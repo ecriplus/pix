@@ -8,6 +8,7 @@ const OidcIdentityProviders = require('../../../domain/constants/oidc-identity-p
 const httpAgent = require('../../http/http-agent');
 const settings = require('../../../config');
 const { UnexpectedUserAccountError } = require('../../../domain/errors');
+const httpErrorsHelper = require('../../../infrastructure/http/errors-helper');
 
 module.exports = {
   async notify(userId, payload) {
@@ -39,8 +40,9 @@ module.exports = {
       });
 
       if (!tokenResponse.isSuccessful) {
-        const errorMessage = _getErrorMessage(tokenResponse.data);
-        monitoringTools.logErrorWithCorrelationIds({ message: errorMessage });
+        const message = 'Erreur lors de la récupération du refresh token auprès du partenaire.';
+        const dataToLog = httpErrorsHelper.serializeHttpErrorResponse(tokenResponse, message);
+        monitoringTools.logErrorWithCorrelationIds({ message: dataToLog });
         return {
           isSuccessful: tokenResponse.isSuccessful,
           code: tokenResponse.code || '500',
@@ -71,8 +73,9 @@ module.exports = {
     const httpResponse = await httpAgent.post({ url, payload, headers });
 
     if (!httpResponse.isSuccessful) {
-      const errorMessage = _getErrorMessage(httpResponse.data);
-      monitoringTools.logErrorWithCorrelationIds({ message: errorMessage });
+      const message = "Erreur lors de l'envoi des résultats au partenaire.";
+      const dataToLog = httpErrorsHelper.serializeHttpErrorResponse(httpResponse, message);
+      monitoringTools.logErrorWithCorrelationIds({ message: dataToLog });
     }
 
     return {
@@ -81,16 +84,3 @@ module.exports = {
     };
   },
 };
-
-function _getErrorMessage(data) {
-  let message;
-
-  if (typeof data === 'string') {
-    message = data;
-  } else {
-    const error = get(data, 'error', '');
-    const error_description = get(data, 'error_description', '');
-    message = `${error} ${error_description}`;
-  }
-  return message.trim();
-}

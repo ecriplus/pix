@@ -222,7 +222,10 @@ describe('Unit | Infrastructure | Externals/Pole-Emploi | pole-emploi-notifier',
 
           monitoringTools.logErrorWithCorrelationIds.resolves();
 
-          const expectedLoggerMessage = `${errorData.error} ${errorData.error_description}`;
+          const expectedLoggerMessage = {
+            customMessage: 'Erreur lors de la récupération du refresh token auprès du partenaire.',
+            errorDetails: JSON.stringify(tokenResponse.data),
+          };
           const expectedResult = {
             code: tokenResponse.code,
             isSuccessful: tokenResponse.isSuccessful,
@@ -271,7 +274,10 @@ describe('Unit | Infrastructure | Externals/Pole-Emploi | pole-emploi-notifier',
 
           monitoringTools.logErrorWithCorrelationIds.resolves();
 
-          const expectedLoggerMessage = httpResponse.data;
+          const expectedLoggerMessage = {
+            customMessage: "Erreur lors de l'envoi des résultats au partenaire.",
+            errorDetails: httpResponse.data,
+          };
           const expectedResult = {
             code: httpResponse.code,
             isSuccessful: httpResponse.isSuccessful,
