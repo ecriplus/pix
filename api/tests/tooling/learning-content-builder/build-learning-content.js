@@ -77,6 +77,8 @@ const buildLearningContent = function (learningContent) {
               practicalDescriptionFrFr: tube.practicalDescriptionFr || tube.practicalDescription,
               practicalTitleEnUs: tube.practicalTitleEn || tube.practicalTitle,
               practicalDescriptionEnUs: tube.practicalDescriptionEn || tube.practicalDescription,
+              isMobileCompliant: tube.isMobileCompliant,
+              isTabletCompliant: tube.isTabletCompliant,
               competenceId: competence.id,
             };
           });
