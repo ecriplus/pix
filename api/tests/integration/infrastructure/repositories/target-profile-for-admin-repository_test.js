@@ -532,24 +532,32 @@ describe('Integration | Repository | target-profile-for-admin', function () {
               competenceId: 'recCompA',
               name: 'tubeName1',
               practicalTitleFrFr: 'practicalTitleFR1',
+              isMobileCompliant: false,
+              isTabletCompliant: true,
             },
             {
               id: 'recTube2',
               competenceId: 'recCompA',
               name: 'tubeName2',
               practicalTitleFrFr: 'practicalTitleFR2',
+              isMobileCompliant: true,
+              isTabletCompliant: true,
             },
             {
               id: 'recTube3',
               competenceId: 'recCompB',
               name: 'tubeName3',
               practicalTitleFrFr: 'practicalTitleFR3',
+              isMobileCompliant: false,
+              isTabletCompliant: false,
             },
             {
               id: 'recTube4',
               competenceId: 'recCompB',
               name: 'tubeName4',
               practicalTitleFrFr: 'practicalTitleFR4',
+              isMobileCompliant: true,
+              isTabletCompliant: false,
             },
           ],
           skills: [
@@ -574,57 +582,6 @@ describe('Integration | Repository | target-profile-for-admin', function () {
               status: 'actif',
             },
           ],
-          challenges: [
-            {
-              id: 'recChalATube1',
-              responsive: ['Smartphone', 'Tablet'],
-              skillId: 'recSkillTube1',
-              status: 'validé',
-              genealogy: 'Prototype 1',
-            },
-            {
-              id: 'recChalBTube1',
-              responsive: ['Tablet'],
-              skillId: 'recSkillTube1',
-              status: 'validé',
-              genealogy: 'Prototype 1',
-            },
-            {
-              id: 'recChalATube2',
-              responsive: ['Smartphone', 'Tablet'],
-              skillId: 'recSkillTube2',
-              status: 'validé',
-              genealogy: 'Prototype 1',
-            },
-            {
-              id: 'recChalBTube2',
-              responsive: ['Smartphone', 'Tablet'],
-              skillId: 'recSkillTube2',
-              status: 'validé',
-              genealogy: 'Prototype 1',
-            },
-            {
-              id: 'recChalATube3',
-              responsive: ['Smartphone', 'Tablet'],
-              skillId: 'recSkillTube3',
-              status: 'validé',
-              genealogy: 'Prototype 1',
-            },
-            {
-              id: 'recChalBTube3',
-              responsive: [],
-              skillId: 'recSkillTube3',
-              status: 'validé',
-              genealogy: 'Prototype 1',
-            },
-            {
-              id: 'recChalTube4',
-              responsive: [],
-              skillId: 'recSkillTube4',
-              status: 'validé',
-              genealogy: 'Prototype 1',
-            },
-          ],
         };
         mockLearningContent(learningContent);
 
@@ -637,8 +594,8 @@ describe('Integration | Repository | target-profile-for-admin', function () {
           name: 'tubeName1',
           practicalTitle: 'practicalTitleFR1',
           level: 4,
-          mobile: false,
-          tablet: true,
+          isMobileCompliant: false,
+          isTabletCompliant: true,
           thematicId: 'recThemA',
         };
         const tube2_themB_compA_areaA = {
@@ -646,8 +603,8 @@ describe('Integration | Repository | target-profile-for-admin', function () {
           name: 'tubeName2',
           practicalTitle: 'practicalTitleFR2',
           level: 2,
-          mobile: true,
-          tablet: true,
+          isMobileCompliant: true,
+          isTabletCompliant: true,
           thematicId: 'recThemB',
         };
         const tube3_themC_compB_areaA = {
@@ -655,8 +612,8 @@ describe('Integration | Repository | target-profile-for-admin', function () {
           name: 'tubeName3',
           practicalTitle: 'practicalTitleFR3',
           level: 8,
-          mobile: false,
-          tablet: false,
+          isMobileCompliant: false,
+          isTabletCompliant: false,
           thematicId: 'recThemC',
         };
         const themA_compA_areaA = {
@@ -778,6 +735,8 @@ describe('Integration | Repository | target-profile-for-admin', function () {
               name: 'tubeName1',
               practicalTitleFrFr: 'practicalTitleFR1',
               practicalTitleEnUs: 'practicalTitleEN1',
+              isMobileCompliant: false,
+              isTabletCompliant: true,
             },
           ],
           skills: [
@@ -785,22 +744,6 @@ describe('Integration | Repository | target-profile-for-admin', function () {
               id: 'recSkillTube1',
               tubeId: 'recTube1',
               status: 'actif',
-            },
-          ],
-          challenges: [
-            {
-              id: 'recChalATube1',
-              responsive: ['Smartphone', 'Tablet'],
-              skillId: 'recSkillTube1',
-              status: 'validé',
-              genealogy: 'Prototype 1',
-            },
-            {
-              id: 'recChalBTube1',
-              responsive: ['Tablet'],
-              skillId: 'recSkillTube1',
-              status: 'validé',
-              genealogy: 'Prototype 1',
             },
           ],
         };
@@ -815,8 +758,8 @@ describe('Integration | Repository | target-profile-for-admin', function () {
           name: 'tubeName1',
           practicalTitle: 'practicalTitleEN1',
           level: 4,
-          mobile: false,
-          tablet: true,
+          isMobileCompliant: false,
+          isTabletCompliant: true,
           thematicId: 'recThemA',
         };
         const themA_compA_areaA = {
