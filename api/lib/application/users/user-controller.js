@@ -145,14 +145,6 @@ module.exports = {
     return userSerializer.serialize(updatedUser);
   },
 
-  getMemberships(request) {
-    const authenticatedUserId = request.auth.credentials.userId;
-
-    return usecases
-      .getUserWithMemberships({ userId: authenticatedUserId })
-      .then((user) => membershipSerializer.serialize(user.memberships));
-  },
-
   async findPaginatedFilteredUsers(request) {
     const options = queryParamsUtils.extractParameters(request.query);
 

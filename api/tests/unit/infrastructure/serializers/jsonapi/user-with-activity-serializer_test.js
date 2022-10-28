@@ -59,11 +59,6 @@ describe('Unit | Serializer | JSONAPI | user-with-activity-serializer', function
               'code-for-last-profile-to-share': userModelObject.codeForLastProfileToShare,
             },
             relationships: {
-              memberships: {
-                links: {
-                  related: `/api/users/${userModelObject.id}/memberships`,
-                },
-              },
               'certification-center-memberships': {
                 links: {
                   related: `/api/users/${userModelObject.id}/certification-center-memberships`,

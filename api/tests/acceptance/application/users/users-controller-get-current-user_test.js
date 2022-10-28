@@ -62,11 +62,6 @@ describe('Acceptance | Controller | users-controller-get-current-user', function
             'code-for-last-profile-to-share': expectedCode,
           },
           relationships: {
-            memberships: {
-              links: {
-                related: `/api/users/${user.id}/memberships`,
-              },
-            },
             'certification-center-memberships': {
               links: {
                 related: `/api/users/${user.id}/certification-center-memberships`,

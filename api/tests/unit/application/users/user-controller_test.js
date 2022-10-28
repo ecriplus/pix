@@ -482,38 +482,6 @@ describe('Unit | Controller | user-controller', function () {
     });
   });
 
-  describe('#getMemberships', function () {
-    const userId = '1';
-
-    const request = {
-      auth: {
-        credentials: {
-          userId: userId,
-        },
-      },
-      params: {
-        id: userId,
-      },
-    };
-
-    beforeEach(function () {
-      sinon.stub(membershipSerializer, 'serialize');
-      sinon.stub(usecases, 'getUserWithMemberships');
-    });
-
-    it('should return serialized Memberships', async function () {
-      // given
-      usecases.getUserWithMemberships.withArgs({ userId }).resolves({ memberships: [] });
-      membershipSerializer.serialize.withArgs([]).returns({});
-
-      // when
-      const response = await userController.getMemberships(request, hFake);
-
-      // then
-      expect(response).to.deep.equal({});
-    });
-  });
-
   describe('#findPaginatedFilteredUsers', function () {
     beforeEach(function () {
       sinon.stub(queryParamsUtils, 'extractParameters');
