@@ -29,6 +29,7 @@ exports.register = async function (server) {
         tags: ['api', 'certification-center'],
       },
     },
+
     {
       method: 'GET',
       path: '/api/admin/certification-centers',
@@ -53,6 +54,7 @@ exports.register = async function (server) {
         tags: ['api', 'certification-center'],
       },
     },
+
     {
       method: 'GET',
       path: '/api/admin/certification-centers/{id}',
@@ -82,6 +84,7 @@ exports.register = async function (server) {
         tags: ['api', 'certification-center'],
       },
     },
+
     {
       method: 'GET',
       path: '/api/admin/certification-centers/{certificationCenterId}/certification-center-memberships',
@@ -143,6 +146,37 @@ exports.register = async function (server) {
             "à partir de l'adresse e-mail d'un utilisateur.",
         ],
         tags: ['api', 'certification-center-membership'],
+      },
+    },
+
+    {
+      method: 'DELETE',
+      path: '/api/admin/certification-centers/{id}/invitations/{certificationCenterInvitationId}',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.adminMemberHasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            id: identifiersType.certificationCenterId,
+            certificationCenterInvitationId: identifiersType.certificationCenterInvitationId,
+          }),
+        },
+        handler: certificationCenterController.cancelCertificationCenterInvitation,
+        tags: ['api', 'admin', 'invitations', 'cancel'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
+            "- Elle permet d'annuler une invitation envoyée mais non acceptée encore.",
+        ],
       },
     },
 
