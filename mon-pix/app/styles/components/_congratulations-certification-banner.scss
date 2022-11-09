@@ -1,15 +1,15 @@
 .congratulations-banner {
-  text-rendering: optimizeLegibility;
-  background: $pix-content-dark;
   position: relative;
-  color: $pix-neutral-10;
-  border-radius: 6px;
-  box-sizing: border-box;
-  height: 194px;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
+  height: 194px;
+  color: $pix-neutral-10;
+  background: $pix-content-dark;
+  border-radius: 6px;
+  text-rendering: optimizelegibility;
 }
 
 .congratulations-banner p {
@@ -17,13 +17,13 @@
 }
 
 .congratulations-banner__icon {
-  color: $pix-neutral-0;
   position: absolute;
   top: 12px;
   right: 12px;
-  display: flex;
-  left: auto;
   bottom: auto;
+  left: auto;
+  display: flex;
+  color: $pix-neutral-0;
   font-size: 1.25rem;
   cursor: pointer;
   opacity: 0.5;
@@ -43,14 +43,14 @@
 }
 
 .congratulations-banner__message {
-  @include textBannerStyle();
+  @include textBannerStyle;
 
-  font-size: 1.5rem;
   margin-bottom: 16px;
+  font-size: 1.5rem;
 }
 
 .congratulations-banner__link {
-  @include textBannerStyle();
+  @include textBannerStyle;
 
   font-size: 0.875rem;
 
@@ -59,7 +59,7 @@
   }
 }
 
-@include device-is('mobile') {
+@include device-is("mobile") {
 
   .congratulations-banner__message {
     padding: 0 8px;
