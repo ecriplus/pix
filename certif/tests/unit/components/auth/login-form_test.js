@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import createGlimmerComponent from '../../../helpers/create-glimmer-component';
@@ -23,6 +25,27 @@ module('Unit | Component | login-form', (hooks) => {
       // then
       const expectedEmail = emailWithSpaces.trim();
       assert.strictEqual(component.email, expectedEmail);
+    });
+  });
+
+  module('#authenticate', () => {
+    module('When there is an invitation', () => {
+      test('should not accept organization invitation when form is invalid', function (assert) {
+        // given
+        component.email = '';
+        component.password = 'pix123';
+        component.args.isWithInvitation = true;
+        component.args.certificationCenterInvitation = {
+          accept: sinon.stub().resolves(),
+        };
+
+        // when
+        component.authenticate(new Event('stub'));
+
+        // then
+        assert.ok(component.args.certificationCenterInvitation.accept.notCalled);
+      });
+      // cas ou le form est valid > intégration
     });
   });
 });
