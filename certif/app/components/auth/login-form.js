@@ -46,10 +46,11 @@ export default class LoginForm extends Component {
       } catch (errorResponse) {
         errorResponse.errors.forEach((error) => {
           const invitationIsAlreadyAccepted = error.status === '412';
-          if (!invitationIsAlreadyAccepted) {
-            this.errorMessage = this._handleResponseError(errorResponse);
-            this.isErrorMessagePresent = true;
+          if (invitationIsAlreadyAccepted) {
+            return this._authenticate(password, email);
           }
+          this.errorMessage = this._handleResponseError(errorResponse);
+          this.isErrorMessagePresent = true;
         });
       }
     }
