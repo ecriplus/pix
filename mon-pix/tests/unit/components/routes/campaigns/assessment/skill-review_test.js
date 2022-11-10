@@ -247,6 +247,44 @@ describe('Unit | component | Campaigns | Evaluation | Skill Review', function ()
     });
   });
 
+  describe('#showValidBadges', function () {
+    it('should show badges when valid', function () {
+      // given
+      const badges = [{ id: 33, isAcquired: true, isCertifiable: true, isValid: true }];
+      component.args.model.campaignParticipationResult.campaignParticipationBadges = badges;
+
+      // when
+      const shouldShowBadges = component.showValidBadges;
+
+      // then
+      expect(shouldShowBadges).to.equal(true);
+    });
+
+    it('should not show not badges when not valid', function () {
+      // given
+      const badges = [{ id: 33, isAcquired: true, isCertifiable: true, isValid: false }];
+      component.args.model.campaignParticipationResult.campaignParticipationBadges = badges;
+
+      // when
+      const shouldShowBadges = component.showValidBadges;
+
+      // then
+      expect(shouldShowBadges).to.equal(false);
+    });
+
+    it('should not show badges when none', function () {
+      // given
+      const badges = [];
+      component.args.model.campaignParticipationResult.campaignParticipationBadges = badges;
+
+      // when
+      const shouldShowBadges = component.showValidBadges;
+
+      // then
+      expect(shouldShowBadges).to.equal(false);
+    });
+  });
+
   describe('#acquiredNotCertifiableBadges', function () {
     it('should only return acquired and not certifiable badges', function () {
       // given
@@ -266,20 +304,100 @@ describe('Unit | component | Campaigns | Evaluation | Skill Review', function ()
     });
   });
 
-  describe('#acquiredCertifiableBadges', function () {
-    it('should only return certifiable acquired badges', function () {
+  describe('#validBadges', function () {
+    it('should only return valid badges', function () {
       // given
       const badges = [
-        { id: 33, isAcquired: true, isCertifiable: true },
-        { id: 34, isAcquired: false, isCertifiable: false },
+        { id: 33, isAcquired: true, isCertifiable: true, isValid: true },
+        { id: 34, isAcquired: true, isCertifiable: false, isValid: true },
+        { id: 35, isAcquired: true, isCertifiable: false, isValid: false },
+        { id: 36, isAcquired: false, isCertifiable: true, isValid: true },
+        { id: 37, isAcquired: false, isCertifiable: false, isValid: true },
+        { id: 38, isAcquired: false, isCertifiable: true, isValid: false },
+        { id: 39, isAcquired: true, isCertifiable: true, isValid: false },
+        { id: 40, isAcquired: false, isCertifiable: false, isValid: false },
       ];
       component.args.model.campaignParticipationResult.campaignParticipationBadges = badges;
 
       // when
-      const acquiredBadges = component.acquiredCertifiableBadges;
+      const acquiredBadges = component.validBadges;
 
       // then
-      expect(acquiredBadges).to.deep.equal([{ id: 33, isAcquired: true, isCertifiable: true }]);
+      expect(acquiredBadges).to.deep.equal([{ id: 33, isAcquired: true, isCertifiable: true, isValid: true }]);
+    });
+  });
+
+  describe('#invalidBadges', function () {
+    it('should only return invalid badges', function () {
+      // given
+      const badges = [
+        { id: 33, isAcquired: true, isCertifiable: true, isValid: true, isAlwaysVisible: true },
+        { id: 34, isAcquired: true, isCertifiable: false, isValid: true, isAlwaysVisible: true },
+        { id: 35, isAcquired: true, isCertifiable: false, isValid: false, isAlwaysVisible: true },
+        { id: 36, isAcquired: false, isCertifiable: true, isValid: true, isAlwaysVisible: true },
+        { id: 37, isAcquired: false, isCertifiable: false, isValid: true, isAlwaysVisible: true },
+        { id: 38, isAcquired: false, isCertifiable: true, isValid: false, isAlwaysVisible: true },
+        { id: 39, isAcquired: true, isCertifiable: true, isValid: false, isAlwaysVisible: true },
+        { id: 40, isAcquired: false, isCertifiable: false, isValid: false, isAlwaysVisible: true },
+        { id: 41, isAcquired: true, isCertifiable: true, isValid: true, isAlwaysVisible: false },
+        { id: 42, isAcquired: true, isCertifiable: false, isValid: true, isAlwaysVisible: false },
+        { id: 43, isAcquired: true, isCertifiable: false, isValid: false, isAlwaysVisible: false },
+        { id: 44, isAcquired: false, isCertifiable: true, isValid: true, isAlwaysVisible: false },
+        { id: 45, isAcquired: false, isCertifiable: false, isValid: true, isAlwaysVisible: false },
+        { id: 46, isAcquired: false, isCertifiable: true, isValid: false, isAlwaysVisible: false },
+        { id: 47, isAcquired: true, isCertifiable: true, isValid: false, isAlwaysVisible: false },
+        { id: 48, isAcquired: false, isCertifiable: false, isValid: false, isAlwaysVisible: false },
+      ];
+      component.args.model.campaignParticipationResult.campaignParticipationBadges = badges;
+
+      // when
+      const acquiredBadges = component.invalidBadges;
+
+      // then
+      expect(acquiredBadges).to.deep.equal([
+        { id: 36, isAcquired: false, isCertifiable: true, isValid: true, isAlwaysVisible: true },
+        { id: 38, isAcquired: false, isCertifiable: true, isValid: false, isAlwaysVisible: true },
+        { id: 39, isAcquired: true, isCertifiable: true, isValid: false, isAlwaysVisible: true },
+        { id: 47, isAcquired: true, isCertifiable: true, isValid: false, isAlwaysVisible: false },
+      ]);
+    });
+  });
+
+  describe('#certifiableBadgesOrderedByValidity', function () {
+    it('should return certifiable badges ordered by validity status', function () {
+      // given
+      const badges = [
+        { id: 33, isAcquired: true, isCertifiable: true, isValid: true, isAlwaysVisible: true },
+        { id: 34, isAcquired: true, isCertifiable: false, isValid: true, isAlwaysVisible: true },
+        { id: 35, isAcquired: true, isCertifiable: false, isValid: false, isAlwaysVisible: true },
+        { id: 36, isAcquired: false, isCertifiable: true, isValid: true, isAlwaysVisible: true },
+        { id: 37, isAcquired: false, isCertifiable: false, isValid: true, isAlwaysVisible: true },
+        { id: 38, isAcquired: false, isCertifiable: true, isValid: false, isAlwaysVisible: true },
+        { id: 39, isAcquired: true, isCertifiable: true, isValid: false, isAlwaysVisible: true },
+        { id: 40, isAcquired: false, isCertifiable: false, isValid: false, isAlwaysVisible: true },
+        { id: 41, isAcquired: true, isCertifiable: true, isValid: true, isAlwaysVisible: false },
+        { id: 42, isAcquired: true, isCertifiable: false, isValid: true, isAlwaysVisible: false },
+        { id: 43, isAcquired: true, isCertifiable: false, isValid: false, isAlwaysVisible: false },
+        { id: 44, isAcquired: false, isCertifiable: true, isValid: true, isAlwaysVisible: false },
+        { id: 45, isAcquired: false, isCertifiable: false, isValid: true, isAlwaysVisible: false },
+        { id: 46, isAcquired: false, isCertifiable: true, isValid: false, isAlwaysVisible: false },
+        { id: 47, isAcquired: true, isCertifiable: true, isValid: false, isAlwaysVisible: false },
+        { id: 48, isAcquired: false, isCertifiable: false, isValid: false, isAlwaysVisible: false },
+      ];
+      component.args.model.campaignParticipationResult.campaignParticipationBadges = badges;
+
+      // when
+      const acquiredBadges = component.certifiableBadgesOrderedByValidity;
+
+      // then
+      expect(acquiredBadges).to.deep.equal([
+        { id: 33, isAcquired: true, isCertifiable: true, isValid: true, isAlwaysVisible: true },
+        { id: 41, isAcquired: true, isCertifiable: true, isValid: true, isAlwaysVisible: false },
+        { id: 36, isAcquired: false, isCertifiable: true, isValid: true, isAlwaysVisible: true },
+        { id: 38, isAcquired: false, isCertifiable: true, isValid: false, isAlwaysVisible: true },
+        { id: 39, isAcquired: true, isCertifiable: true, isValid: false, isAlwaysVisible: true },
+        { id: 47, isAcquired: true, isCertifiable: true, isValid: false, isAlwaysVisible: false },
+      ]);
     });
   });
 
