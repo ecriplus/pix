@@ -3,11 +3,18 @@ import { inject as service } from '@ember/service';
 export default class JoinRoute extends Route {
   @service store;
   @service router;
+  @service session;
 
   queryParams = {
     code: { replace: true },
     invitationId: { replace: true },
   };
+
+  routeIfAlreadyAuthenticated = 'join-when-authenticated';
+
+  beforeModel() {
+    this.session.prohibitAuthentication(this.routeIfAlreadyAuthenticated);
+  }
 
   model(params) {
     return this.store

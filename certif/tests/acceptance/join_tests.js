@@ -83,7 +83,6 @@ module('Acceptance | join ', function (hooks) {
 
         // when
         await clickByName(loginFormButton);
-        await this.pauseTest();
 
         // then
         //       await invalidateSession();
@@ -106,7 +105,20 @@ module('Acceptance | join ', function (hooks) {
         assert.ok(currentSession(this.application).get('isAuthenticated'), 'The user is authenticated');
 
         assert.contains('Harry Cover');
+        // TODO
+        // mettre centre de certif
+        // voir qu'il est dans l'équipe
       });
     });
+
+    // TODO quand un utilisateur est déjà connecté quand on clique sur je me connecte, ça bugge, l'utilisateur n'est pas redirigé
+    // const certificationPointOfContact = server.create('certification-point-of-contact', {
+    //   firstName: 'Buffy',
+    //   lastName: 'Summers',
+    //   email: 'toto@example.net',
+    //   pixCertifTermsOfServiceAccepted: true,
+    //   allowedCertificationCenterAccesses: [],
+    // });
+    // await authenticateSession(certificationPointOfContact.id);
   });
 });

@@ -167,6 +167,10 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
           assert.dom(screen.getByText(this.intl.t('pages.login-or-register.login-form.errors.status.403'))).exists();
         });
       });
+
+      module('When there is an error in authenticate', function () {
+        //TODO certif/tests/integration/components/login-form_test.js
+      });
     });
   });
 

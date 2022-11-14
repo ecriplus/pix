@@ -17,6 +17,7 @@ Router.map(function () {
   this.route('login', { path: 'connexion' });
 
   this.route('join', { path: 'rejoindre' });
+  this.route('join-when-authenticated');
 
   this.route('terms-of-service', { path: '/cgu' });
   this.route('login-session-supervisor', { path: '/connexion-espace-surveillant' });
