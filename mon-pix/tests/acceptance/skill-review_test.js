@@ -1,4 +1,4 @@
-import { findAll, currentURL, visit } from '@ember/test-helpers';
+import { findAll, currentURL, visit, find } from '@ember/test-helpers';
 import { beforeEach, describe, it } from 'mocha';
 import { expect } from 'chai';
 import { authenticateByEmail } from '../helpers/authentication';
@@ -42,7 +42,6 @@ describe('Acceptance | Campaigns | Campaigns Result', function () {
     describe('When user is logged in', async function () {
       const competenceResultName = 'Competence Nom';
       const skillSetResultName = 'badge skill set nom';
-
       beforeEach(async function () {
         // given
         await authenticateByEmail(user);
@@ -75,6 +74,20 @@ describe('Acceptance | Campaigns | Campaigns Result', function () {
         // then
         expect(contains(competenceResultName)).to.exist;
         expect(contains(COMPETENCE_MASTERY_PERCENTAGE)).to.exist;
+      });
+
+      context('When the user has recommended trainings', function () {
+        it.only('should display the "my trainings" menu item when redirected to the dashboard', async function () {
+          // given
+          campaign = server.create('campaign', { code: 'FORBIDDEN', isRestricted: true, title: 'Parcours restreint' });
+          campaignParticipation = server.create('campaign-participation', { campaign });
+          // when
+          await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+          user.update({ hasRecommendedTrainings: true });
+          await visit('/accueil');
+          // then
+          expect(contains('Mes formations')).to.exist;
+        });
       });
 
       context('When the campaign is restricted and organization learner is disabled', function () {

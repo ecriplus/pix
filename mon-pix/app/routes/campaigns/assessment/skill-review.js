@@ -20,6 +20,9 @@ export default class SkillReviewRoute extends Route {
         userId: user.id,
       });
       const trainings = await campaignParticipation.hasMany('trainings').reload();
+
+      if (trainings.length > 0) await this.currentUser.load();
+
       return { campaign, campaignParticipationResult, trainings };
     } catch (error) {
       if (error.errors?.[0]?.status === '412') {
