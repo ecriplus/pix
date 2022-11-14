@@ -24,26 +24,44 @@ function _getTextForResult(result) {
 
 export default class ComparisonWindow extends Component {
   get isAssessmentChallengeTypeQroc() {
+    if (!this.args.answer.challenge) {
+      return '';
+    }
     return this.args.answer.challenge.get('type') === 'QROC';
   }
 
   get isAssessmentChallengeTypeQcm() {
+    if (!this.args.answer.challenge) {
+      return '';
+    }
     return this.args.answer.challenge.get('type') === 'QCM';
   }
 
   get isAssessmentChallengeTypeQcu() {
+    if (!this.args.answer.challenge) {
+      return '';
+    }
     return this.args.answer.challenge.get('type') === 'QCU';
   }
 
   get isAssessmentChallengeTypeQrocm() {
+    if (!this.args.answer.challenge) {
+      return '';
+    }
     return this.args.answer.challenge.get('type') === 'QROCM';
   }
 
   get isAssessmentChallengeTypeQrocmInd() {
+    if (!this.args.answer.challenge) {
+      return '';
+    }
     return this.args.answer.challenge.get('type') === 'QROCM-ind';
   }
 
   get isAssessmentChallengeTypeQrocmDep() {
+    if (!this.args.answer.challenge) {
+      return '';
+    }
     return this.args.answer.challenge.get('type') === 'QROCM-dep';
   }
 
@@ -53,6 +71,9 @@ export default class ComparisonWindow extends Component {
 
   get resultItem() {
     let resultItem = _getTextForResult('default');
+    if (!this.args.answer) {
+      return '';
+    }
     const answerStatus = `${this.args.answer.result}${this.answerSuffix}`;
 
     if (answerStatus && answerStatus in TEXT_FOR_RESULT) {
@@ -70,6 +91,9 @@ export default class ComparisonWindow extends Component {
   }
 
   get _isAutoReply() {
+    if (!this.args.answer.challenge) {
+      return '';
+    }
     return this.args.answer.challenge.get('autoReply');
   }
 }
