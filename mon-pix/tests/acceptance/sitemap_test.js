@@ -1,4 +1,5 @@
-import { findAll, visit } from '@ember/test-helpers';
+import { findAll } from '@ember/test-helpers';
+import { visit } from '@1024pix/ember-testing-library';
 import { beforeEach, describe, it } from 'mocha';
 import { expect } from 'chai';
 import { setupMirage } from 'ember-cli-mirage/test-support';
@@ -9,7 +10,7 @@ describe('Acceptance | Sitemap', function () {
   setupApplicationTest();
   setupMirage();
   let user;
-
+  let screen;
   beforeEach(function () {
     user = server.create('user', 'withEmail');
   });
@@ -17,7 +18,7 @@ describe('Acceptance | Sitemap', function () {
   describe('When visiting /plan-du-site', function () {
     beforeEach(async function () {
       await authenticateByEmail(user);
-      await visit('/plan-du-site');
+      screen = await visit('/plan-du-site');
     });
 
     it('should contain a link to pix.fr/accessibilite', async function () {
@@ -42,6 +43,11 @@ describe('Acceptance | Sitemap', function () {
       // then
       const cguPolicyLink = findAll('a[data-test-resource-link]')[1];
       expect(cguPolicyLink.getAttribute('href')).to.contains('/politique-protection-donnees-personnelles-app');
+    });
+
+    it('should contain a link to pix.fr/mes-formations', async function () {
+      // then
+      expect(screen.getByRole('link', { name: 'Mes formations' })).to.exist;
     });
   });
 });
