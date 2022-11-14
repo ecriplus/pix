@@ -288,4 +288,20 @@ describe('Acceptance | User dashboard page', function () {
       });
     });
   });
+  describe('when user has recommended trainings ', function () {
+    it('should render "my trainings" link to navigation menu', async function () {
+      // given
+      user = server.create('user', 'withEmail');
+
+      // when
+      await authenticateByEmail(user);
+      await visit('/mes-tutos');
+      expect(find("[href='/mes-formations']")).not.to.exist;
+      user.update({ hasRecommendedTrainings: true });
+      await visit('/accueil');
+
+      // then
+      expect(find("[href='/mes-formations']")).to.exist;
+    });
+  });
 });

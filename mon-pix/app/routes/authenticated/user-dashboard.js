@@ -20,6 +20,8 @@ export default class UserDashboard extends Route {
     const profile = await user.belongsTo('profile').reload();
     const scorecards = profile.scorecards;
 
+    this.store.findRecord('user', 'me', { reload: true });
+
     return {
       campaignParticipationOverviews,
       scorecards,
