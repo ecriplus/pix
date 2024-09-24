@@ -8,7 +8,7 @@ const publishSessionsInBatch = async function ({
   publishedAt = new Date(),
   batchId = randomUUID(),
   certificationCenterRepository,
-  certificationRepository,
+  sessionManagementCertificationRepository,
   finalizedSessionRepository,
   sessionRepository,
   sharedSessionRepository,
@@ -20,7 +20,7 @@ const publishSessionsInBatch = async function ({
       const session = await sessionPublicationService.publishSession({
         sessionId,
         publishedAt,
-        certificationRepository,
+        certificationRepository: sessionManagementCertificationRepository,
         finalizedSessionRepository,
         sharedSessionRepository,
         sessionRepository,

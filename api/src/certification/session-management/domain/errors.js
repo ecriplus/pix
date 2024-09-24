@@ -21,6 +21,23 @@ class SessionWithoutStartedCertificationError extends DomainError {
   }
 }
 
+class SendingEmailToRefererError extends DomainError {
+  constructor(failedEmailReferers) {
+    super(
+      `Échec lors de l'envoi du mail au(x) référent(s) du centre de certification : ${failedEmailReferers.join(', ')}`,
+    );
+  }
+}
+
+class CertificationCourseNotPublishableError extends DomainError {
+  constructor(
+    sessionId,
+    message = `Publication de la session ${sessionId}: Une Certification avec le statut 'started' ou 'error' ne peut-être publiée.`,
+  ) {
+    super(message);
+  }
+}
+
 class SessionWithAbortReasonOnCompletedCertificationCourseError extends DomainError {
   constructor(
     message = 'The field "Reason for abandonment" has been filled in for a candidate who has finished their certification exam in between. The session therefore can\'t be finalised. Please refresh the page before finalising.',
@@ -77,12 +94,21 @@ class CertificationIssueReportAutomaticallyResolvedShouldNotBeUpdatedManually ex
   }
 }
 
+class SendingEmailToResultRecipientError extends DomainError {
+  constructor(failedEmailsRecipients) {
+    super(`Échec lors de l'envoi des résultats au(x) destinataire(s) : ${failedEmailsRecipients.join(', ')}`);
+  }
+}
+
 export {
+  CertificationCourseNotPublishableError,
   CertificationIssueReportAutomaticallyResolvedShouldNotBeUpdatedManually,
   ChallengeToBeDeneutralizedNotFoundError,
   ChallengeToBeNeutralizedNotFoundError,
   CsvWithNoSessionDataError,
   InvalidSessionSupervisingLoginError,
+  SendingEmailToRefererError,
+  SendingEmailToResultRecipientError,
   SessionAlreadyFinalizedError,
   SessionAlreadyPublishedError,
   SessionNotAccessible,

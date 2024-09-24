@@ -3,14 +3,14 @@ import { domainBuilder, expect, sinon } from '../../../test-helper.js';
 
 describe('Unit | UseCase | publish-sessions-in-batch', function () {
   let sessionPublicationService;
-  let certificationRepository,
+  let sessionManagementCertificationRepository,
     finalizedSessionRepository,
     sessionRepository,
     certificationCenterRepository,
     sharedSessionRepository;
 
   beforeEach(function () {
-    certificationRepository = Symbol('certificationRepository');
+    sessionManagementCertificationRepository = Symbol('certificationRepository');
     finalizedSessionRepository = Symbol('finalizedSessionRepository');
     sessionRepository = Symbol('sessionRepository');
     certificationCenterRepository = {};
@@ -38,7 +38,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
       batchId: 'batch id',
       publishedAt,
       i18n,
-      certificationRepository,
+      sessionManagementCertificationRepository,
       certificationCenterRepository,
       finalizedSessionRepository,
       sessionRepository,
@@ -50,7 +50,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
     expect(sessionPublicationService.publishSession).to.have.been.calledWithExactly({
       sessionId: session1.id,
       publishedAt,
-      certificationRepository,
+      certificationRepository: sessionManagementCertificationRepository,
       finalizedSessionRepository,
       sessionRepository,
       sharedSessionRepository,
@@ -66,7 +66,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
     expect(sessionPublicationService.publishSession).to.have.been.calledWithExactly({
       sessionId: session2.id,
       publishedAt,
-      certificationRepository,
+      certificationRepository: sessionManagementCertificationRepository,
       finalizedSessionRepository,
       sharedSessionRepository,
       sessionRepository,
@@ -92,7 +92,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
         .withArgs({
           sessionId: session1.id,
           publishedAt,
-          certificationRepository,
+          certificationRepository: sessionManagementCertificationRepository,
           finalizedSessionRepository,
           sessionRepository,
           sharedSessionRepository,
@@ -107,7 +107,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
         batchId: 'batch id',
         i18n,
         certificationCenterRepository,
-        certificationRepository,
+        sessionManagementCertificationRepository,
         finalizedSessionRepository,
         sessionRepository,
         sharedSessionRepository,
@@ -117,7 +117,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
       expect(sessionPublicationService.publishSession).to.have.been.calledWithExactly({
         sessionId: session2.id,
         publishedAt,
-        certificationRepository,
+        certificationRepository: sessionManagementCertificationRepository,
         finalizedSessionRepository,
         sessionRepository,
         sharedSessionRepository,
@@ -144,7 +144,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
         .withArgs({
           sessionId: sessionId1,
           publishedAt,
-          certificationRepository,
+          certificationRepository: sessionManagementCertificationRepository,
           finalizedSessionRepository,
           sessionRepository,
           sharedSessionRepository,
@@ -154,7 +154,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
         .withArgs({
           sessionId: sessionId2,
           publishedAt,
-          certificationRepository,
+          certificationRepository: sessionManagementCertificationRepository,
           finalizedSessionRepository,
           sessionRepository,
           sharedSessionRepository,
@@ -167,7 +167,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
         sessionIds: [sessionId1, sessionId2],
         publishedAt,
         batchId: 'batch id',
-        certificationRepository,
+        sessionManagementCertificationRepository,
         certificationCenterRepository,
         finalizedSessionRepository,
         sessionRepository,

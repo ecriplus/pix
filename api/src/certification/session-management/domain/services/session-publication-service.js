@@ -1,24 +1,24 @@
 /**
- * @typedef {import('../../../lib/domain/usecases/index.js').CertificationRepository} CertificationRepository
- * @typedef {import('../../../lib/domain/usecases/index.js').FinalizedSessionRepository} FinalizedSessionRepository
- * @typedef {import('../../../lib/domain/usecases/index.js').SessionRepository} SessionRepository
- * @typedef {import('../../../lib/domain/usecases/index.js').SharedSessionRepository} SharedSessionRepository
- * @typedef {import('../../../lib/domain/usecases/index.js').MailService} MailService
+ * @typedef {import('../../../../../src/certification/session-management/domain/usecases/index.js').CertificationRepository} CertificationRepository
+ * @typedef {import('../../../../../lib/domain/usecases/index.js').FinalizedSessionRepository} FinalizedSessionRepository
+ * @typedef {import('../../../../../lib/domain/usecases/index.js').SessionRepository} SessionRepository
+ * @typedef {import('../../../../../lib/domain/usecases/index.js').SharedSessionRepository} SharedSessionRepository
+ * @typedef {import('../../../../../src/certification/session-management/domain/usecases/index.js').MailService} MailService
  */
 import lodash from 'lodash';
 
-import { SessionAlreadyPublishedError } from '../../../src/certification/session-management/domain/errors.js';
+import * as mailService from '../../../../../src/certification/session-management/domain/services/mail-service.js';
 import {
   CertificationCourseNotPublishableError,
   SendingEmailToRefererError,
   SendingEmailToResultRecipientError,
-} from '../../../src/shared/domain/errors.js';
-import * as mailService from '../../domain/services/mail-service.js';
+} from '../errors.js';
+import { SessionAlreadyPublishedError } from '../errors.js';
 
 const { some, uniqBy } = lodash;
 
-import { status } from '../../../src/shared/domain/models/AssessmentResult.js';
-import { logger } from '../../../src/shared/infrastructure/utils/logger.js';
+import { status } from '../../../../shared/domain/models/AssessmentResult.js';
+import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 
 /**
  * @param {Object} params

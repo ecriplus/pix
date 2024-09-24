@@ -10,7 +10,9 @@ import * as certificationCpfCityRepository from '../../../src/certification/enro
 import * as sessionEnrolmentRepository from '../../../src/certification/enrolment/infrastructure/repositories/session-repository.js';
 import * as certificationEvaluationCandidateRepository from '../../../src/certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
 import * as flashAlgorithmService from '../../../src/certification/flash-certification/domain/services/algorithm-methods/flash.js';
+import * as sessionPublicationService from '../../../src/certification/session-management/domain/services/session-publication-service.js';
 import * as certificationOfficerRepository from '../../../src/certification/session-management/infrastructure/repositories/certification-officer-repository.js';
+import * as sessionManagementCertificationRepository from '../../../src/certification/session-management/infrastructure/repositories/certification-repository.js';
 import * as finalizedSessionRepository from '../../../src/certification/session-management/infrastructure/repositories/finalized-session-repository.js';
 import * as juryCertificationRepository from '../../../src/certification/session-management/infrastructure/repositories/jury-certification-repository.js';
 import * as juryCertificationSummaryRepository from '../../../src/certification/session-management/infrastructure/repositories/jury-certification-summary-repository.js';
@@ -121,7 +123,6 @@ import * as certificationChallengesService from '../../domain/services/certifica
 import * as mailService from '../../domain/services/mail-service.js';
 import * as obfuscationService from '../../domain/services/obfuscation-service.js';
 import * as passwordGenerator from '../../domain/services/password-generator.js';
-import * as sessionPublicationService from '../../domain/services/session-publication-service.js';
 import * as verifyCertificateCodeService from '../../domain/services/verify-certificate-code-service.js';
 import * as disabledPoleEmploiNotifier from '../../infrastructure/externals/pole-emploi/disabled-pole-emploi-notifier.js';
 import * as poleEmploiNotifier from '../../infrastructure/externals/pole-emploi/pole-emploi-notifier.js';
@@ -192,6 +193,7 @@ function requirePoleEmploiNotifier() {
  * @typedef {certificationChallengesService} CertificationChallengesService
  * @typedef {verifyCertificateCodeService} VerifyCertificateCodeService
  * @typedef {assessmentRepository} AssessmentRepository
+ * @typedef {sessionManagementCertificationRepository} SessionManagementCertificationRepository
  */
 const dependencies = {
   accountRecoveryDemandRepository,
@@ -306,6 +308,7 @@ const dependencies = {
   scoringCertificationService,
   sessionCodeService,
   sessionEnrolmentRepository,
+  sessionManagementCertificationRepository,
   sessionPublicationService,
   sessionRepository,
   sessionSummaryRepository,
