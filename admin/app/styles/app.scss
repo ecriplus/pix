@@ -43,7 +43,6 @@
 @import 'components/certification-details-competence';
 @import 'components/certification-info-field';
 @import 'components/certification-info-tag';
-@import 'components/certification-issue-report';
 @import 'components/certification-issue-reports';
 @import 'components/certification/candidate-edit-modal';
 @import 'components/certification/certification-status-select';
@@ -105,6 +104,7 @@
 @import 'flatpickr';
 
 /* App/Components */
+@import 'certifications/issue-report';
 @import 'certifications/certification/details-v3';
 @import 'certification-centers/certification-center-form';
 @import 'certification-centers/information';
