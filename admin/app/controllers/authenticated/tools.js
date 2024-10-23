@@ -1,11 +1,15 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
+
+import { createMermaidFlowchartLink } from '../../utils/create-tree-data';
 
 export default class ToolsController extends Controller {
   @service pixToast;
   @service store;
   @service currentUser;
+  @tracked juniorMermaidFlowchart;
 
   @action
   async archiveCampaigns(files) {
@@ -28,5 +32,17 @@ export default class ToolsController extends Controller {
         this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue. OUPS...' });
       }
     }
+  }
+
+  @action
+  displayTree([file]) {
+    const reader = new FileReader();
+    reader.addEventListener('load', (event) => this._onFileLoad(event));
+    reader.readAsText(file);
+  }
+
+  _onFileLoad(event) {
+    const data = JSON.parse(event.target.result);
+    this.juniorMermaidFlowchart = createMermaidFlowchartLink(data);
   }
 }
