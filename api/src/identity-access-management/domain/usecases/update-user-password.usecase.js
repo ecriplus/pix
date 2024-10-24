@@ -1,3 +1,4 @@
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { UserNotAuthorizedToUpdatePasswordError } from '../../../shared/domain/errors.js';
 
 /**
@@ -14,7 +15,7 @@ import { UserNotAuthorizedToUpdatePasswordError } from '../../../shared/domain/e
  * @return {Promise<void>}
  * @throws {UserNotAuthorizedToUpdatePasswordError}
  */
-export const updateUserPassword = async function ({
+export const updateUserPassword = withTransaction(async function ({
   userId,
   password,
   temporaryKey,
@@ -45,4 +46,4 @@ export const updateUserPassword = async function ({
 
   user.markEmailAsValid();
   await userRepository.update(user.mapToDatabaseDto());
-};
+});

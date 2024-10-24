@@ -1,6 +1,7 @@
 import { PasswordResetDemandNotFoundError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { updateUserPassword } from '../../../../../src/identity-access-management/domain/usecases/update-user-password.usecase.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { UserNotAuthorizedToUpdatePasswordError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
@@ -20,6 +21,11 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
   let resetPasswordDemandRepository;
 
   beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute');
+    DomainTransaction.execute.callsFake((fn) => {
+      return fn({});
+    });
+
     cryptoService = {
       hashPassword: sinon.stub(),
     };
