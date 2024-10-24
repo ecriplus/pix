@@ -1520,7 +1520,12 @@
         "direction": "Zoek het antwoord en draai de kaart om",
         "position": "Kaart {currentCardPosition}/{totalCards}",
         "answerDirection": "Had je het antwoord?",
-        "completed": "Voltooid"
+        "completed": "Voltooid",
+        "counters": {
+          "almost": "Bijna : {totalAlmost}",
+          "no": "Helemaal niet : {totalNo}",
+          "yes": "Ja! : {totalYes}"
+        }
       },
       "grain": {
         "tag": {

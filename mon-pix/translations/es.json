@@ -1520,7 +1520,12 @@
         "direction": "Encuentra la respuesta y luego gira la tarjeta.",
         "position": "Tarjeta {currentCardPosition}/{totalCards}",
         "answerDirection": "¿Tienes la respuesta?",
-        "completed": "Terminado"
+        "completed": "Terminado",
+        "counters": {
+          "almost": "Casi : {totalAlmost}",
+          "no": "Para nada : {totalNo}",
+          "yes": "¡Sí! : {totalYes}"
+        }
       },
       "grain": {
         "tag": {
