@@ -11,21 +11,21 @@
  * @typedef {import('./index.js').AssessmentRepository} AssessmentRepository
  * @typedef {import('../../../src/shared/domain/models/CertificationCandidate.js').CertificationCandidate} CertificationCandidate
  */
-import { SessionNotAccessible } from '../../../src/certification/session-management/domain/errors.js';
-import { ComplementaryCertificationCourse } from '../../../src/certification/session-management/domain/models/ComplementaryCertificationCourse.js';
-import { AlgorithmEngineVersion } from '../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { CertificationCourse } from '../../../src/certification/shared/domain/models/CertificationCourse.js';
-import { SessionVersion } from '../../../src/certification/shared/domain/models/SessionVersion.js';
-import { config } from '../../../src/shared/config.js';
-import { LanguageNotSupportedError } from '../../../src/shared/domain/errors.js';
+import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
+import { config } from '../../../../shared/config.js';
+import { LanguageNotSupportedError } from '../../../../shared/domain/errors.js';
 import {
   CandidateNotAuthorizedToJoinSessionError,
   CandidateNotAuthorizedToResumeCertificationTestError,
   NotFoundError,
   UnexpectedUserAccountError,
-} from '../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../src/shared/domain/models/Assessment.js';
-import { DomainTransaction } from '../../infrastructure/DomainTransaction.js';
+} from '../../../../shared/domain/errors.js';
+import { Assessment } from '../../../../shared/domain/models/Assessment.js';
+import { SessionNotAccessible } from '../../../session-management/domain/errors.js';
+import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
+import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
+import { CertificationCourse } from '../../../shared/domain/models/CertificationCourse.js';
+import { SessionVersion } from '../../../shared/domain/models/SessionVersion.js';
 
 const { features } = config;
 
@@ -33,7 +33,7 @@ const { features } = config;
  * @param {Object} params
  * @param {SessionRepository} params.sessionRepository
  * @param {AssessmentRepository} params.assessmentRepository
- * @param {CertificationCandidateRepository} params.certificationCandidateRepository
+ * @param {CertificationCandidateRepository} params.enrolmentCertificationCandidateRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {UserRepository} params.userRepository
  * @param {PlacementProfileService} params.placementProfileService
@@ -48,7 +48,7 @@ const retrieveLastOrCreateCertificationCourse = async function ({
   userId,
   locale,
   assessmentRepository,
-  certificationCandidateRepository,
+  enrolmentCertificationCandidateRepository,
   certificationCourseRepository,
   sessionRepository,
   certificationCenterRepository,
@@ -64,7 +64,7 @@ const retrieveLastOrCreateCertificationCourse = async function ({
   _validateSessionAccess(session, accessCode);
   _validateSessionIsActive(session);
 
-  const certificationCandidate = await certificationCandidateRepository.getBySessionIdAndUserId({
+  const certificationCandidate = await enrolmentCertificationCandidateRepository.getBySessionIdAndUserId({
     userId,
     sessionId,
   });
@@ -81,7 +81,7 @@ const retrieveLastOrCreateCertificationCourse = async function ({
 
   await _blockCandidateFromRestartingWithoutExplicitValidation(
     certificationCandidate,
-    certificationCandidateRepository,
+    enrolmentCertificationCandidateRepository,
   );
 
   if (existingCertificationCourse) {
@@ -164,10 +164,10 @@ function _validateCandidateIsAuthorizedToStart(certificationCandidate, existingC
 
 async function _blockCandidateFromRestartingWithoutExplicitValidation(
   certificationCandidate,
-  certificationCandidateRepository,
+  enrolmentCertificationCandidateRepository,
 ) {
   certificationCandidate.authorizedToStart = false;
-  await certificationCandidateRepository.update(certificationCandidate);
+  await enrolmentCertificationCandidateRepository.update(certificationCandidate);
 }
 
 /**
@@ -200,7 +200,7 @@ async function _startNewCertification({
 }) {
   let lang;
   if (SessionVersion.isV3(session.version)) {
-    const user = await userRepository.get(userId);
+    const user = await userRepository.get({ id: userId });
     const isUserLanguageValid = _validateUserLanguage(languageService, user.lang);
 
     if (!isUserLanguageValid) {
