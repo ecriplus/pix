@@ -1468,6 +1468,7 @@
           }
         },
         "flashcards": {
+          "retry": "Inténtalo de nuevo",
           "start": "Para empezar",
           "seeAnswer": "ver la respuesta",
           "seeAgain": "Revisa la pregunta",
@@ -1518,7 +1519,8 @@
       "flashcards": {
         "direction": "Encuentra la respuesta y luego gira la tarjeta.",
         "position": "Tarjeta {currentCardPosition}/{totalCards}",
-        "answerDirection": "¿Tienes la respuesta?"
+        "answerDirection": "¿Tienes la respuesta?",
+        "completed": "Terminado"
       },
       "grain": {
         "tag": {
