@@ -12,43 +12,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
 
   test('should display the intro card by default', async function (assert) {
     // given
-    const firstCard = {
-      id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-      recto: {
-        image: {
-          url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
-        },
-        text: "A quoi sert l'arobase dans mon adresse email ?",
-      },
-      verso: {
-        image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
-        text: "Parce que c'est joli",
-      },
-    };
-    const secondCard = {
-      id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-      recto: {
-        image: {
-          url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
-        },
-        text: 'Qui a écrit le Dormeur du Val ?',
-      },
-      verso: {
-        image: {
-          url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
-        },
-        text: '<p>Arthur Rimbaud</p>',
-      },
-    };
-
-    const flashcards = {
-      id: '71de6394-ff88-4de3-8834-a40057a50ff4',
-      type: 'flashcards',
-      title: "Introduction à l'adresse e-mail",
-      instruction: '<p>...</p>',
-      introImage: { url: 'https://images.pix.fr/modulix/flashcards-intro.png' },
-      cards: [firstCard, secondCard],
-    };
+    const { flashcards } = _getFlashcards();
 
     // when
     const screen = await render(<template><ModulixFlashcards @flashcards={{flashcards}} /></template>);
@@ -69,43 +33,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
   module('when in preview mode', function () {
     test('should display all sides of all cards', async function (assert) {
       // given
-      const firstCard = {
-        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-        recto: {
-          image: {
-            url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
-          },
-          text: "A quoi sert l'arobase dans mon adresse email ?",
-        },
-        verso: {
-          image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
-          text: "Parce que c'est joli",
-        },
-      };
-      const secondCard = {
-        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-        recto: {
-          image: {
-            url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
-          },
-          text: 'Qui a écrit le Dormeur du Val ?',
-        },
-        verso: {
-          image: {
-            url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
-          },
-          text: 'Arthur Rimbaud',
-        },
-      };
-
-      const flashcards = {
-        id: '71de6394-ff88-4de3-8834-a40057a50ff4',
-        type: 'flashcards',
-        title: "Introduction à l'adresse e-mail",
-        instruction: '<p>...</p>',
-        introImage: { url: 'https://images.pix.fr/modulix/flashcards-intro.png' },
-        cards: [firstCard, secondCard],
-      };
+      const { flashcards, firstCard, secondCard } = _getFlashcards();
 
       class PreviewModeServiceStub extends Service {
         isEnabled = true;
@@ -132,43 +60,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
   module('when user clicks on the "Start" button', function () {
     test('should display the first card', async function (assert) {
       // given
-      const firstCard = {
-        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-        recto: {
-          image: {
-            url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
-          },
-          text: "A quoi sert l'arobase dans mon adresse email ?",
-        },
-        verso: {
-          image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
-          text: "Parce que c'est joli",
-        },
-      };
-      const secondCard = {
-        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-        recto: {
-          image: {
-            url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
-          },
-          text: 'Qui a écrit le Dormeur du Val ?',
-        },
-        verso: {
-          image: {
-            url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
-          },
-          text: '<p>Arthur Rimbaud</p>',
-        },
-      };
-
-      const flashcards = {
-        id: '71de6394-ff88-4de3-8834-a40057a50ff4',
-        type: 'flashcards',
-        title: "Introduction à l'adresse e-mail",
-        instruction: '<p>...</p>',
-        introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
-        cards: [firstCard, secondCard],
-      };
+      const { flashcards } = _getFlashcards();
 
       // when
       const screen = await render(<template><ModulixFlashcards @flashcards={{flashcards}} /></template>);
@@ -189,43 +81,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
   module('when users clicks on the "Continue" button', function () {
     test('should display options buttons to answer', async function (assert) {
       // given
-      const firstCard = {
-        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-        recto: {
-          image: {
-            url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
-          },
-          text: "A quoi sert l'arobase dans mon adresse email ?",
-        },
-        verso: {
-          image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
-          text: "Parce que c'est joli",
-        },
-      };
-      const secondCard = {
-        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-        recto: {
-          image: {
-            url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
-          },
-          text: 'Qui a écrit le Dormeur du Val ?',
-        },
-        verso: {
-          image: {
-            url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
-          },
-          text: '<p>Arthur Rimbaud</p>',
-        },
-      };
-
-      const flashcards = {
-        id: '71de6394-ff88-4de3-8834-a40057a50ff4',
-        type: 'flashcards',
-        title: "Introduction à l'adresse e-mail",
-        instruction: '<p>...</p>',
-        introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
-        cards: [firstCard, secondCard],
-      };
+      const { flashcards } = _getFlashcards();
 
       // when
       const screen = await render(<template><ModulixFlashcards @flashcards={{flashcards}} /></template>);
@@ -240,43 +96,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
     module('when the user self-assesses their response', function () {
       test('should display the next card and send self-assessment', async function (assert) {
         // given
-        const firstCard = {
-          id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-          recto: {
-            image: {
-              url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
-            },
-            text: "A quoi sert l'arobase dans mon adresse email ?",
-          },
-          verso: {
-            image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
-            text: "Parce que c'est joli",
-          },
-        };
-        const secondCard = {
-          id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-          recto: {
-            image: {
-              url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
-            },
-            text: 'Qui a écrit le Dormeur du Val ?',
-          },
-          verso: {
-            image: {
-              url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
-            },
-            text: '<p>Arthur Rimbaud</p>',
-          },
-        };
-
-        const flashcards = {
-          id: '71de6394-ff88-4de3-8834-a40057a50ff4',
-          type: 'flashcards',
-          title: "Introduction à l'adresse e-mail",
-          instruction: '<p>...</p>',
-          introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
-          cards: [firstCard, secondCard],
-        };
+        const { flashcards } = _getFlashcards();
 
         const onSelfAssessmentStub = sinon.stub();
 
@@ -300,28 +120,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
     module('then user gives an answer for the last card', function () {
       test('should display the outro card', async function (assert) {
         // given
-        const firstCard = {
-          id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-          recto: {
-            image: {
-              url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
-            },
-            text: "A quoi sert l'arobase dans mon adresse email ?",
-          },
-          verso: {
-            image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
-            text: "Parce que c'est joli",
-          },
-        };
-
-        const flashcards = {
-          id: '71de6394-ff88-4de3-8834-a40057a50ff4',
-          type: 'flashcards',
-          title: "Introduction à l'adresse e-mail",
-          instruction: '<p>...</p>',
-          introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
-          cards: [firstCard],
-        };
+        const { flashcards } = _getFlashcards();
 
         const onSelfAssessmentStub = sinon.stub();
 
@@ -334,6 +133,8 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         await clickByName(t('pages.modulix.buttons.flashcards.start'));
         await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
         await clickByName(t('pages.modulix.buttons.flashcards.answers.no'));
+        await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
+        await clickByName(t('pages.modulix.buttons.flashcards.answers.yes'));
 
         // then
         assert.ok(screen.getByText('Terminé'));
@@ -344,43 +145,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
   module('when users reaches the end of the deck', function () {
     test('should display the counters for each answer', async function (assert) {
       // given
-      const firstCard = {
-        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-        recto: {
-          image: {
-            url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
-          },
-          text: "A quoi sert l'arobase dans mon adresse email ?",
-        },
-        verso: {
-          image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
-          text: "Parce que c'est joli",
-        },
-      };
-      const secondCard = {
-        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-        recto: {
-          image: {
-            url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
-          },
-          text: 'Qui a écrit le Dormeur du Val ?',
-        },
-        verso: {
-          image: {
-            url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
-          },
-          text: '<p>Arthur Rimbaud</p>',
-        },
-      };
-
-      const flashcards = {
-        id: '71de6394-ff88-4de3-8834-a40057a50ff4',
-        type: 'flashcards',
-        title: "Introduction à l'adresse e-mail",
-        instruction: '<p>...</p>',
-        introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
-        cards: [firstCard, secondCard],
-      };
+      const { flashcards } = _getFlashcards();
 
       const onSelfAssessment = sinon.stub();
 
@@ -404,28 +169,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
   module('when user clicks on the "Retry" button', function () {
     test('should display intro card', async function (assert) {
       // given
-      const firstCard = {
-        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-        recto: {
-          image: {
-            url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
-          },
-          text: "A quoi sert l'arobase dans mon adresse email ?",
-        },
-        verso: {
-          image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
-          text: "Parce que c'est joli",
-        },
-      };
-
-      const flashcards = {
-        id: '71de6394-ff88-4de3-8834-a40057a50ff4',
-        type: 'flashcards',
-        title: "Introduction à l'adresse e-mail",
-        instruction: '<p>...</p>',
-        introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
-        cards: [firstCard],
-      };
+      const { flashcards } = _getFlashcards();
 
       const onSelfAssessmentStub = sinon.stub();
 
@@ -438,6 +182,8 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
       await clickByName(t('pages.modulix.buttons.flashcards.start'));
       await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
       await clickByName(t('pages.modulix.buttons.flashcards.answers.yes'));
+      await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
+      await clickByName(t('pages.modulix.buttons.flashcards.answers.no'));
       await clickByName(t('pages.modulix.buttons.flashcards.retry'));
 
       // then
@@ -447,44 +193,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
     module('when user click on the "start" button', function () {
       test('displays the first flashcard', async function (assert) {
         // given
-        const firstCard = {
-          id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-          recto: {
-            image: {
-              url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
-            },
-            text: "A quoi sert l'arobase dans mon adresse email ?",
-          },
-          verso: {
-            image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
-            text: "Parce que c'est joli",
-          },
-        };
-
-        const secondCard = {
-          id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-          recto: {
-            image: {
-              url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
-            },
-            text: 'Qui a écrit le Dormeur du Val ?',
-          },
-          verso: {
-            image: {
-              url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
-            },
-            text: '<p>Arthur Rimbaud</p>',
-          },
-        };
-
-        const flashcards = {
-          id: '71de6394-ff88-4de3-8834-a40057a50ff4',
-          type: 'flashcards',
-          title: "Introduction à l'adresse e-mail",
-          instruction: '<p>...</p>',
-          introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
-          cards: [firstCard, secondCard],
-        };
+        const { flashcards, firstCard } = _getFlashcards();
 
         const onSelfAssessmentStub = sinon.stub();
 
@@ -512,3 +221,45 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
     });
   });
 });
+
+function _getFlashcards() {
+  const firstCard = {
+    id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+    recto: {
+      image: {
+        url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+      },
+      text: "A quoi sert l'arobase dans mon adresse email ?",
+    },
+    verso: {
+      image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
+      text: "Parce que c'est joli",
+    },
+  };
+  const secondCard = {
+    id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+    recto: {
+      image: {
+        url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
+      },
+      text: 'Qui a écrit le Dormeur du Val ?',
+    },
+    verso: {
+      image: {
+        url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
+      },
+      text: 'Arthur Rimbaud',
+    },
+  };
+
+  const flashcards = {
+    id: '71de6394-ff88-4de3-8834-a40057a50ff4',
+    type: 'flashcards',
+    title: "Introduction à l'adresse e-mail",
+    instruction: '<p>...</p>',
+    introImage: { url: 'https://images.pix.fr/modulix/flashcards-intro.png' },
+    cards: [firstCard, secondCard],
+  };
+
+  return { flashcards, firstCard, secondCard };
+}
