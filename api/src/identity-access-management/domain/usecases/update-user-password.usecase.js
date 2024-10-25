@@ -25,9 +25,7 @@ export const updateUserPassword = withTransaction(async function ({
   userRepository,
   resetPasswordDemandRepository,
 }) {
-  const hashedPassword = await cryptoService.hashPassword(password);
   const user = await userRepository.get(userId);
-
   if (!user.email) {
     throw new UserNotAuthorizedToUpdatePasswordError();
   }
@@ -38,6 +36,7 @@ export const updateUserPassword = withTransaction(async function ({
     resetPasswordDemandRepository,
   );
 
+  const hashedPassword = await cryptoService.hashPassword(password);
   await authenticationMethodRepository.updateChangedPassword({
     userId: user.id,
     hashedPassword,
