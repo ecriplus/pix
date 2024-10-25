@@ -1,5 +1,20 @@
 # Pix Changelog
 
+## v4.232.0 (25/10/2024)
+
+
+### :rocket: Amélioration
+- [#10401](https://github.com/1024pix/pix/pull/10401) [FEATURE] Générer un test de certification v2 avec des questions du référentiel Pix+ seul (PIX-14715).
+- [#10410](https://github.com/1024pix/pix/pull/10410) [FEATURE] Modification des roles de la page de reset de password (PIX-14114).
+- [#10406](https://github.com/1024pix/pix/pull/10406) [FEATURE] Ajout de la confirmation de reset de mot de passe (PIX-14114).
+- [#10380](https://github.com/1024pix/pix/pull/10380) [FEATURE] Ajoute une page de loader avant les résultats de fin de parcours (PIX-14944).
+
+### :bug: Correction
+- [#10373](https://github.com/1024pix/pix/pull/10373) [BUGFIX] Cacher la tooltip lorsque le palier ne contient pas de description (PIX-14756).
+
+### :coffee: Autre
+- [#10397](https://github.com/1024pix/pix/pull/10397) [DOC] ADR 56: Standardisation de l'exécution des scripts.
+
 ## v4.231.0 (24/10/2024)
 
 
