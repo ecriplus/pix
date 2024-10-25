@@ -99,7 +99,7 @@ export default class PasswordResetForm extends Component {
 }
 
 const PasswordResetSucceededInfo = <template>
-  <div class="password-reset-succeeded-info" role="alert">
+  <div class="password-reset-succeeded-info">
     <img src="/images/success-check.svg" alt="" />
     <h2 class="password-reset-succeeded-info__heading">
       {{t "components.authentication.password-reset-form.success-info.message"}}
