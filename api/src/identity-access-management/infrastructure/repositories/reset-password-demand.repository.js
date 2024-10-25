@@ -27,6 +27,7 @@ const markAllAsUsedByEmail = async function (email) {
 
   await knexConn(RESET_PASSWORD_DEMANDS_TABLE_NAME)
     .whereRaw('LOWER("email") = LOWER(?)', email)
+    .where({ used: false })
     .update({ used: true, updatedAt: new Date() });
 };
 

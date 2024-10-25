@@ -25,22 +25,57 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   });
 
   describe('#markAllAsUsedByEmail', function () {
-    const email = 'someEmail@example.net';
-    const updatedAt = new Date('2013-01-01T15:00:00Z');
+    const email = 'user1.markAllAsUsedByEmail@example.net';
+    const user2Email = 'user2.markAllAsUsedByEmail@example.net';
+    const oldPasswordResetDemandTemporaryKey = 'zzz123';
+    const oldPasswordResetDemandUpdatedAt = new Date('2013-01-01T15:00:00Z');
+    const currentPasswordResetDemandTemporaryKey = 'aha456';
+    const currentPasswordResetDemandUpdatedAt = new Date('2023-01-01T17:00:00Z');
+    let user2PasswordResetDemandId;
 
     beforeEach(function () {
-      databaseBuilder.factory.buildResetPasswordDemand({ email, used: false, updatedAt });
+      databaseBuilder.factory.buildResetPasswordDemand({
+        email,
+        used: true,
+        temporaryKey: oldPasswordResetDemandTemporaryKey,
+        updatedAt: oldPasswordResetDemandUpdatedAt,
+      });
+      databaseBuilder.factory.buildResetPasswordDemand({
+        email,
+        used: false,
+        temporaryKey: currentPasswordResetDemandTemporaryKey,
+        updatedAt: currentPasswordResetDemandUpdatedAt,
+      });
+      user2PasswordResetDemandId = databaseBuilder.factory.buildResetPasswordDemand({
+        email: user2Email,
+        used: false,
+      }).id;
       return databaseBuilder.commit();
     });
 
-    it('marks reset password demand as used', async function () {
+    it('marks only user’s unused reset password demands as used', async function () {
       // when
       await resetPasswordDemandRepository.markAllAsUsedByEmail(email);
 
       // then
-      const demand = await knex('reset-password-demands').select('used', 'updatedAt').where({ email }).first();
-      expect(demand.used).to.be.true;
-      expect(demand.updatedAt).to.be.above(updatedAt);
+      const oldPasswordResetDemand = await knex('reset-password-demands')
+        .select('used', 'updatedAt')
+        .where({ temporaryKey: oldPasswordResetDemandTemporaryKey })
+        .first();
+      expect(oldPasswordResetDemand.updatedAt).to.deep.equal(oldPasswordResetDemandUpdatedAt);
+
+      const currentPasswordResetDemand = await knex('reset-password-demands')
+        .select('used', 'updatedAt')
+        .where({ temporaryKey: currentPasswordResetDemandTemporaryKey })
+        .first();
+      expect(currentPasswordResetDemand.used).to.be.true;
+      expect(currentPasswordResetDemand.updatedAt).to.be.above(currentPasswordResetDemandUpdatedAt);
+
+      const user2PasswordResetDemand = await knex('reset-password-demands')
+        .select('used')
+        .where({ id: user2PasswordResetDemandId })
+        .first();
+      expect(user2PasswordResetDemand.used).to.be.false;
     });
 
     it('is case insensitive', async function () {
