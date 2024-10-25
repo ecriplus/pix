@@ -1,5 +1,5 @@
 const up = async function (knex) {
-  const [feature] = await knex.select('id').from('features').where({ key: 'ORALIZATION' }).limit(1);
+  const feature = await knex.select('id').from('features').where({ key: 'ORALIZATION' }).first();
   const organizationIdsSco1d = await knex.select('id').from('organizations').where({ type: 'SCO-1D' });
 
   for await (const organization of organizationIdsSco1d) {
