@@ -266,6 +266,12 @@ const updateEmail = async function ({ id, email }) {
   return new User(updatedUserEmail);
 };
 
+const updateEmailConfirmed = async function (userId) {
+  const knexConn = DomainTransaction.getConnection();
+  const updatedAt = new Date();
+  await knexConn('users').where({ id: userId }).update({ emailConfirmedAt: updatedAt, updatedAt });
+};
+
 const updateUserDetailsForAdministration = async function ({ id, userAttributes }, { preventUpdatedAt } = {}) {
   const knexConn = DomainTransaction.getConnection();
 
@@ -435,6 +441,7 @@ const updateLastDataProtectionPolicySeenAt = async function ({ userId }) {
  * @property {function} isUsernameAvailable
  * @property {function} update
  * @property {function} updateEmail
+ * @property {function} updateEmailConfirmed
  * @property {function} updateHasSeenAssessmentInstructionsToTrue
  * @property {function} updateHasSeenChallengeTooltip
  * @property {function} updateHasSeenNewDashboardInfoToTrue
@@ -467,6 +474,7 @@ export {
   isUsernameAvailable,
   update,
   updateEmail,
+  updateEmailConfirmed,
   updateHasSeenAssessmentInstructionsToTrue,
   updateHasSeenChallengeTooltip,
   updateHasSeenNewDashboardInfoToTrue,

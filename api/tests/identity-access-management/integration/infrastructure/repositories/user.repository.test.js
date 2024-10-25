@@ -1415,6 +1415,40 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
     });
 
+    describe('#updateEmailConfirmed', function () {
+      let clock;
+      const now = new Date('2022-02-02');
+
+      beforeEach(function () {
+        clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+      });
+
+      afterEach(function () {
+        clock.restore();
+      });
+
+      it('marks the users’ email as confirmed by updating "emailConfirmedAt" to current date', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser({
+          email: 'someone@example.net',
+        }).id;
+        const user2Id = databaseBuilder.factory.buildUser({
+          email: 'another.someone@example.net',
+        }).id;
+        await databaseBuilder.commit();
+
+        // when
+        await userRepository.updateEmailConfirmed(userId);
+
+        // then
+        const user1 = await knex('users').where({ id: userId }).first();
+        expect(user1.emailConfirmedAt).to.deep.equal(now);
+
+        const user2 = await knex('users').where({ id: user2Id }).first();
+        expect(user2.emailConfirmedAt).to.be.null;
+      });
+    });
+
     describe('#updateWithEmailConfirmed', function () {
       let userInDb;
 

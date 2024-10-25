@@ -38,7 +38,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
     };
     userRepository = {
       get: sinon.stub(),
-      update: sinon.stub(),
+      updateEmailConfirmed: sinon.stub(),
     };
 
     resetPasswordDemandRepository = {
@@ -182,6 +182,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
   it('updates user attribute "emailConfirmedAt"', async function () {
     // given
     const user = domainBuilder.buildUser();
+    const userId = user.id;
     userRepository.get.resolves(user);
 
     // when
@@ -197,6 +198,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
     });
 
     // then
-    expect(userRepository.update).to.have.been.calledWithExactly(user.mapToDatabaseDto());
+    expect(userRepository.updateEmailConfirmed).to.have.been.calledWithExactly(userId);
   });
 });
