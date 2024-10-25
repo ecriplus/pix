@@ -56,7 +56,7 @@ const findByTemporaryKey = async function (temporaryKey) {
  *
  * @returns {ResetPasswordDemand} retrieved reset password demand
  */
-const findByUserEmail = async function (email, temporaryKey) {
+const getByUserEmail = async function (email, temporaryKey) {
   const knexConn = DomainTransaction.getConnection();
 
   const resetPasswordDemand = await knexConn(RESET_PASSWORD_DEMANDS_TABLE_NAME)
@@ -86,14 +86,14 @@ const removeAllByEmail = async function (email) {
  * @property {function} create
  * @property {function} deleteByUserEmail
  * @property {function} findByTemporaryKey
- * @property {function} findByUserEmail
+ * @property {function} getByUserEmail
  * @property {function} markAsBeingUsed
  */
 const resetPasswordDemandRepository = {
   create,
   removeAllByEmail,
   findByTemporaryKey,
-  findByUserEmail,
+  getByUserEmail,
   markAsBeingUsed,
 };
 

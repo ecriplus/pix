@@ -122,11 +122,11 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
   });
 
-  describe('#findByUserEmail', function () {
+  describe('#getByUserEmail', function () {
     context('when demand does not exist', function () {
       it('throws a PasswordResetDemandNotFoundError', async function () {
         // when
-        const error = await catchErr(resetPasswordDemandRepository.findByUserEmail)(
+        const error = await catchErr(resetPasswordDemandRepository.getByUserEmail)(
           'bolossdu66@example.net',
           'salut les noobs',
         );
@@ -148,7 +148,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
         it('throws a PasswordResetDemandNotFoundError', async function () {
           // when
-          const error = await catchErr(resetPasswordDemandRepository.findByUserEmail)(email, temporaryKey);
+          const error = await catchErr(resetPasswordDemandRepository.getByUserEmail)(email, temporaryKey);
 
           // then
           expect(error).to.be.instanceOf(PasswordResetDemandNotFoundError);
@@ -167,7 +167,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
         it('returns the password reset demand', async function () {
           // when
-          const demand = await resetPasswordDemandRepository.findByUserEmail(email, temporaryKey);
+          const demand = await resetPasswordDemandRepository.getByUserEmail(email, temporaryKey);
 
           // then
           expect(demand).to.be.instanceOf(ResetPasswordDemand);
@@ -183,7 +183,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
             const sameEmailWithAnotherCase = 'SomeMaIL@example.net';
 
             // when
-            const demand = await resetPasswordDemandRepository.findByUserEmail(sameEmailWithAnotherCase, temporaryKey);
+            const demand = await resetPasswordDemandRepository.getByUserEmail(sameEmailWithAnotherCase, temporaryKey);
 
             // then
             expect(demand.id).to.equal(demandId);

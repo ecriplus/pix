@@ -31,7 +31,7 @@ const verifyDemand = function (temporaryKey, resetPasswordDemandRepository) {
  * @return {Promise<*>}
  */
 const assertUserHasPasswordResetDemandInProgress = function (email, temporaryKey, resetPasswordDemandRepository) {
-  return resetPasswordDemandRepository.findByUserEmail(email, temporaryKey);
+  return resetPasswordDemandRepository.getByUserEmail(email, temporaryKey);
 };
 
 /**

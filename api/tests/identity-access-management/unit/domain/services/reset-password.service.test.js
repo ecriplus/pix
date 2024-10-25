@@ -63,11 +63,11 @@ describe('Unit | Identity Access Management | Domain | Service | reset-password'
 
     beforeEach(function () {
       resetPasswordDemandRepository = {
-        findByUserEmail: sinon.stub(),
+        getByUserEmail: sinon.stub(),
       };
-      resetPasswordDemandRepository.findByUserEmail.throws();
-      resetPasswordDemandRepository.findByUserEmail.withArgs(userEmail, 'good-temporary-key').resolves();
-      resetPasswordDemandRepository.findByUserEmail.withArgs(userEmail, 'bad-temporary-key').rejects();
+      resetPasswordDemandRepository.getByUserEmail.throws();
+      resetPasswordDemandRepository.getByUserEmail.withArgs(userEmail, 'good-temporary-key').resolves();
+      resetPasswordDemandRepository.getByUserEmail.withArgs(userEmail, 'bad-temporary-key').rejects();
     });
 
     context('when there is a matching password reset demand', function () {
