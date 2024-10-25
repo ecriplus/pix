@@ -40,7 +40,7 @@ const ORGANIZATION_FEATURE = {
   },
   ORALIZATION: {
     key: 'ORALIZATION',
-    description: "Permet d'activer l'oralisation pour un learner et une organisation.",
+description: "Permet au prescripteur qui travail sur PixJunior d'activer ou désactiver l'oralisation pour un prescrit depuis pixOrga."
   },
 };
 
