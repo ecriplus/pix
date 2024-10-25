@@ -56,6 +56,14 @@ export default class ModulixFlashcards extends Component {
     return this.currentStep === 'intro' || this.currentStep === 'outro';
   }
 
+  get shouldDisplayIntroCard() {
+    return this.currentStep === "intro";
+  }
+
+  get shouldDisplayOutroCard() {
+    return this.currentStep === "outro";
+  }
+
   @action
   retry() {
     this.currentStep = 'intro';
@@ -101,7 +109,7 @@ export default class ModulixFlashcards extends Component {
   <template>
     <div class="element-flashcards">
 
-      {{#if (eq this.currentStep "intro")}}
+      {{#if this.shouldDisplayIntroCard}}
         <ModulixFlashcardsIntroCard
           @title={{@flashcards.title}}
           @introImage={{@flashcards.introImage}}
@@ -117,7 +125,7 @@ export default class ModulixFlashcards extends Component {
         />
       {{/if}}
 
-      {{#if (eq this.currentStep "outro")}}
+      {{#if this.shouldDisplayOutroCard}}
         <ModulixFlashcardsOutroCard @title={{@flashcards.title}} @onRetry={{this.retry}} @counters={{this.counters}} />
       {{/if}}
 
