@@ -1474,7 +1474,7 @@
           "seeAgain": "Bekijk de vraag",
           "nextCard": "Volgende",
           "answer": {
-            "notAtAll": "Helemaal niet",
+            "no": "Helemaal niet",
             "almost": "Bijna",
             "yes": "Ja!"
           }

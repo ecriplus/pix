@@ -139,7 +139,7 @@ export default class ModulixFlashcards extends Component {
                 type="button"
                 {{on "click" (fn this.onSelfAssessment "no")}}
               >
-                {{t "pages.modulix.buttons.flashcards.answers.notAtAll"}}
+                {{t "pages.modulix.buttons.flashcards.answers.no"}}
               </button>
               <button
                 class="element-flashcards__footer__answer__button element-flashcards__footer__answer__button--almost"

@@ -170,7 +170,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
 
       // then
       assert.ok(screen.getByText(t('pages.modulix.flashcards.answerDirection')));
-      assert.ok(screen.getByText(t('pages.modulix.buttons.flashcards.answers.notAtAll')));
+      assert.ok(screen.getByText(t('pages.modulix.buttons.flashcards.answers.no')));
     });
 
     module('when the user self-assesses their response', function () {
@@ -224,7 +224,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         );
         await clickByName(t('pages.modulix.buttons.flashcards.start'));
         await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
-        await clickByName(t('pages.modulix.buttons.flashcards.answers.notAtAll'));
+        await clickByName(t('pages.modulix.buttons.flashcards.answers.no'));
 
         // then
         assert.ok(screen.getByText('Qui a écrit le Dormeur du Val ?'));
@@ -269,7 +269,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         );
         await clickByName(t('pages.modulix.buttons.flashcards.start'));
         await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
-        await clickByName(t('pages.modulix.buttons.flashcards.answers.notAtAll'));
+        await clickByName(t('pages.modulix.buttons.flashcards.answers.no'));
 
         // then
         assert.ok(screen.getByText('Terminé'));
@@ -328,7 +328,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
       await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
       await clickByName(t('pages.modulix.buttons.flashcards.answers.yes'));
       await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
-      await clickByName(t('pages.modulix.buttons.flashcards.answers.notAtAll'));
+      await clickByName(t('pages.modulix.buttons.flashcards.answers.no'));
 
       // then
       assert.ok(screen.getByText('Oui ! : 1'));

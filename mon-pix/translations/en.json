@@ -1494,7 +1494,7 @@
         "flashcards": {
           "answers": {
             "almost": "Almost",
-            "notAtAll": "Not at all",
+            "no": "Not at all",
             "yes": "Yes!"
           },
           "nextCard": "Next",
