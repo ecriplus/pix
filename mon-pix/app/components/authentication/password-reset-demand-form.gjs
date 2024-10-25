@@ -78,7 +78,12 @@ export default class PasswordResetDemandForm extends Component {
         </p>
 
         {{#if this.errorMessage}}
-          <PixMessage @type="error" @withIcon={{true}} class="authentication-password-reset-demand-form__error">
+          <PixMessage
+            @type="error"
+            @withIcon={{true}}
+            class="authentication-password-reset-demand-form__error"
+            role="alert"
+          >
             {{this.errorMessage}}
           </PixMessage>
         {{/if}}
