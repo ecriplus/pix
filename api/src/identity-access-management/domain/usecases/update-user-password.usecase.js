@@ -32,7 +32,7 @@ export const updateUserPassword = withTransaction(async function ({
     throw new UserNotAuthorizedToUpdatePasswordError();
   }
 
-  await resetPasswordService.hasUserAPasswordResetDemandInProgress(
+  await resetPasswordService.assertUserHasPasswordResetDemandInProgress(
     user.email,
     temporaryKey,
     resetPasswordDemandRepository,

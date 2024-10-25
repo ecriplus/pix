@@ -24,26 +24,26 @@ const verifyDemand = function (temporaryKey, resetPasswordDemandRepository) {
 };
 
 /**
- * @callback hasUserAPasswordResetDemandInProgress
+ * @callback assertUserHasPasswordResetDemandInProgress
  * @param {string} email
  * @param {string} temporaryKey
  * @param {ResetPasswordDemandRepository} resetPasswordDemandRepository
  * @return {Promise<*>}
  */
-const hasUserAPasswordResetDemandInProgress = function (email, temporaryKey, resetPasswordDemandRepository) {
+const assertUserHasPasswordResetDemandInProgress = function (email, temporaryKey, resetPasswordDemandRepository) {
   return resetPasswordDemandRepository.findByUserEmail(email, temporaryKey);
 };
 
 /**
  * @typedef {Object} ResetPasswordService
  * @property generateTemporaryKey
- * @property hasUserAPasswordResetDemandInProgress
+ * @property assertUserHasPasswordResetDemandInProgress
  * @property invalidateOldResetPasswordDemand
  * @property verifyDemand
  */
 const resetPasswordService = {
   generateTemporaryKey,
-  hasUserAPasswordResetDemandInProgress,
+  assertUserHasPasswordResetDemandInProgress,
   invalidateOldResetPasswordDemand,
   verifyDemand,
 };

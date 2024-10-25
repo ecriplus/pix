@@ -30,7 +30,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
       hashPassword: sinon.stub(),
     };
     resetPasswordService = {
-      hasUserAPasswordResetDemandInProgress: sinon.stub(),
+      assertUserHasPasswordResetDemandInProgress: sinon.stub(),
       invalidateOldResetPasswordDemand: sinon.stub(),
     };
     authenticationMethodRepository = {
@@ -42,12 +42,12 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
     };
 
     resetPasswordDemandRepository = {
-      hasUserAPasswordResetDemandInProgress: sinon.stub(),
+      assertUserHasPasswordResetDemandInProgress: sinon.stub(),
       invalidateOldResetPasswordDemand: sinon.stub(),
     };
 
     cryptoService.hashPassword.resolves();
-    resetPasswordService.hasUserAPasswordResetDemandInProgress.withArgs(user.email, temporaryKey).resolves();
+    resetPasswordService.assertUserHasPasswordResetDemandInProgress.withArgs(user.email, temporaryKey).resolves();
     resetPasswordService.invalidateOldResetPasswordDemand.resolves();
 
     authenticationMethodRepository.updateChangedPassword.resolves();
@@ -105,7 +105,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
     });
 
     // then
-    expect(resetPasswordService.hasUserAPasswordResetDemandInProgress).to.have.been.calledWithExactly(
+    expect(resetPasswordService.assertUserHasPasswordResetDemandInProgress).to.have.been.calledWithExactly(
       user.email,
       temporaryKey,
       resetPasswordDemandRepository,
@@ -158,7 +158,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
   context('When user has not a current password reset demand', function () {
     it('throws a PasswordResetDemandNotFoundError', async function () {
       // given
-      resetPasswordService.hasUserAPasswordResetDemandInProgress
+      resetPasswordService.assertUserHasPasswordResetDemandInProgress
         .withArgs(user.email, temporaryKey)
         .rejects(new PasswordResetDemandNotFoundError());
 

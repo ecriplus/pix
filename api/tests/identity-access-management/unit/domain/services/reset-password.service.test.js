@@ -57,7 +57,7 @@ describe('Unit | Identity Access Management | Domain | Service | reset-password'
     });
   });
 
-  describe('#hasUserAPasswordResetDemandInProgress', function () {
+  describe('#assertUserHasPasswordResetDemandInProgress', function () {
     const userEmail = 'shi@fu.me';
     let resetPasswordDemandRepository;
 
@@ -72,7 +72,7 @@ describe('Unit | Identity Access Management | Domain | Service | reset-password'
 
     context('when there is a matching password reset demand', function () {
       it('resolves', async function () {
-        await resetPasswordService.hasUserAPasswordResetDemandInProgress(
+        await resetPasswordService.assertUserHasPasswordResetDemandInProgress(
           userEmail,
           'good-temporary-key',
           resetPasswordDemandRepository,
@@ -82,7 +82,7 @@ describe('Unit | Identity Access Management | Domain | Service | reset-password'
 
     context('when there is no matching password reset demand', function () {
       it('resolves', function () {
-        const promise = resetPasswordService.hasUserAPasswordResetDemandInProgress(
+        const promise = resetPasswordService.assertUserHasPasswordResetDemandInProgress(
           userEmail,
           'bad-temporary-key',
           resetPasswordDemandRepository,
