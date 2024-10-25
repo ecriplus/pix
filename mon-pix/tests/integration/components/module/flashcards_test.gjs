@@ -1,4 +1,5 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { t } from 'ember-intl/test-support';
 import ModulixFlashcards from 'mon-pix/components/module/element/flashcards/flashcards';
 import { module, test } from 'qunit';
@@ -63,6 +64,69 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
     assert
       .dom(screen.queryByText(t('pages.modulix.flashcards.position', { currentCardPosition: 1, totalCards: 2 })))
       .doesNotExist();
+  });
+
+  module('when in preview mode', function () {
+    test('should display all sides of all cards', async function (assert) {
+      // given
+      const firstCard = {
+        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+        recto: {
+          image: {
+            url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+          },
+          text: "A quoi sert l'arobase dans mon adresse email ?",
+        },
+        verso: {
+          image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
+          text: "Parce que c'est joli",
+        },
+      };
+      const secondCard = {
+        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+        recto: {
+          image: {
+            url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
+          },
+          text: 'Qui a écrit le Dormeur du Val ?',
+        },
+        verso: {
+          image: {
+            url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
+          },
+          text: 'Arthur Rimbaud',
+        },
+      };
+
+      const flashcards = {
+        id: '71de6394-ff88-4de3-8834-a40057a50ff4',
+        type: 'flashcards',
+        title: "Introduction à l'adresse e-mail",
+        instruction: '<p>...</p>',
+        introImage: { url: 'https://images.pix.fr/modulix/flashcards-intro.png' },
+        cards: [firstCard, secondCard],
+      };
+
+      class PreviewModeServiceStub extends Service {
+        isEnabled = true;
+      }
+      this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
+      // when
+      const screen = await render(<template><ModulixFlashcards @flashcards={{flashcards}} /></template>);
+
+      // then
+      const introCardButton = screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.start') });
+      assert.dom(introCardButton).exists();
+
+      assert.dom(screen.getByText(firstCard.recto.text)).exists();
+      assert.dom(screen.getByText(firstCard.verso.text)).exists();
+      assert.dom(screen.getByText(secondCard.recto.text)).exists();
+      assert.dom(screen.getByText(secondCard.verso.text)).exists();
+
+      const outroCardButton = screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.retry') });
+      assert.dom(outroCardButton).exists();
+    });
   });
 
   module('when user clicks on the "Start" button', function () {

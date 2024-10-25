@@ -1,6 +1,7 @@
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
@@ -12,6 +13,8 @@ import ModulixFlashcardsOutroCard from 'mon-pix/components/module/element/flashc
 const INITIAL_COUNTERS_VALUE = { yes: 0, almost: 0, no: 0 };
 
 export default class ModulixFlashcards extends Component {
+  @service modulixPreviewMode;
+
   @tracked
   /**
    * Displayed side of the card on the screen
@@ -57,11 +60,11 @@ export default class ModulixFlashcards extends Component {
   }
 
   get shouldDisplayIntroCard() {
-    return this.currentStep === "intro";
+    return this.currentStep === 'intro' || this.modulixPreviewMode.isEnabled;
   }
 
   get shouldDisplayOutroCard() {
-    return this.currentStep === "outro";
+    return this.currentStep === 'outro' || this.modulixPreviewMode.isEnabled;
   }
 
   @action
@@ -96,6 +99,9 @@ export default class ModulixFlashcards extends Component {
   }
 
   @action
+  noop() {}
+
+  @action
   onSelfAssessment(userAssessment) {
     const selfAssessmentData = {
       userAssessment,
@@ -123,6 +129,15 @@ export default class ModulixFlashcards extends Component {
           @displayedSideName={{this.displayedSideName}}
           @onCardFlip={{this.flipCard}}
         />
+      {{/if}}
+
+      {{#if this.modulixPreviewMode.isEnabled}}
+        {{#each @flashcards.cards as |card|}}
+          <div class="element-flashcards__recto-verso">
+            <ModulixFlashcardsCard @card={{card}} @displayedSideName="recto" @onCardFlip={{this.noop}} />
+            <ModulixFlashcardsCard @card={{card}} @displayedSideName="verso" @onCardFlip={{this.noop}} />
+          </div>
+        {{/each}}
       {{/if}}
 
       {{#if this.shouldDisplayOutroCard}}
