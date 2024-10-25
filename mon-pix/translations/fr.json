@@ -1494,10 +1494,11 @@
         "flashcards": {
           "answers": {
             "almost": "Presque",
-            "notAtAll": "Pas du tout",
+            "no": "Pas du tout",
             "yes": "Oui !"
           },
           "nextCard": "Suivant",
+          "retry": "Réessayer",
           "seeAgain": "Revoir la question",
           "seeAnswer": "Voir la réponse",
           "start": "Commencer"
@@ -1541,6 +1542,12 @@
       },
       "flashcards": {
         "answerDirection": "Vous aviez la réponse ?",
+        "completed": "Terminé",
+        "counters": {
+          "almost": "Presque : {totalAlmost}",
+          "no": "Pas du tout : {totalNo}",
+          "yes": "Oui ! : {totalYes}"
+        },
         "direction": "Cherchez la réponse puis tournez la carte",
         "position": "Carte {currentCardPosition}/{totalCards}"
       },

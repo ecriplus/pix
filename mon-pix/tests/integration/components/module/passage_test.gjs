@@ -491,7 +491,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       // when
       await clickByName(t('pages.modulix.buttons.flashcards.start'));
       await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
-      await clickByName(t('pages.modulix.buttons.flashcards.answers.notAtAll'));
+      await clickByName(t('pages.modulix.buttons.flashcards.answers.no'));
 
       // then
       sinon.assert.calledOnceWithExactly(metrics.add, {

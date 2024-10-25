@@ -1,7 +1,6 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
 import ModulixFlashcards from 'mon-pix/components/module/element/flashcards/flashcards';
-// eslint-disable-next-line no-restricted-imports
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -171,7 +170,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
 
       // then
       assert.ok(screen.getByText(t('pages.modulix.flashcards.answerDirection')));
-      assert.ok(screen.getByText(t('pages.modulix.buttons.flashcards.answers.notAtAll')));
+      assert.ok(screen.getByText(t('pages.modulix.buttons.flashcards.answers.no')));
     });
 
     module('when the user self-assesses their response', function () {
@@ -225,12 +224,226 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         );
         await clickByName(t('pages.modulix.buttons.flashcards.start'));
         await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
-        await clickByName(t('pages.modulix.buttons.flashcards.answers.notAtAll'));
+        await clickByName(t('pages.modulix.buttons.flashcards.answers.no'));
 
         // then
         assert.ok(screen.getByText('Qui a écrit le Dormeur du Val ?'));
         assert.ok(screen.getByText(t('pages.modulix.flashcards.position', { currentCardPosition: 2, totalCards: 2 })));
         assert.true(onSelfAssessmentStub.calledOnce);
+      });
+    });
+
+    module('then user gives an answer for the last card', function () {
+      test('should display the outro card', async function (assert) {
+        // given
+        const firstCard = {
+          id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+          recto: {
+            image: {
+              url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+            },
+            text: "A quoi sert l'arobase dans mon adresse email ?",
+          },
+          verso: {
+            image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
+            text: "Parce que c'est joli",
+          },
+        };
+
+        const flashcards = {
+          id: '71de6394-ff88-4de3-8834-a40057a50ff4',
+          type: 'flashcards',
+          title: "Introduction à l'adresse e-mail",
+          instruction: '<p>...</p>',
+          introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
+          cards: [firstCard],
+        };
+
+        const onSelfAssessmentStub = sinon.stub();
+
+        // when
+        const screen = await render(
+          <template>
+            <ModulixFlashcards @flashcards={{flashcards}} @onSelfAssessment={{onSelfAssessmentStub}} />
+          </template>,
+        );
+        await clickByName(t('pages.modulix.buttons.flashcards.start'));
+        await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
+        await clickByName(t('pages.modulix.buttons.flashcards.answers.no'));
+
+        // then
+        assert.ok(screen.getByText('Terminé'));
+      });
+    });
+  });
+
+  module('when users reaches the end of the deck', function () {
+    test('should display the counters for each answer', async function (assert) {
+      // given
+      const firstCard = {
+        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+        recto: {
+          image: {
+            url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+          },
+          text: "A quoi sert l'arobase dans mon adresse email ?",
+        },
+        verso: {
+          image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
+          text: "Parce que c'est joli",
+        },
+      };
+      const secondCard = {
+        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+        recto: {
+          image: {
+            url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
+          },
+          text: 'Qui a écrit le Dormeur du Val ?',
+        },
+        verso: {
+          image: {
+            url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
+          },
+          text: '<p>Arthur Rimbaud</p>',
+        },
+      };
+
+      const flashcards = {
+        id: '71de6394-ff88-4de3-8834-a40057a50ff4',
+        type: 'flashcards',
+        title: "Introduction à l'adresse e-mail",
+        instruction: '<p>...</p>',
+        introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
+        cards: [firstCard, secondCard],
+      };
+
+      const onSelfAssessment = sinon.stub();
+
+      // when
+      const screen = await render(
+        <template><ModulixFlashcards @flashcards={{flashcards}} @onSelfAssessment={{onSelfAssessment}} /></template>,
+      );
+      await clickByName(t('pages.modulix.buttons.flashcards.start'));
+      await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
+      await clickByName(t('pages.modulix.buttons.flashcards.answers.yes'));
+      await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
+      await clickByName(t('pages.modulix.buttons.flashcards.answers.no'));
+
+      // then
+      assert.ok(screen.getByText('Oui ! : 1'));
+      assert.ok(screen.getByText('Presque : 0'));
+      assert.ok(screen.getByText('Pas du tout : 1'));
+    });
+  });
+
+  module('when user clicks on the "Retry" button', function () {
+    test('should display intro card', async function (assert) {
+      // given
+      const firstCard = {
+        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+        recto: {
+          image: {
+            url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+          },
+          text: "A quoi sert l'arobase dans mon adresse email ?",
+        },
+        verso: {
+          image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
+          text: "Parce que c'est joli",
+        },
+      };
+
+      const flashcards = {
+        id: '71de6394-ff88-4de3-8834-a40057a50ff4',
+        type: 'flashcards',
+        title: "Introduction à l'adresse e-mail",
+        instruction: '<p>...</p>',
+        introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
+        cards: [firstCard],
+      };
+
+      const onSelfAssessmentStub = sinon.stub();
+
+      // when
+      const screen = await render(
+        <template>
+          <ModulixFlashcards @flashcards={{flashcards}} @onSelfAssessment={{onSelfAssessmentStub}} />
+        </template>,
+      );
+      await clickByName(t('pages.modulix.buttons.flashcards.start'));
+      await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
+      await clickByName(t('pages.modulix.buttons.flashcards.answers.yes'));
+      await clickByName(t('pages.modulix.buttons.flashcards.retry'));
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.start') })).exists();
+    });
+
+    module('when user click on the "start" button', function () {
+      test('displays the first flashcard', async function (assert) {
+        // given
+        const firstCard = {
+          id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+          recto: {
+            image: {
+              url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+            },
+            text: "A quoi sert l'arobase dans mon adresse email ?",
+          },
+          verso: {
+            image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
+            text: "Parce que c'est joli",
+          },
+        };
+
+        const secondCard = {
+          id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+          recto: {
+            image: {
+              url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
+            },
+            text: 'Qui a écrit le Dormeur du Val ?',
+          },
+          verso: {
+            image: {
+              url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
+            },
+            text: '<p>Arthur Rimbaud</p>',
+          },
+        };
+
+        const flashcards = {
+          id: '71de6394-ff88-4de3-8834-a40057a50ff4',
+          type: 'flashcards',
+          title: "Introduction à l'adresse e-mail",
+          instruction: '<p>...</p>',
+          introImage: { url: 'https://images.pix.fr/modulix/placeholder-details.svg' },
+          cards: [firstCard, secondCard],
+        };
+
+        const onSelfAssessmentStub = sinon.stub();
+
+        // when
+        const screen = await render(
+          <template>
+            <ModulixFlashcards @flashcards={{flashcards}} @onSelfAssessment={{onSelfAssessmentStub}} />
+          </template>,
+        );
+        await clickByName(t('pages.modulix.buttons.flashcards.start'));
+        await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
+        await clickByName(t('pages.modulix.buttons.flashcards.answers.yes'));
+        await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
+        await clickByName(t('pages.modulix.buttons.flashcards.answers.yes'));
+        await clickByName(t('pages.modulix.buttons.flashcards.retry'));
+        await clickByName(t('pages.modulix.buttons.flashcards.start'));
+
+        // then
+        assert.ok(screen.getByText(firstCard.recto.text));
+        assert.strictEqual(screen.getByRole('presentation').getAttribute('src'), firstCard.recto.image.url);
+        assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.seeAnswer') })).exists();
+        assert.ok(screen.getByText(t('pages.modulix.flashcards.direction')));
+        assert.ok(screen.getByText(t('pages.modulix.flashcards.position', { currentCardPosition: 1, totalCards: 2 })));
       });
     });
   });

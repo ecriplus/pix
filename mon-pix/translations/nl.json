@@ -1468,12 +1468,13 @@
           }
         },
         "flashcards": {
+          "retry": "Opnieuw proberen",
           "start": "Beginnen",
           "seeAnswer": "Zie het antwoord",
           "seeAgain": "Bekijk de vraag",
           "nextCard": "Volgende",
           "answer": {
-            "notAtAll": "Helemaal niet",
+            "no": "Helemaal niet",
             "almost": "Bijna",
             "yes": "Ja!"
           }
@@ -1518,7 +1519,13 @@
       "flashcards": {
         "direction": "Zoek het antwoord en draai de kaart om",
         "position": "Kaart {currentCardPosition}/{totalCards}",
-        "answerDirection": "Had je het antwoord?"
+        "answerDirection": "Had je het antwoord?",
+        "completed": "Voltooid",
+        "counters": {
+          "almost": "Bijna : {totalAlmost}",
+          "no": "Helemaal niet : {totalNo}",
+          "yes": "Ja! : {totalYes}"
+        }
       },
       "grain": {
         "tag": {

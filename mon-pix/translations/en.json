@@ -1494,10 +1494,11 @@
         "flashcards": {
           "answers": {
             "almost": "Almost",
-            "notAtAll": "Not at all",
+            "no": "Not at all",
             "yes": "Yes!"
           },
           "nextCard": "Next",
+          "retry": "Try again",
           "seeAgain": "Review the question",
           "seeAnswer": "See the answer",
           "start": "Start"
@@ -1541,6 +1542,12 @@
       },
       "flashcards": {
         "answerDirection": "Did you have the answer?",
+        "completed": "Completed",
+        "counters": {
+          "almost": "Almost : {totalAlmost}",
+          "no": "Not at all : {totalNo}",
+          "yes": "Yes! : {totalYes}"
+        },
         "direction": "Look for the answer then turn the card",
         "position": "Card {currentCardPosition}/{totalCards}"
       },
