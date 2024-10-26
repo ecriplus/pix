@@ -30,17 +30,14 @@ export const updateUserPassword = withTransaction(async function ({
     throw new UserNotAuthorizedToUpdatePasswordError();
   }
 
-  await resetPasswordService.assertUserHasPasswordResetDemandInProgress(
-    user.email,
-    temporaryKey,
-    resetPasswordDemandRepository,
-  );
+  await resetPasswordService.invalidateResetPasswordDemand(user.email, temporaryKey, resetPasswordDemandRepository);
 
   const hashedPassword = await cryptoService.hashPassword(password);
   await authenticationMethodRepository.updateChangedPassword({
     userId: user.id,
     hashedPassword,
   });
+
   await resetPasswordService.invalidateOldResetPasswordDemandsByEmail(user.email, resetPasswordDemandRepository);
 
   await userRepository.updateEmailConfirmed(userId);

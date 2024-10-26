@@ -30,7 +30,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
       hashPassword: sinon.stub(),
     };
     resetPasswordService = {
-      assertUserHasPasswordResetDemandInProgress: sinon.stub(),
+      invalidateResetPasswordDemand: sinon.stub(),
       invalidateOldResetPasswordDemandsByEmail: sinon.stub(),
     };
     authenticationMethodRepository = {
@@ -42,12 +42,12 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
     };
 
     resetPasswordDemandRepository = {
-      assertUserHasPasswordResetDemandInProgress: sinon.stub(),
+      assertUnusedAndMarkAsUsed: sinon.stub(),
       invalidateOldResetPasswordDemandsByEmail: sinon.stub(),
     };
 
     cryptoService.hashPassword.resolves();
-    resetPasswordService.assertUserHasPasswordResetDemandInProgress.withArgs(user.email, temporaryKey).resolves();
+    resetPasswordService.invalidateResetPasswordDemand.withArgs(user.email, temporaryKey).resolves();
     resetPasswordService.invalidateOldResetPasswordDemandsByEmail.resolves();
 
     authenticationMethodRepository.updateChangedPassword.resolves();
@@ -105,7 +105,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
     });
 
     // then
-    expect(resetPasswordService.assertUserHasPasswordResetDemandInProgress).to.have.been.calledWithExactly(
+    expect(resetPasswordService.invalidateResetPasswordDemand).to.have.been.calledWithExactly(
       user.email,
       temporaryKey,
       resetPasswordDemandRepository,
@@ -158,7 +158,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
   context('When user has not a current password reset demand', function () {
     it('throws a PasswordResetDemandNotFoundError', async function () {
       // given
-      resetPasswordService.assertUserHasPasswordResetDemandInProgress
+      resetPasswordService.invalidateResetPasswordDemand
         .withArgs(user.email, temporaryKey)
         .rejects(new PasswordResetDemandNotFoundError());
 

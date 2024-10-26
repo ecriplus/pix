@@ -60,22 +60,22 @@ describe('Unit | Identity Access Management | Domain | Service | reset-password'
     });
   });
 
-  describe('#assertUserHasPasswordResetDemandInProgress', function () {
+  describe('#invalidateResetPasswordDemand', function () {
     const userEmail = 'shi@fu.me';
     let resetPasswordDemandRepository;
 
     beforeEach(function () {
       resetPasswordDemandRepository = {
-        getByUserEmail: sinon.stub(),
+        markAsUsed: sinon.stub(),
       };
-      resetPasswordDemandRepository.getByUserEmail.throws();
-      resetPasswordDemandRepository.getByUserEmail.withArgs(userEmail, 'good-temporary-key').resolves();
-      resetPasswordDemandRepository.getByUserEmail.withArgs(userEmail, 'bad-temporary-key').rejects();
+      resetPasswordDemandRepository.markAsUsed.throws();
+      resetPasswordDemandRepository.markAsUsed.withArgs(userEmail, 'good-temporary-key').resolves();
+      resetPasswordDemandRepository.markAsUsed.withArgs(userEmail, 'bad-temporary-key').rejects();
     });
 
     context('when there is a matching password reset demand', function () {
       it('resolves', async function () {
-        await resetPasswordService.assertUserHasPasswordResetDemandInProgress(
+        await resetPasswordService.invalidateResetPasswordDemand(
           userEmail,
           'good-temporary-key',
           resetPasswordDemandRepository,
@@ -85,7 +85,7 @@ describe('Unit | Identity Access Management | Domain | Service | reset-password'
 
     context('when there is no matching password reset demand', function () {
       it('resolves', function () {
-        const promise = resetPasswordService.assertUserHasPasswordResetDemandInProgress(
+        const promise = resetPasswordService.invalidateResetPasswordDemand(
           userEmail,
           'bad-temporary-key',
           resetPasswordDemandRepository,

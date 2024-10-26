@@ -24,26 +24,26 @@ const verifyDemand = function (temporaryKey, resetPasswordDemandRepository) {
 };
 
 /**
- * @callback assertUserHasPasswordResetDemandInProgress
  * @param {string} email
  * @param {string} temporaryKey
  * @param {ResetPasswordDemandRepository} resetPasswordDemandRepository
  * @return {Promise<*>}
+ * @throws PasswordResetDemandNotFoundError
  */
-const assertUserHasPasswordResetDemandInProgress = function (email, temporaryKey, resetPasswordDemandRepository) {
-  return resetPasswordDemandRepository.getByUserEmail(email, temporaryKey);
+const invalidateResetPasswordDemand = function (email, temporaryKey, resetPasswordDemandRepository) {
+  return resetPasswordDemandRepository.markAsUsed(email, temporaryKey);
 };
 
 /**
  * @typedef {Object} ResetPasswordService
  * @property generateTemporaryKey
- * @property assertUserHasPasswordResetDemandInProgress
+ * @property invalidateResetPasswordDemand
  * @property invalidateOldResetPasswordDemandsByEmail
  * @property verifyDemand
  */
 const resetPasswordService = {
   generateTemporaryKey,
-  assertUserHasPasswordResetDemandInProgress,
+  invalidateResetPasswordDemand,
   invalidateOldResetPasswordDemandsByEmail,
   verifyDemand,
 };
