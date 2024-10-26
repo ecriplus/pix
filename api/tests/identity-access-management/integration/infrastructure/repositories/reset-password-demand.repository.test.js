@@ -24,7 +24,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
   });
 
-  describe('#markAsBeingUsed', function () {
+  describe('#markAllAsUsedByEmail', function () {
     const email = 'someEmail@example.net';
     const updatedAt = new Date('2013-01-01T15:00:00Z');
 
@@ -35,7 +35,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
     it('marks reset password demand as used', async function () {
       // when
-      await resetPasswordDemandRepository.markAsBeingUsed(email);
+      await resetPasswordDemandRepository.markAllAsUsedByEmail(email);
 
       // then
       const demand = await knex('reset-password-demands').select('used', 'updatedAt').where({ email }).first();
@@ -46,7 +46,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     it('is case insensitive', async function () {
       // when
       const emailWithUppercase = email.toUpperCase();
-      await resetPasswordDemandRepository.markAsBeingUsed(emailWithUppercase);
+      await resetPasswordDemandRepository.markAllAsUsedByEmail(emailWithUppercase);
 
       // then
       const demand = await knex('reset-password-demands').select('used').where({ email }).first();
@@ -59,7 +59,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         const sameEmailWithAnotherCase = 'SomeEmaIL@example.net';
 
         // when
-        await resetPasswordDemandRepository.markAsBeingUsed(sameEmailWithAnotherCase);
+        await resetPasswordDemandRepository.markAllAsUsedByEmail(sameEmailWithAnotherCase);
 
         // then
         const demand = await knex('reset-password-demands').select('used').where({ email }).first();

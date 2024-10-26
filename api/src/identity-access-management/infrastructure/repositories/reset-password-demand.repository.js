@@ -22,7 +22,7 @@ const create = async function ({ email, temporaryKey }) {
 /**
  * @param {string} email
  */
-const markAsBeingUsed = async function (email) {
+const markAllAsUsedByEmail = async function (email) {
   const knexConn = DomainTransaction.getConnection();
 
   await knexConn(RESET_PASSWORD_DEMANDS_TABLE_NAME)
@@ -87,14 +87,14 @@ const removeAllByEmail = async function (email) {
  * @property {function} deleteByUserEmail
  * @property {function} findByTemporaryKey
  * @property {function} getByUserEmail
- * @property {function} markAsBeingUsed
+ * @property {function} markAllAsUsedByEmail
  */
 const resetPasswordDemandRepository = {
   create,
   removeAllByEmail,
   findByTemporaryKey,
   getByUserEmail,
-  markAsBeingUsed,
+  markAllAsUsedByEmail,
 };
 
 export { resetPasswordDemandRepository };

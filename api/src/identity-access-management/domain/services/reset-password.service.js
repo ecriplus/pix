@@ -16,7 +16,7 @@ const generateTemporaryKey = async function () {
 };
 
 const invalidateOldResetPasswordDemand = function (userEmail, resetPasswordDemandRepository) {
-  return resetPasswordDemandRepository.markAsBeingUsed(userEmail);
+  return resetPasswordDemandRepository.markAllAsUsedByEmail(userEmail);
 };
 
 const verifyDemand = function (temporaryKey, resetPasswordDemandRepository) {

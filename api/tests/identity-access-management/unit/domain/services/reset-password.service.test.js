@@ -37,22 +37,22 @@ describe('Unit | Identity Access Management | Domain | Service | reset-password'
 
     beforeEach(function () {
       resetPasswordDemandRepository = {
-        markAsBeingUsed: sinon.stub(),
+        markAllAsUsedByEmail: sinon.stub(),
       };
     });
 
     it('calls reset password repository', function () {
       // given
       const userEmail = 'shi@fu.me';
-      resetPasswordDemandRepository.markAsBeingUsed.resolves();
+      resetPasswordDemandRepository.markAllAsUsedByEmail.resolves();
 
       // when
       const promise = resetPasswordService.invalidateOldResetPasswordDemand(userEmail, resetPasswordDemandRepository);
 
       // then
       return promise.then(() => {
-        sinon.assert.calledOnce(resetPasswordDemandRepository.markAsBeingUsed);
-        sinon.assert.calledWith(resetPasswordDemandRepository.markAsBeingUsed, userEmail);
+        sinon.assert.calledOnce(resetPasswordDemandRepository.markAllAsUsedByEmail);
+        sinon.assert.calledWith(resetPasswordDemandRepository.markAllAsUsedByEmail, userEmail);
       });
     });
   });
