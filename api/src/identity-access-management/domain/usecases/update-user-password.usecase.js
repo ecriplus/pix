@@ -42,7 +42,7 @@ export const updateUserPassword = withTransaction(async function ({
     userId: user.id,
     hashedPassword,
   });
-  await resetPasswordService.invalidateOldResetPasswordDemand(user.email, resetPasswordDemandRepository);
+  await resetPasswordService.invalidateOldResetPasswordDemandsByEmail(user.email, resetPasswordDemandRepository);
 
   user.markEmailAsValid();
   await userRepository.update(user.mapToDatabaseDto());

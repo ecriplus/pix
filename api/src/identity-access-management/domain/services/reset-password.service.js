@@ -15,7 +15,7 @@ const generateTemporaryKey = async function () {
   );
 };
 
-const invalidateOldResetPasswordDemand = function (userEmail, resetPasswordDemandRepository) {
+const invalidateOldResetPasswordDemandsByEmail = function (userEmail, resetPasswordDemandRepository) {
   return resetPasswordDemandRepository.markAllAsUsedByEmail(userEmail);
 };
 
@@ -38,13 +38,13 @@ const assertUserHasPasswordResetDemandInProgress = function (email, temporaryKey
  * @typedef {Object} ResetPasswordService
  * @property generateTemporaryKey
  * @property assertUserHasPasswordResetDemandInProgress
- * @property invalidateOldResetPasswordDemand
+ * @property invalidateOldResetPasswordDemandsByEmail
  * @property verifyDemand
  */
 const resetPasswordService = {
   generateTemporaryKey,
   assertUserHasPasswordResetDemandInProgress,
-  invalidateOldResetPasswordDemand,
+  invalidateOldResetPasswordDemandsByEmail,
   verifyDemand,
 };
 export { resetPasswordService };

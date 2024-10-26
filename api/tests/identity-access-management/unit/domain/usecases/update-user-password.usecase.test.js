@@ -31,7 +31,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
     };
     resetPasswordService = {
       assertUserHasPasswordResetDemandInProgress: sinon.stub(),
-      invalidateOldResetPasswordDemand: sinon.stub(),
+      invalidateOldResetPasswordDemandsByEmail: sinon.stub(),
     };
     authenticationMethodRepository = {
       updateChangedPassword: sinon.stub(),
@@ -43,12 +43,12 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
 
     resetPasswordDemandRepository = {
       assertUserHasPasswordResetDemandInProgress: sinon.stub(),
-      invalidateOldResetPasswordDemand: sinon.stub(),
+      invalidateOldResetPasswordDemandsByEmail: sinon.stub(),
     };
 
     cryptoService.hashPassword.resolves();
     resetPasswordService.assertUserHasPasswordResetDemandInProgress.withArgs(user.email, temporaryKey).resolves();
-    resetPasswordService.invalidateOldResetPasswordDemand.resolves();
+    resetPasswordService.invalidateOldResetPasswordDemandsByEmail.resolves();
 
     authenticationMethodRepository.updateChangedPassword.resolves();
     userRepository.get.resolves(user);
@@ -149,7 +149,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
     });
 
     // then
-    expect(resetPasswordService.invalidateOldResetPasswordDemand).to.have.been.calledWithExactly(
+    expect(resetPasswordService.invalidateOldResetPasswordDemandsByEmail).to.have.been.calledWithExactly(
       user.email,
       resetPasswordDemandRepository,
     );
