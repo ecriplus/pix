@@ -22,7 +22,7 @@ describe('Unit | Organizational Entities | application | API | OrganizationFeatu
   describe('#hasOralizationFeature', function () {
     it('should return true', function () {
       const organizationFeature = new OrganizationFeaturesDTO({
-        features: [{ name: ORGANIZATION_FEATURE.ORALIZATION.key }],
+        features: [{ name: ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER.key }],
       });
 
       expect(organizationFeature.hasOralizationFeature).to.be.true;

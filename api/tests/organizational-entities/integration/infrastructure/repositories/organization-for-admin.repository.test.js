@@ -561,7 +561,9 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         const missionManagementFeatureId = databaseBuilder.factory.buildFeature(
           ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT,
         ).id;
-        const oralizationFeatureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.ORALIZATION).id;
+        const oralizationFeatureId = databaseBuilder.factory.buildFeature(
+          ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER,
+        ).id;
         const learnerImportFeatureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.LEARNER_IMPORT).id;
         const organizationLearnerImportOndeFormat = databaseBuilder.factory.buildOrganizationLearnerImportFormat({
           name: 'ONDE',

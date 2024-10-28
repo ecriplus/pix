@@ -11,13 +11,13 @@ import { ORGANIZATION_FEATURE } from '../../src/shared/domain/constants.js';
 
 const up = async function (knex) {
   await knex('features').insert({
-    key: ORGANIZATION_FEATURE.ORALIZATION.key,
-    description: ORGANIZATION_FEATURE.ORALIZATION.description,
+    key: ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER.key,
+    description: ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER.description,
   });
 };
 
 const down = async function (knex) {
-  await knex('features').where({ key: ORGANIZATION_FEATURE.ORALIZATION.key }).delete();
+  await knex('features').where({ key: ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER.key }).delete();
 };
 
 export { down, up };

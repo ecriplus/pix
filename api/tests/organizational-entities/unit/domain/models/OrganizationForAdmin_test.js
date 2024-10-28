@@ -50,7 +50,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
         const organization = new OrganizationForAdmin(expectedOrganization);
 
         expect(organization.features).to.deep.includes({
-          [ORGANIZATION_FEATURE.ORALIZATION.key]: { active: true, params: null },
+          [ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER.key]: { active: true, params: null },
         });
       });
 

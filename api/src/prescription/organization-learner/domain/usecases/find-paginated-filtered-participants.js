@@ -72,7 +72,7 @@ async function _addOralizationInformationToParticipants({
 }) {
   const learnersWithOralizationFeature = await organizationLearnerFeatureRepository.getOrganizationLearnersByFeature({
     organizationId,
-    featureKey: ORGANIZATION_FEATURE.ORALIZATION.key,
+    featureKey: ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER.key,
   });
   return organizationParticipants?.map((participant) => {
     const hasOralization = learnersWithOralizationFeature.some(

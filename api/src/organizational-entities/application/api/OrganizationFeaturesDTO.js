@@ -18,6 +18,6 @@ export class OrganizationFeaturesDTO {
   }
 
   get hasOralizationFeature() {
-    return this.features.some((feature) => feature.name === ORGANIZATION_FEATURE.ORALIZATION.key);
+    return this.features.some((feature) => feature.name === ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER.key);
   }
 }

@@ -49,8 +49,8 @@ const featuresBuilder = async function ({ databaseBuilder }) {
   });
   databaseBuilder.factory.buildFeature({
     id: FEATURE_ORALIZATION_ID,
-    key: ORGANIZATION_FEATURE.ORALIZATION.key,
-    description: ORGANIZATION_FEATURE.ORALIZATION.description,
+    key: ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER.key,
+    description: ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER.description,
   });
   await databaseBuilder.commit();
 };
