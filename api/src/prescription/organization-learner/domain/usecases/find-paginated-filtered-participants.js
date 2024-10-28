@@ -48,6 +48,7 @@ const findPaginatedFilteredParticipants = async function ({
   });
 };
 
+// https://github.com/1024pix/pix/pull/10346#discussion_r1816721940
 async function _addOralizationInformations({
   organizationId,
   meta,
