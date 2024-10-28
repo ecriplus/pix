@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { databaseBuffer } from '../../../database-buffer.js';
 import { buildFeature } from '../../build-feature.js';
 import { buildOrganizationLearner } from '../../build-organization-learner.js';
@@ -9,8 +7,8 @@ const buildOrganizationLearnerFeature = function ({
   organizationLearnerId,
   featureId,
 } = {}) {
-  organizationLearnerId = _.isUndefined(organizationLearnerId) ? buildOrganizationLearner().id : organizationLearnerId;
-  featureId = _.isUndefined(featureId) ? buildFeature().id : featureId;
+  organizationLearnerId = organizationLearnerId === undefined ? buildOrganizationLearner().id : organizationLearnerId;
+  featureId = featureId === undefined ? buildFeature().id : featureId;
 
   const values = {
     id,

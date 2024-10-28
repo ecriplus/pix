@@ -40,7 +40,8 @@ const ORGANIZATION_FEATURE = {
   },
   ORALIZATION_MANAGED_BY_PRESCRIBER: {
     key: 'ORALIZATION',
-description: "Permet au prescripteur qui travail sur PixJunior d'activer ou désactiver l'oralisation pour un prescrit depuis pixOrga."
+    description:
+      "Permet au prescripteur qui travail sur PixJunior d'activer ou désactiver l'oralisation pour un prescrit depuis pixOrga.",
   },
 };
 
