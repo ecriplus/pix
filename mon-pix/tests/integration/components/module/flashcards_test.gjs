@@ -1,5 +1,6 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
+import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixFlashcards from 'mon-pix/components/module/element/flashcards/flashcards';
 import { module, test } from 'qunit';
@@ -54,6 +55,90 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
 
       const outroCardButton = screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.retry') });
       assert.dom(outroCardButton).exists();
+
+      assert
+        .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.flashcards.answers.no') }))
+        .doesNotExist();
+      assert
+        .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.flashcards.answers.almost') }))
+        .doesNotExist();
+      assert
+        .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.flashcards.answers.yes') }))
+        .doesNotExist();
+    });
+
+    test('should not display new flashcard on "Start" button click', async function (assert) {
+      // given
+      const { flashcards, firstCard, secondCard } = _getFlashcards();
+
+      class PreviewModeServiceStub extends Service {
+        isEnabled = true;
+      }
+      this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
+      // when
+      const screen = await render(<template><ModulixFlashcards @flashcards={{flashcards}} /></template>);
+
+      // then
+      const introCardButton = screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.start') });
+      assert.dom(introCardButton).exists();
+      await click(introCardButton);
+
+      assert.dom(screen.getByText(firstCard.recto.text)).exists();
+      assert.dom(screen.getByText(firstCard.verso.text)).exists();
+      assert.dom(screen.getByText(secondCard.recto.text)).exists();
+      assert.dom(screen.getByText(secondCard.verso.text)).exists();
+
+      const outroCardButton = screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.retry') });
+      assert.dom(outroCardButton).exists();
+
+      assert
+        .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.flashcards.answers.no') }))
+        .doesNotExist();
+      assert
+        .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.flashcards.answers.almost') }))
+        .doesNotExist();
+      assert
+        .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.flashcards.answers.yes') }))
+        .doesNotExist();
+    });
+
+    test('should not display return on intro card on "Retry" button click', async function (assert) {
+      // given
+      const { flashcards, firstCard, secondCard } = _getFlashcards();
+
+      class PreviewModeServiceStub extends Service {
+        isEnabled = true;
+      }
+      this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
+      // when
+      const screen = await render(<template><ModulixFlashcards @flashcards={{flashcards}} /></template>);
+
+      // then
+      const outroCardButton = screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.retry') });
+      assert.dom(outroCardButton).exists();
+      await click(outroCardButton);
+
+      assert.dom(outroCardButton).exists();
+
+      const introCardButton = screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.start') });
+      assert.dom(introCardButton).exists();
+
+      assert.dom(screen.getByText(firstCard.recto.text)).exists();
+      assert.dom(screen.getByText(firstCard.verso.text)).exists();
+      assert.dom(screen.getByText(secondCard.recto.text)).exists();
+      assert.dom(screen.getByText(secondCard.verso.text)).exists();
+
+      assert
+        .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.flashcards.answers.no') }))
+        .doesNotExist();
+      assert
+        .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.flashcards.answers.almost') }))
+        .doesNotExist();
+      assert
+        .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.flashcards.answers.yes') }))
+        .doesNotExist();
     });
   });
 

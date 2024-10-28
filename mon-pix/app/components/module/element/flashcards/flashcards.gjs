@@ -114,74 +114,85 @@ export default class ModulixFlashcards extends Component {
 
   <template>
     <div class="element-flashcards">
-
-      {{#if this.shouldDisplayIntroCard}}
+      {{#if this.modulixPreviewMode.isEnabled}}
         <ModulixFlashcardsIntroCard
           @title={{@flashcards.title}}
           @introImage={{@flashcards.introImage}}
-          @onStart={{this.start}}
+          @onStart={{this.noop}}
         />
-      {{/if}}
 
-      {{#if (eq this.currentStep "cards")}}
-        <ModulixFlashcardsCard
-          @card={{this.currentCard}}
-          @displayedSideName={{this.displayedSideName}}
-          @onCardFlip={{this.flipCard}}
-        />
-      {{/if}}
-
-      {{#if this.modulixPreviewMode.isEnabled}}
         {{#each @flashcards.cards as |card|}}
           <div class="element-flashcards__recto-verso">
             <ModulixFlashcardsCard @card={{card}} @displayedSideName="recto" @onCardFlip={{this.noop}} />
             <ModulixFlashcardsCard @card={{card}} @displayedSideName="verso" @onCardFlip={{this.noop}} />
           </div>
         {{/each}}
-      {{/if}}
 
-      {{#if this.shouldDisplayOutroCard}}
-        <ModulixFlashcardsOutroCard @title={{@flashcards.title}} @onRetry={{this.retry}} @counters={{this.counters}} />
-      {{/if}}
-
-      <div class="element-flashcards__footer {{if this.footerIsEmpty 'element-flashcards__footer--empty'}}">
-        {{#if (eq this.currentStep "cards")}}
-          {{#if (eq this.displayedSideName "recto")}}
-            <p class="element-flashcards__footer__direction">{{t "pages.modulix.flashcards.direction"}}</p>
-            <p class="element-flashcards__footer__position">{{t
-                "pages.modulix.flashcards.position"
-                currentCardPosition=this.currentCardNumber
-                totalCards=this.numberOfCards
-              }}</p>
-          {{/if}}
-          {{#if (eq this.displayedSideName "verso")}}
-            <p class="element-flashcards__footer__question">{{t "pages.modulix.flashcards.answerDirection"}}</p>
-            <div class="element-flashcards__footer__answer">
-              <button
-                class="element-flashcards__footer__answer__button element-flashcards__footer__answer__button--no"
-                type="button"
-                {{on "click" (fn this.onSelfAssessment "no")}}
-              >
-                {{t "pages.modulix.buttons.flashcards.answers.no"}}
-              </button>
-              <button
-                class="element-flashcards__footer__answer__button element-flashcards__footer__answer__button--almost"
-                type="button"
-                {{on "click" (fn this.onSelfAssessment "almost")}}
-              >
-                {{t "pages.modulix.buttons.flashcards.answers.almost"}}
-              </button>
-              <button
-                class="element-flashcards__footer__answer__button element-flashcards__footer__answer__button--yes"
-                type="button"
-                {{on "click" (fn this.onSelfAssessment "yes")}}
-              >
-                {{t "pages.modulix.buttons.flashcards.answers.yes"}}
-              </button>
-            </div>
-          {{/if}}
+        <ModulixFlashcardsOutroCard @title={{@flashcards.title}} @onRetry={{this.noop}} @counters={{this.counters}} />
+      {{else}}
+        {{#if this.shouldDisplayIntroCard}}
+          <ModulixFlashcardsIntroCard
+            @title={{@flashcards.title}}
+            @introImage={{@flashcards.introImage}}
+            @onStart={{this.start}}
+          />
         {{/if}}
-      </div>
+
+        {{#if (eq this.currentStep "cards")}}
+          <ModulixFlashcardsCard
+            @card={{this.currentCard}}
+            @displayedSideName={{this.displayedSideName}}
+            @onCardFlip={{this.flipCard}}
+          />
+        {{/if}}
+
+        {{#if this.shouldDisplayOutroCard}}
+          <ModulixFlashcardsOutroCard
+            @title={{@flashcards.title}}
+            @onRetry={{this.retry}}
+            @counters={{this.counters}}
+          />
+        {{/if}}
+
+        <div class="element-flashcards__footer {{if this.footerIsEmpty 'element-flashcards__footer--empty'}}">
+          {{#if (eq this.currentStep "cards")}}
+            {{#if (eq this.displayedSideName "recto")}}
+              <p class="element-flashcards__footer__direction">{{t "pages.modulix.flashcards.direction"}}</p>
+              <p class="element-flashcards__footer__position">{{t
+                  "pages.modulix.flashcards.position"
+                  currentCardPosition=this.currentCardNumber
+                  totalCards=this.numberOfCards
+                }}</p>
+            {{/if}}
+            {{#if (eq this.displayedSideName "verso")}}
+              <p class="element-flashcards__footer__question">{{t "pages.modulix.flashcards.answerDirection"}}</p>
+              <div class="element-flashcards__footer__answer">
+                <button
+                  class="element-flashcards__footer__answer__button element-flashcards__footer__answer__button--no"
+                  type="button"
+                  {{on "click" (fn this.onSelfAssessment "no")}}
+                >
+                  {{t "pages.modulix.buttons.flashcards.answers.no"}}
+                </button>
+                <button
+                  class="element-flashcards__footer__answer__button element-flashcards__footer__answer__button--almost"
+                  type="button"
+                  {{on "click" (fn this.onSelfAssessment "almost")}}
+                >
+                  {{t "pages.modulix.buttons.flashcards.answers.almost"}}
+                </button>
+                <button
+                  class="element-flashcards__footer__answer__button element-flashcards__footer__answer__button--yes"
+                  type="button"
+                  {{on "click" (fn this.onSelfAssessment "yes")}}
+                >
+                  {{t "pages.modulix.buttons.flashcards.answers.yes"}}
+                </button>
+              </div>
+            {{/if}}
+          {{/if}}
+        </div>
+      {{/if}}
     </div>
   </template>
 }
