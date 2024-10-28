@@ -8,6 +8,8 @@ describe('Prescription | OrganizationLearner | Integration | Infrastructure | Or
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const featureKey = 'AN_UNKNOWN_FEATURE';
 
+      databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+
       await databaseBuilder.commit();
 
       const result = await organizationLearnerFeatureRepository.getOrganizationLearnersByFeature({
@@ -68,6 +70,8 @@ describe('Prescription | OrganizationLearner | Integration | Infrastructure | Or
       await databaseBuilder.commit();
 
       const learner = new OrganizationLearner({ ...organizationLearner });
+      new OrganizationLearner({ ...otherFeatureOrganizationLearner });
+      new OrganizationLearner({ ...otherOrganizationOrganizationLearner });
 
       const result = await organizationLearnerFeatureRepository.getOrganizationLearnersByFeature({
         organizationId,
