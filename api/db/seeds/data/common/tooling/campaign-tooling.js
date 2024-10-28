@@ -473,6 +473,7 @@ function _buildCampaign({
     externalIdHelpImageUrl,
     alternativeTextToExternalIdHelpImage,
     customLandingPageText,
+    idPixLabel: null,
     isForAbsoluteNovice,
     archivedAt,
     archivedBy,
