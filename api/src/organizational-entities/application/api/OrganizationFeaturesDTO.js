@@ -16,4 +16,8 @@ export class OrganizationFeaturesDTO {
   get hasLearnersImportFeature() {
     return this.features.some((feature) => feature.name === ORGANIZATION_FEATURE.LEARNER_IMPORT.key);
   }
+
+  get hasOralizationFeature() {
+    return this.features.some((feature) => feature.name === ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER.key);
+  }
 }
