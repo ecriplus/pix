@@ -47,8 +47,8 @@
           "element": {
             "id": "47823e8f-a4af-44d6-96f7-5b6fc7bc6b51",
             "type": "flashcards",
+            "instruction": "<p>Lisez la question, essayez de trouver la réponse puis retourner la carte en cliquant dessus.<br>Cela permet de tester votre mémoire 🎯</p>",
             "title": "Introduction à la poésie",
-            "instruction": "<p>...</p>",
             "introImage": {
               "url": "https://images.pix.fr/modulix/didacticiel/intro-flashcards.png"
             },
