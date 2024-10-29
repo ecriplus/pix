@@ -60,8 +60,8 @@
         flex-direction: column;
         grid-column: 7 / span 5;
         width: 100%;
-        padding: 20px auto;
         max-width: 800px;
+        padding: 20px auto;
       }
   }
 }
@@ -93,10 +93,10 @@
 
       text-decoration: underline;
     }
-  }
 
-  .footer-navigation__item{
-    margin: 0 var(--pix-spacing-3x) 0 0;
+    .footer-navigation__item {
+      margin: 0 var(--pix-spacing-3x) 0 0;
+    }
   }
 }
 
