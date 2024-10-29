@@ -608,15 +608,9 @@
       "steps": {
         "1": {
           "paragraphs": {
-            "1": {
-              "text": "'<strong>'Se trata de una prueba adaptativa'</strong>'. En otras palabras, tu capacidad para responder correctamente (o no) a las preguntas determina la dificultad de las preguntas siguientes en tiempo real."
-            },
-            "2": {
-              "text": "Si no puedes responder a una pregunta, '<strong>'tienes la opción de \"saltarte\" esa pregunta'</strong>'. '<br>'Las preguntas saltadas se considerarán fallidas y no se volverán a ofrecer."
-            },
-            "3": {
-              "text": "'<strong>'Es importante completar la prueba'</strong>', y por tanto gestionar bien el tiempo. Se aplicará una '<strong>'penalización'</strong>' teniendo en cuenta el número de preguntas restantes."
-            },
+            "1": "La Certificación Pix es un '<strong>'test adaptativo'</strong>' para evaluar tu nivel en el '<strong>'conjunto de 16 competencias digitales del marco de referencia Pix'</strong>'.",
+            "2": "La '<strong>'dificultad de las preguntas se adapta en tiempo real'</strong>' en función de las respuestas dadas.",
+            "3": "Si algunas preguntas le parecen difíciles, es porque la prueba de certificación pretende medir su nivel máximo. '<strong>'Si no puede responder a una pregunta, tiene la opción de \"saltársela\"'</strong>': no se le volverá a ofrecer durante la certificación y no será validada.",
             "4": "Para obtener una puntuación lo más cercana posible a tu capacidad '<strong>'es necesario llegar hasta el final de la prueba'</strong>'."
           },
           "question": "¿Cómo funciona la prueba de certificación?",
@@ -628,15 +622,8 @@
             "text": "1 H 45 min"
           },
           "paragraphs": {
-            "1": {
-              "question": "¿El número de preguntas?",
-              "text": "La certificación contiene '<strong>'32 preguntas'</strong>'."
-            },
-            "2": {
-              "light-text": "*excluyendo cualquier tiempo adicional.",
-              "question": "¿Cuánto durará la prueba?",
-              "text": "Tienes un máximo de '<strong>'1h45*'</strong>'."
-            },
+            "1": "La prueba de certificación consta de '<strong>'32 preguntas'</strong>'.",
+            "2": "Tienes un máximo de '<strong>'1h45'</strong>' para responder*.",
             "3": "*excluyendo cualquier tiempo adicional",
             "4": "Si completa '<strong>'menos de 20 preguntas, no podremos emitirle una puntuación'</strong>'."
           },
@@ -677,17 +664,11 @@
           "list": {
             "1": "'<strong>'Comunicarse con otra persona'</strong>', dentro o fuera de la sala, por medios físicos o electrónicos.",
             "2": "'<strong>'Utilizar un teléfono móvil o cualquier dispositivo electrónico conectado'</strong>' (que no sea el ordenador en el que está realizando la certificación).",
-            "3": "<strong>'Utiliza un sistema de inteligencia artificial'</strong> o un chatbot.",
-            "4": "<strong>'Consulta un foro de autoayuda'</strong>' proporcionando directamente la respuesta a una pregunta.",
+            "3": "'<strong>'Utiliza un sistema de inteligencia artificial'</strong>' o un chatbot.",
+            "4": "'<strong>'Consulta un foro de autoayuda'</strong>' proporcionando directamente la respuesta a una pregunta.",
             "5": "'<strong>'Movilizar cualquier otro medio que proporcione directamente la respuesta a la pregunta'</strong>', sin haber realizado el trabajo requerido por la instrucción.",
             "6": "'<strong>'Utilice un navegador diferente'</strong>' al que está ejecutando su prueba de Certificación Pix.",
-            "7": "<strong>'Suplantar'</strong>' a otra persona.",
-            "miscellaneous": "'<strong>'Movilizar cualquier otro medio que proporcione directamente la respuesta'</strong>', sin haber realizado el trabajo requerido por la instrucción.",
-            "no-artificial-intelligence": "'<strong>'Utilizar un sistema de inteligencia artificial'</strong>' o un chatbot",
-            "no-cheat-sheet": "'<strong>'Use cheat sheets'</strong>' (físicas o electrónicas), recursos de spoilers o notas personales.",
-            "no-communication": "'<strong>'Comunicarse con otra persona'</strong>', dentro o fuera de la sala, por medios físicos o electrónicos.",
-            "no-connected-device": "'<strong>'Utilizar un teléfono móvil o cualquier dispositivo conectado'</strong>' (distinto del ordenador utilizado en la certificación)",
-            "no-forum": "'<strong>'Consulta un foro de autoayuda'</strong>' proporcionando directamente la respuesta a un test"
+            "7": "'<strong>'Suplantar'</strong>' a otra persona."
           },
           "pix-companion": "El acceso a determinados sitios está prohibido en el marco de la prueba de certificación, gracias a una extensión instalada en el navegador. Cualquier fraude probado (intento de eludir la extensión o incumplimiento de los comportamientos enumerados anteriormente) puede dar lugar a la invalidación de la certificación.",
           "text": "En certificación, está prohibido :",
