@@ -8,10 +8,10 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import get from 'lodash/get';
+import { FormValidation } from 'mon-pix/utils/form-validation';
+import isPasswordValid, { PASSWORD_RULES } from 'mon-pix/utils/password-validator.js';
 
-import { PASSWORD_RULES } from '../../../utils/password-validator.js';
-import NewPasswordInput from '../new-password-input';
-import { PasswordResetFormValidation } from './password-reset-form-validation';
+import NewPasswordInput from './new-password-input';
 
 const HTTP_ERROR_MESSAGES = {
   400: 'common.validation.password.error',
@@ -25,33 +25,42 @@ export default class PasswordResetForm extends Component {
 
   @tracked isPasswordResetSucceeded = false;
   @tracked isLoading = false;
-  @tracked validation = new PasswordResetFormValidation(this.intl);
-  @tracked globalErrorMessage;
+  @tracked globalError;
+
+  validation = new FormValidation({
+    password: {
+      validate: (value) => isPasswordValid(value),
+      error: 'common.validation.password.error',
+    },
+  });
 
   @action
   handleInputChange(event) {
     const { user } = this.args;
     user.password = event.target.value;
-    this.validation.validateField(user.password);
+    this.validation.password.validate(user.password);
   }
 
   @action
   async handleResetPassword(event) {
     if (event) event.preventDefault();
 
-    if (!this.validation.isValid) return;
+    const { user, temporaryKey } = this.args;
 
-    this.globalErrorMessage = null;
+    const isValid = this.validation.validateAll({ password: user.password });
+    if (!isValid) return;
+
+    this.globalError = null;
     this.isLoading = true;
     this.isPasswordResetSucceeded = false;
+
     try {
-      const { user, temporaryKey } = this.args;
       await user.save({ adapterOptions: { updatePassword: true, temporaryKey } });
       user.password = null;
       this.isPasswordResetSucceeded = true;
     } catch (response) {
       const status = get(response, 'errors[0].status');
-      this.globalErrorMessage = this.intl.t(HTTP_ERROR_MESSAGES[status] || HTTP_ERROR_MESSAGES['default']);
+      this.globalError = HTTP_ERROR_MESSAGES[status] || HTTP_ERROR_MESSAGES['default'];
     } finally {
       this.isLoading = false;
     }
@@ -62,9 +71,9 @@ export default class PasswordResetForm extends Component {
       <PasswordResetSucceededInfo />
     {{else}}
       <form class="password-reset-form" type="submit" {{on "submit" this.handleResetPassword}}>
-        {{#if this.globalErrorMessage}}
+        {{#if this.globalError}}
           <PixMessage @type="error" @withIcon={{true}} role="alert">
-            {{this.globalErrorMessage}}
+            {{t this.globalError}}
           </PixMessage>
         {{/if}}
 
@@ -78,9 +87,9 @@ export default class PasswordResetForm extends Component {
           name="password"
           {{on "change" this.handleInputChange}}
           @validationStatus={{this.validation.password.status}}
-          @errorMessage={{this.validation.password.errorMessage}}
+          @errorMessage={{t this.validation.password.error}}
           @rules={{PASSWORD_RULES}}
-          required
+          aria-required="true"
         >
           <:label>{{t "components.authentication.password-reset-form.fields.password.label"}}</:label>
         </NewPasswordInput>
