@@ -8,33 +8,32 @@ import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
+const I18N_KEYS = {
+  mandatoryFieldsMessage: 'common.form.mandatory-all-fields',
+  emailInput: 'components.authentication.password-reset-demand-form.fields.email.label',
+  emailError: 'components.authentication.password-reset-demand-form.fields.email.error-message-invalid',
+  resetDemandButton: 'components.authentication.password-reset-demand-form.actions.receive-reset-button',
+  demandReceivedInfo: 'components.authentication.password-reset-demand-received-info.heading',
+  contactLink: 'components.authentication.password-reset-demand-form.contact-us-link.link-text',
+  tryAgainLink: 'components.authentication.password-reset-demand-received-info.try-again',
+};
+
 module('Integration | Component | Authentication | PasswordResetDemand | password-reset-demand-form', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('it displays a contact us link', async function (assert) {
+  test('it displays all elements of component successfully', async function (assert) {
     // given
     const screen = await render(<template><PasswordResetDemandForm /></template>);
 
     // then
-    const link = await screen.queryByRole('link', {
-      name: t('components.authentication.password-reset-demand-form.contact-us-link.link-text'),
-    });
+    assert.dom(screen.getByText(t(I18N_KEYS.mandatoryFieldsMessage))).exists();
+    assert.dom(screen.getByLabelText(t(I18N_KEYS.emailInput))).hasAttribute('aria-required');
+    assert.dom(screen.getByRole('button', { name: t(I18N_KEYS.resetDemandButton) })).exists();
+    assert.dom(screen.queryByRole('heading', { name: t(I18N_KEYS.demandReceivedInfo) })).doesNotExist();
+
+    const link = await screen.queryByRole('link', { name: t(I18N_KEYS.contactLink) });
     assert.dom(link).exists();
     assert.strictEqual(link.getAttribute('href'), 'https://pix.fr/support');
-  });
-
-  test('it doesn’t display a "password reset demand received" info', async function (assert) {
-    // given
-    const screen = await render(<template><PasswordResetDemandForm /></template>);
-
-    // then
-    assert
-      .dom(
-        screen.queryByRole('heading', {
-          name: t('components.authentication.password-reset-demand-received-info.heading'),
-        }),
-      )
-      .doesNotExist();
   });
 
   module('email input validation', function () {
@@ -45,7 +44,7 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
         const screen = await render(<template><PasswordResetDemandForm /></template>);
 
         // when
-        await fillByLabel(t('components.authentication.password-reset-demand-form.fields.email.label'), validEmail);
+        await fillByLabel(t(I18N_KEYS.emailInput), validEmail);
 
         // then
         assert.dom(screen.queryByRole('alert')).doesNotExist();
@@ -59,21 +58,15 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
         const screen = await render(<template><PasswordResetDemandForm /></template>);
 
         // when
-        await fillByLabel(t('components.authentication.password-reset-demand-form.fields.email.label'), invalidEmail);
+        await fillByLabel(t(I18N_KEYS.emailInput), invalidEmail);
 
         // then
-        assert
-          .dom(
-            screen.queryByText(
-              t('components.authentication.password-reset-demand-form.fields.email.error-message-invalid'),
-            ),
-          )
-          .exists();
+        assert.dom(screen.queryByText(t(I18N_KEYS.emailError))).exists();
       });
     });
   });
 
-  module('password-reset-demand sending', function (hooks) {
+  module('when user submits the password reset demand', function (hooks) {
     hooks.beforeEach(function () {
       sinon.stub(window, 'fetch');
     });
@@ -98,29 +91,35 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
         await setLocale(locale);
         const screen = await render(<template><PasswordResetDemandForm /></template>);
 
-        await fillByLabel(t('components.authentication.password-reset-demand-form.fields.email.label'), email);
-        await click(
-          screen.getByRole('button', {
-            name: t('components.authentication.password-reset-demand-form.actions.receive-reset-button'),
-          }),
-        );
+        await fillByLabel(t(I18N_KEYS.emailInput), email);
+        await click(screen.getByRole('button', { name: t(I18N_KEYS.resetDemandButton) }));
 
         // then
         assert.dom(screen.queryByRole('alert')).doesNotExist();
 
-        assert
-          .dom(
-            screen.queryByRole('heading', {
-              name: t('components.authentication.password-reset-demand-received-info.heading'),
-            }),
-          )
-          .exists();
+        assert.dom(screen.queryByRole('heading', { name: t(I18N_KEYS.demandReceivedInfo) })).exists();
 
-        const tryAgainLink = await screen.queryByRole('link', {
-          name: t('components.authentication.password-reset-demand-received-info.try-again'),
-        });
+        const tryAgainLink = await screen.queryByRole('link', { name: t(I18N_KEYS.tryAgainLink) });
         assert.dom(tryAgainLink).exists();
         assert.strictEqual(tryAgainLink.getAttribute('href'), `/mot-de-passe-oublie?lang=${locale}`);
+      });
+    });
+
+    module('when email value is missing', function () {
+      test('it displays an error message on email', async function (assert) {
+        // given
+        const screen = await render(<template><PasswordResetDemandForm /></template>);
+
+        // when
+        await click(
+          screen.getByRole('button', {
+            name: t(I18N_KEYS.resetDemandButton),
+          }),
+        );
+
+        // then
+        assert.dom(screen.queryByText(t(I18N_KEYS.emailError))).exists();
+        assert.true(window.fetch.notCalled);
       });
     });
 
@@ -141,23 +140,17 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
         const screen = await render(<template><PasswordResetDemandForm /></template>);
 
         // when
-        await fillByLabel(t('components.authentication.password-reset-demand-form.fields.email.label'), email);
+        await fillByLabel(t(I18N_KEYS.emailInput), email);
         await click(
           screen.getByRole('button', {
-            name: t('components.authentication.password-reset-demand-form.actions.receive-reset-button'),
+            name: t(I18N_KEYS.resetDemandButton),
           }),
         );
 
         // then
         assert.dom(screen.queryByRole('alert')).doesNotExist();
 
-        assert
-          .dom(
-            screen.queryByRole('heading', {
-              name: t('components.authentication.password-reset-demand-received-info.heading'),
-            }),
-          )
-          .exists();
+        assert.dom(screen.queryByRole('heading', { name: t(I18N_KEYS.demandReceivedInfo) })).exists();
       });
     });
 
@@ -174,18 +167,14 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
         const screen = await render(<template><PasswordResetDemandForm /></template>);
 
         // when
-        await fillByLabel(t('components.authentication.password-reset-demand-form.fields.email.label'), email);
+        await fillByLabel(t(I18N_KEYS.emailInput), email);
         await click(
           screen.getByRole('button', {
-            name: t('components.authentication.password-reset-demand-form.actions.receive-reset-button'),
+            name: t(I18N_KEYS.resetDemandButton),
           }),
         );
 
         // then
-        // The following doesn’t work because of a PixUi span inside the role element
-        //assert
-        //  .dom(screen.queryByRole('alert', { name: t('common.api-error-messages.internal-server-error') }))
-        //  .exists();
         assert.dom(screen.queryByText(t('common.api-error-messages.internal-server-error'))).exists();
       });
     });
