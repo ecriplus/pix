@@ -1,3 +1,4 @@
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { UserNotAuthorizedToUpdatePasswordError } from '../../../shared/domain/errors.js';
 
 /**
@@ -14,7 +15,7 @@ import { UserNotAuthorizedToUpdatePasswordError } from '../../../shared/domain/e
  * @return {Promise<void>}
  * @throws {UserNotAuthorizedToUpdatePasswordError}
  */
-export const updateUserPassword = async function ({
+export const updateUserPassword = withTransaction(async function ({
   userId,
   password,
   temporaryKey,
@@ -24,25 +25,20 @@ export const updateUserPassword = async function ({
   userRepository,
   resetPasswordDemandRepository,
 }) {
-  const hashedPassword = await cryptoService.hashPassword(password);
   const user = await userRepository.get(userId);
-
   if (!user.email) {
     throw new UserNotAuthorizedToUpdatePasswordError();
   }
 
-  await resetPasswordService.hasUserAPasswordResetDemandInProgress(
-    user.email,
-    temporaryKey,
-    resetPasswordDemandRepository,
-  );
+  await resetPasswordService.invalidateResetPasswordDemand(user.email, temporaryKey, resetPasswordDemandRepository);
 
+  const hashedPassword = await cryptoService.hashPassword(password);
   await authenticationMethodRepository.updateChangedPassword({
     userId: user.id,
     hashedPassword,
   });
-  await resetPasswordService.invalidateOldResetPasswordDemand(user.email, resetPasswordDemandRepository);
 
-  user.markEmailAsValid();
-  await userRepository.update(user.mapToDatabaseDto());
-};
+  await resetPasswordService.invalidateOldResetPasswordDemandsByEmail(user.email, resetPasswordDemandRepository);
+
+  await userRepository.updateEmailConfirmed(userId);
+});

@@ -1,6 +1,7 @@
 import { PasswordResetDemandNotFoundError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { updateUserPassword } from '../../../../../src/identity-access-management/domain/usecases/update-user-password.usecase.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { UserNotAuthorizedToUpdatePasswordError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
@@ -20,29 +21,34 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
   let resetPasswordDemandRepository;
 
   beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute');
+    DomainTransaction.execute.callsFake((fn) => {
+      return fn({});
+    });
+
     cryptoService = {
       hashPassword: sinon.stub(),
     };
     resetPasswordService = {
-      hasUserAPasswordResetDemandInProgress: sinon.stub(),
-      invalidateOldResetPasswordDemand: sinon.stub(),
+      invalidateResetPasswordDemand: sinon.stub(),
+      invalidateOldResetPasswordDemandsByEmail: sinon.stub(),
     };
     authenticationMethodRepository = {
       updateChangedPassword: sinon.stub(),
     };
     userRepository = {
       get: sinon.stub(),
-      update: sinon.stub(),
+      updateEmailConfirmed: sinon.stub(),
     };
 
     resetPasswordDemandRepository = {
-      hasUserAPasswordResetDemandInProgress: sinon.stub(),
-      invalidateOldResetPasswordDemand: sinon.stub(),
+      assertUnusedAndMarkAsUsed: sinon.stub(),
+      invalidateOldResetPasswordDemandsByEmail: sinon.stub(),
     };
 
     cryptoService.hashPassword.resolves();
-    resetPasswordService.hasUserAPasswordResetDemandInProgress.withArgs(user.email, temporaryKey).resolves();
-    resetPasswordService.invalidateOldResetPasswordDemand.resolves();
+    resetPasswordService.invalidateResetPasswordDemand.withArgs(user.email, temporaryKey).resolves();
+    resetPasswordService.invalidateOldResetPasswordDemandsByEmail.resolves();
 
     authenticationMethodRepository.updateChangedPassword.resolves();
     userRepository.get.resolves(user);
@@ -99,7 +105,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
     });
 
     // then
-    expect(resetPasswordService.hasUserAPasswordResetDemandInProgress).to.have.been.calledWithExactly(
+    expect(resetPasswordService.invalidateResetPasswordDemand).to.have.been.calledWithExactly(
       user.email,
       temporaryKey,
       resetPasswordDemandRepository,
@@ -143,7 +149,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
     });
 
     // then
-    expect(resetPasswordService.invalidateOldResetPasswordDemand).to.have.been.calledWithExactly(
+    expect(resetPasswordService.invalidateOldResetPasswordDemandsByEmail).to.have.been.calledWithExactly(
       user.email,
       resetPasswordDemandRepository,
     );
@@ -152,7 +158,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
   context('When user has not a current password reset demand', function () {
     it('throws a PasswordResetDemandNotFoundError', async function () {
       // given
-      resetPasswordService.hasUserAPasswordResetDemandInProgress
+      resetPasswordService.invalidateResetPasswordDemand
         .withArgs(user.email, temporaryKey)
         .rejects(new PasswordResetDemandNotFoundError());
 
@@ -176,6 +182,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
   it('updates user attribute "emailConfirmedAt"', async function () {
     // given
     const user = domainBuilder.buildUser();
+    const userId = user.id;
     userRepository.get.resolves(user);
 
     // when
@@ -191,6 +198,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-pas
     });
 
     // then
-    expect(userRepository.update).to.have.been.calledWithExactly(user.mapToDatabaseDto());
+    expect(userRepository.updateEmailConfirmed).to.have.been.calledWithExactly(userId);
   });
 });

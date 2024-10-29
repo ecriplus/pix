@@ -21,12 +21,33 @@ const create = async function ({ email, temporaryKey }) {
 
 /**
  * @param {string} email
+ * @param {string} temporaryKey
+ *
+ * @returns {Promise<void>}
+ * @throws PasswordResetDemandNotFoundError when resetPasswordDemand has been already used or does not exist
  */
-const markAsBeingUsed = async function (email) {
+const markAsUsed = async function (email, temporaryKey) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const resetPasswordDemand = await knexConn(RESET_PASSWORD_DEMANDS_TABLE_NAME)
+    .whereRaw('LOWER("email") = LOWER(?)', email)
+    .where({ temporaryKey, used: false })
+    .update({ used: true, updatedAt: new Date() });
+
+  if (!resetPasswordDemand) {
+    throw new PasswordResetDemandNotFoundError();
+  }
+};
+
+/**
+ * @param {string} email
+ */
+const markAllAsUsedByEmail = async function (email) {
   const knexConn = DomainTransaction.getConnection();
 
   await knexConn(RESET_PASSWORD_DEMANDS_TABLE_NAME)
     .whereRaw('LOWER("email") = LOWER(?)', email)
+    .where({ used: false })
     .update({ used: true, updatedAt: new Date() });
 };
 
@@ -52,28 +73,6 @@ const findByTemporaryKey = async function (temporaryKey) {
 
 /**
  * @param {string} email
- * @param {string} temporaryKey
- *
- * @returns {ResetPasswordDemand} retrieved reset password demand
- */
-const findByUserEmail = async function (email, temporaryKey) {
-  const knexConn = DomainTransaction.getConnection();
-
-  const resetPasswordDemand = await knexConn(RESET_PASSWORD_DEMANDS_TABLE_NAME)
-    .select('*')
-    .whereRaw('LOWER("email") = LOWER(?)', email)
-    .where({ temporaryKey, used: false })
-    .first();
-
-  if (!resetPasswordDemand) {
-    throw new PasswordResetDemandNotFoundError();
-  }
-
-  return _toDomain(resetPasswordDemand);
-};
-
-/**
- * @param {string} email
  */
 const removeAllByEmail = async function (email) {
   const knexConn = DomainTransaction.getConnection();
@@ -83,18 +82,19 @@ const removeAllByEmail = async function (email) {
 
 /**
  * @typedef {Object} ResetPasswordDemandRepository
+ * @property {function} markAsUsed
  * @property {function} create
  * @property {function} deleteByUserEmail
  * @property {function} findByTemporaryKey
- * @property {function} findByUserEmail
- * @property {function} markAsBeingUsed
+ * @property {function} getByUserEmail
+ * @property {function} markAllAsUsedByEmail
  */
 const resetPasswordDemandRepository = {
+  markAsUsed,
   create,
   removeAllByEmail,
   findByTemporaryKey,
-  findByUserEmail,
-  markAsBeingUsed,
+  markAllAsUsedByEmail,
 };
 
 export { resetPasswordDemandRepository };

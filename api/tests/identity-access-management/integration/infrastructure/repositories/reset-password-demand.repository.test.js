@@ -24,29 +24,155 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
   });
 
-  describe('#markAsBeingUsed', function () {
-    const email = 'someEmail@example.net';
-    const updatedAt = new Date('2013-01-01T15:00:00Z');
+  describe('#markAsUsed', function () {
+    const email = 'user1.markAsUsed@example.net';
+    const user2Email = 'user2.markAsUsed@example.net';
+    const oldPasswordResetDemandTemporaryKey = 'zzz123';
+    const oldPasswordResetDemandUpdatedAt = new Date('2013-01-01T15:00:00Z');
+    const currentPasswordResetDemandTemporaryKey = 'aha456';
+    const currentPasswordResetDemandUpdatedAt = new Date('2023-01-01T17:00:00Z');
+    let user2PasswordResetDemandId;
 
     beforeEach(function () {
-      databaseBuilder.factory.buildResetPasswordDemand({ email, used: false, updatedAt });
+      databaseBuilder.factory.buildResetPasswordDemand({
+        email,
+        used: true,
+        temporaryKey: oldPasswordResetDemandTemporaryKey,
+        updatedAt: oldPasswordResetDemandUpdatedAt,
+      });
+      databaseBuilder.factory.buildResetPasswordDemand({
+        email,
+        used: false,
+        temporaryKey: currentPasswordResetDemandTemporaryKey,
+        updatedAt: currentPasswordResetDemandUpdatedAt,
+      });
+      user2PasswordResetDemandId = databaseBuilder.factory.buildResetPasswordDemand({
+        email: user2Email,
+        used: false,
+      }).id;
       return databaseBuilder.commit();
     });
 
-    it('marks reset password demand as used', async function () {
+    context('when demand does not exist', function () {
+      it('throws a PasswordResetDemandNotFoundError', async function () {
+        // when
+        const error = await catchErr(resetPasswordDemandRepository.markAsUsed)(
+          'another.someone@example.net',
+          'hello there',
+        );
+
+        // then
+        expect(error).to.be.instanceOf(PasswordResetDemandNotFoundError);
+      });
+    });
+
+    context('when demand exists', function () {
+      context('when demand has been used', function () {
+        it('throws a PasswordResetDemandNotFoundError', async function () {
+          // when
+          const error = await catchErr(resetPasswordDemandRepository.markAsUsed)(
+            email,
+            oldPasswordResetDemandTemporaryKey,
+          );
+
+          // then
+          expect(error).to.be.instanceOf(PasswordResetDemandNotFoundError);
+        });
+      });
+
+      context('when demand is unused', function () {
+        it('marks only the user’s unused reset password demand as used', async function () {
+          // given
+          const emailWithDifferentCase = 'user1.MarkAsUSED@example.net';
+
+          // when
+          await resetPasswordDemandRepository.markAsUsed(
+            emailWithDifferentCase,
+            currentPasswordResetDemandTemporaryKey,
+          );
+
+          // then
+          const oldPasswordResetDemand = await knex('reset-password-demands')
+            .select('used', 'updatedAt')
+            .where({ temporaryKey: oldPasswordResetDemandTemporaryKey })
+            .first();
+          expect(oldPasswordResetDemand.updatedAt).to.deep.equal(oldPasswordResetDemandUpdatedAt);
+
+          const currentPasswordResetDemand = await knex('reset-password-demands')
+            .select('used', 'updatedAt')
+            .where({ temporaryKey: currentPasswordResetDemandTemporaryKey })
+            .first();
+          expect(currentPasswordResetDemand.used).to.be.true;
+          expect(currentPasswordResetDemand.updatedAt).to.be.above(currentPasswordResetDemandUpdatedAt);
+
+          const user2PasswordResetDemand = await knex('reset-password-demands')
+            .select('used')
+            .where({ id: user2PasswordResetDemandId })
+            .first();
+          expect(user2PasswordResetDemand.used).to.be.false;
+        });
+      });
+    });
+  });
+
+  describe('#markAllAsUsedByEmail', function () {
+    const email = 'user1.markAllAsUsedByEmail@example.net';
+    const user2Email = 'user2.markAllAsUsedByEmail@example.net';
+    const oldPasswordResetDemandTemporaryKey = 'zzz123';
+    const oldPasswordResetDemandUpdatedAt = new Date('2013-01-01T15:00:00Z');
+    const currentPasswordResetDemandTemporaryKey = 'aha456';
+    const currentPasswordResetDemandUpdatedAt = new Date('2023-01-01T17:00:00Z');
+    let user2PasswordResetDemandId;
+
+    beforeEach(function () {
+      databaseBuilder.factory.buildResetPasswordDemand({
+        email,
+        used: true,
+        temporaryKey: oldPasswordResetDemandTemporaryKey,
+        updatedAt: oldPasswordResetDemandUpdatedAt,
+      });
+      databaseBuilder.factory.buildResetPasswordDemand({
+        email,
+        used: false,
+        temporaryKey: currentPasswordResetDemandTemporaryKey,
+        updatedAt: currentPasswordResetDemandUpdatedAt,
+      });
+      user2PasswordResetDemandId = databaseBuilder.factory.buildResetPasswordDemand({
+        email: user2Email,
+        used: false,
+      }).id;
+      return databaseBuilder.commit();
+    });
+
+    it('marks only user’s unused reset password demands as used', async function () {
       // when
-      await resetPasswordDemandRepository.markAsBeingUsed(email);
+      await resetPasswordDemandRepository.markAllAsUsedByEmail(email);
 
       // then
-      const demand = await knex('reset-password-demands').select('used', 'updatedAt').where({ email }).first();
-      expect(demand.used).to.be.true;
-      expect(demand.updatedAt).to.be.above(updatedAt);
+      const oldPasswordResetDemand = await knex('reset-password-demands')
+        .select('used', 'updatedAt')
+        .where({ temporaryKey: oldPasswordResetDemandTemporaryKey })
+        .first();
+      expect(oldPasswordResetDemand.updatedAt).to.deep.equal(oldPasswordResetDemandUpdatedAt);
+
+      const currentPasswordResetDemand = await knex('reset-password-demands')
+        .select('used', 'updatedAt')
+        .where({ temporaryKey: currentPasswordResetDemandTemporaryKey })
+        .first();
+      expect(currentPasswordResetDemand.used).to.be.true;
+      expect(currentPasswordResetDemand.updatedAt).to.be.above(currentPasswordResetDemandUpdatedAt);
+
+      const user2PasswordResetDemand = await knex('reset-password-demands')
+        .select('used')
+        .where({ id: user2PasswordResetDemandId })
+        .first();
+      expect(user2PasswordResetDemand.used).to.be.false;
     });
 
     it('is case insensitive', async function () {
       // when
       const emailWithUppercase = email.toUpperCase();
-      await resetPasswordDemandRepository.markAsBeingUsed(emailWithUppercase);
+      await resetPasswordDemandRepository.markAllAsUsedByEmail(emailWithUppercase);
 
       // then
       const demand = await knex('reset-password-demands').select('used').where({ email }).first();
@@ -59,7 +185,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         const sameEmailWithAnotherCase = 'SomeEmaIL@example.net';
 
         // when
-        await resetPasswordDemandRepository.markAsBeingUsed(sameEmailWithAnotherCase);
+        await resetPasswordDemandRepository.markAllAsUsedByEmail(sameEmailWithAnotherCase);
 
         // then
         const demand = await knex('reset-password-demands').select('used').where({ email }).first();
@@ -117,77 +243,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           expect(demand.email).to.equal(email);
           expect(demand.temporaryKey).to.equal(temporaryKey);
           expect(demand.used).to.equal(false);
-        });
-      });
-    });
-  });
-
-  describe('#findByUserEmail', function () {
-    context('when demand does not exist', function () {
-      it('throws a PasswordResetDemandNotFoundError', async function () {
-        // when
-        const error = await catchErr(resetPasswordDemandRepository.findByUserEmail)(
-          'bolossdu66@example.net',
-          'salut les noobs',
-        );
-
-        // then
-        expect(error).to.be.instanceOf(PasswordResetDemandNotFoundError);
-      });
-    });
-
-    context('when demand exists', function () {
-      const temporaryKey = 'someTemporaryKey';
-      const email = 'someMail@example.net';
-
-      context('when demand has been used already', function () {
-        beforeEach(function () {
-          databaseBuilder.factory.buildResetPasswordDemand({ email, temporaryKey, used: true });
-          return databaseBuilder.commit();
-        });
-
-        it('throws a PasswordResetDemandNotFoundError', async function () {
-          // when
-          const error = await catchErr(resetPasswordDemandRepository.findByUserEmail)(email, temporaryKey);
-
-          // then
-          expect(error).to.be.instanceOf(PasswordResetDemandNotFoundError);
-        });
-      });
-
-      context('when demand is still up', function () {
-        let demandId;
-
-        beforeEach(function () {
-          demandId = databaseBuilder.factory.buildResetPasswordDemand({ email, temporaryKey, used: false }).id;
-          databaseBuilder.factory.buildResetPasswordDemand({ email, used: false });
-          databaseBuilder.factory.buildResetPasswordDemand({ temporaryKey, used: false });
-          return databaseBuilder.commit();
-        });
-
-        it('returns the password reset demand', async function () {
-          // when
-          const demand = await resetPasswordDemandRepository.findByUserEmail(email, temporaryKey);
-
-          // then
-          expect(demand).to.be.instanceOf(ResetPasswordDemand);
-          expect(demand.id).to.equal(demandId);
-          expect(demand.email).to.equal(email);
-          expect(demand.temporaryKey).to.equal(temporaryKey);
-          expect(demand.used).to.equal(false);
-        });
-
-        context('when case is not identical', function () {
-          it('returns the password reset demand', async function () {
-            // given
-            const sameEmailWithAnotherCase = 'SomeMaIL@example.net';
-
-            // when
-            const demand = await resetPasswordDemandRepository.findByUserEmail(sameEmailWithAnotherCase, temporaryKey);
-
-            // then
-            expect(demand.id).to.equal(demandId);
-          });
         });
       });
     });

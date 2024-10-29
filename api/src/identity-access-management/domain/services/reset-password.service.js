@@ -15,8 +15,8 @@ const generateTemporaryKey = async function () {
   );
 };
 
-const invalidateOldResetPasswordDemand = function (userEmail, resetPasswordDemandRepository) {
-  return resetPasswordDemandRepository.markAsBeingUsed(userEmail);
+const invalidateOldResetPasswordDemandsByEmail = function (userEmail, resetPasswordDemandRepository) {
+  return resetPasswordDemandRepository.markAllAsUsedByEmail(userEmail);
 };
 
 const verifyDemand = function (temporaryKey, resetPasswordDemandRepository) {
@@ -24,27 +24,27 @@ const verifyDemand = function (temporaryKey, resetPasswordDemandRepository) {
 };
 
 /**
- * @callback hasUserAPasswordResetDemandInProgress
  * @param {string} email
  * @param {string} temporaryKey
  * @param {ResetPasswordDemandRepository} resetPasswordDemandRepository
  * @return {Promise<*>}
+ * @throws PasswordResetDemandNotFoundError
  */
-const hasUserAPasswordResetDemandInProgress = function (email, temporaryKey, resetPasswordDemandRepository) {
-  return resetPasswordDemandRepository.findByUserEmail(email, temporaryKey);
+const invalidateResetPasswordDemand = function (email, temporaryKey, resetPasswordDemandRepository) {
+  return resetPasswordDemandRepository.markAsUsed(email, temporaryKey);
 };
 
 /**
  * @typedef {Object} ResetPasswordService
  * @property generateTemporaryKey
- * @property hasUserAPasswordResetDemandInProgress
- * @property invalidateOldResetPasswordDemand
+ * @property invalidateResetPasswordDemand
+ * @property invalidateOldResetPasswordDemandsByEmail
  * @property verifyDemand
  */
 const resetPasswordService = {
   generateTemporaryKey,
-  hasUserAPasswordResetDemandInProgress,
-  invalidateOldResetPasswordDemand,
+  invalidateResetPasswordDemand,
+  invalidateOldResetPasswordDemandsByEmail,
   verifyDemand,
 };
 export { resetPasswordService };
