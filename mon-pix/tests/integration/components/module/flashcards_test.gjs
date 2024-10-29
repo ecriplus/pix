@@ -11,6 +11,19 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | Flashcards', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  test('should display provided instructions about Flashcards', async function (assert) {
+    // given
+    const { flashcards } = _getFlashcards();
+
+    // when
+    const screen = await render(<template><ModulixFlashcards @flashcards={{flashcards}} /></template>);
+
+    // then
+    assert.ok(
+      screen.getByText('Lisez la question, essayez de trouver la réponse puis retourner la carte en cliquant dessus'),
+    );
+  });
+
   test('should display the intro card by default', async function (assert) {
     // given
     const { flashcards } = _getFlashcards();
@@ -341,7 +354,7 @@ function _getFlashcards() {
     id: '71de6394-ff88-4de3-8834-a40057a50ff4',
     type: 'flashcards',
     title: "Introduction à l'adresse e-mail",
-    instruction: '<p>...</p>',
+    instruction: 'Lisez la question, essayez de trouver la réponse puis retourner la carte en cliquant dessus',
     introImage: { url: 'https://images.pix.fr/modulix/flashcards-intro.png' },
     cards: [firstCard, secondCard],
   };

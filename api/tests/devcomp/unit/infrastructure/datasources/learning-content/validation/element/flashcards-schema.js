@@ -19,8 +19,8 @@ const versoSide = Joi.object({
 const flashcardsElementSchema = Joi.object({
   id: uuidSchema,
   type: Joi.string().valid('flashcards').required(),
-  title: htmlNotAllowedSchema.required(),
   instruction: htmlSchema.optional(),
+  title: htmlNotAllowedSchema.required(),
   introImage: image,
   cards: Joi.array().items({
     id: uuidSchema,

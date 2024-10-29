@@ -7,6 +7,11 @@
   background-repeat: no-repeat;
   background-position: top center;
 
+  &__instruction {
+    padding-bottom: var(--pix-spacing-6x);
+    font-weight: var(--pix-font-medium);
+  }
+
   &__recto-verso {
     display: flex;
 

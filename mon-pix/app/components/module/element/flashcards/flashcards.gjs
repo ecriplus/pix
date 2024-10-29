@@ -9,6 +9,7 @@ import { eq } from 'ember-truth-helpers';
 import ModulixFlashcardsCard from 'mon-pix/components/module/element/flashcards/flashcards-card';
 import ModulixFlashcardsIntroCard from 'mon-pix/components/module/element/flashcards/flashcards-intro-card';
 import ModulixFlashcardsOutroCard from 'mon-pix/components/module/element/flashcards/flashcards-outro-card';
+import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 
 const INITIAL_COUNTERS_VALUE = { yes: 0, almost: 0, no: 0 };
 
@@ -113,6 +114,9 @@ export default class ModulixFlashcards extends Component {
   }
 
   <template>
+    <div class="element-flashcards__instruction">
+      {{htmlUnsafe @flashcards.instruction}}
+    </div>
     <div class="element-flashcards">
       {{#if this.modulixPreviewMode.isEnabled}}
         <ModulixFlashcardsIntroCard
