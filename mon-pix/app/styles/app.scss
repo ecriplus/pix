@@ -65,6 +65,7 @@ of an adaptative/mobile-first approach — refactoring is welcome here */
 @import 'components/login-or-register';
 @import 'components/module/beta-banner';
 @import 'components/module/details';
+@import 'components/module/feedback';
 @import 'components/module/grain';
 @import 'components/module/grain/tag';
 @import 'components/module/objectives';
@@ -133,7 +134,6 @@ of an adaptative/mobile-first approach — refactoring is welcome here */
 @import 'components/pix-toggle';
 @import 'components/skip-link';
 @import 'components/campaigns';
-@import 'components/modulix/feedback';
 
 /* Styles for colocated components */
 @import 'authentication-layout';
