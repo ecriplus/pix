@@ -29,10 +29,9 @@ export default class CertificationIssueReport extends Component {
       {{#if (or (not @issueReport.isImpactful) @issueReport.resolvedAt)}}
         <PixIcon
           aria-label="Signalement résolu"
-          aria-hidden="false"
           class="certification-issue-report__resolution-status certification-issue-report__resolution-status--resolved"
           @name="checkCircle"
-          @plainIcon="{{true}}"
+          @plainIcon={{true}}
         />
       {{else}}
         <PixIcon
@@ -40,7 +39,7 @@ export default class CertificationIssueReport extends Component {
           aria-hidden="false"
           class="certification-issue-report__resolution-status certification-issue-report__resolution-status--unresolved"
           @name="cancel"
-          @plainIcon="{{true}}"
+          @plainIcon={{true}}
         />
       {{/if}}
 

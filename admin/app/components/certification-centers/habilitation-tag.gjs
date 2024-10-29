@@ -14,7 +14,7 @@ export default class HabilitationTag extends Component {
 
   <template>
     <li aria-label={{@arialabel}}>
-      <PixIcon class={{this.className}} @name={{this.icon}} @plainIcon="{{true}}" />
+      <PixIcon class={{this.className}} @name={{this.icon}} @plainIcon={{true}} />
       {{@label}}
     </li>
   </template>

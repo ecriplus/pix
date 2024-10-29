@@ -70,6 +70,14 @@
     width: 18%;
   }
 
+  &__challenge-informations-cell {
+    & a, a:visited {
+      align-items: center;
+      display: flex;
+      gap: var(--pix-spacing-1x);
+    }
+  }
+
   &__challenge-action-cell {
     display: flex;
     height: inherit;
@@ -79,7 +87,7 @@
       padding: 2px 5px;
     }
 
-    & a, a:visited, {
+    & a, a:visited, button {
       align-items: center;
       display: flex;
       flex-direction: column;

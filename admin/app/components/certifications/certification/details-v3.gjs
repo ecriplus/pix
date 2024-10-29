@@ -354,7 +354,7 @@ export default class DetailsV3 extends Component {
                   </td>
                   <td>{{certificationChallenge.competenceIndex}} {{certificationChallenge.competenceName}}</td>
                   <td>{{certificationChallenge.skillName}}</td>
-                  <td>
+                  <td class="certification-details-v3-table__challenge-informations-cell">
                     <a
                       href={{this.externalUrlForPixEditor certificationChallenge.id}}
                       target="_blank"
@@ -379,7 +379,7 @@ export default class DetailsV3 extends Component {
                       }}
                       rel="noopener noreferrer"
                     >
-                      <PixIcon @name="eye" @plainIcon="{{true}}" />
+                      <PixIcon @name="eye" @plainIcon={{true}} />
                     </a>
 
                     {{#if certificationChallenge.validatedLiveAlert}}
