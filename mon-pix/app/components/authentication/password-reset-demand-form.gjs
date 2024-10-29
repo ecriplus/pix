@@ -103,7 +103,6 @@ export default class PasswordResetDemandForm extends Component {
         <div>
           <PixButton
             @type="submit"
-            @size="large"
             @isLoading={{this.isLoading}}
             class="authentication-password-reset-demand-form__button"
           >
