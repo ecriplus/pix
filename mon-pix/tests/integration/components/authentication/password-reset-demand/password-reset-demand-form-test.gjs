@@ -1,7 +1,8 @@
 import { fillByLabel, render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
-import { t } from 'ember-intl/test-support';
+import { setLocale, t } from 'ember-intl/test-support';
 import PasswordResetDemandForm from 'mon-pix/components/authentication/password-reset-demand/password-reset-demand-form';
+import { ENGLISH_INTERNATIONAL_LOCALE } from 'mon-pix/services/locale';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -91,9 +92,12 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
         );
 
         const email = 'someone@example.net';
-        const screen = await render(<template><PasswordResetDemandForm /></template>);
+        const locale = ENGLISH_INTERNATIONAL_LOCALE;
 
         // when
+        await setLocale(locale);
+        const screen = await render(<template><PasswordResetDemandForm /></template>);
+
         await fillByLabel(t('components.authentication.password-reset-demand-form.fields.email.label'), email);
         await click(
           screen.getByRole('button', {
@@ -116,7 +120,7 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
           name: t('components.authentication.password-reset-demand-received-info.try-again'),
         });
         assert.dom(tryAgainLink).exists();
-        assert.strictEqual(tryAgainLink.getAttribute('href'), '/mot-de-passe-oublie');
+        assert.strictEqual(tryAgainLink.getAttribute('href'), `/mot-de-passe-oublie?lang=${locale}`);
       });
     });
 
