@@ -1,5 +1,25 @@
 # Pix Changelog
 
+## v4.233.0 (29/10/2024)
+
+
+### :rocket: Amélioration
+- [#10417](https://github.com/1024pix/pix/pull/10417) [FEATURE] Afficher la consigne au-dessus des Flashcards (PIX-15035).
+- [#10416](https://github.com/1024pix/pix/pull/10416) [FEATURE] Ajouter une validation sur les emails saisies en identifiant externe lorsque ce champ est défini comme email (Pix-13814).
+- [#10412](https://github.com/1024pix/pix/pull/10412) [FEATURE] Afficher les flashcards à plat dans la preview (PIX-14316).
+- [#10346](https://github.com/1024pix/pix/pull/10346) [FEATURE] Configuration de l'oralisation par élève pour les écoles (PIX-13753).
+- [#10405](https://github.com/1024pix/pix/pull/10405) [FEATURE] Afficher la carte de conclusion des flashcards et gérer le score (PIX-14312).
+
+### :building_construction: Tech
+- [#10371](https://github.com/1024pix/pix/pull/10371) [TECH] Migrer la route FT qui permet de récupérer les participations aux campagnes FT (PIX-14942).
+- [#10389](https://github.com/1024pix/pix/pull/10389) [TECH] Migration du endpoint /api/users/{userId}/campaigns/{campaignId}/profile dans src (Pix-14707).
+- [#10415](https://github.com/1024pix/pix/pull/10415) [TECH] Insérer l'acquisition du palier zéro en base lors du seed d'une campagne (PIX-15037).
+- [#10394](https://github.com/1024pix/pix/pull/10394) [TECH] ♻️  migration de la route `/api/admin/target-profile/{id}` (Pix-14968).
+
+### :arrow_up: Montée de version
+- [#10418](https://github.com/1024pix/pix/pull/10418) [BUMP] Update dependency npm-run-all2 to v6.2.4 (e2e).
+- [#10419](https://github.com/1024pix/pix/pull/10419) [BUMP] Lock file maintenance (admin).
+
 ## v4.232.0 (25/10/2024)
 
 
