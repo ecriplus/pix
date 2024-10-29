@@ -10,7 +10,7 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import ENV from 'mon-pix/config/environment';
 
-import isEmailValid from '../../utils/email-validator.js';
+import isEmailValid from '../../../utils/email-validator.js';
 
 export default class PasswordResetDemandForm extends Component {
   @service intl;

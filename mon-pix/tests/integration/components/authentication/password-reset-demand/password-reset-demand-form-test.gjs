@@ -1,13 +1,13 @@
 import { fillByLabel, render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
-import PasswordResetDemandForm from 'mon-pix/components/authentication/password-reset-demand-form';
+import PasswordResetDemandForm from 'mon-pix/components/authentication/password-reset-demand/password-reset-demand-form';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | Authentication | password-reset-demand-form', function (hooks) {
+module('Integration | Component | Authentication | PasswordResetDemand | password-reset-demand-form', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('it displays a contact us link', async function (assert) {
