@@ -41,6 +41,19 @@ const elementSchema = Joi.alternatives().conditional('.type', {
   ],
 });
 
+const stepperElementSchema = Joi.alternatives().conditional('.type', {
+  switch: [
+    { is: 'download', then: downloadElementSchema },
+    { is: 'image', then: imageElementSchema },
+    { is: 'qcu', then: qcuElementSchema },
+    { is: 'qcm', then: qcmElementSchema },
+    { is: 'qrocm', then: qrocmElementSchema },
+    { is: 'separator', then: separatorElementSchema },
+    { is: 'text', then: textElementSchema },
+    { is: 'video', then: videoElementSchema },
+  ],
+});
+
 const componentElementSchema = Joi.object({
   type: Joi.string().valid('element').required(),
   element: elementSchema.required(),
@@ -51,7 +64,7 @@ const componentStepperSchema = Joi.object({
   steps: Joi.array()
     .items(
       Joi.object({
-        elements: Joi.array().items(elementSchema).required(),
+        elements: Joi.array().items(stepperElementSchema).required(),
       }),
     )
     .min(2)
