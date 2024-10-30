@@ -45,16 +45,28 @@ function _getParticipantsResultList(campaignId, filters) {
     .orderByRaw('LOWER(??) ASC, LOWER(??) ASC', ['lastName', 'firstName']);
 }
 
-function _getParticipations(qb, campaignId, filters) {
-  qb.select(
-    'campaign-participations.id AS campaignParticipationId',
-    'campaign-participations.userId AS userId',
-    'view-active-organization-learners.firstName AS firstName',
-    'view-active-organization-learners.lastName AS lastName',
-    'campaign-participations.participantExternalId',
-    'campaign-participations.sharedAt',
-    'campaign-participations.pixScore AS pixScore',
-  )
+async function _getParticipations(qb, campaignId, filters) {
+  await qb
+    .with('previousParticipationsInfos', (qbWith) => {
+      qbWith
+        .select('pixScore AS previousPixScore', 'sharedAt AS previousSharedAt', 'organizationLearnerId', 'id')
+        .from('campaign-participations')
+        .where({ campaignId, isImproved: true })
+        .whereNotNull('campaign-participations.sharedAt')
+        .whereNull('campaign-participations.deletedAt')
+        .orderBy('sharedAt', 'desc');
+    })
+    .select(
+      'campaign-participations.id AS campaignParticipationId',
+      'campaign-participations.userId AS userId',
+      'view-active-organization-learners.firstName AS firstName',
+      'view-active-organization-learners.lastName AS lastName',
+      'campaign-participations.participantExternalId',
+      'campaign-participations.sharedAt',
+      'campaign-participations.pixScore AS pixScore',
+      'previousParticipationsInfos.previousPixScore',
+      'previousParticipationsInfos.previousSharedAt',
+    )
     .distinctOn('campaign-participations.organizationLearnerId')
     .from('campaign-participations')
     .join(
@@ -62,6 +74,12 @@ function _getParticipations(qb, campaignId, filters) {
       'view-active-organization-learners.id',
       'campaign-participations.organizationLearnerId',
     )
+    .leftJoin('previousParticipationsInfos', function () {
+      this.on(
+        'previousParticipationsInfos.organizationLearnerId',
+        'campaign-participations.organizationLearnerId',
+      ).andOn('campaign-participations.id', '!=', 'previousParticipationsInfos.id');
+    })
     .where('campaign-participations.campaignId', campaignId)
     .whereNull('campaign-participations.deletedAt')
     .whereNotNull('campaign-participations.sharedAt')
