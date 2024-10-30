@@ -1581,7 +1581,10 @@
       "grain": {
         "tag": {
           "activity": "activity",
-          "lesson": "lesson"
+          "challenge": "challenge",
+          "discovery": "discovery",
+          "lesson": "lesson",
+          "summary": "summary"
         }
       },
       "modals": {

@@ -11,11 +11,11 @@
   text-transform: uppercase;
   border-radius: var(--modulix-radius) var(--modulix-radius) 0 0;
 
-  &--activity {
+  &--activity, &--challenge {
     background: var(--modulix-activity-card-background);
   }
 
-  &--lesson {
+  &--lesson, &--discovery, &--summary {
     background: var(--modulix-lesson-card-background);
   }
 

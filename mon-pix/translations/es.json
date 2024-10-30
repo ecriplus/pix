@@ -1583,7 +1583,10 @@
       "grain": {
         "tag": {
           "activity": "Actividad",
-          "lesson": "lección"
+          "lesson": "lección",
+          "discovery": "descubrimiento",
+          "challenge": "desafío",
+          "summary": "resumen"
         }
       },
       "modals": {
