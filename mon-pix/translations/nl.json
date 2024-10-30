@@ -138,6 +138,16 @@
   },
   "components": {
     "authentication": {
+      "login-form": {
+        "fields": {
+          "login": {
+            "error": "You have not entered your e-mail address or username."
+          },
+          "password": {
+            "error": "You have not entered your password."
+          }
+        }
+      },
       "new-password-input": {
         "completed-message": "{ rulesCompleted }  { rulesCount } op .",
         "instructions-label": "Je wachtwoord moet voldoen aan de volgende regels:",
