@@ -25,7 +25,7 @@
       "grainId": "eb83569f-2e37-49ed-aa6f-31c420b673b9"
     },
     {
-      "content": "<p>C'est une information et pas une anecdote, d'accord. Mais est-ce que cette information est vraie ? Pour le savoir, il faut mener l'enquête.<span aria-hidden=\"true\">🕵🏽</span></p><p>Voyons ensemble la méthode <i>qui ?, quand ?, d'où ?</i>. Trois questions à se poser pour vérifier une information.<span aria-hidden=\"true\">👇</span></p>",
+      "content": "<p>C'est une information et pas une anecdote, d'accord. Mais est-ce que cette information est vraie ? Pour le savoir, il faut mener l'enquête.<span aria-hidden=\"true\">🕵🏽</span></p><p>Voyons ensemble la méthode « Qui ? Quand ? D'où ? ». Trois questions à se poser pour vérifier une information.<span aria-hidden=\"true\">👇</span></p>",
       "grainId": "ed22ab38-ec6d-47df-88ea-4894f1cd6c8a"
     },
     {
@@ -34,7 +34,7 @@
     },
 
     {
-      "content": "<p>Même si on a vérifié le <i>qui&#8239;? quand&#8239;? d'où&#8239;?</i>, il faut rester vigilant.<br>D'autres indices peuvent aider à détecter de fausses informations.&nbsp;👣 <br>Plus il y en a, plus l’information a des chances d’être fausse.</p>",
+      "content": "<p>Même si on a vérifié le « Qui ? Quand ? D'où ? », il faut rester vigilant.<br>D'autres indices peuvent aider à détecter de fausses informations.&nbsp;👣 <br>Plus il y en a, plus l’information a des chances d’être fausse.</p>",
       "grainId": "428ea826-6e21-4c56-a5a2-f97373f1e833"
     },
     {
@@ -355,7 +355,7 @@
                 {
                   "id": "8aa4a733-4a92-4007-897d-ab884a7add85",
                   "type": "text",
-                  "content": "<h3>Question n°2&nbsp;: de <i>quand</i> date de l’information&#8239;?&nbsp;<span aria-hidden=\"true\">📅</span></h3><p>C’est simple à vérifier et très important&#8239;! Des informations vraies un jour peuvent être fausses le lendemain. <br>Par exemple, une alerte inondation ou une promotion dans un magasin.</p>"
+                  "content": "<h3>Question n°2&nbsp;: de <i>quand</i> date l’information&#8239;?&nbsp;<span aria-hidden=\"true\">📅</span></h3><p>C’est simple à vérifier et très important&#8239;! Des informations vraies un jour peuvent être fausses le lendemain. <br>Par exemple, une alerte inondation ou une promotion dans un magasin.</p>"
                 }
               ]
             },
@@ -436,7 +436,7 @@
                 {
                   "id": "613bd45d-8e88-4ca5-bfa0-368be2336027",
                   "type": "text",
-                  "content": "<h3><span aria-hidden=\"true\">🔎</span> C'est l'heure d'utiliser le <i>qui ? quand ? d'où ?</i></h3><p>Dans les exemples suivants, les informations publiées sont sûrement fausses.<br>En effet, une des réponses au <i>qui ? quand ? d'où ?</i> présente un problème.<br>Trouvez dans chaque exemple où se situe ce problème."
+                  "content": "<h3><span aria-hidden=\"true\">🔎</span> C'est l'heure d'utiliser le « Qui ? Quand ? D'où ? »</i></h3><p>Dans les exemples suivants, les informations publiées sont sûrement fausses.<br>En effet, une des réponses au « Qui ? Quand ? D'où ? » présente un problème.<br>Trouvez dans chaque exemple où se situe ce problème."
                 }
               ]
             },
@@ -628,7 +628,7 @@
             ],
             "feedbacks": {
               "valid": "<span class=\"feedback__state\">Bonne réponse ! ✨</span><p> Plusieurs indices, comme l'absence de source ou le code promotionnel, poussent à vouloir en savoir plus avant de tester ou de partager ces astuces.</p>",
-              "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> Essayez à nouveau, en appliquant la méthode <i>qui ?, quand ?; d'où ?</i>. Si vous avez un doute sur ces informations, il faut être prudent.</p>"
+              "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> Essayez à nouveau, en appliquant la méthode « Qui ? Quand ? D'où ? ». Si vous avez un doute sur ces informations, il faut être prudent.</p>"
             },
             "solutions": ["2", "3"]
           }
