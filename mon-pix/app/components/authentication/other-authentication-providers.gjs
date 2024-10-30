@@ -16,9 +16,9 @@ export default class OtherAuthenticationProviders extends Component {
     <section class="authentication-other-authentication-providers-section">
       <h2 class="authentication-other-authentication-providers-section__heading">
         {{#if @isForSignup}}
-          {{t "components.authentication.other-authentication-providers.signup-heading"}}
+          {{t "components.authentication.other-authentication-providers.signup.heading"}}
         {{else}}
-          {{t "components.authentication.other-authentication-providers.login-heading"}}
+          {{t "components.authentication.other-authentication-providers.login.heading"}}
         {{/if}}
       </h2>
 
@@ -34,11 +34,18 @@ export default class OtherAuthenticationProviders extends Component {
             alt=""
             class="authentication-other-authentication-providers-section__featured-identity-provider-logo"
           />
-
-          {{t
-            "components.authentication.other-authentication-providers.continue-with-featured-identity-provider-link"
-            featuredIdentityProvider=this.oidcIdentityProviders.featuredIdentityProvider.organizationName
-          }}</PixButtonLink>
+          {{#if @isForSignup}}
+            {{t
+              "components.authentication.other-authentication-providers.signup.signup-with-featured-identity-provider-link"
+              featuredIdentityProvider=this.oidcIdentityProviders.featuredIdentityProvider.organizationName
+            }}
+          {{else}}
+            {{t
+              "components.authentication.other-authentication-providers.login.login-with-featured-identity-provider-link"
+              featuredIdentityProvider=this.oidcIdentityProviders.featuredIdentityProvider.organizationName
+            }}
+          {{/if}}
+        </PixButtonLink>
       {{/if}}
 
       {{#if this.oidcIdentityProviders.hasOtherIdentityProviders}}

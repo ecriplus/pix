@@ -224,7 +224,7 @@ module('Integration | Component | Authentication | SigninForm', function (hooks)
       await clickByName(t(I18N_KEYS.submitButton));
 
       // then
-      const errorMessage = 'Impossible de se connecter. Merci de réessayer dans quelques instants.';
+      const errorMessage = 'Impossible de se connecter. Veuillez réessayer dans quelques instants.';
       assert.dom(screen.getByText(errorMessage, { exact: false })).exists();
 
       const errorMessageLink = screen.getByRole('link', { name: 'merci de nous contacter' });
