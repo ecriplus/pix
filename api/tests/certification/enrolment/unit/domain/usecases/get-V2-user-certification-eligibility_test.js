@@ -1,5 +1,4 @@
 import { getV2UserCertificationEligibility } from '../../../../../../src/certification/enrolment/domain/usecases/get-V2-user-certification-eligibility.js';
-import { config } from '../../../../../../src/shared/config.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | get-v2-user-certification-eligibility', function () {
@@ -275,185 +274,87 @@ describe('Unit | UseCase | get-v2-user-certification-eligibility', function () {
           });
 
           context('when there is more than one new version', function () {
-            context('if FT_ENABLE_PIX_PLUS_LOWER_LEVEL is enabled', function () {
-              it('should return the user certification eligibility without complementary certification', async function () {
-                // given
-                sinon.stub(config.featureToggles, 'isPixPlusLowerLeverEnabled').value(true);
-
-                const detachedTargetProfileHistory1 = domainBuilder.buildTargetProfileHistoryForAdmin({
-                  badges: [
-                    domainBuilder.buildComplementaryCertificationBadgeForAdmin({
-                      id: 3,
-                      complementaryCertificationBadgeId: 32,
-                    }),
-                    domainBuilder.buildComplementaryCertificationBadgeForAdmin({
-                      id: 3,
-                      complementaryCertificationBadgeId: 33,
-                    }),
-                  ],
-                  attachedAt: new Date('2020-01-01'),
-                  detachedAt: new Date('2021-01-01'),
-                });
-                const detachedTargetProfileHistory2 = domainBuilder.buildTargetProfileHistoryForAdmin({
-                  badges: [
-                    domainBuilder.buildComplementaryCertificationBadgeForAdmin({
-                      id: 3,
-                      complementaryCertificationBadgeId: 34,
-                    }),
-                  ],
-                  attachedAt: new Date('2021-01-01'),
-                  detachedAt: new Date('2022-01-01'),
-                });
-                const attachedTargetProfileHistory = domainBuilder.buildTargetProfileHistoryForAdmin({
-                  detachedAt: null,
-                  attachedAt: new Date('2024-01-01'),
-                  badges: [
-                    domainBuilder.buildComplementaryCertificationBadgeForAdmin({
-                      id: 3,
-                      complementaryCertificationBadgeId: 35,
-                    }),
-                  ],
-                });
-
-                targetProfileHistoryRepository.getCurrentTargetProfilesHistoryWithBadgesByComplementaryCertificationId
-                  .withArgs({ complementaryCertificationId: 1 })
-                  .resolves([attachedTargetProfileHistory]);
-
-                targetProfileHistoryRepository.getDetachedTargetProfilesHistoryByComplementaryCertificationId
-                  .withArgs({ complementaryCertificationId: 1 })
-                  .resolves([detachedTargetProfileHistory2, detachedTargetProfileHistory1]);
-
-                const placementProfile = { isCertifiable: () => true };
-                placementProfileService.getPlacementProfile
-                  .withArgs({ userId: 2, limitDate: now })
-                  .resolves(placementProfile);
-
-                const badgeAcquisition = _getOutdatedBadgeAcquisition({ complementaryCertificationBadgeId: 33 });
-
-                certificationBadgesService.findLatestBadgeAcquisitions.resolves([badgeAcquisition]);
-
-                complementaryCertificationCourseRepository.findByUserId.resolves([
-                  domainBuilder.certification.enrolment.buildComplementaryCertificationCourseWithResults({
-                    id: 1,
-                    hasExternalJury: false,
-                    complementaryCertificationBadgeId: 33,
-                    results: [
-                      {
-                        id: 3,
-                        acquired: true,
-                        source: 'PIX',
-                        complementaryCertificationBadgeId: 32,
-                      },
-                    ],
+            it('should return the user certification eligibility without complementary certification', async function () {
+              // given
+              const detachedTargetProfileHistory1 = domainBuilder.buildTargetProfileHistoryForAdmin({
+                badges: [
+                  domainBuilder.buildComplementaryCertificationBadgeForAdmin({
+                    id: 3,
+                    complementaryCertificationBadgeId: 32,
                   }),
-                ]);
-
-                // when
-                const certificationEligibility = await getV2UserCertificationEligibility({
-                  userId: 2,
-                  placementProfileService,
-                  certificationBadgesService,
-                  complementaryCertificationCourseRepository,
-                  targetProfileHistoryRepository,
-                });
-
-                // then
-                expect(certificationEligibility.complementaryCertifications).to.deep.equal([]);
-              });
-            });
-
-            context('if FT_ENABLE_PIX_PLUS_LOWER_LEVEL is not enabled', function () {
-              it('should return the user certification eligibility with complementary certification', async function () {
-                // given
-                sinon.stub(config.featureToggles, 'isPixPlusLowerLeverEnabled').value(false);
-
-                const detachedTargetProfileHistory1 = domainBuilder.buildTargetProfileHistoryForAdmin({
-                  badges: [
-                    domainBuilder.buildComplementaryCertificationBadgeForAdmin({
-                      id: 3,
-                      complementaryCertificationBadgeId: 32,
-                    }),
-                    domainBuilder.buildComplementaryCertificationBadgeForAdmin({
-                      id: 3,
-                      complementaryCertificationBadgeId: 33,
-                    }),
-                  ],
-                  attachedAt: new Date('2020-01-01'),
-                  detachedAt: new Date('2021-01-01'),
-                });
-                const detachedTargetProfileHistory2 = domainBuilder.buildTargetProfileHistoryForAdmin({
-                  badges: [
-                    domainBuilder.buildComplementaryCertificationBadgeForAdmin({
-                      id: 3,
-                      complementaryCertificationBadgeId: 34,
-                    }),
-                  ],
-                  attachedAt: new Date('2021-01-01'),
-                  detachedAt: new Date('2022-01-01'),
-                });
-                const attachedTargetProfileHistory = domainBuilder.buildTargetProfileHistoryForAdmin({
-                  detachedAt: null,
-                  attachedAt: new Date('2024-01-01'),
-                  badges: [
-                    domainBuilder.buildComplementaryCertificationBadgeForAdmin({
-                      id: 3,
-                      complementaryCertificationBadgeId: 35,
-                    }),
-                  ],
-                });
-
-                targetProfileHistoryRepository.getCurrentTargetProfilesHistoryWithBadgesByComplementaryCertificationId
-                  .withArgs({ complementaryCertificationId: 1 })
-                  .resolves([attachedTargetProfileHistory]);
-
-                targetProfileHistoryRepository.getDetachedTargetProfilesHistoryByComplementaryCertificationId
-                  .withArgs({ complementaryCertificationId: 1 })
-                  .resolves([detachedTargetProfileHistory2, detachedTargetProfileHistory1]);
-
-                const placementProfile = { isCertifiable: () => true };
-                placementProfileService.getPlacementProfile
-                  .withArgs({ userId: 2, limitDate: now })
-                  .resolves(placementProfile);
-
-                const badgeAcquisition = _getOutdatedBadgeAcquisition({ complementaryCertificationBadgeId: 33 });
-
-                certificationBadgesService.findLatestBadgeAcquisitions.resolves([badgeAcquisition]);
-
-                complementaryCertificationCourseRepository.findByUserId.resolves([
-                  domainBuilder.certification.enrolment.buildComplementaryCertificationCourseWithResults({
-                    id: 1,
-                    hasExternalJury: false,
+                  domainBuilder.buildComplementaryCertificationBadgeForAdmin({
+                    id: 3,
                     complementaryCertificationBadgeId: 33,
-                    results: [
-                      {
-                        id: 3,
-                        acquired: true,
-                        source: 'PIX',
-                        complementaryCertificationBadgeId: 32,
-                      },
-                    ],
                   }),
-                ]);
-
-                // when
-                const certificationEligibility = await getV2UserCertificationEligibility({
-                  userId: 2,
-                  placementProfileService,
-                  certificationBadgesService,
-                  complementaryCertificationCourseRepository,
-                  targetProfileHistoryRepository,
-                });
-
-                // then
-                expect(certificationEligibility.complementaryCertifications).to.deep.equal([
-                  {
-                    label: 'BADGE_LABEL',
-                    imageUrl: 'http://www.image-url.com',
-                    isOutdated: true,
-                    isAcquiredExpectedLevel: false,
-                  },
-                ]);
+                ],
+                attachedAt: new Date('2020-01-01'),
+                detachedAt: new Date('2021-01-01'),
               });
+              const detachedTargetProfileHistory2 = domainBuilder.buildTargetProfileHistoryForAdmin({
+                badges: [
+                  domainBuilder.buildComplementaryCertificationBadgeForAdmin({
+                    id: 3,
+                    complementaryCertificationBadgeId: 34,
+                  }),
+                ],
+                attachedAt: new Date('2021-01-01'),
+                detachedAt: new Date('2022-01-01'),
+              });
+              const attachedTargetProfileHistory = domainBuilder.buildTargetProfileHistoryForAdmin({
+                detachedAt: null,
+                attachedAt: new Date('2024-01-01'),
+                badges: [
+                  domainBuilder.buildComplementaryCertificationBadgeForAdmin({
+                    id: 3,
+                    complementaryCertificationBadgeId: 35,
+                  }),
+                ],
+              });
+
+              targetProfileHistoryRepository.getCurrentTargetProfilesHistoryWithBadgesByComplementaryCertificationId
+                .withArgs({ complementaryCertificationId: 1 })
+                .resolves([attachedTargetProfileHistory]);
+
+              targetProfileHistoryRepository.getDetachedTargetProfilesHistoryByComplementaryCertificationId
+                .withArgs({ complementaryCertificationId: 1 })
+                .resolves([detachedTargetProfileHistory2, detachedTargetProfileHistory1]);
+
+              const placementProfile = { isCertifiable: () => true };
+              placementProfileService.getPlacementProfile
+                .withArgs({ userId: 2, limitDate: now })
+                .resolves(placementProfile);
+
+              const badgeAcquisition = _getOutdatedBadgeAcquisition({ complementaryCertificationBadgeId: 33 });
+
+              certificationBadgesService.findLatestBadgeAcquisitions.resolves([badgeAcquisition]);
+
+              complementaryCertificationCourseRepository.findByUserId.resolves([
+                domainBuilder.certification.enrolment.buildComplementaryCertificationCourseWithResults({
+                  id: 1,
+                  hasExternalJury: false,
+                  complementaryCertificationBadgeId: 33,
+                  results: [
+                    {
+                      id: 3,
+                      acquired: true,
+                      source: 'PIX',
+                      complementaryCertificationBadgeId: 32,
+                    },
+                  ],
+                }),
+              ]);
+
+              // when
+              const certificationEligibility = await getV2UserCertificationEligibility({
+                userId: 2,
+                placementProfileService,
+                certificationBadgesService,
+                complementaryCertificationCourseRepository,
+                targetProfileHistoryRepository,
+              });
+
+              // then
+              expect(certificationEligibility.complementaryCertifications).to.deep.equal([]);
             });
           });
         });

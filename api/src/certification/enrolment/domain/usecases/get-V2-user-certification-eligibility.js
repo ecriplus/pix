@@ -17,7 +17,6 @@
 
 import _ from 'lodash';
 
-import { config } from '../../../../shared/config.js';
 import { ComplementaryCertificationBadgesHistory } from '../../../complementary-certification/application/api/models/ComplementaryCertificationBadgesHistory.js';
 import {
   ComplementaryCertificationBadge,
@@ -260,12 +259,9 @@ function _isAcquiredByPixSourceOrOutdatedByMoreThanOneVersion({
   isAcquiredExpectedLevel,
 }) {
   return (
-    // TODO: Remove check on isPixPlusLowerLeverEnabled if enabled in PROD
-    (config.featureToggles.isPixPlusLowerLeverEnabled &&
-      _isOutdatedBadgeAcquisitionByMoreThanOneVersion({
-        stillValidBadgeAcquisitionComplementaryCertificationBadgeId,
-        outdatedVersions: complementaryCertificationVersioning,
-      })) ||
-    isAcquiredExpectedLevel
+    _isOutdatedBadgeAcquisitionByMoreThanOneVersion({
+      stillValidBadgeAcquisitionComplementaryCertificationBadgeId,
+      outdatedVersions: complementaryCertificationVersioning,
+    }) || isAcquiredExpectedLevel
   );
 }
