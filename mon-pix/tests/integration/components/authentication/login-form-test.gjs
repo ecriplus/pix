@@ -1,18 +1,21 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
-import SigninForm from 'mon-pix/components/authentication/signin-form';
+import LoginForm from 'mon-pix/components/authentication/login-form';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 const I18N_KEYS = {
-  emailInput: 'pages.sign-in.fields.login.label',
+  loginInput: 'pages.sign-in.fields.login.label',
+  loginError: 'components.authentication.login-form.fields.login.error',
   passwordInput: 'pages.sign-in.fields.password.label',
+  passwordError: 'components.authentication.login-form.fields.password.error',
   submitButton: 'pages.sign-in.actions.submit',
+  forgottenPasswordLink: 'pages.sign-in.forgotten-password',
 };
 
-module('Integration | Component | Authentication | SigninForm', function (hooks) {
+module('Integration | Component | Authentication | LoginForm', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   let screen;
@@ -26,13 +29,24 @@ module('Integration | Component | Authentication | SigninForm', function (hooks)
     sessionService = this.owner.lookup('service:session');
     sinon.stub(sessionService, 'authenticateUser');
 
-    screen = await render(<template><SigninForm /></template>);
+    screen = await render(<template><LoginForm /></template>);
   });
 
-  test('it signs in with valid credentials', async function (assert) {
+  test('it displays all elements of component successfully', async function (assert) {
+    // then
+    assert.dom(screen.getByText(t('common.form.mandatory-all-fields'))).exists();
+    assert.dom(screen.getByRole('textbox', { name: t(I18N_KEYS.loginInput) })).hasAttribute('aria-required');
+    assert.dom(screen.getByLabelText(t(I18N_KEYS.passwordInput))).hasAttribute('aria-required');
+    assert.dom(screen.getByRole('button', { name: t(I18N_KEYS.submitButton) })).exists();
+    assert
+      .dom(screen.getByRole('link', { name: t(I18N_KEYS.forgottenPasswordLink) }))
+      .hasAttribute('href', '/mot-de-passe-oublie');
+  });
+
+  test('it logs in with valid credentials', async function (assert) {
     //given
     sessionService.authenticateUser.resolves();
-    await fillByLabel(t(I18N_KEYS.emailInput), ' pix@example.net ');
+    await fillByLabel(t(I18N_KEYS.loginInput), ' pix@example.net ');
     await fillByLabel(t(I18N_KEYS.passwordInput), 'JeMeLoggue1024');
 
     // when
@@ -42,11 +56,23 @@ module('Integration | Component | Authentication | SigninForm', function (hooks)
     assert.ok(sessionService.authenticateUser.calledWith('pix@example.net', 'JeMeLoggue1024'));
   });
 
+  module('when user submits without filling the form', function () {
+    test('it displays an error messages on inputs', async function (assert) {
+      // when
+      await clickByName(t(I18N_KEYS.submitButton));
+
+      // then
+      assert.dom(screen.getByText(t(I18N_KEYS.loginError))).exists();
+      assert.dom(screen.getByText(t(I18N_KEYS.passwordError))).exists();
+      sinon.assert.notCalled(sessionService.authenticateUser);
+    });
+  });
+
   module('When there are spaces in email', function () {
-    test('it signs in with email trimmed', async function (assert) {
+    test('it logs in with email trimmed', async function (assert) {
       // given
       sessionService.authenticateUser.resolves();
-      await fillByLabel(t(I18N_KEYS.emailInput), ' pix@example.net ');
+      await fillByLabel(t(I18N_KEYS.loginInput), ' pix@example.net ');
       await fillByLabel(t(I18N_KEYS.passwordInput), 'JeMeLoggue1024');
 
       // when
@@ -57,32 +83,9 @@ module('Integration | Component | Authentication | SigninForm', function (hooks)
     });
   });
 
-  module('Rendering', function () {
-    test('[a11y] it displays a message that all inputs are required', async function (assert) {
-      // then
-      assert.dom(screen.getByText(t('common.form.mandatory-all-fields'))).exists();
-    });
-
-    test('it displays a required inputs for email and password fields', async function (assert) {
-      // then
-      assert.dom(screen.getByRole('textbox', { name: t(I18N_KEYS.emailInput) })).hasAttribute('required');
-      assert.dom(screen.getByLabelText(t(I18N_KEYS.passwordInput))).hasAttribute('required');
-    });
-
-    test('it displays a disabled submission button', async function (assert) {
-      // then
-      assert.dom(screen.getByRole('button', { name: t(I18N_KEYS.submitButton) })).hasAttribute('disabled');
-    });
-
-    test('it displays a link to password reset', async function (assert) {
-      // then
-      assert.dom(screen.getByRole('link', { name: t('pages.sign-in.forgotten-password') })).exists();
-    });
-  });
-
   module('When a business error occurred', function (hooks) {
     hooks.beforeEach(async function () {
-      await fillByLabel(t(I18N_KEYS.emailInput), 'pix@example.net');
+      await fillByLabel(t(I18N_KEYS.loginInput), 'pix@example.net');
       await fillByLabel(t(I18N_KEYS.passwordInput), 'JeMeLoggue1024');
     });
 
@@ -164,7 +167,7 @@ module('Integration | Component | Authentication | SigninForm', function (hooks)
 
   module('When a http error occurred', function (hooks) {
     hooks.beforeEach(async function () {
-      await fillByLabel(t(I18N_KEYS.emailInput), 'pix@example.net');
+      await fillByLabel(t(I18N_KEYS.loginInput), 'pix@example.net');
       await fillByLabel(t(I18N_KEYS.passwordInput), 'JeMeLoggue1024');
     });
 

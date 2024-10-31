@@ -1,10 +1,10 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
-import PasswordResetForm from 'mon-pix/components/authentication/password-reset-form/password-reset-form';
+import PasswordResetForm from 'mon-pix/components/authentication/password-reset-form';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 const I18N_KEYS = {
   loginButtonLink: 'components.authentication.password-reset-form.actions.login',
@@ -23,7 +23,7 @@ const I18N_ERROR_KEYS = {
   unknownError: 'common.api-error-messages.internal-server-error',
 };
 
-module('Integration | Component | Authentication | PasswordResetForm | PasswordResetForm', function (hooks) {
+module('Integration | Component | Authentication | PasswordResetForm', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('displays all elements of component successfully', async function (assert) {
@@ -38,7 +38,7 @@ module('Integration | Component | Authentication | PasswordResetForm | PasswordR
 
     // then
     assert.dom(screen.getByText(t(I18N_KEYS.mandatoryFieldsMessage))).exists();
-    assert.dom(screen.getByLabelText(t(I18N_KEYS.passwordInputLabel))).hasAttribute('required');
+    assert.dom(screen.getByLabelText(t(I18N_KEYS.passwordInputLabel))).hasAttribute('aria-required');
     assert.dom(screen.getByRole('button', { name: t(I18N_KEYS.resetPasswordButton) })).exists();
   });
 
@@ -68,6 +68,25 @@ module('Integration | Component | Authentication | PasswordResetForm | PasswordR
     assert.dom(loginLinkElement).hasAttribute('href', '/connexion');
   });
 
+  module('when user submits without filling the form', function () {
+    test('displays an error message on the password input', async function (assert) {
+      // given
+      const user = { save: sinon.stub() };
+      const temporaryKey = 'temporaryKey';
+
+      // when
+      const screen = await render(
+        <template><PasswordResetForm @temporaryKey={{temporaryKey}} @user={{user}} /></template>,
+      );
+
+      await clickByName(t(I18N_KEYS.resetPasswordButton));
+
+      // then
+      assert.dom(screen.getByText(t(I18N_KEYS.passwordInputErrorMessage))).exists();
+      sinon.assert.notCalled(user.save);
+    });
+  });
+
   module('when there is a validationError on the password field', function () {
     test('displays an error message on the password input', async function (assert) {
       // given
@@ -81,7 +100,6 @@ module('Integration | Component | Authentication | PasswordResetForm | PasswordR
       );
 
       await fillByLabel(t(I18N_KEYS.passwordInputLabel), invalidPassword);
-      await clickByName(t(I18N_KEYS.resetPasswordButton));
 
       // then
       assert.dom(screen.getByText(t(I18N_KEYS.passwordInputErrorMessage))).exists();

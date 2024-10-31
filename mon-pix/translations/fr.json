@@ -137,6 +137,16 @@
   },
   "components": {
     "authentication": {
+      "login-form": {
+        "fields": {
+          "login": {
+            "error": "Votre adresse e-mail ou identifiant n’est pas renseigné."
+          },
+          "password": {
+            "error": "Votre mot de passe n’est pas renseigné."
+          }
+        }
+      },
       "new-password-input": {
         "completed-message": "{ rulesCompleted } sur { rulesCount } complétées.",
         "instructions-label": "Votre mot de passe doit respecter les règles suivantes :",

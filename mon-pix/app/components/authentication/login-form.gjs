@@ -11,6 +11,7 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import get from 'lodash/get';
 import ENV from 'mon-pix/config/environment';
+import { FormValidation } from 'mon-pix/utils/form-validation';
 
 const HTTP_ERROR_MESSAGES = {
   400: { key: ENV.APP.API_ERROR_MESSAGES.BAD_REQUEST.I18N_KEY },
@@ -20,7 +21,12 @@ const HTTP_ERROR_MESSAGES = {
   default: { key: 'common.api-error-messages.login-unexpected-error', values: { htmlSafe: true } },
 };
 
-export default class SigninForm extends Component {
+const VALIDATION_ERRORS = {
+  login: 'components.authentication.login-form.fields.login.error',
+  password: 'components.authentication.login-form.fields.password.error',
+};
+
+export default class LoginForm extends Component {
   @service url;
   @service session;
   @service store;
@@ -31,9 +37,26 @@ export default class SigninForm extends Component {
   @tracked globalError = null;
   @tracked isLoading = false;
 
+  validation = new FormValidation({
+    login: {
+      validate: (value) => Boolean(value),
+      error: VALIDATION_ERRORS.login,
+    },
+    password: {
+      validate: (value) => Boolean(value),
+      error: VALIDATION_ERRORS.password,
+    },
+  });
+
   @action
   async signin(event) {
     if (event) event.preventDefault();
+
+    const formValues = { login: this.login, password: this.password };
+
+    const isValid = this.validation.validateAll(formValues);
+    if (!isValid) return;
+
     this.isLoading = true;
 
     try {
@@ -45,18 +68,16 @@ export default class SigninForm extends Component {
     }
   }
 
-  get isFormDisabled() {
-    return !this.login || !this.password;
-  }
-
   @action
   updateLogin(event) {
     this.login = event.target.value?.trim();
+    this.validation.login.validate(this.login);
   }
 
   @action
   updatePassword(event) {
     this.password = event.target.value?.trim();
+    this.validation.password.validate(this.password);
   }
 
   async _handleApiError(responseError) {
@@ -110,14 +131,14 @@ export default class SigninForm extends Component {
   }
 
   <template>
-    <form {{on "submit" this.signin}} class="signin-form">
+    <form {{on "submit" this.signin}} class="authentication-login-form">
       {{#if this.globalError}}
         <PixMessage @type="error" @withIcon={{true}} role="alert">
           {{t this.globalError.key this.globalError.values}}
         </PixMessage>
       {{/if}}
 
-      <p class="signin-form__mandatory-fields-message">
+      <p class="authentication-login-form__mandatory-fields-message">
         {{t "common.form.mandatory-all-fields"}}
       </p>
 
@@ -129,19 +150,23 @@ export default class SigninForm extends Component {
           name="login"
           {{on "input" this.updateLogin}}
           placeholder={{t "pages.sign-in.fields.login.placeholder"}}
+          @validationStatus={{this.validation.login.status}}
+          @errorMessage={{t this.validation.login.error}}
           autocomplete="email"
-          required
+          aria-required="true"
         >
           <:label>{{t "pages.sign-in.fields.login.label"}}</:label>
         </PixInput>
 
-        <div class="signin-form__password">
+        <div class="authentication-login-form__password">
           <PixInputPassword
             @id="password"
             name="password"
             {{on "input" this.updatePassword}}
+            @validationStatus={{this.validation.password.status}}
+            @errorMessage={{t this.validation.password.error}}
             autocomplete="current-password"
-            required
+            aria-required="true"
           >
             <:label>{{t "pages.sign-in.fields.password.label"}}</:label>
           </PixInputPassword>
@@ -152,7 +177,7 @@ export default class SigninForm extends Component {
         </div>
       </fieldset>
 
-      <PixButton @type="submit" @isLoading={{this.isLoading}} @isDisabled={{this.isFormDisabled}}>
+      <PixButton @type="submit" @isLoading={{this.isLoading}}>
         {{t "pages.sign-in.actions.submit"}}
       </PixButton>
     </form>
