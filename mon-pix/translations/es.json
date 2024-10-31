@@ -149,10 +149,15 @@
         "searchLabel": "Búsqueda por palabras clave"
       },
       "other-authentication-providers": {
-        "continue-with-featured-identity-provider-link": "Continuar con {featuredIdentityProvider}",
-        "login-heading": "Otros medios de conexión",
+        "login": {
+          "heading": "Otros medios de conexión",
+          "login-with-featured-identity-provider-link": "Continuar con {featuredIdentityProvider}"
+        },
         "select-another-organization-link": "Elegir otra organización",
-        "signup-heading": "Otros medios de registro"
+        "signup": {
+          "heading": "Otros medios de registro",
+          "signup-with-featured-identity-provider-link": "Continuar con {featuredIdentityProvider}"
+        }
       },
       "password-reset-demand-form": {
         "404-message": "Esta dirección de correo electrónico no corresponde a ninguna cuenta",

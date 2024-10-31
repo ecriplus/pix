@@ -66,7 +66,7 @@
       "error": "You must agree to the Pix terms of use and personal data protection policy to create an account.",
       "label": "Agree Pix terms of use and personal data protection policy",
       "message": "I agree to the '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'Pix terms of use'</a>' and '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'personal data protection policy'</a>'",
-      "read-message": "Read the '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'Pix terms of use'</a>' et la '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'personal data protection policy'</a>'."
+      "read-message": "Read the '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'Pix terms of use'</a>' and the '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'personal data protection policy'</a>'."
     },
     "companion": {
       "not-detected": {
@@ -148,10 +148,15 @@
         "searchLabel": "Keyword search"
       },
       "other-authentication-providers": {
-        "continue-with-featured-identity-provider-link": "Continue with {featuredIdentityProvider}",
-        "login-heading": "Other ways to log in",
+        "login": {
+          "heading": "Other ways to log in",
+          "login-with-featured-identity-provider-link": "Login with {featuredIdentityProvider}"
+        },
         "select-another-organization-link": "Choose another organisation",
-        "signup-heading": "Other ways to sign up"
+        "signup": {
+          "heading": "Other ways to sign up",
+          "signup-with-featured-identity-provider-link": "Register with {featuredIdentityProvider}"
+        }
       },
       "password-reset-demand-form": {
         "actions": {
@@ -165,7 +170,7 @@
           "email": {
             "error-message-invalid": "Your email address is invalid.",
             "label": "Email address",
-            "placeholder": "ex: john.doe@email.com"
+            "placeholder": "e.g. john.smith@example.com"
           }
         },
         "no-email-question": "No email address?",
@@ -207,17 +212,17 @@
           "email": {
             "error": "Your email address is invalid.",
             "label": "Email address",
-            "placeholder": "ex: john.doe@email.fr"
+            "placeholder": "e.g. john.smith@example.com"
           },
           "firstname": {
             "error": "You have not entered your first name.",
             "label": "First name",
-            "placeholder": "ex: John"
+            "placeholder": "e.g. John"
           },
           "lastname": {
             "error": "You have not entered your last name.",
             "label": "Last name",
-            "placeholder": "ex: Doe"
+            "placeholder": "e.g. Smith"
           },
           "legend": "Information required for sign up."
         }
@@ -446,7 +451,7 @@
     },
     "authentication": {
       "login": {
-        "signup-button": "Sign up to Pix"
+        "signup-button": "Sign up"
       },
       "sso-selection": {
         "signin": {
@@ -457,7 +462,7 @@
           "link": "Sign up",
           "title": "Don't have an account?"
         },
-        "title": "Choose another organization"
+        "title": "Choose your organization"
       }
     },
     "autonomous-course": {
@@ -1411,7 +1416,7 @@
           "cgu": "I agree to the '<a href=\"https://pix.org/en/terms-and-conditions\" class=\"link\" target=\"_blank\" rel=\"noopener noreferrer\">'terms and conditions of use of the Pix platform'</a>'",
           "email": {
             "error": "Your email address is invalid.",
-            "help": "(eg. name@example.org)",
+            "help": "(e.g. name@example.org)",
             "label": "Email address"
           },
           "firstname": {
@@ -1748,7 +1753,7 @@
         "legend": "Information required for sign in.",
         "login": {
           "label": "Email address or username",
-          "placeholder": "ex: jean.dupont@email.com"
+          "placeholder": "e.g. john.smith@example.com"
         },
         "password": {
           "label": "Password"
@@ -1777,7 +1782,7 @@
     },
     "sign-up": {
       "actions": {
-        "login": "Log in to Pix",
+        "login": "Log in",
         "submit": "Sign up"
       },
       "errors": {
@@ -1787,7 +1792,7 @@
       "fields": {
         "email": {
           "error": "Your email address is invalid.",
-          "help": "(eg. name@example.org)",
+          "help": "(e.g. name@example.org)",
           "label": "Email address"
         },
         "firstname": {

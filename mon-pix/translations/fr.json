@@ -56,7 +56,7 @@
       "gateway-timeout-error": "Le service subit des ralentissements. Veuillez réessayer ultérieurement.",
       "internal-server-error": "Une erreur interne est survenue, nos équipes sont en train de résoudre le problème. Veuillez réessayer ultérieurement.",
       "login-unauthorized-error": "L'adresse e-mail ou l'identifiant et/ou le mot de passe saisis sont incorrects.",
-      "login-unexpected-error": "Impossible de se connecter. Merci de réessayer dans quelques instants. Si le problème persiste, '<'a href=\"https://pix.fr/support\" target=\"blank\"'>'merci de nous contacter'</a>'.",
+      "login-unexpected-error": "Impossible de se connecter. Veuillez réessayer dans quelques instants. Si le problème persiste, '<'a href=\"https://pix.fr/support\" target=\"blank\"'>'merci de nous contacter'</a>'.",
       "login-user-blocked-error": "Votre compte est bloqué car vous avez effectué trop de tentatives de connexion. Pour le débloquer, '<'a href=\"{url}\"'>'contactez-nous'</a>'.",
       "login-user-temporary-blocked-error": "Vous avez effectué trop de tentatives de connexion. Réessayez plus tard ou cliquez sur '<'a href=\"{url}\"'>'mot de passe oublié'</a>' pour le réinitialiser."
     },
@@ -148,10 +148,15 @@
         "searchLabel": "Recherche par mots-clés"
       },
       "other-authentication-providers": {
-        "continue-with-featured-identity-provider-link": "Continuer avec {featuredIdentityProvider}",
-        "login-heading": "Autres moyens de connexion",
+        "login": {
+          "heading": "Autres moyens de connexion",
+          "login-with-featured-identity-provider-link": "Se connecter avec {featuredIdentityProvider}"
+        },
         "select-another-organization-link": "Choisir une autre organisation",
-        "signup-heading": "Autres moyens d’inscription"
+        "signup": {
+          "heading": "Autres moyens d’inscription",
+          "signup-with-featured-identity-provider-link": "S'inscrire avec {featuredIdentityProvider}"
+        }
       },
       "password-reset-demand-form": {
         "actions": {
@@ -180,7 +185,7 @@
       "password-reset-form": {
         "actions": {
           "login": "Je me connecte",
-          "submit": "Je réinitialise mon mot de passe"
+          "submit": "Réinitialiser mon mot de passe"
         },
         "errors": {
           "expired-demand": "Nous sommes désolés, mais votre demande de réinitialisation de mot de passe a déjà été utilisée ou est expirée. Merci de recommencer.",
@@ -262,7 +267,7 @@
     "footer": {
       "a11y": "Accessibilité : partiellement conforme",
       "data-protection-policy": "Politique de protection des données",
-      "eula": "CGU",
+      "eula": "Conditions Générales d’Utilisation",
       "help-center": "Centre d'aide",
       "label": "Menu de bas de page",
       "legal-notice": "Mentions légales",
@@ -446,7 +451,7 @@
     },
     "authentication": {
       "login": {
-        "signup-button": "S'inscrire sur Pix"
+        "signup-button": "S'inscrire"
       },
       "sso-selection": {
         "signin": {
@@ -457,7 +462,7 @@
           "link": "Inscrivez-vous",
           "title": "Vous n'avez pas de compte ?"
         },
-        "title": "Choisir une autre organisation"
+        "title": "Choisissez votre organisation"
       }
     },
     "autonomous-course": {
@@ -1777,7 +1782,7 @@
     },
     "sign-up": {
       "actions": {
-        "login": "Se connecter sur Pix",
+        "login": "Se connecter",
         "submit": "Je m'inscris"
       },
       "errors": {

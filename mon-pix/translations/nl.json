@@ -149,10 +149,15 @@
         "searchLabel": "Zoeken op trefwoorden"
       },
       "other-authentication-providers": {
-        "continue-with-featured-identity-provider-link": "Doorgaan met {featuredIdentityProvider}",
-        "login-heading": "Andere verbindingsmethoden",
+        "login": {
+          "heading": "Andere verbindingsmethoden",
+          "login-with-featured-identity-provider-link": "Doorgaan met {featuredIdentityProvider}"
+        },
         "select-another-organization-link": "Kies een andere organisatie",
-        "signup-heading": "Andere manieren van registratie"
+        "signup": {
+          "heading": "Andere manieren van registratie",
+          "signup-with-featured-identity-provider-link": "Doorgaan met {featuredIdentityProvider}"
+        }
       },
       "password-reset-demand-form": {
         "404-message": "Dit e-mailadres komt niet overeen met een account",
