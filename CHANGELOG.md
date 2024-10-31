@@ -1,5 +1,35 @@
 # Pix Changelog
 
+## v4.234.0 (31/10/2024)
+
+
+### :rocket: Amélioration
+- [#10445](https://github.com/1024pix/pix/pull/10445) [FEATURE] Ne pas contraindre les formats d'image (PIX-14861).
+- [#10427](https://github.com/1024pix/pix/pull/10427) [FEATURE] Ajuster les boutons utilisés dans les pages d'authentification (PIX-15057).
+- [#10408](https://github.com/1024pix/pix/pull/10408) [FEATURE] Afficher une icône de progression pour les 2 dernières participations d'un prescrit à une campagne d'évaluation sur Pix Orga (PIX-14808).
+- [#10434](https://github.com/1024pix/pix/pull/10434) [FEATURE] Mettre fichiers SCSS dans le même dossier que son composant (PIX-14945).
+- [#10431](https://github.com/1024pix/pix/pull/10431) [FEATURE] Séparer les schémas d'éléments acceptés dans le stepper par rapport au component element (PIX-15063) .
+- [#10430](https://github.com/1024pix/pix/pull/10430) [FEATURE] - Traductions manquantes NL et ES Pix App (PIX-14193).
+- [#10438](https://github.com/1024pix/pix/pull/10438) [FEATURE] Unifier les dossiers module/modulix dans l'appli (PIX-15028).
+
+### :building_construction: Tech
+- [#10444](https://github.com/1024pix/pix/pull/10444) [TECH] Lancer la CI des PRs au statut draft.
+- [#10426](https://github.com/1024pix/pix/pull/10426) [TECH] Passer les FaIcon en PixIcon sur PixOrga (PIX-15064).
+- [#10424](https://github.com/1024pix/pix/pull/10424) [TECH] Montée de version de Pix UI sur Certif (PIX-15059).
+- [#10429](https://github.com/1024pix/pix/pull/10429) [TECH] Rattrapage des dates de reconciliation (PIX-15026).
+- [#10273](https://github.com/1024pix/pix/pull/10273) [TECH] Standardisation des scripts nodejs.
+- [#10407](https://github.com/1024pix/pix/pull/10407) [TECH] Forcer le HTTPS sur les environnements non dev .
+
+### :bug: Correction
+- [#10448](https://github.com/1024pix/pix/pull/10448) [BUGFIX] Resoudre le souci de crash de la page de fin de parcours (PIX-15093).
+- [#10449](https://github.com/1024pix/pix/pull/10449) [BUGFIX].Rendre réactif le partage de résultat depuis l'onglet formations (PIX-15069).
+- [#10436](https://github.com/1024pix/pix/pull/10436) [BUGFIX] Corriger le lien de renvoi d'email dans la page de réinitialisation de mot de passe (PIX-15060).
+- [#10413](https://github.com/1024pix/pix/pull/10413) [BUGFIX] Rendre plus résistant le changement de mot de passe d'un utilisateur côté API, pour ne plus renvoyer d’erreur 500 (PIX-14971).
+
+### :arrow_up: Montée de version
+- [#10456](https://github.com/1024pix/pix/pull/10456) [BUMP] Update dependency ember-resolver to v13 (mon-pix).
+- [#10428](https://github.com/1024pix/pix/pull/10428) [BUMP] Update dependency ember-resolver to v12 (mon-pix).
+
 ## v4.233.0 (29/10/2024)
 
 
