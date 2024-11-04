@@ -1,5 +1,16 @@
 # Pix Changelog
 
+## v4.235.0 (04/11/2024)
+
+
+### :rocket: Amélioration
+- [#10433](https://github.com/1024pix/pix/pull/10433) [FEATURE] Gestion des boutons et erreurs dans les formulaires d'authentification (PIX-15058).
+- [#10452](https://github.com/1024pix/pix/pull/10452) [FEATURE] Modifier le ton et la voix des pages d'authentification (PIX-15062).
+- [#10435](https://github.com/1024pix/pix/pull/10435) [FEATURE] Ajustements sur les mires d'inscription/connexion (pix-15056).
+
+### :building_construction: Tech
+- [#10447](https://github.com/1024pix/pix/pull/10447) [TECH] Documenter la variable d'env `SEEDS_CONTEXT`.
+
 ## v4.234.0 (31/10/2024)
 
 
