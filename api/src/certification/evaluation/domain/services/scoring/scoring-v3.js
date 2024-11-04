@@ -64,6 +64,7 @@ export const handleV3CertificationScoring = async ({
     locale,
   );
 
+  _restoreCalibrationValues(certificationChallengesForScoring, answeredChallenges);
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
 
   const abortReason = certificationCourse.getAbortReason();
@@ -126,6 +127,14 @@ export const handleV3CertificationScoring = async ({
 
   return certificationCourse;
 };
+
+function _restoreCalibrationValues(certificationChallengesForScoring, answeredChallenges) {
+  certificationChallengesForScoring.forEach((certificationChallengeForScoring) => {
+    const answeredChallenge = answeredChallenges.find(({ id }) => id === certificationChallengeForScoring.id);
+    answeredChallenge.discriminant = certificationChallengeForScoring.discriminant;
+    answeredChallenge.difficulty = certificationChallengeForScoring.difficulty;
+  });
+}
 
 function _createV3AssessmentResult({
   allAnswers,

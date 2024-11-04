@@ -50,8 +50,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
       competenceMarkRepository = { save: sinon.stub().rejects(new Error('Args mismatch')) };
       flashAlgorithmConfigurationRepository = { getMostRecentBeforeDate: sinon.stub() };
       flashAlgorithmService = {
-        getCapacityAndErrorRate: sinon.stub().rejects(new Error('Args mismatch')),
-        getCapacityAndErrorRateHistory: sinon.stub().rejects(new Error('Args mismatch')),
+        getCapacityAndErrorRate: sinon.stub().callsFake((a) => {
+          throw new Error(`Args mismatch, was called with ${JSON.stringify(a.challenges)}`);
+        }),
+        getCapacityAndErrorRateHistory: sinon.stub().callsFake(() => {
+          throw new Error('Args mismatch');
+        }),
       };
       scoringDegradationService = { downgradeCapacity: sinon.stub().rejects(new Error('Args mismatch')) };
       scoringConfigurationRepository = {
@@ -1032,6 +1036,18 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               capacityHistory,
             });
 
+            const challengeExcludedFromCalibration = domainBuilder.buildChallenge({
+              ...answeredChallenges[0],
+              discriminant: null,
+              difficulty: null,
+            });
+
+            const challengesAfterCalibration = answeredChallenges.slice(1);
+
+            challengeRepository.getMany
+              .withArgs(answeredChallenges.map((e) => e.id))
+              .returns([challengeExcludedFromCalibration, ...challengesAfterCalibration]);
+
             certificationChallengeForScoringRepository.getByCertificationCourseId
               .withArgs({ certificationCourseId })
               .resolves(certificationChallengesForScoring);
@@ -1044,7 +1060,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               .resolves(baseFlashAlgorithmConfiguration);
             flashAlgorithmService.getCapacityAndErrorRate
               .withArgs({
-                challenges: allChallenges,
+                challenges: answeredChallenges,
                 allAnswers: answers,
                 capacity: sinon.match.number,
                 variationPercent: undefined,
@@ -1068,6 +1084,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                   capacity: expectedCapacity,
                 },
               ]);
+
+            challengeRepository.findFlashCompatibleWithoutLocale
+              .withArgs({
+                useObsoleteChallenges: true,
+              })
+              .returns(challengesAfterCalibration);
 
             scoringConfigurationRepository.getLatestByDateAndLocale
               .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
