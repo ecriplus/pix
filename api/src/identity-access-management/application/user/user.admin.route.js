@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import { userController } from '../../../../lib/application/users/user-controller.js';
 import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { SUPPORTED_LOCALES } from '../../../shared/domain/constants.js';
@@ -145,7 +144,7 @@ export const userAdminRoutes = [
             ])(request, h),
         },
       ],
-      handler: (request, h) => userController.getUserDetailsForAdmin(request, h),
+      handler: (request, h) => userAdminController.getUserDetails(request, h),
       notes: [
         '- **Cette route est restreinte aux utilisateurs administrateurs**\n' +
           "- Elle permet de récupérer le détail d'un utilisateur dans un contexte d'administration",

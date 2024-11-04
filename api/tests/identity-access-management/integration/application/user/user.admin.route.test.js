@@ -1,4 +1,3 @@
-import { userController } from '../../../../../lib/application/users/user-controller.js';
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
 import { userAdminController } from '../../../../../src/identity-access-management/application/user/user.admin.controller.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
@@ -147,7 +146,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
     it('returns an HTTP status code 200', async function () {
       // given
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
-      sinon.stub(userController, 'getUserDetailsForAdmin').resolves('ok');
+      sinon.stub(userAdminController, 'getUserDetails').resolves('ok');
 
       // when
       const response = await httpTestServer.request('GET', '/api/admin/users/8');
@@ -155,7 +154,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       // then
       expect(response.statusCode).to.equal(200);
       sinon.assert.calledOnce(securityPreHandlers.hasAtLeastOneAccessOf);
-      sinon.assert.calledOnce(userController.getUserDetailsForAdmin);
+      sinon.assert.calledOnce(userAdminController.getUserDetails);
     });
 
     it('returns an HTTP status code 403', async function () {

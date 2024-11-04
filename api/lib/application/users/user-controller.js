@@ -2,6 +2,7 @@ import { usecases as devcompUsecases } from '../../../src/devcomp/domain/usecase
 import * as trainingSerializer from '../../../src/devcomp/infrastructure/serializers/jsonapi/training-serializer.js';
 import { evaluationUsecases } from '../../../src/evaluation/domain/usecases/index.js';
 import * as scorecardSerializer from '../../../src/evaluation/infrastructure/serializers/jsonapi/scorecard-serializer.js';
+import { usecases as identityAccessManagementUsecases } from '../../../src/identity-access-management/domain/usecases/index.js';
 import * as userDetailsForAdminSerializer from '../../../src/identity-access-management/infrastructure/serializers/jsonapi/user-details-for-admin.serializer.js';
 import * as campaignParticipationSerializer from '../../../src/prescription/campaign-participation/infrastructure/serializers/jsonapi/campaign-participation-serializer.js';
 import * as userSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/user-serializer.js';
@@ -12,12 +13,6 @@ import * as campaignParticipationOverviewSerializer from '../../infrastructure/s
 import * as certificationCenterMembershipSerializer from '../../infrastructure/serializers/jsonapi/certification-center-membership-serializer.js';
 import * as userAnonymizedDetailsForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-anonymized-details-for-admin-serializer.js';
 import * as userOrganizationForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-organization-for-admin-serializer.js';
-
-const getUserDetailsForAdmin = async function (request, h, dependencies = { userDetailsForAdminSerializer }) {
-  const userId = request.params.id;
-  const userDetailsForAdmin = await usecases.getUserDetailsForAdmin({ userId });
-  return dependencies.userDetailsForAdminSerializer.serialize(userDetailsForAdmin);
-};
 
 const rememberUserHasSeenAssessmentInstructions = async function (request, h, dependencies = { userSerializer }) {
   const authenticatedUserId = request.auth.credentials.userId;
@@ -121,7 +116,7 @@ const anonymizeUser = async function (request, h, dependencies = { userAnonymize
     });
   });
 
-  const anonymizedUser = await usecases.getUserDetailsForAdmin({ userId: userToAnonymizeId });
+  const anonymizedUser = await identityAccessManagementUsecases.getUserDetailsForAdmin({ userId: userToAnonymizeId });
 
   return h.response(dependencies.userAnonymizedDetailsForAdminSerializer.serialize(anonymizedUser)).code(200);
 };
@@ -196,7 +191,6 @@ const userController = {
   getCampaignParticipationOverviews,
   getCampaignParticipations,
   getUserCampaignParticipationToCampaign,
-  getUserDetailsForAdmin,
   reassignAuthenticationMethods,
   rememberUserHasSeenAssessmentInstructions,
   rememberUserHasSeenChallengeTooltip,
