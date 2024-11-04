@@ -1,5 +1,6 @@
-import * as moduleUnderTest from '../../../../lib/application/user-orga-settings/index.js';
-import { userOrgaSettingsController } from '../../../../lib/application/user-orga-settings/user-orga-settings-controller.js';
+import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
+import { teamRoutes } from '../../../../src/team/application/routes.js';
+import { userOrgaSettingsController } from '../../../../src/team/application/user-orga-settings.controller.js';
 import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Unit | Router | user-orga-settings-router', function () {
@@ -9,9 +10,12 @@ describe('Unit | Router | user-orga-settings-router', function () {
 
     it('should exist', async function () {
       // given
+      sinon
+        .stub(securityPreHandlers, 'checkRequestedUserIsAuthenticatedUser')
+        .callsFake((request, h) => h.response(true));
       sinon.stub(userOrgaSettingsController, 'createOrUpdate').returns('ok');
       const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
+      await httpTestServer.register(teamRoutes);
 
       const method = 'PUT';
       const url = `/api/user-orga-settings/${userId}`;
@@ -39,7 +43,7 @@ describe('Unit | Router | user-orga-settings-router', function () {
       it('returns a 403 HTTP status code', async function () {
         // given
         const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
+        await httpTestServer.register(teamRoutes);
 
         const method = 'PUT';
         const url = `/api/user-orga-settings/99`;
@@ -68,7 +72,7 @@ describe('Unit | Router | user-orga-settings-router', function () {
       it('should be mandatory', async function () {
         // given
         const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
+        await httpTestServer.register(teamRoutes);
 
         const method = 'PUT';
         const url = `/api/user-orga-settings/${userId}`;
@@ -84,7 +88,7 @@ describe('Unit | Router | user-orga-settings-router', function () {
       it('should contain relationships.organization.data.id', async function () {
         // given
         const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
+        await httpTestServer.register(teamRoutes);
 
         const method = 'PUT';
         const url = `/api/user-orga-settings/${userId}`;
@@ -111,7 +115,7 @@ describe('Unit | Router | user-orga-settings-router', function () {
       it('should contain relationships.organization.data.id as number', async function () {
         // given
         const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
+        await httpTestServer.register(teamRoutes);
 
         const method = 'PUT';
         const url = `/api/user-orga-settings/${userId}`;

@@ -12,7 +12,6 @@ import * as scoOrganizationLearners from './application/sco-organization-learner
 import * as sessions from './application/sessions/index.js';
 import * as tags from './application/tags/index.js';
 import * as targetProfiles from './application/target-profiles/index.js';
-import * as userOrgaSettings from './application/user-orga-settings/index.js';
 import * as users from './application/users/index.js';
 
 const routes = [
@@ -30,7 +29,6 @@ const routes = [
   tags,
   targetProfiles,
   frameworks,
-  userOrgaSettings,
   users,
 ];
 

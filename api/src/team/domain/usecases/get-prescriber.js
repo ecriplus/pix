@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { UserNotMemberOfOrganizationError } from '../../../shared/domain/errors.js';
+import { UserNotMemberOfOrganizationError } from '../errors.js';
 
 /**
  * @param {{

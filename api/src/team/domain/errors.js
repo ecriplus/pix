@@ -30,6 +30,12 @@ class UncancellableOrganizationInvitationError extends DomainError {
   }
 }
 
+class UserNotMemberOfOrganizationError extends DomainError {
+  constructor(message = "L'utilisateur n'est pas membre de l'organisation.") {
+    super(message);
+  }
+}
+
 class MembershipNotFound extends DomainError {}
 
 class OrganizationArchivedError extends DomainError {
@@ -45,4 +51,5 @@ export {
   OrganizationArchivedError,
   UncancellableCertificationCenterInvitationError,
   UncancellableOrganizationInvitationError,
+  UserNotMemberOfOrganizationError,
 };

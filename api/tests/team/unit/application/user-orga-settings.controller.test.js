@@ -1,5 +1,5 @@
-import { userOrgaSettingsController } from '../../../../lib/application/user-orga-settings/user-orga-settings-controller.js';
-import { usecases } from '../../../../lib/domain/usecases/index.js';
+import { userOrgaSettingsController } from '../../../../src/team/application/user-orga-settings.controller.js';
+import { usecases } from '../../../../src/team/domain/usecases/index.js';
 import { expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Controller | user-orga-settings-controller', function () {
