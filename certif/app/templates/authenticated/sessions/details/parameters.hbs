@@ -121,10 +121,14 @@
   </div>
 
   <div class="session-details-buttons">
+    <PixButtonLink
+      @route="authenticated.sessions.update"
+      @model={{this.session.id}}
+      aria-label={{t "pages.sessions.detail.parameters.actions.update" sessionId=this.session.id}}
+    >
+      {{t "common.actions.update"}}
+    </PixButtonLink>
     {{#if this.sessionHasStarted}}
-      <PixButtonLink @route="authenticated.sessions.update" @model={{this.session.id}}>
-        {{t "common.actions.update"}}
-      </PixButtonLink>
       {{#if this.sessionManagement.isFinalized}}
         <p class="session-details-row__session-finalized-warning">
           {{t "pages.sessions.detail.parameters.finalization-info"}}
@@ -134,14 +138,6 @@
           {{t "pages.sessions.detail.parameters.actions.finalizing"}}
         </PixButtonLink>
       {{/if}}
-    {{else}}
-      <PixButtonLink
-        @route="authenticated.sessions.update"
-        @model={{this.session.id}}
-        aria-label={{t "pages.sessions.detail.parameters.actions.update" sessionId=this.session.id}}
-      >
-        {{t "common.actions.update"}}
-      </PixButtonLink>
     {{/if}}
   </div>
 
