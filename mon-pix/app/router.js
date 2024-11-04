@@ -139,6 +139,8 @@ Router.map(function () {
     this.route('update-sco-record', { path: '/:temporary_key' });
   });
 
+  this.route('companion', { path: '/verification-extension-certification' });
+
   // XXX: this route is used for any request that did not match any of the previous routes. SHOULD ALWAYS BE THE LAST ONE
   this.route('not-found', { path: '/*path' });
 });

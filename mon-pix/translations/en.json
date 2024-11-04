@@ -69,10 +69,20 @@
       "read-message": "Read the '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'Pix terms of use'</a>' and the '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'personal data protection policy'</a>'."
     },
     "companion": {
+      "check": {
+        "detected": {
+          "description": "Pix Companion extension{version}<br />installed and activated.",
+          "version": " (version {version})"
+        },
+        "not-detected": {
+          "description": "Pix Companion extension not installed/activated or in an obsolete version,<br /> which is no longer supported for certification session access.",
+          "link": "Go to documentation"
+        }
+      },
       "not-detected": {
         "description": " The extension may not be installed or enabled. Read the following documentation in order to resume your certification session.  If necessary ask your invigilator.",
         "link": "Go to documentation",
-        "title": "The Pix Companion extension<br /> is not detected"
+        "title": "The Pix Companion extension<br />is not detected"
       }
     },
     "data-protection-policy-information-banner": {
