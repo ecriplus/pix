@@ -129,14 +129,20 @@
       {{t "common.actions.update"}}
     </PixButtonLink>
     {{#if this.sessionHasStarted}}
-      {{#if this.sessionManagement.isFinalized}}
+      {{#if this.isSessionFinalizationTemporarilyBlocked}}
         <p class="session-details-row__session-finalized-warning">
-          {{t "pages.sessions.detail.parameters.finalization-info"}}
+          {{t "pages.sessions.detail.parameters.finalization.temporarily-blocked"}}
         </p>
       {{else}}
-        <PixButtonLink @route="authenticated.sessions.finalize" @model={{this.session.id}} class="push-right">
-          {{t "pages.sessions.detail.parameters.actions.finalizing"}}
-        </PixButtonLink>
+        {{#if this.sessionManagement.isFinalized}}
+          <p class="session-details-row__session-finalized-warning">
+            {{t "pages.sessions.detail.parameters.finalization-info"}}
+          </p>
+        {{else}}
+          <PixButtonLink @route="authenticated.sessions.finalize" @model={{this.session.id}} class="push-right">
+            {{t "pages.sessions.detail.parameters.actions.finalizing"}}
+          </PixButtonLink>
+        {{/if}}
       {{/if}}
     {{/if}}
   </div>
