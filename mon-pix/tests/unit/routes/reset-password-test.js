@@ -83,14 +83,16 @@ module('Unit | Route | reset-password', function (hooks) {
       });
     });
     module('when password reset demand is not valid', function () {
-      module('when error status is equal to 401', function () {
-        test('it adds an error in errors service and replace current route with "reset-password-demand"', async function (assert) {
-          // given
+      module('when error status is equal to 401', function (hooks) {
+        const errorTranslationKey = 'pages.reset-password.error.expired-demand';
+        let errorsService, replaceWithStub, route, routerStub;
+
+        hooks.beforeEach(function () {
           const errors = [{ status: 401 }];
-          const errorsService = this.owner.lookup('service:errors');
-          const route = this.owner.lookup('route:reset-password');
-          const replaceWithStub = sinon.stub();
-          const routerStub = Service.create({
+          errorsService = this.owner.lookup('service:errors');
+          route = this.owner.lookup('route:reset-password');
+          replaceWithStub = sinon.stub();
+          routerStub = Service.create({
             replaceWith: replaceWithStub,
           });
 
@@ -98,6 +100,16 @@ module('Unit | Route | reset-password', function (hooks) {
           route.set('store', storeStub);
           route.set('router', routerStub);
 
+          class FeatureTogglesStub extends Service {
+            get featureToggles() {
+              return { isNewAuthenticationDesignEnabled: false };
+            }
+          }
+
+          this.owner.register('service:feature-toggles', FeatureTogglesStub);
+        });
+
+        test('it replaces current route with "reset-password-demand"', async function (assert) {
           // when
           await route.model(params);
 
@@ -105,6 +117,33 @@ module('Unit | Route | reset-password', function (hooks) {
           sinon.assert.calledOnceWithExactly(replaceWithStub, 'password-reset-demand');
           assert.strictEqual(errorsService.errors.length, 1);
           assert.strictEqual(errorsService.errors[0], t('pages.reset-password.error.expired-demand'));
+        });
+
+        test('it adds an error translation key in error service when "New authentication design" feature toggle is enabled', async function (assert) {
+          // when
+          await route.model(params);
+
+          // then
+          assert.strictEqual(errorsService.errors.length, 1);
+          assert.strictEqual(errorsService.errors[0], t(errorTranslationKey));
+        });
+
+        test('it adds an error with its translation in error service when "New authentication design" feature toggle is disabled', async function (assert) {
+          // given
+          class FeatureTogglesStub extends Service {
+            get featureToggles() {
+              return { isNewAuthenticationDesignEnabled: true };
+            }
+          }
+
+          this.owner.register('service:feature-toggles', FeatureTogglesStub);
+
+          // when
+          await route.model(params);
+
+          // then
+          assert.strictEqual(errorsService.errors.length, 1);
+          assert.strictEqual(errorsService.errors[0], errorTranslationKey);
         });
       });
     });
