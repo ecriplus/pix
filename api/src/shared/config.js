@@ -210,6 +210,7 @@ const configuration = (function () {
       isNewAuthenticationDesignEnabled: toBoolean(process.env.FT_NEW_AUTHENTICATION_DESIGN_ENABLED),
       isPix1dEnabled: toBoolean(process.env.FT_PIX_1D_ENABLED),
       isPixCompanionEnabled: toBoolean(process.env.FT_PIX_COMPANION_ENABLED),
+      isSelfAccountDeletionEnabled: toBoolean(process.env.FT_SELF_ACCOUNT_DELETION),
       isQuestEnabled: toBoolean(process.env.FT_ENABLE_QUESTS),
       isTextToSpeechButtonEnabled: toBoolean(process.env.FT_ENABLE_TEXT_TO_SPEECH_BUTTON),
       isV3EligibilityCheckEnabled: toBoolean(process.env.FT_ENABLE_V3_ELIGIBILITY_CHECK),
@@ -413,11 +414,11 @@ const configuration = (function () {
     config.featureToggles.isNeedToAdjustCertificationAccessibilityEnabled = false;
     config.featureToggles.isPix1dEnabled = true;
     config.featureToggles.isPixCompanionEnabled = false;
+    config.featureToggles.isSelfAccountDeletionEnabled = false;
     config.featureToggles.isTextToSpeechButtonEnabled = false;
     config.featureToggles.isV3EligibilityCheckEnabled = false;
     config.featureToggles.showNewResultPage = false;
     config.featureToggles.showExperimentalMissions = false;
-
 
     config.mailing.enabled = false;
     config.mailing.provider = 'brevo';
