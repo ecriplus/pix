@@ -894,6 +894,9 @@
     "missions": {
       "title": "Missions",
       "list": {
+        "actions": {
+          "see-mission-details": "Voir le détail"
+        },
         "aria-label": "Mission",
         "banner": {
           "copypaste-container": {
@@ -927,6 +930,7 @@
         "caption": "Liste des missions",
         "empty-state": "Il n'y a pas de missions",
         "headers": {
+          "actions": "Actions",
           "competences": "Compétences du CRCN travaillées",
           "name": "Mission",
           "started-by": "Commencé par"

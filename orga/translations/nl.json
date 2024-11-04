@@ -922,7 +922,11 @@
         "headers": {
           "competences": "Vaardigheden waaraan is gewerkt",
           "name": "Opdracht",
-          "started-by": "Gestart door"
+          "started-by": "Gestart door",
+          "actions": "Acties"
+        },
+        "actions": {
+          "see-mission-details": "Zie details"
         },
         "no-division": "Geen klas",
         "non-admin": {

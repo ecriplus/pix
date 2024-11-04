@@ -888,6 +888,9 @@
     "missions": {
       "title": "Missions",
       "list": {
+        "actions": {
+          "see-mission-details": "See details"
+        },
         "aria-label": "Mission",
         "banner": {
           "copypaste-container": {
@@ -921,6 +924,7 @@
         "caption": "List of missions",
         "empty-state": "There is not any mission",
         "headers": {
+          "actions": "Actions",
           "competences": "Targeted DigComp competence",
           "name": "Mission",
           "started-by": "Started by"
