@@ -1583,7 +1583,10 @@
       "grain": {
         "tag": {
           "activity": "activiteit",
-          "lesson": "les"
+          "lesson": "les",
+          "discovery": "ontdekking",
+          "challenge": "uitdaging",
+          "summary": "samenvatting"
         }
       },
       "modals": {

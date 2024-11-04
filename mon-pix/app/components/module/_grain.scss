@@ -45,7 +45,7 @@ $grain-card-border-radius: var(--pix-spacing-4x);
     justify-content: flex-end;
   }
 
-  &--lesson {
+  &--lesson, &--discovery, &--summary {
     background: var(--modulix-lesson-card-background);
 
     &__tag {
@@ -57,7 +57,7 @@ $grain-card-border-radius: var(--pix-spacing-4x);
     }
   }
 
-  &--activity {
+  &--activity, &--challenge {
     background: var(--modulix-activity-card-background);
 
     &__tag {

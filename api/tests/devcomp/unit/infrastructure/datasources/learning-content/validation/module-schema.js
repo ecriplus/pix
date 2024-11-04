@@ -73,7 +73,7 @@ const componentStepperSchema = Joi.object({
 
 const grainSchema = Joi.object({
   id: uuidSchema,
-  type: Joi.string().valid('lesson', 'activity').required(),
+  type: Joi.string().valid('lesson', 'activity', 'discovery', 'challenge', 'summary').required(),
   title: htmlNotAllowedSchema.required(),
   components: Joi.array()
     .items(
