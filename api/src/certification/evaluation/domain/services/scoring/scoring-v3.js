@@ -55,8 +55,13 @@ export const handleV3CertificationScoring = async ({
   const allChallenges = await challengeRepository.findFlashCompatibleWithoutLocale({
     useObsoleteChallenges: true,
   });
+
   const certificationChallengesForScoring = await certificationChallengeForScoringRepository.getByCertificationCourseId(
     { certificationCourseId },
+  );
+  const answeredChallenges = await challengeRepository.getMany(
+    certificationChallengesForScoring.map((challengeForScoring) => challengeForScoring.id),
+    locale,
   );
 
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
@@ -84,7 +89,7 @@ export const handleV3CertificationScoring = async ({
     // so that in can be used during the assessment result creation
     allAnswers: [...candidateAnswers],
     allChallenges,
-    challenges: certificationChallengesForScoring,
+    challenges: answeredChallenges,
     maxReachableLevelOnCertificationDate: certificationCourse.getMaxReachableLevelOnCertificationDate(),
     v3CertificationScoring,
     scoringDegradationService,
