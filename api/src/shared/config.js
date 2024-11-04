@@ -198,23 +198,24 @@ const configuration = (function () {
       scoAccountRecoveryKeyLifetimeMinutes: process.env.SCO_ACCOUNT_RECOVERY_KEY_LIFETIME_MINUTES,
     },
     featureToggles: {
-      isV3EligibilityCheckEnabled: toBoolean(process.env.FT_ENABLE_V3_ELIGIBILITY_CHECK),
       deprecatePoleEmploiPushNotification: toBoolean(process.env.DEPRECATE_PE_PUSH_NOTIFICATION),
       isAlwaysOkValidateNextChallengeEndpointEnabled: toBoolean(
         process.env.FT_ALWAYS_OK_VALIDATE_NEXT_CHALLENGE_ENDPOINT,
       ),
+      isAsyncQuestRewardingCalculationEnabled: toBoolean(process.env.FT_ENABLE_ASYNC_QUESTS_REWARDS_CALCULATION),
       isCertificationTokenScopeEnabled: toBoolean(process.env.FT_ENABLE_CERTIF_TOKEN_SCOPE),
       isNeedToAdjustCertificationAccessibilityEnabled: toBoolean(
         process.env.FT_ENABLE_NEED_TO_ADJUST_CERTIFICATION_ACCESSIBILITY,
       ),
-      isQuestEnabled: toBoolean(process.env.FT_ENABLE_QUESTS),
-      isAsyncQuestRewardingCalculationEnabled: toBoolean(process.env.FT_ENABLE_ASYNC_QUESTS_REWARDS_CALCULATION),
       isNewAuthenticationDesignEnabled: toBoolean(process.env.FT_NEW_AUTHENTICATION_DESIGN_ENABLED),
       isPix1dEnabled: toBoolean(process.env.FT_PIX_1D_ENABLED),
+      isPixCompanionEnabled: toBoolean(process.env.FT_PIX_COMPANION_ENABLED),
+      isQuestEnabled: toBoolean(process.env.FT_ENABLE_QUESTS),
       isTextToSpeechButtonEnabled: toBoolean(process.env.FT_ENABLE_TEXT_TO_SPEECH_BUTTON),
+      isV3EligibilityCheckEnabled: toBoolean(process.env.FT_ENABLE_V3_ELIGIBILITY_CHECK),
       showExperimentalMissions: toBoolean(process.env.FT_SHOW_EXPERIMENTAL_MISSIONS),
       showNewCampaignPresentationPage: toBoolean(process.env.FT_SHOW_NEW_CAMPAIGN_PRESENTATION_PAGE),
-      isPixCompanionEnabled: toBoolean(process.env.FT_PIX_COMPANION_ENABLED),
+      showNewResultPage: toBoolean(process.env.FT_SHOW_NEW_RESULT_PAGE),
     },
     hapi: {
       options: {},
@@ -406,16 +407,17 @@ const configuration = (function () {
     config.features.pixCertifScoBlockedAccessDateLycee = null;
     config.features.pixCertifScoBlockedAccessDateCollege = null;
 
-    config.featureToggles.isV3EligibilityCheckEnabled = false;
-    config.featureToggles.isAlwaysOkValidateNextChallengeEndpointEnabled = false;
-    config.featureToggles.isPix1dEnabled = true;
-    config.featureToggles.isCertificationTokenScopeEnabled = false;
-    config.featureToggles.isTextToSpeechButtonEnabled = false;
     config.featureToggles.deprecatePoleEmploiPushNotification = false;
+    config.featureToggles.isAlwaysOkValidateNextChallengeEndpointEnabled = false;
+    config.featureToggles.isCertificationTokenScopeEnabled = false;
     config.featureToggles.isNeedToAdjustCertificationAccessibilityEnabled = false;
-    config.featureToggles.showNewCampaignPresentationPage = false;
-    config.featureToggles.showExperimentalMissions = false;
+    config.featureToggles.isPix1dEnabled = true;
     config.featureToggles.isPixCompanionEnabled = false;
+    config.featureToggles.isTextToSpeechButtonEnabled = false;
+    config.featureToggles.isV3EligibilityCheckEnabled = false;
+    config.featureToggles.showNewResultPage = false;
+    config.featureToggles.showExperimentalMissions = false;
+
 
     config.mailing.enabled = false;
     config.mailing.provider = 'brevo';
