@@ -1,5 +1,23 @@
 # Pix Changelog
 
+## v4.236.0 (04/11/2024)
+
+
+### :rocket: Amélioration
+- [#10458](https://github.com/1024pix/pix/pull/10458) [FEATURE] Nouvelle catégorisation des grains (PIX-14867).
+- [#10453](https://github.com/1024pix/pix/pull/10453) [FEATURE] Renvoyer les infos du précédent pixScore, sa date de partage et l'évolution dans la route résultats d'une campagne de collecte de profils (PIX-14805).
+- [#10457](https://github.com/1024pix/pix/pull/10457) [FEATURE] Créer la page de vérification d'extension Pix Companion (PIX-15113).
+
+### :building_construction: Tech
+- [#10446](https://github.com/1024pix/pix/pull/10446) [TECH] :wrench: Configure matomo pour pix junior (PIX-14824).
+- [#10372](https://github.com/1024pix/pix/pull/10372) [TECH] :package: mise à jour des dépendances de paquet utilisé chez pix junior (PIX-14976).
+- [#10451](https://github.com/1024pix/pix/pull/10451) [TECH] Suppression du FT_ENABLE_PIX_PLUS_LOWER_LEVEL (PIX-15053).
+- [#10461](https://github.com/1024pix/pix/pull/10461) [TECH] Amélioration et nettoyage des tests du scoring v3.
+
+### :bug: Correction
+- [#10455](https://github.com/1024pix/pix/pull/10455) [BUGFIX] Corriger l'affichage de la page Participant External Id (PIX-15141).
+- [#10459](https://github.com/1024pix/pix/pull/10459) [BUGFIX] Corriger la couleur de l'icone sur le lien se déconnecter dans PixOrga (PIX-14146).
+
 ## v4.235.0 (04/11/2024)
 
 
