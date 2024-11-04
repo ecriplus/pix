@@ -71,7 +71,7 @@
           <Table::Header scope="col">{{t "pages.missions.list.headers.name"}}</Table::Header>
           <Table::Header scope="col">{{t "pages.missions.list.headers.competences"}}</Table::Header>
           <Table::Header scope="col">{{t "pages.missions.list.headers.started-by"}}</Table::Header>
-          <Table::Header scope="col">{{t "pages.missions.list.headers.actions"}}</Table::Header>
+          <Table::Header scope="col" @align="center">{{t "pages.missions.list.headers.actions"}}</Table::Header>
         </tr>
       </thead>
       <tbody>
@@ -95,9 +95,9 @@
               {{/if}}
             </td>
             <td>
-              <a href="#" {{on "click" (fn this.goToMissionDetails mission.id)}}>{{t
-                  "pages.missions.list.actions.see-mission-details"
-                }}</a>
+              <PixButtonLink @route="authenticated.missions.mission" @model={{mission.id}} @variant="tertiary">
+                {{t "pages.missions.list.actions.see-mission-details"}}
+              </PixButtonLink>
             </td>
           </tr>
         {{/each}}
