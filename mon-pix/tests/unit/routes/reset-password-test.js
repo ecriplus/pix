@@ -3,7 +3,7 @@ import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-module('Unit | Route | changer mot de passe', function (hooks) {
+module('Unit | Route | reset-password', function (hooks) {
   setupTest(hooks);
 
   module('Route behavior', function (hooks) {
