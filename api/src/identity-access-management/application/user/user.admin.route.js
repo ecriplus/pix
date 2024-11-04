@@ -1,5 +1,7 @@
 import Joi from 'joi';
 
+import { userController } from '../../../../lib/application/users/user-controller.js';
+import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { SUPPORTED_LOCALES } from '../../../shared/domain/constants.js';
 import { AVAILABLE_LANGUAGES } from '../../../shared/domain/services/language-service.js';
@@ -118,6 +120,37 @@ export const userAdminRoutes = [
         "- Permet à un administrateur de mettre à jour certains attributs d'un utilisateur identifié par son identifiant",
       ],
       tags: ['api', 'admin', 'identity-access-management'],
+    },
+  },
+  {
+    method: 'GET',
+    path: '/api/admin/users/{id}',
+    config: {
+      validate: {
+        params: Joi.object({
+          id: identifiersType.userId,
+        }),
+        failAction: (request, h) => {
+          return sendJsonApiError(new BadRequestError("L'identifiant de l'utilisateur n'est pas au bon format."), h);
+        },
+      },
+      pre: [
+        {
+          method: (request, h) =>
+            securityPreHandlers.hasAtLeastOneAccessOf([
+              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+              securityPreHandlers.checkAdminMemberHasRoleCertif,
+              securityPreHandlers.checkAdminMemberHasRoleSupport,
+              securityPreHandlers.checkAdminMemberHasRoleMetier,
+            ])(request, h),
+        },
+      ],
+      handler: (request, h) => userController.getUserDetailsForAdmin(request, h),
+      notes: [
+        '- **Cette route est restreinte aux utilisateurs administrateurs**\n' +
+          "- Elle permet de récupérer le détail d'un utilisateur dans un contexte d'administration",
+      ],
+      tags: ['api', 'admin', 'identity-access-management', 'user'],
     },
   },
 ];
