@@ -26,7 +26,6 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-certification-token-scope-enabled': false,
             'is-new-authentication-design-enabled': false,
             'is-pix1d-enabled': true,
-            'is-pix-plus-lower-lever-enabled': false,
             'is-need-to-adjust-certification-accessibility-enabled': false,
             'is-text-to-speech-button-enabled': false,
             'show-new-campaign-presentation-page': false,
