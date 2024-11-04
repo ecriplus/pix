@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../../lib/domain/usecases/index.js';
 import { userAdminController } from '../../../../../src/identity-access-management/application/user/user.admin.controller.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
@@ -168,14 +167,14 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
     beforeEach(function () {
       request = { params: { id: 123 } };
 
-      sinon.stub(libUsecases, 'getUserDetailsForAdmin');
+      sinon.stub(usecases, 'getUserDetailsForAdmin');
       const userDetailsForAdminSerializer = { serialize: sinon.stub() };
       dependencies = { userDetailsForAdminSerializer };
     });
 
     it('gets the specified user', async function () {
       // given
-      libUsecases.getUserDetailsForAdmin.withArgs({ userId: 123 }).resolves('userDetail');
+      usecases.getUserDetailsForAdmin.withArgs({ userId: 123 }).resolves('userDetail');
       dependencies.userDetailsForAdminSerializer.serialize.withArgs('userDetail').returns('ok');
 
       // when

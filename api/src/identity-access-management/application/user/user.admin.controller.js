@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as userDetailsForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-details-for-admin.serializer.js';
 import * as userForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-for-admin.serializer.js';
@@ -59,7 +58,7 @@ const updateUserDetailsByAdmin = async function (request, h, dependencies = { us
  */
 const getUserDetails = async function (request, h, dependencies = { userDetailsForAdminSerializer }) {
   const userId = request.params.id;
-  const userDetailsForAdmin = await libUsecases.getUserDetailsForAdmin({ userId });
+  const userDetailsForAdmin = await usecases.getUserDetailsForAdmin({ userId });
   return dependencies.userDetailsForAdminSerializer.serialize(userDetailsForAdmin);
 };
 
