@@ -97,7 +97,7 @@ export default class ModulixEmbed extends ModuleElement {
       {{#if this.isSimulatorLaunched}}
         <div class="element-embed__reset">
           <PixButton
-            @iconBefore="rotate-right"
+            @iconBefore="refresh"
             @variant="tertiary"
             @triggerAction={{this.resetEmbed}}
             aria-label="{{t 'pages.modulix.buttons.embed.reset.ariaLabel'}}"
