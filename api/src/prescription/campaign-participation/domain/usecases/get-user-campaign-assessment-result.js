@@ -1,11 +1,5 @@
-// eslint-disable-next-line @eslint-community/eslint-comments/disable-enable-pair
-/* eslint-disable import/no-restricted-paths */
-import * as defaultCompareStageAndAcquiredStagesService from '../../../src/evaluation/domain/services/stages/stage-and-stage-acquisition-comparison-service.js';
-import * as defaultStageAcquisitionRepository from '../../../src/evaluation/infrastructure/repositories/stage-acquisition-repository.js';
-import * as defaultStageRepository from '../../../src/evaluation/infrastructure/repositories/stage-repository.js';
-import { NoCampaignParticipationForUserAndCampaign, NotFoundError } from '../../../src/shared/domain/errors.js';
-import { CampaignParticipationStatuses } from '../../../src/shared/domain/models/index.js';
-import * as defaultParticipantResultRepository from '../../infrastructure/repositories/participant-result-repository.js';
+import { NoCampaignParticipationForUserAndCampaign, NotFoundError } from '../../../../shared/domain/errors.js';
+import { CampaignParticipationStatuses } from '../../../../shared/domain/models/index.js';
 
 const getUserCampaignAssessmentResult = async function ({
   userId,
@@ -14,10 +8,10 @@ const getUserCampaignAssessmentResult = async function ({
   badgeRepository,
   knowledgeElementRepository,
   badgeForCalculationRepository,
-  stageRepository = defaultStageRepository,
-  stageAcquisitionRepository = defaultStageAcquisitionRepository,
-  participantResultRepository = defaultParticipantResultRepository,
-  compareStagesAndAcquiredStages = defaultCompareStageAndAcquiredStagesService,
+  participantResultRepository,
+  stageRepository,
+  stageAcquisitionRepository,
+  compareStagesAndAcquiredStages,
 }) {
   const { SHARED, TO_SHARE } = CampaignParticipationStatuses;
   const campaignParticipationStatus = await participantResultRepository.getCampaignParticipationStatus({
