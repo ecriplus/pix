@@ -41,7 +41,7 @@
       "close": "Sluit",
       "confirm": "Bevestig",
       "lets-go": "Laten we gaan!",
-      "login": "Inloggen bij Pix",
+      "login": "Inloggen",
       "quit": "Verlaat",
       "refresh-page": "Pagina verversen",
       "show-less": "Minder tonen",
@@ -68,6 +68,16 @@
       "read-message": "Lees de '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'gebruiksvoorwaarden'</a>' en de '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'privacybeleid'</a>'."
     },
     "companion": {
+      "check": {
+        "detected": {
+          "description": "{version}<br />Pix Companion-extensie geïnstalleerd en geactiveerd.",
+          "version": "{version}(versie )"
+        },
+        "not-detected": {
+          "description": "Pix Companion-extensie niet geïnstalleerd/geactiveerd of in een verouderde versie,<br /> die niet langer wordt ondersteund voor toegang tot certificeringssessies.",
+          "link": "Toegang tot de documentatie"
+        }
+      },
       "not-detected": {
         "description": "De extensie is mogelijk niet geïnstalleerd of geactiveerd. Raadpleeg het volgende document om uw certificeringssessie te hervatten.  Neem indien nodig contact op met de supervisor.",
         "link": "Toegang tot de documentatie",
@@ -140,10 +150,10 @@
       "login-form": {
         "fields": {
           "login": {
-            "error": "You have not entered your e-mail address or username."
+            "error": "Uw e-mailadres of login is niet ingevuld."
           },
           "password": {
-            "error": "You have not entered your password."
+            "error": "Uw wachtwoord is niet ingevoerd."
           }
         }
       },
@@ -158,14 +168,17 @@
         "searchLabel": "Zoeken op trefwoorden"
       },
       "other-authentication-providers": {
+        "continue-with-featured-identity-provider-link": "Doorgaan met {featuredIdentityProvider}",
+        "login-heading": "Andere verbindingsmethoden",
         "login": {
           "heading": "Andere verbindingsmethoden",
-          "login-with-featured-identity-provider-link": "Doorgaan met {featuredIdentityProvider}"
+          "login-with-featured-identity-provider-link": "Maak verbinding met {featuredIdentityProvider}"
         },
         "select-another-organization-link": "Kies een andere organisatie",
+        "signup-heading": "Andere manieren van registratie",
         "signup": {
           "heading": "Andere manieren van registratie",
-          "signup-with-featured-identity-provider-link": "Doorgaan met {featuredIdentityProvider}"
+          "signup-with-featured-identity-provider-link": "Registreren bij {featuredIdentityProvider}"
         }
       },
       "password-reset-demand-form": {
@@ -181,7 +194,7 @@
           "email": {
             "error-message-invalid": "Uw e-mailadres is ongeldig.",
             "label": "E-mail adres",
-            "placeholder": "Bijvoorbeeld jean.dupont@email.com"
+            "placeholder": "b.v : jan.jansen@email.com"
           }
         },
         "no-email-question": "Geen e-mailadres opgegeven?",
@@ -223,17 +236,17 @@
           "email": {
             "error": "Uw e-mailadres is ongeldig.",
             "label": "E-mail adres",
-            "placeholder": "Bijvoorbeeld jean.dupont@email.fr"
+            "placeholder": "b.v : jan.jansen@email.com"
           },
           "firstname": {
             "error": "Je voornaam is niet ingevuld.",
             "label": "Voornaam",
-            "placeholder": "ex: Jean"
+            "placeholder": "b.v : Jan"
           },
           "lastname": {
             "error": "Je naam is niet ingevuld.",
             "label": "Achternaam",
-            "placeholder": "bijv. Dupont"
+            "placeholder": "b.v : Jansen"
           },
           "legend": "Vereiste informatie voor registratie."
         }
@@ -421,7 +434,7 @@
             "empty-password": "Het wachtwoordveld is verplicht.",
             "invalid-password": "Je wachtwoord moet minstens 8 tekens lang zijn en minstens één hoofdletter, één kleine letter en één cijfer bevatten."
           },
-          "login-button": "Ik ben online.",
+          "login-button": "Ik ben online",
           "password-label": "Wachtwoord"
         },
         "welcome-message": "Welkom terug { firstName }!"
@@ -451,7 +464,7 @@
     },
     "authentication": {
       "login": {
-        "signup-button": "Registreren bij Pix"
+        "signup-button": "Registreren"
       },
       "sso-selection": {
         "signin": {
@@ -656,9 +669,6 @@
             "3": "Klik op \"Ja, ik weet het zeker\".",
             "4": "Bel de supervisor die zal ingrijpen om je te helpen"
           },
-          "paragraph": {
-            "text": "'<strong>'In het geval van een technisch probleem'</strong>' (de afbeelding weigert bijvoorbeeld te worden weergegeven), volg dan deze stappen: '<br><br>' klik op '<strong>'\"Een probleem met de vraag melden\"'</strong>', vervolgens op '\"Ja, ik weet het zeker\" en informeer je supervisor."
-          },
           "text": "'<strong>'In het geval van een technisch probleem'</strong>' (de afbeelding wordt bijvoorbeeld niet weergegeven), volg dan deze stappen:",
           "title": "Wat te doen in geval van een probleem?"
         },
@@ -778,7 +788,6 @@
       "first-title": "Je staat op het punt om aan je certificeringstest te beginnen",
       "link-to-user-certification": "Bekijk mijn certificaten",
       "non-eligible-subscription": "Je komt niet in aanmerking voor {nonEligibleSubscriptionLabel}. Je kunt echter wel je Pix-certificering behalen.",
-      "subscription": "Je bent geregistreerd voor de volgende aanvullende certificering naast de Pix-certificering:",
       "title": "Doe mee aan een certificeringssessie"
     },
     "certifications-list": {
@@ -848,13 +857,10 @@
         "actions": {
           "no-send-feedback": "Nee, ik kom terug op de test",
           "open-close": "Een probleem met de vraag melden",
-          "refresh-page": "Pagina verversen",
           "send-feedback": "Ja, ik weet het zeker"
         },
         "description": "Weet je zeker dat je een probleem wilt melden?",
-        "information": "Als je een probleem meldt, wordt je certificering gepauzeerd totdat de supervisor ingrijpt om je melding te valideren of ongeldig te verklaren.",
-        "problem-banner": "Vertel het je supervisor zodat hij of zij kan uitzoeken wat het probleem is.",
-        "waiting-information": "Wachten op de supervisor..."
+        "information": "Als je een probleem meldt, wordt je certificering gepauzeerd totdat de supervisor ingrijpt om je melding te valideren of ongeldig te verklaren."
       },
       "feedback-panel": {
         "actions": {
@@ -1388,7 +1394,7 @@
         "login-unauthorized-error": "Het ingevoerde e-mailadres en/of wachtwoord is onjuist."
       },
       "login-form": {
-        "button": "Ik ben online.",
+        "button": "Ik ben online",
         "description": "Log in om je bestaande account te koppelen en je eerder beoordeelde vaardigheden op te halen",
         "email": "E-mail adres",
         "password": "Wachtwoord",
@@ -1482,7 +1488,7 @@
         "rgpd-legal-notice": "Als u wilt weten hoe uw gegevens worden verwerkt en wat uw rechten zijn, kunt u het volgende lezen",
         "rgpd-legal-notice-link": "Informatie.",
         "rgpd-legal-notice-url": "https://cloud.pix.fr/s/nqgBodTkbtsGb39",
-        "title": "Ik wil me registreren bij Pix"
+        "title": "Ik wil me registreren"
       },
       "title": "Verbinding maken met Pix"
     },
@@ -1571,10 +1577,10 @@
       "grain": {
         "tag": {
           "activity": "activiteit",
-          "lesson": "les",
+          "challenge": "Uitdaging",
           "discovery": "ontdekking",
-          "challenge": "uitdaging",
-          "summary": "samenvatting"
+          "lesson": "les",
+          "summary": "recap"
         }
       },
       "modals": {
@@ -1757,7 +1763,7 @@
     },
     "sign-in": {
       "actions": {
-        "submit": "Ik ben online."
+        "submit": "Ik ben online"
       },
       "error": {
         "message": "Het e-mailadres of de ingevoerde gebruikersnaam en/of wachtwoord zijn onjuist"
@@ -1766,7 +1772,7 @@
         "legend": "Informatie die nodig is om in te loggen.",
         "login": {
           "label": "E-mailadres of login",
-          "placeholder": "Bijvoorbeeld jean.dupont@email.com"
+          "placeholder": "b.v : jan.jansen@email.com"
         },
         "password": {
           "label": "Wachtwoord"
@@ -1795,7 +1801,7 @@
     },
     "sign-up": {
       "actions": {
-        "login": "Inloggen bij Pix",
+        "login": "Inloggen",
         "submit": "Ik wil graag registreren"
       },
       "errors": {
@@ -2037,7 +2043,7 @@
         "label": "Wachtwoord"
       },
       "first-title": "Wachtwoord resetten",
-      "go-to-login": "Ik ben online.",
+      "go-to-login": "Ik ben online",
       "subtitle": "Kies een nieuw wachtwoord om verder te gaan",
       "title": "Mijn wachtwoord wijzigen",
       "validation": "Je wachtwoord is bijgewerkt."

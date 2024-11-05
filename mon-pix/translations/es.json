@@ -41,7 +41,7 @@
       "close": "Cerrar",
       "confirm": "Confirmar",
       "lets-go": "¡Empecemos!",
-      "login": "Acceder a Pix",
+      "login": "Acceder",
       "quit": "Salir",
       "refresh-page": "Actualizar la página",
       "show-less": "Mostrar menos",
@@ -68,6 +68,16 @@
       "read-message": "Lea las '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'condiciones de uso'</a>' y la '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'política de privacidad'</a>'."
     },
     "companion": {
+      "check": {
+        "detected": {
+          "description": "{version}<br />Extensión Pix Companion instalada y activada.",
+          "version": "{version}(versión )"
+        },
+        "not-detected": {
+          "description": "Extensión Pix Companion no instalada/activada o en una versión obsoleta,<br /> que ya no es compatible para el acceso a la sesión de certificación.",
+          "link": "Acceder a la documentación"
+        }
+      },
       "not-detected": {
         "description": "Es posible que la extensión no esté instalada o activada. Consulte el siguiente documento para reanudar la sesión de certificación.  Si es necesario, póngase en contacto con el supervisor.",
         "link": "Acceder a la documentación",
@@ -140,10 +150,10 @@
       "login-form": {
         "fields": {
           "login": {
-            "error": "You have not entered your e-mail address or username."
+            "error": "No se ha introducido la dirección de correo electrónico o el nombre de usuario."
           },
           "password": {
-            "error": "You have not entered your password."
+            "error": "No se ha introducido la contraseña."
           }
         }
       },
@@ -158,14 +168,17 @@
         "searchLabel": "Búsqueda por palabras clave"
       },
       "other-authentication-providers": {
+        "continue-with-featured-identity-provider-link": "Continuar con {featuredIdentityProvider}",
+        "login-heading": "Otros medios de conexión",
         "login": {
           "heading": "Otros medios de conexión",
-          "login-with-featured-identity-provider-link": "Continuar con {featuredIdentityProvider}"
+          "login-with-featured-identity-provider-link": "Conectar con {featuredIdentityProvider}"
         },
         "select-another-organization-link": "Elegir otra organización",
+        "signup-heading": "Otros medios de registro",
         "signup": {
           "heading": "Otros medios de registro",
-          "signup-with-featured-identity-provider-link": "Continuar con {featuredIdentityProvider}"
+          "signup-with-featured-identity-provider-link": "Regístrese en {featuredIdentityProvider}"
         }
       },
       "password-reset-demand-form": {
@@ -181,7 +194,7 @@
           "email": {
             "error-message-invalid": "Tu dirección de correo electrónico no es válida.",
             "label": "Dirección de correo electrónico",
-            "placeholder": "Por ejemplo: jean.dupont@email.com"
+            "placeholder": "ej. juan.perez@email.com"
           }
         },
         "no-email-question": "¿No ha facilitado una dirección de correo electrónico?",
@@ -223,7 +236,7 @@
           "email": {
             "error": "Tu dirección de correo electrónico no es válida.",
             "label": "Dirección de correo electrónico",
-            "placeholder": "Por ejemplo: jean.dupont@email.fr"
+            "placeholder": "ej. juan.perez@email.com"
           },
           "firstname": {
             "error": "Su nombre de pila no está rellenado.",
@@ -233,7 +246,7 @@
           "lastname": {
             "error": "No has indicado tus apellidos.",
             "label": "Apellidos",
-            "placeholder": "por ejemplo, Dupont"
+            "placeholder": "ej. Dupont"
           },
           "legend": "Información necesaria para la inscripción."
         }
@@ -451,7 +464,7 @@
     },
     "authentication": {
       "login": {
-        "signup-button": "Registrarse en Pix"
+        "signup-button": "Registrarse"
       },
       "sso-selection": {
         "signin": {
@@ -656,9 +669,6 @@
             "3": "Haga clic en \"Sí, estoy seguro\".",
             "4": "Llama al supervisor que intervendrá para ayudarte"
           },
-          "paragraph": {
-            "text": "'<strong>'En caso de problema técnico'</strong>' (por ejemplo, la imagen se niega a mostrarse), siga estos pasos: '<br><br>' haga clic en '<strong>'\"Informar de un problema con la pregunta\"'</strong>', luego en \"Sí, estoy seguro\" e informe a su supervisor."
-          },
           "text": "'<strong>'En caso de problema técnico'</strong>' (por ejemplo, la imagen se niega a mostrarse), sigue estos pasos:",
           "title": "¿Qué hacer en caso de problema?"
         },
@@ -778,7 +788,6 @@
       "first-title": "Estás a punto de empezar tu prueba de certificación",
       "link-to-user-certification": "Ver mis certificaciones",
       "non-eligible-subscription": "No eres elegible para {nonEligibleSubscriptionLabel}. Sin embargo, puedes presentarte a la certificación Pix.",
-      "subscription": "Además de la certificación Pix, estás inscrito en la siguiente certificación complementaria:",
       "title": "Unirse a una sesión de certificación"
     },
     "certifications-list": {
@@ -848,13 +857,10 @@
         "actions": {
           "no-send-feedback": "No, vuelvo a la prueba",
           "open-close": "Informar de un problema con la pregunta",
-          "refresh-page": "Actualizar la página",
           "send-feedback": "Sí, estoy seguro/a"
         },
         "description": "¿Estás seguro/a de que quieres informar de un problema?",
-        "information": "Al informar de un problema, tu certificación se pausa hasta que el supervisor intervenga para validar o invalidar tu informe.",
-        "problem-banner": "Avisa al supervisor para que identifique el problema.",
-        "waiting-information": "Esperando al supervisor..."
+        "information": "Al informar de un problema, tu certificación se pausa hasta que el supervisor intervenga para validar o invalidar tu informe."
       },
       "feedback-panel": {
         "actions": {
@@ -1452,7 +1458,7 @@
           "cgu": "Acepto las '<a href=\"https://pix.fr/conditions-generales-d-utilisation\" class=\"link\" target=\"_blank\" rel=\"noopener noreferrer\">'condiciones de uso de Pix'</a>'",
           "email": {
             "error": "Tu correo electrónico no es válido.",
-            "help": "(por ejemplo, nombre@ejemplo.fr)",
+            "help": "(ej. nombre@ejemplo.fr)",
             "label": "Dirección de correo electrónico"
           },
           "firstname": {
@@ -1482,7 +1488,7 @@
         "rgpd-legal-notice": "Para saber cómo se tratan tus datos y cuáles son tus derechos, puedes leer el",
         "rgpd-legal-notice-link": "aviso legal.",
         "rgpd-legal-notice-url": "https://cloud.pix.fr/s/nqgBodTkbtsGb39",
-        "title": "Me inscribo en Pix"
+        "title": "Me inscribo"
       },
       "title": "Conectarse a Pix"
     },
@@ -1571,10 +1577,10 @@
       "grain": {
         "tag": {
           "activity": "Actividad",
-          "lesson": "lección",
-          "discovery": "descubrimiento",
           "challenge": "desafío",
-          "summary": "resumen"
+          "discovery": "descubrimiento",
+          "lesson": "lección",
+          "summary": "recapitular"
         }
       },
       "modals": {
@@ -1766,7 +1772,7 @@
         "legend": "Información necesaria para conectarse.",
         "login": {
           "label": "Dirección de correo electrónico o nombre de usuario",
-          "placeholder": "Por ejemplo: jean.dupont@email.com"
+          "placeholder": "ej. juan.perez@email.com"
         },
         "password": {
           "label": "Contraseña"
@@ -1795,7 +1801,7 @@
     },
     "sign-up": {
       "actions": {
-        "login": "Acceder a Pix",
+        "login": "Acceder",
         "submit": "Me inscribo"
       },
       "errors": {
@@ -1805,7 +1811,7 @@
       "fields": {
         "email": {
           "error": "Tu dirección de correo electrónico no es válida.",
-          "help": "(por ejemplo, nombre@ejemplo.fr)",
+          "help": "(ej. nombre@ejemplo.fr)",
           "label": "Dirección de correo electrónico"
         },
         "firstname": {
