@@ -1130,6 +1130,7 @@
         },
         "description": "Tableau des participants trié par nom.",
         "empty": "Aucun participant",
+        "oralization-header-tooltip": "Activer “lecture de la consigne” permettra à l'élève d’avoir sa transcription orale.",
         "row-title": "Participant",
         "row-value": {
           "oralization": {

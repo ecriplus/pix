@@ -1124,6 +1124,7 @@
         },
         "description": "Table of participants, sorted by name.",
         "empty": "No participants",
+        "oralization-header-tooltip": "Activate “read the instruction” to have the student's oral transcription.",
         "row-title": "Participant",
         "row-value": {
           "oralization": {

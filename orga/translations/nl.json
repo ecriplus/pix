@@ -1184,7 +1184,8 @@
         },
         "description": "Tabel met deelnemers gesorteerd op naam.",
         "empty": "Geen deelnemers",
-        "row-title": "Deelnemer"
+        "row-title": "Deelnemer",
+        "oralization-header-tooltip": "Door ‘leesinstructies’ te activeren, kan de student zijn mondelinge transcriptie krijgen."
       }
     },
     "participants-list": {
