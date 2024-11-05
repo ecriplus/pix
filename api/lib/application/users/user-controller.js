@@ -10,7 +10,6 @@ import { usecases } from '../../domain/usecases/index.js';
 import { DomainTransaction } from '../../infrastructure/DomainTransaction.js';
 import * as campaignParticipationOverviewSerializer from '../../infrastructure/serializers/jsonapi/campaign-participation-overview-serializer.js';
 import * as certificationCenterMembershipSerializer from '../../infrastructure/serializers/jsonapi/certification-center-membership-serializer.js';
-import * as participantResultSerializer from '../../infrastructure/serializers/jsonapi/participant-result-serializer.js';
 import * as userAnonymizedDetailsForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-anonymized-details-for-admin-serializer.js';
 import * as userOrganizationForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-organization-for-admin-serializer.js';
 
@@ -110,27 +109,6 @@ const getUserCampaignParticipationToCampaign = function (
     .then((campaignParticipation) => dependencies.campaignParticipationSerializer.serialize(campaignParticipation));
 };
 
-const getUserCampaignAssessmentResult = async function (
-  request,
-  h,
-  dependencies = {
-    participantResultSerializer,
-    requestResponseUtils,
-  },
-) {
-  const authenticatedUserId = request.auth.credentials.userId;
-  const campaignId = request.params.campaignId;
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
-
-  const campaignAssessmentResult = await usecases.getUserCampaignAssessmentResult({
-    userId: authenticatedUserId,
-    campaignId,
-    locale,
-  });
-
-  return dependencies.participantResultSerializer.serialize(campaignAssessmentResult);
-};
-
 const anonymizeUser = async function (request, h, dependencies = { userAnonymizedDetailsForAdminSerializer }) {
   const userToAnonymizeId = request.params.id;
   const adminMemberId = request.auth.credentials.userId;
@@ -217,7 +195,6 @@ const userController = {
   findUserOrganizationsForAdmin,
   getCampaignParticipationOverviews,
   getCampaignParticipations,
-  getUserCampaignAssessmentResult,
   getUserCampaignParticipationToCampaign,
   getUserDetailsForAdmin,
   reassignAuthenticationMethods,
