@@ -137,10 +137,10 @@
       "password": {
         "error": "Ha introducido una contraseña incorrecta. Su contraseña debe tener más de 8 caracteres y contener al menos un número, una letra minúscula y una letra mayúscula.",
         "rules": {
-          "contains-digit": "Al menos un número",
-          "contains-lowercase": "Al menos una letra minúscula",
+          "contains-digit": "al menos un número",
+          "contains-lowercase": "al menos una letra minúscula",
           "contains-uppercase": "al menos una letra mayúscula",
-          "min-length": "Mínimo 8 caracteres"
+          "min-length": "mínimo 8 caracteres"
         }
       }
     }
