@@ -1,5 +1,17 @@
 # Pix Changelog
 
+## v4.238.0 (05/11/2024)
+
+
+### :building_construction: Tech
+- [#10483](https://github.com/1024pix/pix/pull/10483) [TECH] Logger et prévenir le crash de container lorsque la création de release est en échec.
+- [#10484](https://github.com/1024pix/pix/pull/10484) [TECH] Filtrer sur les organizations ayant la feature places management pour la remontée des statistiques de places pour l'API pix-data (PIX-15155).
+- [#10492](https://github.com/1024pix/pix/pull/10492) [TECH] Limite la taille mémoire utilisée par node lors du seed de la base de données.
+- [#10441](https://github.com/1024pix/pix/pull/10441) [TECH] Ajouter des index sur les tables pg.
+
+### :arrow_up: Montée de version
+- [#10493](https://github.com/1024pix/pix/pull/10493) [BUMP] Update dependency @1024pix/pix-ui to ^48.0.4 (orga).
+
 ## v4.237.0 (05/11/2024)
 
 
