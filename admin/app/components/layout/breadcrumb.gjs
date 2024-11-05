@@ -1,6 +1,6 @@
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 import Component from '@glimmer/component';
 
 export default class Breadcrumb extends Component {
@@ -46,7 +46,7 @@ export default class Breadcrumb extends Component {
             <li>
               <LinkTo @route={{crumb.path}}>{{crumb.label}}</LinkTo>
             </li>
-            <FaIcon @icon="chevron-right" />
+            <PixIcon @name="chevronRight" />
           {{else}}
             <li>
               <h1>{{crumb.label}}</h1>
