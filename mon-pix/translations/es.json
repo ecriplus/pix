@@ -241,12 +241,12 @@
           "firstname": {
             "error": "Su nombre de pila no está rellenado.",
             "label": "Nombre",
-            "placeholder": "ej: Jean"
+            "placeholder": "ej. Juan"
           },
           "lastname": {
             "error": "No has indicado tus apellidos.",
             "label": "Apellidos",
-            "placeholder": "ej. Dupont"
+            "placeholder": "ej. Pérez"
           },
           "legend": "Información necesaria para la inscripción."
         }

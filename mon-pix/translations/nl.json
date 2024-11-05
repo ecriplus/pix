@@ -194,7 +194,7 @@
           "email": {
             "error-message-invalid": "Uw e-mailadres is ongeldig.",
             "label": "E-mail adres",
-            "placeholder": "b.v : jan.jansen@email.com"
+            "placeholder": "b.v. jan.jansen@email.com"
           }
         },
         "no-email-question": "Geen e-mailadres opgegeven?",
@@ -236,17 +236,17 @@
           "email": {
             "error": "Uw e-mailadres is ongeldig.",
             "label": "E-mail adres",
-            "placeholder": "b.v : jan.jansen@email.com"
+            "placeholder": "b.v. jan.jansen@email.com"
           },
           "firstname": {
             "error": "Je voornaam is niet ingevuld.",
             "label": "Voornaam",
-            "placeholder": "b.v : Jan"
+            "placeholder": "b.v. Jan"
           },
           "lastname": {
             "error": "Je naam is niet ingevuld.",
             "label": "Achternaam",
-            "placeholder": "b.v : Jansen"
+            "placeholder": "b.v. Jansen"
           },
           "legend": "Vereiste informatie voor registratie."
         }
@@ -1772,7 +1772,7 @@
         "legend": "Informatie die nodig is om in te loggen.",
         "login": {
           "label": "E-mailadres of login",
-          "placeholder": "b.v : jan.jansen@email.com"
+          "placeholder": "b.v. jan.jansen@email.com"
         },
         "password": {
           "label": "Wachtwoord"
