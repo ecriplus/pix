@@ -16,7 +16,7 @@ describe('Certification | Configuration | Acceptance | API | sco-whitelist-route
   });
 
   describe('POST /api/admin/sco-whitelist', function () {
-    it('should return 200 HTTP status code', async function () {
+    it('should return 201 HTTP status code', async function () {
       // given
       const superAdmin = await insertUserWithRoleSuperAdmin();
       const buffer = 'externalId\next1\next2';
@@ -57,6 +57,26 @@ describe('Certification | Configuration | Acceptance | API | sco-whitelist-route
         .where({ isScoBlockedAccessWhitelist: true })
         .pluck('externalId');
       expect(whitelist).to.deep.equal(['ext1', 'ext2']);
+    });
+  });
+
+  describe('GET /api/admin/sco-whitelist', function () {
+    it('should return 200 HTTP status code', async function () {
+      // given
+      const superAdmin = await insertUserWithRoleSuperAdmin();
+      const options = {
+        method: 'GET',
+        url: '/api/admin/sco-whitelist',
+        headers: {
+          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
+        },
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
     });
   });
 });
