@@ -1,7 +1,7 @@
 import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
 import { PRO_ORGANIZATION_ID } from '../common/constants.js';
-import { CAMPAIGN_PROASSMUL_ID } from './constants.js';
+import { CAMPAIGN_PROASSMUL_ID, CAMPAIGN_PROCOLMUL_ID } from './constants.js';
 
 async function _buildMultipleParticipationsForPROASSMULCampaign(databaseBuilder) {
   const firstUser = await databaseBuilder.factory.buildUser.withRawPassword({
@@ -201,6 +201,120 @@ async function _buildMultipleParticipationsForPROASSMULCampaign(databaseBuilder)
   });
 }
 
+async function _buildMultipleParticipationsForPROCOLMULCampaign(databaseBuilder) {
+  const firstUser = await databaseBuilder.factory.buildUser.withRawPassword({
+    firstName: 'Martin',
+    lastName: 'Sapin',
+    email: 'martin-sapin@example.net',
+    cgu: true,
+    lang: 'fr',
+  });
+
+  const firstOrganizationLearner = await databaseBuilder.factory.buildOrganizationLearner({
+    firstName: 'Martin',
+    lastName: 'Sapin',
+    userId: firstUser.id,
+    organizationId: PRO_ORGANIZATION_ID,
+  });
+
+  await databaseBuilder.factory.buildCampaignParticipation({
+    campaignId: CAMPAIGN_PROCOLMUL_ID,
+    organizationLearnerId: firstOrganizationLearner.id,
+    userId: firstUser.id,
+    pixScore: 20,
+    isImproved: true,
+    status: CampaignParticipationStatuses.SHARED,
+    createdAt: '2023-12-27T15:07:57.376Z',
+    sharedAt: '2024-01-04T15:07:57.376Z',
+  });
+
+  await databaseBuilder.factory.buildCampaignParticipation({
+    organizationLearnerId: firstOrganizationLearner.id,
+    userId: firstUser.id,
+    campaignId: CAMPAIGN_PROCOLMUL_ID,
+    pixScore: 50,
+    isImproved: false,
+    status: CampaignParticipationStatuses.SHARED,
+    createdAt: '2024-03-12T15:07:57.376Z',
+    sharedAt: '2024-03-24T15:07:57.376Z',
+  });
+
+  const secondUser = await databaseBuilder.factory.buildUser.withRawPassword({
+    firstName: 'José',
+    lastName: 'Lopez',
+    email: 'jose-lopez@example.net',
+    cgu: true,
+    lang: 'fr',
+  });
+
+  const secondOrganizationLearner = await databaseBuilder.factory.buildOrganizationLearner({
+    firstName: 'José',
+    lastName: 'Lopez',
+    userId: secondUser.id,
+    organizationId: PRO_ORGANIZATION_ID,
+  });
+
+  await databaseBuilder.factory.buildCampaignParticipation({
+    campaignId: CAMPAIGN_PROCOLMUL_ID,
+    organizationLearnerId: secondOrganizationLearner.id,
+    userId: secondUser.id,
+    pixScore: 50,
+    isImproved: true,
+    status: CampaignParticipationStatuses.SHARED,
+    createdAt: '2023-12-27T15:07:57.376Z',
+    sharedAt: '2024-01-04T15:07:57.376Z',
+  });
+
+  await databaseBuilder.factory.buildCampaignParticipation({
+    organizationLearnerId: secondOrganizationLearner.id,
+    userId: secondUser.id,
+    campaignId: CAMPAIGN_PROCOLMUL_ID,
+    pixScore: 45,
+    isImproved: false,
+    status: CampaignParticipationStatuses.SHARED,
+    createdAt: '2024-03-12T15:07:57.376Z',
+    sharedAt: '2024-03-24T15:07:57.376Z',
+  });
+
+  const thirdUser = await databaseBuilder.factory.buildUser.withRawPassword({
+    firstName: 'Pierre',
+    lastName: 'Quiroule',
+    email: 'pierre-quiroule@example.net',
+    cgu: true,
+    lang: 'fr',
+  });
+
+  const thirdOrganizationLearner = await databaseBuilder.factory.buildOrganizationLearner({
+    firstName: 'Pierre',
+    lastName: 'Quiroule',
+    userId: thirdUser.id,
+    organizationId: PRO_ORGANIZATION_ID,
+  });
+
+  await databaseBuilder.factory.buildCampaignParticipation({
+    campaignId: CAMPAIGN_PROCOLMUL_ID,
+    organizationLearnerId: thirdOrganizationLearner.id,
+    userId: thirdUser.id,
+    pixScore: 20,
+    isImproved: true,
+    status: CampaignParticipationStatuses.SHARED,
+    createdAt: '2023-12-27T15:07:57.376Z',
+    sharedAt: '2024-01-04T15:07:57.376Z',
+  });
+
+  await databaseBuilder.factory.buildCampaignParticipation({
+    organizationLearnerId: thirdOrganizationLearner.id,
+    userId: thirdUser.id,
+    campaignId: CAMPAIGN_PROCOLMUL_ID,
+    pixScore: 20,
+    isImproved: false,
+    status: CampaignParticipationStatuses.SHARED,
+    createdAt: '2024-03-12T15:07:57.376Z',
+    sharedAt: '2024-03-24T15:07:57.376Z',
+  });
+}
+
 export async function buildOrganizationLearnersWithMultipleParticipations(databaseBuilder) {
   await _buildMultipleParticipationsForPROASSMULCampaign(databaseBuilder);
+  await _buildMultipleParticipationsForPROCOLMULCampaign(databaseBuilder);
 }
