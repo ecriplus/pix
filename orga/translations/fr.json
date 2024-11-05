@@ -1270,9 +1270,11 @@
       "title": "Profils reçus",
       "table": {
         "title": "Liste des profils reçus",
+        "caption": "Ce tableau comporte la liste des participants ayant partagé leurs profils. Il indique pour chaque participant leur nom, prénom, la date d’envoi, le score Pix, l'évolution, le statut de certificabilité et le nombre de compétences certifiables.",
         "column": {
           "certifiable": "Certifiable",
           "competences-certifiables": "Comp. certifiables",
+          "evolution": "Évolution",
           "first-name": "Prénom",
           "last-name": "Nom",
           "pix-score": {
@@ -1285,6 +1287,15 @@
           }
         },
         "empty": "En attente de profils",
+        "evolution": {
+          "decrease": "En régression",
+          "increase": "En progression",
+          "stable": "Constant",
+          "unavailable": "Non disponible"
+        },
+        "evolution-tooltip": {
+          "content": "Évolution du score pix entre les deux derniers partages de profil."
+        },
         "row-title": "Profil"
       }
     },

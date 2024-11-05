@@ -1262,9 +1262,11 @@
     },
     "profiles-list": {
       "table": {
+        "caption": "Deze tabel bevat de lijst met deelnemers die hun profiel hebben gedeeld. Het geeft voor elke deelnemer zijn achternaam, voornaam, de verzonden datum, de Pix-score, de evolutie, de certificeerbaarheidsstatus en het aantal certificeerbare competenties.",
         "column": {
           "certifiable": "Certificeerbaar",
           "competences-certifiables": "Certificeerbare vaard.",
+          "evolution": "Evolutie",
           "first-name": "Voornaam",
           "last-name": "Achternaam",
           "pix-score": {
@@ -1275,6 +1277,15 @@
             "label": "Verzenddatum",
             "on-hold": "In afwachting van verzending"
           }
+        },
+        "evolution": {
+          "increase": "In uitvoering",
+          "decrease": "In verval",
+          "stable": "Constante",
+          "unavailable": "Niet beschikbaar"
+        },
+        "evolution-tooltip": {
+          "content": "Evolutie van de pix score tussen de laatste twee profielaandelen."
         },
         "empty": "In afwachting van profielen",
         "row-title": "Profiel",

@@ -1264,9 +1264,11 @@
       "title": "Submitted profiles",
       "table": {
         "title": "List of submitted profiles",
+        "caption": "This table contains the list of participants who have shared their profiles. It indicates for each participant their last name, first name, the sent date, the Pix score, the evolution, the certifiability status and the number of certifiable competences.",
         "column": {
           "certifiable": "Eligible for certification",
           "competences-certifiables": "Competences eligible for certification",
+          "evolution": "Evolution",
           "first-name": "First name",
           "last-name": "Last name",
           "pix-score": {
@@ -1279,6 +1281,15 @@
           }
         },
         "empty": "No profiles yet",
+        "evolution": {
+          "decrease": "In decline",
+          "increase": "In progress",
+          "stable": "Constant",
+          "unavailable": "Not available"
+        },
+        "evolution-tooltip": {
+          "content": "Evolution of the pix score between the last two profile shares."
+        },
         "row-title": "Profile"
       }
     },
