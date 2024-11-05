@@ -1,5 +1,25 @@
 # Pix Changelog
 
+## v4.237.0 (05/11/2024)
+
+
+### :rocket: Amélioration
+- [#10473](https://github.com/1024pix/pix/pull/10473) [FEATURE] Bloquer la finalisation de session selon certaines conditions sur Pix Certif (PIX-14717).
+- [#10466](https://github.com/1024pix/pix/pull/10466) [FEATURE] Supprimer le lien de la documentation v3 sur Pix Certif (PIX-15150).
+- [#10475](https://github.com/1024pix/pix/pull/10475) [FEATURE] Supprimer les colonnes "Identifiant externe" et "tarification part Pix" de la liste des candidats Pix Certif (PIX-15160).
+- [#10454](https://github.com/1024pix/pix/pull/10454) [FEATURE] Utiliser la nouvelle page de fin de parcours sans FT (PIX-15125).
+- [#10442](https://github.com/1024pix/pix/pull/10442) [FEATURE] :lipstick: Ajoute un tootltip sur un entête de colonne pour préciser un titre (PIX-15016).
+- [#10437](https://github.com/1024pix/pix/pull/10437) [FEATURE] :art: Ajout d'un bouton dans la liste des missions pour aller sur la page de détail d'une mission (PIX-14992).
+
+### :building_construction: Tech
+- [#10477](https://github.com/1024pix/pix/pull/10477) [TECH] Retirer le loader avant la page de fin de parcours (PIX-15178).
+
+### :arrow_up: Montée de version
+- [#10476](https://github.com/1024pix/pix/pull/10476) [BUMP] Update dependency @1024pix/pix-ui to ^48.0.2 (certif).
+- [#10420](https://github.com/1024pix/pix/pull/10420) [BUMP] Lock file maintenance (certif).
+- [#10422](https://github.com/1024pix/pix/pull/10422) [BUMP] Lock file maintenance (orga).
+- [#10421](https://github.com/1024pix/pix/pull/10421) [BUMP] Lock file maintenance (mon-pix).
+
 ## v4.236.0 (04/11/2024)
 
 
