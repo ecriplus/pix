@@ -375,22 +375,12 @@ export default class EnrolledCandidates extends Component {
                     {{t 'common.forms.certification-labels.email-results'}}
                   </th>
                 {{/unless}}
-                {{#unless @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
-                  <th class='certification-candidates-table__external-id'>
-                    {{t 'common.forms.certification-labels.external-id'}}
-                  </th>
-                {{/unless}}
                 <th class='certification-candidates-table__column-time'>
                   {{t 'common.forms.certification-labels.extratime'}}
                 </th>
                 {{#if this.shouldDisplayAccessibilityAdjustmentNeededFeature}}
                   <th class='certification-candidates-table__column-accessibility'>
                     {{t 'common.forms.certification-labels.accessibility'}}
-                  </th>
-                {{/if}}
-                {{#if @shouldDisplayPaymentOptions}}
-                  <th class='certification-candidates-table__payment-options'>
-                    {{t 'common.forms.certification-labels.pricing'}}
                   </th>
                 {{/if}}
                 <th>
@@ -428,17 +418,9 @@ export default class EnrolledCandidates extends Component {
                   {{#unless @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
                     <td>{{candidate.resultRecipientEmail}}</td>
                   {{/unless}}
-                  {{#unless @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
-                    <td>{{candidate.externalId}}</td>
-                  {{/unless}}
                   <td>{{this.formattedCandidateExtratimePercentage candidate.extraTimePercentage}}</td>
                   {{#if this.shouldDisplayAccessibilityAdjustmentNeededFeature}}
                     <td>{{candidate.accessibilityAdjustmentNeededLabel}}</td>
-                  {{/if}}
-                  {{#if @shouldDisplayPaymentOptions}}
-                    <td>{{candidate.billingModeLabel}}
-                      {{candidate.prepaymentCode}}
-                    </td>
                   {{/if}}
 
                   <td>
