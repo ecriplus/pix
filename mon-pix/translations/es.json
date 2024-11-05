@@ -41,7 +41,7 @@
       "close": "Cerrar",
       "confirm": "Confirmar",
       "lets-go": "¡Empecemos!",
-      "login": "Acceder",
+      "login": "Iniciar sesión",
       "quit": "Salir",
       "refresh-page": "Actualizar la página",
       "show-less": "Mostrar menos",
@@ -65,7 +65,7 @@
       "error": "Debes aceptar las condiciones de uso y la política de privacidad de Pix para crear una cuenta.",
       "label": "Acepto las condiciones de uso y la política de privacidad de Pix",
       "message": "Acepto las '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noopener noreferrer\"'>'condiciones de uso'</a>' y la '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noopener noreferrer\"'>'política de privacidad'</a>' de Pix.",
-      "read-message": "Lea las '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'condiciones de uso'</a>' y la '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'política de privacidad'</a>'."
+      "read-message": "Lee las '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'condiciones de uso'</a>' y la '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'política de privacidad'</a>'."
     },
     "companion": {
       "check": {
@@ -169,13 +169,13 @@
       },
       "other-authentication-providers": {
         "continue-with-featured-identity-provider-link": "Continuar con {featuredIdentityProvider}",
-        "login-heading": "Otros medios de conexión",
+        "login-heading": "Otros métodos de conexión",
         "login": {
           "heading": "Otros medios de conexión",
           "login-with-featured-identity-provider-link": "Conectar con {featuredIdentityProvider}"
         },
         "select-another-organization-link": "Elegir otra organización",
-        "signup-heading": "Otros medios de registro",
+        "signup-heading": "Otros métodos de conexión",
         "signup": {
           "heading": "Otros medios de registro",
           "signup-with-featured-identity-provider-link": "Regístrese en {featuredIdentityProvider}"
@@ -184,7 +184,7 @@
       "password-reset-demand-form": {
         "404-message": "Esta dirección de correo electrónico no corresponde a ninguna cuenta",
         "actions": {
-          "receive-reset-button": "Recibir un enlace de reinicio"
+          "receive-reset-button": "Reiniciar contraseña"
         },
         "contact-us-link": {
           "link-text": "Contáctanos.",
@@ -194,15 +194,15 @@
           "email": {
             "error-message-invalid": "Tu dirección de correo electrónico no es válida.",
             "label": "Dirección de correo electrónico",
-            "placeholder": "ej. juan.perez@email.com"
+            "placeholder": "ej. juan.perez@email.es"
           }
         },
-        "no-email-question": "¿No ha facilitado una dirección de correo electrónico?",
+        "no-email-question": "¿No ingresaste una dirección de correo electrónico?",
         "rule": "Todos los campos son obligatorios."
       },
       "password-reset-demand-received-info": {
-        "heading": "Compruebe su correo electrónico",
-        "message": "Si su dirección está asociada a una cuenta Pix, se le han enviado por correo electrónico instrucciones para restablecer su contraseña.",
+        "heading": "Comprueba tu correo electrónico",
+        "message": "Si tu dirección está asociada a una cuenta Pix, se te han enviado instrucciones por correo electrónico para restablecer tu contraseña.",
         "no-email-received-question": "¿No has recibido un correo electrónico?",
         "try-again": "Reenviar correo electrónico de restablecimiento"
       },
@@ -226,7 +226,7 @@
       },
       "signup-form": {
         "actions": {
-          "submit": "Me inscribo"
+          "submit": "Crear cuenta"
         },
         "errors": {
           "invalid-locale-format": "Tu configuración local «{invalidLocale}» tiene un formato incorrecto.",
@@ -236,7 +236,7 @@
           "email": {
             "error": "Tu dirección de correo electrónico no es válida.",
             "label": "Dirección de correo electrónico",
-            "placeholder": "ej. juan.perez@email.com"
+            "placeholder": "ej. juan.perez@email.es"
           },
           "firstname": {
             "error": "Su nombre de pila no está rellenado.",
@@ -434,7 +434,7 @@
             "empty-password": "El campo contraseña es obligatorio.",
             "invalid-password": "Tu contraseña debe tener al menos 8 caracteres y contener como mínimo una letra mayúscula, una letra minúscula y un dígito."
           },
-          "login-button": "Me conecto",
+          "login-button": "Iniciar sesión",
           "password-label": "Contraseña"
         },
         "welcome-message": "¡Te damos de nuevo la bienvenida, { firstName }!"
@@ -464,7 +464,7 @@
     },
     "authentication": {
       "login": {
-        "signup-button": "Registrarse"
+        "signup-button": "Regístrate"
       },
       "sso-selection": {
         "signin": {
@@ -1394,7 +1394,7 @@
         "login-unauthorized-error": "La dirección de correo electrónico y/o la contraseña introducidas son incorrectas."
       },
       "login-form": {
-        "button": "Me conecto",
+        "button": "Iniciar sesión",
         "description": "Conéctate para vincular tu cuenta existente y recuperar tus competencias evaluadas anteriormente.",
         "email": "Dirección de correo electrónico",
         "password": "Contraseña",
@@ -1426,7 +1426,7 @@
         },
         "forgotten-password": {
           "email": "Una dirección de correo electrónico:",
-          "instruction": "¿Has olvidado tu contraseña? Tienes una cuenta Pix con:",
+          "instruction": "¿Olvidaste tu contraseña? Tienes una cuenta Pix con:",
           "other-identity": "Un nombre de usuario: ponte en contacto con tu profesor para restablecerlo",
           "reset-link": "Haz clic aquí para restablecerlo"
         },
@@ -1435,7 +1435,7 @@
       },
       "register-form": {
         "button": "Inscribirse",
-        "button-form": "Me inscribo",
+        "button-form": "Crear cuenta",
         "fields": {
           "birthdate": {
             "day": {
@@ -1488,7 +1488,7 @@
         "rgpd-legal-notice": "Para saber cómo se tratan tus datos y cuáles son tus derechos, puedes leer el",
         "rgpd-legal-notice-link": "aviso legal.",
         "rgpd-legal-notice-url": "https://cloud.pix.fr/s/nqgBodTkbtsGb39",
-        "title": "Me inscribo"
+        "title": "Crear cuenta"
       },
       "title": "Conectarse a Pix"
     },
@@ -1659,7 +1659,7 @@
         "instructions": "Te hemos enviado un correo electrónico con instrucciones para restablecer tu contraseña a la dirección {email}.",
         "subtitle": "Solicitud de restablecimiento de contraseña"
       },
-      "title": "¿Has olvidado tu contraseña?"
+      "title": "¿Olvidaste tu contraseña?"
     },
     "profile-already-shared": {
       "actions": {
@@ -1772,14 +1772,14 @@
         "legend": "Información necesaria para conectarse.",
         "login": {
           "label": "Dirección de correo electrónico o nombre de usuario",
-          "placeholder": "ej. juan.perez@email.com"
+          "placeholder": "ej. juan.perez@email.es"
         },
         "password": {
           "label": "Contraseña"
         }
       },
       "first-title": "Conéctate",
-      "forgotten-password": "¿Has olvidado tu contraseña?",
+      "forgotten-password": "¿Olvidaste tu contraseña?",
       "fwb": {
         "link": {
           "img": "FWB connect"
@@ -1801,8 +1801,8 @@
     },
     "sign-up": {
       "actions": {
-        "login": "Acceder",
-        "submit": "Me inscribo"
+        "login": "Iniciar sesión",
+        "submit": "Crear cuenta"
       },
       "errors": {
         "invalid-locale-format": "Tu configuración local «{invalidLocale}» tiene un formato incorrecto.",
