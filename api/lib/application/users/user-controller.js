@@ -2,15 +2,12 @@ import { usecases as devcompUsecases } from '../../../src/devcomp/domain/usecase
 import * as trainingSerializer from '../../../src/devcomp/infrastructure/serializers/jsonapi/training-serializer.js';
 import { evaluationUsecases } from '../../../src/evaluation/domain/usecases/index.js';
 import * as scorecardSerializer from '../../../src/evaluation/infrastructure/serializers/jsonapi/scorecard-serializer.js';
-import { usecases as identityAccessManagementUsecases } from '../../../src/identity-access-management/domain/usecases/index.js';
 import * as userDetailsForAdminSerializer from '../../../src/identity-access-management/infrastructure/serializers/jsonapi/user-details-for-admin.serializer.js';
 import * as campaignParticipationSerializer from '../../../src/prescription/campaign-participation/infrastructure/serializers/jsonapi/campaign-participation-serializer.js';
 import * as certificationCenterMembershipSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import * as userSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/user-serializer.js';
 import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
-import { DomainTransaction } from '../../infrastructure/DomainTransaction.js';
-import * as userAnonymizedDetailsForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-anonymized-details-for-admin-serializer.js';
 import * as userOrganizationForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-organization-for-admin-serializer.js';
 
 const rememberUserHasSeenAssessmentInstructions = async function (request, h, dependencies = { userSerializer }) {
@@ -82,23 +79,6 @@ const getUserCampaignParticipationToCampaign = function (
     .then((campaignParticipation) => dependencies.campaignParticipationSerializer.serialize(campaignParticipation));
 };
 
-const anonymizeUser = async function (request, h, dependencies = { userAnonymizedDetailsForAdminSerializer }) {
-  const userToAnonymizeId = request.params.id;
-  const adminMemberId = request.auth.credentials.userId;
-
-  await DomainTransaction.execute(async (domainTransaction) => {
-    await usecases.anonymizeUser({
-      userId: userToAnonymizeId,
-      updatedByUserId: adminMemberId,
-      domainTransaction,
-    });
-  });
-
-  const anonymizedUser = await identityAccessManagementUsecases.getUserDetailsForAdmin({ userId: userToAnonymizeId });
-
-  return h.response(dependencies.userAnonymizedDetailsForAdminSerializer.serialize(anonymizedUser)).code(200);
-};
-
 const removeAuthenticationMethod = async function (request, h) {
   const userId = request.params.id;
   const authenticationMethodType = request.payload.data.attributes.type;
@@ -162,7 +142,6 @@ const findCertificationCenterMembershipsByUser = async function (
 
 const userController = {
   addPixAuthenticationMethodByEmail,
-  anonymizeUser,
   findCertificationCenterMembershipsByUser,
   findPaginatedUserRecommendedTrainings,
   findUserOrganizationsForAdmin,

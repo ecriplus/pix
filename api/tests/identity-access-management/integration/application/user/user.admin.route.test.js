@@ -1,4 +1,3 @@
-import { userController } from '../../../../../lib/application/users/user-controller.js';
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
 import { userAdminController } from '../../../../../src/identity-access-management/application/user/user.admin.controller.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
@@ -201,7 +200,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
   describe('POST /api/admin/users/{id}/anonymize', function () {
     it('returns 200 when user role is "SUPER_ADMIN"', async function () {
       // given
-      sinon.stub(userController, 'anonymizeUser').callsFake((request, h) => h.response({}).code(200));
+      sinon.stub(userAdminController, 'anonymizeUser').callsFake((request, h) => h.response({}).code(200));
       sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin').callsFake((request, h) => h.response(true));
       sinon
         .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
@@ -214,12 +213,12 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       expect(statusCode).to.equal(200);
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
-      sinon.assert.calledOnce(userController.anonymizeUser);
+      sinon.assert.calledOnce(userAdminController.anonymizeUser);
     });
 
     it('returns 200 when user role is "SUPPORT"', async function () {
       // given
-      sinon.stub(userController, 'anonymizeUser').callsFake((request, h) => h.response({}).code(200));
+      sinon.stub(userAdminController, 'anonymizeUser').callsFake((request, h) => h.response({}).code(200));
       sinon
         .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
         .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
@@ -232,7 +231,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       expect(statusCode).to.equal(200);
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
-      sinon.assert.calledOnce(userController.anonymizeUser);
+      sinon.assert.calledOnce(userAdminController.anonymizeUser);
     });
 
     it('returns 400 when id is not a number', async function () {
@@ -246,7 +245,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
 
     it(`returns 403 when user don't have access (CERTIF | METIER)`, async function () {
       // given
-      sinon.stub(userController, 'anonymizeUser').returns('ok');
+      sinon.stub(userAdminController, 'anonymizeUser').returns('ok');
       sinon
         .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
         .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
@@ -264,7 +263,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       expect(result.statusCode).to.equal(403);
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
-      sinon.assert.notCalled(userController.anonymizeUser);
+      sinon.assert.notCalled(userAdminController.anonymizeUser);
     });
   });
 });

@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import { userController } from '../../../../lib/application/users/user-controller.js';
 import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { SUPPORTED_LOCALES } from '../../../shared/domain/constants.js';
@@ -171,7 +170,7 @@ export const userAdminRoutes = [
             ])(request, h),
         },
       ],
-      handler: (request, h) => userController.anonymizeUser(request, h),
+      handler: (request, h) => userAdminController.anonymizeUser(request, h),
       notes: ["- Permet à un administrateur d'anonymiser un utilisateur"],
       tags: ['api', 'admin', 'identity-access-management', 'user'],
     },

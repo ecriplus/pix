@@ -1,10 +1,8 @@
 import { userController } from '../../../../lib/application/users/user-controller.js';
 import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { DomainTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
 import { usecases as devcompUsecases } from '../../../../src/devcomp/domain/usecases/index.js';
 import { evaluationUsecases } from '../../../../src/evaluation/domain/usecases/index.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
-import { usecases as identityAccessManagementUsecases } from '../../../../src/identity-access-management/domain/usecases/index.js';
 import { UserOrganizationForAdmin } from '../../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
 import * as requestResponseUtils from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../test-helper.js';
@@ -236,54 +234,6 @@ describe('Unit | Controller | user-controller', function () {
 
       // then
       expect(response).to.equal(expectedCampaignParticipation);
-    });
-  });
-
-  describe('#anonymizeUser', function () {
-    let clock;
-
-    beforeEach(function () {
-      clock = sinon.useFakeTimers({ now: new Date('2023-08-17'), toFake: ['Date'] });
-    });
-
-    afterEach(function () {
-      clock.restore();
-    });
-
-    it('should call the anonymize user usecase', async function () {
-      // given
-      const userId = 1;
-      const updatedByUserId = 2;
-      const anonymizedUserSerialized = Symbol('anonymizedUserSerialized');
-      const userDetailsForAdmin = Symbol('userDetailsForAdmin');
-      const domainTransaction = {
-        knexTransaction: Symbol('transaction'),
-      };
-      sinon.stub(usecases, 'anonymizeUser');
-      sinon.stub(identityAccessManagementUsecases, 'getUserDetailsForAdmin').resolves(userDetailsForAdmin);
-      sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
-        return callback(domainTransaction);
-      });
-      const userAnonymizedDetailsForAdminSerializer = { serialize: sinon.stub() };
-      userAnonymizedDetailsForAdminSerializer.serialize.returns(anonymizedUserSerialized);
-
-      // when
-      const response = await userController.anonymizeUser(
-        {
-          auth: { credentials: { userId: updatedByUserId } },
-          params: { id: userId },
-        },
-        hFake,
-        { userAnonymizedDetailsForAdminSerializer },
-      );
-
-      // then
-      expect(DomainTransaction.execute).to.have.been.called;
-      expect(usecases.anonymizeUser).to.have.been.calledWithExactly({ userId, updatedByUserId, domainTransaction });
-      expect(identityAccessManagementUsecases.getUserDetailsForAdmin).to.have.been.calledWithExactly({ userId });
-      expect(userAnonymizedDetailsForAdminSerializer.serialize).to.have.been.calledWithExactly(userDetailsForAdmin);
-      expect(response.statusCode).to.equal(200);
-      expect(response.source).to.deep.equal(anonymizedUserSerialized);
     });
   });
 
