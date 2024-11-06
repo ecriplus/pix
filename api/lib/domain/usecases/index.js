@@ -122,7 +122,6 @@ import * as disabledPoleEmploiNotifier from '../../infrastructure/externals/pole
 import * as poleEmploiNotifier from '../../infrastructure/externals/pole-emploi/pole-emploi-notifier.js';
 import * as badgeAcquisitionRepository from '../../infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeForCalculationRepository from '../../infrastructure/repositories/badge-for-calculation-repository.js';
-import * as campaignParticipationOverviewRepository from '../../infrastructure/repositories/campaign-participation-overview-repository.js';
 import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
 import { campaignParticipationResultRepository } from '../../infrastructure/repositories/campaign-participation-result-repository.js';
 import * as campaignRepository from '../../infrastructure/repositories/campaign-repository.js';
@@ -217,7 +216,6 @@ const dependencies = {
   campaignManagementRepository,
   campaignParticipationBCRepository,
   participationCompletedJobRepository,
-  campaignParticipationOverviewRepository,
   campaignParticipationRepository,
   campaignParticipationResultRepository,
   campaignProfileRepository,

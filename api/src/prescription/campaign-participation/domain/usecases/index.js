@@ -22,6 +22,7 @@ import { importNamedExportsFromDirectory } from '../../../../shared/infrastructu
 import * as campaignAnalysisRepository from '../../infrastructure/repositories/campaign-analysis-repository.js';
 import * as campaignAssessmentParticipationRepository from '../../infrastructure/repositories/campaign-assessment-participation-repository.js';
 import * as campaignAssessmentParticipationResultRepository from '../../infrastructure/repositories/campaign-assessment-participation-result-repository.js';
+import * as campaignParticipationOverviewRepository from '../../infrastructure/repositories/campaign-participation-overview-repository.js';
 import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
 import * as campaignProfileRepository from '../../infrastructure/repositories/campaign-profile-repository.js';
 import { repositories as campaignRepositories } from '../../infrastructure/repositories/index.js'; // needed to includes organizationFeatureAPI from another BC
@@ -42,6 +43,7 @@ import * as poleEmploiSendingRepository from '../../infrastructure/repositories/
  * @typedef { import ('../../infrastructure/repositories/campaign-assessment-participation-repository.js')} CampaignAssessmentParticipationRepository
  * @typedef { import ('../../infrastructure/repositories/campaign-assessment-participation-result-repository.js')} CampaignAssessmentParticipationResultRepository
  * @typedef { import ('../../infrastructure/repositories/index.js')} CampaignParticipantRepository
+ * @typedef { import ('../../infrastructure/repositories/campaign-participation-overview-repository.js')} campaignParticipationOverviewRepository
  * @typedef { import ('../../infrastructure/repositories/campaign-participation-repository.js')} CampaignParticipationRepository
  * @typedef { import ('../../infrastructure/repositories/campaign-profile-repository.js')} CampaignProfileRepository
  * @typedef { import ('../../../../../lib/infrastructure/repositories/campaign-repository.js')} CampaignRepository
@@ -74,6 +76,7 @@ const dependencies = {
   campaignAssessmentParticipationRepository,
   campaignAssessmentParticipationResultRepository,
   campaignParticipantRepository: campaignRepositories.campaignParticipantRepository,
+  campaignParticipationOverviewRepository,
   campaignParticipationRepository,
   campaignProfileRepository,
   campaignRepository,
