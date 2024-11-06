@@ -12,7 +12,7 @@ const LOCALE = {
   SPANISH_SPOKEN: 'es',
 };
 
-const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'fr-BE', 'fr-FR', 'nl-BE'];
+const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'fr-BE', 'fr-FR', 'nl-BE', 'nl'];
 
 const ORGANIZATION_FEATURE = {
   MISSIONS_MANAGEMENT: {
