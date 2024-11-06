@@ -6,9 +6,9 @@ import pdfLibUtils from 'pdf-lib/cjs/utils/index.js';
 
 import { getCertificationAttestationsPdfBuffer } from '../../../../../../../src/certification/results/infrastructure/utils/pdf/certification-attestation-pdf.js';
 import { CertificationAttestationGenerationError } from '../../../../../../../src/shared/domain/errors.js';
+import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { catchErr, domainBuilder, expect, nock, sinon } from '../../../../../../test-helper.js';
 import { isSameBinary } from '../../../../../../tooling/binary-comparator.js';
-import { getI18n } from '../../../../../../tooling/i18n/i18n.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -269,8 +269,7 @@ describe('Integration | Infrastructure | Utils | Pdf | Certification Attestation
       certifiedBadges: [],
     });
     const referencePdfPath = 'EN-certification-confirmation-pdf_test.pdf';
-    const i18n = getI18n();
-    i18n.setLocale('en');
+    const i18n = getI18n('en');
 
     // when
     const { buffer } = await getCertificationAttestationsPdfBuffer({
