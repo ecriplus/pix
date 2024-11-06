@@ -1,5 +1,24 @@
 # Pix Changelog
 
+## v4.239.0 (06/11/2024)
+
+
+### :rocket: Amélioration
+- [#10478](https://github.com/1024pix/pix/pull/10478) [FEATURE] Traduction ES & NL : mire de connexion & inscription (PIX-15189).
+- [#10439](https://github.com/1024pix/pix/pull/10439) [FEATURE] Informer l'utilisateur si la demande de réinitialisation de mot de passe est expirée ou déjà utilisée (PIX-15061).
+
+### :building_construction: Tech
+- [#10486](https://github.com/1024pix/pix/pull/10486) [TECH] Réduire la latence lors de scale massif de containers ou de mise en production en chargeant le référentiel et en initialisant la connexion à la base de données avant de démarrer l'API.
+- [#10470](https://github.com/1024pix/pix/pull/10470) [TECH] Migrer la route GET /api/admin/users/{id} dans src (PIX-15170).
+- [#10485](https://github.com/1024pix/pix/pull/10485) [TECH] Migrer la route des resultats d'une participation dans son Bounded Context (PIX-15193).
+- [#10469](https://github.com/1024pix/pix/pull/10469) [TECH] Corriger un test flaky sur le tri des prescrits d'une organisation (PIX-15165).
+- [#10465](https://github.com/1024pix/pix/pull/10465) [TECH] Ajouter un feature toggle pour la suppression en autonomie du compte utilisateur (PIX-14909).
+
+### :bug: Correction
+- [#10471](https://github.com/1024pix/pix/pull/10471) [BUGFIX] Corrige le problème de finalisation de session pour les sessions à cheval sur 2 calibrations (PIX-15005).
+- [#10472](https://github.com/1024pix/pix/pull/10472) [BUGFIX] Réparer l'affichage du contenu spécifique de l'écran de fin de parcours (PIX-15109).
+- [#10482](https://github.com/1024pix/pix/pull/10482) [BUGFIX] Positionner à gauche le logo sur la page de code école de Pix Junior.
+
 ## v4.238.0 (05/11/2024)
 
 
