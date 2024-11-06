@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { userController } from '../../../../lib/application/users/user-controller.js';
 import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { SUPPORTED_LOCALES } from '../../../shared/domain/constants.js';
@@ -149,6 +150,29 @@ export const userAdminRoutes = [
         '- **Cette route est restreinte aux utilisateurs administrateurs**\n' +
           "- Elle permet de récupérer le détail d'un utilisateur dans un contexte d'administration",
       ],
+      tags: ['api', 'admin', 'identity-access-management', 'user'],
+    },
+  },
+  {
+    method: 'POST',
+    path: '/api/admin/users/{id}/anonymize',
+    config: {
+      validate: {
+        params: Joi.object({
+          id: identifiersType.userId,
+        }),
+      },
+      pre: [
+        {
+          method: (request, h) =>
+            securityPreHandlers.hasAtLeastOneAccessOf([
+              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+              securityPreHandlers.checkAdminMemberHasRoleSupport,
+            ])(request, h),
+        },
+      ],
+      handler: (request, h) => userController.anonymizeUser(request, h),
+      notes: ["- Permet à un administrateur d'anonymiser un utilisateur"],
       tags: ['api', 'admin', 'identity-access-management', 'user'],
     },
   },
