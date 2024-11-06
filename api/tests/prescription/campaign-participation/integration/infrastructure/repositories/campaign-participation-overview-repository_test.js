@@ -1,12 +1,21 @@
-import { databaseBuilder, expect, learningContentBuilder, mockLearningContent, sinon } from '../../../test-helper.js';
+import {
+  databaseBuilder,
+  expect,
+  learningContentBuilder,
+  mockLearningContent,
+  sinon,
+} from '../../../../../test-helper.js';
 
 const { campaignParticipationOverviewFactory } = databaseBuilder.factory;
 import _ from 'lodash';
 
-import * as campaignParticipationOverviewRepository from '../../../../lib/infrastructure/repositories/campaign-participation-overview-repository.js';
-import { CampaignParticipationStatuses, CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
-import { constants } from '../../../../src/shared/domain/constants.js';
-import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
+import * as campaignParticipationOverviewRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-overview-repository.js';
+import {
+  CampaignParticipationStatuses,
+  CampaignTypes,
+} from '../../../../../../src/prescription/shared/domain/constants.js';
+import { constants } from '../../../../../../src/shared/domain/constants.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 
 let userId;
 
