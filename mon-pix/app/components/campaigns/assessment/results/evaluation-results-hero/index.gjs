@@ -210,9 +210,8 @@ export default class EvaluationResultsHero extends Component {
       </div>
       {{#if this.showCustomOrganizationBlock}}
         <CustomOrganizationBlock
-          @customResultPageText={{@campaign.customResultPageText}}
-          @customResultPageButtonText={{@campaign.customResultPageButtonText}}
-          @customResultPageButtonUrl={{@campaign.customResultPageButtonUrl}}
+          @campaign={{@campaign}}
+          @campaignParticipationResult={{@campaignParticipationResult}}
         />
       {{/if}}
       {{#if @campaignParticipationResult.canRetry}}
