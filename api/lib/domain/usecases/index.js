@@ -144,7 +144,6 @@ import * as membershipRepository from '../../infrastructure/repositories/members
 import * as organizationLearnerRepository from '../../infrastructure/repositories/organization-learner-repository.js';
 import * as organizationMemberIdentityRepository from '../../infrastructure/repositories/organization-member-identity-repository.js';
 import * as organizationTagRepository from '../../infrastructure/repositories/organization-tag-repository.js';
-import * as participantResultRepository from '../../infrastructure/repositories/participant-result-repository.js';
 import { participantResultsSharedRepository } from '../../infrastructure/repositories/participant-results-shared-repository.js';
 import * as studentRepository from '../../infrastructure/repositories/student-repository.js';
 import * as targetProfileForUpdateRepository from '../../infrastructure/repositories/target-profile-for-update-repository.js';
@@ -291,7 +290,6 @@ const dependencies = {
   organizationRepository,
   organizationTagRepository,
   organizationValidator,
-  participantResultRepository,
   participantResultsSharedRepository,
   passwordGenerator,
   passwordValidator,

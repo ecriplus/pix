@@ -2,7 +2,6 @@ import * as moduleUnderTest from '../../../../lib/application/users/index.js';
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { UserNotAuthorizedToRemoveAuthenticationMethod } from '../../../../src/shared/domain/errors.js';
-import { AssessmentResult } from '../../../../src/shared/domain/read-models/participant-results/AssessmentResult.js';
 import { domainBuilder, expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Integration | Application | Users | user-controller', function () {
@@ -15,7 +14,6 @@ describe('Integration | Application | Users | user-controller', function () {
     sandbox.stub(securityPreHandlers, 'hasAtLeastOneAccessOf');
 
     sandbox.stub(usecases, 'getUserCampaignParticipationToCampaign');
-    sandbox.stub(usecases, 'getUserCampaignAssessmentResult');
     sandbox.stub(usecases, 'removeAuthenticationMethod');
 
     httpTestServer = new HttpTestServer();
@@ -68,72 +66,6 @@ describe('Integration | Application | Users | user-controller', function () {
 
         // then
         expect(response.statusCode).to.equal(403);
-      });
-    });
-  });
-
-  describe('#getUserCampaignAssessmentResult', function () {
-    const auth = { credentials: {}, strategy: {} };
-
-    context('Success cases', function () {
-      let campaignAssessmentResult;
-
-      beforeEach(function () {
-        securityPreHandlers.checkRequestedUserIsAuthenticatedUser.returns(true);
-        auth.credentials.userId = '1234';
-        campaignAssessmentResult = new AssessmentResult({
-          participationResults: { knowledgeElements: [] },
-          competences: [],
-          badgeResultsDTO: [],
-          stageCollection: domainBuilder.buildStageCollectionForUserCampaignResults({ campaignId: 5678, stages: [] }),
-          isCampaignMultipleSendings: false,
-        });
-      });
-
-      it('should return an HTTP response with status code 200', async function () {
-        // given
-        usecases.getUserCampaignAssessmentResult
-          .withArgs({ userId: '1234', campaignId: 5678, locale: 'fr-fr' })
-          .resolves(campaignAssessmentResult);
-
-        // when
-        const response = await httpTestServer.request(
-          'GET',
-          '/api/users/1234/campaigns/5678/assessment-result',
-          null,
-          auth,
-        );
-
-        // then
-        expect(response.statusCode).to.equal(200);
-      });
-    });
-
-    context('Error cases', function () {
-      it('should return a 403 HTTP response', async function () {
-        // given
-        securityPreHandlers.checkRequestedUserIsAuthenticatedUser.callsFake((request, h) => {
-          return Promise.resolve(h.response().code(403).takeover());
-        });
-
-        // when
-        const response = await httpTestServer.request('GET', '/api/users/1234/campaigns/5678/assessment-result');
-
-        // then
-        expect(response.statusCode).to.equal(403);
-      });
-
-      it('should return a 401 HTTP response', async function () {
-        // given
-        securityPreHandlers.checkRequestedUserIsAuthenticatedUser.callsFake((request, h) => {
-          return Promise.resolve(h.response().code(401).takeover());
-        });
-
-        // when
-        const response = await httpTestServer.request('GET', '/api/users/1234/campaigns/5678/assessment-result');
-
-        // then
-        expect(response.statusCode).to.equal(401);
       });
     });
   });

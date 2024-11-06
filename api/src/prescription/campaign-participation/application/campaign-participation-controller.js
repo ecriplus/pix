@@ -6,6 +6,7 @@ import * as campaignAnalysisSerializer from '../infrastructure/serializers/jsona
 import * as campaignAssessmentParticipationResultSerializer from '../infrastructure/serializers/jsonapi/campaign-assessment-participation-result-serializer.js';
 import * as campaignAssessmentParticipationSerializer from '../infrastructure/serializers/jsonapi/campaign-assessment-participation-serializer.js';
 import * as campaignProfileSerializer from '../infrastructure/serializers/jsonapi/campaign-profile-serializer.js';
+import * as participantResultSerializer from '../infrastructure/serializers/jsonapi/participant-result-serializer.js';
 import * as participationForCampaignManagementSerializer from '../infrastructure/serializers/jsonapi/participation-for-campaign-management-serializer.js';
 
 const findPaginatedParticipationsForCampaignManagement = async function (request) {
@@ -116,8 +117,30 @@ const getCampaignParticipationsForOrganizationLearner = async function (
   return dependencies.availableCampaignParticipationsSerializer.serialize(availableCampaignParticipations);
 };
 
+const getUserCampaignAssessmentResult = async function (
+  request,
+  _,
+  dependencies = {
+    participantResultSerializer,
+    extractLocaleFromRequest,
+  },
+) {
+  const authenticatedUserId = request.auth.credentials.userId;
+  const campaignId = request.params.campaignId;
+  const locale = dependencies.extractLocaleFromRequest(request);
+
+  const campaignAssessmentResult = await usecases.getUserCampaignAssessmentResult({
+    userId: authenticatedUserId,
+    campaignId,
+    locale,
+  });
+
+  return dependencies.participantResultSerializer.serialize(campaignAssessmentResult);
+};
+
 const campaignParticipationController = {
   findPaginatedParticipationsForCampaignManagement,
+  getUserCampaignAssessmentResult,
   getAnalysis,
   getCampaignProfile,
   getCampaignAssessmentParticipation,

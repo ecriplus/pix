@@ -1,20 +1,20 @@
 import _ from 'lodash';
 
-import { knex } from '../../../db/knex-database-connection.js';
-import * as flash from '../../../src/certification/flash-certification/domain/services/algorithm-methods/flash.js';
-import * as dataFetcher from '../../../src/evaluation/domain/services/algorithm-methods/data-fetcher.js';
-import { convertLevelStagesIntoThresholds } from '../../../src/evaluation/domain/services/stages/convert-level-stages-into-thresholds-service.js';
-import { NotFoundError } from '../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../src/shared/domain/models/index.js';
-import { AssessmentResult } from '../../../src/shared/domain/read-models/participant-results/AssessmentResult.js';
-import * as answerRepository from '../../../src/shared/infrastructure/repositories/answer-repository.js';
-import * as areaRepository from '../../../src/shared/infrastructure/repositories/area-repository.js';
-import * as challengeRepository from '../../../src/shared/infrastructure/repositories/challenge-repository.js';
-import * as competenceRepository from '../../../src/shared/infrastructure/repositories/competence-repository.js';
-import * as skillRepository from '../../../src/shared/infrastructure/repositories/skill-repository.js';
-import * as campaignRepository from './campaign-repository.js';
-import * as flashAssessmentResultRepository from './flash-assessment-result-repository.js';
-import * as knowledgeElementRepository from './knowledge-element-repository.js';
+import { knex } from '../../../../../db/knex-database-connection.js';
+import * as campaignRepository from '../../../../../lib/infrastructure/repositories/campaign-repository.js';
+import * as flashAssessmentResultRepository from '../../../../../lib/infrastructure/repositories/flash-assessment-result-repository.js';
+import * as knowledgeElementRepository from '../../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
+import * as flash from '../../../../certification/flash-certification/domain/services/algorithm-methods/flash.js';
+import * as dataFetcher from '../../../../evaluation/domain/services/algorithm-methods/data-fetcher.js';
+import { convertLevelStagesIntoThresholds } from '../../../../evaluation/domain/services/stages/convert-level-stages-into-thresholds-service.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
+import { Assessment } from '../../../../shared/domain/models/index.js';
+import { AssessmentResult } from '../../../../shared/domain/read-models/participant-results/AssessmentResult.js';
+import * as answerRepository from '../../../../shared/infrastructure/repositories/answer-repository.js';
+import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
+import * as challengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
+import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
+import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 
 /**
  *

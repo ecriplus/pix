@@ -209,6 +209,44 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
     });
   });
 
+  describe('#getUserCampaignAssessmentResult', function () {
+    beforeEach(function () {
+      sinon.stub(usecases, 'getUserCampaignAssessmentResult');
+    });
+
+    it('should call usecase and serializer with expected parameters', async function () {
+      //given
+      const locale = Symbol('locale');
+      const userId = Symbol('userId');
+      const campaignId = Symbol('campaignId');
+
+      const expectedResult = Symbol('expectedResult');
+      const serializedResult = Symbol('serializedResult');
+
+      const request = {
+        auth: { credentials: { userId } },
+        params: { campaignId },
+      };
+      const dependencies = {
+        extractLocaleFromRequest: sinon.stub(),
+        participantResultSerializer: { serialize: sinon.stub() },
+      };
+      usecases.getUserCampaignAssessmentResult.withArgs({ locale, userId, campaignId }).returns(expectedResult);
+      dependencies.extractLocaleFromRequest.withArgs(request).returns(locale);
+      dependencies.participantResultSerializer.serialize.withArgs(expectedResult).returns(serializedResult);
+
+      // when
+      const response = await campaignParticipationController.getUserCampaignAssessmentResult(
+        request,
+        hFake,
+        dependencies,
+      );
+
+      // then
+      expect(response).to.be.equal(serializedResult);
+    });
+  });
+
   describe('#deleteParticipation', function () {
     it('should call the usecase to delete the campaignParticipation', async function () {
       // given

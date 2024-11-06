@@ -1,7 +1,10 @@
-import { getUserCampaignAssessmentResult } from '../../../../lib/domain/usecases/get-user-campaign-assessment-result.js';
-import { NoCampaignParticipationForUserAndCampaign, NotFoundError } from '../../../../src/shared/domain/errors.js';
-import { CampaignParticipationStatuses } from '../../../../src/shared/domain/models/index.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { getUserCampaignAssessmentResult } from '../../../../../../src/prescription/campaign-participation/domain/usecases/get-user-campaign-assessment-result.js';
+import {
+  NoCampaignParticipationForUserAndCampaign,
+  NotFoundError,
+} from '../../../../../../src/shared/domain/errors.js';
+import { CampaignParticipationStatuses } from '../../../../../../src/shared/domain/models/index.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | get-user-campaign-assessment-result', function () {
   const locale = 'locale',
