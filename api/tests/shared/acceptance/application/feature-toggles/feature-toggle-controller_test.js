@@ -32,6 +32,7 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-self-account-deletion-enabled': false,
             'is-text-to-speech-button-enabled': false,
             'is-v3-eligibility-check-enabled': false,
+            'setup-ecosystem-before-start': false,
             'show-experimental-missions': false,
             'show-new-campaign-presentation-page': false,
             'show-new-result-page': false,
