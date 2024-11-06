@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../../lib/domain/usecases/index.js';
 import { userAdminController } from '../../../../../src/identity-access-management/application/user/user.admin.controller.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
@@ -207,7 +206,7 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
       const domainTransaction = {
         knexTransaction: Symbol('transaction'),
       };
-      sinon.stub(libUsecases, 'anonymizeUser');
+      sinon.stub(usecases, 'anonymizeUser');
       sinon.stub(usecases, 'getUserDetailsForAdmin').resolves(userDetailsForAdmin);
       sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
         return callback(domainTransaction);
@@ -227,7 +226,7 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
 
       // then
       expect(DomainTransaction.execute).to.have.been.called;
-      expect(libUsecases.anonymizeUser).to.have.been.calledWithExactly({ userId, updatedByUserId, domainTransaction });
+      expect(usecases.anonymizeUser).to.have.been.calledWithExactly({ userId, updatedByUserId, domainTransaction });
       expect(usecases.getUserDetailsForAdmin).to.have.been.calledWithExactly({ userId });
       expect(userAnonymizedDetailsForAdminSerializer.serialize).to.have.been.calledWithExactly(userDetailsForAdmin);
       expect(response.statusCode).to.equal(200);

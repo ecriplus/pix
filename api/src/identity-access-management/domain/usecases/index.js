@@ -7,6 +7,8 @@ import * as userReconciliationService from '../../../../lib/domain/services/user
 import { oidcAuthenticationServiceRegistry } from '../../../../lib/domain/usecases/index.js';
 import * as campaignParticipationRepository from '../../../../lib/infrastructure/repositories/campaign-participation-repository.js';
 import * as campaignRepository from '../../../../lib/infrastructure/repositories/campaign-repository.js';
+import { userAnonymizedEventLoggingJobRepository } from '../../../../lib/infrastructure/repositories/jobs/user-anonymized-event-logging-job-repository.js';
+import * as membershipRepository from '../../../../lib/infrastructure/repositories/membership-repository.js';
 import * as organizationLearnerRepository from '../../../../lib/infrastructure/repositories/organization-learner-repository.js';
 import * as userRecommendedTrainingRepository from '../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import { repositories as campaignRepositories } from '../../../prescription/campaign/infrastructure/repositories/index.js';
@@ -22,6 +24,7 @@ import * as codeUtils from '../../../shared/infrastructure/utils/code-utils.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as emailRepository from '../../../shared/mail/infrastructure/repositories/email.repository.js';
+import { certificationCenterMembershipRepository } from '../../../team/infrastructure/repositories/certification-center-membership.repository.js';
 import { accountRecoveryDemandRepository } from '../../infrastructure/repositories/account-recovery-demand.repository.js';
 import * as authenticationMethodRepository from '../../infrastructure/repositories/authentication-method.repository.js';
 import { emailValidationDemandRepository } from '../../infrastructure/repositories/email-validation-demand.repository.js';
@@ -48,13 +51,16 @@ const repositories = {
   campaignParticipationRepository,
   campaignRepository,
   campaignToJoinRepository: campaignRepositories.campaignToJoinRepository,
+  certificationCenterMembershipRepository,
   emailValidationDemandRepository,
   emailRepository,
   eventLoggingJobRepository,
+  membershipRepository,
   oidcProviderRepository,
   organizationLearnerRepository,
   refreshTokenRepository,
   resetPasswordDemandRepository,
+  userAnonymizedEventLoggingJobRepository,
   userEmailRepository,
   userLoginRepository,
   userRecommendedTrainingRepository,

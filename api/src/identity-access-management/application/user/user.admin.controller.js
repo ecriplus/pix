@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import * as userAnonymizedDetailsForAdminSerializer from '../../../../lib/infrastructure/serializers/jsonapi/user-anonymized-details-for-admin-serializer.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
@@ -78,7 +77,7 @@ const anonymizeUser = async function (request, h, dependencies = { userAnonymize
   const adminMemberId = request.auth.credentials.userId;
 
   await DomainTransaction.execute(async (domainTransaction) => {
-    await libUsecases.anonymizeUser({
+    await usecases.anonymizeUser({
       userId: userToAnonymizeId,
       updatedByUserId: adminMemberId,
       domainTransaction,
