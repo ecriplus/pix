@@ -163,7 +163,7 @@
       },
       "oidc-provider-selector": {
         "label": "Rechercher une organisation",
-        "placeholder": "Sélectionner un organisme",
+        "placeholder": "Sélectionner une organisation",
         "searchLabel": "Recherche par mots-clés"
       },
       "other-authentication-providers": {
