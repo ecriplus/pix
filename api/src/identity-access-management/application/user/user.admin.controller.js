@@ -49,11 +49,31 @@ const updateUserDetailsByAdmin = async function (request, h, dependencies = { us
 };
 
 /**
+ *
+ * @param request
+ * @param h
+ * @param dependencies
+ * @param {UserDetailsForAdminSerializer} dependencies.userDetailsForAdminSerializer
+ * @returns {Promise<*>}
+ */
+const getUserDetails = async function (request, h, dependencies = { userDetailsForAdminSerializer }) {
+  const userId = request.params.id;
+  const userDetailsForAdmin = await usecases.getUserDetailsForAdmin({ userId });
+  return dependencies.userDetailsForAdminSerializer.serialize(userDetailsForAdmin);
+};
+
+/**
  * @typedef {object} UserAdminController
  * @property {function} findPaginatedFilteredUsers
+ * @property {function} getUserDetails
  * @property {function} unblockUserAccount
  * @property {function} updateUserDetailsByAdmin
  */
-const userAdminController = { findPaginatedFilteredUsers, unblockUserAccount, updateUserDetailsByAdmin };
+const userAdminController = {
+  findPaginatedFilteredUsers,
+  getUserDetails,
+  unblockUserAccount,
+  updateUserDetailsByAdmin,
+};
 
 export { userAdminController };

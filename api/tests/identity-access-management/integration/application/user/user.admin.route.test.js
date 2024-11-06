@@ -141,4 +141,59 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       expect(response.statusCode).to.equal(400);
     });
   });
+
+  describe('GET /api/admin/users/{id}', function () {
+    it('returns an HTTP status code 200', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+      sinon.stub(userAdminController, 'getUserDetails').resolves('ok');
+
+      // when
+      const response = await httpTestServer.request('GET', '/api/admin/users/8');
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      sinon.assert.calledOnce(securityPreHandlers.hasAtLeastOneAccessOf);
+      sinon.assert.calledOnce(userAdminController.getUserDetails);
+    });
+
+    it('returns an HTTP status code 403', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns((request, h) =>
+        h
+          .response({ errors: new Error('') })
+          .code(403)
+          .takeover(),
+      );
+
+      // when
+      const response = await httpTestServer.request('GET', '/api/admin/users/8');
+
+      // then
+      expect(response.statusCode).to.equal(403);
+      sinon.assert.calledOnce(securityPreHandlers.hasAtLeastOneAccessOf);
+    });
+
+    it('returns BAD_REQUEST (400) when id in param is not a number"', async function () {
+      // given
+      const url = '/api/admin/users/NOT_A_NUMBER';
+
+      // when
+      const response = await httpTestServer.request('GET', url);
+
+      // then
+      expect(response.statusCode).to.equal(400);
+    });
+
+    it('returns BAD_REQUEST (400) when id in params is out of range"', async function () {
+      // given
+      const url = '/api/admin/users/0';
+
+      // when
+      const response = await httpTestServer.request('GET', url);
+
+      // then
+      expect(response.statusCode).to.equal(400);
+    });
+  });
 });

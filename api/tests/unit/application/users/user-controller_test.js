@@ -4,6 +4,7 @@ import { DomainTransaction } from '../../../../lib/infrastructure/DomainTransact
 import { usecases as devcompUsecases } from '../../../../src/devcomp/domain/usecases/index.js';
 import { evaluationUsecases } from '../../../../src/evaluation/domain/usecases/index.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { usecases as identityAccessManagementUsecases } from '../../../../src/identity-access-management/domain/usecases/index.js';
 import { UserOrganizationForAdmin } from '../../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
 import * as requestResponseUtils from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../test-helper.js';
@@ -86,31 +87,6 @@ describe('Unit | Controller | user-controller', function () {
 
       // when
       const response = await userController.rememberUserHasSeenChallengeTooltip(request, hFake, { userSerializer });
-
-      // then
-      expect(response).to.be.equal('ok');
-    });
-  });
-
-  describe('#getUserDetailsForAdmin', function () {
-    let request;
-    let dependencies;
-
-    beforeEach(function () {
-      request = { params: { id: 123 } };
-
-      sinon.stub(usecases, 'getUserDetailsForAdmin');
-      const userDetailsForAdminSerializer = { serialize: sinon.stub() };
-      dependencies = { userDetailsForAdminSerializer };
-    });
-
-    it('should get the specified user for admin context', async function () {
-      // given
-      usecases.getUserDetailsForAdmin.withArgs({ userId: 123 }).resolves('userDetail');
-      dependencies.userDetailsForAdminSerializer.serialize.withArgs('userDetail').returns('ok');
-
-      // when
-      const response = await userController.getUserDetailsForAdmin(request, hFake, dependencies);
 
       // then
       expect(response).to.be.equal('ok');
@@ -363,7 +339,7 @@ describe('Unit | Controller | user-controller', function () {
         knexTransaction: Symbol('transaction'),
       };
       sinon.stub(usecases, 'anonymizeUser');
-      sinon.stub(usecases, 'getUserDetailsForAdmin').resolves(userDetailsForAdmin);
+      sinon.stub(identityAccessManagementUsecases, 'getUserDetailsForAdmin').resolves(userDetailsForAdmin);
       sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
         return callback(domainTransaction);
       });
@@ -383,7 +359,7 @@ describe('Unit | Controller | user-controller', function () {
       // then
       expect(DomainTransaction.execute).to.have.been.called;
       expect(usecases.anonymizeUser).to.have.been.calledWithExactly({ userId, updatedByUserId, domainTransaction });
-      expect(usecases.getUserDetailsForAdmin).to.have.been.calledWithExactly({ userId });
+      expect(identityAccessManagementUsecases.getUserDetailsForAdmin).to.have.been.calledWithExactly({ userId });
       expect(userAnonymizedDetailsForAdminSerializer.serialize).to.have.been.calledWithExactly(userDetailsForAdmin);
       expect(response.statusCode).to.equal(200);
       expect(response.source).to.deep.equal(anonymizedUserSerialized);

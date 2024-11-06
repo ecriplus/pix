@@ -1,14 +1,14 @@
-import { getUserDetailsForAdmin } from '../../../../lib/domain/usecases/get-user-details-for-admin.js';
-import { expect, sinon } from '../../../test-helper.js';
+import { getUserDetailsForAdmin } from '../../../../../src/identity-access-management/domain/usecases/get-user-details-for-admin.usecase.js';
+import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | get-user-details-for-admin', function () {
+describe('Unit | Identity Access Management | Domain | UseCase | get-user-details-for-admin', function () {
   let userRepository;
 
   beforeEach(function () {
     userRepository = { getUserDetailsForAdmin: sinon.stub() };
   });
 
-  it('should get the user details in administration context', async function () {
+  it('gets the user details in administration context', async function () {
     // given
     const userId = 1;
     const expectedUserDetailsForAdmin = { id: userId };
