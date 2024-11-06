@@ -189,7 +189,7 @@
           "email": {
             "error-message-invalid": "Your email address is invalid.",
             "label": "Email address",
-            "placeholder": "e.g. john.smith@example.com"
+            "placeholder": "e.g. john.smith@email.com"
           }
         },
         "no-email-question": "No email address?",
@@ -231,7 +231,7 @@
           "email": {
             "error": "Your email address is invalid.",
             "label": "Email address",
-            "placeholder": "e.g. john.smith@example.com"
+            "placeholder": "e.g. john.smith@email.com"
           },
           "firstname": {
             "error": "You have not entered your first name.",
@@ -1767,7 +1767,7 @@
         "legend": "Information required for sign in.",
         "login": {
           "label": "Email address or username",
-          "placeholder": "e.g. john.smith@example.com"
+          "placeholder": "e.g. john.smith@email.com"
         },
         "password": {
           "label": "Password"
