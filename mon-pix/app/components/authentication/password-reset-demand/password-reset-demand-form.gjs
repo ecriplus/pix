@@ -4,6 +4,7 @@ import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixMessage from '@1024pix/pix-ui/components/pix-message';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
@@ -14,8 +15,10 @@ import isEmailValid from '../../../utils/email-validator.js';
 import PasswordResetDemandReceivedInfo from './password-reset-demand-received-info';
 
 export default class PasswordResetDemandForm extends Component {
+  @service errors;
+
+  @tracked globalError = this.errors.hasErrors && this.errors.shift();
   @tracked isLoading = false;
-  @tracked globalError;
   @tracked isPasswordResetDemandReceived = false;
 
   validation = new FormValidation({

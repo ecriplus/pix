@@ -178,6 +178,21 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
         assert.dom(screen.queryByText(t('common.api-error-messages.internal-server-error'))).exists();
       });
     });
+
+    module('when there is an error in errors service', function () {
+      test('it displays the error on the corresponding banner', async function (assert) {
+        // given
+        const errorKeyMessageToBeDisplayed = 'pages.reset-password.error.expired-demand';
+        const errorsService = this.owner.lookup('service:errors');
+
+        // when
+        errorsService.push(errorKeyMessageToBeDisplayed);
+        const screen = await render(<template><PasswordResetDemandForm /></template>);
+
+        // then
+        assert.dom(screen.getByRole('alert', { value: t(errorKeyMessageToBeDisplayed) })).exists();
+      });
+    });
   });
 });
 

@@ -1,7 +1,7 @@
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
-module('Unit | Route | password reset', function (hooks) {
+module('Unit | Route | password-reset-demand', function (hooks) {
   setupTest(hooks);
 
   let route;
