@@ -14,11 +14,11 @@
   <:content>
     {{#if this.isSigninRoute}}
       <h1 class="pix-title-m">{{t "pages.sign-in.first-title"}}</h1>
+      <Authentication::SsoSelectionForm />
     {{else}}
       <h1 class="pix-title-m">{{t "pages.sign-up.first-title"}}</h1>
+      <Authentication::SsoSelectionForm @isForSignup={{true}} />
     {{/if}}
-
-    <Authentication::SsoSelectionForm />
 
     {{#if this.isSigninRoute}}
       <section class="sso-selection-page__signup">

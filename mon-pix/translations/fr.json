@@ -463,10 +463,11 @@
       },
       "sso-selection": {
         "signin": {
-          "link": "Je me connecte",
+          "button": "Je me connecte",
           "message": "Vous allez être redirigé(e) vers la page de connexion de « {providerName} » afin de vous identifier sur Pix."
         },
         "signup": {
+          "button": "Je m'inscris",
           "link": "Inscrivez-vous",
           "title": "Vous n'avez pas de compte ?"
         },
