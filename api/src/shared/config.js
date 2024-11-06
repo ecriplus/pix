@@ -214,6 +214,7 @@ const configuration = (function () {
       isQuestEnabled: toBoolean(process.env.FT_ENABLE_QUESTS),
       isTextToSpeechButtonEnabled: toBoolean(process.env.FT_ENABLE_TEXT_TO_SPEECH_BUTTON),
       isV3EligibilityCheckEnabled: toBoolean(process.env.FT_ENABLE_V3_ELIGIBILITY_CHECK),
+      setupEcosystemBeforeStart: toBoolean(process.env.FT_SETUP_ECOSYSTEM_BEFORE_START) || false,
       showExperimentalMissions: toBoolean(process.env.FT_SHOW_EXPERIMENTAL_MISSIONS),
       showNewCampaignPresentationPage: toBoolean(process.env.FT_SHOW_NEW_CAMPAIGN_PRESENTATION_PAGE),
       showNewResultPage: toBoolean(process.env.FT_SHOW_NEW_RESULT_PAGE),

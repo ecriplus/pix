@@ -6,6 +6,7 @@ validateEnvironmentVariables();
 
 import { disconnect, prepareDatabaseConnection } from './db/knex-database-connection.js';
 import { createServer } from './server.js';
+import { config } from './src/shared/config.js';
 import { learningContentCache } from './src/shared/infrastructure/caches/learning-content-cache.js';
 import { initLearningContent } from './src/shared/infrastructure/datasources/learning-content/datasource.js';
 import { temporaryStorage } from './src/shared/infrastructure/temporary-storage/index.js';
@@ -30,7 +31,9 @@ async function _setupEcosystem() {
 }
 
 const start = async function () {
-  await _setupEcosystem();
+  if (config.featureToggles.setupEcosystemBeforeStart) {
+    await _setupEcosystem();
+  }
   server = await createServer();
   await server.start();
 };
