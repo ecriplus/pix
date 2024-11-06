@@ -5,6 +5,7 @@ import * as availableCampaignParticipationsSerializer from '../infrastructure/se
 import * as campaignAnalysisSerializer from '../infrastructure/serializers/jsonapi/campaign-analysis-serializer.js';
 import * as campaignAssessmentParticipationResultSerializer from '../infrastructure/serializers/jsonapi/campaign-assessment-participation-result-serializer.js';
 import * as campaignAssessmentParticipationSerializer from '../infrastructure/serializers/jsonapi/campaign-assessment-participation-serializer.js';
+import * as campaignParticipationOverviewSerializer from '../infrastructure/serializers/jsonapi/campaign-participation-overview-serializer.js';
 import * as campaignProfileSerializer from '../infrastructure/serializers/jsonapi/campaign-profile-serializer.js';
 import * as participantResultSerializer from '../infrastructure/serializers/jsonapi/participant-result-serializer.js';
 import * as participationForCampaignManagementSerializer from '../infrastructure/serializers/jsonapi/participation-for-campaign-management-serializer.js';
@@ -117,6 +118,27 @@ const getCampaignParticipationsForOrganizationLearner = async function (
   return dependencies.availableCampaignParticipationsSerializer.serialize(availableCampaignParticipations);
 };
 
+const getCampaignParticipationOverviews = async function (
+  request,
+  h,
+  dependencies = {
+    campaignParticipationOverviewSerializer,
+  },
+) {
+  const authenticatedUserId = request.auth.credentials.userId;
+  const query = request.query;
+
+  const userCampaignParticipationOverviews = await usecases.findUserCampaignParticipationOverviews({
+    userId: authenticatedUserId,
+    states: query.filter.states,
+    page: query.page,
+  });
+
+  return dependencies.campaignParticipationOverviewSerializer.serializeForPaginatedList(
+    userCampaignParticipationOverviews,
+  );
+};
+
 const getUserCampaignAssessmentResult = async function (
   request,
   _,
@@ -149,6 +171,7 @@ const campaignParticipationController = {
   getCampaignAssessmentParticipationResult,
   updateParticipantExternalId,
   deleteCampaignParticipationForAdmin,
+  getCampaignParticipationOverviews,
 };
 
 export { campaignParticipationController };

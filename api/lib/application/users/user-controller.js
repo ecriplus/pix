@@ -9,7 +9,6 @@ import * as userSerializer from '../../../src/shared/infrastructure/serializers/
 import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { DomainTransaction } from '../../infrastructure/DomainTransaction.js';
-import * as campaignParticipationOverviewSerializer from '../../infrastructure/serializers/jsonapi/campaign-participation-overview-serializer.js';
 import * as certificationCenterMembershipSerializer from '../../infrastructure/serializers/jsonapi/certification-center-membership-serializer.js';
 import * as userAnonymizedDetailsForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-anonymized-details-for-admin-serializer.js';
 import * as userOrganizationForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-organization-for-admin-serializer.js';
@@ -58,27 +57,6 @@ const getCampaignParticipations = function (request, h, dependencies = { campaig
   return usecases
     .findLatestOngoingUserCampaignParticipations({ userId: authenticatedUserId })
     .then(dependencies.campaignParticipationSerializer.serialize);
-};
-
-const getCampaignParticipationOverviews = async function (
-  request,
-  h,
-  dependencies = {
-    campaignParticipationOverviewSerializer,
-  },
-) {
-  const authenticatedUserId = request.auth.credentials.userId;
-  const query = request.query;
-
-  const userCampaignParticipationOverviews = await usecases.findUserCampaignParticipationOverviews({
-    userId: authenticatedUserId,
-    states: query.filter.states,
-    page: query.page,
-  });
-
-  return dependencies.campaignParticipationOverviewSerializer.serializeForPaginatedList(
-    userCampaignParticipationOverviews,
-  );
 };
 
 const resetScorecard = function (request, h, dependencies = { scorecardSerializer, requestResponseUtils }) {
@@ -188,7 +166,6 @@ const userController = {
   findCertificationCenterMembershipsByUser,
   findPaginatedUserRecommendedTrainings,
   findUserOrganizationsForAdmin,
-  getCampaignParticipationOverviews,
   getCampaignParticipations,
   getUserCampaignParticipationToCampaign,
   reassignAuthenticationMethods,

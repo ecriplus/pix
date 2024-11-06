@@ -6,6 +6,93 @@ import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 const { FRENCH_SPOKEN } = LOCALE;
 describe('Unit | Application | Controller | Campaign-Participation', function () {
+  describe('#getCampaignParticipationOverviews', function () {
+    const userId = '1';
+    let dependencies;
+
+    beforeEach(function () {
+      const campaignParticipationOverviewSerializer = {
+        serialize: sinon.stub(),
+        serializeForPaginatedList: sinon.stub(),
+      };
+      sinon.stub(usecases, 'findUserCampaignParticipationOverviews');
+      dependencies = {
+        campaignParticipationOverviewSerializer,
+      };
+    });
+
+    it('should return serialized campaignParticipationOverviews', async function () {
+      // given
+      const request = {
+        auth: {
+          credentials: {
+            userId: userId,
+          },
+        },
+        params: {
+          id: userId,
+        },
+        query: { filter: {}, page: {} },
+      };
+      usecases.findUserCampaignParticipationOverviews.withArgs({ userId, states: undefined, page: {} }).resolves([]);
+      dependencies.campaignParticipationOverviewSerializer.serializeForPaginatedList.withArgs([]).returns({
+        id: 'campaignParticipationOverviews',
+      });
+
+      // when
+      const response = await campaignParticipationController.getCampaignParticipationOverviews(
+        request,
+        hFake,
+        dependencies,
+      );
+
+      // then
+      expect(response).to.deep.equal({
+        id: 'campaignParticipationOverviews',
+      });
+      expect(dependencies.campaignParticipationOverviewSerializer.serializeForPaginatedList).to.have.been.calledOnce;
+    });
+
+    it('should forward state and page query parameters', async function () {
+      // given
+      const request = {
+        auth: {
+          credentials: {
+            userId: userId,
+          },
+        },
+        params: {
+          id: userId,
+        },
+        query: {
+          filter: {
+            states: 'ONGOING',
+          },
+          page: { number: 1, size: 10 },
+        },
+      };
+      usecases.findUserCampaignParticipationOverviews
+        .withArgs({ userId, states: 'ONGOING', page: { number: 1, size: 10 } })
+        .resolves([]);
+      dependencies.campaignParticipationOverviewSerializer.serializeForPaginatedList.withArgs([]).returns({
+        id: 'campaignParticipationOverviews',
+      });
+
+      // when
+      const response = await campaignParticipationController.getCampaignParticipationOverviews(
+        request,
+        hFake,
+        dependencies,
+      );
+
+      // then
+      expect(response).to.deep.equal({
+        id: 'campaignParticipationOverviews',
+      });
+      expect(dependencies.campaignParticipationOverviewSerializer.serializeForPaginatedList).to.have.been.calledOnce;
+    });
+  });
+
   describe('#getCampaignAssessmentParticipationResult', function () {
     let dependencies;
     const campaignId = 123;
