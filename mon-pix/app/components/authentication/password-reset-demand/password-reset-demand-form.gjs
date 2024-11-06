@@ -1,5 +1,4 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixMessage from '@1024pix/pix-ui/components/pix-message';
 import { on } from '@ember/modifier';
@@ -114,17 +113,13 @@ export default class PasswordResetDemandForm extends Component {
           </PixButton>
         </div>
 
-        <p class="authentication-password-reset-demand-form__help">
-          {{t "components.authentication.password-reset-demand-form.no-email-question"}}
-          <PixButtonLink
-            @variant="tertiary"
-            @href="{{t 'components.authentication.password-reset-demand-form.contact-us-link.link-url'}}"
-            target="_blank"
-            class="authentication-password-reset-demand-form__help-contact-us-link"
-          >
+        <section class="authentication-password-reset-demand-form__help">
+          <h2>
+            {{t "components.authentication.password-reset-demand-form.no-email-question"}}</h2>
+          <a href="{{t 'components.authentication.password-reset-demand-form.contact-us-link.link-url'}}">
             {{t "components.authentication.password-reset-demand-form.contact-us-link.link-text"}}
-          </PixButtonLink>
-        </p>
+          </a>
+        </section>
       </form>
     {{/if}}
   </template>
