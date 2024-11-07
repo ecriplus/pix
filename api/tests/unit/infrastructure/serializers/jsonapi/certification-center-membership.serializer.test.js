@@ -1,5 +1,5 @@
-import * as certificationCenterMembershipSerializer from '../../../../../lib/infrastructure/serializers/jsonapi/certification-center-membership-serializer.js';
 import { CertificationCenterMembership } from '../../../../../src/shared/domain/models/CertificationCenterMembership.js';
+import * as certificationCenterMembershipSerializer from '../../../../../src/shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Serializer | JSONAPI | certification-center-membership-serializer', function () {
