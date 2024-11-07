@@ -4,6 +4,7 @@ import { config } from '../../../src/shared/config.js';
 import { LOCALE } from '../../../src/shared/domain/constants.js';
 import { tokenService } from '../../../src/shared/domain/services/token-service.js';
 import { urlBuilder } from '../../../src/shared/infrastructure/utils/url-builder.js';
+import { getEmailDefaultVariables } from '../../../src/shared/mail/domain/emails-default-variables.js';
 import { mailer } from '../../../src/shared/mail/infrastructure/services/mailer.js';
 import * as translations from '../../../translations/index.js';
 
@@ -17,10 +18,6 @@ const SCO_ACCOUNT_RECOVERY_TAG = 'SCO_ACCOUNT_RECOVERY';
 const PIX_HOME_NAME_FRENCH_FRANCE = `pix${config.domain.tldFr}`;
 const PIX_HOME_URL_FRENCH_FRANCE = `${config.domain.pix + config.domain.tldFr}`;
 const PIX_APP_URL_FRENCH_FRANCE = `${config.domain.pixApp + config.domain.tldFr}`;
-const PIX_APP_CONNECTION_URL_FRENCH_FRANCE = `${PIX_APP_URL_FRENCH_FRANCE}/connexion`;
-const PIX_ORGA_HOME_URL_FRENCH_FRANCE = `${config.domain.pixOrga + config.domain.tldFr}`;
-const PIX_CERTIF_HOME_URL_FRENCH_FRANCE = `${config.domain.pixCertif + config.domain.tldFr}`;
-const HELPDESK_FRENCH_FRANCE = 'https://pix.fr/support';
 
 // INTERNATIONAL
 const PIX_HOME_NAME_INTERNATIONAL = `pix${config.domain.tldOrg}`;
@@ -29,20 +26,7 @@ const PIX_HOME_URL_INTERNATIONAL = {
   fr: `${config.domain.pix + config.domain.tldOrg}/fr/`,
   nl: `${config.domain.pix + config.domain.tldOrg}/nl-be/`,
 };
-const PIX_ORGA_HOME_URL_INTERNATIONAL = `${config.domain.pixOrga + config.domain.tldOrg}`;
-const PIX_CERTIF_HOME_URL_INTERNATIONAL = `${config.domain.pixCertif + config.domain.tldOrg}`;
 const PIX_APP_URL_INTERNATIONAL = `${config.domain.pixApp + config.domain.tldOrg}`;
-const PIX_APP_CONNECTION_URL_INTERNATIONAL = {
-  en: `${PIX_APP_URL_INTERNATIONAL}/connexion/?lang=en`,
-  es: `${PIX_APP_URL_INTERNATIONAL}/connexion/?lang=es`,
-  fr: `${PIX_APP_URL_INTERNATIONAL}/connexion/?lang=fr`,
-  nl: `${PIX_APP_URL_INTERNATIONAL}/connexion/?lang=nl`,
-};
-const PIX_HELPDESK_URL_INTERNATIONAL = {
-  en: 'https://pix.org/en/support',
-  fr: 'https://pix.org/fr/support',
-  nl: 'https://pix.org/nl-be/support',
-};
 
 /**
  * @param email
@@ -410,30 +394,20 @@ function sendNotificationToOrganizationMembersForTargetProfileDetached({ email, 
  * @private
  */
 function _getMailerConfig(locale) {
+  const defaultVariables = getEmailDefaultVariables(locale);
+
   switch (locale) {
     case FRENCH_SPOKEN:
     case SPANISH_SPOKEN:
     case ENGLISH_SPOKEN:
     case DUTCH_SPOKEN:
       return {
-        homeName: PIX_HOME_NAME_INTERNATIONAL,
-        homeUrl: PIX_HOME_URL_INTERNATIONAL[locale] ?? PIX_HOME_URL_INTERNATIONAL.en,
-        pixOrgaHomeUrl: PIX_ORGA_HOME_URL_INTERNATIONAL,
-        pixCertifHomeUrl: PIX_CERTIF_HOME_URL_INTERNATIONAL,
-        pixAppConnectionUrl: PIX_APP_CONNECTION_URL_INTERNATIONAL[locale] ?? PIX_APP_CONNECTION_URL_INTERNATIONAL.en,
-        helpdeskUrl: PIX_HELPDESK_URL_INTERNATIONAL[locale] ?? PIX_HELPDESK_URL_INTERNATIONAL.en,
-        displayNationalLogo: false,
+        ...defaultVariables,
         translation: translations[locale],
       };
     default:
       return {
-        homeName: PIX_HOME_NAME_FRENCH_FRANCE,
-        homeUrl: PIX_HOME_URL_FRENCH_FRANCE,
-        pixOrgaHomeUrl: PIX_ORGA_HOME_URL_FRENCH_FRANCE,
-        pixCertifHomeUrl: PIX_CERTIF_HOME_URL_FRENCH_FRANCE,
-        pixAppConnectionUrl: PIX_APP_CONNECTION_URL_FRENCH_FRANCE,
-        helpdeskUrl: HELPDESK_FRENCH_FRANCE,
-        displayNationalLogo: true,
+        ...defaultVariables,
         translation: translations.fr,
       };
   }
