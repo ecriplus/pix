@@ -1,13 +1,13 @@
-import { findUserCampaignParticipationOverviews } from '../../../../lib/domain/usecases/find-user-campaign-participation-overviews.js';
-import { sinon } from '../../../test-helper.js';
+import { findUserCampaignParticipationOverviews } from '../../../../../../src/prescription/campaign-participation/domain/usecases/find-user-campaign-participation-overviews.js';
+import { sinon } from '../../../../../test-helper.js';
 describe('Unit | UseCase | find-user-campaign-participation-overviews', function () {
-  let compareStagesAndAcquiredStagesService,
+  let compareStagesAndAcquiredStages,
     campaignParticipationOverviewRepository,
     stageRepository,
     stageAcquisitionRepository;
 
   beforeEach(function () {
-    compareStagesAndAcquiredStagesService = {
+    compareStagesAndAcquiredStages = {
       compare: sinon.stub().returns([]),
     };
     campaignParticipationOverviewRepository = {
@@ -30,7 +30,7 @@ describe('Unit | UseCase | find-user-campaign-participation-overviews', function
       await findUserCampaignParticipationOverviews({
         userId,
         states,
-        compareStagesAndAcquiredStagesService,
+        compareStagesAndAcquiredStages,
         campaignParticipationOverviewRepository,
         stageRepository,
         stageAcquisitionRepository,
@@ -57,7 +57,7 @@ describe('Unit | UseCase | find-user-campaign-participation-overviews', function
         userId,
         states,
         page,
-        compareStagesAndAcquiredStagesService,
+        compareStagesAndAcquiredStages,
         campaignParticipationOverviewRepository,
         stageRepository,
         stageAcquisitionRepository,
@@ -84,7 +84,7 @@ describe('Unit | UseCase | find-user-campaign-participation-overviews', function
         userId,
         states,
         page,
-        compareStagesAndAcquiredStagesService,
+        compareStagesAndAcquiredStages,
         campaignParticipationOverviewRepository,
         stageRepository,
         stageAcquisitionRepository,

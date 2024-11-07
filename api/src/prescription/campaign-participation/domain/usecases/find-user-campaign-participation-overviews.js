@@ -5,7 +5,7 @@ const findUserCampaignParticipationOverviews = async function ({
   stageRepository,
   stageAcquisitionRepository,
   campaignParticipationOverviewRepository,
-  stageAndStageAcquisitionComparisonService,
+  compareStagesAndAcquiredStages,
 }) {
   const concatenatedStates = states ? [].concat(states) : undefined;
 
@@ -33,7 +33,7 @@ const findUserCampaignParticipationOverviews = async function ({
       const acquiredStagesForThisCampaign = acquiredStages.filter(
         ({ campaignParticipationId }) => campaignParticipationId === campaignParticipationOverview.id,
       );
-      const stagesComparison = stageAndStageAcquisitionComparisonService.compare(
+      const stagesComparison = compareStagesAndAcquiredStages.compare(
         stagesForThisCampaign,
         acquiredStagesForThisCampaign,
       );
