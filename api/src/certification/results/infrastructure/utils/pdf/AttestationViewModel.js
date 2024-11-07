@@ -5,6 +5,7 @@ const { sortBy } = lodash;
 import dayjs from 'dayjs';
 
 import { toArrayOfFixedLengthStringsConservingWords } from '../../../../../shared/infrastructure/utils/string-utils.js';
+import { SESSIONS_VERSIONS } from '../../../../shared/domain/models/SessionVersion.js';
 
 const PROFESSIONALIZING_VALIDITY_START_DATE = new Date('2022-01-01');
 
@@ -26,6 +27,7 @@ class AttestationViewModel {
     stickers,
     competenceDetailViewModels,
     isFrenchDomainExtension,
+    version,
   }) {
     this.pixScore = pixScore;
     this.maxReachableScore = maxReachableScore;
@@ -43,6 +45,7 @@ class AttestationViewModel {
     this._hasAcquiredAnyComplementaryCertifications = hasAcquiredAnyComplementaryCertifications;
     this.stickers = stickers;
     this._isFrenchDomainExtension = isFrenchDomainExtension;
+    this._version = version;
   }
 
   certificationDate({ lang }) {
@@ -58,9 +61,12 @@ class AttestationViewModel {
   }
 
   shouldDisplayProfessionalizingCertificationMessage() {
-    if (!this._isFrenchDomainExtension) return false;
     if (!this._deliveredAt) return false;
-    return this._deliveredAt.getTime() >= PROFESSIONALIZING_VALIDITY_START_DATE.getTime();
+    return (
+      this._isFrenchDomainExtension &&
+      this._deliveredAt.getTime() >= PROFESSIONALIZING_VALIDITY_START_DATE.getTime() &&
+      this._version === SESSIONS_VERSIONS.V2
+    );
   }
 
   static from({ certificate, isFrenchDomainExtension, translate, lang }) {
@@ -85,6 +91,7 @@ class AttestationViewModel {
     const birth = _formatDate({ date: certificate.birthdate, lang }) + birthplace;
     const certificationCenter = certificate.certificationCenter;
     const deliveredAt = certificate.deliveredAt;
+    const version = certificate.version;
 
     const maxReachableLevelOnCertificationDate = certificate.maxReachableLevelOnCertificationDate < 8;
     const hasAcquiredAnyComplementaryCertifications = certificate.hasAcquiredAnyComplementaryCertifications();
@@ -119,6 +126,7 @@ class AttestationViewModel {
       stickers,
       competenceDetailViewModels,
       isFrenchDomainExtension,
+      version,
     });
   }
 }
