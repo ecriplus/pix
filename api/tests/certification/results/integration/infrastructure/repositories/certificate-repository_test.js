@@ -1033,6 +1033,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           cleaCertificationImagePath: null,
           pixPlusDroitCertificationImagePath: null,
           sessionId: 789,
+          version: SESSIONS_VERSIONS.V2,
         };
         databaseBuilder.factory.buildUser({ id: 456 });
         databaseBuilder.factory.buildOrganizationLearner({
@@ -1067,6 +1068,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           publishedAt: new Date('2021-05-07'),
           certificationCenter: 'Centre des poules bien dodues',
           certificationCenterId,
+          version: SESSIONS_VERSIONS.V2,
         });
         _buildCertificationAttestationWithSeveralResults(certificationAttestationDataRejected, status.REJECTED);
         const candidate = databaseBuilder.factory.buildCertificationCandidate({
@@ -2845,6 +2847,7 @@ function _buildSession({ userId, sessionId, publishedAt, certificationCenter }) 
     publishedAt,
     certificationCenter: certificationCenter,
     certificationCenterId,
+    version: SESSIONS_VERSIONS.V3,
   });
 }
 
