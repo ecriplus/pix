@@ -120,7 +120,11 @@ module('Unit | Utils | create tree data', function () {
         `flowchart LR
 0[1-VALIDATION] -->|5| 1[1-TRAINING]
 1[1-TRAINING] -->|5| 2[1-VALIDATION]
-0[1-VALIDATION] -->|10| 3[2-VALIDATION]`,
+0[1-VALIDATION] -->|10| 3[2-VALIDATION]
+style 0 stroke:#3d68ff,stroke-width:4px
+style 1 stroke:#3d68ff,stroke-width:4px
+style 2 stroke:#3d68ff,stroke-width:4px
+style 3 stroke:#52d987,stroke-width:4px`,
       );
     });
     test('should shape final states with rounded rectangles', async function (assert) {
@@ -140,7 +144,10 @@ module('Unit | Utils | create tree data', function () {
         mermaidFlowchart,
         `flowchart LR
 0[1-VALIDATION] -->|5| 1[1-TRAINING]
-1[1-TRAINING] -->|5| 2(FAILED)`,
+1[1-TRAINING] -->|5| 2(FAILED)
+style 0 stroke:#3d68ff,stroke-width:4px
+style 1 stroke:#3d68ff,stroke-width:4px
+style 2 fill:#f1c4c4`,
       );
     });
   });

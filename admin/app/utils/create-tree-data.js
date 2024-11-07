@@ -1,5 +1,11 @@
 const RESULT_STATUSES = ['FAILED', 'STARTED', 'SUCCEEDED', 'SKIPPED'];
 
+const COLORS = {
+  FAILED: '#f1c4c4',
+  SUCCEEDED: '#b9d8cd',
+  SKIPPED: '#ffe5c0',
+  STARTED: '#f4f5f7',
+};
 import { fromUint8Array } from 'js-base64';
 import { deflate } from 'pako';
 
@@ -76,6 +82,25 @@ function createMermaidFlowchart(tree) {
         const toLabel = tree.nodeLabelsById.get(relation.to);
         const finalNode = RESULT_STATUSES.includes(toLabel) ? `(${toLabel})` : `[${toLabel}]`;
         return `${relation.from}[${fromLabel}] -->|${relation.number}| ${relation.to}${finalNode}`;
+      })
+      .join('\n') +
+    '\n' +
+    Array.from(tree.nodeLabelsById.entries())
+      .map(([id, label]) => {
+        const nodeColor = COLORS[label];
+        if (nodeColor) {
+          return `style ${id} fill:${nodeColor}`;
+        }
+        const stepNumber = label.charAt(0);
+        if (stepNumber === '0') {
+          return `style ${id} stroke:#ff3f94,stroke-width:4px`;
+        } else if (stepNumber === '1') {
+          return `style ${id} stroke:#3d68ff,stroke-width:4px`;
+        } else if (stepNumber === '-') {
+          // Challenge
+          return `style ${id} stroke:#ac008d,stroke-width:4px`;
+        }
+        return `style ${id} stroke:#52d987,stroke-width:4px`;
       })
       .join('\n')
   );
