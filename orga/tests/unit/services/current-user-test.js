@@ -302,6 +302,24 @@ module('Unit | Service | current-user', function (hooks) {
       });
     });
 
+    module('#canAccessAttestationsPage', function () {
+      test('should return true if organization has feature activated', function (assert) {
+        currentUserService.prescriber = {
+          attestationsManagement: true,
+        };
+
+        assert.true(currentUserService.canAccessAttestationsPage);
+      });
+
+      test('should return false if organization does not have feature activated', function (assert) {
+        currentUserService.prescriber = {
+          attestationsManagement: false,
+        };
+
+        assert.false(currentUserService.canAccessAttestationsPage);
+      });
+    });
+
     module('#canAccessMissionsPage', function () {
       test('should return true if user has feature activated', function (assert) {
         currentUserService.prescriber = {
