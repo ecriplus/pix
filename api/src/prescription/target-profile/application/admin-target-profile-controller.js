@@ -21,6 +21,20 @@ const getTargetProfileForAdmin = async function (request, h, dependencies = { ta
   return dependencies.targetProfileForAdminSerializer.serialize({ targetProfile, filter });
 };
 
+const updateTargetProfile = async function (request, h, dependencies = { usecases, targetProfileSerializer }) {
+  const targetProfileId = request.params.id;
+  const attributesToUpdate = dependencies.targetProfileSerializer.deserialize(request.payload);
+
+  await DomainTransaction.execute(async () => {
+    await dependencies.usecases.updateTargetProfile({
+      id: targetProfileId,
+      attributesToUpdate,
+    });
+  });
+
+  return h.response().code(204);
+};
+
 const getContentAsJsonFile = async function (request, h) {
   const targetProfileId = request.params.id;
 
@@ -209,6 +223,7 @@ const targetProfileController = {
   findPaginatedFilteredTargetProfileSummariesForAdmin,
   findTargetProfileSummariesForAdmin,
   getContentAsJsonFile,
+  updateTargetProfile,
   getLearningContentAsPdf,
   getTargetProfileForAdmin,
   markTargetProfileAsSimplifiedAccess,
