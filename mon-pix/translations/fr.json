@@ -163,7 +163,7 @@
       },
       "oidc-provider-selector": {
         "label": "Rechercher une organisation",
-        "placeholder": "Sélectionner un organisme",
+        "placeholder": "Sélectionner une organisation",
         "searchLabel": "Recherche par mots-clés"
       },
       "other-authentication-providers": {
@@ -231,7 +231,7 @@
           "email": {
             "error": "Votre adresse e-mail n’est pas valide.",
             "label": "Adresse e-mail",
-            "placeholder": "ex: jean.dupont@email.fr"
+            "placeholder": "ex: jean.dupont@email.com"
           },
           "firstname": {
             "error": "Votre prénom n’est pas renseigné.",
@@ -463,10 +463,11 @@
       },
       "sso-selection": {
         "signin": {
-          "link": "Je me connecte",
+          "button": "Je me connecte",
           "message": "Vous allez être redirigé(e) vers la page de connexion de « {providerName} » afin de vous identifier sur Pix."
         },
         "signup": {
+          "button": "Je m'inscris",
           "link": "Inscrivez-vous",
           "title": "Vous n'avez pas de compte ?"
         },

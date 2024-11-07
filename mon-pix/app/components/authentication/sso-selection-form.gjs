@@ -55,7 +55,11 @@ export default class SsoSelectionForm extends Component {
           @route="authentication.login-oidc"
           @model={{this.selectedProviderId}}
         >
-          {{t "pages.authentication.sso-selection.signin.link"}}
+          {{#if @isForSignup}}
+            {{t "pages.authentication.sso-selection.signup.button"}}
+          {{else}}
+            {{t "pages.authentication.sso-selection.signin.button"}}
+          {{/if}}
         </PixButtonLink>
 
         <p id="signin-message" class="sso-selection-form__signin-message" aria-live="polite">
@@ -63,7 +67,11 @@ export default class SsoSelectionForm extends Component {
         </p>
       {{else}}
         <PixButton @type="button" @isDisabled={{true}}>
-          {{t "pages.authentication.sso-selection.signin.link"}}
+          {{#if @isForSignup}}
+            {{t "pages.authentication.sso-selection.signup.button"}}
+          {{else}}
+            {{t "pages.authentication.sso-selection.signin.button"}}
+          {{/if}}
         </PixButton>
       {{/if}}
     </section>
