@@ -21,23 +21,23 @@ export default class MenuBar extends Component {
       <ul>
         <MenuBarEntry
           @path="authenticated.organizations"
-          @icon="building"
+          @icon="buildings"
           @title={{t "components.layout.menu-bar.entries.organizations"}}
         />
         <MenuBarEntry
           @path="authenticated.users"
-          @icon="user"
+          @icon="infoUser"
           @title={{t "components.layout.menu-bar.entries.users"}}
         />
         <MenuBarEntry
           @path="authenticated.certification-centers"
-          @icon="map-pin"
+          @icon="mapPin"
           @title={{t "components.layout.menu-bar.entries.certification-centers"}}
           @inline={{true}}
         />
         <MenuBarEntry
           @path="authenticated.sessions"
-          @icon="chalkboard-user"
+          @icon="session"
           @title={{t "components.layout.menu-bar.entries.sessions"}}
           @inline={{true}}
         />
@@ -45,21 +45,21 @@ export default class MenuBar extends Component {
         {{#if this.accessControl.hasAccessToCertificationActionsScope}}
           <MenuBarEntry
             @path="authenticated.certifications"
-            @icon="graduation-cap"
+            @icon="newRealease"
             @title={{t "components.layout.menu-bar.entries.certifications"}}
             @inline={{true}}
           />
         {{/if}}
         <MenuBarEntry
           @path="authenticated.complementary-certifications"
-          @icon="stamp"
+          @icon="extension"
           @title={{t "components.layout.menu-bar.entries.complementary-certifications"}}
           @inline={{true}}
         />
         {{#if this.accessControl.hasAccessToTargetProfilesActionsScope}}
           <MenuBarEntry
             @path="authenticated.target-profiles"
-            @icon="clipboard-list"
+            @icon="assignment"
             @title={{t "components.layout.menu-bar.entries.target-profiles"}}
             @inline={{true}}
           />
@@ -74,7 +74,7 @@ export default class MenuBar extends Component {
         }}
           <MenuBarEntry
             @path="authenticated.autonomous-courses"
-            @icon="signs-post"
+            @icon="signpost"
             @title={{t "components.layout.menu-bar.entries.autonomous-courses"}}
           />
         {{/if}}
@@ -89,26 +89,26 @@ export default class MenuBar extends Component {
         {{#if this.accessControl.hasAccessToTrainings}}
           <MenuBarEntry
             @path="authenticated.trainings"
-            @icon="book-open"
+            @icon="book"
             @title={{t "components.layout.menu-bar.entries.trainings"}}
           />
         {{/if}}
         {{#if (or this.currentUser.adminMember.isSuperAdmin this.currentUser.adminMember.isMetier)}}
           <MenuBarEntry
             @path="authenticated.tools"
-            @icon="screwdriver-wrench"
+            @icon="tools"
             @title={{t "components.layout.menu-bar.entries.tools"}}
           />
         {{/if}}
         {{#if this.currentUser.adminMember.isSuperAdmin}}
           <MenuBarEntry
             @path="authenticated.administration"
-            @icon="crown"
+            @icon="shieldPerson"
             @title={{t "components.layout.menu-bar.entries.administration"}}
           />
         {{/if}}
 
-        <MenuBarEntry @path="logout" @icon="power-off" @title={{t "components.layout.menu-bar.entries.logout"}} />
+        <MenuBarEntry @path="logout" @icon="power" @title={{t "components.layout.menu-bar.entries.logout"}} />
       </ul>
     </nav>
   </template>
