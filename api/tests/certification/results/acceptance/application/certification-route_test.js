@@ -157,6 +157,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
             ],
             'verification-code': certificationCourse.verificationCode,
             'max-reachable-level-on-certification-date': certificationCourse.maxReachableLevelOnCertificationDate,
+            version: SESSIONS_VERSIONS.V2,
           },
           id: `${certificationCourse.id}`,
           relationships: {
@@ -399,6 +400,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
               'certified-badge-images': [],
               'verification-code': certificationCourse.verificationCode,
               'max-reachable-level-on-certification-date': certificationCourse.maxReachableLevelOnCertificationDate,
+              version: SESSIONS_VERSIONS.V2,
             },
             relationships: {
               'result-competence-tree': {
@@ -488,6 +490,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
               'certified-badge-images': [],
               'verification-code': certificationCourse.verificationCode,
               'max-reachable-level-on-certification-date': certificationCourse.maxReachableLevelOnCertificationDate,
+              version: SESSIONS_VERSIONS.V3,
             },
             relationships: {
               'result-competence-tree': {

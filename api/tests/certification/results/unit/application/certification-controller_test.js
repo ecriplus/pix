@@ -93,6 +93,7 @@ describe('Certification | Results | Unit | Application | certifications-controll
         certifiedBadgeImages: [],
         verificationCode: 'P-SUPERCODE',
         maxReachableLevelOnCertificationDate: 6,
+        version: SESSIONS_VERSIONS.V3,
       });
       sinon.stub(usecases, 'getPrivateCertificate');
       usecases.getPrivateCertificate.withArgs({ userId, certificationCourseId, locale }).resolves(privateCertificate);
@@ -123,6 +124,7 @@ describe('Certification | Results | Unit | Application | certifications-controll
             'certified-badge-images': [],
             'verification-code': 'P-SUPERCODE',
             'max-reachable-level-on-certification-date': 6,
+            version: SESSIONS_VERSIONS.V3,
           },
           relationships: {
             'result-competence-tree': {
@@ -154,6 +156,7 @@ describe('Certification | Results | Unit | Application | certifications-controll
         certifiedBadgeImages: [],
         verificationCode: 'P-SUPERCODE',
         maxReachableLevelOnCertificationDate: 6,
+        version: SESSIONS_VERSIONS.V3,
       });
       sinon.stub(usecases, 'findUserPrivateCertificates');
       usecases.findUserPrivateCertificates.withArgs({ userId }).resolves([privateCertificate1]);
@@ -182,6 +185,7 @@ describe('Certification | Results | Unit | Application | certifications-controll
               'certified-badge-images': [],
               'verification-code': 'P-SUPERCODE',
               'max-reachable-level-on-certification-date': 6,
+              version: SESSIONS_VERSIONS.V3,
             },
             relationships: {
               'result-competence-tree': {

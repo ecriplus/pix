@@ -182,6 +182,7 @@ function _selectPrivateCertificates() {
           json_build_object('score', "competence-marks".score, 'level', "competence-marks".level, 'competence_code', "competence-marks"."competence_code")
           ORDER BY "competence-marks"."competence_code" asc
         )`),
+    version: 'sessions.version',
   });
 }
 

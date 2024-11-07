@@ -77,12 +77,12 @@ module('Unit | Model | certification', function (hooks) {
         // given
         class CurrentDomainServiceStub extends Service {
           get isFranceDomain() {
-            return false;
+            return true;
           }
         }
 
         this.owner.register('service:currentDomain', CurrentDomainServiceStub);
-        const model = store.createRecord('certification', { deliveredAt: '2022-01-01' });
+        const model = store.createRecord('certification', { deliveredAt: '2022-01-01', version: 3 });
 
         // when / then
         assert.false(model.shouldDisplayProfessionalizingWarning);
