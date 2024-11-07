@@ -4,16 +4,18 @@
   border-bottom: var(--pix-neutral-15) solid 1px;
 
   &__resolution-status {
+    height: 2rem;
     margin-top: 24px;
     margin-bottom: 24px;
     margin-left: 24px;
+    width: 2rem;
 
     &--resolved {
-      color: var(--pix-success-700);
+      fill: var(--pix-success-700);
     }
 
     &--unresolved {
-      color: var(--pix-error-700);
+      fill: var(--pix-error-700);
     }
   }
 

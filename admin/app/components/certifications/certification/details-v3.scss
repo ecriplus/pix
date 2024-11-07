@@ -29,8 +29,7 @@
     dd {
       color: var(--pix-neutral-900);
     }
-  }
-}
+  } }
 
 .certification-details-v3-header {
   display: flex;
@@ -46,6 +45,11 @@
 }
 
 .certification-details-v3-table {
+  svg {
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+
   &__answered-at-column {
     width: 11%;
   }
@@ -66,14 +70,27 @@
     width: 18%;
   }
 
-  &__challenge-action-cell {
-    color: var(--pix-neutral-900);
-
-  button:focus-visible {
-    padding: 2px 5px;
+  &__challenge-informations-cell {
+    & a, a:visited {
+      align-items: center;
+      display: flex;
+      gap: var(--pix-spacing-1x);
+    }
   }
 
-    & a, a:visited, {
+  &__challenge-action-cell {
+    display: flex;
+    height: inherit;
+    align-items: center;
+
+    button:focus-visible {
+      padding: 2px 5px;
+    }
+
+    & a, a:visited, button {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
       padding-right: 3px;
       color: inherit;
       text-decoration: none;
