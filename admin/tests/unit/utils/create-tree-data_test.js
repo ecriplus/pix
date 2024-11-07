@@ -4,6 +4,7 @@ import {
   createRelationsFromPath,
   createTreeFromData,
   minifyTree,
+  sortTree,
 } from 'pix-admin/utils/create-tree-data.js';
 import { module, test } from 'qunit';
 
@@ -68,6 +69,38 @@ module('Unit | Utils | create tree data', function () {
     });
   });
 
+  module('#sortTree', function () {
+    test('should sort tree relations in order to have successes first', async function (assert) {
+      const tree = {
+        relations: [
+          { from: '1-VALIDATION', to: '1-VALIDATION > 1-TRAINING' },
+          { from: '1-VALIDATION > 1-TRAINING', to: '1-VALIDATION > 1-TRAINING > 1-TUTORIAL' },
+          { from: '1-VALIDATION', to: '1-VALIDATION > 2-VALIDATION' },
+          { from: '1-VALIDATION > 1-TRAINING', to: '1-VALIDATION > 1-TRAINING > 1-VALIDATION' },
+        ],
+        nodes: [
+          { id: '1-VALIDATION > 1-TRAINING' },
+          { id: '1-VALIDATION > 1-TRAINING > STARTED' },
+          { id: '1-VALIDATION' },
+          { id: '1-VALIDATION > 2-VALIDATION' },
+        ],
+      };
+
+      const sortedTree = sortTree(tree);
+      assert.deepEqual(sortedTree.relations, [
+        { from: '1-VALIDATION', to: '1-VALIDATION > 2-VALIDATION' },
+        { from: '1-VALIDATION > 1-TRAINING', to: '1-VALIDATION > 1-TRAINING > 1-VALIDATION' },
+        { from: '1-VALIDATION', to: '1-VALIDATION > 1-TRAINING' },
+        { from: '1-VALIDATION > 1-TRAINING', to: '1-VALIDATION > 1-TRAINING > 1-TUTORIAL' },
+      ]);
+      assert.deepEqual(sortedTree.nodes, [
+        { id: '1-VALIDATION > 2-VALIDATION' },
+        { id: '1-VALIDATION' },
+        { id: '1-VALIDATION > 1-TRAINING' },
+        { id: '1-VALIDATION > 1-TRAINING > STARTED' },
+      ]);
+    });
+  });
   module('#minifyTree', function () {
     test('should create tree with short node ids and meaningfull labels', async function (assert) {
       const tree = {

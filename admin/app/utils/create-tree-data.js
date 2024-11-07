@@ -6,6 +6,21 @@ const COLORS = {
   SKIPPED: '#ffe5c0',
   STARTED: '#f4f5f7',
 };
+
+const NODE_ORDER = [
+  'STARTED',
+  'SKIPPED',
+  'FAILED',
+  '1-TUTORIAL',
+  '1-TRAINING',
+  '1-VALIDATION',
+  '2-TUTORIAL',
+  '2-TRAINING',
+  '2-VALIDATION',
+  'SUCCEEDED',
+  '-CHALLENGE',
+];
+
 import { fromUint8Array } from 'js-base64';
 import { deflate } from 'pako';
 
@@ -53,13 +68,29 @@ function createRelationsFromPath(path) {
   return relations;
 }
 
+function sortTree(tree) {
+  return {
+    relations: tree.relations.sort((relation1, relation2) => {
+      return lastWordValue(relation2.to) - lastWordValue(relation1.to);
+    }),
+    nodes: tree.nodes.sort((node1, node2) => {
+      return lastWordValue(node2.id) - lastWordValue(node1.id);
+    }),
+  };
+}
+
+function lastWordValue(path) {
+  return NODE_ORDER.findIndex((nodeLabel) => nodeLabel === lastWord(path));
+}
+
+function lastWord(path) {
+  return path.split(' ').slice(-1)[0];
+}
+
 function minifyTree(tree) {
   const nodesMinifiedNamesByPath = new Map(Array.from(tree.nodes, (node, i) => [node.id, i]));
   const nodeLabelsById = new Map(
-    Array.from(nodesMinifiedNamesByPath.entries()).map(([path, minifiedName]) => [
-      minifiedName,
-      path.split(' ').slice(-1)[0],
-    ]),
+    Array.from(nodesMinifiedNamesByPath.entries()).map(([path, minifiedName]) => [minifiedName, lastWord(path)]),
   );
   return {
     nodeLabelsById,
@@ -107,7 +138,7 @@ function createMermaidFlowchart(tree) {
 }
 
 function createMermaidFlowchartLink(data) {
-  const flowChart = createMermaidFlowchart(minifyTree(createTreeFromData(data)));
+  const flowChart = createMermaidFlowchart(minifyTree(sortTree(createTreeFromData(data))));
   const defaultState = {
     code: flowChart,
     mermaid: formatJSON({
@@ -122,4 +153,11 @@ function createMermaidFlowchartLink(data) {
   return `https://mermaid.live/edit#pako:${serialized}`;
 }
 
-export { createMermaidFlowchart, createMermaidFlowchartLink, createRelationsFromPath, createTreeFromData, minifyTree };
+export {
+  createMermaidFlowchart,
+  createMermaidFlowchartLink,
+  createRelationsFromPath,
+  createTreeFromData,
+  minifyTree,
+  sortTree,
+};
