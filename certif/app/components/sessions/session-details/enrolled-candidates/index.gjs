@@ -343,7 +343,7 @@ export default class EnrolledCandidates extends Component {
       </div>
       <div class='table content-text content-text--small certification-candidates-table'>
         {{#if (or @certificationCandidates this.candidatesInStaging)}}
-          <table class='certification-candidates-table-cpf-toggle-enabled'>
+          <table>
             <caption class='screen-reader-only'>
               {{#if @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
                 {{t 'pages.sessions.detail.candidates.list.without-details-description'}}
@@ -353,17 +353,17 @@ export default class EnrolledCandidates extends Component {
             </caption>
             <thead>
               <tr>
-                <th class='certification-candidates-table__column-last-name'>
+                <th class='table__column--medium'>
                   {{t 'common.labels.candidate.birth-name'}}
                 </th>
-                <th class='certification-candidates-table__column-first-name'>
+                <th class='table__column--small'>
                   {{t 'common.labels.candidate.firstname'}}
                 </th>
-                <th class='certification-candidates-table__column-birthdate'>
+                <th class='table__column--small'>
                   {{t 'common.labels.candidate.birth-date'}}
                 </th>
                 {{#if @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
-                  <th class='certification-candidates-table__birth-city'>
+                  <th>
                     {{t 'common.labels.candidate.birth-city'}}
                   </th>
                   <th>
@@ -371,15 +371,15 @@ export default class EnrolledCandidates extends Component {
                   </th>
                 {{/if}}
                 {{#unless @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
-                  <th class='certification-candidates-table__recipient-email'>
+                  <th>
                     {{t 'common.forms.certification-labels.email-results'}}
                   </th>
                 {{/unless}}
-                <th class='certification-candidates-table__column-time'>
+                <th class='table__column--small'>
                   {{t 'common.forms.certification-labels.extratime'}}
                 </th>
                 {{#if this.shouldDisplayAccessibilityAdjustmentNeededFeature}}
-                  <th class='certification-candidates-table__column-accessibility'>
+                  <th class='table__column--small'>
                     {{t 'common.forms.certification-labels.accessibility'}}
                   </th>
                 {{/if}}
