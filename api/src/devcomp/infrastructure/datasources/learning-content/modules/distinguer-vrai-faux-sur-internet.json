@@ -346,7 +346,7 @@
                 {
                   "id": "332d9e96-d12e-4809-9d25-173a57ed93be",
                   "type": "text",
-                  "content": "<h3>Question n°1&nbsp;: <i>qui</i> est la personne qui partage cette information&#8239;?&nbsp;<span aria-hidden=\"true\">🖋️</span></h3><p>Demandez-vous si vous connaissez cette personne, si elle est reconnue ou encore si elle a un intérêt particulier à ce que cette information circule.</p>"
+                  "content": "<h3>Question n°1&nbsp;: <i>qui</i> est la personne qui partage cette information&#8239;?&nbsp;<span aria-hidden=\"true\">💬</span></h3><p>Demandez-vous si vous connaissez cette personne, si elle est reconnue ou encore si elle a un intérêt particulier à ce que cette information circule.</p>"
                 }
               ]
             },
@@ -364,7 +364,7 @@
                 {
                   "id": "36577421-d9d0-4f49-ac43-b4e804ba5635",
                   "type": "text",
-                  "content": "<h3>Question n°3&nbsp;: <i>d’où</i> provient cette information&#8239;?&nbsp;<span aria-hidden=\"true\">📍</span></h3><p>C'est-à-dire, son origine, sa source. Cherchez à savoir si c’est un témoignage direct, le résultat d'expériences scientifiques, l'enquête d'un journal, etc.<br>Regardez également si vous pouvez vérifier cette information par vous-même et si l’auteur a partagé ses sources.</p>"
+                  "content": "<h3>Question n°3&nbsp;: <i>d’où</i> provient cette information&#8239;?&nbsp;<span aria-hidden=\"true\">🤔</span></h3><p>Cherchez à connaître l’origine de cette information, c’est-à-dire sa source : un témoignage direct, le résultat d'expériences scientifiques ou l'enquête d'un journal, etc.<br>Regardez également si l’auteur a partagé ses sources et si vous pouvez vérifier cette information par vous-même, en cherchant d’autres sources pour les comparer.</p>"
                 }
               ]
             },
