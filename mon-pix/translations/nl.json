@@ -1584,7 +1584,10 @@
           "yes": "Ja ! {totalYes}"
         },
         "direction": "Zoek het antwoord en draai de kaart om",
-        "position": "{currentCardPosition}Kaart /{totalCards}"
+        "position": "{currentCardPosition}Kaart /{totalCards}",
+        "navigation": {
+          "currentStep": "Stap {current} van {total}"
+        }
       },
       "grain": {
         "tag": {

@@ -1564,6 +1564,9 @@
           "yes": "Yes! : {totalYes}"
         },
         "direction": "Look for the answer then turn the card",
+        "navigation": {
+          "currentStep": "Step {current} of {total}"
+        },
         "position": "Card {currentCardPosition}/{totalCards}"
       },
       "grain": {
