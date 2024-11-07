@@ -1,8 +1,8 @@
-import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { usecases } from '../../../../../src/team/domain/usecases/index.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | find-certification-center-memberships-by-certification-center', function () {
-  it('should result certification-center-memberships by certification center id', async function () {
+describe('Unit | Team | Domain | UseCase | find-certification-center-memberships-by-certification-center', function () {
+  it('returns certification-center-memberships by certification center id', async function () {
     // given
     const certificationCenterId = 1;
     const certificationCenterMemberships = [domainBuilder.buildCertificationCenterMembership()];

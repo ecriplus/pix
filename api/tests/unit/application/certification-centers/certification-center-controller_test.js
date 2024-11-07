@@ -1,5 +1,6 @@
 import { certificationCenterController } from '../../../../lib/application/certification-centers/certification-center-controller.js';
 import { usecases } from '../../../../lib/domain/usecases/index.js';
+import { usecases as teamUsecases } from '../../../../src/team/domain/usecases/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Controller | certifications-center-controller', function () {
@@ -122,7 +123,7 @@ describe('Unit | Controller | certifications-center-controller', function () {
     let certificationCenterMembershipSerializerStub;
 
     beforeEach(function () {
-      sinon.stub(usecases, 'findCertificationCenterMembershipsByCertificationCenter');
+      sinon.stub(teamUsecases, 'findCertificationCenterMembershipsByCertificationCenter');
       certificationCenterMembershipSerializerStub = {
         serialize: sinon.stub(),
       };
@@ -130,7 +131,7 @@ describe('Unit | Controller | certifications-center-controller', function () {
 
     it('should call usecase and serializer and return ok', async function () {
       // given
-      usecases.findCertificationCenterMembershipsByCertificationCenter
+      teamUsecases.findCertificationCenterMembershipsByCertificationCenter
         .withArgs({
           certificationCenterId,
         })
@@ -167,7 +168,7 @@ describe('Unit | Controller | certifications-center-controller', function () {
       };
 
       sinon
-        .stub(usecases, 'findCertificationCenterMembershipsByCertificationCenter')
+        .stub(teamUsecases, 'findCertificationCenterMembershipsByCertificationCenter')
         .withArgs({
           certificationCenterId: certificationCenter.id,
         })
@@ -186,7 +187,7 @@ describe('Unit | Controller | certifications-center-controller', function () {
       });
 
       // then
-      expect(usecases.findCertificationCenterMembershipsByCertificationCenter).to.have.been.calledOnce;
+      expect(teamUsecases.findCertificationCenterMembershipsByCertificationCenter).to.have.been.calledOnce;
       expect(response).equal(serializedCertificationCenterMembership);
     });
   });
