@@ -354,6 +354,7 @@
     },
     "main": {
       "aria-label": "Navigation principale",
+      "attestations": "Attestations",
       "campaigns": "Campagnes",
       "certifications": "Certifications",
       "documentation": "Documentation",
@@ -415,6 +416,13 @@
         "empty": "En attente de résultats",
         "row-title": "Compétence"
       }
+    },
+    "attestations": {
+      "title": "Attestations",
+      "description": "Sélectionnez la classe pour laquelle vous souhaitez exporter les attestations au format PDF.",
+      "download-attestations-button": "Télécharger",
+      "placeholder": "-- Sélectionner --",
+      "select-label": "Sélectionnez une ou plusieurs classes"
     },
     "campaign": {
       "actions": {
