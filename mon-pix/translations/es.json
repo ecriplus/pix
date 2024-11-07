@@ -1584,7 +1584,10 @@
           "yes": "¡Sí! {totalYes}"
         },
         "direction": "Busca la respuesta y gira la tarjeta",
-        "position": "{currentCardPosition}Tarjeta /{totalCards}"
+        "position": "{currentCardPosition}Tarjeta /{totalCards}",
+        "navigation": {
+          "currentStep": "Paso {current} de {total}"
+        }
       },
       "grain": {
         "tag": {

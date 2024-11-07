@@ -1564,6 +1564,9 @@
           "yes": "Oui ! : {totalYes}"
         },
         "direction": "Cherchez la réponse puis tournez la carte",
+        "navigation": {
+          "currentStep": "Étape {current} sur {total}"
+        },
         "position": "Carte {currentCardPosition}/{totalCards}"
       },
       "grain": {

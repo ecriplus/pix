@@ -2,6 +2,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
 
 import didInsert from '../../modifiers/modifier-did-insert';
@@ -32,6 +33,10 @@ export default class ModulePassage extends Component {
 
   get currentGrainIndex() {
     return this.grainsToDisplay.length - 1;
+  }
+
+  get currentPassageStep() {
+    return this.currentGrainIndex + 1;
   }
 
   @action
@@ -193,9 +198,24 @@ export default class ModulePassage extends Component {
 
   <template>
     {{pageTitle @module.title}}
-    <BetaBanner />
+    <nav
+      class="module-navbar"
+      aria-label={{t
+        "pages.modulix.flashcards.navigation.currentStep"
+        current=this.currentPassageStep
+        total=this.displayableGrains.length
+      }}
+    >
+      <div class="module-navbar__content">
+        <div class="module-navbar__content__current-step">
+          {{this.currentPassageStep}}/{{this.displayableGrains.length}}
+        </div>
+      </div>
+    </nav>
 
     <main class="module-passage">
+      <BetaBanner />
+
       <div class="module-passage__title">
         <h1>{{@module.title}}</h1>
       </div>
