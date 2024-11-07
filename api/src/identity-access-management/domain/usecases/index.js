@@ -21,6 +21,7 @@ import * as userLoginRepository from '../../../shared/infrastructure/repositorie
 import * as codeUtils from '../../../shared/infrastructure/utils/code-utils.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
+import * as emailRepository from '../../../shared/mail/infrastructure/repositories/email.repository.js';
 import { accountRecoveryDemandRepository } from '../../infrastructure/repositories/account-recovery-demand.repository.js';
 import * as authenticationMethodRepository from '../../infrastructure/repositories/authentication-method.repository.js';
 import { emailValidationDemandRepository } from '../../infrastructure/repositories/email-validation-demand.repository.js';
@@ -48,6 +49,7 @@ const repositories = {
   campaignRepository,
   campaignToJoinRepository: campaignRepositories.campaignToJoinRepository,
   emailValidationDemandRepository,
+  emailRepository,
   eventLoggingJobRepository,
   oidcProviderRepository,
   organizationLearnerRepository,
