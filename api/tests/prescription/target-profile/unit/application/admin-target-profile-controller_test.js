@@ -22,7 +22,7 @@ describe('Unit | Controller | admin-target-profile-controller', function () {
 
         const request = {
           params: {
-            id: 123,
+            targetProfileId: 123,
           },
           payload,
         };
@@ -30,7 +30,7 @@ describe('Unit | Controller | admin-target-profile-controller', function () {
         const attributesToUpdate = Symbol('deserialized attributes to update');
 
         const dependencies = {
-          usecases: {
+          prescriptionTargetProfileUsecases: {
             updateTargetProfile: sinon.stub(),
           },
           targetProfileSerializer: {
@@ -45,8 +45,8 @@ describe('Unit | Controller | admin-target-profile-controller', function () {
         // then
         expect(response.statusCode).to.equal(204);
         expect(dependencies.targetProfileSerializer.deserialize).to.have.been.calledOnceWith(payload);
-        expect(dependencies.usecases.updateTargetProfile).to.have.been.calledOnceWithExactly({
-          id: request.params.id,
+        expect(dependencies.prescriptionTargetProfileUsecases.updateTargetProfile).to.have.been.calledOnceWithExactly({
+          id: request.params.targetProfileId,
           attributesToUpdate,
         });
       });
