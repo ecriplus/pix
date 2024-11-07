@@ -12,3 +12,9 @@
   color: var(--pix-neutral-900);
   background: var(--pix-neutral-0);
 }
+
+.modulix-beta-banner {
+  --modulix-z-index-above-all: 2;
+
+  z-index: var(--modulix-z-index-above-all);
+}
