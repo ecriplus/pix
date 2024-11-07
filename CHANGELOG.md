@@ -1,5 +1,23 @@
 # Pix Changelog
 
+## v4.240.0 (07/11/2024)
+
+
+### :rocket: Amélioration
+- [#10489](https://github.com/1024pix/pix/pull/10489) [FEATURE] Ajouter la barre de navigation Modulix (PIX-14864).
+
+### :building_construction: Tech
+- [#10495](https://github.com/1024pix/pix/pull/10495) [TECH] Migrer la route campaign-participations-overview dans son BC (PIX-15202).
+- [#10464](https://github.com/1024pix/pix/pull/10464) [TECH] Rendre les seeds de learners déterministes (PIX-15156).
+- [#10468](https://github.com/1024pix/pix/pull/10468) [TECH] Suppression du feature toggle FT_ENABLE_V3_ELIGIBILITY_CHECK (PIX-15054).
+- [#10487](https://github.com/1024pix/pix/pull/10487) [TECH] Redimensionner les colonnes du tableau des candidats sur Pix Certif.
+- [#10414](https://github.com/1024pix/pix/pull/10414) [TECH] Migration de PixAdmin vers PixIcon / Partie Certif (PIX-14772).
+
+### :bug: Correction
+- [#10505](https://github.com/1024pix/pix/pull/10505) [BUGFIX] Ajouter des paramètres dans l'URL du lien custom de fin de parcours (PIX-15184).
+- [#10504](https://github.com/1024pix/pix/pull/10504) [BUGFIX] Corriger le chevauchement d'affichage des écrans focus et timer lors de la certification sur Pix App (PIX-14970).
+- [#10498](https://github.com/1024pix/pix/pull/10498) [BUGFIX] Flaky validation de contenu des modules (PIX-15205).
+
 ## v4.239.0 (06/11/2024)
 
 
