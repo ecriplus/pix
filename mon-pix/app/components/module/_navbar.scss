@@ -9,6 +9,8 @@
 
   &__content {
     display: flex;
+    flex-wrap: wrap;
+    gap: var(--pix-spacing-3x);
     max-width: var(--modulix-max-content-width);
     margin: 0 auto;
 
