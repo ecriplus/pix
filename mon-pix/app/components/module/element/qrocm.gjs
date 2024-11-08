@@ -166,7 +166,7 @@ export default class ModuleQrocm extends ModuleElement {
           @size="small"
           @type="button"
           @triggerAction={{this.retry}}
-          @iconAfter="rotate-right"
+          @iconAfter="refresh"
         >
           {{t "pages.modulix.buttons.activity.retry"}}
         </PixButton>
