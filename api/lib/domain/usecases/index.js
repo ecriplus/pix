@@ -74,7 +74,6 @@ import * as poleEmploiSendingRepository from '../../../src/prescription/campaign
 import * as supOrganizationLearnerRepository from '../../../src/prescription/learner-management/infrastructure/repositories/sup-organization-learner-repository.js';
 import * as organizationLearnerActivityRepository from '../../../src/prescription/organization-learner/infrastructure/repositories/organization-learner-activity-repository.js';
 import * as registrationOrganizationLearnerRepository from '../../../src/prescription/organization-learner/infrastructure/repositories/registration-organization-learner-repository.js';
-import * as targetProfileAdministrationRepository from '../../../src/prescription/target-profile/infrastructure/repositories/target-profile-administration-repository.js';
 import * as targetProfileSummaryForAdminRepository from '../../../src/prescription/target-profile/infrastructure/repositories/target-profile-summary-for-admin-repository.js';
 import * as activityAnswerRepository from '../../../src/school/infrastructure/repositories/activity-answer-repository.js';
 import * as missionRepository from '../../../src/school/infrastructure/repositories/mission-repository.js';
@@ -145,7 +144,6 @@ import * as organizationMemberIdentityRepository from '../../infrastructure/repo
 import * as organizationTagRepository from '../../infrastructure/repositories/organization-tag-repository.js';
 import { participantResultsSharedRepository } from '../../infrastructure/repositories/participant-results-shared-repository.js';
 import * as studentRepository from '../../infrastructure/repositories/student-repository.js';
-import * as targetProfileForUpdateRepository from '../../infrastructure/repositories/target-profile-for-update-repository.js';
 import * as targetProfileRepository from '../../infrastructure/repositories/target-profile-repository.js';
 import * as targetProfileShareRepository from '../../infrastructure/repositories/target-profile-share-repository.js';
 import * as targetProfileTrainingRepository from '../../infrastructure/repositories/target-profile-training-repository.js';
@@ -320,8 +318,6 @@ const dependencies = {
   supervisorAccessRepository,
   supOrganizationLearnerRepository,
   tagRepository,
-  targetProfileAdministrationRepository,
-  targetProfileForUpdateRepository,
   targetProfileRepository,
   targetProfileShareRepository,
   targetProfileSummaryForAdminRepository,
