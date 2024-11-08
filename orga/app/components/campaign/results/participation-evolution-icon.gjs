@@ -1,6 +1,5 @@
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { t } from 'ember-intl';
-
-import TooltipWithIcon from '../../ui/tooltip-with-icon';
 
 const EVOLUTION_INFOS = {
   increase: {
@@ -19,15 +18,15 @@ const EVOLUTION_INFOS = {
 
 const getIconName = (evolution) => EVOLUTION_INFOS[evolution].iconName;
 const getIconLabel = (evolution) => EVOLUTION_INFOS[evolution].label;
+const getIconClass = (evolution) => `participation-evolution-icon--${evolution}`;
 
 <template>
   {{#if @evolution}}
-    <TooltipWithIcon
-      @position="top"
-      @isInline={{true}}
-      @content={{t (getIconLabel @evolution)}}
-      @iconName={{getIconName @evolution}}
-      @iconClass="tooltip-with-icon__{{@evolution}}"
+    <PixIcon
+      @title={{t (getIconLabel @evolution)}}
+      @name={{getIconName @evolution}}
+      role="presentation"
+      class="participation-evolution-icon {{getIconClass @evolution}}"
     />
   {{else}}
     <p class="screen-reader-only">{{t "pages.campaign-results.table.evolution.unavailable"}}</p>
