@@ -15,6 +15,7 @@ import PasswordResetDemandReceivedInfo from './password-reset-demand-received-in
 
 export default class PasswordResetDemandForm extends Component {
   @service errors;
+  @service requestManager;
 
   @tracked globalError = this.errors.hasErrors && this.errors.shift();
   @tracked isLoading = false;
@@ -47,22 +48,19 @@ export default class PasswordResetDemandForm extends Component {
     this.isPasswordResetDemandReceived = false;
 
     try {
-      const response = await window.fetch(`${ENV.APP.API_HOST}/api/password-reset-demands`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
+      await this.requestManager.request({
+        url: `${ENV.APP.API_HOST}/api/password-reset-demands`,
         method: 'POST',
         body: JSON.stringify({ email }),
       });
 
-      if (!response.ok && response.status != 404) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-
       this.isPasswordResetDemandReceived = true;
     } catch (error) {
-      this.globalError = 'common.api-error-messages.internal-server-error';
+      if (error.status === 404) {
+        this.isPasswordResetDemandReceived = true;
+      } else {
+        this.globalError = 'common.api-error-messages.internal-server-error';
+      }
     } finally {
       this.isLoading = false;
     }

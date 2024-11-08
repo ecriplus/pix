@@ -21,6 +21,13 @@ const I18N_KEYS = {
 module('Integration | Component | Authentication | PasswordResetDemand | password-reset-demand-form', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  let requestManagerService;
+
+  hooks.beforeEach(function () {
+    requestManagerService = this.owner.lookup('service:requestManager');
+    sinon.stub(requestManagerService, 'request');
+  });
+
   test('it displays all elements of component successfully', async function (assert) {
     // given
     const screen = await render(<template><PasswordResetDemandForm /></template>);
@@ -78,11 +85,7 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
     module('when the password-reset-demand is successful', function () {
       test('it displays a "password reset demand received" info (without any error message)', async function (assert) {
         // given
-        window.fetch.resolves(
-          fetchMock({
-            status: 201,
-          }),
-        );
+        requestManagerService.request.resolves({ response: { ok: true, status: 201 } });
 
         const email = 'someone@example.net';
         const locale = ENGLISH_INTERNATIONAL_LOCALE;
@@ -127,14 +130,7 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
     module('when there is no corresponding user account', function () {
       test('it displays a "password reset demand received" info (without any error message to avoid email enumeration)', async function (assert) {
         // given
-        window.fetch.resolves(
-          fetchMock({
-            status: 404,
-            body: {
-              errors: [{ title: 'Not Found' }],
-            },
-          }),
-        );
+        requestManagerService.request.rejects({ status: 404 });
 
         const email = 'someone@example.net';
         const screen = await render(<template><PasswordResetDemandForm /></template>);
@@ -157,11 +153,7 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
     module('when there is an unknown error', function () {
       test('it displays an "unknown error" error message', async function (assert) {
         // given
-        window.fetch.resolves(
-          fetchMock({
-            status: 500,
-          }),
-        );
+        requestManagerService.request.rejects({ status: 500 });
 
         const email = 'someone@example.net';
         const screen = await render(<template><PasswordResetDemandForm /></template>);
@@ -195,12 +187,3 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
     });
   });
 });
-
-function fetchMock({ body, status }) {
-  return new window.Response(JSON.stringify(body), {
-    status,
-    headers: {
-      'Content-type': 'application/json',
-    },
-  });
-}
