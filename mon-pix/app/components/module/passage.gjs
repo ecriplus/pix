@@ -2,12 +2,12 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
 
 import didInsert from '../../modifiers/modifier-did-insert';
 import BetaBanner from './beta-banner';
 import ModuleGrain from './grain.js';
+import ModuleNavbar from './navbar';
 
 export default class ModulePassage extends Component {
   @service router;
@@ -198,20 +198,7 @@ export default class ModulePassage extends Component {
 
   <template>
     {{pageTitle @module.title}}
-    <nav
-      class="module-navbar"
-      aria-label={{t
-        "pages.modulix.flashcards.navigation.currentStep"
-        current=this.currentPassageStep
-        total=this.displayableGrains.length
-      }}
-    >
-      <div class="module-navbar__content">
-        <div class="module-navbar__content__current-step">
-          {{this.currentPassageStep}}/{{this.displayableGrains.length}}
-        </div>
-      </div>
-    </nav>
+    <ModuleNavbar @currentStep={{this.currentPassageStep}} @totalSteps={{this.displayableGrains.length}} />
 
     <main class="module-passage">
       <BetaBanner />
