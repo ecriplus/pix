@@ -35,9 +35,13 @@ describe('Unit | Team | Application | Controller | CertificationCenterMembership
         .returns(serializedCertificationCenterMembership);
 
       // when
-      const response = await certificationCenterMembershipController.findCertificationCenterMemberships(request, hFake, {
-        certificationCenterMembershipSerializer: certificationCenterMembershipSerializerStub,
-      });
+      const response = await certificationCenterMembershipController.findCertificationCenterMemberships(
+        request,
+        hFake,
+        {
+          certificationCenterMembershipSerializer: certificationCenterMembershipSerializerStub,
+        },
+      );
 
       // then
       expect(usecases.findCertificationCenterMembershipsByCertificationCenter).to.have.been.calledOnce;
