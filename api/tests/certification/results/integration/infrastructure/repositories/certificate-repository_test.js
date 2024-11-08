@@ -1,5 +1,6 @@
 import * as certificateRepository from '../../../../../../src/certification/results/infrastructure/repositories/certificate-repository.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
+import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { status } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import {
@@ -1256,12 +1257,14 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         deliveredAt: new Date('2021-05-05'),
         certificationCenter: 'Centre des poules bien dodues',
         pixScore: 51,
+        version: SESSIONS_VERSIONS.V3,
       };
       const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
       const sessionId = databaseBuilder.factory.buildSession({
         publishedAt: privateCertificateData.deliveredAt,
         certificationCenter: privateCertificateData.certificationCenter,
         certificationCenterId,
+        version: SESSIONS_VERSIONS.V3,
       }).id;
       const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
         firstName: privateCertificateData.firstName,
@@ -1413,6 +1416,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         certificationCenter: 'Centre des poules bien dodues',
         pixScore: 51,
         commentForCandidate: 'Il aime beaucoup les mangues, et ça se voit !',
+        version: SESSIONS_VERSIONS.V3,
       };
 
       const { certificationCourseId } = await _buildValidPrivateCertificate(privateCertificateData);
@@ -1469,6 +1473,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         certificationCenter: 'Centre des poules bien dodues',
         pixScore: 51,
         commentForCandidate: 'Il aime beaucoup les mangues, et ça se voit !',
+        version: SESSIONS_VERSIONS.V3,
       };
 
       const { certificationCourseId } = await _buildValidPrivateCertificateWithSeveralResults(privateCertificateData);
@@ -1727,6 +1732,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         certificationCenter: 'Centre des poules bien dodues',
         pixScore: 51,
         commentForCandidate: 'Il aime beaucoup les mangues, et ça se voit !',
+        version: SESSIONS_VERSIONS.V3,
       };
 
       const { certificationCourseId } = await _buildValidPrivateCertificate(privateCertificateData);
@@ -2062,6 +2068,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
               message: 'temporary message badge 2',
             },
           ],
+          version: SESSIONS_VERSIONS.V3,
         };
 
         const { certificationCourseId } = await _buildValidPrivateCertificateWithAcquiredAndNotAcquiredBadges({
@@ -2347,6 +2354,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           deliveredAt: new Date('2021-05-05'),
           certificationCenter: 'Centre des poules bien dodues',
           pixScore: 51,
+          version: SESSIONS_VERSIONS.V3,
         };
 
         const { certificationCourseId, assessmentResultId } = await _buildValidShareableCertificate(
@@ -2459,6 +2467,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           deliveredAt: new Date('2021-05-05'),
           certificationCenter: 'Centre des poules bien dodues',
           pixScore: 51,
+          version: SESSIONS_VERSIONS.V3,
         };
 
         const { certificationCourseId, assessmentResultId } = await _buildValidShareableCertificate(
@@ -2595,6 +2604,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           deliveredAt: new Date('2021-05-05'),
           certificationCenter: 'Centre des poules bien dodues',
           pixScore: 51,
+          version: SESSIONS_VERSIONS.V3,
           certifiedBadgeImages: [
             {
               imageUrl: 'https://images.pix.fr/badge1.svg',
@@ -2723,6 +2733,7 @@ async function _buildValidPrivateCertificate(privateCertificateData, buildCompet
     publishedAt: privateCertificateData.deliveredAt,
     certificationCenter: privateCertificateData.certificationCenter,
     certificationCenterId,
+    version: SESSIONS_VERSIONS.V3,
   }).id;
   const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
     firstName: privateCertificateData.firstName,
@@ -2763,6 +2774,7 @@ async function _buildValidPrivateCertificateWithSeveralResults(privateCertificat
     publishedAt: privateCertificateData.deliveredAt,
     certificationCenter: privateCertificateData.certificationCenter,
     certificationCenterId,
+    version: SESSIONS_VERSIONS.V3,
   }).id;
   const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
     firstName: privateCertificateData.firstName,
@@ -2908,6 +2920,7 @@ async function _buildValidPrivateCertificateWithAcquiredAndNotAcquiredBadges({
     publishedAt: privateCertificateData.deliveredAt,
     certificationCenter: privateCertificateData.certificationCenter,
     certificationCenterId,
+    version: SESSIONS_VERSIONS.V3,
   }).id;
   const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
     firstName: privateCertificateData.firstName,
@@ -2969,6 +2982,7 @@ async function _buildValidPrivateCertificateWithAcquiredAndNotAcquiredBadges({
 async function _buildValidShareableCertificate(shareableCertificateData, buildCompetenceMark = true) {
   const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
   const sessionId = databaseBuilder.factory.buildSession({
+    version: shareableCertificateData.version,
     id: shareableCertificateData.sessionId,
     publishedAt: shareableCertificateData.deliveredAt,
     certificationCenter: shareableCertificateData.certificationCenter,
@@ -2987,6 +3001,7 @@ async function _buildValidShareableCertificate(shareableCertificateData, buildCo
     maxReachableLevelOnCertificationDate: shareableCertificateData.maxReachableLevelOnCertificationDate,
     sessionId,
     userId: shareableCertificateData.userId,
+    version: shareableCertificateData.version,
   }).id;
 
   const assessmentResultId = databaseBuilder.factory.buildAssessmentResult.last({
@@ -3010,6 +3025,7 @@ async function _buildValidShareableCertificate(shareableCertificateData, buildCo
 async function _buildValidShareableCertificateWithAcquiredBadges({ shareableCertificateData, acquiredBadges }) {
   const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
   const sessionId = databaseBuilder.factory.buildSession({
+    version: shareableCertificateData.version,
     publishedAt: shareableCertificateData.deliveredAt,
     certificationCenter: shareableCertificateData.certificationCenter,
     certificationCenterId,
