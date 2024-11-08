@@ -10,6 +10,7 @@ import {
 import { createAssessmentCampaign, createProfilesCollectionCampaign } from '../common/tooling/campaign-tooling.js';
 import {
   CAMPAIGN_PROASSMUL_ID,
+  CAMPAIGN_PROCOLMUL_ID,
   TARGET_PROFILE_BADGES_STAGES_ID,
   TARGET_PROFILE_NO_BADGES_NO_STAGES_ID,
 } from './constants.js';
@@ -142,6 +143,7 @@ async function _createProGenericCampaigns(databaseBuilder) {
 
 async function _createProCampaigns(databaseBuilder) {
   await createProfilesCollectionCampaign({
+    campaignId: CAMPAIGN_PROCOLMUL_ID,
     databaseBuilder,
     organizationId: PRO_ORGANIZATION_ID,
     ownerId: USER_ID_ADMIN_ORGANIZATION,

@@ -18,7 +18,7 @@ module('Integration | Component | Campaign::Results::ParticipationEvolutionIcon'
       const screen = await render(hbs`<Campaign::Results::ParticipationEvolutionIcon @evolution={{this.evolution}} />`);
 
       // then
-      assert.ok(screen.getByRole('img', { name: t('pages.campaign-results.table.evolution.increase') }));
+      assert.ok(screen.getByRole('presentation', { name: t('pages.campaign-results.table.evolution.increase') }));
     });
   });
 
@@ -32,7 +32,7 @@ module('Integration | Component | Campaign::Results::ParticipationEvolutionIcon'
       const screen = await render(hbs`<Campaign::Results::ParticipationEvolutionIcon @evolution={{this.evolution}} />`);
 
       // then
-      assert.ok(screen.getByRole('img', { name: t('pages.campaign-results.table.evolution.decrease') }));
+      assert.ok(screen.getByRole('presentation', { name: t('pages.campaign-results.table.evolution.decrease') }));
     });
   });
 
@@ -46,7 +46,7 @@ module('Integration | Component | Campaign::Results::ParticipationEvolutionIcon'
       const screen = await render(hbs`<Campaign::Results::ParticipationEvolutionIcon @evolution={{this.evolution}} />`);
 
       // then
-      assert.ok(screen.getByRole('img', { name: t('pages.campaign-results.table.evolution.stable') }));
+      assert.ok(screen.getByRole('presentation', { name: t('pages.campaign-results.table.evolution.stable') }));
     });
   });
 
