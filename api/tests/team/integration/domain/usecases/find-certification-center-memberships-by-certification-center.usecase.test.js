@@ -1,12 +1,12 @@
-import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { CertificationCenterMembership } from '../../../../src/shared/domain/models/CertificationCenterMembership.js';
-import { certificationCenterMembershipRepository } from '../../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
-import { databaseBuilder, expect } from '../../../test-helper.js';
+import { CertificationCenterMembership } from '../../../../../src/shared/domain/models/CertificationCenterMembership.js';
+import { usecases } from '../../../../../src/team/domain/usecases/index.js';
+import { certificationCenterMembershipRepository } from '../../../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 const { findCertificationCenterMembershipsByCertificationCenter } = usecases;
 
-describe('Integration | UseCase | find-certification-center-memberships-by-certification-center', function () {
-  it('should return certification center memberships', async function () {
+describe('Integration | Team | Domain | UseCase | find-certification-center-memberships-by-certification-center', function () {
+  it('returns certification center memberships', async function () {
     // given
     const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
     const user = databaseBuilder.factory.buildUser();

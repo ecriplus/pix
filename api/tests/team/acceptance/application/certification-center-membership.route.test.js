@@ -5,10 +5,13 @@ import {
   generateValidRequestAuthorizationHeader,
 } from '../../../test-helper.js';
 
-describe('Acceptance | Application | Certification-centers | Routes', function () {
+describe('Acceptance | Application | Certification center membership | Routes', function () {
+  let server, options;
+
   describe('GET /api/certification-centers/{certificationCenterId}/members', function () {
     it('should return 200 http status code', async function () {
       // given
+      server = await createServer();
       const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
       const certificationCenterMember = databaseBuilder.factory.buildUser();
       const user2 = databaseBuilder.factory.buildUser();
@@ -21,9 +24,8 @@ describe('Acceptance | Application | Certification-centers | Routes', function (
         userId: user2.id,
       });
       await databaseBuilder.commit();
-      const server = await createServer();
 
-      const options = {
+      options = {
         headers: {
           authorization: generateValidRequestAuthorizationHeader(certificationCenterMember.id),
         },
