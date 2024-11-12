@@ -1878,6 +1878,26 @@
         "nonDefinitive": "(non-definitive calculation)",
         "pixScore": "You got {score, number, ::.} Pix"
       },
+      "hero": {
+        "acquired-badges-title": "Awards received",
+        "bravo": "Congratulations {name}!",
+        "explanations": {
+          "improve": "If you want to improve your score, you can retry certain questions.",
+          "send-results": "Send your results to the course organiser and continue with the recommended training.",
+          "trainings": "To help you progress, discover our training recommendations and find the ones that suit you best."
+        },
+        "mastery-rate": "of success in questions",
+        "retry": {
+          "actions": {
+            "reset": "Reset and try again",
+            "retry": "Replay my course"
+          },
+          "description": "Your organizer invites you to take this course again.",
+          "title": "Improve your results"
+        },
+        "see-trainings": "See trainings",
+        "shared-message": "Thank you for sending us your results."
+      },
       "improve": {
         "description": "You can retake some of the questions",
         "title": "Want to improve your results?"
