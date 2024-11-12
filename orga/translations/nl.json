@@ -1150,6 +1150,10 @@
       },
       "page-title": "Deelnemers",
       "table": {
+        "actions": {
+          "enable-oralization": "Activate oralization",
+          "disable-oralization": "Deactivate oralization"
+        },
         "column": {
           "checkbox": "Selecteren/Deselecteren {firstname} {lastname}",
           "first-name": "Voornaam",
@@ -1176,16 +1180,16 @@
             "label": "Aantal deelnames"
           }
         },
+        "description": "Tabel met deelnemers gesorteerd op naam.",
+        "empty": "Geen deelnemers",
+        "oralization-header-tooltip": "Door ‘leesinstructies’ te activeren, kan de student zijn mondelinge transcriptie krijgen.",
+        "row-title": "Deelnemer",
         "row-value": {
           "oralization": {
             "true": "Geactiveerd",
             "false": "Gedeactiveerd"
           }
-        },
-        "description": "Tabel met deelnemers gesorteerd op naam.",
-        "empty": "Geen deelnemers",
-        "row-title": "Deelnemer",
-        "oralization-header-tooltip": "Door ‘leesinstructies’ te activeren, kan de student zijn mondelinge transcriptie krijgen."
+        }
       }
     },
     "participants-list": {
