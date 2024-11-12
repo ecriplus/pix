@@ -291,7 +291,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
       const userId = databaseBuilder.factory.buildUser().id;
       const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
         userId,
-        status: STARTED,
+        status: TO_SHARE,
       }).id;
       databaseBuilder.factory.buildAssessment({
         userId,
@@ -317,7 +317,11 @@ describe('Acceptance | Routes | Campaign Participations', function () {
     it('should return 412 HTTP status code when user has already shared his results', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
-      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({ userId }).id;
+      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+        userId,
+        status: SHARED,
+        sharedAt: new Date(),
+      }).id;
       databaseBuilder.factory.buildAssessment({
         userId,
         campaignParticipationId,

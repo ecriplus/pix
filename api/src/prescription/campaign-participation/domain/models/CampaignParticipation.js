@@ -92,6 +92,10 @@ class CampaignParticipation {
   }
 
   _canBeImproved() {
+    if (this.status !== CampaignParticipationStatuses.TO_SHARE) {
+      throw new CampaignParticiationInvalidStatus(this.id, CampaignParticipationStatuses.TO_SHARE);
+    }
+
     if (this.campaign.isProfilesCollection()) {
       throw new CantImproveCampaignParticipationError();
     }
