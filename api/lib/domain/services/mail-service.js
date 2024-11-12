@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import { config } from '../../../src/shared/config.js';
 import { LOCALE } from '../../../src/shared/domain/constants.js';
 import { tokenService } from '../../../src/shared/domain/services/token-service.js';
-import { urlBuilder } from '../../../src/shared/infrastructure/utils/url-builder.js';
 import { getEmailDefaultVariables } from '../../../src/shared/mail/domain/emails-default-variables.js';
 import { mailer } from '../../../src/shared/mail/infrastructure/services/mailer.js';
 import * as translations from '../../../translations/index.js';
@@ -27,38 +26,6 @@ const PIX_HOME_URL_INTERNATIONAL = {
   nl: `${config.domain.pix + config.domain.tldOrg}/nl-be/`,
 };
 const PIX_APP_URL_INTERNATIONAL = `${config.domain.pixApp + config.domain.tldOrg}`;
-
-/**
- * @param email
- * @param locale
- * @param redirectionUrl
- * @returns {Promise<EmailingAttempt>}
- */
-function sendAccountCreationEmail({ email, firstName, locale = FRENCH_FRANCE, token, redirectionUrl, i18n }) {
-  const mailerConfig = _getMailerConfig(locale);
-  const redirectUrl = redirectionUrl || mailerConfig.pixAppConnectionUrl;
-
-  const templateVariables = {
-    homeName: mailerConfig.homeName,
-    homeUrl: mailerConfig.homeUrl,
-    redirectionUrl: urlBuilder.getEmailValidationUrl({ locale, redirectUrl, token }),
-    helpdeskUrl: mailerConfig.helpdeskUrl,
-    displayNationalLogo: mailerConfig.displayNationalLogo,
-    ...mailerConfig.translation['pix-account-creation-email'].params,
-    title: i18n.__({ phrase: 'pix-account-creation-email.params.title', locale }, { firstName }),
-  };
-  const pixName = mailerConfig.translation['email-sender-name']['pix-app'];
-  const accountCreationEmailSubject = mailerConfig.translation['pix-account-creation-email'].subject;
-
-  return mailer.sendEmail({
-    from: EMAIL_ADDRESS_NO_RESPONSE,
-    fromName: pixName,
-    to: email,
-    subject: accountCreationEmailSubject,
-    template: mailer.accountCreationTemplateId,
-    variables: templateVariables,
-  });
-}
 
 function sendCertificationResultEmail({
   email,
@@ -430,7 +397,6 @@ function _formatUrlWithLocale(url, locale) {
 }
 
 const mailService = {
-  sendAccountCreationEmail,
   sendAccountRecoveryEmail,
   sendCertificationResultEmail,
   sendOrganizationInvitationEmail,
@@ -445,7 +411,6 @@ const mailService = {
 
 /**
  * @typedef {Object} MailService
- * @property {function} sendAccountCreationEmail
  * @property {function} sendAccountRecoveryEmail
  * @property {function} sendCertificationCenterInvitationEmail
  * @property {function} sendCertificationResultEmail
@@ -459,7 +424,6 @@ const mailService = {
  */
 export {
   mailService,
-  sendAccountCreationEmail,
   sendAccountRecoveryEmail,
   sendCertificationCenterInvitationEmail,
   sendCertificationResultEmail,
