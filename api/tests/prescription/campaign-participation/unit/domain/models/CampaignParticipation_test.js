@@ -1,5 +1,8 @@
 import { ArchivedCampaignError } from '../../../../../../src/prescription/campaign/domain/errors.js';
-import { CampaignParticipationDeletedError } from '../../../../../../src/prescription/campaign-participation/domain/errors.js';
+import {
+  CampaignParticiationInvalidStatus,
+  CampaignParticipationDeletedError,
+} from '../../../../../../src/prescription/campaign-participation/domain/errors.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
 import {
   CampaignParticipationStatuses,
@@ -11,9 +14,9 @@ import {
   CantImproveCampaignParticipationError,
 } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr, catchErrSync, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-const { TO_SHARE, SHARED } = CampaignParticipationStatuses;
+const { TO_SHARE, SHARED, STARTED } = CampaignParticipationStatuses;
 
 describe('Unit | Domain | Models | CampaignParticipation', function () {
   describe('#getTargetProfileId', function () {
@@ -120,6 +123,17 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
 
       afterEach(function () {
         clock.restore();
+      });
+
+      context('when the campaign is started', function () {
+        it('throws an CampaignParticiationInvalidStatus error', function () {
+          const campaign = domainBuilder.buildCampaign({ type: CampaignTypes.PROFILES_COLLECTION });
+          const campaignParticipation = new CampaignParticipation({ campaign, status: STARTED });
+
+          const error = catchErrSync(campaignParticipation.share, campaignParticipation)();
+
+          expect(error).to.be.an.instanceOf(CampaignParticiationInvalidStatus);
+        });
       });
 
       context('when the campaign is already shared', function () {
