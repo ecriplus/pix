@@ -291,7 +291,38 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
   });
 
   module('improve results', function () {
-    module('when user can improve results', function () {
+    module('when user can improve results', function (hooks) {
+      let beginImprovementStub, campaign, campaignParticipationResult, router, screen;
+
+      hooks.beforeEach(async function () {
+        // given
+        const store = this.owner.lookup('service:store');
+
+        router = this.owner.lookup('service:router');
+        router.transitionTo = sinon.stub();
+
+        const adapter = store.adapterFor('campaign-participation-result');
+        sinon.stub(adapter, 'share');
+        beginImprovementStub = sinon.stub(adapter, 'beginImprovement');
+
+        campaignParticipationResult = store.createRecord('campaign-participation-result', {
+          masteryRate: 0.75,
+          canImprove: true,
+        });
+        campaignParticipationResult.id = 'campaignParticipationResultId';
+        this.set('campaignParticipationResult', campaignParticipationResult);
+
+        campaign = this.set('campaign', { organizationId: 1, code: 'ABC' });
+
+        // when
+        screen = await render(
+          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
+  @campaign={{this.campaign}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+/>`,
+        );
+      });
+
       test('it should display specific explanation and button', async function (assert) {
         // given
         this.set('campaign', { organizationId: 1 });
@@ -310,37 +341,31 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         assert.dom(screen.getByRole('button', { name: t('pages.skill-review.actions.improve') })).exists();
       });
 
-      module('on improve button click', function (hooks) {
-        let beginImprovementStub, campaign, campaignParticipationResult, router, screen;
-
-        hooks.beforeEach(async function () {
+      module('loading button', function () {
+        test('should not be able to share the campaign at the same time', async function (assert) {
           // given
-          const store = this.owner.lookup('service:store');
-
-          router = this.owner.lookup('service:router');
-          router.transitionTo = sinon.stub();
-
-          const adapter = store.adapterFor('campaign-participation-result');
-          beginImprovementStub = sinon.stub(adapter, 'beginImprovement');
-
-          campaignParticipationResult = store.createRecord('campaign-participation-result', {
-            masteryRate: 0.75,
-            canImprove: true,
-          });
-          campaignParticipationResult.id = 'campaignParticipationResultId';
-          this.set('campaignParticipationResult', campaignParticipationResult);
-
-          campaign = this.set('campaign', { organizationId: 1, code: 'ABC' });
-
+          const pendingPromise = new Promise(() => {});
+          beginImprovementStub.resolves(pendingPromise);
           // when
-          screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
-          );
+          await click(screen.getByRole('button', { name: t('pages.skill-review.actions.improve') }));
+          // then
+          assert.notOk(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
+          assert.notOk(screen.queryByRole('button', { name: t('pages.skill-review.actions.improve') }));
         });
 
+        test('should not be able to improve the campaign at the same time', async function (assert) {
+          // given
+          const pendingPromise = new Promise(() => {});
+          beginImprovementStub.resolves(pendingPromise);
+          // when
+          await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
+          // then
+          assert.notOk(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
+          assert.notOk(screen.queryByRole('button', { name: t('pages.skill-review.actions.improve') }));
+        });
+      });
+
+      module('on improve button click', function () {
         test('on success, it should restart the campaign', async function (assert) {
           // when
           await click(screen.getByRole('button', { name: t('pages.skill-review.actions.improve') }));
@@ -355,11 +380,10 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
         test('on fail, it should display an error', async function (assert) {
           // given
-          beginImprovementStub.rejects();
+          beginImprovementStub.withArgs('campaignParticipationResultId').rejects();
 
           // when
-          await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
-
+          await click(screen.getByRole('button', { name: t('pages.skill-review.actions.improve') }));
           // then
           assert.dom(screen.queryByText(t('pages.skill-review.error'))).exists();
           assert.dom(screen.getByText(t('pages.skill-review.hero.explanations.improve'))).exists();

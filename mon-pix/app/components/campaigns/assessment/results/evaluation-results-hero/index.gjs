@@ -21,8 +21,7 @@ export default class EvaluationResultsHero extends Component {
   @service tabManager;
 
   @tracked hasGlobalError = false;
-  @tracked isImproveButtonLoading = false;
-  @tracked isShareResultsLoading = false;
+  @tracked isButtonLoading = false;
 
   get isAutonomousCourse() {
     return this.args.campaign.organizationId === ENV.APP.AUTONOMOUS_COURSES_ORGANIZATION_ID;
@@ -58,11 +57,11 @@ export default class EvaluationResultsHero extends Component {
 
   @action
   async improveResults() {
-    if (this.isImproveButtonLoading) return;
+    if (this.isButtonLoading) return;
 
     try {
       this.hasGlobalError = false;
-      this.isImproveButtonLoading = true;
+      this.isButtonLoading = true;
 
       const campaignParticipationResult = this.args.campaignParticipationResult;
       const adapter = this.store.adapterFor('campaign-participation-result');
@@ -71,17 +70,17 @@ export default class EvaluationResultsHero extends Component {
     } catch {
       this.hasGlobalError = true;
     } finally {
-      this.isImproveButtonLoading = false;
+      this.isButtonLoading = false;
     }
   }
 
   @action
   async handleShareResultsClick() {
-    if (this.isShareResultsLoading) return;
+    if (this.isButtonLoading) return;
 
     try {
       this.hasGlobalError = false;
-      this.isShareResultsLoading = true;
+      this.isButtonLoading = true;
 
       const campaignParticipationResult = this.args.campaignParticipationResult;
       const adapter = this.store.adapterFor('campaign-participation-result');
@@ -92,7 +91,7 @@ export default class EvaluationResultsHero extends Component {
     } catch {
       this.hasGlobalError = true;
     } finally {
-      this.isShareResultsLoading = false;
+      this.isButtonLoading = false;
     }
   }
 
@@ -178,7 +177,7 @@ export default class EvaluationResultsHero extends Component {
               <PixButton
                 @triggerAction={{this.handleShareResultsClick}}
                 @size="large"
-                @isLoading={{this.isShareResultsLoading}}
+                @isLoading={{this.isButtonLoading}}
               >
                 {{t "pages.skill-review.actions.send"}}
               </PixButton>
@@ -190,7 +189,7 @@ export default class EvaluationResultsHero extends Component {
               @variant="tertiary"
               @size="large"
               @triggerAction={{this.improveResults}}
-              @isLoading={{this.isImproveButtonLoading}}
+              @isLoading={{this.isButtonLoading}}
             >
               {{t "pages.skill-review.actions.improve"}}
             </PixButton>
