@@ -285,6 +285,7 @@ const configuration = (function () {
           organizationInvitationTemplateId: process.env.BREVO_ORGANIZATION_INVITATION_TEMPLATE_ID,
           organizationInvitationScoTemplateId: process.env.BREVO_ORGANIZATION_INVITATION_SCO_TEMPLATE_ID,
           passwordResetTemplateId: process.env.BREVO_PASSWORD_RESET_TEMPLATE_ID,
+          selfAccountDeletionTemplateId: process.env.BREVO_SELF_ACCOUNT_DELETION_TEMPLATE_ID,
           targetProfileNotCertifiableTemplateId: process.env.BREVO_TARGET_PROFILE_NOT_CERTIFIABLE_TEMPLATE_ID,
         },
       },
