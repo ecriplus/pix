@@ -56,6 +56,15 @@ async function _getParticipations(qb, campaignId, filters) {
         .whereNull('campaign-participations.deletedAt')
         .orderBy('sharedAt', 'desc');
     })
+    .with('participationsCount', (qb) => {
+      qb.select('organizationLearnerId')
+        .count('organizationLearnerId AS sharedProfileCount')
+        .from('campaign-participations')
+        .groupBy('organizationLearnerId')
+        .where('campaignId', campaignId)
+        .whereNotNull('campaign-participations.sharedAt')
+        .whereNull('campaign-participations.deletedAt');
+    })
     .select(
       'campaign-participations.id AS campaignParticipationId',
       'campaign-participations.userId AS userId',
@@ -66,13 +75,7 @@ async function _getParticipations(qb, campaignId, filters) {
       'campaign-participations.pixScore AS pixScore',
       'previousParticipationsInfos.previousPixScore',
       'previousParticipationsInfos.previousSharedAt',
-      knex('campaign-participations')
-        .as('sharedProfileCount')
-        .count()
-        .whereRaw('"campaign-participations"."organizationLearnerId" = "view-active-organization-learners".id')
-        .whereNotNull('campaign-participations.sharedAt')
-        .whereNull('campaign-participations.deletedAt')
-        .where('campaign-participations.campaignId', campaignId),
+      'participationsCount.sharedProfileCount',
     )
     .distinctOn('campaign-participations.organizationLearnerId')
     .from('campaign-participations')
@@ -87,6 +90,11 @@ async function _getParticipations(qb, campaignId, filters) {
         'campaign-participations.organizationLearnerId',
       ).andOn('campaign-participations.id', '!=', 'previousParticipationsInfos.id');
     })
+    .join(
+      'participationsCount',
+      'participationsCount.organizationLearnerId',
+      'campaign-participations.organizationLearnerId',
+    )
     .where('campaign-participations.campaignId', campaignId)
     .whereNull('campaign-participations.deletedAt')
     .whereNotNull('campaign-participations.sharedAt')
