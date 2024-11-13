@@ -11,6 +11,7 @@ const serialize = function ({ data, pagination }) {
       'participantExternalId',
       'sharedAt',
       'pixScore',
+      'sharedProfileCount',
       'previousPixScore',
       'previousSharedAt',
       'evolution',
