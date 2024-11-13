@@ -66,6 +66,13 @@ async function _getParticipations(qb, campaignId, filters) {
       'campaign-participations.pixScore AS pixScore',
       'previousParticipationsInfos.previousPixScore',
       'previousParticipationsInfos.previousSharedAt',
+      knex('campaign-participations')
+        .as('sharedProfileCount')
+        .count()
+        .whereRaw('"campaign-participations"."organizationLearnerId" = "view-active-organization-learners".id')
+        .whereNotNull('campaign-participations.sharedAt')
+        .whereNull('campaign-participations.deletedAt')
+        .where('campaign-participations.campaignId', campaignId),
     )
     .distinctOn('campaign-participations.organizationLearnerId')
     .from('campaign-participations')
