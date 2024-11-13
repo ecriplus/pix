@@ -1,6 +1,9 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import * as certificationCenterForAdminRepository from '../../../../lib/infrastructure/repositories/certification-center-for-admin-repository.js';
+import * as complementaryCertificationHabilitationRepository from '../../../../lib/infrastructure/repositories/complementary-certification-habilitation-repository.js';
+import * as dataProtectionOfficerRepository from '../../../../lib/infrastructure/repositories/data-protection-officer-repository.js';
 import * as organizationTagRepository from '../../../../lib/infrastructure/repositories/organization-tag-repository.js';
 import * as schoolRepository from '../../../school/infrastructure/repositories/school-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
@@ -14,6 +17,9 @@ const path = dirname(fileURLToPath(import.meta.url));
 
 /**
  * @typedef {import ('../../infrastructure/repositories/certification-center.repository.js')} CertificationCenterRepository
+ * @typedef {import ('../../../../lib/infrastructure/repositories/certification-center-for-admin-repository.js')} CertificationCenterForAdminRepository
+ * @typedef {import ('../../../../lib/infrastructure/repositories/complementary-certification-habilitation-repository.js')} ComplementaryCertificationHabilitationRepository
+ * @typedef {import ('../../../../lib/infrastructure/repositories/data-protection-officer-repository.js')} DataProtectionOfficerRepository
  * @typedef {import ('../../infrastructure/repositories/organization-feature-repository.js')} OrganizationFeatureRepository
  * @typedef {import ('../../infrastructure/repositories/organization-for-admin.repository.js')} OrganizationForAdminRepository
  * @typedef {import ('../../infrastructure/repositories/tag.repository.js')} TagRepository
@@ -22,6 +28,9 @@ const path = dirname(fileURLToPath(import.meta.url));
 
 const repositories = {
   certificationCenterRepository,
+  certificationCenterForAdminRepository,
+  dataProtectionOfficerRepository,
+  complementaryCertificationHabilitationRepository,
   organizationForAdminRepository,
   organizationFeatureRepository,
   schoolRepository,
@@ -39,6 +48,7 @@ const usecasesWithoutInjectedDependencies = {
  * @typedef OrganizationalEntitiesUsecases
  * @property {addOrganizationFeatureInBatch} addOrganizationFeatureInBatch
  * @property {attachChildOrganizationToOrganization} attachChildOrganizationToOrganization
+ * @property {createCertificationCenter} createCertificationCenter
  * @property {createTag} createTag
  * @property {findPaginatedFilteredCertificationCenters} findPaginatedFilteredCertificationCenters
  * @property {getOrganizationDetails} getOrganizationDetails

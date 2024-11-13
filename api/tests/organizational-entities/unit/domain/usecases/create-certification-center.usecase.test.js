@@ -1,10 +1,10 @@
-import { createCertificationCenter } from '../../../../lib/domain/usecases/create-certification-center.js';
-import { DataProtectionOfficer } from '../../../../src/organizational-entities/domain/models/DataProtectionOfficer.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { DataProtectionOfficer } from '../../../../../src/organizational-entities/domain/models/DataProtectionOfficer.js';
+import { createCertificationCenter } from '../../../../../src/organizational-entities/domain/usecases/create-certification-center.usecase.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | create-certification-center', function () {
+describe('Unit | Organizational Entities | Domain | UseCase | create-certification-center', function () {
   describe('#createCertificationCenter', function () {
-    it('should save and return the certification center', async function () {
+    it('saves and returns the certification center', async function () {
       // given
       const certificationCenter = domainBuilder.buildCertificationCenter();
       const certificationCenterForAdminRepository = { save: sinon.stub().returns(certificationCenter) };
@@ -35,7 +35,7 @@ describe('Unit | UseCase | create-certification-center', function () {
       expect(createdCertificationCenter).to.deepEqualInstance(certificationCenter);
     });
 
-    it('should save the complementary certification habilitations', async function () {
+    it('saves the complementary certification habilitations', async function () {
       // given
       const certificationCenter = domainBuilder.buildCertificationCenter();
       const complementaryCertificationIds = ['1234', '4567'];
@@ -68,7 +68,7 @@ describe('Unit | UseCase | create-certification-center', function () {
       expect(complementaryCertificationHabilitationRepository.save).to.be.calledTwice;
     });
 
-    it('should create a data protection officer while saving and returning the certification center', async function () {
+    it('creates a data protection officer while saving and returning the certification center', async function () {
       // given
       const certificationCenter = domainBuilder.buildCertificationCenter();
       const dataProtectionOfficer = {

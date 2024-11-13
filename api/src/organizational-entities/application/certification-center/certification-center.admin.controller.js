@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as certificationCenterSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center.serializer.js';
 import * as certificationCenterForAdminSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center-for-admin.serializer.js';
@@ -8,7 +7,7 @@ const create = async function (request) {
   const complementaryCertificationIds = request.payload.data.relationships?.habilitations?.data.map(
     (complementaryCertification) => complementaryCertification.id,
   );
-  const createdCertificationCenter = await libUsecases.createCertificationCenter({
+  const createdCertificationCenter = await usecases.createCertificationCenter({
     certificationCenter,
     complementaryCertificationIds,
   });
