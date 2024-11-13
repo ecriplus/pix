@@ -85,3 +85,26 @@ input:invalid {
 * {
   box-sizing: border-box;
 }
+
+.pix-toast__icon .pix-icon {
+  fill: var(--pix-neutral-0);
+}
+
+.pix-icon-button {
+  &:active:enabled,
+  &:focus:enabled {
+    .pix-icon {
+      fill: var(--pix-neutral-0);
+    }
+  }
+}
+
+.pix-toast__close-button-container button {
+  &:hover:enabled,
+  &:active:enabled,
+  &:focus:enabled {
+    .pix-icon {
+      fill: var(--pix-neutral-0);
+    }
+  }
+}
