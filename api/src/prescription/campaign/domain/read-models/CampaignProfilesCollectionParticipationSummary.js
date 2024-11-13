@@ -6,6 +6,7 @@ class CampaignProfilesCollectionParticipationSummary {
     participantExternalId,
     sharedAt,
     pixScore,
+    sharedProfileCount,
     previousPixScore,
     previousSharedAt,
     certifiable,
@@ -17,6 +18,7 @@ class CampaignProfilesCollectionParticipationSummary {
     this.participantExternalId = participantExternalId;
     this.sharedAt = sharedAt;
     this.pixScore = pixScore;
+    this.sharedProfileCount = sharedProfileCount;
     this.previousPixScore = previousPixScore ?? null;
     this.previousSharedAt = previousSharedAt ?? null;
     this.evolution = this.#computeEvolution(this.pixScore, this.previousPixScore);

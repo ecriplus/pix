@@ -11,6 +11,7 @@ describe('Unit | Domain | Read-Models | CampaignResults | CampaignProfilesCollec
         participantExternalId: 'Sarah2024',
         sharedAt: '2024-10-28',
         pixScore: 20,
+        sharedProfileCount: 2,
         previousPixScore: null,
         previousSharedAt: null,
         certifiable: true,
@@ -40,6 +41,7 @@ describe('Unit | Domain | Read-Models | CampaignResults | CampaignProfilesCollec
         participantExternalId: 'Sarah2024',
         certifiable: true,
         certifiableCompetencesCount: 9,
+        sharedProfileCount: 2,
       };
 
       describe('when previous participation pixScore and shared date are undefined', function () {
