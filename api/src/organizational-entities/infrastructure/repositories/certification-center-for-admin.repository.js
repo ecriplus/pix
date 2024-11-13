@@ -1,5 +1,5 @@
-import { CenterForAdmin } from '../../../src/certification/enrolment/domain/models/CenterForAdmin.js';
-import { DomainTransaction } from '../DomainTransaction.js';
+import { CenterForAdmin } from '../../../certification/enrolment/domain/models/CenterForAdmin.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 
 const save = async function (certificationCenter) {
   const knexConn = DomainTransaction.getConnection();
