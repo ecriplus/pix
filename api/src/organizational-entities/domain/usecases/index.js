@@ -1,7 +1,6 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as complementaryCertificationHabilitationRepository from '../../../../lib/infrastructure/repositories/complementary-certification-habilitation-repository.js';
 import * as dataProtectionOfficerRepository from '../../../../lib/infrastructure/repositories/data-protection-officer-repository.js';
 import * as organizationTagRepository from '../../../../lib/infrastructure/repositories/organization-tag-repository.js';
 import * as schoolRepository from '../../../school/infrastructure/repositories/school-repository.js';
@@ -9,6 +8,7 @@ import { injectDependencies } from '../../../shared/infrastructure/utils/depende
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as certificationCenterRepository from '../../infrastructure/repositories/certification-center.repository.js';
 import * as certificationCenterForAdminRepository from '../../infrastructure/repositories/certification-center-for-admin.repository.js';
+import * as complementaryCertificationHabilitationRepository from '../../infrastructure/repositories/complementary-certification-habilitation.repository.js';
 import * as organizationFeatureRepository from '../../infrastructure/repositories/organization-feature-repository.js';
 import { organizationForAdminRepository } from '../../infrastructure/repositories/organization-for-admin.repository.js';
 import { tagRepository } from '../../infrastructure/repositories/tag.repository.js';
@@ -18,7 +18,7 @@ const path = dirname(fileURLToPath(import.meta.url));
 /**
  * @typedef {import ('../../infrastructure/repositories/certification-center.repository.js')} CertificationCenterRepository
  * @typedef {import ('../../infrastructure/repositories/certification-center-for-admin-repository.js')} CertificationCenterForAdminRepository
- * @typedef {import ('../../../../lib/infrastructure/repositories/complementary-certification-habilitation-repository.js')} ComplementaryCertificationHabilitationRepository
+ * @typedef {import ('../../infrastructure/repositories/complementary-certification-habilitation-repository.js')} ComplementaryCertificationHabilitationRepository
  * @typedef {import ('../../../../lib/infrastructure/repositories/data-protection-officer-repository.js')} DataProtectionOfficerRepository
  * @typedef {import ('../../infrastructure/repositories/organization-feature-repository.js')} OrganizationFeatureRepository
  * @typedef {import ('../../infrastructure/repositories/organization-for-admin.repository.js')} OrganizationForAdminRepository

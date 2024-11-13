@@ -1,9 +1,9 @@
-import * as complementaryCertificationHabilitationRepository from '../../../../lib/infrastructure/repositories/complementary-certification-habilitation-repository.js';
-import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import * as complementaryCertificationHabilitationRepository from '../../../../../src/organizational-entities/infrastructure/repositories/complementary-certification-habilitation.repository.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
-describe('Integration | Infrastructure | Repository | complementary-certification-habilitation-repository', function () {
+describe('Integration | Organizational Entities | Infrastructure | Repository | complementary-certification-habilitation', function () {
   context('#save', function () {
-    it('should create the complementary certitification habilitation', async function () {
+    it('creates the complementary certitification habilitation', async function () {
       // given
       const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
       const complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification().id;
@@ -26,7 +26,7 @@ describe('Integration | Infrastructure | Repository | complementary-certificatio
   });
 
   context('#deleteByCertificationCenterId', function () {
-    it('should delete all complementary certitification habilitations for a given certification center id', async function () {
+    it('deletes all complementary certitification habilitations for a given certification center id', async function () {
       // given
       const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
       const otherCertificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
