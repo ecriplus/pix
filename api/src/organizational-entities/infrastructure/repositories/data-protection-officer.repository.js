@@ -1,5 +1,5 @@
-import { DataProtectionOfficer } from '../../../src/organizational-entities/domain/models/DataProtectionOfficer.js';
-import { DomainTransaction } from '../DomainTransaction.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { DataProtectionOfficer } from '../../domain/models/DataProtectionOfficer.js';
 
 const DATA_PROTECTION_OFFICERS_TABLE_NAME = 'data-protection-officers';
 

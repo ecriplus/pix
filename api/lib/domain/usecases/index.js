@@ -64,6 +64,7 @@ import { userEmailRepository } from '../../../src/identity-access-management/inf
 import { userToCreateRepository } from '../../../src/identity-access-management/infrastructure/repositories/user-to-create.repository.js';
 import * as certificationCenterForAdminRepository from '../../../src/organizational-entities/infrastructure/repositories/certification-center-for-admin.repository.js';
 import * as complementaryCertificationHabilitationRepository from '../../../src/organizational-entities/infrastructure/repositories/complementary-certification-habilitation.repository.js';
+import * as dataProtectionOfficerRepository from '../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
 import { organizationForAdminRepository } from '../../../src/organizational-entities/infrastructure/repositories/organization-for-admin.repository.js';
 import { tagRepository } from '../../../src/organizational-entities/infrastructure/repositories/tag.repository.js';
 import * as campaignManagementRepository from '../../../src/prescription/campaign/infrastructure/repositories/campaign-management-repository.js';
@@ -133,7 +134,6 @@ import * as certifiableProfileForLearningContentRepository from '../../infrastru
 import * as certificationPointOfContactRepository from '../../infrastructure/repositories/certification-point-of-contact-repository.js';
 import * as certificationRepository from '../../infrastructure/repositories/certification-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../infrastructure/repositories/complementary-certification-course-result-repository.js';
-import * as dataProtectionOfficerRepository from '../../infrastructure/repositories/data-protection-officer-repository.js';
 import * as flashAssessmentResultRepository from '../../infrastructure/repositories/flash-assessment-result-repository.js';
 import * as frameworkRepository from '../../infrastructure/repositories/framework-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
