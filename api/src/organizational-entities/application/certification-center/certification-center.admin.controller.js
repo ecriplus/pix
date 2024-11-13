@@ -1,7 +1,7 @@
 import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
-import * as certificationCenterForAdminSerializer from '../../../../lib/infrastructure/serializers/jsonapi/certification-center-for-admin-serializer.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as certificationCenterSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center.serializer.js';
+import * as certificationCenterForAdminSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center-for-admin.serializer.js';
 
 const create = async function (request) {
   const certificationCenter = certificationCenterForAdminSerializer.deserialize(request.payload);

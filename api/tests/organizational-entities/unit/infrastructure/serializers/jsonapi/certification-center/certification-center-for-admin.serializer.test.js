@@ -1,7 +1,7 @@
-import * as serializer from '../../../../../lib/infrastructure/serializers/jsonapi/certification-center-for-admin-serializer.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import * as serializer from '../../../../../../../src/organizational-entities/infrastructure/serializers/jsonapi/certification-center/certification-center-for-admin.serializer.js';
+import { domainBuilder, expect } from '../../../../../../test-helper.js';
 
-describe('Unit | Serializer | JSONAPI | certification-center-for-admin-serializer', function () {
+describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI | certification-center-for-admin-serializer', function () {
   let certificationCenterJsonApi;
   let centerForAdmin;
   let dataProtectionOfficer;
