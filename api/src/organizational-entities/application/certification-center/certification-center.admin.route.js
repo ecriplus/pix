@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { optionalIdentifiersType } from '../../../shared/domain/types/identifiers-type.js';
-import { certificationCenterController } from './certification-center.admin.controller.js';
+import { certificationCenterAdminController } from './certification-center.admin.controller.js';
 
 const register = async function (server) {
   server.route([
@@ -10,7 +10,7 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/admin/certification-centers',
       config: {
-        handler: certificationCenterController.findPaginatedFilteredCertificationCenters,
+        handler: certificationCenterAdminController.findPaginatedFilteredCertificationCenters,
         pre: [
           {
             method: (request, h) =>

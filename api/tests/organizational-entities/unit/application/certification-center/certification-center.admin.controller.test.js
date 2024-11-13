@@ -1,4 +1,4 @@
-import { certificationCenterController } from '../../../../../src/organizational-entities/application/certification-center/certification-center.admin.controller.js';
+import { certificationCenterAdminController } from '../../../../../src/organizational-entities/application/certification-center/certification-center.admin.controller.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
@@ -41,7 +41,7 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | ce
         });
 
       // when
-      const response = await certificationCenterController.findPaginatedFilteredCertificationCenters(
+      const response = await certificationCenterAdminController.findPaginatedFilteredCertificationCenters(
         request,
         hFake,
         dependencies,

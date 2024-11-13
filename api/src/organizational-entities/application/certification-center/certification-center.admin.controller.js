@@ -15,8 +15,8 @@ const findPaginatedFilteredCertificationCenters = async function (
   return dependencies.certificationCenterSerializer.serialize(organizations, pagination);
 };
 
-const certificationCenterController = {
+const certificationCenterAdminController = {
   findPaginatedFilteredCertificationCenters,
 };
 
-export { certificationCenterController };
+export { certificationCenterAdminController };
