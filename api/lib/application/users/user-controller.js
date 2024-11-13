@@ -66,19 +66,6 @@ const resetScorecard = function (request, h, dependencies = { scorecardSerialize
     .then(dependencies.scorecardSerializer.serialize);
 };
 
-const getUserCampaignParticipationToCampaign = function (
-  request,
-  h,
-  dependencies = { campaignParticipationSerializer },
-) {
-  const authenticatedUserId = request.auth.credentials.userId;
-  const campaignId = request.params.campaignId;
-
-  return usecases
-    .getUserCampaignParticipationToCampaign({ userId: authenticatedUserId, campaignId })
-    .then((campaignParticipation) => dependencies.campaignParticipationSerializer.serialize(campaignParticipation));
-};
-
 const removeAuthenticationMethod = async function (request, h) {
   const userId = request.params.id;
   const authenticationMethodType = request.payload.data.attributes.type;
@@ -146,7 +133,6 @@ const userController = {
   findPaginatedUserRecommendedTrainings,
   findUserOrganizationsForAdmin,
   getCampaignParticipations,
-  getUserCampaignParticipationToCampaign,
   reassignAuthenticationMethods,
   rememberUserHasSeenAssessmentInstructions,
   rememberUserHasSeenChallengeTooltip,
