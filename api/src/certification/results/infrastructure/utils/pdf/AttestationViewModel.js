@@ -10,6 +10,26 @@ import { SESSIONS_VERSIONS } from '../../../../shared/domain/models/SessionVersi
 const PROFESSIONALIZING_VALIDITY_START_DATE = new Date('2022-01-01');
 
 class AttestationViewModel {
+  /**
+   * @param {Object} props
+   * @param {number} props.pixScore
+   * @param {number} props.maxReachableScore
+   * @param {string} props.maxLevel
+   * @param {string} props.absoluteMaxLevelIndication
+   * @param {string} props.maxReachableLevelIndication
+   * @param {string} props.fullName
+   * @param {Date} props.birthplace
+   * @param {Date} props.birth
+   * @param {string} props.certificationCenter
+   * @param {Date} props.deliveredAt
+   * @param {string} props.verificationCode
+   * @param {Date} props.maxReachableLevelOnCertificationDate
+   * @param {Boolean} props.hasAcquiredAnyComplementaryCertifications
+   * @param {Object} props.stickers
+   * @param {Array} props.competenceDetailViewModels
+   * @param {Boolean} props.isFrenchDomainExtension
+   * @param {number} props.version
+   */
   constructor({
     pixScore,
     maxReachableScore,
@@ -26,7 +46,7 @@ class AttestationViewModel {
     hasAcquiredAnyComplementaryCertifications,
     stickers,
     competenceDetailViewModels,
-    isFrenchDomainExtension,
+    isFrenchDomainExtension = true,
     version,
   }) {
     this.pixScore = pixScore;
@@ -62,10 +82,12 @@ class AttestationViewModel {
 
   shouldDisplayProfessionalizingCertificationMessage() {
     if (!this._deliveredAt) return false;
+    return this.#isDeliveredAfterProfessionalizingStartDate() && this._version === SESSIONS_VERSIONS.V2;
+  }
+
+  #isDeliveredAfterProfessionalizingStartDate() {
     return (
-      this._isFrenchDomainExtension &&
-      this._deliveredAt.getTime() >= PROFESSIONALIZING_VALIDITY_START_DATE.getTime() &&
-      this._version === SESSIONS_VERSIONS.V2
+      this._isFrenchDomainExtension && this._deliveredAt.getTime() >= PROFESSIONALIZING_VALIDITY_START_DATE.getTime()
     );
   }
 
