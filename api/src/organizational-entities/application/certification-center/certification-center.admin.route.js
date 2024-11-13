@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import { certificationCenterController } from '../../../../lib/application/certification-centers/certification-center-controller.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { optionalIdentifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { certificationCenterAdminController } from './certification-center.admin.controller.js';
@@ -49,7 +48,7 @@ const register = async function (server) {
       method: 'POST',
       path: '/api/admin/certification-centers',
       config: {
-        handler: certificationCenterController.create,
+        handler: certificationCenterAdminController.create,
         pre: [
           {
             method: (request, h) =>

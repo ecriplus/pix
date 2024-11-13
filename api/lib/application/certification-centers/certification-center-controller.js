@@ -12,16 +12,6 @@ import * as studentCertificationSerializer from '../../infrastructure/serializer
 
 const { map } = lodash;
 
-const create = async function (request) {
-  const certificationCenter = certificationCenterForAdminSerializer.deserialize(request.payload);
-  const complementaryCertificationIds = map(request.payload.data.relationships?.habilitations?.data, 'id');
-  const createdCertificationCenter = await usecases.createCertificationCenter({
-    certificationCenter,
-    complementaryCertificationIds,
-  });
-  return certificationCenterForAdminSerializer.serialize(createdCertificationCenter);
-};
-
 const update = async function (request) {
   const certificationCenterId = request.params.id;
   const certificationCenterInformation = certificationCenterForAdminSerializer.deserialize(request.payload);
@@ -140,7 +130,6 @@ const updateReferer = async function (request, h) {
 };
 
 const certificationCenterController = {
-  create,
   createCertificationCenterMembershipByEmail,
   findCertificationCenterMembershipsByCertificationCenter,
   findPaginatedSessionSummaries,
