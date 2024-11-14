@@ -1,16 +1,51 @@
-import { createUsers } from '../../../../src/identity-access-management/scripts/mass-create-user-accounts.js';
+import * as url from 'node:url';
+
+import { MassCreateUserAccountsScript } from '../../../../src/identity-access-management/scripts/mass-create-user-accounts.js';
 import { expect, knex, sinon } from '../../../test-helper.js';
 
-describe('Acceptance | Identity Access Management | Scripts | mass-create-user-accounts', function () {
-  describe('#createUsers', function () {
+const currentDirectory = url.fileURLToPath(new URL('.', import.meta.url));
+
+describe('Integration | Identity Access Management | Scripts | mass-create-user-accounts', function () {
+  describe('Options', function () {
+    it('has the correct options', function () {
+      const script = new MassCreateUserAccountsScript();
+
+      const { options } = script.metaInfo;
+      expect(options.file).to.deep.include({
+        type: 'string',
+        describe: 'CSV file path',
+        demandOption: true,
+      });
+    });
+
+    it('parses CSV data correctly', async function () {
+      const testCsvFile = `${currentDirectory}files/mass-create-user-accounts.csv`;
+
+      const script = new MassCreateUserAccountsScript();
+
+      const { options } = script.metaInfo;
+      const parsedData = await options.file.coerce(testCsvFile);
+      expect(parsedData).to.be.an('array').that.deep.includes({
+        firstName: 'Dik',
+        lastName: 'Tektive',
+        email: 'dik.tektive@example.net',
+        password: 'P@ssW0rd',
+      });
+      expect(parsedData).to.be.an('array').that.deep.includes({
+        firstName: 'Foo',
+        lastName: 'Bar',
+        email: 'foo@bar.com',
+        password: 'barbarbar',
+      });
+    });
+  });
+
+  describe('#handle', function () {
     const now = new Date();
     let clock;
 
     beforeEach(async function () {
-      clock = sinon.useFakeTimers({
-        now,
-        toFake: ['Date'],
-      });
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
     });
 
     afterEach(async function () {
@@ -35,7 +70,8 @@ describe('Acceptance | Identity Access Management | Scripts | mass-create-user-a
       ];
 
       // when
-      await createUsers({ usersInRaw });
+      const script = new MassCreateUserAccountsScript();
+      await script.handle({ options: { file: usersInRaw } });
 
       // then
       const firstUserFound = await knex('users').where({ lastName: 'Kilo' }).first();
@@ -87,7 +123,8 @@ describe('Acceptance | Identity Access Management | Scripts | mass-create-user-a
       ];
 
       // when
-      await createUsers({ usersInRaw });
+      const script = new MassCreateUserAccountsScript();
+      await script.handle({ options: { file: usersInRaw } });
 
       // then
       const usersInDatabases = await knex('authentication-methods');
