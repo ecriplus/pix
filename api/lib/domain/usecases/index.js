@@ -54,6 +54,7 @@ import { scoAccountRecoveryService } from '../../../src/identity-access-manageme
 import { accountRecoveryDemandRepository } from '../../../src/identity-access-management/infrastructure/repositories/account-recovery-demand.repository.js';
 import * as authenticationMethodRepository from '../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
 import { emailValidationDemandRepository } from '../../../src/identity-access-management/infrastructure/repositories/email-validation-demand.repository.js';
+import { userAnonymizedEventLoggingJobRepository } from '../../../src/identity-access-management/infrastructure/repositories/jobs/user-anonymized-event-logging-job-repository.js';
 import * as oidcProviderRepository from '../../../src/identity-access-management/infrastructure/repositories/oidc-provider-repository.js';
 import { organizationLearnerIdentityRepository } from '../../../src/identity-access-management/infrastructure/repositories/organization-learner-identity.repository.js';
 import { refreshTokenRepository } from '../../../src/identity-access-management/infrastructure/repositories/refresh-token.repository.js';
@@ -137,7 +138,6 @@ import * as flashAssessmentResultRepository from '../../infrastructure/repositor
 import * as frameworkRepository from '../../infrastructure/repositories/framework-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import { certificationCompletedJobRepository } from '../../infrastructure/repositories/jobs/certification-completed-job-repository.js';
-import { userAnonymizedEventLoggingJobRepository } from '../../infrastructure/repositories/jobs/user-anonymized-event-logging-job-repository.js';
 import * as knowledgeElementRepository from '../../infrastructure/repositories/knowledge-element-repository.js';
 import * as learningContentRepository from '../../infrastructure/repositories/learning-content-repository.js';
 import * as organizationLearnerRepository from '../../infrastructure/repositories/organization-learner-repository.js';

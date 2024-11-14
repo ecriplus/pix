@@ -7,7 +7,6 @@ import * as userReconciliationService from '../../../../lib/domain/services/user
 import { oidcAuthenticationServiceRegistry } from '../../../../lib/domain/usecases/index.js';
 import * as campaignParticipationRepository from '../../../../lib/infrastructure/repositories/campaign-participation-repository.js';
 import * as campaignRepository from '../../../../lib/infrastructure/repositories/campaign-repository.js';
-import { userAnonymizedEventLoggingJobRepository } from '../../../../lib/infrastructure/repositories/jobs/user-anonymized-event-logging-job-repository.js';
 import * as organizationLearnerRepository from '../../../../lib/infrastructure/repositories/organization-learner-repository.js';
 import * as userRecommendedTrainingRepository from '../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import { repositories as campaignRepositories } from '../../../prescription/campaign/infrastructure/repositories/index.js';
@@ -30,6 +29,7 @@ import * as authenticationMethodRepository from '../../infrastructure/repositori
 import { emailValidationDemandRepository } from '../../infrastructure/repositories/email-validation-demand.repository.js';
 import { eventLoggingJobRepository } from '../../infrastructure/repositories/jobs/event-logging-job.repository.js';
 import { garAnonymizedBatchEventsLoggingJobRepository } from '../../infrastructure/repositories/jobs/gar-anonymized-batch-events-logging-job-repository.js';
+import { userAnonymizedEventLoggingJobRepository } from '../../infrastructure/repositories/jobs/user-anonymized-event-logging-job-repository.js';
 import { oidcProviderRepository } from '../../infrastructure/repositories/oidc-provider-repository.js';
 import { refreshTokenRepository } from '../../infrastructure/repositories/refresh-token.repository.js';
 import { resetPasswordDemandRepository } from '../../infrastructure/repositories/reset-password-demand.repository.js';
