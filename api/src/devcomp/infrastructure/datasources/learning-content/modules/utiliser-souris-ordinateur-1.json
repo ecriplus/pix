@@ -7,12 +7,12 @@
     "description": "<p>Dans ce module, vous découvrirez ce qu’est une souris et à quoi elle sert.&nbsp;</p><p>Vous apprendrez à la déplacer et à cliquer pour interagir avec votre ordinateur.</p><br>",
     "duration": 10,
     "level": "Débutant",
+    "tabletSupport": "obstructed",
     "objectives": [
       "<p>Reconnaître une souris et connaître son utilité</p>",
-      "Prendre en main une souris et la déplacer",
+      "<p>Prendre en main une souris et la déplacer</p>",
       "<p>Effectuer ses premiers clics gauches</p>"
-    ],
-    "tabletSupport": "obstructed"
+    ]
   },
   "transitionTexts": [
     {
