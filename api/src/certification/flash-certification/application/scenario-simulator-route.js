@@ -60,15 +60,6 @@ const register = async (server) => {
                 .required(),
             }),
             _baseScenarioParametersValidator.keys({
-              type: Joi.string().valid('random').required(),
-              probabilities: Joi.object({
-                ok: Joi.number(),
-                ko: Joi.number(),
-                aband: Joi.number(),
-              }),
-              length: Joi.number().integer().min(0).required(),
-            }),
-            _baseScenarioParametersValidator.keys({
               type: Joi.string().valid('capacity').required(),
               capacity: Joi.number().min(-8).max(8).required(),
             }),

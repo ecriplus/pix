@@ -96,22 +96,14 @@ async function simulateFlashAssessmentScenario(
 }
 
 function _getPickAnswerStatusMethod(pickAnswerStatusService, payload) {
-  const { type, probabilities, length, capacity, answerStatusArray } = payload;
+  const { type, capacity, answerStatusArray } = payload;
 
   switch (type) {
     case 'deterministic':
       return pickAnswerStatusService.pickAnswerStatusFromArray(answerStatusArray);
-    case 'random': {
-      const answer = _generateAnswerStatusArray(random, probabilities, length);
-      return pickAnswerStatusService.pickAnswerStatusFromArray(answer);
-    }
     case 'capacity':
       return pickAnswerStatusService.pickAnswerStatusForCapacity(capacity);
   }
-}
-
-function _generateAnswerStatusArray(random, probabilities, length) {
-  return random.weightedRandoms(probabilities, length);
 }
 
 function _minimumEstimatedSuccessRateRangesToDomain(successRateRanges) {

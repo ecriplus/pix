@@ -16,7 +16,6 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
   let server;
   let adminAuthorization;
   let validDeterministicPayload;
-  let validRandomPayload;
   let validCapacityPayload;
   let stopAtChallenge;
   const answerStatusArray = ['ok', 'ko', 'aband'];
@@ -37,17 +36,6 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
     validDeterministicPayload = {
       answerStatusArray,
       type: 'deterministic',
-      stopAtChallenge,
-    };
-
-    validRandomPayload = {
-      type: 'random',
-      probabilities: {
-        ok: 0.3,
-        ko: 0.5,
-        aband: 0.2,
-      },
-      length: 5,
       stopAtChallenge,
     };
 
@@ -206,21 +194,6 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
         const response = await server.inject(options);
         // then
         expect(response).to.have.property('statusCode', 200);
-        const parsedResponse = parseJsonStream(response);
-        expect(parsedResponse[0].simulationReport).to.have.lengthOf(2);
-      });
-    });
-
-    describe('when the scenario is random', function () {
-      it('should return a payload with simulation random scenario results', async function () {
-        // given
-        options.headers.authorization = adminAuthorization;
-        options.payload = validRandomPayload;
-
-        // when
-        const response = await server.inject(options);
-
-        // then
         const parsedResponse = parseJsonStream(response);
         expect(parsedResponse[0].simulationReport).to.have.lengthOf(2);
       });

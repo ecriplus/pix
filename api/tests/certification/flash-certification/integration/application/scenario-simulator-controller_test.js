@@ -3,7 +3,6 @@ import { usecases } from '../../../../../src/certification/flash-certification/d
 import { pickAnswerStatusService } from '../../../../../src/certification/shared/domain/services/pick-answer-status-service.js';
 import { pickChallengeService } from '../../../../../src/evaluation/domain/services/pick-challenge-service.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { random } from '../../../../../src/shared/infrastructure/utils/random.js';
 import { domainBuilder, expect, HttpTestServer, parseJsonStream, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Application | scenario-simulator-controller', function () {
@@ -18,7 +17,6 @@ describe('Integration | Application | scenario-simulator-controller', function (
   beforeEach(async function () {
     sinon.stub(usecases, 'simulateFlashDeterministicAssessmentScenario');
     sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin');
-    sinon.stub(random, 'weightedRandoms');
     sinon.stub(pickAnswerStatusService, 'pickAnswerStatusFromArray');
     sinon.stub(pickAnswerStatusService, 'pickAnswerStatusForCapacity');
     sinon.stub(pickChallengeService, 'chooseNextChallenge');
@@ -753,130 +751,6 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 {
                   index: 1,
                   simulationReport: [result],
-                },
-              ]);
-            });
-          });
-        });
-      });
-
-      context('When the scenario is random', function () {
-        context('When the route is called with correct arguments', function () {
-          context('When the route is called without an initial capacity', function () {
-            it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
-              // given
-              const length = 1;
-              const probabilities = { ok: 0.3, ko: 0.4, aband: 0.3 };
-              random.weightedRandoms.withArgs(probabilities, length).returns(['ok']);
-
-              const pickChallengeImplementation = sinon.stub();
-              pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
-              const pickAnswerStatusFromArrayImplementation = sinon.stub();
-              pickAnswerStatusService.pickAnswerStatusFromArray
-                .withArgs(['ok'])
-                .returns(pickAnswerStatusFromArrayImplementation);
-
-              usecases.simulateFlashDeterministicAssessmentScenario
-                .withArgs({
-                  pickChallenge: pickChallengeImplementation,
-                  locale: 'en',
-                  pickAnswerStatus: pickAnswerStatusFromArrayImplementation,
-                })
-                .resolves(simulationResults);
-              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
-
-              // when
-              const response = await httpTestServer.request(
-                'POST',
-                '/api/scenario-simulator',
-                {
-                  type: 'random',
-                  probabilities,
-                  length,
-                },
-                null,
-                { 'accept-language': 'en' },
-              );
-
-              // then
-              expect(response.statusCode).to.equal(200);
-              const parsedResult = parseJsonStream(response);
-              expect(parsedResult).to.deep.equal([
-                {
-                  index: 0,
-                  simulationReport: [
-                    {
-                      challengeId: challenge1.id,
-                      errorRate: errorRate1,
-                      capacity: capacity1,
-                      minimumCapability: 0.6190392084062237,
-                      answerStatus: 'ok',
-                      reward: reward1,
-                      difficulty: challenge1.difficulty,
-                      discriminant: challenge1.discriminant,
-                    },
-                  ],
-                },
-              ]);
-            });
-          });
-
-          context('When the route is called with an initial capacity', function () {
-            it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
-              // given
-              const length = 1;
-              const probabilities = { ok: 0.3, ko: 0.4, aband: 0.3 };
-              random.weightedRandoms.withArgs(probabilities, length).returns(['ok']);
-
-              const pickChallengeImplementation = sinon.stub();
-              pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
-              const pickAnswerStatusFromArrayImplementation = sinon.stub();
-              pickAnswerStatusService.pickAnswerStatusFromArray
-                .withArgs(['ok'])
-                .returns(pickAnswerStatusFromArrayImplementation);
-
-              usecases.simulateFlashDeterministicAssessmentScenario
-                .withArgs({
-                  pickChallenge: pickChallengeImplementation,
-                  locale: 'en',
-                  pickAnswerStatus: pickAnswerStatusFromArrayImplementation,
-                  initialCapacity,
-                })
-                .resolves(simulationResults);
-              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
-
-              // when
-              const response = await httpTestServer.request(
-                'POST',
-                '/api/scenario-simulator',
-                {
-                  type: 'random',
-                  probabilities,
-                  initialCapacity,
-                  length,
-                },
-                null,
-                { 'accept-language': 'en' },
-              );
-
-              // then
-              expect(response.statusCode).to.equal(200);
-              const parsedResult = parseJsonStream(response);
-              expect(parsedResult).to.deep.equal([
-                {
-                  index: 0,
-                  simulationReport: [
-                    {
-                      challengeId: challenge1.id,
-                      errorRate: errorRate1,
-                      capacity: capacity1,
-                      minimumCapability: 0.6190392084062237,
-                      answerStatus: 'ok',
-                      reward: reward1,
-                      difficulty: challenge1.difficulty,
-                      discriminant: challenge1.discriminant,
-                    },
-                  ],
                 },
               ]);
             });
