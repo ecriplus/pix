@@ -125,7 +125,7 @@ describe('Integration | Team | Infrastructure | Repository | organization-invita
       await databaseBuilder.commit();
     });
 
-    it('should return an Organization-invitation domain object', async function () {
+    it('accepts and returns the accepted organization invitation', async function () {
       // when
       const organizationInvitationSaved = await organizationInvitationRepository.markAsAccepted(
         organizationInvitation.id,
@@ -133,6 +133,11 @@ describe('Integration | Team | Infrastructure | Repository | organization-invita
 
       // then
       expect(organizationInvitationSaved).to.be.an.instanceof(OrganizationInvitation);
+      expect(organizationInvitationSaved.id).to.equal(organizationInvitation.id);
+      expect(organizationInvitationSaved.organizationId).to.equal(organizationInvitation.organizationId);
+      expect(organizationInvitationSaved.email).to.equal(organizationInvitation.email);
+      expect(organizationInvitationSaved.status).to.equal(OrganizationInvitation.StatusType.ACCEPTED);
+      expect(organizationInvitationSaved.code).to.equal(organizationInvitation.code);
     });
 
     it('should not add row in table organization-invitations', async function () {
@@ -145,23 +150,6 @@ describe('Integration | Team | Infrastructure | Repository | organization-invita
       // then
       const { count: nbOrganizationInvitationsAfterUpdate } = await knex('organization-invitations').count().first();
       expect(nbOrganizationInvitationsAfterUpdate).to.equal(nbOrganizationInvitationsBeforeUpdate);
-    });
-
-    it('should update model in database', async function () {
-      // given
-      const statusAccepted = OrganizationInvitation.StatusType.ACCEPTED;
-
-      // when
-      const organizationInvitationSaved = await organizationInvitationRepository.markAsAccepted(
-        organizationInvitation.id,
-      );
-
-      // then
-      expect(organizationInvitationSaved.id).to.equal(organizationInvitation.id);
-      expect(organizationInvitationSaved.organizationId).to.equal(organizationInvitation.organizationId);
-      expect(organizationInvitationSaved.email).to.equal(organizationInvitation.email);
-      expect(organizationInvitationSaved.status).to.equal(statusAccepted);
-      expect(organizationInvitationSaved.code).to.equal(organizationInvitation.code);
     });
   });
 
