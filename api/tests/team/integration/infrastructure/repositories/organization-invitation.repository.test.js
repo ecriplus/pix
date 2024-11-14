@@ -7,6 +7,17 @@ import { organizationInvitationRepository } from '../../../../../src/team/infras
 import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Team | Infrastructure | Repository | organization-invitation', function () {
+  let clock;
+  const now = new Date('2021-01-02');
+
+  beforeEach(function () {
+    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+  });
+
+  afterEach(function () {
+    clock.restore();
+  });
+
   describe('#create', function () {
     let organizationId;
 
@@ -157,8 +168,6 @@ describe('Integration | Team | Infrastructure | Repository | organization-invita
   describe('#markAsCancelled', function () {
     it('should return the cancelled organization invitation', async function () {
       // given
-      const now = new Date('2021-01-02');
-      const clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
       const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
         updatedAt: new Date('2020-01-01T00:00:00Z'),
         status: OrganizationInvitation.StatusType.PENDING,
@@ -178,7 +187,6 @@ describe('Integration | Team | Infrastructure | Repository | organization-invita
       expect(organizationInvitationSaved.status).to.equal(OrganizationInvitation.StatusType.CANCELLED);
       expect(organizationInvitationSaved.code).to.equal(organizationInvitation.code);
       expect(organizationInvitationSaved.updatedAt).to.be.deep.equal(now);
-      clock.restore();
     });
 
     it('should throw a not found error', async function () {
@@ -308,17 +316,6 @@ describe('Integration | Team | Infrastructure | Repository | organization-invita
   });
 
   describe('#updateModificationDate', function () {
-    let clock;
-    const now = new Date('2021-01-02');
-
-    beforeEach(function () {
-      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-    });
-
-    afterEach(function () {
-      clock.restore();
-    });
-
     it('should update the modification date', async function () {
       // given
       const organizationId = 2323;
