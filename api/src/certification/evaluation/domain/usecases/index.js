@@ -27,13 +27,17 @@ import * as certificationCenterRepository from '../../../shared/infrastructure/r
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import * as userRepository from '../../../shared/infrastructure/repositories/user-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
+import * as certificationChallengeForScoringRepository from '../../infrastructure/repositories/certification-challenge-for-scoring-repository.js';
 import * as certificationCompanionAlertRepository from '../../infrastructure/repositories/certification-companion-alert-repository.js';
 /**
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
+ * @typedef {certificationChallengeForScoringRepository} CertificationChallengeForScoringRepository
  */
 
 const dependencies = {
   ...sessionRepositories,
+  certificationChallengeForScoringRepository,
+  certificationCandidateRepository,
   assessmentRepository,
   sharedCertificationCandidateRepository,
   verifyCertificateCodeService,
@@ -53,7 +57,6 @@ const dependencies = {
   pickChallengeService,
   placementProfileService,
   certificationCenterRepository,
-  certificationCandidateRepository,
   certificationCompanionAlertRepository,
   certificationCourseRepository,
 };

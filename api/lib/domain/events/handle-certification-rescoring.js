@@ -1,3 +1,4 @@
+import { services } from '../../../src/certification/evaluation/domain/services/index.js';
 import { AssessmentResultFactory } from '../../../src/certification/scoring/domain/models/factories/AssessmentResultFactory.js';
 import { AlgorithmEngineVersion } from '../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { V3_REPRODUCIBILITY_RATE } from '../../../src/shared/domain/constants.js';
@@ -119,6 +120,7 @@ async function _handleV3CertificationScoring({
     emitter,
     certificationAssessment,
     locale,
+    dependencies: { findByCertificationCourseIdForScoring: services.findByCertificationCourseIdForScoring },
   });
 
   if (certificationCourse.isCancelled()) {
