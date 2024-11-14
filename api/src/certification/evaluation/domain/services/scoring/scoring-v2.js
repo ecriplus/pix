@@ -5,6 +5,8 @@
  * @typedef {import('../index.js').ScoringDegradationService} ScoringDegradationService
  * @typedef {import('../index.js').ScoringCertificationService} ScoringCertificationService
  * @typedef {import('../index.js').ScoringService} ScoringService
+ * @typedef {import('../index.js').PlacementProfileService} PlacementProfileService
+ * @typedef {import('../../../../session-management/domain/models/CertificationAssessment.js').CertificationAssessment} CertificationAssessment
  */
 
 import _ from 'lodash';
@@ -24,6 +26,9 @@ import { AlgorithmEngineVersion } from '../../../../shared/domain/models/Algorit
 
 /**
  * @param {Object} params
+ * @param {{juryId: number}} params.[event]
+ * @param {'PIX-ALGO'|'Jury Pix'|'PIX-ALGO-FRAUD-REJECTION'} params.emitter
+ * @param {CertificationAssessment} params.certificationAssessment
  * @param {AssessmentResultRepository} params.assessmentResultRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CompetenceMarkRepository} params.competenceMarkRepository
@@ -31,6 +36,8 @@ import { AlgorithmEngineVersion } from '../../../../shared/domain/models/Algorit
  * @param {AreaRepository} params.areaRepository
  * @param {PlacementProfileService} params.placementProfileService
  * @param {ScoringService} params.scoringService
+ * @param {Object} params.dependencies
+ * @param {calculateCertificationAssessmentScore} params.dependencies.calculateCertificationAssessmentScore
  */
 export const handleV2CertificationScoring = async ({
   event,
@@ -78,6 +85,8 @@ export const handleV2CertificationScoring = async ({
 
 /**
  * @param {Object} params
+ * @param {CertificationAssessment} params.certificationAssessment
+ * @param {boolean} params.continueOnError
  * @param {ScoringService} params.dependencies.scoringService
  */
 export const calculateCertificationAssessmentScore = async function ({
@@ -115,6 +124,10 @@ export const calculateCertificationAssessmentScore = async function ({
   );
 };
 
+/**
+ * @param {Object} params
+ * @param {PlacementProfileService} params.placementProfileService
+ */
 async function _getTestedCompetences({ userId, limitDate, version, placementProfileService }) {
   const placementProfile = await placementProfileService.getPlacementProfile({ userId, limitDate, version });
   return _(placementProfile.userCompetences)
@@ -247,6 +260,7 @@ function _getResult(answers, certificationChallenges, testedCompetences, allArea
 
 /**
  * @param {Object} params
+ * @param {CertificationAssessment} params.certificationAssessment
  * @param {ScoringCertificationService} params.scoringCertificationService
  */
 function _createV2AssessmentResult({

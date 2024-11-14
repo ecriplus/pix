@@ -1,8 +1,17 @@
+/**
+ * @typedef {import('./UserCompetence.js').UserCompetence} UserCompetence
+ */
 import _ from 'lodash';
 
 import { MINIMUM_CERTIFIABLE_COMPETENCES_FOR_CERTIFIABILITY } from '../constants.js';
 
 class PlacementProfile {
+  /**
+   * @param {Object} params
+   * @param {Date} params.profileDate
+   * @param {number} params.userId
+   * @param {Array<UserCompetence>} params.userCompetences
+   */
   constructor({ profileDate, userId, userCompetences } = {}) {
     this.profileDate = profileDate;
     this.userId = userId;

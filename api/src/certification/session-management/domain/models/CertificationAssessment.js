@@ -1,3 +1,7 @@
+/**
+ * @typedef {import('../../../../shared/domain/models/CertificationChallengeWithType.js').CertificationChallengeWithType} CertificationChallengeWithType
+ * @typedef {import('../../../../evaluation/domain/models/Answer.js').Answer} Answer
+ */
 import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
@@ -36,6 +40,12 @@ const certificationAssessmentSchema = Joi.object({
 });
 
 class CertificationAssessment {
+  /**
+   * @param {Object} params
+   * @param {Date} params.createdAt certification course creation date
+   * @param {Array<CertificationChallengeWithType>} params.certificationChallenges
+   * @param {Array<Answer>} params.certificationAnswersByDate
+   */
   constructor({
     id,
     userId,
