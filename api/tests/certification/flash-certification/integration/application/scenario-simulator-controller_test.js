@@ -15,7 +15,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
   const initialCapacity = 2;
 
   beforeEach(async function () {
-    sinon.stub(usecases, 'simulateFlashDeterministicAssessmentScenario');
+    sinon.stub(usecases, 'simulateFlashAssessmentScenario');
     sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin');
     sinon.stub(pickAnswerStatusService, 'pickAnswerStatusFromArray');
     sinon.stub(pickAnswerStatusService, 'pickAnswerStatusForCapacity');
@@ -58,7 +58,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
 
       context('When the scenario is forced to pass through some competences', function () {
         context('When there is no warmup', function () {
-          it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
+          it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
             // given
             const forcedCompetences = ['compA', 'compB', 'compC'];
 
@@ -69,7 +69,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
               .withArgs(6)
               .returns(pickAnswerStatusForCapacityImplementation);
 
-            usecases.simulateFlashDeterministicAssessmentScenario
+            usecases.simulateFlashAssessmentScenario
               .withArgs({
                 pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
                 locale: 'en',
@@ -129,7 +129,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
             .withArgs(6)
             .returns(pickAnswerStatusForCapacityImplementation);
 
-          usecases.simulateFlashDeterministicAssessmentScenario
+          usecases.simulateFlashAssessmentScenario
             .withArgs({
               pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
               locale: 'en',
@@ -177,7 +177,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
       });
 
       context('When configuring the challenge pick probability', function () {
-        it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
+        it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
           // given
           const challengePickProbability = 40;
 
@@ -190,7 +190,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
             .withArgs(6)
             .returns(pickAnswerStatusForCapacityImplementation);
 
-          usecases.simulateFlashDeterministicAssessmentScenario
+          usecases.simulateFlashAssessmentScenario
             .withArgs({
               pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
               locale: 'en',
@@ -237,7 +237,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
       });
 
       context('When configuring the limit of challenges per tube', function () {
-        it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
+        it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
           // given
           const limitToOneQuestionPerTube = true;
 
@@ -248,7 +248,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
             .withArgs(6)
             .returns(pickAnswerStatusForCapacityImplementation);
 
-          usecases.simulateFlashDeterministicAssessmentScenario
+          usecases.simulateFlashAssessmentScenario
             .withArgs({
               pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
               locale: 'en',
@@ -297,7 +297,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
 
       context('When configuring the minimum success rates', function () {
         context('When providing valid parameters', function () {
-          it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
+          it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
             // given
             const minimumEstimatedSuccessRateRanges = [
               {
@@ -336,7 +336,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
               .withArgs(6)
               .returns(pickAnswerStatusForCapacityImplementation);
 
-            usecases.simulateFlashDeterministicAssessmentScenario
+            usecases.simulateFlashAssessmentScenario
               .withArgs({
                 pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
                 locale: 'en',
@@ -501,7 +501,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
       });
 
       context('When configuring the passage by all competences', function () {
-        it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
+        it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
           // given
           const enablePassageByAllCompetences = true;
 
@@ -512,7 +512,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
             .withArgs(6)
             .returns(pickAnswerStatusForCapacityImplementation);
 
-          usecases.simulateFlashDeterministicAssessmentScenario
+          usecases.simulateFlashAssessmentScenario
             .withArgs({
               pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
               locale: 'en',
@@ -562,7 +562,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
       context('When the scenario is capacity', function () {
         context('When the route is called with correct arguments', function () {
           context('When the route is called without an initial capacity', function () {
-            it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
+            it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
               // given
               const capacity = -3.1;
 
@@ -573,7 +573,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 .withArgs(capacity)
                 .returns(pickAnswerStatusFromCapacityImplementation);
 
-              usecases.simulateFlashDeterministicAssessmentScenario
+              usecases.simulateFlashAssessmentScenario
                 .withArgs({
                   pickChallenge: pickChallengeImplementation,
                   locale: 'en',
@@ -617,7 +617,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
           });
 
           context('When the route is called with an initial capacity', function () {
-            it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
+            it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
               // given
               const capacity = -3.1;
 
@@ -628,7 +628,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 .withArgs(capacity)
                 .returns(pickAnswerStatusFromCapacityImplementation);
 
-              usecases.simulateFlashDeterministicAssessmentScenario
+              usecases.simulateFlashAssessmentScenario
                 .withArgs({
                   pickChallenge: pickChallengeImplementation,
                   locale: 'en',

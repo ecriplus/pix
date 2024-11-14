@@ -74,7 +74,7 @@ async function simulateFlashAssessmentScenario(
         _.isUndefined,
       );
 
-      const simulationReport = await usecases.simulateFlashDeterministicAssessmentScenario(usecaseParams);
+      const simulationReport = await usecases.simulateFlashAssessmentScenario(usecaseParams);
 
       yield JSON.stringify({
         index,

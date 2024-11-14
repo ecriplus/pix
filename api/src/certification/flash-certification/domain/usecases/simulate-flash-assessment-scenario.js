@@ -4,7 +4,7 @@ import { AssessmentSimulatorDoubleMeasureStrategy } from '../models/AssessmentSi
 import { AssessmentSimulatorSingleMeasureStrategy } from '../models/AssessmentSimulatorSingleMeasureStrategy.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
-export async function simulateFlashDeterministicAssessmentScenario({
+export async function simulateFlashAssessmentScenario({
   locale,
   pickChallenge,
   pickAnswerStatus,
