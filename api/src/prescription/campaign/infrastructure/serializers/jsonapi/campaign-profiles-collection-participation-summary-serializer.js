@@ -12,8 +12,6 @@ const serialize = function ({ data, pagination }) {
       'sharedAt',
       'pixScore',
       'sharedProfileCount',
-      'previousPixScore',
-      'previousSharedAt',
       'evolution',
       'certifiable',
       'certifiableCompetencesCount',

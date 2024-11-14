@@ -15,7 +15,6 @@ describe('Unit | Serializer | JSONAPI | campaign-profiles-collection-participati
         pixScore: 1024,
         sharedProfileCount: 1,
         previousPixScore: 512,
-        previousSharedAt: new Date(2024, 10, 29),
         certifiable: true,
         certifiableCompetencesCount: 8,
       });
@@ -31,8 +30,6 @@ describe('Unit | Serializer | JSONAPI | campaign-profiles-collection-participati
             'shared-at': new Date(2020, 2, 2),
             'pix-score': 1024,
             'shared-profile-count': 1,
-            'previous-pix-score': 512,
-            'previous-shared-at': new Date(2024, 10, 29),
             evolution: 'increase',
             certifiable: true,
             'certifiable-competences-count': 8,
