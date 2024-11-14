@@ -138,6 +138,7 @@ describe('Integration | Team | Infrastructure | Repository | organization-invita
       expect(organizationInvitationSaved.email).to.equal(organizationInvitation.email);
       expect(organizationInvitationSaved.status).to.equal(OrganizationInvitation.StatusType.ACCEPTED);
       expect(organizationInvitationSaved.code).to.equal(organizationInvitation.code);
+      expect(organizationInvitationSaved.updatedAt).to.be.deep.equal(now);
     });
 
     it('should not add row in table organization-invitations', async function () {
