@@ -60,19 +60,18 @@ describe('Integration | Application | scenario-simulator-controller', function (
         context('When there is no warmup', function () {
           it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
             // given
-            const answerStatusArray = ['ok'];
             const forcedCompetences = ['compA', 'compB', 'compC'];
 
             const pickChallengeImplementation = sinon.stub();
             pickChallengeService.chooseNextChallenge.withArgs().returns(pickChallengeImplementation);
-            const pickAnswerStatusFromArrayImplementation = sinon.stub();
-            pickAnswerStatusService.pickAnswerStatusFromArray
-              .withArgs(['ok'])
-              .returns(pickAnswerStatusFromArrayImplementation);
+            const pickAnswerStatusForCapacityImplementation = sinon.stub();
+            pickAnswerStatusService.pickAnswerStatusForCapacity
+              .withArgs(6)
+              .returns(pickAnswerStatusForCapacityImplementation);
 
             usecases.simulateFlashDeterministicAssessmentScenario
               .withArgs({
-                pickAnswerStatus: pickAnswerStatusFromArrayImplementation,
+                pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
                 locale: 'en',
                 pickChallenge: pickChallengeImplementation,
                 initialCapacity,
@@ -87,8 +86,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
               '/api/scenario-simulator',
               {
                 initialCapacity,
-                answerStatusArray,
-                type: 'deterministic',
+                capacity: 6,
                 forcedCompetences,
               },
               null,
@@ -122,19 +120,18 @@ describe('Integration | Application | scenario-simulator-controller', function (
       context('When the scenario is forced to space competences', function () {
         it('should call the usecase with the right parameters', async function () {
           // given
-          const answerStatusArray = ['ok'];
           const challengesBetweenSameCompetence = 2;
 
           const pickChallengeImplementation = sinon.stub();
           pickChallengeService.chooseNextChallenge.withArgs().returns(pickChallengeImplementation);
-          const pickAnswerStatusFromArrayImplementation = sinon.stub();
-          pickAnswerStatusService.pickAnswerStatusFromArray
-            .withArgs(['ok'])
-            .returns(pickAnswerStatusFromArrayImplementation);
+          const pickAnswerStatusForCapacityImplementation = sinon.stub();
+          pickAnswerStatusService.pickAnswerStatusForCapacity
+            .withArgs(6)
+            .returns(pickAnswerStatusForCapacityImplementation);
 
           usecases.simulateFlashDeterministicAssessmentScenario
             .withArgs({
-              pickAnswerStatus: pickAnswerStatusFromArrayImplementation,
+              pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
               locale: 'en',
               pickChallenge: pickChallengeImplementation,
               initialCapacity,
@@ -149,8 +146,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
             '/api/scenario-simulator',
             {
               initialCapacity,
-              answerStatusArray,
-              type: 'deterministic',
+              capacity: 6,
               challengesBetweenSameCompetence,
             },
             null,
@@ -183,21 +179,20 @@ describe('Integration | Application | scenario-simulator-controller', function (
       context('When configuring the challenge pick probability', function () {
         it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
           // given
-          const answerStatusArray = ['ok'];
           const challengePickProbability = 40;
 
           const pickChallengeImplementation = sinon.stub();
           pickChallengeService.chooseNextChallenge
             .withArgs(challengePickProbability)
             .returns(pickChallengeImplementation);
-          const pickAnswerStatusFromArrayImplementation = sinon.stub();
-          pickAnswerStatusService.pickAnswerStatusFromArray
-            .withArgs(['ok'])
-            .returns(pickAnswerStatusFromArrayImplementation);
+          const pickAnswerStatusForCapacityImplementation = sinon.stub();
+          pickAnswerStatusService.pickAnswerStatusForCapacity
+            .withArgs(6)
+            .returns(pickAnswerStatusForCapacityImplementation);
 
           usecases.simulateFlashDeterministicAssessmentScenario
             .withArgs({
-              pickAnswerStatus: pickAnswerStatusFromArrayImplementation,
+              pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
               locale: 'en',
               pickChallenge: pickChallengeImplementation,
               initialCapacity,
@@ -211,8 +206,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
             '/api/scenario-simulator',
             {
               initialCapacity,
-              answerStatusArray,
-              type: 'deterministic',
+              capacity: 6,
               challengePickProbability,
             },
             null,
@@ -246,18 +240,17 @@ describe('Integration | Application | scenario-simulator-controller', function (
         it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
           // given
           const limitToOneQuestionPerTube = true;
-          const answerStatusArray = ['ok'];
 
           const pickChallengeImplementation = sinon.stub();
           pickChallengeService.chooseNextChallenge.withArgs().returns(pickChallengeImplementation);
-          const pickAnswerStatusFromArrayImplementation = sinon.stub();
-          pickAnswerStatusService.pickAnswerStatusFromArray
-            .withArgs(['ok'])
-            .returns(pickAnswerStatusFromArrayImplementation);
+          const pickAnswerStatusForCapacityImplementation = sinon.stub();
+          pickAnswerStatusService.pickAnswerStatusForCapacity
+            .withArgs(6)
+            .returns(pickAnswerStatusForCapacityImplementation);
 
           usecases.simulateFlashDeterministicAssessmentScenario
             .withArgs({
-              pickAnswerStatus: pickAnswerStatusFromArrayImplementation,
+              pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
               locale: 'en',
               pickChallenge: pickChallengeImplementation,
               initialCapacity,
@@ -272,8 +265,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
             '/api/scenario-simulator',
             {
               initialCapacity,
-              answerStatusArray,
-              type: 'deterministic',
+              capacity: 6,
               limitToOneQuestionPerTube,
             },
             null,
@@ -307,8 +299,6 @@ describe('Integration | Application | scenario-simulator-controller', function (
         context('When providing valid parameters', function () {
           it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
             // given
-            const answerStatusArray = ['ok'];
-
             const minimumEstimatedSuccessRateRanges = [
               {
                 type: 'fixed',
@@ -341,14 +331,14 @@ describe('Integration | Application | scenario-simulator-controller', function (
 
             const pickChallengeImplementation = sinon.stub();
             pickChallengeService.chooseNextChallenge.withArgs().returns(pickChallengeImplementation);
-            const pickAnswerStatusFromArrayImplementation = sinon.stub();
-            pickAnswerStatusService.pickAnswerStatusFromArray
-              .withArgs(['ok'])
-              .returns(pickAnswerStatusFromArrayImplementation);
+            const pickAnswerStatusForCapacityImplementation = sinon.stub();
+            pickAnswerStatusService.pickAnswerStatusForCapacity
+              .withArgs(6)
+              .returns(pickAnswerStatusForCapacityImplementation);
 
             usecases.simulateFlashDeterministicAssessmentScenario
               .withArgs({
-                pickAnswerStatus: pickAnswerStatusFromArrayImplementation,
+                pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
                 locale: 'en',
                 pickChallenge: pickChallengeImplementation,
                 initialCapacity,
@@ -363,8 +353,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
               '/api/scenario-simulator',
               {
                 initialCapacity,
-                answerStatusArray,
-                type: 'deterministic',
+                capacity: 6,
                 minimumEstimatedSuccessRateRanges,
               },
               null,
@@ -424,7 +413,6 @@ describe('Integration | Application | scenario-simulator-controller', function (
               {
                 initialCapacity,
                 answerStatusArray,
-                type: 'deterministic',
                 minimumEstimatedSuccessRateRanges,
               },
               null,
@@ -466,7 +454,6 @@ describe('Integration | Application | scenario-simulator-controller', function (
               {
                 initialCapacity,
                 answerStatusArray,
-                type: 'deterministic',
                 minimumEstimatedSuccessRateRanges,
               },
               null,
@@ -501,7 +488,6 @@ describe('Integration | Application | scenario-simulator-controller', function (
               {
                 initialCapacity,
                 answerStatusArray,
-                type: 'deterministic',
                 minimumEstimatedSuccessRateRanges,
               },
               null,
@@ -518,18 +504,17 @@ describe('Integration | Application | scenario-simulator-controller', function (
         it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
           // given
           const enablePassageByAllCompetences = true;
-          const answerStatusArray = ['ok'];
 
           const pickChallengeImplementation = sinon.stub();
           pickChallengeService.chooseNextChallenge.withArgs().returns(pickChallengeImplementation);
-          const pickAnswerStatusFromArrayImplementation = sinon.stub();
-          pickAnswerStatusService.pickAnswerStatusFromArray
-            .withArgs(['ok'])
-            .returns(pickAnswerStatusFromArrayImplementation);
+          const pickAnswerStatusForCapacityImplementation = sinon.stub();
+          pickAnswerStatusService.pickAnswerStatusForCapacity
+            .withArgs(6)
+            .returns(pickAnswerStatusForCapacityImplementation);
 
           usecases.simulateFlashDeterministicAssessmentScenario
             .withArgs({
-              pickAnswerStatus: pickAnswerStatusFromArrayImplementation,
+              pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
               locale: 'en',
               pickChallenge: pickChallengeImplementation,
               initialCapacity,
@@ -544,8 +529,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
             '/api/scenario-simulator',
             {
               initialCapacity,
-              answerStatusArray,
-              type: 'deterministic',
+              capacity: 6,
               enablePassageByAllCompetences,
             },
             null,
@@ -572,189 +556,6 @@ describe('Integration | Application | scenario-simulator-controller', function (
               ],
             },
           ]);
-        });
-      });
-
-      context('When the scenario is deterministic', function () {
-        context('When the route is called with correct arguments', function () {
-          context('When the route is called with an initial capacity', function () {
-            it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
-              // given
-              const answerStatusArray = ['ok'];
-
-              const pickChallengeImplementation = sinon.stub();
-              pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
-              const pickAnswerStatusFromArrayImplementation = sinon.stub();
-              pickAnswerStatusService.pickAnswerStatusFromArray
-                .withArgs(['ok'])
-                .returns(pickAnswerStatusFromArrayImplementation);
-
-              usecases.simulateFlashDeterministicAssessmentScenario
-                .withArgs({
-                  pickAnswerStatus: pickAnswerStatusFromArrayImplementation,
-                  locale: 'en',
-                  pickChallenge: pickChallengeImplementation,
-                  initialCapacity,
-                })
-                .resolves(simulationResults);
-              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
-
-              // when
-              const response = await httpTestServer.request(
-                'POST',
-                '/api/scenario-simulator',
-                {
-                  initialCapacity,
-                  answerStatusArray,
-                  type: 'deterministic',
-                },
-                null,
-                { 'accept-language': 'en' },
-              );
-
-              // then
-              expect(response.statusCode).to.equal(200);
-              const parsedResult = parseJsonStream(response);
-              expect(parsedResult).to.deep.equal([
-                {
-                  index: 0,
-                  simulationReport: [
-                    {
-                      challengeId: challenge1.id,
-                      errorRate: errorRate1,
-                      capacity: capacity1,
-                      minimumCapability: 0.6190392084062237,
-                      answerStatus: 'ok',
-                      reward: reward1,
-                      difficulty: challenge1.difficulty,
-                      discriminant: challenge1.discriminant,
-                    },
-                  ],
-                },
-              ]);
-            });
-          });
-
-          context('When the route is called without an initial capacity', function () {
-            it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
-              // given
-              const answerStatusArray = ['ok'];
-
-              const pickChallengeImplementation = sinon.stub();
-              pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
-              const pickAnswerStatusFromArrayImplementation = sinon.stub();
-              pickAnswerStatusService.pickAnswerStatusFromArray
-                .withArgs(['ok'])
-                .returns(pickAnswerStatusFromArrayImplementation);
-
-              usecases.simulateFlashDeterministicAssessmentScenario
-                .withArgs({
-                  pickAnswerStatus: pickAnswerStatusFromArrayImplementation,
-                  pickChallenge: pickChallengeImplementation,
-                  locale: 'en',
-                })
-                .resolves(simulationResults);
-              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
-
-              // when
-              const response = await httpTestServer.request(
-                'POST',
-                '/api/scenario-simulator',
-                {
-                  answerStatusArray,
-                  type: 'deterministic',
-                },
-                null,
-                { 'accept-language': 'en' },
-              );
-
-              // then
-              expect(response.statusCode).to.equal(200);
-              const parsedResult = parseJsonStream(response);
-              expect(parsedResult).to.deep.equal([
-                {
-                  index: 0,
-                  simulationReport: [
-                    {
-                      challengeId: challenge1.id,
-                      errorRate: errorRate1,
-                      capacity: capacity1,
-                      minimumCapability: 0.6190392084062237,
-                      answerStatus: 'ok',
-                      reward: reward1,
-                      difficulty: challenge1.difficulty,
-                      discriminant: challenge1.discriminant,
-                    },
-                  ],
-                },
-              ]);
-            });
-          });
-
-          context('When the route is called with a numberOfIterations', function () {
-            it('should call simulateFlashDeterministicAssessmentScenario usecase with correct arguments', async function () {
-              // given
-              const answerStatusArray = ['ok'];
-              const numberOfIterations = 2;
-
-              const pickChallengeImplementation = sinon.stub();
-              pickChallengeService.chooseNextChallenge
-                .returns(pickChallengeImplementation)
-                .returns(pickChallengeImplementation);
-              const pickAnswerStatusFromArrayImplementation = sinon.stub();
-              pickAnswerStatusService.pickAnswerStatusFromArray
-                .withArgs(['ok'])
-                .returns(pickAnswerStatusFromArrayImplementation);
-
-              usecases.simulateFlashDeterministicAssessmentScenario
-                .withArgs({
-                  pickAnswerStatus: pickAnswerStatusFromArrayImplementation,
-                  pickChallenge: pickChallengeImplementation,
-                  locale: 'en',
-                })
-                .resolves(simulationResults);
-              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
-
-              // when
-              const response = await httpTestServer.request(
-                'POST',
-                '/api/scenario-simulator',
-                {
-                  numberOfIterations,
-                  answerStatusArray,
-                  type: 'deterministic',
-                },
-                null,
-                { 'accept-language': 'en' },
-              );
-
-              const result = {
-                challengeId: challenge1.id,
-                errorRate: errorRate1,
-                capacity: capacity1,
-                minimumCapability: 0.6190392084062237,
-                answerStatus: 'ok',
-                reward: reward1,
-                difficulty: challenge1.difficulty,
-                discriminant: challenge1.discriminant,
-              };
-
-              // then
-              expect(response.statusCode).to.equal(200);
-
-              const parsedResult = parseJsonStream(response);
-              expect(parsedResult).to.deep.equal([
-                {
-                  index: 0,
-                  simulationReport: [result],
-                },
-                {
-                  index: 1,
-                  simulationReport: [result],
-                },
-              ]);
-            });
-          });
         });
       });
 
@@ -786,7 +587,6 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 'POST',
                 '/api/scenario-simulator',
                 {
-                  type: 'capacity',
                   capacity,
                 },
                 null,
@@ -843,7 +643,6 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 'POST',
                 '/api/scenario-simulator',
                 {
-                  type: 'capacity',
                   capacity,
                   initialCapacity,
                 },

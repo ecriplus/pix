@@ -36,9 +36,10 @@ async function simulateFlashAssessmentScenario(
     doubleMeasuresUntil,
     variationPercent,
     variationPercentUntil,
+    capacity,
   } = request.payload;
 
-  const pickAnswerStatus = _getPickAnswerStatusMethod(dependencies.pickAnswerStatusService, request.payload);
+  const pickAnswerStatus = dependencies.pickAnswerStatusService.pickAnswerStatusForCapacity(capacity);
 
   const locale = dependencies.extractLocaleFromRequest(request);
 
@@ -93,17 +94,6 @@ async function simulateFlashAssessmentScenario(
 
   const generatedResponse = Readable.from(generate(), { objectMode: false });
   return h.response(generatedResponse).type('text/event-stream; charset=utf-8');
-}
-
-function _getPickAnswerStatusMethod(pickAnswerStatusService, payload) {
-  const { type, capacity, answerStatusArray } = payload;
-
-  switch (type) {
-    case 'deterministic':
-      return pickAnswerStatusService.pickAnswerStatusFromArray(answerStatusArray);
-    case 'capacity':
-      return pickAnswerStatusService.pickAnswerStatusForCapacity(capacity);
-  }
 }
 
 function _minimumEstimatedSuccessRateRangesToDomain(successRateRanges) {

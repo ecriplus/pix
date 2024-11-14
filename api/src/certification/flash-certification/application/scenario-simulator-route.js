@@ -52,18 +52,11 @@ const register = async (server) => {
           options: {
             allowUnknown: true,
           },
-          payload: Joi.alternatives([
-            _baseScenarioParametersValidator.keys({
-              type: Joi.string().valid('deterministic').required(),
-              answerStatusArray: Joi.array()
-                .items(Joi.string().allow('ok', 'ko', 'aband'))
-                .required(),
-            }),
-            _baseScenarioParametersValidator.keys({
-              type: Joi.string().valid('capacity').required(),
+          payload: _baseScenarioParametersValidator
+            .keys({
               capacity: Joi.number().min(-8).max(8).required(),
-            }),
-          ]).required(),
+            })
+            .required(),
         },
         handler: scenarioSimulatorController.simulateFlashAssessmentScenario,
         tags: ['api'],
