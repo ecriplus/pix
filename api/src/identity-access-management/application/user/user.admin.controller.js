@@ -1,6 +1,6 @@
-import * as userAnonymizedDetailsForAdminSerializer from '../../../../lib/infrastructure/serializers/jsonapi/user-anonymized-details-for-admin-serializer.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
+import * as userAnonymizedDetailsForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-anonymized-details-for-admin.serializer.js';
 import * as userDetailsForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-details-for-admin.serializer.js';
 import * as userForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-for-admin.serializer.js';
 import * as userLoginSerializer from '../../infrastructure/serializers/jsonapi/user-login-serializer.js';
