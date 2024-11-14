@@ -177,7 +177,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
         await databaseBuilder.commit();
       });
 
-      it('should return the certification profile info and pix score', async function () {
+      it('should return the certification profile info, pix score and count', async function () {
         // when
         const results =
           await campaignProfilesCollectionParticipationSummaryRepository.findPaginatedByCampaignId(campaignId);
@@ -191,6 +191,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
             participantExternalId: 'JeBu',
             sharedAt,
             pixScore: 46,
+            sharedProfileCount: 1,
             certifiable: false,
             certifiableCompetencesCount: 1,
           }),
@@ -257,6 +258,151 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
         // then
         expect(results.data).to.have.lengthOf(1);
         expect(results.data[0].id).to.equal(oldCampaignParticipation.id);
+      });
+    });
+
+    context('participations count', function () {
+      beforeEach(async function () {
+        databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          sharedAt: new Date('2020-01-02'),
+          createdAt: new Date('2020-01-02'),
+          isImproved: true,
+          userId: organizationLearner.userId,
+          organizationLearnerId: organizationLearner.id,
+        });
+
+        await databaseBuilder.commit();
+      });
+
+      describe('when participant has only one shared participation', function () {
+        it('should count one participation', async function () {
+          // when
+          const results =
+            await campaignProfilesCollectionParticipationSummaryRepository.findPaginatedByCampaignId(campaignId);
+
+          // then
+          expect(results.data[0].sharedProfileCount).to.equal(1);
+        });
+      });
+      describe('when participant has multiple participations', function () {
+        it('should return the count of shared participations only', async function () {
+          // given
+          databaseBuilder.factory.buildCampaignParticipation({
+            isImproved: true,
+            sharedAt: new Date('2022-01-02'),
+            createdAt: new Date('2022-01-02'),
+            status: SHARED,
+            campaignId,
+            userId: organizationLearner.userId,
+            organizationLearnerId: organizationLearner.id,
+          });
+
+          databaseBuilder.factory.buildCampaignParticipation({
+            isImproved: false,
+            sharedAt: null,
+            createdAt: new Date('2022-01-02'),
+            status: TO_SHARE,
+            campaignId,
+            userId: organizationLearner.userId,
+            organizationLearnerId: organizationLearner.id,
+          });
+
+          await databaseBuilder.commit();
+
+          // when
+          const results =
+            await campaignProfilesCollectionParticipationSummaryRepository.findPaginatedByCampaignId(campaignId);
+
+          // then
+          expect(results.data[0].sharedProfileCount).to.equal(2);
+        });
+
+        it('should not count a deleted participation', async function () {
+          // given deleted participation
+          databaseBuilder.factory.buildCampaignParticipation({
+            isImproved: true,
+            sharedAt: new Date('2022-01-02'),
+            createdAt: new Date('2022-01-02'),
+            deletedAt: new Date('2022-01-02'),
+            status: SHARED,
+            campaignId,
+            userId: organizationLearner.userId,
+            organizationLearnerId: organizationLearner.id,
+          });
+
+          // given not shared participation
+          databaseBuilder.factory.buildCampaignParticipation({
+            isImproved: false,
+            sharedAt: null,
+            createdAt: new Date('2022-01-02'),
+            status: TO_SHARE,
+            campaignId,
+            userId: organizationLearner.userId,
+            organizationLearnerId: organizationLearner.id,
+          });
+
+          await databaseBuilder.commit();
+
+          // when
+          const results =
+            await campaignProfilesCollectionParticipationSummaryRepository.findPaginatedByCampaignId(campaignId);
+
+          // then
+          expect(results.data[0].sharedProfileCount).to.equal(1);
+        });
+      });
+
+      describe('when there is another participant for same campaign', function () {
+        it('should only count shared participations for same learner', async function () {
+          // given second organisation learner and his participation
+          const secondOrganizationLearner = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+          databaseBuilder.factory.buildCampaignParticipation({
+            isImproved: false,
+            sharedAt: new Date('2022-01-02'),
+            createdAt: new Date('2022-01-02'),
+            status: SHARED,
+            campaignId,
+            userId: secondOrganizationLearner.userId,
+            organizationLearnerId: secondOrganizationLearner.id,
+          });
+
+          await databaseBuilder.commit();
+
+          // when
+          const results =
+            await campaignProfilesCollectionParticipationSummaryRepository.findPaginatedByCampaignId(campaignId);
+
+          // then
+          expect(results.data[0].sharedProfileCount).to.equal(1);
+          expect(results.data[1].sharedProfileCount).to.equal(1);
+        });
+      });
+
+      describe('when participant has participations to different campaigns', function () {
+        it('should only count shared participations for same campaign', async function () {
+          // given second campaign and participation
+          const secondCampaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
+
+          databaseBuilder.factory.buildCampaignParticipation({
+            isImproved: false,
+            sharedAt: new Date('2022-01-02'),
+            createdAt: new Date('2022-01-02'),
+            status: SHARED,
+            campaignId: secondCampaignId,
+            userId: organizationLearner.userId,
+            organizationLearnerId: organizationLearner.id,
+          });
+
+          await databaseBuilder.commit();
+
+          // when
+          const results =
+            await campaignProfilesCollectionParticipationSummaryRepository.findPaginatedByCampaignId(campaignId);
+
+          // then
+          expect(results.data[0].sharedProfileCount).to.equal(1);
+        });
       });
     });
 

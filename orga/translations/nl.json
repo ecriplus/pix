@@ -1268,6 +1268,7 @@
       "table": {
         "caption": "Deze tabel bevat de lijst met deelnemers die hun profiel hebben gedeeld. Het geeft voor elke deelnemer zijn achternaam, voornaam, de verzonden datum, de Pix-score, de evolutie, de certificeerbaarheidsstatus en het aantal certificeerbare competenties.",
         "column": {
+          "ariaSharedProfileCount": "Aantal profielaandelen",
           "certifiable": "Certificeerbaar",
           "competences-certifiables": "Certificeerbare vaard.",
           "evolution": "Evolutie",
@@ -1277,6 +1278,7 @@
             "label": "Pix-score",
             "value": "{score, number}"
           },
+          "sharedProfileCount": "Aantal profielaandelen",
           "sending-date": {
             "label": "Verzenddatum",
             "on-hold": "In afwachting van verzending"
