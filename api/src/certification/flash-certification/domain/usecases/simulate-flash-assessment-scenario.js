@@ -11,7 +11,6 @@ export async function simulateFlashAssessmentScenario({
   stopAtChallenge,
   initialCapacity,
   useObsoleteChallenges,
-  warmUpLength = 0,
   forcedCompetences = [],
   challengesBetweenSameCompetence = 0,
   limitToOneQuestionPerTube = true,
@@ -28,7 +27,6 @@ export async function simulateFlashAssessmentScenario({
   const flashAssessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,
     configuration: new FlashAssessmentAlgorithmConfiguration({
-      warmUpLength,
       forcedCompetences,
       limitToOneQuestionPerTube,
       minimumEstimatedSuccessRateRanges,
