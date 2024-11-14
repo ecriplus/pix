@@ -979,7 +979,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
         // when
         const error = await catchErr(calculateCertificationAssessmentScore)({
           certificationAssessment,
-          continueOnError: false,
           areaRepository,
           placementProfileService,
           scoringService,
@@ -1032,7 +1031,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
         const error = await catchErr(calculateCertificationAssessmentScore)({
           candidate,
           certificationAssessment,
-          continueOnError: false,
           areaRepository,
           placementProfileService,
           scoringService,
@@ -1147,7 +1145,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
         const error = await catchErr(calculateCertificationAssessmentScore)({
           candidate,
           certificationAssessment,
-          continueOnError: false,
           areaRepository,
           placementProfileService,
           scoringService,
@@ -1159,8 +1156,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
       });
     });
 
-    context('Compute certification result for jury (continue on error)', function () {
-      const continueOnError = true;
+    context('Compute certification result for jury', function () {
       let placementProfileService;
       beforeEach(function () {
         certificationAssessment = domainBuilder.buildCertificationAssessment({
@@ -1185,7 +1181,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
         // when
         await calculateCertificationAssessmentScore({
           certificationAssessment,
-          continueOnError,
           areaRepository,
           placementProfileService,
           scoringService,
@@ -1210,7 +1205,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment: startedCertificationAssessment,
-            continueOnError,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1226,7 +1220,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment,
-            continueOnError,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1270,7 +1263,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment,
-            continueOnError,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1307,7 +1299,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment,
-            continueOnError,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1348,7 +1339,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment,
-            continueOnError,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1366,7 +1356,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const { percentageCorrectAnswers } = await calculateCertificationAssessmentScore({
             certificationAssessment: certificationAssessmentWithNeutralizedChallenge,
-            continueOnError,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1432,7 +1421,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
               // When
               const certificationAssessmentScore = await calculateCertificationAssessmentScore({
                 certificationAssessment,
-                continueOnError,
                 areaRepository,
                 placementProfileService,
                 scoringService,
@@ -1448,7 +1436,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
     });
 
     context('Calculate certification result when assessment is completed (stop on error)', function () {
-      const continueOnError = false;
       let placementProfileService;
       beforeEach(function () {
         certificationAssessment = domainBuilder.buildCertificationAssessment({
@@ -1473,7 +1460,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment,
-            continueOnError,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1517,7 +1503,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment,
-            continueOnError,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1552,7 +1537,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment,
-            continueOnError,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1593,7 +1577,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment,
-            continueOnError,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1678,7 +1661,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment,
-            continueOnError,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1778,7 +1760,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment,
-            continueOnError,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1830,7 +1811,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment,
-            continueOnError,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1876,7 +1856,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment: certificationAssessmentWithNeutralizedChallenge,
-            continueOnError: false,
             areaRepository,
             placementProfileService,
             scoringService,
@@ -1901,7 +1880,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
           // when
           const certificationAssessmentScore = await calculateCertificationAssessmentScore({
             certificationAssessment: certificationAssessmentWithNeutralizedChallenge,
-            continueOnError: false,
             areaRepository,
             placementProfileService,
             scoringService,

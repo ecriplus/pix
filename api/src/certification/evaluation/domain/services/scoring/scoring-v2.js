@@ -54,7 +54,6 @@ export const handleV2CertificationScoring = async ({
 }) => {
   const certificationAssessmentScore = await dependencies.calculateCertificationAssessmentScore({
     certificationAssessment,
-    continueOnError: false,
     areaRepository,
     placementProfileService,
     scoringService,
@@ -86,12 +85,10 @@ export const handleV2CertificationScoring = async ({
 /**
  * @param {Object} params
  * @param {CertificationAssessment} params.certificationAssessment
- * @param {boolean} params.continueOnError
  * @param {ScoringService} params.dependencies.scoringService
  */
 export const calculateCertificationAssessmentScore = async function ({
   certificationAssessment,
-  continueOnError,
   areaRepository,
   placementProfileService,
   scoringService,
@@ -114,14 +111,7 @@ export const calculateCertificationAssessmentScore = async function ({
   );
 
   const allAreas = await areaRepository.list();
-  return _getResult(
-    matchingAnswers,
-    matchingCertificationChallenges,
-    testedCompetences,
-    allAreas,
-    continueOnError,
-    scoringService,
-  );
+  return _getResult(matchingAnswers, matchingCertificationChallenges, testedCompetences, allAreas, scoringService);
 };
 
 /**
@@ -156,7 +146,6 @@ function _getCompetenceMarksWithCertifiedLevelAndScore(
   listCompetences,
   reproducibilityRate,
   certificationChallenges,
-  continueOnError,
   answerCollection,
   allAreas,
   scoringService,
@@ -165,11 +154,9 @@ function _getCompetenceMarksWithCertifiedLevelAndScore(
     const challengesForCompetence = _.filter(certificationChallenges, { competenceId: competence.id });
     const answersForCompetence = _selectAnswersMatchingCertificationChallenges(answers, challengesForCompetence);
 
-    if (!continueOnError) {
-      CertificationContract.assertThatCompetenceHasAtLeastOneChallenge(challengesForCompetence, competence.index);
-      CertificationContract.assertThatEveryAnswerHasMatchingChallenge(answersForCompetence, challengesForCompetence);
-      CertificationContract.assertThatNoChallengeHasMoreThanOneAnswer(answersForCompetence, challengesForCompetence);
-    }
+    CertificationContract.assertThatCompetenceHasAtLeastOneChallenge(challengesForCompetence, competence.index);
+    CertificationContract.assertThatEveryAnswerHasMatchingChallenge(answersForCompetence, challengesForCompetence);
+    CertificationContract.assertThatNoChallengeHasMoreThanOneAnswer(answersForCompetence, challengesForCompetence);
 
     const certifiedLevel = CertifiedLevel.from({
       numberOfChallenges: answerCollection.numberOfChallengesForCompetence(competence.id),
@@ -209,10 +196,8 @@ function _getCompetenceMarksWithFailedLevel(listCompetences, allAreas, scoringSe
 /**
  * @param {ScoringService} scoringService
  */
-function _getResult(answers, certificationChallenges, testedCompetences, allAreas, continueOnError, scoringService) {
-  if (!continueOnError) {
-    CertificationContract.assertThatWeHaveEnoughAnswers(answers, certificationChallenges);
-  }
+function _getResult(answers, certificationChallenges, testedCompetences, allAreas, scoringService) {
+  CertificationContract.assertThatWeHaveEnoughAnswers(answers, certificationChallenges);
 
   const answerCollection = AnswerCollectionForScoring.from({ answers, challenges: certificationChallenges });
 
@@ -240,16 +225,13 @@ function _getResult(answers, certificationChallenges, testedCompetences, allArea
     testedCompetences,
     reproducibilityRate.value,
     certificationChallenges,
-    continueOnError,
     answerCollection,
     allAreas,
     scoringService,
   );
   const scoreAfterRating = _getSumScoreFromCertifiedCompetences(competenceMarks);
 
-  if (!continueOnError) {
-    CertificationContract.assertThatScoreIsCoherentWithReproducibilityRate(scoreAfterRating, reproducibilityRate.value);
-  }
+  CertificationContract.assertThatScoreIsCoherentWithReproducibilityRate(scoreAfterRating, reproducibilityRate.value);
 
   return new CertificationAssessmentScore({
     competenceMarks,
