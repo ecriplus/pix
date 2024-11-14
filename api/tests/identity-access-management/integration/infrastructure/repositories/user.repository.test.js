@@ -1400,6 +1400,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         // then
         expect(updatedUser).to.be.an.instanceOf(User);
         expect(updatedUser.email).to.equal(newEmail);
+        expect(updatedUser.updatedAt).to.deep.equal(now);
       });
     });
 
@@ -1420,6 +1421,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         // then
         const user1 = await knex('users').where({ id: userId }).first();
         expect(user1.emailConfirmedAt).to.deep.equal(now);
+        expect(user1.updatedAt).to.deep.equal(now);
 
         const user2 = await knex('users').where({ id: user2Id }).first();
         expect(user2.emailConfirmedAt).to.be.null;
@@ -1451,6 +1453,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(updatedUser.emailConfirmedAt.toString()).to.equal(userAttributes.emailConfirmedAt.toString());
         expect(updatedUser.email).to.equal(userAttributes.email);
         expect(updatedUser.cgu).to.equal(userAttributes.cgu);
+        expect(updatedUser.updatedAt).to.deep.equal(now);
       });
 
       it('should rollback the user email in case of error in transaction', async function () {
@@ -1593,6 +1596,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         // then
         expect(updatedUser).to.be.an.instanceOf(User);
         expect(updatedUser.username).to.equal(username);
+        expect(updatedUser.updatedAt).to.deep.equal(now);
       });
 
       it('should throw UserNotFoundError when user id not found', async function () {
@@ -1638,6 +1642,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
         // then
         expect(result.lastPixOrgaTermsOfServiceValidatedAt).to.deep.equal(now);
+        expect(result.updatedAt).to.deep.equal(now);
       });
     });
 
@@ -1668,6 +1673,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
         // then
         expect(actualUser.lastPixCertifTermsOfServiceValidatedAt).to.deep.equal(now);
+        expect(actualUser.updatedAt).to.deep.equal(now);
       });
     });
 
@@ -1682,6 +1688,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
         // then
         expect(actualUser.hasSeenAssessmentInstructions).to.be.true;
+        expect(actualUser.updatedAt).to.deep.equal(now);
       });
     });
 
@@ -1696,6 +1703,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
         // then
         expect(actualUser.hasSeenNewDashboardInfo).to.be.true;
+        expect(actualUser.updatedAt).to.deep.equal(now);
       });
     });
 
@@ -1717,6 +1725,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
         // then
         expect(actualUser.hasSeenFocusedChallengeTooltip).to.be.true;
+        expect(actualUser.updatedAt).to.deep.equal(now);
       });
 
       it('should return the model with hasSeenOtherChallengesTooltip flag updated to true', async function () {
@@ -1726,6 +1735,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
         // then
         expect(actualUser.hasSeenOtherChallengesTooltip).to.be.true;
+        expect(actualUser.updatedAt).to.deep.equal(now);
       });
     });
   });
@@ -1813,6 +1823,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(actualUser.lastTermsOfServiceValidatedAt).to.be.exist;
       expect(actualUser.lastTermsOfServiceValidatedAt).to.be.a('Date');
       expect(actualUser.mustValidateTermsOfService).to.be.false;
+      expect(actualUser.updatedAt).to.deep.equal(now);
     });
   });
 
@@ -1855,6 +1866,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       // then
       expect(result).to.be.an.instanceOf(User);
       expect(result.lastDataProtectionPolicySeenAt).to.deep.equal(now);
+      expect(result.updatedAt).to.deep.equal(now);
     });
   });
 });
