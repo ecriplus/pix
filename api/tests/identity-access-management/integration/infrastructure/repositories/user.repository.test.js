@@ -54,6 +54,17 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   let membershipInDB;
   let certificationCenterInDB;
 
+  let clock;
+  const now = new Date('2022-12-24');
+
+  beforeEach(function () {
+    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+  });
+
+  afterEach(function () {
+    clock.restore();
+  });
+
   function _insertUserWithOrganizationsAndCertificationCenterAccesses() {
     organizationInDB = databaseBuilder.factory.buildOrganization({
       type: 'PRO',
@@ -797,7 +808,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
       it('should only return actives certification center membership associated to the user', async function () {
         // given
-        const now = new Date();
         const email = 'lilou@example.net';
         const user = databaseBuilder.factory.buildUser({ email });
         const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
@@ -1076,11 +1086,11 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     describe('#getUserDetailsForAdmin', function () {
       it('should return the found user', async function () {
         // given
+        const createdAt = new Date('2021-01-01');
         const emailConfirmedAt = new Date('2022-01-01');
         const lastTermsOfServiceValidatedAt = new Date('2022-01-02');
         const lastPixOrgaTermsOfServiceValidatedAt = new Date('2022-01-03');
         const lastLoggedAt = new Date('2022-01-04');
-        const now = new Date();
         const userInDB = databaseBuilder.factory.buildUser({
           firstName: 'Henri',
           lastName: 'Cochet',
@@ -1088,8 +1098,8 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           cgu: true,
           lang: 'en',
           locale: 'en',
-          createdAt: now,
-          updatedAt: now,
+          createdAt,
+          updatedAt: createdAt,
           lastTermsOfServiceValidatedAt,
           lastPixOrgaTermsOfServiceValidatedAt,
           lastPixCertifTermsOfServiceValidatedAt: lastLoggedAt,
@@ -1108,8 +1118,8 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(userDetailsForAdmin.lastName).to.equal('Cochet');
         expect(userDetailsForAdmin.email).to.equal('henri-cochet@example.net');
         expect(userDetailsForAdmin.cgu).to.be.true;
-        expect(userDetailsForAdmin.createdAt).to.deep.equal(now);
-        expect(userDetailsForAdmin.updatedAt).to.deep.equal(now);
+        expect(userDetailsForAdmin.createdAt).to.deep.equal(createdAt);
+        expect(userDetailsForAdmin.updatedAt).to.deep.equal(createdAt);
         expect(userDetailsForAdmin.lang).to.equal('en');
         expect(userDetailsForAdmin.locale).to.equal('en');
         expect(userDetailsForAdmin.lastTermsOfServiceValidatedAt).to.deep.equal(lastTermsOfServiceValidatedAt);
@@ -1315,17 +1325,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
 
       context('when user has login details', function () {
-        let clock;
-        const now = new Date('2022-02-02');
-
-        beforeEach(function () {
-          clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-        });
-
-        afterEach(function () {
-          clock.restore();
-        });
-
         it('should return the user with his login details', async function () {
           // given
           const userInDB = databaseBuilder.factory.buildUser(userToInsert);
@@ -1372,17 +1371,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
   describe('update user', function () {
     describe('#update', function () {
-      let clock;
-      const now = new Date('2021-01-02');
-
-      beforeEach(function () {
-        clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-      });
-
-      afterEach(function () {
-        clock.restore();
-      });
-
       it('updates the given properties', async function () {
         // given
         const user = databaseBuilder.factory.buildUser();
@@ -1393,7 +1381,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         const fetchedUser = await knex.from('users').where({ id: user.id }).first();
 
         // then
-        expect(fetchedUser.updatedAt).to.deep.equal(new Date('2021-01-02'));
+        expect(fetchedUser.updatedAt).to.deep.equal(now);
         expect(fetchedUser.email).to.equal('chronos@example.net');
         expect(fetchedUser.locale).to.equal('fr-BE');
       });
@@ -1416,17 +1404,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#updateEmailConfirmed', function () {
-      let clock;
-      const now = new Date('2022-02-02');
-
-      beforeEach(function () {
-        clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-      });
-
-      afterEach(function () {
-        clock.restore();
-      });
-
       it('marks the users’ email as confirmed by updating "emailConfirmedAt" to current date', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser({
@@ -1502,17 +1479,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#updateUserDetailsForAdministration', function () {
-      let clock;
-      const now = new Date('2022-11-24');
-
-      beforeEach(async function () {
-        clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-      });
-
-      afterEach(function () {
-        clock.restore();
-      });
-
       it('updates firstName, lastName, email, username and locale of the user', async function () {
         // given
         const userInDb = databaseBuilder.factory.buildUser(userToInsert);
@@ -1542,7 +1508,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(updatedUser.email).to.equal('email_123@example.net');
         expect(updatedUser.username).to.equal('username_123');
         expect(updatedUser.locale).to.equal('fr-FR');
-        expect(updatedUser.updatedAt).to.deep.equal(new Date('2022-11-24'));
+        expect(updatedUser.updatedAt).to.deep.equal(now);
       });
 
       describe('when the preventUpdatedAt option is true', function () {
@@ -1646,17 +1612,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#updatePixOrgaTermsOfServiceAcceptedToTrue', function () {
-      let clock;
-      const now = new Date('2021-01-02');
-
-      beforeEach(function () {
-        clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-      });
-
-      afterEach(function () {
-        clock.restore();
-      });
-
       it('should return the model with pixOrgaTermsOfServiceAccepted flag updated to true', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser({ pixOrgaTermsOfServiceAccepted: false }).id;
@@ -1687,17 +1642,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#updatePixCertifTermsOfServiceAcceptedToTrue', function () {
-      let clock;
-      const now = new Date('2021-01-02');
-
-      beforeEach(function () {
-        clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-      });
-
-      afterEach(function () {
-        clock.restore();
-      });
-
       it('should return the model with pixCertifTermsOfServiceAccepted flag updated to true', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser({ pixCertifTermsOfServiceAccepted: false }).id;
@@ -1899,17 +1843,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   });
 
   describe('#updateLastDataProtectionPolicySeenAt', function () {
-    let clock;
-    const now = new Date('2022-12-24');
-
-    beforeEach(function () {
-      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-    });
-
-    afterEach(function () {
-      clock.restore();
-    });
-
     it('should update the last data protection policy to now', async function () {
       // given
       const user = databaseBuilder.factory.buildUser();
