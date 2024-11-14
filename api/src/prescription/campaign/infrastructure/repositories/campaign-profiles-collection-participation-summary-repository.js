@@ -49,7 +49,7 @@ async function _getParticipations(qb, campaignId, filters) {
   await qb
     .with('previousParticipationsInfos', (qbWith) => {
       qbWith
-        .select('pixScore AS previousPixScore', 'sharedAt AS previousSharedAt', 'organizationLearnerId', 'id')
+        .select('pixScore AS previousPixScore', 'organizationLearnerId', 'id')
         .from('campaign-participations')
         .where({ campaignId, isImproved: true })
         .whereNotNull('campaign-participations.sharedAt')
@@ -74,7 +74,6 @@ async function _getParticipations(qb, campaignId, filters) {
       'campaign-participations.sharedAt',
       'campaign-participations.pixScore AS pixScore',
       'previousParticipationsInfos.previousPixScore',
-      'previousParticipationsInfos.previousSharedAt',
       'participationsCount.sharedProfileCount',
     )
     .distinctOn('campaign-participations.organizationLearnerId')

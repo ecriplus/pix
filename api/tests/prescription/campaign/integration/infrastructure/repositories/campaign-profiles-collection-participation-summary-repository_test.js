@@ -406,7 +406,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
       });
     });
 
-    context('additionnal informations about previous participation and evolution', function () {
+    context('evolution', function () {
       let userId,
         organizationId,
         organizationLearnerId,
@@ -461,7 +461,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
       });
 
       describe('when participant has only one shared participation, and the other is not shared', function () {
-        it('should return null for previous participations infos and evolution', async function () {
+        it('should return null for evolution', async function () {
           // when
           const results = await campaignProfilesCollectionParticipationSummaryRepository.findPaginatedByCampaignId(
             campaign.id,
@@ -470,8 +470,6 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
           // then
           expect(results.data[0]).to.deep.include({
             pixScore: recentParticipationPixScore,
-            previousPixScore: null,
-            previousSharedAt: null,
             evolution: null,
           });
         });
@@ -481,7 +479,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
         const previousParticipationPixScore = 20;
         const previousParticipationSharedAt = new Date('2024-01-04');
 
-        it('should return latest participation with previous participation pixScore, sharedAt and evolution', async function () {
+        it('should return correct evolution', async function () {
           // given
           databaseBuilder.factory.buildCampaignParticipation({
             campaignId: campaign.id,
@@ -504,13 +502,11 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
           // then
           expect(results.data[0]).to.deep.include({
             pixScore: recentParticipationPixScore,
-            previousPixScore: previousParticipationPixScore,
-            previousSharedAt: previousParticipationSharedAt,
             evolution: 'increase',
           });
         });
 
-        it('should return null for previous participations infos and evolution when previous participation is deleted', async function () {
+        it('should return null for evolution when previous participation is deleted', async function () {
           // given
           databaseBuilder.factory.buildCampaignParticipation({
             campaignId: campaign.id,
@@ -534,13 +530,11 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
           // then
           expect(results.data[0]).to.deep.include({
             pixScore: recentParticipationPixScore,
-            previousPixScore: null,
-            previousSharedAt: null,
             evolution: null,
           });
         });
 
-        it('should return null for previous participations infos and evolution when learner has 2 participations to different campaigns', async function () {
+        it('should return null for evolution when learner has 2 participations to different campaigns', async function () {
           // given
           const otherCampaign = databaseBuilder.factory.buildCampaign({
             type: CampaignTypes.PROFILES_COLLECTION,
@@ -569,13 +563,11 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
           // then
           expect(results.data[0]).to.deep.include({
             pixScore: recentParticipationPixScore,
-            previousPixScore: null,
-            previousSharedAt: null,
             evolution: null,
           });
         });
 
-        it('should return null for previous participations infos and evolution when participations are from different learners', async function () {
+        it('should return null for evolution when participations are from different learners', async function () {
           // given
           const otherUserId = databaseBuilder.factory.buildUser({}).id;
 
@@ -608,22 +600,18 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
           // then
           expect(results.data[0]).to.deep.include({
             pixScore: recentParticipationPixScore,
-            previousPixScore: null,
-            previousSharedAt: null,
             evolution: null,
           });
 
           expect(results.data[1]).to.deep.include({
             pixScore: otherOrganizationLearnerParticipation.pixScore,
-            previousPixScore: null,
-            previousSharedAt: null,
             evolution: null,
           });
         });
       });
 
       describe('when participant has a third shared participation', function () {
-        it('should return latest participation and additionnal infos for participation before', async function () {
+        it('should return correct evolution, comparing recent and previous, ignoring old', async function () {
           const oldParticipationPixScore = 20;
           const oldParticipationSharedAt = new Date('2024-01-02');
 
@@ -664,8 +652,6 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
           // then
           expect(results.data[0]).to.deep.include({
             pixScore: recentParticipationPixScore,
-            previousPixScore: previousParticipationPixScore,
-            previousSharedAt: previousParticipationSharedAt,
             evolution: 'decrease',
           });
         });
