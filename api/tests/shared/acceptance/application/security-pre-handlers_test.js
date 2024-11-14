@@ -48,7 +48,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       // given
       const options = {
         method: 'GET',
-        url: '/api/users/1/campaign-participations',
+        url: '/api/users/{id}/trainings',
         headers: { authorization: generateValidRequestAuthorizationHeader(2) },
       };
 

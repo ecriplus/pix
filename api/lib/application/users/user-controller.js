@@ -3,7 +3,6 @@ import * as trainingSerializer from '../../../src/devcomp/infrastructure/seriali
 import { evaluationUsecases } from '../../../src/evaluation/domain/usecases/index.js';
 import * as scorecardSerializer from '../../../src/evaluation/infrastructure/serializers/jsonapi/scorecard-serializer.js';
 import * as userDetailsForAdminSerializer from '../../../src/identity-access-management/infrastructure/serializers/jsonapi/user-details-for-admin.serializer.js';
-import * as campaignParticipationSerializer from '../../../src/prescription/campaign-participation/infrastructure/serializers/jsonapi/campaign-participation-serializer.js';
 import * as certificationCenterMembershipSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import * as userSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/user-serializer.js';
 import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
@@ -46,14 +45,6 @@ const findPaginatedUserRecommendedTrainings = async function (
   });
 
   return dependencies.trainingSerializer.serialize(userRecommendedTrainings, meta);
-};
-
-const getCampaignParticipations = function (request, h, dependencies = { campaignParticipationSerializer }) {
-  const authenticatedUserId = request.auth.credentials.userId;
-
-  return usecases
-    .findLatestOngoingUserCampaignParticipations({ userId: authenticatedUserId })
-    .then(dependencies.campaignParticipationSerializer.serialize);
 };
 
 const resetScorecard = function (request, h, dependencies = { scorecardSerializer, requestResponseUtils }) {
@@ -132,7 +123,6 @@ const userController = {
   findCertificationCenterMembershipsByUser,
   findPaginatedUserRecommendedTrainings,
   findUserOrganizationsForAdmin,
-  getCampaignParticipations,
   reassignAuthenticationMethods,
   rememberUserHasSeenAssessmentInstructions,
   rememberUserHasSeenChallengeTooltip,
