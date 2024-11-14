@@ -1,4 +1,6 @@
 class CampaignProfilesCollectionParticipationSummary {
+  #previousPixScore;
+
   constructor({
     campaignParticipationId,
     firstName,
@@ -8,7 +10,6 @@ class CampaignProfilesCollectionParticipationSummary {
     pixScore,
     sharedProfileCount,
     previousPixScore,
-    previousSharedAt,
     certifiable,
     certifiableCompetencesCount,
   }) {
@@ -19,9 +20,8 @@ class CampaignProfilesCollectionParticipationSummary {
     this.sharedAt = sharedAt;
     this.pixScore = pixScore;
     this.sharedProfileCount = sharedProfileCount;
-    this.previousPixScore = previousPixScore ?? null;
-    this.previousSharedAt = previousSharedAt ?? null;
-    this.evolution = this.#computeEvolution(this.pixScore, this.previousPixScore);
+    this.#previousPixScore = previousPixScore ?? null;
+    this.evolution = this.#computeEvolution(this.pixScore, this.#previousPixScore);
     this.certifiable = certifiable;
     this.certifiableCompetencesCount = certifiableCompetencesCount;
   }
