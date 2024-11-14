@@ -1,10 +1,10 @@
-import { User } from '../../../src/identity-access-management/domain/models/User.js';
-import { Organization } from '../../../src/organizational-entities/domain/models/Organization.js';
-import { MembershipCreationError, MembershipUpdateError, NotFoundError } from '../../../src/shared/domain/errors.js';
-import { Membership } from '../../../src/shared/domain/models/Membership.js';
-import * as knexUtils from '../../../src/shared/infrastructure/utils/knex-utils.js';
-import { fetchPage } from '../../../src/shared/infrastructure/utils/knex-utils.js';
-import { DomainTransaction } from '../DomainTransaction.js';
+import { User } from '../../../identity-access-management/domain/models/User.js';
+import { Organization } from '../../../organizational-entities/domain/models/Organization.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { MembershipCreationError, MembershipUpdateError, NotFoundError } from '../../../shared/domain/errors.js';
+import { Membership } from '../../../shared/domain/models/Membership.js';
+import * as knexUtils from '../../../shared/infrastructure/utils/knex-utils.js';
+import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_NUMBER = 1;
