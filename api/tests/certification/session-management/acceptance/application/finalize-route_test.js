@@ -86,7 +86,15 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           // given
           const userId = databaseBuilder.factory.buildUser().id;
           const session = databaseBuilder.factory.buildSession();
-          const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ sessionId: session.id }).id;
+          const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+            userId,
+            sessionId: session.id,
+          }).id;
+          databaseBuilder.factory.buildCertificationCandidate({
+            sessionId: session.id,
+            userId,
+            reconciledAt: new Date('2020-01-01'),
+          });
           databaseBuilder.factory.buildCertificationCenterMembership({
             userId,
             certificationCenterId: session.certificationCenterId,
@@ -212,9 +220,15 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           const userId = databaseBuilder.factory.buildUser().id;
           const session = databaseBuilder.factory.buildSession();
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+            userId,
             sessionId: session.id,
             completedAt: new Date(),
           }).id;
+          databaseBuilder.factory.buildCertificationCandidate({
+            sessionId: session.id,
+            userId,
+            reconciledAt: new Date('2020-01-01'),
+          });
           databaseBuilder.factory.buildCertificationCenterMembership({
             userId,
             certificationCenterId: session.certificationCenterId,
@@ -326,6 +340,11 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             userId,
             createdAt: new Date(),
           }).id;
+          databaseBuilder.factory.buildCertificationCandidate({
+            sessionId: session.id,
+            userId,
+            reconciledAt: new Date('2020-01-01'),
+          });
           databaseBuilder.factory.buildCertificationCenterMembership({
             userId,
             certificationCenterId: session.certificationCenterId,
@@ -477,6 +496,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           const userId = databaseBuilder.factory.buildUser().id;
           const session = databaseBuilder.factory.buildSession();
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+            userId,
             sessionId: session.id,
             completedAt: new Date(),
           }).id;

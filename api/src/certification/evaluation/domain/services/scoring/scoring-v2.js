@@ -2,6 +2,7 @@
  * @typedef {import('../index.js').AssessmentResultRepository} AssessmentResultRepository
  * @typedef {import('../index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../index.js').CompetenceMarkRepository} CompetenceMarkRepository
+ * @typedef {import('../index.js').CertificationCandidateRepository} CertificationCandidateRepository
  * @typedef {import('../index.js').ScoringDegradationService} ScoringDegradationService
  * @typedef {import('../index.js').ScoringCertificationService} ScoringCertificationService
  * @typedef {import('../index.js').ScoringService} ScoringService
@@ -36,6 +37,7 @@ import { AlgorithmEngineVersion } from '../../../../shared/domain/models/Algorit
  * @param {AreaRepository} params.areaRepository
  * @param {PlacementProfileService} params.placementProfileService
  * @param {ScoringService} params.scoringService
+ * @param {CertificationCandidateRepository} params.certificationCandidateRepository
  * @param {Object} params.dependencies
  * @param {calculateCertificationAssessmentScore} params.dependencies.calculateCertificationAssessmentScore
  */
@@ -50,6 +52,7 @@ export const handleV2CertificationScoring = async ({
   areaRepository,
   placementProfileService,
   scoringService,
+  certificationCandidateRepository,
   dependencies = { calculateCertificationAssessmentScore },
 }) => {
   const certificationAssessmentScore = await dependencies.calculateCertificationAssessmentScore({
@@ -57,6 +60,7 @@ export const handleV2CertificationScoring = async ({
     areaRepository,
     placementProfileService,
     scoringService,
+    certificationCandidateRepository,
   });
   const certificationCourse = await certificationCourseRepository.get({
     id: certificationAssessment.certificationCourseId,
@@ -85,17 +89,23 @@ export const handleV2CertificationScoring = async ({
 /**
  * @param {Object} params
  * @param {CertificationAssessment} params.certificationAssessment
- * @param {ScoringService} params.dependencies.scoringService
+ * @param {ScoringService} params.scoringService
+ * @param {CertificationCandidateRepository} params.certificationCandidateRepository
  */
 export const calculateCertificationAssessmentScore = async function ({
   certificationAssessment,
   areaRepository,
   placementProfileService,
   scoringService,
+  certificationCandidateRepository,
 }) {
+  const candidate = await certificationCandidateRepository.findByAssessmentId({
+    assessmentId: certificationAssessment.id,
+  });
+
   const testedCompetences = await _getTestedCompetences({
     userId: certificationAssessment.userId,
-    limitDate: certificationAssessment.createdAt,
+    limitDate: candidate.reconciledAt,
     version: AlgorithmEngineVersion.V2,
     placementProfileService,
   });

@@ -138,6 +138,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         });
 
         const { assessment, assessmentResult } = await createSuccessfulCertificationCourse({
+          sessionId: session.id,
           userId,
           certificationCourse,
         });
@@ -276,6 +277,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       });
 
       const { assessment, assessmentResult } = await createSuccessfulCertificationCourse({
+        sessionId: session.id,
         userId,
         certificationCourse,
       });
