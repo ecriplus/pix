@@ -12,7 +12,6 @@ import * as centerRepository from '../../infrastructure/repositories/center-repo
  * @typedef {import('../../infrastructure/repositories/index.js').SessionsRepository} SessionsRepository
  */
 import { configurationRepositories } from '../../infrastructure/repositories/index.js';
-import { convertCenterToV3JobRepository } from '../../infrastructure/repositories/jobs/convert-center-to-v3-job-repository.js';
 
 /**
  *
@@ -22,7 +21,6 @@ import { convertCenterToV3JobRepository } from '../../infrastructure/repositorie
  * @typedef {attachableTargetProfileRepository} AttachableTargetProfileRepository
  * @typedef {centerPilotFeaturesRepository} CenterPilotFeaturesRepository
  * @typedef {centerRepository} CentersRepository
- * @typedef {convertCenterToV3JobRepository} ConvertCenterToV3JobRepository
  * @typedef {sessionsRepository} SessionsRepository
  * @typedef {candidateRepository} CandidateRepository
  **/
@@ -31,7 +29,6 @@ const dependencies = {
   complementaryCertificationRepository,
   centerPilotFeaturesRepository,
   centerRepository,
-  convertCenterToV3JobRepository,
   sessionsRepository: configurationRepositories.sessionsRepository,
   candidateRepository,
 };
