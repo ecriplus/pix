@@ -2,6 +2,12 @@
   display: flex;
   align-content: center;
   margin: 0 140px;
+  opacity: 0;
+  transition: all 1s;
+
+  &.display {
+    opacity:1;
+  }
 
   @include device-is('tablet') {
     margin: 0 120px;

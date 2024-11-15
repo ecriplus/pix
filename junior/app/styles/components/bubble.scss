@@ -1,6 +1,15 @@
 .bubble-container {
   display: flex;
   align-items: center;
+  opacity: 0;
+
+  &.display {
+    opacity: 1;
+  }
+
+  &__delayed {
+    transition: all 1s;
+  }
 }
 
 .bubble {

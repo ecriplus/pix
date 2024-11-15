@@ -1,8 +1,12 @@
 {{page-title (t "pages.challenge.title")}}
 <div class="container">
   <RobotDialog @class={{this.robotMood}}>
-    {{#each @challenge.instruction as |instruction|}}
-      <Bubble @message={{instruction}} @oralization={{@oralization}} />
+    {{#each @challenge.instruction as |instruction index|}}
+      <Bubble
+        @message={{instruction}}
+        @oralization={{@oralization}}
+        @shouldDisplayIn={{this.displayBubbleWithDelay index}}
+      />
     {{/each}}
     {{#if (eq this.answer.result "ok")}}
       <Bubble
@@ -25,6 +29,7 @@
     {{/if}}
   </RobotDialog>
   <Challenge::Item
+    @display={{this.displayChallenge}}
     @setAnswerValue={{this.setAnswerValue}}
     @setValidationWarning={{this.setValidationWarning}}
     @validateAnswer={{this.validateAnswer}}

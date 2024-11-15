@@ -10,7 +10,20 @@ export default class Challenge extends Component {
   @tracked answer = null;
   @tracked answerValue = null;
   @tracked displayValidationWarning = false;
+  @tracked displayChallenge = false;
   validationWarning = null;
+
+  constructor() {
+    super(...arguments);
+    setTimeout(() => {
+      this.displayChallenge = true;
+    }, this.args.challenge.instruction.length * 1500);
+  }
+
+  @action
+  displayBubbleWithDelay(index) {
+    return (index || 0) * 1500;
+  }
 
   get disableCheckButton() {
     return this.answerValue === null || this.answerValue === '';
