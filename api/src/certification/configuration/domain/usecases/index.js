@@ -8,10 +8,6 @@ import * as attachableTargetProfileRepository from '../../infrastructure/reposit
 import * as candidateRepository from '../../infrastructure/repositories/candidate-repository.js';
 import * as centerPilotFeaturesRepository from '../../infrastructure/repositories/center-pilot-features-repository.js';
 import * as centerRepository from '../../infrastructure/repositories/center-repository.js';
-/**
- * @typedef {import('../../infrastructure/repositories/index.js').SessionsRepository} SessionsRepository
- */
-import { configurationRepositories } from '../../infrastructure/repositories/index.js';
 
 /**
  *
@@ -21,7 +17,6 @@ import { configurationRepositories } from '../../infrastructure/repositories/ind
  * @typedef {attachableTargetProfileRepository} AttachableTargetProfileRepository
  * @typedef {centerPilotFeaturesRepository} CenterPilotFeaturesRepository
  * @typedef {centerRepository} CentersRepository
- * @typedef {sessionsRepository} SessionsRepository
  * @typedef {candidateRepository} CandidateRepository
  **/
 const dependencies = {
@@ -29,7 +24,6 @@ const dependencies = {
   complementaryCertificationRepository,
   centerPilotFeaturesRepository,
   centerRepository,
-  sessionsRepository: configurationRepositories.sessionsRepository,
   candidateRepository,
 };
 
