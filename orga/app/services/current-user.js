@@ -72,6 +72,10 @@ export default class CurrentUserService extends Service {
     );
   }
 
+  get canAccessAttestationsPage() {
+    return this.prescriber.attestationsManagement;
+  }
+
   get canAccessPlacesPage() {
     return this.isAdminInOrganization && this.prescriber.placesManagement;
   }

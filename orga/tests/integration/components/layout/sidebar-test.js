@@ -316,6 +316,21 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
     });
   });
 
+  module('When the user has the attestations feature', function () {
+    test('should display Attestations entry with link to attestation page', async function (assert) {
+      class CurrentUserStub extends Service {
+        organization = Object.create({ id: 5 });
+        canAccessAttestationsPage = true;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+
+      const screen = await render(hbs`<Layout::Sidebar />`);
+
+      const attestationsLink = screen.getByRole('link', { name: t('navigation.main.attestations') });
+      assert.dom(attestationsLink).hasAttribute('href', '/attestations');
+    });
+  });
+
   test('[a11y] it should contain accessibility aria-label nav', async function (assert) {
     // given
     class CurrentUserStub extends Service {

@@ -23,6 +23,14 @@
         {{t "navigation.main.certifications"}}
       </LinkTo>
     {{/if}}
+    {{#if this.shouldDisplayAttestationsEntry}}
+      <LinkTo @route="authenticated.attestations" class="sidebar-nav__item">
+        <span class="sidebar-nav__item-icon">
+          <PixIcon @name="assignment" role="none" />
+        </span>
+        {{t "navigation.main.attestations"}}
+      </LinkTo>
+    {{/if}}
     {{#if this.shouldDisplayMissionsEntry}}
       <LinkTo @route="authenticated.missions" class="sidebar-nav__item">
         <span class="sidebar-nav__item-icon">
