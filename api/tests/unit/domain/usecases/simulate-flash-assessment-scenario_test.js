@@ -26,7 +26,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
           pickChallenge,
           pickAnswerStatus,
           flashAlgorithmService,
-          enablePassageByAllCompetences: false,
         });
 
         // then
@@ -69,7 +68,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
           initialCapacity,
           flashAlgorithmService,
           limitToOneQuestionPerTube: false,
-          enablePassageByAllCompetences: false,
         });
 
         // then
@@ -88,7 +86,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
       it('should return an array of estimated level, challenge, reward and error rate for each answer', async function () {
         // given
         const limitToOneQuestionPerTube = false;
-        const enablePassageByAllCompetences = false;
 
         const {
           challengeRepository,
@@ -136,7 +133,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
           pickAnswerStatus,
           limitToOneQuestionPerTube,
           flashAlgorithmService,
-          enablePassageByAllCompetences,
         });
 
         // then
@@ -155,7 +151,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
       it('should return an array of estimated level, challenge, reward and error rate for each answer', async function () {
         // given
         const limitToOneQuestionPerTube = false;
-        const enablePassageByAllCompetences = false;
         const minimumEstimatedSuccessRateRanges = [
           domainBuilder.buildFlashAssessmentAlgorithmSuccessRateHandlerFixed({
             startingChallengeIndex: 0,
@@ -178,7 +173,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
           minimumEstimatedSuccessRateRanges,
           flashAlgorithmService,
           limitToOneQuestionPerTube,
-          enablePassageByAllCompetences,
         });
 
         // then
@@ -208,7 +202,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
           pickChallenge,
           pickAnswerStatus,
           flashAlgorithmService,
-          enablePassageByAllCompetences: false,
           doubleMeasuresUntil: 2,
         });
 
@@ -226,7 +219,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
     it('should stop simulating', async function () {
       // given
       const limitToOneQuestionPerTube = false;
-      const enablePassageByAllCompetences = false;
       const challenge = domainBuilder.buildChallenge({ id: 1 });
       const challengeRepository = {
         findActiveFlashCompatible: sinon.stub(),
@@ -278,7 +270,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
         pickAnswerStatus,
         flashAlgorithmService,
         limitToOneQuestionPerTube,
-        enablePassageByAllCompetences,
       });
 
       // then

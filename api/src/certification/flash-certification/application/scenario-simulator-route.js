@@ -17,7 +17,6 @@ const _baseScenarioParametersValidator = Joi.object().keys({
   challengesBetweenSameCompetence: Joi.number().min(0),
   limitToOneQuestionPerTube: Joi.boolean(),
   minimumEstimatedSuccessRateRanges: Joi.array().items(_successRatesConfigurationValidator),
-  enablePassageByAllCompetences: Joi.boolean(),
   doubleMeasuresUntil: Joi.number().min(0),
   variationPercent: Joi.number().min(0).max(1),
   variationPercentUntil: Joi.number().min(0),

@@ -13,7 +13,6 @@ export async function simulateFlashAssessmentScenario({
   challengesBetweenSameCompetence = 0,
   limitToOneQuestionPerTube = true,
   minimumEstimatedSuccessRateRanges = [],
-  enablePassageByAllCompetences = false,
   doubleMeasuresUntil = 0,
   variationPercent,
   variationPercentUntil,
@@ -22,12 +21,14 @@ export async function simulateFlashAssessmentScenario({
 }) {
   const challenges = await challengeRepository.findActiveFlashCompatible({ locale });
 
+  const enablePassageByAllCompetencesValueInProduction = true;
+
   const flashAssessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,
     configuration: new FlashAssessmentAlgorithmConfiguration({
       limitToOneQuestionPerTube,
       minimumEstimatedSuccessRateRanges,
-      enablePassageByAllCompetences,
+      enablePassageByAllCompetences: enablePassageByAllCompetencesValueInProduction,
       variationPercent,
       variationPercentUntil,
       doubleMeasuresUntil,
