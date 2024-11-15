@@ -10,7 +10,6 @@ export async function simulateFlashAssessmentScenario({
   pickAnswerStatus,
   stopAtChallenge,
   initialCapacity,
-  useObsoleteChallenges,
   challengesBetweenSameCompetence = 0,
   limitToOneQuestionPerTube = true,
   minimumEstimatedSuccessRateRanges = [],
@@ -21,7 +20,7 @@ export async function simulateFlashAssessmentScenario({
   challengeRepository,
   flashAlgorithmService,
 }) {
-  const challenges = await challengeRepository.findFlashCompatible({ locale, useObsoleteChallenges });
+  const challenges = await challengeRepository.findActiveFlashCompatible({ locale });
 
   const flashAssessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,

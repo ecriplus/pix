@@ -229,9 +229,9 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
       const enablePassageByAllCompetences = false;
       const challenge = domainBuilder.buildChallenge({ id: 1 });
       const challengeRepository = {
-        findFlashCompatible: sinon.stub(),
+        findActiveFlashCompatible: sinon.stub(),
       };
-      challengeRepository.findFlashCompatible.resolves([challenge]);
+      challengeRepository.findActiveFlashCompatible.resolves([challenge]);
 
       const pickChallenge = sinon.stub();
       const pickAnswerStatus = sinon.stub();
@@ -321,7 +321,7 @@ function prepareStubs({
   const allChallenges = [firstChallenge, secondChallenge, thirdChallenge];
 
   const challengeRepository = {
-    findFlashCompatible: sinon.stub(),
+    findActiveFlashCompatible: sinon.stub(),
   };
   const pickChallenge = sinon.stub();
   const pickAnswerStatus = sinon.stub();
@@ -430,7 +430,7 @@ function prepareStubs({
       .returns([thirdChallenge, secondChallenge]);
   }
 
-  challengeRepository.findFlashCompatible.resolves([firstChallenge, secondChallenge, thirdChallenge]);
+  challengeRepository.findActiveFlashCompatible.resolves([firstChallenge, secondChallenge, thirdChallenge]);
 
   pickChallenge
     .withArgs({
