@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
+import {tracked} from '@glimmer/tracking';
 import MarkdownToHtml from 'junior/components/markdown-to-html';
 import * as markdownConverter from 'junior/utils/markdown-converter';
 
@@ -22,7 +22,7 @@ export default class Bubble extends Component {
     return className;
   }
   get getDelayedClass() {
-    if (typeof this.args.shouldDisplayIn === 'number') {
+    if (typeof this.args.shouldDisplayIn === 'number' || this.args.withTransition) {
       return 'bubble-container__delayed';
     }
     return '';

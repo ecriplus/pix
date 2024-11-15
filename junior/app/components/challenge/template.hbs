@@ -14,6 +14,7 @@
         @status="success"
         @oralization={{@oralization}}
         aria-live="polite"
+        @withTransition={{true}}
       />
     {{/if}}
     {{#if (eq this.answer.result "ko")}}
@@ -22,10 +23,17 @@
         @oralization={{@oralization}}
         @status="error"
         aria-live="polite"
+        @withTransition={{true}}
       />
     {{/if}}
     {{#if this.displayValidationWarning}}
-      <Bubble @message={{this.validationWarning}} @status="warning" aria-live="polite" @oralization={{@oralization}} />
+      <Bubble
+        @message={{this.validationWarning}}
+        @status="warning"
+        aria-live="polite"
+        @oralization={{@oralization}}
+        @withTransition={{true}}
+      />
     {{/if}}
   </RobotDialog>
   <Challenge::Item
