@@ -301,17 +301,9 @@ describe('Integration | Application | scenario-simulator-controller', function (
             // given
             const minimumEstimatedSuccessRateRanges = [
               {
-                type: 'fixed',
                 startingChallengeIndex: 0,
                 endingChallengeIndex: 7,
                 value: 0.8,
-              },
-              {
-                type: 'linear',
-                startingChallengeIndex: 8,
-                endingChallengeIndex: 15,
-                startingValue: 0.8,
-                endingValue: 0.5,
               },
             ];
 
@@ -320,12 +312,6 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 startingChallengeIndex: 0,
                 endingChallengeIndex: 7,
                 value: 0.8,
-              }),
-              domainBuilder.buildFlashAssessmentAlgorithmSuccessRateHandlerLinear({
-                startingChallengeIndex: 8,
-                endingChallengeIndex: 15,
-                startingValue: 0.8,
-                endingValue: 0.5,
               }),
             ];
 
@@ -390,58 +376,9 @@ describe('Integration | Application | scenario-simulator-controller', function (
 
             const minimumEstimatedSuccessRateRanges = [
               {
-                type: 'fixed',
                 startingChallengeIndex: 0,
                 endingChallengeIndex: 7,
                 value: 0.8,
-              },
-              {
-                type: 'linear',
-                startingChallengeIndex: 8,
-                endingChallengeIndex: 7,
-                startingValue: 0.8,
-                endingValue: 0.5,
-              },
-            ];
-
-            securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
-
-            // when
-            const response = await httpTestServer.request(
-              'POST',
-              '/api/scenario-simulator',
-              {
-                initialCapacity,
-                answerStatusArray,
-                minimumEstimatedSuccessRateRanges,
-              },
-              null,
-              { 'accept-language': 'en' },
-            );
-
-            // then
-            expect(response.statusCode).to.equal(400);
-          });
-        });
-
-        context('When providing invalid linear config', function () {
-          it('should respond with a 400 error', async function () {
-            // given
-            const answerStatusArray = ['ok'];
-
-            const minimumEstimatedSuccessRateRanges = [
-              {
-                type: 'fixed',
-                startingChallengeIndex: 0,
-                endingChallengeIndex: 7,
-                value: 0.8,
-              },
-              {
-                type: 'linear',
-                startingChallengeIndex: 8,
-                endingChallengeIndex: 15,
-                startingValue: 1.3,
-                endingValue: 0.5,
               },
             ];
 
