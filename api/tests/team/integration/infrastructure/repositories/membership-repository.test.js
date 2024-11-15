@@ -1,13 +1,17 @@
 import _ from 'lodash';
 
-import * as membershipRepository from '../../../../lib/infrastructure/repositories/membership-repository.js';
-import { User } from '../../../../src/identity-access-management/domain/models/User.js';
-import { Organization } from '../../../../src/organizational-entities/domain/models/Organization.js';
-import { MembershipCreationError, MembershipUpdateError, NotFoundError } from '../../../../src/shared/domain/errors.js';
-import { Membership } from '../../../../src/shared/domain/models/Membership.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
+import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
+import { Organization } from '../../../../../src/organizational-entities/domain/models/Organization.js';
+import {
+  MembershipCreationError,
+  MembershipUpdateError,
+  NotFoundError,
+} from '../../../../../src/shared/domain/errors.js';
+import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
+import * as membershipRepository from '../../../../../src/team/infrastructure/repositories/membership.repository.js';
+import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
-describe('Integration | Infrastructure | Repository | membership-repository', function () {
+describe('Integration | Team | Infrastructure | Repository | membership-repository', function () {
   let clock;
   const now = new Date('2022-12-01');
 
@@ -22,17 +26,16 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
   describe('#create', function () {
     let userId;
     let organizationId;
-    // TODO: Fix this the next time the file is edited.
-    // eslint-disable-next-line mocha/no-setup-in-describe
-    const organizationRole = Membership.roles.ADMIN;
+    let organizationRole;
 
     beforeEach(async function () {
       userId = databaseBuilder.factory.buildUser().id;
       organizationId = databaseBuilder.factory.buildOrganization().id;
+      organizationRole = Membership.roles.ADMIN;
       await databaseBuilder.commit();
     });
 
-    it('should add a new membership in database', async function () {
+    it('adds a new membership in database', async function () {
       // given
       const beforeNbMemberships = await knex('memberships').count('id as count');
 
@@ -44,7 +47,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
       expect(parseInt(afterNbMemberships[0].count)).to.equal(parseInt(beforeNbMemberships[0].count + 1));
     });
 
-    it('should return a Membership domain model object', async function () {
+    it('returns a Membership domain model object', async function () {
       // when
       const membership = await membershipRepository.create(userId, organizationId, organizationRole);
 
@@ -54,7 +57,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
     });
 
     context('Error cases', function () {
-      it('should throw a domain error when a membership already exist for user + organization', async function () {
+      it('throws a domain error when a membership already exist for user + organization', async function () {
         // given
         await membershipRepository.create(userId, organizationId, organizationRole);
 
@@ -78,7 +81,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
     });
 
     context('when membership exists', function () {
-      it('should return the membership', async function () {
+      it('returns the membership', async function () {
         // when
         const result = await membershipRepository.get(existingMembershipId);
 
@@ -90,7 +93,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
     });
 
     context('when membership does not exist', function () {
-      it('should throw a NotFoundError', async function () {
+      it('throws a NotFoundError', async function () {
         // given
         const nonExistingMembership = existingMembershipId + 1;
 
@@ -104,7 +107,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
   });
 
   describe('#findByOrganizationId', function () {
-    it('should return all the memberships for a given organization ID with only required relationships', async function () {
+    it('returns all the memberships for a given organization ID with only required relationships', async function () {
       // given
       const organization_1 = databaseBuilder.factory.buildOrganization();
       const organization_2 = databaseBuilder.factory.buildOrganization();
@@ -140,7 +143,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
       expect(_.map(memberships, 'user.id')).to.have.members([user_1.id, user_2.id]);
     });
 
-    it('should order memberships by id', async function () {
+    it('orders memberships by id', async function () {
       // given
       const organization = databaseBuilder.factory.buildOrganization();
 
@@ -184,7 +187,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
   });
 
   describe('#findAdminsByOrganizationId', function () {
-    it('should return all the admin for a given organization ID with only required relationships', async function () {
+    it('returns all the admin for a given organization ID with only required relationships', async function () {
       // given
       const organization_1 = databaseBuilder.factory.buildOrganization();
       const organization_2 = databaseBuilder.factory.buildOrganization();
@@ -218,7 +221,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
       expect(_.map(memberships, 'user.id')).to.have.members([user_1.id]);
     });
 
-    it('should order memberships by id', async function () {
+    it('orders memberships by id', async function () {
       // given
       const organization = databaseBuilder.factory.buildOrganization();
 
@@ -280,7 +283,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
         return databaseBuilder.commit();
       });
 
-      it('should return an Array of Memberships', async function () {
+      it('returns an Array of Memberships', async function () {
         // given
         const filter = {};
         const page = { number: 1, size: 10 };
@@ -312,7 +315,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
         return databaseBuilder.commit();
       });
 
-      it('should return paginated matching Organizations', async function () {
+      it('returns paginated matching Organizations', async function () {
         // given
         const filter = {};
         const page = { number: 1, size: 2 };
@@ -342,7 +345,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
         return databaseBuilder.commit();
       });
 
-      it('should return only Memberships matching "firstName" if given in filters', async function () {
+      it('returns only Memberships matching "firstName" if given in filters', async function () {
         // given
         const filter = { firstName: 'andré' };
         const page = { number: 1, size: 10 };
@@ -373,7 +376,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
         return databaseBuilder.commit();
       });
 
-      it('should return only Memberships matching "firstName" if given in filters', async function () {
+      it('returns only Memberships matching "firstName" if given in filters', async function () {
         // given
         const filter = { lastName: 'andré' };
         const page = { number: 1, size: 10 };
@@ -404,7 +407,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
         return databaseBuilder.commit();
       });
 
-      it('should return only Memberships matching "firstName" if given in filters', async function () {
+      it('returns only Memberships matching "firstName" if given in filters', async function () {
         // given
         const filter = { email: 'andre' };
         const page = { number: 1, size: 10 };
@@ -465,7 +468,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
           return databaseBuilder.commit();
         });
 
-        it('should return only Memberships matching "firstName" AND "lastName" AND "email" if given in filters', async function () {
+        it('returns only Memberships matching "firstName" AND "lastName" AND "email" if given in filters', async function () {
           // given
           const filter = { firstName: 'firstname_ok', lastName: 'lastname_ok', email: 'email_ok' };
           const page = { number: 1, size: 10 };
@@ -499,7 +502,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
         return databaseBuilder.commit();
       });
 
-      it('should ignore the filters and retrieve all organizations', async function () {
+      it('ignores the filters and retrieve all organizations', async function () {
         // given
         const filter = { id: 999 };
         const page = { number: 1, size: 10 };
@@ -518,7 +521,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
       });
     });
 
-    it('should return only active memberships', async function () {
+    it('returns only active memberships', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
 
@@ -547,7 +550,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
 
   describe('#findByUserIdAndOrganizationId', function () {
     context('When organization is not required', function () {
-      it('should retrieve membership with given useId and OrganizationId', async function () {
+      it('retrieves membership with given userId and OrganizationId', async function () {
         // given
         const organization = databaseBuilder.factory.buildOrganization();
         const user1 = databaseBuilder.factory.buildUser();
@@ -579,7 +582,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
         expect(memberships[0].id).to.equal(membership2.id);
       });
 
-      it('should retrieve only active membership', async function () {
+      it('retrieves only active membership', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
@@ -595,7 +598,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
         expect(foundMemberships).to.have.lengthOf(0);
       });
 
-      it('should retrieve membership and organization with tags', async function () {
+      it('retrieves membership and organization with tags', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
@@ -618,7 +621,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
     });
 
     context('When organization is required', function () {
-      it('should retrieve membership and organization with given userId and organizationId', async function () {
+      it('retrieves membership and organization with given userId and organizationId', async function () {
         // given
         const organizationId = databaseBuilder.factory.buildOrganization().id;
         const userId = databaseBuilder.factory.buildUser().id;
@@ -658,7 +661,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
     });
 
     context('When membership exist', function () {
-      it('should return the updated membership', async function () {
+      it('returns the updated membership', async function () {
         // given
         const membership = { organizationRole: Membership.roles.ADMIN, updatedByUserId };
 
@@ -671,7 +674,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
         expect(updatedMembership.updatedByUserId).to.equal(updatedMembership.updatedByUserId);
       });
 
-      it('should return the organization and user linked to this membership', async function () {
+      it('returns the organization and user linked to this membership', async function () {
         // given
         const membership = { organizationRole: Membership.roles.ADMIN, updatedByUserId };
 
@@ -684,7 +687,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
     });
 
     context('When membership does not exist', function () {
-      it('should throw MembershipUpdateError', async function () {
+      it('throws MembershipUpdateError', async function () {
         // given
         const organizationRole = Membership.roles.ADMIN;
         const messageNotRowUpdated = 'Erreur lors de la mise à jour du membership à une organisation.';
@@ -701,7 +704,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
     });
 
     context('When membership attributes are empty', function () {
-      it('should throw MembershipUpdateError', async function () {
+      it('throws MembershipUpdateError', async function () {
         // given
         const errorMessage = "Le membership n'est pas renseigné";
         const membership = undefined;

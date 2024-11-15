@@ -1,7 +1,24 @@
-import { UserAnonymizedEventLoggingJob } from '../../../src/identity-access-management/domain/models/UserAnonymizedEventLoggingJob.js';
-import { config } from '../../../src/shared/config.js';
-import { UserNotFoundError } from '../../../src/shared/domain/errors.js';
+import { config } from '../../../shared/config.js';
+import { UserNotFoundError } from '../../../shared/domain/errors.js';
+import { UserAnonymizedEventLoggingJob } from '../models/UserAnonymizedEventLoggingJob.js';
 
+/**
+ * @param params
+ * @param{string} params.userId
+ * @param{string} params.updatedByUserId
+ * @param{boolean} params.preventAuditLogging
+ * @param{UserRepository} params.userRepository
+ * @param{AuthenticationMethodRepository} params.authenticationMethodRepository
+ * @param{MembershipRepository} params.membershipRepository
+ * @param{CertificationCenterMembershipRepository} params.certificationCenterMembershipRepository
+ * @param{OrganizationLearnerRepository} params.organizationLearnerRepository
+ * @param{RefreshTokenRepository} params.refreshTokenRepository
+ * @param{ResetPasswordDemandRepository} params.resetPasswordDemandRepository
+ * @param{UserLoginRepository} params.userLoginRepository
+ * @param{AdminMemberRepository} params.adminMemberRepository
+ * @param{UserAnonymizedEventLoggingJobRepository} params.userAnonymizedEventLoggingJobRepository
+ * @returns {Promise<null>}
+ */
 const anonymizeUser = async function ({
   userId,
   updatedByUserId,

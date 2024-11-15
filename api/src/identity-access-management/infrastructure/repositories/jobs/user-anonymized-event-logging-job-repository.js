@@ -1,5 +1,5 @@
-import { UserAnonymizedEventLoggingJob } from '../../../../src/identity-access-management/domain/models/UserAnonymizedEventLoggingJob.js';
-import { JobRepository, JobRetry } from '../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
+import { JobRepository, JobRetry } from '../../../../shared/infrastructure/repositories/jobs/job-repository.js';
+import { UserAnonymizedEventLoggingJob } from '../../../domain/models/UserAnonymizedEventLoggingJob.js';
 
 class UserAnonymizedEventLoggingJobRepository extends JobRepository {
   constructor() {

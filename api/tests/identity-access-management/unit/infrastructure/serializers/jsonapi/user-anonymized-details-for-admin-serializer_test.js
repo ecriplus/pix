@@ -1,9 +1,9 @@
-import * as serializer from '../../../../../lib/infrastructure/serializers/jsonapi/user-anonymized-details-for-admin-serializer.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import * as serializer from '../../../../../../src/identity-access-management/infrastructure/serializers/jsonapi/user-anonymized-details-for-admin.serializer.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
-describe('Unit | Serializer | JSONAPI | user-anonymized-details-for-admin-serializer', function () {
+describe('Unit | Identity Access Management | Serializer | JSONAPI | user-anonymized-details-for-admin-serializer', function () {
   describe('#serialize', function () {
-    it('should serialize user details for Pix Admin', function () {
+    it('serializes user details for Pix Admin', function () {
       // given
       const now = new Date();
       const modelObject = domainBuilder.buildUserDetailsForAdmin({
