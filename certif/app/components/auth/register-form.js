@@ -113,7 +113,7 @@ export default class RegisterForm extends Component {
       const status = get(response, 'errors[0].status');
 
       if (status === '422') {
-        this.errorMessage = this.intl.t('common.form-errors.email.already-exists');
+        this.errorMessage = this.intl.t('common.form-errors.email.invalid-or-already-used-email');
       } else {
         this.errorMessage = this.intl.t('common.form-errors.default');
       }
