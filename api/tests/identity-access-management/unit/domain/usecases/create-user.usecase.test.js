@@ -1,8 +1,8 @@
 import { createAccountCreationEmail } from '../../../../../src/identity-access-management/domain/emails/create-account-creation.email.js';
+import { InvalidOrAlreadyUsedEmailError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { createUser } from '../../../../../src/identity-access-management/domain/usecases/create-user.usecase.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { AlreadyRegisteredEmailError } from '../../../../../src/shared/domain/errors.js';
 import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
 import { urlBuilder } from '../../../../../src/shared/infrastructure/utils/url-builder.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
@@ -140,12 +140,12 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
     context('when user email is already used', function () {
       it('should reject with an error EntityValidationError on email already registered', async function () {
         // given
-        const emailExistError = new AlreadyRegisteredEmailError('email already exists');
+        const emailExistError = new InvalidOrAlreadyUsedEmailError('email already exists');
         const expectedValidationError = new EntityValidationError({
           invalidAttributes: [
             {
               attribute: 'email',
-              message: 'ALREADY_REGISTERED_EMAIL',
+              message: 'INVALID_OR_ALREADY_USED_EMAIL',
             },
           ],
         });
@@ -231,9 +231,9 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           },
         ],
       });
-      const emailExistError = new AlreadyRegisteredEmailError('email already exists');
+      const emailExistError = new InvalidOrAlreadyUsedEmailError('email already exists');
 
-      it('should reject with an error EntityValidationError containing the entityValidationError and the AlreadyRegisteredEmailError', async function () {
+      it('should reject with an error EntityValidationError containing the entityValidationError and the InvalidOrAlreadyUsedEmailError', async function () {
         // given
         userRepository.checkIfEmailIsAvailable.rejects(emailExistError);
         userValidator.validate.throws(entityValidationError);

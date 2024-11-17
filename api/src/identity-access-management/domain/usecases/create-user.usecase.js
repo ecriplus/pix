@@ -1,8 +1,8 @@
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { AlreadyRegisteredEmailError } from '../../../shared/domain/errors.js';
 import { EntityValidationError } from '../../../shared/domain/errors.js';
 import { urlBuilder } from '../../../shared/infrastructure/utils/url-builder.js';
 import { createAccountCreationEmail } from '../emails/create-account-creation.email.js';
+import { InvalidOrAlreadyUsedEmailError } from '../errors.js';
 
 /**
  * @param {Object} params
@@ -90,7 +90,7 @@ export { createUser };
  * @private
  */
 function _manageEmailAvailabilityError(error) {
-  return _manageError(error, AlreadyRegisteredEmailError, 'email', 'ALREADY_REGISTERED_EMAIL');
+  return _manageError(error, InvalidOrAlreadyUsedEmailError, 'email', 'INVALID_OR_ALREADY_USED_EMAIL');
 }
 
 /**
