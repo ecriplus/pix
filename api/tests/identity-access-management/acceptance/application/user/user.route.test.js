@@ -768,7 +768,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
 
       // then
       expect(response.statusCode).to.equal(400);
-      expect(response.result.errors[0].detail).to.equal('Cette adresse e-mail est déjà utilisée.');
+      expect(response.result.errors[0].detail).to.equal('Adresse e-mail invalide ou déjà utilisée');
     });
 
     it('should return 403 if requested user is not the same as authenticated user', async function () {

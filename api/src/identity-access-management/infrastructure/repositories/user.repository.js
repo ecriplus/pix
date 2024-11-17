@@ -1,4 +1,5 @@
 import { knex } from '../../../../db/knex-database-connection.js';
+import { InvalidOrAlreadyUsedEmailError } from '../../../identity-access-management/domain/errors.js';
 import * as organizationFeaturesApi from '../../../organizational-entities/application/api/organization-features-api.js';
 import { Organization } from '../../../organizational-entities/domain/models/Organization.js';
 import { OrganizationLearnerForAdmin } from '../../../prescription/learner-management/domain/read-models/OrganizationLearnerForAdmin.js';
@@ -6,7 +7,6 @@ import * as organizationLearnerImportFormatRepository from '../../../prescriptio
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import {
   AlreadyExistingEntityError,
-  AlreadyRegisteredEmailError,
   AlreadyRegisteredUsernameError,
   UserNotFoundError,
 } from '../../../shared/domain/errors.js';
@@ -249,7 +249,7 @@ const updateWithEmailConfirmed = function ({ id, userAttributes }) {
 const checkIfEmailIsAvailable = async function (email) {
   const existingUserEmail = await knex('users').whereRaw('LOWER("email") = ?', email.toLowerCase()).first();
 
-  if (existingUserEmail) throw new AlreadyRegisteredEmailError();
+  if (existingUserEmail) throw new InvalidOrAlreadyUsedEmailError();
 
   return email;
 };
