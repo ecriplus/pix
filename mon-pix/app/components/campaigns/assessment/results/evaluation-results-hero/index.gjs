@@ -8,7 +8,6 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import ENV from 'mon-pix/config/environment';
 
 import MarkdownToHtml from '../../../../markdown-to-html';
 import AcquiredBadges from './acquired-badges';
@@ -24,10 +23,6 @@ export default class EvaluationResultsHero extends Component {
 
   @tracked hasGlobalError = false;
   @tracked isButtonLoading = false;
-
-  get isAutonomousCourse() {
-    return this.args.campaign.organizationId === ENV.APP.AUTONOMOUS_COURSES_ORGANIZATION_ID;
-  }
 
   get masteryRatePercentage() {
     return Math.round(this.args.campaignParticipationResult.masteryRate * 100);
@@ -47,18 +42,22 @@ export default class EvaluationResultsHero extends Component {
     };
   }
 
+  get isSharableCampaign() {
+    return !this.args.campaign.isSimplifiedAccess;
+  }
+
   get showCustomOrganizationBlock() {
     const hasCustomContent = this.args.campaign.customResultPageText || this.args.campaign.hasCustomResultPageButton;
-    return hasCustomContent && this.args.campaignParticipationResult.isShared;
+    return hasCustomContent && (!this.isSharableCampaign || this.args.campaignParticipationResult.isShared);
+  }
+
+  get hasQuestResults() {
+    return this.args.questResults && this.args.questResults.length > 0;
   }
 
   @action
   handleSeeTrainingsClick() {
     this.args.showTrainings();
-  }
-
-  get hasQuestResults() {
-    return this.args.questResults && this.args.questResults.length > 0;
   }
 
   @action
@@ -144,52 +143,49 @@ export default class EvaluationResultsHero extends Component {
         <h2 class="evaluation-results-hero-details__title">
           {{t "pages.skill-review.hero.bravo" name=this.currentUser.user.firstName}}
         </h2>
+
         {{#if @campaignParticipationResult.hasReachedStage}}
           <div class="evaluation-results-hero-details__stage-message" data-testid="stage-message">
             <MarkdownToHtml @isInline={{true}} @markdown={{@campaignParticipationResult.reachedStage.message}} />
           </div>
         {{/if}}
-        {{#if @campaignParticipationResult.isShared}}
-          <PixMessage class="evaluation-results-hero-results__shared-message" @type="success" @withIcon={{true}}>
-            {{t "pages.skill-review.hero.shared-message"}}
-          </PixMessage>
-          {{#if @hasTrainings}}
-            <p class="evaluation-results-hero-details__explanations">
-              {{t "pages.skill-review.hero.explanations.trainings"}}
-            </p>
-          {{/if}}
-        {{else}}
-          {{#unless this.isAutonomousCourse}}
+
+        {{#if this.isSharableCampaign}}
+          {{#if @campaignParticipationResult.isShared}}
+            <PixMessage class="evaluation-results-hero-results__shared-message" @type="success" @withIcon={{true}}>
+              {{t "pages.skill-review.hero.shared-message"}}
+            </PixMessage>
+            {{#if @hasTrainings}}
+              <p class="evaluation-results-hero-details__explanations">
+                {{t "pages.skill-review.hero.explanations.trainings"}}
+              </p>
+            {{/if}}
+          {{else}}
             <p class="evaluation-results-hero-details__explanations">
               {{t "pages.skill-review.hero.explanations.send-results"}}
             </p>
-          {{/unless}}
+          {{/if}}
+          {{#if @campaignParticipationResult.canImprove}}
+            <p class="evaluation-results-hero-details__explanations">
+              {{t "pages.skill-review.hero.explanations.improve"}}
+            </p>
+          {{/if}}
         {{/if}}
-        {{#if @campaignParticipationResult.canImprove}}
-          <p class="evaluation-results-hero-details__explanations">
-            {{t "pages.skill-review.hero.explanations.improve"}}
-          </p>
-        {{/if}}
+
         <div class="evaluation-results-hero-details__actions">
-          {{#if @campaignParticipationResult.isShared}}
-            {{#if @hasTrainings}}
-              <PixButton @triggerAction={{this.handleSeeTrainingsClick}} @size="large">
-                {{t "pages.skill-review.hero.see-trainings"}}
-              </PixButton>
-            {{else}}
-              {{#unless @campaign.hasCustomResultPageButton}}
-                <PixButtonLink @route="authentication.login" @size="large">
-                  {{t "navigation.back-to-homepage"}}
-                </PixButtonLink>
-              {{/unless}}
-            {{/if}}
-          {{else}}
-            {{#if this.isAutonomousCourse}}
-              {{#unless @campaign.hasCustomResultPageButton}}
-                <PixButtonLink @route="authentication.login" @size="large">
-                  {{t "navigation.back-to-homepage"}}
-                </PixButtonLink>
-              {{/unless}}
+          {{#if this.isSharableCampaign}}
+            {{#if @campaignParticipationResult.isShared}}
+              {{#if @hasTrainings}}
+                <PixButton @triggerAction={{this.handleSeeTrainingsClick}} @size="large">
+                  {{t "pages.skill-review.hero.see-trainings"}}
+                </PixButton>
+              {{else}}
+                {{#unless @campaign.hasCustomResultPageButton}}
+                  <PixButtonLink @route="authentication.login" @size="large">
+                    {{t "navigation.back-to-homepage"}}
+                  </PixButtonLink>
+                {{/unless}}
+              {{/if}}
             {{else}}
               <PixButton
                 @triggerAction={{this.handleShareResultsClick}}
@@ -199,17 +195,22 @@ export default class EvaluationResultsHero extends Component {
                 {{t "pages.skill-review.actions.send"}}
               </PixButton>
             {{/if}}
-          {{/if}}
-
-          {{#if @campaignParticipationResult.canImprove}}
-            <PixButton
-              @variant="tertiary"
-              @size="large"
-              @triggerAction={{this.improveResults}}
-              @isLoading={{this.isButtonLoading}}
-            >
-              {{t "pages.skill-review.actions.improve"}}
-            </PixButton>
+            {{#if @campaignParticipationResult.canImprove}}
+              <PixButton
+                @variant="tertiary"
+                @size="large"
+                @triggerAction={{this.improveResults}}
+                @isLoading={{this.isButtonLoading}}
+              >
+                {{t "pages.skill-review.actions.improve"}}
+              </PixButton>
+            {{/if}}
+          {{else}}
+            {{#unless @campaign.hasCustomResultPageButton}}
+              <PixButtonLink @route="authentication.login" @size="large">
+                {{t "navigation.back-to-homepage"}}
+              </PixButtonLink>
+            {{/unless}}
           {{/if}}
 
           {{#if this.hasGlobalError}}
@@ -220,16 +221,19 @@ export default class EvaluationResultsHero extends Component {
             </div>
           {{/if}}
         </div>
+
         {{#if @campaignParticipationResult.acquiredBadges.length}}
           <AcquiredBadges @acquiredBadges={{@campaignParticipationResult.acquiredBadges}} />
         {{/if}}
       </div>
+
       {{#if this.showCustomOrganizationBlock}}
         <CustomOrganizationBlock
           @campaign={{@campaign}}
           @campaignParticipationResult={{@campaignParticipationResult}}
         />
       {{/if}}
+
       {{#if @campaignParticipationResult.canRetry}}
         <RetryOrResetBlock @campaign={{@campaign}} @campaignParticipationResult={{@campaignParticipationResult}} />
       {{/if}}
