@@ -1,3 +1,5 @@
+import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import {
   createServer,
@@ -268,13 +270,43 @@ describe('Certification | Session Management | Acceptance | Application | Routes
 
       const session = databaseBuilder.factory.buildSession({
         publishedAt: new Date('2018-12-01T01:02:03Z'),
+        version: SESSIONS_VERSIONS.V3,
       });
 
       const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
         sessionId: session.id,
         userId,
         isRejectedForFraud: true,
+        version: AlgorithmEngineVersion.V3,
       });
+
+      const configurationCreatorId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildCompetenceScoringConfiguration({
+        createdByUserId: configurationCreatorId,
+        configuration: [
+          {
+            competence: '1.1',
+            values: [
+              {
+                bounds: {
+                  max: 0,
+                  min: -5,
+                },
+                competenceLevel: 0,
+              },
+              {
+                bounds: {
+                  max: 5,
+                  min: 0,
+                },
+                competenceLevel: 1,
+              },
+            ],
+          },
+        ],
+      });
+      databaseBuilder.factory.buildScoringConfiguration({ createdByUserId: configurationCreatorId });
+      databaseBuilder.factory.buildFlashAlgorithmConfiguration();
 
       const { assessment, assessmentResult } = await createSuccessfulCertificationCourse({
         sessionId: session.id,
