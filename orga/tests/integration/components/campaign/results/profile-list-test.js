@@ -156,7 +156,42 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
       assert.ok(screen.getByRole('cell', { name: '01/02/2020' }));
     });
 
-    test('it should display correct evolution', async function (assert) {
+    test('it should not display evolution if campaign is not multiple sendings', async function (assert) {
+      // given
+      this.campaign = store.createRecord('campaign', {
+        id: '1',
+        name: 'campagne 1',
+        participationsCount: 1,
+        multipleSendings: false,
+      });
+      this.profiles = [
+        {
+          firstName: 'Alice',
+          lastName: 'Red',
+          participantExternalId: '789',
+          evolution: null,
+          sharedAt: new Date(2020, 1, 1),
+        },
+      ];
+      this.profiles.meta = { rowCount: 1 };
+
+      // when
+      const screen = await render(
+        hbs`<Campaign::Results::ProfileList
+  @campaign={{this.campaign}}
+  @profiles={{this.profiles}}
+  @onClickParticipant={{this.noop}}
+  @onFilter={{this.noop}}
+  @selectedDivisions={{this.divisions}}
+  @selectedGroups={{this.groups}}
+/>`,
+      );
+
+      // then
+      assert.notOk(screen.queryByRole('cell', { name: t('pages.profiles-list.table.evolution.unavailable') }));
+    });
+
+    test('it should display correct evolution if campaign is multiple sendings', async function (assert) {
       // given
       this.campaign = store.createRecord('campaign', {
         id: '1',
@@ -215,7 +250,7 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
       assert.ok(screen.getByRole('cell', { name: t('pages.profiles-list.table.evolution.unavailable') }));
     });
 
-    test('it should display number of profiles shares', async function (assert) {
+    test('it should display number of profiles shares if campaign is multiple sendings', async function (assert) {
       // given
       this.campaign = store.createRecord('campaign', {
         id: '1',
@@ -249,6 +284,42 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
 
       // then
       assert.ok(screen.getByRole('cell', { name: '3' }));
+    });
+
+    test('it should not display number of profiles shares if campaign is not multiple sendings', async function (assert) {
+      // given
+      this.campaign = store.createRecord('campaign', {
+        id: '1',
+        name: 'campagne 1',
+        participationsCount: 1,
+        multipleSendings: false,
+      });
+      this.profiles = [
+        {
+          firstName: 'John',
+          lastName: 'Doe',
+          participantExternalId: '123',
+          sharedProfileCount: 1,
+          evolution: 'decrease',
+          sharedAt: new Date(2020, 1, 1),
+        },
+      ];
+      this.profiles.meta = { rowCount: 1 };
+
+      // when
+      const screen = await render(
+        hbs`<Campaign::Results::ProfileList
+  @campaign={{this.campaign}}
+  @profiles={{this.profiles}}
+  @onClickParticipant={{this.noop}}
+  @onFilter={{this.noop}}
+  @selectedDivisions={{this.divisions}}
+  @selectedGroups={{this.groups}}
+/>`,
+      );
+
+      // then
+      assert.notOk(screen.queryByRole('cell', { name: '1' }));
     });
 
     test('it should display the profile list with external id', async function (assert) {
