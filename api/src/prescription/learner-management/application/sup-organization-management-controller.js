@@ -28,10 +28,8 @@ const importSupOrganizationLearners = async function (
       Parser: SupOrganizationLearnerParser,
       organizationId,
       i18n: request.i18n,
-    });
-    await usecases.importSupOrganizationLearners({
-      organizationId,
-      i18n: request.i18n,
+      type: 'ADDITIONNAL_STUDENT',
+      performJob: true,
     });
   } finally {
     try {

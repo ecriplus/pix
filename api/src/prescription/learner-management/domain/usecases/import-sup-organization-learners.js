@@ -3,13 +3,13 @@ import { getDataBuffer } from '../../infrastructure/utils/bufferize/get-data-buf
 import { AggregateImportError } from '../errors.js';
 
 const importSupOrganizationLearners = async function ({
-  organizationId,
+  organizationImportId,
   i18n,
   supOrganizationLearnerRepository,
   organizationImportRepository,
   importStorage,
 }) {
-  const organizationImport = await organizationImportRepository.getLastByOrganizationId(organizationId);
+  const organizationImport = await organizationImportRepository.get(organizationImportId);
   const errors = [];
 
   // Reading File
@@ -17,7 +17,7 @@ const importSupOrganizationLearners = async function ({
     const readableStream = await importStorage.readFile({ filename: organizationImport.filename });
 
     const buffer = await getDataBuffer(readableStream);
-    const parser = SupOrganizationLearnerParser.buildParser(buffer, organizationId, i18n);
+    const parser = SupOrganizationLearnerParser.buildParser(buffer, organizationImport.organizationId, i18n);
 
     const { learners } = parser.parse(parser.getFileEncoding());
 

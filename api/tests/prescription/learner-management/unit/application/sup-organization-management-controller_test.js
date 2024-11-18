@@ -23,7 +23,6 @@ describe('Unit | Controller | sup-organization-management-controller', function 
 
     sinon.stub(usecases, 'uploadCsvFile');
     sinon.stub(usecases, 'validateCsvFile');
-    sinon.stub(usecases, 'importSupOrganizationLearners');
     sinon.stub(usecases, 'replaceSupOrganizationLearners');
     supOrganizationLearnerWarningSerializerStub = { serialize: sinon.stub() };
     logErrorWithCorrelationIdsStub = sinon.stub();
@@ -41,12 +40,6 @@ describe('Unit | Controller | sup-organization-management-controller', function 
       };
       usecases.uploadCsvFile.withArgs({ userId, organizationId, payload: request.payload, i18n }).resolves();
       usecases.validateCsvFile.withArgs({ organizationId, i18n }).resolves();
-      usecases.importSupOrganizationLearners
-        .withArgs({
-          organizationId,
-          i18n,
-        })
-        .resolves();
 
       supOrganizationLearnerWarningSerializerStub.serialize
         .withArgs({ id: organizationId, warnings })
@@ -60,13 +53,7 @@ describe('Unit | Controller | sup-organization-management-controller', function 
       });
 
       // then
-      expect(
-        sinon.assert.callOrder(
-          usecases.uploadCsvFile,
-          usecases.validateCsvFile,
-          usecases.importSupOrganizationLearners,
-        ),
-      ).to.not.throws;
+      expect(sinon.assert.callOrder(usecases.uploadCsvFile, usecases.validateCsvFile)).to.not.throws;
       expect(response.statusCode).to.be.equal(204);
 
       expect(unlinkStub).to.have.been.calledWith(path);
