@@ -16,7 +16,7 @@ export default class CertificationInformationsController extends Controller {
   // Properties
   @alias('model.certification') certification;
   @alias('model.countries') countries;
-  @service notifications;
+  @service pixToast;
   @service intl;
 
   @tracked displayConfirm = false;
@@ -80,9 +80,9 @@ export default class CertificationInformationsController extends Controller {
   async resolveIssueReport(issueReport, resolutionLabel) {
     try {
       await issueReport.save({ adapterOptions: { resolutionLabel } });
-      this.notifications.success('Le signalement a été résolu.');
+      this.pixToast.sendSuccessNotification({ message: 'Le signalement a été résolu.' });
     } catch (error) {
-      this.notifications.error('Une erreur est survenue :\n' + error?.errors[0]?.detail);
+      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue :\n' + error?.errors[0]?.detail });
     }
     await this.certification.reload();
   }
@@ -98,8 +98,7 @@ export default class CertificationInformationsController extends Controller {
   }
 
   async saveCertificationCourse() {
-    const save = await this.certification.save({ adapterOptions: { updateJuryComment: false } });
-    return save;
+    return await this.certification.save({ adapterOptions: { updateJuryComment: false } });
   }
 
   @action
@@ -164,7 +163,7 @@ export default class CertificationInformationsController extends Controller {
       await this.certification.save({ adapterOptions: { isCertificationCancel: true } });
       await this.certification.reload();
     } catch (error) {
-      this.notifications.error('Une erreur est survenue.');
+      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
 
     this.displayConfirm = false;
@@ -176,7 +175,7 @@ export default class CertificationInformationsController extends Controller {
       await this.certification.save({ adapterOptions: { isCertificationUncancel: true } });
       await this.certification.reload();
     } catch (error) {
-      this.notifications.error('Une erreur est survenue.');
+      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
 
     this.displayConfirm = false;
@@ -188,7 +187,7 @@ export default class CertificationInformationsController extends Controller {
       await this.certification.save({ adapterOptions: { isCertificationReject: true } });
       await this.certification.reload();
     } catch (error) {
-      this.notifications.error('Une erreur est survenue.');
+      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
 
     this.displayConfirm = false;
@@ -200,7 +199,7 @@ export default class CertificationInformationsController extends Controller {
       await this.certification.save({ adapterOptions: { isCertificationUnreject: true } });
       await this.certification.reload();
     } catch (error) {
-      this.notifications.error('Une erreur est survenue.');
+      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
 
     this.displayConfirm = false;
@@ -210,17 +209,17 @@ export default class CertificationInformationsController extends Controller {
   async onCandidateInformationSave() {
     try {
       await this.saveCertificationCourse();
-      this.notifications.success('Les informations du candidat ont bien été enregistrées.');
+      this.pixToast.sendSuccessNotification({ message: 'Les informations du candidat ont bien été enregistrées.' });
       this.isCandidateEditModalOpen = false;
-    } catch (e) {
-      if (e.errors && e.errors.length > 0) {
-        e.errors.forEach((error) => {
-          this.notifications.error(error.detail);
+    } catch (error) {
+      if (error.errors && error.errors.length > 0) {
+        error.errors.forEach((error) => {
+          this.pixToast.sendErrorNotification({ message: error.detail });
         });
       } else {
-        this.notifications.error(e);
+        this.pixToast.sendErrorNotification({ message: error });
       }
-      throw e;
+      throw error;
     }
   }
 
@@ -228,10 +227,10 @@ export default class CertificationInformationsController extends Controller {
   async onJuryCommentSave(commentByJury) {
     try {
       await this.saveAssessmentResult(commentByJury);
-      this.notifications.success('Le commentaire du jury a bien été enregistré.');
+      this.pixToast.sendSuccessNotification({ message: 'Le commentaire du jury a bien été enregistré.' });
       return true;
-    } catch (e) {
-      this.notifications.error("Le commentaire du jury n'a pas pu être enregistré.");
+    } catch (_) {
+      this.pixToast.sendErrorNotification({ message: "Le commentaire du jury n'a pas pu être enregistré." });
       return false;
     }
   }

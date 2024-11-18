@@ -10,7 +10,7 @@ import AdministrationBlockLayout from '../block-layout';
 
 export default class CertificationScoringConfiguration extends Component {
   @service store;
-  @service notifications;
+  @service pixToast;
   certificationScoringConfiguration = '';
 
   @action
@@ -24,9 +24,9 @@ export default class CertificationScoringConfiguration extends Component {
     const adapter = this.store.adapterFor('scoring-configuration');
     try {
       await adapter.updateCertificationScoringConfiguration(this.certificationScoringConfiguration);
-      this.notifications.success('Configuration enregistrée');
-    } catch (e) {
-      this.notifications.error("La config n'a pas pu être ajoutée");
+      this.pixToast.sendSuccessNotification({ message: 'Configuration enregistrée' });
+    } catch (_) {
+      this.pixToast.sendErrorNotification({ message: "La config n'a pas pu être ajoutée" });
     }
   }
 

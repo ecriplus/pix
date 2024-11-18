@@ -5,7 +5,7 @@ import { tracked } from '@glimmer/tracking';
 import get from 'lodash/get';
 
 export default class SessionToBePublishedController extends Controller {
-  @service notifications;
+  @service pixToast;
   @service store;
   @service accessControl;
   @tracked shouldShowModal = false;
@@ -16,9 +16,9 @@ export default class SessionToBePublishedController extends Controller {
     try {
       await adapter.publishSession(toBePublishedSession.id);
       this.send('refreshModel');
-    } catch (err) {
-      const finalErr = get(err, 'errors[0].detail', err);
-      this.notifications.error(finalErr);
+    } catch (error) {
+      const errorMessage = get(error, 'errors[0].detail', error);
+      this.pixToast.sendErrorNotification({ message: errorMessage });
     }
   }
 
@@ -33,10 +33,10 @@ export default class SessionToBePublishedController extends Controller {
         this.send('refreshModel');
       } else {
         this._removePublishedSessionsFromStore(this.model);
-        this.notifications.success('Les sessions ont été publiées avec succès');
+        this.pixToast.sendSuccessNotification({ message: 'Les sessions ont été publiées avec succès' });
       }
-    } catch (err) {
-      this.notifications.error(err);
+    } catch (error) {
+      this.pixToast.sendErrorNotification({ message: error });
     }
     this.hideConfirmModal();
   }
@@ -52,11 +52,11 @@ export default class SessionToBePublishedController extends Controller {
   }
 
   _notifyPublicationFailure(error) {
-    this.notifications.error(
-      "Une ou plusieurs erreurs se sont produites, veuillez conserver la référence suivante pour investigation auprès de l'équipe technique : " +
+    this.pixToast.sendErrorNotification({
+      message:
+        "Une ou plusieurs erreurs se sont produites, veuillez conserver la référence suivante pour investigation auprès de l'équipe technique : " +
         get(error, 'errors[0].detail'),
-      { autoClear: false },
-    );
+    });
   }
 
   _batchPublicationFailed(error) {
