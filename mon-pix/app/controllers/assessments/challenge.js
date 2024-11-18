@@ -252,8 +252,8 @@ export default class ChallengeController extends Controller {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Vocalisation',
-      'pix-event-action': `Assessment : ${this.model.assessment.id} Epreuve : ${this.model.challenge.id}`,
-      'pix-event-name': `Click sur le bouton d'activation de la vocalisation : ${this.isTextToSpeechActivated ? 'activé' : 'désactivé'}`,
+      'pix-event-action': 'Activation globale de la vocalisation',
+      'pix-event-name': `Clic sur le bouton d'activation de la vocalisation : ${this.isTextToSpeechActivated ? 'activé' : 'désactivé'}`,
     });
   }
 }

@@ -112,8 +112,8 @@ export default class ChallengeStatement extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Vocalisation',
-      'pix-event-action': `Assessment : ${this.args.assessment.id} Epreuve : ${this.args.challenge.id}`,
-      'pix-event-name': `Click sur le bouton de vocalisation : ${this.isSpeaking ? 'lecture' : 'stop'}`,
+      'pix-event-action': "Lecture d'une épreuve",
+      'pix-event-name': `Clic sur le bouton de lecture d'épreuve : ${this.isSpeaking ? 'play' : 'stop'}`,
     });
   }
 
