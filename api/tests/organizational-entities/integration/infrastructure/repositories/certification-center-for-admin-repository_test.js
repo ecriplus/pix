@@ -1,8 +1,8 @@
-import * as CertificationCenterForAdminRepository from '../../../../lib/infrastructure/repositories/certification-center-for-admin-repository.js';
-import { CenterForAdmin } from '../../../../src/certification/enrolment/domain/models/CenterForAdmin.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
+import { CenterForAdmin } from '../../../../../src/certification/enrolment/domain/models/CenterForAdmin.js';
+import * as CertificationCenterForAdminRepository from '../../../../../src/organizational-entities/infrastructure/repositories/certification-center-for-admin.repository.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
-describe('Integration | Repository | certification-center-for-admin', function () {
+describe('Integration | Organizational Entities | Infrastructure | Repository | certification-center-for-admin', function () {
   let clock;
   const now = new Date('2021-11-16');
 
@@ -15,7 +15,7 @@ describe('Integration | Repository | certification-center-for-admin', function (
   });
 
   describe('#save', function () {
-    it('should save the given certification center', async function () {
+    it('saves the given certification center', async function () {
       // given
       const certificationCenterId = 1;
       const certificationCenterName = 'CertificationCenterName';
@@ -54,7 +54,7 @@ describe('Integration | Repository | certification-center-for-admin', function (
       await databaseBuilder.commit();
     });
 
-    it('should update the given certification center', async function () {
+    it('updates the given certification center', async function () {
       // when
       await CertificationCenterForAdminRepository.update({
         id: center.id,

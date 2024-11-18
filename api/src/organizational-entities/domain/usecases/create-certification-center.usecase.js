@@ -1,6 +1,16 @@
-import { ComplementaryCertificationHabilitation } from '../../../src/shared/domain/models/ComplementaryCertificationHabilitation.js';
-import * as certificationCenterCreationValidator from '../validators/certification-center-creation-validator.js';
+import * as certificationCenterCreationValidator from '../../../../lib/domain/validators/certification-center-creation-validator.js';
+import { ComplementaryCertificationHabilitation } from '../../../shared/domain/models/ComplementaryCertificationHabilitation.js';
 
+/**
+ *
+ * @param{object} params
+ * @param{CertificationCenter} params.certificationCenter
+ * @param{string[]} params.complementaryCertificationIds
+ * @param{ComplementaryCertificationHabilitationRepository} params.complementaryCertificationHabilitationRepository
+ * @param{CertificationCenterForAdminRepository} params.certificationCenterForAdminRepository
+ * @param{DataProtectionOfficerRepository} params.dataProtectionOfficerRepository
+ * @returns {Promise<*>}
+ */
 const createCertificationCenter = async function ({
   certificationCenter,
   complementaryCertificationIds,
