@@ -208,7 +208,7 @@ describe('Acceptance | Identity Access Management | Application | Route | accoun
       expect(response.statusCode).to.equal(204);
     });
 
-    it('returns 400 if email already exists', async function () {
+    it('returns 422 if email already exists', async function () {
       // given
       const newEmail = 'new_email@example.net';
       await createUserWithSeveralOrganizationLearners({ email: newEmail });
@@ -233,8 +233,8 @@ describe('Acceptance | Identity Access Management | Application | Route | accoun
       const response = await server.inject(options);
 
       // then
-      expect(response.statusCode).to.equal(400);
-      expect(response.result.errors[0].detail).to.equal('Cette adresse e-mail est déjà utilisée.');
+      expect(response.statusCode).to.equal(422);
+      expect(response.result.errors[0].detail).to.equal('Invalid or already used e-mail address');
     });
   });
 });
