@@ -264,6 +264,13 @@ const reconcileUserByNationalStudentIdAndOrganizationId = async function ({
   }
 };
 
+const countByUserId = async function (userId) {
+  const knexConn = DomainTransaction.getConnection();
+  const { count } = await knexConn('organization-learners').count('id').where({ userId }).first();
+
+  return count;
+};
+
 // copied from api/lib/repositories/organization-learner-repository-test.js-
 const findByUserId = async function ({ userId }) {
   const knexConn = DomainTransaction.getConnection();
@@ -298,6 +305,7 @@ const reconcileUserToOrganizationLearner = async function ({ userId, organizatio
 
 export {
   addOrUpdateOrganizationOfOrganizationLearners,
+  countByUserId,
   disableAllOrganizationLearnersInOrganization,
   disableCommonOrganizationLearnersFromOrganizationId,
   dissociateUserFromOrganizationLearner,

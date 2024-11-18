@@ -6,6 +6,7 @@ import { CommonOrganizationLearner } from '../../../../../../src/prescription/le
 import { OrganizationLearnerForAdmin } from '../../../../../../src/prescription/learner-management/domain/read-models/OrganizationLearnerForAdmin.js';
 import {
   addOrUpdateOrganizationOfOrganizationLearners,
+  countByUserId,
   disableAllOrganizationLearnersInOrganization,
   disableCommonOrganizationLearnersFromOrganizationId,
   findAllCommonLearnersFromOrganizationId,
@@ -1827,6 +1828,79 @@ describe('Integration | Repository | Organization Learner Management | Organizat
 
       // then
       expect(error).to.be.instanceOf(UserCouldNotBeReconciledError);
+    });
+  });
+
+  describe('#countByUserId', function () {
+    let userId;
+    let organizationId, otherOrganizationId;
+
+    beforeEach(async function () {
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+      otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
+
+      userId = databaseBuilder.factory.buildUser().id;
+
+      await databaseBuilder.commit();
+    });
+
+    context('when there is no organization learner with userId', function () {
+      it('should return 0', async function () {
+        // given
+        const notExistingUserId = 0;
+
+        // when
+        const result = await countByUserId(notExistingUserId);
+        // then
+        expect(result).to.equal(0);
+      });
+    });
+
+    context('when organization learner with userId exist', function () {
+      beforeEach(async function () {
+        const otherUserId = databaseBuilder.factory.buildUser().id;
+
+        databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId });
+        databaseBuilder.factory.buildOrganizationLearner({ organizationId: otherOrganizationId, userId });
+        databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId: otherUserId });
+
+        await databaseBuilder.commit();
+      });
+      it('should return the number of organizationLearners with userId', async function () {
+        // when
+        const result = await countByUserId(userId);
+        // then
+        expect(result).to.equal(2);
+      });
+    });
+
+    context('when disabled or deleted organization learner with userId exist', function () {
+      let userLinkToNotActiveOrganizationLearnerId;
+
+      beforeEach(async function () {
+        userLinkToNotActiveOrganizationLearnerId = databaseBuilder.factory.buildUser().id;
+
+        databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          userId: userLinkToNotActiveOrganizationLearnerId,
+          deletedAt: new Date(),
+          isDisabled: true,
+        });
+        databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: otherOrganizationId,
+          userId: userLinkToNotActiveOrganizationLearnerId,
+          isDisabled: true,
+        });
+
+        await databaseBuilder.commit();
+      });
+
+      it('should return the number of organizationLearners', async function () {
+        // when
+        const result = await countByUserId(userLinkToNotActiveOrganizationLearnerId);
+        // then
+        expect(result).to.equal(2);
+      });
     });
   });
 });
