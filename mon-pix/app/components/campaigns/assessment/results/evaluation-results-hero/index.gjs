@@ -2,6 +2,7 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixMessage from '@1024pix/pix-ui/components/pix-message';
 import PixStars from '@1024pix/pix-ui/components/pix-stars';
+import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -11,6 +12,7 @@ import ENV from 'mon-pix/config/environment';
 
 import MarkdownToHtml from '../../../../markdown-to-html';
 import AcquiredBadges from './acquired-badges';
+import AttestationResult from './attestation-result';
 import CustomOrganizationBlock from './custom-organization-block';
 import RetryOrResetBlock from './retry-or-reset-block';
 
@@ -55,6 +57,10 @@ export default class EvaluationResultsHero extends Component {
     this.args.showTrainings();
   }
 
+  get hasQuestResults() {
+    return this.args.questResults && this.args.questResults.length > 0;
+  }
+
   @action
   async improveResults() {
     if (this.isButtonLoading) return;
@@ -95,6 +101,11 @@ export default class EvaluationResultsHero extends Component {
     }
   }
 
+  @action
+  setGlobalError(value) {
+    this.hasGlobalError = value;
+  }
+
   <template>
     <div class="evaluation-results-hero">
       <div class="evaluation-results-hero__results">
@@ -114,6 +125,7 @@ export default class EvaluationResultsHero extends Component {
             }}
             @color="yellow"
           />
+
           <div class="evaluation-results-hero-results__stars-text" role="presentation">
             {{t
               "pages.skill-review.stage.starsAcquired"
@@ -122,6 +134,11 @@ export default class EvaluationResultsHero extends Component {
             }}
           </div>
         {{/if}}
+
+        {{#if this.hasQuestResults}}
+          <AttestationResult @results={{@questResults}} @onError={{(fn this.setGlobalError true)}} />
+        {{/if}}
+
       </div>
       <div class="evaluation-results-hero__details">
         <h2 class="evaluation-results-hero-details__title">
