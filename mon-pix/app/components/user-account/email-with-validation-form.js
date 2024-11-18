@@ -11,6 +11,8 @@ const ERROR_INPUT_MESSAGE_MAP = {
   invalidEmail: 'pages.user-account.account-update-email-with-validation.fields.errors.invalid-email',
   emptyPassword: 'pages.user-account.account-update-email-with-validation.fields.errors.empty-password',
   emailAlreadyExist: 'pages.user-account.account-update-email-with-validation.fields.errors.new-email-already-exist',
+  invalidOrAlreadyUsedEmail:
+    'pages.user-account.account-update-email-with-validation.fields.errors.invalid-or-already-used-email',
   invalidPassword: 'pages.user-account.account-update-email-with-validation.fields.errors.invalid-password',
   unknownError: 'pages.user-account.account-update-email.fields.errors.unknown-error',
 };
@@ -81,17 +83,13 @@ export default class EmailWithValidationForm extends Component {
     if (status === '422') {
       const pointer = get(response, 'errors[0].source.pointer');
       if (pointer.endsWith('email')) {
-        this.errorMessage = this.intl.t(ERROR_INPUT_MESSAGE_MAP['invalidEmail']);
+        this.errorMessage = this.intl.t(ERROR_INPUT_MESSAGE_MAP['invalidOrAlreadyUsedEmail']);
       }
       if (pointer.endsWith('password')) {
         this.errorMessage = this.intl.t(ERROR_INPUT_MESSAGE_MAP['emptyPassword']);
       }
     } else if (status === '400') {
-      const code = get(response, 'errors[0].code');
       this.errorMessage = this.intl.t(ERROR_INPUT_MESSAGE_MAP['invalidPassword']);
-      if (code === 'ACCOUNT_WITH_EMAIL_ALREADY_EXISTS') {
-        this.errorMessage = this.intl.t(ERROR_INPUT_MESSAGE_MAP['emailAlreadyExist']);
-      }
     } else {
       this.errorMessage = this.intl.t(ERROR_INPUT_MESSAGE_MAP['unknownError']);
     }
