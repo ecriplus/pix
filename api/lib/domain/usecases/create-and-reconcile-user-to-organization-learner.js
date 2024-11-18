@@ -119,6 +119,7 @@ function _createDomainUser(userAttributes) {
 }
 
 function _manageEmailAvailabilityError(error) {
+  error = new AlreadyRegisteredEmailError();
   return _manageError(
     error,
     AlreadyRegisteredEmailError,
