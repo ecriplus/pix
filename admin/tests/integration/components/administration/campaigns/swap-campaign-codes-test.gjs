@@ -17,7 +17,6 @@ module('Integration | Component | administration/swap-campaign-codes', function 
     store = this.owner.lookup('service:store');
 
     sinon.stub(notificationService, 'success');
-    sinon.stub(notificationService, 'clearAll');
     sinon.stub(notificationService, 'error');
   });
 
@@ -57,7 +56,6 @@ module('Integration | Component | administration/swap-campaign-codes', function 
       ),
     );
     assert.true(notificationService.error.notCalled);
-    assert.true(notificationService.clearAll.called);
   });
 
   test('it should display common error notification', async function (assert) {
@@ -90,7 +88,6 @@ module('Integration | Component | administration/swap-campaign-codes', function 
 
     // then
     assert.true(swapStub.calledOnce);
-    assert.true(notificationService.clearAll.called);
     assert.true(notificationService.success.notCalled);
     assert.true(notificationService.error.calledOnceWithExactly(t('common.notifications.generic-error')));
   });
@@ -125,7 +122,6 @@ module('Integration | Component | administration/swap-campaign-codes', function 
 
     // then
     assert.true(swapStub.calledOnce);
-    assert.true(notificationService.clearAll.called);
     assert.true(notificationService.success.notCalled);
     assert.true(
       notificationService.error.calledOnceWithExactly(
@@ -164,7 +160,6 @@ module('Integration | Component | administration/swap-campaign-codes', function 
 
     // then
     assert.true(swapStub.calledOnce);
-    assert.true(notificationService.clearAll.called);
     assert.true(notificationService.success.notCalled);
     assert.true(
       notificationService.error.calledOnceWithExactly(

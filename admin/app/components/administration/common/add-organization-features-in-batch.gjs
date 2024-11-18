@@ -15,7 +15,6 @@ export default class AddOrganizationFeaturesInBatch extends Component {
 
   @action
   async addOrganizationFeaturesInBatch(files) {
-    this.notifications.clearAll();
 
     let response;
     try {

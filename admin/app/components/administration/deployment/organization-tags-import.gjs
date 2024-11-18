@@ -15,7 +15,6 @@ export default class OrganizationTagsImport extends Component {
 
   @action
   async importOrganizationTags(files) {
-    this.notifications.clearAll();
 
     let response;
     try {

@@ -18,7 +18,6 @@ export default class AnonymizeGarImport extends Component {
   @action
   async anonymizeGar(files) {
     this.isLoading = true;
-    this.notifications.clearAll();
 
     try {
       const token = this.session.data.authenticated.access_token;

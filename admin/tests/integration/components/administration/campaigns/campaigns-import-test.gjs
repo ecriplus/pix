@@ -13,7 +13,7 @@ module('Integration | Component |  administration/campaigns-import', function (h
   setupIntlRenderingTest(hooks);
   setupMirage(hooks);
 
-  let store, adapter, notificationSuccessStub, clearAllStub, saveAdapterStub, notificationErrorStub;
+  let store, adapter, notificationSuccessStub, saveAdapterStub, notificationErrorStub;
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
     adapter = store.adapterFor('import-files');
@@ -21,7 +21,6 @@ module('Integration | Component |  administration/campaigns-import', function (h
     notificationSuccessStub = sinon.stub();
     notificationErrorStub = sinon.stub().returns();
 
-    clearAllStub = sinon.stub();
   });
 
   module('when import succeeds', function () {
@@ -30,7 +29,6 @@ module('Integration | Component |  administration/campaigns-import', function (h
       const file = new Blob(['foo'], { type: `valid-file` });
       class NotificationsStub extends Service {
         success = notificationSuccessStub;
-        clearAll = clearAllStub;
       }
       this.owner.register('service:notifications', NotificationsStub);
       saveAdapterStub.withArgs(file).resolves();
@@ -65,7 +63,6 @@ module('Integration | Component |  administration/campaigns-import', function (h
       const file = new Blob(['foo'], { type: `valid-file` });
       class NotificationsStub extends Service {
         error = notificationErrorStub;
-        clearAll = clearAllStub;
       }
       this.owner.register('service:notifications', NotificationsStub);
 

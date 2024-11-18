@@ -13,7 +13,7 @@ module('Integration | Component |  administration/organizations-import', functio
   setupIntlRenderingTest(hooks);
   setupMirage(hooks);
 
-  let store, adapter, notificationSuccessStub, clearAllStub, saveAdapterStub, notificationErrorStub;
+  let store, adapter, notificationSuccessStub, saveAdapterStub, notificationErrorStub;
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
@@ -22,7 +22,6 @@ module('Integration | Component |  administration/organizations-import', functio
     notificationSuccessStub = sinon.stub();
     notificationErrorStub = sinon.stub().returns();
 
-    clearAllStub = sinon.stub();
   });
 
   module('when import succeeds', function () {
@@ -31,7 +30,6 @@ module('Integration | Component |  administration/organizations-import', functio
       const file = new Blob(['foo'], { type: `valid-file` });
       class NotificationsStub extends Service {
         success = notificationSuccessStub;
-        clearAll = clearAllStub;
       }
       this.owner.register('service:notifications', NotificationsStub);
       saveAdapterStub.withArgs(file).resolves();
@@ -66,7 +64,6 @@ module('Integration | Component |  administration/organizations-import', functio
       const file = new Blob(['foo'], { type: `valid-file` });
       class NotificationsStub extends Service {
         error = notificationErrorStub;
-        clearAll = sinon.stub();
       }
       this.owner.register('service:notifications', NotificationsStub);
 

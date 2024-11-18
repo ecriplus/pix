@@ -12,7 +12,7 @@ module('Unit | Component | update-campaign-code', function (hooks) {
   hooks.beforeEach(function () {
     // given
     updateCampaignCodeStub = sinon.stub();
-    notificationStub = { clearAll: sinon.stub(), success: sinon.stub(), error: sinon.stub() };
+    notificationStub = { sendSuccessNotification: sinon.stub(), sendErrorNotification: sinon.stub() };
     intlStub = sinon.stub();
     component = createGlimmerComponent('component:administration/campaigns/update-campaign-code');
     component.notifications = notificationStub;
@@ -49,7 +49,6 @@ module('Unit | Component | update-campaign-code', function (hooks) {
         await component.updateCode(event);
 
         // then
-        assert.ok(notificationStub.clearAll.calledOnce);
         assert.ok(intlStub.calledWithExactly('components.administration.update-campaign-code.notifications.success'));
         assert.ok(notificationStub.success.calledWithExactly(successMsg));
       });
@@ -65,7 +64,6 @@ module('Unit | Component | update-campaign-code', function (hooks) {
         await component.updateCode(event);
 
         // then
-        assert.ok(notificationStub.clearAll.calledOnce);
         assert.ok(
           intlStub.calledWithExactly(
             'components.administration.update-campaign-code.notifications.error.campaign-code-format',
@@ -85,7 +83,6 @@ module('Unit | Component | update-campaign-code', function (hooks) {
         await component.updateCode(event);
 
         // then
-        assert.ok(notificationStub.clearAll.calledOnce);
         assert.ok(
           intlStub.calledWithExactly(
             'components.administration.update-campaign-code.notifications.error.unique-code-error',
@@ -105,7 +102,6 @@ module('Unit | Component | update-campaign-code', function (hooks) {
         await component.updateCode(event);
 
         // then
-        assert.ok(notificationStub.clearAll.calledOnce);
         assert.ok(
           intlStub.calledWithExactly(
             'components.administration.update-campaign-code.notifications.error.campaign-id-error',
@@ -125,7 +121,6 @@ module('Unit | Component | update-campaign-code', function (hooks) {
         await component.updateCode(event);
 
         // then
-        assert.ok(notificationStub.clearAll.calledOnce);
         assert.ok(intlStub.calledWithExactly('common.notifications.generic-error'));
         assert.ok(notificationStub.error.calledWithExactly(errorMsg));
       });
@@ -141,7 +136,6 @@ module('Unit | Component | update-campaign-code', function (hooks) {
         await component.updateCode(event);
 
         // then
-        assert.ok(notificationStub.clearAll.calledOnce);
         assert.ok(intlStub.calledWithExactly('common.notifications.generic-error'));
         assert.ok(notificationStub.error.calledWithExactly(errorMsg));
       });

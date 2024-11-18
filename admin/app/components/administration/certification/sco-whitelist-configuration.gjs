@@ -15,7 +15,6 @@ export default class ScoWhitelistConfiguration extends Component {
 
   @action
   async importScoWhitelist(files) {
-    this.notifications.clearAll();
     try {
       const fileContent = files[0];
 

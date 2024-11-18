@@ -14,7 +14,6 @@ export default class OrganizationsImport extends Component {
 
   @action
   async importOrganizations(files) {
-    this.notifications.clearAll();
 
     const adapter = this.store.adapterFor('organizations-import');
     try {

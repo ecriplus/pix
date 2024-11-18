@@ -15,7 +15,6 @@ export default class UpdateOrganizationsInBatch extends Component {
 
   @action
   async updateOrganizationsInBatch(files) {
-    this.notifications.clearAll();
 
     let response;
 

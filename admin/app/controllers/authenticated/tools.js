@@ -12,7 +12,6 @@ export default class ToolsController extends Controller {
     const adapter = this.store.adapterFor('import-files');
 
     this.isLoading = true;
-    this.notifications.clearAll();
     try {
       await adapter.importCampaignsToArchive(files);
       this.isLoading = false;

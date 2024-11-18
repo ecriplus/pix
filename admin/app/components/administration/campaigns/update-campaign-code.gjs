@@ -20,7 +20,6 @@ export default class UpdateCampaignCode extends Component {
   async updateCode(event) {
     event.preventDefault();
     this.isLoading = true;
-    this.notifications.clearAll();
 
     const adapter = this.store.adapterFor('update-campaign-code');
     try {

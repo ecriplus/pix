@@ -15,7 +15,6 @@ export default class OidcProvidersImport extends Component {
 
   @action
   async importOidcProviders(files) {
-    this.notifications.clearAll();
 
     let response;
     try {

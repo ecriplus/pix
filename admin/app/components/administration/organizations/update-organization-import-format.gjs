@@ -14,7 +14,6 @@ export default class UpdateOrganizationImportFormat extends Component {
 
   @action
   async uploadOrganizationImportFile(files) {
-    this.notifications.clearAll();
     const adapter = this.store.adapterFor('import-files');
     try {
       await adapter.updateOrganizationImportFormat(files);

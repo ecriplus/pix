@@ -21,7 +21,6 @@ export default class SwapCampaignCodes extends Component {
   async swapCodes(event) {
     event.preventDefault();
     this.isLoading = true;
-    this.notifications.clearAll();
 
     const adapter = this.store.adapterFor('swap-campaign-code');
     try {

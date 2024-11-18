@@ -14,7 +14,6 @@ export default class CampaignsImport extends Component {
 
   @action
   async importCampaigns(files) {
-    this.notifications.clearAll();
 
     const adapter = this.store.adapterFor('import-files');
     try {

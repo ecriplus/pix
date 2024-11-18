@@ -17,7 +17,6 @@ module('Integration | Component | administration/update-campaign-code', function
     store = this.owner.lookup('service:store');
 
     sinon.stub(notificationService, 'success');
-    sinon.stub(notificationService, 'clearAll');
     sinon.stub(notificationService, 'error');
 
     adapter = store.adapterFor('update-campaign-code');
@@ -57,6 +56,5 @@ module('Integration | Component | administration/update-campaign-code', function
       ),
     );
     assert.true(notificationService.error.notCalled);
-    assert.true(notificationService.clearAll.called);
   });
 });

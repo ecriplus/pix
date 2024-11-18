@@ -13,7 +13,7 @@ module('Integration | Component | administration/update-organization-import-form
   setupIntlRenderingTest(hooks);
   setupMirage(hooks);
 
-  let store, adapter, notificationSuccessStub, clearAllStub, saveAdapterStub, notificationErrorStub;
+  let store, adapter, notificationSuccessStub, saveAdapterStub, notificationErrorStub;
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
     adapter = store.adapterFor('import-files');
@@ -21,7 +21,6 @@ module('Integration | Component | administration/update-organization-import-form
     notificationSuccessStub = sinon.stub();
     notificationErrorStub = sinon.stub().returns();
 
-    clearAllStub = sinon.stub();
   });
 
   module('when import succeeds', function () {
@@ -31,7 +30,6 @@ module('Integration | Component | administration/update-organization-import-form
       class NotificationsStub extends Service {
         success = notificationSuccessStub;
         error = notificationErrorStub;
-        clearAll = clearAllStub;
       }
       this.owner.register('service:notifications', NotificationsStub);
       saveAdapterStub.withArgs([files]).resolves();
@@ -61,7 +59,6 @@ module('Integration | Component | administration/update-organization-import-form
       class NotificationsStub extends Service {
         error = notificationErrorStub;
         success = notificationSuccessStub;
-        clearAll = clearAllStub;
       }
       saveAdapterStub.withArgs([files]).rejects({
         errors: [{ status: '422', meta: 'POUET', code: 'MISSING_REQUIRED_FIELD_NAMES' }],
@@ -86,7 +83,6 @@ module('Integration | Component | administration/update-organization-import-form
       class NotificationsStub extends Service {
         error = notificationErrorStub;
         success = notificationSuccessStub;
-        clearAll = clearAllStub;
       }
       saveAdapterStub.withArgs([files]).rejects({
         errors: [{ status: '422', title: "Un soucis avec l'import", code: '422', detail: 'Erreur d’import' }],
