@@ -28,7 +28,7 @@ const importSupOrganizationLearners = async function (
       Parser: SupOrganizationLearnerParser,
       organizationId,
       i18n: request.i18n,
-      type: 'ADDITIONNAL_STUDENT',
+      type: 'ADDITIONAL_STUDENT',
       performJob: true,
     });
   } finally {
@@ -65,10 +65,8 @@ const replaceSupOrganizationLearners = async function (
       Parser: SupOrganizationLearnerParser,
       organizationId,
       i18n: request.i18n,
-    });
-    await usecases.replaceSupOrganizationLearners({
-      organizationId,
-      i18n: request.i18n,
+      type: 'REPLACE_STUDENT',
+      performJob: true,
     });
   } finally {
     // see https://hapi.dev/api/?v=21.3.3#-routeoptionspayloadoutput

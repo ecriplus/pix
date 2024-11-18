@@ -19,13 +19,22 @@ class ImportSupOrganizationLearnersJobController extends JobController {
   }
 
   async handle({ data }) {
-    const { organizationImportId, locale } = data;
+    const { organizationImportId, locale, type } = data;
+
+    const i18n = getI18n(locale);
 
     try {
-      return await await usecases.importSupOrganizationLearners({
-        organizationImportId,
-        i18n: getI18n(locale),
-      });
+      if (type === 'ADDITIONAL_STUDENT') {
+        return await await usecases.importSupOrganizationLearners({
+          organizationImportId,
+          i18n,
+        });
+      } else if (type === 'REPLACE_STUDENT') {
+        return await usecases.replaceSupOrganizationLearners({
+          organizationImportId,
+          i18n,
+        });
+      }
     } catch (err) {
       if (!(err instanceof DomainError)) {
         throw err;

@@ -31,52 +31,104 @@ describe('Unit | Prescription | Application | Jobs | importSupOrganizationLearne
   });
 
   describe('#handle', function () {
-    it('should call usecase', async function () {
-      sinon.stub(usecases, 'importSupOrganizationLearners');
+    describe('#importSupOrganizationLearners', function () {
+      it('should call usecase', async function () {
+        sinon.stub(usecases, 'importSupOrganizationLearners');
 
-      // given
-      const handler = new ImportSupOrganizationLearnersJobController();
-      const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en' };
+        // given
+        const handler = new ImportSupOrganizationLearnersJobController();
+        const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en', type: 'ADDITIONAL_STUDENT' };
 
-      // when
-      await handler.handle({ data });
+        // when
+        await handler.handle({ data });
 
-      // then
-      expect(usecases.importSupOrganizationLearners).to.have.been.calledOnce;
-      expect(usecases.importSupOrganizationLearners).to.have.been.calledWithExactly({
-        organizationImportId: data.organizationImportId,
-        i18n: getI18n(data.locale),
+        // then
+        expect(usecases.importSupOrganizationLearners).to.have.been.calledOnce;
+        expect(usecases.importSupOrganizationLearners).to.have.been.calledWithExactly({
+          organizationImportId: data.organizationImportId,
+          i18n: getI18n(data.locale),
+        });
+      });
+
+      it('should not throw when error is from domain', async function () {
+        const error = new OrganizationLearnersCouldNotBeSavedError();
+        sinon.stub(usecases, 'importSupOrganizationLearners').rejects(error);
+
+        // given
+        const errorStub = sinon.stub();
+        const handler = new ImportSupOrganizationLearnersJobController({ logger: { error: errorStub } });
+        const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en', type: 'ADDITIONAL_STUDENT' };
+
+        // when & then
+        await handler.handle({ data });
+
+        expect(errorStub).to.have.been.calledWithExactly(error);
+      });
+
+      it('should throw when error is not from domain', async function () {
+        const error = new Error();
+        sinon.stub(usecases, 'importSupOrganizationLearners').rejects(error);
+
+        // given
+        const handler = new ImportSupOrganizationLearnersJobController();
+        const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en', type: 'ADDITIONAL_STUDENT' };
+
+        // when
+        const result = await catchErr(handler.handle)({ data });
+
+        // then
+        expect(result).to.equal(error);
       });
     });
 
-    it('should not throw when error is from domain', async function () {
-      const error = new OrganizationLearnersCouldNotBeSavedError();
-      sinon.stub(usecases, 'importSupOrganizationLearners').rejects(error);
+    describe('#replaceSupOrganizationLearners', function () {
+      it('should call usecase', async function () {
+        sinon.stub(usecases, 'replaceSupOrganizationLearners');
 
-      // given
-      const errorStub = sinon.stub();
-      const handler = new ImportSupOrganizationLearnersJobController({ logger: { error: errorStub } });
-      const data = { organizationImportId: Symbol('organizationImportId') };
+        // given
+        const handler = new ImportSupOrganizationLearnersJobController();
+        const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en', type: 'REPLACE_STUDENT' };
 
-      // when & then
-      await handler.handle({ data });
+        // when
+        await handler.handle({ data });
 
-      expect(errorStub).to.have.been.calledWithExactly(error);
-    });
+        // then
+        expect(usecases.replaceSupOrganizationLearners).to.have.been.calledOnce;
+        expect(usecases.replaceSupOrganizationLearners).to.have.been.calledWithExactly({
+          organizationImportId: data.organizationImportId,
+          i18n: getI18n(data.locale),
+        });
+      });
 
-    it('should throw when error is not from domain', async function () {
-      const error = new Error();
-      sinon.stub(usecases, 'importSupOrganizationLearners').rejects(error);
+      it('should not throw when error is from domain', async function () {
+        const error = new OrganizationLearnersCouldNotBeSavedError();
+        sinon.stub(usecases, 'replaceSupOrganizationLearners').rejects(error);
 
-      // given
-      const handler = new ImportSupOrganizationLearnersJobController();
-      const data = { organizationImportId: Symbol('organizationImportId') };
+        // given
+        const errorStub = sinon.stub();
+        const handler = new ImportSupOrganizationLearnersJobController({ logger: { error: errorStub } });
+        const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en', type: 'REPLACE_STUDENT' };
 
-      // when
-      const result = await catchErr(handler.handle)({ data });
+        // when & then
+        await handler.handle({ data });
 
-      // then
-      expect(result).to.equal(error);
+        expect(errorStub).to.have.been.calledWithExactly(error);
+      });
+
+      it('should throw when error is not from domain', async function () {
+        const error = new Error();
+        sinon.stub(usecases, 'replaceSupOrganizationLearners').rejects(error);
+
+        // given
+        const handler = new ImportSupOrganizationLearnersJobController();
+        const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en', type: 'REPLACE_STUDENT' };
+
+        // when
+        const result = await catchErr(handler.handle)({ data });
+
+        // then
+        expect(result).to.equal(error);
+      });
     });
   });
 });
