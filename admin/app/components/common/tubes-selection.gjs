@@ -12,7 +12,7 @@ import Areas from './tubes-selection/areas';
 const MAX_TUBE_LEVEL = 8;
 
 export default class TubesSelection extends Component {
-  @service notifications;
+  @service pixToast;
 
   @tracked selectedFrameworkIds = [];
 
@@ -173,9 +173,9 @@ export default class TubesSelection extends Component {
       }
 
       this._triggerOnChange();
-      this.notifications.success('Fichier bien importé.');
-    } catch (e) {
-      this.notifications.error(e.message);
+      this.pixToast.sendSuccessNotification({ message: 'Fichier bien importé.' });
+    } catch (error) {
+      this.pixToast.sendErrorNotification({ message: error.message });
     }
   }
 

@@ -7,7 +7,7 @@ import Component from '@glimmer/component';
 import AdministrationBlockLayout from '../block-layout';
 
 export default class LearningContent extends Component {
-  @service notifications;
+  @service pixToast;
   @service store;
   @service intl;
 
@@ -15,10 +15,12 @@ export default class LearningContent extends Component {
   async refreshLearningContent() {
     try {
       await this.store.adapterFor('learning-content-cache').refreshCacheEntries();
-      this.notifications.success('La demande de rechargement du cache a bien été prise en compte.');
-    } catch (err) {
+      this.pixToast.sendSuccessNotification({
+        message: 'La demande de rechargement du cache a bien été prise en compte.',
+      });
+    } catch (_) {
       const genericErrorMessage = this.intl.t('common.notifications.generic-error');
-      this.notifications.error(genericErrorMessage);
+      this.pixToast.sendErrorNotification({ message: genericErrorMessage });
     }
   }
 
@@ -26,11 +28,11 @@ export default class LearningContent extends Component {
   async createLearningContentReleaseAndRefreshCache() {
     try {
       await this.store.adapterFor('learning-content-cache').createLearningContentReleaseAndRefreshCache();
-      this.notifications.success(
-        'La création de la version du référentiel et le rechargement du cache a bien été prise en compte.',
-      );
-    } catch (err) {
-      this.notifications.error('Une erreur est survenue.');
+      this.pixToast.sendSuccessNotification({
+        message: 'La création de la version du référentiel et le rechargement du cache a bien été prise en compte.',
+      });
+    } catch (_) {
+      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }
   <template>

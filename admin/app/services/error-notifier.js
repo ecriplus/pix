@@ -4,13 +4,15 @@ import every from 'lodash/every';
 import isEmpty from 'lodash/isEmpty';
 
 export default class ErrorNotifierService extends Service {
-  @service notifications;
+  @service pixToast;
 
   notify(anError) {
     if (_isJSONAPIError(anError)) {
-      anError.errors.forEach((e) => this.notifications.error(new Error(`${e.title} : ${e.detail}`)));
+      anError.errors.forEach((e) =>
+        this.pixToast.sendErrorNotification({ message: new Error(`${e.title} : ${e.detail}`) }),
+      );
     } else {
-      this.notifications.error(anError);
+      this.pixToast.sendErrorNotification({ message: anError });
     }
   }
 }
