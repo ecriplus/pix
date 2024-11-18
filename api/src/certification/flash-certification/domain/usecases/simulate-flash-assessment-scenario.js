@@ -4,35 +4,31 @@ import { AssessmentSimulatorDoubleMeasureStrategy } from '../models/AssessmentSi
 import { AssessmentSimulatorSingleMeasureStrategy } from '../models/AssessmentSimulatorSingleMeasureStrategy.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
-export async function simulateFlashDeterministicAssessmentScenario({
+export async function simulateFlashAssessmentScenario({
   locale,
   pickChallenge,
   pickAnswerStatus,
   stopAtChallenge,
   initialCapacity,
-  useObsoleteChallenges,
-  warmUpLength = 0,
-  forcedCompetences = [],
   challengesBetweenSameCompetence = 0,
   limitToOneQuestionPerTube = true,
   minimumEstimatedSuccessRateRanges = [],
-  enablePassageByAllCompetences = false,
   doubleMeasuresUntil = 0,
   variationPercent,
   variationPercentUntil,
   challengeRepository,
   flashAlgorithmService,
 }) {
-  const challenges = await challengeRepository.findFlashCompatible({ locale, useObsoleteChallenges });
+  const challenges = await challengeRepository.findActiveFlashCompatible({ locale });
+
+  const enablePassageByAllCompetencesValueInProduction = true;
 
   const flashAssessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,
     configuration: new FlashAssessmentAlgorithmConfiguration({
-      warmUpLength,
-      forcedCompetences,
       limitToOneQuestionPerTube,
       minimumEstimatedSuccessRateRanges,
-      enablePassageByAllCompetences,
+      enablePassageByAllCompetences: enablePassageByAllCompetencesValueInProduction,
       variationPercent,
       variationPercentUntil,
       doubleMeasuresUntil,
