@@ -7,7 +7,6 @@ import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
-import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
@@ -17,9 +16,6 @@ import Card from '../card';
 import TubesSelection from '../common/tubes-selection';
 
 export default class CreateTargetProfileForm extends Component {
-  @service notifications;
-  @service router;
-
   @tracked submitting = false;
   selectedTubes = [];
 

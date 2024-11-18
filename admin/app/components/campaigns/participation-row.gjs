@@ -10,7 +10,6 @@ import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
 
 export default class ParticipationRow extends Component {
-  @service notifications;
   @service accessControl;
 
   @tracked isEditionMode = false;

@@ -5,15 +5,12 @@ import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
-import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { not } from 'ember-truth-helpers';
 
 export default class ActionsOnUsersRoleInOrganization extends Component {
-  @service notifications;
-
   @tracked showModal = false;
   @tracked organizationToDetach;
 

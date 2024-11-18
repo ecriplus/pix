@@ -5,7 +5,6 @@ import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
-import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
@@ -41,8 +40,6 @@ class Form {
 }
 
 export default class CreateOrUpdateTrainingForm extends Component {
-  @service notifications;
-
   @tracked submitting = false;
 
   constructor() {

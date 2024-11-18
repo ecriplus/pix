@@ -11,7 +11,6 @@ import ConfirmPopup from '../confirm-popup';
 
 export default class CampaignParticipation extends Component {
   @service accessControl;
-  @service notifications;
 
   @tracked displayRemoveParticipationModal = false;
   @tracked participationToDelete = null;
