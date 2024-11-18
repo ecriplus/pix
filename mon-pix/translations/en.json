@@ -226,6 +226,7 @@
         },
         "errors": {
           "invalid-locale-format": "Provided locale \"{invalidLocale}\" has an invalid format.",
+          "invalid-or-already-used-email" : "Invalid or already used e-mail address",
           "locale-not-supported": "Provided locale \"{localeNotSupported}\" isn't currently supported."
         },
         "fields": {
@@ -2095,6 +2096,7 @@
           "errors": {
             "empty-password": "Your password can't be empty.",
             "invalid-email": "Your email address is invalid.",
+            "invalid-or-already-used-email" : "Invalid or already used e-mail address",
             "invalid-password": "There was an error in the password entered.",
             "new-email-already-exist": "This email address is already in use."
           },

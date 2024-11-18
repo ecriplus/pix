@@ -232,6 +232,7 @@
         },
         "errors": {
           "invalid-locale-format": "Uw locale \"{invalidLocale}\" heeft de verkeerde indeling.",
+          "invalid-or-already-used-email" : "Invalid or already used e-mail address",
           "locale-not-supported": "Uw \"{localeNotSupported}\" locale wordt momenteel niet ondersteund."
         },
         "fields": {
@@ -2077,6 +2078,7 @@
           "errors": {
             "empty-password": "Je wachtwoord mag niet leeg zijn.",
             "invalid-email": "Uw e-mailadres is ongeldig.",
+            "invalid-or-already-used-email" : "Invalid or already used e-mail address",
             "invalid-password": "Het ingevoerde wachtwoord is ongeldig.",
             "new-email-already-exist": "Dit e-mailadres is al in gebruik."
           },
