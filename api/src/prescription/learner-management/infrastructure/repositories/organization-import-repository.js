@@ -1,6 +1,5 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { ApplicationTransaction } from '../../../shared/infrastructure/ApplicationTransaction.js';
 import { OrganizationImport } from '../../domain/models/OrganizationImport.js';
 import { OrganizationImportDetail } from '../../domain/read-models/OrganizationImportDetail.js';
 
@@ -31,7 +30,7 @@ const getLastImportDetailForOrganization = async function (organizationId) {
 };
 
 const get = async function (id) {
-  const knexConn = ApplicationTransaction.getConnection();
+  const knexConn = DomainTransaction.getConnection();
   const result = await knexConn('organization-imports').where({ id }).first();
 
   if (!result) return null;

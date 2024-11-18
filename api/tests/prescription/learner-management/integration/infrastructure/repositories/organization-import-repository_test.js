@@ -1,7 +1,6 @@
 import { IMPORT_STATUSES } from '../../../../../../src/prescription/learner-management/domain/constants.js';
 import { OrganizationImport } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImport.js';
 import * as organizationImportRepository from '../../../../../../src/prescription/learner-management/infrastructure/repositories/organization-import-repository.js';
-import { ApplicationTransaction } from '../../../../../../src/prescription/shared/infrastructure/ApplicationTransaction.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { catchErr, databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -87,13 +86,13 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       const expectedResult = databaseBuilder.factory.buildOrganizationImport();
       await databaseBuilder.commit();
 
-      const originalImp = ApplicationTransaction.getConnection;
-      sinon.stub(ApplicationTransaction, 'getConnection');
-      ApplicationTransaction.getConnection.callsFake(originalImp);
+      const originalImp = DomainTransaction.getConnection;
+      sinon.stub(DomainTransaction, 'getConnection');
+      DomainTransaction.getConnection.callsFake(originalImp);
 
       await organizationImportRepository.get(expectedResult.organizationId);
 
-      expect(ApplicationTransaction.getConnection).to.have.been.called;
+      expect(DomainTransaction.getConnection).to.have.been.called;
     });
   });
 
