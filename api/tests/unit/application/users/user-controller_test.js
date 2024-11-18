@@ -134,40 +134,6 @@ describe('Unit | Controller | user-controller', function () {
     });
   });
 
-  describe('#getCampaignParticipations', function () {
-    const userId = '1';
-
-    const request = {
-      auth: {
-        credentials: {
-          userId: userId,
-        },
-      },
-      params: {
-        id: userId,
-      },
-    };
-
-    beforeEach(function () {
-      sinon.stub(usecases, 'findLatestOngoingUserCampaignParticipations');
-    });
-
-    it('should return serialized campaignParticipations', async function () {
-      // given
-      const campaignParticipationSerializer = { serialize: sinon.stub() };
-      usecases.findLatestOngoingUserCampaignParticipations.withArgs({ userId }).resolves([]);
-      campaignParticipationSerializer.serialize.withArgs([]).returns({});
-
-      // when
-      const response = await userController.getCampaignParticipations(request, hFake, {
-        campaignParticipationSerializer,
-      });
-
-      // then
-      expect(response).to.deep.equal({});
-    });
-  });
-
   describe('#resetScorecard', function () {
     beforeEach(function () {
       sinon.stub(evaluationUsecases, 'resetScorecard').resolves({

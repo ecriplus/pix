@@ -168,32 +168,6 @@ const register = async function (server) {
     ...adminRoutes,
     {
       method: 'GET',
-      path: '/api/users/{id}/campaign-participations',
-      config: {
-        pre: [
-          {
-            method: securityPreHandlers.checkRequestedUserIsAuthenticatedUser,
-            assign: 'requestedUserIsAuthenticatedUser',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            id: identifiersType.userId,
-          }),
-        },
-        handler: userController.getCampaignParticipations,
-        notes: [
-          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
-            '- Récupération des participations à des campagnes à partir de l’id\n' +
-            '- L’id demandé doit correspondre à celui de l’utilisateur authentifié' +
-            '- Les participations aux campagnes sont triées par ordre inverse de création' +
-            '  (les plus récentes en premier)',
-        ],
-        tags: ['api'],
-      },
-    },
-    {
-      method: 'GET',
       path: '/api/users/{id}/trainings',
       config: {
         validate: {
