@@ -10,7 +10,7 @@ import { t } from 'ember-intl';
 import { not } from 'ember-truth-helpers';
 
 export default class CampaignCriterion extends Component {
-  @service notifications;
+  @service pixToast;
 
   @tracked isEditModalVisible = false;
   @tracked thresholdInputValue = this.previousTreshold;
@@ -36,14 +36,16 @@ export default class CampaignCriterion extends Component {
 
     try {
       await criterion.save();
-      this.notifications.success("Seuil d'obtention du critère modifié avec succès.");
+      this.pixToast.sendSuccessNotification({ message: "Seuil d'obtention du critère modifié avec succès." });
       this.toggleEditModal();
     } catch (responseError) {
       responseError?.errors?.forEach((error) => {
         if (error?.detail) {
-          this.notifications.error(error.detail);
+          this.pixToast.sendErrorNotification({ message: error.detail });
         } else {
-          this.notifications.error("Problème lors de la modification du seuil d'obtention du critère.");
+          this.pixToast.sendErrorNotification({
+            message: "Problème lors de la modification du seuil d'obtention du critère.",
+          });
         }
       });
     }

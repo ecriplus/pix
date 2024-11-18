@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 export default class NewController extends Controller {
-  @service notifications;
+  @service pixToast;
   @service store;
   @service router;
 
@@ -21,7 +21,7 @@ export default class NewController extends Controller {
   async createOrUpdateTraining(trainingFormData) {
     try {
       const { id } = await this.store.createRecord('training', trainingFormData).save();
-      this.notifications.success('Le contenu formatif a été créé avec succès.');
+      this.pixToast.sendSuccessNotification({ message: 'Le contenu formatif a été créé avec succès.' });
       this.goToTrainingDetails(id);
     } catch (error) {
       this._handleResponseError(error);
@@ -30,13 +30,13 @@ export default class NewController extends Controller {
 
   _handleResponseError({ errors }) {
     if (!errors) {
-      return this.notifications.error('Une erreur est survenue.');
+      return this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
     errors.forEach((error) => {
       if (['400', '404', '412', '422'].includes(error.status)) {
-        return this.notifications.error(error.detail);
+        return this.pixToast.sendErrorNotification({ message: error.detail });
       }
-      return this.notifications.error('Une erreur est survenue.');
+      return this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     });
   }
 }

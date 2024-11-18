@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 export default class NewController extends Controller {
-  @service notifications;
+  @service pixToast;
   @service store;
   @service router;
 
@@ -22,16 +22,16 @@ export default class NewController extends Controller {
     event.preventDefault();
     try {
       const { id: autonomousCourseId } = await this.store.createRecord('autonomous-course', autonomousCourse).save();
-      this.notifications.success('Le parcours autonome a été créé avec succès.');
+      this.pixToast.sendSuccessNotification({ message: 'Le parcours autonome a été créé avec succès.' });
       this.goToAutonomousCourseDetails(autonomousCourseId);
     } catch (error) {
       if (!autonomousCourse.targetProfileId) {
-        return this.notifications.error('Aucun profil cible sélectionné !');
+        return this.pixToast.sendErrorNotification({ message: 'Aucun profil cible sélectionné !' });
       }
       if (error.errors[0]?.detail) {
-        return this.notifications.error(error.errors[0].detail);
+        return this.pixToast.sendErrorNotification({ message: error.errors[0].detail });
       } else {
-        return this.notifications.error('Une erreur est survenue.');
+        return this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
       }
     }
   }

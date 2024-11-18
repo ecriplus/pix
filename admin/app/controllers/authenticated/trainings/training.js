@@ -4,7 +4,7 @@ import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class Training extends Controller {
-  @service notifications;
+  @service pixToast;
   @service accessControl;
 
   @tracked isEditMode = false;
@@ -25,10 +25,10 @@ export default class Training extends Controller {
         this.model[key] = trainingFormData[key];
       }
       await this.model.save();
-      this.notifications.success('Le contenu formatif a été mis à jour avec succès.');
+      this.pixToast.sendSuccessNotification({ message: 'Le contenu formatif a été mis à jour avec succès.' });
       this.toggleEditMode();
     } catch (error) {
-      this.notifications.error('Une erreur est survenue.');
+      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }
 }

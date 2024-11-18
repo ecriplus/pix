@@ -4,7 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 
 export default class TargetProfileTrainingsRoute extends Route {
   @service accessControl;
-  @service notifications;
+  @service pixToast;
   @service store;
 
   queryParams = {
@@ -30,7 +30,7 @@ export default class TargetProfileTrainingsRoute extends Route {
       });
     } catch (errorResponse) {
       if (!isEmpty(errorResponse)) {
-        errorResponse.errors.forEach((error) => this.notifications.error(error.detail));
+        errorResponse.errors.forEach((error) => this.pixToast.sendErrorNotification({ message: error.detail }));
       }
       return [];
     }

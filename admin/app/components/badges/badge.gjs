@@ -19,7 +19,7 @@ import CampaignCriterion from './campaign-criterion';
 import CappedTubesCriterion from './capped-tubes-criterion';
 
 export default class Badge extends Component {
-  @service notifications;
+  @service pixToast;
   @service store;
   @service intl;
 
@@ -79,7 +79,7 @@ export default class Badge extends Component {
         imageUrl: this.IMAGE_BASE_URL + this.form.imageName,
       };
       await this.args.onUpdateBadge(badgeDTO);
-      this.notifications.success('Le résultat thématique a été mis à jour.');
+      this.pixToast.sendSuccessNotification({ message: 'Le résultat thématique a été mis à jour.' });
       this.editMode = false;
     } catch (err) {
       let errorMessage;
@@ -91,7 +91,7 @@ export default class Badge extends Component {
         } else {
           errorMessage = error.detail;
         }
-        this.notifications.error(errorMessage);
+        this.pixToast.sendErrorNotification({ message: errorMessage });
       });
     }
   }

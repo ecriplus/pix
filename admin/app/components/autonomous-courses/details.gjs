@@ -12,7 +12,7 @@ import ViewAutonomousCourse from './view-autonomous-course';
 export default class Details extends Component {
   @tracked isEditMode = false;
   @service intl;
-  @service notifications;
+  @service pixToast;
   @service router;
 
   @action
@@ -28,12 +28,12 @@ export default class Details extends Component {
     this.isEditMode = false;
     try {
       await this.args.autonomousCourse.save();
-      this.notifications.success('Parcours autonome modifié avec succès.');
+      this.pixToast.sendSuccessNotification({ message: 'Parcours autonome modifié avec succès.' });
     } catch ({ errors }) {
       this.args.autonomousCourse.rollbackAttributes();
 
       if (errors[0]?.detail) {
-        return this.notifications.error(errors[0].detail);
+        return this.pixToast.sendErrorNotification({ message: errors[0].detail });
       }
     }
   }

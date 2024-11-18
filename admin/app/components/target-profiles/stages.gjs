@@ -19,7 +19,7 @@ const THRESHOLD_COLUMN_NAME = 'Seuil';
 export default class Stages extends Component {
   @service store;
   @service intl;
-  @service notifications;
+  @service pixToast;
 
   @tracked
   stageType = undefined;
@@ -155,10 +155,11 @@ export default class Stages extends Component {
           this.stages.removeObject(stage);
           stage.deleteRecord();
         });
-      this.notifications.success('Palier(s) ajouté(s) avec succès.');
-    } catch (e) {
+      this.pixToast.sendSuccessNotification({ message: 'Palier(s) ajouté(s) avec succès.' });
+    } catch (error) {
       const genericErrorMessage = this.intl.t('common.notifications.generic-error');
-      this.notifications.error(e.errors?.[0]?.detail ?? genericErrorMessage);
+      const message = error.errors?.[0]?.detail ?? genericErrorMessage;
+      this.pixToast.sendErrorNotification({ message });
     }
   }
 

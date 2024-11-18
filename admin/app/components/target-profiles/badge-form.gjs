@@ -14,7 +14,7 @@ import Card from '../card';
 import Criteria from './badge-form/criteria';
 
 export default class BadgeForm extends Component {
-  @service notifications;
+  @service pixToast;
   @service store;
   @service router;
 
@@ -55,13 +55,17 @@ export default class BadgeForm extends Component {
     const hasCappedTubesCriteria = this.badge.cappedTubesCriteria.length;
 
     if (!hasCampaignCriteria && !hasCappedTubesCriteria) {
-      return this.notifications.error("Vous devez sélectionner au moins un critère d'obtention de résultat thématique");
+      return this.pixToast.sendErrorNotification({
+        message: "Vous devez sélectionner au moins un critère d'obtention de résultat thématique",
+      });
     }
 
     const hasSelectedCappedTubes = this.badge.cappedTubesCriteria[0]?.cappedTubes?.length;
 
     if (hasCappedTubesCriteria && !hasSelectedCappedTubes) {
-      return this.notifications.error('Vous devez sélectionner au moins un sujet du profil cible');
+      return this.pixToast.sendErrorNotification({
+        message: 'Vous devez sélectionner au moins un sujet du profil cible',
+      });
     }
 
     await this._createBadge();
@@ -81,12 +85,12 @@ export default class BadgeForm extends Component {
       });
       await this.args.targetProfile.reload();
 
-      this.notifications.success('Le résultat thématique a été créé.');
+      this.pixToast.sendSuccessNotification({ message: 'Le résultat thématique a été créé.' });
       this.router.transitionTo('authenticated.target-profiles.target-profile.insights');
       return badge;
     } catch (error) {
       console.error(error);
-      this.notifications.error(`${error.errors[0].detail}`);
+      this.pixToast.sendErrorNotification({ message: `${error.errors[0].detail}` });
     }
   }
 
