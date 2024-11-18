@@ -4,9 +4,10 @@ import * as certificationCenterForAdminSerializer from '../../infrastructure/ser
 
 const create = async function (request) {
   const certificationCenter = certificationCenterForAdminSerializer.deserialize(request.payload);
-  const complementaryCertificationIds = request.payload.data.relationships?.habilitations?.data.map(
-    (complementaryCertification) => complementaryCertification.id,
-  );
+  const complementaryCertificationIds =
+    request.payload.data.relationships?.habilitations?.data.map(
+      (complementaryCertification) => complementaryCertification.id,
+    ) || [];
   const createdCertificationCenter = await usecases.createCertificationCenter({
     certificationCenter,
     complementaryCertificationIds,
