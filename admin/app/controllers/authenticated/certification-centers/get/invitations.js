@@ -7,7 +7,7 @@ import isEmailValid from '../../../../utils/email-validator';
 
 export default class AuthenticatedCertificationCentersGetInvitationsController extends Controller {
   @service accessControl;
-  @service notifications;
+  @service pixToast;
   @service errorResponseHandler;
   @service store;
 
@@ -41,7 +41,7 @@ export default class AuthenticatedCertificationCentersGetInvitationsController e
         certificationCenterId: this.model.certificationCenterId,
       });
 
-      this.notifications.success(`Un email a bien a été envoyé à l'adresse ${email}.`);
+      this.pixToast.sendSuccessNotification({ message: `Un email a bien a été envoyé à l'adresse ${email}.` });
       this.userEmailToInvite = null;
     } catch (err) {
       this.errorResponseHandler.notify(err, this.CUSTOM_ERROR_MESSAGES);
@@ -72,9 +72,9 @@ export default class AuthenticatedCertificationCentersGetInvitationsController e
           certificationCenterInvitationId: certificationCenterInvitation.id,
         },
       });
-      this.notifications.success('Cette invitation a bien été annulée.');
+      this.pixToast.sendSuccessNotification({ message: 'Cette invitation a bien été annulée.' });
     } catch (error) {
-      this.notifications.error('Une erreur s’est produite, veuillez réessayer.');
+      this.pixToast.sendErrorNotification({ message: 'Une erreur s’est produite, veuillez réessayer.' });
     }
   }
 }

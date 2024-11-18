@@ -10,7 +10,7 @@ import AdministrationBlockLayout from '../block-layout';
 
 export default class AnonymizeGarImport extends Component {
   @service intl;
-  @service notifications;
+  @service pixToast;
   @service session;
 
   @tracked isLoading = false;
@@ -38,31 +38,33 @@ export default class AnonymizeGarImport extends Component {
         const { 'gar-anonymized-user-count': garAnonymizedUserCount, total } = json.data.attributes;
 
         if (garAnonymizedUserCount === total) {
-          return this.notifications.success(
-            this.intl.t('components.administration.anonymize-gar-import.notifications.success.full', { total }),
-          );
+          return this.pixToast.sendSuccessNotification({
+            message: this.intl.t('components.administration.anonymize-gar-import.notifications.success.full', {
+              total,
+            }),
+          });
         }
 
-        return this.notifications.warning(
-          this.intl.t('components.administration.anonymize-gar-import.notifications.success.partial', {
+        return this.pixToast.sendWarningNotification({
+          message: this.intl.t('components.administration.anonymize-gar-import.notifications.success.partial', {
             garAnonymizedUserCount,
             total,
           }),
-        );
+        });
       }
 
       const error = json.errors[0];
       if (error.code === 'PAYLOAD_TOO_LARGE') {
-        return this.notifications.error(
-          this.intl.t('components.administration.anonymize-gar-import.notifications.error.payload-too-large', {
+        return this.pixToast.sendErrorNotification({
+          message: this.intl.t('components.administration.anonymize-gar-import.notifications.error.payload-too-large', {
             maxSize: error.meta.maxSize,
           }),
-        );
+        });
       }
 
       this.errorResponseHandler.notify(await response.json());
     } catch (error) {
-      this.notifications.error(this.intl.t('common.notifications.generic-error'));
+      this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
     } finally {
       this.isLoading = false;
     }

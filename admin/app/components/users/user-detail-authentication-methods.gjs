@@ -22,7 +22,7 @@ export default class UserDetailAuthenticationMethodsComponent extends Component 
   @tracked isLoading = false;
   @tracked authenticationMethodType = null;
 
-  @service notifications;
+  @service pixToast;
 
   get translatedType() {
     return typesLabel[this.authenticationMethodType];
@@ -44,7 +44,7 @@ export default class UserDetailAuthenticationMethodsComponent extends Component 
       if (get(response, 'errors[0].status') === '403') {
         errorMessage = 'Vous ne pouvez pas supprimer la dernière méthode de connexion de cet utilisateur';
       }
-      this.notifications.error(errorMessage);
+      this.pixToast.sendErrorNotification({ message: errorMessage });
     } finally {
       this.isLoading = false;
       this.toggleDisplayRemoveAuthenticationMethodModal(null);

@@ -6,7 +6,7 @@ import get from 'lodash/get';
 export default class AuthenticatedOrganizationsGetChildrenController extends Controller {
   @service accessControl;
   @service intl;
-  @service notifications;
+  @service pixToast;
   @service store;
 
   @action
@@ -16,9 +16,9 @@ export default class AuthenticatedOrganizationsGetChildrenController extends Con
 
     try {
       await organizationAdapter.attachChildOrganization({ childOrganizationId, parentOrganizationId });
-      this.notifications.success(
-        this.intl.t('pages.organization-children.notifications.success.attach-child-organization'),
-      );
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('pages.organization-children.notifications.success.attach-child-organization'),
+      });
 
       await this.model.organization.hasMany('children').reload();
     } catch (responseError) {
@@ -54,7 +54,7 @@ export default class AuthenticatedOrganizationsGetChildrenController extends Con
           message = this.intl.t('common.notifications.generic-error');
       }
 
-      this.notifications.error(message);
+      this.pixToast.sendErrorNotification({ message });
     }
   }
 }

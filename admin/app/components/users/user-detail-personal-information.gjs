@@ -12,7 +12,7 @@ export default class UserDetailPersonalInformationComponent extends Component {
   @tracked displayDissociateModal = false;
   @tracked isLoading = false;
 
-  @service notifications;
+  @service pixToast;
 
   organizationLearnerToDissociate = null;
 
@@ -27,10 +27,10 @@ export default class UserDetailPersonalInformationComponent extends Component {
     this.isLoading = true;
     try {
       await this.organizationLearnerToDissociate.destroyRecord();
-      this.notifications.success(DISSOCIATE_SUCCESS_NOTIFICATION_MESSAGE);
+      this.pixToast.sendSuccessNotification({ message: DISSOCIATE_SUCCESS_NOTIFICATION_MESSAGE });
     } catch (response) {
       const errorMessage = 'Une erreur est survenue !';
-      this.notifications.error(errorMessage);
+      this.pixToast.sendErrorNotification({ message: errorMessage });
     } finally {
       this.displayDissociateModal = false;
       this.isLoading = false;

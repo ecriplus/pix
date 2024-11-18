@@ -9,7 +9,7 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 export default class ActionsOnUsersRoleInOrganization extends Component {
-  @service notifications;
+  @service pixToast;
   @service accessControl;
   @service intl;
 
@@ -37,9 +37,11 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
     try {
       this.args.organizationMembership.organizationRole = this.selectedNewRole;
       await this.args.organizationMembership.save();
-      this.notifications.success('Le rôle du membre a été mis à jour avec succès.');
+      this.pixToast.sendSuccessNotification({ message: 'Le rôle du membre a été mis à jour avec succès.' });
     } catch (e) {
-      this.notifications.error('Une erreur est survenue lors de la mise à jour du rôle du membre.');
+      this.pixToast.sendErrorNotification({
+        message: 'Une erreur est survenue lors de la mise à jour du rôle du membre.',
+      });
     } finally {
       this.isEditionMode = false;
     }
@@ -66,9 +68,9 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
   async disableOrganizationMembership() {
     try {
       await this.args.organizationMembership.destroyRecord({ adapterOptions: { disable: true } });
-      this.notifications.success('Le membre a été désactivé avec succès.');
+      this.pixToast.sendSuccessNotification({ message: 'Le membre a été désactivé avec succès.' });
     } catch (e) {
-      this.notifications.error('Une erreur est survenue lors de la désactivation du membre.');
+      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue lors de la désactivation du membre.' });
     } finally {
       this.displayConfirm = false;
     }

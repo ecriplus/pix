@@ -13,7 +13,7 @@ import ReassignGarAuthenticationMethodModal from './reassign-gar-authentication-
 import ReassignOidcAuthenticationMethodModal from './reassign-oidc-authentication-method-modal';
 
 export default class AuthenticationMethod extends Component {
-  @service notifications;
+  @service pixToast;
   @service accessControl;
   @service oidcIdentityProviders;
 
@@ -116,7 +116,9 @@ export default class AuthenticationMethod extends Component {
     event.preventDefault();
     try {
       await this.args.addPixAuthenticationMethod(this.newEmail);
-      this.notifications.success(`${this.newEmail} a bien été rajouté aux méthodes de connexion de l'utilisateur`);
+      this.pixToast.sendSuccessNotification({
+        message: `${this.newEmail} a bien été rajouté aux méthodes de connexion de l'utilisateur`,
+      });
       this.newEmail = '';
       this.showAddAuthenticationMethodModal = false;
       this.showAlreadyExistingEmailError = false;
@@ -130,7 +132,7 @@ export default class AuthenticationMethod extends Component {
         this.showAlreadyExistingEmailError = true;
       } else {
         this.showAddAuthenticationMethodModal = false;
-        this.notifications.error('Une erreur est survenue, veuillez réessayer.');
+        this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue, veuillez réessayer.' });
         this.newEmail = '';
         this.showAlreadyExistingEmailError = false;
       }

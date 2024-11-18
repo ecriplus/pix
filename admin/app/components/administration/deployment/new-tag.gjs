@@ -10,7 +10,7 @@ import AdministrationBlockLayout from '../block-layout';
 
 export default class NewTag extends Component {
   @service store;
-  @service notifications;
+  @service pixToast;
 
   @action
   async createNewTag(event) {
@@ -21,15 +21,15 @@ export default class NewTag extends Component {
       tag = this.store.createRecord('tag', { name: this.tagName });
       await tag.save();
 
-      this.notifications.success('Le tag a bien été créé !');
+      this.pixToast.sendSuccessNotification({ message: 'Le tag a bien été créé !' });
       document.getElementById('tagNameInput').value = '';
     } catch (response) {
       this.store.deleteRecord(tag);
       const status = get(response, 'errors[0].status');
       if (status === '412') {
-        this.notifications.error('Ce tag existe déjà.');
+        this.pixToast.sendErrorNotification({ message: 'Ce tag existe déjà.' });
       } else {
-        this.notifications.error('Une erreur est survenue. Veuillez réessayer.');
+        this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue. Veuillez réessayer.' });
       }
     }
   }

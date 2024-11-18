@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 export default class UserAuthenticationMethodsController extends Controller {
-  @service notifications;
+  @service pixToast;
   @service oidcIdentityProviders;
 
   ERROR_MESSAGES = {
@@ -46,10 +46,12 @@ export default class UserAuthenticationMethodsController extends Controller {
           identityProvider,
         },
       });
-      this.notifications.success(`La méthode de connexion a bien été déplacé vers l'utilisateur ${targetUserId}`);
-      this.notifications.success(
-        `L'utilisateur n'a plus de méthode de connexion ${reassignedAuthenticationMethodLabel}`,
-      );
+      this.pixToast.sendSuccessNotification({
+        message: `La méthode de connexion a bien été déplacé vers l'utilisateur ${targetUserId}`,
+      });
+      this.pixToast.sendSuccessNotification({
+        message: `L'utilisateur n'a plus de méthode de connexion ${reassignedAuthenticationMethodLabel}`,
+      });
     } catch (errors) {
       authenticationMethod.rollbackAttributes();
       this._handleResponseError(errors, identityProvider);
@@ -63,21 +65,21 @@ export default class UserAuthenticationMethodsController extends Controller {
       errors.map((error) => {
         switch (error.status) {
           case '400':
-            this.notifications.error(this.ERROR_MESSAGES.STATUS_400);
+            this.pixToast.sendErrorNotification({ message: this.ERROR_MESSAGES.STATUS_400 });
             break;
           case '404':
-            this.notifications.error(this.ERROR_MESSAGES.STATUS_404);
+            this.pixToast.sendErrorNotification({ message: this.ERROR_MESSAGES.STATUS_404 });
             break;
           case '422':
-            this.notifications.error(this.ERROR_MESSAGES.STATUS_422[identityProvider]);
+            this.pixToast.sendErrorNotification({ message: this.ERROR_MESSAGES.STATUS_422[identityProvider] });
             break;
           default:
-            this.notifications.error(this.ERROR_MESSAGES.DEFAULT);
+            this.pixToast.sendErrorNotification({ message: this.ERROR_MESSAGES.DEFAULT });
             break;
         }
       });
     } else {
-      this.notifications.error(this.ERROR_MESSAGES.DEFAULT);
+      this.pixToast.sendErrorNotification({ message: this.ERROR_MESSAGES.DEFAULT });
     }
   }
 }

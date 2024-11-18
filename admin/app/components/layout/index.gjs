@@ -1,5 +1,6 @@
-import NotificationContainer from '@1024pix/ember-cli-notifications/components/notification-container';
+import PixToastContainer from '@1024pix/pix-ui/components/pix-toast-container';
 import { LinkTo } from '@ember/routing';
+import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
 
 import MenuBar from './menu-bar';
@@ -23,7 +24,7 @@ import MenuBar from './menu-bar';
       </div>
     </div>
 
-    <NotificationContainer @position="bottom-right" />
+    <PixToastContainer @closeButtonAriaLabel={{t "common.notifications.close-button.extra-information"}} />
 
   </div>
 </template>

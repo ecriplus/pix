@@ -4,7 +4,7 @@ import { service } from '@ember/service';
 import get from 'lodash/get';
 
 export default class GetController extends Controller {
-  @service notifications;
+  @service pixToast;
   @service router;
   @service accessControl;
   @service intl;
@@ -13,7 +13,7 @@ export default class GetController extends Controller {
   async updateOrganizationInformation() {
     try {
       await this.model.save();
-      this.notifications.success("L'organisation a bien été modifiée.");
+      this.pixToast.sendSuccessNotification({ message: "L'organisation a bien été modifiée." });
     } catch (responseError) {
       this.model.rollbackAttributes();
       const error = get(responseError, 'errors[0]');
@@ -27,7 +27,7 @@ export default class GetController extends Controller {
         default:
           message = this.intl.t(I18N_KEY_ERROR_MESSAGES['default']);
       }
-      this.notifications.error(message, { autoClear: false });
+      this.pixToast.sendErrorNotification({ message });
     }
   }
 
@@ -36,14 +36,14 @@ export default class GetController extends Controller {
     try {
       await this.model.save({ adapterOptions: { archiveOrganization: true } });
 
-      this.notifications.success('Cette organisation a bien été archivée.');
+      this.pixToast.sendSuccessNotification({ message: 'Cette organisation a bien été archivée.' });
       this.router.transitionTo('authenticated.organizations.get');
     } catch (responseError) {
       const status = get(responseError, 'errors[0].status');
       if (status === '422') {
-        return this.notifications.error("L'organisation n'a pas pu être archivée.");
+        return this.pixToast.sendErrorNotification({ message: "L'organisation n'a pas pu être archivée." });
       }
-      this.notifications.error('Une erreur est survenue.');
+      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }
 }
