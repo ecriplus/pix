@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 export default class ToolsController extends Controller {
-  @service notifications;
+  @service pixToast;
   @service store;
   @service currentUser;
 
@@ -15,17 +15,17 @@ export default class ToolsController extends Controller {
     try {
       await adapter.importCampaignsToArchive(files);
       this.isLoading = false;
-      this.notifications.success('Toutes les campagnes ont été archivées.');
+      this.pixToast.sendSuccessNotification({ message: 'Toutes les campagnes ont été archivées.' });
     } catch ({ errors: [error] }) {
       this.isLoading = false;
       if (error.code === 'HEADER_REQUIRED') {
-        this.notifications.error("La colonne campaignId n'est pas présente.");
+        this.pixToast.sendErrorNotification({ message: "La colonne campaignId n'est pas présente." });
       } else if (error.code === 'HEADER_UNKNOWN') {
-        this.notifications.error('Une colonne dans le fichier ne devrait pas être présente.');
+        this.pixToast.sendErrorNotification({ message: 'Une colonne dans le fichier ne devrait pas être présente.' });
       } else if (error.code === 'ENCODING_NOT_SUPPORTED') {
-        this.notifications.error('Encodage non supporté.');
+        this.pixToast.sendErrorNotification({ message: 'Encodage non supporté.' });
       } else {
-        this.notifications.error('Une erreur est survenue. OUPS...');
+        this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue. OUPS...' });
       }
     }
   }

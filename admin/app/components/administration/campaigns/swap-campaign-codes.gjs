@@ -12,7 +12,7 @@ import AdministrationBlockLayout from '../block-layout';
 
 export default class SwapCampaignCodes extends Component {
   @service intl;
-  @service notifications;
+  @service pixToast;
   @service store;
 
   @tracked isLoading;
@@ -25,25 +25,29 @@ export default class SwapCampaignCodes extends Component {
     const adapter = this.store.adapterFor('swap-campaign-code');
     try {
       await adapter.swap({ firstCampaignId: this.firstCampaignId, secondCampaignId: this.secondCampaignId });
-      this.notifications.success(this.intl.t('components.administration.swap-campaign-codes.notifications.success'));
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('components.administration.swap-campaign-codes.notifications.success'),
+      });
     } catch (errorResponse) {
       const errors = errorResponse.errors;
 
       if (!errors) {
-        return this.notifications.error(this.intl.t('common.notifications.generic-error'));
+        return this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
       } else {
         const error = errors[0];
 
         if (error.code === 'ORGANIZATION_MISMATCH') {
-          return this.notifications.error(
-            this.intl.t('components.administration.swap-campaign-codes.notifications.error.mismatch-organization'),
-          );
+          return this.pixToast.sendErrorNotification({
+            message: this.intl.t(
+              'components.administration.swap-campaign-codes.notifications.error.mismatch-organization',
+            ),
+          });
         } else if (error.code === 'UNKNOWN_CAMPAIGN_ID') {
-          this.notifications.error(
-            this.intl.t('components.administration.swap-campaign-codes.notifications.error.swap-code-error'),
-          );
+          this.pixToast.sendErrorNotification({
+            message: this.intl.t('components.administration.swap-campaign-codes.notifications.error.swap-code-error'),
+          });
         } else {
-          this.notifications.error(this.intl.t('common.notifications.generic-error'));
+          this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
         }
       }
     } finally {

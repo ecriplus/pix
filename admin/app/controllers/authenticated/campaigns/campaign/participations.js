@@ -11,15 +11,17 @@ export default class CampaignParticipationsController extends Controller {
   @tracked pageNumber = DEFAULT_PAGE_NUMBER;
   @tracked pageSize = 10;
 
-  @service notifications;
+  @service pixToast;
 
   @action
   async updateParticipantExternalId(campaignParticipation) {
     try {
       await campaignParticipation.save();
-      this.notifications.success("L'id externe du participant été mis à jour avec succès.");
-    } catch (e) {
-      this.notifications.error("Une erreur est survenue lors de la mise à jour de l'id externe du participant.");
+      this.pixToast.sendSuccessNotification({ message: "L'id externe du participant été mis à jour avec succès." });
+    } catch (_) {
+      this.pixToast.sendErrorNotification({
+        message: "Une erreur est survenue lors de la mise à jour de l'id externe du participant.",
+      });
     }
   }
 }

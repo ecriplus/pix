@@ -15,7 +15,7 @@ import { not } from 'ember-truth-helpers';
 import PixFieldset from 'pix-admin/components/ui/pix-fieldset';
 
 export default class Update extends Component {
-  @service notifications;
+  @service pixToast;
   @service accessControl;
   @service store;
   @service intl;
@@ -117,7 +117,7 @@ export default class Update extends Component {
 
     try {
       await campaign.save();
-      await this.notifications.success('Les modifications ont bien été enregistrées.');
+      await this.pixToast.sendSuccessNotification({ message: 'Les modifications ont bien été enregistrées.' });
       this.args.onExit();
     } catch (errorResponse) {
       campaign.rollbackAttributes();
@@ -125,13 +125,13 @@ export default class Update extends Component {
       const genericErrorMessage = this.intl.t('common.notifications.generic-error');
 
       if (!errors) {
-        return this.notifications.error(genericErrorMessage);
+        return this.pixToast.sendErrorNotification({ message: genericErrorMessage });
       }
       return errorResponse.errors.forEach((error) => {
         if (error.status === '422') {
-          return this.notifications.error(error.detail);
+          return this.pixToast.sendErrorNotification({ message: error.detail });
         }
-        return this.notifications.error(genericErrorMessage);
+        return this.pixToast.sendErrorNotification({ message: genericErrorMessage });
       });
     }
   }

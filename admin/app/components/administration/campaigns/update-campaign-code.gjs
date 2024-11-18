@@ -11,7 +11,7 @@ import AdministrationBlockLayout from '../block-layout';
 
 export default class UpdateCampaignCode extends Component {
   @service intl;
-  @service notifications;
+  @service pixToast;
   @service store;
 
   @tracked isLoading;
@@ -24,29 +24,37 @@ export default class UpdateCampaignCode extends Component {
     const adapter = this.store.adapterFor('update-campaign-code');
     try {
       await adapter.updateCampaignCode({ campaignId: this.campaignId, campaignCode: this.campaignCode });
-      this.notifications.success(this.intl.t('components.administration.update-campaign-code.notifications.success'));
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('components.administration.update-campaign-code.notifications.success'),
+      });
     } catch (errorResponse) {
       const errors = errorResponse.errors;
 
       if (!errors) {
-        return this.notifications.error(this.intl.t('common.notifications.generic-error'));
+        return this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
       } else {
         const error = errors[0];
 
         if (error.code === 'CAMPAIGN_CODE_BAD_FORMAT') {
-          return this.notifications.error(
-            this.intl.t('components.administration.update-campaign-code.notifications.error.campaign-code-format'),
-          );
+          return this.pixToast.sendErrorNotification({
+            message: this.intl.t(
+              'components.administration.update-campaign-code.notifications.error.campaign-code-format',
+            ),
+          });
         } else if (error.code === 'CAMPAIGN_CODE_NOT_UNIQUE') {
-          return this.notifications.error(
-            this.intl.t('components.administration.update-campaign-code.notifications.error.unique-code-error'),
-          );
+          return this.pixToast.sendErrorNotification({
+            message: this.intl.t(
+              'components.administration.update-campaign-code.notifications.error.unique-code-error',
+            ),
+          });
         } else if (error.code === 'UNKNOWN_CAMPAIGN_ID') {
-          this.notifications.error(
-            this.intl.t('components.administration.update-campaign-code.notifications.error.campaign-id-error'),
-          );
+          this.pixToast.sendErrorNotification({
+            message: this.intl.t(
+              'components.administration.update-campaign-code.notifications.error.campaign-id-error',
+            ),
+          });
         } else {
-          this.notifications.error(this.intl.t('common.notifications.generic-error'));
+          this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
         }
       }
     } finally {

@@ -14,7 +14,7 @@ import ListItems from '../organizations/list-items';
 
 export default class Organizations extends Component {
   @service store;
-  @service notifications;
+  @service pixToast;
   @service router;
   @service currentUser;
   @service intl;
@@ -68,7 +68,7 @@ export default class Organizations extends Component {
         );
       }
 
-      await this.notifications.success(message.join(''), { htmlContent: true });
+      await this.pixToast.sendSuccessNotification({ message: message.join('') });
 
       return this.router.replaceWith('authenticated.target-profiles.target-profile.organizations');
     } catch (responseError) {
@@ -89,7 +89,7 @@ export default class Organizations extends Component {
         targetProfileIdToCopy: this.existingTargetProfile,
       });
       this.existingTargetProfile = '';
-      await this.notifications.success('Organisation(s) rattaché(es) avec succès.');
+      await this.pixToast.sendSuccessNotification({ message: 'Organisation(s) rattaché(es) avec succès.' });
       return this.router.replaceWith('authenticated.target-profiles.target-profile.organizations');
     } catch (responseError) {
       this._handleResponseError(responseError);
@@ -100,13 +100,13 @@ export default class Organizations extends Component {
     const genericErrorMessage = this.intl.t('common.notifications.generic-error');
 
     if (!errors) {
-      return this.notifications.error(genericErrorMessage);
+      return this.pixToast.sendErrorNotification({ message: genericErrorMessage });
     }
     errors.forEach((error) => {
       if (['404', '412'].includes(error.status)) {
-        return this.notifications.error(error.detail);
+        return this.pixToast.sendErrorNotification({ message: error.detail });
       }
-      return this.notifications.error(genericErrorMessage);
+      return this.pixToast.sendErrorNotification({ message: genericErrorMessage });
     });
   }
 
