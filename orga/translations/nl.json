@@ -854,7 +854,8 @@
         "button": "Aanmelden",
         "errors": {
           "default": "De service is tijdelijk niet beschikbaar. Probeer het later nog eens.",
-          "email-already-exists": "Dit e-mailadres is al geregistreerd, log in."
+          "email-already-exists": "Dit e-mailadres is al geregistreerd, log in.",
+          "invalid-or-already-used-email": "Invalid or already used e-mail address"
         },
         "fields": {
           "button": {

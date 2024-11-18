@@ -40,7 +40,11 @@
         name="email"
         type="email"
         {{on "change" this.validateEmail}}
-        @errorMessage={{this.validation.email.message}}
+        @errorMessage={{if
+          (this._getErrorMessageForField "email")
+          (this._getErrorMessageForField "email")
+          this.validation.email.message
+        }}
         @validationStatus={{this.validation.email.status}}
         required={{true}}
         aria-required={{true}}

@@ -866,7 +866,8 @@
         "button": "S'inscrire",
         "errors": {
           "default": "Le service est momentanément indisponible. Veuillez réessayer ultérieurement.",
-          "email-already-exists": "Cette adresse e-mail est déjà enregistrée, connectez-vous."
+          "email-already-exists": "Cette adresse e-mail est déjà enregistrée, connectez-vous.",
+          "invalid-or-already-used-email": "Adresse e-mail invalide ou déjà utilisée"
         },
         "fields": {
           "button": {
