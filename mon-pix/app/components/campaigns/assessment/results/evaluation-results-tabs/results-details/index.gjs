@@ -1,9 +1,23 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
 import CompetenceRow from './competence-row';
 
 export default class EvaluationResultsDetailsTab extends Component {
+  @service metrics;
+
+  constructor() {
+    super(...arguments);
+
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Fin de parcours',
+      'pix-event-action': 'Affichage onglet',
+      'pix-event-name': "Affichage de l'onglet Détails",
+    });
+  }
+
   get groupedCompetencesByArea() {
     return this.args.competenceResults.reduce((areas, competenceResult) => {
       const existingArea = areas.find((area) => area.areaTitle === competenceResult.areaTitle);
