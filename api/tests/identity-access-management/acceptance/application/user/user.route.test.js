@@ -730,7 +730,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       expect(response.statusCode).to.equal(204);
     });
 
-    it('should return 400 if email already exists', async function () {
+    it('should return 422 if email already exists', async function () {
       // given
       const server = await createServer();
 
@@ -767,8 +767,8 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       const response = await server.inject(options);
 
       // then
-      expect(response.statusCode).to.equal(400);
-      expect(response.result.errors[0].detail).to.equal('Adresse e-mail invalide ou déjà utilisée');
+      expect(response.statusCode).to.equal(422);
+      expect(response.result.errors[0].detail).to.equal('INVALID_OR_ALREADY_USED_EMAIL');
     });
 
     it('should return 403 if requested user is not the same as authenticated user', async function () {
