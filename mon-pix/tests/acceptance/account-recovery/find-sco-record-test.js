@@ -244,7 +244,9 @@ module('Acceptance | account-recovery | FindScoRecordRoute', function (hooks) {
         // then
         assert.ok(
           screen.getByText(
-            t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.error.new-email-already-exist'),
+            t(
+              'pages.account-recovery.find-sco-record.backup-email-confirmation.form.error.invalid-or-already-used-email',
+            ),
           ),
         );
       });

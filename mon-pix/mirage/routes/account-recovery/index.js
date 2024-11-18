@@ -13,7 +13,7 @@ export default function index(config) {
         400,
         {},
         {
-          errors: [{ status: '400', code: 'ACCOUNT_WITH_EMAIL_ALREADY_EXISTS' }],
+          errors: [{ status: '422', code: 'INVALID_OR_ALREADY_USED_EMAIL' }],
         },
       );
     }

@@ -366,6 +366,7 @@
                 "new-email": ",if not, enter a new one."
               },
               "empty-email": "The e-mail address field is mandatory.",
+              "invalid-or-already-used-email" : "Invalid or already used e-mail address",
               "new-backup-email": "Please enter a valid e-mail address to recover your account",
               "new-email-already-exist": "This e-mail address is already in use",
               "wrong-email-format": "Your e-mail address is invalid."

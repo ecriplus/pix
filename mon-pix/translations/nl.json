@@ -370,6 +370,7 @@
                 "new-email": "Zo niet, voer dan een nieuwe in."
               },
               "empty-email": "Het e-mailadresveld is verplicht.",
+              "invalid-or-already-used-email" : "Invalid or already used e-mail address",
               "new-backup-email": "Voer een geldig e-mailadres in om uw account te herstellen",
               "new-email-already-exist": "Dit e-mailadres is al in gebruik",
               "wrong-email-format": "Uw e-mailadres is ongeldig."
