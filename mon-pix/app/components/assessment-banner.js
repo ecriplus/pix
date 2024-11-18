@@ -9,10 +9,6 @@ export default class AssessmentBanner extends Component {
 
   @tracked showClosingModal = false;
 
-  get textToSpeechIcon() {
-    return this.args.isTextToSpeechActivated ? 'volume-high' : 'volume-xmark';
-  }
-
   get textToSpeechTooltipText() {
     return this.args.isTextToSpeechActivated
       ? this.intl.t('pages.challenge.statement.text-to-speech.deactivate')

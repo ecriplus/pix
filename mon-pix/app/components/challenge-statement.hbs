@@ -8,11 +8,11 @@
             <:triggerElement>
               <button
                 type="button"
+                class="challenge-statement__text-to-speech-trigger"
                 aria-label={{this.textToSpeechButtonTooltipText}}
                 {{on "click" this.toggleInstructionTextToSpeech}}
-                class="challenge-statement__text-to-speech-trigger"
               >
-                <FaIcon @icon={{this.textToSpeechButtonIcon}} />
+                <PixIcon @name={{if this.isSpeaking "stopCircle" "volumeOn"}} />
               </button>
             </:triggerElement>
             <:tooltip>

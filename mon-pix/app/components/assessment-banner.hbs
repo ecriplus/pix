@@ -13,7 +13,7 @@
         <PixTooltip class="assessment-banner__text-to-speech-toggle" @position="left" @isInline={{true}}>
           <:triggerElement>
             <button type="button" aria-label={{this.textToSpeechTooltipText}} {{on "click" @toggleTextToSpeech}}>
-              <FaIcon @icon={{this.textToSpeechIcon}} />
+              <PixIcon @name={{if @isTextToSpeechActivated "volumeOn" "volumeOff"}} />
             </button>
           </:triggerElement>
           <:tooltip>
