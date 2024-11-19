@@ -1748,4 +1748,84 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       expect(results).to.deep.equal([organizationLearnerId]);
     });
   });
+
+  describe('#reconcileUserToOrganizationLearner', function () {
+    let organization;
+    let organizationLearner;
+    let user;
+    let initialDate;
+
+    beforeEach(async function () {
+      initialDate = new Date('2023-01-01');
+      organization = databaseBuilder.factory.buildOrganization();
+      organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: organization.id,
+        userId: null,
+        firstName: 'Steeve',
+        lastName: 'Roger',
+        updatedAt: initialDate,
+      });
+      user = databaseBuilder.factory.buildUser({ firstName: 'Steeve', lastName: 'Roger' });
+      await databaseBuilder.commit();
+    });
+
+    it('should save association between user and organizationLearner', async function () {
+      // when
+      const organizationLearnerPatched = await organizationLearnerRepository.reconcileUserToOrganizationLearner({
+        userId: user.id,
+        organizationLearnerId: organizationLearner.id,
+      });
+
+      // then
+      expect(organizationLearnerPatched).to.be.instanceof(OrganizationLearner);
+      expect(organizationLearnerPatched.updatedAt).to.be.above(initialDate);
+      expect(organizationLearnerPatched.userId).to.equal(user.id);
+    });
+
+    it('should return an error when we don’t find the organizationLearner to update', async function () {
+      // given
+      const fakeStudentId = 1;
+
+      // when
+      const error = await catchErr(organizationLearnerRepository.reconcileUserToOrganizationLearner)({
+        userId: user.id,
+        organizationLearnerId: fakeStudentId,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(UserCouldNotBeReconciledError);
+    });
+
+    it('should return an error when the userId to link don’t match a user', async function () {
+      // given
+      const fakeUserId = 1;
+
+      // when
+      const error = await catchErr(organizationLearnerRepository.reconcileUserToOrganizationLearner)({
+        userId: fakeUserId,
+        organizationLearnerId: organizationLearner.id,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(UserCouldNotBeReconciledError);
+    });
+
+    it('should return an error when the organization learner is disabled', async function () {
+      // given
+      const disabledOrganizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: organization.id,
+        userId: null,
+        isDisabled: true,
+      });
+
+      // when
+      const error = await catchErr(organizationLearnerRepository.reconcileUserToOrganizationLearner)({
+        userId: user.id,
+        organizationLearnerId: disabledOrganizationLearner.id,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(UserCouldNotBeReconciledError);
+    });
+  });
 });

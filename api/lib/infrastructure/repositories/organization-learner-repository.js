@@ -4,7 +4,6 @@ import {
   NotFoundError,
   OrganizationLearnerCertificabilityNotUpdatedError,
   OrganizationLearnerNotFound,
-  UserCouldNotBeReconciledError,
   UserNotFoundError,
 } from '../../../src/shared/domain/errors.js';
 import { OrganizationLearner } from '../../../src/shared/domain/models/OrganizationLearner.js';
@@ -132,21 +131,6 @@ const findByOrganizationIdAndBirthdate = async function ({ organizationId, birth
     .orderBy('id');
 
   return rawOrganizationLearners.map((rawOrganizationLearner) => new OrganizationLearner(rawOrganizationLearner));
-};
-
-const reconcileUserToOrganizationLearner = async function ({ userId, organizationLearnerId }) {
-  try {
-    const knexConn = DomainTransaction.getConnection();
-    const [rawOrganizationLearner] = await knexConn('organization-learners')
-      .where({ id: organizationLearnerId })
-      .where('isDisabled', false)
-      .update({ userId, updatedAt: knex.fn.now() })
-      .returning('*');
-    if (!rawOrganizationLearner) throw new Error();
-    return new OrganizationLearner(rawOrganizationLearner);
-  } catch (error) {
-    throw new UserCouldNotBeReconciledError();
-  }
 };
 
 const dissociateAllStudentsByUserId = async function ({ userId }) {
@@ -377,7 +361,6 @@ export {
   get,
   getLatestOrganizationLearner,
   isActive,
-  reconcileUserToOrganizationLearner,
   updateCertificability,
   updateUserIdWhereNull,
 };
