@@ -10,6 +10,8 @@ import * as competenceRepository from '../../../shared/infrastructure/repositori
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as attestationRepository from '../../infrastructure/repositories/attestation-repository.js';
+import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
+import * as organizationProfileRewardRepository from '../../infrastructure/repositories/organization-profile-reward-repository.js';
 import * as rewardRepository from '../../infrastructure/repositories/reward-repository.js';
 
 const path = dirname(fileURLToPath(import.meta.url));
@@ -25,8 +27,10 @@ const dependencies = {
   knowledgeElementRepository,
   profileRewardRepository,
   userRepository: repositories.userRepository,
+  organizationProfileRewardRepository,
   attestationRepository,
   rewardRepository,
+  campaignParticipationRepository,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
