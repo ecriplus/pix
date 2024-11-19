@@ -5,6 +5,7 @@ import { usecases } from '../../domain/usecases/index.js';
 import { authenticationMethodsSerializer } from '../../infrastructure/serializers/jsonapi/authentication-methods.serializer.js';
 import { emailVerificationSerializer } from '../../infrastructure/serializers/jsonapi/email-verification.serializer.js';
 import * as updateEmailSerializer from '../../infrastructure/serializers/jsonapi/update-email.serializer.js';
+import { userAccountInfoSerializer } from '../../infrastructure/serializers/jsonapi/user-account-info.serializer.js';
 import { userWithActivitySerializer } from '../../infrastructure/serializers/jsonapi/user-with-activity.serializer.js';
 
 const acceptPixCertifTermsOfService = async function (request, h) {
@@ -86,6 +87,22 @@ const getCurrentUser = async function (request, h, dependencies = { userWithActi
   const result = await usecases.getCurrentUser({ authenticatedUserId });
 
   return dependencies.userWithActivitySerializer.serialize(result);
+};
+
+/**
+ * @param request
+ * @param h
+ * @param {{
+ *   userAccountInfoSerializer: UserAccountInfoSerializer
+ * }} dependencies
+ * @return {Promise<*>}
+ */
+const getCurrentUserAccountInfo = async function (request, h, dependencies = { userAccountInfoSerializer }) {
+  const authenticatedUserId = request.auth.credentials.userId;
+
+  const userAccountInfo = await usecases.getUserAccountInfo({ userId: authenticatedUserId });
+
+  return dependencies.userAccountInfoSerializer.serialize(userAccountInfo);
 };
 
 /**
@@ -214,6 +231,7 @@ export const userController = {
   acceptPixOrgaTermsOfService,
   changeUserLanguage,
   getCurrentUser,
+  getCurrentUserAccountInfo,
   getUserAuthenticationMethods,
   rememberUserHasSeenLastDataProtectionPolicyInformation,
   createUser,
