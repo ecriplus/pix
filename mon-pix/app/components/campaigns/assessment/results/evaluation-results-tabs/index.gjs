@@ -11,7 +11,9 @@ export default class EvaluationResultsTabs extends Component {
   @service tabManager;
 
   get showRewardsTab() {
-    return this.args.campaignParticipationResult.campaignParticipationBadges.length > 0;
+    const badges = this.args.campaignParticipationResult.campaignParticipationBadges;
+
+    return badges.some((badge) => badge.isAcquired || badge.isAlwaysVisible);
   }
 
   get initialTabIndex() {
