@@ -4,6 +4,7 @@ import { ProfileReward } from '../../../../../src/profile/domain/models/ProfileR
 import {
   getByAttestationKeyAndUserIds,
   getById,
+  getByIds,
   getByUserId,
   save,
 } from '../../../../../src/profile/infrastructure/repositories/profile-reward-repository.js';
@@ -63,6 +64,38 @@ describe('Profile | Integration | Repository | profile-reward', function () {
       // then
       expect(result).to.be.an.instanceof(ProfileReward);
       expect(result.id).to.equal(expectedProfileReward.id);
+    });
+  });
+
+  describe('#getByIds', function () {
+    it('should return empty array if the profile rewards does not exist', async function () {
+      // given
+      const notExistingProfileRewardId = 12;
+
+      // when
+      const result = await getByIds({ profileRewardIds: [notExistingProfileRewardId] });
+
+      // then
+      expect(result).to.be.empty;
+    });
+
+    it('should return the profile rewards for given ids', async function () {
+      // given
+      const attestation = databaseBuilder.factory.buildAttestation({ key: 'key' });
+      const firstProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId: attestation.id });
+      const secondProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId: attestation.id });
+      const expectedProfileReward = [firstProfileReward.id, secondProfileReward.id];
+
+      databaseBuilder.factory.buildProfileReward();
+
+      await databaseBuilder.commit();
+
+      // when
+      const results = await getByIds({ profileRewardIds: expectedProfileReward });
+
+      // then
+      expect(results).to.have.lengthOf(2);
+      expect(results).to.have.deep.members([firstProfileReward, secondProfileReward]);
     });
   });
 
