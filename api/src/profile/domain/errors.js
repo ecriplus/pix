@@ -18,4 +18,15 @@ class ProfileRewardCantBeSharedError extends DomainError {
   }
 }
 
-export { AttestationNotFoundError, ProfileRewardCantBeSharedError, RewardTypeDoesNotExistError };
+class NoProfileRewardsFoundError extends DomainError {
+  constructor(message = 'No profile rewards found') {
+    super(message);
+  }
+}
+
+export {
+  AttestationNotFoundError,
+  NoProfileRewardsFoundError,
+  ProfileRewardCantBeSharedError,
+  RewardTypeDoesNotExistError,
+};
