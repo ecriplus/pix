@@ -34,7 +34,7 @@ describe('Integration | Organizational Entities | Repository | data-protection-o
 
       // then
       const foundDataProtectionOfficers = await knex('data-protection-officers').select();
-      expect(foundDataProtectionOfficers.length).to.equal(2);
+      expect(foundDataProtectionOfficers).to.have.lengthOf(2);
       expect(foundDataProtectionOfficers[0]).to.contain({
         ...dataProtectionOfficerA,
         organizationId: firstOrganization.id,

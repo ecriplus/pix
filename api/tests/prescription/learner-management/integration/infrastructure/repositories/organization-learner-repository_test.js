@@ -151,7 +151,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
 
       // then
       const learners = await knex('view-active-organization-learners').where({ organizationId });
-      expect(learners.length).to.equal(1);
+      expect(learners).to.have.lengthOf(1);
       expect(learners[0].id).to.equal(thirdOrganisationLearnerId);
     });
   });
@@ -332,7 +332,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
             const existingOrganizationLearners = await organizationLearnerRepository.findByIds({
               ids: [existingOrganizationLearner.id],
             });
-            expect(existingOrganizationLearners).to.have.length(1);
+            expect(existingOrganizationLearners).to.have.lengthOf(1);
             expect(existingOrganizationLearner).to.deep.contain(existingOrganizationLearners[0]);
 
             const [newOrganizationLearner] = await organizationLearnerRepository.findByOrganizationId({
@@ -392,7 +392,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
         const actualOrganizationLearners = await organizationLearnerRepository.findByOrganizationId({
           organizationId,
         });
-        expect(actualOrganizationLearners).to.have.length(1);
+        expect(actualOrganizationLearners).to.have.lengthOf(1);
         expect(
           _.omit(actualOrganizationLearners[0], ['updatedAt', 'id', 'certifiableAt', 'isCertifiable']),
         ).to.deep.equal(_.omit(firstOrganizationLearner, ['updatedAt', 'id', 'certifiableAt', 'isCertifiable']));

@@ -33,7 +33,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
         await campaignProfilesCollectionParticipationSummaryRepository.findPaginatedByCampaignId(campaignId);
 
       // then
-      expect(results.data.length).to.equal(0);
+      expect(results.data).to.have.lengthOf(0);
     });
 
     it('should not return participant data summary for a not shared campaign participation', async function () {
@@ -811,7 +811,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
         );
 
         // then
-        expect(results.data.length).to.equal(2);
+        expect(results.data).to.have.lengthOf(2);
       });
 
       it('returns Laa-Laa when we search part of its firstname', async function () {
@@ -854,7 +854,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
         );
 
         // then
-        expect(results.data.length).to.equal(1);
+        expect(results.data).to.have.lengthOf(1);
         expect(results.data[0].firstName).to.equal('Laa-Laa');
       });
 
@@ -898,7 +898,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
         );
 
         // then
-        expect(results.data.length).to.equal(1);
+        expect(results.data).to.have.lengthOf(1);
         expect(results.data[0].firstName).to.equal('Laa-Laa');
       });
 
@@ -942,7 +942,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
         );
 
         // then
-        expect(results.data.length).to.equal(1);
+        expect(results.data).to.have.lengthOf(1);
         expect(results.data[0].firstName).to.equal('Laa-Laa');
       });
 
@@ -986,7 +986,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
         );
 
         // then
-        expect(results.data.length).to.equal(1);
+        expect(results.data).to.have.lengthOf(1);
         expect(results.data[0].firstName).to.equal('Laa-Laa');
       });
 
@@ -1038,7 +1038,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
         );
 
         // then
-        expect(results.data.length).to.equal(2);
+        expect(results.data).to.have.lengthOf(2);
         expect(results.data[0].firstName).to.equal('Dipsy');
         expect(results.data[1].firstName).to.equal('Laa-Laa');
       });

@@ -255,7 +255,7 @@ describe('Integration | Team | Infrastructure | Repository | organization-invita
       });
 
       // then
-      expect(foundOrganizationInvitations.length).to.equal(2);
+      expect(foundOrganizationInvitations).to.have.lengthOf(2);
     });
 
     it('should return organization-invitations from most recent to oldest', async function () {

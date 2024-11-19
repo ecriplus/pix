@@ -350,7 +350,7 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         'extraTimePercentage',
       ]);
       expect(parseFloat(savedCandidateData.extraTimePercentage)).to.equal(candidateData.extraTimePercentage);
-      expect(savedSubscriptionsData.length).to.equal(2);
+      expect(savedSubscriptionsData).to.have.lengthOf(2);
       expect(savedSubscriptionsData[0]).to.deepEqualInstanceOmitting(
         {
           certificationCandidateId: candidateId,

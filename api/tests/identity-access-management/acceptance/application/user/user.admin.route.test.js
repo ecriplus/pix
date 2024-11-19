@@ -69,7 +69,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
         // then
         const { result, statusCode } = response;
         expect(statusCode).to.equal(200);
-        expect(result.data).to.have.length(3);
+        expect(result.data).to.have.lengthOf(3);
       });
     });
   });
