@@ -1,3 +1,4 @@
+import { CenterTypes } from '../../../../../src/certification/configuration/domain/models/CenterTypes.js';
 import { CERTIFICATION_CENTER_TYPES } from '../../../../../src/shared/domain/constants.js';
 import {
   createServer,
@@ -61,8 +62,9 @@ describe('Certification | Configuration | Acceptance | API | sco-whitelist-route
   });
 
   describe('GET /api/admin/sco-whitelist', function () {
-    it('should return 200 HTTP status code', async function () {
+    it('should return 200 HTTP status code and whitelist as CSV', async function () {
       // given
+      const BOM_CHAR = '\ufeff';
       const superAdmin = await insertUserWithRoleSuperAdmin();
       const options = {
         method: 'GET',
@@ -72,11 +74,24 @@ describe('Certification | Configuration | Acceptance | API | sco-whitelist-route
         },
       };
 
+      databaseBuilder.factory.buildCertificationCenter({
+        type: CenterTypes.SCO,
+        isScoBlockedAccessWhitelist: true,
+        externalId: 'I_AM_WHITELISTED',
+      });
+      databaseBuilder.factory.buildCertificationCenter({
+        type: CenterTypes.SCO,
+        isScoBlockedAccessWhitelist: false,
+        externalId: 'I_AM_NOT_WHITELISTED',
+      });
+      await databaseBuilder.commit();
+
       // when
       const response = await server.inject(options);
 
       // then
       expect(response.statusCode).to.equal(200);
+      expect(response.payload).to.equal(`${BOM_CHAR}"externalId"\n"I_AM_WHITELISTED"`);
     });
   });
 });
