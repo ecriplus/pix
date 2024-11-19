@@ -1,8 +1,8 @@
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 
 export class AssessmentSimulator {
-  constructor({ getStrategy }) {
-    this.getStrategy = getStrategy;
+  constructor({ strategy }) {
+    this.strategy = strategy;
   }
 
   run({ challengesAnswers } = { challengesAnswers: [] }) {
@@ -14,7 +14,7 @@ export class AssessmentSimulator {
     do {
       hasNextAnswer = false;
 
-      const simulatorStepResult = this.getStrategy().run({ challengesAnswers, stepIndex });
+      const simulatorStepResult = this.strategy.run({ challengesAnswers, stepIndex });
       if (simulatorStepResult) {
         stepIndex = simulatorStepResult.nextStepIndex;
         challengesAnswers.push(...simulatorStepResult.challengeAnswers);

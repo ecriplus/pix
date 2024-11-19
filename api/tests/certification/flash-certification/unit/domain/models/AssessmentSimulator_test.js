@@ -14,7 +14,6 @@ describe('Unit | Domain | Models | AssessmentSimulator', function () {
       const strategy = {
         run: sinon.stub(),
       };
-      const getStrategy = () => strategy;
 
       const firstRunAnswer = new Answer({
         result: answersForSimulator[0],
@@ -80,7 +79,7 @@ describe('Unit | Domain | Models | AssessmentSimulator', function () {
       ];
 
       const result = new AssessmentSimulator({
-        getStrategy,
+        strategy,
       }).run();
 
       // then

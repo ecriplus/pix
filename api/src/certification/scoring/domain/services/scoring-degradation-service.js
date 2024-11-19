@@ -30,10 +30,8 @@ export const downgradeCapacity = ({
     initialCapacity: capacity,
   });
 
-  const getStrategy = () => singleMeasureStrategy;
-
   const simulator = new AssessmentSimulator({
-    getStrategy,
+    strategy: singleMeasureStrategy,
   });
 
   const result = simulator.run({ challengesAnswers: allAnswers });

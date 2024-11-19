@@ -43,10 +43,8 @@ export async function simulateFlashAssessmentScenario({
     initialCapacity,
   });
 
-  const getStrategy = () => singleMeasureStrategy;
-
   const simulator = new AssessmentSimulator({
-    getStrategy,
+    strategy: singleMeasureStrategy,
   });
 
   return simulator.run();
