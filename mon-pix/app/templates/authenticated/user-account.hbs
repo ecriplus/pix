@@ -32,6 +32,11 @@
                 </LinkTo>
               </li>
             {{/if}}
+            {{#if @model.accountInfo.canSelfDeleteAccount}}
+              <li>
+                {{! ADD DELETE ACCOUNT LINK HERE }}
+              </li>
+            {{/if}}
           </ul>
         </nav>
       </PixBlock>
