@@ -69,7 +69,6 @@ export const handleV3CertificationScoring = async ({
   );
   const askedChallenges = await challengeRepository.getMany(
     certificationChallengesForScoring.map((challengeForScoring) => challengeForScoring.id),
-    locale,
   );
 
   _restoreCalibrationValues(certificationChallengesForScoring, askedChallenges);
