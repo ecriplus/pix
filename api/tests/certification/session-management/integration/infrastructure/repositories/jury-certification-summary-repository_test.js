@@ -25,7 +25,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
         const juryCertificationSummaries = await juryCertificationSummaryRepository.findBySessionId({ sessionId });
 
         // then
-        expect(juryCertificationSummaries).to.have.length(0);
+        expect(juryCertificationSummaries).to.have.lengthOf(0);
       });
     });
 
@@ -102,7 +102,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           ],
           complementaryCertificationTakenLabel: null,
         });
-        expect(juryCertificationSummaries).to.have.length(3);
+        expect(juryCertificationSummaries).to.have.lengthOf(3);
         expect(juryCertificationSummaries[0]).to.deepEqualInstance(expectedJuryCertificationSummary);
         expect(juryCertificationSummaries[1].id).to.equal(startedCertification.id);
       });
@@ -285,7 +285,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
         });
 
         // then
-        expect(juryCertificationSummaries).to.have.length(0);
+        expect(juryCertificationSummaries).to.have.lengthOf(0);
       });
     });
 
@@ -423,7 +423,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           });
 
         // then
-        expect(juryCertificationSummaries).to.have.length(2);
+        expect(juryCertificationSummaries).to.have.lengthOf(2);
         expect(pagination).to.deep.equal({ rowCount: 5, pageCount: 3, page: page.number, pageSize: page.size });
       });
 

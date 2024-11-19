@@ -75,7 +75,7 @@ describe('Integration | Repository | Campaign Participation', function () {
 
       // then
       const snapshotInDB = await knex.select('id').from('knowledge-element-snapshots');
-      expect(snapshotInDB).to.have.length(1);
+      expect(snapshotInDB).to.have.lengthOf(1);
     });
 
     context('when there is a transaction', function () {
@@ -85,7 +85,7 @@ describe('Integration | Repository | Campaign Participation', function () {
         await withTransaction(async () => campaignParticipationRepository.updateWithSnapshot(campaignParticipation))();
 
         const snapshotInDB = await knex.select('id').from('knowledge-element-snapshots');
-        expect(snapshotInDB).to.have.length(1);
+        expect(snapshotInDB).to.have.lengthOf(1);
       });
 
       it('does not save a snapshot when there is an error', async function () {

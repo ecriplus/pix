@@ -82,7 +82,7 @@ describe('Integration | Repository | Certification Challenge Live Alert', functi
         });
 
         // then
-        expect(liveAlerts).to.have.length(0);
+        expect(liveAlerts).to.have.lengthOf(0);
       });
     });
 
@@ -105,7 +105,7 @@ describe('Integration | Repository | Certification Challenge Live Alert', functi
         });
 
         // then
-        expect(liveAlerts).to.have.length(1);
+        expect(liveAlerts).to.have.lengthOf(1);
         expect(_.pick(liveAlerts[0], ['questionNumber', 'assessmentId'])).to.deep.equal({
           questionNumber,
           assessmentId: assessmentIdWithLiveAlert,
@@ -167,7 +167,7 @@ describe('Integration | Repository | Certification Challenge Live Alert', functi
           });
 
         // then
-        expect(liveAlertValidatedChallengeIds).to.have.length(0);
+        expect(liveAlertValidatedChallengeIds).to.have.lengthOf(0);
       });
     });
 

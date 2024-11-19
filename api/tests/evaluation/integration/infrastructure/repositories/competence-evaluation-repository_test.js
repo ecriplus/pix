@@ -280,7 +280,7 @@ describe('Integration | Repository | Competence Evaluation', function () {
 
       // then
       return promise.then((competenceEvaluation) => {
-        expect(competenceEvaluation).to.have.length(2);
+        expect(competenceEvaluation).to.have.lengthOf(2);
         expect(_.omit(competenceEvaluation[0], ['assessment', 'scorecard'])).to.deep.equal(
           _.omit(competenceEvaluationExpected, ['assessment']),
         );
@@ -319,7 +319,7 @@ describe('Integration | Repository | Competence Evaluation', function () {
       const competenceEvaluations = await competenceEvaluationRepository.findByAssessmentId(assessmentId);
 
       // then
-      expect(competenceEvaluations).to.have.length(1);
+      expect(competenceEvaluations).to.have.lengthOf(1);
       expect(_.omit(competenceEvaluations[0], ['assessment', 'scorecard'])).to.deep.equal(
         _.omit(competenceEvaluationExpected, ['assessment']),
       );

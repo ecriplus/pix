@@ -343,7 +343,7 @@ describe('Acceptance | API | Certification Course', function () {
 
           // then
           const certificationCourses = await knex('certification-courses').where({ userId, sessionId });
-          expect(certificationCourses).to.have.length(1);
+          expect(certificationCourses).to.have.lengthOf(1);
           expect(certificationCourses[0].version).to.equal(SESSIONS_VERSIONS.V2);
           expect(response.result.data.attributes).to.include({
             'nb-challenges': 2,
@@ -455,7 +455,7 @@ describe('Acceptance | API | Certification Course', function () {
           userId,
           sessionId,
         });
-        expect(otherCertificationCourses).to.have.length(0);
+        expect(otherCertificationCourses).to.have.lengthOf(0);
         expect(certificationCourse.id + '').to.equal(response.result.data.id);
         expect(certificationCourse.version).to.equal(SESSIONS_VERSIONS.V2);
       });

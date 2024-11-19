@@ -148,7 +148,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       expect(archivedOrganization.archivedAt).to.deep.equal(now);
 
       const organizations = await knex('organizations').where({ archivedBy: null });
-      expect(organizations).to.have.length(1);
+      expect(organizations).to.have.lengthOf(1);
       expect(organizations[0].id).to.equal(2);
     });
 

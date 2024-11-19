@@ -96,30 +96,30 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
     });
 
     const authenticationMethods = await knex('authentication-methods').where({ userId });
-    expect(authenticationMethods).to.have.length(0);
+    expect(authenticationMethods).to.have.lengthOf(0);
 
     const refreshTokens = await refreshTokenRepository.findAllByUserId(userId);
-    expect(refreshTokens).to.have.length(0);
+    expect(refreshTokens).to.have.lengthOf(0);
 
     const resetPasswordDemands = await knex('reset-password-demands').whereRaw('LOWER("email") = LOWER(?)', user.email);
-    expect(resetPasswordDemands).to.have.length(0);
+    expect(resetPasswordDemands).to.have.lengthOf(0);
 
     const enabledMemberships = await knex('memberships').where({ userId }).whereNull('disabledAt');
-    expect(enabledMemberships).to.have.length(0);
+    expect(enabledMemberships).to.have.lengthOf(0);
     const disabledMemberships = await knex('memberships').where({ userId }).whereNotNull('disabledAt');
-    expect(disabledMemberships).to.have.length(1);
+    expect(disabledMemberships).to.have.lengthOf(1);
 
     const enabledCertificationCenterMemberships = await knex('certification-center-memberships')
       .where({ userId })
       .whereNull('disabledAt');
-    expect(enabledCertificationCenterMemberships).to.have.length(0);
+    expect(enabledCertificationCenterMemberships).to.have.lengthOf(0);
     const disabledCertificationCenterMemberships = await knex('certification-center-memberships')
       .where({ userId })
       .whereNotNull('disabledAt');
-    expect(disabledCertificationCenterMemberships).to.have.length(1);
+    expect(disabledCertificationCenterMemberships).to.have.lengthOf(1);
 
     const organizationLearners = await knex('organization-learners').where({ userId });
-    expect(organizationLearners).to.have.length(0);
+    expect(organizationLearners).to.have.lengthOf(0);
 
     const anonymizedUserLogin = await knex('user-logins').where({ id: userLogin.id }).first();
     expect(anonymizedUserLogin.createdAt.toISOString()).to.equal('2012-12-01T00:00:00.000Z');

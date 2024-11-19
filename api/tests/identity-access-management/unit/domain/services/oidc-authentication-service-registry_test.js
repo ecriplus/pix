@@ -243,7 +243,7 @@ describe('Unit | Identity Access Management | Domain | Services | oidc-authentic
         const services = oidcAuthenticationServiceRegistry.getAllOidcProviderServices();
 
         // then
-        expect(services).to.have.length(3);
+        expect(services).to.have.lengthOf(3);
 
         const genericService = services.find((service) => service.identityProvider === 'GENERIC');
         expect(genericService).not.to.be.empty;

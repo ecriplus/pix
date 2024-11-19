@@ -229,8 +229,8 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
         await knowledgeElementRepository.findUniqByUserIdGroupedByCompetenceId({ userId });
 
       // then
-      expect(actualKnowledgeElementsGroupedByCompetenceId[1]).to.have.length(2);
-      expect(actualKnowledgeElementsGroupedByCompetenceId[2]).to.have.length(1);
+      expect(actualKnowledgeElementsGroupedByCompetenceId[1]).to.have.lengthOf(2);
+      expect(actualKnowledgeElementsGroupedByCompetenceId[2]).to.have.lengthOf(1);
       expect(actualKnowledgeElementsGroupedByCompetenceId[1][0]).to.be.instanceOf(KnowledgeElement);
     });
   });
@@ -1361,7 +1361,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
       const knowledgeElements = await knowledgeElementRepository.findInvalidatedAndDirectByUserId(userId);
 
       // Then
-      expect(knowledgeElements).to.have.length(2);
+      expect(knowledgeElements).to.have.lengthOf(2);
       expect(knowledgeElements[0]).to.be.instanceOf(KnowledgeElement);
       expect(knowledgeElements[0].id).to.equal(2);
     });
@@ -1375,7 +1375,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
       const knowledgeElements = await knowledgeElementRepository.findInvalidatedAndDirectByUserId(userId);
 
       // Then
-      expect(knowledgeElements).to.have.length(0);
+      expect(knowledgeElements).to.have.lengthOf(0);
     });
   });
 
