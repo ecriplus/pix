@@ -82,6 +82,18 @@ export const userRoutes = [
   },
   {
     method: 'GET',
+    path: '/api/users/my-account',
+    config: {
+      handler: (request, h) => userController.getCurrentUserAccountInfo(request, h),
+      notes: [
+        '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
+          '- Récupération des information de compte utilisateur\n',
+      ],
+      tags: ['identity-access-management', 'api', 'user', 'my-account'],
+    },
+  },
+  {
+    method: 'GET',
     path: '/api/users/{id}/authentication-methods',
     config: {
       validate: {

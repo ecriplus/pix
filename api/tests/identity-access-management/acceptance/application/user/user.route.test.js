@@ -260,6 +260,35 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
     });
   });
 
+  describe('GET /api/users/my-account', function () {
+    it('returns 200 HTTP status code', async function () {
+      // given
+      const user = databaseBuilder.factory.buildUser();
+      await databaseBuilder.commit();
+
+      // when
+      const response = await server.inject({
+        method: 'GET',
+        url: '/api/users/my-account',
+        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+      });
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result).to.deep.equal({
+        data: {
+          type: 'my-accounts',
+          id: user.id.toString(),
+          attributes: {
+            'can-self-delete-account': false,
+            email: user.email,
+            username: user.username,
+          },
+        },
+      });
+    });
+  });
+
   describe('GET /api/users/{id}/authentication-methods', function () {
     it('returns 200 HTTP status code', async function () {
       // given
