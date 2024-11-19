@@ -1,8 +1,8 @@
 import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
@@ -45,6 +45,14 @@ export default class Tube extends Component {
 
   get checked() {
     return this.state === 'checked';
+  }
+
+  get mobileIcon() {
+    return this.args.tube.mobile ? 'mobile' : 'mobileOff';
+  }
+
+  get tabletIcon() {
+    return this.args.tube.tablet ? 'tablet' : 'tabletOff';
   }
 
   @action
@@ -102,16 +110,10 @@ export default class Tube extends Component {
     {{#if @displayDeviceCompatibility}}
       <td class="table__column--center">
         <div class="icon-container" aria-label="{{if @tube.mobile 'compatible mobile' 'incompatible mobile'}}">
-          <FaIcon @icon="mobile-screen-button" class="fa-2x {{if @tube.mobile 'is-responsive'}}" />
-          {{#unless @tube.mobile}}
-            <FaIcon @icon="slash" class="fa-2x not-responsive" />
-          {{/unless}}
+          <PixIcon @name={{this.mobileIcon}} @plainIcon={{true}} class="{{if @tube.mobile 'is-responsive'}}" />
         </div>
         <div class="icon-container" aria-label="{{if @tube.tablet 'compatible tablette' 'incompatible tablette'}}">
-          <FaIcon @icon="tablet-screen-button" class="fa-2x {{if @tube.tablet 'is-responsive'}}" />
-          {{#unless @tube.tablet}}
-            <FaIcon @icon="slash" class="fa-2x not-responsive" />
-          {{/unless}}
+          <PixIcon @name={{this.tabletIcon}} @plainIcon={{true}} class="{{if @tube.tablet 'is-responsive'}}" />
         </div>
       </td>
     {{/if}}

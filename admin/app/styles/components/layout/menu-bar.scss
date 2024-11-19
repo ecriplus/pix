@@ -14,11 +14,11 @@
 
       a {
         display: flex;
+        align-items: center;
         width: 50px;
+        height: 50px;
         border-radius: 5px;
         cursor: pointer;
-        height: 50px;
-        align-items: center;
 
         &:hover {
           text-decoration: none;
@@ -30,9 +30,9 @@
         }
 
         svg {
-          fill: var(--pix-neutral-100);
           width: 32px;
           margin: 0 10px;
+          fill: var(--pix-neutral-100);
         }
 
         &:hover svg,
