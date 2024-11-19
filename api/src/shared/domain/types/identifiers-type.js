@@ -55,6 +55,7 @@ const typesPositiveInteger32bits = [
   'ownerId',
   'passageId',
   'placeId',
+  'profileRewardId',
   'schoolingRegistrationId',
   'sessionId',
   'stageCollectionId',

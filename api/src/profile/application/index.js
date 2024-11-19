@@ -6,7 +6,37 @@ import { attestationController } from './attestation-controller.js';
 import { profileController } from './profile-controller.js';
 
 const register = async function (server) {
-  server.route([
+  const adminRoutes = [
+    {
+      method: 'GET',
+      path: '/api/admin/users/{id}/profile',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            id: identifiersType.userId,
+          }),
+        },
+        handler: profileController.getProfileForAdmin,
+        notes: [
+          "- Permet à un administrateur de récupérer le nombre total de Pix d'un utilisateur\n et de ses scorecards",
+        ],
+        tags: ['api', 'user', 'profile'],
+      },
+    },
+  ];
+
+  const userRoutes = [
     {
       method: 'GET',
       path: '/api/users/{userId}/attestations/{attestationKey}',
@@ -57,33 +87,38 @@ const register = async function (server) {
       },
     },
     {
-      method: 'GET',
-      path: '/api/admin/users/{id}/profile',
+      method: 'POST',
+      path: '/api/users/{userId}/profile/share-reward',
       config: {
         pre: [
           {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleCertif,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-                securityPreHandlers.checkAdminMemberHasRoleMetier,
-              ])(request, h),
+            method: securityPreHandlers.checkRequestedUserIsAuthenticatedUser,
+            assign: 'requestedUserIsAuthenticatedUser',
           },
         ],
         validate: {
           params: Joi.object({
-            id: identifiersType.userId,
+            userId: identifiersType.userId,
+          }),
+          payload: Joi.object({
+            data: {
+              attributes: {
+                campaignParticipationId: identifiersType.campaignParticipationId,
+                profileRewardId: identifiersType.profileRewardId,
+              },
+            },
           }),
         },
-        handler: profileController.getProfileForAdmin,
+        handler: profileController.shareProfileReward,
         notes: [
-          "- Permet à un administrateur de récupérer le nombre total de Pix d'un utilisateur\n et de ses scorecards",
+          "- Cette route permet à un utilisateur de partager l'obtention de son attestation avec une organisation\n",
         ],
-        tags: ['api', 'user', 'profile'],
+        tags: ['api', 'user', 'profile', 'reward'],
       },
     },
-  ]);
+  ];
+
+  server.route([...adminRoutes, ...userRoutes]);
 };
 
 const name = 'profile-api';
