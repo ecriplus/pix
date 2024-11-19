@@ -33,11 +33,12 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
         organizationId,
         division: '6emeA',
       });
-      databaseBuilder.factory.buildProfileReward({
+      const profileRewardId = databaseBuilder.factory.buildProfileReward({
         userId: organizationLearner.userId,
         rewardId: attestation.id,
         rewardType: REWARD_TYPES.ATTESTATION,
-      });
+      }).id;
+      databaseBuilder.factory.buildOrganizationsProfileRewards({ organizationId, profileRewardId });
 
       await databaseBuilder.commit();
 
