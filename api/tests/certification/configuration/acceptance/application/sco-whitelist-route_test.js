@@ -59,6 +59,50 @@ describe('Certification | Configuration | Acceptance | API | sco-whitelist-route
         .pluck('externalId');
       expect(whitelist).to.deep.equal(['ext1', 'ext2']);
     });
+
+    it('should rollback if invalid whitelist given', async function () {
+      // given
+      const thisExternalIdCannotBeWhitelisted = 'NOT_A_SCO_EXTERNAL_ID';
+      const superAdmin = await insertUserWithRoleSuperAdmin();
+      const buffer = `externalId\next1\n${thisExternalIdCannotBeWhitelisted}`;
+      const options = {
+        method: 'POST',
+        url: '/api/admin/sco-whitelist',
+        headers: {
+          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
+        },
+        payload: buffer,
+      };
+      databaseBuilder.factory.buildCertificationCenter({
+        isV3Pilot: true,
+        type: CERTIFICATION_CENTER_TYPES.SCO,
+        externalId: 'ext1',
+        isScoBlockedAccessWhitelist: false,
+      });
+      databaseBuilder.factory.buildCertificationCenter({
+        isV3Pilot: true,
+        type: CERTIFICATION_CENTER_TYPES.PRO,
+        externalId: thisExternalIdCannotBeWhitelisted,
+        isScoBlockedAccessWhitelist: false,
+      });
+      const whitelistRollbackedToThis = databaseBuilder.factory.buildCertificationCenter({
+        isV3Pilot: true,
+        type: CERTIFICATION_CENTER_TYPES.SCO,
+        externalId: 'ext3',
+        isScoBlockedAccessWhitelist: true,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(500);
+      const whitelist = await knex('certification-centers')
+        .where({ isScoBlockedAccessWhitelist: true })
+        .pluck('externalId');
+      expect(whitelist).to.deep.equal([whitelistRollbackedToThis.externalId]);
+    });
   });
 
   describe('GET /api/admin/sco-whitelist', function () {

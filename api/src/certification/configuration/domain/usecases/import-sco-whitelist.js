@@ -11,6 +11,10 @@ export const importScoWhitelist = withTransaction(
    */
   async ({ externalIds = [], centerRepository }) => {
     await centerRepository.resetWhitelist();
-    return centerRepository.addToWhitelistByExternalIds({ externalIds });
+    const numberOfUpdatedLines = await centerRepository.addToWhitelistByExternalIds({ externalIds });
+
+    if (externalIds.length !== numberOfUpdatedLines) {
+      throw new RangeError('Some externalIds are not valid, please verify whitelist');
+    }
   },
 );

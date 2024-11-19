@@ -5,14 +5,16 @@ import { CenterTypes } from '../../domain/models/CenterTypes.js';
 /**
  * @param {Object} params
  * @param {Array<number>} params.externalIds
- * @returns {Promise<void>}
+ * @returns {Promise<number>} - number of rows affected
  */
 export const addToWhitelistByExternalIds = async ({ externalIds }) => {
   const knexConn = DomainTransaction.getConnection();
-  return knexConn('certification-centers')
+  const numberOfUpdatedLines = knexConn('certification-centers')
     .update({ isScoBlockedAccessWhitelist: true, updatedAt: knexConn.fn.now() })
     .where({ type: CenterTypes.SCO })
     .whereIn('externalId', externalIds);
+
+  return numberOfUpdatedLines || 0;
 };
 
 /**

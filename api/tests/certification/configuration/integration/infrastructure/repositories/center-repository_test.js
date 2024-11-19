@@ -23,11 +23,12 @@ describe('Certification | Configuration | Integration | Repository | center-repo
       await databaseBuilder.commit();
 
       // when
-      await centerRepository.addToWhitelistByExternalIds({
+      const numberOfUpdatedLines = await centerRepository.addToWhitelistByExternalIds({
         externalIds: [whitelistedExternalId1, whitelistedExternalId2],
       });
 
       // then
+      expect(numberOfUpdatedLines).to.equal(2);
       const updatedCenter1 = await knex('certification-centers').where({ id: center1BeforeUpdate.id }).first();
       expect(updatedCenter1.isScoBlockedAccessWhitelist).to.be.true;
       expect(updatedCenter1.updatedAt).to.be.above(center1BeforeUpdate.updatedAt);
