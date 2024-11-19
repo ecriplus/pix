@@ -151,7 +151,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
 
       // then
       const learners = await knex('view-active-organization-learners').where({ organizationId });
-      expect(learners.length).to.equal(1);
+      expect(learners).to.have.lengthOf(1);
       expect(learners[0].id).to.equal(thirdOrganisationLearnerId);
     });
   });

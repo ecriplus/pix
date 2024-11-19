@@ -652,7 +652,7 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
             rowCount: 1,
             pageCount: 1,
           });
-          expect(result.learners.length).to.equal(1);
+          expect(result.learners).to.have.lengthOf(1);
           expect(result.learners[0].id).to.equal(rogueLearner.id);
         });
       });

@@ -128,7 +128,7 @@ describe('Integration | Identity Access Management | Scripts | mass-create-user-
 
       // then
       const usersInDatabases = await knex('authentication-methods');
-      expect(usersInDatabases.length).to.equal(2);
+      expect(usersInDatabases).to.have.lengthOf(2);
 
       const firstUserFound = await knex('users').where({ lastName: 'Kilo' }).first();
       const firstAuthenticationMethodFound = await knex('authentication-methods')

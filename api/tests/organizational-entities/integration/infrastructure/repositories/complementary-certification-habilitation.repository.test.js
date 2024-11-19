@@ -57,12 +57,12 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         .select('*')
         .from('complementary-certification-habilitations')
         .where({ certificationCenterId });
-      expect(complementaryCertificationHabilitationsForCertificationCenterId.length).to.equal(0);
+      expect(complementaryCertificationHabilitationsForCertificationCenterId).to.have.lengthOf(0);
       const complementaryCertificationHabilitationThatShouldHaveBeenDeleted = await knex
         .select('*')
         .from('complementary-certification-habilitations')
         .where({ certificationCenterId: otherCertificationCenterId });
-      expect(complementaryCertificationHabilitationThatShouldHaveBeenDeleted.length).to.equal(1);
+      expect(complementaryCertificationHabilitationThatShouldHaveBeenDeleted).to.have.lengthOf(1);
     });
   });
 });

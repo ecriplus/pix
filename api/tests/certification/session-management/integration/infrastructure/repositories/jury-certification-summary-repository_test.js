@@ -480,8 +480,8 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
             // then
             expect(juryCertificationSummaries[0].id).to.equal(certificationWithOneImpactfulCategoryIssueReportId);
             expect(juryCertificationSummaries[1].id).to.equal(certificationWithNotImpactfulCategoryIssueReportId);
-            expect(juryCertificationSummaries[0].certificationIssueReports.length).to.equal(1);
-            expect(juryCertificationSummaries[1].certificationIssueReports.length).to.equal(1);
+            expect(juryCertificationSummaries[0].certificationIssueReports).to.have.lengthOf(1);
+            expect(juryCertificationSummaries[1].certificationIssueReports).to.have.lengthOf(1);
           });
         });
 
@@ -533,8 +533,8 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
             expect(juryCertificationSummaries[0].id).to.equal(certificationWithOneImpactfulSubcategoryIssueReportsId);
             expect(juryCertificationSummaries[1].id).to.equal(certificationWithoutImpactfulIssueReportId);
 
-            expect(juryCertificationSummaries[0].certificationIssueReports.length).to.equal(1);
-            expect(juryCertificationSummaries[1].certificationIssueReports.length).to.equal(0);
+            expect(juryCertificationSummaries[0].certificationIssueReports).to.have.lengthOf(1);
+            expect(juryCertificationSummaries[1].certificationIssueReports).to.have.lengthOf(0);
           });
         });
       });

@@ -1032,7 +1032,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         const user = await userRepository.getWithCertificationCenterMemberships(userInDB.id);
 
         // then
-        expect(user.certificationCenterMemberships.length).to.equal(1);
+        expect(user.certificationCenterMemberships).to.have.lengthOf(1);
 
         const foundCertificationCenterMembership = user.certificationCenterMemberships[0];
         expect(foundCertificationCenterMembership).to.be.an.instanceof(CertificationCenterMembership);
@@ -1212,7 +1212,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           const userDetailsForAdmin = await userRepository.getUserDetailsForAdmin(userInDB.id);
 
           // then
-          expect(userDetailsForAdmin.organizationLearners.length).to.equal(2);
+          expect(userDetailsForAdmin.organizationLearners).to.have.lengthOf(2);
           const organizationLearners = userDetailsForAdmin.organizationLearners;
           expect(organizationLearners[0]).to.be.instanceOf(OrganizationLearnerForAdmin);
 
@@ -1246,7 +1246,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           const userDetailsForAdmin = await userRepository.getUserDetailsForAdmin(userInDB.id);
 
           // then
-          expect(userDetailsForAdmin.organizationLearners.length).to.equal(0);
+          expect(userDetailsForAdmin.organizationLearners).to.have.lengthOf(0);
         });
       });
 
@@ -1268,7 +1268,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           const pixAuthenticationMethod = userDetailsForAdmin.authenticationMethods.find(
             ({ identityProvider }) => identityProvider === NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
           );
-          expect(userDetailsForAdmin.authenticationMethods.length).to.equal(2);
+          expect(userDetailsForAdmin.authenticationMethods).to.have.lengthOf(2);
           expect(pixAuthenticationMethod).to.deep.equal({
             authenticationComplement: {
               shouldChangePassword: false,
@@ -1293,7 +1293,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           const userDetailsForAdmin = await userRepository.getUserDetailsForAdmin(userInDB.id);
 
           // then
-          expect(userDetailsForAdmin.authenticationMethods.length).to.equal(0);
+          expect(userDetailsForAdmin.authenticationMethods).to.have.lengthOf(0);
           expect(userDetailsForAdmin.hasBeenAnonymised).to.be.true;
 
           const { hasBeenAnonymisedBy } = await knex('users').where({ id: userInDB.id }).first();

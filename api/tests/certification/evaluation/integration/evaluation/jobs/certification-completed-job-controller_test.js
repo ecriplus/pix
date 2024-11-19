@@ -525,7 +525,7 @@ describe('Integration | Certification | Application | jobs | CertificationComple
               courseId: certificationCourse.id,
             });
 
-          expect(certificationChallengeCapacities.length).to.equal(9);
+          expect(certificationChallengeCapacities).to.have.lengthOf(9);
         });
 
         describe('when user estimatedLevel is too high', function () {

@@ -771,7 +771,7 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
 
         // then
         const disabledMemberships = await knex('memberships').returning('*').where({ userId });
-        expect(disabledMemberships.length).to.equal(2);
+        expect(disabledMemberships).to.have.lengthOf(2);
         expect(disabledMemberships).to.deep.include.members(expectedMemberships);
       });
     });
@@ -795,7 +795,7 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
 
         // then
         const disabledMemberships = await knex('memberships').where({ userId });
-        expect(disabledMemberships.length).to.equal(0);
+        expect(disabledMemberships).to.have.lengthOf(0);
       });
     });
   });

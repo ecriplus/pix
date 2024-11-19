@@ -481,7 +481,7 @@ describe('Unit | Service | Certification Challenge Service', function () {
 
         // then
         const skillsForChallenges = _.uniq(_.map(certificationChallenges, 'associatedSkillName'));
-        expect(skillsForChallenges.length).to.equal(expectedSkills.length);
+        expect(skillsForChallenges).to.have.lengthOf(expectedSkills.length);
       });
     });
 

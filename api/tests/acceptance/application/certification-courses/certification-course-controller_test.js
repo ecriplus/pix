@@ -402,7 +402,7 @@ describe('Acceptance | API | Certification Course', function () {
 
           // then
           const certificationChallenges = await knex('certification-challenges');
-          expect(certificationChallenges.length).to.equal(2);
+          expect(certificationChallenges).to.have.lengthOf(2);
           expect(certificationChallenges[0].challengeId).to.equal('recChallenge5_1_1');
           expect(certificationChallenges[1].challengeId).to.equal('recChallenge5_0_0');
         });
@@ -420,7 +420,7 @@ describe('Acceptance | API | Certification Course', function () {
 
           // then
           const certificationChallenges = await knex('certification-challenges');
-          expect(certificationChallenges.length).to.equal(2);
+          expect(certificationChallenges).to.have.lengthOf(2);
           expect(certificationChallenges[0].challengeId).to.equal('recChallenge6_1_0');
           expect(certificationChallenges[1].challengeId).to.equal('recChallenge6_0_0');
         });
