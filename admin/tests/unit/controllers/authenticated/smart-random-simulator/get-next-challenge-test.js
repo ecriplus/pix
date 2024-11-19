@@ -194,8 +194,8 @@ module('Unit | Controller | authenticated/smart-random-simulator/get-next-challe
           { status: 400 },
         );
         fetchStub.resolves(apiResponse);
-        controller.notifications = {
-          error: sinon.stub(),
+        controller.pixToast = {
+          sendErrorNotification: sinon.stub(),
         };
 
         // when
@@ -203,7 +203,7 @@ module('Unit | Controller | authenticated/smart-random-simulator/get-next-challe
 
         // then
         assert.ok(controller);
-        assert.ok(controller.notifications.error.calledTwice);
+        assert.ok(controller.pixToast.sendErrorNotification.calledTwice);
       });
     });
   });
@@ -237,8 +237,8 @@ module('Unit | Controller | authenticated/smart-random-simulator/get-next-challe
         // given
         const apiResponse = new Response(JSON.stringify(getCampaignParamsApiResponseBody), { status: 200 });
         fetchStub.resolves(apiResponse);
-        controller.notifications = {
-          success: sinon.stub(),
+        controller.pixToast = {
+          sendSuccessNotification: sinon.stub(),
         };
 
         // when
@@ -247,7 +247,9 @@ module('Unit | Controller | authenticated/smart-random-simulator/get-next-challe
         // then
         assert.ok(controller);
         assert.ok(
-          controller.notifications.success.calledOnceWithExactly('Données chargées: 2 compétences et 1 challenges'),
+          controller.pixToast.sendSuccessNotification.calledOnceWithExactly({
+            message: 'Données chargées: 2 compétences et 1 challenges',
+          }),
         );
       });
     });
@@ -260,8 +262,8 @@ module('Unit | Controller | authenticated/smart-random-simulator/get-next-challe
           { status: 400 },
         );
         fetchStub.resolves(apiResponse);
-        controller.notifications = {
-          error: sinon.stub(),
+        controller.pixToast = {
+          sendErrorNotification: sinon.stub(),
         };
 
         // when
@@ -269,9 +271,9 @@ module('Unit | Controller | authenticated/smart-random-simulator/get-next-challe
 
         // then
         assert.ok(controller);
-        const stubCalls = controller.notifications.error.getCalls();
-        assert.deepEqual(stubCalls[0].args, ['An other error']);
-        assert.deepEqual(stubCalls[1].args, ['This error will blow your mind']);
+        const stubCalls = controller.pixToast.sendErrorNotification.getCalls();
+        assert.deepEqual(stubCalls[0].args, [{ message: 'An other error' }]);
+        assert.deepEqual(stubCalls[1].args, [{ message: 'This error will blow your mind' }]);
       });
     });
   });

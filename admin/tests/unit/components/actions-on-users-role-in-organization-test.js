@@ -20,9 +20,9 @@ module('Unit | Component | actions-on-users-role-in-organization', function (hoo
 
         const notificationErrorStub = sinon.stub();
         class NotificationsStub extends Service {
-          error = notificationErrorStub;
+          sendErrorNotification = notificationErrorStub;
         }
-        this.owner.register('service:notifications', NotificationsStub);
+        this.owner.register('service:pixToast', NotificationsStub);
 
         const component = createGlimmerComponent('component:actions-on-users-role-in-organization', {
           organizationMembership,
@@ -33,10 +33,9 @@ module('Unit | Component | actions-on-users-role-in-organization', function (hoo
         await component.updateRoleOfMember();
 
         // then
-        sinon.assert.calledWith(
-          notificationErrorStub,
-          'Une erreur est survenue lors de la mise à jour du rôle du membre.',
-        );
+        sinon.assert.calledWith(notificationErrorStub, {
+          message: 'Une erreur est survenue lors de la mise à jour du rôle du membre.',
+        });
         assert.false(component.isEditionMode);
       });
     });
@@ -54,9 +53,9 @@ module('Unit | Component | actions-on-users-role-in-organization', function (hoo
 
         const notificationErrorStub = sinon.stub();
         class NotificationsStub extends Service {
-          error = notificationErrorStub;
+          sendErrorNotification = notificationErrorStub;
         }
-        this.owner.register('service:notifications', NotificationsStub);
+        this.owner.register('service:pixToast', NotificationsStub);
 
         const component = createGlimmerComponent('component:actions-on-users-role-in-organization', {
           organizationMembership,
@@ -66,7 +65,9 @@ module('Unit | Component | actions-on-users-role-in-organization', function (hoo
         await component.disableOrganizationMembership();
 
         // then
-        sinon.assert.calledWith(notificationErrorStub, 'Une erreur est survenue lors de la désactivation du membre.');
+        sinon.assert.calledWith(notificationErrorStub, {
+          message: 'Une erreur est survenue lors de la désactivation du membre.',
+        });
         assert.false(component.displayConfirm);
       });
     });

@@ -19,8 +19,8 @@ module('Unit | Controller | authenticated/organizations/get', function (hooks) {
           save: sinon.stub(),
           rollbackAttributes: sinon.stub(),
         };
-        controller.notifications = {
-          success: sinon.stub(),
+        controller.pixToast = {
+          sendSuccessNotification: sinon.stub(),
         };
         controller.model.save.resolves();
 
@@ -29,7 +29,9 @@ module('Unit | Controller | authenticated/organizations/get', function (hooks) {
 
         // Then
         sinon.assert.calledOnce(controller.model.save);
-        sinon.assert.calledWith(controller.notifications.success, "L'organisation a bien été modifiée.");
+        sinon.assert.calledWith(controller.pixToast.sendSuccessNotification, {
+          message: "L'organisation a bien été modifiée.",
+        });
         assert.ok(true);
       });
     });
@@ -43,8 +45,8 @@ module('Unit | Controller | authenticated/organizations/get', function (hooks) {
           save: sinon.stub(),
           rollbackAttributes: sinon.stub(),
         };
-        controller.notifications = {
-          error: sinon.stub(),
+        controller.pixToast = {
+          sendErrorNotification: sinon.stub(),
         };
         controller.model.save.rejects({ errors: [{ status: '413', meta: { maxSizeInMegaBytes: '2.5' } }] });
 
@@ -54,10 +56,11 @@ module('Unit | Controller | authenticated/organizations/get', function (hooks) {
         // Then
         sinon.assert.calledOnce(controller.model.save);
         sinon.assert.calledOnce(controller.model.rollbackAttributes);
-        sinon.assert.calledWith(
-          controller.notifications.error,
-          t('pages.organizations.notifications.errors.payload-too-large', { maxSizeInMegaBytes: '2.5' }),
-        );
+        sinon.assert.calledWith(controller.pixToast.sendErrorNotification, {
+          message: t('pages.organizations.notifications.errors.payload-too-large', {
+            maxSizeInMegaBytes: '2.5',
+          }),
+        });
         assert.ok(true);
       });
     });
@@ -72,8 +75,8 @@ module('Unit | Controller | authenticated/organizations/get', function (hooks) {
         id: 3,
         save: sinon.stub(),
       };
-      controller.notifications = {
-        success: sinon.stub(),
+      controller.pixToast = {
+        sendSuccessNotification: sinon.stub(),
       };
       controller.model.save.resolves();
 

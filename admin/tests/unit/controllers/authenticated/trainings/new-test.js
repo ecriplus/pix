@@ -50,8 +50,8 @@ module('Unit | Controller | authenticated/trainings/new', function (hooks) {
 
       controller.router.transitionTo = sinon.stub();
 
-      controller.notifications = {
-        success: sinon.stub(),
+      controller.pixToast = {
+        sendSuccessNotification: sinon.stub(),
       };
 
       // when
@@ -59,13 +59,17 @@ module('Unit | Controller | authenticated/trainings/new', function (hooks) {
 
       // then
       assert.ok(saveStub.called);
-      assert.ok(controller.notifications.success.calledWith('Le contenu formatif a été créé avec succès.'));
+      assert.ok(
+        controller.pixToast.sendSuccessNotification.calledWith({
+          message: 'Le contenu formatif a été créé avec succès.',
+        }),
+      );
       assert.ok(controller.router.transitionTo.calledWith('authenticated.trainings.training', trainingData.id));
     });
 
     test('it should display error notification when training cannot be saved', async function (assert) {
-      controller.notifications = {
-        error: sinon.stub(),
+      controller.pixToast = {
+        sendErrorNotification: sinon.stub(),
       };
 
       const saveStub = sinon.stub().rejects();
@@ -77,7 +81,7 @@ module('Unit | Controller | authenticated/trainings/new', function (hooks) {
 
       // then
       assert.ok(saveStub.called);
-      assert.ok(controller.notifications.error.calledWith('Une erreur est survenue.'));
+      assert.ok(controller.pixToast.sendErrorNotification.calledWith({ message: 'Une erreur est survenue.' }));
     });
   });
 });

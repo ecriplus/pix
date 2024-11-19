@@ -12,9 +12,9 @@ module('Unit | Controller | authenticated/organizations/get/team', function (hoo
     controller = this.owner.lookup('controller:authenticated/organizations/get/team');
     store = this.owner.lookup('service:store');
 
-    controller.notifications = {
-      error: sinon.stub(),
-      success: sinon.stub(),
+    controller.pixToast = {
+      sendErrorNotification: sinon.stub(),
+      sendSuccessNotification: sinon.stub(),
     };
   });
 
@@ -33,7 +33,7 @@ module('Unit | Controller | authenticated/organizations/get/team', function (hoo
         await controller.addOrganizationMembership();
 
         // then
-        sinon.assert.calledWith(controller.notifications.error, 'Compte inconnu.');
+        sinon.assert.calledWith(controller.pixToast.sendErrorNotification, { message: 'Compte inconnu.' });
         assert.ok(true);
       });
     });
@@ -57,7 +57,7 @@ module('Unit | Controller | authenticated/organizations/get/team', function (hoo
         await controller.addOrganizationMembership();
 
         // then
-        sinon.assert.calledWith(controller.notifications.error, 'Compte déjà associé.');
+        sinon.assert.calledWith(controller.pixToast.sendErrorNotification, { message: 'Compte déjà associé.' });
         assert.ok(true);
       });
     });
@@ -88,7 +88,9 @@ module('Unit | Controller | authenticated/organizations/get/team', function (hoo
         // then
         assert.deepEqual(controller.userEmailToAdd, null);
         assert.ok(controller.model.organizationMemberships.reload.calledOnce);
-        sinon.assert.calledWith(controller.notifications.success, 'Accès attribué avec succès.');
+        sinon.assert.calledWith(controller.pixToast.sendSuccessNotification, {
+          message: 'Accès attribué avec succès.',
+        });
         assert.ok(true);
       });
 
@@ -114,7 +116,9 @@ module('Unit | Controller | authenticated/organizations/get/team', function (hoo
         await controller.addOrganizationMembership();
 
         // then
-        sinon.assert.calledWith(controller.notifications.error, 'Une erreur est survenue.');
+        sinon.assert.calledWith(controller.pixToast.sendErrorNotification, {
+          message: 'Une erreur est survenue.',
+        });
         assert.ok(true);
       });
     });

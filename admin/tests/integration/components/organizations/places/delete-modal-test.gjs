@@ -33,10 +33,10 @@ module('Integration | Component | Organizations | Places | Delete-modal', functi
 
   hooks.beforeEach(async function () {
     class NotificationsStub extends Service {
-      success = notificationSuccessStub;
-      error = notificationErrorStub;
+      sendSuccessNotification = notificationSuccessStub;
+      sendErrorNotification = notificationErrorStub;
     }
-    this.owner.register('service:notifications', NotificationsStub);
+    this.owner.register('service:pixToast', NotificationsStub);
   });
 
   module('Display delete Modal', function () {

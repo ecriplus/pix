@@ -35,7 +35,7 @@ module('Unit | Component | Campaigns | update', function (hooks) {
       component.form.customResultPageButtonText = 'some button text';
       component.form.customResultPageButtonUrl = 'google.com';
 
-      component.notifications = { success: sinon.stub(), error: sinon.stub() };
+      component.pixToast = { sendSuccessNotification: sinon.stub(), sendErrorNotification: sinon.stub() };
 
       // when
       await component.update(event);
@@ -66,13 +66,13 @@ module('Unit | Component | Campaigns | update', function (hooks) {
       };
       component.form.name = 'other name';
 
-      component.notifications = { success: sinon.stub(), error: sinon.stub() };
+      component.pixToast = { sendSuccessNotification: sinon.stub(), sendErrorNotification: sinon.stub() };
 
       // when
       await component.update(event);
 
       // then
-      assert.ok(component.notifications.success.called);
+      assert.ok(component.pixToast.sendSuccessNotification.called);
     });
   });
 });

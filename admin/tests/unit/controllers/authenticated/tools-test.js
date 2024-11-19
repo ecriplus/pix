@@ -21,38 +21,48 @@ module('Unit | Controller | authenticated/tools', function (hooks) {
   module('#importCampaignsToArchive', function () {
     module('when file is csv', function () {
       test('it sends the chosen csv file to the API', async function (assert) {
-        controller.notifications.success = sinon.spy();
+        controller.pixToast.sendSuccessNotification = sinon.spy();
         await controller.archiveCampaigns(files);
 
         assert.ok(importFilesStub.calledWith(files));
-        assert.ok(controller.notifications.success.calledWith('Toutes les campagnes ont été archivées.'));
+        assert.ok(
+          controller.pixToast.sendSuccessNotification.calledWith({
+            message: 'Toutes les campagnes ont été archivées.',
+          }),
+        );
       });
     });
 
     module('when the error is HEADER_REQUIRED', function () {
       test('it display a notification about the missing header', async function (assert) {
         importFilesStub.rejects({ errors: [{ status: '401', code: 'HEADER_REQUIRED' }] });
-        controller.notifications.error = sinon.spy();
-
-        // when
-        await controller.archiveCampaigns(files);
-
-        // then
-        assert.ok(controller.notifications.error.calledOnceWith("La colonne campaignId n'est pas présente."));
-      });
-    });
-
-    module('when the error is HEADER_UNKNOWN', function () {
-      test('it display a notification about the unexpected column', async function (assert) {
-        importFilesStub.rejects({ errors: [{ status: '401', code: 'HEADER_UNKNOWN' }] });
-        controller.notifications.error = sinon.spy();
+        controller.pixToast.sendErrorNotification = sinon.spy();
 
         // when
         await controller.archiveCampaigns(files);
 
         // then
         assert.ok(
-          controller.notifications.error.calledOnceWith('Une colonne dans le fichier ne devrait pas être présente.'),
+          controller.pixToast.sendErrorNotification.calledOnceWith({
+            message: "La colonne campaignId n'est pas présente.",
+          }),
+        );
+      });
+    });
+
+    module('when the error is HEADER_UNKNOWN', function () {
+      test('it display a notification about the unexpected column', async function (assert) {
+        importFilesStub.rejects({ errors: [{ status: '401', code: 'HEADER_UNKNOWN' }] });
+        controller.pixToast.sendErrorNotification = sinon.spy();
+
+        // when
+        await controller.archiveCampaigns(files);
+
+        // then
+        assert.ok(
+          controller.pixToast.sendErrorNotification.calledOnceWith({
+            message: 'Une colonne dans le fichier ne devrait pas être présente.',
+          }),
         );
       });
     });
@@ -60,26 +70,30 @@ module('Unit | Controller | authenticated/tools', function (hooks) {
     module('when the error is ENCODING_NOT_SUPPORTED', function () {
       test('it display a notification about the unexpected enooding', async function (assert) {
         importFilesStub.rejects({ errors: [{ status: '401', code: 'ENCODING_NOT_SUPPORTED' }] });
-        controller.notifications.error = sinon.spy();
+        controller.pixToast.sendErrorNotification = sinon.spy();
 
         // when
         await controller.archiveCampaigns(files);
 
         // then
-        assert.ok(controller.notifications.error.calledOnceWith('Encodage non supporté.'));
+        assert.ok(controller.pixToast.sendErrorNotification.calledOnceWith({ message: 'Encodage non supporté.' }));
       });
     });
 
     module('when the error is something else', function () {
       test('it display a generic notification', async function (assert) {
         importFilesStub.rejects({ errors: [{ status: '401', code: 'OTHER_ERROR' }] });
-        controller.notifications.error = sinon.spy();
+        controller.pixToast.sendErrorNotification = sinon.spy();
 
         // when
         await controller.archiveCampaigns(files);
 
         // then
-        assert.ok(controller.notifications.error.calledOnceWith('Une erreur est survenue. OUPS...'));
+        assert.ok(
+          controller.pixToast.sendErrorNotification.calledOnceWith({
+            message: 'Une erreur est survenue. OUPS...',
+          }),
+        );
       });
     });
   });

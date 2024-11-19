@@ -13,11 +13,11 @@ module('Integration | Component | administration/swap-campaign-codes', function 
   let store, notificationService;
 
   hooks.beforeEach(function () {
-    notificationService = this.owner.lookup('service:notifications');
+    notificationService = this.owner.lookup('service:pixToast');
     store = this.owner.lookup('service:store');
 
-    sinon.stub(notificationService, 'success');
-    sinon.stub(notificationService, 'error');
+    sinon.stub(notificationService, 'sendSuccessNotification');
+    sinon.stub(notificationService, 'sendErrorNotification');
   });
 
   test('it should swap code', async function (assert) {
@@ -51,11 +51,11 @@ module('Integration | Component | administration/swap-campaign-codes', function 
     // then
     assert.true(swapStub.calledOnce);
     assert.true(
-      notificationService.success.calledOnceWithExactly(
-        t('components.administration.swap-campaign-codes.notifications.success'),
-      ),
+      notificationService.sendSuccessNotification.calledOnceWithExactly({
+        message: t('components.administration.swap-campaign-codes.notifications.success'),
+      }),
     );
-    assert.true(notificationService.error.notCalled);
+    assert.true(notificationService.sendErrorNotification.notCalled);
   });
 
   test('it should display common error notification', async function (assert) {
@@ -88,8 +88,12 @@ module('Integration | Component | administration/swap-campaign-codes', function 
 
     // then
     assert.true(swapStub.calledOnce);
-    assert.true(notificationService.success.notCalled);
-    assert.true(notificationService.error.calledOnceWithExactly(t('common.notifications.generic-error')));
+    assert.true(notificationService.sendSuccessNotification.notCalled);
+    assert.true(
+      notificationService.sendErrorNotification.calledOnceWithExactly({
+        message: t('common.notifications.generic-error'),
+      }),
+    );
   });
 
   test('it should display mismatch organization error notification', async function (assert) {
@@ -122,11 +126,11 @@ module('Integration | Component | administration/swap-campaign-codes', function 
 
     // then
     assert.true(swapStub.calledOnce);
-    assert.true(notificationService.success.notCalled);
+    assert.true(notificationService.sendSuccessNotification.notCalled);
     assert.true(
-      notificationService.error.calledOnceWithExactly(
-        t('components.administration.swap-campaign-codes.notifications.error.mismatch-organization'),
-      ),
+      notificationService.sendErrorNotification.calledOnceWithExactly({
+        message: t('components.administration.swap-campaign-codes.notifications.error.mismatch-organization'),
+      }),
     );
   });
 
@@ -160,11 +164,11 @@ module('Integration | Component | administration/swap-campaign-codes', function 
 
     // then
     assert.true(swapStub.calledOnce);
-    assert.true(notificationService.success.notCalled);
+    assert.true(notificationService.sendSuccessNotification.notCalled);
     assert.true(
-      notificationService.error.calledOnceWithExactly(
-        t('components.administration.swap-campaign-codes.notifications.error.swap-code-error'),
-      ),
+      notificationService.sendErrorNotification.calledOnceWithExactly({
+        message: t('components.administration.swap-campaign-codes.notifications.error.swap-code-error'),
+      }),
     );
   });
 });

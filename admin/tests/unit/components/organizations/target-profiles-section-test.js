@@ -22,7 +22,7 @@ module('Unit | Component | organizations/target-profiles-section', function (hoo
     module('when attaching target profiles works correctly', () => {
       test('it displays a success message', async function (assert) {
         const component = createComponent('component:organizations/target-profiles-section');
-        component.notifications = { success: sinon.stub() };
+        component.pixToast = { sendSuccessNotification: sinon.stub() };
         const reloadStub = sinon.stub();
         const mapStub = sinon.stub();
         const adapter = this.owner.lookup('adapter:attachable-target-profile');
@@ -48,15 +48,15 @@ module('Unit | Component | organizations/target-profiles-section', function (hoo
         assert.ok(adapter.attachTargetProfile.calledWith({ organizationId: 123, targetProfileIds: ['1', '2'] }));
         assert.strictEqual(component.targetProfilesToAttach, '');
         assert.ok(
-          component.notifications.success.calledWithExactly('Profil(s) cible(s) rattaché(s) avec succès.', {
-            htmlContent: true,
+          component.pixToast.sendSuccessNotification.calledWithExactly({
+            message: 'Profil(s) cible(s) rattaché(s) avec succès.',
           }),
         );
       });
 
       test('it displays a message with duplicated ids when trying to attach already attached target profiles', async function (assert) {
         const component = createComponent('component:organizations/target-profiles-section');
-        component.notifications = { success: sinon.stub() };
+        component.pixToast = { sendSuccessNotification: sinon.stub() };
         const reloadStub = sinon.stub();
         const mapStub = sinon.stub();
         mapStub.onCall(0).returns(['1', '2']);
@@ -79,12 +79,10 @@ module('Unit | Component | organizations/target-profiles-section', function (hoo
         await component.attachTargetProfiles(event);
 
         assert.ok(
-          component.notifications.success.calledWith(
-            'Profil(s) cible(s) rattaché(s) avec succès.<br/>Le(s) profil(s) cible(s) suivant(s) étai(en)t déjà rattaché(s) à cette organisation : 1, 2.',
-            {
-              htmlContent: true,
-            },
-          ),
+          component.pixToast.sendSuccessNotification.calledWith({
+            message:
+              'Profil(s) cible(s) rattaché(s) avec succès.<br/>Le(s) profil(s) cible(s) suivant(s) étai(en)t déjà rattaché(s) à cette organisation : 1, 2.',
+          }),
         );
       });
     });
@@ -99,7 +97,7 @@ module('Unit | Component | organizations/target-profiles-section', function (hoo
               { status: '404', detail: 'I am displayed 2' },
             ],
           };
-          component.notifications = { error: sinon.stub() };
+          component.pixToast = { sendErrorNotification: sinon.stub() };
           const reloadStub = sinon.stub();
           const mapStub = sinon.stub();
           reloadStub.returns([]);
@@ -121,8 +119,8 @@ module('Unit | Component | organizations/target-profiles-section', function (hoo
           await component.attachTargetProfiles(event);
 
           assert.strictEqual(component.targetProfilesToAttach, '1,1,2,3,3');
-          assert.ok(component.notifications.error.calledWith('I am displayed 1'));
-          assert.ok(component.notifications.error.calledWith('I am displayed 2'));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'I am displayed 1' }));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'I am displayed 2' }));
         });
 
         test('it displays a notification for each 412 error found', async function (assert) {
@@ -133,7 +131,7 @@ module('Unit | Component | organizations/target-profiles-section', function (hoo
               { status: '412', detail: 'I am displayed too 2' },
             ],
           };
-          component.notifications = { error: sinon.stub() };
+          component.pixToast = { sendErrorNotification: sinon.stub() };
           const reloadStub = sinon.stub();
           const mapStub = sinon.stub();
           reloadStub.returns([]);
@@ -154,8 +152,8 @@ module('Unit | Component | organizations/target-profiles-section', function (hoo
           await component.attachTargetProfiles(event);
 
           assert.strictEqual(component.targetProfilesToAttach, '1,1,5,3,3');
-          assert.ok(component.notifications.error.calledWith('I am displayed too 1'));
-          assert.ok(component.notifications.error.calledWith('I am displayed too 2'));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'I am displayed too 1' }));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'I am displayed too 2' }));
         });
 
         test('it display default notification for all other error found', async function (assert) {
@@ -169,7 +167,7 @@ module('Unit | Component | organizations/target-profiles-section', function (hoo
               { status: '401', detail: 'I am displayed' },
             ],
           };
-          component.notifications = { error: sinon.stub() };
+          component.pixToast = { sendErrorNotification: sinon.stub() };
           const reloadStub = sinon.stub();
           const mapStub = sinon.stub();
           reloadStub.returns([]);
@@ -190,7 +188,10 @@ module('Unit | Component | organizations/target-profiles-section', function (hoo
           await component.attachTargetProfiles(event);
 
           assert.strictEqual(component.targetProfilesToAttach, '1,1,2,3,3');
-          assert.strictEqual(component.notifications.error.withArgs('Une erreur est survenue.').callCount, 2);
+          assert.strictEqual(
+            component.pixToast.sendErrorNotification.withArgs({ message: 'Une erreur est survenue.' }).callCount,
+            2,
+          );
         });
       });
 
@@ -203,7 +204,7 @@ module('Unit | Component | organizations/target-profiles-section', function (hoo
           };
           const targetProfileSummaries = [];
           targetProfileSummaries.reload = sinon.stub();
-          component.notifications = { error: sinon.stub(), success: sinon.stub() };
+          component.pixToast = { sendErrorNotification: sinon.stub(), sendSuccessNotification: sinon.stub() };
           const getStub = sinon.stub();
           getStub.returns([]);
           component.args = {
@@ -216,7 +217,7 @@ module('Unit | Component | organizations/target-profiles-section', function (hoo
           await component.attachTargetProfiles(event);
 
           assert.strictEqual(component.targetProfilesToAttach, '1,1,2,3,3');
-          assert.ok(component.notifications.error.calledWith('Une erreur est survenue.'));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'Une erreur est survenue.' }));
         });
       });
     });

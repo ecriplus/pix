@@ -580,9 +580,9 @@ module('Unit | Controller | authenticated/certifications/certification/informati
 
       const notificationSuccessStub = sinon.stub();
       class NotificationsStub extends Service {
-        success = notificationSuccessStub;
+        sendSuccessNotification = notificationSuccessStub;
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
 
       // when
       await controller.onJuryCommentSave();
@@ -600,9 +600,9 @@ module('Unit | Controller | authenticated/certifications/certification/informati
 
       const notificationErrorStub = sinon.stub();
       class NotificationsStub extends Service {
-        error = notificationErrorStub;
+        sendErrorNotification = notificationErrorStub;
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
 
       // when
       await controller.onJuryCommentSave();

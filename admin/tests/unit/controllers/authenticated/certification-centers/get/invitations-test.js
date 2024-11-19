@@ -74,15 +74,15 @@ module('Unit | Controller | authenticated/certification-centers/get/invitations'
 
       const notificationErrorStub = sinon.stub();
       class NotificationsStub extends Service {
-        error = notificationErrorStub;
+        sendErrorNotification = notificationErrorStub;
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
 
       // when
       await controller.cancelCertificationCenterInvitation();
 
       // then
-      sinon.assert.calledWith(notificationErrorStub, 'Une erreur s’est produite, veuillez réessayer.');
+      sinon.assert.calledWith(notificationErrorStub, { message: 'Une erreur s’est produite, veuillez réessayer.' });
       assert.ok(true);
     });
   });

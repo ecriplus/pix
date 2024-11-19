@@ -15,7 +15,7 @@ module('Unit | Component | update-campaign-code', function (hooks) {
     notificationStub = { sendSuccessNotification: sinon.stub(), sendErrorNotification: sinon.stub() };
     intlStub = sinon.stub();
     component = createGlimmerComponent('component:administration/campaigns/update-campaign-code');
-    component.notifications = notificationStub;
+    component.pixToast = notificationStub;
     component.store.adapterFor = sinon.stub().returns({ updateCampaignCode: updateCampaignCodeStub });
     component.campaignId = 123;
     component.campaignCode = 'ABC';
@@ -50,7 +50,7 @@ module('Unit | Component | update-campaign-code', function (hooks) {
 
         // then
         assert.ok(intlStub.calledWithExactly('components.administration.update-campaign-code.notifications.success'));
-        assert.ok(notificationStub.success.calledWithExactly(successMsg));
+        assert.ok(notificationStub.sendSuccessNotification.calledWithExactly({ message: successMsg }));
       });
     });
     module('when updateCampaignCode returns a CAMPAIGN_CODE_BAD_FORMAT error', function (hooks) {
@@ -69,7 +69,7 @@ module('Unit | Component | update-campaign-code', function (hooks) {
             'components.administration.update-campaign-code.notifications.error.campaign-code-format',
           ),
         );
-        assert.ok(notificationStub.error.calledWithExactly(errorMsg));
+        assert.ok(notificationStub.sendErrorNotification.calledWithExactly({ message: errorMsg }));
       });
     });
     module('when updateCampaignCode returns a CAMPAIGN_CODE_NOT_UNIQUE error', function (hooks) {
@@ -88,7 +88,7 @@ module('Unit | Component | update-campaign-code', function (hooks) {
             'components.administration.update-campaign-code.notifications.error.unique-code-error',
           ),
         );
-        assert.ok(notificationStub.error.calledWithExactly(errorMsg));
+        assert.ok(notificationStub.sendErrorNotification.calledWithExactly({ message: errorMsg }));
       });
     });
     module('when updateCampaignCode returns a UNKNOWN_CAMPAIGN_ID error', function (hooks) {
@@ -107,7 +107,7 @@ module('Unit | Component | update-campaign-code', function (hooks) {
             'components.administration.update-campaign-code.notifications.error.campaign-id-error',
           ),
         );
-        assert.ok(notificationStub.error.calledWithExactly(errorMsg));
+        assert.ok(notificationStub.sendErrorNotification.calledWithExactly({ message: errorMsg }));
       });
     });
     module('when updateCampaignCode returns a generic error', function (hooks) {
@@ -122,7 +122,7 @@ module('Unit | Component | update-campaign-code', function (hooks) {
 
         // then
         assert.ok(intlStub.calledWithExactly('common.notifications.generic-error'));
-        assert.ok(notificationStub.error.calledWithExactly(errorMsg));
+        assert.ok(notificationStub.sendErrorNotification.calledWithExactly({ message: errorMsg }));
       });
     });
     module('when updateCampaignCode fails with no error', function (hooks) {
@@ -137,7 +137,7 @@ module('Unit | Component | update-campaign-code', function (hooks) {
 
         // then
         assert.ok(intlStub.calledWithExactly('common.notifications.generic-error'));
-        assert.ok(notificationStub.error.calledWithExactly(errorMsg));
+        assert.ok(notificationStub.sendErrorNotification.calledWithExactly({ message: errorMsg }));
       });
     });
   });

@@ -26,9 +26,9 @@ module('Integration | Component | actions-on-users-role-in-organization', functi
 
       const notificationSuccessStub = sinon.stub();
       class NotificationsStub extends Service {
-        success = notificationSuccessStub;
+        sendSuccessNotification = notificationSuccessStub;
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
 
       // when
       const screen = await render(
@@ -43,7 +43,7 @@ module('Integration | Component | actions-on-users-role-in-organization', functi
 
       // then
       assert.ok(organizationMembership.save.called);
-      sinon.assert.calledWith(notificationSuccessStub, 'Le rôle du membre a été mis à jour avec succès.');
+      sinon.assert.calledWith(notificationSuccessStub, { message: 'Le rôle du membre a été mis à jour avec succès.' });
       assert.dom(screen.queryByRole('button', { name: 'Modifier le rôle' })).exists();
       assert.dom(screen.getByText('Membre')).exists();
     });
@@ -66,9 +66,9 @@ module('Integration | Component | actions-on-users-role-in-organization', functi
 
       const notificationSuccessStub = sinon.stub();
       class NotificationsStub extends Service {
-        success = notificationSuccessStub;
+        sendSuccessNotification = notificationSuccessStub;
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
 
       // when
       const screen = await render(
@@ -82,7 +82,7 @@ module('Integration | Component | actions-on-users-role-in-organization', functi
       await clickByName('Confirmer');
 
       // then
-      sinon.assert.calledWith(notificationSuccessStub, 'Le membre a été désactivé avec succès.');
+      sinon.assert.calledWith(notificationSuccessStub, { message: 'Le membre a été désactivé avec succès.' });
       assert.ok(organizationMembership.destroyRecord.calledWith({ adapterOptions: { disable: true } }));
     });
   });

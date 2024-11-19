@@ -61,9 +61,9 @@ module('Integration | Component | BadgeForm', function (hooks) {
     // given
     const notificationErrorStub = sinon.stub().returns();
     class NotificationsStub extends Service {
-      error = notificationErrorStub;
+      sendErrorNotification = notificationErrorStub;
     }
-    this.owner.register('service:notifications', NotificationsStub);
+    this.owner.register('service:pixToast', NotificationsStub);
 
     // when
     const screen = await render(<template><BadgeForm @targetProfile={{targetProfile}} /></template>);
@@ -76,10 +76,9 @@ module('Integration | Component | BadgeForm', function (hooks) {
     await click(screen.getByRole('button', { name: 'Enregistrer le RT' }));
 
     // then
-    sinon.assert.calledWith(
-      notificationErrorStub,
-      "Vous devez sélectionner au moins un critère d'obtention de résultat thématique",
-    );
+    sinon.assert.calledWith(notificationErrorStub, {
+      message: "Vous devez sélectionner au moins un critère d'obtention de résultat thématique",
+    });
     assert.ok(true);
   });
 
@@ -159,9 +158,9 @@ module('Integration | Component | BadgeForm', function (hooks) {
       // given
       const notificationErrorStub = sinon.stub().returns();
       class NotificationsStub extends Service {
-        error = notificationErrorStub;
+        sendErrorNotification = notificationErrorStub;
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
 
       // when
       const screen = await render(<template><BadgeForm @targetProfile={{targetProfile}} /></template>);
@@ -176,7 +175,9 @@ module('Integration | Component | BadgeForm', function (hooks) {
       await click(screen.getByRole('button', { name: 'Enregistrer le RT' }));
 
       // then
-      sinon.assert.calledWith(notificationErrorStub, 'Vous devez sélectionner au moins un sujet du profil cible');
+      sinon.assert.calledWith(notificationErrorStub, {
+        message: 'Vous devez sélectionner au moins un sujet du profil cible',
+      });
       assert.ok(true);
     });
   });

@@ -37,17 +37,19 @@ module('Unit | Controller | authenticated/users/get/authentication-methods', fun
         const userProfile = EmberObject.create({ id: originUserId, authenticationMethods });
 
         controller.model = { userProfile, authenticationMethods };
-        controller.notifications = {
-          success: sinon.stub(),
-          error: sinon.stub(),
+        controller.pixToast = {
+          sendSuccessNotification: sinon.stub(),
+          sendErrorNotification: sinon.stub(),
         };
-        controller.notifications.error.resolves();
+        controller.pixToast.sendErrorNotification.resolves();
 
         // when
         await controller.reassignAuthenticationMethod({ targetUserId, identityProvider });
 
         // then
-        sinon.assert.calledWith(controller.notifications.error, controller.ERROR_MESSAGES.STATUS_422.POLE_EMPLOI);
+        sinon.assert.calledWith(controller.pixToast.sendErrorNotification, {
+          message: controller.ERROR_MESSAGES.STATUS_422.POLE_EMPLOI,
+        });
         assert.ok(true);
       });
     });

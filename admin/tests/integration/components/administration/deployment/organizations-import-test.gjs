@@ -21,7 +21,6 @@ module('Integration | Component |  administration/organizations-import', functio
     saveAdapterStub = sinon.stub(adapter, 'addOrganizationsCsv');
     notificationSuccessStub = sinon.stub();
     notificationErrorStub = sinon.stub().returns();
-
   });
 
   module('when import succeeds', function () {
@@ -29,9 +28,9 @@ module('Integration | Component |  administration/organizations-import', functio
       // given
       const file = new Blob(['foo'], { type: `valid-file` });
       class NotificationsStub extends Service {
-        success = notificationSuccessStub;
+        sendSuccessNotification = notificationSuccessStub;
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
       saveAdapterStub.withArgs(file).resolves();
 
       // when
@@ -63,9 +62,9 @@ module('Integration | Component |  administration/organizations-import', functio
       );
       const file = new Blob(['foo'], { type: `valid-file` });
       class NotificationsStub extends Service {
-        error = notificationErrorStub;
+        sendErrorNotification = notificationErrorStub;
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
 
       // when
       const screen = await render(<template><OrganizationsImport /></template>);
