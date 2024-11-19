@@ -1,6 +1,8 @@
 import { tracked } from '@glimmer/tracking';
 import camelCase from 'lodash/camelCase.js';
 
+const COMMON_API_ERROR = 'common.error';
+
 /**
  * Manages form validation with configurable validation rules for each form field.
  */
@@ -39,7 +41,13 @@ export class FormValidation {
       if (!this[name]) return;
 
       this[name].status = 'error';
-      this[name].apiError = message;
+
+      const { apiErrors } = this[name].options;
+      if (apiErrors && apiErrors[message]) {
+        this[name].apiError = apiErrors[message];
+      } else {
+        this[name].apiError = COMMON_API_ERROR;
+      }
     });
   }
 }
@@ -74,6 +82,7 @@ class Validation {
    */
   get error() {
     if (this.isValid) return null;
+    if (this.apiError) return this.apiError;
     return this.options.error;
   }
 

@@ -148,18 +148,12 @@ module('Integration | Component | Authentication | SignupForm | index', function
   });
 
   module('When there are server errors from user creation', function () {
-    test('it displays error messages on each input', async function (assert) {
+    test('it displays error for email invalid', async function (assert) {
       // given
       class UserModel {
         errors = [];
         save() {
-          this.errors = [
-            { attribute: 'firstName', message: 'Firstname error !' },
-            { attribute: 'lastName', message: 'Lastname error !' },
-            { attribute: 'email', message: 'INVALID_OR_ALREADY_USED_EMAIL' },
-            { attribute: 'password', message: 'Password error !' },
-            { attribute: 'cgu', message: 'CGU error !' },
-          ];
+          this.errors = [{ attribute: 'email', message: 'INVALID_OR_ALREADY_USED_EMAIL' }];
           throw _buildApiReponseError({ status: 422, isAdapterError: true });
         }
       }
@@ -175,11 +169,7 @@ module('Integration | Component | Authentication | SignupForm | index', function
       await clickByName(t(I18N_KEYS.submitButton));
 
       // then
-      assert.dom(screen.getByText('Firstname error !')).exists();
-      assert.dom(screen.getByText('Lastname error !')).exists();
       assert.dom(screen.getByText('Adresse e-mail invalide ou déjà utilisée')).exists();
-      assert.dom(screen.getByText('Password error !')).exists();
-      assert.dom(screen.getByText('CGU error !')).exists();
       assert.strictEqual(sessionService.authenticateUser.callCount, 0);
     });
   });
