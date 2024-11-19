@@ -11,13 +11,10 @@ describe('Unit | Domain | Models | AssessmentSimulator', function () {
       const expectedEstimatedLevels = [0.4, 0.2];
       const expectedErrorRates = [0.2, 0.1];
       const expectedRewards = [5, 3];
-      const strategy1 = {
+      const strategy = {
         run: sinon.stub(),
       };
-
-      const strategy2 = {
-        run: sinon.stub(),
-      };
+      const getStrategy = () => strategy;
 
       const firstRunAnswer = new Answer({
         result: answersForSimulator[0],
@@ -28,7 +25,7 @@ describe('Unit | Domain | Models | AssessmentSimulator', function () {
         challengeId: secondChallenge.id,
       });
 
-      strategy1.run
+      strategy.run
         .withArgs({
           challengesAnswers: [],
           stepIndex: 0,
@@ -45,8 +42,7 @@ describe('Unit | Domain | Models | AssessmentSimulator', function () {
           ],
           challengeAnswers: [firstRunAnswer],
           nextStepIndex: 1,
-        });
-      strategy2.run
+        })
         .withArgs({
           challengesAnswers: [firstRunAnswer],
           stepIndex: 1,
@@ -64,8 +60,6 @@ describe('Unit | Domain | Models | AssessmentSimulator', function () {
           challengeAnswers: [secondRunAnswer],
           nextStepIndex: 2,
         });
-
-      const getStrategy = (stepIndex) => (stepIndex === 0 ? strategy1 : strategy2);
 
       // when
       const expectedResult = [

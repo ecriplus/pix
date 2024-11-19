@@ -14,7 +14,7 @@ export class AssessmentSimulator {
     do {
       hasNextAnswer = false;
 
-      const simulatorStepResult = this.getStrategy(stepIndex).run({ challengesAnswers, stepIndex });
+      const simulatorStepResult = this.getStrategy().run({ challengesAnswers, stepIndex });
       if (simulatorStepResult) {
         stepIndex = simulatorStepResult.nextStepIndex;
         challengesAnswers.push(...simulatorStepResult.challengeAnswers);

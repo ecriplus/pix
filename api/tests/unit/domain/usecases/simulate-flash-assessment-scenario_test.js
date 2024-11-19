@@ -186,33 +186,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
         });
       });
     });
-
-    context('when doing a double measure', function () {
-      it('should return an array of estimated level, challenge, reward and error rate for each answer', async function () {
-        // given
-        const { challengeRepository, pickChallenge, pickAnswerStatus, flashAlgorithmService } = prepareStubs({
-          doubleMeasuresUntil: 2,
-        });
-
-        // when
-        const result = await simulateFlashAssessmentScenario({
-          stopAtChallenge: 3,
-          challengeRepository,
-          locale,
-          pickChallenge,
-          pickAnswerStatus,
-          flashAlgorithmService,
-          doubleMeasuresUntil: 2,
-        });
-
-        // then
-        expect(result).to.have.lengthOf(3);
-        result.forEach((answer) => {
-          expect(answer.challenge).not.to.be.undefined;
-          expect(answer.capacity).not.to.be.undefined;
-        });
-      });
-    });
   });
 
   context('when there are not enough flash challenges left', function () {
