@@ -76,6 +76,7 @@ import * as campaignProfileRepository from '../../../src/prescription/campaign-p
 import { participationCompletedJobRepository } from '../../../src/prescription/campaign-participation/infrastructure/repositories/jobs/participation-completed-job-repository.js';
 import * as poleEmploiSendingRepository from '../../../src/prescription/campaign-participation/infrastructure/repositories/pole-emploi-sending-repository.js';
 import * as prescriptionOrganizationLearnerRepository from '../../../src/prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
+import * as studentRepository from '../../../src/prescription/learner-management/infrastructure/repositories/student-repository.js';
 import * as organizationLearnerActivityRepository from '../../../src/prescription/organization-learner/infrastructure/repositories/organization-learner-activity-repository.js';
 import * as registrationOrganizationLearnerRepository from '../../../src/prescription/organization-learner/infrastructure/repositories/registration-organization-learner-repository.js';
 import * as targetProfileSummaryForAdminRepository from '../../../src/prescription/target-profile/infrastructure/repositories/target-profile-summary-for-admin-repository.js';
@@ -144,7 +145,6 @@ import * as organizationLearnerRepository from '../../infrastructure/repositorie
 import * as organizationMemberIdentityRepository from '../../infrastructure/repositories/organization-member-identity-repository.js';
 import * as organizationTagRepository from '../../infrastructure/repositories/organization-tag-repository.js';
 import { participantResultsSharedRepository } from '../../infrastructure/repositories/participant-results-shared-repository.js';
-import * as studentRepository from '../../infrastructure/repositories/student-repository.js';
 import * as targetProfileRepository from '../../infrastructure/repositories/target-profile-repository.js';
 import * as targetProfileShareRepository from '../../infrastructure/repositories/target-profile-share-repository.js';
 import * as targetProfileTrainingRepository from '../../infrastructure/repositories/target-profile-training-repository.js';

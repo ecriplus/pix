@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { Student } from '../../../src/shared/domain/models/Student.js';
-import { DomainTransaction } from '../DomainTransaction.js';
+import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
+import { Student } from '../../../../shared/domain/models/Student.js';
 
 const _toStudents = function (results) {
   const students = [];
