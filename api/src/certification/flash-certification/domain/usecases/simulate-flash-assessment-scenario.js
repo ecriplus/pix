@@ -13,7 +13,6 @@ export async function simulateFlashAssessmentScenario({
   limitToOneQuestionPerTube = true,
   minimumEstimatedSuccessRateRanges = [],
   variationPercent,
-  variationPercentUntil,
   challengeRepository,
   flashAlgorithmService,
 }) {
@@ -28,7 +27,7 @@ export async function simulateFlashAssessmentScenario({
       minimumEstimatedSuccessRateRanges,
       enablePassageByAllCompetences: enablePassageByAllCompetencesValueInProduction,
       variationPercent,
-      variationPercentUntil,
+      variationPercentUntil: undefined,
       doubleMeasuresUntil: 0,
       challengesBetweenSameCompetence,
       maximumAssessmentLength: stopAtChallenge,
