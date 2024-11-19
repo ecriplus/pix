@@ -1,8 +1,9 @@
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import { REWARD_TYPES } from '../../../../src/quest/domain/constants.js';
 import { COMPARISON } from '../../../../src/quest/domain/models/Quest.js';
-import { Assessment, Tag } from '../../../../src/shared/domain/models/index.js';
+import { Assessment, CampaignParticipationStatuses } from '../../../../src/shared/domain/models/index.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/temporary-storage/index.js';
+import { AEFE_TAG, FEATURE_ATTESTATIONS_MANAGEMENT_ID } from '../common/constants.js';
 import { TARGET_PROFILE_BADGES_STAGES_ID } from './constants.js';
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
@@ -12,6 +13,11 @@ const USERS = [
     firstName: 'attestation-success',
     lastName: 'attestation',
     email: 'attestation-success@example.net',
+  },
+  {
+    firstName: 'attestation-success-shared',
+    lastName: 'attestation',
+    email: 'attestation-success-shared@example.net',
   },
   {
     firstName: 'attestation-failed',
@@ -30,7 +36,6 @@ const USERS = [
   },
 ];
 const ORGANIZATION = { name: 'attestation', type: 'SCO', isManagingStudents: true };
-const ORGANIZATION_TAG = Tag.AEFE;
 const CAMPAIGN = { code: 'ATESTTEST', multipleSendings: true };
 
 const TUBES = [
@@ -82,12 +87,14 @@ const buildOrganizationLearners = (databaseBuilder, organization, users) =>
   );
 
 const buildCampaignParticipations = (databaseBuilder, campaignId, users) =>
-  users.map(({ user, organizationLearner }) =>
+  users.map(({ user, organizationLearner, status, sharedAt }) =>
     databaseBuilder.factory.buildCampaignParticipation({
       userId: user.id,
       campaignId,
       masteryRate: 1,
       organizationLearnerId: organizationLearner.id,
+      status,
+      sharedAt,
     }),
   );
 
@@ -104,7 +111,7 @@ const buildQuest = (databaseBuilder, rewardId, targetProfileId) => {
       type: 'organization',
       data: {
         isManagingStudents: true,
-        tags: [ORGANIZATION_TAG],
+        tags: [AEFE_TAG.name],
       },
       comparison: COMPARISON.ONE_OF,
     },
@@ -186,27 +193,37 @@ const buildTargetProfile = (databaseBuilder, organization) => {
 export const buildQuests = async (databaseBuilder) => {
   // Create USERS
 
-  const [successUser, failedUser, pendingUser, blankUser] = buildUsers(databaseBuilder);
+  const [successUser, successSharedUser, failedUser, pendingUser, blankUser] = buildUsers(databaseBuilder);
 
   // Create organization
 
   const organization = buildOrganization(databaseBuilder);
 
-  // Get organization tag id
+  // Associate attestation feature to organization
 
-  const { id: tagId } = await databaseBuilder.knex('tags').select('id').where({ name: ORGANIZATION_TAG }).first();
+  databaseBuilder.factory.buildOrganizationFeature({
+    organizationId: organization.id,
+    featureId: FEATURE_ATTESTATIONS_MANAGEMENT_ID,
+  });
 
   // Associate tag to organization
 
-  databaseBuilder.factory.buildOrganizationTag({ organizationId: organization.id, tagId: tagId });
+  databaseBuilder.factory.buildOrganizationTag({ organizationId: organization.id, tagId: AEFE_TAG.id });
 
   // Create organizationLearners
 
-  const [successOrganizationLearner, failedOrganizationLearner, pendingOrganizationLearner] = buildOrganizationLearners(
-    databaseBuilder,
-    organization,
-    [successUser, failedUser, pendingUser, blankUser],
-  );
+  const [
+    successOrganizationLearner,
+    successSharedOrganizationLearner,
+    failedOrganizationLearner,
+    pendingOrganizationLearner,
+  ] = buildOrganizationLearners(databaseBuilder, organization, [
+    successUser,
+    successSharedUser,
+    failedUser,
+    pendingUser,
+    blankUser,
+  ]);
 
   // Create target profile
 
@@ -236,6 +253,12 @@ export const buildQuests = async (databaseBuilder) => {
       {
         user: successUser,
         organizationLearner: successOrganizationLearner,
+        sharedAt: null,
+        status: CampaignParticipationStatuses.TO_SHARE,
+      },
+      {
+        user: successSharedUser,
+        organizationLearner: successSharedOrganizationLearner,
       },
       {
         user: failedUser,
@@ -297,7 +320,20 @@ export const buildQuests = async (databaseBuilder) => {
     rewardId,
   });
 
+  const { id: sharedProfileRewardId } = databaseBuilder.factory.buildProfileReward({
+    userId: successSharedUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId,
+  });
+
+  // Create link between profile reward and organization
+
+  databaseBuilder.factory.buildOrganizationsProfileRewards({
+    organizationId: organization.id,
+    profileRewardId: sharedProfileRewardId,
+  });
+
   // Insert job count in temporary storage for pending user
 
-  profileRewardTemporaryStorage.increment(pendingUser.id);
+  await profileRewardTemporaryStorage.increment(pendingUser.id);
 };
