@@ -13,6 +13,7 @@ import {
   findOrganizationLearnerIdsByOrganizationId,
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
+  reconcileUserToOrganizationLearner,
   removeByIds,
   saveCommonOrganizationLearners,
   update,
@@ -1771,7 +1772,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
 
     it('should save association between user and organizationLearner', async function () {
       // when
-      const organizationLearnerPatched = await organizationLearnerRepository.reconcileUserToOrganizationLearner({
+      const organizationLearnerPatched = await reconcileUserToOrganizationLearner({
         userId: user.id,
         organizationLearnerId: organizationLearner.id,
       });
@@ -1787,7 +1788,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       const fakeStudentId = 1;
 
       // when
-      const error = await catchErr(organizationLearnerRepository.reconcileUserToOrganizationLearner)({
+      const error = await catchErr(reconcileUserToOrganizationLearner)({
         userId: user.id,
         organizationLearnerId: fakeStudentId,
       });
@@ -1801,7 +1802,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       const fakeUserId = 1;
 
       // when
-      const error = await catchErr(organizationLearnerRepository.reconcileUserToOrganizationLearner)({
+      const error = await catchErr(reconcileUserToOrganizationLearner)({
         userId: fakeUserId,
         organizationLearnerId: organizationLearner.id,
       });
@@ -1819,7 +1820,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       });
 
       // when
-      const error = await catchErr(organizationLearnerRepository.reconcileUserToOrganizationLearner)({
+      const error = await catchErr(reconcileUserToOrganizationLearner)({
         userId: user.id,
         organizationLearnerId: disabledOrganizationLearner.id,
       });

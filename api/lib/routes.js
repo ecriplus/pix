@@ -13,7 +13,6 @@ import * as organizations from './application/organizations/index.js';
 import * as passwords from './application/passwords/index.js';
 import * as scoOrganizationLearners from './application/sco-organization-learners/index.js';
 import * as sessions from './application/sessions/index.js';
-import * as supOrganizationLearners from './application/sup-organization-learners/index.js';
 import * as tags from './application/tags/index.js';
 import * as targetProfiles from './application/target-profiles/index.js';
 import * as userOrgaSettings from './application/user-orga-settings/index.js';
@@ -33,7 +32,6 @@ const routes = [
   organizations,
   passwords,
   scoOrganizationLearners,
-  supOrganizationLearners,
   sessions,
   tags,
   targetProfiles,
