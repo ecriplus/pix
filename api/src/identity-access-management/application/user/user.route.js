@@ -87,7 +87,7 @@ export const userRoutes = [
       handler: (request, h) => userController.getCurrentUserAccountInfo(request, h),
       notes: [
         '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
-          '- Récupération des information de compte utilisateur\n',
+          '- Récupération des informations du compte utilisateur authentifié\n',
       ],
       tags: ['identity-access-management', 'api', 'user', 'my-account'],
     },

@@ -232,6 +232,11 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
             'last-data-protection-policy-seen-at': null,
           },
           relationships: {
+            'account-info': {
+              links: {
+                related: '/api/users/my-account',
+              },
+            },
             profile: {
               links: {
                 related: `/api/users/${user.id}/profile`,
@@ -277,7 +282,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       expect(response.statusCode).to.equal(200);
       expect(response.result).to.deep.equal({
         data: {
-          type: 'my-accounts',
+          type: 'account-infos',
           id: user.id.toString(),
           attributes: {
             'can-self-delete-account': false,

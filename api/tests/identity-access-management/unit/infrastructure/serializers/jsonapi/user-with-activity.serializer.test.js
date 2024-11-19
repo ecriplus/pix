@@ -65,6 +65,11 @@ describe('Unit | Identity Access Management | Infrastructure | Serializer | JSON
                 userModelObject.shouldSeeDataProtectionPolicyInformationBanner,
             },
             relationships: {
+              'account-info': {
+                links: {
+                  related: '/api/users/my-account',
+                },
+              },
               profile: {
                 links: {
                   related: `/api/users/${userModelObject.id}/profile`,
