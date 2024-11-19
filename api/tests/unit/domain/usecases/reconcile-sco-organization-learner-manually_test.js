@@ -13,6 +13,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
 
   let campaignRepository;
   let organizationLearnerRepository;
+  let prescriptionOrganizationLearnerRepository;
   let registrationOrganizationLearnerRepository;
   let userReconciliationService;
 
@@ -35,8 +36,10 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
       getByCode: sinon.stub(),
     };
     organizationLearnerRepository = {
-      reconcileUserToOrganizationLearner: sinon.stub(),
       findByUserId: sinon.stub(),
+    };
+    prescriptionOrganizationLearnerRepository = {
+      reconcileUserToOrganizationLearner: sinon.stub(),
     };
     registrationOrganizationLearnerRepository = {
       findOneByUserIdAndOrganizationId: sinon.stub(),
@@ -194,7 +197,9 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
           userReconciliationService.assertStudentHasAnAlreadyReconciledAccount.resolves();
           registrationOrganizationLearnerRepository.findOneByUserIdAndOrganizationId.resolves();
           organizationLearnerRepository.findByUserId.withArgs({ userId: 1 }).resolves([previousOrganizationLearner]);
-          organizationLearnerRepository.reconcileUserToOrganizationLearner.resolves(currentOrganizationLearner);
+          prescriptionOrganizationLearnerRepository.reconcileUserToOrganizationLearner.resolves(
+            currentOrganizationLearner,
+          );
 
           // when
           await usecases.reconcileScoOrganizationLearnerManually({
@@ -204,11 +209,14 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
             campaignRepository,
             userReconciliationService,
             organizationLearnerRepository,
+            prescriptionOrganizationLearnerRepository,
             registrationOrganizationLearnerRepository,
           });
 
           // then
-          expect(organizationLearnerRepository.reconcileUserToOrganizationLearner).to.have.been.calledOnceWithExactly({
+          expect(
+            prescriptionOrganizationLearnerRepository.reconcileUserToOrganizationLearner,
+          ).to.have.been.calledOnceWithExactly({
             userId: reconciliationInfo.id,
             organizationLearnerId: currentOrganizationLearner.id,
           });
@@ -304,7 +312,9 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
         userReconciliationService.assertStudentHasAnAlreadyReconciledAccount.resolves();
         registrationOrganizationLearnerRepository.findOneByUserIdAndOrganizationId.resolves();
         organizationLearnerRepository.findByUserId.withArgs({ userId: 1 }).resolves([previousOrganizationLearner]);
-        organizationLearnerRepository.reconcileUserToOrganizationLearner.resolves(currentOrganizationLearner);
+        prescriptionOrganizationLearnerRepository.reconcileUserToOrganizationLearner.resolves(
+          currentOrganizationLearner,
+        );
 
         // when
         await usecases.reconcileScoOrganizationLearnerManually({
@@ -314,11 +324,14 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
           campaignRepository,
           userReconciliationService,
           organizationLearnerRepository,
+          prescriptionOrganizationLearnerRepository,
           registrationOrganizationLearnerRepository,
         });
 
         // then
-        expect(organizationLearnerRepository.reconcileUserToOrganizationLearner).to.have.been.calledOnceWithExactly({
+        expect(
+          prescriptionOrganizationLearnerRepository.reconcileUserToOrganizationLearner,
+        ).to.have.been.calledOnceWithExactly({
           userId: reconciliationInfo.id,
           organizationLearnerId: currentOrganizationLearner.id,
         });
@@ -359,7 +372,9 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
         userReconciliationService.assertStudentHasAnAlreadyReconciledAccount.resolves();
         registrationOrganizationLearnerRepository.findOneByUserIdAndOrganizationId.resolves();
         organizationLearnerRepository.findByUserId.withArgs({ userId: 1 }).resolves([previousOrganizationLearner]);
-        organizationLearnerRepository.reconcileUserToOrganizationLearner.resolves(currentOrganizationLearner);
+        prescriptionOrganizationLearnerRepository.reconcileUserToOrganizationLearner.resolves(
+          currentOrganizationLearner,
+        );
 
         // when
         await usecases.reconcileScoOrganizationLearnerManually({
@@ -369,11 +384,14 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
           campaignRepository,
           userReconciliationService,
           organizationLearnerRepository,
+          prescriptionOrganizationLearnerRepository,
           registrationOrganizationLearnerRepository,
         });
 
         // then
-        expect(organizationLearnerRepository.reconcileUserToOrganizationLearner).to.have.been.calledOnceWithExactly({
+        expect(
+          prescriptionOrganizationLearnerRepository.reconcileUserToOrganizationLearner,
+        ).to.have.been.calledOnceWithExactly({
           userId: reconciliationInfo.id,
           organizationLearnerId: currentOrganizationLearner.id,
         });
@@ -495,16 +513,17 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
               campaignRepository,
               userReconciliationService,
               organizationLearnerRepository,
+              prescriptionOrganizationLearnerRepository,
               registrationOrganizationLearnerRepository,
             });
 
             // then
-            expect(organizationLearnerRepository.reconcileUserToOrganizationLearner).to.have.been.calledOnceWithExactly(
-              {
-                userId: reconciliationInfo.id,
-                organizationLearnerId: currentOrganizationLearner.id,
-              },
-            );
+            expect(
+              prescriptionOrganizationLearnerRepository.reconcileUserToOrganizationLearner,
+            ).to.have.been.calledOnceWithExactly({
+              userId: reconciliationInfo.id,
+              organizationLearnerId: currentOrganizationLearner.id,
+            });
           });
         });
       },
@@ -525,7 +544,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
         organizationLearner,
       );
       userReconciliationService.assertStudentHasAnAlreadyReconciledAccount.resolves();
-      organizationLearnerRepository.reconcileUserToOrganizationLearner
+      prescriptionOrganizationLearnerRepository.reconcileUserToOrganizationLearner
         .withArgs({
           userId: user.id,
           organizationLearnerId: organizationLearnerId,
@@ -541,6 +560,7 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
         campaignRepository,
         userReconciliationService,
         organizationLearnerRepository,
+        prescriptionOrganizationLearnerRepository,
         registrationOrganizationLearnerRepository,
       });
 
@@ -574,12 +594,13 @@ describe('Unit | UseCase | reconcile-sco-organization-learner-manually', functio
         campaignRepository,
         userReconciliationService,
         organizationLearnerRepository,
+        prescriptionOrganizationLearnerRepository,
         registrationOrganizationLearnerRepository,
       });
 
       // then
       expect(result).to.be.undefined;
-      expect(organizationLearnerRepository.reconcileUserToOrganizationLearner).to.not.have.been.called;
+      expect(prescriptionOrganizationLearnerRepository.reconcileUserToOrganizationLearner).to.not.have.been.called;
     });
   });
 });

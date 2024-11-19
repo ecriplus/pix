@@ -1,10 +1,9 @@
-import * as userReconciliationService from '../../../../lib/domain/services/user-reconciliation-service.js';
-import { reconcileSupOrganizationLearner } from '../../../../lib/domain/usecases/reconcile-sup-organization-learner.js';
-import * as campaignRepository from '../../../../lib/infrastructure/repositories/campaign-repository.js';
-import * as organizationLearnerRepository from '../../../../lib/infrastructure/repositories/organization-learner-repository.js';
-import * as supOrganizationLearnerRepository from '../../../../src/prescription/learner-management/infrastructure/repositories/sup-organization-learner-repository.js';
-import { NotFoundError, OrganizationLearnerAlreadyLinkedToUserError } from '../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
+import {
+  NotFoundError,
+  OrganizationLearnerAlreadyLinkedToUserError,
+} from '../../../../../../src/shared/domain/errors.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | UseCases | reconcile-sup-organization-learner', function () {
   let userId;
@@ -14,10 +13,9 @@ describe('Integration | UseCases | reconcile-sup-organization-learner', function
   context('When there is no campaign with the given code', function () {
     it('should throw a campaign code error', async function () {
       // when
-      const error = await catchErr(reconcileSupOrganizationLearner)({
+      const error = await catchErr(usecases.reconcileSupOrganizationLearner)({
         campaignCode: 'NOTEXIST',
         reconciliationInfo: {},
-        campaignRepository,
       });
 
       // then
@@ -54,13 +52,9 @@ describe('Integration | UseCases | reconcile-sup-organization-learner', function
           await databaseBuilder.commit();
 
           // when
-          const error = await catchErr(reconcileSupOrganizationLearner)({
+          const error = await catchErr(usecases.reconcileSupOrganizationLearner)({
             campaignCode,
             reconciliationInfo,
-            campaignRepository,
-            supOrganizationLearnerRepository,
-            organizationLearnerRepository,
-            userReconciliationService,
           });
 
           // then
@@ -89,13 +83,9 @@ describe('Integration | UseCases | reconcile-sup-organization-learner', function
           await databaseBuilder.commit();
 
           // when
-          await reconcileSupOrganizationLearner({
+          await usecases.reconcileSupOrganizationLearner({
             campaignCode,
             reconciliationInfo,
-            campaignRepository,
-            supOrganizationLearnerRepository,
-            organizationLearnerRepository,
-            userReconciliationService,
           });
 
           // then
@@ -124,13 +114,9 @@ describe('Integration | UseCases | reconcile-sup-organization-learner', function
           await databaseBuilder.commit();
 
           // when
-          const error = await catchErr(reconcileSupOrganizationLearner)({
+          const error = await catchErr(usecases.reconcileSupOrganizationLearner)({
             campaignCode,
             reconciliationInfo,
-            campaignRepository,
-            supOrganizationLearnerRepository,
-            organizationLearnerRepository,
-            userReconciliationService,
           });
 
           // then
