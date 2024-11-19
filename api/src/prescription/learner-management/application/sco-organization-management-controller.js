@@ -7,6 +7,7 @@ import {
 } from '../../../../src/shared/infrastructure/monitoring-tools.js';
 import { usecases } from '../domain/usecases/index.js';
 import { OrganizationLearnerParser } from '../infrastructure/serializers/csv/organization-learner-parser.js';
+import * as scoOrganizationLearnerSerializer from '../infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 
 const INVALID_FILE_EXTENSION_ERROR = 'INVALID_FILE_EXTENSION';
 
@@ -66,8 +67,42 @@ const importOrganizationLearnersFromSIECLE = async function (
   return h.response(null).code(204);
 };
 
+const reconcileScoOrganizationLearnerManually = async function (
+  request,
+  h,
+  dependencies = { scoOrganizationLearnerSerializer },
+) {
+  const authenticatedUserId = request.auth.credentials.userId;
+  const payload = request.payload.data.attributes;
+  const campaignCode = payload['campaign-code'];
+  const withReconciliation = request.query.withReconciliation === 'true';
+
+  const reconciliationInfo = {
+    id: authenticatedUserId,
+    firstName: payload['first-name'],
+    lastName: payload['last-name'],
+    birthdate: payload['birthdate'],
+  };
+
+  const organizationLearner = await usecases.reconcileScoOrganizationLearnerManually({
+    campaignCode,
+    reconciliationInfo,
+    withReconciliation,
+  });
+
+  let response;
+  if (withReconciliation) {
+    const serializedData = dependencies.scoOrganizationLearnerSerializer.serializeIdentity(organizationLearner);
+    response = h.response(serializedData).code(200);
+  } else {
+    response = h.response().code(204);
+  }
+  return response;
+};
+
 const scoOrganizationManagementController = {
   importOrganizationLearnersFromSIECLE,
+  reconcileScoOrganizationLearnerManually,
 };
 
 export { scoOrganizationManagementController };
