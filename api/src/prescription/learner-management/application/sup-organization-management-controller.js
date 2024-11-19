@@ -13,7 +13,7 @@ const importSupOrganizationLearners = async function (
     unlink: fs.unlink,
   },
 ) {
-  const organizationId = request.params.id;
+  const organizationId = request.params.organizationId;
   const userId = request.auth.credentials.userId;
 
   try {
@@ -51,7 +51,7 @@ const replaceSupOrganizationLearners = async function (
   },
 ) {
   const userId = request.auth.credentials.userId;
-  const organizationId = request.params.id;
+  const organizationId = request.params.organizationId;
 
   try {
     await usecases.uploadCsvFile({
@@ -82,7 +82,7 @@ const replaceSupOrganizationLearners = async function (
 };
 
 const getOrganizationLearnersCsvTemplate = async function (request, h, dependencies = { tokenService }) {
-  const organizationId = request.params.id;
+  const organizationId = request.params.organizationId;
   const token = request.query.accessToken;
   const userId = dependencies.tokenService.extractUserId(token);
   const template = await usecases.getOrganizationLearnersCsvTemplate({
@@ -99,7 +99,7 @@ const getOrganizationLearnersCsvTemplate = async function (request, h, dependenc
 
 const updateStudentNumber = async function (request, h) {
   const payload = request.payload.data.attributes;
-  const organizationId = request.params.id;
+  const organizationId = request.params.organizationId;
   const studentNumber = payload['student-number'];
   const organizationLearnerId = request.params.organizationLearnerId;
 
