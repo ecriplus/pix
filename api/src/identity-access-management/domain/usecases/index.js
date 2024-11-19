@@ -31,6 +31,7 @@ import { eventLoggingJobRepository } from '../../infrastructure/repositories/job
 import { garAnonymizedBatchEventsLoggingJobRepository } from '../../infrastructure/repositories/jobs/gar-anonymized-batch-events-logging-job-repository.js';
 import { userAnonymizedEventLoggingJobRepository } from '../../infrastructure/repositories/jobs/user-anonymized-event-logging-job-repository.js';
 import { oidcProviderRepository } from '../../infrastructure/repositories/oidc-provider-repository.js';
+import * as privacyUsersApiRepository from '../../infrastructure/repositories/privacy-users-api.repository.js';
 import { refreshTokenRepository } from '../../infrastructure/repositories/refresh-token.repository.js';
 import { resetPasswordDemandRepository } from '../../infrastructure/repositories/reset-password-demand.repository.js';
 import * as userRepository from '../../infrastructure/repositories/user.repository.js';
@@ -58,6 +59,7 @@ const repositories = {
   membershipRepository,
   oidcProviderRepository,
   organizationLearnerRepository,
+  privacyUsersApiRepository,
   refreshTokenRepository,
   resetPasswordDemandRepository,
   userAnonymizedEventLoggingJobRepository,
