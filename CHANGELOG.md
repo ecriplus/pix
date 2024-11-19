@@ -1,5 +1,44 @@
 # Pix Changelog
 
+## v4.243.0 (19/11/2024)
+
+
+### :rocket: Amélioration
+- [#10582](https://github.com/1024pix/pix/pull/10582) [FEATURE] Faire une passe sur l'accessibilité pour l'élément Flashcards (PIX-14427).
+- [#10491](https://github.com/1024pix/pix/pull/10491) [FEATURE] Mise à jour du CTA de fin de parcours autonomes (PIX-15070).
+- [#10559](https://github.com/1024pix/pix/pull/10559) [FEATURE] ajout de metrics sur les visites du détail de participations partagées (PIX-14814).
+- [#10542](https://github.com/1024pix/pix/pull/10542) [FEATURE] Utiliser le composant Pix Toast dans Pix Certif (PIX-15280).
+- [#10411](https://github.com/1024pix/pix/pull/10411) [FEATURE] Ajoute un encart sur les attestations sur la page de fin de parcours (PIX-13826).
+- [#10549](https://github.com/1024pix/pix/pull/10549) [FEATURE] Masquer le pourcentage de progression dans la navbar Modulix (PIX-15306).
+- [#10565](https://github.com/1024pix/pix/pull/10565) [FEATURE] Ajouter le profileRewardId dans le endpoint qui remonte les résultats d'une quête (PIX-15322).
+
+### :building_construction: Tech
+- [#10536](https://github.com/1024pix/pix/pull/10536) [TECH] Migrer la route POST /api/admin/certification-centers dans src (PIX-15277).
+- [#10548](https://github.com/1024pix/pix/pull/10548) [TECH] Suppression de paramètres dans le simulateur de déroulé (PIX-15213).
+- [#10545](https://github.com/1024pix/pix/pull/10545) [TECH] 🪓  suppression de la route  `/api/users/{userId}/campaign-participations` (Pix-15301).
+- [#10560](https://github.com/1024pix/pix/pull/10560) [TECH] Déplacement du code relatif à la gestion du référentiel depuis lib vers src/shared (PIX-15315).
+- [#10552](https://github.com/1024pix/pix/pull/10552) [TECH] Suppression du script d'éligibilité V2 (PIX-15191).
+- [#10555](https://github.com/1024pix/pix/pull/10555) [TECH] Suppression des scripts de conversion des centres en V3 (PIX-14274).
+- [#10558](https://github.com/1024pix/pix/pull/10558) [TECH] Supprimer le script permettant de retirer certaines habilitations des centres (PIX-15312).
+
+### :bug: Correction
+- [#10579](https://github.com/1024pix/pix/pull/10579) [BUGFIX] Ne pas restreindre le scoring d'une session de certification v3 aux épreuves de la locale courante (PIX-15330).
+- [#10568](https://github.com/1024pix/pix/pull/10568) [BUGFIX] Utiliser la bonne couleur sur le logo d'informations des places dans PixOrga(PIX-15281).
+
+### :arrow_up: Montée de version
+- [#10580](https://github.com/1024pix/pix/pull/10580) [BUMP] Update dependency @1024pix/pix-ui to ^48.6.0 (mon-pix).
+- [#10575](https://github.com/1024pix/pix/pull/10575) [BUMP] Update dependency @1024pix/pix-ui to ^48.6.0 (certif).
+- [#10571](https://github.com/1024pix/pix/pull/10571) [BUMP] Update dependency @1024pix/pix-ui to ^48.6.0 (admin).
+- [#10570](https://github.com/1024pix/pix/pull/10570) [BUMP] Update dependency @1024pix/pix-ui to ^48.6.0 (orga).
+- [#10569](https://github.com/1024pix/pix/pull/10569) [BUMP] Update dependency @1024pix/pix-ui to ^48.5.0 (orga).
+- [#10567](https://github.com/1024pix/pix/pull/10567) [BUMP] Update dependency @1024pix/pix-ui to ^48.5.0 (certif).
+- [#10566](https://github.com/1024pix/pix/pull/10566) [BUMP] Update dependency @1024pix/pix-ui to ^48.5.0 (admin).
+- [#10563](https://github.com/1024pix/pix/pull/10563) [BUMP] Update dependency @1024pix/pix-ui to ^48.5.0 (mon-pix).
+- [#10557](https://github.com/1024pix/pix/pull/10557) [BUMP] Update dependency @1024pix/pix-ui to ^48.4.0 (mon-pix).
+
+### :coffee: Autre
+- [#10543](https://github.com/1024pix/pix/pull/10543) [REFACTOR] Améliorer les affichages conditionnels de l'en-tête de fin de parcours (PIX-15274).
+
 ## v4.242.0 (15/11/2024)
 
 
