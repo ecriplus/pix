@@ -1,5 +1,30 @@
 # Pix Changelog
 
+## v4.244.0 (20/11/2024)
+
+
+### :rocket: Amélioration
+- [#10589](https://github.com/1024pix/pix/pull/10589) [FEATURE] Ajout de la route GET /api/users/my-account (PIX-14903).
+- [#10573](https://github.com/1024pix/pix/pull/10573) [FEATURE] Rendre asynchrone l'import SUP sur PixOrga (Pix-13792).
+- [#10576](https://github.com/1024pix/pix/pull/10576) [FEATURE] Partager sa récompense de quête à une organisation (PIX-15314).
+
+### :building_construction: Tech
+- [#10598](https://github.com/1024pix/pix/pull/10598) [TECH] corrige le type des paramètres du script d'anonymisation d'un learner  (PIX-15360).
+- [#10586](https://github.com/1024pix/pix/pull/10586) [TECH] Nouveau contexte Privacy et API (PIX-14907).
+- [#10588](https://github.com/1024pix/pix/pull/10588) [TECH] ♻️ migre la route reconciliation sup (Pix-15334).
+- [#10547](https://github.com/1024pix/pix/pull/10547) [TECH] ajoute un script de suppression / anonymisation d'un prescrit (pix-15254).
+- [#10587](https://github.com/1024pix/pix/pull/10587) [TECH] Dans les tests utiliser l'assertion dédiée lengthOf qui est plus sémantique.
+- [#10551](https://github.com/1024pix/pix/pull/10551) [TECH] Mettre à jour des tests suite à la suppression de Bookshelf (PIX-10677).
+
+### :bug: Correction
+- [#10578](https://github.com/1024pix/pix/pull/10578) [BUGFIX] Corriger l'affichage du tableau des résultats d'une campagne de collecte de profils (PIX-15329).
+- [#10572](https://github.com/1024pix/pix/pull/10572) [BUGFIX] Utiliser la date de réconciliation du candidat lors du scoring de la certification en V2 (PIX-15138).
+- [#10592](https://github.com/1024pix/pix/pull/10592) [BUGFIX] Afficher l'onglet Récompenses de fin de parcours uniquement sous condition (PIX-15052).
+
+### :arrow_up: Montée de version
+- [#10595](https://github.com/1024pix/pix/pull/10595) [BUMP] Update dependency @1024pix/pix-ui to ^48.7.0 (certif).
+- [#10597](https://github.com/1024pix/pix/pull/10597) [BUMP] Update dependency @1024pix/pix-ui to ^48.7.0 (mon-pix).
+
 ## v4.243.0 (19/11/2024)
 
 
