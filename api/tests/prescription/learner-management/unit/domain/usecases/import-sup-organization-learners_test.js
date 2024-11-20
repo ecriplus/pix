@@ -11,10 +11,12 @@ const supOrganizationLearnerImportHeader = new SupOrganizationLearnerImportHeade
   .join(';');
 
 describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
-  const organizationId = 1234;
+  let organizationImportId, organizationId;
   let organizationImport, organizationImportRepositoryStub, supOrganizationLearnerRepositoryStub, importStorageStub;
 
   beforeEach(function () {
+    organizationImportId = Symbol('organizationImportId');
+    organizationId = 123;
     organizationImport = new OrganizationImport({
       filename: 'file.csv',
       organizationId,
@@ -25,7 +27,7 @@ describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
     supOrganizationLearnerRepositoryStub = { addStudents: sinon.stub().resolves() };
 
     organizationImportRepositoryStub = {
-      getLastByOrganizationId: sinon.stub(),
+      get: sinon.stub(),
       save: sinon.stub(),
     };
 
@@ -41,11 +43,11 @@ describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
           Beatrix;The;Bride;Kiddo;Black Mamba;01/01/1970;thebride@example.net;12346;Assassination Squad;Hattori Hanzo;Deadly Viper Assassination Squad;Master;hello darkness my old friend;
           O-Ren;;;Ishii;Cottonmouth;01/01/1980;ishii@example.net;789;Assassination Squad;Bill;Deadly Viper Assassination Squad;DUT;;
       `.trim();
-      organizationImportRepositoryStub.getLastByOrganizationId.withArgs(organizationId).resolves(organizationImport);
+      organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
       importStorageStub.readFile.withArgs({ filename: organizationImport.filename }).resolves(toStream(input));
 
       await importSupOrganizationLearners({
-        organizationId,
+        organizationImportId,
         i18n,
         supOrganizationLearnerRepository: supOrganizationLearnerRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
@@ -92,11 +94,11 @@ describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
       const input = `${supOrganizationLearnerImportHeader}
               Beatrix;The;Bride;Kiddo;Black Mamba;01/01/1970;thebride@example.net;123456;
           `.trim();
-      organizationImportRepositoryStub.getLastByOrganizationId.withArgs(organizationId).resolves(organizationImport);
+      organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
       importStorageStub.readFile.withArgs({ filename: organizationImport.filename }).resolves(toStream(input));
 
       await importSupOrganizationLearners({
-        organizationId,
+        organizationImportId,
         i18n,
         importStorage: importStorageStub,
         supOrganizationLearnerRepository: supOrganizationLearnerRepositoryStub,
@@ -111,7 +113,7 @@ describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
     describe('success case', function () {
       it('should save imported state', async function () {
         // given
-        organizationImportRepositoryStub.getLastByOrganizationId.withArgs(organizationId).resolves(organizationImport);
+        organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
 
         const csvContent = `${supOrganizationLearnerImportHeader}
         Beatrix;The;Bride;Kiddo;Black Mamba;01/01/1970;thebride@example.net;123456;Assassination Squad;Hattori Hanzo;Deadly Viper Assassination Squad;BAD;BAD;
@@ -121,7 +123,7 @@ describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
 
         // when
         await importSupOrganizationLearners({
-          organizationId,
+          organizationImportId,
           i18n,
           supOrganizationLearnerRepository: supOrganizationLearnerRepositoryStub,
           organizationImportRepository: organizationImportRepositoryStub,
@@ -135,7 +137,7 @@ describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
 
     describe('errors case', function () {
       beforeEach(function () {
-        organizationImportRepositoryStub.getLastByOrganizationId.withArgs(organizationId).resolves(organizationImport);
+        organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
 
         const csvContent = `${supOrganizationLearnerImportHeader}
           Beatrix;The;Bride;Kiddo;Black Mamba;01/01/1970;thebride@example.net;123456;Assassination Squad;Hattori Hanzo;Deadly Viper Assassination Squad;BAD;BAD;
@@ -150,7 +152,7 @@ describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
 
         // when
         const error = await catchErr(importSupOrganizationLearners)({
-          organizationId,
+          organizationImportId,
           i18n,
           supOrganizationLearnerRepository: supOrganizationLearnerRepositoryStub,
           organizationImportRepository: organizationImportRepositoryStub,

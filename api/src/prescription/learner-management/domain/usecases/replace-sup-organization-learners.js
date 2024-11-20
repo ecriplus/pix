@@ -3,23 +3,27 @@ import { getDataBuffer } from '../../infrastructure/utils/bufferize/get-data-buf
 import { AggregateImportError } from '../errors.js';
 
 const replaceSupOrganizationLearners = async function ({
-  organizationId,
+  organizationImportId,
   i18n,
   supOrganizationLearnerRepository,
   organizationImportRepository,
   importStorage,
 }) {
   const errors = [];
-  const organizationImport = await organizationImportRepository.getLastByOrganizationId(organizationId);
+  const organizationImport = await organizationImportRepository.get(organizationImportId);
 
   try {
     const readableStream = await importStorage.readFile({ filename: organizationImport.filename });
     const buffer = await getDataBuffer(readableStream);
-    const parser = SupOrganizationLearnerParser.buildParser(buffer, organizationId, i18n);
+    const parser = SupOrganizationLearnerParser.buildParser(buffer, organizationImport.organizationId, i18n);
 
     const { learners } = parser.parse(parser.getFileEncoding());
 
-    await supOrganizationLearnerRepository.replaceStudents(organizationId, learners, organizationImport.createdBy);
+    await supOrganizationLearnerRepository.replaceStudents(
+      organizationImport.organizationId,
+      learners,
+      organizationImport.createdBy,
+    );
   } catch (error) {
     if (error instanceof AggregateImportError) {
       errors.push(...error.meta);

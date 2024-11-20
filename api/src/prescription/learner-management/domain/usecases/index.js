@@ -13,6 +13,7 @@ import * as membershipRepository from '../../../../team/infrastructure/repositor
 import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import { importOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-organization-learners-job-repository.js';
+import { importSupOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-sup-organization-learners-job-repository.js';
 import { validateOrganizationImportFileJobRepository } from '../../infrastructure/repositories/jobs/validate-organization-learners-import-file-job-repository.js';
 import * as organizationImportRepository from '../../infrastructure/repositories/organization-import-repository.js';
 import * as organizationLearnerImportFormatRepository from '../../infrastructure/repositories/organization-learner-import-format-repository.js';
@@ -21,37 +22,42 @@ import * as supOrganizationLearnerRepository from '../../infrastructure/reposito
 import { importStorage } from '../../infrastructure/storage/import-storage.js';
 
 /**
- * @typedef {import ('../../../../../lib/infrastructure/repositories/campaign-repository.js')} CampaignRepository
  * @typedef {import ('../../infrastructure/repositories/organization-feature-repository.js')} CampaignParticipationRepository
+ * @typedef {import ('../../../../../lib/infrastructure/repositories/campaign-repository.js')} CampaignRepository
+ * @typedef {import ('../../infrastructure/repositories/jobs/import-organization-learners-job-repository.js')} ImportOrganizationLearnersJobRepository
  * @typedef {import ('../../infrastructure/storage/import-storage.js')} ImportStorage
+ * @typedef {import ('../../infrastructure/repositories/jobs/import-sup-organization-learners-job-repository.js')} ImportSupOrganizationLearnersJobRepository
+ * @typedef {import ('../../../../shared/infrastructure/monitoring-tools.js')} LogErrorWithCorrelationIds
+ * @typedef {import ('../../../../shared/infrastructure/utils/logger.js')} Loggger
  * @typedef {import ('../../../../team/infrastructure/repositories/membership-repository.js')} MembershipRepository
- * @typedef {import ('../../infrastructure/repositories/organization-learner-repository.js')} OrganizationLearnerRepository
- * @typedef {import ('../../infrastructure/repositories/organization-learner-import-format-repository.js')} OrganizationLearnerImportFormatRepository
- * @typedef {import ('../../../../shared/infrastructure/repositories/organization-repository.js')} OrganizationRepository
- * @typedef {import ('../../infrastructure/repositories/organization-import-repository.js')} OrganizationImportRepository
- * @typedef {import ('../../infrastructure/repositories/sup-organization-learner-repository.js')} SupOrganizationLearnerRepository
  * @typedef {import ('../../../../organizational-entities/application/api/organization-features-api.js')} OrganizationFeatureApi
- * @typedef {import ('../../../../../src/shared/infrastructure/utils/logger.js')} logger
- * @typedef {import ('../../../../../lib/domain/services/user-reconciliation-service.js')} UserReconciliationService
  * @typedef {import ('../../infrastructure/repositories/organization-feature-repository.js')} OrganizationFeatureRepository
+ * @typedef {import ('../../infrastructure/repositories/organization-import-repository.js')} OrganizationImportRepository
+ * @typedef {import ('../../infrastructure/repositories/organization-learner-import-format-repository.js')} OrganizationLearnerImportFormatRepository
+ * @typedef {import ('../../infrastructure/repositories/organization-learner-repository.js')} OrganizationLearnerRepository
+ * @typedef {import ('../../../../shared/infrastructure/repositories/organization-repository.js')} OrganizationRepository
+ * @typedef {import ('../../infrastructure/repositories/sup-organization-learner-repository.js')} SupOrganizationLearnerRepository
+ * @typedef {import ('../../../../../lib/domain/services/user-reconciliation-service.js')} UserReconciliationService
+ * @typedef {import ('../../infrastructure/repositories/jobs/validate-organization-learners-import-file-job-repository.js')} ValidateOrganizationImportFileJobRepository
  */
 const dependencies = {
-  campaignRepository,
   campaignParticipationRepository,
-  importStorage,
-  membershipRepository,
-  organizationLearnerRepository,
-  organizationLearnerImportFormatRepository,
-  organizationRepository,
+  campaignRepository,
   importOrganizationLearnersJobRepository,
-  validateOrganizationImportFileJobRepository,
-  organizationImportRepository,
-  supOrganizationLearnerRepository,
-  organizationFeatureApi,
+  importStorage,
+  importSupOrganizationLearnersJobRepository,
   logErrorWithCorrelationIds,
-  userReconciliationService,
-  organizationFeatureRepository: repositories.organizationFeatureRepository,
   logger,
+  membershipRepository,
+  organizationFeatureApi,
+  organizationFeatureRepository: repositories.organizationFeatureRepository,
+  organizationImportRepository,
+  organizationLearnerImportFormatRepository,
+  organizationLearnerRepository,
+  organizationRepository,
+  supOrganizationLearnerRepository,
+  userReconciliationService,
+  validateOrganizationImportFileJobRepository,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));

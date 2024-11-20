@@ -13,7 +13,7 @@ const importSupOrganizationLearners = async function (
     unlink: fs.unlink,
   },
 ) {
-  const organizationId = request.params.id;
+  const organizationId = request.params.organizationId;
   const userId = request.auth.credentials.userId;
 
   try {
@@ -28,10 +28,8 @@ const importSupOrganizationLearners = async function (
       Parser: SupOrganizationLearnerParser,
       organizationId,
       i18n: request.i18n,
-    });
-    await usecases.importSupOrganizationLearners({
-      organizationId,
-      i18n: request.i18n,
+      type: 'ADDITIONAL_STUDENT',
+      performJob: true,
     });
   } finally {
     try {
@@ -53,7 +51,7 @@ const replaceSupOrganizationLearners = async function (
   },
 ) {
   const userId = request.auth.credentials.userId;
-  const organizationId = request.params.id;
+  const organizationId = request.params.organizationId;
 
   try {
     await usecases.uploadCsvFile({
@@ -67,10 +65,8 @@ const replaceSupOrganizationLearners = async function (
       Parser: SupOrganizationLearnerParser,
       organizationId,
       i18n: request.i18n,
-    });
-    await usecases.replaceSupOrganizationLearners({
-      organizationId,
-      i18n: request.i18n,
+      type: 'REPLACE_STUDENT',
+      performJob: true,
     });
   } finally {
     // see https://hapi.dev/api/?v=21.3.3#-routeoptionspayloadoutput
@@ -86,7 +82,7 @@ const replaceSupOrganizationLearners = async function (
 };
 
 const getOrganizationLearnersCsvTemplate = async function (request, h, dependencies = { tokenService }) {
-  const organizationId = request.params.id;
+  const organizationId = request.params.organizationId;
   const token = request.query.accessToken;
   const userId = dependencies.tokenService.extractUserId(token);
   const template = await usecases.getOrganizationLearnersCsvTemplate({
@@ -103,7 +99,7 @@ const getOrganizationLearnersCsvTemplate = async function (request, h, dependenc
 
 const updateStudentNumber = async function (request, h) {
   const payload = request.payload.data.attributes;
-  const organizationId = request.params.id;
+  const organizationId = request.params.organizationId;
   const studentNumber = payload['student-number'];
   const organizationLearnerId = request.params.organizationLearnerId;
 

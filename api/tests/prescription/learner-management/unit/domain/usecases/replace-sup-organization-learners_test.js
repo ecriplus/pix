@@ -1,5 +1,5 @@
 import { OrganizationImport } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImport.js';
-import { replaceSupOrganizationLearners } from '../../../../../../src/prescription/learner-management/domain/usecases/replace-sup-organization-learner.js';
+import { replaceSupOrganizationLearners } from '../../../../../../src/prescription/learner-management/domain/usecases/replace-sup-organization-learners.js';
 import { SupOrganizationLearnerImportHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-import-header.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { catchErr, expect, sinon, toStream } from '../../../../../test-helper.js';
@@ -11,6 +11,7 @@ const supOrganizationLearnerImportHeader = new SupOrganizationLearnerImportHeade
   .join(';');
 
 describe('Unit | UseCase | ReplaceSupOrganizationLearner', function () {
+  let organizationImportId;
   const organizationId = 1234;
   const userId = 333;
   let organizationImport,
@@ -20,7 +21,9 @@ describe('Unit | UseCase | ReplaceSupOrganizationLearner', function () {
     expectedLearners;
 
   beforeEach(function () {
+    organizationImportId = Symbol('organizationImportId');
     organizationImport = new OrganizationImport({
+      id: organizationImportId,
       filename: 'file.csv',
       organizationId,
       createdBy: userId,
@@ -28,10 +31,11 @@ describe('Unit | UseCase | ReplaceSupOrganizationLearner', function () {
     });
     supOrganizationLearnerRepositoryStub = { replaceStudents: sinon.stub().resolves() };
     organizationImportRepositoryStub = {
-      getLastByOrganizationId: sinon.stub().withArgs(organizationId).resolves(organizationImport),
+      get: sinon.stub(),
       save: sinon.stub(),
     };
 
+    organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
     importStorageStub = {
       readFile: sinon.stub(),
       deleteFile: sinon.stub(),
@@ -84,7 +88,7 @@ describe('Unit | UseCase | ReplaceSupOrganizationLearner', function () {
 
       // when
       await replaceSupOrganizationLearners({
-        organizationId,
+        organizationImportId,
         i18n,
         supOrganizationLearnerRepository: supOrganizationLearnerRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
@@ -110,7 +114,7 @@ describe('Unit | UseCase | ReplaceSupOrganizationLearner', function () {
 
       // when
       await replaceSupOrganizationLearners({
-        organizationId,
+        organizationImportId,
         i18n,
         supOrganizationLearnerRepository: supOrganizationLearnerRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
@@ -134,7 +138,7 @@ describe('Unit | UseCase | ReplaceSupOrganizationLearner', function () {
 
         // when
         await replaceSupOrganizationLearners({
-          organizationId,
+          organizationImportId,
           supOrganizationLearnerRepository: supOrganizationLearnerRepositoryStub,
           importStorage: importStorageStub,
           organizationImportRepository: organizationImportRepositoryStub,
@@ -149,7 +153,7 @@ describe('Unit | UseCase | ReplaceSupOrganizationLearner', function () {
 
     describe('errors case', function () {
       beforeEach(function () {
-        organizationImportRepositoryStub.getLastByOrganizationId.withArgs(organizationId).resolves(organizationImport);
+        organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
 
         const csvContent = `${supOrganizationLearnerImportHeader}
           Beatrix;The;Bride;Kiddo;Black Mamba;01/01/1970;thebride@example.net;123456;Assassination Squad;Hattori Hanzo;Deadly Viper Assassination Squad;BAD;BAD;
@@ -165,7 +169,7 @@ describe('Unit | UseCase | ReplaceSupOrganizationLearner', function () {
 
         // when
         await catchErr(replaceSupOrganizationLearners)({
-          organizationId,
+          organizationImportId,
           i18n,
           supOrganizationLearnerRepository: supOrganizationLearnerRepositoryStub,
           organizationImportRepository: organizationImportRepositoryStub,

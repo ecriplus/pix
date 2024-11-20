@@ -1,4 +1,5 @@
 import { IMPORT_STATUSES } from '../../../../../../src/prescription/learner-management/domain/constants.js';
+import { AggregateImportError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
 import { OrganizationImport } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImport.js';
 import { validateCsvFile } from '../../../../../../src/prescription/learner-management/domain/usecases/validate-csv-file.js';
 import { SupOrganizationLearnerImportHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-import-header.js';
@@ -12,7 +13,7 @@ const supOrganizationLearnerImportHeader = new SupOrganizationLearnerImportHeade
   .map((column) => column.name)
   .join(';');
 
-describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
+describe('Unit | UseCase | validateCsvFile', function () {
   const organizationId = 1234;
   let csvContent, expectedWarnings, organizationImport, organizationImportRepositoryStub, importStorageStub;
 
@@ -79,12 +80,75 @@ describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
   });
 
   context('when there is errors', function () {
+    let importSupOrganizationLearnersJobRepositoryStub, organizationImportStub;
     beforeEach(function () {
-      organizationImportRepositoryStub.getLastByOrganizationId.withArgs(organizationId).resolves(organizationImport);
+      importSupOrganizationLearnersJobRepositoryStub = {
+        performAsync: sinon.stub(),
+      };
+
+      organizationImportStub = {
+        id: 1,
+        filename: Symbol('filename'),
+        encoding: Symbol('encoding'),
+        validate: sinon.stub(),
+        save: sinon.stub(),
+      };
+      organizationImportRepositoryStub.getLastByOrganizationId
+        .withArgs(organizationId)
+        .resolves(organizationImportStub);
+    });
+
+    context('when there is s3 errors', function () {
+      it('should save error when there is an error reading file from S3', async function () {
+        const s3Error = new Error('s3 error');
+        importStorageStub.getParser.rejects(s3Error);
+        const error = await catchErr(validateCsvFile)({
+          organizationId,
+          organizationImportRepository: organizationImportRepositoryStub,
+          importStorage: importStorageStub,
+          importSupOrganizationLearnersJobRepository: importSupOrganizationLearnersJobRepositoryStub,
+        });
+        expect(error).to.eq(s3Error);
+        expect(importStorageStub.deleteFile).to.have.been.calledWithExactly({
+          filename: organizationImportStub.filename,
+        });
+        expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportStub);
+        expect(organizationImportStub.validate).to.have.been.calledWithExactly({
+          errors: [s3Error],
+          warnings: undefined,
+        });
+      });
+
+      it('should save error when there is an error deleting file from S3', async function () {
+        const parserStub = { parse: sinon.stub() };
+        importStorageStub.getParser
+          .withArgs(
+            { Parser: SupOrganizationLearnerParser, filename: organizationImport.filename },
+            organizationId,
+            i18n,
+          )
+          .resolves(parserStub);
+        parserStub.parse.rejects(new AggregateImportError([new Error('parsing')]));
+        const s3Error = new Error('s3 error');
+        importStorageStub.deleteFile.rejects(s3Error);
+
+        const error = await catchErr(validateCsvFile)({
+          organizationId,
+          organizationImportRepository: organizationImportRepositoryStub,
+          importStorage: importStorageStub,
+          importSupOrganizationLearnersJobRepositoryStub: importSupOrganizationLearnersJobRepositoryStub,
+        });
+        expect(error).to.eq(s3Error);
+        expect(importStorageStub.deleteFile).to.have.been.calledWithExactly({
+          filename: organizationImportStub.filename,
+        });
+        expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportStub);
+      });
     });
 
     it('should save VALIDATION_ERROR status', async function () {
       // given
+      organizationImportRepositoryStub.getLastByOrganizationId.withArgs(organizationId).resolves(organizationImport);
       const csvContent = `${supOrganizationLearnerImportHeader}
           Beatrix;The;Bride;Kiddo;Black Mamba;01/01/1970;thebride@example.net;123456;Assassination Squad;Hattori Hanzo;Deadly Viper Assassination Squad;BAD;BAD;
           Beatrix;The;Bride;Kiddo;Black Mamba;01/01/1970;thebride@example.net;123456;Assassination Squad;Hattori Hanzo;Deadly Viper Assassination Squad;BAD;BAD;

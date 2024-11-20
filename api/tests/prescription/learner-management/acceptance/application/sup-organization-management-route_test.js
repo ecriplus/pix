@@ -20,7 +20,7 @@ describe('Acceptance | Application | organization-controller-sup-organization-le
     server = await createServer();
   });
 
-  describe('POST organizations/:id/sup-organization-learners/import-csv', function () {
+  describe('POST organizations/{organizationId}/sup-organization-learners/import-csv', function () {
     let connectedUser;
 
     beforeEach(async function () {
@@ -130,7 +130,7 @@ describe('Acceptance | Application | organization-controller-sup-organization-le
     );
   });
 
-  describe('POST organizations/:id/sup-organization-learners/replace-csv', function () {
+  describe('POST organizations/{organizationId}/sup-organization-learners/replace-csv', function () {
     let connectedUser;
 
     beforeEach(async function () {
@@ -188,7 +188,7 @@ describe('Acceptance | Application | organization-controller-sup-organization-le
     });
   });
 
-  describe('GET /api/organizations/{id}/organization-learners/csv-template', function () {
+  describe('GET /api/organizations/{organizationId}/organization-learners/csv-template', function () {
     let userId, organization, accessToken;
 
     beforeEach(async function () {

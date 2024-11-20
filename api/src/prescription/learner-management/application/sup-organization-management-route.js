@@ -20,7 +20,7 @@ const register = async function (server) {
   server.route([
     {
       method: 'POST',
-      path: '/api/organizations/{id}/sup-organization-learners/replace-csv',
+      path: '/api/organizations/{organizationId}/sup-organization-learners/replace-csv',
       config: {
         pre: [
           {
@@ -30,7 +30,7 @@ const register = async function (server) {
         ],
         validate: {
           params: Joi.object({
-            id: identifiersType.organizationId,
+            organizationId: identifiersType.organizationId,
           }),
         },
         payload: {
@@ -57,7 +57,7 @@ const register = async function (server) {
     },
     {
       method: 'POST',
-      path: '/api/organizations/{id}/sup-organization-learners/import-csv',
+      path: '/api/organizations/{organizationId}/sup-organization-learners/import-csv',
       config: {
         pre: [
           {
@@ -67,7 +67,7 @@ const register = async function (server) {
         ],
         validate: {
           params: Joi.object({
-            id: identifiersType.organizationId,
+            organizationId: identifiersType.organizationId,
           }),
         },
         payload: {
@@ -94,12 +94,12 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/organizations/{id}/organization-learners/csv-template',
+      path: '/api/organizations/{organizationId}/organization-learners/csv-template',
       config: {
         auth: false,
         validate: {
           params: Joi.object({
-            id: identifiersType.organizationId,
+            organizationId: identifiersType.organizationId,
           }),
           query: Joi.object({
             accessToken: Joi.string().required(),
@@ -116,7 +116,7 @@ const register = async function (server) {
     },
     {
       method: 'PATCH',
-      path: '/api/organizations/{id}/sup-organization-learners/{organizationLearnerId}',
+      path: '/api/organizations/{organizationId}/sup-organization-learners/{organizationLearnerId}',
       config: {
         pre: [
           {
@@ -129,7 +129,7 @@ const register = async function (server) {
             allowUnknown: true,
           },
           params: Joi.object({
-            id: identifiersType.organizationId,
+            organizationId: identifiersType.organizationId,
             organizationLearnerId: identifiersType.organizationLearnerId,
           }),
           payload: Joi.object({
