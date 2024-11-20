@@ -25,6 +25,13 @@ const up = async function (knex) {
     table.specificType('skillIds', 'string[]');
     table.specificType('thematicIds', 'string[]');
   });
+  await knex.schema.withSchema(SCHEMA_NAME).createTable('thematics', function (table) {
+    table.string('id').primary();
+    table.jsonb('name_i18n');
+    table.integer('index');
+    table.string('competenceId').references('id').inTable(`${SCHEMA_NAME}.competences`);
+    table.specificType('tubeIds', 'string[]');
+  });
 };
 
 const down = function (knex) {
