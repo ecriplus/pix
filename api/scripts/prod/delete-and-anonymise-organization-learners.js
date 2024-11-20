@@ -12,7 +12,7 @@ export class DeleteAndAnonymiseOrgnizationLearnerScript extends Script {
       permanent: true,
       options: {
         organizationLearnerIds: {
-          type: '<array>number',
+          type: 'string',
           describe: 'a list of comma separated organization learner ids',
           demandOption: true,
           coerce: commaSeparatedNumberParser(),
@@ -28,7 +28,6 @@ export class DeleteAndAnonymiseOrgnizationLearnerScript extends Script {
     organizationLearnerRepository = { removeByIds },
   }) {
     const engineeringUserId = process.env.ENGINEERING_USER_ID;
-
     logger.info(`Anonymise ${options.organizationLearnerIds.length} learners`);
     await DomainTransaction.execute(async () => {
       await campaignParticipationRepository.removeByOrganizationLearnerIds({
