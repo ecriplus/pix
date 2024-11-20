@@ -26,6 +26,7 @@ export default class User extends Model {
   // includes
   @belongsTo('is-certifiable', { async: true, inverse: null }) isCertifiable;
   @belongsTo('profile', { async: true, inverse: null }) profile;
+  @belongsTo('account-info', { async: true, inverse: null }) accountInfo;
   @hasMany('certification', { async: true, inverse: 'user' }) certifications;
   @hasMany('scorecard', { async: true, inverse: null }) scorecards;
   @hasMany('training', { async: true, inverse: null }) trainings;

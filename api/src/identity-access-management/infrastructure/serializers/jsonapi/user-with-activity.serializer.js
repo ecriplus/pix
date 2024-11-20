@@ -18,6 +18,7 @@ const serialize = function (users, meta) {
       'pixCertifTermsOfServiceAccepted',
       'lang',
       'isAnonymous',
+      'accountInfo',
       'profile',
       'hasSeenAssessmentInstructions',
       'isCertifiable',
@@ -59,6 +60,12 @@ const serialize = function (users, meta) {
           return `/api/users/${parent.id}/trainings`;
         },
       },
+    },
+    accountInfo: {
+      ref: 'id',
+      ignoreRelationshipData: true,
+      nullIfMissing: true,
+      relationshipLinks: { related: () => '/api/users/my-account' },
     },
     meta,
   }).serialize(users);
