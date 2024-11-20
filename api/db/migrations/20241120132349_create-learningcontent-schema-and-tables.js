@@ -6,6 +6,15 @@ const up = async function (knex) {
     table.string('id').primary();
     table.text('name');
   });
+  await knex.schema.withSchema(SCHEMA_NAME).createTable('areas', function (table) {
+    table.string('id').primary();
+    table.string('code');
+    table.text('name');
+    table.jsonb('title_i18n');
+    table.string('color');
+    table.string('frameworkId').references('id').inTable(`${SCHEMA_NAME}.frameworks`);
+    table.specificType('competenceIds', 'string[]');
+  });
 };
 
 const down = function (knex) {
