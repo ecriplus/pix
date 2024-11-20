@@ -11,11 +11,10 @@ describe('DeleteAndAnonymiseOrgnizationLearnerScript', function () {
       const { options } = script.metaInfo;
 
       expect(options.organizationLearnerIds).to.deep.include({
-        type: '<array>number',
+        type: 'string',
         describe: 'a list of comma separated organization learner ids',
         demandOption: true,
       });
-      expect(options.organizationLearnerIds.coerce).to.be.a('function');
     });
 
     it('parses list of organizationLearnerIds', async function () {
