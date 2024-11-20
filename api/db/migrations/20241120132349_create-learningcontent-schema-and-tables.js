@@ -106,6 +106,15 @@ const up = async function (knex) {
     table.specificType('competences', 'string[]');
     table.specificType('challenges', 'string[]');
   });
+  await knex.schema.withSchema(SCHEMA_NAME).createTable('tutorials', function (table) {
+    table.string('id').primary();
+    table.string('duration');
+    table.text('format');
+    table.text('title');
+    table.text('source');
+    table.text('link');
+    table.string('locale');
+  });
 };
 
 const down = function (knex) {
