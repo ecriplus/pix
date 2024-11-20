@@ -3,17 +3,10 @@ import Joi from 'joi';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { scenarioSimulatorController } from './scenario-simulator-controller.js';
 
-const _successRatesConfigurationValidator = Joi.object({
-  startingChallengeIndex: Joi.number().integer().min(0).required(),
-  endingChallengeIndex: Joi.number().integer().min(Joi.ref('startingChallengeIndex')).required(),
-  value: Joi.number().min(0).max(1).required(),
-});
-
 const _baseScenarioParametersValidator = Joi.object().keys({
   initialCapacity: Joi.number().integer().min(-8).max(8),
   numberOfIterations: Joi.number().integer().min(0),
   challengePickProbability: Joi.number().min(0).max(100),
-  minimumEstimatedSuccessRateRanges: Joi.array().items(_successRatesConfigurationValidator),
   variationPercent: Joi.number().min(0).max(1),
 });
 

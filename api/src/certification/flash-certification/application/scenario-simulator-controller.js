@@ -6,7 +6,6 @@ import { pickChallengeService } from '../../../evaluation/domain/services/pick-c
 import { random } from '../../../shared/infrastructure/utils/random.js';
 import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { pickAnswerStatusService } from '../../shared/domain/services/pick-answer-status-service.js';
-import { FlashAssessmentSuccessRateHandler } from '../domain/models/FlashAssessmentSuccessRateHandler.js';
 import { usecases } from '../domain/usecases/index.js';
 import { scenarioSimulatorBatchSerializer } from '../infrastructure/serializers/scenario-simulator-batch-serializer.js';
 
@@ -25,7 +24,6 @@ async function simulateFlashAssessmentScenario(
     initialCapacity,
     numberOfIterations = 1,
     challengePickProbability,
-    minimumEstimatedSuccessRateRanges: minimumEstimatedSuccessRateRangesDto,
     variationPercent,
     capacity,
   } = request.payload;
@@ -33,10 +31,6 @@ async function simulateFlashAssessmentScenario(
   const pickAnswerStatus = dependencies.pickAnswerStatusService.pickAnswerStatusForCapacity(capacity);
 
   const locale = dependencies.extractLocaleFromRequest(request);
-
-  const minimumEstimatedSuccessRateRanges = _minimumEstimatedSuccessRateRangesToDomain(
-    minimumEstimatedSuccessRateRangesDto,
-  );
 
   async function* generate() {
     const iterations = _.range(0, numberOfIterations);
@@ -50,7 +44,6 @@ async function simulateFlashAssessmentScenario(
           pickChallenge,
           locale,
           initialCapacity,
-          minimumEstimatedSuccessRateRanges,
           variationPercent,
         },
         _.isUndefined,
@@ -76,16 +69,6 @@ async function simulateFlashAssessmentScenario(
 
   const generatedResponse = Readable.from(generate(), { objectMode: false });
   return h.response(generatedResponse).type('text/event-stream; charset=utf-8');
-}
-
-function _minimumEstimatedSuccessRateRangesToDomain(successRateRanges) {
-  if (!successRateRanges) {
-    return undefined;
-  }
-
-  return successRateRanges.map((successRateRange) => {
-    return FlashAssessmentSuccessRateHandler.create(successRateRange);
-  });
 }
 
 export const scenarioSimulatorController = { simulateFlashAssessmentScenario };

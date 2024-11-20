@@ -8,7 +8,6 @@ export async function simulateFlashAssessmentScenario({
   pickChallenge,
   pickAnswerStatus,
   initialCapacity,
-  minimumEstimatedSuccessRateRanges = [],
   variationPercent,
   challengeRepository,
   flashAlgorithmService,
@@ -22,8 +21,7 @@ export async function simulateFlashAssessmentScenario({
     flashAlgorithmImplementation: flashAlgorithmService,
     configuration: new FlashAssessmentAlgorithmConfiguration({
       limitToOneQuestionPerTube: configurationUsedInProduction.limitToOneQuestionPerTube,
-      minimumEstimatedSuccessRateRanges:
-        minimumEstimatedSuccessRateRanges ?? configurationUsedInProduction.minimumEstimatedSuccessRateRanges,
+      minimumEstimatedSuccessRateRanges: configurationUsedInProduction.minimumEstimatedSuccessRateRanges,
       enablePassageByAllCompetences: configurationUsedInProduction.enablePassageByAllCompetences,
       variationPercent: variationPercent ?? configurationUsedInProduction.variationPercent,
       variationPercentUntil: undefined,
