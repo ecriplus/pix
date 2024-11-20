@@ -38,6 +38,7 @@ Router.map(function () {
       this.route('personal-information', { path: '/informations-personnelles' });
       this.route('connection-methods', { path: '/methodes-de-connexion' });
       this.route('language', { path: '/langue' });
+      this.route('delete-account');
     });
 
     this.route('certifications', function () {
