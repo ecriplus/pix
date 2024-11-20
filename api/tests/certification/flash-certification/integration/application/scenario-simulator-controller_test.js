@@ -55,66 +55,6 @@ describe('Integration | Application | scenario-simulator-controller', function (
           },
         ];
       });
-
-      context('When the scenario is forced to space competences', function () {
-        it('should call the usecase with the right parameters', async function () {
-          // given
-          const challengesBetweenSameCompetence = 2;
-
-          const pickChallengeImplementation = sinon.stub();
-          pickChallengeService.chooseNextChallenge.withArgs().returns(pickChallengeImplementation);
-          const pickAnswerStatusForCapacityImplementation = sinon.stub();
-          pickAnswerStatusService.pickAnswerStatusForCapacity
-            .withArgs(6)
-            .returns(pickAnswerStatusForCapacityImplementation);
-
-          usecases.simulateFlashAssessmentScenario
-            .withArgs({
-              pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
-              locale: 'en',
-              pickChallenge: pickChallengeImplementation,
-              initialCapacity,
-              challengesBetweenSameCompetence,
-            })
-            .resolves(simulationResults);
-          securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
-
-          // when
-          const response = await httpTestServer.request(
-            'POST',
-            '/api/scenario-simulator',
-            {
-              initialCapacity,
-              capacity: 6,
-              challengesBetweenSameCompetence,
-            },
-            null,
-            { 'accept-language': 'en' },
-          );
-
-          // then
-          expect(response.statusCode).to.equal(200);
-          const parsedResult = parseJsonStream(response);
-          expect(parsedResult).to.deep.equal([
-            {
-              index: 0,
-              simulationReport: [
-                {
-                  challengeId: challenge1.id,
-                  errorRate: errorRate1,
-                  capacity: capacity1,
-                  minimumCapability: 0.6190392084062237,
-                  answerStatus: 'ok',
-                  reward: reward1,
-                  difficulty: challenge1.difficulty,
-                  discriminant: challenge1.discriminant,
-                },
-              ],
-            },
-          ]);
-        });
-      });
-
       context('When configuring the challenge pick probability', function () {
         it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
           // given

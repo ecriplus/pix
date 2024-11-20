@@ -8,7 +8,6 @@ export async function simulateFlashAssessmentScenario({
   pickChallenge,
   pickAnswerStatus,
   initialCapacity,
-  challengesBetweenSameCompetence = 0,
   minimumEstimatedSuccessRateRanges = [],
   variationPercent,
   challengeRepository,
@@ -23,12 +22,13 @@ export async function simulateFlashAssessmentScenario({
     flashAlgorithmImplementation: flashAlgorithmService,
     configuration: new FlashAssessmentAlgorithmConfiguration({
       limitToOneQuestionPerTube: configurationUsedInProduction.limitToOneQuestionPerTube,
-      minimumEstimatedSuccessRateRanges,
+      minimumEstimatedSuccessRateRanges:
+        minimumEstimatedSuccessRateRanges ?? configurationUsedInProduction.minimumEstimatedSuccessRateRanges,
       enablePassageByAllCompetences: configurationUsedInProduction.enablePassageByAllCompetences,
-      variationPercent,
+      variationPercent: variationPercent ?? configurationUsedInProduction.variationPercent,
       variationPercentUntil: undefined,
       doubleMeasuresUntil: 0,
-      challengesBetweenSameCompetence,
+      challengesBetweenSameCompetence: configurationUsedInProduction.challengesBetweenSameCompetence,
       maximumAssessmentLength: configurationUsedInProduction.maximumAssessmentLength,
     }),
   });
