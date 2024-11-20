@@ -34,10 +34,9 @@
     </PixInput>
 
     <div class="session-form__field {{if this.isSessionDateMissing 'session-form__field--error'}}">
-      <label for="session-date" class="label">
-        <abbr title={{t "common.forms.required"}} class="mandatory-mark" aria-hidden="true">*</abbr>
+      <PixLabel @requiredLabel={{t "common.forms.required"}} for="session-date">
         {{t "common.forms.session-labels.date-start"}}
-      </label>
+      </PixLabel>
       <EmberFlatpickr
         id="session-date"
         @altFormat="d/m/Y"
@@ -59,10 +58,9 @@
     </div>
 
     <div class="session-form__field {{if this.isSessionTimeMissing 'session-form__field--error'}}">
-      <label for="session-time" class="label">
-        <abbr title={{t "common.forms.required"}} class="mandatory-mark" aria-hidden="true">*</abbr>
+      <PixLabel @requiredLabel={{t "common.forms.required"}} for="session-time">
         {{t "common.forms.session-labels.time-start"}}
-      </label>
+      </PixLabel>
       <EmberFlatpickr
         id="session-time"
         @onChange={{this.onTimePicked}}
