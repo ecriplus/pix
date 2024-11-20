@@ -79,7 +79,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
           pickAnswerStatus,
           initialCapacity,
           flashAlgorithmService,
-          limitToOneQuestionPerTube: false,
         });
 
         // then
@@ -97,8 +96,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
     context('when we don‘t limit the number of challenges per tube', function () {
       it('should return an array of estimated level, challenge, reward and error rate for each answer', async function () {
         // given
-        const limitToOneQuestionPerTube = false;
-
         const {
           challengeRepository,
           sharedFlashAlgorithmConfigurationRepository,
@@ -107,9 +104,7 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
           flashAlgorithmService: baseFlashAlgorithmService,
           getNextChallengesOptionsMatcher,
           allChallenges,
-        } = prepareStubs({
-          limitToOneQuestionPerTube,
-        });
+        } = prepareStubs();
 
         const flashAlgorithmService = {
           ...baseFlashAlgorithmService,
@@ -144,7 +139,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
           locale,
           pickChallenge,
           pickAnswerStatus,
-          limitToOneQuestionPerTube,
           flashAlgorithmService,
         });
 
@@ -163,7 +157,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
     context('when we set a minimum estimated success rate range', function () {
       it('should return an array of estimated level, challenge, reward and error rate for each answer', async function () {
         // given
-        const limitToOneQuestionPerTube = false;
         const minimumEstimatedSuccessRateRanges = [
           domainBuilder.buildFlashAssessmentAlgorithmSuccessRateHandlerFixed({
             startingChallengeIndex: 0,
@@ -191,7 +184,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
           pickAnswerStatus,
           minimumEstimatedSuccessRateRanges,
           flashAlgorithmService,
-          limitToOneQuestionPerTube,
         });
 
         // then
@@ -210,7 +202,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
   context('when there are not enough flash challenges left', function () {
     it('should stop simulating', async function () {
       // given
-      const limitToOneQuestionPerTube = false;
       const challenge = domainBuilder.buildChallenge({ id: 1 });
       const challengeRepository = {
         findActiveFlashCompatible: sinon.stub(),
@@ -266,7 +257,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
         pickChallenge,
         pickAnswerStatus,
         flashAlgorithmService,
-        limitToOneQuestionPerTube,
       });
 
       // then
@@ -336,6 +326,7 @@ function prepareStubs({
   sharedFlashAlgorithmConfigurationRepository.getMostRecent.resolves({
     enablePassageByAllCompetences: true,
     maximumAssessmentLength: 3,
+    limitToOneQuestionPerTube: false,
   });
 
   flashAlgorithmService.getCapacityAndErrorRate
