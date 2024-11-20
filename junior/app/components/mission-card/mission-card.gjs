@@ -4,12 +4,10 @@ import MissionCardBackGround from './mission-card-background';
 
 export default class MissionCard extends Component {
   get imageUrl() {
-    console.log(this.args.cardImageUrl);
     return this.args.cardImageUrl ? this.args.cardImageUrl : '/images/mission/icon/pix-junior-logo-white.svg';
   }
 
   get classIcon() {
-    console.log(this.args.cardImageUrl);
     return this.args.cardImageUrl ? 'mission-icon' : 'mission-icon-default';
   }
   <template>
