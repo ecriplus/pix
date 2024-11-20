@@ -7,7 +7,6 @@ export async function simulateFlashAssessmentScenario({
   locale,
   pickChallenge,
   pickAnswerStatus,
-  stopAtChallenge,
   initialCapacity,
   challengesBetweenSameCompetence = 0,
   limitToOneQuestionPerTube = true,
@@ -31,7 +30,7 @@ export async function simulateFlashAssessmentScenario({
       variationPercentUntil: undefined,
       doubleMeasuresUntil: 0,
       challengesBetweenSameCompetence,
-      maximumAssessmentLength: stopAtChallenge,
+      maximumAssessmentLength: configurationUsedInProduction.maximumAssessmentLength,
     }),
   });
 

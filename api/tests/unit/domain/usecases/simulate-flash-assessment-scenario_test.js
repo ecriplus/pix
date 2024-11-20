@@ -26,7 +26,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
 
         // when
         const result = await simulateFlashAssessmentScenario({
-          stopAtChallenge: 3,
           challengeRepository,
           locale,
           pickChallenge,
@@ -73,7 +72,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
 
         // when
         const result = await simulateFlashAssessmentScenario({
-          stopAtChallenge: 3,
           challengeRepository,
           sharedFlashAlgorithmConfigurationRepository,
           locale,
@@ -141,7 +139,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
 
         // when
         const result = await simulateFlashAssessmentScenario({
-          stopAtChallenge: 3,
           challengeRepository,
           sharedFlashAlgorithmConfigurationRepository,
           locale,
@@ -187,7 +184,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
 
         // when
         const result = await simulateFlashAssessmentScenario({
-          stopAtChallenge: 3,
           challengeRepository,
           sharedFlashAlgorithmConfigurationRepository,
           locale,
@@ -337,7 +333,10 @@ function prepareStubs({
     ),
   );
 
-  sharedFlashAlgorithmConfigurationRepository.getMostRecent.resolves({ enablePassageByAllCompetences: true });
+  sharedFlashAlgorithmConfigurationRepository.getMostRecent.resolves({
+    enablePassageByAllCompetences: true,
+    maximumAssessmentLength: 3,
+  });
 
   flashAlgorithmService.getCapacityAndErrorRate
     .withArgs({

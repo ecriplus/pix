@@ -22,7 +22,6 @@ async function simulateFlashAssessmentScenario(
   },
 ) {
   const {
-    stopAtChallenge,
     initialCapacity,
     numberOfIterations = 1,
     challengePickProbability,
@@ -52,7 +51,6 @@ async function simulateFlashAssessmentScenario(
           pickAnswerStatus,
           pickChallenge,
           locale,
-          stopAtChallenge,
           initialCapacity,
           challengesBetweenSameCompetence,
           limitToOneQuestionPerTube,
