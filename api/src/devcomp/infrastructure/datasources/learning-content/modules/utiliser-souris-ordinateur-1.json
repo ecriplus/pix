@@ -41,7 +41,7 @@
     },
     {
       "grainId": "4a80afba-d2ef-4f58-a328-a0fc9f204aca",
-      "content": "<p>Maintenant que vous savez déplacer votre souris, vous allez apprendre à cliquer.<br>Pour cliquer, découvrez les différents boutons de la souris ! <span aria-hidden=\"\\&quot;true\\&quot;\">🖱️️</span></p>"
+      "content": "<p>Maintenant que vous savez déplacer votre souris, découvrez les différents boutons de la souris !<span aria-hidden=\"\\&quot;true\\&quot;\">🖱️️</span></p>"
     },
     {
       "grainId": "83f44f19-e8de-4248-bfc7-e38f19190138",
@@ -71,7 +71,7 @@
           "element": {
             "id": "48708070-39c3-4af4-8914-ab61d61dfee8",
             "type": "text",
-            "content": "<p><strong>Reconnaître une souris</strong> </p><p>La souris fait partie de l'équipement de base d’un ordinateur, avec le clavier.  </p><p>Les souris peuvent avoir différentes formes, tailles ou couleurs. </p><p>Il y a deux types de souris : </p><ul><li>les souris avec un fil</li><li>les souris sans fil</li></ul><p>Globalement, toutes ces souris servent à faire les mêmes choses.</p>"
+            "content": "<p>La souris fait partie de l'équipement de base d’un ordinateur, avec le clavier.</p><p><strong>Reconnaître une souris</strong>  </p><p>Les souris peuvent avoir différentes formes, tailles ou couleurs. </p><p>Il y a deux types de souris : </p><ul><li>les souris avec un fil</li><li>les souris sans fil</li></ul><p>Globalement, toutes ces souris servent à faire les mêmes choses.</p>"
           }
         },
         {
@@ -157,7 +157,7 @@
           "element": {
             "id": "7dad11c9-fafd-4e94-bd81-003e3944ff6d",
             "type": "text",
-            "content": "<p>Après cette vidéo, vous devrez déplacez votre souris dans une situation concrète.</p>"
+            "content": "<p>Après cette vidéo, vous devrez déplacez votre souris dans une situation simple.</p>"
           }
         },
         {
@@ -203,7 +203,7 @@
           "element": {
             "id": "a33ac061-ab23-4e94-b60e-904e701e7d76",
             "type": "text",
-            "content": "<h3><span aria-hidden=\"true\">👉</span> Dans le cadre ci-dessous, déplacez le pointeur sur chacun des éléments qui apparaissent. </h3><p>Vous pouvez essayer autant de fois que vous voulez.</p>"
+            "content": "<h3><span aria-hidden=\"true\">👉</span> Dans la zone ci-dessous, déplacez le pointeur sur chacun des éléments qui apparaissent. </h3><p>Vous pouvez essayer autant de fois que vous voulez.</p>"
           }
         },
         {
@@ -265,7 +265,7 @@
           "element": {
             "id": "98a59942-5506-4c18-b16a-97ce2010103b",
             "type": "text",
-            "content": "<p><strong><span aria-hidden=\"\\&quot;true\\&quot;\">🔎</span> Observez : combien votre souris d'ordinateur a-t-elle de boutons ?</strong></p>"
+            "content": "<p><strong><span aria-hidden=\"\\&quot;true\\&quot;\">🔎</span> Observez : combien de boutons a votre souris d’ordinateur ?</strong></p>"
           }
         }
       ]
@@ -346,7 +346,7 @@
           "element": {
             "id": "80070528-b2ca-4e93-99a6-bc495a6029ef",
             "type": "text",
-            "content": "<p>Voici un rappel des étapes pour faire un clic gauche&nbsp;:</p><ol><li>déplacer le pointeur à l'endroit voulu,</li><li>appuyer sur le bouton gauche de la souris,</li></ol><p>Observez l'effet à l'écran.</p><p><strong>Dans la zone ci-dessous, faites un clic sur chaque élément lorsqu'il apparait.</strong><br></p>"
+            "content": "<p>Voici un rappel des étapes pour faire un clic gauche&nbsp;:</p><ol><li>Déplacer le pointeur à l'endroit voulu</li><li>Appuyer sur le bouton gauche de la souris</li></ol><p>Observez ensuite l'effet à l'écran.</p><p><strong>Dans la zone ci-dessous, faites un clic sur chaque élément lorsqu'il apparait.</strong><br></p>"
           }
         },
         {
@@ -369,7 +369,7 @@
           "element": {
             "id": "930a995c-2b29-474a-97a3-c90d5e03ad80",
             "type": "text",
-            "content": "<p>Vous savez maintenant déplacer le pointeur de votre souris et cliquer.</p><p>Faites un clic gauche sur le bouton «&nbsp;Continuer&nbsp;» pour passer à l'étape suivante en autonomie.</p>"
+            "content": "<p>👏Bravo ! Vous savez maintenant déplacer le pointeur de votre souris et cliquer.</p><p>Faites un clic gauche sur le bouton «&nbsp;Continuer&nbsp;» pour passer à l'étape suivante en autonomie.</p>"
           }
         }
       ]
@@ -384,14 +384,7 @@
           "element": {
             "id": "af44ed34-f3a3-46f1-813d-c801a6e0b073",
             "type": "text",
-            "content": "<p>Quand vous déplacez votre souris sur un élément, le pointeur peut changer de forme. Cela signifie qu'une action est possible.</p><p>Découvrez les trois formes de pointeur les plus courantes et leur utilité.</p> <br>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "3e773e63-59e0-4311-b03b-005060bb8f7e",
-            "type": "separator"
+            "content": "<p>Quand vous déplacez votre souris sur un élément, le pointeur peut changer de forme. Cela signifie qu'une action est possible.</p><p>Découvrez les trois formes de pointeur les plus courantes et leur utilité.</p>"
           }
         },
         {
@@ -409,7 +402,7 @@
           "element": {
             "id": "8c07cbe0-14aa-4a0e-898d-7ddf9c4ff3be",
             "type": "text",
-            "content": "<ul>\n    <li><strong>La flèche</strong> indique la position du pointeur. C’est le pointeur de base de votre souris.</li>\n    <li><strong>La main</strong> indique une zone interactive. Ce pointeur signifie que vous pouvez faire une action.</li>\n    <li><strong>La barre verticale</strong> indique une zone de texte. Ce pointeur signifie que vous pouvez taper du texte.</li>\n    <li><strong>La roue ou le sablier</strong> indiquent que l’ordinateur travaille et qu’il faut patienter.</li>\n</ul>"
+            "content": "<ul><li><strong>La flèche</strong> indique la position du pointeur. C’est le pointeur de base de votre souris.</li><li><strong>La main</strong> indique une zone interactive. Ce pointeur signifie que vous pouvez faire une action.</li><li><strong>La barre verticale</strong> indique une zone de texte. Ce pointeur signifie que vous pouvez taper du texte.</li><li><strong>La roue ou le sablier</strong> indiquent que l’ordinateur travaille et qu’il faut patienter.</li></ul>"
           }
         }
       ]
