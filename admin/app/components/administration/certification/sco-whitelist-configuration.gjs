@@ -70,7 +70,6 @@ export default class ScoWhitelistConfiguration extends Component {
       @title={{t "pages.administration.certification.sco-whitelist.title"}}
       class="sco-whitelist-configuration"
     >
-      <PixMessage @type="warning">Feature en cours de construction</PixMessage>
       <PixMessage @type="info">{{t "pages.administration.certification.sco-whitelist.instructions"}}</PixMessage>
 
       <div class="sco-whitelist-configuration__actions">
