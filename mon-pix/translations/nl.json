@@ -260,7 +260,7 @@
         "obtained": "Verkregen certificaat",
         "not-obtained": "Certificaat niet behaald",
         "computing": "Certificaat wordt momenteel berekend",
-        "SIXTH_GRADE": {"title": "Digitaal bewustzijn"},
+        "SIXTH_GRADE": { "title": "Digitaal bewustzijn" },
         "computing-description": "Door een technisch probleem kunnen wij u niet informeren over het verkrijgen van uw certificaat. Meld u morgen opnieuw aan bij Pix, 'Mijn reis', om uw resultaten te bekijken. Onze excuses voor het ongemak."
       },
       "results-loader": {
@@ -2129,6 +2129,17 @@
         "email": "E-mail adres",
         "menu-link-title": "Mijn verbindingsmethoden",
         "username": "Inloggen"
+      },
+      "delete-account": {
+        "actions": {
+          "delete": "Delete my account"
+        },
+        "menu-link-title": "Delete my account",
+        "more-information": "For more information, ",
+        "more-information-contact-support": "please contact support.",
+        "title": "Delete my account permanently",
+        "warning-email": "This action is irreversible. All the skills, courses and {pixScore} pix you have obtained will be permanently deleted for the PIX account using <strong>{email}</strong>.",
+        "warning-other": "This action is irreversible. All the skills, courses and {pixScore} pix you have obtained will be permanently deleted for the PIX account <strong>{firstName} {lastName}</strong>."
       },
       "email-confirmed": "Geverifieerd e-mailadres.",
       "email-verification": {
