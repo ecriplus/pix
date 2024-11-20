@@ -59,7 +59,6 @@ const up = async function (knex) {
     table.specificType('tutorialIds', 'string[]');
     table.specificType('learningMoreTutorialIds', 'string[]');
   });
-
   await knex.schema.withSchema(SCHEMA_NAME).createTable('challenges', function (table) {
     table.string('id').primary();
     table.text('instruction');
@@ -98,6 +97,14 @@ const up = async function (knex) {
     table.specificType('locales', 'string[]');
     table.string('competenceId').references('id').inTable(`${SCHEMA_NAME}.competences`);
     table.string('skillId').references('id').inTable(`${SCHEMA_NAME}.skills`);
+  });
+  await knex.schema.withSchema(SCHEMA_NAME).createTable('courses', function (table) {
+    table.string('id').primary();
+    table.text('name');
+    table.text('description');
+    table.boolean('isActive');
+    table.specificType('competences', 'string[]');
+    table.specificType('challenges', 'string[]');
   });
 };
 
