@@ -222,6 +222,21 @@ const findOrganizationLearnerIdsByOrganizationId = function ({ organizationId })
   return knexConnection('view-active-organization-learners').where({ organizationId }).select('id').pluck('id');
 };
 
+const reconcileUserToOrganizationLearner = async function ({ userId, organizationLearnerId }) {
+  try {
+    const knexConn = DomainTransaction.getConnection();
+    const [rawOrganizationLearner] = await knexConn('organization-learners')
+      .where({ id: organizationLearnerId })
+      .where('isDisabled', false)
+      .update({ userId, updatedAt: knexConn.fn.now() })
+      .returning('*');
+    if (!rawOrganizationLearner) throw new Error();
+    return new OrganizationLearner(rawOrganizationLearner);
+  } catch (error) {
+    throw new UserCouldNotBeReconciledError();
+  }
+};
+
 export {
   addOrUpdateOrganizationOfOrganizationLearners,
   disableAllOrganizationLearnersInOrganization,
@@ -233,6 +248,7 @@ export {
   findOrganizationLearnerIdsByOrganizationId,
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
+  reconcileUserToOrganizationLearner,
   removeByIds,
   saveCommonOrganizationLearners,
   update,

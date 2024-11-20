@@ -24,6 +24,7 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
   userLoginRepository,
   userToCreateRepository,
   organizationLearnerRepository,
+  prescriptionOrganizationLearnerRepository,
   studentRepository,
 }) {
   const campaign = await campaignRepository.getByCode(campaignCode);
@@ -102,7 +103,7 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
           userId: reconciliationUserId,
           identityProvider,
         });
-        const organizationLearner = await organizationLearnerRepository.reconcileUserToOrganizationLearner({
+        const organizationLearner = await prescriptionOrganizationLearnerRepository.reconcileUserToOrganizationLearner({
           userId: reconciliationUserId,
           organizationLearnerId: matchedOrganizationLearner.id,
         });

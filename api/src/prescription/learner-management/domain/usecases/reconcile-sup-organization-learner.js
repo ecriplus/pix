@@ -1,4 +1,4 @@
-import { NotFoundError } from '../../../src/shared/domain/errors.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 
 const reconcileSupOrganizationLearner = async function ({
   campaignCode,

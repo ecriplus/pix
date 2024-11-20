@@ -75,7 +75,7 @@ import * as campaignParticipationBCRepository from '../../../src/prescription/ca
 import * as campaignProfileRepository from '../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-profile-repository.js';
 import { participationCompletedJobRepository } from '../../../src/prescription/campaign-participation/infrastructure/repositories/jobs/participation-completed-job-repository.js';
 import * as poleEmploiSendingRepository from '../../../src/prescription/campaign-participation/infrastructure/repositories/pole-emploi-sending-repository.js';
-import * as supOrganizationLearnerRepository from '../../../src/prescription/learner-management/infrastructure/repositories/sup-organization-learner-repository.js';
+import * as prescriptionOrganizationLearnerRepository from '../../../src/prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationLearnerActivityRepository from '../../../src/prescription/organization-learner/infrastructure/repositories/organization-learner-activity-repository.js';
 import * as registrationOrganizationLearnerRepository from '../../../src/prescription/organization-learner/infrastructure/repositories/registration-organization-learner-repository.js';
 import * as targetProfileSummaryForAdminRepository from '../../../src/prescription/target-profile/infrastructure/repositories/target-profile-summary-for-admin-repository.js';
@@ -296,6 +296,7 @@ const dependencies = {
   placementProfileService,
   poleEmploiNotifier: requirePoleEmploiNotifier(),
   poleEmploiSendingRepository,
+  prescriptionOrganizationLearnerRepository,
   refreshTokenRepository,
   registrationOrganizationLearnerRepository,
   resetPasswordDemandRepository,
@@ -318,7 +319,6 @@ const dependencies = {
   stageRepository,
   studentRepository,
   supervisorAccessRepository,
-  supOrganizationLearnerRepository,
   tagRepository,
   targetProfileRepository,
   targetProfileShareRepository,

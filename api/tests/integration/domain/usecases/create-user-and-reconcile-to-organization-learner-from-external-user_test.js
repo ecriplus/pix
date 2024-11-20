@@ -1,13 +1,5 @@
-import * as obfuscationService from '../../../../lib/domain/services/obfuscation-service.js';
-import * as userReconciliationService from '../../../../lib/domain/services/user-reconciliation-service.js';
-import { createUserAndReconcileToOrganizationLearnerFromExternalUser as createUserAndReconcileToOrganizationLearnerByExternalUser } from '../../../../lib/domain/usecases/create-user-and-reconcile-to-organization-learner-from-external-user.js';
-import * as campaignRepository from '../../../../lib/infrastructure/repositories/campaign-repository.js';
-import * as organizationLearnerRepository from '../../../../lib/infrastructure/repositories/organization-learner-repository.js';
-import * as studentRepository from '../../../../lib/infrastructure/repositories/student-repository.js';
+import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
-import * as authenticationMethodRepository from '../../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
-import * as userRepository from '../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
-import { userToCreateRepository } from '../../../../src/identity-access-management/infrastructure/repositories/user-to-create.repository.js';
 import {
   CampaignCodeError,
   NotFoundError,
@@ -15,17 +7,14 @@ import {
   OrganizationLearnerAlreadyLinkedToUserError,
 } from '../../../../src/shared/domain/errors.js';
 import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
-import * as userService from '../../../../src/shared/domain/services/user-service.js';
-import * as userLoginRepository from '../../../../src/shared/infrastructure/repositories/user-login-repository.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../test-helper.js';
 
 describe('Integration | UseCases | create-user-and-reconcile-to-organization-learner-from-external-user', function () {
   context('When there is no campaign with the given code', function () {
     it('should throw a campaign code error', async function () {
       // when
-      const error = await catchErr(createUserAndReconcileToOrganizationLearnerByExternalUser)({
+      const error = await catchErr(usecases.createUserAndReconcileToOrganizationLearnerFromExternalUser)({
         campaignCode: 'NOTEXIST',
-        campaignRepository,
       });
 
       // then
@@ -51,11 +40,10 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
         const token = tokenService.createIdTokenForUserReconciliation(externalUser);
 
         // when
-        const error = await catchErr(createUserAndReconcileToOrganizationLearnerByExternalUser)({
+        const error = await catchErr(usecases.createUserAndReconcileToOrganizationLearnerFromExternalUser)({
           campaignCode,
           token,
           tokenService,
-          campaignRepository,
         });
 
         // then
@@ -74,11 +62,9 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
         const token = tokenService.createIdTokenForUserReconciliation(externalUser);
 
         // when
-        const error = await catchErr(createUserAndReconcileToOrganizationLearnerByExternalUser)({
+        const error = await catchErr(usecases.createUserAndReconcileToOrganizationLearnerFromExternalUser)({
           campaignCode,
           token,
-          tokenService,
-          campaignRepository,
         });
 
         // then
@@ -97,11 +83,9 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
         const token = tokenService.createIdTokenForUserReconciliation(externalUser);
 
         // when
-        const error = await catchErr(createUserAndReconcileToOrganizationLearnerByExternalUser)({
+        const error = await catchErr(usecases.createUserAndReconcileToOrganizationLearnerFromExternalUser)({
           campaignCode,
           token,
-          tokenService,
-          campaignRepository,
         });
 
         // then
@@ -131,14 +115,10 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
       const birthdate = '2008-01-01';
 
       // when
-      const error = await catchErr(createUserAndReconcileToOrganizationLearnerByExternalUser)({
+      const error = await catchErr(usecases.createUserAndReconcileToOrganizationLearnerFromExternalUser)({
         birthdate,
         campaignCode,
         token,
-        campaignRepository,
-        tokenService,
-        userReconciliationService,
-        organizationLearnerRepository,
       });
 
       // then
@@ -178,21 +158,11 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
       const usersBefore = await knex('users');
 
       // when
-      await createUserAndReconcileToOrganizationLearnerByExternalUser({
+      await usecases.createUserAndReconcileToOrganizationLearnerFromExternalUser({
         birthdate: organizationLearner.birthdate,
         campaignCode,
-        campaignRepository,
         token,
-        obfuscationService,
         tokenService,
-        userReconciliationService,
-        userService,
-        authenticationMethodRepository,
-        organizationLearnerRepository,
-        studentRepository,
-        userRepository,
-        userLoginRepository,
-        userToCreateRepository,
       });
 
       // then
@@ -220,17 +190,10 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
           await databaseBuilder.commit();
 
           // when
-          const error = await catchErr(createUserAndReconcileToOrganizationLearnerByExternalUser)({
+          const error = await catchErr(usecases.createUserAndReconcileToOrganizationLearnerFromExternalUser)({
             birthdate: organizationLearner.birthdate,
             campaignCode,
             token,
-            obfuscationService,
-            tokenService,
-            userReconciliationService,
-            campaignRepository,
-            organizationLearnerRepository,
-            userRepository,
-            userLoginRepository,
           });
 
           // then
@@ -273,19 +236,10 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
             await databaseBuilder.commit();
 
             // when
-            await createUserAndReconcileToOrganizationLearnerByExternalUser({
+            await usecases.createUserAndReconcileToOrganizationLearnerFromExternalUser({
               campaignCode,
               token,
               birthdate: organizationLearner.birthdate,
-              obfuscationService,
-              tokenService,
-              userReconciliationService,
-              authenticationMethodRepository,
-              campaignRepository,
-              organizationLearnerRepository,
-              studentRepository,
-              userRepository,
-              userLoginRepository,
             });
 
             // then
@@ -334,19 +288,10 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
             await databaseBuilder.commit();
 
             // when
-            await createUserAndReconcileToOrganizationLearnerByExternalUser({
+            await usecases.createUserAndReconcileToOrganizationLearnerFromExternalUser({
               campaignCode,
               token,
               birthdate: organizationLearner.birthdate,
-              obfuscationService,
-              tokenService,
-              userReconciliationService,
-              authenticationMethodRepository,
-              campaignRepository,
-              organizationLearnerRepository,
-              studentRepository,
-              userRepository,
-              userLoginRepository,
             });
 
             // then
@@ -388,18 +333,10 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
         const usersBefore = await knex('users');
 
         // when
-        await createUserAndReconcileToOrganizationLearnerByExternalUser({
+        await usecases.createUserAndReconcileToOrganizationLearnerFromExternalUser({
           birthdate: organizationLearner.birthdate,
           campaignCode,
           token,
-          obfuscationService,
-          tokenService,
-          userReconciliationService,
-          campaignRepository,
-          organizationLearnerRepository,
-          studentRepository,
-          userRepository,
-          userLoginRepository,
         });
 
         // then

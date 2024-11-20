@@ -15,6 +15,7 @@ const reconcileScoOrganizationLearnerManually = async function ({
   withReconciliation,
   campaignRepository,
   organizationLearnerRepository,
+  prescriptionOrganizationLearnerRepository,
   registrationOrganizationLearnerRepository,
   studentRepository,
   userRepository,
@@ -53,7 +54,7 @@ const reconcileScoOrganizationLearnerManually = async function ({
   });
 
   if (withReconciliation) {
-    return organizationLearnerRepository.reconcileUserToOrganizationLearner({
+    return prescriptionOrganizationLearnerRepository.reconcileUserToOrganizationLearner({
       userId: reconciliationInfo.id,
       organizationLearnerId: organizationLearnerOfUserAccessingCampaign.id,
     });
