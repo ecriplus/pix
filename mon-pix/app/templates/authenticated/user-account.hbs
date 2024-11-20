@@ -5,36 +5,42 @@
 </header>
 
 <main id="main" class="main" role="main">
-  <PixBackgroundHeader>
-
+  <PixBackgroundHeader class="user-account">
     <h1 class="user-account__title">{{t "pages.user-account.title"}}</h1>
+
     <div class="user-account__menu-and-content">
       <PixBlock class="user-account__menu-block">
         <nav class="user-account-menu" role="navigation">
           <ul>
             <li>
               <LinkTo @route="authenticated.user-account.personal-information" class="user-account-menu__link">
-                <FaIcon @icon="user" />
+                <PixIcon @name="userCircle" @ariaHidden={{true}} />
                 {{t "pages.user-account.personal-information.menu-link-title"}}
               </LinkTo>
             </li>
             <li>
               <LinkTo @route="authenticated.user-account.connection-methods" class="user-account-menu__link">
-                <FaIcon @icon="link" />
+                <PixIcon @name="link" @ariaHidden={{true}} />
                 {{t "pages.user-account.connexion-methods.menu-link-title"}}
               </LinkTo>
             </li>
             {{#if this.isInternationalDomain}}
               <li>
                 <LinkTo @route="authenticated.user-account.language" class="user-account-menu__link">
-                  <FaIcon @icon="earth-europe" />
+                  <PixIcon @name="language" @ariaHidden={{true}} />
                   {{t "pages.user-account.language.menu-link-title"}}
                 </LinkTo>
               </li>
             {{/if}}
             {{#if @model.accountInfo.canSelfDeleteAccount}}
               <li>
-                {{! ADD DELETE ACCOUNT LINK HERE }}
+                <LinkTo
+                  @route="authenticated.user-account.delete-account"
+                  class="user-account-menu__link user-account-menu__link--important"
+                >
+                  <PixIcon @name="delete" @ariaHidden={{true}} />
+                  {{t "pages.user-account.delete-account.menu-link-title"}}
+                </LinkTo>
               </li>
             {{/if}}
           </ul>
