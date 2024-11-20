@@ -4,7 +4,7 @@
   "title": "ChatGPT parle-t-il vraiment français ?",
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>Les Large Language Model (LLM) sont des systèmes d'intelligence artificielle générative. Ils donnent l'impression de parler toutes les langues mais, du fait de leurs biais, leurs productions sont parfois stéréotypées ou discriminantes. Dans ce module, vous allez découvrir les origines de ces biais et interroger directement des LLM pour les repérer !</p>",
+    "description": "<p>Les Large Language Models (LLM) sont des systèmes d'intelligence artificielle générative. Ils donnent l'impression de parler toutes les langues mais, du fait de leurs biais, leurs productions sont parfois stéréotypées ou discriminantes. Dans ce module, vous allez découvrir les origines de ces biais et interroger directement des LLM pour les repérer !</p>",
     "duration": 10,
     "level": "Avancé",
     "objectives": [
@@ -17,7 +17,7 @@
   "transitionTexts": [
     {
       "grainId": "0bfa08bd-7052-49bb-89e8-150efa589926",
-      "content": "<p>Vous avez peut-être déjà utilisé des outils d'intelligence artificielle générative de texte, comme ChatGPT ou Copilot. Ces grands modèles de langage, <i>Large Language Model (LLM)</i> en anglais, peuvent être utiles pour produire des synthèses ou inventer des histoires.<span aria-hidden=\"true\">&nbsp;✒️ 💭</span></p><p>Pourtant, les textes produits contiennent parfois des maladresses ou des erreurs.<span aria-hidden=\"true\">&nbsp;❌</span> Commençons par un exemple concret&nbsp;!</p>"
+      "content": "<p>Vous avez peut-être déjà utilisé des outils d'intelligence artificielle générative de texte, comme ChatGPT ou Copilot. Ces grands modèles de langage, <i>Large Language Models (LLM)</i> en anglais, peuvent être utiles pour produire des synthèses ou inventer des histoires.<span aria-hidden=\"true\">&nbsp;✒️ 💭</span></p><p>Pourtant, les textes produits contiennent parfois des maladresses ou des erreurs.<span aria-hidden=\"true\">&nbsp;❌</span> Commençons par un exemple concret&nbsp;!</p>"
     },
     {
       "grainId": "c8722f6e-7534-4fdc-9f2d-515c2a96641f",
