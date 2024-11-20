@@ -2,9 +2,12 @@
  * @typedef {import('../index.js').AssessmentResultRepository} AssessmentResultRepository
  * @typedef {import('../index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../index.js').CompetenceMarkRepository} CompetenceMarkRepository
+ * @typedef {import('../index.js').CertificationCandidateRepository} CertificationCandidateRepository
  * @typedef {import('../index.js').ScoringDegradationService} ScoringDegradationService
  * @typedef {import('../index.js').ScoringCertificationService} ScoringCertificationService
  * @typedef {import('../index.js').ScoringService} ScoringService
+ * @typedef {import('../index.js').PlacementProfileService} PlacementProfileService
+ * @typedef {import('../../../../session-management/domain/models/CertificationAssessment.js').CertificationAssessment} CertificationAssessment
  */
 
 import _ from 'lodash';
@@ -24,6 +27,9 @@ import { AlgorithmEngineVersion } from '../../../../shared/domain/models/Algorit
 
 /**
  * @param {Object} params
+ * @param {{juryId: number}} params.[event]
+ * @param {'PIX-ALGO'|'Jury Pix'|'PIX-ALGO-FRAUD-REJECTION'} params.emitter
+ * @param {CertificationAssessment} params.certificationAssessment
  * @param {AssessmentResultRepository} params.assessmentResultRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CompetenceMarkRepository} params.competenceMarkRepository
@@ -31,6 +37,9 @@ import { AlgorithmEngineVersion } from '../../../../shared/domain/models/Algorit
  * @param {AreaRepository} params.areaRepository
  * @param {PlacementProfileService} params.placementProfileService
  * @param {ScoringService} params.scoringService
+ * @param {CertificationCandidateRepository} params.certificationCandidateRepository
+ * @param {Object} params.dependencies
+ * @param {calculateCertificationAssessmentScore} params.dependencies.calculateCertificationAssessmentScore
  */
 export const handleV2CertificationScoring = async ({
   event,
@@ -43,14 +52,15 @@ export const handleV2CertificationScoring = async ({
   areaRepository,
   placementProfileService,
   scoringService,
+  certificationCandidateRepository,
   dependencies = { calculateCertificationAssessmentScore },
 }) => {
   const certificationAssessmentScore = await dependencies.calculateCertificationAssessmentScore({
     certificationAssessment,
-    continueOnError: false,
     areaRepository,
     placementProfileService,
     scoringService,
+    certificationCandidateRepository,
   });
   const certificationCourse = await certificationCourseRepository.get({
     id: certificationAssessment.certificationCourseId,
@@ -78,18 +88,24 @@ export const handleV2CertificationScoring = async ({
 
 /**
  * @param {Object} params
- * @param {ScoringService} params.dependencies.scoringService
+ * @param {CertificationAssessment} params.certificationAssessment
+ * @param {ScoringService} params.scoringService
+ * @param {CertificationCandidateRepository} params.certificationCandidateRepository
  */
 export const calculateCertificationAssessmentScore = async function ({
   certificationAssessment,
-  continueOnError,
   areaRepository,
   placementProfileService,
   scoringService,
+  certificationCandidateRepository,
 }) {
+  const candidate = await certificationCandidateRepository.findByAssessmentId({
+    assessmentId: certificationAssessment.id,
+  });
+
   const testedCompetences = await _getTestedCompetences({
     userId: certificationAssessment.userId,
-    limitDate: certificationAssessment.createdAt,
+    limitDate: candidate.reconciledAt,
     version: AlgorithmEngineVersion.V2,
     placementProfileService,
   });
@@ -105,16 +121,13 @@ export const calculateCertificationAssessmentScore = async function ({
   );
 
   const allAreas = await areaRepository.list();
-  return _getResult(
-    matchingAnswers,
-    matchingCertificationChallenges,
-    testedCompetences,
-    allAreas,
-    continueOnError,
-    scoringService,
-  );
+  return _getResult(matchingAnswers, matchingCertificationChallenges, testedCompetences, allAreas, scoringService);
 };
 
+/**
+ * @param {Object} params
+ * @param {PlacementProfileService} params.placementProfileService
+ */
 async function _getTestedCompetences({ userId, limitDate, version, placementProfileService }) {
   const placementProfile = await placementProfileService.getPlacementProfile({ userId, limitDate, version });
   return _(placementProfile.userCompetences)
@@ -143,7 +156,6 @@ function _getCompetenceMarksWithCertifiedLevelAndScore(
   listCompetences,
   reproducibilityRate,
   certificationChallenges,
-  continueOnError,
   answerCollection,
   allAreas,
   scoringService,
@@ -152,11 +164,9 @@ function _getCompetenceMarksWithCertifiedLevelAndScore(
     const challengesForCompetence = _.filter(certificationChallenges, { competenceId: competence.id });
     const answersForCompetence = _selectAnswersMatchingCertificationChallenges(answers, challengesForCompetence);
 
-    if (!continueOnError) {
-      CertificationContract.assertThatCompetenceHasAtLeastOneChallenge(challengesForCompetence, competence.index);
-      CertificationContract.assertThatEveryAnswerHasMatchingChallenge(answersForCompetence, challengesForCompetence);
-      CertificationContract.assertThatNoChallengeHasMoreThanOneAnswer(answersForCompetence, challengesForCompetence);
-    }
+    CertificationContract.assertThatCompetenceHasAtLeastOneChallenge(challengesForCompetence, competence.index);
+    CertificationContract.assertThatEveryAnswerHasMatchingChallenge(answersForCompetence, challengesForCompetence);
+    CertificationContract.assertThatNoChallengeHasMoreThanOneAnswer(answersForCompetence, challengesForCompetence);
 
     const certifiedLevel = CertifiedLevel.from({
       numberOfChallenges: answerCollection.numberOfChallengesForCompetence(competence.id),
@@ -196,10 +206,8 @@ function _getCompetenceMarksWithFailedLevel(listCompetences, allAreas, scoringSe
 /**
  * @param {ScoringService} scoringService
  */
-function _getResult(answers, certificationChallenges, testedCompetences, allAreas, continueOnError, scoringService) {
-  if (!continueOnError) {
-    CertificationContract.assertThatWeHaveEnoughAnswers(answers, certificationChallenges);
-  }
+function _getResult(answers, certificationChallenges, testedCompetences, allAreas, scoringService) {
+  CertificationContract.assertThatWeHaveEnoughAnswers(answers, certificationChallenges);
 
   const answerCollection = AnswerCollectionForScoring.from({ answers, challenges: certificationChallenges });
 
@@ -227,16 +235,13 @@ function _getResult(answers, certificationChallenges, testedCompetences, allArea
     testedCompetences,
     reproducibilityRate.value,
     certificationChallenges,
-    continueOnError,
     answerCollection,
     allAreas,
     scoringService,
   );
   const scoreAfterRating = _getSumScoreFromCertifiedCompetences(competenceMarks);
 
-  if (!continueOnError) {
-    CertificationContract.assertThatScoreIsCoherentWithReproducibilityRate(scoreAfterRating, reproducibilityRate.value);
-  }
+  CertificationContract.assertThatScoreIsCoherentWithReproducibilityRate(scoreAfterRating, reproducibilityRate.value);
 
   return new CertificationAssessmentScore({
     competenceMarks,
@@ -247,6 +252,7 @@ function _getResult(answers, certificationChallenges, testedCompetences, allArea
 
 /**
  * @param {Object} params
+ * @param {CertificationAssessment} params.certificationAssessment
  * @param {ScoringCertificationService} params.scoringCertificationService
  */
 function _createV2AssessmentResult({

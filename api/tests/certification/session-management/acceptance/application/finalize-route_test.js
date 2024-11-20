@@ -1,7 +1,9 @@
+import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import {
   CertificationIssueReportCategory,
   CertificationIssueReportSubcategories,
 } from '../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
+import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { AnswerStatus, Assessment, CertificationResult } from '../../../../../src/shared/domain/models/index.js';
 import {
   createServer,
@@ -86,7 +88,15 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           // given
           const userId = databaseBuilder.factory.buildUser().id;
           const session = databaseBuilder.factory.buildSession();
-          const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ sessionId: session.id }).id;
+          const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+            userId,
+            sessionId: session.id,
+          }).id;
+          databaseBuilder.factory.buildCertificationCandidate({
+            sessionId: session.id,
+            userId,
+            reconciledAt: new Date('2020-01-01'),
+          });
           databaseBuilder.factory.buildCertificationCenterMembership({
             userId,
             certificationCenterId: session.certificationCenterId,
@@ -182,39 +192,18 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
         it('should set the finalized session as publishable when the issue reports have been resolved', async function () {
           // given
-          const learningContent = [
-            {
-              id: 'recArea0',
-              code: '66',
-              competences: [
-                {
-                  id: 'recCompetence0',
-                  index: '1',
-                  tubes: [
-                    {
-                      id: 'recTube0_0',
-                      skills: [
-                        {
-                          id: 'recSkill0_0',
-                          nom: '@recSkill0_0',
-                          challenges: [{ id: 'recChallenge0_0_0' }],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ];
-          const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-          mockLearningContent(learningContentObjects);
-
           const userId = databaseBuilder.factory.buildUser().id;
           const session = databaseBuilder.factory.buildSession();
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+            userId,
             sessionId: session.id,
             completedAt: new Date(),
           }).id;
+          databaseBuilder.factory.buildCertificationCandidate({
+            sessionId: session.id,
+            userId,
+            reconciledAt: new Date('2020-01-01'),
+          });
           databaseBuilder.factory.buildCertificationCenterMembership({
             userId,
             certificationCenterId: session.certificationCenterId,
@@ -291,34 +280,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
         it('should re score assessment when there is auto-neutralizable challenge', async function () {
           // given
-
-          const learningContent = [
-            {
-              id: 'recArea0',
-              code: '66',
-              competences: [
-                {
-                  id: 'recCompetence0',
-                  index: '1',
-                  tubes: [
-                    {
-                      id: 'recTube0_0',
-                      skills: [
-                        {
-                          id: 'recSkill0_0',
-                          nom: '@recSkill0_0',
-                          challenges: [{ id: 'recChallenge0_0_0' }],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ];
-          const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-          mockLearningContent(learningContentObjects);
-
           const userId = databaseBuilder.factory.buildUser().id;
           const session = databaseBuilder.factory.buildSession();
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
@@ -326,6 +287,11 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             userId,
             createdAt: new Date(),
           }).id;
+          databaseBuilder.factory.buildCertificationCandidate({
+            sessionId: session.id,
+            userId,
+            reconciledAt: new Date('2020-01-01'),
+          });
           databaseBuilder.factory.buildCertificationCenterMembership({
             userId,
             certificationCenterId: session.certificationCenterId,
@@ -447,38 +413,13 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
         it('should set the finalized session as publishable', async function () {
           // given
-          const learningContent = [
-            {
-              id: 'recArea0',
-              code: '66',
-              competences: [
-                {
-                  id: 'recCompetence0',
-                  index: '1',
-                  tubes: [
-                    {
-                      id: 'recTube0_0',
-                      skills: [
-                        {
-                          id: 'recSkill0_0',
-                          nom: '@recSkill0_0',
-                          challenges: [{ id: 'recChallenge0_0_0' }],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ];
-          const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-          mockLearningContent(learningContentObjects);
-
           const userId = databaseBuilder.factory.buildUser().id;
-          const session = databaseBuilder.factory.buildSession();
+          const session = databaseBuilder.factory.buildSession({ version: SESSIONS_VERSIONS.V3 });
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+            userId,
             sessionId: session.id,
             completedAt: new Date(),
+            version: AlgorithmEngineVersion.V3,
           }).id;
           databaseBuilder.factory.buildCertificationCenterMembership({
             userId,
@@ -494,7 +435,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             certificationCourseId,
             category: CertificationIssueReportCategory.IN_CHALLENGE,
             description: '',
-            subcategory: CertificationIssueReportSubcategories.WEBSITE_BLOCKED,
+            subcategory: CertificationIssueReportSubcategories.EXTRA_TIME_PERCENTAGE,
             questionNumber: 1,
           });
 
@@ -557,39 +498,19 @@ describe('Certification | Session Management | Acceptance | Application | Route 
         it('should mark the assessment as ended due to finalization', async function () {
           // given
           const abortReason = 'candidate';
-          const learningContent = [
-            {
-              id: 'recArea0',
-              code: '66',
-              competences: [
-                {
-                  id: 'recCompetence0',
-                  index: '1',
-                  tubes: [
-                    {
-                      id: 'recTube0_0',
-                      skills: [
-                        {
-                          id: 'recSkill0_0',
-                          nom: '@recSkill0_0',
-                          challenges: [{ id: 'recChallenge0_0_0' }],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ];
-          const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-          mockLearningContent(learningContentObjects);
-
           const userId = databaseBuilder.factory.buildUser().id;
-          const session = databaseBuilder.factory.buildSession();
+          const session = databaseBuilder.factory.buildSession({ version: SESSIONS_VERSIONS.V3 });
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+            userId,
             sessionId: session.id,
             completedAt: null,
+            version: AlgorithmEngineVersion.V3,
           }).id;
+          databaseBuilder.factory.buildCertificationCandidate({
+            sessionId: session.id,
+            userId,
+            reconciledAt: new Date('2020-01-01'),
+          });
           databaseBuilder.factory.buildCertificationCenterMembership({
             userId,
             certificationCenterId: session.certificationCenterId,
@@ -607,7 +528,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             certificationCourseId,
             category: CertificationIssueReportCategory.IN_CHALLENGE,
             description: '',
-            subcategory: CertificationIssueReportSubcategories.WEBSITE_BLOCKED,
+            subcategory: CertificationIssueReportSubcategories.EXTRA_TIME_PERCENTAGE,
             questionNumber: 1,
           });
 
@@ -626,6 +547,34 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             challengeId: certificationChallenge.challengeId,
             result: AnswerStatus.KO.status,
           });
+
+          const configurationCreatorId = databaseBuilder.factory.buildUser().id;
+          databaseBuilder.factory.buildCompetenceScoringConfiguration({
+            createdByUserId: configurationCreatorId,
+            configuration: [
+              {
+                competence: '1.1',
+                values: [
+                  {
+                    bounds: {
+                      max: 0,
+                      min: -5,
+                    },
+                    competenceLevel: 0,
+                  },
+                  {
+                    bounds: {
+                      max: 5,
+                      min: 0,
+                    },
+                    competenceLevel: 1,
+                  },
+                ],
+              },
+            ],
+          });
+          databaseBuilder.factory.buildScoringConfiguration({ createdByUserId: configurationCreatorId });
+          databaseBuilder.factory.buildFlashAlgorithmConfiguration();
 
           await databaseBuilder.commit();
 
@@ -756,7 +705,7 @@ const _createSession = async ({ version = 2 } = {}) => {
       competences: [
         {
           id: 'recCompetence0',
-          index: '1',
+          index: '1.1',
           tubes: [
             {
               id: 'recTube0_0',
