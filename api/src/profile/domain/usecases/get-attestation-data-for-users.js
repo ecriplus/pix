@@ -8,14 +8,14 @@ export async function getAttestationDataForUsers({
   profileRewardRepository,
   attestationRepository,
 }) {
-  const users = await userRepository.getByIds({ userIds });
-  const profileRewards = await profileRewardRepository.getByAttestationKeyAndUserIds({ attestationKey, userIds });
-
   const attestationData = await attestationRepository.getByKey({ attestationKey });
 
   if (!attestationData) {
     throw new AttestationNotFoundError();
   }
+  const users = await userRepository.getByIds({ userIds });
+
+  const profileRewards = await profileRewardRepository.getByAttestationKeyAndUserIds({ attestationKey, userIds });
 
   return {
     data: profileRewards.map(({ userId, createdAt }) => {
