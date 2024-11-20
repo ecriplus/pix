@@ -16,7 +16,13 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
     context('when no initial capacity is provided', function () {
       it('should return an array of capacity, challenge, reward and error rate for each answer', async function () {
         // given
-        const { challengeRepository, pickChallenge, pickAnswerStatus, flashAlgorithmService } = prepareStubs();
+        const {
+          challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
+          pickChallenge,
+          pickAnswerStatus,
+          flashAlgorithmService,
+        } = prepareStubs();
 
         // when
         const result = await simulateFlashAssessmentScenario({
@@ -26,6 +32,7 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
           pickChallenge,
           pickAnswerStatus,
           flashAlgorithmService,
+          sharedFlashAlgorithmConfigurationRepository,
         });
 
         // then
@@ -45,10 +52,16 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
         // given
         const initialCapacity = 7;
 
-        const { challengeRepository, firstChallenge, pickChallenge, pickAnswerStatus, flashAlgorithmService } =
-          prepareStubs({
-            initialCapacity,
-          });
+        const {
+          challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
+          firstChallenge,
+          pickChallenge,
+          pickAnswerStatus,
+          flashAlgorithmService,
+        } = prepareStubs({
+          initialCapacity,
+        });
 
         flashAlgorithmService.getReward
           .withArgs({
@@ -62,6 +75,7 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
         const result = await simulateFlashAssessmentScenario({
           stopAtChallenge: 3,
           challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
           locale,
           pickChallenge,
           pickAnswerStatus,
@@ -89,6 +103,7 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
 
         const {
           challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
           pickChallenge,
           pickAnswerStatus,
           flashAlgorithmService: baseFlashAlgorithmService,
@@ -128,6 +143,7 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
         const result = await simulateFlashAssessmentScenario({
           stopAtChallenge: 3,
           challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
           locale,
           pickChallenge,
           pickAnswerStatus,
@@ -159,7 +175,13 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
           }),
         ];
 
-        const { challengeRepository, pickChallenge, pickAnswerStatus, flashAlgorithmService } = prepareStubs({
+        const {
+          challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
+          pickChallenge,
+          pickAnswerStatus,
+          flashAlgorithmService,
+        } = prepareStubs({
           minimalSuccessRate: 0.8,
         });
 
@@ -167,6 +189,7 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
         const result = await simulateFlashAssessmentScenario({
           stopAtChallenge: 3,
           challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
           locale,
           pickChallenge,
           pickAnswerStatus,
@@ -196,6 +219,10 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
       const challengeRepository = {
         findActiveFlashCompatible: sinon.stub(),
       };
+      const sharedFlashAlgorithmConfigurationRepository = {
+        getMostRecent: sinon.stub(),
+      };
+      sharedFlashAlgorithmConfigurationRepository.getMostRecent.resolves({ enablePassageByAllCompetences: true });
       challengeRepository.findActiveFlashCompatible.resolves([challenge]);
 
       const pickChallenge = sinon.stub();
@@ -238,6 +265,7 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
       // when
       const error = await catchErr(simulateFlashAssessmentScenario)({
         challengeRepository,
+        sharedFlashAlgorithmConfigurationRepository,
         locale,
         pickChallenge,
         pickAnswerStatus,
@@ -287,6 +315,11 @@ function prepareStubs({
   const challengeRepository = {
     findActiveFlashCompatible: sinon.stub(),
   };
+
+  const sharedFlashAlgorithmConfigurationRepository = {
+    getMostRecent: sinon.stub(),
+  };
+
   const pickChallenge = sinon.stub();
   const pickAnswerStatus = sinon.stub();
   const flashAlgorithmService = {
@@ -303,6 +336,8 @@ function prepareStubs({
       _.isUndefined,
     ),
   );
+
+  sharedFlashAlgorithmConfigurationRepository.getMostRecent.resolves({ enablePassageByAllCompetences: true });
 
   flashAlgorithmService.getCapacityAndErrorRate
     .withArgs({
@@ -418,6 +453,7 @@ function prepareStubs({
     pickChallenge,
     pickAnswerStatus,
     challengeRepository,
+    sharedFlashAlgorithmConfigurationRepository,
     flashAlgorithmService,
     firstChallenge,
     allChallenges,
