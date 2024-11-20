@@ -62,19 +62,19 @@ module('Acceptance | Session creation', function (hooks) {
         // when
         await fillIn(
           screen.getByRole('textbox', {
-            name: '* Nom du site',
+            name: 'Nom du site *',
           }),
           '',
         );
         await fillIn(
           screen.getByRole('textbox', {
-            name: '* Nom de la salle',
+            name: 'Nom de la salle *',
           }),
           '',
         );
 
         const examinerInput = screen.getByRole('textbox', {
-          name: '* Surveillant(s)',
+          name: 'Surveillant(s) *',
         });
         await fillIn(examinerInput, '');
         await triggerEvent(examinerInput, 'focusout');
@@ -92,19 +92,19 @@ module('Acceptance | Session creation', function (hooks) {
         const screen = await visit('/sessions/creation');
         await fillIn(
           screen.getByRole('textbox', {
-            name: '* Nom du site',
+            name: 'Nom du site *',
           }),
           ' ',
         );
         await fillIn(
           screen.getByRole('textbox', {
-            name: '* Nom de la salle',
+            name: 'Nom de la salle *',
           }),
           ' ',
         );
         await fillIn(
           screen.getByRole('textbox', {
-            name: '* Surveillant(s)',
+            name: 'Surveillant(s) *',
           }),
           ' ',
         );
@@ -133,19 +133,19 @@ module('Acceptance | Session creation', function (hooks) {
 
       await fillIn(
         screen.getByRole('textbox', {
-          name: '* Nom du site',
+          name: 'Nom du site *',
         }),
         'My address',
       );
       await fillIn(
         screen.getByRole('textbox', {
-          name: '* Nom de la salle',
+          name: 'Nom de la salle *',
         }),
         'My room',
       );
       await fillIn(
         screen.getByRole('textbox', {
-          name: '* Surveillant(s)',
+          name: 'Surveillant(s) *',
         }),
         'My examiner',
       );
@@ -156,7 +156,7 @@ module('Acceptance | Session creation', function (hooks) {
       );
       await setFlatpickrDate('#session-date', sessionDate);
       await setFlatpickrDate(
-        screen.getByRole('textbox', { name: t('common.forms.session-labels.time-start') }),
+        screen.getByRole('textbox', { name: `${t('common.forms.session-labels.time-start')} *` }),
         sessionTime,
       );
       await click(screen.getByRole('button', { name: t('pages.sessions.new.actions.create-session') }));

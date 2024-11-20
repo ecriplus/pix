@@ -1,3 +1,4 @@
+import PixLabel from '@1024pix/pix-ui/components/pix-label';
 import PixRadioButton from '@1024pix/pix-ui/components/pix-radio-button';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
@@ -41,8 +42,9 @@ export default class CandidateCreationModalComplementaryList extends Component {
     <div class='new-candidate-modal-form__field'>
       <fieldset id='complementary-certifications'>
         <legend class='label'>
-          <abbr title={{t 'common.forms.required'}} class='mandatory-mark' aria-hidden='true'>*</abbr>
-          {{this.fieldsetLegend}}
+          <PixLabel @requiredLabel={{t 'common.forms.required'}}>
+            {{this.fieldsetLegend}}
+          </PixLabel>
         </legend>
         <PixRadioButton required name='subscriptions' {{on 'change' (fn @updateComplementaryCertification null)}}>
           <:label>{{this.firstInputLabel}}</:label>

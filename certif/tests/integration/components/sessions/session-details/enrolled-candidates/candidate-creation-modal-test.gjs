@@ -68,15 +68,15 @@ module(
       );
 
       // then
-      assert.dom(screen.getByRole('textbox', { name: '* Nom de naissance' })).exists();
-      assert.dom(screen.getByRole('textbox', { name: '* Prénom' })).exists();
+      assert.dom(screen.getByRole('textbox', { name: 'Nom de naissance *' })).exists();
+      assert.dom(screen.getByRole('textbox', { name: 'Prénom *' })).exists();
       assert.dom(screen.getByRole('radio', { name: 'Homme' })).exists();
       assert.dom(screen.getByRole('radio', { name: 'Femme' })).exists();
-      assert.dom(screen.getByRole('textbox', { name: '* Date de naissance' })).exists();
-      assert.dom(screen.getByRole('button', { name: '* Pays de naissance' })).exists();
+      assert.dom(screen.getByRole('textbox', { name: 'Date de naissance *' })).exists();
+      assert.dom(screen.getByRole('button', { name: 'Pays de naissance *' })).exists();
       assert.dom(screen.getByRole('radio', { name: 'Code INSEE' })).exists();
       assert.dom(screen.getByRole('radio', { name: 'Code postal' })).exists();
-      assert.dom(screen.getByRole('textbox', { name: '* Code INSEE de naissance' })).exists();
+      assert.dom(screen.getByRole('textbox', { name: 'Code INSEE de naissance *' })).exists();
       assert.dom(screen.getByRole('textbox', { name: 'Identifiant externe' })).exists();
       assert.dom(screen.getByRole('textbox', { name: 'Temps majoré (%)' })).exists();
       assert
@@ -113,11 +113,11 @@ module(
       );
 
       // then
-      assert.dom(screen.getByRole('textbox', { name: '* Nom de naissance' })).hasAttribute('required');
-      assert.dom(screen.getByRole('textbox', { name: '* Prénom' })).hasAttribute('required');
-      assert.dom(screen.getByRole('textbox', { name: '* Date de naissance' })).hasAttribute('required');
+      assert.dom(screen.getByRole('textbox', { name: 'Nom de naissance *' })).hasAttribute('required');
+      assert.dom(screen.getByRole('textbox', { name: 'Prénom *' })).hasAttribute('required');
+      assert.dom(screen.getByRole('textbox', { name: 'Date de naissance *' })).hasAttribute('required');
       assert.dom(screen.getByRole('radio', { name: 'Femme' })).hasAttribute('required');
-      assert.dom(screen.getByRole('textbox', { name: '* Code INSEE de naissance' })).hasAttribute('required');
+      assert.dom(screen.getByRole('textbox', { name: 'Code INSEE de naissance *' })).hasAttribute('required');
     });
 
     module('when the form is filled', function () {
@@ -168,11 +168,11 @@ module(
           </template>,
         );
 
-        await fillIn(screen.getByLabelText('* Prénom'), candidateData.firstName);
-        await fillIn(screen.getByLabelText('* Nom de naissance'), candidateData.lastName);
-        await fillIn(screen.getByLabelText('* Date de naissance'), '23/08/1985');
+        await fillIn(screen.getByLabelText('Prénom *'), candidateData.firstName);
+        await fillIn(screen.getByLabelText('Nom de naissance *'), candidateData.lastName);
+        await fillIn(screen.getByLabelText('Date de naissance *'), '23/08/1985');
         await click(screen.getByRole('radio', { name: 'Femme' }));
-        await click(screen.getByLabelText('* Pays de naissance'));
+        await click(screen.getByLabelText('Pays de naissance *'));
         await click(
           await screen.findByRole('option', {
             name: 'France',
@@ -180,7 +180,7 @@ module(
         );
         await click(screen.getByRole('radio', { name: 'Code INSEE' }));
         await fillIn(screen.getByLabelText('Identifiant externe'), candidateData.externalId);
-        await fillIn(screen.getByLabelText('* Code INSEE de naissance'), candidateData.birthInseeCode);
+        await fillIn(screen.getByLabelText('Code INSEE de naissance *'), candidateData.birthInseeCode);
         await fillIn(screen.getByLabelText('Temps majoré (%)'), candidateData.extraTimePercentage);
         await fillIn(
           screen.getByLabelText('E-mail du destinataire des résultats (formateur, enseignant...)'),
@@ -224,7 +224,7 @@ module(
         );
 
         // then
-        assert.dom(screen.getByRole('button', { name: '* Tarification part Pix' })).isVisible();
+        assert.dom(screen.getByRole('button', { name: 'Tarification part Pix *' })).isVisible();
       });
 
       module('when the selected billing mode is PREPAID', function () {
@@ -252,7 +252,7 @@ module(
             </template>,
           );
 
-          await click(screen.getByRole('button', { name: `* ${t('common.forms.certification-labels.pricing')}` }));
+          await click(screen.getByRole('button', { name: `${t('common.forms.certification-labels.pricing')} *` }));
           await screen.findByRole('listbox');
           await click(screen.getByRole('option', { name: t('common.labels.billing-mode.prepaid') }));
 
@@ -292,7 +292,7 @@ module(
             </template>,
           );
 
-          await click(screen.getByRole('button', { name: `* ${t('common.forms.certification-labels.pricing')}` }));
+          await click(screen.getByRole('button', { name: `${t('common.forms.certification-labels.pricing')} *` }));
           await screen.findByRole('listbox');
           await click(screen.getByRole('option', { name: t('common.labels.billing-mode.paid') }));
 
@@ -333,7 +333,7 @@ module(
       );
 
       // then
-      assert.dom(screen.getByRole('button', { name: '* Pays de naissance' })).includesText('France');
+      assert.dom(screen.getByRole('button', { name: 'Pays de naissance *' })).includesText('France');
     });
 
     module('when close button cross icon is clicked', function () {
@@ -418,7 +418,7 @@ module(
           </template>,
         );
 
-        await click(screen.getByRole('button', { name: '* Pays de naissance' }));
+        await click(screen.getByRole('button', { name: 'Pays de naissance *' }));
 
         await screen.findByRole('listbox');
 
@@ -429,9 +429,9 @@ module(
         );
 
         // then
-        assert.dom(screen.queryByLabelText('* Code INSEE de naissance')).isNotVisible();
-        assert.dom(screen.queryByLabelText('* Code postal de naissance')).isNotVisible();
-        assert.dom(screen.getByLabelText('* Commune de naissance')).isVisible();
+        assert.dom(screen.queryByLabelText('Code INSEE de naissance *')).isNotVisible();
+        assert.dom(screen.queryByLabelText('Code postal de naissance *')).isNotVisible();
+        assert.dom(screen.getByLabelText('Commune de naissance *')).isVisible();
       });
     });
 
@@ -460,9 +460,9 @@ module(
         await click(screen.getByRole('radio', { name: 'Code INSEE' }));
 
         // then
-        assert.dom(screen.getByLabelText('* Code INSEE de naissance')).isVisible();
-        assert.dom(screen.queryByLabelText('* Code postal de naissance')).isNotVisible();
-        assert.dom(screen.queryByLabelText('* Commune de naissance')).isNotVisible();
+        assert.dom(screen.getByLabelText('Code INSEE de naissance *')).isVisible();
+        assert.dom(screen.queryByLabelText('Code postal de naissance *')).isNotVisible();
+        assert.dom(screen.queryByLabelText('Commune de naissance *')).isNotVisible();
       });
     });
 
@@ -491,9 +491,9 @@ module(
         await click(screen.getByRole('radio', { name: 'Code postal' }));
 
         // then
-        assert.dom(screen.queryByLabelText('* Code INSEE de naissance')).isNotVisible();
-        assert.dom(screen.queryByLabelText('* Code postal de naissance')).isVisible();
-        assert.dom(screen.getByLabelText('* Commune de naissance')).isVisible();
+        assert.dom(screen.queryByLabelText('Code INSEE de naissance *')).isNotVisible();
+        assert.dom(screen.queryByLabelText('Code postal de naissance *')).isVisible();
+        assert.dom(screen.getByLabelText('Commune de naissance *')).isVisible();
       });
     });
 
@@ -515,7 +515,7 @@ module(
         );
 
         // then
-        assert.dom(screen.getByRole('group', { name: 'Certification complémentaire' })).exists();
+        assert.dom(screen.getByRole('group', { name: 'Certification complémentaire *' })).exists();
         assert.dom(screen.getByRole('radio', { name: 'Certif complémentaire 1' })).exists();
         assert.dom(screen.getByRole('radio', { name: 'Certif complémentaire 2' })).exists();
       });
@@ -549,7 +549,7 @@ module(
         );
 
         // then
-        assert.dom(screen.getByRole('group', { name: 'Choix de la certification' })).exists();
+        assert.dom(screen.getByRole('group', { name: 'Choix de la certification *' })).exists();
         assert.dom(screen.getByRole('radio', { name: 'Certification Pix' })).exists();
         assert.dom(screen.getByRole('radio', { name: 'Certif complémentaire 1' })).exists();
         assert.dom(screen.getByRole('radio', { name: 'Certif complémentaire 2' })).exists();

@@ -454,16 +454,16 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
 
           await click(screen.getByRole('button', { name: 'Inscrire un candidat' }));
           const modal = await screen.findByRole('dialog');
-          await fillIn(screen.getByLabelText('* Nom de naissance'), 'BackStreet');
-          await fillIn(screen.getByLabelText('* Prénom'), 'Boys');
+          await fillIn(screen.getByLabelText('Nom de naissance *'), 'BackStreet');
+          await fillIn(screen.getByLabelText('Prénom *'), 'Boys');
           await click(screen.getByLabelText('Homme'));
-          await fillIn(screen.getByLabelText('* Date de naissance'), '01/01/2000');
-          await fillIn(screen.getByLabelText('* Pays de naissance'), '99100');
+          await fillIn(screen.getByLabelText('Date de naissance *'), '01/01/2000');
+          await fillIn(screen.getByLabelText('Pays de naissance *'), '99100');
           await click(screen.getByLabelText('Code INSEE'));
           await fillIn(screen.getByLabelText('Identifiant externe'), '44AA3355');
-          await fillIn(screen.getByLabelText('* Code INSEE de naissance'), '75100');
+          await fillIn(screen.getByLabelText('Code INSEE de naissance *'), '75100');
           await fillIn(screen.getByLabelText('Temps majoré (%)'), '20');
-          await click(screen.getByLabelText('* Tarification part Pix'));
+          await click(screen.getByLabelText('Tarification part Pix *'));
           await click(
             await screen.findByRole('option', {
               name: 'Prépayée',
@@ -482,14 +482,14 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
           await click(screen.getByRole('button', { name: 'Inscrire un candidat' }));
           // then
 
-          assert.strictEqual(screen.getByLabelText('* Nom de naissance').value, '');
-          assert.strictEqual(screen.getByLabelText('* Prénom').value, '');
+          assert.strictEqual(screen.getByLabelText('Nom de naissance *').value, '');
+          assert.strictEqual(screen.getByLabelText('Prénom *').value, '');
           assert.false(screen.getByLabelText('Homme').checked);
-          assert.strictEqual(screen.getByLabelText('* Date de naissance').value, '');
+          assert.strictEqual(screen.getByLabelText('Date de naissance *').value, '');
           assert.strictEqual(screen.getByLabelText('Identifiant externe').value, '');
-          assert.strictEqual(screen.getByLabelText('* Code INSEE de naissance').value, '');
+          assert.strictEqual(screen.getByLabelText('Code INSEE de naissance *').value, '');
           assert.strictEqual(screen.getByLabelText('Temps majoré (%)').value, '');
-          assert.strictEqual(screen.getByLabelText('* Tarification part Pix').value, '');
+          assert.strictEqual(screen.getByLabelText('Tarification part Pix *').value, '');
           assert.dom(screen.queryByLabelText('Code de prépaiement')).doesNotExist();
           assert.strictEqual(
             screen.getByLabelText('E-mail du destinataire des résultats (formateur, enseignant...)').value,
@@ -639,15 +639,15 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
 
               const screen = await visit(`/sessions/${session.id}/candidats`);
               await click(screen.getByRole('button', { name: 'Inscrire un candidat' }));
-              await fillIn(screen.getByLabelText('* Prénom'), 'Guybrush');
-              await fillIn(screen.getByLabelText('* Nom de naissance'), 'Threepwood');
-              await fillIn(screen.getByLabelText('* Date de naissance'), '28/04/2019');
+              await fillIn(screen.getByLabelText('Prénom *'), 'Guybrush');
+              await fillIn(screen.getByLabelText('Nom de naissance *'), 'Threepwood');
+              await fillIn(screen.getByLabelText('Date de naissance *'), '28/04/2019');
               await click(screen.getByLabelText('Homme'));
-              await fillIn(screen.getByLabelText('* Pays de naissance'), '99100');
+              await fillIn(screen.getByLabelText('Pays de naissance *'), '99100');
               await click(screen.getByLabelText('Code INSEE'));
               await fillIn(screen.getByLabelText('Identifiant externe'), '44AA3355');
-              await fillIn(screen.getByLabelText('* Code INSEE de naissance'), '75100');
-              await click(screen.getByLabelText('* Tarification part Pix'));
+              await fillIn(screen.getByLabelText('Code INSEE de naissance *'), '75100');
+              await click(screen.getByLabelText('Tarification part Pix *'));
               await click(
                 await screen.findByRole('option', {
                   name: 'Prépayée',
@@ -673,16 +673,16 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
     });
   });
   async function _fillFormWithCorrectData(screen) {
-    await fillIn(screen.getByRole('textbox', { name: '* Prénom' }), 'Guybrush');
-    await fillIn(screen.getByRole('textbox', { name: '* Nom de naissance' }), 'Threepwood');
-    await fillIn(screen.getByRole('textbox', { name: '* Date de naissance' }), '28/04/2019');
+    await fillIn(screen.getByRole('textbox', { name: 'Prénom *' }), 'Guybrush');
+    await fillIn(screen.getByRole('textbox', { name: 'Nom de naissance *' }), 'Threepwood');
+    await fillIn(screen.getByRole('textbox', { name: 'Date de naissance *' }), '28/04/2019');
     await click(screen.getByRole('radio', { name: 'Homme' }));
-    await fillIn(screen.getByRole('button', { name: '* Pays de naissance' }), '99100');
+    await fillIn(screen.getByRole('button', { name: 'Pays de naissance *' }), '99100');
     await click(screen.getByRole('radio', { name: 'Code INSEE' }));
     await fillIn(screen.getByRole('textbox', { name: 'Identifiant externe' }), '44AA3355');
-    await fillIn(screen.getByRole('textbox', { name: '* Code INSEE de naissance' }), '75100');
+    await fillIn(screen.getByRole('textbox', { name: 'Code INSEE de naissance *' }), '75100');
     await fillIn(screen.getByRole('textbox', { name: 'Temps majoré (%)' }), '20');
-    await click(screen.getByRole('button', { name: '* Tarification part Pix' }));
+    await click(screen.getByRole('button', { name: 'Tarification part Pix *' }));
     await click(
       await screen.findByRole('option', {
         name: 'Gratuite',

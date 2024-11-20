@@ -49,13 +49,13 @@ module('Acceptance | Session Add Candidate', function (hooks) {
 
       // when
       await click(screen.getByRole('button', { name: 'Inscrire un candidat' }));
-      await fillIn(screen.getByLabelText('* Nom de naissance'), 'Quatorze');
-      await fillIn(screen.getByLabelText('* Prénom'), 'Louis');
+      await fillIn(screen.getByLabelText('Nom de naissance *'), 'Quatorze');
+      await fillIn(screen.getByLabelText('Prénom *'), 'Louis');
       await click(screen.getByLabelText('Homme'));
-      await fillIn(screen.getByLabelText('* Date de naissance'), '01/01/2000');
-      await click(screen.getByLabelText('* Pays de naissance'));
+      await fillIn(screen.getByLabelText('Date de naissance *'), '01/01/2000');
+      await click(screen.getByLabelText('Pays de naissance *'));
       await click(screen.getByText('Portugal'));
-      await fillIn(screen.getByLabelText('* Commune de naissance'), 'Paris');
+      await fillIn(screen.getByLabelText('Commune de naissance *'), 'Paris');
       await click(screen.getByLabelText('Certif complémentaire 2'));
       await click(screen.getByLabelText('Aucune'));
       await click(screen.getByRole('button', { name: 'Inscrire le candidat' }));
@@ -73,13 +73,13 @@ module('Acceptance | Session Add Candidate', function (hooks) {
 
       // when
       await click(screen.getByRole('button', { name: 'Inscrire un candidat' }));
-      await fillIn(screen.getByLabelText('* Nom de naissance'), 'Quatorze');
-      await fillIn(screen.getByLabelText('* Prénom'), 'Louis');
+      await fillIn(screen.getByLabelText('Nom de naissance *'), 'Quatorze');
+      await fillIn(screen.getByLabelText('Prénom *'), 'Louis');
       await click(screen.getByLabelText('Homme'));
-      await fillIn(screen.getByLabelText('* Date de naissance'), '01/01/2000');
-      await click(screen.getByLabelText('* Pays de naissance'));
+      await fillIn(screen.getByLabelText('Date de naissance *'), '01/01/2000');
+      await click(screen.getByLabelText('Pays de naissance *'));
       await click(screen.getByText('Portugal'));
-      await fillIn(screen.getByLabelText('* Commune de naissance'), 'Paris');
+      await fillIn(screen.getByLabelText('Commune de naissance *'), 'Paris');
       await click(screen.getByLabelText('Certif complémentaire 2'));
       await click(screen.getByRole('button', { name: 'Inscrire le candidat' }));
 
@@ -105,13 +105,13 @@ module('Acceptance | Session Add Candidate', function (hooks) {
 
       // when
       await click(screen.getByRole('button', { name: 'Inscrire un candidat' }));
-      await fillIn(screen.getByLabelText('* Nom de naissance'), 'Quatorze');
-      await fillIn(screen.getByLabelText('* Prénom'), 'Louis');
+      await fillIn(screen.getByLabelText('Nom de naissance *'), 'Quatorze');
+      await fillIn(screen.getByLabelText('Prénom *'), 'Louis');
       await click(screen.getByLabelText('Homme'));
-      await fillIn(screen.getByLabelText('* Date de naissance'), '01/01/2000');
-      await click(screen.getByLabelText('* Pays de naissance'));
+      await fillIn(screen.getByLabelText('Date de naissance *'), '01/01/2000');
+      await click(screen.getByLabelText('Pays de naissance *'));
       await click(screen.getByText('Portugal'));
-      await fillIn(screen.getByLabelText('* Commune de naissance'), 'Paris');
+      await fillIn(screen.getByLabelText('Commune de naissance *'), 'Paris');
       await click(screen.getByLabelText('Certification Pix'));
       await click(screen.getByRole('button', { name: 'Inscrire le candidat' }));
 
@@ -129,13 +129,13 @@ module('Acceptance | Session Add Candidate', function (hooks) {
 
       // when
       await click(screen.getByRole('button', { name: 'Inscrire un candidat' }));
-      await fillIn(screen.getByLabelText('* Nom de naissance'), 'Quatorze');
-      await fillIn(screen.getByLabelText('* Prénom'), 'Louis');
+      await fillIn(screen.getByLabelText('Nom de naissance *'), 'Quatorze');
+      await fillIn(screen.getByLabelText('Prénom *'), 'Louis');
       await click(screen.getByLabelText('Homme'));
-      await fillIn(screen.getByLabelText('* Date de naissance'), '01/01/2000');
-      await click(screen.getByLabelText('* Pays de naissance'));
+      await fillIn(screen.getByLabelText('Date de naissance *'), '01/01/2000');
+      await click(screen.getByLabelText('Pays de naissance *'));
       await click(screen.getByText('Portugal'));
-      await fillIn(screen.getByLabelText('* Commune de naissance'), 'Paris');
+      await fillIn(screen.getByLabelText('Commune de naissance *'), 'Paris');
       await click(screen.getByRole('button', { name: 'Inscrire le candidat' }));
 
       // then
@@ -151,13 +151,13 @@ module('Acceptance | Session Add Candidate', function (hooks) {
 
       // when
       await click(screen.getByRole('button', { name: 'Inscrire un candidat' }));
-      await fillIn(screen.getByLabelText('* Nom de naissance'), 'Quatorze');
-      await fillIn(screen.getByLabelText('* Prénom'), 'Louis');
+      await fillIn(screen.getByLabelText('Nom de naissance *'), 'Quatorze');
+      await fillIn(screen.getByLabelText('Prénom *'), 'Louis');
       await click(screen.getByLabelText('Homme'));
-      await fillIn(screen.getByLabelText('* Date de naissance'), '01/01/2000');
-      await click(screen.getByLabelText('* Pays de naissance'));
+      await fillIn(screen.getByLabelText('Date de naissance *'), '01/01/2000');
+      await click(screen.getByLabelText('Pays de naissance *'));
       await click(screen.getByText('Portugal'));
-      await fillIn(screen.getByLabelText('* Commune de naissance'), 'Paris');
+      await fillIn(screen.getByLabelText('Commune de naissance *'), 'Paris');
       await click(screen.getByLabelText('Double Certification Pix-CléA Numérique'));
       await click(screen.getByRole('button', { name: 'Inscrire le candidat' }));
 
@@ -174,13 +174,13 @@ module('Acceptance | Session Add Candidate', function (hooks) {
 
       // when
       await click(screen.getByRole('button', { name: 'Inscrire un candidat' }));
-      await fillIn(screen.getByLabelText('* Nom de naissance'), 'Quatorze');
-      await fillIn(screen.getByLabelText('* Prénom'), 'Louis');
+      await fillIn(screen.getByLabelText('Nom de naissance *'), 'Quatorze');
+      await fillIn(screen.getByLabelText('Prénom *'), 'Louis');
       await click(screen.getByLabelText('Homme'));
-      await fillIn(screen.getByLabelText('* Date de naissance'), '01/01/2000');
-      await click(screen.getByLabelText('* Pays de naissance'));
+      await fillIn(screen.getByLabelText('Date de naissance *'), '01/01/2000');
+      await click(screen.getByLabelText('Pays de naissance *'));
       await click(screen.getByText('Portugal'));
-      await fillIn(screen.getByLabelText('* Commune de naissance'), 'Paris');
+      await fillIn(screen.getByLabelText('Commune de naissance *'), 'Paris');
       await click(screen.getByLabelText('Certif complémentaire 2'));
       await click(screen.getByRole('button', { name: 'Inscrire le candidat' }));
 

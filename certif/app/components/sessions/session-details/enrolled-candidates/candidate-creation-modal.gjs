@@ -1,6 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
+import PixLabel from '@1024pix/pix-ui/components/pix-label';
 import PixMessage from '@1024pix/pix-ui/components/pix-message';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import PixRadioButton from '@1024pix/pix-ui/components/pix-radio-button';
@@ -265,8 +266,9 @@ export default class CandidateCreationModal extends Component {
           <div class='new-candidate-modal-form__field'>
             <fieldset>
               <legend class='label'>
-                <abbr title={{t 'common.forms.required'}} class='mandatory-mark' aria-hidden='true'>*</abbr>
-                {{t 'common.labels.candidate.gender.title'}}
+                <PixLabel @requiredLabel={{t 'common.forms.required'}}>
+                  {{t 'common.labels.candidate.gender.title'}}
+                </PixLabel>
               </legend>
               <div class='radio-button-container'>
                 <PixRadioButton
@@ -329,8 +331,9 @@ export default class CandidateCreationModal extends Component {
             <div class='new-candidate-modal-form__field'>
               <fieldset>
                 <legend class='label'>
-                  <abbr title={{t 'common.forms.required'}} class='mandatory-mark' aria-hidden='true'>*</abbr>
-                  {{t 'common.labels.candidate.birth-geographical-code'}}
+                  <PixLabel @requiredLabel={{t 'common.forms.required'}}>
+                    {{t 'common.labels.candidate.birth-geographical-code'}}
+                  </PixLabel>
                 </legend>
                 <div class='radio-button-container'>
                   <PixRadioButton
