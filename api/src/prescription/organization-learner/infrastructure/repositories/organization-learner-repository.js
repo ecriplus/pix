@@ -122,11 +122,17 @@ async function findOrganizationLearnersByDivisions({ organizationId, divisions }
   return organizationLearners.map((organizationLearner) => new OrganizationLearner(organizationLearner));
 }
 
-async function getAttestationsForOrganizationLearnersAndKey({ attestationKey, organizationLearners, attestationsApi }) {
+async function getAttestationsForOrganizationLearnersAndKey({
+  attestationKey,
+  organizationLearners,
+  organizationId,
+  attestationsApi,
+}) {
   const userIds = organizationLearners.map((learner) => learner.userId);
   return attestationsApi.generateAttestations({
     attestationKey,
     userIds,
+    organizationId,
   });
 }
 

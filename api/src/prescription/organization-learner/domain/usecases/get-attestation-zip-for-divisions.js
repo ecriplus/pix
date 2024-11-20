@@ -12,5 +12,6 @@ export const getAttestationZipForDivisions = async ({
   return organizationLearnerRepository.getAttestationsForOrganizationLearnersAndKey({
     attestationKey,
     organizationLearners,
+    organizationId,
   });
 };

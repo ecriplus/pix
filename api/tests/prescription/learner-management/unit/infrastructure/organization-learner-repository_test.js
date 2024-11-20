@@ -9,18 +9,20 @@ describe('Prescription | Learner-Management | Unit | Infrastructure | organizati
       const attestationKey = Symbol('attestation');
       const userId1 = 1;
       const userId2 = 2;
+      const organizationId = Symbol('organizationId');
       const organizationLearners = [{ userId: userId1 }, { userId: userId2 }];
 
       const expectedResult = Symbol('expectedResult');
 
       attestationApiStub.generateAttestations
-        .withArgs({ attestationKey, userIds: [userId1, userId2] })
+        .withArgs({ attestationKey, userIds: [userId1, userId2], organizationId })
         .resolves(expectedResult);
 
       //when
       const result = await getAttestationsForOrganizationLearnersAndKey({
         attestationKey,
         organizationLearners,
+        organizationId,
         attestationsApi: attestationApiStub,
       });
 

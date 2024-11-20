@@ -3,7 +3,7 @@ import { REWARD_TYPES } from '../../../../src/quest/domain/constants.js';
 import { COMPARISON } from '../../../../src/quest/domain/models/Quest.js';
 import { Assessment, CampaignParticipationStatuses } from '../../../../src/shared/domain/models/index.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/temporary-storage/index.js';
-import { AEFE_TAG, FEATURE_ATTESTATIONS_MANAGEMENT_ID } from '../common/constants.js';
+import { AEFE_TAG, FEATURE_ATTESTATIONS_MANAGEMENT_ID, USER_ID_ADMIN_ORGANIZATION } from '../common/constants.js';
 import { TARGET_PROFILE_BADGES_STAGES_ID } from './constants.js';
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
@@ -81,7 +81,7 @@ const buildOrganization = (databaseBuilder) => databaseBuilder.factory.buildOrga
 const buildOrganizationLearners = (databaseBuilder, organization, users) =>
   users.map((user) =>
     databaseBuilder.factory.buildOrganizationLearner({
-      userId: user.id,
+      ...user,
       organizationId: organization.id,
     }),
   );
@@ -199,6 +199,14 @@ export const buildQuests = async (databaseBuilder) => {
 
   const organization = buildOrganization(databaseBuilder);
 
+  // Add admin-orga@example.net as Admin in organization
+
+  databaseBuilder.factory.buildMembership({
+    organizationId: organization.id,
+    organizationRole: 'ADMIN',
+    userId: USER_ID_ADMIN_ORGANIZATION,
+  });
+
   // Associate attestation feature to organization
 
   databaseBuilder.factory.buildOrganizationFeature({
@@ -212,18 +220,25 @@ export const buildQuests = async (databaseBuilder) => {
 
   // Create organizationLearners
 
+  const organizationLearnersData = [
+    { userId: successUser.id, division: '6emeA', firstName: 'attestation-success', lastName: 'attestation-success' },
+    {
+      userId: successSharedUser.id,
+      division: '6emeA',
+      firstName: 'attestation-success-shared',
+      lastName: 'attestation-success-shared',
+    },
+    { userId: failedUser.id, division: '6emeA', firstName: 'attestation-failed', lastName: 'attestation-failed' },
+    { userId: pendingUser.id, division: '6emeB', firstName: 'attestation-pending', lastName: 'attestation-pending' },
+    { userId: blankUser.id, division: '6emeB', firstName: 'attestation-blank', lastName: 'attestation-blank' },
+  ];
+
   const [
     successOrganizationLearner,
     successSharedOrganizationLearner,
     failedOrganizationLearner,
     pendingOrganizationLearner,
-  ] = buildOrganizationLearners(databaseBuilder, organization, [
-    successUser,
-    successSharedUser,
-    failedUser,
-    pendingUser,
-    blankUser,
-  ]);
+  ] = buildOrganizationLearners(databaseBuilder, organization, organizationLearnersData);
 
   // Create target profile
 
