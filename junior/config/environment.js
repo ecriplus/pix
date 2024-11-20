@@ -33,6 +33,7 @@ module.exports = function (environment) {
         process.env.EMBED_ALLOWED_ORIGINS || 'https://epreuves.pix.fr,https://1024pix.github.io'
       ).split(','),
       APP_VERSION: process.env.SOURCE_VERSION || 'development',
+      CHALLENGE_DISPLAY_DELAY: process.env.CHALLENGE_DISPLAY_DELAY || 1500,
     },
     'ember-cli-mirage': {
       usingProxy: true,
@@ -61,6 +62,8 @@ module.exports = function (environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
+
+    ENV.APP.CHALLENGE_DISPLAY_DELAY = 0;
   }
 
   if (environment === 'production') {

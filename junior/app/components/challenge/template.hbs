@@ -2,53 +2,34 @@
 <div class="container">
   <RobotDialog @class={{this.robotMood}}>
     {{#each @challenge.instruction as |instruction index|}}
-      <Bubble
-        @message={{instruction}}
-        @oralization={{@oralization}}
-        @shouldDisplayIn={{this.displayBubbleWithDelay index}}
-      />
+      <DelayedElement @shouldDisplayIn={{this.bubbleDisplayDelay index}}>
+        <Bubble @message={{instruction}} @oralization={{@oralization}} />
+      </DelayedElement>
     {{/each}}
-    {{#if (eq this.answer.result "ok")}}
+
+    {{#if this.robotFeedback.message}}
       <Bubble
-        @message={{t "pages.challenge.messages.correct-answer"}}
-        @status="success"
+        @message={{this.robotFeedback.message}}
+        @status={{this.robotFeedback.status}}
         @oralization={{@oralization}}
         aria-live="polite"
-        @withTransition={{true}}
-      />
-    {{/if}}
-    {{#if (eq this.answer.result "ko")}}
-      <Bubble
-        @message={{t "pages.challenge.messages.wrong-answer"}}
-        @oralization={{@oralization}}
-        @status="error"
-        aria-live="polite"
-        @withTransition={{true}}
-      />
-    {{/if}}
-    {{#if this.displayValidationWarning}}
-      <Bubble
-        @message={{this.validationWarning}}
-        @status="warning"
-        aria-live="polite"
-        @oralization={{@oralization}}
-        @withTransition={{true}}
       />
     {{/if}}
   </RobotDialog>
-  <Challenge::Item
-    @display={{this.displayChallenge}}
-    @setAnswerValue={{this.setAnswerValue}}
-    @setValidationWarning={{this.setValidationWarning}}
-    @validateAnswer={{this.validateAnswer}}
-    @skipChallenge={{this.skipChallenge}}
-    @challenge={{@challenge}}
-    @assessment={{@assessment}}
-    @disableCheckButton={{this.disableCheckButton}}
-    @disableLessonButton={{this.disableLessonButton}}
-    @answerHasBeenValidated={{this.answerHasBeenValidated}}
-    @activity={{@activity}}
-    @resume={{this.resume}}
-    @isDisabled={{this.hasBeenAnswered}}
-  />
+  <DelayedElement @shouldDisplayIn={{this.challengeItemDisplayDelay}}>
+    <Challenge::Item
+      @setAnswerValue={{this.setAnswerValue}}
+      @setValidationWarning={{this.setValidationWarning}}
+      @validateAnswer={{this.validateAnswer}}
+      @skipChallenge={{this.skipChallenge}}
+      @challenge={{@challenge}}
+      @assessment={{@assessment}}
+      @disableCheckButton={{this.disableCheckButton}}
+      @disableLessonButton={{this.disableLessonButton}}
+      @answerHasBeenValidated={{this.answerHasBeenValidated}}
+      @activity={{@activity}}
+      @resume={{this.resume}}
+      @isDisabled={{this.hasBeenAnswered}}
+    />
+  </DelayedElement>
 </div>

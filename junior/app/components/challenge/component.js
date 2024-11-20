@@ -2,27 +2,26 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import ENV from 'junior/config/environment';
+
+const CHALLENGE_DISPLAY_DELAY = ENV.APP.CHALLENGE_DISPLAY_DELAY;
 
 export default class Challenge extends Component {
   @service store;
   @service router;
+  @service intl;
   @tracked answerHasBeenValidated = false;
   @tracked answer = null;
   @tracked answerValue = null;
   @tracked displayValidationWarning = false;
-  @tracked displayChallenge = false;
   validationWarning = null;
 
-  constructor() {
-    super(...arguments);
-    setTimeout(() => {
-      this.displayChallenge = true;
-    }, this.args.challenge.instruction.length * 1500);
+  get challengeItemDisplayDelay() {
+    return this.args.challenge.instruction.length * CHALLENGE_DISPLAY_DELAY;
   }
 
-  @action
-  displayBubbleWithDelay(index) {
-    return (index || 0) * 1500;
+  bubbleDisplayDelay(index) {
+    return (index || 0) * CHALLENGE_DISPLAY_DELAY;
   }
 
   get disableCheckButton() {
@@ -44,6 +43,24 @@ export default class Challenge extends Component {
       return 'retry';
     }
     return 'default';
+  }
+
+  get robotFeedback() {
+    const feedback = {};
+
+    if (this.answer?.result === 'ok') {
+      feedback.message = this.intl.t('pages.challenge.messages.correct-answer');
+      feedback.status = 'success';
+    }
+    if (this.answer?.result === 'ko') {
+      feedback.message = this.intl.t('pages.challenge.messages.wrong-answer');
+      feedback.status = 'error';
+    }
+    if (this.displayValidationWarning) {
+      feedback.message = this.validationWarning;
+      feedback.status = 'warning';
+    }
+    return feedback;
   }
 
   @action

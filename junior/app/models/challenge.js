@@ -17,7 +17,13 @@ export default class Challenge extends Model {
   })
   illustrationAlt;
   @attr('string') illustrationUrl;
-  @attr() instruction;
+  @attr('', {
+    //TODO passer instruction au pluriel pour utiliser le type array
+    defaultValue() {
+      return [];
+    },
+  })
+  instruction;
   @attr('string') alternativeInstruction;
   @attr('string') proposals;
   @attr('number') timer;
