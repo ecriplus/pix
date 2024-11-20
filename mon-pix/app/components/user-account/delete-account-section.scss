@@ -1,0 +1,23 @@
+.delete-account-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-6x);
+  align-items: start;
+
+  h2 {
+    @extend %pix-title-xs;
+  }
+
+  p {
+    color: var(--pix-neutral-500);
+  }
+
+  a {
+    text-decoration: underline;
+
+    &:focus
+    &:hover {
+      color: var(--pix-primary-500);
+    }
+  }
+}
