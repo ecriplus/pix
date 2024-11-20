@@ -112,6 +112,7 @@ const moduleSchema = Joi.object({
     .regex(/^[a-z0-9-]+$/)
     .required(),
   title: htmlNotAllowedSchema.required(),
+  isBeta: Joi.boolean().required(),
   details: moduleDetailsSchema.required(),
   transitionTexts: Joi.array().items(transitionTextSchema),
   grains: Joi.array().items(grainSchema).required(),

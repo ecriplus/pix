@@ -2,6 +2,7 @@
   "id": "68f92c57-9e66-4258-a2f4-b71fad7ab004",
   "slug": "sources-informations",
   "title": "Les sources d'information",
+  "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "Sur internet et les réseaux sociaux, il est parfois difficile de savoir si une information est vraie ou fausse. Dans ce module, vous allez découvrir pourquoi il est important de s’intéresser à la source d’une information pour démêler le vrai du faux.",

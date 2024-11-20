@@ -16,6 +16,7 @@ describe('Integration | Devcomp | Domain | Models | Module', function () {
       const id = '1';
       const slug = 'les-adresses-email';
       const title = 'Les adresses email';
+      const isBeta = true;
       const grains = [grain];
       const transitionTexts = [
         {
@@ -30,7 +31,7 @@ describe('Integration | Devcomp | Domain | Models | Module', function () {
       const details = Symbol('details');
 
       // when
-      const error = catchErrSync(() => new Module({ id, slug, title, grains, transitionTexts, details }))();
+      const error = catchErrSync(() => new Module({ id, slug, title, isBeta, grains, transitionTexts, details }))();
 
       // then
       expect(error).to.be.instanceOf(ModuleInstantiationError);

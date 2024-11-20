@@ -28,6 +28,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -78,6 +79,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
             id: '6282925d-4775-4bca-b513-4c3009ec5886',
             slug: 'title',
             title: 'title',
+            isBeta: true,
             details: {
               image: 'https://images.pix.fr/modulix/placeholder-details.svg',
               description: 'Description',
@@ -126,6 +128,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
             id: '6282925d-4775-4bca-b513-4c3009ec5886',
             slug: 'title',
             title: 'title',
+            isBeta: true,
             details: {
               image: 'https://images.pix.fr/modulix/placeholder-details.svg',
               description: 'Description',
@@ -174,6 +177,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
             id: '6282925d-4775-4bca-b513-4c3009ec5886',
             slug: 'title',
             title: 'title',
+            isBeta: true,
             details: {
               image: 'https://images.pix.fr/modulix/placeholder-details.svg',
               description: 'Description',
@@ -229,6 +233,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
         slug: 'title',
         title: 'title',
+        isBeta: true,
         details: {
           image: 'https://images.pix.fr/modulix/placeholder-details.svg',
           description: 'Description',
@@ -276,6 +281,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
         slug: 'title',
         title: 'title',
+        isBeta: true,
         details: {
           image: 'https://images.pix.fr/modulix/placeholder-details.svg',
           description: 'Description',
@@ -333,6 +339,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -375,6 +382,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -419,6 +427,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -459,6 +468,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -513,6 +523,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -553,6 +564,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -596,6 +608,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -655,6 +668,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -722,6 +736,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -805,6 +820,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -870,6 +886,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -920,6 +937,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -967,6 +985,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -1015,6 +1034,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -1067,6 +1087,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -1115,6 +1136,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -1167,6 +1189,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -1233,6 +1256,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -1309,6 +1333,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -1396,6 +1421,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -1465,6 +1491,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -1519,6 +1546,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -1575,6 +1603,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
           title: 'title',
+          isBeta: true,
           details: {
             image: 'https://images.pix.fr/modulix/placeholder-details.svg',
             description: 'Description',
@@ -1623,6 +1652,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
         slug: 'title',
         title: 'title',
+        isBeta: true,
         details: {
           image: 'https://images.pix.fr/modulix/placeholder-details.svg',
           description: 'Description',
@@ -1674,6 +1704,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
         slug: 'title',
         title: 'title',
+        isBeta: true,
         details: {
           image: 'https://images.pix.fr/modulix/placeholder-details.svg',
           description: 'Description',

@@ -26,6 +26,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const id = 'id';
       const slug = 'bien-ecrire-son-adresse-mail';
       const title = 'Bien écrire son adresse mail';
+      const isBeta = true;
       const details = {
         image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
         description:
@@ -38,13 +39,14 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           'Comprendre les fonctions des parties d’une adresse mail',
         ],
       };
-      const moduleFromDomain = new Module({ id, details, slug, title, grains: [] });
+      const moduleFromDomain = new Module({ id, details, slug, title, grains: [], isBeta });
       const expectedJson = {
         data: {
           type: 'modules',
           id: slug,
           attributes: {
             title,
+            'is-beta': isBeta,
             'transition-texts': [],
             details,
           },
@@ -68,6 +70,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
       const id = 'id';
       const slug = 'bien-ecrire-son-adresse-mail';
       const title = 'Bien écrire son adresse mail';
+      const isBeta = true;
       const details = {
         image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
         description:
@@ -90,6 +93,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         id,
         slug,
         title,
+        isBeta,
         details,
         transitionTexts,
         grains: [
@@ -105,6 +109,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         data: {
           attributes: {
             title: 'Bien écrire son adresse mail',
+            'is-beta': isBeta,
             'transition-texts': transitionTexts,
             details,
           },
