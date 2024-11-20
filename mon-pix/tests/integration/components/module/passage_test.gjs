@@ -116,23 +116,46 @@ module('Integration | Component | Module | Passage', function (hooks) {
     });
   });
 
-  test('should display a banner at the top of the screen for a passage', async function (assert) {
-    // given
-    const store = this.owner.lookup('service:store');
-    const textElement = { content: 'content', type: 'text' };
-    const grain = store.createRecord('grain', {
-      id: 'grainId1',
-      components: [{ type: 'element', element: textElement }],
+  module('when module has isBeta status', function () {
+    test('should display a banner at the top of the screen for a passage', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const textElement = { content: 'content', type: 'text' };
+      const grain = store.createRecord('grain', {
+        id: 'grainId1',
+        components: [{ type: 'element', element: textElement }],
+      });
+      const module = store.createRecord('module', { title: 'Module title', isBeta: true, grains: [grain] });
+
+      const passage = store.createRecord('passage');
+
+      // when
+      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+
+      // then
+      assert.dom(screen.getByRole('alert')).exists();
     });
-    const module = store.createRecord('module', { title: 'Module title', grains: [grain] });
+  });
 
-    const passage = store.createRecord('passage');
+  module('when module does not have isBeta status', function () {
+    test('should not display a banner at the top of the screen for a passage', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const textElement = { content: 'content', type: 'text' };
+      const grain = store.createRecord('grain', {
+        id: 'grainId1',
+        components: [{ type: 'element', element: textElement }],
+      });
+      const module = store.createRecord('module', { title: 'Module title', isBeta: false, grains: [grain] });
 
-    // when
-    const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+      const passage = store.createRecord('passage');
 
-    // then
-    assert.dom(screen.getByRole('alert')).exists();
+      // when
+      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+
+      // then
+      assert.dom(screen.queryByRole('alert')).doesNotExist();
+    });
   });
 
   test('should display given module with more than one grain', async function (assert) {

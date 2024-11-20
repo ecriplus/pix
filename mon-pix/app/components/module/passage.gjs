@@ -201,7 +201,9 @@ export default class ModulePassage extends Component {
     <ModuleNavbar @currentStep={{this.currentPassageStep}} @totalSteps={{this.displayableGrains.length}} />
 
     <main class="module-passage">
-      <BetaBanner />
+      {{#if @module.isBeta}}
+        <BetaBanner />
+      {{/if}}
 
       <div class="module-passage__title">
         <h1>{{@module.title}}</h1>
