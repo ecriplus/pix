@@ -45,6 +45,20 @@ const up = async function (knex) {
     table.boolean('isMobileCompliant');
     table.boolean('isTabletCompliant');
   });
+  await knex.schema.withSchema(SCHEMA_NAME).createTable('skills', function (table) {
+    table.string('id').primary();
+    table.text('name');
+    table.string('status');
+    table.float('pixValue');
+    table.integer('version');
+    table.integer('level');
+    table.string('hintStatus');
+    table.jsonb('hint_i18n');
+    table.string('competenceId').references('id').inTable(`${SCHEMA_NAME}.competences`);
+    table.string('tubeId').references('id').inTable(`${SCHEMA_NAME}.tubes`);
+    table.specificType('tutorialIds', 'string[]');
+    table.specificType('learningMoreTutorialIds', 'string[]');
+  });
 };
 
 const down = function (knex) {
