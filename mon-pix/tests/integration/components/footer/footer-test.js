@@ -14,7 +14,7 @@ module('Integration | Component | Footer', function (hooks) {
     const screen = await render(hbs`<Footer />}`);
 
     // then
-    assert.ok(screen.getByAltText(t('navigation.homepage')));
+    assert.ok(screen.getByAltText(t('common.pix')));
   });
 
   test('displays the navigation menu with expected elements', async function (assert) {

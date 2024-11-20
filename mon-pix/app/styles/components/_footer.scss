@@ -1,148 +1,63 @@
 #footer {
-  margin-top: auto;
-}
-
-.footer__container {
   display: flex;
-  flex-direction: column;
-  max-width: 1280px;
+  gap: var(--pix-spacing-4x);
+  align-items: flex-start;
+  justify-content: space-between;
+  width: min(100%, 1280px);
+  margin: 0 auto;
   padding: var(--pix-spacing-6x) 20px;
+  color: var(--pix-neutral-500);
 
-  @include device-is('desktop') {
-    flex-direction: row;
-    margin: 0 auto;
-  }
-}
-
-.footer-container {
-  &__content {
-    display: flex;
+  @include device-is('mobile') {
     flex-direction: column;
-    gap: var(--pix-spacing-8x);
-    width: 100%;
-
-    @include device-is('tablet') {
-      flex-direction: column;
-      justify-content: space-between;
-      border: none;
-    }
-
-    @include device-is('desktop') {
-      flex-direction: row;
-      align-items: center;
-    }
-  }
-
-  &__logos {
-    display: flex;
-    align-items: center;
-    padding-bottom: 16px;
-
-    @include device-is('tablet') {
-      padding-bottom: 0;
-    }
-
-    img {
-      max-width: unset;
-    }
   }
 }
 
-.footer-container-content {
-  &__navigation {
-    @include device-is('tablet') {
-      flex-direction: row;
-      align-items: center;
-    }
-
-    @include device-is('desktop') {
-      margin-left: 12px;
-    }
-
-    &-list {
-      display: flex;
-      flex-wrap: wrap;
-      margin: 0;
-      margin-top: 20px;
-      padding: 0;
-      list-style: none;
-
-      @include device-is('tablet') {
-        flex-direction: row;
-        align-self: center;
-      }
-
-      @include device-is('desktop') {
-        margin: 0;
-        padding-top: 0;
-      }
-    }
-  }
-
-  &__copyrights {
-    padding-top: 16px;
-    color: var(--pix-neutral-500);
-    font-size: 0.75rem;
-    font-family: $font-roboto;
-    letter-spacing: 0.008rem;
-
-    @include device-is('desktop') {
-      padding: 0;
-      white-space: nowrap;
-    }
-  }
-}
-
-.footer-navigation {
-  &__item {
-    display: inline-block;
-    padding: 0 12px 6px 0;
-    color: var(--pix-neutral-500);
-    font-size: 0.8125rem;
-    font-family: $font-roboto;
-    line-height: 1.375rem;
-    letter-spacing: 0.009rem;
-
-    &--internal-link {
-      &:visited {
-        color: var(--pix-neutral-500);
-      }
-    }
-
-    @include device-is('desktop') {
-      margin: 0 10px;
-      padding: 0;
-    }
-
-    &.active {
-      color: var(--pix-primary-700);
-      text-decoration: none;
-    }
-
-    &:focus {
-      color: var(--pix-neutral-500);
-      text-decoration: none;
-    }
-
-    &:hover {
-      color: var(--pix-primary-700);
-      text-decoration: none;
-      cursor: pointer;
-    }
-  }
-}
-
-.footer-logos {
+.footer__logos {
   display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 1em;
+  align-items: center;
 
-  &__french-government {
-    > img {
-      height: 45px;
-      margin-right: 24px;
+  img {
+    height: 54px;
+  }
 
-      @include device-is('tablet') {
-        height: 54px;
-      }
+  .copyrights {
+    @extend %pix-body-xs;
+
+    flex: 100%;
+  }
+}
+
+// Footer links
+.footer-links__list {
+  text-align: right;
+  text-wrap: pretty;
+
+  @include device-is('mobile') {
+    text-align: left;
+  }
+
+  li {
+    display: inline-block;
+    padding-block: 0.25em;
+
+    @include device-is('mobile') {
+      margin-right: 2ch;
+    }
+
+    @include device-is('tablet') {
+      margin-left: 2ch;
+    }
+  }
+
+  a {
+    @extend %pix-body-s;
+
+    &:hover, &:focus {
+      color: var(--pix-primary-500);
     }
   }
 }

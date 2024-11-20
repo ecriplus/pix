@@ -32,7 +32,7 @@ module('Acceptance | Footer', function (hooks) {
       await resumeCampaignOfTypeAssessmentByCode(campaign.code, false);
 
       // then
-      assert.dom('.footer').doesNotExist();
+      assert.dom('#footer').doesNotExist();
     });
 
     test('should contain link to pix.org/fr/support', async function (assert) {
@@ -40,11 +40,7 @@ module('Acceptance | Footer', function (hooks) {
       await visit('/');
 
       // then
-      assert.ok(
-        find('.footer-container-content__navigation ul li:nth-child(1) a')
-          .getAttribute('href')
-          .includes('pix.org/fr/support'),
-      );
+      assert.ok(find('#footer ul li:nth-child(1) a').getAttribute('href').includes('pix.org/fr/support'));
     });
 
     test('should contain link to pix.fr/accessibilite', async function (assert) {
@@ -52,11 +48,7 @@ module('Acceptance | Footer', function (hooks) {
       await visit('/');
 
       // then
-      assert.ok(
-        find('.footer-container-content__navigation ul li:nth-child(2) a')
-          .getAttribute('href')
-          .includes('/accessibilite'),
-      );
+      assert.ok(find('#footer ul li:nth-child(2) a').getAttribute('href').includes('/accessibilite'));
     });
   });
 });
