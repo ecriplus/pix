@@ -59,6 +59,46 @@ const up = async function (knex) {
     table.specificType('tutorialIds', 'string[]');
     table.specificType('learningMoreTutorialIds', 'string[]');
   });
+
+  await knex.schema.withSchema(SCHEMA_NAME).createTable('challenges', function (table) {
+    table.string('id').primary();
+    table.text('instruction');
+    table.text('alternativeInstruction');
+    table.text('proposals');
+    table.string('type');
+    table.text('solution');
+    table.text('solutionToDisplay');
+    table.boolean('t1Status');
+    table.boolean('t2Status');
+    table.boolean('t3Status');
+    table.string('status');
+    table.string('genealogy');
+    table.string('accessibility1');
+    table.string('accessibility2');
+    table.boolean('requireGafamWebsiteAccess');
+    table.boolean('isIncompatibleIpadCertif');
+    table.string('deafAndHardOfHearing');
+    table.boolean('isAwarenessChallenge');
+    table.boolean('toRephrase');
+    table.integer('alternativeVersion');
+    table.boolean('shuffled');
+    table.text('illustrationAlt');
+    table.text('illustrationUrl');
+    table.specificType('attachments', 'string[]');
+    table.string('responsive');
+    table.float('alpha');
+    table.float('delta');
+    table.boolean('autoReply');
+    table.boolean('focusable');
+    table.string('format');
+    table.integer('timer');
+    table.integer('embedHeight');
+    table.text('embedUrl');
+    table.text('embedTitle');
+    table.specificType('locales', 'string[]');
+    table.string('competenceId').references('id').inTable(`${SCHEMA_NAME}.competences`);
+    table.string('skillId').references('id').inTable(`${SCHEMA_NAME}.skills`);
+  });
 };
 
 const down = function (knex) {
