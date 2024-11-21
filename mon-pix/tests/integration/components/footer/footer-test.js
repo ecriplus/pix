@@ -17,17 +17,23 @@ module('Integration | Component | Footer', function (hooks) {
     assert.ok(screen.getByAltText(t('common.pix')));
   });
 
-  test('displays the navigation menu with expected elements', async function (assert) {
+  test('displays the navigation menu with expected', async function (assert) {
     // when
     const screen = await render(hbs`<Footer />}`);
 
     // then
-    assert.ok(screen.getByRole('link', { name: t('navigation.footer.a11y') }));
-    assert.ok(screen.getByRole('link', { name: t('navigation.footer.data-protection-policy') }));
-    assert.ok(screen.getByRole('link', { name: t('navigation.footer.eula') }));
+    assert.dom(screen.getByRole('navigation')).hasAttribute('aria-label', t('navigation.footer.label'));
+
+    assert.dom(screen.getByAltText(t('common.pix'))).exists();
+    assert.dom(screen.getByText(`${t('navigation.copyrights')} ${new Date().getFullYear()} Pix`)).exists();
+
     assert.ok(screen.getByRole('link', { name: t('navigation.footer.help-center') }));
-    assert.ok(screen.getByRole('link', { name: t('navigation.footer.legal-notice') }));
+    assert.ok(screen.getByRole('link', { name: t('navigation.footer.a11y') }));
+    assert.ok(screen.getByRole('link', { name: t('navigation.footer.server-status') }));
     assert.ok(screen.getByRole('link', { name: t('navigation.footer.sitemap') }));
+    assert.ok(screen.getByRole('link', { name: t('navigation.footer.eula') }));
+    assert.ok(screen.getByRole('link', { name: t('navigation.footer.legal-notice') }));
+    assert.ok(screen.getByRole('link', { name: t('navigation.footer.data-protection-policy') }));
   });
 
   module('when url does not have frenchDomainExtension', function (hooks) {
@@ -46,7 +52,7 @@ module('Integration | Component | Footer', function (hooks) {
       const screen = await render(hbs`<Footer />`);
 
       // then
-      assert.dom(screen.queryByAltText('République française. Liberté, égalité, fraternité.')).doesNotExist();
+      assert.dom(screen.queryByAltText(t('common.french-republic'))).doesNotExist();
     });
 
     test('does not display the student data policy', async function (assert) {
@@ -54,7 +60,9 @@ module('Integration | Component | Footer', function (hooks) {
       const screen = await render(hbs`<Footer />}`);
 
       // then
-      assert.dom(screen.queryByRole('link', { name: 'Politique de protection des données des élèves' })).doesNotExist();
+      assert
+        .dom(screen.queryByRole('link', { name: t('navigation.footer.student-data-protection-policy') }))
+        .doesNotExist();
     });
   });
 
@@ -74,7 +82,7 @@ module('Integration | Component | Footer', function (hooks) {
       const screen = await render(hbs`<Footer />`);
 
       // then
-      assert.dom(screen.getByAltText('République française. Liberté, égalité, fraternité.')).exists();
+      assert.dom(screen.getByAltText(t('common.french-republic'))).exists();
     });
 
     test('displays the student data policy', async function (assert) {
@@ -82,7 +90,7 @@ module('Integration | Component | Footer', function (hooks) {
       const screen = await render(hbs`<Footer />}`);
 
       // then
-      assert.dom(screen.getByRole('link', { name: 'Politique de protection des données des élèves' })).exists();
+      assert.dom(screen.getByRole('link', { name: t('navigation.footer.student-data-protection-policy') })).exists();
     });
   });
 });

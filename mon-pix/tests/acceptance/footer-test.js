@@ -1,6 +1,5 @@
-import { visit } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
-import { find } from '@ember/test-helpers';
+import { visit } from '@1024pix/ember-testing-library';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -13,42 +12,46 @@ module('Acceptance | Footer', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
   setupIntl(hooks);
-  let user;
 
-  hooks.beforeEach(function () {
-    user = server.create('user', 'withEmail');
-  });
-
-  module('Authenticated cases as simple user', function (hooks) {
+  module('when user is connected', function (hooks) {
     hooks.beforeEach(async function () {
+      const user = server.create('user', 'withEmail');
       await authenticate(user);
     });
 
-    test('should not be displayed while in campaign', async function (assert) {
-      // given
-      const campaign = server.create('campaign', 'withOneChallenge');
+    const pagesWithFooter = [
+      { name: 'dashboard', url: '/' },
+      { name: 'competences', url: '/competences' },
+      { name: 'campagne fill code', url: '/campagnes' },
+      { name: 'certifications', url: '/certifications' },
+      { name: 'my certifications', url: '/mes-certifications' },
+      { name: 'my tutorials', url: '/mes-tutos' },
+      { name: 'my courses', url: '/mes-parcours' },
+      { name: 'my account', url: '/mon-compte' },
+      { name: 'sitemap', url: '/plan-du-site' },
+    ];
 
-      // when
-      await resumeCampaignOfTypeAssessmentByCode(campaign.code, false);
+    pagesWithFooter.forEach(function (page) {
+      test(`should be displayed while in ${page.name} page`, async function (assert) {
+        // when
+        await visit(page.url);
 
-      // then
-      assert.dom('#footer').doesNotExist();
+        // then
+        assert.dom('#footer').exists();
+      });
+    });
+  });
+
+  test('should not be displayed while in campaign', async function (assert) {
+    // given
+    const campaign = server.create('campaign', 'withOneChallenge', {
+      isSimplifiedAccess: true,
     });
 
-    test('should contain link to pix.org/fr/support', async function (assert) {
-      // when
-      await visit('/');
+    // when
+    await resumeCampaignOfTypeAssessmentByCode(campaign.code, false);
 
-      // then
-      assert.ok(find('#footer ul li:nth-child(1) a').getAttribute('href').includes('pix.org/fr/support'));
-    });
-
-    test('should contain link to pix.fr/accessibilite', async function (assert) {
-      // when
-      await visit('/');
-
-      // then
-      assert.ok(find('#footer ul li:nth-child(2) a').getAttribute('href').includes('/accessibilite'));
-    });
+    // then
+    assert.dom('#footer').doesNotExist();
   });
 });
