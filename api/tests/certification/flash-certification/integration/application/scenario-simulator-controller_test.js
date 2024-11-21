@@ -55,66 +55,6 @@ describe('Integration | Application | scenario-simulator-controller', function (
           },
         ];
       });
-
-      context('When the scenario is forced to space competences', function () {
-        it('should call the usecase with the right parameters', async function () {
-          // given
-          const challengesBetweenSameCompetence = 2;
-
-          const pickChallengeImplementation = sinon.stub();
-          pickChallengeService.chooseNextChallenge.withArgs().returns(pickChallengeImplementation);
-          const pickAnswerStatusForCapacityImplementation = sinon.stub();
-          pickAnswerStatusService.pickAnswerStatusForCapacity
-            .withArgs(6)
-            .returns(pickAnswerStatusForCapacityImplementation);
-
-          usecases.simulateFlashAssessmentScenario
-            .withArgs({
-              pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
-              locale: 'en',
-              pickChallenge: pickChallengeImplementation,
-              initialCapacity,
-              challengesBetweenSameCompetence,
-            })
-            .resolves(simulationResults);
-          securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
-
-          // when
-          const response = await httpTestServer.request(
-            'POST',
-            '/api/scenario-simulator',
-            {
-              initialCapacity,
-              capacity: 6,
-              challengesBetweenSameCompetence,
-            },
-            null,
-            { 'accept-language': 'en' },
-          );
-
-          // then
-          expect(response.statusCode).to.equal(200);
-          const parsedResult = parseJsonStream(response);
-          expect(parsedResult).to.deep.equal([
-            {
-              index: 0,
-              simulationReport: [
-                {
-                  challengeId: challenge1.id,
-                  errorRate: errorRate1,
-                  capacity: capacity1,
-                  minimumCapability: 0.6190392084062237,
-                  answerStatus: 'ok',
-                  reward: reward1,
-                  difficulty: challenge1.difficulty,
-                  discriminant: challenge1.discriminant,
-                },
-              ],
-            },
-          ]);
-        });
-      });
-
       context('When configuring the challenge pick probability', function () {
         it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
           // given
@@ -175,40 +115,24 @@ describe('Integration | Application | scenario-simulator-controller', function (
         });
       });
 
-      context('When configuring the minimum success rates', function () {
-        context('When providing valid parameters', function () {
+      context('When the route is called with correct arguments', function () {
+        context('When the route is called without an initial capacity', function () {
           it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
             // given
-            const minimumEstimatedSuccessRateRanges = [
-              {
-                startingChallengeIndex: 0,
-                endingChallengeIndex: 7,
-                value: 0.8,
-              },
-            ];
-
-            const expectedSuccessRateRanges = [
-              domainBuilder.buildFlashAssessmentAlgorithmSuccessRateHandlerFixed({
-                startingChallengeIndex: 0,
-                endingChallengeIndex: 7,
-                value: 0.8,
-              }),
-            ];
+            const capacity = -3.1;
 
             const pickChallengeImplementation = sinon.stub();
-            pickChallengeService.chooseNextChallenge.withArgs().returns(pickChallengeImplementation);
-            const pickAnswerStatusForCapacityImplementation = sinon.stub();
+            pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
+            const pickAnswerStatusFromCapacityImplementation = sinon.stub();
             pickAnswerStatusService.pickAnswerStatusForCapacity
-              .withArgs(6)
-              .returns(pickAnswerStatusForCapacityImplementation);
+              .withArgs(capacity)
+              .returns(pickAnswerStatusFromCapacityImplementation);
 
             usecases.simulateFlashAssessmentScenario
               .withArgs({
-                pickAnswerStatus: pickAnswerStatusForCapacityImplementation,
-                locale: 'en',
                 pickChallenge: pickChallengeImplementation,
-                initialCapacity,
-                minimumEstimatedSuccessRateRanges: expectedSuccessRateRanges,
+                locale: 'en',
+                pickAnswerStatus: pickAnswerStatusFromCapacityImplementation,
               })
               .resolves(simulationResults);
             securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
@@ -218,9 +142,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
               'POST',
               '/api/scenario-simulator',
               {
-                initialCapacity,
-                capacity: 6,
-                minimumEstimatedSuccessRateRanges,
+                capacity,
               },
               null,
               { 'accept-language': 'en' },
@@ -249,19 +171,26 @@ describe('Integration | Application | scenario-simulator-controller', function (
           });
         });
 
-        context('When providing invalid fixed config', function () {
-          it('should respond with a 400 error', async function () {
+        context('When the route is called with an initial capacity', function () {
+          it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
             // given
-            const answerStatusArray = ['ok'];
+            const capacity = -3.1;
 
-            const minimumEstimatedSuccessRateRanges = [
-              {
-                startingChallengeIndex: 0,
-                endingChallengeIndex: 7,
-                value: 0.8,
-              },
-            ];
+            const pickChallengeImplementation = sinon.stub();
+            pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
+            const pickAnswerStatusFromCapacityImplementation = sinon.stub();
+            pickAnswerStatusService.pickAnswerStatusForCapacity
+              .withArgs(capacity)
+              .returns(pickAnswerStatusFromCapacityImplementation);
 
+            usecases.simulateFlashAssessmentScenario
+              .withArgs({
+                pickChallenge: pickChallengeImplementation,
+                locale: 'en',
+                pickAnswerStatus: pickAnswerStatusFromCapacityImplementation,
+                initialCapacity,
+              })
+              .resolves(simulationResults);
             securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
 
             // when
@@ -269,166 +198,33 @@ describe('Integration | Application | scenario-simulator-controller', function (
               'POST',
               '/api/scenario-simulator',
               {
+                capacity,
                 initialCapacity,
-                answerStatusArray,
-                minimumEstimatedSuccessRateRanges,
               },
               null,
               { 'accept-language': 'en' },
             );
 
             // then
-            expect(response.statusCode).to.equal(400);
-          });
-        });
-
-        context('When providing invalid type', function () {
-          it('should respond with a 400 error', async function () {
-            // given
-            const answerStatusArray = ['ok'];
-
-            const minimumEstimatedSuccessRateRanges = [
+            expect(response.statusCode).to.equal(200);
+            const parsedResult = parseJsonStream(response);
+            expect(parsedResult).to.deep.equal([
               {
-                type: 'toto',
-                startingChallengeIndex: 0,
-                endingChallengeIndex: 7,
-                value: 0.8,
+                index: 0,
+                simulationReport: [
+                  {
+                    challengeId: challenge1.id,
+                    errorRate: errorRate1,
+                    capacity: capacity1,
+                    minimumCapability: 0.6190392084062237,
+                    answerStatus: 'ok',
+                    reward: reward1,
+                    difficulty: challenge1.difficulty,
+                    discriminant: challenge1.discriminant,
+                  },
+                ],
               },
-            ];
-
-            securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
-
-            // when
-            const response = await httpTestServer.request(
-              'POST',
-              '/api/scenario-simulator',
-              {
-                initialCapacity,
-                answerStatusArray,
-                minimumEstimatedSuccessRateRanges,
-              },
-              null,
-              { 'accept-language': 'en' },
-            );
-
-            // then
-            expect(response.statusCode).to.equal(400);
-          });
-        });
-      });
-
-      context('When the scenario is capacity', function () {
-        context('When the route is called with correct arguments', function () {
-          context('When the route is called without an initial capacity', function () {
-            it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
-              // given
-              const capacity = -3.1;
-
-              const pickChallengeImplementation = sinon.stub();
-              pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
-              const pickAnswerStatusFromCapacityImplementation = sinon.stub();
-              pickAnswerStatusService.pickAnswerStatusForCapacity
-                .withArgs(capacity)
-                .returns(pickAnswerStatusFromCapacityImplementation);
-
-              usecases.simulateFlashAssessmentScenario
-                .withArgs({
-                  pickChallenge: pickChallengeImplementation,
-                  locale: 'en',
-                  pickAnswerStatus: pickAnswerStatusFromCapacityImplementation,
-                })
-                .resolves(simulationResults);
-              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
-
-              // when
-              const response = await httpTestServer.request(
-                'POST',
-                '/api/scenario-simulator',
-                {
-                  capacity,
-                },
-                null,
-                { 'accept-language': 'en' },
-              );
-
-              // then
-              expect(response.statusCode).to.equal(200);
-              const parsedResult = parseJsonStream(response);
-              expect(parsedResult).to.deep.equal([
-                {
-                  index: 0,
-                  simulationReport: [
-                    {
-                      challengeId: challenge1.id,
-                      errorRate: errorRate1,
-                      capacity: capacity1,
-                      minimumCapability: 0.6190392084062237,
-                      answerStatus: 'ok',
-                      reward: reward1,
-                      difficulty: challenge1.difficulty,
-                      discriminant: challenge1.discriminant,
-                    },
-                  ],
-                },
-              ]);
-            });
-          });
-
-          context('When the route is called with an initial capacity', function () {
-            it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
-              // given
-              const capacity = -3.1;
-
-              const pickChallengeImplementation = sinon.stub();
-              pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
-              const pickAnswerStatusFromCapacityImplementation = sinon.stub();
-              pickAnswerStatusService.pickAnswerStatusForCapacity
-                .withArgs(capacity)
-                .returns(pickAnswerStatusFromCapacityImplementation);
-
-              usecases.simulateFlashAssessmentScenario
-                .withArgs({
-                  pickChallenge: pickChallengeImplementation,
-                  locale: 'en',
-                  pickAnswerStatus: pickAnswerStatusFromCapacityImplementation,
-                  initialCapacity,
-                })
-                .resolves(simulationResults);
-              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
-
-              // when
-              const response = await httpTestServer.request(
-                'POST',
-                '/api/scenario-simulator',
-                {
-                  capacity,
-                  initialCapacity,
-                },
-                null,
-                { 'accept-language': 'en' },
-              );
-
-              // then
-              expect(response.statusCode).to.equal(200);
-              const parsedResult = parseJsonStream(response);
-              expect(parsedResult).to.deep.equal([
-                {
-                  index: 0,
-                  simulationReport: [
-                    {
-                      challengeId: challenge1.id,
-                      errorRate: errorRate1,
-                      capacity: capacity1,
-                      minimumCapability: 0.6190392084062237,
-                      answerStatus: 'ok',
-                      reward: reward1,
-                      difficulty: challenge1.difficulty,
-                      discriminant: challenge1.discriminant,
-                    },
-                  ],
-                },
-              ]);
-            });
+            ]);
           });
         });
       });
