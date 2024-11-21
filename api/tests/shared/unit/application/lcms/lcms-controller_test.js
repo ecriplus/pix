@@ -1,6 +1,5 @@
 import { lcmsController } from '../../../../../src/shared/application/lcms/lcms-controller.js';
 import { sharedUsecases as usecases } from '../../../../../src/shared/domain/usecases/index.js';
-import * as learningContentDatasources from '../../../../../src/shared/infrastructure/datasources/learning-content/index.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | lcms-controller', function () {
@@ -18,7 +17,7 @@ describe('Unit | Controller | lcms-controller', function () {
     });
   });
 
-  describe('#refreshCacheEntry', function () {
+  describe('#patchCacheEntry', function () {
     const request = {
       params: {
         model: 'challenges',
@@ -29,65 +28,21 @@ describe('Unit | Controller | lcms-controller', function () {
       },
     };
 
-    for (const entity of [
-      'area',
-      'challenge',
-      'competence',
-      'course',
-      'framework',
-      'skill',
-      'thematic',
-      'tube',
-      'tutorial',
-    ]) {
-      it(`should reply 204 when patching ${entity}`, async function () {
-        // given
-
-        // eslint-disable-next-line import/namespace
-        sinon.stub(learningContentDatasources[`${entity}Datasource`], 'refreshLearningContentCacheRecord').resolves();
-        const request = {
-          params: {
-            model: `${entity}s`,
-            id: 'recId',
-          },
-          payload: {
-            property: 'updatedValue',
-          },
-        };
-
-        // when
-        const response = await lcmsController.refreshCacheEntry(request, hFake);
-
-        // then
-        expect(response.statusCode).to.equal(204);
-      });
-    }
-
-    it('should reply with null when the cache key exists', async function () {
+    it('should call the usecase and return 204', async function () {
       // given
-      sinon.stub(learningContentDatasources.challengeDatasource, 'refreshLearningContentCacheRecord').resolves();
+      sinon.stub(usecases, 'patchLearningContentCacheEntry');
 
       // when
-      const response = await lcmsController.refreshCacheEntry(request, hFake);
+      const response = await lcmsController.patchCacheEntry(request, hFake);
 
       // then
-      expect(
-        learningContentDatasources.challengeDatasource.refreshLearningContentCacheRecord,
-      ).to.have.been.calledWithExactly('recId', { property: 'updatedValue' });
-      expect(response.statusCode).to.equal(204);
-    });
-
-    it('should reply with null when the cache key does not exist', async function () {
-      // given
-      sinon.stub(learningContentDatasources.challengeDatasource, 'refreshLearningContentCacheRecord').resolves();
-
-      // when
-      const response = await lcmsController.refreshCacheEntry(request, hFake);
-
-      // Then
-      expect(
-        learningContentDatasources.challengeDatasource.refreshLearningContentCacheRecord,
-      ).to.have.been.calledWithExactly('recId', { property: 'updatedValue' });
+      expect(usecases.patchLearningContentCacheEntry).to.have.been.calledWithExactly({
+        recordId: 'recId',
+        updatedRecord: {
+          property: 'updatedValue',
+        },
+        modelName: 'challenges',
+      });
       expect(response.statusCode).to.equal(204);
     });
   });

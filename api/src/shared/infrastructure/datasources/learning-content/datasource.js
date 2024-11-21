@@ -33,30 +33,6 @@ const _DatasourcePrototype = {
     const learningContent = await LearningContentCache.instance.get();
     return learningContent[this.modelName];
   },
-
-  async refreshLearningContentCacheRecord(id, newEntry) {
-    const currentLearningContent = await LearningContentCache.instance.get();
-
-    const patch = this._generatePatch(currentLearningContent, id, newEntry);
-    await LearningContentCache.instance.patch(patch);
-    return newEntry;
-  },
-
-  _generatePatch(currentLearningContent, id, newEntry) {
-    const index = currentLearningContent[this.modelName].findIndex((element) => element?.id === id);
-    if (index === -1) {
-      return {
-        operation: 'push',
-        path: this.modelName,
-        value: newEntry,
-      };
-    }
-    return {
-      operation: 'assign',
-      path: `${this.modelName}[${index}]`,
-      value: newEntry,
-    };
-  },
 };
 
 const extend = function (props) {
