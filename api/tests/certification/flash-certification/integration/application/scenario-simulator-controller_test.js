@@ -115,118 +115,116 @@ describe('Integration | Application | scenario-simulator-controller', function (
         });
       });
 
-      context('When the scenario is capacity', function () {
-        context('When the route is called with correct arguments', function () {
-          context('When the route is called without an initial capacity', function () {
-            it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
-              // given
-              const capacity = -3.1;
+      context('When the route is called with correct arguments', function () {
+        context('When the route is called without an initial capacity', function () {
+          it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
+            // given
+            const capacity = -3.1;
 
-              const pickChallengeImplementation = sinon.stub();
-              pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
-              const pickAnswerStatusFromCapacityImplementation = sinon.stub();
-              pickAnswerStatusService.pickAnswerStatusForCapacity
-                .withArgs(capacity)
-                .returns(pickAnswerStatusFromCapacityImplementation);
+            const pickChallengeImplementation = sinon.stub();
+            pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
+            const pickAnswerStatusFromCapacityImplementation = sinon.stub();
+            pickAnswerStatusService.pickAnswerStatusForCapacity
+              .withArgs(capacity)
+              .returns(pickAnswerStatusFromCapacityImplementation);
 
-              usecases.simulateFlashAssessmentScenario
-                .withArgs({
-                  pickChallenge: pickChallengeImplementation,
-                  locale: 'en',
-                  pickAnswerStatus: pickAnswerStatusFromCapacityImplementation,
-                })
-                .resolves(simulationResults);
-              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
+            usecases.simulateFlashAssessmentScenario
+              .withArgs({
+                pickChallenge: pickChallengeImplementation,
+                locale: 'en',
+                pickAnswerStatus: pickAnswerStatusFromCapacityImplementation,
+              })
+              .resolves(simulationResults);
+            securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
 
-              // when
-              const response = await httpTestServer.request(
-                'POST',
-                '/api/scenario-simulator',
-                {
-                  capacity,
-                },
-                null,
-                { 'accept-language': 'en' },
-              );
+            // when
+            const response = await httpTestServer.request(
+              'POST',
+              '/api/scenario-simulator',
+              {
+                capacity,
+              },
+              null,
+              { 'accept-language': 'en' },
+            );
 
-              // then
-              expect(response.statusCode).to.equal(200);
-              const parsedResult = parseJsonStream(response);
-              expect(parsedResult).to.deep.equal([
-                {
-                  index: 0,
-                  simulationReport: [
-                    {
-                      challengeId: challenge1.id,
-                      errorRate: errorRate1,
-                      capacity: capacity1,
-                      minimumCapability: 0.6190392084062237,
-                      answerStatus: 'ok',
-                      reward: reward1,
-                      difficulty: challenge1.difficulty,
-                      discriminant: challenge1.discriminant,
-                    },
-                  ],
-                },
-              ]);
-            });
+            // then
+            expect(response.statusCode).to.equal(200);
+            const parsedResult = parseJsonStream(response);
+            expect(parsedResult).to.deep.equal([
+              {
+                index: 0,
+                simulationReport: [
+                  {
+                    challengeId: challenge1.id,
+                    errorRate: errorRate1,
+                    capacity: capacity1,
+                    minimumCapability: 0.6190392084062237,
+                    answerStatus: 'ok',
+                    reward: reward1,
+                    difficulty: challenge1.difficulty,
+                    discriminant: challenge1.discriminant,
+                  },
+                ],
+              },
+            ]);
           });
+        });
 
-          context('When the route is called with an initial capacity', function () {
-            it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
-              // given
-              const capacity = -3.1;
+        context('When the route is called with an initial capacity', function () {
+          it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
+            // given
+            const capacity = -3.1;
 
-              const pickChallengeImplementation = sinon.stub();
-              pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
-              const pickAnswerStatusFromCapacityImplementation = sinon.stub();
-              pickAnswerStatusService.pickAnswerStatusForCapacity
-                .withArgs(capacity)
-                .returns(pickAnswerStatusFromCapacityImplementation);
+            const pickChallengeImplementation = sinon.stub();
+            pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
+            const pickAnswerStatusFromCapacityImplementation = sinon.stub();
+            pickAnswerStatusService.pickAnswerStatusForCapacity
+              .withArgs(capacity)
+              .returns(pickAnswerStatusFromCapacityImplementation);
 
-              usecases.simulateFlashAssessmentScenario
-                .withArgs({
-                  pickChallenge: pickChallengeImplementation,
-                  locale: 'en',
-                  pickAnswerStatus: pickAnswerStatusFromCapacityImplementation,
-                  initialCapacity,
-                })
-                .resolves(simulationResults);
-              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
+            usecases.simulateFlashAssessmentScenario
+              .withArgs({
+                pickChallenge: pickChallengeImplementation,
+                locale: 'en',
+                pickAnswerStatus: pickAnswerStatusFromCapacityImplementation,
+                initialCapacity,
+              })
+              .resolves(simulationResults);
+            securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
 
-              // when
-              const response = await httpTestServer.request(
-                'POST',
-                '/api/scenario-simulator',
-                {
-                  capacity,
-                  initialCapacity,
-                },
-                null,
-                { 'accept-language': 'en' },
-              );
+            // when
+            const response = await httpTestServer.request(
+              'POST',
+              '/api/scenario-simulator',
+              {
+                capacity,
+                initialCapacity,
+              },
+              null,
+              { 'accept-language': 'en' },
+            );
 
-              // then
-              expect(response.statusCode).to.equal(200);
-              const parsedResult = parseJsonStream(response);
-              expect(parsedResult).to.deep.equal([
-                {
-                  index: 0,
-                  simulationReport: [
-                    {
-                      challengeId: challenge1.id,
-                      errorRate: errorRate1,
-                      capacity: capacity1,
-                      minimumCapability: 0.6190392084062237,
-                      answerStatus: 'ok',
-                      reward: reward1,
-                      difficulty: challenge1.difficulty,
-                      discriminant: challenge1.discriminant,
-                    },
-                  ],
-                },
-              ]);
-            });
+            // then
+            expect(response.statusCode).to.equal(200);
+            const parsedResult = parseJsonStream(response);
+            expect(parsedResult).to.deep.equal([
+              {
+                index: 0,
+                simulationReport: [
+                  {
+                    challengeId: challenge1.id,
+                    errorRate: errorRate1,
+                    capacity: capacity1,
+                    minimumCapability: 0.6190392084062237,
+                    answerStatus: 'ok',
+                    reward: reward1,
+                    difficulty: challenge1.difficulty,
+                    discriminant: challenge1.discriminant,
+                  },
+                ],
+              },
+            ]);
           });
         });
       });
