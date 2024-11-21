@@ -2,12 +2,12 @@ const { chunk } = lodash;
 
 import lodash from 'lodash';
 
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
+import { withTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { ORGANIZATION_LEARNER_CHUNK_SIZE } from '../../../../shared/infrastructure/constants.js';
 import { OrganizationLearnerParser } from '../../infrastructure/serializers/csv/organization-learner-parser.js';
 
-const importOrganizationLearnersFromSIECLECSVFormat = async function ({
-  organizationId,
+const importOrganizationLearnersFromSIECLECSVFormat = withTransaction(async function ({
+  organizationImportId,
   organizationLearnerRepository,
   organizationImportRepository,
   importStorage,
@@ -16,41 +16,40 @@ const importOrganizationLearnersFromSIECLECSVFormat = async function ({
 }) {
   let organizationImport;
   const errors = [];
-  return DomainTransaction.execute(async () => {
-    try {
-      organizationImport = await organizationImportRepository.getLastByOrganizationId(organizationId);
+  try {
+    organizationImport = await organizationImportRepository.get(organizationImportId);
+    const organizationId = organizationImport.organizationId;
 
-      const parser = await importStorage.getParser(
-        {
-          Parser: OrganizationLearnerParser,
-          filename: organizationImport.filename,
-        },
-        organizationId,
-        i18n,
-      );
-      const result = parser.parse(organizationImport.encoding);
-      const organizationLearnerData = result.learners;
+    const parser = await importStorage.getParser(
+      {
+        Parser: OrganizationLearnerParser,
+        filename: organizationImport.filename,
+      },
+      organizationId,
+      i18n,
+    );
+    const result = parser.parse(organizationImport.encoding);
+    const organizationLearnerData = result.learners;
 
-      const organizationLearnersChunks = chunk(organizationLearnerData, chunkLength);
-      const nationalStudentIdData = organizationLearnerData.map((learner) => learner.nationalStudentId, []);
+    const organizationLearnersChunks = chunk(organizationLearnerData, chunkLength);
+    const nationalStudentIdData = organizationLearnerData.map((learner) => learner.nationalStudentId, []);
 
-      await organizationLearnerRepository.disableAllOrganizationLearnersInOrganization({
-        organizationId,
-        nationalStudentIds: nationalStudentIdData,
-      });
+    await organizationLearnerRepository.disableAllOrganizationLearnersInOrganization({
+      organizationId,
+      nationalStudentIds: nationalStudentIdData,
+    });
 
-      for (const chunk of organizationLearnersChunks) {
-        await organizationLearnerRepository.addOrUpdateOrganizationOfOrganizationLearners(chunk, organizationId);
-      }
-    } catch (error) {
-      errors.push(error);
-      throw error;
-    } finally {
-      organizationImport.process({ errors });
-      await organizationImportRepository.save(organizationImport);
-      await importStorage.deleteFile({ filename: organizationImport.filename });
+    for (const chunk of organizationLearnersChunks) {
+      await organizationLearnerRepository.addOrUpdateOrganizationOfOrganizationLearners(chunk, organizationId);
     }
-  });
-};
+  } catch (error) {
+    errors.push(error);
+    throw error;
+  } finally {
+    organizationImport.process({ errors });
+    await organizationImportRepository.save(organizationImport);
+    await importStorage.deleteFile({ filename: organizationImport.filename });
+  }
+});
 
 export { importOrganizationLearnersFromSIECLECSVFormat };
