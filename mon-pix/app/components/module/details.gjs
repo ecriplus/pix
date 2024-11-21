@@ -161,7 +161,9 @@ export default class ModulixDetails extends Component {
             <h2>{{t "pages.modulix.details.explanationTitle"}}</h2>
           </div>
           <p class="module-details-infos-explanation__text">{{t "pages.modulix.details.explanationText1"}}</p>
-          <p class="module-details-infos-explanation__text">{{t "pages.modulix.details.explanationText2"}}</p>
+          {{#if @module.isBeta}}
+            <p class="module-details-infos-explanation__text">{{t "pages.modulix.details.explanationText2"}}</p>
+          {{/if}}
         </div>
       </div>
     </main>
