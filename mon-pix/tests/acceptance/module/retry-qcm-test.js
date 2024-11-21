@@ -104,6 +104,7 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
     server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
+      isBeta: true,
       grains: [grain],
     });
 

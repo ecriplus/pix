@@ -54,6 +54,7 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
     server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
+      isBeta: true,
       grains: [grain1, grain2],
     });
 
@@ -140,6 +141,7 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
     server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
+      isBeta: true,
       grains: [grain1, grain2],
     });
 

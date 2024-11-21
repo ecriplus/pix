@@ -15,6 +15,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
     const module = server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
+      isBeta: true,
       details: {
         image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
         description:
