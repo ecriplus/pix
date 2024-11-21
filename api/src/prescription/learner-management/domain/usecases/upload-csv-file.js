@@ -1,15 +1,23 @@
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { OrganizationImport } from '../models/OrganizationImport.js';
+import { ValidateCsvOrganizationImportFileJob } from '../models/ValidateCsvOrganizationImportFileJob.js';
 
-const uploadCsvFile = async function ({
+const uploadCsvFile = withTransaction(async function ({
   payload,
   userId,
   organizationId,
+  type,
   i18n,
   organizationImportRepository,
+  validateCsvOrganizationImportFileJobRepository,
   importStorage,
   Parser,
 }) {
-  const organizationImport = OrganizationImport.create({ organizationId, createdBy: userId });
+  const organizationImportInstance = OrganizationImport.create({ organizationId, createdBy: userId });
+  await organizationImportRepository.save(organizationImportInstance);
+
+  const organizationImport = await organizationImportRepository.getLastByOrganizationId(organizationId);
+
   let filename;
   let encoding;
   const errors = [];
@@ -20,6 +28,18 @@ const uploadCsvFile = async function ({
 
     const parserEncoding = await importStorage.getParser({ Parser, filename }, organizationId, i18n);
     encoding = parserEncoding.getFileEncoding();
+
+    if (type) {
+      await validateCsvOrganizationImportFileJobRepository.performAsync(
+        new ValidateCsvOrganizationImportFileJob({
+          organizationImportId: organizationImport.id,
+          type,
+          locale: i18n.getLocale(),
+        }),
+      );
+    }
+
+    return organizationImport.id;
   } catch (error) {
     errors.push(error);
     throw error;
@@ -27,6 +47,6 @@ const uploadCsvFile = async function ({
     organizationImport.upload({ filename, encoding, errors });
     await organizationImportRepository.save(organizationImport);
   }
-};
+});
 
 export { uploadCsvFile };
