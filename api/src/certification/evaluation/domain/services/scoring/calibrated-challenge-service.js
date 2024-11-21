@@ -3,7 +3,7 @@ import differenceBy from 'lodash/differenceBy.js';
 
 const debugScoringForV3Certification = Debug('pix:certif:v3:scoring');
 
-export const findByCertificationCourseIdForScoring = async ({
+export const findByCertificationCourseId = async ({
   certificationCourseId,
   certificationChallengeRepository,
   challengeRepository,
@@ -27,15 +27,13 @@ const _findByCertificationCourseId = async ({
   certificationChallengeRepository,
   challengeRepository,
 }) => {
-  const certificationChallengesForScoring = await certificationChallengeRepository.getByCertificationCourseId({
+  const challengeCalibrations = await certificationChallengeRepository.getByCertificationCourseId({
     certificationCourseId,
   });
 
-  const askedChallenges = await challengeRepository.getMany(
-    certificationChallengesForScoring.map((challengeForScoring) => challengeForScoring.id),
-  );
+  const askedChallenges = await challengeRepository.getMany(challengeCalibrations.map((challenge) => challenge.id));
 
-  _restoreCalibrationValues(certificationChallengesForScoring, askedChallenges);
+  _restoreCalibrationValues(challengeCalibrations, askedChallenges);
 
   const flashCompatibleChallengesNotAskedInCertification = differenceBy(compatibleChallenges, askedChallenges, 'id');
 
@@ -45,13 +43,13 @@ const _findByCertificationCourseId = async ({
     `Challenges after FlashCompatibleChallenges & CandidateAnswers merge count: ${allChallenges.length}`,
   );
 
-  return { allChallenges, askedChallenges, certificationChallengesForScoring };
+  return { allChallenges, askedChallenges, challengeCalibrations };
 };
 
-function _restoreCalibrationValues(certificationChallengesForScoring, askedChallenges) {
-  certificationChallengesForScoring.forEach((certificationChallengeForScoring) => {
-    const askedChallenge = askedChallenges.find(({ id }) => id === certificationChallengeForScoring.id);
-    askedChallenge.discriminant = certificationChallengeForScoring.discriminant;
-    askedChallenge.difficulty = certificationChallengeForScoring.difficulty;
+function _restoreCalibrationValues(challengeCalibrations, askedChallenges) {
+  challengeCalibrations.forEach((certificationChallenge) => {
+    const askedChallenge = askedChallenges.find(({ id }) => id === certificationChallenge.id);
+    askedChallenge.discriminant = certificationChallenge.discriminant;
+    askedChallenge.difficulty = certificationChallenge.difficulty;
   });
 }

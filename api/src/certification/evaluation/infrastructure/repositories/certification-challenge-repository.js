@@ -1,8 +1,8 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { CertificationChallengeForScoring } from '../../../scoring/domain/models/CertificationChallengeForScoring.js';
+import { ChallengeCalibration } from '../../../scoring/domain/read-models/ChallengeCalibration.js';
 
 export const getByCertificationCourseId = async ({ certificationCourseId }) => {
-  const certificationChallengesForScoringDTO = await knex('certification-challenges')
+  const challengeCalibrations = await knex('certification-challenges')
     .select({
       challengeId: 'challengeId',
       discriminant: 'discriminant',
@@ -12,14 +12,14 @@ export const getByCertificationCourseId = async ({ certificationCourseId }) => {
     .where({ courseId: certificationCourseId })
     .orderBy('createdAt', 'asc');
 
-  return _toDomain(certificationChallengesForScoringDTO);
+  return _toDomain(challengeCalibrations);
 };
 
-function _toDomain(certificationChallengesForScoringDTO) {
-  return certificationChallengesForScoringDTO.map((certificationChallengeForScoring) => {
-    return new CertificationChallengeForScoring({
-      ...certificationChallengeForScoring,
-      id: certificationChallengeForScoring.challengeId,
+function _toDomain(challengeCalibrations) {
+  return challengeCalibrations.map((challengeCalibration) => {
+    return new ChallengeCalibration({
+      ...challengeCalibration,
+      id: challengeCalibration.challengeId,
     });
   });
 }

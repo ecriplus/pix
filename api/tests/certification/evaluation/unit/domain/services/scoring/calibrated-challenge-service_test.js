@@ -1,5 +1,4 @@
 import * as calibratedChallengeService from '../../../../../../../src/certification/evaluation/domain/services/scoring/calibrated-challenge-service.js';
-import { CertificationChallengeForScoring } from '../../../../../../../src/certification/scoring/domain/models/CertificationChallengeForScoring.js';
 import { config } from '../../../../../../../src/shared/config.js';
 import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
 import { generateChallengeList } from '../../../../../shared/fixtures/challenges.js';
@@ -7,7 +6,7 @@ import { generateChallengeList } from '../../../../../shared/fixtures/challenges
 const { minimumAnswersRequiredToValidateACertification } = config.v3Certification.scoring;
 
 describe('Certification | Evaluation | Unit | Domain | Services | calibrated challenge service', function () {
-  context('#findByCertificationCourseIdForScoring', function () {
+  context('#findByCertificationCourseId', function () {
     let certificationChallengeRepository, challengeRepository;
 
     let challengeList;
@@ -30,7 +29,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
       };
     });
 
-    it('should return askedChallenges, allChallenges and certificationChallengesForScoring', async function () {
+    it('should return askedChallenges, allChallenges and challengeCalibrations', async function () {
       // given
       const certificationCourseId = 1234;
       const challengesAfterCalibration = challengeList.slice(1);
@@ -41,10 +40,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         difficulty: null,
       });
 
-      const expectedCertificationChallengesForScoring = _buildDataFromAnsweredChallenges(
-        challengeList,
-        challengeRepository,
-      );
+      const expectedChallengeCalibrations = _buildDataFromAnsweredChallenges(challengeList, challengeRepository);
 
       const expectedAskedChallenges = [challengeExcludedFromCalibration, ...challengesAfterCalibration];
 
@@ -52,7 +48,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
 
       certificationChallengeRepository.getByCertificationCourseId
         .withArgs({ certificationCourseId })
-        .resolves(expectedCertificationChallengesForScoring);
+        .resolves(expectedChallengeCalibrations);
 
       challengeRepository.findFlashCompatibleWithoutLocale
         .withArgs({
@@ -61,23 +57,23 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         .returns(challengesAfterCalibration);
 
       // when
-      const { allChallenges, askedChallenges, certificationChallengesForScoring } =
-        await calibratedChallengeService.findByCertificationCourseIdForScoring({
+      const { allChallenges, askedChallenges, challengeCalibrations } =
+        await calibratedChallengeService.findByCertificationCourseId({
           certificationCourseId,
           certificationChallengeRepository,
           challengeRepository,
         });
 
       // then
-      expect(certificationChallengesForScoring).to.deep.equal(expectedCertificationChallengesForScoring);
+      expect(challengeCalibrations).to.deep.equal(expectedChallengeCalibrations);
       expect(askedChallenges).to.deep.equal(expectedAskedChallenges);
       expect(allChallenges).to.deep.equal(challengeList);
     });
   });
 });
 
-const _generateCertificationChallengeForChallenge = ({ discriminant, difficulty, id }) => {
-  return new CertificationChallengeForScoring({
+const _generateChallengeCalibrations = ({ discriminant, difficulty, id }) => {
+  return domainBuilder.certification.scoring.buildChallengeCalibration({
     id,
     discriminant,
     difficulty,
@@ -86,9 +82,7 @@ const _generateCertificationChallengeForChallenge = ({ discriminant, difficulty,
 };
 
 const _buildDataFromAnsweredChallenges = (challengeList, challengeRepository) => {
-  const certificationChallengesForScoring = challengeList.map(_generateCertificationChallengeForChallenge);
-
+  const challengeCalibrations = challengeList.map(_generateChallengeCalibrations);
   challengeRepository.getMany.withArgs(challengeList.map((e) => e.id)).returns(challengeList);
-
-  return certificationChallengesForScoring;
+  return challengeCalibrations;
 };

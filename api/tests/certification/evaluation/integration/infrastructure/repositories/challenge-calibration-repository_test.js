@@ -1,8 +1,8 @@
 import { getByCertificationCourseId } from '../../../../../../src/certification/evaluation/infrastructure/repositories/certification-challenge-repository.js';
-import { CertificationChallengeForScoring } from '../../../../../../src/certification/scoring/domain/models/CertificationChallengeForScoring.js';
+import { ChallengeCalibration } from '../../../../../../src/certification/scoring/domain/read-models/ChallengeCalibration.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
-describe('Integration | Infrastructure | Repository | CertificationChallengeRepository', function () {
+describe('Integration | Infrastructure | Repository | ChallengeCalibrationRepository', function () {
   describe('#getByCertificationCourseId', function () {
     let certificationCourseId;
 
@@ -60,7 +60,7 @@ describe('Integration | Infrastructure | Repository | CertificationChallengeRepo
         const challenges = await getByCertificationCourseId({ certificationCourseId });
 
         expect(challenges).to.have.lengthOf(3);
-        expect(challenges[0]).to.be.instanceOf(CertificationChallengeForScoring);
+        expect(challenges[0]).to.be.instanceOf(ChallengeCalibration);
         expect(challenges[0].id).to.equal('challenge_id_1');
         expect(challenges[1].id).to.equal('challenge_id_2');
         expect(challenges[2].id).to.equal('challenge_id_3');

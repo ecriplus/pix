@@ -128,7 +128,7 @@ async function _handleV3CertificationScoring({
     certificationAssessment,
     emitter,
     locale,
-    dependencies: { findByCertificationCourseIdForScoring: services.findByCertificationCourseIdForScoring },
+    dependencies: { findByCertificationCourseId: services.findByCertificationCourseId },
   });
 
   if (!certificationCourse.isCancelled()) {

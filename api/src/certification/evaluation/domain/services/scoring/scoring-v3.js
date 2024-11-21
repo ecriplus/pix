@@ -58,10 +58,9 @@ export const handleV3CertificationScoring = async ({
   const candidateAnswers = await answerRepository.findByAssessment(assessmentId);
   debugScoringForV3Certification(`CandidateAnswers count: ${candidateAnswers.length}`);
 
-  const { allChallenges, askedChallenges, certificationChallengesForScoring } =
-    await dependencies.findByCertificationCourseIdForScoring({
-      certificationCourseId,
-    });
+  const { allChallenges, askedChallenges, challengeCalibrations } = await dependencies.findByCertificationCourseId({
+    certificationCourseId,
+  });
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
 
   const abortReason = certificationCourse.getAbortReason();
@@ -108,7 +107,7 @@ export const handleV3CertificationScoring = async ({
 
   const certificationAssessmentHistory = CertificationAssessmentHistory.fromChallengesAndAnswers({
     algorithm,
-    challenges: certificationChallengesForScoring,
+    challenges: challengeCalibrations,
     allAnswers: candidateAnswers,
   });
 
