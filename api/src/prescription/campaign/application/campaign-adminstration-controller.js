@@ -51,7 +51,7 @@ const save = async function (request, h, dependencies = { requestResponseUtils, 
 };
 
 const update = async function (request, _, dependencies = { campaignReportSerializer }) {
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
 
   const result = await usecases.updateCampaign({ campaignId, ...request.deserializedPayload });
 
@@ -67,7 +67,7 @@ const swapCampaignCodes = async function (request, h) {
 };
 
 const updateCampaignDetails = async function (request, h) {
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
   const authenticatedUserId = request.auth.credentials.userId;
 
   const campaignDetails = request.deserializedPayload;
@@ -92,14 +92,14 @@ const updateCampaignCode = async function (request, h) {
 
 const archiveCampaign = function (request, h, dependencies = { campaignReportSerializer }) {
   const { userId } = request.auth.credentials;
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
 
   return usecases.archiveCampaign({ userId, campaignId }).then(dependencies.campaignReportSerializer.serialize);
 };
 
 const unarchiveCampaign = function (request, h, dependencies = { campaignReportSerializer }) {
   const { userId } = request.auth.credentials;
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
 
   return usecases.unarchiveCampaign({ userId, campaignId }).then(dependencies.campaignReportSerializer.serialize);
 };
