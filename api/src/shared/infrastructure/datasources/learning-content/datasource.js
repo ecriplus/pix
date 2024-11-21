@@ -30,16 +30,12 @@ const _DatasourcePrototype = {
   },
 
   async list() {
-    const learningContent = await this._getLearningContent();
+    const learningContent = await LearningContentCache.instance.get();
     return learningContent[this.modelName];
   },
 
-  async _getLearningContent() {
-    return await LearningContentCache.instance.get();
-  },
-
   async refreshLearningContentCacheRecord(id, newEntry) {
-    const currentLearningContent = await this._getLearningContent();
+    const currentLearningContent = await LearningContentCache.instance.get();
 
     const patch = this._generatePatch(currentLearningContent, id, newEntry);
     await LearningContentCache.instance.patch(patch);
@@ -69,6 +65,4 @@ const extend = function (props) {
   return result;
 };
 
-const initLearningContent = _DatasourcePrototype._getLearningContent;
-
-export { extend, initLearningContent };
+export { extend };
