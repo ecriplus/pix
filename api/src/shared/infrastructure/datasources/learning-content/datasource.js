@@ -36,8 +36,7 @@ const _DatasourcePrototype = {
   },
 
   async _getLearningContent() {
-    const generator = () => lcms.getLatestRelease();
-    return await LearningContentCache.instance.get(generator);
+    return await LearningContentCache.instance.get();
   },
 
   async refreshLearningContentCacheRecord(id, newEntry) {

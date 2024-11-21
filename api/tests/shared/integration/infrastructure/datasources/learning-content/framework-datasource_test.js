@@ -1,13 +1,12 @@
-import { frameworkDatasource } from '../../../../../../src/shared/infrastructure/datasources/learning-content/framework-datasource.js';
-import { lcms } from '../../../../../../src/shared/infrastructure/lcms.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { frameworkDatasource } from '../../../../../../src/shared/infrastructure/datasources/learning-content/index.js';
+import { expect, mockLearningContent } from '../../../../../test-helper.js';
 
-describe('Unit | Infrastructure | Datasource | Learning Content | FrameworkDatasource', function () {
+describe('Integration | Infrastructure | Datasource | Learning Content | FrameworkDatasource', function () {
   describe('#list', function () {
     it('should return an array of learning content frameworks data objects', async function () {
       // given
       const records = [{ id: 'recFramework0' }, { id: 'recFramework1' }, { id: 'recFramework2' }];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ frameworks: records });
+      mockLearningContent({ frameworks: records });
 
       // when
       const foundFrameworks = await frameworkDatasource.list();
@@ -25,7 +24,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | FrameworkDatas
         { id: 'recFramework1', name: 'Framework1' },
         { id: 'recFramework2', name: 'Framework2' },
       ];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ frameworks });
+      mockLearningContent({ frameworks });
 
       // when
       const foundFramework = await frameworkDatasource.getByName('Framework0');
@@ -41,7 +40,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | FrameworkDatas
           { id: 'recFramework1', name: 'Framework1' },
           { id: 'recFramework2', name: 'Framework2' },
         ];
-        sinon.stub(lcms, 'getLatestRelease').resolves({ frameworks });
+        mockLearningContent({ frameworks });
 
         // when
         const foundFramework = await frameworkDatasource.getByName('Framework3');
@@ -56,7 +55,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | FrameworkDatas
     it('should return an array of learning content frameworks data objects by ids', async function () {
       // given
       const records = [{ id: 'recFramework0' }, { id: 'recFramework1' }, { id: 'recFramework2' }];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ frameworks: records });
+      mockLearningContent({ frameworks: records });
 
       // when
       const foundFrameworks = await frameworkDatasource.findByRecordIds(['recFramework0', 'recFramework2']);
@@ -68,7 +67,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | FrameworkDatas
     it('should return an empty array when no frameworks data objects found for ids', async function () {
       // given
       const records = [{ id: 'recFramework0' }, { id: 'recFramework1' }, { id: 'recFramework2' }];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ frameworks: records });
+      mockLearningContent({ frameworks: records });
 
       // when
       const foundFrameworks = await frameworkDatasource.findByRecordIds(['recFrameworkCOUCOU']);

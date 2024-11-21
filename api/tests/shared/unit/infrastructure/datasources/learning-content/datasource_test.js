@@ -15,24 +15,20 @@ describe('Unit | Infrastructure | Datasource | Learning Content | datasource', f
   });
 
   describe('#get', function () {
+    let learningContent;
+
     beforeEach(function () {
-      learningContentCache.get.callsFake((generator) => generator());
+      learningContent = {
+        learningContentModel: [
+          { id: 'rec1', property: 'value1' },
+          { id: 'rec2', property: 'value2' },
+        ],
+      };
+      learningContentCache.get.resolves(learningContent);
     });
 
     context('(success cases)', function () {
-      let learningContent;
-
-      beforeEach(function () {
-        learningContent = {
-          learningContentModel: [
-            { id: 'rec1', property: 'value1' },
-            { id: 'rec2', property: 'value2' },
-          ],
-        };
-        sinon.stub(lcms, 'getLatestRelease').resolves(learningContent);
-      });
-
-      it('should fetch a single record from LCMS API (or its cached copy)', async function () {
+      it('should fetch a single record from the learning content cache', async function () {
         // when
         const record = await someDatasource.get('rec1');
 
@@ -69,7 +65,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | datasource', f
             { id: 'rec2', property: 'value2' },
           ],
         };
-        sinon.stub(lcms, 'getLatestRelease').resolves(learningContent);
+        learningContentCache.get.resolves(learningContent);
 
         // when
         const promise = someDatasource.get('UNKNOWN_RECORD_ID');
@@ -81,7 +77,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | datasource', f
       it('should dispatch error in case of generic error', function () {
         // given
         const err = new Error();
-        sinon.stub(lcms, 'getLatestRelease').rejects(err);
+        learningContentCache.get.rejects(err);
 
         // when
         const promise = someDatasource.get('rec1');
@@ -96,8 +92,6 @@ describe('Unit | Infrastructure | Datasource | Learning Content | datasource', f
     let learningContent;
 
     beforeEach(function () {
-      learningContentCache.get.callsFake((generator) => generator());
-
       learningContent = {
         learningContentModel: [
           { id: 'rec1', property: 'value1' },
@@ -105,10 +99,10 @@ describe('Unit | Infrastructure | Datasource | Learning Content | datasource', f
           { id: 'rec3', property: 'value3' },
         ],
       };
-      sinon.stub(lcms, 'getLatestRelease').resolves(learningContent);
+      learningContentCache.get.resolves(learningContent);
     });
 
-    it('should fetch all records from LCMS API corresponfing to the ids passed', async function () {
+    it('should fetch all records from Learning content cached corresponding to the ids passed', async function () {
       // when
       const result = await someDatasource.getMany(['rec1', 'rec2']);
 
@@ -132,18 +126,16 @@ describe('Unit | Infrastructure | Datasource | Learning Content | datasource', f
     let learningContent;
 
     beforeEach(function () {
-      learningContentCache.get.callsFake((generator) => generator());
-
       learningContent = {
         learningContentModel: [
           { id: 'rec1', property: 'value1' },
           { id: 'rec2', property: 'value2' },
         ],
       };
-      sinon.stub(lcms, 'getLatestRelease').resolves(learningContent);
+      learningContentCache.get.resolves(learningContent);
     });
 
-    it('should fetch all the records of a given type from LCMS API (or its cached copy)', async function () {
+    it('should fetch all the records of a given type from Learning content cache', async function () {
       // when
       const learningContentModelObjects = await someDatasource.list();
 
@@ -175,7 +167,6 @@ describe('Unit | Infrastructure | Datasource | Learning Content | datasource', f
     let learningContent;
 
     beforeEach(function () {
-      learningContentCache.get.withArgs(someDatasource.modelName).callsFake((generator) => generator());
       sinon.stub(learningContentCache, 'set');
       learningContent = {
         learningContentModel: [

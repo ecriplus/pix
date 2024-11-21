@@ -1,4 +1,5 @@
 import { config } from '../../config.js';
+import { lcms } from '../lcms.js';
 import { DistributedCache } from './DistributedCache.js';
 import { InMemoryCache } from './InMemoryCache.js';
 import { LayeredCache } from './LayeredCache.js';
@@ -17,10 +18,11 @@ export class LearningContentCache {
     } else {
       this._underlyingCache = new InMemoryCache();
     }
+    this.generator = () => lcms.getLatestRelease();
   }
 
-  get(generator) {
-    return this._underlyingCache.get(LEARNING_CONTENT_CACHE_KEY, generator);
+  get() {
+    return this._underlyingCache.get(LEARNING_CONTENT_CACHE_KEY, this.generator);
   }
 
   set(object) {

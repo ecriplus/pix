@@ -1,13 +1,12 @@
-import { areaDatasource } from '../../../../../../src/shared/infrastructure/datasources/learning-content/area-datasource.js';
-import { lcms } from '../../../../../../src/shared/infrastructure/lcms.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { areaDatasource } from '../../../../../../src/shared/infrastructure/datasources/learning-content/index.js';
+import { expect, mockLearningContent } from '../../../../../test-helper.js';
 
-describe('Unit | Infrastructure | Datasource | Learning Content | AreaDatasource', function () {
+describe('Integration | Infrastructure | Datasource | Learning Content | AreaDatasource', function () {
   describe('#findByRecordIds', function () {
     it('should return an array of matching learning content area data objects', async function () {
       // given
       const records = [{ id: 'recArea0' }, { id: 'recArea1' }, { id: 'recArea2' }];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ areas: records });
+      mockLearningContent({ areas: records });
       const expectedAreaIds = ['recArea0', 'recArea1'];
 
       // when
@@ -19,7 +18,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | AreaDatasource
     it('should return an empty array when there are no objects matching the ids', async function () {
       // given
       const records = [{ id: 'recArea0' }];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ areas: records });
+      mockLearningContent({ areas: records });
 
       // when
       const foundAreas = await areaDatasource.findByRecordIds(['some_other_id']);
@@ -46,8 +45,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | AreaDatasource
           competenceIds: ['competenceId_4'],
         },
       ];
-
-      sinon.stub(lcms, 'getLatestRelease').resolves({ areas });
+      mockLearningContent({ areas });
 
       // when
       const foundArea = await areaDatasource.findOneFromCompetenceId('competenceId_1');
@@ -70,7 +68,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | AreaDatasource
           competenceIds: ['competenceId_4'],
         },
       ];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ areas });
+      mockLearningContent({ areas });
 
       // when
       const foundArea = await areaDatasource.findOneFromCompetenceId('competenceId_10');
@@ -87,7 +85,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | AreaDatasource
         { id: 'recArea1', frameworkId: 'framework2' },
         { id: 'recArea2', frameworkId: 'framework1' },
       ];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ areas: records });
+      mockLearningContent({ areas: records });
       const expectedAreaIds = ['recArea0', 'recArea2'];
       const frameworkId = 'framework1';
 
