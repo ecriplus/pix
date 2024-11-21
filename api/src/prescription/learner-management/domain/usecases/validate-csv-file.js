@@ -3,22 +3,21 @@ import { ImportSupOrganizationLearnersJob } from '../models/ImportSupOrganizatio
 
 const validateCsvFile = async function ({
   Parser,
-  organizationId,
+  organizationImportId,
   i18n,
   type,
-  performJob,
   importSupOrganizationLearnersJobRepository,
   organizationImportRepository,
   importStorage,
 }) {
-  const organizationImport = await organizationImportRepository.getLastByOrganizationId(organizationId);
+  const organizationImport = await organizationImportRepository.get(organizationImportId);
   const errors = [];
   let warningsData;
 
   try {
     const parser = await importStorage.getParser(
       { Parser, filename: organizationImport.filename },
-      organizationId,
+      organizationImport.organizationId,
       i18n,
     );
 
@@ -26,7 +25,7 @@ const validateCsvFile = async function ({
 
     warningsData = warnings;
 
-    if (performJob) {
+    if (type) {
       await importSupOrganizationLearnersJobRepository.performAsync(
         new ImportSupOrganizationLearnersJob({
           organizationImportId: organizationImport.id,
