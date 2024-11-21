@@ -43,13 +43,7 @@ const importOrganizationLearnersFromSIECLE = async function (
         Parser: OrganizationLearnerParser,
         organizationImportId,
         i18n: request.i18n,
-      });
-
-      await usecases.importOrganizationLearnersFromSIECLECSVFormat({
-        userId: authenticatedUserId,
-        organizationId,
-        payload: request.payload,
-        i18n: request.i18n,
+        type: 'FREGATA',
       });
     }
   } catch (error) {

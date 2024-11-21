@@ -1,4 +1,5 @@
 import { AggregateImportError } from '../errors.js';
+import { ImportScoCsvOrganizationLearnersJob } from '../models/ImportScoCsvOrganizationLearnersJob.js';
 import { ImportSupOrganizationLearnersJob } from '../models/ImportSupOrganizationLearnersJob.js';
 
 const validateCsvFile = async function ({
@@ -7,6 +8,7 @@ const validateCsvFile = async function ({
   i18n,
   type,
   importSupOrganizationLearnersJobRepository,
+  importScoCsvOrganizationLearnersJobRepository,
   organizationImportRepository,
   importStorage,
 }) {
@@ -26,13 +28,22 @@ const validateCsvFile = async function ({
     warningsData = warnings;
 
     if (type) {
-      await importSupOrganizationLearnersJobRepository.performAsync(
-        new ImportSupOrganizationLearnersJob({
-          organizationImportId: organizationImport.id,
-          type,
-          locale: i18n.getLocale(),
-        }),
-      );
+      if (type === 'FREGATA') {
+        await importScoCsvOrganizationLearnersJobRepository.performAsync(
+          new ImportScoCsvOrganizationLearnersJob({
+            organizationImportId: organizationImport.id,
+            locale: i18n.getLocale(),
+          }),
+        );
+      } else {
+        await importSupOrganizationLearnersJobRepository.performAsync(
+          new ImportSupOrganizationLearnersJob({
+            organizationImportId: organizationImport.id,
+            type,
+            locale: i18n.getLocale(),
+          }),
+        );
+      }
     }
   } catch (error) {
     if (error instanceof AggregateImportError) {

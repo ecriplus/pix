@@ -1,5 +1,6 @@
 import { IMPORT_STATUSES } from '../../../../../../src/prescription/learner-management/domain/constants.js';
 import { AggregateImportError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
+import { ImportScoCsvOrganizationLearnersJob } from '../../../../../../src/prescription/learner-management/domain/models/ImportScoCsvOrganizationLearnersJob.js';
 import { ImportSupOrganizationLearnersJob } from '../../../../../../src/prescription/learner-management/domain/models/ImportSupOrganizationLearnersJob.js';
 import { OrganizationImport } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImport.js';
 import { validateCsvFile } from '../../../../../../src/prescription/learner-management/domain/usecases/validate-csv-file.js';
@@ -21,7 +22,8 @@ describe('Unit | UseCase | validateCsvFile', function () {
     organizationImport,
     organizationImportRepositoryStub,
     importStorageStub,
-    importSupOrganizationLearnersJobRepositoryStub;
+    importSupOrganizationLearnersJobRepositoryStub,
+    importScoCsvOrganizationLearnersJobRepositoryStub;
 
   beforeEach(function () {
     organizationImportId = Symbol('organizationImportId');
@@ -65,6 +67,10 @@ describe('Unit | UseCase | validateCsvFile', function () {
     importSupOrganizationLearnersJobRepositoryStub = {
       performAsync: sinon.stub(),
     };
+
+    importScoCsvOrganizationLearnersJobRepositoryStub = {
+      performAsync: sinon.stub(),
+    };
   });
 
   context('when there is no errors', function () {
@@ -91,34 +97,73 @@ describe('Unit | UseCase | validateCsvFile', function () {
       expect(organizationImport.errors).to.deep.equal(expectedWarnings);
     });
 
-    it('should perform job when type is detected', async function () {
-      // given
-      const type = Symbol('type');
-      organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
+    describe('performJob', function () {
+      it('should perform sup job when type other than FREGATE is detected', async function () {
+        // given
+        const type = Symbol('type');
+        organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
 
-      importStorageStub.getParser
-        .withArgs({ Parser: SupOrganizationLearnerParser, filename: organizationImport.filename }, organizationId, i18n)
-        .resolves(SupOrganizationLearnerParser.buildParser(csvContent, organizationId, i18n));
+        importStorageStub.getParser
+          .withArgs(
+            { Parser: SupOrganizationLearnerParser, filename: organizationImport.filename },
+            organizationId,
+            i18n,
+          )
+          .resolves(SupOrganizationLearnerParser.buildParser(csvContent, organizationId, i18n));
 
-      // when
-      await validateCsvFile({
-        Parser: SupOrganizationLearnerParser,
-        type,
-        organizationImportId,
-        importSupOrganizationLearnersJobRepository: importSupOrganizationLearnersJobRepositoryStub,
-        i18n,
-        organizationImportRepository: organizationImportRepositoryStub,
-        importStorage: importStorageStub,
+        // when
+        await validateCsvFile({
+          Parser: SupOrganizationLearnerParser,
+          type,
+          organizationImportId,
+          importSupOrganizationLearnersJobRepository: importSupOrganizationLearnersJobRepositoryStub,
+          i18n,
+          organizationImportRepository: organizationImportRepositoryStub,
+          importStorage: importStorageStub,
+        });
+
+        // then
+        expect(importSupOrganizationLearnersJobRepositoryStub.performAsync).to.have.been.calledOnceWithExactly(
+          new ImportSupOrganizationLearnersJob({
+            type,
+            locale: 'fr',
+            organizationImportId,
+          }),
+        );
       });
 
-      // then
-      expect(importSupOrganizationLearnersJobRepositoryStub.performAsync).to.have.been.calledOnceWithExactly(
-        new ImportSupOrganizationLearnersJob({
+      it('should perform sco csv job when type is detected', async function () {
+        // given
+        const type = 'FREGATA';
+        organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
+
+        importStorageStub.getParser
+          .withArgs(
+            { Parser: SupOrganizationLearnerParser, filename: organizationImport.filename },
+            organizationId,
+            i18n,
+          )
+          .resolves(SupOrganizationLearnerParser.buildParser(csvContent, organizationId, i18n));
+
+        // when
+        await validateCsvFile({
+          Parser: SupOrganizationLearnerParser,
           type,
-          locale: 'fr',
           organizationImportId,
-        }),
-      );
+          importScoCsvOrganizationLearnersJobRepository: importScoCsvOrganizationLearnersJobRepositoryStub,
+          i18n,
+          organizationImportRepository: organizationImportRepositoryStub,
+          importStorage: importStorageStub,
+        });
+
+        // then
+        expect(importScoCsvOrganizationLearnersJobRepositoryStub.performAsync).to.have.been.calledOnceWithExactly(
+          new ImportScoCsvOrganizationLearnersJob({
+            locale: 'fr',
+            organizationImportId,
+          }),
+        );
+      });
     });
   });
 

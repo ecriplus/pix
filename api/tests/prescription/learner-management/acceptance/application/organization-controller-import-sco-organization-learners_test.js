@@ -96,16 +96,6 @@ describe('Acceptance | Application | organization-controller-import-sco-organiza
           // then
           expect(response.statusCode).to.equal(204);
         });
-
-        it('should create all organizationLearners', async function () {
-          // when
-          await server.inject(options);
-
-          // then
-          const organizationLearners = await knex('organization-learners').where({ organizationId });
-          expect(organizationLearners).to.have.lengthOf(2);
-          expect(_.map(organizationLearners, 'firstName')).to.have.members(['Beatrix', 'O-Ren']);
-        });
       });
 
       context('SCO : when no organization learner has been imported yet', function () {
@@ -126,17 +116,6 @@ describe('Acceptance | Application | organization-controller-import-sco-organiza
 
           // then
           expect(response.statusCode).to.equal(204);
-        });
-
-        it('should create all organizationLearners', async function () {
-          // when
-          await server.inject(options);
-
-          // then
-          const organizationLearners = await knex('organization-learners').where({ organizationId });
-          expect(organizationLearners).to.have.lengthOf(2);
-          expect(_.map(organizationLearners, 'firstName')).to.have.members(['Beatrix', 'O-Ren']);
-          expect(_.map(organizationLearners, 'sex')).to.have.members(['F', 'M']);
         });
       });
 

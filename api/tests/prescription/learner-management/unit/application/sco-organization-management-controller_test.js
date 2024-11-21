@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import { eventBus } from '../../../../../lib/domain/events/index.js';
 import { scoOrganizationManagementController } from '../../../../../src/prescription/learner-management/application/sco-organization-management-controller.js';
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
+import { OrganizationLearnerParser } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-parser.js';
 import { ApplicationTransaction } from '../../../../../src/prescription/shared/infrastructure/ApplicationTransaction.js';
 import { FileValidationError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, expect, hFake, sinon } from '../../../../test-helper.js';
@@ -28,7 +29,6 @@ describe('Unit | Application | Organizations | organization-controller', functio
       sinon.stub(usecases, 'uploadSiecleFile');
       sinon.stub(usecases, 'uploadCsvFile');
       sinon.stub(usecases, 'validateCsvFile');
-      sinon.stub(usecases, 'importOrganizationLearnersFromSIECLECSVFormat');
       sinon.stub(eventBus, 'publish');
       sinon.stub(ApplicationTransaction, 'execute');
       sinon.stub(ApplicationTransaction, 'getTransactionAsDomainTransaction');
@@ -113,9 +113,10 @@ describe('Unit | Application | Organizations | organization-controller', functio
       expect(error).to.be.deep.equal(uploadedError);
     });
 
-    it('should call the usecase to import organizationLearners csv', async function () {
+    it('should call the usecase uploadCsvFile to import organizationLearners csv', async function () {
       // given
       const userId = 1;
+      const organizationImportId = Symbol('organizationImportId');
       request.auth = { credentials: { userId } };
       request.query.format = 'csv';
       const i18n = Symbol('i18n');
@@ -123,16 +124,24 @@ describe('Unit | Application | Organizations | organization-controller', functio
       hFake.request = {
         path: '/api/organizations/145/sco-organization-learners/import-siecle',
       };
-
+      usecases.uploadCsvFile.resolves(organizationImportId);
       // when
       await scoOrganizationManagementController.importOrganizationLearnersFromSIECLE(request, hFake, dependencies);
 
       // then
-      expect(usecases.importOrganizationLearnersFromSIECLECSVFormat).to.have.been.calledWithExactly({
+      expect(usecases.uploadCsvFile).to.have.been.calledWithExactly({
+        Parser: OrganizationLearnerParser,
         userId,
         organizationId,
         payload,
         i18n,
+      });
+
+      expect(usecases.validateCsvFile).to.have.been.calledWithExactly({
+        Parser: OrganizationLearnerParser,
+        i18n,
+        organizationImportId,
+        type: 'FREGATA',
       });
     });
     context('when file format is not supported', function () {
