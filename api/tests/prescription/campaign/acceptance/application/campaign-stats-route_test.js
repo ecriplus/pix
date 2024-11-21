@@ -14,7 +14,7 @@ describe('Acceptance | API | Campaign Stats Route', function () {
     server = await createServer();
   });
 
-  describe('GET /api/campaigns/{id}/stats/participations-by-stage', function () {
+  describe('GET /api/campaigns/{campaignId}/stats/participations-by-stage', function () {
     it('should return the campaign by id', async function () {
       // given
       const learningContentObjects = learningContentBuilder.fromAreas([
@@ -101,7 +101,7 @@ describe('Acceptance | API | Campaign Stats Route', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}/stats/participations-by-status', function () {
+  describe('GET /api/campaigns/{campaignId}/stats/participations-by-status', function () {
     it('should return participations counts by status for the campaign', async function () {
       // given
       const campaign = databaseBuilder.factory.buildCampaign();
@@ -140,7 +140,7 @@ describe('Acceptance | API | Campaign Stats Route', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}/stats/participations-by-day', function () {
+  describe('GET /api/campaigns/{campaignId}/stats/participations-by-day', function () {
     it('should return the activity by day', async function () {
       // given
       const campaign = databaseBuilder.factory.buildCampaign();
@@ -168,7 +168,7 @@ describe('Acceptance | API | Campaign Stats Route', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}/stats/participations-by-mastery-rate', function () {
+  describe('GET /api/campaigns/{campaignId}/stats/participations-by-mastery-rate', function () {
     it('should return the mastery rate distribution', async function () {
       const { id: userId } = databaseBuilder.factory.buildUser();
       const { id: organizationId } = databaseBuilder.factory.buildOrganization();

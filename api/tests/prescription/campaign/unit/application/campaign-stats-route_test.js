@@ -3,7 +3,7 @@ import * as moduleUnderTest from '../../../../../src/prescription/campaign/appli
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | Router | campaign-router ', function () {
-  describe('GET /api/campaigns/{id}/stats/participations-by-stage', function () {
+  describe('GET /api/campaigns/{campaignId}/stats/participations-by-stage', function () {
     it('should return 200', async function () {
       // given
       sinon
@@ -32,7 +32,7 @@ describe('Unit | Application | Router | campaign-router ', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}/stats/participations-by-status', function () {
+  describe('GET /api/campaigns/{campaignId}/stats/participations-by-status', function () {
     it('should return 200', async function () {
       sinon
         .stub(campaignStatsController, 'getParticipationsByStatus')
@@ -58,7 +58,7 @@ describe('Unit | Application | Router | campaign-router ', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}/stats/participations-by-mastery-rate', function () {
+  describe('GET /api/campaigns/{campaignId}/stats/participations-by-mastery-rate', function () {
     beforeEach(function () {
       sinon
         .stub(campaignStatsController, 'getParticipationsCountByMasteryRate')

@@ -7,10 +7,10 @@ const register = async function (server) {
   server.route([
     {
       method: 'GET',
-      path: '/api/campaigns/{id}/stats/participations-by-stage',
+      path: '/api/campaigns/{campaignId}/stats/participations-by-stage',
       config: {
         validate: {
-          params: Joi.object({ id: identifiersType.campaignId }),
+          params: Joi.object({ campaignId: identifiersType.campaignId }),
         },
         handler: campaignStatsController.getParticipationsByStage,
         notes: [
@@ -22,10 +22,10 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/campaigns/{id}/stats/participations-by-status',
+      path: '/api/campaigns/{campaignId}/stats/participations-by-status',
       config: {
         validate: {
-          params: Joi.object({ id: identifiersType.campaignId }),
+          params: Joi.object({ campaignId: identifiersType.campaignId }),
         },
         handler: campaignStatsController.getParticipationsByStatus,
         notes: [
@@ -37,10 +37,10 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/campaigns/{id}/stats/participations-by-day',
+      path: '/api/campaigns/{campaignId}/stats/participations-by-day',
       config: {
         validate: {
-          params: Joi.object({ id: identifiersType.campaignId }),
+          params: Joi.object({ campaignId: identifiersType.campaignId }),
         },
         handler: campaignStatsController.getParticipationsByDay,
         notes: [
@@ -52,10 +52,10 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/campaigns/{id}/stats/participations-by-mastery-rate',
+      path: '/api/campaigns/{campaignId}/stats/participations-by-mastery-rate',
       config: {
         validate: {
-          params: Joi.object({ id: identifiersType.campaignId }),
+          params: Joi.object({ campaignId: identifiersType.campaignId }),
         },
         handler: campaignStatsController.getParticipationsCountByMasteryRate,
         notes: [
