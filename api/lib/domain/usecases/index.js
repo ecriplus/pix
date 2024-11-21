@@ -7,7 +7,6 @@ import * as complementaryCertificationRepository from '../../../src/certificatio
 import * as sessionCodeService from '../../../src/certification/enrolment/domain/services/session-code-service.js';
 import { getCenterForAdmin } from '../../../src/certification/enrolment/domain/usecases/get-center-for-admin.js';
 import * as centerRepository from '../../../src/certification/enrolment/infrastructure/repositories/center-repository.js';
-import * as certificationCandidateRepository from '../../../src/certification/enrolment/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCpfCityRepository from '../../../src/certification/enrolment/infrastructure/repositories/certification-cpf-city-repository.js';
 import * as sessionEnrolmentRepository from '../../../src/certification/enrolment/infrastructure/repositories/session-repository.js';
 import * as certificationEvaluationCandidateRepository from '../../../src/certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
@@ -23,6 +22,7 @@ import * as supervisorAccessRepository from '../../../src/certification/session-
 import * as certificationBadgesService from '../../../src/certification/shared/domain/services/certification-badges-service.js';
 import * as scoringCertificationService from '../../../src/certification/shared/domain/services/scoring-certification-service.js';
 import * as certificationAssessmentRepository from '../../../src/certification/shared/infrastructure/repositories/certification-assessment-repository.js';
+import * as certificationCandidateRepository from '../../../src/certification/shared/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCenterRepository from '../../../src/certification/shared/infrastructure/repositories/certification-center-repository.js';
 import * as certificationChallengeLiveAlertRepository from '../../../src/certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 import * as certificationChallengeRepository from '../../../src/certification/shared/infrastructure/repositories/certification-challenge-repository.js';

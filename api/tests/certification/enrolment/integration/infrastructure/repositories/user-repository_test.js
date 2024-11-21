@@ -1,4 +1,4 @@
-import * as userRepository from '../../../../../../src/certification/enrolment/infrastructure/repositories/user-repository.js';
+import * as userRepository from '../../../../../../src/certification/shared/infrastructure/repositories/user-repository.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | certification | enrolment | User', function () {

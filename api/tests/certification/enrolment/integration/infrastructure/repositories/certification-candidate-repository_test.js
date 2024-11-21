@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import * as certificationCandidateRepository from '../../../../../../src/certification/enrolment/infrastructure/repositories/certification-candidate-repository.js';
 import { ComplementaryCertification } from '../../../../../../src/certification/session-management/domain/models/ComplementaryCertification.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import * as certificationCandidateRepository from '../../../../../../src/certification/shared/infrastructure/repositories/certification-candidate-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 

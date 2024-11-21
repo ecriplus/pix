@@ -21,7 +21,7 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {import('../../infrastructure/repositories/index.js').ComplementaryCertificationRepository} ComplementaryCertificationRepository
  * @typedef {import('../../infrastructure/repositories/index.js').ComplementaryCertificationBadgeWithOffsetVersionRepository} ComplementaryCertificationBadgeWithOffsetVersionRepository
  * @typedef {import('../../infrastructure/repositories/index.js').SessionRepository} SessionRepository
- * @typedef {import('../../infrastructure/repositories/index.js').CertificationCandidateRepository} CertificationCandidateRepository
+ * @typedef {import('../../../../shared/infrastructure/repositories/index.js').CertificationCandidateRepository} CertificationCandidateRepository
  * @typedef {import('../../../session-management/infrastructure/repositories/index.js').CertificationCandidateForSupervisingRepository} CertificationCandidateForSupervisingRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCpfCityRepository} CertificationCpfCityRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCpfCountryRepository} CertificationCpfCountryRepository
@@ -32,7 +32,7 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {import('../../infrastructure/repositories/index.js').CountryRepository} CountryRepository
  * @typedef {import('../../infrastructure/repositories/index.js').ScoCertificationCandidateRepository} ScoCertificationCandidateRepository
  * @typedef {import('../../infrastructure/repositories/index.js').OrganizationLearnerRepository} OrganizationLearnerRepository
- * @typedef {import('../../infrastructure/repositories/index.js').UserRepository} UserRepository
+ * @typedef {import('../../../../shared/infrastructure/repositories/index.js').UserRepository} UserRepository
  * @typedef {import('../../../shared/domain/validators/session-validator.js')} SessionValidator
  * @typedef {import('../../../shared/domain/services/certification-cpf-service.js')} CertificationCpfService
  * @typedef {import('../../infrastructure/utils/pdf/attendance-sheet-pdf.js')} AttendanceSheetPdfUtils

@@ -33,7 +33,7 @@ const { features } = config;
  * @param {Object} params
  * @param {SessionRepository} params.sessionRepository
  * @param {AssessmentRepository} params.assessmentRepository
- * @param {CertificationCandidateRepository} params.enrolmentCertificationCandidateRepository
+ * @param {CertificationCandidateRepository} params.sharedCertificationCandidateRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {UserRepository} params.userRepository
  * @param {PlacementProfileService} params.placementProfileService
@@ -48,7 +48,7 @@ const retrieveLastOrCreateCertificationCourse = async function ({
   userId,
   locale,
   assessmentRepository,
-  enrolmentCertificationCandidateRepository,
+  sharedCertificationCandidateRepository,
   certificationCourseRepository,
   sessionRepository,
   certificationCenterRepository,
@@ -64,7 +64,7 @@ const retrieveLastOrCreateCertificationCourse = async function ({
   _validateSessionAccess(session, accessCode);
   _validateSessionIsActive(session);
 
-  const certificationCandidate = await enrolmentCertificationCandidateRepository.getBySessionIdAndUserId({
+  const certificationCandidate = await sharedCertificationCandidateRepository.getBySessionIdAndUserId({
     userId,
     sessionId,
   });
@@ -81,7 +81,7 @@ const retrieveLastOrCreateCertificationCourse = async function ({
 
   await _blockCandidateFromRestartingWithoutExplicitValidation(
     certificationCandidate,
-    enrolmentCertificationCandidateRepository,
+    sharedCertificationCandidateRepository,
   );
 
   if (existingCertificationCourse) {
@@ -164,10 +164,10 @@ function _validateCandidateIsAuthorizedToStart(certificationCandidate, existingC
 
 async function _blockCandidateFromRestartingWithoutExplicitValidation(
   certificationCandidate,
-  enrolmentCertificationCandidateRepository,
+  sharedCertificationCandidateRepository,
 ) {
   certificationCandidate.authorizedToStart = false;
-  await enrolmentCertificationCandidateRepository.update(certificationCandidate);
+  await sharedCertificationCandidateRepository.update(certificationCandidate);
 }
 
 /**
