@@ -2,6 +2,7 @@
   "id": "65b761ab-3ebd-44a9-84b7-8b5e151aee76",
   "slug": "distinguer-vrai-faux-sur-internet",
   "title": "Les informations sur internet : distinguer le vrai du faux",
+  "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "Sur internet, de nombreuses informations circulent. Certaines sont vraies, d'autres sont fausses. Dans ce module, vous allez découvrir une méthode pour analyser l'information et aiguiser votre esprit critique !",

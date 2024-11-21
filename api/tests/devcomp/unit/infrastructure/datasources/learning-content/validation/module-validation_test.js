@@ -219,6 +219,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
         slug: 'didacticiel-modulix',
         title: '<h1>Didacticiel Modulix</h1>',
+        isBeta: true,
         details: {
           image: 'https://images.pix.fr/modulix/placeholder-details.svg',
           description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',

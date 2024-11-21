@@ -32,6 +32,7 @@ export class ModuleFactory {
         id: moduleData.id,
         slug: moduleData.slug,
         title: moduleData.title,
+        isBeta: moduleData.isBeta,
         transitionTexts: moduleData.transitionTexts?.map((transitionText) => new TransitionText(transitionText)) ?? [],
         details: new Details(moduleData.details),
         grains: moduleData.grains.map((grain) => {

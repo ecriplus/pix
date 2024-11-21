@@ -48,6 +48,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         id: 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
         slug: existingModuleSlug,
         title: 'Bien écrire son adresse mail',
+        isBeta: true,
         details: {
           image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
           description:
