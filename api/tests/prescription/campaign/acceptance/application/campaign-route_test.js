@@ -64,7 +64,7 @@ describe('Acceptance | API | Campaign Route', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}/analyses', function () {
+  describe('GET /api/campaigns/{campaignId}/analyses', function () {
     let userId, organization, campaign;
 
     describe('skill Ids provide by the campaign', function () {
