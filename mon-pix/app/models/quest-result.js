@@ -4,4 +4,5 @@ export default class QuestResult extends Model {
   // attributes
   @attr obtained;
   @attr reward;
+  @attr('number') profileRewardId;
 }
