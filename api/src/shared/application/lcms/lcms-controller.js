@@ -19,7 +19,7 @@ const createRelease = async function (request, h) {
 const refreshCacheEntries = async function (request, h) {
   const { userId } = request.auth.credentials;
 
-  await usecases.refreshLearningContentCache({ userId });
+  await usecases.scheduleRefreshLearningContentCacheJob({ userId });
   return h.response({}).code(202);
 };
 

@@ -1,6 +1,5 @@
 import { LcmsRefreshCacheJob } from '../models/LcmsRefreshCacheJob.js';
 
-const refreshLearningContentCache = async function ({ userId, lcmsRefreshCacheJobRepository }) {
+export async function scheduleRefreshLearningContentCacheJob({ userId, lcmsRefreshCacheJobRepository }) {
   await lcmsRefreshCacheJobRepository.performAsync(new LcmsRefreshCacheJob({ userId }));
-};
-export { refreshLearningContentCache };
+}

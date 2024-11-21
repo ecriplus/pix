@@ -96,7 +96,7 @@ describe('Unit | Controller | lcms-controller', function () {
     context('nominal case', function () {
       it('should reply with http status 202', async function () {
         // given
-        sinon.stub(usecases, 'refreshLearningContentCache').resolves();
+        sinon.stub(usecases, 'scheduleRefreshLearningContentCacheJob').resolves();
 
         // when
         const response = await lcmsController.refreshCacheEntries(
@@ -111,8 +111,8 @@ describe('Unit | Controller | lcms-controller', function () {
         );
 
         // then
-        expect(usecases.refreshLearningContentCache).to.have.been.calledOnce;
-        expect(usecases.refreshLearningContentCache).to.have.been.calledWithExactly({ userId: 123 });
+        expect(usecases.scheduleRefreshLearningContentCacheJob).to.have.been.calledOnce;
+        expect(usecases.scheduleRefreshLearningContentCacheJob).to.have.been.calledWithExactly({ userId: 123 });
         expect(response.statusCode).to.equal(202);
       });
     });
