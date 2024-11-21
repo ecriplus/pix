@@ -12,7 +12,7 @@ const KNOWLEDGE_ELEMENTS_SOURCES = { DIRECT: 'direct', INFERRED: 'inferred' };
 
 export default class SmartRandomSimulator extends Controller {
   @service session;
-  @service notifications;
+  @service pixToast;
 
   // Simulator parameters
   @tracked skills = [];
@@ -76,15 +76,15 @@ export default class SmartRandomSimulator extends Controller {
       const responseBody = await apiResponse.json();
       this.skills = responseBody.skills;
       this.challenges = responseBody.challenges;
-      this.notifications.success(
-        `Données chargées: ${this.skills.length} compétences et ${this.challenges.length} challenges`,
-      );
+      this.pixToast.sendSuccessNotification({
+        message: `Données chargées: ${this.skills.length} compétences et ${this.challenges.length} challenges`,
+      });
       return;
     }
 
     const response = await apiResponse.json();
     response.errors.map(({ detail }) => {
-      this.notifications.error(detail);
+      this.pixToast.sendErrorNotification({ message: detail });
     });
   }
 
@@ -160,7 +160,7 @@ export default class SmartRandomSimulator extends Controller {
       default: {
         const response = await apiResponse.json();
         return response.errors.map(({ detail }) => {
-          this.notifications.error(detail);
+          this.pixToast.sendErrorNotification({ message: detail });
         });
       }
     }

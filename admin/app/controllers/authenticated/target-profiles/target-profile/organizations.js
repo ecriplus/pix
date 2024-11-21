@@ -11,7 +11,7 @@ export default class TargetProfileOrganizationsController extends Controller {
   queryParams = ['pageNumber', 'pageSize', 'id', 'name', 'type', 'externalId'];
   DEBOUNCE_MS = config.pagination.debounce;
   @service router;
-  @service notifications;
+  @service pixToast;
   @service store;
 
   @tracked pageNumber = DEFAULT_PAGE_NUMBER;
@@ -48,11 +48,11 @@ export default class TargetProfileOrganizationsController extends Controller {
 
       if (hasDetachedOrganizations) {
         const message = 'Organisation(s) détachée(s) avec succès : ' + detachedOrganizationIds.join(', ');
-        await this.notifications.success(message, { htmlContent: true });
+        await this.pixToast.sendSuccessNotification({ message });
         this.router.transitionTo('authenticated.target-profiles.target-profile.organizations');
       }
     } catch (responseError) {
-      return this.notifications.error('Une erreur est survenue.');
+      return this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }
 }

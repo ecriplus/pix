@@ -13,12 +13,11 @@ module('Integration | Component | administration/update-campaign-code', function
   let store, notificationService, adapter, updateAdapterStub;
 
   hooks.beforeEach(function () {
-    notificationService = this.owner.lookup('service:notifications');
+    notificationService = this.owner.lookup('service:pixToast');
     store = this.owner.lookup('service:store');
 
-    sinon.stub(notificationService, 'success');
-    sinon.stub(notificationService, 'clearAll');
-    sinon.stub(notificationService, 'error');
+    sinon.stub(notificationService, 'sendSuccessNotification');
+    sinon.stub(notificationService, 'sendErrorNotification');
 
     adapter = store.adapterFor('update-campaign-code');
     updateAdapterStub = sinon.stub(adapter, 'updateCampaignCode');
@@ -52,11 +51,10 @@ module('Integration | Component | administration/update-campaign-code', function
     // then
     assert.true(updateAdapterStub.calledOnce);
     assert.true(
-      notificationService.success.calledOnceWithExactly(
-        t('components.administration.update-campaign-code.notifications.success'),
-      ),
+      notificationService.sendSuccessNotification.calledOnceWithExactly({
+        message: t('components.administration.update-campaign-code.notifications.success'),
+      }),
     );
-    assert.true(notificationService.error.notCalled);
-    assert.true(notificationService.clearAll.called);
+    assert.true(notificationService.sendErrorNotification.notCalled);
   });
 });

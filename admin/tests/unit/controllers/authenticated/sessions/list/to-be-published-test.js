@@ -30,10 +30,10 @@ module('Unit | Controller | authenticated/sessions/list/to-be-published', functi
       const errorMock = sinon.stub();
 
       class NotificationsStub extends Service {
-        error = errorMock;
+        sendErrorNotification = errorMock;
       }
 
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
       const controller = this.owner.lookup('controller:authenticated.sessions.list.to-be-published');
       const publishError = new Error('someError');
       const publishSessionStub = sinon.stub().rejects(publishError);
@@ -45,7 +45,7 @@ module('Unit | Controller | authenticated/sessions/list/to-be-published', functi
       await controller.send('publishSession', { id: 1 });
 
       // then
-      sinon.assert.calledWith(errorMock, publishError);
+      sinon.assert.calledWith(errorMock, { message: publishError });
       assert.ok(true);
     });
   });
@@ -82,10 +82,10 @@ module('Unit | Controller | authenticated/sessions/list/to-be-published', functi
       const successMock = sinon.stub();
 
       class NotificationsStub extends Service {
-        success = successMock;
+        sendSuccessNotification = successMock;
       }
 
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
       const store = this.owner.lookup('service:store');
       const controller = this.owner.lookup('controller:authenticated.sessions.list.to-be-published');
       const unloadRecord = sinon.stub().resolves();
@@ -111,10 +111,10 @@ module('Unit | Controller | authenticated/sessions/list/to-be-published', functi
       const errorMock = sinon.stub();
 
       class NotificationsStub extends Service {
-        error = errorMock;
+        sendErrorNotification = errorMock;
       }
 
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
       const store = this.owner.lookup('service:store');
       const controller = this.owner.lookup('controller:authenticated.sessions.list.to-be-published');
 
@@ -137,10 +137,9 @@ module('Unit | Controller | authenticated/sessions/list/to-be-published', functi
 
       // then
       sinon.assert.calledWith(send, 'refreshModel');
-      sinon.assert.calledWith(
-        errorMock,
-        `Une ou plusieurs erreurs se sont produites, veuillez conserver la référence suivante pour investigation auprès de l'équipe technique : ${response.errors[0].detail}`,
-      );
+      sinon.assert.calledWith(errorMock, {
+        message: `Une ou plusieurs erreurs se sont produites, veuillez conserver la référence suivante pour investigation auprès de l'équipe technique : ${response.errors[0].detail}`,
+      });
       assert.ok(true);
     });
   });

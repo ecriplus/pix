@@ -18,9 +18,9 @@ module('Unit | Component | authenticated/certifications/flash-algorithm-configur
 
       const notificationSuccessStub = sinon.stub();
       class NotificationsStub extends Service {
-        success = notificationSuccessStub;
+        sendSuccessNotification = notificationSuccessStub;
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
 
       const event = {
         preventDefault: () => {},
@@ -44,7 +44,7 @@ module('Unit | Component | authenticated/certifications/flash-algorithm-configur
 
       // then
       sinon.assert.calledWithExactly(createRecordStub, flashAlgorithmConfiguration);
-      sinon.assert.calledWith(notificationSuccessStub, 'La configuration a été créée');
+      sinon.assert.calledWith(notificationSuccessStub, { message: 'La configuration a été créée' });
       assert.ok(true);
     });
 
@@ -62,9 +62,9 @@ module('Unit | Component | authenticated/certifications/flash-algorithm-configur
 
         const notificationErrorStub = sinon.stub();
         class NotificationsStub extends Service {
-          error = notificationErrorStub;
+          sendErrorNotification = notificationErrorStub;
         }
-        this.owner.register('service:notifications', NotificationsStub);
+        this.owner.register('service:pixToast', NotificationsStub);
 
         const event = {
           preventDefault: () => {},
@@ -87,7 +87,7 @@ module('Unit | Component | authenticated/certifications/flash-algorithm-configur
         await component.onCreateFlashAlgorithmConfiguration(event);
 
         // then
-        sinon.assert.calledWith(notificationErrorStub, "La configuration n'a pu être créée");
+        sinon.assert.calledWith(notificationErrorStub, { message: "La configuration n'a pu être créée" });
         assert.ok(true);
       });
     });

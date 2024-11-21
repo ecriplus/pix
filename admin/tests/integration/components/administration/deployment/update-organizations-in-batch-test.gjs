@@ -1,5 +1,5 @@
-import NotificationContainer from '@1024pix/ember-cli-notifications/components/notification-container';
 import { render } from '@1024pix/ember-testing-library';
+import PixToastContainer from '@1024pix/pix-ui/components/pix-toast-container';
 import Service from '@ember/service';
 import { triggerEvent } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
@@ -34,7 +34,7 @@ module('Integration | Component |  administration/update-organizations-in-batch'
       window.fetch.resolves(fetchResponse({ status: 204 }));
 
       // when
-      const screen = await render(<template><UpdateOrganizationsInBatch /><NotificationContainer /></template>);
+      const screen = await render(<template><UpdateOrganizationsInBatch /><PixToastContainer /></template>);
       const input = await screen.getByLabelText(
         t('components.administration.update-organizations-in-batch.upload-button'),
       );
@@ -60,7 +60,7 @@ module('Integration | Component |  administration/update-organizations-in-batch'
       );
 
       // when
-      const screen = await render(<template><UpdateOrganizationsInBatch /><NotificationContainer /></template>);
+      const screen = await render(<template><UpdateOrganizationsInBatch /><PixToastContainer /></template>);
       const input = await screen.findByLabelText(
         t('components.administration.update-organizations-in-batch.upload-button'),
       );
@@ -93,7 +93,7 @@ module('Integration | Component |  administration/update-organizations-in-batch'
       );
 
       // when
-      const screen = await render(<template><UpdateOrganizationsInBatch /><NotificationContainer /></template>);
+      const screen = await render(<template><UpdateOrganizationsInBatch /><PixToastContainer /></template>);
       const input = await screen.findByLabelText(
         t('components.administration.update-organizations-in-batch.upload-button'),
       );
@@ -127,7 +127,7 @@ module('Integration | Component |  administration/update-organizations-in-batch'
       );
 
       // when
-      const screen = await render(<template><UpdateOrganizationsInBatch /><NotificationContainer /></template>);
+      const screen = await render(<template><UpdateOrganizationsInBatch /><PixToastContainer /></template>);
       const input = await screen.findByLabelText(
         t('components.administration.update-organizations-in-batch.upload-button'),
       );
@@ -156,7 +156,7 @@ module('Integration | Component |  administration/update-organizations-in-batch'
       );
 
       // when
-      const screen = await render(<template><UpdateOrganizationsInBatch /><NotificationContainer /></template>);
+      const screen = await render(<template><UpdateOrganizationsInBatch /><PixToastContainer /></template>);
       const input = await screen.findByLabelText(
         t('components.administration.update-organizations-in-batch.upload-button'),
       );

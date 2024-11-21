@@ -9,14 +9,12 @@ import AdministrationBlockLayout from '../block-layout';
 
 export default class OrganizationTagsImport extends Component {
   @service intl;
-  @service notifications;
+  @service pixToast;
   @service session;
   @service errorResponseHandler;
 
   @action
   async importOrganizationTags(files) {
-    this.notifications.clearAll();
-
     let response;
     try {
       const fileContent = files[0];
@@ -32,28 +30,28 @@ export default class OrganizationTagsImport extends Component {
         body: fileContent,
       });
       if (response.ok) {
-        this.notifications.success(
-          this.intl.t('components.administration.organization-tags-import.notifications.success'),
-        );
+        this.pixToast.sendSuccessNotification({
+          message: this.intl.t('components.administration.organization-tags-import.notifications.success'),
+        });
         return;
       } else {
         const json = await response.json();
         const error = json.errors[0];
 
         if (error.code === 'TAG_NOT_FOUND') {
-          this.notifications.error(
-            this.intl.t(
+          this.pixToast.sendErrorNotification({
+            message: this.intl.t(
               'components.administration.organization-tags-import.notifications.errors.tag-not-found',
               error.meta,
             ),
-          );
+          });
           return;
         }
 
         this.errorResponseHandler.notify(json);
       }
     } catch (error) {
-      this.notifications.error(this.intl.t('common.notifications.generic-error'));
+      this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
     } finally {
       this.isLoading = false;
     }

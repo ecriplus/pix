@@ -111,10 +111,10 @@ module('Integration | Component | team | list', function (hooks) {
           const notificationSuccessStub = sinon.stub();
 
           class NotificationsStub extends Service {
-            success = notificationSuccessStub;
+            sendSuccessNotification = notificationSuccessStub;
           }
 
-          this.owner.register('service:notifications', NotificationsStub);
+          this.owner.register('service:pixToast', NotificationsStub);
 
           const members = [
             {
@@ -139,7 +139,9 @@ module('Integration | Component | team | list', function (hooks) {
 
           // then
           await waitForDialogClose();
-          sinon.assert.calledWith(notificationSuccessStub, "L'agent Marie Tim n'a plus accès à Pix Admin.");
+          sinon.assert.calledWith(notificationSuccessStub, {
+            message: "L'agent Marie Tim n'a plus accès à Pix Admin.",
+          });
           assert.dom(await screen.queryByRole('dialog')).doesNotExist();
           assert.ok(true);
         });
@@ -150,10 +152,10 @@ module('Integration | Component | team | list', function (hooks) {
           const notificationErrorStub = sinon.stub();
 
           class NotificationsStub extends Service {
-            error = notificationErrorStub;
+            sendErrorNotification = notificationErrorStub;
           }
 
-          this.owner.register('service:notifications', NotificationsStub);
+          this.owner.register('service:pixToast', NotificationsStub);
 
           const members = [
             {
@@ -176,7 +178,7 @@ module('Integration | Component | team | list', function (hooks) {
           // then
           await waitForDialogClose();
 
-          sinon.assert.calledWith(notificationErrorStub, 'Impossible de désactiver cet agent.');
+          sinon.assert.calledWith(notificationErrorStub, { message: 'Impossible de désactiver cet agent.' });
           assert.ok(true);
           assert.dom(screen.queryByRole('button', { name: 'Confirmer' })).doesNotExist();
         });

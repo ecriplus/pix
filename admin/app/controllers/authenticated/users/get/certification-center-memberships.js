@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 export default class UsersCertificationCenterMembershipsController extends Controller {
-  @service notifications;
+  @service pixToast;
   @service store;
   @service intl;
 
@@ -11,14 +11,14 @@ export default class UsersCertificationCenterMembershipsController extends Contr
   async updateCertificationCenterMembershipRole(certificationCenterMembership) {
     try {
       await certificationCenterMembership.save();
-      this.notifications.success(
-        this.intl.t('pages.user-details.notifications.success.update-certification-center-membership-role'),
-      );
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('pages.user-details.notifications.success.update-certification-center-membership-role'),
+      });
     } catch (_) {
       certificationCenterMembership.rollbackAttributes();
-      this.notifications.error(
-        this.intl.t('pages.user-details.notifications.failure.update-certification-center-membership-role'),
-      );
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('pages.user-details.notifications.failure.update-certification-center-membership-role'),
+      });
     }
   }
 
@@ -26,13 +26,13 @@ export default class UsersCertificationCenterMembershipsController extends Contr
   async disableCertificationCenterMembership(certificationCenterMembership) {
     try {
       await certificationCenterMembership.destroyRecord();
-      this.notifications.success(
-        this.intl.t('pages.user-details.notifications.success.deactivate-certification-center-membership'),
-      );
-    } catch (e) {
-      this.notifications.error(
-        this.intl.t('pages.user-details.notifications.failure.deactivate-certification-center-membership'),
-      );
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('pages.user-details.notifications.success.deactivate-certification-center-membership'),
+      });
+    } catch (_) {
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('pages.user-details.notifications.failure.deactivate-certification-center-membership'),
+      });
     }
   }
 }

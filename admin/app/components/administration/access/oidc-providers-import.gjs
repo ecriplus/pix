@@ -10,13 +10,11 @@ import AdministrationBlockLayout from '../block-layout';
 
 export default class OidcProvidersImport extends Component {
   @service intl;
-  @service notifications;
+  @service pixToast;
   @service session;
 
   @action
   async importOidcProviders(files) {
-    this.notifications.clearAll();
-
     let response;
     try {
       const fileContent = files[0];
@@ -32,9 +30,9 @@ export default class OidcProvidersImport extends Component {
         body: fileContent,
       });
       if (response.ok) {
-        this.notifications.success(
-          this.intl.t('components.administration.oidc-providers-import.notifications.success'),
-        );
+        this.pixToast.sendSuccessNotification({
+          message: this.intl.t('components.administration.oidc-providers-import.notifications.success'),
+        });
         return;
       }
 
@@ -44,10 +42,10 @@ export default class OidcProvidersImport extends Component {
       }
 
       jsonResponse.errors.forEach((error) => {
-        this.notifications.error(error.detail, { autoClear: false });
+        this.pixToast.sendErrorNotification({ message: error.detail });
       });
     } catch (error) {
-      this.notifications.error(this.intl.t('common.notifications.generic-error'));
+      this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
     } finally {
       this.isLoading = false;
     }

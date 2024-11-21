@@ -54,8 +54,8 @@ module('Unit | Controller | authenticated/certification-centers/get/team', funct
         const emailWithSpaces = ' test@example.net ';
         controller.userEmailToAdd = emailWithSpaces;
         controller.send = sinon.stub();
-        controller.notifications = {
-          success: sinon.stub(),
+        controller.pixToast = {
+          sendSuccessNotification: sinon.stub(),
         };
         controller.model = {
           certificationCenterMemberships: {},
@@ -113,8 +113,8 @@ module('Unit | Controller | authenticated/certification-centers/get/team', funct
         controller.model = {
           certificationCenterId: 666,
         };
-        controller.notifications = {
-          success: sinon.stub(),
+        controller.pixToast = {
+          sendSuccessNotification: sinon.stub(),
         };
 
         const store = this.owner.lookup('service:store');
@@ -127,7 +127,7 @@ module('Unit | Controller | authenticated/certification-centers/get/team', funct
         await controller.addCertificationCenterMembership(event);
 
         // then
-        sinon.assert.called(controller.notifications.success);
+        sinon.assert.called(controller.pixToast.sendSuccessNotification);
         assert.ok(true);
       });
     });
@@ -178,16 +178,16 @@ module('Unit | Controller | authenticated/certification-centers/get/team', funct
 
           const notificationErrorStub = sinon.stub();
           class NotificationsStub extends Service {
-            error = notificationErrorStub;
+            sendErrorNotification = notificationErrorStub;
           }
-          this.owner.register('service:notifications', NotificationsStub);
+          this.owner.register('service:pixToast', NotificationsStub);
 
           // when
           const event = { preventDefault() {} };
           await controller.addCertificationCenterMembership(event);
 
           // then
-          sinon.assert.calledWith(notificationErrorStub, controller.ERROR_MESSAGES.DEFAULT);
+          sinon.assert.calledWith(notificationErrorStub, { message: controller.ERROR_MESSAGES.DEFAULT });
           assert.ok(true);
         });
       });
@@ -197,8 +197,8 @@ module('Unit | Controller | authenticated/certification-centers/get/team', funct
           // given
           const controller = this.owner.lookup('controller:authenticated/certification-centers/get/team');
 
-          controller.notifications = {
-            error: sinon.stub(),
+          controller.pixToast = {
+            sendErrorNotification: sinon.stub(),
           };
           controller.model = {
             certificationCenterId: 666,
@@ -218,9 +218,9 @@ module('Unit | Controller | authenticated/certification-centers/get/team', funct
 
           const notificationErrorStub = sinon.stub();
           class NotificationsStub extends Service {
-            error = notificationErrorStub;
+            sendErrorNotification = notificationErrorStub;
           }
-          this.owner.register('service:notifications', NotificationsStub);
+          this.owner.register('service:pixToast', NotificationsStub);
 
           controller.userEmailToAdd = 'test@example.net';
 
@@ -229,9 +229,11 @@ module('Unit | Controller | authenticated/certification-centers/get/team', funct
           await controller.addCertificationCenterMembership(event);
 
           // then
-          sinon.assert.calledWith(notificationErrorStub, controller.ERROR_MESSAGES.STATUS_400);
-          sinon.assert.calledWith(notificationErrorStub, controller.ERROR_MESSAGES.STATUS_404);
-          sinon.assert.calledWith(notificationErrorStub, controller.ERROR_MESSAGES.STATUS_412);
+          sinon.assert.calledWith(notificationErrorStub, { message: controller.ERROR_MESSAGES.STATUS_400 });
+          sinon.assert.calledWith(notificationErrorStub, { message: controller.ERROR_MESSAGES.STATUS_404 });
+          sinon.assert.calledWith(notificationErrorStub, {
+            message: controller.ERROR_MESSAGES.STATUS_412,
+          });
           assert.ok(true);
         });
       });
@@ -247,8 +249,8 @@ module('Unit | Controller | authenticated/certification-centers/get/team', funct
         rollbackAttributes: sinon.stub(),
       };
       notifications = {
-        error: sinon.stub(),
-        success: sinon.stub(),
+        sendErrorNotification: sinon.stub(),
+        sendSuccessNotification: sinon.stub(),
       };
     });
 
@@ -256,7 +258,7 @@ module('Unit | Controller | authenticated/certification-centers/get/team', funct
       test('calls success method from notifications service', async function (assert) {
         // given
         const controller = this.owner.lookup('controller:authenticated/certification-centers/get/team');
-        controller.notifications = notifications;
+        controller.pixToast = notifications;
         certificationCenterMembership.save.resolves();
 
         // when
@@ -264,9 +266,9 @@ module('Unit | Controller | authenticated/certification-centers/get/team', funct
 
         // then
         sinon.assert.calledOnce(certificationCenterMembership.save);
-        sinon.assert.calledOnce(controller.notifications.success);
+        sinon.assert.calledOnce(controller.pixToast.sendSuccessNotification);
         sinon.assert.notCalled(certificationCenterMembership.rollbackAttributes);
-        sinon.assert.notCalled(controller.notifications.error);
+        sinon.assert.notCalled(controller.pixToast.sendErrorNotification);
         assert.ok(true);
       });
     });
@@ -275,7 +277,7 @@ module('Unit | Controller | authenticated/certification-centers/get/team', funct
       test('calls error method from notifications service', async function (assert) {
         // given
         const controller = this.owner.lookup('controller:authenticated/certification-centers/get/team');
-        controller.notifications = notifications;
+        controller.pixToast = notifications;
         certificationCenterMembership.save.rejects();
 
         // when
@@ -283,9 +285,9 @@ module('Unit | Controller | authenticated/certification-centers/get/team', funct
 
         // then
         sinon.assert.calledOnce(certificationCenterMembership.save);
-        sinon.assert.notCalled(controller.notifications.success);
+        sinon.assert.notCalled(controller.pixToast.sendSuccessNotification);
         sinon.assert.calledOnce(certificationCenterMembership.rollbackAttributes);
-        sinon.assert.calledOnce(controller.notifications.error);
+        sinon.assert.calledOnce(controller.pixToast.sendErrorNotification);
         assert.ok(true);
       });
     });

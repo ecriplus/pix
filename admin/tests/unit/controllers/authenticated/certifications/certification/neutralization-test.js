@@ -48,17 +48,18 @@ module('Unit | Controller | authenticated/certifications/certification/neutraliz
           },
         })
         .resolves({});
-      const notifications = {
-        success: sinon.stub(),
+      controller.pixToast = {
+        sendSuccessNotification: sinon.stub(),
       };
-      controller.notifications = notifications;
 
       // when
       await controller.neutralize('challengeRecId123', 2);
 
       // then
       assert.ok(
-        controller.notifications.success.calledOnceWithExactly('La question n°2 a été neutralisée avec succès.'),
+        controller.pixToast.sendSuccessNotification.calledOnceWithExactly({
+          message: 'La question n°2 a été neutralisée avec succès.',
+        }),
       );
       assert.true(controller.certificationDetails.listChallengesAndAnswers[0].isNeutralized);
     });
@@ -80,19 +81,18 @@ module('Unit | Controller | authenticated/certifications/certification/neutraliz
           },
         })
         .rejects({});
-      const notifications = {
-        error: sinon.stub(),
+      controller.pixToast = {
+        sendErrorNotification: sinon.stub(),
       };
-      controller.notifications = notifications;
 
       // when
       await controller.neutralize('challengeRecId123', 2);
 
       // then
       assert.ok(
-        controller.notifications.error.calledOnceWithExactly(
-          'Une erreur est survenue lors de la neutralisation de la question n°2.',
-        ),
+        controller.pixToast.sendErrorNotification.calledOnceWithExactly({
+          message: 'Une erreur est survenue lors de la neutralisation de la question n°2.',
+        }),
       );
     });
   });
@@ -132,17 +132,18 @@ module('Unit | Controller | authenticated/certifications/certification/neutraliz
         listChallengesAndAnswers: [{ challengeId: 'challengeRecId123', isNeutralized: false }],
       };
       controller.certificationDetails.save.resolves({});
-      const notifications = {
-        success: sinon.stub(),
+      controller.pixToast = {
+        sendSuccessNotification: sinon.stub(),
       };
-      controller.notifications = notifications;
 
       // when
       await controller.deneutralize('challengeRecId123', 2);
 
       // then
       assert.ok(
-        controller.notifications.success.calledOnceWithExactly('La question n°2 a été dé-neutralisée avec succès.'),
+        controller.pixToast.sendSuccessNotification.calledOnceWithExactly({
+          message: 'La question n°2 a été dé-neutralisée avec succès.',
+        }),
       );
       assert.false(controller.certificationDetails.listChallengesAndAnswers[0].isNeutralized);
     });
@@ -156,19 +157,18 @@ module('Unit | Controller | authenticated/certifications/certification/neutraliz
         listChallengesAndAnswers: [{ challengeId: 'challengeRecId123', isNeutralized: false }],
       };
       controller.certificationDetails.save.rejects({});
-      const notifications = {
-        error: sinon.stub(),
+      controller.pixToast = {
+        sendErrorNotification: sinon.stub(),
       };
-      controller.notifications = notifications;
 
       // when
       await controller.deneutralize('challengeRecId123', 2);
 
       // then
       assert.ok(
-        controller.notifications.error.calledOnceWithExactly(
-          'Une erreur est survenue lors de la dé-neutralisation de la question n°2.',
-        ),
+        controller.pixToast.sendErrorNotification.calledOnceWithExactly({
+          message: 'Une erreur est survenue lors de la dé-neutralisation de la question n°2.',
+        }),
       );
     });
   });

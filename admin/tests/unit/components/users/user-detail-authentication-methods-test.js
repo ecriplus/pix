@@ -11,9 +11,9 @@ module('Unit | Component | users | user-detail-personal-information', function (
 
   hooks.beforeEach(function () {
     component = createGlimmerComponent('component:users/user-detail-authentication-methods');
-    component.notifications = {
-      success: sinon.stub(),
-      error: sinon.stub(),
+    component.pixToast = {
+      sendSuccessNotification: sinon.stub(),
+      sendErrorNotification: sinon.stub(),
     };
   });
 

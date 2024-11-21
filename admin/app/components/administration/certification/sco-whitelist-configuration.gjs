@@ -11,11 +11,10 @@ import AdministrationBlockLayout from '../block-layout';
 export default class ScoWhitelistConfiguration extends Component {
   @service intl;
   @service session;
-  @service notifications;
+  @service pixToast;
 
   @action
   async importScoWhitelist(files) {
-    this.notifications.clearAll();
     try {
       const fileContent = files[0];
 
@@ -30,12 +29,18 @@ export default class ScoWhitelistConfiguration extends Component {
         body: fileContent,
       });
       if (response.ok) {
-        this.notifications.success(this.intl.t('pages.administration.certification.sco-whitelist.import.success'));
+        this.pixToast.sendSuccessNotification({
+          message: this.intl.t('pages.administration.certification.sco-whitelist.import.success'),
+        });
       } else {
-        this.notifications.error(this.intl.t('pages.administration.certification.sco-whitelist.import.error'));
+        this.pixToast.sendErrorNotification({
+          message: this.intl.t('pages.administration.certification.sco-whitelist.import.error'),
+        });
       }
     } catch (error) {
-      this.notifications.error(this.intl.t('pages.administration.certification.sco-whitelist.import.error'));
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('pages.administration.certification.sco-whitelist.import.error'),
+      });
     } finally {
       this.isLoading = false;
     }

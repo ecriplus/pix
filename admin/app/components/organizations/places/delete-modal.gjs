@@ -5,7 +5,7 @@ import Component from '@glimmer/component';
 import ConfirmPopup from '../../confirm-popup';
 
 export default class DeleteModal extends Component {
-  @service notifications;
+  @service pixToast;
 
   get message() {
     if (!this.args.show) return '';
@@ -18,10 +18,14 @@ export default class DeleteModal extends Component {
       await this.args.organizationPlacesLot.deleteRecord();
       await this.args.organizationPlacesLot.save({ adapterOptions: { organizationId: this.args.organizationId } });
 
-      this.notifications.success(`Le lot de place ${this.args.organizationPlacesLot.reference} a été supprimé.`);
+      this.pixToast.sendSuccessNotification({
+        message: `Le lot de place ${this.args.organizationPlacesLot.reference} a été supprimé.`,
+      });
       this.args.refreshModel();
     } catch (error) {
-      this.notifications.error(`Le lot de place ${this.args.organizationPlacesLot.reference} n'a pas été supprimé.`);
+      this.pixToast.sendErrorNotification({
+        message: `Le lot de place ${this.args.organizationPlacesLot.reference} n'a pas été supprimé.`,
+      });
     }
 
     this.args.toggle();

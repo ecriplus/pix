@@ -100,8 +100,8 @@ module('Unit | Controller | authenticated/target-profiles/new', function (hooks)
 
       controller.router.transitionTo = sinon.stub();
 
-      controller.notifications = {
-        success: sinon.stub(),
+      controller.pixToast = {
+        sendSuccessNotification: sinon.stub(),
       };
 
       const event = {
@@ -114,7 +114,9 @@ module('Unit | Controller | authenticated/target-profiles/new', function (hooks)
       // then
       assert.ok(event.preventDefault.called);
       assert.ok(controller.model.targetProfile.save.called);
-      assert.ok(controller.notifications.success.calledWith('Le profil cible a été créé avec succès.'));
+      assert.ok(
+        controller.pixToast.sendSuccessNotification.calledWith({ message: 'Le profil cible a été créé avec succès.' }),
+      );
       assert.ok(
         controller.router.transitionTo.calledWith(
           'authenticated.target-profiles.target-profile',
@@ -124,8 +126,8 @@ module('Unit | Controller | authenticated/target-profiles/new', function (hooks)
     });
 
     test('it should display error notification when model cannot be saved', async function (assert) {
-      controller.notifications = {
-        error: sinon.stub(),
+      controller.pixToast = {
+        sendErrorNotification: sinon.stub(),
       };
 
       const event = {
@@ -145,7 +147,7 @@ module('Unit | Controller | authenticated/target-profiles/new', function (hooks)
       // then
       assert.ok(event.preventDefault.called);
       assert.ok(controller.model.targetProfile.save.called);
-      assert.ok(controller.notifications.error.calledWith('Une erreur est survenue.'));
+      assert.ok(controller.pixToast.sendErrorNotification.calledWith({ message: 'Une erreur est survenue.' }));
     });
 
     test('it should display detailed error notification when model cannot be saved', async function (assert) {
@@ -158,8 +160,8 @@ module('Unit | Controller | authenticated/target-profiles/new', function (hooks)
         },
       };
 
-      controller.notifications = {
-        error: sinon.stub(),
+      controller.pixToast = {
+        sendErrorNotification: sinon.stub(),
       };
 
       const event = {
@@ -172,7 +174,7 @@ module('Unit | Controller | authenticated/target-profiles/new', function (hooks)
       // then
       assert.ok(event.preventDefault.called);
       assert.ok(controller.model.targetProfile.save.called);
-      assert.ok(controller.notifications.error.calledWith('Organisation non trouvée'));
+      assert.ok(controller.pixToast.sendErrorNotification.calledWith({ message: 'Organisation non trouvée' }));
     });
   });
 });

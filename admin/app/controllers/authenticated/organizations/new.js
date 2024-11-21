@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 export default class NewController extends Controller {
-  @service notifications;
+  @service pixToast;
   @service router;
 
   @action
@@ -16,10 +16,10 @@ export default class NewController extends Controller {
     event.preventDefault();
     try {
       await this.model.save();
-      this.notifications.success('L’organisation a été créée avec succès.');
+      this.pixToast.sendSuccessNotification({ message: 'L’organisation a été créée avec succès.' });
       this.router.transitionTo('authenticated.organizations.get.all-tags', this.model.id);
     } catch (error) {
-      this.notifications.error('Une erreur est survenue.');
+      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }
 }

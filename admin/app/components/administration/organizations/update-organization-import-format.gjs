@@ -8,32 +8,31 @@ import AdministrationBlockLayout from '../block-layout';
 
 export default class UpdateOrganizationImportFormat extends Component {
   @service intl;
-  @service notifications;
+  @service pixToast;
   @service router;
   @service store;
 
   @action
   async uploadOrganizationImportFile(files) {
-    this.notifications.clearAll();
     const adapter = this.store.adapterFor('import-files');
     try {
       await adapter.updateOrganizationImportFormat(files);
-      this.notifications.success(
-        this.intl.t('components.administration.organization-import-format.notifications.success'),
-      );
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('components.administration.organization-import-format.notifications.success'),
+      });
     } catch (errorResponse) {
       const errors = errorResponse.errors;
       if (!errors) {
-        return this.notifications.error(this.intl.t('common.notifications.generic-error'));
+        return this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
       }
 
       errors.forEach((error) => {
         switch (error.code) {
           case 'MISSING_REQUIRED_FIELD_NAMES':
-            this.notifications.error(`${error.meta}`, { autoClear: false });
+            this.pixToast.sendErrorNotification({ message: `${error.meta}` });
             break;
           default:
-            this.notifications.error(error.detail, { autoClear: false });
+            this.pixToast.sendErrorNotification({ message: error.detail });
         }
       });
     } finally {

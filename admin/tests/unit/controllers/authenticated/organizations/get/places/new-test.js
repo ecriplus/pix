@@ -15,7 +15,7 @@ module('Unit | Controller | authenticated/organizations/places/new', function (h
       test('it displays success notification', async function (assert) {
         // given
         const notifications = {
-          success: sinon.stub(),
+          sendSuccessNotification: sinon.stub(),
         };
         const router = {
           transitionTo: sinon.stub(),
@@ -30,14 +30,14 @@ module('Unit | Controller | authenticated/organizations/places/new', function (h
         };
 
         controller.set('model', model);
-        controller.set('notifications', notifications);
+        controller.set('pixToast', notifications);
         controller.set('router', router);
 
         await controller.create(attrtibutes);
 
         sinon.assert.calledWith(model.setProperties, attrtibutes);
         sinon.assert.calledWith(model.save, { adapterOptions: { organizationId: model.organizationId } });
-        sinon.assert.calledWith(notifications.success, 'Le lot de place est enregistré.');
+        sinon.assert.calledWith(notifications.sendSuccessNotification, { message: 'Le lot de place est enregistré.' });
         assert.ok(true);
       });
     });
@@ -46,7 +46,7 @@ module('Unit | Controller | authenticated/organizations/places/new', function (h
       test('it displays error notification', async function (assert) {
         // given
         const notifications = {
-          error: sinon.stub(),
+          sendErrorNotification: sinon.stub(),
         };
         const router = {
           transitionTo: sinon.stub(),
@@ -62,12 +62,14 @@ module('Unit | Controller | authenticated/organizations/places/new', function (h
         };
 
         controller.set('model', model);
-        controller.set('notifications', notifications);
+        controller.set('pixToast', notifications);
         controller.set('router', router);
 
         await controller.create(attrtibutes);
 
-        sinon.assert.calledWith(notifications.error, 'Erreur lors de la création du lot de place.');
+        sinon.assert.calledWith(notifications.sendErrorNotification, {
+          message: 'Erreur lors de la création du lot de place.',
+        });
         assert.strictEqual(controller.errors, model.errors);
       });
     });

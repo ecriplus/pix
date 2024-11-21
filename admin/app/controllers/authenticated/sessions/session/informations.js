@@ -8,7 +8,7 @@ import { tracked } from '@glimmer/tracking';
 import { statusToDisplayName } from '../../../../models/session';
 
 export default class IndexController extends Controller {
-  @service notifications;
+  @service pixToast;
   @service currentUser;
   @service accessControl;
   @service session;
@@ -50,9 +50,9 @@ export default class IndexController extends Controller {
     try {
       await this.sessionModel.save({ adapterOptions: { unfinalize: true } });
       await this.sessionModel.reload();
-      this.notifications.success('La session a bien été définalisée');
+      this.pixToast.sendSuccessNotification({ message: 'La session a bien été définalisée' });
     } catch (err) {
-      this.notifications.error('Erreur lors de la définalisation de la session');
+      this.pixToast.sendErrorNotification({ message: 'Erreur lors de la définalisation de la session' });
     }
     this.cancelModal();
   }
@@ -113,7 +113,9 @@ export default class IndexController extends Controller {
     try {
       await this.fileSaver.save({ url, token });
     } catch (error) {
-      this.notifications.error("Une erreur est survenue, les attestations n'ont pas pu être téléchargées.");
+      this.pixToast.sendErrorNotification({
+        message: "Une erreur est survenue, les attestations n'ont pas pu être téléchargées.",
+      });
     }
   }
 
@@ -123,7 +125,9 @@ export default class IndexController extends Controller {
       await this.sessionModel.save({ adapterOptions: { isComment: true, comment } });
       this.sessionModel.reload();
     } catch (error) {
-      this.notifications.error("Une erreur est survenue pendant l'enregistrement du commentaire. ");
+      this.pixToast.sendErrorNotification({
+        message: "Une erreur est survenue pendant l'enregistrement du commentaire. ",
+      });
     }
   }
 
@@ -133,7 +137,9 @@ export default class IndexController extends Controller {
       await this.sessionModel.save({ adapterOptions: { isDeleteComment: true } });
       await this.sessionModel.reload();
     } catch (error) {
-      this.notifications.error('Une erreur est survenue pendant la suppression du commentaire.');
+      this.pixToast.sendErrorNotification({
+        message: 'Une erreur est survenue pendant la suppression du commentaire.',
+      });
       throw error;
     }
   }
@@ -155,9 +161,9 @@ export default class IndexController extends Controller {
   async _assignSessionToCurrentUser() {
     try {
       await this.sessionModel.save({ adapterOptions: { certificationOfficerAssignment: true } });
-      this.notifications.success('La session vous a correctement été assignée');
-    } catch (err) {
-      this.notifications.error("Erreur lors de l'assignation à la session");
+      this.pixToast.sendSuccessNotification({ message: 'La session vous a correctement été assignée' });
+    } catch (_) {
+      this.pixToast.sendErrorNotification({ message: "Erreur lors de l'assignation à la session" });
     }
   }
 }

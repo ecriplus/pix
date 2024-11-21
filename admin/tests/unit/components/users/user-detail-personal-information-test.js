@@ -11,9 +11,9 @@ module('Unit | Component | users | user-detail-personal-information', function (
 
   hooks.beforeEach(function () {
     component = createGlimmerComponent('component:users/user-detail-personal-information');
-    component.notifications = {
-      success: sinon.stub(),
-      error: sinon.stub(),
+    component.pixToast = {
+      sendSuccessNotification: sinon.stub(),
+      sendErrorNotification: sinon.stub(),
     };
   });
 
@@ -36,7 +36,7 @@ module('Unit | Component | users | user-detail-personal-information', function (
 
       // then
       assert.ok(organizationLearner.destroyRecord.called);
-      assert.ok(component.notifications.success.called);
+      assert.ok(component.pixToast.sendSuccessNotification.called);
     });
 
     test('it should notify an error if destroyRecord fail', async function (assert) {
@@ -47,7 +47,7 @@ module('Unit | Component | users | user-detail-personal-information', function (
       await component.dissociate(organizationLearner);
 
       // then
-      assert.ok(component.notifications.error.called);
+      assert.ok(component.pixToast.sendErrorNotification.called);
     });
   });
 });

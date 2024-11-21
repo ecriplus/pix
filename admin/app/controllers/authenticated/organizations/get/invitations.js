@@ -10,7 +10,7 @@ export default class InvitationsController extends Controller {
   @tracked userEmailToInviteError;
   @tracked email = null;
 
-  @service notifications;
+  @service pixToast;
   @service store;
   @service accessControl;
   @service errorResponseHandler;
@@ -37,7 +37,9 @@ export default class InvitationsController extends Controller {
         organizationId: this.model.organization.id,
       });
 
-      this.notifications.success(`Un email a bien a été envoyé à l'adresse ${organizationInvitation.email}.`);
+      this.pixToast.sendSuccessNotification({
+        message: `Un email a bien a été envoyé à l'adresse ${organizationInvitation.email}.`,
+      });
       this.userEmailToInvite = null;
     } catch (err) {
       this.errorResponseHandler.notify(err, this.CUSTOM_ERROR_MESSAGES);
@@ -74,10 +76,9 @@ export default class InvitationsController extends Controller {
           organizationId: this.model.organization.id,
         },
       });
-      this.notifications.success(`Cette invitation a bien été annulée.`);
+      this.pixToast.sendSuccessNotification({ message: `Cette invitation a bien été annulée.` });
     } catch (error) {
-      console.error(error);
-      this.notifications.error('Une erreur s’est produite, veuillez réessayer.');
+      this.pixToast.sendErrorNotification({ message: 'Une erreur s’est produite, veuillez réessayer.' });
     }
   }
 }

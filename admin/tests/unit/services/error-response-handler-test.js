@@ -12,8 +12,8 @@ module('Unit | Service | error-response-handler', function (hooks) {
     // given
     const service = this.owner.lookup('service:error-response-handler');
     const errorMock = sinon.stub();
-    service.notifications = {
-      error: errorMock,
+    service.pixToast = {
+      sendErrorNotification: errorMock,
     };
     const errorResponse = new Error('a generic error');
 
@@ -21,7 +21,7 @@ module('Unit | Service | error-response-handler', function (hooks) {
     service.notify(errorResponse);
 
     // then
-    assert.ok(errorMock.calledWith(errorResponse));
+    assert.ok(errorMock.calledWith({ message: errorResponse }));
   });
 
   module('Without custom error messages', function () {
@@ -29,8 +29,8 @@ module('Unit | Service | error-response-handler', function (hooks) {
       // given
       const service = this.owner.lookup('service:error-response-handler');
       const errorMock = sinon.stub();
-      service.notifications = {
-        error: errorMock,
+      service.pixToast = {
+        sendErrorNotification: errorMock,
       };
       const errorResponse = {
         errors: [
@@ -59,10 +59,12 @@ module('Unit | Service | error-response-handler', function (hooks) {
       service.notify(errorResponse);
 
       // then
-      sinon.assert.calledWith(errorMock, 'Cette opération est impossible.');
-      sinon.assert.calledWith(errorMock, 'Non trouvé.');
-      sinon.assert.calledWith(errorMock, "Échec lors de l'envoi d'un e-mail car le domaine semble invalide.");
-      sinon.assert.calledWith(errorMock, 'Une erreur est survenue.');
+      sinon.assert.calledWith(errorMock, { message: 'Cette opération est impossible.' });
+      sinon.assert.calledWith(errorMock, { message: 'Non trouvé.' });
+      sinon.assert.calledWith(errorMock, {
+        message: "Échec lors de l'envoi d'un e-mail car le domaine semble invalide.",
+      });
+      sinon.assert.calledWith(errorMock, { message: 'Une erreur est survenue.' });
       assert.ok(true);
     });
   });
@@ -72,8 +74,8 @@ module('Unit | Service | error-response-handler', function (hooks) {
       // given
       const service = this.owner.lookup('service:error-response-handler');
       const errorMock = sinon.stub();
-      service.notifications = {
-        error: errorMock,
+      service.pixToast = {
+        sendErrorNotification: errorMock,
       };
       const errorResponse = {
         errors: [
@@ -103,9 +105,9 @@ module('Unit | Service | error-response-handler', function (hooks) {
       service.notify(errorResponse, customErrorMessagesByStatus);
 
       // then
-      sinon.assert.calledWith(errorMock, customErrorMessagesByStatus.DEFAULT);
-      sinon.assert.calledWith(errorMock, customErrorMessagesByStatus.STATUS_422);
-      sinon.assert.calledWith(errorMock, customErrorMessagesByStatus.STATUS_404);
+      sinon.assert.calledWith(errorMock, { message: customErrorMessagesByStatus.DEFAULT });
+      sinon.assert.calledWith(errorMock, { message: customErrorMessagesByStatus.STATUS_422 });
+      sinon.assert.calledWith(errorMock, { message: customErrorMessagesByStatus.STATUS_404 });
       assert.ok(true);
     });
   });
@@ -132,7 +134,7 @@ module('Unit | Service | error-response-handler', function (hooks) {
       test(`it notifies correct error for code ${code}`, function (assert) {
         // given
         const service = this.owner.lookup('service:error-response-handler');
-        service.notifications.error = sinon.stub();
+        service.pixToast.sendErrorNotification = sinon.stub();
         const invalidDomainError = {
           status: '400',
           title: 'Sending email to an invalid domain',
@@ -143,7 +145,7 @@ module('Unit | Service | error-response-handler', function (hooks) {
         service.notify({ errors: [invalidDomainError] });
 
         // then
-        sinon.assert.calledWith(service.notifications.error, message);
+        sinon.assert.calledWith(service.pixToast.sendErrorNotification, { message });
         assert.ok(true);
       });
     });
@@ -160,14 +162,14 @@ module('Unit | Service | error-response-handler', function (hooks) {
       test(`it notifies correct error for code ${code}`, function (assert) {
         // given
         const service = this.owner.lookup('service:error-response-handler');
-        service.notifications.error = sinon.stub();
+        service.pixToast.sendErrorNotification = sinon.stub();
         const invalidDomainError = { status: '400', title: 'Error', code, meta };
 
         // when
         service.notify({ errors: [invalidDomainError] });
 
         // then
-        sinon.assert.calledWith(service.notifications.error, message);
+        sinon.assert.calledWith(service.pixToast.sendErrorNotification, { message });
         assert.ok(true);
       });
     });

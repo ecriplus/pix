@@ -15,9 +15,9 @@ module('Integration | Controller | authenticated/target-profiles/target-profile/
         id: 3,
       },
     };
-    controller.notifications = {
-      success: sinon.stub(),
-      error: sinon.stub(),
+    controller.pixToast = {
+      sendSuccessNotification: sinon.stub(),
+      sendErrorNotification: sinon.stub(),
     };
     controller.store = {
       adapterFor: sinon.stub().returns({
@@ -36,8 +36,8 @@ module('Integration | Controller | authenticated/target-profiles/target-profile/
 
       // then
       assert.true(
-        controller.notifications.success.calledWith(`Organisation(s) détachée(s) avec succès : ${organizationId}`, {
-          htmlContent: true,
+        controller.pixToast.sendSuccessNotification.calledWith({
+          message: `Organisation(s) détachée(s) avec succès : ${organizationId}`,
         }),
       );
     });
@@ -63,7 +63,7 @@ module('Integration | Controller | authenticated/target-profiles/target-profile/
       await controller.detachOrganizations(organizationId);
 
       // then
-      assert.true(controller.notifications.error.calledWith('Une erreur est survenue.'));
+      assert.true(controller.pixToast.sendErrorNotification.calledWith({ message: 'Une erreur est survenue.' }));
     });
   });
 });

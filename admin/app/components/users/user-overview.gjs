@@ -24,7 +24,7 @@ import ConfirmPopup from '../confirm-popup';
 export default class UserOverview extends Component {
   @service accessControl;
   @service intl;
-  @service notifications;
+  @service pixToast;
   @service references;
   @service store;
 
@@ -139,13 +139,13 @@ export default class UserOverview extends Component {
 
     try {
       await this.args.user.save();
-      this.notifications.success('L’utilisateur a été mis à jour avec succès.');
+      this.pixToast.sendSuccessNotification({ message: 'L’utilisateur a été mis à jour avec succès.' });
       this.isEditionMode = false;
     } catch (response) {
       this.args.user.rollbackAttributes();
       const messageValidationError =
         response.errors[0].detail || "une erreur est survenue, vos modifications n'ont pas été enregistrées";
-      this.notifications.error(messageValidationError);
+      this.pixToast.sendErrorNotification({ message: messageValidationError });
     }
   }
 

@@ -6,7 +6,7 @@ import { tracked } from '@glimmer/tracking';
 const DEFAULT_BADGE_LEVEL = '1';
 
 export default class AttachTargetProfileController extends Controller {
-  @service notifications;
+  @service pixToast;
   @service router;
   @service store;
 
@@ -24,7 +24,7 @@ export default class AttachTargetProfileController extends Controller {
   @action
   async onError(errorMessage) {
     if (errorMessage) {
-      this.notifications.error(errorMessage);
+      this.pixToast.sendErrorNotification({ message: errorMessage });
     }
   }
 
@@ -99,9 +99,9 @@ export default class AttachTargetProfileController extends Controller {
 
       this.router.transitionTo('authenticated.complementary-certifications.complementary-certification.details');
 
-      this.notifications.success(
-        `Profil cible rattaché à la certification ${complementaryCertification.label} mis à jour avec succès !`,
-      );
+      this.pixToast.sendSuccessNotification({
+        message: `Profil cible rattaché à la certification ${complementaryCertification.label} mis à jour avec succès !`,
+      });
     } catch (error) {
       console.error({ error });
       await this.onError("Une erreur est survenue lors de l'enregistrement du profil cible.");

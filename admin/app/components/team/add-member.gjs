@@ -11,7 +11,7 @@ import { t } from 'ember-intl';
 import isEmailValid from '../../utils/email-validator';
 
 export default class AddMember extends Component {
-  @service notifications;
+  @service pixToast;
   @service store;
   @service errorResponseHandler;
 
@@ -45,9 +45,9 @@ export default class AddMember extends Component {
       await adminMember.save();
       this.email = '';
       this.role = 'SUPER_ADMIN';
-      this.notifications.success(
-        `L'agent ${adminMember.firstName} ${adminMember.lastName} a dorénavant accès à Pix Admin`,
-      );
+      this.pixToast.sendSuccessNotification({
+        message: `L'agent ${adminMember.firstName} ${adminMember.lastName} a dorénavant accès à Pix Admin`,
+      });
     } catch (errorResponse) {
       this.store.deleteRecord(adminMember);
       this.errorResponseHandler.notify(errorResponse, this.CUSTOM_ERROR_STATUS_MESSAGES);

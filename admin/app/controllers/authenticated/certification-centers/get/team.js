@@ -6,7 +6,7 @@ import { tracked } from '@glimmer/tracking';
 import isEmailValid from '../../../../utils/email-validator';
 
 export default class AuthenticatedCertificationCentersGetTeamController extends Controller {
-  @service notifications;
+  @service pixToast;
   @service errorResponseHandler;
   @service store;
   @service intl;
@@ -52,7 +52,7 @@ export default class AuthenticatedCertificationCentersGetTeamController extends 
 
         this.userEmailToAdd = null;
         this.send('refreshModel');
-        this.notifications.success('Membre ajouté avec succès.');
+        this.pixToast.sendSuccessNotification({ message: 'Membre ajouté avec succès.' });
       } catch (responseError) {
         this.errorResponseHandler.notify(responseError, this.ERROR_MESSAGES);
       }
@@ -64,9 +64,9 @@ export default class AuthenticatedCertificationCentersGetTeamController extends 
     try {
       certificationCenterMembership.deleteRecord();
       await certificationCenterMembership.save();
-      this.notifications.success('Le membre a correctement été désactivé.');
-    } catch (e) {
-      this.notifications.error("Une erreur est survenue, le membre n'a pas été désactivé.");
+      this.pixToast.sendSuccessNotification({ message: 'Le membre a correctement été désactivé.' });
+    } catch (_) {
+      this.pixToast.sendErrorNotification({ message: "Une erreur est survenue, le membre n'a pas été désactivé." });
     }
   }
 
@@ -74,14 +74,18 @@ export default class AuthenticatedCertificationCentersGetTeamController extends 
   async updateCertificationCenterMembershipRole(certificationCenterMembership) {
     try {
       await certificationCenterMembership.save();
-      this.notifications.success(
-        this.intl.t('pages.certification-centers.notifications.success.update-certification-center-membership-role'),
-      );
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t(
+          'pages.certification-centers.notifications.success.update-certification-center-membership-role',
+        ),
+      });
     } catch (_) {
       certificationCenterMembership.rollbackAttributes();
-      this.notifications.error(
-        this.intl.t('pages.certification-centers.notifications.failure.update-certification-center-membership-role'),
-      );
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t(
+          'pages.certification-centers.notifications.failure.update-certification-center-membership-role',
+        ),
+      });
     }
   }
 

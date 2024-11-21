@@ -53,21 +53,13 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
 
     module('when the target profile is not linked with a campaign', function () {
       test('should display an edit modal with a filled input', async function (assert) {
+        // given
         const store = this.owner.lookup('service:store');
         const criterion = store.createRecord('badge-criterion', {
           scope: 'CampaignParticipation',
           threshold: 60,
           save: sinon.stub(),
         });
-
-        // given
-        const notificationSuccessStub = sinon.stub();
-        const notificationErrorStub = sinon.stub();
-        class NotificationsStub extends Service {
-          success = notificationSuccessStub;
-          error = notificationErrorStub;
-        }
-        this.owner.register('service:notifications', NotificationsStub);
 
         // when
         const screen = await render(
@@ -81,21 +73,13 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
       });
 
       test('should close the edit modal on cancel action', async function (assert) {
+        // given
         const store = this.owner.lookup('service:store');
         const criterion = store.createRecord('badge-criterion', {
           scope: 'CampaignParticipation',
           threshold: 60,
           save: sinon.stub(),
         });
-
-        // given
-        const notificationSuccessStub = sinon.stub();
-        const notificationErrorStub = sinon.stub();
-        class NotificationsStub extends Service {
-          success = notificationSuccessStub;
-          error = notificationErrorStub;
-        }
-        this.owner.register('service:notifications', NotificationsStub);
 
         // when
         const screen = await render(
@@ -117,12 +101,10 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
 
         // given
         const notificationSuccessStub = sinon.stub();
-        const notificationErrorStub = sinon.stub();
         class NotificationsStub extends Service {
-          success = notificationSuccessStub;
-          error = notificationErrorStub;
+          sendSuccessNotification = notificationSuccessStub;
         }
-        this.owner.register('service:notifications', NotificationsStub);
+        this.owner.register('service:pixToast', NotificationsStub);
 
         // when
         const screen = await render(
@@ -141,7 +123,9 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
 
         //then
         assert.ok(criterion.save.called);
-        sinon.assert.calledWith(notificationSuccessStub, "Seuil d'obtention du critère modifié avec succès.");
+        sinon.assert.calledWith(notificationSuccessStub, {
+          message: "Seuil d'obtention du critère modifié avec succès.",
+        });
         assert.dom(this.element.querySelector('.pix-modal__overlay--hidden')).exists();
       });
 
@@ -154,13 +138,11 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
         });
 
         // given
-        const notificationSuccessStub = sinon.stub();
         const notificationErrorStub = sinon.stub();
         class NotificationsStub extends Service {
-          success = notificationSuccessStub;
-          error = notificationErrorStub;
+          sendErrorNotification = notificationErrorStub;
         }
-        this.owner.register('service:notifications', NotificationsStub);
+        this.owner.register('service:pixToast', NotificationsStub);
 
         // when
         const screen = await render(
@@ -181,10 +163,9 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
         await click(modal.getByRole('button', { name: 'Enregistrer' }));
 
         // then
-        sinon.assert.calledWith(
-          notificationErrorStub,
-          "Il est interdit de modifier un critère d'un résultat thématique déjà acquis par un utilisateur.",
-        );
+        sinon.assert.calledWith(notificationErrorStub, {
+          message: "Il est interdit de modifier un critère d'un résultat thématique déjà acquis par un utilisateur.",
+        });
         assert.ok(true);
       });
     });

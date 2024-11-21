@@ -9,8 +9,8 @@ module('Unit | Service | error-notifier', function (hooks) {
     // given
     const service = this.owner.lookup('service:error-notifier');
     const errorMock = sinon.stub();
-    service.notifications = {
-      error: errorMock,
+    service.pixToast = {
+      sendErrorNotification: errorMock,
     };
     const anError = new Error('a generic error');
 
@@ -18,15 +18,15 @@ module('Unit | Service | error-notifier', function (hooks) {
     service.notify(anError);
 
     // then
-    assert.ok(errorMock.calledWith(anError));
+    assert.ok(errorMock.calledWith({ message: anError }));
   });
 
   test('it notifies JSONAPI bundled errors as several notifications', function (assert) {
     // given
     const service = this.owner.lookup('service:error-notifier');
     const errorMock = sinon.stub();
-    service.notifications = {
-      error: errorMock,
+    service.pixToast = {
+      sendErrorNotification: errorMock,
     };
     const anError = {
       errors: [
@@ -44,7 +44,15 @@ module('Unit | Service | error-notifier', function (hooks) {
     service.notify(anError);
 
     // then
-    assert.ok(errorMock.calledWith(sinon.match.has('message', 'Something went wrong : the provided id is invalid')));
-    assert.ok(errorMock.calledWith(sinon.match.has('message', 'Something else went wrong too ! : undefined')));
+    assert.ok(
+      errorMock.calledWith({
+        message: sinon.match.has('message', 'Something went wrong : the provided id is invalid'),
+      }),
+    );
+    assert.ok(
+      errorMock.calledWith({
+        message: sinon.match.has('message', 'Something else went wrong too ! : undefined'),
+      }),
+    );
   });
 });

@@ -56,6 +56,9 @@
       "mandatory-fields": "The fields marked '<abbr title=\"required\" class=\"mandatory-mark\">'*'</abbr>' are required"
     },
     "notifications": {
+      "close-button": {
+        "extra-information": "Close notification"
+      },
       "generic-error": "An error occurred."
     },
     "roles": {

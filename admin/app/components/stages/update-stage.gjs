@@ -14,7 +14,7 @@ import isInteger from 'lodash/isInteger';
 import StageLevelSelect from './stage-level-select';
 
 export default class UpdateStage extends Component {
-  @service notifications;
+  @service pixToast;
 
   @tracked threshold;
   @tracked level;
@@ -47,11 +47,12 @@ export default class UpdateStage extends Component {
     model.prescriberDescription = this.prescriberDescription ? this.prescriberDescription.trim() : null;
     try {
       await this.args.onUpdate();
-      await this.notifications.success('Les modifications ont bien été enregistrées.');
+      await this.pixToast.sendSuccessNotification({ message: 'Les modifications ont bien été enregistrées.' });
       this.args.toggleEditMode();
-    } catch (e) {
+    } catch (error) {
       model.rollbackAttributes();
-      this.notifications.error(e.errors?.[0]?.detail ?? 'Une erreur est survenue.');
+      const message = error.errors?.[0]?.detail ?? 'Une erreur est survenue.';
+      this.pixToast.sendErrorNotification({ message });
     }
   }
 

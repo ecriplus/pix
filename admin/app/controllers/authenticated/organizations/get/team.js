@@ -21,7 +21,7 @@ export default class GetTeamController extends Controller {
   @tracked organizationRole = null;
 
   @service accessControl;
-  @service notifications;
+  @service pixToast;
   @service store;
 
   updateFilters(filters) {
@@ -54,11 +54,11 @@ export default class GetTeamController extends Controller {
     const email = this.userEmailToAdd.trim();
     const user = await this._getUser(email);
     if (!user) {
-      return this.notifications.error('Compte inconnu.');
+      return this.pixToast.sendErrorNotification({ message: 'Compte inconnu.' });
     }
 
     if (await organization.hasMember(user.id)) {
-      return this.notifications.error('Compte déjà associé.');
+      return this.pixToast.sendErrorNotification({ message: 'Compte déjà associé.' });
     }
 
     try {
@@ -76,9 +76,9 @@ export default class GetTeamController extends Controller {
       });
 
       this.userEmailToAdd = null;
-      this.notifications.success('Accès attribué avec succès.');
-    } catch (e) {
-      this.notifications.error('Une erreur est survenue.');
+      this.pixToast.sendSuccessNotification({ message: 'Accès attribué avec succès.' });
+    } catch (_) {
+      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }
 

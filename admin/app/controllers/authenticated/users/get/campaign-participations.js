@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 export default class UserCampaignParticipationsController extends Controller {
-  @service notifications;
+  @service pixToast;
 
   @action
   async removeParticipation(campaignParticipation) {
@@ -13,9 +13,11 @@ export default class UserCampaignParticipationsController extends Controller {
       await campaignParticipation.unloadRecord();
       await this.model.reload();
       this.send('refreshModel');
-      this.notifications.success('La participation du prescrit a été supprimée avec succès.');
-    } catch (e) {
-      this.notifications.error('Une erreur est survenue lors de la suppression de la participation.');
+      this.pixToast.sendSuccessNotification({ message: 'La participation du prescrit a été supprimée avec succès.' });
+    } catch (_) {
+      this.pixToast.sendErrorNotification({
+        message: 'Une erreur est survenue lors de la suppression de la participation.',
+      });
     }
   }
 }

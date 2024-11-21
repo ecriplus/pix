@@ -4,7 +4,7 @@ import RSVP from 'rsvp';
 
 export default class OrganizationTeamRoute extends Route {
   @service router;
-  @service notifications;
+  @service pixToast;
 
   queryParams = {
     pageNumber: { refreshModel: true },
@@ -68,15 +68,15 @@ export default class OrganizationTeamRoute extends Route {
       errors.map((error) => {
         switch (error.code) {
           case 403:
-            this.notifications.error(this.ERROR_MESSAGES.STATUS_403);
+            this.pixToast.sendErrorNotification({ message: this.ERROR_MESSAGES.STATUS_403 });
             break;
           default:
-            this.notifications.error(this.ERROR_MESSAGES.DEFAULT);
+            this.pixToast.sendErrorNotification({ message: this.ERROR_MESSAGES.DEFAULT });
             break;
         }
       });
     } else {
-      this.notifications.error(this.ERROR_MESSAGES.DEFAULT);
+      this.pixToast.sendErrorNotification({ message: this.ERROR_MESSAGES.DEFAULT });
     }
   }
 }

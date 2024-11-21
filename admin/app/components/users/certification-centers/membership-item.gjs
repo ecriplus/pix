@@ -9,8 +9,6 @@ import MembershipItemActions from './membership-item-actions';
 import MembershipItemRole from './membership-item-role';
 
 export default class UsersCertificationCentersMembershipItemComponent extends Component {
-  @service notifications;
-  @service store;
   @service intl;
 
   @tracked isEditionMode = false;

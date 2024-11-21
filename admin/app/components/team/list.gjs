@@ -12,7 +12,7 @@ import ConfirmPopup from '../confirm-popup';
 
 export default class List extends Component {
   @service store;
-  @service notifications;
+  @service pixToast;
   @service errorResponseHandler;
   @tracked displayConfirm = false;
   @tracked editionMode = false;
@@ -50,9 +50,9 @@ export default class List extends Component {
     try {
       await adminMember.save({ adapterOptions: { method: 'updateRole' } });
 
-      this.notifications.success(
-        `L'agent ${adminMember.firstName} ${adminMember.lastName} a désormais le rôle ${adminMember.updatedRole}`,
-      );
+      this.pixToast.sendSuccessNotification({
+        message: `L'agent ${adminMember.firstName} ${adminMember.lastName} a désormais le rôle ${adminMember.updatedRole}`,
+      });
     } catch (errorResponse) {
       this.errorResponseHandler.notify(errorResponse, this.CUSTOM_ERROR_STATUS_MESSAGES.UPDATE);
       adminMember.role = previousRole;
@@ -69,9 +69,9 @@ export default class List extends Component {
       await this.adminMemberToDeactivate.save({ adapterOptions: { method: 'deactivate' } });
       await this.args.refreshValues();
       this.toggleDisplayConfirm();
-      this.notifications.success(
-        `L'agent ${adminMemberToDeactivate.firstName} ${adminMemberToDeactivate.lastName} n'a plus accès à Pix Admin.`,
-      );
+      this.pixToast.sendSuccessNotification({
+        message: `L'agent ${adminMemberToDeactivate.firstName} ${adminMemberToDeactivate.lastName} n'a plus accès à Pix Admin.`,
+      });
     } catch (errorResponse) {
       this.toggleDisplayConfirm();
 

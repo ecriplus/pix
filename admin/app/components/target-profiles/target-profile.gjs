@@ -18,7 +18,7 @@ import Copy from './modal/copy';
 import PdfParametersModal from './pdf-parameters-modal';
 
 export default class TargetProfile extends Component {
-  @service notifications;
+  @service pixToast;
   @service router;
   @service store;
   @service intl;
@@ -79,7 +79,7 @@ export default class TargetProfile extends Component {
     try {
       await adapter.outdate(this.args.model.id);
       this.args.model.reload();
-      return this.notifications.success('Profil cible marqué comme obsolète.');
+      return this.pixToast.sendSuccessNotification({ message: 'Profil cible marqué comme obsolète.' });
     } catch (responseError) {
       this._handleResponseError(responseError);
     }
@@ -92,23 +92,23 @@ export default class TargetProfile extends Component {
       this.args.model.isSimplifiedAccess = true;
       await this.args.model.save({ adapterOptions: { markTargetProfileAsSimplifiedAccess: true } });
 
-      this.notifications.success('Ce profil cible a bien été marqué comme accès simplifié.');
+      this.pixToast.sendSuccessNotification({ message: 'Ce profil cible a bien été marqué comme accès simplifié.' });
     } catch (responseError) {
       const genericErrorMessage = this.intl.t('common.notifications.generic-error');
-      this.notifications.error(genericErrorMessage);
+      this.pixToast.sendErrorNotification({ message: genericErrorMessage });
     }
   }
 
   _handleResponseError({ errors }) {
     if (!errors) {
-      return this.notifications.error('Une erreur est survenue.');
+      return this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
     errors.forEach((error) => {
       if (['404', '412'].includes(error.status)) {
-        this.notifications.error(error.detail);
+        this.pixToast.sendErrorNotification({ message: error.detail });
       }
       if (error.status === '400') {
-        this.notifications.error('Une erreur est survenue.');
+        this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
       }
     });
   }
@@ -123,7 +123,7 @@ export default class TargetProfile extends Component {
       const token = this.session.data.authenticated.access_token;
       await this.fileSaver.save({ url, fileName, token });
     } catch (error) {
-      this.notifications.error(error.message, { autoClear: false });
+      this.pixToast.sendErrorNotification({ message: error.message });
     }
   }
 
@@ -136,7 +136,7 @@ export default class TargetProfile extends Component {
       const token = this.session.data.authenticated.access_token;
       await this.fileSaver.save({ url, fileName, token });
     } catch (error) {
-      this.notifications.error(error.message, { autoClear: false });
+      this.pixToast.sendErrorNotification({ message: error.message });
     }
   }
 
@@ -146,11 +146,13 @@ export default class TargetProfile extends Component {
       const adapter = this.store.adapterFor('target-profile');
       const newTargetProfileId = await adapter.copy(this.args.model.id);
       this.router.transitionTo('authenticated.target-profiles.target-profile', newTargetProfileId);
-      this.notifications.success(this.intl.t('pages.target-profiles.copy.notifications.success'));
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('pages.target-profiles.copy.notifications.success'),
+      });
       this.showCopyModal = false;
     } catch (error) {
       error.errors.forEach((apiError) => {
-        this.notifications.error(apiError.detail);
+        this.pixToast.sendErrorNotification({ message: apiError.detail });
       });
     }
   }

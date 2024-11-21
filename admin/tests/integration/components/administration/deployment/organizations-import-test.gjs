@@ -13,7 +13,7 @@ module('Integration | Component |  administration/organizations-import', functio
   setupIntlRenderingTest(hooks);
   setupMirage(hooks);
 
-  let store, adapter, notificationSuccessStub, clearAllStub, saveAdapterStub, notificationErrorStub;
+  let store, adapter, notificationSuccessStub, saveAdapterStub, notificationErrorStub;
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
@@ -21,8 +21,6 @@ module('Integration | Component |  administration/organizations-import', functio
     saveAdapterStub = sinon.stub(adapter, 'addOrganizationsCsv');
     notificationSuccessStub = sinon.stub();
     notificationErrorStub = sinon.stub().returns();
-
-    clearAllStub = sinon.stub();
   });
 
   module('when import succeeds', function () {
@@ -30,10 +28,9 @@ module('Integration | Component |  administration/organizations-import', functio
       // given
       const file = new Blob(['foo'], { type: `valid-file` });
       class NotificationsStub extends Service {
-        success = notificationSuccessStub;
-        clearAll = clearAllStub;
+        sendSuccessNotification = notificationSuccessStub;
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
       saveAdapterStub.withArgs(file).resolves();
 
       // when
@@ -65,10 +62,9 @@ module('Integration | Component |  administration/organizations-import', functio
       );
       const file = new Blob(['foo'], { type: `valid-file` });
       class NotificationsStub extends Service {
-        error = notificationErrorStub;
-        clearAll = sinon.stub();
+        sendErrorNotification = notificationErrorStub;
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
 
       // when
       const screen = await render(<template><OrganizationsImport /></template>);

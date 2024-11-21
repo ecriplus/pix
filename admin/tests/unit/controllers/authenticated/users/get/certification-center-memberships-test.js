@@ -16,8 +16,8 @@ module('Unit | Controller | authenticated/users/get/certification-center-members
       rollbackAttributes: sinon.stub(),
     };
     notifications = {
-      error: sinon.stub(),
-      success: sinon.stub(),
+      sendErrorNotification: sinon.stub(),
+      sendSuccessNotification: sinon.stub(),
     };
   });
 
@@ -26,7 +26,7 @@ module('Unit | Controller | authenticated/users/get/certification-center-members
       test('it calls success method from notifications service', async function (assert) {
         // given
         const controller = this.owner.lookup('controller:authenticated/users/get/certification-center-memberships');
-        controller.notifications = notifications;
+        controller.pixToast = notifications;
         UserCertificationCenterMembership.destroyRecord.resolves();
 
         // when
@@ -34,8 +34,8 @@ module('Unit | Controller | authenticated/users/get/certification-center-members
 
         // then
         sinon.assert.calledOnce(UserCertificationCenterMembership.destroyRecord);
-        sinon.assert.calledOnce(controller.notifications.success);
-        sinon.assert.notCalled(controller.notifications.error);
+        sinon.assert.calledOnce(controller.pixToast.sendSuccessNotification);
+        sinon.assert.notCalled(controller.pixToast.sendErrorNotification);
         assert.ok(true);
       });
     });
@@ -44,7 +44,7 @@ module('Unit | Controller | authenticated/users/get/certification-center-members
       test('it calls error method from notifications service', async function (assert) {
         // given
         const controller = this.owner.lookup('controller:authenticated/users/get/certification-center-memberships');
-        controller.notifications = notifications;
+        controller.pixToast = notifications;
         UserCertificationCenterMembership.destroyRecord.rejects();
 
         // when
@@ -52,8 +52,8 @@ module('Unit | Controller | authenticated/users/get/certification-center-members
 
         // then
         sinon.assert.calledOnce(UserCertificationCenterMembership.destroyRecord);
-        sinon.assert.notCalled(controller.notifications.success);
-        sinon.assert.calledOnce(controller.notifications.error);
+        sinon.assert.notCalled(controller.pixToast.sendSuccessNotification);
+        sinon.assert.calledOnce(controller.pixToast.sendErrorNotification);
         assert.ok(true);
       });
     });
@@ -64,7 +64,7 @@ module('Unit | Controller | authenticated/users/get/certification-center-members
       test('it calls success method from notifications service', async function (assert) {
         // given
         const controller = this.owner.lookup('controller:authenticated/users/get/certification-center-memberships');
-        controller.notifications = notifications;
+        controller.pixToast = notifications;
         UserCertificationCenterMembership.save.resolves();
 
         // when
@@ -72,9 +72,9 @@ module('Unit | Controller | authenticated/users/get/certification-center-members
 
         // then
         sinon.assert.calledOnce(UserCertificationCenterMembership.save);
-        sinon.assert.calledOnce(controller.notifications.success);
+        sinon.assert.calledOnce(controller.pixToast.sendSuccessNotification);
         sinon.assert.notCalled(UserCertificationCenterMembership.rollbackAttributes);
-        sinon.assert.notCalled(controller.notifications.error);
+        sinon.assert.notCalled(controller.pixToast.sendErrorNotification);
         assert.ok(true);
       });
     });
@@ -83,7 +83,7 @@ module('Unit | Controller | authenticated/users/get/certification-center-members
       test('it calls error method from notifications service', async function (assert) {
         // given
         const controller = this.owner.lookup('controller:authenticated/users/get/certification-center-memberships');
-        controller.notifications = notifications;
+        controller.pixToast = notifications;
         UserCertificationCenterMembership.save.rejects();
 
         // when
@@ -91,9 +91,9 @@ module('Unit | Controller | authenticated/users/get/certification-center-members
 
         // then
         sinon.assert.calledOnce(UserCertificationCenterMembership.save);
-        sinon.assert.notCalled(controller.notifications.success);
+        sinon.assert.notCalled(controller.pixToast.sendSuccessNotification);
         sinon.assert.calledOnce(UserCertificationCenterMembership.rollbackAttributes);
-        sinon.assert.calledOnce(controller.notifications.error);
+        sinon.assert.calledOnce(controller.pixToast.sendErrorNotification);
         assert.ok(true);
       });
     });

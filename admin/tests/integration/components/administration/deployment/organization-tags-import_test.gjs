@@ -1,5 +1,5 @@
-import NotificationContainer from '@1024pix/ember-cli-notifications/components/notification-container';
 import { render } from '@1024pix/ember-testing-library';
+import PixToastContainer from '@1024pix/pix-ui/components/pix-toast-container';
 import { triggerEvent } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
@@ -19,7 +19,7 @@ module('Integration | Component | administration/organization-tags-import', func
       const file = new Blob(['foo'], { type: `valid-file` });
 
       // when
-      const screen = await render(<template><OrganizationTagsImport /><NotificationContainer /></template>);
+      const screen = await render(<template><OrganizationTagsImport /><PixToastContainer /></template>);
       const input = await screen.findByLabelText(t('components.administration.organization-tags-import.upload-button'));
       await triggerEvent(input, 'change', { files: [file] });
 
@@ -44,7 +44,7 @@ module('Integration | Component | administration/organization-tags-import', func
       const file = new Blob(['foo'], { type: `invalid-file` });
 
       // when
-      const screen = await render(<template><OrganizationTagsImport /><NotificationContainer /></template>);
+      const screen = await render(<template><OrganizationTagsImport /><PixToastContainer /></template>);
       const input = await screen.findByLabelText(t('components.administration.organization-tags-import.upload-button'));
       await triggerEvent(input, 'change', { files: [file] });
 

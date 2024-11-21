@@ -4,7 +4,6 @@ import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
-import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjs from 'dayjs';
@@ -22,9 +21,6 @@ const categories = [
 ];
 
 export default class PlacesLotCreationForm extends Component {
-  @service store;
-  @service notifications;
-  @service router;
   @tracked selectedCategory = null;
 
   @tracked count;

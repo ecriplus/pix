@@ -13,15 +13,13 @@ module('Integration | Component | administration/update-organization-import-form
   setupIntlRenderingTest(hooks);
   setupMirage(hooks);
 
-  let store, adapter, notificationSuccessStub, clearAllStub, saveAdapterStub, notificationErrorStub;
+  let store, adapter, notificationSuccessStub, saveAdapterStub, notificationErrorStub;
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
     adapter = store.adapterFor('import-files');
     saveAdapterStub = sinon.stub(adapter, 'updateOrganizationImportFormat');
     notificationSuccessStub = sinon.stub();
     notificationErrorStub = sinon.stub().returns();
-
-    clearAllStub = sinon.stub();
   });
 
   module('when import succeeds', function () {
@@ -29,11 +27,10 @@ module('Integration | Component | administration/update-organization-import-form
       // given
       const files = Symbol('file');
       class NotificationsStub extends Service {
-        success = notificationSuccessStub;
-        error = notificationErrorStub;
-        clearAll = clearAllStub;
+        sendSuccessNotification = notificationSuccessStub;
+        sendErrorNotification = notificationErrorStub;
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
       saveAdapterStub.withArgs([files]).resolves();
 
       // when
@@ -47,9 +44,9 @@ module('Integration | Component | administration/update-organization-import-form
       assert.ok(true);
       assert.ok(notificationErrorStub.notCalled);
       assert.ok(
-        notificationSuccessStub.calledWith(
-          t('components.administration.organization-import-format.notifications.success'),
-        ),
+        notificationSuccessStub.calledWith({
+          message: t('components.administration.organization-import-format.notifications.success'),
+        }),
       );
     });
   });
@@ -59,14 +56,13 @@ module('Integration | Component | administration/update-organization-import-form
       // given
       const files = Symbol('file');
       class NotificationsStub extends Service {
-        error = notificationErrorStub;
-        success = notificationSuccessStub;
-        clearAll = clearAllStub;
+        sendErrorNotification = notificationErrorStub;
+        sendSuccessNotification = notificationSuccessStub;
       }
       saveAdapterStub.withArgs([files]).rejects({
         errors: [{ status: '422', meta: 'POUET', code: 'MISSING_REQUIRED_FIELD_NAMES' }],
       });
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
 
       // when
       const screen = await render(<template><UpdateOrganizationImportFormat /></template>);
@@ -77,21 +73,20 @@ module('Integration | Component | administration/update-organization-import-form
 
       // then
       assert.ok(notificationSuccessStub.notCalled);
-      assert.ok(notificationErrorStub.calledWithExactly('POUET', { autoClear: false }));
+      assert.ok(notificationErrorStub.calledWithExactly({ message: 'POUET' }));
     });
 
     test('it displays an error notification', async function (assert) {
       // given
       const files = Symbol('file');
       class NotificationsStub extends Service {
-        error = notificationErrorStub;
-        success = notificationSuccessStub;
-        clearAll = clearAllStub;
+        sendErrorNotification = notificationErrorStub;
+        sendSuccessNotification = notificationSuccessStub;
       }
       saveAdapterStub.withArgs([files]).rejects({
         errors: [{ status: '422', title: "Un soucis avec l'import", code: '422', detail: 'Erreur d’import' }],
       });
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
 
       // when
       const screen = await render(<template><UpdateOrganizationImportFormat /></template>);

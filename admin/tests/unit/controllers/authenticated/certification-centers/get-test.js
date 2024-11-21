@@ -20,9 +20,9 @@ module('Unit | Controller | authenticated/certification-centers/get', function (
       controller.model = { certificationCenter: initialCertificationCenter };
 
       class NotificationsStub extends Service {
-        success = sinon.stub();
+        sendSuccessNotification = sinon.stub();
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
 
       // when
       controller.model.certificationCenter.name = 'New Ton';
@@ -37,7 +37,9 @@ module('Unit | Controller | authenticated/certification-centers/get', function (
       assert.strictEqual(controller.model.certificationCenter.externalId, '123456ABC');
       assert.strictEqual(controller.model.certificationCenter.type, 'PRO');
       assert.deepEqual(controller.model.certificationCenter.habilitations, []);
-      sinon.assert.calledWith(controller.notifications.success, 'Centre de certification mis à jour avec succès.');
+      sinon.assert.calledWith(controller.pixToast.sendSuccessNotification, {
+        message: 'Centre de certification mis à jour avec succès.',
+      });
     });
 
     test('should show an error notification if save failed', async function (assert) {
@@ -50,18 +52,17 @@ module('Unit | Controller | authenticated/certification-centers/get', function (
       };
 
       class NotificationsStub extends Service {
-        error = sinon.stub();
+        sendErrorNotification = sinon.stub();
       }
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
 
       // when
       await controller.updateCertificationCenter();
 
       // then
-      sinon.assert.calledWith(
-        controller.notifications.error,
-        "Une erreur est survenue, le centre de certification n'a pas été mis à jour.",
-      );
+      sinon.assert.calledWith(controller.pixToast.sendErrorNotification, {
+        message: "Une erreur est survenue, le centre de certification n'a pas été mis à jour.",
+      });
       assert.ok(true);
     });
   });

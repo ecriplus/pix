@@ -127,12 +127,12 @@ module('Unit | Controller | authenticated/sessions/session/certifications', func
     let isPublishedGetterStub;
 
     hooks.beforeEach(function () {
-      notificationsStub = { success: sinon.stub() };
+      notificationsStub = { sendSuccessNotification: sinon.stub() };
       store = this.owner.lookup('service:store');
 
       store.findRecord = sinon.stub();
       controller.set('model', model);
-      controller.set('notifications', notificationsStub);
+      controller.set('pixToast', notificationsStub);
       controller.set('displayConfirm', true);
       controller.model.session.save = sinon.stub();
       isPublishedGetterStub = sinon.stub();
@@ -143,7 +143,7 @@ module('Unit | Controller | authenticated/sessions/session/certifications', func
     test('should notify an error if request failed', async function (assert) {
       // given
       const anError = 'anError';
-      Object.assign(notificationsStub, { error: sinon.stub() });
+      Object.assign(notificationsStub, { sendErrorNotification: sinon.stub() });
 
       controller.model.session.save = sinon.stub().throws(anError);
 
@@ -153,7 +153,7 @@ module('Unit | Controller | authenticated/sessions/session/certifications', func
 
       // then
       assert.throws(model.session.save, anError);
-      sinon.assert.called(notificationsStub.error);
+      sinon.assert.called(notificationsStub.sendErrorNotification);
       assert.false(controller.displayConfirm);
     });
 
@@ -170,7 +170,9 @@ module('Unit | Controller | authenticated/sessions/session/certifications', func
         sinon.assert.calledWith(controller.model.session.save, {
           adapterOptions: { updatePublishedCertifications: true, toPublish: true },
         });
-        sinon.assert.calledWith(notificationsStub.success, 'Les certifications ont été correctement publiées.');
+        sinon.assert.calledWith(notificationsStub.sendSuccessNotification, {
+          message: 'Les certifications ont été correctement publiées.',
+        });
         assert.false(controller.displayConfirm);
       });
     });
@@ -188,7 +190,9 @@ module('Unit | Controller | authenticated/sessions/session/certifications', func
         sinon.assert.calledWith(model.session.save, {
           adapterOptions: { updatePublishedCertifications: true, toPublish: false },
         });
-        sinon.assert.calledWith(notificationsStub.success, 'Les certifications ont été correctement dépubliées.');
+        sinon.assert.calledWith(notificationsStub.sendSuccessNotification, {
+          message: 'Les certifications ont été correctement dépubliées.',
+        });
         assert.false(controller.displayConfirm);
       });
     });

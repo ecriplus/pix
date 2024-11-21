@@ -20,7 +20,7 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
   @tracked targetProfileToDetach;
 
   @service accessControl;
-  @service notifications;
+  @service pixToast;
   @service router;
   @service store;
   @service intl;
@@ -76,7 +76,7 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
         );
       }
       this.targetProfilesToAttach = '';
-      return this.notifications.success(message.join(''), { htmlContent: true });
+      return this.pixToast.sendSuccessNotification({ message: message.join('') });
     } catch (responseError) {
       this._handleResponseError(responseError);
     }
@@ -95,7 +95,7 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
       await adapter.detachOrganizations(targetProfilId, [this.args.organization.id]);
       this.closeModal();
       await this.args.organization.get('targetProfileSummaries').reload();
-      return this.notifications.success('Profil cible détaché avec succès.');
+      return this.pixToast.sendSuccessNotification({ message: 'Profil cible détaché avec succès.' });
     } catch (responseError) {
       this._handleResponseError(responseError);
     }
@@ -117,13 +117,13 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
     const genericErrorMessage = this.intl.t('common.notifications.generic-error');
 
     if (!errors) {
-      return this.notifications.error(genericErrorMessage);
+      return this.pixToast.sendErrorNotification({ message: genericErrorMessage });
     }
     errors.forEach((error) => {
       if (['404', '412'].includes(error.status)) {
-        return this.notifications.error(error.detail);
+        return this.pixToast.sendErrorNotification({ message: error.detail });
       }
-      return this.notifications.error(genericErrorMessage);
+      return this.pixToast.sendErrorNotification({ message: genericErrorMessage });
     });
   }
 

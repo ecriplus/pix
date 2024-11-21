@@ -9,7 +9,7 @@ import Form from './form';
 
 export default class FlashAlgorithmConfiguration extends Component {
   @service store;
-  @service notifications;
+  @service pixToast;
   @tracked form = {
     maximumAssessmentLength: this.args.model.maximumAssessmentLength,
     warmUpLength: this.args.model.warmUpLength,
@@ -27,9 +27,9 @@ export default class FlashAlgorithmConfiguration extends Component {
     const adapter = this.store.adapterFor('flash-algorithm-configuration');
     try {
       await adapter.createRecord(this.form);
-      this.notifications.success('La configuration a été créée');
+      this.pixToast.sendSuccessNotification({ message: 'La configuration a été créée' });
     } catch (errorResponse) {
-      this.notifications.error("La configuration n'a pu être créée");
+      this.pixToast.sendErrorNotification({ message: "La configuration n'a pu être créée" });
     }
   }
 

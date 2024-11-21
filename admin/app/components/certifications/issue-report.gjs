@@ -9,7 +9,6 @@ import { and, not, or } from 'ember-truth-helpers';
 import CertificationIssueReportModal from './issue-reports/resolve-issue-report-modal';
 
 export default class CertificationIssueReport extends Component {
-  @service notifications;
   @service accessControl;
 
   @tracked showResolveModal = false;

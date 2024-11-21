@@ -26,7 +26,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
       test('it displays a success message notifications', async function (assert) {
         // given
         const component = createComponent('component:target-profiles/organizations');
-        component.notifications = { success: sinon.stub() };
+        component.pixToast = { sendSuccessNotification: sinon.stub() };
         component.args = {
           targetProfile: {
             id: 56,
@@ -50,8 +50,8 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
         assert.ok(attachOrganizations.calledWith({ organizationIds: [1, 2], targetProfileId: 56 }));
         assert.strictEqual(component.organizationsToAttach, '');
         assert.ok(
-          component.notifications.success.calledWith('Organisation(s) rattaché(es) avec succès.', {
-            htmlContent: true,
+          component.pixToast.sendSuccessNotification.calledWith({
+            message: 'Organisation(s) rattaché(es) avec succès.',
           }),
         );
         assert.ok(
@@ -62,7 +62,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
       test('it displays duplicate message notifications', async function (assert) {
         // given
         const component = createComponent('component:target-profiles/organizations');
-        component.notifications = { success: sinon.stub() };
+        component.pixToast = { sendSuccessNotification: sinon.stub() };
         component.args = {
           targetProfile: {
             id: 56,
@@ -81,10 +81,9 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
         assert.ok(attachOrganizations.calledWith({ organizationIds: [1], targetProfileId: 56 }));
         assert.strictEqual(component.organizationsToAttach, '');
         assert.ok(
-          component.notifications.success.calledWith(
-            'Le(s) organisation(s) suivantes étai(en)t déjà rattachée(s) à ce profil cible : 1',
-            { htmlContent: true },
-          ),
+          component.pixToast.sendSuccessNotification.calledWith({
+            message: 'Le(s) organisation(s) suivantes étai(en)t déjà rattachée(s) à ce profil cible : 1',
+          }),
         );
         assert.ok(
           component.router.replaceWith.calledWith('authenticated.target-profiles.target-profile.organizations'),
@@ -94,7 +93,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
       test('it displays a duplicate and success messages notifications', async function (assert) {
         // given
         const component = createComponent('component:target-profiles/organizations');
-        component.notifications = { success: sinon.stub() };
+        component.pixToast = { sendSuccessNotification: sinon.stub() };
         component.args = {
           targetProfile: {
             id: 56,
@@ -113,10 +112,10 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
         assert.ok(attachOrganizations.calledWith({ organizationIds: [1, 2], targetProfileId: 56 }));
         assert.strictEqual(component.organizationsToAttach, '');
         assert.ok(
-          component.notifications.success.calledWith(
-            'Organisation(s) rattaché(es) avec succès.<br/>Le(s) organisation(s) suivantes étai(en)t déjà rattachée(s) à ce profil cible : 1',
-            { htmlContent: true },
-          ),
+          component.pixToast.sendSuccessNotification.calledWith({
+            message:
+              'Organisation(s) rattaché(es) avec succès.<br/>Le(s) organisation(s) suivantes étai(en)t déjà rattachée(s) à ce profil cible : 1',
+          }),
         );
         assert.ok(
           component.router.replaceWith.calledWith('authenticated.target-profiles.target-profile.organizations'),
@@ -128,7 +127,6 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
       test('it remove duplicate ids', async function (assert) {
         // given
         const component = createComponent('component:target-profiles/organizations');
-        component.notifications = { success: sinon.stub() };
         component.args = {
           targetProfile: {
             id: 56,
@@ -163,7 +161,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
               { status: '404', detail: 'I am displayed 2' },
             ],
           };
-          component.notifications = { error: sinon.stub() };
+          component.pixToast = { sendErrorNotification: sinon.stub() };
           component.args = { targetProfile: { id: 56 } };
           attachOrganizations.rejects(errors);
           component.organizationsToAttach = '1,1,2,3,3';
@@ -172,8 +170,8 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
 
           // then
           assert.strictEqual(component.organizationsToAttach, '1,1,2,3,3');
-          assert.ok(component.notifications.error.calledWith('I am displayed 1'));
-          assert.ok(component.notifications.error.calledWith('I am displayed 2'));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'I am displayed 1' }));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'I am displayed 2' }));
         });
 
         test('it displays a notification for each 412 error found', async function (assert) {
@@ -185,7 +183,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
               { status: '412', detail: 'I am displayed too 2' },
             ],
           };
-          component.notifications = { error: sinon.stub() };
+          component.pixToast = { sendErrorNotification: sinon.stub() };
           component.args = { targetProfile: { id: 56 } };
           attachOrganizations.rejects(errors);
           component.organizationsToAttach = '1,1,5,3,3';
@@ -195,8 +193,8 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
 
           // then
           assert.strictEqual(component.organizationsToAttach, '1,1,5,3,3');
-          assert.ok(component.notifications.error.calledWith('I am displayed too 1'));
-          assert.ok(component.notifications.error.calledWith('I am displayed too 2'));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'I am displayed too 1' }));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'I am displayed too 2' }));
         });
 
         test('it display default notification for all other error found', async function (assert) {
@@ -208,7 +206,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
               { status: '401', detail: 'I am displayed' },
             ],
           };
-          component.notifications = { error: sinon.stub() };
+          component.pixToast = { sendErrorNotification: sinon.stub() };
           component.args = { targetProfile: { id: 56 } };
           attachOrganizations.rejects(errors);
           component.organizationsToAttach = '1,1,2,3,3';
@@ -218,7 +216,10 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
 
           // then
           assert.strictEqual(component.organizationsToAttach, '1,1,2,3,3');
-          assert.strictEqual(component.notifications.error.withArgs('Une erreur est survenue.').callCount, 2);
+          assert.strictEqual(
+            component.pixToast.sendErrorNotification.withArgs({ message: 'Une erreur est survenue.' }).callCount,
+            2,
+          );
         });
       });
 
@@ -227,7 +228,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
           // given
           const component = createComponent('component:target-profiles/organizations');
           const errors = {};
-          component.notifications = { error: sinon.stub() };
+          component.pixToast = { sendErrorNotification: sinon.stub() };
           component.args = { targetProfile: { attachOrganizations: sinon.stub().rejects(errors) } };
           component.organizationsToAttach = '1,1,2,3,3';
 
@@ -236,7 +237,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
 
           // then
           assert.strictEqual(component.organizationsToAttach, '1,1,2,3,3');
-          assert.ok(component.notifications.error.calledWith('Une erreur est survenue.'));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'Une erreur est survenue.' }));
         });
       });
     });
@@ -262,7 +263,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
       test('it shows a success notifications', async function (assert) {
         // given
         const component = createComponent('component:target-profiles/organizations');
-        component.notifications = { success: sinon.stub() };
+        component.pixToast = { sendSuccessNotification: sinon.stub() };
         component.args = { targetProfile: { id: 1 } };
         component.existingTargetProfile = 2;
         component.router = { replaceWith: sinon.stub() };
@@ -279,7 +280,11 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
           }),
         );
         assert.strictEqual(component.existingTargetProfile, '');
-        assert.ok(component.notifications.success.calledWith('Organisation(s) rattaché(es) avec succès.'));
+        assert.ok(
+          component.pixToast.sendSuccessNotification.calledWith({
+            message: 'Organisation(s) rattaché(es) avec succès.',
+          }),
+        );
         assert.ok(
           component.router.replaceWith.calledWith('authenticated.target-profiles.target-profile.organizations'),
         );
@@ -296,7 +301,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
               { status: '404', detail: 'I am displayed 2' },
             ],
           };
-          component.notifications = { error: sinon.stub() };
+          component.pixToast = { sendErrorNotification: sinon.stub() };
           component.args = {
             targetProfile: { id: 1 },
           };
@@ -305,8 +310,8 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
 
           await component.organizationsFromExistingTargetProfileToAttach(event);
 
-          assert.ok(component.notifications.error.calledWith('I am displayed 1'));
-          assert.ok(component.notifications.error.calledWith('I am displayed 2'));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'I am displayed 1' }));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'I am displayed 2' }));
         });
 
         test('it shows notification for each 412 error found', async function (assert) {
@@ -317,7 +322,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
               { status: '412', detail: 'I am displayed too 2' },
             ],
           };
-          component.notifications = { error: sinon.stub() };
+          component.pixToast = { sendErrorNotification: sinon.stub() };
           attachOrganizationsFromExistingTargetProfile.rejects(errors);
           component.args = {
             targetProfile: { id: 1 },
@@ -326,8 +331,8 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
 
           await component.organizationsFromExistingTargetProfileToAttach(event);
 
-          assert.ok(component.notifications.error.calledWith('I am displayed too 1'));
-          assert.ok(component.notifications.error.calledWith('I am displayed too 2'));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'I am displayed too 1' }));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'I am displayed too 2' }));
         });
 
         test('it shows default notification for all other error found', async function (assert) {
@@ -339,7 +344,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
               { status: '401', detail: 'another' },
             ],
           };
-          component.notifications = { error: sinon.stub() };
+          component.pixToast = { sendErrorNotification: sinon.stub() };
           component.args = {
             targetProfile: { id: 1 },
           };
@@ -350,7 +355,10 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
           await component.organizationsFromExistingTargetProfileToAttach(event);
 
           // then
-          assert.strictEqual(component.notifications.error.withArgs('Une erreur est survenue.').callCount, 2);
+          assert.strictEqual(
+            component.pixToast.sendErrorNotification.withArgs({ message: 'Une erreur est survenue.' }).callCount,
+            2,
+          );
         });
       });
 
@@ -359,7 +367,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
           // given
           const component = createComponent('component:target-profiles/organizations');
           const errors = {};
-          component.notifications = { error: sinon.stub() };
+          component.pixToast = { sendErrorNotification: sinon.stub() };
           component.args = {
             targetProfile: { id: 1 },
           };
@@ -370,7 +378,7 @@ module('Unit | Component | Target Profiles | Organizations', function (hooks) {
           await component.organizationsFromExistingTargetProfileToAttach(event);
 
           // then
-          assert.ok(component.notifications.error.calledWith('Une erreur est survenue.'));
+          assert.ok(component.pixToast.sendErrorNotification.calledWith({ message: 'Une erreur est survenue.' }));
         });
       });
     });

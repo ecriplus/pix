@@ -16,7 +16,7 @@ import ConfirmPopup from '../confirm-popup';
 export default class Badges extends Component {
   @tracked displayConfirm = false;
   @service store;
-  @service notifications;
+  @service pixToast;
   badgeIdToDelete;
 
   get hasBadges() {
@@ -36,9 +36,9 @@ export default class Badges extends Component {
     try {
       badge = this.store.peekRecord('badge', this.badgeIdToDelete);
       await badge.destroyRecord();
-      this.notifications.success('Le résultat thématique a été supprimé avec succès.');
-    } catch (e) {
-      this.notifications.error(e.errors[0].detail);
+      this.pixToast.sendSuccessNotification({ message: 'Le résultat thématique a été supprimé avec succès.' });
+    } catch (error) {
+      this.pixToast.sendErrorNotification({ message: error.errors[0].detail });
       badge.rollbackAttributes();
     }
     this.toggleDisplayConfirm();

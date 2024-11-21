@@ -7,7 +7,7 @@ export default class TrainingEditTriggersController extends Controller {
   @service intl;
   @service router;
   @service store;
-  @service notifications;
+  @service pixToast;
 
   queryParams = ['type'];
 
@@ -43,10 +43,10 @@ export default class TrainingEditTriggersController extends Controller {
       await this.store
         .createRecord('training-trigger', { ...data, type: this.type, training: this.model.training })
         .save({ adapterOptions: { tubes: this.selectedTubes, trainingId: this.model.training.id } });
-      this.notifications.success('Le déclencheur a été créé avec succès.');
+      this.pixToast.sendSuccessNotification({ message: 'Le déclencheur a été créé avec succès.' });
       this.goBackToTraining();
     } catch (error) {
-      this.notifications.error('Une erreur est survenue.');
+      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }
 

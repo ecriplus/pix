@@ -5,7 +5,7 @@ import { tracked } from '@glimmer/tracking';
 
 const DEFAULT_PAGE_NUMBER = 1;
 export default class ListController extends Controller {
-  @service notifications;
+  @service pixToast;
   @service store;
   @service accessControl;
 
@@ -58,7 +58,7 @@ export default class ListController extends Controller {
     try {
       await this.model.session.save({ adapterOptions: { updatePublishedCertifications: true, toPublish: false } });
       await this.model.juryCertificationSummaries.reload();
-      this.notifications.success('Les certifications ont été correctement dépubliées.');
+      this.pixToast.sendSuccessNotification({ message: 'Les certifications ont été correctement dépubliées.' });
     } catch (e) {
       this.notifyError(e);
     }
@@ -75,17 +75,16 @@ export default class ListController extends Controller {
 
     await this.model.juryCertificationSummaries.reload();
     if (this.model.session.isPublished) {
-      this.notifications.success('Les certifications ont été correctement publiées.');
+      this.pixToast.sendSuccessNotification({ message: 'Les certifications ont été correctement publiées.' });
     }
     this.hideConfirmationModal();
   }
 
   notifyError(error) {
     if (error.errors && error.errors[0] && error.errors[0].detail) {
-      const autoClear = error.errors[0].status != 503;
-      this.notifications.error(error.errors[0].detail, { autoClear });
+      this.pixToast.sendErrorNotification({ message: error.errors[0].detail });
     } else {
-      this.notifications.error(error);
+      this.pixToast.sendErrorNotification({ message: error });
     }
   }
 

@@ -39,11 +39,11 @@ module('Integration | Component | organizations/target-profiles-section', functi
     test('it calls the organization action when the input is not empty and user clicks on button', async function (assert) {
       // given
       class NotificationsStub extends Service {
-        success = sinon.stub();
+        sendSuccessNotification = sinon.stub();
       }
       const adapter = store.adapterFor('organization');
       const attachTargetProfileStub = sinon.stub(adapter, 'attachTargetProfile').resolves();
-      this.owner.register('service:notifications', NotificationsStub);
+      this.owner.register('service:pixToast', NotificationsStub);
       const targetProfileSummary = store.createRecord('target-profile-summary', {
         id: 666,
         name: 'Number of The Beast',
@@ -155,8 +155,8 @@ module('Integration | Component | organizations/target-profiles-section', functi
       test('it should detach a target profile when click on "Confirmer" button', async function (assert) {
         // given
 
-        const notificationService = this.owner.lookup('service:notifications');
-        sinon.stub(notificationService, 'success');
+        const notificationService = this.owner.lookup('service:pixToast');
+        sinon.stub(notificationService, 'sendSuccessNotification');
 
         const adapter = store.adapterFor('target-profile');
         const detachOrganizationsTargetProfileStub = sinon.stub(adapter, 'detachOrganizations').resolves();
@@ -188,8 +188,8 @@ module('Integration | Component | organizations/target-profiles-section', functi
 
       test('it should show a notification on success', async function (assert) {
         // given
-        const notificationService = this.owner.lookup('service:notifications');
-        const notificationSuccessStub = sinon.stub(notificationService, 'success');
+        const notificationService = this.owner.lookup('service:pixToast');
+        const notificationSuccessStub = sinon.stub(notificationService, 'sendSuccessNotification');
 
         const adapter = store.adapterFor('target-profile');
         sinon.stub(adapter, 'detachOrganizations').resolves();
@@ -219,7 +219,7 @@ module('Integration | Component | organizations/target-profiles-section', functi
         await click(confirmButton);
 
         // then
-        assert.ok(notificationSuccessStub.calledOnceWithExactly('Profil cible détaché avec succès.'));
+        assert.ok(notificationSuccessStub.calledOnceWithExactly({ message: 'Profil cible détaché avec succès.' }));
       });
     });
   });

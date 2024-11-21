@@ -24,30 +24,30 @@ const I18N_KEYS_BY_ERROR_CODE = {
 };
 
 export default class ErrorResponseHandlerService extends Service {
-  @service notifications;
+  @service pixToast;
   @service intl;
 
   notify(errorResponse, customErrorMessageByStatus) {
     if (!_isJSONAPIError(errorResponse)) {
-      this.notifications.error(errorResponse);
+      this.pixToast.sendErrorNotification({ message: errorResponse });
       return;
     }
 
     const { errors } = errorResponse;
     if (!errors) {
-      this.notifications.error(ERROR_MESSAGES_BY_STATUS.DEFAULT);
+      this.pixToast.sendErrorNotification({ message: ERROR_MESSAGES_BY_STATUS.DEFAULT });
       return;
     }
 
     errors.forEach((error) => {
       const messageForCode = this._getErrorMessageForErrorCode(error.code, error.meta);
       if (messageForCode) {
-        this.notifications.error(messageForCode);
+        this.pixToast.sendErrorNotification({ message: messageForCode });
         return;
       }
 
       const message = _getErrorMessageForHttpStatus(error.status, customErrorMessageByStatus);
-      this.notifications.error(message);
+      this.pixToast.sendErrorNotification({ message });
     });
   }
 

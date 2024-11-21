@@ -12,9 +12,9 @@ module('Unit | Controller | authenticated/sessions/session/informations', functi
 
   hooks.beforeEach(function () {
     controller = this.owner.lookup('controller:authenticated/sessions/session/informations');
-    const success = sinon.stub().returns();
-    const error = sinon.stub().returns();
-    controller.notifications = { success, error };
+    const sendSuccessNotification = sinon.stub().returns();
+    const sendErrorNotification = sinon.stub().returns();
+    controller.pixToast = { sendSuccessNotification, sendErrorNotification };
   });
 
   module('#unfinalizeSession', function () {
@@ -30,7 +30,11 @@ module('Unit | Controller | authenticated/sessions/session/informations', functi
       // then
       assert.ok(controller.model.save.calledWithExactly({ adapterOptions: { unfinalize: true } }));
       assert.ok(controller.model.reload.calledOnce);
-      assert.ok(controller.notifications.success.calledWithExactly('La session a bien été définalisée'));
+      assert.ok(
+        controller.pixToast.sendSuccessNotification.calledWithExactly({
+          message: 'La session a bien été définalisée',
+        }),
+      );
     });
 
     module('when save failed', function () {
@@ -45,7 +49,11 @@ module('Unit | Controller | authenticated/sessions/session/informations', functi
         // then
         assert.ok(controller.model.save.calledOnce);
         assert.ok(controller.model.reload.notCalled);
-        assert.ok(controller.notifications.error.calledWithExactly('Erreur lors de la définalisation de la session'));
+        assert.ok(
+          controller.pixToast.sendErrorNotification.calledWithExactly({
+            message: 'Erreur lors de la définalisation de la session',
+          }),
+        );
       });
     });
   });
@@ -92,7 +100,11 @@ module('Unit | Controller | authenticated/sessions/session/informations', functi
         assert.ok(
           controller.model.save.calledWithExactly({ adapterOptions: { certificationOfficerAssignment: true } }),
         );
-        assert.ok(controller.notifications.success.calledWithExactly('La session vous a correctement été assignée'));
+        assert.ok(
+          controller.pixToast.sendSuccessNotification.calledWithExactly({
+            message: 'La session vous a correctement été assignée',
+          }),
+        );
         assert.false(controller.isShowingModal);
       });
 
@@ -107,7 +119,11 @@ module('Unit | Controller | authenticated/sessions/session/informations', functi
 
         // then
         assert.ok(controller.model.save.calledOnce);
-        assert.ok(controller.notifications.error.calledWithExactly("Erreur lors de l'assignation à la session"));
+        assert.ok(
+          controller.pixToast.sendErrorNotification.calledWithExactly({
+            message: "Erreur lors de l'assignation à la session",
+          }),
+        );
         assert.false(controller.isShowingModal);
       });
     });
@@ -139,7 +155,11 @@ module('Unit | Controller | authenticated/sessions/session/informations', functi
 
       // then
       assert.ok(controller.model.save.calledWithExactly({ adapterOptions: { certificationOfficerAssignment: true } }));
-      assert.ok(controller.notifications.success.calledWithExactly('La session vous a correctement été assignée'));
+      assert.ok(
+        controller.pixToast.sendSuccessNotification.calledWithExactly({
+          message: 'La session vous a correctement été assignée',
+        }),
+      );
       assert.false(controller.isShowingModal);
     });
 
@@ -154,7 +174,11 @@ module('Unit | Controller | authenticated/sessions/session/informations', functi
 
       // then
       assert.ok(controller.model.save.calledOnce);
-      assert.ok(controller.notifications.error.calledWithExactly("Erreur lors de l'assignation à la session"));
+      assert.ok(
+        controller.pixToast.sendErrorNotification.calledWithExactly({
+          message: "Erreur lors de l'assignation à la session",
+        }),
+      );
       assert.false(controller.isShowingModal);
     });
   });

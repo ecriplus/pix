@@ -57,8 +57,8 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
 
       controller.router.transitionTo = sinon.stub();
 
-      controller.notifications = {
-        success: sinon.stub(),
+      controller.pixToast = {
+        sendSuccessNotification: sinon.stub(),
       };
 
       const event = {
@@ -70,7 +70,11 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
 
       // then
       assert.ok(saveStub.called);
-      assert.ok(controller.notifications.success.calledWith('Le parcours autonome a été créé avec succès.'));
+      assert.ok(
+        controller.pixToast.sendSuccessNotification.calledWith({
+          message: 'Le parcours autonome a été créé avec succès.',
+        }),
+      );
       assert.ok(
         controller.router.transitionTo.calledWith('authenticated.autonomous-courses.details', autonomousCourse.id),
       );
@@ -81,8 +85,8 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
       const autonomousCourse = {
         targetProfileId: 32,
       };
-      controller.notifications = {
-        error: sinon.stub(),
+      controller.pixToast = {
+        sendErrorNotification: sinon.stub(),
       };
 
       const saveStub = sinon.stub().rejects({ errors: [] });
@@ -98,7 +102,7 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
 
       // then
       assert.ok(saveStub.called);
-      assert.ok(controller.notifications.error.calledWith('Une erreur est survenue.'));
+      assert.ok(controller.pixToast.sendErrorNotification.calledWith({ message: 'Une erreur est survenue.' }));
     });
 
     test('it should display error message from API when it receives a "bad request" error', async function (assert) {
@@ -106,8 +110,8 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
       const autonomousCourse = {
         targetProfileId: 32,
       };
-      controller.notifications = {
-        error: sinon.stub(),
+      controller.pixToast = {
+        sendErrorNotification: sinon.stub(),
       };
 
       const errors = {
@@ -127,7 +131,7 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
 
       // then
       assert.ok(saveStub.called);
-      assert.ok(controller.notifications.error.calledWith('Le profil cible ne correspond pas'));
+      assert.ok(controller.pixToast.sendErrorNotification.calledWith({ message: 'Le profil cible ne correspond pas' }));
     });
 
     test('it should display error message from API when it receives an "user does not have access to the organization" error message', async function (assert) {
@@ -135,8 +139,8 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
       const autonomousCourse = {
         targetProfileId: 32,
       };
-      controller.notifications = {
-        error: sinon.stub(),
+      controller.pixToast = {
+        sendErrorNotification: sinon.stub(),
       };
       const errors = {
         errors: [{ status: '403', detail: 'User does not have an access to the organization 14' }],
@@ -152,7 +156,11 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
 
       // then
       assert.ok(saveStub.called);
-      assert.ok(controller.notifications.error.calledWith('User does not have an access to the organization 14'));
+      assert.ok(
+        controller.pixToast.sendErrorNotification.calledWith({
+          message: 'User does not have an access to the organization 14',
+        }),
+      );
     });
 
     test('it should display not selected target profile error notification when autonomous-course is saved without target profile', async function (assert) {
@@ -164,8 +172,8 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
         customLandingPageText: "un texte de page d'accueil",
       };
 
-      controller.notifications = {
-        error: sinon.stub(),
+      controller.pixToast = {
+        sendErrorNotification: sinon.stub(),
       };
 
       const saveStub = sinon.stub().rejects();
@@ -181,7 +189,7 @@ module('Unit | Controller | authenticated/autonomous-courses/new', function (hoo
 
       // then
       assert.ok(saveStub.called);
-      assert.ok(controller.notifications.error.calledWith('Aucun profil cible sélectionné !'));
+      assert.ok(controller.pixToast.sendErrorNotification.calledWith({ message: 'Aucun profil cible sélectionné !' }));
     });
   });
 });

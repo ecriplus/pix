@@ -1,5 +1,5 @@
-import NotificationContainer from '@1024pix/ember-cli-notifications/components/notification-container';
 import { render } from '@1024pix/ember-testing-library';
+import PixToastContainer from '@1024pix/pix-ui/components/pix-toast-container';
 import Service from '@ember/service';
 import { triggerEvent } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
@@ -49,7 +49,7 @@ module('Integration | Component | administration/certification/sco-whitelist-con
 
     test('it displays a success notification', async function (assert) {
       // when
-      const screen = await render(<template><ScoWhitelistConfiguration /><NotificationContainer /></template>);
+      const screen = await render(<template><ScoWhitelistConfiguration /><PixToastContainer /></template>);
       const input = await screen.getByLabelText(t('pages.administration.certification.sco-whitelist.import.button'));
       await triggerEvent(input, 'change', { files: [file] });
 
@@ -73,7 +73,7 @@ module('Integration | Component | administration/certification/sco-whitelist-con
         })
         .rejects();
       // when
-      const screen = await render(<template><ScoWhitelistConfiguration /><NotificationContainer /></template>);
+      const screen = await render(<template><ScoWhitelistConfiguration /><PixToastContainer /></template>);
       const input = await screen.findByLabelText(t('pages.administration.certification.sco-whitelist.import.button'));
       await triggerEvent(input, 'change', { files: [file] });
 

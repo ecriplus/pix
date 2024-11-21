@@ -9,14 +9,12 @@ import AdministrationBlockLayout from '../block-layout';
 
 export default class AddOrganizationFeaturesInBatch extends Component {
   @service intl;
-  @service notifications;
+  @service pixToast;
   @service session;
   @service errorResponseHandler;
 
   @action
   async addOrganizationFeaturesInBatch(files) {
-    this.notifications.clearAll();
-
     let response;
     try {
       const fileContent = files[0];
@@ -32,15 +30,15 @@ export default class AddOrganizationFeaturesInBatch extends Component {
         body: fileContent,
       });
       if (response.ok) {
-        this.notifications.success(
-          this.intl.t('components.administration.add-organization-features-in-batch.notifications.success'),
-        );
+        this.pixToast.sendSuccessNotification({
+          message: this.intl.t('components.administration.add-organization-features-in-batch.notifications.success'),
+        });
         return;
       } else {
         this.errorResponseHandler.notify(await response.json());
       }
     } catch (error) {
-      this.notifications.error(this.intl.t('common.notifications.generic-error'));
+      this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
     } finally {
       this.isLoading = false;
     }

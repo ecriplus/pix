@@ -17,7 +17,7 @@ import TargetProfileSelector from './target-profile-selector';
 const DEFAULT_BADGE_LEVEL = '1';
 
 export default class AttachBadges extends Component {
-  @service notifications;
+  @service pixToast;
   @service router;
   @service store;
 
@@ -35,7 +35,7 @@ export default class AttachBadges extends Component {
   @action
   async onError(errorMessage) {
     if (errorMessage) {
-      this.notifications.error(errorMessage);
+      this.pixToast.sendErrorNotification({ message: errorMessage });
     }
   }
 
@@ -110,9 +110,9 @@ export default class AttachBadges extends Component {
 
       this.router.transitionTo('authenticated.complementary-certifications.complementary-certification.details');
 
-      this.notifications.success(
-        `Profil cible rattaché à la certification ${complementaryCertification.label} mis à jour avec succès !`,
-      );
+      this.pixToast.sendSuccessNotification({
+        message: `Profil cible rattaché à la certification ${complementaryCertification.label} mis à jour avec succès !`,
+      });
     } catch (error) {
       console.error({ error });
       await this.onError("Une erreur est survenue lors de l'enregistrement du profil cible.");

@@ -6,7 +6,6 @@ import Searchbar from 'pix-admin/components/complementary-certifications/attach-
 import SelectedTargetProfile from 'pix-admin/components/complementary-certifications/attach-badges/target-profile-selector/selected-target-profile';
 
 export default class TargetProfileSelectorComponent extends Component {
-  @service notifications;
   @service store;
 
   @tracked attachableTargetProfiles = undefined;

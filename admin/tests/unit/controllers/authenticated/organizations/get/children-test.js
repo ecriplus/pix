@@ -14,7 +14,7 @@ module('Unit | Controller | authenticated/organizations/get/children', function 
 
   hooks.beforeEach(function () {
     controller = this.owner.lookup('controller:authenticated/organizations/get/children');
-    notifications = this.owner.lookup('service:notifications');
+    notifications = this.owner.lookup('service:pixToast');
     store = this.owner.lookup('service:store');
   });
 
@@ -25,7 +25,7 @@ module('Unit | Controller | authenticated/organizations/get/children', function 
       const organizationAdapter = { attachChildOrganization: sinon.stub().resolves() };
 
       sinon.stub(store, 'adapterFor').returns(organizationAdapter);
-      sinon.stub(notifications, 'success');
+      sinon.stub(notifications, 'sendSuccessNotification');
       controller.model = {
         organization: store.createRecord('organization', { id: '12' }),
       };
@@ -47,7 +47,9 @@ module('Unit | Controller | authenticated/organizations/get/children', function 
         }),
       );
       assert.true(
-        notifications.success.calledWithExactly(`L'organisation fille a bien été liée à l'organisation mère`),
+        notifications.sendSuccessNotification.calledWithExactly({
+          message: `L'organisation fille a bien été liée à l'organisation mère`,
+        }),
       );
       assert.true(reloadStub.calledOnce);
     });
@@ -86,7 +88,7 @@ module('Unit | Controller | authenticated/organizations/get/children', function 
             };
 
             sinon.stub(store, 'adapterFor').returns(organizationAdapter);
-            sinon.stub(notifications, 'error');
+            sinon.stub(notifications, 'sendErrorNotification');
 
             controller.model = {
               organization: store.createRecord('organization', { id: '12' }),
@@ -97,7 +99,7 @@ module('Unit | Controller | authenticated/organizations/get/children', function 
             await controller.handleFormSubmitted(childOrganizationId);
 
             // then
-            assert.true(notifications.error.calledWithExactly(message));
+            assert.true(notifications.sendErrorNotification.calledWithExactly({ message }));
             assert.true(controller.model.organizations.reload.notCalled);
           });
         });

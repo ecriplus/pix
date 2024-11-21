@@ -9,7 +9,7 @@ export default class TrainingDetailsTargetProfilesController extends Controller 
   @tracked targetProfilesToAttach = '';
 
   @service accessControl;
-  @service notifications;
+  @service pixToast;
 
   get canAttachTargetProfiles() {
     return this.accessControl.hasAccessToTrainingsActionsScope;
@@ -55,7 +55,7 @@ export default class TrainingDetailsTargetProfilesController extends Controller 
         );
       }
       this.targetProfilesToAttach = '';
-      return this.notifications.success(message.join(''), { htmlContent: true });
+      return this.pixToast.sendSuccessNotification({ message: message.join('') });
     } catch (responseError) {
       this._handleResponseError(responseError);
     }
@@ -63,13 +63,13 @@ export default class TrainingDetailsTargetProfilesController extends Controller 
 
   _handleResponseError({ errors }) {
     if (!errors) {
-      return this.notifications.error('Une erreur est survenue.');
+      return this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
     errors.forEach((error) => {
       if (['404', '412'].includes(error.status)) {
-        return this.notifications.error(error.detail);
+        return this.pixToast.sendErrorNotification({ message: error.detail });
       }
-      return this.notifications.error('Une erreur est survenue.');
+      return this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     });
   }
 
