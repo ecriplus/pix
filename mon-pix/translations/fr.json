@@ -2129,6 +2129,12 @@
           "delete": "Supprimer mon compte"
         },
         "menu-link-title": "Supprimer mon compte",
+        "modal": {
+          "question": "Êtes-vous sûr(e) de vouloir supprimer votre compte ?",
+          "title": "Vous êtes sur le point de supprimer votre compte",
+          "warning-1": "Veuillez noter que le compte ne pourra pas être récupéré après la suppression.",
+          "warning-2": "Dès votre confirmation, vous serez déconnecté automatiquement et votre demande sera prise en compte immédiatement."
+        },
         "more-information": "Pour plus d’informations, ",
         "more-information-contact-support": "vous pouvez contacter le support.",
         "title": "Supprimer mon compte définitivement",
