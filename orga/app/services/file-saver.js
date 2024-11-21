@@ -1,7 +1,9 @@
 import Service from '@ember/service';
 import { service } from '@ember/service';
 import fetch from 'fetch';
+
 export default class FileSaverService extends Service {
+  @service notifications;
   @service intl;
 
   async save({
@@ -11,8 +13,14 @@ export default class FileSaverService extends Service {
     fetcher = _fetchData,
     downloadFileForIEBrowser = _downloadFileForIEBrowser,
     downloadFileForModernBrowsers = _downloadFileForModernBrowsers,
+    noContentMessageNotification = this.intl.t('common.no-content'),
   }) {
     const response = await fetcher({ url, token, locale: this.locale });
+
+    if (response.status === 204) {
+      this.notifications.sendWarning(noContentMessageNotification);
+      return;
+    }
 
     if (response.status !== 200) {
       const jsonResponse = await response.json();

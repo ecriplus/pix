@@ -2,8 +2,11 @@ import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import setupIntl from '../../helpers/setup-intl';
+
 module('Unit | Service | file-saver', function (hooks) {
   setupTest(hooks);
+  setupIntl(hooks);
   let fileSaver;
 
   hooks.beforeEach(function () {
@@ -75,6 +78,48 @@ module('Unit | Service | file-saver', function (hooks) {
           // then
           const expectedArgs = { fileContent: responseContent, fileName: responseFileName };
           assert.ok(downloadFileForModernBrowsersStub.calledWith(expectedArgs));
+        });
+      });
+    });
+
+    module('when response has a status 204', function (hooks) {
+      let notificationsStub;
+      hooks.beforeEach(function () {
+        const response = { status: 204 };
+        fetchStub = sinon.stub().resolves(response);
+        notificationsStub = this.owner.lookup('service:notifications');
+        sinon.stub(notificationsStub, 'sendWarning');
+      });
+
+      test('should call notification service with default message', async function (assert) {
+        // when
+        await fileSaver.save({
+          url,
+          token,
+          fetcher: fetchStub,
+          downloadFileForIEBrowser: downloadFileForIEBrowserStub,
+          downloadFileForModernBrowsers: downloadFileForModernBrowsersStub,
+        });
+
+        // then
+        assert.ok(notificationsStub.sendWarning.calledOnce);
+      });
+
+      module('when notification message is provided', function () {
+        test('should use the provided message', async function (assert) {
+          // when
+          const customMessage = 'a message';
+          await fileSaver.save({
+            url,
+            token,
+            fetcher: fetchStub,
+            downloadFileForIEBrowser: downloadFileForIEBrowserStub,
+            downloadFileForModernBrowsers: downloadFileForModernBrowsersStub,
+            noContentMessageNotification: customMessage,
+          });
+
+          // then
+          assert.ok(notificationsStub.sendWarning.calledOnceWithExactly(customMessage));
         });
       });
     });
