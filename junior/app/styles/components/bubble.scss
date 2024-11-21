@@ -1,22 +1,14 @@
 .bubble-container {
   display: flex;
-  align-items: center;
-  opacity: 0;
-
-  &.display {
-    opacity: 1;
-  }
-
-  &__delayed {
-    transition: all 2s;
-  }
+  margin-bottom: 16px;
 }
 
 .bubble {
   position: relative;
   width: fit-content;
   height: fit-content;
-  margin: 8px 16px 8px 8px;
+  margin-right: 16px;
+  margin-left: 8px;
   padding: 12px 24px;
   font-size: 1.5rem;
   text-align: left;

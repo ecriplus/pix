@@ -1,25 +1,26 @@
 .robot-speaking {
   display: flex;
   width: 100%;
+  margin-top: 30px;
 
   .bubbles {
     display: flex;
     flex-direction: column;
+    justify-content: start;
     max-width: 80%;
-    margin-top: auto;
-    margin-bottom: var(--pix-spacing-12x);
+    margin-left: 130px;
   }
 
   &__logo {
-    align-self: end;
+    position: absolute;
     width: 128px;
     margin-right: var(--pix-spacing-3x);
-    margin-bottom: -30px;
+    margin-top: -57px;
 
     @include device-is('tablet') {
       width: 106px;
       margin-right: var(--pix-spacing-4x);
-      margin-bottom: -18px;
+      margin-top: -37px;
     }
   }
 }
