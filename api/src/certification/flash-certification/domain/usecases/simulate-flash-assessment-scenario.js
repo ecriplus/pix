@@ -1,6 +1,5 @@
 import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { AssessmentSimulator } from '../models/AssessmentSimulator.js';
-import { AssessmentSimulatorDoubleMeasureStrategy } from '../models/AssessmentSimulatorDoubleMeasureStrategy.js';
 import { AssessmentSimulatorSingleMeasureStrategy } from '../models/AssessmentSimulatorSingleMeasureStrategy.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
@@ -8,32 +7,29 @@ export async function simulateFlashAssessmentScenario({
   locale,
   pickChallenge,
   pickAnswerStatus,
-  stopAtChallenge,
   initialCapacity,
   challengesBetweenSameCompetence = 0,
-  limitToOneQuestionPerTube = true,
   minimumEstimatedSuccessRateRanges = [],
-  doubleMeasuresUntil = 0,
   variationPercent,
-  variationPercentUntil,
   challengeRepository,
   flashAlgorithmService,
+  sharedFlashAlgorithmConfigurationRepository,
 }) {
   const challenges = await challengeRepository.findActiveFlashCompatible({ locale });
 
-  const enablePassageByAllCompetencesValueInProduction = true;
+  const configurationUsedInProduction = await sharedFlashAlgorithmConfigurationRepository.getMostRecent();
 
   const flashAssessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,
     configuration: new FlashAssessmentAlgorithmConfiguration({
-      limitToOneQuestionPerTube,
+      limitToOneQuestionPerTube: configurationUsedInProduction.limitToOneQuestionPerTube,
       minimumEstimatedSuccessRateRanges,
-      enablePassageByAllCompetences: enablePassageByAllCompetencesValueInProduction,
+      enablePassageByAllCompetences: configurationUsedInProduction.enablePassageByAllCompetences,
       variationPercent,
-      variationPercentUntil,
-      doubleMeasuresUntil,
+      variationPercentUntil: undefined,
+      doubleMeasuresUntil: 0,
       challengesBetweenSameCompetence,
-      maximumAssessmentLength: stopAtChallenge,
+      maximumAssessmentLength: configurationUsedInProduction.maximumAssessmentLength,
     }),
   });
 
@@ -45,19 +41,8 @@ export async function simulateFlashAssessmentScenario({
     initialCapacity,
   });
 
-  const doubleMeasureStrategy = new AssessmentSimulatorDoubleMeasureStrategy({
-    algorithm: flashAssessmentAlgorithm,
-    challenges,
-    pickChallenge,
-    pickAnswerStatus,
-    initialCapacity,
-  });
-
-  const getStrategy = (questionIndex) =>
-    questionIndex >= doubleMeasuresUntil ? singleMeasureStrategy : doubleMeasureStrategy;
-
   const simulator = new AssessmentSimulator({
-    getStrategy,
+    strategy: singleMeasureStrategy,
   });
 
   return simulator.run();

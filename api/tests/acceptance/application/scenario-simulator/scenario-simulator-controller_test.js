@@ -15,25 +15,23 @@ const {
 describe('Acceptance | Controller | scenario-simulator-controller', function () {
   let server;
   let adminAuthorization;
-  let validCapacityPayload;
-  let stopAtChallenge;
+  let validPayload;
 
   beforeEach(async function () {
     const { id: adminId } = databaseBuilder.factory.buildUser.withRole({
       role: SUPER_ADMIN,
     });
 
-    stopAtChallenge = databaseBuilder.factory.buildFlashAlgorithmConfiguration({
+    databaseBuilder.factory.buildFlashAlgorithmConfiguration({
       maximumAssessmentLength: 2,
       createdAt: new Date('2022-02-01'),
-    }).maximumAssessmentLength;
+    });
 
     adminAuthorization = generateValidRequestAuthorizationHeader(adminId);
     await databaseBuilder.commit();
 
-    validCapacityPayload = {
+    validPayload = {
       capacity: 4.5,
-      stopAtChallenge,
     };
 
     const learningContent = {
@@ -151,10 +149,6 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
     describe('when a number of challenges to pass is specified', function () {
       it('should return a payload with the same number of simulation scenario results', async function () {
         // given
-        const validPayload = {
-          ...validCapacityPayload,
-          stopAtChallenge,
-        };
         options.headers.authorization = adminAuthorization;
         options.payload = validPayload;
 
@@ -179,7 +173,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
       it('should return a payload with simulation the capacity scenario results', async function () {
         // given
         options.headers.authorization = adminAuthorization;
-        options.payload = validCapacityPayload;
+        options.payload = validPayload;
 
         // when
         const response = await server.inject(options);
@@ -209,7 +203,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
         const { id: userId } = databaseBuilder.factory.buildUser();
         options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
         await databaseBuilder.commit();
-        options.payload = validCapacityPayload;
+        options.payload = validPayload;
 
         // when
         const response = await server.inject(options);

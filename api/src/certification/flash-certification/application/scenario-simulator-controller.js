@@ -22,16 +22,12 @@ async function simulateFlashAssessmentScenario(
   },
 ) {
   const {
-    stopAtChallenge,
     initialCapacity,
     numberOfIterations = 1,
     challengePickProbability,
     challengesBetweenSameCompetence,
-    limitToOneQuestionPerTube,
     minimumEstimatedSuccessRateRanges: minimumEstimatedSuccessRateRangesDto,
-    doubleMeasuresUntil,
     variationPercent,
-    variationPercentUntil,
     capacity,
   } = request.payload;
 
@@ -54,14 +50,10 @@ async function simulateFlashAssessmentScenario(
           pickAnswerStatus,
           pickChallenge,
           locale,
-          stopAtChallenge,
           initialCapacity,
           challengesBetweenSameCompetence,
-          limitToOneQuestionPerTube,
           minimumEstimatedSuccessRateRanges,
-          doubleMeasuresUntil,
           variationPercent,
-          variationPercentUntil,
         },
         _.isUndefined,
       );

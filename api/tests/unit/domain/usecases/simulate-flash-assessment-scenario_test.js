@@ -16,16 +16,22 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
     context('when no initial capacity is provided', function () {
       it('should return an array of capacity, challenge, reward and error rate for each answer', async function () {
         // given
-        const { challengeRepository, pickChallenge, pickAnswerStatus, flashAlgorithmService } = prepareStubs();
+        const {
+          challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
+          pickChallenge,
+          pickAnswerStatus,
+          flashAlgorithmService,
+        } = prepareStubs();
 
         // when
         const result = await simulateFlashAssessmentScenario({
-          stopAtChallenge: 3,
           challengeRepository,
           locale,
           pickChallenge,
           pickAnswerStatus,
           flashAlgorithmService,
+          sharedFlashAlgorithmConfigurationRepository,
         });
 
         // then
@@ -45,10 +51,16 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
         // given
         const initialCapacity = 7;
 
-        const { challengeRepository, firstChallenge, pickChallenge, pickAnswerStatus, flashAlgorithmService } =
-          prepareStubs({
-            initialCapacity,
-          });
+        const {
+          challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
+          firstChallenge,
+          pickChallenge,
+          pickAnswerStatus,
+          flashAlgorithmService,
+        } = prepareStubs({
+          initialCapacity,
+        });
 
         flashAlgorithmService.getReward
           .withArgs({
@@ -60,14 +72,13 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
 
         // when
         const result = await simulateFlashAssessmentScenario({
-          stopAtChallenge: 3,
           challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
           locale,
           pickChallenge,
           pickAnswerStatus,
           initialCapacity,
           flashAlgorithmService,
-          limitToOneQuestionPerTube: false,
         });
 
         // then
@@ -85,18 +96,15 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
     context('when we don‘t limit the number of challenges per tube', function () {
       it('should return an array of estimated level, challenge, reward and error rate for each answer', async function () {
         // given
-        const limitToOneQuestionPerTube = false;
-
         const {
           challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
           pickChallenge,
           pickAnswerStatus,
           flashAlgorithmService: baseFlashAlgorithmService,
           getNextChallengesOptionsMatcher,
           allChallenges,
-        } = prepareStubs({
-          limitToOneQuestionPerTube,
-        });
+        } = prepareStubs();
 
         const flashAlgorithmService = {
           ...baseFlashAlgorithmService,
@@ -126,12 +134,11 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
 
         // when
         const result = await simulateFlashAssessmentScenario({
-          stopAtChallenge: 3,
           challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
           locale,
           pickChallenge,
           pickAnswerStatus,
-          limitToOneQuestionPerTube,
           flashAlgorithmService,
         });
 
@@ -150,7 +157,6 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
     context('when we set a minimum estimated success rate range', function () {
       it('should return an array of estimated level, challenge, reward and error rate for each answer', async function () {
         // given
-        const limitToOneQuestionPerTube = false;
         const minimumEstimatedSuccessRateRanges = [
           domainBuilder.buildFlashAssessmentAlgorithmSuccessRateHandlerFixed({
             startingChallengeIndex: 0,
@@ -159,20 +165,25 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
           }),
         ];
 
-        const { challengeRepository, pickChallenge, pickAnswerStatus, flashAlgorithmService } = prepareStubs({
+        const {
+          challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
+          pickChallenge,
+          pickAnswerStatus,
+          flashAlgorithmService,
+        } = prepareStubs({
           minimalSuccessRate: 0.8,
         });
 
         // when
         const result = await simulateFlashAssessmentScenario({
-          stopAtChallenge: 3,
           challengeRepository,
+          sharedFlashAlgorithmConfigurationRepository,
           locale,
           pickChallenge,
           pickAnswerStatus,
           minimumEstimatedSuccessRateRanges,
           flashAlgorithmService,
-          limitToOneQuestionPerTube,
         });
 
         // then
@@ -186,43 +197,19 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
         });
       });
     });
-
-    context('when doing a double measure', function () {
-      it('should return an array of estimated level, challenge, reward and error rate for each answer', async function () {
-        // given
-        const { challengeRepository, pickChallenge, pickAnswerStatus, flashAlgorithmService } = prepareStubs({
-          doubleMeasuresUntil: 2,
-        });
-
-        // when
-        const result = await simulateFlashAssessmentScenario({
-          stopAtChallenge: 3,
-          challengeRepository,
-          locale,
-          pickChallenge,
-          pickAnswerStatus,
-          flashAlgorithmService,
-          doubleMeasuresUntil: 2,
-        });
-
-        // then
-        expect(result).to.have.lengthOf(3);
-        result.forEach((answer) => {
-          expect(answer.challenge).not.to.be.undefined;
-          expect(answer.capacity).not.to.be.undefined;
-        });
-      });
-    });
   });
 
   context('when there are not enough flash challenges left', function () {
     it('should stop simulating', async function () {
       // given
-      const limitToOneQuestionPerTube = false;
       const challenge = domainBuilder.buildChallenge({ id: 1 });
       const challengeRepository = {
         findActiveFlashCompatible: sinon.stub(),
       };
+      const sharedFlashAlgorithmConfigurationRepository = {
+        getMostRecent: sinon.stub(),
+      };
+      sharedFlashAlgorithmConfigurationRepository.getMostRecent.resolves({ enablePassageByAllCompetences: true });
       challengeRepository.findActiveFlashCompatible.resolves([challenge]);
 
       const pickChallenge = sinon.stub();
@@ -265,11 +252,11 @@ describe('Unit | UseCase | simulate-flash-assessment-scenario', function () {
       // when
       const error = await catchErr(simulateFlashAssessmentScenario)({
         challengeRepository,
+        sharedFlashAlgorithmConfigurationRepository,
         locale,
         pickChallenge,
         pickAnswerStatus,
         flashAlgorithmService,
-        limitToOneQuestionPerTube,
       });
 
       // then
@@ -314,6 +301,11 @@ function prepareStubs({
   const challengeRepository = {
     findActiveFlashCompatible: sinon.stub(),
   };
+
+  const sharedFlashAlgorithmConfigurationRepository = {
+    getMostRecent: sinon.stub(),
+  };
+
   const pickChallenge = sinon.stub();
   const pickAnswerStatus = sinon.stub();
   const flashAlgorithmService = {
@@ -330,6 +322,12 @@ function prepareStubs({
       _.isUndefined,
     ),
   );
+
+  sharedFlashAlgorithmConfigurationRepository.getMostRecent.resolves({
+    enablePassageByAllCompetences: true,
+    maximumAssessmentLength: 3,
+    limitToOneQuestionPerTube: false,
+  });
 
   flashAlgorithmService.getCapacityAndErrorRate
     .withArgs({
@@ -445,6 +443,7 @@ function prepareStubs({
     pickChallenge,
     pickAnswerStatus,
     challengeRepository,
+    sharedFlashAlgorithmConfigurationRepository,
     flashAlgorithmService,
     firstChallenge,
     allChallenges,
