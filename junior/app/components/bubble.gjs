@@ -20,11 +20,11 @@ export default class Bubble extends Component {
   }
 
   <template>
-      <div class="bubble-container">
-        <MarkdownToHtml ...attributes @markdown={{@message}} @class={{this.getClasses}} />
-        {{#if @oralization}}
-          <OralizationButton @text={{this.textToRead}} />
-        {{/if}}
-      </div>
-    </template>
+    <div class="bubble-container">
+      <MarkdownToHtml ...attributes @markdown={{@message}} @class={{this.getClasses}} />
+      {{#if @oralization}}
+        <OralizationButton @text={{this.textToRead}} />
+      {{/if}}
+    </div>
+  </template>
 }

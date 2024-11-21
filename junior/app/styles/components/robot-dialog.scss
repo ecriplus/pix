@@ -14,13 +14,13 @@
   &__logo {
     position: absolute;
     width: 128px;
-    margin-right: var(--pix-spacing-3x);
     margin-top: -57px;
+    margin-right: var(--pix-spacing-3x);
 
     @include device-is('tablet') {
       width: 106px;
-      margin-right: var(--pix-spacing-4x);
       margin-top: -37px;
+      margin-right: var(--pix-spacing-4x);
     }
   }
 }

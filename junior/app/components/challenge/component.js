@@ -51,12 +51,10 @@ export default class Challenge extends Component {
     if (this.answer?.result === 'ok') {
       feedback.message = this.intl.t('pages.challenge.messages.correct-answer');
       feedback.status = 'success';
-    }
-    if (this.answer?.result === 'ko') {
+    } else if (this.answer?.result === 'ko') {
       feedback.message = this.intl.t('pages.challenge.messages.wrong-answer');
       feedback.status = 'error';
-    }
-    if (this.displayValidationWarning) {
+    } else if (this.displayValidationWarning) {
       feedback.message = this.validationWarning;
       feedback.status = 'warning';
     }
