@@ -2,12 +2,10 @@ import { certificationCourseController } from '../../../../src/certification/eva
 import { usecases } from '../../../../src/certification/evaluation/domain/usecases/index.js';
 import { CertificationCourse } from '../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { usecases as certificationSharedUsecases } from '../../../../src/certification/shared/domain/usecases/index.js';
-import { domainBuilder, expect, generateValidRequestAuthorizationHeader, hFake, sinon } from '../../../test-helper.js';
+import { expect, generateValidRequestAuthorizationHeader, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Controller | certification-course-controller', function () {
   let certificationCourseSerializer;
-  let certifiedProfileSerializer;
-  let certifiedProfileRepository;
   let requestResponseUtils;
 
   beforeEach(function () {
@@ -15,12 +13,6 @@ describe('Unit | Controller | certification-course-controller', function () {
       serialize: sinon.stub(),
       serializeFromCertificationCourse: sinon.stub(),
       deserializeCertificationCandidateModificationCommand: sinon.stub(),
-    };
-    certifiedProfileSerializer = {
-      serialize: sinon.stub(),
-    };
-    certifiedProfileRepository = {
-      get: sinon.stub(),
     };
     requestResponseUtils = { extractLocaleFromRequest: sinon.stub() };
   });
@@ -109,64 +101,6 @@ describe('Unit | Controller | certification-course-controller', function () {
 
       // then
       expect(response).to.deep.equal(certificationCourse);
-    });
-  });
-
-  describe('#getCertifiedProfile', function () {
-    it('should fetch the associated certified profile serialized as JSONAPI', async function () {
-      // given
-      const skill1 = domainBuilder.buildCertifiedSkill({
-        id: 'recSkill1',
-        name: 'skill_1',
-        hasBeenAskedInCertif: false,
-        tubeId: 'recTube1',
-        difficulty: 1,
-      });
-      const skill2 = domainBuilder.buildCertifiedSkill({
-        id: 'recSkill2',
-        name: 'skill_2',
-        hasBeenAskedInCertif: true,
-        tubeId: 'recTube1',
-        difficulty: 2,
-      });
-      const tube1 = domainBuilder.buildCertifiedTube({
-        id: 'recTube1',
-        name: 'tube_1',
-        competenceId: 'recCompetence1',
-      });
-      const competence1 = domainBuilder.buildCertifiedCompetence({
-        id: 'recCompetence1',
-        name: 'competence_1',
-        areaId: 'recArea1',
-        origin: 'Pix',
-      });
-      const area1 = domainBuilder.buildCertifiedArea({
-        id: 'recArea1',
-        name: 'area_1',
-        color: 'someColor',
-      });
-      const certifiedProfile = domainBuilder.buildCertifiedProfile({
-        id: 123,
-        userId: 456,
-        certifiedSkills: [skill1, skill2],
-        certifiedTubes: [tube1],
-        certifiedCompetences: [competence1],
-        certifiedAreas: [area1],
-      });
-      certifiedProfileRepository.get.withArgs(123).resolves(certifiedProfile);
-      certifiedProfileSerializer.serialize.withArgs(certifiedProfile).resolves('ok');
-      const request = {
-        params: { id: 123 },
-      };
-
-      // when
-      const response = await certificationCourseController.getCertifiedProfile(request, hFake, {
-        certifiedProfileRepository,
-        certifiedProfileSerializer,
-      });
-
-      // then
-      expect(response).to.deep.equal('ok');
     });
   });
 });

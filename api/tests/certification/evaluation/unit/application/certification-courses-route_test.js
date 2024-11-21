@@ -4,22 +4,6 @@ import { securityPreHandlers } from '../../../../../src/shared/application/secur
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | Certifications Course | Route', function () {
-  describe('GET /api/admin/certifications/{id}/certified-profile', function () {
-    it('should exist', async function () {
-      // given
-      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
-      sinon.stub(certificationCoursesController, 'getCertifiedProfile').returns('ok');
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const response = await httpTestServer.request('GET', '/api/admin/certifications/1234/certified-profile');
-
-      // then
-      expect(response.statusCode).to.equal(200);
-    });
-  });
-
   describe('POST /api/certification-courses', function () {
     it('should return OK (200)', async function () {
       // given

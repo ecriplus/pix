@@ -130,4 +130,67 @@ describe('Certification | Results | Unit | Controller | certification results', 
       expect(response.headers['Content-Disposition']).to.equal(`attachment; filename=${fileName}`);
     });
   });
+
+  describe('#getCertifiedProfile', function () {
+    it('should fetch the associated certified profile serialized as JSONAPI', async function () {
+      const certifiedProfileSerializer = {
+        serialize: sinon.stub(),
+      };
+      const certifiedProfileRepository = {
+        get: sinon.stub(),
+      };
+      const skill1 = domainBuilder.buildCertifiedSkill({
+        id: 'recSkill1',
+        name: 'skill_1',
+        hasBeenAskedInCertif: false,
+        tubeId: 'recTube1',
+        difficulty: 1,
+      });
+      const skill2 = domainBuilder.buildCertifiedSkill({
+        id: 'recSkill2',
+        name: 'skill_2',
+        hasBeenAskedInCertif: true,
+        tubeId: 'recTube1',
+        difficulty: 2,
+      });
+      const tube1 = domainBuilder.buildCertifiedTube({
+        id: 'recTube1',
+        name: 'tube_1',
+        competenceId: 'recCompetence1',
+      });
+      const competence1 = domainBuilder.buildCertifiedCompetence({
+        id: 'recCompetence1',
+        name: 'competence_1',
+        areaId: 'recArea1',
+        origin: 'Pix',
+      });
+      const area1 = domainBuilder.buildCertifiedArea({
+        id: 'recArea1',
+        name: 'area_1',
+        color: 'someColor',
+      });
+      const certifiedProfile = domainBuilder.buildCertifiedProfile({
+        id: 123,
+        userId: 456,
+        certifiedSkills: [skill1, skill2],
+        certifiedTubes: [tube1],
+        certifiedCompetences: [competence1],
+        certifiedAreas: [area1],
+      });
+      certifiedProfileRepository.get.withArgs(123).resolves(certifiedProfile);
+      certifiedProfileSerializer.serialize.withArgs(certifiedProfile).resolves('ok');
+      const request = {
+        params: { id: 123 },
+      };
+
+      // when
+      const response = await certificationResultsController.getCertifiedProfile(request, hFake, {
+        certifiedProfileRepository,
+        certifiedProfileSerializer,
+      });
+
+      // then
+      expect(response).to.deep.equal('ok');
+    });
+  });
 });

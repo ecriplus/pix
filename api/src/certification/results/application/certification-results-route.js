@@ -1,11 +1,41 @@
 import Joi from 'joi';
 
+import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { authorization } from '../../shared/application/pre-handlers/authorization.js';
 import { certificationResultsController } from './certification-results-controller.js';
 
 const register = async function (server) {
   server.route([
+    {
+      method: 'GET',
+      path: '/api/admin/certifications/{id}/certified-profile',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            id: identifiersType.certificationCourseId,
+          }),
+        },
+        handler: certificationResultsController.getCertifiedProfile,
+        tags: ['api'],
+        notes: [
+          'Cette route est utilisé par Pix Admin',
+          'Elle permet de récupérer le profil certifié pour une certification donnée',
+        ],
+      },
+    },
     {
       method: 'GET',
       path: '/api/sessions/{sessionId}/certified-clea-candidate-data',

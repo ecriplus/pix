@@ -1,9 +1,7 @@
 import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases as certificationSharedUsecases } from '../../shared/domain/usecases/index.js';
 import { usecases } from '../domain/usecases/index.js';
-import * as certifiedProfileRepository from '../infrastructure/repositories/certified-profile-repository.js';
 import * as certificationCourseSerializer from '../infrastructure/serializers/certification-course-serializer.js';
-import * as certifiedProfileSerializer from '../infrastructure/serializers/certified-profile-serializer.js';
 
 const save = async function (request, h, dependencies = { extractLocaleFromRequest, certificationCourseSerializer }) {
   const userId = request.auth.credentials.userId;
@@ -29,20 +27,9 @@ const get = async function (request, h, dependencies = { certificationCourseSeri
   return dependencies.certificationCourseSerializer.serialize(certificationCourse);
 };
 
-const getCertifiedProfile = async function (
-  request,
-  h,
-  dependencies = { certifiedProfileRepository, certifiedProfileSerializer },
-) {
-  const certificationCourseId = request.params.id;
-  const certifiedProfile = await dependencies.certifiedProfileRepository.get(certificationCourseId);
-  return dependencies.certifiedProfileSerializer.serialize(certifiedProfile);
-};
-
 const certificationCourseController = {
   save,
   get,
-  getCertifiedProfile,
 };
 
 export { certificationCourseController };

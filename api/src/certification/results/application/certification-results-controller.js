@@ -2,6 +2,8 @@ import dayjs from 'dayjs';
 
 import { tokenService } from '../../../shared/domain/services/token-service.js';
 import { usecases } from '../domain/usecases/index.js';
+import * as certifiedProfileRepository from '../infrastructure/repositories/certified-profile-repository.js';
+import * as certifiedProfileSerializer from '../infrastructure/serializers/certified-profile-serializer.js';
 import { getCleaCertifiedCandidateCsv } from '../infrastructure/utils/csv/certification-results/get-clea-certified-candidate-csv.js';
 import { getSessionCertificationResultsCsv } from '../infrastructure/utils/csv/certification-results/get-session-certification-results-csv.js';
 
@@ -69,10 +71,22 @@ const getSessionResultsToDownload = async function (
     .header('Content-Disposition', `attachment; filename=${csvResult.filename}`);
 };
 
+const getCertifiedProfile = async function (
+  request,
+  h,
+  dependencies = { certifiedProfileRepository, certifiedProfileSerializer },
+) {
+  const certificationCourseId = request.params.id;
+  //TODO add passthrough usecase to remove link between application and infrastructure
+  const certifiedProfile = await dependencies.certifiedProfileRepository.get(certificationCourseId);
+  return dependencies.certifiedProfileSerializer.serialize(certifiedProfile);
+};
+
 const certificationResultsController = {
   getCleaCertifiedCandidateDataCsv,
   getSessionResultsByRecipientEmail,
   getSessionResultsToDownload,
+  getCertifiedProfile,
 };
 
 export { certificationResultsController };
