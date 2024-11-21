@@ -37,7 +37,6 @@ class FlashAssessmentAlgorithm {
     assessmentAnswers,
     challenges,
     initialCapacity = config.v3Certification.defaultCandidateCapacity,
-    answersForComputingCapacity,
   }) {
     const maximumAssessmentLength = this._configuration.maximumAssessmentLength;
     if (assessmentAnswers?.length > maximumAssessmentLength) {
@@ -49,7 +48,7 @@ class FlashAssessmentAlgorithm {
     }
 
     const { capacity } = this.getCapacityAndErrorRate({
-      allAnswers: answersForComputingCapacity ?? assessmentAnswers,
+      allAnswers: assessmentAnswers,
       challenges,
       initialCapacity,
     });
