@@ -5,7 +5,7 @@ const debugScoringForV3Certification = Debug('pix:certif:v3:scoring');
 
 export const findByCertificationCourseIdForScoring = async ({
   certificationCourseId,
-  certificationChallengeForScoringRepository,
+  certificationChallengeRepository,
   challengeRepository,
 }) => {
   const flashCompatibleChallenges = await challengeRepository.findFlashCompatibleWithoutLocale({
@@ -16,7 +16,7 @@ export const findByCertificationCourseIdForScoring = async ({
   return _findByCertificationCourseId({
     compatibleChallenges: flashCompatibleChallenges,
     certificationCourseId,
-    certificationChallengeForScoringRepository,
+    certificationChallengeRepository,
     challengeRepository,
   });
 };
@@ -24,12 +24,12 @@ export const findByCertificationCourseIdForScoring = async ({
 const _findByCertificationCourseId = async ({
   compatibleChallenges,
   certificationCourseId,
-  certificationChallengeForScoringRepository,
+  certificationChallengeRepository,
   challengeRepository,
 }) => {
-  const certificationChallengesForScoring = await certificationChallengeForScoringRepository.getByCertificationCourseId(
-    { certificationCourseId },
-  );
+  const certificationChallengesForScoring = await certificationChallengeRepository.getByCertificationCourseId({
+    certificationCourseId,
+  });
 
   const askedChallenges = await challengeRepository.getMany(
     certificationChallengesForScoring.map((challengeForScoring) => challengeForScoring.id),

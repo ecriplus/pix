@@ -4,7 +4,7 @@
  * @typedef {import('../index.js').CompetenceMarkRepository} CompetenceMarkRepository
  * @typedef {import('../index.js').ScoringDegradationService} ScoringDegradationService
  * @typedef {import('../index.js').CertificationAssessmentHistoryRepository} CertificationAssessmentHistoryRepository
- * @typedef {import('../index.js').CertificationChallengeForScoringRepository} CertificationChallengeForScoringRepository
+ * @typedef {import('../index.js').CertificationChallengeRepository} CertificationChallengeRepository
  * @typedef {import('../index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
  * @typedef {import('../index.js').FlashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {import('../index.js').AnswerRepository} AnswerRepository
@@ -29,7 +29,7 @@ const debugScoringForV3Certification = Debug('pix:certif:v3:scoring');
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CompetenceMarkRepository} params.competenceMarkRepository
  * @param {CertificationAssessmentHistoryRepository} params.certificationAssessmentHistoryRepository
- * @param {CertificationChallengeForScoringRepository} params.certificationChallengeForScoringRepository
+ * @param {CertificationChallengeRepository} params.certificationChallengeRepository
  * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
  * @param {FlashAlgorithmConfigurationRepository} params.flashAlgorithmConfigurationRepository
  * @param {AnswerRepository} params.answerRepository

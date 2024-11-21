@@ -1,6 +1,6 @@
 /**
  * @typedef {import('../../../session-management/domain/usecases/index.js').AnswerRepository} AnswerRepository
- * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationChallengeRepository} CertificationChallengeRepository
+ * @typedef {import('../../../session-management/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
  * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../../../session-management/domain/usecases/index.js').ChallengeRepository} ChallengeRepository
@@ -20,7 +20,7 @@ const debugGetNextChallengeForV3Certification = Debug('pix:certif:v3:get-next-ch
 /**
  * @param {Object} params
  * @param {AnswerRepository} params.answerRepository
- * @param {CertificationChallengeRepository} params.certificationChallengeRepository
+ * @param {SessionManagementCertificationChallengeRepository} params.sessionManagementCertificationChallengeRepository
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {ChallengeRepository} params.challengeRepository
@@ -32,7 +32,7 @@ const debugGetNextChallengeForV3Certification = Debug('pix:certif:v3:get-next-ch
 const getNextChallenge = async function ({
   assessment,
   answerRepository,
-  certificationChallengeRepository,
+  sessionManagementCertificationChallengeRepository,
   certificationChallengeLiveAlertRepository,
   certificationCourseRepository,
   challengeRepository,
@@ -54,10 +54,11 @@ const getNextChallenge = async function ({
 
   const excludedChallengeIds = [...alreadyAnsweredChallengeIds, ...validatedLiveAlertChallengeIds];
 
-  const lastNonAnsweredCertificationChallenge = await certificationChallengeRepository.getNextChallengeByCourseIdForV3(
-    assessment.certificationCourseId,
-    excludedChallengeIds,
-  );
+  const lastNonAnsweredCertificationChallenge =
+    await sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3(
+      assessment.certificationCourseId,
+      excludedChallengeIds,
+    );
 
   if (lastNonAnsweredCertificationChallenge) {
     return challengeRepository.get(lastNonAnsweredCertificationChallenge.challengeId);
@@ -114,7 +115,7 @@ const getNextChallenge = async function ({
     difficulty: challenge.difficulty,
   });
 
-  await certificationChallengeRepository.save({ certificationChallenge });
+  await sessionManagementCertificationChallengeRepository.save({ certificationChallenge });
 
   return challenge;
 };

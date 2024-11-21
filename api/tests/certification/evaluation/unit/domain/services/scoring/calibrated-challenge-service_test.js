@@ -8,14 +8,14 @@ const { minimumAnswersRequiredToValidateACertification } = config.v3Certificatio
 
 describe('Certification | Evaluation | Unit | Domain | Services | calibrated challenge service', function () {
   context('#findByCertificationCourseIdForScoring', function () {
-    let certificationChallengeForScoringRepository, challengeRepository;
+    let certificationChallengeRepository, challengeRepository;
 
     let challengeList;
 
     beforeEach(function () {
       challengeList = generateChallengeList({ length: minimumAnswersRequiredToValidateACertification + 1 });
 
-      certificationChallengeForScoringRepository = {
+      certificationChallengeRepository = {
         getByCertificationCourseId: sinon.stub().rejects(new Error('Args mismatch')),
       };
 
@@ -50,7 +50,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
 
       challengeRepository.getMany.withArgs(challengeList.map((e) => e.id)).returns(expectedAskedChallenges);
 
-      certificationChallengeForScoringRepository.getByCertificationCourseId
+      certificationChallengeRepository.getByCertificationCourseId
         .withArgs({ certificationCourseId })
         .resolves(expectedCertificationChallengesForScoring);
 
@@ -64,7 +64,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
       const { allChallenges, askedChallenges, certificationChallengesForScoring } =
         await calibratedChallengeService.findByCertificationCourseIdForScoring({
           certificationCourseId,
-          certificationChallengeForScoringRepository,
+          certificationChallengeRepository,
           challengeRepository,
         });
 

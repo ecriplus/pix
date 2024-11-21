@@ -23,7 +23,7 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
   let answerRepository;
   let flashAlgorithmConfigurationRepository;
   let flashAlgorithmService;
-  let certificationChallengeForScoringRepository;
+  let certificationChallengeRepository;
   let certificationAssessmentHistoryRepository;
   let services;
 
@@ -52,7 +52,7 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
     };
     scoringConfigurationRepository = { getLatestByDateAndLocale: sinon.stub() };
     competenceMarkRepository = { save: sinon.stub() };
-    certificationChallengeForScoringRepository = { getByCertificationCourseId: sinon.stub() };
+    certificationChallengeRepository = { getByCertificationCourseId: sinon.stub() };
     answerRepository = { findByAssessment: sinon.stub() };
     flashAlgorithmConfigurationRepository = { getMostRecentBeforeDate: sinon.stub() };
     certificationAssessmentHistoryRepository = { save: sinon.stub() };
@@ -374,7 +374,7 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
             services.handleV3CertificationScoring.resolves(abortedCertificationCourse);
 
             const dependencies = {
-              certificationChallengeForScoringRepository,
+              certificationChallengeRepository,
               answerRepository,
               assessmentResultRepository,
               certificationCourseRepository,
@@ -424,7 +424,7 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
             services.handleV3CertificationScoring.resolves(abortedCertificationCourse);
 
             const dependencies = {
-              certificationChallengeForScoringRepository,
+              certificationChallengeRepository,
               answerRepository,
               assessmentResultRepository,
               certificationCourseRepository,
@@ -476,7 +476,7 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
             services.handleV3CertificationScoring.resolves(certificationCourse);
 
             const dependencies = {
-              certificationChallengeForScoringRepository,
+              certificationChallengeRepository,
               answerRepository,
               assessmentResultRepository,
               certificationCourseRepository,
@@ -527,7 +527,7 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
               services.handleV3CertificationScoring.resolves(certificationCourse);
 
               const dependencies = {
-                certificationChallengeForScoringRepository,
+                certificationChallengeRepository,
                 answerRepository,
                 assessmentResultRepository,
                 certificationCourseRepository,
@@ -578,7 +578,7 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
               services.handleV3CertificationScoring.resolves(certificationCourse);
 
               const dependencies = {
-                certificationChallengeForScoringRepository,
+                certificationChallengeRepository,
                 answerRepository,
                 assessmentResultRepository,
                 certificationCourseRepository,
