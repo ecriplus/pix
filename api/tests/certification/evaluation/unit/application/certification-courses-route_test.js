@@ -1,25 +1,9 @@
-import { certificationCourseController as certificationCoursesController } from '../../../../lib/application/certification-courses/certification-course-controller.js';
-import * as moduleUnderTest from '../../../../lib/application/certification-courses/index.js';
-import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import { certificationCourseController as certificationCoursesController } from '../../../../../src/certification/evaluation/application/certification-course-controller.js';
+import * as moduleUnderTest from '../../../../../src/certification/evaluation/application/certification-course-route.js';
+import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
+import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | Certifications Course | Route', function () {
-  describe('GET /api/admin/certifications/{id}/certified-profile', function () {
-    it('should exist', async function () {
-      // given
-      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
-      sinon.stub(certificationCoursesController, 'getCertifiedProfile').returns('ok');
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const response = await httpTestServer.request('GET', '/api/admin/certifications/1234/certified-profile');
-
-      // then
-      expect(response.statusCode).to.equal(200);
-    });
-  });
-
   describe('POST /api/certification-courses', function () {
     it('should return OK (200)', async function () {
       // given

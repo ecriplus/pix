@@ -1,43 +1,11 @@
 import Joi from 'joi';
 
-import { securityPreHandlers } from '../../../src/shared/application/security-pre-handlers.js';
-import { identifiersType } from '../../../src/shared/domain/types/identifiers-type.js';
+import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { certificationCourseController } from './certification-course-controller.js';
 
 const register = async function (server) {
-  const adminRoutes = [
-    {
-      method: 'GET',
-      path: '/api/admin/certifications/{id}/certified-profile',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleCertif,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-                securityPreHandlers.checkAdminMemberHasRoleMetier,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            id: identifiersType.certificationCourseId,
-          }),
-        },
-        handler: certificationCourseController.getCertifiedProfile,
-        tags: ['api'],
-        notes: [
-          'Cette route est utilisé par Pix Admin',
-          'Elle permet de récupérer le profil certifié pour une certification donnée',
-        ],
-      },
-    },
-  ];
   server.route([
-    ...adminRoutes,
     {
       method: 'POST',
       path: '/api/certification-courses',

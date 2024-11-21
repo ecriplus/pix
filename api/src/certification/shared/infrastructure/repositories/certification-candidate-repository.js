@@ -1,8 +1,8 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationCandidate } from '../../../../shared/domain/models/index.js';
-import { ComplementaryCertification } from '../../domain/models/ComplementaryCertification.js';
-import { Subscription } from '../../domain/models/Subscription.js';
+import { ComplementaryCertification } from '../../../enrolment/domain/models/ComplementaryCertification.js';
+import { Subscription } from '../../../enrolment/domain/models/Subscription.js';
 
 const getBySessionIdAndUserId = async function ({ sessionId, userId }) {
   const candidateData = await _candidateBaseQuery().where({ sessionId, userId }).first();
