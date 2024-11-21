@@ -1,7 +1,6 @@
 import { learningContentCache } from '../../../../../../src/shared/infrastructure/caches/learning-content-cache.js';
 import * as dataSource from '../../../../../../src/shared/infrastructure/datasources/learning-content/datasource.js';
 import { LearningContentResourceNotFound } from '../../../../../../src/shared/infrastructure/datasources/learning-content/LearningContentResourceNotFound.js';
-import { lcms } from '../../../../../../src/shared/infrastructure/lcms.js';
 import { expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Infrastructure | Datasource | Learning Content | datasource', function () {
@@ -160,37 +159,6 @@ describe('Unit | Infrastructure | Datasource | Learning Content | datasource', f
 
       // then
       expect(learningContentCache.get).to.have.been.called;
-    });
-  });
-
-  describe('#refreshLearningContentCacheRecords', function () {
-    let learningContent;
-
-    beforeEach(function () {
-      sinon.stub(learningContentCache, 'set');
-      learningContent = {
-        learningContentModel: [
-          { id: 'rec1', property: 'value1' },
-          { id: 'rec2', property: 'value2' },
-        ],
-      };
-      sinon.stub(lcms, 'getLatestRelease').resolves(learningContent);
-    });
-
-    it('should load all the learning content table content in the cache (and return them)', async function () {
-      // when
-      const results = await dataSource.refreshLearningContentCacheRecords();
-
-      // then
-      expect(results).to.equal(learningContent);
-    });
-
-    it('should preload cache', async function () {
-      // when
-      await dataSource.refreshLearningContentCacheRecords();
-
-      // then
-      expect(learningContentCache.set).to.have.been.calledWithExactly(learningContent);
     });
   });
 

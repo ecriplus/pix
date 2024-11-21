@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import { LearningContentCache } from '../../caches/learning-content-cache.js';
-import { lcms } from '../../lcms.js';
 import { LearningContentResourceNotFound } from './LearningContentResourceNotFound.js';
 
 const _DatasourcePrototype = {
@@ -70,12 +69,6 @@ const extend = function (props) {
   return result;
 };
 
-const refreshLearningContentCacheRecords = async function () {
-  const learningContent = await lcms.getLatestRelease();
-  await LearningContentCache.instance.set(learningContent);
-  return learningContent;
-};
-
 const initLearningContent = _DatasourcePrototype._getLearningContent;
 
-export { extend, initLearningContent, refreshLearningContentCacheRecords };
+export { extend, initLearningContent };

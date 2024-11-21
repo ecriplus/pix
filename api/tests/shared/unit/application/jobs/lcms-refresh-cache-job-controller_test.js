@@ -1,22 +1,19 @@
 import { LcmsRefreshCacheJobController } from '../../../../../src/shared/application/jobs/lcms-refresh-cache-job-controller.js';
+import { sharedUsecases as usecases } from '../../../../../src/shared/domain/usecases/index.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Shared | Application | Jobs | LcmsRefreshCacheJobController', function () {
   describe('#handle', function () {
     it('should call usecase', async function () {
-      const dependencies = {
-        learningContentDatasource: {
-          refreshLearningContentCacheRecords: sinon.stub(),
-        },
-      };
       // given
+      sinon.stub(usecases, 'refreshLearningContentCache');
       const handler = new LcmsRefreshCacheJobController();
 
       // when
-      await handler.handle({ dependencies });
+      await handler.handle();
 
       // then
-      expect(dependencies.learningContentDatasource.refreshLearningContentCacheRecords).to.have.been.calledOnce;
+      expect(usecases.refreshLearningContentCache).to.have.been.calledOnce;
     });
   });
 });
