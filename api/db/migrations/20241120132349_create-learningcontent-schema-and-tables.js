@@ -13,7 +13,7 @@ const up = async function (knex) {
     table.jsonb('title_i18n');
     table.string('color');
     table.string('frameworkId').references('id').inTable(`${SCHEMA_NAME}.frameworks`);
-    table.specificType('competenceIds', 'string[]');
+    table.specificType('competenceIds', 'text[]');
   });
   await knex.schema.withSchema(SCHEMA_NAME).createTable('competences', function (table) {
     table.string('id').primary();
@@ -22,15 +22,15 @@ const up = async function (knex) {
     table.string('index');
     table.text('origin');
     table.string('areaId').references('id').inTable(`${SCHEMA_NAME}.areas`);
-    table.specificType('skillIds', 'string[]');
-    table.specificType('thematicIds', 'string[]');
+    table.specificType('skillIds', 'text[]');
+    table.specificType('thematicIds', 'text[]');
   });
   await knex.schema.withSchema(SCHEMA_NAME).createTable('thematics', function (table) {
     table.string('id').primary();
     table.jsonb('name_i18n');
     table.integer('index');
     table.string('competenceId').references('id').inTable(`${SCHEMA_NAME}.competences`);
-    table.specificType('tubeIds', 'string[]');
+    table.specificType('tubeIds', 'text[]');
   });
   await knex.schema.withSchema(SCHEMA_NAME).createTable('tubes', function (table) {
     table.string('id').primary();
@@ -41,7 +41,7 @@ const up = async function (knex) {
     table.jsonb('practicalDescription_i18n');
     table.string('competenceId').references('id').inTable(`${SCHEMA_NAME}.competences`);
     table.string('thematicId').references('id').inTable(`${SCHEMA_NAME}.thematics`);
-    table.specificType('skillIds', 'string[]');
+    table.specificType('skillIds', 'text[]');
     table.boolean('isMobileCompliant');
     table.boolean('isTabletCompliant');
   });
@@ -56,8 +56,8 @@ const up = async function (knex) {
     table.jsonb('hint_i18n');
     table.string('competenceId').references('id').inTable(`${SCHEMA_NAME}.competences`);
     table.string('tubeId').references('id').inTable(`${SCHEMA_NAME}.tubes`);
-    table.specificType('tutorialIds', 'string[]');
-    table.specificType('learningMoreTutorialIds', 'string[]');
+    table.specificType('tutorialIds', 'text[]');
+    table.specificType('learningMoreTutorialIds', 'text[]');
   });
   await knex.schema.withSchema(SCHEMA_NAME).createTable('challenges', function (table) {
     table.string('id').primary();
@@ -83,7 +83,7 @@ const up = async function (knex) {
     table.boolean('shuffled');
     table.text('illustrationAlt');
     table.text('illustrationUrl');
-    table.specificType('attachments', 'string[]');
+    table.specificType('attachments', 'text[]');
     table.string('responsive');
     table.float('alpha');
     table.float('delta');
@@ -94,7 +94,7 @@ const up = async function (knex) {
     table.integer('embedHeight');
     table.text('embedUrl');
     table.text('embedTitle');
-    table.specificType('locales', 'string[]');
+    table.specificType('locales', 'text[]');
     table.string('competenceId').references('id').inTable(`${SCHEMA_NAME}.competences`);
     table.string('skillId').references('id').inTable(`${SCHEMA_NAME}.skills`);
   });
@@ -103,8 +103,8 @@ const up = async function (knex) {
     table.text('name');
     table.text('description');
     table.boolean('isActive');
-    table.specificType('competences', 'string[]');
-    table.specificType('challenges', 'string[]');
+    table.specificType('competences', 'text[]');
+    table.specificType('challenges', 'text[]');
   });
   await knex.schema.withSchema(SCHEMA_NAME).createTable('tutorials', function (table) {
     table.string('id').primary();
