@@ -2,7 +2,7 @@ import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
 
-import { sendJsonApiError } from '../../../shared/application/http-errors.js';
+import { sendJsonApiError, UnprocessableEntityError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { usecases } from '../domain/usecases/index.js';
@@ -12,6 +12,37 @@ const TWENTY_MEGABYTES = 1048576 * 20;
 
 const register = async function (server) {
   server.route([
+    {
+      method: 'POST',
+      path: '/api/sco-organization-learners/association',
+      config: {
+        handler: scoOrganizationManagementController.reconcileScoOrganizationLearnerManually,
+        validate: {
+          options: {
+            allowUnknown: false,
+          },
+          payload: Joi.object({
+            data: {
+              attributes: {
+                'first-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
+                'last-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
+                birthdate: Joi.date().format('YYYY-MM-DD').required(),
+                'campaign-code': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
+              },
+              type: 'sco-organization-learners',
+            },
+          }),
+          failAction: (request, h) => {
+            return sendJsonApiError(new UnprocessableEntityError('Un des champs saisis n’est pas valide.'), h);
+          },
+        },
+        notes: [
+          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
+            '- Elle associe des données saisies par l’utilisateur à l’inscription de l’élève dans cette organisation',
+        ],
+        tags: ['api', 'sco-organization-learners'],
+      },
+    },
     {
       method: 'POST',
       path: '/api/organizations/{id}/sco-organization-learners/import-siecle',

@@ -1,11 +1,11 @@
 import lodash from 'lodash';
 
-import { STUDENT_RECONCILIATION_ERRORS } from '../../../src/shared/domain/constants.js';
+import { STUDENT_RECONCILIATION_ERRORS } from '../../../../shared/domain/constants.js';
 import {
   CampaignCodeError,
   OrganizationLearnerAlreadyLinkedToUserError,
   UserShouldNotBeReconciledOnAnotherAccountError,
-} from '../../../src/shared/domain/errors.js';
+} from '../../../../shared/domain/errors.js';
 
 const { isEmpty } = lodash;
 
@@ -14,8 +14,8 @@ const reconcileScoOrganizationLearnerManually = async function ({
   reconciliationInfo,
   withReconciliation,
   campaignRepository,
+  libOrganizationLearnerRepository,
   organizationLearnerRepository,
-  prescriptionOrganizationLearnerRepository,
   registrationOrganizationLearnerRepository,
   studentRepository,
   userRepository,
@@ -31,7 +31,7 @@ const reconcileScoOrganizationLearnerManually = async function ({
     await userReconciliationService.findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo({
       organizationId: campaign.organizationId,
       reconciliationInfo,
-      organizationLearnerRepository,
+      organizationLearnerRepository: libOrganizationLearnerRepository,
     });
 
   await userReconciliationService.assertStudentHasAnAlreadyReconciledAccount(
@@ -50,11 +50,11 @@ const reconcileScoOrganizationLearnerManually = async function ({
   await _checkIfUserIsConnectedOnAnotherAccount({
     organizationLearnerOfUserAccessingCampaign,
     authenticatedUserId: reconciliationInfo.id,
-    organizationLearnerRepository,
+    libOrganizationLearnerRepository,
   });
 
   if (withReconciliation) {
-    return prescriptionOrganizationLearnerRepository.reconcileUserToOrganizationLearner({
+    return organizationLearnerRepository.reconcileUserToOrganizationLearner({
       userId: reconciliationInfo.id,
       organizationLearnerId: organizationLearnerOfUserAccessingCampaign.id,
     });
@@ -86,9 +86,9 @@ async function _checkIfAnotherStudentIsAlreadyReconciledWithTheSameOrganizationA
 async function _checkIfUserIsConnectedOnAnotherAccount({
   organizationLearnerOfUserAccessingCampaign,
   authenticatedUserId,
-  organizationLearnerRepository,
+  libOrganizationLearnerRepository,
 }) {
-  const loggedAccountReconciledOrganizationLearners = await organizationLearnerRepository.findByUserId({
+  const loggedAccountReconciledOrganizationLearners = await libOrganizationLearnerRepository.findByUserId({
     userId: authenticatedUserId,
   });
 

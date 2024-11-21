@@ -11,6 +11,7 @@ import { OrganizationLearner } from '../../../../shared/domain/models/index.js';
 import { ApplicationTransaction } from '../../../shared/infrastructure/ApplicationTransaction.js';
 import { CommonOrganizationLearner } from '../../domain/models/CommonOrganizationLearner.js';
 import { OrganizationLearnerForAdmin } from '../../domain/read-models/OrganizationLearnerForAdmin.js';
+import * as studentRepository from './student-repository.js';
 
 const dissociateUserFromOrganizationLearner = async function (organizationLearnerId) {
   const knexConn = DomainTransaction.getConnection();
@@ -82,7 +83,7 @@ const addOrUpdateOrganizationOfOrganizationLearners = async function (organizati
   );
   const existingOrganizationLearners = await organizationLearnerRepository.findByOrganizationId({ organizationId });
 
-  const reconciledOrganizationLearnersToImport = await organizationLearnerRepository._reconcileOrganizationLearners(
+  const reconciledOrganizationLearnersToImport = await _reconcileOrganizationLearners(
     organizationLearnersFromFile,
     existingOrganizationLearners,
   );
@@ -102,6 +103,64 @@ const addOrUpdateOrganizationOfOrganizationLearners = async function (organizati
     throw new OrganizationLearnersCouldNotBeSavedError();
   }
 };
+
+const _reconcileOrganizationLearners = async function (studentsToImport, allOrganizationLearnersInSameOrganization) {
+  const nationalStudentIdsFromFile = studentsToImport
+    .map((organizationLearnerData) => organizationLearnerData.nationalStudentId)
+    .filter(Boolean);
+  const organizationLearnersWithSameNationalStudentIdsAsImported =
+    await studentRepository.findReconciledStudentsByNationalStudentId(nationalStudentIdsFromFile);
+
+  organizationLearnersWithSameNationalStudentIdsAsImported.forEach((organizationLearner) => {
+    const alreadyReconciledStudentToImport = studentsToImport.find(
+      (studentToImport) => studentToImport.userId === organizationLearner.account.userId,
+    );
+
+    if (alreadyReconciledStudentToImport) {
+      alreadyReconciledStudentToImport.userId = null;
+      return;
+    }
+
+    const studentToImport = studentsToImport.find(
+      (studentToImport) => studentToImport.nationalStudentId === organizationLearner.nationalStudentId,
+    );
+
+    if (
+      _shouldStudentToImportBeReconciled(
+        allOrganizationLearnersInSameOrganization,
+        organizationLearner,
+        studentToImport,
+      )
+    ) {
+      studentToImport.userId = organizationLearner.account.userId;
+    }
+  });
+  return studentsToImport;
+};
+
+function _shouldStudentToImportBeReconciled(
+  allOrganizationLearnersInSameOrganization,
+  organizationLearner,
+  studentToImport,
+) {
+  const organizationLearnerWithSameUserId = allOrganizationLearnersInSameOrganization.find(
+    (organizationLearnerInSameOrganization) => {
+      return organizationLearnerInSameOrganization.userId === organizationLearner.account.userId;
+    },
+  );
+  const isOrganizationLearnerReconciled = organizationLearnerWithSameUserId != null;
+  const organizationLearnerHasSameUserIdAndNationalStudentId =
+    organizationLearnerWithSameUserId?.nationalStudentId === organizationLearner.nationalStudentId;
+
+  if (isOrganizationLearnerReconciled && !organizationLearnerHasSameUserIdAndNationalStudentId) {
+    return false;
+  }
+
+  const isFromSameOrganization = studentToImport.organizationId === organizationLearner.account.organizationId;
+  const isFromDifferentOrganizationWithSameBirthday =
+    !isFromSameOrganization && studentToImport.birthdate === organizationLearner.account.birthdate;
+  return isFromSameOrganization || isFromDifferentOrganizationWithSameBirthday;
+}
 
 const saveCommonOrganizationLearners = function (learners) {
   const knex = ApplicationTransaction.getConnection();

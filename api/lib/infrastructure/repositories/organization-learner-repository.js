@@ -10,31 +10,6 @@ import { OrganizationLearner } from '../../../src/shared/domain/models/Organizat
 import { ParticipantRepartition } from '../../../src/shared/domain/models/ParticipantRepartition.js';
 import { fetchPage } from '../../../src/shared/infrastructure/utils/knex-utils.js';
 import { DomainTransaction } from '../DomainTransaction.js';
-import * as studentRepository from './student-repository.js';
-
-function _shouldStudentToImportBeReconciled(
-  allOrganizationLearnersInSameOrganization,
-  organizationLearner,
-  studentToImport,
-) {
-  const organizationLearnerWithSameUserId = allOrganizationLearnersInSameOrganization.find(
-    (organizationLearnerInSameOrganization) => {
-      return organizationLearnerInSameOrganization.userId === organizationLearner.account.userId;
-    },
-  );
-  const isOrganizationLearnerReconciled = organizationLearnerWithSameUserId != null;
-  const organizationLearnerHasSameUserIdAndNationalStudentId =
-    organizationLearnerWithSameUserId?.nationalStudentId === organizationLearner.nationalStudentId;
-
-  if (isOrganizationLearnerReconciled && !organizationLearnerHasSameUserIdAndNationalStudentId) {
-    return false;
-  }
-
-  const isFromSameOrganization = studentToImport.organizationId === organizationLearner.account.organizationId;
-  const isFromDifferentOrganizationWithSameBirthday =
-    !isFromSameOrganization && studentToImport.birthdate === organizationLearner.account.birthdate;
-  return isFromSameOrganization || isFromDifferentOrganizationWithSameBirthday;
-}
 
 const findByIds = async function ({ ids }) {
   const rawOrganizationLearners = await knex
@@ -87,40 +62,6 @@ const findByUserId = async function ({ userId }) {
     .orderBy('id');
 
   return rawOrganizationLearners.map((rawOrganizationLearner) => new OrganizationLearner(rawOrganizationLearner));
-};
-
-const _reconcileOrganizationLearners = async function (studentsToImport, allOrganizationLearnersInSameOrganization) {
-  const nationalStudentIdsFromFile = studentsToImport
-    .map((organizationLearnerData) => organizationLearnerData.nationalStudentId)
-    .filter(Boolean);
-  const organizationLearnersWithSameNationalStudentIdsAsImported =
-    await studentRepository.findReconciledStudentsByNationalStudentId(nationalStudentIdsFromFile);
-
-  organizationLearnersWithSameNationalStudentIdsAsImported.forEach((organizationLearner) => {
-    const alreadyReconciledStudentToImport = studentsToImport.find(
-      (studentToImport) => studentToImport.userId === organizationLearner.account.userId,
-    );
-
-    if (alreadyReconciledStudentToImport) {
-      alreadyReconciledStudentToImport.userId = null;
-      return;
-    }
-
-    const studentToImport = studentsToImport.find(
-      (studentToImport) => studentToImport.nationalStudentId === organizationLearner.nationalStudentId,
-    );
-
-    if (
-      _shouldStudentToImportBeReconciled(
-        allOrganizationLearnersInSameOrganization,
-        organizationLearner,
-        studentToImport,
-      )
-    ) {
-      studentToImport.userId = organizationLearner.account.userId;
-    }
-  });
-  return studentsToImport;
 };
 
 const findByOrganizationIdAndBirthdate = async function ({ organizationId, birthdate }) {
@@ -347,7 +288,6 @@ const findAllLearnerWithAtLeastOneParticipationByOrganizationIds = async functio
 };
 
 export {
-  _reconcileOrganizationLearners,
   countByOrganizationsWhichNeedToComputeCertificability,
   dissociateAllStudentsByUserId,
   findAllLearnerWithAtLeastOneParticipationByOrganizationId,

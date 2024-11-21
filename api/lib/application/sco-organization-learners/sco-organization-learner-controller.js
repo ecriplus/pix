@@ -1,43 +1,10 @@
 import dayjs from 'dayjs';
 
+import * as scoOrganizationLearnerSerializer from '../../../src/prescription/learner-management/infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { DomainTransaction } from '../../infrastructure/DomainTransaction.js';
-import * as scoOrganizationLearnerSerializer from '../../infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 import * as studentInformationForAccountRecoverySerializer from '../../infrastructure/serializers/jsonapi/student-information-for-account-recovery-serializer.js';
-
-const reconcileScoOrganizationLearnerManually = async function (
-  request,
-  h,
-  dependencies = { scoOrganizationLearnerSerializer },
-) {
-  const authenticatedUserId = request.auth.credentials.userId;
-  const payload = request.payload.data.attributes;
-  const campaignCode = payload['campaign-code'];
-  const withReconciliation = request.query.withReconciliation === 'true';
-
-  const reconciliationInfo = {
-    id: authenticatedUserId,
-    firstName: payload['first-name'],
-    lastName: payload['last-name'],
-    birthdate: payload['birthdate'],
-  };
-
-  const organizationLearner = await usecases.reconcileScoOrganizationLearnerManually({
-    campaignCode,
-    reconciliationInfo,
-    withReconciliation,
-  });
-
-  let response;
-  if (withReconciliation) {
-    const serializedData = dependencies.scoOrganizationLearnerSerializer.serializeIdentity(organizationLearner);
-    response = h.response(serializedData).code(200);
-  } else {
-    response = h.response().code(204);
-  }
-  return response;
-};
 
 const generateUsername = async function (request, h, dependencies = { scoOrganizationLearnerSerializer }) {
   const payload = request.payload.data.attributes;
@@ -191,7 +158,6 @@ const batchGenerateOrganizationLearnersUsernameWithTemporaryPassword = async fun
 };
 
 const scoOrganizationLearnerController = {
-  reconcileScoOrganizationLearnerManually,
   generateUsername,
   createAndReconcileUserToOrganizationLearner,
   createUserAndReconcileToOrganizationLearnerFromExternalUser,
