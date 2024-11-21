@@ -4,7 +4,7 @@ import { securityPreHandlers } from '../../../../../src/shared/application/secur
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | campaign-results-router ', function () {
-  describe('GET /api/campaigns/{id}/profiles-collection-participations', function () {
+  describe('GET /api/campaigns/{campaignId}/profiles-collection-participations', function () {
     beforeEach(function () {
       sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCampaign').returns((_, h) => h.response(true));
       sinon
@@ -202,7 +202,7 @@ describe('Unit | Application | campaign-results-router ', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}/collective-results', function () {
+  describe('GET /api/campaigns/{campaignId}/collective-results', function () {
     it('should return 200', async function () {
       // given
       sinon

@@ -8,12 +8,12 @@ const register = async function (server) {
   server.route([
     {
       method: 'GET',
-      path: '/api/campaigns/{id}/assessment-results',
+      path: '/api/campaigns/{campaignId}/assessment-results',
       config: {
         pre: [{ method: securityPreHandlers.checkAuthorizationToAccessCampaign }],
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
           }),
           query: Joi.object({
             filter: Joi.object({
@@ -39,12 +39,12 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/campaigns/{id}/profiles-collection-participations',
+      path: '/api/campaigns/{campaignId}/profiles-collection-participations',
       config: {
         pre: [{ method: securityPreHandlers.checkAuthorizationToAccessCampaign }],
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
           }),
           query: Joi.object({
             filter: Joi.object({
@@ -69,11 +69,11 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/campaigns/{id}/collective-results',
+      path: '/api/campaigns/{campaignId}/collective-results',
       config: {
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
           }),
         },
         handler: campaignResultsController.getCollectiveResult,

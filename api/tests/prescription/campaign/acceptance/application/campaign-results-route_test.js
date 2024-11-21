@@ -17,7 +17,7 @@ describe('Acceptance | API | campaign-results-route', function () {
     server = await createServer();
   });
 
-  describe('GET /api/campaigns/{id}/assessment-results', function () {
+  describe('GET /api/campaigns/{campaignId}/assessment-results', function () {
     const participant1 = { firstName: 'John', lastName: 'McClane', id: 12, email: 'john.mclane@die.hard' };
     const participant2 = { firstName: 'Holly', lastName: 'McClane', id: 13, email: 'holly.mclane@die.hard' };
 
@@ -114,7 +114,7 @@ describe('Acceptance | API | campaign-results-route', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}/profiles-collection-participations', function () {
+  describe('GET /api/campaigns/{campaignId}/profiles-collection-participations', function () {
     beforeEach(async function () {
       const learningContent = [
         {
@@ -523,7 +523,7 @@ describe('Acceptance | API | campaign-results-route', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}/collective-result', function () {
+  describe('GET /api/campaigns/{campaignId}/collective-result', function () {
     const assessmentStartDate = '2018-01-02';
     const participationStartDate = '2018-01-01';
 

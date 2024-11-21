@@ -6,7 +6,7 @@ import * as campaignCollectiveResultSerializer from '../infrastructure/serialize
 import * as campaignProfilesCollectionParticipationSummarySerializer from '../infrastructure/serializers/jsonapi/campaign-profiles-collection-participation-summary-serializer.js';
 
 const findAssessmentParticipationResults = async function (request) {
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
   const { page, filter: filters } = request.query;
   if (filters.divisions && !Array.isArray(filters.divisions)) {
     filters.divisions = [filters.divisions];
@@ -29,7 +29,7 @@ const findAssessmentParticipationResults = async function (request) {
 };
 
 const findProfilesCollectionParticipations = async function (request) {
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
   const { page, filter: filters } = request.query;
   if (filters.divisions && !Array.isArray(filters.divisions)) {
     filters.divisions = [filters.divisions];
@@ -50,7 +50,7 @@ const findProfilesCollectionParticipations = async function (request) {
 
 const getCollectiveResult = async function (request, h, dependencies = { campaignCollectiveResultSerializer }) {
   const { userId } = request.auth.credentials;
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
   const locale = extractLocaleFromRequest(request);
 
   const campaignCollectiveResult = await usecases.computeCampaignCollectiveResult({ userId, campaignId, locale });
