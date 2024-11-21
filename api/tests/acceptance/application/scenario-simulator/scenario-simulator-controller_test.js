@@ -146,42 +146,25 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
       };
     });
 
-    describe('when a number of challenges to pass is specified', function () {
-      it('should return a payload with the same number of simulation scenario results', async function () {
-        // given
-        options.headers.authorization = adminAuthorization;
-        options.payload = validPayload;
+    it('should return a report with the same number of simulation scenario reports as the number of challenges in the configuration', async function () {
+      // given
+      options.headers.authorization = adminAuthorization;
+      options.payload = validPayload;
 
-        // when
-        const response = await server.inject(options);
+      // when
+      const response = await server.inject(options);
 
-        // then
-        expect(response).to.have.property('statusCode', 200);
-        const parsedResponse = parseJsonStream(response);
-        expect(parsedResponse[0].simulationReport).to.have.lengthOf(2);
-        expect(parsedResponse[0].simulationReport[0].challengeId).to.exist;
-        expect(parsedResponse[0].simulationReport[0].capacity).to.exist;
-        expect(parsedResponse[0].simulationReport[0].difficulty).to.exist;
-        expect(parsedResponse[0].simulationReport[0].discriminant).to.exist;
-        expect(parsedResponse[0].simulationReport[0].reward).to.exist;
-        expect(parsedResponse[0].simulationReport[0].errorRate).to.exist;
-        expect(parsedResponse[0].simulationReport[0].answerStatus).to.exist;
-      });
-    });
-
-    describe('when the scenario is capacity', function () {
-      it('should return a payload with simulation the capacity scenario results', async function () {
-        // given
-        options.headers.authorization = adminAuthorization;
-        options.payload = validPayload;
-
-        // when
-        const response = await server.inject(options);
-
-        // then
-        const parsedResponse = parseJsonStream(response);
-        expect(parsedResponse[0].simulationReport).to.have.lengthOf(2);
-      });
+      // then
+      expect(response).to.have.property('statusCode', 200);
+      const parsedResponse = parseJsonStream(response);
+      expect(parsedResponse[0].simulationReport).to.have.lengthOf(2);
+      expect(parsedResponse[0].simulationReport[0].challengeId).to.exist;
+      expect(parsedResponse[0].simulationReport[0].capacity).to.exist;
+      expect(parsedResponse[0].simulationReport[0].difficulty).to.exist;
+      expect(parsedResponse[0].simulationReport[0].discriminant).to.exist;
+      expect(parsedResponse[0].simulationReport[0].reward).to.exist;
+      expect(parsedResponse[0].simulationReport[0].errorRate).to.exist;
+      expect(parsedResponse[0].simulationReport[0].answerStatus).to.exist;
     });
 
     describe('when there is no connected user', function () {
