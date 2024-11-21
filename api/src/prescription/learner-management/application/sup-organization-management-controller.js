@@ -23,14 +23,12 @@ const importSupOrganizationLearners = async function (
       organizationId,
       userId,
       i18n: request.i18n,
-    });
-    await usecases.validateCsvFile({
-      Parser: SupOrganizationLearnerParser,
-      organizationId,
-      i18n: request.i18n,
       type: 'ADDITIONAL_STUDENT',
-      performJob: true,
     });
+  } catch (error) {
+    dependencies.logWarnWithCorrelationIds(error);
+
+    throw error;
   } finally {
     try {
       dependencies.unlink(request.payload.path);
@@ -60,14 +58,12 @@ const replaceSupOrganizationLearners = async function (
       organizationId,
       userId,
       i18n: request.i18n,
-    });
-    await usecases.validateCsvFile({
-      Parser: SupOrganizationLearnerParser,
-      organizationId,
-      i18n: request.i18n,
       type: 'REPLACE_STUDENT',
-      performJob: true,
     });
+  } catch (error) {
+    dependencies.logWarnWithCorrelationIds(error);
+
+    throw error;
   } finally {
     // see https://hapi.dev/api/?v=21.3.3#-routeoptionspayloadoutput
     // add a catch to avoid an error if unlink fails

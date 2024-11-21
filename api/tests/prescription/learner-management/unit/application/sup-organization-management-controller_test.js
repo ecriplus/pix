@@ -7,11 +7,8 @@ describe('Unit | Controller | sup-organization-management-controller', function 
   let organizationId;
   let path;
   let i18n;
-  let warnings;
-  let serializedResponse;
   let userId;
 
-  let supOrganizationLearnerWarningSerializerStub;
   let logErrorWithCorrelationIdsStub;
   let unlinkStub;
 
@@ -22,14 +19,12 @@ describe('Unit | Controller | sup-organization-management-controller', function 
     userId = Symbol('userId');
 
     sinon.stub(usecases, 'uploadCsvFile');
-    sinon.stub(usecases, 'validateCsvFile');
-    supOrganizationLearnerWarningSerializerStub = { serialize: sinon.stub() };
     logErrorWithCorrelationIdsStub = sinon.stub();
     unlinkStub = sinon.stub();
   });
 
   context('#importSupOrganizationLearners', function () {
-    it('should call uploadCsvFile, validateCsvFile and importSupOrganizationLearners usecase and return 200', async function () {
+    it('should call uploadCsvFile usecase and return 200', async function () {
       const params = { id: organizationId };
       const request = {
         auth: { credentials: { userId } },
@@ -37,22 +32,17 @@ describe('Unit | Controller | sup-organization-management-controller', function 
         params,
         i18n,
       };
-      usecases.uploadCsvFile.withArgs({ userId, organizationId, payload: request.payload, i18n }).resolves();
-      usecases.validateCsvFile.withArgs({ organizationId, i18n }).resolves();
-
-      supOrganizationLearnerWarningSerializerStub.serialize
-        .withArgs({ id: organizationId, warnings })
-        .returns(serializedResponse);
+      usecases.uploadCsvFile
+        .withArgs({ userId, organizationId, payload: request.payload, i18n, type: 'ADDITIONAL_STUDENT' })
+        .resolves();
 
       // when
       const response = await supOrganizationManagementController.importSupOrganizationLearners(request, hFake, {
-        supOrganizationLearnerWarningSerializer: supOrganizationLearnerWarningSerializerStub,
         logErrorWithCorrelationIds: logErrorWithCorrelationIdsStub,
         unlink: unlinkStub,
       });
 
       // then
-      expect(sinon.assert.callOrder(usecases.uploadCsvFile, usecases.validateCsvFile)).to.not.throws;
       expect(response.statusCode).to.be.equal(204);
 
       expect(unlinkStub).to.have.been.calledWith(path);
@@ -70,7 +60,6 @@ describe('Unit | Controller | sup-organization-management-controller', function 
 
       // when
       await catchErr(supOrganizationManagementController.importSupOrganizationLearners)(request, hFake, {
-        supOrganizationLearnerWarningSerializer: supOrganizationLearnerWarningSerializerStub,
         logErrorWithCorrelationIds: logErrorWithCorrelationIdsStub,
         unlink: unlinkStub,
       });
@@ -111,23 +100,17 @@ describe('Unit | Controller | sup-organization-management-controller', function 
         params,
         i18n,
       };
-      usecases.uploadCsvFile.withArgs({ userId, organizationId, payload: request.payload, i18n }).resolves();
-      usecases.validateCsvFile.withArgs({ organizationId, i18n }).resolves();
-
-      supOrganizationLearnerWarningSerializerStub.serialize
-        .withArgs({ id: organizationId, warnings })
-        .returns(serializedResponse);
+      usecases.uploadCsvFile
+        .withArgs({ userId, organizationId, payload: request.payload, i18n, type: 'REPLACE_STUDENT' })
+        .resolves();
 
       // when
       const response = await supOrganizationManagementController.replaceSupOrganizationLearners(request, hFake, {
-        supOrganizationLearnerWarningSerializer: supOrganizationLearnerWarningSerializerStub,
         logErrorWithCorrelationIds: logErrorWithCorrelationIdsStub,
         unlink: unlinkStub,
       });
 
       // then
-      // then
-      expect(sinon.assert.callOrder(usecases.uploadCsvFile, usecases.validateCsvFile)).to.not.throws;
       expect(response.statusCode).to.be.equal(204);
 
       expect(unlinkStub).to.have.been.calledWith(path);
@@ -166,7 +149,6 @@ describe('Unit | Controller | sup-organization-management-controller', function 
 
       // when
       const response = await supOrganizationManagementController.replaceSupOrganizationLearners(request, hFake, {
-        supOrganizationLearnerWarningSerializer: supOrganizationLearnerWarningSerializerStub,
         logErrorWithCorrelationIds: logErrorWithCorrelationIdsStub,
         unlink: unlinkStub,
       });
