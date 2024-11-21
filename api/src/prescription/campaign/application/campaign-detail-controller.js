@@ -32,7 +32,7 @@ const getById = async function (
   },
 ) {
   const { userId } = request.auth.credentials;
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
 
   const tokenForCampaignResults = dependencies.tokenService.createTokenForCampaignResults({ userId, campaignId });
 
@@ -41,13 +41,13 @@ const getById = async function (
 };
 
 const getCampaignDetails = async function (request) {
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
   const campaign = await usecases.getCampaignManagement({ campaignId });
   return campaignDetailsManagementSerializer.serialize(campaign);
 };
 
 const findPaginatedFilteredCampaigns = async function (request, _, dependencies = { campaignReportSerializer }) {
-  const organizationId = request.params.id;
+  const { organizationId } = request.params;
   const options = request.query;
   const userId = request.auth.credentials.userId;
 
@@ -65,7 +65,7 @@ const findPaginatedFilteredCampaigns = async function (request, _, dependencies 
 };
 
 const getCsvAssessmentResults = async function (request, h) {
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
 
   const writableStream = new PassThrough();
 
@@ -88,7 +88,7 @@ const getCsvAssessmentResults = async function (request, h) {
 };
 
 const getCsvProfilesCollectionResults = async function (request, h) {
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
 
   const writableStream = new PassThrough();
 
@@ -114,7 +114,7 @@ const findParticipantsActivity = async function (
   h,
   dependencies = { campaignParticipantsActivitySerializer },
 ) {
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
 
   const { page, filter: filters } = request.query;
   if (filters.divisions && !Array.isArray(filters.divisions)) {

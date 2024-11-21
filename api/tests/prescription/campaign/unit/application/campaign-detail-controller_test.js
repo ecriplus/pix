@@ -43,7 +43,7 @@ describe('Unit | Application | Controller | Campaign detail', function () {
       };
       request = {
         params: {
-          id: campaign.id,
+          campaignId: campaign.id,
         },
         auth: {
           credentials: {
@@ -93,7 +93,7 @@ describe('Unit | Application | Controller | Campaign detail', function () {
     beforeEach(function () {
       organizationId = 1;
       request = {
-        params: { id: organizationId },
+        params: { organizationId },
         auth: {
           credentials: {
             userId: 1,
@@ -314,7 +314,7 @@ describe('Unit | Application | Controller | Campaign detail', function () {
       // when
       const response = await campaignDetailController.findParticipantsActivity(
         {
-          params: { id: campaignId },
+          params: { campaignId },
           auth: {
             credentials: { userId },
           },
@@ -344,7 +344,7 @@ function _getRequestForCampaignId(campaignId) {
       accessToken: 'token',
     },
     params: {
-      id: campaignId,
+      campaignId,
     },
     i18n: {
       __: sinon.stub(),

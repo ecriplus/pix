@@ -30,12 +30,12 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/campaigns/{id}',
+      path: '/api/campaigns/{campaignId}',
       config: {
         pre: [{ method: securityPreHandlers.checkAuthorizationToAccessCampaign }],
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
           }),
         },
         handler: campaignDetailController.getById,
@@ -45,7 +45,7 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/admin/campaigns/{id}',
+      path: '/api/admin/campaigns/{campaignId}',
       config: {
         pre: [
           {
@@ -61,7 +61,7 @@ const register = async function (server) {
         ],
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
           }),
         },
         handler: campaignDetailController.getCampaignDetails,
@@ -74,12 +74,12 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/organizations/{id}/campaigns',
+      path: '/api/organizations/{organizationId}/campaigns',
       config: {
         pre: [{ method: securityPreHandlers.checkUserBelongsToOrganization }],
         validate: {
           params: Joi.object({
-            id: identifiersType.organizationId,
+            organizationId: identifiersType.organizationId,
           }),
           query: Joi.object({
             page: {
@@ -104,12 +104,12 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/campaigns/{id}/csv-profiles-collection-results',
+      path: '/api/campaigns/{campaignId}/csv-profiles-collection-results',
       config: {
         pre: [{ method: securityPreHandlers.checkAuthorizationToAccessCampaign }],
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
           }),
         },
         handler: campaignDetailController.getCsvProfilesCollectionResults,
@@ -123,12 +123,12 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/campaigns/{id}/csv-assessment-results',
+      path: '/api/campaigns/{campaignId}/csv-assessment-results',
       config: {
         pre: [{ method: securityPreHandlers.checkAuthorizationToAccessCampaign }],
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
           }),
         },
         handler: campaignDetailController.getCsvAssessmentResults,
@@ -142,11 +142,11 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/campaigns/{id}/participants-activity',
+      path: '/api/campaigns/{campaignId}/participants-activity',
       config: {
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
           }),
           query: Joi.object({
             page: {
