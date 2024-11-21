@@ -1,3 +1,4 @@
+import { ChallengeAlreadyAnsweredError } from '../../../evaluation/domain/errors.js';
 import { CertificationChallengeLiveAlert } from '../../../shared/domain/models/CertificationChallengeLiveAlert.js';
 
 const createCertificationChallengeLiveAlert = async function ({
@@ -18,6 +19,14 @@ const createCertificationChallengeLiveAlert = async function ({
   }
 
   const answers = await answerRepository.findByAssessment(assessmentId);
+
+  const isCurrentChallengeAlreadyAnswered = Boolean(
+    answers.find(({ challengeId: currentChallengeId }) => currentChallengeId === challengeId),
+  );
+
+  if (isCurrentChallengeAlreadyAnswered) {
+    throw new ChallengeAlreadyAnsweredError();
+  }
 
   const questionNumber = _getCurrentQuestionNumber(answers);
 
