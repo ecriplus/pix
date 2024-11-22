@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
-  margin: auto 145px 40px;
+  margin: 40px 145px;
 
   @include device-is('tablet') {
     margin-left: 120px;

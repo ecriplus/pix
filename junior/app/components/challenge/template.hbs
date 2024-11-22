@@ -1,41 +1,35 @@
 {{page-title (t "pages.challenge.title")}}
 <div class="container">
   <RobotDialog @class={{this.robotMood}}>
-    {{#each @challenge.instruction as |instruction|}}
-      <Bubble @message={{instruction}} @oralization={{@oralization}} />
+    {{#each @challenge.instructions as |instruction index|}}
+      <DelayedElement @shouldDisplayIn={{this.bubbleDisplayDelay index}}>
+        <Bubble @message={{instruction}} @oralization={{@oralization}} />
+      </DelayedElement>
     {{/each}}
-    {{#if (eq this.answer.result "ok")}}
+
+    {{#if this.robotFeedback.message}}
       <Bubble
-        @message={{t "pages.challenge.messages.correct-answer"}}
-        @status="success"
+        @message={{this.robotFeedback.message}}
+        @status={{this.robotFeedback.status}}
         @oralization={{@oralization}}
         aria-live="polite"
       />
-    {{/if}}
-    {{#if (eq this.answer.result "ko")}}
-      <Bubble
-        @message={{t "pages.challenge.messages.wrong-answer"}}
-        @oralization={{@oralization}}
-        @status="error"
-        aria-live="polite"
-      />
-    {{/if}}
-    {{#if this.displayValidationWarning}}
-      <Bubble @message={{this.validationWarning}} @status="warning" aria-live="polite" @oralization={{@oralization}} />
     {{/if}}
   </RobotDialog>
-  <Challenge::Item
-    @setAnswerValue={{this.setAnswerValue}}
-    @setValidationWarning={{this.setValidationWarning}}
-    @validateAnswer={{this.validateAnswer}}
-    @skipChallenge={{this.skipChallenge}}
-    @challenge={{@challenge}}
-    @assessment={{@assessment}}
-    @disableCheckButton={{this.disableCheckButton}}
-    @disableLessonButton={{this.disableLessonButton}}
-    @answerHasBeenValidated={{this.answerHasBeenValidated}}
-    @activity={{@activity}}
-    @resume={{this.resume}}
-    @isDisabled={{this.hasBeenAnswered}}
-  />
+  <DelayedElement @shouldDisplayIn={{this.challengeItemDisplayDelay}}>
+    <Challenge::Item
+      @setAnswerValue={{this.setAnswerValue}}
+      @setValidationWarning={{this.setValidationWarning}}
+      @validateAnswer={{this.validateAnswer}}
+      @skipChallenge={{this.skipChallenge}}
+      @challenge={{@challenge}}
+      @assessment={{@assessment}}
+      @disableCheckButton={{this.disableCheckButton}}
+      @disableLessonButton={{this.disableLessonButton}}
+      @answerHasBeenValidated={{this.answerHasBeenValidated}}
+      @activity={{@activity}}
+      @resume={{this.resume}}
+      @isDisabled={{this.hasBeenAnswered}}
+    />
+  </DelayedElement>
 </div>

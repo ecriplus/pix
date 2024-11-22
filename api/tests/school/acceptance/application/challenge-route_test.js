@@ -28,7 +28,7 @@ describe('Integration | Controller | challenge-controller', function () {
       });
 
       expect(response.statusCode).to.equal(200);
-      expect(response.result.data.attributes.instruction).to.deep.equal(expectedResult);
+      expect(response.result.data.attributes.instructions).to.deep.equal(expectedResult);
     });
   });
 });

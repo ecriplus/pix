@@ -1,10 +1,11 @@
 .challenge-item {
   display: flex;
   align-content: center;
-  margin: 0 140px;
+  margin: 35px 140px 0;
+  transition: all 0.4s;
 
   @include device-is('tablet') {
-    margin: 0 120px;
+    margin: 35px 120px 0;
   }
 
   &--single-display {

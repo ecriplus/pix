@@ -9,7 +9,7 @@ module('Integration | Component | Challenge', function (hooks) {
 
   module('if learner has oralization feature', function () {
     test('should display oralization buttons on instruction bubbles', async function (assert) {
-      this.set('challenge', { instruction: ['1ère instruction', '2ème instruction'] });
+      this.set('challenge', { instructions: ['1ère instruction', '2ème instruction'] });
       const screen = await render(hbs`<template>
   <Challenge @challenge={{this.challenge}} @oralization={{true}} />
 </template>`);
@@ -21,7 +21,7 @@ module('Integration | Component | Challenge', function (hooks) {
     test('should not display oralization buttons', async function (assert) {
       const store = this.owner.lookup('service:store');
       this.set('organizationLearner', store.createRecord('organization-learner', { features: [] }));
-      this.set('challenge', { instruction: ['1ère instruction', '2ème instruction'] });
+      this.set('challenge', { instructions: ['1ère instruction', '2ème instruction'] });
       const screen = await render(hbs`<template>
   <Challenge @challenge={{this.challenge}} @oralization={{false}} />
 </template>`);

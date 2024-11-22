@@ -2,15 +2,27 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import ENV from 'junior/config/environment';
+
+const CHALLENGE_DISPLAY_DELAY = ENV.APP.CHALLENGE_DISPLAY_DELAY;
 
 export default class Challenge extends Component {
   @service store;
   @service router;
+  @service intl;
   @tracked answerHasBeenValidated = false;
   @tracked answer = null;
   @tracked answerValue = null;
   @tracked displayValidationWarning = false;
   validationWarning = null;
+
+  get challengeItemDisplayDelay() {
+    return this.args.challenge.instructions.length * CHALLENGE_DISPLAY_DELAY;
+  }
+
+  bubbleDisplayDelay(index) {
+    return (index || 0) * CHALLENGE_DISPLAY_DELAY;
+  }
 
   get disableCheckButton() {
     return this.answerValue === null || this.answerValue === '';
@@ -31,6 +43,22 @@ export default class Challenge extends Component {
       return 'retry';
     }
     return 'default';
+  }
+
+  get robotFeedback() {
+    const feedback = {};
+
+    if (this.answer?.result === 'ok') {
+      feedback.message = this.intl.t('pages.challenge.messages.correct-answer');
+      feedback.status = 'success';
+    } else if (this.answer?.result === 'ko') {
+      feedback.message = this.intl.t('pages.challenge.messages.wrong-answer');
+      feedback.status = 'error';
+    } else if (this.displayValidationWarning) {
+      feedback.message = this.validationWarning;
+      feedback.status = 'warning';
+    }
+    return feedback;
   }
 
   @action

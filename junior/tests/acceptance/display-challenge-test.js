@@ -8,24 +8,24 @@ module('Acceptance | Challenge', function (hooks) {
   setupApplicationTest(hooks);
   test('displays challenge page', async function (assert) {
     const assessment = this.server.create('assessment');
-    const challenge = this.server.create('challenge', 'withInstruction');
+    const challenge = this.server.create('challenge', 'withInstructions');
     this.server.create('activity', { assessmentId: assessment.id });
     // when
     const screen = await visit(`/assessments/${assessment.id}/challenges`);
     // then
-    assert.dom(screen.getByText(challenge.instruction)).exists();
+    assert.dom(screen.getByText(challenge.instructions)).exists();
     assert.dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') })).exists();
   });
 
   test('displays challenge page with multiple instruction bubbles', async function (assert) {
     const assessment = this.server.create('assessment');
-    const challenge = this.server.create('challenge', { instruction: ['1ère instruction', '2ème instruction'] });
+    const challenge = this.server.create('challenge', { instructions: ['1ère instruction', '2ème instruction'] });
     this.server.create('activity', { assessmentId: assessment.id });
     // when
     const screen = await visit(`/assessments/${assessment.id}/challenges`);
     // then
-    assert.dom(screen.getByText(challenge.instruction[0])).exists();
-    assert.dom(screen.getByText(challenge.instruction[1])).exists();
+    assert.dom(screen.getByText(challenge.instructions[0])).exists();
+    assert.dom(screen.getByText(challenge.instructions[1])).exists();
     assert.dom(screen.getByRole('button', { name: t('pages.challenge.actions.check') })).exists();
   });
 
@@ -34,7 +34,7 @@ module('Acceptance | Challenge', function (hooks) {
       features: ['ORALIZATION'],
     });
     const assessment = this.server.create('assessment');
-    this.server.create('challenge', { instruction: ['1ère instruction', '2ème instruction'] });
+    this.server.create('challenge', { instructions: ['1ère instruction', '2ème instruction'] });
     this.server.create('activity', { assessmentId: assessment.id });
 
     identifyLearner(this.owner, oragnizationLearner);
@@ -48,12 +48,12 @@ module('Acceptance | Challenge', function (hooks) {
 
   test('do not display skip button when activity level is TUTORIAL', async function (assert) {
     const assessment = this.server.create('assessment');
-    const challenge = this.server.create('challenge', 'withInstruction');
+    const challenge = this.server.create('challenge', 'withInstructions');
     this.server.create('activity', { level: 'TUTORIAL', assessmentId: assessment.id });
     // when
     const screen = await visit(`/assessments/${assessment.id}/challenges`);
     // then
-    assert.dom(screen.getByText(challenge.instruction)).exists();
+    assert.dom(screen.getByText(challenge.instructions)).exists();
     assert.dom(screen.queryByRole('button', { name: t('pages.challenge.actions.skip') })).doesNotExist();
   });
 });
