@@ -18,6 +18,7 @@ import * as campaignParticipationRepository from '../../infrastructure/repositor
 import { repositories } from '../../infrastructure/repositories/index.js';
 import { importOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-organization-learners-job-repository.js';
 import { importSupOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-sup-organization-learners-job-repository.js';
+import { validateCsvOrganizationImportFileJobRepository } from '../../infrastructure/repositories/jobs/validate-csv-organization-learners-import-file-job-repository.js';
 import { validateOrganizationImportFileJobRepository } from '../../infrastructure/repositories/jobs/validate-organization-learners-import-file-job-repository.js';
 import * as organizationImportRepository from '../../infrastructure/repositories/organization-import-repository.js';
 import * as organizationLearnerImportFormatRepository from '../../infrastructure/repositories/organization-learner-import-format-repository.js';
@@ -48,6 +49,7 @@ import { importStorage } from '../../infrastructure/storage/import-storage.js';
  * @typedef {import ('../../infrastructure/repositories/sup-organization-learner-repository.js')} SupOrganizationLearnerRepository
  * @typedef {import ('../../../../../lib/domain/services/user-reconciliation-service.js')} UserReconciliationService
  * @typedef {import('../../../../identity-access-management/infrastructure/repositories/user.repository.js')} userRepository
+ * @typedef {import('../../infrastructure/repositories/jobs/validate-csv-organization-learners-import-file-job-repository.js')} validateCsvOrganizationImportFileJobRepository
  * @typedef {import ('../../infrastructure/repositories/jobs/validate-organization-learners-import-file-job-repository.js')} ValidateOrganizationImportFileJobRepository
  */
 const dependencies = {
@@ -72,6 +74,7 @@ const dependencies = {
   supOrganizationLearnerRepository,
   userReconciliationService,
   userRepository,
+  validateCsvOrganizationImportFileJobRepository,
   validateOrganizationImportFileJobRepository,
 };
 
