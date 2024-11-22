@@ -101,6 +101,7 @@ const usecasesWithoutInjectedDependencies = {
  * @property {handlePayloadTooLargeError} handlePayloadTooLargeError
  * @property {importOrganizationLearnersFromSIECLECSVFormat} importOrganizationLearnersFromSIECLECSVFormat
  * @property {importSupOrganizationLearners} importSupOrganizationLearners
+ * @property {hasBeenLearner} hasBeenLearner
  * @property {reconcileCommonOrganizationLearner} reconcileCommonOrganizationLearner
  * @property {reconcileScoOrganizationLearnerAutomatically} reconcileScoOrganizationLearnerAutomatically
  * @property {replaceSupOrganizationLearners} replaceSupOrganizationLearners
