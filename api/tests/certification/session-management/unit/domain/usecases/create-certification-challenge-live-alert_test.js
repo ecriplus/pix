@@ -1,7 +1,8 @@
 import _ from 'lodash';
 
+import { ChallengeAlreadyAnsweredError } from '../../../../../../src/certification/evaluation/domain/errors.js';
 import { createCertificationChallengeLiveAlert } from '../../../../../../src/certification/session-management/domain/usecases/create-certification-challenge-live-alert.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | create-certification-challenge-live-alert', function () {
   let certificationChallengeLiveAlertRepository;
@@ -74,6 +75,30 @@ describe('Unit | UseCase | create-certification-challenge-live-alert', function 
 
     expect(certificationChallengeLiveAlertRepository.save).to.have.been.calledWith({
       certificationChallengeLiveAlert: sinon.match(expectedLiveAlert),
+    });
+  });
+
+  context('when the candidate has already answered the current challenge', function () {
+    it('should throw an error', async function () {
+      // given
+      const assessmentId = 123;
+      const challengeId = 'pix123';
+
+      const answers = [domainBuilder.buildAnswer({ id: 1 }), domainBuilder.buildAnswer({ id: 2, challengeId })];
+      answerRepository.findByAssessment.withArgs(assessmentId).resolves(answers);
+
+      // when
+      const error = await catchErr(createCertificationChallengeLiveAlert)({
+        assessmentId,
+        challengeId,
+        certificationChallengeLiveAlertRepository,
+        answerRepository,
+        challengeRepository,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(ChallengeAlreadyAnsweredError);
+      expect(certificationChallengeLiveAlertRepository.save).to.not.have.been.called;
     });
   });
 
