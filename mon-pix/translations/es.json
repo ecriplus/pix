@@ -1606,10 +1606,10 @@
       "grain": {
         "tag": {
           "activity": "Actividad",
-          "challenge": "desafío",
-          "discovery": "descubrimiento",
-          "lesson": "lección",
-          "summary": "recapitular"
+          "challenge": "Desafío",
+          "discovery": "Descubrimiento",
+          "lesson": "Lección",
+          "summary": "Recapitular"
         }
       },
       "modals": {

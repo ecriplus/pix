@@ -1595,11 +1595,11 @@
       },
       "grain": {
         "tag": {
-          "activity": "activité",
-          "challenge": "défi",
-          "discovery": "découverte",
-          "lesson": "leçon",
-          "summary": "récap'"
+          "activity": "Activité",
+          "challenge": "Défi",
+          "discovery": "Découverte",
+          "lesson": "Leçon",
+          "summary": "Récap'"
         }
       },
       "modals": {

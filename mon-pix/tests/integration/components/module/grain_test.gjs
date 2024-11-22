@@ -73,7 +73,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // then
       assert.dom(find('.grain-card--activity')).exists();
-      assert.dom(screen.getByText('activité')).exists();
+      assert.dom(screen.getByText('Activité')).exists();
     });
 
     test('should have the "lesson" color and tag if grain is of type lesson', async function (assert) {
@@ -88,7 +88,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // then
       assert.dom(find('.grain-card--lesson')).exists();
-      assert.dom(screen.getByText('leçon')).exists();
+      assert.dom(screen.getByText('Leçon')).exists();
     });
 
     test('should have the "lesson" color and tag if grain is of undefined type', async function (assert) {
@@ -103,7 +103,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // then
       assert.dom(find('.grain-card--lesson')).exists();
-      assert.dom(screen.getByText('leçon')).exists();
+      assert.dom(screen.getByText('Leçon')).exists();
     });
 
     test('should have the "lesson" color and tag if grain is of unknown type', async function (assert) {
@@ -118,7 +118,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // then
       assert.dom(find('.grain-card--lesson')).exists();
-      assert.dom(screen.getByText('leçon')).exists();
+      assert.dom(screen.getByText('Leçon')).exists();
     });
 
     test('should have the "discovery" color and tag if grain is of type discovery', async function (assert) {
@@ -133,7 +133,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // then
       assert.dom(find('.grain-card--discovery')).exists();
-      assert.dom(screen.getByText('découverte')).exists();
+      assert.dom(screen.getByText('Découverte')).exists();
     });
 
     test('should have the "challenge" color and tag if grain is of type challenge', async function (assert) {
@@ -148,7 +148,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // then
       assert.dom(find('.grain-card--challenge')).exists();
-      assert.dom(screen.getByText('défi')).exists();
+      assert.dom(screen.getByText('Défi')).exists();
     });
 
     test('should have the "summary" color and tag if grain is of type summary', async function (assert) {
@@ -163,7 +163,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // then
       assert.dom(find('.grain-card--summary')).exists();
-      assert.dom(screen.getByText("récap'")).exists();
+      assert.dom(screen.getByText("Récap'")).exists();
     });
   });
 

@@ -1601,11 +1601,11 @@
       },
       "grain": {
         "tag": {
-          "activity": "activiteit",
+          "activity": "Activiteit",
           "challenge": "Uitdaging",
-          "discovery": "ontdekking",
-          "lesson": "les",
-          "summary": "recap"
+          "discovery": "Ontdekking",
+          "lesson": "Les",
+          "summary": "Recap"
         }
       },
       "modals": {
