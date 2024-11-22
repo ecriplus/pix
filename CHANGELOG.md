@@ -1,5 +1,35 @@
 # Pix Changelog
 
+## v4.245.0 (22/11/2024)
+
+
+### :rocket: Amélioration
+- [#10616](https://github.com/1024pix/pix/pull/10616) [FEATURE] Afficher une notification lorsque aucune attestation n'est disponible (PIX-15364).
+- [#10607](https://github.com/1024pix/pix/pull/10607) [FEATURE] Partager l'attestation au partage du résultat de la campagne (PIX-15365).
+- [#10601](https://github.com/1024pix/pix/pull/10601) [FEATURE] Améliorer le style du footer (PIX-15363).
+- [#10546](https://github.com/1024pix/pix/pull/10546) [FEATURE] Afficher le message d'erreur "adresse email invalide ou déjà utilisée" (PIX-14689).
+- [#10596](https://github.com/1024pix/pix/pull/10596) [FEATURE] API - statut béta (PIX-15350).
+- [#10585](https://github.com/1024pix/pix/pull/10585) [FEATURE] Permettre d'avoir un `campaignParticipationId` `NULL` dans `user-recommended-trainings` (PIX-15303).
+- [#10604](https://github.com/1024pix/pix/pull/10604) [FEATURE] Correction coquille + ajout vignette video module chatgpt-parle-francais.
+- [#10577](https://github.com/1024pix/pix/pull/10577) [FEATURE] Utiliser PixToast dans Pix Admin (PIX-15328).
+- [#10594](https://github.com/1024pix/pix/pull/10594) [FEATURE] Ne recuperer que les attestations partagées pour le prescripteur (PIX-15336).
+
+### :building_construction: Tech
+- [#10610](https://github.com/1024pix/pix/pull/10610) [TECH] Uniformiser la sélection de challenges entre le simulateur de déroulé et la prod (PIX-15214).
+- [#10602](https://github.com/1024pix/pix/pull/10602) [TECH] Création des tables de contenu pédagogique dans la base de données de l'API (PIX-15355).
+- [#10404](https://github.com/1024pix/pix/pull/10404) [TECH] :recycle: Déplacement des éléments de `CertificationCourse` vers le contexte `src/certification/evaluation`.
+- [#10600](https://github.com/1024pix/pix/pull/10600) [TECH] Nettoyage du simulateur PARTIE 3 (PIX-15353).
+- [#10591](https://github.com/1024pix/pix/pull/10591) [TECH] Suppression de paramètres non utilisés du simulateur de déroulé (PIX-15316).
+- [#10590](https://github.com/1024pix/pix/pull/10590) [TECH] Migrer la route reconciliation SCO dans son bounded Context (Pix-15335).
+
+### :bug: Correction
+- [#10621](https://github.com/1024pix/pix/pull/10621) [BUGFIX] Valider le bon externalId lorsque l'on repasse une campagne (PIX-15361).
+- [#10615](https://github.com/1024pix/pix/pull/10615) [BUGFIX] Empêcher de lever une alerte sur un challenge déjà répondu (PIX-15388).
+- [#10583](https://github.com/1024pix/pix/pull/10583) [BUGFIX] ✏️ Correction du titre "Objectif.s" (PIX-15326).
+
+### :arrow_up: Montée de version
+- [#10619](https://github.com/1024pix/pix/pull/10619) [BUMP] Lock file maintenance (mon-pix).
+
 ## v4.244.0 (20/11/2024)
 
 
