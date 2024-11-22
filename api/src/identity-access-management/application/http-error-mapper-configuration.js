@@ -3,6 +3,7 @@ import { DomainErrorMappingConfiguration } from '../../shared/application/models
 import {
   AuthenticationKeyExpired,
   DifferentExternalIdentifierError,
+  InvalidOrAlreadyUsedEmailError,
   MissingOrInvalidCredentialsError,
   MissingUserAccountError,
   PasswordNotMatching,
@@ -19,6 +20,10 @@ const authenticationDomainErrorMappingConfiguration = [
   {
     name: DifferentExternalIdentifierError.name,
     httpErrorFn: (error) => new HttpErrors.ConflictError(error.message),
+  },
+  {
+    name: InvalidOrAlreadyUsedEmailError.name,
+    httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code),
   },
   {
     name: MissingOrInvalidCredentialsError.name,

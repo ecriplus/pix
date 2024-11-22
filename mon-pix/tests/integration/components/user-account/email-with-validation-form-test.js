@@ -90,29 +90,6 @@ module('Integration | Component | user-account | email-with-validation-form', fu
       assert.ok(true);
     });
 
-    test('should display email already exists error if response status is 400', async function (assert) {
-      // given
-      const emailAlreadyExist = 'email@example.net';
-      const password = 'password';
-      store.createRecord = () => ({
-        sendNewEmail: sinon.stub().throws({ errors: [{ status: '400', code: 'ACCOUNT_WITH_EMAIL_ALREADY_EXISTS' }] }),
-      });
-
-      const screen = await render(
-        hbs`<UserAccount::EmailWithValidationForm @showVerificationCode={{this.showVerificationCode}} />`,
-      );
-
-      // when
-      await _fillInputsAndValidateNewEmail({ screen, t, email: emailAlreadyExist, password });
-
-      // then
-      assert.ok(
-        screen.getByText(
-          t('pages.user-account.account-update-email-with-validation.fields.errors.new-email-already-exist'),
-        ),
-      );
-    });
-
     test('should display error message from server if response status is 400 or 403', async function (assert) {
       // given
       const newEmail = 'newEmail@example.net';
@@ -134,7 +111,7 @@ module('Integration | Component | user-account | email-with-validation-form', fu
       );
     });
 
-    test('should display invalid email format error if response status is 422', async function (assert) {
+    test('should display invalid or already used email error if response status is 422', async function (assert) {
       // given
       const newEmail = 'newEmail@example.net';
       const password = 'password';
@@ -151,7 +128,9 @@ module('Integration | Component | user-account | email-with-validation-form', fu
 
       // then
       assert.ok(
-        screen.getByText(t('pages.user-account.account-update-email-with-validation.fields.errors.invalid-email')),
+        screen.getByText(
+          t('pages.user-account.account-update-email-with-validation.fields.errors.invalid-or-already-used-email'),
+        ),
       );
     });
 

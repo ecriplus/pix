@@ -109,7 +109,7 @@ export default class FindScoRecordController extends Controller {
     const hasInternalErrorOrConflictOrAlreadyLeftSco =
       status === 403 || status === 409 || status >= 500 || isApiUnreachable;
     const isEmailAlreadyRegistered =
-      this.showBackupEmailConfirmationForm && status === 400 && code === 'ACCOUNT_WITH_EMAIL_ALREADY_EXISTS';
+      this.showBackupEmailConfirmationForm && status === 422 && code === 'INVALID_OR_ALREADY_USED_EMAIL';
 
     if (!hasInternalErrorOrConflictOrAlreadyLeftSco || isEmailAlreadyRegistered) {
       this._showErrorOnComponent(isEmailAlreadyRegistered);

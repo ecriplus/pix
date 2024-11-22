@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 
+import { InvalidOrAlreadyUsedEmailError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { EventLoggingJob } from '../../../../../src/identity-access-management/domain/models/jobs/EventLoggingJob.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { userEmailRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/user-email.repository.js';
 import {
-  AlreadyRegisteredEmailError,
   EmailModificationDemandNotFoundOrExpiredError,
   InvalidVerificationCodeError,
   UserNotAuthorizedToUpdateEmailError,
@@ -137,7 +137,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
       });
 
       // then
-      expect(error).to.be.instanceOf(AlreadyRegisteredEmailError);
+      expect(error).to.be.instanceOf(InvalidOrAlreadyUsedEmailError);
     });
   });
 });

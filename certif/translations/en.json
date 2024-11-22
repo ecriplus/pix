@@ -79,8 +79,8 @@
     "form-errors": {
       "default": "The service is temporarily unavailable. Please try again later.",
       "email": {
-        "already-exists": "This email address is already registered, please login.",
-        "format": "Your email address is invalid."
+        "format": "Your email address is invalid.",
+        "invalid-or-already-used-email": "Invalid or already used e-mail address"
       },
       "fill-mandatory-fields": "Please fill in all the required fields before confirming.",
       "firstname": {

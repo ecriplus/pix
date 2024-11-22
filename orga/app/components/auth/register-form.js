@@ -14,6 +14,10 @@ const STATUS = {
   ERROR: 'error',
 };
 
+const API_ERRORS = {
+  INVALID_OR_ALREADY_USED_EMAIL: 'pages.login-or-register.register-form.errors.invalid-or-already-used-email',
+};
+
 class LastName {
   @tracked status = STATUS.DEFAULT;
   @tracked message = null;
@@ -56,6 +60,7 @@ export default class RegisterForm extends Component {
   @tracked errorMessage = null;
   @tracked validation = new SignupFormValidation();
   @tracked selectedLanguage = this.intl.primaryLocale;
+  @tracked apiErrors = API_ERRORS;
 
   get cguUrl() {
     return this.url.cguUrl;
@@ -64,6 +69,16 @@ export default class RegisterForm extends Component {
   get dataProtectionPolicyUrl() {
     return this.url.dataProtectionPolicyUrl;
   }
+
+  _getErrorMessageForField = (fieldName) => {
+    const apiErrorKey = this.validation[fieldName]?.message;
+
+    if (apiErrorKey && this.apiErrors[apiErrorKey]) {
+      const errorMessage = this.intl.t(this.apiErrors[apiErrorKey]);
+      return errorMessage;
+    }
+    return false;
+  };
 
   @action
   async register(event) {

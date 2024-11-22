@@ -1,10 +1,12 @@
 import lodash from 'lodash';
 
 import {
+  EntityValidationError,
   InvalidPasswordForUpdateEmailError,
   UserNotAuthorizedToUpdateEmailError,
 } from '../../../shared/domain/errors.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
+import { InvalidOrAlreadyUsedEmailError } from '../errors.js';
 
 const { get } = lodash;
 
@@ -42,7 +44,11 @@ const sendVerificationCode = async function ({
     throw new UserNotAuthorizedToUpdateEmailError();
   }
 
-  await userRepository.checkIfEmailIsAvailable(newEmail);
+  try {
+    await userRepository.checkIfEmailIsAvailable(newEmail);
+  } catch (e) {
+    _manageError(e, InvalidOrAlreadyUsedEmailError, 'email', 'INVALID_OR_ALREADY_USED_EMAIL');
+  }
 
   const authenticationMethod = await authenticationMethodRepository.findOneByUserIdAndIdentityProvider({
     userId,
@@ -65,5 +71,14 @@ const sendVerificationCode = async function ({
   await userEmailRepository.saveEmailModificationDemand({ userId, code, newEmail });
   await mailService.sendVerificationCodeEmail({ code, locale, translate: i18n.__, email: newEmail });
 };
+
+function _manageError(error, errorType, attribute, message) {
+  if (error instanceof errorType) {
+    throw new EntityValidationError({
+      invalidAttributes: [{ attribute, message }],
+    });
+  }
+  throw error;
+}
 
 export { sendVerificationCode };

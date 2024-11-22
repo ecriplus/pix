@@ -6,7 +6,11 @@ module('Unit | Utils | form-validation', function (hooks) {
 
   hooks.beforeEach(async function () {
     formValidation = new FormValidation({
-      login: { validate: (value) => Boolean(value), error: 'Bad login' },
+      login: {
+        validate: (value) => Boolean(value),
+        error: 'Bad login',
+        apiErrors: { API_ERROR_CODE: 'api.bad.error' },
+      },
       password: { validate: (value) => Boolean(value), error: 'Bad password' },
     });
   });
@@ -74,21 +78,33 @@ module('Unit | Utils | form-validation', function (hooks) {
   });
 
   module('When API errors', function () {
-    test('updates validation from API errors', function (assert) {
+    test('maps error from API errors', function (assert) {
       // when
-      formValidation.setErrorsFromApi([{ attribute: 'login', message: 'Bad login from API' }]);
+      formValidation.setErrorsFromApi([{ attribute: 'login', message: 'API_ERROR_CODE' }]);
 
       // then
       assert.deepEqual(formValidation.login.status, 'error');
-      assert.deepEqual(formValidation.login.error, 'Bad login');
-      assert.deepEqual(formValidation.login.apiError, 'Bad login from API');
+      assert.deepEqual(formValidation.login.error, 'api.bad.error');
+      assert.deepEqual(formValidation.login.apiError, 'api.bad.error');
+      assert.deepEqual(formValidation.password.status, 'default');
+      assert.deepEqual(formValidation.password.error, null);
+    });
+
+    test('returns default error when no mapping error found', function (assert) {
+      // when
+      formValidation.setErrorsFromApi([{ attribute: 'login', message: 'OTHER_ERROR_CODE' }]);
+
+      // then
+      assert.deepEqual(formValidation.login.status, 'error');
+      assert.deepEqual(formValidation.login.error, 'common.error');
+      assert.deepEqual(formValidation.login.apiError, 'common.error');
       assert.deepEqual(formValidation.password.status, 'default');
       assert.deepEqual(formValidation.password.error, null);
     });
 
     test('resets API errors after a field validation', function (assert) {
       // when
-      formValidation.setErrorsFromApi([{ attribute: 'login', message: 'Bad login from API' }]);
+      formValidation.setErrorsFromApi([{ attribute: 'login', message: 'API_ERROR_CODE' }]);
       formValidation.login.validate('foo');
 
       // then
@@ -99,7 +115,7 @@ module('Unit | Utils | form-validation', function (hooks) {
 
     test('resets API errors after all fields validation', function (assert) {
       // when
-      formValidation.setErrorsFromApi([{ attribute: 'login', message: 'Bad login from API' }]);
+      formValidation.setErrorsFromApi([{ attribute: 'login', message: 'API_ERROR_CODE' }]);
       formValidation.validateAll({ login: 'foo', password: 'bar' });
 
       // then

@@ -860,7 +860,8 @@
         "button": "Sign up",
         "errors": {
           "default": "The service is temporarily unavailable. Please try again later.",
-          "email-already-exists": "This email address is already registered, please login."
+          "email-already-exists": "This email address is already registered, please login.",
+          "invalid-or-already-used-email": "Invalid or already used e-mail address"
         },
         "fields": {
           "button": {

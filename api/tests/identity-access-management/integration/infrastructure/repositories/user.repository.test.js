@@ -3,6 +3,7 @@ const { each, map, times, pick } = lodash;
 import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import * as OidcIdentityProviders from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
+import { InvalidOrAlreadyUsedEmailError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { UserDetailsForAdmin } from '../../../../../src/identity-access-management/domain/models/UserDetailsForAdmin.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
@@ -12,7 +13,6 @@ import { OrganizationLearnerForAdmin } from '../../../../../src/prescription/lea
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import {
   AlreadyExistingEntityError,
-  AlreadyRegisteredEmailError,
   AlreadyRegisteredUsernameError,
   UserNotFoundError,
 } from '../../../../../src/shared/domain/errors.js';
@@ -1749,7 +1749,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(email).to.equal('email@example.net');
     });
 
-    it('should reject an AlreadyRegisteredEmailError when it already exists', async function () {
+    it('throws an InvalidOrAlreadyUsedEmailError when it already exists', async function () {
       // given
       const userInDb = databaseBuilder.factory.buildUser(userToInsert);
       await databaseBuilder.commit();
@@ -1758,10 +1758,10 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       const result = await catchErr(userRepository.checkIfEmailIsAvailable)(userInDb.email);
 
       // then
-      expect(result).to.be.instanceOf(AlreadyRegisteredEmailError);
+      expect(result).to.be.instanceOf(InvalidOrAlreadyUsedEmailError);
     });
 
-    it('should reject an AlreadyRegisteredEmailError when email case insensitive already exists', async function () {
+    it('throws an InvalidOrAlreadyUsedEmailError when email case insensitive already exists', async function () {
       // given
       const upperCaseEmail = 'TEST@example.net';
       const lowerCaseEmail = 'test@example.net';
@@ -1772,7 +1772,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       const result = await catchErr(userRepository.checkIfEmailIsAvailable)(lowerCaseEmail);
 
       // then
-      expect(result).to.be.instanceOf(AlreadyRegisteredEmailError);
+      expect(result).to.be.instanceOf(InvalidOrAlreadyUsedEmailError);
     });
   });
 

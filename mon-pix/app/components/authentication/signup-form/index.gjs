@@ -30,6 +30,10 @@ const VALIDATION_ERRORS = {
   cgu: 'common.cgu.error',
 };
 
+const EMAIL_API_ERRORS = {
+  INVALID_OR_ALREADY_USED_EMAIL: 'components.authentication.signup-form.errors.invalid-or-already-used-email',
+};
+
 export default class SignupForm extends Component {
   @service session;
   @service intl;
@@ -49,6 +53,7 @@ export default class SignupForm extends Component {
     email: {
       validate: (value) => isEmailValid(value),
       error: VALIDATION_ERRORS.email,
+      apiErrors: EMAIL_API_ERRORS,
     },
     password: {
       validate: (value) => isPasswordValid(value),
@@ -149,11 +154,7 @@ export default class SignupForm extends Component {
           name="firstName"
           {{on "change" this.handleInputChange}}
           @validationStatus={{this.validation.firstName.status}}
-          @errorMessage={{if
-            this.validation.firstName.apiError
-            this.validation.firstName.apiError
-            (t this.validation.firstName.error)
-          }}
+          @errorMessage={{t this.validation.firstName.error}}
           placeholder={{t "components.authentication.signup-form.fields.firstname.placeholder"}}
           aria-required="true"
           autocomplete="given-name"
@@ -166,11 +167,7 @@ export default class SignupForm extends Component {
           name="lastName"
           {{on "change" this.handleInputChange}}
           @validationStatus={{this.validation.lastName.status}}
-          @errorMessage={{if
-            this.validation.lastName.apiError
-            this.validation.lastName.apiError
-            (t this.validation.lastName.error)
-          }}
+          @errorMessage={{t this.validation.lastName.error}}
           placeholder={{t "components.authentication.signup-form.fields.lastname.placeholder"}}
           aria-required="true"
           autocomplete="family-name"
@@ -183,11 +180,7 @@ export default class SignupForm extends Component {
           name="email"
           {{on "change" this.handleInputChange}}
           @validationStatus={{this.validation.email.status}}
-          @errorMessage={{if
-            this.validation.email.apiError
-            this.validation.email.apiError
-            (t this.validation.email.error)
-          }}
+          @errorMessage={{t this.validation.email.error}}
           placeholder={{t "components.authentication.signup-form.fields.email.placeholder"}}
           aria-required="true"
           autocomplete="email"
@@ -200,11 +193,7 @@ export default class SignupForm extends Component {
           name="password"
           {{on "change" this.handleInputChange}}
           @validationStatus={{this.validation.password.status}}
-          @errorMessage={{if
-            this.validation.password.apiError
-            this.validation.password.apiError
-            (t this.validation.password.error)
-          }}
+          @errorMessage={{t this.validation.password.error}}
           @rules={{PASSWORD_RULES}}
           aria-required="true"
         >
@@ -216,7 +205,7 @@ export default class SignupForm extends Component {
           name="cgu"
           {{on "change" this.handleInputChange}}
           @validationStatus={{this.validation.cgu.status}}
-          @errorMessage={{if this.validation.cgu.apiError this.validation.cgu.apiError (t this.validation.cgu.error)}}
+          @errorMessage={{t this.validation.cgu.error}}
           aria-required="true"
         />
       </fieldset>

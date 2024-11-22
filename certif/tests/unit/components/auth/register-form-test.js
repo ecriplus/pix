@@ -134,7 +134,7 @@ module('Unit | Component | register-form', (hooks) => {
           await component.register(eventStub);
 
           // then
-          assert.strictEqual(component.errorMessage, t('common.form-errors.email.already-exists'));
+          assert.strictEqual(component.errorMessage, t('common.form-errors.email.invalid-or-already-used-email'));
           sinon.assert.calledOnce(deleteRecord);
         });
       });

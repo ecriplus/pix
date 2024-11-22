@@ -159,6 +159,11 @@
           }
         }
       },
+      "sign-up-form": {
+        "errors": {
+          "invalid-or-already-used-email" : "Invalid or already used e-mail address"
+        }
+      },
       "new-password-input": {
         "completed-message": "{ rulesCompleted }  { rulesCount } en .",
         "instructions-label": "Tu contraseña debe cumplir con los siguientes requisitos :",
@@ -369,6 +374,7 @@
                 "new-email": ", de lo contrario, introduce una nueva."
               },
               "empty-email": "El campo de dirección de correo electrónico es obligatorio.",
+              "invalid-or-already-used-email" : "Invalid or already used e-mail address",
               "new-backup-email": "Introduce una dirección de correo electrónico válida para restablecer tu cuenta",
               "new-email-already-exist": "Esta dirección de correo electrónico ya se está utilizando",
               "wrong-email-format": "Tu dirección de correo electrónico no es válida."
@@ -2077,6 +2083,7 @@
           "errors": {
             "empty-password": "Tu contraseña no puede estar vacía.",
             "invalid-email": "Tu dirección de correo electrónico no es válida.",
+            "invalid-or-already-used-email" : "Invalid or already used e-mail address",
             "invalid-password": "La contraseña que has introducido no es válida.",
             "new-email-already-exist": "Esta dirección de correo electrónico ya se está utilizando."
           },

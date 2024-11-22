@@ -14,6 +14,12 @@ class DifferentExternalIdentifierError extends DomainError {
   }
 }
 
+class InvalidOrAlreadyUsedEmailError extends DomainError {
+  constructor() {
+    super('Invalid or already used e-mail address', 'INVALID_OR_ALREADY_USED_EMAIL');
+  }
+}
+
 class OrganizationLearnerNotBelongToOrganizationIdentityError extends DomainError {
   constructor(message = 'Organization Learner identity does not belong to Organization Identity') {
     super(message);
@@ -74,6 +80,7 @@ class UserShouldChangePasswordError extends DomainError {
 export {
   AuthenticationKeyExpired,
   DifferentExternalIdentifierError,
+  InvalidOrAlreadyUsedEmailError,
   MissingOrInvalidCredentialsError,
   MissingUserAccountError,
   OrganizationLearnerIdentityNotFoundError,
