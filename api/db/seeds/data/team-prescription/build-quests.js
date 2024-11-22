@@ -192,15 +192,12 @@ const buildTargetProfile = (databaseBuilder, organization) => {
 
 export const buildQuests = async (databaseBuilder) => {
   // Create USERS
-
   const [successUser, successSharedUser, failedUser, pendingUser, blankUser] = buildUsers(databaseBuilder);
 
   // Create organization
-
   const organization = buildOrganization(databaseBuilder);
 
   // Add admin-orga@example.net as Admin in organization
-
   databaseBuilder.factory.buildMembership({
     organizationId: organization.id,
     organizationRole: 'ADMIN',
@@ -208,18 +205,15 @@ export const buildQuests = async (databaseBuilder) => {
   });
 
   // Associate attestation feature to organization
-
   databaseBuilder.factory.buildOrganizationFeature({
     organizationId: organization.id,
     featureId: FEATURE_ATTESTATIONS_MANAGEMENT_ID,
   });
 
   // Associate tag to organization
-
   databaseBuilder.factory.buildOrganizationTag({ organizationId: organization.id, tagId: AEFE_TAG.id });
 
   // Create organizationLearners
-
   const organizationLearnersData = [
     { userId: successUser.id, division: '6emeA', firstName: 'attestation-success', lastName: 'attestation-success' },
     {
@@ -241,11 +235,9 @@ export const buildQuests = async (databaseBuilder) => {
   ] = buildOrganizationLearners(databaseBuilder, organization, organizationLearnersData);
 
   // Create target profile
-
   const targetProfile = buildTargetProfile(databaseBuilder, organization);
 
   // Create campaigns
-
   const { id: campaignId } = databaseBuilder.factory.buildCampaign({
     ...CAMPAIGN,
     targetProfileId: targetProfile.id,
@@ -260,11 +252,8 @@ export const buildQuests = async (databaseBuilder) => {
   );
 
   // Create campaignParticipations
-
-  const [successParticipation, failedParticipation, pendingParticipation] = buildCampaignParticipations(
-    databaseBuilder,
-    campaignId,
-    [
+  const [successParticipation, successSharedParticipation, failedParticipation, pendingParticipation] =
+    buildCampaignParticipations(databaseBuilder, campaignId, [
       {
         user: successUser,
         organizationLearner: successOrganizationLearner,
@@ -283,15 +272,18 @@ export const buildQuests = async (databaseBuilder) => {
         user: pendingUser,
         organizationLearner: pendingOrganizationLearner,
       },
-    ],
-  );
+    ]);
 
   // Create assessments
-
   databaseBuilder.factory.buildAssessment({
     userId: successUser.id,
     type: Assessment.types.CAMPAIGN,
     campaignParticipationId: successParticipation.id,
+  });
+  databaseBuilder.factory.buildAssessment({
+    userId: successSharedUser.id,
+    type: Assessment.types.CAMPAIGN,
+    campaignParticipationId: successSharedParticipation.id,
   });
   databaseBuilder.factory.buildAssessment({
     userId: failedUser.id,
@@ -305,7 +297,6 @@ export const buildQuests = async (databaseBuilder) => {
   });
 
   // Create first stage
-
   await buildFirstStages(
     databaseBuilder,
     successUser,
@@ -317,18 +308,15 @@ export const buildQuests = async (databaseBuilder) => {
   );
 
   // Create attestation quest
-
   const { id: rewardId } = databaseBuilder.factory.buildAttestation({
     templateName: 'sixth-grade-attestation-template',
     key: ATTESTATIONS.SIXTH_GRADE,
   });
 
   // Create quest
-
   buildQuest(databaseBuilder, rewardId, targetProfile.id);
 
   // Create reward for success user
-
   databaseBuilder.factory.buildProfileReward({
     userId: successUser.id,
     rewardType: REWARD_TYPES.ATTESTATION,
@@ -342,13 +330,11 @@ export const buildQuests = async (databaseBuilder) => {
   });
 
   // Create link between profile reward and organization
-
   databaseBuilder.factory.buildOrganizationsProfileRewards({
     organizationId: organization.id,
     profileRewardId: sharedProfileRewardId,
   });
 
   // Insert job count in temporary storage for pending user
-
   await profileRewardTemporaryStorage.increment(pendingUser.id);
 };
