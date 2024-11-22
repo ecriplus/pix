@@ -20,14 +20,8 @@ export async function simulateFlashAssessmentScenario({
   const flashAssessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,
     configuration: new FlashAssessmentAlgorithmConfiguration({
-      limitToOneQuestionPerTube: configurationUsedInProduction.limitToOneQuestionPerTube,
-      minimumEstimatedSuccessRateRanges: configurationUsedInProduction.minimumEstimatedSuccessRateRanges,
-      enablePassageByAllCompetences: configurationUsedInProduction.enablePassageByAllCompetences,
+      ...configurationUsedInProduction,
       variationPercent: variationPercent ?? configurationUsedInProduction.variationPercent,
-      variationPercentUntil: configurationUsedInProduction.variationPercentUntil,
-      doubleMeasuresUntil: configurationUsedInProduction.doubleMeasuresUntil,
-      challengesBetweenSameCompetence: configurationUsedInProduction.challengesBetweenSameCompetence,
-      maximumAssessmentLength: configurationUsedInProduction.maximumAssessmentLength,
     }),
   });
 
