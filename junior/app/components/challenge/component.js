@@ -17,7 +17,7 @@ export default class Challenge extends Component {
   validationWarning = null;
 
   get challengeItemDisplayDelay() {
-    return this.args.challenge.instruction.length * CHALLENGE_DISPLAY_DELAY;
+    return this.args.challenge.instructions.length * CHALLENGE_DISPLAY_DELAY;
   }
 
   bubbleDisplayDelay(index) {

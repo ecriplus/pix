@@ -5,8 +5,8 @@ import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class Challenge extends Model {
   // attributes
-  @attr('array') attachments;
   @attr('string') embedUrl;
+  @attr('boolean') autoReply;
   @attr('string') embedTitle;
   @attr('string') embedHeight;
   @attr('string') format;
@@ -17,18 +17,14 @@ export default class Challenge extends Model {
   })
   illustrationAlt;
   @attr('string') illustrationUrl;
-  @attr('', {
-    //TODO passer instruction au pluriel pour utiliser le type array
+  @attr('array', {
     defaultValue() {
       return [];
     },
   })
-  instruction;
-  @attr('string') alternativeInstruction;
+  instructions;
   @attr('string') proposals;
-  @attr('number') timer;
   @attr('string') type;
-  @attr('boolean') autoReply;
   @attr('boolean') focused;
   @attr('boolean') shuffled;
   @attr() webComponentProps;

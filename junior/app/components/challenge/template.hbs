@@ -1,7 +1,7 @@
 {{page-title (t "pages.challenge.title")}}
 <div class="container">
   <RobotDialog @class={{this.robotMood}}>
-    {{#each @challenge.instruction as |instruction index|}}
+    {{#each @challenge.instructions as |instruction index|}}
       <DelayedElement @shouldDisplayIn={{this.bubbleDisplayDelay index}}>
         <Bubble @message={{instruction}} @oralization={{@oralization}} />
       </DelayedElement>
