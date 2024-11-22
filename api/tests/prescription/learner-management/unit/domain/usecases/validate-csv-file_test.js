@@ -98,7 +98,7 @@ describe('Unit | UseCase | validateCsvFile', function () {
     });
 
     describe('performJob', function () {
-      it('should perform sup job when type other than FREGATE is detected', async function () {
+      it('should perform sup job when type other than FREGATA is detected', async function () {
         // given
         const type = Symbol('type');
         organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);

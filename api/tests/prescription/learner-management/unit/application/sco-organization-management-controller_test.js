@@ -28,7 +28,6 @@ describe('Unit | Application | Organizations | organization-controller', functio
       sinon.stub(fs, 'unlink').resolves();
       sinon.stub(usecases, 'uploadSiecleFile');
       sinon.stub(usecases, 'uploadCsvFile');
-      sinon.stub(usecases, 'validateCsvFile');
       sinon.stub(eventBus, 'publish');
       sinon.stub(ApplicationTransaction, 'execute');
       sinon.stub(ApplicationTransaction, 'getTransactionAsDomainTransaction');
@@ -116,7 +115,6 @@ describe('Unit | Application | Organizations | organization-controller', functio
     it('should call the usecase uploadCsvFile to import organizationLearners csv', async function () {
       // given
       const userId = 1;
-      const organizationImportId = Symbol('organizationImportId');
       request.auth = { credentials: { userId } };
       request.query.format = 'csv';
       const i18n = Symbol('i18n');
@@ -124,7 +122,6 @@ describe('Unit | Application | Organizations | organization-controller', functio
       hFake.request = {
         path: '/api/organizations/145/sco-organization-learners/import-siecle',
       };
-      usecases.uploadCsvFile.resolves(organizationImportId);
       // when
       await scoOrganizationManagementController.importOrganizationLearnersFromSIECLE(request, hFake, dependencies);
 
@@ -133,15 +130,9 @@ describe('Unit | Application | Organizations | organization-controller', functio
         Parser: OrganizationLearnerParser,
         userId,
         organizationId,
+        type: 'FREGATA',
         payload,
         i18n,
-      });
-
-      expect(usecases.validateCsvFile).to.have.been.calledWithExactly({
-        Parser: OrganizationLearnerParser,
-        i18n,
-        organizationImportId,
-        type: 'FREGATA',
       });
     });
     context('when file format is not supported', function () {
