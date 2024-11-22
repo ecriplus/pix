@@ -1,3 +1,4 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { htmlSafe } from '@ember/template';
@@ -62,50 +63,49 @@ export default class Recommendations extends Component {
         {{this.description}}
       </p>
 
-      <table
-        class="panel panel--light-shadow content-text content-text--small campaign-details-analysis__table"
-        aria-label={{t "pages.campaign-review.table.analysis.title"}}
-      >
-        <caption class="screen-reader-only">{{t "pages.campaign-review.table.analysis.caption"}}</caption>
-        <thead>
-          <tr>
-            <TableHeader @size="wide">{{t
-                "pages.campaign-review.table.analysis.column.subjects"
-                count=this.sortedRecommendations.length
-              }}
-            </TableHeader>
-            <TableHeaderSort
-              @size="small"
-              @align="center"
-              @order={{this.order}}
-              @onSort={{this.sortRecommendationOrder}}
-              @isDisabled={{not @displayAnalysis}}
-              @ariaLabelDefaultSort={{t "pages.campaign-review.table.analysis.column.relevance.ariaLabelDefaultSort"}}
-              @ariaLabelSortUp={{t "pages.campaign-review.table.analysis.column.relevance.ariaLabelSortUp"}}
-              @ariaLabelSortDown={{t "pages.campaign-review.table.analysis.column.relevance.ariaLabelSortDown"}}
-            >
-              {{t "pages.campaign-review.table.analysis.column.relevance.label"}}
-            </TableHeaderSort>
-            <TableHeader
-              @size="small"
-              @align="center"
-              aria-label="{{t 'pages.campaign-review.table.analysis.column.tutorial-count.aria-label'}}"
-            />
-            <TableHeader @size="small" />
-          </tr>
-        </thead>
+      <PixBlock>
+        <table aria-label={{t "pages.campaign-review.table.analysis.title"}}>
+          <caption class="screen-reader-only">{{t "pages.campaign-review.table.analysis.caption"}}</caption>
+          <thead>
+            <tr>
+              <TableHeader @size="wide">{{t
+                  "pages.campaign-review.table.analysis.column.subjects"
+                  count=this.sortedRecommendations.length
+                }}
+              </TableHeader>
+              <TableHeaderSort
+                @size="small"
+                @align="center"
+                @order={{this.order}}
+                @onSort={{this.sortRecommendationOrder}}
+                @isDisabled={{not @displayAnalysis}}
+                @ariaLabelDefaultSort={{t "pages.campaign-review.table.analysis.column.relevance.ariaLabelDefaultSort"}}
+                @ariaLabelSortUp={{t "pages.campaign-review.table.analysis.column.relevance.ariaLabelSortUp"}}
+                @ariaLabelSortDown={{t "pages.campaign-review.table.analysis.column.relevance.ariaLabelSortDown"}}
+              >
+                {{t "pages.campaign-review.table.analysis.column.relevance.label"}}
+              </TableHeaderSort>
+              <TableHeader
+                @size="small"
+                @align="center"
+                aria-label="{{t 'pages.campaign-review.table.analysis.column.tutorial-count.aria-label'}}"
+              />
+              <TableHeader @size="small" />
+            </tr>
+          </thead>
 
-        {{#if @displayAnalysis}}
-          <tbody>
-            {{#each this.sortedRecommendations as |tubeRecommendation|}}
-              <TubeRecommendationRow @tubeRecommendation={{tubeRecommendation}} />
-            {{/each}}
-          </tbody>
-        {{/if}}
-      </table>
-      {{#unless @displayAnalysis}}
-        <div class="table__empty content-text">{{t "pages.campaign-review.table.empty"}}</div>
-      {{/unless}}
+          {{#if @displayAnalysis}}
+            <tbody>
+              {{#each this.sortedRecommendations as |tubeRecommendation|}}
+                <TubeRecommendationRow @tubeRecommendation={{tubeRecommendation}} />
+              {{/each}}
+            </tbody>
+          {{/if}}
+        </table>
+        {{#unless @displayAnalysis}}
+          <div class="table__empty content-text">{{t "pages.campaign-review.table.empty"}}</div>
+        {{/unless}}
+      </PixBlock>
     </section>
   </template>
 }
