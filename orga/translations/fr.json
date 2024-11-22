@@ -246,6 +246,7 @@
       }
     },
     "loading": "Chargement en cours",
+    "no-content": "Aucun contenu",
     "pagination": {
       "action": {
         "next": "Aller à la page suivante",
@@ -421,6 +422,7 @@
       "title": "Attestations",
       "description": "Sélectionnez la classe pour laquelle vous souhaitez exporter les attestations au format PDF.",
       "download-attestations-button": "Télécharger",
+      "no-attestations": "Aucune attestation disponible pour votre sélection",
       "placeholder": "-- Sélectionner --",
       "select-label": "Sélectionnez une ou plusieurs classes"
     },

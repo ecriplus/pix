@@ -14,6 +14,7 @@ module('Unit | Controller | authenticated/attestations', function (hooks) {
   module('#downloadSixthGradeAttestationsFile', function () {
     test('should call the file-saver service with the right parameters', async function (assert) {
       // given
+      this.intl = this.owner.lookup('service:intl');
       const controller = this.owner.lookup('controller:authenticated/attestations');
 
       const token = 'a token';
@@ -52,6 +53,7 @@ module('Unit | Controller | authenticated/attestations', function (hooks) {
           token,
           url: `/api/organizations/${organizationId}/attestations/${SIXTH_GRADE_ATTESTATION_KEY}?divisions[]=${encodeURIComponent(selectedDivision)}`,
           fileName: SIXTH_GRADE_ATTESTATION_FILE_NAME,
+          noContentMessageNotification: this.intl.t('pages.attestations.no-attestations'),
         }),
       );
     });

@@ -10,6 +10,7 @@ export default class AuthenticatedAttestationsController extends Controller {
   @service session;
   @service currentUser;
   @service notifications;
+  @service intl;
 
   @action
   async downloadSixthGradeAttestationsFile(selectedDivisions) {
@@ -23,7 +24,14 @@ export default class AuthenticatedAttestationsController extends Controller {
 
       const token = this.session.isAuthenticated ? this.session.data.authenticated.access_token : '';
 
-      await this.fileSaver.save({ url, token, fileName: SIXTH_GRADE_ATTESTATION_FILE_NAME });
+      const noAttestationMessageNotification = this.intl.t('pages.attestations.no-attestations');
+
+      await this.fileSaver.save({
+        url,
+        token,
+        fileName: SIXTH_GRADE_ATTESTATION_FILE_NAME,
+        noContentMessageNotification: noAttestationMessageNotification,
+      });
     } catch (error) {
       this.notifications.sendError(error.message, { autoClear: false });
     }

@@ -270,7 +270,8 @@
       },
       "subjects": "Onderwerpen: {value, number}",
       "thematic-results": "Thematische resultaten: {value, number}"
-    }
+    },
+    "no-content": "Geen inhoud"
   },
   "components": {
     "campaign": {
@@ -412,6 +413,7 @@
       "title": "Resultaten voor {firstName} {lastName}"
     },
     "attestations": {
+      "no-attestations": "Er zijn geen certificaten beschikbaar voor jouw selectie",
       "title": "Certificaten",
       "description": "Selecteer de klas waarvoor je de attesten in PDF-formaat wilt exporteren.",
       "download-attestations-button": "Downloaden",
