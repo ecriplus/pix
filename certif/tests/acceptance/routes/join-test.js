@@ -35,7 +35,7 @@ module('Acceptance | Routes | join', function (hooks) {
 
       // then
       assert.strictEqual(currentURL(), '/sessions');
-      assert.dom(screen.getByText('Collège Truffaut', { exact: false })).exists();
+      assert.dom(screen.getByText('Collège Truffaut (ABC123)')).exists();
     });
   });
 

@@ -156,37 +156,37 @@ module('Integration | Component | Layout | Banners', function (hooks) {
 
     module('when user is on finalization page', function () {
       test('should not display banner', async function (assert) {
-      //given
-      const serviceRouter = this.owner.lookup('service:router');
-      const RouterStub = sinon.stub(serviceRouter, 'currentRouteName').value('authenticated.sessions.finalize');
+        //given
+        const serviceRouter = this.owner.lookup('service:router');
+        const RouterStub = sinon.stub(serviceRouter, 'currentRouteName').value('authenticated.sessions.finalize');
 
-      this.owner.register('service:router', RouterStub);
+        this.owner.register('service:router', RouterStub);
 
-      currentAllowedCertificationCenterAccess = store.createRecord('allowed-certification-center-access', {
-        id: '456',
-        name: 'allowedCenter',
-        type: 'SCO',
-        isRelatedToManagingStudentsOrganization: true,
+        currentAllowedCertificationCenterAccess = store.createRecord('allowed-certification-center-access', {
+          id: '456',
+          name: 'allowedCenter',
+          type: 'SCO',
+          isRelatedToManagingStudentsOrganization: true,
+        });
+        certificationPointOfContact = {
+          firstName: 'Alain',
+          lastName: 'Térieur',
+        };
+
+        class CurrentUserStub extends Service {
+          currentAllowedCertificationCenterAccess = currentAllowedCertificationCenterAccess;
+          certificationPointOfContact = certificationPointOfContact;
+          updateCurrentCertificationCenter = sinon.stub();
+        }
+
+        this.owner.register('service:current-user', CurrentUserStub);
+
+        // when
+        const screen = await render(<template><Banners /></template>);
+
+        // then
+        assert.dom(screen.queryByRole('alert')).doesNotExist();
       });
-      certificationPointOfContact = {
-        firstName: 'Alain',
-        lastName: 'Térieur',
-      };
-
-      class CurrentUserStub extends Service {
-        currentAllowedCertificationCenterAccess = currentAllowedCertificationCenterAccess;
-        certificationPointOfContact = certificationPointOfContact;
-        updateCurrentCertificationCenter = sinon.stub();
-      }
-
-      this.owner.register('service:current-user', CurrentUserStub);
-
-      // when
-      const screen = await render(<template><Banners /></template>);
-
-      // then
-      assert.dom(screen.queryByRole('alert')).doesNotExist();
-    });
     });
   });
 });

@@ -99,24 +99,6 @@ module('Acceptance | authentication', function (hooks) {
         );
       });
 
-      test('it should show the user name, the name and externalId of certification center', async function (assert) {
-        // given
-        certificationPointOfContact = createCertificationPointOfContactWithTermsOfServiceAccepted('SUP', 'Centre');
-        await authenticateSession(certificationPointOfContact.id);
-
-        // when
-        const screen = await visit('/sessions');
-
-        // then
-        assert
-          .dom(
-            screen.getByRole('button', {
-              name: 'Harry Cover Centre (ABC123) Ouvrir le menu utilisateur',
-            }),
-          )
-          .exists();
-      });
-
       test('it should redirect certificationPointOfContact to the session list on root url', async function (assert) {
         // given
         certificationPointOfContact = createCertificationPointOfContactWithTermsOfServiceAccepted();
