@@ -212,11 +212,6 @@
       "sessions-label": "Certification sessions",
       "supervisor": "Invigilator’s Portal",
       "team": "Team"
-    },
-    "user-logged-menu": {
-      "button-extra-information": "Open user menu",
-      "logout": "Log out",
-      "page-title": "Logout"
     }
   },
   "pages": {
@@ -280,6 +275,9 @@
           }
         }
       }
+    },
+    "logout": {
+      "page-title": "Logout"
     },
     "sco": {
       "banner": {

@@ -212,11 +212,6 @@
       "sessions-label": "Sessions de certification",
       "supervisor": "Espace surveillant",
       "team": "Équipe"
-    },
-    "user-logged-menu": {
-      "button-extra-information": "Ouvrir le menu utilisateur",
-      "logout": "Se déconnecter",
-      "page-title": "Déconnexion"
     }
   },
   "pages": {
@@ -280,6 +275,9 @@
           }
         }
       }
+    },
+    "logout": {
+      "page-title": "Déconnexion"
     },
     "sco": {
       "banner": {
