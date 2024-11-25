@@ -1638,6 +1638,9 @@
         "subtitle": "Has alcanzado los siguientes objetivos:",
         "title": "¡Enhorabuena! Módulo completado"
       },
+      "sidebar": {
+        "button": "Mostrar los pasos del módulo"
+      },
       "stepper": {
         "step": {
           "position": "{currentStep} Paso a paso {totalSteps}"

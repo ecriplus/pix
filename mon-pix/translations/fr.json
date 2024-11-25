@@ -1628,6 +1628,9 @@
         "subtitle": "Vous avez atteint les objectifs suivants :",
         "title": "Bravo ! Module terminé"
       },
+      "sidebar": {
+        "button": "Afficher les étapes du module"
+      },
       "stepper": {
         "step": {
           "position": "Étape {currentStep} sur {totalSteps}"
