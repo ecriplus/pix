@@ -6,6 +6,7 @@ import { t } from 'ember-intl';
 export default class FooterLinks extends Component {
   @service url;
   @service currentDomain;
+  @service currentUser;
 
   get shouldDisplayStudentDataProtectionPolicyLink() {
     return this.currentDomain.isFranceDomain;
@@ -56,11 +57,13 @@ export default class FooterLinks extends Component {
           </a>
         </li>
 
-        <li>
-          <LinkTo @route="authenticated.sitemap">
-            {{t "navigation.footer.sitemap"}}
-          </LinkTo>
-        </li>
+        {{#if this.currentUser.user}}
+          <li>
+            <LinkTo @route="authenticated.sitemap">
+              {{t "navigation.footer.sitemap"}}
+            </LinkTo>
+          </li>
+        {{/if}}
 
         <li>
           <a href="{{this.cguUrl}}" target="_blank" rel="noopener noreferrer">
