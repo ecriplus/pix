@@ -436,6 +436,7 @@ export default class CreateForm extends Component {
           <PixInput
             @id="campaign-title"
             @name="campaign-title"
+            @subLabel={{t "pages.campaign-creation.test-title.sublabel"}}
             maxlength="50"
             {{on "change" (fn this.onChangeCampaignValue "title")}}
             @value={{@campaign.title}}
@@ -449,6 +450,7 @@ export default class CreateForm extends Component {
           @id="custom-landing-page-text"
           @maxlength="5000"
           @value={{@campaign.customLandingPageText}}
+          @subLabel={{t "pages.campaign-creation.landing-page-text.sublabel"}}
           {{on "change" this.onChangeCampaignCustomLandingPageText}}
           rows="8"
         >

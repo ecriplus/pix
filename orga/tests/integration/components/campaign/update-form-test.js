@@ -1,5 +1,6 @@
 import { clickByName, fillByLabel, render as renderScreen } from '@1024pix/ember-testing-library';
 import { hbs } from 'ember-cli-htmlbars';
+import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -36,11 +37,11 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
       );
 
       // then
-      assert.dom(screen.getByLabelText('Titre du parcours')).exists();
-      assert.dom(screen.getByLabelText('Titre du parcours')).hasAttribute('maxLength', '50');
+      assert.dom(screen.getByLabelText('Titre du parcours', { exact: false })).exists();
+      assert.dom(screen.getByLabelText('Titre du parcours', { exact: false })).hasAttribute('maxLength', '50');
     });
 
-    test('it should contain inputs, attributes, information block,validation and cancel buttons', async function (assert) {
+    test('it should contain inputs, attributes, information block, validation and cancel buttons', async function (assert) {
       // when
       const screen = await renderScreen(
         hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
@@ -49,8 +50,8 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
       // then
       assert.dom(screen.getByLabelText('Nom de la campagne *')).exists();
       assert.dom(screen.getByLabelText('Propriétaire de la campagne *')).exists();
-      assert.dom(screen.getByLabelText("Texte de la page d'accueil")).exists();
-      assert.dom(screen.getByLabelText('Titre du parcours')).exists();
+      assert.dom(screen.getByLabelText("Texte de la page d'accueil", { exact: false })).exists();
+      assert.dom(screen.getByLabelText('Titre du parcours', { exact: false })).exists();
       assert.dom(screen.getByText('Modifier')).exists();
       assert.dom(screen.getByText('Annuler')).exists();
     });
@@ -87,7 +88,33 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
       );
 
       //then
-      assert.dom(screen.getByLabelText("Texte de la page d'accueil")).hasAttribute('maxLength', '5000');
+      assert
+        .dom(screen.getByLabelText("Texte de la page d'accueil", { exact: false }))
+        .hasAttribute('maxLength', '5000');
+    });
+
+    test('it should explain which informations will be visible to organization-learners', async function (assert) {
+      //when
+      const screen = await renderScreen(
+        hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
+      );
+
+      //then
+      const testTitleSublabel = screen.getAllByLabelText(
+        t('pages.campaign-modification.personalised-test-title.sublabel'),
+        {
+          exact: false,
+        },
+      )[0];
+      const landingPageSublabel = screen.getAllByLabelText(
+        t('pages.campaign-modification.landing-page-text.sublabel'),
+        {
+          exact: false,
+        },
+      )[1];
+
+      assert.ok(testTitleSublabel);
+      assert.ok(landingPageSublabel);
     });
   });
 

@@ -107,11 +107,14 @@ module('Acceptance | Campaign Creation', function (hooks) {
       await clickByName('Évaluer les participants');
       await click(screen.getByLabelText(`${t('pages.campaign-creation.target-profiles-list-label')} *`));
       await click(await screen.findByRole('option', { name: expectedTargetProfileName }));
-      await fillByLabel('Titre du parcours', 'Savoir rechercher');
+
+      const title = `${t('pages.campaign-creation.test-title.label')} ${t('pages.campaign-creation.test-title.sublabel')}`;
+
+      await fillByLabel(title, 'Savoir rechercher');
       await clickByName('Non');
 
       // when
-      await clickByName('Créer la campagne');
+      await clickByName(t('pages.campaign-creation.actions.create'));
 
       // then
       assert.strictEqual(server.db.campaigns[0].name, 'Ma Campagne');

@@ -4,7 +4,7 @@ import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
-import { module, test } from 'qunit';
+import { assert, module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -220,6 +220,34 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
         name: t('pages.campaign-creation.multiple-sendings.assessments.question-label'),
       });
       assert.dom(within(radiogroup).getByLabelText(t('pages.campaign-creation.yes'))).isChecked();
+    });
+
+    test('it should explain which informations will be visible to organization-learners', async function () {
+      // given
+      this.campaign.type = 'ASSESSMENT';
+
+      // when
+      const screen = await render(
+        hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @targetProfiles={{this.targetProfiles}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+      );
+
+      // then
+      const testTitleSublabel = screen.getAllByLabelText(t('pages.campaign-creation.landing-page-text.sublabel'), {
+        exact: false,
+      })[0];
+      const landingPageSublabel = screen.getAllByLabelText(t('pages.campaign-creation.landing-page-text.sublabel'), {
+        exact: false,
+      })[1];
+
+      assert.ok(testTitleSublabel);
+      assert.ok(landingPageSublabel);
     });
   });
 
@@ -957,7 +985,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
     );
 
     assert
-      .dom(screen.getByRole('textbox', { name: t('pages.campaign-creation.test-title.label') }))
+      .dom(screen.getByLabelText(t('pages.campaign-creation.test-title.label'), { exact: false }))
       .hasValue('Mon titre de parcours');
   });
 
@@ -978,7 +1006,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
     );
 
     assert
-      .dom(screen.getByRole('textbox', { name: t('pages.campaign-creation.landing-page-text.label') }))
+      .dom(screen.getByLabelText(t('pages.campaign-creation.landing-page-text.label'), { exact: false }))
       .hasValue('Mon texte de landing page');
   });
 

@@ -1,15 +1,18 @@
 import { clickByName, fillByLabel, visit as visitScreen } from '@1024pix/ember-testing-library';
-import { currentURL } from '@ember/test-helpers';
+import { currentURL, fillIn } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
 import authenticateSession from '../helpers/authenticate-session';
+import setupIntl from '../helpers/setup-intl';
 import { createPrescriberByUser, createUserManagingStudents } from '../helpers/test-init';
 
 module('Acceptance | Campaign Update', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks);
   let user;
 
   module('when user is ADMIN', function (hooks) {
@@ -35,9 +38,15 @@ module('Acceptance | Campaign Update', function (hooks) {
       const newName = 'New Name';
       const newText = 'New text';
 
-      await visitScreen(`/campagnes/${campaign.id}/modification`);
+      const screen = await visitScreen(`/campagnes/${campaign.id}/modification`);
       await fillByLabel('Nom de la campagne *', newName);
-      await fillByLabel("Texte de la page d'accueil", newText);
+
+      const landingPageTextInput = screen.getByLabelText(
+        `${t('pages.campaign-modification.landing-page-text.label')}`,
+        { exact: false },
+      );
+
+      await fillIn(landingPageTextInput, newText);
 
       // when
       await clickByName('Modifier');
