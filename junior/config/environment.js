@@ -13,8 +13,10 @@ module.exports = function (environment) {
     environment,
     locationType: 'history',
     rootURL: '/',
-    matomo: {},
-
+    metrics: {
+      enabled: analyticsEnabled,
+      matomoUrl: process.env.WEB_ANALYTICS_URL,
+    },
     EmberENV: {
       EXTEND_PROTOTYPES: false,
       FEATURES: {
@@ -46,10 +48,6 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    if (analyticsEnabled) {
-      ENV.matomo.url = process.env.WEB_ANALYTICS_URL;
-      ENV.matomo.debug = true;
-    }
   }
 
   if (environment === 'test') {
@@ -62,15 +60,8 @@ module.exports = function (environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
-
     ENV.APP.CHALLENGE_DISPLAY_DELAY = 0;
-  }
-
-  if (environment === 'production') {
-    // here you can enable a production-specific feature
-    if (analyticsEnabled) {
-      ENV.matomo.url = process.env.WEB_ANALYTICS_URL;
-    }
+    ENV.metrics.enabled = false;
   }
 
   ENV['ember-component-css'] = {
