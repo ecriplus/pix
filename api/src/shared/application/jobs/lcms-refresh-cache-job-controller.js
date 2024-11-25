@@ -1,5 +1,5 @@
 import { LcmsRefreshCacheJob } from '../../domain/models/LcmsRefreshCacheJob.js';
-import * as learningContentDatasource from '../../infrastructure/datasources/learning-content/datasource.js';
+import { sharedUsecases as usecases } from '../../domain/usecases/index.js';
 import { JobController } from './job-controller.js';
 
 export class LcmsRefreshCacheJobController extends JobController {
@@ -7,7 +7,7 @@ export class LcmsRefreshCacheJobController extends JobController {
     super(LcmsRefreshCacheJob.name);
   }
 
-  async handle({ dependencies = { learningContentDatasource } }) {
-    await dependencies.learningContentDatasource.refreshLearningContentCacheRecords();
+  async handle() {
+    await usecases.refreshLearningContentCache();
   }
 }

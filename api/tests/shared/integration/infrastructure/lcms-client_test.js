@@ -1,35 +1,19 @@
-import { lcms } from '../../../../src/shared/infrastructure/lcms.js';
-import { catchErr, expect, nock } from '../../../test-helper.js';
+import { lcmsClient } from '../../../../src/shared/infrastructure/lcms-client.js';
+import { catchErr, expect, mockLearningContent, nock } from '../../../test-helper.js';
 
-describe('Unit | Infrastructure | LCMS', function () {
+describe('Integration | Infrastructure | LCMS Client', function () {
   describe('#getLatestRelease', function () {
     it('calls LCMS API to get learning content latest release', async function () {
       // given
-      const lcmsCall = nock('https://lcms-test.pix.fr/api')
-        .get('/releases/latest')
-        .matchHeader('Authorization', 'Bearer test-api-key')
-        .reply(200);
-
-      // when
-      await lcms.getLatestRelease();
-
-      // then
-      expect(lcmsCall.isDone()).to.equal(true);
-    });
-
-    it('returns learning content release', async function () {
-      // given
       const learningContent = { models: [{ id: 'recId' }] };
-      nock('https://lcms-test.pix.fr/api')
-        .get('/releases/latest')
-        .matchHeader('Authorization', 'Bearer test-api-key')
-        .reply(200, { content: learningContent });
+      const lcmsCall = mockLearningContent(learningContent);
 
       // when
-      const response = await lcms.getLatestRelease();
+      const response = await lcmsClient.getLatestRelease();
 
       // then
       expect(response).to.deep.equal(learningContent);
+      expect(lcmsCall.isDone()).to.be.true;
     });
 
     it('rejects when learning content release failed to get', async function () {
@@ -40,7 +24,7 @@ describe('Unit | Infrastructure | LCMS', function () {
         .reply(500);
 
       // when
-      const error = await catchErr(lcms.getLatestRelease)();
+      const error = await catchErr(lcmsClient.getLatestRelease)();
 
       // then
       expect(error).to.be.instanceOf(Error);
@@ -57,7 +41,7 @@ describe('Unit | Infrastructure | LCMS', function () {
         .reply(201);
 
       // when
-      await lcms.createRelease();
+      await lcmsClient.createRelease();
 
       // then
       expect(lcmsCall.isDone()).to.equal(true);
@@ -72,7 +56,7 @@ describe('Unit | Infrastructure | LCMS', function () {
         .reply(201, { content: learningContent });
 
       // when
-      const response = await lcms.createRelease();
+      const response = await lcmsClient.createRelease();
 
       // then
       expect(response).to.deep.equal(learningContent);
@@ -86,7 +70,7 @@ describe('Unit | Infrastructure | LCMS', function () {
         .reply(403);
 
       // when
-      const error = await catchErr(lcms.createRelease)();
+      const error = await catchErr(lcmsClient.createRelease)();
 
       // then
       expect(error.message).to.deep.equal('An error occurred while creating a release on https://lcms-test.pix.fr/api');

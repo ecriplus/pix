@@ -69,20 +69,20 @@ describe('Acceptance | Controller | lcms-controller', function () {
 
       it('should store patches in Redis', async function () {
         // given
-        mockLearningContent({ frameworks: [{ id: 'frameworkId' }] });
+        mockLearningContent({ frameworks: [{ id: `frameworkId` }] });
         const superAdminUserId = databaseBuilder.factory.buildUser.withRole({
           role: ROLES.SUPER_ADMIN,
         }).id;
         await databaseBuilder.commit();
         const payload = {
-          id: 'frameworkId',
-          param: 'updatedFramework',
+          id: `frameworkId`,
+          param: `updated framework`,
         };
 
         // when
         const response = await server.inject({
           method: 'PATCH',
-          url: '/api/cache/frameworks/frameworkId',
+          url: `/api/cache/frameworks/frameworkId`,
           headers: { authorization: generateValidRequestAuthorizationHeader(superAdminUserId) },
           payload,
         });
@@ -91,7 +91,7 @@ describe('Acceptance | Controller | lcms-controller', function () {
         expect(response.statusCode).to.equal(204);
         const redis = new Redis(process.env.TEST_REDIS_URL);
         expect(await redis.lrange('cache:LearningContent:patches', 0, -1)).to.deep.equal([
-          JSON.stringify({ operation: 'assign', path: 'frameworks[0]', value: payload }),
+          JSON.stringify({ operation: 'assign', path: `frameworks[0]`, value: payload }),
         ]);
       });
     });

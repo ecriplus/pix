@@ -1,8 +1,7 @@
-import { thematicDatasource } from '../../../../../../src/shared/infrastructure/datasources/learning-content/thematic-datasource.js';
-import { lcms } from '../../../../../../src/shared/infrastructure/lcms.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { thematicDatasource } from '../../../../../../src/shared/infrastructure/datasources/learning-content/index.js';
+import { expect, mockLearningContent } from '../../../../../test-helper.js';
 
-describe('Unit | Infrastructure | Datasource | Learning Content | ThematicDatasource', function () {
+describe('Integration | Infrastructure | Datasource | Learning Content | ThematicDatasource', function () {
   describe('#findByCompetenceIds', function () {
     it('should return an array of matching learning content thematics data objects by competence ids', async function () {
       // given
@@ -12,7 +11,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ThematicDataso
         { id: 'recThematic3', competenceId: 'competence3' },
         { id: 'recThematic2', competenceId: 'competence1' },
       ];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ thematics: records });
+      mockLearningContent({ thematics: records });
       const expectedThematicIds = ['recThematic0', 'recThematic1', 'recThematic2'];
       const competenceIds = ['competence1', 'competence2'];
 
@@ -27,7 +26,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ThematicDataso
     it('should return an array of matching learning content thematics data objects by ids', async function () {
       // given
       const records = [{ id: 'recThematic0' }, { id: 'recThematic1' }, { id: 'recThematic3' }, { id: 'recThematic2' }];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ thematics: records });
+      mockLearningContent({ thematics: records });
 
       // when
       const foundThematics = await thematicDatasource.findByRecordIds(['recThematic1', 'recThematic3']);

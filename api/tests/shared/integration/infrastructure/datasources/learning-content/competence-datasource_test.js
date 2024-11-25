@@ -1,13 +1,7 @@
-import { learningContentCache } from '../../../../../../src/shared/infrastructure/caches/learning-content-cache.js';
-import { competenceDatasource } from '../../../../../../src/shared/infrastructure/datasources/learning-content/competence-datasource.js';
-import { lcms } from '../../../../../../src/shared/infrastructure/lcms.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { competenceDatasource } from '../../../../../../src/shared/infrastructure/datasources/learning-content/index.js';
+import { expect, mockLearningContent } from '../../../../../test-helper.js';
 
-describe('Unit | Infrastructure | Datasource | Learning Content | CompetenceDatasource', function () {
-  beforeEach(function () {
-    sinon.stub(learningContentCache, 'get').callsFake((generator) => generator());
-  });
-
+describe('Integration | Infrastructure | Datasource | Learning Content | CompetenceDatasource', function () {
   describe('#findByRecordIds', function () {
     it('should return an array of matching competence data objects', async function () {
       // given
@@ -17,7 +11,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | CompetenceData
       const rawCompetence4 = { id: 'RECORD_ID_RAW_COMPETENCE_4' };
 
       const records = [rawCompetence1, rawCompetence2, rawCompetence3, rawCompetence4];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ competences: records });
+      mockLearningContent({ competences: records });
       const expectedCompetenceIds = [rawCompetence1.id, rawCompetence2.id, rawCompetence4.id];
 
       // when
@@ -31,7 +25,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | CompetenceData
       const rawCompetence1 = { id: 'RECORD_ID_RAW_COMPETENCE_1' };
 
       const records = [rawCompetence1];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ competences: records });
+      mockLearningContent({ competences: records });
 
       // when
       const foundCompetences = await competenceDatasource.findByRecordIds(['some_other_id']);

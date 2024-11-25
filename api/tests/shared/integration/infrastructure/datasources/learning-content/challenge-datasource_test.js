@@ -1,12 +1,10 @@
 import _ from 'lodash';
 
-import { learningContentCache } from '../../../../../../src/shared/infrastructure/caches/learning-content-cache.js';
-import { challengeDatasource } from '../../../../../../src/shared/infrastructure/datasources/learning-content/challenge-datasource.js';
+import { challengeDatasource } from '../../../../../../src/shared/infrastructure/datasources/learning-content/index.js';
 import { LearningContentResourceNotFound } from '../../../../../../src/shared/infrastructure/datasources/learning-content/LearningContentResourceNotFound.js';
-import { lcms } from '../../../../../../src/shared/infrastructure/lcms.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr, expect, mockLearningContent } from '../../../../../test-helper.js';
 
-describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatasource', function () {
+describe('Integration | Infrastructure | Datasource | Learning Content | ChallengeDatasource', function () {
   let competence1,
     competence2,
     web1,
@@ -129,15 +127,13 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatas
       alpha: -8.1,
       delta: 0,
     };
-
-    sinon.stub(learningContentCache, 'get').callsFake((generator) => generator());
   });
 
   describe('#listBylocale', function () {
     beforeEach(function () {
-      sinon
-        .stub(lcms, 'getLatestRelease')
-        .resolves({ challenges: [challenge_web1, challenge_web1_notValidated, challenge_web2_en, challenge_web3] });
+      mockLearningContent({
+        challenges: [challenge_web1, challenge_web1_notValidated, challenge_web2_en, challenge_web3],
+      });
     });
 
     it('should return a list of all challenges having locale', async function () {
@@ -158,9 +154,9 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatas
 
   describe('#getManyByLocale', function () {
     beforeEach(function () {
-      sinon
-        .stub(lcms, 'getLatestRelease')
-        .resolves({ challenges: [challenge_web1, challenge_web1_notValidated, challenge_web2_en, challenge_web3] });
+      mockLearningContent({
+        challenges: [challenge_web1, challenge_web1_notValidated, challenge_web2_en, challenge_web3],
+      });
     });
 
     it('should return a list of all challenges having locale by id', async function () {
@@ -182,9 +178,9 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatas
 
   describe('#findOperativeBySkillIds', function () {
     beforeEach(function () {
-      sinon
-        .stub(lcms, 'getLatestRelease')
-        .resolves({ challenges: [challenge_web1, challenge_web1_notValidated, challenge_web2_en, challenge_web3] });
+      mockLearningContent({
+        challenges: [challenge_web1, challenge_web1_notValidated, challenge_web2_en, challenge_web3],
+      });
     });
 
     it('should resolve an array of matching Challenges from learning content', async function () {
@@ -205,7 +201,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatas
 
     beforeEach(async function () {
       // given
-      sinon.stub(lcms, 'getLatestRelease').resolves({
+      mockLearningContent({
         challenges: [
           challenge_competence1,
           challenge_competence1_en,
@@ -229,7 +225,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatas
     it('should retrieve the operative Challenges of given locale only', async function () {
       // given
       const locale = 'fr-fr';
-      sinon.stub(lcms, 'getLatestRelease').resolves({
+      mockLearningContent({
         challenges: [challenge_web1, challenge_web1_notValidated, challenge_web2_en, challenge_web3_archived],
       });
 
@@ -243,7 +239,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatas
 
   describe('#findValidated', function () {
     beforeEach(function () {
-      sinon.stub(lcms, 'getLatestRelease').resolves({
+      mockLearningContent({
         challenges: [challenge_web1, challenge_web1_notValidated, challenge_web2_en, challenge_web3_archived],
       });
     });
@@ -259,7 +255,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatas
 
   describe('#findFlashCompatible', function () {
     beforeEach(function () {
-      sinon.stub(lcms, 'getLatestRelease').resolves({
+      mockLearningContent({
         challenges: [
           challenge_competence1,
           challenge_competence1_notValidated,
@@ -310,7 +306,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatas
 
   describe('#findFlashCompatibleWithoutLocale', function () {
     beforeEach(function () {
-      sinon.stub(lcms, 'getLatestRelease').resolves({
+      mockLearningContent({
         challenges: [
           challenge_competence1,
           challenge_competence1_notValidated,
@@ -362,7 +358,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatas
 
   describe('#findActiveFlashCompatible', function () {
     beforeEach(function () {
-      sinon.stub(lcms, 'getLatestRelease').resolves({
+      mockLearningContent({
         challenges: [
           challenge_competence1,
           challenge_competence1_noSkills,
@@ -394,7 +390,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatas
 
   describe('#findValidatedBySkillId', function () {
     beforeEach(function () {
-      sinon.stub(lcms, 'getLatestRelease').resolves({
+      mockLearningContent({
         challenges: [challenge_web1, challenge_web1_notValidated, challenge_web1_archived, challenge_competence2],
       });
     });
@@ -443,7 +439,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatas
     context('when there are several challenges for the skillId', function () {
       it('should return an array of validated or proposed challenges', async function () {
         // when
-        sinon.stub(lcms, 'getLatestRelease').resolves({
+        mockLearningContent({
           challenges: [
             challenge_web1,
             challenge_competence2,
@@ -462,7 +458,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatas
     context('when there is only one challenge for the skillId', function () {
       it('should return a challenge from learning content', async function () {
         // when
-        sinon.stub(lcms, 'getLatestRelease').resolves({
+        mockLearningContent({
           challenges: [challenge_web1, challenge_competence2, validated_challenge_pix1d],
         });
         const result = await challengeDatasource.getBySkillId(skillId, locale);
@@ -474,7 +470,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | ChallengeDatas
 
     it('should return an error if there is no challenge for the given skillId', async function () {
       // when
-      sinon.stub(lcms, 'getLatestRelease').resolves({
+      mockLearningContent({
         challenges: [challenge_web1, challenge_competence2, validated_challenge_pix1d, proposed_challenge_pix1d],
       });
       const error = await catchErr(challengeDatasource.getBySkillId, locale)('falseId');

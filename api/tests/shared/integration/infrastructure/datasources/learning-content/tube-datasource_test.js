@@ -1,15 +1,9 @@
 import _ from 'lodash';
 
-import { learningContentCache } from '../../../../../../src/shared/infrastructure/caches/learning-content-cache.js';
-import { tubeDatasource } from '../../../../../../src/shared/infrastructure/datasources/learning-content/tube-datasource.js';
-import { lcms } from '../../../../../../src/shared/infrastructure/lcms.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { tubeDatasource } from '../../../../../../src/shared/infrastructure/datasources/learning-content/index.js';
+import { expect, mockLearningContent } from '../../../../../test-helper.js';
 
-describe('Unit | Infrastructure | Datasource | Learning Content | TubeDatasource', function () {
-  beforeEach(function () {
-    sinon.stub(learningContentCache, 'get').callsFake((generator) => generator());
-  });
-
+describe('Integration | Infrastructure | Datasource | Learning Content | TubeDatasource', function () {
   describe('#findByNames', function () {
     it('should return an array of matching tube data objects', async function () {
       // given
@@ -19,7 +13,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | TubeDatasource
       const rawTube4 = { id: 'rectTube4', name: 'FAKE_NAME_RAW_TUBE_4' };
 
       const records = [rawTube1, rawTube2, rawTube3, rawTube4];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ tubes: records });
+      mockLearningContent({ tubes: records });
 
       // when
       const foundTubes = await tubeDatasource.findByNames([rawTube1.name, rawTube2.name, rawTube4.name]);
@@ -27,7 +21,6 @@ describe('Unit | Infrastructure | Datasource | Learning Content | TubeDatasource
       // then
       expect(foundTubes).to.be.an('array');
       expect(_.map(foundTubes, 'name')).to.deep.equal([rawTube1.name, rawTube2.name, rawTube4.name]);
-      expect(lcms.getLatestRelease).to.have.been.called;
     });
   });
 
@@ -40,7 +33,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | TubeDatasource
       const rawTube4 = { id: 'RECORD_ID_RAW_TUBE_4' };
 
       const records = [rawTube1, rawTube2, rawTube3, rawTube4];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ tubes: records });
+      mockLearningContent({ tubes: records });
       const expectedTubeIds = [rawTube1.id, rawTube2.id, rawTube4.id];
 
       // when
@@ -54,7 +47,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | TubeDatasource
       const rawTube1 = { id: 'RECORD_ID_RAW_TUBE_1' };
 
       const records = [rawTube1];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ tubes: records });
+      mockLearningContent({ tubes: records });
 
       // when
       const foundTubes = await tubeDatasource.findByRecordIds(['some_other_id']);
@@ -73,7 +66,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | TubeDatasource
       const rawTube4 = { id: 'RECORD_ID_RAW_TUBE_4', thematicId: 'thematicId1' };
 
       const records = [rawTube1, rawTube2, rawTube3, rawTube4];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ tubes: records });
+      mockLearningContent({ tubes: records });
       const expectedTubeIds = [rawTube1.id, rawTube2.id, rawTube4.id];
 
       // when
@@ -87,7 +80,7 @@ describe('Unit | Infrastructure | Datasource | Learning Content | TubeDatasource
       const rawTube1 = { id: 'RECORD_ID_RAW_TUBE_1', thematicId: 'thematicId2' };
 
       const records = [rawTube1];
-      sinon.stub(lcms, 'getLatestRelease').resolves({ tubes: records });
+      mockLearningContent({ tubes: records });
 
       // when
       const foundTubes = await tubeDatasource.findByThematicId('thematicId1');

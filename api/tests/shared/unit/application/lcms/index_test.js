@@ -8,9 +8,9 @@ describe('Unit | Router | lcms-router', function () {
 
   beforeEach(function () {
     sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin').callsFake((request, h) => h.response(true));
-    sinon.stub(lcmsController, 'refreshCacheEntry').callsFake((request, h) => h.response().code(204));
+    sinon.stub(lcmsController, 'patchCacheEntry').callsFake((request, h) => h.response().code(204));
     sinon.stub(lcmsController, 'createRelease').callsFake((request, h) => h.response().code(204));
-    sinon.stub(lcmsController, 'refreshCacheEntries').callsFake((request, h) => h.response().code(204));
+    sinon.stub(lcmsController, 'refreshCache').callsFake((request, h) => h.response().code(204));
     httpTestServer = new HttpTestServer();
     httpTestServer.register(moduleUnderTest);
   });
@@ -27,15 +27,56 @@ describe('Unit | Router | lcms-router', function () {
   });
 
   describe('PATCH /api/cache/{model}/{id}', function () {
-    it('should exist', async function () {
-      //given
-      const updatedRecord = { id: 'recId', param: 'updatedValue' };
+    describe('Resource access management', function () {
+      it('should respond with a 400 - bad request - if model in params in not amongst allowed values', async function () {
+        // given
+        const response = await httpTestServer.request(
+          'PATCH',
+          '/api/cache/chocolats/recXYZ1234',
+          {
+            id: 'recChallengeId',
+            param: 'updatedModelParam',
+          },
+          null,
+          { authorization: 'some.access.token' },
+        );
 
-      // when
-      const response = await httpTestServer.request('PATCH', '/api/cache/table/recXYZ1234', updatedRecord);
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+    });
 
-      // then
-      expect(response.statusCode).to.equal(204);
+    describe('nominal case', function () {
+      // eslint-disable-next-line mocha/no-setup-in-describe
+      [
+        'frameworks',
+        'areas',
+        'competences',
+        'thematics',
+        'tubes',
+        'skills',
+        'challenges',
+        'tutorials',
+        'courses',
+      ].forEach((modelName) => {
+        it('should reach the controller', async function () {
+          // given
+          const response = await httpTestServer.request(
+            'PATCH',
+            `/api/cache/${modelName}/recXYZ1234`,
+            {
+              id: 'recChallengeId',
+              param: 'updatedModelParam',
+            },
+            null,
+            { authorization: 'some.access.token' },
+          );
+
+          // then
+          expect(response.statusCode).to.equal(204);
+          expect(lcmsController.patchCacheEntry).to.have.been.calledOnce;
+        });
+      });
     });
   });
 

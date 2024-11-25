@@ -7,8 +7,8 @@ validateEnvironmentVariables();
 import { disconnect, prepareDatabaseConnection } from './db/knex-database-connection.js';
 import { createServer } from './server.js';
 import { config } from './src/shared/config.js';
+import { sharedUsecases as usecases } from './src/shared/domain/usecases/index.js';
 import { learningContentCache } from './src/shared/infrastructure/caches/learning-content-cache.js';
-import { initLearningContent } from './src/shared/infrastructure/datasources/learning-content/datasource.js';
 import { temporaryStorage } from './src/shared/infrastructure/temporary-storage/index.js';
 import { logger } from './src/shared/infrastructure/utils/logger.js';
 import { redisMonitor } from './src/shared/infrastructure/utils/redis-monitor.js';
@@ -21,7 +21,7 @@ async function _setupEcosystem() {
     Hence, we force this loading before the server starts so the requests can
     immediately be responded.
   */
-  await initLearningContent();
+  await usecases.initLearningContentCache();
   /*
     First connection with Knex requires infrastructure operations such as
     DNS resolution. So we execute one harmless query to our database

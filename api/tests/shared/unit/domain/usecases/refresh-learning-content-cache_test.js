@@ -1,20 +1,21 @@
-import { LcmsRefreshCacheJob } from '../../../../../src/shared/domain/models/LcmsRefreshCacheJob.js';
 import { refreshLearningContentCache } from '../../../../../src/shared/domain/usecases/refresh-learning-content-cache.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Domain | Usecases | Refresh Learning Content Cache', function () {
-  it('should use repository to schedule refresh job', async function () {
-    // given
-    const userId = 1234;
-    const lcmsRefreshCacheJobRepository = { performAsync: sinon.stub() };
+describe('Unit | Domain | Usecase | Refresh learning content cache', function () {
+  describe('#refreshLearningContentCache', function () {
+    it('should trigger a reset of the learning content cache', async function () {
+      // given
+      const LearningContentCache = {
+        instance: {
+          reset: sinon.stub(),
+        },
+      };
 
-    // when
-    await refreshLearningContentCache({ userId, lcmsRefreshCacheJobRepository });
+      // when
+      await refreshLearningContentCache({ LearningContentCache });
 
-    // then
-    expect(lcmsRefreshCacheJobRepository.performAsync).to.have.been.calledOnce;
-    expect(lcmsRefreshCacheJobRepository.performAsync).to.have.been.calledWithExactly(
-      new LcmsRefreshCacheJob({ userId }),
-    );
+      // then
+      expect(LearningContentCache.instance.reset).to.have.been.calledOnce;
+    });
   });
 });

@@ -255,7 +255,7 @@ chaiUse(function () {
 });
 
 function mockLearningContent(learningContent) {
-  nock('https://lcms-test.pix.fr/api')
+  return nock('https://lcms-test.pix.fr/api')
     .get('/releases/latest')
     .matchHeader('Authorization', 'Bearer test-api-key')
     .reply(200, { content: learningContent });
