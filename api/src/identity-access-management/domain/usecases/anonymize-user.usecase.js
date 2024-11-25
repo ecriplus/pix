@@ -37,7 +37,7 @@ const anonymizeUser = async function ({
   const user = await userRepository.get(userId);
 
   const anonymizedBy = await _getAdminUser({
-    adminUserId: updatedByUserId || user.hasBeenAnonymisedBy,
+    adminUserId: updatedByUserId,
     adminMemberRepository,
   });
 
@@ -49,10 +49,10 @@ const anonymizeUser = async function ({
     await resetPasswordDemandRepository.removeAllByEmail(user.email);
   }
 
-  await membershipRepository.disableMembershipsByUserId({ userId, updatedByUserId: anonymizedBy?.userId });
+  await membershipRepository.disableMembershipsByUserId({ userId, updatedByUserId: anonymizedBy.userId });
 
   await certificationCenterMembershipRepository.disableMembershipsByUserId({
-    updatedByUserId: anonymizedBy?.userId,
+    updatedByUserId: anonymizedBy.userId,
     userId,
   });
 
@@ -60,9 +60,9 @@ const anonymizeUser = async function ({
 
   await _anonymizeUserLogin({ userId, userLoginRepository });
 
-  await _anonymizeUser({ user, anonymizedByUserId: anonymizedBy?.userId, userRepository });
+  await _anonymizeUser({ user, anonymizedByUserId: anonymizedBy.userId, userRepository });
 
-  if (anonymizedBy && !preventAuditLogging && config.auditLogger.isEnabled) {
+  if (!preventAuditLogging && config.auditLogger.isEnabled) {
     await userAnonymizedEventLoggingJobRepository.performAsync(
       new UserAnonymizedEventLoggingJob({
         userId,
@@ -75,8 +75,6 @@ const anonymizeUser = async function ({
 };
 
 async function _getAdminUser({ adminUserId, adminMemberRepository }) {
-  if (!adminUserId) return undefined;
-
   const admin = await adminMemberRepository.get({ userId: adminUserId });
   if (!admin) {
     throw new UserNotFoundError(`Admin not found for id: ${adminUserId}`);
