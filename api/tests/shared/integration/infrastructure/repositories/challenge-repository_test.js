@@ -512,6 +512,7 @@ describe('Integration | Repository | challenge-repository', function () {
         status: 'périmé',
         locales: ['nl'],
       });
+
       const learningContent = {
         skills: [{ ...skill, status: 'actif', level: skill.difficulty }],
         challenges: [
@@ -555,7 +556,6 @@ describe('Integration | Repository | challenge-repository', function () {
         expect(actualChallenges[1]).to.deep.contain({
           status: 'archivé',
         });
-
         expect(actualChallenges[2]).to.deep.contain({
           status: 'périmé',
         });
@@ -586,12 +586,33 @@ describe('Integration | Repository | challenge-repository', function () {
         status: 'périmé',
         locales,
       });
+      const nonAccessibleChallenge = domainBuilder.buildChallenge({
+        id: 'nonAccessibleChallenge',
+        skill,
+        status: 'validé',
+        locales,
+      });
       const learningContent = {
         skills: [{ ...skill, status: 'actif', level: skill.difficulty }],
         challenges: [
-          { ...activeChallenge, skillId: 'recSkill1', alpha: 3.57, delta: -8.99 },
-          { ...archivedChallenge, skillId: 'recSkill1' },
-          { ...outdatedChallenge, skillId: 'recSkill1' },
+          {
+            ...activeChallenge,
+            accessibility1: 'OK',
+            accessibility2: 'OK',
+            skillId: 'recSkill1',
+            alpha: 3.57,
+            delta: -8.99,
+          },
+          { ...archivedChallenge, accessibility1: 'OK', accessibility2: 'OK', skillId: 'recSkill1' },
+          { ...outdatedChallenge, accessibility1: 'OK', accessibility2: 'OK', skillId: 'recSkill1' },
+          {
+            ...nonAccessibleChallenge,
+            accessibility1: 'KO',
+            accessibility2: 'OK',
+            skillId: 'recSkill1',
+            alpha: 3.57,
+            delta: -8.99,
+          },
         ],
       };
       await mockLearningContent(learningContent);
@@ -609,7 +630,7 @@ describe('Integration | Repository | challenge-repository', function () {
       });
 
       // then
-      expect(actualChallenges).to.have.lengthOf(1);
+      expect(actualChallenges).to.have.lengthOf(2);
       expect(actualChallenges[0]).to.be.instanceOf(Challenge);
       expect(actualChallenges[0]).to.deep.contain({
         id: 'activeChallenge',
@@ -635,9 +656,29 @@ describe('Integration | Repository | challenge-repository', function () {
       });
 
       // then
-      expect(actualChallenges).to.have.lengthOf(1);
+      expect(actualChallenges).to.have.lengthOf(2);
       expect(actualChallenges[0]).to.be.instanceOf(Challenge);
       expect(actualChallenges[0].minimumCapability).to.equal(-8.682265465359073);
+    });
+
+    context('when requesting only accessible challenges', function () {
+      it('should return all accessible flash compatible challenges with skills', async function () {
+        // given
+        const successProbabilityThreshold = 0.95;
+
+        // when
+        const actualChallenges = await challengeRepository.findActiveFlashCompatible({
+          locale: 'fr-fr',
+          successProbabilityThreshold,
+          accessibilityAdjustmentNeeded: true,
+        });
+
+        // then
+        expect(actualChallenges).to.have.lengthOf(1);
+        expect(actualChallenges[0]).to.deep.contain({
+          status: 'validé',
+        });
+      });
     });
   });
 
