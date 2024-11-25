@@ -9,6 +9,8 @@
     list-style: none;
 
     a {
+      display: inline-flex;
+      gap: var(--pix-spacing-1x);
       color: var(--pix-primary-700);
     }
   }
