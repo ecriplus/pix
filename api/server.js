@@ -1,5 +1,6 @@
 import Oppsy from '@1024pix/oppsy';
 import Hapi from '@hapi/hapi';
+import metrics from 'datadog-metrics';
 import { parse } from 'neoqs';
 
 import { setupErrorHandling } from './config/server-setup-error-handling.js';
@@ -37,6 +38,7 @@ import { config } from './src/shared/config.js';
 import { monitoringTools } from './src/shared/infrastructure/monitoring-tools.js';
 import { plugins } from './src/shared/infrastructure/plugins/index.js';
 import { deserializer } from './src/shared/infrastructure/serializers/jsonapi/deserializer.js';
+import { logger } from './src/shared/infrastructure/utils/logger.js';
 // bounded context migration
 import { sharedRoutes } from './src/shared/routes.js';
 import { swaggers } from './src/shared/swaggers.js';
@@ -71,7 +73,26 @@ const { logOpsMetrics, port, logging } = config;
 const createServer = async () => {
   const server = createBareServer();
 
-  if (logOpsMetrics) await enableOpsMetrics(server);
+  // initialisation of Datadog link for metrics publication
+  if (config.environment !== 'development' || config.featureToggles.isDirectMetricsEnabled) {
+    logger.info('Metric initialisation : linked to Datadog');
+    metrics.init({
+      host: config.infra.containerName,
+      prefix: '',
+      flushIntervalSeconds: config.infra.metricsFlushIntervalSecond,
+      defaultTags: [`service:${config.infra.appName}`],
+    });
+  } else {
+    logger.info('Metric initialisation : no reporter => no metrics sent');
+    metrics.init({ reporter: metrics.NullReporter() });
+  }
+
+  if (logOpsMetrics) {
+    // OPS metrics via direct metrics
+    if (config.featureToggles.isDirectMetricsEnabled) await enableOpsMetrics(server);
+    // OPS metrics via Oppsy
+    if (!config.featureToggles.isOppsyDisabled) await enableLegacyOpsMetrics(server);
+  }
 
   setupErrorHandling(server);
 
@@ -127,6 +148,48 @@ const createBareServer = function () {
 };
 
 const enableOpsMetrics = async function (server) {
+  function collectMemoryStats() {
+    const memUsage = process.memoryUsage();
+    metrics.gauge(`captain.api.memory.rss`, memUsage.rss);
+    metrics.gauge('captain.api.memory.heapTotal', memUsage.heapTotal);
+    metrics.gauge('captain.api.memory.heapUsed', memUsage.heapUsed);
+    metrics.gauge('captain.api.conteneur', 1);
+  }
+
+  const metricsInterval = setInterval(collectMemoryStats, 5000);
+  server.pixCustomIntervals = [metricsInterval];
+
+  const gaugeConnections = (pool) => () => {
+    logger.info('publie les metrics de knex');
+    metrics.gauge('captain.api.knex.db_connections_used', pool.numUsed());
+    metrics.gauge('captain.api.knex.db_connections_free', pool.numFree());
+    metrics.gauge('captain.api.knex.db_connections_pending_creation', pool.numPendingCreates());
+    metrics.gauge('captain.api.knex.db_connections_pending_destroy', pool['pendingDestroys'].length);
+  };
+
+  const client = knex.client;
+  gaugeConnections(client.pool)();
+
+  client.pool.on('createSuccess', gaugeConnections(client.pool));
+  client.pool.on('acquireSuccess', gaugeConnections(client.pool));
+  client.pool.on('release', gaugeConnections(client.pool));
+  client.pool.on('destroySuccess', gaugeConnections(client.pool));
+
+  server.events.on('response', (request) => {
+    const info = request.info;
+
+    const statusCode = request.raw.res.statusCode;
+    const responseTime = (info.completed !== undefined ? info.completed : info.responded) - info.received;
+
+    metrics.histogram('captain.api.duration', responseTime, [
+      `method:${request.route.method}`,
+      `route:${request.route.path}`,
+      `statusCode:${statusCode}`,
+    ]);
+  });
+};
+
+const enableLegacyOpsMetrics = async function (server) {
   const oppsy = new Oppsy(server);
 
   oppsy.on('ops', (data) => {

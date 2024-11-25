@@ -74,15 +74,20 @@ const plugin = {
 
     server.events.on('response', (request) => {
       const info = request.info;
-      logger.info(
-        {
-          queryParams: request.query,
-          req: request,
-          res: request.raw.res,
-          responseTime: (info.completed !== undefined ? info.completed : info.responded) - info.received,
-        },
-        'request completed',
-      );
+
+      const shouldLog = !config.featureToggles.isDirectMetricsEnabled;
+
+      if (shouldLog || request.raw.res.statusCode != 200) {
+        logger.info(
+          {
+            queryParams: request.query,
+            req: request,
+            res: request.raw.res,
+            responseTime: (info.completed !== undefined ? info.completed : info.responded) - info.received,
+          },
+          'request completed',
+        );
+      }
     });
   },
 };

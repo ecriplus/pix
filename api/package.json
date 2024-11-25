@@ -39,6 +39,7 @@
     "cron-parser": "^4.9.0",
     "dataloader": "^2.2.2",
     "dayjs": "^1.11.5",
+    "datadog-metrics": "^0.12.0",
     "debug": "^4.3.4",
     "dotenv": "^16.0.1",
     "fast-levenshtein": "^3.0.0",
