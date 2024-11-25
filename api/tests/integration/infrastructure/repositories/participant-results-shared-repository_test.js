@@ -101,7 +101,7 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
           skills: [{ id: 'skill_1' }, { id: 'skill_2' }, { id: 'skill_3' }],
           competences: [],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         //when
         const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -141,7 +141,7 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
             { id: 'competence_5', origin: 'Pix' },
           ],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         //when
         const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -178,7 +178,7 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
             { id: 'competence_5', origin: 'Pix' },
           ],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         //when
         const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -209,7 +209,7 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
           ],
           competences: [],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         //when
         const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -242,7 +242,7 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
             ],
             competences: [],
           };
-          mockLearningContent(learningContent);
+          await mockLearningContent(learningContent);
 
           //when
           const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -275,7 +275,7 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
             ],
             competences: [],
           };
-          mockLearningContent(learningContent);
+          await mockLearningContent(learningContent);
 
           //when
           const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -318,7 +318,7 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
             { id: 'competence_5', origin: 'Pix' },
           ],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         //when
         const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -339,7 +339,7 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
       await databaseBuilder.commit();
 
       const learningContent = { skills: [{ id: 'skill_1', status: 'actif' }], competences: [] };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       //when
       const participantResultsShared = await participantResultsSharedRepository.get(participation.id);

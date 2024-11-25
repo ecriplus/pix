@@ -90,7 +90,7 @@ describe('Integration | Usecase | Handle Stage Acquisition', function () {
         type: Assessment.types.CAMPAIGN,
       });
 
-      mockLearningContent(learningContentBuilder(learningContent));
+      await mockLearningContent(learningContentBuilder(learningContent));
     });
 
     context('when some KEs are acquired', function () {

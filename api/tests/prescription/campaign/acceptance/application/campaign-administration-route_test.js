@@ -52,7 +52,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
 
       // when
       const payload = {
@@ -176,7 +176,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
 
       // when
       const payload = {

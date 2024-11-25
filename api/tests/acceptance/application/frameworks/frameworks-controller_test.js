@@ -193,7 +193,7 @@ describe('Acceptance | Controller | frameworks-controller', function () {
       beforeEach(async function () {
         userId = databaseBuilder.factory.buildUser().id;
         await databaseBuilder.commit();
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
       });
 
       it('should return response code 200', async function () {
@@ -442,7 +442,7 @@ describe('Acceptance | Controller | frameworks-controller', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
       const options = {
         method: 'GET',
         url: `/api/admin/frameworks/fmk1/areas`,

@@ -11,7 +11,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Compete
       const rawCompetence4 = { id: 'RECORD_ID_RAW_COMPETENCE_4' };
 
       const records = [rawCompetence1, rawCompetence2, rawCompetence3, rawCompetence4];
-      mockLearningContent({ competences: records });
+      await mockLearningContent({ competences: records });
       const expectedCompetenceIds = [rawCompetence1.id, rawCompetence2.id, rawCompetence4.id];
 
       // when
@@ -25,7 +25,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Compete
       const rawCompetence1 = { id: 'RECORD_ID_RAW_COMPETENCE_1' };
 
       const records = [rawCompetence1];
-      mockLearningContent({ competences: records });
+      await mockLearningContent({ competences: records });
 
       // when
       const foundCompetences = await competenceDatasource.findByRecordIds(['some_other_id']);

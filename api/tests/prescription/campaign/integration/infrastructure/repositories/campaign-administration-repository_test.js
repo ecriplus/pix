@@ -210,7 +210,7 @@ describe('Integration | Repository | Campaign Administration', function () {
               },
             ],
           };
-          mockLearningContent(learningContent);
+          await mockLearningContent(learningContent);
 
           databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1', level: 2 });
           databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube2', level: 8 });
@@ -274,7 +274,7 @@ describe('Integration | Repository | Campaign Administration', function () {
             },
           ],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1', level: 2 });
         await databaseBuilder.commit();

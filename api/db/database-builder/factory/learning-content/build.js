@@ -1,3 +1,5 @@
+import nock from 'nock';
+
 import { buildArea } from './build-area.js';
 import { buildChallenge } from './build-challenge.js';
 import { buildCompetence } from './build-competence.js';
@@ -20,4 +22,9 @@ export function build(learningContent) {
   learningContent.courses?.forEach(buildCourse);
   learningContent.tutorials?.forEach(buildTutorial);
   learningContent.missions?.forEach(buildMission);
+
+  return nock('https://lcms-test.pix.fr/api')
+    .get('/releases/latest')
+    .matchHeader('Authorization', 'Bearer test-api-key')
+    .reply(200, { content: learningContent });
 }

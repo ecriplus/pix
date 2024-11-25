@@ -11,7 +11,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Themati
         { id: 'recThematic3', competenceId: 'competence3' },
         { id: 'recThematic2', competenceId: 'competence1' },
       ];
-      mockLearningContent({ thematics: records });
+      await mockLearningContent({ thematics: records });
       const expectedThematicIds = ['recThematic0', 'recThematic1', 'recThematic2'];
       const competenceIds = ['competence1', 'competence2'];
 
@@ -26,7 +26,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Themati
     it('should return an array of matching learning content thematics data objects by ids', async function () {
       // given
       const records = [{ id: 'recThematic0' }, { id: 'recThematic1' }, { id: 'recThematic3' }, { id: 'recThematic2' }];
-      mockLearningContent({ thematics: records });
+      await mockLearningContent({ thematics: records });
 
       // when
       const foundThematics = await thematicDatasource.findByRecordIds(['recThematic1', 'recThematic3']);

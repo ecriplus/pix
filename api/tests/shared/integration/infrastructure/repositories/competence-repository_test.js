@@ -19,7 +19,7 @@ describe('Integration | Repository | competence-repository', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const competence = await competenceRepository.get({ id: expectedCompetence.id });
@@ -45,7 +45,7 @@ describe('Integration | Repository | competence-repository', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const competence = await competenceRepository.get({ id: expectedCompetence.id, locale });
@@ -73,7 +73,7 @@ describe('Integration | Repository | competence-repository', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const competenceName = await competenceRepository.getCompetenceName({ id: expectedCompetence.id, locale });
@@ -86,8 +86,8 @@ describe('Integration | Repository | competence-repository', function () {
   describe('#list', function () {
     it('should return the competences', async function () {
       // given
-      const competence1 = domainBuilder.buildCompetence();
-      const competence2 = domainBuilder.buildCompetence();
+      const competence1 = domainBuilder.buildCompetence({ id: 'competence1' });
+      const competence2 = domainBuilder.buildCompetence({ id: 'competence2' });
       const learningContent = {
         competences: [
           {
@@ -110,7 +110,7 @@ describe('Integration | Repository | competence-repository', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const competences = await competenceRepository.list();
@@ -136,7 +136,7 @@ describe('Integration | Repository | competence-repository', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const competences = await competenceRepository.list({ locale });
@@ -149,8 +149,8 @@ describe('Integration | Repository | competence-repository', function () {
   describe('#listPixCompetencesOnly', function () {
     it('should return the competences with only Pix as origin', async function () {
       // given
-      const pixCompetence = domainBuilder.buildCompetence({ origin: 'Pix' });
-      const nonPixCompetence = domainBuilder.buildCompetence({ origin: 'Continuum Espace temps' });
+      const pixCompetence = domainBuilder.buildCompetence({ id: 'competence1', origin: 'Pix' });
+      const nonPixCompetence = domainBuilder.buildCompetence({ id: 'competence2', origin: 'Continuum Espace temps' });
       const learningContent = {
         competences: [
           {
@@ -173,7 +173,7 @@ describe('Integration | Repository | competence-repository', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const competences = await competenceRepository.listPixCompetencesOnly();
@@ -199,7 +199,7 @@ describe('Integration | Repository | competence-repository', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const competences = await competenceRepository.listPixCompetencesOnly({ locale });
@@ -210,7 +210,7 @@ describe('Integration | Repository | competence-repository', function () {
   });
 
   describe('#findByRecordIds', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningContent = {
         competences: [
           {
@@ -245,7 +245,7 @@ describe('Integration | Repository | competence-repository', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
     });
 
     it('should return competences given by id with default locale', async function () {
@@ -311,7 +311,7 @@ describe('Integration | Repository | competence-repository', function () {
   });
 
   describe('#findByAreaIds', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningContent = {
         competences: [
           {
@@ -346,7 +346,7 @@ describe('Integration | Repository | competence-repository', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
     });
 
     it('should return competences given by areaId with default locale', async function () {

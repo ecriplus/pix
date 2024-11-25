@@ -103,7 +103,7 @@ describe('Acceptance | Controller | scorecard-controller', function () {
     server = await createServer();
     databaseBuilder.factory.buildUser({ id: userId });
     await databaseBuilder.commit();
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
   });
 
   describe('GET /scorecards/{id}', function () {

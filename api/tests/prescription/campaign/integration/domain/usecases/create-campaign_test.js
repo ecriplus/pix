@@ -34,7 +34,7 @@ describe('Integration | UseCases | create-campaign', function () {
       skills: [{ id: 'recSkill1' }],
     };
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
   });
 
   it('should save a new campaign of type ASSESSMENT', async function () {

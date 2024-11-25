@@ -102,7 +102,7 @@ describe('Integration | Repository | training-trigger-repository', function () {
       },
     ];
     const learningContentObjects = learningContentBuilder(learningContent);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
   });
 
   describe('#createOrUpdate', function () {

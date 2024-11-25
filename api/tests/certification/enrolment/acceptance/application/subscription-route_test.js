@@ -15,7 +15,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | subscr
       const server = await createServer();
 
       const learningContent = _buildLearningContent();
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       const userId = databaseBuilder.factory.buildUser().id;
 

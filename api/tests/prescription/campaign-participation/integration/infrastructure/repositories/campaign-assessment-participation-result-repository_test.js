@@ -11,7 +11,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result', 
   describe('#getByCampaignIdAndCampaignParticipationId', function () {
     let campaignId, campaignParticipationId;
 
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningContent = {
         frameworks: [{ id: 'frameworkId', name: 'frameworkName' }],
         areas: [
@@ -76,7 +76,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result', 
         challenges: [],
       };
 
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
       return databaseBuilder.commit();
     });
 

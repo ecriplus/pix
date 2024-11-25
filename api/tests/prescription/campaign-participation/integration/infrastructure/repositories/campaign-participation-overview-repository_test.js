@@ -47,7 +47,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
       },
     ];
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
     targetProfile = databaseBuilder.factory.buildTargetProfile();
     databaseBuilder.factory.buildStage({ targetProfileId: targetProfile.id });
     await databaseBuilder.commit();

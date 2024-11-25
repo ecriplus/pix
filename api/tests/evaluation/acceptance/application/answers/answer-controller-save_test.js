@@ -77,7 +77,7 @@ describe('Acceptance | Controller | answer-controller-save', function () {
             },
           ],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         postAnswersOptions = {
           method: 'POST',
@@ -259,7 +259,7 @@ describe('Acceptance | Controller | answer-controller-save', function () {
     });
 
     context('when the answer is empty and has timed out', function () {
-      beforeEach(function () {
+      beforeEach(async function () {
         // given
         const learningContent = {
           areas: [{ id: 'recArea1', competenceIds: ['recCompetence'] }],
@@ -292,7 +292,7 @@ describe('Acceptance | Controller | answer-controller-save', function () {
             },
           ],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         postAnswersOptions = {
           method: 'POST',
@@ -337,7 +337,7 @@ describe('Acceptance | Controller | answer-controller-save', function () {
     });
 
     context('when the answer is empty but not in timeout', function () {
-      beforeEach(function () {
+      beforeEach(async function () {
         // given
         const learningContent = {
           areas: [{ id: 'recArea1', competenceIds: ['recCompetence'] }],
@@ -370,7 +370,7 @@ describe('Acceptance | Controller | answer-controller-save', function () {
             },
           ],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         postAnswersOptions = {
           method: 'POST',

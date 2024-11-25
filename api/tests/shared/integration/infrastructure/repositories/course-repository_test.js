@@ -9,7 +9,7 @@ describe('Integration | Repository | course-repository', function () {
       it('should return the course', async function () {
         // given
         const expectedCourse = domainBuilder.buildCourse();
-        mockLearningContent({ courses: [{ ...expectedCourse }] });
+        await mockLearningContent({ courses: [{ ...expectedCourse }] });
 
         // when
         const actualCourse = await courseRepository.get(expectedCourse.id);
@@ -36,7 +36,7 @@ describe('Integration | Repository | course-repository', function () {
       it('should return the course name', async function () {
         // given
         const expectedCourse = domainBuilder.buildCourse();
-        mockLearningContent({ courses: [{ ...expectedCourse }] });
+        await mockLearningContent({ courses: [{ ...expectedCourse }] });
 
         // when
         const actualCourseName = await courseRepository.getCourseName(expectedCourse.id);

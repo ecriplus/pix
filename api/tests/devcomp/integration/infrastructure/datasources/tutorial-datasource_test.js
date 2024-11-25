@@ -11,7 +11,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Tutoria
       const rawTutorial2 = { id: 'FAKE_REC_ID_RAW_TUTORIAL_2' };
       const rawTutorial3 = { id: 'FAKE_REC_ID_RAW_TUTORIAL_3' };
       const records = [rawTutorial1, rawTutorial2, rawTutorial3];
-      const lcmsApiCall = mockLearningContent({ tutorials: records });
+      const lcmsApiCall = await mockLearningContent({ tutorials: records });
 
       // when
       const foundTutorials = await tutorialDatasource.findByRecordIds([rawTutorial1.id, rawTutorial3.id]);

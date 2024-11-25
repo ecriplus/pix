@@ -6,7 +6,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | AreaDat
     it('should return an array of matching learning content area data objects', async function () {
       // given
       const records = [{ id: 'recArea0' }, { id: 'recArea1' }, { id: 'recArea2' }];
-      mockLearningContent({ areas: records });
+      await mockLearningContent({ areas: records });
       const expectedAreaIds = ['recArea0', 'recArea1'];
 
       // when
@@ -18,7 +18,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | AreaDat
     it('should return an empty array when there are no objects matching the ids', async function () {
       // given
       const records = [{ id: 'recArea0' }];
-      mockLearningContent({ areas: records });
+      await mockLearningContent({ areas: records });
 
       // when
       const foundAreas = await areaDatasource.findByRecordIds(['some_other_id']);
@@ -45,7 +45,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | AreaDat
           competenceIds: ['competenceId_4'],
         },
       ];
-      mockLearningContent({ areas });
+      await mockLearningContent({ areas });
 
       // when
       const foundArea = await areaDatasource.findOneFromCompetenceId('competenceId_1');
@@ -64,11 +64,11 @@ describe('Integration | Infrastructure | Datasource | Learning Content | AreaDat
           competenceIds: ['competenceId_1', 'competenceId_2', 'competenceId_3'],
         },
         {
-          id: 'area_1',
+          id: 'area_2',
           competenceIds: ['competenceId_4'],
         },
       ];
-      mockLearningContent({ areas });
+      await mockLearningContent({ areas });
 
       // when
       const foundArea = await areaDatasource.findOneFromCompetenceId('competenceId_10');
@@ -85,7 +85,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | AreaDat
         { id: 'recArea1', frameworkId: 'framework2' },
         { id: 'recArea2', frameworkId: 'framework1' },
       ];
-      mockLearningContent({ areas: records });
+      await mockLearningContent({ areas: records });
       const expectedAreaIds = ['recArea0', 'recArea2'];
       const frameworkId = 'framework1';
 

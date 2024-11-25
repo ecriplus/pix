@@ -1,6 +1,6 @@
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
 import { status } from '../../../../src/shared/domain/models/AssessmentResult.js';
-import { databaseBuilder, learningContentBuilder, mockLearningContent } from '../../../test-helper.js';
+import { databaseBuilder, learningContentBuilder } from '../../../test-helper.js';
 
 const assessmentCreatedDate = new Date('2020-04-19');
 const assessmentBeforeCreatedDate = new Date('2020-04-18');
@@ -359,7 +359,7 @@ function mockLearningContentCompetences() {
   ];
 
   const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-  mockLearningContent(learningContentObjects);
+  databaseBuilder.factory.learningContent.build(learningContentObjects);
 }
 
 export {

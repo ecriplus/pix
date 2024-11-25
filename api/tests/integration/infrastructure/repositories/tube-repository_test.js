@@ -38,7 +38,7 @@ describe('Integration | Repository | tube-repository', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const tube = await tubeRepository.get(expectedTube.id);
@@ -106,7 +106,7 @@ describe('Integration | Repository | tube-repository', function () {
         thematicId: 'thematicCava',
         skillIds: ['skillPoire', 'skillPeche'],
       };
-      mockLearningContent({ tubes: [learningContentTube0, learningContentTube1] });
+      await mockLearningContent({ tubes: [learningContentTube0, learningContentTube1] });
 
       // when
       const tubes = await tubeRepository.list();
@@ -178,7 +178,7 @@ describe('Integration | Repository | tube-repository', function () {
         thematicId: 'thematicCava',
         skillIds: ['skillPoire', 'skillPeche'],
       };
-      mockLearningContent({ tubes: [learningContentTube1, learningContentTube0] });
+      await mockLearningContent({ tubes: [learningContentTube1, learningContentTube0] });
 
       // when
       const tubes = await tubeRepository.findByNames({ tubeNames: ['tubeName1', 'tubeName0'] });
@@ -222,7 +222,7 @@ describe('Integration | Repository | tube-repository', function () {
             },
           ],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         // when
         const tubes = await tubeRepository.findByNames({ tubeNames: ['tubeName'] });
@@ -269,7 +269,7 @@ describe('Integration | Repository | tube-repository', function () {
             },
           ],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
         const locale = 'en';
 
         // when
@@ -283,7 +283,7 @@ describe('Integration | Repository | tube-repository', function () {
   });
 
   describe('#findByRecordIds', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningContentTube0 = {
         id: 'recTube0',
         name: 'tubeName0',
@@ -349,7 +349,7 @@ describe('Integration | Repository | tube-repository', function () {
           tubeId: 'recTube2',
         },
       ];
-      mockLearningContent({ tubes: [learningContentTube1, learningContentTube0, learningContentTube2], skills });
+      await mockLearningContent({ tubes: [learningContentTube1, learningContentTube0, learningContentTube2], skills });
     });
 
     it('should return a list of tubes (locale FR - default)', async function () {
@@ -502,7 +502,7 @@ describe('Integration | Repository | tube-repository', function () {
           tubeId: 'recTube2',
         },
       ];
-      mockLearningContent({ tubes: [learningContentTube1, learningContentTube0, learningContentTube2], skills });
+      await mockLearningContent({ tubes: [learningContentTube1, learningContentTube0, learningContentTube2], skills });
 
       // when
       const tubes = await tubeRepository.findActiveByRecordIds(['recTube1', 'recTube2']);
@@ -598,7 +598,7 @@ describe('Integration | Repository | tube-repository', function () {
           tubeId: 'recTube2',
         },
       ];
-      mockLearningContent({ tubes: [learningContentTube1, learningContentTube0, learningContentTube2], skills });
+      await mockLearningContent({ tubes: [learningContentTube1, learningContentTube0, learningContentTube2], skills });
 
       // when
       const tubes = await tubeRepository.findActiveByRecordIds(['recTube1', 'recTube2'], 'en');

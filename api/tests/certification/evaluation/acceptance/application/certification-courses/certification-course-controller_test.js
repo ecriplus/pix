@@ -4,7 +4,7 @@ import {
   SessionVersion,
 } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { config } from '../../../../../../src/shared/config.js';
-import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
+import { KnowledgeElement } from '../../../../../../src/shared/domain/models/index.js';
 import {
   createServer,
   databaseBuilder,
@@ -12,7 +12,6 @@ import {
   generateValidRequestAuthorizationHeader,
   knex,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../../test-helper.js';
 
 describe('Acceptance | API | Certification Course', function () {
@@ -270,7 +269,7 @@ describe('Acceptance | API | Certification Course', function () {
               id: 'recCompetence5',
               tubes: [
                 {
-                  id: 'recTube0_0',
+                  id: 'recTube5_0',
                   skills: [
                     {
                       id: 'recSkill5_0',
@@ -295,7 +294,7 @@ describe('Acceptance | API | Certification Course', function () {
               id: 'recCompetence6',
               tubes: [
                 {
-                  id: 'recTube0_0',
+                  id: 'recTube6_0',
                   skills: [
                     {
                       id: 'recSkill6_0',
@@ -513,7 +512,7 @@ function _createRequestOptions(
 
 function _createNonExistingCertifCourseSetup({ learningContent, sessionId, userId }) {
   const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-  mockLearningContent(learningContentObjects);
+  databaseBuilder.factory.learningContent.build(learningContentObjects);
   const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
     sessionId,
     userId,

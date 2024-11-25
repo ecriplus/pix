@@ -149,7 +149,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           const certificationChallenge = databaseBuilder.factory.buildCertificationChallenge({
             courseId: certificationCourseId,
           });
-          mockLearningContent({
+          await mockLearningContent({
             frameworks: [{ id: 'frameworkId' }],
             challenges: [
               {

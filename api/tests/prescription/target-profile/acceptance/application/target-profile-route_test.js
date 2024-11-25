@@ -35,7 +35,7 @@ describe('Acceptance | Route | target-profile', function () {
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
 
         user = databaseBuilder.factory.buildUser({});
         linkedOrganization = databaseBuilder.factory.buildOrganization({});
@@ -259,7 +259,7 @@ describe('Acceptance | Route | target-profile', function () {
       userId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildMembership({ userId });
       await databaseBuilder.commit();
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
     });
 
     it('should return response code 200', async function () {

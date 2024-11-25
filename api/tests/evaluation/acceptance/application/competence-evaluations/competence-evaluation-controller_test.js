@@ -37,7 +37,7 @@ describe('Acceptance | API | Competence Evaluations', function () {
         ];
 
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
       });
 
       context('and competence exists', function () {

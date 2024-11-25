@@ -134,7 +134,7 @@ describe('Acceptance | API | Campaign Route', function () {
         ];
 
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
       });
 
       it('should return campaign analysis with status code 200', async function () {
@@ -276,7 +276,7 @@ describe('Acceptance | API | Campaign Route', function () {
         ];
 
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
       });
 
       it('should return campaign analysis with status code 200', async function () {
@@ -374,7 +374,7 @@ describe('Acceptance | API | Campaign Route', function () {
 
       const learningContent = domainBuilder.buildLearningContent.withSimpleContent();
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent.frameworks[0].areas);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
 
       databaseBuilder.factory.buildCampaignSkill({
         campaignId: campaign.id,

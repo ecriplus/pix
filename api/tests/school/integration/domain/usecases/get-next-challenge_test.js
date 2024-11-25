@@ -65,7 +65,7 @@ describe('Integration | Usecase | get-next-challenge', function () {
 
         await databaseBuilder.commit();
 
-        mockLearningContent({
+        await mockLearningContent({
           challenges: [
             learningContentBuilder.buildChallenge({ id: 'second_va_challenge_on_step_2_id', skillId: 'skill_id' }),
           ],

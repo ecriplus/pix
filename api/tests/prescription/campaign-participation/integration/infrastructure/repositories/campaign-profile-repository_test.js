@@ -11,8 +11,8 @@ describe('Integration | Repository | CampaignProfileRepository', function () {
 
   describe('#findProfile', function () {
     context('campaign participation infos', function () {
-      beforeEach(function () {
-        mockLearningContent({ areas: [], competences: [], skills: [] });
+      beforeEach(async function () {
+        await mockLearningContent({ areas: [], competences: [], skills: [] });
       });
 
       it('return the creation date, the sharing date and the participantExternalId', async function () {
@@ -79,8 +79,8 @@ describe('Integration | Repository | CampaignProfileRepository', function () {
     });
 
     context('organization learner infos', function () {
-      beforeEach(function () {
-        mockLearningContent({ areas: [], competences: [], skills: [] });
+      beforeEach(async function () {
+        await mockLearningContent({ areas: [], competences: [], skills: [] });
       });
 
       it('return the first name and last name of the organization learner', async function () {
@@ -131,7 +131,7 @@ describe('Integration | Repository | CampaignProfileRepository', function () {
     });
 
     context('certification infos', function () {
-      beforeEach(function () {
+      beforeEach(async function () {
         const learningContent = {
           areas: [{ id: 'recArea1', competenceIds: ['recArea1_Competence1'] }],
           competences: [
@@ -158,7 +158,7 @@ describe('Integration | Repository | CampaignProfileRepository', function () {
           ],
         };
 
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
       });
 
       it('return the number of competences', async function () {
@@ -292,8 +292,8 @@ describe('Integration | Repository | CampaignProfileRepository', function () {
     });
 
     context('when there is no campaign-participation with the given id', function () {
-      beforeEach(function () {
-        mockLearningContent({ areas: [], competences: [], skills: [] });
+      beforeEach(async function () {
+        await mockLearningContent({ areas: [], competences: [], skills: [] });
       });
 
       it('throws an NotFoundError error', async function () {
@@ -309,8 +309,8 @@ describe('Integration | Repository | CampaignProfileRepository', function () {
     });
 
     context('when there is no campaign-participation with the given id for the given campaign', function () {
-      beforeEach(function () {
-        mockLearningContent({ areas: [], competences: [], skills: [] });
+      beforeEach(async function () {
+        await mockLearningContent({ areas: [], competences: [], skills: [] });
       });
 
       it('throws an NotFoundError error', async function () {
@@ -331,8 +331,8 @@ describe('Integration | Repository | CampaignProfileRepository', function () {
     });
 
     context('when the campaign-participation is deleted with the given id for the given campaign', function () {
-      beforeEach(function () {
-        mockLearningContent({ areas: [], competences: [], skills: [] });
+      beforeEach(async function () {
+        await mockLearningContent({ areas: [], competences: [], skills: [] });
       });
 
       it('throws a NotFoundError error', async function () {

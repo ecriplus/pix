@@ -29,7 +29,7 @@ describe('computeParticipationResults', function () {
           { id: 'competence_3', origin: 'Pix' },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       await computeParticipationResults(1, false);
 
@@ -62,7 +62,7 @@ describe('computeParticipationResults', function () {
         ],
         competences: [],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       await computeParticipationResults(1, false);
 
@@ -110,7 +110,7 @@ describe('computeParticipationResults', function () {
             { id: 'competence_5', origin: 'Pix' },
           ],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         await computeParticipationResults(1, false);
         const campaignParticipations = await knex('campaign-participations')
@@ -140,7 +140,7 @@ describe('computeParticipationResults', function () {
 
         await databaseBuilder.commit();
 
-        mockLearningContent({ skills: [], competences: [] });
+        await mockLearningContent({ skills: [], competences: [] });
 
         await computeParticipationResults(1, false);
         const campaignParticipations = await knex('campaign-participations')
@@ -171,7 +171,7 @@ describe('computeParticipationResults', function () {
 
           await databaseBuilder.commit();
 
-          mockLearningContent({ skills: [], competences: [] });
+          await mockLearningContent({ skills: [], competences: [] });
 
           await computeParticipationResults(1, false);
 
@@ -200,7 +200,7 @@ describe('computeParticipationResults', function () {
 
         await databaseBuilder.commit();
 
-        mockLearningContent({ skills: [], competences: [] });
+        await mockLearningContent({ skills: [], competences: [] });
 
         await computeParticipationResults(1, false);
 
@@ -221,7 +221,7 @@ describe('computeParticipationResults', function () {
 
         await databaseBuilder.commit();
 
-        mockLearningContent({ skills: [] });
+        await mockLearningContent({ skills: [] });
 
         await computeParticipationResults(1, false);
 

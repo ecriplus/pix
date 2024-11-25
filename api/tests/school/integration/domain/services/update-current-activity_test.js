@@ -36,7 +36,7 @@ describe('Integration | UseCase | update current activity', function () {
 
           await databaseBuilder.commit();
 
-          mockLearningContent({
+          await mockLearningContent({
             missions: [
               learningContentBuilder.buildMission({
                 id: missionId,
@@ -98,7 +98,7 @@ describe('Integration | UseCase | update current activity', function () {
 
           await databaseBuilder.commit();
 
-          mockLearningContent({
+          await mockLearningContent({
             missions: [
               learningContentBuilder.buildMission({
                 id: missionId,
@@ -145,7 +145,7 @@ describe('Integration | UseCase | update current activity', function () {
           result: AnswerStatus.statuses.KO,
         });
 
-        mockLearningContent({
+        await mockLearningContent({
           missions: [
             learningContentBuilder.buildMission({
               id: missionId,
@@ -194,7 +194,7 @@ describe('Integration | UseCase | update current activity', function () {
 
           await databaseBuilder.commit();
 
-          mockLearningContent({
+          await mockLearningContent({
             missions: [
               learningContentBuilder.buildMission({
                 id: missionId,
@@ -246,7 +246,7 @@ describe('Integration | UseCase | update current activity', function () {
 
           await databaseBuilder.commit();
 
-          mockLearningContent({
+          await mockLearningContent({
             missions: [
               learningContentBuilder.buildMission({
                 id: missionId,
@@ -292,7 +292,7 @@ describe('Integration | UseCase | update current activity', function () {
         });
         await databaseBuilder.commit();
 
-        mockLearningContent({
+        await mockLearningContent({
           missions: [
             learningContentBuilder.buildMission({
               id: missionId,

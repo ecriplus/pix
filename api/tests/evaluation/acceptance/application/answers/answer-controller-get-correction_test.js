@@ -188,7 +188,7 @@ describe('Acceptance | Controller | answer-controller-get-correction', function 
         tutorialId: 'french-tutorial-id',
       });
       await databaseBuilder.commit();
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
     });
 
     context('when Accept-Language header is specified', function () {

@@ -34,8 +34,8 @@ describe('Integration | Repository | area-repository', function () {
 
     const learningContent = { areas: [area0, area1] };
 
-    beforeEach(function () {
-      mockLearningContent(learningContent);
+    beforeEach(async function () {
+      await mockLearningContent(learningContent);
     });
 
     it('should return all areas without fetching competences', async function () {
@@ -109,8 +109,8 @@ describe('Integration | Repository | area-repository', function () {
 
     const learningContent = { areas: [area0, area1] };
 
-    beforeEach(function () {
-      mockLearningContent(learningContent);
+    beforeEach(async function () {
+      await mockLearningContent(learningContent);
     });
 
     it('should return the code area', async function () {
@@ -142,8 +142,8 @@ describe('Integration | Repository | area-repository', function () {
         competences: [{ id: 'recCompetence0', origin: 'NotPix' }],
       };
 
-      beforeEach(function () {
-        mockLearningContent(learningContent);
+      beforeEach(async function () {
+        await mockLearningContent(learningContent);
       });
 
       it('should ignore the area', async function () {
@@ -192,8 +192,8 @@ describe('Integration | Repository | area-repository', function () {
         ],
       };
 
-      beforeEach(function () {
-        mockLearningContent(learningContent);
+      beforeEach(async function () {
+        await mockLearningContent(learningContent);
       });
 
       it('should return the areas with only pix competences in it', async function () {
@@ -308,8 +308,8 @@ describe('Integration | Repository | area-repository', function () {
       ],
     };
 
-    beforeEach(function () {
-      mockLearningContent(learningContent);
+    beforeEach(async function () {
+      await mockLearningContent(learningContent);
     });
 
     it('should return a list of areas from the proper framework', async function () {
@@ -417,7 +417,7 @@ describe('Integration | Repository | area-repository', function () {
         frameworkId: 'recFwkId2',
       };
 
-      mockLearningContent({ areas: [learningContentArea0, learningContentArea1, learningContentArea2] });
+      await mockLearningContent({ areas: [learningContentArea0, learningContentArea1, learningContentArea2] });
 
       // when
       const areas = await areaRepository.findByRecordIds({ areaIds: ['recArea1', 'recArea2'] });
@@ -481,7 +481,7 @@ describe('Integration | Repository | area-repository', function () {
         frameworkId: 'recFwkId2',
       };
 
-      mockLearningContent({ areas: [learningContentArea0, learningContentArea1, learningContentArea2] });
+      await mockLearningContent({ areas: [learningContentArea0, learningContentArea1, learningContentArea2] });
 
       // when
       const areas = await areaRepository.findByRecordIds({ areaIds: ['recArea1', 'recArea2'], locale: 'en' });
@@ -492,7 +492,7 @@ describe('Integration | Repository | area-repository', function () {
   });
 
   describe('#get', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningContentArea0 = {
         id: 'recArea0',
         code: 1,
@@ -515,7 +515,7 @@ describe('Integration | Repository | area-repository', function () {
         color: 'blue1',
         frameworkId: 'recFwkId1',
       };
-      mockLearningContent({ areas: [learningContentArea0, learningContentArea1] });
+      await mockLearningContent({ areas: [learningContentArea0, learningContentArea1] });
     });
 
     it('should return the area', async function () {
@@ -545,7 +545,7 @@ describe('Integration | Repository | area-repository', function () {
   });
 
   describe('#findByFrameworkId', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const area0 = {
         id: 'recArea0',
         code: 'area0code',
@@ -582,7 +582,7 @@ describe('Integration | Repository | area-repository', function () {
       const learningContent = {
         areas: [area0, area1, area2],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
     });
 
     it('should return a list of areas from the proper framework', async function () {

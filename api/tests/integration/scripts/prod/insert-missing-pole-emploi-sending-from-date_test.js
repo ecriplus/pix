@@ -41,7 +41,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     context('validation', function () {

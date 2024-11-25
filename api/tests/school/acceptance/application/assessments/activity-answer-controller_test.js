@@ -20,7 +20,7 @@ describe('Acceptance | Controller | activity-answer-controller', function () {
         databaseBuilder.factory.buildActivity({ assessmentId, stepIndex: 0, level: Activity.levels.VALIDATION });
         await databaseBuilder.commit();
 
-        mockLearningContentForMission(missionId);
+        await mockLearningContentForMission(missionId);
 
         const payload = {
           data: {
@@ -66,7 +66,7 @@ describe('Acceptance | Controller | activity-answer-controller', function () {
           skills: [skill],
         };
 
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         const payload = {
           data: {
@@ -122,8 +122,8 @@ describe('Acceptance | Controller | activity-answer-controller', function () {
   });
 });
 
-function mockLearningContentForMission(missionId) {
-  mockLearningContent({
+async function mockLearningContentForMission(missionId) {
+  await mockLearningContent({
     skills: [
       learningContentBuilder.buildSkill({
         id: 'skill_id',

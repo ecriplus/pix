@@ -35,7 +35,7 @@ describe('Acceptance | Controller | tutorial-evaluations-controller', function (
     });
     await databaseBuilder.commit();
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
   });
 
   describe('PUT /api/users/tutorials/{tutorialId}/evaluate', function () {

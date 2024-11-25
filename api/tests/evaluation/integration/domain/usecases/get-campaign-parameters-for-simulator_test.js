@@ -1,17 +1,11 @@
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import {
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  learningContentBuilder,
-  mockLearningContent,
-} from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
 
 function buildLearningContent() {
   const learningContent = domainBuilder.buildCampaignLearningContent.withSimpleContent();
   const learningContentObjects = learningContentBuilder([learningContent]);
-  mockLearningContent(learningContentObjects);
+  databaseBuilder.factory.learningContent.build(learningContentObjects);
 }
 
 describe('Integration | Domain | UseCases | get-campaign-parameters-for-simulator', function () {
@@ -33,9 +27,9 @@ describe('Integration | Domain | UseCases | get-campaign-parameters-for-simulato
 
       databaseBuilder.factory.buildCampaign({ id: campaignId });
       databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'skillId' });
+      buildLearningContent();
 
       await databaseBuilder.commit();
-      buildLearningContent();
 
       // when
       const result = await evaluationUsecases.getCampaignParametersForSimulator({

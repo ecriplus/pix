@@ -29,7 +29,7 @@ describe('Acceptance | API | Stages', function () {
       },
     ];
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
   });
 
   describe('PATCH /api/admin/stages/{id}', function () {

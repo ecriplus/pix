@@ -1,7 +1,7 @@
 import { AnswerStatus } from '../../../../src/shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../src/shared/domain/models/index.js';
-import { databaseBuilder, domainBuilder, mockLearningContent } from '../../../test-helper.js';
+import { databaseBuilder, domainBuilder } from '../../../test-helper.js';
 import {
   buildArea,
   buildChallenge,
@@ -73,7 +73,7 @@ const createLearningContent = () => {
   area.competences = [competence];
   framework.areas = [area];
   const learningContent = buildLearningContent([framework]);
-  mockLearningContent(learningContent);
+  databaseBuilder.factory.learningContent.build(learningContent);
 
   return {
     challenges: [challenge1],

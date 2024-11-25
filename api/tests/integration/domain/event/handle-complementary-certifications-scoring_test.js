@@ -156,7 +156,7 @@ describe('Integration | Event | Handle Complementary Certifications Scoring', fu
       });
 
       describe('when the lower level is acquired', function () {
-        beforeEach(function () {
+        beforeEach(async function () {
           const learningContent = {
             challenges: [
               {
@@ -174,7 +174,7 @@ describe('Integration | Event | Handle Complementary Certifications Scoring', fu
             ],
           };
 
-          mockLearningContent(learningContent);
+          await mockLearningContent(learningContent);
         });
 
         it('should save a result', async function () {

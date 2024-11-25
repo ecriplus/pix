@@ -48,7 +48,7 @@ describe('Integration | UseCase | get-campaign', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       userId = databaseBuilder.factory.buildUser().id;

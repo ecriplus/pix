@@ -30,7 +30,7 @@ describe('Integration | UseCase | getMission', function () {
 
     const organizationId = databaseBuilder.factory.buildOrganization().id;
 
-    mockLearningContent({
+    await mockLearningContent({
       missions: [mission],
       areas: [area],
       competences: [{ id: 'competenceId', name_i18n: { fr: 'Name' }, index: '1.3' }],

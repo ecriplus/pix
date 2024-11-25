@@ -47,9 +47,9 @@ describe('Acceptance | API | Campaign Participations', function () {
   });
 
   describe('GET /api/campaigns/{campaignId}/profiles-collection-participations/{campaignParticipationId}', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningObjects = learningContentBuilder.fromAreas([]);
-      mockLearningContent(learningObjects);
+      await mockLearningContent(learningObjects);
     });
 
     it('should return the campaign profile as JSONAPI', async function () {
@@ -158,7 +158,7 @@ describe('Acceptance | API | Campaign Participations', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     it('should return the campaign participation analyses', async function () {
@@ -263,7 +263,7 @@ describe('Acceptance | API | Campaign Participations', function () {
   });
 
   describe('GET /api/campaigns/{campaignId}/assessment-participations/{campaignParticipationId}/results', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningContent = [
         {
           id: 'recArea1',
@@ -298,7 +298,7 @@ describe('Acceptance | API | Campaign Participations', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     it('should return the assessment participation results', async function () {
@@ -331,9 +331,9 @@ describe('Acceptance | API | Campaign Participations', function () {
   });
 
   describe('GET /api/campaigns/{campaignId}/organization-learners/{organizationLearnerId}/participations', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningObjects = learningContentBuilder.fromAreas([]);
-      mockLearningContent(learningObjects);
+      await mockLearningContent(learningObjects);
     });
 
     it('should return the campaign profile as JSONAPI', async function () {
@@ -610,7 +610,7 @@ describe('Acceptance | API | Campaign Participations', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
       await databaseBuilder.commit();
     });
 
@@ -810,7 +810,7 @@ describe('Acceptance | API | Campaign Participations', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
 
       return databaseBuilder.commit();
     });

@@ -40,7 +40,7 @@ describe('Integration | Repository | tutorial-repository', function () {
         },
       ];
       const learningContent = { tutorials: tutorialsList };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const tutorials = await tutorialRepository.findByRecordIdsForCurrentUser({
@@ -69,7 +69,7 @@ describe('Integration | Repository | tutorial-repository', function () {
         id: 'recTutorial0',
       };
       const learningContent = { tutorials: [tutorial] };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
       // when
       const tutorials = await tutorialRepository.findByRecordIdsForCurrentUser({ ids: ['recTutorial0'], userId });
 
@@ -96,7 +96,7 @@ describe('Integration | Repository | tutorial-repository', function () {
         id: 'recTutorial0',
       };
       const learningContent = { tutorials: [tutorial] };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
       // when
       const tutorials = await tutorialRepository.findByRecordIdsForCurrentUser({ ids: ['recTutorial0'], userId });
 
@@ -122,7 +122,7 @@ describe('Integration | Repository | tutorial-repository', function () {
         const learningContent = {
           tutorials: [{ id: tutorialId1 }, { id: tutorialId2 }],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         const firstUserSavedTutorial = databaseBuilder.factory.buildUserSavedTutorial({
           tutorialId: tutorialId1,
@@ -163,7 +163,7 @@ describe('Integration | Repository | tutorial-repository', function () {
           const learningContent = {
             tutorials: [{ id: tutorialId }],
           };
-          mockLearningContent(learningContent);
+          await mockLearningContent(learningContent);
 
           databaseBuilder.factory.buildUserSavedTutorial({ tutorialId, userId });
           databaseBuilder.factory.buildTutorialEvaluation({ tutorialId, userId });
@@ -209,7 +209,7 @@ describe('Integration | Repository | tutorial-repository', function () {
               },
             ],
           };
-          mockLearningContent(learningContent);
+          await mockLearningContent(learningContent);
 
           databaseBuilder.factory.buildUserSavedTutorial({
             tutorialId: tutorialId1,
@@ -246,7 +246,7 @@ describe('Integration | Repository | tutorial-repository', function () {
 
     context('when user has not saved tutorial', function () {
       it('should return an empty list', async function () {
-        mockLearningContent({ tutorials: [] });
+        await mockLearningContent({ tutorials: [] });
 
         const { models: tutorialsForUser } = await tutorialRepository.findPaginatedFilteredForCurrentUser({
           userId,
@@ -259,7 +259,7 @@ describe('Integration | Repository | tutorial-repository', function () {
 
     context('when user has saved a tutorial which is not available anymore', function () {
       it('should return an empty list', async function () {
-        mockLearningContent({ tutorials: [] });
+        await mockLearningContent({ tutorials: [] });
         databaseBuilder.factory.buildUserSavedTutorial({ tutorialId: 'recTutorial', userId });
         await databaseBuilder.commit();
 
@@ -277,7 +277,7 @@ describe('Integration | Repository | tutorial-repository', function () {
           tutorials: [{ id: 'tuto1' }, { id: 'tuto2' }, { id: 'tuto3' }, { id: 'tuto4' }],
         };
 
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         databaseBuilder.factory.buildUserSavedTutorial({
           tutorialId: 'tuto1',
@@ -330,7 +330,7 @@ describe('Integration | Repository | tutorial-repository', function () {
           domainBuilder.buildTutorial({ id: 'tutorialain' }),
           domainBuilder.buildTutorial({ id: 'tutorialadin' }),
         ];
-        mockLearningContent({ tutorials });
+        await mockLearningContent({ tutorials });
         tutorials.forEach((tutorial) =>
           databaseBuilder.factory.buildUserSavedTutorial({ userId, tutorialId: tutorial.id }),
         );
@@ -376,7 +376,7 @@ describe('Integration | Repository | tutorial-repository', function () {
           },
         ];
         const learningContent = { tutorials: tutorials };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         // when
         const tutorial = await tutorialRepository.get({ tutorialId: 'recTutorial0' });
@@ -422,7 +422,7 @@ describe('Integration | Repository | tutorial-repository', function () {
         },
       ];
       const learningContent = { tutorials: [...frenchTutorials, ...englishTutorials] };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const tutorials = await tutorialRepository.list({});
@@ -456,7 +456,7 @@ describe('Integration | Repository | tutorial-repository', function () {
         locale: 'en-us',
       };
       const learningContent = { tutorials: [frenchTutorial, englishTutorial] };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const tutorials = await tutorialRepository.list({ locale });
@@ -479,7 +479,7 @@ describe('Integration | Repository | tutorial-repository', function () {
         id: 'recTutorial0',
       };
       const learningContent = { tutorials: [tutorial] };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const tutorials = await tutorialRepository.list({ locale });
@@ -500,7 +500,7 @@ describe('Integration | Repository | tutorial-repository', function () {
     describe('when there are no invalidated and direct KE', function () {
       it('should return an empty page', async function () {
         // given
-        mockLearningContent({
+        await mockLearningContent({
           tutorials: [
             {
               id: 'tuto1',
@@ -538,7 +538,7 @@ describe('Integration | Repository | tutorial-repository', function () {
         });
         await databaseBuilder.commit();
 
-        mockLearningContent({
+        await mockLearningContent({
           tutorials: [
             {
               id: 'tuto1',
@@ -581,7 +581,7 @@ describe('Integration | Repository | tutorial-repository', function () {
         });
         await databaseBuilder.commit();
 
-        mockLearningContent({
+        await mockLearningContent({
           tutorials: [
             {
               id: 'tuto1',
@@ -646,7 +646,7 @@ describe('Integration | Repository | tutorial-repository', function () {
         });
         await databaseBuilder.commit();
 
-        mockLearningContent({
+        await mockLearningContent({
           tutorials: [
             {
               id: 'tuto1',
@@ -693,7 +693,7 @@ describe('Integration | Repository | tutorial-repository', function () {
         });
         await databaseBuilder.commit();
 
-        mockLearningContent({
+        await mockLearningContent({
           tutorials: [
             {
               id: 'tuto4',
@@ -732,7 +732,7 @@ describe('Integration | Repository | tutorial-repository', function () {
         });
         await databaseBuilder.commit();
 
-        mockLearningContent({
+        await mockLearningContent({
           tutorials: [
             {
               id: 'tuto1',
@@ -791,7 +791,7 @@ describe('Integration | Repository | tutorial-repository', function () {
           }).id;
           await databaseBuilder.commit();
 
-          mockLearningContent({
+          await mockLearningContent({
             tutorials: [
               {
                 id: 'tuto4',
@@ -838,7 +838,7 @@ describe('Integration | Repository | tutorial-repository', function () {
           });
           await databaseBuilder.commit();
 
-          mockLearningContent({
+          await mockLearningContent({
             tutorials: [
               {
                 id: 'tuto4',
@@ -907,7 +907,7 @@ describe('Integration | Repository | tutorial-repository', function () {
           });
           await databaseBuilder.commit();
 
-          mockLearningContent({
+          await mockLearningContent({
             tutorials: [
               {
                 id: 'tuto1',
@@ -1009,7 +1009,7 @@ describe('Integration | Repository | tutorial-repository', function () {
           });
           await databaseBuilder.commit();
 
-          mockLearningContent({
+          await mockLearningContent({
             tutorials: [
               {
                 id: 'tuto1',

@@ -30,7 +30,7 @@ describe('Integration | Application | send-started-participation-results-to-pole
     campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({ campaignId, userId }).id;
     databaseBuilder.factory.buildAssessment({ campaignParticipationId, userId });
     const learningContentObjects = learningContentBuilder.fromAreas([]);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
     return databaseBuilder.commit();
   });
 

@@ -43,7 +43,7 @@ describe('Acceptance | API | Autonomous Course', function () {
       },
     ];
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
   });
 
   describe('POST /api/autonomous-course', function () {

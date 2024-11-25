@@ -52,7 +52,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         ];
 
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
 
         const sessionId = databaseBuilder.factory.buildSession().id;
         const userId = databaseBuilder.factory.buildUser().id;

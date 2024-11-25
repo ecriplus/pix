@@ -98,7 +98,7 @@ describe('Acceptance | Controller | users-controller-get-user-profile-for-admin'
         const superAdmin = await insertUserWithRoleSuperAdmin();
         options.headers.authorization = generateValidRequestAuthorizationHeader(superAdmin.id);
 
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         knowledgeElement = databaseBuilder.factory.buildKnowledgeElement({
           userId,

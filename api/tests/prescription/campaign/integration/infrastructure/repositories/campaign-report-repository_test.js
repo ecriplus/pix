@@ -22,7 +22,7 @@ describe('Integration | Repository | Campaign-Report', function () {
           ownerId: creator.id,
           multipleSendings: false,
         });
-        mockLearningContent({ skills: [] });
+        await mockLearningContent({ skills: [] });
 
         await databaseBuilder.commit();
         const result = await campaignReportRepository.get(campaign.id);
@@ -61,7 +61,7 @@ describe('Integration | Repository | Campaign-Report', function () {
           },
         });
 
-        mockLearningContent({ skills: [] });
+        await mockLearningContent({ skills: [] });
 
         await databaseBuilder.commit();
         const result = await campaignReportRepository.get(campaign.id);
@@ -97,7 +97,7 @@ describe('Integration | Repository | Campaign-Report', function () {
           ],
         };
 
-        mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
         return databaseBuilder.commit();
       });
 
@@ -190,7 +190,7 @@ describe('Integration | Repository | Campaign-Report', function () {
 
         const learningContent = { skills: [{ id: 'skill1' }] };
 
-        mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
         return databaseBuilder.commit();
       });
 

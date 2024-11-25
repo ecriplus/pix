@@ -30,7 +30,7 @@ describe('Integration | Domain | UseCases | send-completed-participation-results
     campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({ campaignId, userId }).id;
     databaseBuilder.factory.buildAssessment({ campaignParticipationId, userId });
     const learningContentObjects = learningContentBuilder.fromAreas([]);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
     return databaseBuilder.commit();
   });
 

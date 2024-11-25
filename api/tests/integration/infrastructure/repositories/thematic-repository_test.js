@@ -12,7 +12,7 @@ describe('Integration | Repository | thematic-repository', function () {
         thematics: [{ ...thematic, name_i18n: { fr: 'frName' } }],
       };
 
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const actualThematics = await thematicRepository.list();
@@ -30,7 +30,7 @@ describe('Integration | Repository | thematic-repository', function () {
         thematics: [{ ...thematic, name_i18n: { fr: 'frName', en: 'enName' } }],
       };
 
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       // when
       const actualThematics = await thematicRepository.list({ locale });
@@ -85,8 +85,8 @@ describe('Integration | Repository | thematic-repository', function () {
       thematics,
     };
 
-    beforeEach(function () {
-      mockLearningContent(learningContent);
+    beforeEach(async function () {
+      await mockLearningContent(learningContent);
     });
 
     it('should return thematics of a competence', async function () {
@@ -142,14 +142,14 @@ describe('Integration | Repository | thematic-repository', function () {
   });
 
   describe('#findByRecordIds', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningContentThematic0 = {
         id: 'recThematic0',
         name_i18n: {
           fr: 'nameThemaFR0',
           en: 'nameThemaEN0',
         },
-        index: 'indexThema0',
+        index: 0,
         description: 'tubeDescription0',
         competenceId: 'recComp0',
       };
@@ -159,7 +159,7 @@ describe('Integration | Repository | thematic-repository', function () {
           fr: 'nameThemaFR1',
           en: 'nameThemaEN1',
         },
-        index: 'indexThema1',
+        index: 1,
         description: 'tubeDescription1',
         competenceId: 'recComp1',
       };
@@ -169,11 +169,11 @@ describe('Integration | Repository | thematic-repository', function () {
           fr: 'nameThemaFR2',
           en: 'nameThemaEN2',
         },
-        index: 'indexThema2',
+        index: 2,
         description: 'tubeDescription2',
         competenceId: 'recComp2',
       };
-      mockLearningContent({
+      await mockLearningContent({
         thematics: [learningContentThematic0, learningContentThematic1, learningContentThematic2],
       });
     });
@@ -183,14 +183,14 @@ describe('Integration | Repository | thematic-repository', function () {
       const thematic1 = new Thematic({
         id: 'recThematic1',
         name: 'nameThemaFR1',
-        index: 'indexThema1',
+        index: 1,
         competenceId: 'recComp1',
         tubeIds: [],
       });
       const thematic2 = new Thematic({
         id: 'recThematic2',
         name: 'nameThemaFR2',
-        index: 'indexThema2',
+        index: 2,
         competenceId: 'recComp2',
         tubeIds: [],
       });
@@ -207,14 +207,14 @@ describe('Integration | Repository | thematic-repository', function () {
       const thematic1 = new Thematic({
         id: 'recThematic1',
         name: 'nameThemaEN1',
-        index: 'indexThema1',
+        index: 1,
         competenceId: 'recComp1',
         tubeIds: [],
       });
       const thematic2 = new Thematic({
         id: 'recThematic2',
         name: 'nameThemaEN2',
-        index: 'indexThema2',
+        index: 2,
         competenceId: 'recComp2',
         tubeIds: [],
       });

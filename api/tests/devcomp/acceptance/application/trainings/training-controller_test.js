@@ -67,7 +67,7 @@ describe('Acceptance | Controller | training-controller', function () {
       ];
 
       const learningContentObjects = learningContentBuilder(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     it('should get a training with the specific id', async function () {
@@ -374,7 +374,7 @@ describe('Acceptance | Controller | training-controller', function () {
       ];
 
       const learningContentObjects = learningContentBuilder(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     it('should update training trigger', async function () {

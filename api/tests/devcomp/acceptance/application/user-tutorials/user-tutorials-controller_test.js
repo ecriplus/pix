@@ -48,7 +48,7 @@ describe('Acceptance | Controller | user-tutorial-controller', function () {
       ],
     };
 
-    beforeEach(function () {
+    beforeEach(async function () {
       options = {
         method: 'PUT',
         url: '/api/users/tutorials/tutorialId',
@@ -57,7 +57,7 @@ describe('Acceptance | Controller | user-tutorial-controller', function () {
         },
       };
 
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
     });
 
     describe('nominal case', function () {
@@ -278,7 +278,7 @@ describe('Acceptance | Controller | user-tutorial-controller', function () {
     describe('nominal case', function () {
       it('should respond with a 200 and return tutorials saved for user', async function () {
         // given
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
 
         databaseBuilder.factory.buildUserSavedTutorial({
           id: 101,
@@ -333,7 +333,7 @@ describe('Acceptance | Controller | user-tutorial-controller', function () {
 
       it('should respond with a 200 and return tutorials recommended for user', async function () {
         // given
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
 
         databaseBuilder.factory.buildKnowledgeElement({
           userId,
@@ -468,7 +468,7 @@ describe('Acceptance | Controller | user-tutorial-controller', function () {
       ],
     };
 
-    beforeEach(function () {
+    beforeEach(async function () {
       options = {
         method: 'DELETE',
         url: '/api/users/tutorials/tutorialId',
@@ -477,7 +477,7 @@ describe('Acceptance | Controller | user-tutorial-controller', function () {
         },
       };
 
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
     });
 
     describe('nominal case', function () {

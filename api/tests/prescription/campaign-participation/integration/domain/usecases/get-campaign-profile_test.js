@@ -6,8 +6,8 @@ const { FRENCH_SPOKEN } = LOCALE;
 describe('Integration | UseCase | get-campaign-profile', function () {
   const locale = FRENCH_SPOKEN;
 
-  beforeEach(function () {
-    mockLearningContent({ competences: [], areas: [], skills: [] });
+  beforeEach(async function () {
+    await mockLearningContent({ competences: [], areas: [], skills: [] });
   });
 
   it('should return the campaign profile', async function () {

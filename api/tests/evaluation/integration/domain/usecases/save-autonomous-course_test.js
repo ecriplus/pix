@@ -26,7 +26,7 @@ describe('Integration | Usecases | Save autonomous course', function () {
 
     const learningContent = domainBuilder.buildCampaignLearningContent.withSimpleContent();
     const learningContentObjects = learningContentBuilder([learningContent]);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
   });
 
   context('when target-profile does not exist', function () {

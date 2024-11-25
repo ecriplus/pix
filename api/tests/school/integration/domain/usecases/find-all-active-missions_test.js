@@ -8,7 +8,7 @@ describe('Integration | UseCases | find-all-active-missions', function () {
   it('returns empty array without missions from LCMS', async function () {
     const expectedMissions = [];
 
-    mockLearningContent({
+    await mockLearningContent({
       missions: [],
     });
 
@@ -75,7 +75,7 @@ describe('Integration | UseCases | find-all-active-missions', function () {
         },
       };
 
-      mockLearningContent({
+      await mockLearningContent({
         missions: [validatedMission, experimentalMission, inactiveMission],
         areas: [area],
         competences: [competence],
@@ -159,7 +159,7 @@ describe('Integration | UseCases | find-all-active-missions', function () {
         },
       };
 
-      mockLearningContent({
+      await mockLearningContent({
         missions: [validatedMission, experimentalMission, inactiveMission],
         areas: [area],
         competences: [competence],

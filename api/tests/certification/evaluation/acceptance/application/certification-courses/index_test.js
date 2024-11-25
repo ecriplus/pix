@@ -18,7 +18,7 @@ describe('Acceptance | Route | Certification Courses', function () {
   describe('POST /api/certification-courses', function () {
     context('when the certification course does not exist', function () {
       let learningContent;
-      beforeEach(function () {
+      beforeEach(async function () {
         learningContent = [
           {
             id: 'recArea0',
@@ -167,7 +167,7 @@ describe('Acceptance | Route | Certification Courses', function () {
                 id: 'recCompetence5',
                 tubes: [
                   {
-                    id: 'recTube0_0',
+                    id: 'recTube5_0',
                     skills: [
                       {
                         id: 'recSkill5_0',
@@ -192,7 +192,7 @@ describe('Acceptance | Route | Certification Courses', function () {
                 id: 'recCompetence6',
                 tubes: [
                   {
-                    id: 'recTube0_0',
+                    id: 'recTube6_0',
                     skills: [
                       {
                         id: 'recSkill6_0',
@@ -214,7 +214,7 @@ describe('Acceptance | Route | Certification Courses', function () {
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
       });
       it('should create a certification course in database', async function () {
         // given

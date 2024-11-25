@@ -51,7 +51,7 @@ describe('Integration | UseCase | handle activity answer', function () {
         });
         await databaseBuilder.commit();
 
-        mockLearningContentForMission(missionId);
+        await mockLearningContentForMission(missionId);
 
         await handleActivityAnswer({
           activityAnswer,
@@ -92,7 +92,7 @@ describe('Integration | UseCase | handle activity answer', function () {
         });
         await databaseBuilder.commit();
 
-        mockLearningContentForMission(missionId);
+        await mockLearningContentForMission(missionId);
 
         await handleActivityAnswer({
           activityAnswer,
@@ -134,7 +134,7 @@ describe('Integration | UseCase | handle activity answer', function () {
 
         await databaseBuilder.commit();
 
-        mockLearningContentForMission(missionId);
+        await mockLearningContentForMission(missionId);
 
         await handleActivityAnswer({
           activityAnswer,
@@ -180,7 +180,7 @@ describe('Integration | UseCase | handle activity answer', function () {
 
           await databaseBuilder.commit();
 
-          mockLearningContentForMission(missionId);
+          await mockLearningContentForMission(missionId);
 
           await handleActivityAnswer({
             activityAnswer,
@@ -221,7 +221,7 @@ describe('Integration | UseCase | handle activity answer', function () {
           });
           await databaseBuilder.commit();
 
-          mockLearningContentForMission(missionId);
+          await mockLearningContentForMission(missionId);
 
           await handleActivityAnswer({
             activityAnswer,
@@ -265,7 +265,7 @@ describe('Integration | UseCase | handle activity answer', function () {
 
         await databaseBuilder.commit();
 
-        mockLearningContentForMission(missionId);
+        await mockLearningContentForMission(missionId);
 
         await handleActivityAnswer({
           activityAnswer,
@@ -306,7 +306,7 @@ describe('Integration | UseCase | handle activity answer', function () {
         });
         await databaseBuilder.commit();
 
-        mockLearningContentForMission(missionId);
+        await mockLearningContentForMission(missionId);
 
         await handleActivityAnswer({
           activityAnswer,
@@ -355,7 +355,7 @@ describe('Integration | UseCase | handle activity answer', function () {
 
         await databaseBuilder.commit();
 
-        mockLearningContentForMission(missionId);
+        await mockLearningContentForMission(missionId);
 
         await handleActivityAnswer({
           activityAnswer,
@@ -397,7 +397,7 @@ describe('Integration | UseCase | handle activity answer', function () {
     });
 
     await databaseBuilder.commit();
-    mockLearningContent({
+    await mockLearningContent({
       skills: [
         learningContentBuilder.buildSkill({
           id: 'skill_id',
@@ -436,8 +436,8 @@ async function expectStatesAndLevel({ assessmentId, activityLevel, activityStatu
   expect(currentAssessment.state).to.equal(assessmentState);
 }
 
-function mockLearningContentForMission(missionId) {
-  mockLearningContent({
+async function mockLearningContentForMission(missionId) {
+  await mockLearningContent({
     skills: [
       learningContentBuilder.buildSkill({
         id: 'skill_id',

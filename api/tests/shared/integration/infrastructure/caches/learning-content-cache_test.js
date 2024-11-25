@@ -8,7 +8,7 @@ describe('Integration | Infrastructure | Caches | LearningContentCache', functio
     it('should get learning content from underlying cache (redis not used in test)', async function () {
       // given
       const learningContent = { models: [{ id: 'recId' }] };
-      const lcmsApiCall = mockLearningContent(learningContent);
+      const lcmsApiCall = await mockLearningContent(learningContent);
 
       // when
       const result = await learningContentCache.get();
@@ -23,7 +23,7 @@ describe('Integration | Infrastructure | Caches | LearningContentCache', functio
     it('should set learning content in underlying cache', async function () {
       // given
       const learningContent = { models: [{ id: 'recId' }] };
-      const lcmsApiCall = mockLearningContent(learningContent);
+      const lcmsApiCall = await mockLearningContent(learningContent);
       const underlyingCacheSpy = sinon.spy(learningContentCache._underlyingCache, 'set');
 
       // when

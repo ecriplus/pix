@@ -114,7 +114,7 @@ describe('Integration | Repository | training-repository', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
     });
 
     it('should throw an error when training does not exist', async function () {
@@ -396,7 +396,7 @@ describe('Integration | Repository | training-repository', function () {
           },
         ],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
     });
 
     it('should find trainings by campaignParticipationId and locale', async function () {

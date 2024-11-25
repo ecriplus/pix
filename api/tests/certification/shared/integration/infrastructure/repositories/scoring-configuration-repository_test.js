@@ -65,7 +65,7 @@ describe('Integration | Repository | scoring-configuration-repository', function
       const framework = buildFramework({ id: frameworkId, name: 'someFramework', areas });
       const learningContent = buildLearningContent([framework]);
 
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       databaseBuilder.factory.buildCompetenceScoringConfiguration({
         configuration: competenceScoringConfiguration,

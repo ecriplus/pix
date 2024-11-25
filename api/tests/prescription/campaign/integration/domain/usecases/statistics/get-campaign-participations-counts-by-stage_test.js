@@ -45,7 +45,7 @@ describe('Integration | UseCase | get-campaign-participations-counts-by-stage', 
         ],
       },
     ]);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
 
     const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
     organizationId = databaseBuilder.factory.buildOrganization().id;

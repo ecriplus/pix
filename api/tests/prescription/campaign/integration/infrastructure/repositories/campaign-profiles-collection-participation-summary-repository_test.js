@@ -4,7 +4,7 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
-import { databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 const { STARTED, TO_SHARE, SHARED } = CampaignParticipationStatuses;
 
@@ -1142,7 +1142,7 @@ const buildLearningContentData = () => {
     skills,
   };
 
-  mockLearningContent(learningContent);
+  databaseBuilder.factory.learningContent.build(learningContent);
 
   return { competences, skills };
 };

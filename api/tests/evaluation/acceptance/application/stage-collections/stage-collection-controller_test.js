@@ -15,10 +15,10 @@ describe('Acceptance | Controller | stage-collection', function () {
   });
 
   describe('PATCH api/admin/stage-collections/{id}', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningContent = [{ id: 'recArea0', competences: [] }];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     context('when the target-profile is not linked to a campaign', function () {

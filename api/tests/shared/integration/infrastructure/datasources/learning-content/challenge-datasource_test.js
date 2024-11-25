@@ -39,7 +39,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
       delta: -3.56,
     };
     challenge_competence1_en = {
-      id: 'challenge-competence1',
+      id: 'challenge-competence1-en',
       competenceId: competence1.id,
       skillId: web1.id,
       status: 'validé',
@@ -130,8 +130,8 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
   });
 
   describe('#listBylocale', function () {
-    beforeEach(function () {
-      mockLearningContent({
+    beforeEach(async function () {
+      await mockLearningContent({
         challenges: [challenge_web1, challenge_web1_notValidated, challenge_web2_en, challenge_web3],
       });
     });
@@ -153,8 +153,8 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
   });
 
   describe('#getManyByLocale', function () {
-    beforeEach(function () {
-      mockLearningContent({
+    beforeEach(async function () {
+      await mockLearningContent({
         challenges: [challenge_web1, challenge_web1_notValidated, challenge_web2_en, challenge_web3],
       });
     });
@@ -177,8 +177,8 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
   });
 
   describe('#findOperativeBySkillIds', function () {
-    beforeEach(function () {
-      mockLearningContent({
+    beforeEach(async function () {
+      await mockLearningContent({
         challenges: [challenge_web1, challenge_web1_notValidated, challenge_web2_en, challenge_web3],
       });
     });
@@ -201,7 +201,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
 
     beforeEach(async function () {
       // given
-      mockLearningContent({
+      await mockLearningContent({
         challenges: [
           challenge_competence1,
           challenge_competence1_en,
@@ -225,7 +225,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
     it('should retrieve the operative Challenges of given locale only', async function () {
       // given
       const locale = 'fr-fr';
-      mockLearningContent({
+      await mockLearningContent({
         challenges: [challenge_web1, challenge_web1_notValidated, challenge_web2_en, challenge_web3_archived],
       });
 
@@ -238,8 +238,8 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
   });
 
   describe('#findValidated', function () {
-    beforeEach(function () {
-      mockLearningContent({
+    beforeEach(async function () {
+      await mockLearningContent({
         challenges: [challenge_web1, challenge_web1_notValidated, challenge_web2_en, challenge_web3_archived],
       });
     });
@@ -254,8 +254,8 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
   });
 
   describe('#findFlashCompatible', function () {
-    beforeEach(function () {
-      mockLearningContent({
+    beforeEach(async function () {
+      await mockLearningContent({
         challenges: [
           challenge_competence1,
           challenge_competence1_notValidated,
@@ -305,8 +305,8 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
   });
 
   describe('#findFlashCompatibleWithoutLocale', function () {
-    beforeEach(function () {
-      mockLearningContent({
+    beforeEach(async function () {
+      await mockLearningContent({
         challenges: [
           challenge_competence1,
           challenge_competence1_notValidated,
@@ -357,8 +357,8 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
   });
 
   describe('#findActiveFlashCompatible', function () {
-    beforeEach(function () {
-      mockLearningContent({
+    beforeEach(async function () {
+      await mockLearningContent({
         challenges: [
           challenge_competence1,
           challenge_competence1_noSkills,
@@ -389,8 +389,8 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
   });
 
   describe('#findValidatedBySkillId', function () {
-    beforeEach(function () {
-      mockLearningContent({
+    beforeEach(async function () {
+      await mockLearningContent({
         challenges: [challenge_web1, challenge_web1_notValidated, challenge_web1_archived, challenge_competence2],
       });
     });
@@ -414,21 +414,21 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
 
     beforeEach(function () {
       validated_challenge_pix1d = {
-        id: 'challenge-competence1',
+        id: 'challenge-pix1d1',
         competenceId: competence1.id,
         locales: ['fr'],
         skillId,
         status: 'validé',
       };
       proposed_challenge_pix1d = {
-        id: 'challenge-competence2',
+        id: 'challenge-pix1d2',
         competenceId: competence1.id,
         locales: ['fr'],
         status: 'proposé',
         skillId,
       };
       obsolete_challenge_pix1d = {
-        id: 'challenge-competence3',
+        id: 'challenge-pix1d3',
         competenceId: competence1.id,
         locales: ['fr'],
         status: 'périmé',
@@ -439,7 +439,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
     context('when there are several challenges for the skillId', function () {
       it('should return an array of validated or proposed challenges', async function () {
         // when
-        mockLearningContent({
+        await mockLearningContent({
           challenges: [
             challenge_web1,
             challenge_competence2,
@@ -458,7 +458,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
     context('when there is only one challenge for the skillId', function () {
       it('should return a challenge from learning content', async function () {
         // when
-        mockLearningContent({
+        await mockLearningContent({
           challenges: [challenge_web1, challenge_competence2, validated_challenge_pix1d],
         });
         const result = await challengeDatasource.getBySkillId(skillId, locale);
@@ -470,7 +470,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | Challen
 
     it('should return an error if there is no challenge for the given skillId', async function () {
       // when
-      mockLearningContent({
+      await mockLearningContent({
         challenges: [challenge_web1, challenge_competence2, validated_challenge_pix1d, proposed_challenge_pix1d],
       });
       const error = await catchErr(challengeDatasource.getBySkillId, locale)('falseId');

@@ -97,7 +97,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     it('should return the campaign by id', async function () {
@@ -165,7 +165,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     it('should return csv file with statusCode 200', async function () {
@@ -251,7 +251,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     it('should return csv file with statusCode 200', async function () {
