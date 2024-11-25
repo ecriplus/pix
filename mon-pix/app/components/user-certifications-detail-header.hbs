@@ -66,11 +66,10 @@
                   class="icon-button"
                   aria-describedby="verification-code-copy-button-tooltip"
                 >
-                  <FaIcon
+                  <PixIcon
                     class="verification-code__copy-button"
-                    @icon="copy"
-                    @prefix="far"
-                    alt={{t "pages.certificate.verification-code.alt"}}
+                    @name="copy"
+                    @title={{t "pages.certificate.verification-code.alt"}}
                   />
                 </CopyButton>
               </:triggerElement>

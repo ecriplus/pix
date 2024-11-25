@@ -12,16 +12,20 @@
 
             {{#if (gt @certificationCandidateSubscription.eligibleSubscriptions.length 0)}}
               <span class="certification-starter-subscriptions-container-items__eligible-item">
-                <FaIcon
-                  @icon="circle-check"
+                <PixIcon
+                  @name="checkCircle"
+                  @plainIcon={{true}}
+                  @ariaHidden={{true}}
                   class="certification-starter-subscriptions-container-items__eligible-icon"
                 />
                 {{this.complementarySubscriptionLabel}}
               </span>
             {{else}}
               <span class="certification-starter-subscriptions-container-items__non-eligible-item">
-                <FaIcon
-                  @icon="circle-check"
+                <PixIcon
+                  @name="checkCircle"
+                  @plainIcon={{true}}
+                  @ariaHidden={{true}}
                   class="certification-starter-subscriptions-container-items__non-eligible-icon"
                 />
                 {{@certificationCandidateSubscription.nonEligibleSubscription.label}}
@@ -31,7 +35,12 @@
         </div>
         {{#if @certificationCandidateSubscription.nonEligibleSubscription}}
           <div class="certification-starter-subscriptions-container__non-eligible">
-            <FaIcon @icon="circle-exclamation" class="certification-starter-subscriptions-container__info-icon" />
+            <PixIcon
+              @name="error"
+              @plainIcon={{true}}
+              @ariaHidden={{true}}
+              class="certification-starter-subscriptions-container__info-icon"
+            />
             <span>
               {{t
                 "pages.certification-start.non-eligible-subscription"

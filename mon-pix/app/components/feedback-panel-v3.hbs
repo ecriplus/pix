@@ -11,7 +11,8 @@
       aria-expanded={{this.isAriaExpanded}}
       type="button"
     >
-      <FaIcon @icon="flag" />{{t "pages.challenge.feedback-panel-v3.actions.open-close"}}
+      <PixIcon @name="flag" @plainIcon={{true}} @ariaHidden={{true}} />
+      {{t "pages.challenge.feedback-panel-v3.actions.open-close"}}
     </button>
 
     {{#if this.shouldBeExpanded}}
