@@ -2135,6 +2135,12 @@
           "delete": "Delete my account"
         },
         "menu-link-title": "Delete my account",
+        "modal": {
+          "title": "You’re about to delete your account",
+          "question": "Are you sure you want to delete your account?",
+          "warning-1": "Please note that the account cannot be recovered after deletion.",
+          "warning-2": "As soon as you confirm, you will be automatically disconnected and your request will be taken into account immediately."
+        },
         "more-information": "For more information, ",
         "more-information-contact-support": "please contact support.",
         "title": "Delete my account permanently",
