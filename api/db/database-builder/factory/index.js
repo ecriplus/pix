@@ -5,6 +5,7 @@ import { importNamedExportsFromDirectory } from '../../../src/shared/infrastruct
 import * as buildDataProtectionOfficer from './build-data-protection-officer.js';
 import * as campaignParticipationOverviewFactory from './campaign-participation-overview-factory.js';
 import * as knowledgeElementSnapshotFactory from './knowledge-elements-snapshot-factory.js';
+import * as learningContent from './learning-content/index.js';
 import * as poleEmploiSendingFactory from './pole-emploi-sending-factory.js';
 
 const path = dirname(fileURLToPath(import.meta.url));
@@ -47,4 +48,5 @@ export const factory = {
   knowledgeElementSnapshotFactory,
   poleEmploiSendingFactory,
   buildDataProtectionOfficer,
+  learningContent,
 };

@@ -146,7 +146,8 @@ describe('Unit | Tooling | DatabaseBuilder | database-builder', function () {
           rows: [{ table_name: 'table2' }, { table_name: 'knex_migrations' }, { table_name: 'table1' }],
         });
         knex.raw.onCall(1).resolves({ rows: [] });
-        knex.raw.onCall(2).resolves();
+        knex.raw.onCall(2).resolves({ rows: [] });
+        knex.raw.onCall(3).resolves();
         databaseBuilder.knex = knex;
         databaseBuilder.isFirstCommit = true;
 
