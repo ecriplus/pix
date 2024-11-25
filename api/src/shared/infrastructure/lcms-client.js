@@ -44,6 +44,6 @@ const createRelease = async function () {
   return response.data.content;
 };
 
-const lcms = { getLatestRelease, createRelease };
+const lcmsClient = { getLatestRelease, createRelease };
 
-export { lcms };
+export { lcmsClient };

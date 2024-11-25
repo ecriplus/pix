@@ -1,5 +1,5 @@
 import { config } from '../../config.js';
-import { lcms } from '../lcms.js';
+import { lcmsClient } from '../lcms-client.js';
 import { DistributedCache } from './DistributedCache.js';
 import { InMemoryCache } from './InMemoryCache.js';
 import { LayeredCache } from './LayeredCache.js';
@@ -18,7 +18,7 @@ export class LearningContentCache {
     } else {
       this._underlyingCache = new InMemoryCache();
     }
-    this.generator = () => lcms.getLatestRelease();
+    this.generator = () => lcmsClient.getLatestRelease();
   }
 
   get() {
@@ -31,7 +31,7 @@ export class LearningContentCache {
   }
 
   async update() {
-    const newLearningContent = await lcms.createRelease();
+    const newLearningContent = await lcmsClient.createRelease();
     return this._underlyingCache.set(LEARNING_CONTENT_CACHE_KEY, newLearningContent);
   }
 

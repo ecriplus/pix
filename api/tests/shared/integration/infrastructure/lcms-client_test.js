@@ -1,7 +1,7 @@
-import { lcms } from '../../../../src/shared/infrastructure/lcms.js';
+import { lcmsClient } from '../../../../src/shared/infrastructure/lcms-client.js';
 import { catchErr, expect, mockLearningContent, nock } from '../../../test-helper.js';
 
-describe('Integration | Infrastructure | LCMS', function () {
+describe('Integration | Infrastructure | LCMS Client', function () {
   describe('#getLatestRelease', function () {
     it('calls LCMS API to get learning content latest release', async function () {
       // given
@@ -9,7 +9,7 @@ describe('Integration | Infrastructure | LCMS', function () {
       const lcmsCall = mockLearningContent(learningContent);
 
       // when
-      const response = await lcms.getLatestRelease();
+      const response = await lcmsClient.getLatestRelease();
 
       // then
       expect(response).to.deep.equal(learningContent);
@@ -24,7 +24,7 @@ describe('Integration | Infrastructure | LCMS', function () {
         .reply(500);
 
       // when
-      const error = await catchErr(lcms.getLatestRelease)();
+      const error = await catchErr(lcmsClient.getLatestRelease)();
 
       // then
       expect(error).to.be.instanceOf(Error);
@@ -41,7 +41,7 @@ describe('Integration | Infrastructure | LCMS', function () {
         .reply(201);
 
       // when
-      await lcms.createRelease();
+      await lcmsClient.createRelease();
 
       // then
       expect(lcmsCall.isDone()).to.equal(true);
@@ -56,7 +56,7 @@ describe('Integration | Infrastructure | LCMS', function () {
         .reply(201, { content: learningContent });
 
       // when
-      const response = await lcms.createRelease();
+      const response = await lcmsClient.createRelease();
 
       // then
       expect(response).to.deep.equal(learningContent);
@@ -70,7 +70,7 @@ describe('Integration | Infrastructure | LCMS', function () {
         .reply(403);
 
       // when
-      const error = await catchErr(lcms.createRelease)();
+      const error = await catchErr(lcmsClient.createRelease)();
 
       // then
       expect(error.message).to.deep.equal('An error occurred while creating a release on https://lcms-test.pix.fr/api');
