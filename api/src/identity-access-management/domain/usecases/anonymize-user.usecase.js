@@ -65,6 +65,7 @@ const anonymizeUser = async function ({
       new UserAnonymizedEventLoggingJob({
         userId,
         updatedByUserId: anonymizedBy.userId,
+        client: 'PIX_ADMIN',
         role: anonymizedBy.role,
       }),
     );
