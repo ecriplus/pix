@@ -3,6 +3,7 @@ import { service } from '@ember/service';
 
 export default class ApplicationRoute extends Route {
   @service intl;
+  @service metrics;
 
   async beforeModel() {
     /*
@@ -16,5 +17,6 @@ export default class ApplicationRoute extends Route {
     Pour régler ce problème, il faut définir une locale ayant un fichier dans le dossier de traduction.
      */
     this.intl.setLocale('fr');
+    this.metrics.initialize();
   }
 }
