@@ -35,10 +35,8 @@ const _DatasourcePrototype = {
   },
 };
 
-const extend = function (props) {
+export function extend(props) {
   const result = Object.assign({}, _DatasourcePrototype, props);
   _.bindAll(result, _.functions(result));
   return result;
-};
-
-export { extend };
+}
