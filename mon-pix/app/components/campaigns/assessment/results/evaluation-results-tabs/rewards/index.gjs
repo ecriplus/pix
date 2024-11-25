@@ -1,3 +1,4 @@
+import { inject as service } from '@ember/service';
 import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
@@ -5,6 +6,19 @@ import { t } from 'ember-intl';
 import RewardsBadge from './badge';
 
 export default class Rewards extends Component {
+  @service metrics;
+
+  constructor() {
+    super(...arguments);
+
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Fin de parcours',
+      'pix-event-action': 'Affichage onglet',
+      'pix-event-name': "Affichage de l'onglet Récompenses",
+    });
+  }
+
   getFilteredAndSortedBadges(acquisitionStatus) {
     return this.args.badges
       .toArray()

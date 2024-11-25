@@ -11,9 +11,21 @@ import TrainingCard from '../../../../training/card';
 export default class EvaluationResultsTabsTrainings extends Component {
   @service currentUser;
   @service store;
+  @service metrics;
 
   @tracked isShareResultsLoading = false;
   @tracked isShareResultsError = false;
+
+  constructor() {
+    super(...arguments);
+
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Fin de parcours',
+      'pix-event-action': 'Affichage onglet',
+      'pix-event-name': "Affichage de l'onglet Formations",
+    });
+  }
 
   @action
   async shareResults() {
@@ -33,6 +45,13 @@ export default class EvaluationResultsTabsTrainings extends Component {
         },
         { reload: true },
       );
+
+      this.metrics.add({
+        event: 'custom-event',
+        'pix-event-category': 'Fin de parcours',
+        'pix-event-action': 'Envoi des résultats',
+        'pix-event-name': "Envoi des résultats depuis l'onglet Formations",
+      });
     } catch {
       this.isShareResultsError = true;
     } finally {

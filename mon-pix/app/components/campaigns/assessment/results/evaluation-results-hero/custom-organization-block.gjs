@@ -1,10 +1,14 @@
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
 import MarkdownToHtml from '../../../../markdown-to-html';
 
 export default class EvaluationResultsCustomOrganizationBlock extends Component {
+  @service metrics;
+
   get customButtonUrl() {
     if (this.args.campaign.customResultPageButtonUrl && this.args.campaign.customResultPageButtonText) {
       const params = {};
@@ -21,6 +25,26 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
     }
   }
 
+  @action
+  handleCustomButtonDisplay() {
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Fin de parcours',
+      'pix-event-action': "Affichage du bloc de l'organisation",
+      'pix-event-name': 'Présence d’un bouton comportant un lien externe',
+    });
+  }
+
+  @action
+  handleCustomButtonClick() {
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Fin de parcours',
+      'pix-event-action': "Affichage du bloc de l'organisation",
+      'pix-event-name': 'Clic sur le lien externe',
+    });
+  }
+
   <template>
     <div class="evaluation-results-hero__organization-block">
       <h3 class="evaluation-results-hero-organization-block__title">
@@ -34,10 +58,12 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
         />
       {{/if}}
       {{#if this.customButtonUrl}}
+        {{this.handleCustomButtonDisplay}}
         <PixButtonLink
           class="evaluation-results-hero-organization-block__link"
           @href={{this.customButtonUrl}}
           @variant="secondary"
+          onclick={{this.handleCustomButtonClick}}
         >
           {{@campaign.customResultPageButtonText}}
         </PixButtonLink>

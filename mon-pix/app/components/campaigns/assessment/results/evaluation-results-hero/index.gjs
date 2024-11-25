@@ -4,7 +4,7 @@ import PixMessage from '@1024pix/pix-ui/components/pix-message';
 import PixStars from '@1024pix/pix-ui/components/pix-stars';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
-import { service } from '@ember/service';
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
@@ -17,6 +17,7 @@ import RetryOrResetBlock from './retry-or-reset-block';
 
 export default class EvaluationResultsHero extends Component {
   @service currentUser;
+  @service metrics;
   @service router;
   @service store;
   @service tabManager;
@@ -61,7 +62,7 @@ export default class EvaluationResultsHero extends Component {
   }
 
   @action
-  async improveResults() {
+  async handleImproveResults() {
     if (this.isButtonLoading) return;
 
     try {
@@ -69,8 +70,17 @@ export default class EvaluationResultsHero extends Component {
       this.isButtonLoading = true;
 
       const campaignParticipationResult = this.args.campaignParticipationResult;
+
       const adapter = this.store.adapterFor('campaign-participation-result');
       await adapter.beginImprovement(campaignParticipationResult.id);
+
+      this.metrics.add({
+        event: 'custom-event',
+        'pix-event-category': 'Fin de parcours',
+        'pix-event-action': 'Amélioration des résultats',
+        'pix-event-name': "Clic sur le bouton 'Je retente'",
+      });
+
       this.router.transitionTo('campaigns.entry-point', this.args.campaign.code);
     } catch {
       this.hasGlobalError = true;
@@ -98,6 +108,13 @@ export default class EvaluationResultsHero extends Component {
 
       campaignParticipationResult.isShared = true;
       campaignParticipationResult.canImprove = false;
+
+      this.metrics.add({
+        event: 'custom-event',
+        'pix-event-category': 'Fin de parcours',
+        'pix-event-action': 'Envoi des résultats',
+        'pix-event-name': "Envoi des résultats depuis l'en-tête",
+      });
     } catch {
       this.hasGlobalError = true;
     } finally {
@@ -108,6 +125,26 @@ export default class EvaluationResultsHero extends Component {
   @action
   setGlobalError(value) {
     this.hasGlobalError = value;
+  }
+
+  @action
+  handleBackToHomepageDisplay() {
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Fin de parcours',
+      'pix-event-action': 'Sortie de parcours',
+      'pix-event-name': "Affichage du bouton 'Revenir à la page d'accueil'",
+    });
+  }
+
+  @action
+  handleBackToHomepageClick() {
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Fin de parcours',
+      'pix-event-action': 'Sortie de parcours',
+      'pix-event-name': "Clic sur le bouton 'Revenir à la page d'accueil'",
+    });
   }
 
   <template>
@@ -186,7 +223,8 @@ export default class EvaluationResultsHero extends Component {
                 </PixButton>
               {{else}}
                 {{#unless @campaign.hasCustomResultPageButton}}
-                  <PixButtonLink @route="authentication.login" @size="large">
+                  {{this.handleBackToHomepageDisplay}}
+                  <PixButtonLink @route="authentication.login" @size="large" onclick={{this.handleBackToHomepageClick}}>
                     {{t "navigation.back-to-homepage"}}
                   </PixButtonLink>
                 {{/unless}}
@@ -204,7 +242,7 @@ export default class EvaluationResultsHero extends Component {
               <PixButton
                 @variant="tertiary"
                 @size="large"
-                @triggerAction={{this.improveResults}}
+                @triggerAction={{this.handleImproveResults}}
                 @isLoading={{this.isButtonLoading}}
               >
                 {{t "pages.skill-review.actions.improve"}}
@@ -212,7 +250,8 @@ export default class EvaluationResultsHero extends Component {
             {{/if}}
           {{else}}
             {{#unless @campaign.hasCustomResultPageButton}}
-              <PixButtonLink @route="authentication.login" @size="large">
+              {{this.handleBackToHomepageDisplay}}
+              <PixButtonLink @route="authentication.login" @size="large" onclick={{this.handleBackToHomepageClick}}>
                 {{if this.currentUser.user.isAnonymous (t "common.actions.login") (t "navigation.back-to-homepage")}}
               </PixButtonLink>
             {{/unless}}

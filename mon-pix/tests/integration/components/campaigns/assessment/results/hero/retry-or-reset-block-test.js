@@ -12,8 +12,17 @@ module(
     setupIntlRenderingTest(hooks);
 
     test('displays a title, a description and a message', async function (assert) {
+      // given
+      this.set('campaign', {});
+      this.set('campaignParticipationResult', {});
+
       // when
-      const screen = await render(hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock />`);
+      const screen = await render(
+        hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock
+  @campaign={{this.campaign}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+/>`,
+      );
 
       // then
       assert.dom(screen.getByText(t('pages.skill-review.hero.retry.title'))).exists();
