@@ -20,20 +20,6 @@ describe('Unit | Infrastructure | Caches | LearningContentCache', function () {
     learningContentCache._underlyingCache = originalUnderlyingCache;
   });
 
-  describe('#set', function () {
-    it('should set learning content in underlying cache', async function () {
-      // given
-      const learningContent = Symbol('LearningContent');
-      learningContentCache._underlyingCache.set.resolves();
-
-      // when
-      await learningContentCache.set(learningContent);
-
-      // then
-      expect(learningContentCache._underlyingCache.set).to.have.been.calledWith('LearningContent', learningContent);
-    });
-  });
-
   describe('#patch', function () {
     it('should patch the learning content in underlying cache', async function () {
       // given

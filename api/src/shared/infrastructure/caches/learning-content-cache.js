@@ -25,8 +25,14 @@ export class LearningContentCache {
     return this._underlyingCache.get(LEARNING_CONTENT_CACHE_KEY, this.generator);
   }
 
-  set(object) {
+  async reset() {
+    const object = await this.generator();
     return this._underlyingCache.set(LEARNING_CONTENT_CACHE_KEY, object);
+  }
+
+  async update() {
+    const newLearningContent = await lcms.createRelease();
+    return this._underlyingCache.set(LEARNING_CONTENT_CACHE_KEY, newLearningContent);
   }
 
   patch(patch) {

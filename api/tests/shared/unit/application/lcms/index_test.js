@@ -10,7 +10,7 @@ describe('Unit | Router | lcms-router', function () {
     sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin').callsFake((request, h) => h.response(true));
     sinon.stub(lcmsController, 'patchCacheEntry').callsFake((request, h) => h.response().code(204));
     sinon.stub(lcmsController, 'createRelease').callsFake((request, h) => h.response().code(204));
-    sinon.stub(lcmsController, 'refreshCacheEntries').callsFake((request, h) => h.response().code(204));
+    sinon.stub(lcmsController, 'refreshCache').callsFake((request, h) => h.response().code(204));
     httpTestServer = new HttpTestServer();
     httpTestServer.register(moduleUnderTest);
   });

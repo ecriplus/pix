@@ -3,24 +3,19 @@ import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Usecase | Refresh learning content cache', function () {
   describe('#refreshLearningContentCache', function () {
-    it('should refresh learning content cache with what is returned from lcms api', async function () {
+    it('should trigger a reset of the learning content cache', async function () {
       // given
-      const lcms = {
-        getLatestRelease: sinon.stub(),
-      };
       const LearningContentCache = {
         instance: {
-          set: sinon.stub(),
+          reset: sinon.stub(),
         },
       };
-      const learningContent = Symbol('LC');
-      lcms.getLatestRelease.resolves(learningContent);
 
       // when
-      await refreshLearningContentCache({ lcms, LearningContentCache });
+      await refreshLearningContentCache({ LearningContentCache });
 
       // then
-      expect(LearningContentCache.instance.set).to.have.been.calledWithExactly(learningContent);
+      expect(LearningContentCache.instance.reset).to.have.been.calledOnce;
     });
   });
 });
