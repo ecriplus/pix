@@ -1,8 +1,8 @@
 /**
  * @module OrganizationFeatureRepository
  */
-import { knex } from '../../../../db/knex-database-connection.js';
 import * as knexUtils from '../../../../src/shared/infrastructure/utils/knex-utils.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { AlreadyExistingOrganizationFeatureError, FeatureNotFound, OrganizationNotFound } from '../../domain/errors.js';
 import { OrganizationFeatureItem } from '../../domain/models/OrganizationFeatureItem.js';
 
@@ -21,7 +21,8 @@ const DEFAULT_BATCH_SIZE = 100;
  */
 async function saveInBatch(organizationFeatures, batchSize = DEFAULT_BATCH_SIZE) {
   try {
-    await knex.batchInsert('organization-features', organizationFeatures, batchSize);
+    const knexConn = DomainTransaction.getConnection();
+    await knexConn.batchInsert('organization-features', organizationFeatures, batchSize);
   } catch (err) {
     if (knexUtils.isUniqConstraintViolated(err)) {
       throw new AlreadyExistingOrganizationFeatureError();
@@ -51,7 +52,8 @@ async function saveInBatch(organizationFeatures, batchSize = DEFAULT_BATCH_SIZE)
  * @returns {Promise<OrganizationFeatureItem>}
  */
 async function findAllOrganizationFeaturesFromOrganizationId({ organizationId }) {
-  const organizationFeatures = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const organizationFeatures = await knexConn
     .select('key', 'params')
     .from('organization-features')
     .join('features', 'features.id', 'organization-features.featureId')
