@@ -90,4 +90,9 @@
 
 .assessment-banner__text-to-speech-toggle {
   z-index: 1;
+  line-height: 0;
+
+  button {
+    color: var(--pix-neutral-0);
+  }
 }

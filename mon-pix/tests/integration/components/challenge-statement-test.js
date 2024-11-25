@@ -298,8 +298,8 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
                 sinon.assert.calledWithExactly(add, {
                   event: 'custom-event',
                   'pix-event-category': 'Vocalisation',
-                  'pix-event-action': `Assessment : ${this.assessment.id} Epreuve : ${this.challenge.id}`,
-                  'pix-event-name': 'Click sur le bouton de vocalisation : lecture',
+                  'pix-event-action': "Lecture d'une épreuve",
+                  'pix-event-name': "Clic sur le bouton de lecture d'épreuve : play",
                 });
                 assert.ok(true);
               });

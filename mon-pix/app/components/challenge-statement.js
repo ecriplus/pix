@@ -18,7 +18,6 @@ export default class ChallengeStatement extends Component {
   @tracked displayAlternativeInstruction = false;
   @tracked isSpeaking = false;
   @tracked textToSpeechButtonTooltipText = this.intl.t('pages.challenge.statement.text-to-speech.play');
-  @tracked textToSpeechButtonIcon = 'volume-high';
 
   constructor() {
     super(...arguments);
@@ -78,7 +77,6 @@ export default class ChallengeStatement extends Component {
       speechSynthesis.cancel();
       this.isSpeaking = false;
       this.textToSpeechButtonTooltipText = this.intl.t('pages.challenge.statement.text-to-speech.play');
-      this.textToSpeechButtonIcon = 'volume-high';
     } else {
       const element = document.getElementsByClassName('challenge-statement-instruction__text')[0];
       const textToSpeech = new SpeechSynthesisUtterance(element.innerText);
@@ -88,7 +86,6 @@ export default class ChallengeStatement extends Component {
       textToSpeech.onend = () => {
         this.isSpeaking = false;
         this.textToSpeechButtonTooltipText = this.intl.t('pages.challenge.statement.text-to-speech.play');
-        this.textToSpeechButtonIcon = 'volume-high';
       };
       this.isSpeaking = true;
       this.textToSpeechButtonTooltipText = this.intl.t('pages.challenge.statement.text-to-speech.stop');
@@ -112,8 +109,8 @@ export default class ChallengeStatement extends Component {
     this.metrics.add({
       event: 'custom-event',
       'pix-event-category': 'Vocalisation',
-      'pix-event-action': `Assessment : ${this.args.assessment.id} Epreuve : ${this.args.challenge.id}`,
-      'pix-event-name': `Click sur le bouton de vocalisation : ${this.isSpeaking ? 'lecture' : 'stop'}`,
+      'pix-event-action': "Lecture d'une épreuve",
+      'pix-event-name': `Clic sur le bouton de lecture d'épreuve : ${this.isSpeaking ? 'play' : 'stop'}`,
     });
   }
 
