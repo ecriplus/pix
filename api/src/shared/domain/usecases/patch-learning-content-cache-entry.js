@@ -5,7 +5,6 @@ export async function patchLearningContentCacheEntry({ recordId, updatedRecord, 
 }
 
 function generatePatch(currentLearningContent, id, newEntry, modelName) {
-  if (!currentLearningContent[modelName]) throw new Error(`Invalid modelName for entry to patch : ${modelName}`);
   const index = currentLearningContent[modelName].findIndex((element) => element?.id === id);
   if (index === -1) {
     return {

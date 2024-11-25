@@ -1,3 +1,5 @@
+import Joi from 'joi';
+
 import { securityPreHandlers } from '../security-pre-handlers.js';
 import { lcmsController } from './lcms-controller.js';
 
@@ -31,6 +33,24 @@ const register = async function (server) {
             assign: 'hasRoleSuperAdmin',
           },
         ],
+        validate: {
+          params: Joi.object({
+            id: Joi.string().required(),
+            model: Joi.string()
+              .valid(
+                'frameworks',
+                'areas',
+                'competences',
+                'thematics',
+                'tubes',
+                'skills',
+                'challenges',
+                'tutorials',
+                'courses',
+              )
+              .required(),
+          }),
+        },
         handler: lcmsController.patchCacheEntry,
         tags: ['api', 'cache'],
         notes: [
