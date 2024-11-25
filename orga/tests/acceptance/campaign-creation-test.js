@@ -57,10 +57,10 @@ module('Acceptance | Campaign Creation', function (hooks) {
       const expectedTargetProfileName = availableTargetProfiles[1].name;
 
       const screen = await visit('/campagnes/creation');
-      await fillByLabel('* Nom de la campagne', 'Ma Campagne');
+      await fillByLabel('Nom de la campagne *', 'Ma Campagne');
       await clickByName('Évaluer les participants');
 
-      await click(screen.getByLabelText(`* ${t('pages.campaign-creation.target-profiles-list-label')}`));
+      await click(screen.getByLabelText(`${t('pages.campaign-creation.target-profiles-list-label')} *`));
       await click(await screen.findByRole('option', { name: expectedTargetProfileName }));
 
       const externalIdentifier = screen
@@ -82,7 +82,7 @@ module('Acceptance | Campaign Creation', function (hooks) {
     test('it should allow to create a campaign of type PROFILES_COLLECTION and redirect to the newly created campaign', async function (assert) {
       // given
       const screen = await visit('/campagnes/creation');
-      await fillByLabel('* Nom de la campagne', 'Ma Campagne');
+      await fillByLabel('Nom de la campagne *', 'Ma Campagne');
       await clickByName('Collecter les profils Pix des participants');
       const externalIdentifier = screen
         .getByText('Souhaitez-vous demander un identifiant externe ?', { selector: 'legend' })
@@ -103,9 +103,9 @@ module('Acceptance | Campaign Creation', function (hooks) {
       const expectedTargetProfileName = availableTargetProfiles[1].name;
 
       const screen = await visit('/campagnes/creation');
-      await fillByLabel('* Nom de la campagne', 'Ma Campagne');
+      await fillByLabel('Nom de la campagne *', 'Ma Campagne');
       await clickByName('Évaluer les participants');
-      await click(screen.getByLabelText(`* ${t('pages.campaign-creation.target-profiles-list-label')}`));
+      await click(screen.getByLabelText(`${t('pages.campaign-creation.target-profiles-list-label')} *`));
       await click(await screen.findByRole('option', { name: expectedTargetProfileName }));
       await fillByLabel('Titre du parcours', 'Savoir rechercher');
       await clickByName('Non');
@@ -122,9 +122,9 @@ module('Acceptance | Campaign Creation', function (hooks) {
       // given
       const targetProfileName = availableTargetProfiles[1].name;
       const screen = await visit('/campagnes/creation');
-      await fillByLabel('* Nom de la campagne', 'Ma Campagne');
+      await fillByLabel('Nom de la campagne *', 'Ma Campagne');
       await clickByName('Évaluer les participants');
-      await click(screen.getByLabelText(`* ${t('pages.campaign-creation.target-profiles-list-label')}`));
+      await click(screen.getByLabelText(`${t('pages.campaign-creation.target-profiles-list-label')} *`));
       await click(await screen.findByRole('option', { name: targetProfileName }));
 
       // when
@@ -142,9 +142,9 @@ module('Acceptance | Campaign Creation', function (hooks) {
       server.post('/campaigns', {}, 500);
 
       // when
-      await fillByLabel('* Nom de la campagne', 'Ma Campagne');
+      await fillByLabel('Nom de la campagne *', 'Ma Campagne');
       await clickByName('Évaluer les participants');
-      await click(screen.getByLabelText(`* ${t('pages.campaign-creation.target-profiles-list-label')}`));
+      await click(screen.getByLabelText(`${t('pages.campaign-creation.target-profiles-list-label')} *`));
       await click(await screen.findByRole('option', { name: expectedTargetProfileName }));
       const externalIdentifier = screen
         .getByText('Souhaitez-vous demander un identifiant externe ?', { selector: 'legend' })
