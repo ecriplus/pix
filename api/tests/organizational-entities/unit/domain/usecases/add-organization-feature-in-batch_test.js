@@ -1,12 +1,17 @@
 import { FeatureParamsNotProcessable } from '../../../../../src/organizational-entities/domain/errors.js';
 import { OrganizationFeature } from '../../../../../src/organizational-entities/domain/models/OrganizationFeature.js';
 import { addOrganizationFeatureInBatch } from '../../../../../src/organizational-entities/domain/usecases/add-organization-feature-in-batch.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { catchErr, createTempFile, expect, removeTempFile, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Domain | UseCases | add-organization-feature-in-batch', function () {
   let organizationFeatureRepository, featureId, filePath, csvData;
 
   beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+      return callback();
+    });
+
     featureId = 1;
     csvData = [
       new OrganizationFeature({ featureId, organizationId: 123, params: `{ "id": 123 }` }),

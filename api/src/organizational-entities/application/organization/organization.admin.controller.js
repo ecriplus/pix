@@ -20,7 +20,10 @@ const attachChildOrganization = async function (request, h) {
 };
 
 const addOrganizationFeatureInBatch = async function (request, h) {
-  await usecases.addOrganizationFeatureInBatch({ filePath: request.payload.path });
+  await usecases.addOrganizationFeatureInBatch({
+    userId: request.auth.credentials.userId,
+    filePath: request.payload.path,
+  });
   return h.response().code(204);
 };
 
