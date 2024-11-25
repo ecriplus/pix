@@ -57,7 +57,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
         },
       ];
       const learningObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningObjects);
+      await mockLearningContent(learningObjects);
 
       options = {
         method: 'PATCH',
@@ -194,7 +194,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
       area.competences = [competence];
       framework.areas = [area];
       const learningContent = buildLearningContent([framework]);
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       await databaseBuilder.commit();
     });
@@ -407,7 +407,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
     };
 
     beforeEach(async function () {
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
       userId = 100;
       databaseBuilder.factory.buildUser({ id: userId });
       const campaign = databaseBuilder.factory.buildCampaign();

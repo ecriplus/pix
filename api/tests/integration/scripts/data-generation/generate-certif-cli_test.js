@@ -24,7 +24,7 @@ describe('Integration | Scripts | generate-certif-cli.js', function () {
       skills: [{ tubeId: 'xxx', skillId: 'yyy', status: 'actif' }],
       challenges: [],
     };
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
   });
 
   afterEach(function () {

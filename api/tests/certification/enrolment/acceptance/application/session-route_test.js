@@ -355,7 +355,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     context('not SCO / isManagingStudents', function () {

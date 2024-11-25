@@ -104,7 +104,7 @@ describe('Integration | Usecase | Handle Badge Acquisition', function () {
       });
 
       const learningContentObjects = learningContentBuilder(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
 
       return databaseBuilder.commit();
     });

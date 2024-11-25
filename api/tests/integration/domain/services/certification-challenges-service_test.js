@@ -72,7 +72,7 @@ describe('Integration | CertificationChallengeService | pickCertificationChallen
       ],
     };
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
 
     await _buildCorrectAnswerAndKnowledgeElement({
       userId: certifiableUserId,
@@ -163,7 +163,7 @@ describe('Integration | CertificationChallengeService | pickCertificationChallen
       ],
     };
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
 
     await _buildCorrectAnswerAndKnowledgeElement({
       userId: certifiableUserId,
@@ -265,7 +265,7 @@ describe('Integration | CertificationChallengeService | pickCertificationChallen
       ],
     };
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
 
     await _buildCorrectAnswerAndKnowledgeElement({
       userId: certifiableUserId,
@@ -366,7 +366,7 @@ describe('Integration | CertificationChallengeService | pickCertificationChallen
       ],
     };
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
 
     await _buildCorrectAnswerAndKnowledgeElement({
       userId: certifiableUserId,
@@ -457,7 +457,7 @@ describe('Integration | CertificationChallengeService | pickCertificationChallen
       ],
     };
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
 
     await _buildCorrectAnswerAndKnowledgeElement({
       userId: certifiableUserId,
@@ -540,7 +540,7 @@ describe('Integration | CertificationChallengeService | pickCertificationChallen
       ],
     };
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
 
     await _buildCorrectAnswerAndKnowledgeElement({
       userId: certifiableUserId,
@@ -673,7 +673,7 @@ describe('Integration | CertificationChallengeService | pickCertificationChallen
       ],
     };
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
 
     await _buildCorrectAnswerAndKnowledgeElement({
       userId: certifiableUserId,

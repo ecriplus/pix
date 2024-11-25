@@ -70,7 +70,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-locale-man
       context('when there is one challenge in the accepted language (fr-fr)', function () {
         beforeEach(async function () {
           const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-          mockLearningContent(learningContentObjects);
+          await mockLearningContent(learningContentObjects);
 
           databaseBuilder.factory.buildUser({ id: userId });
           databaseBuilder.factory.buildAssessment({

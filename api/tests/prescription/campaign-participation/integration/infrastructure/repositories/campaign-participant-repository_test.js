@@ -12,7 +12,7 @@ import {
   OrganizationLearnersCouldNotBeSavedError,
 } from '../../../../../../src/shared/domain/errors.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, mockLearningContent, sinon } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 const campaignParticipationDBAttributes = [
   'id',
@@ -30,16 +30,24 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
   describe('get', function () {
     let organizationId, organizationFeatureAPI;
 
-    beforeEach(function () {
+    beforeEach(async function () {
       organizationId = 12;
-      const learningContent = { skills: [{ id: 'skill1', status: 'actif' }] };
+      const learningContent = {
+        skills: [
+          { id: 'skill1', status: 'actif' },
+          { id: 'skill2', status: 'actif' },
+          { id: 'skill3', status: 'archivé' },
+          { id: 'skill4', status: 'inactif' },
+        ],
+      };
 
       organizationFeatureAPI = {
         getAllFeaturesFromOrganization: sinon.stub().resolves({ hasLearnersImportFeature: false }),
       };
       featureId = databaseBuilder.factory.buildFeature(CAMPAIGN_FEATURES.EXTERNAL_ID).id;
 
-      mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
+      await databaseBuilder.commit();
     });
 
     afterEach(function () {
@@ -477,15 +485,6 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
 
     context('when there is one campaign', function () {
       it('find campaign with operative skills', async function () {
-        const learningContent = {
-          skills: [
-            { id: 'skill1', status: 'actif' },
-            { id: 'skill2', status: 'archivé' },
-            { id: 'skill3', status: 'inactif' },
-          ],
-        };
-
-        mockLearningContent(learningContent);
         const campaignToStartParticipation = buildCampaignWithSkills(
           {
             idPixLabel: 'email',
@@ -496,7 +495,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
             assessmentMethod: 'SMART_RANDOM',
             skillCount: 1,
           },
-          ['skill1'],
+          ['skill2'],
         );
         const { id: userId } = databaseBuilder.factory.buildUser();
 
@@ -517,15 +516,6 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
 
     context('when there are several campaigns', function () {
       it('find skills for the correct campaign', async function () {
-        const learningContent = {
-          skills: [
-            { id: 'skill1', status: 'actif' },
-            { id: 'skill2', status: 'actif' },
-          ],
-        };
-
-        mockLearningContent(learningContent);
-
         const campaignToStartParticipation = buildCampaignWithSkills(
           {
             idPixLabel: 'email',

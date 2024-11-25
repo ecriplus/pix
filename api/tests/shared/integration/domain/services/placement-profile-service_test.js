@@ -1,7 +1,7 @@
 import { LOCALE } from '../../../../../src/shared/domain/constants.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import * as placementProfileService from '../../../../../src/shared/domain/services/placement-profile-service.js';
-import { databaseBuilder, expect, learningContentBuilder, mockLearningContent } from '../../../../test-helper.js';
+import { databaseBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
 
 const { ENGLISH_SPOKEN } = LOCALE;
 
@@ -28,7 +28,6 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
                     id: 'recCitation4',
                     nom: '@citation4',
                     pixValue: 1,
-                    challenges: ['challengeRecordIdOne', 'challengeRecordIdTwo', 'challengeRecordIdTen'],
                     version: 1,
                     level: 4,
                   },
@@ -48,7 +47,6 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
                     id: 'recRemplir2',
                     nom: '@remplir2',
                     pixValue: 1,
-                    challenges: ['challengeRecordIdOne', 'challengeRecordIdFive'],
                     version: 1,
                     level: 2,
                   },
@@ -56,7 +54,6 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
                     id: 'recRemplir4',
                     nom: '@remplir4',
                     pixValue: 1,
-                    challenges: ['challengeRecordIdSix'],
                     version: 1,
                     level: 4,
                   },
@@ -76,7 +73,6 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
                     id: 'recRequin5',
                     nom: '@requin5',
                     pixValue: 1,
-                    challenges: ['challengeRecordIdNine'],
                     version: 1,
                     level: 5,
                   },
@@ -89,7 +85,7 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
     ];
 
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
 
     userId = databaseBuilder.factory.buildUser().id;
     assessmentId = databaseBuilder.factory.buildAssessment({ userId }).id;

@@ -175,7 +175,7 @@ describe('Certification | Enrolment | Acceptance | Routes | User', function () {
         ],
       },
     ]);
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
 
     learningContent.skills.forEach(({ id: skillId, competenceId }) => {
       databaseBuilder.factory.buildKnowledgeElement({ userId: user.id, earnedPix: 10, competenceId, skillId });

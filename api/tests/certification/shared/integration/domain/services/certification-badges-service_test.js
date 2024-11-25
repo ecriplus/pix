@@ -98,7 +98,7 @@ describe('Integration | Service | Certification-Badges Service', function () {
       });
       await databaseBuilder.commit();
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
 
       // when
       const badgeAcquisitions = await DomainTransaction.execute(async () => {
@@ -160,7 +160,7 @@ describe('Integration | Service | Certification-Badges Service', function () {
           });
           await databaseBuilder.commit();
           const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-          mockLearningContent(learningContentObjects);
+          await mockLearningContent(learningContentObjects);
 
           // when
           const badgeAcquisitions = await DomainTransaction.execute(async () => {
@@ -222,7 +222,7 @@ describe('Integration | Service | Certification-Badges Service', function () {
           });
           await databaseBuilder.commit();
           const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-          mockLearningContent(learningContentObjects);
+          await mockLearningContent(learningContentObjects);
 
           // when
           const badgeAcquisitions = await DomainTransaction.execute(async () => {

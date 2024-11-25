@@ -97,7 +97,7 @@ describe('Acceptance | Controller | users-controller-get-user-profile', function
       beforeEach(async function () {
         options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
 
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         knowledgeElement = databaseBuilder.factory.buildKnowledgeElement({
           userId,

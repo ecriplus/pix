@@ -15,7 +15,7 @@ describe('Integration | Controller | challenge-controller', function () {
       });
       const skill = learningContentBuilder.buildSkill({ id: challenge.skillId });
 
-      mockLearningContent({
+      await mockLearningContent({
         challenges: [challenge],
         skills: [skill],
       });

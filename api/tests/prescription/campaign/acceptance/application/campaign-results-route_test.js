@@ -49,7 +49,7 @@ describe('Acceptance | API | campaign-results-route', function () {
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
 
       campaign = databaseBuilder.factory.buildAssessmentCampaignForSkills({ organizationId: organization.id }, [skill]);
 
@@ -139,7 +139,7 @@ describe('Acceptance | API | campaign-results-route', function () {
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     context('Division filter', function () {
@@ -611,7 +611,7 @@ describe('Acceptance | API | campaign-results-route', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     it('should return campaign collective result with status code 200', async function () {

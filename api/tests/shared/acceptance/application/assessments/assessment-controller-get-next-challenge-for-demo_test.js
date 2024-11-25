@@ -46,7 +46,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
     ];
 
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
   });
 
   describe('(demo) GET /api/assessments/:assessment_id/next', function () {

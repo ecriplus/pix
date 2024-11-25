@@ -69,7 +69,7 @@ describe('Acceptance | Controller | lcms-controller', function () {
 
       it('should store patches in Redis', async function () {
         // given
-        mockLearningContent({ frameworks: [{ id: `frameworkId` }] });
+        await mockLearningContent({ frameworks: [{ id: `frameworkId` }] });
         const superAdminUserId = databaseBuilder.factory.buildUser.withRole({
           role: ROLES.SUPER_ADMIN,
         }).id;

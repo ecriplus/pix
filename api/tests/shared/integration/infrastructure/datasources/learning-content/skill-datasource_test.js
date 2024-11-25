@@ -13,7 +13,7 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
       const rawSkill4 = { id: 'recSkill4', status: 'périmé' };
 
       const records = [rawSkill1, rawSkill2, rawSkill3, rawSkill4];
-      mockLearningContent({ skills: records });
+      await mockLearningContent({ skills: records });
 
       // when
       const foundSkills = await skillDatasource.findOperativeByRecordIds([rawSkill1.id, rawSkill2.id, rawSkill4.id]);
@@ -33,7 +33,7 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
       const rawSkill4 = { id: 'recSkill4', status: 'périmé' };
 
       const records = [rawSkill1, rawSkill2, rawSkill3, rawSkill4];
-      mockLearningContent({ skills: records });
+      await mockLearningContent({ skills: records });
 
       // when
       const foundSkills = await skillDatasource.findByRecordIds([rawSkill1.id, rawSkill2.id, rawSkill4.id]);
@@ -52,7 +52,7 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
       const rawSkill3 = { id: 'recSkill3', name: '@rechercher_entrainement1', status: 'en construction' };
       const rawSkill4 = { id: 'recSkill4', name: '@rechercher_didacticiel2', status: 'actif' };
       const rawSkill5 = { id: 'recSkill5', name: '@rechercher_didacticiel12', status: 'en construction' };
-      mockLearningContent({ skills: [rawSkill1, rawSkill2, rawSkill3, rawSkill4, rawSkill5] });
+      await mockLearningContent({ skills: [rawSkill1, rawSkill2, rawSkill3, rawSkill4, rawSkill5] });
 
       // when
       const result = await skillDatasource.findAllSkillsByNameForPix1d('@rechercher_didacticiel1');
@@ -66,7 +66,7 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
       const rawSkill1 = { id: 'recSkill1', name: '@rechercher_didacticiel1', status: 'actif' };
       const rawSkill2 = { id: 'recSkill2', name: '@rechercher_didacticiel1', status: 'en construction' };
       const rawSkill3 = { id: 'recSkill3', name: '@rechercher_didacticiel1', status: 'archivé' };
-      mockLearningContent({ skills: [rawSkill1, rawSkill2, rawSkill3] });
+      await mockLearningContent({ skills: [rawSkill1, rawSkill2, rawSkill3] });
 
       // when
       const result = await skillDatasource.findAllSkillsByNameForPix1d('@rechercher_didacticiel1');
@@ -78,7 +78,7 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
     context('when there is no skill found', function () {
       it('should return an empty array', async function () {
         // given
-        mockLearningContent({ skills: [] });
+        await mockLearningContent({ skills: [] });
 
         // when
         const result = await skillDatasource.findAllSkillsByNameForPix1d('@rechercher_validation');
@@ -94,7 +94,7 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
       // given
       const rawSkill1 = { id: 'recSkill1', status: 'actif' },
         rawSkill2 = { id: 'recSkill2', status: 'actif' };
-      mockLearningContent({ skills: [rawSkill1, rawSkill2] });
+      await mockLearningContent({ skills: [rawSkill1, rawSkill2] });
 
       // when
       const foundSkills = await skillDatasource.findActive();
@@ -108,7 +108,7 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
       const rawSkill1 = { id: 'recSkill1', status: 'actif' },
         rawSkill2 = { id: 'recSkill2', status: 'actif' },
         rawSkill3 = { id: 'recSkill3', status: 'périmé' };
-      mockLearningContent({ skills: [rawSkill1, rawSkill2, rawSkill3] });
+      await mockLearningContent({ skills: [rawSkill1, rawSkill2, rawSkill3] });
 
       // when
       const foundSkills = await skillDatasource.findActive();
@@ -123,7 +123,7 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
       // given
       const rawSkill1 = { id: 'recSkill1', status: 'actif' },
         rawSkill2 = { id: 'recSkill2', status: 'actif' };
-      mockLearningContent({ skills: [rawSkill1, rawSkill2] });
+      await mockLearningContent({ skills: [rawSkill1, rawSkill2] });
 
       // when
       const foundSkills = await skillDatasource.findOperative();
@@ -137,7 +137,7 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
       const rawSkill1 = { id: 'recSkill1', status: 'actif' },
         rawSkill2 = { id: 'recSkill2', status: 'archivé' },
         rawSkill3 = { id: 'recSkill3', status: 'périmé' };
-      mockLearningContent({ skills: [rawSkill1, rawSkill2, rawSkill3] });
+      await mockLearningContent({ skills: [rawSkill1, rawSkill2, rawSkill3] });
 
       // when
       const foundSkills = await skillDatasource.findOperative();
@@ -148,12 +148,12 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
   });
 
   describe('#findActiveByCompetenceId', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const skill1 = { id: 'recSkill1', status: 'actif', competenceId: 'recCompetence' };
       const skill2 = { id: 'recSkill2', status: 'actif', competenceId: 'recCompetence' };
       const skill3 = { id: 'recSkill3', status: 'périmé', competenceId: 'recCompetence' };
       const skill4 = { id: 'recSkill4', status: 'actif', competenceId: 'recOtherCompetence' };
-      mockLearningContent({ skills: [skill1, skill2, skill3, skill4] });
+      await mockLearningContent({ skills: [skill1, skill2, skill3, skill4] });
     });
 
     it('should retrieve all skills from learning content for one competence', async function () {
@@ -166,12 +166,12 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
   });
 
   describe('#findActiveByTubeId', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const skill1 = { id: 'recSkill1', status: 'actif', competenceId: 'recCompetence', tubeId: 'recTube' };
       const skill2 = { id: 'recSkill2', status: 'actif', competenceId: 'recCompetence', tubeId: 'recTube' };
       const skill3 = { id: 'recSkill3', status: 'périmé', competenceId: 'recCompetence', tubeId: 'recTube' };
       const skill4 = { id: 'recSkill4', status: 'actif', competenceId: 'recOtherCompetence', tubeId: 'recOtherTube' };
-      mockLearningContent({ skills: [skill1, skill2, skill3, skill4] });
+      await mockLearningContent({ skills: [skill1, skill2, skill3, skill4] });
     });
 
     it('should retrieve all skills from learning content for one competence', async function () {
@@ -184,7 +184,7 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
   });
 
   describe('#findByTubeIdFor1d', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const skillActive = { id: 'recSkillActive', status: 'actif', competenceId: 'recCompetence', tubeId: 'recTube' };
       const skillInBuild = {
         id: 'recSkillInBuild',
@@ -204,7 +204,7 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
         competenceId: 'recOtherCompetence',
         tubeId: 'recOtherTube',
       };
-      mockLearningContent({ skills: [skillActive, skillInBuild, skillExpired, skillOtherTube] });
+      await mockLearningContent({ skills: [skillActive, skillInBuild, skillExpired, skillOtherTube] });
     });
 
     it('should retrieve all skills from learning content for one competence', async function () {
@@ -217,12 +217,12 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
   });
 
   describe('#findOperativeByCompetenceId', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const skill1 = { id: 'recSkill1', status: 'actif', competenceId: 'recCompetence' };
       const skill2 = { id: 'recSkill2', status: 'archivé', competenceId: 'recCompetence' };
       const skill3 = { id: 'recSkill3', status: 'périmé', competenceId: 'recCompetence' };
       const skill4 = { id: 'recSkill4', status: 'actif', competenceId: 'recOtherCompetence' };
-      mockLearningContent({ skills: [skill1, skill2, skill3, skill4] });
+      await mockLearningContent({ skills: [skill1, skill2, skill3, skill4] });
     });
 
     it('should retrieve all skills from learning content for one competence', async function () {
@@ -235,7 +235,7 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
   });
 
   describe('#findOperativeByCompetenceIds', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const skill1 = { id: 'recSkill1', status: 'actif', competenceId: 'recCompetence1' };
       const skill2 = { id: 'recSkill2', status: 'archivé', competenceId: 'recCompetence1' };
       const skill3 = { id: 'recSkill3', status: 'périmé', competenceId: 'recCompetence1' };
@@ -243,7 +243,7 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
       const skill5 = { id: 'recSkill5', status: 'actif', competenceId: 'recCompetence2' };
       const skill6 = { id: 'recSkill6', status: 'archivé', competenceId: 'recCompetence2' };
       const skill7 = { id: 'recSkill7', status: 'périmé', competenceId: 'recCompetence2' };
-      mockLearningContent({ skills: [skill1, skill2, skill3, skill4, skill5, skill6, skill7] });
+      await mockLearningContent({ skills: [skill1, skill2, skill3, skill4, skill5, skill6, skill7] });
     });
 
     it('should retrieve all skills from learning content for competences', async function () {
@@ -256,12 +256,12 @@ describe('Integration | Infrastructure | Datasource | LearningContent | SkillDat
   });
 
   describe('#findOperativeByTubeId', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const skill1 = { id: 'recSkill1', status: 'actif', tubeId: 'recTube' };
       const skill2 = { id: 'recSkill2', status: 'archivé', tubeId: 'recTube' };
       const skill3 = { id: 'recSkill3', status: 'périmé', tubeId: 'recTube' };
       const skill4 = { id: 'recSkill4', status: 'actif', tubeId: 'recOtherTube' };
-      mockLearningContent({ skills: [skill1, skill2, skill3, skill4] });
+      await mockLearningContent({ skills: [skill1, skill2, skill3, skill4] });
     });
 
     it('should retrieve all operative skills from learning content for one tube', async function () {

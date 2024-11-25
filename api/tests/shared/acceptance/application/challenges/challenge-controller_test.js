@@ -18,7 +18,7 @@ describe('Acceptance | API | ChallengeController', function () {
     const challengeId = 'recLt9uwa2dR3IYpi';
     const challengeType = 'QCM';
 
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningContent = [
         {
           id: 'recArea0',
@@ -51,7 +51,7 @@ describe('Acceptance | API | ChallengeController', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     const options = {

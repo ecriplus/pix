@@ -1,19 +1,12 @@
 import { StageWithLinkedCampaignError } from '../../../../../src/evaluation/domain/errors.js';
 import { Stage } from '../../../../../src/evaluation/domain/models/Stage.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
-import {
-  catchErr,
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  learningContentBuilder,
-  mockLearningContent,
-} from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
 
 function _buildLearningContent() {
   const learningContent = domainBuilder.buildCampaignLearningContent.withSimpleContent();
   const learningContentObjects = learningContentBuilder([learningContent]);
-  mockLearningContent(learningContentObjects);
+  databaseBuilder.factory.learningContent.build(learningContentObjects);
 }
 
 describe('Integration | Domain | UseCases | update-stage', function () {
@@ -28,8 +21,8 @@ describe('Integration | Domain | UseCases | update-stage', function () {
         level: 1,
       });
 
-      await databaseBuilder.commit();
       _buildLearningContent();
+      await databaseBuilder.commit();
 
       const payload = {
         id: stage.id,
@@ -70,9 +63,8 @@ describe('Integration | Domain | UseCases | update-stage', function () {
             threshold: null,
           });
 
-          await databaseBuilder.commit();
-
           _buildLearningContent();
+          await databaseBuilder.commit();
 
           const payload = {
             id: stage.id,
@@ -107,8 +99,8 @@ describe('Integration | Domain | UseCases | update-stage', function () {
             threshold: null,
           });
 
-          await databaseBuilder.commit();
           _buildLearningContent();
+          await databaseBuilder.commit();
 
           const payload = {
             id: stage.id,
@@ -154,9 +146,8 @@ describe('Integration | Domain | UseCases | update-stage', function () {
             threshold: 10,
           });
 
-          await databaseBuilder.commit();
-
           _buildLearningContent();
+          await databaseBuilder.commit();
 
           const payload = {
             id: stage.id,
@@ -190,8 +181,8 @@ describe('Integration | Domain | UseCases | update-stage', function () {
             threshold: 10,
           });
 
-          await databaseBuilder.commit();
           _buildLearningContent();
+          await databaseBuilder.commit();
 
           const payload = {
             id: stage.id,

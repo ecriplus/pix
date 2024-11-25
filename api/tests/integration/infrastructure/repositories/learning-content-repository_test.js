@@ -18,7 +18,7 @@ describe('Integration | Repository | learning-content', function () {
   let tube1Fr, tube1En, tube2Fr, tube2En, tube4Fr, tube4En;
   let skill1, skill2, skill3, skill8;
 
-  beforeEach(function () {
+  beforeEach(async function () {
     learningContent = learningContentBuilder([
       {
         id: 'recFramework1',
@@ -235,7 +235,7 @@ describe('Integration | Repository | learning-content', function () {
     [tube1En, tube2En, , tube4En] = _buildDomainTubesFromLearningContent(learningContent, 'en');
     [skill1, skill2, skill3, , , , , skill8] = _buildDomainSkillsFromLearningContent(learningContent);
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
   });
 
   describe('#findByCampaignId', function () {

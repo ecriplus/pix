@@ -68,7 +68,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
         ],
         challenges: [],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       writableStream = new PassThrough();
       csvPromise = streamToPromise(writableStream);

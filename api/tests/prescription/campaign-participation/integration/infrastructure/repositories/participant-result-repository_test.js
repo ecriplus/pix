@@ -5,7 +5,7 @@ import {
   CampaignParticipationStatuses,
   KnowledgeElement,
 } from '../../../../../../src/shared/domain/models/index.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 const { STARTED } = CampaignParticipationStatuses;
 
@@ -86,7 +86,7 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
         ],
       };
 
-      mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
       return databaseBuilder.commit();
     });
 

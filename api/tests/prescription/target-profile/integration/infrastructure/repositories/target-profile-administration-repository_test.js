@@ -107,7 +107,7 @@ describe('Integration | Repository | Target-profile', function () {
             },
           ],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         // when
         const err = await catchErr(targetProfileAdministrationRepository.get)({ id: 1 });
@@ -352,7 +352,7 @@ describe('Integration | Repository | Target-profile', function () {
             },
           ],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         // when
         const actualTargetProfile = await targetProfileAdministrationRepository.get({ id: 1 });
@@ -564,7 +564,7 @@ describe('Integration | Repository | Target-profile', function () {
             },
           ],
         };
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         // when
         const actualTargetProfile = await targetProfileAdministrationRepository.get({ id: 1, locale: 'en' });
@@ -643,7 +643,7 @@ describe('Integration | Repository | Target-profile', function () {
 
         const learningContent = domainBuilder.buildCampaignLearningContent.withSimpleContent();
         const learningContentObjects = learningContentBuilder([learningContent]);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
 
         // when
         const actualTargetProfile = await targetProfileAdministrationRepository.get({ id });
@@ -661,7 +661,7 @@ describe('Integration | Repository | Target-profile', function () {
 
           const learningContent = domainBuilder.buildCampaignLearningContent.withSimpleContent();
           const learningContentObjects = learningContentBuilder([learningContent]);
-          mockLearningContent(learningContentObjects);
+          await mockLearningContent(learningContentObjects);
 
           const { id: organizationId } = databaseBuilder.factory.buildOrganization({
             id: constants.AUTONOMOUS_COURSES_ORGANIZATION_ID,
@@ -691,7 +691,7 @@ describe('Integration | Repository | Target-profile', function () {
 
           const learningContent = domainBuilder.buildCampaignLearningContent.withSimpleContent();
           const learningContentObjects = learningContentBuilder([learningContent]);
-          mockLearningContent(learningContentObjects);
+          await mockLearningContent(learningContentObjects);
 
           const { id: ownerOrganizationId } = databaseBuilder.factory.buildOrganization({ id: 9999 });
 

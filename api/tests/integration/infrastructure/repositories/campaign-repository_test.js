@@ -123,7 +123,7 @@ describe('Integration | Repository | Campaign', function () {
       area.competences = [competence];
       framework.areas = [area];
       const learningContent = buildLearningContent([framework]);
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
       databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'tubeId1' });

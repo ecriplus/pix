@@ -119,7 +119,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         ],
         skills,
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       writableStream = new PassThrough();
       csvPromise = streamToPromise(writableStream);

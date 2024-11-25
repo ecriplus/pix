@@ -16,7 +16,7 @@ describe('Integration | Campaign | UseCase | get-presentation-steps', function (
   beforeEach(async function () {
     const learningContent = domainBuilder.buildLearningContent.withSimpleContent();
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent.frameworks[0].areas);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
 
     const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
 

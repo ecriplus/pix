@@ -55,7 +55,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
       });
 
       it('returns the list of participations shared for the given campaign', async function () {
@@ -106,7 +106,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
       });
 
       it('returns the list of participations shared for the given campaign', async function () {
@@ -225,7 +225,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
       });
 
       it('returns the name from the organization learner', async function () {
@@ -282,7 +282,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
       });
 
       it('returns acquired badges during the campaign', async function () {
@@ -330,7 +330,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
       });
 
       it('does not return deleted participations', async function () {
@@ -376,7 +376,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
       });
 
       it('computes the mastery percentage', async function () {
@@ -596,7 +596,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
 
         // when
         const { participations } = await campaignAssessmentParticipationResultListRepository.findPaginatedByCampaignId({
@@ -639,7 +639,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
       });
 
       it('should return paginated campaign participations based on the given size and number', async function () {
@@ -754,7 +754,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
 
         // when
         const { participations } = await campaignAssessmentParticipationResultListRepository.findPaginatedByCampaignId({
@@ -775,7 +775,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
       let user1;
       let user2;
 
-      beforeEach(function () {
+      beforeEach(async function () {
         campaign = databaseBuilder.factory.buildAssessmentCampaignForSkills({}, [{ id: 'Skill1' }]);
         badge1 = databaseBuilder.factory.buildBadge({ key: 'badge1', targetProfileId: campaign.targetProfileId });
         badge2 = databaseBuilder.factory.buildBadge({ key: 'badge2', targetProfileId: campaign.targetProfileId });
@@ -799,7 +799,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
       });
       it('returns participants which have one badge', async function () {
         const campaignParticipation1 = databaseBuilder.factory.buildCampaignParticipation({
@@ -934,7 +935,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
     });
 
     context('when there is a filter on stage', function () {
-      beforeEach(function () {
+      beforeEach(async function () {
         const learningContent = [
           {
             id: 'recArea1',
@@ -952,7 +953,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
       });
 
       it('returns participants which have the given stage', async function () {
@@ -1238,7 +1239,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
 
         // when
         const { participations } = await campaignAssessmentParticipationResultListRepository.findPaginatedByCampaignId({
@@ -1277,7 +1278,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
       });
 
       it('returns all participants if the filter is empty', async function () {

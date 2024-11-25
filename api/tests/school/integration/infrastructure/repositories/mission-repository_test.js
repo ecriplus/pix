@@ -28,7 +28,7 @@ describe('Integration | Repository | mission-repository', function () {
           },
         });
 
-        mockLearningContent({
+        await mockLearningContent({
           missions: [
             {
               id: 1,
@@ -62,7 +62,7 @@ describe('Integration | Repository | mission-repository', function () {
     context('when there is no mission for the given id', function () {
       it('should return the not found error', async function () {
         // given
-        mockLearningContent({
+        await mockLearningContent({
           thematics: [],
         });
         const missionId = 'recThematic1';
@@ -101,7 +101,7 @@ describe('Integration | Repository | mission-repository', function () {
           },
         });
 
-        mockLearningContent({
+        await mockLearningContent({
           missions: [
             {
               id: 1,

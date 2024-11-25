@@ -192,6 +192,7 @@ class DatabaseBuilder {
     }
 
     const publicResults = await this.knex.raw(_constructRawQuery('public'));
+    const learningContentResults = await this.knex.raw(_constructRawQuery('learningcontent'));
     const pgbossResults = await this.knex.raw(_constructRawQuery('pgboss'));
 
     this.tablesOrderedByDependencyWithDirtinessMap = [];
@@ -199,6 +200,12 @@ class DatabaseBuilder {
     publicResults.rows.forEach(({ table_name }) => {
       this.tablesOrderedByDependencyWithDirtinessMap.push({
         table: table_name,
+        isDirty: false,
+      });
+    });
+    learningContentResults.rows.forEach(({ table_name }) => {
+      this.tablesOrderedByDependencyWithDirtinessMap.push({
+        table: `learningcontent.${table_name}`,
         isDirty: false,
       });
     });

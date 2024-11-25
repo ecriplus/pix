@@ -72,7 +72,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
   beforeEach(async function () {
     server = await createServer();
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
   });
 
   describe('GET /api/assessments/:assessment_id/next', function () {

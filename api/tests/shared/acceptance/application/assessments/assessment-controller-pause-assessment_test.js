@@ -56,7 +56,7 @@ describe('Acceptance | API | assessment-controller-pause-assessment', function (
         },
       };
 
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
       return databaseBuilder.commit();
     });
 

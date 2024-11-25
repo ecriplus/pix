@@ -48,14 +48,14 @@ const request = {
 
 describe('Integration | Application | Smart Random Simulator', function () {
   context('#getNextChallenge', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningContent = {
         areas: [],
         competences: [],
         thematics: [],
         tubes: [{ id: 'tubeId1' }],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
     });
 
     it('should empty smart random log after execution', async function () {

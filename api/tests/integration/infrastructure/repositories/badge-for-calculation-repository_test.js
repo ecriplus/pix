@@ -1,12 +1,6 @@
 import * as badgeForCalculationRepository from '../../../../lib/infrastructure/repositories/badge-for-calculation-repository.js';
 import { SCOPES } from '../../../../src/shared/domain/models/BadgeDetails.js';
-import {
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  learningContentBuilder,
-  mockLearningContent,
-} from '../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, learningContentBuilder } from '../../../test-helper.js';
 
 describe('Integration | Repository | BadgeForCalculation', function () {
   const campaignSkillsId = [
@@ -101,7 +95,7 @@ describe('Integration | Repository | BadgeForCalculation', function () {
       },
     ];
     const learningContentObjects = learningContentBuilder(learningContent);
-    mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
     targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
     campaignId = databaseBuilder.factory.buildCampaign({ targetProfileId }).id;
     campaignSkillsId.map((skillId) => {

@@ -45,7 +45,7 @@ describe('Integration | Usecase | init-mission-activity', function () {
           });
           await databaseBuilder.commit();
 
-          mockLearningContent({
+          await mockLearningContent({
             missions: [learningContentBuilder.buildMission({ id: missionId })],
           });
 
@@ -96,7 +96,7 @@ describe('Integration | Usecase | init-mission-activity', function () {
 
           const lastActivity = domainBuilder.buildActivity(tutorialActivity);
 
-          mockLearningContent({
+          await mockLearningContent({
             missions: [
               learningContentBuilder.buildMission({
                 id: missionId,
@@ -149,7 +149,7 @@ describe('Integration | Usecase | init-mission-activity', function () {
 
           const lastActivity = domainBuilder.buildActivity(firstStepValidationActivity);
 
-          mockLearningContent({
+          await mockLearningContent({
             missions: [
               learningContentBuilder.buildMission({
                 id: missionId,
@@ -193,7 +193,7 @@ describe('Integration | Usecase | init-mission-activity', function () {
         const { assessmentId } = databaseBuilder.factory.buildMissionAssessment({ missionId });
         await databaseBuilder.commit();
 
-        mockLearningContent({
+        await mockLearningContent({
           missions: [
             learningContentBuilder.buildMission({
               id: missionId,

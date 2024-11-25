@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import * as url from 'node:url';
 
 import { generateCertificateVerificationCode } from '../../../../../lib/domain/services/verify-certificate-code-service.js';
-import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
+import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { AssessmentResult, Membership } from '../../../../../src/shared/domain/models/index.js';
 import {
   createServer,
@@ -36,13 +36,13 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
                   {
                     id: 'recSkillId1',
                     challenges: [
-                      'rec02tVrimXNkgaLD',
-                      'rec0gm0GFue3PQB3k',
-                      'rec0hoSlSwCeNNLkq',
-                      'rec2FcZ4jsPuY1QYt',
-                      'rec39bDMnaVw3MyMR',
-                      'rec3FMoD8h9USTktb',
-                      'rec3P7fvPSpFkIFLV',
+                      { id: 'rec02tVrimXNkgaLD1' },
+                      { id: 'rec0gm0GFue3PQB3k1' },
+                      { id: 'rec0hoSlSwCeNNLkq1' },
+                      { id: 'rec2FcZ4jsPuY1QYt1' },
+                      { id: 'rec39bDMnaVw3MyMR1' },
+                      { id: 'rec3FMoD8h9USTktb1' },
+                      { id: 'rec3P7fvPSpFkIFLV1' },
                     ],
                   },
                 ],
@@ -60,13 +60,13 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
                   {
                     id: 'recSkillId2',
                     challenges: [
-                      'rec02tVrimXNkgaLD',
-                      'rec0gm0GFue3PQB3k',
-                      'rec0hoSlSwCeNNLkq',
-                      'rec2FcZ4jsPuY1QYt',
-                      'rec39bDMnaVw3MyMR',
-                      'rec3FMoD8h9USTktb',
-                      'rec3P7fvPSpFkIFLV',
+                      { id: 'rec02tVrimXNkgaLD2' },
+                      { id: 'rec0gm0GFue3PQB3k2' },
+                      { id: 'rec0hoSlSwCeNNLkq2' },
+                      { id: 'rec2FcZ4jsPuY1QYt2' },
+                      { id: 'rec39bDMnaVw3MyMR2' },
+                      { id: 'rec3FMoD8h9USTktb2' },
+                      { id: 'rec3P7fvPSpFkIFLV2' },
                     ],
                   },
                 ],
@@ -84,13 +84,13 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
                   {
                     id: 'recSkillId3',
                     challenges: [
-                      'rec02tVrimXNkgaLD',
-                      'rec0gm0GFue3PQB3k',
-                      'rec0hoSlSwCeNNLkq',
-                      'rec2FcZ4jsPuY1QYt',
-                      'rec39bDMnaVw3MyMR',
-                      'rec3FMoD8h9USTktb',
-                      'rec3P7fvPSpFkIFLV',
+                      { id: 'rec02tVrimXNkgaLD3' },
+                      { id: 'rec0gm0GFue3PQB3k3' },
+                      { id: 'rec0hoSlSwCeNNLkq3' },
+                      { id: 'rec2FcZ4jsPuY1QYt3' },
+                      { id: 'rec39bDMnaVw3MyMR3' },
+                      { id: 'rec3FMoD8h9USTktb3' },
+                      { id: 'rec3P7fvPSpFkIFLV3' },
                     ],
                   },
                 ],
@@ -102,7 +102,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
     ];
 
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
 
     const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
     nock('http://tarte.fr')

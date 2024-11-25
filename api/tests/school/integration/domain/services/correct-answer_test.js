@@ -39,7 +39,7 @@ describe('Integration | UseCases | correct-answer', function () {
           skills: [skill],
         };
 
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         assessment = databaseBuilder.factory.buildAssessment({
           state: Assessment.states.STARTED,
@@ -199,7 +199,7 @@ describe('Integration | UseCases | correct-answer', function () {
         challenges: [challenge],
         skills: [skill],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
 
       const assessmentId = 10;
       const activityAnswer = domainBuilder.buildActivityAnswer({

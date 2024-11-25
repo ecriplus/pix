@@ -15,7 +15,7 @@ describe('Integration | UseCase | find-campaign-profiles-collection-participatio
 
     databaseBuilder.factory.buildMembership({ organizationId, userId });
 
-    mockLearningContent({ skills: [], tubes: [], competences: [], areas: [] });
+    await mockLearningContent({ skills: [], tubes: [], competences: [], areas: [] });
 
     await databaseBuilder.commit();
   });

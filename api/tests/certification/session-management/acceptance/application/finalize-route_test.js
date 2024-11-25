@@ -723,7 +723,7 @@ const _createSession = async ({ version = 2 } = {}) => {
     },
   ];
   const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-  mockLearningContent(learningContentObjects);
+  await mockLearningContent(learningContentObjects);
 
   return {
     session,

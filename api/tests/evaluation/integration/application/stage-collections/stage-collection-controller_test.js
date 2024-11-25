@@ -4,14 +4,14 @@ import { databaseBuilder, expect, hFake, mockLearningContent } from '../../../..
 
 describe('Integration | Application | stage-collection-controller', function () {
   context('update', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningContent = {
         areas: [],
         competences: [],
         thematics: [],
         tubes: [{ id: 'tubeId1' }],
       };
-      mockLearningContent(learningContent);
+      await mockLearningContent(learningContent);
     });
 
     it('should modify stage collection according to the request', async function () {

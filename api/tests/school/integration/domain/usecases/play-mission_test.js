@@ -24,7 +24,7 @@ describe('Integration | UseCases | play-mission', function () {
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
       await databaseBuilder.commit();
 
-      mockLearningContent({
+      await mockLearningContent({
         missions: [
           learningContentBuilder.buildMission({
             id: missionId,
@@ -60,7 +60,7 @@ describe('Integration | UseCases | play-mission', function () {
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
       await databaseBuilder.commit();
 
-      mockLearningContent({
+      await mockLearningContent({
         missions: [
           learningContentBuilder.buildMission({
             id: missionId,
@@ -95,7 +95,7 @@ describe('Integration | UseCases | play-mission', function () {
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
       await databaseBuilder.commit();
 
-      mockLearningContent({
+      await mockLearningContent({
         missions: [
           learningContentBuilder.buildMission({
             id: missionId,
@@ -130,7 +130,7 @@ describe('Integration | UseCases | play-mission', function () {
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
       await databaseBuilder.commit();
 
-      mockLearningContent({
+      await mockLearningContent({
         missions: [
           learningContentBuilder.buildMission({
             id: missionId,

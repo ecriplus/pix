@@ -42,7 +42,7 @@ describe('Acceptance | API | Campaign Stats Route', function () {
           ],
         },
       ]);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
 
       const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
       const stage1 = databaseBuilder.factory.buildStage({

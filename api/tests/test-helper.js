@@ -254,11 +254,10 @@ chaiUse(function () {
   });
 });
 
-function mockLearningContent(learningContent) {
-  return nock('https://lcms-test.pix.fr/api')
-    .get('/releases/latest')
-    .matchHeader('Authorization', 'Bearer test-api-key')
-    .reply(200, { content: learningContent });
+async function mockLearningContent(learningContent) {
+  const scope = databaseBuilder.factory.learningContent.build(learningContent);
+  await databaseBuilder.commit();
+  return scope;
 }
 
 // Inspired by what is done within chai project itself to test assertions

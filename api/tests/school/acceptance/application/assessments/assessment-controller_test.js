@@ -73,7 +73,7 @@ describe('Acceptance | Controller | assessment-controller', function () {
           missions: [mission],
         };
 
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         const postAssessmentRequest = {
           method: 'POST',
@@ -116,7 +116,7 @@ describe('Acceptance | Controller | assessment-controller', function () {
           missions: [mission],
         };
 
-        mockLearningContent(learningContent);
+        await mockLearningContent(learningContent);
 
         const learner = databaseBuilder.factory.buildOrganizationLearner();
         const missionAssessment = databaseBuilder.factory.buildMissionAssessment({

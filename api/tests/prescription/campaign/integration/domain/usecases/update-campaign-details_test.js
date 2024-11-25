@@ -44,7 +44,7 @@ describe('Integration | UseCases | update-campaign-details', function () {
       skills: [{ id: 'recSkill1' }],
     };
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
   });
 
   it('should update campaign', async function () {

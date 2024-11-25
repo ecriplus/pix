@@ -171,7 +171,7 @@ describe('Integration | Certification | Application | jobs | CertificationComple
           index: '2.2',
           tubes: [
             {
-              id: 'recTube4_0',
+              id: 'recTube5_0',
               skills: [
                 {
                   id: 'recSkill5_0',
@@ -187,7 +187,7 @@ describe('Integration | Certification | Application | jobs | CertificationComple
           index: '2.3',
           tubes: [
             {
-              id: 'recTube4_0',
+              id: 'recTube6_0',
               skills: [
                 {
                   id: 'recSkill6_0',
@@ -295,7 +295,7 @@ describe('Integration | Certification | Application | jobs | CertificationComple
           index: '4.1',
           tubes: [
             {
-              id: 'recTube4_0',
+              id: 'recTube12_0',
               skills: [
                 {
                   id: 'recSkill12_0',
@@ -382,7 +382,7 @@ describe('Integration | Certification | Application | jobs | CertificationComple
 
   beforeEach(async function () {
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
 
     certificationCompletedJobController = new CertificationCompletedJobController();
 

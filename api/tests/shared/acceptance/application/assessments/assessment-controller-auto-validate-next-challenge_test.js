@@ -56,7 +56,7 @@ describe('Acceptance | API | assessment-controller-auto-validate-next-challenge'
 
     server = await createServer();
     const learningContentObjects = learningContentBuilder(learningContent);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
   });
 
   afterEach(function () {

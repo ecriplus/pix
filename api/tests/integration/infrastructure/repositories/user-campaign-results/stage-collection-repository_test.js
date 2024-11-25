@@ -50,7 +50,7 @@ describe('Integration | Infrastructure | Repository | stage-collection-repositor
 
     beforeEach(async function () {
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
       targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
       campaignId = databaseBuilder.factory.buildCampaign({ type: 'ASSESSMENT', targetProfileId }).id;
       databaseBuilder.factory.buildCampaignSkill({ skillId: 'skillWeb1', campaignId });

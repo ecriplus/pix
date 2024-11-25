@@ -19,7 +19,7 @@ describe('Certification | Evaluation | Acceptance | answer-route', function () {
       context('when the candidate needs an accessibility adjustment', function () {
         it('should save the answer as correct', async function () {
           // given
-          const { competenceId, challengeId } = _buildLearningContent();
+          const { competenceId, challengeId } = await _buildLearningContent();
           const { assessmentId, userId } = await _setupTestData(databaseBuilder, {
             competenceId,
             doesCandidateNeedAccessibilityAdjustment: true,
@@ -39,7 +39,7 @@ describe('Certification | Evaluation | Acceptance | answer-route', function () {
       context('when the candidate does not need an accessibility adjustment', function () {
         it('should save the answer as focused out', async function () {
           // given
-          const { competenceId, challengeId } = _buildLearningContent();
+          const { competenceId, challengeId } = await _buildLearningContent();
           const { assessmentId, userId } = await _setupTestData(databaseBuilder, {
             competenceId,
             doesCandidateNeedAccessibilityAdjustment: false,
@@ -118,7 +118,7 @@ function _setupRequestOptions({ userId, challengeId, assessmentId }) {
   };
 }
 
-function _buildLearningContent() {
+async function _buildLearningContent() {
   const challengeId = 'a_challenge_id';
   const competenceId = 'recCompetence';
 
@@ -160,7 +160,7 @@ function _buildLearningContent() {
       },
     ],
   };
-  mockLearningContent(learningContent);
+  await mockLearningContent(learningContent);
 
   return {
     competenceId,

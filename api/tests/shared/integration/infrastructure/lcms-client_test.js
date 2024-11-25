@@ -6,7 +6,7 @@ describe('Integration | Infrastructure | LCMS Client', function () {
     it('calls LCMS API to get learning content latest release', async function () {
       // given
       const learningContent = { models: [{ id: 'recId' }] };
-      const lcmsCall = mockLearningContent(learningContent);
+      const lcmsCall = await mockLearningContent(learningContent);
 
       // when
       const response = await lcmsClient.getLatestRelease();

@@ -27,7 +27,14 @@ describe('Integration | UseCase | find-assessment-participation-result-list', fu
     const participant2 = { firstName: 'Tonari', lastName: 'No Totoro' };
     databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(participant2, participation2);
 
-    mockLearningContent({ skills: [skill], tubes: [], thematics: [], competences: [], areas: [], challenges: [] });
+    await mockLearningContent({
+      skills: [skill],
+      tubes: [],
+      thematics: [],
+      competences: [],
+      areas: [],
+      challenges: [],
+    });
 
     await databaseBuilder.commit();
   });

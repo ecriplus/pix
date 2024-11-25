@@ -77,7 +77,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        mockLearningContent(learningContentObjects);
+        await mockLearningContent(learningContentObjects);
 
         const assessmentId = databaseBuilder.factory.buildAssessment({
           userId: null,

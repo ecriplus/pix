@@ -24,7 +24,7 @@ describe('Integration | UseCases | create-badge', function () {
       skills: [{ id: 'recSkill1' }],
     };
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
 
     targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
     databaseBuilder.factory.buildTargetProfileTube({ tubeId: 'monTubeA', level: 2, targetProfileId });

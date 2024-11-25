@@ -250,7 +250,7 @@ describe('Acceptance | Application | scoring-and-capacity-simulator-route', func
                   index: '2.2',
                   tubes: [
                     {
-                      id: 'recTube4_0',
+                      id: 'recTube5_0',
                       skills: [
                         {
                           id: 'recSkill5_0',
@@ -266,7 +266,7 @@ describe('Acceptance | Application | scoring-and-capacity-simulator-route', func
                   index: '2.3',
                   tubes: [
                     {
-                      id: 'recTube4_0',
+                      id: 'recTube6_0',
                       skills: [
                         {
                           id: 'recSkill6_0',
@@ -374,7 +374,7 @@ describe('Acceptance | Application | scoring-and-capacity-simulator-route', func
                   index: '4.1',
                   tubes: [
                     {
-                      id: 'recTube4_0',
+                      id: 'recTube12_0',
                       skills: [
                         {
                           id: 'recSkill12_0',
@@ -459,7 +459,7 @@ describe('Acceptance | Application | scoring-and-capacity-simulator-route', func
             },
           ];
           const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-          mockLearningContent(learningContentObjects);
+          await mockLearningContent(learningContentObjects);
 
           const superAdmin = databaseBuilder.factory.buildUser.withRole({
             role: PIX_ADMIN.ROLES.SUPER_ADMIN,

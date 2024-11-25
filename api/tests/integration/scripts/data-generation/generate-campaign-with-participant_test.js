@@ -4,7 +4,7 @@ import { databaseBuilder, expect, knex, learningContentBuilder, mockLearningCont
 describe('Integration | Scripts | generate-campaign-with-participants', function () {
   it('should create a profiles collection campaign with participants', async function () {
     // given
-    mockLearningContent(learningContentBuilder.fromAreas([]));
+    await mockLearningContent(learningContentBuilder.fromAreas([]));
     const organizationId = databaseBuilder.factory.buildOrganization().id;
     const userId = databaseBuilder.factory.buildUser({ id: 1 }).id;
     databaseBuilder.factory.buildMembership({ organizationId, organizationRole: 'ADMIN', userId });
@@ -25,7 +25,7 @@ describe('Integration | Scripts | generate-campaign-with-participants', function
 
   it('should create a assessment campaign with participants', async function () {
     // given
-    mockLearningContent(learningContentBuilder.fromAreas([]));
+    await mockLearningContent(learningContentBuilder.fromAreas([]));
     const organizationId = databaseBuilder.factory.buildOrganization().id;
     const userId = databaseBuilder.factory.buildUser({ id: 1 }).id;
     databaseBuilder.factory.buildMembership({ organizationId, organizationRole: 'ADMIN', userId });

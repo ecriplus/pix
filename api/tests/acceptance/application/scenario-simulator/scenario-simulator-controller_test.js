@@ -129,7 +129,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
       ],
     };
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
 
     server = await createServer();
   });

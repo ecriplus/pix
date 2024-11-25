@@ -57,7 +57,7 @@ describe('Acceptance | API | assessment-controller-update-last-challenge-state',
   beforeEach(async function () {
     server = await createServer();
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    mockLearningContent(learningContentObjects);
+    await mockLearningContent(learningContentObjects);
   });
 
   describe('PATCH /api/assessments/{id}/last-challenge-state/{state}', function () {

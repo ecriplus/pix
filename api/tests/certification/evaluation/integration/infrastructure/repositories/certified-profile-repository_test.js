@@ -2,7 +2,7 @@ import * as certifiedProfileRepository from '../../../../../../src/certification
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { CertifiedProfile } from '../../../../../../src/shared/domain/read-models/CertifiedProfile.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Certified Profile', function () {
   describe('#get', function () {
@@ -174,7 +174,7 @@ describe('Integration | Repository | Certified Profile', function () {
         certifiedCompetences: [competence1_1, competence1_2],
         certifiedAreas: [area1],
       });
-      mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
       await databaseBuilder.commit();
 
       // when
@@ -295,7 +295,7 @@ describe('Integration | Repository | Certified Profile', function () {
         associatedSkillId: 'recArea1_Competence1_Tube1_Skill2',
       });
 
-      mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
       await databaseBuilder.commit();
 
       // when

@@ -16,7 +16,7 @@ describe('Acceptance | API | Courses', function () {
   });
 
   describe('GET /api/courses/:course_id', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       const learningContent = [
         {
           id: '1. Information et données',
@@ -57,7 +57,7 @@ describe('Acceptance | API | Courses', function () {
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      mockLearningContent(learningContentObjects);
+      await mockLearningContent(learningContentObjects);
     });
 
     after(function () {

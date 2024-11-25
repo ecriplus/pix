@@ -13,7 +13,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | TubeDat
       const rawTube4 = { id: 'rectTube4', name: 'FAKE_NAME_RAW_TUBE_4' };
 
       const records = [rawTube1, rawTube2, rawTube3, rawTube4];
-      mockLearningContent({ tubes: records });
+      await mockLearningContent({ tubes: records });
 
       // when
       const foundTubes = await tubeDatasource.findByNames([rawTube1.name, rawTube2.name, rawTube4.name]);
@@ -33,7 +33,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | TubeDat
       const rawTube4 = { id: 'RECORD_ID_RAW_TUBE_4' };
 
       const records = [rawTube1, rawTube2, rawTube3, rawTube4];
-      mockLearningContent({ tubes: records });
+      await mockLearningContent({ tubes: records });
       const expectedTubeIds = [rawTube1.id, rawTube2.id, rawTube4.id];
 
       // when
@@ -47,7 +47,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | TubeDat
       const rawTube1 = { id: 'RECORD_ID_RAW_TUBE_1' };
 
       const records = [rawTube1];
-      mockLearningContent({ tubes: records });
+      await mockLearningContent({ tubes: records });
 
       // when
       const foundTubes = await tubeDatasource.findByRecordIds(['some_other_id']);
@@ -66,7 +66,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | TubeDat
       const rawTube4 = { id: 'RECORD_ID_RAW_TUBE_4', thematicId: 'thematicId1' };
 
       const records = [rawTube1, rawTube2, rawTube3, rawTube4];
-      mockLearningContent({ tubes: records });
+      await mockLearningContent({ tubes: records });
       const expectedTubeIds = [rawTube1.id, rawTube2.id, rawTube4.id];
 
       // when
@@ -80,7 +80,7 @@ describe('Integration | Infrastructure | Datasource | Learning Content | TubeDat
       const rawTube1 = { id: 'RECORD_ID_RAW_TUBE_1', thematicId: 'thematicId2' };
 
       const records = [rawTube1];
-      mockLearningContent({ tubes: records });
+      await mockLearningContent({ tubes: records });
 
       // when
       const foundTubes = await tubeDatasource.findByThematicId('thematicId1');

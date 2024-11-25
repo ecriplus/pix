@@ -10,7 +10,7 @@ import { Challenge } from '../../../../../../src/shared/domain/models/Challenge.
 import { catchErr, databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
 
 describe('Integration | Infrastructure | Repositories | certification-assessment-repository', function () {
-  beforeEach(function () {
+  beforeEach(async function () {
     const learningContent = {
       areas: [
         {
@@ -83,7 +83,7 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
         },
       ],
     };
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
   });
 
   describe('#get', function () {

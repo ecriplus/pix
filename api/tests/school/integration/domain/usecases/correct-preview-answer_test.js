@@ -20,7 +20,7 @@ describe('Integration | UseCases | correct-preview-answer', function () {
       skills: [skill],
     };
 
-    mockLearningContent(learningContent);
+    await mockLearningContent(learningContent);
 
     const alwaysTrueExaminer = new Examiner({ validator: new ValidatorAlwaysOK() });
 

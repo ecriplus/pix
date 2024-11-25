@@ -18,8 +18,8 @@ describe('Integration | Repository | framework-repository', function () {
 
   const learningContent = { frameworks: [framework0, framework1, framework2] };
 
-  beforeEach(function () {
-    mockLearningContent(learningContent);
+  beforeEach(async function () {
+    await mockLearningContent(learningContent);
   });
 
   describe('#list', function () {
