@@ -17,6 +17,7 @@ import * as registrationOrganizationLearnerRepository from '../../../organizatio
 import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import { importOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-organization-learners-job-repository.js';
+import { importScoCsvOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-sco-csv-organization-learners-job-repository.js';
 import { importSupOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-sup-organization-learners-job-repository.js';
 import { validateCsvOrganizationImportFileJobRepository } from '../../infrastructure/repositories/jobs/validate-csv-organization-learners-import-file-job-repository.js';
 import { validateOrganizationImportFileJobRepository } from '../../infrastructure/repositories/jobs/validate-organization-learners-import-file-job-repository.js';
@@ -33,6 +34,7 @@ import { importStorage } from '../../infrastructure/storage/import-storage.js';
  * @typedef {import ('../../infrastructure/repositories/jobs/import-organization-learners-job-repository.js')} ImportOrganizationLearnersJobRepository
  * @typedef {import ('../../infrastructure/storage/import-storage.js')} ImportStorage
  * @typedef {import ('../../infrastructure/repositories/jobs/import-sup-organization-learners-job-repository.js')} ImportSupOrganizationLearnersJobRepository
+ * @typedef {import ('../../infrastructure/repositories/jobs/import-sco-csv-organization-learners-job-repository.js')} importScoCsvOrganizationLearnersJobRepository
  * @typedef {import ('../../../../../lib/infrastructure/repositories/organization-learner-repository.js')} libOrganizationLearnerRepository
  * @typedef {import ('../../../../shared/infrastructure/monitoring-tools.js')} LogErrorWithCorrelationIds
  * @typedef {import ('../../../../shared/infrastructure/utils/logger.js')} loggger
@@ -56,6 +58,7 @@ const dependencies = {
   campaignParticipationRepository,
   campaignRepository,
   importOrganizationLearnersJobRepository,
+  importScoCsvOrganizationLearnersJobRepository,
   importStorage,
   importSupOrganizationLearnersJobRepository,
   libOrganizationLearnerRepository,

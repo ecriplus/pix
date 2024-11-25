@@ -31,24 +31,12 @@ const importOrganizationLearnersFromSIECLE = async function (
         payload: request.payload,
       });
     } else if (format === 'csv') {
-      const organizationImportId = await usecases.uploadCsvFile({
+      await usecases.uploadCsvFile({
         Parser: OrganizationLearnerParser,
         payload: request.payload,
         organizationId,
         userId,
-        i18n: request.i18n,
-      });
-
-      await usecases.validateCsvFile({
-        Parser: OrganizationLearnerParser,
-        organizationImportId,
-        i18n: request.i18n,
-      });
-
-      await usecases.importOrganizationLearnersFromSIECLECSVFormat({
-        userId: authenticatedUserId,
-        organizationId,
-        payload: request.payload,
+        type: 'FREGATA',
         i18n: request.i18n,
       });
     }

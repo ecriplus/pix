@@ -6,6 +6,7 @@ import { catchErr, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', function () {
   let organizationId,
+    organizationImportId,
     learners,
     i18n,
     s3Filename,
@@ -18,10 +19,12 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
 
   beforeEach(function () {
     organizationId = Symbol('organizationId');
+    organizationImportId = Symbol('organizationImportId');
     i18n = Symbol('i18n');
     s3Filename = Symbol('s3FileName');
     encoding = Symbol('encoding');
     organizationImport = new OrganizationImport({
+      id: organizationImportId,
       filename: s3Filename,
       organizationId,
       createdBy: 2,
@@ -34,7 +37,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
     };
 
     organizationImportRepositoryStub = {
-      getLastByOrganizationId: sinon.stub(),
+      get: sinon.stub(),
       save: sinon.stub(),
     };
 
@@ -55,7 +58,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
 
     learners = [{ nationalStudentId: 1 }, { nationalStudentId: 2 }, { nationalStudentId: 3 }];
 
-    organizationImportRepositoryStub.getLastByOrganizationId.withArgs(organizationId).resolves(organizationImport);
+    organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
     importStorageStub.getParser
       .withArgs({ Parser: OrganizationLearnerParser, filename: s3Filename }, organizationId, i18n)
       .resolves(parserStub);
@@ -66,7 +69,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
   context('when there is no errors', function () {
     it('add learners from csv fivle', async function () {
       await importOrganizationLearnersFromSIECLECSVFormat({
-        organizationId,
+        organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
@@ -96,7 +99,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
 
     it('should chunk the called insertion', async function () {
       await importOrganizationLearnersFromSIECLECSVFormat({
-        organizationId,
+        organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
@@ -112,7 +115,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
 
     it('should delete file on s3', async function () {
       await importOrganizationLearnersFromSIECLECSVFormat({
-        organizationId,
+        organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
@@ -125,7 +128,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
     it('should save imported state', async function () {
       // when
       await importOrganizationLearnersFromSIECLECSVFormat({
-        organizationId,
+        organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
@@ -146,7 +149,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
     it('should save IMPORT_ERROR status with error', async function () {
       // when
       const error = await catchErr(importOrganizationLearnersFromSIECLECSVFormat)({
-        organizationId,
+        organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
@@ -161,7 +164,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
 
     it('should delete file on s3', async function () {
       await catchErr(importOrganizationLearnersFromSIECLECSVFormat)({
-        organizationId,
+        organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
