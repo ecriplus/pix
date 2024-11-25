@@ -16,7 +16,7 @@ module('Acceptance | User account page', function (hooks) {
   setupIntl(hooks);
 
   module('When user is not connected', function () {
-    test('should be redirected to connection page', async function (assert) {
+    test('it is redirected to connection page', async function (assert) {
       // given / when
       await visit('/mon-compte');
 
@@ -34,7 +34,7 @@ module('Acceptance | User account page', function (hooks) {
       await authenticate(user);
     });
 
-    test('should display my account page', async function (assert) {
+    test('it displays my account page', async function (assert) {
       // when
       await visit('/mon-compte');
 
@@ -43,7 +43,7 @@ module('Acceptance | User account page', function (hooks) {
     });
 
     module('My account menu', function () {
-      test('should display my account menu', async function (assert) {
+      test('it displays my account menu', async function (assert) {
         // when
         const screen = await visit('/mon-compte');
 
@@ -51,9 +51,12 @@ module('Acceptance | User account page', function (hooks) {
         assert.ok(screen.getByRole('link', { name: t('pages.user-account.personal-information.menu-link-title') }));
         assert.ok(screen.getByRole('link', { name: t('pages.user-account.connexion-methods.menu-link-title') }));
         assert.ok(screen.getByRole('link', { name: t('pages.user-account.language.menu-link-title') }));
+        assert
+          .dom(screen.queryByRole('link', { name: t('pages.user-account.delete-account.menu-link-title') }))
+          .doesNotExist();
       });
 
-      test('should display personal information on click on "Informations personnelles"', async function (assert) {
+      test('it displays personal information on click on "Informations personnelles"', async function (assert) {
         // given
         const screen = await visit('/mon-compte');
 
@@ -64,7 +67,7 @@ module('Acceptance | User account page', function (hooks) {
         assert.strictEqual(currentURL(), '/mon-compte/informations-personnelles');
       });
 
-      test('should display connection methods on click on "Méthodes de connexion"', async function (assert) {
+      test('it displays connection methods on click on "Méthodes de connexion"', async function (assert) {
         // given
         const screen = await visit('/mon-compte');
 
@@ -75,8 +78,25 @@ module('Acceptance | User account page', function (hooks) {
         assert.strictEqual(currentURL(), '/mon-compte/methodes-de-connexion');
       });
 
+      module('When user can delete their account', () => {
+        test('it displays "Delete my account" menu', async function (assert) {
+          // given
+          const user = server.create('user', 'withEmail', 'withCanSelfDeleteAccount');
+          await authenticate(user);
+
+          // when
+          const screen = await visit('/mon-compte');
+
+          // then
+          assert.ok(screen.getByRole('link', { name: t('pages.user-account.personal-information.menu-link-title') }));
+          assert.ok(screen.getByRole('link', { name: t('pages.user-account.connexion-methods.menu-link-title') }));
+          assert.ok(screen.getByRole('link', { name: t('pages.user-account.language.menu-link-title') }));
+          assert.ok(screen.getByRole('link', { name: t('pages.user-account.delete-account.menu-link-title') }));
+        });
+      });
+
       module('When not in France domain', () => {
-        test('displays language switcher on click on "Choisir ma langue"', async function (assert) {
+        test('it displays language switcher on click on "Choisir ma langue"', async function (assert) {
           // given
           class CurrentDomainStubService extends Service {
             get isFranceDomain() {
@@ -102,7 +122,7 @@ module('Acceptance | User account page', function (hooks) {
       });
 
       module('When in France domain', () => {
-        test('does not display language menu link', async function (assert) {
+        test('it does not display language menu link', async function (assert) {
           // given
           class CurrentDomainStubService extends Service {
             get isFranceDomain() {

@@ -1,15 +1,12 @@
-.personal-information {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0;
-}
-
 .personal-information-item {
   display: flex;
   align-content: flex-start;
-  margin: 20px 0;
-  padding-bottom: 1rem;
+  padding: var(--pix-spacing-4x) 0;
   border-bottom: var(--pix-neutral-20) 1px solid;
+
+  &:first-child {
+    padding-top: 0;
+  }
 
   &:last-child {
     padding-bottom: 0;

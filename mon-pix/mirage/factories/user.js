@@ -1,6 +1,18 @@
 import sumBy from 'lodash/sumBy';
 import { Factory, trait } from 'miragejs';
 
+function _addAccountInfo(user, server) {
+  if (!user.profile) {
+    user.update({
+      accountInfo: server.create('account-info', {
+        email: user.email,
+        username: user.username,
+        canSelfDeleteAccount: false,
+      }),
+    });
+  }
+}
+
 function _addDefaultProfile(user, server) {
   if (!user.profile) {
     const pixScoreValue = sumBy(user.scorecards.models, 'earnedPix');
@@ -384,9 +396,19 @@ export default Factory.extend({
       user.update({ trainings });
     },
   }),
+  withCanSelfDeleteAccount: trait({
+    afterCreate(user, server) {
+      user.update({
+        accountInfo: server.create('accountInfo', {
+          canSelfDeleteAccount: true,
+        }),
+      });
+    },
+  }),
   afterCreate(user, server) {
     _addDefaultIsCertifiable(user, server);
     _addDefaultScorecards(user, server);
     _addDefaultProfile(user, server);
+    _addAccountInfo(user, server);
   },
 });

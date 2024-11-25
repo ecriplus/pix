@@ -19,6 +19,9 @@ export default ApplicationSerializer.extend({
   links(user) {
     const userBaseUrl = `/api/users/${user.id}`;
     return {
+      accountInfo: {
+        related: '/api/users/my-account',
+      },
       isCertifiable: {
         related: `${userBaseUrl}/is-certifiable`,
       },

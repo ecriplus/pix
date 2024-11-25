@@ -2124,6 +2124,17 @@
         "menu-link-title": "Mes méthodes de connexion",
         "username": "Identifiant"
       },
+      "delete-account": {
+        "actions": {
+          "delete": "Supprimer mon compte"
+        },
+        "menu-link-title": "Supprimer mon compte",
+        "more-information": "Pour plus d’informations, ",
+        "more-information-contact-support": "vous pouvez contacter le support.",
+        "title": "Supprimer mon compte définitivement",
+        "warning-email": "Cette action est irréversible. Toutes les compétences, parcours et {pixScore} pix que vous avez obtenus seront effacés de façon définitive pour le compte PIX utilisant l’adresse e-mail <strong>{email}</strong>.",
+        "warning-other": "Cette action est irréversible. Toutes les compétences, parcours et {pixScore} pix que vous avez obtenus seront effacés de façon définitive pour le compte PIX <strong>{firstName} {lastName}</strong>."
+      },
       "email-confirmed": "Adresse e-mail vérifiée.",
       "email-verification": {
         "code-explanation-of-use": "Pour se déplacer de champ en champ, utilisez soit la tabulation, soit les flèches gauche et droite du clavier. Pour remplir un champ, saisissez des chiffres de 1 à 9 ou bien utilisez les flèches haut et bas du clavier.",

@@ -1,20 +1,20 @@
 .user-account {
 
+  .pix-background-header__content {
+    max-width: 1280px;
+  }
+
   &__title {
     @extend %pix-title-l;
 
-    position: relative;
-    right: 0;
-    margin: 0 0 8px;
-    padding-bottom: 26px;
+    margin-bottom: var(--pix-spacing-8x);
     color: var(--pix-neutral-0);
-    text-align: center;
   }
 
   &__validation-title {
     @extend %pix-title-s;
 
-    padding-bottom: 16px;
+    padding-bottom: var(--pix-spacing-4x);
     color: var(--pix-neutral-900);
     text-align: center;
 
@@ -26,7 +26,7 @@
   &__menu-and-content {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: center;
+    gap: var(--pix-spacing-6x);
 
     @include device-is('mobile') {
       flex-wrap: wrap;
@@ -40,7 +40,7 @@
 
   &__menu-block {
     height: max-content;
-    margin: 32px 26px;
+    border-radius: var(--pix-spacing-2x);
 
     .user-account-menu {
 
@@ -52,20 +52,23 @@
 
       ul li {
         border-bottom: 1.5px solid var(--pix-neutral-20);
-        border-radius: 4px;
+        border-radius: var(--pix-spacing-2x);
 
         &:first-child a {
-          border-radius: 4px 4px 0 0;
+          border-radius: var(--pix-spacing-2x) var(--pix-spacing-2x) 0 0;
         }
 
         &:last-child a {
           border-bottom: none;
-          border-radius: 0 0 4px 4px;
+          border-radius: 0 0 var(--pix-spacing-2x) var(--pix-spacing-2x);
         }
       }
 
       &__link {
-        display: block;
+        @extend %pix-body-m;
+
+        display: flex;
+        align-items: center;
         padding: var(--pix-spacing-4x);
         color: var(--pix-neutral-800);
 
@@ -82,24 +85,34 @@
         }
 
         &.active {
+          font-weight: var(--pix-font-medium);
           background-color: var(--pix-neutral-20);
         }
+
+        &--important {
+          color: var(--pix-error-500);
+        }
       }
+    }
+
+    @include device-is('mobile') {
+      flex-grow: 1;
     }
   }
 
   &__content.pix-block {
+    @extend %pix-body-m;
+
     flex-grow: 1;
-    max-width: 600px;
     height: max-content;
-    margin: 32px 0;
-    padding: 14px 24px;
+    padding: var(--pix-spacing-8x);
+    border-radius: var(--pix-spacing-2x);
 
     @include device-is('mobile') {
       min-width: 100%;
       max-width: 100%;
       margin: 0;
-      padding: 16px;
+      padding: var(--pix-spacing-4x);
     }
   }
 
@@ -108,10 +121,5 @@
       max-width: 520px;
       margin-bottom: 10px;
     }
-  }
-
-  &__connection-methods {
-    max-width: 980px;
-    padding: 10px 0;
   }
 }

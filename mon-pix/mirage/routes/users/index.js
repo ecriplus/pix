@@ -3,6 +3,7 @@ import { Response } from 'miragejs';
 import findPaginatedUserTrainings from './find-paginated-user-trainings';
 import getAuthenticatedUser from './get-authenticated-user';
 import getCampaignParticipationResult from './get-campaign-participation-result';
+import getMyAccount from './get-my-account.js';
 import getProfile from './get-profile';
 import getScorecards from './get-scorecards';
 import getUserCampaignParticipationOverviews from './get-user-campaign-participation-overviews';
@@ -17,6 +18,8 @@ import resetScorecard from './reset-scorecard';
 
 export default function index(config) {
   config.get('/users/me', getAuthenticatedUser);
+
+  config.get('/users/my-account', getMyAccount);
 
   config.post('/users', (schema, request) => {
     const params = JSON.parse(request.requestBody);
