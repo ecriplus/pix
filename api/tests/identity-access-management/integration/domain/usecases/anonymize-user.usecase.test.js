@@ -144,42 +144,6 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
     expect(anonymizedUser.lastDataProtectionPolicySeenAt).to.be.null;
   });
 
-  context('when preventAuditLogging is true', function () {
-    it('does not trigger audit log', async function () {
-      // given
-      const user = databaseBuilder.factory.buildUser({ firstName: 'Bob' });
-      const admin = databaseBuilder.factory.buildUser.withRole();
-      await databaseBuilder.commit();
-
-      // when
-      await DomainTransaction.execute(async (domainTransaction) =>
-        anonymizeUser({
-          userId: user.id,
-          updatedByUserId: admin.id,
-          preventAuditLogging: true,
-          userRepository,
-          userLoginRepository,
-          authenticationMethodRepository,
-          refreshTokenRepository,
-          membershipRepository,
-          certificationCenterMembershipRepository,
-          organizationLearnerRepository,
-          resetPasswordDemandRepository,
-          domainTransaction,
-          adminMemberRepository,
-          userAnonymizedEventLoggingJobRepository,
-        }),
-      );
-
-      // then
-      const anonymizedUser = await knex('users').where({ id: user.id }).first();
-      expect(anonymizedUser.hasBeenAnonymised).to.be.true;
-      expect(anonymizedUser.hasBeenAnonymisedBy).to.equal(admin.id);
-
-      await expect(UserAnonymizedEventLoggingJob.name).to.have.been.performed.withJobsCount(0);
-    });
-  });
-
   context('when the admin user does not exist', function () {
     it('throws an error and does not anonymize the user', async function () {
       // given

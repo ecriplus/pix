@@ -6,7 +6,6 @@ import { UserAnonymizedEventLoggingJob } from '../models/UserAnonymizedEventLogg
  * @param params
  * @param{string} params.userId
  * @param{string} params.updatedByUserId
- * @param{boolean} params.preventAuditLogging
  * @param{UserRepository} params.userRepository
  * @param{AuthenticationMethodRepository} params.authenticationMethodRepository
  * @param{MembershipRepository} params.membershipRepository
@@ -22,7 +21,6 @@ import { UserAnonymizedEventLoggingJob } from '../models/UserAnonymizedEventLogg
 const anonymizeUser = async function ({
   userId,
   updatedByUserId,
-  preventAuditLogging = false,
   userRepository,
   authenticationMethodRepository,
   membershipRepository,
@@ -62,7 +60,7 @@ const anonymizeUser = async function ({
 
   await _anonymizeUser({ user, anonymizedByUserId: anonymizedBy.userId, userRepository });
 
-  if (!preventAuditLogging && config.auditLogger.isEnabled) {
+  if (config.auditLogger.isEnabled) {
     await userAnonymizedEventLoggingJobRepository.performAsync(
       new UserAnonymizedEventLoggingJob({
         userId,
