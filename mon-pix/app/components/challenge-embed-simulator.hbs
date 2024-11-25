@@ -2,7 +2,7 @@
 <div class="challenge-embed-simulator">
   {{#if this.isLoadingEmbed}}
     <div class="embed placeholder blurred" aria-label="{{t 'pages.challenge.embed-simulator.placeholder'}}">
-      <FaIcon @icon="image" />
+      <PixIcon @name="image" />
     </div>
   {{/if}}
 
@@ -41,7 +41,7 @@
           aria-label={{t "pages.challenge.embed-simulator.actions.reset-label"}}
           {{on "click" this.rebootSimulator}}
         >
-          <FaIcon @icon="rotate-right" class="embed-reboot-content__icon" />
+          <PixIcon @name="refresh" @ariaHidden={{true}} class="embed-reboot-content__icon" />
           {{t "pages.challenge.embed-simulator.actions.reset"}}
         </button>
       </div>

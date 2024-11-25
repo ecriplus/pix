@@ -10,7 +10,7 @@
       aria-controls={{this.feedbackPanelId}}
       type="button"
     >
-      <FaIcon @icon="flag" />
+      <PixIcon @name="flag" @plainIcon={{true}} @ariaHidden={{true}} />
       {{t "pages.challenge.feedback-panel.actions.open-close"}}
     </button>
   </div>
@@ -56,7 +56,7 @@
                   {{/if}}
                   {{#if this.quickHelpInstructions}}
                     <div class="feedback-panel__quick-help">
-                      <FaIcon @icon="circle-exclamation" class="tuto-icon__warning" />
+                      <PixIcon @name="error" @plainIcon={{true}} @ariaHidden={{true}} class="tuto-icon__warning" />
                       <p>{{t this.quickHelpInstructions htmlSafe=true}}</p>
                     </div>
                   {{/if}}
@@ -65,7 +65,7 @@
               {{#if this.displayTextBox}}
                 {{#if this.displayAddCommentButton}}
                   <button type="button" class="feedback-panel__comment" onClick={{this.addComment}}>
-                    <FaIcon @icon="pen" class="feedback-panel-comment__icon" />
+                    <PixIcon @name="edit" @ariaHidden={{true}} class="feedback-panel-comment__icon" />
                     {{t "pages.challenge.feedback-panel.form.fields.detail-selection.add-comment"}}
                   </button>
                 {{else}}

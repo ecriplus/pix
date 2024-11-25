@@ -12,7 +12,12 @@
             class="hexagon-score-content-pix-total__icon"
             aria-describedby="hexagon-score-tooltip"
           >
-            <FaIcon @icon="circle-info" aria-label={{t "pages.profile.total-score-helper.icon"}} />
+            <PixIcon
+              @name="info"
+              @plainIcon={{true}}
+              @ariaHidden={{true}}
+              @title={{t "pages.profile.total-score-helper.icon"}}
+            />
           </button>
         </:triggerElement>
         <:tooltip>
