@@ -27,8 +27,8 @@ import * as certificationCenterRepository from '../../../shared/infrastructure/r
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import * as userRepository from '../../../shared/infrastructure/repositories/user-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
-import * as certificationChallengeRepository from '../../infrastructure/repositories/certification-challenge-repository.js';
 import * as certificationCompanionAlertRepository from '../../infrastructure/repositories/certification-companion-alert-repository.js';
+import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
 /**
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
  * @typedef {certificationChallengeRepository} CertificationChallengeRepository
@@ -37,7 +37,7 @@ import * as certificationCompanionAlertRepository from '../../infrastructure/rep
 const dependencies = {
   ...sessionRepositories,
   sessionManagementCertificationChallengeRepository,
-  certificationChallengeRepository,
+  challengeCalibrationRepository,
   certificationCandidateRepository,
   assessmentRepository,
   sharedCertificationCandidateRepository,

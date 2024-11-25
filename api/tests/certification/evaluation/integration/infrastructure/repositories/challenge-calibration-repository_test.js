@@ -1,4 +1,4 @@
-import { getByCertificationCourseId } from '../../../../../../src/certification/evaluation/infrastructure/repositories/certification-challenge-repository.js';
+import { getByCertificationCourseId } from '../../../../../../src/certification/evaluation/infrastructure/repositories/challenge-calibration-repository.js';
 import { ChallengeCalibration } from '../../../../../../src/certification/scoring/domain/read-models/ChallengeCalibration.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
