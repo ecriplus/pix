@@ -32,7 +32,6 @@ const serialize = (state) => {
 };
 
 function createTreeFromData(data) {
-  console.log(data);
   const relations = data.flatMap((pathWithNumber) =>
     createRelationsFromPath(pathWithNumber.fullPath).map((path) => {
       return { ...path, number: pathWithNumber.nombre };
@@ -41,9 +40,7 @@ function createTreeFromData(data) {
   const uniqueRelations = [];
 
   relations.forEach((relation) => {
-    const uniqueRelation = uniqueRelations.filter(
-      (uniqueRelations) => relation.from === relation.from && uniqueRelations.to === relation.to,
-    )?.[0];
+    const uniqueRelation = uniqueRelations.filter((uniqueRelation) => uniqueRelation.to === relation.to)?.[0];
     if (uniqueRelation) {
       uniqueRelation.number = new String(Number(uniqueRelation.number) + Number(relation.number));
     } else {
@@ -104,6 +101,26 @@ function minifyTree(tree) {
   };
 }
 
+function applyBoxStyle([id, label]) {
+  const nodeColor = COLORS[label];
+  if (nodeColor) {
+    return `style ${id} fill:${nodeColor}`;
+  }
+  const stepNumber = label.charAt(0);
+  if (stepNumber === '0') {
+    return `style ${id} stroke:#ff3f94,stroke-width:4px`;
+  } else if (stepNumber === '1') {
+    return `style ${id} stroke:#3d68ff,stroke-width:4px`;
+  } else if (stepNumber === '-') {
+    return `style ${id} stroke:#ac008d,stroke-width:4px`;
+  }
+  return `style ${id} stroke:#52d987,stroke-width:4px`;
+}
+
+function applyMermaidStyle(tree) {
+  return Array.from(tree.nodeLabelsById.entries(), applyBoxStyle).join('\n');
+}
+
 function createMermaidFlowchart(tree) {
   return (
     'flowchart LR\n' +
@@ -114,33 +131,20 @@ function createMermaidFlowchart(tree) {
         const finalNode = RESULT_STATUSES.includes(toLabel) ? `(${toLabel})` : `[${toLabel}]`;
         return `${relation.from}[${fromLabel}] -->|${relation.number}| ${relation.to}${finalNode}`;
       })
-      .join('\n') +
-    '\n' +
-    Array.from(tree.nodeLabelsById.entries())
-      .map(([id, label]) => {
-        const nodeColor = COLORS[label];
-        if (nodeColor) {
-          return `style ${id} fill:${nodeColor}`;
-        }
-        const stepNumber = label.charAt(0);
-        if (stepNumber === '0') {
-          return `style ${id} stroke:#ff3f94,stroke-width:4px`;
-        } else if (stepNumber === '1') {
-          return `style ${id} stroke:#3d68ff,stroke-width:4px`;
-        } else if (stepNumber === '-') {
-          // Challenge
-          return `style ${id} stroke:#ac008d,stroke-width:4px`;
-        }
-        return `style ${id} stroke:#52d987,stroke-width:4px`;
-      })
       .join('\n')
   );
 }
 
 function createMermaidFlowchartLink(data) {
-  const flowChart = createMermaidFlowchart(minifyTree(sortTree(createTreeFromData(data))));
+  const rawTree = createTreeFromData(data);
+  const sortedTree = sortTree(rawTree);
+  const minifiedTree = minifyTree(sortedTree);
+
+  const flowChart = createMermaidFlowchart(minifiedTree);
+  const flowChartStyle = applyMermaidStyle(minifiedTree);
+
   const defaultState = {
-    code: flowChart,
+    code: flowChart + '\n' + flowChartStyle,
     mermaid: formatJSON({
       theme: 'default',
     }),
@@ -154,6 +158,7 @@ function createMermaidFlowchartLink(data) {
 }
 
 export {
+  applyMermaidStyle,
   createMermaidFlowchart,
   createMermaidFlowchartLink,
   createRelationsFromPath,

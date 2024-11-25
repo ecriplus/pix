@@ -1,5 +1,6 @@
 import { setupTest } from 'ember-qunit';
 import {
+  applyMermaidStyle,
   createMermaidFlowchart,
   createRelationsFromPath,
   createTreeFromData,
@@ -153,11 +154,7 @@ module('Unit | Utils | create tree data', function () {
         `flowchart LR
 0[1-VALIDATION] -->|5| 1[1-TRAINING]
 1[1-TRAINING] -->|5| 2[1-VALIDATION]
-0[1-VALIDATION] -->|10| 3[2-VALIDATION]
-style 0 stroke:#3d68ff,stroke-width:4px
-style 1 stroke:#3d68ff,stroke-width:4px
-style 2 stroke:#3d68ff,stroke-width:4px
-style 3 stroke:#52d987,stroke-width:4px`,
+0[1-VALIDATION] -->|10| 3[2-VALIDATION]`,
       );
     });
     test('should shape final states with rounded rectangles', async function (assert) {
@@ -177,8 +174,41 @@ style 3 stroke:#52d987,stroke-width:4px`,
         mermaidFlowchart,
         `flowchart LR
 0[1-VALIDATION] -->|5| 1[1-TRAINING]
-1[1-TRAINING] -->|5| 2(FAILED)
-style 0 stroke:#3d68ff,stroke-width:4px
+1[1-TRAINING] -->|5| 2(FAILED)`,
+      );
+    });
+  });
+  module('#applyMermaidStyle', function () {
+    test('should create mermaid Flowchart from tree', async function (assert) {
+      const tree = {
+        nodeLabelsById: new Map([
+          [0, '1-VALIDATION'],
+          [1, '1-TRAINING'],
+          [2, '1-VALIDATION'],
+          [3, '2-VALIDATION'],
+        ]),
+      };
+      const mermaidFlowchart = applyMermaidStyle(tree);
+      assert.strictEqual(
+        mermaidFlowchart,
+        `style 0 stroke:#3d68ff,stroke-width:4px
+style 1 stroke:#3d68ff,stroke-width:4px
+style 2 stroke:#3d68ff,stroke-width:4px
+style 3 stroke:#52d987,stroke-width:4px`,
+      );
+    });
+    test('should shape final states with rounded rectangles', async function (assert) {
+      const tree = {
+        nodeLabelsById: new Map([
+          [0, '1-VALIDATION'],
+          [1, '1-TRAINING'],
+          [2, 'FAILED'],
+        ]),
+      };
+      const mermaidFlowchart = applyMermaidStyle(tree);
+      assert.strictEqual(
+        mermaidFlowchart,
+        `style 0 stroke:#3d68ff,stroke-width:4px
 style 1 stroke:#3d68ff,stroke-width:4px
 style 2 fill:#f1c4c4`,
       );
