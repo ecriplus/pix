@@ -50,7 +50,7 @@ const register = async function (server) {
             assign: 'hasRoleSuperAdmin',
           },
         ],
-        handler: lcmsController.refreshCacheEntries,
+        handler: lcmsController.refreshCache,
         tags: ['api', 'cache'],
         notes: [
           'Cette route est restreinte aux utilisateurs authentifiés avec le rôle Super Admin',

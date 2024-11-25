@@ -47,14 +47,14 @@ describe('Unit | Controller | lcms-controller', function () {
     });
   });
 
-  describe('#refreshCacheEntries', function () {
+  describe('#refreshCache', function () {
     context('nominal case', function () {
       it('should reply with http status 202', async function () {
         // given
         sinon.stub(usecases, 'scheduleRefreshLearningContentCacheJob').resolves();
 
         // when
-        const response = await lcmsController.refreshCacheEntries(
+        const response = await lcmsController.refreshCache(
           {
             auth: {
               credentials: {

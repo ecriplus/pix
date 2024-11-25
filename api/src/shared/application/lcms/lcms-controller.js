@@ -13,7 +13,7 @@ const createRelease = async function (request, h) {
   return h.response({}).code(204);
 };
 
-const refreshCacheEntries = async function (request, h) {
+const refreshCache = async function (request, h) {
   const { userId } = request.auth.credentials;
 
   await usecases.scheduleRefreshLearningContentCacheJob({ userId });
@@ -28,6 +28,6 @@ const patchCacheEntry = async function (request, h) {
   return h.response().code(204);
 };
 
-const lcmsController = { createRelease, refreshCacheEntries, patchCacheEntry };
+const lcmsController = { createRelease, refreshCache, patchCacheEntry };
 
 export { lcmsController };
