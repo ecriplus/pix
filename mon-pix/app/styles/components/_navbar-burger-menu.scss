@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: 32px;
+    padding-right: var(--pix-spacing-8x);
   }
 
   &__content {
@@ -25,7 +25,7 @@
     flex-direction: column;
     margin-top: auto;
     margin-bottom: 21px;
-    padding: 10px 32px;
+    padding: 10px var(--pix-spacing-8x);
   }
 
   &__footer {
@@ -36,17 +36,19 @@
 
 .navbar-burger-menu-list-item {
   &__link {
+    @extend %pix-body-l;
+
     display: inline-block;
     width: 100%;
-    padding: 12px 32px;
+    padding: var(--pix-spacing-3x) var(--pix-spacing-8x);
     color: var(--pix-neutral-800);
-    font-size: 1.125rem;
-    font-family: $font-roboto;
 
     &.active {
-      padding-left: calc(32px - 5px);
+      --border-width: 5px;
+
+      padding-left: calc(var(--pix-spacing-8x) - var(--border-width));
       color: var(--pix-primary-500);
-      border-left: 5px solid var(--pix-primary-500);
+      border-left: var(--border-width) solid var(--pix-primary-500);
     }
 
     &:hover {
@@ -74,12 +76,14 @@
 
     display: inline-block;
     width: 100%;
-    padding: 10px 32px;
+    padding: 10px var(--pix-spacing-8x);
     color: var(--pix-neutral-0);
 
     &.active {
-      padding-left: calc(32px - 5px);
-      border-left: 5px solid var(--pix-neutral-0);
+      --border-width: 5px;
+
+      padding-left: calc(var(--pix-spacing-8x) - var(--border-width));
+      border-left: var(--border-width) solid var(--pix-neutral-0);
     }
 
     &:hover {
