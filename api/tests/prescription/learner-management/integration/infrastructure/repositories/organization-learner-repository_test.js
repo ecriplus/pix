@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { DomainTransaction } from '../../../../../../lib/infrastructure/DomainTransaction.js';
 import * as organizationLearnerRepository from '../../../../../../lib/infrastructure/repositories/organization-learner-repository.js';
 import { CommonOrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/CommonOrganizationLearner.js';
 import { OrganizationLearnerForAdmin } from '../../../../../../src/prescription/learner-management/domain/read-models/OrganizationLearnerForAdmin.js';
@@ -19,7 +18,7 @@ import {
   saveCommonOrganizationLearners,
   update,
 } from '../../../../../../src/prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
-import { ApplicationTransaction } from '../../../../../../src/prescription/shared/infrastructure/ApplicationTransaction.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import {
   NotFoundError,
   OrganizationLearnersCouldNotBeSavedError,
@@ -1087,7 +1086,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
         });
 
         try {
-          await ApplicationTransaction.execute(async () => {
+          await DomainTransaction.execute(async () => {
             await saveCommonOrganizationLearners([learnerSacha]);
             throw new Error();
           });
@@ -1243,7 +1242,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       await databaseBuilder.commit();
 
       try {
-        await ApplicationTransaction.execute(async () => {
+        await DomainTransaction.execute(async () => {
           await disableCommonOrganizationLearnersFromOrganizationId({ organizationId });
           throw new Error();
         });
