@@ -64,7 +64,7 @@ module('Acceptance | Team Creation', function (hooks) {
 
         await authenticateSession(user.id);
 
-        inputLabel = '* ' + t('pages.team-new-item.input-label');
+        inputLabel = `${t('pages.team-new-item.input-label')} *`;
         inviteButton = t('pages.team-new-item.invite-button');
         cancelButton = t('common.actions.cancel');
       });

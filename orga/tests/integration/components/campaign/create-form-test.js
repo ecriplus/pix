@@ -998,7 +998,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
   @membersSortedByFullName={{this.defaultMembers}}
 />`,
     );
-    await fillByLabel(`* ${t('pages.campaign-creation.name.label')}`, 'Ma campagne');
+    await fillByLabel(`${t('pages.campaign-creation.name.label')} *`, 'Ma campagne');
     await clickByName(t('pages.campaign-creation.purpose.assessment'));
     await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
     await click(await screen.findByRole('option', { name: targetProfile.name }));

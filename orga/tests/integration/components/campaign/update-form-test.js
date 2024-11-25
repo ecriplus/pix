@@ -47,8 +47,8 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
       );
 
       // then
-      assert.dom(screen.getByLabelText('* Nom de la campagne')).exists();
-      assert.dom(screen.getByLabelText('* Propriétaire de la campagne')).exists();
+      assert.dom(screen.getByLabelText('Nom de la campagne *')).exists();
+      assert.dom(screen.getByLabelText('Propriétaire de la campagne *')).exists();
       assert.dom(screen.getByLabelText("Texte de la page d'accueil")).exists();
       assert.dom(screen.getByLabelText('Titre du parcours')).exists();
       assert.dom(screen.getByText('Modifier')).exists();
@@ -72,7 +72,7 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
       );
 
       // when
-      await fillByLabel('* Nom de la campagne', 'New name');
+      await fillByLabel('Nom de la campagne *', 'New name');
       await clickByName('Modifier');
 
       //then
