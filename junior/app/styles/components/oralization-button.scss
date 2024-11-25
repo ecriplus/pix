@@ -5,10 +5,25 @@
   justify-content: center;
   width: 80px;
   color: var(--pix-primary-500);
-  line-height: 0.7;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 0.9;
 
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
     padding: 0;
+    background-color: var(--pix-primary-500);
+
+    svg {
+      width: auto;
+      height: 30px;
+      margin-left: 4px;
+      fill: var(--pix-neutral-0);
+    }
 
     &:focus {
       border: 2px solid var(--pix-primary-700);
@@ -17,6 +32,14 @@
 
   &--is-reading {
     color: var(--pix-primary-700);
+
+    button {
+      background-color: var(--pix-primary-700);
+
+      svg {
+        margin-left: unset;
+      }
+    }
   }
 }
 

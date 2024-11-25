@@ -1,4 +1,5 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -10,9 +11,7 @@ export default class OralizationButton extends Component {
   @service intl;
 
   get oralizationIconName() {
-    const iconName = this.isSpeaking ? 'oralization-stop' : 'oralization-start';
-
-    return `/images/icons/${iconName}.svg`;
+    return this.isSpeaking ? 'stopCircle' : 'hearing';
   }
 
   get oralizationButtonLabel() {
@@ -71,7 +70,7 @@ export default class OralizationButton extends Component {
         @variant="tertiary"
         @triggerAction={{this.readText}}
       >
-        <img alt="" src={{this.oralizationIconName}} />
+        <PixIcon @name={{this.oralizationIconName}} />
       </PixButton>
       {{this.oralizationButtonLabel}}
     </div>
