@@ -26,6 +26,7 @@ const register = async (server) => {
               challengePickProbability: Joi.number().min(0).max(100),
               variationPercent: Joi.number().min(0).max(1),
               capacity: Joi.number().min(-8).max(8).required(),
+              accessibilityAdjustmentNeeded: Joi.boolean(),
             })
             .required(),
         },
