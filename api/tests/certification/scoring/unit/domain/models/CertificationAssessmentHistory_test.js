@@ -13,15 +13,15 @@ describe('Unit | Domain | Models | CertificationAssessmentHistory', function () 
       const thirdAnswerId = 789;
 
       const challenges = [
-        domainBuilder.buildCertificationChallengeForScoring({
+        domainBuilder.certification.scoring.buildChallengeCalibration({
           id: 'challenge1',
           certificationChallengeId: 'certificationChallengeId1',
         }),
-        domainBuilder.buildCertificationChallengeForScoring({
+        domainBuilder.certification.scoring.buildChallengeCalibration({
           id: 'challenge2',
           certificationChallengeId: 'certificationChallengeId2',
         }),
-        domainBuilder.buildCertificationChallengeForScoring({
+        domainBuilder.certification.scoring.buildChallengeCalibration({
           id: 'challenge3',
           certificationChallengeId: 'certificationChallengeId3',
         }),

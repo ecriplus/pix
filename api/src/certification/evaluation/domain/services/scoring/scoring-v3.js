@@ -4,7 +4,7 @@
  * @typedef {import('../index.js').CompetenceMarkRepository} CompetenceMarkRepository
  * @typedef {import('../index.js').ScoringDegradationService} ScoringDegradationService
  * @typedef {import('../index.js').CertificationAssessmentHistoryRepository} CertificationAssessmentHistoryRepository
- * @typedef {import('../index.js').CertificationChallengeForScoringRepository} CertificationChallengeForScoringRepository
+ * @typedef {import('../index.js').CertificationChallengeRepository} CertificationChallengeRepository
  * @typedef {import('../index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
  * @typedef {import('../index.js').FlashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {import('../index.js').AnswerRepository} AnswerRepository
@@ -13,7 +13,6 @@
  * @typedef {import('../index.js').ScoringDegradationService} ScoringDegradationService
  */
 import Debug from 'debug';
-import differenceBy from 'lodash/differenceBy.js';
 
 import { config } from '../../../../../shared/config.js';
 import { CompetenceMark } from '../../../../../shared/domain/models/index.js';
@@ -30,7 +29,7 @@ const debugScoringForV3Certification = Debug('pix:certif:v3:scoring');
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CompetenceMarkRepository} params.competenceMarkRepository
  * @param {CertificationAssessmentHistoryRepository} params.certificationAssessmentHistoryRepository
- * @param {CertificationChallengeForScoringRepository} params.certificationChallengeForScoringRepository
+ * @param {CertificationChallengeRepository} params.certificationChallengeRepository
  * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
  * @param {FlashAlgorithmConfigurationRepository} params.flashAlgorithmConfigurationRepository
  * @param {AnswerRepository} params.answerRepository
@@ -46,52 +45,22 @@ export const handleV3CertificationScoring = async ({
   answerRepository,
   assessmentResultRepository,
   certificationAssessmentHistoryRepository,
-  certificationChallengeForScoringRepository,
   certificationCourseRepository,
   competenceMarkRepository,
   flashAlgorithmConfigurationRepository,
   flashAlgorithmService,
   scoringDegradationService,
   scoringConfigurationRepository,
-  challengeRepository,
+  dependencies,
 }) => {
   const { certificationCourseId, id: assessmentId } = certificationAssessment;
-  const candidateAnswers = await answerRepository.findByAssessment(assessmentId);
-  const flashCompatibleChallenges = await challengeRepository.findFlashCompatibleWithoutLocale({
-    useObsoleteChallenges: true,
-  });
 
-  debugScoringForV3Certification(`FlashCompatibleChallenges count: ${flashCompatibleChallenges.length}`);
+  const candidateAnswers = await answerRepository.findByAssessment(assessmentId);
   debugScoringForV3Certification(`CandidateAnswers count: ${candidateAnswers.length}`);
 
-  const certificationChallengesForScoring = await certificationChallengeForScoringRepository.getByCertificationCourseId(
-    { certificationCourseId },
-  );
-  const askedChallenges = await challengeRepository.getMany(
-    certificationChallengesForScoring.map((challengeForScoring) => challengeForScoring.id),
-  );
-
-  _restoreCalibrationValues(certificationChallengesForScoring, askedChallenges);
-
-  const flashCompatibleChallengesNotAskedInCertification = differenceBy(
-    flashCompatibleChallenges,
-    askedChallenges,
-    'id',
-  );
-
-  const allChallenges = [...askedChallenges, ...flashCompatibleChallengesNotAskedInCertification];
-
-  debugScoringForV3Certification(
-    `Challenges after FlashCompatibleChallenges & CandidateAnswers merge count: ${allChallenges.length}`,
-  );
-
-  if (allChallenges.length > flashCompatibleChallenges.length) {
-    const addedChallenges = differenceBy(allChallenges, flashCompatibleChallenges, 'id');
-    const challengeIds = addedChallenges.map((challenge) => challenge.id);
-
-    debugScoringForV3Certification(`Added challenges after merge: ${challengeIds}`);
-  }
-
+  const { allChallenges, askedChallenges, challengeCalibrations } = await dependencies.findByCertificationCourseId({
+    certificationCourseId,
+  });
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
 
   const abortReason = certificationCourse.getAbortReason();
@@ -138,7 +107,7 @@ export const handleV3CertificationScoring = async ({
 
   const certificationAssessmentHistory = CertificationAssessmentHistory.fromChallengesAndAnswers({
     algorithm,
-    challenges: certificationChallengesForScoring,
+    challenges: challengeCalibrations,
     allAnswers: candidateAnswers,
   });
 
@@ -154,14 +123,6 @@ export const handleV3CertificationScoring = async ({
 
   return certificationCourse;
 };
-
-function _restoreCalibrationValues(certificationChallengesForScoring, answeredChallenges) {
-  certificationChallengesForScoring.forEach((certificationChallengeForScoring) => {
-    const answeredChallenge = answeredChallenges.find(({ id }) => id === certificationChallengeForScoring.id);
-    answeredChallenge.discriminant = certificationChallengeForScoring.discriminant;
-    answeredChallenge.difficulty = certificationChallengeForScoring.difficulty;
-  });
-}
 
 function _createV3AssessmentResult({
   allAnswers,

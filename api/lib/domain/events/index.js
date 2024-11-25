@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import { services as certificationEvaluationServices } from '../../../src/certification/evaluation/domain/services/index.js';
 import * as certificationAssessmentHistoryRepository from '../../../src/certification/evaluation/infrastructure/repositories/certification-assessment-history-repository.js';
-import * as certificationChallengeForScoringRepository from '../../../src/certification/evaluation/infrastructure/repositories/certification-challenge-for-scoring-repository.js';
+import * as challengeCalibrationRepository from '../../../src/certification/evaluation/infrastructure/repositories/challenge-calibration-repository.js';
 import * as flashAlgorithmService from '../../../src/certification/flash-certification/domain/services/algorithm-methods/flash.js';
 import * as finalizedSessionRepository from '../../../src/certification/session-management/infrastructure/repositories/finalized-session-repository.js';
 import * as juryCertificationSummaryRepository from '../../../src/certification/session-management/infrastructure/repositories/jury-certification-summary-repository.js';
@@ -70,7 +70,7 @@ const dependencies = {
   certificationAssessmentHistoryRepository,
   certificationAssessmentRepository,
   certificationCenterRepository,
-  certificationChallengeForScoringRepository,
+  challengeCalibrationRepository,
   certificationCourseRepository,
   certificationIssueReportRepository,
   challengeRepository,

@@ -11,7 +11,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       challengeRepository,
       certificationCourseRepository,
       certificationChallengeLiveAlertRepository,
-      certificationChallengeRepository,
+      sessionManagementCertificationChallengeRepository,
       pickChallengeService,
       flashAlgorithmService,
       flashAlgorithmConfigurationRepository,
@@ -39,7 +39,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       certificationChallengeLiveAlertRepository = {
         getLiveAlertValidatedChallengeIdsByAssessmentId: sinon.stub(),
       };
-      certificationChallengeRepository = {
+      sessionManagementCertificationChallengeRepository = {
         save: sinon.stub(),
         getNextChallengeByCourseIdForV3: sinon.stub(),
       };
@@ -87,7 +87,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         certificationCourseRepository.get
           .withArgs({ id: assessment.certificationCourseId })
           .resolves(v3CertificationCourse);
-        certificationChallengeRepository.getNextChallengeByCourseIdForV3
+        sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3
           .withArgs(assessment.certificationCourseId, [])
           .resolves(null);
         challengeRepository.get.resolves();
@@ -126,7 +126,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         const challenge = await getNextChallenge({
           answerRepository,
           assessment,
-          certificationChallengeRepository,
+          sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           challengeRepository,
@@ -178,7 +178,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationCourseRepository.get
             .withArgs({ id: assessment.certificationCourseId })
             .resolves(v3CertificationCourse);
-          certificationChallengeRepository.getNextChallengeByCourseIdForV3
+          sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3
             .withArgs(assessment.certificationCourseId, [])
             .resolves(null);
 
@@ -225,7 +225,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           const challenge = await getNextChallenge({
             answerRepository,
             assessment,
-            certificationChallengeRepository,
+            sessionManagementCertificationChallengeRepository,
             certificationChallengeLiveAlertRepository,
             certificationCourseRepository,
             challengeRepository,
@@ -267,7 +267,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationCourseRepository.get
             .withArgs({ id: assessment.certificationCourseId })
             .resolves(v3CertificationCourse);
-          certificationChallengeRepository.getNextChallengeByCourseIdForV3
+          sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3
             .withArgs(assessment.certificationCourseId, [])
             .resolves(nonAnsweredCertificationChallenge);
           challengeRepository.get.withArgs(nonAnsweredCertificationChallenge.challengeId).resolves(lastSeenChallenge);
@@ -276,7 +276,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           const challenge = await getNextChallenge({
             answerRepository,
             assessment,
-            certificationChallengeRepository,
+            sessionManagementCertificationChallengeRepository,
             certificationChallengeLiveAlertRepository,
             certificationCourseRepository,
             challengeRepository,
@@ -289,7 +289,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
           // then
           expect(challenge).to.equal(lastSeenChallenge);
-          expect(certificationChallengeRepository.save).not.to.have.been.called;
+          expect(sessionManagementCertificationChallengeRepository.save).not.to.have.been.called;
         });
       });
     });
@@ -330,7 +330,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         certificationCourseRepository.get
           .withArgs({ id: assessment.certificationCourseId })
           .resolves(v3CertificationCourse);
-        certificationChallengeRepository.getNextChallengeByCourseIdForV3
+        sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3
           .withArgs(assessment.certificationCourseId, [])
           .resolves(null);
         challengeRepository.get.resolves();
@@ -374,7 +374,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         const challenge = await getNextChallenge({
           answerRepository,
           assessment,
-          certificationChallengeRepository,
+          sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           challengeRepository,
@@ -448,7 +448,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         certificationCourseRepository.get
           .withArgs({ id: assessment.certificationCourseId })
           .resolves(v3CertificationCourse);
-        certificationChallengeRepository.getNextChallengeByCourseIdForV3
+        sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3
           .withArgs(assessment.certificationCourseId, [])
           .resolves(nonAnsweredCertificationChallenge);
 
@@ -464,7 +464,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         const challenge = await getNextChallenge({
           answerRepository,
           assessment,
-          certificationChallengeRepository,
+          sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           challengeRepository,
@@ -477,7 +477,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         // then
         expect(challenge).to.equal(nextChallenge);
-        expect(certificationChallengeRepository.save).to.have.been.called;
+        expect(sessionManagementCertificationChallengeRepository.save).to.have.been.called;
       });
 
       it('should not return a challenge with the same skill', async function () {
@@ -546,7 +546,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         certificationCourseRepository.get
           .withArgs({ id: assessment.certificationCourseId })
           .resolves(v3CertificationCourse);
-        certificationChallengeRepository.getNextChallengeByCourseIdForV3
+        sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3
           .withArgs(assessment.certificationCourseId, [])
           .resolves(nonAnsweredCertificationChallenge);
 
@@ -562,7 +562,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         const challenge = await getNextChallenge({
           answerRepository,
           assessment,
-          certificationChallengeRepository,
+          sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           challengeRepository,
@@ -575,7 +575,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         // then
         expect(challenge).to.equal(challengeWithOtherSkill);
-        expect(certificationChallengeRepository.save).to.have.been.called;
+        expect(sessionManagementCertificationChallengeRepository.save).to.have.been.called;
       });
     });
 
@@ -608,7 +608,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         certificationCourseRepository.get
           .withArgs({ id: assessment.certificationCourseId })
           .resolves(v3CertificationCourse);
-        certificationChallengeRepository.getNextChallengeByCourseIdForV3
+        sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3
           .withArgs(assessment.certificationCourseId, [answeredChallenge.id])
           .resolves(null);
         challengeRepository.get.resolves();
@@ -620,7 +620,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         const error = await catchErr(getNextChallenge)({
           answerRepository,
           assessment,
-          certificationChallengeRepository,
+          sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           challengeRepository,
@@ -687,7 +687,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             certificationCourseRepository.get
               .withArgs({ id: assessment.certificationCourseId })
               .resolves(v3CertificationCourse);
-            certificationChallengeRepository.getNextChallengeByCourseIdForV3
+            sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3
               .withArgs(assessment.certificationCourseId, [])
               .resolves(null);
             challengeRepository.get.resolves();
@@ -726,7 +726,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             const challenge = await getNextChallenge({
               answerRepository,
               assessment,
-              certificationChallengeRepository,
+              sessionManagementCertificationChallengeRepository,
               certificationChallengeLiveAlertRepository,
               certificationCourseRepository,
               challengeRepository,

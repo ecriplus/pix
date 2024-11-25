@@ -21,7 +21,7 @@ import * as flashAlgorithmConfigurationRepository from '../../../shared/infrastr
 import * as scoringConfigurationRepository from '../../../shared/infrastructure/repositories/scoring-configuration-repository.js';
 import * as certificationAssessmentHistoryRepository from '../../infrastructure/repositories/certification-assessment-history-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
-import * as certificationChallengeForScoringRepository from '../../infrastructure/repositories/certification-challenge-for-scoring-repository.js';
+import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
 
 /**
  * Using {@link https://jsdoc.app/tags-type "Closure Compiler's syntax"} to document injected dependencies
@@ -31,7 +31,7 @@ import * as certificationChallengeForScoringRepository from '../../infrastructur
  * @typedef {certificationCourseRepository} CertificationCourseRepository
  * @typedef {scoringDegradationService} ScoringDegradationService
  * @typedef {certificationAssessmentHistoryRepository} CertificationAssessmentHistoryRepository
- * @typedef {certificationChallengeForScoringRepository} CertificationChallengeForScoringRepository
+ * @typedef {challengeCalibrationRepository} ChallengeCalibrationRepository
  * @typedef {scoringConfigurationRepository} ScoringConfigurationRepository
  * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {answerRepository} AnswerRepository
@@ -53,7 +53,7 @@ const dependencies = {
   answerRepository,
   certificationAssessmentHistoryRepository,
   flashAlgorithmService,
-  certificationChallengeForScoringRepository,
+  challengeCalibrationRepository,
   challengeRepository,
   areaRepository,
   placementProfileService,

@@ -4,13 +4,15 @@ import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Use Cases | get-next-challenge-for-v2-certification', function () {
   describe('#getNextChallengeForV2Certification', function () {
-    let certificationChallengeRepository;
+    let sessionManagementCertificationChallengeRepository;
     let challengeRepository;
     let certificationCourseRepository;
 
     beforeEach(function () {
       certificationCourseRepository = { get: sinon.stub() };
-      certificationChallengeRepository = { getNextNonAnsweredChallengeByCourseId: sinon.stub().resolves() };
+      sessionManagementCertificationChallengeRepository = {
+        getNextNonAnsweredChallengeByCourseId: sinon.stub().resolves(),
+      };
       challengeRepository = { get: sinon.stub().resolves() };
     });
 
@@ -20,21 +22,20 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-v2-certification', 
       const assessment = new Assessment({ id: 156, certificationCourseId: 54516 });
       const certificationCourse = domainBuilder.buildCertificationCourse();
 
-      certificationChallengeRepository.getNextNonAnsweredChallengeByCourseId.resolves(nextChallenge);
+      sessionManagementCertificationChallengeRepository.getNextNonAnsweredChallengeByCourseId.resolves(nextChallenge);
       certificationCourseRepository.get.withArgs(assessment.certificationCourseId).resolves(certificationCourse);
 
       // when
       await getNextChallengeForV2Certification({
         assessment,
-        certificationChallengeRepository,
+        sessionManagementCertificationChallengeRepository,
         challengeRepository,
       });
 
       // then
-      expect(certificationChallengeRepository.getNextNonAnsweredChallengeByCourseId).to.have.been.calledWithExactly(
-        156,
-        54516,
-      );
+      expect(
+        sessionManagementCertificationChallengeRepository.getNextNonAnsweredChallengeByCourseId,
+      ).to.have.been.calledWithExactly(156, 54516);
     });
 
     it('should return the next Challenge', async function () {
@@ -45,14 +46,16 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-v2-certification', 
       const assessment = new Assessment({ id: 156, courseId: 54516 });
       const certificationCourse = domainBuilder.buildCertificationCourse();
 
-      certificationChallengeRepository.getNextNonAnsweredChallengeByCourseId.resolves(nextCertificationChallenge);
+      sessionManagementCertificationChallengeRepository.getNextNonAnsweredChallengeByCourseId.resolves(
+        nextCertificationChallenge,
+      );
       challengeRepository.get.resolves(nextChallengeToAnswer);
       certificationCourseRepository.get.withArgs(assessment.certificationCourseId).resolves(certificationCourse);
 
       // when
       const challenge = await getNextChallengeForV2Certification({
         assessment,
-        certificationChallengeRepository,
+        sessionManagementCertificationChallengeRepository,
         challengeRepository,
       });
 

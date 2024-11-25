@@ -2,7 +2,6 @@ import { CertificationCompletedJob } from '../../../../../../../lib/domain/event
 import { CertificationCourseRejected } from '../../../../../../../lib/domain/events/CertificationCourseRejected.js';
 import { CertificationJuryDone } from '../../../../../../../lib/domain/events/CertificationJuryDone.js';
 import { handleV3CertificationScoring } from '../../../../../../../src/certification/evaluation/domain/services/scoring/scoring-v3.js';
-import { CertificationChallengeForScoring } from '../../../../../../../src/certification/scoring/domain/models/CertificationChallengeForScoring.js';
 import { AlgorithmEngineVersion } from '../../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ABORT_REASONS } from '../../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { AutoJuryCommentKeys } from '../../../../../../../src/certification/shared/domain/models/JuryComment.js';
@@ -21,15 +20,14 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
     let answerRepository,
       assessmentResultRepository,
       certificationAssessmentHistoryRepository,
-      certificationChallengeForScoringRepository,
       certificationCourseRepository,
       competenceMarkRepository,
       flashAlgorithmConfigurationRepository,
       flashAlgorithmService,
       scoringDegradationService,
       scoringConfigurationRepository,
-      challengeRepository,
-      baseFlashAlgorithmConfiguration;
+      baseFlashAlgorithmConfiguration,
+      dependencies;
     let clock;
     const now = new Date('2019-01-01T05:06:07Z');
     let allChallenges;
@@ -43,9 +41,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
       };
       assessmentResultRepository = { save: sinon.stub().rejects(new Error('Args mismatch')) };
       certificationAssessmentHistoryRepository = { save: sinon.stub() };
-      certificationChallengeForScoringRepository = {
-        getByCertificationCourseId: sinon.stub().rejects(new Error('Args mismatch')),
-      };
       certificationCourseRepository = { get: sinon.stub().rejects(new Error('Args mismatch')) };
       competenceMarkRepository = { save: sinon.stub().rejects(new Error('Args mismatch')) };
       flashAlgorithmConfigurationRepository = { getMostRecentBeforeDate: sinon.stub() };
@@ -63,18 +58,14 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
           throw new Error(`Args mismatch: ${a}`);
         }),
       };
-      challengeRepository = {
-        findFlashCompatibleWithoutLocale: sinon
-          .stub()
-          .withArgs({
-            useObsoleteChallenges: true,
-          })
-          .returns(allChallenges),
-        getMany: sinon.stub(),
-      };
+
       baseFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
         maximumAssessmentLength,
       });
+
+      dependencies = {
+        findByCertificationCourseId: sinon.stub(),
+      };
     });
 
     afterEach(function () {
@@ -144,7 +135,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
         });
 
         const challenges = generateChallengeList({ length: maximumAssessmentLength });
-        const certificationChallengesForScoring = challenges.map(_generateCertificationChallengeForChallenge);
+        const challengeCalibrations = challenges.map(_generateCertificationChallengeForChallenge);
         const answers = generateAnswersForChallenges({ challenges });
 
         const expectedCapacity = 2;
@@ -153,7 +144,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
         const capacityHistory = [
           domainBuilder.buildCertificationChallengeCapacity({
-            certificationChallengeId: certificationChallengesForScoring[0].certificationChallengeId,
+            certificationChallengeId: challengeCalibrations[0].certificationChallengeId,
             capacity: expectedCapacity,
           }),
         ];
@@ -161,10 +152,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
         const certificationAssessmentHistory = domainBuilder.buildCertificationAssessmentHistory({
           capacityHistory,
         });
-
-        certificationChallengeForScoringRepository.getByCertificationCourseId
-          .withArgs({ certificationCourseId })
-          .resolves(certificationChallengesForScoring);
 
         scoringConfigurationRepository.getLatestByDateAndLocale
           .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
@@ -195,7 +182,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
         flashAlgorithmService.getCapacityAndErrorRateHistory
           .withArgs({
-            challenges: certificationChallengesForScoring,
+            challenges: challengeCalibrations,
             allAnswers: answers,
             capacity: sinon.match.number,
             variationPercent: undefined,
@@ -207,13 +194,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               capacity: expectedCapacity,
             },
           ]);
-        challengeRepository.findFlashCompatibleWithoutLocale
-          .withArgs({
-            useObsoleteChallenges: true,
-          })
-          .returns(challenges);
 
-        challengeRepository.getMany.withArgs(challenges.map((e) => e.id)).returns(challenges);
+        dependencies.findByCertificationCourseId.resolves({
+          allChallenges: challenges,
+          askedChallenges: challenges,
+          challengeCalibrations,
+        });
 
         const event = new CertificationJuryDone({
           certificationCourseId,
@@ -228,13 +214,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
           answerRepository,
           assessmentResultRepository,
           certificationAssessmentHistoryRepository,
-          certificationChallengeForScoringRepository,
           certificationCourseRepository,
           competenceMarkRepository,
           flashAlgorithmConfigurationRepository,
           flashAlgorithmService,
           scoringConfigurationRepository,
-          challengeRepository,
+          dependencies,
         });
 
         // then
@@ -274,14 +259,11 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
             const expectedCapacity = 2;
             const scoreForCapacity = 438;
             const answeredChallenges = allChallenges;
-            const { answers, certificationChallengesForScoring } = _buildDataFromAnsweredChallenges(
-              answeredChallenges,
-              challengeRepository,
-            );
+            const { answers, challengeCalibrations } = _buildDataFromAnsweredChallenges(answeredChallenges);
 
             const capacityHistory = [
               domainBuilder.buildCertificationChallengeCapacity({
-                certificationChallengeId: certificationChallengesForScoring[0].certificationChallengeId,
+                certificationChallengeId: challengeCalibrations[0].certificationChallengeId,
                 capacity: expectedCapacity,
               }),
             ];
@@ -290,9 +272,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               capacityHistory,
             });
 
-            certificationChallengeForScoringRepository.getByCertificationCourseId
-              .withArgs({ certificationCourseId })
-              .resolves(certificationChallengesForScoring);
+            dependencies.findByCertificationCourseId.resolves({
+              allChallenges: answeredChallenges,
+              askedChallenges: answeredChallenges,
+              challengeCalibrations,
+            });
+
             answerRepository.findByAssessment.withArgs(assessmentId).resolves(answers);
             certificationCourseRepository.get.withArgs({ id: certificationCourseId }).resolves(certificationCourse);
             flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
@@ -314,7 +299,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             flashAlgorithmService.getCapacityAndErrorRateHistory
               .withArgs({
-                challenges: certificationChallengesForScoring,
+                challenges: challengeCalibrations,
                 allAnswers: answers,
                 capacity: sinon.match.number,
                 variationPercent: undefined,
@@ -336,13 +321,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               answerRepository,
               assessmentResultRepository,
               certificationAssessmentHistoryRepository,
-              certificationChallengeForScoringRepository,
               certificationCourseRepository,
               competenceMarkRepository,
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
-              challengeRepository,
+              dependencies,
             });
 
             // then
@@ -383,14 +367,11 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               const expectedCapacity = 8;
               const cappedScoreForCapacity = 895;
               const answeredChallenges = allChallenges;
-              const { answers, certificationChallengesForScoring } = _buildDataFromAnsweredChallenges(
-                answeredChallenges,
-                challengeRepository,
-              );
+              const { answers, challengeCalibrations } = _buildDataFromAnsweredChallenges(answeredChallenges);
 
               const capacityHistory = [
                 domainBuilder.buildCertificationChallengeCapacity({
-                  certificationChallengeId: certificationChallengesForScoring[0].certificationChallengeId,
+                  certificationChallengeId: challengeCalibrations[0].certificationChallengeId,
                   capacity: expectedCapacity,
                 }),
               ];
@@ -399,9 +380,11 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacityHistory,
               });
 
-              certificationChallengeForScoringRepository.getByCertificationCourseId
-                .withArgs({ certificationCourseId })
-                .resolves(certificationChallengesForScoring);
+              dependencies.findByCertificationCourseId.resolves({
+                allChallenges,
+                askedChallenges: allChallenges,
+                challengeCalibrations,
+              });
               answerRepository.findByAssessment.withArgs(assessmentId).resolves(answers);
               certificationCourseRepository.get.withArgs({ id: certificationCourseId }).resolves(certificationCourse);
               flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
@@ -422,7 +405,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
               flashAlgorithmService.getCapacityAndErrorRateHistory
                 .withArgs({
-                  challenges: certificationChallengesForScoring,
+                  challenges: challengeCalibrations,
                   allAnswers: answers,
                   capacity: sinon.match.number,
                   variationPercent: undefined,
@@ -446,13 +429,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 answerRepository,
                 assessmentResultRepository,
                 certificationAssessmentHistoryRepository,
-                certificationChallengeForScoringRepository,
                 certificationCourseRepository,
                 competenceMarkRepository,
                 flashAlgorithmConfigurationRepository,
                 flashAlgorithmService,
                 scoringConfigurationRepository,
-                challengeRepository,
+                dependencies,
               });
 
               // then
@@ -526,10 +508,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
             });
 
             const answeredChallenges = allChallenges.slice(0, -2);
-            const { answers, certificationChallengesForScoring } = _buildDataFromAnsweredChallenges(
-              answeredChallenges,
-              challengeRepository,
-            );
+            const { answers, challengeCalibrations } = _buildDataFromAnsweredChallenges(answeredChallenges);
 
             const expectedCapacity = 2;
             const scoreForCapacity = 438;
@@ -537,7 +516,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             const capacityHistory = [
               domainBuilder.buildCertificationChallengeCapacity({
-                certificationChallengeId: certificationChallengesForScoring[0].certificationChallengeId,
+                certificationChallengeId: challengeCalibrations[0].certificationChallengeId,
                 capacity: expectedCapacity,
               }),
             ];
@@ -546,9 +525,11 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               capacityHistory,
             });
 
-            certificationChallengeForScoringRepository.getByCertificationCourseId
-              .withArgs({ certificationCourseId })
-              .resolves(certificationChallengesForScoring);
+            dependencies.findByCertificationCourseId.resolves({
+              allChallenges: answeredChallenges,
+              askedChallenges: answeredChallenges,
+              challengeCalibrations,
+            });
 
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
 
@@ -579,7 +560,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             flashAlgorithmService.getCapacityAndErrorRateHistory
               .withArgs({
-                challenges: certificationChallengesForScoring,
+                challenges: challengeCalibrations,
                 allAnswers: answers,
                 capacity: sinon.match.number,
                 variationPercent: undefined,
@@ -606,13 +587,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               answerRepository,
               assessmentResultRepository,
               certificationAssessmentHistoryRepository,
-              certificationChallengeForScoringRepository,
               certificationCourseRepository,
               competenceMarkRepository,
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
-              challengeRepository,
+              dependencies,
             });
 
             // then
@@ -653,14 +633,11 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
             const emitter = CertificationResult.emitters.PIX_ALGO_AUTO_JURY;
 
             const answeredChallenges = allChallenges.slice(0, -2);
-            const { answers, certificationChallengesForScoring } = _buildDataFromAnsweredChallenges(
-              answeredChallenges,
-              challengeRepository,
-            );
+            const { answers, challengeCalibrations } = _buildDataFromAnsweredChallenges(answeredChallenges);
 
             const capacityHistory = [
               domainBuilder.buildCertificationChallengeCapacity({
-                certificationChallengeId: certificationChallengesForScoring[0].certificationChallengeId,
+                certificationChallengeId: challengeCalibrations[0].certificationChallengeId,
                 capacity: expectedCapacity,
               }),
             ];
@@ -673,9 +650,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               .withArgs(certificationCourseStartDate)
               .resolves(baseFlashAlgorithmConfiguration);
 
-            certificationChallengeForScoringRepository.getByCertificationCourseId
-              .withArgs({ certificationCourseId })
-              .resolves(certificationChallengesForScoring);
+            dependencies.findByCertificationCourseId.resolves({
+              allChallenges: answeredChallenges,
+              askedChallenges: answeredChallenges,
+              challengeCalibrations,
+            });
+
             answerRepository.findByAssessment.withArgs(assessmentId).resolves(answers);
             certificationCourseRepository.get
               .withArgs({ id: certificationCourseId })
@@ -696,7 +676,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             flashAlgorithmService.getCapacityAndErrorRateHistory
               .withArgs({
-                challenges: certificationChallengesForScoring,
+                challenges: challengeCalibrations,
                 allAnswers: answers,
                 capacity: sinon.match.number,
                 variationPercent: undefined,
@@ -721,13 +701,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               answerRepository,
               assessmentResultRepository,
               certificationAssessmentHistoryRepository,
-              certificationChallengeForScoringRepository,
               certificationCourseRepository,
               competenceMarkRepository,
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
-              challengeRepository,
+              dependencies,
             });
 
             // then
@@ -771,10 +750,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
             });
 
             const answeredChallenges = allChallenges.slice(0, -2);
-            const { answers, certificationChallengesForScoring } = _buildDataFromAnsweredChallenges(
-              answeredChallenges,
-              challengeRepository,
-            );
+            const { answers, challengeCalibrations } = _buildDataFromAnsweredChallenges(answeredChallenges);
 
             const expectedCapacity = 2;
             const scoreForCapacity = 438;
@@ -782,7 +758,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             const capacityHistory = [
               domainBuilder.buildCertificationChallengeCapacity({
-                certificationChallengeId: certificationChallengesForScoring[0].certificationChallengeId,
+                certificationChallengeId: challengeCalibrations[0].certificationChallengeId,
                 capacity: expectedCapacity,
               }),
             ];
@@ -791,9 +767,11 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               capacityHistory,
             });
 
-            certificationChallengeForScoringRepository.getByCertificationCourseId
-              .withArgs({ certificationCourseId })
-              .resolves(certificationChallengesForScoring);
+            dependencies.findByCertificationCourseId.resolves({
+              allChallenges: answeredChallenges,
+              askedChallenges: answeredChallenges,
+              challengeCalibrations,
+            });
 
             scoringConfigurationRepository.getLatestByDateAndLocale
               .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
@@ -820,7 +798,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             flashAlgorithmService.getCapacityAndErrorRateHistory
               .withArgs({
-                challenges: certificationChallengesForScoring,
+                challenges: challengeCalibrations,
                 allAnswers: answers,
                 capacity: sinon.match.number,
                 variationPercent: undefined,
@@ -847,13 +825,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               answerRepository,
               assessmentResultRepository,
               certificationAssessmentHistoryRepository,
-              certificationChallengeForScoringRepository,
               certificationCourseRepository,
               competenceMarkRepository,
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
-              challengeRepository,
+              dependencies,
             });
 
             // then
@@ -894,14 +871,11 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
             });
 
             const answeredChallenges = allChallenges.slice(0, -2);
-            const { answers, certificationChallengesForScoring } = _buildDataFromAnsweredChallenges(
-              answeredChallenges,
-              challengeRepository,
-            );
+            const { answers, challengeCalibrations } = _buildDataFromAnsweredChallenges(answeredChallenges);
 
             const capacityHistory = [
               domainBuilder.buildCertificationChallengeCapacity({
-                certificationChallengeId: certificationChallengesForScoring[0].certificationChallengeId,
+                certificationChallengeId: challengeCalibrations[0].certificationChallengeId,
                 capacity: expectedCapacity,
               }),
             ];
@@ -914,9 +888,11 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               .withArgs(certificationCourseStartDate)
               .resolves(baseFlashAlgorithmConfiguration);
 
-            certificationChallengeForScoringRepository.getByCertificationCourseId
-              .withArgs({ certificationCourseId })
-              .resolves(certificationChallengesForScoring);
+            dependencies.findByCertificationCourseId.resolves({
+              allChallenges: answeredChallenges,
+              askedChallenges: answeredChallenges,
+              challengeCalibrations,
+            });
 
             answerRepository.findByAssessment.withArgs(assessmentId).resolves(answers);
             certificationCourseRepository.get
@@ -942,7 +918,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             flashAlgorithmService.getCapacityAndErrorRateHistory
               .withArgs({
-                challenges: certificationChallengesForScoring,
+                challenges: challengeCalibrations,
                 allAnswers: answers,
                 capacity: sinon.match.number,
                 variationPercent: undefined,
@@ -964,13 +940,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               answerRepository,
               assessmentResultRepository,
               certificationAssessmentHistoryRepository,
-              certificationChallengeForScoringRepository,
               certificationCourseRepository,
               competenceMarkRepository,
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
-              challengeRepository,
+              dependencies,
             });
 
             // then
@@ -1011,10 +986,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
             const expectedCapacity = 2;
             const pixScore = 438;
             const answeredChallenges = allChallenges.slice(0, -1);
-            const { answers, certificationChallengesForScoring } = _buildDataFromAnsweredChallenges(
-              answeredChallenges,
-              challengeRepository,
-            );
+            const { answers, challengeCalibrations } = _buildDataFromAnsweredChallenges(answeredChallenges);
 
             const abortReason = ABORT_REASONS.CANDIDATE;
             const abortedCertificationCourse = domainBuilder.buildCertificationCourse({
@@ -1027,7 +999,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             const capacityHistory = [
               domainBuilder.buildCertificationChallengeCapacity({
-                certificationChallengeId: certificationChallengesForScoring[0].certificationChallengeId,
+                certificationChallengeId: challengeCalibrations[0].certificationChallengeId,
                 capacity: expectedCapacity,
               }),
             ];
@@ -1044,13 +1016,11 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             const challengesAfterCalibration = answeredChallenges.slice(1);
 
-            challengeRepository.getMany
-              .withArgs(answeredChallenges.map((e) => e.id))
-              .returns([challengeExcludedFromCalibration, ...challengesAfterCalibration]);
-
-            certificationChallengeForScoringRepository.getByCertificationCourseId
-              .withArgs({ certificationCourseId })
-              .resolves(certificationChallengesForScoring);
+            dependencies.findByCertificationCourseId.resolves({
+              allChallenges: [challengeExcludedFromCalibration, ...challengesAfterCalibration],
+              askedChallenges: [challengeExcludedFromCalibration, ...challengesAfterCalibration],
+              challengeCalibrations,
+            });
             answerRepository.findByAssessment.withArgs(assessmentId).resolves(answers);
             certificationCourseRepository.get
               .withArgs({ id: certificationCourseId })
@@ -1072,7 +1042,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               });
             flashAlgorithmService.getCapacityAndErrorRateHistory
               .withArgs({
-                challenges: certificationChallengesForScoring,
+                challenges: challengeCalibrations,
                 allAnswers: answers,
                 capacity: sinon.match.number,
                 variationPercent: undefined,
@@ -1084,12 +1054,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                   capacity: expectedCapacity,
                 },
               ]);
-
-            challengeRepository.findFlashCompatibleWithoutLocale
-              .withArgs({
-                useObsoleteChallenges: true,
-              })
-              .returns(challengesAfterCalibration);
 
             scoringConfigurationRepository.getLatestByDateAndLocale
               .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
@@ -1106,13 +1070,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               answerRepository,
               assessmentResultRepository,
               certificationAssessmentHistoryRepository,
-              certificationChallengeForScoringRepository,
               certificationCourseRepository,
               competenceMarkRepository,
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
-              challengeRepository,
+              dependencies,
               scoringDegradationService,
             });
 
@@ -1152,10 +1115,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
             });
 
             const answeredChallenges = allChallenges.slice(0, -1);
-            const { answers, certificationChallengesForScoring } = _buildDataFromAnsweredChallenges(
-              answeredChallenges,
-              challengeRepository,
-            );
+            const { answers, challengeCalibrations } = _buildDataFromAnsweredChallenges(answeredChallenges);
 
             const expectedCapacity = 2;
             const rawScore = 438;
@@ -1163,7 +1123,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             const capacityHistory = [
               domainBuilder.buildCertificationChallengeCapacity({
-                certificationChallengeId: certificationChallengesForScoring[0].certificationChallengeId,
+                certificationChallengeId: challengeCalibrations[0].certificationChallengeId,
                 capacity: expectedCapacity,
               }),
             ];
@@ -1172,9 +1132,11 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               capacityHistory,
             });
 
-            certificationChallengeForScoringRepository.getByCertificationCourseId
-              .withArgs({ certificationCourseId })
-              .resolves(certificationChallengesForScoring);
+            dependencies.findByCertificationCourseId.resolves({
+              allChallenges: answeredChallenges,
+              askedChallenges: answeredChallenges,
+              challengeCalibrations,
+            });
 
             scoringConfigurationRepository.getLatestByDateAndLocale
               .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
@@ -1205,7 +1167,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             flashAlgorithmService.getCapacityAndErrorRateHistory
               .withArgs({
-                challenges: certificationChallengesForScoring,
+                challenges: challengeCalibrations,
                 allAnswers: answers,
                 capacity: sinon.match.number,
                 variationPercent: undefined,
@@ -1232,13 +1194,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               answerRepository,
               assessmentResultRepository,
               certificationAssessmentHistoryRepository,
-              certificationChallengeForScoringRepository,
               certificationCourseRepository,
               competenceMarkRepository,
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
-              challengeRepository,
+              dependencies,
             });
 
             // then
@@ -1277,10 +1238,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
             });
 
             const answeredChallenges = allChallenges.slice(0, -1);
-            const { answers, certificationChallengesForScoring } = _buildDataFromAnsweredChallenges(
-              answeredChallenges,
-              challengeRepository,
-            );
+            const { answers, challengeCalibrations } = _buildDataFromAnsweredChallenges(answeredChallenges);
 
             const expectedCapacity = 2;
             const scoreForCapacity = 438;
@@ -1288,7 +1246,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             const capacityHistory = [
               domainBuilder.buildCertificationChallengeCapacity({
-                certificationChallengeId: certificationChallengesForScoring[0].certificationChallengeId,
+                certificationChallengeId: challengeCalibrations[0].certificationChallengeId,
                 capacity: expectedCapacity,
               }),
             ];
@@ -1297,9 +1255,11 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               capacityHistory,
             });
 
-            certificationChallengeForScoringRepository.getByCertificationCourseId
-              .withArgs({ certificationCourseId })
-              .resolves(certificationChallengesForScoring);
+            dependencies.findByCertificationCourseId.resolves({
+              allChallenges: answeredChallenges,
+              askedChallenges: answeredChallenges,
+              challengeCalibrations,
+            });
 
             scoringConfigurationRepository.getLatestByDateAndLocale
               .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
@@ -1330,7 +1290,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             flashAlgorithmService.getCapacityAndErrorRateHistory
               .withArgs({
-                challenges: certificationChallengesForScoring,
+                challenges: challengeCalibrations,
                 allAnswers: answers,
                 capacity: sinon.match.number,
                 variationPercent: undefined,
@@ -1356,13 +1316,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               answerRepository,
               assessmentResultRepository,
               certificationAssessmentHistoryRepository,
-              certificationChallengeForScoringRepository,
               certificationCourseRepository,
               competenceMarkRepository,
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
-              challengeRepository,
+              dependencies,
             });
 
             // then
@@ -1397,10 +1356,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
             });
 
             const answeredChallenges = allChallenges;
-            const { answers, certificationChallengesForScoring } = _buildDataFromAnsweredChallenges(
-              answeredChallenges,
-              challengeRepository,
-            );
+            const { answers, challengeCalibrations } = _buildDataFromAnsweredChallenges(answeredChallenges);
 
             const expectedCapacity = 8;
             const cappedscoreForCapacity = 895;
@@ -1408,7 +1364,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             const capacityHistory = [
               domainBuilder.buildCertificationChallengeCapacity({
-                certificationChallengeId: certificationChallengesForScoring[0].certificationChallengeId,
+                certificationChallengeId: challengeCalibrations[0].certificationChallengeId,
                 capacity: expectedCapacity,
               }),
             ];
@@ -1417,9 +1373,11 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               capacityHistory,
             });
 
-            certificationChallengeForScoringRepository.getByCertificationCourseId
-              .withArgs({ certificationCourseId })
-              .resolves(certificationChallengesForScoring);
+            dependencies.findByCertificationCourseId.resolves({
+              allChallenges: allChallenges,
+              askedChallenges: allChallenges,
+              challengeCalibrations,
+            });
 
             scoringConfigurationRepository.getLatestByDateAndLocale
               .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
@@ -1450,7 +1408,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             flashAlgorithmService.getCapacityAndErrorRateHistory
               .withArgs({
-                challenges: certificationChallengesForScoring,
+                challenges: challengeCalibrations,
                 allAnswers: answers,
                 capacity: sinon.match.number,
                 variationPercent: undefined,
@@ -1489,13 +1447,12 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               answerRepository,
               assessmentResultRepository,
               certificationAssessmentHistoryRepository,
-              certificationChallengeForScoringRepository,
               certificationCourseRepository,
               competenceMarkRepository,
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
-              challengeRepository,
+              dependencies,
             });
 
             // then
@@ -1511,7 +1468,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 });
 
 const _generateCertificationChallengeForChallenge = ({ discriminant, difficulty, id }) => {
-  return new CertificationChallengeForScoring({
+  return domainBuilder.certification.scoring.buildChallengeCalibration({
     id,
     discriminant,
     difficulty,
@@ -1519,11 +1476,9 @@ const _generateCertificationChallengeForChallenge = ({ discriminant, difficulty,
   });
 };
 
-const _buildDataFromAnsweredChallenges = (answeredChallenges, challengeRepository) => {
-  const certificationChallengesForScoring = answeredChallenges.map(_generateCertificationChallengeForChallenge);
+const _buildDataFromAnsweredChallenges = (answeredChallenges) => {
+  const challengeCalibrations = answeredChallenges.map(_generateCertificationChallengeForChallenge);
   const answers = generateAnswersForChallenges({ challenges: answeredChallenges });
 
-  challengeRepository.getMany.withArgs(answeredChallenges.map((e) => e.id)).returns(answeredChallenges);
-
-  return { answers, certificationChallengesForScoring };
+  return { answers, challengeCalibrations };
 };

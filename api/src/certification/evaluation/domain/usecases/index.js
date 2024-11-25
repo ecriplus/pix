@@ -13,7 +13,7 @@ import {
   answerRepository,
   assessmentRepository,
   assessmentResultRepository,
-  certificationChallengeRepository,
+  certificationChallengeRepository as sessionManagementCertificationChallengeRepository,
   challengeRepository,
   competenceMarkRepository,
   cpfExportRepository,
@@ -28,12 +28,17 @@ import * as certificationCourseRepository from '../../../shared/infrastructure/r
 import * as userRepository from '../../../shared/infrastructure/repositories/user-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCompanionAlertRepository from '../../infrastructure/repositories/certification-companion-alert-repository.js';
+import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
 /**
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
+ * @typedef {certificationChallengeRepository} CertificationChallengeRepository
  */
 
 const dependencies = {
   ...sessionRepositories,
+  sessionManagementCertificationChallengeRepository,
+  challengeCalibrationRepository,
+  certificationCandidateRepository,
   assessmentRepository,
   sharedCertificationCandidateRepository,
   verifyCertificateCodeService,
@@ -45,7 +50,6 @@ const dependencies = {
   competenceMarkRepository,
   certificationChallengesService,
   cpfExportRepository,
-  certificationChallengeRepository,
   flashAlgorithmConfigurationRepository,
   flashAlgorithmService,
   languageService,
@@ -53,7 +57,6 @@ const dependencies = {
   pickChallengeService,
   placementProfileService,
   certificationCenterRepository,
-  certificationCandidateRepository,
   certificationCompanionAlertRepository,
   certificationCourseRepository,
 };

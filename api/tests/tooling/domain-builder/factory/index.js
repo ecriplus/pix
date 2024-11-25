@@ -190,7 +190,7 @@ import { buildFlashAssessmentAlgorithm } from './certification/flash-certificati
 import { buildAssessmentResult as buildCertificationScoringAssessmentResult } from './certification/scoring/build-assessment-result.js';
 import { buildCertificationAssessmentHistory } from './certification/scoring/build-certification-assessment-history.js';
 import { buildCertificationChallengeCapacity } from './certification/scoring/build-certification-challenge-capacity.js';
-import { buildCertificationChallengeForScoring } from './certification/scoring/build-certification-challenge-for-scoring.js';
+import { buildChallengeCalibration } from './certification/scoring/build-challenge-calibration.js';
 import { buildCertificationCandidate as buildSessionManagementCandidate } from './certification/session-management/build-certification-candidate.js';
 import { buildCertificationDetails } from './certification/session-management/build-certification-details.js';
 import { buildCertificationSessionComplementaryCertification } from './certification/session-management/build-certification-session-complementary-certification.js';
@@ -213,6 +213,7 @@ const certification = {
   },
   scoring: {
     buildAssessmentResult: buildCertificationScoringAssessmentResult,
+    buildChallengeCalibration,
   },
   enrolment: {
     buildSession: buildSessionEnrolment,
@@ -307,7 +308,6 @@ export {
   buildCertificationCenterMembership,
   buildCertificationChallenge,
   buildCertificationChallengeCapacity,
-  buildCertificationChallengeForScoring,
   buildCertificationChallengeLiveAlert,
   buildCertificationChallengeWithType,
   buildCertificationCompanionLiveAlert,
