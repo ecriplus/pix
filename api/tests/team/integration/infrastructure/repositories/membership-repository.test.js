@@ -70,6 +70,35 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
     });
   });
 
+  describe('#countByUserId', function () {
+    it("counts all the user's memberships in organizations", async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildMembership({ userId });
+      databaseBuilder.factory.buildMembership({ userId });
+      databaseBuilder.factory.buildMembership();
+      await databaseBuilder.commit();
+
+      // when
+      const membershipCount = await membershipRepository.countByUserId(userId);
+
+      // then
+      expect(membershipCount).to.equal(2);
+    });
+
+    it('does not count disabled memberships', async function () {
+      // given
+      const { userId } = databaseBuilder.factory.buildMembership({ disabledAt: new Date() });
+      await databaseBuilder.commit();
+
+      // when
+      const membershipCount = await membershipRepository.countByUserId(userId);
+
+      // then
+      expect(membershipCount).to.equal(0);
+    });
+  });
+
   describe('#get', function () {
     let existingMembershipId;
 
