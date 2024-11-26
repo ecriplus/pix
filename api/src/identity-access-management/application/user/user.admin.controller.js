@@ -14,9 +14,9 @@ import * as userLoginSerializer from '../../infrastructure/serializers/jsonapi/u
  * @returns {Promise<*>}
  */
 const findPaginatedFilteredUsers = async function (request, h, dependencies = { userForAdminSerializer }) {
-  const { filter, page } = request.query;
+  const { filter, page, queryType } = request.query;
 
-  const { models: users, pagination } = await usecases.findPaginatedFilteredUsers({ filter, page });
+  const { models: users, pagination } = await usecases.findPaginatedFilteredUsers({ filter, page, queryType });
   return dependencies.userForAdminSerializer.serialize(users, pagination);
 };
 

@@ -159,9 +159,9 @@ const getUserDetailsForAdmin = async function (userId) {
   });
 };
 
-const findPaginatedFiltered = async function ({ filter, page }) {
+const findPaginatedFiltered = async function ({ filter, page, queryType }) {
   const query = knex('users')
-    .where((qb) => _setSearchFiltersForQueryBuilder(filter, qb))
+    .where((qb) => _setSearchFiltersForQueryBuilder(filter, qb, queryType))
     .orderBy([{ column: 'firstName', order: 'asc' }, { column: 'lastName', order: 'asc' }, { column: 'id' }]);
   const { results, pagination } = await fetchPage(query, page);
 
@@ -625,22 +625,30 @@ function _toDomainFromDTO({
   });
 }
 
-function _setSearchFiltersForQueryBuilder(filter, qb) {
+function _applyQueryType(field, value, qb, queryType) {
+  if (queryType === 'EXACT_QUERY') {
+    qb.where(field, value);
+  } else {
+    qb.whereILike(field, `%${value}%`);
+  }
+}
+
+function _setSearchFiltersForQueryBuilder(filter, qb, queryType) {
   const { id, firstName, lastName, email, username } = filter;
 
   if (id) {
     qb.where({ id });
   }
   if (firstName) {
-    qb.whereILike('firstName', `%${firstName}%`);
+    _applyQueryType('firstName', firstName, qb, queryType);
   }
   if (lastName) {
-    qb.whereILike('lastName', `%${lastName}%`);
+    _applyQueryType('lastName', lastName, qb, queryType);
   }
   if (email) {
-    qb.whereILike('email', `%${email}%`);
+    _applyQueryType('email', email, qb, queryType);
   }
   if (username) {
-    qb.whereILike('username', `%${username}%`);
+    _applyQueryType('username', username, qb, queryType);
   }
 }

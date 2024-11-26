@@ -7,18 +7,18 @@ describe('Unit | Identity Access Management | UseCase | find-paginated-filtered-
     // given
     const filter = { email: 'gigi@example.net' };
     const page = { number: 1, size: 2 };
-
+    const queryType = 'CONTAINS';
     const resolvedPagination = { page: 1, pageSize: 2, itemsCount: 3, pagesCount: 2 };
     const matchingUsers = [new User({ id: 1 }), new User({ id: 2 }), new User({ id: 3 })];
     const userRepository = {
       findPaginatedFiltered: sinon.stub(),
     };
     userRepository.findPaginatedFiltered
-      .withArgs({ filter, page })
+      .withArgs({ filter, page, queryType })
       .resolves({ models: matchingUsers, pagination: resolvedPagination });
 
     // when
-    const response = await usecases.findPaginatedFilteredUsers({ filter, page, userRepository });
+    const response = await usecases.findPaginatedFilteredUsers({ filter, page, queryType, userRepository });
 
     // then
     expect(response.models).to.equal(matchingUsers);

@@ -297,195 +297,41 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           expect(pagination).to.deep.equal(expectedPagination);
         });
       });
+      context('when default/contains request type is settled', function () {
+        context('when there are multiple users matching the same "first name" search pattern', function () {
+          beforeEach(function () {
+            databaseBuilder.factory.buildUser({ firstName: 'Son Gohan' });
+            databaseBuilder.factory.buildUser({ firstName: 'Son Goku' });
+            databaseBuilder.factory.buildUser({ firstName: 'Son Goten' });
+            databaseBuilder.factory.buildUser({ firstName: 'Vegeta' });
+            databaseBuilder.factory.buildUser({ firstName: 'Piccolo' });
+            return databaseBuilder.commit();
+          });
 
-      context('when there are multiple users matching the same "first name" search pattern', function () {
-        beforeEach(function () {
-          databaseBuilder.factory.buildUser({ firstName: 'Son Gohan' });
-          databaseBuilder.factory.buildUser({ firstName: 'Son Goku' });
-          databaseBuilder.factory.buildUser({ firstName: 'Son Goten' });
-          databaseBuilder.factory.buildUser({ firstName: 'Vegeta' });
-          databaseBuilder.factory.buildUser({ firstName: 'Piccolo' });
-          return databaseBuilder.commit();
+          it('should return only users matching "first name" if given in filter', async function () {
+            // given
+            const filter = { firstName: 'Go' };
+            const page = { number: 1, size: 10 };
+            const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 3 };
+
+            // when
+            const { models: matchingUsers, pagination } = await userRepository.findPaginatedFiltered({ filter, page });
+
+            // then
+            expect(map(matchingUsers, 'firstName')).to.have.members(['Son Gohan', 'Son Goku', 'Son Goten']);
+            expect(pagination).to.deep.equal(expectedPagination);
+          });
         });
 
-        it('should return only users matching "first name" if given in filter', async function () {
-          // given
-          const filter = { firstName: 'Go' };
-          const page = { number: 1, size: 10 };
-          const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 3 };
-
-          // when
-          const { models: matchingUsers, pagination } = await userRepository.findPaginatedFiltered({ filter, page });
-
-          // then
-          expect(map(matchingUsers, 'firstName')).to.have.members(['Son Gohan', 'Son Goku', 'Son Goten']);
-          expect(pagination).to.deep.equal(expectedPagination);
-        });
-      });
-
-      context('when there are multiple users matching the same "last name" search pattern', function () {
-        beforeEach(async function () {
-          each(
-            [
-              { firstName: 'Anakin', lastName: 'Skywalker' },
-              { firstName: 'Luke', lastName: 'Skywalker' },
-              { firstName: 'Leia', lastName: 'Skywalker' },
-              { firstName: 'Han', lastName: 'Solo' },
-              { firstName: 'Ben', lastName: 'Solo' },
-            ],
-            (user) => {
-              databaseBuilder.factory.buildUser(user);
-            },
-          );
-
-          await databaseBuilder.commit();
-        });
-
-        it('should return only users matching "last name" if given in filter', async function () {
-          // given
-          const filter = { lastName: 'walk' };
-          const page = { number: 1, size: 10 };
-          const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 3 };
-
-          // when
-          const { models: matchingUsers, pagination } = await userRepository.findPaginatedFiltered({ filter, page });
-
-          // then
-          expect(map(matchingUsers, 'firstName')).to.have.members(['Anakin', 'Luke', 'Leia']);
-          expect(pagination).to.deep.equal(expectedPagination);
-        });
-      });
-
-      context('when there are multiple users matching the same "email" search pattern', function () {
-        beforeEach(async function () {
-          each(
-            [
-              { email: 'playpus@pix.fr' },
-              { email: 'panda@pix.fr' },
-              { email: 'otter@pix.fr' },
-              { email: 'playpus@example.net' },
-              { email: 'panda@example.net' },
-              { email: 'PANDA@example.net' },
-              { email: 'PANDA@PIX.be' },
-            ],
-            (user) => {
-              databaseBuilder.factory.buildUser(user);
-            },
-          );
-
-          await databaseBuilder.commit();
-        });
-
-        it('should return only users matching "email" if given in filter even if it is in uppercase in database', async function () {
-          // given
-          const filter = { email: 'panda' };
-          const page = { number: 1, size: 10 };
-          const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 4 };
-
-          // when
-          const { models: matchingUsers, pagination } = await userRepository.findPaginatedFiltered({ filter, page });
-
-          // then
-          expect(map(matchingUsers, 'email')).to.have.members([
-            'panda@pix.fr',
-            'panda@example.net',
-            'panda@example.net',
-            'panda@pix.be',
-          ]);
-          expect(pagination).to.deep.equal(expectedPagination);
-        });
-
-        it('should return only users matching "email" if given in filter', async function () {
-          // given
-          const filter = { email: 'pix.fr' };
-          const page = { number: 1, size: 10 };
-          const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 3 };
-
-          // when
-          const { models: matchingUsers, pagination } = await userRepository.findPaginatedFiltered({ filter, page });
-
-          // then
-          expect(map(matchingUsers, 'email')).to.have.members(['playpus@pix.fr', 'panda@pix.fr', 'otter@pix.fr']);
-          expect(pagination).to.deep.equal(expectedPagination);
-        });
-      });
-
-      context('when there are multiple users matching the same "username" search pattern', function () {
-        it('should return only users matching "username" if given in filter', async function () {
-          // given
-          each(
-            [
-              { username: 'alex.ception1011' },
-              { username: 'alex.terieur1011' },
-              { username: 'ella.danloss0101' },
-              { username: 'ella.bienhu1011' },
-              { username: 'ella.bienhu2312' },
-            ],
-            (user) => {
-              databaseBuilder.factory.buildUser(user);
-            },
-          );
-          await databaseBuilder.commit();
-          const filter = { username: '1011' };
-          const page = { number: 1, size: 10 };
-
-          // when
-          const { models: matchingUsers } = await userRepository.findPaginatedFiltered({ filter, page });
-
-          // then
-          expect(map(matchingUsers, 'username')).to.have.members([
-            'alex.ception1011',
-            'alex.terieur1011',
-            'ella.bienhu1011',
-          ]);
-        });
-      });
-
-      context(
-        'when there are multiple users matching the fields "first name", "last name" and "email" search pattern',
-        function () {
+        context('when there are multiple users matching the same "last name" search pattern', function () {
           beforeEach(async function () {
             each(
               [
-                // Matching users
-                {
-                  firstName: 'fn_ok_1',
-                  lastName: 'ln_ok_1',
-                  email: 'email_ok_1@mail.com',
-                  username: 'username_ok0210',
-                },
-                {
-                  firstName: 'fn_ok_2',
-                  lastName: 'ln_ok_2',
-                  email: 'email_ok_2@mail.com',
-                  username: 'username_ok1214',
-                },
-                {
-                  firstName: 'fn_ok_3',
-                  lastName: 'ln_ok_3',
-                  email: 'email_ok_3@mail.com',
-                  username: 'username_ok1010',
-                },
-
-                // Unmatching users
-                {
-                  firstName: 'fn_ko_4',
-                  lastName: 'ln_ok_4',
-                  email: 'email_ok_4@mail.com',
-                  username: 'username_ko1309',
-                },
-                {
-                  firstName: 'fn_ok_5',
-                  lastName: 'ln_ko_5',
-                  email: 'email_ok_5@mail.com',
-                  username: 'username_ok1911',
-                },
-                {
-                  firstName: 'fn_ok_6',
-                  lastName: 'ln_ok_6',
-                  email: 'email_ko_6@mail.com',
-                  username: 'username_ok2010',
-                },
+                { firstName: 'Anakin', lastName: 'Skywalker' },
+                { firstName: 'Luke', lastName: 'Skywalker' },
+                { firstName: 'Leia', lastName: 'Skywalker' },
+                { firstName: 'Han', lastName: 'Solo' },
+                { firstName: 'Ben', lastName: 'Solo' },
               ],
               (user) => {
                 databaseBuilder.factory.buildUser(user);
@@ -495,9 +341,67 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
             await databaseBuilder.commit();
           });
 
-          it('should return only users matching "first name" AND "last name" AND "email" AND "username" if given in filter', async function () {
+          it('should return only users matching "last name" if given in filter', async function () {
             // given
-            const filter = { firstName: 'fn_ok', lastName: 'ln_ok', email: 'email_ok', username: 'username_ok' };
+            const filter = { lastName: 'walk' };
+            const page = { number: 1, size: 10 };
+            const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 3 };
+
+            // when
+            const { models: matchingUsers, pagination } = await userRepository.findPaginatedFiltered({
+              filter,
+              page,
+              queryType: 'CONTAINS',
+            });
+
+            // then
+            expect(map(matchingUsers, 'firstName')).to.have.members(['Anakin', 'Luke', 'Leia']);
+            expect(pagination).to.deep.equal(expectedPagination);
+          });
+        });
+
+        context('when there are multiple users matching the same "email" search pattern', function () {
+          beforeEach(async function () {
+            each(
+              [
+                { email: 'playpus@pix.fr' },
+                { email: 'panda@pix.fr' },
+                { email: 'otter@pix.fr' },
+                { email: 'playpus@example.net' },
+                { email: 'panda@example.net' },
+                { email: 'PANDA@example.net' },
+                { email: 'PANDA@PIX.be' },
+              ],
+              (user) => {
+                databaseBuilder.factory.buildUser(user);
+              },
+            );
+
+            await databaseBuilder.commit();
+          });
+
+          it('should return only users matching "email" if given in filter even if it is in uppercase in database', async function () {
+            // given
+            const filter = { email: 'panda' };
+            const page = { number: 1, size: 10 };
+            const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 4 };
+
+            // when
+            const { models: matchingUsers, pagination } = await userRepository.findPaginatedFiltered({ filter, page });
+
+            // then
+            expect(map(matchingUsers, 'email')).to.have.members([
+              'panda@pix.fr',
+              'panda@example.net',
+              'panda@example.net',
+              'panda@pix.be',
+            ]);
+            expect(pagination).to.deep.equal(expectedPagination);
+          });
+
+          it('should return only users matching "email" if given in filter', async function () {
+            // given
+            const filter = { email: 'pix.fr' };
             const page = { number: 1, size: 10 };
             const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 3 };
 
@@ -505,22 +409,168 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
             const { models: matchingUsers, pagination } = await userRepository.findPaginatedFiltered({ filter, page });
 
             // then
-            expect(map(matchingUsers, 'firstName')).to.have.members(['fn_ok_1', 'fn_ok_2', 'fn_ok_3']);
-            expect(map(matchingUsers, 'lastName')).to.have.members(['ln_ok_1', 'ln_ok_2', 'ln_ok_3']);
-            expect(map(matchingUsers, 'email')).to.have.members([
-              'email_ok_1@mail.com',
-              'email_ok_2@mail.com',
-              'email_ok_3@mail.com',
-            ]);
-            expect(map(matchingUsers, 'username')).to.have.members([
-              'username_ok0210',
-              'username_ok1214',
-              'username_ok1010',
-            ]);
+            expect(map(matchingUsers, 'email')).to.have.members(['playpus@pix.fr', 'panda@pix.fr', 'otter@pix.fr']);
             expect(pagination).to.deep.equal(expectedPagination);
           });
-        },
-      );
+        });
+
+        context('when there are multiple users matching the same "username" search pattern', function () {
+          it('should return only users matching "username" if given in filter', async function () {
+            // given
+            each(
+              [
+                { username: 'alex.ception1011' },
+                { username: 'alex.terieur1011' },
+                { username: 'ella.danloss0101' },
+                { username: 'ella.bienhu1011' },
+                { username: 'ella.bienhu2312' },
+              ],
+              (user) => {
+                databaseBuilder.factory.buildUser(user);
+              },
+            );
+            await databaseBuilder.commit();
+            const filter = { username: '1011' };
+            const page = { number: 1, size: 10 };
+
+            // when
+            const { models: matchingUsers } = await userRepository.findPaginatedFiltered({ filter, page });
+
+            // then
+            expect(map(matchingUsers, 'username')).to.have.members([
+              'alex.ception1011',
+              'alex.terieur1011',
+              'ella.bienhu1011',
+            ]);
+          });
+        });
+
+        context(
+          'when there are multiple users matching the fields "first name", "last name" and "email" search pattern',
+          function () {
+            beforeEach(async function () {
+              each(
+                [
+                  // Matching users
+                  {
+                    firstName: 'fn_ok_1',
+                    lastName: 'ln_ok_1',
+                    email: 'email_ok_1@mail.com',
+                    username: 'username_ok0210',
+                  },
+                  {
+                    firstName: 'fn_ok_2',
+                    lastName: 'ln_ok_2',
+                    email: 'email_ok_2@mail.com',
+                    username: 'username_ok1214',
+                  },
+                  {
+                    firstName: 'fn_ok_3',
+                    lastName: 'ln_ok_3',
+                    email: 'email_ok_3@mail.com',
+                    username: 'username_ok1010',
+                  },
+
+                  // Unmatching users
+                  {
+                    firstName: 'fn_ko_4',
+                    lastName: 'ln_ok_4',
+                    email: 'email_ok_4@mail.com',
+                    username: 'username_ko1309',
+                  },
+                  {
+                    firstName: 'fn_ok_5',
+                    lastName: 'ln_ko_5',
+                    email: 'email_ok_5@mail.com',
+                    username: 'username_ok1911',
+                  },
+                  {
+                    firstName: 'fn_ok_6',
+                    lastName: 'ln_ok_6',
+                    email: 'email_ko_6@mail.com',
+                    username: 'username_ok2010',
+                  },
+                ],
+                (user) => {
+                  databaseBuilder.factory.buildUser(user);
+                },
+              );
+
+              await databaseBuilder.commit();
+            });
+
+            it('should return only users matching "first name" AND "last name" AND "email" AND "username" if given in filter', async function () {
+              // given
+              const filter = { firstName: 'fn_ok', lastName: 'ln_ok', email: 'email_ok', username: 'username_ok' };
+              const page = { number: 1, size: 10 };
+              const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 3 };
+
+              // when
+              const { models: matchingUsers, pagination } = await userRepository.findPaginatedFiltered({
+                filter,
+                page,
+              });
+
+              // then
+              expect(map(matchingUsers, 'firstName')).to.have.members(['fn_ok_1', 'fn_ok_2', 'fn_ok_3']);
+              expect(map(matchingUsers, 'lastName')).to.have.members(['ln_ok_1', 'ln_ok_2', 'ln_ok_3']);
+              expect(map(matchingUsers, 'email')).to.have.members([
+                'email_ok_1@mail.com',
+                'email_ok_2@mail.com',
+                'email_ok_3@mail.com',
+              ]);
+              expect(map(matchingUsers, 'username')).to.have.members([
+                'username_ok0210',
+                'username_ok1214',
+                'username_ok1010',
+              ]);
+              expect(pagination).to.deep.equal(expectedPagination);
+            });
+          },
+        );
+      });
+      context('when exact search is required', function () {
+        beforeEach(function () {
+          databaseBuilder.factory.buildUser({ firstName: 'Son Gohan' });
+          databaseBuilder.factory.buildUser({ firstName: 'Son Goku' });
+          databaseBuilder.factory.buildUser({ firstName: 'Son Goten' });
+          databaseBuilder.factory.buildUser({ firstName: 'Vegeta' });
+          databaseBuilder.factory.buildUser({ firstName: 'Piccolo' });
+          return databaseBuilder.commit();
+        });
+        it('should return only exact "first name" matching if given in filter', async function () {
+          // given
+          const filter = { firstName: 'Son Gohan' };
+          const page = { number: 1, size: 10 };
+
+          // when
+          const { models: matchingUsers } = await userRepository.findPaginatedFiltered({
+            filter,
+            page,
+            queryType: 'EXACT_QUERY',
+          });
+
+          // then
+          expect(map(matchingUsers, 'firstName')).to.have.members(['Son Gohan']);
+        });
+        it('should return no matching if matching is fuzzy', async function () {
+          // given
+          const filter = { firstName: 'Go' };
+          const page = { number: 1, size: 10 };
+          const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 0, rowCount: 0 };
+
+          // when
+          const { models: matchingUsers, pagination } = await userRepository.findPaginatedFiltered({
+            filter,
+            page,
+            queryType: 'EXACT_QUERY',
+          });
+
+          // then
+          expect(map(matchingUsers, 'firstName')).to.be.empty;
+          expect(pagination).to.deep.equal(expectedPagination);
+        });
+      });
     });
 
     describe('#findAnotherUserByEmail', function () {

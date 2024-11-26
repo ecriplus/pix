@@ -62,6 +62,7 @@ export const userAdminRoutes = [
             number: Joi.number().integer().empty('').allow(null).optional(),
             size: Joi.number().integer().empty('').allow(null).optional(),
           }).default({}),
+          queryType: Joi.string().valid('CONTAINS', 'EXACT_QUERY').empty('').allow(null).default('CONTAINS').optional(),
         }),
       },
       handler: (request, h) => userAdminController.findPaginatedFilteredUsers(request, h),

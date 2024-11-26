@@ -22,7 +22,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       // when
       const response = await httpTestServer.request(
         'GET',
-        '/api/admin/users?filter[firstName]=Bruce&filter[lastName]=Wayne&filter[email]=batman@gotham.city&page[number]=3&page[size]=25',
+        '/api/admin/users?filter[firstName]=Bruce&filter[lastName]=Wayne&filter[email]=batman@gotham.city&page[number]=3&page[size]=25&queryType=CONTAINS',
       );
 
       // then
@@ -43,7 +43,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       // when
       const response = await httpTestServer.request(
         'GET',
-        '/api/admin/users?filter[firstName]=Bruce&filter[lastName]=Wayne&filter[email]=batman@gotham.city&page[number]=3&page[size]=25',
+        '/api/admin/users?filter[firstName]=Bruce&filter[lastName]=Wayne&filter[email]=batman@gotham.city&page[number]=3&page[size]=25&queryType=CONTAINS',
       );
 
       // then

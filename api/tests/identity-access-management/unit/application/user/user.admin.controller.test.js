@@ -49,7 +49,7 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
 
     it('allows to filter users by first name', async function () {
       // given
-      const query = { filter: { firstName: 'Alexia' }, page: {} };
+      const query = { filter: { firstName: 'Alexia' }, page: {}, queryType: 'CONTAINS' };
       const request = { query };
       usecases.findPaginatedFilteredUsers.resolves({ models: {}, pagination: {} });
 
@@ -62,7 +62,7 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
 
     it('allows to filter users by last name', async function () {
       // given
-      const query = { filter: { lastName: 'Granjean' }, page: {} };
+      const query = { filter: { lastName: 'Granjean' }, page: {}, queryType: 'CONTAINS' };
       const request = { query };
       usecases.findPaginatedFilteredUsers.resolves({ models: {}, pagination: {} });
 
@@ -75,7 +75,7 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
 
     it('allows to filter users by email', async function () {
       // given
-      const query = { filter: { email: 'alexiagranjean' }, page: {} };
+      const query = { filter: { email: 'alexiagranjean' }, page: {}, queryType: 'CONTAINS' };
       const request = { query };
       usecases.findPaginatedFilteredUsers.resolves({ models: {}, pagination: {} });
 
@@ -88,7 +88,7 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
 
     it('allows to paginate on a given page and page size', async function () {
       // given
-      const query = { filter: { email: 'alexiagranjean' }, page: { number: 2, size: 25 } };
+      const query = { filter: { email: 'alexiagranjean' }, page: { number: 2, size: 25 }, queryType: 'CONTAINS' };
       const request = { query };
       usecases.findPaginatedFilteredUsers.resolves({ models: {}, pagination: {} });
 
