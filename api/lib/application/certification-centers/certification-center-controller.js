@@ -38,14 +38,6 @@ const update = async function (request) {
   return certificationCenterForAdminSerializer.serialize(updatedCertificationCenter, certificationCenterPilotFeatures);
 };
 
-const getCertificationCenterDetails = async function (request) {
-  const certificationCenterId = request.params.id;
-
-  const certificationCenterDetails = await usecases.getCenterForAdmin({ id: certificationCenterId });
-
-  return certificationCenterForAdminSerializer.serialize(certificationCenterDetails);
-};
-
 const findPaginatedSessionSummaries = async function (request) {
   const certificationCenterId = request.params.id;
   const userId = request.auth.credentials.userId;
@@ -133,7 +125,6 @@ const certificationCenterController = {
   createCertificationCenterMembershipByEmail,
   findCertificationCenterMembershipsByCertificationCenter,
   findPaginatedSessionSummaries,
-  getCertificationCenterDetails,
   getDivisions,
   getStudents,
   update,

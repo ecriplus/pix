@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import { certificationCenterController } from '../../../../lib/application/certification-centers/certification-center-controller.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType, optionalIdentifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { certificationCenterAdminController } from './certification-center.admin.controller.js';
@@ -90,7 +89,7 @@ const register = async function (server) {
             id: identifiersType.certificationCenterId,
           }),
         },
-        handler: certificationCenterController.getCertificationCenterDetails,
+        handler: certificationCenterAdminController.getCertificationCenterDetails,
         notes: [
           "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès**\n" +
             "- Récupération d'un centre de certification\n",
