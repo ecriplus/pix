@@ -145,12 +145,13 @@ export default class UpdateForm extends Component {
           <PixInput
             @id="campaign-title"
             @name="campaign-title"
+            @subLabel={{t "pages.campaign-modification.personalised-test-title.sublabel"}}
             class="form-control"
             maxlength="50"
             @value={{this.title}}
             {{on "change" this.onChangeCampaignTitle}}
           >
-            <:label>{{t "pages.campaign-modification.personalised-test-title"}}</:label>
+            <:label>{{t "pages.campaign-modification.personalised-test-title.label"}}</:label>
           </PixInput>
           {{#if @campaign.errors.title}}
             <div class="form__error error-message">
@@ -166,10 +167,11 @@ export default class UpdateForm extends Component {
           class="form-control"
           @maxlength={{5000}}
           @value={{this.customLandingPageText}}
+          @subLabel={{t "pages.campaign-modification.landing-page-text.sublabel"}}
           {{on "change" this.onChangeCampaignCustomLandingPageText}}
           rows={{8}}
         >
-          <:label>{{t "pages.campaign-modification.landing-page-text"}}</:label>
+          <:label>{{t "pages.campaign-modification.landing-page-text.label"}}</:label>
         </PixTextarea>
         {{#if @campaign.errors.customLandingPageText}}
           <div class="form__error error-message">

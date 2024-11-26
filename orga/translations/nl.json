@@ -477,7 +477,8 @@
         "question-label": "Wat is het type externe identifier?"
       },
       "landing-page-text": {
-        "label": "Tekst op de startpagina"
+        "label": "Tekst op de startpagina",
+        "sublabel":"Dit veld wordt weergegeven voor deelnemers aan de campagne."
       },
       "legal-warning": "* In overeenstemming met de Franse wet op gegevensbescherming en als verantwoordelijke voor de verwerking van de gegevens, vragen we niet naar bijzonder identificerende of belangrijke gegevens, tenzij dit absoluut noodzakelijk is. Het burgerservicenummer (BSN) moet worden vermeden, net als gevoelige gegevens.",
       "multiple-sendings": {
@@ -529,7 +530,8 @@
       "target-profiles-list-label": "Wat wil je testen?",
       "target-profiles-search-placeholder": "Zoeken op naam",
       "test-title": {
-        "label": "Titel test"
+        "label": "Titel test",
+        "sublabel":"Dit veld wordt weergegeven voor deelnemers aan de campagne."
       },
       "title": "Een campagne maken",
       "yes": "Ja"
@@ -547,14 +549,20 @@
       },
       "campaign-modification-success-message": "De wijzigingen zijn opgeslagen.",
       "campaign-name": "Naam Campagne",
-      "landing-page-text": "Tekst op de startpagina",
+      "landing-page-text": {
+         "label": "Tekst op de startpagina",
+         "sublabel":"Dit veld wordt weergegeven voor deelnemers aan de campagne."
+      },
       "owner": {
         "info": "De eigenaar van de campagne en de beheerders van deze organisatie zijn de enige personen die deze campagne kunnen wijzigen en archiveren.",
         "label": "Eigenaar van de campagne",
         "placeholder": "Naam en voornaam eigenaar",
         "title": "Eigenaar van de campagne"
       },
-      "personalised-test-title": "Titel test",
+      "personalised-test-title": {
+        "label":"Titel test",
+        "sublabel":"Dit veld wordt weergegeven voor deelnemers aan de campagne."
+      },
       "title": "Een campagne wijzigen"
     },
     "campaign-results": {

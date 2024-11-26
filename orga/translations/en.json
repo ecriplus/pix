@@ -514,7 +514,8 @@
         "question-label": "What is the type of the external ID ?"
       },
       "landing-page-text": {
-        "label": "Text to display on the starting page"
+        "label": "Text to display on the starting page",
+        "sublabel":"This field will be displayed to campaign participants."
       },
       "legal-warning": "*In accordance with the French law governing computer technology and freedoms (“Informatique et Libertés”), and as data controller, please be careful not to ask for significant or identifying personal data unless it is absolutely necessary. Asking for social security numbers, as well as any sensitive data, is strictly prohibited.",
       "multiple-sendings": {
@@ -566,7 +567,9 @@
       "target-profiles-list-label": "What would you like to test?",
       "target-profiles-search-placeholder": "Search by name",
       "test-title": {
-        "label": "Title of the customised test"
+        "label": "Title of the customised test",
+        "sublabel":"This field will be displayed to campaign participants."
+
       },
       "yes": "Yes"
     },
@@ -584,14 +587,20 @@
       },
       "campaign-modification-success-message": "The changes have been successfully saved.",
       "campaign-name": "Name of the campaign",
-      "landing-page-text": "Text to display on the starting page",
+      "landing-page-text": {
+         "label": "Text to display on the starting page",
+         "sublabel":"This field will be displayed to campaign participants."
+      },
       "owner": {
         "title": "Owner of the campaign",
         "info": "The campaign owner, along with the organisation administrators, are the only ones who can modify or archive this campaign.",
         "label": "Owner of the campaign",
         "placeholder": "Owner’s first and last name"
       },
-      "personalised-test-title": "Title of the personalised test"
+      "personalised-test-title": {
+        "label":"Title of the personalised test",
+        "sublabel":"This field will be displayed to campaign participants."
+      }
     },
     "campaign-results": {
       "title": "Results",
