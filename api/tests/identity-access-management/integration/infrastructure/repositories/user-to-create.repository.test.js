@@ -57,6 +57,24 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           expect(error).to.be.instanceOf(OrganizationLearnerAlreadyLinkedToUserError);
         });
       });
+      context('when firstName field is not defined', function () {
+        it('throws an error', async function () {
+          // given
+          const user = new UserToCreate({
+            lastName: 'lastName',
+            username: 'lastName12',
+            cgu: true,
+            locale: 'fr-FR',
+          });
+          user.firstName = undefined;
+
+          // when
+          const error = await catchErr(userToCreateRepository.create)({ user });
+
+          // then
+          expect(error).to.be.instanceOf(Error);
+        });
+      });
     });
 
     context('when no username is given', function () {
@@ -105,6 +123,24 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
           // then
           expect(error).to.be.instanceOf(AlreadyRegisteredEmailError);
+        });
+      });
+      context('when firstName field is not defined', function () {
+        it('throws an error', async function () {
+          // given
+          const user = new UserToCreate({
+            lastName: 'lastName',
+            email: 'email@example.net',
+            cgu: true,
+            locale: 'fr-FR',
+          });
+          user.firstName = undefined;
+
+          // when
+          const error = await catchErr(userToCreateRepository.create)({ user });
+
+          // then
+          expect(error).to.be.instanceOf(Error);
         });
       });
     });

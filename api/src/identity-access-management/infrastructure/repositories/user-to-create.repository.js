@@ -47,6 +47,8 @@ async function _createWithUsername({ knexConnection, user }) {
     if (error.constraint === 'users_username_unique' && error.code === PGSQL_UNIQUE_CONSTRAINT_VIOLATION_ERROR) {
       throw new OrganizationLearnerAlreadyLinkedToUserError(detail, error.code, meta);
     }
+
+    throw error;
   }
 }
 
@@ -65,6 +67,8 @@ async function _createWithoutUsername({ knexConnection, user }) {
     if (error.constraint === 'users_email_unique' && error.code === PGSQL_UNIQUE_CONSTRAINT_VIOLATION_ERROR) {
       throw new AlreadyRegisteredEmailError();
     }
+
+    throw error;
   }
 }
 
