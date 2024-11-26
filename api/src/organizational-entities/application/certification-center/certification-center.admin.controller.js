@@ -1,4 +1,4 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
+import { usecases as certificationUsecases } from '../../../certification/enrolment/domain/usecases/index.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as certificationCenterSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center.serializer.js';
 import * as certificationCenterForAdminSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center-for-admin.serializer.js';
@@ -33,7 +33,7 @@ const findPaginatedFilteredCertificationCenters = async function (
 const getCertificationCenterDetails = async function (request) {
   const certificationCenterId = request.params.id;
 
-  const certificationCenterDetails = await libUsecases.getCenterForAdmin({ id: certificationCenterId });
+  const certificationCenterDetails = await certificationUsecases.getCenterForAdmin({ id: certificationCenterId });
 
   return certificationCenterForAdminSerializer.serialize(certificationCenterDetails);
 };
