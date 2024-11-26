@@ -252,6 +252,7 @@ const configuration = (function () {
       enabled: toBoolean(process.env.LOG_ENABLED),
       logLevel: process.env.LOG_LEVEL || 'info',
       logForHumans: _getLogForHumans(),
+      logForHumansCompactFormat: process.env.LOG_FOR_HUMANS_FORMAT === 'compact',
       enableKnexPerformanceMonitoring: toBoolean(process.env.ENABLE_KNEX_PERFORMANCE_MONITORING),
       enableLogStartingEventDispatch: toBoolean(process.env.LOG_STARTING_EVENT_DISPATCH),
       enableLogEndingEventDispatch: toBoolean(process.env.LOG_ENDING_EVENT_DISPATCH),
