@@ -121,7 +121,7 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
                 {{/if}}
                 <td class="table__column--center hide-on-mobile">
                   {{#if profile.certifiable}}
-                    <PixTag @color="green-light">{{t "pages.profiles-list.table.column.certifiable"}}</PixTag>
+                    <PixTag @color="green-light">{{t "pages.profiles-list.table.column.certifiable-tag"}}</PixTag>
                   {{/if}}
                 </td>
                 <td class="table__column--center hide-on-mobile">

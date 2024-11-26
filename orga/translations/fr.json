@@ -1289,6 +1289,7 @@
         "column": {
           "ariaSharedProfileCount": "Nombre de partages de profil",
           "certifiable": "Certifiable",
+          "certifiable-tag": "Certifiable",
           "competences-certifiables": "Comp. certifiables",
           "evolution": "Évolution",
           "first-name": "Prénom",

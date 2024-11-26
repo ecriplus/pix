@@ -1283,6 +1283,7 @@
         "column": {
           "ariaSharedProfileCount": "Number of profiles shared",
           "certifiable": "Eligible for certification",
+          "certifiable-tag": "Eligible",
           "competences-certifiables": "Competences eligible for certification",
           "evolution": "Evolution",
           "first-name": "First name",

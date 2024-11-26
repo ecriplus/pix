@@ -387,7 +387,7 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
       // then
       assert.ok(screen.getByRole('cell', { name: '01/02/2020' }));
       assert.ok(screen.getByRole('cell', { name: '10' }));
-      assert.ok(screen.getByRole('cell', { name: 'Certifiable' }));
+      assert.ok(screen.getByRole('cell', { name: t('pages.profiles-list.table.column.certifiable-tag') }));
       assert.ok(screen.getByRole('cell', { name: '5' }));
     });
 

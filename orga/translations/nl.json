@@ -1281,6 +1281,7 @@
         "column": {
           "ariaSharedProfileCount": "Aantal profielaandelen",
           "certifiable": "Certificeerbaar",
+          "certifiable-tag": "Certificeerbaar",
           "competences-certifiables": "Certificeerbare vaard.",
           "evolution": "Evolutie",
           "first-name": "Voornaam",
