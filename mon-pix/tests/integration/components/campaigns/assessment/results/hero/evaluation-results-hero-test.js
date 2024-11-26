@@ -32,6 +32,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
 />`,
       );
     });
@@ -75,6 +76,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
 />`,
         );
 
@@ -112,6 +114,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
 />`,
           );
         });
@@ -175,6 +178,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
   @campaign={{this.campaign}}
   @questResults={{this.questResults}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
 />`,
             );
             await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
@@ -200,6 +204,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
   @campaign={{this.campaign}}
   @questResults={{this.questResults}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
 />`,
             );
             await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
@@ -221,6 +226,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
               hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
 />`,
             );
             await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
@@ -244,6 +250,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
 />`,
           );
 
@@ -267,6 +274,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
 />`,
           );
 
@@ -296,6 +304,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
   @showTrainings={{this.showTrainings}}
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
 />`,
           );
         });
@@ -317,7 +326,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     });
   });
 
-  module('when campaign is simplified access', function () {
+  module('when campaign results should not be shared', function () {
     module('when there is no custom link', function () {
       module('when user is anonymous', function () {
         test('it should display only a connection link', async function (assert) {
@@ -327,10 +336,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           }
           this.owner.register('service:current-user', currentUserService);
 
-          this.set('campaign', {
-            isSimplifiedAccess: true,
-            hasCustomResultPageButton: false,
-          });
+          this.set('campaign', { hasCustomResultPageButton: false });
           this.set('campaignParticipationResult', { masteryRate: 0.75 });
 
           // when
@@ -338,6 +344,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{false}}
 />`,
           );
 
@@ -360,10 +367,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           }
           this.owner.register('service:currentUser', currentUserService);
 
-          this.set('campaign', {
-            isSimplifiedAccess: true,
-            hasCustomResultPageButton: false,
-          });
+          this.set('campaign', { hasCustomResultPageButton: false });
           this.set('campaignParticipationResult', { masteryRate: 0.75 });
 
           // when
@@ -371,6 +375,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{false}}
 />`,
           );
 
@@ -387,10 +392,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     module('when there is a custom link', function () {
       test('it should not display a homepage link', async function (assert) {
         // given
-        this.set('campaign', {
-          isSimplifiedAccess: true,
-          hasCustomResultPageButton: true,
-        });
+        this.set('campaign', { hasCustomResultPageButton: true });
         this.set('campaignParticipationResult', { masteryRate: 0.75 });
 
         // when
@@ -398,6 +400,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{false}}
 />`,
         );
 
@@ -440,6 +443,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
 />`,
         );
       });
@@ -454,6 +458,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
   @campaign={{this.campaign}}
   @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
 />`,
         );
 

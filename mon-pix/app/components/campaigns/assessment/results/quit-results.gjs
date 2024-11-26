@@ -11,45 +11,48 @@ import { t } from 'ember-intl';
 export default class QuitResults extends Component {
   @tracked showModal = false;
 
+  get shouldShareCampaignResults() {
+    return this.args.isSharableCampaign && !this.args.isCampaignShared;
+  }
+
   @action
   toggleModal() {
     this.showModal = !this.showModal;
   }
 
   <template>
-    {{#if @isCampaignShared}}
-      <LinkTo @route="authenticated" class="evaluation-results-header__back-link">
-        {{t "common.actions.quit"}}
-      </LinkTo>
-    {{else}}
+    {{#if this.shouldShareCampaignResults}}
       <button class="evaluation-results-header__back-link" type="button" {{on "click" this.toggleModal}}>
         {{t "common.actions.quit"}}
       </button>
+      <PixModal
+        @title={{t "pages.evaluation-results.quit-results.modal.title"}}
+        @onCloseButtonClick={{this.toggleModal}}
+        @showModal={{this.showModal}}
+      >
+        <:content>
+          <p class="quit-results__first-paragraph">{{t
+              "pages.evaluation-results.quit-results.modal.content-information"
+            }}</p>
+          <p><strong>{{t "pages.evaluation-results.quit-results.modal.content-instruction"}}</strong></p>
+        </:content>
+
+        <:footer>
+          <div class="quit-results__footer">
+            <PixButton @variant="secondary" @triggerAction={{this.toggleModal}}>
+              {{t "pages.evaluation-results.quit-results.modal.actions.cancel-to-share"}}
+            </PixButton>
+
+            <PixButtonLink @href="authenticated" @variant="primary">
+              {{t "pages.evaluation-results.quit-results.modal.actions.quit-without-sharing"}}
+            </PixButtonLink>
+          </div>
+        </:footer>
+      </PixModal>
+    {{else}}
+      <LinkTo @route="authenticated" class="evaluation-results-header__back-link">
+        {{t "common.actions.quit"}}
+      </LinkTo>
     {{/if}}
-
-    <PixModal
-      @title={{t "pages.evaluation-results.quit-results.modal.title"}}
-      @onCloseButtonClick={{this.toggleModal}}
-      @showModal={{this.showModal}}
-    >
-      <:content>
-        <p class="quit-results__first-paragraph">{{t
-            "pages.evaluation-results.quit-results.modal.content-information"
-          }}</p>
-        <p><strong>{{t "pages.evaluation-results.quit-results.modal.content-instruction"}}</strong></p>
-      </:content>
-
-      <:footer>
-        <div class="quit-results__footer">
-          <PixButton @variant="secondary" @triggerAction={{this.toggleModal}}>
-            {{t "pages.evaluation-results.quit-results.modal.actions.cancel-to-share"}}
-          </PixButton>
-
-          <PixButtonLink @href="authenticated" @variant="primary">
-            {{t "pages.evaluation-results.quit-results.modal.actions.quit-without-sharing"}}
-          </PixButtonLink>
-        </div>
-      </:footer>
-    </PixModal>
   </template>
 }
