@@ -21,19 +21,6 @@ describe('Integration | Application | scenario-simulator-controller', function (
     sinon.stub(pickAnswerStatusService, 'pickAnswerStatusForCapacity');
     sinon.stub(pickChallengeService, 'chooseNextChallenge');
 
-    challenge1 = domainBuilder.buildChallenge({ id: 'chall1', successProbabilityThreshold: 0.65 });
-    reward1 = 0.2;
-    errorRate1 = 0.3;
-    capacity1 = 0.4;
-    simulationResults = [
-      {
-        challenge: challenge1,
-        reward: reward1,
-        errorRate: errorRate1,
-        capacity: capacity1,
-      },
-    ];
-
     httpTestServer = new HttpTestServer();
     await httpTestServer.register(moduleUnderTest);
   });
@@ -52,9 +39,11 @@ describe('Integration | Application | scenario-simulator-controller', function (
             errorRate: errorRate1,
             capacity: capacity1,
             answerStatus: 'ok',
+            numberOfAvailableChallenges: 1,
           },
         ];
       });
+
       context('When configuring the challenge pick probability', function () {
         it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
           // given
@@ -108,6 +97,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
                   reward: reward1,
                   difficulty: challenge1.difficulty,
                   discriminant: challenge1.discriminant,
+                  numberOfAvailableChallenges: 1,
                 },
               ],
             },
@@ -164,6 +154,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
                     reward: reward1,
                     difficulty: challenge1.difficulty,
                     discriminant: challenge1.discriminant,
+                    numberOfAvailableChallenges: 1,
                   },
                 ],
               },
@@ -221,6 +212,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
                     reward: reward1,
                     difficulty: challenge1.difficulty,
                     discriminant: challenge1.discriminant,
+                    numberOfAvailableChallenges: 1,
                   },
                 ],
               },

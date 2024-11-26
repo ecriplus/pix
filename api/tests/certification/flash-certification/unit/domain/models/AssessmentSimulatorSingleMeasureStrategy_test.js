@@ -111,6 +111,7 @@ describe('Unit | Domain | Models | AssessmentSimulatorSingleMeasureStrategy', fu
                 errorRate: expectedErrorRate,
                 reward: expectedReward,
                 answerStatus: answerForSimulator,
+                numberOfAvailableChallenges: 2,
               },
             ],
             challengeAnswers: [
@@ -248,6 +249,7 @@ describe('Unit | Domain | Models | AssessmentSimulatorSingleMeasureStrategy', fu
                 errorRate: expectedErrorRate,
                 reward: expectedReward,
                 answerStatus: answerForSimulator,
+                numberOfAvailableChallenges: 2,
               },
             ],
             challengeAnswers: [

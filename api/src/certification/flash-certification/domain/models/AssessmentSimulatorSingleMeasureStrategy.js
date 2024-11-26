@@ -60,6 +60,7 @@ export class AssessmentSimulatorSingleMeasureStrategy {
           capacity,
           reward,
           answerStatus,
+          numberOfAvailableChallenges: possibleChallenges.length,
         },
       ],
       challengeAnswers: [newAnswer],
