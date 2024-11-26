@@ -1,20 +1,12 @@
-import * as organizationLearnerRepository from '../../../../../lib/infrastructure/repositories/organization-learner-repository.js';
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { RefreshToken } from '../../../../../src/identity-access-management/domain/models/RefreshToken.js';
 import { UserAnonymizedEventLoggingJob } from '../../../../../src/identity-access-management/domain/models/UserAnonymizedEventLoggingJob.js';
 import { anonymizeUser } from '../../../../../src/identity-access-management/domain/usecases/anonymize-user.usecase.js';
-import * as authenticationMethodRepository from '../../../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
-import { userAnonymizedEventLoggingJobRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/jobs/user-anonymized-event-logging-job-repository.js';
+import * as privacyUsersApiRepository from '../../../../../src/identity-access-management/infrastructure/repositories/privacy-users-api.repository.js';
 import { refreshTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/refresh-token.repository.js';
-import { resetPasswordDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/reset-password-demand.repository.js';
-import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import { config } from '../../../../../src/shared/config.js';
-import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { adminMemberRepository } from '../../../../../src/shared/infrastructure/repositories/admin-member.repository.js';
-import * as userLoginRepository from '../../../../../src/shared/infrastructure/repositories/user-login-repository.js';
-import { certificationCenterMembershipRepository } from '../../../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
-import * as membershipRepository from '../../../../../src/team/infrastructure/repositories/membership.repository.js';
 import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | anonymize-user', function () {
@@ -68,23 +60,12 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
     await refreshTokenRepository.save({ refreshToken });
 
     // when
-    await DomainTransaction.execute(async (domainTransaction) =>
-      anonymizeUser({
-        userId,
-        updatedByUserId: anonymizedByUserId,
-        userRepository,
-        userLoginRepository,
-        authenticationMethodRepository,
-        refreshTokenRepository,
-        membershipRepository,
-        certificationCenterMembershipRepository,
-        organizationLearnerRepository,
-        resetPasswordDemandRepository,
-        domainTransaction,
-        adminMemberRepository,
-        userAnonymizedEventLoggingJobRepository,
-      }),
-    );
+    await anonymizeUser({
+      userId,
+      updatedByUserId: anonymizedByUserId,
+      adminMemberRepository,
+      privacyUsersApiRepository,
+    });
 
     // then
     await expect(UserAnonymizedEventLoggingJob.name).to.have.been.performed.withJobPayload({
@@ -151,22 +132,12 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       await databaseBuilder.commit();
 
       // when
-      const error = await catchErr(DomainTransaction.execute)(async (domainTransaction) =>
-        anonymizeUser({
-          userId: user.id,
-          updatedByUserId: 666,
-          userRepository,
-          userLoginRepository,
-          authenticationMethodRepository,
-          refreshTokenRepository,
-          membershipRepository,
-          certificationCenterMembershipRepository,
-          organizationLearnerRepository,
-          resetPasswordDemandRepository,
-          domainTransaction,
-          adminMemberRepository,
-        }),
-      );
+      const error = await catchErr(anonymizeUser)({
+        userId: user.id,
+        updatedByUserId: 666,
+        adminMemberRepository,
+        privacyUsersApiRepository,
+      });
 
       // then
       expect(error).to.be.instanceOf(UserNotFoundError);
@@ -190,23 +161,12 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       await databaseBuilder.commit();
 
       // when
-      await DomainTransaction.execute(async (domainTransaction) =>
-        anonymizeUser({
-          userId: user.id,
-          updatedByUserId: newAdmin.id,
-          userRepository,
-          userLoginRepository,
-          authenticationMethodRepository,
-          refreshTokenRepository,
-          membershipRepository,
-          certificationCenterMembershipRepository,
-          organizationLearnerRepository,
-          resetPasswordDemandRepository,
-          domainTransaction,
-          adminMemberRepository,
-          userAnonymizedEventLoggingJobRepository,
-        }),
-      );
+      await anonymizeUser({
+        userId: user.id,
+        updatedByUserId: newAdmin.id,
+        adminMemberRepository,
+        privacyUsersApiRepository,
+      });
 
       // then
       const anonymizedUser = await knex('users').where({ id: user.id }).first();
@@ -248,23 +208,12 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       sinon.stub(config.auditLogger, 'isEnabled').value(false);
 
       // when
-      await DomainTransaction.execute(async (domainTransaction) =>
-        anonymizeUser({
-          userId,
-          updatedByUserId: anonymizedByUserId,
-          userRepository,
-          userLoginRepository,
-          authenticationMethodRepository,
-          refreshTokenRepository,
-          membershipRepository,
-          certificationCenterMembershipRepository,
-          organizationLearnerRepository,
-          resetPasswordDemandRepository,
-          domainTransaction,
-          adminMemberRepository,
-          userAnonymizedEventLoggingJobRepository,
-        }),
-      );
+      await anonymizeUser({
+        userId,
+        updatedByUserId: anonymizedByUserId,
+        adminMemberRepository,
+        privacyUsersApiRepository,
+      });
 
       // then
       const anonymizedUser = await knex('users').where({ id: user.id }).first();
