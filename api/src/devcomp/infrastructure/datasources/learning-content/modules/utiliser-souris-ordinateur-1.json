@@ -2,6 +2,7 @@
   "id": "e8cee13e-1d4d-47eb-bd26-d7ea6a10b1e6",
   "slug": "utiliser-souris-ordinateur-1",
   "title": "Utiliser une souris d'ordinateur - 1",
+  "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Dans ce module, vous découvrirez ce qu’est une souris et à quoi elle sert.&nbsp;</p><p>Vous apprendrez à la déplacer et à cliquer pour interagir avec votre ordinateur.</p><br>",
@@ -29,7 +30,7 @@
     },
     {
       "grainId": "8a9618f5-c8d8-447e-83ae-cf66914c0aa0",
-      "content": "<p>Dans la vidéo suivante, vous allez voir comment contrôler la souris sur votre écran.&nbsp;<span aria-hidden=\"true\">📺</span></p>"
+      "content": "<p>Dans la vidéo suivante, vous allez voir comment déplacer la souris sur votre écran.&nbsp;<span aria-hidden=\"true\">📺</span></p>"
     },
     {
       "grainId": "713aeb31-6bbd-4e0c-930a-ad24164f5b9c",
@@ -57,7 +58,7 @@
     },
     {
       "grainId": "efba1e45-54ca-4829-b203-1e74b9269045",
-      "content": "<p>Le clic gauche sert à ouvrir des pages internet ou à démarrer des vidéos. Pour chacune de ses actions, le pointeur change de forme. <span aria-hidden=\"\\&quot;true\\&quot;\">🕹</span>️ À vous de jouer ! <br><br></p>"
+      "content": "<p>Le clic gauche sert à ouvrir des pages internet ou à démarrer des vidéos. Pour chacune de ses actions, le pointeur change de forme.</p>\n<p><span aria-hidden=\"\\&quot;true\\&quot;\">🖱️</span>️ À vous de jouer ! <br><br></p>"
     }
   ],
   "grains": [
@@ -71,7 +72,7 @@
           "element": {
             "id": "48708070-39c3-4af4-8914-ab61d61dfee8",
             "type": "text",
-            "content": "<p>La souris fait partie de l'équipement de base d’un ordinateur, avec le clavier.</p><p><strong>Reconnaître une souris</strong>  </p><p>Les souris peuvent avoir différentes formes, tailles ou couleurs. </p><p>Il y a deux types de souris : </p><ul><li>les souris avec un fil</li><li>les souris sans fil</li></ul><p>Globalement, toutes ces souris servent à faire les mêmes choses.</p>"
+            "content": "<p>La souris fait partie de l'équipement de base d’un ordinateur, avec le clavier.</p>\n<p>Les souris peuvent avoir différentes formes, tailles ou couleurs. </p>\n<p>Il y a deux types de souris : </p>\n<ul>\n    <li>les souris avec un fil</li>\n    <li>les souris sans fil</li>\n</ul>\n<p>Globalement, toutes ces souris servent à faire les mêmes choses.</p>"
           }
         },
         {
@@ -79,7 +80,7 @@
           "element": {
             "id": "c849cbc5-931e-4a00-ae6a-083e2ff0614d",
             "type": "image",
-            "url": "https://i.imgur.com/aIm64oG.jpeg",
+            "url": "https://i.imgur.com/0izQ3cg.png",
             "alt": "-",
             "alternativeText": "<p>Photographies de quatres souris filaires de tailles, formes et couleurs différentes. Photographies de 3 souris sans fil différentes&nbsp;:</p> <ul><li>Une souris blanche d'ordinateur mac, </li><li> une souris sans fil reliée par un connecteur USB Bluetooth, </li><li>une souris reliée par bluetooth.</li></ul>"
           }
@@ -250,7 +251,7 @@
           "element": {
             "id": "d9e4718d-a15a-4e62-a967-19971e1a611e",
             "type": "text",
-            "content": "<p>Sur la souris, on trouve toujours deux boutons : un bouton gauche et un bouton droit.<br>En général, il y a une molette.</p>"
+            "content": "<p>Sur la souris, on trouve toujours deux boutons : un bouton gauche et un bouton droit.<br>En général, il y a aussi une molette.</p>"
           }
         },
         {
@@ -280,7 +281,7 @@
           "element": {
             "id": "e45a32cf-2ab9-4464-85d0-ae4f0ca897cb",
             "type": "text",
-            "content": "<h3>D'abord, pourquoi est-ce qu'on dit «&nbsp;<strong>clic&nbsp;</strong>»&nbsp;?</h3><p>C'est le bruit que fait une souris d'ordinateur quand on appuie dessus.</p>"
+            "content": "<h3>D'abord, pourquoi est-ce qu'on dit «&nbsp;<strong>clic&nbsp;</strong>»&nbsp;?</h3><p>C'est le bruit que fait une souris d'ordinateur quand on appuie sur un de ses boutons.</p>"
           }
         },
         {
@@ -288,7 +289,7 @@
           "element": {
             "id": "4ec66bb9-f016-48c3-9653-56d7ae04d1b9",
             "type": "image",
-            "url": "https://i.imgur.com/yUbbQ56.gif",
+            "url": "https://i.imgur.com/AgjMRvD.gif",
             "alt": "",
             "alternativeText": ""
           }
@@ -313,7 +314,7 @@
           "element": {
             "id": "a510f893-7d93-4e4f-b8a4-0dd978324c70",
             "type": "text",
-            "content": "<p>Voici la démonstration du clic gauche.&nbsp;👇Vous pourrez vous entraîner ensuite.</p><h3>Étape 1&nbsp;: On déplace le pointeur à l'écran.&nbsp;</h3><h3>Étape 2 : On appuie sur le bouton gauche de la souris</h3><ul><li>Il faut appuyer avec l’index sans faire bouger la souris.</li><li>Relâchez immédiatement après l’appui. C’est comme pour un bouton de télécommande.</li><li>On doit entendre le son « clic ».<br></li></ul>"
+            "content": "<p>Voyons comment faire un clic gauche. <span aria-hidden=\"\\&quot;true\\&quot;\">👇</span></p>"
           }
         },
         {
@@ -329,9 +330,9 @@
         {
           "type": "element",
           "element": {
-            "id": "d41bc55d-6539-4be8-8604-87c2d2640b57",
+            "id": "4f9d39e4-5687-43fa-881d-8904d63023c8",
             "type": "text",
-            "content": "<p><span aria-hidden=\"\\&quot;true\\&quot;\">💡</span> Bon à savoir : </p>\n<p>Le doigt qui fait le clic gauche peut être positionné de différentes façons.<br>L'important est d'être à l'aise.</p>"
+            "content": "<p><strong>Étape 1&nbsp;:</strong> On déplace le pointeur à l'écran.</p><p><strong>Étape 2 : </strong>On appuie sur le bouton gauche de la souris</p><p><br></p><p>💡Pour réussir un clic : </p><ul><li>Il faut appuyer avec l’index sans faire bouger la souris.</li><li>On doit entendre le son « clic ».</li><li>Relâcher immédiatement après l’appui. C’est comme pour un bouton de télécommande !</li></ul>"
           }
         }
       ]
@@ -346,7 +347,7 @@
           "element": {
             "id": "80070528-b2ca-4e93-99a6-bc495a6029ef",
             "type": "text",
-            "content": "<p>Voici un rappel des étapes pour faire un clic gauche&nbsp;:</p><ol><li>Déplacer le pointeur à l'endroit voulu</li><li>Appuyer sur le bouton gauche de la souris</li></ol><p>Observez ensuite l'effet à l'écran.</p><p><strong>Dans la zone ci-dessous, faites un clic sur chaque élément lorsqu'il apparait.</strong><br></p>"
+            "content": "<p><strong>Dans la zone ci-dessous, faites un clic sur chaque élément lorsqu'il apparait.</strong><br></p>"
           }
         },
         {
@@ -392,7 +393,7 @@
           "element": {
             "id": "1ad8190f-46b6-43b5-82b1-cd81640b1700",
             "type": "image",
-            "url": "https://i.imgur.com/XDg6UgY.png",
+            "url": "https://i.imgur.com/G6t4f0c.png",
             "alt": "",
             "alternativeText": "<p>image des 4 formes de pointeur les plus courantes : la flèche, la main, la barre verticale, et la roue ou le sablier.&nbsp;</p>"
           }
@@ -402,7 +403,7 @@
           "element": {
             "id": "8c07cbe0-14aa-4a0e-898d-7ddf9c4ff3be",
             "type": "text",
-            "content": "<ul><li><strong>La flèche</strong> indique la position du pointeur. C’est le pointeur de base de votre souris.</li><li><strong>La main</strong> indique une zone interactive. Ce pointeur signifie que vous pouvez faire une action.</li><li><strong>La barre verticale</strong> indique une zone de texte. Ce pointeur signifie que vous pouvez taper du texte.</li><li><strong>La roue ou le sablier</strong> indiquent que l’ordinateur travaille et qu’il faut patienter.</li></ul>"
+            "content": "<ul><li><strong>La flèche</strong> est le pointeur le plus courant.</li><li><strong>La main</strong> indique que vous pouvez cliquer.</li><li><strong>La barre verticale</strong> indique que vous pouvez taper du texte.</li><li><strong>La roue ou le sablier</strong> indiquent qu’il faut patienter.</li></ul>"
           }
         }
       ]
@@ -434,11 +435,11 @@
                 {
                   "id": "7253ded2-df17-4926-930d-0b0947f7de82",
                   "type": "qcu",
-                  "instruction": "Une phrase a été dite dans la vidéo.<br>Quelle est cette phrase ?",
+                  "instruction": "<p>Une phrase a été dite dans la vidéo.</p><br><p>Quelle est cette phrase ?</p>",
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "Vous allez voir, c'est facile !"
+                      "content": "<p>Vous allez voir, c'est facile !</p>"
                     },
                     {
                       "id": "2",
@@ -488,7 +489,7 @@
           "element": {
             "id": "3480a769-41ea-47e8-990b-c5f8089542e7",
             "type": "text",
-            "content": "<ul>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">🖐️</span>La souris glisse sur la table grâce à votre main.</li>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">🖥️</span> À l'écran, le pointeur suit le mouvement de la souris.</li>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">👉</span> Cliquer veut dire appuyer brièvement sur un bouton de la souris.</li>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">▶️</span> Cliquer permet d'interagir avec l’ordinateur.</li>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">🖱️Le pointeur de la souris change de forme lorsqu'une action est possible.</span></li>\n</ul>"
+            "content": "<ul>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">🖐️</span>La souris glisse sur la table grâce à votre main.</li>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">🖥️</span> À l'écran, le pointeur suit le mouvement de la souris.</li>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">👉</span> Cliquer veut dire appuyer brièvement sur un bouton de la souris.</li>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">▶️</span> Cliquer permet d'interagir avec l’ordinateur.</li>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">🖱️Le pointeur de la souris change de forme quand on peut cliquer.</span></li>\n</ul>"
           }
         },
         {
