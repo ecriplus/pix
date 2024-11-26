@@ -1,6 +1,8 @@
-<div class="modulix-beta-banner">
-  <Module::BetaBanner />
-</div>
+{{#if @model.isBeta}}
+  <div class="modulix-beta-banner">
+    <Module::BetaBanner />
+  </div>
+{{/if}}
 <nav>
   <ul>
     <li>

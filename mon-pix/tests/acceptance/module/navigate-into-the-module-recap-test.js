@@ -28,6 +28,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
       server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
+        isBeta: true,
         grains: [grain],
         details: {
           image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
@@ -48,18 +49,20 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
       assert.ok(screen.getByRole('heading', { level: 1, name: t('pages.modulix.recap.title') }));
     });
 
-    test('should display the links to details button and to form builder', async function (assert) {
-      // when
-      const formLink = screen.getByRole('link', { name: t('pages.modulix.recap.goToForm') });
+    module('when module has status beta', function () {
+      test('should display the links to details button and to form builder', async function (assert) {
+        // when
+        const formLink = screen.getByRole('link', { name: t('pages.modulix.recap.goToForm') });
 
-      // then
-      const passage = server.schema.passages.all().models[0];
-      assert.ok(formLink);
-      assert.ok(screen.getByRole('link', { name: t('pages.modulix.recap.backToModuleDetails') }));
-      assert.strictEqual(
-        formLink.getAttribute('href'),
-        `https://form-eu.123formbuilder.com/71180/modulix-experimentation?2850087=${passage.id}`,
-      );
+        // then
+        const passage = server.schema.passages.all().models[0];
+        assert.ok(formLink);
+        assert.ok(screen.queryByRole('link', { name: t('pages.modulix.recap.backToModuleDetails') }));
+        assert.strictEqual(
+          formLink.getAttribute('href'),
+          `https://form-eu.123formbuilder.com/71180/modulix-experimentation?2850087=${passage.id}`,
+        );
+      });
     });
 
     test('should navigate to details page by clicking on back to module details button', async function (assert) {
