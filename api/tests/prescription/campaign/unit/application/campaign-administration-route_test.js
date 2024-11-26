@@ -25,7 +25,7 @@ describe('Unit | Application | Router | campaign-administration-router ', functi
     });
   });
 
-  describe('PATCH /api/campaigns/{id}', function () {
+  describe('PATCH /api/campaigns/{campaignId}', function () {
     it('should return 400 with an invalid campaign id', async function () {
       // given
       const httpTestServer = new HttpTestServer();
@@ -118,7 +118,7 @@ describe('Unit | Application | Router | campaign-administration-router ', functi
     });
   });
 
-  describe('PATCH /api/admin/campaigns/{id}', function () {
+  describe('PATCH /api/admin/campaigns/{campaignId}', function () {
     it('should return 204', async function () {
       // given
       sinon
@@ -365,7 +365,7 @@ describe('Unit | Application | Router | campaign-administration-router ', functi
     });
   });
 
-  describe('PUT /api/campaigns/{id}/archive', function () {
+  describe('PUT /api/campaigns/{campaignId}/archive', function () {
     it('should return 400 with an invalid campaign id', async function () {
       // given
       const httpTestServer = new HttpTestServer();
@@ -379,7 +379,7 @@ describe('Unit | Application | Router | campaign-administration-router ', functi
     });
   });
 
-  describe('DELETE /api/campaigns/{id}/archive', function () {
+  describe('DELETE /api/campaigns/{campaignId}/archive', function () {
     it('should return 400 with an invalid campaign id', async function () {
       // given
       const httpTestServer = new HttpTestServer();

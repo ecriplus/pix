@@ -160,7 +160,7 @@ describe('Unit | Application | Controller | Campaign administration', function (
       // given
       const request = {
         auth: { credentials: { userId: 1 } },
-        params: { id: 1 },
+        params: { campaignId: 1 },
         deserializedPayload: {
           name: 'New name',
           title: 'New title',
@@ -253,7 +253,7 @@ describe('Unit | Application | Controller | Campaign administration', function (
       // when
       const response = await campaignAdministrationController.archiveCampaign(
         {
-          params: { id: campaignId },
+          params: { campaignId },
           auth: {
             credentials: { userId },
           },
@@ -294,7 +294,7 @@ describe('Unit | Application | Controller | Campaign administration', function (
       // when
       const response = await campaignAdministrationController.unarchiveCampaign(
         {
-          params: { id: campaignId },
+          params: { campaignId },
           auth: {
             credentials: { userId },
           },

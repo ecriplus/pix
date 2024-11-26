@@ -27,7 +27,7 @@ const register = async function (server) {
     },
     {
       method: 'PATCH',
-      path: '/api/campaigns/{id}',
+      path: '/api/campaigns/{campaignId}',
       config: {
         pre: [
           {
@@ -37,7 +37,7 @@ const register = async function (server) {
         ],
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
           }),
           payload: Joi.object({
             data: {
@@ -65,12 +65,12 @@ const register = async function (server) {
     },
     {
       method: 'PUT',
-      path: '/api/campaigns/{id}/archive',
+      path: '/api/campaigns/{campaignId}/archive',
       config: {
         pre: [{ method: securityPreHandlers.checkAuthorizationToManageCampaign }],
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
           }),
         },
         handler: campaignAdministrationController.archiveCampaign,
@@ -82,12 +82,12 @@ const register = async function (server) {
     },
     {
       method: 'DELETE',
-      path: '/api/campaigns/{id}/archive',
+      path: '/api/campaigns/{campaignId}/archive',
       config: {
         pre: [{ method: securityPreHandlers.checkAuthorizationToManageCampaign }],
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
           }),
         },
         handler: campaignAdministrationController.unarchiveCampaign,
@@ -132,7 +132,7 @@ const register = async function (server) {
     },
     {
       method: 'PATCH',
-      path: '/api/admin/campaigns/{id}',
+      path: '/api/admin/campaigns/{campaignId}',
       config: {
         pre: [
           {
@@ -147,7 +147,7 @@ const register = async function (server) {
         ],
         validate: {
           params: Joi.object({
-            id: identifiersType.campaignId,
+            campaignId: identifiersType.campaignId,
           }),
           payload: Joi.object({
             data: {

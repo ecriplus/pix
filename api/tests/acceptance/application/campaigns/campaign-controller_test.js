@@ -12,7 +12,7 @@ describe('Acceptance | API | Campaign Controller', function () {
     server = await createServer();
   });
 
-  describe('PATCH /api/campaigns/{id}', function () {
+  describe('PATCH /api/campaigns/{campaignId}', function () {
     it('should return 200 when user is admin but not owner of the campaign', async function () {
       // given
       const organization = databaseBuilder.factory.buildOrganization();

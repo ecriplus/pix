@@ -54,7 +54,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}', function () {
+  describe('GET /api/campaigns/{campaignId}', function () {
     const options = {
       headers: { authorization: null },
       method: 'GET',
@@ -109,7 +109,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}/csv-profiles-collection-results', function () {
+  describe('GET /api/campaigns/{campaignId}/csv-profiles-collection-results', function () {
     const options = {
       headers: { authorization: null },
       method: 'GET',
@@ -191,7 +191,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}/csv-assessment-results', function () {
+  describe('GET /api/campaigns/{campaignId}/csv-assessment-results', function () {
     let campaign;
     let organization;
 
@@ -277,7 +277,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}/participants-activity', function () {
+  describe('GET /api/campaigns/{campaignId}/participants-activity', function () {
     const participant1 = { firstName: 'John', lastName: 'McClane', division: '5eme' };
     const participant2 = { firstName: 'Holly', lastName: 'McClane', division: '4eme' };
     const participant3 = { firstName: 'Mary', lastName: 'McClane', group: 'L1' };

@@ -29,7 +29,7 @@ describe('Unit | Application | Controller | Campaign', function () {
 
       const request = {
         auth: { credentials: { userId } },
-        params: { id: campaignId },
+        params: { campaignId },
         headers: { 'accept-language': locale },
       };
 
@@ -46,7 +46,7 @@ describe('Unit | Application | Controller | Campaign', function () {
       // given
       const error = new UserNotAuthorizedToAccessEntityError('User does not have access to this campaign');
       const request = {
-        params: { id: campaignId },
+        params: { campaignId },
         auth: {
           credentials: { userId },
         },

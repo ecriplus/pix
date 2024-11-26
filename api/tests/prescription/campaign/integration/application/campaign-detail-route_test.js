@@ -6,7 +6,7 @@ import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 describe('Integration | Application | Route | campaign detail router', function () {
   let httpTestServer;
 
-  describe('GET /api/campaigns/{id}/csv-profiles-collection-results', function () {
+  describe('GET /api/campaigns/{campaignId}/csv-profiles-collection-results', function () {
     it('should exist', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCampaign').callsFake((request, h) => h.response(true));
@@ -28,7 +28,7 @@ describe('Integration | Application | Route | campaign detail router', function 
     });
   });
 
-  describe('GET /api/campaigns/{id}/csv-assessment-results', function () {
+  describe('GET /api/campaigns/{campaignId}/csv-assessment-results', function () {
     it('should exist', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCampaign').callsFake((request, h) => h.response(true));
@@ -48,7 +48,7 @@ describe('Integration | Application | Route | campaign detail router', function 
     });
   });
 
-  describe('GET /api/organizations/:id/campaigns', function () {
+  describe('GET /api/organizations/{organizationId}/campaigns', function () {
     it('should call the organization controller to get the campaigns', async function () {
       sinon.stub(campaignDetailController, 'findPaginatedFilteredCampaigns').returns('ok');
       sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization').callsFake((request, h) => h.response(true));

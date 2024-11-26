@@ -6,7 +6,7 @@ import * as participationsCountByMasteryRateSerializer from '../infrastructure/s
 
 const getParticipationsByStage = async function (request) {
   const { userId } = request.auth.credentials;
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
 
   const participationsByStage = await usecases.getCampaignParticipationsCountByStage({ userId, campaignId });
 
@@ -18,7 +18,7 @@ const getParticipationsByStage = async function (request) {
 
 const getParticipationsByStatus = async function (request) {
   const { userId } = request.auth.credentials;
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
 
   const participantsCounts = await usecases.getCampaignParticipationsCountsByStatus({ userId, campaignId });
 
@@ -29,7 +29,7 @@ const getParticipationsByStatus = async function (request) {
 };
 const getParticipationsByDay = async function (request) {
   const { userId } = request.auth.credentials;
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
 
   const participantsCounts = await usecases.getCampaignParticipationsActivityByDay({ userId, campaignId });
 
@@ -41,7 +41,7 @@ const getParticipationsByDay = async function (request) {
 
 const getParticipationsCountByMasteryRate = async function (request) {
   const { userId } = request.auth.credentials;
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
 
   const resultDistribution = await usecases.getParticipationsCountByMasteryRate({ userId, campaignId });
 

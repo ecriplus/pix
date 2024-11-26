@@ -31,7 +31,7 @@ describe('Unit | Application | Controller | Campaign Results', function () {
 
       const request = {
         auth: { credentials: { userId } },
-        params: { id: campaignId },
+        params: { campaignId },
         headers: { 'accept-language': locale },
       };
 
@@ -50,7 +50,7 @@ describe('Unit | Application | Controller | Campaign Results', function () {
         'User does not have access to this campaign participation',
       );
       const request = {
-        params: { id: campaignId },
+        params: { campaignId },
         auth: {
           credentials: { userId },
         },

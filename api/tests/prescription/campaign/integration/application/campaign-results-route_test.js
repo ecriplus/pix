@@ -9,7 +9,7 @@ import {
 } from '../../../../test-helper.js';
 
 describe('Integration | Application | campaign-results-route', function () {
-  describe('GET /api/campaigns/{id}/assessment-results', function () {
+  describe('GET /api/campaigns/{campaignId}/assessment-results', function () {
     const method = 'GET';
 
     let headers, httpTestServer, organizationId, campaignId, url;
@@ -72,7 +72,7 @@ describe('Integration | Application | campaign-results-route', function () {
     });
   });
 
-  describe('GET /api/campaigns/{id}/profiles-collection-participations', function () {
+  describe('GET /api/campaigns/{campaignId}/profiles-collection-participations', function () {
     const method = 'GET';
 
     let headers, httpTestServer, organizationId, campaignId, url;

@@ -305,7 +305,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
     });
   });
 
-  describe('PATCH /api/admin/campaigns/{id}', function () {
+  describe('PATCH /api/admin/campaigns/{campaignId}', function () {
     it('should return the updated campaign', async function () {
       // given
       const campaign = databaseBuilder.factory.buildCampaign({ name: 'odlName', multipleSendings: false });
@@ -361,7 +361,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
     });
   });
 
-  describe('PUT /api/campaigns/{id}/archive', function () {
+  describe('PUT /api/campaigns/{campaignId}/archive', function () {
     it('should return 200 when user is admin in organization', async function () {
       // given
       const organization = databaseBuilder.factory.buildOrganization();
@@ -405,7 +405,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
     });
   });
 
-  describe('DELETE /api/campaigns/{id}/archive', function () {
+  describe('DELETE /api/campaigns/{campaignId}/archive', function () {
     it('should return 200 when user is admin in organization', async function () {
       // given
       const organization = databaseBuilder.factory.buildOrganization();

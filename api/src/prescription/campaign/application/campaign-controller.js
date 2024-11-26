@@ -23,7 +23,7 @@ const getGroups = async function (request) {
 
 const getAnalysis = async function (request, h, dependencies = { campaignAnalysisSerializer }) {
   const { userId } = request.auth.credentials;
-  const campaignId = request.params.id;
+  const { campaignId } = request.params;
   const locale = extractLocaleFromRequest(request);
   const campaignAnalysis = await usecases.computeCampaignAnalysis({ userId, campaignId, locale });
   return dependencies.campaignAnalysisSerializer.serialize(campaignAnalysis);
