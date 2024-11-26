@@ -3,6 +3,7 @@
  */
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { InvalidScoWhitelistError } from '../errors.js';
 
 export const importScoWhitelist = withTransaction(
   /**
@@ -14,7 +15,10 @@ export const importScoWhitelist = withTransaction(
     const numberOfUpdatedLines = await centerRepository.addToWhitelistByExternalIds({ externalIds });
 
     if (externalIds.length !== numberOfUpdatedLines) {
-      throw new RangeError('Some externalIds are not valid, please verify whitelist');
+      throw new InvalidScoWhitelistError({
+        numberOfExternalIdsInInput: externalIds.length,
+        numberOfValidExternalIds: numberOfUpdatedLines,
+      });
     }
   },
 );

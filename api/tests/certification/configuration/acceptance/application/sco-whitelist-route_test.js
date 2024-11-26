@@ -97,7 +97,17 @@ describe('Certification | Configuration | Acceptance | API | sco-whitelist-route
       const response = await server.inject(options);
 
       // then
-      expect(response.statusCode).to.equal(500);
+      expect(response.statusCode).to.equal(422);
+      expect(response.result.errors[0]).to.deep.equal({
+        status: '422',
+        code: 'CERTIFICATION_INVALID_SCO_WHITELIST_ERROR',
+        title: 'Unprocessable entity',
+        detail: 'La liste blanche contient des données invalides.',
+        meta: {
+          numberOfExternalIdsInInput: 2,
+          numberOfValidExternalIds: 1,
+        },
+      });
       const whitelist = await knex('certification-centers')
         .where({ isScoBlockedAccessWhitelist: true })
         .pluck('externalId');

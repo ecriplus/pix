@@ -14,7 +14,6 @@ export default class ScoWhitelistConfiguration extends Component {
   @service intl;
   @service session;
   @service pixToast;
-  @service notifications;
   @service fileSaver;
 
   @tracked isExportLoading = false;
@@ -59,7 +58,9 @@ export default class ScoWhitelistConfiguration extends Component {
       const token = this.session.data.authenticated.access_token;
       await this.fileSaver.save({ url, fileName, token });
     } catch (error) {
-      this.pixToast.sendErrorNotification(this.intl.t('pages.administration.certification.sco-whitelist.export.error'));
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('pages.administration.certification.sco-whitelist.export.error')
+      });
     } finally {
       this.isExportLoading = false;
     }

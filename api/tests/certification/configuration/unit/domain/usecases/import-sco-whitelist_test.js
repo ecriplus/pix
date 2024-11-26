@@ -1,4 +1,5 @@
 import { DomainTransaction } from '../../../../../../lib/infrastructure/DomainTransaction.js';
+import { InvalidScoWhitelistError } from '../../../../../../src/certification/configuration/domain/errors.js';
 import { importScoWhitelist } from '../../../../../../src/certification/configuration/domain/usecases/import-sco-whitelist.js';
 import { catchErr, expect, sinon } from '../../../../../test-helper.js';
 
@@ -46,7 +47,7 @@ describe('Certification | Configuration | Unit | UseCase | import-sco-whitelist'
     )([11, 12]);
 
     // then
-    expect(error).to.be.instanceOf(RangeError);
-    expect(error.message).to.equal('Some externalIds are not valid, please verify whitelist');
+    expect(error).to.be.instanceOf(InvalidScoWhitelistError);
+    expect(error.message).to.equal('La liste blanche contient des données invalides.');
   });
 });

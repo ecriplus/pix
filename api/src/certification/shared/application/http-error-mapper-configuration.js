@@ -1,5 +1,6 @@
 import { HttpErrors } from '../../../shared/application/http-errors.js';
 import { DomainErrorMappingConfiguration } from '../../../shared/application/models/domain-error-mapping-configuration.js';
+import { configurationDomainErrorMappingConfiguration } from '../../configuration/application/http-error-mapper-configuration.js';
 import { enrolmentDomainErrorMappingConfiguration } from '../../enrolment/application/http-error-mapper-configuration.js';
 import { resultsDomainErrorMappingConfiguration } from '../../results/application/http-error-mapper-configuration.js';
 import { sessionDomainErrorMappingConfiguration } from '../../session-management/application/http-error-mapper-configuration.js';
@@ -22,5 +23,6 @@ certificationDomainErrorMappingConfiguration.push(
   ...resultsDomainErrorMappingConfiguration,
   ...enrolmentDomainErrorMappingConfiguration,
   ...sessionDomainErrorMappingConfiguration,
+  ...configurationDomainErrorMappingConfiguration,
 );
 export { certificationDomainErrorMappingConfiguration };
