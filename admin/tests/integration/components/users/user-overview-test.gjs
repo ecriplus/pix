@@ -442,16 +442,16 @@ module('Integration | Component | users | user-overview', function (hooks) {
         await clickByName('Modifier');
 
         // then
-        assert.dom(screen.getByRole('textbox', { name: 'Prénom :' })).hasValue(user.firstName);
-        assert.dom(screen.getByRole('textbox', { name: 'Nom :' })).hasValue(user.lastName);
+        assert.dom(screen.getByRole('textbox', { name: 'Prénom *' })).hasValue(user.firstName);
+        assert.dom(screen.getByRole('textbox', { name: 'Nom *' })).hasValue(user.lastName);
 
-        await clickByName('Langue :');
+        await clickByName('Langue');
         await screen.findByRole('listbox');
         assert.dom(screen.getByRole('option', { name: 'Français' })).exists();
         assert.dom(screen.getByRole('option', { name: 'Anglais' })).exists();
         assert.dom(screen.getByRole('option', { name: 'Néerlandais' })).exists();
 
-        await clickByName('Locale :');
+        await clickByName('Locale');
         await waitFor(async () => {
           await screen.findByRole('listbox');
           assert.dom(screen.getByRole('option', { name: 'en' })).exists();
@@ -495,7 +495,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
           await clickByName('Modifier');
 
           // then
-          assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail :' })).hasValue(user.email);
+          assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail *' })).hasValue(user.email);
         });
 
         test('does not display username in edit mode', async function (assert) {
@@ -512,7 +512,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
           await clickByName('Modifier');
 
           // then
-          assert.dom(screen.queryByRole('textbox', { name: 'Identifiant :' })).doesNotExist();
+          assert.dom(screen.queryByRole('textbox', { name: 'Identifiant *' })).doesNotExist();
         });
       });
 
@@ -531,7 +531,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
           await clickByName('Modifier');
 
           // then
-          assert.dom(screen.getByRole('textbox', { name: 'Identifiant :' })).hasValue(user.username);
+          assert.dom(screen.getByRole('textbox', { name: 'Identifiant *' })).hasValue(user.username);
         });
 
         test('displays email', async function (assert) {
@@ -548,7 +548,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
           await clickByName('Modifier');
 
           // then
-          assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail :' })).exists();
+          assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail *' })).exists();
         });
       });
 
@@ -567,7 +567,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
           await clickByName('Modifier');
 
           // then
-          assert.dom(screen.queryByRole('textbox', { name: 'Adresse e-mail :' })).doesNotExist();
+          assert.dom(screen.queryByRole('textbox', { name: 'Adresse e-mail *' })).doesNotExist();
         });
       });
     });

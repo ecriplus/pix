@@ -103,7 +103,7 @@ export default class CappedTubesCriterion extends Component {
           @requiredLabel={{t "common.forms.mandatory"}}
           {{on "change" @onThresholdChange}}
         >
-          <:label>Taux de réussite requis :</:label>
+          <:label>Taux de réussite requis</:label>
         </PixInput>
         <Areas
           @areas={{this.areas}}

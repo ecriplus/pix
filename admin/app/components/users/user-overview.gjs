@@ -195,51 +195,51 @@ export default class UserOverview extends Component {
             </span>
             <div class="form-field">
               <PixInput
+                @requiredLabel="obligatoire"
                 @errorMessage={{this.form.firstNameError.message}}
                 @validationStatus={{this.form.firstNameError.status}}
                 @value={{this.form.firstName}}
                 {{on "input" (fn this.updateFormValue "firstName")}}
               ><:label>
-                  <abbr title="obligatoire" class="mandatory-mark" aria-hidden="true">*</abbr>
-                  Prénom :
+                  Prénom
                 </:label></PixInput>
             </div>
             <div class="form-field">
               <PixInput
+                @requiredLabel="obligatoire"
                 @errorMessage={{this.form.lastNameError.message}}
                 @validationStatus={{this.form.lastNameError.status}}
                 @value={{this.form.lastName}}
                 {{on "input" (fn this.updateFormValue "lastName")}}
               >
                 <:label>
-                  <abbr title="obligatoire" class="mandatory-mark" aria-hidden="true">*</abbr>
-                  Nom :
+                  Nom
                 </:label></PixInput>
             </div>
             {{#if this.canModifyEmail}}
               <div class="form-field">
                 <PixInput
+                  @requiredLabel="obligatoire"
                   @errorMessage={{this.form.emailError.message}}
                   @validationStatus={{this.form.emailError.status}}
                   @value={{this.form.email}}
                   {{on "input" (fn this.updateFormValue "email")}}
                 >
                   <:label>
-                    <abbr title="obligatoire" class="mandatory-mark" aria-hidden="true">*</abbr>
-                    Adresse e-mail :
+                    Adresse e-mail
                   </:label></PixInput>
               </div>
             {{/if}}
             {{#if @user.username}}
               <div class="form-field">
                 <PixInput
+                  @requiredLabel="obligatoire"
                   @errorMessage={{this.form.usernameError.message}}
                   @validationStatus={{this.form.usernameError.status}}
                   @value={{this.form.username}}
                   {{on "input" (fn this.updateFormValue "username")}}
                 ><:label>
-                    <abbr title="obligatoire" class="mandatory-mark" aria-hidden="true">*</abbr>
-                    Identifiant :
+                    Identifiant
                   </:label></PixInput>
               </div>
             {{/if}}
@@ -251,7 +251,7 @@ export default class UserOverview extends Component {
                 @onChange={{this.onChangeLanguage}}
                 @hideDefaultOption={{true}}
               >
-                <:label>Langue :</:label>
+                <:label>Langue</:label>
               </PixSelect>
             </div>
             <div class="form-field">
@@ -262,7 +262,7 @@ export default class UserOverview extends Component {
                 @onChange={{this.onLocaleChange}}
                 @hideDefaultOption={{true}}
               >
-                <:label>Locale :</:label>
+                <:label>Locale</:label>
               </PixSelect>
             </div>
             <div class="form-actions">

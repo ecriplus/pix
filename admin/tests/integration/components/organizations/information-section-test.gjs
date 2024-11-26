@@ -1,7 +1,7 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
-import { click } from '@ember/test-helpers';
+import { click, fillIn } from '@ember/test-helpers';
 import InformationSection from 'pix-admin/components/organizations/information-section';
 import { module, test } from 'qunit';
 
@@ -39,7 +39,7 @@ module('Integration | Component | organizations/information-section', function (
       await clickByName('Modifier');
 
       // then
-      assert.dom(screen.getByRole('textbox', { name: 'Nom' })).exists();
+      assert.dom(screen.getByRole('textbox', { name: 'Nom *' })).exists();
       assert.dom(screen.getByRole('textbox', { name: 'Identifiant externe' })).exists();
       assert.dom(screen.getByRole('button', { name: 'Annuler' })).exists();
       assert.dom(screen.getByRole('button', { name: 'Enregistrer' })).exists();
@@ -65,7 +65,7 @@ module('Integration | Component | organizations/information-section', function (
 
       await clickByName('Modifier');
 
-      await fillByLabel('* Nom', 'new name');
+      await fillIn(screen.getByLabelText('Nom *', { exact: false }), 'new name');
       await fillByLabel('Identifiant externe', 'new externalId');
       await fillByLabel('Département (en 3 chiffres)', 'new provinceCode');
       await clickByName('Gestion d’élèves/étudiants');
@@ -112,7 +112,7 @@ module('Integration | Component | organizations/information-section', function (
       );
       await clickByName('Modifier');
 
-      await fillByLabel('* Nom', 'new name');
+      await fillIn(screen.getByLabelText('Nom *', { exact: false }), 'new name');
       await fillByLabel('Identifiant externe', 'new externalId');
       await fillByLabel('Département (en 3 chiffres)', '   ');
       await fillByLabel('Crédits', 50);

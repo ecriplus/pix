@@ -1,6 +1,7 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
+import { fillIn } from '@ember/test-helpers';
 import Update from 'pix-admin/components/campaigns/update';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -111,7 +112,7 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
   test('it should display an error text when the name is empty', async function (assert) {
     // when
     const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
-    await fillByLabel('* Nom de la campagne', '');
+    await fillIn(screen.getByLabelText('Nom de la campagne *', { exact: false }), '');
 
     // then
     assert.dom(screen.getByText('Le nom ne peut pas être vide')).exists();
@@ -120,7 +121,7 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
   test('it should display an error text when the name has more than 255 characters', async function (assert) {
     // when
     const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
-    await fillByLabel('* Nom de la campagne', 'a'.repeat(256));
+    await fillIn(screen.getByLabelText('Nom de la campagne *', { exact: false }), 'a'.repeat(256));
 
     // then
     assert.dom(screen.getByText('La longueur du nom ne doit pas excéder 255 caractères')).exists();
@@ -128,8 +129,8 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
 
   test('it should call Update when form is valid', async function (assert) {
     //when
-    await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
-    await fillByLabel('* Nom de la campagne', 'Nouveau nom');
+    const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
+    await fillIn(screen.getByLabelText('Nom de la campagne *', { exact: false }), 'Nouveau nom');
     await clickByName('Enregistrer');
 
     //then

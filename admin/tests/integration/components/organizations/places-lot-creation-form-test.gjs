@@ -1,5 +1,5 @@
 import { fillByLabel, render } from '@1024pix/ember-testing-library';
-import { click } from '@ember/test-helpers';
+import { click, fillIn } from '@ember/test-helpers';
 import PlacesLotCreationForm from 'pix-admin/components/organizations/places-lot-creation-form';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -17,8 +17,8 @@ module('Integration | Component | organizations/places-lot-creation-form', funct
 
     // when
     await fillByLabel('Nombre :', '10');
-    await fillByLabel("* Date d'activation :", '2022-10-20');
-    await fillByLabel("Date d'expiration :", '2022-12-20');
+    await fillIn(screen.getByLabelText("Date d'activation *", { exact: false }), '2022-10-20');
+    await fillByLabel("Date d'expiration", '2022-12-20');
 
     const select = screen.getByRole('button', { name: /Catégorie/ });
 
@@ -26,7 +26,7 @@ module('Integration | Component | organizations/places-lot-creation-form', funct
 
     await click(await screen.findByRole('option', { name: 'Tarif gratuit' }));
 
-    await fillByLabel('* Référence :', '123ABC');
+    await fillIn(screen.getByLabelText('Référence *', { exact: false }), '123ABC');
     await click(screen.getByRole('button', { name: 'Ajouter' }));
     // then
     sinon.assert.calledOnce(create);
@@ -41,8 +41,8 @@ module('Integration | Component | organizations/places-lot-creation-form', funct
 
     // when
     await fillByLabel('Nombre :', '10');
-    await fillByLabel("* Date d'activation :", '2022-10-20');
-    await fillByLabel("Date d'expiration :", '2022-12-20');
+    await fillIn(screen.getByLabelText("Date d'activation *", { exact: false }), '2022-10-20');
+    await fillByLabel("Date d'expiration", '2022-12-20');
 
     const select = screen.getByRole('button', { name: /Catégorie/ });
 
@@ -52,7 +52,7 @@ module('Integration | Component | organizations/places-lot-creation-form', funct
 
     await click(await screen.findByRole('option', { name: 'Tarif gratuit' }));
 
-    await fillByLabel('* Référence :', '123ABC');
+    await fillIn(screen.getByLabelText('Référence *', { exact: false }), '123ABC');
     await click(screen.getByRole('button', { name: 'Ajouter' }));
 
     assert.throws(function () {
