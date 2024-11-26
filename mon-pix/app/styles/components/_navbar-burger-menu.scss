@@ -95,7 +95,17 @@
     }
 
     &--logout {
+      display: flex;
+      align-items: center;
       margin-top: var(--pix-spacing-2x);
     }
+  }
+}
+
+.navbar-burger-menu-footer-list-item-logout {
+  &__icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: var(--pix-spacing-1x);
   }
 }
