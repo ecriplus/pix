@@ -1,5 +1,5 @@
 import { clickByName, fillByLabel, visit } from '@1024pix/ember-testing-library';
-import { click, currentURL } from '@ember/test-helpers';
+import { click, currentURL, fillIn } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
@@ -32,7 +32,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
       await clickByName('Modifier');
 
       // when
-      await fillByLabel('* Nom', 'newOrganizationName');
+      await fillIn(screen.getByLabelText(/Nom \*/), 'newOrganizationName');
       await fillByLabel('Prénom du DPO', 'Bru');
       await fillByLabel('Nom du DPO', 'No');
       await fillByLabel('Adresse e-mail du DPO', 'bru.no@example.net');

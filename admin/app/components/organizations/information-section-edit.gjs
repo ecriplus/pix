@@ -124,12 +124,12 @@ export default class OrganizationInformationSectionEditionMode extends Component
         <div class="form-field">
           <PixInput
             required={{true}}
+            @requiredLabel="obligatoire"
             @errorMessage={{this.form.nameError.message}}
             @validationStatus={{this.form.nameError.status}}
             @value={{this.form.name}}
             {{on "input" (fn this.updateFormValue "name")}}
           ><:label>
-              <abbr title="obligatoire" class="mandatory-mark" aria-hidden="true">*</abbr>
               Nom
             </:label></PixInput>
         </div>

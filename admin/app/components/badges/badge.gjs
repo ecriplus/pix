@@ -150,7 +150,7 @@ export default class Badge extends Component {
                     @value={{this.form.title}}
                     @requiredLabel={{true}}
                     {{on "input" (pick "target.value" (set this "form.title"))}}
-                  ><:label>Titre : </:label></PixInput>
+                  ><:label>Titre</:label></PixInput>
                 </div>
                 <div class="badge-edit-form__field">
                   <PixInput
@@ -158,7 +158,7 @@ export default class Badge extends Component {
                     @value={{this.form.key}}
                     @requiredLabel={{true}}
                     {{on "input" (pick "target.value" (set this "form.key"))}}
-                  ><:label>Clé : </:label></PixInput>
+                  ><:label>Clé</:label></PixInput>
                 </div>
                 <div class="badge-edit-form__field">
                   <PixTextarea
@@ -166,23 +166,23 @@ export default class Badge extends Component {
                     @value={{this.form.message}}
                     rows="4"
                     {{on "input" (pick "target.value" (set this "form.message"))}}
-                  ><:label>Message : </:label></PixTextarea>
+                  ><:label>Message</:label></PixTextarea>
                 </div>
                 <div class="badge-edit-form__field">
                   <PixInput
                     class="form-control"
                     @value={{this.form.imageName}}
-                    @requiredLabel={{true}}
+                    @requiredLabel={{t "common.forms.mandatory"}}
                     {{on "input" (pick "target.value" (set this "form.imageName"))}}
-                  ><:label>Nom de l'image (svg) : </:label></PixInput>
+                  ><:label>Nom de l'image (svg)</:label></PixInput>
                 </div>
                 <div class="badge-edit-form__field">
                   <PixInput
                     class="form-control"
                     @value={{this.form.altMessage}}
-                    @requiredLabel={{true}}
+                    @requiredLabel={{t "common.forms.mandatory"}}
                     {{on "input" (pick "target.value" (set this "form.altMessage"))}}
-                  ><:label>Message Alternatif : </:label></PixInput>
+                  ><:label>Message Alternatif</:label></PixInput>
                 </div>
                 <div class="badge-edit-form__field">
                   <PixCheckbox

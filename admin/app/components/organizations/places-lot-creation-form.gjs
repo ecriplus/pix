@@ -94,7 +94,7 @@ export default class PlacesLotCreationForm extends Component {
               @value={{this.activationDate}}
               @requiredLabel={{true}}
               {{on "input" (pick "target.value" (set this "activationDate"))}}
-            ><:label>Date d'activation : </:label></PixInput>
+            ><:label>Date d'activation</:label></PixInput>
 
             {{#if @errors.activationDate}}
               <div class="form-field__error">
@@ -108,7 +108,7 @@ export default class PlacesLotCreationForm extends Component {
               type="date"
               @value={{this.expirationDate}}
               {{on "input" (pick "target.value" (set this "expirationDate"))}}
-            ><:label>Date d'expiration : </:label></PixInput>
+            ><:label>Date d'expiration</:label></PixInput>
 
             {{#if @errors.expirationDate}}
               <div class="form-field__error">
@@ -125,7 +125,7 @@ export default class PlacesLotCreationForm extends Component {
               @errorMessage={{get @errors.category "0.message"}}
               @requiredLabel="Champs obligatoire"
             >
-              <:label>Catégorie :</:label>
+              <:label>Catégorie</:label>
             </PixSelect>
           </div>
           <div class="form-field">
@@ -135,7 +135,7 @@ export default class PlacesLotCreationForm extends Component {
               maxlength="255"
               @requiredLabel={{true}}
               {{on "input" (pick "target.value" (set this "reference"))}}
-            ><:label>Référence :</:label></PixInput>
+            ><:label>Référence</:label></PixInput>
 
             {{#if @errors.reference}}
               <div class="form-field__error">

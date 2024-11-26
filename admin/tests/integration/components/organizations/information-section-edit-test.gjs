@@ -1,6 +1,7 @@
 import { fillByLabel, render } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
+import { fillIn } from '@ember/test-helpers';
 import InformationSectionEdit from 'pix-admin/components/organizations/information-section-edit';
 import { module, test } from 'qunit';
 
@@ -35,7 +36,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillByLabel('* Nom', '');
+      await fillIn(screen.getByLabelText('Nom *', { exact: false }), '');
 
       // then
       assert.dom(screen.getByText('Le nom ne peut pas être vide')).exists();
@@ -46,7 +47,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillByLabel('* Nom', 'a'.repeat(256));
+      await fillIn(screen.getByLabelText('Nom *', { exact: false }), 'a'.repeat(256));
 
       // then
       assert.dom(screen.getByText('La longueur du nom ne doit pas excéder 255 caractères')).exists();

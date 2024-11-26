@@ -218,7 +218,6 @@ module('Acceptance | Target Profile Insights', function (hooks) {
           await click(secondStageLevelButton);
           await screen.findByRole('listbox');
           await click(screen.getByRole('option', { name: '3' }));
-          await waitForElementToBeRemoved(() => screen.queryByRole('listbox'));
 
           await fillIn(firstStageLevelMessage, 'mon message un');
           await fillIn(secondStageLevelMessage, 'mon message deux');
@@ -496,11 +495,11 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         await clickByName('Clés de lecture');
         await clickByName('Voir le détail du résultat thématique ancien titre');
         await clickByName('Modifier');
-        await fillByLabel('* Titre :', 'nouveau titre');
-        await fillByLabel('* Clé :', 'NEW_KEY');
-        await fillByLabel('Message :', 'nouveau message');
-        await fillByLabel("* Nom de l'image (svg) :", 'new_image.svg');
-        await fillByLabel('* Message Alternatif :', 'nouveau alt');
+        await fillIn(screen.getByLabelText('Titre *', { exact: false }), 'nouveau titre');
+        await fillIn(screen.getByLabelText('Clé *', { exact: false }), 'NEW_KEY');
+        await fillByLabel('Message', 'nouveau message');
+        await fillIn(screen.getByLabelText("Nom de l'image (svg) *", { exact: false }), 'new_image.svg');
+        await fillIn(screen.getByLabelText('Message Alternatif *', { exact: false }), 'nouveau alt');
         await clickByName('Certifiable');
         await clickByName('Lacunes');
         await clickByName('Enregistrer');
@@ -528,7 +527,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         await clickByName('Clés de lecture');
         await clickByName('Voir le détail du résultat thématique tagada');
         await clickByName('Modifier');
-        await fillByLabel('* Titre :', 'tsouintsouin');
+        await fillIn(screen.getByLabelText('Titre *', { exact: false }), 'tsouintsouin');
         await clickByName('Annuler');
 
         // then
@@ -589,7 +588,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         await clickByName('Clés de lecture');
         await clickByName('Nouveau résultat thématique');
         await fillByLabel(/Nom du résultat thématique :/, 'Mon nouveau RT');
-        await fillByLabel("* Nom de l'image (svg) :", 'troll.png');
+        await fillIn(screen.getByLabelText("Nom de l'image (svg) *", { exact: false }), 'troll.png');
         await fillByLabel(/Texte alternatif pour l'image :/, 'Je mets du png je fais ce que je veux');
         await fillByLabel('Message :', 'message de mon RT');
         await fillByLabel(/Clé/, 'MY_BADGE');
@@ -602,7 +601,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         const [tubeGroupNameInput] = screen.getAllByLabelText('Nom du critère :');
         await fillIn(tubeGroupNameInput, "Le tube de l'année");
 
-        const thresholdInputs = screen.getAllByLabelText('* Taux de réussite requis :');
+        const thresholdInputs = screen.getAllByLabelText('Taux de réussite requis *', { exact: false });
         await fillIn(thresholdInputs[0], 50);
         await fillIn(thresholdInputs[1], 60);
         await fillIn(thresholdInputs[2], 70);

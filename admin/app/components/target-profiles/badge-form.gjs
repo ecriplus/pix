@@ -127,7 +127,7 @@ export default class BadgeForm extends Component {
               placeholder="exemple: clea_num.svg"
               {{on "change" (fn this.updateFormValue "imageName")}}
             >
-              <:label>Nom de l'image (svg) :</:label>
+              <:label>Nom de l'image (svg)</:label>
             </PixInput>
           </div>
           <div class="badge-form__text-field">

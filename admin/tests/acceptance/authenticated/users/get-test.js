@@ -1,5 +1,5 @@
-import { clickByName, fillByLabel, visit, within } from '@1024pix/ember-testing-library';
-import { click, currentURL } from '@ember/test-helpers';
+import { clickByName, visit, within } from '@1024pix/ember-testing-library';
+import { click, currentURL, fillIn } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { createAuthenticateSession } from 'pix-admin/tests/helpers/test-init';
@@ -69,11 +69,11 @@ module('Acceptance | authenticated/users/get', function (hooks) {
       await clickByName('Modifier');
 
       // when
-      await fillByLabel('* Prénom :', 'john');
-      await fillByLabel('* Nom :', 'doe');
-      await fillByLabel('* Adresse e-mail :', 'john.doe@example.net');
-      await fillByLabel('* Identifiant :', 'john.doe0101');
-      await click(screen.getByRole('button', { name: 'Langue :' }));
+      await fillIn(screen.getByLabelText('Prénom *', { exact: false }), 'john');
+      await fillIn(screen.getByLabelText(/Nom */), 'doe');
+      await fillIn(screen.getByLabelText('Adresse e-mail *', { exact: false }), 'john.doe@example.net');
+      await fillIn(screen.getByLabelText('Identifiant *', { exact: false }), 'john.doe0101');
+      await click(screen.getByRole('button', { name: 'Langue' }));
 
       await screen.findByRole('listbox');
       await click(screen.getByRole('option', { name: 'Anglais' }));
