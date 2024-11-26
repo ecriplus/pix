@@ -25,6 +25,10 @@ export async function getModulesListAsCsv(modules) {
         value: (row) => row.grains.filter((grain) => grain.type === 'activity').length,
       },
       { label: 'ModuleDuration', value: (row) => `=TEXT(${row.details.duration}/24/60; "mm:ss")` },
+      {
+        label: 'ModuleIsBeta',
+        value: (row) => (row.isBeta ? '=TRUE' : '=FALSE'),
+      },
     ],
   });
 }
