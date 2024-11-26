@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { LOCALE } from '../../../shared/domain/constants.js';
 import { scenarioSimulatorController } from './scenario-simulator-controller.js';
 
 const register = async (server) => {
@@ -27,6 +28,10 @@ const register = async (server) => {
               variationPercent: Joi.number().min(0).max(1),
               capacity: Joi.number().min(-8).max(8).required(),
               accessibilityAdjustmentNeeded: Joi.boolean(),
+              locale: Joi.string()
+                .valid(...Object.values(LOCALE))
+                .lowercase()
+                .required(),
             })
             .required(),
         },
