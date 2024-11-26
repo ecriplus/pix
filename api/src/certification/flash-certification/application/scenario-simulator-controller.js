@@ -64,6 +64,7 @@ async function simulateFlashAssessmentScenario(
           errorRate: answer.errorRate,
           answerStatus: answer.answerStatus,
           capacity: answer.capacity,
+          numberOfAvailableChallenges: answer.numberOfAvailableChallenges,
         })),
       }) + '\n';
     }

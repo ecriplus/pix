@@ -165,6 +165,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
       expect(parsedResponse[0].simulationReport[0].reward).to.exist;
       expect(parsedResponse[0].simulationReport[0].errorRate).to.exist;
       expect(parsedResponse[0].simulationReport[0].answerStatus).to.exist;
+      expect(parsedResponse[0].simulationReport[0].numberOfAvailableChallenges).to.exist;
     });
 
     describe('when there is no connected user', function () {
