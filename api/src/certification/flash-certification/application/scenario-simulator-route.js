@@ -3,13 +3,6 @@ import Joi from 'joi';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { scenarioSimulatorController } from './scenario-simulator-controller.js';
 
-const _baseScenarioParametersValidator = Joi.object().keys({
-  initialCapacity: Joi.number().integer().min(-8).max(8),
-  numberOfIterations: Joi.number().integer().min(0),
-  challengePickProbability: Joi.number().min(0).max(100),
-  variationPercent: Joi.number().min(0).max(1),
-});
-
 const register = async (server) => {
   server.route([
     {
@@ -26,9 +19,14 @@ const register = async (server) => {
           options: {
             allowUnknown: true,
           },
-          payload: _baseScenarioParametersValidator
+          payload: Joi.object()
             .keys({
+              initialCapacity: Joi.number().integer().min(-8).max(8),
+              numberOfIterations: Joi.number().integer().min(0),
+              challengePickProbability: Joi.number().min(0).max(100),
+              variationPercent: Joi.number().min(0).max(1),
               capacity: Joi.number().min(-8).max(8).required(),
+              accessibilityAdjustmentNeeded: Joi.boolean(),
             })
             .required(),
         },

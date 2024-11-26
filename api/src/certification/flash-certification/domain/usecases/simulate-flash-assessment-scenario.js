@@ -12,8 +12,9 @@ export async function simulateFlashAssessmentScenario({
   challengeRepository,
   flashAlgorithmService,
   sharedFlashAlgorithmConfigurationRepository,
+  accessibilityAdjustmentNeeded,
 }) {
-  const challenges = await challengeRepository.findActiveFlashCompatible({ locale });
+  const challenges = await challengeRepository.findActiveFlashCompatible({ locale, accessibilityAdjustmentNeeded });
 
   const configurationUsedInProduction = await sharedFlashAlgorithmConfigurationRepository.getMostRecent();
 

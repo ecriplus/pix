@@ -26,6 +26,7 @@ async function simulateFlashAssessmentScenario(
     challengePickProbability,
     variationPercent,
     capacity,
+    accessibilityAdjustmentNeeded,
   } = request.payload;
 
   const pickAnswerStatus = dependencies.pickAnswerStatusService.pickAnswerStatusForCapacity(capacity);
@@ -45,6 +46,7 @@ async function simulateFlashAssessmentScenario(
           locale,
           initialCapacity,
           variationPercent,
+          accessibilityAdjustmentNeeded,
         },
         _.isUndefined,
       );

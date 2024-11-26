@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { httpAgent } from '../../../../lib/infrastructure/http/http-agent.js';
 import { config } from '../../config.js';
 import { NotFoundError } from '../../domain/errors.js';
+import { Accessibility } from '../../domain/models/Challenge.js';
 import { Challenge } from '../../domain/models/index.js';
 import * as solutionAdapter from '../../infrastructure/adapters/solution-adapter.js';
 import * as skillAdapter from '../adapters/skill-adapter.js';
@@ -88,9 +89,20 @@ const findOperativeBySkills = async function (skills, locale) {
 const findActiveFlashCompatible = async function ({
   locale,
   successProbabilityThreshold = config.features.successProbabilityThreshold,
+  accessibilityAdjustmentNeeded = false,
 } = {}) {
   _assertLocaleIsDefined(locale);
-  const challengeDataObjects = await challengeDatasource.findActiveFlashCompatible(locale);
+  let challengeDataObjects = await challengeDatasource.findActiveFlashCompatible(locale);
+  if (accessibilityAdjustmentNeeded) {
+    challengeDataObjects = challengeDataObjects.filter((challengeDataObject) => {
+      return (
+        (challengeDataObject.accessibility1 === Accessibility.OK ||
+          challengeDataObject.accessibility1 === Accessibility.RAS) &&
+        (challengeDataObject.accessibility2 === Accessibility.OK ||
+          challengeDataObject.accessibility2 === Accessibility.RAS)
+      );
+    });
+  }
   const activeSkills = await skillDatasource.findActive();
   return _toDomainCollection({ challengeDataObjects, skills: activeSkills, successProbabilityThreshold });
 };
