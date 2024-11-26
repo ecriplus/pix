@@ -97,7 +97,7 @@ const addOrUpdateOrganizationOfOrganizationLearners = async function (organizati
 
     await knexConn('organization-learners')
       .insert(organizationLearnersToSave)
-      .onConflict(['organizationId', 'nationalStudentId'])
+      .onConflict(knexConn.raw('("organizationId","nationalStudentId") where "deletedAt" is NULL'))
       .merge();
   } catch (err) {
     throw new OrganizationLearnersCouldNotBeSavedError();

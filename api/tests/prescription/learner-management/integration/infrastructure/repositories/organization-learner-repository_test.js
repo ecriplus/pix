@@ -580,6 +580,56 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       });
     });
 
+    context('when there are deleted organizationLearners with same nationalStudentId', function () {
+      let organizationLearners;
+      let organizationId;
+      let firstOrganizationLearner;
+
+      beforeEach(async function () {
+        organizationId = databaseBuilder.factory.buildOrganization().id;
+
+        firstOrganizationLearner = new OrganizationLearner({
+          lastName: 'Pipeau',
+          preferredLastName: 'Toto',
+          firstName: 'Corinne',
+          middleName: 'Dorothée',
+          thirdName: 'Driss',
+          sex: 'F',
+          birthdate: '2000-01-01',
+          birthCity: 'Perpi',
+          birthCityCode: '123456',
+          birthProvinceCode: '66',
+          birthCountryCode: '100',
+          MEFCode: 'MEF123456',
+          status: 'ST',
+          nationalStudentId: '1234',
+          division: '4B',
+          userId: null,
+          isDisabled: false,
+          organizationId,
+        });
+
+        databaseBuilder.factory.buildOrganizationLearner({ ...firstOrganizationLearner, deletedAt: new Date() });
+
+        await databaseBuilder.commit();
+
+        organizationLearners = [firstOrganizationLearner];
+      });
+
+      it('should create all organizationLearners', async function () {
+        // when
+        await DomainTransaction.execute((domainTransaction) => {
+          return addOrUpdateOrganizationOfOrganizationLearners(organizationLearners, organizationId, domainTransaction);
+        });
+
+        // then
+        const actualOrganizationLearners = await organizationLearnerRepository.findByOrganizationId({
+          organizationId,
+        });
+        expect(actualOrganizationLearners).to.have.lengthOf(1);
+      });
+    });
+
     context('when an organizationLearner is saved with a userId already present in organization', function () {
       it('should save the organization learner with userId as null', async function () {
         const { id: organizationId } = databaseBuilder.factory.buildOrganization();
