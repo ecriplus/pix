@@ -8,35 +8,6 @@ const register = async function (server) {
   const adminRoutes = [
     {
       method: 'GET',
-      path: '/api/admin/certification-centers/{id}',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleCertif,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-                securityPreHandlers.checkAdminMemberHasRoleMetier,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            id: identifiersType.certificationCenterId,
-          }),
-        },
-        handler: certificationCenterController.getCertificationCenterDetails,
-        notes: [
-          "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès**\n" +
-            "- Récupération d'un centre de certification\n",
-        ],
-        tags: ['api', 'certification-center'],
-      },
-    },
-    {
-      method: 'GET',
       path: '/api/admin/certification-centers/{certificationCenterId}/certification-center-memberships',
       config: {
         pre: [

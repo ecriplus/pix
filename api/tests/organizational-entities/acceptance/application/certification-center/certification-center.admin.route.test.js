@@ -239,4 +239,124 @@ describe('Acceptance | Organization Entities | Route | Certification Centers', f
       });
     });
   });
+
+  describe('GET /api/admin/certification-centers/{id}', function () {
+    let expectedCertificationCenter;
+
+    beforeEach(async function () {
+      expectedCertificationCenter = databaseBuilder.factory.buildCertificationCenter({ id: 1234 });
+      databaseBuilder.factory.buildComplementaryCertification({
+        id: 4567,
+        key: 'certif comp',
+        label: 'Une Certif Comp',
+      });
+      databaseBuilder.factory.buildComplementaryCertificationHabilitation({
+        certificationCenterId: 1234,
+        complementaryCertificationId: 4567,
+      });
+      databaseBuilder.factory.buildCertificationCenter({});
+      await databaseBuilder.commit();
+      request = {
+        method: 'GET',
+        url: '/api/admin/certification-centers/' + expectedCertificationCenter.id,
+      };
+    });
+
+    context('when user is Super Admin', function () {
+      beforeEach(function () {
+        request.headers = { authorization: generateValidRequestAuthorizationHeader() };
+      });
+
+      it('returns 200 HTTP status', async function () {
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+      });
+
+      it('returns the certification center asked', async function () {
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.result).to.deep.equal({
+          data: {
+            type: 'certification-centers',
+            id: '1234',
+            attributes: {
+              name: 'some name',
+              type: 'SUP',
+              'external-id': 'EX123',
+              'created-at': undefined,
+              'data-protection-officer-first-name': undefined,
+              'data-protection-officer-last-name': undefined,
+              'data-protection-officer-email': undefined,
+              'is-v3-pilot': false,
+              'is-complementary-alone-pilot': false,
+            },
+            relationships: {
+              'certification-center-memberships': {
+                links: {
+                  related: '/api/admin/certification-centers/1234/certification-center-memberships',
+                },
+              },
+              habilitations: {
+                data: [
+                  {
+                    id: '4567',
+                    type: 'complementary-certifications',
+                  },
+                ],
+              },
+            },
+          },
+          included: [
+            {
+              id: '4567',
+              type: 'complementary-certifications',
+              attributes: { key: 'certif comp', label: 'Une Certif Comp' },
+            },
+          ],
+        });
+      });
+
+      it('returns notFoundError when the certificationCenter not exist', async function () {
+        // given
+        request.url = '/api/admin/certification-centers/112334';
+
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(404);
+        expect(response.result.errors[0].title).to.equal('Not Found');
+        expect(response.result.errors[0].detail).to.equal('Center not found');
+      });
+    });
+
+    context('when user is not SuperAdmin', function () {
+      beforeEach(function () {
+        request.headers = { authorization: generateValidRequestAuthorizationHeader(1111) };
+      });
+
+      it('returns 403 HTTP status code ', async function () {
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(403);
+      });
+    });
+
+    context('when user is not connected', function () {
+      it('returns 401 HTTP status code if user is not authenticated', async function () {
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(401);
+      });
+    });
+  });
 });
