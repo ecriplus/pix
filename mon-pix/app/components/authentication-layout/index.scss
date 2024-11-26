@@ -83,15 +83,25 @@
   width: 100%;
   margin-top: var(--pix-spacing-12x);
 
-  .footer-container-content__navigation {
-    margin-top: var(--pix-spacing-2x);
+  nav {
+    @extend %pix-body-xs;
+
+    margin-top: var(--pix-spacing-4x);
     margin-left: 0;
-    line-height: 1rem;
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--pix-spacing-2x) var(--pix-spacing-3x);
+    }
 
     a {
-      @extend %pix-body-xs;
-
+      color: var(--pix-neutral-500);
       text-decoration: underline;
+
+      &:hover, &:focus {
+        color: var(--pix-primary-500);
+      }
     }
 
     .footer-navigation__item {
