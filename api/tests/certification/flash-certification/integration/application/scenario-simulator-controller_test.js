@@ -76,9 +76,9 @@ describe('Integration | Application | scenario-simulator-controller', function (
               initialCapacity,
               capacity: 6,
               challengePickProbability,
+              locale: 'en',
             },
             null,
-            { 'accept-language': 'en' },
           );
 
           // then
@@ -133,9 +133,9 @@ describe('Integration | Application | scenario-simulator-controller', function (
               '/api/scenario-simulator',
               {
                 capacity,
+                locale: 'en',
               },
               null,
-              { 'accept-language': 'en' },
             );
 
             // then
@@ -191,9 +191,9 @@ describe('Integration | Application | scenario-simulator-controller', function (
               {
                 capacity,
                 initialCapacity,
+                locale: 'en',
               },
               null,
-              { 'accept-language': 'en' },
             );
 
             // then
@@ -217,6 +217,85 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 ],
               },
             ]);
+          });
+        });
+        context('When the route is called with uppercased supported locale', function () {
+          it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
+            // given
+            const capacity = -3.1;
+
+            const pickChallengeImplementation = sinon.stub();
+            pickChallengeService.chooseNextChallenge.returns(pickChallengeImplementation);
+            const pickAnswerStatusFromCapacityImplementation = sinon.stub();
+            pickAnswerStatusService.pickAnswerStatusForCapacity
+              .withArgs(capacity)
+              .returns(pickAnswerStatusFromCapacityImplementation);
+
+            usecases.simulateFlashAssessmentScenario
+              .withArgs({
+                pickChallenge: pickChallengeImplementation,
+                locale: 'en',
+                pickAnswerStatus: pickAnswerStatusFromCapacityImplementation,
+                initialCapacity,
+              })
+              .resolves(simulationResults);
+            securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
+
+            // when
+            const response = await httpTestServer.request(
+              'POST',
+              '/api/scenario-simulator',
+              {
+                capacity,
+                initialCapacity,
+                locale: 'EN',
+              },
+              null,
+            );
+
+            // then
+            expect(response.statusCode).to.equal(200);
+            const parsedResult = parseJsonStream(response);
+            expect(parsedResult).to.deep.equal([
+              {
+                index: 0,
+                simulationReport: [
+                  {
+                    challengeId: challenge1.id,
+                    errorRate: errorRate1,
+                    capacity: capacity1,
+                    minimumCapability: 0.6190392084062237,
+                    answerStatus: 'ok',
+                    reward: reward1,
+                    difficulty: challenge1.difficulty,
+                    discriminant: challenge1.discriminant,
+                    numberOfAvailableChallenges: 1,
+                  },
+                ],
+              },
+            ]);
+          });
+        });
+        context('When the route is called with non supported locale', function () {
+          it('should returns 400', async function () {
+            // given
+            const capacity = -3.1;
+
+            // when
+            const response = await httpTestServer.request(
+              'POST',
+              '/api/scenario-simulator',
+              {
+                capacity,
+                initialCapacity,
+                locale: 'jp',
+              },
+              null,
+            );
+
+            // then
+            expect(response.statusCode).to.equal(400);
+            expect(response.result.errors[0].detail).to.have.string('"locale" must be one of');
           });
         });
       });

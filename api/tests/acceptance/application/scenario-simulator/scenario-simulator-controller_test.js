@@ -32,6 +32,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
 
     validPayload = {
       capacity: 4.5,
+      locale: 'fr-fr',
     };
 
     const learningContent = {

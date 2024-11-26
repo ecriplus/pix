@@ -4,7 +4,6 @@ import _ from 'lodash';
 
 import { pickChallengeService } from '../../../evaluation/domain/services/pick-challenge-service.js';
 import { random } from '../../../shared/infrastructure/utils/random.js';
-import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { pickAnswerStatusService } from '../../shared/domain/services/pick-answer-status-service.js';
 import { usecases } from '../domain/usecases/index.js';
 import { scenarioSimulatorBatchSerializer } from '../infrastructure/serializers/scenario-simulator-batch-serializer.js';
@@ -17,7 +16,6 @@ async function simulateFlashAssessmentScenario(
     random,
     pickAnswerStatusService,
     pickChallengeService,
-    extractLocaleFromRequest,
   },
 ) {
   const {
@@ -27,11 +25,10 @@ async function simulateFlashAssessmentScenario(
     variationPercent,
     capacity,
     accessibilityAdjustmentNeeded,
+    locale,
   } = request.payload;
 
   const pickAnswerStatus = dependencies.pickAnswerStatusService.pickAnswerStatusForCapacity(capacity);
-
-  const locale = dependencies.extractLocaleFromRequest(request);
 
   async function* generate() {
     const iterations = _.range(0, numberOfIterations);
