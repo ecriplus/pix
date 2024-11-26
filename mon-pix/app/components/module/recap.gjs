@@ -1,5 +1,5 @@
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { t } from 'ember-intl';
 import ModuleBetaBanner from 'mon-pix/components/module/beta-banner';
 import ModuleObjectives from 'mon-pix/components/module/objectives';
@@ -11,7 +11,7 @@ import ModuleObjectives from 'mon-pix/components/module/objectives';
 
   <main class="module-recap">
     <div class="module-recap__header">
-      <FaIcon @icon="circle-check" class="module-recap-header__icon fa-3x" />
+      <PixIcon @name="checkCircle" @plainIcon={{true}} @ariaHidden={{true}} class="module-recap-header__icon" />
     </div>
     <h1 class="module-recap__title">{{t "pages.modulix.recap.title"}}</h1>
 

@@ -67,7 +67,7 @@ module('Integration | Component | Module | Element | Download', function (hooks)
 
     // then
     const documentationLink = screen.getByRole('link', {
-      name: t('pages.modulix.download.documentationLinkLabel'),
+      name: `${t('pages.modulix.download.documentationLinkLabel')} ${t('navigation.external-link-title')}`,
     });
     assert.dom(documentationLink).hasAttribute('href', t('pages.modulix.download.documentationLinkHref'));
   });

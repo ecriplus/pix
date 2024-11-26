@@ -1,8 +1,8 @@
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 import { t } from 'ember-intl';
 import ResponsiveListWideWrap from 'mon-pix/components/common/responsive-ul-wide-wrap';
 
@@ -47,7 +47,7 @@ export default class ModulixDownload extends ModuleElement {
         target="_blank"
       >
         {{t "pages.modulix.download.documentationLinkLabel"}}
-        <FaIcon @icon="arrow-up-right-from-square" />
+        <PixIcon @name="openNew" @title={{t "navigation.external-link-title"}} />
       </a>
     </div>
   </template>
