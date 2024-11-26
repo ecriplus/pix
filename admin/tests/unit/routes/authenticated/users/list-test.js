@@ -23,6 +23,8 @@ module('Unit | Route | authenticated/users/list', function (hooks) {
         number: 'somePageNumber',
         size: 'somePageSize',
       };
+      params.queryType = 'CONTAINS';
+      expectedQueryArgs.queryType = 'CONTAINS';
     });
 
     module('when queryParams filters are falsy', function () {
@@ -36,6 +38,7 @@ module('Unit | Route | authenticated/users/list', function (hooks) {
           email: '',
           username: '',
         };
+        expectedQueryArgs.queryType = 'CONTAINS';
 
         // then
         sinon.assert.notCalled(route.store.query);
@@ -96,6 +99,7 @@ module('Unit | Route | authenticated/users/list', function (hooks) {
         lastName: 'someLastName',
         email: 'someEmail',
         username: 'someUsername',
+        queryType: 'EXACT_QUERY',
       };
     });
 
@@ -112,6 +116,7 @@ module('Unit | Route | authenticated/users/list', function (hooks) {
         assert.deepEqual(controller.lastName, null);
         assert.deepEqual(controller.email, null);
         assert.deepEqual(controller.username, null);
+        assert.deepEqual(controller.queryType, 'CONTAINS');
       });
     });
 
@@ -128,6 +133,7 @@ module('Unit | Route | authenticated/users/list', function (hooks) {
         assert.deepEqual(controller.lastName, 'someLastName');
         assert.deepEqual(controller.email, 'someEmail');
         assert.deepEqual(controller.username, 'someUsername');
+        assert.deepEqual(controller.queryType, 'EXACT_QUERY');
       });
     });
   });

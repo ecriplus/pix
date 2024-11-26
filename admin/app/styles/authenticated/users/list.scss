@@ -1,3 +1,13 @@
+.pix-select {
+  min-width: 110px;
+  margin-right: 16px;
+}
+
+.pix-select .pix-icon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
 .user-list-form {
   display: flex;
   flex-wrap: wrap;
@@ -5,7 +15,7 @@
   justify-content: flex-end;
 
   &__input--small {
-    max-width: 190px;
+    max-width: 150px;
   }
 
   &__actions {

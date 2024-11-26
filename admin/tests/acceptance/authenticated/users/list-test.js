@@ -171,7 +171,7 @@ module('Acceptance | authenticated/users | list', function (hooks) {
           assert.strictEqual(currentURL(), '/users/list');
         });
 
-        test('should empty all search fields', async function (assert) {
+        test('empties all search fields and resets query type to "Contains"', async function (assert) {
           // given
           await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
@@ -182,6 +182,9 @@ module('Acceptance | authenticated/users | list', function (hooks) {
             identifiant: 'emma123',
           });
           const screen = await visit('/users/list');
+          await click(screen.getByRole('button', { name: 'Contient' }));
+          await screen.findByRole('listbox');
+          await click(screen.getByRole('option', { name: 'Exacte' }));
           await fillIn(screen.getByRole('textbox', { name: 'Nom' }), 'sardine');
           await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail' }), 'emma@example.net');
           await fillIn(screen.getByRole('textbox', { name: 'Identifiant' }), 'emma123');
@@ -194,6 +197,8 @@ module('Acceptance | authenticated/users | list', function (hooks) {
           assert.dom(screen.getByRole('textbox', { name: 'Nom' })).hasNoValue();
           assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail' })).hasNoValue();
           assert.dom(screen.getByRole('textbox', { name: 'Identifiant' })).hasNoValue();
+          assert.dom(screen.getByRole('button', { name: 'Contient' })).exists();
+          assert.dom(screen.queryByRole('button', { name: 'Exacte' })).doesNotExist();
         });
 
         test('should let empty fields on search', async function (assert) {

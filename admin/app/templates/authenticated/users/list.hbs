@@ -4,6 +4,14 @@
   <h1 class="page-title">Rechercher un(des) utilisateur(s)</h1>
   <div class="page-actions">
     <form class="user-list-form" {{on "submit" this.refreshModel}}>
+      <PixSelect
+        @id="query-type-selector"
+        @onChange={{this.onChangeQueryType}}
+        @value={{this.queryTypeForm}}
+        @options={{this.queryTypes}}
+      >
+        <:default>Contient</:default>
+      </PixSelect>
       <PixInput
         @id="userId"
         {{on "change" this.onChangeUserId}}
