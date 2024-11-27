@@ -1,6 +1,6 @@
 import * as centerRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/center-repository.js';
 import { CenterTypes } from '../../../../../../src/certification/enrolment/domain/models/CenterTypes.js';
-import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Integration | Repository | center-repository', function () {
   describe('#addToWhitelistByExternalIds', function () {
@@ -23,11 +23,12 @@ describe('Certification | Configuration | Integration | Repository | center-repo
       await databaseBuilder.commit();
 
       // when
-      await centerRepository.addToWhitelistByExternalIds({
+      const numberOfUpdatedLines = await centerRepository.addToWhitelistByExternalIds({
         externalIds: [whitelistedExternalId1, whitelistedExternalId2],
       });
 
       // then
+      expect(numberOfUpdatedLines).to.equal(2);
       const updatedCenter1 = await knex('certification-centers').where({ id: center1BeforeUpdate.id }).first();
       expect(updatedCenter1.isScoBlockedAccessWhitelist).to.be.true;
       expect(updatedCenter1.updatedAt).to.be.above(center1BeforeUpdate.updatedAt);
@@ -93,6 +94,38 @@ describe('Certification | Configuration | Integration | Repository | center-repo
       // then
       const updatedCenter = await knex('certification-centers').where({ id: centerBeforeUpdate.id }).first();
       expect(updatedCenter.isScoBlockedAccessWhitelist).to.be.true;
+    });
+  });
+
+  describe('#getWhitelist', function () {
+    it('should get whitelisted centers', async function () {
+      // given
+      const whitelistedCenter = databaseBuilder.factory.buildCertificationCenter({
+        type: CenterTypes.SCO,
+        isScoBlockedAccessWhitelist: true,
+        externalId: 'IN_WHITELIST',
+        updatedAt: new Date('2024-09-24'),
+      });
+      databaseBuilder.factory.buildCertificationCenter({
+        type: CenterTypes.SCO,
+        isScoBlockedAccessWhitelist: false,
+        externalId: 'NOT_IN_WHITELIST',
+        updatedAt: new Date('2024-09-24'),
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const results = await centerRepository.getWhitelist();
+
+      // then
+      expect(results).to.have.lengthOf(1);
+      expect(results[0]).to.deepEqualInstance(
+        domainBuilder.certification.configuration.buildCenter({
+          id: whitelistedCenter.id,
+          type: CenterTypes.SCO,
+          externalId: 'IN_WHITELIST',
+        }),
+      );
     });
   });
 });

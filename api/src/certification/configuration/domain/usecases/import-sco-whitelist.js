@@ -3,6 +3,7 @@
  */
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { InvalidScoWhitelistError } from '../errors.js';
 
 export const importScoWhitelist = withTransaction(
   /**
@@ -11,6 +12,13 @@ export const importScoWhitelist = withTransaction(
    */
   async ({ externalIds = [], centerRepository }) => {
     await centerRepository.resetWhitelist();
-    return centerRepository.addToWhitelistByExternalIds({ externalIds });
+    const numberOfUpdatedLines = await centerRepository.addToWhitelistByExternalIds({ externalIds });
+
+    if (externalIds.length !== numberOfUpdatedLines) {
+      throw new InvalidScoWhitelistError({
+        numberOfExternalIdsInInput: externalIds.length,
+        numberOfValidExternalIds: numberOfUpdatedLines,
+      });
+    }
   },
 );

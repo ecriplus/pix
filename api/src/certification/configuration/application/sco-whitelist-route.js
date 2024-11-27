@@ -40,6 +40,24 @@ const register = async function (server) {
         ],
       },
     },
+    {
+      method: 'GET',
+      path: '/api/admin/sco-whitelist',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+            assign: 'hasRoleSuperAdmin',
+          },
+        ],
+        handler: scoWhitelistController.exportScoWhitelist,
+        tags: ['api', 'admin'],
+        notes: [
+          'Cette route est restreinte aux utilisateurs authentifiés avec le rôle Super Admin',
+          'Elle permet de récupérer la liste blanche des centres SCO.',
+        ],
+      },
+    },
   ]);
 };
 

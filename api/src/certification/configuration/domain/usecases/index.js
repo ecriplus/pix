@@ -16,7 +16,7 @@ import * as centerRepository from '../../infrastructure/repositories/center-repo
  * @typedef {complementaryCertificationRepository} ComplementaryCertificationRepository
  * @typedef {attachableTargetProfileRepository} AttachableTargetProfileRepository
  * @typedef {centerPilotFeaturesRepository} CenterPilotFeaturesRepository
- * @typedef {centerRepository} CentersRepository
+ * @typedef {centerRepository} CenterRepository
  * @typedef {candidateRepository} CandidateRepository
  **/
 const dependencies = {
