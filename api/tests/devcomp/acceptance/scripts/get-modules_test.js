@@ -9,6 +9,7 @@ describe('Acceptance | Script | Get Modules as CSV', function () {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
         slug: 'didacticiel-modulix',
         title: 'Didacticiel Modulix',
+        isBeta: true,
         details: {
           image: 'https://images.pix.fr/modulix/placeholder-details.svg',
           description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',
@@ -347,7 +348,7 @@ describe('Acceptance | Script | Get Modules as CSV', function () {
     // Then
     expect(modulesListAsCsv).to.be.a('string');
     expect(modulesListAsCsv).to
-      .equal(`\ufeff"Module"	"ModuleTotalElements"	"ModuleLink"	"ModuleLevel"	"ModuleTotalGrains"	"ModuleTotalLessons"	"ModuleTotalActivities"	"ModuleDuration"
-"didacticiel-modulix"	11	"https://app.recette.pix.fr/modules/didacticiel-modulix"	"Débutant"	8	2	6	"=TEXT(5/24/60; ""mm:ss"")"`);
+      .equal(`\ufeff"Module"\t"ModuleTotalElements"\t"ModuleLink"\t"ModuleLevel"\t"ModuleTotalGrains"\t"ModuleTotalLessons"\t"ModuleTotalActivities"\t"ModuleDuration"\t"ModuleIsBeta"
+"didacticiel-modulix"\t11\t"https://app.recette.pix.fr/modules/didacticiel-modulix"\t"Débutant"\t8\t2\t6\t"=TEXT(5/24/60; ""mm:ss"")"\t"=TRUE"`);
   });
 });
