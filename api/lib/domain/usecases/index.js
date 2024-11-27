@@ -5,7 +5,6 @@ import { fileURLToPath } from 'node:url';
 
 import * as complementaryCertificationRepository from '../../../src/certification/complementary-certification/infrastructure/repositories/complementary-certification-repository.js';
 import * as sessionCodeService from '../../../src/certification/enrolment/domain/services/session-code-service.js';
-import { getCenterForAdmin } from '../../../src/certification/enrolment/domain/usecases/get-center-for-admin.js';
 import * as centerRepository from '../../../src/certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as certificationCpfCityRepository from '../../../src/certification/enrolment/infrastructure/repositories/certification-cpf-city-repository.js';
 import * as sessionEnrolmentRepository from '../../../src/certification/enrolment/infrastructure/repositories/session-repository.js';
@@ -355,7 +354,6 @@ const path = dirname(fileURLToPath(import.meta.url));
 const usecasesWithoutInjectedDependencies = {
   ...(await importNamedExportsFromDirectory({ path: join(path, './'), ignoredFileNames: ['index.js'] })),
   ...(await importNamedExportsFromDirectory({ path: join(path, './stages') })),
-  getCenterForAdmin,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
