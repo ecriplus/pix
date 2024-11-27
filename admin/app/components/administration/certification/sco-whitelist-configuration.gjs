@@ -38,8 +38,11 @@ export default class ScoWhitelistConfiguration extends Component {
           message: this.intl.t('pages.administration.certification.sco-whitelist.import.success'),
         });
       } else {
+        const responseJson = await response.json();
+        const errorKey = responseJson?.errors[0]?.code || 'error';
+
         this.pixToast.sendErrorNotification({
-          message: this.intl.t('pages.administration.certification.sco-whitelist.import.error'),
+          message: this.intl.t(`pages.administration.certification.sco-whitelist.import.${errorKey}`),
         });
       }
     } catch (error) {
@@ -59,7 +62,7 @@ export default class ScoWhitelistConfiguration extends Component {
       await this.fileSaver.save({ url, fileName, token });
     } catch (error) {
       this.pixToast.sendErrorNotification({
-        message: this.intl.t('pages.administration.certification.sco-whitelist.export.error')
+        message: this.intl.t('pages.administration.certification.sco-whitelist.export.error'),
       });
     } finally {
       this.isExportLoading = false;
