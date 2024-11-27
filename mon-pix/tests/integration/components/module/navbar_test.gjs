@@ -1,8 +1,9 @@
-import { clickByName, render, within } from '@1024pix/ember-testing-library';
+import { clickByName, clickByText, render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixNavbar from 'mon-pix/components/module/navbar';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 import { waitForDialog } from '../../../helpers/wait-for';
@@ -137,15 +138,45 @@ module('Integration | Component | Module | Navbar', function (hooks) {
       assert.dom(items[2]).hasAria('current', 'step');
       assert.dom(screen.queryByRole('listitem', { name: t('pages.modulix.grain.tag.summary') })).doesNotExist();
     });
+
+    module('when user clicks on grain’s type', function () {
+      test('should call goToGrain action on matching grain element', async function (assert) {
+        // given
+        const module = createModule(this.owner);
+        const threeFirstGrains = module.grains.slice(0, -1);
+        const goToGrainSpy = sinon.spy();
+
+        //  when
+        await render(
+          <template>
+            <ModulixNavbar
+              @currentStep={{3}}
+              @totalSteps={{4}}
+              @module={{module}}
+              @grainsToDisplay={{threeFirstGrains}}
+              @goToGrain={{goToGrainSpy}}
+            />
+          </template>,
+        );
+        await clickByName('Afficher les étapes du module');
+        await waitForDialog();
+        await clickByText('Activité');
+
+        // then
+        sinon.assert.calledOnce(goToGrainSpy);
+        sinon.assert.calledWithExactly(goToGrainSpy, '234-abc');
+        assert.ok(true);
+      });
+    });
   });
 });
 
 function createModule(owner) {
   const store = owner.lookup('service:store');
-  const grain1 = store.createRecord('grain', { title: 'Grain title', type: 'discovery' });
-  const grain2 = store.createRecord('grain', { title: 'Grain title', type: 'activity' });
-  const grain3 = store.createRecord('grain', { title: 'Grain title', type: 'lesson' });
-  const grain4 = store.createRecord('grain', { title: 'Grain title', type: 'summary' });
+  const grain1 = store.createRecord('grain', { title: 'Grain title', type: 'discovery', id: '123-abc' });
+  const grain2 = store.createRecord('grain', { title: 'Grain title', type: 'activity', id: '234-abc' });
+  const grain3 = store.createRecord('grain', { title: 'Grain title', type: 'lesson', id: '345-abc' });
+  const grain4 = store.createRecord('grain', { title: 'Grain title', type: 'summary', id: '456-abc' });
   return store.createRecord('module', {
     title: 'Didacticiel',
     grains: [grain1, grain2, grain3, grain4],
