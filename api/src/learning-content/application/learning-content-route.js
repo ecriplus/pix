@@ -19,7 +19,8 @@ export async function register(server) {
         tags: ['api', 'lcms'],
         notes: [
           'Cette route est restreinte aux utilisateurs authentifiés avec le rôle Super Admin',
-          'Elle permet de demander la création d’une nouvelle version au référentiel et de recharger le cache',
+          'Elle permet de lancer un job pour demander la création d’une nouvelle version au référentiel\n' +
+            ' et de recharger le cache',
         ],
       },
     },
@@ -74,7 +75,8 @@ export async function register(server) {
         tags: ['api', 'cache'],
         notes: [
           'Cette route est restreinte aux utilisateurs authentifiés avec le rôle Super Admin',
-          'Elle permet de précharger les entrées du cache de l’application (les requêtes les plus longues)',
+          'Elle permet de lancer un job pour précharger les entrées du cache de l’application \n' +
+            '(les requêtes les plus longues)',
         ],
       },
     },

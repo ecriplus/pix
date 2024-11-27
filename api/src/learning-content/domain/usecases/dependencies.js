@@ -4,6 +4,7 @@ import { challengeRepository } from '../../infrastructure/repositories/challenge
 import { competenceRepository } from '../../infrastructure/repositories/competence-repository.js';
 import { courseRepository } from '../../infrastructure/repositories/course-repository.js';
 import { frameworkRepository } from '../../infrastructure/repositories/framework-repository.js';
+import { lcmsCreateReleaseJobRepository } from '../../infrastructure/repositories/jobs/lcms-create-release-job-repository.js';
 import { lcmsRefreshCacheJobRepository } from '../../infrastructure/repositories/jobs/lcms-refresh-cache-job-repository.js';
 import { missionRepository } from '../../infrastructure/repositories/mission-repository.js';
 import { skillRepository } from '../../infrastructure/repositories/skill-repository.js';
@@ -23,6 +24,7 @@ export const dependencies = {
   tutorialRepository,
   missionRepository,
   lcmsRefreshCacheJobRepository,
+  lcmsCreateReleaseJobRepository,
   LearningContentCache,
 };
 

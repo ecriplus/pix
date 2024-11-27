@@ -2,7 +2,7 @@ import { LcmsRefreshCacheJob } from '../../../../../../src/learning-content/doma
 import { lcmsRefreshCacheJobRepository } from '../../../../../../src/learning-content/infrastructure/repositories/jobs/lcms-refresh-cache-job-repository.js';
 import { expect } from '../../../../../test-helper.js';
 
-describe('Integration | Repository | Jobs | LcmsRefreshCacheJobRepository', function () {
+describe('Learning Content | Integration | Repository | Jobs | LcmsRefreshCacheJobRepository', function () {
   describe('#performAsync', function () {
     it('publish a job', async function () {
       // when
