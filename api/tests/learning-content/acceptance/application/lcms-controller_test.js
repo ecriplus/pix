@@ -7,6 +7,7 @@ import {
   databaseBuilder,
   expect,
   generateValidRequestAuthorizationHeader,
+  knex,
   mockLearningContent,
 } from '../../../test-helper.js';
 
@@ -67,16 +68,21 @@ describe('Acceptance | Controller | lcms-controller', function () {
         LearningContentCache.instance = null;
       });
 
-      it('should store patches in Redis', async function () {
+      it('should store patches in Redis and patch the DB for an assign operation', async function () {
         // given
-        await mockLearningContent({ frameworks: [{ id: `frameworkId` }] });
+        await mockLearningContent({
+          frameworks: [
+            { id: 'frameworkId', name: 'old name' },
+            { id: 'frameworkId_other', name: 'other name' },
+          ],
+        });
         const superAdminUserId = databaseBuilder.factory.buildUser.withRole({
           role: ROLES.SUPER_ADMIN,
         }).id;
         await databaseBuilder.commit();
         const payload = {
-          id: `frameworkId`,
-          param: `updated framework`,
+          id: 'frameworkId',
+          name: 'new name',
         };
 
         // when
@@ -92,6 +98,50 @@ describe('Acceptance | Controller | lcms-controller', function () {
         const redis = new Redis(process.env.TEST_REDIS_URL);
         expect(await redis.lrange('cache:LearningContent:patches', 0, -1)).to.deep.equal([
           JSON.stringify({ operation: 'assign', path: `frameworks[0]`, value: payload }),
+        ]);
+        const frameworksInDB = await knex.select('*').from('learningcontent.frameworks').orderBy('name');
+        expect(frameworksInDB).to.deep.equal([
+          { id: 'frameworkId', name: 'new name' },
+          { id: 'frameworkId_other', name: 'other name' },
+        ]);
+      });
+
+      it('should store patches in Redis and patch the DB for a push operation', async function () {
+        // given
+        await mockLearningContent({
+          frameworks: [
+            { id: 'frameworkId1', name: 'name 1' },
+            { id: 'frameworkId3', name: 'name 3' },
+          ],
+        });
+        const superAdminUserId = databaseBuilder.factory.buildUser.withRole({
+          role: ROLES.SUPER_ADMIN,
+        }).id;
+        await databaseBuilder.commit();
+        const payload = {
+          id: 'frameworkId2',
+          name: 'name 2',
+        };
+
+        // when
+        const response = await server.inject({
+          method: 'PATCH',
+          url: `/api/cache/frameworks/frameworkId2`,
+          headers: { authorization: generateValidRequestAuthorizationHeader(superAdminUserId) },
+          payload,
+        });
+
+        // then
+        expect(response.statusCode).to.equal(204);
+        const redis = new Redis(process.env.TEST_REDIS_URL);
+        expect(await redis.lrange('cache:LearningContent:patches', 0, -1)).to.deep.equal([
+          JSON.stringify({ operation: 'push', path: `frameworks`, value: payload }),
+        ]);
+        const frameworksInDB = await knex.select('*').from('learningcontent.frameworks').orderBy('name');
+        expect(frameworksInDB).to.deep.equal([
+          { id: 'frameworkId1', name: 'name 1' },
+          { id: 'frameworkId2', name: 'name 2' },
+          { id: 'frameworkId3', name: 'name 3' },
         ]);
       });
     });
