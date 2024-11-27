@@ -6,7 +6,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
-import { waitForDialog } from '../../../helpers/wait-for';
+import { waitForDialog, waitForDialogClose } from '../../../helpers/wait-for';
 
 module('Integration | Component | Module | Navbar', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -127,16 +127,21 @@ module('Integration | Component | Module | Navbar', function (hooks) {
       await waitForDialog();
 
       // then
-      assert.ok(screen);
-      const list = screen.getByRole('list');
-      assert.dom(list).exists();
-      const items = within(list).getAllByRole('listitem');
-      assert.strictEqual(items.length, 3);
-      assert.strictEqual(items[0].textContent.trim(), t('pages.modulix.grain.tag.discovery'));
-      assert.strictEqual(items[1].textContent.trim(), t('pages.modulix.grain.tag.activity'));
-      assert.strictEqual(items[2].textContent.trim(), t('pages.modulix.grain.tag.lesson'));
-      assert.dom(items[2]).hasAria('current', 'step');
-      assert.dom(screen.queryByRole('listitem', { name: t('pages.modulix.grain.tag.summary') })).doesNotExist();
+      assert.strictEqual(
+        screen.getByRole('link', { name: 'Découverte' }).textContent.trim(),
+        t('pages.modulix.grain.tag.discovery'),
+      );
+      assert.strictEqual(
+        screen.getByRole('link', { name: 'Activité' }).textContent.trim(),
+        t('pages.modulix.grain.tag.activity'),
+      );
+      assert.strictEqual(
+        screen.getByRole('link', { name: 'Leçon' }).textContent.trim(),
+        t('pages.modulix.grain.tag.lesson'),
+      );
+      assert.dom(screen.getByRole('link', { name: 'Leçon' })).hasAria('current', 'step');
+
+      assert.dom(screen.queryByRole('link', { name: "Récap'" })).doesNotExist();
     });
 
     module('when user clicks on grain’s type', function () {
@@ -166,6 +171,33 @@ module('Integration | Component | Module | Navbar', function (hooks) {
         sinon.assert.calledOnce(goToGrainSpy);
         sinon.assert.calledWithExactly(goToGrainSpy, '234-abc');
         assert.ok(true);
+      });
+
+      test('should close sidebar', async function (assert) {
+        // given
+        const module = createModule(this.owner);
+        const threeFirstGrains = module.grains.slice(0, -1);
+        const goToGrainMock = sinon.mock();
+
+        //  when
+        const screen = await render(
+          <template>
+            <ModulixNavbar
+              @currentStep={{3}}
+              @totalSteps={{4}}
+              @module={{module}}
+              @grainsToDisplay={{threeFirstGrains}}
+              @goToGrain={{goToGrainMock}}
+            />
+          </template>,
+        );
+        await clickByName('Afficher les étapes du module');
+        await waitForDialog();
+        await clickByText('Activité');
+        await waitForDialogClose();
+
+        // then
+        assert.dom(screen.queryByRole('dialog', { name: module.title })).doesNotExist();
       });
     });
   });

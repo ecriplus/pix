@@ -44,10 +44,6 @@ export default class ModulixNavbar extends Component {
     return this.grainsWithIdAndTranslatedType.length - 1;
   }
 
-  isActive(index) {
-    return index + 1 === this.grainsWithIdAndTranslatedType.length;
-  }
-
   @action
   onMenuItemClick(grainId) {
     this.closeSidebar();

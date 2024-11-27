@@ -1,6 +1,6 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
-import { find, findAll } from '@ember/test-helpers';
+import { click, find, findAll } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ApplicationAdapter from 'mon-pix/adapters/application';
 import ModulePassage from 'mon-pix/components/module/passage';
@@ -8,6 +8,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import { waitForDialog } from '../../../helpers/wait-for';
 
 module('Integration | Component | Module | Passage', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -1046,6 +1047,44 @@ module('Integration | Component | Module | Passage', function (hooks) {
         'pix-event-name': `Click sur le bouton Terminer du grain : ${grain.id}`,
       });
       assert.ok(true);
+    });
+  });
+
+  module('when user clicks on grain’s type in sidebar', function () {
+    test('should focus and scroll on matching grain element', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const element = { type: 'text', isAnswerable: false, content: 'Ceci est un grain dans un test d‘intégration' };
+      const grain1 = store.createRecord('grain', {
+        title: 'Grain title',
+        type: 'discovery',
+        id: '123-abc',
+        components: [{ type: 'element', element }],
+      });
+      const grain2 = store.createRecord('grain', {
+        title: 'Grain title',
+        type: 'activity',
+        id: '234-abc',
+        components: [{ type: 'element', element }],
+      });
+      const module = store.createRecord('module', {
+        title: 'Didacticiel',
+        grains: [grain1, grain2],
+        transitionTexts: [],
+      });
+      const passage = store.createRecord('passage');
+      const modulixAutoScroll = this.owner.lookup('service:modulix-auto-scroll');
+      modulixAutoScroll.focusAndScroll = sinon.mock();
+
+      //  when
+      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+      await clickByName('Afficher les étapes du module');
+      await waitForDialog();
+      const item = screen.getByRole('link', { name: 'Découverte' });
+      await click(item);
+
+      //  then
+      assert.ok(modulixAutoScroll.focusAndScroll.calledOnce);
     });
   });
 });

@@ -37,4 +37,8 @@
     color: var(--pix-primary-700);
     background-color: var(--pix-neutral-20);
   }
+
+  &:active {
+    background-color: var(--pix-neutral-100);
+  }
 }
