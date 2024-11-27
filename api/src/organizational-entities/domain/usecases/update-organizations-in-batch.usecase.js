@@ -1,7 +1,7 @@
 import { createReadStream } from 'node:fs';
 
-import { emailIsValid } from '../../../../lib/domain/services/email-validator.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import * as emailValidationService from '../../../shared/domain/services/email-validation-service.js';
 import { CsvColumn } from '../../../shared/infrastructure/serializers/csv/csv-column.js';
 import { CsvParser } from '../../../shared/infrastructure/serializers/csv/csv-parser.js';
 import { getDataBuffer } from '../../../shared/infrastructure/utils/buffer.js';
@@ -117,7 +117,7 @@ async function checkOrganizationUpdate(organizationBatchUpdateDto, organizationF
 
   if (
     organizationBatchUpdateDto.dataProtectionOfficerEmail &&
-    !emailIsValid(organizationBatchUpdateDto.dataProtectionOfficerEmail)
+    !emailValidationService.validateEmailSyntax(organizationBatchUpdateDto.dataProtectionOfficerEmail)
   ) {
     throw new DpoEmailInvalid({
       meta: {
