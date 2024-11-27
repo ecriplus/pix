@@ -6,11 +6,19 @@ import { disconnect } from '../../db/knex-database-connection.js';
 import { CertificationRescoringByScriptJob } from '../../src/certification/session-management/domain/models/CertificationRescoringByScriptJob.js';
 import { certificationRescoringByScriptJobRepository } from '../../src/certification/session-management/infrastructure/repositories/jobs/certification-rescoring-by-script-job-repository.js';
 import { logger } from '../../src/shared/infrastructure/utils/logger.js';
+import { parseCsv } from '../helpers/csvHelpers.js';
 
 const modulePath = url.fileURLToPath(import.meta.url);
 const isLaunchedFromCommandLine = process.argv[1] === modulePath;
 
-async function main(certificationCourseIds) {
+/**
+ * Usage: node scripts/certification/rescore-certifications.js path/file.csv
+ * File has only one column of certification-courses.id (integer), no header
+ **/
+async function main(filePath) {
+  logger.info('Reading and parsing csv data file... ');
+  const certificationCourseIds = await extractCsvData(filePath);
+
   logger.info(`Publishing ${certificationCourseIds.length} rescoring jobs`);
   const jobs = await _scheduleRescoringJobs(certificationCourseIds);
 
@@ -22,6 +30,15 @@ async function main(certificationCourseIds) {
 
   logger.info(`${jobs.length} jobs successfully published`);
   return 0;
+}
+
+async function extractCsvData(filePath) {
+  const dataRows = await parseCsv(filePath, { header: false, skipEmptyLines: true });
+  return dataRows.reduce((certificationCourseIds, dataRow) => {
+    const certificationCenterId = parseInt(dataRow[0]);
+    certificationCourseIds.push(certificationCenterId);
+    return certificationCourseIds;
+  }, []);
 }
 
 const _scheduleRescoringJobs = async (certificationCourseIds) => {
@@ -40,11 +57,8 @@ const _scheduleRescoringJobs = async (certificationCourseIds) => {
 (async () => {
   if (isLaunchedFromCommandLine) {
     try {
-      const certificationCourseIds = process.argv[2]
-        .split(',')
-        .map((str) => parseInt(str, 10))
-        .filter(Number.isInteger);
-      const exitCode = await main(certificationCourseIds);
+      const filePath = process.argv[2];
+      const exitCode = await main(filePath);
       return exitCode;
     } catch (error) {
       logger.error(error);
