@@ -28,31 +28,43 @@ const organizationFeatureCsvHeader = {
       name: 'Params',
       isRequired: false,
     }),
+    new CsvColumn({
+      property: 'deleteLearner',
+      name: 'Delete Learner',
+      isRequired: false,
+    }),
   ],
 };
 
 export const addOrganizationFeatureInBatch = withTransaction(
   /**
    * @param {Object} params - A parameter object.
-   * @param {Number} params.userId - user connected performing action
+   * @param {Number} params.userId - user connected performing the action
    * @param {string} params.filePath - path of csv file wich contains organizations and params.
    * @param {OrganizationFeatureRepository} params.organizationFeatureRepository - organizationRepository to use.
    * @param {Object} params.dependencies
    * @returns {Promise<void>}
    */
-  async ({ filePath, organizationFeatureRepository }) => {
+  async ({ userId, filePath, organizationFeatureRepository, learnersApi }) => {
     const stream = createReadStream(filePath);
     const buffer = await getDataBuffer(stream);
 
     const csvParser = new CsvParser(buffer, organizationFeatureCsvHeader);
     const csvData = csvParser.parse();
-    const data = csvData.map(({ featureId, organizationId, params }) => {
+    const data = csvData.map(({ featureId, organizationId, params, deleteLearner }) => {
       try {
-        return new OrganizationFeature({ featureId, organizationId, params: params });
+        return new OrganizationFeature({ featureId, organizationId, params, deleteLearner });
       } catch (err) {
         throw new FeatureParamsNotProcessable();
       }
     });
+
+    data.forEach(async ({ organizationId, deleteLearner }) => {
+      if (deleteLearner) {
+        await learnersApi.deleteOrganizationLearnerBeforeImportFeature({ userId, organizationId });
+      }
+    });
+
     return organizationFeatureRepository.saveInBatch(data);
   },
 );

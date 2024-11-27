@@ -5,11 +5,12 @@ import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js'
 
 describe('Unit | Organizational Entities | Application | Controller | Admin | organization', function () {
   describe('#addOrganizationFeatureInBatch', function () {
-    let filePath, request;
+    let filePath, request, userId;
 
     beforeEach(function () {
+      userId = Symbol('userId');
       filePath = Symbol('filePath');
-      request = { payload: { path: filePath } };
+      request = { payload: { path: filePath }, auth: { credentials: { userId } } };
       sinon.stub(usecases, 'addOrganizationFeatureInBatch').resolves();
     });
 
@@ -24,6 +25,7 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | or
 
       // then
       expect(usecases.addOrganizationFeatureInBatch).to.have.been.calledWithExactly({
+        userId,
         filePath,
       });
     });
