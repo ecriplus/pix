@@ -8,22 +8,21 @@ const createCampaigns = async function ({
   userRepository,
   organizationRepository,
 }) {
-  const enrichedCampaignsData = await Promise.all(
-    campaignsToCreate.map(async (campaign) => {
-      await _checkIfOwnerIsExistingUser(userRepository, campaign.ownerId);
-      await _checkIfOrganizationExists(organizationRepository, campaign.organizationId);
+  const enrichedCampaignsData = [];
+  for (const campaign of campaignsToCreate) {
+    await _checkIfOwnerIsExistingUser(userRepository, campaign.ownerId);
+    await _checkIfOrganizationExists(organizationRepository, campaign.organizationId);
 
-      const generatedCampaignCode = await codeGenerator.generate(campaignAdministrationRepository);
-      const campaignCreator = await campaignCreatorRepository.get(campaign.organizationId);
+    const generatedCampaignCode = await codeGenerator.generate(campaignAdministrationRepository);
+    const campaignCreator = await campaignCreatorRepository.get(campaign.organizationId);
 
-      return campaignCreator.createCampaign({
-        ...campaign,
-        type: CampaignTypes.ASSESSMENT,
-        code: generatedCampaignCode,
-      });
-    }),
-  );
-
+    const campaignToCreate = await campaignCreator.createCampaign({
+      ...campaign,
+      type: CampaignTypes.ASSESSMENT,
+      code: generatedCampaignCode,
+    });
+    enrichedCampaignsData.push(campaignToCreate);
+  }
   return campaignAdministrationRepository.save(enrichedCampaignsData);
 };
 
