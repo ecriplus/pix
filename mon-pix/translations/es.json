@@ -1606,10 +1606,10 @@
       "grain": {
         "tag": {
           "activity": "Actividad",
-          "challenge": "desafío",
-          "discovery": "descubrimiento",
-          "lesson": "lección",
-          "summary": "recapitular"
+          "challenge": "Desafío",
+          "discovery": "Descubrimiento",
+          "lesson": "Lección",
+          "summary": "Recapitular"
         }
       },
       "modals": {
@@ -1637,6 +1637,9 @@
         "goToForm": "Responder al cuestionario",
         "subtitle": "Has alcanzado los siguientes objetivos:",
         "title": "¡Enhorabuena! Módulo completado"
+      },
+      "sidebar": {
+        "button": "Mostrar los pasos del módulo"
       },
       "stepper": {
         "step": {

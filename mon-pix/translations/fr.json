@@ -1595,11 +1595,11 @@
       },
       "grain": {
         "tag": {
-          "activity": "activité",
-          "challenge": "défi",
-          "discovery": "découverte",
-          "lesson": "leçon",
-          "summary": "récap'"
+          "activity": "Activité",
+          "challenge": "Défi",
+          "discovery": "Découverte",
+          "lesson": "Leçon",
+          "summary": "Récap'"
         }
       },
       "modals": {
@@ -1627,6 +1627,9 @@
         "goToForm": "Répondre au questionnaire",
         "subtitle": "Vous avez atteint les objectifs suivants :",
         "title": "Bravo ! Module terminé"
+      },
+      "sidebar": {
+        "button": "Afficher les étapes du module"
       },
       "stepper": {
         "step": {

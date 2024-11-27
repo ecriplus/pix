@@ -1601,11 +1601,11 @@
       },
       "grain": {
         "tag": {
-          "activity": "activiteit",
+          "activity": "Activiteit",
           "challenge": "Uitdaging",
-          "discovery": "ontdekking",
-          "lesson": "les",
-          "summary": "recap"
+          "discovery": "Ontdekking",
+          "lesson": "Les",
+          "summary": "Recap"
         }
       },
       "modals": {
@@ -1633,6 +1633,9 @@
         "goToForm": "Beantwoord de vragenlijst",
         "subtitle": "Je hebt de volgende doelen bereikt:",
         "title": "Gefeliciteerd! Module voltooid"
+      },
+      "sidebar": {
+        "button": "De stappen van de module "
       },
       "stepper": {
         "step": {

@@ -198,7 +198,12 @@ export default class ModulePassage extends Component {
 
   <template>
     {{pageTitle @module.title}}
-    <ModuleNavbar @currentStep={{this.currentPassageStep}} @totalSteps={{this.displayableGrains.length}} />
+    <ModuleNavbar
+      @currentStep={{this.currentPassageStep}}
+      @totalSteps={{this.displayableGrains.length}}
+      @module={{@module}}
+      @grainsToDisplay={{this.grainsToDisplay}}
+    />
 
     <main class="module-passage">
       {{#if @module.isBeta}}

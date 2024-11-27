@@ -1594,11 +1594,11 @@
       },
       "grain": {
         "tag": {
-          "activity": "activity",
-          "challenge": "challenge",
-          "discovery": "discovery",
-          "lesson": "lesson",
-          "summary": "summary"
+          "activity": "Activity",
+          "challenge": "Challenge",
+          "discovery": "Discovery",
+          "lesson": "Lesson",
+          "summary": "Summary"
         }
       },
       "modals": {
@@ -1626,6 +1626,9 @@
         "goToForm": "Answer the questionnaire",
         "subtitle": "You have achieved the following objectives:",
         "title": "Congratulations! Module completed"
+      },
+      "sidebar": {
+        "button": "Display the steps of the module"
       },
       "stepper": {
         "step": {
