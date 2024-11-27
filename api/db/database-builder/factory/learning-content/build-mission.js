@@ -1,7 +1,7 @@
 import { databaseBuffer } from '../../database-buffer.js';
 
 export function buildMission({
-  id = 'missionIdA',
+  id = 1,
   status = 'status Mission A',
   name_i18n = { fr: 'name FR Mission A', en: 'name EN Mission A' },
   content = { some: 'content' },
