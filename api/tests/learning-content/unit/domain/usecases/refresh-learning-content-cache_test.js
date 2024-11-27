@@ -2,7 +2,7 @@ import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTrans
 import { refreshLearningContentCache } from '../../../../../src/learning-content/domain/usecases/refresh-learning-content-cache.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Domain | Usecase | Refresh learning content cache', function () {
+describe('Learning Content | Unit | Domain | Usecase | Refresh learning content cache', function () {
   beforeEach(function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
       return callback();
