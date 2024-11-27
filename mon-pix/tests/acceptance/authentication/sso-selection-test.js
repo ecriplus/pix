@@ -16,8 +16,6 @@ module('Acceptance | authentication | SSO selection', function (hooks) {
   let domainService;
 
   hooks.beforeEach(function () {
-    server.create('feature-toggle', { id: 0, isNewAuthenticationDesignEnabled: true });
-
     domainService = this.owner.lookup('service:currentDomain');
     sinon.stub(domainService, 'getExtension');
   });
