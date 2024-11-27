@@ -47,6 +47,10 @@ const ORGANIZATION_FEATURE = {
     description:
       "Permet au prescripteur qui travail sur PixJunior d'activer ou désactiver l'oralisation pour un prescrit depuis pixOrga.",
   },
+  COVER_RATE: {
+    key: 'COVER_RATE',
+    description: "Permet l'affichage de la page statistiques sur Pix Orga",
+  },
 };
 
 const CAMPAIGN_FEATURES = {
