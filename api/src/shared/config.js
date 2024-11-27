@@ -391,7 +391,7 @@ const configuration = (function () {
         password: 'passowrd',
       },
       queries: {
-        coverageRate: 'coverage-rate-query-id',
+        coverRateByTubes: 'coverage-rate-query-id',
       },
     };
 
