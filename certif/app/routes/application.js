@@ -16,4 +16,11 @@ export default class ApplicationRoute extends Route {
     const userLocale = this.currentUser.certificationPointOfContact?.lang;
     await this.session.handleLocale({ isFranceDomain, localeFromQueryParam, userLocale });
   }
+
+  model() {
+    return {
+      title: this.currentDomain.isFranceDomain ? 'Pix Certif (France)' : 'Pix Certif (hors France)',
+      headElement: document.querySelector('head'),
+    };
+  }
 }

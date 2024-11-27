@@ -1,4 +1,9 @@
-{{page-title "Pix Certif"}}
+{{page-title this.model.title}}
+{{#in-element this.model.headElement insertBefore=null}}
+  {{! template-lint-disable no-forbidden-elements }}
+  <meta name="description" content={{t "application.description"}} />
+{{/in-element}}
+
 <CommunicationBanner />
 {{outlet}}
 <PixToastContainer @closeButtonAriaLabel={{t "common.notifications.close-button.extra-information"}} />
