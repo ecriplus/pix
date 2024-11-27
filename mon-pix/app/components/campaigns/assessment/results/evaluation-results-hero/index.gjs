@@ -43,13 +43,11 @@ export default class EvaluationResultsHero extends Component {
     };
   }
 
-  get isSharableCampaign() {
-    return !this.args.campaign.isSimplifiedAccess;
-  }
-
   get showCustomOrganizationBlock() {
     const hasCustomContent = this.args.campaign.customResultPageText || this.args.campaign.hasCustomResultPageButton;
-    return hasCustomContent && (!this.isSharableCampaign || this.args.campaignParticipationResult.isShared);
+    return (
+      hasCustomContent && (this.args.campaign.isSimplifiedAccess || this.args.campaignParticipationResult.isShared)
+    );
   }
 
   get hasQuestResults() {
@@ -192,7 +190,7 @@ export default class EvaluationResultsHero extends Component {
           </div>
         {{/if}}
 
-        {{#if this.isSharableCampaign}}
+        {{#if @isSharableCampaign}}
           {{#if @campaignParticipationResult.isShared}}
             <PixMessage class="evaluation-results-hero-results__shared-message" @type="success" @withIcon={{true}}>
               {{t "pages.skill-review.hero.shared-message"}}
@@ -215,7 +213,7 @@ export default class EvaluationResultsHero extends Component {
         {{/if}}
 
         <div class="evaluation-results-hero-details__actions">
-          {{#if this.isSharableCampaign}}
+          {{#if @isSharableCampaign}}
             {{#if @campaignParticipationResult.isShared}}
               {{#if @hasTrainings}}
                 <PixButton @triggerAction={{this.handleSeeTrainingsClick}} @size="large">

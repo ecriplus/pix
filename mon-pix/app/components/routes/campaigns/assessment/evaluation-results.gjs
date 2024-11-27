@@ -2,6 +2,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
+import ENV from 'mon-pix/config/environment';
 
 import EvaluationResultsHero from '../../../campaigns/assessment/results/evaluation-results-hero';
 import EvaluationResultsTabs from '../../../campaigns/assessment/results/evaluation-results-tabs';
@@ -12,6 +13,11 @@ export default class EvaluationResults extends Component {
 
   get hasTrainings() {
     return Boolean(this.args.model.trainings.length);
+  }
+
+  get isSharableCampaign() {
+    const isAutonomousCourse = this.args.model.campaign.organizationId === ENV.APP.AUTONOMOUS_COURSES_ORGANIZATION_ID;
+    return !isAutonomousCourse && !this.args.model.campaign.isForAbsoluteNovice;
   }
 
   @action
@@ -35,7 +41,10 @@ export default class EvaluationResults extends Component {
           <span>{{@model.campaign.title}}</span>
           <span class="sr-only">{{t "pages.skill-review.abstract-title"}}</span>
         </h1>
-        <QuitResults @isCampaignShared={{@model.campaignParticipationResult.isShared}} />
+        <QuitResults
+          @isCampaignShared={{@model.campaignParticipationResult.isShared}}
+          @isSharableCampaign={{this.isSharableCampaign}}
+        />
       </header>
       <EvaluationResultsHero
         @campaign={{@model.campaign}}
@@ -43,6 +52,7 @@ export default class EvaluationResults extends Component {
         @questResults={{@model.questResults}}
         @hasTrainings={{this.hasTrainings}}
         @showTrainings={{this.showTrainings}}
+        @isSharableCampaign={{this.isSharableCampaign}}
       />
       <EvaluationResultsTabs
         @campaign={{@model.campaign}}
