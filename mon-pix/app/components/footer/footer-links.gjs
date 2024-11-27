@@ -2,6 +2,7 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
+import { eq } from 'ember-truth-helpers';
 
 export default class FooterLinks extends Component {
   @service url;
@@ -38,7 +39,11 @@ export default class FooterLinks extends Component {
 
   <template>
     <nav class="footer__links" role="navigation" aria-label={{t "navigation.footer.label"}}>
-      <ul class="footer-links__list">
+      <ul
+        class="footer-links__list
+          {{if (eq @size 'extra-small') 'footer-links__list--extra-small' 'footer-links__list--small'}}
+          {{if (eq @textAlign 'right') 'footer-links__list--align-right'}}"
+      >
         <li>
           <a href="{{this.supportHomeUrl}}" target="_blank" rel="noopener noreferrer">
             {{t "navigation.footer.help-center"}}

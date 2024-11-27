@@ -55,7 +55,7 @@ module('Integration | Component | Footer', function (hooks) {
 
     test('does not display the student data policy', async function (assert) {
       // when
-      const screen = await render(hbs`<Footer />}`);
+      const screen = await render(hbs`<Footer::FooterLinks />}`);
 
       // then
       assert
@@ -77,10 +77,54 @@ module('Integration | Component | Footer', function (hooks) {
 
     test('displays the student data policy', async function (assert) {
       // when
-      const screen = await render(hbs`<Footer />}`);
+      const screen = await render(hbs`<Footer::FooterLinks />}`);
 
       // then
       assert.dom(screen.getByRole('link', { name: t('navigation.footer.student-data-protection-policy') })).exists();
+    });
+  });
+
+  module('component sizes', function () {
+    module('when @size prop is not defined', function () {
+      test('default size is small', async function (assert) {
+        // when
+        const screen = await render(hbs`<Footer::FooterLinks />}`);
+
+        // then
+        assert.dom(screen.getByRole('list')).hasClass(/--small/);
+      });
+    });
+
+    module('when @size prop is "extra-small"', function () {
+      test('size is "extra-small"', async function (assert) {
+        // when
+        const screen = await render(hbs`<Footer::FooterLinks @size='extra-small' />}`);
+
+        // then
+        assert.dom(screen.getByRole('list')).hasClass(/--extra-small/);
+      });
+    });
+  });
+
+  module('component text align', function () {
+    module('when @textAlign prop is not defined', function () {
+      test('there is no text align variant', async function (assert) {
+        // when
+        const screen = await render(hbs`<Footer::FooterLinks />}`);
+
+        // then
+        assert.dom(screen.getByRole('list')).hasNoClass(/--align/);
+      });
+    });
+
+    module('when @textAlign prop is "right"', function () {
+      test('text align is "right"', async function (assert) {
+        // when
+        const screen = await render(hbs`<Footer::FooterLinks @textAlign='right' />}`);
+
+        // then
+        assert.dom(screen.getByRole('list')).hasClass(/--align-right/);
+      });
     });
   });
 });
