@@ -1,5 +1,50 @@
 # Pix Changelog
 
+## v4.246.0 (27/11/2024)
+
+
+### :rocket: Amélioration
+- [#10650](https://github.com/1024pix/pix/pull/10650) [FEATURE] Prendre en compte la langue depuis la payload pour le simualtor flash (PIX-15218).
+- [#10626](https://github.com/1024pix/pix/pull/10626) [FEATURE] Informer les prescripteurs des informations de leurs campagnes que leurs prescrits voient [PIX-191].
+- [#10639](https://github.com/1024pix/pix/pull/10639) [FEATURE] Renvoyer le nombre de challenges possibles dans le simulateur (PIX-15216).
+- [#10644](https://github.com/1024pix/pix/pull/10644) [FEATURE] Modififier le texte anglais du tag d'éligibilité à la certification (PIX-15311).
+- [#10618](https://github.com/1024pix/pix/pull/10618) [FEATURE] Ajout d'un paramètre de besoin d'aménagement lié à l'accessibilité dans le simulateur (PIX-15215).
+- [#10611](https://github.com/1024pix/pix/pull/10611) [FEATURE] Front - statut béta (PIX-15351).
+- [#10574](https://github.com/1024pix/pix/pull/10574) [FEATURE] Ajout de metriques Matomo pour la page de fin de parcours (PIX-15040).
+- [#10613](https://github.com/1024pix/pix/pull/10613) [FEATURE] Ajout de la modal de suppression de compte (PIX-14908).
+- [#10479](https://github.com/1024pix/pix/pull/10479) [FEATURE] Afficher de manière graphique les parcours Pix Junior.
+- [#10605](https://github.com/1024pix/pix/pull/10605) [FEATURE] Ajout de la page de suppression de compte (PIX-14904) (PIX-14905).
+- [#10614](https://github.com/1024pix/pix/pull/10614) [FEATURE] Déplacer la validation et l'insertion des learners SCO Csv dans un job (Pix-13790).
+- [#10561](https://github.com/1024pix/pix/pull/10561) [FEATURE] Affiche les bulles une à une puis l'épreuve avec un délai (PIX-14571).
+- [#10620](https://github.com/1024pix/pix/pull/10620) [FEATURE] Améliorer le style de la page de détails de parcours autonome (PIX-15401).
+- [#10612](https://github.com/1024pix/pix/pull/10612) [FEATURE] Ajouter la validation des imports SUP dans un job PgBoss (Pix-13793).
+
+### :building_construction: Tech
+- [#10652](https://github.com/1024pix/pix/pull/10652) [TECH] Migrer la route GET /api/admin/certification-centers/{id} dans src (PIX-15465).
+- [#10645](https://github.com/1024pix/pix/pull/10645) [TECH] Ajout d'un format compact de log pour le dev.
+- [#10629](https://github.com/1024pix/pix/pull/10629) [TECH] Renommer les params `{id}` en `{campaignId}` dans les routes liées aux campagnes (PIX-15425).
+- [#10635](https://github.com/1024pix/pix/pull/10635) [TECH] Ecrire le contenu pédagogique dans la base de données PG dans les tests (PIX-15439).
+- [#10500](https://github.com/1024pix/pix/pull/10500) [TECH] :wrench: Configure matomo pour pix junior - Suite.
+- [#10617](https://github.com/1024pix/pix/pull/10617) [TECH] Déplacer du code relatif à la gestion du cache référentiel depuis le fichier datasource vers des usecases dédiés (PIX-15389).
+- [#10564](https://github.com/1024pix/pix/pull/10564) [TECH] Supprimer des événements Matomo inutiles de la vocalisation des épreuves (PIX-15187).
+- [#10625](https://github.com/1024pix/pix/pull/10625) [TECH] Suppression des vieilles versions du changelog.
+- [#10608](https://github.com/1024pix/pix/pull/10608) [TECH] Extraire la sélection d'épreuves lors du scoring dans un service dédié (PIX-15332).
+- [#10609](https://github.com/1024pix/pix/pull/10609) [TECH] Créer des tests d'intégration pour OidcAuthenticationServiceRegistry (PIX-14173).
+- [#10599](https://github.com/1024pix/pix/pull/10599) [TECH] Ajouter une API interne permettant de vérifier si un utilisateur a été un prescrit (PIX-14983).
+
+### :bug: Correction
+- [#10651](https://github.com/1024pix/pix/pull/10651) [BUGFIX] Fix mission title in list display (PIX-15395).
+- [#10633](https://github.com/1024pix/pix/pull/10633) [BUGFIX] Centrer la description du formulaire d'activation d'espace Pix Orga (PIX-11564).
+- [#10627](https://github.com/1024pix/pix/pull/10627) [BUGFIX] Réparer le style du pied de page de la mire de connexion (PIX-15363).
+- [#10641](https://github.com/1024pix/pix/pull/10641) [BUGFIX] Améliorer la gestion des cas d'erreurs lors de la création d'un utilisateur (PIX-15393).
+- [#10643](https://github.com/1024pix/pix/pull/10643) [BUGFIX] Impossible de seeder en RA (PIX-15448).
+- [#10623](https://github.com/1024pix/pix/pull/10623) [BUGFIX] Ajouter une bordure de fond sur le page de résultat individuel dans PixOrga (PIX-3522).
+
+### :arrow_up: Montée de version
+- [#10634](https://github.com/1024pix/pix/pull/10634) [BUMP] Update dependency @1024pix/pix-ui to ^48.9.0 (admin).
+- [#10581](https://github.com/1024pix/pix/pull/10581) [BUMP] Update dependency @1024pix/pix-ui to v48.9 (junior).
+- [#10624](https://github.com/1024pix/pix/pull/10624) [BUMP] Update dependency @1024pix/pix-ui to ^48.7.1 (orga).
+
 ## v4.245.0 (22/11/2024)
 
 
