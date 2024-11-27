@@ -162,8 +162,17 @@ export default class ModuleGrain extends Component {
     await this.args.onModuleTerminate({ grainId: this.args.grain.id });
   }
 
+  get elementId() {
+    return `grain_${this.args.grain.id}`;
+  }
+
   <template>
-    <article class="grain {{if @hasJustAppeared 'grain--active'}}" tabindex="-1" {{didInsert this.focusAndScroll}}>
+    <article
+      id={{this.elementId}}
+      class="grain {{if @hasJustAppeared 'grain--active'}}"
+      tabindex="-1"
+      {{didInsert this.focusAndScroll}}
+    >
       <h2 class="screen-reader-only">{{@grain.title}}</h2>
 
       {{#if @transition}}
