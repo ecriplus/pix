@@ -1,4 +1,3 @@
-import { sharedUsecases } from '../../shared/domain/usecases/index.js';
 import { usecases } from '../domain/usecases/index.js';
 
 const createRelease = async function (request, h) {
@@ -17,7 +16,7 @@ const patchCacheEntry = async function (request, h) {
   const updatedRecord = request.payload;
   const recordId = request.params.id;
   const modelName = request.params.model;
-  await sharedUsecases.patchLearningContentCacheEntry({ recordId, updatedRecord, modelName });
+  await usecases.patchLearningContentCacheEntry({ recordId, updatedRecord, modelName });
   return h.response().code(204);
 };
 

@@ -1,8 +1,8 @@
-import { patchLearningContentCacheEntry } from '../../../../../src/shared/domain/usecases/patch-learning-content-cache-entry.js';
+import { patchLearningContentCacheEntry } from '../../../../../src/learning-content/domain/usecases/patch-learning-content-cache-entry.js';
 import * as LearningContentDatasources from '../../../../../src/shared/infrastructure/datasources/learning-content/index.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Domain | Usecase | Patch learning content cache entry', function () {
+describe('Learning Content | Unit | Domain | Usecase | Patch learning content cache entry', function () {
   describe('#patchLearningContentCacheEntry', function () {
     context('when entry is already in cache', function () {
       it('should patch learning content cache with provided updated entry', async function () {

@@ -1,9 +1,8 @@
 import { learningContentController } from '../../../../src/learning-content/application/learning-content-controller.js';
 import { usecases } from '../../../../src/learning-content/domain/usecases/index.js';
-import { sharedUsecases } from '../../../../src/shared/domain/usecases/index.js';
 import { expect, hFake, sinon } from '../../../test-helper.js';
 
-describe('Unit | Controller | learning-content-controller', function () {
+describe('Learning Content | Unit | Controller | learning-content-controller', function () {
   describe('#createRelease', function () {
     it('should schedule createRelease job', async function () {
       // given
@@ -40,13 +39,13 @@ describe('Unit | Controller | learning-content-controller', function () {
 
     it('should call the usecase and return 204', async function () {
       // given
-      sinon.stub(sharedUsecases, 'patchLearningContentCacheEntry');
+      sinon.stub(usecases, 'patchLearningContentCacheEntry');
 
       // when
       const response = await learningContentController.patchCacheEntry(request, hFake);
 
       // then
-      expect(sharedUsecases.patchLearningContentCacheEntry).to.have.been.calledWithExactly({
+      expect(usecases.patchLearningContentCacheEntry).to.have.been.calledWithExactly({
         recordId: 'recId',
         updatedRecord: {
           property: 'updatedValue',
