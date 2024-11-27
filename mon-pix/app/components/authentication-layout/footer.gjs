@@ -30,7 +30,7 @@ export default class Footer extends Component {
       {{#if this.isInternationalDomain}}
         <LanguageSwitcher @selectedLanguage={{this.selectedLanguage}} @onLanguageChange={{this.onLanguageChange}} />
       {{/if}}
-      <FooterLinks />
+      <FooterLinks @size="extra-small" />
     </footer>
   </template>
 }

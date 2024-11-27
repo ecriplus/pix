@@ -23,7 +23,7 @@ export default class Footer extends Component {
           <span>{{t "navigation.copyrights"}} {{this.currentYear}} {{t "navigation.pix"}}</span>
         </div>
       </div>
-      <FooterLinks />
+      <FooterLinks @textAlign="right" />
     </footer>
   </template>
 }

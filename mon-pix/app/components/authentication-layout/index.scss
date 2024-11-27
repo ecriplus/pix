@@ -83,30 +83,8 @@
   width: 100%;
   margin-top: var(--pix-spacing-12x);
 
-  nav {
-    @extend %pix-body-xs;
-
-    margin-top: var(--pix-spacing-4x);
-    margin-left: 0;
-
-    ul {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--pix-spacing-2x) var(--pix-spacing-3x);
-    }
-
-    a {
-      color: var(--pix-neutral-500);
-      text-decoration: underline;
-
-      &:hover, &:focus {
-        color: var(--pix-primary-500);
-      }
-    }
-
-    .footer-navigation__item {
-      margin: 0 var(--pix-spacing-3x) 0 0;
-    }
+  .language-switcher {
+    margin-bottom: var(--pix-spacing-4x);
   }
 }
 
