@@ -10,6 +10,7 @@ import {
   disableCommonOrganizationLearnersFromOrganizationId,
   findAllCommonLearnersFromOrganizationId,
   findAllCommonOrganizationLearnerByReconciliationInfos,
+  findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId,
   findOrganizationLearnerIdsByOrganizationId,
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
@@ -1950,6 +1951,92 @@ describe('Integration | Repository | Organization Learner Management | Organizat
         // then
         expect(result).to.equal(2);
       });
+    });
+  });
+
+  describe('#findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId ', function () {
+    let organizationId, organizationLearnerIdOfYesYes;
+
+    beforeEach(async function () {
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      organizationLearnerIdOfYesYes =
+        databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+          organizationId,
+          firstName: 'Oui',
+          lastName: 'Oui',
+          userId: null,
+          attributes: null,
+        }).id;
+
+      await databaseBuilder.commit();
+    });
+
+    it('should return an array of organization learner id given organizationId', async function () {
+      const otherOrganizationLearnerId =
+        databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+          organizationId,
+          firstName: 'Non',
+          lastName: 'Non',
+          userId: null,
+          attributes: null,
+        }).id;
+
+      await databaseBuilder.commit();
+
+      const results = await findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId({ organizationId });
+
+      expect([organizationLearnerIdOfYesYes, otherOrganizationLearnerId]).to.be.deep.members(results);
+    });
+
+    it('should not return organization learners from other organization', async function () {
+      databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+        organizationId: databaseBuilder.factory.buildOrganization().id,
+        firstName: 'Non',
+        lastName: 'Non',
+        userId: null,
+        attributes: null,
+      }).id;
+
+      await databaseBuilder.commit();
+
+      const results = await findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId({ organizationId });
+
+      expect([organizationLearnerIdOfYesYes]).to.be.deep.members(results);
+    });
+
+    it('should not return organization learners already deleted', async function () {
+      databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+        organizationId,
+        firstName: 'Non',
+        lastName: 'Non',
+        userId: null,
+        attributes: null,
+        deletedAt: new Date('2020-01-01'),
+      }).id;
+
+      await databaseBuilder.commit();
+
+      const results = await findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId({ organizationId });
+
+      expect([organizationLearnerIdOfYesYes]).to.be.deep.members(results);
+    });
+
+    it('should not return organization learners with attributes', async function () {
+      databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+        organizationId,
+        firstName: 'Non',
+        lastName: 'Non',
+        userId: null,
+        attributes: { test: 'toto' },
+        deletedAt: null,
+      }).id;
+
+      await databaseBuilder.commit();
+
+      const results = await findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId({ organizationId });
+
+      expect([organizationLearnerIdOfYesYes]).to.be.deep.members(results);
     });
   });
 });

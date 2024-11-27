@@ -302,6 +302,18 @@ const reconcileUserToOrganizationLearner = async function ({ userId, organizatio
   }
 };
 
+/**
+ * @function
+ * @name findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId
+ * @param {Object} params
+ * @param {number} params.organizationId
+ * @returns {Promise<number[]>}
+ */
+const findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId = async function ({ organizationId }) {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('view-active-organization-learners').where({ organizationId }).whereNull('attributes').pluck('id');
+};
+
 export {
   addOrUpdateOrganizationOfOrganizationLearners,
   countByUserId,
@@ -311,6 +323,7 @@ export {
   findAllCommonLearnersFromOrganizationId,
   findAllCommonOrganizationLearnerByReconciliationInfos,
   findByUserId,
+  findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId,
   findOrganizationLearnerIdsByOrganizationId,
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
