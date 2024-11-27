@@ -1,5 +1,15 @@
 # Pix Changelog
 
+## v4.247.0 (27/11/2024)
+
+
+### :rocket: Amélioration
+- [#10640](https://github.com/1024pix/pix/pull/10640) [FEATURE] Reprendre l’extract CSV pour ajouter le champ isBeta dans les infos du module (PIX-15359) (PIX-15172).
+
+### :bug: Correction
+- [#10653](https://github.com/1024pix/pix/pull/10653) [BUGFIX] Permettre de recréer un learner avec nationalStudentId lorsque l'ancien est supprimé (PIX-15467).
+- [#10648](https://github.com/1024pix/pix/pull/10648) [BUGFIX] Réparer l'envoi des résultats d'une campagne à accès simplifié (PIX-15440).
+
 ## v4.246.0 (27/11/2024)
 
 
