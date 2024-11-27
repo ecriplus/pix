@@ -26,6 +26,7 @@ import * as scoOrganizationParticipantRepository from '../../infrastructure/repo
 import * as supOrganizationParticipantRepository from '../../infrastructure/repositories/sup-organization-participant-repository.js';
 
 const dependencies = {
+  analysisRepository: repositories.analysisRepository,
   divisionRepository,
   groupRepository,
   supOrganizationParticipantRepository,
