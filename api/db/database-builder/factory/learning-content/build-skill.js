@@ -12,6 +12,7 @@ export function buildSkill({
   tubeId = 'tubeIdA',
   tutorialIds = ['tutorialIdA'],
   learningMoreTutorialIds = [],
+  hint_i18n = { fr: 'Un indice' },
 } = {}) {
   const values = {
     id,
@@ -25,6 +26,7 @@ export function buildSkill({
     tubeId,
     tutorialIds,
     learningMoreTutorialIds,
+    hint_i18n,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'learningcontent.skills',
