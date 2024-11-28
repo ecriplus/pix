@@ -1,3 +1,4 @@
+import { QUERY_TYPES } from '../../../../../src/identity-access-management/domain/constants/user-query.js';
 import {
   createServer,
   databaseBuilder,
@@ -50,6 +51,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
       await databaseBuilder.factory.buildUser({ firstName: 'Ann' });
       await databaseBuilder.factory.buildUser({ firstName: 'Anne' });
       await databaseBuilder.factory.buildUser({ firstName: 'Annie' });
+      await databaseBuilder.factory.buildUser({ firstName: 'Lisa' });
       await databaseBuilder.commit();
     });
 
@@ -58,7 +60,8 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
         it('retrieves this list of users', async function () {
           // given
           const user = await insertUserWithRoleSuperAdmin();
-          const params = '?filter[firstName]=Ann' + '&page[number]=1&page[size]=25' + '&queryType=EXACT_QUERY';
+          const params =
+            '?filter[firstName]=Ann' + '&page[number]=1&page[size]=25' + `&queryType=${QUERY_TYPES.EXACT_QUERY}`;
 
           requestOptions = {
             method: 'GET',
@@ -80,7 +83,8 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
         it('retrieves this list of users', async function () {
           // given
           const user = await insertUserWithRoleSuperAdmin();
-          const params = '?filter[firstName]=Ann' + '&page[number]=1&page[size]=25' + '&queryType=CONTAINS';
+          const params =
+            '?filter[firstName]=Ann' + '&page[number]=1&page[size]=25' + `&queryType=${QUERY_TYPES.CONTAINS}`;
 
           requestOptions = {
             method: 'GET',

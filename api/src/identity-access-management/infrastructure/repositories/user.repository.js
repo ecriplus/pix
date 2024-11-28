@@ -15,6 +15,7 @@ import { CertificationCenterMembership } from '../../../shared/domain/models/Cer
 import { Membership } from '../../../shared/domain/models/Membership.js';
 import { fetchPage, isUniqConstraintViolated } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../domain/constants/identity-providers.js';
+import { QUERY_TYPES } from '../../domain/constants/user-query.js';
 import { User } from '../../domain/models/User.js';
 import { UserDetailsForAdmin } from '../../domain/models/UserDetailsForAdmin.js';
 import { UserLogin } from '../../domain/models/UserLogin.js';
@@ -159,7 +160,7 @@ const getUserDetailsForAdmin = async function (userId) {
   });
 };
 
-const findPaginatedFiltered = async function ({ filter, page, queryType }) {
+const findPaginatedFiltered = async function ({ filter, page, queryType = QUERY_TYPES.CONTAINS }) {
   const query = knex('users')
     .where((qb) => _setSearchFiltersForQueryBuilder(filter, qb, queryType))
     .orderBy([{ column: 'firstName', order: 'asc' }, { column: 'lastName', order: 'asc' }, { column: 'id' }]);
@@ -625,30 +626,24 @@ function _toDomainFromDTO({
   });
 }
 
-function _applyQueryType(field, value, qb, queryType) {
-  if (queryType === 'EXACT_QUERY') {
-    qb.where(field, value);
-  } else {
-    qb.whereILike(field, `%${value}%`);
-  }
-}
-
 function _setSearchFiltersForQueryBuilder(filter, qb, queryType) {
-  const { id, firstName, lastName, email, username } = filter;
-
+  const id = filter.id;
+  const fields = ['email', 'firstName', 'lastName', 'email', 'username'];
   if (id) {
     qb.where({ id });
   }
-  if (firstName) {
-    _applyQueryType('firstName', firstName, qb, queryType);
-  }
-  if (lastName) {
-    _applyQueryType('lastName', lastName, qb, queryType);
-  }
-  if (email) {
-    _applyQueryType('email', email, qb, queryType);
-  }
-  if (username) {
-    _applyQueryType('username', username, qb, queryType);
+
+  fields.forEach((field) => {
+    if (filter[field]) {
+      _applyQueryType(field, filter[field], qb, queryType);
+    }
+  });
+}
+
+function _applyQueryType(field, value, qb, queryType) {
+  if (queryType === QUERY_TYPES.EXACT_QUERY) {
+    qb.where(field, value);
+  } else {
+    qb.whereILike(field, `%${value}%`);
   }
 }
