@@ -5,9 +5,12 @@ import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
 
+import setupIntl from '../../../helpers/setup-intl';
+
 module('Acceptance | authenticated/users | list', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks);
 
   module('When user is not logged in', function () {
     test('it should not be accessible by an unauthenticated user', async function (assert) {

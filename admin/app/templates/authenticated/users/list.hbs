@@ -9,9 +9,8 @@
         @onChange={{this.onChangeQueryType}}
         @value={{this.queryTypeForm}}
         @options={{this.queryTypes}}
-      >
-        <:default>Contient</:default>
-      </PixSelect>
+        @hideDefaultOption={{true}}
+      />
       <PixInput
         @id="userId"
         {{on "change" this.onChangeUserId}}

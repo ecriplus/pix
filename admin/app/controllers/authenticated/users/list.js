@@ -1,17 +1,22 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 const DEFAULT_PAGE_NUMBER = 1;
 const DEFAULT_QUERY_TYPE = 'CONTAINS';
 
 export default class ListController extends Controller {
+  @service intl;
+
   queryParams = ['pageNumber', 'pageSize', 'id', 'firstName', 'lastName', 'email', 'username', 'queryType'];
 
-  queryTypes = [
-    { value: 'CONTAINS', label: 'Contient' },
-    { value: 'EXACT_QUERY', label: 'Exacte' },
-  ];
+  get queryTypes() {
+    return [
+      { value: 'CONTAINS', label: this.intl.t('pages.users-list.query.contains') },
+      { value: 'EXACT_QUERY', label: this.intl.t('pages.users-list.query.exact') },
+    ];
+  }
 
   @tracked pageNumber = DEFAULT_PAGE_NUMBER;
   @tracked queryType = DEFAULT_QUERY_TYPE;
@@ -66,8 +71,8 @@ export default class ListController extends Controller {
     this.usernameForm = event.target.value;
   }
   @action
-  onChangeQueryType(event) {
-    this.queryTypeForm = event;
+  onChangeQueryType(value) {
+    this.queryTypeForm = value;
   }
 
   @action

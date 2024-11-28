@@ -740,6 +740,12 @@
           "update-certification-center-membership-role": "Le rôle du membre a été modifié."
         }
       }
+    },
+    "users-list": {
+      "query":  {
+        "contains": "Contient",
+        "exact": "Exacte"
+      }
     }
   }
 }
