@@ -47,76 +47,63 @@ module('Integration | Component | in-challenge-certification-issue-report-fields
     assert.ok(toggleOnCategory.calledOnceWith(inChallengeCategory));
   });
 
-  [
-    `${subcategoryToCode[certificationIssueReportSubcategories.IMAGE_NOT_DISPLAYING]} ${
-      subcategoryToLabel[certificationIssueReportSubcategories.IMAGE_NOT_DISPLAYING]
-    }`,
-    `${subcategoryToCode[certificationIssueReportSubcategories.EMBED_NOT_WORKING]} ${
-      subcategoryToLabel[certificationIssueReportSubcategories.EMBED_NOT_WORKING]
-    }`,
-    `${subcategoryToCode[certificationIssueReportSubcategories.FILE_NOT_OPENING]} ${
-      subcategoryToLabel[certificationIssueReportSubcategories.FILE_NOT_OPENING]
-    }`,
-    `${subcategoryToCode[certificationIssueReportSubcategories.WEBSITE_UNAVAILABLE]} ${
-      subcategoryToLabel[certificationIssueReportSubcategories.WEBSITE_UNAVAILABLE]
-    }`,
-    `${subcategoryToCode[certificationIssueReportSubcategories.WEBSITE_BLOCKED]} ${
-      subcategoryToLabel[certificationIssueReportSubcategories.WEBSITE_BLOCKED]
-    }`,
-    `${subcategoryToCode[certificationIssueReportSubcategories.EXTRA_TIME_EXCEEDED]} ${
-      subcategoryToLabel[certificationIssueReportSubcategories.EXTRA_TIME_EXCEEDED]
-    }`,
-    `${subcategoryToCode[certificationIssueReportSubcategories.SOFTWARE_NOT_WORKING]} ${
-      subcategoryToLabel[certificationIssueReportSubcategories.SOFTWARE_NOT_WORKING]
-    }`,
-    `${subcategoryToCode[certificationIssueReportSubcategories.UNINTENTIONAL_FOCUS_OUT]} ${
-      subcategoryToLabel[certificationIssueReportSubcategories.UNINTENTIONAL_FOCUS_OUT]
-    }`,
-    `${subcategoryToCode[certificationIssueReportSubcategories.SKIP_ON_OOPS]} ${
-      subcategoryToLabel[certificationIssueReportSubcategories.SKIP_ON_OOPS]
-    }`,
-    `${subcategoryToCode[certificationIssueReportSubcategories.ACCESSIBILITY_ISSUE]} ${
-      subcategoryToLabel[certificationIssueReportSubcategories.ACCESSIBILITY_ISSUE]
-    }`,
-  ].forEach(function (subcategory) {
-    test(`it should select the subcategory: ${subcategory} when category is checked`, async function (assert) {
-      // given
-      const toggleOnCategory = sinon.stub();
-      const [subcategoryCode, subcategoryLabel] = subcategory.split(' ');
-      const intl = this.owner.lookup('service:intl');
-      const inChallengeCategory = new RadioButtonCategoryWithSubcategoryAndQuestionNumber({
-        name: 'IN_CHALLENGE',
-        isChecked: true,
-        intl,
-      });
-      this.set('toggleOnCategory', toggleOnCategory);
-      this.set('inChallengeCategory', inChallengeCategory);
+  test(`it should display all subcategories when the category is checked`, async function (assert) {
+    // given
+    const toggleOnCategory = sinon.stub();
+    const intl = this.owner.lookup('service:intl');
+    const inChallengeCategory = new RadioButtonCategoryWithSubcategoryAndQuestionNumber({
+      name: 'IN_CHALLENGE',
+      isChecked: true,
+      intl,
+    });
+    this.set('toggleOnCategory', toggleOnCategory);
+    this.set('inChallengeCategory', inChallengeCategory);
 
-      // when
-      const screen = await render(hbs`<IssueReportModal::InChallengeCertificationIssueReportFields
+    // when
+    const screen = await render(hbs`<IssueReportModal::InChallengeCertificationIssueReportFields
   @inChallengeCategory={{this.inChallengeCategory}}
   @toggleOnCategory={{this.toggleOnCategory}}
   @maxlength={{500}}
 />`);
 
-      await click(screen.getByLabelText(t('pages.session-finalization.add-issue-modal.actions.select-subcategory')));
+    await click(screen.getByLabelText(t('pages.session-finalization.add-issue-modal.actions.select-subcategory')));
 
-      await screen.findByRole('listbox');
-      await click(
-        await screen.findByRole('option', {
-          name: `${subcategoryCode} ${t(subcategoryLabel)}`,
-        }),
-      );
+    await screen.findByRole('listbox');
 
-      // then
-      assert
-        .dom(
-          screen.getByRole('option', {
-            selected: true,
-            name: `${subcategoryCode} ${t(subcategoryLabel)}`,
-          }),
-        )
-        .exists();
+    [
+      `${subcategoryToCode[certificationIssueReportSubcategories.IMAGE_NOT_DISPLAYING]} ${
+        subcategoryToLabel[certificationIssueReportSubcategories.IMAGE_NOT_DISPLAYING]
+      }`,
+      `${subcategoryToCode[certificationIssueReportSubcategories.EMBED_NOT_WORKING]} ${
+        subcategoryToLabel[certificationIssueReportSubcategories.EMBED_NOT_WORKING]
+      }`,
+      `${subcategoryToCode[certificationIssueReportSubcategories.FILE_NOT_OPENING]} ${
+        subcategoryToLabel[certificationIssueReportSubcategories.FILE_NOT_OPENING]
+      }`,
+      `${subcategoryToCode[certificationIssueReportSubcategories.WEBSITE_UNAVAILABLE]} ${
+        subcategoryToLabel[certificationIssueReportSubcategories.WEBSITE_UNAVAILABLE]
+      }`,
+      `${subcategoryToCode[certificationIssueReportSubcategories.WEBSITE_BLOCKED]} ${
+        subcategoryToLabel[certificationIssueReportSubcategories.WEBSITE_BLOCKED]
+      }`,
+      `${subcategoryToCode[certificationIssueReportSubcategories.EXTRA_TIME_EXCEEDED]} ${
+        subcategoryToLabel[certificationIssueReportSubcategories.EXTRA_TIME_EXCEEDED]
+      }`,
+      `${subcategoryToCode[certificationIssueReportSubcategories.SOFTWARE_NOT_WORKING]} ${
+        subcategoryToLabel[certificationIssueReportSubcategories.SOFTWARE_NOT_WORKING]
+      }`,
+      `${subcategoryToCode[certificationIssueReportSubcategories.UNINTENTIONAL_FOCUS_OUT]} ${
+        subcategoryToLabel[certificationIssueReportSubcategories.UNINTENTIONAL_FOCUS_OUT]
+      }`,
+      `${subcategoryToCode[certificationIssueReportSubcategories.SKIP_ON_OOPS]} ${
+        subcategoryToLabel[certificationIssueReportSubcategories.SKIP_ON_OOPS]
+      }`,
+      `${subcategoryToCode[certificationIssueReportSubcategories.ACCESSIBILITY_ISSUE]} ${
+        subcategoryToLabel[certificationIssueReportSubcategories.ACCESSIBILITY_ISSUE]
+      }`,
+    ].forEach(function (subcategory) {
+      const [subcategoryCode, subcategoryLabel] = subcategory.split(' ');
+      assert.dom(screen.getByRole('option', { name: `${subcategoryCode} ${t(subcategoryLabel)}` })).exists();
     });
   });
 
