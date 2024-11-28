@@ -1,13 +1,11 @@
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { RefreshToken } from '../../../../../src/identity-access-management/domain/models/RefreshToken.js';
 import { UserAnonymizedEventLoggingJob } from '../../../../../src/identity-access-management/domain/models/UserAnonymizedEventLoggingJob.js';
-import { anonymizeUser } from '../../../../../src/identity-access-management/domain/usecases/anonymize-user.usecase.js';
-import * as privacyUsersApiRepository from '../../../../../src/identity-access-management/infrastructure/repositories/privacy-users-api.repository.js';
+import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { refreshTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/refresh-token.repository.js';
 import { config } from '../../../../../src/shared/config.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { adminMemberRepository } from '../../../../../src/shared/infrastructure/repositories/admin-member.repository.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | anonymize-user', function () {
   let clock;
@@ -60,11 +58,9 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
     await refreshTokenRepository.save({ refreshToken });
 
     // when
-    await anonymizeUser({
+    await usecases.anonymizeUser({
       userId,
       updatedByUserId: anonymizedByUserId,
-      adminMemberRepository,
-      privacyUsersApiRepository,
     });
 
     // then
@@ -131,17 +127,13 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       const user = databaseBuilder.factory.buildUser({ firstName: 'Bob' });
       await databaseBuilder.commit();
 
-      // when
-      const error = await catchErr(anonymizeUser)({
-        userId: user.id,
-        updatedByUserId: 666,
-        adminMemberRepository,
-        privacyUsersApiRepository,
-      });
-
-      // then
-      expect(error).to.be.instanceOf(UserNotFoundError);
-      expect(error.message).to.equal(`Admin not found for id: 666`);
+      // when / then
+      await expect(
+        usecases.anonymizeUser({
+          userId: user.id,
+          updatedByUserId: 666,
+        }),
+      ).to.be.rejectedWith(UserNotFoundError, 'Admin not found for id: 666');
 
       const anonymizedUser = await knex('users').where({ id: user.id }).first();
       expect(anonymizedUser.hasBeenAnonymised).to.be.false;
@@ -161,11 +153,9 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       await databaseBuilder.commit();
 
       // when
-      await anonymizeUser({
+      await usecases.anonymizeUser({
         userId: user.id,
         updatedByUserId: newAdmin.id,
-        adminMemberRepository,
-        privacyUsersApiRepository,
       });
 
       // then
@@ -208,11 +198,9 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       sinon.stub(config.auditLogger, 'isEnabled').value(false);
 
       // when
-      await anonymizeUser({
+      await usecases.anonymizeUser({
         userId,
         updatedByUserId: anonymizedByUserId,
-        adminMemberRepository,
-        privacyUsersApiRepository,
       });
 
       // then
