@@ -26,7 +26,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         getMostRecentBeforeDate: sinon.stub(),
       };
       answerRepository = {
-        findByAssessment: sinon.stub(),
+        findByAssessmentExcludingChallengeIds: sinon.stub(),
       };
       challengeRepository = {
         get: sinon.stub(),
@@ -79,7 +79,9 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs(v3CertificationCourse.getStartDate())
           .resolves(flashAlgorithmConfiguration);
 
-        answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
+        answerRepository.findByAssessmentExcludingChallengeIds
+          .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
+          .resolves([]);
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId: assessment.id })
           .resolves([]);
@@ -170,7 +172,9 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs(v3CertificationCourse.getStartDate())
             .resolves(flashAlgorithmConfiguration);
 
-          answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
+          answerRepository.findByAssessmentExcludingChallengeIds
+            .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
+            .resolves([]);
           certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
             .withArgs({ assessmentId: assessment.id })
             .resolves([]);
@@ -259,7 +263,9 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             id: nonAnsweredCertificationChallenge.challengeId,
           });
 
-          answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
+          answerRepository.findByAssessmentExcludingChallengeIds
+            .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
+            .resolves([]);
           certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
             .withArgs({ assessmentId: assessment.id })
             .resolves([]);
@@ -319,8 +325,8 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         const answerStillValid = domainBuilder.buildAnswer({ challengeId: alreadyAnsweredChallenge.id });
         const answerWithOutdatedChallenge = domainBuilder.buildAnswer({ challengeId: outdatedChallenge.id });
-        answerRepository.findByAssessment
-          .withArgs(assessment.id)
+        answerRepository.findByAssessmentExcludingChallengeIds
+          .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
           .resolves([answerStillValid, answerWithOutdatedChallenge]);
 
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
@@ -418,7 +424,12 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs(v3CertificationCourse.getStartDate())
           .resolves(flashAlgorithmConfiguration);
 
-        answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
+        answerRepository.findByAssessmentExcludingChallengeIds
+          .withArgs({
+            assessmentId: assessment.id,
+            excludedChallengeIds: [nonAnsweredCertificationChallenge.challengeId],
+          })
+          .resolves([]);
         challengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves([nextChallenge, lastSeenChallenge]);
         challengeRepository.getMany.withArgs([]).resolves([]);
 
@@ -514,7 +525,12 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs(v3CertificationCourse.getStartDate())
           .resolves(flashAlgorithmConfiguration);
 
-        answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
+        answerRepository.findByAssessmentExcludingChallengeIds
+          .withArgs({
+            assessmentId: assessment.id,
+            excludedChallengeIds: [nonAnsweredCertificationChallenge.challengeId],
+          })
+          .resolves([]);
         challengeRepository.findActiveFlashCompatible
           .withArgs()
           .resolves([challengeWithLiveAlert, challengeWithOtherSkill, challengeWithLiveAlertedSkill]);
@@ -600,7 +616,9 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs(v3CertificationCourse.getStartDate())
           .resolves(flashAlgorithmConfiguration);
 
-        answerRepository.findByAssessment.withArgs(assessment.id).resolves([answer]);
+        answerRepository.findByAssessmentExcludingChallengeIds
+          .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
+          .resolves([answer]);
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId: assessment.id })
           .resolves([]);
@@ -679,7 +697,9 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             const assessment = domainBuilder.buildAssessment();
             const locale = 'fr-FR';
 
-            answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
+            answerRepository.findByAssessmentExcludingChallengeIds
+              .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
+              .resolves([]);
             certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
               .withArgs({ assessmentId: assessment.id })
               .resolves([]);

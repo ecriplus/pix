@@ -81,6 +81,16 @@ const findByAssessment = async function (assessmentId) {
   return _toDomainArray(answerDTOsWithoutDuplicate);
 };
 
+const findByAssessmentExcludingChallengeIds = async function ({ assessmentId, excludedChallengeIds = [] }) {
+  const answerDTOs = await knex
+    .select(COLUMNS)
+    .from('answers')
+    .where({ assessmentId })
+    .whereNotIn('challengeId', excludedChallengeIds);
+
+  return _toDomainArray(answerDTOs);
+};
+
 const findChallengeIdsFromAnswerIds = async function (ids) {
   return knex.distinct().pluck('challengeId').from('answers').whereInArray('id', ids);
 };
@@ -108,6 +118,7 @@ const saveWithKnowledgeElements = async function (answer, knowledgeElements) {
 };
 export {
   findByAssessment,
+  findByAssessmentExcludingChallengeIds,
   findByChallengeAndAssessment,
   findChallengeIdsFromAnswerIds,
   get,

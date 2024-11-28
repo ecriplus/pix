@@ -44,16 +44,19 @@ const getNextChallenge = async function ({
 }) {
   const certificationCourse = await certificationCourseRepository.get({ id: assessment.certificationCourseId });
 
-  const allAnswers = await answerRepository.findByAssessment(assessment.id);
-  const alreadyAnsweredChallengeIds = allAnswers.map(({ challengeId }) => challengeId);
-
   const validatedLiveAlertChallengeIds = await _getValidatedLiveAlertChallengeIds({
     assessmentId: assessment.id,
     certificationChallengeLiveAlertRepository,
   });
 
-  const excludedChallengeIds = [...alreadyAnsweredChallengeIds, ...validatedLiveAlertChallengeIds];
+  const allAnswers = await answerRepository.findByAssessmentExcludingChallengeIds({
+    assessmentId: assessment.id,
+    excludedChallengeIds: validatedLiveAlertChallengeIds,
+  });
 
+  const alreadyAnsweredChallengeIds = allAnswers.map(({ challengeId }) => challengeId);
+
+  const excludedChallengeIds = [...alreadyAnsweredChallengeIds, ...validatedLiveAlertChallengeIds];
   const lastNonAnsweredCertificationChallenge =
     await sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3(
       assessment.certificationCourseId,
