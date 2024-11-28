@@ -2142,6 +2142,7 @@
         },
         "menu-link-title": "Supprimer mon compte",
         "modal": {
+          "error-403": "Vous ne pouvez pas supprimer votre compte. Veuillez contacter le support de Pix.",
           "question": "Êtes-vous sûr(e) de vouloir supprimer votre compte ?",
           "title": "Vous êtes sur le point de supprimer votre compte",
           "warning-1": "Veuillez noter que le compte ne pourra pas être récupéré après la suppression.",
