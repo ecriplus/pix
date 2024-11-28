@@ -6,6 +6,7 @@ const { FRENCH_SPOKEN } = LOCALE;
 import { knex } from '../../../../../db/knex-database-connection.js';
 import * as knowledgeElementRepository from '../../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
 import * as areaRepository from '../../../../../src/shared/infrastructure/repositories/area-repository.js';
+import * as competenceRepository from '../../../../../src/shared/infrastructure/repositories/competence-repository.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import {
   CertifiedArea,
@@ -15,7 +16,6 @@ import {
   CertifiedTube,
 } from '../../../../shared/domain/read-models/CertifiedProfile.js';
 import {
-  competenceDatasource,
   skillDatasource,
   tubeDatasource,
 } from '../../../../shared/infrastructure/datasources/learning-content/index.js';
@@ -93,16 +93,17 @@ async function _createCertifiedTubes(certifiedSkills) {
 
 async function _createCertifiedCompetences(certifiedTubes) {
   const certifiedTubesByCompetence = _.groupBy(certifiedTubes, 'competenceId');
-  const learningContentCompetences = await competenceDatasource.findByRecordIds(
-    Object.keys(certifiedTubesByCompetence),
-  );
-  return learningContentCompetences.map((learningContentCompetence) => {
-    const name = learningContentCompetence.name_i18n.fr;
+  const competences = await competenceRepository.findByRecordIds({
+    competenceIds: Object.keys(certifiedTubesByCompetence),
+    locale: FRENCH_SPOKEN,
+  });
+  return competences.map((competence) => {
+    const name = competence.name;
     return new CertifiedCompetence({
-      id: learningContentCompetence.id,
+      id: competence.id,
       name,
-      areaId: learningContentCompetence.areaId,
-      origin: learningContentCompetence.origin,
+      areaId: competence.areaId,
+      origin: competence.origin,
     });
   });
 }
