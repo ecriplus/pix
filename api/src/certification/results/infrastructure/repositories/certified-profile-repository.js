@@ -5,6 +5,7 @@ import { LOCALE } from '../../../../shared/domain/constants.js';
 const { FRENCH_SPOKEN } = LOCALE;
 import { knex } from '../../../../../db/knex-database-connection.js';
 import * as knowledgeElementRepository from '../../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
+import * as tubeRepository from '../../../../../lib/infrastructure/repositories/tube-repository.js';
 import * as areaRepository from '../../../../../src/shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../../../src/shared/infrastructure/repositories/competence-repository.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
@@ -15,10 +16,7 @@ import {
   CertifiedSkill,
   CertifiedTube,
 } from '../../../../shared/domain/read-models/CertifiedProfile.js';
-import {
-  skillDatasource,
-  tubeDatasource,
-} from '../../../../shared/infrastructure/datasources/learning-content/index.js';
+import { skillDatasource } from '../../../../shared/infrastructure/datasources/learning-content/index.js';
 
 const get = async function (certificationCourseId) {
   const certificationDatas = await knex
@@ -80,13 +78,13 @@ async function _createCertifiedSkills(skillIds, askedSkillIds) {
 
 async function _createCertifiedTubes(certifiedSkills) {
   const certifiedSkillsByTube = _.groupBy(certifiedSkills, 'tubeId');
-  const learningContentTubes = await tubeDatasource.findByRecordIds(Object.keys(certifiedSkillsByTube));
-  return learningContentTubes.map((learningContentTube) => {
-    const name = learningContentTube.practicalTitle_i18n.fr;
+  const tubes = await tubeRepository.findByRecordIds(Object.keys(certifiedSkillsByTube), FRENCH_SPOKEN);
+  return tubes.map((tube) => {
+    const name = tube.practicalTitle;
     return new CertifiedTube({
-      id: learningContentTube.id,
+      id: tube.id,
       name,
-      competenceId: learningContentTube.competenceId,
+      competenceId: tube.competenceId,
     });
   });
 }

@@ -6,13 +6,15 @@ import { CAMPAIGN_FEATURES } from '../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../src/shared/domain/errors.js';
 import { Campaign } from '../../../../src/shared/domain/models/Campaign.js';
 import { databaseBuilder, domainBuilder, expect, mockLearningContent } from '../../../test-helper.js';
-import { buildArea } from '../../../tooling/domain-builder/factory/build-area.js';
-import { buildCompetence } from '../../../tooling/domain-builder/factory/build-competence.js';
-import { buildFramework } from '../../../tooling/domain-builder/factory/build-framework.js';
-import { buildSkill } from '../../../tooling/domain-builder/factory/build-skill.js';
-import { buildThematic } from '../../../tooling/domain-builder/factory/build-thematic.js';
-import { buildTube } from '../../../tooling/domain-builder/factory/build-tube.js';
-import { buildLearningContent } from '../../../tooling/learning-content-builder/build-learning-content.js';
+import {
+  buildArea,
+  buildCompetence,
+  buildFramework,
+  buildSkill,
+  buildThematic,
+  buildTube,
+} from '../../../tooling/domain-builder/factory/index.js';
+import { buildLearningContent } from '../../../tooling/learning-content-builder/index.js';
 
 describe('Integration | Repository | Campaign', function () {
   describe('#areKnowledgeElementsResettable', function () {
