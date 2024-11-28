@@ -1,16 +1,16 @@
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
-import { refreshLearningContentCache } from '../../../../../src/learning-content/domain/usecases/refresh-learning-content-cache.js';
+import { createLearningContentRelease } from '../../../../../src/learning-content/domain/usecases/create-learning-content-release.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Learning Content | Unit | Domain | Usecase | Refresh learning content cache', function () {
+describe('Learning Content | Unit | UseCase | create-learning-content-release', function () {
   beforeEach(function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
       return callback();
     });
   });
 
-  describe('#refreshLearningContentCache', function () {
-    it('should trigger a reset of the learning content cache', async function () {
+  describe('#createLearningContentRelease', function () {
+    it('should trigger an update of the learning content cache', async function () {
       // given
       const frameworks = Symbol('frameworks');
       const areas = Symbol('areas');
@@ -25,7 +25,7 @@ describe('Learning Content | Unit | Domain | Usecase | Refresh learning content 
 
       const LearningContentCache = {
         instance: {
-          reset: sinon.stub().resolves({
+          update: sinon.stub().resolves({
             frameworks,
             areas,
             competences,
@@ -72,7 +72,7 @@ describe('Learning Content | Unit | Domain | Usecase | Refresh learning content 
       };
 
       // when
-      await refreshLearningContentCache({
+      await createLearningContentRelease({
         LearningContentCache,
         frameworkRepository,
         areaRepository,
@@ -87,7 +87,7 @@ describe('Learning Content | Unit | Domain | Usecase | Refresh learning content 
       });
 
       // then
-      expect(LearningContentCache.instance.reset).to.have.been.calledOnce;
+      expect(LearningContentCache.instance.update).to.have.been.calledOnce;
       expect(frameworkRepository.save).to.have.been.calledOnceWithExactly(frameworks);
       expect(areaRepository.save).to.have.been.calledOnceWithExactly(areas);
       expect(competenceRepository.save).to.have.been.calledOnceWithExactly(competences);

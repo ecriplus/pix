@@ -5,16 +5,25 @@ import { expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Controller | learning-content-controller', function () {
   describe('#createRelease', function () {
-    it('should call the createRelease', async function () {
+    it('should schedule createRelease job', async function () {
       // given
-      sinon.stub(sharedUsecases, 'createLcmsRelease').resolves();
-      const request = {};
+      sinon.stub(usecases, 'scheduleCreateLearningContentReleaseJob').resolves();
 
       // when
-      await learningContentController.createRelease(request, hFake);
+      await learningContentController.createRelease(
+        {
+          auth: {
+            credentials: {
+              userId: 123,
+            },
+          },
+        },
+        hFake,
+      );
 
       // then
-      expect(sharedUsecases.createLcmsRelease).to.have.been.called;
+      expect(usecases.scheduleCreateLearningContentReleaseJob).to.have.been.calledOnce;
+      expect(usecases.scheduleCreateLearningContentReleaseJob).to.have.been.calledWithExactly({ userId: 123 });
     });
   });
 
