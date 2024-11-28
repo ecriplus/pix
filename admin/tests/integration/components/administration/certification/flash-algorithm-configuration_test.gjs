@@ -11,7 +11,6 @@ module('Integration | Component |  administration/certification/flash-algorithm-
     // given
     const flashAlgorithmConfiguration = {
       maximumAssessmentLength: 1,
-      warmUpLength: 2,
       challengesBetweenSameCompetence: 3,
       variationPercent: 4,
       variationPercentUntil: 5,
@@ -27,9 +26,6 @@ module('Integration | Component |  administration/certification/flash-algorithm-
     // then
     const maximumAssessmentLength = await screen.getByRole('spinbutton', {
       name: t('pages.administration.certification.flash-algorithm-configuration.form.maximumAssessmentLength'),
-    }).value;
-    const warmUpLength = await screen.getByRole('spinbutton', {
-      name: t('pages.administration.certification.flash-algorithm-configuration.form.warmUpLength'),
     }).value;
     const challengesBetweenSameCompetence = await screen.getByRole('spinbutton', {
       name: t('pages.administration.certification.flash-algorithm-configuration.form.challengesBetweenSameCompetence'),
@@ -48,7 +44,6 @@ module('Integration | Component |  administration/certification/flash-algorithm-
     }).checked;
 
     assert.strictEqual(maximumAssessmentLength, '1');
-    assert.strictEqual(warmUpLength, '2');
     assert.strictEqual(challengesBetweenSameCompetence, '3');
     assert.strictEqual(variationPercent, '4');
     assert.strictEqual(variationPercentUntil, '5');

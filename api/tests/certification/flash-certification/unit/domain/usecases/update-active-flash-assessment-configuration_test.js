@@ -14,11 +14,11 @@ describe('Unit | Domain | UseCases | create-flash-assessment-configuration', fun
     };
 
     const configuration = {
-      warmUpLength: 12,
+      enablePassageByAllCompetences: true,
     };
 
     const previousConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
-      warmUpLength: 10,
+      enablePassageByAllCompetences: false,
       variationPercent: 0.5,
     });
 

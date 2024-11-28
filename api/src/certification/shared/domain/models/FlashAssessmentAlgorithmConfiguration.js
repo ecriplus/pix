@@ -14,7 +14,6 @@ import { FlashAssessmentSuccessRateHandler } from '../../../flash-certification/
  */
 export class FlashAssessmentAlgorithmConfiguration {
   constructor({
-    warmUpLength = 0,
     forcedCompetences = [],
     maximumAssessmentLength = config.v3Certification.numberOfChallengesPerCourse,
     challengesBetweenSameCompetence = config.v3Certification.challengesBetweenSameCompetence,
@@ -25,7 +24,6 @@ export class FlashAssessmentAlgorithmConfiguration {
     variationPercentUntil,
     createdAt,
   } = {}) {
-    this.warmUpLength = warmUpLength;
     this.forcedCompetences = forcedCompetences;
     this.maximumAssessmentLength = maximumAssessmentLength;
     this.challengesBetweenSameCompetence = challengesBetweenSameCompetence;
@@ -39,7 +37,6 @@ export class FlashAssessmentAlgorithmConfiguration {
 
   toDTO() {
     return {
-      warmUpLength: this.warmUpLength,
       forcedCompetences: JSON.stringify(this.forcedCompetences),
       maximumAssessmentLength: this.maximumAssessmentLength,
       challengesBetweenSameCompetence: this.challengesBetweenSameCompetence,
@@ -55,7 +52,6 @@ export class FlashAssessmentAlgorithmConfiguration {
   }
 
   static fromDTO({
-    warmUpLength,
     forcedCompetences,
     maximumAssessmentLength,
     challengesBetweenSameCompetence,
@@ -67,7 +63,6 @@ export class FlashAssessmentAlgorithmConfiguration {
     createdAt,
   }) {
     return new FlashAssessmentAlgorithmConfiguration({
-      warmUpLength,
       forcedCompetences,
       maximumAssessmentLength,
       challengesBetweenSameCompetence,

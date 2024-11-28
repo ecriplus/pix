@@ -5,7 +5,6 @@ import { config } from '../../../../../../src/shared/config.js';
 import { catchErrSync, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 const baseFlashAssessmentAlgorithmConfig = {
-  warmUpLength: 0,
   forcedCompetences: [],
   minimumEstimatedSuccessRateRanges: [],
   limitToOneQuestionPerTube: false,

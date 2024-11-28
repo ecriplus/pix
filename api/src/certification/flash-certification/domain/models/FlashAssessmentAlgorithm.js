@@ -17,7 +17,6 @@ const availableRules = [
 class FlashAssessmentAlgorithm {
   /**
    * Model to interact with the flash algorithm
-   * @param warmUpLength - define a warmup when the algorithm do not go through the competences
    * @param configuration - options to configure algorithm challenge selection and behaviour
    */
   constructor({ flashAlgorithmImplementation, configuration = {} } = {}) {
@@ -28,7 +27,6 @@ class FlashAssessmentAlgorithm {
       limitToOneQuestionPerTube: configuration.limitToOneQuestionPerTube,
       challengesBetweenSameCompetence: configuration.challengesBetweenSameCompetence,
       forcedCompetences: configuration.forcedCompetences,
-      warmUpLength: configuration.warmUpLength,
       enablePassageByAllCompetences: configuration.enablePassageByAllCompetences,
     });
   }

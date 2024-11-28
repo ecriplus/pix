@@ -25,7 +25,7 @@ module('Unit | Adapters | flash-algorithm-configuration', function (hooks) {
   module('#createRecord', () => {
     test('should call the post url with the correct payload', async function (assert) {
       // given
-      const flashAlgorithmConfiguration = { warmUpLength: 2 };
+      const flashAlgorithmConfiguration = { enablePassageByAllCompetences: true };
       const payload = { data: flashAlgorithmConfiguration };
       const adapter = this.owner.lookup('adapter:flash-algorithm-configuration');
       sinon.stub(adapter, 'ajax');

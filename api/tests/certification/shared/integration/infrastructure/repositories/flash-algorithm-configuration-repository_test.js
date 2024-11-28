@@ -11,7 +11,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
       it('should return a flash algorithm configuration', async function () {
         // given
         const flashAlgorithmConfiguration = databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-          warmUpLength: 1,
           maximumAssessmentLength: 2,
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
@@ -44,7 +43,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
       it('should return the latest', async function () {
         // given
         const latestFlashAlgorithmConfiguration = databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-          warmUpLength: 1,
           maximumAssessmentLength: 2,
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
@@ -59,7 +57,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
         });
 
         databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-          warmUpLength: 1,
           maximumAssessmentLength: 2,
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,

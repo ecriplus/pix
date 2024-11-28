@@ -416,8 +416,7 @@
             "limitToOneQuestionPerTube": "Limiter à une question par sujet",
             "maximumAssessmentLength": "Nombre de questions",
             "variationPercent": "Capage de la capacité (en % )",
-            "variationPercentUntil": "Nombre de questions pour le capage de la capacité",
-            "warmUpLength": "Nombre de questions d'entraînement"
+            "variationPercentUntil": "Nombre de questions pour le capage de la capacité"
           }
         },
         "sco-whitelist": {

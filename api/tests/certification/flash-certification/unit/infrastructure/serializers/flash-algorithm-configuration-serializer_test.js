@@ -11,7 +11,6 @@ describe('Unit | Certification | flash-certification | Serializer | flash-algori
           id: '0',
           type: 'flash-algorithm-configurations',
           attributes: {
-            'warm-up-length': 1,
             'forced-competences': 2,
             'maximum-assessment-length': 3,
             'challenges-between-same-competence': 4,
@@ -25,7 +24,6 @@ describe('Unit | Certification | flash-certification | Serializer | flash-algori
       };
 
       const flashAlgorithmConfiguration = new FlashAssessmentAlgorithmConfiguration({
-        warmUpLength: 1,
         forcedCompetences: 2,
         maximumAssessmentLength: 3,
         challengesBetweenSameCompetence: 4,

@@ -18,10 +18,6 @@ import { t } from 'ember-intl';
         }}</:label>
     </PixInput>
 
-    <PixInput {{on "input" @updateNumberValues}} @id="warmUpLength" @value={{@form.warmUpLength}} type="number" min="0">
-      <:label>{{t "pages.administration.certification.flash-algorithm-configuration.form.warmUpLength"}}</:label>
-    </PixInput>
-
     <PixInput
       {{on "input" @updateNumberValues}}
       @id="challengesBetweenSameCompetence"

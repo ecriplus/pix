@@ -1,23 +1,17 @@
 import lodash from 'lodash';
 
 export class FlashAssessmentAlgorithmForcedCompetencesRule {
-  static isApplicable({ answers, forcedCompetences, warmUpLength }) {
-    return forcedCompetences.length > 0 && answers.length >= warmUpLength;
+  static isApplicable({ forcedCompetences }) {
+    return forcedCompetences.length > 0;
   }
 
-  static execute({ allChallenges, assessmentAnswers, availableChallenges, warmUpLength, forcedCompetences }) {
-    const answersAfterWarmup = this._getAnswersAfterWarmup({ assessmentAnswers, warmUpLength });
-
+  static execute({ allChallenges, assessmentAnswers, availableChallenges, forcedCompetences }) {
     return this._filterAlreadyAnsweredCompetences({
-      assessmentAnswers: answersAfterWarmup,
+      assessmentAnswers,
       availableChallenges,
       allChallenges,
       forcedCompetences,
     });
-  }
-
-  static _getAnswersAfterWarmup({ assessmentAnswers, warmUpLength }) {
-    return assessmentAnswers.slice(warmUpLength);
   }
 
   static _filterAlreadyAnsweredCompetences({

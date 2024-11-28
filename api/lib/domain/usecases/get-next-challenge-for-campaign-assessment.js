@@ -65,7 +65,6 @@ const _hasAnsweredToAllChallenges = ({ possibleChallenges }) => {
 
 const _createDefaultAlgorithmConfiguration = () => {
   return new FlashAssessmentAlgorithmConfiguration({
-    warmUpLength: 0,
     forcedCompetences: [],
     limitToOneQuestionPerTube: false,
     minimumEstimatedSuccessRateRanges: [],

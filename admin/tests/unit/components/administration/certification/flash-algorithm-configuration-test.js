@@ -28,7 +28,6 @@ module('Unit | Component | authenticated/certifications/flash-algorithm-configur
 
       const flashAlgorithmConfiguration = {
         maximumAssessmentLength: 0,
-        warmUpLength: 1,
         challengesBetweenSameCompetence: 2,
         variationPercent: 3,
         variationPercentUntil: 4,
@@ -71,7 +70,6 @@ module('Unit | Component | authenticated/certifications/flash-algorithm-configur
 
         const flashAlgorithmConfiguration = {
           maximumAssessmentLength: 0,
-          warmUpLength: 1,
           challengesBetweenSameCompetence: 2,
           variationPercent: 3,
           variationPercentUntil: 4,

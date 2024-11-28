@@ -2,7 +2,6 @@ import { FlashAssessmentSuccessRateHandler } from '../../../../src/certification
 import { FlashAssessmentAlgorithmConfiguration } from '../../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 
 export const buildFlashAlgorithmConfiguration = ({
-  warmUpLength,
   forcedCompetences,
   maximumAssessmentLength,
   challengesBetweenSameCompetence,
@@ -14,7 +13,6 @@ export const buildFlashAlgorithmConfiguration = ({
   createdAt,
 } = {}) => {
   return new FlashAssessmentAlgorithmConfiguration({
-    warmUpLength,
     forcedCompetences,
     maximumAssessmentLength,
     challengesBetweenSameCompetence,

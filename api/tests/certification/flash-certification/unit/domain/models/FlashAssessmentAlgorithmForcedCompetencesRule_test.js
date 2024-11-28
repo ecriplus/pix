@@ -7,32 +7,16 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlg
       it('should return false', function () {
         const configuration = {
           forcedCompetences: [],
-          warmUpLength: 1,
-          answers: [],
         };
 
         expect(FlashAssessmentAlgorithmForcedCompetencesRule.isApplicable(configuration)).to.be.false;
       });
     });
 
-    describe('when there is forcedCompetences AND answers length is smaller than warmUpLength', function () {
-      it('should return false', function () {
-        const configuration = {
-          forcedCompetences: ['comp1'],
-          warmUpLength: 2,
-          answers: [],
-        };
-
-        expect(FlashAssessmentAlgorithmForcedCompetencesRule.isApplicable(configuration)).to.be.false;
-      });
-    });
-
-    describe('when there is forcedCompetence AND answers length is bigger or equal than warmUpLength', function () {
+    describe('when there is at least one forcedCompetence', function () {
       it('should return true', function () {
         const configuration = {
           forcedCompetences: ['comp1'],
-          warmUpLength: 0,
-          answers: [],
         };
 
         expect(FlashAssessmentAlgorithmForcedCompetencesRule.isApplicable(configuration)).to.be.true;
@@ -80,13 +64,12 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlg
           allChallenges,
           assessmentAnswers,
           availableChallenges: allChallenges,
-          warmUpLength: 0,
           forcedCompetences: ['comp1'],
         }),
       ).to.deep.equal([unansweredCompetenceUnansweredForcedChallenge]);
     });
 
-    it('should all the challenges if they are all answered', function () {
+    it('should return all the challenges if they are all answered', function () {
       const unansweredCompetenceUnansweredChallenge = domainBuilder.buildChallenge({
         id: 'challenge1',
         competenceId: 'competenceId1',
@@ -128,7 +111,6 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlg
           allChallenges,
           assessmentAnswers,
           availableChallenges: allChallenges,
-          warmUpLength: 0,
           forcedCompetences: ['comp1'],
         }),
       ).to.deep.equal(allChallenges);
