@@ -8,6 +8,7 @@ import * as knowledgeElementRepository from '../../../../../lib/infrastructure/r
 import * as tubeRepository from '../../../../../lib/infrastructure/repositories/tube-repository.js';
 import * as areaRepository from '../../../../../src/shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../../../src/shared/infrastructure/repositories/competence-repository.js';
+import * as skillRepository from '../../../../../src/shared/infrastructure/repositories/skill-repository.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import {
   CertifiedArea,
@@ -16,7 +17,6 @@ import {
   CertifiedSkill,
   CertifiedTube,
 } from '../../../../shared/domain/read-models/CertifiedProfile.js';
-import { skillDatasource } from '../../../../shared/infrastructure/datasources/learning-content/index.js';
 
 const get = async function (certificationCourseId) {
   const certificationDatas = await knex
@@ -64,14 +64,14 @@ const get = async function (certificationCourseId) {
 export { get };
 
 async function _createCertifiedSkills(skillIds, askedSkillIds) {
-  const learningContentSkills = await skillDatasource.findByRecordIds(skillIds);
-  return learningContentSkills.map((learningContentSkill) => {
+  const skills = await skillRepository.findByRecordIds(skillIds);
+  return skills.map((skill) => {
     return new CertifiedSkill({
-      id: learningContentSkill.id,
-      name: learningContentSkill.name,
-      hasBeenAskedInCertif: askedSkillIds.includes(learningContentSkill.id),
-      tubeId: learningContentSkill.tubeId,
-      difficulty: learningContentSkill.level,
+      id: skill.id,
+      name: skill.name,
+      hasBeenAskedInCertif: askedSkillIds.includes(skill.id),
+      tubeId: skill.tubeId,
+      difficulty: skill.difficulty,
     });
   });
 }

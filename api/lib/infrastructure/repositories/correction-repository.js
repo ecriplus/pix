@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+// TODO modifier les dépendances avec datasource en meme temps que la PR de lecture, pour des considérations de perf
 import { Answer } from '../../../src/evaluation/domain/models/Answer.js';
 import { Challenge } from '../../../src/shared/domain/models/Challenge.js';
 import { Correction } from '../../../src/shared/domain/models/Correction.js';

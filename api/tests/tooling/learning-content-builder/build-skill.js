@@ -1,5 +1,3 @@
-import * as skillDatasource from '../../../src/shared/infrastructure/datasources/learning-content/skill-datasource.js';
-
 const buildSkill = function buildSkill({
   id = 'recSK123',
   name = '@sau6',
@@ -10,7 +8,7 @@ const buildSkill = function buildSkill({
   tubeId = 'recTUB123',
   version = 1,
   level = 6,
-  status = skillDatasource.ACTIVE_STATUS,
+  status = 'actif',
 } = {}) {
   return {
     id,
