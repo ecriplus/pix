@@ -21,6 +21,10 @@ export default class OidcIdentityProviders extends Service {
       .map((provider) => provider.organizationName);
   }
 
+  get hasIdentityProviders() {
+    return this.list.length > 0;
+  }
+
   // TODO: Manage this through the API
   get featuredIdentityProvider() {
     return this.list.find((identityProvider) => {
