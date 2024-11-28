@@ -1,5 +1,27 @@
 # Pix Changelog
 
+## v4.248.0 (28/11/2024)
+
+
+### :rocket: Amélioration
+- [#10654](https://github.com/1024pix/pix/pull/10654) [FEATURE] Écrire le contenu pédagogique dans PG lors d'un refresh complet du cache (PIX-15469).
+- [#10662](https://github.com/1024pix/pix/pull/10662) [FEATURE] Ajout d'une description à Pix Certif et autorisation du passage des google Bots (PIX-15321).
+- [#10628](https://github.com/1024pix/pix/pull/10628) [FEATURE] Voir dans une Sidebar les grains accessibles (PIX-15396).
+- [#10649](https://github.com/1024pix/pix/pull/10649) [FEATURE] Activer le taux de couverture à des organisations précises (PIX-15449).
+
+### :building_construction: Tech
+- [#10667](https://github.com/1024pix/pix/pull/10667) [TECH] Ecrire dans PG le contenu pédagogique lorsqu'on provoque la création d'une nouvelle release (PIX-15470).
+- [#10666](https://github.com/1024pix/pix/pull/10666) [TECH] Améliorer la performance de la route de création d'organisation en masse (PIX-15486).
+- [#10655](https://github.com/1024pix/pix/pull/10655) [TECH] :recycle: Utiliser un seul système de vérification d'email.
+- [#10593](https://github.com/1024pix/pix/pull/10593) [TECH] Export de la liste blanche SCO.
+- [#10660](https://github.com/1024pix/pix/pull/10660) [TECH] Modifier le type de la colonne "id" de la table "learningcontent.missions" (PIX-15481).
+- [#10656](https://github.com/1024pix/pix/pull/10656) [TECH] Améliorer la composition de FooterLinks (PIX-15477).
+- [#10647](https://github.com/1024pix/pix/pull/10647) [TECH] Creer une source de données pour l'Api Data (PIX-15450).
+
+### :arrow_up: Montée de version
+- [#10670](https://github.com/1024pix/pix/pull/10670) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.23 (admin).
+- [#10646](https://github.com/1024pix/pix/pull/10646) [BUMP] Update dependency @1024pix/pix-ui to ^48.9.0 (certif).
+
 ## v4.247.0 (27/11/2024)
 
 
