@@ -118,7 +118,6 @@ async function _createScoCertificationCenter({ databaseBuilder }) {
 
 function _createV3CertificationConfiguration({ databaseBuilder }) {
   databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-    forcedCompetences: [],
     maximumAssessmentLength: 32,
     challengesBetweenSameCompetence: null,
     limitToOneQuestionPerTube: true,

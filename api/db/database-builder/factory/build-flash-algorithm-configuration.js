@@ -2,7 +2,6 @@ import { config } from '../../../src/shared/config.js';
 import { databaseBuffer } from '../database-buffer.js';
 
 const buildFlashAlgorithmConfiguration = function ({
-  forcedCompetences = [],
   maximumAssessmentLength = config.v3Certification.numberOfChallengesPerCourse,
   challengesBetweenSameCompetence = null,
   limitToOneQuestionPerTube = null,
@@ -14,7 +13,6 @@ const buildFlashAlgorithmConfiguration = function ({
   const values = {
     maximumAssessmentLength,
     challengesBetweenSameCompetence,
-    forcedCompetences: JSON.stringify(forcedCompetences),
     limitToOneQuestionPerTube,
     enablePassageByAllCompetences,
     variationPercent,

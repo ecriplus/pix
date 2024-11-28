@@ -10,7 +10,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         challengesBetweenSameCompetence: 3,
         variationPercent: 4,
         variationPercentUntil: 3,
-        forcedCompetences: ['comp1', 'comp2'],
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: false,
       });
@@ -21,7 +20,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
       // then
       const createdConfiguration = await knex('flash-algorithm-configurations').first();
       expect(createdConfiguration).to.deep.contains({
-        forcedCompetences: ['comp1', 'comp2'],
         maximumAssessmentLength: 2,
         challengesBetweenSameCompetence: 3,
         limitToOneQuestionPerTube: true,
@@ -48,7 +46,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
       // then
       const createdConfiguration = await knex('flash-algorithm-configurations').first();
       expect(createdConfiguration).to.deep.contains({
-        forcedCompetences: [],
         maximumAssessmentLength: 2,
         challengesBetweenSameCompetence: 3,
         limitToOneQuestionPerTube: true,
@@ -65,7 +62,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         challengesBetweenSameCompetence: 3,
         variationPercent: 4,
         variationPercentUntil: 3,
-        forcedCompetences: ['comp1', 'comp2'],
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: false,
       });
@@ -76,7 +72,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
       // then
       const createdConfiguration = await knex('flash-algorithm-configurations').first();
       expect(createdConfiguration).to.deep.contains({
-        forcedCompetences: ['comp1', 'comp2'],
         maximumAssessmentLength: 2,
         challengesBetweenSameCompetence: 3,
         limitToOneQuestionPerTube: true,

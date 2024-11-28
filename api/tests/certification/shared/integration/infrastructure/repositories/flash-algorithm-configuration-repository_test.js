@@ -15,14 +15,12 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
           variationPercentUntil: 3,
-          forcedCompetences: ['comp1', 'comp2'],
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: false,
         });
 
         const expectedFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
           ...flashAlgorithmConfiguration,
-          forcedCompetences: JSON.parse(flashAlgorithmConfiguration.forcedCompetences),
         });
 
         await databaseBuilder.commit();
@@ -43,7 +41,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
           variationPercentUntil: 3,
-          forcedCompetences: ['comp1', 'comp2'],
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: false,
           createdAt: new Date('2021-01-01'),
@@ -54,7 +51,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
           variationPercentUntil: 3,
-          forcedCompetences: ['comp1', 'comp2'],
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: false,
           createdAt: new Date('2020-01-01'),
@@ -62,7 +58,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
 
         const expectedFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
           ...latestFlashAlgorithmConfiguration,
-          forcedCompetences: JSON.parse(latestFlashAlgorithmConfiguration.forcedCompetences),
         });
 
         await databaseBuilder.commit();

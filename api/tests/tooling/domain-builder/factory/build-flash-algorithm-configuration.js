@@ -1,7 +1,6 @@
 import { FlashAssessmentAlgorithmConfiguration } from '../../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 
 export const buildFlashAlgorithmConfiguration = ({
-  forcedCompetences,
   maximumAssessmentLength,
   challengesBetweenSameCompetence,
   limitToOneQuestionPerTube,
@@ -11,7 +10,6 @@ export const buildFlashAlgorithmConfiguration = ({
   createdAt,
 } = {}) => {
   return new FlashAssessmentAlgorithmConfiguration({
-    forcedCompetences,
     maximumAssessmentLength,
     challengesBetweenSameCompetence,
     limitToOneQuestionPerTube,

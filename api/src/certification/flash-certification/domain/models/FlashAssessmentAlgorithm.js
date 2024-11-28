@@ -1,6 +1,5 @@
 import { config } from '../../../../shared/config.js';
 import { FlashAssessmentAlgorithmChallengesBetweenCompetencesRule } from './FlashAssessmentAlgorithmChallengesBetweenCompetencesRule.js';
-import { FlashAssessmentAlgorithmForcedCompetencesRule } from './FlashAssessmentAlgorithmForcedCompetencesRule.js';
 import { FlashAssessmentAlgorithmNonAnsweredSkillsRule } from './FlashAssessmentAlgorithmNonAnsweredSkillsRule.js';
 import { FlashAssessmentAlgorithmOneQuestionPerTubeRule } from './FlashAssessmentAlgorithmOneQuestionPerTubeRule.js';
 import { FlashAssessmentAlgorithmPassageByAllCompetencesRule } from './FlashAssessmentAlgorithmPassageByAllCompetencesRule.js';
@@ -10,7 +9,6 @@ const availableRules = [
   FlashAssessmentAlgorithmOneQuestionPerTubeRule,
   FlashAssessmentAlgorithmNonAnsweredSkillsRule,
   FlashAssessmentAlgorithmPassageByAllCompetencesRule,
-  FlashAssessmentAlgorithmForcedCompetencesRule,
   FlashAssessmentAlgorithmChallengesBetweenCompetencesRule,
 ];
 
@@ -26,7 +24,6 @@ class FlashAssessmentAlgorithm {
     this.ruleEngine = new FlashAssessmentAlgorithmRuleEngine(availableRules, {
       limitToOneQuestionPerTube: configuration.limitToOneQuestionPerTube,
       challengesBetweenSameCompetence: configuration.challengesBetweenSameCompetence,
-      forcedCompetences: configuration.forcedCompetences,
       enablePassageByAllCompetences: configuration.enablePassageByAllCompetences,
     });
   }

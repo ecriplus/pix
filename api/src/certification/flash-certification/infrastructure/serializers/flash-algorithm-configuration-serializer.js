@@ -4,7 +4,6 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function ({ flashAlgorithmConfiguration }) {
   const attributes = [
-    'forcedCompetences',
     'maximumAssessmentLength',
     'challengesBetweenSameCompetence',
     'limitToOneQuestionPerTube',

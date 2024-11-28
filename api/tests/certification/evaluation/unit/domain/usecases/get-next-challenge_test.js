@@ -655,7 +655,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       const competenceId = 'cmp1';
       // eslint-disable-next-line mocha/no-setup-in-describe
       Object.entries({
-        forcedCompetences: [competenceId],
         challengesBetweenSameCompetence: 2,
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: true,
