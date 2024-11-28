@@ -1,21 +1,24 @@
 import _ from 'lodash';
 
+import { LOCALE } from '../../../../shared/domain/constants.js';
+
+const { FRENCH_SPOKEN } = LOCALE;
 import { knex } from '../../../../../db/knex-database-connection.js';
 import * as knowledgeElementRepository from '../../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
-import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import * as areaRepository from '../../../../../src/shared/infrastructure/repositories/area-repository.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 import {
   CertifiedArea,
   CertifiedCompetence,
   CertifiedProfile,
   CertifiedSkill,
   CertifiedTube,
-} from '../../../../../src/shared/domain/read-models/CertifiedProfile.js';
+} from '../../../../shared/domain/read-models/CertifiedProfile.js';
 import {
-  areaDatasource,
   competenceDatasource,
   skillDatasource,
   tubeDatasource,
-} from '../../../../../src/shared/infrastructure/datasources/learning-content/index.js';
+} from '../../../../shared/infrastructure/datasources/learning-content/index.js';
 
 const get = async function (certificationCourseId) {
   const certificationDatas = await knex
@@ -106,13 +109,16 @@ async function _createCertifiedCompetences(certifiedTubes) {
 
 async function _createCertifiedAreas(certifiedCompetences) {
   const certifiedCompetencesByArea = _.groupBy(certifiedCompetences, 'areaId');
-  const learningContentAreas = await areaDatasource.findByRecordIds(Object.keys(certifiedCompetencesByArea));
-  return learningContentAreas.map((learningContentArea) => {
-    const name = learningContentArea.title_i18n.fr;
+  const areas = await areaRepository.findByRecordIds({
+    areaIds: Object.keys(certifiedCompetencesByArea),
+    locale: FRENCH_SPOKEN,
+  });
+  return areas.map((area) => {
+    const name = area.title;
     return new CertifiedArea({
-      id: learningContentArea.id,
+      id: area.id,
       name,
-      color: learningContentArea.color,
+      color: area.color,
     });
   });
 }
