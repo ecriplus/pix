@@ -11,7 +11,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         challengesBetweenSameCompetence: 3,
         variationPercent: 4,
         variationPercentUntil: 3,
-        doubleMeasuresUntil: 5,
         forcedCompetences: ['comp1', 'comp2'],
         minimumEstimatedSuccessRateRanges: [
           { type: 'fixed', startingChallengeIndex: 0, endingChallengeIndex: 7, value: 0.8 },
@@ -37,7 +36,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         enablePassageByAllCompetences: false,
         variationPercent: 4,
         variationPercentUntil: 3,
-        doubleMeasuresUntil: 5,
       });
     });
 
@@ -49,7 +47,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         challengesBetweenSameCompetence: 3,
         variationPercent: 4,
         variationPercentUntil: 3,
-        doubleMeasuresUntil: 5,
         minimumEstimatedSuccessRateRanges: [
           { type: 'fixed', startingChallengeIndex: 0, endingChallengeIndex: 7, value: 0.8 },
         ],
@@ -74,7 +71,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         enablePassageByAllCompetences: false,
         variationPercent: 4,
         variationPercentUntil: 3,
-        doubleMeasuresUntil: 5,
       });
     });
 
@@ -86,7 +82,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         challengesBetweenSameCompetence: 3,
         variationPercent: 4,
         variationPercentUntil: 3,
-        doubleMeasuresUntil: 5,
         forcedCompetences: ['comp1', 'comp2'],
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: false,
@@ -107,7 +102,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         enablePassageByAllCompetences: false,
         variationPercent: 4,
         variationPercentUntil: 3,
-        doubleMeasuresUntil: 5,
       });
     });
   });

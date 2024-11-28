@@ -32,7 +32,6 @@ module('Unit | Component | authenticated/certifications/flash-algorithm-configur
         challengesBetweenSameCompetence: 2,
         variationPercent: 3,
         variationPercentUntil: 4,
-        doubleMeasuresUntil: 5,
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: true,
       };
@@ -76,7 +75,6 @@ module('Unit | Component | authenticated/certifications/flash-algorithm-configur
           challengesBetweenSameCompetence: 2,
           variationPercent: 3,
           variationPercentUntil: 4,
-          doubleMeasuresUntil: 5,
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: true,
         };

@@ -16,7 +16,6 @@ describe('Integration | Domain | services | scoringDegradationService', function
       minimumEstimatedSuccessRateRanges: [],
       limitToOneQuestionPerTube: false,
       enablePassageByAllCompetences: false,
-      doubleMeasuresUntil: null,
       variationPercent: null,
       variationPercentUntil: null,
       createdAt: new Date('2020-01-01T00:00:00Z'),

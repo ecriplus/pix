@@ -104,7 +104,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
             variationPercentUntil: undefined,
-            doubleMeasuresUntil: undefined,
           })
           .returns({ capacity: 0 });
 
@@ -196,7 +195,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               capacity: config.v3Certification.defaultCandidateCapacity,
               variationPercent: undefined,
               variationPercentUntil: undefined,
-              doubleMeasuresUntil: undefined,
             })
             .returns({ capacity: 0 });
 
@@ -356,7 +354,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
             variationPercentUntil: undefined,
-            doubleMeasuresUntil: undefined,
           })
           .returns({ capacity: 0 });
 
@@ -440,7 +437,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
             variationPercentUntil: undefined,
-            doubleMeasuresUntil: undefined,
           })
           .returns({ capacity: 0 });
 
@@ -543,7 +539,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
             variationPercentUntil: undefined,
-            doubleMeasuresUntil: undefined,
           })
           .returns({ capacity: 0 });
 
@@ -722,7 +717,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
                 capacity: config.v3Certification.defaultCandidateCapacity,
                 variationPercent: configuration.variationPercent,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns({ capacity: 0 });
 

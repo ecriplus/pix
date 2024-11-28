@@ -125,7 +125,6 @@ function _createV3CertificationConfiguration({ databaseBuilder }) {
     minimumEstimatedSuccessRateRanges: [],
     limitToOneQuestionPerTube: true,
     enablePassageByAllCompetences: true,
-    doubleMeasuresUntil: null,
     variationPercent: 0.5,
     variationPercentUntil: null,
     createdAt: new Date('1977-10-19'),

@@ -11,7 +11,6 @@ const serialize = function ({ flashAlgorithmConfiguration }) {
     'minimumEstimatedSuccessRateRanges',
     'limitToOneQuestionPerTube',
     'enablePassageByAllCompetences',
-    'doubleMeasuresUntil',
     'variationPercent',
     'variationPercentUntil',
   ];

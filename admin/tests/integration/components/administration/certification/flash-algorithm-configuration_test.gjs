@@ -15,7 +15,6 @@ module('Integration | Component |  administration/certification/flash-algorithm-
       challengesBetweenSameCompetence: 3,
       variationPercent: 4,
       variationPercentUntil: 5,
-      doubleMeasuresUntil: 6,
       limitToOneQuestionPerTube: true,
       enablePassageByAllCompetences: false,
     };
@@ -41,9 +40,6 @@ module('Integration | Component |  administration/certification/flash-algorithm-
     const variationPercentUntil = await screen.getByRole('spinbutton', {
       name: t('pages.administration.certification.flash-algorithm-configuration.form.variationPercentUntil'),
     }).value;
-    const doubleMeasuresUntil = await screen.getByRole('spinbutton', {
-      name: t('pages.administration.certification.flash-algorithm-configuration.form.doubleMeasuresUntil'),
-    }).value;
     const limitToOneQuestionPerTube = await screen.getByRole('checkbox', {
       name: t('pages.administration.certification.flash-algorithm-configuration.form.limitToOneQuestionPerTube'),
     }).checked;
@@ -56,7 +52,6 @@ module('Integration | Component |  administration/certification/flash-algorithm-
     assert.strictEqual(challengesBetweenSameCompetence, '3');
     assert.strictEqual(variationPercent, '4');
     assert.strictEqual(variationPercentUntil, '5');
-    assert.strictEqual(doubleMeasuresUntil, '6');
     assert.true(limitToOneQuestionPerTube);
     assert.false(enablePassageByAllCompetences);
   });

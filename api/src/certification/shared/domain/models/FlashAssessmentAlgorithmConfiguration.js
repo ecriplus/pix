@@ -9,7 +9,6 @@ import { FlashAssessmentSuccessRateHandler } from '../../../flash-certification/
  * @param limitToOneQuestionPerTube - limits questions to one per tube
  * @param flashImplementation - the flash algorithm implementation
  * @param enablePassageByAllCompetences - enable or disable the passage through all competences
- * @param doubleMeasuresUntil - use the double measure strategy for specified number of challenges
  * @param variationPercent - maximum variation of estimated level between two answers
  * @param variationPercentUntil - maximum variation of estimated level between two answers for a specified number of challenges
  */
@@ -22,7 +21,6 @@ export class FlashAssessmentAlgorithmConfiguration {
     minimumEstimatedSuccessRateRanges = [],
     limitToOneQuestionPerTube = false,
     enablePassageByAllCompetences = false,
-    doubleMeasuresUntil,
     variationPercent,
     variationPercentUntil,
     createdAt,
@@ -34,7 +32,6 @@ export class FlashAssessmentAlgorithmConfiguration {
     this.minimumEstimatedSuccessRateRanges = minimumEstimatedSuccessRateRanges;
     this.limitToOneQuestionPerTube = limitToOneQuestionPerTube;
     this.enablePassageByAllCompetences = enablePassageByAllCompetences;
-    this.doubleMeasuresUntil = doubleMeasuresUntil;
     this.variationPercent = variationPercent;
     this.variationPercentUntil = variationPercentUntil;
     this.createdAt = createdAt;
@@ -51,7 +48,6 @@ export class FlashAssessmentAlgorithmConfiguration {
       ),
       limitToOneQuestionPerTube: this.limitToOneQuestionPerTube,
       enablePassageByAllCompetences: this.enablePassageByAllCompetences,
-      doubleMeasuresUntil: this.doubleMeasuresUntil,
       variationPercent: this.variationPercent,
       variationPercentUntil: this.variationPercentUntil,
       createdAt: this.createdAt,
@@ -66,7 +62,6 @@ export class FlashAssessmentAlgorithmConfiguration {
     minimumEstimatedSuccessRateRanges,
     limitToOneQuestionPerTube,
     enablePassageByAllCompetences,
-    doubleMeasuresUntil,
     variationPercent,
     variationPercentUntil,
     createdAt,
@@ -81,7 +76,6 @@ export class FlashAssessmentAlgorithmConfiguration {
         : minimumEstimatedSuccessRateRanges,
       limitToOneQuestionPerTube,
       enablePassageByAllCompetences,
-      doubleMeasuresUntil,
       variationPercent,
       variationPercentUntil,
       createdAt,

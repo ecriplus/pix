@@ -174,7 +174,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
             capacity: sinon.match.number,
             variationPercent: undefined,
             variationPercentUntil: undefined,
-            doubleMeasuresUntil: undefined,
           })
           .returns({
             capacity: expectedCapacity,
@@ -187,7 +186,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
             capacity: sinon.match.number,
             variationPercent: undefined,
             variationPercentUntil: undefined,
-            doubleMeasuresUntil: undefined,
           })
           .returns([
             {
@@ -290,7 +288,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -304,7 +301,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns([
                 {
@@ -397,7 +393,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                   capacity: sinon.match.number,
                   variationPercent: undefined,
                   variationPercentUntil: undefined,
-                  doubleMeasuresUntil: undefined,
                 })
                 .returns({
                   capacity: expectedCapacity,
@@ -410,7 +405,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                   capacity: sinon.match.number,
                   variationPercent: undefined,
                   variationPercentUntil: undefined,
-                  doubleMeasuresUntil: undefined,
                 })
                 .returns([
                   {
@@ -552,7 +546,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -565,7 +558,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns([
                 {
@@ -668,7 +660,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -681,7 +672,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns([
                 {
@@ -790,7 +780,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -803,7 +792,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns([
                 {
@@ -910,7 +898,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -923,7 +910,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns([
                 {
@@ -1035,7 +1021,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -1047,7 +1032,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns([
                 {
@@ -1159,7 +1143,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -1172,7 +1155,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns([
                 {
@@ -1282,7 +1264,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -1295,7 +1276,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns([
                 {
@@ -1400,7 +1380,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns({
                 capacity: expectedCapacity,
@@ -1413,7 +1392,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacity: sinon.match.number,
                 variationPercent: undefined,
                 variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns([
                 {

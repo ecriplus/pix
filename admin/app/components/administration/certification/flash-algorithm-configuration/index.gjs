@@ -16,7 +16,6 @@ export default class FlashAlgorithmConfiguration extends Component {
     challengesBetweenSameCompetence: this.args.model.challengesBetweenSameCompetence,
     variationPercent: this.args.model.variationPercent,
     variationPercentUntil: this.args.model.variationPercentUntil,
-    doubleMeasuresUntil: this.args.model.doubleMeasuresUntil,
     limitToOneQuestionPerTube: this.args.model.limitToOneQuestionPerTube,
     enablePassageByAllCompetences: this.args.model.enablePassageByAllCompetences,
   };

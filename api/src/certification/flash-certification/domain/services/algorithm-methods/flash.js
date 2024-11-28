@@ -47,7 +47,6 @@ function getCapacityAndErrorRate({
   allAnswers,
   challenges,
   capacity = DEFAULT_CAPACITY,
-  doubleMeasuresUntil = 0,
   variationPercent,
   variationPercentUntil,
 }) {
@@ -59,7 +58,6 @@ function getCapacityAndErrorRate({
     allAnswers,
     challenges,
     capacity,
-    doubleMeasuresUntil,
     variationPercent,
     variationPercentUntil,
   });
@@ -71,7 +69,6 @@ function getCapacityAndErrorRateHistory({
   allAnswers,
   challenges,
   capacity = DEFAULT_CAPACITY,
-  doubleMeasuresUntil = 0,
   variationPercent,
   variationPercentUntil,
 }) {
@@ -92,31 +89,16 @@ function getCapacityAndErrorRateHistory({
       answerIndex,
     );
 
-    if (!_shouldUseDoubleMeasure({ doubleMeasuresUntil, answerIndex, answersLength: allAnswers.length })) {
-      ({ latestCapacity, likelihood, normalizedPosteriori } = _singleMeasure({
-        challenges,
-        answer,
-        latestCapacity,
-        likelihood,
-        normalizedPosteriori,
-        variationPercent: variationPercentForCurrentAnswer,
-      }));
+    ({ latestCapacity, likelihood, normalizedPosteriori } = _singleMeasure({
+      challenges,
+      answer,
+      latestCapacity,
+      likelihood,
+      normalizedPosteriori,
+      variationPercent: variationPercentForCurrentAnswer,
+    }));
 
-      answerIndex++;
-    } else {
-      answer = allAnswers[answerIndex];
-      const answer2 = allAnswers[answerIndex + 1];
-      ({ latestCapacity, likelihood, normalizedPosteriori } = _doubleMeasure({
-        challenges,
-        answers: [answer, answer2],
-        latestCapacity,
-        likelihood,
-        normalizedPosteriori,
-        variationPercent: variationPercentForCurrentAnswer,
-      }));
-
-      answerIndex += 2;
-    }
+    answerIndex++;
 
     capacityHistory.push({
       answerId: answer.id,
@@ -136,31 +118,12 @@ function _defineVariationPercentForCurrentAnswer(variationPercent, variationPerc
   return variationPercentUntil >= answerIndex ? variationPercent : undefined;
 }
 
-function _shouldUseDoubleMeasure({ doubleMeasuresUntil, answerIndex, answersLength }) {
-  const isLastAnswer = answersLength === answerIndex + 1;
-  return doubleMeasuresUntil > answerIndex && !isLastAnswer;
-}
-
 function _singleMeasure({ challenges, answer, latestCapacity, likelihood, normalizedPosteriori, variationPercent }) {
   const answeredChallenge = _findChallengeForAnswer(challenges, answer);
 
   const normalizedPrior = _computeNormalizedPrior(latestCapacity);
 
   likelihood = _computeLikelihood(answeredChallenge, answer, likelihood);
-
-  normalizedPosteriori = _computeNormalizedPosteriori(likelihood, normalizedPrior);
-
-  latestCapacity = _computeCapacity(latestCapacity, variationPercent, normalizedPosteriori);
-  return { latestCapacity, likelihood, normalizedPosteriori };
-}
-
-function _doubleMeasure({ challenges, answers, latestCapacity, likelihood, normalizedPosteriori, variationPercent }) {
-  const answeredChallenge1 = _findChallengeForAnswer(challenges, answers[0]);
-  const answeredChallenge2 = _findChallengeForAnswer(challenges, answers[1]);
-
-  const normalizedPrior = _computeNormalizedPrior(latestCapacity);
-
-  likelihood = _computeDoubleMeasureLikelihood([answeredChallenge1, answeredChallenge2], answers, likelihood);
 
   normalizedPosteriori = _computeNormalizedPosteriori(likelihood, normalizedPrior);
 
@@ -186,17 +149,6 @@ function _computeLikelihood(answeredChallenge, answer, previousLikelihood) {
     return previousLikelihood[index] * probability;
   });
 }
-
-function _computeDoubleMeasureLikelihood(answeredChallenges, answers, previousLikelihood) {
-  return samples.map((sample, index) => {
-    let probability1 = _getProbability(sample, answeredChallenges[0].discriminant, answeredChallenges[0].difficulty);
-    let probability2 = _getProbability(sample, answeredChallenges[1].discriminant, answeredChallenges[1].difficulty);
-    probability1 = answers[0].isOk() ? probability1 : 1 - probability1;
-    probability2 = answers[1].isOk() ? probability2 : 1 - probability2;
-    return (previousLikelihood[index] * (probability1 + probability2)) / 2;
-  });
-}
-
 function _computeNormalizedPosteriori(likelihood, normalizedGaussian) {
   const posteriori = samples.map((_, index) => likelihood[index] * normalizedGaussian[index]);
 

@@ -113,7 +113,6 @@ class FlashAssessmentAlgorithm {
       capacity: initialCapacity,
       variationPercent: this._configuration.variationPercent,
       variationPercentUntil: this._configuration.variationPercentUntil,
-      doubleMeasuresUntil: this._configuration.doubleMeasuresUntil,
     });
   }
 
@@ -128,7 +127,6 @@ class FlashAssessmentAlgorithm {
       capacity: initialCapacity,
       variationPercent: this._configuration.variationPercent,
       variationPercentUntil: this._configuration.variationPercentUntil,
-      doubleMeasuresUntil: this._configuration.doubleMeasuresUntil,
     });
   }
 

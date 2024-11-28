@@ -6,7 +6,6 @@ export default class FlashAlgorithmConfiguration extends Model {
   @attr('number') challengesBetweenSameCompetence;
   @attr('number') variationPercent;
   @attr('number') variationPercentUntil;
-  @attr('number') doubleMeasuresUntil;
   @attr('boolean') limitToOneQuestionPerTube;
   @attr('boolean') enablePassageByAllCompetences;
   @attr('array') forcedCompetences;

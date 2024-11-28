@@ -16,7 +16,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
           variationPercentUntil: 3,
-          doubleMeasuresUntil: 5,
           forcedCompetences: ['comp1', 'comp2'],
           minimumEstimatedSuccessRateRanges: [
             { type: 'fixed', startingChallengeIndex: 0, endingChallengeIndex: 7, value: 0.8 },
@@ -50,7 +49,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
           variationPercentUntil: 3,
-          doubleMeasuresUntil: 5,
           forcedCompetences: ['comp1', 'comp2'],
           minimumEstimatedSuccessRateRanges: [
             { type: 'fixed', startingChallengeIndex: 0, endingChallengeIndex: 7, value: 0.8 },
@@ -66,7 +64,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
           variationPercentUntil: 3,
-          doubleMeasuresUntil: 5,
           forcedCompetences: ['comp1', 'comp2'],
           minimumEstimatedSuccessRateRanges: [
             { type: 'fixed', startingChallengeIndex: 0, endingChallengeIndex: 7, value: 0.8 },

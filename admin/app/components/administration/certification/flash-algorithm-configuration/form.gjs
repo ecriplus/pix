@@ -56,16 +56,6 @@ import { t } from 'ember-intl';
         }}</:label>
     </PixInput>
 
-    <PixInput
-      {{on "input" @updateNumberValues}}
-      @id="doubleMeasuresUntil"
-      @value={{@form.doubleMeasuresUntil}}
-      type="number"
-      min="0"
-    >
-      <:label>{{t "pages.administration.certification.flash-algorithm-configuration.form.doubleMeasuresUntil"}}</:label>
-    </PixInput>
-
     <PixCheckbox
       {{on "input" @updateCheckboxValues}}
       @id="limitToOneQuestionPerTube"
