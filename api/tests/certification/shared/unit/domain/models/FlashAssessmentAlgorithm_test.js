@@ -255,6 +255,5 @@ const _getAlgorithmConfig = (options) => {
 
 const _getCapacityAndErrorRateParams = (params) => ({
   variationPercent: undefined,
-  variationPercentUntil: undefined,
   ...params,
 });

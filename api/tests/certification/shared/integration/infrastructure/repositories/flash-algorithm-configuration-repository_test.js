@@ -14,7 +14,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           maximumAssessmentLength: 2,
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
-          variationPercentUntil: 3,
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: false,
         });
@@ -40,7 +39,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           maximumAssessmentLength: 2,
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
-          variationPercentUntil: 3,
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: false,
           createdAt: new Date('2021-01-01'),
@@ -50,7 +48,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           maximumAssessmentLength: 2,
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
-          variationPercentUntil: 3,
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: false,
           createdAt: new Date('2020-01-01'),

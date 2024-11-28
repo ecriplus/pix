@@ -103,7 +103,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             challenges: [nextChallengeToAnswer],
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
-            variationPercentUntil: undefined,
           })
           .returns({ capacity: 0 });
 
@@ -194,7 +193,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               challenges: [nextChallengeToAnswer, accessibleChallenge],
               capacity: config.v3Certification.defaultCandidateCapacity,
               variationPercent: undefined,
-              variationPercentUntil: undefined,
             })
             .returns({ capacity: 0 });
 
@@ -353,7 +351,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             challenges: [alreadyAnsweredChallenge, outdatedChallenge, nextChallengeToAnswer],
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
-            variationPercentUntil: undefined,
           })
           .returns({ capacity: 0 });
 
@@ -436,7 +433,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             challenges: [nextChallenge],
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
-            variationPercentUntil: undefined,
           })
           .returns({ capacity: 0 });
 
@@ -538,7 +534,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             challenges: [challengeWithOtherSkill],
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
-            variationPercentUntil: undefined,
           })
           .returns({ capacity: 0 });
 
@@ -707,7 +702,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
                 challenges: [nextChallengeToAnswer],
                 capacity: config.v3Certification.defaultCandidateCapacity,
                 variationPercent: configuration.variationPercent,
-                variationPercentUntil: undefined,
               })
               .returns({ capacity: 0 });
 

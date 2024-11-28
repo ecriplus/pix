@@ -7,7 +7,6 @@ import { config } from '../../../../shared/config.js';
  * @param flashImplementation - the flash algorithm implementation
  * @param enablePassageByAllCompetences - enable or disable the passage through all competences
  * @param variationPercent - maximum variation of estimated level between two answers
- * @param variationPercentUntil - maximum variation of estimated level between two answers for a specified number of challenges
  */
 export class FlashAssessmentAlgorithmConfiguration {
   constructor({
@@ -16,7 +15,6 @@ export class FlashAssessmentAlgorithmConfiguration {
     limitToOneQuestionPerTube = false,
     enablePassageByAllCompetences = false,
     variationPercent,
-    variationPercentUntil,
     createdAt,
   } = {}) {
     this.maximumAssessmentLength = maximumAssessmentLength;
@@ -24,7 +22,6 @@ export class FlashAssessmentAlgorithmConfiguration {
     this.limitToOneQuestionPerTube = limitToOneQuestionPerTube;
     this.enablePassageByAllCompetences = enablePassageByAllCompetences;
     this.variationPercent = variationPercent;
-    this.variationPercentUntil = variationPercentUntil;
     this.createdAt = createdAt;
   }
 
@@ -35,7 +32,6 @@ export class FlashAssessmentAlgorithmConfiguration {
       limitToOneQuestionPerTube: this.limitToOneQuestionPerTube,
       enablePassageByAllCompetences: this.enablePassageByAllCompetences,
       variationPercent: this.variationPercent,
-      variationPercentUntil: this.variationPercentUntil,
       createdAt: this.createdAt,
     };
   }
@@ -46,7 +42,6 @@ export class FlashAssessmentAlgorithmConfiguration {
     limitToOneQuestionPerTube,
     enablePassageByAllCompetences,
     variationPercent,
-    variationPercentUntil,
     createdAt,
   }) {
     return new FlashAssessmentAlgorithmConfiguration({
@@ -55,7 +50,6 @@ export class FlashAssessmentAlgorithmConfiguration {
       limitToOneQuestionPerTube,
       enablePassageByAllCompetences,
       variationPercent,
-      variationPercentUntil,
       createdAt,
     });
   }

@@ -9,7 +9,6 @@ const serialize = function ({ flashAlgorithmConfiguration }) {
     'limitToOneQuestionPerTube',
     'enablePassageByAllCompetences',
     'variationPercent',
-    'variationPercentUntil',
   ];
   return new Serializer('flash-algorithm-configurations', {
     transform(config) {

@@ -14,7 +14,6 @@ describe('Integration | Domain | services | scoringDegradationService', function
       limitToOneQuestionPerTube: false,
       enablePassageByAllCompetences: false,
       variationPercent: null,
-      variationPercentUntil: null,
       createdAt: new Date('2020-01-01T00:00:00Z'),
     });
 

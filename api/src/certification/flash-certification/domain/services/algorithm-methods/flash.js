@@ -43,13 +43,7 @@ function getPossibleNextChallenges({
   return _findBestPossibleChallenges(challengesWithReward, minimalSuccessRate, capacity);
 }
 
-function getCapacityAndErrorRate({
-  allAnswers,
-  challenges,
-  capacity = DEFAULT_CAPACITY,
-  variationPercent,
-  variationPercentUntil,
-}) {
+function getCapacityAndErrorRate({ allAnswers, challenges, capacity = DEFAULT_CAPACITY, variationPercent }) {
   if (allAnswers.length === 0) {
     return { capacity, errorRate: DEFAULT_ERROR_RATE };
   }
@@ -59,19 +53,12 @@ function getCapacityAndErrorRate({
     challenges,
     capacity,
     variationPercent,
-    variationPercentUntil,
   });
 
   return capacityHistory.at(-1);
 }
 
-function getCapacityAndErrorRateHistory({
-  allAnswers,
-  challenges,
-  capacity = DEFAULT_CAPACITY,
-  variationPercent,
-  variationPercentUntil,
-}) {
+function getCapacityAndErrorRateHistory({ allAnswers, challenges, capacity = DEFAULT_CAPACITY, variationPercent }) {
   let latestCapacity = capacity;
 
   let likelihood = samples.map(() => DEFAULT_PROBABILITY_TO_ANSWER);
@@ -83,11 +70,6 @@ function getCapacityAndErrorRateHistory({
 
   while (answerIndex < allAnswers.length) {
     answer = allAnswers[answerIndex];
-    const variationPercentForCurrentAnswer = _defineVariationPercentForCurrentAnswer(
-      variationPercent,
-      variationPercentUntil,
-      answerIndex,
-    );
 
     ({ latestCapacity, likelihood, normalizedPosteriori } = _singleMeasure({
       challenges,
@@ -95,7 +77,7 @@ function getCapacityAndErrorRateHistory({
       latestCapacity,
       likelihood,
       normalizedPosteriori,
-      variationPercent: variationPercentForCurrentAnswer,
+      variationPercent,
     }));
 
     answerIndex++;
@@ -108,14 +90,6 @@ function getCapacityAndErrorRateHistory({
   }
 
   return capacityHistory;
-}
-
-function _defineVariationPercentForCurrentAnswer(variationPercent, variationPercentUntil, answerIndex) {
-  if (!variationPercentUntil) {
-    return variationPercent;
-  }
-
-  return variationPercentUntil >= answerIndex ? variationPercent : undefined;
 }
 
 function _singleMeasure({ challenges, answer, latestCapacity, likelihood, normalizedPosteriori, variationPercent }) {

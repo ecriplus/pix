@@ -415,8 +415,7 @@
             "enablePassageByAllCompetences": "Forcer le passage par les 16 compétences",
             "limitToOneQuestionPerTube": "Limiter à une question par sujet",
             "maximumAssessmentLength": "Nombre de questions",
-            "variationPercent": "Capage de la capacité (en % )",
-            "variationPercentUntil": "Nombre de questions pour le capage de la capacité"
+            "variationPercent": "Capage de la capacité (en % )"
           }
         },
         "sco-whitelist": {

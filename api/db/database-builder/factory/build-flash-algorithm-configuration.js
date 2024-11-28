@@ -7,7 +7,6 @@ const buildFlashAlgorithmConfiguration = function ({
   limitToOneQuestionPerTube = null,
   enablePassageByAllCompetences = false,
   variationPercent = null,
-  variationPercentUntil = null,
   createdAt = new Date(),
 } = {}) {
   const values = {
@@ -16,7 +15,6 @@ const buildFlashAlgorithmConfiguration = function ({
     limitToOneQuestionPerTube,
     enablePassageByAllCompetences,
     variationPercent,
-    variationPercentUntil,
     createdAt,
   };
 

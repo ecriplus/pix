@@ -40,18 +40,6 @@ import { t } from 'ember-intl';
       <:label>{{t "pages.administration.certification.flash-algorithm-configuration.form.variationPercent"}}</:label>
     </PixInput>
 
-    <PixInput
-      {{on "input" @updateNumberValues}}
-      @id="variationPercentUntil"
-      @value={{@form.variationPercentUntil}}
-      type="number"
-      min="0"
-    >
-      <:label>{{t
-          "pages.administration.certification.flash-algorithm-configuration.form.variationPercentUntil"
-        }}</:label>
-    </PixInput>
-
     <PixCheckbox
       {{on "input" @updateCheckboxValues}}
       @id="limitToOneQuestionPerTube"

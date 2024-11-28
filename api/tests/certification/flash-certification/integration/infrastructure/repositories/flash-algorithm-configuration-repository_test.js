@@ -9,7 +9,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         maximumAssessmentLength: 2,
         challengesBetweenSameCompetence: 3,
         variationPercent: 4,
-        variationPercentUntil: 3,
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: false,
       });
@@ -25,7 +24,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: false,
         variationPercent: 4,
-        variationPercentUntil: 3,
       });
     });
 
@@ -35,7 +33,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         maximumAssessmentLength: 2,
         challengesBetweenSameCompetence: 3,
         variationPercent: 4,
-        variationPercentUntil: 3,
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: false,
       });
@@ -51,7 +48,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: false,
         variationPercent: 4,
-        variationPercentUntil: 3,
       });
     });
 
@@ -61,7 +57,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         maximumAssessmentLength: 2,
         challengesBetweenSameCompetence: 3,
         variationPercent: 4,
-        variationPercentUntil: 3,
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: false,
       });
@@ -77,7 +72,6 @@ describe('Certification | Flash-certification | Integration | Infrastructure | R
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: false,
         variationPercent: 4,
-        variationPercentUntil: 3,
       });
     });
   });

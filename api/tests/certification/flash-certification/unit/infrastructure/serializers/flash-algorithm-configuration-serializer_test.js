@@ -14,7 +14,6 @@ describe('Unit | Certification | flash-certification | Serializer | flash-algori
             'maximum-assessment-length': 3,
             'challenges-between-same-competence': 4,
             'variation-percent': 6,
-            'variation-percent-until': 7,
             'limit-to-one-question-per-tube': false,
             'enable-passage-by-all-competences': true,
           },
@@ -25,7 +24,6 @@ describe('Unit | Certification | flash-certification | Serializer | flash-algori
         maximumAssessmentLength: 3,
         challengesBetweenSameCompetence: 4,
         variationPercent: 6,
-        variationPercentUntil: 7,
         limitToOneQuestionPerTube: false,
         enablePassageByAllCompetences: true,
       });

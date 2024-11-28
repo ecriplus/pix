@@ -152,7 +152,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-campaign-assessment
               allAnswers,
               capacity: config.v3Certification.defaultCandidateCapacity,
               variationPercent: undefined,
-              variationPercentUntil: undefined,
             })
             .returns({
               capacity: 0,

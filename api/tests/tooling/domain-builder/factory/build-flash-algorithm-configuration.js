@@ -6,7 +6,6 @@ export const buildFlashAlgorithmConfiguration = ({
   limitToOneQuestionPerTube,
   enablePassageByAllCompetences,
   variationPercent,
-  variationPercentUntil,
   createdAt,
 } = {}) => {
   return new FlashAssessmentAlgorithmConfiguration({
@@ -15,7 +14,6 @@ export const buildFlashAlgorithmConfiguration = ({
     limitToOneQuestionPerTube,
     enablePassageByAllCompetences,
     variationPercent,
-    variationPercentUntil,
     createdAt,
   });
 };

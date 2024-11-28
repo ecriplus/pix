@@ -40,7 +40,6 @@ const register = async (server) => {
             limitToOneQuestionPerTube: Joi.boolean().optional(),
             enablePassageByAllCompetences: Joi.boolean().optional(),
             variationPercent: Joi.number().min(0).max(1).allow(null).optional(),
-            variationPercentUntil: Joi.number().min(0).allow(null).optional(),
           }),
         },
         handler: flashAssessmentConfigurationController.createFlashAssessmentConfiguration,
