@@ -57,10 +57,6 @@ class FlashAssessmentAlgorithm {
     return this.flashAlgorithmImplementation.getPossibleNextChallenges({
       availableChallenges: challengesAfterRulesApplication,
       capacity,
-      options: {
-        challengesBetweenSameCompetence: this._configuration.challengesBetweenSameCompetence,
-        minimalSuccessRate: 0,
-      },
     });
   }
 

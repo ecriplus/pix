@@ -162,7 +162,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-campaign-assessment
             .withArgs({
               availableChallenges: [secondChallenge],
               capacity: 0,
-              options: sinon.match.object,
             })
             .returns([secondChallenge]);
 
@@ -273,7 +272,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge-for-campaign-assessment
             .withArgs({
               challenges,
               capacity: 0,
-              options: sinon.match.object,
             })
             .returns({
               hasAssessmentEnded: false,

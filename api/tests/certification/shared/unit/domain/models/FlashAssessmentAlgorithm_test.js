@@ -11,11 +11,6 @@ const baseFlashAssessmentAlgorithmConfig = {
 describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlgorithm', function () {
   let flashAlgorithmImplementation;
 
-  const baseGetNextChallengeOptions = {
-    challengesBetweenSameCompetence: 2,
-    minimalSuccessRate: 0,
-  };
-
   beforeEach(function () {
     flashAlgorithmImplementation = {
       getPossibleNextChallenges: sinon.stub(),
@@ -156,7 +151,6 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlg
             .withArgs({
               availableChallenges: expectedChallenges,
               capacity: computedCapacity,
-              options: baseGetNextChallengeOptions,
             })
             .returns(expectedChallenges);
 
@@ -233,7 +227,6 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlg
             .withArgs({
               availableChallenges: expectedChallenges,
               capacity: computedCapacity,
-              options: baseGetNextChallengeOptions,
             })
             .returns(expectedChallenges);
 

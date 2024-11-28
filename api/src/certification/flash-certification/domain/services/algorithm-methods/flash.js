@@ -24,11 +24,7 @@ export {
   getReward,
 };
 
-function getPossibleNextChallenges({
-  availableChallenges,
-  capacity = DEFAULT_CAPACITY,
-  options: { minimalSuccessRate = 0 } = {},
-} = {}) {
+function getPossibleNextChallenges({ availableChallenges, capacity = DEFAULT_CAPACITY } = {}) {
   const challengesWithReward = availableChallenges.map((challenge) => {
     return {
       challenge,
@@ -40,7 +36,7 @@ function getPossibleNextChallenges({
     };
   });
 
-  return _findBestPossibleChallenges(challengesWithReward, minimalSuccessRate, capacity);
+  return _findBestPossibleChallenges(challengesWithReward, capacity);
 }
 
 function getCapacityAndErrorRate({ allAnswers, challenges, capacity = DEFAULT_CAPACITY, variationPercent }) {
@@ -177,8 +173,9 @@ function _limitCapacityVariation(previousCapacity, nextCapacity, variationPercen
     : Math.max(nextCapacity, previousCapacity - gap);
 }
 
-function _findBestPossibleChallenges(challengesWithReward, minimumSuccessRate, capacity) {
-  const hasMinimumSuccessRate = ({ challenge }) => {
+function _findBestPossibleChallenges(challengesWithReward, capacity) {
+  const canChallengeBeSuccessful = ({ challenge }) => {
+    const minimumSuccessRate = 0;
     const successProbability = _getProbability(capacity, challenge.discriminant, challenge.difficulty);
 
     return successProbability >= minimumSuccessRate;
@@ -186,7 +183,7 @@ function _findBestPossibleChallenges(challengesWithReward, minimumSuccessRate, c
 
   const orderedChallengesWithReward = orderBy(
     challengesWithReward,
-    [hasMinimumSuccessRate, 'reward'],
+    [canChallengeBeSuccessful, 'reward'],
     ['desc', 'desc'],
   );
 

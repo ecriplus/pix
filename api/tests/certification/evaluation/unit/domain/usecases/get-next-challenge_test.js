@@ -110,7 +110,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             availableChallenges: [nextChallengeToAnswer],
             capacity: 0,
-            options: sinon.match.any,
           })
           .returns([nextChallengeToAnswer]);
 
@@ -200,7 +199,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs({
               availableChallenges: [nextChallengeToAnswer, accessibleChallenge],
               capacity: 0,
-              options: sinon.match.any,
             })
             .returns([nextChallengeToAnswer]);
 
@@ -358,7 +356,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             availableChallenges: [nextChallengeToAnswer],
             capacity: 0,
-            options: sinon.match.any,
           })
           .returns([nextChallengeToAnswer]);
 
@@ -440,7 +437,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             availableChallenges: [nextChallenge],
             capacity: 0,
-            options: sinon.match.any,
           })
           .returns([nextChallenge]);
 
@@ -541,7 +537,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             availableChallenges: [challengeWithOtherSkill],
             capacity: 0,
-            options: sinon.match.any,
           })
           .returns([challengeWithOtherSkill]);
 
@@ -709,7 +704,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               .withArgs({
                 availableChallenges: [nextChallengeToAnswer],
                 capacity: 0,
-                options: sinon.match.any,
               })
               .returns([nextChallengeToAnswer]);
 
