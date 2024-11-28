@@ -67,7 +67,6 @@ const _createDefaultAlgorithmConfiguration = () => {
   return new FlashAssessmentAlgorithmConfiguration({
     forcedCompetences: [],
     limitToOneQuestionPerTube: false,
-    minimumEstimatedSuccessRateRanges: [],
     enablePassageByAllCompetences: false,
   });
 };

@@ -57,14 +57,12 @@ class FlashAssessmentAlgorithm {
       throw new RangeError('No eligible challenges in referential');
     }
 
-    const minimalSuccessRate = this.#computeMinimalSuccessRate(assessmentAnswers.length);
-
     return this.flashAlgorithmImplementation.getPossibleNextChallenges({
       availableChallenges: challengesAfterRulesApplication,
       capacity,
       options: {
         challengesBetweenSameCompetence: this._configuration.challengesBetweenSameCompetence,
-        minimalSuccessRate,
+        minimalSuccessRate: 0,
       },
     });
   }
@@ -82,22 +80,6 @@ class FlashAssessmentAlgorithm {
       assessmentAnswers,
       allChallenges: challenges,
     });
-  }
-
-  #computeMinimalSuccessRate(questionIndex) {
-    const filterConfiguration = this.#findApplicableSuccessRateConfiguration(questionIndex);
-
-    if (!filterConfiguration) {
-      return 0;
-    }
-
-    return filterConfiguration.getMinimalSuccessRate(questionIndex);
-  }
-
-  #findApplicableSuccessRateConfiguration(questionIndex) {
-    return this._configuration.minimumEstimatedSuccessRateRanges.find((successRateRange) =>
-      successRateRange.isApplicable(questionIndex),
-    );
   }
 
   getCapacityAndErrorRate({

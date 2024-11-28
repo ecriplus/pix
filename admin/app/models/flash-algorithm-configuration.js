@@ -8,5 +8,4 @@ export default class FlashAlgorithmConfiguration extends Model {
   @attr('boolean') limitToOneQuestionPerTube;
   @attr('boolean') enablePassageByAllCompetences;
   @attr('array') forcedCompetences;
-  @attr('array') minimumEstimatedSuccessRateRanges;
 }

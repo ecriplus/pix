@@ -16,7 +16,6 @@ describe('Unit | Certification | flash-certification | Serializer | flash-algori
             'challenges-between-same-competence': 4,
             'variation-percent': 6,
             'variation-percent-until': 7,
-            'minimum-estimated-success-rate-ranges': [],
             'limit-to-one-question-per-tube': false,
             'enable-passage-by-all-competences': true,
           },
@@ -29,7 +28,6 @@ describe('Unit | Certification | flash-certification | Serializer | flash-algori
         challengesBetweenSameCompetence: 4,
         variationPercent: 6,
         variationPercentUntil: 7,
-        minimumEstimatedSuccessRateRanges: [],
         limitToOneQuestionPerTube: false,
         enablePassageByAllCompetences: true,
       });

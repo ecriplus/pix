@@ -7,7 +7,6 @@ const serialize = function ({ flashAlgorithmConfiguration }) {
     'forcedCompetences',
     'maximumAssessmentLength',
     'challengesBetweenSameCompetence',
-    'minimumEstimatedSuccessRateRanges',
     'limitToOneQuestionPerTube',
     'enablePassageByAllCompetences',
     'variationPercent',

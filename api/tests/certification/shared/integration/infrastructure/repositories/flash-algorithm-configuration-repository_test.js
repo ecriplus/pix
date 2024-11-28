@@ -16,9 +16,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           variationPercent: 4,
           variationPercentUntil: 3,
           forcedCompetences: ['comp1', 'comp2'],
-          minimumEstimatedSuccessRateRanges: [
-            { type: 'fixed', startingChallengeIndex: 0, endingChallengeIndex: 7, value: 0.8 },
-          ],
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: false,
         });
@@ -26,7 +23,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
         const expectedFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
           ...flashAlgorithmConfiguration,
           forcedCompetences: JSON.parse(flashAlgorithmConfiguration.forcedCompetences),
-          minimumEstimatedSuccessRateRanges: JSON.parse(flashAlgorithmConfiguration.minimumEstimatedSuccessRateRanges),
         });
 
         await databaseBuilder.commit();
@@ -48,9 +44,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           variationPercent: 4,
           variationPercentUntil: 3,
           forcedCompetences: ['comp1', 'comp2'],
-          minimumEstimatedSuccessRateRanges: [
-            { type: 'fixed', startingChallengeIndex: 0, endingChallengeIndex: 7, value: 0.8 },
-          ],
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: false,
           createdAt: new Date('2021-01-01'),
@@ -62,9 +55,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           variationPercent: 4,
           variationPercentUntil: 3,
           forcedCompetences: ['comp1', 'comp2'],
-          minimumEstimatedSuccessRateRanges: [
-            { type: 'fixed', startingChallengeIndex: 0, endingChallengeIndex: 7, value: 0.8 },
-          ],
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: false,
           createdAt: new Date('2020-01-01'),
@@ -73,9 +63,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
         const expectedFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
           ...latestFlashAlgorithmConfiguration,
           forcedCompetences: JSON.parse(latestFlashAlgorithmConfiguration.forcedCompetences),
-          minimumEstimatedSuccessRateRanges: JSON.parse(
-            latestFlashAlgorithmConfiguration.minimumEstimatedSuccessRateRanges,
-          ),
         });
 
         await databaseBuilder.commit();

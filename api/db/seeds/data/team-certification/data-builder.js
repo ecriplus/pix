@@ -121,7 +121,6 @@ function _createV3CertificationConfiguration({ databaseBuilder }) {
     forcedCompetences: [],
     maximumAssessmentLength: 32,
     challengesBetweenSameCompetence: null,
-    minimumEstimatedSuccessRateRanges: [],
     limitToOneQuestionPerTube: true,
     enablePassageByAllCompetences: true,
     variationPercent: 0.5,

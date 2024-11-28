@@ -657,14 +657,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       Object.entries({
         forcedCompetences: [competenceId],
         challengesBetweenSameCompetence: 2,
-        minimumEstimatedSuccessRateRanges: [
-          {
-            type: 'fixed',
-            startingChallengeIndex: 0,
-            endingChallengeIndex: 10,
-            value: 0.1,
-          },
-        ],
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: true,
         variationPercent: 20,

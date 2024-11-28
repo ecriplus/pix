@@ -12,7 +12,6 @@ describe('Integration | Domain | services | scoringDegradationService', function
       forcedCompetences: [],
       maximumAssessmentLength: 4,
       challengesBetweenSameCompetence: 0,
-      minimumEstimatedSuccessRateRanges: [],
       limitToOneQuestionPerTube: false,
       enablePassageByAllCompetences: false,
       variationPercent: null,
