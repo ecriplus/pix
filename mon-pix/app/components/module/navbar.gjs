@@ -52,6 +52,7 @@ export default class ModulixNavbar extends Component {
 
   <template>
     <nav
+      id="module-navbar"
       class="module-navbar"
       aria-label={{t "pages.modulix.flashcards.navigation.currentStep" current=@currentStep total=@totalSteps}}
     >

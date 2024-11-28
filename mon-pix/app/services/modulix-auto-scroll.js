@@ -13,10 +13,11 @@ export default class ModulixAutoScroll extends Service {
 
   focusAndScroll(
     htmlElement,
-    { scroll, userPrefersReducedMotion, getWindowScrollY } = {
+    { scroll, userPrefersReducedMotion, getWindowScrollY, getNavbar } = {
       scroll: this.#scroll,
       userPrefersReducedMotion: this.#userPrefersReducedMotion,
       getWindowScrollY: this.#getWindowScrollY,
+      getNavbar: this.#getNavbar,
     },
   ) {
     if (this.modulixPreviewMode.isEnabled) {
@@ -27,7 +28,7 @@ export default class ModulixAutoScroll extends Service {
 
     const elementY = htmlElement.getBoundingClientRect().top + getWindowScrollY();
     scroll({
-      top: elementY - this.#SCROLL_OFFSET_PX,
+      top: elementY - this.#getScrollOffset({ getNavbar }),
       behavior: userPrefersReducedMotion() ? 'instant' : 'smooth',
     });
   }
@@ -43,5 +44,9 @@ export default class ModulixAutoScroll extends Service {
 
   #getWindowScrollY() {
     return window.scrollY;
+  }
+
+  #getNavbar() {
+    return document.getElementById('module-navbar');
   }
 }
