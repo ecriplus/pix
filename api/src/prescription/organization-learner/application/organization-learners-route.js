@@ -1,11 +1,41 @@
 import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { organizationLearnersController } from './organization-learners-controller.js';
 
 const register = async function (server) {
   server.route([
+    {
+      method: 'GET',
+      path: '/api/organizations/{organizationId}/organization-learners-level-by-tubes',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkUserIsAdminInOrganization,
+            assign: 'checkUserIsAdminInOrganization',
+          },
+          {
+            method: securityPreHandlers.makeCheckOrganizationHasFeature(ORGANIZATION_FEATURE.COVER_RATE.key),
+            assign: 'makeCheckOrganizationHasFeature',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            organizationId: identifiersType.organizationId,
+          }),
+        },
+        handler: organizationLearnersController.getAnalysisByTubes,
+        notes: [
+          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
+            '- Cette route retourne le taux de couverture par tubes pour l\'organisation"- ' +
+            "- L'organisation doit avoir la feature COVER_RATE d'activée" +
+            "- L'utisateur doit être admin de l'organisation'",
+        ],
+        tags: ['api', 'organization', 'analysis'],
+      },
+    },
     {
       method: 'GET',
       path: '/api/organizations/{organizationId}/attestations/{attestationKey}',

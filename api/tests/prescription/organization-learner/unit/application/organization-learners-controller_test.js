@@ -97,4 +97,26 @@ describe('Unit | Application | Organization-Learner | organization-learners-cont
       });
     });
   });
+
+  describe('#getLearnersLevelsByTubes', function () {
+    it('should return data', async function () {
+      // given
+      const organizationId = 123;
+
+      sinon.stub(usecases, 'getAnalysisByTubes');
+      usecases.getAnalysisByTubes.withArgs({ organizationId }).resolves();
+
+      const request = {
+        params: {
+          organizationId,
+        },
+      };
+
+      // when
+      const response = await organizationLearnersController.getAnalysisByTubes(request, hFake);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+  });
 });

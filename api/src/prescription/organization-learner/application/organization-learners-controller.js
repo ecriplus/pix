@@ -17,7 +17,14 @@ const getAttestationZipForDivisions = async function (request, h) {
   }
 };
 
+const getAnalysisByTubes = async function (request, h) {
+  const organizationId = request.params.organizationId;
+  const result = await usecases.getAnalysisByTubes({ organizationId });
+  return h.response(result).code(200);
+};
+
 const organizationLearnersController = {
+  getAnalysisByTubes,
   getAttestationZipForDivisions,
 };
 
