@@ -1,6 +1,6 @@
 import * as certifiedProfileRepository from '../../../../../../src/certification/results/infrastructure/repositories/certified-profile-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
+import { KnowledgeElement } from '../../../../../../src/shared/domain/models/index.js';
 import { CertifiedProfile } from '../../../../../../src/shared/domain/read-models/CertifiedProfile.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 

@@ -1,8 +1,8 @@
 import { knex } from '../../../db/knex-database-connection.js';
+import * as tubeRepository from '../../../lib/infrastructure/repositories/tube-repository.js';
 import { CAMPAIGN_FEATURES } from '../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../src/shared/domain/errors.js';
 import { Campaign } from '../../../src/shared/domain/models/Campaign.js';
-import { tubeDatasource } from '../../../src/shared/infrastructure/datasources/learning-content/tube-datasource.js';
 import * as skillRepository from '../../../src/shared/infrastructure/repositories/skill-repository.js';
 import { DomainTransaction } from '../DomainTransaction.js';
 
@@ -127,7 +127,7 @@ const findTubes = async function ({ campaignId }) {
 
 const findAllSkills = async function ({ campaignId }) {
   const tubeIds = await findTubes({ campaignId });
-  const tubes = await tubeDatasource.findByRecordIds(tubeIds);
+  const tubes = await tubeRepository.findByRecordIds(tubeIds);
   const skillIds = tubes.flatMap((tube) => tube.skillIds);
   return skillRepository.findByRecordIds(skillIds);
 };

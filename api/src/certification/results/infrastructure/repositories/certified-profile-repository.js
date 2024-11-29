@@ -1,21 +1,22 @@
 import _ from 'lodash';
 
+import { LOCALE } from '../../../../shared/domain/constants.js';
+
+const { FRENCH_SPOKEN } = LOCALE;
 import { knex } from '../../../../../db/knex-database-connection.js';
 import * as knowledgeElementRepository from '../../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
-import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import * as tubeRepository from '../../../../../lib/infrastructure/repositories/tube-repository.js';
+import * as areaRepository from '../../../../../src/shared/infrastructure/repositories/area-repository.js';
+import * as competenceRepository from '../../../../../src/shared/infrastructure/repositories/competence-repository.js';
+import * as skillRepository from '../../../../../src/shared/infrastructure/repositories/skill-repository.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 import {
   CertifiedArea,
   CertifiedCompetence,
   CertifiedProfile,
   CertifiedSkill,
   CertifiedTube,
-} from '../../../../../src/shared/domain/read-models/CertifiedProfile.js';
-import {
-  areaDatasource,
-  competenceDatasource,
-  skillDatasource,
-  tubeDatasource,
-} from '../../../../../src/shared/infrastructure/datasources/learning-content/index.js';
+} from '../../../../shared/domain/read-models/CertifiedProfile.js';
 
 const get = async function (certificationCourseId) {
   const certificationDatas = await knex
@@ -63,56 +64,60 @@ const get = async function (certificationCourseId) {
 export { get };
 
 async function _createCertifiedSkills(skillIds, askedSkillIds) {
-  const learningContentSkills = await skillDatasource.findByRecordIds(skillIds);
-  return learningContentSkills.map((learningContentSkill) => {
+  const skills = await skillRepository.findByRecordIds(skillIds);
+  return skills.map((skill) => {
     return new CertifiedSkill({
-      id: learningContentSkill.id,
-      name: learningContentSkill.name,
-      hasBeenAskedInCertif: askedSkillIds.includes(learningContentSkill.id),
-      tubeId: learningContentSkill.tubeId,
-      difficulty: learningContentSkill.level,
+      id: skill.id,
+      name: skill.name,
+      hasBeenAskedInCertif: askedSkillIds.includes(skill.id),
+      tubeId: skill.tubeId,
+      difficulty: skill.difficulty,
     });
   });
 }
 
 async function _createCertifiedTubes(certifiedSkills) {
   const certifiedSkillsByTube = _.groupBy(certifiedSkills, 'tubeId');
-  const learningContentTubes = await tubeDatasource.findByRecordIds(Object.keys(certifiedSkillsByTube));
-  return learningContentTubes.map((learningContentTube) => {
-    const name = learningContentTube.practicalTitle_i18n.fr;
+  const tubes = await tubeRepository.findByRecordIds(Object.keys(certifiedSkillsByTube), FRENCH_SPOKEN);
+  return tubes.map((tube) => {
+    const name = tube.practicalTitle;
     return new CertifiedTube({
-      id: learningContentTube.id,
+      id: tube.id,
       name,
-      competenceId: learningContentTube.competenceId,
+      competenceId: tube.competenceId,
     });
   });
 }
 
 async function _createCertifiedCompetences(certifiedTubes) {
   const certifiedTubesByCompetence = _.groupBy(certifiedTubes, 'competenceId');
-  const learningContentCompetences = await competenceDatasource.findByRecordIds(
-    Object.keys(certifiedTubesByCompetence),
-  );
-  return learningContentCompetences.map((learningContentCompetence) => {
-    const name = learningContentCompetence.name_i18n.fr;
+  const competences = await competenceRepository.findByRecordIds({
+    competenceIds: Object.keys(certifiedTubesByCompetence),
+    locale: FRENCH_SPOKEN,
+  });
+  return competences.map((competence) => {
+    const name = competence.name;
     return new CertifiedCompetence({
-      id: learningContentCompetence.id,
+      id: competence.id,
       name,
-      areaId: learningContentCompetence.areaId,
-      origin: learningContentCompetence.origin,
+      areaId: competence.areaId,
+      origin: competence.origin,
     });
   });
 }
 
 async function _createCertifiedAreas(certifiedCompetences) {
   const certifiedCompetencesByArea = _.groupBy(certifiedCompetences, 'areaId');
-  const learningContentAreas = await areaDatasource.findByRecordIds(Object.keys(certifiedCompetencesByArea));
-  return learningContentAreas.map((learningContentArea) => {
-    const name = learningContentArea.title_i18n.fr;
+  const areas = await areaRepository.findByRecordIds({
+    areaIds: Object.keys(certifiedCompetencesByArea),
+    locale: FRENCH_SPOKEN,
+  });
+  return areas.map((area) => {
+    const name = area.title;
     return new CertifiedArea({
-      id: learningContentArea.id,
+      id: area.id,
       name,
-      color: learningContentArea.color,
+      color: area.color,
     });
   });
 }

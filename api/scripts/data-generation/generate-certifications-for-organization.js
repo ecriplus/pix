@@ -4,7 +4,7 @@ import _ from 'lodash';
 import yargs from 'yargs';
 
 import { disconnect, knex } from '../../db/knex-database-connection.js';
-import { competenceDatasource } from '../../src/shared/infrastructure/datasources/learning-content/competence-datasource.js';
+import * as competenceRepository from '../../src/shared/infrastructure/repositories/competence-repository.js';
 
 const CERTIF_ERROR_RATE = 0.05;
 const CERTIF_REJECTED_RATE = 0.15;
@@ -79,7 +79,7 @@ async function _do({ organizationId, certificationCenterId }) {
     await _createCertificationResultsInError({ assessmentIds: errorAssessmentIds, transaction });
     console.log('\tOK');
 
-    const competences = await competenceDatasource.list();
+    const competences = await competenceRepository.list();
     const pixCompetences = competences.filter((competence) => competence.origin === 'Pix');
     const rejectedCount = parseInt(allAssessmentIds.length * CERTIF_REJECTED_RATE);
     const rejectedAssessmentIds = _.sampleSize(allAssessmentIds, rejectedCount);
