@@ -4,6 +4,8 @@ import { getQuestResultsForCampaignParticipation } from '../../../../../src/ques
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipation', function () {
+  let campaignParticipationRepository;
+
   let questRepository, eligibilityRepository, rewardRepository, campaignParticipationId, userId;
 
   beforeEach(function () {
@@ -11,6 +13,7 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
     campaignParticipationId = 2;
     questRepository = { findAll: sinon.stub() };
     eligibilityRepository = { find: sinon.stub() };
+    campaignParticipationRepository = { getCampaignByParticipationId: sinon.stub() };
     rewardRepository = { getByQuestAndUserId: sinon.stub() };
   });
 
@@ -56,6 +59,7 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
       userId,
       questRepository,
       eligibilityRepository,
+      campaignParticipationRepository,
       rewardRepository,
     });
 
@@ -77,6 +81,9 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
         rewardId: 20,
       }),
     ]);
+    campaignParticipationRepository.getCampaignByParticipationId
+      .withArgs({ campaignParticipationId })
+      .resolves([{ targetProfileId: 40 }]);
 
     eligibilityRepository.find.withArgs({ userId }).resolves([
       new Eligibility({
@@ -90,6 +97,7 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
       userId,
       questRepository,
       eligibilityRepository,
+      campaignParticipationRepository,
       rewardRepository,
     });
 
