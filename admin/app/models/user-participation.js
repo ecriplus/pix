@@ -8,6 +8,7 @@ export const campaignParticipationStatuses = {
 
 export default class UserParticipation extends Model {
   @attr campaignId;
+  @attr campaignParticipationId;
   @attr('string') campaignCode;
   @attr('string') participantExternalId;
   @attr('string') status;

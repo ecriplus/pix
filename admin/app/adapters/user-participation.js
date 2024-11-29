@@ -3,8 +3,8 @@ import ApplicationAdapter from './application';
 export default class UserParticipations extends ApplicationAdapter {
   namespace = 'api/admin';
 
-  urlForDeleteRecord(id) {
+  urlForDeleteRecord(id, modelName, snapshot) {
     const baseUrl = this.buildURL();
-    return `${baseUrl}/campaign-participations/${id}`;
+    return `${baseUrl}/campaign-participations/${snapshot.attr('campaignParticipationId')}`;
   }
 }

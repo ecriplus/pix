@@ -108,11 +108,10 @@ module('Integration | Component | users | campaign-participation', function (hoo
       assert.dom(screen.getByText('01/01/2020')).exists();
     });
 
-    test('it should display deletedByFullName and deletedAt if participation is deleted', async function (assert) {
+    test('it should display deletedAt if participation is deleted', async function (assert) {
       // given
       const participation = EmberObject.create({
         deletedAt: new Date('2022-01-01'),
-        deletedByFullName: 'le coupable',
       });
       const participations = [participation];
 
@@ -120,8 +119,7 @@ module('Integration | Component | users | campaign-participation', function (hoo
       const screen = await render(<template><CampaignParticipations @participations={{participations}} /></template>);
 
       // then
-      assert.dom(screen.getByText('01/01/2022 par')).exists();
-      assert.dom(screen.getByRole('link', { name: 'le coupable' })).exists();
+      assert.dom(screen.getByText('01/01/2022')).exists();
     });
 
     test('it should not be able to see action button "Supprimer"', async function (assert) {

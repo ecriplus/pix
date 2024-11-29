@@ -233,7 +233,10 @@ module('Acceptance | authenticated/users/get', function (hooks) {
   module('when administrator click on delete participation button', function () {
     test('marks participation as deleted', async function (assert) {
       // given
-      const userParticipation = this.server.create('user-participation', { deletedAt: null });
+      const userParticipation = this.server.create('user-participation', {
+        campaignParticipation: 123,
+        deletedAt: null,
+      });
       const user = server.create('user');
       user.participations = [userParticipation];
       user.save();
@@ -254,8 +257,7 @@ module('Acceptance | authenticated/users/get', function (hooks) {
 
       // then
       assert.dom(screen.getByText('La participation du prescrit a été supprimée avec succès.')).exists();
-      assert.dom(screen.getByText('12/12/2012 par')).exists();
-      assert.dom(screen.getByRole('link', { name: 'Terry Dicule' })).exists();
+      assert.dom(screen.getByText('12/12/2012')).exists();
     });
   });
 
