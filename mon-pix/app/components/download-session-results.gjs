@@ -8,20 +8,23 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import ENV from 'mon-pix/config/environment';
+import PixWindow from 'mon-pix/utils/pix-window';
 
 export default class DownloadSessionResults extends Component {
   @tracked showErrorMessage = false;
   @service requestManager;
 
   @action
-  async downloadSessionResults() {
+  async downloadSessionResults(event) {
+    event.preventDefault();
     this.showErrorMessage = false;
 
     try {
+      const token = decodeURIComponent(PixWindow.getLocationHash().slice(1));
       await this.requestManager.request({
-        url: `${ENV.APP.API_HOST}/api/xxx`,
+        url: `${ENV.APP.API_HOST}/api/sessions/download-all-results`,
         method: 'POST',
-        body: { token: 'xxx' },
+        body: JSON.stringify({ token }),
       });
     } catch {
       this.showErrorMessage = true;
