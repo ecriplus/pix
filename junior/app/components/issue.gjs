@@ -45,7 +45,7 @@ export default class Issue extends Component {
       </RobotDialog>
       <div class="issue-buttons">
         {{#if @refreshAction}}
-          <PixButton class="issue-button" @triggerAction={{@refreshAction}} @iconBefore="arrows-rotate" @size="large">
+          <PixButton class="issue-button" @triggerAction={{@refreshAction}} @iconBefore="refresh" @size="large">
             {{t "pages.error.refresh"}}
           </PixButton>
         {{/if}}
@@ -54,10 +54,10 @@ export default class Issue extends Component {
           class="issue-button"
           @size="large"
           @triggerAction={{this.goToHome}}
-          @iconBefore="arrow-left"
+          @iconBefore="arrowLeft"
         >{{t "pages.error.backHome"}}</PixButton>
       </div>
     </div>
-    <img src="/images/logo.svg" alt="Pix Junior" class="issue-logo" />
+    <img src="/images/logo-in-one-line.svg" alt="Pix Junior" class="issue-logo" />
   </template>
 }

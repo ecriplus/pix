@@ -9,7 +9,7 @@
   {{#if @answerHasBeenValidated}}
     <PixButton
       class="pix1d-button pix1d-button--success"
-      @iconAfter="arrow-right"
+      @iconAfter="arrowRight"
       @triggerAction={{@nextAction}}
       @size="large"
     >
@@ -20,7 +20,7 @@
   {{else if @isLesson}}
     <PixButton
       class="pix1d-button"
-      @iconAfter="arrow-right"
+      @iconAfter="arrowRight"
       @isDisabled={{@disableLessonButton}}
       @triggerAction={{@skipChallenge}}
       @size="large"
