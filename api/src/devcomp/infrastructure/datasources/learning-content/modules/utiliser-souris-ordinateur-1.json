@@ -82,7 +82,7 @@
             "type": "image",
             "url": "https://i.imgur.com/0bI4zEN.png",
             "alt": "-",
-            "alternativeText": "<p>Photographies de quatres souris filaires de tailles, formes et couleurs différentes. Photographies de 3 souris sans fil différentes&nbsp;:</p> <ul><li>Une souris blanche d'ordinateur mac, </li><li> une souris sans fil reliée par un connecteur USB Bluetooth, </li><li>une souris reliée par bluetooth.</li></ul>"
+            "alternativeText": "<ul><li>Les souris avec un fil : photographies de 4 souris avec fil de taille, forme et couleur différentes.</li><li>Les souris sans fil : photographies de 3 souris sans fil&nbsp;différentes reliées par des connecteurs USB Bluetooth .</li></ul>"
           }
         },
         {
@@ -90,7 +90,7 @@
           "element": {
             "id": "c785bfd1-e8b8-42a0-8354-333d5acf6555",
             "type": "text",
-            "content": "<h3><span aria-hidden=\"true\">🔎</span> Observez : votre souris a-t-elle un fil ou non ?</h3>"
+            "content": "<h3><span aria-hidden=\"true\">🔎</span> Observez : votre souris a-t-elle un fil ?</h3>"
           }
         }
       ]
