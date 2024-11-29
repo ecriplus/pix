@@ -101,7 +101,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   describe('find user', function () {
     describe('#findByExternalIdentifier', function () {
       context('when identityProvider is generic', function () {
-        it('should return user informations for the given external identity id and identity provider', async function () {
+        it('returns user informations for the given external identity id and identity provider', async function () {
           // given
           const externalIdentityId = 'external-identity-id';
           const userId = databaseBuilder.factory.buildUser().id;
@@ -125,7 +125,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
 
       context('when identityProvider is POLE_EMPLOI', function () {
-        it('should return user informations for the given external identity id and identity provider', async function () {
+        it('returns user informations for the given external identity id and identity provider', async function () {
           // given
           const externalIdentityId = 'external-identity-id';
           const userId = databaseBuilder.factory.buildUser().id;
@@ -147,7 +147,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         });
       });
 
-      it('should return undefined when no user was found with this external identity id', async function () {
+      it('returns undefined when no user was found with this external identity id', async function () {
         // given
         const badId = 'not-exist-external-identity-id';
 
@@ -161,7 +161,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         return expect(foundUser).to.be.null;
       });
 
-      it('should return null when the identity provider provided is PIX', async function () {
+      it('returns null when the identity provider provided is PIX', async function () {
         // given
         const externalIdentityId = 'external-identity-id';
         const userId = databaseBuilder.factory.buildUser().id;
@@ -183,7 +183,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
     describe('#findPaginatedFiltered', function () {
       context('when there are users in the database', function () {
-        it('should return an array of users', async function () {
+        it('returns an array of users', async function () {
           // given
           const filter = {};
           const page = { number: 1, size: 10 };
@@ -281,7 +281,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
 
       context('when there are lots of users (> 10) in the database', function () {
-        it('should return paginated matching users', async function () {
+        it('returns paginated matching users', async function () {
           // given
           const filter = {};
           const page = { number: 1, size: 3 };
@@ -308,7 +308,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
             return databaseBuilder.commit();
           });
 
-          it('should return only users matching "first name" if given in filter', async function () {
+          it('returns only users matching "first name" if given in filter', async function () {
             // given
             const filter = { firstName: 'Go' };
             const page = { number: 1, size: 10 };
@@ -341,7 +341,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
             await databaseBuilder.commit();
           });
 
-          it('should return only users matching "last name" if given in filter', async function () {
+          it('returns only users matching "last name" if given in filter', async function () {
             // given
             const filter = { lastName: 'walk' };
             const page = { number: 1, size: 10 };
@@ -380,7 +380,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
             await databaseBuilder.commit();
           });
 
-          it('should return only users matching "email" if given in filter even if it is in uppercase in database', async function () {
+          it('returns only users matching "email" if given in filter even if it is in uppercase in database', async function () {
             // given
             const filter = { email: 'panda' };
             const page = { number: 1, size: 10 };
@@ -399,7 +399,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
             expect(pagination).to.deep.equal(expectedPagination);
           });
 
-          it('should return only users matching "email" if given in filter', async function () {
+          it('returns only users matching "email" if given in filter', async function () {
             // given
             const filter = { email: 'pix.fr' };
             const page = { number: 1, size: 10 };
@@ -415,7 +415,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         });
 
         context('when there are multiple users matching the same "username" search pattern', function () {
-          it('should return only users matching "username" if given in filter', async function () {
+          it('returns only users matching "username" if given in filter', async function () {
             // given
             each(
               [
@@ -499,7 +499,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
               await databaseBuilder.commit();
             });
 
-            it('should return only users matching "first name" AND "last name" AND "email" AND "username" if given in filter', async function () {
+            it('returns only users matching "first name" AND "last name" AND "email" AND "username" if given in filter', async function () {
               // given
               const filter = { firstName: 'fn_ok', lastName: 'ln_ok', email: 'email_ok', username: 'username_ok' };
               const page = { number: 1, size: 10 };
@@ -538,7 +538,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           databaseBuilder.factory.buildUser({ firstName: 'Piccolo' });
           return databaseBuilder.commit();
         });
-        it('should return only exact "first name" matching if given in filter', async function () {
+        it('returns only exact "first name" matching if given in filter', async function () {
           // given
           const filter = { firstName: 'Son Gohan' };
           const page = { number: 1, size: 10 };
@@ -553,7 +553,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           // then
           expect(map(matchingUsers, 'firstName')).to.have.members(['Son Gohan']);
         });
-        it('should return no matching if matching is fuzzy', async function () {
+        it('returns no matching if matching is fuzzy', async function () {
           // given
           const filter = { firstName: 'Go' };
           const page = { number: 1, size: 10 };
@@ -574,7 +574,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#findAnotherUserByEmail', function () {
-      it('should return a list of a single user if email already used', async function () {
+      it('returns a list of a single user if email already used', async function () {
         // given
         const currentUser = databaseBuilder.factory.buildUser({
           email: 'current.user@example.net',
@@ -593,7 +593,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(foundUsers[0].email).to.equal(anotherUser.email);
       });
 
-      it('should return a list of a single user if email case insensitive already used', async function () {
+      it('returns a list of a single user if email case insensitive already used', async function () {
         // given
         const currentUser = databaseBuilder.factory.buildUser({
           email: 'current.user@example.net',
@@ -612,7 +612,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(foundUsers[0].email).to.equal(anotherUser.email);
       });
 
-      it('should return an empty list if email is not used', async function () {
+      it('returns an empty list if email is not used', async function () {
         // given
         const currentUser = databaseBuilder.factory.buildUser({
           email: 'current.user@example.net',
@@ -628,7 +628,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#findAnotherUserByUsername', function () {
-      it('should return a list of a single user if username already used', async function () {
+      it('returns a list of a single user if username already used', async function () {
         // given
         const currentUser = databaseBuilder.factory.buildUser({
           username: 'current.user.name',
@@ -647,7 +647,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(foundUsers[0].username).to.equal(anotherUser.username);
       });
 
-      it('should return an empty list if username is not used', async function () {
+      it('returns an empty list if username is not used', async function () {
         // given
         const currentUser = databaseBuilder.factory.buildUser({
           username: 'current.user.name',
@@ -665,7 +665,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
   describe('get user', function () {
     describe('#getByEmail', function () {
-      it('should handle a rejection, when user id is not found', async function () {
+      it('handles a rejection, when user id is not found', async function () {
         // given
         const emailThatDoesNotExist = '10093';
 
@@ -676,7 +676,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(result).to.be.instanceOf(UserNotFoundError);
       });
 
-      it('should return the user with email case insensitive', async function () {
+      it('returns the user with email case insensitive', async function () {
         // given
         const mixCaseEmail = 'USER@example.net';
         const userInDb = databaseBuilder.factory.buildUser({ email: mixCaseEmail });
@@ -703,7 +703,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         await databaseBuilder.commit();
       });
 
-      it('should return user informations for the given SAML ID', async function () {
+      it('returns user informations for the given SAML ID', async function () {
         // when
         const user = await userRepository.getBySamlId('some-saml-id');
 
@@ -712,7 +712,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(user.id).to.equal(userInDb.id);
       });
 
-      it('should return undefined when no user was found with this SAML ID', async function () {
+      it('returns undefined when no user was found with this SAML ID', async function () {
         // given
         const badSamlId = 'bad-saml-id';
 
@@ -725,7 +725,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#get', function () {
-      it('should return the found user', async function () {
+      it('returns the found user', async function () {
         // given
         const userInDb = databaseBuilder.factory.buildUser(userToInsert);
         await databaseBuilder.commit();
@@ -744,7 +744,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(user.updatedAt.toISOString()).to.equal('2019-03-12T19:37:03.000Z');
       });
 
-      it('should return a UserNotFoundError if no user is found', async function () {
+      it('returns a UserNotFoundError if no user is found', async function () {
         // given
         const nonExistentUserId = 678;
 
@@ -784,7 +784,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         await _insertUserWithOrganizationsAndCertificationCenterAccesses();
       });
 
-      it('should return user informations for the given email', async function () {
+      it('returns user informations for the given email', async function () {
         // given
         const expectedUser = new User(userInDB);
 
@@ -802,7 +802,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(foundUser.locale).to.equal(expectedUser.locale);
       });
 
-      it('should return user informations for the given email (case insensitive)', async function () {
+      it('returns user informations for the given email (case insensitive)', async function () {
         // given
         const expectedUser = new User(userInDB);
         const uppercaseEmailAlreadyInDb = userInDB.email.toUpperCase();
@@ -816,7 +816,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(foundUser.email).to.equal(expectedUser.email);
       });
 
-      it('should return user informations for the given username (case insensitive)', async function () {
+      it('returns user informations for the given username (case insensitive)', async function () {
         // given
         const savedUser = databaseBuilder.factory.buildUser({
           username: 'thomas123',
@@ -839,7 +839,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(foundUser.cgu).to.equal(savedUser.cgu);
       });
 
-      it('should return authenticationMethods associated to the user', async function () {
+      it('returns authenticationMethods associated to the user', async function () {
         // when
         const foundUser = await userRepository.getByUsernameOrEmailWithRolesAndPassword(userInDB.email);
 
@@ -856,7 +856,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         );
       });
 
-      it('should only return actives certification center membership associated to the user', async function () {
+      it('only returns actives certification center membership associated to the user', async function () {
         // given
         const email = 'lilou@example.net';
         const user = databaseBuilder.factory.buildUser({ email });
@@ -882,7 +882,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(certificationCenterMembership.id).to.equal(activeCertificationCenterMembership.id);
       });
 
-      it('should return membership associated to the user', async function () {
+      it('returns membership associated to the user', async function () {
         // when
         const user = await userRepository.getByUsernameOrEmailWithRolesAndPassword(userInDB.email);
 
@@ -917,7 +917,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         });
       });
 
-      it('should return certification center membership associated to the user', async function () {
+      it('returns certification center membership associated to the user', async function () {
         // given
         const user = databaseBuilder.factory.buildUser({ email: 'super@example.net' });
         const certificationCenterMembershipId = databaseBuilder.factory.buildCertificationCenterMembership({
@@ -937,7 +937,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(firstCertificationCenterMembership.id).to.equal(certificationCenterMembershipId);
       });
 
-      it('should reject with a UserNotFound error when no user was found with this email', async function () {
+      it('rejects with a UserNotFound error when no user was found with this email', async function () {
         // given
         const unusedEmail = 'kikou@pix.fr';
 
@@ -948,7 +948,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(result).to.be.instanceOf(UserNotFoundError);
       });
 
-      it('should reject with a UserNotFound error when no user was found with this username', async function () {
+      it('rejects with a UserNotFound error when no user was found with this username', async function () {
         // given
         const unusedUsername = 'john.doe0909';
 
@@ -961,7 +961,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#getWithMemberships', function () {
-      it('should return user with his/her membership(s) for the given id', async function () {
+      it('returns user with his/her membership(s) for the given id', async function () {
         // given
         const user = databaseBuilder.factory.buildUser.withRawPassword({
           firstName: 'Sarah',
@@ -1010,7 +1010,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
 
       context('when the membership associated to the user has been disabled', function () {
-        it('should not return the membership', async function () {
+        it('does not return the membership', async function () {
           // given
           const userId = databaseBuilder.factory.buildUser().id;
           const organizationId = databaseBuilder.factory.buildOrganization().id;
@@ -1030,7 +1030,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         });
       });
 
-      it('should reject with a UserNotFound error when no user was found with the given id', async function () {
+      it('rejects with a UserNotFound error when no user was found with the given id', async function () {
         // given
         const unknownUserId = 666;
 
@@ -1043,7 +1043,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#getWithCertificationCenterMemberships', function () {
-      it('should return user for the given id', async function () {
+      it('returns user for the given id', async function () {
         // given
         await _insertUserWithOrganizationsAndCertificationCenterAccesses();
         const expectedUser = new User(userInDB);
@@ -1061,7 +1061,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(user.cgu).to.equal(expectedUser.cgu);
       });
 
-      it('should return actives certification center membership associated to the user', async function () {
+      it('returns actives certification center membership associated to the user', async function () {
         // when
         const userInDB = databaseBuilder.factory.buildUser(userToInsert);
         const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
@@ -1094,7 +1094,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(associatedCertificationCenter.name).to.equal(certificationCenter.name);
       });
 
-      it('should reject with a UserNotFound error when no user was found with the given id', async function () {
+      it('rejects with a UserNotFound error when no user was found with the given id', async function () {
         // given
         await _insertUserWithOrganizationsAndCertificationCenterAccesses();
         const unknownUserId = 666;
@@ -1108,7 +1108,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#getForObfuscation', function () {
-      it('should return a domain user with authentication methods only when found', async function () {
+      it('returns a domain user with authentication methods only when found', async function () {
         // given
         const userInDb = databaseBuilder.factory.buildUser(userToInsert);
         await databaseBuilder.commit();
@@ -1121,7 +1121,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(user.email).to.equal(userInDb.email);
       });
 
-      it('should throw an error when user not found', async function () {
+      it('throws an error when user not found', async function () {
         // given
         const userIdThatDoesNotExist = '99999';
 
@@ -1134,7 +1134,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#getUserDetailsForAdmin', function () {
-      it('should return the found user', async function () {
+      it('returns the found user', async function () {
         // given
         const createdAt = new Date('2021-01-01');
         const emailConfirmedAt = new Date('2022-01-01');
@@ -1183,7 +1183,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(userDetailsForAdmin.isPixAgent).to.be.false;
       });
 
-      it('should return a UserNotFoundError if no user is found', async function () {
+      it('returns a UserNotFoundError if no user is found', async function () {
         // given
         const nonExistentUserId = 678;
 
@@ -1195,7 +1195,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
 
       context('when user has organizationLearners', function () {
-        it('should return the user with his organizationLearner', async function () {
+        it('returns the user with his organizationLearner', async function () {
           // given
           const randomUser = databaseBuilder.factory.buildUser();
           const userInDB = databaseBuilder.factory.buildUser(userToInsert);
@@ -1287,7 +1287,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
 
       context("when user doesn't have organizationLearners", function () {
-        it('should return the user with an empty array', async function () {
+        it('returns the user with an empty array', async function () {
           // given
           const userInDB = databaseBuilder.factory.buildUser(userToInsert);
           await databaseBuilder.commit();
@@ -1330,7 +1330,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
 
       context('when user is anonymized', function () {
-        it('should return an empty array of authenticationMethods', async function () {
+        it('returns an empty array of authenticationMethods', async function () {
           // given
           const userInDB = databaseBuilder.factory.buildUser({
             ...userToInsert,
@@ -1350,7 +1350,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           expect(hasBeenAnonymisedBy).to.equal(1);
         });
 
-        it("should return the anonymisedBy's first and last names", async function () {
+        it("returns the anonymisedBy's first and last names", async function () {
           // given
           const adminWhoAnonymisedUser = databaseBuilder.factory.buildUser({
             id: 1,
@@ -1375,7 +1375,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
 
       context('when user has login details', function () {
-        it('should return the user with his login details', async function () {
+        it('returns the user with his login details', async function () {
           // given
           const userInDB = databaseBuilder.factory.buildUser(userToInsert);
           databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
@@ -1438,7 +1438,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#updateEmail', function () {
-      it('should update the user email', async function () {
+      it('updates the user email', async function () {
         // given
         const newEmail = 'new_email@example.net';
         const userInDb = databaseBuilder.factory.buildUser({ ...userToInsert, email: 'old_email@example.net' });
@@ -1486,7 +1486,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         await databaseBuilder.commit();
       });
 
-      it('should update the user email', async function () {
+      it('updates the user email', async function () {
         // given
         const newEmail = 'new_email@example.net';
         const userAttributes = {
@@ -1506,7 +1506,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(updatedUser.updatedAt).to.deep.equal(now);
       });
 
-      it('should rollback the user email in case of error in transaction', async function () {
+      it('rolls back the user email in case of error in transaction', async function () {
         // given
         const newEmail = 'new_email@example.net';
         const userAttributes = {
@@ -1631,7 +1631,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#updateUsername', function () {
-      it('should update the username', async function () {
+      it('updates the username', async function () {
         // given
         const username = 'blue.carter0701';
         const userId = databaseBuilder.factory.buildUser(userToInsert).id;
@@ -1649,7 +1649,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(updatedUser.updatedAt).to.deep.equal(now);
       });
 
-      it('should throw UserNotFoundError when user id not found', async function () {
+      it('throws UserNotFoundError when user id not found', async function () {
         // given
         const wrongUserId = 0;
         const username = 'blue.carter0701';
@@ -1666,7 +1666,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#updatePixOrgaTermsOfServiceAcceptedToTrue', function () {
-      it('should return the model with pixOrgaTermsOfServiceAccepted flag updated to true', async function () {
+      it('returns the model with pixOrgaTermsOfServiceAccepted flag updated to true', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser({ pixOrgaTermsOfServiceAccepted: false }).id;
         await databaseBuilder.commit();
@@ -1679,7 +1679,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(result.pixOrgaTermsOfServiceAccepted).to.be.true;
       });
 
-      it('should update the lastPixOrgaTermsOfServiceValidatedAt', async function () {
+      it('updates the lastPixOrgaTermsOfServiceValidatedAt', async function () {
         // given
         const user = databaseBuilder.factory.buildUser({
           pixOrgaTermsOfServiceAccepted: true,
@@ -1697,7 +1697,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#updatePixCertifTermsOfServiceAcceptedToTrue', function () {
-      it('should return the model with pixCertifTermsOfServiceAccepted flag updated to true', async function () {
+      it('returns the model with pixCertifTermsOfServiceAccepted flag updated to true', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser({ pixCertifTermsOfServiceAccepted: false }).id;
         await databaseBuilder.commit();
@@ -1710,7 +1710,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(actualUser.pixCertifTermsOfServiceAccepted).to.be.true;
       });
 
-      it('should update the pixCertifTermsOfServiceValidatedAt', async function () {
+      it('updates the pixCertifTermsOfServiceValidatedAt', async function () {
         // given
         const user = databaseBuilder.factory.buildUser({
           pixCertifTermsOfServiceAccepted: true,
@@ -1728,7 +1728,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#updateHasSeenAssessmentInstructionsToTrue', function () {
-      it('should return the model with hasSeenAssessmentInstructions flag updated to true', async function () {
+      it('returns the model with hasSeenAssessmentInstructions flag updated to true', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser({ hasSeenAssessmentInstructions: false }).id;
         await databaseBuilder.commit();
@@ -1743,7 +1743,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#updateHasSeenNewDashboardInfoToTrue', function () {
-      it('should return the model with hasSeenNewDashboardInfo flag updated to true', async function () {
+      it('returns the model with hasSeenNewDashboardInfo flag updated to true', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser({ hasSeenNewDashboardInfo: false }).id;
         await databaseBuilder.commit();
@@ -1768,7 +1768,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         return databaseBuilder.commit();
       });
 
-      it('should return the model with hasSeenFocusedChallengeTooltip flag updated to true', async function () {
+      it('returns the model with hasSeenFocusedChallengeTooltip flag updated to true', async function () {
         // when
         const challengeType = 'focused';
         const actualUser = await userRepository.updateHasSeenChallengeTooltip({ userId, challengeType });
@@ -1778,7 +1778,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(actualUser.updatedAt).to.deep.equal(now);
       });
 
-      it('should return the model with hasSeenOtherChallengesTooltip flag updated to true', async function () {
+      it('returns the model with hasSeenOtherChallengesTooltip flag updated to true', async function () {
         // when
         const challengeType = 'other';
         const actualUser = await userRepository.updateHasSeenChallengeTooltip({ userId, challengeType });
@@ -1791,7 +1791,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   });
 
   describe('#checkIfEmailIsAvailable', function () {
-    it('should return the email when the email is not registered', async function () {
+    it('returns the email when the email is not registered', async function () {
       // when
       const email = await userRepository.checkIfEmailIsAvailable('email@example.net');
 
@@ -1835,12 +1835,12 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       return databaseBuilder.commit();
     });
 
-    it('should return true when the user exists by email', async function () {
+    it('returns true when the user exists by email', async function () {
       const userExists = await userRepository.isUserExistingByEmail(email);
       expect(userExists).to.be.true;
     });
 
-    it('should return true when the user exists by email (case insensitive)', async function () {
+    it('returns true when the user exists by email (case insensitive)', async function () {
       // given
       const uppercaseEmailAlreadyInDb = email.toUpperCase();
 
@@ -1851,14 +1851,14 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(userExists).to.be.true;
     });
 
-    it('should throw an error when the user does not exist by email', async function () {
+    it('throws an error when the user does not exist by email', async function () {
       const err = await catchErr(userRepository.isUserExistingByEmail)('none');
       expect(err).to.be.instanceOf(UserNotFoundError);
     });
   });
 
   describe('#acceptPixLastTermsOfService', function () {
-    it('should validate the last terms of service and save the date of acceptance ', async function () {
+    it('validates the last terms of service and save the date of acceptance ', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser({
         mustValidateTermsOfService: true,
@@ -1880,7 +1880,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   describe('#isUsernameAvailable', function () {
     const username = 'abc.def0101';
 
-    it("should return username when it doesn't exist", async function () {
+    it("returns username when it doesn't exist", async function () {
       // when
       const result = await userRepository.isUsernameAvailable(username);
 
@@ -1888,7 +1888,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(result).to.equal(username);
     });
 
-    it('should throw AlreadyRegisteredUsernameError when username already exist', async function () {
+    it('throws AlreadyRegisteredUsernameError when username already exist', async function () {
       // given
       databaseBuilder.factory.buildUser({
         username,
