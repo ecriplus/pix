@@ -1,3 +1,4 @@
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
   createServer,
   databaseBuilder,
@@ -22,6 +23,11 @@ describe('Acceptance | Controller | GET /api/admin/users/{userId}/participations
       campaignId: campaign.id,
       organizationLearnerId: organizationLearner.id,
     });
+    const assessment = databaseBuilder.factory.buildAssessment({
+      userId: user.id,
+      campaignParticipationId: campaignParticipation.id,
+      type: Assessment.types.CAMPAIGN,
+    });
     const admin = databaseBuilder.factory.buildUser.withRole();
     await databaseBuilder.commit();
 
@@ -37,14 +43,14 @@ describe('Acceptance | Controller | GET /api/admin/users/{userId}/participations
     expect(response.result).to.deep.equal({
       data: [
         {
-          id: campaignParticipation.id.toString(),
+          id: assessment.id.toString(),
           type: 'user-participations',
           attributes: {
+            'campaign-participation-id': campaignParticipation.id,
             'campaign-code': campaign.code,
             'campaign-id': campaign.id,
             'created-at': campaignParticipation.createdAt,
             'deleted-at': null,
-            'deleted-by': null,
             'participant-external-id': campaignParticipation.participantExternalId,
             'shared-at': campaignParticipation.sharedAt,
             status: campaignParticipation.status,

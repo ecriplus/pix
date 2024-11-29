@@ -8,12 +8,11 @@ const serialize = function (campaignParticipation) {
       'participantExternalId',
       'status',
       'campaignId',
+      'campaignParticipationId',
       'campaignCode',
       'createdAt',
       'sharedAt',
       'deletedAt',
-      'deletedBy',
-      'deletedByFullName',
       'organizationLearnerFullName',
     ],
   }).serialize(campaignParticipation);
