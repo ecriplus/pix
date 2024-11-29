@@ -226,7 +226,7 @@
         },
         "errors": {
           "invalid-locale-format": "Provided locale \"{invalidLocale}\" has an invalid format.",
-          "invalid-or-already-used-email" : "Invalid or already used e-mail address",
+          "invalid-or-already-used-email": "Invalid or already used e-mail address",
           "locale-not-supported": "Provided locale \"{localeNotSupported}\" isn't currently supported."
         },
         "fields": {
@@ -366,7 +366,7 @@
                 "new-email": ",if not, enter a new one."
               },
               "empty-email": "The e-mail address field is mandatory.",
-              "invalid-or-already-used-email" : "Invalid or already used e-mail address",
+              "invalid-or-already-used-email": "Invalid or already used e-mail address",
               "new-backup-email": "Please enter a valid e-mail address to recover your account",
               "new-email-already-exist": "This e-mail address is already in use",
               "wrong-email-format": "Your e-mail address is invalid."
@@ -1261,6 +1261,15 @@
       },
       "title": "Homepage"
     },
+    "download-session-results": {
+      "button": {
+        "label": "Download results"
+      },
+      "errors": {
+        "expiration": "The session results download link has expired."
+      },
+      "title": "Download session results"
+    },
     "error": {
       "content-text": "'<p>'Please refresh the page or return to homepage.'</p><p>'You can also contact us via '<a href=\"https://pix.org/en/contact-form\">'the help centre form'</a>'specifying the error code below in the description.'</p><p>'Please excuse any inconvenience caused.'</p><p>'The Pix team.'</p>'",
       "first-title": "Oops, an error occurred!"
@@ -2100,7 +2109,7 @@
           "errors": {
             "empty-password": "Your password can't be empty.",
             "invalid-email": "Your email address is invalid.",
-            "invalid-or-already-used-email" : "Invalid or already used e-mail address",
+            "invalid-or-already-used-email": "Invalid or already used e-mail address",
             "invalid-password": "There was an error in the password entered.",
             "new-email-already-exist": "This email address is already in use."
           },

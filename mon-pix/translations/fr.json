@@ -226,7 +226,7 @@
         },
         "errors": {
           "invalid-locale-format": "Votre locale \"{invalidLocale}\" n'est pas dans le bon format.",
-          "invalid-or-already-used-email" : "Adresse e-mail invalide ou déjà utilisée",
+          "invalid-or-already-used-email": "Adresse e-mail invalide ou déjà utilisée",
           "locale-not-supported": "Votre locale \"{localeNotSupported}\" n'est actuellement pas supportée."
         },
         "fields": {
@@ -366,7 +366,7 @@
                 "new-email": ", sinon saisissez une nouvelle."
               },
               "empty-email": "Le champ adresse e-mail est obligatoire.",
-              "invalid-or-already-used-email" : "Adresse e-mail invalide ou déjà utilisée",
+              "invalid-or-already-used-email": "Adresse e-mail invalide ou déjà utilisée",
               "new-backup-email": "Veuillez saisir un e-mail valide pour récupérer votre compte",
               "new-email-already-exist": "Cette adresse e-mail est déjà utilisée",
               "wrong-email-format": "Votre adresse e-mail n’est pas valide."
@@ -1262,6 +1262,15 @@
       },
       "title": "Accueil"
     },
+    "download-session-results": {
+      "button": {
+        "label": "Télécharger les résultats"
+      },
+      "errors": {
+        "expiration": "Le lien de téléchargement des résultats de session a expiré."
+      },
+      "title": "Télécharger les résultats de session"
+    },
     "error": {
       "content-text": "'<p>'Nous vous invitons à recharger cette page ou revenir à la page d’accueil.'</p><p>'Vous pouvez aussi nous contacter via '<a href=\"https://support.pix.fr/support/tickets/new\">'le formulaire du centre d'aide'</a>' en nous précisant le code d’erreur ci-dessous dans la description.'</p><p>'Nous vous prions de nous excuser pour la gêne occasionnée.'</p><p>'L’équipe Pix.'</p>'",
       "first-title": "Oups, une erreur est survenue !"
@@ -2101,7 +2110,7 @@
           "errors": {
             "empty-password": "Votre mot de passe ne peut pas être vide.",
             "invalid-email": "Votre adresse e-mail n’est pas valide.",
-            "invalid-or-already-used-email" : "Adresse e-mail invalide ou déjà utilisée",
+            "invalid-or-already-used-email": "Adresse e-mail invalide ou déjà utilisée",
             "invalid-password": "Le mot de passe que vous avez saisi est invalide.",
             "new-email-already-exist": "Cette adresse e-mail est déjà utilisée."
           },
