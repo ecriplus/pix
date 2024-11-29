@@ -14,6 +14,18 @@ const ORGANIZATIONS_TABLE = 'organizations';
 const MEMBERSHIPS_TABLE = 'memberships';
 const USERS_TABLE = 'users';
 
+/**
+ * Get the number of active memberships for a user
+ *
+ * @param {string} userId - The ID of the user
+ * @returns {Promise<number>} - The number of active memberships
+ */
+export const countByUserId = async function (userId) {
+  const knexConnection = DomainTransaction.getConnection();
+  const { count } = await knexConnection(MEMBERSHIPS_TABLE).where({ userId, disabledAt: null }).count('id').first();
+  return count;
+};
+
 export const create = async (userId, organizationId, organizationRole) => {
   const knexConnection = DomainTransaction.getConnection();
   try {

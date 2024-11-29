@@ -48,6 +48,35 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
     });
   });
 
+  describe('#countByUserId', function () {
+    it("counts all the user's memberships in certification centers", async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildCertificationCenterMembership({ userId });
+      databaseBuilder.factory.buildCertificationCenterMembership({ userId });
+      databaseBuilder.factory.buildCertificationCenterMembership();
+      await databaseBuilder.commit();
+
+      // when
+      const membershipCount = await certificationCenterMembershipRepository.countByUserId(userId);
+
+      // then
+      expect(membershipCount).to.equal(2);
+    });
+
+    it('does not count disabled memberships', async function () {
+      // given
+      const { userId } = databaseBuilder.factory.buildCertificationCenterMembership({ disabledAt: new Date() });
+      await databaseBuilder.commit();
+
+      // when
+      const membershipCount = await certificationCenterMembershipRepository.countByUserId(userId);
+
+      // then
+      expect(membershipCount).to.equal(0);
+    });
+  });
+
   describe('#create', function () {
     afterEach(async function () {
       await knex('certification-center-memberships').delete();
