@@ -18,6 +18,7 @@ import sinonChai from 'sinon-chai';
 
 import { DatabaseBuilder } from '../db/database-builder/database-builder.js';
 import { disconnect, knex } from '../db/knex-database-connection.js';
+import * as frameworkRepository from '../lib/infrastructure/repositories/framework-repository.js';
 import { PIX_ADMIN } from '../src/authorization/domain/constants.js';
 import { config } from '../src/shared/config.js';
 import { Membership } from '../src/shared/domain/models/index.js';
@@ -71,6 +72,7 @@ afterEach(function () {
   restore();
   LearningContentCache.instance.flushAll();
   nock.cleanAll();
+  frameworkRepository.clearCache();
   return databaseBuilder.clean();
 });
 
