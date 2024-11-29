@@ -48,7 +48,7 @@
           @placeholder="{{t 'pages.team-members.actions.select-role.label'}}"
           @onChange={{this.setRoleSelection}}
           @options={{this.organizationRoles}}
-          @value={{@membership.organizationRole}}
+          @value={{this.roleSelection}}
         >
           <:label>{{t "pages.team-members.actions.select-role.label"}}</:label>
         </PixSelect>
