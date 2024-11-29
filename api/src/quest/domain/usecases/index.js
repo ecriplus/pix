@@ -1,6 +1,7 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import * as campaignParticipationRepository from '../../../profile/infrastructure/repositories/campaign-participation-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
@@ -17,6 +18,7 @@ const dependencies = {
   rewardRepository: repositories.rewardRepository,
   successRepository: repositories.successRepository,
   questRepository,
+  campaignParticipationRepository,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

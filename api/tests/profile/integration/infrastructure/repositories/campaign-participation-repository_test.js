@@ -19,6 +19,7 @@ describe('Profile | Integration | Infrastructure | Repository | campaign-partici
       expect(result).to.be.an.instanceOf(Campaign);
       expect(result.id).to.equal(campaign.id);
       expect(result.organizationId).to.equal(campaign.organizationId);
+      expect(result.targetProfileId).to.equal(campaign.targetProfileId);
     });
 
     it('return null if campaignParticipation does not exist', async function () {

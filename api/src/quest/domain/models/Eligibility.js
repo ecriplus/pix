@@ -15,10 +15,22 @@ export class Eligibility {
     };
   }
 
+  set campaignParticipations(campaignParticipations) {
+    this.#campaignParticipations = campaignParticipations;
+  }
+
   hasCampaignParticipation(campaignParticipationId) {
     return Boolean(
       this.#campaignParticipations.find(
         (campaignParticipation) => campaignParticipation.id === campaignParticipationId,
+      ),
+    );
+  }
+
+  hasCampaignParticipationForTargetProfileId(targetProfileId) {
+    return Boolean(
+      this.#campaignParticipations.find(
+        (campaignParticipation) => campaignParticipation.targetProfileId === targetProfileId,
       ),
     );
   }

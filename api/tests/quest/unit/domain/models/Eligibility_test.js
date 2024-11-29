@@ -79,4 +79,36 @@ describe('Quest | Unit | Domain | Models | Eligibility ', function () {
       expect(result).to.be.null;
     });
   });
+
+  describe('#hasCampaignParticipationForTargetProfileId', function () {
+    it('should return true if has campaign participation for given target profile', function () {
+      // given
+      const campaignParticipations = [
+        { id: 1, targetProfileId: 10 },
+        { id: 2, targetProfileId: 20 },
+      ];
+      const eligiblity = new Eligibility({ campaignParticipations });
+
+      // when
+      const result = eligiblity.hasCampaignParticipationForTargetProfileId(10);
+
+      // then
+      expect(result).to.be.true;
+    });
+
+    it('should return false if there are no campaign participation for given target profile', function () {
+      // given
+      const campaignParticipations = [
+        { id: 1, targetProfileId: 10 },
+        { id: 2, targetProfileId: 20 },
+      ];
+      const eligiblity = new Eligibility({ campaignParticipations });
+
+      // when
+      const result = eligiblity.hasCampaignParticipationForTargetProfileId(1);
+
+      // then
+      expect(result).to.be.false;
+    });
+  });
 });

@@ -36,42 +36,69 @@ const USERS = [
   },
 ];
 const ORGANIZATION = { name: 'attestation', type: 'SCO', isManagingStudents: true };
-const CAMPAIGN = { code: 'ATESTTEST', multipleSendings: true };
-
-const TUBES = [
-  {
-    id: 'tube2e715GxaaWzNK6',
-    level: 2,
-  },
-  {
-    id: 'recs1vdbHxX8X55G9',
-    level: 2,
-  },
-  {
-    id: 'reccqGUKgzIOK8f9U',
-    level: 2,
-  },
-  {
-    id: 'recBbCIEKgrQi7eb6',
-    level: 2,
-  },
-  {
-    id: 'recpe7Y8Wq2D56q6I',
-    level: 2,
-  },
-  {
-    id: 'recPOjwrHFhM21yGE',
-    level: 2,
-  },
+const CAMPAIGN = [
+  { code: 'ATTEST001', multipleSendings: true, name: 'campagne attestation 1' },
+  { code: 'ATTEST002', multipleSendings: true, name: 'campagne attestation 2' },
+  { code: 'ATTEST003', multipleSendings: true, name: 'campagne attestation 3' },
 ];
 
-const SKILLS = [
-  'skill2wQfMYrOHlL6HI',
-  'skill1QAVccgLO16Rx8',
-  'skillX5Rpk2rucNfnF',
-  'skill1aj7jVAKrVgUye',
-  'reczOCGv8pz976Acl',
-  'skill2mIMdudcltFsaz',
+const TARGET_PROFILE_TUBES = [
+  [
+    {
+      id: 'tube2e715GxaaWzNK6',
+      level: 2,
+    },
+    {
+      id: 'recs1vdbHxX8X55G9',
+      level: 2,
+    },
+    {
+      id: 'reccqGUKgzIOK8f9U',
+      level: 2,
+    },
+    {
+      id: 'recBbCIEKgrQi7eb6',
+      level: 2,
+    },
+    {
+      id: 'recpe7Y8Wq2D56q6I',
+      level: 2,
+    },
+  ],
+  [
+    {
+      id: 'tube2e715GxaaWzNK6',
+      level: 2,
+    },
+    {
+      id: 'recs1vdbHxX8X55G9',
+      level: 2,
+    },
+    {
+      id: 'reccqGUKgzIOK8f9U',
+      level: 2,
+    },
+  ],
+  [
+    {
+      id: 'recBbCIEKgrQi7eb6',
+      level: 2,
+    },
+    {
+      id: 'recpe7Y8Wq2D56q6I',
+      level: 2,
+    },
+    {
+      id: 'recPOjwrHFhM21yGE',
+      level: 2,
+    },
+  ],
+];
+
+const CAMPAIGN_SKILLS = [
+  ['skill2wQfMYrOHlL6HI', 'skill1QAVccgLO16Rx8', 'skillX5Rpk2rucNfnF', 'skill1aj7jVAKrVgUye', 'reczOCGv8pz976Acl'],
+  ['skill2wQfMYrOHlL6HI', 'skill1QAVccgLO16Rx8', 'skillX5Rpk2rucNfnF'],
+  ['skill1aj7jVAKrVgUye', 'reczOCGv8pz976Acl', 'skill2mIMdudcltFsaz'],
 ];
 
 const buildUsers = (databaseBuilder) => USERS.map((user) => databaseBuilder.factory.buildUser.withRawPassword(user));
@@ -86,20 +113,38 @@ const buildOrganizationLearners = (databaseBuilder, organization, users) =>
     }),
   );
 
-const buildCampaignParticipations = (databaseBuilder, campaignId, users) =>
-  users.map(({ user, organizationLearner, status, sharedAt }) =>
-    databaseBuilder.factory.buildCampaignParticipation({
+const buildCampaignParticipations = (databaseBuilder, users) =>
+  users.map(async ({ user, organizationLearner, status, sharedAt }) => {
+    const stages = await databaseBuilder.knex('stages').where({ targetProfileId: TARGET_PROFILE_BADGES_STAGES_ID });
+    const stageZero = stages.find((stage) => stage.level === 0 || stage.threshold === 0);
+
+    const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
       userId: user.id,
-      campaignId,
+      campaignId: user.campaignId,
       masteryRate: 1,
       organizationLearnerId: organizationLearner.id,
       status,
       sharedAt,
-    }),
-  );
+    });
+    databaseBuilder.factory.buildAssessment({
+      userId: user.id,
+      type: Assessment.types.CAMPAIGN,
+      campaignParticipationId: participationId,
+    });
 
-const buildQuest = (databaseBuilder, rewardId, targetProfileId) => {
-  const questEligibilityRequirements = [
+    databaseBuilder.factory.buildStageAcquisition({
+      stageId: stageZero.id,
+      userId: user.id,
+      campaignParticipationId: participationId,
+    });
+  });
+
+const buildSixthGradeQuests = (
+  databaseBuilder,
+  rewardId,
+  [firstTargetProfile, secondTargetProfile, thirdTargetProfile],
+) => {
+  const firstQuestRequirement = [
     {
       type: 'organization',
       data: {
@@ -118,17 +163,16 @@ const buildQuest = (databaseBuilder, rewardId, targetProfileId) => {
     {
       type: 'campaignParticipations',
       data: {
-        targetProfileIds: [targetProfileId],
+        targetProfileIds: [firstTargetProfile.id],
       },
       comparison: COMPARISON.ALL,
     },
   ];
-
-  const questSuccessRequirements = [
+  const firstQuestSuccessRequirements = [
     {
       type: 'skill',
       data: {
-        ids: SKILLS,
+        ids: CAMPAIGN_SKILLS[0],
         threshold: 50,
       },
     },
@@ -137,58 +181,90 @@ const buildQuest = (databaseBuilder, rewardId, targetProfileId) => {
   databaseBuilder.factory.buildQuest({
     rewardType: REWARD_TYPES.ATTESTATION,
     rewardId,
-    eligibilityRequirements: questEligibilityRequirements,
-    successRequirements: questSuccessRequirements,
+    eligibilityRequirements: firstQuestRequirement,
+    successRequirements: firstQuestSuccessRequirements,
+  });
+
+  const secondQuestEligibilityRequirements = [
+    {
+      type: 'organization',
+      data: {
+        type: 'SCO',
+      },
+      comparison: COMPARISON.ALL,
+    },
+    {
+      type: 'organization',
+      data: {
+        isManagingStudents: true,
+        tags: [AEFE_TAG.name],
+      },
+      comparison: COMPARISON.ONE_OF,
+    },
+    {
+      type: 'campaignParticipations',
+      data: {
+        targetProfileIds: [secondTargetProfile.id, thirdTargetProfile.id],
+      },
+      comparison: COMPARISON.ALL,
+    },
+  ];
+
+  const secondQuestSuccessRequirements = [
+    {
+      type: 'skill',
+      data: {
+        ids: [CAMPAIGN_SKILLS[1], CAMPAIGN_SKILLS[2]].flat(),
+        threshold: 50,
+      },
+    },
+  ];
+
+  databaseBuilder.factory.buildQuest({
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId,
+    eligibilityRequirements: secondQuestEligibilityRequirements,
+    successRequirements: secondQuestSuccessRequirements,
   });
 };
 
-const buildFirstStages = async (
-  databaseBuilder,
-  successUser,
-  successParticipation,
-  failedUser,
-  failedParticipation,
-  pendingUser,
-  pendingParticipation,
-) => {
-  const stages = await databaseBuilder.knex('stages').where({ targetProfileId: TARGET_PROFILE_BADGES_STAGES_ID });
+const buildTargetProfiles = (databaseBuilder, organization) =>
+  TARGET_PROFILE_TUBES.map((tubes, index) => {
+    const targetProfile = databaseBuilder.factory.buildTargetProfile({
+      description: `parcours attestation 6 eme numero ${index + 1}`,
+      name: `parcours attestation 6 eme numero ${index + 1}`,
+      ownerOrganizationId: organization.id,
+    });
 
-  const stageZero = stages.find((stage) => stage.level === 0 || stage.threshold === 0);
+    tubes.map(({ tubeId, level }) =>
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: targetProfile.id,
+        tubeId,
+        level,
+      }),
+    );
 
-  databaseBuilder.factory.buildStageAcquisition({
-    stageId: stageZero.id,
-    userId: successUser.id,
-    campaignParticipationId: successParticipation.id,
-  });
-  databaseBuilder.factory.buildStageAcquisition({
-    stageId: stageZero.id,
-    userId: failedUser.id,
-    campaignParticipationId: failedParticipation.id,
-  });
-  databaseBuilder.factory.buildStageAcquisition({
-    stageId: stageZero.id,
-    userId: pendingUser.id,
-    campaignParticipationId: pendingParticipation.id,
-  });
-};
-
-const buildTargetProfile = (databaseBuilder, organization) => {
-  const targetProfile = databaseBuilder.factory.buildTargetProfile({
-    description: 'parcours attestation 6 eme',
-    name: 'parcours attestation 6 eme',
-    ownerOrganizationId: organization.id,
+    return targetProfile;
   });
 
-  TUBES.map(({ tubeId, level }) =>
-    databaseBuilder.factory.buildTargetProfileTube({
+const buildCampaigns = (databaseBuilder, organization, targetProfiles) =>
+  targetProfiles.map((targetProfile, index) => {
+    const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+      ...CAMPAIGN[index],
       targetProfileId: targetProfile.id,
-      tubeId,
-      level,
-    }),
-  );
+      organizationId: organization.id,
+      title: `Attestation 6ème ${index + 1}`,
+    });
 
-  return targetProfile;
-};
+    CAMPAIGN_SKILLS[index].map((skillId) =>
+      databaseBuilder.factory.buildCampaignSkill({
+        campaignId,
+        skillId,
+      }),
+    );
+
+    return campaignId;
+  });
 
 export const buildQuests = async (databaseBuilder) => {
   // Create USERS
@@ -235,77 +311,53 @@ export const buildQuests = async (databaseBuilder) => {
   ] = buildOrganizationLearners(databaseBuilder, organization, organizationLearnersData);
 
   // Create target profile
-  const targetProfile = buildTargetProfile(databaseBuilder, organization);
+
+  const targetProfiles = buildTargetProfiles(databaseBuilder, organization);
 
   // Create campaigns
-  const { id: campaignId } = databaseBuilder.factory.buildCampaign({
-    ...CAMPAIGN,
-    targetProfileId: targetProfile.id,
-    organizationId: organization.id,
-  });
 
-  SKILLS.map((skillId) =>
-    databaseBuilder.factory.buildCampaignSkill({
-      campaignId,
-      skillId,
-    }),
-  );
+  const campaigns = buildCampaigns(databaseBuilder, organization, targetProfiles);
 
   // Create campaignParticipations
-  const [successParticipation, successSharedParticipation, failedParticipation, pendingParticipation] =
-    buildCampaignParticipations(databaseBuilder, campaignId, [
-      {
-        user: successUser,
-        organizationLearner: successOrganizationLearner,
-        sharedAt: null,
-        status: CampaignParticipationStatuses.TO_SHARE,
-      },
-      {
-        user: successSharedUser,
-        organizationLearner: successSharedOrganizationLearner,
-      },
-      {
-        user: failedUser,
-        organizationLearner: failedOrganizationLearner,
-      },
-      {
-        user: pendingUser,
-        organizationLearner: pendingOrganizationLearner,
-      },
-    ]);
 
-  // Create assessments
-  databaseBuilder.factory.buildAssessment({
-    userId: successUser.id,
-    type: Assessment.types.CAMPAIGN,
-    campaignParticipationId: successParticipation.id,
-  });
-  databaseBuilder.factory.buildAssessment({
-    userId: successSharedUser.id,
-    type: Assessment.types.CAMPAIGN,
-    campaignParticipationId: successSharedParticipation.id,
-  });
-  databaseBuilder.factory.buildAssessment({
-    userId: failedUser.id,
-    type: Assessment.types.CAMPAIGN,
-    campaignParticipationId: failedParticipation.id,
-  });
-  databaseBuilder.factory.buildAssessment({
-    userId: pendingUser.id,
-    type: Assessment.types.CAMPAIGN,
-    campaignParticipationId: pendingParticipation.id,
-  });
-
-  // Create first stage
-  await buildFirstStages(
-    databaseBuilder,
-    successUser,
-    successParticipation,
-    failedUser,
-    failedParticipation,
-    pendingUser,
-    pendingParticipation,
-  );
+  buildCampaignParticipations(databaseBuilder, [
+    {
+      user: successUser,
+      campaignId: campaigns[0].id,
+      organizationLearner: successOrganizationLearner,
+      sharedAt: null,
+      status: CampaignParticipationStatuses.TO_SHARE,
+    },
+    {
+      user: successUser,
+      campaignId: campaigns[1].id,
+      organizationLearner: successOrganizationLearner,
+      sharedAt: null,
+      status: CampaignParticipationStatuses.TO_SHARE,
+    },
+    {
+      user: successUser,
+      campaignId: campaigns[2].id,
+      organizationLearner: successOrganizationLearner,
+      sharedAt: null,
+      status: CampaignParticipationStatuses.TO_SHARE,
+    },
+    {
+      user: successSharedUser,
+      campaignId: campaigns[0].id,
+      organizationLearner: successSharedOrganizationLearner,
+    },
+    {
+      user: failedUser,
+      campaignId: campaigns[0].id,
+      organizationLearner: failedOrganizationLearner,
+    },
+    {
+      user: pendingUser,
+      campaignId: campaigns[0].id,
+      organizationLearner: pendingOrganizationLearner,
+    },
+  ]);
 
   // Create attestation quest
   const { id: rewardId } = databaseBuilder.factory.buildAttestation({
@@ -313,8 +365,8 @@ export const buildQuests = async (databaseBuilder) => {
     key: ATTESTATIONS.SIXTH_GRADE,
   });
 
-  // Create quest
-  buildQuest(databaseBuilder, rewardId, targetProfile.id);
+  // Create quests
+  buildSixthGradeQuests(databaseBuilder, rewardId, targetProfiles);
 
   // Create reward for success user
   databaseBuilder.factory.buildProfileReward({
