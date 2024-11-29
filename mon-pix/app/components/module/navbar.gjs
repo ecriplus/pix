@@ -63,7 +63,7 @@ export default class ModulixNavbar extends Component {
           <ul>
             {{#each this.grainTypeTexts as |type index|}}
               <li
-                class="module-sidebar-list-item__link {{if (eq index this.currentGrainIndex) 'current-grain'}}"
+                class="module-sidebar__list-item {{if (eq index this.currentGrainIndex) 'current-grain'}}"
                 aria-current={{if (eq index this.currentGrainIndex) "step"}}
               >
                 {{type}}
