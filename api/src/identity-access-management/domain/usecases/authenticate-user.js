@@ -3,19 +3,6 @@ import { ForbiddenAccess, LocaleFormatError, LocaleNotSupportedError } from '../
 import { MissingOrInvalidCredentialsError, UserShouldChangePasswordError } from '../errors.js';
 import { RefreshToken } from '../models/RefreshToken.js';
 
-async function _checkUserAccessScope(scope, user, adminMemberRepository) {
-  if (scope === PIX_ORGA.SCOPE && !user.isLinkedToOrganizations()) {
-    throw new ForbiddenAccess(PIX_ORGA.NOT_LINKED_ORGANIZATION_MSG);
-  }
-
-  if (scope === PIX_ADMIN.SCOPE) {
-    const adminMember = await adminMemberRepository.get({ userId: user.id });
-    if (!adminMember?.hasAccessToAdminScope) {
-      throw new ForbiddenAccess(PIX_ADMIN.NOT_ALLOWED_MSG);
-    }
-  }
-}
-
 const authenticateUser = async function ({
   password,
   scope,
@@ -68,5 +55,18 @@ const authenticateUser = async function ({
     throw new MissingOrInvalidCredentialsError();
   }
 };
+
+async function _checkUserAccessScope(scope, user, adminMemberRepository) {
+  if (scope === PIX_ORGA.SCOPE && !user.isLinkedToOrganizations()) {
+    throw new ForbiddenAccess(PIX_ORGA.NOT_LINKED_ORGANIZATION_MSG);
+  }
+
+  if (scope === PIX_ADMIN.SCOPE) {
+    const adminMember = await adminMemberRepository.get({ userId: user.id });
+    if (!adminMember?.hasAccessToAdminScope) {
+      throw new ForbiddenAccess(PIX_ADMIN.NOT_ALLOWED_MSG);
+    }
+  }
+}
 
 export { authenticateUser };
