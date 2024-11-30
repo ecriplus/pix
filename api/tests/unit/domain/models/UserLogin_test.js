@@ -264,7 +264,7 @@ describe('Unit | Domain | Models | UserLogin', function () {
     });
   });
 
-  describe('#unblockUser', function () {
+  describe('#resetUserBlocking', function () {
     it('should reset failure count and reset temporary blocked until', function () {
       // given
       const userLogin = new UserLogin({
