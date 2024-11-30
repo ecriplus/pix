@@ -15,12 +15,35 @@ describe('Unit | Identity Access Management | Domain | Model | UserAnonymizedEve
   });
 
   describe('#constructor', function () {
-    context('when instantiated with valid parameters', function () {
+    context('when client is PIX_APP', function () {
       it('instantiates a new event', function () {
         // when
         const userAnonymised = new UserAnonymizedEventLoggingJob({
           userId: 1,
           updatedByUserId: 2,
+          client: 'PIX_APP',
+          role: 'USER',
+        });
+
+        // then
+        const expectedUserAnonymised = {
+          userId: 1,
+          updatedByUserId: 2,
+          client: 'PIX_APP',
+          occurredAt: new Date(),
+          role: 'USER',
+        };
+        expect(userAnonymised).to.deep.equal(expectedUserAnonymised);
+      });
+    });
+
+    context('when client is PIX_ADMIN', function () {
+      it('instantiates a new event', function () {
+        // when
+        const userAnonymised = new UserAnonymizedEventLoggingJob({
+          userId: 1,
+          updatedByUserId: 2,
+          client: 'PIX_ADMIN',
           role: 'SUPER_ADMIN',
         });
 
@@ -36,7 +59,7 @@ describe('Unit | Identity Access Management | Domain | Model | UserAnonymizedEve
       });
     });
 
-    context('when client is not "PIX_ADMIN"', function () {
+    context('when client is not "PIX_APP" nor "PIX_ADMIN"', function () {
       it('throws an ObjectValidation error', function () {
         expect(
           () =>
@@ -50,7 +73,7 @@ describe('Unit | Identity Access Management | Domain | Model | UserAnonymizedEve
       });
     });
 
-    context('when role is not "SUPER_ADMIN" nor "SUPPORT"', function () {
+    context('when role is not "USER", "SUPER_ADMIN" nor "SUPPORT"', function () {
       it('throws an ObjectValidation error', function () {
         // then
         expect(

@@ -1,13 +1,13 @@
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { RefreshToken } from '../../../../../src/identity-access-management/domain/models/RefreshToken.js';
 import { UserAnonymizedEventLoggingJob } from '../../../../../src/identity-access-management/domain/models/UserAnonymizedEventLoggingJob.js';
-import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { refreshTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/refresh-token.repository.js';
+import { usecases } from '../../../../../src/privacy/domain/usecases/index.js';
 import { config } from '../../../../../src/shared/config.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
-describe('Integration | Identity Access Management | Domain | UseCase | anonymize-user', function () {
+describe('Integration | Privacy | Domain | UseCase | anonymize-user', function () {
   let clock;
   const now = new Date('2003-04-05T03:04:05Z');
 
@@ -60,7 +60,9 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
     // when
     await usecases.anonymizeUser({
       userId,
-      updatedByUserId: anonymizedByUserId,
+      anonymizedByUserId,
+      anonymizedByUserRole: PIX_ADMIN.ROLES.SUPER_ADMIN,
+      client: 'PIX_ADMIN',
     });
 
     // then
@@ -121,7 +123,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
     expect(anonymizedUser.lastDataProtectionPolicySeenAt).to.be.null;
   });
 
-  context('when the admin user does not exist', function () {
+  context('when anonymizedByUserId does not exist', function () {
     it('throws an error and does not anonymize the user', async function () {
       // given
       const user = databaseBuilder.factory.buildUser({ firstName: 'Bob' });
@@ -131,9 +133,11 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       await expect(
         usecases.anonymizeUser({
           userId: user.id,
-          updatedByUserId: 666,
+          anonymizedByUserId: 666,
+          anonymizedByUserRole: PIX_ADMIN.ROLES.SUPER_ADMIN,
+          client: 'PIX_ADMIN',
         }),
-      ).to.be.rejectedWith(UserNotFoundError, 'Admin not found for id: 666');
+      ).to.be.rejectedWith(UserNotFoundError, 'User not found for ID 666');
 
       const anonymizedUser = await knex('users').where({ id: user.id }).first();
       expect(anonymizedUser.hasBeenAnonymised).to.be.false;
@@ -155,7 +159,9 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       // when
       await usecases.anonymizeUser({
         userId: user.id,
-        updatedByUserId: newAdmin.id,
+        anonymizedByUserId: newAdmin.id,
+        anonymizedByUserRole: PIX_ADMIN.ROLES.SUPER_ADMIN,
+        client: 'PIX_ADMIN',
       });
 
       // then
@@ -200,7 +206,9 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       // when
       await usecases.anonymizeUser({
         userId,
-        updatedByUserId: anonymizedByUserId,
+        anonymizedByUserId,
+        anonymizedByUserRole: PIX_ADMIN.ROLES.SUPER_ADMIN,
+        client: 'PIX_ADMIN',
       });
 
       // then

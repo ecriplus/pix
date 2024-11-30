@@ -23,6 +23,7 @@ describe('Unit | Jobs | audit-log | User anonymized event logging', function () 
       const data = new UserAnonymizedEventLoggingJob({
         userId: 1,
         updatedByUserId: 2,
+        client: 'PIX_ADMIN',
         role: 'SUPER_ADMIN',
       });
 

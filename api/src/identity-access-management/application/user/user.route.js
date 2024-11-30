@@ -81,6 +81,18 @@ export const userRoutes = [
     },
   },
   {
+    method: 'DELETE',
+    path: '/api/users/me',
+    config: {
+      handler: (request, h) => userController.selfDeleteUserAccount(request, h),
+      notes: [
+        '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
+          '- Permet à l’utilisateur authentifié de supprimer son compte',
+      ],
+      tags: ['identity-access-management', 'api', 'user'],
+    },
+  },
+  {
     method: 'GET',
     path: '/api/users/my-account',
     config: {

@@ -4,6 +4,7 @@ import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-
 import { emailValidationDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/email-validation-demand.repository.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import { userEmailRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/user-email.repository.js';
+import { config } from '../../../../../src/shared/config.js';
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import {
   createServer,
@@ -193,7 +194,6 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       options = {
         method: 'GET',
         url: '/api/users/me',
-        payload: {},
         headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
       };
 
@@ -893,6 +893,37 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
 
       // then
       expect(response.statusCode).to.equal(200);
+    });
+  });
+
+  describe('DELETE /api/users/me', function () {
+    let userId;
+
+    beforeEach(async function () {
+      sinon.stub(config.featureToggles, 'isSelfAccountDeletionEnabled').value(true);
+
+      userId = databaseBuilder.factory.buildUser().id;
+      await databaseBuilder.commit();
+    });
+
+    it('anonymizes the user and returns a 204 HTTP status code', async function () {
+      // given
+      const options = {
+        method: 'DELETE',
+        url: '/api/users/me',
+        headers: {
+          authorization: generateValidRequestAuthorizationHeader(userId),
+        },
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(204);
+
+      const user = await knex('users').select().where({ id: userId }).first();
+      expect(user.hasBeenAnonymised).to.be.true;
     });
   });
 });

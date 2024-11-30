@@ -203,6 +203,14 @@ const rememberUserHasSeenLastDataProtectionPolicyInformation = async function (
   return dependencies.userSerializer.serialize(updatedUser);
 };
 
+const selfDeleteUserAccount = async function (request, h) {
+  const authenticatedUserId = request.auth.credentials.userId;
+
+  await usecases.selfDeleteUserAccount({ userId: authenticatedUserId });
+
+  return h.response().code(204);
+};
+
 const sendVerificationCode = async function (
   request,
   h,
@@ -235,6 +243,7 @@ export const userController = {
   getUserAuthenticationMethods,
   rememberUserHasSeenLastDataProtectionPolicyInformation,
   createUser,
+  selfDeleteUserAccount,
   sendVerificationCode,
   updatePassword,
   updateUserEmailWithValidation,

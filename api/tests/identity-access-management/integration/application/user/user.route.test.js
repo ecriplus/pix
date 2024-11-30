@@ -1,6 +1,13 @@
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
+import { config } from '../../../../../src/shared/config.js';
 import * as i18nPlugin from '../../../../../src/shared/infrastructure/plugins/i18n.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import {
+  databaseBuilder,
+  expect,
+  generateValidRequestAuthorizationHeader,
+  HttpTestServer,
+  sinon,
+} from '../../../../test-helper.js';
 
 const routesUnderTest = identityAccessManagementRoutes[0];
 
@@ -11,6 +18,7 @@ describe('Integration | Identity Access Management | Application | Route | User'
     httpTestServer = new HttpTestServer();
     await httpTestServer.register(i18nPlugin);
     await httpTestServer.register(routesUnderTest);
+    httpTestServer.setupAuthentication();
   });
 
   describe('POST /api/users', function () {
@@ -84,6 +92,43 @@ describe('Integration | Identity Access Management | Application | Route | User'
 
         // then
         expect(response.statusCode).to.equal(400);
+      });
+    });
+  });
+
+  describe('DELETE /api/users/me', function () {
+    context('when user is not authenticated', function () {
+      it('returns a 401 HTTP status code', async function () {
+        // given
+        const url = '/api/users/me';
+
+        // when
+        const response = await httpTestServer.request('DELETE', url);
+
+        // then
+        expect(response.statusCode).to.equal(401);
+      });
+    });
+
+    context('when user cannot self delete their account', function () {
+      beforeEach(async function () {
+        sinon.stub(config.featureToggles, 'isSelfAccountDeletionEnabled').value(false);
+      });
+
+      it('returns a 403 HTTP status code', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser().id;
+
+        const url = '/api/users/me';
+        const headers = {
+          authorization: generateValidRequestAuthorizationHeader(userId),
+        };
+
+        // when
+        const response = await httpTestServer.request('DELETE', url, null, null, headers);
+
+        // then
+        expect(response.statusCode).to.equal(403);
       });
     });
   });
