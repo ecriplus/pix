@@ -29,14 +29,7 @@ const createToken = async function (request, h, dependencies = { tokenService })
   const grantType = request.payload.grant_type;
   const scope = request.payload.scope;
 
-  if (grantType === 'refresh_token') {
-    refreshToken = request.payload.refresh_token;
-
-    const tokensInfo = await usecases.createAccessTokenFromRefreshToken({ refreshToken, scope });
-
-    accessToken = tokensInfo.accessToken;
-    expirationDelaySeconds = tokensInfo.expirationDelaySeconds;
-  } else if (grantType === 'password') {
+  if (grantType === 'password') {
     const { username, password, scope } = request.payload;
     const localeFromCookie = request.state?.locale;
     const source = 'pix';
@@ -45,6 +38,13 @@ const createToken = async function (request, h, dependencies = { tokenService })
 
     accessToken = tokensInfo.accessToken;
     refreshToken = tokensInfo.refreshToken;
+    expirationDelaySeconds = tokensInfo.expirationDelaySeconds;
+  } else if (grantType === 'refresh_token') {
+    refreshToken = request.payload.refresh_token;
+
+    const tokensInfo = await usecases.createAccessTokenFromRefreshToken({ refreshToken, scope });
+
+    accessToken = tokensInfo.accessToken;
     expirationDelaySeconds = tokensInfo.expirationDelaySeconds;
   } else {
     throw new BadRequestError('Invalid grant type');
