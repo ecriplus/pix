@@ -27,7 +27,7 @@ class UserLogin {
   }
 
   hasFailedAtLeastOnce() {
-    return this.failureCount > 0 || !!this.temporaryBlockedUntil;
+    return this.failureCount > 0 || Boolean(this.temporaryBlockedUntil);
   }
 
   shouldMarkUserAsTemporarilyBlocked() {
@@ -41,7 +41,7 @@ class UserLogin {
 
   isUserMarkedAsTemporaryBlocked() {
     const now = new Date();
-    return !!this.temporaryBlockedUntil && this.temporaryBlockedUntil > now;
+    return this?.temporaryBlockedUntil > now;
   }
 
   resetUserTemporaryBlocking() {
@@ -58,7 +58,7 @@ class UserLogin {
   }
 
   isUserMarkedAsBlocked() {
-    return !!this.blockedAt;
+    return Boolean(this.blockedAt);
   }
 
   resetUserBlocking() {
