@@ -269,6 +269,20 @@ describe('Unit | Domain | Models | UserLogin', function () {
         expect(result).to.be.true;
       });
     });
+
+    context('when failure count is upper than the limit failure count', function () {
+      it('returns true', function () {
+        // given
+        const failureCount = config.login.blockingLimitFailureCount + 1;
+        const userLogin = new UserLogin({ failureCount });
+
+        // when
+        const result = userLogin.shouldMarkUserAsBlocked();
+
+        // then
+        expect(result).to.be.true;
+      });
+    });
   });
 
   describe('#resetUserBlocking', function () {
