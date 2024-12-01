@@ -69,10 +69,17 @@ async function checkIfUserIsBlocked(
     checkIfUserIsBlockedUseCase,
   },
 ) {
-  const { username, grant_type: grantType } = request.payload;
+  const { username, grant_type: grantType, data } = request.payload;
 
+  let usernameOrEmailToCheck;
   if (grantType === 'password') {
-    await dependencies.checkIfUserIsBlockedUseCase.execute(username);
+    usernameOrEmailToCheck = username;
+  } else if (data?.attributes?.password) {
+    usernameOrEmailToCheck = data.attributes.email;
+  }
+
+  if (usernameOrEmailToCheck) {
+    await dependencies.checkIfUserIsBlockedUseCase.execute(usernameOrEmailToCheck);
   }
 
   return h.response(true);

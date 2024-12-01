@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { oidcProviderController } from './oidc-provider.controller.js';
 
 export const oidcProviderRoutes = [
@@ -125,6 +126,7 @@ export const oidcProviderRoutes = [
           }),
         }),
       },
+      pre: [{ method: securityPreHandlers.checkIfUserIsBlocked }],
       handler: (request, h) => oidcProviderController.findUserForReconciliation(request, h),
       notes: [
         "- Cette route permet d'identifier un utilisateur Pix provenant de la double mire OIDC.\n" +
