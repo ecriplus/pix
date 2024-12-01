@@ -230,7 +230,8 @@ describe('Unit | Domain | Models | UserLogin', function () {
     context('when failure count equals failure count threshold', function () {
       it('returns true', function () {
         // given
-        const userLogin = new UserLogin({ failureCount: 20 });
+        const failureCountThreshold = 20;
+        const userLogin = new UserLogin({ failureCount: failureCountThreshold });
 
         // when
         const result = userLogin.shouldMarkUserAsTemporarilyBlocked();
