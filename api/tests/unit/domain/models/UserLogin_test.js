@@ -209,6 +209,21 @@ describe('Unit | Domain | Models | UserLogin', function () {
 
       // then
       expect(userLogin.blockedAt).to.deepEqualInstance(new Date('2022-11-28T12:00:00Z'));
+      expect(userLogin.temporaryBlockedUntil).to.be.null;
+    });
+
+    context('when the user was temporarily blocked and must be blocked', function () {
+      it('blocks user and removes temporaryBlockedUntil', function () {
+        // given
+        const userLogin = new UserLogin({ temporaryBlockedUntil: new Date('2022-11-25') });
+
+        // when
+        userLogin.markUserAsBlocked();
+
+        // then
+        expect(userLogin.blockedAt).to.deepEqualInstance(new Date('2022-11-28T12:00:00Z'));
+        expect(userLogin.temporaryBlockedUntil).to.be.null;
+      });
     });
   });
 

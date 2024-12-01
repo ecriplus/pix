@@ -55,6 +55,7 @@ class UserLogin {
 
   markUserAsBlocked() {
     this.blockedAt = new Date();
+    this.temporaryBlockedUntil = null;
   }
 
   isUserMarkedAsBlocked() {
