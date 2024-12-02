@@ -253,6 +253,65 @@ describe('Integration | Repository | answerRepository', function () {
     });
   });
 
+  describe('#findByAssessmentExcludingChallenges', function () {
+    context('when assessment does not exist', function () {
+      it('should return an empty array', async function () {
+        // given
+        databaseBuilder.factory.buildAssessment({ id: 123 });
+        databaseBuilder.factory.buildAnswer({ assessmentId: 123 });
+        await databaseBuilder.commit();
+
+        // when
+        const foundAnswers = await answerRepository.findByAssessmentExcludingChallengeIds({ assessmentId: 456 });
+
+        // then
+        expect(foundAnswers).to.be.empty;
+      });
+    });
+    context('when assessment exists', function () {
+      context('when excludingChallengeIds is not provided', function () {
+        it('should return all answers', async function () {
+          // given
+          databaseBuilder.factory.buildAssessment({ id: 123 });
+          const expectedAnswer = domainBuilder.buildAnswer({ assessmentId: 123 });
+          databaseBuilder.factory.buildAnswer({ ...expectedAnswer, result: expectedAnswer.result.status });
+          await databaseBuilder.commit();
+
+          // when
+          const foundAnswers = await answerRepository.findByAssessmentExcludingChallengeIds({ assessmentId: 123 });
+
+          // then
+          expect(foundAnswers).to.deep.equal([expectedAnswer]);
+        });
+      });
+
+      context('when excludingChallengeIds is provided', function () {
+        it('should return answers except the ones excluded', async function () {
+          // given
+          databaseBuilder.factory.buildAssessment({ id: 123 });
+          const expectedAnswer = domainBuilder.buildAnswer({ assessmentId: 123 });
+          const excludedAnswer = domainBuilder.buildAnswer({
+            id: 456,
+            assessmentId: 123,
+            challengeId: 'excludedChallengeId',
+          });
+          databaseBuilder.factory.buildAnswer({ ...expectedAnswer, result: expectedAnswer.result.status });
+          databaseBuilder.factory.buildAnswer({ ...excludedAnswer, result: excludedAnswer.result.status });
+          await databaseBuilder.commit();
+
+          // when
+          const foundAnswers = await answerRepository.findByAssessmentExcludingChallengeIds({
+            assessmentId: 123,
+            excludedChallengeIds: [excludedAnswer.challengeId],
+          });
+
+          // then
+          expect(foundAnswers).to.deep.equal([expectedAnswer]);
+        });
+      });
+    });
+  });
+
   describe('#findChallengeIdsFromAnswerIds', function () {
     context('when provided answerIds collection is empty', function () {
       it('should return an empty array', async function () {
