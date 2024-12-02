@@ -1,58 +1,61 @@
 import 'dotenv/config';
 
-import * as url from 'node:url';
+import Joi from 'joi';
 
-import { disconnect } from '../../db/knex-database-connection.js';
 import { CertificationRescoringByScriptJob } from '../../src/certification/session-management/domain/models/CertificationRescoringByScriptJob.js';
 import { certificationRescoringByScriptJobRepository } from '../../src/certification/session-management/infrastructure/repositories/jobs/certification-rescoring-by-script-job-repository.js';
-import { logger } from '../../src/shared/infrastructure/utils/logger.js';
+import { csvFileParser } from '../../src/shared/application/scripts/parsers.js';
+import { Script } from '../../src/shared/application/scripts/script.js';
+import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 
-const modulePath = url.fileURLToPath(import.meta.url);
-const isLaunchedFromCommandLine = process.argv[1] === modulePath;
+const columnsSchemas = [{ name: 'certificationCourseId', schema: Joi.number() }];
 
-async function main(certificationCourseIds) {
-  logger.info(`Publishing ${certificationCourseIds.length} rescoring jobs`);
-  const jobs = await _scheduleRescoringJobs(certificationCourseIds);
-
-  const errors = jobs.filter((result) => result.status === 'rejected');
-  if (errors.length) {
-    errors.forEach((result) => logger.error(result.reason, 'Some jobs could not be published'));
-    return 1;
+export class RescoreCertificationScript extends Script {
+  constructor() {
+    super({
+      description: 'Rescore all certification given by CSV file. This script will schedule job to rescore',
+      permanent: true,
+      options: {
+        file: {
+          type: 'string',
+          describe:
+            'CSV File with only one column with certification-courses.id (integer) to process. Need `certificationCourseId`',
+          demandOption: true,
+          coerce: csvFileParser(columnsSchemas),
+        },
+      },
+    });
   }
 
-  logger.info(`${jobs.length} jobs successfully published`);
-  return 0;
+  async handle({ options, logger }) {
+    const { file: certificationCourses } = options;
+    const certificationCourseIds = certificationCourses.map(({ certificationCourseId }) => certificationCourseId);
+
+    logger.info(`Publishing ${certificationCourseIds.length} rescoring jobs`);
+    const jobs = await this.#scheduleRescoringJobs(certificationCourseIds);
+
+    const errors = jobs.filter((result) => result.status === 'rejected');
+    if (errors.length) {
+      errors.forEach((result) => logger.error(result.reason, 'Some jobs could not be published'));
+      return 1;
+    }
+
+    logger.info(`${jobs.length} jobs successfully published`);
+    return 0;
+  }
+
+  async #scheduleRescoringJobs(certificationCourseIds) {
+    const promisefiedJobs = certificationCourseIds.map(async (certificationCourseId) => {
+      try {
+        await certificationRescoringByScriptJobRepository.performAsync(
+          new CertificationRescoringByScriptJob({ certificationCourseId }),
+        );
+      } catch (error) {
+        throw new Error(`Error for certificationCourseId: [${certificationCourseId}]`, { cause: error });
+      }
+    });
+    return Promise.allSettled(promisefiedJobs);
+  }
 }
 
-const _scheduleRescoringJobs = async (certificationCourseIds) => {
-  const promisefiedJobs = certificationCourseIds.map(async (certificationCourseId) => {
-    try {
-      await certificationRescoringByScriptJobRepository.performAsync(
-        new CertificationRescoringByScriptJob({ certificationCourseId }),
-      );
-    } catch (error) {
-      throw new Error(`Error for certificationCourseId: [${certificationCourseId}]`, { cause: error });
-    }
-  });
-  return Promise.allSettled(promisefiedJobs);
-};
-
-(async () => {
-  if (isLaunchedFromCommandLine) {
-    try {
-      const certificationCourseIds = process.argv[2]
-        .split(',')
-        .map((str) => parseInt(str, 10))
-        .filter(Number.isInteger);
-      const exitCode = await main(certificationCourseIds);
-      return exitCode;
-    } catch (error) {
-      logger.error(error);
-      process.exitCode = 1;
-    } finally {
-      await disconnect();
-    }
-  }
-})();
-
-export { main };
+await ScriptRunner.execute(import.meta.url, RescoreCertificationScript);
