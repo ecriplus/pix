@@ -141,6 +141,8 @@ Router.map(function () {
 
   this.route('companion', { path: '/verification-extension-certification' });
 
+  this.route('download-session-results', { path: '/resultats-session' });
+
   // XXX: this route is used for any request that did not match any of the previous routes. SHOULD ALWAYS BE THE LAST ONE
   this.route('not-found', { path: '/*path' });
 });

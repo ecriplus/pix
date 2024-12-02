@@ -1,0 +1,29 @@
+.download-session-results {
+  max-width: max-content;
+  margin: 0 auto 32px;
+  padding: 48px 24px;
+
+  @include device-is('tablet') {
+    padding: 48px 60px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .form__title {
+      @extend %pix-title-m;
+
+      margin-bottom: var(--pix-spacing-4x);
+    }
+
+    .form__actions {
+      margin-top: var(--pix-spacing-6x);
+    }
+
+    .form__error {
+      margin-top: var(--pix-spacing-4x);
+    }
+  }
+}
