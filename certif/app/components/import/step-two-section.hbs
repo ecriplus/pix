@@ -33,7 +33,7 @@
         {{t "pages.sessions.import.step-two.blocking-errors.information"}}
       </span>
       <div>
-        <PixCollapsible
+        <PixAccordions
           @iconName="error"
           @plainIcon={{true}}
           @tagContent={{t
@@ -41,7 +41,7 @@
             blockingErrorReportsCount=this.blockingErrorReportsCount
           }}
           @tagColor="error"
-          class="collapsible-header collapsible-header--blocking"
+          class="accordions-header accordions-header--blocking"
         >
           <:title>
             {{t
@@ -50,20 +50,20 @@
             }}
           </:title>
           <:content>
-            <ul class="collapsible-header__list">
+            <ul class="accordions-header__list">
               {{#each this.translatedBlockingErrorReport as |report|}}
                 <li>
-                  <PixMessage @type="error">
+                  <PixNotificationAlert @type="error">
                     {{t "pages.sessions.import.step-two.blocking-errors.line"}}
                     {{report.line}}
                     :
                     {{report.message}}
-                  </PixMessage>
+                  </PixNotificationAlert>
                 </li>
               {{/each}}
             </ul>
           </:content>
-        </PixCollapsible>
+        </PixAccordions>
       </div>
     {{/if}}
     {{#if (gt this.nonBlockingErrorReportsCount 0)}}
@@ -74,7 +74,7 @@
         }}
       </span>
       <div>
-        <PixCollapsible
+        <PixAccordions
           @iconName="warning"
           @plainIcon={{true}}
           @tagContent={{t
@@ -82,7 +82,7 @@
             nonBlockingErrorReportsCount=this.nonBlockingErrorReportsCount
           }}
           @tagColor="secondary"
-          class="collapsible-header collapsible-header--non-blocking"
+          class="accordions-header accordions-header--non-blocking"
         >
           <:title>
             {{t
@@ -91,20 +91,20 @@
             }}
           </:title>
           <:content>
-            <ul class="collapsible-header__list">
+            <ul class="accordions-header__list">
               {{#each this.translatedNonBlockingErrorReport as |report|}}
                 <li>
-                  <PixMessage @type="warning">
+                  <PixNotificationAlert @type="warning">
                     {{t "pages.sessions.import.step-two.non-blocking-errors.line"}}
                     {{report.line}}
                     :
                     {{report.message}}
-                  </PixMessage>
+                  </PixNotificationAlert>
                 </li>
               {{/each}}
             </ul>
           </:content>
-        </PixCollapsible>
+        </PixAccordions>
       </div>
     {{/if}}
 
@@ -139,7 +139,7 @@
     />
 
     {{#if @importErrorMessage}}
-      <PixMessage @type="error" @withIcon={{true}}>{{@importErrorMessage}}</PixMessage>
+      <PixNotificationAlert @type="error" @withIcon={{true}}>{{@importErrorMessage}}</PixNotificationAlert>
     {{/if}}
 
     <div>

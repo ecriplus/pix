@@ -194,8 +194,8 @@
   }
 }
 
-.collapsible-header {
-  .pix-collapsible-title__label {
+.accordions-header {
+  .pix-accordions-title__label {
     font-size: 1rem;
     font-weight: 400;
   }
@@ -207,14 +207,14 @@
   }
 }
 
-.collapsible-header--blocking {
-  .pix-collapsible-title__icon {
+.accordions-header--blocking {
+  .pix-accordions-title__icon {
     fill: var(--pix-error-700);
   }
 }
 
-.collapsible-header--non-blocking {
-  .pix-collapsible-title__icon {
+.accordions-header--non-blocking {
+  .pix-accordions-title__icon {
     fill: var(--pix-warning-500);
   }
 }
