@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { userController } from '../../../../lib/application/users/user-controller.js';
 import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { SUPPORTED_LOCALES } from '../../../shared/domain/constants.js';
@@ -178,6 +179,39 @@ export const userAdminRoutes = [
       handler: (request, h) => userAdminController.anonymizeUser(request, h),
       notes: ["- Permet à un administrateur d'anonymiser un utilisateur"],
       tags: ['api', 'admin', 'identity-access-management', 'user'],
+    },
+  },
+  {
+    method: 'POST',
+    path: '/api/admin/users/{id}/remove-authentication',
+    config: {
+      pre: [
+        {
+          method: (request, h) =>
+            securityPreHandlers.hasAtLeastOneAccessOf([
+              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+              securityPreHandlers.checkAdminMemberHasRoleSupport,
+            ])(request, h),
+        },
+      ],
+      validate: {
+        params: Joi.object({
+          id: identifiersType.userId,
+        }),
+        payload: Joi.object({
+          data: {
+            attributes: {
+              type: Joi.string().required(),
+            },
+          },
+        }),
+        options: {
+          allowUnknown: true,
+        },
+      },
+      handler: (request, h) => userController.removeAuthenticationMethod(request, h),
+      notes: ['- Permet à un administrateur de supprimer une méthode de connexion'],
+      tags: ['api', 'admin', 'user'],
     },
   },
 ];

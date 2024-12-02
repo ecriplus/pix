@@ -129,39 +129,6 @@ const register = async function (server) {
         tags: ['api', 'admin', 'user', 'authentication-method'],
       },
     },
-    {
-      method: 'POST',
-      path: '/api/admin/users/{id}/remove-authentication',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-              ])(request, h),
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            id: identifiersType.userId,
-          }),
-          payload: Joi.object({
-            data: {
-              attributes: {
-                type: Joi.string().required(),
-              },
-            },
-          }),
-          options: {
-            allowUnknown: true,
-          },
-        },
-        handler: userController.removeAuthenticationMethod,
-        notes: ['- Permet à un administrateur de supprimer une méthode de connexion'],
-        tags: ['api', 'admin', 'user'],
-      },
-    },
   ];
 
   server.route([

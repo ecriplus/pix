@@ -1,9 +1,16 @@
+import { userController } from '../../../../../lib/application/users/user-controller.js';
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
 import { userAdminController } from '../../../../../src/identity-access-management/application/user/user.admin.controller.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import * as OidcIdentityProviders from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { QUERY_TYPES } from '../../../../../src/identity-access-management/domain/constants/user-query.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
+const CODE_IDENTITY_PROVIDER_GAR = NON_OIDC_IDENTITY_PROVIDERS.GAR.code;
+const CODE_IDENTITY_PROVIDER_POLE_EMPLOI = OidcIdentityProviders.POLE_EMPLOI.code;
+
+const oidcProviderCode = 'genericOidcProviderCode';
 const routesUnderTest = identityAccessManagementRoutes[0];
 
 describe('Integration | Identity Access Management | Application | Route | Admin | User', function () {
@@ -265,6 +272,103 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
       sinon.assert.notCalled(userAdminController.anonymizeUser);
+    });
+  });
+
+  describe('POST /api/admin/users/{id}/remove-authentication', function () {
+    // eslint-disable-next-line mocha/no-setup-in-describe
+    [CODE_IDENTITY_PROVIDER_GAR, 'EMAIL', 'USERNAME', CODE_IDENTITY_PROVIDER_POLE_EMPLOI, oidcProviderCode].forEach(
+      (type) => {
+        it(`returns 200 when user is "SUPER_ADMIN" and type is ${type}`, async function () {
+          // given
+          sinon.stub(userController, 'removeAuthenticationMethod').returns('ok');
+          sinon
+            .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+            .callsFake((request, h) => h.response(true));
+          sinon
+            .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+            .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+
+          // when
+          const result = await httpTestServer.request('POST', '/api/admin/users/1/remove-authentication', {
+            data: {
+              attributes: {
+                type,
+              },
+            },
+          });
+
+          // then
+          expect(result.statusCode).to.equal(200);
+          sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
+          sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
+          sinon.assert.calledOnce(userController.removeAuthenticationMethod);
+        });
+
+        it(`returns 200 when user is "SUPPORT" and type is ${type}`, async function () {
+          // given
+          sinon.stub(userController, 'removeAuthenticationMethod').returns('ok');
+          sinon
+            .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+            .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+          sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport').callsFake((request, h) => h.response(true));
+
+          // when
+          const result = await httpTestServer.request('POST', '/api/admin/users/1/remove-authentication', {
+            data: {
+              attributes: {
+                type,
+              },
+            },
+          });
+
+          // then
+          expect(result.statusCode).to.equal(200);
+          sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
+          sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
+          sinon.assert.calledOnce(userController.removeAuthenticationMethod);
+        });
+      },
+    );
+
+    it('returns 400 when id is not a number', async function () {
+      // when
+      const result = await httpTestServer.request('POST', '/api/admin/users/invalid-id/remove-authentication', {
+        data: {
+          attributes: {
+            type: 'EMAIL',
+          },
+        },
+      });
+
+      // then
+      expect(result.statusCode).to.equal(400);
+    });
+
+    it(`returns 403 when user don't have access (CERTIF | METIER)`, async function () {
+      // given
+      sinon.stub(userController, 'removeAuthenticationMethod').returns('ok');
+      sinon
+        .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+        .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+      sinon
+        .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+        .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+
+      // when
+      const result = await httpTestServer.request('POST', '/api/admin/users/1/remove-authentication', {
+        data: {
+          attributes: {
+            type: OidcIdentityProviders.POLE_EMPLOI.code,
+          },
+        },
+      });
+
+      // then
+      sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
+      sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
+      sinon.assert.notCalled(userController.removeAuthenticationMethod);
+      expect(result.statusCode).to.equal(403);
     });
   });
 });
