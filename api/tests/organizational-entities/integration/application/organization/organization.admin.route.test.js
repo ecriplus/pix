@@ -1,7 +1,6 @@
 import { organizationAdminController } from '../../../../../src/organizational-entities/application/organization/organization.admin.controller.js';
 import * as organizationAdminRoutes from '../../../../../src/organizational-entities/application/organization/organization.admin.route.js';
 import {
-  AlreadyExistingOrganizationFeatureError,
   DpoEmailInvalid,
   FeatureNotFound,
   FeatureParamsNotProcessable,
@@ -91,20 +90,6 @@ describe('Integration | Organizational Entities | Application | Route | Admin | 
 
         // then
         expect(response.statusCode).to.equal(422);
-      });
-    });
-
-    context('when trying to add already existing feature on organization', function () {
-      it('returns a 409 HTTP status code', async function () {
-        organizationAdminController.addOrganizationFeatureInBatch.rejects(
-          new AlreadyExistingOrganizationFeatureError(),
-        );
-
-        // when
-        const response = await httpTestServer.request(method, url, payload);
-
-        // then
-        expect(response.statusCode).to.equal(409);
       });
     });
   });

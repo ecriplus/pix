@@ -1,8 +1,4 @@
-import {
-  AlreadyExistingOrganizationFeatureError,
-  FeatureNotFound,
-  OrganizationNotFound,
-} from '../../../../../src/organizational-entities/domain/errors.js';
+import { FeatureNotFound, OrganizationNotFound } from '../../../../../src/organizational-entities/domain/errors.js';
 import { OrganizationFeature } from '../../../../../src/organizational-entities/domain/models/OrganizationFeature.js';
 import { OrganizationFeatureItem } from '../../../../../src/organizational-entities/domain/models/OrganizationFeatureItem.js';
 import * as organizationFeatureRepository from '../../../../../src/organizational-entities/infrastructure/repositories/organization-feature-repository.js';
@@ -54,7 +50,7 @@ describe('Integration | Repository | Organization-for-admin', function () {
       expect(result[1].params).to.deep.equal(organizationFeatures[1].params);
     });
 
-    it('throws an error if organization feature already exists', async function () {
+    it('should passe even if organization feature already exists', async function () {
       databaseBuilder.factory.buildOrganizationFeature({ organizationId: organization.id, featureId: feature.id });
       await databaseBuilder.commit();
 
@@ -67,9 +63,7 @@ describe('Integration | Repository | Organization-for-admin', function () {
       ];
 
       // when
-      const error = await catchErr(organizationFeatureRepository.saveInBatch)(organizationFeatures);
-
-      expect(error).to.be.instanceOf(AlreadyExistingOrganizationFeatureError);
+      expect(await organizationFeatureRepository.saveInBatch(organizationFeatures)).to.not.throws;
     });
 
     it('throws an error if organization does not exists', async function () {

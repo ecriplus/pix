@@ -12,18 +12,6 @@ class UnableToAttachChildOrganizationToParentOrganizationError extends DomainErr
   }
 }
 
-class AlreadyExistingOrganizationFeatureError extends DomainError {
-  constructor({
-    code = 'ALREADY_EXISTING_ORGANIZATION_FEATURE',
-    message = 'Unable to add feature to organization',
-    meta,
-  } = {}) {
-    super(message);
-    this.code = code;
-    this.meta = meta;
-  }
-}
-
 class DpoEmailInvalid extends DomainError {
   constructor({ code = 'DPO_EMAIL_INVALID', message = 'DPO email invalid', meta } = {}) {
     super(message);
@@ -72,7 +60,6 @@ class FeatureParamsNotProcessable extends DomainError {
 }
 
 export {
-  AlreadyExistingOrganizationFeatureError,
   DpoEmailInvalid,
   FeatureNotFound,
   FeatureParamsNotProcessable,
