@@ -31,6 +31,15 @@ export class LearningContentRepository {
   }
 
   /**
+   * @param {object} object
+   */
+  async save(object) {
+    const dto = this.toDto(object);
+    const knex = DomainTransaction.getConnection();
+    await knex.insert(dto).into(this.#tableName).onConflict('id').merge();
+  }
+
+  /**
    * Maps an object to a DTO before insertion.
    * @param {object} object
    * @returns {object}
