@@ -48,6 +48,11 @@
 
     &__info {
       font-size: 0.75rem;
+
+      svg {
+        width: 1rem;
+        height: 1rem;
+      }
     }
 
     &__comment {

@@ -11,7 +11,7 @@
           aria-controls="principale-menu"
         >
           <span id="nav-mobile-button" class="sr-only">{{t "navigation.mobile-button-title"}}</span>
-          <FaIcon @icon="bars" />
+          <PixIcon @name="menu" @ariaHidden={{true}} />
         </button>
 
         <NavbarBurgerMenu @showSidebar={{this.isMenuOpen}} @onClose={{this.closeMenu}} />

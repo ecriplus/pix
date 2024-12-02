@@ -46,7 +46,7 @@ module('Integration | Component | Certification Banners | Congratulations Certif
     );
 
     // when
-    await click(screen.getByLabelText('Fermer'));
+    await click(screen.getByRole('button', { name: 'Fermer' }));
 
     // then
     sinon.assert.calledOnce(closeBannerStub);

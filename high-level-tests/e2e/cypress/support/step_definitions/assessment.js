@@ -35,20 +35,17 @@ Then(`je vois la page de résultats`, () => {
 Then(`j'ai passé à {string}`, (challenge) => {
   cy.contains(".result-item", challenge)
     .find(".result-item__icon svg")
-    .should("have.class", "fa-circle-xmark")
-    .and("have.class", "result-item__icon--grey");
+    .should("have.class", "result-item__icon--grey");
 });
 
 Then(`j'ai mal répondu à {string}`, (challenge) => {
   cy.contains(".result-item", challenge)
     .find(".result-item__icon svg")
-    .should("have.class", "fa-circle-xmark")
-    .and("have.class", "result-item__icon--red");
+    .should("have.class", "result-item__icon--red");
 });
 
 Then(`j'ai bien répondu à {string}`, (challenge) => {
   cy.contains(".result-item", challenge)
     .find(".result-item__icon svg")
-    .should("have.class", "fa-circle-check")
-    .and("have.class", "result-item__icon--green");
+    .should("have.class", "result-item__icon--green");
 });

@@ -179,10 +179,12 @@
   &__title {
     @extend %pix-title-xs;
 
+    margin-bottom: var(--pix-spacing-6x);
     text-align: center;
   }
 }
 
 .campaign-landing-page__error-button {
+  width: fit-content;
   margin: auto;
 }

@@ -121,12 +121,15 @@
     line-height: 1.375rem;
     letter-spacing: 0.009rem;
 
-    .fa-arrow-right {
-      margin-right: 5px;
+    svg {
+      width: 1rem;
+      height: 1rem;
+      margin-right: var(--pix-spacing-1x);
     }
 
     @include device-is('desktop') {
-      display: inline-table;
+      display: flex;
+      align-items: center;
     }
 
     &:focus span,

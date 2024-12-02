@@ -5,10 +5,10 @@
   <div class="certification-ender__finished-test">
     <img src="/images/illustrations/certification-ender/test-completed.svg" alt="" class="certification-ender__image" />
     <div class="certification-ender__candidate">
-      <div class="certification-ender__candidate-name">
-        <span><FaIcon @icon="circle-user" /></span>
+      <p class="certification-ender__candidate-name">
+        <PixIcon @name="userCircle" @plainIcon={{true}} @ariaHidden={{true}} />
         {{this.currentUser.user.fullName}}
-      </div>
+      </p>
       <h1 class="certification-ender__candidate-title">{{t "pages.certification-ender.candidate.title"}}</h1>
       {{#if @isEndedBySupervisor}}
         <div class="certification-ender__candidate-message">

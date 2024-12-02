@@ -14,7 +14,8 @@
   display: flex;
   flex-direction: row;
   padding: 32px 0;
-  font-family: $font-open-sans;
+
+  @extend %pix-body-m;
 
   &__info-certificate {
     align-self: center;
@@ -26,8 +27,7 @@
     }
 
     h1 {
-      font-weight: lighter;
-      font-size: 2rem;
+      @extend %pix-title-m;
     }
 
     p:nth-child(4) {
@@ -102,20 +102,18 @@
     max-width: 250px;
     margin: auto;
     color: var(--pix-neutral-900);
-    font-family: $font-open-sans;
     letter-spacing: 0;
+
+    @extend %pix-body-m;
 
     &__title {
       display: flex;
-      padding: 0;
-      padding-bottom: 8px;
-      font-weight: initial;
-      font-size: 1rem;
+      padding: 0 0 var(--pix-spacing-2x) 0;
     }
 
     &__box {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: center;
       padding: 10px 20px;
       background-color: var(--pix-neutral-20);
@@ -123,8 +121,7 @@
       border-radius: 4px;
 
       .verification-code__code {
-        margin: 0;
-        margin-right: 6px;
+        margin: 0 var(--pix-spacing-2x) 0 0;
         padding: 0;
         font-weight: bold;
         font-size: 1.25rem;
@@ -146,8 +143,7 @@
     }
 
     &__informations {
-      margin: 0;
-      margin-top: 8px;
+      margin: var(--pix-spacing-2x) 0 0 0;
       font-size: 0.8125rem;
       line-height: 20px;
     }

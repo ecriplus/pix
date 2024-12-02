@@ -24,7 +24,7 @@
       {{#if @displayHomeLink}}
         <button type="button" class="assessment-banner__home-link" onclick={{this.toggleClosingModal}}>
           {{t "common.actions.quit"}}
-          <FaIcon @icon="right-from-bracket" />
+          <PixIcon @name="logout" @ariaHidden={{true}} />
         </button>
         <PixModal
           class="assessment-banner__closing-modal"

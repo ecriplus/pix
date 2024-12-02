@@ -86,13 +86,11 @@
             </ul>
           {{/if}}
           {{#if this.errorMessageLink}}
-            <a
-              rel="noopener noreferrer"
-              target="_blank"
-              href={{this.errorMessageLink.url}}
-            >{{this.errorMessageLink.label}}
+            <a rel="noopener noreferrer" target="_blank" href={{this.errorMessageLink.url}}>
+              {{this.errorMessageLink.label}}
+              <PixIcon @name="openNew" @title={{t "navigation.external-link-title"}} />
             </a>
-            <FaIcon @icon="up-right-from-square" />
+
           {{/if}}
         </PixMessage>
       </div>

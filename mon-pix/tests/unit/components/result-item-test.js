@@ -44,10 +44,10 @@ module('Unit | Component | result-item-component', function (hooks) {
 
   module('#resultItem Computed property - defined case', function () {
     [
-      { result: 'ok', expectedColor: 'green', expectedIcon: 'circle-check' },
-      { result: 'ko', expectedColor: 'red', expectedIcon: 'circle-xmark' },
-      { result: 'timedout', expectedColor: 'red', expectedIcon: 'circle-xmark' },
-      { result: 'aband', expectedColor: 'grey', expectedIcon: 'circle-xmark' },
+      { result: 'ok', expectedColor: 'green', expectedIcon: 'checkCircle' },
+      { result: 'ko', expectedColor: 'red', expectedIcon: 'cancel' },
+      { result: 'timedout', expectedColor: 'red', expectedIcon: 'cancel' },
+      { result: 'aband', expectedColor: 'grey', expectedIcon: 'cancel' },
     ].forEach((data) => {
       test(`should return a ${data.expectedColor} ${data.expectedIcon} icon when answer provided has a ${data.result} result`, function (assert) {
         // given

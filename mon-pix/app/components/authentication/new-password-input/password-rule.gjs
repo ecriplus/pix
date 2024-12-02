@@ -1,13 +1,13 @@
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import Component from '@glimmer/component';
 
 const RULE_STYLES = {
   VALID: {
-    iconClass: 'circle-check',
+    iconClass: 'checkCircle',
     listItemClass: 'password-rule',
   },
   INVALID: {
-    iconClass: 'circle-xmark',
+    iconClass: 'cancel',
     listItemClass: 'password-rule password-rule--error',
   },
 };
@@ -19,7 +19,7 @@ export default class PasswordRule extends Component {
 
   <template>
     <li class="{{this.classes.listItemClass}}" aria-label="{{@description}}.">
-      <FaIcon @icon="{{this.classes.iconClass}}" />
+      <PixIcon @name={{this.classes.iconClass}} @plainIcon={{true}} @ariaHidden={{true}} />
       <p aria-live="polite"> {{@description}} </p>
     </li>
   </template>

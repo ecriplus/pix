@@ -149,8 +149,8 @@ form .challenge-response.challenge-response--locked {
 
 form .challenge-response-locked {
   &__icon {
-    font-size: 3.125rem;
-    opacity: 1;
+    width: 3.125rem;
+    height: 3.125rem;
 
     &:hover {
       opacity: 1;

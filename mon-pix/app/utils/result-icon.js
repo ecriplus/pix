@@ -1,22 +1,22 @@
 const resultIcons = {
   ok: {
-    icon: 'circle-check',
+    icon: 'checkCircle',
     color: 'green',
   },
   ko: {
-    icon: 'circle-xmark',
+    icon: 'cancel',
     color: 'red',
   },
   focusedOut: {
-    icon: 'circle-xmark',
+    icon: 'cancel',
     color: 'red',
   },
   aband: {
-    icon: 'circle-xmark',
+    icon: 'cancel',
     color: 'grey',
   },
   timedout: {
-    icon: 'circle-xmark',
+    icon: 'cancel',
     color: 'red',
   },
 };

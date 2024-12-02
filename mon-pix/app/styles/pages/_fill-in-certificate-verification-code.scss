@@ -2,11 +2,23 @@
   max-width: max-content;
   margin: 0 auto 32px;
   padding: 48px 24px;
-  font-family: $font-roboto;
   text-align: center;
+
+  @extend %pix-body-m;
 
   @include device-is('tablet') {
     padding: 48px 60px;
+  }
+
+  &__title {
+    @extend %pix-title-m;
+  }
+
+  &__description {
+    max-width: 500px;
+    margin: var(--pix-spacing-6x) 0;
+    color: var(--pix-neutral-500);
+    line-height: 22px;
   }
 
   &__form {
@@ -14,32 +26,17 @@
     flex-direction: column;
     align-items: center;
 
-    .form__title {
-      margin-bottom: 16px;
-      color: var(--pix-neutral-800);
-      font-size: 2rem;
-      font-family: $font-open-sans;
-    }
-
-    .form__description {
-      max-width: 500px;
-      margin-bottom: 32px;
-      color: var(--pix-neutral-500);
-      line-height: 22px;
-    }
-
     .form__input-and-label {
       display: flex;
       flex-direction: column;
 
       label {
         margin-bottom: 6px;
-        color: var(--pix-neutral-900);
-        font-weight: var(--pix-font-normal);
-        font-size: 0.875rem;
         line-height: 22px;
         letter-spacing: 0.15px;
         text-align: left;
+
+        @extend %pix-body-s;
       }
 
       input {
@@ -54,24 +51,13 @@
     }
 
     .form__actions {
-      width: calc(276px + 4px + 0.5ch + 1px);
-      margin-top: 24px;
-      padding: 14px 20px;
+      margin: var(--pix-spacing-6x) 0;
     }
 
     .form__error--validation {
-      margin: 16px 10px 0;
       color: var(--pix-error-700);
-      font-size: 0.875rem;
-    }
 
-    .form__error--not-found {
-      margin: 0;
-      margin-top: 16px;
-
-      svg {
-        margin-right: 4px;
-      }
+      @extend %pix-body-s;
     }
   }
 }

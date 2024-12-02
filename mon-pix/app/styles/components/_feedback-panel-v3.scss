@@ -41,7 +41,8 @@
   text-decoration: underline;
 
   svg {
-    margin-right: var(--pix-spacing-1x);
+    width: 1rem;
+    height: 1rem;
   }
 
   &[aria-expanded='true'] {

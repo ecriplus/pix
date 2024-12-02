@@ -25,40 +25,36 @@
   &__candidate-name {
     display: block;
     color: var(--pix-neutral-500);
-    font-weight: normal;
-    font-size: 1.25rem;
-    font-family: $font-open-sans;
-    line-height: 45px;
+
+    @extend %pix-body-l;
+
+    @include device-is('tablet') {
+      display: flex;
+      gap: var(--pix-spacing-1x);
+      align-items: center;
+    }
   }
 
   &__candidate-title {
-    display: block;
     color: var(--pix-success-700);
-    font-size: 2rem;
-    font-family: $font-open-sans;
-    line-height: 64px;
+
+    @extend %pix-title-m;
   }
 
   &__candidate-message {
-    display: block;
     width: 272px;
     margin: 16px auto auto;
     color: var(--pix-neutral-100);
-    font-size: 1rem;
-    font-family: $font-roboto;
-    line-height: 22px;
+
+    @extend %pix-body-l;
   }
 
   &__remote-certification {
     margin-top: 16px;
 
     .pix-message {
-
       &__content {
-        margin-left: 16px;
         color: var(--pix-neutral-500);
-        font-size: 14px;
-        line-height: 20px;
       }
     }
   }
@@ -76,9 +72,8 @@
     width: 272px;
     margin: auto;
     color: var(--pix-neutral-500);
-    font-size: 0.875rem;
-    font-family: $font-roboto;
-    line-height: 22px;
+
+    @extend %pix-body-s;
   }
 
   &__results {
@@ -92,27 +87,23 @@
   &__results-disclaimer {
     margin-bottom: 8px;
     color: var(--pix-success-700);
-    font-weight: 600;
-    font-size: 0.875rem;
-    font-family: $font-open-sans;
-    line-height: 23px;
+    font-weight: var(--pix-font-bold);
     text-transform: uppercase;
+
+    @extend %pix-body-s;
   }
 
   &__results-title {
-    display: block;
     margin-bottom: 6px;
     color: var(--pix-neutral-900);
-    font-size: 1.25rem;
-    font-family: $font-open-sans;
+
+    @extend %pix-body-l;
   }
 
   &__results-steps {
-    display: block;
     color: var(--pix-neutral-500);
-    font-size: 0.875rem;
-    font-family: $font-roboto;
-    line-height: 22px;
+
+    @extend %pix-body-s;
   }
 }
 
@@ -149,10 +140,6 @@
 
     &__candidate-disconnect-tip {
       width: auto;
-    }
-
-    &__candidate-name {
-      font-size: 1.5rem;
     }
 
     &__candidate-title {
