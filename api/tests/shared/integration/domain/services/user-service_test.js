@@ -1,11 +1,11 @@
 import lodash from 'lodash';
 const { pick } = lodash;
 
-import * as organizationLearnerRepository from '../../../../../lib/infrastructure/repositories/organization-learner-repository.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import * as authenticationMethodRepository from '../../../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import { userToCreateRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/user-to-create.repository.js';
+import * as organizationLearnerRepository from '../../../../../src/prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import { OrganizationLearnerNotFound } from '../../../../../src/shared/domain/errors.js';
 import * as userService from '../../../../../src/shared/domain/services/user-service.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
@@ -153,7 +153,7 @@ describe('Integration | Domain | Services | user-service', function () {
         });
 
         // then
-        const foundOrganizationLearner = await organizationLearnerRepository.get(organizationLearnerId);
+        const foundOrganizationLearner = await organizationLearnerRepository.getLearnerInfo(organizationLearnerId);
         expect(updatedUserId).to.equal(foundOrganizationLearner.userId);
       });
 

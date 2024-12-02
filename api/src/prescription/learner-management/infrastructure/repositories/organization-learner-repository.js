@@ -8,6 +8,7 @@ import {
   UserCouldNotBeReconciledError,
 } from '../../../../shared/domain/errors.js';
 import { OrganizationLearner } from '../../../../shared/domain/models/index.js';
+import { OrganizationLearnerCertificabilityNotUpdatedError } from '../../domain/errors.js';
 import { CommonOrganizationLearner } from '../../domain/models/CommonOrganizationLearner.js';
 import { OrganizationLearnerForAdmin } from '../../domain/read-models/OrganizationLearnerForAdmin.js';
 import * as studentRepository from './student-repository.js';
@@ -302,6 +303,34 @@ const reconcileUserToOrganizationLearner = async function ({ userId, organizatio
   }
 };
 
+async function updateCertificability(organizationLearner) {
+  const knexConn = DomainTransaction.getConnection();
+  const result = await knexConn('organization-learners').where({ id: organizationLearner.id }).update({
+    isCertifiable: organizationLearner.isCertifiable,
+    certifiableAt: organizationLearner.certifiableAt,
+  });
+  if (result === 0) {
+    throw new OrganizationLearnerCertificabilityNotUpdatedError(
+      `Could not update certificability for OrganizationLearner with ID ${organizationLearner.id}.`,
+    );
+  }
+}
+
+async function getLearnerInfo(organizationLearnerId) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const organizationLearner = await knexConn
+    .select('*')
+    .from('view-active-organization-learners')
+    .where({ id: organizationLearnerId })
+    .first();
+
+  if (!organizationLearner) {
+    throw new NotFoundError(`Student not found for ID ${organizationLearnerId}`);
+  }
+  return new OrganizationLearner(organizationLearner);
+}
+
 /**
  * @function
  * @name findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId
@@ -325,10 +354,12 @@ export {
   findByUserId,
   findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId,
   findOrganizationLearnerIdsByOrganizationId,
+  getLearnerInfo,
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
   reconcileUserToOrganizationLearner,
   removeByIds,
   saveCommonOrganizationLearners,
   update,
+  updateCertificability,
 };
