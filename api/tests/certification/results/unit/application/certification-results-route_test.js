@@ -36,4 +36,25 @@ describe('Certification | Results | Unit | Application | Certification Results R
       expect(response.statusCode).to.equal(200);
     });
   });
+
+  describe('POST /api/sessions/download-all-results', function () {
+    describe('when payload is invalid', function () {
+      it('should return 400', async function () {
+        // given
+        sinon.stub(certificationResultsController, 'postSessionResultsToDownload').returns('ok');
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request('POST', '/api/sessions/download-all-results', {
+          not: 'aValidPayload',
+        });
+
+        // then
+        expect(response.statusCode).to.equal(400);
+        const { errors } = JSON.parse(response.payload);
+        expect(errors[0].detail).to.equals('"token" is required');
+      });
+    });
+  });
 });

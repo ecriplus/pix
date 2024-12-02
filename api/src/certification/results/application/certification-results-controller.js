@@ -71,6 +71,26 @@ const getSessionResultsToDownload = async function (
     .header('Content-Disposition', `attachment; filename=${csvResult.filename}`);
 };
 
+const postSessionResultsToDownload = async function (
+  request,
+  h,
+  dependencies = { tokenService, getSessionCertificationResultsCsv },
+) {
+  const { sessionId } = dependencies.tokenService.extractCertificationResultsLink(request.payload.token);
+  const { session, certificationResults } = await usecases.getSessionResults({ sessionId });
+
+  const csvResult = await dependencies.getSessionCertificationResultsCsv({
+    session,
+    certificationResults,
+    i18n: request.i18n,
+  });
+
+  return h
+    .response(csvResult.content)
+    .header('Content-Type', 'text/csv;charset=utf-8')
+    .header('Content-Disposition', `attachment; filename=${csvResult.filename}`);
+};
+
 const getCertifiedProfile = async function (
   request,
   h,
@@ -86,6 +106,7 @@ const certificationResultsController = {
   getCleaCertifiedCandidateDataCsv,
   getSessionResultsByRecipientEmail,
   getSessionResultsToDownload,
+  postSessionResultsToDownload,
   getCertifiedProfile,
 };
 
