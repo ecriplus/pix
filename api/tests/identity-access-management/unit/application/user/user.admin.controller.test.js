@@ -1,4 +1,5 @@
 import { userAdminController } from '../../../../../src/identity-access-management/application/user/user.admin.controller.js';
+import { QUERY_TYPES } from '../../../../../src/identity-access-management/domain/constants/user-query.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
@@ -49,7 +50,7 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
 
     it('allows to filter users by first name', async function () {
       // given
-      const query = { filter: { firstName: 'Alexia' }, page: {} };
+      const query = { filter: { firstName: 'Alexia' }, page: {}, queryType: QUERY_TYPES.CONTAINS };
       const request = { query };
       usecases.findPaginatedFilteredUsers.resolves({ models: {}, pagination: {} });
 
@@ -62,7 +63,7 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
 
     it('allows to filter users by last name', async function () {
       // given
-      const query = { filter: { lastName: 'Granjean' }, page: {} };
+      const query = { filter: { lastName: 'Granjean' }, page: {}, queryType: QUERY_TYPES.CONTAINS };
       const request = { query };
       usecases.findPaginatedFilteredUsers.resolves({ models: {}, pagination: {} });
 
@@ -75,7 +76,7 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
 
     it('allows to filter users by email', async function () {
       // given
-      const query = { filter: { email: 'alexiagranjean' }, page: {} };
+      const query = { filter: { email: 'alexiagranjean' }, page: {}, queryType: QUERY_TYPES.CONTAINS };
       const request = { query };
       usecases.findPaginatedFilteredUsers.resolves({ models: {}, pagination: {} });
 
@@ -88,7 +89,11 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
 
     it('allows to paginate on a given page and page size', async function () {
       // given
-      const query = { filter: { email: 'alexiagranjean' }, page: { number: 2, size: 25 } };
+      const query = {
+        filter: { email: 'alexiagranjean' },
+        page: { number: 2, size: 25 },
+        queryType: QUERY_TYPES.CONTAINS,
+      };
       const request = { query };
       usecases.findPaginatedFilteredUsers.resolves({ models: {}, pagination: {} });
 

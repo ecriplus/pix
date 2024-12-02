@@ -1,0 +1,4 @@
+export const QUERY_TYPES = {
+  CONTAINS: 'CONTAINS',
+  EXACT_QUERY: 'EXACT_QUERY',
+};

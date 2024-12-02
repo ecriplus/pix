@@ -1,3 +1,4 @@
+import { QUERY_TYPES } from '../../../../../src/identity-access-management/domain/constants/user-query.js';
 import {
   createServer,
   databaseBuilder,
@@ -44,32 +45,59 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
   });
 
   describe('GET /api/admin/users', function () {
-    context('When filters match a list of users', function () {
-      let requestOptions;
+    let requestOptions;
 
-      beforeEach(async function () {
-        const user = await insertUserWithRoleSuperAdmin();
-        const params = '?filter[firstName]=Ann' + '&page[number]=1&page[size]=25';
+    beforeEach(async function () {
+      await databaseBuilder.factory.buildUser({ firstName: 'Ann' });
+      await databaseBuilder.factory.buildUser({ firstName: 'Anne' });
+      await databaseBuilder.factory.buildUser({ firstName: 'Annie' });
+      await databaseBuilder.factory.buildUser({ firstName: 'Lisa' });
+      await databaseBuilder.commit();
+    });
 
-        requestOptions = {
-          method: 'GET',
-          url: `/api/admin/users${params}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
-        };
+    context('When EXACT_QUERY type is settled', function () {
+      context('When filters match a list of users', function () {
+        it('retrieves this list of users', async function () {
+          // given
+          const user = await insertUserWithRoleSuperAdmin();
+          const params =
+            '?filter[firstName]=Ann' + '&page[number]=1&page[size]=25' + `&queryType=${QUERY_TYPES.EXACT_QUERY}`;
 
-        await databaseBuilder.factory.buildUser({ firstName: 'Ann' });
-        await databaseBuilder.factory.buildUser({ firstName: 'Anne' });
-        await databaseBuilder.factory.buildUser({ firstName: 'Annie' });
-        await databaseBuilder.commit();
+          requestOptions = {
+            method: 'GET',
+            url: `/api/admin/users${params}`,
+            headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          };
+          // when
+          const response = await server.inject(requestOptions);
+
+          // then
+          const { result, statusCode } = response;
+          expect(statusCode).to.equal(200);
+          expect(result.data).to.have.lengthOf(1);
+        });
       });
+    });
+    context('When CONTAINS type is settled', function () {
+      context('When filters match a list of users', function () {
+        it('retrieves this list of users', async function () {
+          // given
+          const user = await insertUserWithRoleSuperAdmin();
+          const params =
+            '?filter[firstName]=Ann' + '&page[number]=1&page[size]=25' + `&queryType=${QUERY_TYPES.CONTAINS}`;
 
-      it('retrieves this list of users', async function () {
-        // when
-        const response = await server.inject(requestOptions);
-        // then
-        const { result, statusCode } = response;
-        expect(statusCode).to.equal(200);
-        expect(result.data).to.have.lengthOf(3);
+          requestOptions = {
+            method: 'GET',
+            url: `/api/admin/users${params}`,
+            headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          };
+          // when
+          const response = await server.inject(requestOptions);
+          // then
+          const { result, statusCode } = response;
+          expect(statusCode).to.equal(200);
+          expect(result.data).to.have.lengthOf(3);
+        });
       });
     });
   });

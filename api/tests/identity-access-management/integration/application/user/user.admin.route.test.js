@@ -1,5 +1,6 @@
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
 import { userAdminController } from '../../../../../src/identity-access-management/application/user/user.admin.controller.js';
+import { QUERY_TYPES } from '../../../../../src/identity-access-management/domain/constants/user-query.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
@@ -22,7 +23,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       // when
       const response = await httpTestServer.request(
         'GET',
-        '/api/admin/users?filter[firstName]=Bruce&filter[lastName]=Wayne&filter[email]=batman@gotham.city&page[number]=3&page[size]=25',
+        `/api/admin/users?filter[firstName]=Bruce&filter[lastName]=Wayne&filter[email]=batman@gotham.city&page[number]=3&page[size]=25&queryType=${QUERY_TYPES.CONTAINS}`,
       );
 
       // then
@@ -43,7 +44,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       // when
       const response = await httpTestServer.request(
         'GET',
-        '/api/admin/users?filter[firstName]=Bruce&filter[lastName]=Wayne&filter[email]=batman@gotham.city&page[number]=3&page[size]=25',
+        `/api/admin/users?filter[firstName]=Bruce&filter[lastName]=Wayne&filter[email]=batman@gotham.city&page[number]=3&page[size]=25&queryType=${QUERY_TYPES.CONTAINS}`,
       );
 
       // then

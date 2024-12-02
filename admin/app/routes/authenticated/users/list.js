@@ -7,6 +7,7 @@ export default class ListRoute extends Route {
   queryParams = {
     pageNumber: { refreshModel: true },
     pageSize: { refreshModel: true },
+    queryType: { refreshModel: true },
     id: { refreshModel: true },
     firstName: { refreshModel: true },
     lastName: { refreshModel: true },
@@ -30,6 +31,7 @@ export default class ListRoute extends Route {
           number: params.pageNumber,
           size: params.pageSize,
         },
+        queryType: params.queryType,
       });
       return users;
     } catch (error) {
@@ -46,6 +48,7 @@ export default class ListRoute extends Route {
       controller.lastName = null;
       controller.email = null;
       controller.username = null;
+      controller.queryType = 'CONTAINS';
     }
   }
 }

@@ -5,6 +5,7 @@ import { securityPreHandlers } from '../../../shared/application/security-pre-ha
 import { SUPPORTED_LOCALES } from '../../../shared/domain/constants.js';
 import { AVAILABLE_LANGUAGES } from '../../../shared/domain/services/language-service.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
+import { QUERY_TYPES } from '../../domain/constants/user-query.js';
 import { userAdminController } from './user.admin.controller.js';
 
 export const userAdminRoutes = [
@@ -62,6 +63,10 @@ export const userAdminRoutes = [
             number: Joi.number().integer().empty('').allow(null).optional(),
             size: Joi.number().integer().empty('').allow(null).optional(),
           }).default({}),
+          queryType: Joi.string()
+            .valid(QUERY_TYPES.CONTAINS, QUERY_TYPES.EXACT_QUERY)
+            .default(QUERY_TYPES.CONTAINS)
+            .optional(),
         }),
       },
       handler: (request, h) => userAdminController.findPaginatedFilteredUsers(request, h),

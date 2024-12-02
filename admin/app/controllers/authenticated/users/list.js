@@ -1,13 +1,25 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 const DEFAULT_PAGE_NUMBER = 1;
+const DEFAULT_QUERY_TYPE = 'CONTAINS';
 
 export default class ListController extends Controller {
-  queryParams = ['pageNumber', 'pageSize', 'id', 'firstName', 'lastName', 'email', 'username'];
+  @service intl;
+
+  queryParams = ['pageNumber', 'pageSize', 'id', 'firstName', 'lastName', 'email', 'username', 'queryType'];
+
+  get queryTypes() {
+    return [
+      { value: 'CONTAINS', label: this.intl.t('pages.users-list.query.contains') },
+      { value: 'EXACT_QUERY', label: this.intl.t('pages.users-list.query.exact') },
+    ];
+  }
 
   @tracked pageNumber = DEFAULT_PAGE_NUMBER;
+  @tracked queryType = DEFAULT_QUERY_TYPE;
   @tracked pageSize = 10;
   @tracked id = null;
   @tracked firstName = null;
@@ -20,6 +32,7 @@ export default class ListController extends Controller {
   @tracked lastNameForm = null;
   @tracked emailForm = null;
   @tracked usernameForm = null;
+  @tracked queryTypeForm = DEFAULT_QUERY_TYPE;
 
   @action
   async refreshModel(event) {
@@ -29,6 +42,7 @@ export default class ListController extends Controller {
     this.lastName = this.lastNameForm;
     this.email = this.emailForm;
     this.username = this.usernameForm;
+    this.queryType = this.queryTypeForm;
     this.pageNumber = DEFAULT_PAGE_NUMBER;
   }
 
@@ -56,6 +70,10 @@ export default class ListController extends Controller {
   onChangeUsername(event) {
     this.usernameForm = event.target.value;
   }
+  @action
+  onChangeQueryType(value) {
+    this.queryTypeForm = value;
+  }
 
   @action
   clearSearchFields() {
@@ -64,11 +82,13 @@ export default class ListController extends Controller {
     this.lastName = null;
     this.email = null;
     this.username = null;
+    this.queryType = DEFAULT_QUERY_TYPE;
 
     this.idForm = null;
     this.firstNameForm = null;
     this.lastNameForm = null;
     this.emailForm = null;
     this.usernameForm = null;
+    this.queryTypeForm = DEFAULT_QUERY_TYPE;
   }
 }
