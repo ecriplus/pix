@@ -59,7 +59,7 @@ export default class DeleteAccountSection extends Component {
     <section class="delete-account-section">
       <h2>{{t "pages.user-account.delete-account.title"}}</h2>
 
-      <p>
+      <p class="delete-account-section__content">
         {{#if this.hasEmail}}
           {{t
             "pages.user-account.delete-account.warning-email"
@@ -78,7 +78,7 @@ export default class DeleteAccountSection extends Component {
         {{/if}}
       </p>
 
-      <p>
+      <p class="delete-account-section__content">
         {{t "pages.user-account.delete-account.more-information"}}
         <a href="{{this.supportHomeUrl}}" target="_blank" rel="noopener noreferrer">
           {{t "pages.user-account.delete-account.more-information-contact-support"}}
