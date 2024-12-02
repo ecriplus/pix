@@ -8,6 +8,8 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
   let successRepository;
   let rewardRepository;
 
+  let dependencies;
+
   beforeEach(function () {
     userId = 1;
 
@@ -22,6 +24,13 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
     successRepository = { find: sinon.stub() };
 
     rewardRepository = { save: sinon.stub(), getByUserId: sinon.stub() };
+
+    dependencies = {
+      questRepository,
+      eligibilityRepository,
+      successRepository,
+      rewardRepository,
+    };
   });
 
   context('when there are no quests available', function () {
@@ -30,7 +39,21 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
       questRepository.findAll.resolves([]);
 
       // when
-      await rewardUser({ userId, questRepository, eligibilityRepository });
+      await rewardUser({ userId, ...dependencies });
+      expect(eligibilityRepository.find).to.not.have.been.called;
+    });
+  });
+
+  context('when user id is not provided', function () {
+    it('should not call eligibility repository', async function () {
+      // given
+      const quest = { isEligible: () => false };
+      questRepository.findAll.resolves([quest]);
+      rewardRepository.getByUserId.resolves([]);
+      eligibilityRepository.find.resolves([]);
+
+      // when
+      await rewardUser({ userId: null, ...dependencies });
       expect(eligibilityRepository.find).to.not.have.been.called;
     });
   });
@@ -46,10 +69,7 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
       // when
       await rewardUser({
         userId,
-        questRepository,
-        eligibilityRepository,
-        successRepository,
-        rewardRepository,
+        ...dependencies,
       });
       expect(successRepository.find).to.not.have.been.called;
     });
@@ -72,10 +92,7 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
       // when
       await rewardUser({
         userId,
-        questRepository,
-        eligibilityRepository,
-        successRepository,
-        rewardRepository,
+        ...dependencies,
       });
 
       // then
@@ -99,10 +116,7 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
       // when
       await rewardUser({
         userId,
-        questRepository,
-        eligibilityRepository,
-        successRepository,
-        rewardRepository,
+        ...dependencies,
       });
       expect(successRepository.find).to.not.have.been.called;
     });

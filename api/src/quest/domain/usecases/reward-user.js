@@ -5,6 +5,10 @@ export const rewardUser = async ({
   successRepository,
   rewardRepository,
 }) => {
+  if (!userId) {
+    return;
+  }
+
   const quests = await questRepository.findAll();
 
   if (quests.length === 0) {
