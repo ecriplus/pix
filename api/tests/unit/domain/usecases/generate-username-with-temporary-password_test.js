@@ -20,7 +20,7 @@ describe('Unit | UseCase | generate-username-with-temporary-password', function 
 
   let authenticationMethodRepository;
   let userRepository;
-  let organizationLearnerRepository;
+  let prescriptionOrganizationLearnerRepository;
 
   beforeEach(function () {
     userRelatedToStudent = domainBuilder.buildUser({
@@ -55,10 +55,12 @@ describe('Unit | UseCase | generate-username-with-temporary-password', function 
       get: sinon.stub().resolves(userRelatedToStudent),
       updateUsernameAndPassword: sinon.stub().resolves(),
     };
-    organizationLearnerRepository = {
-      get: sinon.stub(),
+    prescriptionOrganizationLearnerRepository = {
+      getLearnerInfo: sinon.stub(),
     };
-    organizationLearnerRepository.get.withArgs(organizationLearnerId).resolves(organizationLearner);
+    prescriptionOrganizationLearnerRepository.getLearnerInfo
+      .withArgs(organizationLearnerId)
+      .resolves(organizationLearner);
   });
 
   it('should generate username and temporary password', async function () {
@@ -72,7 +74,7 @@ describe('Unit | UseCase | generate-username-with-temporary-password', function 
       userService,
       authenticationMethodRepository,
       userRepository,
-      organizationLearnerRepository,
+      prescriptionOrganizationLearnerRepository,
     });
 
     // then
@@ -94,7 +96,7 @@ describe('Unit | UseCase | generate-username-with-temporary-password', function 
       userService,
       authenticationMethodRepository,
       userRepository,
-      organizationLearnerRepository,
+      prescriptionOrganizationLearnerRepository,
     });
 
     // then
@@ -119,7 +121,7 @@ describe('Unit | UseCase | generate-username-with-temporary-password', function 
       userService,
       authenticationMethodRepository,
       userRepository,
-      organizationLearnerRepository,
+      prescriptionOrganizationLearnerRepository,
     });
 
     // then
@@ -152,7 +154,9 @@ describe('Unit | UseCase | generate-username-with-temporary-password', function 
 
       userReconciliationService.createUsernameByUser.resolves(username);
 
-      organizationLearnerRepository.get.withArgs(organizationLearner.id).resolves(organizationLearner);
+      prescriptionOrganizationLearnerRepository.getLearnerInfo
+        .withArgs(organizationLearner.id)
+        .resolves(organizationLearner);
       userRepository.get.resolves(userWithEmail);
       userRepository.updateUsername.resolves({ ...userWithEmail, username });
 
@@ -170,7 +174,7 @@ describe('Unit | UseCase | generate-username-with-temporary-password', function 
         userService,
         authenticationMethodRepository,
         userRepository,
-        organizationLearnerRepository,
+        prescriptionOrganizationLearnerRepository,
       });
 
       // then
