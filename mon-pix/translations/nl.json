@@ -232,7 +232,7 @@
         },
         "errors": {
           "invalid-locale-format": "Uw locale \"{invalidLocale}\" heeft de verkeerde indeling.",
-          "invalid-or-already-used-email" : "Invalid or already used e-mail address",
+          "invalid-or-already-used-email": "Invalid or already used e-mail address",
           "locale-not-supported": "Uw \"{localeNotSupported}\" locale wordt momenteel niet ondersteund."
         },
         "fields": {
@@ -370,7 +370,7 @@
                 "new-email": "Zo niet, voer dan een nieuwe in."
               },
               "empty-email": "Het e-mailadresveld is verplicht.",
-              "invalid-or-already-used-email" : "Invalid or already used e-mail address",
+              "invalid-or-already-used-email": "Invalid or already used e-mail address",
               "new-backup-email": "Voer een geldig e-mailadres in om uw account te herstellen",
               "new-email-already-exist": "Dit e-mailadres is al in gebruik",
               "wrong-email-format": "Uw e-mailadres is ongeldig."
@@ -1667,26 +1667,6 @@
       "username": "Inloggen"
     },
     "password-reset-demand": {
-      "actions": {
-        "back-home": "Terug naar de homepage",
-        "back-sign-in": "Terug naar de inlogpagina",
-        "reset": "Mijn wachtwoord resetten"
-      },
-      "error": {
-        "message": "Dit e-mailadres komt niet overeen met een account"
-      },
-      "fields": {
-        "email": {
-          "label": "E-mail adres"
-        }
-      },
-      "page-title": "Wachtwoord vergeten",
-      "subtitle": "Voer hieronder je e-mailadres in en je kunt aan de slag!",
-      "succeed": {
-        "help": "Als je deze e-mail niet ontvangt, controleer dan je spamfolder.",
-        "instructions": "Er is een e-mail met instructies voor het opnieuw instellen van uw wachtwoord\nverzonden naar het e-mailadres {email}.",
-        "subtitle": "Wachtwoord opnieuw instellen"
-      },
       "title": "Bent u uw wachtwoord vergeten?"
     },
     "profile-already-shared": {
@@ -1740,23 +1720,10 @@
       }
     },
     "reset-password": {
-      "actions": {
-        "sign-in": "Log in op",
-        "submit": "Stuur naar"
-      },
       "error": {
-        "expired-demand": "Het spijt ons, maar uw wachtwoordaanvraag is al gebruikt of verlopen. Probeer het opnieuw.",
-        "forbidden": "Er is een fout opgetreden, neem contact op met ondersteuning.",
-        "wrong-format": "Je wachtwoord moet minstens 8 tekens lang zijn en minstens één hoofdletter, één kleine letter en één cijfer bevatten."
-      },
-      "fields": {
-        "password": {
-          "label": "Wachtwoord"
-        }
+        "expired-demand": "Het spijt ons, maar uw wachtwoordaanvraag is al gebruikt of verlopen. Probeer het opnieuw."
       },
       "first-title": "Wachtwoord opnieuw instellen",
-      "instruction": "Voer uw nieuwe wachtwoord in",
-      "succeed": "Uw wachtwoord is gewijzigd.",
       "title": "Mijn wachtwoord wijzigen"
     },
     "result-item": {
@@ -1793,9 +1760,6 @@
       "actions": {
         "submit": "Ik ben online"
       },
-      "error": {
-        "message": "Het e-mailadres of de ingevoerde gebruikersnaam en/of wachtwoord zijn onjuist"
-      },
       "fields": {
         "legend": "Informatie die nodig is om in te loggen.",
         "login": {
@@ -1808,23 +1772,6 @@
       },
       "first-title": "Log in op",
       "forgotten-password": "Bent u uw wachtwoord vergeten?",
-      "fwb": {
-        "link": {
-          "img": "FWB verbinden"
-        },
-        "title": "Verbinding maken via het FWB"
-      },
-      "or": "OF",
-      "pole-emploi": {
-        "link": {
-          "img": "pôle Emploi connect"
-        },
-        "title": "Contact maken met Pôle Emploi"
-      },
-      "subtitle": {
-        "link": "Een account aanmaken",
-        "text": "Heb je nog geen Pix-account?"
-      },
       "title": "Verbinding"
     },
     "sign-up": {
@@ -1838,30 +1785,10 @@
       },
       "fields": {
         "email": {
-          "error": "Uw e-mailadres is ongeldig.",
-          "help": "(voorbeeld: naam.voornaam@voorbeeld.org)",
-          "label": "E-mail adres"
-        },
-        "firstname": {
-          "error": "Je voornaam is niet ingevuld.",
-          "label": "Voornaam"
-        },
-        "lastname": {
-          "error": "Je naam is niet ingevuld.",
-          "label": "Achternaam"
-        },
-        "legend": "Vereiste informatie voor registratie.",
-        "password": {
-          "error": "Je wachtwoord moet minstens 8 tekens lang zijn en minstens één hoofdletter, één kleine letter en één cijfer bevatten.",
-          "help": "(minimaal 8 tekens, waaronder een hoofdletter, een kleine letter en een cijfer)",
-          "label": "Wachtwoord"
+          "help": "(voorbeeld: naam.voornaam@voorbeeld.org)"
         }
       },
       "first-title": "Aanmelden",
-      "instructions": "Velden gemarkeerd met '<abbr title=\"mandatory\" class=\"mandatory-mark\">'*'</abbr>' zijn verplicht.",
-      "subtitle": {
-        "link": "inloggen op uw account"
-      },
       "title": "Registratie"
     },
     "sitemap": {
@@ -2082,7 +2009,7 @@
           "errors": {
             "empty-password": "Je wachtwoord mag niet leeg zijn.",
             "invalid-email": "Uw e-mailadres is ongeldig.",
-            "invalid-or-already-used-email" : "Invalid or already used e-mail address",
+            "invalid-or-already-used-email": "Invalid or already used e-mail address",
             "invalid-password": "Het ingevoerde wachtwoord is ongeldig.",
             "new-email-already-exist": "Dit e-mailadres is al in gebruik."
           },

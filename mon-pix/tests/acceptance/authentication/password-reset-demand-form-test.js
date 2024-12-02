@@ -32,7 +32,9 @@ module('Acceptance | Password reset demand form', function (hooks) {
     });
     const screen = await visit('/mot-de-passe-oublie');
     await fillIn(
-      screen.getByRole('textbox', { name: t('pages.password-reset-demand.fields.email.label') }),
+      screen.getByRole('textbox', {
+        name: t('components.authentication.password-reset-demand-form.fields.email.label'),
+      }),
       'brandone.martins@pix.com',
     );
 
