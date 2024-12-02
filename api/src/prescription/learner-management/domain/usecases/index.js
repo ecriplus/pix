@@ -7,6 +7,7 @@ import * as campaignRepository from '../../../../../lib/infrastructure/repositor
 import * as libOrganizationLearnerRepository from '../../../../../lib/infrastructure/repositories/organization-learner-repository.js';
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as organizationFeatureApi from '../../../../organizational-entities/application/api/organization-features-api.js';
+import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
 import { logErrorWithCorrelationIds } from '../../../../shared/infrastructure/monitoring-tools.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
@@ -46,6 +47,7 @@ import { importStorage } from '../../infrastructure/storage/import-storage.js';
  * @typedef {import ('../../infrastructure/repositories/organization-learner-import-format-repository.js')} OrganizationLearnerImportFormatRepository
  * @typedef {import ('../../infrastructure/repositories/organization-learner-repository.js')} OrganizationLearnerRepository
  * @typedef {import ('../../../../shared/infrastructure/repositories/organization-repository.js')} OrganizationRepository
+ * @typedef {import ('../../../../shared/domain/services/placement-profile-service.js')} placementProfileService
  * @typedef {import('../../../organization-learner/infrastructure/repositories/registration-organization-learner-repository.js')} registrationOrganizationLearnerRepository
  * @typedef {import ('../../infrastructure/repositories/student-repository.js')} studentRepository
  * @typedef {import ('../../infrastructure/repositories/sup-organization-learner-repository.js')} SupOrganizationLearnerRepository
@@ -72,6 +74,7 @@ const dependencies = {
   organizationLearnerImportFormatRepository,
   organizationLearnerRepository,
   organizationRepository,
+  placementProfileService,
   registrationOrganizationLearnerRepository,
   studentRepository,
   supOrganizationLearnerRepository,
@@ -96,6 +99,7 @@ const usecasesWithoutInjectedDependencies = {
 
 /**
  * @typedef PrescriptionLearnerManagementUsecases
+ * @property {computeOrganizationLearnerCertificability} computeOrganizationLearnerCertificability
  * @property {saveOrganizationLearnersFile} saveOrganizationLearnersFile
  * @property {sendOrganizationLearnersFile} sendOrganizationLearnersFile
  * @property {validateOrganizationLearnersFile} validateOrganizationLearnersFile

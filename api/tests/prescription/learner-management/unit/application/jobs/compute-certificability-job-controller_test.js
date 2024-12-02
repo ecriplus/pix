@@ -1,5 +1,5 @@
-import { usecases } from '../../../../../../lib/domain/usecases/index.js';
 import { ComputeCertificabilityJobController } from '../../../../../../src/prescription/learner-management/application/jobs/compute-certificability-job-controller.js';
+import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Prescription | Application | Jobs | computeCertificabilityJobController', function () {
