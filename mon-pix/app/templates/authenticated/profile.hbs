@@ -1,9 +1,5 @@
 {{page-title (t "pages.profile.title")}}
 
-<header role="banner">
-  <NavbarHeader />
-</header>
-
-<ProfileContent @model={{@model}} />
-
-<Footer />
+<Global::AppLayout>
+  <ProfileContent @model={{@model}} />
+</Global::AppLayout>

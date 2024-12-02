@@ -1,28 +1,38 @@
 body {
   color: var(--pix-neutral-800);
-  background-color: var(--pix-neutral-20);
+  background-color: var(--pix-primary-10);
 }
 
-.body {
+#app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.page-container {
-  width: 100%;
-  max-width: 1240px;
-  margin: 0 auto;
-}
-
-.pix-communication-banner {
-  position: relative;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 2;
-}
-
 img {
   max-width: 100%;
+}
+
+/* Global container */
+%global-container {
+  width: 100%;
+  max-width: 96rem;
+  margin-inline: auto;
+  padding-inline: var(--pix-spacing-4x);
+
+  @include device-is('desktop') {
+    padding-inline: var(--pix-spacing-6x);
+  }
+}
+
+.global-page-container {
+  @extend %global-container;
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.global-page-container__streched-content {
+  flex-grow: 1;
 }

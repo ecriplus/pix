@@ -1,9 +1,5 @@
 {{page-title (t "pages.dashboard.title")}}
 
-<header role="banner">
-  <NavbarHeader />
-</header>
-
-<Dashboard::Content @model={{this.model}} />
-
-<Footer />
+<Global::AppLayout>
+  <Dashboard::Content @model={{this.model}} />
+</Global::AppLayout>

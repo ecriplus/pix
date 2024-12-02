@@ -6,12 +6,13 @@
 /* globals */
 @import 'globals/a11y';
 @import 'globals/alert';
-@import 'globals/inputs';
-@import 'globals/loading';
 @import 'globals/buttons';
+@import 'globals/inputs';
+@import 'globals/layout';
+@import 'globals/loading';
+@import 'globals/page-header';
 @import 'globals/tables';
 @import 'globals/text';
-@import 'globals/layout';
 
 /* components */
 @import '../components/campaigns/assessment/results/evaluation-results-hero/attestation-result';
@@ -31,6 +32,7 @@
 @import 'components/certifications-list';
 @import 'components/certifications-list-item';
 @import 'components/certifications/certification-ender';
+@import 'components/communication-banner';
 @import 'components/companion/blocker';
 @import 'components/companion/check';
 @import 'components/congratulations-certification-banner';
@@ -131,6 +133,7 @@ of an adaptative/mobile-first approach — refactoring is welcome here */
 @import 'components/pix-toggle';
 @import 'components/skip-link';
 @import 'components/campaigns';
+@import 'components/profile/scorecards';
 
 /* Styles for colocated components */
 @import 'authentication-layout';

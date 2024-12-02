@@ -1,5 +1,11 @@
-<main id="main" class="main page-container user-certifications-page__container" role="main">
-  <h1 class="user-certifications-page__title">{{t "pages.certifications-list.title"}}</h1>
+<main id="main" class="global-page-container" role="main">
+  <section class="global-page-header">
+    <div class="global-page-header__left-content">
+      <h1 class="global-page-header__title">
+        {{t "pages.certifications-list.title"}}
+      </h1>
+    </div>
+  </section>
 
   <UserCertificationsPanel @certifications={{@model}} />
 </main>

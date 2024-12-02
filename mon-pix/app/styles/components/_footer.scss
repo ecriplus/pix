@@ -1,11 +1,11 @@
 #footer {
+  @extend %global-container;
+
   display: flex;
   gap: var(--pix-spacing-4x);
   align-items: flex-start;
   justify-content: space-between;
-  width: min(100%, 1280px);
-  margin: 0 auto;
-  padding: var(--pix-spacing-6x) 20px;
+  padding-block: var(--pix-spacing-6x);
   color: var(--pix-neutral-500);
 
   @include device-is('mobile') {

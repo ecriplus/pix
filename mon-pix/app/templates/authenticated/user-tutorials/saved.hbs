@@ -1,10 +1,10 @@
 <header role="banner">
   <NavbarHeader />
-  <Tutorials::Header @onTriggerFilterButton={{this.showSidebar}} @shouldShowFilterButton={{false}} />
 </header>
 
-<main id="main" class="main" role="main">
-  <div class="user-tutorials-content">
+<main id="main" class="user-tutorials global-page-container" role="main">
+  <Tutorials::Header @onTriggerFilterButton={{this.showSidebar}} @shouldShowFilterButton={{false}} />
+  <div class="user-tutorials-content global-page-container__streched-content">
     {{#if @model.savedTutorials.meta.pagination.rowCount}}
       <Tutorials::Cards @tutorials={{@model.savedTutorials}} @afterRemove={{this.refresh}} />
       <PixPagination

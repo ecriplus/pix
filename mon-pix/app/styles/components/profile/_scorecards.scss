@@ -1,0 +1,23 @@
+.profile-scorecards {
+  --profile-scorecards-spacing: var(--pix-spacing-4x);
+
+  @include device-is('desktop') {
+    --profile-scorecards-spacing: var(--pix-spacing-6x);
+  }
+}
+
+.profile-scorecards__areas {
+  & > li:not(:last-child) {
+    margin-bottom: var(--profile-scorecards-spacing);
+  }
+}
+
+.profile-scorecards__competences {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
+  gap: var(--profile-scorecards-spacing);
+
+  @include device-is('mobile') {
+    grid-template-columns: 1fr;
+  }
+}
