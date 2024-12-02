@@ -1,5 +1,28 @@
 # Pix Changelog
 
+## v4.249.0 (02/12/2024)
+
+
+### :rocket: Amélioration
+- [#10637](https://github.com/1024pix/pix/pull/10637) [FEATURE] Pouvoir faire une recherche exacte d'utilisateurs dans Pix Admin (PIX-9567).
+- [#10632](https://github.com/1024pix/pix/pull/10632) [FEATURE] Utiliser PixIcon dans Pix App - Partie 1 (PIX-14775).
+- [#10682](https://github.com/1024pix/pix/pull/10682) [FEATURE] Changement du logo sur la page d'erreur (Pix-15030).
+- [#10676](https://github.com/1024pix/pix/pull/10676) [FEATURE] Ajouter un endpoint pour récuperer les statistiques par compétences au grain d'une organisation (PIX-15451).
+- [#10636](https://github.com/1024pix/pix/pull/10636) [FEATURE] Ajout des règles métier pour canSelfDeleteAccount (PIX-15333).
+- [#10659](https://github.com/1024pix/pix/pull/10659) [FEATURE] Empecher l'affichage des resultats d'une attestation si elle est liee a plusieurs profils cible (PIX-13828).
+
+### :building_construction: Tech
+- [#10663](https://github.com/1024pix/pix/pull/10663) [TECH] Support du format CSV pour le script de rescoring de certification (PIX-15366).
+- [#10606](https://github.com/1024pix/pix/pull/10606) [TECH] Ajouter une API de suppression de compte utilisateur (PIX-14910) .
+- [#10690](https://github.com/1024pix/pix/pull/10690) [TECH] Remettre l'usage de skillDatasource dans les seeds.
+- [#10674](https://github.com/1024pix/pix/pull/10674) [TECH] Retirer les imports directs en dehors des repositories autorisés aux fichiers "datasources/learning-content/*" (PIX-15474).
+- [#10668](https://github.com/1024pix/pix/pull/10668) [TECH] Appliquer le patch dans PG lorsque la release est patchée (PIX-15471).
+- [#10664](https://github.com/1024pix/pix/pull/10664) [TECH] Correction d'un test flaky sur Certif (PIX-14960).
+
+### :bug: Correction
+- [#10673](https://github.com/1024pix/pix/pull/10673) [BUGFIX] :bug: Plus d'erreur 500 si une épreuve est à la fois répondue et signalée (PIX-15484).
+- [#10688](https://github.com/1024pix/pix/pull/10688) [BUGFIX] retirer un scroll non utils sur la page d'accueil (PIX-13917).
+
 ## v4.248.0 (28/11/2024)
 
 
