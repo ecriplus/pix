@@ -1,10 +1,10 @@
-<Layout::Banners />
-
-<PixAppLayout @variant="certif">
+<PixAppLayout @variant="certif" class="authenticated-layout">
   <Layout::Sidebar />
 
   <div class="authenticated">
     <main>
+      <Layout::Banners />
+
       {{outlet}}
     </main>
 

@@ -42,6 +42,7 @@ export default class Banners extends Component {
         @actionLabel={{t 'pages.sco.banner.url-label'}}
         @actionUrl={{ACTION_URL_FOR_INFORMATION_BANNER}}
         @canCloseBanner='true'
+        class='banners'
       >
         {{t 'pages.sco.banner.information'}}
       </PixBannerAlert>
@@ -52,6 +53,7 @@ export default class Banners extends Component {
         @type='information'
         @canCloseBanner='true'
         @onCloseBannerTriggerAction={{this.closeLocaleNotSupportedBanner}}
+        class='banners'
       >
         {{t 'banners.language-availability.message'}}
       </PixBannerAlert>

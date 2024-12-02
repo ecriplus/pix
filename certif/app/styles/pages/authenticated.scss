@@ -3,3 +3,11 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.authenticated-layout {
+  min-height: 100vh;
+
+  @include device-is('tablet') {
+    min-height: auto;
+  }
+}

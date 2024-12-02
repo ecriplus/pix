@@ -347,7 +347,7 @@ export default class EnrolledCandidates extends Component {
           </PixButton>
         {{/if}}
       </div>
-      <div class='table content-text content-text--small certification-candidates-table'>
+      <div class='table content-text--small certification-candidates-table'>
         {{#if (or @certificationCandidates this.candidatesInStaging)}}
           <table>
             <caption class='screen-reader-only'>
