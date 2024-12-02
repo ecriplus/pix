@@ -12,7 +12,7 @@ import PixWindow from 'mon-pix/utils/pix-window';
 
 export default class DownloadSessionResults extends Component {
   @tracked showErrorMessage = false;
-  @service requestManager;
+  @service fileSaver;
 
   @action
   async downloadSessionResults(event) {
@@ -21,10 +21,12 @@ export default class DownloadSessionResults extends Component {
 
     try {
       const token = decodeURIComponent(PixWindow.getLocationHash().slice(1));
-      await this.requestManager.request({
+      await this.fileSaver.save({
         url: `${ENV.APP.API_HOST}/api/sessions/download-all-results`,
-        method: 'POST',
-        body: JSON.stringify({ token }),
+        options: {
+          method: 'POST',
+          body: { token },
+        },
       });
     } catch {
       this.showErrorMessage = true;

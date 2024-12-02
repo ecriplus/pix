@@ -1,4 +1,5 @@
 import { setupTest } from 'ember-qunit';
+import * as fetch from 'fetch';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -30,6 +31,77 @@ module('Unit | Service | file-saver', function (hooks) {
       jsonStub = sinon.stub();
       downloadFileForIEBrowserStub = sinon.stub().returns();
       downloadFileForModernBrowsersStub = sinon.stub().returns();
+    });
+
+    module('when options are given', function (hooks) {
+      let fetchAPIStub;
+      hooks.beforeEach(function () {
+        fetchAPIStub = sinon.stub(fetch, 'default').resolves({
+          ok: true,
+          headers: {
+            get: sinon.stub().returns(`attachment; filename=${responseFileName}`),
+          },
+          blob: blobStub,
+          json: jsonStub,
+        });
+      });
+
+      hooks.afterEach(function () {
+        sinon.restore();
+      });
+
+      test('should override the HTTP method', async function (assert) {
+        // given
+        const expectedMethod = 'PATCH';
+        const headers = {
+          get: sinon.stub().withArgs('Content-Disposition').returns(`attachment; filename=${responseFileName}`),
+        };
+        const response = { ok: true, headers, blob: blobStub, json: jsonStub };
+        fetchStub = sinon.stub().resolves(response);
+
+        // when
+        await fileSaver.save({
+          url,
+          fileName: defaultFileName,
+          token,
+          options: {
+            method: expectedMethod,
+          },
+          downloadFileForIEBrowser: downloadFileForIEBrowserStub,
+          downloadFileForModernBrowsers: downloadFileForModernBrowsersStub,
+        });
+
+        // then
+        const fetchOptions = fetchAPIStub.getCall(0).args[1];
+        assert.strictEqual(fetchOptions.method, expectedMethod);
+      });
+
+      test('should add a JSON body', async function (assert) {
+        // given
+        const expectedBody = { test: 'body' };
+        const headers = {
+          get: sinon.stub().withArgs('Content-Disposition').returns(`attachment; filename=${responseFileName}`),
+        };
+        const response = { ok: true, headers, blob: blobStub, json: jsonStub };
+        fetchStub = sinon.stub().resolves(response);
+
+        // when
+        await fileSaver.save({
+          url,
+          fileName: defaultFileName,
+          token,
+          options: {
+            body: expectedBody,
+          },
+          downloadFileForIEBrowser: downloadFileForIEBrowserStub,
+          downloadFileForModernBrowsers: downloadFileForModernBrowsersStub,
+        });
+
+        // then
+        const fetchOptions = fetchAPIStub.getCall(0).args[1];
+        assert.strictEqual(fetchOptions.headers['Content-Type'], 'application/json');
+        assert.strictEqual(fetchOptions.body, '{"test":"body"}');
+      });
     });
 
     module('when response does have a fileName info in headers', function () {

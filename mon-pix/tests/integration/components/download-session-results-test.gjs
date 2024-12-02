@@ -13,11 +13,11 @@ import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 module('Integration | Component | download-session-results', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  let requestManagerService;
+  let fileSaver;
 
   hooks.beforeEach(function () {
-    requestManagerService = this.owner.lookup('service:requestManager');
-    sinon.stub(requestManagerService, 'request');
+    fileSaver = this.owner.lookup('service:file-saver');
+    sinon.stub(fileSaver, 'save');
   });
 
   hooks.afterEach(function () {
@@ -36,7 +36,7 @@ module('Integration | Component | download-session-results', function (hooks) {
 
   test('should display the expiration error message', async function (assert) {
     // given
-    requestManagerService.request.rejects({ status: 500 });
+    fileSaver.save.rejects();
 
     // when
     const screen = await render(hbs`<DownloadSessionResults />`);
@@ -49,7 +49,7 @@ module('Integration | Component | download-session-results', function (hooks) {
 
   test('should trigger the download', async function (assert) {
     // given
-    requestManagerService.request.resolves({ status: 200 });
+    fileSaver.save.resolves();
     const tokenHash = 'mytoken';
     sinon.stub(PixWindow, 'getLocationHash').returns(`#${tokenHash}`);
 
@@ -59,10 +59,12 @@ module('Integration | Component | download-session-results', function (hooks) {
     await click(downloadButton);
 
     // then
-    sinon.assert.calledWithExactly(requestManagerService.request, {
+    sinon.assert.calledWith(fileSaver.save, {
       url: `${ENV.APP.API_HOST}/api/sessions/download-all-results`,
-      method: 'POST',
-      body: `{"token":"${tokenHash}"}`,
+      options: {
+        method: 'POST',
+        body: { token: tokenHash },
+      },
     });
     assert.ok(true);
   });

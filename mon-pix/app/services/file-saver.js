@@ -16,21 +16,32 @@ export default class FileSaver extends Service {
     document.body.removeChild(link);
   }
 
-  _fetchData({ url, token }) {
-    return fetch(url, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+  _fetchData({ url, token, options = {} }) {
+    const requestOptions = {
+      method: options.method ?? 'GET',
+      headers: {},
+    };
+
+    if (token) requestOptions.headers['Authorization'] = `Bearer ${token}`;
+
+    if (options.body) {
+      requestOptions.headers['Content-Type'] = 'application/json';
+      requestOptions.body = JSON.stringify(options.body);
+    }
+
+    return fetch(url, requestOptions);
   }
 
   async save({
     url,
     fileName,
     token,
+    options,
     fetcher = this._fetchData,
     downloadFileForIEBrowser = this._downloadFileForIEBrowser,
     downloadFileForModernBrowsers = this._downloadFileForModernBrowsers,
   }) {
-    const response = await fetcher({ url, token });
+    const response = await fetcher({ url, token, options });
 
     if (!response.ok) {
       const payload = await response.json();
