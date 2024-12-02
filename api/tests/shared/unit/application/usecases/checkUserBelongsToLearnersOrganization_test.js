@@ -10,7 +10,7 @@ describe('Unit | Application | Use Case | checkUserBelongsToLearnersOrganization
       findByUserIdAndOrganizationId: sinon.stub(),
     };
     organizationLearnerRepositoryStub = {
-      get: sinon.stub(),
+      getLearnerInfo: sinon.stub(),
     };
   });
 
@@ -26,7 +26,7 @@ describe('Unit | Application | Use Case | checkUserBelongsToLearnersOrganization
       id: organizationLearnerId,
       organization: sharedOrganization,
     });
-    organizationLearnerRepositoryStub.get.resolves(organizationLearner);
+    organizationLearnerRepositoryStub.getLearnerInfo.resolves(organizationLearner);
     membershipRepositoryStub.findByUserIdAndOrganizationId.resolves([membership]);
 
     // when
@@ -54,7 +54,7 @@ describe('Unit | Application | Use Case | checkUserBelongsToLearnersOrganization
       id: organizationLearnerId,
       anotherOrganization,
     });
-    organizationLearnerRepositoryStub.get.resolves(organizationLearner);
+    organizationLearnerRepositoryStub.getLearnerInfo.resolves(organizationLearner);
     membershipRepositoryStub.findByUserIdAndOrganizationId.resolves([]);
 
     // when

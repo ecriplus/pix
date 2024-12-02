@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import * as organizationLearnerRepository from '../../../../lib/infrastructure/repositories/organization-learner-repository.js';
+import * as organizationLearnerRepository from '../../../../src/prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
 import * as membershipRepository from '../../../team/infrastructure/repositories/membership.repository.js';
 
 const execute = async function (
@@ -8,7 +8,7 @@ const execute = async function (
   organizationLearnerId,
   dependencies = { membershipRepository, organizationLearnerRepository },
 ) {
-  const organizationLearner = await dependencies.organizationLearnerRepository.get(organizationLearnerId);
+  const organizationLearner = await dependencies.organizationLearnerRepository.getLearnerInfo(organizationLearnerId);
   const memberships = await dependencies.membershipRepository.findByUserIdAndOrganizationId({
     userId,
     organizationId: organizationLearner.organizationId,
