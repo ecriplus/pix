@@ -78,6 +78,51 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
     });
   });
 
+  module('hasIdentityProviders', function () {
+    module('when there is some identity providers', function () {
+      test('returns true', async function () {
+        // given
+        const oidcPartner = {
+          id: 'oidc-partner',
+          code: 'OIDC_PARTNER',
+          organizationName: 'Partenaire OIDC',
+          slug: 'partenaire-oidc',
+          shouldCloseSession: false,
+          source: 'oidc-externe',
+        };
+        const oidcPartnerObject = Object.create(oidcPartner);
+        const storeStub = Service.create({
+          peekAll: sinon.stub().returns([oidcPartnerObject]),
+        });
+        const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const hasIdentityProviders = await oidcIdentityProvidersService.hasIdentityProviders;
+
+        // then
+        assert.strictEqual(hasIdentityProviders, true);
+      });
+    });
+
+    module('when there is no identity providers', function () {
+      test('returns false', async function () {
+        // given
+        const storeStub = Service.create({
+          peekAll: sinon.stub().returns([]),
+        });
+        const oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const hasIdentityProviders = await oidcIdentityProvidersService.hasIdentityProviders;
+
+        // then
+        assert.strictEqual(hasIdentityProviders, false);
+      });
+    });
+  });
+
   module('featuredIdentityProvider', function () {
     module('when there is some identity providers containing a featured one', function () {
       test('returns the featured identity provider', async function () {
