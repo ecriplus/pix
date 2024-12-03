@@ -1,8 +1,8 @@
-import { updateCertificationCenterMembership } from '../../../../lib/domain/usecases/update-certification-center-membership.js';
-import { CertificationCenterMembership } from '../../../../src/shared/domain/models/CertificationCenterMembership.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { CertificationCenterMembership } from '../../../../../src/shared/domain/models/index.js';
+import { updateCertificationCenterMembership } from '../../../../../src/team/domain/usecases/update-certification-center-membership.usecase.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | update-certification-center-membership', function () {
+describe('Unit | Team | Domain | UseCase | update-certification-center-membership', function () {
   const now = new Date('2023-09-12');
   let clock;
 

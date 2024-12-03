@@ -1,7 +1,7 @@
-import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { BadRequestError } from '../../../shared/application/http-errors.js';
 import * as certificationCenterMembershipSerializer from '../../../shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { usecases } from '../../domain/usecases/index.js';
 
 const updateRole = async function (
   request,

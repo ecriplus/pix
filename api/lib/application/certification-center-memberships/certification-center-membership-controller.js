@@ -1,6 +1,7 @@
 import { ForbiddenError } from '../../../src/shared/application/http-errors.js';
 import * as certificationCenterMembershipSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
+import { usecases as teamUsecases } from '../../../src/team/domain/usecases/index.js';
 import { certificationCenterMembershipRepository } from '../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
 import { usecases } from '../../domain/usecases/index.js';
 
@@ -45,7 +46,7 @@ const updateFromPixCertif = async function (
     throw new ForbiddenError('Wrong certification center');
   }
 
-  const updatedCertificationCenterMembership = await usecases.updateCertificationCenterMembership({
+  const updatedCertificationCenterMembership = await teamUsecases.updateCertificationCenterMembership({
     certificationCenterMembershipId,
     role: certificationCenterMembership.role,
     updatedByUserId: currentUserId,
