@@ -4,19 +4,18 @@
   gap: var(--pix-spacing-6x);
   align-items: start;
 
-  h2 {
-    @extend %pix-title-xs;
+  &__content {
+    color: var(--pix-neutral-500);
   }
 
-  p {
-    color: var(--pix-neutral-500);
+  h2 {
+    @extend %pix-title-xs;
   }
 
   a {
     text-decoration: underline;
 
-    &:focus
-    &:hover {
+    &:focus &:hover {
       color: var(--pix-primary-500);
     }
   }
@@ -24,6 +23,10 @@
   .delete-account-modal {
     width: 560px;
     border-radius: var(--pix-spacing-2x);
+
+    &__error {
+      margin-top: var(--pix-spacing-4x);
+    }
 
     .pix-modal__header {
       align-items: center;
@@ -33,12 +36,6 @@
       display: flex;
       flex-direction: column;
       gap: var(--pix-spacing-2x);
-
-      p {
-        color: var(--pix-neutral-800);
-      }
-
-
     }
 
     .pix-modal__footer {

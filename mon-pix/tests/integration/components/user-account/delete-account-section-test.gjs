@@ -1,7 +1,9 @@
 import { clickByName, render, within } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import DeleteAccountSection from 'mon-pix/components/user-account/delete-account-section';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 import { waitForDialog, waitForDialogClose } from '../../../helpers/wait-for.js';
@@ -124,6 +126,116 @@ module('Integration | Component | UserAccount | DeleteAccountSection', function 
       await waitForDialogClose();
 
       assert.ok(true);
+    });
+  });
+
+  module('selfDeleteUserAccount button', function (hooks) {
+    let requestManagerService;
+    let router;
+
+    hooks.beforeEach(function () {
+      requestManagerService = this.owner.lookup('service:requestManager');
+      sinon.stub(requestManagerService, 'request');
+
+      router = this.owner.lookup('service:router');
+      router.replaceWith = sinon.stub();
+    });
+
+    module('when the action is a success', function () {
+      test('it logouts the user', async function (assert) {
+        // given
+        requestManagerService.request.resolves({ response: { ok: true, status: 204 } });
+
+        const user = {
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'john.doe@email.com',
+          profile: { pixScore: 42 },
+        };
+        const screen = await render(<template><DeleteAccountSection @user={{user}} /></template>);
+
+        await clickByName(t('pages.user-account.delete-account.actions.delete'));
+        await waitForDialog();
+
+        // when
+        const dialog = screen.getByRole('dialog');
+        const button = within(dialog).getByRole('button', {
+          name: t('pages.user-account.delete-account.actions.delete'),
+        });
+        await click(button);
+
+        // then
+        sinon.assert.calledWithExactly(router.replaceWith, 'logout');
+        assert.ok(true);
+      });
+    });
+
+    module('when the user is not allowed to self delete their account', function () {
+      test('it displays a forbidden message', async function (assert) {
+        // given
+        requestManagerService.request.rejects({ status: 403 });
+
+        const user = {
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'john.doe@email.com',
+          profile: { pixScore: 42 },
+        };
+        const screen = await render(<template><DeleteAccountSection @user={{user}} /></template>);
+
+        await clickByName(t('pages.user-account.delete-account.actions.delete'));
+        await waitForDialog();
+
+        // when
+        const dialog = screen.getByRole('dialog');
+        const button = within(dialog).getByRole('button', {
+          name: t('pages.user-account.delete-account.actions.delete'),
+        });
+        await click(button);
+
+        // then
+        assert
+          .dom(
+            screen.getByRole('alert', {
+              value: t('pages.user-account.delete-account.modal.error-403'),
+            }),
+          )
+          .exists();
+      });
+    });
+
+    module('when there is an internal server error', function () {
+      test('it displays an internal server error message', async function (assert) {
+        // given
+        requestManagerService.request.rejects({ status: 500 });
+
+        const user = {
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'john.doe@email.com',
+          profile: { pixScore: 42 },
+        };
+        const screen = await render(<template><DeleteAccountSection @user={{user}} /></template>);
+
+        await clickByName(t('pages.user-account.delete-account.actions.delete'));
+        await waitForDialog();
+
+        // when
+        const dialog = screen.getByRole('dialog');
+        const button = within(dialog).getByRole('button', {
+          name: t('pages.user-account.delete-account.actions.delete'),
+        });
+        await click(button);
+
+        // then
+        assert
+          .dom(
+            screen.getByRole('alert', {
+              value: t('common.api-error-messages.internal-server-error'),
+            }),
+          )
+          .exists();
+      });
     });
   });
 });

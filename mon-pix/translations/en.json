@@ -2141,6 +2141,7 @@
         },
         "menu-link-title": "Delete my account",
         "modal": {
+          "error-403": "You are not allowed to delete your account. Please contact the support.",
           "question": "Are you sure you want to delete your account?",
           "title": "You’re about to delete your account",
           "warning-1": "Please note that the account cannot be recovered after deletion.",
