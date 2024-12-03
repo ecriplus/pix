@@ -329,4 +329,61 @@ describe('Learning Content | Integration | Repositories | Skill', function () {
       ]);
     });
   });
+
+  describe('when giving additionnal fields', function () {
+    it('should ignore these', async function () {
+      // given
+      const skillDtos = [
+        {
+          id: 'skill1',
+          name: '@cuiredespates2',
+          hintStatus: 'pré-validé',
+          tutorialIds: ['tuto1', 'tuto2'],
+          learningMoreTutorialIds: ['tutoMore1'],
+          pixValue: 10000,
+          competenceId: 'competence1',
+          status: 'périmé',
+          tubeId: 'tube1',
+          version: 1,
+          level: 2,
+          hint_i18n: {
+            fr: 'Il faut une casserolle d’eau chaude',
+            en: 'A casserolle of hot water is needed',
+            nl: 'Aflugeublik',
+          },
+          // additionnal fields
+          airtableId: 'recSkill1',
+          foo: 'foo',
+          bar: 'bar',
+        },
+      ];
+
+      // when
+      await skillRepository.save(skillDtos);
+
+      // then
+      const savedSkills = await knex.select('*').from('learningcontent.skills').orderBy('name');
+
+      expect(savedSkills).to.deep.equal([
+        {
+          id: 'skill1',
+          name: '@cuiredespates2',
+          hintStatus: 'pré-validé',
+          tutorialIds: ['tuto1', 'tuto2'],
+          learningMoreTutorialIds: ['tutoMore1'],
+          pixValue: 10000,
+          competenceId: 'competence1',
+          status: 'périmé',
+          tubeId: 'tube1',
+          version: 1,
+          level: 2,
+          hint_i18n: {
+            fr: 'Il faut une casserolle d’eau chaude',
+            en: 'A casserolle of hot water is needed',
+            nl: 'Aflugeublik',
+          },
+        },
+      ]);
+    });
+  });
 });

@@ -1,3 +1,16 @@
 import { LearningContentRepository } from './learning-content-repository.js';
 
-export const frameworkRepository = new LearningContentRepository({ tableName: 'learningcontent.frameworks' });
+class FrameworkRepository extends LearningContentRepository {
+  constructor() {
+    super({ tableName: 'learningcontent.frameworks' });
+  }
+
+  toDto({ id, name }) {
+    return {
+      id,
+      name,
+    };
+  }
+}
+
+export const frameworkRepository = new FrameworkRepository();
