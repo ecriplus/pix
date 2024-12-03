@@ -11,7 +11,11 @@ const save = async function (request, h, dependencies = { answerSerializer, requ
   const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
   const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
   const createdAnswer = await usecases.correctAnswerThenUpdateAssessment({ answer, userId, locale });
-  if (!config.featureToggles.isAsyncQuestRewardingCalculationEnabled && config.featureToggles.isQuestEnabled) {
+  if (
+    userId &&
+    !config.featureToggles.isAsyncQuestRewardingCalculationEnabled &&
+    config.featureToggles.isQuestEnabled
+  ) {
     await questUsecases.rewardUser({ userId });
   }
 

@@ -1,4 +1,8 @@
+import Joi from 'joi';
+
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+
+const userIdsSchema = Joi.array().items(Joi.number());
 
 const findOrganizationLearnersWithParticipations = withTransaction(async function ({
   userIds,
@@ -7,6 +11,12 @@ const findOrganizationLearnersWithParticipations = withTransaction(async functio
   libOrganizationLearnerRepository,
   tagRepository,
 }) {
+  const validationResult = userIdsSchema.validate(userIds);
+
+  if (validationResult.error) {
+    return [];
+  }
+
   const organizationLearners = (
     await Promise.all(
       userIds.map((userId) => {

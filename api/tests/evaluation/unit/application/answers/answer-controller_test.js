@@ -18,6 +18,7 @@ describe('Unit | Controller | answer-controller', function () {
       extractLocaleFromRequest: sinon.stub(),
     };
     sinon.stub(usecases, 'correctAnswerThenUpdateAssessment');
+    sinon.stub(questUsecases, 'rewardUser');
   });
 
   describe('#save', function () {
@@ -120,15 +121,15 @@ describe('Unit | Controller | answer-controller', function () {
         usecases.correctAnswerThenUpdateAssessment.resolves(createdAnswer);
         requestResponseUtilsStub.extractUserIdFromRequest.withArgs(request).returns(userId);
         requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+      });
 
+      it('should call the usecase to save the answer', async function () {
         // when
         response = await answerController.save(request, hFake, {
           answerSerializer: answerSerializerStub,
           requestResponseUtils: requestResponseUtilsStub,
         });
-      });
 
-      it('should call the usecase to save the answer', function () {
         // then
         expect(usecases.correctAnswerThenUpdateAssessment).to.have.been.calledWithExactly({
           answer: deserializedAnswer,
@@ -136,12 +137,23 @@ describe('Unit | Controller | answer-controller', function () {
           locale,
         });
       });
+      it('should serialize the answer', async function () {
+        // when
+        response = await answerController.save(request, hFake, {
+          answerSerializer: answerSerializerStub,
+          requestResponseUtils: requestResponseUtilsStub,
+        });
 
-      it('should serialize the answer', function () {
         // then
         expect(answerSerializerStub.serialize).to.have.been.calledWithExactly(createdAnswer);
       });
-      it('should return the serialized answer', function () {
+      it('should return the serialized answer', async function () {
+        // when
+        response = await answerController.save(request, hFake, {
+          answerSerializer: answerSerializerStub,
+          requestResponseUtils: requestResponseUtilsStub,
+        });
+
         // then
         expect(response.source).to.deep.equal(serializedAnswer);
         expect(response.statusCode).to.equal(201);
@@ -150,7 +162,6 @@ describe('Unit | Controller | answer-controller', function () {
       context('quests', function () {
         beforeEach(function () {
           sinon.stub(config, 'featureToggles');
-          sinon.stub(questUsecases, 'rewardUser');
         });
 
         context('when quest feature is not enabled', function () {
@@ -198,6 +209,22 @@ describe('Unit | Controller | answer-controller', function () {
 
             // then
             expect(questUsecases.rewardUser).to.have.been.calledWith({ userId });
+          });
+
+          it('should not call the reward user usecase if userId is not provided', async function () {
+            // given
+            config.featureToggles.isQuestEnabled = true;
+            config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
+            requestResponseUtilsStub.extractUserIdFromRequest.withArgs(request).returns(null);
+
+            // when
+            await answerController.save(request, hFake, {
+              answerSerializer: answerSerializerStub,
+              requestResponseUtils: requestResponseUtilsStub,
+            });
+
+            // then
+            expect(questUsecases.rewardUser).to.not.have.been.called;
           });
         });
       });
