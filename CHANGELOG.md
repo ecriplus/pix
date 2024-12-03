@@ -1,5 +1,20 @@
 # Pix Changelog
 
+## v4.250.0 (03/12/2024)
+
+
+### :rocket: Amélioration
+- [#10681](https://github.com/1024pix/pix/pull/10681) [FEATURE] Appeler l'API d'anonymisation de compte à partir de la modale de confirmation (PIX-14914).
+- [#10687](https://github.com/1024pix/pix/pull/10687) [FEATURE] Créer la page de téléchargement des résultats de session (PIX-15513).
+
+### :bug: Correction
+- [#10697](https://github.com/1024pix/pix/pull/10697) [BUGFIX] Ne pas appeler le usecase "reward user" si l'utlilisateur n'est pas connecte (PIX-15528).
+- [#10669](https://github.com/1024pix/pix/pull/10669) [BUGFIX] Ne pas afficher « Autres moyens de connexion » quand aucun SSO n'est disponible (PIX-15494).
+
+### :arrow_up: Montée de version
+- [#10671](https://github.com/1024pix/pix/pull/10671) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.23 (certif).
+- [#10692](https://github.com/1024pix/pix/pull/10692) [BUMP] Update dependency @1024pix/pix-ui to v49 (certif).
+
 ## v4.249.0 (02/12/2024)
 
 
