@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { certificationCenterController } from '../../../../lib/application/certification-centers/certification-center-controller.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType, optionalIdentifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { certificationCenterAdminController } from './certification-center.admin.controller.js';
@@ -95,6 +96,30 @@ const register = async function (server) {
             "- Récupération d'un centre de certification\n",
         ],
         tags: ['api', 'organizational-entities', 'certification-center'],
+      },
+    },
+    {
+      method: 'PATCH',
+      path: '/api/admin/certification-centers/{id}',
+      config: {
+        handler: (request, h) => certificationCenterController.update(request, h),
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès**\n" +
+            '- Elle met à jour les informations d‘un centre de certification\n',
+        ],
+        tags: ['api', 'admin', 'certification-center'],
       },
     },
   ]);
