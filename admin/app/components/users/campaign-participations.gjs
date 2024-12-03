@@ -76,10 +76,6 @@ export default class CampaignParticipation extends Component {
               {{#if participation.deletedAt}}
                 <td>
                   {{dayjsFormat participation.deletedAt "DD/MM/YYYY"}}
-                  par
-                  <LinkTo @route="authenticated.users.get" @model={{participation.deletedBy}}>
-                    {{participation.deletedByFullName}}
-                  </LinkTo>
                 </td>
               {{else}}
                 <td>-</td>

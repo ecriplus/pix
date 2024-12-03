@@ -1,32 +1,43 @@
 class CampaignParticipationForUserManagement {
   constructor({
     id,
+    campaignParticipationId,
     participantExternalId,
     status,
     campaignId,
     campaignCode,
     createdAt,
     sharedAt,
+    updatedAt,
     deletedAt,
-    deletedBy,
-    deletedByFirstName,
-    deletedByLastName,
     organizationLearnerFirstName,
     organizationLearnerLastName,
   } = {}) {
     this.id = id;
-    this.participantExternalId = participantExternalId;
-    this.status = status;
-    this.campaignId = campaignId;
-    this.campaignCode = campaignCode;
+    this.campaignParticipationId = campaignParticipationId;
     this.createdAt = createdAt;
-    this.sharedAt = sharedAt;
-    this.deletedAt = deletedAt;
-    this.deletedBy = deletedBy;
-    if (this.deletedAt) {
-      this.deletedByFullName = `${deletedByFirstName} ${deletedByLastName}`;
+    this.participantExternalId = null;
+    this.status = null;
+    this.campaignId = null;
+    this.campaignCode = null;
+    this.sharedAt = null;
+    this.deletedAt = null;
+    if (campaignParticipationId) {
+      if (!deletedAt) {
+        this.organizationLearnerFullName = `${organizationLearnerFirstName} ${organizationLearnerLastName}`;
+        this.participantExternalId = participantExternalId;
+        this.status = status;
+        this.campaignId = campaignId;
+        this.campaignCode = campaignCode;
+        this.sharedAt = sharedAt;
+      } else {
+        this.organizationLearnerFullName = '-';
+        this.deletedAt = deletedAt;
+      }
+    } else {
+      this.organizationLearnerFullName = '-';
+      this.deletedAt = updatedAt;
     }
-    this.organizationLearnerFullName = `${organizationLearnerFirstName} ${organizationLearnerLastName}`;
   }
 }
 

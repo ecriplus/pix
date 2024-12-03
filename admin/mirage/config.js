@@ -443,10 +443,9 @@ function routes() {
 
   this.delete('/admin/campaign-participations/:id', (schema, request) => {
     const participationId = request.params.id;
-    const participation = schema.userParticipations.find(participationId);
+    const participation = schema.userParticipations.findBy({ campaignParticipationId: participationId });
     participation.update({
       deletedAt: new Date('2012-12-12'),
-      deletedByFullName: 'Terry Dicule',
     });
 
     return new Response(204);
