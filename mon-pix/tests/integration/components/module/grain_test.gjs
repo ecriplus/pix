@@ -15,7 +15,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
   test('should display given grain', async function (assert) {
     // given
     const store = this.owner.lookup('service:store');
-    const grain = store.createRecord('grain', { title: 'Grain title' });
+    const grain = store.createRecord('grain', { id: '12345-abcdef', title: 'Grain title' });
     this.set('grain', grain);
 
     // when
@@ -24,6 +24,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
     // then
     assert.ok(screen.getByRole('heading', { name: grain.title, level: 2 }));
+    assert.dom('.grain').hasAttribute('id', 'grain_12345-abcdef');
   });
 
   module('when grain has transition', function () {

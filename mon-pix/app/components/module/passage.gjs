@@ -196,6 +196,12 @@ export default class ModulePassage extends Component {
     });
   }
 
+  @action
+  async goToGrain(grainId) {
+    const element = document.getElementById(`grain_${grainId}`);
+    this.modulixAutoScroll.focusAndScroll(element);
+  }
+
   <template>
     {{pageTitle @module.title}}
     <ModuleNavbar
@@ -203,6 +209,7 @@ export default class ModulePassage extends Component {
       @totalSteps={{this.displayableGrains.length}}
       @module={{@module}}
       @grainsToDisplay={{this.grainsToDisplay}}
+      @goToGrain={{this.goToGrain}}
     />
 
     <main class="module-passage">

@@ -3,7 +3,7 @@
   top: 0;
   z-index: var(--modulix-z-index-above-all);
   height: var(--module-navbar-height);
-  padding: var(--pix-spacing-4x);
+  padding: var(--pix-spacing-3x);
   background: var(--pix-neutral-0);
   box-shadow: 0 4px 20px 0 rgb(0 0 0 / 6%);
 
@@ -16,26 +16,29 @@
   }
 }
 
-.module-sidebar-list-item {
-  &__link {
-    @extend %pix-body-l;
+.module-sidebar__list-item {
+  @extend %pix-body-l;
 
-    display: inline-block;
-    width: 100%;
-    padding: var(--pix-spacing-3x) var(--pix-spacing-8x);
-    color: var(--pix-neutral-800);
+  display: inline-block;
+  width: 100%;
+  padding: var(--pix-spacing-3x) var(--pix-spacing-8x);
+  color: var(--pix-neutral-800);
+  cursor: pointer;
 
-    &.current-grain {
-      --border-width: 5px;
+  &.current-grain {
+    --border-width: 5px;
 
-      padding-left: calc(var(--pix-spacing-8x) - var(--border-width));
-      color: var(--pix-primary-500);
-      border-left: var(--border-width) solid var(--pix-primary-500);
-    }
+    padding-left: calc(var(--pix-spacing-8x) - var(--border-width));
+    color: var(--pix-primary-500);
+    border-left: var(--border-width) solid var(--pix-primary-500);
+  }
 
-    &:hover {
-      color: var(--pix-primary-700);
-      background-color: var(--pix-neutral-20);
-    }
+  &:hover {
+    color: var(--pix-primary-700);
+    background-color: var(--pix-neutral-20);
+  }
+
+  &:active {
+    background-color: var(--pix-neutral-100);
   }
 }

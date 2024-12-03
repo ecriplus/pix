@@ -1,6 +1,8 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixProgressGauge from '@1024pix/pix-ui/components/pix-progress-gauge';
 import PixSidebar from '@1024pix/pix-ui/components/pix-sidebar';
+import { fn } from '@ember/helper';
+import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -31,12 +33,21 @@ export default class ModulixNavbar extends Component {
     this.sidebarOpened = false;
   }
 
-  get grainTypeTexts() {
-    return this.args.grainsToDisplay.map((grain) => this.intl.t(`pages.modulix.grain.tag.${grain.type}`));
+  get grainsWithIdAndTranslatedType() {
+    return this.args.grainsToDisplay.map((grain) => ({
+      type: this.intl.t(`pages.modulix.grain.tag.${grain.type}`),
+      id: grain.id,
+    }));
   }
 
   get currentGrainIndex() {
-    return this.grainTypeTexts.length - 1;
+    return this.grainsWithIdAndTranslatedType.length - 1;
+  }
+
+  @action
+  onMenuItemClick(grainId) {
+    this.closeSidebar();
+    this.args.goToGrain(grainId);
   }
 
   <template>
@@ -61,12 +72,14 @@ export default class ModulixNavbar extends Component {
       <:content>
         <nav>
           <ul>
-            {{#each this.grainTypeTexts as |type index|}}
+            {{#each this.grainsWithIdAndTranslatedType as |grain index|}}
               <li
-                class="module-sidebar-list-item__link {{if (eq index this.currentGrainIndex) 'current-grain'}}"
+                class="module-sidebar__list-item {{if (eq index this.currentGrainIndex) 'current-grain'}}"
                 aria-current={{if (eq index this.currentGrainIndex) "step"}}
+                {{on "click" (fn this.onMenuItemClick grain.id)}}
+                role="link"
               >
-                {{type}}
+                {{grain.type}}
               </li>
             {{/each}}
           </ul>
