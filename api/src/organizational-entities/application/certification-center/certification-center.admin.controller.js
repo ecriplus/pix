@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { usecases as certificationConfigurationUsecases } from '../../../certification/configuration/domain/usecases/index.js';
 import { usecases as certificationUsecases } from '../../../certification/enrolment/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
@@ -51,7 +50,7 @@ const update = async function (request) {
 
   const { updatedCertificationCenter, certificationCenterPilotFeatures } = await DomainTransaction.execute(
     async () => {
-      const updatedCertificationCenter = await libUsecases.updateCertificationCenter({
+      const updatedCertificationCenter = await usecases.updateCertificationCenter({
         certificationCenterId,
         certificationCenterInformation,
         complementaryCertificationIds,
