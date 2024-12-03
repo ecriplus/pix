@@ -13,31 +13,31 @@
       padding: 0 15px;
 
       a {
-        position: relative;
-        display: block;
+        display: flex;
+        align-items: center;
         width: 50px;
-        padding: 0;
-        color: var(--pix-neutral-100);
-        font-size: 1.25rem;
-        line-height: 50px;
-        text-align: center;
+        height: 50px;
         border-radius: 5px;
         cursor: pointer;
 
-        i.fa {
-          width: 32px;
-          margin: 0 10px;
-        }
-
         &:hover {
-          color: var(--pix-neutral-0);
           text-decoration: none;
         }
 
         &.active {
-          color: var(--pix-neutral-0);
           font-weight: 600;
           background-color: var(--pix-neutral-500);
+        }
+
+        svg {
+          width: 32px;
+          margin: 0 10px;
+          fill: var(--pix-neutral-100);
+        }
+
+        &:hover svg,
+        &.active svg {
+          fill: var(--pix-neutral-0);
         }
       }
     }

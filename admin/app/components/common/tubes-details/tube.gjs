@@ -1,4 +1,4 @@
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
@@ -15,6 +15,14 @@ export default class Tube extends Component {
         this.skillAvailabilityMap.push({ difficulty: i, availability: hasSkill ? 'active' : 'missing' });
       }
     }
+  }
+
+  get mobileIcon() {
+    return this.args.mobile ? 'mobile' : 'mobileOff';
+  }
+
+  get tabletIcon() {
+    return this.args.tablet ? 'tablet' : 'tabletOff';
   }
 
   <template>
@@ -42,20 +50,14 @@ export default class Tube extends Component {
           aria-label="{{if @mobile 'compatible mobile' 'incompatible mobile'}}"
           data-testid="mobile-compliant-{{@id}}"
         >
-          <FaIcon @icon="mobile-screen-button" class="fa-2x {{if @mobile 'is-responsive'}}" />
-          {{#unless @mobile}}
-            <FaIcon @icon="slash" class="fa-2x not-responsive" />
-          {{/unless}}
+          <PixIcon @name={{this.mobileIcon}} @plainIcon={{true}} class="{{if @mobile 'is-responsive'}}" />
         </div>
         <div
           class="icon-container"
           aria-label="{{if @tablet 'compatible tablette' 'incompatible tablette'}}"
           data-testid="tablet-compliant-{{@id}}"
         >
-          <FaIcon @icon="tablet-screen-button" class="fa-2x {{if @tablet 'is-responsive'}}" />
-          {{#unless @tablet}}
-            <FaIcon @icon="slash" class="fa-2x not-responsive" />
-          {{/unless}}
+          <PixIcon @name={{this.tabletIcon}} @plainIcon={{true}} class="{{if @mobile 'is-responsive'}}" />
         </div>
       </td>
     {{/if}}
