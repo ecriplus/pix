@@ -3,13 +3,13 @@ import {
   databaseBuilder,
   expect,
   generateValidRequestAuthorizationHeader,
-} from '../../../test-helper.js';
+} from '../../../../test-helper.js';
 
-describe('Acceptance | Application | Certification center membership | Routes', function () {
+describe('Acceptance | Team | Application | Routes | certification-center-membership ', function () {
   let server, options;
 
   describe('GET /api/certification-centers/{certificationCenterId}/members', function () {
-    it('should return 200 http status code', async function () {
+    it('returns 200 http status code', async function () {
       // given
       server = await createServer();
       const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
