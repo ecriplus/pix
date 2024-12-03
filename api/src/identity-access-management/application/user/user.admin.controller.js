@@ -1,3 +1,4 @@
+import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as userAnonymizedDetailsForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-anonymized-details-for-admin.serializer.js';
@@ -89,11 +90,19 @@ const anonymizeUser = async function (request, h, dependencies = { userAnonymize
   return h.response(dependencies.userAnonymizedDetailsForAdminSerializer.serialize(anonymizedUser)).code(200);
 };
 
+const removeAuthenticationMethod = async function (request, h) {
+  const userId = request.params.id;
+  const authenticationMethodType = request.payload.data.attributes.type;
+  await libUsecases.removeAuthenticationMethod({ userId, authenticationMethodType });
+  return h.response().code(204);
+};
+
 /**
  * @typedef {object} UserAdminController
  * @property {function} anonymizeUser
  * @property {function} findPaginatedFilteredUsers
  * @property {function} getUserDetails
+ * @property {function} removeAuthenticationMethod
  * @property {function} unblockUserAccount
  * @property {function} updateUserDetailsByAdmin
  */
@@ -101,6 +110,7 @@ const userAdminController = {
   anonymizeUser,
   findPaginatedFilteredUsers,
   getUserDetails,
+  removeAuthenticationMethod,
   unblockUserAccount,
   updateUserDetailsByAdmin,
 };

@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import { userController } from '../../../../lib/application/users/user-controller.js';
 import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { SUPPORTED_LOCALES } from '../../../shared/domain/constants.js';
@@ -209,9 +208,9 @@ export const userAdminRoutes = [
           allowUnknown: true,
         },
       },
-      handler: (request, h) => userController.removeAuthenticationMethod(request, h),
+      handler: (request, h) => userAdminController.removeAuthenticationMethod(request, h),
       notes: ['- Permet à un administrateur de supprimer une méthode de connexion'],
-      tags: ['api', 'admin', 'user'],
+      tags: ['api', 'identity-access-management', 'admin', 'user'],
     },
   },
 ];

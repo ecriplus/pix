@@ -1,4 +1,3 @@
-import { userController } from '../../../../../lib/application/users/user-controller.js';
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
 import { userAdminController } from '../../../../../src/identity-access-management/application/user/user.admin.controller.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
@@ -281,7 +280,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       (type) => {
         it(`returns 200 when user is "SUPER_ADMIN" and type is ${type}`, async function () {
           // given
-          sinon.stub(userController, 'removeAuthenticationMethod').returns('ok');
+          sinon.stub(userAdminController, 'removeAuthenticationMethod').returns('ok');
           sinon
             .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
             .callsFake((request, h) => h.response(true));
@@ -302,12 +301,12 @@ describe('Integration | Identity Access Management | Application | Route | Admin
           expect(result.statusCode).to.equal(200);
           sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
           sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
-          sinon.assert.calledOnce(userController.removeAuthenticationMethod);
+          sinon.assert.calledOnce(userAdminController.removeAuthenticationMethod);
         });
 
         it(`returns 200 when user is "SUPPORT" and type is ${type}`, async function () {
           // given
-          sinon.stub(userController, 'removeAuthenticationMethod').returns('ok');
+          sinon.stub(userAdminController, 'removeAuthenticationMethod').returns('ok');
           sinon
             .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
             .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
@@ -326,7 +325,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
           expect(result.statusCode).to.equal(200);
           sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
           sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
-          sinon.assert.calledOnce(userController.removeAuthenticationMethod);
+          sinon.assert.calledOnce(userAdminController.removeAuthenticationMethod);
         });
       },
     );
@@ -347,7 +346,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
 
     it(`returns 403 when user don't have access (CERTIF | METIER)`, async function () {
       // given
-      sinon.stub(userController, 'removeAuthenticationMethod').returns('ok');
+      sinon.stub(userAdminController, 'removeAuthenticationMethod').returns('ok');
       sinon
         .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
         .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
@@ -367,7 +366,7 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       // then
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
-      sinon.assert.notCalled(userController.removeAuthenticationMethod);
+      sinon.assert.notCalled(userAdminController.removeAuthenticationMethod);
       expect(result.statusCode).to.equal(403);
     });
   });
