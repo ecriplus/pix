@@ -19,14 +19,24 @@ export class LearningContentRepository {
   }
 
   /**
-   * @param {object[]} dtos
+   * @param {object[]} objects
    */
-  async save(dtos) {
-    if (!dtos) return;
+  async save(objects) {
+    if (!objects) return;
+    const dtos = objects.map(this.toDto);
     const knex = DomainTransaction.getConnection();
     for (const chunk of chunks(dtos, this.#chunkSize)) {
       await knex.insert(chunk).into(this.#tableName).onConflict('id').merge();
     }
+  }
+
+  /**
+   * Maps an object to a DTO before insertion.
+   * @param {object} object
+   * @returns {object}
+   */
+  toDto(_object) {
+    // must be overridden
   }
 }
 

@@ -1,3 +1,20 @@
 import { LearningContentRepository } from './learning-content-repository.js';
 
-export const courseRepository = new LearningContentRepository({ tableName: 'learningcontent.courses' });
+class CourseRepository extends LearningContentRepository {
+  constructor() {
+    super({ tableName: 'learningcontent.courses' });
+  }
+
+  toDto({ id, name, description, isActive, competences, challenges }) {
+    return {
+      id,
+      name,
+      description,
+      isActive,
+      competences,
+      challenges,
+    };
+  }
+}
+
+export const courseRepository = new CourseRepository();
