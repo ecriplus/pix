@@ -265,6 +265,7 @@ const configuration = (function () {
       enableLogStartingEventDispatch: toBoolean(process.env.LOG_STARTING_EVENT_DISPATCH),
       enableLogEndingEventDispatch: toBoolean(process.env.LOG_ENDING_EVENT_DISPATCH),
       opsEventIntervalInSeconds: process.env.OPS_EVENT_INTERVAL_IN_SECONDS || 15,
+      debugSections: process.env.LOG_DEBUG?.split(',') ?? [],
     },
     login: {
       temporaryBlockingThresholdFailureCount: _getNumber(
