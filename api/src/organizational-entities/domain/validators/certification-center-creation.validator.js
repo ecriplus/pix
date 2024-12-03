@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { EntityValidationError } from '../../../src/shared/domain/errors.js';
+import { EntityValidationError } from '../../../shared/domain/errors.js';
 
 const validationConfiguration = { abortEarly: false, allowUnknown: true };
 
