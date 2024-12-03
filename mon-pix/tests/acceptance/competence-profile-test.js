@@ -32,11 +32,13 @@ module('Acceptance | Profile | Start competence', function (hooks) {
       server.create('competence-evaluation', { user, competenceId, assessment });
 
       // when
-      await visit('/competences');
+      const screen = await visit('/competences');
       await setBreakpoint('tablet');
-      await click(
-        `.rounded-panel-body__areas:nth-of-type(${firstScorecard.area.code}) .rounded-panel-body__competence-card:nth-of-type(${competenceNumber}) .competence-card__button`,
+
+      const cardName = new RegExp(
+        `Reprendre la compétence Area_${firstScorecard.area.code}_Competence_${competenceNumber}`,
       );
+      await click(screen.getByRole('link', { name: cardName }));
 
       // then
       assert.ok(currentURL().includes('/assessments/'));

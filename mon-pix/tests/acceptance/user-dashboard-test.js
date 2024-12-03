@@ -228,14 +228,14 @@ module('Acceptance | User dashboard page', function (hooks) {
           await authenticate(user);
           const screen = await visit('/accueil');
 
-          assert.dom(screen.getByRole('heading', { name: 'Bonjour Henri, découvrez votre tableau de bord.' })).exists();
+          assert.dom(screen.getByRole('heading', { name: 'Bonjour, découvrez votre tableau de bord.' })).exists();
 
           // when
           await click(screen.getByRole('button', { name: 'Fermer la bannière' }));
 
           // then
           assert
-            .dom(screen.queryByRole('heading', { name: 'Bonjour Henri, découvrez votre tableau de bord.' }))
+            .dom(screen.queryByRole('heading', { name: 'Bonjour, découvrez votre tableau de bord.' }))
             .doesNotExist();
         });
       });

@@ -1,6 +1,7 @@
 import { visit } from '@1024pix/ember-testing-library';
 import { currentURL, findAll } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -49,10 +50,10 @@ module('Acceptance | User certifications page', function (hooks) {
     test('should render a title for the page', async function (assert) {
       // when
       await authenticate(userWithNoCertificates);
-      await visit('/mes-certifications');
+      const screen = await visit('/mes-certifications');
 
       // then
-      assert.dom('.user-certifications-page__title').exists();
+      assert.dom(screen.getByRole('heading', { name: t('pages.certifications-list.title') })).exists();
     });
 
     test('should render the panel which contains informations about certifications of the connected user', async function (assert) {
