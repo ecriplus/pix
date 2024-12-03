@@ -1,4 +1,7 @@
+import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
+import { usecases as certificationConfigurationUsecases } from '../../../certification/configuration/domain/usecases/index.js';
 import { usecases as certificationUsecases } from '../../../certification/enrolment/domain/usecases/index.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as certificationCenterSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center.serializer.js';
 import * as certificationCenterForAdminSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center-for-admin.serializer.js';
@@ -38,10 +41,40 @@ const getCertificationCenterDetails = async function (request) {
   return certificationCenterForAdminSerializer.serialize(certificationCenterDetails);
 };
 
+const update = async function (request) {
+  const certificationCenterId = request.params.id;
+  const certificationCenterInformation = certificationCenterForAdminSerializer.deserialize(request.payload);
+  const complementaryCertificationIds =
+    request.payload.data.relationships?.habilitations?.data.map(
+      (complementaryCertification) => complementaryCertification.id,
+    ) || [];
+
+  const { updatedCertificationCenter, certificationCenterPilotFeatures } = await DomainTransaction.execute(
+    async () => {
+      const updatedCertificationCenter = await libUsecases.updateCertificationCenter({
+        certificationCenterId,
+        certificationCenterInformation,
+        complementaryCertificationIds,
+      });
+
+      const certificationCenterPilotFeatures = await certificationConfigurationUsecases.registerCenterPilotFeatures({
+        centerId: updatedCertificationCenter.id,
+        isV3Pilot: certificationCenterInformation.isV3Pilot,
+      });
+
+      return { updatedCertificationCenter, certificationCenterPilotFeatures };
+    },
+    { isolationLevel: 'repeatable read' },
+  );
+
+  return certificationCenterForAdminSerializer.serialize(updatedCertificationCenter, certificationCenterPilotFeatures);
+};
+
 const certificationCenterAdminController = {
   create,
   findPaginatedFilteredCertificationCenters,
   getCertificationCenterDetails,
+  update,
 };
 
 export { certificationCenterAdminController };
