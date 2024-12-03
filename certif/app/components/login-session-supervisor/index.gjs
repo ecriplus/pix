@@ -55,7 +55,7 @@ export default class LoginSessionSupervisor extends Component {
   }
 
   <template>
-    <div id='login-session-supervisor-page'>
+    <div id='login-session-supervisor-page' class='login-session-supervisor-page'>
       <main>
         <section>
           <LoginSessionSupervisorHeader @errorMessage={{this.errorMessage}} />
