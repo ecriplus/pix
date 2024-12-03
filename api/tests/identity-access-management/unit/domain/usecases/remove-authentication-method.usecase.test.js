@@ -1,10 +1,10 @@
-import { removeAuthenticationMethod } from '../../../../lib/domain/usecases/remove-authentication-method.js';
-import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
-import * as OidcIdentityProviders from '../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
-import { UserNotAuthorizedToRemoveAuthenticationMethod } from '../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import * as OidcIdentityProviders from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
+import { removeAuthenticationMethod } from '../../../../../src/identity-access-management/domain/usecases/remove-authentication-method.usecase.js';
+import { UserNotAuthorizedToRemoveAuthenticationMethod } from '../../../../../src/shared/domain/errors.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | remove-authentication-method', function () {
+describe('Unit | Identity Access Management | Domain | UseCase | remove-authentication-method', function () {
   let userRepository;
   let authenticationMethodRepository;
 
@@ -47,7 +47,7 @@ describe('Unit | UseCase | remove-authentication-method', function () {
   context('When authentication method type is EMAIL', function () {
     const authenticationMethodType = 'EMAIL';
 
-    it('should set the email to null', async function () {
+    it('sets the email to null', async function () {
       // given
       const user = domainBuilder.buildUser();
       userRepository.get.resolves(user);
@@ -91,7 +91,7 @@ describe('Unit | UseCase | remove-authentication-method', function () {
     });
 
     context('When user has a username', function () {
-      it('should not remove PIX authentication method', async function () {
+      it('does not remove PIX authentication method', async function () {
         // given
         const user = domainBuilder.buildUser({ username: 'john.doe0101' });
         userRepository.get.resolves(user);
@@ -115,7 +115,7 @@ describe('Unit | UseCase | remove-authentication-method', function () {
   context('When authentication method type is USERNAME', function () {
     const authenticationMethodType = 'USERNAME';
 
-    it('should set the username to null', async function () {
+    it('sets the username to null', async function () {
       // given
       const user = domainBuilder.buildUser();
       userRepository.get.resolves(user);
@@ -159,7 +159,7 @@ describe('Unit | UseCase | remove-authentication-method', function () {
     });
 
     context('When user has an email', function () {
-      it('should not remove PIX authentication method', async function () {
+      it('does not remove PIX authentication method', async function () {
         // given
         const user = domainBuilder.buildUser({ email: 'john.doe@example.net' });
         userRepository.get.resolves(user);
@@ -256,7 +256,7 @@ describe('Unit | UseCase | remove-authentication-method', function () {
     });
   });
   context('When there is only one remaining authentication method', function () {
-    it('should throw a UserNotAuthorizedToRemoveAuthenticationMethod', async function () {
+    it('throws a UserNotAuthorizedToRemoveAuthenticationMethod', async function () {
       // given
       const user = domainBuilder.buildUser();
       userRepository.get.resolves(user);
@@ -277,7 +277,7 @@ describe('Unit | UseCase | remove-authentication-method', function () {
       expect(error).to.be.an.instanceOf(UserNotAuthorizedToRemoveAuthenticationMethod);
     });
 
-    it('should not remove the authentication method', async function () {
+    it('does not remove the authentication method', async function () {
       // given
       const user = domainBuilder.buildUser();
       userRepository.get.resolves(user);

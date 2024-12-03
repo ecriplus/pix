@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../../lib/domain/usecases/index.js';
 import { userAdminController } from '../../../../../src/identity-access-management/application/user/user.admin.controller.js';
 import { QUERY_TYPES } from '../../../../../src/identity-access-management/domain/constants/user-query.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
@@ -245,7 +244,7 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
     let removeAuthenticationMethodStub, request;
 
     beforeEach(function () {
-      removeAuthenticationMethodStub = sinon.stub(libUsecases, 'removeAuthenticationMethod');
+      removeAuthenticationMethodStub = sinon.stub(usecases, 'removeAuthenticationMethod');
       request = {
         params: { id: 123 },
         payload: {

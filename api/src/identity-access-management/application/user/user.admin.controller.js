@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as userAnonymizedDetailsForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-anonymized-details-for-admin.serializer.js';
@@ -93,7 +92,7 @@ const anonymizeUser = async function (request, h, dependencies = { userAnonymize
 const removeAuthenticationMethod = async function (request, h) {
   const userId = request.params.id;
   const authenticationMethodType = request.payload.data.attributes.type;
-  await libUsecases.removeAuthenticationMethod({ userId, authenticationMethodType });
+  await usecases.removeAuthenticationMethod({ userId, authenticationMethodType });
   return h.response().code(204);
 };
 
