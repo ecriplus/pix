@@ -1,5 +1,5 @@
 .session-supervising-candidate-list-background {
-  background: var(--pix-neutral-900);
+  background: var(--pix-certif-500);
   border-radius: 18px 18px 0 0;
   flex-grow: 1;
   padding: 32px 16px;
@@ -18,7 +18,7 @@
     &__description {
       display: flex;
       justify-content: flex-start;
-      color: var(--pix-neutral-20);
+      color: var(--pix-neutral-0);
       font-size: 0.875rem;
       font-weight: normal;
       min-height: 14px;
@@ -30,7 +30,7 @@
       @extend %pix-title-xs;
       font-weight: 600;
       margin: 0 0 8px;
-      color: var(--pix-neutral-20);
+      color: var(--pix-neutral-0);
     }
 
     &__candidates {
@@ -38,7 +38,7 @@
       padding: 0;
 
       > li {
-        background: var(--pix-neutral-800);
+        background: rgb(var(--pix-neutral-900-inline), 40%);
       }
     }
 
@@ -60,7 +60,6 @@
     &__search {
       align-items: center;
       background-color: var(--pix-neutral-0);
-      border: 1px solid #7A869A;
       border-radius: 4px;
       box-sizing: border-box;
       display: flex;
@@ -73,7 +72,7 @@
     &__candidates-count {
       display: flex;
       justify-content: flex-start;
-      color: var(--pix-neutral-20);
+      color: var(--pix-neutral-0);
       font-size: 0.875rem;
       font-weight: normal;
       height: 14px;
