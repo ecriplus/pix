@@ -360,6 +360,7 @@
       "campaigns": "Campagnes",
       "certifications": "Certifications",
       "documentation": "Documentation",
+      "home": "Accueil",
       "missions": "Missions",
       "organization-participants": "Participants",
       "places": "Places",
@@ -388,7 +389,7 @@
       "aria-label": "Navigation de la section équipe"
     },
     "user-logged-menu": {
-      "button": "Ouvrir le menu utilisateur",
+      "button": "Changer d'organisation",
       "logout": "Se déconnecter"
     }
   },

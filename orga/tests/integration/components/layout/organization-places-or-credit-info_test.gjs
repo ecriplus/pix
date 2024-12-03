@@ -47,7 +47,6 @@ module('Integration | Components | Layout | OrganizationPlacesOrCreditInfo', fun
 
       // then
       assert.ok(screen.getByText(t('navigation.places.number', { count: placesNumber })));
-      assert.ok(screen.getByRole('link', { name: t('navigation.places.link'), href: '/places' }));
     });
 
     test('when there is 0 places left', async function (assert) {

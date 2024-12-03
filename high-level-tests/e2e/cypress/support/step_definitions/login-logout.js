@@ -85,7 +85,6 @@ When(`je me déconnecte`, () => {
 });
 
 When(`je me déconnecte de Pix Orga`, () => {
-  cy.get('[aria-label="Ouvrir le menu utilisateur"]').click();
   cy.contains("Se déconnecter").click();
 });
 

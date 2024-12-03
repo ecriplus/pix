@@ -1,28 +1,17 @@
-<button
-  type="button"
-  {{on "click" this.toggleUserMenu}}
-  aria-haspopup="listbox"
-  aria-expanded="{{this.isMenuOpen}}"
-  aria-label={{t "navigation.user-logged-menu.button"}}
-  class="user-logged-button"
-  ...attributes
->
-  <span class="user-logged-button__text">
-    <span>{{this.currentUser.prescriber.firstName}} {{this.currentUser.prescriber.lastName}}</span>
-    <span>{{this.organizationNameAndExternalId}}</span>
-  </span>
-  <PixIcon @name={{if this.isMenuOpen "chevronTop" "chevronBottom"}} />
-</button>
-
-<Dropdown::Content @display={{this.isMenuOpen}} @close={{this.closeMenu}} class="user-logged-menu">
-  {{#each this.eligibleOrganizations as |organization|}}
-    <Dropdown::Item @onClick={{fn this.onOrganizationChange organization}}>
-      {{organization.name}}
-      {{#if organization.externalId}}({{organization.externalId}}){{/if}}
-    </Dropdown::Item>
-  {{/each}}
-  <Dropdown::ItemLink @linkTo="logout">
-    <PixIcon @name="logout" class="user-logged-menu__icon" />
-    {{t "navigation.user-logged-menu.logout"}}
-  </Dropdown::ItemLink>
-</Dropdown::Content>
+<p>
+  <strong>
+    {{this.currentUser.prescriber.firstName}}
+    {{this.currentUser.prescriber.lastName}}
+  </strong>
+  <br />
+  {{this.organizationNameAndExternalId}}
+</p>
+{{#if this.belongsToSeveralOrganizations}}
+  <PixStructureSwitcher
+    @value={{this.currentUser.organization.id}}
+    @structures={{this.eligibleOrganizations}}
+    @label={{t "navigation.user-logged-menu.button"}}
+    @onChange={{this.onOrganizationChange}}
+  />
+{{/if}}
+<PixButtonLink @variant="tertiary" class="" @route="logout">{{t "navigation.user-logged-menu.logout"}}</PixButtonLink>

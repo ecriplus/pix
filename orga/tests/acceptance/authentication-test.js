@@ -1,5 +1,5 @@
 import { clickByName, fillByLabel, visit } from '@1024pix/ember-testing-library';
-import { currentURL } from '@ember/test-helpers';
+import { click, currentURL } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -269,15 +269,18 @@ module('Acceptance | authentication', function (hooks) {
     });
 
     module('When prescriber can access missions', function (hooks) {
-      let clock;
+      let clock, now;
+      hooks.beforeEach(function () {
+        now = new Date(2024, 5, 12, 14);
+        clock = sinon.useFakeTimers({ now, toFake: ['Date'], shouldAdvanceTime: true });
+      });
+
       hooks.afterEach(function () {
         clock.restore();
       });
 
       test('should display session status', async function (assert) {
-        const now = new Date(2024, 5, 12, 14);
         const sessionExpirationDate = new Date(2024, 5, 12, 16);
-        clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
         const user = createPrescriberForOrganization(
           { lang: 'fr', pixOrgaTermsOfServiceAccepted: true },
           {
@@ -290,6 +293,7 @@ module('Acceptance | authentication', function (hooks) {
           },
         );
         await authenticateSession(user.id);
+
         const screen = await visit('/');
 
         assert.ok(
@@ -298,8 +302,6 @@ module('Acceptance | authentication', function (hooks) {
       });
 
       test('should handle starting session', async function (assert) {
-        const now = new Date(2024, 5, 12, 14);
-        clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
         const user = createPrescriberForOrganization(
           { lang: 'fr', pixOrgaTermsOfServiceAccepted: true },
           {
@@ -312,9 +314,13 @@ module('Acceptance | authentication', function (hooks) {
           },
         );
         await authenticateSession(user.id);
-        const screen = await visit('/');
-        await clickByName(t('navigation.school-sessions.activate-button'));
 
+        const screen = await visit('/');
+
+        const activateButton = await screen.findByRole('button', {
+          name: t('navigation.school-sessions.activate-button'),
+        });
+        await click(activateButton);
         assert.ok(
           screen.getByText(t('navigation.school-sessions.status.active-label', { sessionExpirationDate: '18:00' })),
         );

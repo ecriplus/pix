@@ -1,6 +1,5 @@
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
-import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
@@ -10,12 +9,14 @@ export default class OrganizationPlacesOrCreditInfo extends Component {
   @service currentUser;
 
   get canShowCredit() {
-    return this.currentUser.isAdminInOrganization && this.currentUser.organization.credit > 0;
+    const canShow = this.currentUser.isAdminInOrganization && this.currentUser.organization.credit > 0;
+    this.args.onCanShowCredit?.(canShow);
+    return canShow;
   }
 
   <template>
     {{#if this.currentUser.prescriber.placesManagement}}
-      <div class="organization-places-or-credit-info hide-on-mobile">
+      <div class="organization-places-or-credit-info">
         {{#if (eq @placesCount 0)}}
           <span class="organization-places-or-credit-info__warning">
             <PixIcon @name="warning" @plainIcon={{true}} class="warning-icon" />
@@ -23,17 +24,12 @@ export default class OrganizationPlacesOrCreditInfo extends Component {
         {{else}}
           <span>{{t "navigation.places.number" count=@placesCount}}</span>
         {{/if}}
-        {{#if this.currentUser.isAdminInOrganization}}
-          <LinkTo @route="authenticated.places" class="organization-places-or-credit-info__link">
-            {{t "navigation.places.link"}}
-          </LinkTo>
-        {{/if}}
       </div>
     {{else if this.canShowCredit}}
-      <div class="organization-places-or-credit-info organization-places-or-credit-info--inline hide-on-mobile">
+      <div class="organization-places-or-credit-info">
         <span>{{t "navigation.credits.number" count=this.currentUser.organization.credit}}</span>
 
-        <PixTooltip @id="credit-info-tooltip" @position="bottom-left" @isWide={{true}} @isLight={{true}}>
+        <PixTooltip @id="credit-info-tooltip" @position="auto" @isWide={{true}} @isLight={{true}}>
           <:triggerElement>
             <PixIcon
               @name="help"

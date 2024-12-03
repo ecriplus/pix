@@ -59,7 +59,6 @@ module('Acceptance | Campaign Creation', function (hooks) {
       const screen = await visit('/campagnes/creation');
       await fillByLabel('Nom de la campagne *', 'Ma Campagne');
       await clickByName('Évaluer les participants');
-
       await click(screen.getByLabelText(`${t('pages.campaign-creation.target-profiles-list-label')} *`));
       await click(await screen.findByRole('option', { name: expectedTargetProfileName }));
 
