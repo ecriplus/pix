@@ -16,6 +16,7 @@ export default class MembersListItem extends Component {
   @tracked isEditionMode = false;
   @tracked isRemoveMembershipModalDisplayed = false;
   @tracked isLeaveOrganizationModalDisplayed = false;
+  @tracked roleSelection = null;
 
   adminOption = {
     value: 'ADMIN',
@@ -37,6 +38,7 @@ export default class MembersListItem extends Component {
   constructor() {
     super(...arguments);
     this.organizationRoles = [this.adminOption, this.memberOption];
+    this.roleSelection = this.args.membership.organizationRole;
   }
 
   get displayRole() {
@@ -53,7 +55,7 @@ export default class MembersListItem extends Component {
 
   @action
   setRoleSelection(value) {
-    this.args.membership.organizationRole = value;
+    this.roleSelection = value;
   }
 
   @action
@@ -64,7 +66,7 @@ export default class MembersListItem extends Component {
   @action
   async updateRoleOfMember(membership) {
     this.isEditionMode = false;
-
+    membership.organizationRole = this.roleSelection;
     membership.organization = this.currentUser.organization;
 
     try {
