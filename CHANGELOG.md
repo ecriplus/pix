@@ -1,5 +1,14 @@
 # Pix Changelog
 
+## v4.250.1 (03/12/2024)
+
+
+### :rocket: Amélioration
+- [#10685](https://github.com/1024pix/pix/pull/10685) [FEATURE] cacher les infos d'une participation supprimée (Pix-14303).
+
+### :bug: Correction
+- [#10698](https://github.com/1024pix/pix/pull/10698) [BUGFIX] Impossible de patcher les acquis en recette (PIX-15533).
+
 ## v4.250.0 (03/12/2024)
 
 
