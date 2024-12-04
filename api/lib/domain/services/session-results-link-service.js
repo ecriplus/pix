@@ -6,7 +6,7 @@ const generateResultsLink = function ({ sessionId, i18n }) {
 
   const token = tokenService.createCertificationResultsLinkToken({ sessionId, daysBeforeExpiration });
   const lang = i18n.getLocale();
-  const link = `${config.domain.pixApp + config.domain.tldOrg}/api/sessions/download-all-results/${token}?lang=${lang}`;
+  const link = `${config.domain.pixApp + config.domain.tldOrg}/resultats-session#${token}?lang=${lang}`;
 
   return link;
 };

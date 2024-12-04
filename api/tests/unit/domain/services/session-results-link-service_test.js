@@ -16,7 +16,7 @@ describe('Unit | Domain | Service | Session Results Link Service', function () {
       const link = sessionResultsLinkService.generateResultsLink({ sessionId, i18n });
 
       // then
-      expect(link).to.deep.equal('https://app.pix.org/api/sessions/download-all-results/a_valid_token?lang=fr');
+      expect(link).to.deep.equal('https://test.app.pix.org/resultats-session#a_valid_token?lang=fr');
     });
   });
 });

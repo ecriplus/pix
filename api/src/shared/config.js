@@ -420,6 +420,7 @@ const configuration = (function () {
     config.domain.tldOrg = '.org';
     config.domain.pix = 'https://pix';
     config.domain.pixOrga = 'https://orga.pix';
+    config.domain.pixApp = 'https://test.app.pix';
 
     config.features.dayBeforeRetrying = 4;
     config.features.dayBeforeImproving = 4;
