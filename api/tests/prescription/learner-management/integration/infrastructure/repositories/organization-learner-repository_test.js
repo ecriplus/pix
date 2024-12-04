@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { DomainTransaction } from '../../../../../../lib/infrastructure/DomainTransaction.js';
 import * as organizationLearnerRepository from '../../../../../../lib/infrastructure/repositories/organization-learner-repository.js';
 import { CommonOrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/CommonOrganizationLearner.js';
 import { OrganizationLearnerForAdmin } from '../../../../../../src/prescription/learner-management/domain/read-models/OrganizationLearnerForAdmin.js';
@@ -11,6 +10,7 @@ import {
   disableCommonOrganizationLearnersFromOrganizationId,
   findAllCommonLearnersFromOrganizationId,
   findAllCommonOrganizationLearnerByReconciliationInfos,
+  findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId,
   findOrganizationLearnerIdsByOrganizationId,
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
@@ -19,7 +19,7 @@ import {
   saveCommonOrganizationLearners,
   update,
 } from '../../../../../../src/prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
-import { ApplicationTransaction } from '../../../../../../src/prescription/shared/infrastructure/ApplicationTransaction.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import {
   NotFoundError,
   OrganizationLearnersCouldNotBeSavedError,
@@ -1087,7 +1087,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
         });
 
         try {
-          await ApplicationTransaction.execute(async () => {
+          await DomainTransaction.execute(async () => {
             await saveCommonOrganizationLearners([learnerSacha]);
             throw new Error();
           });
@@ -1243,7 +1243,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       await databaseBuilder.commit();
 
       try {
-        await ApplicationTransaction.execute(async () => {
+        await DomainTransaction.execute(async () => {
           await disableCommonOrganizationLearnersFromOrganizationId({ organizationId });
           throw new Error();
         });
@@ -1951,6 +1951,92 @@ describe('Integration | Repository | Organization Learner Management | Organizat
         // then
         expect(result).to.equal(2);
       });
+    });
+  });
+
+  describe('#findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId ', function () {
+    let organizationId, organizationLearnerIdOfYesYes;
+
+    beforeEach(async function () {
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      organizationLearnerIdOfYesYes =
+        databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+          organizationId,
+          firstName: 'Oui',
+          lastName: 'Oui',
+          userId: null,
+          attributes: null,
+        }).id;
+
+      await databaseBuilder.commit();
+    });
+
+    it('should return an array of organization learner id given organizationId', async function () {
+      const otherOrganizationLearnerId =
+        databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+          organizationId,
+          firstName: 'Non',
+          lastName: 'Non',
+          userId: null,
+          attributes: null,
+        }).id;
+
+      await databaseBuilder.commit();
+
+      const results = await findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId({ organizationId });
+
+      expect([organizationLearnerIdOfYesYes, otherOrganizationLearnerId]).to.be.deep.members(results);
+    });
+
+    it('should not return organization learners from other organization', async function () {
+      databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+        organizationId: databaseBuilder.factory.buildOrganization().id,
+        firstName: 'Non',
+        lastName: 'Non',
+        userId: null,
+        attributes: null,
+      }).id;
+
+      await databaseBuilder.commit();
+
+      const results = await findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId({ organizationId });
+
+      expect([organizationLearnerIdOfYesYes]).to.be.deep.members(results);
+    });
+
+    it('should not return organization learners already deleted', async function () {
+      databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+        organizationId,
+        firstName: 'Non',
+        lastName: 'Non',
+        userId: null,
+        attributes: null,
+        deletedAt: new Date('2020-01-01'),
+      }).id;
+
+      await databaseBuilder.commit();
+
+      const results = await findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId({ organizationId });
+
+      expect([organizationLearnerIdOfYesYes]).to.be.deep.members(results);
+    });
+
+    it('should not return organization learners with attributes', async function () {
+      databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+        organizationId,
+        firstName: 'Non',
+        lastName: 'Non',
+        userId: null,
+        attributes: { test: 'toto' },
+        deletedAt: null,
+      }).id;
+
+      await databaseBuilder.commit();
+
+      const results = await findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId({ organizationId });
+
+      expect([organizationLearnerIdOfYesYes]).to.be.deep.members(results);
     });
   });
 });

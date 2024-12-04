@@ -1,7 +1,6 @@
 import { HttpErrors } from '../../shared/application/http-errors.js';
 import { DomainErrorMappingConfiguration } from '../../shared/application/models/domain-error-mapping-configuration.js';
 import {
-  AlreadyExistingOrganizationFeatureError,
   DpoEmailInvalid,
   FeatureNotFound,
   FeatureParamsNotProcessable,
@@ -14,10 +13,6 @@ import {
 const organizationalEntitiesDomainErrorMappingConfiguration = [
   {
     name: UnableToAttachChildOrganizationToParentOrganizationError.name,
-    httpErrorFn: (error) => new HttpErrors.ConflictError(error.message, error.code, error.meta),
-  },
-  {
-    name: AlreadyExistingOrganizationFeatureError.name,
     httpErrorFn: (error) => new HttpErrors.ConflictError(error.message, error.code, error.meta),
   },
   {

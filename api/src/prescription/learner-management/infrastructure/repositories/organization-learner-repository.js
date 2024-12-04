@@ -8,7 +8,6 @@ import {
   UserCouldNotBeReconciledError,
 } from '../../../../shared/domain/errors.js';
 import { OrganizationLearner } from '../../../../shared/domain/models/index.js';
-import { ApplicationTransaction } from '../../../shared/infrastructure/ApplicationTransaction.js';
 import { CommonOrganizationLearner } from '../../domain/models/CommonOrganizationLearner.js';
 import { OrganizationLearnerForAdmin } from '../../domain/read-models/OrganizationLearnerForAdmin.js';
 import * as studentRepository from './student-repository.js';
@@ -163,7 +162,7 @@ function _shouldStudentToImportBeReconciled(
 }
 
 const saveCommonOrganizationLearners = function (learners) {
-  const knex = ApplicationTransaction.getConnection();
+  const knex = DomainTransaction.getConnection();
 
   return Promise.all(
     learners.map((learner) => {
@@ -182,7 +181,7 @@ const disableCommonOrganizationLearnersFromOrganizationId = function ({
   organizationId,
   excludeOrganizationLearnerIds = [],
 }) {
-  const knex = ApplicationTransaction.getConnection();
+  const knex = DomainTransaction.getConnection();
   return knex('organization-learners')
     .where({ organizationId, isDisabled: false })
     .whereNull('deletedAt')
@@ -191,7 +190,7 @@ const disableCommonOrganizationLearnersFromOrganizationId = function ({
 };
 
 const findAllCommonLearnersFromOrganizationId = async function ({ organizationId }) {
-  const knex = ApplicationTransaction.getConnection();
+  const knex = DomainTransaction.getConnection();
 
   const existingLearners = await knex('view-active-organization-learners')
     .select(['firstName', 'id', 'lastName', 'userId', 'organizationId', 'attributes'])
@@ -215,7 +214,7 @@ const findAllCommonOrganizationLearnerByReconciliationInfos = async function ({
   organizationId,
   reconciliationInformations,
 }) {
-  const knex = ApplicationTransaction.getConnection();
+  const knex = DomainTransaction.getConnection();
 
   const query = knex('view-active-organization-learners')
     .select('firstName', 'lastName', 'id', 'attributes', 'userId')
@@ -234,7 +233,7 @@ const findAllCommonOrganizationLearnerByReconciliationInfos = async function ({
 };
 
 const update = async function (organizationLearner) {
-  const knex = ApplicationTransaction.getConnection();
+  const knex = DomainTransaction.getConnection();
 
   const { id, ...attributes } = organizationLearner;
   const updatedRows = await knex('organization-learners').update(attributes).where({ id });
@@ -303,6 +302,18 @@ const reconcileUserToOrganizationLearner = async function ({ userId, organizatio
   }
 };
 
+/**
+ * @function
+ * @name findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId
+ * @param {Object} params
+ * @param {number} params.organizationId
+ * @returns {Promise<number[]>}
+ */
+const findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId = async function ({ organizationId }) {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('view-active-organization-learners').where({ organizationId }).whereNull('attributes').pluck('id');
+};
+
 export {
   addOrUpdateOrganizationOfOrganizationLearners,
   countByUserId,
@@ -312,6 +323,7 @@ export {
   findAllCommonLearnersFromOrganizationId,
   findAllCommonOrganizationLearnerByReconciliationInfos,
   findByUserId,
+  findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId,
   findOrganizationLearnerIdsByOrganizationId,
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,

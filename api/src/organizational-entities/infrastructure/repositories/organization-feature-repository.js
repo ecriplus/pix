@@ -1,9 +1,9 @@
 /**
  * @module OrganizationFeatureRepository
  */
-import { knex } from '../../../../db/knex-database-connection.js';
 import * as knexUtils from '../../../../src/shared/infrastructure/utils/knex-utils.js';
-import { AlreadyExistingOrganizationFeatureError, FeatureNotFound, OrganizationNotFound } from '../../domain/errors.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { FeatureNotFound, OrganizationNotFound } from '../../domain/errors.js';
 import { OrganizationFeatureItem } from '../../domain/models/OrganizationFeatureItem.js';
 
 /**
@@ -13,20 +13,18 @@ import { OrganizationFeatureItem } from '../../domain/models/OrganizationFeature
  * @typedef {import('../../domain/models/OrganizationFeatureItem.js').OrganizationFeatureItem} OrganizationFeatureItem
  */
 
-const DEFAULT_BATCH_SIZE = 100;
-
 /**
  **
  * @param {OrganizationFeature[]} organizations
  */
-async function saveInBatch(organizationFeatures, batchSize = DEFAULT_BATCH_SIZE) {
+async function saveInBatch(organizationFeatures) {
   try {
-    await knex.batchInsert('organization-features', organizationFeatures, batchSize);
+    const knexConn = DomainTransaction.getConnection();
+    await knexConn('organization-features')
+      .insert(organizationFeatures)
+      .onConflict(['featureId', 'organizationId'])
+      .ignore();
   } catch (err) {
-    if (knexUtils.isUniqConstraintViolated(err)) {
-      throw new AlreadyExistingOrganizationFeatureError();
-    }
-
     if (knexUtils.foreignKeyConstraintViolated(err) && err.constraint.includes('featureid')) {
       throw new FeatureNotFound();
     }
@@ -51,7 +49,8 @@ async function saveInBatch(organizationFeatures, batchSize = DEFAULT_BATCH_SIZE)
  * @returns {Promise<OrganizationFeatureItem>}
  */
 async function findAllOrganizationFeaturesFromOrganizationId({ organizationId }) {
-  const organizationFeatures = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const organizationFeatures = await knexConn
     .select('key', 'params')
     .from('organization-features')
     .join('features', 'features.id', 'organization-features.featureId')
