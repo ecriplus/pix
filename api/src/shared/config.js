@@ -237,6 +237,7 @@ const configuration = (function () {
         process.env.INFRA_CHUNK_SIZE_ORGANIZATION_LEARNER_DATA_PROCESSING,
         1000,
       ),
+      startJobInWebProcess: toBoolean(process.env.START_JOB_IN_WEB_PROCESS),
     },
     jwtConfig: {
       livretScolaire: {
