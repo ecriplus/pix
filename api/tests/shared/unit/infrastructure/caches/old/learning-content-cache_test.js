@@ -1,7 +1,7 @@
-import { learningContentCache } from '../../../../../src/shared/infrastructure/caches/learning-content-cache.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { learningContentCache } from '../../../../../../src/shared/infrastructure/caches/old/learning-content-cache.js';
+import { expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | Infrastructure | Caches | LearningContentCache', function () {
+describe('Unit | Infrastructure | Caches | Old | LearningContentCache', function () {
   let originalUnderlyingCache;
 
   beforeEach(function () {

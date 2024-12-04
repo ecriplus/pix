@@ -1,7 +1,7 @@
 import Redis from 'ioredis';
 
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
-import { LearningContentCache } from '../../../../src/shared/infrastructure/caches/learning-content-cache.js';
+import { LearningContentCache } from '../../../../src/shared/infrastructure/caches/old/learning-content-cache.js';
 import {
   createServer,
   databaseBuilder,

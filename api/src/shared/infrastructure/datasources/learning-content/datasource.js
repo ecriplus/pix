@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { LearningContentCache } from '../../caches/learning-content-cache.js';
+import { LearningContentCache } from '../../caches/old/learning-content-cache.js';
 import { LearningContentResourceNotFound } from './LearningContentResourceNotFound.js';
 
 const _DatasourcePrototype = {

@@ -1,4 +1,4 @@
-import { LearningContentCache } from '../../../shared/infrastructure/caches/learning-content-cache.js';
+import { LearningContentCache } from '../../../shared/infrastructure/caches/old/learning-content-cache.js';
 import { areaRepository } from '../../infrastructure/repositories/area-repository.js';
 import { challengeRepository } from '../../infrastructure/repositories/challenge-repository.js';
 import { competenceRepository } from '../../infrastructure/repositories/competence-repository.js';

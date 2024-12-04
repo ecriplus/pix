@@ -27,7 +27,7 @@ import * as missionRepository from '../src/school/infrastructure/repositories/mi
 import { config } from '../src/shared/config.js';
 import { Membership } from '../src/shared/domain/models/index.js';
 import * as tokenService from '../src/shared/domain/services/token-service.js';
-import { LearningContentCache } from '../src/shared/infrastructure/caches/learning-content-cache.js';
+import { LearningContentCache } from '../src/shared/infrastructure/caches/old/learning-content-cache.js';
 import * as areaRepository from '../src/shared/infrastructure/repositories/area-repository.js';
 import * as challengeRepository from '../src/shared/infrastructure/repositories/challenge-repository.js';
 import * as competenceRepository from '../src/shared/infrastructure/repositories/competence-repository.js';
