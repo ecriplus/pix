@@ -1,5 +1,6 @@
 import isEmpty from 'lodash/isEmpty.js';
 import omit from 'lodash/omit.js';
+import micromatch from 'micromatch';
 import pino from 'pino';
 import pretty from 'pino-pretty';
 
@@ -20,7 +21,7 @@ if (logging.logForHumans) {
   });
 }
 
-const logger = pino(
+export const logger = pino(
   {
     level: logging.logLevel,
     redact: ['req.headers.authorization'],
@@ -28,6 +29,22 @@ const logger = pino(
   },
   prettyPrint,
 );
+
+/**
+ * Creates a child logger for a section.
+ * Debug may be enabled for a section using LOG_DEBUG.
+ * @param {string} section
+ * @param {pino.Bindings} bindings
+ * @param {pino.ChildLoggerOptions} options
+ */
+export function child(section, bindings, options) {
+  /** @type{Partial<pino.ChildLoggerOptions>} */
+  const optionsOverride = {};
+  if (micromatch.isMatch(section, logging.debugSections)) {
+    optionsOverride.level = 'debug';
+  }
+  return logger.child(bindings, { ...options, ...optionsOverride });
+}
 
 function messageFormatCompact(log, messageKey, _logLevel, { colors }) {
   const message = log[messageKey];
@@ -71,5 +88,3 @@ function messageFormatCompact(log, messageKey, _logLevel, { colors }) {
   const details = !isEmpty(compactLog) ? colors.gray(JSON.stringify(compactLog)) : '';
   return `${message} ${details}`;
 }
-
-export { logger };
