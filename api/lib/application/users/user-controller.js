@@ -57,13 +57,6 @@ const resetScorecard = function (request, h, dependencies = { scorecardSerialize
     .then(dependencies.scorecardSerializer.serialize);
 };
 
-const removeAuthenticationMethod = async function (request, h) {
-  const userId = request.params.id;
-  const authenticationMethodType = request.payload.data.attributes.type;
-  await usecases.removeAuthenticationMethod({ userId, authenticationMethodType });
-  return h.response().code(204);
-};
-
 const addPixAuthenticationMethodByEmail = async function (
   request,
   h,
@@ -126,7 +119,6 @@ const userController = {
   reassignAuthenticationMethods,
   rememberUserHasSeenAssessmentInstructions,
   rememberUserHasSeenChallengeTooltip,
-  removeAuthenticationMethod,
   resetScorecard,
 };
 

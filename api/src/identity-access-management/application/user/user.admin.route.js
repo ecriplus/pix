@@ -180,4 +180,37 @@ export const userAdminRoutes = [
       tags: ['api', 'admin', 'identity-access-management', 'user'],
     },
   },
+  {
+    method: 'POST',
+    path: '/api/admin/users/{id}/remove-authentication',
+    config: {
+      pre: [
+        {
+          method: (request, h) =>
+            securityPreHandlers.hasAtLeastOneAccessOf([
+              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+              securityPreHandlers.checkAdminMemberHasRoleSupport,
+            ])(request, h),
+        },
+      ],
+      validate: {
+        params: Joi.object({
+          id: identifiersType.userId,
+        }),
+        payload: Joi.object({
+          data: {
+            attributes: {
+              type: Joi.string().required(),
+            },
+          },
+        }),
+        options: {
+          allowUnknown: true,
+        },
+      },
+      handler: (request, h) => userAdminController.removeAuthenticationMethod(request, h),
+      notes: ['- Permet à un administrateur de supprimer une méthode de connexion'],
+      tags: ['api', 'identity-access-management', 'admin', 'user'],
+    },
+  },
 ];

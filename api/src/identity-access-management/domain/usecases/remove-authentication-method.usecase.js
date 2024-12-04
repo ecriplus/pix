@@ -1,7 +1,16 @@
-import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../src/identity-access-management/domain/constants/identity-providers.js';
-import * as OidcIdentityProviders from '../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
-import { UserNotAuthorizedToRemoveAuthenticationMethod } from '../../../src/shared/domain/errors.js';
+import { UserNotAuthorizedToRemoveAuthenticationMethod } from '../../../shared/domain/errors.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
+import * as OidcIdentityProviders from '../constants/oidc-identity-providers.js';
 
+/**
+ * @param{object} params
+ * @param{string} params.userId
+ * @param{string} params.authenticationMethodType
+ * @param{UserRepository} userRepository
+ * @param{AuthenticationMethodRepository} authenticationMethodRepository
+ * @returns {Promise<void>}
+ * @throws UserNotAuthorizedToRemoveAuthenticationMethod
+ */
 export const removeAuthenticationMethod = async function ({
   userId,
   authenticationMethodType,
