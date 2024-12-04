@@ -24,6 +24,7 @@ import { config } from '../src/shared/config.js';
 import { Membership } from '../src/shared/domain/models/index.js';
 import * as tokenService from '../src/shared/domain/services/token-service.js';
 import { LearningContentCache } from '../src/shared/infrastructure/caches/learning-content-cache.js';
+import * as areaRepository from '../src/shared/infrastructure/repositories/area-repository.js';
 import * as customChaiHelpers from './tooling/chai-custom-helpers/index.js';
 import * as domainBuilder from './tooling/domain-builder/factory/index.js';
 import { jobChai } from './tooling/jobs/expect-job.js';
@@ -73,6 +74,7 @@ afterEach(function () {
   LearningContentCache.instance.flushAll();
   nock.cleanAll();
   frameworkRepository.clearCache();
+  areaRepository.clearCache();
   return databaseBuilder.clean();
 });
 
