@@ -28,12 +28,12 @@
       </PixButton>
     </form>
 
-    <PixMessage @withIcon={{true}}>
+    <PixNotificationAlert @withIcon={{true}}>
       {{t "pages.certifications.documentation-link-notice"}}
       <a href={{t "pages.certifications.documentation-link"}} target="_blank" rel="noopener noreferrer">{{t
           "pages.certifications.documentation-link-label"
         }}</a>
-    </PixMessage>
+    </PixNotificationAlert>
   {{else}}
     <p class="certifications-page__text">
       {{t "pages.certifications.no-students-imported-yet" htmlSafe=true}}

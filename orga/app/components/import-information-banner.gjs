@@ -1,4 +1,4 @@
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -47,14 +47,14 @@ export default class ImportBanner extends Component {
 
   <template>
     {{#if this.displayBanner}}
-      <PixMessage class="import-information-banner" @type={{this.bannerType}} @withIcon="true">
+      <PixNotificationAlert class="import-information-banner" @type={{this.bannerType}} @withIcon="true">
         <strong>{{this.message}}</strong>
         {{#if this.linkMessage}}
           <LinkTo @route="authenticated.import-organization-participants" class="import-information-banner__link link">
             {{this.linkMessage}}
           </LinkTo>
         {{/if}}
-      </PixMessage>
+      </PixNotificationAlert>
     {{/if}}
   </template>
 }

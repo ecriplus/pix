@@ -1,4 +1,4 @@
-import PixBanner from '@1024pix/pix-ui/components/pix-banner';
+import PixBannerAlert from '@1024pix/pix-ui/components/pix-banner-alert';
 import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 import { STATUSES } from 'pix-orga/models/organization-places-lot.js';
@@ -29,8 +29,8 @@ function isAlertVisible(placesLots) {
 
 <template>
   {{#if (isAlertVisible @placesLots)}}
-    <PixBanner class="places-lots-alert" @type="warning" @withIcon="true">
+    <PixBannerAlert class="places-lots-alert" @type="warning" @withIcon="true">
       {{t "banners.last-places-lot-available.message" days=(getCountdDownDays @placesLots)}}
-    </PixBanner>
+    </PixBannerAlert>
   {{/if}}
 </template>

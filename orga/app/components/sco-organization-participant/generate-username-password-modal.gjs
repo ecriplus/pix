@@ -1,6 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import { not } from 'ember-truth-helpers';
@@ -18,9 +18,9 @@ export default class GenerateUsernamePasswordModal extends Component {
     >
       <:content>
         <section class="generate-username-password-modal__content">
-          <PixMessage @type="warning" @withIcon={{true}}>{{t
+          <PixNotificationAlert @type="warning" @withIcon={{true}}>{{t
               "pages.sco-organization-participants.generate-username-password-modal.warning-message"
-            }}</PixMessage>
+            }}</PixNotificationAlert>
           <p>{{t "pages.sco-organization-participants.generate-username-password-modal.content-message-1"}}</p>
           <p>{{t "pages.sco-organization-participants.generate-username-password-modal.content-message-2"}}</p>
           <p>{{t "pages.sco-organization-participants.generate-username-password-modal.content-message-3"}}</p>
