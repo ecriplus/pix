@@ -67,7 +67,7 @@ process.on('SIGINT', () => {
 (async () => {
   try {
     await start();
-    if (process.env.START_JOB_IN_WEB_PROCESS) {
+    if (config.infra.startJobInWebProcess) {
       import('./worker.js');
     }
   } catch (error) {
