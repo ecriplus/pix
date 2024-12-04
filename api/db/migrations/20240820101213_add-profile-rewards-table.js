@@ -1,4 +1,3 @@
-import { REWARD_TYPES } from '../../src/quest/domain/constants.js';
 export const PROFILE_REWARDS_TABLE_NAME = 'profile-rewards';
 
 const up = async function (knex) {
@@ -6,8 +5,8 @@ const up = async function (knex) {
     table.increments('id').primary();
     table.dateTime('createdAt').notNullable().defaultTo(knex.fn.now());
     table.bigInteger('userId').index().references('users.id');
-    table.enum('rewardType', [REWARD_TYPES.ATTESTATION]).defaultTo(REWARD_TYPES.ATTESTATION);
-    table.bigInteger('rewardId').notNullable();
+    table.string('rewardType').notNullable();
+    table.string('rewardId').notNullable();
   });
 };
 
