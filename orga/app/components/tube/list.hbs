@@ -23,7 +23,7 @@
     {{/if}}
   </div>
   {{#each this.sortedAreas as |area|}}
-    <PixCollapsible class="{{area.color}}">
+    <PixAccordions class="{{area.color}}">
       <:title>{{area.code}} · {{area.title}}</:title>
       <:content>
         {{#each area.sortedCompetences as |competence|}}
@@ -75,7 +75,7 @@
           </table>
         {{/each}}
       </:content>
-    </PixCollapsible>
+    </PixAccordions>
 
   {{/each}}
 </section>

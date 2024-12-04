@@ -1,5 +1,5 @@
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 
@@ -99,7 +99,7 @@ export default class ImportBanner extends Component {
       </p>
     {{/if}}
     {{#if this.displayBanner}}
-      <PixMessage @type={{this.bannerType}} @withIcon="true">
+      <PixNotificationAlert @type={{this.bannerType}} @withIcon="true">
         <strong class="import-banner__title">{{this.bannerMessage}}</strong>
         {{#if this.anchorMessage}}
           (<a class="import-banner__link" href="#{{@errorPanelId}}">{{this.anchorMessage}}</a>)
@@ -111,7 +111,7 @@ export default class ImportBanner extends Component {
             {{this.actionMessage}}
           </span>
         {{/if}}
-      </PixMessage>
+      </PixNotificationAlert>
     {{/if}}
   </template>
 }

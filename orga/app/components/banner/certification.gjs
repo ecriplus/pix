@@ -1,4 +1,4 @@
-import PixBanner from '@1024pix/pix-ui/components/pix-banner';
+import PixBannerAlert from '@1024pix/pix-ui/components/pix-banner-alert';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
@@ -21,7 +21,7 @@ export default class InformationBanner extends Component {
 
   <template>
     {{#if this.displayCertificationBanner}}
-      <PixBanner @type="warning">
+      <PixBannerAlert @type="warning">
         {{t
           "banners.certification.message"
           documentationLink="https://cloud.pix.fr/s/DEarDXyxFxM78ps"
@@ -29,7 +29,7 @@ export default class InformationBanner extends Component {
           htmlSafe=true
           year=this.year
         }}
-      </PixBanner>
+      </PixBannerAlert>
     {{/if}}
   </template>
 }

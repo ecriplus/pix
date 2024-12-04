@@ -1,5 +1,5 @@
 import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
-import PixToggle from '@1024pix/pix-ui/components/pix-toggle';
+import PixToggleButton from '@1024pix/pix-ui/components/pix-toggle-button';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
@@ -52,11 +52,11 @@ export default class CampaignFilters extends Component {
         />
       {{/unless}}
 
-      <PixToggle @toggled={{this.isToggleSwitched}} @onChange={{this.onToggle}} @screenReaderOnly={{true}}>
+      <PixToggleButton @toggled={{this.isToggleSwitched}} @onChange={{this.onToggle}} @screenReaderOnly={{true}}>
         <:label>{{t "pages.campaigns-list.action.campaign.label"}}</:label>
         <:on>{{t "pages.campaigns-list.action.campaign.ongoing"}}</:on>
         <:off>{{t "pages.campaigns-list.action.campaign.archived"}}</:off>
-      </PixToggle>
+      </PixToggleButton>
     </PixFilterBanner>
   </template>
 }

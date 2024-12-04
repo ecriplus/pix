@@ -1,4 +1,4 @@
-import PixProgressGauge from '@1024pix/pix-ui/components/pix-progress-gauge';
+import PixProgressBar from '@1024pix/pix-ui/components/pix-progress-bar';
 import { hash } from '@ember/helper';
 import { t } from 'ember-intl';
 
@@ -38,7 +38,7 @@ function getCount(campaignCollectiveResult) {
               </span>
             </td>
             <td class="competences-col__gauge">
-              <PixProgressGauge
+              <PixProgressBar
                 @value={{competenceResult.validatedSkillsPercentage}}
                 @tooltipText={{t
                   "pages.campaign-review.table.competences.column.results.tooltip"

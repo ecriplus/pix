@@ -1,4 +1,4 @@
-import PixBanner from '@1024pix/pix-ui/components/pix-banner';
+import PixBannerAlert from '@1024pix/pix-ui/components/pix-banner-alert';
 import { htmlSafe } from '@ember/template';
 import isEmpty from 'lodash/isEmpty';
 import ENV from 'pix-orga/config/environment';
@@ -19,8 +19,8 @@ function bannerContent() {
 
 <template>
   {{#if (isEnabled)}}
-    <PixBanner @type={{(bannerType)}} class="sticker-banner">
+    <PixBannerAlert @type={{(bannerType)}} class="sticker-banner">
       {{textWithMultipleLang (bannerContent)}}
-    </PixBanner>
+    </PixBannerAlert>
   {{/if}}
 </template>

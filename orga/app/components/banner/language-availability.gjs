@@ -1,4 +1,4 @@
-import PixBanner from '@1024pix/pix-ui/components/pix-banner';
+import PixBannerAlert from '@1024pix/pix-ui/components/pix-banner-alert';
 import { fn } from '@ember/helper';
 import { t } from 'ember-intl';
 
@@ -14,13 +14,13 @@ function shouldDisplayBanner(session) {
 <template>
   {{#let (getService "service:session") as |session|}}
     {{#if (shouldDisplayBanner session)}}
-      <PixBanner
+      <PixBannerAlert
         @type="information"
         @canCloseBanner="true"
         @onCloseBannerTriggerAction={{fn session.updateDataAttribute "localeNotSupportedBannerClosed" true}}
       >
         {{t "banners.language-availability.message"}}
-      </PixBanner>
+      </PixBannerAlert>
     {{/if}}
   {{/let}}
 </template>
