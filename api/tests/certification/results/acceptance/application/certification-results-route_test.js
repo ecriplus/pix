@@ -105,6 +105,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
 
         const token = jsonwebtoken.sign(
           {
+            scope: 'certificationResultsByRecipientEmailLink',
             result_recipient_email: 'recipientEmail@example.net',
             session_id: sessionId,
           },
@@ -176,6 +177,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
 
         const token = jsonwebtoken.sign(
           {
+            scope: 'certificationResultsLink',
             session_id: sessionId,
           },
           settings.authentication.secret,
@@ -246,6 +248,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
 
         const token = jsonwebtoken.sign(
           {
+            scope: 'certificationResultsLink',
             session_id: sessionId,
           },
           settings.authentication.secret,

@@ -23,7 +23,6 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'deprecate-pole-emploi-push-notification': false,
             'is-always-ok-validate-next-challenge-endpoint-enabled': false,
             'is-async-quest-rewarding-calculation-enabled': false,
-            'is-certification-token-scope-enabled': false,
             'is-need-to-adjust-certification-accessibility-enabled': false,
             'is-pix1d-enabled': true,
             'is-pix-companion-enabled': false,
