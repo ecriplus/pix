@@ -1056,12 +1056,6 @@ class AuditLoggerApiError extends DomainError {
   }
 }
 
-class OrganizationLearnerCertificabilityNotUpdatedError extends DomainError {
-  constructor(message) {
-    super(message);
-  }
-}
-
 export {
   AccountRecoveryDemandExpired,
   AccountRecoveryUserAlreadyConfirmEmail,
@@ -1162,7 +1156,6 @@ export {
   OrganizationLearnerAlreadyLinkedToInvalidUserError,
   OrganizationLearnerAlreadyLinkedToUserError,
   OrganizationLearnerCannotBeDissociatedError,
-  OrganizationLearnerCertificabilityNotUpdatedError,
   OrganizationLearnerDisabledError,
   OrganizationLearnerNotFound,
   OrganizationLearnersConstraintError,

@@ -10,6 +10,7 @@ import * as campaignRepository from '../../../../lib/infrastructure/repositories
 import * as organizationLearnerRepository from '../../../../lib/infrastructure/repositories/organization-learner-repository.js';
 import * as userRecommendedTrainingRepository from '../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import { repositories as campaignRepositories } from '../../../prescription/campaign/infrastructure/repositories/index.js';
+import * as prescriptionOrganizationLearnerRepository from '../../../prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
 import { config } from '../../../shared/config.js';
 import { cryptoService } from '../../../shared/domain/services/crypto-service.js';
 import { tokenService } from '../../../shared/domain/services/token-service.js';
@@ -59,6 +60,7 @@ const repositories = {
   membershipRepository,
   oidcProviderRepository,
   organizationLearnerRepository,
+  prescriptionOrganizationLearnerRepository,
   privacyUsersApiRepository,
   refreshTokenRepository,
   resetPasswordDemandRepository,

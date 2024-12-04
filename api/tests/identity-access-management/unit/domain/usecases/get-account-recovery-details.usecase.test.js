@@ -5,8 +5,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | get-account-rec
   it('returns new email and firstName of account recovery demand', async function () {
     // given
     const temporaryKey = 'ZHABCDEFJSJ';
-    const organizationLearnerRepository = {
-      get: sinon.stub(),
+    const prescriptionOrganizationLearnerRepository = {
+      getLearnerInfo: sinon.stub(),
     };
     const scoAccountRecoveryService = {
       retrieveAndValidateAccountRecoveryDemand: sinon.stub(),
@@ -16,12 +16,12 @@ describe('Unit | Identity Access Management | Domain | UseCase | get-account-rec
     const firstName = 'Emma';
 
     scoAccountRecoveryService.retrieveAndValidateAccountRecoveryDemand.resolves({ organizationLearnerId, newEmail });
-    organizationLearnerRepository.get.withArgs(organizationLearnerId).resolves({ firstName });
+    prescriptionOrganizationLearnerRepository.getLearnerInfo.withArgs(organizationLearnerId).resolves({ firstName });
 
     // when
     const result = await getAccountRecoveryDetails({
       temporaryKey,
-      organizationLearnerRepository,
+      prescriptionOrganizationLearnerRepository,
       scoAccountRecoveryService,
     });
 

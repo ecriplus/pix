@@ -47,10 +47,17 @@ class CouldNotDeleteLearnersError extends DomainError {
   }
 }
 
+class OrganizationLearnerCertificabilityNotUpdatedError extends DomainError {
+  constructor(message) {
+    super(message);
+  }
+}
+
 export {
   AggregateImportError,
   CouldNotDeleteLearnersError,
   OrganizationDoesNotHaveFeatureEnabledError,
+  OrganizationLearnerCertificabilityNotUpdatedError,
   OrganizationLearnerImportFormatNotFoundError,
   OrganizationLearnersCouldNotBeSavedError,
   ReconcileCommonOrganizationLearnerError,

@@ -14,7 +14,7 @@ describe('Unit | UseCase | update-organization-learner-dependent-user-password',
   let passwordGenerator;
   let cryptoService;
   let authenticationMethodRepository;
-  let organizationLearnerRepository;
+  let prescriptionOrganizationLearnerRepository;
   let userRepository;
 
   let userMember;
@@ -47,8 +47,8 @@ describe('Unit | UseCase | update-organization-learner-dependent-user-password',
     authenticationMethodRepository = {
       updatePasswordThatShouldBeChanged: sinon.stub(),
     };
-    organizationLearnerRepository = {
-      get: sinon.stub().resolves(student),
+    prescriptionOrganizationLearnerRepository = {
+      getLearnerInfo: sinon.stub().resolves(student),
     };
     userRepository = {
       get: sinon.stub().resolves(userStudent),
@@ -66,7 +66,7 @@ describe('Unit | UseCase | update-organization-learner-dependent-user-password',
       cryptoService,
       passwordGenerator,
       authenticationMethodRepository,
-      organizationLearnerRepository,
+      prescriptionOrganizationLearnerRepository,
       userRepository,
     });
 
@@ -83,12 +83,14 @@ describe('Unit | UseCase | update-organization-learner-dependent-user-password',
       cryptoService,
       passwordGenerator,
       authenticationMethodRepository,
-      organizationLearnerRepository,
+      prescriptionOrganizationLearnerRepository,
       userRepository,
     });
 
     // then
-    expect(organizationLearnerRepository.get).to.have.been.calledWithExactly(organizationLearnerId);
+    expect(prescriptionOrganizationLearnerRepository.getLearnerInfo).to.have.been.calledWithExactly(
+      organizationLearnerId,
+    );
   });
 
   it('should update user password with a hashed password', async function () {
@@ -100,7 +102,7 @@ describe('Unit | UseCase | update-organization-learner-dependent-user-password',
       cryptoService,
       passwordGenerator,
       authenticationMethodRepository,
-      organizationLearnerRepository,
+      prescriptionOrganizationLearnerRepository,
       userRepository,
     });
 
@@ -121,7 +123,7 @@ describe('Unit | UseCase | update-organization-learner-dependent-user-password',
       cryptoService,
       passwordGenerator,
       authenticationMethodRepository,
-      organizationLearnerRepository,
+      prescriptionOrganizationLearnerRepository,
       userRepository,
     });
 
@@ -142,7 +144,7 @@ describe('Unit | UseCase | update-organization-learner-dependent-user-password',
         cryptoService,
         passwordGenerator,
         authenticationMethodRepository,
-        organizationLearnerRepository,
+        prescriptionOrganizationLearnerRepository,
         userRepository,
       });
 
@@ -167,7 +169,7 @@ describe('Unit | UseCase | update-organization-learner-dependent-user-password',
         cryptoService,
         passwordGenerator,
         authenticationMethodRepository,
-        organizationLearnerRepository,
+        prescriptionOrganizationLearnerRepository,
         userRepository,
       });
 
@@ -189,7 +191,7 @@ describe('Unit | UseCase | update-organization-learner-dependent-user-password',
         cryptoService,
         passwordGenerator,
         authenticationMethodRepository,
-        organizationLearnerRepository,
+        prescriptionOrganizationLearnerRepository,
         userRepository,
       });
 
@@ -210,7 +212,7 @@ describe('Unit | UseCase | update-organization-learner-dependent-user-password',
         cryptoService,
         passwordGenerator,
         authenticationMethodRepository,
-        organizationLearnerRepository,
+        prescriptionOrganizationLearnerRepository,
         userRepository,
       });
 

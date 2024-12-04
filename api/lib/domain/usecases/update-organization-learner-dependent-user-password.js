@@ -11,11 +11,11 @@ const updateOrganizationLearnerDependentUserPassword = async function ({
   cryptoService,
   passwordGenerator,
   authenticationMethodRepository,
-  organizationLearnerRepository,
+  prescriptionOrganizationLearnerRepository,
   userRepository,
 }) {
   const userWithMemberships = await userRepository.getWithMemberships(userId);
-  const organizationLearner = await organizationLearnerRepository.get(organizationLearnerId);
+  const organizationLearner = await prescriptionOrganizationLearnerRepository.getLearnerInfo(organizationLearnerId);
 
   if (
     !userWithMemberships.hasAccessToOrganization(organizationId) ||

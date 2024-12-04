@@ -1,5 +1,5 @@
-import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | compute-organization-learner-certificabilty', function () {
   let clock;
@@ -18,13 +18,13 @@ describe('Unit | UseCase | compute-organization-learner-certificabilty', functio
   it('should update certificability for an organization learner', async function () {
     // given
     const organizationLearnerRepository = {
-      get: sinon.stub(),
+      getLearnerInfo: sinon.stub(),
       updateCertificability: sinon.stub(),
     };
     const organizationLearnerId = 1;
     const organizationLearner = domainBuilder.buildOrganizationLearner({ id: organizationLearnerId });
     sinon.stub(organizationLearner, 'updateCertificability');
-    organizationLearnerRepository.get.withArgs(organizationLearner.id).returns(organizationLearner);
+    organizationLearnerRepository.getLearnerInfo.withArgs(organizationLearner.id).returns(organizationLearner);
     const placementProfileService = {
       getPlacementProfile: sinon.stub(),
     };

@@ -2,7 +2,7 @@
  * @param {{
  *   temporaryKey: string,
  *   accountRecoveryDemandRepository: AccountRecoveryDemandRepository,
- *   organizationLearnerRepository: OrganizationLearnerRepository,
+ *   prescriptionOrganizationLearnerRepository: PrescriptionOrganizationLearnerRepository,
  *   userRepository: UserRepository,
  *   scoAccountRecoveryService: ScoAccountRecoveryService,
  * }} params
@@ -11,7 +11,7 @@
 export const getAccountRecoveryDetails = async function ({
   temporaryKey,
   accountRecoveryDemandRepository,
-  organizationLearnerRepository,
+  prescriptionOrganizationLearnerRepository,
   userRepository,
   scoAccountRecoveryService,
 }) {
@@ -22,7 +22,7 @@ export const getAccountRecoveryDetails = async function ({
       userRepository,
     });
 
-  const { firstName } = await organizationLearnerRepository.get(organizationLearnerId);
+  const { firstName } = await prescriptionOrganizationLearnerRepository.getLearnerInfo(organizationLearnerId);
 
   return {
     id,

@@ -1,11 +1,6 @@
 import { knex } from '../../../db/knex-database-connection.js';
 import { ORGANIZATION_FEATURE } from '../../../src/shared/domain/constants.js';
-import {
-  NotFoundError,
-  OrganizationLearnerCertificabilityNotUpdatedError,
-  OrganizationLearnerNotFound,
-  UserNotFoundError,
-} from '../../../src/shared/domain/errors.js';
+import { OrganizationLearnerNotFound, UserNotFoundError } from '../../../src/shared/domain/errors.js';
 import { OrganizationLearner } from '../../../src/shared/domain/models/OrganizationLearner.js';
 import { ParticipantRepartition } from '../../../src/shared/domain/models/ParticipantRepartition.js';
 import { fetchPage } from '../../../src/shared/infrastructure/utils/knex-utils.js';
@@ -93,19 +88,6 @@ function _queryBuilderDissociation(knexConn) {
   });
 }
 
-const get = async function (organizationLearnerId) {
-  const organizationLearner = await knex
-    .select('*')
-    .from('view-active-organization-learners')
-    .where({ id: organizationLearnerId })
-    .first();
-
-  if (!organizationLearner) {
-    throw new NotFoundError(`Student not found for ID ${organizationLearnerId}`);
-  }
-  return new OrganizationLearner(organizationLearner);
-};
-
 const getLatestOrganizationLearner = async function ({ nationalStudentId, birthdate }) {
   const organizationLearner = await knex
     .where({ nationalStudentId, birthdate })
@@ -147,18 +129,6 @@ const isActive = async function ({ userId, campaignId }) {
     .first();
   return !learner?.isDisabled;
 };
-
-async function updateCertificability(organizationLearner) {
-  const result = await knex('organization-learners').where({ id: organizationLearner.id }).update({
-    isCertifiable: organizationLearner.isCertifiable,
-    certifiableAt: organizationLearner.certifiableAt,
-  });
-  if (result === 0) {
-    throw new OrganizationLearnerCertificabilityNotUpdatedError(
-      `Could not update certificability for OrganizationLearner with ID ${organizationLearner.id}.`,
-    );
-  }
-}
 
 async function countByOrganizationsWhichNeedToComputeCertificability({
   skipLoggedLastDayCheck = false,
@@ -298,9 +268,7 @@ export {
   findByOrganizationIdAndUpdatedAtOrderByDivision,
   findByOrganizationsWhichNeedToComputeCertificability,
   findByUserId,
-  get,
   getLatestOrganizationLearner,
   isActive,
-  updateCertificability,
   updateUserIdWhereNull,
 };

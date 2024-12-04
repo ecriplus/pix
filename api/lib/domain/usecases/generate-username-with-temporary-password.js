@@ -13,9 +13,9 @@ const generateUsernameWithTemporaryPassword = async function ({
   userService,
   authenticationMethodRepository,
   userRepository,
-  organizationLearnerRepository,
+  prescriptionOrganizationLearnerRepository,
 }) {
-  const organizationLearner = await organizationLearnerRepository.get(organizationLearnerId);
+  const organizationLearner = await prescriptionOrganizationLearnerRepository.getLearnerInfo(organizationLearnerId);
   _checkIfStudentHasAccessToOrganization(organizationLearner, organizationId);
 
   const studentAccount = await userRepository.get(organizationLearner.userId);

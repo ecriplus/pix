@@ -1,4 +1,4 @@
-import { usecases } from '../../../../../lib/domain/usecases/index.js';
+import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { JobController } from '../../../../shared/application/jobs/job-controller.js';
 import { ComputeCertificabilityJob } from '../../domain/models/ComputeCertificabilityJob.js';
 

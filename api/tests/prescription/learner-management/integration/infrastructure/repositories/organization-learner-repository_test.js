@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import * as organizationLearnerRepository from '../../../../../../lib/infrastructure/repositories/organization-learner-repository.js';
+import { OrganizationLearnerCertificabilityNotUpdatedError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
 import { CommonOrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/CommonOrganizationLearner.js';
 import { OrganizationLearnerForAdmin } from '../../../../../../src/prescription/learner-management/domain/read-models/OrganizationLearnerForAdmin.js';
 import {
@@ -12,12 +13,14 @@ import {
   findAllCommonOrganizationLearnerByReconciliationInfos,
   findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId,
   findOrganizationLearnerIdsByOrganizationId,
+  getLearnerInfo,
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
   reconcileUserToOrganizationLearner,
   removeByIds,
   saveCommonOrganizationLearners,
   update,
+  updateCertificability,
 } from '../../../../../../src/prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import {
@@ -2037,6 +2040,72 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       const results = await findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId({ organizationId });
 
       expect([organizationLearnerIdOfYesYes]).to.be.deep.members(results);
+    });
+  });
+
+  describe('#getLearnerInfo', function () {
+    let organizationLearnerId;
+
+    beforeEach(function () {
+      organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
+      return databaseBuilder.commit();
+    });
+
+    it('should return an instance of OrganizationLearner', async function () {
+      // when
+      const organizationLearner = await getLearnerInfo(organizationLearnerId);
+
+      // then
+      expect(organizationLearner).to.be.an.instanceOf(OrganizationLearner);
+      expect(organizationLearner.id).to.equal(organizationLearnerId);
+    });
+
+    it('should return a NotFoundError if no organizationLearner is found', async function () {
+      // given
+      const nonExistentStudentId = 678;
+
+      // when
+      const result = await catchErr(getLearnerInfo)(nonExistentStudentId);
+
+      // then
+      expect(result).to.be.instanceOf(NotFoundError);
+    });
+  });
+
+  describe('#updateCertificability', function () {
+    it('should update isCertifiable and certifiableAt', async function () {
+      // given
+      const organizationLearner = new OrganizationLearner(
+        databaseBuilder.factory.buildOrganizationLearner({ isCertifiable: null, certifiableAt: null }),
+      );
+      await databaseBuilder.commit();
+
+      // when
+      organizationLearner.isCertifiable = true;
+      organizationLearner.certifiableAt = new Date('2023-01-01');
+      await updateCertificability(organizationLearner);
+
+      // then
+      const { isCertifiable, certifiableAt } = await knex('organization-learners')
+        .where({ id: organizationLearner.id })
+        .first();
+      expect(isCertifiable).to.be.true;
+      expect(new Date(certifiableAt)).to.deep.equal(organizationLearner.certifiableAt);
+    });
+
+    it('should throw an error if it does not update anything', async function () {
+      // given
+      const notExistingOrganizationLearner = new OrganizationLearner({ id: 1 });
+      await databaseBuilder.commit();
+
+      // when
+      notExistingOrganizationLearner.isCertifiable = true;
+      notExistingOrganizationLearner.certifiableAt = new Date('2023-01-01');
+
+      const error = await catchErr(updateCertificability)(notExistingOrganizationLearner);
+
+      // then
+      expect(error).to.be.instanceof(OrganizationLearnerCertificabilityNotUpdatedError);
     });
   });
 });

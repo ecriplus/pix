@@ -3,7 +3,7 @@ const computeOrganizationLearnerCertificability = async function ({
   organizationLearnerRepository,
   placementProfileService,
 }) {
-  const organizationLearner = await organizationLearnerRepository.get(organizationLearnerId);
+  const organizationLearner = await organizationLearnerRepository.getLearnerInfo(organizationLearnerId);
 
   const placementProfile = await placementProfileService.getPlacementProfile({
     userId: organizationLearner.userId,
