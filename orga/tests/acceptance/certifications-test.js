@@ -86,10 +86,12 @@ module('Acceptance | Certifications page', function (hooks) {
 
       test('should show documentation about certification results link', async function (assert) {
         // given / when
-        await visit('/certifications');
+        const screen = await visit('/certifications');
 
         // then
-        assert.ok('a[href="https://cloud.pix.fr/s/cRaeKT4ErrXs4X8"]');
+        assert
+          .dom(screen.getByRole('link', { name: 'Interprétation des résultats Ouverture dans une nouvelle fenêtre' }))
+          .hasAttribute('href', 'https://cloud.pix.fr/s/8pJqgNNntwDtsDY');
       });
 
       test('should display attestation download button', async function (assert) {
