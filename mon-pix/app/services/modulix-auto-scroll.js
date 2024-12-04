@@ -4,11 +4,18 @@ import Service, { service } from '@ember/service';
 export default class ModulixAutoScroll extends Service {
   @service modulixPreviewMode;
 
-  #SCROLL_OFFSET_PX = 70;
+  #DISTANCE_BETWEEN_GRAIN_AND_NAVBAR_PX = 70;
 
   @action
   setHTMLElementScrollOffsetCssProperty(htmlElement) {
-    htmlElement.style.setProperty('--scroll-offset', `${this.#SCROLL_OFFSET_PX}px`);
+    htmlElement.style.setProperty('--scroll-offset', `${this.#getScrollOffset()}px`);
+  }
+
+  #getScrollOffset({ getNavbar } = { getNavbar: this.#getNavbar }) {
+    const navbarElement = getNavbar();
+    const navbarHeight = navbarElement ? navbarElement.getBoundingClientRect().height : 0;
+
+    return this.#DISTANCE_BETWEEN_GRAIN_AND_NAVBAR_PX + navbarHeight;
   }
 
   focusAndScroll(
