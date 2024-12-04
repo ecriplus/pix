@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { LOCALE } from '../../../shared/domain/constants.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { authorization } from '../../shared/application/pre-handlers/authorization.js';
 import { certificationResultsController } from './certification-results-controller.js';
@@ -83,6 +84,27 @@ const register = async function (server) {
           }),
         },
         handler: certificationResultsController.getSessionResultsToDownload,
+        tags: ['api', 'sessions', 'results'],
+        notes: [
+          'Cette route est accessible via un token généré par un utilisateur ayant le rôle SUPERADMIN',
+          "Elle retourne tous les résultats de certifications d'une session, sous format CSV",
+        ],
+      },
+    },
+    {
+      method: 'POST',
+      path: '/api/sessions/download-all-results',
+      config: {
+        auth: false,
+        validate: {
+          query: Joi.object({
+            lang: Joi.string().optional().valid(LOCALE.FRENCH_SPOKEN, LOCALE.ENGLISH_SPOKEN),
+          }),
+          payload: Joi.object({
+            token: Joi.string().required(),
+          }),
+        },
+        handler: certificationResultsController.postSessionResultsToDownload,
         tags: ['api', 'sessions', 'results'],
         notes: [
           'Cette route est accessible via un token généré par un utilisateur ayant le rôle SUPERADMIN',
