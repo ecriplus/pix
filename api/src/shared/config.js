@@ -251,6 +251,10 @@ const configuration = (function () {
         secret: process.env.PIX_DATA_AUTH_SECRET,
         tokenLifespan: process.env.TOKEN_LIFE_SPAN || '1h',
       },
+      certificationResults: {
+        scope: process.env.CERTIFICATION_RESULTS_JWT_SCOPE || 'certificationResultsLink',
+        tokenLifespan: process.env.CERTIFICATION_RESULTS_JWT_TOKEN_LIFE_SPAN || '30d',
+      },
     },
     lcms: {
       url: _removeTrailingSlashFromUrl(process.env.CYPRESS_LCMS_API_URL || process.env.LCMS_API_URL || ''),

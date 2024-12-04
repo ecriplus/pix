@@ -10,7 +10,7 @@ describe('Certification | Results | Unit | Domain | Service | Session Results Li
       const sessionId = 12345;
       const i18n = getI18n();
       const tokenServiceStub = sinon.stub(tokenService, 'createCertificationResultsLinkToken');
-      tokenServiceStub.withArgs({ sessionId, daysBeforeExpiration: 30 }).returns('a_valid_token');
+      tokenServiceStub.withArgs({ sessionId }).returns('a_valid_token');
 
       // when
       const link = sessionResultsLinkService.generateResultsLink({ sessionId, i18n });

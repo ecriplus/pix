@@ -2,7 +2,7 @@ import lodash from 'lodash';
 const { omit } = lodash;
 import jsonwebtoken from 'jsonwebtoken';
 
-import { config as settings } from '../../../../../src/shared/config.js';
+import { config, config as settings } from '../../../../../src/shared/config.js';
 import {
   ForbiddenAccess,
   InvalidExternalUserTokenError,
@@ -229,7 +229,7 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
               scope: 'certificationResultsLink',
             },
             settings.authentication.secret,
-            { expiresIn: '30d' },
+            { expiresIn: config.jwtConfig.certificationResults.tokenLifespan },
           );
 
           // when
@@ -463,14 +463,13 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
     it('should return a valid token with sessionId and resultRecipientEmail', function () {
       // given
       const sessionId = 'abcd1234';
-      const daysBeforeExpiration = 30;
       const expectedTokenAttributes = {
         session_id: 'abcd1234',
         scope: 'certificationResultsLink',
       };
 
       // when
-      const linkToken = tokenService.createCertificationResultsLinkToken({ sessionId, daysBeforeExpiration });
+      const linkToken = tokenService.createCertificationResultsLinkToken({ sessionId });
 
       // then
       const decodedToken = jsonwebtoken.verify(linkToken, settings.authentication.secret);
