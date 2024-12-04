@@ -1,7 +1,7 @@
 import Dataloader from 'dataloader';
 
 import { knex } from '../../../../db/knex-database-connection.js';
-import * as learningContentPubSub from '../caches/learning-content-pubsub.js';
+import { LearningContentCache } from '../caches/learning-content-cache.js';
 import { child } from '../utils/logger.js';
 
 const logger = child('learningcontent:repository', { event: 'learningcontent' });
@@ -131,56 +131,5 @@ export class LearningContentRepository {
       this.#dataloader.clearAll();
     }
     this.#findCache.clear();
-  }
-}
-
-class LearningContentCache {
-  #map;
-  #pubSub;
-  #name;
-
-  /**
-   * @param {{
-   *   name: string
-   *   pubSub: import('../caches/learning-content-pubsub.js').LearningContentPubSub
-   *   map: Map
-   * }} config
-   * @returns
-   */
-  constructor({ name, pubSub = learningContentPubSub.getPubSub(), map = new Map() }) {
-    this.#name = name;
-    this.#pubSub = pubSub;
-    this.#map = map;
-
-    this.#subscribe();
-  }
-
-  get(key) {
-    return this.#map.get(key);
-  }
-
-  set(key, value) {
-    return this.#map.set(key, value);
-  }
-
-  delete(key) {
-    return this.#pubSub.publish(this.#name, { type: 'delete', key });
-  }
-
-  clear() {
-    return this.#pubSub.publish(this.#name, { type: 'clear' });
-  }
-
-  async #subscribe() {
-    for await (const message of this.#pubSub.subscribe(this.#name)) {
-      if (message.type === 'clear') {
-        logger.debug({ name: this.#name }, 'clearing cache');
-        this.#map.clear();
-      }
-      if (message.type === 'delete') {
-        logger.debug({ name: this.#name, key: message.key }, 'deleting cache key');
-        this.#map.delete(message.key);
-      }
-    }
   }
 }
