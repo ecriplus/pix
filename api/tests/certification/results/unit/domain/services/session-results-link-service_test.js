@@ -1,9 +1,9 @@
-import * as sessionResultsLinkService from '../../../../lib/domain/services/session-results-link-service.js';
-import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
-import { getI18n } from '../../../../src/shared/infrastructure/i18n/i18n.js';
-import { expect, sinon } from '../../../test-helper.js';
+import * as sessionResultsLinkService from '../../../../../../src/certification/results/domain/services/session-results-link-service.js';
+import { tokenService } from '../../../../../../src/shared/domain/services/token-service.js';
+import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | Domain | Service | Session Results Link Service', function () {
+describe('Certification | Results | Unit | Domain | Service | Session Results Link Service', function () {
   describe('#generateResultsLink', function () {
     it('should return a valid download link', function () {
       // given

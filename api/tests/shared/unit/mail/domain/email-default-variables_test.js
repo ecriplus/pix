@@ -1,3 +1,4 @@
+import { config } from '../../../../../src/shared/config.js';
 import { LOCALE } from '../../../../../src/shared/domain/constants.js';
 import { getEmailDefaultVariables } from '../../../../../src/shared/mail/domain/emails-default-variables.js';
 import { expect } from '../../../../test-helper.js';
@@ -12,7 +13,7 @@ describe('Unit | Email | Domain | email-default-variables', function () {
         homeUrl: 'https://pix.fr',
         pixOrgaHomeUrl: 'https://orga.pix.fr',
         pixCertifHomeUrl: 'https://certif.pix.fr',
-        pixAppConnectionUrl: 'https://app.pix.fr/connexion',
+        pixAppConnectionUrl: `${config.domain.pixApp + config.domain.tldFr}/connexion`,
         helpdeskUrl: 'https://pix.fr/support',
         displayNationalLogo: true,
       });
@@ -26,7 +27,7 @@ describe('Unit | Email | Domain | email-default-variables', function () {
         homeUrl: 'https://pix.org/fr/',
         pixOrgaHomeUrl: 'https://orga.pix.org',
         pixCertifHomeUrl: 'https://certif.pix.org',
-        pixAppConnectionUrl: 'https://app.pix.org/connexion/?lang=fr',
+        pixAppConnectionUrl: `${config.domain.pixApp + config.domain.tldOrg}/connexion/?lang=fr`,
         helpdeskUrl: 'https://pix.org/fr/support',
         displayNationalLogo: false,
       });
@@ -40,7 +41,7 @@ describe('Unit | Email | Domain | email-default-variables', function () {
         homeUrl: 'https://pix.org/en/',
         pixOrgaHomeUrl: 'https://orga.pix.org',
         pixCertifHomeUrl: 'https://certif.pix.org',
-        pixAppConnectionUrl: 'https://app.pix.org/connexion/?lang=en',
+        pixAppConnectionUrl: `${config.domain.pixApp + config.domain.tldOrg}/connexion/?lang=en`,
         helpdeskUrl: 'https://pix.org/en/support',
         displayNationalLogo: false,
       });
@@ -54,7 +55,7 @@ describe('Unit | Email | Domain | email-default-variables', function () {
         homeUrl: 'https://pix.org/en/',
         pixOrgaHomeUrl: 'https://orga.pix.org',
         pixCertifHomeUrl: 'https://certif.pix.org',
-        pixAppConnectionUrl: 'https://app.pix.org/connexion/?lang=es',
+        pixAppConnectionUrl: `${config.domain.pixApp + config.domain.tldOrg}/connexion/?lang=es`,
         helpdeskUrl: 'https://pix.org/en/support',
         displayNationalLogo: false,
       });
@@ -68,7 +69,7 @@ describe('Unit | Email | Domain | email-default-variables', function () {
         homeUrl: 'https://pix.org/nl-be/',
         pixOrgaHomeUrl: 'https://orga.pix.org',
         pixCertifHomeUrl: 'https://certif.pix.org',
-        pixAppConnectionUrl: 'https://app.pix.org/connexion/?lang=nl',
+        pixAppConnectionUrl: `${config.domain.pixApp + config.domain.tldOrg}/connexion/?lang=nl`,
         helpdeskUrl: 'https://pix.org/nl-be/support',
         displayNationalLogo: false,
       });

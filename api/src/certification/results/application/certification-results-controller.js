@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
 import { tokenService } from '../../../shared/domain/services/token-service.js';
+import * as sessionResultsLinkService from '../domain/services/session-results-link-service.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as certifiedProfileRepository from '../infrastructure/repositories/certified-profile-repository.js';
 import * as certifiedProfileSerializer from '../infrastructure/serializers/certified-profile-serializer.js';
@@ -102,12 +103,21 @@ const getCertifiedProfile = async function (
   return dependencies.certifiedProfileSerializer.serialize(certifiedProfile);
 };
 
+const generateSessionResultsDownloadLink = async function (request, h, dependencies = { sessionResultsLinkService }) {
+  const sessionId = request.params.sessionId;
+  const i18n = request.i18n;
+  const sessionResultsLink = dependencies.sessionResultsLinkService.generateResultsLink({ sessionId, i18n });
+
+  return h.response({ sessionResultsLink });
+};
+
 const certificationResultsController = {
   getCleaCertifiedCandidateDataCsv,
   getSessionResultsByRecipientEmail,
   getSessionResultsToDownload,
   postSessionResultsToDownload,
   getCertifiedProfile,
+  generateSessionResultsDownloadLink,
 };
 
 export { certificationResultsController };

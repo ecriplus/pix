@@ -112,6 +112,37 @@ const register = async function (server) {
         ],
       },
     },
+    {
+      method: 'GET',
+      path: '/api/admin/sessions/{sessionId}/generate-results-download-link',
+      config: {
+        validate: {
+          params: Joi.object({
+            sessionId: identifiersType.sessionId,
+          }),
+          query: Joi.object({
+            lang: Joi.string().optional().valid(LOCALE.FRENCH_SPOKEN, LOCALE.ENGLISH_SPOKEN),
+          }),
+        },
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: certificationResultsController.generateSessionResultsDownloadLink,
+        tags: ['api', 'sessions', 'results'],
+        notes: [
+          "Cette route est restreinte aux utilisateurs ayant les droits d'accès",
+          "Elle permet de générer un lien permettant de télécharger tous les résultats de certification d'une session",
+        ],
+      },
+    },
   ]);
 };
 

@@ -1,5 +1,6 @@
 import { sendSharedParticipationResultsToPoleEmploi } from '../../../../lib/domain/usecases/send-shared-participation-results-to-pole-emploi.js';
 import { PoleEmploiPayload } from '../../../../lib/infrastructure/externals/pole-emploi/PoleEmploiPayload.js';
+import { config } from '../../../../src/shared/config.js';
 import { PoleEmploiSending } from '../../../../src/shared/domain/models/PoleEmploiSending.js';
 import { domainBuilder, expect, sinon } from '../../../test-helper.js';
 
@@ -64,7 +65,7 @@ describe('Unit | Domain | UseCase | send-shared-participation-results-to-pole-em
         dateFin: new Date('2020-02-01'),
         type: 'EVALUATION',
         codeCampagne: 'CODEPE123',
-        urlCampagne: 'https://app.pix.fr/campagnes/CODEPE123',
+        urlCampagne: `${config.domain.pixApp + config.domain.tldFr}/campagnes/CODEPE123`,
         nomOrganisme: 'Pix',
         typeOrganisme: 'externe',
       },
