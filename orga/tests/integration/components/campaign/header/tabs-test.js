@@ -143,5 +143,27 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
         }),
       );
     });
+
+    test('it should push matomo event when user clicks on export button', async function (assert) {
+      const add = sinon.stub();
+
+      class MetricsStubService extends Service {
+        add = add;
+      }
+      this.owner.register('service:metrics', MetricsStubService);
+
+      const screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+
+      // when
+      await click(screen.getByRole('button', { name: t('pages.campaign.actions.export-results') }));
+
+      sinon.assert.calledWithExactly(add, {
+        event: 'custom-event',
+        'pix-event-category': 'Campagnes',
+        'pix-event-action': "Cliquer sur le bouton d'export des résultats d'une campagne",
+        'pix-event-name': "Clic sur le bouton d'export",
+      });
+      assert.ok(true);
+    });
   });
 });
