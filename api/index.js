@@ -31,6 +31,11 @@ async function _setupEcosystem() {
 }
 
 const start = async function () {
+  if (config.featureToggles.useNewLearningContent) {
+    logger.info({ event: 'learningcontent' }, 'will use new learning content');
+  } else {
+    logger.info({ event: 'learningcontent' }, 'will use old learning content');
+  }
   if (config.featureToggles.setupEcosystemBeforeStart) {
     await _setupEcosystem();
   }

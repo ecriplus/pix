@@ -34,6 +34,7 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'show-experimental-missions': false,
             'show-new-campaign-presentation-page': false,
             'show-new-result-page': false,
+            'use-new-learning-content': true,
           },
         },
       };
