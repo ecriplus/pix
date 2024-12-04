@@ -7,8 +7,10 @@ export default class ApplicationRoute extends Route {
   @service currentUser;
   @service session;
   @service intl;
+  @service metrics;
 
   async beforeModel(transition) {
+    this.metrics.initialize();
     await this.session.setup();
     await this.featureToggles.load();
     const isFranceDomain = this.currentDomain.isFranceDomain;
