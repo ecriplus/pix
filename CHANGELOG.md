@@ -1,5 +1,35 @@
 # Pix Changelog
 
+## v4.251.0 (04/12/2024)
+
+
+### :rocket: Amélioration
+- [#10706](https://github.com/1024pix/pix/pull/10706) [FEATURE] Modifier les couleurs de l'espace surveillant sur Pix Certif (PIX-15549).
+- [#10702](https://github.com/1024pix/pix/pull/10702) [FEATURE] Pouvoir logger en debug sur un scope réduit (PIX-15534).
+- [#10661](https://github.com/1024pix/pix/pull/10661) [FEATURE] Supprimer les learners précédent l'ajout de l'import à format (Pix-15428).
+- [#10696](https://github.com/1024pix/pix/pull/10696) [FEATURE] Telecharger via Pix les resultats de sessions via POST (PIX-15514).
+- [#10691](https://github.com/1024pix/pix/pull/10691) [FEATURE] Permettre de naviguer dans le module en cliquant sur les étapes de la sidebar (PIX-15397).
+
+### :building_construction: Tech
+- [#10716](https://github.com/1024pix/pix/pull/10716) [TECH] Ajout de monitoring sur api/token (PIX-15565).
+- [#10693](https://github.com/1024pix/pix/pull/10693) [TECH] Migration du usecase `computeCertificability`dans le BC Prescription (PIX-15342).
+- [#10684](https://github.com/1024pix/pix/pull/10684) [TECH] Appliquer le nouveau nommage des composants sur Pix Admin (PIX-14606).
+- [#10677](https://github.com/1024pix/pix/pull/10677) [TECH] Migrer la route de mise à jour Has Seen Assessment Instructions (PIX-14725).
+- [#10678](https://github.com/1024pix/pix/pull/10678) [TECH] Suppression des paramètres non utilisés de l'algo flash (PIX-15475).
+- [#10711](https://github.com/1024pix/pix/pull/10711) [TECH] Modifier le type de la colonne reward ID de la table Profile Rewards (PIX-15546).
+- [#10700](https://github.com/1024pix/pix/pull/10700) [TECH] Migrer la route POST /api/admin/users/{id}/remove-authentication dans src (PIX-15518).
+- [#10494](https://github.com/1024pix/pix/pull/10494) [TECH] Migration de PixAdmin / Composants communs et layout (PIX-15221).
+
+### :bug: Correction
+- [#10713](https://github.com/1024pix/pix/pull/10713) [BUGFIX] Lire la variable d’env START_JOB_IN_WEB_PROCESS comme booléen.
+- [#10675](https://github.com/1024pix/pix/pull/10675) [BUGFIX] Le scroll auto ne descend pas assez bas (PIX-15476).
+- [#10686](https://github.com/1024pix/pix/pull/10686) [BUGFIX] Corriger la mise à jour trop tôt du rôle d'un membre sur Pix Orga (PIX-11534).
+
+### :arrow_up: Montée de version
+- [#10710](https://github.com/1024pix/pix/pull/10710) [BUMP] Update dependency @1024pix/pix-ui to ^48.9.0 (orga).
+- [#10523](https://github.com/1024pix/pix/pull/10523) [BUMP] Update dependency npm-run-all2 to v6.2.6 (e2e).
+- [#10695](https://github.com/1024pix/pix/pull/10695) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.24 (admin).
+
 ## v4.250.1 (03/12/2024)
 
 
