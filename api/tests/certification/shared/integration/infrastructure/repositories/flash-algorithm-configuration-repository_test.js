@@ -11,24 +11,15 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
       it('should return a flash algorithm configuration', async function () {
         // given
         const flashAlgorithmConfiguration = databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-          warmUpLength: 1,
           maximumAssessmentLength: 2,
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
-          variationPercentUntil: 3,
-          doubleMeasuresUntil: 5,
-          forcedCompetences: ['comp1', 'comp2'],
-          minimumEstimatedSuccessRateRanges: [
-            { type: 'fixed', startingChallengeIndex: 0, endingChallengeIndex: 7, value: 0.8 },
-          ],
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: false,
         });
 
         const expectedFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
           ...flashAlgorithmConfiguration,
-          forcedCompetences: JSON.parse(flashAlgorithmConfiguration.forcedCompetences),
-          minimumEstimatedSuccessRateRanges: JSON.parse(flashAlgorithmConfiguration.minimumEstimatedSuccessRateRanges),
         });
 
         await databaseBuilder.commit();
@@ -45,32 +36,18 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
       it('should return the latest', async function () {
         // given
         const latestFlashAlgorithmConfiguration = databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-          warmUpLength: 1,
           maximumAssessmentLength: 2,
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
-          variationPercentUntil: 3,
-          doubleMeasuresUntil: 5,
-          forcedCompetences: ['comp1', 'comp2'],
-          minimumEstimatedSuccessRateRanges: [
-            { type: 'fixed', startingChallengeIndex: 0, endingChallengeIndex: 7, value: 0.8 },
-          ],
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: false,
           createdAt: new Date('2021-01-01'),
         });
 
         databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-          warmUpLength: 1,
           maximumAssessmentLength: 2,
           challengesBetweenSameCompetence: 3,
           variationPercent: 4,
-          variationPercentUntil: 3,
-          doubleMeasuresUntil: 5,
-          forcedCompetences: ['comp1', 'comp2'],
-          minimumEstimatedSuccessRateRanges: [
-            { type: 'fixed', startingChallengeIndex: 0, endingChallengeIndex: 7, value: 0.8 },
-          ],
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: false,
           createdAt: new Date('2020-01-01'),
@@ -78,10 +55,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
 
         const expectedFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
           ...latestFlashAlgorithmConfiguration,
-          forcedCompetences: JSON.parse(latestFlashAlgorithmConfiguration.forcedCompetences),
-          minimumEstimatedSuccessRateRanges: JSON.parse(
-            latestFlashAlgorithmConfiguration.minimumEstimatedSuccessRateRanges,
-          ),
         });
 
         await databaseBuilder.commit();

@@ -9,16 +9,11 @@ describe('Integration | Domain | services | scoringDegradationService', function
     const allChallenges = _buildChallenges();
     const allAnswers = _buildAnswers();
     const flashAssessmentAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
-      warmUpLength: 0,
-      forcedCompetences: [],
       maximumAssessmentLength: 4,
       challengesBetweenSameCompetence: 0,
-      minimumEstimatedSuccessRateRanges: [],
       limitToOneQuestionPerTube: false,
       enablePassageByAllCompetences: false,
-      doubleMeasuresUntil: null,
       variationPercent: null,
-      variationPercentUntil: null,
       createdAt: new Date('2020-01-01T00:00:00Z'),
     });
 

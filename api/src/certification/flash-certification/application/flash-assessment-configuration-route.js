@@ -35,15 +35,11 @@ const register = async (server) => {
         ],
         validate: {
           payload: Joi.object({
-            warmUpLength: Joi.number().integer().min(0).allow(null).optional(),
-            forcedCompetences: Joi.array().items(Joi.string()).optional(),
             maximumAssessmentLength: Joi.number().integer().min(0).allow(null).optional(),
             challengesBetweenSameCompetence: Joi.number().integer().min(0).allow(null).optional(),
             limitToOneQuestionPerTube: Joi.boolean().optional(),
             enablePassageByAllCompetences: Joi.boolean().optional(),
-            doubleMeasuresUntil: Joi.number().min(0).allow(null).optional(),
             variationPercent: Joi.number().min(0).max(1).allow(null).optional(),
-            variationPercentUntil: Joi.number().min(0).allow(null).optional(),
           }),
         },
         handler: flashAssessmentConfigurationController.createFlashAssessmentConfiguration,

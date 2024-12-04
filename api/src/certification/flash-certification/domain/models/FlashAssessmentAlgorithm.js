@@ -1,6 +1,5 @@
 import { config } from '../../../../shared/config.js';
 import { FlashAssessmentAlgorithmChallengesBetweenCompetencesRule } from './FlashAssessmentAlgorithmChallengesBetweenCompetencesRule.js';
-import { FlashAssessmentAlgorithmForcedCompetencesRule } from './FlashAssessmentAlgorithmForcedCompetencesRule.js';
 import { FlashAssessmentAlgorithmNonAnsweredSkillsRule } from './FlashAssessmentAlgorithmNonAnsweredSkillsRule.js';
 import { FlashAssessmentAlgorithmOneQuestionPerTubeRule } from './FlashAssessmentAlgorithmOneQuestionPerTubeRule.js';
 import { FlashAssessmentAlgorithmPassageByAllCompetencesRule } from './FlashAssessmentAlgorithmPassageByAllCompetencesRule.js';
@@ -10,14 +9,12 @@ const availableRules = [
   FlashAssessmentAlgorithmOneQuestionPerTubeRule,
   FlashAssessmentAlgorithmNonAnsweredSkillsRule,
   FlashAssessmentAlgorithmPassageByAllCompetencesRule,
-  FlashAssessmentAlgorithmForcedCompetencesRule,
   FlashAssessmentAlgorithmChallengesBetweenCompetencesRule,
 ];
 
 class FlashAssessmentAlgorithm {
   /**
    * Model to interact with the flash algorithm
-   * @param warmUpLength - define a warmup when the algorithm do not go through the competences
    * @param configuration - options to configure algorithm challenge selection and behaviour
    */
   constructor({ flashAlgorithmImplementation, configuration = {} } = {}) {
@@ -27,8 +24,6 @@ class FlashAssessmentAlgorithm {
     this.ruleEngine = new FlashAssessmentAlgorithmRuleEngine(availableRules, {
       limitToOneQuestionPerTube: configuration.limitToOneQuestionPerTube,
       challengesBetweenSameCompetence: configuration.challengesBetweenSameCompetence,
-      forcedCompetences: configuration.forcedCompetences,
-      warmUpLength: configuration.warmUpLength,
       enablePassageByAllCompetences: configuration.enablePassageByAllCompetences,
     });
   }
@@ -59,15 +54,9 @@ class FlashAssessmentAlgorithm {
       throw new RangeError('No eligible challenges in referential');
     }
 
-    const minimalSuccessRate = this.#computeMinimalSuccessRate(assessmentAnswers.length);
-
     return this.flashAlgorithmImplementation.getPossibleNextChallenges({
       availableChallenges: challengesAfterRulesApplication,
       capacity,
-      options: {
-        challengesBetweenSameCompetence: this._configuration.challengesBetweenSameCompetence,
-        minimalSuccessRate,
-      },
     });
   }
 
@@ -86,22 +75,6 @@ class FlashAssessmentAlgorithm {
     });
   }
 
-  #computeMinimalSuccessRate(questionIndex) {
-    const filterConfiguration = this.#findApplicableSuccessRateConfiguration(questionIndex);
-
-    if (!filterConfiguration) {
-      return 0;
-    }
-
-    return filterConfiguration.getMinimalSuccessRate(questionIndex);
-  }
-
-  #findApplicableSuccessRateConfiguration(questionIndex) {
-    return this._configuration.minimumEstimatedSuccessRateRanges.find((successRateRange) =>
-      successRateRange.isApplicable(questionIndex),
-    );
-  }
-
   getCapacityAndErrorRate({
     allAnswers,
     challenges,
@@ -112,8 +85,6 @@ class FlashAssessmentAlgorithm {
       challenges,
       capacity: initialCapacity,
       variationPercent: this._configuration.variationPercent,
-      variationPercentUntil: this._configuration.variationPercentUntil,
-      doubleMeasuresUntil: this._configuration.doubleMeasuresUntil,
     });
   }
 
@@ -127,8 +98,6 @@ class FlashAssessmentAlgorithm {
       challenges,
       capacity: initialCapacity,
       variationPercent: this._configuration.variationPercent,
-      variationPercentUntil: this._configuration.variationPercentUntil,
-      doubleMeasuresUntil: this._configuration.doubleMeasuresUntil,
     });
   }
 

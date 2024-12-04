@@ -1,22 +1,16 @@
 import lodash from 'lodash';
 
 export class FlashAssessmentAlgorithmPassageByAllCompetencesRule {
-  static isApplicable({ answers, enablePassageByAllCompetences, warmUpLength }) {
-    return enablePassageByAllCompetences && answers.length >= warmUpLength;
+  static isApplicable({ enablePassageByAllCompetences }) {
+    return enablePassageByAllCompetences;
   }
 
-  static execute({ allChallenges, assessmentAnswers, availableChallenges, warmUpLength }) {
-    const answersAfterWarmup = this._getAnswersAfterWarmup({ assessmentAnswers, warmUpLength });
-
+  static execute({ allChallenges, assessmentAnswers, availableChallenges }) {
     return this._filterAlreadyAnsweredCompetences({
-      assessmentAnswers: answersAfterWarmup,
+      assessmentAnswers,
       availableChallenges,
       allChallenges,
     });
-  }
-
-  static _getAnswersAfterWarmup({ assessmentAnswers, warmUpLength }) {
-    return assessmentAnswers.slice(warmUpLength);
   }
 
   static _filterAlreadyAnsweredCompetences({ assessmentAnswers, allChallenges, availableChallenges }) {

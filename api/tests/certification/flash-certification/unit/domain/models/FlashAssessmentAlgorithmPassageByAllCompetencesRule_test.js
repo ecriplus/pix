@@ -7,7 +7,6 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlg
       it('should return false', function () {
         const configuration = {
           enablePassageByAllCompetences: false,
-          warmUpLength: 1,
           answers: [],
         };
 
@@ -15,24 +14,10 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlg
       });
     });
 
-    describe('when enablePassageByAllCompetences is true AND answers length is smaller than warmUpLength', function () {
-      it('should return false', function () {
-        const configuration = {
-          enablePassageByAllCompetences: true,
-          warmUpLength: 2,
-          answers: [],
-        };
-
-        expect(FlashAssessmentAlgorithmPassageByAllCompetencesRule.isApplicable(configuration)).to.be.false;
-      });
-    });
-
-    describe('when the enablePassageByAllCompetences is true AND answers length is bigger or equal than warmUpLength', function () {
+    describe('when enablePassageByAllCompetences is true', function () {
       it('should return true', function () {
         const configuration = {
           enablePassageByAllCompetences: true,
-          warmUpLength: 0,
-          answers: [],
         };
 
         expect(FlashAssessmentAlgorithmPassageByAllCompetencesRule.isApplicable(configuration)).to.be.true;
@@ -74,7 +59,6 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlg
           allChallenges,
           assessmentAnswers,
           availableChallenges: allChallenges,
-          warmUpLength: 0,
         }),
       ).to.deep.equal([unansweredCompetenceUnansweredChallenge]);
     });

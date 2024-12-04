@@ -12,11 +12,8 @@ export default class FlashAlgorithmConfiguration extends Component {
   @service pixToast;
   @tracked form = {
     maximumAssessmentLength: this.args.model.maximumAssessmentLength,
-    warmUpLength: this.args.model.warmUpLength,
     challengesBetweenSameCompetence: this.args.model.challengesBetweenSameCompetence,
     variationPercent: this.args.model.variationPercent,
-    variationPercentUntil: this.args.model.variationPercentUntil,
-    doubleMeasuresUntil: this.args.model.doubleMeasuresUntil,
     limitToOneQuestionPerTube: this.args.model.limitToOneQuestionPerTube,
     enablePassageByAllCompetences: this.args.model.enablePassageByAllCompetences,
   };

@@ -18,10 +18,6 @@ import { t } from 'ember-intl';
         }}</:label>
     </PixInput>
 
-    <PixInput {{on "input" @updateNumberValues}} @id="warmUpLength" @value={{@form.warmUpLength}} type="number" min="0">
-      <:label>{{t "pages.administration.certification.flash-algorithm-configuration.form.warmUpLength"}}</:label>
-    </PixInput>
-
     <PixInput
       {{on "input" @updateNumberValues}}
       @id="challengesBetweenSameCompetence"
@@ -42,28 +38,6 @@ import { t } from 'ember-intl';
       min="0"
     >
       <:label>{{t "pages.administration.certification.flash-algorithm-configuration.form.variationPercent"}}</:label>
-    </PixInput>
-
-    <PixInput
-      {{on "input" @updateNumberValues}}
-      @id="variationPercentUntil"
-      @value={{@form.variationPercentUntil}}
-      type="number"
-      min="0"
-    >
-      <:label>{{t
-          "pages.administration.certification.flash-algorithm-configuration.form.variationPercentUntil"
-        }}</:label>
-    </PixInput>
-
-    <PixInput
-      {{on "input" @updateNumberValues}}
-      @id="doubleMeasuresUntil"
-      @value={{@form.doubleMeasuresUntil}}
-      type="number"
-      min="0"
-    >
-      <:label>{{t "pages.administration.certification.flash-algorithm-configuration.form.doubleMeasuresUntil"}}</:label>
     </PixInput>
 
     <PixCheckbox

@@ -118,16 +118,11 @@ async function _createScoCertificationCenter({ databaseBuilder }) {
 
 function _createV3CertificationConfiguration({ databaseBuilder }) {
   databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-    warmUpLength: null,
-    forcedCompetences: [],
     maximumAssessmentLength: 32,
     challengesBetweenSameCompetence: null,
-    minimumEstimatedSuccessRateRanges: [],
     limitToOneQuestionPerTube: true,
     enablePassageByAllCompetences: true,
-    doubleMeasuresUntil: null,
     variationPercent: 0.5,
-    variationPercentUntil: null,
     createdAt: new Date('1977-10-19'),
   });
 }

@@ -9,7 +9,7 @@ describe('Integration | Application | FlashAssessmentConfigurationController', f
         data: {
           type: 'flash-algorithm-configurations',
           attributes: {
-            'warm-up-length': 12,
+            'enable-passage-by-all-competences': true,
           },
         },
       };
@@ -20,7 +20,7 @@ describe('Integration | Application | FlashAssessmentConfigurationController', f
       };
 
       const flashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
-        warmUpLength: 12,
+        enablePassageByAllCompetences: true,
       });
 
       usecases.getActiveFlashAssessmentConfiguration.resolves(flashAlgorithmConfiguration);
@@ -42,7 +42,7 @@ describe('Integration | Application | FlashAssessmentConfigurationController', f
       sinon.stub(usecases, 'createFlashAssessmentConfiguration');
 
       const payload = {
-        warmUpLength: 12,
+        enablePassageByAllCompetences: true,
       };
 
       const response = await flashAssessmentConfigurationController.createFlashAssessmentConfiguration(

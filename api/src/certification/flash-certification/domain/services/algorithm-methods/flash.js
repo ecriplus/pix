@@ -24,11 +24,7 @@ export {
   getReward,
 };
 
-function getPossibleNextChallenges({
-  availableChallenges,
-  capacity = DEFAULT_CAPACITY,
-  options: { minimalSuccessRate = 0 } = {},
-} = {}) {
+function getPossibleNextChallenges({ availableChallenges, capacity = DEFAULT_CAPACITY } = {}) {
   const challengesWithReward = availableChallenges.map((challenge) => {
     return {
       challenge,
@@ -40,17 +36,10 @@ function getPossibleNextChallenges({
     };
   });
 
-  return _findBestPossibleChallenges(challengesWithReward, minimalSuccessRate, capacity);
+  return _findBestPossibleChallenges(challengesWithReward, capacity);
 }
 
-function getCapacityAndErrorRate({
-  allAnswers,
-  challenges,
-  capacity = DEFAULT_CAPACITY,
-  doubleMeasuresUntil = 0,
-  variationPercent,
-  variationPercentUntil,
-}) {
+function getCapacityAndErrorRate({ allAnswers, challenges, capacity = DEFAULT_CAPACITY, variationPercent }) {
   if (allAnswers.length === 0) {
     return { capacity, errorRate: DEFAULT_ERROR_RATE };
   }
@@ -59,22 +48,13 @@ function getCapacityAndErrorRate({
     allAnswers,
     challenges,
     capacity,
-    doubleMeasuresUntil,
     variationPercent,
-    variationPercentUntil,
   });
 
   return capacityHistory.at(-1);
 }
 
-function getCapacityAndErrorRateHistory({
-  allAnswers,
-  challenges,
-  capacity = DEFAULT_CAPACITY,
-  doubleMeasuresUntil = 0,
-  variationPercent,
-  variationPercentUntil,
-}) {
+function getCapacityAndErrorRateHistory({ allAnswers, challenges, capacity = DEFAULT_CAPACITY, variationPercent }) {
   let latestCapacity = capacity;
 
   let likelihood = samples.map(() => DEFAULT_PROBABILITY_TO_ANSWER);
@@ -86,37 +66,17 @@ function getCapacityAndErrorRateHistory({
 
   while (answerIndex < allAnswers.length) {
     answer = allAnswers[answerIndex];
-    const variationPercentForCurrentAnswer = _defineVariationPercentForCurrentAnswer(
+
+    ({ latestCapacity, likelihood, normalizedPosteriori } = _singleMeasure({
+      challenges,
+      answer,
+      latestCapacity,
+      likelihood,
+      normalizedPosteriori,
       variationPercent,
-      variationPercentUntil,
-      answerIndex,
-    );
+    }));
 
-    if (!_shouldUseDoubleMeasure({ doubleMeasuresUntil, answerIndex, answersLength: allAnswers.length })) {
-      ({ latestCapacity, likelihood, normalizedPosteriori } = _singleMeasure({
-        challenges,
-        answer,
-        latestCapacity,
-        likelihood,
-        normalizedPosteriori,
-        variationPercent: variationPercentForCurrentAnswer,
-      }));
-
-      answerIndex++;
-    } else {
-      answer = allAnswers[answerIndex];
-      const answer2 = allAnswers[answerIndex + 1];
-      ({ latestCapacity, likelihood, normalizedPosteriori } = _doubleMeasure({
-        challenges,
-        answers: [answer, answer2],
-        latestCapacity,
-        likelihood,
-        normalizedPosteriori,
-        variationPercent: variationPercentForCurrentAnswer,
-      }));
-
-      answerIndex += 2;
-    }
+    answerIndex++;
 
     capacityHistory.push({
       answerId: answer.id,
@@ -128,39 +88,12 @@ function getCapacityAndErrorRateHistory({
   return capacityHistory;
 }
 
-function _defineVariationPercentForCurrentAnswer(variationPercent, variationPercentUntil, answerIndex) {
-  if (!variationPercentUntil) {
-    return variationPercent;
-  }
-
-  return variationPercentUntil >= answerIndex ? variationPercent : undefined;
-}
-
-function _shouldUseDoubleMeasure({ doubleMeasuresUntil, answerIndex, answersLength }) {
-  const isLastAnswer = answersLength === answerIndex + 1;
-  return doubleMeasuresUntil > answerIndex && !isLastAnswer;
-}
-
 function _singleMeasure({ challenges, answer, latestCapacity, likelihood, normalizedPosteriori, variationPercent }) {
   const answeredChallenge = _findChallengeForAnswer(challenges, answer);
 
   const normalizedPrior = _computeNormalizedPrior(latestCapacity);
 
   likelihood = _computeLikelihood(answeredChallenge, answer, likelihood);
-
-  normalizedPosteriori = _computeNormalizedPosteriori(likelihood, normalizedPrior);
-
-  latestCapacity = _computeCapacity(latestCapacity, variationPercent, normalizedPosteriori);
-  return { latestCapacity, likelihood, normalizedPosteriori };
-}
-
-function _doubleMeasure({ challenges, answers, latestCapacity, likelihood, normalizedPosteriori, variationPercent }) {
-  const answeredChallenge1 = _findChallengeForAnswer(challenges, answers[0]);
-  const answeredChallenge2 = _findChallengeForAnswer(challenges, answers[1]);
-
-  const normalizedPrior = _computeNormalizedPrior(latestCapacity);
-
-  likelihood = _computeDoubleMeasureLikelihood([answeredChallenge1, answeredChallenge2], answers, likelihood);
 
   normalizedPosteriori = _computeNormalizedPosteriori(likelihood, normalizedPrior);
 
@@ -186,17 +119,6 @@ function _computeLikelihood(answeredChallenge, answer, previousLikelihood) {
     return previousLikelihood[index] * probability;
   });
 }
-
-function _computeDoubleMeasureLikelihood(answeredChallenges, answers, previousLikelihood) {
-  return samples.map((sample, index) => {
-    let probability1 = _getProbability(sample, answeredChallenges[0].discriminant, answeredChallenges[0].difficulty);
-    let probability2 = _getProbability(sample, answeredChallenges[1].discriminant, answeredChallenges[1].difficulty);
-    probability1 = answers[0].isOk() ? probability1 : 1 - probability1;
-    probability2 = answers[1].isOk() ? probability2 : 1 - probability2;
-    return (previousLikelihood[index] * (probability1 + probability2)) / 2;
-  });
-}
-
 function _computeNormalizedPosteriori(likelihood, normalizedGaussian) {
   const posteriori = samples.map((_, index) => likelihood[index] * normalizedGaussian[index]);
 
@@ -251,8 +173,9 @@ function _limitCapacityVariation(previousCapacity, nextCapacity, variationPercen
     : Math.max(nextCapacity, previousCapacity - gap);
 }
 
-function _findBestPossibleChallenges(challengesWithReward, minimumSuccessRate, capacity) {
-  const hasMinimumSuccessRate = ({ challenge }) => {
+function _findBestPossibleChallenges(challengesWithReward, capacity) {
+  const canChallengeBeSuccessful = ({ challenge }) => {
+    const minimumSuccessRate = 0;
     const successProbability = _getProbability(capacity, challenge.discriminant, challenge.difficulty);
 
     return successProbability >= minimumSuccessRate;
@@ -260,7 +183,7 @@ function _findBestPossibleChallenges(challengesWithReward, minimumSuccessRate, c
 
   const orderedChallengesWithReward = orderBy(
     challengesWithReward,
-    [hasMinimumSuccessRate, 'reward'],
+    [canChallengeBeSuccessful, 'reward'],
     ['desc', 'desc'],
   );
 

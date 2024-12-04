@@ -52,7 +52,7 @@ describe('Acceptance | Application | flash-assessment-configuration-route', func
       describe('when there is an available configuration', function () {
         it('should return a 200', async function () {
           // given
-          const warmUpLength = 12;
+          const enablePassageByAllCompetences = true;
           const superAdmin = databaseBuilder.factory.buildUser.withRole({
             role: PIX_ADMIN.ROLES.SUPER_ADMIN,
           });
@@ -63,7 +63,7 @@ describe('Acceptance | Application | flash-assessment-configuration-route', func
 
           databaseBuilder.factory.buildFlashAlgorithmConfiguration({
             createdAt: new Date('2021-01-01'),
-            warmUpLength,
+            enablePassageByAllCompetences,
           });
 
           await databaseBuilder.commit();
@@ -83,7 +83,7 @@ describe('Acceptance | Application | flash-assessment-configuration-route', func
 
           // then
           expect(response.statusCode).to.equal(200);
-          expect(response.result.data.attributes['warm-up-length']).to.equal(warmUpLength);
+          expect(response.result.data.attributes['enable-passage-by-all-competences']).to.be.true;
         });
       });
     });

@@ -103,8 +103,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             challenges: [nextChallengeToAnswer],
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
-            variationPercentUntil: undefined,
-            doubleMeasuresUntil: undefined,
           })
           .returns({ capacity: 0 });
 
@@ -112,7 +110,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             availableChallenges: [nextChallengeToAnswer],
             capacity: 0,
-            options: sinon.match.any,
           })
           .returns([nextChallengeToAnswer]);
 
@@ -195,8 +192,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               challenges: [nextChallengeToAnswer, accessibleChallenge],
               capacity: config.v3Certification.defaultCandidateCapacity,
               variationPercent: undefined,
-              variationPercentUntil: undefined,
-              doubleMeasuresUntil: undefined,
             })
             .returns({ capacity: 0 });
 
@@ -204,7 +199,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs({
               availableChallenges: [nextChallengeToAnswer, accessibleChallenge],
               capacity: 0,
-              options: sinon.match.any,
             })
             .returns([nextChallengeToAnswer]);
 
@@ -355,8 +349,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             challenges: [alreadyAnsweredChallenge, outdatedChallenge, nextChallengeToAnswer],
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
-            variationPercentUntil: undefined,
-            doubleMeasuresUntil: undefined,
           })
           .returns({ capacity: 0 });
 
@@ -364,7 +356,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             availableChallenges: [nextChallengeToAnswer],
             capacity: 0,
-            options: sinon.match.any,
           })
           .returns([nextChallengeToAnswer]);
 
@@ -439,8 +430,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             challenges: [nextChallenge],
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
-            variationPercentUntil: undefined,
-            doubleMeasuresUntil: undefined,
           })
           .returns({ capacity: 0 });
 
@@ -448,7 +437,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             availableChallenges: [nextChallenge],
             capacity: 0,
-            options: sinon.match.any,
           })
           .returns([nextChallenge]);
 
@@ -542,8 +530,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             challenges: [challengeWithOtherSkill],
             capacity: config.v3Certification.defaultCandidateCapacity,
             variationPercent: undefined,
-            variationPercentUntil: undefined,
-            doubleMeasuresUntil: undefined,
           })
           .returns({ capacity: 0 });
 
@@ -551,7 +537,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             availableChallenges: [challengeWithOtherSkill],
             capacity: 0,
-            options: sinon.match.any,
           })
           .returns([challengeWithOtherSkill]);
 
@@ -660,16 +645,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       const competenceId = 'cmp1';
       // eslint-disable-next-line mocha/no-setup-in-describe
       Object.entries({
-        forcedCompetences: [competenceId],
         challengesBetweenSameCompetence: 2,
-        minimumEstimatedSuccessRateRanges: [
-          {
-            type: 'fixed',
-            startingChallengeIndex: 0,
-            endingChallengeIndex: 10,
-            value: 0.1,
-          },
-        ],
         limitToOneQuestionPerTube: true,
         enablePassageByAllCompetences: true,
         variationPercent: 20,
@@ -721,8 +697,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
                 challenges: [nextChallengeToAnswer],
                 capacity: config.v3Certification.defaultCandidateCapacity,
                 variationPercent: configuration.variationPercent,
-                variationPercentUntil: undefined,
-                doubleMeasuresUntil: undefined,
               })
               .returns({ capacity: 0 });
 
@@ -730,7 +704,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               .withArgs({
                 availableChallenges: [nextChallengeToAnswer],
                 capacity: 0,
-                options: sinon.match.any,
               })
               .returns([nextChallengeToAnswer]);
 
