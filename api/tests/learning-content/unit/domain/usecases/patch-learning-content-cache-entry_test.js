@@ -17,45 +17,45 @@ describe('Learning Content | Unit | Domain | Usecase | Patch learning content ca
 
   beforeEach(function () {
     frameworkRepository = {
-      save: sinon.stub(),
+      save: sinon.stub().rejects('should not be called'),
+      clearCache: sinon.stub().rejects('should not be called'),
     };
-    frameworkRepository.save.rejects('I should not be called');
     areaRepository = {
-      save: sinon.stub(),
+      save: sinon.stub().rejects('should not be called'),
+      clearCache: sinon.stub().rejects('should not be called'),
     };
-    areaRepository.save.rejects('I should not be called');
     competenceRepository = {
-      save: sinon.stub(),
+      save: sinon.stub().rejects('should not be called'),
+      clearCache: sinon.stub().rejects('should not be called'),
     };
-    competenceRepository.save.rejects('I should not be called');
     thematicRepository = {
-      save: sinon.stub(),
+      save: sinon.stub().rejects('should not be called'),
+      clearCache: sinon.stub().rejects('should not be called'),
     };
-    thematicRepository.save.rejects('I should not be called');
     tubeRepository = {
-      save: sinon.stub(),
+      save: sinon.stub().rejects('should not be called'),
+      clearCache: sinon.stub().rejects('should not be called'),
     };
-    tubeRepository.save.rejects('I should not be called');
     skillRepository = {
-      save: sinon.stub(),
+      save: sinon.stub().rejects('should not be called'),
+      clearCache: sinon.stub().rejects('should not be called'),
     };
-    skillRepository.save.rejects('I should not be called');
     challengeRepository = {
-      save: sinon.stub(),
+      save: sinon.stub().rejects('should not be called'),
+      clearCache: sinon.stub().rejects('should not be called'),
     };
-    challengeRepository.save.rejects('I should not be called');
     courseRepository = {
-      save: sinon.stub(),
+      save: sinon.stub().rejects('should not be called'),
+      clearCache: sinon.stub().rejects('should not be called'),
     };
-    courseRepository.save.rejects('I should not be called');
     tutorialRepository = {
-      save: sinon.stub(),
+      save: sinon.stub().rejects('should not be called'),
+      clearCache: sinon.stub().rejects('should not be called'),
     };
-    tutorialRepository.save.rejects('I should not be called');
     missionRepository = {
-      save: sinon.stub(),
+      save: sinon.stub().rejects('should not be called'),
+      clearCache: sinon.stub().rejects('should not be called'),
     };
-    missionRepository.save.rejects('I should not be called');
     repositories = {
       frameworkRepository,
       areaRepository,
@@ -83,83 +83,6 @@ describe('Learning Content | Unit | Domain | Usecase | Patch learning content ca
   });
 
   describe('#patchLearningContentCacheEntry', function () {
-    context('when entry is already in cache', function () {
-      it('should patch learning content cache with provided updated entry', async function () {
-        // given
-        const recordId = 'recId';
-        const updatedRecord = Symbol('updated record');
-        const modelName = 'someModelName';
-        const LearningContentCache = {
-          instance: {
-            get: sinon.stub(),
-            patch: sinon.stub(),
-          },
-        };
-        const learningContent = {
-          someModelName: [
-            { attr1: 'attr1 value index 0', id: 'otherRecordId' },
-            { attr1: 'attr1 value index 1', id: recordId },
-          ],
-          someOtherModelName: [{ other: 'entry', id: recordId }],
-        };
-        LearningContentCache.instance.get.resolves(learningContent);
-
-        // when
-        await patchLearningContentCacheEntry({
-          recordId,
-          updatedRecord,
-          modelName,
-          LearningContentCache,
-          ...repositories,
-        });
-
-        // then
-        expect(LearningContentCache.instance.patch).to.have.been.calledWithExactly({
-          operation: 'assign',
-          path: 'someModelName[1]',
-          value: updatedRecord,
-        });
-      });
-    });
-    context('when entry is not in cache', function () {
-      it('should patch learning content cache by adding provided entry', async function () {
-        // given
-        const recordId = 'recId';
-        const updatedRecord = Symbol('updated record');
-        const modelName = 'someModelName';
-        const LearningContentCache = {
-          instance: {
-            get: sinon.stub(),
-            patch: sinon.stub(),
-          },
-        };
-        const learningContent = {
-          someModelName: [
-            { attr1: 'attr1 value index 0', id: 'otherRecordId' },
-            { attr1: 'attr1 value index 1', id: 'yetAnotherRecordId' },
-          ],
-          someOtherModelName: [{ other: 'entry', id: recordId }],
-        };
-        LearningContentCache.instance.get.resolves(learningContent);
-
-        // when
-        await patchLearningContentCacheEntry({
-          recordId,
-          updatedRecord,
-          modelName,
-          LearningContentCache,
-          ...repositories,
-        });
-
-        // then
-        expect(LearningContentCache.instance.patch).to.have.been.calledWithExactly({
-          operation: 'push',
-          path: 'someModelName',
-          value: updatedRecord,
-        });
-      });
-    });
-
     // eslint-disable-next-line mocha/no-setup-in-describe
     [
       'frameworks',
@@ -173,37 +96,113 @@ describe('Learning Content | Unit | Domain | Usecase | Patch learning content ca
       'tutorials',
       'missions',
     ].forEach((modelName) => {
-      it(`should call save on appropriate repository for model ${modelName}`, async function () {
-        // given
+      describe(`when model is ${modelName}`, function () {
         const recordId = 'recId';
-        const updatedRecord = Symbol('updated record');
-        const learningContent = {
-          [modelName]: [
-            { attr1: 'attr1 value index 0', id: 'otherRecordId' },
-            { attr1: 'attr1 value index 1', id: recordId },
-          ],
-          someOtherModelName: [{ other: 'entry', id: recordId }],
-        };
-        const LearningContentCache = {
-          instance: {
-            get: sinon.stub().resolves(learningContent),
-            patch: sinon.stub().resolves(),
-          },
-        };
-        repositoriesByModel[modelName].save.withArgs(updatedRecord).resolves();
+        const updatedRecord = Symbol('updated record'); // eslint-disable-line mocha/no-setup-in-describe
 
-        // when
-        await patchLearningContentCacheEntry({
-          recordId,
-          updatedRecord,
-          modelName,
-          LearningContentCache,
-          ...repositories,
+        beforeEach(function () {
+          repositoriesByModel[modelName].save.withArgs(updatedRecord).resolves();
+          repositoriesByModel[modelName].clearCache.withArgs(recordId).returns();
         });
 
-        // then
-        expect(repositoriesByModel[modelName].save).to.have.been.calledOnce;
-        expect(repositoriesByModel[modelName].save).to.have.been.calledWithExactly(updatedRecord);
+        it(`should call save and clearCache on appropriate repository`, async function () {
+          // given
+          const learningContent = {
+            [modelName]: [
+              { attr1: 'attr1 value index 0', id: 'otherRecordId' },
+              { attr1: 'attr1 value index 1', id: recordId },
+            ],
+            someOtherModelName: [{ other: 'entry', id: recordId }],
+          };
+          const LearningContentCache = {
+            instance: {
+              get: sinon.stub().resolves(learningContent),
+              patch: sinon.stub().resolves(),
+            },
+          };
+
+          // when
+          await patchLearningContentCacheEntry({
+            recordId,
+            updatedRecord,
+            modelName,
+            LearningContentCache,
+            ...repositories,
+          });
+
+          // then
+          expect(repositoriesByModel[modelName].save).to.have.been.calledOnceWithExactly(updatedRecord);
+          expect(repositoriesByModel[modelName].clearCache).to.have.been.calledOnceWithExactly(recordId);
+        });
+
+        describe('when entry is already in cache', function () {
+          it('should patch learning content cache with provided updated entry', async function () {
+            // given
+            const LearningContentCache = {
+              instance: {
+                get: sinon.stub(),
+                patch: sinon.stub(),
+              },
+            };
+            const learningContent = {
+              [modelName]: [
+                { attr1: 'attr1 value index 0', id: 'otherRecordId' },
+                { attr1: 'attr1 value index 1', id: recordId },
+              ],
+              someOtherModelName: [{ other: 'entry', id: recordId }],
+            };
+            LearningContentCache.instance.get.resolves(learningContent);
+
+            // when
+            await patchLearningContentCacheEntry({
+              recordId,
+              updatedRecord,
+              modelName,
+              LearningContentCache,
+              ...repositories,
+            });
+
+            // then
+            expect(LearningContentCache.instance.patch).to.have.been.calledWithExactly({
+              operation: 'assign',
+              path: `${modelName}[1]`,
+              value: updatedRecord,
+            });
+          });
+        });
+
+        describe('when entry is not in cache', function () {
+          it('should patch learning content cache by adding provided entry', async function () {
+            // given
+            const LearningContentCache = {
+              instance: {
+                get: sinon.stub(),
+                patch: sinon.stub(),
+              },
+            };
+            const learningContent = {
+              [modelName]: [{ attr1: 'attr1 value index 0', id: 'otherRecordId' }],
+              someOtherModelName: [{ other: 'entry', id: recordId }],
+            };
+            LearningContentCache.instance.get.resolves(learningContent);
+
+            // when
+            await patchLearningContentCacheEntry({
+              recordId,
+              updatedRecord,
+              modelName,
+              LearningContentCache,
+              ...repositories,
+            });
+
+            // then
+            expect(LearningContentCache.instance.patch).to.have.been.calledWithExactly({
+              operation: 'push',
+              path: modelName,
+              value: updatedRecord,
+            });
+          });
+        });
       });
     });
   });
