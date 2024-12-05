@@ -221,15 +221,15 @@ describe('DeleteAndAnonymiseOrgnizationLearnerScript', function () {
         const anonymizedRecommendedTrainingResults =
           await knex('user-recommended-trainings').whereNull('campaignParticipationId');
 
-        const otherRecommendedTrainingResults =
-          await knex('user-recommended-trainings').whereNotNull('campaignParticipationId');
+        const otherRecommendedTrainingResults = await knex('user-recommended-trainings').where({
+          campaignParticipationId: otherParticipation.id,
+        });
 
         expect(anonymizedRecommendedTrainingResults).lengthOf(1);
         expect(anonymizedRecommendedTrainingResults[0].campaignParticipationId).to.be.null;
         expect(anonymizedRecommendedTrainingResults[0].updatedAt).to.deep.equal(now);
 
         expect(otherRecommendedTrainingResults).lengthOf(1);
-        expect(otherRecommendedTrainingResults[1].campaignParticipationId).to.deep.equal(otherParticipation.id);
       });
     });
   });
