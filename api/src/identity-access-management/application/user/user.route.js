@@ -1,7 +1,6 @@
 import Joi from 'joi';
 import XRegExp from 'xregexp';
 
-import { certificationPointOfContactController } from '../../../../lib/application/certification-point-of-contacts/certification-point-of-contact-controller.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { config } from '../../../shared/config.js';
 import { EntityValidationError } from '../../../shared/domain/errors.js';
@@ -351,7 +350,7 @@ export const userRoutes = [
     method: 'GET',
     path: '/api/certification-point-of-contacts/me',
     config: {
-      handler: (request, h) => certificationPointOfContactController.get(request, h),
+      handler: (request, h) => userController.getCertificationPointOfContact(request, h),
       notes: [
         '- **Cette route est restreinte aux utilisateurs authentifiés*' * '\n' +
           '- Récupération d’un référent de certification.',

@@ -1,5 +1,5 @@
-import { certificationPointOfContactController } from '../../../../../lib/application/certification-point-of-contacts/certification-point-of-contact-controller.js';
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
+import { userController } from '../../../../../src/identity-access-management/application/user/user.controller.js';
 import { config } from '../../../../../src/shared/config.js';
 import * as i18nPlugin from '../../../../../src/shared/infrastructure/plugins/i18n.js';
 import {
@@ -141,7 +141,7 @@ describe('Integration | Identity Access Management | Application | Route | User'
       const headers = {
         authorization: generateValidRequestAuthorizationHeader(userId),
       };
-      sinon.stub(certificationPointOfContactController, 'get').callsFake((request, h) => h.response().code(200));
+      sinon.stub(userController, 'getCertificationPointOfContact').callsFake((request, h) => h.response().code(200));
 
       // when
       const result = await httpTestServer.request(
