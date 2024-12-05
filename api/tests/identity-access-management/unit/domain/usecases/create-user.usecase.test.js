@@ -2,6 +2,7 @@ import { createAccountCreationEmail } from '../../../../../src/identity-access-m
 import { InvalidOrAlreadyUsedEmailError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { createUser } from '../../../../../src/identity-access-management/domain/usecases/create-user.usecase.js';
+import { config } from '../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
 import { urlBuilder } from '../../../../../src/shared/infrastructure/utils/url-builder.js';
@@ -442,7 +443,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           firstName: user.firstName,
           locale: localeFromHeader,
           token,
-          redirectionUrl: `https://app.pix.fr/campagnes/${campaignCode}`,
+          redirectionUrl: `${config.domain.pixApp + config.domain.tldFr}/campagnes/${campaignCode}`,
         });
 
         // when

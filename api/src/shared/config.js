@@ -211,7 +211,6 @@ const configuration = (function () {
         process.env.FT_ALWAYS_OK_VALIDATE_NEXT_CHALLENGE_ENDPOINT,
       ),
       isAsyncQuestRewardingCalculationEnabled: toBoolean(process.env.FT_ENABLE_ASYNC_QUESTS_REWARDS_CALCULATION),
-      isCertificationTokenScopeEnabled: toBoolean(process.env.FT_ENABLE_CERTIF_TOKEN_SCOPE),
       isNeedToAdjustCertificationAccessibilityEnabled: toBoolean(
         process.env.FT_ENABLE_NEED_TO_ADJUST_CERTIFICATION_ACCESSIBILITY,
       ),
@@ -250,6 +249,10 @@ const configuration = (function () {
       pixData: {
         secret: process.env.PIX_DATA_AUTH_SECRET,
         tokenLifespan: process.env.TOKEN_LIFE_SPAN || '1h',
+      },
+      certificationResults: {
+        scope: process.env.CERTIFICATION_RESULTS_JWT_SCOPE || 'certificationResultsLink',
+        tokenLifespan: process.env.CERTIFICATION_RESULTS_JWT_TOKEN_LIFE_SPAN || '30d',
       },
     },
     lcms: {
@@ -420,6 +423,7 @@ const configuration = (function () {
     config.domain.tldOrg = '.org';
     config.domain.pix = 'https://pix';
     config.domain.pixOrga = 'https://orga.pix';
+    config.domain.pixApp = 'https://test.app.pix';
 
     config.features.dayBeforeRetrying = 4;
     config.features.dayBeforeImproving = 4;
@@ -432,7 +436,6 @@ const configuration = (function () {
 
     config.featureToggles.deprecatePoleEmploiPushNotification = false;
     config.featureToggles.isAlwaysOkValidateNextChallengeEndpointEnabled = false;
-    config.featureToggles.isCertificationTokenScopeEnabled = false;
     config.featureToggles.isNeedToAdjustCertificationAccessibilityEnabled = false;
     config.featureToggles.isPix1dEnabled = true;
     config.featureToggles.isPixCompanionEnabled = false;

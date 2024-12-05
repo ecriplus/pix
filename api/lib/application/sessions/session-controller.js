@@ -2,7 +2,6 @@ import * as juryCertificationSummaryRepository from '../../../src/certification/
 import * as sessionManagementSerializer from '../../../src/certification/session-management/infrastructure/serializers/session-serializer.js';
 import { SessionPublicationBatchError } from '../../../src/shared/application/http-errors.js';
 import { logger } from '../../../src/shared/infrastructure/utils/logger.js';
-import * as sessionResultsLinkService from '../../domain/services/session-results-link-service.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as juryCertificationSummarySerializer from '../../infrastructure/serializers/jsonapi/jury-certification-summary-serializer.js';
 
@@ -23,14 +22,6 @@ const getJuryCertificationSummaries = async function (
       page,
     });
   return dependencies.juryCertificationSummarySerializer.serialize(juryCertificationSummaries, pagination);
-};
-
-const generateSessionResultsDownloadLink = async function (request, h, dependencies = { sessionResultsLinkService }) {
-  const sessionId = request.params.id;
-  const i18n = request.i18n;
-  const sessionResultsLink = dependencies.sessionResultsLinkService.generateResultsLink({ sessionId, i18n });
-
-  return h.response({ sessionResultsLink });
 };
 
 const publish = async function (request, h, dependencies = { sessionManagementSerializer }) {
@@ -74,7 +65,6 @@ const flagResultsAsSentToPrescriber = async function (request, h, dependencies =
 
 const sessionController = {
   getJuryCertificationSummaries,
-  generateSessionResultsDownloadLink,
   publish,
   publishInBatch,
   unpublish,

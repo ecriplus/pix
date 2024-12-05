@@ -1,3 +1,4 @@
+import { config } from '../../../../../src/shared/config.js';
 import { urlBuilder } from '../../../../../src/shared/infrastructure/utils/url-builder.js';
 import { expect } from '../../../../test-helper.js';
 
@@ -7,28 +8,28 @@ describe('Unit | Shared | Infrastructure | Utils | url-builder', function () {
       // when
       const url = urlBuilder.getPixAppBaseUrl();
       // then
-      expect(url).to.equal('https://app.pix.fr');
+      expect(url).to.equal(`${config.domain.pixApp + config.domain.tldFr}`);
     });
 
     it('returns base url fr if locale is fr-FR', function () {
       // when
       const url = urlBuilder.getPixAppBaseUrl('fr-FR');
       // then
-      expect(url).to.equal('https://app.pix.fr');
+      expect(url).to.equal(`${config.domain.pixApp + config.domain.tldFr}`);
     });
 
     it('returns base url fr if locale is not supported', function () {
       // when
       const url = urlBuilder.getPixAppBaseUrl('ru');
       // then
-      expect(url).to.equal('https://app.pix.fr');
+      expect(url).to.equal(`${config.domain.pixApp + config.domain.tldFr}`);
     });
 
     it('returns base url org if locale is in supported locales and not fr-FR', function () {
       // when
       const url = urlBuilder.getPixAppBaseUrl('fr');
       // then
-      expect(url).to.equal('https://app.pix.org');
+      expect(url).to.equal(`${config.domain.pixApp + config.domain.tldOrg}`);
     });
   });
 
@@ -42,37 +43,37 @@ describe('Unit | Shared | Infrastructure | Utils | url-builder', function () {
 
       it('returns campaignUrl with fr domain when locale is not supported', function () {
         expect(urlBuilder.getCampaignUrl('ru', campaignCode)).to.be.equal(
-          `https://app.pix.fr/campagnes/${campaignCode}`,
+          `${config.domain.pixApp + config.domain.tldFr}/campagnes/${campaignCode}`,
         );
       });
 
       it('returns campaignUrl with fr domain when locale is not defined', function () {
         expect(urlBuilder.getCampaignUrl(undefined, campaignCode)).to.be.equal(
-          `https://app.pix.fr/campagnes/${campaignCode}`,
+          `${config.domain.pixApp + config.domain.tldFr}/campagnes/${campaignCode}`,
         );
       });
 
       it('returns campaignUrl with fr domain when locale is fr-fr', function () {
         expect(urlBuilder.getCampaignUrl('fr-fr', campaignCode)).to.be.equal(
-          `https://app.pix.fr/campagnes/${campaignCode}`,
+          `${config.domain.pixApp + config.domain.tldFr}/campagnes/${campaignCode}`,
         );
       });
 
       it('returns campaignUrl with org domain when locale is fr', function () {
         expect(urlBuilder.getCampaignUrl('fr', campaignCode)).to.be.equal(
-          `https://app.pix.org/campagnes/${campaignCode}/?lang=fr`,
+          `${config.domain.pixApp + config.domain.tldOrg}/campagnes/${campaignCode}/?lang=fr`,
         );
       });
 
       it('returns campaignUrl with org domain when locale is en', function () {
         expect(urlBuilder.getCampaignUrl('en', campaignCode)).to.be.equal(
-          `https://app.pix.org/campagnes/${campaignCode}/?lang=en`,
+          `${config.domain.pixApp + config.domain.tldOrg}/campagnes/${campaignCode}/?lang=en`,
         );
       });
 
       it('returns campaignUrl with org domain when locale is nl', function () {
         expect(urlBuilder.getCampaignUrl('nl', campaignCode)).to.be.equal(
-          `https://app.pix.org/campagnes/${campaignCode}/?lang=nl`,
+          `${config.domain.pixApp + config.domain.tldOrg}/campagnes/${campaignCode}/?lang=nl`,
         );
       });
     });
@@ -91,7 +92,9 @@ describe('Unit | Shared | Infrastructure | Utils | url-builder', function () {
         const url = urlBuilder.getEmailValidationUrl({ locale, redirectUrl, token });
 
         // then
-        expect(url).to.equal(`https://app.pix.org/api/users/validate-email?${expectedParams.toString()}`);
+        expect(url).to.equal(
+          `${config.domain.pixApp + config.domain.tldOrg}/api/users/validate-email?${expectedParams.toString()}`,
+        );
       });
     });
 
@@ -106,7 +109,9 @@ describe('Unit | Shared | Infrastructure | Utils | url-builder', function () {
         const url = urlBuilder.getEmailValidationUrl({ redirectUrl, token });
 
         // then
-        expect(url).to.equal(`https://app.pix.fr/api/users/validate-email?${expectedParams.toString()}`);
+        expect(url).to.equal(
+          `${config.domain.pixApp + config.domain.tldFr}/api/users/validate-email?${expectedParams.toString()}`,
+        );
       });
     });
 
@@ -120,7 +125,9 @@ describe('Unit | Shared | Infrastructure | Utils | url-builder', function () {
         const url = urlBuilder.getEmailValidationUrl({ redirectUrl });
 
         // then
-        expect(url).to.equal(`https://app.pix.fr/api/users/validate-email?${expectedParams.toString()}`);
+        expect(url).to.equal(
+          `${config.domain.pixApp + config.domain.tldFr}/api/users/validate-email?${expectedParams.toString()}`,
+        );
       });
     });
 
@@ -130,7 +137,7 @@ describe('Unit | Shared | Infrastructure | Utils | url-builder', function () {
         const url = urlBuilder.getEmailValidationUrl();
 
         // then
-        expect(url).to.equal(`https://app.pix.fr/api/users/validate-email?`);
+        expect(url).to.equal(`${config.domain.pixApp + config.domain.tldFr}/api/users/validate-email?`);
       });
     });
   });

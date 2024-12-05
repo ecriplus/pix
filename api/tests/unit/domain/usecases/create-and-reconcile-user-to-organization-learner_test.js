@@ -1,5 +1,6 @@
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { createAccountCreationEmail } from '../../../../src/identity-access-management/domain/emails/create-account-creation.email.js';
+import { config } from '../../../../src/shared/config.js';
 import {
   AlreadyRegisteredUsernameError,
   CampaignCodeError,
@@ -279,7 +280,7 @@ describe('Unit | UseCase | create-and-reconcile-user-to-organization-learner', f
             firstName: userAttributes.firstName,
             locale,
             token,
-            redirectionUrl: `https://app.pix.fr/campagnes/${campaignCode}`,
+            redirectionUrl: `${config.domain.pixApp + config.domain.tldFr}/campagnes/${campaignCode}`,
           });
 
           // when

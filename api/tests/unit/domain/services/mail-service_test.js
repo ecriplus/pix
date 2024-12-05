@@ -1,5 +1,5 @@
 import * as mailService from '../../../../lib/domain/services/mail-service.js';
-import { config as settings } from '../../../../src/shared/config.js';
+import { config, config as settings } from '../../../../src/shared/config.js';
 import { LOCALE } from '../../../../src/shared/domain/constants.js';
 import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
 import { getI18n } from '../../../../src/shared/infrastructure/i18n/i18n.js';
@@ -102,7 +102,7 @@ describe('Unit | Service | MailService', function () {
             ...mainTranslationsMapping.en['reset-password-demand-email'].params,
             homeName: 'pix.org',
             homeUrl: 'https://pix.org/en/',
-            resetUrl: `https://app.pix.org/changer-mot-de-passe/${temporaryKey}/?lang=en`,
+            resetUrl: `${config.domain.pixApp + config.domain.tldOrg}/changer-mot-de-passe/${temporaryKey}/?lang=en`,
             helpdeskURL: 'https://pix.org/en/support',
           },
         };
@@ -131,7 +131,7 @@ describe('Unit | Service | MailService', function () {
             ...mainTranslationsMapping.nl['reset-password-demand-email'].params,
             homeName: 'pix.org',
             homeUrl: 'https://pix.org/nl-be/',
-            resetUrl: `https://app.pix.org/changer-mot-de-passe/${temporaryKey}/?lang=nl`,
+            resetUrl: `${config.domain.pixApp + config.domain.tldOrg}/changer-mot-de-passe/${temporaryKey}/?lang=nl`,
             helpdeskURL: 'https://pix.org/nl-be/support',
           },
         };
@@ -160,7 +160,7 @@ describe('Unit | Service | MailService', function () {
             ...mainTranslationsMapping.es['reset-password-demand-email'].params,
             homeName: 'pix.org',
             homeUrl: 'https://pix.org/en/',
-            resetUrl: `https://app.pix.org/changer-mot-de-passe/${temporaryKey}/?lang=es`,
+            resetUrl: `${config.domain.pixApp + config.domain.tldOrg}/changer-mot-de-passe/${temporaryKey}/?lang=es`,
             helpdeskURL: 'https://pix.org/en/support',
           },
         };
@@ -189,7 +189,7 @@ describe('Unit | Service | MailService', function () {
             ...mainTranslationsMapping.fr['reset-password-demand-email'].params,
             homeName: 'pix.org',
             homeUrl: 'https://pix.org/fr/',
-            resetUrl: `https://app.pix.org/changer-mot-de-passe/${temporaryKey}/?lang=fr`,
+            resetUrl: `${config.domain.pixApp + config.domain.tldOrg}/changer-mot-de-passe/${temporaryKey}/?lang=fr`,
             helpdeskURL: 'https://pix.org/fr/support',
           },
         };
@@ -218,7 +218,7 @@ describe('Unit | Service | MailService', function () {
             ...mainTranslationsMapping.fr['reset-password-demand-email'].params,
             homeName: 'pix.fr',
             homeUrl: 'https://pix.fr',
-            resetUrl: `https://app.pix.fr/changer-mot-de-passe/${temporaryKey}`,
+            resetUrl: `${config.domain.pixApp + config.domain.tldFr}/changer-mot-de-passe/${temporaryKey}`,
             helpdeskURL: 'https://pix.fr/support',
           },
         };
@@ -247,7 +247,7 @@ describe('Unit | Service | MailService', function () {
             ...mainTranslationsMapping.fr['reset-password-demand-email'].params,
             homeName: 'pix.fr',
             homeUrl: 'https://pix.fr',
-            resetUrl: `https://app.pix.fr/changer-mot-de-passe/${temporaryKey}`,
+            resetUrl: `${config.domain.pixApp + config.domain.tldFr}/changer-mot-de-passe/${temporaryKey}`,
             helpdeskURL: 'https://pix.fr/support',
           },
         };
@@ -584,7 +584,7 @@ describe('Unit | Service | MailService', function () {
       const firstName = 'Carla';
       const temporaryKey = 'a temporary key';
       const email = 'carla@example.net';
-      const redirectionUrl = `https://app.pix.fr/recuperer-mon-compte/${temporaryKey}`;
+      const redirectionUrl = `${config.domain.pixApp + config.domain.tldFr}/recuperer-mon-compte/${temporaryKey}`;
 
       // when
       await mailService.sendAccountRecoveryEmail({

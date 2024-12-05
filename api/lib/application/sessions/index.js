@@ -38,37 +38,6 @@ const register = async function (server) {
       },
     },
     {
-      method: 'GET',
-      path: '/api/admin/sessions/{id}/generate-results-download-link',
-      config: {
-        validate: {
-          params: Joi.object({
-            id: identifiersType.sessionId,
-          }),
-          query: Joi.object({
-            lang: Joi.string().optional().valid('fr', 'en'),
-          }),
-        },
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleCertif,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        handler: sessionController.generateSessionResultsDownloadLink,
-        tags: ['api', 'sessions'],
-        notes: [
-          "Cette route est restreinte aux utilisateurs ayant les droits d'accès",
-          "Elle permet de générer un lien permettant de télécharger tous les résultats de certification d'une session",
-        ],
-      },
-    },
-    {
       method: 'PATCH',
       path: '/api/admin/sessions/{id}/publish',
       config: {

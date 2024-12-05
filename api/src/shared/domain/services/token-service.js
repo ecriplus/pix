@@ -9,7 +9,6 @@ import {
   InvalidTemporaryKeyError,
 } from '../errors.js';
 
-const CERTIFICATION_RESULTS_LINK_SCOPE = 'certificationResultsLink';
 const CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE = 'certificationResultsByRecipientEmailLink';
 
 function _createAccessToken({ userId, source, expirationDelaySeconds }) {
@@ -93,15 +92,15 @@ function createCertificationResultsByRecipientEmailLinkToken({
   );
 }
 
-function createCertificationResultsLinkToken({ sessionId, daysBeforeExpiration }) {
+function createCertificationResultsLinkToken({ sessionId }) {
   return jsonwebtoken.sign(
     {
       session_id: sessionId,
-      scope: CERTIFICATION_RESULTS_LINK_SCOPE,
+      scope: config.jwtConfig.certificationResults.scope,
     },
     config.authentication.secret,
     {
-      expiresIn: `${daysBeforeExpiration}d`,
+      expiresIn: `${config.jwtConfig.certificationResults.tokenLifespan}`,
     },
   );
 }
@@ -153,10 +152,8 @@ function extractCertificationResultsByRecipientEmailLink(token) {
     throw new InvalidResultRecipientTokenError();
   }
 
-  if (config.featureToggles.isCertificationTokenScopeEnabled) {
-    if (decoded.scope !== CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE) {
-      throw new InvalidResultRecipientTokenError();
-    }
+  if (decoded.scope !== CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE) {
+    throw new InvalidResultRecipientTokenError();
   }
 
   return {
@@ -171,10 +168,8 @@ function extractCertificationResultsLink(token) {
     throw new InvalidSessionResultTokenError();
   }
 
-  if (config.featureToggles.isCertificationTokenScopeEnabled) {
-    if (decoded.scope !== CERTIFICATION_RESULTS_LINK_SCOPE) {
-      throw new InvalidSessionResultTokenError();
-    }
+  if (decoded.scope !== config.jwtConfig.certificationResults.scope) {
+    throw new InvalidSessionResultTokenError();
   }
 
   return {
