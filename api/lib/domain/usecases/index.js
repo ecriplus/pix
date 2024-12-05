@@ -143,7 +143,6 @@ import * as learningContentRepository from '../../infrastructure/repositories/le
 import * as organizationLearnerRepository from '../../infrastructure/repositories/organization-learner-repository.js';
 import * as organizationMemberIdentityRepository from '../../infrastructure/repositories/organization-member-identity-repository.js';
 import * as organizationTagRepository from '../../infrastructure/repositories/organization-tag-repository.js';
-import { participantResultsSharedRepository } from '../../infrastructure/repositories/participant-results-shared-repository.js';
 import * as targetProfileRepository from '../../infrastructure/repositories/target-profile-repository.js';
 import * as targetProfileShareRepository from '../../infrastructure/repositories/target-profile-share-repository.js';
 import * as targetProfileTrainingRepository from '../../infrastructure/repositories/target-profile-training-repository.js';
@@ -287,7 +286,6 @@ const dependencies = {
   organizationRepository,
   organizationTagRepository,
   organizationValidator,
-  participantResultsSharedRepository,
   passwordGenerator,
   passwordValidator,
   pickChallengeService,
