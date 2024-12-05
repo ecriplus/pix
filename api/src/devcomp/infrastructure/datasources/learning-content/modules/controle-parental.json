@@ -1,0 +1,418 @@
+{
+  "id": "a9e7dda1-fbcc-43a0-a9b4-90056548a4ae",
+  "slug": "controle-parental",
+  "title": "Le contrôle parental",
+  "isBeta": false,
+  "details": {
+    "image": "",
+    "description": "<p>Les enfants et les adolescents utilisent le numérique au quotidien. Pour les protéger sur internet, le contrôle parental fait partie des solutions à la disposition des parents. <span aria-hidden=\"\\&quot;true\\&quot;\">🧑‍🧒</span><br>Dans ce module, découvrez le contrôle parental et ses fonctionnalités.</p>",
+    "duration": 10,
+    "level": "Débutant",
+    "objectives": [
+      "<p>Savoir ce qu'est le contrôle parental</p>",
+      "<p>Comprendre à quoi sert le contrôle parental</p>",
+      "<p>Savoir où trouver du contrôle parental et comment l'activer</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "transitionTexts": [
+    {
+      "grainId": "f7e0ec28-06a2-4915-bcd7-53d5f5e3b9a7",
+      "content": "<p>Max entre bientôt au collège. <br>Ses parents souhaitent lui offrir son premier smartphone, mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion. <span aria-hidden=\"\\&quot;true\\&quot;\">📺</span></p>"
+    },
+    {
+      "grainId": "fab2ec90-8350-4f51-8700-336bcd3acade",
+      "content": "<p>Grâce au contrôle parental, Nina va pouvoir accompagner les usages en ligne de Max sur son premier smartphone. <span aria-hidden=\"\\&quot;true\\&quot;\">📱</span></p>\n<p>Voyons cela ensemble ! <br><br></p>"
+    },
+    {
+      "grainId": "58d3587f-05b7-45a8-830a-d21cf319b6a2",
+      "content": "<p>Voyons si vous avez retenu l’essentiel. <span aria-hidden=\"\\&quot;true\\&quot;\">🎯</span></p>"
+    },
+    {
+      "grainId": "ee9779af-508e-4fe1-88ad-acf2fa89dd45",
+      "content": "<p>Maintenant que vous en savez plus sur le contrôle parental, aidez Nina à l’activer sur le smartphone de Max.</p>"
+    },
+    {
+      "grainId": "6e9c3dbf-34de-4652-b119-aa2a02772fdd",
+      "content": "<p>Il n’y a pas que sur les smartphones qu’il y a du contrôle parental !&nbsp; Partons à la découverte des appareils et des plateformes qui proposent du contrôle parental.</p>"
+    },
+    {
+      "grainId": "dde349da-a5fc-41b5-8c47-9ec5a2780165",
+      "content": "<p>Grâce au contrôle parental, Nina va pouvoir accompagner Max dans ses usages numériques plus sereinement.<br>Maintenant, à vous de trouver les options de contrôle parental de vos appareils connectés.&nbsp;🔎<br></p>"
+    }
+  ],
+  "grains": [
+    {
+      "id": "f7e0ec28-06a2-4915-bcd7-53d5f5e3b9a7",
+      "type": "discovery",
+      "title": "Discussion de groupe - Les gentils copains",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "1a19fe4d-9c97-450c-bc13-9402fe5d06f2",
+            "type": "image",
+            "url": "https://i.imgur.com/KUBS77h.png",
+            "alt": "",
+            "alternativeText": "<p>Discussion du groupe <strong>Les gentils copains</strong> sur une application de messagerie instantannée :</p>\n<p>Nina :&nbsp;Salut ! Ca y est ! Pour sa rentrée en 6e, j’achète un smartphone à Max. J’ai peur qu’il tombe sur des trucs pas top pour son âge. Un conseil ?</p>\n<p>Tao :&nbsp;Ha moi, Nina a pas encore de smartphone. Elle le réclame mais c’est encore trop jeune !</p>\n<p>Camille :&nbsp;Nous on n’a pas hésité. Le collège est loin et Théo prend le bus.</p>\n<p>Nina :&nbsp;Et du coup, vous avez fait comment ?</p>\n<p>Camille :&nbsp;On a beaucoup discuté avec Théo et son père. Pour fixer quelques règles. En plus, on a activé le contrôle parental du smartphone.</p>\n<p>Tao :&nbsp;Le contrôle parental ? C’est utile ?</p>\n<p>Camille :&nbsp;Oui oui. Ça restreint pas mal de choses… le temps passé, les sites visités. Attention, ça remplace pas de discuter avec lui, mais c’est un bon complément.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "938ababc-7496-453a-bccd-1a493a829525",
+            "type": "text",
+            "content": "<p><a href=\"https://www.youtube.com/shorts/AJUkmn48D0U\">Lien vers la version vidéo</a></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "3281eca4-ff14-4f28-bb65-11b2e5f70faf",
+            "type": "qcu",
+            "instruction": "<p>Le contrôle parental est un outil numérique. Que permet-il ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Il permet d'accompagner les pratiques numériques de son enfant.</p>",
+                "feedback": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Bonne réponse ! <span aria-hidden=\"\\&quot;true\\&quot;\">🎉</span></span></p>\n\n<p>Le contrôle parental est un outil à mettre en place en plus de temps d’échanges et de discussion entre parents et enfants.<br><br></p>"
+              },
+              {
+                "id": "2",
+                "content": "<p>Il permet de surveiller la santé physique de son enfant.</p>",
+                "feedback": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Mauvaise réponse.</span></p>\n<p>Le contrôle parental ne concerne pas la surveillance de la santé. Essayez à nouveau !</p>"
+              },
+              {
+                "id": "3",
+                "content": "<p>Il permet de vérifier que son enfant a fait ses devoirs scolaires.</p>",
+                "feedback": "\n<p><span class=\"\\&quot;feedback__state\\&quot;\">Mauvaise réponse.</span></p>\n<p>Le contrôle parental ne concerne pas la scolarité. Essayez à nouveau !</p>"
+              }
+            ],
+            "feedbacks": {
+              "valid": "",
+              "invalid": ""
+            },
+            "solution": "1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fab2ec90-8350-4f51-8700-336bcd3acade",
+      "type": "lesson",
+      "title": "Les fonctionnalités du contrôle parental",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "fe57ddca-0827-45b1-ab8a-59a92ca48ce9",
+            "type": "text",
+            "content": "<p>Après cette vidéo, vous devrez choisir la fonctionnalité de contrôle parental adaptée dans des situations concrètes.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "18ae1715-325d-47fe-970d-fe6e5e0f2bc4",
+            "type": "text",
+            "content": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/fBtl2VFzSKg?si=LkL2m5ALoFE_5Rrs\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen=\"\"></iframe>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "58d3587f-05b7-45a8-830a-d21cf319b6a2",
+      "type": "activity",
+      "title": "Quelle est la fonctionnalité adaptée ?",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "510822a9-aba9-43e0-8ef7-cd5f377ae78d",
+            "type": "text",
+            "content": "<p>Pour chacune des situations suivantes, sélectionnez la fonctionnalité de contrôle parental adaptée.</p>"
+          }
+        },
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "c9540007-19f4-456e-8137-5b85f81d2854",
+                  "type": "text",
+                  "content": "<p>Rachel veut éviter que son fils de 13 ans télécharge des jeux déconseillés au moins de 16 ans sur sa console.</p>"
+                },
+                {
+                  "id": "ca55f260-188e-4292-91fe-80866319f0eb",
+                  "type": "qcu",
+                  "instruction": "<p>Quelle fonctionnalité du contrôle parental est adaptée ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>gestion du temps d'écran</p>",
+                      "feedback": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Mauvaise réponse.</span></p>\n<p><span class=\"\\&quot;feedback__state\\&quot;\">La gestion du temps d’écran permet de mettre des limites de temps d’utilisation. Elle ne permet pas de bloquer l’accès à un contenu en particulier.</span></p>"
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>filtrage des contenus</p>",
+                      "feedback": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Bonne réponse ! <span aria-hidden=\"\\&quot;true\\&quot;\">🎉</span></span></p>\n<p>Le filtrage de contenus permet de bloquer l’accès aux contenus en fonction de l’âge de l’enfant.</p>"
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>suivi de l'activité en ligne</p>",
+                      "feedback": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Mauvaise réponse.</span></p>\n<p>Le suivi de l’activité en ligne permet de suivre l’utilisation de la console. Il ne permet pas de bloquer l’accès à un contenu.</p>"
+                    }
+                  ],
+                  "feedbacks": {
+                    "valid": "",
+                    "invalid": "<p><br></p>"
+                  },
+                  "solution": "2"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "e45eb37c-86b0-4643-ae61-39582618d6f1",
+                  "type": "text",
+                  "content": "<p>Thibault trouve que son fils utilise son smartphone trop tard les soirs de semaine. Il souhaite verrouiller l’appareil après 20h.</p>"
+                },
+                {
+                  "id": "a175d292-6210-4a62-9e0a-4caf588e7bee",
+                  "type": "qcu",
+                  "instruction": "<p>Quelle fonctionnalité du contrôle parental est adaptée ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>gestion du temps d'écran</p>",
+                      "feedback": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Bonne réponse ! <span aria-hidden=\"\\&quot;true\\&quot;\">🎉</span></span></p>\n<p>Avec la gestion du temps d’écran, il est possible de définir des plages horaires où l'utilisation du smartphone est bloquée.</p>"
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>filtrage des contenus</p>",
+                      "feedback": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Mauvaise réponse.</span></p>\n<p>Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple. Il ne permet pas de définir des temps de blocage du smartphone.</p>"
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>suivi de l'activité en ligne</p>",
+                      "feedback": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Mauvaise réponse.</span></p>\n<p>Le suivi de l’activité en ligne permet de suivre l’utilisation du smartphone. Il ne permet pas de définir des temps de blocage du smartphone.</p>"
+                    }
+                  ],
+                  "feedbacks": {
+                    "valid": "",
+                    "invalid": ""
+                  },
+                  "solution": "1"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "7196fed5-37d9-4e5c-8d47-4baf6702129b",
+                  "type": "text",
+                  "content": "<p>Nassira souhaite connaître le temps passé par son fils sur son réseau social favori.</p>"
+                },
+                {
+                  "id": "93effa58-b217-46c7-bb73-9b447a56902e",
+                  "type": "qcu",
+                  "instruction": "<p>Quelle fonctionnalité du contrôle parental est adaptée ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>gestion du temps d'écran</p>",
+                      "feedback": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Mauvaise réponse.</span></p>\n<p>La gestion du temps d’écran permet de mettre des limites de temps d’utilisation. Elle ne permet pas de connaître le temps d’utilisation d’une application.</p>"
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>filtrage des contenus</p>",
+                      "feedback": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Mauvaise réponse.</span></p>\n<p><span class=\"\\&quot;feedback__state\\&quot;\">Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple. Il ne permet pas de connaître le temps d’utilisation d’une application.</span></p>"
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>suivi de l'activité en ligne</p>",
+                      "feedback": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Bonne réponse ! <span aria-hidden=\"\\&quot;true\\&quot;\">🎉</span></span></p>\n<p>Le suivi de l’activité en ligne permet de consulter le temps passé par son enfant sur son smartphone ou sur une application en particulier.</p>"
+                    }
+                  ],
+                  "feedbacks": {
+                    "valid": "",
+                    "invalid": ""
+                  },
+                  "solution": "3"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ee9779af-508e-4fe1-88ad-acf2fa89dd45",
+      "type": "challenge",
+      "title": "Activation du contrôle parental sur un smartphone",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "37ff3330-b8df-47e0-80d2-e382671dc3dd",
+            "type": "embed",
+            "isCompletionRequired": true,
+            "title": "Simulateur de smartphone - activation du contrôle parental",
+            "url": "https://epreuves.pix.fr/temps_en_ligne/temps_en_ligne.html?mode=activer&lang=fr",
+            "instruction": "<p><strong>Activez le contrôle parental dans le simulateur de smartphone ci-dessous. </strong><span aria-hidden=\"\\&quot;true\\&quot;\">👇</span> <br><span aria-hidden=\"\\&quot;true\\&quot;\">🧘 </span> Ne vous inquiétez pas ! Les réglages de votre propre smartphone ne seront pas modifiés.</p>",
+            "height": 720
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "37ff3330-b8df-47e0-80d2-e382671dc3dd",
+            "type": "separator"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "37ff3330-b8df-47e0-80d2-e382671dc3dd",
+            "type": "text",
+            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les astuces ci-dessous&nbsp;:</p>\n<p><br></p>\n\n<p>\n<br></p><p><details>\n    <summary>Indice 1</summary>\n    <p>Le contrôle parental fait partie des paramètres de l’appareil à activer. ⚙️</p>\n</details>\n<details>\n    <summary>Indice 2</summary>\n    <p>Ici, le contrôle parental s’active sur l’appareil de l’enfant.</p>\n</details>\n<details>\n    <summary>Solution</summary>\n    <p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"326\" height=\"627\" src=\"https://i.imgur.com/xrC3Cvj.gif\"></iframe>\n</details>\n</p><p><br></p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e9b51c11-8a5e-42bb-9563-e06ffce4221e",
+      "type": "summary",
+      "title": "Récapitulatif",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "2b03d03b-39fd-433a-8895-1144aa69d766",
+            "type": "text",
+            "content": "<p>\n    <br>\n</p>\n<h3><span aria-hidden=\"\\&quot;true\\&quot;\">📌</span> Les 4 points à retenir :&nbsp;</h3>\n<p><br></p>\n<ul>\n    <li>Le contrôle parental est un <strong>outil numérique pour protéger et accompagner les enfants</strong> dans leurs usages numériques.<span aria-hidden=\"\\&quot;true\\&quot;\">🛡</span>️</li><br>\n    <li>Le contrôle parental a de nombreuses fonctionnalités :&nbsp; <strong>gestion du temps en ligne, de filtrage des contenus et de suivi des activités</strong>.&nbsp;<span aria-hidden=\"\\&quot;true\\&quot;\">⏳</span></li><br>\n    <li>Pour trouver les options de contrôle parental, rendez-vous dans les <strong>paramètres</strong>. <span aria-hidden=\"\\&quot;true\\&quot;\">⚙️</span>&nbsp;</li><br>\n    <li>Le contrôle parental ne remplace pas les <strong>échanges parents-enfants</strong>, il les complète !&nbsp;<span aria-hidden=\"\\&quot;true\\&quot;\">🗣</span>️</li><br>\n</ul>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "6e9c3dbf-34de-4652-b119-aa2a02772fdd",
+      "type": "discovery",
+      "title": "Où trouver du contrôle parental et l'activer ?",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "2589ce3b-fe26-42fc-aadc-eba80302f0da",
+            "type": "text",
+            "content": "<p>Après cette infographie, vous devrez sélectionner où l'on trouve du contrôle parental.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "9bc8b95e-c9ca-4836-9f59-2624aa4c37f8",
+            "type": "image",
+            "url": "https://i.imgur.com/gGd7D2F.png",
+            "alt": "",
+            "alternativeText": "<p>Infographie<strong> Où trouver du contrôle parental ?</strong> </p><ul><li>Sur les appareils :<ul><li>les appareils personnels (smarthpones, tablettes, ordinateurs, montres connectées, télévisions connectées)</li><li>les consoles de jeux (nintendo switch, xbox, playstation et d'autres)</li><li>les box internet</li></ul></li><li>En ligne :&nbsp;<ul><li>les réseaux sociaux (instagram, facebook, snapchat, tiktok, discord et d'autres)</li><li>les plateformes de jeux vidéo (electronic art, steam, roblox et d'autres)</li><li>les plateformes de vidéo à la demande (netflix, amazon prime, disney+ et d'autres)</li></ul></li><li>Pour l'activer, rendez vous sur <strong>paramètres </strong>ou <strong>compte</strong></li><li>Puis cherchez, selon : supervision parentale, contrôle parental, temps d'écran, bien être numérique, connexion famille, famille et contrôle parental, centre familial ou d'autres</li><br></ul>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "725a2e07-46dd-4fff-a41e-08656432b3e7",
+            "type": "text",
+            "content": "<p>En plus de son tout nouveau smartphone, Max utilise d'autres appareils numériques et plateformes en ligne.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "9f20ae6f-bb80-4d43-bce0-882b8e9726cd",
+            "type": "qcm",
+            "instruction": "<p>Parmi les appareils et les plateformes suivantes, sur lesquels Nina peut activer un contrôle parental pour accompagner Max ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Netflix</p>"
+              },
+              {
+                "id": "2",
+                "content": "<p>Roblox</p>"
+              },
+              {
+                "id": "3",
+                "content": "<p>la box internet</p>"
+              },
+              {
+                "id": "4",
+                "content": "<p>Whatsapp<br></p>"
+              },
+              {
+                "id": "5",
+                "content": "<p>la console Nintendo Switch</p>"
+              },
+              {
+                "id": "6",
+                "content": "<p>le téléphone fixe</p>"
+              }
+            ],
+            "feedbacks": {
+              "valid": "<p>Bonne réponse ! 🎉</p><p><br></p>",
+              "invalid": "<span class=\"\\&quot;feedback__state\\&quot;\">Mauvaise réponse.</span>"
+            },
+            "solutions": [
+              "1",
+              "2",
+              "3",
+              "5"
+            ]
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "693544c4-d186-45b2-8ade-525ad981787d",
+            "type": "text",
+            "content": "<p>💡<strong>Bon à savoir</strong> : Depuis juillet 2024,<strong> tous les nouveaux appareils connectés vendus en France doivent obligatoirement être équipés d’un contrôle parental</strong> pré-installé, activable facilement dès le premier démarrage.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dde349da-a5fc-41b5-8c47-9ec5a2780165",
+      "type": "activity",
+      "title": "Et vous ? ",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "6ce0eec7-8b4e-4b28-8805-ed83a2b8db68",
+            "type": "qcu",
+            "instruction": "<p>Avez-vous trouvé des options de contrôle parental sur vos appareils connectés ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>oui</p>",
+                "feedback": "<p>Et oui ! Il y a du contrôle parental dans quasiment tous les appareils connectés !</p>"
+              },
+              {
+                "id": "2",
+                "content": "<p>non</p>",
+                "feedback": "<p>Avez vous regardé dans les paramètres de chacun des appareils ?</p>"
+              }
+            ],
+            "feedbacks": {
+              "valid": "<p><br></p>",
+              "invalid": ""
+            },
+            "solution": "1"
+          }
+        }
+      ]
+    }
+  ]
+}
