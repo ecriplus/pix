@@ -22,8 +22,12 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
   describe('GET /api/organizations/{organizationId}/attestations/{attestationKey}', function () {
     it('should return 200 status code and right content type', async function () {
       // given
+      const attestationFeatureId = databaseBuilder.factory.buildFeature(
+        ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT,
+      ).id;
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildOrganizationFeature({ organizationId, featureId: attestationFeatureId });
       databaseBuilder.factory.buildMembership({
         userId,
         organizationId,

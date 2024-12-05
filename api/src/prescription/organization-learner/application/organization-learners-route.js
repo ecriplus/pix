@@ -45,6 +45,12 @@ const register = async function (server) {
             method: securityPreHandlers.checkUserBelongsToOrganization,
             assign: 'checkUserBelongsToOrganization',
           },
+          {
+            method: securityPreHandlers.makeCheckOrganizationHasFeature(
+              ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT.key,
+            ),
+            assign: 'makeCheckOrganizationHasFeature',
+          },
         ],
         validate: {
           params: Joi.object({
