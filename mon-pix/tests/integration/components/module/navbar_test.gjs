@@ -26,7 +26,7 @@ module('Integration | Component | Module | Navbar', function (hooks) {
       // then
       assert.ok(screen);
       assert.dom(screen.getByRole('navigation', { name: 'Étape 1 sur 3' })).exists();
-      assert.dom('.progress-gauge__bar').hasValue(0);
+      assert.dom('.progress-bar__bar').hasValue(0);
     });
   });
 
@@ -45,7 +45,7 @@ module('Integration | Component | Module | Navbar', function (hooks) {
       // then
       assert.ok(screen);
       assert.dom(screen.getByRole('navigation', { name: 'Étape 2 sur 3' })).exists();
-      assert.dom('.progress-gauge__bar').hasValue(50);
+      assert.dom('.progress-bar__bar').hasValue(50);
     });
   });
 
@@ -64,7 +64,7 @@ module('Integration | Component | Module | Navbar', function (hooks) {
       // then
       assert.ok(screen);
       assert.dom(screen.getByRole('navigation', { name: 'Étape 3 sur 3' })).exists();
-      assert.dom('.progress-gauge__bar').hasValue(100);
+      assert.dom('.progress-bar__bar').hasValue(100);
     });
   });
 
@@ -83,7 +83,7 @@ module('Integration | Component | Module | Navbar', function (hooks) {
       // then
       assert.ok(screen);
       assert.dom(screen.getByRole('navigation', { name: 'Étape 1 sur 1' })).exists();
-      assert.dom('.progress-gauge__bar').hasValue(100);
+      assert.dom('.progress-bar__bar').hasValue(100);
     });
   });
 

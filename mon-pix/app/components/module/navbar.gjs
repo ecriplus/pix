@@ -1,5 +1,5 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixProgressGauge from '@1024pix/pix-ui/components/pix-progress-gauge';
+import PixProgressBar from '@1024pix/pix-ui/components/pix-progress-bar';
 import PixSidebar from '@1024pix/pix-ui/components/pix-sidebar';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
@@ -65,7 +65,7 @@ export default class ModulixNavbar extends Component {
           {{t "pages.modulix.flashcards.navigation.currentStep" current=@currentStep total=@totalSteps}}
         </PixButton>
 
-        <PixProgressGauge @hidePercentage={{true}} @isDecorative={{true}} @value={{this.progressValue}} />
+        <PixProgressBar @hidePercentage={{true}} @isDecorative={{true}} @value={{this.progressValue}} />
       </div>
     </nav>
 
