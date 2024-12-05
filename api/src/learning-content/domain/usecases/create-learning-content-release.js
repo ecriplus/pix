@@ -1,22 +1,22 @@
-import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 
-export const createLearningContentRelease = withTransaction(
-  /** @param {import('./dependencies.js').Dependencies} */
-  async function createLearningContentRelease({
-    LearningContentCache,
-    frameworkRepository,
-    areaRepository,
-    competenceRepository,
-    thematicRepository,
-    tubeRepository,
-    skillRepository,
-    challengeRepository,
-    courseRepository,
-    tutorialRepository,
-    missionRepository,
-  }) {
-    const learningContent = await LearningContentCache.instance.update();
+/** @param {import('./dependencies.js').Dependencies} */
+export async function createLearningContentRelease({
+  LearningContentCache,
+  frameworkRepository,
+  areaRepository,
+  competenceRepository,
+  thematicRepository,
+  tubeRepository,
+  skillRepository,
+  challengeRepository,
+  courseRepository,
+  tutorialRepository,
+  missionRepository,
+}) {
+  const learningContent = await LearningContentCache.instance.update();
 
+  await DomainTransaction.execute(async () => {
     await frameworkRepository.saveMany(learningContent.frameworks);
     await areaRepository.saveMany(learningContent.areas);
     await competenceRepository.saveMany(learningContent.competences);
@@ -27,5 +27,16 @@ export const createLearningContentRelease = withTransaction(
     await courseRepository.saveMany(learningContent.courses);
     await tutorialRepository.saveMany(learningContent.tutorials);
     await missionRepository.saveMany(learningContent.missions);
-  },
-);
+  });
+
+  frameworkRepository.clearCache();
+  areaRepository.clearCache();
+  competenceRepository.clearCache();
+  thematicRepository.clearCache();
+  tubeRepository.clearCache();
+  skillRepository.clearCache();
+  challengeRepository.clearCache();
+  courseRepository.clearCache();
+  tutorialRepository.clearCache();
+  missionRepository.clearCache();
+}

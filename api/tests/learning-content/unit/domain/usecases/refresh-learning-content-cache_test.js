@@ -42,33 +42,43 @@ describe('Learning Content | Unit | Domain | Usecase | Refresh learning content 
 
       const frameworkRepository = {
         saveMany: sinon.stub(),
+        clearCache: sinon.stub(),
       };
       const areaRepository = {
         saveMany: sinon.stub(),
+        clearCache: sinon.stub(),
       };
       const competenceRepository = {
         saveMany: sinon.stub(),
+        clearCache: sinon.stub(),
       };
       const thematicRepository = {
         saveMany: sinon.stub(),
+        clearCache: sinon.stub(),
       };
       const tubeRepository = {
         saveMany: sinon.stub(),
+        clearCache: sinon.stub(),
       };
       const skillRepository = {
         saveMany: sinon.stub(),
+        clearCache: sinon.stub(),
       };
       const challengeRepository = {
         saveMany: sinon.stub(),
+        clearCache: sinon.stub(),
       };
       const courseRepository = {
         saveMany: sinon.stub(),
+        clearCache: sinon.stub(),
       };
       const tutorialRepository = {
         saveMany: sinon.stub(),
+        clearCache: sinon.stub(),
       };
       const missionRepository = {
         saveMany: sinon.stub(),
+        clearCache: sinon.stub(),
       };
 
       // when
@@ -88,6 +98,7 @@ describe('Learning Content | Unit | Domain | Usecase | Refresh learning content 
 
       // then
       expect(LearningContentCache.instance.reset).to.have.been.calledOnce;
+
       expect(frameworkRepository.saveMany).to.have.been.calledOnceWithExactly(frameworks);
       expect(areaRepository.saveMany).to.have.been.calledOnceWithExactly(areas);
       expect(competenceRepository.saveMany).to.have.been.calledOnceWithExactly(competences);
@@ -98,6 +109,17 @@ describe('Learning Content | Unit | Domain | Usecase | Refresh learning content 
       expect(courseRepository.saveMany).to.have.been.calledOnceWithExactly(courses);
       expect(tutorialRepository.saveMany).to.have.been.calledOnceWithExactly(tutorials);
       expect(missionRepository.saveMany).to.have.been.calledOnceWithExactly(missions);
+
+      expect(frameworkRepository.clearCache).to.have.been.calledOnceWithExactly();
+      expect(areaRepository.clearCache).to.have.been.calledOnceWithExactly();
+      expect(competenceRepository.clearCache).to.have.been.calledOnceWithExactly();
+      expect(thematicRepository.clearCache).to.have.been.calledOnceWithExactly();
+      expect(tubeRepository.clearCache).to.have.been.calledOnceWithExactly();
+      expect(skillRepository.clearCache).to.have.been.calledOnceWithExactly();
+      expect(challengeRepository.clearCache).to.have.been.calledOnceWithExactly();
+      expect(courseRepository.clearCache).to.have.been.calledOnceWithExactly();
+      expect(tutorialRepository.clearCache).to.have.been.calledOnceWithExactly();
+      expect(missionRepository.clearCache).to.have.been.calledOnceWithExactly();
     });
   });
 });
