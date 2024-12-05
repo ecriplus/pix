@@ -1670,26 +1670,6 @@
       "username": "Identifiant"
     },
     "password-reset-demand": {
-      "actions": {
-        "back-home": "Retour à l'accueil",
-        "back-sign-in": "Retour à la page de connexion",
-        "reset": "Réinitialiser mon mot de passe"
-      },
-      "error": {
-        "message": "Cette adresse e-mail ne correspond à aucun compte"
-      },
-      "fields": {
-        "email": {
-          "label": "Adresse e-mail"
-        }
-      },
-      "page-title": "Oubli de mot de passe",
-      "subtitle": "Entrez votre adresse e-mail ci-dessous, et c'est repartix",
-      "succeed": {
-        "help": "Si vous ne recevez pas cet e-mail, vérifiez vos courriers indésirables.",
-        "instructions": "Un e-mail contenant la démarche à suivre afin de réinitialiser votre mot de passe\n vous a été envoyé à l’adresse e-mail {email}.",
-        "subtitle": "Demande de réinitialisation de mot de passe"
-      },
       "title": "Mot de passe oublié"
     },
     "profile": {
@@ -1743,23 +1723,10 @@
       "title": "Profil déjà envoyé"
     },
     "reset-password": {
-      "actions": {
-        "sign-in": "Connectez-vous",
-        "submit": "Envoyer"
-      },
       "error": {
-        "expired-demand": "Nous sommes désolés, mais votre demande de réinitialisation de mot de passe a déjà été utilisée ou est expirée. Merci de recommencer.",
-        "forbidden": "Une erreur est survenue, veuillez contacter le support.",
-        "wrong-format": "Votre mot de passe doit contenir 8 caractères au minimum et comporter au moins une majuscule, une minuscule et un chiffre."
-      },
-      "fields": {
-        "password": {
-          "label": "Mot de passe"
-        }
+        "expired-demand": "Nous sommes désolés, mais votre demande de réinitialisation de mot de passe a déjà été utilisée ou est expirée. Merci de recommencer."
       },
       "first-title": "Réinitialisation du mot de passe",
-      "instruction": "Saisissez votre nouveau mot de passe",
-      "succeed": "Votre mot de passe a été modifié avec succès.",
       "title": "Changer mon mot de passe"
     },
     "result-item": {
@@ -1796,9 +1763,6 @@
       "actions": {
         "submit": "Je me connecte"
       },
-      "error": {
-        "message": "L'adresse e-mail ou l'identifiant et/ou le mot de passe saisis sont incorrects"
-      },
       "fields": {
         "legend": "Informations nécessaires pour se connecter.",
         "login": {
@@ -1811,23 +1775,6 @@
       },
       "first-title": "Connectez-vous",
       "forgotten-password": "Mot de passe oublié ?",
-      "fwb": {
-        "link": {
-          "img": "FWB connect"
-        },
-        "title": "Se connecter via la FWB"
-      },
-      "or": "OU",
-      "pole-emploi": {
-        "link": {
-          "img": "pôle Emploi connect"
-        },
-        "title": "Se connecter avec pôle emploi"
-      },
-      "subtitle": {
-        "link": "Créez un compte",
-        "text": "Vous n'avez pas encore de compte Pix ?"
-      },
       "title": "Connexion"
     },
     "sign-up": {
@@ -1841,30 +1788,10 @@
       },
       "fields": {
         "email": {
-          "error": "Votre adresse e-mail n’est pas valide.",
-          "help": "(ex: nom@exemple.fr)",
-          "label": "Adresse e-mail"
-        },
-        "firstname": {
-          "error": "Votre prénom n’est pas renseigné.",
-          "label": "Prénom"
-        },
-        "lastname": {
-          "error": "Votre nom n’est pas renseigné.",
-          "label": "Nom"
-        },
-        "legend": "Information nécessaire pour l'inscription.",
-        "password": {
-          "error": "Votre mot de passe doit contenir 8 caractères au minimum et comporter au moins une majuscule, une minuscule et un chiffre.",
-          "help": "(8 caractères minimum, dont une majuscule, une minuscule et un chiffre)",
-          "label": "Mot de passe"
+          "help": "(ex: nom@exemple.fr)"
         }
       },
       "first-title": "Inscrivez-vous",
-      "instructions": "Les champs marqués de '<abbr title=\"obligatoire\" class=\"mandatory-mark\">'*'</abbr>' sont obligatoires",
-      "subtitle": {
-        "link": "connectez-vous à votre compte"
-      },
       "title": "Inscription"
     },
     "sitemap": {

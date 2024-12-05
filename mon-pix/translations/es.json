@@ -161,7 +161,7 @@
       },
       "sign-up-form": {
         "errors": {
-          "invalid-or-already-used-email" : "Invalid or already used e-mail address"
+          "invalid-or-already-used-email": "Invalid or already used e-mail address"
         }
       },
       "new-password-input": {
@@ -374,7 +374,7 @@
                 "new-email": ", de lo contrario, introduce una nueva."
               },
               "empty-email": "El campo de dirección de correo electrónico es obligatorio.",
-              "invalid-or-already-used-email" : "Invalid or already used e-mail address",
+              "invalid-or-already-used-email": "Invalid or already used e-mail address",
               "new-backup-email": "Introduce una dirección de correo electrónico válida para restablecer tu cuenta",
               "new-email-already-exist": "Esta dirección de correo electrónico ya se está utilizando",
               "wrong-email-format": "Tu dirección de correo electrónico no es válida."
@@ -1671,26 +1671,6 @@
       "username": "Nombre de usuario"
     },
     "password-reset-demand": {
-      "actions": {
-        "back-home": "Volver a la página de inicio",
-        "back-sign-in": "Volver a la página de conexión",
-        "reset": "Restablecer mi contraseña"
-      },
-      "error": {
-        "message": "Esta dirección de correo electrónico no corresponde a ninguna cuenta"
-      },
-      "fields": {
-        "email": {
-          "label": "Dirección de correo electrónico"
-        }
-      },
-      "page-title": "Contraseña olvidada",
-      "subtitle": "Introduce tu dirección de correo electrónico a continuación y ¡a por ello!",
-      "succeed": {
-        "help": "Si no recibes este correo electrónico, comprueba la carpeta de correo no deseado.",
-        "instructions": "Te hemos enviado un correo electrónico con instrucciones para restablecer tu contraseña a la dirección {email}.",
-        "subtitle": "Solicitud de restablecimiento de contraseña"
-      },
       "title": "¿Olvidaste tu contraseña?"
     },
     "profile-already-shared": {
@@ -1744,23 +1724,10 @@
       }
     },
     "reset-password": {
-      "actions": {
-        "sign-in": "Conéctate",
-        "submit": "Enviar"
-      },
       "error": {
-        "expired-demand": "Lo sentimos, pero tu solicitud de restablecimiento de contraseña ya ha sido utilizada o ha caducado. Por favor, vuelve a intentarlo.",
-        "forbidden": "Se ha producido un error, ponte en contacto con el servicio de asistencia.",
-        "wrong-format": "Tu contraseña debe tener al menos 8 caracteres y contener como mínimo una letra mayúscula, una letra minúscula y un dígito."
-      },
-      "fields": {
-        "password": {
-          "label": "Contraseña"
-        }
+        "expired-demand": "Lo sentimos, pero tu solicitud de restablecimiento de contraseña ya ha sido utilizada o ha caducado. Por favor, vuelve a intentarlo."
       },
       "first-title": "Restablecer contraseña",
-      "instruction": "Introduce tu nueva contraseña",
-      "succeed": "Tu contraseña ha sido cambiada con éxito.",
       "title": "Cambiar mi contraseña"
     },
     "result-item": {
@@ -1797,9 +1764,6 @@
       "actions": {
         "submit": "Me conecto"
       },
-      "error": {
-        "message": "La dirección de correo electrónico o el nombre de usuario y/o la contraseña introducidos son incorrectos"
-      },
       "fields": {
         "legend": "Información necesaria para conectarse.",
         "login": {
@@ -1812,23 +1776,6 @@
       },
       "first-title": "Conéctate",
       "forgotten-password": "¿Olvidaste tu contraseña?",
-      "fwb": {
-        "link": {
-          "img": "FWB connect"
-        },
-        "title": "Conectarse a través de la FWB"
-      },
-      "or": "O",
-      "pole-emploi": {
-        "link": {
-          "img": "Pôle Emploi connect"
-        },
-        "title": "Conectarse con Pôle Emploi"
-      },
-      "subtitle": {
-        "link": "Crea una cuenta",
-        "text": "¿Aún no tienes una cuenta Pix?"
-      },
       "title": "Conexión"
     },
     "sign-up": {
@@ -1842,30 +1789,10 @@
       },
       "fields": {
         "email": {
-          "error": "Tu dirección de correo electrónico no es válida.",
-          "help": "(ej. nombre@ejemplo.fr)",
-          "label": "Dirección de correo electrónico"
-        },
-        "firstname": {
-          "error": "No has indicado tu nombre.",
-          "label": "Nombre"
-        },
-        "lastname": {
-          "error": "No has indicado tus apellidos.",
-          "label": "Apellidos"
-        },
-        "legend": "Información necesaria para la inscripción.",
-        "password": {
-          "error": "Tu contraseña debe tener al menos 8 caracteres y contener como mínimo una letra mayúscula, una letra minúscula y un dígito.",
-          "help": "(mínimo 8 caracteres, incluyendo una mayúscula, una minúscula y un dígito)",
-          "label": "Contraseña"
+          "help": "(ej. nombre@ejemplo.fr)"
         }
       },
       "first-title": "Inscríbete",
-      "instructions": "Los campos marcados con '<abbr title=\"obligatorio\" class=\"mandatory-mark\">'*'</abbr>' son obligatorios",
-      "subtitle": {
-        "link": "conéctate a tu cuenta"
-      },
       "title": "Inscripción"
     },
     "sitemap": {
@@ -2086,7 +2013,7 @@
           "errors": {
             "empty-password": "Tu contraseña no puede estar vacía.",
             "invalid-email": "Tu dirección de correo electrónico no es válida.",
-            "invalid-or-already-used-email" : "Invalid or already used e-mail address",
+            "invalid-or-already-used-email": "Invalid or already used e-mail address",
             "invalid-password": "La contraseña que has introducido no es válida.",
             "new-email-already-exist": "Esta dirección de correo electrónico ya se está utilizando."
           },

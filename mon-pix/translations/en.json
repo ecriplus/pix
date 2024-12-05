@@ -1669,26 +1669,6 @@
       "username": "Username"
     },
     "password-reset-demand": {
-      "actions": {
-        "back-home": "Return to homepage",
-        "back-sign-in": "Return to log in page",
-        "reset": "Reset my password"
-      },
-      "error": {
-        "message": "The email address entered does not match any Pix account"
-      },
-      "fields": {
-        "email": {
-          "label": "Email address"
-        }
-      },
-      "page-title": "Password forgotten",
-      "subtitle": "Enter your email address below",
-      "succeed": {
-        "help": "If you do not receive this email, please check your spam folder.",
-        "instructions": "An email explaining how to reset your password\n has been sent to the email address {email}.",
-        "subtitle": "Password reset request"
-      },
       "title": "Forgotten password"
     },
     "profile": {
@@ -1742,23 +1722,10 @@
       "title": "Profile already submitted"
     },
     "reset-password": {
-      "actions": {
-        "sign-in": "Log in",
-        "submit": "Send"
-      },
       "error": {
-        "expired-demand": "We’re sorry, but your request to reset your password has already been used or has expired. Please start again.",
-        "forbidden": "An error occurred, please contact the support.",
-        "wrong-format": "Your password must contain at least 8 characters and include at least one uppercase letter, one lowercase letter and one number."
-      },
-      "fields": {
-        "password": {
-          "label": "Password"
-        }
+        "expired-demand": "We’re sorry, but your request to reset your password has already been used or has expired. Please start again."
       },
       "first-title": "Resetting the password",
-      "instruction": "Enter your new password",
-      "succeed": "Your password has been changed successfully.",
       "title": "Change my password"
     },
     "result-item": {
@@ -1795,9 +1762,6 @@
       "actions": {
         "submit": "Log in"
       },
-      "error": {
-        "message": "There was an error in the email address or username/password entered."
-      },
       "fields": {
         "legend": "Information required for sign in.",
         "login": {
@@ -1810,23 +1774,6 @@
       },
       "first-title": "Log in",
       "forgotten-password": "Forgot your password?",
-      "fwb": {
-        "link": {
-          "img": "FWB connect"
-        },
-        "title": "Log in via the FWB"
-      },
-      "or": "OR",
-      "pole-emploi": {
-        "link": {
-          "img": "pôle emploi connect"
-        },
-        "title": "Log in via Pôle Emploi"
-      },
-      "subtitle": {
-        "link": "Create an account",
-        "text": "Don’t have a Pix account yet?"
-      },
       "title": "Log in"
     },
     "sign-up": {
@@ -1840,30 +1787,10 @@
       },
       "fields": {
         "email": {
-          "error": "Your email address is invalid.",
-          "help": "(e.g. name@example.org)",
-          "label": "Email address"
-        },
-        "firstname": {
-          "error": "You have not entered your first name.",
-          "label": "First name"
-        },
-        "lastname": {
-          "error": "You have not entered your last name.",
-          "label": "Last name"
-        },
-        "legend": "Information required for sign up.",
-        "password": {
-          "error": "Your password must contain at least 8 characters and include at least one uppercase letter, one lowercase letter and one number.",
-          "help": "(at least 8 characters, including one uppercase letter, one lowercase letter and one number)",
-          "label": "Password"
+          "help": "(e.g. name@example.org)"
         }
       },
       "first-title": "Sign up",
-      "instructions": "The fields marked '<abbr title=\"required\" class=\"mandatory-mark\">'*'</abbr>' are required",
-      "subtitle": {
-        "link": "log into your account"
-      },
       "title": "Sign up"
     },
     "sitemap": {

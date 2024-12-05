@@ -25,7 +25,6 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-async-quest-rewarding-calculation-enabled': false,
             'is-certification-token-scope-enabled': false,
             'is-need-to-adjust-certification-accessibility-enabled': false,
-            'is-new-authentication-design-enabled': false,
             'is-pix1d-enabled': true,
             'is-pix-companion-enabled': false,
             'is-quest-enabled': false,
