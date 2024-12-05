@@ -389,6 +389,21 @@
         "authentication-method": {
           "should-change-password-status": "Mot de passe temporaire :"
         },
+        "cgu": {
+          "title": "CGU",
+          "validation": {
+            "domain": {
+              "pix-app": "CGU Pix App validé :",
+              "pix-certif": "CGU Pix Certif validé :",
+              "pix-orga": "CGU Pix Orga validé :"
+            },
+            "status": {
+              "non-validated": "NON",
+              "validated": "OUI",
+              "validated-with-date": "OUI, le {formattedDate}"
+            }
+          }
+        },
         "copied": "Copié !"
       }
     }
@@ -746,6 +761,8 @@
       "navbar": {
         "authentication-methods": "Méthodes de connexion",
         "certification-centers-list": "Pix Certif",
+        "cgu": "CGU",
+        "cgu-aria-label" : "Conditions générales d'utilisation",
         "details": "Informations prescrit",
         "organizations-list": "Pix Orga",
         "participations-list": "Participations",
@@ -763,7 +780,7 @@
       }
     },
     "users-list": {
-      "query":  {
+      "query": {
         "contains": "Contient",
         "exact": "Exacte"
       }
