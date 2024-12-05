@@ -453,6 +453,34 @@ module('Unit | Service | current-user', function (hooks) {
         assert.false(currentUserService.hasLearnerImportFeature);
       });
     });
+
+    module('#canAccessStatisticsPage', function () {
+      test('should return true if user is admin and organization has feature activated', function (assert) {
+        currentUserService.isAdminInOrganization = true;
+        currentUserService.prescriber = {
+          hasCoverRateFeature: true,
+        };
+
+        assert.true(currentUserService.canAccessStatisticsPage);
+      });
+
+      test('should return false if user is admin and organization does not have feature activated', function (assert) {
+        currentUserService.isAdminInOrganization = true;
+        currentUserService.prescriber = {
+          hasCoverRateFeature: false,
+        };
+
+        assert.false(currentUserService.canAccessStatisticsPage);
+      });
+      test('should return false if user is not admin', function (assert) {
+        currentUserService.isAdminInOrganization = false;
+        currentUserService.prescriber = {
+          hasCoverRateFeature: true,
+        };
+
+        assert.false(currentUserService.canAccessStatisticsPage);
+      });
+    });
   });
 
   module('user is not authenticated', function () {

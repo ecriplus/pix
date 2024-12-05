@@ -14,6 +14,48 @@ export default class CurrentUserService extends Service {
   @tracked isAgriculture;
   @tracked isGarAuthenticationMethod;
 
+  get homePage() {
+    if (this.canAccessMissionsPage) {
+      return 'authenticated.missions';
+    }
+    return 'authenticated.campaigns';
+  }
+
+  get canAccessImportPage() {
+    return Boolean(
+      (this.isSCOManagingStudents || this.isSUPManagingStudents || this.hasLearnerImportFeature) &&
+        this.isAdminInOrganization,
+    );
+  }
+
+  get canAccessAttestationsPage() {
+    return this.prescriber.attestationsManagement;
+  }
+
+  get canAccessPlacesPage() {
+    return this.isAdminInOrganization && this.prescriber.placesManagement;
+  }
+
+  get canAccessMissionsPage() {
+    return this.prescriber.missionsManagement;
+  }
+
+  get canAccessCampaignsPage() {
+    return !this.prescriber.missionsManagement;
+  }
+
+  get hasLearnerImportFeature() {
+    return this.prescriber.hasOrganizationLearnerImport;
+  }
+
+  get canActivateOralizationLearner() {
+    return this.prescriber.hasOralizationFeature;
+  }
+
+  get canAccessStatisticsPage() {
+    return this.isAdminInOrganization && this.prescriber.hasCoverRateFeature;
+  }
+
   async load() {
     if (this.session.isAuthenticated) {
       try {
@@ -56,43 +98,5 @@ export default class CurrentUserService extends Service {
     this.isGarAuthenticationMethod = organization.identityProviderForCampaigns === 'GAR';
     this.isAgriculture = organization.isAgriculture;
     this.organization = organization;
-  }
-
-  get homePage() {
-    if (this.canAccessMissionsPage) {
-      return 'authenticated.missions';
-    }
-    return 'authenticated.campaigns';
-  }
-
-  get canAccessImportPage() {
-    return Boolean(
-      (this.isSCOManagingStudents || this.isSUPManagingStudents || this.hasLearnerImportFeature) &&
-        this.isAdminInOrganization,
-    );
-  }
-
-  get canAccessAttestationsPage() {
-    return this.prescriber.attestationsManagement;
-  }
-
-  get canAccessPlacesPage() {
-    return this.isAdminInOrganization && this.prescriber.placesManagement;
-  }
-
-  get canAccessMissionsPage() {
-    return this.prescriber.missionsManagement;
-  }
-
-  get canAccessCampaignsPage() {
-    return !this.prescriber.missionsManagement;
-  }
-
-  get hasLearnerImportFeature() {
-    return this.prescriber.hasOrganizationLearnerImport;
-  }
-
-  get canActivateOralizationLearner() {
-    return this.prescriber.hasOralizationFeature;
   }
 }

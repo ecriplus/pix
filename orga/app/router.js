@@ -87,6 +87,7 @@ Router.map(function () {
         this.route('results');
       });
     });
+    this.route('statistics', { path: '/statistiques' });
   });
 
   this.route('logout');
