@@ -13,6 +13,16 @@ describe('Unit | Domain | Models | ParticipationForCampaignManagement', function
       // then
       expect(participationForCampaignManagement.userFullName).to.equal('Jacques Ouche');
     });
+    it('is empty if no userFirstName or userLastname', function () {
+      // when
+      const participationForCampaignManagement = new ParticipationForCampaignManagement({
+        userFirstName: '',
+        userLastName: '',
+      });
+
+      // then
+      expect(participationForCampaignManagement.userFullName).to.equal('(Anonymised)');
+    });
   });
 
   context('#deletedByFullName', function () {
