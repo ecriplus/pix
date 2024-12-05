@@ -1,9 +1,16 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 
 export default class SidebarMenu extends Component {
   @service currentUser;
   @service url;
+
+  @tracked canShowCredit;
+
+  handleCanShowCredit = (value) => {
+    this.canShowCredit = value;
+  };
 
   get redirectionRoute() {
     if (this.shouldDisplayMissionsEntry) {
@@ -39,6 +46,10 @@ export default class SidebarMenu extends Component {
 
   get shouldDisplayStatisticsEntry() {
     return this.currentUser.canAccessStatisticsPage;
+  }
+
+  get shouldDisplaySeparator() {
+    return this.shouldDisplayMissionsEntry || this.shouldDisplayPlacesEntry || this.canShowCredit;
   }
 
   get organizationLearnersList() {

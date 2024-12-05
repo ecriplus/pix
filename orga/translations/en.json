@@ -354,6 +354,7 @@
       "campaigns": "Campaigns",
       "certifications": "Certifications",
       "documentation": "Documentation",
+      "home": "Home",
       "missions": "Missions",
       "organization-participants": "Participants",
       "places": "Seats",
@@ -382,7 +383,7 @@
       "aria-label": "Team members navigation"
     },
     "user-logged-menu": {
-      "button": "Open user menu",
+      "button": "Change organization",
       "logout": "Log out"
     }
   },

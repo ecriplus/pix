@@ -1,18 +1,11 @@
-<div class="app">
-  <Layout::Sidebar />
+<PixAppLayout @variant="orga" class="app">
+  <Layout::Sidebar @placesCount={{@model.available}} @onChangeOrganization={{this.onChangeOrganization}} />
 
-  <div class="main-content">
-    <header>
-      <Layout::Topbar @placesCount={{@model.available}} @onChangeOrganization={{this.onChangeOrganization}} />
-    </header>
-
-    <main class="main-content__body page">
-      <Banner::TopBanners />
-      {{outlet}}
-    </main>
-
+  <main class="main-content__body page">
+    <Banner::TopBanners />
+    {{outlet}}
     <Layout::Footer />
-  </div>
+  </main>
 
-  <NotificationContainer @position="bottom-right" />
-</div>
+</PixAppLayout>
+<NotificationContainer @position="bottom-right" />

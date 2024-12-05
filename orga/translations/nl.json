@@ -354,6 +354,7 @@
       "campaigns": "Campagnes",
       "certifications": "Certificeringen",
       "documentation": "Documentatie",
+      "home": "Home",
       "missions": "Opdrachten",
       "organization-participants": "Deelnemers",
       "places": "Plaatsen",
@@ -382,7 +383,7 @@
       "aria-label": "Navigeren door het gedeelte Team"
     },
     "user-logged-menu": {
-      "button": "Gebruikersmenu openen",
+      "button": "Veranderende organisatie",
       "logout": "Uitloggen"
     }
   },

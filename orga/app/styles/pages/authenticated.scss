@@ -1,34 +1,6 @@
-.app {
-  display: flex;
-  align-items: stretch;
-  min-height: 100vh;
-}
-
-.main-content {
-  display: flex;
-  flex-direction: column;
-
-  // Minus 280px because it corresponds to the sidebar's width
-  width: calc(100% - 280px);
-  background-color: var(--pix-neutral-20);
-
-  &__body {
-    flex: 1 0 auto;
-  }
-}
-
 .sticker-banner {
   position: sticky;
   top: 0;
   z-index: 200;
 }
 
-@include device-is('mobile') {
-  .app {
-    flex-direction: column;
-  }
-
-  .main-content {
-    width: 100%;
-  }
-}

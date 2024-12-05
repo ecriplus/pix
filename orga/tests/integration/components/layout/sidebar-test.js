@@ -52,7 +52,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       assert.dom(logoLink).hasAttribute('href', '/campagnes');
     });
 
-    test('should display Campagne and Équipe menu for all organisation members', async function (assert) {
+    test('should display Campagne, Équipe, Se déconnecter in menu for all organisation members', async function (assert) {
       class CurrentUserStub extends Service {
         organization = Object.create({ id: '1' });
         canAccessCampaignsPage = true;
@@ -65,6 +65,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
 
       assert.dom(screen.getByText('Campagnes')).exists();
       assert.dom(screen.getByText('Équipe')).exists();
+      assert.dom(screen.getByText('Se déconnecter')).exists();
     });
 
     test('should display Documentation menu when the organization has a documentation url', async function (assert) {

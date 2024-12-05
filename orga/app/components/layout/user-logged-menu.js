@@ -1,14 +1,11 @@
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 
 export default class UserLoggedMenu extends Component {
   @service currentUser;
   @service router;
   @service store;
-
-  @tracked isMenuOpen = false;
 
   get organizationNameAndExternalId() {
     const organization = this.currentUser.organization;
@@ -25,19 +22,15 @@ export default class UserLoggedMenu extends Component {
     }
     return memberships
       .slice()
-      .map((membership) => membership.organization)
-      .filter((organization) => organization.get('id') !== this.currentUser.organization.id)
-      .sort((a, b) => a.get('name').localeCompare(b.get('name')));
+      .map((membership) => ({
+        label: `${membership.organization.get('name')} (${membership.organization.get('externalId')})`,
+        value: membership.organization.get('id'),
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label));
   }
 
-  @action
-  toggleUserMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-
-  @action
-  closeMenu() {
-    this.isMenuOpen = false;
+  get belongsToSeveralOrganizations() {
+    return this.eligibleOrganizations.length > 1;
   }
 
   @action
@@ -46,7 +39,7 @@ export default class UserLoggedMenu extends Component {
     const userOrgaSettingsId = prescriber.userOrgaSettings.get('id');
 
     const userOrgaSettings = await this.store.peekRecord('user-orga-setting', userOrgaSettingsId);
-    const selectedOrganization = await this.store.peekRecord('organization', organization.get('id'));
+    const selectedOrganization = await this.store.peekRecord('organization', organization.value);
 
     userOrgaSettings.organization = selectedOrganization;
     await userOrgaSettings.save({ adapterOptions: { userId: prescriber.id } });
@@ -57,7 +50,5 @@ export default class UserLoggedMenu extends Component {
 
     await this.currentUser.load();
     this.args.onChangeOrganization();
-
-    this.closeMenu();
   }
 }

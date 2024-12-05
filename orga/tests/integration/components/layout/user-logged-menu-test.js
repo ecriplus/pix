@@ -8,95 +8,131 @@ import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | Layout::UserLoggedMenu', function (hooks) {
-  setupIntlRenderingTest(hooks);
+module('Integration | Component | Layout::UserLoggedMenu', function () {
+  module('When user belongs to several organizations', function (hooks) {
+    setupIntlRenderingTest(hooks);
 
-  let prescriber, organization, organization2, organization3, loadStub;
+    let prescriber, organization, organization2, organization3, loadStub;
 
-  hooks.beforeEach(function () {
-    organization = Object.create({ id: '1', name: 'Main organization', externalId: 'EXT' });
-    prescriber = Object.create({
-      firstName: 'givenFirstName',
-      lastName: 'givenLastName',
-      userOrgaSettings: Object.create({
-        id: 234,
-      }),
-    });
-    organization2 = Object.create({ id: '2', name: 'Organization 2', externalId: 'EXT2' });
-    organization3 = Object.create({ id: '3', name: 'Organization 3', externalId: 'EXT3' });
-    loadStub = sinon.stub();
+    hooks.beforeEach(function () {
+      organization = Object.create({ id: '1', name: 'Main organization', externalId: 'EXT' });
+      prescriber = Object.create({
+        firstName: 'givenFirstName',
+        lastName: 'givenLastName',
+        userOrgaSettings: Object.create({
+          id: 234,
+        }),
+      });
+      organization2 = Object.create({ id: '2', name: 'Organization 2', externalId: 'EXT2' });
+      organization3 = Object.create({ id: '3', name: 'Organization 3', externalId: 'EXT3' });
+      loadStub = sinon.stub();
 
-    class CurrentUserStub extends Service {
-      organization = organization;
-      prescriber = prescriber;
-      memberships = [
-        Object.create({ organization }),
-        Object.create({ organization: organization2 }),
-        Object.create({ organization: organization3 }),
-      ];
-      load = loadStub;
-    }
-    this.owner.register('service:current-user', CurrentUserStub);
-  });
-
-  test("should display user's firstName and lastName", async function (assert) {
-    // when
-    const screen = await render(hbs`<Layout::UserLoggedMenu />`);
-
-    // then
-    assert.ok(screen.getByText(`${prescriber.firstName} ${prescriber.lastName}`));
-  });
-
-  test('should display the user current organization name and externalId', async function (assert) {
-    // when
-    const screen = await render(hbs`<Layout::UserLoggedMenu />`);
-
-    // then
-    assert.ok(screen.getByText(`${organization.name} (${organization.externalId})`));
-  });
-
-  test('should display the disconnect link when menu is open', async function (assert) {
-    // when
-    const screen = await render(hbs`<Layout::UserLoggedMenu />`);
-    await clickByName('Ouvrir le menu utilisateur');
-
-    // then
-    assert.ok(screen.getByRole('link', { name: 'Se déconnecter' }));
-  });
-
-  test('should display the organizations name and externalId when menu is open', async function (assert) {
-    // when
-    const screen = await render(hbs`<Layout::UserLoggedMenu />`);
-    await clickByName('Ouvrir le menu utilisateur');
-
-    // then
-    assert.ok(screen.getByRole('button', { name: `${organization2.name} (${organization2.externalId})` }));
-    assert.ok(screen.getByRole('button', { name: `${organization3.name} (${organization3.externalId})` }));
-  });
-
-  test('should redirect to authenticated route before reload the current user', async function (assert) {
-    const replaceWithStub = sinon.stub();
-    const onChangeOrganization = sinon.stub();
-
-    class RouterStub extends Service {
-      replaceWith = replaceWithStub;
-      currentRoute = { queryParams: [] };
-    }
-
-    class StoreStub extends Service {
-      peekRecord() {
-        return { save() {} };
+      class CurrentUserStub extends Service {
+        organization = organization;
+        prescriber = prescriber;
+        memberships = [
+          Object.create({ organization }),
+          Object.create({ organization: organization2 }),
+          Object.create({ organization: organization3 }),
+        ];
+        load = loadStub;
       }
-    }
-    this.set('onChangeOrganization', onChangeOrganization);
-    this.owner.register('service:router', RouterStub);
-    this.owner.register('service:store', StoreStub);
+      this.owner.register('service:current-user', CurrentUserStub);
+    });
 
-    const screen = await render(hbs`<Layout::UserLoggedMenu @onChangeOrganization={{this.onChangeOrganization}} />`);
-    await clickByName('Ouvrir le menu utilisateur');
-    await click(screen.getByRole('button', { name: `${organization2.name} (${organization2.externalId})` }));
+    test("should display user's firstName and lastName", async function (assert) {
+      // when
+      const screen = await render(hbs`<Layout::UserLoggedMenu />`);
 
-    sinon.assert.callOrder(replaceWithStub, loadStub);
-    assert.ok(onChangeOrganization.calledOnce);
+      // then
+      assert.ok(screen.getByText(`${prescriber.firstName} ${prescriber.lastName}`));
+    });
+
+    test('should display the user current organization name and externalId', async function (assert) {
+      // when
+      const screen = await render(hbs`<Layout::UserLoggedMenu />`);
+      const currentOrganizationText = screen.getByText(`${organization.name} (${organization.externalId})`, {
+        selector: 'p',
+      });
+
+      // then
+      assert.ok(currentOrganizationText);
+    });
+
+    test('should display the disconnect link when menu is open', async function (assert) {
+      // when
+      const screen = await render(hbs`<Layout::UserLoggedMenu />`);
+      await clickByName("Changer d'organisation");
+
+      // then
+      assert.ok(screen.getByRole('link', { name: 'Se déconnecter' }));
+    });
+
+    test('should display the organizations name when menu is open', async function (assert) {
+      // when
+      const screen = await render(hbs`<Layout::UserLoggedMenu />`);
+      await clickByName("Changer d'organisation");
+
+      // then
+      assert.ok(await screen.findByRole('option', { name: `${organization2.name} (${organization2.externalId})` }));
+      assert.ok(await screen.findByRole('option', { name: `${organization3.name} (${organization3.externalId})` }));
+    });
+
+    test('should redirect to authenticated route before reload the current user', async function (assert) {
+      const replaceWithStub = sinon.stub();
+      const onChangeOrganization = sinon.stub();
+
+      class RouterStub extends Service {
+        replaceWith = replaceWithStub;
+        currentRoute = { queryParams: [] };
+      }
+
+      class StoreStub extends Service {
+        peekRecord() {
+          return { save() {} };
+        }
+      }
+      this.set('onChangeOrganization', onChangeOrganization);
+      this.owner.register('service:router', RouterStub);
+      this.owner.register('service:store', StoreStub);
+
+      const screen = await render(hbs`<Layout::UserLoggedMenu @onChangeOrganization={{this.onChangeOrganization}} />`);
+      await clickByName("Changer d'organisation");
+      await click(await screen.findByRole('option', { name: `${organization2.name} (${organization2.externalId})` }));
+
+      sinon.assert.callOrder(replaceWithStub, loadStub);
+      assert.ok(onChangeOrganization.calledOnce);
+    });
+  });
+  module('When user belongs to only one organization', function (hooks) {
+    setupIntlRenderingTest(hooks);
+
+    let prescriber, organization, loadStub;
+
+    hooks.beforeEach(function () {
+      organization = Object.create({ id: '1', name: 'Main organization', externalId: 'EXT' });
+      prescriber = Object.create({
+        firstName: 'givenFirstName',
+        lastName: 'givenLastName',
+        userOrgaSettings: Object.create({
+          id: 234,
+        }),
+      });
+      loadStub = sinon.stub();
+
+      class CurrentUserStub extends Service {
+        organization = organization;
+        prescriber = prescriber;
+        memberships = [Object.create({ organization })];
+        load = loadStub;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+      test('should not display organization switcher when user belongs to only one organization', async function (assert) {
+        const screen = await render(
+          hbs`<Layout::UserLoggedMenu @onChangeOrganization={{this.onChangeOrganization}} />`,
+        );
+        assert.notOk(screen.getByRole('button', { name: "Changer d'organisation" }));
+      });
+    });
   });
 });
