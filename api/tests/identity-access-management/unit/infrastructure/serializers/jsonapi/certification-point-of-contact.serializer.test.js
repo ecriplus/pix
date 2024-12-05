@@ -1,11 +1,11 @@
-import * as certificationPointOfContactSerializer from '../../../../../lib/infrastructure/serializers/jsonapi/certification-point-of-contact-serializer.js';
-import { CERTIFICATION_FEATURES } from '../../../../../src/certification/shared/domain/constants.js';
-import { config as settings } from '../../../../../src/shared/config.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { CERTIFICATION_FEATURES } from '../../../../../../src/certification/shared/domain/constants.js';
+import * as certificationPointOfContactSerializer from '../../../../../../src/identity-access-management/infrastructure/serializers/jsonapi/certification-point-of-contact.serializer.js';
+import { config as settings } from '../../../../../../src/shared/config.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | Serializer | JSONAPI | certification-point-of-contact-serializer', function () {
+describe('Unit | Identity Access Management | Serializer | JSONAPI | certification-point-of-contact-serializer', function () {
   describe('#serialize()', function () {
-    it('should convert a CertificationPointOfContact model into JSON API data', function () {
+    it('converts a CertificationPointOfContact model into JSON API data', function () {
       // given
       const habilitation1 = { id: 1, label: 'Certif comp 1', key: 'CERTIF_COMP_1' };
       const habilitation2 = { id: 2, label: 'Certif comp 2', key: 'CERTIF_COMP_2' };
