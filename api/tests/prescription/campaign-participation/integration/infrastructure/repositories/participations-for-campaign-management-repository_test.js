@@ -268,5 +268,43 @@ describe('Integration | Repository | Participations-For-Campaign-Management', fu
         expect(pagination).to.include(expectedPagination);
       });
     });
+
+    context('whern participations have been anonymised', function () {
+      it('should return participation with no userId', async function () {
+        // given
+        const user = databaseBuilder.factory.buildUser();
+        const organizationLearner = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+          userId: user.id,
+          deletedAt: new Date('2024-12-24'),
+          updatedAt: new Date('2024-12-24'),
+          firstName: '',
+          lastName: '',
+        });
+        const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          organizationLearnerId: organizationLearner.id,
+          userId: null,
+          participantExternalId: null,
+          deletedAt: new Date('2024-12-24'),
+        });
+        const otherCampaignId = databaseBuilder.factory.buildCampaign().id;
+        databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: otherCampaignId,
+          organizationLearnerId: organizationLearner.id,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { models: participationsForCampaignManagement } =
+          await participationsForCampaignManagementRepository.findPaginatedParticipationsForCampaignManagement({
+            campaignId,
+            page,
+          });
+
+        // then
+        expect(participationsForCampaignManagement).to.have.lengthOf(1);
+        expect(participationsForCampaignManagement[0].id).to.equal(campaignParticipation.id);
+      });
+    });
   });
 });
