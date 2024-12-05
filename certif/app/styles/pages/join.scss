@@ -3,6 +3,6 @@
   justify-content: center;
   width: 100%;
   min-height: 100vh;
-  background: $pix-primary-certif-gradient;
+  background: var(--pix-certif-500);
   box-shadow: 0 2px 8px 0 rgb(var(--pix-neutral-900) 0.1);
 }
