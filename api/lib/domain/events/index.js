@@ -37,7 +37,6 @@ import { EventDispatcherLogger } from '../../infrastructure/events/EventDispatch
 import * as disabledPoleEmploiNotifier from '../../infrastructure/externals/pole-emploi/disabled-pole-emploi-notifier.js';
 import * as poleEmploiNotifier from '../../infrastructure/externals/pole-emploi/pole-emploi-notifier.js';
 import * as badgeAcquisitionRepository from '../../infrastructure/repositories/badge-acquisition-repository.js';
-import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
 import * as campaignParticipationResultRepository from '../../infrastructure/repositories/campaign-participation-result-repository.js';
 import * as campaignRepository from '../../infrastructure/repositories/campaign-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../infrastructure/repositories/complementary-certification-course-result-repository.js';
@@ -64,7 +63,6 @@ const dependencies = {
   authenticationMethodRepository,
   badgeAcquisitionRepository,
   campaignRepository,
-  campaignParticipationRepository,
   campaignParticipationResultRepository,
   certificationAssessmentHistoryRepository,
   certificationAssessmentRepository,

@@ -5,7 +5,7 @@ import { CertificationCompletedJob } from '../events/CertificationCompleted.js';
 
 const completeAssessment = async function ({
   assessmentId,
-  campaignParticipationBCRepository,
+  campaignParticipationRepository,
   assessmentRepository,
   certificationCompletedJobRepository,
   participationCompletedJobRepository,
@@ -22,7 +22,7 @@ const completeAssessment = async function ({
   if (assessment.campaignParticipationId) {
     const { TO_SHARE } = CampaignParticipationStatuses;
 
-    await campaignParticipationBCRepository.update({ id: assessment.campaignParticipationId, status: TO_SHARE });
+    await campaignParticipationRepository.update({ id: assessment.campaignParticipationId, status: TO_SHARE });
 
     await participationCompletedJobRepository.performAsync(
       new ParticipationCompletedJob({ campaignParticipationId: assessment.campaignParticipationId }),

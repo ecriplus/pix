@@ -3,7 +3,7 @@ import { completeAssessment } from '../../../../lib/domain/usecases/complete-ass
 import { DomainTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
 import { certificationCompletedJobRepository } from '../../../../lib/infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import { ParticipationCompletedJob } from '../../../../src/prescription/campaign-participation/domain/models/ParticipationCompletedJob.js';
-import * as campaignParticipationBCRepository from '../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
+import * as campaignParticipationRepository from '../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import { participationCompletedJobRepository } from '../../../../src/prescription/campaign-participation/infrastructure/repositories/jobs/participation-completed-job-repository.js';
 import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
@@ -42,7 +42,7 @@ describe('Integration | Usecase | Complete Assessment', function () {
           // when
           await completeAssessment({
             assessmentId,
-            campaignParticipationBCRepository,
+            campaignParticipationRepository,
             assessmentRepository,
             certificationCompletedJobRepository,
             participationCompletedJobRepository,
@@ -97,7 +97,7 @@ describe('Integration | Usecase | Complete Assessment', function () {
         // when
         await completeAssessment({
           assessmentId,
-          campaignParticipationBCRepository,
+          campaignParticipationRepository,
           assessmentRepository,
           certificationCompletedJobRepository,
           participationCompletedJobRepository,
