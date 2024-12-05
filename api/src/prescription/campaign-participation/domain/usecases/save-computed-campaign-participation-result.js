@@ -1,4 +1,4 @@
-import { CantCalculateCampaignParticipationResultError } from '../../../src/shared/domain/errors.js';
+import { CantCalculateCampaignParticipationResultError } from '../errors.js';
 
 const saveComputedCampaignParticipationResult = async function ({
   participantResultsSharedRepository,

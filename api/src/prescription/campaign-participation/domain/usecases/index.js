@@ -30,6 +30,7 @@ import { participationResultCalculationJobRepository } from '../../infrastructur
 import { participationSharedJobRepository } from '../../infrastructure/repositories/jobs/participation-shared-job-repository.js';
 import { participationStartedJobRepository } from '../../infrastructure/repositories/jobs/participation-started-job-repository.js';
 import * as participantResultRepository from '../../infrastructure/repositories/participant-result-repository.js';
+import { participantResultsSharedRepository } from '../../infrastructure/repositories/participant-results-shared-repository.js';
 import * as participationsForCampaignManagementRepository from '../../infrastructure/repositories/participations-for-campaign-management-repository.js';
 import * as participationsForUserManagementRepository from '../../infrastructure/repositories/participations-for-user-management-repository.js';
 import * as poleEmploiSendingRepository from '../../infrastructure/repositories/pole-emploi-sending-repository.js';
@@ -54,6 +55,7 @@ import * as poleEmploiSendingRepository from '../../infrastructure/repositories/
  * @typedef { import ('../../../../../lib/infrastructure/repositories/learning-content-repository.js')} LearningContentRepository
  * @typedef { import ('../../../../../lib/infrastructure/repositories/organization-learner-repository.js')} OrganizationLearnerRepository
  * @typedef { import ('../../infrastructure/repositories/participant-result-repository.js')} ParticipantResultRepository
+ * @typedef { import ('../../infrastructure/repositories/participant-results-shared-repository.js')} participantResultsSharedRepository
  * @typedef { import ('../../infrastructure/repositories/jobs/participation-result-calculation-job-repository.js')} ParticipationResultCalculationJobRepository
  * @typedef { import ('../../infrastructure/repositories/participations-for-campaign-management-repository.js')} ParticipationsForCampaignManagementRepository
  * @typedef { import ('../../infrastructure/repositories/participations-for-user-management-repository.js')} ParticipationsForUserManagementRepository
@@ -92,6 +94,7 @@ const dependencies = {
   participationsForUserManagementRepository,
   participationSharedJobRepository,
   participationStartedJobRepository,
+  participantResultsSharedRepository,
   poleEmploiSendingRepository,
   stageAcquisitionRepository,
   stageCollectionRepository,

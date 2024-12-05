@@ -63,12 +63,6 @@ class CantImproveCampaignParticipationError extends DomainError {
   }
 }
 
-class CantCalculateCampaignParticipationResultError extends DomainError {
-  constructor(message = `Impossible de calculer le résultat de la participation car elle n'a pas été partagée.`) {
-    super(message);
-  }
-}
-
 class CampaignCodeError extends DomainError {
   constructor(message = "Le code campagne n'existe pas.") {
     super(message);
