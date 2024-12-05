@@ -5,13 +5,15 @@ import { Mission, MissionContent, MissionStep } from '../../domain/models/Missio
 import { MissionNotFoundError } from '../../domain/school-errors.js';
 import { missionDatasource } from '../datasources/learning-content/mission-datasource.js';
 
-const { FRENCH_FRANCE } = LOCALE;
+const { FRENCH_SPOKEN } = LOCALE;
 
 function _toDomain(data, locale) {
   const translatedName = getTranslatedKey(data.name_i18n, locale);
   const translatedLearningObjectives = getTranslatedKey(data.learningObjectives_i18n, locale);
   const translatedValidatedObjectives = getTranslatedKey(data.validatedObjectives_i18n, locale);
+  const translatedIntroductionMediaAlt = getTranslatedKey(data.introductionMediaAlt_i18n, locale);
   const translatedContent = getTranslatedContent(data.content, locale);
+
   return new Mission({
     id: data.id,
     name: translatedName,
@@ -22,13 +24,13 @@ function _toDomain(data, locale) {
     validatedObjectives: translatedValidatedObjectives,
     introductionMediaUrl: data.introductionMediaUrl,
     introductionMediaType: data.introductionMediaType,
-    introductionMediaAlt: data.introductionMediaAlt,
+    introductionMediaAlt: translatedIntroductionMediaAlt,
     documentationUrl: data.documentationUrl,
     content: translatedContent,
   });
 }
 
-async function get(id, locale = { locale: FRENCH_FRANCE }) {
+async function get(id, locale = FRENCH_SPOKEN) {
   try {
     const missionData = await missionDatasource.get(parseInt(id, 10));
     return _toDomain(missionData, locale);
@@ -37,7 +39,7 @@ async function get(id, locale = { locale: FRENCH_FRANCE }) {
   }
 }
 
-async function findAllActiveMissions(locale = { locale: FRENCH_FRANCE }) {
+async function findAllActiveMissions(locale = FRENCH_SPOKEN) {
   const allMissions = await missionDatasource.list();
   const allActiveMissions = allMissions.filter((mission) => {
     return (

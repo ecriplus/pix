@@ -39,7 +39,7 @@ describe('Integration | Repository | mission-repository', function () {
               validatedObjectives_i18n: { fr: 'validatedObjectivesi18n' },
               introductionMediaUrl: 'http://monimage.pix.fr',
               introductionMediaType: 'image',
-              introductionMediaAlt: "Alt à l'image",
+              introductionMediaAlt_i18n: { fr: "Alt à l'image" },
               documentationUrl: 'http://madoc.pix.fr',
               content: {
                 steps: [
@@ -56,9 +56,10 @@ describe('Integration | Repository | mission-repository', function () {
         const mission = await missionRepository.get('1');
 
         // then
-        expect({ ...mission }).to.deep.equal(expectedMission);
+        expect(mission).to.deep.equal(expectedMission);
       });
     });
+
     context('when there is no mission for the given id', function () {
       it('should return the not found error', async function () {
         // given
@@ -114,7 +115,7 @@ describe('Integration | Repository | mission-repository', function () {
               validatedObjectives_i18n: { fr: 'validatedObjectivesi18n' },
               introductionMediaUrl: 'http://monimage.pix.fr',
               introductionMediaType: 'image',
-              introductionMediaAlt: "Alt à l'image",
+              introductionMediaAlt_i18n: { fr: "Alt à l'image" },
               documentationUrl: 'http://madoc.pix.fr',
               content: {
                 steps: [
@@ -135,7 +136,7 @@ describe('Integration | Repository | mission-repository', function () {
               validatedObjectives_i18n: { fr: 'validatedObjectivesi18n' },
               introductionMediaUrl: 'http://monimage.pix.fr',
               introductionMediaType: 'image',
-              introductionMediaAlt: "Alt à l'image",
+              introductionMediaAlt_i18n: { fr: "Alt à l'image" },
               documentationUrl: 'http://madoc.pix.fr',
               content: {
                 steps: [
