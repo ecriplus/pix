@@ -40,6 +40,7 @@ export default class ModulixEmbed extends ModuleElement {
   }
 
   _receiveEmbedMessage(event) {
+    if (!this._messageIsFromCurrentElementSimulator(event)) return;
     if (!isEmbedAllowedOrigin(event.origin)) return;
     const message = this._getMessageFromEventData(event);
     if (message && message.answer && message.from === 'pix') {
@@ -48,6 +49,10 @@ export default class ModulixEmbed extends ModuleElement {
         element: this.args.embed,
       });
     }
+  }
+
+  _messageIsFromCurrentElementSimulator(event) {
+    return event.source === this.iframe.contentWindow;
   }
 
   _getMessageFromEventData(event) {

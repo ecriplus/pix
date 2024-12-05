@@ -186,6 +186,36 @@ module('Integration | Component | Module | Embed', function (hooks) {
         });
       });
 
+      module('when message is not coming from current element’s iframe', function () {
+        test('should not call the onAnswer method', async function (assert) {
+          // given
+          const embed = {
+            id: 'id',
+            title: 'Simulateur',
+            isCompletionRequired: true,
+            url: 'https://example.org',
+            height: 800,
+          };
+          const onElementAnswerStub = sinon.stub();
+          await render(<template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>);
+          await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+          const otheriFrame = document.createElement('iframe');
+          otheriFrame.src = 'https://example.org';
+
+          // when
+          const event = new MessageEvent('message', {
+            data: { answer: 'toto', from: 'pix' },
+            origin: 'https://epreuves.pix.fr',
+            source: otheriFrame.contentWindow,
+          });
+          window.dispatchEvent(event);
+
+          // then
+          sinon.assert.notCalled(onElementAnswerStub);
+          assert.ok(true);
+        });
+      });
+
       module('otherwise when everything is ok', function () {
         test('should call the onAnswer method', async function (assert) {
           // given
