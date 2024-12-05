@@ -1,4 +1,4 @@
-import PixBanner from '@1024pix/pix-ui/components/pix-banner';
+import PixBannerAlert from '@1024pix/pix-ui/components/pix-banner-alert';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixMessage from '@1024pix/pix-ui/components/pix-message';
@@ -104,7 +104,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
               @onCloseButtonClick={{this.toggleResetModalVisibility}}
             >
               <:content>
-                <PixBanner @type="warning">{{t "pages.skill-review.reset.modal.warning-text"}}</PixBanner>
+                <PixBannerAlert @type="warning">{{t "pages.skill-review.reset.modal.warning-text"}}</PixBannerAlert>
                 <p class="reset-campaign-participation-modal__text">
                   {{t
                     "pages.skill-review.reset.modal.text"
