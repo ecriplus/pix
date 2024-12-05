@@ -30,9 +30,15 @@
 
     <PixNotificationAlert @withIcon={{true}}>
       {{t "pages.certifications.documentation-link-notice"}}
-      <a href={{t "pages.certifications.documentation-link"}} target="_blank" rel="noopener noreferrer">{{t
-          "pages.certifications.documentation-link-label"
-        }}</a>
+      <a
+        class="link--underlined certifications-page-action__link"
+        href={{t "pages.certifications.documentation-link"}}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{t "pages.certifications.documentation-link-label"}}
+        <PixIcon @name="openNew" @title={{t "navigation.external-link-title"}} />
+      </a>
     </PixNotificationAlert>
   {{else}}
     <p class="certifications-page__text">

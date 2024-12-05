@@ -339,6 +339,7 @@
       "number": "{count, plural, =0 {0 credits} =1 {1 credit} other {{count, number} credits}}",
       "tooltip-text": "The number of credits displayed is the number of credits acquired by the organisation and currently valid (regardless of their activation). For more information, please contact us at the following address: '<a href=mailto:pro@pix.fr>'pro@pix.fr'</a>'"
     },
+    "external-link-title": "Open in a new window",
     "footer": {
       "a11y": "Accessibility",
       "aria-label": "Footer navigation",
@@ -811,8 +812,8 @@
     "certifications": {
       "title": "Certification results",
       "description": "Please select the class for which you would like to export the certification results (.csv) or download certificates (.pdf).",
-      "documentation-link": "https://cloud.pix.fr/s/cRaeKT4ErrXs4X8",
-      "documentation-link-label": "Interpreting the results.",
+      "documentation-link": "https://cloud.pix.fr/s/8pJqgNNntwDtsDY",
+      "documentation-link-label": "Interpreting the results",
       "documentation-link-notice": "Follow this link to find indications on how to interpret the results: ",
       "download-attestations-button": "Download attestations",
       "download-button": "Export the results",
