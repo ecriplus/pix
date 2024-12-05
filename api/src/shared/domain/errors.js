@@ -1065,7 +1065,6 @@ export {
   CandidateAlreadyLinkedToUserError,
   CandidateNotAuthorizedToJoinSessionError,
   CandidateNotAuthorizedToResumeCertificationTestError,
-  CantCalculateCampaignParticipationResultError,
   CantImproveCampaignParticipationError,
   CertificateVerificationCodeGenerationTooManyTrials,
   CertificationAttestationGenerationError,
