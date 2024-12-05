@@ -98,13 +98,19 @@ describe('Unit | Application | Organization-Learner | organization-learners-cont
     });
   });
 
-  describe('#getLearnersLevelsByTubes', function () {
+  describe('#getAnalysisByTubes', function () {
     it('should return data', async function () {
       // given
       const organizationId = 123;
 
+      const useCaseResult = Symbol('use-case-result');
       sinon.stub(usecases, 'getAnalysisByTubes');
-      usecases.getAnalysisByTubes.withArgs({ organizationId }).resolves();
+      usecases.getAnalysisByTubes.withArgs({ organizationId }).resolves(useCaseResult);
+      const analysisByTubesSerializer = {
+        serialize: sinon.stub(),
+      };
+      const expectedResult = Symbol('expected-result');
+      analysisByTubesSerializer.serialize.withArgs(useCaseResult).returns(expectedResult);
 
       const request = {
         params: {
@@ -113,9 +119,12 @@ describe('Unit | Application | Organization-Learner | organization-learners-cont
       };
 
       // when
-      const response = await organizationLearnersController.getAnalysisByTubes(request, hFake);
+      const response = await organizationLearnersController.getAnalysisByTubes(request, hFake, {
+        analysisByTubesSerializer,
+      });
 
       // then
+      expect(response.source).to.equal(expectedResult);
       expect(response.statusCode).to.equal(200);
     });
   });
