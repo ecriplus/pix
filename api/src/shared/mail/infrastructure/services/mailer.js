@@ -103,6 +103,10 @@ class Mailer {
   get targetProfileNotCertifiableTemplateId() {
     return mailing[this._providerName].templates.targetProfileNotCertifiableTemplateId;
   }
+
+  get selfAccountDeletionTemplateId() {
+    return mailing[this._providerName].templates.selfAccountDeletionTemplateId;
+  }
 }
 
 const mailer = new Mailer();
