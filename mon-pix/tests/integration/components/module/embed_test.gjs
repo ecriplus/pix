@@ -98,19 +98,23 @@ module('Integration | Component | Module | Embed', function (hooks) {
           // given
           const embed = {
             id: 'id',
-            title: 'title',
+            title: 'Simulateur',
             isCompletionRequired: true,
             url: 'https://example.org',
             height: 800,
           };
           const onElementAnswerStub = sinon.stub();
-          await render(<template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>);
+          const screen = await render(
+            <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
+          );
           await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
 
           // when
+          const iframe = screen.getByTitle('Simulateur');
           const event = new MessageEvent('message', {
             data: { answer: 'toto', from: 'nsa' },
             origin: 'https://epreuves.pix.fr',
+            source: iframe.contentWindow,
           });
           window.dispatchEvent(event);
 
@@ -125,19 +129,23 @@ module('Integration | Component | Module | Embed', function (hooks) {
           // given
           const embed = {
             id: 'id',
-            title: 'title',
+            title: 'Simulateur',
             isCompletionRequired: true,
             url: 'https://example.org',
             height: 800,
           };
           const onElementAnswerStub = sinon.stub();
-          await render(<template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>);
+          const screen = await render(
+            <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
+          );
           await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
 
           // when
+          const iframe = screen.getByTitle('Simulateur');
           const event = new MessageEvent('message', {
             data: { start: 'true', from: 'pix' },
             origin: 'https://epreuves.pix.fr',
+            source: iframe.contentWindow,
           });
           window.dispatchEvent(event);
 
@@ -152,19 +160,23 @@ module('Integration | Component | Module | Embed', function (hooks) {
           // given
           const embed = {
             id: 'id',
-            title: 'title',
+            title: 'Simulateur',
             isCompletionRequired: true,
             url: 'https://example.org',
             height: 800,
           };
           const onElementAnswerStub = sinon.stub();
-          await render(<template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>);
+          const screen = await render(
+            <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
+          );
           await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
 
           // when
+          const iframe = screen.getByTitle('Simulateur');
           const event = new MessageEvent('message', {
             data: { answer: 'toto', from: 'pix' },
             origin: 'https://example.org',
+            source: iframe.contentWindow,
           });
           window.dispatchEvent(event);
 
@@ -179,19 +191,23 @@ module('Integration | Component | Module | Embed', function (hooks) {
           // given
           const embed = {
             id: 'id',
-            title: 'title',
+            title: 'Simulateur',
             isCompletionRequired: true,
             url: 'https://example.org',
             height: 800,
           };
           const onElementAnswerStub = sinon.stub();
-          await render(<template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>);
+          const screen = await render(
+            <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
+          );
           await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
 
           // when
+          const iframe = screen.getByTitle('Simulateur');
           const event = new MessageEvent('message', {
             data: { answer: 'toto', from: 'pix' },
             origin: 'https://epreuves.pix.fr',
+            source: iframe.contentWindow,
           });
           window.dispatchEvent(event);
 
