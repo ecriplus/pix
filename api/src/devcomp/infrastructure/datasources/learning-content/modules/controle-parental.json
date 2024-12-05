@@ -18,7 +18,7 @@
   "transitionTexts": [
     {
       "grainId": "f7e0ec28-06a2-4915-bcd7-53d5f5e3b9a7",
-      "content": "<p>Max entre bientôt au collège. <br>Ses parents souhaitent lui offrir son premier smartphone, mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion. <span aria-hidden=\"true\">📺</span></p>"
+      "content": "<p>Max entre bientôt au collège. <span aria-hidden=\"true\">🎒</span><br>Ses parents souhaitent lui offrir son premier smartphone, mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion. <span aria-hidden=\"true\">📺</span></p>"
     },
     {
       "grainId": "fab2ec90-8350-4f51-8700-336bcd3acade",
@@ -277,7 +277,7 @@
           "element": {
             "id": "37ff3330-b8df-47e0-80d2-e382671dc3dd",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les astuces ci-dessous&nbsp;:</p><p><details>\n    <summary>Indice 1</summary>\n    <p>Le contrôle parental fait partie des paramètres de l’appareil à activer. ⚙️</p>\n</details>\n<details>\n    <summary>Indice 2</summary>\n    <p>Ici, le contrôle parental s’active sur l’appareil de l’enfant.</p>\n</details>\n<details>\n    <summary>Solution</summary>\n    <p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"326\" height=\"627\" src=\"https://i.imgur.com/xrC3Cvj.gif\"></iframe>\n</details>\n</p>"
+            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les astuces ci-dessous&nbsp;:</p><p><details>\n    <summary>Indice 1</summary>\n    <p>Le contrôle parental fait partie des paramètres de l’appareil à activer. ⚙️</p>\n</details>\n<details>\n    <summary>Indice 2</summary>\n    <p>Ici, le contrôle parental s’active sur l’appareil de l’enfant.</p>\n</details>\n<details>\n    <summary>Solution</summary>\n    <p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"326\" height=\"627\" src=\"https://i.postimg.cc/3rfN1sdX/ezgif-3-f6e09d7242.gif\"></iframe>\n</details>\n</p>"
           }
         }
       ]
