@@ -1,7 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixInputPassword from '@1024pix/pix-ui/components/pix-input-password';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
@@ -133,9 +133,9 @@ export default class LoginForm extends Component {
   <template>
     <form {{on "submit" this.signin}} class="authentication-login-form">
       {{#if this.globalError}}
-        <PixMessage @type="error" @withIcon={{true}} role="alert">
+        <PixNotificationAlert @type="error" @withIcon={{true}} role="alert">
           {{t this.globalError.key this.globalError.values}}
-        </PixMessage>
+        </PixNotificationAlert>
       {{/if}}
 
       <p class="authentication-login-form__mandatory-fields-message">

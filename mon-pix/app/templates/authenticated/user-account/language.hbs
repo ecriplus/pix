@@ -6,8 +6,8 @@
   />
 
   {{#if this.shouldDisplayLanguageUpdatedMessage}}
-    <PixMessage class="language__notification" @type="success" @withIcon={{true}}>
+    <PixNotificationAlert class="language__notification" @type="success" @withIcon={{true}}>
       {{t "pages.user-account.language.update-successful"}}
-    </PixMessage>
+    </PixNotificationAlert>
   {{/if}}
 </div>

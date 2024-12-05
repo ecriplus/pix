@@ -1,6 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import PixStars from '@1024pix/pix-ui/components/pix-stars';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
@@ -192,9 +192,13 @@ export default class EvaluationResultsHero extends Component {
 
         {{#if @isSharableCampaign}}
           {{#if @campaignParticipationResult.isShared}}
-            <PixMessage class="evaluation-results-hero-results__shared-message" @type="success" @withIcon={{true}}>
+            <PixNotificationAlert
+              class="evaluation-results-hero-results__shared-message"
+              @type="success"
+              @withIcon={{true}}
+            >
               {{t "pages.skill-review.hero.shared-message"}}
-            </PixMessage>
+            </PixNotificationAlert>
             {{#if @hasTrainings}}
               <p class="evaluation-results-hero-details__explanations">
                 {{t "pages.skill-review.hero.explanations.trainings"}}
@@ -257,9 +261,9 @@ export default class EvaluationResultsHero extends Component {
 
           {{#if this.hasGlobalError}}
             <div class="evaluation-results-hero-results__actions-error">
-              <PixMessage @type="error" @withIcon={{true}}>
+              <PixNotificationAlert @type="error" @withIcon={{true}}>
                 {{t "pages.skill-review.error"}}
-              </PixMessage>
+              </PixNotificationAlert>
             </div>
           {{/if}}
         </div>

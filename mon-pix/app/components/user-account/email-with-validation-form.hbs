@@ -28,9 +28,9 @@
     </PixInputPassword>
   </div>
   {{#if this.errorMessage}}
-    <PixMessage @type="error" class="user-account__error-message">
+    <PixNotificationAlert @type="error" class="user-account__error-message">
       {{this.errorMessage}}
-    </PixMessage>
+    </PixNotificationAlert>
   {{/if}}
   <div class="update-email-with-validation__action-buttons">
     <PixButton @triggerAction={{@disableEmailEditionMode}} @variant="secondary">

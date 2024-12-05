@@ -13,15 +13,15 @@
   </div>
 
   {{#if this.errorMessage}}
-    <PixMessage @type="error" class="email-verification-code__error">
+    <PixNotificationAlert @type="error" class="email-verification-code__error">
       {{this.errorMessage}}
-    </PixMessage>
+    </PixNotificationAlert>
   {{/if}}
 
   {{#if this.isEmailSent}}
-    <PixMessage @type="success" class="email-verification-code__resend-confirmation-message">
+    <PixNotificationAlert @type="success" class="email-verification-code__resend-confirmation-message">
       {{t "pages.user-account.email-verification.confirmation-message"}}
-    </PixMessage>
+    </PixNotificationAlert>
   {{else}}
     <div class="email-verification-code__resend {{if this.showResendCode 'visible'}}">
       <p>{{t "pages.user-account.email-verification.did-not-receive"}}</p>

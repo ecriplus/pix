@@ -1,6 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -113,9 +113,9 @@ export default class DeleteAccountSection extends Component {
           <p>{{t "pages.user-account.delete-account.modal.warning-2"}}</p>
 
           {{#if this.globalError}}
-            <PixMessage @type="error" @withIcon={{true}} role="alert" class="delete-account-modal__error">
+            <PixNotificationAlert @type="error" @withIcon={{true}} role="alert" class="delete-account-modal__error">
               {{t this.globalError}}
-            </PixMessage>
+            </PixNotificationAlert>
           {{/if}}
         </:content>
 

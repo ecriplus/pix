@@ -27,9 +27,9 @@
     </div>
 
     {{#if this.registerErrorMessage}}
-      <PixMessage @type="error" class="login-or-register-oidc-form__cgu-error">
+      <PixNotificationAlert @type="error" class="login-or-register-oidc-form__cgu-error">
         {{this.registerErrorMessage}}
-      </PixMessage>
+      </PixNotificationAlert>
     {{/if}}
 
     <PixButton @type="submit" @triggerAction={{this.register}} @isLoading={{this.isRegisterLoading}}>
@@ -77,9 +77,9 @@
       </div>
 
       {{#if this.loginErrorMessage}}
-        <PixMessage @type="error" class="login-or-register-oidc-form__cgu-error">
+        <PixNotificationAlert @type="error" class="login-or-register-oidc-form__cgu-error">
           {{this.loginErrorMessage}}
-        </PixMessage>
+        </PixNotificationAlert>
       {{/if}}
 
       <PixButton @type="submit" @isLoading={{this.isLoginLoading}} class="login-or-register-oidc-form__submit-button">

@@ -1,6 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -137,9 +137,9 @@ export default class SignupForm extends Component {
   <template>
     <form {{on "submit" this.handleSignup}} class="signup-form">
       {{#if this.globalError}}
-        <PixMessage @type="error" @withIcon="true" role="alert">
+        <PixNotificationAlert @type="error" @withIcon="true" role="alert">
           {{t this.globalError.key this.globalError.values}}
-        </PixMessage>
+        </PixNotificationAlert>
       {{/if}}
 
       <p class="signup-form__mandatory-fields-message">

@@ -1,5 +1,5 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -89,9 +89,9 @@ export default class EvaluationResultsTabsTrainings extends Component {
               {{t "pages.skill-review.actions.send"}}
             </PixButton>
             {{#if this.isShareResultsError}}
-              <PixMessage @type="error" @withIcon={{true}}>
+              <PixNotificationAlert @type="error" @withIcon={{true}}>
                 {{t "pages.skill-review.tabs.trainings.modal.share-error"}}
-              </PixMessage>
+              </PixNotificationAlert>
             {{/if}}
           </div>
         </div>

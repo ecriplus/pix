@@ -1,6 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { fn, get } from '@ember/helper';
 import { on } from '@ember/modifier';
@@ -134,9 +134,9 @@ export default class ModuleQrocm extends ModuleElement {
 
       {{#if this.shouldDisplayRequiredMessage}}
         <div class="element-qrocm__required-field-missing">
-          <PixMessage role="alert" @type="error" @withIcon={{true}}>
+          <PixNotificationAlert role="alert" @type="error" @withIcon={{true}}>
             {{t "pages.modulix.verification-precondition-failed-alert.qrocm"}}
-          </PixMessage>
+          </PixNotificationAlert>
         </div>
       {{/if}}
 

@@ -76,7 +76,7 @@
 
     {{#if this.errorMessage}}
       <div class="certification-course-page__errors">
-        <PixMessage @type="error">
+        <PixNotificationAlert @type="error">
           {{this.errorMessage}}
           {{#if this.errorDetailList}}
             <ul class="certification-course-page__errors__list">
@@ -92,7 +92,7 @@
             </a>
 
           {{/if}}
-        </PixMessage>
+        </PixNotificationAlert>
       </div>
     {{/if}}
     <PixButton @id="certificationJoinerSubmitButton" @type="submit">{{t

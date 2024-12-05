@@ -43,9 +43,9 @@
         {{/if}}
 
         {{#if this.showNotFoundCertificationErrorMessage}}
-          <PixMessage @type="error" @withIcon={{true}}>
+          <PixNotificationAlert @type="error" @withIcon={{true}}>
             {{t "pages.fill-in-certificate-verification-code.errors.not-found"}}
-          </PixMessage>
+          </PixNotificationAlert>
         {{/if}}
       </form>
     </PixBlock>

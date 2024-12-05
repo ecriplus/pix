@@ -26,15 +26,15 @@
         </div>
 
         {{#if this.showEmailUpdatedMessage}}
-          <PixMessage @type="success" @withIcon={{true}} class="user-account-panel__success-message">
+          <PixNotificationAlert @type="success" @withIcon={{true}} class="user-account-panel__success-message">
             {{t "pages.user-account.email-verification.update-successful"}}
-          </PixMessage>
+          </PixNotificationAlert>
         {{/if}}
 
         {{#if this.shouldShowEmailConfirmedBanner}}
-          <PixMessage @type="success" @withIcon={{true}} class="user-account-panel__success-message">
+          <PixNotificationAlert @type="success" @withIcon={{true}} class="user-account-panel__success-message">
             {{t "pages.user-account.email-confirmed"}}
-          </PixMessage>
+          </PixNotificationAlert>
         {{/if}}
       {{/if}}
 

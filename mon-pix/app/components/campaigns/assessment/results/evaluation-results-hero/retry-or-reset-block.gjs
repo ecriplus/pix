@@ -1,8 +1,8 @@
 import PixBannerAlert from '@1024pix/pix-ui/components/pix-banner-alert';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -132,9 +132,9 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
             </PixModal>
           {{/if}}
         </div>
-        <PixMessage class="evaluation-results-hero-retry__message" @withIcon={{true}}>
+        <PixNotificationAlert class="evaluation-results-hero-retry__message" @withIcon={{true}}>
           {{t "pages.skill-review.reset.notifications"}}
-        </PixMessage>
+        </PixNotificationAlert>
       </div>
     </div>
   </template>
