@@ -39,4 +39,66 @@ describe('Prescription | Unit | Router | organization-learner-router', function 
       );
     });
   });
+
+  describe('GET /api/organizations/{organizationId}/attestations/{attestationKey}', function () {
+    const method = 'GET';
+
+    it('should throw 403 if organization does not have feature activated', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization').callsFake((request, h) => h.response(true));
+      sinon.stub(securityPreHandlers, 'makeCheckOrganizationHasFeature').callsFake(
+        () => (request, h) =>
+          h
+            .response({ errors: new Error('forbidden') })
+            .code(403)
+            .takeover(),
+      );
+      sinon
+        .stub(organizationLearnersController, 'getAttestationZipForDivisions')
+        .callsFake((request, h) => h.response('ok'));
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      const url = '/api/organizations/1/attestations/key';
+
+      // when
+      const response = await httpTestServer.request(method, url);
+
+      // then
+      expect(response.statusCode).to.equal(403);
+      expect(organizationLearnersController.getAttestationZipForDivisions).to.not.have.been.called;
+    });
+
+    it('should call prehandlers before calling controller method', async function () {
+      // given
+      sinon
+        .stub(organizationLearnersController, 'getAttestationZipForDivisions')
+        .callsFake((request, h) => h.response('ok').code(200));
+      sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization').callsFake((request, h) => h.response(true));
+      sinon
+        .stub(securityPreHandlers, 'makeCheckOrganizationHasFeature')
+        .callsFake(() => (request, h) => h.response(true));
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      const url = '/api/organizations/1/attestations/key';
+
+      // when
+      const response = await httpTestServer.request(method, url);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(securityPreHandlers.checkUserBelongsToOrganization).to.have.been.calledBefore(
+        organizationLearnersController.getAttestationZipForDivisions,
+      );
+      expect(securityPreHandlers.makeCheckOrganizationHasFeature).calledWithExactly(
+        ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT.key,
+      );
+      expect(securityPreHandlers.makeCheckOrganizationHasFeature).to.have.been.calledBefore(
+        organizationLearnersController.getAttestationZipForDivisions,
+      );
+    });
+  });
 });
