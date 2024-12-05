@@ -203,10 +203,11 @@ const rememberUserHasSeenLastDataProtectionPolicyInformation = async function (
   return dependencies.userSerializer.serialize(updatedUser);
 };
 
-const selfDeleteUserAccount = async function (request, h) {
+const selfDeleteUserAccount = async function (request, h, dependencies = { requestResponseUtils }) {
   const authenticatedUserId = request.auth.credentials.userId;
+  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
 
-  await usecases.selfDeleteUserAccount({ userId: authenticatedUserId });
+  await usecases.selfDeleteUserAccount({ userId: authenticatedUserId, locale });
 
   return h.response().code(204);
 };
