@@ -1,14 +1,14 @@
 .footer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
-  margin: 0 35px;
-  border-top: 1px solid var(--pix-neutral-20);
+  margin: 0 var(--pix-spacing-1x);
 
-  @include device-is('desktop') {
-    flex-direction: row;
+  @include device-is('mobile') {
+    flex-direction: column;
+    margin-top: var(--pix-spacing-6x);
   }
 
   &__navigation {
@@ -22,7 +22,12 @@
     &-list {
       list-style: none;
       display: flex;
+      flex-direction: column;
       padding: 0;
+
+      @include device-is('tablet') {
+        flex-direction: row;
+      }
 
       li {
         align-self: center;

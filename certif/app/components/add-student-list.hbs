@@ -1,6 +1,6 @@
 {{#if @studentList}}
 
-  <div class="add-student-list">
+  <PixBlock class="add-student-list">
     <div class="add-student-list__filters">
       <span>{{t "pages.sco.enrol-candidates-in-session.list.table.filter.title"}}</span>
       <PixMultiSelect
@@ -22,7 +22,7 @@
       <table>
         <thead>
           <tr>
-            <th>
+            <th class="table__column--checkbox">
               <PixCheckbox
                 @screenReaderOnly={{true}}
                 @class="add-student-list__checker"
@@ -34,9 +34,9 @@
                 <:label>{{t "pages.candidates.add.actions.select-all.label"}}</:label>
               </PixCheckbox>
             </th>
-            <th>{{t "pages.sco.enrol-candidates-in-session.list.table.division"}}</th>
-            <th>{{t "pages.sco.enrol-candidates-in-session.list.table.last-name"}}</th>
-            <th>{{t "pages.sco.enrol-candidates-in-session.list.table.first-name"}}</th>
+            <th class="table__column--medium">{{t "pages.sco.enrol-candidates-in-session.list.table.division"}}</th>
+            <th class="table__column--medium">{{t "pages.sco.enrol-candidates-in-session.list.table.last-name"}}</th>
+            <th class="table__column--medium">{{t "pages.sco.enrol-candidates-in-session.list.table.first-name"}}</th>
             <th class="add-student-list__column-birthdate">
               {{t "pages.sco.enrol-candidates-in-session.list.table.birthdate"}}
             </th>
@@ -46,7 +46,7 @@
           {{#each @studentList as |student|}}
             {{#if student.isEnrolled}}
               <tr class="add-student-list__row add-student-list__row--disabled">
-                <td class="add-student-list__column-checkbox">
+                <td>
                   <PixCheckbox @screenReaderOnly={{true}} @class="add-student-list__checker" @checked={{true}} disabled>
                     <:label>
                       {{t
@@ -60,11 +60,11 @@
                 <td>{{student.division}}</td>
                 <td>{{student.lastName}}</td>
                 <td>{{student.firstName}}</td>
-                <td class="add-student-list__column-birthdate">{{dayjs-format student.birthdate "DD/MM/YYYY"}}</td>
+                <td>{{dayjs-format student.birthdate "DD/MM/YYYY"}}</td>
               </tr>
             {{else}}
               <tr class="add-student-list__row" {{on "click" (fn this.toggleItem student)}}>
-                <td class="add-student-list__column-checkbox">
+                <td>
                   <PixCheckbox @screenReaderOnly={{true}} @checked={{student.isSelected}}>
                     <:label>
                       {{t
@@ -85,47 +85,47 @@
         </tbody>
       </table>
     </div>
+  </PixBlock>
 
-    <PixPagination @pagination={{@studentList.meta}} />
+  <PixPagination @pagination={{@studentList.meta}} />
 
-    {{#if this.showStickyBar}}
-      <div class="add-student-list__bottom-action-bar">
+  {{#if this.showStickyBar}}
+    <div class="add-student-list__bottom-action-bar">
 
-        <div class="bottom-action-bar__informations">
-          <p class="bottom-action-bar__informations--candidates-selected">
-            {{#if this.numberOfStudentsSelected}}
-              {{this.numberOfStudentsSelected}}
-              {{t "pages.sco.enrol-candidates-in-session.list.action-bar.candidate-selected"}}
-            {{else}}
-              {{t "pages.sco.enrol-candidates-in-session.list.action-bar.no-candidate-selected"}}
-            {{/if}}
-          </p>
-          <span class="bottom-action-bar__seperator"></span>
-          <p class="bottom-action-bar__informations--candidates-already-added">
-            {{this.numberOfStudentsAlreadyCandidate}}
-            {{t "pages.sco.enrol-candidates-in-session.list.action-bar.candidate-already-enrolled"}}
-          </p>
-        </div>
-
-        <div class="bottom-action-bar__actions">
-          <PixButtonLink
-            @variant="secondary"
-            @isBorderVisible={{true}}
-            @route="authenticated.sessions.details.certification-candidates"
-            @model={{@session.id}}
-          >
-            {{t "common.actions.cancel"}}
-          </PixButtonLink>
-          <PixButton
-            @triggerAction={{this.enrolStudents}}
-            type="button"
-            @isDisabled={{this.shouldDisableAddButton}}
-            class="bottom-action-bar__actions--add-button"
-          >
-            Inscrire
-          </PixButton>
-        </div>
+      <div class="bottom-action-bar__information">
+        <p class="bottom-action-bar__information--candidates-selected">
+          {{#if this.numberOfStudentsSelected}}
+            {{this.numberOfStudentsSelected}}
+            {{t "pages.sco.enrol-candidates-in-session.list.action-bar.candidate-selected"}}
+          {{else}}
+            {{t "pages.sco.enrol-candidates-in-session.list.action-bar.no-candidate-selected"}}
+          {{/if}}
+        </p>
+        <span class="bottom-action-bar__separator"></span>
+        <p class="bottom-action-bar__information--candidates-already-added">
+          {{this.numberOfStudentsAlreadyCandidate}}
+          {{t "pages.sco.enrol-candidates-in-session.list.action-bar.candidate-already-enrolled"}}
+        </p>
       </div>
-    {{/if}}
-  </div>
+
+      <div class="bottom-action-bar__actions">
+        <PixButtonLink
+          @variant="secondary"
+          @isBorderVisible={{true}}
+          @route="authenticated.sessions.details.certification-candidates"
+          @model={{@session.id}}
+        >
+          {{t "common.actions.cancel"}}
+        </PixButtonLink>
+        <PixButton
+          @triggerAction={{this.enrolStudents}}
+          type="button"
+          @isDisabled={{this.shouldDisableAddButton}}
+          class="bottom-action-bar__actions--add-button"
+        >
+          Inscrire
+        </PixButton>
+      </div>
+    </div>
+  {{/if}}
 {{/if}}

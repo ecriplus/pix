@@ -35,6 +35,8 @@ $navbar-height: 60px;
 @import 'components/edit-candidate-modal';
 @import 'components/issue-report-modal';
 @import 'components/layout/footer';
+@import 'components/layout/sidebar';
+@import 'components/layout/banners';
 @import 'components/login-form';
 @import 'components/login-or-register';
 @import 'components/finalize';
@@ -55,7 +57,6 @@ $navbar-height: 60px;
 @import 'components/session-summary-list';
 @import 'components/team/invitations-list-item';
 @import 'components/dropdown';
-@import 'components/user-logged-menu';
 @import 'flatpickr';
 
 /* App/Components */
@@ -83,4 +84,10 @@ input:invalid {
 
 * {
   box-sizing: border-box;
+}
+
+@include device-is('mobile') {
+  .hide-on-mobile {
+    display: none;
+  }
 }

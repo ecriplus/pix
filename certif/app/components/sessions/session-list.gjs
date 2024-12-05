@@ -1,3 +1,4 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -78,65 +79,63 @@ export default class SessionList extends Component {
   }
 
   <template>
-    <div class='table--with-row-clickable session-summary-list' role='tabpanel'>
-      <div class='panel'>
-        <div class='table content-text content-text--small'>
-          <table>
-            <thead>
-              <tr>
-                <th class='table__column table__column--small' scope='col'>
-                  {{t 'common.forms.session-labels.session-number'}}
-                </th>
-                <th class='table__column table__column--small' scope='col'>
-                  {{t 'common.forms.session-labels.center-name'}}
-                </th>
-                <th class='table__column table__column--small' scope='col'>
-                  {{t 'common.forms.session-labels.room'}}
-                </th>
-                <th class='table__column table__column--small' scope='col'>
-                  {{t 'common.forms.session-labels.date'}}
-                </th>
-                <th class='table__column table__column--small' scope='col'>
-                  {{t 'common.forms.session-labels.time'}}
-                </th>
-                <th class='table__column table__column--small' scope='col'>
-                  {{t 'common.forms.session-labels.invigilator'}}
-                </th>
-                <th class='table__column table__column' scope='col'>
-                  {{t 'pages.sessions.list.table.header.enrolled-candidates'}}
-                </th>
-                <th class='table__column table__column' scope='col'>
-                  {{t 'pages.sessions.list.table.header.effective-candidates'}}
-                </th>
-                <th class='table__column table__column--small' scope='col'>
-                  {{t 'common.forms.session-labels.status'}}
-                </th>
-                <th class='table__column table__column--small' scope='col'>
-                  <span class='screen-reader-only'>
-                    {{t 'pages.sessions.list.table.header.actions'}}
-                  </span>
-                </th>
-              </tr>
-            </thead>
+    <PixBlock class='table--with-row-clickable' role='tabpanel'>
+      <div class='table content-text--small'>
+        <table>
+          <thead>
+            <tr>
+              <th class='table__column--small' scope='col'>
+                {{t 'common.forms.session-labels.session-number'}}
+              </th>
+              <th class='table__column--medium' scope='col'>
+                {{t 'common.forms.session-labels.center-name'}}
+              </th>
+              <th class='table__column--small' scope='col'>
+                {{t 'common.forms.session-labels.room'}}
+              </th>
+              <th class='table__column--small' scope='col'>
+                {{t 'common.forms.session-labels.date'}}
+              </th>
+              <th class='table__column--small' scope='col'>
+                {{t 'common.forms.session-labels.time'}}
+              </th>
+              <th class='table__column--small' scope='col'>
+                {{t 'common.forms.session-labels.invigilator'}}
+              </th>
+              <th class='table__column--small' scope='col'>
+                {{t 'pages.sessions.list.table.header.enrolled-candidates'}}
+              </th>
+              <th class='table__column--medium' scope='col'>
+                {{t 'pages.sessions.list.table.header.effective-candidates'}}
+              </th>
+              <th class='table__column--medium' scope='col'>
+                {{t 'common.forms.session-labels.status'}}
+              </th>
+              <th class='table__column--small' scope='col'>
+                <span class='screen-reader-only'>
+                  {{t 'pages.sessions.list.table.header.actions'}}
+                </span>
+              </th>
+            </tr>
+          </thead>
 
-            <tbody>
-              {{#each @sessionSummaries as |sessionSummary|}}
-                <SessionListRow
-                  @sessionSummary={{sessionSummary}}
-                  @goToSessionDetails={{@goToSessionDetails}}
-                  @openSessionDeletionConfirmModal={{this.openSessionDeletionConfirmModal}}
-                />
-              {{/each}}
-            </tbody>
-          </table>
-          {{#if (eq @sessionSummaries.length 0)}}
-            <div class='table__empty content-text'>
-              {{t 'pages.sessions.list.table.empty'}}
-            </div>
-          {{/if}}
-        </div>
+          <tbody>
+            {{#each @sessionSummaries as |sessionSummary|}}
+              <SessionListRow
+                @sessionSummary={{sessionSummary}}
+                @goToSessionDetails={{@goToSessionDetails}}
+                @openSessionDeletionConfirmModal={{this.openSessionDeletionConfirmModal}}
+              />
+            {{/each}}
+          </tbody>
+        </table>
+        {{#if (eq @sessionSummaries.length 0)}}
+          <div class='table__empty content-text'>
+            {{t 'pages.sessions.list.table.empty'}}
+          </div>
+        {{/if}}
       </div>
-    </div>
+    </PixBlock>
 
     <PixPagination @pagination={{@sessionSummaries.meta}} @locale={{this.currentLocale}} />
 

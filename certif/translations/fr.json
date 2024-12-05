@@ -206,17 +206,19 @@
       "current-year": "© {currentYear} Pix",
       "legal-notice": "Mentions légales"
     },
-    "main": {
+    "sidebar": {
+      "change-center": {
+        "label": "Changer de centre"
+      },
       "documentation": "Documentation",
-      "sessions": "Sessions",
-      "sessions-label": "Sessions de certification",
+      "extra-information": "Navigation principale",
+      "logout": "Se déconnecter",
+      "sessions": {
+        "extra-information": "Sessions de certification",
+        "label": "Sessions"
+      },
       "supervisor": "Espace surveillant",
       "team": "Équipe"
-    },
-    "user-logged-menu": {
-      "button-extra-information": "Ouvrir le menu utilisateur",
-      "logout": "Se déconnecter",
-      "page-title": "Déconnexion"
     }
   },
   "pages": {
@@ -280,6 +282,9 @@
           }
         }
       }
+    },
+    "logout": {
+      "page-title": "Déconnexion"
     },
     "sco": {
       "banner": {

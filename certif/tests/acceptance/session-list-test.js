@@ -171,11 +171,12 @@ module('Acceptance | Session List', function (hooks) {
 
         await click(
           screen.getByRole('button', {
-            name: 'Harry Cover Centre SCO isNotM (ABC123) Ouvrir le menu utilisateur',
+            name: 'Changer de centre',
           }),
         );
+        await screen.findByRole('listbox');
         await click(
-          screen.getByRole('button', {
+          screen.getByRole('option', {
             name: 'Centre SCO isM (ABC123)',
           }),
         );

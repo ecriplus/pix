@@ -338,8 +338,8 @@ module('Acceptance | authenticated | team', function (hooks) {
           const screen = await visitScreen('/equipe');
 
           // when
-          await click(screen.getByText(`${certificationCenterName} (${certificationPointOfContact.externalId})`));
-          await click(screen.getByText(`${otherCertificationCenterName}`));
+          await click(screen.getByRole('button', { name: 'Changer de centre' }));
+          await click(screen.getByText(`${otherCertificationCenterName} (${certificationPointOfContact2.externalId})`));
           memberOfTheFirstCertificationCenter.destroy();
           await visitScreen('/equipe');
 
@@ -579,8 +579,8 @@ module('Acceptance | authenticated | team', function (hooks) {
           const screen = await visitScreen('/equipe');
 
           // when
-          await click(screen.getByText(`${certificationCenterName} (${certificationPointOfContact.externalId})`));
-          await click(screen.getByText(`${otherCertificationCenterName}`));
+          await click(screen.getByRole('button', { name: 'Changer de centre' }));
+          await click(screen.getByText(`${otherCertificationCenterName} (${certificationPointOfContact2.externalId})`));
           memberOfTheFirstCertificationCenter.destroy();
           await visitScreen('/equipe');
 

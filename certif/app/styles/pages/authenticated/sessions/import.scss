@@ -30,7 +30,7 @@
       margin-left: 24px;
     }
 
-    .pix-message--warning {
+    .pix-notification-alert--warning {
       margin-top: var(--pix-spacing-4x);
     }
   }
@@ -41,7 +41,7 @@
     padding: var(--pix-spacing-6x);
     gap: var(--pix-spacing-6x);
 
-    .pix-message__content {
+    .pix-notification-alert__content {
       color: var(--pix-neutral-800);
 
       li:first-of-type {

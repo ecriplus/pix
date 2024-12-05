@@ -1,19 +1,13 @@
-<div class="app">
-  <Layout::Sidebar
-    @rootUrl={{this.rootUrl}}
-    @showLinkToSessions={{this.showLinkToSessions}}
-    @documentationLink={{this.documentationLink}}
-  />
+<PixAppLayout @variant="certif" class="authenticated-layout">
+  <Layout::Sidebar />
 
-  <div class="app__main-content main-content">
+  <div class="authenticated">
+    <main>
+      <Layout::Banners />
 
-    <Layout::Topbar />
-
-    <div class="page">
       {{outlet}}
-    </div>
+    </main>
 
     <Layout::Footer />
   </div>
-
-</div>
+</PixAppLayout>
