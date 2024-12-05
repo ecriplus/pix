@@ -40,7 +40,7 @@ export default class Places extends Component {
             @variant="primary"
             @route="authenticated.organizations.get.places.new"
             @model={{@model}}
-            @iconBefore="plus"
+            @iconBefore="add"
           >
             Ajouter des places
           </PixButtonLink>

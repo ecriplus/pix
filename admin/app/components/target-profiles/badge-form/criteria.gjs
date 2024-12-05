@@ -1,8 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
-import { fn } from '@ember/helper';
-import { concat } from '@ember/helper';
+import { concat, fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -111,7 +110,7 @@ export default class Criteria extends Component {
           @variant="primary"
           @size="small"
           @triggerAction={{this.addCappedTubeCriterion}}
-          @iconBefore="plus"
+          @iconBefore="add"
         >
           Ajouter une nouvelle sélection de sujets
         </PixButton>

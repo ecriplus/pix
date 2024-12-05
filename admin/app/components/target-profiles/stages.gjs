@@ -256,7 +256,7 @@ export default class Stages extends Component {
               @variant="secondary"
               @triggerAction={{this.addStage}}
               @isDisabled={{this.isAddStageDisabled}}
-              @iconBefore="plus"
+              @iconBefore="add"
             >
               Nouveau palier
             </PixButton>
@@ -268,7 +268,7 @@ export default class Stages extends Component {
                     @variant="secondary"
                     @triggerAction={{this.addFirstSkillStage}}
                     @isDisabled={{this.isAddFirstSkillStageDisabled}}
-                    @iconBefore="plus"
+                    @iconBefore="add"
                   >
                     Nouveau palier "1er acquis"
                   </PixButton>
