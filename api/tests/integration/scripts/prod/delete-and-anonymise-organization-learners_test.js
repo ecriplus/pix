@@ -138,7 +138,7 @@ describe('DeleteAndAnonymiseOrgnizationLearnerScript', function () {
         expect(participationResult[1].userId).to.be.null;
       });
 
-      it('detach its assessments', async function () {
+      it('detach its assessments and updates updatedAt column', async function () {
         // given
         const otherParticipation = databaseBuilder.factory.buildCampaignParticipation({
           userId: otherLearner.userId,
@@ -174,29 +174,16 @@ describe('DeleteAndAnonymiseOrgnizationLearnerScript', function () {
         });
 
         // then
-        const assessmentResults = await knex('assessments').whereNull('campaignParticipationId');
+        const assessmentResults = await knex('assessments')
+          .where({ updatedAt: now })
+          .whereNull('campaignParticipationId');
         expect(assessmentResults).lengthOf(2);
       });
 
-      // We skip this test since there is a database
-      // non-nullable constraint on campaignParticipationId
-      // Until this constraint is removed we skip the tests
-      // eslint-disable-next-line mocha/no-skipped-tests
-      it.skip('detach its user recommended trainings', async function () {
+      it('detach its user recommended trainings', async function () {
         // given
         const training = databaseBuilder.factory.buildTraining();
         const training2 = databaseBuilder.factory.buildTraining();
-
-        const otherCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
-          userId: otherLearner.userId,
-          organizationLearnerId: otherLearner.id,
-          participantExternalId: 'coucou',
-        });
-        databaseBuilder.factory.buildUserRecommendedTraining({
-          campaignParticipationId: otherCampaignParticipation.id,
-          trainingId: training.id,
-          userId: otherLearner.userId,
-        });
 
         const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
           userId: learner.userId,
@@ -204,15 +191,22 @@ describe('DeleteAndAnonymiseOrgnizationLearnerScript', function () {
           participantExternalId: 'coucou',
         });
 
+        const otherParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          userId: otherLearner.userId,
+          organizationLearnerId: otherLearner.id,
+          participantExternalId: 'other-learner',
+        });
+
         databaseBuilder.factory.buildUserRecommendedTraining({
           campaignParticipationId: campaignParticipation.id,
           trainingId: training.id,
           userId: learner.userId,
         });
+
         databaseBuilder.factory.buildUserRecommendedTraining({
-          campaignParticipationId: campaignParticipation.id,
+          campaignParticipationId: otherParticipation.id,
           trainingId: training2.id,
-          userId: learner.userId,
+          userId: otherLearner.userId,
         });
 
         await databaseBuilder.commit();
@@ -224,12 +218,18 @@ describe('DeleteAndAnonymiseOrgnizationLearnerScript', function () {
         });
 
         // then
-        const recommendedTrainingResults = await knex('user-recommended-trainings').whereNull('userId');
-        expect(recommendedTrainingResults).lengthOf(2);
-        expect(recommendedTrainingResults[0].campaignParticipationId).to.be.null;
-        expect(recommendedTrainingResults[0].campaignParticipationId).to.be.null;
-        expect(recommendedTrainingResults[1].campaignParticipationId).to.be.null;
-        expect(recommendedTrainingResults[1].campaignParticipationId).to.be.null;
+        const anonymizedRecommendedTrainingResults =
+          await knex('user-recommended-trainings').whereNull('campaignParticipationId');
+
+        const otherRecommendedTrainingResults =
+          await knex('user-recommended-trainings').whereNotNull('campaignParticipationId');
+
+        expect(anonymizedRecommendedTrainingResults).lengthOf(1);
+        expect(anonymizedRecommendedTrainingResults[0].campaignParticipationId).to.be.null;
+        expect(anonymizedRecommendedTrainingResults[0].updatedAt).to.deep.equal(now);
+
+        expect(otherRecommendedTrainingResults).lengthOf(1);
+        expect(otherRecommendedTrainingResults[1].campaignParticipationId).to.deep.equal(otherParticipation.id);
       });
     });
   });
