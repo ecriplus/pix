@@ -24,6 +24,7 @@ module('Integration | Component | Campaigns | participation-row', function (hook
       const participation = EmberObject.create({
         firstName: 'Jean',
         lastName: 'Claude',
+        userId: 123,
         userFullName: 'Jean-Claude Gangan',
         createdAt: new Date('2020-01-01'),
       });
@@ -35,6 +36,22 @@ module('Integration | Component | Campaigns | participation-row', function (hook
       assert.dom(screen.getByText('Jean Claude')).exists();
       assert.dom(screen.getByRole('link', { name: 'Jean-Claude Gangan' })).exists();
       assert.dom(screen.getByText('01/01/2020')).exists();
+    });
+    test('it should display name without link when there is no userId', async function (assert) {
+      // given
+      const participation = EmberObject.create({
+        firstName: '',
+        lastName: '',
+        userFullName: '(Anonymised)',
+        createdAt: new Date('2020-01-01'),
+      });
+
+      // when
+      const screen = await render(<template><ParticipationRow @participation={{participation}} /></template>);
+
+      // then
+      assert.ok(screen.getByText('(Anonymised)'));
+      assert.notOk(screen.queryByRole('link', { name: '(Anonymised)' }));
     });
 
     test('it should not display participantExternalId if idPixLabel is null', async function (assert) {
