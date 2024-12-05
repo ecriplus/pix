@@ -358,6 +358,7 @@
       "organization-participants": "Deelnemers",
       "places": "Plaatsen",
       "sco-organization-participants": "Leerlingen",
+      "statistics": "Statistieken",
       "sup-organization-participants": "Studenten",
       "support": "Helpcentrum",
       "team": "Team"
@@ -479,7 +480,7 @@
       },
       "landing-page-text": {
         "label": "Tekst op de startpagina",
-        "sublabel":"Dit veld wordt weergegeven voor deelnemers aan de campagne."
+        "sublabel": "Dit veld wordt weergegeven voor deelnemers aan de campagne."
       },
       "legal-warning": "* In overeenstemming met de Franse wet op gegevensbescherming en als verantwoordelijke voor de verwerking van de gegevens, vragen we niet naar bijzonder identificerende of belangrijke gegevens, tenzij dit absoluut noodzakelijk is. Het burgerservicenummer (BSN) moet worden vermeden, net als gevoelige gegevens.",
       "multiple-sendings": {
@@ -532,7 +533,7 @@
       "target-profiles-search-placeholder": "Zoeken op naam",
       "test-title": {
         "label": "Titel test",
-        "sublabel":"Dit veld wordt weergegeven voor deelnemers aan de campagne."
+        "sublabel": "Dit veld wordt weergegeven voor deelnemers aan de campagne."
       },
       "title": "Een campagne maken",
       "yes": "Ja"
@@ -551,8 +552,8 @@
       "campaign-modification-success-message": "De wijzigingen zijn opgeslagen.",
       "campaign-name": "Naam Campagne",
       "landing-page-text": {
-         "label": "Tekst op de startpagina",
-         "sublabel":"Dit veld wordt weergegeven voor deelnemers aan de campagne."
+        "label": "Tekst op de startpagina",
+        "sublabel": "Dit veld wordt weergegeven voor deelnemers aan de campagne."
       },
       "owner": {
         "info": "De eigenaar van de campagne en de beheerders van deze organisatie zijn de enige personen die deze campagne kunnen wijzigen en archiveren.",
@@ -561,8 +562,8 @@
         "title": "Eigenaar van de campagne"
       },
       "personalised-test-title": {
-        "label":"Titel test",
-        "sublabel":"Dit veld wordt weergegeven voor deelnemers aan de campagne."
+        "label": "Titel test",
+        "sublabel": "Dit veld wordt weergegeven voor deelnemers aan de campagne."
       },
       "title": "Een campagne wijzigen"
     },

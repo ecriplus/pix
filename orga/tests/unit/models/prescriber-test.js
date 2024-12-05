@@ -247,4 +247,34 @@ module('Unit | Model | prescriber', function (hooks) {
       assert.false(hasOrganizationLearnerImport);
     });
   });
+
+  module('#hasCoverRateFeature', function () {
+    test('it return true when feature is enabled', function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const model = store.createRecord('prescriber', {
+        features: { ['COVER_RATE']: true },
+      });
+
+      // when
+      const { hasCoverRateFeature } = model;
+
+      // then
+      assert.true(hasCoverRateFeature);
+    });
+
+    test('it return false when feature is disabled', function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const model = store.createRecord('prescriber', {
+        features: { ['COVER_RATE']: false },
+      });
+
+      // when
+      const { hasCoverRateFeature } = model;
+
+      // then
+      assert.false(hasCoverRateFeature);
+    });
+  });
 });

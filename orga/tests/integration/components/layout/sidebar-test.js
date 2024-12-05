@@ -331,6 +331,21 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
     });
   });
 
+  module('When the user has the cover rate feature', function () {
+    test('should display Statistiques entry with link to statistics page', async function (assert) {
+      class CurrentUserStub extends Service {
+        organization = { id: 5 };
+        canAccessStatisticsPage = true;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+
+      const screen = await render(hbs`<Layout::Sidebar />`);
+
+      const statisticsLink = screen.getByRole('link', { name: t('navigation.main.statistics') });
+      assert.dom(statisticsLink).hasAttribute('href', '/statistiques');
+    });
+  });
+
   test('[a11y] it should contain accessibility aria-label nav', async function (assert) {
     // given
     class CurrentUserStub extends Service {

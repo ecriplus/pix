@@ -80,6 +80,13 @@
         {{t "navigation.main.support"}}
       </a>
     {{/if}}
-
+    {{#if this.shouldDisplayStatisticsEntry}}
+      <LinkTo @route="authenticated.statistics" class="sidebar-nav__item">
+        <span class="sidebar-nav__item-icon">
+          <PixIcon @name="monitoring" role="none" />
+        </span>
+        {{t "navigation.main.statistics"}}
+      </LinkTo>
+    {{/if}}
   </nav>
 </aside>

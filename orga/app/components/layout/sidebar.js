@@ -37,6 +37,10 @@ export default class SidebarMenu extends Component {
     return this.currentUser.canAccessCampaignsPage;
   }
 
+  get shouldDisplayStatisticsEntry() {
+    return this.currentUser.canAccessStatisticsPage;
+  }
+
   get organizationLearnersList() {
     if (this.currentUser.isSCOManagingStudents) {
       return {

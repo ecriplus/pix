@@ -20,8 +20,10 @@ export default class Prescriber extends Model {
       MISSIONS_MANAGEMENT: 'MISSIONS_MANAGEMENT',
       LEARNER_IMPORT: 'LEARNER_IMPORT',
       ORALIZATION: 'ORALIZATION',
+      COVER_RATE: 'COVER_RATE',
     };
   }
+
   get fullName() {
     return `${this.firstName} ${this.lastName}`;
   }
@@ -70,5 +72,9 @@ export default class Prescriber extends Model {
 
   get hasParticipants() {
     return Boolean(this.participantCount);
+  }
+
+  get hasCoverRateFeature() {
+    return this.features[Prescriber.featureList.COVER_RATE];
   }
 }

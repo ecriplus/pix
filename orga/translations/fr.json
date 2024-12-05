@@ -364,6 +364,7 @@
       "organization-participants": "Participants",
       "places": "Places",
       "sco-organization-participants": "Élèves",
+      "statistics": "Statistiques",
       "sup-organization-participants": "Étudiants",
       "support": "Centre d'aide",
       "team": "Équipe"
@@ -575,8 +576,7 @@
       "target-profiles-search-placeholder": "Rechercher par nom",
       "test-title": {
         "label": "Titre du parcours",
-        "sublabel":"Ce champs sera affiché aux participants de la campagne."
-
+        "sublabel": "Ce champs sera affiché aux participants de la campagne."
       },
       "yes": "Oui"
     },
@@ -596,8 +596,8 @@
       "campaign-name": "Nom de la campagne",
       "landing-page-text": {
         "label": "Texte de la page d'accueil",
-        "sublabel":"Ce champs sera affiché aux participants de la campagne."
-     },
+        "sublabel": "Ce champs sera affiché aux participants de la campagne."
+      },
       "owner": {
         "title": "Propriétaire de la campagne",
         "info": "Le propriétaire de la campagne ainsi que les administrateurs de cette organisation, sont les seules personnes qui peuvent modifier et archiver cette campagne.",
@@ -605,8 +605,8 @@
         "placeholder": "Nom et prénom du propriétaire"
       },
       "personalised-test-title": {
-        "label":"Titre du parcours",
-        "sublabel":"Ce champs sera affiché aux participants de la campagne."
+        "label": "Titre du parcours",
+        "sublabel": "Ce champs sera affiché aux participants de la campagne."
       }
     },
     "campaign-results": {
