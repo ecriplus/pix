@@ -1,12 +1,12 @@
-import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { CERTIFICATION_FEATURES } from '../../../../src/certification/shared/domain/constants.js';
-import { CERTIFICATION_CENTER_MEMBERSHIP_ROLES } from '../../../../src/shared/domain/models/CertificationCenterMembership.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../test-helper.js';
+import { CERTIFICATION_FEATURES } from '../../../../../src/certification/shared/domain/constants.js';
+import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
+import { CERTIFICATION_CENTER_MEMBERSHIP_ROLES } from '../../../../../src/shared/domain/models/CertificationCenterMembership.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
 const { getCertificationPointOfContact } = usecases;
 
-describe('Integration | UseCase | get-certification-point-of-contact', function () {
-  it('should return the CertificationPointOfContact', async function () {
+describe('Integration | Identity Access Management | Domain | UseCase | get-certification-point-of-contact', function () {
+  it('returns the CertificationPointOfContact', async function () {
     // given
     const user = databaseBuilder.factory.buildUser();
     const certificationCenter = databaseBuilder.factory.buildCertificationCenter();

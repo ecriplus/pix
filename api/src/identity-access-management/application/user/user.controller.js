@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import * as localeService from '../../../shared/domain/services/locale-service.js';
 import * as userSerializer from '../../../shared/infrastructure/serializers/jsonapi/user-serializer.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
@@ -238,7 +237,7 @@ const validateUserAccountEmail = async function (request, h) {
 
 const getCertificationPointOfContact = async function (request) {
   const authenticatedUserId = request.auth.credentials.userId;
-  const certificationPointOfContact = await libUsecases.getCertificationPointOfContact({ userId: authenticatedUserId });
+  const certificationPointOfContact = await usecases.getCertificationPointOfContact({ userId: authenticatedUserId });
   return certificationPointOfContactSerializer.serialize(certificationPointOfContact);
 };
 

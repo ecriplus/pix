@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../../lib/domain/usecases/index.js';
 import { userController } from '../../../../../src/identity-access-management/application/user/user.controller.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
@@ -475,7 +474,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
 
   describe('#getCertificationPointOfContact', function () {
     beforeEach(function () {
-      sinon.stub(libUsecases, 'getCertificationPointOfContact');
+      sinon.stub(usecases, 'getCertificationPointOfContact');
     });
 
     it('returns a serialized CertificationPointOfContact', async function () {
@@ -514,7 +513,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
         },
       };
 
-      libUsecases.getCertificationPointOfContact.withArgs({ userId: 123 }).resolves(certificationPointOfContact);
+      usecases.getCertificationPointOfContact.withArgs({ userId: 123 }).resolves(certificationPointOfContact);
 
       // when
       const response = await userController.getCertificationPointOfContact(request, hFake);
