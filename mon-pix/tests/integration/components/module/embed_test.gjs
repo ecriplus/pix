@@ -93,6 +93,37 @@ module('Integration | Component | Module | Embed', function (hooks) {
     });
 
     module('when a message is received', function () {
+      module('when embed does not require completion', function () {
+        test('should not call the onAnswer method', async function (assert) {
+          // given
+          const embed = {
+            id: 'id',
+            title: 'Simulateur',
+            isCompletionRequired: false,
+            url: 'https://example.org',
+            height: 800,
+          };
+          const onElementAnswerStub = sinon.stub();
+          const screen = await render(
+            <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
+          );
+          await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+
+          // when
+          const iframe = screen.getByTitle('Simulateur');
+          const event = new MessageEvent('message', {
+            data: { answer: 'toto', from: 'pix' },
+            origin: 'https://epreuves.pix.fr',
+            source: iframe.contentWindow,
+          });
+          window.dispatchEvent(event);
+
+          // then
+          sinon.assert.notCalled(onElementAnswerStub);
+          assert.ok(true);
+        });
+      });
+
       module('when message is not from pix', function () {
         test('should not call the onAnswer method', async function (assert) {
           // given

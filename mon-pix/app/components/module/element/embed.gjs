@@ -36,7 +36,9 @@ export default class ModulixEmbed extends ModuleElement {
     this.iframe.focus();
 
     this.messageHandler = this._receiveEmbedMessage.bind(this);
-    window.addEventListener('message', this.messageHandler);
+    if (this.args.embed.isCompletionRequired) {
+      window.addEventListener('message', this.messageHandler);
+    }
   }
 
   _receiveEmbedMessage(event) {
