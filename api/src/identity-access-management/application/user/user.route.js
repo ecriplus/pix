@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import XRegExp from 'xregexp';
 
+import { certificationPointOfContactController } from '../../../../lib/application/certification-point-of-contacts/certification-point-of-contact-controller.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { config } from '../../../shared/config.js';
 import { EntityValidationError } from '../../../shared/domain/errors.js';
@@ -344,6 +345,18 @@ export const userRoutes = [
         "- Suite à une demande de changement d'adresse e-mail, met à jour cette dernière pour l'utilisateur identifié par son id.",
       ],
       tags: ['api', 'user', 'update-email'],
+    },
+  },
+  {
+    method: 'GET',
+    path: '/api/certification-point-of-contacts/me',
+    config: {
+      handler: (request, h) => certificationPointOfContactController.get(request, h),
+      notes: [
+        '- **Cette route est restreinte aux utilisateurs authentifiés*' * '\n' +
+          '- Récupération d’un référent de certification.',
+      ],
+      tags: ['api', 'identity-access-management', 'user', 'certification', 'certification-point-of-contact'],
     },
   },
 ];

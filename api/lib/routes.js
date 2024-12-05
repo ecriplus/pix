@@ -4,7 +4,6 @@ import * as campaignParticipations from './application/campaign-participations/i
 import * as certificationCenterInvitations from './application/certification-center-invitations/index.js';
 import * as certificationCenterMemberships from './application/certification-center-memberships/index.js';
 import * as certificationCenters from './application/certification-centers/index.js';
-import * as certificationPointOfContacts from './application/certification-point-of-contacts/index.js';
 import * as certifications from './application/certifications/index.js';
 import * as frameworks from './application/frameworks/index.js';
 import * as memberships from './application/memberships/index.js';
@@ -23,7 +22,6 @@ const routes = [
   certificationCenters,
   certificationCenterInvitations,
   certificationCenterMemberships,
-  certificationPointOfContacts,
   certifications,
   healthcheck,
   memberships,
