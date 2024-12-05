@@ -1,7 +1,11 @@
 import _ from 'lodash';
 
+import { config } from '../../../config.js';
 import { LearningContentCache } from '../../caches/old/learning-content-cache.js';
+import { child } from '../../utils/logger.js';
 import { LearningContentResourceNotFound } from './LearningContentResourceNotFound.js';
+
+const logger = child('learningcontent:datasource:old', { event: 'learningcontent' });
 
 const _DatasourcePrototype = {
   async get(id) {
@@ -30,6 +34,9 @@ const _DatasourcePrototype = {
   },
 
   async list() {
+    if (config.featureToggles.useNewLearningContent) {
+      logger.warn({ modelName: this.modelName }, 'container should not use old datasource');
+    }
     const learningContent = await LearningContentCache.instance.get();
     return learningContent[this.modelName];
   },
