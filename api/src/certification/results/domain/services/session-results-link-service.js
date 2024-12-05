@@ -4,5 +4,5 @@ import { tokenService } from '../../../../shared/domain/services/token-service.j
 export const generateResultsLink = function ({ sessionId, i18n }) {
   const token = tokenService.createCertificationResultsLinkToken({ sessionId });
   const lang = i18n.getLocale();
-  return `${config.domain.pixApp + config.domain.tldOrg}/resultats-session#${token}?lang=${lang}`;
+  return `${config.domain.pixApp + config.domain.tldOrg}/resultats-session?lang=${lang}#${token}`;
 };
