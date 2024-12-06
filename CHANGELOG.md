@@ -1,5 +1,42 @@
 # Pix Changelog
 
+## v4.252.0 (06/12/2024)
+
+
+### :rocket: Amélioration
+- [#10745](https://github.com/1024pix/pix/pull/10745) [FEATURE] Traduction manquante depuis Phrase ES et NL (PIX-14930).
+- [#10740](https://github.com/1024pix/pix/pull/10740) [FEATURE] Mettre à jour la traduction des "courses" (PIX-15606).
+- [#10718](https://github.com/1024pix/pix/pull/10718) [FEATURE] Faire remonter le nombre de clics sur le bouton "Exporter les résultats de campagne" dans Matomo.
+- [#10737](https://github.com/1024pix/pix/pull/10737) [FEATURE] Déplacer les CGU vers un onglet dédié.
+- [#10689](https://github.com/1024pix/pix/pull/10689) [FEATURE] Envoyer l'email de confirmation de suppression de compte en autonomie (PIX-14917).
+- [#10665](https://github.com/1024pix/pix/pull/10665) [FEATURE] Intégrer le nouvelle navigation sur PixOrga (PIX-15369).
+- [#10725](https://github.com/1024pix/pix/pull/10725) [FEATURE] Ajouter l'entrée `Statistiques` pour les organisations ayant la feature sur PixOrga (PIX-15453).
+- [#10680](https://github.com/1024pix/pix/pull/10680) [FEATURE] Ajout du Pix Navigation dans Pix Certif (PIX-14554).
+- [#10721](https://github.com/1024pix/pix/pull/10721) [FEATURE] Ajouter un prehandler pour la route de récupération d'une liste d'attestations (PIX-15593).
+- [#10720](https://github.com/1024pix/pix/pull/10720) [FEATURE] Modifier le lien pour l'interprétation des résultats sur Pix Orga (PIX-15555).
+- [#10622](https://github.com/1024pix/pix/pull/10622) [FEATURE] Correction typo module chatgpt-parle-francais.
+
+### :building_construction: Tech
+- [#10741](https://github.com/1024pix/pix/pull/10741) [TECH] Ajouter les traductions manquantes pour la page de sélection SSO (PIX-15609).
+- [#10705](https://github.com/1024pix/pix/pull/10705) [TECH] Migrer la route PATCH /api/admin/certification-centers/{id} dans src (PIX-15539).
+- [#10714](https://github.com/1024pix/pix/pull/10714) [TECH] Migration de la route de publication de session (PIX-14476).
+- [#10704](https://github.com/1024pix/pix/pull/10704) [TECH] Migrer la route PATCH /api/admin/certification-center-memberships/{id} dans src (PIX-15537).
+- [#10727](https://github.com/1024pix/pix/pull/10727) [TECH] Mise à jour des icônes dans admnistration de PixAdmin (PIX-15604).
+- [#10719](https://github.com/1024pix/pix/pull/10719) [TECH] Changement de l'URL de recuperation des resultats de certification (PIX-15515).
+- [#10658](https://github.com/1024pix/pix/pull/10658) [TECH] Suppression de l'ancien design des pages d'authentification (PIX-15327).
+- [#10715](https://github.com/1024pix/pix/pull/10715) [TECH] Supprimer l'action qui vérifie que Scalingo a bien la version de Node.js.
+
+### :bug: Correction
+- [#10734](https://github.com/1024pix/pix/pull/10734) [BUGFIX] Ignorer les réponses envoyés par les autres simulateurs auto (PIX-15256).
+- [#10728](https://github.com/1024pix/pix/pull/10728) [BUGFIX] MAJ l'interface lors de l'import JSON d'un profil-cible (PIX-15548).
+- [#10726](https://github.com/1024pix/pix/pull/10726) [BUGFIX] Mission: alt des illustrations (PIX-15601).
+- [#10722](https://github.com/1024pix/pix/pull/10722) [BUGFIX] Rajouter un fond derrière le bloc d'alerte d'une épreuve focus (PIX-15545).
+
+### :arrow_up: Montée de version
+- [#10735](https://github.com/1024pix/pix/pull/10735) [BUMP] Update dependency @1024pix/pix-ui to ^48.9.0 (mon-pix).
+- [#10707](https://github.com/1024pix/pix/pull/10707) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.24 (certif).
+- [#10717](https://github.com/1024pix/pix/pull/10717) [BUMP] Update dependency @1024pix/pix-ui to v49 (orga).
+
 ## v4.251.0 (04/12/2024)
 
 
