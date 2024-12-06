@@ -119,12 +119,6 @@ function routes() {
   });
   this.get('/admin/sessions/:id');
   this.get('/admin/sessions/:id/jury-certification-summaries', getPaginatedJuryCertificationSummariesBySessionId);
-  this.put('/admin/sessions/:id/results-sent-to-prescriber', (schema, request) => {
-    const sessionId = request.params.id;
-    const session = schema.sessions.findBy({ id: sessionId });
-    session.update({ resultsSentToPrescriberAt: new Date() });
-    return session;
-  });
   this.post('/admin/sessions/publish-in-batch', () => {
     return new Response(200);
   });

@@ -157,7 +157,6 @@ module('Acceptance | Session pages', function (hooks) {
           // then
           assert.dom(screen.getByText("M'assigner la session")).exists();
           assert.dom(screen.getByText('Lien de téléchargement des résultats')).exists();
-          assert.dom(screen.getByText('Résultats transmis au prescripteur')).exists();
         });
 
         module('copy link button', function () {

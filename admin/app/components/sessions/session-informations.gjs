@@ -190,17 +190,6 @@ function getFormattedDate(param) {
             >
               Télécharger les attestations
             </PixButton>
-
-            {{#if @sessionModel.areResultsToBeSentToPrescriber}}
-              <PixButton
-                size="small"
-                @triggerAction={{@tagSessionAsSentToPrescriber}}
-                @variant="secondary"
-                class="session-info__download-button"
-              >
-                Résultats transmis au prescripteur
-              </PixButton>
-            {{/if}}
           </div>
         </div>
       {{/if}}

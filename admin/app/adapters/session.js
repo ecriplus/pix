@@ -31,10 +31,7 @@ export default class SessionAdapter extends ApplicationAdapter {
   }
 
   updateRecord(store, type, snapshot) {
-    if (snapshot.adapterOptions.flagResultsAsSentToPrescriber) {
-      const url = this.urlForUpdateRecord(snapshot.id, type.modelName, snapshot) + '/results-sent-to-prescriber';
-      return this.ajax(url, 'PUT');
-    } else if (snapshot.adapterOptions.updatePublishedCertifications) {
+    if (snapshot.adapterOptions.updatePublishedCertifications) {
       let url;
       if (snapshot.adapterOptions.toPublish) {
         url = this.urlForUpdateRecord(snapshot.id, type.modelName, snapshot) + '/publish';

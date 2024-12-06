@@ -117,11 +117,6 @@ export default class Session extends Model {
     );
   }
 
-  @computed('resultsSentToPrescriberAt', 'isFinalized')
-  get areResultsToBeSentToPrescriber() {
-    return Boolean(this.isFinalized && !this.resultsSentToPrescriberAt);
-  }
-
   @computed('status')
   get displayStatus() {
     return statusToDisplayName[this.status];

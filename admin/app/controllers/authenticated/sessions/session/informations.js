@@ -41,11 +41,6 @@ export default class IndexController extends Controller {
   }
 
   @action
-  async tagSessionAsSentToPrescriber() {
-    await this.sessionModel.save({ adapterOptions: { flagResultsAsSentToPrescriber: true } });
-  }
-
-  @action
   async unfinalizeSession() {
     try {
       await this.sessionModel.save({ adapterOptions: { unfinalize: true } });
