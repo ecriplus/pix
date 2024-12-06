@@ -330,7 +330,7 @@ module('Integration | Component | user certifications detail header', function (
   });
 
   module('when there is an error during the download of the attestation', function () {
-    test('should show the error message', async function (assert) {
+    test('should show the common error message', async function (assert) {
       // given
       const fileSaverSaveStub = sinon.stub();
 
@@ -366,7 +366,7 @@ module('Integration | Component | user certifications detail header', function (
       await click(screen.getByRole('button', { name: 'Télécharger mon attestation' }));
 
       // then
-      assert.ok(screen.getByText('an error message'));
+      assert.ok(screen.getByText('Une erreur est survenue. Veuillez recommencer ou contacter le support.'));
     });
   });
 });

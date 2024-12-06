@@ -72,34 +72,31 @@
 }
 
 .attestation-and-verification-code {
-  padding: 16px 20px;
+  max-width: 100%;
+  padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
   background-color: var(--pix-neutral-20);
   border-radius: 8px;
 
+  @include device-is('desktop') {
+    max-width: calc(var(--pix-spacing-12x) * 6);
+  }
+
   .attestation {
-    margin: auto;
-    font-size: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: var(--pix-spacing-6x);
     text-align: center;
 
-    button {
-      max-width: 250px;
-      padding: 14px 20px;
-    }
-
     &__error-message {
-      max-width: 250px;
-      margin-top: 15px;
+      @extend %pix-body-s;
+
+      margin-top: var(--pix-spacing-4x);
       color: var(--pix-error-500);
     }
   }
 
-  hr {
-    margin: 24px 0;
-    border: 1px solid var(--pix-neutral-20);
-  }
-
   .verification-code {
-    max-width: 250px;
     margin: auto;
     color: var(--pix-neutral-900);
     letter-spacing: 0;
@@ -157,10 +154,5 @@
   @include device-is('desktop') {
     flex-grow: 0;
     margin-left: auto;
-
-    .verification-code,
-    .attestation {
-      margin: 0;
-    }
   }
 }
