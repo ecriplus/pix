@@ -14,7 +14,7 @@ import Stages from './stages';
           @variant="secondary"
           @route="authenticated.target-profiles.target-profile.badges.new"
           @model={{@targetProfile.id}}
-          @iconBefore="plus"
+          @iconBefore="add"
         >
           Nouveau résultat thématique
         </PixButtonLink>

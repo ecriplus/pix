@@ -28,7 +28,7 @@ import Details from './trigger/details';
         @query={{hash type="prerequisite"}}
         @variant="secondary"
         aria-label={{t "pages.trainings.training.triggers.prerequisite.alternative-title"}}
-        @iconBefore="plus"
+        @iconBefore="add"
       >
         {{t "pages.trainings.training.triggers.prerequisite.title"}}
       </PixButtonLink>
@@ -56,7 +56,7 @@ import Details from './trigger/details';
         @query={{hash type="goal"}}
         @variant="secondary"
         aria-label={{t "pages.trainings.training.triggers.goal.alternative-title"}}
-        @iconBefore="plus"
+        @iconBefore="add"
       >
         {{t "pages.trainings.training.triggers.goal.title"}}
       </PixButtonLink>
