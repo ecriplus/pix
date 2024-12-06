@@ -7,7 +7,6 @@ import { logger } from '../../../../src/shared/infrastructure/utils/logger.js';
 import { catchErr, expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Controller | sessionController', function () {
-  let request;
   const userId = 274939274;
 
   describe('#getJuryCertificationSummaries ', function () {
@@ -188,68 +187,6 @@ describe('Unit | Controller | sessionController', function () {
 
       // then
       expect(error).to.be.an.instanceof(SessionPublicationBatchError);
-    });
-  });
-
-  describe('#flagResultsAsSentToPrescriber', function () {
-    let sessionId;
-    let session;
-    let serializedSession;
-
-    beforeEach(function () {
-      sessionId = 123;
-      session = Symbol('session');
-      serializedSession = Symbol('serializedSession');
-      request = {
-        params: {
-          id: sessionId,
-        },
-      };
-    });
-
-    context('when the session results were already flagged as sent', function () {
-      beforeEach(function () {
-        const usecaseResult = { resultsFlaggedAsSent: false, session };
-        sinon.stub(usecases, 'flagSessionResultsAsSentToPrescriber').withArgs({ sessionId }).resolves(usecaseResult);
-      });
-
-      it('should return the serialized session', async function () {
-        // given
-        const sessionManagementSerializer = {
-          serialize: sinon.stub(),
-        };
-        sessionManagementSerializer.serialize.withArgs({ session }).resolves(serializedSession);
-
-        // when
-        const response = await sessionController.flagResultsAsSentToPrescriber(request, hFake, {
-          sessionManagementSerializer,
-        });
-
-        // then
-        expect(response).to.equal(serializedSession);
-      });
-    });
-
-    context('when the session results were not flagged as sent', function () {
-      beforeEach(function () {
-        const usecaseResult = { resultsFlaggedAsSent: true, session };
-        sinon.stub(usecases, 'flagSessionResultsAsSentToPrescriber').withArgs({ sessionId }).resolves(usecaseResult);
-      });
-
-      it('should return the serialized session with code 201', async function () {
-        // given
-        const sessionManagementSerializer = { serialize: sinon.stub() };
-        sessionManagementSerializer.serialize.withArgs({ session }).resolves(serializedSession);
-
-        // when
-        const response = await sessionController.flagResultsAsSentToPrescriber(request, hFake, {
-          sessionManagementSerializer,
-        });
-
-        // then
-        expect(response.statusCode).to.equal(201);
-        expect(response.source).to.equal(serializedSession);
-      });
     });
   });
 });

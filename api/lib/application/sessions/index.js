@@ -97,36 +97,6 @@ const register = async function (server) {
         tags: ['api', 'session', 'publication'],
       },
     },
-    {
-      method: 'PUT',
-      path: '/api/admin/sessions/{id}/results-sent-to-prescriber',
-      config: {
-        validate: {
-          params: Joi.object({
-            id: identifiersType.sessionId,
-          }),
-        },
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleCertif,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-
-        handler: sessionController.flagResultsAsSentToPrescriber,
-        tags: ['api', 'sessions'],
-        notes: [
-          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
-            '- Elle permet de marquer le fait que les résultats de la session ont été envoyés au prescripteur,\n',
-          '- par le biais de la sauvegarde de la date courante.',
-        ],
-      },
-    },
   ]);
 };
 

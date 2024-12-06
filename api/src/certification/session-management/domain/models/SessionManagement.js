@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { SESSION_STATUSES } from '../../../shared/domain/constants.js';
 import { SESSIONS_VERSIONS } from '../../../shared/domain/models/SessionVersion.js';
 
@@ -50,10 +48,6 @@ class SessionManagement {
     this.invigilatorPassword = invigilatorPassword;
     this.version = version;
     this.createdBy = createdBy;
-  }
-
-  areResultsFlaggedAsSent() {
-    return !_.isNil(this.resultsSentToPrescriberAt);
   }
 
   get status() {
