@@ -93,24 +93,59 @@ module('Integration | Component | Module | Embed', function (hooks) {
     });
 
     module('when a message is received', function () {
+      module('when embed does not require completion', function () {
+        test('should not call the onAnswer method', async function (assert) {
+          // given
+          const embed = {
+            id: 'id',
+            title: 'Simulateur',
+            isCompletionRequired: false,
+            url: 'https://example.org',
+            height: 800,
+          };
+          const onElementAnswerStub = sinon.stub();
+          const screen = await render(
+            <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
+          );
+          await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+
+          // when
+          const iframe = screen.getByTitle('Simulateur');
+          const event = new MessageEvent('message', {
+            data: { answer: 'toto', from: 'pix' },
+            origin: 'https://epreuves.pix.fr',
+            source: iframe.contentWindow,
+          });
+          window.dispatchEvent(event);
+
+          // then
+          sinon.assert.notCalled(onElementAnswerStub);
+          assert.ok(true);
+        });
+      });
+
       module('when message is not from pix', function () {
         test('should not call the onAnswer method', async function (assert) {
           // given
           const embed = {
             id: 'id',
-            title: 'title',
+            title: 'Simulateur',
             isCompletionRequired: true,
             url: 'https://example.org',
             height: 800,
           };
           const onElementAnswerStub = sinon.stub();
-          await render(<template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>);
+          const screen = await render(
+            <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
+          );
           await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
 
           // when
+          const iframe = screen.getByTitle('Simulateur');
           const event = new MessageEvent('message', {
             data: { answer: 'toto', from: 'nsa' },
             origin: 'https://epreuves.pix.fr',
+            source: iframe.contentWindow,
           });
           window.dispatchEvent(event);
 
@@ -125,19 +160,23 @@ module('Integration | Component | Module | Embed', function (hooks) {
           // given
           const embed = {
             id: 'id',
-            title: 'title',
+            title: 'Simulateur',
             isCompletionRequired: true,
             url: 'https://example.org',
             height: 800,
           };
           const onElementAnswerStub = sinon.stub();
-          await render(<template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>);
+          const screen = await render(
+            <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
+          );
           await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
 
           // when
+          const iframe = screen.getByTitle('Simulateur');
           const event = new MessageEvent('message', {
             data: { start: 'true', from: 'pix' },
             origin: 'https://epreuves.pix.fr',
+            source: iframe.contentWindow,
           });
           window.dispatchEvent(event);
 
@@ -152,7 +191,38 @@ module('Integration | Component | Module | Embed', function (hooks) {
           // given
           const embed = {
             id: 'id',
-            title: 'title',
+            title: 'Simulateur',
+            isCompletionRequired: true,
+            url: 'https://example.org',
+            height: 800,
+          };
+          const onElementAnswerStub = sinon.stub();
+          const screen = await render(
+            <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
+          );
+          await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+
+          // when
+          const iframe = screen.getByTitle('Simulateur');
+          const event = new MessageEvent('message', {
+            data: { answer: 'toto', from: 'pix' },
+            origin: 'https://example.org',
+            source: iframe.contentWindow,
+          });
+          window.dispatchEvent(event);
+
+          // then
+          sinon.assert.notCalled(onElementAnswerStub);
+          assert.ok(true);
+        });
+      });
+
+      module('when message is not coming from current element’s iframe', function () {
+        test('should not call the onAnswer method', async function (assert) {
+          // given
+          const embed = {
+            id: 'id',
+            title: 'Simulateur',
             isCompletionRequired: true,
             url: 'https://example.org',
             height: 800,
@@ -160,11 +230,14 @@ module('Integration | Component | Module | Embed', function (hooks) {
           const onElementAnswerStub = sinon.stub();
           await render(<template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>);
           await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
+          const otheriFrame = document.createElement('iframe');
+          otheriFrame.src = 'https://example.org';
 
           // when
           const event = new MessageEvent('message', {
             data: { answer: 'toto', from: 'pix' },
-            origin: 'https://example.org',
+            origin: 'https://epreuves.pix.fr',
+            source: otheriFrame.contentWindow,
           });
           window.dispatchEvent(event);
 
@@ -179,19 +252,23 @@ module('Integration | Component | Module | Embed', function (hooks) {
           // given
           const embed = {
             id: 'id',
-            title: 'title',
+            title: 'Simulateur',
             isCompletionRequired: true,
             url: 'https://example.org',
             height: 800,
           };
           const onElementAnswerStub = sinon.stub();
-          await render(<template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>);
+          const screen = await render(
+            <template><ModulixEmbed @embed={{embed}} @onAnswer={{onElementAnswerStub}} /></template>,
+          );
           await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
 
           // when
+          const iframe = screen.getByTitle('Simulateur');
           const event = new MessageEvent('message', {
             data: { answer: 'toto', from: 'pix' },
             origin: 'https://epreuves.pix.fr',
+            source: iframe.contentWindow,
           });
           window.dispatchEvent(event);
 
