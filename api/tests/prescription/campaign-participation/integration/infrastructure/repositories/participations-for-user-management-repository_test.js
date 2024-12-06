@@ -146,16 +146,17 @@ describe('Integration | Repository | Participations-For-User-Management', functi
           expect(participationsForUserManagement[0]).to.deep.includes({
             id: assessment.id,
             campaignParticipationId: campaignParticipation.id,
-            participantExternalId: null,
-            status: null,
+            participantExternalId: campaignParticipation.participantExternalId,
+            status: SHARED,
             createdAt: assessment.createdAt,
-            sharedAt: null,
-            campaignId: null,
-            campaignCode: null,
+            sharedAt: campaignParticipation.sharedAt,
+            campaignId: campaign.id,
+            campaignCode: campaign.code,
             deletedAt: campaignParticipation.deletedAt,
-            organizationLearnerFullName: '-',
+            organizationLearnerFullName: `${organizationLearner.firstName} ${organizationLearner.lastName}`,
           });
         });
+
         it('should return participation is deleted and anonymized', async function () {
           // given
           const assessment = databaseBuilder.factory.buildAssessment({
