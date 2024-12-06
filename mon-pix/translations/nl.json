@@ -36,12 +36,12 @@
   },
   "common": {
     "actions": {
-      "download": "Downloaden",
       "back": "Terug",
       "cancel": "Annuleer",
       "close": "Sluit",
       "confirm": "Bevestig",
       "continue": "Ga verder met",
+      "download": "Downloaden",
       "lets-go": "Laten we gaan!",
       "login": "Inloggen",
       "quit": "Verlaat",
@@ -232,7 +232,7 @@
         },
         "errors": {
           "invalid-locale-format": "Uw locale \"{invalidLocale}\" heeft de verkeerde indeling.",
-          "invalid-or-already-used-email": "Invalid or already used e-mail address",
+          "invalid-or-already-used-email": "Ongeldig of al gebruikt e-mailadres",
           "locale-not-supported": "Uw \"{localeNotSupported}\" locale wordt momenteel niet ondersteund."
         },
         "fields": {
@@ -257,11 +257,13 @@
     },
     "campaigns": {
       "attestation-result": {
+        "computing": "Certificaat wordt berekend",
+        "computing-description": "Door een technisch probleem kunnen we je niet informeren over je resultaten. Log morgen opnieuw in op Pix, in de 'Mijn cursus' sectie, om je resultaten te bekijken. Onze excuses voor het ongemak.",
+        "not-obtained": "Certificaat niet verkregen :",
         "obtained": "Verkregen certificaat",
-        "not-obtained": "Certificaat niet behaald",
-        "computing": "Certificaat wordt momenteel berekend",
-        "SIXTH_GRADE": { "title": "Digitaal bewustzijn" },
-        "computing-description": "Door een technisch probleem kunnen wij u niet informeren over het verkrijgen van uw certificaat. Meld u morgen opnieuw aan bij Pix, 'Mijn reis', om uw resultaten te bekijken. Onze excuses voor het ongemak."
+        "SIXTH_GRADE": {
+          "title": "Digitaal bewustzijn"
+        }
       },
       "results-loader": {
         "steps": {
@@ -370,7 +372,7 @@
                 "new-email": "Zo niet, voer dan een nieuwe in."
               },
               "empty-email": "Het e-mailadresveld is verplicht.",
-              "invalid-or-already-used-email": "Invalid or already used e-mail address",
+              "invalid-or-already-used-email": "Ongeldig of al gebruikt e-mailadres",
               "new-backup-email": "Voer een geldig e-mailadres in om uw account te herstellen",
               "new-email-already-exist": "Dit e-mailadres is al in gebruik",
               "wrong-email-format": "Uw e-mailadres is ongeldig."
@@ -490,11 +492,12 @@
       },
       "sso-selection": {
         "signin": {
-          "button": "Log in",
+          "button": "Ik log in",
+          "link": "Ik log in",
           "message": "{providerName} Je wordt doorgestuurd naar de \" \" inlogpagina om je te identificeren op Pix."
         },
         "signup": {
-          "button": "Sign up",
+          "button": "Ik wil graag registreren",
           "link": "Aanmelden",
           "title": "Heb je geen account?"
         },
@@ -1266,6 +1269,15 @@
       },
       "title": "Home"
     },
+    "download-session-results": {
+      "button": {
+        "label": "Download de resultaten"
+      },
+      "errors": {
+        "expiration": "De downloadlink voor de sessieresultaten is verlopen."
+      },
+      "title": "Download sessie resultaten"
+    },
     "error": {
       "content-text": "'<p>'Laad deze pagina opnieuw of keer terug naar de startpagina.'</p><p>'Je kunt ook contact met ons opnemen via '<a href=\"https://support.pix.fr/support/tickets/new\">'het helpcentrumformulier'</a>' onder vermelding van de foutcode hieronder in de beschrijving.'</p><p>'Onze excuses voor het ongemak.'</p><p>'Het Pix-team.'</p>'",
       "first-title": "Oeps, er is een fout gemaakt!"
@@ -1595,10 +1607,10 @@
           "yes": "Ja ! {totalYes}"
         },
         "direction": "Zoek het antwoord en draai de kaart om",
-        "position": "{currentCardPosition}Kaart /{totalCards}",
         "navigation": {
-          "currentStep": "Stap {current} van {total}"
-        }
+          "currentStep": "{current} Stap op {total}"
+        },
+        "position": "{currentCardPosition}Kaart /{totalCards}"
       },
       "grain": {
         "tag": {
@@ -1636,7 +1648,7 @@
         "title": "Gefeliciteerd! Module voltooid"
       },
       "sidebar": {
-        "button": "De stappen van de module "
+        "button": "De modulestappen weergeven"
       },
       "stepper": {
         "step": {
@@ -1668,6 +1680,26 @@
       "username": "Inloggen"
     },
     "password-reset-demand": {
+      "actions": {
+        "back-home": "Terug naar de homepage",
+        "back-sign-in": "Terug naar de inlogpagina",
+        "reset": "Mijn wachtwoord resetten"
+      },
+      "error": {
+        "message": "Dit e-mailadres komt niet overeen met een account"
+      },
+      "fields": {
+        "email": {
+          "label": "E-mail adres"
+        }
+      },
+      "page-title": "Wachtwoord vergeten",
+      "subtitle": "Voer hieronder je e-mailadres in en je kunt aan de slag!",
+      "succeed": {
+        "help": "Als je deze e-mail niet ontvangt, controleer dan je spamfolder.",
+        "instructions": "Er is een e-mail met instructies voor het opnieuw instellen van uw wachtwoord\nverzonden naar het e-mailadres {email}.",
+        "subtitle": "Wachtwoord opnieuw instellen"
+      },
       "title": "Bent u uw wachtwoord vergeten?"
     },
     "profile-already-shared": {
@@ -1721,10 +1753,23 @@
       }
     },
     "reset-password": {
+      "actions": {
+        "sign-in": "Log in op",
+        "submit": "Stuur naar"
+      },
       "error": {
-        "expired-demand": "Het spijt ons, maar uw wachtwoordaanvraag is al gebruikt of verlopen. Probeer het opnieuw."
+        "expired-demand": "Het spijt ons, maar uw wachtwoordaanvraag is al gebruikt of verlopen. Probeer het opnieuw.",
+        "forbidden": "Er is een fout opgetreden, neem contact op met ondersteuning.",
+        "wrong-format": "Je wachtwoord moet minstens 8 tekens lang zijn en minstens één hoofdletter, één kleine letter en één cijfer bevatten."
+      },
+      "fields": {
+        "password": {
+          "label": "Wachtwoord"
+        }
       },
       "first-title": "Wachtwoord opnieuw instellen",
+      "instruction": "Voer uw nieuwe wachtwoord in",
+      "succeed": "Uw wachtwoord is gewijzigd.",
       "title": "Mijn wachtwoord wijzigen"
     },
     "result-item": {
@@ -1761,6 +1806,9 @@
       "actions": {
         "submit": "Ik ben online"
       },
+      "error": {
+        "message": "Het e-mailadres of de ingevoerde gebruikersnaam en/of wachtwoord zijn onjuist"
+      },
       "fields": {
         "legend": "Informatie die nodig is om in te loggen.",
         "login": {
@@ -1773,6 +1821,23 @@
       },
       "first-title": "Log in op",
       "forgotten-password": "Bent u uw wachtwoord vergeten?",
+      "fwb": {
+        "link": {
+          "img": "FWB verbinden"
+        },
+        "title": "Verbinding maken via het FWB"
+      },
+      "or": "OF",
+      "pole-emploi": {
+        "link": {
+          "img": "pôle Emploi connect"
+        },
+        "title": "Contact maken met Pôle Emploi"
+      },
+      "subtitle": {
+        "link": "Een account aanmaken",
+        "text": "Heb je nog geen Pix-account?"
+      },
       "title": "Verbinding"
     },
     "sign-up": {
@@ -1786,10 +1851,30 @@
       },
       "fields": {
         "email": {
-          "help": "(voorbeeld: naam.voornaam@voorbeeld.org)"
+          "error": "Uw e-mailadres is ongeldig.",
+          "help": "(voorbeeld: naam.voornaam@voorbeeld.org)",
+          "label": "E-mail adres"
+        },
+        "firstname": {
+          "error": "Je voornaam is niet ingevuld.",
+          "label": "Voornaam"
+        },
+        "lastname": {
+          "error": "Je naam is niet ingevuld.",
+          "label": "Achternaam"
+        },
+        "legend": "Vereiste informatie voor registratie.",
+        "password": {
+          "error": "Je wachtwoord moet minstens 8 tekens lang zijn en minstens één hoofdletter, één kleine letter en één cijfer bevatten.",
+          "help": "(minimaal 8 tekens, waaronder een hoofdletter, een kleine letter en een cijfer)",
+          "label": "Wachtwoord"
         }
       },
       "first-title": "Aanmelden",
+      "instructions": "Velden gemarkeerd met '<abbr title=\"mandatory\" class=\"mandatory-mark\">'*'</abbr>' zijn verplicht.",
+      "subtitle": {
+        "link": "inloggen op uw account"
+      },
       "title": "Registratie"
     },
     "sitemap": {
@@ -1894,7 +1979,7 @@
       "stage": {
         "caption": "Details van je resultaten in de vorm van percentages en sterren volgens vaardigheden",
         "masteryPercentage": "{rate, number, ::percent} succes",
-        "starsAcquired": "{acquired, plural, =0 {geen ster} =1 {# ster} other {# sterren}} behaald op {total}",
+        "starsAcquired": "{acquired, plural, =0 {geen sterren verworven} other {# ster verworven}} op {total}",
         "title": "Vaardigheden"
       },
       "tabs": {
@@ -2010,7 +2095,7 @@
           "errors": {
             "empty-password": "Je wachtwoord mag niet leeg zijn.",
             "invalid-email": "Uw e-mailadres is ongeldig.",
-            "invalid-or-already-used-email": "Invalid or already used e-mail address",
+            "invalid-or-already-used-email": "Ongeldig of al gebruikt e-mailadres",
             "invalid-password": "Het ingevoerde wachtwoord is ongeldig.",
             "new-email-already-exist": "Dit e-mailadres is al in gebruik."
           },
@@ -2063,21 +2148,21 @@
       },
       "delete-account": {
         "actions": {
-          "delete": "Delete my account"
+          "delete": "Mijn account verwijderen"
         },
-        "menu-link-title": "Delete my account",
+        "menu-link-title": "Mijn account verwijderen",
         "modal": {
-          "title": "You’re about to delete your account",
-          "question": "Are you sure you want to delete your account?",
-          "warning-1": "Please note that the account cannot be recovered after deletion.",
-          "warning-2": "As soon as you confirm, you will be automatically disconnected and your request will be taken into account immediately.",
-          "error-403": "You are not allowed to delete your account. Please contact the support."
+          "error-403": "Je kunt je account niet verwijderen. Neem contact op met Pix Support.",
+          "question": "Weet je zeker dat je je account wilt verwijderen?",
+          "title": "Je staat op het punt je account te verwijderen",
+          "warning-1": "Houd er rekening mee dat het account niet kan worden hersteld na verwijdering.",
+          "warning-2": "Zodra u bevestigt, wordt u automatisch uitgelogd en wordt uw verzoek onmiddellijk verwerkt."
         },
-        "more-information": "For more information, ",
-        "more-information-contact-support": "please contact support.",
-        "title": "Delete my account permanently",
-        "warning-email": "This action is irreversible. All the skills, courses and {pixScore} pix you have obtained will be permanently deleted for the PIX account using <strong>{email}</strong>.",
-        "warning-other": "This action is irreversible. All the skills, courses and {pixScore} pix you have obtained will be permanently deleted for the PIX account <strong>{firstName} {lastName}</strong>."
+        "more-information": "Voor meer informatie,",
+        "more-information-contact-support": "kunt u contact opnemen met ondersteuning.",
+        "title": "Mijn account permanent verwijderen",
+        "warning-email": "Deze actie is onomkeerbaar. {pixScore} Alle vaardigheden, cursussen en pix die je hebt verkregen worden permanent verwijderd voor het PIX-account met het e-mailadres<strong>{email}</strong>.",
+        "warning-other": "Deze actie is onomkeerbaar. {pixScore} Alle vaardigheden, cursussen en pix die je hebt behaald, worden permanent verwijderd van het PIX-account.<strong>{firstName} {lastName}</strong>."
       },
       "email-confirmed": "Geverifieerd e-mailadres.",
       "email-verification": {
