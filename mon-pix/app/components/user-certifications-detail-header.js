@@ -34,8 +34,8 @@ export default class UserCertificationsDetailHeader extends Component {
     const token = this.session.data.authenticated.access_token;
     try {
       await this.fileSaver.save({ url, token });
-    } catch (error) {
-      this.attestationDownloadErrorMessage = error.message;
+    } catch (_) {
+      this.attestationDownloadErrorMessage = this.intl.t('common.error');
     }
   }
 }

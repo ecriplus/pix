@@ -394,8 +394,11 @@ class InvalidResultRecipientTokenError extends DomainError {
 }
 
 class InvalidSessionResultTokenError extends DomainError {
-  constructor(message = 'Le token de récupération des résultats de la session de certification est invalide.') {
-    super(message);
+  constructor(
+    message = 'The token used to retrieve the results of the certification session is invalid.',
+    code = 'INVALID_SESSION_RESULT_TOKEN',
+  ) {
+    super(message, code);
   }
 }
 

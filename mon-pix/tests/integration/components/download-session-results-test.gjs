@@ -34,9 +34,9 @@ module('Integration | Component | download-session-results', function (hooks) {
     assert.dom(screen.getByRole('button', { name: t('pages.download-session-results.button.label') })).exists();
   });
 
-  test('should display the expiration error message', async function (assert) {
+  test('should display the invalid token error message', async function (assert) {
     // given
-    fileSaver.save.rejects();
+    fileSaver.save.rejects({ status: '400', code: 'INVALID_SESSION_RESULT_TOKEN' });
 
     // when
     const screen = await render(hbs`<DownloadSessionResults />`);
@@ -44,7 +44,7 @@ module('Integration | Component | download-session-results', function (hooks) {
     await click(downloadButton);
 
     // then
-    assert.dom(screen.getByText(t('pages.download-session-results.errors.expiration'))).exists();
+    assert.dom(screen.getByText(t('pages.download-session-results.errors.invalid-token'))).exists();
   });
 
   test('should trigger the download', async function (assert) {

@@ -89,6 +89,17 @@ describe('Integration | API | Controller Error', function () {
       );
       expect(responseCode(response)).to.equal('SESSION_WITHOUT_STARTED_CERTIFICATION');
     });
+
+    it('responds Bad Request when a InvalidSessionResultTokenError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.InvalidSessionResultTokenError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal(
+        'The token used to retrieve the results of the certification session is invalid.',
+      );
+      expect(responseCode(response)).to.equal('INVALID_SESSION_RESULT_TOKEN');
+    });
   });
 
   context('403 Forbidden', function () {
