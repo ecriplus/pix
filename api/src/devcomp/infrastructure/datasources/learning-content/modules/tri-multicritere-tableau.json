@@ -90,10 +90,6 @@
                         "feedback": "<p>Mauvaise réponse. Un seul critère est en jeu dans cette situation : le niveau de priorité.</p>"
                       }
                     ],
-                    "feedbacks": {
-                      "valid": "<p><br></p>",
-                      "invalid": ""
-                    },
                     "solution": "1"
                   }
                 ]
@@ -133,10 +129,6 @@
                         "feedback": "<p>Mauvaise réponse.&nbsp;Le tri multicritère peut permettre de regrouper les élèves par option et par classe, mais l’ensemble des élèves resteront affichés dans cette liste.</p>"
                       }
                     ],
-                    "feedbacks": {
-                      "valid": "",
-                      "invalid": ""
-                    },
                     "solution": "2"
                   }
                 ]
@@ -176,10 +168,6 @@
                         "feedback": "<p>Bonne réponse !&nbsp;Plusieurs critères vont permettre de faire le classement final, le tri multicritère est donc recommandé.</p>"
                       }
                     ],
-                    "feedbacks": {
-                      "valid": "",
-                      "invalid": ""
-                    },
                     "solution": "3"
                   }
                 ]
@@ -307,7 +295,7 @@
                   "content": "<p>Le deuxième au classement est</p>"
                 },
                 {
-                  "input": "",
+                  "input": "prenom-activite",
                   "type": "input",
                   "inputType": "text",
                   "size": 12,
@@ -327,7 +315,7 @@
                   "content": "<p>Les vainqueurs remportent une</p>"
                 },
                 {
-                  "input": "",
+                  "input": "lot-activite",
                   "type": "input",
                   "inputType": "text",
                   "size": 12,
@@ -489,7 +477,7 @@
                   "content": "<p>Le prénom du deuxième est :</p>"
                 },
                 {
-                  "input": "",
+                  "input": "prenom-boss",
                   "type": "input",
                   "inputType": "text",
                   "size": 12,
@@ -509,7 +497,7 @@
                   "content": "<p>Le contenu du trésor est :</p>"
                 },
                 {
-                  "input": "",
+                  "input": "tresor-boss",
                   "type": "input",
                   "inputType": "text",
                   "size": 12,
@@ -545,7 +533,7 @@
       {
         "id": "16df02e4-4dd0-4fa3-9be0-44e1f54a3217",
         "type": "lesson",
-        "title": "",
+        "title": "Recap",
         "components": [
           {
             "type": "element",
