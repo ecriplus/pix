@@ -492,6 +492,10 @@ function _mapToHttpError(error) {
     return new HttpErrors.BadRequestError(error.message, 'SENDING_EMAIL_TO_INVALID_EMAIL_ADDRESS', error.meta);
   }
 
+  if (error instanceof DomainErrors.InvalidSessionResultTokenError) {
+    return new HttpErrors.BadRequestError(error.message, error.code);
+  }
+
   return new HttpErrors.BaseHttpError(error.message);
 }
 
