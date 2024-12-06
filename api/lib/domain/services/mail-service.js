@@ -1,8 +1,5 @@
-import dayjs from 'dayjs';
-
 import { config } from '../../../src/shared/config.js';
 import { LOCALE } from '../../../src/shared/domain/constants.js';
-import { tokenService } from '../../../src/shared/domain/services/token-service.js';
 import { getEmailDefaultVariables } from '../../../src/shared/mail/domain/emails-default-variables.js';
 import { mailer } from '../../../src/shared/mail/infrastructure/services/mailer.js';
 import * as translations from '../../../translations/index.js';
@@ -14,67 +11,10 @@ const EMAIL_VERIFICATION_CODE_TAG = 'EMAIL_VERIFICATION_CODE';
 const SCO_ACCOUNT_RECOVERY_TAG = 'SCO_ACCOUNT_RECOVERY';
 
 // FRENCH_FRANCE
-const PIX_HOME_NAME_FRENCH_FRANCE = `pix${config.domain.tldFr}`;
-const PIX_HOME_URL_FRENCH_FRANCE = `${config.domain.pix + config.domain.tldFr}`;
 const PIX_APP_URL_FRENCH_FRANCE = `${config.domain.pixApp + config.domain.tldFr}`;
 
 // INTERNATIONAL
-const PIX_HOME_NAME_INTERNATIONAL = `pix${config.domain.tldOrg}`;
-const PIX_HOME_URL_INTERNATIONAL = {
-  en: `${config.domain.pix + config.domain.tldOrg}/en/`,
-  fr: `${config.domain.pix + config.domain.tldOrg}/fr/`,
-  nl: `${config.domain.pix + config.domain.tldOrg}/nl-be/`,
-};
 const PIX_APP_URL_INTERNATIONAL = `${config.domain.pixApp + config.domain.tldOrg}`;
-
-function sendCertificationResultEmail({
-  email,
-  sessionId,
-  sessionDate,
-  certificationCenterName,
-  resultRecipientEmail,
-  daysBeforeExpiration,
-  translate,
-}) {
-  const token = tokenService.createCertificationResultsByRecipientEmailLinkToken({
-    sessionId,
-    resultRecipientEmail,
-    daysBeforeExpiration,
-  });
-  const link = `${config.domain.pixApp + config.domain.tldOrg}/api/sessions/download-results/${token}`;
-
-  const formattedSessionDate = dayjs(sessionDate).locale('fr').format('DD/MM/YYYY');
-
-  const templateVariables = {
-    certificationCenterName,
-    sessionId,
-    sessionDate: formattedSessionDate,
-    fr: {
-      ...translations.fr['certification-result-email'].params,
-      homeName: PIX_HOME_NAME_FRENCH_FRANCE,
-      homeUrl: PIX_HOME_URL_FRENCH_FRANCE,
-      homeNameInternational: PIX_HOME_NAME_INTERNATIONAL,
-      homeUrlInternational: PIX_HOME_URL_INTERNATIONAL.fr,
-      title: translate({ phrase: 'certification-result-email.title', locale: 'fr' }, { sessionId }),
-      link: `${link}?lang=fr`,
-    },
-    en: {
-      ...translations.en['certification-result-email'].params,
-      homeName: PIX_HOME_NAME_INTERNATIONAL,
-      homeUrl: PIX_HOME_URL_INTERNATIONAL.en,
-      title: translate({ phrase: 'certification-result-email.title', locale: 'en' }, { sessionId }),
-      link: `${link}?lang=en`,
-    },
-  };
-
-  return mailer.sendEmail({
-    from: EMAIL_ADDRESS_NO_RESPONSE,
-    fromName: `${translations.fr['email-sender-name']['pix-app']} / ${translations.en['email-sender-name']['pix-app']}`,
-    to: email,
-    template: mailer.certificationResultTemplateId,
-    variables: templateVariables,
-  });
-}
 
 /**
  * @param email
@@ -317,20 +257,6 @@ function sendCpfEmail({ email, generatedFiles }) {
   return mailer.sendEmail(options);
 }
 
-function sendNotificationToCertificationCenterRefererForCleaResults({ email, sessionId, sessionDate }) {
-  const formattedSessionDate = dayjs(sessionDate).locale('fr').format('DD/MM/YYYY');
-
-  const options = {
-    from: EMAIL_ADDRESS_NO_RESPONSE,
-    fromName: translations.fr['email-sender-name']['pix-app'],
-    to: email,
-    template: mailer.acquiredCleaResultTemplateId,
-    variables: { sessionId, sessionDate: formattedSessionDate },
-  };
-
-  return mailer.sendEmail(options);
-}
-
 function sendNotificationToOrganizationMembersForTargetProfileDetached({ email, complementaryCertificationName }) {
   const options = {
     from: EMAIL_ADDRESS_NO_RESPONSE,
@@ -398,14 +324,12 @@ function _formatUrlWithLocale(url, locale) {
 
 const mailService = {
   sendAccountRecoveryEmail,
-  sendCertificationResultEmail,
   sendOrganizationInvitationEmail,
   sendScoOrganizationInvitationEmail,
   sendCertificationCenterInvitationEmail,
   sendResetPasswordDemandEmail,
   sendVerificationCodeEmail,
   sendCpfEmail,
-  sendNotificationToCertificationCenterRefererForCleaResults,
   sendNotificationToOrganizationMembersForTargetProfileDetached,
 };
 
@@ -413,9 +337,7 @@ const mailService = {
  * @typedef {Object} MailService
  * @property {function} sendAccountRecoveryEmail
  * @property {function} sendCertificationCenterInvitationEmail
- * @property {function} sendCertificationResultEmail
  * @property {function} sendCpfEmail
- * @property {function} sendNotificationToCertificationCenterRefererForCleaResults
  * @property {function} sendNotificationToOrganizationMembersForTargetProfileDetached
  * @property {function} sendOrganizationInvitationEmail
  * @property {function} sendResetPasswordDemandEmail
@@ -426,9 +348,7 @@ export {
   mailService,
   sendAccountRecoveryEmail,
   sendCertificationCenterInvitationEmail,
-  sendCertificationResultEmail,
   sendCpfEmail,
-  sendNotificationToCertificationCenterRefererForCleaResults,
   sendNotificationToOrganizationMembersForTargetProfileDetached,
   sendOrganizationInvitationEmail,
   sendResetPasswordDemandEmail,

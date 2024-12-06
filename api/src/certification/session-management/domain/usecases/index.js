@@ -9,12 +9,14 @@ import { injectDependencies } from '../../../../shared/infrastructure/utils/depe
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as certificationBadgesService from '../../../shared/domain/services/certification-badges-service.js';
 import * as certificationCpfService from '../../../shared/domain/services/certification-cpf-service.js';
+import * as sharedSessionRepository from '../../../shared/infrastructure/repositories/session-repository.js';
 import {
   answerRepository,
   assessmentRepository,
   assessmentResultRepository,
   certificationChallengeRepository,
   certificationIssueReportRepository,
+  certificationRepository,
   challengeRepository,
   competenceMarkRepository,
   cpfExportRepository,
@@ -24,6 +26,7 @@ import {
 } from '../../infrastructure/repositories/index.js';
 import { cpfExportsStorage } from '../../infrastructure/storage/cpf-exports-storage.js';
 import { cpfReceiptsStorage } from '../../infrastructure/storage/cpf-receipts-storage.js';
+import * as sessionPublicationService from '../services/session-publication-service.js';
 
 /**
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCourseRepository} CertificationCourseRepository
@@ -40,6 +43,7 @@ import { cpfReceiptsStorage } from '../../infrastructure/storage/cpf-receipts-st
  * @typedef {import('../../infrastructure/repositories/index.js').AssessmentResultRepository} AssessmentResultRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CompetenceMarkRepository} CompetenceMarkRepository
  * @typedef {import('../../infrastructure/repositories/index.js').ChallengeRepository} ChallengeRepository
+ * @typedef {import('../../infrastructure/repositories/index.js').CertificationRepository} CertificationRepository
  * @typedef {import('../../infrastructure/repositories/index.js').AnswerRepository} AnswerRepository
  * @typedef {import('../../infrastructure/repositories/index.js').IssueReportCategoryRepository} IssueReportCategoryRepository
  * @typedef {import('../../infrastructure/repositories/index.js').SessionJuryCommentRepository} SessionJuryCommentRepository
@@ -56,6 +60,8 @@ import { cpfReceiptsStorage } from '../../infrastructure/storage/cpf-receipts-st
  * @typedef {import('../../infrastructure/storage/cpf-receipts-storage.js').cpfReceiptsStorage} CpfReceiptsStorage
  * @typedef {import('../../infrastructure/storage/cpf-exports-storage.js').cpfExportsStorage} CpfExportsStorage
  * @typedef {import('../../../shared/domain/services/certification-badges-service.js')} CertificationBadgesService
+ * @typedef {import('../../../shared/domain/services/scoring-certification-service.js')} ScoringCertificationService
+ * @typedef {import('../services/session-publication-service.js')} SessionPublicationService
  * @typedef {import('../../../../shared/domain/services/placement-profile-service.js')} PlacementProfileService
  * @typedef {import('../../../shared/domain/services/certification-cpf-service.js')} CertificationCpfService
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCandidateRepository} CertificationCandidateRepository
@@ -77,6 +83,7 @@ import { cpfReceiptsStorage } from '../../infrastructure/storage/cpf-receipts-st
  * @typedef {certificationOfficerRepository} CertificationOfficerRepository
  * @typedef {certificationChallengeRepository} CertificationChallengeRepository
  * @typedef {challengeRepository} ChallengeRepository
+ * @typedef {certificationRepository} CertificationRepository
  * @typedef {finalizedSessionRepository} FinalizedSessionRepository
  * @typedef {juryCertificationRepository} JuryCertificationRepository
  * @typedef {jurySessionRepository} JurySessionRepository
@@ -93,8 +100,10 @@ import { cpfReceiptsStorage } from '../../infrastructure/storage/cpf-receipts-st
  * @typedef {cpfExportsStorage} CpfExportsStorage
  * @typedef {placementProfileService} PlacementProfileService
  * @typedef {certificationCpfService} CertificationCpfService
+ * @typedef {mailService} MailService
  * @typedef {pickChallengeService} PickChallengeService
  * @typedef {flashAlgorithmService} FlashAlgorithmService
+ * @typedef {sessionPublicationService} SessionPublicationService
  * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {cpfExportRepository} CpfExportRepository
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
@@ -115,10 +124,13 @@ const dependencies = {
   placementProfileService,
   certificationCpfService,
   certificationChallengeRepository,
+  certificationRepository,
   certificationIssueReportRepository,
   flashAlgorithmConfigurationRepository,
   flashAlgorithmService,
   pickChallengeService,
+  sessionPublicationService,
+  sharedSessionRepository,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));

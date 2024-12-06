@@ -1,3 +1,7 @@
+import {
+  SendingEmailToRefererError,
+  SendingEmailToResultRecipientError,
+} from '../../../src/certification/session-management/domain/errors.js';
 import { InvalidCertificationReportForFinalization } from '../../../src/certification/shared/domain/errors.js';
 import * as EvaluationDomainErrors from '../../../src/evaluation/domain/errors.js';
 import { AnswerEvaluationError, CompetenceResetError } from '../../../src/evaluation/domain/errors.js';
@@ -756,7 +760,7 @@ describe('Integration | API | Controller Error', function () {
     });
 
     it('responds ServiceUnavailable when a SendingEmailToResultRecipientError error occurs', async function () {
-      routeHandler.throws(new DomainErrors.SendingEmailToResultRecipientError(['toto@pix.fr', 'titi@pix.fr']));
+      routeHandler.throws(new SendingEmailToResultRecipientError(['toto@pix.fr', 'titi@pix.fr']));
 
       const response = await server.requestObject(request);
 
@@ -767,7 +771,7 @@ describe('Integration | API | Controller Error', function () {
     });
 
     it('responds ServiceUnavailable when a SendingEmailToRefererError error occurs', async function () {
-      routeHandler.throws(new DomainErrors.SendingEmailToRefererError(['toto@pix.fr', 'titi@pix.fr']));
+      routeHandler.throws(new SendingEmailToRefererError(['toto@pix.fr', 'titi@pix.fr']));
 
       const response = await server.requestObject(request);
 

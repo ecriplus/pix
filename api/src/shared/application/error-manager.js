@@ -3,7 +3,11 @@ import _ from 'lodash';
 
 import * as translations from '../../../translations/index.js';
 import { AdminMemberError } from '../../authorization/domain/errors.js';
-import { CsvWithNoSessionDataError } from '../../certification/session-management/domain/errors.js';
+import {
+  CsvWithNoSessionDataError,
+  SendingEmailToRefererError,
+  SendingEmailToResultRecipientError,
+} from '../../certification/session-management/domain/errors.js';
 import { EmptyAnswerError } from '../../evaluation/domain/errors.js';
 import { UnableToAttachChildOrganizationToParentOrganizationError } from '../../organizational-entities/domain/errors.js';
 import { ArchivedCampaignError, DeletedCampaignError } from '../../prescription/campaign/domain/errors.js';
@@ -209,7 +213,7 @@ function _mapToHttpError(error) {
     return new HttpErrors.BadRequestError(error.message, error.code);
   }
 
-  if (error instanceof DomainErrors.SendingEmailToRefererError) {
+  if (error instanceof SendingEmailToRefererError) {
     return new HttpErrors.ServiceUnavailableError(error.message);
   }
 
@@ -233,7 +237,7 @@ function _mapToHttpError(error) {
   if (error instanceof DomainErrors.MissingAttributesError) {
     return new HttpErrors.UnprocessableEntityError(error.message);
   }
-  if (error instanceof DomainErrors.SendingEmailToResultRecipientError) {
+  if (error instanceof SendingEmailToResultRecipientError) {
     return new HttpErrors.ServiceUnavailableError(error.message);
   }
   if (error instanceof DomainErrors.InvalidPasswordForUpdateEmailError) {

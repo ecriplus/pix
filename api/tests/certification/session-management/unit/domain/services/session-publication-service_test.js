@@ -1,17 +1,20 @@
-import { manageEmails, publishSession } from '../../../../lib/domain/services/session-publication-service.js';
-import { SessionAlreadyPublishedError } from '../../../../src/certification/session-management/domain/errors.js';
-import { FinalizedSession } from '../../../../src/certification/session-management/domain/models/FinalizedSession.js';
+import { SessionAlreadyPublishedError } from '../../../../../../src/certification/session-management/domain/errors.js';
 import {
   CertificationCourseNotPublishableError,
   SendingEmailToRefererError,
   SendingEmailToResultRecipientError,
-} from '../../../../src/shared/domain/errors.js';
-import { status } from '../../../../src/shared/domain/models/AssessmentResult.js';
-import { EmailingAttempt } from '../../../../src/shared/domain/models/index.js';
-import { getI18n } from '../../../../src/shared/infrastructure/i18n/i18n.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+} from '../../../../../../src/certification/session-management/domain/errors.js';
+import { FinalizedSession } from '../../../../../../src/certification/session-management/domain/models/FinalizedSession.js';
+import {
+  manageEmails,
+  publishSession,
+} from '../../../../../../src/certification/session-management/domain/services/session-publication-service.js';
+import { status } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
+import { EmailingAttempt } from '../../../../../../src/shared/domain/models/index.js';
+import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | UseCase | session-publication-service', function () {
+describe('Certification | Session Management | Unit | Domain | Services | session-publication-service', function () {
   const sessionId = 123;
   let i18n;
   let certificationRepository,

@@ -230,15 +230,6 @@ class CampaignTypeError extends DomainError {
   }
 }
 
-class CertificationCourseNotPublishableError extends DomainError {
-  constructor(
-    sessionId,
-    message = `Publication de la session ${sessionId}: Une Certification avec le statut 'started' ou 'error' ne peut-être publiée.`,
-  ) {
-    super(message);
-  }
-}
-
 class ImportLearnerConfigurationError extends DomainError {
   constructor(message, code) {
     super(message);
@@ -798,20 +789,6 @@ class SendingEmailToInvalidEmailAddressError extends DomainError {
   }
 }
 
-class SendingEmailToRefererError extends DomainError {
-  constructor(failedEmailReferers) {
-    super(
-      `Échec lors de l'envoi du mail au(x) référent(s) du centre de certification : ${failedEmailReferers.join(', ')}`,
-    );
-  }
-}
-
-class SendingEmailToResultRecipientError extends DomainError {
-  constructor(failedEmailsRecipients) {
-    super(`Échec lors de l'envoi des résultats au(x) destinataire(s) : ${failedEmailsRecipients.join(', ')}`);
-  }
-}
-
 class NotEnoughDaysPassedBeforeResetCampaignParticipationError extends DomainError {
   constructor() {
     super(`Il n'est pas possible de remettre à zéro votre parcours pour le moment.`);
@@ -1102,7 +1079,6 @@ export {
   CertificationCenterMembershipDisableError,
   CertificationCenterPilotFeaturesConflictError,
   CertificationComputeError,
-  CertificationCourseNotPublishableError,
   CertificationEndedByFinalizationError,
   CertificationEndedBySupervisorError,
   ChallengeAlreadyAnsweredError,
@@ -1167,8 +1143,6 @@ export {
   SendingEmailError,
   SendingEmailToInvalidDomainError,
   SendingEmailToInvalidEmailAddressError,
-  SendingEmailToRefererError,
-  SendingEmailToResultRecipientError,
   SIECLE_ERRORS,
   TargetProfileInvalidError,
   TargetProfileRequiresToBeLinkedToAutonomousCourseOrganization,
