@@ -494,10 +494,11 @@
       },
       "sso-selection": {
         "signin": {
-          "link": "Me conecto",
+          "button": "Log in",
           "message": "{providerName} Será redirigido a la página de acceso \" \" para identificarse en Pix."
         },
         "signup": {
+          "button": "Sign up",
           "link": "Inscríbete",
           "title": "¿No tiene una cuenta?"
         },
