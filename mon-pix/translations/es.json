@@ -37,11 +37,11 @@
   "common": {
     "actions": {
       "back": "Volver",
-      "download": "Descargar",
       "cancel": "Cancelar",
       "close": "Cerrar",
       "confirm": "Confirmar",
       "continue": "Continuar",
+      "download": "Descargar",
       "lets-go": "¡Empecemos!",
       "login": "Iniciar sesión",
       "quit": "Salir",
@@ -159,11 +159,6 @@
           }
         }
       },
-      "sign-up-form": {
-        "errors": {
-          "invalid-or-already-used-email": "Invalid or already used e-mail address"
-        }
-      },
       "new-password-input": {
         "completed-message": "{ rulesCompleted }  { rulesCount } en .",
         "instructions-label": "Tu contraseña debe cumplir con los siguientes requisitos :",
@@ -237,6 +232,7 @@
         },
         "errors": {
           "invalid-locale-format": "Tu configuración local «{invalidLocale}» tiene un formato incorrecto.",
+          "invalid-or-already-used-email": "Dirección de correo electrónico no válida o ya utilizada",
           "locale-not-supported": "Tu configuración local «{localeNotSupported}» no es compatible actualmente."
         },
         "fields": {
@@ -261,11 +257,13 @@
     },
     "campaigns": {
       "attestation-result": {
+        "computing": "Certificado en curso de cálculo",
+        "computing-description": "Un problema técnico nos ha impedido informarle de sus resultados. Por favor, conéctese de nuevo mañana en Pix, en la sección \"Mi curso\", para comprobar sus resultados. Le pedimos disculpas por las molestias ocasionadas.",
+        "not-obtained": "Certificado no obtenido :",
         "obtained": "Certificado obtenido",
-        "not-obtained": "Certificado no obtenido",
-        "computing": "Certificado actualmente en cálculo",
-        "SIXTH_GRADE": { "title": "Conciencia digital" },
-        "computing-description": "Un problema técnico nos impide informarle sobre la obtención de su certificado. Vuelva a iniciar sesión mañana en Pix, sección 'Mi viaje', para ver sus resultados. Pedimos disculpas por las molestias ocasionadas."
+        "SIXTH_GRADE": {
+          "title": "Conciencia digital"
+        }
       },
       "results-loader": {
         "steps": {
@@ -374,7 +372,7 @@
                 "new-email": ", de lo contrario, introduce una nueva."
               },
               "empty-email": "El campo de dirección de correo electrónico es obligatorio.",
-              "invalid-or-already-used-email": "Invalid or already used e-mail address",
+              "invalid-or-already-used-email": "Dirección de correo electrónico no válida o ya utilizada",
               "new-backup-email": "Introduce una dirección de correo electrónico válida para restablecer tu cuenta",
               "new-email-already-exist": "Esta dirección de correo electrónico ya se está utilizando",
               "wrong-email-format": "Tu dirección de correo electrónico no es válida."
@@ -494,11 +492,12 @@
       },
       "sso-selection": {
         "signin": {
-          "button": "Log in",
+          "button": "Iniciar sesión",
+          "link": "Me conecto",
           "message": "{providerName} Será redirigido a la página de acceso \" \" para identificarse en Pix."
         },
         "signup": {
-          "button": "Sign up",
+          "button": "Crear cuenta",
           "link": "Inscríbete",
           "title": "¿No tiene una cuenta?"
         },
@@ -1270,6 +1269,15 @@
       },
       "title": "Inicio"
     },
+    "download-session-results": {
+      "button": {
+        "label": "Descargue los resultados"
+      },
+      "errors": {
+        "expiration": "El enlace de descarga de los resultados de la sesión ha caducado."
+      },
+      "title": "Descargar los resultados de la sesión"
+    },
     "error": {
       "content-text": "'<p>'Por favor, vuelve a cargar esta página o vuelve a la página de inicio.'</p><p>'También puedes ponerte en contacto con nosotros con '<a href=\"https://support.pix.fr/support/tickets/new\">'el formulario del centro de ayuda.'</a>'especificando el código de error que aparece a continuación en la descripción.'</p><p>Te pedimos disculpas por las molestias ocasionadas.'</p><p>'El equipo Pix.'</p>'",
       "first-title": "¡Uy, se ha producido un error!"
@@ -1599,10 +1607,10 @@
           "yes": "¡Sí! {totalYes}"
         },
         "direction": "Busca la respuesta y gira la tarjeta",
-        "position": "{currentCardPosition}Tarjeta /{totalCards}",
         "navigation": {
-          "currentStep": "Paso {current} de {total}"
-        }
+          "currentStep": "{current} Paso a paso {total}"
+        },
+        "position": "{currentCardPosition}Tarjeta /{totalCards}"
       },
       "grain": {
         "tag": {
@@ -1640,7 +1648,7 @@
         "title": "¡Enhorabuena! Módulo completado"
       },
       "sidebar": {
-        "button": "Mostrar los pasos del módulo"
+        "button": "Visualizar los pasos del módulo"
       },
       "stepper": {
         "step": {
@@ -1672,6 +1680,26 @@
       "username": "Nombre de usuario"
     },
     "password-reset-demand": {
+      "actions": {
+        "back-home": "Volver a la página de inicio",
+        "back-sign-in": "Volver a la página de conexión",
+        "reset": "Restablecer mi contraseña"
+      },
+      "error": {
+        "message": "Esta dirección de correo electrónico no corresponde a ninguna cuenta"
+      },
+      "fields": {
+        "email": {
+          "label": "Dirección de correo electrónico"
+        }
+      },
+      "page-title": "Contraseña olvidada",
+      "subtitle": "Introduce tu dirección de correo electrónico a continuación y ¡a por ello!",
+      "succeed": {
+        "help": "Si no recibes este correo electrónico, comprueba la carpeta de correo no deseado.",
+        "instructions": "Te hemos enviado un correo electrónico con instrucciones para restablecer tu contraseña a la dirección {email}.",
+        "subtitle": "Solicitud de restablecimiento de contraseña"
+      },
       "title": "¿Olvidaste tu contraseña?"
     },
     "profile-already-shared": {
@@ -1725,10 +1753,23 @@
       }
     },
     "reset-password": {
+      "actions": {
+        "sign-in": "Conéctate",
+        "submit": "Enviar"
+      },
       "error": {
-        "expired-demand": "Lo sentimos, pero tu solicitud de restablecimiento de contraseña ya ha sido utilizada o ha caducado. Por favor, vuelve a intentarlo."
+        "expired-demand": "Lo sentimos, pero tu solicitud de restablecimiento de contraseña ya ha sido utilizada o ha caducado. Por favor, vuelve a intentarlo.",
+        "forbidden": "Se ha producido un error, ponte en contacto con el servicio de asistencia.",
+        "wrong-format": "Tu contraseña debe tener al menos 8 caracteres y contener como mínimo una letra mayúscula, una letra minúscula y un dígito."
+      },
+      "fields": {
+        "password": {
+          "label": "Contraseña"
+        }
       },
       "first-title": "Restablecer contraseña",
+      "instruction": "Introduce tu nueva contraseña",
+      "succeed": "Tu contraseña ha sido cambiada con éxito.",
       "title": "Cambiar mi contraseña"
     },
     "result-item": {
@@ -1765,6 +1806,9 @@
       "actions": {
         "submit": "Me conecto"
       },
+      "error": {
+        "message": "La dirección de correo electrónico o el nombre de usuario y/o la contraseña introducidos son incorrectos"
+      },
       "fields": {
         "legend": "Información necesaria para conectarse.",
         "login": {
@@ -1777,6 +1821,23 @@
       },
       "first-title": "Conéctate",
       "forgotten-password": "¿Olvidaste tu contraseña?",
+      "fwb": {
+        "link": {
+          "img": "FWB connect"
+        },
+        "title": "Conectarse a través de la FWB"
+      },
+      "or": "O",
+      "pole-emploi": {
+        "link": {
+          "img": "Pôle Emploi connect"
+        },
+        "title": "Conectarse con Pôle Emploi"
+      },
+      "subtitle": {
+        "link": "Crea una cuenta",
+        "text": "¿Aún no tienes una cuenta Pix?"
+      },
       "title": "Conexión"
     },
     "sign-up": {
@@ -1790,10 +1851,30 @@
       },
       "fields": {
         "email": {
-          "help": "(ej. nombre@ejemplo.fr)"
+          "error": "Tu dirección de correo electrónico no es válida.",
+          "help": "(ej. nombre@ejemplo.fr)",
+          "label": "Dirección de correo electrónico"
+        },
+        "firstname": {
+          "error": "No has indicado tu nombre.",
+          "label": "Nombre"
+        },
+        "lastname": {
+          "error": "No has indicado tus apellidos.",
+          "label": "Apellidos"
+        },
+        "legend": "Información necesaria para la inscripción.",
+        "password": {
+          "error": "Tu contraseña debe tener al menos 8 caracteres y contener como mínimo una letra mayúscula, una letra minúscula y un dígito.",
+          "help": "(mínimo 8 caracteres, incluyendo una mayúscula, una minúscula y un dígito)",
+          "label": "Contraseña"
         }
       },
       "first-title": "Inscríbete",
+      "instructions": "Los campos marcados con '<abbr title=\"obligatorio\" class=\"mandatory-mark\">'*'</abbr>' son obligatorios",
+      "subtitle": {
+        "link": "conéctate a tu cuenta"
+      },
       "title": "Inscripción"
     },
     "sitemap": {
@@ -1845,7 +1926,7 @@
       },
       "hero": {
         "acquired-badges-title": "Premios obtenidos",
-        "bravo": "{name} ¡Bien hecho!",
+        "bravo": "¡ {name} bien hecho!",
         "explanations": {
           "improve": "Si quieres mejorar tu puntuación, puedes volver a intentar algunas preguntas.",
           "send-results": "Envíe sus resultados al organizador del curso y siga avanzando con los cursos recomendados.",
@@ -2014,7 +2095,7 @@
           "errors": {
             "empty-password": "Tu contraseña no puede estar vacía.",
             "invalid-email": "Tu dirección de correo electrónico no es válida.",
-            "invalid-or-already-used-email": "Invalid or already used e-mail address",
+            "invalid-or-already-used-email": "Dirección de correo electrónico no válida o ya utilizada",
             "invalid-password": "La contraseña que has introducido no es válida.",
             "new-email-already-exist": "Esta dirección de correo electrónico ya se está utilizando."
           },
@@ -2067,21 +2148,21 @@
       },
       "delete-account": {
         "actions": {
-          "delete": "Delete my account"
+          "delete": "Eliminar mi cuenta"
         },
-        "menu-link-title": "Delete my account",
+        "menu-link-title": "Eliminar mi cuenta",
         "modal": {
-          "title": "You’re about to delete your account",
-          "question": "Are you sure you want to delete your account?",
-          "warning-1": "Please note that the account cannot be recovered after deletion.",
-          "warning-2": "As soon as you confirm, you will be automatically disconnected and your request will be taken into account immediately.",
-          "error-403": "You are not allowed to delete your account. Please contact the support."
+          "error-403": "No puedes eliminar tu cuenta. Póngase en contacto con el servicio de asistencia de Pix.",
+          "question": "¿Seguro que quieres eliminar tu cuenta?",
+          "title": "Está a punto de eliminar su cuenta",
+          "warning-1": "Tenga en cuenta que la cuenta no se puede recuperar después de eliminarla.",
+          "warning-2": "En cuanto lo confirme, se cerrará automáticamente su sesión y su solicitud se tramitará inmediatamente."
         },
-        "more-information": "For more information, ",
-        "more-information-contact-support": "please contact support.",
-        "title": "Delete my account permanently",
-        "warning-email": "This action is irreversible. All the skills, courses and {pixScore} pix you have obtained will be permanently deleted for the PIX account using <strong>{email}</strong>.",
-        "warning-other": "This action is irreversible. All the skills, courses and {pixScore} pix you have obtained will be permanently deleted for the PIX account <strong>{firstName} {lastName}</strong>."
+        "more-information": "Para más información,",
+        "more-information-contact-support": "puede ponerse en contacto con el servicio de asistencia.",
+        "title": "Eliminar mi cuenta definitivamente",
+        "warning-email": "Esta acción es irreversible. {pixScore} Todas las habilidades, cursos y píxeles que haya obtenido se eliminarán de forma permanente para la cuenta PIX que utilice la dirección de correo electrónico<strong>{email}</strong>.",
+        "warning-other": "Esta acción es irreversible. {pixScore} Todas las habilidades, cursos y píxeles que haya obtenido se eliminarán permanentemente de la cuenta PIX.<strong>{firstName} {lastName}</strong>."
       },
       "email-confirmed": "Dirección de correo electrónico verificada.",
       "email-verification": {
