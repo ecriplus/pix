@@ -49,6 +49,15 @@
       {{t "pages.user-details.navbar.certification-centers-list"}}
       ({{@model.certificationCenterMembershipsCount}})
     </LinkTo>
+
+    <LinkTo
+      @route="authenticated.users.get.cgu"
+      @model={{@model}}
+      aria-label={{t "pages.user-details.navbar.cgu-aria-label"}}
+      class="navbar-item"
+    >
+      {{t "pages.user-details.navbar.cgu"}}
+    </LinkTo>
   </nav>
 
   {{outlet}}

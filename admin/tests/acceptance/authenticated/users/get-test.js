@@ -5,9 +5,12 @@ import { setupApplicationTest } from 'ember-qunit';
 import { createAuthenticateSession } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
 
+import setupIntl from '../../../helpers/setup-intl';
+
 module('Acceptance | authenticated/users/get', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks);
 
   test('access to user details page by URL /users/:id', async function (assert) {
     // when
@@ -20,6 +23,7 @@ module('Acceptance | authenticated/users/get', function (hooks) {
 
   test('displays user detail information page', async function (assert) {
     // given
+    this.intl = this.owner.lookup('service:intl');
     const user = await _buildAndAuthenticateUser(this.server, { email: 'john.harry@example.net', username: null });
     const expectedOrganizationMembershipsCount = 2;
     const expectedParticipationCount = 1;
@@ -27,7 +31,6 @@ module('Acceptance | authenticated/users/get', function (hooks) {
 
     // when
     const screen = await visit(`/users/${user.id}`);
-
     // then
     assert.dom(screen.getByRole('heading', { name: "Informations de l'utilisateur" })).exists();
     assert.dom(screen.getByRole('heading', { name: 'Informations prescrit' })).exists();
@@ -43,6 +46,9 @@ module('Acceptance | authenticated/users/get', function (hooks) {
     assert
       .dom(userNavigation.getByLabelText('Organisations de l’utilisateur'))
       .hasText(`Pix Orga (${expectedOrganizationMembershipsCount})`);
+    assert
+      .dom(userNavigation.getByRole('link', { name: this.intl.t('pages.user-details.navbar.cgu-aria-label') }))
+      .exists();
   });
 
   test('redirects to list users page when click page title', async function (assert) {

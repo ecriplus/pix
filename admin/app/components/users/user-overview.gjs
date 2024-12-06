@@ -64,24 +64,6 @@ export default class UserOverview extends Component {
     return false;
   }
 
-  get userHasValidatePixAppTermsOfService() {
-    return this._formatValidatedTermsOfServiceText(this.args.user.lastTermsOfServiceValidatedAt, this.args.user.cgu);
-  }
-
-  get userHasValidatePixOrgaTermsOfService() {
-    return this._formatValidatedTermsOfServiceText(
-      this.args.user.lastPixOrgaTermsOfServiceValidatedAt,
-      this.args.user.pixOrgaTermsOfServiceAccepted,
-    );
-  }
-
-  get userHasValidatePixCertifTermsOfService() {
-    return this._formatValidatedTermsOfServiceText(
-      this.args.user.lastPixCertifTermsOfServiceValidatedAt,
-      this.args.user.pixCertifTermsOfServiceAccepted,
-    );
-  }
-
   get languageOptions() {
     return this.languages;
   }
@@ -93,11 +75,6 @@ export default class UserOverview extends Component {
   get isAnonymizationDisabled() {
     const { hasBeenAnonymised, isPixAgent } = this.args.user;
     return hasBeenAnonymised || isPixAgent;
-  }
-
-  _formatValidatedTermsOfServiceText(date, hasValidatedTermsOfService) {
-    const formattedDateText = date ? `, le ${dayjs(date).format('DD/MM/YYYY')}` : '';
-    return hasValidatedTermsOfService ? `OUI${formattedDateText}` : 'NON';
   }
 
   _initForm() {
@@ -346,14 +323,7 @@ export default class UserOverview extends Component {
                   </span>
                 </li>
               </ul>
-              <ul class="user-detail-personal-information-section__infogroup">
-                <li class="user-detail-personal-information-section__user-informations">CGU Pix App validé :
-                  {{this.userHasValidatePixAppTermsOfService}}</li>
-                <li class="user-detail-personal-information-section__user-informations">CGU Pix Orga validé :
-                  {{this.userHasValidatePixOrgaTermsOfService}}</li>
-                <li class="user-detail-personal-information-section__user-informations">CGU Pix Certif validé :
-                  {{this.userHasValidatePixCertifTermsOfService}}</li>
-              </ul>
+
               <ul class="user-detail-personal-information-section__infogroup">
                 <li class="user-detail-personal-information-section__user-informations">Nombre de tentatives de
                   connexion en erreur :
