@@ -3,7 +3,7 @@ import { Email } from '../../../../../src/shared/mail/domain/models/Email.js';
 import { mailer } from '../../../../../src/shared/mail/infrastructure/services/mailer.js';
 import { expect } from '../../../../test-helper.js';
 
-describe('Unit | Identity Access Management | Domain | Emails | create-account-creation', function () {
+describe('Unit | Identity Access Management | Domain | Email | create-account-creation', function () {
   it('creates account creation email with correct parameters', function () {
     const emailParams = {
       locale: 'fr',
