@@ -399,6 +399,26 @@ describe('Integration | Application | SecurityPreHandlers', function () {
         // then
         expect(response.statusCode).to.equal(200);
       });
+
+      describe('when the application tries to refresh the access token', function () {
+        before(async function () {
+          // given
+          databaseBuilder.factory.buildUser({ username: 'refresh_token_user_1' });
+          await databaseBuilder.commit();
+        });
+
+        it('returns 200', async function () {
+          // when
+          const { statusCode } = await httpServerTest.requestObject({
+            method: 'POST',
+            url: '/api/token',
+            payload: { grant_type: 'refresh_token' },
+          });
+
+          // then
+          expect(statusCode).to.equal(200);
+        });
+      });
     });
 
     describe('when user is temporary blocked', function () {
@@ -424,26 +444,6 @@ describe('Integration | Application | SecurityPreHandlers', function () {
         // then
         expect(response.statusCode).to.equal(403);
         expect(response.result.errors[0].code).to.equal('USER_IS_TEMPORARY_BLOCKED');
-      });
-    });
-
-    describe('when the application tries to refresh the access token', function () {
-      before(async function () {
-        // given
-        databaseBuilder.factory.buildUser({ username: 'refresh_token_user_1' });
-        await databaseBuilder.commit();
-      });
-
-      it('returns 200', async function () {
-        // when
-        const { statusCode } = await httpServerTest.requestObject({
-          method: 'POST',
-          url: '/api/token',
-          payload: { grant_type: 'refresh_token' },
-        });
-
-        // then
-        expect(statusCode).to.equal(200);
       });
     });
 
