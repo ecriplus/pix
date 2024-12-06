@@ -58,13 +58,15 @@ class OrganizationLearnerForAdmin {
   }
 
   updateDivisionAndBirthdate({ additionalInformations, additionalColumns }) {
-    const dateOfBirthColumn = additionalColumns.find((column) => column.name === IMPORT_KEY_FIELD.COMMON_BIRTHDATE);
-    if (dateOfBirthColumn) {
-      this.birthdate = additionalInformations[dateOfBirthColumn.key];
-    }
-    const divisionColumn = additionalColumns.find((column) => column.name === IMPORT_KEY_FIELD.COMMON_DIVISION);
-    if (divisionColumn) {
-      this.division = additionalInformations[divisionColumn.key];
+    if (additionalInformations) {
+      const dateOfBirthColumn = additionalColumns.find((column) => column.name === IMPORT_KEY_FIELD.COMMON_BIRTHDATE);
+      if (dateOfBirthColumn) {
+        this.birthdate = additionalInformations[dateOfBirthColumn.key];
+      }
+      const divisionColumn = additionalColumns.find((column) => column.name === IMPORT_KEY_FIELD.COMMON_DIVISION);
+      if (divisionColumn) {
+        this.division = additionalInformations[divisionColumn.key];
+      }
     }
   }
 }
