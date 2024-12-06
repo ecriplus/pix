@@ -1,6 +1,7 @@
-import { BadRequestError, ForbiddenError } from '../../../src/shared/application/http-errors.js';
+import { ForbiddenError } from '../../../src/shared/application/http-errors.js';
 import * as certificationCenterMembershipSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
+import { usecases as teamUsecases } from '../../../src/team/domain/usecases/index.js';
 import { certificationCenterMembershipRepository } from '../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
 import { usecases } from '../../domain/usecases/index.js';
 
@@ -26,32 +27,6 @@ const disableFromPixCertif = async function (request, h, dependencies = { reques
   return h.response().code(204);
 };
 
-const updateFromPixAdmin = async function (
-  request,
-  h,
-  dependencies = { requestResponseUtils, certificationCenterMembershipSerializer },
-) {
-  const certificationCenterMembershipId = request.params.id;
-  const certificationCenterMembership = dependencies.certificationCenterMembershipSerializer.deserialize(
-    request.payload,
-  );
-  const pixAgentUserId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
-
-  if (certificationCenterMembershipId !== certificationCenterMembership.id) {
-    throw new BadRequestError();
-  }
-
-  const updatedCertificationCenterMembership = await usecases.updateCertificationCenterMembership({
-    certificationCenterMembershipId,
-    role: certificationCenterMembership.role,
-    updatedByUserId: pixAgentUserId,
-  });
-
-  return h.response(
-    dependencies.certificationCenterMembershipSerializer.serializeForAdmin(updatedCertificationCenterMembership),
-  );
-};
-
 const updateFromPixCertif = async function (
   request,
   h,
@@ -71,7 +46,7 @@ const updateFromPixCertif = async function (
     throw new ForbiddenError('Wrong certification center');
   }
 
-  const updatedCertificationCenterMembership = await usecases.updateCertificationCenterMembership({
+  const updatedCertificationCenterMembership = await teamUsecases.updateCertificationCenterMembership({
     certificationCenterMembershipId,
     role: certificationCenterMembership.role,
     updatedByUserId: currentUserId,
@@ -85,7 +60,6 @@ const updateFromPixCertif = async function (
 const certificationCenterMembershipController = {
   disableFromPixAdmin,
   disableFromPixCertif,
-  updateFromPixAdmin,
   updateFromPixCertif,
 };
 

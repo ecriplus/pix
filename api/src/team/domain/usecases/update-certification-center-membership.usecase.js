@@ -1,3 +1,15 @@
+/**
+ * @typedef {import('../../infrastructure/repositories/certification-center-membership.repository.js').certificationCenterMembershipRepository} CertificationCenterMembershipRepository
+ */
+
+/**
+ * @param{object} params
+ * @param{string} params.certificationCenterMembershipId
+ * @param{string} role
+ * @param{string} updatedByUserId
+ * @param{CertificationCenterMembershipRepository} certificationCenterMembershipRepository
+ * @returns {Promise<CertificationCenterMembership>}
+ */
 const updateCertificationCenterMembership = async function ({
   certificationCenterMembershipId,
   role,
