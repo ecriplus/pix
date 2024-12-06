@@ -486,10 +486,11 @@
       },
       "sso-selection": {
         "signin": {
-          "link": "Log in",
+          "button": "Log in",
           "message": "You will be redirected to the “{providerName}” connection page in order to identify yourself on Pix."
         },
         "signup": {
+          "button": "Sign up",
           "link": "Sign up",
           "title": "Don't have an account?"
         },

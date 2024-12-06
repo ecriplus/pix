@@ -490,10 +490,11 @@
       },
       "sso-selection": {
         "signin": {
-          "link": "Ik log in",
+          "button": "Log in",
           "message": "{providerName} Je wordt doorgestuurd naar de \" \" inlogpagina om je te identificeren op Pix."
         },
         "signup": {
+          "button": "Sign up",
           "link": "Aanmelden",
           "title": "Heb je geen account?"
         },
