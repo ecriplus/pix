@@ -1,13 +1,13 @@
-import { updateCertificationCenter } from '../../../../lib/domain/usecases/update-certification-center.js';
-import { CenterForAdmin } from '../../../../src/certification/enrolment/domain/models/CenterForAdmin.js';
-import * as centerRepository from '../../../../src/certification/enrolment/infrastructure/repositories/center-repository.js';
-import * as certificationCenterForAdminRepository from '../../../../src/organizational-entities/infrastructure/repositories/certification-center-for-admin.repository.js';
-import * as complementaryCertificationHabilitationRepository from '../../../../src/organizational-entities/infrastructure/repositories/complementary-certification-habilitation.repository.js';
-import * as dataProtectionOfficerRepository from '../../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../test-helper.js';
+import { CenterForAdmin } from '../../../../../src/certification/enrolment/domain/models/CenterForAdmin.js';
+import * as centerRepository from '../../../../../src/certification/enrolment/infrastructure/repositories/center-repository.js';
+import { updateCertificationCenter } from '../../../../../src/organizational-entities/domain/usecases/update-certification-center.usecase.js';
+import * as certificationCenterForAdminRepository from '../../../../../src/organizational-entities/infrastructure/repositories/certification-center-for-admin.repository.js';
+import * as complementaryCertificationHabilitationRepository from '../../../../../src/organizational-entities/infrastructure/repositories/complementary-certification-habilitation.repository.js';
+import * as dataProtectionOfficerRepository from '../../../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
-describe('Integration | UseCases | update-certification-center', function () {
-  it('should update certification center and his data protection officer information', async function () {
+describe('Integration | Organizational Entities | Domain | UseCases | update-certification-center', function () {
+  it('updates certification center and its data protection officer information', async function () {
     // given
     const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
     databaseBuilder.factory.buildDataProtectionOfficer.withCertificationCenterId({

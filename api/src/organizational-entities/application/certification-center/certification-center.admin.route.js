@@ -97,6 +97,30 @@ const register = async function (server) {
         tags: ['api', 'organizational-entities', 'certification-center'],
       },
     },
+    {
+      method: 'PATCH',
+      path: '/api/admin/certification-centers/{id}',
+      config: {
+        handler: (request, h) => certificationCenterAdminController.update(request, h),
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès**\n" +
+            '- Elle met à jour les informations d‘un centre de certification\n',
+        ],
+        tags: ['api', 'admin', 'certification-center'],
+      },
+    },
   ]);
 };
 

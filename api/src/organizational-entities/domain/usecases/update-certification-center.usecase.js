@@ -4,12 +4,9 @@
  * @typedef {import('./index.js').ComplementaryCertificationHabilitationRepository} ComplementaryCertificationHabilitationRepository
  * @typedef {import('./index.js').DataProtectionOfficerRepository} DataProtectionOfficerRepository
  */
-import { CenterForAdminFactory } from '../../../src/certification/enrolment/domain/models/factories/CenterForAdminFactory.js';
-import {
-  ComplementaryCertificationHabilitation,
-  DataProtectionOfficer,
-} from '../../../src/shared/domain/models/index.js';
-import * as certificationCenterCreationValidator from '../validators/certification-center-creation-validator.js';
+import { CenterForAdminFactory } from '../../../certification/enrolment/domain/models/factories/CenterForAdminFactory.js';
+import { ComplementaryCertificationHabilitation, DataProtectionOfficer } from '../../../shared/domain/models/index.js';
+import * as certificationCenterCreationValidator from '../validators/certification-center-creation.validator.js';
 
 /**
  * @param {Object} params
@@ -18,7 +15,7 @@ import * as certificationCenterCreationValidator from '../validators/certificati
  * @param {Array<number>} params.complementaryCertificationIds
  * @param {CenterRepository} params.centerRepository
  * @param {CertificationCenterForAdminRepository} params.certificationCenterForAdminRepository
- * @param {ComplementaryCertificationHabilitationRepository} params.ComplementaryCertificationHabilitationRepository
+ * @param {ComplementaryCertificationHabilitationRepository} params.complementaryCertificationHabilitationRepository
  * @param {DataProtectionOfficerRepository} params.dataProtectionOfficerRepository
  */
 const updateCertificationCenter = async function ({
