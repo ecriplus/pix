@@ -1267,7 +1267,7 @@
         "label": "Download results"
       },
       "errors": {
-        "expiration": "The session results download link has expired."
+        "invalid-token": "The session results download link is invalid."
       },
       "title": "Download session results"
     },

@@ -155,25 +155,24 @@ module('Unit | Service | file-saver', function (hooks) {
     });
 
     module('when the response is an error', function () {
-      test('should throw an error with the response error detail as message', async function (assert) {
+      test('should throw', async function (assert) {
         // given
         jsonStub.resolves({ errors: [{ detail: 'the error message' }] });
         const response = { ok: false, json: jsonStub };
         fetchStub = sinon.stub().resolves(response);
 
         // when
-        try {
-          await fileSaver.save({
-            url,
-            fileName: defaultFileName,
-            token,
-            fetcher: fetchStub,
-            downloadFileForIEBrowser: downloadFileForIEBrowserStub,
-            downloadFileForModernBrowsers: downloadFileForModernBrowsersStub,
-          });
-        } catch (error) {
-          assert.strictEqual(error.message, 'the error message');
-        }
+        const promise = fileSaver.save({
+          url,
+          fileName: defaultFileName,
+          token,
+          fetcher: fetchStub,
+          downloadFileForIEBrowser: downloadFileForIEBrowserStub,
+          downloadFileForModernBrowsers: downloadFileForModernBrowsersStub,
+        });
+
+        // then
+        assert.rejects(promise);
       });
     });
   });

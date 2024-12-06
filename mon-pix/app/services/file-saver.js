@@ -45,7 +45,7 @@ export default class FileSaver extends Service {
 
     if (!response.ok) {
       const payload = await response.json();
-      throw new Error(payload?.errors[0]?.detail);
+      throw payload?.errors[0];
     }
 
     if (response.headers && response.headers.get('Content-Disposition')) {

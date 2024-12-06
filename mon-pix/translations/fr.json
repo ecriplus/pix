@@ -1267,7 +1267,7 @@
         "label": "Télécharger les résultats"
       },
       "errors": {
-        "expiration": "Le lien de téléchargement des résultats de session a expiré."
+        "invalid-token": "Le lien de téléchargement des résultats de session est invalide."
       },
       "title": "Télécharger les résultats de session"
     },
