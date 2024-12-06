@@ -10,12 +10,19 @@ export default class CampaignTabs extends Component {
   @service notifications;
   @service fileSaver;
   @service session;
+  @service metrics;
 
   @action
   async exportData() {
     try {
       const token = this.session.data.authenticated.access_token;
       await this.fileSaver.save({ url: this.args.campaign.urlToResult, token });
+      this.metrics.add({
+        event: 'custom-event',
+        'pix-event-category': 'Campagnes',
+        'pix-event-action': "Cliquer sur le bouton d'export des résultats d'une campagne",
+        'pix-event-name': "Clic sur le bouton d'export",
+      });
     } catch (err) {
       this.notifications.sendError(this.intl.t('api-error-messages.global'));
     }

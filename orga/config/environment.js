@@ -105,8 +105,6 @@ module.exports = function (environment) {
       warnIfNoIconsIncluded: false,
     },
 
-    matomo: {},
-
     'ember-cli-notifications': {
       autoClear: true,
       clearDuration: 5000,
@@ -120,6 +118,11 @@ module.exports = function (environment) {
     'ember-cli-mirage': {
       usingProxy: true,
     },
+
+    metrics: {
+      enabled: analyticsEnabled,
+      matomoUrl: process.env.WEB_ANALYTICS_URL,
+    },
   };
 
   if (environment === 'development') {
@@ -132,10 +135,6 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    if (analyticsEnabled) {
-      ENV.matomo.url = process.env.WEB_ANALYTICS_URL;
-      ENV.matomo.debug = true;
-    }
   }
 
   if (environment === 'test') {
@@ -157,16 +156,12 @@ module.exports = function (environment) {
       autoClear: null,
       clearDuration: null,
     };
-
+    ENV.metrics.enabled = false;
     ENV.pagination.debounce = 0;
   }
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
-
-    if (analyticsEnabled) {
-      ENV.matomo.url = process.env.WEB_ANALYTICS_URL;
-    }
   }
 
   return ENV;
