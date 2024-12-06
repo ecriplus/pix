@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { securityPreHandlers } from '../../../src/shared/application/security-pre-handlers.js';
 import { responseAuthenticationDoc } from '../../../src/shared/infrastructure/open-api-doc/authentication/response-authentication-doc.js';
 import { responseObjectErrorDoc } from '../../../src/shared/infrastructure/open-api-doc/response-object-error-doc.js';
 import { authenticationController } from './authentication-controller.js';
@@ -66,6 +67,7 @@ const register = async function (server) {
             },
           }),
         },
+        pre: [{ method: securityPreHandlers.checkIfUserIsBlocked }],
         handler: authenticationController.authenticateExternalUser,
         notes: [
           '- Cette route permet d’authentifier un utilisateur Pix provenant de la double mire GAR.\n' +

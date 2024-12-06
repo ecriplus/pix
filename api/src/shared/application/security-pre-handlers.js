@@ -74,7 +74,9 @@ async function checkIfUserIsBlocked(
   let usernameOrEmailToCheck;
   if (grantType === 'password') {
     usernameOrEmailToCheck = username;
-  } else if (data?.attributes?.password) {
+  } else if (data?.attributes?.username) {
+    usernameOrEmailToCheck = data.attributes.username;
+  } else if (data?.attributes?.email) {
     usernameOrEmailToCheck = data.attributes.email;
   }
 
