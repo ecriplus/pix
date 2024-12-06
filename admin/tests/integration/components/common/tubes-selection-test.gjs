@@ -1,5 +1,5 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
-import { click } from '@ember/test-helpers';
+import { click, triggerEvent } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import TubesSelection from 'pix-admin/components/common/tubes-selection';
 import { module, test } from 'qunit';
@@ -11,62 +11,7 @@ module('Integration | Component | Common::TubesSelection', function (hooks) {
 
   hooks.beforeEach(async function () {
     const store = this.owner.lookup('service:store');
-    const tubes1 = [
-      store.createRecord('tube', {
-        id: 'tubeId1',
-        name: '@tubeName1',
-        practicalTitle: 'Tube 1',
-        skills: [],
-        level: 8,
-      }),
-      store.createRecord('tube', {
-        id: 'tubeId2',
-        name: '@tubeName2',
-        practicalTitle: 'Tube 2',
-        skills: [],
-        level: 8,
-      }),
-    ];
-
-    const tubes2 = [
-      store.createRecord('tube', {
-        id: 'tubeId3',
-        name: '@tubeName3',
-        practicalTitle: 'Tube 3',
-        skills: [],
-        level: 8,
-      }),
-    ];
-
-    const thematics = [
-      store.createRecord('thematic', { id: 'thematicId1', name: 'Thématique 1', tubes: tubes1 }),
-      store.createRecord('thematic', { id: 'thematicId2', name: 'Thématique 2', tubes: tubes2 }),
-    ];
-
-    const competences = [
-      store.createRecord('competence', {
-        id: 'competenceId',
-        index: '1',
-        name: 'Titre competence',
-        thematics,
-      }),
-    ];
-
-    const areas = [
-      store.createRecord('area', {
-        id: 'areaId',
-        title: 'Titre domaine',
-        code: 1,
-        competences,
-      }),
-    ];
-    const framework = store.createRecord('framework', { id: 'frameworkId', name: 'Pix', areas });
-    const frameworks = [framework];
-
-    sinon.stub(framework, 'hasMany');
-    framework.hasMany.returns({
-      reload: sinon.stub().resolves(areas),
-    });
+    const frameworks = _createFrameworks(store);
 
     const onChangeFunction = sinon.stub();
 
@@ -195,13 +140,6 @@ module('Integration | Component | Common::TubesSelection', function (hooks) {
     assert.dom(screen.getByLabelText('@tubeName3 : Tube 3')).isChecked();
   });
 
-  module('#import tubes preselection or target profile export', function () {
-    test('it should display a button to import JSON file', function (assert) {
-      // then
-      assert.dom(screen.getByText('Importer un fichier JSON')).exists();
-    });
-  });
-
   test('it should show the total number of tubes and selected tubes', async function (assert) {
     // when
     await clickByName('1 · Titre domaine');
@@ -220,4 +158,109 @@ module('Integration | Component | Common::TubesSelection', function (hooks) {
     // then
     assert.dom(screen.getByText('Compatibilité')).exists();
   });
+
+  module('#import tubes preselection or target profile export', function () {
+    test('it should display a button to import JSON file', function (assert) {
+      // then
+      assert.dom(screen.getByRole('textbox')).hasAttribute('placeholder', 'Pix');
+      assert.dom(screen.getByText('Importer un fichier JSON')).exists();
+    });
+
+    module('when import succeeds', function () {
+      test('it should update areas and skills list', async function (assert) {
+        // given
+        const jsonFileContent = [
+          JSON.stringify([
+            {
+              id: 'tubeId1',
+              level: 2,
+              frameworkId: 'pixPlusFrameworkId',
+            },
+            {
+              id: 'tubeId3',
+              level: 2,
+              frameworkId: 'pixPlusFrameworkId',
+            },
+          ]),
+        ];
+
+        // when
+        await triggerEvent('input[type="file"]', 'change', {
+          files: [new File(jsonFileContent, 'file-to-upload.json')],
+        });
+
+        // then
+        assert.dom(screen.getByRole('textbox')).hasAttribute('placeholder', 'Pix plus');
+        assert.dom(screen.getByText('2/3 sujet(s) sélectionné(s)')).exists();
+      });
+    });
+  });
 });
+
+function _createFrameworks(store) {
+  const tubes1 = [
+    store.createRecord('tube', {
+      id: 'tubeId1',
+      name: '@tubeName1',
+      practicalTitle: 'Tube 1',
+      skills: [],
+      level: 8,
+    }),
+    store.createRecord('tube', {
+      id: 'tubeId2',
+      name: '@tubeName2',
+      practicalTitle: 'Tube 2',
+      skills: [],
+      level: 8,
+    }),
+  ];
+
+  const tubes2 = [
+    store.createRecord('tube', {
+      id: 'tubeId3',
+      name: '@tubeName3',
+      practicalTitle: 'Tube 3',
+      skills: [],
+      level: 8,
+    }),
+  ];
+
+  const thematics = [
+    store.createRecord('thematic', { id: 'thematicId1', name: 'Thématique 1', tubes: tubes1 }),
+    store.createRecord('thematic', { id: 'thematicId2', name: 'Thématique 2', tubes: tubes2 }),
+  ];
+
+  const competences = [
+    store.createRecord('competence', {
+      id: 'competenceId',
+      index: '1',
+      name: 'Titre competence',
+      thematics,
+    }),
+  ];
+
+  const areas = [
+    store.createRecord('area', {
+      id: 'areaId',
+      title: 'Titre domaine',
+      code: 1,
+      competences,
+    }),
+  ];
+
+  const framework = store.createRecord('framework', { id: 'frameworkId', name: 'Pix', areas });
+  const framework2 = store.createRecord('framework', {
+    id: 'pixPlusFrameworkId',
+    name: 'Pix plus',
+    areas: [
+      store.createRecord('area', {
+        id: 'pixPlusAreaId',
+        title: 'Area pix plus',
+        code: 2,
+        competences,
+      }),
+    ],
+  });
+
+  return [framework, framework2];
+}
