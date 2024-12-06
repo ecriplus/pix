@@ -67,6 +67,10 @@ const register = async function (server) {
           }),
         },
         handler: authenticationController.authenticateExternalUser,
+        notes: [
+          '- Cette route permet d’authentifier un utilisateur Pix provenant de la double mire GAR.\n' +
+            '- Elle renvoie un objet contenant un access token.',
+        ],
         tags: ['api'],
       },
     },
