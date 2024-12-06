@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 import { responseAuthenticationDoc } from '../../../src/shared/infrastructure/open-api-doc/authentication/response-authentication-doc.js';
 import { responseObjectErrorDoc } from '../../../src/shared/infrastructure/open-api-doc/response-object-error-doc.js';
-import { authenticationController as AuthenticationController } from './authentication-controller.js';
+import { authenticationController } from './authentication-controller.js';
 
 const register = async function (server) {
   server.route([
@@ -44,7 +44,7 @@ const register = async function (server) {
             403: responseObjectErrorDoc,
           },
         },
-        handler: AuthenticationController.authenticateApplication,
+        handler: authenticationController.authenticateApplication,
         tags: ['api', 'authorization-server'],
       },
     },
@@ -66,7 +66,7 @@ const register = async function (server) {
             },
           }),
         },
-        handler: AuthenticationController.authenticateExternalUser,
+        handler: authenticationController.authenticateExternalUser,
         tags: ['api'],
       },
     },
