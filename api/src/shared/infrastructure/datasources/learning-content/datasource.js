@@ -2,10 +2,10 @@ import _ from 'lodash';
 
 import { config } from '../../../config.js';
 import { LearningContentCache } from '../../caches/old/learning-content-cache.js';
-import { child } from '../../utils/logger.js';
+import { child, SCOPES } from '../../utils/logger.js';
 import { LearningContentResourceNotFound } from './LearningContentResourceNotFound.js';
 
-const logger = child('learningcontent:datasource:old', { event: 'learningcontent' });
+const logger = child('learningcontent:datasource:old', { event: SCOPES.LEARNING_CONTENT });
 
 const _DatasourcePrototype = {
   async get(id) {

@@ -2,9 +2,9 @@ import Dataloader from 'dataloader';
 
 import { knex } from '../../../../db/knex-database-connection.js';
 import { LearningContentCache } from '../caches/learning-content-cache.js';
-import { child } from '../utils/logger.js';
+import { child, SCOPES } from '../utils/logger.js';
 
-const logger = child('learningcontent:repository', { event: 'learningcontent' });
+const logger = child('learningcontent:repository', { event: SCOPES.LEARNING_CONTENT });
 
 /**
  * @typedef {(knex: import('knex').QueryBuilder) => Promise<string[]|number[]>} QueryBuilderCallback

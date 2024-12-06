@@ -1,8 +1,8 @@
 import * as learningContentPubSub from '../caches/learning-content-pubsub.js';
-import { child } from '../utils/logger.js';
+import { child, SCOPES } from '../utils/logger.js';
 import { learningContentCache as oldLearningContentCache } from './old/learning-content-cache.js';
 
-const logger = child('learningcontent:cache', { event: 'learningcontent' });
+const logger = child('learningcontent:cache', { event: SCOPES.LEARNING_CONTENT });
 
 export class LearningContentCache {
   #map;
@@ -42,15 +42,20 @@ export class LearningContentCache {
   }
 
   async #subscribe() {
-    for await (const message of this.#pubSub.subscribe(this.#name)) {
-      if (message.type === 'clear') {
-        logger.debug({ name: this.#name }, 'clearing cache');
-        this.#map.clear();
+    try {
+      for await (const message of this.#pubSub.subscribe(this.#name)) {
+        if (message.type === 'clear') {
+          logger.debug({ name: this.#name }, 'clearing cache');
+          this.#map.clear();
+        }
+        if (message.type === 'delete') {
+          logger.debug({ name: this.#name, key: message.key }, 'deleting cache key');
+          this.#map.delete(message.key);
+        }
       }
-      if (message.type === 'delete') {
-        logger.debug({ name: this.#name, key: message.key }, 'deleting cache key');
-        this.#map.delete(message.key);
-      }
+    } catch (err) {
+      logger.err({ err }, 'Error when subscribing to events for managing Learning Content Cache');
+      throw err;
     }
   }
 }

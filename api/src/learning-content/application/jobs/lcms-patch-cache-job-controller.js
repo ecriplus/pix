@@ -1,5 +1,5 @@
 import { JobController } from '../../../shared/application/jobs/job-controller.js';
-import { logger } from '../../../shared/infrastructure/utils/logger.js';
+import { logger, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import { LcmsPatchCacheJob } from '../../domain/models/LcmsPatchCacheJob.js';
 import { usecases } from '../../domain/usecases/index.js';
 
@@ -15,9 +15,9 @@ export class LcmsPatchCacheJobController extends JobController {
         updatedRecord: data.updatedRecord,
         modelName: data.modelName,
       });
-      logger.info('Learning Content cache patched');
+      logger.info({ event: SCOPES.LEARNING_CONTENT }, 'Learning Content cache patched');
     } catch (e) {
-      logger.error('Error while patching cache', e);
+      logger.error({ err: e, event: SCOPES.LEARNING_CONTENT }, 'Error while patching cache');
       throw e;
     }
   }

@@ -1,5 +1,5 @@
 import { lcmsClient } from '../../../../src/shared/infrastructure/lcms-client.js';
-import { logger } from '../../../../src/shared/infrastructure/utils/logger.js';
+import { logger, SCOPES } from '../../../../src/shared/infrastructure/utils/logger.js';
 
 export async function learningContentBuilder({ databaseBuilder }) {
   const learningContent = await lcmsClient.getLatestRelease();
@@ -17,9 +17,18 @@ export async function learningContentBuilder({ databaseBuilder }) {
 
   learningContent.tutorials = learningContent.tutorials.filter(isUsedByOneOf(learningContent.skills));
 
-  logger.debug(`inserting ${learningContent.skills.length} skills out of ${totalSkillsCount}`);
-  logger.debug(`inserting ${learningContent.challenges.length} challenges out of ${totalChallengesCount}`);
-  logger.debug(`inserting ${learningContent.tutorials.length} tutorials out of ${totalTutorialsCount}`);
+  logger.debug(
+    { event: SCOPES.LEARNING_CONTENT },
+    `inserting ${learningContent.skills.length} skills out of ${totalSkillsCount}`,
+  );
+  logger.debug(
+    { event: SCOPES.LEARNING_CONTENT },
+    `inserting ${learningContent.challenges.length} challenges out of ${totalChallengesCount}`,
+  );
+  logger.debug(
+    { event: SCOPES.LEARNING_CONTENT },
+    `inserting ${learningContent.tutorials.length} tutorials out of ${totalTutorialsCount}`,
+  );
 
   databaseBuilder.factory.learningContent.build(learningContent);
   await databaseBuilder.commit();
