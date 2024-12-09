@@ -27,7 +27,7 @@ export default class NavbarDesktopHeader extends Component {
   }
 
   get _isExternalUser() {
-    return this.session.get('data.externalUser');
+    return this.session.isAuthenticatedByGar;
   }
 
   get showHeaderMenuItem() {

@@ -95,9 +95,8 @@ module('Unit | Component | Navbar Desktop Header Component', function (hooks) {
       component = createGlimmerComponent('navbar-desktop-header');
       component.session = Service.create({
         isAuthenticated: false,
-        data: {
-          externalUser: 'externalUserToken',
-        },
+        isAuthenticatedByGar: true,
+        externalUserTokenFromGar: 'externalUserToken',
       });
     });
 
