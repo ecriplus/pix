@@ -26,7 +26,7 @@ export default class FillInCampaignCodeController extends Controller {
   }
 
   get isUserAuthenticatedByGAR() {
-    return !!this.session.get('data.externalUser');
+    return this.session.isAuthenticatedByGar;
   }
 
   get firstTitle() {
@@ -74,8 +74,7 @@ export default class FillInCampaignCodeController extends Controller {
         filter: { code: campaignCode },
       });
       const isGARCampaign = this.campaign.identityProvider === IDENTITY_PROVIDER_ID_GAR;
-      const isUserAuthenticatedByGAR = this.session.get('data.externalUser');
-      if (_shouldShowGARModal(isGARCampaign, isUserAuthenticatedByGAR, this.isUserAuthenticatedByPix)) {
+      if (_shouldShowGARModal(isGARCampaign, this.isUserAuthenticatedByGAR, this.isUserAuthenticatedByPix)) {
         this.showGARModal = true;
         return;
       }
