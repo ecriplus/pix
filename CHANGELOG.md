@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## v5.0.0 (09/12/2024)
+
+
+### :rocket: Amélioration
+- [#10712](https://github.com/1024pix/pix/pull/10712) [FEATURE] Lire le contenu LCMS depuis PG (PIX-15358).
+
 ## v4.253.0 (09/12/2024)
 
 
