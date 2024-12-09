@@ -1,14 +1,14 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
-import {
-  logErrorWithCorrelationIds,
-  logInfoWithCorrelationIds,
-} from '../../../../../src/shared/infrastructure/monitoring-tools.js';
 import { config } from '../../../../shared/config.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/index.js';
+import {
+  logErrorWithCorrelationIds,
+  logInfoWithCorrelationIds,
+} from '../../../../shared/infrastructure/monitoring-tools.js';
 import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
 import { CertificationCourse } from '../../domain/models/CertificationCourse.js';
 import { CertificationIssueReport } from '../../domain/models/CertificationIssueReport.js';
@@ -202,17 +202,13 @@ async function findOneCertificationCourseByUserIdAndSessionId({ userId, sessionI
   });
 }
 
-async function updateWithoutTransaction({ certificationCourse }) {
-  return update({ certificationCourse, noTransaction: true });
-}
-
 async function update({ certificationCourse, noTransaction = false }) {
   const knexConn = noTransaction ? knex : DomainTransaction.getConnection();
 
   const certificationCourseData = _pickUpdatableProperties(certificationCourse);
 
   const nbOfUpdatedCertificationCourses = await knexConn('certification-courses')
-    .update(certificationCourseData)
+    .update({ ...certificationCourseData, updatedAt: new Date() })
     .where({ id: certificationCourseData.id });
 
   if (nbOfUpdatedCertificationCourses === 0) {
@@ -249,7 +245,6 @@ export {
   isVerificationCodeAvailable,
   save,
   update,
-  updateWithoutTransaction,
 };
 
 function _adaptModelToDb(certificationCourse) {
