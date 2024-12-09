@@ -30,6 +30,7 @@ export class DeleteAndAnonymiseOrgnizationLearnerScript extends Script {
     const engineeringUserId = process.env.ENGINEERING_USER_ID;
     logger.info(`Anonymise ${options.organizationLearnerIds.length} learners`);
     await DomainTransaction.execute(async () => {
+      const updatedAt = new Date();
       await campaignParticipationRepository.removeByOrganizationLearnerIds({
         organizationLearnerIds: options.organizationLearnerIds,
         userId: engineeringUserId,
@@ -43,8 +44,9 @@ export class DeleteAndAnonymiseOrgnizationLearnerScript extends Script {
       await anonymizeDeletedOrganizationLearners(options.organizationLearnerIds);
 
       const participations = await anonymizeDeletedOrganizationLearnersParticipations(options.organizationLearnerIds);
-
-      await detachAssessments(participations.map((participation) => participation.id));
+      const participationsIds = participations.map((participation) => participation.id);
+      await detachAssessments(participationsIds, updatedAt);
+      await detachRecommendedTrainings(participationsIds, updatedAt);
     });
   }
 }
@@ -65,11 +67,19 @@ async function anonymizeDeletedOrganizationLearnersParticipations(organizationLe
     .whereNotNull('deletedAt')
     .returning('id');
 }
-async function detachAssessments(participationIds) {
+
+async function detachAssessments(participationIds, updatedAt) {
   const knexConnection = DomainTransaction.getConnection();
   await knexConnection('assessments')
-    .update({ campaignParticipationId: null })
+    .update({ campaignParticipationId: null, updatedAt })
     .whereIn('campaignParticipationId', participationIds);
 }
-// Exécution du script
+
+async function detachRecommendedTrainings(participationIds, updatedAt) {
+  const knexConnection = DomainTransaction.getConnection();
+  await knexConnection('user-recommended-trainings')
+    .update({ campaignParticipationId: null, updatedAt })
+    .whereIn('campaignParticipationId', participationIds);
+}
+
 await ScriptRunner.execute(import.meta.url, DeleteAndAnonymiseOrgnizationLearnerScript);
