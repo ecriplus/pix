@@ -2,6 +2,8 @@ import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubSessionService } from '../../../../helpers/service-stubs.js';
+
 module('Unit | Controller | campaigns | join | student-sco', function (hooks) {
   setupTest(hooks);
 
@@ -13,11 +15,10 @@ module('Unit | Controller | campaigns | join | student-sco', function (hooks) {
 
   hooks.beforeEach(function () {
     controller = this.owner.lookup('controller:campaigns.join.student-sco');
-
-    sessionStub = {
-      set: sinon.stub(),
-      authenticate: sinon.stub(),
-    };
+    sessionStub = stubSessionService(this.owner, {
+      isAuthenticatedByGar: true,
+      userIdForLearnerAssociation: expectedUserId,
+    });
     currentUserStub = {
       load: sinon.stub().resolves(),
       user: {
@@ -56,8 +57,7 @@ module('Unit | Controller | campaigns | join | student-sco', function (hooks) {
 
       // then
       sinon.assert.calledOnce(expectedExternalUserAuthenticationRequest.save);
-      sinon.assert.calledWith(sessionStub.set, 'data.externalUser', null);
-      sinon.assert.calledWith(sessionStub.set, 'data.expectedUserId', null);
+      sinon.assert.calledOnce(sessionStub.revokeGarAuthenticationContext);
       assert.ok(true);
     });
 
