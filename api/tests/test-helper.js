@@ -74,8 +74,8 @@ afterEach(function () {
   return databaseBuilder.clean();
 });
 
-after(function () {
-  return disconnect();
+after(async function () {
+  return await disconnect();
 });
 
 /* eslint-enable mocha/no-top-level-hooks */
