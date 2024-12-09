@@ -41,7 +41,7 @@ export default class LearningContent extends Component {
         <p>Une version du référentiel de données pédagogique est créée quotidiennement (vers 4h00) et le référentiel
           utilisé par l'application est mis à jour (vers 6h00).</p>
         <p>Si le cache a été vidé, il peut s’avérer utile ou nécessaire de recharger le référentiel.</p>
-        <PixNotificationAlert @type="alert" @withIcon={{true}}>
+        <PixNotificationAlert @type="error" @withIcon={{true}}>
           <strong>Attention !</strong>
           Le rechargement du référentiel est une opération risquée. Il est recommandé de ne l’effectuer qu’en cas de
           force majeure, accompagné d’un développeur ou d'une développeuse.
