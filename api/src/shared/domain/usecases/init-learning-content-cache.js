@@ -1,4 +1,7 @@
-const initLearningContentCache = async function ({ LearningContentCache }) {
+import { logger, SCOPES } from '../../infrastructure/utils/logger.js';
+
+export async function initLearningContentCache({ LearningContentCache }) {
+  logger.info({ event: SCOPES.LEARNING_CONTENT }, 'initializing learning content cache');
   await LearningContentCache.instance.get();
-};
-export { initLearningContentCache };
+  logger.info({ event: SCOPES.LEARNING_CONTENT }, 'learning content cache initialized');
+}
