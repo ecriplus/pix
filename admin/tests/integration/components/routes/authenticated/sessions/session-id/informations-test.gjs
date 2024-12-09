@@ -145,34 +145,6 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
       assert.dom(screen.queryByText('Commentaire global :')).doesNotExist();
     });
 
-    module('when results have not yet been sent to prescriber', function () {
-      test('it should display the button to flag results as sent', async function (assert) {
-        // given
-        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-        const session = _buildSessionWithTwoJuryCertificationSummary({ resultsSentToPrescriberAt: null }, server);
-
-        // when
-        const screen = await visit(`/sessions/${session.id}`);
-
-        // then
-        assert.dom(screen.getByRole('button', { name: 'Résultats transmis au prescripteur' })).exists();
-      });
-    });
-
-    module('when results have been sent to prescriber', function () {
-      test('it should not display the button to flag results as sent', async function (assert) {
-        // given
-        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-        const session = _buildSessionWithTwoJuryCertificationSummary({ resultsSentToPrescriberAt: new Date() }, server);
-
-        // when
-        const screen = await visit(`/sessions/${session.id}`);
-
-        // then
-        assert.dom(screen.queryByRole('button', { name: 'Résultats transmis au prescripteur' })).doesNotExist();
-      });
-    });
-
     module('when the session results have been sent to the prescriber', function () {
       test('it renders the resultsSentToPrescriberAt date', async function (assert) {
         // given
@@ -218,7 +190,6 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
           assert.dom(screen.queryByText("M'assigner la session")).doesNotExist();
           assert.dom(screen.queryByText('Définaliser la session')).doesNotExist();
           assert.dom(screen.queryByText('Lien de téléchargement des résultats')).doesNotExist();
-          assert.dom(screen.queryByText('Résultats transmis au prescripteur')).doesNotExist();
         });
       });
     });
@@ -236,7 +207,6 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
         assert.dom(screen.getByRole('button', { name: "M'assigner la session" })).exists();
         assert.dom(screen.getByRole('button', { name: 'Définaliser la session' })).exists();
         assert.dom(screen.getByRole('button', { name: 'Lien de téléchargement des résultats' })).exists();
-        assert.dom(screen.getByRole('button', { name: 'Résultats transmis au prescripteur' })).exists();
       });
     });
   });

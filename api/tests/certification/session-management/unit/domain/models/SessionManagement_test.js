@@ -65,34 +65,6 @@ describe('Unit | Certification | Session | Domain | Models | SessionManagement',
     expect(_.keys(session)).to.have.deep.members(SESSION_PROPS);
   });
 
-  context('#areResultsFlaggedAsSent', function () {
-    context('when session resultsSentToPrescriberAt timestamp is defined', function () {
-      it('should return true', function () {
-        // given
-        session.resultsSentToPrescriberAt = new Date();
-
-        // when
-        const areResultsFlaggedAsSent = session.areResultsFlaggedAsSent();
-
-        // then
-        expect(areResultsFlaggedAsSent).to.be.true;
-      });
-    });
-
-    context('when session resultsSentToPrescriberAt timestamp is falsy', function () {
-      it('should return false', function () {
-        // given
-        session.resultsSentToPrescriberAt = null;
-
-        // when
-        const areResultsFlaggedAsSent = session.areResultsFlaggedAsSent();
-
-        // then
-        expect(areResultsFlaggedAsSent).to.be.false;
-      });
-    });
-  });
-
   context('#get status', function () {
     context('when session publishedAt timestamp is defined', function () {
       it('should return PROCESSED', function () {

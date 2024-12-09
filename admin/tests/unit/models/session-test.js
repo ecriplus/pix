@@ -324,34 +324,6 @@ module('Unit | Model | session', function (hooks) {
     });
   });
 
-  module('#areResultsToBeSentToPrescriber', function () {
-    module('when session is finalized but results were not sent to prescriber yet', function () {
-      test('it should return areResultsToBeSentToPrescriber with true value', function (assert) {
-        // given
-        const session = store.createRecord('session', { status: 'finalized', resultsSentToPrescriberAt: null });
-
-        // when
-        const areResultsToBeSentToPrescriber = session.areResultsToBeSentToPrescriber;
-
-        // then
-        assert.true(areResultsToBeSentToPrescriber);
-      });
-    });
-
-    module('when session is finalized and results has been sent to prescriber', function () {
-      test('it should return areResultsToBeSentToPrescriber with false value', function (assert) {
-        // given
-        const session = store.createRecord('session', { status: 'finalized', resultsSentToPrescriberAt: new Date() });
-
-        // when
-        const areResultsToBeSentToPrescriber = session.areResultsToBeSentToPrescriber;
-
-        // then
-        assert.false(areResultsToBeSentToPrescriber);
-      });
-    });
-  });
-
   module('#displayStatus', function () {
     module('when status is created', function () {
       test('it should display created printable equivalent', function (assert) {

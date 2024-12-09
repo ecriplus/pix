@@ -47,18 +47,10 @@ const unpublish = async function (request, h, dependencies = { sessionManagement
   return dependencies.sessionManagementSerializer.serialize({ session });
 };
 
-const flagResultsAsSentToPrescriber = async function (request, h, dependencies = { sessionManagementSerializer }) {
-  const sessionId = request.params.id;
-  const { resultsFlaggedAsSent, session } = await usecases.flagSessionResultsAsSentToPrescriber({ sessionId });
-  const serializedSession = await dependencies.sessionManagementSerializer.serialize({ session });
-  return resultsFlaggedAsSent ? h.response(serializedSession).created() : serializedSession;
-};
-
 const sessionController = {
   getJuryCertificationSummaries,
   publishInBatch,
   unpublish,
-  flagResultsAsSentToPrescriber,
 };
 
 export { sessionController };

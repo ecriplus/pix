@@ -163,47 +163,6 @@ describe('Unit | Application | Sessions | Routes', function () {
         expect(response.statusCode).to.equal(400);
       });
     });
-
-    describe('PUT /api/admin/sessions/{id}/results-sent-to-prescriber', function () {
-      it('should exist', async function () {
-        // when
-        sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
-        sinon.stub(sessionController, 'flagResultsAsSentToPrescriber').returns('ok');
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
-
-        const response = await httpTestServer.request('PUT', '/api/admin/sessions/3/results-sent-to-prescriber');
-
-        // then
-        expect(response.statusCode).to.equal(200);
-      });
-
-      it('return forbidden access if user has METIER role', async function () {
-        // given
-        sinon
-          .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
-          .withArgs([
-            securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-            securityPreHandlers.checkAdminMemberHasRoleCertif,
-            securityPreHandlers.checkAdminMemberHasRoleSupport,
-          ])
-          .callsFake(
-            () => (request, h) =>
-              h
-                .response({ errors: new Error('forbidden') })
-                .code(403)
-                .takeover(),
-          );
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
-
-        // when
-        const response = await httpTestServer.request('PUT', '/api/admin/sessions/1/results-sent-to-prescriber');
-
-        // then
-        expect(response.statusCode).to.equal(403);
-      });
-    });
   });
 
   describe('DELETE /api/sessions/{id}', function () {
