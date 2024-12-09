@@ -4,7 +4,7 @@ Date : 2024-10-22
 
 ## État
 
-Proposé
+Validé
 
 ## Contexte
 
