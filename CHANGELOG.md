@@ -1,5 +1,30 @@
 # Pix Changelog
 
+## v4.253.0 (09/12/2024)
+
+
+### :rocket: Amélioration
+- [#10729](https://github.com/1024pix/pix/pull/10729) [FEATURE]: couper le lien entre les utilisateurs et leurs recommended trainings lors de l'anonymisation (PIX-15558).
+- [#10742](https://github.com/1024pix/pix/pull/10742) [FEATURE] Création des tables legal documents (PIX-15578).
+- [#10739](https://github.com/1024pix/pix/pull/10739) [FEATURE] Création du feature toggle FT_NEW_LEGAL_DOCUMENTS_VERSIONING (PIX-15567).
+
+### :building_construction: Tech
+- [#10754](https://github.com/1024pix/pix/pull/10754) [TECH] Supprimer la fonctionnalité pour définir la date d'envoi des résultats aux prescripteurs sur Pix Admin (PIX-15538).
+- [#10732](https://github.com/1024pix/pix/pull/10732) [TECH] Migrer la route GET /api/certification-point-of-contacts/me dans src (PIX-15543).
+- [#10746](https://github.com/1024pix/pix/pull/10746) [TECH] Supprimer 3 composants obsolètes (PIX-15614).
+- [#10749](https://github.com/1024pix/pix/pull/10749) [TECH] Supprimer @fortawesome de Pix Certif (PIX-15416).
+- [#10752](https://github.com/1024pix/pix/pull/10752) [TECH] Passer le status de l'ADR 56 à "Validé".
+- [#10753](https://github.com/1024pix/pix/pull/10753) [TECH] attend la deconnexion dans le hook After (Pix-15599).
+- [#10733](https://github.com/1024pix/pix/pull/10733) [TECH] Suppression de la route GET /download-all-results (PIX-15516).
+- [#10743](https://github.com/1024pix/pix/pull/10743) [TECH] Améliorer la gestion d'erreurs lors du téléchargement des résultats de session sur Pix App (PIX-15587).
+
+### :bug: Correction
+- [#10744](https://github.com/1024pix/pix/pull/10744) [BUGFIX] Ne plus retourner de 500 lors de la consultation de learner d'organization ayant l'import à format (Pix-15610).
+- [#10750](https://github.com/1024pix/pix/pull/10750) [BUGFIX] Suppression des doublons de réponses lors de l'appel à /next (PIX-15561).
+
+### :arrow_up: Montée de version
+- [#10736](https://github.com/1024pix/pix/pull/10736) [BUMP] Update dependency @1024pix/pix-ui to v49 (mon-pix).
+
 ## v4.252.0 (06/12/2024)
 
 
