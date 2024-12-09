@@ -1,0 +1,83 @@
+.cover-rate-gauge {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 3.5rem;
+}
+
+.cover-rate-gauge__container {
+  position: relative;
+  width: 8.875rem;
+
+  --gauge-height: 0.875rem;
+
+  height: var(--gauge-height);
+  color: var(--pix-neutral-500);
+  font-weight: var(--pix-font-medium);
+}
+
+.cover-rate-gauge__background {
+  display: grid;
+  align-items: center;
+  height: var(--gauge-height);
+  padding: 0 2px;
+  line-height: 20px;
+  background-color: rgba(var(--pix-neutral-900-inline), 0.1);
+  border-radius: 3.125rem;
+
+  --level-text-spacing-from-gauge: -12px;
+
+  &:before {
+    position: absolute;
+    left: var(--level-text-spacing-from-gauge);
+    content: '0';
+  }
+
+  &:after {
+    position: absolute;
+    right: var(--level-text-spacing-from-gauge);
+    content: '7';
+  }
+}
+
+.cover-rate-gauge__progress {
+  width: 100%;
+  height: 10px;
+  color: var(--pix-primary-300);
+  background-color: var(--pix-neutral-0);
+  border: none;
+
+  --gauge-border-radius: 1.625rem;
+
+  border-radius: var(--gauge-border-radius);
+
+  &::-webkit-progress-value {
+    background-color: var(--pix-primary-300);
+    border-radius: var(--gauge-border-radius);
+  }
+
+  &::-moz-progress-bar {
+    background-color: var(--pix-primary-300);
+    border-radius: var(--gauge-border-radius);
+  }
+
+  &::-webkit-progress-bar {
+    background-color: var(--pix-neutral-0);
+    border-radius: var(--gauge-border-radius);
+  }
+}
+
+.cover-rate-gauge__level {
+  position: absolute;
+  text-align: right;
+
+  &--user-level {
+    color: var(--pix-primary-500);
+  }
+
+  &--tube-level {
+    top: -20px;
+    color: var(--pix-neutral-800);
+  }
+}

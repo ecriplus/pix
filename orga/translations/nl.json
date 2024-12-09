@@ -1462,6 +1462,9 @@
       "title": "{count, plural, =0 {Studenten} =1 {Studenten ({count})} other {studenten ({count})}}"
     },
     "statistics": {
+      "gauge": {
+        "label": "Je deelnemers behaalden een {userLevel} op een maximaal haalbaar niveau van {tubeLevel}."
+      },
       "level": {
         "advanced": "geavanceerd",
         "expert": "expert",

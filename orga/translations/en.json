@@ -1462,6 +1462,9 @@
       }
     },
     "statistics": {
+      "gauge": {
+        "label": "On the topic, your participants achieved a level of {userLevel} out of a maximum reachable level of {tubeLevel}."
+      },
       "level": {
         "advanced": "advanced",
         "expert": "expert",

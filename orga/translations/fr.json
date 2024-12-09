@@ -1468,6 +1468,9 @@
       }
     },
     "statistics": {
+      "gauge": {
+        "label": "Sur le sujet vos participants ont obtenu un niveau de {userLevel} sur un niveau maximum atteignable de {tubeLevel}."
+      },
       "level": {
         "advanced": "avancé",
         "expert": "expert",
