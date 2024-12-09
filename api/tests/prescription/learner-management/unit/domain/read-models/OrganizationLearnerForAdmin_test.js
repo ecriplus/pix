@@ -29,23 +29,41 @@ describe('Unit | Domain | Read-models | OrganizationLearnerForAdmin', function (
       expect(() => new OrganizationLearnerForAdmin(validArguments)).not.to.throw(ObjectValidationError);
     });
 
-    it('should overide birthdate and division if additionalColumns and additionalInfos are given', function () {
-      const learner = new OrganizationLearnerForAdmin({
-        ...validArguments,
-        additionalColumns: [
-          {
-            name: IMPORT_KEY_FIELD.COMMON_BIRTHDATE,
-            key: 'dateofbirth',
-          },
-          { name: IMPORT_KEY_FIELD.COMMON_DIVISION, key: 'groupe' },
-        ],
-        additionalInformations: {
-          groupe: 'CP',
-          dateofbirth: '2020-02-01',
-        },
+    describe('additionalColumns', function () {
+      it('should not throw when addtionalInformations is not defined', function () {
+        const learner = new OrganizationLearnerForAdmin({
+          ...validArguments,
+          additionalColumns: [
+            {
+              name: IMPORT_KEY_FIELD.COMMON_BIRTHDATE,
+              key: 'dateofbirth',
+            },
+            { name: IMPORT_KEY_FIELD.COMMON_DIVISION, key: 'groupe' },
+          ],
+          additionalInformations: null,
+        });
+        expect(learner.division).to.equal('3A');
+        expect(learner.birthdate).to.deep.equal('2000-10-15');
       });
-      expect(learner.division).to.equal('CP');
-      expect(learner.birthdate).to.deep.equal('2020-02-01');
+
+      it('should overide birthdate and division if additionalColumns and additionalInfos are given', function () {
+        const learner = new OrganizationLearnerForAdmin({
+          ...validArguments,
+          additionalColumns: [
+            {
+              name: IMPORT_KEY_FIELD.COMMON_BIRTHDATE,
+              key: 'dateofbirth',
+            },
+            { name: IMPORT_KEY_FIELD.COMMON_DIVISION, key: 'groupe' },
+          ],
+          additionalInformations: {
+            groupe: 'CP',
+            dateofbirth: '2020-02-01',
+          },
+        });
+        expect(learner.division).to.equal('CP');
+        expect(learner.birthdate).to.deep.equal('2020-02-01');
+      });
     });
 
     it('should throw an ObjectValidationError when id is not valid', function () {
