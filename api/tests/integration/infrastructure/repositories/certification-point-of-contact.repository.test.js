@@ -1,13 +1,13 @@
-import * as certificationPointOfContactRepository from '../../../../lib/infrastructure/repositories/certification-point-of-contact-repository.js';
 import * as centerRepository from '../../../../src/certification/enrolment/infrastructure/repositories/center-repository.js';
 import { CERTIFICATION_FEATURES } from '../../../../src/certification/shared/domain/constants.js';
+import * as certificationPointOfContactRepository from '../../../../src/identity-access-management/infrastructure/repositories/certification-point-of-contact.repository.js';
 import { Organization } from '../../../../src/organizational-entities/domain/models/Organization.js';
 import { NotFoundError } from '../../../../src/shared/domain/errors.js';
 import { CertificationCenter } from '../../../../src/shared/domain/models/CertificationCenter.js';
 import { AllowedCertificationCenterAccess } from '../../../../src/shared/domain/read-models/AllowedCertificationCenterAccess.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../test-helper.js';
 
-describe('Integration | Repository | CertificationPointOfContact', function () {
+describe('Integration | Identity Access Management |  Repository | CertificationPointOfContact', function () {
   let userWithoutMembership;
   let userWithMembership;
   let certificationCenter;
@@ -50,7 +50,7 @@ describe('Integration | Repository | CertificationPointOfContact', function () {
   });
 
   describe('#getAuthorizedCenterIds', function () {
-    it('should throw NotFoundError when point of contact does not exist', async function () {
+    it('throws a NotFoundError when point of contact does not exist', async function () {
       // given
       const unexistingUserId = 999999;
 
@@ -62,7 +62,7 @@ describe('Integration | Repository | CertificationPointOfContact', function () {
       expect(error.message).to.equal(`Le référent de certification ${unexistingUserId} n'existe pas.`);
     });
 
-    it('should return a list of authorized centers', async function () {
+    it('returns a list of authorized centers', async function () {
       // given
       databaseBuilder.factory.buildUser();
       await databaseBuilder.commit();
@@ -89,7 +89,7 @@ describe('Integration | Repository | CertificationPointOfContact', function () {
   });
 
   describe('#getAllowedCenterAccesses', function () {
-    it('should return a list of access allowed center', async function () {
+    it('returns a list of access allowed center', async function () {
       // when
       const { authorizedCenterIds } = await certificationPointOfContactRepository.getAuthorizedCenterIds(
         userWithMembership.id,
@@ -124,7 +124,7 @@ describe('Integration | Repository | CertificationPointOfContact', function () {
   });
 
   describe('#getPointOfContact', function () {
-    it('should return a point of contact', async function () {
+    it('returns a point of contact', async function () {
       // when
       const { authorizedCenterIds, certificationPointOfContactDTO } =
         await certificationPointOfContactRepository.getAuthorizedCenterIds(userWithMembership.id);
@@ -164,7 +164,7 @@ describe('Integration | Repository | CertificationPointOfContact', function () {
     context(
       'when the certification center is related to an organization of the same type that manages students',
       function () {
-        it('should return CertificationPointOfContact with isRelatedOrganizationManagingStudents as true', async function () {
+        it('returns a CertificationPointOfContact with isRelatedOrganizationManagingStudents as true', async function () {
           // given
           databaseBuilder.factory.buildOrganization({
             id: 333,
@@ -283,7 +283,7 @@ describe('Integration | Repository | CertificationPointOfContact', function () {
         await databaseBuilder.commit();
       });
 
-      it('should return actives and allowed certification center accesses of the CertificationPointOfContact', async function () {
+      it('return actives and allowed certification center accesses of the CertificationPointOfContact', async function () {
         // given
         const now = new Date();
 
@@ -511,7 +511,7 @@ describe('Integration | Repository | CertificationPointOfContact', function () {
     context(
       'when user is linked to a certification center that has habilitations and is associated with an organization with tags',
       function () {
-        it('should return the certification point of contact with tags and habilitations', async function () {
+        it('returns the certification point of contact with tags and habilitations', async function () {
           // given
           const firstComplementaryCertification = {
             id: 1,

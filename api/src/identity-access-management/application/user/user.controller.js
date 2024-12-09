@@ -3,6 +3,7 @@ import * as userSerializer from '../../../shared/infrastructure/serializers/json
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { authenticationMethodsSerializer } from '../../infrastructure/serializers/jsonapi/authentication-methods.serializer.js';
+import * as certificationPointOfContactSerializer from '../../infrastructure/serializers/jsonapi/certification-point-of-contact.serializer.js';
 import { emailVerificationSerializer } from '../../infrastructure/serializers/jsonapi/email-verification.serializer.js';
 import * as updateEmailSerializer from '../../infrastructure/serializers/jsonapi/update-email.serializer.js';
 import { userAccountInfoSerializer } from '../../infrastructure/serializers/jsonapi/user-account-info.serializer.js';
@@ -234,11 +235,18 @@ const validateUserAccountEmail = async function (request, h) {
   return h.redirect(location);
 };
 
+const getCertificationPointOfContact = async function (request) {
+  const authenticatedUserId = request.auth.credentials.userId;
+  const certificationPointOfContact = await usecases.getCertificationPointOfContact({ userId: authenticatedUserId });
+  return certificationPointOfContactSerializer.serialize(certificationPointOfContact);
+};
+
 export const userController = {
   acceptPixCertifTermsOfService,
   acceptPixLastTermsOfService,
   acceptPixOrgaTermsOfService,
   changeUserLanguage,
+  getCertificationPointOfContact,
   getCurrentUser,
   getCurrentUserAccountInfo,
   getUserAuthenticationMethods,

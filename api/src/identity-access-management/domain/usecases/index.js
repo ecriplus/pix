@@ -8,6 +8,7 @@ import { oidcAuthenticationServiceRegistry } from '../../../../lib/domain/usecas
 import * as campaignParticipationRepository from '../../../../lib/infrastructure/repositories/campaign-participation-repository.js';
 import * as campaignRepository from '../../../../lib/infrastructure/repositories/campaign-repository.js';
 import * as organizationLearnerRepository from '../../../../lib/infrastructure/repositories/organization-learner-repository.js';
+import * as centerRepository from '../../../certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as userRecommendedTrainingRepository from '../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import { repositories as campaignRepositories } from '../../../prescription/campaign/infrastructure/repositories/index.js';
 import * as prescriptionOrganizationLearnerRepository from '../../../prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
@@ -27,6 +28,7 @@ import { certificationCenterMembershipRepository } from '../../../team/infrastru
 import * as membershipRepository from '../../../team/infrastructure/repositories/membership.repository.js';
 import { accountRecoveryDemandRepository } from '../../infrastructure/repositories/account-recovery-demand.repository.js';
 import * as authenticationMethodRepository from '../../infrastructure/repositories/authentication-method.repository.js';
+import * as certificationPointOfContactRepository from '../../infrastructure/repositories/certification-point-of-contact.repository.js';
 import { emailValidationDemandRepository } from '../../infrastructure/repositories/email-validation-demand.repository.js';
 import { eventLoggingJobRepository } from '../../infrastructure/repositories/jobs/event-logging-job.repository.js';
 import { garAnonymizedBatchEventsLoggingJobRepository } from '../../infrastructure/repositories/jobs/gar-anonymized-batch-events-logging-job-repository.js';
@@ -53,7 +55,9 @@ const repositories = {
   campaignParticipationRepository,
   campaignRepository,
   campaignToJoinRepository: campaignRepositories.campaignToJoinRepository,
+  centerRepository,
   certificationCenterMembershipRepository,
+  certificationPointOfContactRepository,
   emailValidationDemandRepository,
   emailRepository,
   eventLoggingJobRepository,

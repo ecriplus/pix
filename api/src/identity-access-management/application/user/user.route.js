@@ -346,4 +346,16 @@ export const userRoutes = [
       tags: ['api', 'user', 'update-email'],
     },
   },
+  {
+    method: 'GET',
+    path: '/api/certification-point-of-contacts/me',
+    config: {
+      handler: (request, h) => userController.getCertificationPointOfContact(request, h),
+      notes: [
+        '- **Cette route est restreinte aux utilisateurs authentifiés*' * '\n' +
+          '- Récupération d’un référent de certification.',
+      ],
+      tags: ['api', 'identity-access-management', 'user', 'certification', 'certification-point-of-contact'],
+    },
+  },
 ];

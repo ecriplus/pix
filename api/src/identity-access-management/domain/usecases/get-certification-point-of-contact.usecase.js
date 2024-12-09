@@ -1,13 +1,16 @@
 /**
- * @typedef {import('./index.js').CenterRepository} CenterRepository
- * @typedef {import('../../../src/certification/enrolment/domain/models/Center.js').Center} Center
+ * @typedef {import('../../../certification/enrolment/infrastructure/repositories/center-repository.js').CenterRepository} CenterRepository
+ * @typedef {import('../../infrastructure/repositories/certification-point-of-contact-repository.js').CertificationPointOfContactRepository} CertificationPointOfContactRepository
+ * @typedef {import('../../../certification/enrolment/domain/models/Center.js').Center} Center
  */
-import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../src/shared/infrastructure/constants.js';
-import { PromiseUtils } from '../../../src/shared/infrastructure/utils/promise-utils.js';
+import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../shared/infrastructure/constants.js';
+import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
 
 /**
  * @param {Object} params
+ * @param {string} params.userId
  * @param {CenterRepository} params.centerRepository
+ * @param {CertificationPointOfContactRepository} params.certificationPointOfContactRepository
  */
 const getCertificationPointOfContact = async function ({
   userId,
