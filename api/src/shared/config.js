@@ -219,6 +219,7 @@ const configuration = (function () {
       isSelfAccountDeletionEnabled: toBoolean(process.env.FT_SELF_ACCOUNT_DELETION),
       isQuestEnabled: toBoolean(process.env.FT_ENABLE_QUESTS),
       isTextToSpeechButtonEnabled: toBoolean(process.env.FT_ENABLE_TEXT_TO_SPEECH_BUTTON),
+      isLegalDocumentsVersioningEnabled: toBoolean(process.env.FT_NEW_LEGAL_DOCUMENTS_VERSIONING),
       setupEcosystemBeforeStart: toBoolean(process.env.FT_SETUP_ECOSYSTEM_BEFORE_START) || false,
       showExperimentalMissions: toBoolean(process.env.FT_SHOW_EXPERIMENTAL_MISSIONS),
       showNewCampaignPresentationPage: toBoolean(process.env.FT_SHOW_NEW_CAMPAIGN_PRESENTATION_PAGE),
@@ -443,6 +444,7 @@ const configuration = (function () {
     config.featureToggles.isQuestEnabled = false;
     config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
     config.featureToggles.isTextToSpeechButtonEnabled = false;
+    config.featureToggles.isLegalDocumentsVersioningEnabled = false;
     config.featureToggles.showNewResultPage = false;
     config.featureToggles.showExperimentalMissions = false;
 
