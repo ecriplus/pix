@@ -1,0 +1,13 @@
+.statistics-page__header {
+  display: flex;
+  gap: var(--pix-spacing-2x);
+  align-items: baseline;
+}
+
+.statistics-page__section {
+  tbody > tr {
+    &:nth-child(odd) {
+      background-color: var(--pix-neutral-20);
+    }
+  }
+}

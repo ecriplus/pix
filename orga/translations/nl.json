@@ -1462,6 +1462,7 @@
       "title": "{count, plural, =0 {Studenten} =1 {Studenten ({count})} other {studenten ({count})}}"
     },
     "statistics": {
+      "title": "Statistieken",
       "gauge": {
         "label": "Je deelnemers behaalden een {userLevel} op een maximaal haalbaar niveau van {tubeLevel}."
       },
@@ -1470,6 +1471,15 @@
         "expert": "expert",
         "independent": "onafhankelijk",
         "novice": "beginnende"
+      },
+      "table": {
+        "caption": "Deze tabel toont de resultaten van alle deelnemers per onderwerp. Voor elke regel wordt de vaardigheid, het onderwerp, het dekkingspercentage en het behaalde niveau aangegeven.",
+        "headers": {
+          "positioning": "positionering",
+          "reached-level": "Bereikt niveau",
+          "skills": "Vaardigheden",
+          "topics": "Onderwerpen"
+        }
       }
     },
     "sup-organization-participant-activity": {

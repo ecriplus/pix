@@ -1462,6 +1462,7 @@
       }
     },
     "statistics": {
+      "title": "Statistics",
       "gauge": {
         "label": "On the topic, your participants achieved a level of {userLevel} out of a maximum reachable level of {tubeLevel}."
       },
@@ -1470,6 +1471,15 @@
         "expert": "expert",
         "independent": "independent",
         "novice": "novice"
+      },
+      "table": {
+        "caption": "This table displays the analysis of all participants' results by topic. For each line, it shows the skill, the topic, the coverage rate and the level achieved.",
+        "headers": {
+          "positioning": "Positioning",
+          "reached-level": "Reached level",
+          "skills": "Skills",
+          "topics": "Topics"
+        }
       }
     },
     "sup-organization-participant-activity": {
