@@ -32,9 +32,9 @@
   </div>
 
   {{#if this.errorMessage}}
-    <PixMessage role="alert" class="challenge-response__alert" @type="error" @withIcon={{true}}>
+    <PixNotificationAlert role="alert" class="challenge-response__alert" @type="error" @withIcon={{true}}>
       {{this.errorMessage}}
-    </PixMessage>
+    </PixNotificationAlert>
   {{/if}}
 
   {{#if @assessment}}

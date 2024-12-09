@@ -1,14 +1,14 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { t } from 'ember-intl';
 
 <template>
   <div class="element-flashcards-outro-card">
 
     <div class="element-flashcards-outro-card__header">
-      <PixMessage class="element-flashcards-outro-card__alert" @type="success" @withIcon="true">
+      <PixNotificationAlert class="element-flashcards-outro-card__alert" @type="success" @withIcon="true">
         {{t "pages.modulix.flashcards.completed"}}
-      </PixMessage>
+      </PixNotificationAlert>
       <p class="element-flashcards-outro-card__title">{{@title}}</p>
     </div>
 

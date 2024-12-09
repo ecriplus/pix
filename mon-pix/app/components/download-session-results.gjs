@@ -1,7 +1,7 @@
 import PixBackgroundHeader from '@1024pix/pix-ui/components/pix-background-header';
 import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -52,9 +52,9 @@ export default class DownloadSessionResults extends Component {
           </PixButton>
 
           {{#if this.errorMessage}}
-            <PixMessage @type="error" class="form__error">
+            <PixNotificationAlert @type="error" class="form__error">
               {{this.errorMessage}}
-            </PixMessage>
+            </PixNotificationAlert>
           {{/if}}
         </form>
       </PixBlock>

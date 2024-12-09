@@ -27,7 +27,7 @@ module('Integration | Component | communication-banner', function (hooks) {
     await render(hbs`<CommunicationBanner />`);
 
     // then
-    assert.dom('.pix-banner').doesNotExist();
+    assert.dom('.pix-banner-alert').doesNotExist();
   });
 
   test('should display the information banner', async function (assert) {
@@ -39,7 +39,7 @@ module('Integration | Component | communication-banner', function (hooks) {
     await render(hbs`<CommunicationBanner />`);
 
     // then
-    assert.dom('.pix-banner--information').exists();
-    assert.ok(find('.pix-banner--information').textContent.includes('information banner text ...'));
+    assert.dom('.pix-banner-alert--information').exists();
+    assert.ok(find('.pix-banner-alert--information').textContent.includes('information banner text ...'));
   });
 });

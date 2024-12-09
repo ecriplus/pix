@@ -1,6 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -16,7 +16,7 @@ export default class LiveAlert extends Component {
 
   <template>
     <div class="live-alert">
-      <PixMessage @type="error" @withIcon={{true}}>{{@message}}</PixMessage>
+      <PixNotificationAlert @type="error" @withIcon={{true}}>{{@message}}</PixNotificationAlert>
 
       <div class="live-alert__refresh-information">
         <p>{{t "pages.challenge.live-alerts.waiting-information"}}</p>

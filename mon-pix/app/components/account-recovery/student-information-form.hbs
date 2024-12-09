@@ -121,8 +121,8 @@
     </div>
 
     {{#if @showAccountNotFoundError}}
-      <PixMessage
-        @type="alert"
+      <PixNotificationAlert
+        @type="error"
         class="account-recovery__content--not-found-error"
         id="student-information-error-message"
       >
@@ -134,7 +134,7 @@
         >
           {{t "pages.account-recovery.find-sco-record.contact-support.link-text"}}
         </a>
-      </PixMessage>
+      </PixNotificationAlert>
     {{/if}}
 
     <div class="account-recovery__content--actions">

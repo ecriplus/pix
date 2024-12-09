@@ -8,7 +8,7 @@
     {{#each this.sortedAreas as |area|}}
       <div class="area-border-container">
         <div class="area-border {{area.color}}"></div>
-        <PixCollapsible class="tutorials-filters__areas {{area.color}}">
+        <PixAccordions class="tutorials-filters__areas {{area.color}}">
           <:title>{{area.title}}</:title>
           <:content>
             <ul class="tutorials-filters-areas__competences">
@@ -22,7 +22,7 @@
               {{/each}}
             </ul>
           </:content>
-        </PixCollapsible>
+        </PixAccordions>
       </div>
     {{/each}}
   </:content>

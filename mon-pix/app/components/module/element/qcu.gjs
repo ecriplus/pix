@@ -1,5 +1,5 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import PixRadioButton from '@1024pix/pix-ui/components/pix-radio-button';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
@@ -87,9 +87,9 @@ export default class ModuleQcu extends ModuleElement {
 
       {{#if this.shouldDisplayRequiredMessage}}
         <div class="element-qcu__required-field-missing">
-          <PixMessage role="alert" @type="error" @withIcon={{true}}>
+          <PixNotificationAlert role="alert" @type="error" @withIcon={{true}}>
             {{t "pages.modulix.verification-precondition-failed-alert.qcu"}}
-          </PixMessage>
+          </PixNotificationAlert>
         </div>
       {{/if}}
 

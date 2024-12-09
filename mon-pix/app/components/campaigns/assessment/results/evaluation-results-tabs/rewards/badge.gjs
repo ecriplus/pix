@@ -1,4 +1,4 @@
-import PixProgressGauge from '@1024pix/pix-ui/components/pix-progress-gauge';
+import PixProgressBar from '@1024pix/pix-ui/components/pix-progress-bar';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
@@ -47,10 +47,7 @@ export default class RewardsBadge extends Component {
           <MarkdownToHtml @markdown={{@badge.message}} @isInline={{true}} />
         </ShowMoreText>
         {{#unless @badge.isAcquired}}
-          <PixProgressGauge
-            class="evaluation-results-tab-badge__progress-gauge"
-            @value={{@badge.acquisitionPercentage}}
-          />
+          <PixProgressBar class="evaluation-results-tab-badge__progress-bar" @value={{@badge.acquisitionPercentage}} />
         {{/unless}}
       </div>
     </li>

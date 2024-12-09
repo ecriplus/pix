@@ -1,6 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
-import PixMessage from '@1024pix/pix-ui/components/pix-message';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -76,14 +76,14 @@ export default class PasswordResetDemandForm extends Component {
         </p>
 
         {{#if this.globalError}}
-          <PixMessage
+          <PixNotificationAlert
             @type="error"
             @withIcon={{true}}
             class="authentication-password-reset-demand-form__error"
             role="alert"
           >
             {{t this.globalError}}
-          </PixMessage>
+          </PixNotificationAlert>
         {{/if}}
 
         <div class="authentication-password-reset-demand-form__input-block">

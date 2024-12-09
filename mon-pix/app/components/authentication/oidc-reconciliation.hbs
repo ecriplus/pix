@@ -59,9 +59,9 @@
   </div>
 
   {{#if this.reconcileErrorMessage}}
-    <PixMessage @type="error" class="oidc-reconciliation__container-error">
+    <PixNotificationAlert @type="error" class="oidc-reconciliation__container-error">
       {{this.reconcileErrorMessage}}
-    </PixMessage>
+    </PixNotificationAlert>
   {{/if}}
 
   <div class="oidc-reconciliation__action-buttons">
