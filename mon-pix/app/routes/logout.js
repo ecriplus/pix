@@ -11,7 +11,7 @@ export default class LogoutRoute extends Route {
   @service router;
 
   beforeModel() {
-    delete this.session.data.externalUser;
+    this.session.revokeGarExternalUserToken();
     this.campaignStorage.clearAll();
 
     if (this.session.isAuthenticated) {
