@@ -72,4 +72,12 @@
   p + details {
     margin-top: var(--pix-spacing-4x);
   }
+
+  .modulix-two-columns {
+    columns: 2;
+  }
+
+  .modulix-three-columns {
+    columns: 3;
+  }
 }
