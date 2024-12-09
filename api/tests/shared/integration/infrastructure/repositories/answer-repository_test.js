@@ -268,6 +268,7 @@ describe('Integration | Repository | answerRepository', function () {
         expect(foundAnswers).to.be.empty;
       });
     });
+
     context('when assessment exists', function () {
       context('when excludingChallengeIds is not provided', function () {
         it('should return all answers', async function () {
@@ -308,6 +309,40 @@ describe('Integration | Repository | answerRepository', function () {
           // then
           expect(foundAnswers).to.deep.equal([expectedAnswer]);
         });
+      });
+    });
+
+    context('when there are doubled answers', function () {
+      it('should return unique answers', async function () {
+        // given
+        databaseBuilder.factory.buildAssessment({ id: 123 });
+        const firstAnswer = domainBuilder.buildAnswer({ id: 1, assessmentId: 123, challengeId: 'recChallenge123' });
+        const secondAnswer = domainBuilder.buildAnswer({ id: 3, assessmentId: 123, challengeId: 'recChallenge456' });
+        databaseBuilder.factory.buildAnswer({
+          ...firstAnswer,
+          id: 1,
+          result: firstAnswer.result.status,
+        });
+        databaseBuilder.factory.buildAnswer({
+          ...firstAnswer,
+          id: 2,
+          result: firstAnswer.result.status,
+        });
+        databaseBuilder.factory.buildAnswer({
+          ...secondAnswer,
+          id: 3,
+          result: secondAnswer.result.status,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const foundAnswers = await answerRepository.findByAssessmentExcludingChallengeIds({
+          assessmentId: 123,
+          excludedChallengeIds: [],
+        });
+
+        // then
+        expect(foundAnswers).to.deep.equal([firstAnswer, secondAnswer]);
       });
     });
   });

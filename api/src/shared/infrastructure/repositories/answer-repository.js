@@ -83,10 +83,16 @@ const findByAssessment = async function (assessmentId) {
 
 const findByAssessmentExcludingChallengeIds = async function ({ assessmentId, excludedChallengeIds = [] }) {
   const answerDTOs = await knex
-    .select(COLUMNS)
-    .from('answers')
-    .where({ assessmentId })
-    .whereNotIn('challengeId', excludedChallengeIds);
+    .with('all-first-answers', (qb) => {
+      qb.select('*')
+        .distinctOn('challengeId', 'assessmentId')
+        .from('answers')
+        .where({ assessmentId })
+        .whereNotIn('challengeId', excludedChallengeIds)
+        .orderBy(['challengeId', 'assessmentId', 'createdAt']);
+    })
+    .from('all-first-answers')
+    .orderBy('all-first-answers.createdAt');
 
   return _toDomainArray(answerDTOs);
 };
