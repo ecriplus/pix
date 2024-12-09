@@ -7,8 +7,7 @@ export default class TermsOfServiceRoute extends Route {
   @service router;
 
   beforeModel(transition) {
-    const isUserExternal = Boolean(this.session.data.externalUser);
-    if (isUserExternal || !this.currentUser.user.mustValidateTermsOfService) {
+    if (this.session.isAuthenticatedByGar || !this.currentUser.user.mustValidateTermsOfService) {
       if (this.session.attemptedTransition) {
         this.session.attemptedTransition.retry();
       } else {

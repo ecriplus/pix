@@ -2,22 +2,22 @@ import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubCurrentUserService, stubSessionService } from '../../helpers/service-stubs.js';
+
 module('Unit | Route | Terms-of-service', function (hooks) {
   setupTest(hooks);
 
   let route;
 
-  hooks.beforeEach(function () {
-    route = this.owner.lookup('route:terms-of-service');
-    route.router = { replaceWith: sinon.stub() };
-    route.currentUser = { user: { mustValidateTermsOfService: true } };
-    route.session = { attemptedTransition: null, data: {}, requireAuthentication: sinon.stub().returns() };
-  });
-
   module('#beforeModel', function () {
     module('when user is external', function (hooks) {
       hooks.beforeEach(function () {
-        route.session.data.externalUser = 'some external user';
+        const sessionStub = stubSessionService(this.owner, { isAuthenticatedByGar: true });
+        const currentUser = stubCurrentUserService(this.owner, { mustValidateTermsOfService: true });
+        route = this.owner.lookup('route:terms-of-service');
+        route.router = { replaceWith: sinon.stub() };
+        route.session = sessionStub;
+        route.currentUser = currentUser;
       });
 
       test('should redirect to default page if there is no attempted transition', async function (assert) {
@@ -43,7 +43,12 @@ module('Unit | Route | Terms-of-service', function (hooks) {
 
     module('when user must not validate terms of service', function (hooks) {
       hooks.beforeEach(function () {
-        route.currentUser.user.mustValidateTermsOfService = false;
+        const sessionStub = stubSessionService(this.owner, { isAuthenticatedByGar: true });
+        const currentUser = stubCurrentUserService(this.owner, { mustValidateTermsOfService: false });
+        route = this.owner.lookup('route:terms-of-service');
+        route.router = { replaceWith: sinon.stub() };
+        route.session = sessionStub;
+        route.currentUser = currentUser;
       });
 
       test('should transition to default page if there is no attempted transition', async function (assert) {
