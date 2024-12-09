@@ -101,6 +101,7 @@ import { buildJuryCertificationSummary } from './build-jury-certification-summar
 import { buildJurySession } from './build-jury-session.js';
 import { buildKnowledgeElement } from './build-knowledge-element.js';
 import { buildLearningContent } from './build-learning-content.js';
+import { buildLegalDocument } from './build-legal-document.js';
 import { buildMembership } from './build-membership.js';
 import { buildMission } from './build-mission.js';
 import { buildOrganization } from './build-organization.js';
@@ -365,6 +366,7 @@ export {
   buildJurySession,
   buildKnowledgeElement,
   buildLearningContent,
+  buildLegalDocument,
   buildMembership,
   buildMission,
   buildOrganization,
