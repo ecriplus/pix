@@ -35,8 +35,37 @@ const register = async function (server) {
         tags: ['api'],
       },
     },
+    {
+      method: 'POST',
+      path: '/api/admin/certification/deneutralize-challenge',
+      config: {
+        validate: {
+          payload: Joi.object({
+            data: {
+              attributes: {
+                certificationCourseId: identifiersType.certificationCourseId,
+                challengeRecId: Joi.string().required(),
+              },
+            },
+          }),
+        },
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: certificationController.deneutralizeChallenge,
+        tags: ['api'],
+      },
+    },
   ]);
 };
 
-const name = 'src-certification-api';
+const name = 'evaluation-certification-api';
 export { name, register };

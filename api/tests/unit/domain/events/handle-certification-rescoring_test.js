@@ -1,7 +1,7 @@
 import { CertificationCourseRejected } from '../../../../lib/domain/events/CertificationCourseRejected.js';
 import { CertificationJuryDone } from '../../../../lib/domain/events/CertificationJuryDone.js';
-import { ChallengeDeneutralized } from '../../../../lib/domain/events/ChallengeDeneutralized.js';
 import { _forTestOnly } from '../../../../lib/domain/events/index.js';
+import { ChallengeDeneutralized } from '../../../../src/certification/evaluation/domain/events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
 import { CertificationAssessment } from '../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { AlgorithmEngineVersion } from '../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
