@@ -1,6 +1,7 @@
 import { render as renderScreen } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -73,9 +74,7 @@ module(
       // then
       assert
         .dom(
-          screen.getByText(
-            "Signalement à titre informatif, le problème rencontré n'a pas empêché le candidat de continuer à répondre aux questions. En cas d’incident sur une question focus, merci de vous reporter à la catégorie E10.",
-          ),
+          screen.getByText(t('pages.session-finalization.add-issue-modal.non-blocking-issues.technical-information')),
         )
         .exists();
     });

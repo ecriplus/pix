@@ -360,7 +360,7 @@
           "candidate-examples": "a quitté temporairement, sous surveillance, la salle d’examen, est arrivé en retard, a rencontré des difficultés pour se connecter à la session, a dû se reconnecter à la session, avait oublié son mot de passe...",
           "candidate-information": "Signalement à titre informatif, le problème rencontré n'a pas empêché le candidat de continuer à répondre aux questions. ",
           "technical-examples": "L’ordinateur s’est éteint, lenteur significative du réseau et/ou de l’appareil etc.",
-          "technical-information": "Signalement à titre informatif, le problème rencontré n'a pas empêché le candidat de continuer à répondre aux questions. En cas d’incident sur une question focus, merci de vous reporter à la catégorie E10."
+          "technical-information": "Signalement à titre informatif, le problème rencontré n'a pas empêché le candidat de continuer à répondre aux questions. Pour rappel, un incident technique sur une question doit être signalé en direct pendant la session, depuis l'espace surveillant."
         },
         "subcategory-labels": {
           "accessibility-issue": "Problème avec l’accessibilité de la question (ex : daltonisme)",
