@@ -184,7 +184,7 @@
                     "type": "image",
                     "url": "https://i.imgur.com/gVN10ff.jpeg",
                     "alt": "",
-                    "alternativeText": "<p>Icones génériques des options de filtre et de tri dans les logiciel de tableurs :</p><ul><li>Filtre</li><li>Tri croissant</li><li>Tri décroissant</li><li>Tri multicritère</li><br></ul>"
+                    "alternativeText": "<p>Icones génériques des options de filtre et de tri dans les logiciel de tableurs :</p><ul><li>Filtre</li><li>Tri croissant</li><li>Tri décroissant</li><li>Tri multicritère</li></ul>"
                   }
                 ]
               }
@@ -210,7 +210,7 @@
             "element": {
               "id": "8707010a-2068-470f-a007-77f0e82005c1",
               "type": "text",
-              "content": "<iframe width=\"\\&quot;700\\&quot;\" height=\"\\&quot;400\\&quot;\" src=\"\\&quot;https://www.youtube.com/watch?v=ikdJ-4ZVpOo\\&quot;\" title=\"\\&quot;Appliquer\" un=\"\" tri=\"\" multicritère=\"\" dans=\"\" tableau\\\"=\"\"></iframe</iframe>"
+              "content": "<iframe width=\"\\&quot;700\\&quot;\" height=\"\\&quot;400\\&quot;\" src=\"\\&quot;https://www.youtube.com/watch?v=ikdJ-4ZVpOo\\&quot;\" title=\"\\&quot;Appliquer\" un=\"\" tri=\"\" multicritère=\"\" dans=\"\" tableau\\\"=\"\"></iframe>"
             }
           },
           {
@@ -343,7 +343,7 @@
             "element": {
               "id": "82815beb-6dc8-4caf-8c26-2454ffde5458",
               "type": "text",
-              "content": "<p>🗝️ Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>En fonction de votre logiciel, le vocabulaire de tri peut être différent :<ul><li>La fenêtre peut s’appeler «&nbspTrier&nbsp;», «&nbspTri personnalisé&nbsp;» ou «&nbspOptions avancées de tri&nbsp;».</li><li>Un critère de tri peut aussi s’appeler «&nbsp;Clé de tri&nbsp;» ou «&nbsp;Niveau de tri&nbsp;».</li><li>«&nbsp;Croissant&nbsp;» peut être écrit «&nbsp;Du plus petit au plus grand&nbsp;» ou «&nbsp;A-Z&nbsp;».</li></ul></p></details><details><summary>Indice 2</summary><p>Pour ouvrir la fenêtre de tri sur le logiciel LibreOffice, voici la manipulation à effectuer</p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"600\"height=\"337\"src=\"https://www.hebergeur-image.com/upload/88.125.115.216-67530fa7a5525.gif\"></iframe></details><details><summary>Indice 3</summary><ul><li>Commencez par sélectionner «&nbsp;<strong>Score aux fléchettes</strong>&nbsp;» dans votre premier critère de tri. Attribuez-lui un classement «&nbsp;<strong>Décroissant</strong>&nbsp;».</li><li>Puis, sélectionnez «&nbsp;<strong>Réponse au quiz</strong>&nbsp;» dans votre second critère de tri. Attribuez-lui le classement «&nbsp;<strong>Croissant</strong>&nbsp;» </li></ul></p></details>"
+              "content": "<p>🗝️ Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>En fonction de votre logiciel, le vocabulaire de tri peut être différent :</p><ul><li>La fenêtre peut s’appeler «&nbsp;Trier&nbsp;», «&nbsp;Tri personnalisé&nbsp;» ou «&nbsp;Options avancées de tri&nbsp;».</li><li>Un critère de tri peut aussi s’appeler «&nbsp;Clé de tri&nbsp;» ou «&nbsp;Niveau de tri&nbsp;».</li><li>«&nbsp;Croissant&nbsp;» peut être écrit «&nbsp;Du plus petit au plus grand&nbsp;» ou «&nbsp;A-Z&nbsp;».</li></ul></details><details><summary>Indice 2</summary><p>Pour ouvrir la fenêtre de tri sur le logiciel LibreOffice, voici la manipulation à effectuer</p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"600\"height=\"337\" src=\"https://www.hebergeur-image.com/upload/88.125.115.216-67530fa7a5525.gif\"></iframe></details><details><summary>Indice 3</summary><ul><li>Commencez par sélectionner «&nbsp;<strong>Score aux fléchettes</strong>&nbsp;» dans votre premier critère de tri. Attribuez-lui un classement «&nbsp;<strong>Décroissant</strong>&nbsp;».</li><li>Puis, sélectionnez «&nbsp;<strong>Réponse au quiz</strong>&nbsp;» dans votre second critère de tri. Attribuez-lui le classement «&nbsp;<strong>Croissant</strong>&nbsp;» </li></ul></details>"
             }
           }
         ]
@@ -525,7 +525,7 @@
             "element": {
               "id": "9c101788-40c6-4343-95e4-fcac920c96b7",
               "type": "text",
-              "content": "<p>❓Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>Avez-vous nettoyé ce tableau de données ? Pensez à supprimer les lignes ou colonnes vides pour qu'elles ne perturbent pas le résultat de votre tri</p></details><details><summary>Indice 2</summary><p>Voici le résultat que vous devriez obtenir. Observez bien les colonnes pour trouver l'ordre des critères de tri.</p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"696\"height=\"437\"src=\"https://www.hebergeur-image.com/upload/88.125.115.216-675311daf3821.png\"></iframe></details><details><summary>Indice 3</summary><p>Il y a 3 critères de tri nécessaires au classement de Sarah.<br>L’énoncé vous permet de trouver l’ordre des critères de tri suivant&nbsp;:</p><ol><li>L’étape la plus importante est bien sûr : la découverte du trésor</li><li>La seconde épreuve est le nombre d’énigmes réussies</li><li>Le troisième critère est le temps au labyrinthe</li></ol>Ensuite, comparez l’ordre des critères de tri au tableau de l’indice 2 et déterminez le classement de chaque colonne.</p></details>"
+              "content": "<p>❓Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>Avez-vous nettoyé ce tableau de données ? Pensez à supprimer les lignes ou colonnes vides pour qu'elles ne perturbent pas le résultat de votre tri</p></details><details><summary>Indice 2</summary><p>Voici le résultat que vous devriez obtenir. Observez bien les colonnes pour trouver l'ordre des critères de tri.</p><iframe id=\"inlineFrameExample2\" title=\"Inline Frame Example\" width=\"696\"height=\"437\" src=\"https://www.hebergeur-image.com/upload/88.125.115.216-675311daf3821.png\"></iframe></details><details><summary>Indice 3</summary><p>Il y a 3 critères de tri nécessaires au classement de Sarah.<br>L’énoncé vous permet de trouver l’ordre des critères de tri suivant&nbsp;:</p><ol><li>L’étape la plus importante est bien sûr : la découverte du trésor</li><li>La seconde épreuve est le nombre d’énigmes réussies</li><li>Le troisième critère est le temps au labyrinthe</li></ol><p>Ensuite, comparez l’ordre des critères de tri au tableau de l’indice 2 et déterminez le classement de chaque colonne.</p></details>"
             }
           }
         ]
