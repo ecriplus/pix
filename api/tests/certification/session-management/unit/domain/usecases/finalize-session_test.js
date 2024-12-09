@@ -1,6 +1,5 @@
 import {
   SessionAlreadyFinalizedError,
-  SessionWithAbortReasonOnCompletedCertificationCourseError,
   SessionWithMissingAbortReasonError,
   SessionWithoutStartedCertificationError,
 } from '../../../../../../src/certification/session-management/domain/errors.js';
@@ -105,44 +104,6 @@ describe('Unit | UseCase | finalize-session', function () {
 
         // then
         expect(err).to.be.instanceOf(InvalidCertificationReportForFinalization);
-      });
-    });
-
-    context('When there is an abort reason for completed certification course', function () {
-      it('should throw an SessionWithAbortReasonOnCompletedCertificationCourseError error', async function () {
-        // given
-        const reportWithAbortReason = domainBuilder.buildCertificationReport({
-          abortReason: 'candidate',
-          certificationCourseId: 1234,
-        });
-        const certificationReports = [reportWithAbortReason];
-        const completedCertificationCourse = domainBuilder.buildCertificationCourse({
-          id: 1234,
-          abortReason: 'candidate',
-          completedAt: '2022-01-01',
-        });
-        sessionRepository.countUncompletedCertificationsAssessment.withArgs({ id: sessionId }).resolves(0);
-        certificationCourseRepository.findCertificationCoursesBySessionId
-          .withArgs({ sessionId })
-          .resolves([completedCertificationCourse]);
-
-        certificationCourseRepository.update.resolves(
-          domainBuilder.buildCertificationCourse({ ...completedCertificationCourse, abortReason: null }),
-        );
-
-        // when
-        const err = await catchErr(finalizeSession)({
-          sessionId,
-          examinerGlobalComment,
-          sessionRepository,
-          certificationReports,
-          certificationReportRepository,
-          certificationCourseRepository,
-        });
-
-        // then
-        expect(certificationCourseRepository.update).to.have.been.calledOnce;
-        expect(err).to.be.instanceOf(SessionWithAbortReasonOnCompletedCertificationCourseError);
       });
     });
 

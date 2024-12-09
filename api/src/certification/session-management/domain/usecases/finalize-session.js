@@ -119,7 +119,10 @@ async function _removeAbortReasonFromCompletedCertificationCourses({
         sessionCertificationCourse.isCompleted()
       ) {
         sessionCertificationCourse.unabort();
-        await certificationCourseRepository.update({ certificationCourse: sessionCertificationCourse });
+        // do not use transaction so throwing error will not revert the session unabort
+        await certificationCourseRepository.updateWithoutTransaction({
+          certificationCourse: sessionCertificationCourse,
+        });
       }
     }
   }

@@ -202,8 +202,12 @@ async function findOneCertificationCourseByUserIdAndSessionId({ userId, sessionI
   });
 }
 
-async function update({ certificationCourse }) {
-  const knexConn = DomainTransaction.getConnection();
+async function updateWithoutTransaction({ certificationCourse }) {
+  return update({ certificationCourse, noTransaction: true });
+}
+
+async function update({ certificationCourse, noTransaction = false }) {
+  const knexConn = noTransaction ? knex : DomainTransaction.getConnection();
 
   const certificationCourseData = _pickUpdatableProperties(certificationCourse);
 
@@ -245,6 +249,7 @@ export {
   isVerificationCodeAvailable,
   save,
   update,
+  updateWithoutTransaction,
 };
 
 function _adaptModelToDb(certificationCourse) {
