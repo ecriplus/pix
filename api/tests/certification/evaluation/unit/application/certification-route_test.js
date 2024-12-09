@@ -1,10 +1,10 @@
-import { certificationController } from '../../../../lib/application/certifications/certification-controller.js';
-import * as moduleUnderTest from '../../../../lib/application/certifications/index.js';
-import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import { certificationController } from '../../../../../src/certification/evaluation/application/certification-controller.js';
+import * as moduleUnderTest from '../../../../../src/certification/evaluation/application/certification-route.js';
+import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
+import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Application | Certification | Routes', function () {
-  context('POST /api/admin/certification/deneutralize-challenge', function () {
+describe('Certification | Evaluation | Unit | Application | Routes | certification ', function () {
+  context('POST /api/admin/certification/neutralize-challenge', function () {
     it('return forbidden access if user has METIER role', async function () {
       // given
       sinon
@@ -26,7 +26,7 @@ describe('Unit | Application | Certification | Routes', function () {
       await httpTestServer.register(moduleUnderTest);
 
       // when
-      const response = await httpTestServer.request('POST', '/api/admin/certification/deneutralize-challenge', {
+      const response = await httpTestServer.request('POST', '/api/admin/certification/neutralize-challenge', {
         data: {
           attributes: {
             certificationCourseId: 1,
@@ -41,7 +41,7 @@ describe('Unit | Application | Certification | Routes', function () {
 
     it('checks that a valid certification-course id is given', async function () {
       // given
-      sinon.stub(certificationController, 'deneutralizeChallenge').returns('ok');
+      sinon.stub(certificationController, 'neutralizeChallenge').returns('ok');
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
@@ -55,7 +55,7 @@ describe('Unit | Application | Certification | Routes', function () {
       };
 
       // when
-      const response = await httpTestServer.request('POST', '/api/admin/certification/deneutralize-challenge', payload);
+      const response = await httpTestServer.request('POST', '/api/admin/certification/neutralize-challenge', payload);
 
       // then
       expect(response.statusCode).to.equal(400);
@@ -63,7 +63,7 @@ describe('Unit | Application | Certification | Routes', function () {
 
     it('checks that a challenge recId is given', async function () {
       // given
-      sinon.stub(certificationController, 'deneutralizeChallenge').returns('ok');
+      sinon.stub(certificationController, 'neutralizeChallenge').returns('ok');
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
@@ -77,7 +77,7 @@ describe('Unit | Application | Certification | Routes', function () {
       };
 
       // when
-      const response = await httpTestServer.request('POST', '/api/admin/certification/deneutralize-challenge', payload);
+      const response = await httpTestServer.request('POST', '/api/admin/certification/neutralize-challenge', payload);
 
       // then
       expect(response.statusCode).to.equal(400);

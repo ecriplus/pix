@@ -1,11 +1,11 @@
-import { certificationController } from '../../../../lib/application/certifications/certification-controller.js';
-import { ChallengeDeneutralized } from '../../../../lib/domain/events/ChallengeDeneutralized.js';
-import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { certificationController } from '../../../../../src/certification/evaluation/application/certification-controller.js';
+import { ChallengeNeutralized } from '../../../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
+import { usecases } from '../../../../../src/certification/evaluation/domain/usecases/index.js';
+import { expect, hFake, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Controller | certifications-controller', function () {
-  describe('#deneutralizeChallenge', function () {
-    it('deneutralizes the challenge', async function () {
+describe('Certification | Evaluation | Unit | Application | Controller | certification', function () {
+  describe('#neutralizeChallenge', function () {
+    it('neutralizes the challenge and dispatches the event', async function () {
       // given
       const request = {
         payload: {
@@ -18,7 +18,7 @@ describe('Unit | Controller | certifications-controller', function () {
         },
         auth: { credentials: { userId: 7 } },
       };
-      sinon.stub(usecases, 'deneutralizeChallenge');
+      sinon.stub(usecases, 'neutralizeChallenge');
       const eventsStub = {
         eventDispatcher: {
           dispatch: sinon.stub(),
@@ -26,10 +26,10 @@ describe('Unit | Controller | certifications-controller', function () {
       };
 
       // when
-      await certificationController.deneutralizeChallenge(request, hFake, { events: eventsStub });
+      await certificationController.neutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
-      expect(usecases.deneutralizeChallenge).to.have.been.calledWithExactly({
+      expect(usecases.neutralizeChallenge).to.have.been.calledWithExactly({
         certificationCourseId: 1,
         challengeRecId: 'rec43mpMIR5dUzdjh',
         juryId: 7,
@@ -49,20 +49,21 @@ describe('Unit | Controller | certifications-controller', function () {
         },
         auth: { credentials: { userId: 7 } },
       };
-      sinon.stub(usecases, 'deneutralizeChallenge');
+      sinon.stub(usecases, 'neutralizeChallenge');
+
       const eventsStub = {
         eventDispatcher: {
           dispatch: sinon.stub(),
         },
       };
       // when
-      const response = await certificationController.deneutralizeChallenge(request, hFake, { events: eventsStub });
+      const response = await certificationController.neutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(response.statusCode).to.equal(204);
     });
 
-    it('dispatches the event', async function () {
+    it('dispatches an event', async function () {
       // given
       const request = {
         payload: {
@@ -75,9 +76,8 @@ describe('Unit | Controller | certifications-controller', function () {
         },
         auth: { credentials: { userId: 7 } },
       };
-      const eventToBeDispatched = new ChallengeDeneutralized({ certificationCourseId: 1, juryId: 7 });
-
-      sinon.stub(usecases, 'deneutralizeChallenge').resolves(eventToBeDispatched);
+      const eventToBeDispatched = new ChallengeNeutralized({ certificationCourseId: 1, juryId: 7 });
+      sinon.stub(usecases, 'neutralizeChallenge').resolves(eventToBeDispatched);
       const eventsStub = {
         eventDispatcher: {
           dispatch: sinon.stub(),
@@ -85,7 +85,7 @@ describe('Unit | Controller | certifications-controller', function () {
       };
 
       // when
-      await certificationController.deneutralizeChallenge(request, hFake, { events: eventsStub });
+      await certificationController.neutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(eventsStub.eventDispatcher.dispatch).to.have.been.calledWithExactly(eventToBeDispatched);

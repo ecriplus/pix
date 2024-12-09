@@ -1,9 +1,9 @@
-import { ChallengeNeutralized } from '../../../../lib/domain/events/ChallengeNeutralized.js';
-import { neutralizeChallenge } from '../../../../lib/domain/usecases/neutralize-challenge.js';
-import { CertificationAssessment } from '../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { ChallengeNeutralized } from '../../../../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
+import { neutralizeChallenge } from '../../../../../../src/certification/evaluation/domain/usecases/neutralize-challenge.js';
+import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | UseCase | neutralize-challenge', function () {
+describe('Certification | Evaluation | Unit | UseCase | neutralize-challenge', function () {
   it('neutralizes a challenge by its recId', async function () {
     // given
     const certificationCourseId = 1;

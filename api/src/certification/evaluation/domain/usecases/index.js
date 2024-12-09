@@ -22,6 +22,7 @@ import {
   sharedCompetenceMarkRepository,
 } from '../../../session-management/infrastructure/repositories/index.js';
 import * as certificationBadgesService from '../../../shared/domain/services/certification-badges-service.js';
+import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
 import * as sharedCertificationCandidateRepository from '../../../shared/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCenterRepository from '../../../shared/infrastructure/repositories/certification-center-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
@@ -32,6 +33,7 @@ import * as challengeCalibrationRepository from '../../infrastructure/repositori
 /**
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
  * @typedef {certificationChallengeRepository} CertificationChallengeRepository
+ * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
  */
 
 const dependencies = {
@@ -59,6 +61,7 @@ const dependencies = {
   certificationCenterRepository,
   certificationCompanionAlertRepository,
   certificationCourseRepository,
+  certificationAssessmentRepository,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));

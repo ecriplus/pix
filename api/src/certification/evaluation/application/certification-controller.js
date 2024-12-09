@@ -1,11 +1,11 @@
-import * as events from '../../domain/events/index.js';
-import { usecases } from '../../domain/usecases/index.js';
+import * as events from '../../../../lib/domain/events/index.js';
+import { usecases } from '../domain/usecases/index.js';
 
-const deneutralizeChallenge = async function (request, h, dependencies = { events }) {
+const neutralizeChallenge = async function (request, h, dependencies = { events }) {
   const challengeRecId = request.payload.data.attributes.challengeRecId;
   const certificationCourseId = request.payload.data.attributes.certificationCourseId;
   const juryId = request.auth.credentials.userId;
-  const event = await usecases.deneutralizeChallenge({
+  const event = await usecases.neutralizeChallenge({
     challengeRecId,
     certificationCourseId,
     juryId,
@@ -15,7 +15,7 @@ const deneutralizeChallenge = async function (request, h, dependencies = { event
 };
 
 const certificationController = {
-  deneutralizeChallenge,
+  neutralizeChallenge,
 };
 
 export { certificationController };

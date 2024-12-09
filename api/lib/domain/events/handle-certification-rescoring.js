@@ -1,3 +1,4 @@
+import { ChallengeNeutralized } from '../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
 import { services } from '../../../src/certification/evaluation/domain/services/index.js';
 import { AssessmentResultFactory } from '../../../src/certification/scoring/domain/models/factories/AssessmentResultFactory.js';
 import { AlgorithmEngineVersion } from '../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
@@ -10,7 +11,6 @@ import { CertificationJuryDone } from './CertificationJuryDone.js';
 import CertificationRescoredByScript from './CertificationRescoredByScript.js';
 import { CertificationRescoringCompleted } from './CertificationRescoringCompleted.js';
 import { ChallengeDeneutralized } from './ChallengeDeneutralized.js';
-import { ChallengeNeutralized } from './ChallengeNeutralized.js';
 import { checkEventTypes } from './check-event-types.js';
 
 const eventTypes = [

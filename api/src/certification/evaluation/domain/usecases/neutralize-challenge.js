@@ -1,10 +1,10 @@
 import { ChallengeNeutralized } from '../events/ChallengeNeutralized.js';
 
 const neutralizeChallenge = async function ({
-  certificationAssessmentRepository,
   certificationCourseId,
   challengeRecId,
   juryId,
+  certificationAssessmentRepository,
 }) {
   const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
     certificationCourseId,
