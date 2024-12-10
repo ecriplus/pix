@@ -62,7 +62,7 @@
           "element": {
             "id": "938ababc-7496-453a-bccd-1a493a829525",
             "type": "text",
-            "content": "<p><a href=\"https://www.youtube.com/shorts/AJUkmn48D0U\">Lien vers la version vidéo</a></p>"
+            "content": "<p><a href=\"https://www.youtube.com/shorts/AJUkmn48D0U\"target=\"_blank\">Lien vers la version vidéo</a></p>"
           }
         },
         {
