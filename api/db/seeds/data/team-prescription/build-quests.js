@@ -114,13 +114,13 @@ const buildOrganizationLearners = (databaseBuilder, organization, users) =>
   );
 
 const buildCampaignParticipations = (databaseBuilder, users) =>
-  users.map(async ({ user, organizationLearner, status, sharedAt }) => {
+  users.map(async ({ user, organizationLearner, status, sharedAt, campaignId }) => {
     const stages = await databaseBuilder.knex('stages').where({ targetProfileId: TARGET_PROFILE_BADGES_STAGES_ID });
     const stageZero = stages.find((stage) => stage.level === 0 || stage.threshold === 0);
 
     const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
       userId: user.id,
-      campaignId: user.campaignId,
+      campaignId,
       masteryRate: 1,
       organizationLearnerId: organizationLearner.id,
       status,
@@ -315,46 +315,44 @@ export const buildQuests = async (databaseBuilder) => {
   const targetProfiles = buildTargetProfiles(databaseBuilder, organization);
 
   // Create campaigns
-
   const campaigns = buildCampaigns(databaseBuilder, organization, targetProfiles);
 
   // Create campaignParticipations
-
   buildCampaignParticipations(databaseBuilder, [
     {
       user: successUser,
-      campaignId: campaigns[0].id,
+      campaignId: campaigns[0],
       organizationLearner: successOrganizationLearner,
       sharedAt: null,
       status: CampaignParticipationStatuses.TO_SHARE,
     },
     {
       user: successUser,
-      campaignId: campaigns[1].id,
+      campaignId: campaigns[1],
       organizationLearner: successOrganizationLearner,
       sharedAt: null,
       status: CampaignParticipationStatuses.TO_SHARE,
     },
     {
       user: successUser,
-      campaignId: campaigns[2].id,
+      campaignId: campaigns[2],
       organizationLearner: successOrganizationLearner,
       sharedAt: null,
       status: CampaignParticipationStatuses.TO_SHARE,
     },
     {
       user: successSharedUser,
-      campaignId: campaigns[0].id,
+      campaignId: campaigns[0],
       organizationLearner: successSharedOrganizationLearner,
     },
     {
       user: failedUser,
-      campaignId: campaigns[0].id,
+      campaignId: campaigns[0],
       organizationLearner: failedOrganizationLearner,
     },
     {
       user: pendingUser,
-      campaignId: campaigns[0].id,
+      campaignId: campaigns[0],
       organizationLearner: pendingOrganizationLearner,
     },
   ]);
