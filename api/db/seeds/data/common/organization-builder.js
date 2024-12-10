@@ -96,7 +96,7 @@ async function _createProOrganization(databaseBuilder) {
     type: 'PRO',
     name: 'PRO Classic',
     isManagingStudents: false,
-    externalId: 'PRO_NOT_MANAGING',
+    externalId: null,
     adminIds: [USER_ID_ADMIN_ORGANIZATION],
     memberIds: [USER_ID_MEMBER_ORGANIZATION],
     features: [
