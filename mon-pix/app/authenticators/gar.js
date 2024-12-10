@@ -1,3 +1,4 @@
+import { isEmpty } from '@ember/utils';
 import BaseAuthenticator from 'ember-simple-auth/authenticators/base';
 import { decodeToken } from 'mon-pix/helpers/jwt';
 import RSVP from 'rsvp';
@@ -11,6 +12,15 @@ export default class GarAuthenticator extends BaseAuthenticator {
       access_token: token,
       user_id,
       source,
+    });
+  }
+
+  restore(data) {
+    return new RSVP.Promise((resolve, reject) => {
+      if (!isEmpty(data['access_token'])) {
+        resolve(data);
+      }
+      reject();
     });
   }
 }
