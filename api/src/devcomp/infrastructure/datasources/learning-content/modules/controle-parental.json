@@ -80,12 +80,12 @@
               {
                 "id": "2",
                 "content": "<p>Il permet de surveiller la santé de son enfant.</p>",
-                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le contrôle parental ne concerne pas la surveillance de la santé. Regardez à nouveau la conversation et réessayez !</p>"
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le contrôle parental ne concerne pas la surveillance de la santé.<br>Regardez à nouveau la conversation et réessayez !</p>"
               },
               {
                 "id": "3",
                 "content": "<p>Il permet de vérifier que son enfant a fait ses devoirs scolaires.</p>",
-                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le contrôle parental ne concerne pas la surveillance de la santé. Regardez à nouveau la conversation et réessayez !</p>"
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le contrôle parental ne concerne pas la surveillance de la santé.<br>Regardez à nouveau la conversation et réessayez !</p>"
               }
             ],
             "feedbacks": {
@@ -151,7 +151,7 @@
                     {
                       "id": "1",
                       "content": "<p>gestion du temps d'écran</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><span class=\"feedback__state\">La gestion du temps d’écran permet de mettre des limites de temps d’utilisation.<br>Elle ne permet pas de bloquer l’accès à un contenu en fonction de l’âge du fils de Rachel.</span></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><span class=\"feedback__state\"></p><p>La gestion du temps d’écran permet de mettre des limites de temps d’utilisation.<br>Elle ne permet pas de bloquer l’accès à un contenu en fonction de l’âge du fils de Rachel.</span></p>"
                     },
                     {
                       "id": "2",
@@ -228,7 +228,7 @@
                     {
                       "id": "2",
                       "content": "<p>filtrage des contenus</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p><span class=\"feedback__state\">Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple. <br>Il ne permet pas de connaître le temps d’utilisation d’une application par le fils de Nassira.</span></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p><span class=\"feedback__state\"></p><p>Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple. <br>Il ne permet pas de connaître le temps d’utilisation d’une application par le fils de Nassira.</span></p>"
                     },
                     {
                       "id": "3",
@@ -260,7 +260,7 @@
             "type": "embed",
             "isCompletionRequired": true,
             "title": "Simulateur de smartphone - activation du contrôle parental",
-            "url": "https://epreuves.pix.fr/temps_en_ligne/temps_en_ligne.html?mode=activer&lang=fr",
+            "url": "https://epreuves.pix.fr/temps_en_ligne/temps_en_ligne.html?mode=module-activer&lang=fr",
             "instruction": "<p><strong>Activez le contrôle parental dans le simulateur de smartphone ci-dessous. </strong><span aria-hidden=\"true\">👇</span> <br><span aria-hidden=\"true\">🧘 </span> Ne vous inquiétez pas ! Les réglages de votre propre smartphone ne seront pas modifiés.</p>",
             "height": 720
           }
