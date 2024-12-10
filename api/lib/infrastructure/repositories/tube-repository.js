@@ -10,6 +10,7 @@ const TABLE_NAME = 'learningcontent.tubes';
 const ACTIVE_STATUS = 'actif';
 
 export async function get(id) {
+  if (!config.featureToggles.useNewLearningContent) return oldTubeRepository.get(id);
   const tubeDto = await getInstance().load(id);
   if (!tubeDto) {
     throw new LearningContentResourceNotFound();
