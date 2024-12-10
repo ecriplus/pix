@@ -1,5 +1,32 @@
 # Pix Changelog
 
+## v5.1.0 (10/12/2024)
+
+
+### :rocket: Amélioration
+- [#10758](https://github.com/1024pix/pix/pull/10758) [FEATURE] Création de l'API  legal documents (PIX-15580).
+- [#10709](https://github.com/1024pix/pix/pull/10709) [FEATURE] Modification du background des mires sur Pix Orga et Pix Certif (PIX-15554).
+- [#10761](https://github.com/1024pix/pix/pull/10761) [FEATURE] Mise à jour du message en cas d'incident technique non bloquant sur Pix Certif (PIX-15391).
+- [#10703](https://github.com/1024pix/pix/pull/10703) [FEATURE] Intégrer le nouveau gabarit de pages de PixApp (PIX-15521).
+- [#10755](https://github.com/1024pix/pix/pull/10755) [FEATURE] Permettre de rendre les <ol> sur 2 colonnes (PIX-15592).
+
+### :building_construction: Tech
+- [#10767](https://github.com/1024pix/pix/pull/10767) [TECH] Migration des routes de neutralisation et de-neutralisation d'un challenge vers le bounded context évaluation de certification (PIX-15641).
+- [#10731](https://github.com/1024pix/pix/pull/10731) [TECH]  Migrer le usecase de calcul de resultat dans le BC Campaign Participations (PIX-15341).
+
+### :bug: Correction
+- [#10770](https://github.com/1024pix/pix/pull/10770) [BUGFIX] Mélange des options QCM à tort (PIX-15655).
+- [#10763](https://github.com/1024pix/pix/pull/10763) [BUGFIX] Nouveaux repositories learning content : résultats en doublon (PIX-15640).
+- [#10762](https://github.com/1024pix/pix/pull/10762) [BUGFIX] Crash du rafraichissement du cache en recette (PIX-15642).
+
+### :arrow_up: Montée de version
+- [#10766](https://github.com/1024pix/pix/pull/10766) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.24 (orga).
+- [#10765](https://github.com/1024pix/pix/pull/10765) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.24 (mon-pix).
+- [#10723](https://github.com/1024pix/pix/pull/10723) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.24 (junior).
+
+### :coffee: Autre
+- [#10481](https://github.com/1024pix/pix/pull/10481) [DOC] ADR-57 - Migration des fichiers SCSS dans le dossier des composants.
+
 ## v5.0.0 (09/12/2024)
 
 
