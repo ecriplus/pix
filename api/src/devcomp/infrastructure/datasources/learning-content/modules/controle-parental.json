@@ -292,7 +292,7 @@
           "element": {
             "id": "2b03d03b-39fd-433a-8895-1144aa69d766",
             "type": "text",
-            "content": "<p><br></p><h3><span aria-hidden=\"true\">📌</span> Les 4 points à retenir :&nbsp;</h3>\n<p><br></p><ul><li>Le contrôle parental est un <strong>outil numérique pour protéger et accompagner les enfants</strong> dans leurs usages numériques.<span aria-hidden=\"true\">🛡</span>️</li><br><li>Le contrôle parental a de nombreuses fonctionnalités :&nbsp; <strong>gestion du temps en ligne, de filtrage des contenus et de suivi des activités</strong>.&nbsp;<span aria-hidden=\"true\">⏳</span></li><br><li>Pour trouver le contrôle parental, rendez-vous dans les <strong>paramètres</strong>. <span aria-hidden=\"true\">⚙️</span>&nbsp;</li><br><li>Le contrôle parental ne remplace pas les <strong>échanges parents-enfants</strong>, il les complète !&nbsp;<span aria-hidden=\"true\">🗣</span>️</li><br></ul>"
+            "content": "<h3><span aria-hidden=\"true\">📌</span> Les 4 points à retenir :&nbsp;</h3>\n<p><br></p><ul><li>Le contrôle parental est un <strong>outil numérique pour protéger et accompagner les enfants</strong> dans leurs usages numériques.<span aria-hidden=\"true\">🛡</span>️</li><br><li>Le contrôle parental a de nombreuses fonctionnalités :&nbsp; <strong>gestion du temps en ligne, de filtrage des contenus et de suivi des activités</strong>.&nbsp;<span aria-hidden=\"true\">⏳</span></li><br><li>Pour trouver le contrôle parental, rendez-vous dans les <strong>paramètres</strong>. <span aria-hidden=\"true\">⚙️</span>&nbsp;</li><br><li>Le contrôle parental ne remplace pas les <strong>échanges parents-enfants</strong>, il les complète !&nbsp;<span aria-hidden=\"true\">🗣</span>️</li><br></ul>"
           }
         }
       ]
@@ -307,7 +307,7 @@
           "element": {
             "id": "2589ce3b-fe26-42fc-aadc-eba80302f0da",
             "type": "text",
-            "content": "<p>Après cette infographie, vous devrez sélectionner où l'on trouve du contrôle parental.</p>"
+            "content": "<p>Après cette infographie, vous devrez sélectionner où Nina peut activer des options de contrôle parental pour accompagner Max.</p>"
           }
         },
         {
@@ -323,6 +323,21 @@
         {
           "type": "element",
           "element": {
+            "id": "693544c4-d186-45b2-8ade-525ad981787d",
+            "type": "text",
+            "content": "<p><span aria-hidden=\"true\">💡</span> <strong>Bon à savoir</strong> : </p><p>Depuis juillet 2024,<strong> tous les nouveaux appareils connectés vendus en France doivent obligatoirement être équipés d’un contrôle parental</strong> pré-installé, activable facilement dès le premier démarrage.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "37ff3330-b8df-47e0-80d2-e382678dc3da",
+            "type": "separator"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
             "id": "725a2e07-46dd-4fff-a41e-08656432b3e7",
             "type": "text",
             "content": "<p>En plus de son tout nouveau smartphone, Max utilise d'autres appareils numériques et plateformes en ligne.</p>"
@@ -333,36 +348,36 @@
           "element": {
             "id": "9f20ae6f-bb80-4d43-bce0-882b8e9726cd",
             "type": "qcm",
-            "instruction": "<p>Parmi les appareils et les plateformes suivantes, sur lesquels Nina peut activer un contrôle parental pour accompagner Max ?</p>",
+            "instruction": "<p>Où Nina peut-elle activer des options de contrôle parental pour accompagner Max ?</p>",
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>Netflix</p>"
+                "content": "<p>sur Netflix</p>"
               },
               {
                 "id": "2",
-                "content": "<p>Roblox</p>"
+                "content": "<p>sur Roblox</p>"
               },
               {
                 "id": "3",
-                "content": "<p>la box internet</p>"
+                "content": "<p>sur la box internet</p>"
               },
               {
                 "id": "4",
-                "content": "<p>Whatsapp<br></p>"
+                "content": "<p>sur Whatsapp<br></p>"
               },
               {
                 "id": "5",
-                "content": "<p>la console Nintendo Switch</p>"
+                "content": "<p>sur la console Nintendo Switch</p>"
               },
               {
                 "id": "6",
-                "content": "<p>le téléphone fixe</p>"
+                "content": "<p>sur le téléphone fixe</p>"
               }
             ],
             "feedbacks": {
-              "valid": "<span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span>",
-              "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span>"
+              "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Pour accompagner au mieux Max, Nina peut activer des options de contrôle parental sur les appareils et les plateformes en ligne.</>",
+              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Relisez l’infographie et essayez à nouveau !</>"
             },
             "solutions": [
               "1",
@@ -371,15 +386,7 @@
               "5"
             ]
           }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "693544c4-d186-45b2-8ade-525ad981787d",
-            "type": "text",
-            "content": "<p><span aria-hidden=\"true\">💡</span> <strong>Bon à savoir</strong> : </p><p>Depuis juillet 2024,<strong> tous les nouveaux appareils connectés vendus en France doivent obligatoirement être équipés d’un contrôle parental</strong> pré-installé, activable facilement dès le premier démarrage.</p>"
-          }
-        }
+        }  
       ]
     },
     {
