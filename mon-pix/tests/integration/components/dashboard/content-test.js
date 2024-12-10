@@ -383,7 +383,7 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
       const screen = await render(hbs`<Dashboard::Content @model={{this.model}} />`);
 
       // then
-      assert.dom(screen.getByRole('heading', { name: 'Bonjour Banana, découvrez votre tableau de bord.' })).exists();
+      assert.dom(screen.getByRole('heading', { name: 'Bonjour, découvrez votre tableau de bord.' })).exists();
     });
 
     test('should not display NewInformation on dashboard if user has close it before', async function (assert) {
@@ -484,7 +484,7 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
       const screen = await render(hbs`<Dashboard::Content @model={{this.model}} />`);
 
       // then
-      assert.dom(screen.getByRole('heading', { name: 'Bonjour Banana, découvrez votre tableau de bord.' })).exists();
+      assert.dom(screen.getByRole('heading', { name: 'Bonjour, découvrez votre tableau de bord.' })).exists();
       assert.dom(screen.queryByRole('link', { name: t('pages.dashboard.presentation.link.text') })).doesNotExist();
     });
   });

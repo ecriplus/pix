@@ -63,8 +63,8 @@ Then(`je suis redirigé vers le profil de {string}`, (firstName) => {
   cy.get(".logged-user-name").should((userName) => {
     expect(userName.text()).to.contains(firstName);
   });
-  cy.get(".rounded-panel-title").should((title) => {
-    expect(title.text()).to.contains("Vous avez 16 compétences à tester.");
+  cy.get(".global-page-header__title").should((title) => {
+    expect(title.text()).to.contains("Compétences Pix");
   });
 });
 

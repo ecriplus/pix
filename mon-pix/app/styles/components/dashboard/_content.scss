@@ -1,6 +1,10 @@
 @mixin add-dashboard-content-separator() {
-  padding: 24px 0;
+  padding: var(--pix-spacing-8x) 0;
   border-bottom: 1px solid var(--pix-neutral-20);
+
+  &:first-child {
+    padding-top: 0;
+  }
 }
 
 .dashboard-content {
@@ -12,7 +16,6 @@
     'certif';
   grid-template-rows: auto;
   grid-template-columns: 100%;
-  padding: 40px 20px;
 
   .dashboard-banner {
     grid-area: banner;
@@ -24,7 +27,6 @@
       @include add-dashboard-content-separator;
 
       grid-area: score;
-      margin-bottom: 20px;
     }
   }
 
@@ -87,7 +89,6 @@
       'main main main certif';
     grid-template-rows: auto;
     grid-template-columns: repeat(4, 1fr);
-    padding: 0;
 
     .dashboard-banner {
       display: none;
@@ -102,7 +103,10 @@
           @include add-dashboard-content-separator;
 
           display: block;
-          padding: 40px 0 47px;
+
+          &:first-child {
+            padding-top: 0;
+          }
         }
 
         & > .new-information {
@@ -114,12 +118,8 @@
     &__score {
       grid-area: score;
       margin: 0;
-      padding-top: 40px;
+      padding-top: 0;
       border-bottom: none;
-
-      &:first-of-type {
-        padding-top: 40px;
-      }
     }
 
     &__certif {
@@ -169,21 +169,24 @@
 }
 
 .dashboard-section {
+  @include add-dashboard-content-separator;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
   &__title {
+    @extend %pix-title-xs;
+
+    margin-bottom: var(--pix-spacing-1x);
     color: var(--pix-neutral-800);
-    font-weight: var(--pix-font-medium);
-    font-size: 1.125rem;
-    font-family: $font-open-sans;
-    line-height: 1.562rem;
-    letter-spacing: 0.009rem;
   }
 
   &__subtitle {
-    margin: 4px 0 24px;
+    @extend %pix-body-m;
+
+    margin-bottom: var(--pix-spacing-6x);
     color: var(--pix-neutral-500);
-    font-size: 0.8125rem;
-    font-family: $font-roboto;
-    letter-spacing: 0.009rem;
   }
 
   &__header {
@@ -200,16 +203,5 @@
     @include device-is('tablet') {
       display: block;
     }
-  }
-
-  // stylelint-disable-next-line no-duplicate-selectors
-  & {
-    @include add-dashboard-content-separator;
-
-    padding: 24px 0;
-  }
-
-  &:last-child {
-    border-bottom: none;
   }
 }

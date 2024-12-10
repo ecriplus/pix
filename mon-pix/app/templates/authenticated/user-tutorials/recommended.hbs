@@ -1,28 +1,24 @@
-<header role="banner">
-  <NavbarHeader />
-  <Tutorials::Header @onTriggerFilterButton={{this.showSidebar}} @shouldShowFilterButton={{true}} />
-</header>
-
-<main id="main" class="main" role="main">
-  <UserTutorials::Filters::Sidebar
-    @onSubmit={{this.handleSubmitFilters}}
-    @isVisible={{this.isSidebarVisible}}
-    @areas={{this.model.areas}}
-    @onClose={{this.closeSidebar}}
-  />
-  <div class="user-tutorials-content">
-    {{#if @model.recommendedTutorials.meta.pagination.rowCount}}
-      <Tutorials::Cards @tutorials={{@model.recommendedTutorials}} />
-      <PixPagination
-        @pagination={{@model.recommendedTutorials.meta.pagination}}
-        @pageOptions={{this.pageOptions}}
-        @locale={{this.intl.primaryLocale}}
-        @isCondensed="true"
-      />
-    {{else}}
-      <Tutorials::RecommendedEmpty />
-    {{/if}}
-  </div>
-</main>
-
-<Footer />
+<Global::AppLayout>
+  <main id="main" class="user-tutorials global-page-container" role="main">
+    <Tutorials::Header @onTriggerFilterButton={{this.showSidebar}} @shouldShowFilterButton={{true}} />
+    <UserTutorials::Filters::Sidebar
+      @onSubmit={{this.handleSubmitFilters}}
+      @isVisible={{this.isSidebarVisible}}
+      @areas={{this.model.areas}}
+      @onClose={{this.closeSidebar}}
+    />
+    <div class="user-tutorials-content global-page-container__streched-content">
+      {{#if @model.recommendedTutorials.meta.pagination.rowCount}}
+        <Tutorials::Cards @tutorials={{@model.recommendedTutorials}} />
+        <PixPagination
+          @pagination={{@model.recommendedTutorials.meta.pagination}}
+          @pageOptions={{this.pageOptions}}
+          @locale={{this.intl.primaryLocale}}
+          @isCondensed="true"
+        />
+      {{else}}
+        <Tutorials::RecommendedEmpty />
+      {{/if}}
+    </div>
+  </main>
+</Global::AppLayout>

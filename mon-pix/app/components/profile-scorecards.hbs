@@ -1,17 +1,19 @@
-<div class="rounded-panel-body">
+<section class="profile-scorecards">
   <h2 class="sr-only">{{t "pages.profile.accessibility.user-skills"}}</h2>
-  <div>
+  <ul class="profile-scorecards__areas">
     {{#each @areas as |area|}}
-      <h3 class="sr-only">{{area.title}}</h3>
-      <div class="rounded-panel-body__areas">
-        {{#each @scorecards as |scorecard|}}
-          {{#if (eq area.code scorecard.area.code)}}
-            <div class="rounded-panel-body__competence-card">
-              <CompetenceCard @interactive={{@interactive}} @scorecard={{scorecard}} />
-            </div>
-          {{/if}}
-        {{/each}}
-      </div>
+      <li>
+        <h3 class="sr-only">{{area.title}}</h3>
+        <ul class="profile-scorecards__competences">
+          {{#each @scorecards as |scorecard|}}
+            {{#if (eq area.code scorecard.area.code)}}
+              <li>
+                <CompetenceCard @interactive={{@interactive}} @scorecard={{scorecard}} />
+              </li>
+            {{/if}}
+          {{/each}}
+        </ul>
+      </li>
     {{/each}}
-  </div>
-</div>
+  </ul>
+</section>

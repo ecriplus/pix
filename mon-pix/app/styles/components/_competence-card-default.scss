@@ -2,8 +2,6 @@
 
 @include device-is('tablet') {
   .competence-card {
-    flex-direction: column;
-    width: 212px;
     height: 310px;
   }
 

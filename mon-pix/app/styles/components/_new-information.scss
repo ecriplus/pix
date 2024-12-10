@@ -31,10 +31,6 @@
 
   &--yellow-background {
     background: linear-gradient(-225deg, rgb(254 220 65 / 55%) 0%, rgb(255 159 0 / 55%) 100%);
-
-    @include device-is('tablet') {
-      margin-top: 40px;
-    }
   }
 
   &--blue-gradient-background {

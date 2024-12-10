@@ -4,81 +4,77 @@
 <div class="pix-communication-banner">
   <DataProtectionPolicyInformationBanner />
 </div>
+<Global::AppLayout>
+  <main id="main" class="main" role="main">
+    <PixBackgroundHeader>
+      <PixBlock class="fill-in-campaign-code__container">
+        <h1 class="fill-in-campaign-code__title rounded-panel-title">
+          {{this.firstTitle}}
+        </h1>
+        <p id="campaign-code-description" class="fill-in-campaign-code__instruction">{{t
+            "pages.fill-in-campaign-code.description"
+          }}</p>
 
-<header role="banner">
-  <NavbarHeader />
-</header>
+        <label for="campaign-code" class="screen-reader-only">{{t "pages.fill-in-campaign-code.label"}}</label>
+        <form class="fill-in-campaign-code__form" autocomplete="off">
 
-<main id="main" class="main" role="main">
-  <PixBackgroundHeader>
-    <PixBlock class="fill-in-campaign-code__container">
-      <h1 class="fill-in-campaign-code__title rounded-panel-title">
-        {{this.firstTitle}}
-      </h1>
-      <p id="campaign-code-description" class="fill-in-campaign-code__instruction">{{t
-          "pages.fill-in-campaign-code.description"
-        }}</p>
+          <div class="fill-in-campaign-code__form-field">
+            <Input
+              required
+              aria-describedby="campaign-code-description"
+              id="campaign-code"
+              class="input-code"
+              @type="text"
+              @value={{this.campaignCode}}
+              maxlength="9"
+              {{on "keyup" this.clearErrorMessage}}
+            />
+          </div>
 
-      <label for="campaign-code" class="screen-reader-only">{{t "pages.fill-in-campaign-code.label"}}</label>
-      <form class="fill-in-campaign-code__form" autocomplete="off">
+          {{#if this.errorMessage}}
+            <div role="alert" class="fill-in-campaign-code__error">
+              {{this.errorMessage}}
+            </div>
+          {{/if}}
 
-        <div class="fill-in-campaign-code__form-field">
-          <Input
-            required
-            aria-describedby="campaign-code-description"
-            id="campaign-code"
-            class="input-code"
-            @type="text"
-            @value={{this.campaignCode}}
-            maxlength="9"
-            {{on "keyup" this.clearErrorMessage}}
-          />
-        </div>
+          <div class="fill-in-campaign-code__actions">
+            <PixButton
+              @type="submit"
+              class="fill-in-campaign-code__start-button"
+              @triggerAction={{action "startCampaign"}}
+            >
+              {{t "pages.fill-in-campaign-code.start"}}
+            </PixButton>
+          </div>
+        </form>
 
-        {{#if this.errorMessage}}
-          <div role="alert" class="fill-in-campaign-code__error">
-            {{this.errorMessage}}
+        {{#if this.showWarningMessage}}
+          <div class="fill-in-campaign-code__warning">
+            <span>{{this.warningMessage}}</span>
+            <a href="#" class="link" {{action this.disconnect}}>
+              {{t "pages.fill-in-campaign-code.warning-message-logout"}}
+            </a>
           </div>
         {{/if}}
 
-        <div class="fill-in-campaign-code__actions">
-          <PixButton
-            @type="submit"
-            class="fill-in-campaign-code__start-button"
-            @triggerAction={{action "startCampaign"}}
+        <div class="fill-in-campaign-code__explanation">
+          <a
+            href={{t "pages.fill-in-campaign-code.explanation-link"}}
+            class="link"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            {{t "pages.fill-in-campaign-code.start"}}
-          </PixButton>
-        </div>
-      </form>
-
-      {{#if this.showWarningMessage}}
-        <div class="fill-in-campaign-code__warning">
-          <span>{{this.warningMessage}}</span>
-          <a href="#" class="link" {{action this.disconnect}}>
-            {{t "pages.fill-in-campaign-code.warning-message-logout"}}
+            {{t "pages.fill-in-campaign-code.explanation-message"}}
           </a>
         </div>
+      </PixBlock>
+      {{#if this.canDisplayLanguageSwitcher}}
+        <LanguageSwitcher @selectedLanguage={{this.selectedLanguage}} @onLanguageChange={{this.onLanguageChange}} />
       {{/if}}
+    </PixBackgroundHeader>
+  </main>
 
-      <div class="fill-in-campaign-code__explanation">
-        <a
-          href={{t "pages.fill-in-campaign-code.explanation-link"}}
-          class="link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {{t "pages.fill-in-campaign-code.explanation-message"}}
-        </a>
-      </div>
-    </PixBlock>
-    {{#if this.canDisplayLanguageSwitcher}}
-      <LanguageSwitcher @selectedLanguage={{this.selectedLanguage}} @onLanguageChange={{this.onLanguageChange}} />
-    {{/if}}
-  </PixBackgroundHeader>
-</main>
-
-<Footer />
+</Global::AppLayout>
 
 <PixModal
   @title={{t "pages.fill-in-campaign-code.mediacentre-start-campaign-modal.title"}}

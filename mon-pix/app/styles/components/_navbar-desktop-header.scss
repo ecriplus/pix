@@ -1,11 +1,13 @@
 .navbar-desktop-header {
+  box-shadow: rgb(0 0 0 / 6%) 0 6px 24px;
+
   &__container {
+    @extend %global-container;
+
     position: relative;
     display: flex;
     gap: 4rem;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: var(--pix-spacing-4x) 20px;
+    padding-block: var(--pix-spacing-4x);
   }
 }
 

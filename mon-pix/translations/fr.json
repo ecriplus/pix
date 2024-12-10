@@ -835,7 +835,7 @@
           "title": "Certification obtenue"
         }
       },
-      "title": "Mes Certifications"
+      "title": "Mes certifications"
     },
     "challenge": {
       "actions": {
@@ -1245,7 +1245,7 @@
           "text": "En savoir plus",
           "url": "https://pix.fr/actualites/decouvrez-votre-nouveau-tableau-de-bord"
         },
-        "message": "<h2>Bonjour { firstname }, découvrez votre tableau de bord.</h2><p>Accédez rapidement et facilement à vos parcours et vos tests de compétence déjà commencés.<br/>Retrouvez l’évolution de votre score Pix et vérifiez si votre profil est prêt pour la certification Pix.</p>"
+        "message": "<h2>Bonjour, découvrez votre tableau de bord.</h2><p>Accédez rapidement et facilement à vos parcours et vos tests de compétence déjà commencés.<br/>Retrouvez l’évolution de votre score Pix et vérifiez si votre profil est prêt pour la certification Pix.</p>"
       },
       "recommended-competences": {
         "extra-information": "Accéder à toutes les compétences recommandées",
@@ -1260,7 +1260,8 @@
         "subtitle": "Continuez vos tests de compétences, retrouvez les plus récents ici.",
         "title": "Reprendre une compétence"
       },
-      "title": "Accueil"
+      "title": "Accueil",
+      "welcome": "Bienvenue { firstName } 🎉"
     },
     "download-session-results": {
       "button": {
@@ -1687,6 +1688,7 @@
           "no-level": "Compétence non commencée"
         }
       },
+      "description": "Explorez à votre rythme 16 compétences numériques, réparties sur 7 niveaux. Apprenez en vous testant, gagnez des Pix et construisez votre profil numérique. à vous de jouer !",
       "first-title": "Vous avez 16 compétences à tester. '<br>'On se concentre et c'est partix&nbsp;!",
       "resume-campaign-banner": {
         "accessibility": {
@@ -1702,7 +1704,7 @@
         "reminder-send-campaign": "N'oubliez pas de finaliser votre envoi !",
         "reminder-send-campaign-with-title": "Parcours \"{title}\" terminé. N'oubliez pas de finaliser votre envoi !"
       },
-      "title": "Compétences",
+      "title": "Compétences Pix",
       "total-score-helper": {
         "explanation": "'<p>'C’est le nombre maximum de pix qu’on pourra atteindre lorsque les 8 niveaux du référentiel Pix seront disponibles.'</p><p>'Aujourd’hui, '<span class=\"hexagon-score-information__text--strong\">'le maximum est de {maxReachablePixScore} pix'</span>', correspondant au niveau {maxReachableLevel}.'</p>'",
         "icon": "Information sur les pix",
