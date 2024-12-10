@@ -94,19 +94,19 @@ export default class LoginForm extends Component {
           </LinkTo>
 
           {{#if @userShouldCreateAnAccount}}
-            <PixNotificationAlert @type="alert">
+            <PixNotificationAlert @type="error">
               Vous n'avez pas de compte Pix.
             </PixNotificationAlert>
           {{/if}}
 
           {{#if @unknownErrorHasOccured}}
-            <PixNotificationAlert @type="alert">
+            <PixNotificationAlert @type="error">
               Une erreur est survenue. Veuillez recommencer ou contacter les administrateurs de la plateforme.
             </PixNotificationAlert>
           {{/if}}
 
           {{#if @userShouldRequestAccess}}
-            <PixNotificationAlert @type="alert">
+            <PixNotificationAlert @type="error">
               Vous n'avez pas les droits pour vous connecter. Veuillez demander un accès aux administrateurs de la
               plateforme.
             </PixNotificationAlert>
