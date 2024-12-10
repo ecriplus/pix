@@ -1461,6 +1461,14 @@
       },
       "title": "{count, plural, =0 {Studenten} =1 {Studenten ({count})} other {studenten ({count})}}"
     },
+    "statistics": {
+      "level": {
+        "advanced": "geavanceerd",
+        "expert": "expert",
+        "independent": "onafhankelijk",
+        "novice": "beginnende"
+      }
+    },
     "sup-organization-participant-activity": {
       "title": "Activiteit van de student"
     },

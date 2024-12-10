@@ -1467,6 +1467,14 @@
         "row-title": "Élève"
       }
     },
+    "statistics": {
+      "level": {
+        "advanced": "avancé",
+        "expert": "expert",
+        "independent": "indépendant",
+        "novice": "novice"
+      }
+    },
     "sup-organization-participant-activity": {
       "title": "Activité de l'étudiant"
     },

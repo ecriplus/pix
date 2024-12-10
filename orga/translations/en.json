@@ -1461,6 +1461,14 @@
         "row-title": "Student"
       }
     },
+    "statistics": {
+      "level": {
+        "advanced": "advanced",
+        "expert": "expert",
+        "independent": "independent",
+        "novice": "novice"
+      }
+    },
     "sup-organization-participant-activity": {
       "title": "Student activity"
     },
