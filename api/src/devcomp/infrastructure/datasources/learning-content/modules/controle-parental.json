@@ -38,7 +38,7 @@
     },
     {
       "grainId": "dde349da-a5fc-41b5-8c47-9ec5a2780165",
-      "content": "<p>Grâce au contrôle parental, Nina va pouvoir accompagner Max dans ses usages numériques plus sereinement.<br>Maintenant, à vous de trouver les options de contrôle parental de vos appareils connectés.&nbsp;<span aria-hidden=\"true\">🔎</span><br></p>"
+      "content": "<p>Grâce au contrôle parental, Nina va pouvoir accompagner Max dans ses usages numériques plus sereinement.<br>Pour terminer ce module, trouvez les options de contrôle parental de vos appareils connectés.&nbsp;<span aria-hidden=\"true\">🔎</span><br></p>"
     }
   ],
   "grains": [
@@ -364,7 +364,7 @@
               },
               {
                 "id": "4",
-                "content": "<p>sur Whatsapp<br></p>"
+                "content": "<p>sur Whatsapp</p>"
               },
               {
                 "id": "5",
@@ -376,8 +376,8 @@
               }
             ],
             "feedbacks": {
-              "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Pour accompagner au mieux Max, Nina peut activer des options de contrôle parental sur les appareils et les plateformes en ligne.</>",
-              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Relisez l’infographie et essayez à nouveau !</>"
+              "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Pour accompagner au mieux Max, Nina peut activer des options de contrôle parental sur les appareils et les plateformes en ligne.</p>",
+              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Relisez l’infographie et essayez à nouveau !</p>"
             },
             "solutions": [
               "1",
@@ -399,17 +399,17 @@
           "element": {
             "id": "6ce0eec7-8b4e-4b28-8805-ed83a2b8db68",
             "type": "qcu",
-            "instruction": "<p>Avez-vous trouvé des options de contrôle parental sur vos appareils connectés ?</p>",
+            "instruction": "<p>Cherchez sur vos appareils connectés les options de contrôle parental.<br>Avez-vous réussi à la trouver ?</p>",
             "proposals": [
               {
                 "id": "1",
                 "content": "<p>oui</p>",
-                "feedback": "<span class=\"feedback__state\">Et oui ! Il y a du contrôle parental dans quasiment tous les appareils connectés !</span>"
+                "feedback": "<p><span class=\"feedback__state\">Bravo ! <span aria-hidden=\"true\">✨</span></span></p>"
               },
               {
                 "id": "2",
                 "content": "<p>non</p>",
-                "feedback": "<span class=\"feedback__state\">Avez vous regardé dans les paramètres de chacun des appareils ?</span>"
+                "feedback": "<span class=\"feedback__state\">Avez vous regardé dans les paramètres de vos appareils ?</span>"
               }
             ],
             "feedbacks": {
