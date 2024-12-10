@@ -90,7 +90,6 @@ import { Membership } from './Membership.js';
 import { OrganizationLearner } from './OrganizationLearner.js';
 import { OrganizationMemberIdentity } from './OrganizationMemberIdentity.js';
 import { OrganizationTag } from './OrganizationTag.js';
-import { ParticipantResultsShared } from './ParticipantResultsShared.js';
 import { PartnerCertificationScoring } from './PartnerCertificationScoring.js';
 import { PlacementProfile } from './PlacementProfile.js';
 import { PoleEmploiSending } from './PoleEmploiSending.js';
@@ -191,7 +190,6 @@ export {
   OrganizationPlacesLotForManagement,
   OrganizationsToAttachToTargetProfile,
   OrganizationTag,
-  ParticipantResultsShared,
   PartnerCertificationScoring,
   PlacementProfile,
   PoleEmploiSending,

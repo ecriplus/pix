@@ -1,6 +1,6 @@
-import { saveComputedCampaignParticipationResult } from '../../../../lib/domain/usecases/save-computed-campaign-participation-result.js';
-import { CantCalculateCampaignParticipationResultError } from '../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../test-helper.js';
+import { CantCalculateCampaignParticipationResultError } from '../../../../../../src/prescription/campaign-participation/domain/errors.js';
+import { saveComputedCampaignParticipationResult } from '../../../../../../src/prescription/campaign-participation/domain/usecases/save-computed-campaign-participation-result.js';
+import { catchErr, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | UseCases | SaveComputedCompaignParticipationResult', function () {
   it('should throw an error if participation is not shared', async function () {

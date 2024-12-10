@@ -1,8 +1,8 @@
-import { knex } from '../../../db/knex-database-connection.js';
-import { ParticipantResultsShared } from '../../../src/shared/domain/models/ParticipantResultsShared.js';
-import * as placementProfileService from '../../../src/shared/domain/services/placement-profile-service.js';
-import * as competenceRepository from '../../../src/shared/infrastructure/repositories/competence-repository.js';
-import * as campaignRepository from './campaign-repository.js';
+import { knex } from '../../../../../db/knex-database-connection.js';
+import * as campaignRepository from '../../../../../lib/infrastructure/repositories/campaign-repository.js';
+import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
+import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
+import { ParticipantResultsShared } from '../../domain/models/ParticipantResultsShared.js';
 
 async function _fetchKnowledgeElements(campaignParticipationId) {
   const { snapshot: knowledgeElements } = await knex('campaign-participations')

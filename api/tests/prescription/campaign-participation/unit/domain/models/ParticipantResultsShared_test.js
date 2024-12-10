@@ -1,9 +1,9 @@
 import lodash from 'lodash';
 
-import { MAX_REACHABLE_PIX_BY_COMPETENCE } from '../../../../src/shared/domain/constants.js';
-import { KnowledgeElement } from '../../../../src/shared/domain/models/KnowledgeElement.js';
-import { ParticipantResultsShared } from '../../../../src/shared/domain/models/ParticipantResultsShared.js';
-import { domainBuilder, expect } from '../../../test-helper.js';
+import { ParticipantResultsShared } from '../../../../../../src/prescription/campaign-participation/domain/models/ParticipantResultsShared.js';
+import { MAX_REACHABLE_PIX_BY_COMPETENCE } from '../../../../../../src/shared/domain/constants.js';
+import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 const { noop } = lodash;
 
 describe('Unit | Domain | Models | ParticipantResultsShared', function () {

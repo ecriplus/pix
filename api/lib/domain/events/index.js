@@ -37,13 +37,11 @@ import { EventDispatcherLogger } from '../../infrastructure/events/EventDispatch
 import * as disabledPoleEmploiNotifier from '../../infrastructure/externals/pole-emploi/disabled-pole-emploi-notifier.js';
 import * as poleEmploiNotifier from '../../infrastructure/externals/pole-emploi/pole-emploi-notifier.js';
 import * as badgeAcquisitionRepository from '../../infrastructure/repositories/badge-acquisition-repository.js';
-import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
 import * as campaignParticipationResultRepository from '../../infrastructure/repositories/campaign-participation-result-repository.js';
 import * as campaignRepository from '../../infrastructure/repositories/campaign-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
 import * as knowledgeElementRepository from '../../infrastructure/repositories/knowledge-element-repository.js';
-import { participantResultsSharedRepository } from '../../infrastructure/repositories/participant-results-shared-repository.js';
 import * as targetProfileRepository from '../../infrastructure/repositories/target-profile-repository.js';
 import { handleCertificationRescoring } from './handle-certification-rescoring.js';
 import { handleComplementaryCertificationsScoring } from './handle-complementary-certifications-scoring.js';
@@ -65,7 +63,6 @@ const dependencies = {
   authenticationMethodRepository,
   badgeAcquisitionRepository,
   campaignRepository,
-  campaignParticipationRepository,
   campaignParticipationResultRepository,
   certificationAssessmentHistoryRepository,
   certificationAssessmentRepository,
@@ -86,7 +83,6 @@ const dependencies = {
   knowledgeElementRepository,
   logger,
   organizationRepository,
-  participantResultsSharedRepository,
   poleEmploiNotifier: requirePoleEmploiNotifier(),
   poleEmploiSendingRepository,
   scoringCertificationService,

@@ -6,6 +6,12 @@ class CampaignParticipationDeletedError extends DomainError {
   }
 }
 
+class CantCalculateCampaignParticipationResultError extends DomainError {
+  constructor(message = `Impossible de calculer le résultat de la participation car elle n'a pas été partagée.`) {
+    super(message);
+  }
+}
+
 class CampaignParticiationInvalidStatus extends DomainError {
   constructor(campaignParticipationId, acceptedStatus) {
     super(
@@ -14,4 +20,8 @@ class CampaignParticiationInvalidStatus extends DomainError {
   }
 }
 
-export { CampaignParticiationInvalidStatus, CampaignParticipationDeletedError };
+export {
+  CampaignParticiationInvalidStatus,
+  CampaignParticipationDeletedError,
+  CantCalculateCampaignParticipationResultError,
+};

@@ -10,7 +10,7 @@ import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js'
 
 describe('Unit | UseCase | complete-assessment', function () {
   let assessmentRepository;
-  let campaignParticipationBCRepository;
+  let campaignParticipationRepository;
   let certificationCompletedJobRepository;
   let participationCompletedJobRepository;
   const now = new Date('2019-01-01T05:06:07Z');
@@ -22,7 +22,7 @@ describe('Unit | UseCase | complete-assessment', function () {
       completeByAssessmentId: _.noop,
     };
 
-    campaignParticipationBCRepository = {
+    campaignParticipationRepository = {
       get: _.noop,
       update: _.noop,
     };
@@ -58,7 +58,7 @@ describe('Unit | UseCase | complete-assessment', function () {
       const err = await catchErr(completeAssessment)({
         assessmentId,
         assessmentRepository,
-        campaignParticipationBCRepository,
+        campaignParticipationRepository,
       });
 
       // then
@@ -91,7 +91,7 @@ describe('Unit | UseCase | complete-assessment', function () {
           await completeAssessment({
             assessmentId: assessment.id,
             assessmentRepository,
-            campaignParticipationBCRepository,
+            campaignParticipationRepository,
             certificationCompletedJobRepository,
             participationCompletedJobRepository,
           });
@@ -109,19 +109,19 @@ describe('Unit | UseCase | complete-assessment', function () {
 
         sinon.stub(assessmentRepository, 'get').withArgs(assessment.id).resolves(assessment);
         sinon.stub(assessmentRepository, 'completeByAssessmentId').resolves();
-        sinon.stub(campaignParticipationBCRepository, 'update').resolves();
+        sinon.stub(campaignParticipationRepository, 'update').resolves();
         sinon.stub(participationCompletedJobRepository, 'performAsync').resolves();
         // when
         await completeAssessment({
           assessmentId: assessment.id,
           assessmentRepository,
-          campaignParticipationBCRepository,
+          campaignParticipationRepository,
           participationCompletedJobRepository,
         });
 
         // then
         expect(
-          campaignParticipationBCRepository.update.calledWithExactly({
+          campaignParticipationRepository.update.calledWithExactly({
             id: assessment.campaignParticipationId,
             status: TO_SHARE,
           }),
@@ -133,15 +133,15 @@ describe('Unit | UseCase | complete-assessment', function () {
 
         sinon.stub(assessmentRepository, 'get').withArgs(assessment.id).resolves(assessment);
         sinon.stub(assessmentRepository, 'completeByAssessmentId').resolves();
-        sinon.stub(campaignParticipationBCRepository, 'get').resolves({ id: 1 });
-        sinon.stub(campaignParticipationBCRepository, 'update').resolves();
+        sinon.stub(campaignParticipationRepository, 'get').resolves({ id: 1 });
+        sinon.stub(campaignParticipationRepository, 'update').resolves();
         sinon.stub(certificationCompletedJobRepository, 'performAsync').resolves();
         sinon.stub(participationCompletedJobRepository, 'performAsync').resolves();
         // when
         await completeAssessment({
           assessmentId: assessment.id,
           assessmentRepository,
-          campaignParticipationBCRepository,
+          campaignParticipationRepository,
           certificationCompletedJobRepository,
           participationCompletedJobRepository,
         });
@@ -160,7 +160,7 @@ describe('Unit | UseCase | complete-assessment', function () {
 
         sinon.stub(assessmentRepository, 'get').withArgs(assessment.id).resolves(assessment);
         sinon.stub(assessmentRepository, 'completeByAssessmentId').resolves();
-        sinon.stub(campaignParticipationBCRepository, 'update').resolves();
+        sinon.stub(campaignParticipationRepository, 'update').resolves();
         sinon.stub(participationCompletedJobRepository, 'performAsync').resolves();
         sinon
           .stub(certificationCompletedJobRepository, 'performAsync')
@@ -176,13 +176,13 @@ describe('Unit | UseCase | complete-assessment', function () {
         await completeAssessment({
           assessmentId: assessment.id,
           assessmentRepository,
-          campaignParticipationBCRepository,
+          campaignParticipationRepository,
           certificationCompletedJobRepository,
           participationCompletedJobRepository,
         });
 
         // then
-        expect(campaignParticipationBCRepository.update).to.not.have.been.called;
+        expect(campaignParticipationRepository.update).to.not.have.been.called;
         expect(participationCompletedJobRepository.performAsync).to.not.have.been.called;
         expect(certificationCompletedJobRepository.performAsync).to.have.been.called;
       });
