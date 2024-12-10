@@ -137,7 +137,7 @@ export class LearningContentRepository {
    * @param {string|number|undefined} id
    */
   clearCache(id) {
-    logger.debug({ tableName: this.#tableName, id }, 'trigerring cache clear');
+    logger.debug({ tableName: this.#tableName, id }, 'triggering cache clear');
 
     if (id) {
       this.#dataloader.clear(id);
