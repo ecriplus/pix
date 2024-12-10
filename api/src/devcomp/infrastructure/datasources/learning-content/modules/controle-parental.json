@@ -261,7 +261,7 @@
             "isCompletionRequired": true,
             "title": "Simulateur de smartphone - activation du contrôle parental",
             "url": "https://epreuves.pix.fr/temps_en_ligne/temps_en_ligne.html?mode=module-activer&lang=fr",
-            "instruction": "<p><strong>Activez le contrôle parental dans le simulateur de smartphone ci-dessous. </strong><span aria-hidden=\"true\">👇</span> <br><span aria-hidden=\"true\">🧘 </span> Ne vous inquiétez pas ! Les réglages de votre propre smartphone ne seront pas modifiés.</p>",
+            "instruction": "<p><strong>Activez le contrôle parental dans le simulateur de smartphone ci-dessous. </strong><span aria-hidden=\"true\">👇</span></p><p><span aria-hidden=\"true\">🧘 </span> Ne vous inquiétez pas ! Les réglages de votre propre smartphone ne seront pas modifiés.</p>",
             "height": 720
           }
         },
@@ -404,12 +404,12 @@
               {
                 "id": "1",
                 "content": "<p>oui</p>",
-                "feedback": "<p><span class=\"feedback__state\">Bravo ! <span aria-hidden=\"true\">✨</span></span></p>"
+                "feedback": "<p>Bravo ! <span aria-hidden=\"true\">✨</span></p>"
               },
               {
                 "id": "2",
                 "content": "<p>non</p>",
-                "feedback": "<span class=\"feedback__state\">Avez vous regardé dans les paramètres de vos appareils ?</span>"
+                "feedback": "<p>Avez vous regardé dans les paramètres de vos appareils ?</p>"
               }
             ],
             "feedbacks": {
