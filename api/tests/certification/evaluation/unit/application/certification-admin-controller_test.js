@@ -1,4 +1,4 @@
-import { certificationController } from '../../../../../src/certification/evaluation/application/certification-controller.js';
+import { certificationAdminController } from '../../../../../src/certification/evaluation/application/certification-admin-controller.js';
 import { ChallengeDeneutralized } from '../../../../../src/certification/evaluation/domain/events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../../../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
 import { usecases } from '../../../../../src/certification/evaluation/domain/usecases/index.js';
@@ -27,7 +27,7 @@ describe('Certification | Evaluation | Unit | Application | Controller | certifi
       };
 
       // when
-      await certificationController.neutralizeChallenge(request, hFake, { events: eventsStub });
+      await certificationAdminController.neutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(usecases.neutralizeChallenge).to.have.been.calledWithExactly({
@@ -58,7 +58,7 @@ describe('Certification | Evaluation | Unit | Application | Controller | certifi
         },
       };
       // when
-      const response = await certificationController.neutralizeChallenge(request, hFake, { events: eventsStub });
+      const response = await certificationAdminController.neutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(response.statusCode).to.equal(204);
@@ -86,7 +86,7 @@ describe('Certification | Evaluation | Unit | Application | Controller | certifi
       };
 
       // when
-      await certificationController.neutralizeChallenge(request, hFake, { events: eventsStub });
+      await certificationAdminController.neutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(eventsStub.eventDispatcher.dispatch).to.have.been.calledWithExactly(eventToBeDispatched);
@@ -115,7 +115,7 @@ describe('Certification | Evaluation | Unit | Application | Controller | certifi
       };
 
       // when
-      await certificationController.deneutralizeChallenge(request, hFake, { events: eventsStub });
+      await certificationAdminController.deneutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(usecases.deneutralizeChallenge).to.have.been.calledWithExactly({
@@ -145,7 +145,7 @@ describe('Certification | Evaluation | Unit | Application | Controller | certifi
         },
       };
       // when
-      const response = await certificationController.deneutralizeChallenge(request, hFake, { events: eventsStub });
+      const response = await certificationAdminController.deneutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(response.statusCode).to.equal(204);
@@ -174,7 +174,7 @@ describe('Certification | Evaluation | Unit | Application | Controller | certifi
       };
 
       // when
-      await certificationController.deneutralizeChallenge(request, hFake, { events: eventsStub });
+      await certificationAdminController.deneutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(eventsStub.eventDispatcher.dispatch).to.have.been.calledWithExactly(eventToBeDispatched);

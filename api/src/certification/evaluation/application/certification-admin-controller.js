@@ -27,9 +27,9 @@ const deneutralizeChallenge = async function (request, h, dependencies = { event
   return h.response().code(204);
 };
 
-const certificationController = {
+const certificationAdminController = {
   neutralizeChallenge,
   deneutralizeChallenge,
 };
 
-export { certificationController };
+export { certificationAdminController };

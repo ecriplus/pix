@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
-import { certificationController } from './certification-controller.js';
+import { certificationAdminController } from './certification-admin-controller.js';
 
 const register = async function (server) {
   server.route([
@@ -31,7 +31,7 @@ const register = async function (server) {
             assign: 'hasAuthorizationToAccessAdminScope',
           },
         ],
-        handler: certificationController.neutralizeChallenge,
+        handler: certificationAdminController.neutralizeChallenge,
         tags: ['api'],
       },
     },
@@ -60,7 +60,7 @@ const register = async function (server) {
             assign: 'hasAuthorizationToAccessAdminScope',
           },
         ],
-        handler: certificationController.deneutralizeChallenge,
+        handler: certificationAdminController.deneutralizeChallenge,
         tags: ['api'],
       },
     },
