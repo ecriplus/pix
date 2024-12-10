@@ -66,21 +66,35 @@ export class LearningContentRepository {
   /**
    * Loads one entity by ID.
    * @param {string|number} id
-   * @returns {Promise<object>}
+   * @returns {Promise<object|null>}
    */
   async load(id) {
-    if (!id) return null;
     return this.#dataloader.load(id);
+  }
+
+  /**
+   * Gets several entities by ID.
+   * Deduplicates ids and removes nullish ids before loading.
+   * @param {string[]|number[]} ids
+   * @returns {Promise<(object|null)[]>}
+   */
+  async getMany(ids) {
+    const idsToLoad = new Set(ids);
+    idsToLoad.delete(undefined);
+    idsToLoad.delete(null);
+
+    const dtos = await this.loadMany(Array.from(idsToLoad));
+
+    return dtos;
   }
 
   /**
    * Loads several entities by ID.
    * @param {string[]|number[]} ids
-   * @returns {Promise<object[]>}
+   * @returns {Promise<(object|null)[]>}
    */
   async loadMany(ids) {
-    const notNullIds = ids.filter((id) => id);
-    return this.#dataloader.loadMany(notNullIds);
+    return this.#dataloader.loadMany(ids);
   }
 
   /**
