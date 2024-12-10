@@ -1245,7 +1245,7 @@
           "text": "Unused, but cannot be empty.",
           "url": "Unused, but cannot be empty."
         },
-        "message": "'<h2>'Hi {firstname}, welcome to your dashboard.'</h2><p>'Quickly and easily access all your tests in progress.'<br>'Follow the evolution of your Pix score and check if your profile is ready for certification.'</p>'"
+        "message": "<h2>Hi, welcome to your dashboard.</h2><p>Quickly and easily access all your tests in progress.<br/>Follow the evolution of your Pix score and check if your profile is ready for certification.</p>"
       },
       "recommended-competences": {
         "extra-information": "Access all recommended competences",
