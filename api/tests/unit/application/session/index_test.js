@@ -23,48 +23,6 @@ describe('Unit | Application | Sessions | Routes', function () {
       });
     });
 
-    describe('PATCH /api/admin/sessions/{id}/unpublish', function () {
-      it('should exist', async function () {
-        // given
-        sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
-        sinon.stub(sessionController, 'unpublish').returns('ok');
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
-
-        // when
-        const response = await httpTestServer.request('PATCH', '/api/admin/sessions/1/unpublish');
-
-        // then
-        expect(response.statusCode).to.equal(200);
-      });
-
-      it('return forbidden access if user has METIER role', async function () {
-        // given
-        sinon
-          .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
-          .withArgs([
-            securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-            securityPreHandlers.checkAdminMemberHasRoleCertif,
-            securityPreHandlers.checkAdminMemberHasRoleSupport,
-          ])
-          .callsFake(
-            () => (request, h) =>
-              h
-                .response({ errors: new Error('forbidden') })
-                .code(403)
-                .takeover(),
-          );
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
-
-        // when
-        const response = await httpTestServer.request('PATCH', '/api/admin/sessions/1/unpublish');
-
-        // then
-        expect(response.statusCode).to.equal(403);
-      });
-    });
-
     describe('POST /api/admin/sessions/publish-in-batch', function () {
       it('is protected by a pre-handler checking authorization to access Pix Admin', async function () {
         // given

@@ -1,8 +1,8 @@
-import { unpublishSession } from '../../../../lib/domain/usecases/unpublish-session.js';
-import { FinalizedSession } from '../../../../src/certification/session-management/domain/models/FinalizedSession.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { FinalizedSession } from '../../../../../../src/certification/session-management/domain/models/FinalizedSession.js';
+import { unpublishSession } from '../../../../../../src/certification/session-management/domain/usecases/unpublish-session.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | UseCase | unpublish-session', function () {
+describe('Certification | Session-Management | Unit | Domain | Use Cases | unpublish-session', function () {
   let certificationRepository;
   let sessionRepository;
   let sharedSessionRepository;
@@ -46,7 +46,9 @@ describe('Unit | UseCase | unpublish-session', function () {
     });
 
     // then
-    expect(certificationRepository.unpublishCertificationCoursesBySessionId).to.have.been.calledWithExactly(sessionId);
+    expect(certificationRepository.unpublishCertificationCoursesBySessionId).to.have.been.calledWithExactly({
+      sessionId,
+    });
     expect(sessionRepository.updatePublishedAt).to.have.been.calledWithExactly({ id: sessionId, publishedAt: null });
     expect(finalizedSession.publishedAt).to.be.null;
     expect(finalizedSessionRepository.save).to.be.calledWith({ finalizedSession });

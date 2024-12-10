@@ -10,6 +10,15 @@ const publish = async function (request, h, dependencies = { sessionManagementSe
   return dependencies.sessionManagementSerializer.serialize({ session });
 };
 
+const unpublish = async function (request, h, dependencies = { sessionManagementSerializer }) {
+  const sessionId = request.params.sessionId;
+
+  const session = await usecases.unpublishSession({ sessionId });
+
+  return dependencies.sessionManagementSerializer.serialize({ session });
+};
+
 export const sessionPublicationController = {
   publish,
+  unpublish,
 };

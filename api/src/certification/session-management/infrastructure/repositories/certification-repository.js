@@ -36,4 +36,8 @@ const publishCertificationCourses = async function (certificationStatuses) {
     .merge(['isPublished', 'updatedAt']);
 };
 
-export { getStatusesBySessionId, publishCertificationCourses };
+const unpublishCertificationCoursesBySessionId = async function ({ sessionId }) {
+  await knex('certification-courses').where({ sessionId }).update({ isPublished: false, updatedAt: new Date() });
+};
+
+export { getStatusesBySessionId, publishCertificationCourses, unpublishCertificationCoursesBySessionId };

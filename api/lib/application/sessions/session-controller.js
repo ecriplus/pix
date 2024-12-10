@@ -1,5 +1,4 @@
 import * as juryCertificationSummaryRepository from '../../../src/certification/session-management/infrastructure/repositories/jury-certification-summary-repository.js';
-import * as sessionManagementSerializer from '../../../src/certification/session-management/infrastructure/serializers/session-serializer.js';
 import { SessionPublicationBatchError } from '../../../src/shared/application/http-errors.js';
 import { logger } from '../../../src/shared/infrastructure/utils/logger.js';
 import { usecases } from '../../domain/usecases/index.js';
@@ -39,18 +38,9 @@ const publishInBatch = async function (request, h) {
   return h.response().code(204);
 };
 
-const unpublish = async function (request, h, dependencies = { sessionManagementSerializer }) {
-  const sessionId = request.params.id;
-
-  const session = await usecases.unpublishSession({ sessionId });
-
-  return dependencies.sessionManagementSerializer.serialize({ session });
-};
-
 const sessionController = {
   getJuryCertificationSummaries,
   publishInBatch,
-  unpublish,
 };
 
 export { sessionController };

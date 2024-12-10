@@ -7,7 +7,7 @@ const unpublishSession = async function ({
 }) {
   const session = await sharedSessionRepository.getWithCertificationCandidates({ id: sessionId });
 
-  await certificationRepository.unpublishCertificationCoursesBySessionId(sessionId);
+  await certificationRepository.unpublishCertificationCoursesBySessionId({ sessionId });
 
   session.publishedAt = null;
 

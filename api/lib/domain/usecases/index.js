@@ -131,7 +131,6 @@ import * as badgeForCalculationRepository from '../../infrastructure/repositorie
 import { campaignParticipationResultRepository } from '../../infrastructure/repositories/campaign-participation-result-repository.js';
 import * as campaignRepository from '../../infrastructure/repositories/campaign-repository.js';
 import * as certifiableProfileForLearningContentRepository from '../../infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
-import * as certificationRepository from '../../infrastructure/repositories/certification-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as flashAssessmentResultRepository from '../../infrastructure/repositories/flash-assessment-result-repository.js';
 import * as frameworkRepository from '../../infrastructure/repositories/framework-repository.js';
@@ -235,7 +234,6 @@ const dependencies = {
   certificationCourseRepository,
   certificationCpfCityRepository,
   certificationOfficerRepository,
-  certificationRepository,
   challengeRepository,
   codeGenerator,
   codeUtils,
