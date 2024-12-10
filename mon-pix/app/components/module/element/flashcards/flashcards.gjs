@@ -175,11 +175,11 @@ export default class ModulixFlashcards extends Component {
               <p class="element-flashcards__footer__question">{{t "pages.modulix.flashcards.answerDirection"}}</p>
               <div class="element-flashcards__footer__answer">
                 <button
-                  class="element-flashcards__footer__answer__button element-flashcards__footer__answer__button--no"
+                  class="element-flashcards__footer__answer__button element-flashcards__footer__answer__button--yes"
                   type="button"
-                  {{on "click" (fn this.onSelfAssessment "no")}}
+                  {{on "click" (fn this.onSelfAssessment "yes")}}
                 >
-                  {{t "pages.modulix.buttons.flashcards.answers.no"}}
+                  {{t "pages.modulix.buttons.flashcards.answers.yes"}}
                 </button>
                 <button
                   class="element-flashcards__footer__answer__button element-flashcards__footer__answer__button--almost"
@@ -189,11 +189,11 @@ export default class ModulixFlashcards extends Component {
                   {{t "pages.modulix.buttons.flashcards.answers.almost"}}
                 </button>
                 <button
-                  class="element-flashcards__footer__answer__button element-flashcards__footer__answer__button--yes"
+                  class="element-flashcards__footer__answer__button element-flashcards__footer__answer__button--no"
                   type="button"
-                  {{on "click" (fn this.onSelfAssessment "yes")}}
+                  {{on "click" (fn this.onSelfAssessment "no")}}
                 >
-                  {{t "pages.modulix.buttons.flashcards.answers.yes"}}
+                  {{t "pages.modulix.buttons.flashcards.answers.no"}}
                 </button>
               </div>
             {{/if}}

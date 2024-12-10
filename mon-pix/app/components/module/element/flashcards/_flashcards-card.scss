@@ -7,7 +7,7 @@
   justify-content: space-between;
   max-width: 345px;
   height: 440px;
-  margin: auto auto var(--pix-spacing-4x);
+  margin: auto auto var(--pix-spacing-2x);
   padding: var(--pix-spacing-6x);
   background: var(--pix-neutral-0);
   border: 5px solid var(--pix-neutral-100);
@@ -70,7 +70,7 @@
     }
 
     &--verso {
-      justify-content: flex-end;
+      justify-content: flex-start;
     }
   }
 }
@@ -84,6 +84,10 @@
 
   &__title {
     @extend %pix-title-s;
+
+    width: 100%;
+    text-align: center;
+    text-wrap: balance;
   }
 }
 
@@ -111,6 +115,8 @@
   }
 
   &__title {
+    @extend %pix-title-xs;
+
     padding: 0 var(--pix-spacing-4x);
     color: var(--pix-neutral-0);
   }
