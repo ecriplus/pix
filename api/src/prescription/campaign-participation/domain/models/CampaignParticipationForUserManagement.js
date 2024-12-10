@@ -22,18 +22,15 @@ class CampaignParticipationForUserManagement {
     this.campaignCode = null;
     this.sharedAt = null;
     this.deletedAt = null;
+
     if (campaignParticipationId) {
-      if (!deletedAt) {
-        this.organizationLearnerFullName = `${organizationLearnerFirstName} ${organizationLearnerLastName}`;
-        this.participantExternalId = participantExternalId;
-        this.status = status;
-        this.campaignId = campaignId;
-        this.campaignCode = campaignCode;
-        this.sharedAt = sharedAt;
-      } else {
-        this.organizationLearnerFullName = '-';
-        this.deletedAt = deletedAt;
-      }
+      this.organizationLearnerFullName = `${organizationLearnerFirstName} ${organizationLearnerLastName}`;
+      this.participantExternalId = participantExternalId;
+      this.status = status;
+      this.campaignId = campaignId;
+      this.campaignCode = campaignCode;
+      this.sharedAt = sharedAt;
+      this.deletedAt = deletedAt;
     } else {
       this.organizationLearnerFullName = '-';
       this.deletedAt = updatedAt;
