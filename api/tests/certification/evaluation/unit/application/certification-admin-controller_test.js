@@ -1,10 +1,10 @@
-import { certificationController } from '../../../../lib/application/certifications/certification-controller.js';
-import { ChallengeDeneutralized } from '../../../../lib/domain/events/ChallengeDeneutralized.js';
-import { ChallengeNeutralized } from '../../../../lib/domain/events/ChallengeNeutralized.js';
-import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { certificationAdminController } from '../../../../../src/certification/evaluation/application/certification-admin-controller.js';
+import { ChallengeDeneutralized } from '../../../../../src/certification/evaluation/domain/events/ChallengeDeneutralized.js';
+import { ChallengeNeutralized } from '../../../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
+import { usecases } from '../../../../../src/certification/evaluation/domain/usecases/index.js';
+import { expect, hFake, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Controller | certifications-controller', function () {
+describe('Certification | Evaluation | Unit | Application | Controller | certification', function () {
   describe('#neutralizeChallenge', function () {
     it('neutralizes the challenge and dispatches the event', async function () {
       // given
@@ -27,7 +27,7 @@ describe('Unit | Controller | certifications-controller', function () {
       };
 
       // when
-      await certificationController.neutralizeChallenge(request, hFake, { events: eventsStub });
+      await certificationAdminController.neutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(usecases.neutralizeChallenge).to.have.been.calledWithExactly({
@@ -58,7 +58,7 @@ describe('Unit | Controller | certifications-controller', function () {
         },
       };
       // when
-      const response = await certificationController.neutralizeChallenge(request, hFake, { events: eventsStub });
+      const response = await certificationAdminController.neutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(response.statusCode).to.equal(204);
@@ -86,7 +86,7 @@ describe('Unit | Controller | certifications-controller', function () {
       };
 
       // when
-      await certificationController.neutralizeChallenge(request, hFake, { events: eventsStub });
+      await certificationAdminController.neutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(eventsStub.eventDispatcher.dispatch).to.have.been.calledWithExactly(eventToBeDispatched);
@@ -115,7 +115,7 @@ describe('Unit | Controller | certifications-controller', function () {
       };
 
       // when
-      await certificationController.deneutralizeChallenge(request, hFake, { events: eventsStub });
+      await certificationAdminController.deneutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(usecases.deneutralizeChallenge).to.have.been.calledWithExactly({
@@ -145,7 +145,7 @@ describe('Unit | Controller | certifications-controller', function () {
         },
       };
       // when
-      const response = await certificationController.deneutralizeChallenge(request, hFake, { events: eventsStub });
+      const response = await certificationAdminController.deneutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(response.statusCode).to.equal(204);
@@ -174,7 +174,7 @@ describe('Unit | Controller | certifications-controller', function () {
       };
 
       // when
-      await certificationController.deneutralizeChallenge(request, hFake, { events: eventsStub });
+      await certificationAdminController.deneutralizeChallenge(request, hFake, { events: eventsStub });
 
       // then
       expect(eventsStub.eventDispatcher.dispatch).to.have.been.calledWithExactly(eventToBeDispatched);

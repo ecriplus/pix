@@ -1,9 +1,9 @@
-import { certificationController } from '../../../../lib/application/certifications/certification-controller.js';
-import * as moduleUnderTest from '../../../../lib/application/certifications/index.js';
-import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import { certificationAdminController } from '../../../../../src/certification/evaluation/application/certification-admin-controller.js';
+import * as moduleUnderTest from '../../../../../src/certification/evaluation/application/certification-admin-route.js';
+import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
+import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Application | Certification | Routes', function () {
+describe('Certification | Evaluation | Unit | Application | Routes | certification ', function () {
   context('POST /api/admin/certification/neutralize-challenge', function () {
     it('return forbidden access if user has METIER role', async function () {
       // given
@@ -41,7 +41,7 @@ describe('Unit | Application | Certification | Routes', function () {
 
     it('checks that a valid certification-course id is given', async function () {
       // given
-      sinon.stub(certificationController, 'neutralizeChallenge').returns('ok');
+      sinon.stub(certificationAdminController, 'neutralizeChallenge').returns('ok');
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
@@ -63,7 +63,7 @@ describe('Unit | Application | Certification | Routes', function () {
 
     it('checks that a challenge recId is given', async function () {
       // given
-      sinon.stub(certificationController, 'neutralizeChallenge').returns('ok');
+      sinon.stub(certificationAdminController, 'neutralizeChallenge').returns('ok');
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
@@ -121,7 +121,7 @@ describe('Unit | Application | Certification | Routes', function () {
 
     it('checks that a valid certification-course id is given', async function () {
       // given
-      sinon.stub(certificationController, 'deneutralizeChallenge').returns('ok');
+      sinon.stub(certificationAdminController, 'deneutralizeChallenge').returns('ok');
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
@@ -143,7 +143,7 @@ describe('Unit | Application | Certification | Routes', function () {
 
     it('checks that a challenge recId is given', async function () {
       // given
-      sinon.stub(certificationController, 'deneutralizeChallenge').returns('ok');
+      sinon.stub(certificationAdminController, 'deneutralizeChallenge').returns('ok');
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);

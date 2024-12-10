@@ -1,5 +1,5 @@
-import * as events from '../../domain/events/index.js';
-import { usecases } from '../../domain/usecases/index.js';
+import * as events from '../../../../lib/domain/events/index.js';
+import { usecases } from '../domain/usecases/index.js';
 
 const neutralizeChallenge = async function (request, h, dependencies = { events }) {
   const challengeRecId = request.payload.data.attributes.challengeRecId;
@@ -27,9 +27,9 @@ const deneutralizeChallenge = async function (request, h, dependencies = { event
   return h.response().code(204);
 };
 
-const certificationController = {
+const certificationAdminController = {
   neutralizeChallenge,
   deneutralizeChallenge,
 };
 
-export { certificationController };
+export { certificationAdminController };

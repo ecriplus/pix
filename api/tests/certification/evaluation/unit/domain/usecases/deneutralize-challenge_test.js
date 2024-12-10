@@ -1,10 +1,10 @@
-import { ChallengeNeutralized } from '../../../../lib/domain/events/ChallengeNeutralized.js';
-import { neutralizeChallenge } from '../../../../lib/domain/usecases/neutralize-challenge.js';
-import { CertificationAssessment } from '../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { ChallengeDeneutralized } from '../../../../../../src/certification/evaluation/domain/events/ChallengeDeneutralized.js';
+import { deneutralizeChallenge } from '../../../../../../src/certification/evaluation/domain/usecases/deneutralize-challenge.js';
+import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | UseCase | neutralize-challenge', function () {
-  it('neutralizes a challenge by its recId', async function () {
+describe('Unit | UseCase | deneutralize-challenge', function () {
+  it('deneutralizes a challenge by its recId', async function () {
     // given
     const certificationCourseId = 1;
     const certificationAssessmentRepository = {
@@ -15,43 +15,36 @@ describe('Unit | UseCase | neutralize-challenge', function () {
       certificationAssessmentRepository,
     };
 
-    const challengeToBeNeutralized = domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false });
-    const certificationAssessment = new CertificationAssessment({
-      id: 123,
-      userId: 123,
-      certificationCourseId: 1,
-      createdAt: new Date('2020-01-01'),
-      completedAt: new Date('2020-01-01'),
-      state: CertificationAssessment.states.STARTED,
-      version: 2,
+    const challengeToBeDeneutralized = domainBuilder.buildCertificationChallengeWithType({ isNeutralized: true });
+    const certificationAssessment = domainBuilder.buildCertificationAssessment({
       certificationChallenges: [
-        challengeToBeNeutralized,
+        challengeToBeDeneutralized,
         domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false }),
         domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false }),
       ],
-      certificationAnswersByDate: ['answer'],
     });
-    sinon.stub(certificationAssessment, 'neutralizeChallengeByRecId');
+    sinon.stub(certificationAssessment, 'deneutralizeChallengeByRecId');
+
     certificationAssessmentRepository.getByCertificationCourseId
       .withArgs({ certificationCourseId })
       .resolves(certificationAssessment);
 
     // when
-    await neutralizeChallenge({
+    await deneutralizeChallenge({
       ...dependencies,
       certificationCourseId,
-      challengeRecId: challengeToBeNeutralized.challengeId,
+      challengeRecId: challengeToBeDeneutralized.challengeId,
       juryId: 7,
     });
 
     // then
-    expect(certificationAssessment.neutralizeChallengeByRecId).to.have.been.calledWithExactly(
-      challengeToBeNeutralized.challengeId,
+    expect(certificationAssessment.deneutralizeChallengeByRecId).to.have.been.calledWithExactly(
+      challengeToBeDeneutralized.challengeId,
     );
     expect(certificationAssessmentRepository.save).to.have.been.calledWithExactly(certificationAssessment);
   });
 
-  it('return a ChallengeNeutralized event', async function () {
+  it('return a ChallengeDeneutralized event', async function () {
     // given
     const certificationCourseId = 1;
     const certificationAssessmentRepository = {
@@ -62,7 +55,7 @@ describe('Unit | UseCase | neutralize-challenge', function () {
       certificationAssessmentRepository,
     };
 
-    const challengeToBeNeutralized = domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false });
+    const challengeToBeDeneutralized = domainBuilder.buildCertificationChallengeWithType({ isNeutralized: true });
     const certificationAssessment = new CertificationAssessment({
       id: 123,
       userId: 123,
@@ -72,7 +65,7 @@ describe('Unit | UseCase | neutralize-challenge', function () {
       state: CertificationAssessment.states.STARTED,
       version: 2,
       certificationChallenges: [
-        challengeToBeNeutralized,
+        challengeToBeDeneutralized,
         domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false }),
         domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false }),
       ],
@@ -83,15 +76,15 @@ describe('Unit | UseCase | neutralize-challenge', function () {
       .resolves(certificationAssessment);
 
     // when
-    const event = await neutralizeChallenge({
+    const event = await deneutralizeChallenge({
       ...dependencies,
       certificationCourseId,
-      challengeRecId: challengeToBeNeutralized.challengeId,
+      challengeRecId: challengeToBeDeneutralized.challengeId,
       juryId: 7,
     });
 
     // then
-    expect(event).to.be.an.instanceof(ChallengeNeutralized);
+    expect(event).to.be.an.instanceof(ChallengeDeneutralized);
     expect(event).to.deep.equal({ certificationCourseId, juryId: 7 });
   });
 });
