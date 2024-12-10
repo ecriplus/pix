@@ -1,6 +1,9 @@
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import PixStructureSwitcher from '@1024pix/pix-ui/components/pix-structure-switcher';
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import { t } from 'ember-intl';
 
 export default class UserLoggedMenu extends Component {
   @service currentUser;
@@ -51,4 +54,26 @@ export default class UserLoggedMenu extends Component {
     await this.currentUser.load();
     this.args.onChangeOrganization();
   }
+
+  <template>
+    <p>
+      <strong>
+        {{this.currentUser.prescriber.firstName}}
+        {{this.currentUser.prescriber.lastName}}
+      </strong>
+      <br />
+      {{this.organizationNameAndExternalId}}
+    </p>
+    {{#if this.belongsToSeveralOrganizations}}
+      <PixStructureSwitcher
+        @value={{this.currentUser.organization.id}}
+        @structures={{this.eligibleOrganizations}}
+        @label={{t "navigation.user-logged-menu.button"}}
+        @onChange={{this.onOrganizationChange}}
+      />
+    {{/if}}
+    <PixButtonLink @variant="tertiary" class="" @route="logout">{{t
+        "navigation.user-logged-menu.logout"
+      }}</PixButtonLink>
+  </template>
 }
