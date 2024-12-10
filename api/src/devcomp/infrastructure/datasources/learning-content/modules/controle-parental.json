@@ -62,7 +62,7 @@
           "element": {
             "id": "938ababc-7496-453a-bccd-1a493a829525",
             "type": "text",
-            "content": "<p><a href=\"https://www.youtube.com/shorts/AJUkmn48D0U\"target=\"_blank\">Lien vers la version vidéo</a></p>"
+            "content": "<p><a href=\"https://www.youtube.com/shorts/AJUkmn48D0U\" target=\"_blank\">Lien vers la version vidéo</a></p>"
           }
         },
         {
@@ -151,7 +151,7 @@
                     {
                       "id": "1",
                       "content": "<p>gestion du temps d'écran</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><span class=\"feedback__state\"></p><p>La gestion du temps d’écran permet de mettre des limites de temps d’utilisation.<br>Elle ne permet pas de bloquer l’accès à un contenu en fonction de l’âge du fils de Rachel.</span></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><span class=\"feedback__state\"></span></p><p>La gestion du temps d’écran permet de mettre des limites de temps d’utilisation.<br>Elle ne permet pas de bloquer l’accès à un contenu en fonction de l’âge du fils de Rachel.</p>"
                     },
                     {
                       "id": "2",
@@ -228,7 +228,7 @@
                     {
                       "id": "2",
                       "content": "<p>filtrage des contenus</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p><span class=\"feedback__state\"></p><p>Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple. <br>Il ne permet pas de connaître le temps d’utilisation d’une application par le fils de Nassira.</span></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p><span class=\"feedback__state\"></span></p><p>Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple. <br>Il ne permet pas de connaître le temps d’utilisation d’une application par le fils de Nassira.</p>"
                     },
                     {
                       "id": "3",
@@ -256,12 +256,20 @@
         {
           "type": "element",
           "element": {
+            "id": "04eff902-3513-432e-b9a5-764c8563dd17",
+            "type": "text",
+            "content": "<p><strong>Activez le contrôle parental dans le simulateur de smartphone ci-dessous. </strong><span aria-hidden=\"true\">👇</span></p>\n<p><span aria-hidden=\"true\">🧘 </span> Ne vous inquiétez pas ! Les réglages de votre propre smartphone ne seront pas modifiés.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
             "id": "37ff3330-b8df-47e0-80d2-e382671dc3dd",
             "type": "embed",
             "isCompletionRequired": true,
             "title": "Simulateur de smartphone - activation du contrôle parental",
             "url": "https://epreuves.pix.fr/temps_en_ligne/temps_en_ligne.html?mode=module-activer&lang=fr",
-            "instruction": "<p><strong>Activez le contrôle parental dans le simulateur de smartphone ci-dessous. </strong><span aria-hidden=\"true\">👇</span></p><p><span aria-hidden=\"true\">🧘 </span> Ne vous inquiétez pas ! Les réglages de votre propre smartphone ne seront pas modifiés.</p>",
+            "instruction": "",
             "height": 720
           }
         },
@@ -277,7 +285,7 @@
           "element": {
             "id": "37ff3330-b8df-47e0-80d2-e382671dc3dd",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><details><summary>Indice 1</summary><p>Le contrôle parental fait partie des paramètres de l’appareil à activer. ⚙️</p></details><details><summary>Indice 2</summary><p>Ici, le contrôle parental s’active sur l’appareil de l’enfant.</p></details>\n<details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://www.image-heberg.fr/files/1733406264146730843.gif\"></iframe></details></p>"
+            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><br></p><p><details><summary>Indice 1</summary><p>Le contrôle parental fait partie des paramètres de l’appareil à activer. ⚙️</p></details><details><summary>Indice 2</summary><p>Ici, le contrôle parental s’active sur l’appareil de l’enfant.</p></details>\n<details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://www.image-heberg.fr/files/1733406264146730843.gif\"></iframe></details></p><p><br></p>"
           }
         }
       ]
@@ -386,7 +394,7 @@
               "5"
             ]
           }
-        }  
+        }
       ]
     },
     {
