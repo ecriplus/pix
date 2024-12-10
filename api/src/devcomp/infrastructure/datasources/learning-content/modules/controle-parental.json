@@ -151,17 +151,17 @@
                     {
                       "id": "1",
                       "content": "<p>gestion du temps d'écran</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p><span class=\"feedback__state\">La gestion du temps d’écran permet de mettre des limites de temps d’utilisation. Elle ne permet pas de bloquer l’accès à un contenu en particulier.</span></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><span class=\"feedback__state\">La gestion du temps d’écran permet de mettre des limites de temps d’utilisation.<br>Elle ne permet pas de bloquer l’accès à un contenu en fonction de l’âge du fils de Rachel.</span></p>"
                     },
                     {
                       "id": "2",
                       "content": "<p>filtrage des contenus</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p>\n<p>Le filtrage de contenus permet de bloquer l’accès aux contenus en fonction de l’âge de l’enfant.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Le filtrage de contenus permet de bloquer l’accès aux contenus en fonction de l’âge de l’enfant.</p>"
                     },
                     {
                       "id": "3",
                       "content": "<p>suivi de l'activité en ligne</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le suivi de l’activité en ligne permet de suivre l’utilisation de la console. Il ne permet pas de bloquer l’accès à un contenu.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le suivi de l’activité en ligne permet de suivre l’utilisation de la console. <br>Il ne permet pas de bloquer l’accès à un contenu en fonction de l’âge du fils de Rachel.</p>"
                     }
                   ],
                   "feedbacks": {
@@ -192,12 +192,12 @@
                     {
                       "id": "2",
                       "content": "<p>filtrage des contenus</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple. Il ne permet pas de définir des temps de blocage du smartphone.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple.<br> Il ne permet pas de définir des temps de blocage du smartphone du fils de Thibault.</p>"
                     },
                     {
                       "id": "3",
                       "content": "<p>suivi de l'activité en ligne</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le suivi de l’activité en ligne permet de suivre l’utilisation du smartphone. Il ne permet pas de définir des temps de blocage du smartphone.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le suivi de l’activité en ligne permet de suivre l’utilisation du smartphone. <br>Il ne permet pas de définir des temps de blocage du smartphone du fils de Thibault.</p>"
                     }
                   ],
                   "feedbacks": {
@@ -223,12 +223,12 @@
                     {
                       "id": "1",
                       "content": "<p>gestion du temps d'écran</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>La gestion du temps d’écran permet de mettre des limites de temps d’utilisation. Elle ne permet pas de connaître le temps d’utilisation d’une application.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>La gestion du temps d’écran permet de mettre des limites de temps d’utilisation.<br>Elle ne permet pas de connaître le temps d’utilisation d’une application par le fils de Nassira.</p>"
                     },
                     {
                       "id": "2",
                       "content": "<p>filtrage des contenus</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p><span class=\"feedback__state\">Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple. Il ne permet pas de connaître le temps d’utilisation d’une application.</span></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p><span class=\"feedback__state\">Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple. <br>Il ne permet pas de connaître le temps d’utilisation d’une application par le fils de Nassira.</span></p>"
                     },
                     {
                       "id": "3",
