@@ -1,6 +1,7 @@
-import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
+
+import { stubSessionService } from '../../helpers/service-stubs.js';
 
 module('Unit | Route | fill-in-campaign-code', function (hooks) {
   setupTest(hooks);
@@ -11,9 +12,7 @@ module('Unit | Route | fill-in-campaign-code', function (hooks) {
       const externalUser = 'external-user-token';
       const route = this.owner.lookup('route:fill-in-campaign-code');
 
-      const sessionStub = Service.create({
-        data: { externalUser: null },
-      });
+      const sessionStub = stubSessionService(this.owner);
       route.set('session', sessionStub);
 
       const transition = { to: { queryParams: { externalUser } } };
@@ -22,7 +21,7 @@ module('Unit | Route | fill-in-campaign-code', function (hooks) {
       route.beforeModel(transition);
 
       // then
-      assert.strictEqual(sessionStub.data.externalUser, externalUser);
+      assert.strictEqual(sessionStub.externalUserTokenFromGar, externalUser);
     });
   });
 });

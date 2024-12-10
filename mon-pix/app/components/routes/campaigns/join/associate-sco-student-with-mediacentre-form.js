@@ -23,7 +23,7 @@ export default class AssociateScoStudentWithMediacentreForm extends Component {
   constructor() {
     super(...arguments);
 
-    const tokenIdForExternalUser = this.session.data.externalUser;
+    const tokenIdForExternalUser = this.session.externalUserTokenFromGar;
     if (tokenIdForExternalUser) {
       const userFirstNameAndLastName = decodeToken(tokenIdForExternalUser);
       this.firstName = userFirstNameAndLastName['first_name'];
@@ -53,7 +53,7 @@ export default class AssociateScoStudentWithMediacentreForm extends Component {
   }
 
   _createExternalUserRecord() {
-    const externalUserToken = this.session.get('data.externalUser');
+    const externalUserToken = this.session.externalUserTokenFromGar;
     return this.store.createRecord('external-user', {
       birthdate: this.attributes.birthdate,
       campaignCode: this.args.campaignCode,
@@ -70,7 +70,7 @@ export default class AssociateScoStudentWithMediacentreForm extends Component {
         } else {
           this.reconciliationError = error;
           this.displayInformationModal = true;
-          this.session.set('data.expectedUserId', error.meta.userId);
+          this.session.userIdForLearnerAssociation = error.meta.userId;
         }
       } else if (error.status === '404') {
         this.errorMessage = this.intl.t('pages.join.sco.error-not-found', { htmlSafe: true });

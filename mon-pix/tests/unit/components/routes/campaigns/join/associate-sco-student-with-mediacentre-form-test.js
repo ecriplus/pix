@@ -19,7 +19,7 @@ module('Unit | Component | routes/campaigns/join/associate-sco-student-with-medi
   hooks.beforeEach(function () {
     record = { unloadRecord: sinon.stub() };
     storeStub = { createRecord: sinon.stub().returns(record) };
-    sessionStub = { data: {}, get: sinon.stub(), set: sinon.stub() };
+    sessionStub = { externalUserTokenFromGar: null };
     onSubmitStub = sinon.stub();
     component = createComponent('routes/campaigns/join/associate-sco-student-with-mediacentre-form', {
       onSubmit: onSubmitStub,
@@ -39,7 +39,7 @@ module('Unit | Component | routes/campaigns/join/associate-sco-student-with-medi
         birthdate: '2000-10-10',
       };
 
-      sessionStub.get.withArgs('data.externalUser').returns(externalUserToken);
+      sessionStub.externalUserTokenFromGar = externalUserToken;
     });
 
     test('should create an external-user', async function (assert) {
@@ -123,7 +123,7 @@ module('Unit | Component | routes/campaigns/join/associate-sco-student-with-medi
           sinon.assert.calledOnce(record.unloadRecord);
           assert.true(component.displayInformationModal);
           assert.strictEqual(component.reconciliationError, error);
-          sinon.assert.calledWith(sessionStub.set, 'data.expectedUserId', error.meta.userId);
+          assert.strictEqual(sessionStub.userIdForLearnerAssociation, error.meta.userId);
           assert.ok(true);
         });
       });

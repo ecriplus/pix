@@ -19,20 +19,11 @@ export default class CurrentSessionService extends SessionService {
   routeAfterAuthentication = 'authenticated.user-dashboard';
 
   async authenticateUser(login, password) {
-    await this._removeExternalUserContext();
+    this.revokeGarAuthenticationContext();
 
     const trimedLogin = login ? login.trim() : '';
     const scope = ENV.APP.AUTHENTICATION.SCOPE;
     return this.authenticate('authenticator:oauth2', { login: trimedLogin, password, scope });
-  }
-
-  async _removeExternalUserContext() {
-    if (this.data && this.data.expectedUserId) {
-      delete this.data.expectedUserId;
-    }
-    if (this.data && this.data.externalUser) {
-      delete this.data.externalUser;
-    }
   }
 
   async handleAuthentication() {
@@ -83,6 +74,41 @@ export default class CurrentSessionService extends SessionService {
     this.attemptedTransition = transition;
   }
 
+  get isAuthenticatedByGar() {
+    return Boolean(this.externalUserTokenFromGar);
+  }
+
+  get externalUserTokenFromGar() {
+    return this.data.externalUser;
+  }
+
+  set externalUserTokenFromGar(token) {
+    this.data.externalUser = token;
+  }
+
+  get userIdForLearnerAssociation() {
+    return this.data.expectedUserId;
+  }
+
+  set userIdForLearnerAssociation(userId) {
+    this.data.expectedUserId = userId;
+  }
+
+  revokeGarExternalUserToken() {
+    if (this.externalUserTokenFromGar) {
+      delete this.data.externalUser;
+    }
+  }
+
+  revokeGarAuthenticationContext() {
+    if (this.userIdForLearnerAssociation) {
+      delete this.data.expectedUserId;
+    }
+    if (this.externalUserTokenFromGar) {
+      delete this.data.externalUser;
+    }
+  }
+
   async _loadCurrentUserAndSetLocale(locale = null) {
     await this.currentUser.load();
     await this._handleLocale(locale);
@@ -119,11 +145,5 @@ export default class CurrentSessionService extends SessionService {
     this.alternativeRootURL = null;
 
     return alternativeRootURL ? alternativeRootURL : this.url.homeUrl;
-  }
-
-  _logoutUser() {
-    delete super.data.expectedUserId;
-    delete super.data.externalUser;
-    return super.invalidate();
   }
 }

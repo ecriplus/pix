@@ -65,11 +65,10 @@ module('Unit | Component | Update Expired Password Form', function (hooks) {
   module('#handleUpdatePasswordAndAuthenticate', function (hooks) {
     const login = 'beth.rave1203';
     const newPassword = 'Pix67890';
-    const scope = 'mon-pix';
 
     hooks.beforeEach(() => {
       const sessionStub = Service.create({
-        authenticate: sinon.stub().resolves(),
+        authenticateUser: sinon.stub().resolves(),
       });
 
       const resetExpiredPasswordDemand = {
@@ -101,19 +100,11 @@ module('Unit | Component | Update Expired Password Form', function (hooks) {
       });
 
       test('should authenticate with username and newPassword', async function (assert) {
-        // given
-        const expectedAuthenticator = 'authenticator:oauth2';
-        const expectedParameters = {
-          login,
-          password: newPassword,
-          scope,
-        };
-
         // when
         await component.actions.handleUpdatePasswordAndAuthenticate.call(component);
 
         // then
-        sinon.assert.calledWith(component.session.authenticate, expectedAuthenticator, expectedParameters);
+        sinon.assert.calledWith(component.session.authenticateUser, login, newPassword);
         assert.ok(true);
       });
     });
@@ -162,7 +153,7 @@ module('Unit | Component | Update Expired Password Form', function (hooks) {
     module('When authentication after update fails', function () {
       test('should set authenticationHasFailed to true', async function (assert) {
         // given
-        component.session.authenticate.rejects();
+        component.session.authenticateUser.rejects();
 
         // when
         await component.actions.handleUpdatePasswordAndAuthenticate.call(component);

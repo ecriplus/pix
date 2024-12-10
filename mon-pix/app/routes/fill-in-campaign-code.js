@@ -6,7 +6,7 @@ export default class FillInCampaignCodeRoute extends Route {
 
   beforeModel(transition) {
     if (transition.to.queryParams.externalUser) {
-      this.session.data.externalUser = transition.to.queryParams.externalUser;
+      this.session.externalUserTokenFromGar = transition.to.queryParams.externalUser;
     }
   }
 

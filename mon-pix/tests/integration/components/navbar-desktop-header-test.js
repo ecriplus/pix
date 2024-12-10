@@ -1,10 +1,10 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { setBreakpoint } from 'ember-responsive/test-support';
 import { module, test } from 'qunit';
 
+import { stubCurrentUserService, stubSessionService } from '../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | navbar-desktop-header', function (hooks) {
@@ -13,10 +13,7 @@ module('Integration | Component | navbar-desktop-header', function (hooks) {
   module('when user is not logged', function (hooks) {
     hooks.beforeEach(function () {
       // given
-      class sessionService extends Service {
-        isAuthenticated = false;
-      }
-      this.owner.register('service:session', sessionService);
+      stubSessionService(this.owner, { isAuthenticated: false });
       setBreakpoint('desktop');
     });
 
@@ -65,21 +62,8 @@ module('Integration | Component | navbar-desktop-header', function (hooks) {
   module('When user is logged', function (hooks) {
     hooks.beforeEach(function () {
       // given
-      class sessionService extends Service {
-        isAuthenticated = true;
-        data = {
-          authenticated: {
-            token: 'access_token',
-            userId: 1,
-            source: 'pix',
-          },
-        };
-      }
-      this.owner.register('service:session', sessionService);
-      class currentUserService extends Service {
-        user = { isAnonymous: false, firstName: 'Judy' };
-      }
-      this.owner.register('service:currentUser', currentUserService);
+      stubSessionService(this.owner, { isAuthenticated: true });
+      stubCurrentUserService(this.owner, { firstName: 'Judy' });
       setBreakpoint('desktop');
     });
 
@@ -142,24 +126,8 @@ module('Integration | Component | navbar-desktop-header', function (hooks) {
   module('when user has recommended trainings', function (hooks) {
     hooks.beforeEach(function () {
       // given
-      class sessionService extends Service {
-        isAuthenticated = true;
-        data = {
-          authenticated: {
-            token: 'access_token',
-            userId: 1,
-            source: 'pix',
-          },
-        };
-      }
-      this.owner.register('service:session', sessionService);
-      class currentUser extends Service {
-        user = {
-          isAnonymous: false,
-          hasRecommendedTrainings: true,
-        };
-      }
-      this.owner.register('service:currentUser', currentUser);
+      stubSessionService(this.owner, { isAuthenticated: true });
+      stubCurrentUserService(this.owner, { hasRecommendedTrainings: true });
       setBreakpoint('desktop');
     });
 
@@ -175,13 +143,7 @@ module('Integration | Component | navbar-desktop-header', function (hooks) {
   module('when user comes from external platform', function (hooks) {
     hooks.beforeEach(function () {
       // given
-      class sessionService extends Service {
-        isAuthenticated = false;
-        data = {
-          externalUser: 'externalUserToken',
-        };
-      }
-      this.owner.register('service:session', sessionService);
+      stubSessionService(this.owner, { isAuthenticatedByGar: true });
       setBreakpoint('desktop');
     });
 
@@ -230,15 +192,8 @@ module('Integration | Component | navbar-desktop-header', function (hooks) {
   module('when logged user is anonymous', function (hooks) {
     hooks.beforeEach(async function () {
       // given
-      class sessionService extends Service {
-        isAuthenticated = true;
-      }
-      this.owner.register('service:session', sessionService);
-      class currentUserService extends Service {
-        user = { isAnonymous: true };
-      }
-      this.owner.register('service:currentUser', currentUserService);
-
+      stubSessionService(this.owner, { isAuthenticated: true });
+      stubCurrentUserService(this.owner, { isAnonymous: true });
       setBreakpoint('desktop');
     });
 

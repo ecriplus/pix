@@ -1,16 +1,16 @@
 import { action } from '@ember/object';
-import { inject } from '@ember/service';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import get from 'lodash/get';
 import ENV from 'mon-pix/config/environment';
 
 export default class LoginForm extends Component {
-  @inject session;
-  @inject store;
-  @inject router;
-  @inject currentUser;
-  @inject intl;
+  @service session;
+  @service store;
+  @service router;
+  @service currentUser;
+  @service intl;
 
   @tracked login = null;
   @tracked password = null;
@@ -28,8 +28,8 @@ export default class LoginForm extends Component {
     this.isErrorMessagePresent = false;
     this.hasUpdateUserError = false;
 
-    this.externalUserToken = this.session.get('data.externalUser');
-    this.expectedUserId = this.session.get('data.expectedUserId');
+    this.externalUserToken = this.session.externalUserTokenFromGar;
+    this.expectedUserId = this.session.userIdForLearnerAssociation;
 
     if (this.externalUserToken) {
       await this._authenticateExternalUser(this.password, this.login);

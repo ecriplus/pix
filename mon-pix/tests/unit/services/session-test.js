@@ -25,7 +25,6 @@ module('Unit | Services | session', function (hooks) {
       setLocale: sinon.stub(),
     };
     sessionService._getRouteAfterInvalidation = sinon.stub();
-    sessionService._logoutUser = sinon.stub();
 
     routerService = this.owner.lookup('service:router');
     routerService.transitionTo = sinon.stub();

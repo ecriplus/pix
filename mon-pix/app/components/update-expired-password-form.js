@@ -11,7 +11,6 @@ import ENV from 'mon-pix/config/environment';
 import isPasswordValid from '../utils/password-validator';
 
 const ERROR_PASSWORD_MESSAGE = 'pages.update-expired-password.fields.error';
-const AUTHENTICATED_SOURCE_FROM_GAR = ENV.APP.AUTHENTICATED_SOURCE_FROM_GAR;
 
 const VALIDATION_MAP = {
   default: {
@@ -70,13 +69,10 @@ export default class UpdateExpiredPasswordForm extends Component {
         const login = await this.resetExpiredPasswordDemand.updateExpiredPassword();
         this.resetExpiredPasswordDemand.unloadRecord();
 
-        await this._authenticateWithUpdatedPassword({
-          login,
-          password: this.newPassword,
-        });
-
-        if (this.session.get('data.externalUser')) {
-          this.session.data.authenticated.source = AUTHENTICATED_SOURCE_FROM_GAR;
+        try {
+          await this.session.authenticateUser(login, this.newPassword);
+        } catch (errorResponse) {
+          this.authenticationHasFailed = true;
         }
       } catch (errorResponse) {
         const error = get(errorResponse, 'errors[0]');
@@ -84,17 +80,6 @@ export default class UpdateExpiredPasswordForm extends Component {
       } finally {
         this.isLoading = false;
       }
-    }
-  }
-
-  async _authenticateWithUpdatedPassword({ login, password }) {
-    try {
-      const scope = ENV.APP.AUTHENTICATION.SCOPE;
-      await this.session.authenticate('authenticator:oauth2', { login, password, scope });
-      this.session.set('data.externalUser', null);
-      this.session.set('data.expectedUserId', null);
-    } catch (errorResponse) {
-      this.authenticationHasFailed = true;
     }
   }
 

@@ -25,7 +25,9 @@ module('Unit | Component | routes/login-form', function (hooks) {
     sessionStub = {
       authenticate: sinon.stub().resolves(),
       isAuthenticated: sinon.stub().returns(true),
-      get: sinon.stub(),
+      isAuthenticatedByGar: false,
+      externalUserTokenFromGar: null,
+      userIdForLearnerAssociation: null,
       invalidate: sinon.stub(),
     };
     routerStub = {
@@ -174,8 +176,9 @@ module('Unit | Component | routes/login-form', function (hooks) {
       const expectedUserId = 1;
 
       hooks.beforeEach(() => {
-        sessionStub.get.withArgs('data.externalUser').returns(externalUserToken);
-        sessionStub.get.withArgs('data.expectedUserId').returns(expectedUserId);
+        sessionStub.isAuthenticatedByGar = false;
+        sessionStub.externalUserTokenFromGar = externalUserToken;
+        sessionStub.userIdForLearnerAssociation = expectedUserId;
       });
 
       test('should display an error message when update user authentication method fails', async function (assert) {

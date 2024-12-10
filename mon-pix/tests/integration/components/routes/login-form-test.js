@@ -6,6 +6,7 @@ import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubSessionService } from '../../../helpers/service-stubs.js';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | routes/login-form', function (hooks) {
@@ -29,10 +30,8 @@ module('Integration | Component | routes/login-form', function (hooks) {
       },
     };
 
-    class SessionStub extends Service {
-      authenticate = sinon.stub().rejects(errorResponse);
-    }
-    this.owner.register('service:session', SessionStub);
+    const sessionStub = stubSessionService(this.owner);
+    sessionStub.authenticate.rejects(errorResponse);
 
     const screen = await render(hbs`<Routes::LoginForm />`);
     await fillByLabel('Adresse e-mail ou identifiant', 'pix@example.net');
@@ -61,11 +60,8 @@ module('Integration | Component | routes/login-form', function (hooks) {
   module('when there is no invitation', function () {
     test('should call authentication service with appropriate parameters', async function (assert) {
       // given
-      class SessionStub extends Service {
-        authenticate = sinon.stub().resolves();
-      }
-      this.owner.register('service:session', SessionStub);
-      const sessionServiceObserver = this.owner.lookup('service:session');
+      const sessionStub = stubSessionService(this.owner);
+      sessionStub.authenticate.resolves();
 
       // when
       const screen = await render(hbs`<Routes::LoginForm />`);
@@ -74,7 +70,7 @@ module('Integration | Component | routes/login-form', function (hooks) {
       await click(screen.getByRole('button', { name: t('pages.login-or-register.login-form.button') }));
 
       // then
-      sinon.assert.calledWith(sessionServiceObserver.authenticate, 'authenticator:oauth2', {
+      sinon.assert.calledWith(sessionStub.authenticate, 'authenticator:oauth2', {
         login: 'pix@example.net',
         password: 'JeMeLoggue1024',
         scope: 'mon-pix',
@@ -86,12 +82,8 @@ module('Integration | Component | routes/login-form', function (hooks) {
   module('when there is an invitation', function () {
     test('should be ok and call authentication service with appropriate parameters', async function (assert) {
       // given
-      class SessionStub extends Service {
-        authenticate = sinon.stub().resolves();
-      }
-      this.owner.register('service:session', SessionStub);
-
-      const sessionServiceObserver = this.owner.lookup('service:session');
+      const sessionStub = stubSessionService(this.owner);
+      sessionStub.authenticate.resolves();
 
       //  when
       const screen = await render(hbs`<Routes::LoginForm />`);
@@ -100,7 +92,7 @@ module('Integration | Component | routes/login-form', function (hooks) {
       await click(screen.getByRole('button', { name: t('pages.login-or-register.login-form.button') }));
 
       // then
-      sinon.assert.calledWith(sessionServiceObserver.authenticate, 'authenticator:oauth2', {
+      sinon.assert.calledWith(sessionStub.authenticate, 'authenticator:oauth2', {
         login: 'pix@example.net',
         password: 'JeMeLoggue1024',
         scope: 'mon-pix',
@@ -128,10 +120,8 @@ module('Integration | Component | routes/login-form', function (hooks) {
         },
       };
 
-      class SessionStub extends Service {
-        authenticate = sinon.stub().rejects(response);
-      }
-      this.owner.register('service:session', SessionStub);
+      const sessionStub = stubSessionService(this.owner);
+      sessionStub.authenticate.rejects(response);
 
       const routerObserver = this.owner.lookup('service:router');
       routerObserver.replaceWith = sinon.stub();
@@ -159,13 +149,12 @@ module('Integration | Component | routes/login-form', function (hooks) {
       }
       this.owner.register('service:store', StoreStub);
 
-      class SessionStub extends Service {
-        authenticate = sinon.stub().resolves();
-        isAuthenticated = sinon.stub().returns(true);
-        get = sinon.stub().returns(externalUserToken);
-        invalidate = sinon.stub().resolves();
-      }
-      this.owner.register('service:session', SessionStub);
+      const sessionStub = stubSessionService(this.owner, {
+        isAuthenticated: true,
+        isAuthenticatedByGar: true,
+        externalUserTokenFromGar: externalUserToken,
+      });
+      sessionStub.authenticate.resolves();
 
       addGarAuthenticationMethodToUserStub = sinon.stub();
     });

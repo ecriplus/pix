@@ -58,20 +58,20 @@ export default class AccessRoute extends Route {
   }
 
   _shouldLoginToAccessSCORestrictedCampaign(campaign) {
-    const isUserExternal = get(this.session, 'data.externalUser');
+    const isAuthenticatedByGar = this.session.isAuthenticatedByGar;
     const hasUserSeenJoinPage = this.campaignStorage.get(campaign.code, 'hasUserSeenJoinPage');
     return (
       campaign.isRestricted &&
       campaign.organizationType === 'SCO' &&
       !campaign.isReconciliationRequired &&
       !this.session.isAuthenticated &&
-      (!isUserExternal || hasUserSeenJoinPage)
+      (!isAuthenticatedByGar || hasUserSeenJoinPage)
     );
   }
 
   _shouldJoinFromMediacentre(campaign) {
-    const isUserExternal = get(this.session, 'data.externalUser');
-    return campaign.isRestricted && isUserExternal;
+    const isAuthenticatedByGar = this.session.isAuthenticatedByGar;
+    return campaign.isRestricted && isAuthenticatedByGar;
   }
 
   _shouldJoinSimplifiedCampaignAsAnonymous(campaign) {

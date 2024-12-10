@@ -26,7 +26,7 @@ export default class CampaignLandingPageController extends Controller {
   }
 
   get isUserAuthenticatedByGAR() {
-    return !!this.session.get('data.externalUser');
+    return this.session.isAuthenticatedByGar;
   }
 
   get isUserAuthenticatedByPix() {

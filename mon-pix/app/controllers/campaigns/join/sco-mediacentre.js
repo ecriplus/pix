@@ -11,7 +11,7 @@ export default class ScoMediacentreController extends Controller {
   async createAndReconcile(externalUser) {
     const response = await externalUser.save();
 
-    this.session.set('data.externalUser', null);
+    this.session.revokeGarExternalUserToken();
 
     await this.session.authenticate('authenticator:oauth2', { token: response.accessToken });
     await this.currentUser.load();

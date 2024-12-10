@@ -76,7 +76,7 @@ export default class AssociateScoStudentForm extends Component {
         } else {
           this.reconciliationError = error;
           this.displayInformationModal = true;
-          this.session.set('data.expectedUserId', error.meta.userId);
+          this.session.userIdForLearnerAssociation = error.meta.userId;
         }
       } else if (error.status === '422' && error.code === 'ACCOUNT_SEEMS_TO_BELONGS_TO_ANOTHER_USER') {
         this.reconciliationError = error;

@@ -22,7 +22,7 @@ export default class StudentScoController extends Controller {
 
     await this.session.authenticate('authenticator:oauth2', { token: externalUserAuthenticationRequest.accessToken });
 
-    await this._clearExternalUserContext();
+    this.session.revokeGarAuthenticationContext();
 
     await this.currentUser.load();
     await this._reconcileUser();
@@ -37,10 +37,5 @@ export default class StudentScoController extends Controller {
         campaignCode: this.model.code,
       })
       .save({ adapterOptions: { tryReconciliation: true } });
-  }
-
-  _clearExternalUserContext() {
-    this.session.set('data.externalUser', null);
-    this.session.set('data.expectedUserId', null);
   }
 }
