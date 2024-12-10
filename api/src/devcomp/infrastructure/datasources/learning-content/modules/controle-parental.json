@@ -75,17 +75,17 @@
               {
                 "id": "1",
                 "content": "<p>Il permet d'accompagner les pratiques numériques de son enfant.</p>",
-                "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p>\n\n<p>Le contrôle parental est un outil à mettre en place en plus de temps d’échanges et de discussion entre parents et enfants.</p>"
+                "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p>\n\n<p>En plus du contrôle parental, des temps de discussion entre parents et enfants sont nécessaires pour accompagner les pratiques numériques des enfants.</p>"
               },
               {
                 "id": "2",
-                "content": "<p>Il permet de surveiller la santé physique de son enfant.</p>",
-                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le contrôle parental ne concerne pas la surveillance de la santé. Essayez à nouveau !</p>"
+                "content": "<p>Il permet de surveiller la santé de son enfant.</p>",
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le contrôle parental ne concerne pas la surveillance de la santé. Regardez à nouveau la conversation et réessayez !</p>"
               },
               {
                 "id": "3",
                 "content": "<p>Il permet de vérifier que son enfant a fait ses devoirs scolaires.</p>",
-                "feedback": "\n<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le contrôle parental ne concerne pas la scolarité. Essayez à nouveau !</p>"
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le contrôle parental ne concerne pas la surveillance de la santé. Regardez à nouveau la conversation et réessayez !</p>"
               }
             ],
             "feedbacks": {
