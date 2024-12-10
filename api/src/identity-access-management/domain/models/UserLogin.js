@@ -26,14 +26,8 @@ class UserLogin {
     this.failureCount++;
   }
 
-  isUserMarkedAsTemporaryBlocked() {
-    const now = new Date();
-    return !!this.temporaryBlockedUntil && this.temporaryBlockedUntil > now;
-  }
-
-  resetUserTemporaryBlocking() {
-    this.failureCount = 0;
-    this.temporaryBlockedUntil = null;
+  hasFailedAtLeastOnce() {
+    return this.failureCount > 0 || Boolean(this.temporaryBlockedUntil);
   }
 
   shouldMarkUserAsTemporarilyBlocked() {
@@ -45,8 +39,14 @@ class UserLogin {
     this.temporaryBlockedUntil = new Date(Date.now() + config.login.temporaryBlockingBaseTimeMs * commonRatio);
   }
 
-  hasFailedAtLeastOnce() {
-    return this.failureCount > 0 || !!this.temporaryBlockedUntil;
+  isUserMarkedAsTemporaryBlocked() {
+    const now = new Date();
+    return this?.temporaryBlockedUntil > now;
+  }
+
+  resetUserTemporaryBlocking() {
+    this.failureCount = 0;
+    this.temporaryBlockedUntil = null;
   }
 
   shouldMarkUserAsBlocked() {
@@ -55,16 +55,17 @@ class UserLogin {
 
   markUserAsBlocked() {
     this.blockedAt = new Date();
+    this.temporaryBlockedUntil = null;
+  }
+
+  isUserMarkedAsBlocked() {
+    return Boolean(this.blockedAt);
   }
 
   resetUserBlocking() {
     this.failureCount = 0;
     this.temporaryBlockedUntil = null;
     this.blockedAt = null;
-  }
-
-  isUserMarkedAsBlocked() {
-    return !!this.blockedAt;
   }
 
   anonymize() {

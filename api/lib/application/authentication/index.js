@@ -1,8 +1,9 @@
 import Joi from 'joi';
 
+import { securityPreHandlers } from '../../../src/shared/application/security-pre-handlers.js';
 import { responseAuthenticationDoc } from '../../../src/shared/infrastructure/open-api-doc/authentication/response-authentication-doc.js';
 import { responseObjectErrorDoc } from '../../../src/shared/infrastructure/open-api-doc/response-object-error-doc.js';
-import { authenticationController as AuthenticationController } from './authentication-controller.js';
+import { authenticationController } from './authentication-controller.js';
 
 const register = async function (server) {
   server.route([
@@ -44,7 +45,7 @@ const register = async function (server) {
             403: responseObjectErrorDoc,
           },
         },
-        handler: AuthenticationController.authenticateApplication,
+        handler: authenticationController.authenticateApplication,
         tags: ['api', 'authorization-server'],
       },
     },
@@ -66,7 +67,12 @@ const register = async function (server) {
             },
           }),
         },
-        handler: AuthenticationController.authenticateExternalUser,
+        pre: [{ method: securityPreHandlers.checkIfUserIsBlocked }],
+        handler: authenticationController.authenticateExternalUser,
+        notes: [
+          '- Cette route permet d’authentifier un utilisateur Pix provenant de la double mire GAR.\n' +
+            '- Elle renvoie un objet contenant un access token.',
+        ],
         tags: ['api'],
       },
     },

@@ -16,44 +16,6 @@ import { buildPixAdminRole } from './build-pix-admin-role.js';
 const DEFAULT_PASSWORD = 'pix123';
 const { ROLES } = PIX_ADMIN;
 
-function _buildPixAuthenticationMethod({
-  id = databaseBuffer.getNextId(),
-  userId,
-  rawPassword = DEFAULT_PASSWORD,
-  shouldChangePassword,
-  createdAt,
-  updatedAt,
-} = {}) {
-  // eslint-disable-next-line no-sync
-  const hashedPassword = cryptoService.hashPasswordSync(rawPassword);
-
-  const values = {
-    id,
-    userId,
-    identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
-    authenticationComplement: new AuthenticationMethod.PixAuthenticationComplement({
-      password: hashedPassword,
-      shouldChangePassword,
-    }),
-    externalIdentifier: undefined,
-    createdAt,
-    updatedAt,
-  };
-
-  return databaseBuffer.pushInsertable({
-    tableName: 'authentication-methods',
-    values,
-  });
-}
-
-function _generateEmailIfUndefined(email, id, lastName, firstName) {
-  if (isUndefined(email)) {
-    return `${firstName}.${lastName}${id}@example.net`.replaceAll(/\s+/g, '_').toLowerCase();
-  }
-
-  return email;
-}
-
 /**
  * @typedef SeedUser
  * @type {object}
@@ -430,6 +392,44 @@ buildUser.withCertificationCenterMembership = function buildUserWithCertificatio
 
   return user;
 };
+
+function _buildPixAuthenticationMethod({
+  id = databaseBuffer.getNextId(),
+  userId,
+  rawPassword = DEFAULT_PASSWORD,
+  shouldChangePassword,
+  createdAt,
+  updatedAt,
+} = {}) {
+  // eslint-disable-next-line no-sync
+  const hashedPassword = cryptoService.hashPasswordSync(rawPassword);
+
+  const values = {
+    id,
+    userId,
+    identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
+    authenticationComplement: new AuthenticationMethod.PixAuthenticationComplement({
+      password: hashedPassword,
+      shouldChangePassword,
+    }),
+    externalIdentifier: undefined,
+    createdAt,
+    updatedAt,
+  };
+
+  return databaseBuffer.pushInsertable({
+    tableName: 'authentication-methods',
+    values,
+  });
+}
+
+function _generateEmailIfUndefined(email, id, lastName, firstName) {
+  if (isUndefined(email)) {
+    return `${firstName}.${lastName}${id}@example.net`.replaceAll(/\s+/g, '_').toLowerCase();
+  }
+
+  return email;
+}
 
 /**
  * @typedef {
