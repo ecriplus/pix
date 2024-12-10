@@ -135,8 +135,15 @@ const findValidatedBySkillId = async function (skillId, locale) {
 };
 
 export async function getManyTypes(ids) {
-  const challenges = await challengeDatasource.getMany(ids);
-  return Object.fromEntries(challenges.map(({ id, type }) => [id, type]));
+  try {
+    const challenges = await challengeDatasource.getMany(ids);
+    return Object.fromEntries(challenges.map(({ id, type }) => [id, type]));
+  } catch (err) {
+    if (err instanceof LearningContentResourceNotFound) {
+      throw new NotFoundError();
+    }
+    throw err;
+  }
 }
 
 function byId(challenge1, challenge2) {
