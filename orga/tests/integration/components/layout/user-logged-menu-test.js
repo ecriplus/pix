@@ -24,7 +24,7 @@ module('Integration | Component | Layout::UserLoggedMenu', function () {
         }),
       });
       organization2 = Object.create({ id: '2', name: 'Organization 2', externalId: 'EXT2' });
-      organization3 = Object.create({ id: '3', name: 'Organization 3', externalId: 'EXT3' });
+      organization3 = Object.create({ id: '3', name: 'Organization 3' });
       loadStub = sinon.stub();
 
       class CurrentUserStub extends Service {
@@ -75,7 +75,7 @@ module('Integration | Component | Layout::UserLoggedMenu', function () {
 
       // then
       assert.ok(await screen.findByRole('option', { name: `${organization2.name} (${organization2.externalId})` }));
-      assert.ok(await screen.findByRole('option', { name: `${organization3.name} (${organization3.externalId})` }));
+      assert.ok(await screen.findByRole('option', { name: `${organization3.name}` }));
     });
 
     test('should redirect to authenticated route before reload the current user', async function (assert) {
