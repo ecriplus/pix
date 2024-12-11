@@ -49,4 +49,20 @@ describe('Integration | Legal document | Infrastructure | Repository | legal-doc
       expect(lastDocument).to.be.null;
     });
   });
+
+  describe('#create', function () {
+    it('creates a new legal document in the database', async function () {
+      // given
+      const type = TOS;
+      const service = PIX_ORGA;
+      const versionAt = new Date('2024-12-01');
+
+      // when
+      const createdDocument = await legalDocumentRepository.create({ type, service, versionAt });
+
+      // then
+      expect(createdDocument).to.be.instanceOf(LegalDocument);
+      expect(createdDocument).to.deep.include({ type, service, versionAt });
+    });
+  });
 });

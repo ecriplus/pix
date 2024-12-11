@@ -1,6 +1,8 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { LegalDocument } from '../../domain/models/LegalDocument.js';
 
+const TABLE_NAME = 'legal-document-versions';
+
 /**
  * Retrieves the latest version of a legal document by type and service.
  *
@@ -11,7 +13,7 @@ import { LegalDocument } from '../../domain/models/LegalDocument.js';
  */
 const findLastVersionByTypeAndService = async ({ type, service }) => {
   const knexConnection = DomainTransaction.getConnection();
-  const documentVersionDto = await knexConnection('legal-document-versions')
+  const documentVersionDto = await knexConnection(TABLE_NAME)
     .where({ type, service })
     .orderBy('versionAt', 'desc')
     .first();
@@ -21,4 +23,21 @@ const findLastVersionByTypeAndService = async ({ type, service }) => {
   return new LegalDocument(documentVersionDto);
 };
 
-export { findLastVersionByTypeAndService };
+/**
+ * Creates a new legal document in the database.
+ *
+ * @param {Object} params - The parameters.
+ * @param {string} params.type - The type of the legal document.
+ * @param {string} params.service - The service associated with the legal document.
+ * @param {Date} params.versionAt - The date of the legal document version.
+ * @returns {Promise<LegalDocument>} The newly created legal document.
+ */
+const create = async ({ type, service, versionAt }) => {
+  const knexConnection = DomainTransaction.getConnection();
+
+  const [documentVersionDto] = await knexConnection(TABLE_NAME).insert({ type, service, versionAt }).returning('*');
+
+  return new LegalDocument(documentVersionDto);
+};
+
+export { create, findLastVersionByTypeAndService };
