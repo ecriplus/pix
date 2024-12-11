@@ -10,6 +10,20 @@
     src="{{@url}}"
     title="{{@title}}"
     style="{{this.embedDocumentHeightStyle}}"
+    {{did-render this.setIframeHtmlElement}}
   >
   </iframe>
+  {{#if @shouldDisplayRebootButton}}
+    <div class="reboot-container">
+      <button
+        type="button"
+        class="link link--grey reboot-container__content"
+        aria-label={{t "pages.challenge.embed-simulator.actions.reset-label"}}
+        {{on "click" this.rebootSimulator}}
+      >
+        <PixIcon @name="refresh" @ariaHidden={{true}} class="embed-reboot-content__icon" />
+        {{t "components.challenge.embed-simulator.actions.reset"}}
+      </button>
+    </div>
+  {{/if}}
 </div>

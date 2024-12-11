@@ -16,6 +16,17 @@
     width: 100%;
     height: 100%;
   }
+
+  .reboot-container {
+    display: flex;
+    justify-content: flex-end;
+    color: var(--pix-neutral-500);
+
+    &__content {
+      display: flex;
+      align-items: center;
+    }
+  }
 }
 
 
