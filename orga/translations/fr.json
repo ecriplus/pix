@@ -1467,6 +1467,27 @@
         "row-title": "Élève"
       }
     },
+    "statistics": {
+      "title": "Statistiques",
+      "gauge": {
+        "label": "Sur le sujet vos participants ont obtenu un niveau de {userLevel} sur un niveau maximum atteignable de {tubeLevel}."
+      },
+      "level": {
+        "advanced": "avancé",
+        "expert": "expert",
+        "independent": "indépendant",
+        "novice": "novice"
+      },
+      "table": {
+        "caption": "Ce tableau affiche l'analyse des résultats de tous les participants par sujets. Il indique pour chaque ligne la compétence, le sujet, le taux de couverture ainsi que le niveau atteint",
+        "headers": {
+          "positioning": "Positionnement",
+          "reached-level": "Niveau atteint",
+          "skills": "Compétences",
+          "topics": "Sujets"
+        }
+      }
+    },
     "sup-organization-participant-activity": {
       "title": "Activité de l'étudiant"
     },

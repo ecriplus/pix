@@ -1,5 +1,6 @@
 import { NoProfileRewardsFoundError } from '../../../profile/domain/errors.js';
 import { usecases } from '../domain/usecases/index.js';
+import * as analysisByTubesSerializer from '../infrastructure/serializers/jsonapi/analysis-by-tubes-serializer.js';
 
 const getAttestationZipForDivisions = async function (request, h) {
   const organizationId = request.params.organizationId;
@@ -17,10 +18,11 @@ const getAttestationZipForDivisions = async function (request, h) {
   }
 };
 
-const getAnalysisByTubes = async function (request, h) {
+const getAnalysisByTubes = async function (request, h, dependencies = { analysisByTubesSerializer }) {
   const organizationId = request.params.organizationId;
   const result = await usecases.getAnalysisByTubes({ organizationId });
-  return h.response(result).code(200);
+  const serializedResult = dependencies.analysisByTubesSerializer.serialize(result);
+  return h.response(serializedResult).code(200);
 };
 
 const organizationLearnersController = {

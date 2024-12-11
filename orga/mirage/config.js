@@ -276,6 +276,20 @@ function routes() {
 
   this.get('/organizations/:id/participants', findFilteredPaginatedOrganizationParticipants);
 
+  this.get('/organizations/:id/organization-learners-level-by-tubes', (schema) => {
+    return schema.analysisByTubes.create({
+      data: [
+        {
+          competence_code: '2.1',
+          competence: 'Interagir',
+          sujet: 'Gérer ses contacts',
+          niveau_par_user: '1.30',
+          niveau_par_sujet: '1.50',
+        },
+      ],
+    });
+  });
+
   this.get('/organization-learners/:id', (schema, request) => {
     const participantId = request.params.id;
 

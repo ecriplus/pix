@@ -109,11 +109,16 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
         const response = await server.inject(options);
 
         // then
+        const expectedResult = {
+          data: {
+            attributes: {
+              data: 'expected-data',
+            },
+            type: 'analysis-by-tubes',
+          },
+        };
         expect(response.statusCode).to.equal(200);
-        expect(response.result).to.deep.equal({
-          data: expectedData,
-          status: 'success',
-        });
+        expect(response.result.data).to.deep.includes(expectedResult.data);
       });
     });
   });

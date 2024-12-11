@@ -43,4 +43,27 @@ module('Unit | Route | authenticated/statistics', function (hooks) {
       assert.ok(route.router.replaceWith.calledWith(expectedRedirection));
     });
   });
+
+  module('model', function () {
+    test('fetch analysis by tubes data', async function (assert) {
+      // given
+      const route = this.owner.lookup('route:authenticated/statistics');
+      const store = this.owner.lookup('service:store');
+
+      const organizationId = Symbol('organization-id');
+      const analysisByTubes = Symbol('analysis-by-tubes');
+
+      route.currentUser = { organization: { id: organizationId } };
+
+      const queryRecord = sinon.stub(store, 'queryRecord');
+
+      queryRecord.withArgs('analysis-by-tube', { organizationId }).resolves(analysisByTubes);
+
+      // when
+      const result = await route.model();
+
+      // then
+      assert.deepEqual(result, analysisByTubes);
+    });
+  });
 });
