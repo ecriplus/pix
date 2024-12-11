@@ -80,7 +80,8 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
           // then
           const certifications = await knex('certification-courses')
             .select('id', 'isPublished', 'updatedAt', 'version')
-            .where({ sessionId });
+            .where({ sessionId })
+            .orderBy('id');
           expect(certifications).to.deep.equal([
             {
               id: 1,
