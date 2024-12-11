@@ -1,6 +1,9 @@
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixStructureSwitcher from '@1024pix/pix-ui/components/pix-structure-switcher';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 
 export default class UserLoggedMenu extends Component {
   @service currentUser;
@@ -22,10 +25,18 @@ export default class UserLoggedMenu extends Component {
     }
     return memberships
       .slice()
-      .map((membership) => ({
-        label: `${membership.organization.get('name')} (${membership.organization.get('externalId')})`,
-        value: membership.organization.get('id'),
-      }))
+      .map((membership) => {
+        let label = `${membership.organization.get('name')}`;
+
+        if (membership.organization.get('externalId')) {
+          label = label.concat(` (${membership.organization.get('externalId')})`);
+        }
+
+        return {
+          label,
+          value: membership.organization.get('id'),
+        };
+      })
       .sort((a, b) => a.label.localeCompare(b.label));
   }
 
@@ -51,4 +62,26 @@ export default class UserLoggedMenu extends Component {
     await this.currentUser.load();
     this.args.onChangeOrganization();
   }
+
+  <template>
+    <p>
+      <strong>
+        {{this.currentUser.prescriber.firstName}}
+        {{this.currentUser.prescriber.lastName}}
+      </strong>
+      <br />
+      {{this.organizationNameAndExternalId}}
+    </p>
+    {{#if this.belongsToSeveralOrganizations}}
+      <PixStructureSwitcher
+        @value={{this.currentUser.organization.id}}
+        @structures={{this.eligibleOrganizations}}
+        @label={{t "navigation.user-logged-menu.button"}}
+        @onChange={{this.onOrganizationChange}}
+      />
+    {{/if}}
+    <PixButtonLink @variant="tertiary" class="" @route="logout">{{t
+        "navigation.user-logged-menu.logout"
+      }}</PixButtonLink>
+  </template>
 }
