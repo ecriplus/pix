@@ -407,7 +407,7 @@
           "element": {
             "id": "6ce0eec7-8b4e-4b28-8805-ed83a2b8db68",
             "type": "qcu",
-            "instruction": "<p>Cherchez sur vos appareils connectés les options de contrôle parental.<br>Avez-vous réussi à la trouver ?</p>",
+            "instruction": "<p>Cherchez sur vos appareils connectés les options de contrôle parental.<br>Avez-vous réussi à les trouver ?</p>",
             "proposals": [
               {
                 "id": "1",
@@ -417,7 +417,7 @@
               {
                 "id": "2",
                 "content": "<p>non</p>",
-                "feedback": "<p>Avez vous regardé dans les paramètres de vos appareils ?</p>"
+                "feedback": "<p>Avez-vous regardé dans les paramètres de vos appareils ?</p>"
               }
             ],
             "feedbacks": {
