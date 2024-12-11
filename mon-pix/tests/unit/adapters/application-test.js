@@ -3,6 +3,8 @@ import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubSessionService } from '../../helpers/service-stubs.js';
+
 const FRENCH_INTERNATIONAL_LOCALE = 'fr';
 const FRANCE_TLD = 'fr';
 const ENGLISH_INTERNATIONAL_LOCALE = 'en';
@@ -132,16 +134,15 @@ module('Unit | Adapters | ApplicationAdapter', function (hooks) {
     module('when the HTTP status code received is different from 401', function () {
       test('should not invalidate the current session', function (assert) {
         // given
+        const sessionService = stubSessionService(this.owner, { isAuthenticated: true });
         const applicationAdapter = this.owner.lookup('adapter:application');
-        const session = this.owner.lookup('service:session');
         sinon.stub(REST.prototype, 'handleResponse');
-        sinon.stub(session, 'invalidate');
 
         // when
         applicationAdapter.handleResponse(302);
 
         // then
-        sinon.assert.notCalled(session.invalidate);
+        sinon.assert.notCalled(sessionService.invalidate);
         sinon.assert.calledOnce(REST.prototype.handleResponse);
         sinon.restore();
         assert.ok(true);

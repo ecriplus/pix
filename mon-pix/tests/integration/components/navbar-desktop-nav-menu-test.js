@@ -1,9 +1,9 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 
+import { stubSessionService } from '../../helpers/service-stubs.js';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | navbar desktop menu', function (hooks) {
@@ -11,10 +11,8 @@ module('Integration | Component | navbar desktop menu', function (hooks) {
 
   test('should render links', async function (assert) {
     // given
-    class SessionStub extends Service {
-      isAuthenticated = true;
-    }
-    this.owner.register('service:session', SessionStub);
+    stubSessionService(this.owner, { isAuthenticated: true });
+
     this.set('menu', [
       {
         name: t('navigation.not-logged.sign-in'),

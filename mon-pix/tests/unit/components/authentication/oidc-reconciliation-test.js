@@ -6,6 +6,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import createGlimmerComponent from '../../../helpers/create-glimmer-component';
+import { stubSessionService } from '../../../helpers/service-stubs.js';
 import setupIntl from '../../../helpers/setup-intl';
 
 module('Unit | Component | authentication | oidc-reconciliation', function (hooks) {
@@ -144,13 +145,8 @@ module('Unit | Component | authentication | oidc-reconciliation', function (hook
       test('user authenticates with reconciliation', async function (assert) {
         // given
         const component = createGlimmerComponent('authentication/oidc-reconciliation');
-        const authenticateStub = sinon.stub();
+        const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
 
-        class SessionStub extends Service {
-          authenticate = authenticateStub;
-        }
-
-        this.owner.register('service:session', SessionStub);
         component.args.identityProviderSlug = 'super-idp';
         component.args.authenticationKey = 'super-key';
         component.isTermsOfServiceValidated = true;
@@ -159,7 +155,7 @@ module('Unit | Component | authentication | oidc-reconciliation', function (hook
         await component.reconcile();
 
         // then
-        sinon.assert.calledWith(authenticateStub, 'authenticator:oidc', {
+        sinon.assert.calledWith(sessionService.authenticate, 'authenticator:oidc', {
           authenticationKey: 'super-key',
           identityProviderSlug: 'super-idp',
           hostSlug: 'user/reconcile',
@@ -172,13 +168,9 @@ module('Unit | Component | authentication | oidc-reconciliation', function (hook
         test('should display error', async function (assert) {
           // given
           const component = createGlimmerComponent('authentication/oidc-reconciliation');
-          const authenticateStub = sinon.stub().rejects({ errors: [{ status: '401' }] });
+          const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+          sessionService.authenticate.rejects({ errors: [{ status: '401' }] });
 
-          class SessionStub extends Service {
-            authenticate = authenticateStub;
-          }
-
-          this.owner.register('service:session', SessionStub);
           component.args.identityProviderSlug = 'super-idp';
           component.args.authenticationKey = 'super-key';
           component.isTermsOfServiceValidated = true;
@@ -199,13 +191,9 @@ module('Unit | Component | authentication | oidc-reconciliation', function (hook
         test('should display generic error message', async function (assert) {
           // given
           const component = createGlimmerComponent('authentication/oidc-reconciliation');
-          const authenticateStub = sinon.stub().rejects({ errors: [{ status: '400' }] });
+          const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+          sessionService.authenticate.rejects({ errors: [{ status: '400' }] });
 
-          class SessionStub extends Service {
-            authenticate = authenticateStub;
-          }
-
-          this.owner.register('service:session', SessionStub);
           component.args.identityProviderSlug = 'super-idp';
           component.args.authenticationKey = 'super-key';
           component.isTermsOfServiceValidated = true;
@@ -224,15 +212,11 @@ module('Unit | Component | authentication | oidc-reconciliation', function (hook
         // given
         let inflightLoading;
         const component = createGlimmerComponent('authentication/oidc-reconciliation');
-        const authenticateStub = function () {
+        const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+        sessionService.authenticate = function () {
           inflightLoading = component.isLoading;
           return Promise.resolve();
         };
-
-        class SessionStub extends Service {
-          authenticate = authenticateStub;
-        }
-        this.owner.register('service:session', SessionStub);
 
         // when
         await component.reconcile();

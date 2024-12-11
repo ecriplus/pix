@@ -1,9 +1,9 @@
-import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import createGlimmerComponent from '../../../helpers/create-glimmer-component';
+import { stubSessionService } from '../../../helpers/service-stubs.js';
 
 module('Unit | Component | Autonomous Course | Landing page start block', function (hooks) {
   setupTest(hooks);
@@ -21,22 +21,14 @@ module('Unit | Component | Autonomous Course | Landing page start block', functi
     module('when user is anonymous', function () {
       test('should redirect to sign-in page on click', async function (assert) {
         // given
-        const event = {
-          preventDefault: () => {},
-        };
-
-        class SessionStub extends Service {
-          isAuthenticated = false;
-          requireAuthenticationAndApprovedTermsOfService = sinon.stub();
-        }
-        this.owner.register('service:session', SessionStub);
-        const session = this.owner.lookup('service:session');
+        const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+        const event = { preventDefault: () => {} };
 
         // when
         await component.actions.redirectToSigninIfUserIsAnonymous.call(component, event);
 
         // then
-        sinon.assert.calledWith(session.requireAuthenticationAndApprovedTermsOfService, 'stubbed-transition');
+        sinon.assert.calledWith(sessionService.requireAuthenticationAndApprovedTermsOfService, 'stubbed-transition');
         assert.ok(true);
       });
     });
@@ -44,15 +36,8 @@ module('Unit | Component | Autonomous Course | Landing page start block', functi
     module('when user is authenticated', function () {
       test('should redirect to next page', async function (assert) {
         // given
-        const event = {
-          preventDefault: () => {},
-        };
-
-        class SessionStub extends Service {
-          isAuthenticated = true;
-        }
-        this.owner.register('service:session', SessionStub);
-        this.owner.lookup('service:session');
+        stubSessionService(this.owner, { isAuthenticated: true });
+        const event = { preventDefault: () => {} };
 
         // when
         await component.actions.redirectToSigninIfUserIsAnonymous.call(component, event);

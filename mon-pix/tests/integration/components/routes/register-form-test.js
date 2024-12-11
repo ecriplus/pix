@@ -7,6 +7,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import ENV from '../../../../config/environment';
+import { stubSessionService } from '../../../helpers/service-stubs.js';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 const EMAIL_INPUT_LABEL = '* Adresse e-mail (ex: nom@exemple.fr)';
@@ -35,16 +36,13 @@ const USERNAME_ERROR_MESSAGE =
 module('Integration | Component | routes/register-form', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  let authenticateStub;
+  let sessionService;
   let saveUserAssociationStub;
   let saveDependentUserStub;
 
   hooks.beforeEach(function () {
-    authenticateStub = sinon.stub();
-    class sessionStub extends Service {
-      authenticate = authenticateStub;
-    }
-    authenticateStub.resolves();
+    sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+    sessionService.authenticate.resolves();
 
     saveUserAssociationStub = sinon.stub();
     saveDependentUserStub = sinon.stub();
@@ -66,7 +64,6 @@ module('Integration | Component | routes/register-form', function (hooks) {
     saveUserAssociationStub.resolves({ username: 'pix.pix1010' });
     saveDependentUserStub.resolves();
 
-    this.owner.register('service:session', sessionStub);
     this.owner.register('service:store', storeStub);
   });
 
@@ -87,7 +84,7 @@ module('Integration | Component | routes/register-form', function (hooks) {
       await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
 
       // then
-      sinon.assert.calledWith(authenticateStub, 'authenticator:oauth2', {
+      sinon.assert.calledWith(sessionService.authenticate, 'authenticator:oauth2', {
         login: 'shi@fu.me',
         password: 'Mypassword1',
         scope: 'mon-pix',
@@ -107,7 +104,7 @@ module('Integration | Component | routes/register-form', function (hooks) {
       await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
 
       // then
-      sinon.assert.calledWith(authenticateStub, 'authenticator:oauth2', {
+      sinon.assert.calledWith(sessionService.authenticate, 'authenticator:oauth2', {
         login: 'pix.pix1010',
         password: 'Mypassword1',
         scope: 'mon-pix',
