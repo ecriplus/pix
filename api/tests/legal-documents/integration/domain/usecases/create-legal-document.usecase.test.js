@@ -39,7 +39,7 @@ describe('Integration | Legal documents | Domain | Use case | create-legal-docum
       //then
       expect(error).to.be.instanceOf(LegalDocumentInvalidDateError);
       expect(error.message).to.be.equal(
-        'Document version must not be before or equal to same document type and service',
+        'Document version must not be before or equal to same document service and type',
       );
     });
 
