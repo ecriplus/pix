@@ -5,6 +5,10 @@ export default class AuthenticatedStatisticsRoute extends Route {
   @service currentUser;
   @service router;
   @service store;
+  queryParams = {
+    pageNumber: { refreshModel: false },
+    pageSize: { refreshModel: false },
+  };
 
   beforeModel() {
     if (!this.currentUser.canAccessStatisticsPage) {
