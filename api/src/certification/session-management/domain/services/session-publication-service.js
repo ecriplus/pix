@@ -7,7 +7,7 @@
  */
 import lodash from 'lodash';
 
-import * as mailService from '../../../../../src/certification/session-management/domain/services/mail-service.js';
+import { mailService } from '../../../../../src/certification/session-management/domain/services/mail-service.js';
 import {
   CertificationCourseNotPublishableError,
   SendingEmailToRefererError,
