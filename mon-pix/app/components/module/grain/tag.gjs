@@ -1,3 +1,4 @@
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 
@@ -8,26 +9,26 @@ export default class ModulixGrainTag extends Component {
     return this.intl.t(`pages.modulix.grain.tag.${this.args.type}`);
   }
 
-  get iconPath() {
+  get iconName() {
     switch (this.args.type) {
       case 'lesson':
-        return '/images/icons/icon-book.svg';
+        return 'book';
       case 'activity':
-        return '/images/icons/icon-cog.svg';
+        return 'cogsMagic';
       case 'discovery':
-        return '/images/icons/icon-door-open.svg';
+        return 'doorOpen';
       case 'challenge':
-        return '/images/icons/icon-cognition.svg';
+        return 'think';
       case 'summary':
-        return '/images/icons/icon-mountain.svg';
+        return 'mountain';
       default:
-        return '/images/icons/icon-book.svg';
+        return 'book';
     }
   }
 
   <template>
     <div class="tag tag--{{@type}}">
-      <img src={{this.iconPath}} class="tag_icon" alt="" aria-hidden="true" />
+      <PixIcon @name={{this.iconName}} @ariaHidden={{true}} />
       <span>{{this.typeText}}</span>
     </div>
   </template>
