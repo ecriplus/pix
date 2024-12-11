@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
 import { usecases } from '../../../../lib/domain/usecases/index.js';
+import { evaluationUsecases } from '../../../evaluation/domain/usecases/index.js';
 import * as organizationSerializer from '../../../organizational-entities/infrastructure/serializers/jsonapi/organization-serializer.js';
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
@@ -158,7 +159,7 @@ const copyTargetProfile = withTransaction(async (request) => {
     targetProfileId: targetProfileIdToCopy,
   });
   await Promise.all([
-    await usecases.copyTargetProfileBadges({
+    await evaluationUsecases.copyTargetProfileBadges({
       originTargetProfileId: targetProfileIdToCopy,
       destinationTargetProfileId: copiedTargetProfileId,
     }),
