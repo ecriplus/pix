@@ -122,15 +122,15 @@ export default class SidebarMenu extends Component {
           {{t "navigation.main.team"}}
         </PixNavigationButton>
 
-        {{#if this.shouldDisplayStatisticsEntry}}
-          <PixNavigationButton @route="authenticated.statistics" @icon="monitoring">
-            {{t "navigation.main.statistics"}}
-          </PixNavigationButton>
-        {{/if}}
-
         {{#if this.shouldDisplayPlacesEntry}}
           <PixNavigationButton @route="authenticated.places" @icon="seat">
             {{t "navigation.main.places"}}
+          </PixNavigationButton>
+        {{/if}}
+
+        {{#if this.shouldDisplayStatisticsEntry}}
+          <PixNavigationButton @route="authenticated.statistics" @icon="monitoring">
+            {{t "navigation.main.statistics"}}
           </PixNavigationButton>
         {{/if}}
 
