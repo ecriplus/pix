@@ -924,7 +924,7 @@
             "admin": {
               "head": "Stap 1: <b>Gelieve</b>.",
               "link": "de studentendatabase importeren",
-              "tail": "<b>Van Onde</b> (exporteerbaar bestand in het menu Lijsten & documenten > Uittreksels > Schoolleerlingen of hun begeleiders)."
+              "tail": "<b>Van Onde</b> (exporteerbaar bestand in het menu Lijsten & documenten > Uittreksels > Schoolleerlingen of hun begeleiders <b>door alleen leerlingen uit cyclus 3 te selecteren</b>)."
             },
             "non-admin": "Stap 1: <b>Vraag de beheerder</b> Pix Orga van je ruimte om de leerlingen te importeren."
           },
