@@ -1,13 +1,9 @@
 <PixBackgroundHeader class="user-certifications-page-get">
 
+  <PixReturnTo @route="authenticated.user-certifications" @shade="neutral-light">
+    {{t "pages.certificate.back-link"}}
+  </PixReturnTo>
   <PixBlock class="user-certifications-page-get__header">
-    <PixReturnTo
-      @route="authenticated.user-certifications"
-      @shade="white"
-      class="user-certifications-page-get__return-to"
-    >
-      {{t "pages.certificate.back-link"}}
-    </PixReturnTo>
     <UserCertificationsDetailHeader @certification={{@model}} />
   </PixBlock>
 
