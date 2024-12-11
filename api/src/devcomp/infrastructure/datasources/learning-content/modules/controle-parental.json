@@ -150,17 +150,17 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "<p>gestion du temps d'écran</p>",
+                      "content": "<p>la gestion du temps d'écran</p>",
                       "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><span class=\"feedback__state\"></span></p><p>La gestion du temps d’écran permet de mettre des limites de temps d’utilisation.<br>Elle ne permet pas de bloquer l’accès à un contenu en fonction de l’âge du fils de Rachel.</p>"
                     },
                     {
                       "id": "2",
-                      "content": "<p>filtrage des contenus</p>",
+                      "content": "<p>le filtrage des contenus</p>",
                       "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Le filtrage de contenus permet de bloquer l’accès aux contenus en fonction de l’âge de l’enfant.</p>"
                     },
                     {
                       "id": "3",
-                      "content": "<p>suivi de l'activité en ligne</p>",
+                      "content": "<p>le suivi de l'activité en ligne</p>",
                       "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le suivi de l’activité en ligne permet de suivre l’utilisation de la console. <br>Il ne permet pas de bloquer l’accès à un contenu en fonction de l’âge du fils de Rachel.</p>"
                     }
                   ],
@@ -186,17 +186,17 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "<p>gestion du temps d'écran</p>",
+                      "content": "<p>la gestion du temps d'écran</p>",
                       "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p>\n<p>Avec la gestion du temps d’écran, il est possible de définir des plages horaires où l'utilisation du smartphone est bloquée.</p>"
                     },
                     {
                       "id": "2",
-                      "content": "<p>filtrage des contenus</p>",
+                      "content": "<p>le filtrage des contenus</p>",
                       "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple.<br> Il ne permet pas de définir des temps de blocage du smartphone du fils de Thibault.</p>"
                     },
                     {
                       "id": "3",
-                      "content": "<p>suivi de l'activité en ligne</p>",
+                      "content": "<p>le suivi de l'activité en ligne</p>",
                       "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le suivi de l’activité en ligne permet de suivre l’utilisation du smartphone. <br>Il ne permet pas de définir des temps de blocage du smartphone du fils de Thibault.</p>"
                     }
                   ],
@@ -222,17 +222,17 @@
                   "proposals": [
                     {
                       "id": "1",
-                      "content": "<p>gestion du temps d'écran</p>",
+                      "content": "<p>la gestion du temps d'écran</p>",
                       "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>La gestion du temps d’écran permet de mettre des limites de temps d’utilisation.<br>Elle ne permet pas de connaître le temps d’utilisation d’une application par le fils de Nassira.</p>"
                     },
                     {
                       "id": "2",
-                      "content": "<p>filtrage des contenus</p>",
+                      "content": "<p>le filtrage des contenus</p>",
                       "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p><span class=\"feedback__state\"></span></p><p>Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple. <br>Il ne permet pas de connaître le temps d’utilisation d’une application par le fils de Nassira.</p>"
                     },
                     {
                       "id": "3",
-                      "content": "<p>suivi de l'activité en ligne</p>",
+                      "content": "<p>le suivi de l'activité en ligne</p>",
                       "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p>\n<p>Le suivi de l’activité en ligne permet de consulter le temps passé par son enfant sur son smartphone ou sur une application en particulier.</p>"
                     }
                   ],
@@ -300,7 +300,7 @@
           "element": {
             "id": "2b03d03b-39fd-433a-8895-1144aa69d766",
             "type": "text",
-            "content": "<h3><span aria-hidden=\"true\">📌</span> Les 4 points à retenir :&nbsp;</h3>\n<p><br></p><ul><li>Le contrôle parental est un <strong>outil numérique pour protéger et accompagner les enfants</strong> dans leurs usages numériques.<span aria-hidden=\"true\">🛡</span>️</li><br><li>Le contrôle parental a de nombreuses fonctionnalités :&nbsp; <strong>gestion du temps en ligne, de filtrage des contenus et de suivi des activités</strong>.&nbsp;<span aria-hidden=\"true\">⏳</span></li><br><li>Pour trouver le contrôle parental, rendez-vous dans les <strong>paramètres</strong>. <span aria-hidden=\"true\">⚙️</span>&nbsp;</li><br><li>Le contrôle parental ne remplace pas les <strong>échanges parents-enfants</strong>, il les complète !&nbsp;<span aria-hidden=\"true\">🗣</span>️</li><br></ul>"
+            "content": "<h3><span aria-hidden=\"true\">📌</span> Les 4 points à retenir :&nbsp;</h3>\n<p><br></p><ul><li>Le contrôle parental est un <strong>outil numérique pour protéger et accompagner les enfants</strong> dans leurs usages numériques.<span aria-hidden=\"true\">🛡</span>️</li><br><li>Le contrôle parental a de nombreuses fonctionnalités :&nbsp; <strong>gestion du temps en ligne, filtrage des contenus et suivi des activités</strong>.&nbsp;<span aria-hidden=\"true\">⏳</span></li><br><li>Pour trouver le contrôle parental, rendez-vous dans les <strong>paramètres</strong>. <span aria-hidden=\"true\">⚙️</span>&nbsp;</li><br><li>Le contrôle parental ne remplace pas les <strong>échanges parents-enfants</strong>, il les complète !&nbsp;<span aria-hidden=\"true\">🗣</span>️</li><br></ul>"
           }
         }
       ]
