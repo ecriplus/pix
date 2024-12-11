@@ -361,14 +361,15 @@ describe('Integration | Repository | Certification Course', function () {
   });
 
   describe('#update', function () {
-    let certificationCourse;
+    let certificationCourse, certificationCourseData;
 
     beforeEach(async function () {
       // given
       const userId = databaseBuilder.factory.buildUser({}).id;
-      const certificationCourseData = databaseBuilder.factory.buildCertificationCourse({
+      certificationCourseData = databaseBuilder.factory.buildCertificationCourse({
         userId,
         isCancelled: false,
+        updatedAt: new Date('2020-12-01'),
       });
       certificationCourse = domainBuilder.buildCertificationCourse(certificationCourseData);
       await databaseBuilder.commit();
@@ -408,36 +409,26 @@ describe('Integration | Repository | Certification Course', function () {
 
       // then
       const unpersistedUpdatedCertificationCourseDTO = unpersistedUpdatedCertificationCourse.toDTO();
-      const persistedUpdatedCertificationCourse = await certificationCourseRepository.get({
-        id: unpersistedUpdatedCertificationCourseDTO.id,
-      });
-      const persistedUpdatedCertificationCourseDTO = persistedUpdatedCertificationCourse.toDTO();
-      expect(persistedUpdatedCertificationCourse.getId()).to.equal(unpersistedUpdatedCertificationCourse.getId());
-      expect(persistedUpdatedCertificationCourseDTO.firstName).to.equal(
-        unpersistedUpdatedCertificationCourseDTO.firstName,
-      );
-      expect(persistedUpdatedCertificationCourseDTO.lastName).to.equal(
-        unpersistedUpdatedCertificationCourseDTO.lastName,
-      );
-      expect(persistedUpdatedCertificationCourseDTO.birthdate).to.equal(
-        unpersistedUpdatedCertificationCourseDTO.birthdate,
-      );
-      expect(persistedUpdatedCertificationCourseDTO.birthplace).to.equal(
-        unpersistedUpdatedCertificationCourseDTO.birthplace,
-      );
-      expect(persistedUpdatedCertificationCourseDTO.birthPostalCode).to.equal(
+      const updatedCertificationCourse = await knex('certification-courses')
+        .where('id', unpersistedUpdatedCertificationCourse.getId())
+        .first();
+      expect(updatedCertificationCourse.id).to.equal(unpersistedUpdatedCertificationCourse.getId());
+      expect(updatedCertificationCourse.firstName).to.equal(unpersistedUpdatedCertificationCourseDTO.firstName);
+      expect(updatedCertificationCourse.lastName).to.equal(unpersistedUpdatedCertificationCourseDTO.lastName);
+      expect(updatedCertificationCourse.birthdate).to.equal(unpersistedUpdatedCertificationCourseDTO.birthdate);
+      expect(updatedCertificationCourse.birthplace).to.equal(unpersistedUpdatedCertificationCourseDTO.birthplace);
+      expect(updatedCertificationCourse.birthPostalCode).to.equal(
         unpersistedUpdatedCertificationCourseDTO.birthPostalCode,
       );
-      expect(persistedUpdatedCertificationCourseDTO.birthINSEECode).to.equal(
+      expect(updatedCertificationCourse.birthINSEECode).to.equal(
         unpersistedUpdatedCertificationCourseDTO.birthINSEECode,
       );
-      expect(persistedUpdatedCertificationCourseDTO.birthCountry).to.equal(
-        unpersistedUpdatedCertificationCourseDTO.birthCountry,
-      );
-      expect(persistedUpdatedCertificationCourseDTO.sex).to.equal(unpersistedUpdatedCertificationCourseDTO.sex);
-      expect(persistedUpdatedCertificationCourseDTO.isCancelled).to.be.true;
-      expect(persistedUpdatedCertificationCourseDTO.completedAt).to.deep.equal(new Date('1999-12-31'));
-      expect(persistedUpdatedCertificationCourseDTO.isRejectedForFraud).to.be.true;
+      expect(updatedCertificationCourse.birthCountry).to.equal(unpersistedUpdatedCertificationCourseDTO.birthCountry);
+      expect(updatedCertificationCourse.sex).to.equal(unpersistedUpdatedCertificationCourseDTO.sex);
+      expect(updatedCertificationCourse.isCancelled).to.be.true;
+      expect(updatedCertificationCourse.completedAt).to.deep.equal(new Date('1999-12-31'));
+      expect(updatedCertificationCourse.isRejectedForFraud).to.be.true;
+      expect(updatedCertificationCourse.updatedAt).to.be.greaterThan(certificationCourseData.updatedAt);
     });
 
     it('should prevent other values to be updated', async function () {
