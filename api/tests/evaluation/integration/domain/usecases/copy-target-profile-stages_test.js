@@ -1,8 +1,8 @@
-import { copyTargetProfileStages } from '../../../../lib/domain/usecases/copy-target-profile-stages.js';
-import * as stageRepository from '../../../../src/evaluation/infrastructure/repositories/stage-repository.js';
-import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { copyTargetProfileStages } from '../../../../../src/evaluation/domain/usecases/copy-target-profile-stages.js';
+import * as stageRepository from '../../../../../src/evaluation/infrastructure/repositories/stage-repository.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
-describe('Integration | UseCases | copy-stages', function () {
+describe('Evaluation | Integration | Domain | UseCases | copy-stages', function () {
   describe('when there are stages to copy from an origin to a destination target profile', function () {
     it('should copy the stages', async function () {
       // given
