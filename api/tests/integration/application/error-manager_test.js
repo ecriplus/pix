@@ -11,7 +11,10 @@ import {
 } from '../../../src/identity-access-management/domain/errors.js';
 import { CampaignParticipationDeletedError } from '../../../src/prescription/campaign-participation/domain/errors.js';
 import * as DomainErrors from '../../../src/shared/domain/errors.js';
-import { AlreadyAcceptedOrCancelledInvitationError } from '../../../src/team/domain/errors.js';
+import {
+  AlreadyAcceptedOrCancelledInvitationError,
+  UserNotMemberOfOrganizationError,
+} from '../../../src/team/domain/errors.js';
 import { expect, HttpTestServer, sinon } from '../../test-helper.js';
 
 describe('Integration | API | Controller Error', function () {
@@ -495,9 +498,7 @@ describe('Integration | API | Controller Error', function () {
     });
 
     it('responds Unprocessable Entity when a UserNotMemberOfOrganizationError error occurs', async function () {
-      routeHandler.throws(
-        new DomainErrors.UserNotMemberOfOrganizationError("L'utilisateur n'est pas membre de l'organisation."),
-      );
+      routeHandler.throws(new UserNotMemberOfOrganizationError("L'utilisateur n'est pas membre de l'organisation."));
       const response = await server.requestObject(request);
 
       expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);

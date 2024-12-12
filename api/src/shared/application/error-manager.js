@@ -14,23 +14,11 @@ import { ArchivedCampaignError, DeletedCampaignError } from '../../prescription/
 import { CampaignParticipationDeletedError } from '../../prescription/campaign-participation/domain/errors.js';
 import { AggregateImportError, SiecleXmlImportError } from '../../prescription/learner-management/domain/errors.js';
 import { OrganizationCantGetPlacesStatisticsError } from '../../prescription/organization-place/domain/errors.js';
-import { AlreadyAcceptedOrCancelledInvitationError } from '../../team/domain/errors.js';
-import * as DomainErrors from '../domain/errors.js';
 import {
-  AutonomousCourseRequiresATargetProfileWithSimplifiedAccessError,
-  CertificationCenterPilotFeaturesConflictError,
-  EntityValidationError,
-  OidcError,
-  TargetProfileRequiresToBeLinkedToAutonomousCourseOrganization,
-  UserAlreadyExistsWithAuthenticationMethodError,
-  UserAlreadyLinkedToCandidateInSessionError,
-  UserCouldNotBeReconciledError,
-  UserHasAlreadyLeftSCO,
-  UserIsBlocked,
-  UserIsTemporaryBlocked,
-  UserNotAuthorizedToAccessEntityError,
-  UserNotFoundError,
-} from '../domain/errors.js';
+  AlreadyAcceptedOrCancelledInvitationError,
+  UserNotMemberOfOrganizationError,
+} from '../../team/domain/errors.js';
+import * as SharedDomainErrors from '../domain/errors.js';
 import * as errorSerializer from '../infrastructure/serializers/jsonapi/error-serializer.js';
 import { extractLocaleFromRequest } from '../infrastructure/utils/request-response-utils.js';
 import { domainErrorMapper } from './domain-error-mapper.js';
@@ -93,93 +81,90 @@ function _mapToHttpError(error) {
   if (error instanceof HttpErrors.BaseHttpError) {
     return error;
   }
-  if (error instanceof DomainErrors.CertificationCandidateNotFoundError) {
+  if (error instanceof SharedDomainErrors.CertificationCandidateNotFoundError) {
     return new HttpErrors.NotFoundError(error.message, error.code);
   }
-  if (error instanceof DomainErrors.NotFoundError) {
+  if (error instanceof SharedDomainErrors.NotFoundError) {
     return new HttpErrors.NotFoundError(error.message);
   }
-  if (error instanceof DomainErrors.ForbiddenAccess) {
+  if (error instanceof SharedDomainErrors.ForbiddenAccess) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
-  if (error instanceof DomainErrors.CsvImportError) {
+  if (error instanceof SharedDomainErrors.CsvImportError) {
     return new HttpErrors.PreconditionFailedError(error.message, error.code, error.meta);
   }
-  if (error instanceof UserNotAuthorizedToAccessEntityError) {
+  if (error instanceof SharedDomainErrors.UserNotAuthorizedToAccessEntityError) {
     return new HttpErrors.ForbiddenError('Utilisateur non autorisé à accéder à la ressource');
   }
-  if (error instanceof UserIsTemporaryBlocked) {
+  if (error instanceof SharedDomainErrors.UserIsTemporaryBlocked) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
-  if (error instanceof UserHasAlreadyLeftSCO) {
+  if (error instanceof SharedDomainErrors.UserHasAlreadyLeftSCO) {
     return new HttpErrors.ForbiddenError(error.message);
   }
-  if (error instanceof UserAlreadyExistsWithAuthenticationMethodError) {
+  if (error instanceof SharedDomainErrors.UserAlreadyExistsWithAuthenticationMethodError) {
     return new HttpErrors.ConflictError(error.message);
   }
-  if (error instanceof UserNotFoundError) {
+  if (error instanceof SharedDomainErrors.UserNotFoundError) {
     return new HttpErrors.NotFoundError(error.message);
   }
-  if (error instanceof UserNotAuthorizedToAccessEntityError) {
-    return new HttpErrors.ForbiddenError('Utilisateur non autorisé à accéder à la ressource');
-  }
-  if (error instanceof UserIsBlocked) {
+  if (error instanceof SharedDomainErrors.UserIsBlocked) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
-  if (error instanceof UserAlreadyLinkedToCandidateInSessionError) {
+  if (error instanceof SharedDomainErrors.UserAlreadyLinkedToCandidateInSessionError) {
     return new HttpErrors.ForbiddenError("L'utilisateur est déjà lié à un candidat dans cette session.");
   }
-  if (error instanceof DomainErrors.AlreadyRegisteredEmailError) {
+  if (error instanceof SharedDomainErrors.AlreadyRegisteredEmailError) {
     return new HttpErrors.BadRequestError(error.message, error.code);
   }
-  if (error instanceof DomainErrors.AssessmentEndedError) {
+  if (error instanceof SharedDomainErrors.AssessmentEndedError) {
     return new HttpErrors.BaseHttpError(error.message);
   }
-  if (error instanceof DomainErrors.CertificationAttestationGenerationError) {
+  if (error instanceof SharedDomainErrors.CertificationAttestationGenerationError) {
     return new HttpErrors.UnprocessableEntityError(error.message);
   }
-  if (error instanceof UserCouldNotBeReconciledError) {
+  if (error instanceof SharedDomainErrors.UserCouldNotBeReconciledError) {
     return new HttpErrors.UnprocessableEntityError(error.message);
   }
-  if (error instanceof DomainErrors.EmailModificationDemandNotFoundOrExpiredError) {
+  if (error instanceof SharedDomainErrors.EmailModificationDemandNotFoundOrExpiredError) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
-  if (error instanceof DomainErrors.InvalidExternalUserTokenError) {
+  if (error instanceof SharedDomainErrors.InvalidExternalUserTokenError) {
     return new HttpErrors.UnauthorizedError(error.message);
   }
-  if (error instanceof DomainErrors.InvalidResultRecipientTokenError) {
+  if (error instanceof SharedDomainErrors.InvalidResultRecipientTokenError) {
     return new HttpErrors.UnauthorizedError(error.message);
   }
-  if (error instanceof DomainErrors.InvalidTemporaryKeyError) {
+  if (error instanceof SharedDomainErrors.InvalidTemporaryKeyError) {
     return new HttpErrors.UnauthorizedError(error.message);
   }
-  if (error instanceof DomainErrors.InvalidVerificationCodeError) {
+  if (error instanceof SharedDomainErrors.InvalidVerificationCodeError) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
-  if (error instanceof DomainErrors.LocaleFormatError) {
+  if (error instanceof SharedDomainErrors.LocaleFormatError) {
     return new HttpErrors.BadRequestError(error.message, error.code, error.meta);
   }
-  if (error instanceof DomainErrors.LanguageNotSupportedError) {
+  if (error instanceof SharedDomainErrors.LanguageNotSupportedError) {
     return new HttpErrors.BadRequestError(error.message, error.code, error.meta);
   }
-  if (error instanceof DomainErrors.LocaleNotSupportedError) {
+  if (error instanceof SharedDomainErrors.LocaleNotSupportedError) {
     return new HttpErrors.BadRequestError(error.message, error.code, error.meta);
   }
   if (error instanceof AdminMemberError) {
     return new HttpErrors.UnprocessableEntityError(error.message, error.code);
   }
-  if (error instanceof DomainErrors.NoCertificationAttestationForDivisionError) {
+  if (error instanceof SharedDomainErrors.NoCertificationAttestationForDivisionError) {
     return new HttpErrors.BadRequestError(error.message);
   }
   if (error instanceof OrganizationCantGetPlacesStatisticsError) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
 
-  if (error instanceof AutonomousCourseRequiresATargetProfileWithSimplifiedAccessError) {
+  if (error instanceof SharedDomainErrors.AutonomousCourseRequiresATargetProfileWithSimplifiedAccessError) {
     return new HttpErrors.BadRequestError(error.message);
   }
 
-  if (error instanceof TargetProfileRequiresToBeLinkedToAutonomousCourseOrganization) {
+  if (error instanceof SharedDomainErrors.TargetProfileRequiresToBeLinkedToAutonomousCourseOrganization) {
     return new HttpErrors.BadRequestError(error.message);
   }
   if (error instanceof SiecleXmlImportError) {
@@ -197,11 +182,11 @@ function _mapToHttpError(error) {
     return new HttpErrors.UnprocessableEntityError(error.message, error.code);
   }
 
-  if (error instanceof OidcError) {
+  if (error instanceof SharedDomainErrors.OidcError) {
     return new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta);
   }
 
-  if (error instanceof DomainErrors.InvalidInputDataError) {
+  if (error instanceof SharedDomainErrors.InvalidInputDataError) {
     return new HttpErrors.PreconditionFailedError(error.message, error.code, error.meta);
   }
 
@@ -217,282 +202,282 @@ function _mapToHttpError(error) {
     return new HttpErrors.ServiceUnavailableError(error.message);
   }
 
-  if (error instanceof DomainErrors.SendingEmailError) {
+  if (error instanceof SharedDomainErrors.SendingEmailError) {
     return new HttpErrors.ServiceUnavailableError(error.message);
   }
 
-  if (error instanceof DomainErrors.ApplicationWithInvalidClientIdError) {
+  if (error instanceof SharedDomainErrors.ApplicationWithInvalidClientIdError) {
     return new HttpErrors.UnauthorizedError('The client ID is invalid.');
   }
 
-  if (error instanceof DomainErrors.CertificationCandidatesError) {
+  if (error instanceof SharedDomainErrors.CertificationCandidatesError) {
     return new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta);
   }
-  if (error instanceof DomainErrors.AuthenticationMethodAlreadyExistsError) {
+  if (error instanceof SharedDomainErrors.AuthenticationMethodAlreadyExistsError) {
     return new HttpErrors.UnprocessableEntityError(error.message);
   }
-  if (error instanceof DomainErrors.ApplicationWithInvalidClientSecretError) {
+  if (error instanceof SharedDomainErrors.ApplicationWithInvalidClientSecretError) {
     return new HttpErrors.UnauthorizedError('The client secret is invalid.');
   }
-  if (error instanceof DomainErrors.MissingAttributesError) {
+  if (error instanceof SharedDomainErrors.MissingAttributesError) {
     return new HttpErrors.UnprocessableEntityError(error.message);
   }
   if (error instanceof SendingEmailToResultRecipientError) {
     return new HttpErrors.ServiceUnavailableError(error.message);
   }
-  if (error instanceof DomainErrors.InvalidPasswordForUpdateEmailError) {
+  if (error instanceof SharedDomainErrors.InvalidPasswordForUpdateEmailError) {
     return new HttpErrors.BadRequestError(error.message);
   }
 
-  if (error instanceof DomainErrors.UserNotAuthorizedToUpdateEmailError) {
+  if (error instanceof SharedDomainErrors.UserNotAuthorizedToUpdateEmailError) {
     return new HttpErrors.ForbiddenError(error.message);
   }
 
-  if (error instanceof DomainErrors.UserNotAuthorizedToUpdatePasswordError) {
+  if (error instanceof SharedDomainErrors.UserNotAuthorizedToUpdatePasswordError) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
 
-  if (error instanceof CertificationCenterPilotFeaturesConflictError) {
+  if (error instanceof SharedDomainErrors.CertificationCenterPilotFeaturesConflictError) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
 
-  if (error instanceof DomainErrors.AlreadyExistingEntityError) {
+  if (error instanceof SharedDomainErrors.AlreadyExistingEntityError) {
     return new HttpErrors.PreconditionFailedError(error.message, error.code, error.meta);
   }
   if (error instanceof UnableToAttachChildOrganizationToParentOrganizationError) {
     return new HttpErrors.ConflictError(error.message, error.code, error.meta);
   }
-  if (error instanceof DomainErrors.AccountRecoveryDemandExpired) {
+  if (error instanceof SharedDomainErrors.AccountRecoveryDemandExpired) {
     return new HttpErrors.UnauthorizedError(error.message);
   }
-  if (error instanceof DomainErrors.AccountRecoveryUserAlreadyConfirmEmail) {
+  if (error instanceof SharedDomainErrors.AccountRecoveryUserAlreadyConfirmEmail) {
     return new HttpErrors.ConflictError(error.message);
   }
-  if (error instanceof DomainErrors.AlreadyRatedAssessmentError) {
+  if (error instanceof SharedDomainErrors.AlreadyRatedAssessmentError) {
     return new HttpErrors.PreconditionFailedError('Assessment is already rated.');
   }
-  if (error instanceof DomainErrors.NotEnoughDaysPassedBeforeResetCampaignParticipationError) {
+  if (error instanceof SharedDomainErrors.NotEnoughDaysPassedBeforeResetCampaignParticipationError) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
-  if (error instanceof DomainErrors.NoCampaignParticipationForUserAndCampaign) {
+  if (error instanceof SharedDomainErrors.NoCampaignParticipationForUserAndCampaign) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
-  if (error instanceof DomainErrors.OrganizationLearnerDisabledError) {
+  if (error instanceof SharedDomainErrors.OrganizationLearnerDisabledError) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
-  if (error instanceof DomainErrors.NoOrganizationToAttach) {
+  if (error instanceof SharedDomainErrors.NoOrganizationToAttach) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
-  if (error instanceof DomainErrors.ChallengeAlreadyAnsweredError) {
+  if (error instanceof SharedDomainErrors.ChallengeAlreadyAnsweredError) {
     return new HttpErrors.ConflictError('This challenge has already been answered.');
   }
-  if (error instanceof DomainErrors.ChallengeNotAskedError) {
+  if (error instanceof SharedDomainErrors.ChallengeNotAskedError) {
     return new HttpErrors.ConflictError('This challenge has not been asked to the user.');
   }
-  if (error instanceof DomainErrors.NotFoundError) {
+  if (error instanceof SharedDomainErrors.NotFoundError) {
     return new HttpErrors.NotFoundError(error.message, error.code);
   }
-  if (error instanceof DomainErrors.DeletedError) {
+  if (error instanceof SharedDomainErrors.DeletedError) {
     return new HttpErrors.ConflictError(error.message, error.code);
   }
-  if (error instanceof DomainErrors.CampaignCodeError) {
+  if (error instanceof SharedDomainErrors.CampaignCodeError) {
     return new HttpErrors.NotFoundError(error.message);
   }
-  if (error instanceof DomainErrors.UserNotAuthorizedToUpdateResourceError) {
+  if (error instanceof SharedDomainErrors.UserNotAuthorizedToUpdateResourceError) {
     return new HttpErrors.ForbiddenError(error.message);
   }
-  if (error instanceof DomainErrors.UserNotAuthorizedToCreateCampaignError) {
+  if (error instanceof SharedDomainErrors.UserNotAuthorizedToCreateCampaignError) {
     return new HttpErrors.ForbiddenError(error.message);
   }
-  if (error instanceof DomainErrors.UserNotAuthorizedToGenerateUsernamePasswordError) {
+  if (error instanceof SharedDomainErrors.UserNotAuthorizedToGenerateUsernamePasswordError) {
     return new HttpErrors.ForbiddenError(error.message);
   }
-  if (error instanceof DomainErrors.UserNotAuthorizedToRemoveAuthenticationMethod) {
+  if (error instanceof SharedDomainErrors.UserNotAuthorizedToRemoveAuthenticationMethod) {
     return new HttpErrors.ForbiddenError(error.message);
   }
-  if (error instanceof DomainErrors.CandidateAlreadyLinkedToUserError) {
+  if (error instanceof SharedDomainErrors.CandidateAlreadyLinkedToUserError) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
-  if (error instanceof DomainErrors.CertificationCandidateByPersonalInfoNotFoundError) {
+  if (error instanceof SharedDomainErrors.CertificationCandidateByPersonalInfoNotFoundError) {
     return new HttpErrors.NotFoundError(
       "Aucun candidat de certification ne correspond aux informations d'identité fournies.",
     );
   }
-  if (error instanceof DomainErrors.CertificationCandidateByPersonalInfoTooManyMatchesError) {
+  if (error instanceof SharedDomainErrors.CertificationCandidateByPersonalInfoTooManyMatchesError) {
     return new HttpErrors.ConflictError(
       "Plus d'un candidat de certification correspondent aux informations d'identité fournies.",
     );
   }
-  if (error instanceof DomainErrors.CertificationCandidatePersonalInfoFieldMissingError) {
+  if (error instanceof SharedDomainErrors.CertificationCandidatePersonalInfoFieldMissingError) {
     return new HttpErrors.BadRequestError("Un ou plusieurs champs d'informations d'identité sont manquants.");
   }
-  if (error instanceof DomainErrors.CertificationCandidatePersonalInfoWrongFormat) {
+  if (error instanceof SharedDomainErrors.CertificationCandidatePersonalInfoWrongFormat) {
     return new HttpErrors.BadRequestError("Un ou plusieurs champs d'informations d'identité sont au mauvais format.");
   }
-  if (error instanceof DomainErrors.CancelledInvitationError) {
+  if (error instanceof SharedDomainErrors.CancelledInvitationError) {
     return new HttpErrors.ForbiddenError(error.message);
   }
-  if (error instanceof DomainErrors.CertificationCenterMembershipCreationError) {
+  if (error instanceof SharedDomainErrors.CertificationCenterMembershipCreationError) {
     return new HttpErrors.BadRequestError("Le membre ou le centre de certification n'existe pas.");
   }
-  if (error instanceof DomainErrors.InvalidExternalAPIResponseError) {
+  if (error instanceof SharedDomainErrors.InvalidExternalAPIResponseError) {
     return new HttpErrors.ServiceUnavailableError(error.message);
   }
-  if (error instanceof DomainErrors.UnexpectedUserAccountError) {
+  if (error instanceof SharedDomainErrors.UnexpectedUserAccountError) {
     return new HttpErrors.ConflictError(error.message, error.code, error.meta);
   }
-  if (error instanceof DomainErrors.AlreadyExistingEntityError) {
+  if (error instanceof SharedDomainErrors.AlreadyExistingEntityError) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
-  if (error instanceof DomainErrors.AlreadyExistingMembershipError) {
+  if (error instanceof SharedDomainErrors.AlreadyExistingMembershipError) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
-  if (error instanceof DomainErrors.AlreadyExistingInvitationError) {
+  if (error instanceof SharedDomainErrors.AlreadyExistingInvitationError) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
   if (error instanceof AlreadyAcceptedOrCancelledInvitationError) {
     return new HttpErrors.ConflictError(error.message);
   }
-  if (error instanceof DomainErrors.AlreadyExistingCampaignParticipationError) {
+  if (error instanceof SharedDomainErrors.AlreadyExistingCampaignParticipationError) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
-  if (error instanceof DomainErrors.AlreadySharedCampaignParticipationError) {
+  if (error instanceof SharedDomainErrors.AlreadySharedCampaignParticipationError) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
-  if (error instanceof DomainErrors.MembershipCreationError) {
+  if (error instanceof SharedDomainErrors.MembershipCreationError) {
     return new HttpErrors.BadRequestError(error.message);
   }
-  if (error instanceof DomainErrors.MembershipUpdateError) {
+  if (error instanceof SharedDomainErrors.MembershipUpdateError) {
     return new HttpErrors.BadRequestError(error.message);
   }
-  if (error instanceof DomainErrors.ObjectValidationError) {
+  if (error instanceof SharedDomainErrors.ObjectValidationError) {
     return new HttpErrors.UnprocessableEntityError(error.message);
   }
-  if (error instanceof DomainErrors.OrganizationNotFoundError) {
+  if (error instanceof SharedDomainErrors.OrganizationNotFoundError) {
     return new HttpErrors.NotFoundError(error.message);
   }
-  if (error instanceof DomainErrors.OrganizationWithoutEmailError) {
+  if (error instanceof SharedDomainErrors.OrganizationWithoutEmailError) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
-  if (error instanceof DomainErrors.ManyOrganizationsFoundError) {
+  if (error instanceof SharedDomainErrors.ManyOrganizationsFoundError) {
     return new HttpErrors.ConflictError(error.message);
   }
-  if (error instanceof DomainErrors.FileValidationError) {
+  if (error instanceof SharedDomainErrors.FileValidationError) {
     return new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta);
   }
-  if (error instanceof DomainErrors.OrganizationLearnersCouldNotBeSavedError) {
+  if (error instanceof SharedDomainErrors.OrganizationLearnersCouldNotBeSavedError) {
     return new HttpErrors.BadRequestError(error.message);
   }
-  if (error instanceof DomainErrors.OrganizationLearnersConstraintError) {
+  if (error instanceof SharedDomainErrors.OrganizationLearnersConstraintError) {
     return new HttpErrors.ConflictError(error.message);
   }
-  if (error instanceof DomainErrors.AssessmentNotCompletedError) {
+  if (error instanceof SharedDomainErrors.AssessmentNotCompletedError) {
     return new HttpErrors.ConflictError(error.message);
   }
-  if (error instanceof DomainErrors.UserNotAuthorizedToCertifyError) {
+  if (error instanceof SharedDomainErrors.UserNotAuthorizedToCertifyError) {
     return new HttpErrors.ForbiddenError('The user cannot be certified.');
   }
-  if (error instanceof DomainErrors.ApplicationScopeNotAllowedError) {
+  if (error instanceof SharedDomainErrors.ApplicationScopeNotAllowedError) {
     return new HttpErrors.ForbiddenError('The scope is not allowed.');
   }
-  if (error instanceof DomainErrors.UserNotAuthorizedToGetCampaignResultsError) {
+  if (error instanceof SharedDomainErrors.UserNotAuthorizedToGetCampaignResultsError) {
     return new HttpErrors.ForbiddenError(error.message);
   }
-  if (error instanceof DomainErrors.AlreadyRegisteredEmailAndUsernameError) {
+  if (error instanceof SharedDomainErrors.AlreadyRegisteredEmailAndUsernameError) {
     return new HttpErrors.BadRequestError(error.message);
   }
-  if (error instanceof DomainErrors.AlreadyRegisteredUsernameError) {
+  if (error instanceof SharedDomainErrors.AlreadyRegisteredUsernameError) {
     return new HttpErrors.BadRequestError(error.message);
   }
-  if (error instanceof DomainErrors.WrongDateFormatError) {
+  if (error instanceof SharedDomainErrors.WrongDateFormatError) {
     return new HttpErrors.BadRequestError(error.message);
   }
-  if (error instanceof DomainErrors.OrganizationLearnerAlreadyLinkedToUserError) {
+  if (error instanceof SharedDomainErrors.OrganizationLearnerAlreadyLinkedToUserError) {
     return new HttpErrors.ConflictError(error.message, error.code, error.meta);
   }
-  if (error instanceof DomainErrors.OrganizationLearnerAlreadyLinkedToInvalidUserError) {
+  if (error instanceof SharedDomainErrors.OrganizationLearnerAlreadyLinkedToInvalidUserError) {
     return new HttpErrors.BadRequestError(error.message);
   }
-  if (error instanceof DomainErrors.MatchingReconciledStudentNotFoundError) {
+  if (error instanceof SharedDomainErrors.MatchingReconciledStudentNotFoundError) {
     return new HttpErrors.BadRequestError(error.message, error.code);
   }
 
-  if (error instanceof DomainErrors.UserNotAuthorizedToCreateResourceError) {
+  if (error instanceof SharedDomainErrors.UserNotAuthorizedToCreateResourceError) {
     return new HttpErrors.ForbiddenError(error.message);
   }
-  if (error instanceof DomainErrors.UserOrgaSettingsCreationError) {
+  if (error instanceof SharedDomainErrors.UserOrgaSettingsCreationError) {
     return new HttpErrors.BadRequestError(error.message);
   }
-  if (error instanceof DomainErrors.UserNotMemberOfOrganizationError) {
+  if (error instanceof UserNotMemberOfOrganizationError) {
     return new HttpErrors.UnprocessableEntityError(error.message);
   }
-  if (error instanceof DomainErrors.TargetProfileInvalidError) {
+  if (error instanceof SharedDomainErrors.TargetProfileInvalidError) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
-  if (error instanceof DomainErrors.NoStagesForCampaign) {
+  if (error instanceof SharedDomainErrors.NoStagesForCampaign) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
-  if (error instanceof DomainErrors.CampaignTypeError) {
+  if (error instanceof SharedDomainErrors.CampaignTypeError) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
 
-  if (error instanceof DomainErrors.InvalidMembershipOrganizationRoleError) {
+  if (error instanceof SharedDomainErrors.InvalidMembershipOrganizationRoleError) {
     return new HttpErrors.BadRequestError(error.message);
   }
 
-  if (error instanceof DomainErrors.OidcMissingFieldsError) {
+  if (error instanceof SharedDomainErrors.OidcMissingFieldsError) {
     return new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta);
   }
 
-  if (error instanceof DomainErrors.InvalidIdentityProviderError) {
+  if (error instanceof SharedDomainErrors.InvalidIdentityProviderError) {
     return new HttpErrors.BadRequestError(error.message);
   }
 
-  if (error instanceof DomainErrors.YamlParsingError) {
+  if (error instanceof SharedDomainErrors.YamlParsingError) {
     return new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta);
   }
 
-  if (error instanceof DomainErrors.MultipleOrganizationLearnersWithDifferentNationalStudentIdError) {
+  if (error instanceof SharedDomainErrors.MultipleOrganizationLearnersWithDifferentNationalStudentIdError) {
     return new HttpErrors.ConflictError(error.message);
   }
 
-  if (error instanceof DomainErrors.UserShouldNotBeReconciledOnAnotherAccountError) {
+  if (error instanceof SharedDomainErrors.UserShouldNotBeReconciledOnAnotherAccountError) {
     return new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta);
   }
 
-  if (error instanceof DomainErrors.CandidateNotAuthorizedToJoinSessionError) {
+  if (error instanceof SharedDomainErrors.CandidateNotAuthorizedToJoinSessionError) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
 
-  if (error instanceof DomainErrors.CandidateNotAuthorizedToResumeCertificationTestError) {
+  if (error instanceof SharedDomainErrors.CandidateNotAuthorizedToResumeCertificationTestError) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
 
-  if (error instanceof DomainErrors.CertificationCandidateOnFinalizedSessionError) {
+  if (error instanceof SharedDomainErrors.CertificationCandidateOnFinalizedSessionError) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
 
-  if (error instanceof DomainErrors.OrganizationLearnerCannotBeDissociatedError) {
+  if (error instanceof SharedDomainErrors.OrganizationLearnerCannotBeDissociatedError) {
     return new HttpErrors.PreconditionFailedError(error.message);
   }
 
-  if (error instanceof DomainErrors.CertificationEndedByFinalizationError) {
+  if (error instanceof SharedDomainErrors.CertificationEndedByFinalizationError) {
     return new HttpErrors.ConflictError(error.message);
   }
 
-  if (error instanceof DomainErrors.InvalidJuryLevelError) {
+  if (error instanceof SharedDomainErrors.InvalidJuryLevelError) {
     return new HttpErrors.BadRequestError(error.message);
   }
 
-  if (error instanceof DomainErrors.SendingEmailToInvalidDomainError) {
+  if (error instanceof SharedDomainErrors.SendingEmailToInvalidDomainError) {
     return new HttpErrors.BadRequestError(error.message, 'SENDING_EMAIL_TO_INVALID_DOMAIN');
   }
 
-  if (error instanceof DomainErrors.SendingEmailToInvalidEmailAddressError) {
+  if (error instanceof SharedDomainErrors.SendingEmailToInvalidEmailAddressError) {
     return new HttpErrors.BadRequestError(error.message, 'SENDING_EMAIL_TO_INVALID_EMAIL_ADDRESS', error.meta);
   }
 
-  if (error instanceof DomainErrors.InvalidSessionResultTokenError) {
+  if (error instanceof SharedDomainErrors.InvalidSessionResultTokenError) {
     return new HttpErrors.BadRequestError(error.message, error.code);
   }
 
@@ -500,7 +485,7 @@ function _mapToHttpError(error) {
 }
 
 function handle(request, h, error) {
-  if (error instanceof EntityValidationError) {
+  if (error instanceof SharedDomainErrors.EntityValidationError) {
     const locale = extractLocaleFromRequest(request).split('-')[0];
 
     const jsonApiError = new JSONAPIError(
