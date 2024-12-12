@@ -1,6 +1,5 @@
 import * as learningContentPubSub from '../caches/learning-content-pubsub.js';
 import { child, SCOPES } from '../utils/logger.js';
-import { learningContentCache as oldLearningContentCache } from './old/learning-content-cache.js';
 
 const logger = child('learningcontent:cache', { event: SCOPES.LEARNING_CONTENT });
 
@@ -62,6 +61,6 @@ export class LearningContentCache {
 
 export const learningContentCache = {
   async quit() {
-    return Promise.all([learningContentPubSub.quit(), oldLearningContentCache.quit()]);
+    return learningContentPubSub.quit();
   },
 };
