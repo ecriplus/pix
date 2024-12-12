@@ -3,8 +3,12 @@ import SessionService from 'ember-simple-auth/services/session';
 import get from 'lodash/get';
 import ENV from 'mon-pix/config/environment';
 import { FRENCH_FRANCE_LOCALE, FRENCH_INTERNATIONAL_LOCALE } from 'mon-pix/services/locale';
+import { SessionStorageEntry } from 'mon-pix/utils/session-storage-entry.js';
 
 const FRANCE_TLD = 'fr';
+
+const externalUserTokenFromGarStorage = new SessionStorageEntry('externalUserTokenFromGar');
+const userIdForLearnerAssociationStorage = new SessionStorageEntry('userIdForLearnerAssociation');
 
 export default class CurrentSessionService extends SessionService {
   @service currentUser;
@@ -79,34 +83,28 @@ export default class CurrentSessionService extends SessionService {
   }
 
   get externalUserTokenFromGar() {
-    return this.data.externalUser;
+    return externalUserTokenFromGarStorage.get();
   }
 
   set externalUserTokenFromGar(token) {
-    this.data.externalUser = token;
+    externalUserTokenFromGarStorage.set(token);
   }
 
   get userIdForLearnerAssociation() {
-    return this.data.expectedUserId;
+    return userIdForLearnerAssociationStorage.get();
   }
 
   set userIdForLearnerAssociation(userId) {
-    this.data.expectedUserId = userId;
+    userIdForLearnerAssociationStorage.set(userId);
   }
 
   revokeGarExternalUserToken() {
-    if (this.externalUserTokenFromGar) {
-      delete this.data.externalUser;
-    }
+    externalUserTokenFromGarStorage.remove();
   }
 
   revokeGarAuthenticationContext() {
-    if (this.userIdForLearnerAssociation) {
-      delete this.data.expectedUserId;
-    }
-    if (this.externalUserTokenFromGar) {
-      delete this.data.externalUser;
-    }
+    externalUserTokenFromGarStorage.remove();
+    userIdForLearnerAssociationStorage.remove();
   }
 
   async _loadCurrentUserAndSetLocale(locale = null) {

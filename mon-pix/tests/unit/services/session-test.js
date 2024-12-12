@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { DEFAULT_LOCALE, FRENCH_FRANCE_LOCALE, FRENCH_INTERNATIONAL_LOCALE } from 'mon-pix/services/locale';
+import { SessionStorageEntry } from 'mon-pix/utils/session-storage-entry.js';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -54,28 +55,28 @@ module('Unit | Services | session', function (hooks) {
       assert.ok(true);
     });
 
-    test('should delete expectedUserId', async function (assert) {
+    test('should delete userIdForLearnerAssociation', async function (assert) {
       // given
       sessionService.currentDomain.getExtension.returns(FRANCE_TLD);
-      sessionService.data.expectedUserId = 1;
+      sessionService.userIdForLearnerAssociation = 1;
 
       // when
       await sessionService.authenticateUser('user', 'secret');
 
       // then
-      assert.notOk(sessionService.data.expectedUserId);
+      assert.notOk(sessionService.userIdForLearnerAssociation);
     });
 
-    test('should delete externalUser', async function (assert) {
+    test('should delete externalUserTokenFromGar', async function (assert) {
       // given
       sessionService.currentDomain.getExtension.returns(FRANCE_TLD);
-      sessionService.data.externalUser = 1;
+      sessionService.externalUserTokenFromGar = 1;
 
       // when
       await sessionService.authenticateUser('user', 'secret');
 
       // then
-      assert.notOk(sessionService.data.externalUser);
+      assert.notOk(sessionService.externalUserTokenFromGar);
     });
   });
 
@@ -316,6 +317,108 @@ module('Unit | Services | session', function (hooks) {
 
       // then
       assert.deepEqual(sessionService.attemptedTransition, { from: 'campaigns.campaign-landing-page' });
+    });
+  });
+
+  module('#isAuthenticatedByGar', function () {
+    test('returns true if the external user token from gar is set', function (assert) {
+      // given
+      sessionService.externalUserTokenFromGar = '134';
+
+      // when
+      const isAuthenticatedByGar = sessionService.isAuthenticatedByGar;
+
+      // then
+      assert.ok(isAuthenticatedByGar);
+    });
+
+    test('returns false if the external user token from gar not is set', function (assert) {
+      // given
+      sessionService.externalUserTokenFromGar = null;
+
+      // when
+      const isAuthenticatedByGar = sessionService.isAuthenticatedByGar;
+
+      // then
+      assert.notOk(isAuthenticatedByGar);
+    });
+  });
+
+  module('#externalUserTokenFromGar', function () {
+    test('gets the external user token from the session storage', function (assert) {
+      // given
+      const sessionStorage = new SessionStorageEntry('externalUserTokenFromGar');
+      sessionStorage.set('XXX');
+
+      // when
+      const externalUserTokenFromGar = sessionService.externalUserTokenFromGar;
+
+      // then
+      assert.strictEqual(externalUserTokenFromGar, 'XXX');
+    });
+
+    test('sets the external user token to the session storage', function (assert) {
+      // given
+      sessionService.externalUserTokenFromGar = 'XXX';
+
+      // when
+      const sessionStorage = new SessionStorageEntry('externalUserTokenFromGar');
+
+      // then
+      assert.strictEqual(sessionStorage.get(), 'XXX');
+    });
+  });
+
+  module('#userIdForLearnerAssociation', function () {
+    test('gets the user id for learner association from the session storage', function (assert) {
+      // given
+      const sessionStorage = new SessionStorageEntry('userIdForLearnerAssociation');
+      sessionStorage.set(123);
+
+      // when
+      const userIdForLearnerAssociation = sessionService.userIdForLearnerAssociation;
+
+      // then
+      assert.strictEqual(userIdForLearnerAssociation, 123);
+    });
+
+    test('sets the user id for learner association to the session storage', function (assert) {
+      // given
+      sessionService.userIdForLearnerAssociation = 123;
+
+      // when
+      const sessionStorage = new SessionStorageEntry('userIdForLearnerAssociation');
+
+      // then
+      assert.strictEqual(sessionStorage.get(), 123);
+    });
+  });
+
+  module('#revokeGarExternalUserToken', function () {
+    test('removes the external user token from the session storage', function (assert) {
+      // given
+      sessionService.externalUserTokenFromGar = 'XXX';
+
+      // when
+      sessionService.revokeGarExternalUserToken();
+
+      // then
+      assert.notOk(sessionService.externalUserTokenFromGar);
+    });
+  });
+
+  module('#revokeGarAuthenticationContext', function () {
+    test('removes the external user token from the session storage', function (assert) {
+      // given
+      sessionService.externalUserTokenFromGar = 'XXX';
+      sessionService.userIdForLearnerAssociation = 123;
+
+      // when
+      sessionService.revokeGarAuthenticationContext();
+
+      // then
+      assert.notOk(sessionService.externalUserTokenFromGar);
+      assert.notOk(sessionService.userIdForLearnerAssociation);
     });
   });
 });
