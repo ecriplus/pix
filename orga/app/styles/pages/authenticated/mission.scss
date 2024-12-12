@@ -67,24 +67,9 @@
       text-overflow: ellipsis;
     }
 
-    &__details {
-      @extend %pix-body-m;
-
-      color: var(--pix-neutral-500);
-
-      .competence-title {
-        margin-bottom: var(--pix-spacing-2x);
-      }
-
-     .competence-name {
-        margin: 0;
-        color: var(--pix-neutral-900);
-      }
-    }
-
     &__documentation-button {
       width: fit-content;
-      margin: 16px auto;
+      margin: var(--pix-spacing-4x);
     }
   }
 }
@@ -92,7 +77,18 @@
 .mission-header-objectives {
   @extend %pix-body-l;
 
-  color: var(--pix-neutral-500);
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--pix-spacing-8x);
+
+  h2 {
+    margin-bottom: var(--pix-spacing-4x);
+    text-decoration: underline;
+  }
+
+  &__competence {
+    margin-left: 100px;
+  }
 
   &__list {
     margin-top: var(--pix-spacing-2x);

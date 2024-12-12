@@ -961,10 +961,10 @@
         "details": {
           "button-label": "View the mission documentation",
           "competence": {
-            "title": "Competence :"
+            "title": "Targeted DigComp competence :"
           },
           "objective": {
-            "title": "Objectives :"
+            "title": "Mission objectives :"
           }
         },
         "table": {
