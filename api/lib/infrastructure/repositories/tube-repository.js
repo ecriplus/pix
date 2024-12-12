@@ -28,6 +28,9 @@ export async function list() {
 
 export async function findByNames({ tubeNames, locale }) {
   if (!config.featureToggles.useNewLearningContent) return oldTubeRepository.findByNames({ tubeNames, locale });
+  if (!tubeNames) {
+    return [];
+  }
   const ids = await knex.pluck('id').from(TABLE_NAME).whereIn('name', tubeNames).orderBy('name');
   const tubeDtos = await getInstance().loadMany(ids);
   return toDomainList(tubeDtos, locale);

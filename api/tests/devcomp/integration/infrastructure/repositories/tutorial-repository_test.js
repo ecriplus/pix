@@ -170,6 +170,57 @@ describe('Integration | Repository | tutorial-repository', function () {
         expect(tutorials).to.have.lengthOf(1);
         expect(tutorials[0].tutorialEvaluation).to.deep.equal(tutorialEvaluation);
       });
+
+      it('should return empty array when invalid argument given for ids', async function () {
+        // given
+        const tutorialsList = [
+          {
+            duration: '00:00:54',
+            format: 'video',
+            link: 'https://tuto.fr',
+            source: 'tuto.fr',
+            title: 'tuto0',
+            id: 'recTutorial0',
+            skillId: undefined,
+            userSavedTutorial: undefined,
+            tutorialEvaluation: undefined,
+          },
+          {
+            duration: '00:01:54',
+            format: 'page',
+            link: 'https://tuto.com',
+            source: 'tuto.com',
+            title: 'tuto1',
+            id: 'recTutorial1',
+            skillId: undefined,
+            userSavedTutorial: undefined,
+            tutorialEvaluation: undefined,
+          },
+        ];
+
+        await mockLearningContent({
+          tutorials: tutorialsList,
+        });
+
+        // when
+        const tutorials1 = await tutorialRepository.findByRecordIdsForCurrentUser({
+          ids: [],
+          userId: null,
+        });
+        const tutorials2 = await tutorialRepository.findByRecordIdsForCurrentUser({
+          ids: null,
+          userId: null,
+        });
+        const tutorials3 = await tutorialRepository.findByRecordIdsForCurrentUser({
+          ids: undefined,
+          userId: null,
+        });
+
+        // then
+        expect(tutorials1).to.deep.equal([]);
+        expect(tutorials2).to.deep.equal([]);
+        expect(tutorials3).to.deep.equal([]);
+      });
     });
 
     describe('#findPaginatedFilteredForCurrentUser', function () {
