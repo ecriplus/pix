@@ -1,17 +1,30 @@
-import { logger } from '../../shared/infrastructure/utils/logger.js';
+import { monitoringTools } from '../../shared/infrastructure/monitoring-tools.js';
 import { generateHash } from '../infrastructure/utils/crypto.js';
 
-async function monitorApiTokenRoute(request, h, dependencies = { logger }) {
+async function monitorApiTokenRoute(request, h, dependencies = { monitoringTools }) {
   const { username, refresh_token, grant_type, scope } = request.payload;
 
   if (grant_type === 'password') {
     const hash = generateHash(username);
-    dependencies.logger.warn({ hash, grant_type, scope }, 'Authentication attempt');
+    dependencies.monitoringTools.logWarnWithCorrelationIds({
+      message: 'Authentication attempt',
+      hash,
+      grant_type,
+      scope,
+    });
   } else if (grant_type === 'refresh_token') {
     const hash = generateHash(refresh_token);
-    dependencies.logger.warn({ hash, grant_type, scope }, 'Authentication attempt');
+    dependencies.monitoringTools.logWarnWithCorrelationIds({
+      message: 'Authentication attempt',
+      hash,
+      grant_type,
+      scope,
+    });
   } else {
-    dependencies.logger.warn(request.payload, 'Authentication attempt with unknown method');
+    dependencies.monitoringTools.logWarnWithCorrelationIds({
+      message: 'Authentication attempt with unknown method',
+      ...request.payload,
+    });
   }
 
   return true;
