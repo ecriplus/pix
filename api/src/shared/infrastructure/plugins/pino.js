@@ -1,8 +1,7 @@
-import crypto from 'node:crypto';
-
 import { stdSerializers } from 'pino';
 
 import { monitoringTools } from '../../../../src/shared/infrastructure/monitoring-tools.js';
+import { generateHash } from '../../../identity-access-management/infrastructure/utils/crypto.js';
 import { config } from '../../config.js';
 import { logger } from '../utils/logger.js';
 
@@ -17,11 +16,15 @@ function requestSerializer(req) {
   };
 
   if (!config.hapi.enableRequestMonitoring) return enhancedReq;
+
+  // monitor api token route
   const context = monitoringTools.getContext();
   if (context?.request?.route?.path === '/api/token') {
-    const hash = crypto.createHash('sha256');
-    const username = context?.request?.payload?.username;
-    enhancedReq.usernameHash = username ? hash.update(username).digest('hex') : '-';
+    const { username, refresh_token, grant_type, scope } = context.request.payload || {};
+    enhancedReq.grantType = grant_type || '-';
+    enhancedReq.scope = scope || '-';
+    enhancedReq.usernameHash = generateHash(username) || '-';
+    enhancedReq.refreshTokenHash = generateHash(refresh_token) || '-';
   }
 
   return {
