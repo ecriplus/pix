@@ -1,5 +1,5 @@
 import { certificationCenterController } from '../../../../lib/application/certification-centers/certification-center-controller.js';
-import * as moduleUnderTest from '../../../../src/certification/session-management/application/certification-centers-session-summaries.route.js';
+import * as moduleUnderTest from '../../../../lib/application/certification-centers/index.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
 

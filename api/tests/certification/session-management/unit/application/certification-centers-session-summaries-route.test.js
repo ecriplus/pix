@@ -1,5 +1,5 @@
-import { certificationCenterController } from '../../../../../lib/application/certification-centers/certification-center-controller.js';
-import * as moduleUnderTest from '../../../../../src/certification/session-management/application/certification-centers-session-summaries.route.js';
+import { certificationCenterController } from '../../../../../src/certification/session-management/application/certification-centers-session-summaries-controller.js';
+import * as moduleUnderTest from '../../../../../src/certification/session-management/application/certification-centers-session-summaries-route.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Certification | Session-management | Unit | Application | Routes | session-summaries', function () {

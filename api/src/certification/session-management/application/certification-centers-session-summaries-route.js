@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { certificationCenterController } from '../../../../lib/application/certification-centers/certification-center-controller.js';
+import { certificationCenterController } from '../../../../src/certification/session-management/application/certification-centers-session-summaries-controller.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 
 const register = async function (server) {

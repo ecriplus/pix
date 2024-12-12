@@ -2,7 +2,6 @@ import * as divisionSerializer from '../../../src/prescription/campaign/infrastr
 import * as certificationCenterMembershipSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import { usecases as teamUsecases } from '../../../src/team/domain/usecases/index.js';
 import { usecases } from '../../domain/usecases/index.js';
-import * as sessionSummarySerializer from '../../infrastructure/serializers/jsonapi/session-summary-serializer.js';
 import * as studentCertificationSerializer from '../../infrastructure/serializers/jsonapi/student-certification-serializer.js';
 
 const getStudents = async function (request) {

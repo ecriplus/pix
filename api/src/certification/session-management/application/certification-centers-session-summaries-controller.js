@@ -1,5 +1,5 @@
+import { usecases } from '../domain/usecases/index.js';
 import * as sessionSummarySerializer from '../infrastructure/serializers/session-summary-serializer.js';
-import { usecases } from '../../../../lib/domain/usecases/index.js';
 
 const findPaginatedSessionSummaries = async function (request) {
   const certificationCenterId = request.params.id;

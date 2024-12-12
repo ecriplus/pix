@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import { pickChallengeService } from '../../../../../src/evaluation/domain/services/pick-challenge-service.js';
 import * as flashAlgorithmService from '../../../../certification/flash-certification/domain/services/algorithm-methods/flash.js';
+import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
@@ -23,6 +24,7 @@ import {
   cpfExportRepository,
   flashAlgorithmConfigurationRepository,
   sessionRepositories,
+  sessionSummaryRepository,
   sharedCompetenceMarkRepository,
 } from '../../infrastructure/repositories/index.js';
 import { cpfExportsStorage } from '../../infrastructure/storage/cpf-exports-storage.js';
@@ -68,6 +70,7 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {import('../../../shared/domain/services/certification-cpf-service.js')} CertificationCpfService
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCandidateRepository} CertificationCandidateRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCompanionAlertRepository} CertificationCompanionAlertRepository
+ * @typedef {import('../../../../identity-access-management/infrastructure/repositories/user.respository.js').UserRepository} UserRepository
  **/
 
 /**
@@ -96,6 +99,7 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {complementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository
  * @typedef {sessionJuryCommentRepository} SessionJuryCommentRepository
  * @typedef {sessionRepository} SessionRepository
+ * @typedef {sessionSummaryRepository} SessionSummaryRepository
  * @typedef {certificationReportRepository} CertificationReportRepository
  * @typedef {certificationCpfCountryRepository} CertificationCpfCountryRepository
  * @typedef {certificationCpfCityRepository} CertificationCpfCityRepository
@@ -111,9 +115,11 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {cpfExportRepository} CpfExportRepository
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
+ * @typedef {userRepository} UserRepository
  **/
 const dependencies = {
   ...sessionRepositories,
+  sessionSummaryRepository,
   assessmentRepository,
   assessmentResultRepository,
   answerRepository,
@@ -135,6 +141,7 @@ const dependencies = {
   pickChallengeService,
   sessionPublicationService,
   sharedSessionRepository,
+  userRepository,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));
