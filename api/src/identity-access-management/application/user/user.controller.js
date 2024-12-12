@@ -1,3 +1,4 @@
+import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import * as localeService from '../../../shared/domain/services/locale-service.js';
 import * as userSerializer from '../../../shared/infrastructure/serializers/jsonapi/user-serializer.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
@@ -241,6 +242,17 @@ const getCertificationPointOfContact = async function (request) {
   return certificationPointOfContactSerializer.serialize(certificationPointOfContact);
 };
 
+const rememberUserHasSeenChallengeTooltip = async function (request, h, dependencies = { userSerializer }) {
+  const authenticatedUserId = request.auth.credentials.userId;
+  const challengeType = request.params.challengeType;
+
+  const updatedUser = await libUsecases.rememberUserHasSeenChallengeTooltip({
+    userId: authenticatedUserId,
+    challengeType,
+  });
+  return dependencies.userSerializer.serialize(updatedUser);
+};
+
 export const userController = {
   acceptPixCertifTermsOfService,
   acceptPixLastTermsOfService,
@@ -250,6 +262,7 @@ export const userController = {
   getCurrentUser,
   getCurrentUserAccountInfo,
   getUserAuthenticationMethods,
+  rememberUserHasSeenChallengeTooltip,
   rememberUserHasSeenLastDataProtectionPolicyInformation,
   createUser,
   selfDeleteUserAccount,

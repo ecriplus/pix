@@ -8,61 +8,6 @@ import * as requestResponseUtils from '../../../../src/shared/infrastructure/uti
 import { domainBuilder, expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Controller | user-controller', function () {
-  let userSerializer;
-
-  beforeEach(function () {
-    userSerializer = {
-      deserialize: sinon.stub(),
-      serialize: sinon.stub(),
-    };
-  });
-
-  describe('#rememberUserHasSeenChallengeTooltip', function () {
-    let request;
-    const userId = 1;
-    let challengeType;
-
-    beforeEach(function () {
-      sinon.stub(usecases, 'rememberUserHasSeenChallengeTooltip');
-    });
-
-    it('should remember user has seen focused challenge tooltip', async function () {
-      // given
-      challengeType = 'focused';
-      request = {
-        auth: { credentials: { userId } },
-        params: { id: userId, challengeType },
-      };
-
-      usecases.rememberUserHasSeenChallengeTooltip.withArgs({ userId, challengeType }).resolves({});
-      userSerializer.serialize.withArgs({}).returns('ok');
-
-      // when
-      const response = await userController.rememberUserHasSeenChallengeTooltip(request, hFake, { userSerializer });
-
-      // then
-      expect(response).to.be.equal('ok');
-    });
-
-    it('should remember user has seen other challenges tooltip', async function () {
-      // given
-      challengeType = 'other';
-      request = {
-        auth: { credentials: { userId } },
-        params: { id: userId, challengeType },
-      };
-
-      usecases.rememberUserHasSeenChallengeTooltip.withArgs({ userId, challengeType }).resolves({});
-      userSerializer.serialize.withArgs({}).returns('ok');
-
-      // when
-      const response = await userController.rememberUserHasSeenChallengeTooltip(request, hFake, { userSerializer });
-
-      // then
-      expect(response).to.be.equal('ok');
-    });
-  });
-
   describe('#findPaginatedUserRecommendedTrainings', function () {
     it('should call the appropriate use-case', async function () {
       // given

@@ -1,3 +1,4 @@
+import { usecases as libUsecases } from '../../../../../lib/domain/usecases/index.js';
 import { userController } from '../../../../../src/identity-access-management/application/user/user.controller.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
@@ -581,6 +582,52 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
           },
         ],
       });
+    });
+  });
+
+  describe('#rememberUserHasSeenChallengeTooltip', function () {
+    let request;
+    const userId = 1;
+    let challengeType;
+
+    beforeEach(function () {
+      sinon.stub(libUsecases, 'rememberUserHasSeenChallengeTooltip');
+    });
+
+    it('should remember user has seen focused challenge tooltip', async function () {
+      // given
+      challengeType = 'focused';
+      request = {
+        auth: { credentials: { userId } },
+        params: { id: userId, challengeType },
+      };
+
+      libUsecases.rememberUserHasSeenChallengeTooltip.withArgs({ userId, challengeType }).resolves({});
+      userSerializer.serialize.withArgs({}).returns('ok');
+
+      // when
+      const response = await userController.rememberUserHasSeenChallengeTooltip(request, hFake, { userSerializer });
+
+      // then
+      expect(response).to.be.equal('ok');
+    });
+
+    it('should remember user has seen other challenges tooltip', async function () {
+      // given
+      challengeType = 'other';
+      request = {
+        auth: { credentials: { userId } },
+        params: { id: userId, challengeType },
+      };
+
+      libUsecases.rememberUserHasSeenChallengeTooltip.withArgs({ userId, challengeType }).resolves({});
+      userSerializer.serialize.withArgs({}).returns('ok');
+
+      // when
+      const response = await userController.rememberUserHasSeenChallengeTooltip(request, hFake, { userSerializer });
+
+      // then
+      expect(response).to.be.equal('ok');
     });
   });
 });
