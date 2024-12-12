@@ -934,7 +934,7 @@
             "admin": {
               "head": "Étape 1 : <b>Veuillez</b>",
               "link": "importer la base élève",
-              "tail": "<b>depuis Onde</b> (fichier exportable dans le menu Listes & documents > Extractions > Élèves de l’école ou leurs responsables)."
+              "tail": "<b>depuis Onde</b> (fichier exportable dans le menu Listes & documents > Extractions > Élèves de l’école ou leurs responsables <b>en sélectionnant les élèves de cycle 3 uniquement</b>)."
             },
             "non-admin": "Étape 1 : <b>Demandez à l'administrateur</b> Pix Orga de votre espace afin d’importer les élèves."
           },
@@ -946,7 +946,7 @@
               "hint": "Vous pouvez enregistrer ce favori sur les ordinateurs."
             }
           },
-          "step3": "Étape 3 : <b>Activez la session Pix Junior</b> via le bouton ci-dessus. <b>Cette action est à réaliser avant chaque séance avec vos élèves</b>.",
+          "step3": "Étape 3 : <b>Activez la session Pix Junior</b> via le bouton dans la barre de navigation. <b>Cette action est à réaliser avant chaque séance avec vos élèves</b>.",
           "welcome": "Pour commencer à utiliser Pix Junior :"
         },
         "caption": "Liste des missions",
