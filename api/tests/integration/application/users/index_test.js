@@ -4,8 +4,6 @@ import { securityPreHandlers } from '../../../../src/shared/application/security
 import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Integration | Application | Users | Routes', function () {
-  const methodPATCH = 'PATCH';
-
   let httpTestServer;
 
   beforeEach(async function () {
@@ -15,7 +13,6 @@ describe('Integration | Application | Users | Routes', function () {
       .callsFake((request, h) => h.response(true));
 
     sinon.stub(userController, 'resetScorecard').returns('ok');
-    sinon.stub(userController, 'rememberUserHasSeenChallengeTooltip').returns('ok');
 
     httpTestServer = new HttpTestServer();
     await httpTestServer.register(moduleUnderTest);
@@ -45,30 +42,6 @@ describe('Integration | Application | Users | Routes', function () {
 
       // then
       expect(response.statusCode).to.equal(400);
-    });
-  });
-
-  describe('PATCH /api/users/{id}/has-seen-challenge-tooltip/{challengeType}', function () {
-    it('should return 400 - Bad request when challengeType is not valid', async function () {
-      // given
-      const url = '/api/users/1/has-seen-challenge-tooltip/invalid';
-
-      // when
-      const response = await httpTestServer.request(methodPATCH, url, {});
-
-      // then
-      expect(response.statusCode).to.equal(400);
-    });
-
-    it('should return 200 when challengeType is valid', async function () {
-      // given
-      const url = '/api/users/1/has-seen-challenge-tooltip/other';
-
-      // when
-      const response = await httpTestServer.request(methodPATCH, url, {});
-
-      // then
-      expect(response.statusCode).to.equal(200);
     });
   });
 });

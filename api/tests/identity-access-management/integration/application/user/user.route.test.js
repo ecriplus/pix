@@ -156,4 +156,36 @@ describe('Integration | Identity Access Management | Application | Route | User'
       expect(result.statusCode).to.equal(200);
     });
   });
+
+  describe('PATCH /api/users/{id}/has-seen-challenge-tooltip/{challengeType}', function () {
+    it('should return 400 - Bad request when challengeType is not valid', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      const headers = {
+        authorization: generateValidRequestAuthorizationHeader(userId),
+      };
+      const url = `/api/users/${userId}/has-seen-challenge-tooltip/invalid`;
+
+      // when
+      const response = await httpTestServer.request('PATCH', url, {}, null, headers);
+
+      // then
+      expect(response.statusCode).to.equal(400);
+    });
+
+    it('should return 200 when challengeType is valid', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      const headers = {
+        authorization: generateValidRequestAuthorizationHeader(userId),
+      };
+      const url = `/api/users/${userId}/has-seen-challenge-tooltip/other`;
+
+      // when
+      const response = await httpTestServer.request('PATCH', url, {}, null, headers);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+  });
 });
