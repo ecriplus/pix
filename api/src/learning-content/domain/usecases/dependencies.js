@@ -1,4 +1,5 @@
 import { LearningContentCache } from '../../../shared/infrastructure/caches/old/learning-content-cache.js';
+import { lcmsClient } from '../../../shared/infrastructure/lcms-client.js';
 import { areaRepository } from '../../infrastructure/repositories/area-repository.js';
 import { challengeRepository } from '../../infrastructure/repositories/challenge-repository.js';
 import { competenceRepository } from '../../infrastructure/repositories/competence-repository.js';
@@ -28,6 +29,7 @@ export const dependencies = {
   lcmsPatchCacheJobRepository,
   lcmsRefreshCacheJobRepository,
   LearningContentCache,
+  lcmsClient,
 };
 
 /** @typedef {typeof dependencies} Dependencies */

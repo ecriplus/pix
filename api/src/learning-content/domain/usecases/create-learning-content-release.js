@@ -2,7 +2,7 @@ import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 
 /** @param {import('./dependencies.js').Dependencies} */
 export async function createLearningContentRelease({
-  LearningContentCache,
+  lcmsClient,
   frameworkRepository,
   areaRepository,
   competenceRepository,
@@ -14,19 +14,19 @@ export async function createLearningContentRelease({
   tutorialRepository,
   missionRepository,
 }) {
-  const learningContent = await LearningContentCache.instance.update();
+  const newLearningContent = await lcmsClient.createRelease();
 
   await DomainTransaction.execute(async () => {
-    await frameworkRepository.saveMany(learningContent.frameworks);
-    await areaRepository.saveMany(learningContent.areas);
-    await competenceRepository.saveMany(learningContent.competences);
-    await thematicRepository.saveMany(learningContent.thematics);
-    await tubeRepository.saveMany(learningContent.tubes);
-    await skillRepository.saveMany(learningContent.skills);
-    await challengeRepository.saveMany(learningContent.challenges);
-    await courseRepository.saveMany(learningContent.courses);
-    await tutorialRepository.saveMany(learningContent.tutorials);
-    await missionRepository.saveMany(learningContent.missions);
+    await frameworkRepository.saveMany(newLearningContent.frameworks);
+    await areaRepository.saveMany(newLearningContent.areas);
+    await competenceRepository.saveMany(newLearningContent.competences);
+    await thematicRepository.saveMany(newLearningContent.thematics);
+    await tubeRepository.saveMany(newLearningContent.tubes);
+    await skillRepository.saveMany(newLearningContent.skills);
+    await challengeRepository.saveMany(newLearningContent.challenges);
+    await courseRepository.saveMany(newLearningContent.courses);
+    await tutorialRepository.saveMany(newLearningContent.tutorials);
+    await missionRepository.saveMany(newLearningContent.missions);
   });
 
   frameworkRepository.clearCache();
