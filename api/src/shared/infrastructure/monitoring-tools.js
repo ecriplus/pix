@@ -140,6 +140,7 @@ const monitoringTools = {
   incrementInContext,
   installHapiHook,
   logErrorWithCorrelationIds,
+  logWarnWithCorrelationIds,
   logInfoWithCorrelationIds,
   pushInContext,
   setInContext,
