@@ -2,9 +2,9 @@ import { httpAgent } from '../../../../lib/infrastructure/http/http-agent.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
 import { config } from '../../config.js';
 import { NotFoundError } from '../../domain/errors.js';
+import { Accessibility } from '../../domain/models/Challenge.js';
 import { Challenge } from '../../domain/models/index.js';
 import * as solutionAdapter from '../../infrastructure/adapters/solution-adapter.js';
-import * as oldChallengeRepository from './challenge-repository_old.js';
 import { LearningContentRepository } from './learning-content-repository.js';
 
 const TABLE_NAME = 'learningcontent.challenges';
@@ -12,10 +12,9 @@ const VALIDATED_STATUS = 'validé';
 const ARCHIVED_STATUS = 'archivé';
 const OBSOLETE_STATUS = 'périmé';
 const OPERATIVE_STATUSES = [VALIDATED_STATUS, ARCHIVED_STATUS];
-const ACCESSIBLE_STATUSES = ['OK', 'RAS'];
+const ACCESSIBLE_STATUSES = [Accessibility.RAS, Accessibility.OK];
 
 export async function get(id, { forCorrection = false } = {}) {
-  if (!config.featureToggles.useNewLearningContent) return oldChallengeRepository.get(id, { forCorrection });
   const challengeDto = await getInstance().load(id);
   if (!challengeDto) {
     throw new NotFoundError();
@@ -42,7 +41,6 @@ export async function get(id, { forCorrection = false } = {}) {
 }
 
 export async function getMany(ids, locale) {
-  if (!config.featureToggles.useNewLearningContent) return oldChallengeRepository.getMany(ids, locale);
   const challengeDtos = await getInstance().loadMany(ids);
   if (challengeDtos.some((challengeDto) => !challengeDto)) {
     throw new NotFoundError();
@@ -56,7 +54,6 @@ export async function getMany(ids, locale) {
 }
 
 export async function list(locale) {
-  if (!config.featureToggles.useNewLearningContent) return oldChallengeRepository.list(locale);
   _assertLocaleIsDefined(locale);
   const cacheKey = `list(${locale})`;
   const findByLocaleCallback = (knex) => knex.whereRaw('?=ANY(??)', [locale, 'locales']).orderBy('id');
@@ -66,7 +63,6 @@ export async function list(locale) {
 }
 
 export async function findValidated(locale) {
-  if (!config.featureToggles.useNewLearningContent) return oldChallengeRepository.findValidated(locale);
   _assertLocaleIsDefined(locale);
   const cacheKey = `findValidated(${locale})`;
   const findValidatedByLocaleCallback = (knex) =>
@@ -77,7 +73,6 @@ export async function findValidated(locale) {
 }
 
 export async function findOperative(locale) {
-  if (!config.featureToggles.useNewLearningContent) return oldChallengeRepository.findOperative(locale);
   _assertLocaleIsDefined(locale);
   const cacheKey = `findOperative(${locale})`;
   const findOperativeByLocaleCallback = (knex) =>
@@ -88,8 +83,6 @@ export async function findOperative(locale) {
 }
 
 export async function findValidatedByCompetenceId(competenceId, locale) {
-  if (!config.featureToggles.useNewLearningContent)
-    return oldChallengeRepository.findValidatedByCompetenceId(competenceId, locale);
   _assertLocaleIsDefined(locale);
   const cacheKey = `findValidatedByCompetenceId(${competenceId}, ${locale})`;
   const findValidatedByLocaleByCompetenceIdCallback = (knex) =>
@@ -100,7 +93,6 @@ export async function findValidatedByCompetenceId(competenceId, locale) {
 }
 
 export async function findOperativeBySkills(skills, locale) {
-  if (!config.featureToggles.useNewLearningContent) return oldChallengeRepository.findOperativeBySkills(skills, locale);
   _assertLocaleIsDefined(locale);
   const skillIds = skills.map((skill) => skill.id);
   const cacheKey = `findOperativeBySkillIds([${skillIds.sort()}], ${locale})`;
@@ -120,12 +112,6 @@ export async function findActiveFlashCompatible({
   successProbabilityThreshold = config.features.successProbabilityThreshold,
   accessibilityAdjustmentNeeded = false,
 } = {}) {
-  if (!config.featureToggles.useNewLearningContent)
-    return oldChallengeRepository.findActiveFlashCompatible({
-      locale,
-      successProbabilityThreshold,
-      accessibilityAdjustmentNeeded,
-    });
   _assertLocaleIsDefined(locale);
   const cacheKey = `findActiveFlashCompatible({ locale: ${locale}, accessibilityAdjustmentNeeded: ${accessibilityAdjustmentNeeded} })`;
   let findCallback;
@@ -156,8 +142,6 @@ export async function findActiveFlashCompatible({
 }
 
 export async function findFlashCompatibleWithoutLocale({ useObsoleteChallenges } = {}) {
-  if (!config.featureToggles.useNewLearningContent)
-    return oldChallengeRepository.findFlashCompatibleWithoutLocale({ useObsoleteChallenges });
   const acceptedStatuses = useObsoleteChallenges ? [OBSOLETE_STATUS, ...OPERATIVE_STATUSES] : OPERATIVE_STATUSES;
   const cacheKey = `findFlashCompatibleByStatuses({ useObsoleteChallenges: ${Boolean(useObsoleteChallenges)} })`;
   const findFlashCompatibleByStatusesCallback = (knex) =>
@@ -168,8 +152,6 @@ export async function findFlashCompatibleWithoutLocale({ useObsoleteChallenges }
 }
 
 export async function findValidatedBySkillId(skillId, locale) {
-  if (!config.featureToggles.useNewLearningContent)
-    return oldChallengeRepository.findValidatedBySkillId(skillId, locale);
   _assertLocaleIsDefined(locale);
   const cacheKey = `findValidatedBySkillId(${skillId}, ${locale})`;
   const findValidatedByLocaleBySkillIdCallback = (knex) =>
@@ -180,7 +162,6 @@ export async function findValidatedBySkillId(skillId, locale) {
 }
 
 export async function getManyTypes(ids) {
-  if (!config.featureToggles.useNewLearningContent) return oldChallengeRepository.getManyTypes(ids);
   const challengeDtos = await getInstance().loadMany(ids);
   if (challengeDtos.some((challengeDto) => !challengeDto)) {
     throw new NotFoundError();
