@@ -427,6 +427,13 @@ class LanguageNotSupportedError extends DomainError {
   }
 }
 
+class LearningContentResourceNotFound extends Error {
+  constructor({ skillId } = {}) {
+    super();
+    this.skillId = skillId;
+  }
+}
+
 class LocaleFormatError extends DomainError {
   constructor(locale) {
     super(`Given locale is in invalid format: "${locale}"`);
@@ -1097,6 +1104,7 @@ export {
   InvalidTemporaryKeyError,
   InvalidVerificationCodeError,
   LanguageNotSupportedError,
+  LearningContentResourceNotFound,
   LocaleFormatError,
   LocaleNotSupportedError,
   ManyOrganizationsFoundError,

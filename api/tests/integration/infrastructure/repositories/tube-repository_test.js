@@ -1,5 +1,5 @@
 import * as tubeRepository from '../../../../lib/infrastructure/repositories/tube-repository.js';
-import { LearningContentResourceNotFound } from '../../../../src/shared/infrastructure/datasources/learning-content/LearningContentResourceNotFound.js';
+import { LearningContentResourceNotFound } from '../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../test-helper.js';
 
 describe('Integration | Repository | tube-repository', function () {

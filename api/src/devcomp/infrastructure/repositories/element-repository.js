@@ -1,5 +1,5 @@
 import { NotFoundError } from '../../../shared/domain/errors.js';
-import { LearningContentResourceNotFound } from '../../../shared/infrastructure/datasources/learning-content/LearningContentResourceNotFound.js';
+import { LearningContentResourceNotFound } from '../../../shared/domain/errors.js';
 import { ElementForVerificationFactory } from '../factories/element-for-verification-factory.js';
 
 async function getByIdForAnswerVerification({ moduleId, elementId, moduleDatasource }) {

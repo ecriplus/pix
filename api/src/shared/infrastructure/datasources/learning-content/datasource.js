@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
 import { config } from '../../../config.js';
+import { LearningContentResourceNotFound } from '../../../domain/errors.js';
 import { LearningContentCache } from '../../caches/old/learning-content-cache.js';
 import { child, SCOPES } from '../../utils/logger.js';
-import { LearningContentResourceNotFound } from './LearningContentResourceNotFound.js';
 
 const logger = child('learningcontent:datasource:old', { event: SCOPES.LEARNING_CONTENT });
 

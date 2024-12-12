@@ -1,7 +1,7 @@
 import { knex } from '../../../db/knex-database-connection.js';
+import { LearningContentResourceNotFound } from '../../../src/shared/domain/errors.js';
 import { Tube } from '../../../src/shared/domain/models/Tube.js';
 import { getTranslatedKey } from '../../../src/shared/domain/services/get-translated-text.js';
-import { LearningContentResourceNotFound } from '../../../src/shared/infrastructure/datasources/learning-content/LearningContentResourceNotFound.js';
 import { LearningContentRepository } from '../../../src/shared/infrastructure/repositories/learning-content-repository.js';
 
 const TABLE_NAME = 'learningcontent.tubes';
