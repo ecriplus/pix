@@ -45,7 +45,7 @@ class User {
       hasBeenAnonymised,
       hasBeenAnonymisedBy,
     } = {},
-    dependencies = { config, localeService, languageService },
+    dependencies = { localeService, languageService },
   ) {
     if (locale) {
       locale = dependencies.localeService.getCanonicalLocale(locale);
@@ -86,7 +86,6 @@ class User {
     this.authenticationMethods = authenticationMethods;
     this.hasBeenAnonymised = hasBeenAnonymised;
     this.hasBeenAnonymisedBy = hasBeenAnonymisedBy;
-    this.dependencies = dependencies;
   }
 
   get shouldChangePassword() {
@@ -108,16 +107,13 @@ class User {
   get shouldSeeDataProtectionPolicyInformationBanner() {
     const isNotOrganizationLearner = this.cgu === true;
     const parsedDate = new Date(this.lastDataProtectionPolicySeenAt);
-    return (
-      dayjs(parsedDate).isBefore(dayjs(this.dependencies.config.dataProtectionPolicy.updateDate)) &&
-      isNotOrganizationLearner
-    );
+    return dayjs(parsedDate).isBefore(dayjs(config.dataProtectionPolicy.updateDate)) && isNotOrganizationLearner;
   }
 
-  setLocaleIfNotAlreadySet(newLocale) {
+  setLocaleIfNotAlreadySet(newLocale, dependencies = { localeService }) {
     this.hasBeenModified = false;
     if (newLocale && !this.locale) {
-      const canonicalLocale = this.dependencies.localeService.getCanonicalLocale(newLocale);
+      const canonicalLocale = dependencies.localeService.getCanonicalLocale(newLocale);
       this.locale = canonicalLocale;
       this.hasBeenModified = true;
     }
