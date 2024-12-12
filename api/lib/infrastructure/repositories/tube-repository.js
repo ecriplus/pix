@@ -1,16 +1,13 @@
 import { knex } from '../../../db/knex-database-connection.js';
-import { config } from '../../../src/shared/config.js';
 import { Tube } from '../../../src/shared/domain/models/Tube.js';
 import { getTranslatedKey } from '../../../src/shared/domain/services/get-translated-text.js';
 import { LearningContentResourceNotFound } from '../../../src/shared/infrastructure/datasources/learning-content/LearningContentResourceNotFound.js';
 import { LearningContentRepository } from '../../../src/shared/infrastructure/repositories/learning-content-repository.js';
-import * as oldTubeRepository from './tube-repository_old.js';
 
 const TABLE_NAME = 'learningcontent.tubes';
 const ACTIVE_STATUS = 'actif';
 
 export async function get(id) {
-  if (!config.featureToggles.useNewLearningContent) return oldTubeRepository.get(id);
   const tubeDto = await getInstance().load(id);
   if (!tubeDto) {
     throw new LearningContentResourceNotFound();
@@ -19,7 +16,6 @@ export async function get(id) {
 }
 
 export async function list() {
-  if (!config.featureToggles.useNewLearningContent) return oldTubeRepository.list();
   const cacheKey = `list()`;
   const listCallback = (knex) => knex;
   const tubeDtos = await getInstance().find(cacheKey, listCallback);
@@ -27,7 +23,6 @@ export async function list() {
 }
 
 export async function findByNames({ tubeNames, locale }) {
-  if (!config.featureToggles.useNewLearningContent) return oldTubeRepository.findByNames({ tubeNames, locale });
   if (!tubeNames) {
     return [];
   }
@@ -37,7 +32,6 @@ export async function findByNames({ tubeNames, locale }) {
 }
 
 export async function findByRecordIds(ids, locale) {
-  if (!config.featureToggles.useNewLearningContent) return oldTubeRepository.findByRecordIds(ids, locale);
   const tubeDtos = await getInstance().getMany(ids);
   return toDomainList(
     tubeDtos.filter((tubeDto) => tubeDto),
@@ -46,7 +40,6 @@ export async function findByRecordIds(ids, locale) {
 }
 
 export async function findActiveByRecordIds(ids, locale) {
-  if (!config.featureToggles.useNewLearningContent) return oldTubeRepository.findActiveByRecordIds(ids, locale);
   const activeTubeIds = await knex
     .pluck('tubeId')
     .distinct()
