@@ -10,6 +10,7 @@ import { usecases as devcompUsecases } from '../../../devcomp/domain/usecases/in
 import { Answer } from '../../../evaluation/domain/models/Answer.js';
 import { ValidatorAlwaysOK } from '../../../evaluation/domain/models/ValidatorAlwaysOK.js';
 import * as competenceEvaluationSerializer from '../../../evaluation/infrastructure/serializers/jsonapi/competence-evaluation-serializer.js';
+import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import {
   extractLocaleFromRequest,
   extractUserIdFromRequest,
@@ -98,6 +99,7 @@ const completeAssessment = async function (request) {
     const assessment = await usecases.completeAssessment({ assessmentId, locale });
     await usecases.handleBadgeAcquisition({ assessment });
     await usecases.handleStageAcquisition({ assessment });
+    if (assessment.userId) await questUsecases.rewardUser({ userId: assessment.userId });
     await devcompUsecases.handleTrainingRecommendation({ assessment, locale });
   });
 

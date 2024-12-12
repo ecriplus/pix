@@ -3,6 +3,7 @@ import { usecases } from '../../../../../lib/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
 import { usecases as certificationUsecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { usecases as devcompUsecases } from '../../../../../src/devcomp/domain/usecases/index.js';
+import { usecases as questUsecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { assessmentController } from '../../../../../src/shared/application/assessments/assessment-controller.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
@@ -74,6 +75,7 @@ describe('Unit | Controller | assessment-controller', function () {
       sinon.stub(usecases, 'handleBadgeAcquisition');
       sinon.stub(devcompUsecases, 'handleTrainingRecommendation');
       sinon.stub(usecases, 'handleStageAcquisition');
+      sinon.stub(questUsecases, 'rewardUser');
       usecases.completeAssessment.resolves(assessment);
       usecases.handleBadgeAcquisition.resolves();
       sinon.stub(events.eventDispatcher, 'dispatch');
@@ -107,6 +109,30 @@ describe('Unit | Controller | assessment-controller', function () {
         assessment,
         locale,
       });
+    });
+
+    it('should call the rewardUser use case if there is a userId', async function () {
+      // given
+      usecases.completeAssessment.resolves({ userId: 12 });
+
+      // when
+      await assessmentController.completeAssessment({ params: { id: assessmentId } });
+
+      // then
+      expect(questUsecases.rewardUser).to.have.been.calledWithExactly({
+        userId: 12,
+      });
+    });
+
+    it('should not call the rewardUser use case if there is no userId', async function () {
+      // given
+      usecases.completeAssessment.resolves({ userId: null });
+
+      // when
+      await assessmentController.completeAssessment({ params: { id: assessmentId } });
+
+      // then
+      expect(questUsecases.rewardUser).to.be.not.called;
     });
   });
 
