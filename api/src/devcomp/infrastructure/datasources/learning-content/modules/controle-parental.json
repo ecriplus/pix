@@ -412,12 +412,12 @@
               {
                 "id": "1",
                 "content": "<p>oui</p>",
-                "feedback": "<p>Bravo ! <span aria-hidden=\"true\">✨</span></p>"
+                "feedback": "<p>Bravo ! <span aria-hidden=\"true\">✨</span>Pour aller plus loin, rendez-vous sur la page <a href=\"https://e-enfance.org/informer/controle-parental/\" target=\"_blank\">Activer, installer et configurer un contrôle parental</a> de l'association e-Enfance.</p>"
               },
               {
                 "id": "2",
                 "content": "<p>non</p>",
-                "feedback": "<p>Avez-vous regardé dans les paramètres de vos appareils ?</p>"
+                "feedback": "<p>Avez-vous regardé dans les paramètres de vos appareils ? Pour aller plus loin, rendez-vous sur la page <a href=\"https://e-enfance.org/informer/controle-parental/\" target=\"_blank\">Activer, installer et configurer un contrôle parental</a> de l'association e-Enfance.</p>"
               }
             ],
             "feedbacks": {
