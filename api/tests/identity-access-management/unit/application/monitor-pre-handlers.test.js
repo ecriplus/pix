@@ -10,14 +10,19 @@ describe('Unit | Identity Access Management | Application | monitor-pre-handlers
       const grant_type = 'password';
       const scope = 'pix-app';
       const hash = generateHash(username);
-      const logger = { warn: sinon.stub() };
+      const monitoringTools = { logWarnWithCorrelationIds: sinon.stub() };
       const request = { payload: { grant_type, username, scope } };
 
       // when
-      monitorPreHandlers.monitorApiTokenRoute(request, hFake, { logger });
+      monitorPreHandlers.monitorApiTokenRoute(request, hFake, { monitoringTools });
 
       // then
-      expect(logger.warn).to.have.been.calledWith({ hash, grant_type, scope }, 'Authentication attempt');
+      expect(monitoringTools.logWarnWithCorrelationIds).to.have.been.calledWith({
+        message: 'Authentication attempt',
+        hash,
+        grant_type,
+        scope,
+      });
     });
 
     it('logs authentication attempt with grant type refresh token', async function () {
@@ -26,27 +31,35 @@ describe('Unit | Identity Access Management | Application | monitor-pre-handlers
       const grant_type = 'refresh_token';
       const scope = 'pix-app';
       const hash = generateHash(refresh_token);
-      const logger = { warn: sinon.stub() };
+      const monitoringTools = { logWarnWithCorrelationIds: sinon.stub() };
       const request = { payload: { grant_type, refresh_token, scope } };
 
       // when
-      monitorPreHandlers.monitorApiTokenRoute(request, hFake, { logger });
+      monitorPreHandlers.monitorApiTokenRoute(request, hFake, { monitoringTools });
 
       // then
-      expect(logger.warn).to.have.been.calledWith({ hash, grant_type, scope }, 'Authentication attempt');
+      expect(monitoringTools.logWarnWithCorrelationIds).to.have.been.calledWith({
+        message: 'Authentication attempt',
+        hash,
+        grant_type,
+        scope,
+      });
     });
 
     it('logs authentication attempt with grant type unknown', async function () {
       // given
       const grant_type = 'unknown';
-      const logger = { warn: sinon.stub() };
+      const monitoringTools = { logWarnWithCorrelationIds: sinon.stub() };
       const request = { payload: { foo: 'bar', grant_type } };
 
       // when
-      monitorPreHandlers.monitorApiTokenRoute(request, hFake, { logger });
+      monitorPreHandlers.monitorApiTokenRoute(request, hFake, { monitoringTools });
 
       // then
-      expect(logger.warn).to.have.been.calledWith(request.payload, 'Authentication attempt with unknown method');
+      expect(monitoringTools.logWarnWithCorrelationIds).to.have.been.calledWith({
+        message: 'Authentication attempt with unknown method',
+        ...request.payload,
+      });
     });
   });
 });
