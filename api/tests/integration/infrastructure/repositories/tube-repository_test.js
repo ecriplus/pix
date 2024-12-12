@@ -227,6 +227,20 @@ describe('Integration | Repository | tube-repository', function () {
           expect(tubes).to.deep.equal([]);
         });
       });
+
+      context('when invalid value provided for tubeNames argument', function () {
+        it('should return an empty array', async function () {
+          // when
+          const tubes1 = await tubeRepository.findByNames({ tubeNames: null });
+          const tubes2 = await tubeRepository.findByNames({ tubeNames: undefined });
+          const tubes3 = await tubeRepository.findByNames({ tubeNames: [] });
+
+          // then
+          expect(tubes1).to.deep.equal([]);
+          expect(tubes2).to.deep.equal([]);
+          expect(tubes3).to.deep.equal([]);
+        });
+      });
     });
 
     describe('#findByRecordIds', function () {
