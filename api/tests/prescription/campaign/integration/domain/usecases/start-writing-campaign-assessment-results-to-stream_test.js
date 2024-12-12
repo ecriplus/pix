@@ -1,5 +1,7 @@
 import stream from 'node:stream';
 
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc.js';
 const { PassThrough } = stream;
 
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
@@ -9,6 +11,7 @@ import { Assessment } from '../../../../../../src/shared/domain/models/Assessmen
 import { CampaignParticipationStatuses, KnowledgeElement } from '../../../../../../src/shared/domain/models/index.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { databaseBuilder, expect, mockLearningContent, streamToPromise } from '../../../../../test-helper.js';
+dayjs.extend(utc);
 
 describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-results-to-stream', function () {
   describe('#startWritingCampaignAssessmentResultsToStream', function () {
@@ -155,9 +158,9 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           `"'${organizationLearner.firstName}";` +
           `"${campaignParticipation.participantExternalId}";` +
           '1;' +
-          '2019-02-25;' +
+          `"${dayjs.utc(createdAt).format()}";` +
           '"Oui";' +
-          '2019-03-01;' +
+          `"${dayjs.utc(sharedAt).format()}";` +
           '1;' +
           '"Non";' +
           '0,67;' +
@@ -295,9 +298,9 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           `"'${organizationLearner.firstName}";` +
           `"${organizationLearner.attributes.hobby}";` +
           '1;' +
-          '2019-02-25;' +
+          `"${dayjs.utc(createdAt).format()}";` +
           '"Oui";' +
-          '2019-03-01;' +
+          `"${dayjs.utc(sharedAt).format()}";` +
           '1;' +
           '"Non";' +
           '0,67;' +
@@ -404,9 +407,9 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           `"'${organizationLearner.lastName}";` +
           `"'${organizationLearner.firstName}";` +
           '1;' +
-          '2019-02-25;' +
+          `"${dayjs.utc(createdAt).format()}";` +
           '"Oui";' +
-          '2019-03-01;' +
+          `"${dayjs.utc(sharedAt).format()}";` +
           '1;' +
           '"Non";' +
           '0,67;' +
@@ -492,7 +495,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           `"'${organizationLearner.lastName}";` +
           `"'${organizationLearner.firstName}";` +
           '0,333;' +
-          `2019-02-25;` +
+          `"${dayjs.utc(createdAt).format()}";` +
           '"Non";' +
           `"NA";` +
           '"NA";' +
@@ -630,7 +633,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           `"'${organizationLearner.lastName}";` +
           `"'${organizationLearner.firstName}";` +
           '0,667;' +
-          `2019-03-05;` +
+          `"${dayjs.utc(secondParticipationDateCreatedAt).format()}";` +
           '"Non";' +
           `"NA";` +
           '"NA";' +
@@ -655,9 +658,9 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           `"'${organizationLearner.lastName}";` +
           `"'${organizationLearner.firstName}";` +
           '1;' +
-          '2019-02-25;' +
+          `"${dayjs.utc(createdAt).format()}";` +
           '"Oui";' +
-          '2019-03-01;' +
+          `"${dayjs.utc(sharedAt).format()}";` +
           '1;' +
           '"Non";' +
           '0,67;' +

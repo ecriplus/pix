@@ -92,7 +92,7 @@ class CampaignProfilesCollectionResultLine {
 
   _getSharedAtColumn() {
     return this.campaignParticipationResult.isShared
-      ? dayjs.utc(this.campaignParticipationResult.sharedAt).format('YYYY-MM-DD')
+      ? dayjs.utc(this.campaignParticipationResult.sharedAt).format()
       : this.notShared;
   }
 

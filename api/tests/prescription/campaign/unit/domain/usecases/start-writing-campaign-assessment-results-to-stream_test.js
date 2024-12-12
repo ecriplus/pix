@@ -2,12 +2,16 @@ import stream from 'node:stream';
 
 const { PassThrough } = stream;
 
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc.js';
+
 import * as campaignCsvExportService from '../../../../../../src/prescription/campaign/domain/services/campaign-csv-export-service.js';
 import { startWritingCampaignAssessmentResultsToStream } from '../../../../../../src/prescription/campaign/domain/usecases/start-writing-campaign-assessment-results-to-stream.js';
 import { CampaignTypeError } from '../../../../../../src/shared/domain/errors.js';
 import { StageCollection } from '../../../../../../src/shared/domain/models/user-campaign-results/StageCollection.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { catchErr, domainBuilder, expect, sinon, streamToPromise } from '../../../../../test-helper.js';
+dayjs.extend(utc);
 
 describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-to-stream', function () {
   let campaignRepository,
@@ -543,6 +547,8 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
 
   it('should process result for each participation and add it to csv', async function () {
     // given
+    const createdAt = new Date('2020-01-01');
+    const sharedAt = new Date('2020-02-01');
     const { user: admin, campaign, organization } = _buildOrganizationAndUserWithMembershipAndCampaign();
     const badge = domainBuilder.buildBadge({ title: 'badge sup' });
     const targetProfile = domainBuilder.buildTargetProfile({
@@ -551,8 +557,8 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
     const learningContent = domainBuilder.buildLearningContent.withSimpleContent();
     const participantInfo = domainBuilder.buildCampaignParticipationInfo({
       campaignParticipationId: 12,
-      createdAt: new Date('2020-01-01'),
-      sharedAt: new Date('2020-02-01'),
+      createdAt,
+      sharedAt,
     });
     const knowledgeElement = domainBuilder.buildKnowledgeElement({
       status: 'validated',
@@ -611,9 +617,9 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
       `"${participantInfo.participantLastName}";` +
       `"${participantInfo.participantFirstName}";` +
       '1;' +
-      '2020-01-01;' +
+      `"${dayjs.utc(createdAt).format()}";` +
       '"Oui";' +
-      '2020-02-01;' +
+      `"${dayjs.utc(sharedAt).format()}";` +
       '"Oui";' +
       '1;' +
       '1;' +
