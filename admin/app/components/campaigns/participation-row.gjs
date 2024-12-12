@@ -53,9 +53,13 @@ export default class ParticipationRow extends Component {
   <template>
     <td>{{@participation.firstName}} {{@participation.lastName}}</td>
     <td>
-      <LinkTo @route="authenticated.users.get" @model={{@participation.userId}}>
+      {{#if @participation.userId}}
+        <LinkTo @route="authenticated.users.get" @model={{@participation.userId}}>
+          {{@participation.userFullName}}
+        </LinkTo>
+      {{else}}
         {{@participation.userFullName}}
-      </LinkTo>
+      {{/if}}
     </td>
     {{#if @idPixLabel}}
       <td class="table__column table__column--break-word">

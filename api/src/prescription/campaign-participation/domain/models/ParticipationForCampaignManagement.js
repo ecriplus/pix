@@ -19,7 +19,11 @@ class ParticipationForCampaignManagement {
     this.lastName = lastName;
     this.firstName = firstName;
     this.userId = userId;
-    this.userFullName = userFirstName + ' ' + userLastName;
+    if (userFirstName && userLastName) {
+      this.userFullName = `${userFirstName} ${userLastName}`;
+    } else {
+      this.userFullName = '(Anonymised)';
+    }
     this.participantExternalId = participantExternalId;
     this.status = status;
     this.createdAt = createdAt;

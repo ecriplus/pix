@@ -31,13 +31,13 @@ const findPaginatedParticipationsForCampaignManagement = async function ({ campa
       deletedByFirstName: 'deletedByUsers.firstName',
       deletedByLastName: 'deletedByUsers.lastName',
     })
-    .join(
+    .leftJoin(
       'view-active-organization-learners',
       'view-active-organization-learners.id',
       'campaign-participations.organizationLearnerId',
     )
     .leftJoin('users as deletedByUsers', 'deletedByUsers.id', 'campaign-participations.deletedBy')
-    .innerJoin('users', 'users.id', 'campaign-participations.userId')
+    .leftJoin('users', 'users.id', 'campaign-participations.userId')
     .where('campaignId', campaignId)
     .orderBy(['lastName', 'firstName'], ['asc', 'asc']);
 
