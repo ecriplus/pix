@@ -1,16 +1,13 @@
-import { config } from '../../config.js';
 import { PIX_ORIGIN } from '../../domain/constants.js';
 import { NotFoundError } from '../../domain/errors.js';
 import { Area } from '../../domain/models/Area.js';
 import { getTranslatedKey } from '../../domain/services/get-translated-text.js';
-import * as oldAreaRepository from './area-repository_old.js';
 import * as competenceRepository from './competence-repository.js';
 import { LearningContentRepository } from './learning-content-repository.js';
 
 const TABLE_NAME = 'learningcontent.areas';
 
 export async function list({ locale } = {}) {
-  if (!config.featureToggles.useNewLearningContent) return oldAreaRepository.list({ locale });
   const cacheKey = 'list()';
   const listCallback = (knex) => knex.orderBy('id');
   const areaDtos = await getInstance().find(cacheKey, listCallback);
@@ -18,7 +15,6 @@ export async function list({ locale } = {}) {
 }
 
 export async function listWithPixCompetencesOnly({ locale } = {}) {
-  if (!config.featureToggles.useNewLearningContent) return oldAreaRepository.listWithPixCompetencesOnly({ locale });
   const cacheKey = 'listWithPixCompetencesOnly()';
   const listPixAreasCallback = (knex) =>
     knex
@@ -30,8 +26,6 @@ export async function listWithPixCompetencesOnly({ locale } = {}) {
 }
 
 export async function findByFrameworkIdWithCompetences({ frameworkId, locale }) {
-  if (!config.featureToggles.useNewLearningContent)
-    return oldAreaRepository.findByFrameworkIdWithCompetences({ frameworkId, locale });
   const cacheKey = `findByFrameworkIdWithCompetences({ frameworkId: ${frameworkId} })`;
   const findAreasByFrameworkIdCallback = (knex) => knex.where('frameworkId', frameworkId).orderBy('id');
   const areaDtos = await getInstance().find(cacheKey, findAreasByFrameworkIdCallback);
@@ -39,7 +33,6 @@ export async function findByFrameworkIdWithCompetences({ frameworkId, locale }) 
 }
 
 export async function findByFrameworkId({ frameworkId, locale }) {
-  if (!config.featureToggles.useNewLearningContent) return oldAreaRepository.findByFrameworkId({ frameworkId, locale });
   const cacheKey = `findByFrameworkId({ frameworkId: ${frameworkId} })`;
   const findAreasByFrameworkIdCallback = (knex) => knex.where('frameworkId', frameworkId).orderBy('id');
   const areaDtos = await getInstance().find(cacheKey, findAreasByFrameworkIdCallback);
@@ -47,7 +40,6 @@ export async function findByFrameworkId({ frameworkId, locale }) {
 }
 
 export async function findByRecordIds({ areaIds, locale }) {
-  if (!config.featureToggles.useNewLearningContent) return oldAreaRepository.findByRecordIds({ areaIds, locale });
   const areaDtos = await getInstance().getMany(areaIds);
   return areaDtos
     .filter((areaDto) => areaDto)
@@ -56,7 +48,6 @@ export async function findByRecordIds({ areaIds, locale }) {
 }
 
 export async function getAreaCodeByCompetenceId(competenceId) {
-  if (!config.featureToggles.useNewLearningContent) return oldAreaRepository.getAreaCodeByCompetenceId(competenceId);
   const cacheKey = `getAreaCodeByCompetenceId(${competenceId})`;
   const findByCompetenceIdCallback = (knex) => knex.whereRaw('?=ANY(??)', [competenceId, 'competenceIds']).limit(1);
   const [areaDto] = await getInstance().find(cacheKey, findByCompetenceIdCallback);
@@ -64,7 +55,6 @@ export async function getAreaCodeByCompetenceId(competenceId) {
 }
 
 export async function get({ id, locale }) {
-  if (!config.featureToggles.useNewLearningContent) return oldAreaRepository.get({ id, locale });
   const areaDto = await getInstance().load(id);
   if (!areaDto) {
     throw new NotFoundError(`Area "${id}" not found.`);
