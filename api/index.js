@@ -16,14 +16,6 @@ import { redisMonitor } from './src/shared/infrastructure/utils/redis-monitor.js
 let server;
 
 async function _setupEcosystem() {
-  if (!config.featureToggles.useNewLearningContent) {
-    /*
-      Load learning content from Redis to memory cache can take some time
-      Hence, we force this loading before the server starts so the requests can
-      immediately be responded.
-    */
-    await usecases.initLearningContentCache();
-  }
   /*
     First connection with Knex requires infrastructure operations such as
     DNS resolution. So we execute one harmless query to our database
