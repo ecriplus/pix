@@ -1,4 +1,4 @@
-import * as sessionSummarySerializer from '../../../../lib/infrastructure/serializers/jsonapi/session-summary-serializer.js';
+import * as sessionSummarySerializer from '../infrastructure/serializers/session-summary-serializer.js';
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 
 const findPaginatedSessionSummaries = async function (request) {
@@ -16,7 +16,7 @@ const findPaginatedSessionSummaries = async function (request) {
 };
 
 const certificationCenterController = {
-  findPaginatedSessionSummaries
+  findPaginatedSessionSummaries,
 };
 
 export { certificationCenterController };
