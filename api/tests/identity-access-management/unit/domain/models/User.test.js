@@ -1,18 +1,15 @@
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
+import { config } from '../../../../../src/shared/config.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | Model | User', function () {
-  let config;
   let languageService;
   let localeService;
   let dependencies;
 
   beforeEach(function () {
-    config = {
-      dataProtectionPolicy: {
-        updateDate: '2020-01-01',
-      },
-    };
+    sinon.stub(config.dataProtectionPolicy, 'updateDate').value('2020-01-01');
+
     languageService = {
       assertLanguageAvailability: sinon.stub(),
       LANGUAGES_CODE: { FRENCH: 'fr' },
@@ -20,7 +17,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
     localeService = {
       getCanonicalLocale: sinon.stub(),
     };
-    dependencies = { config, localeService, languageService };
+    dependencies = { localeService, languageService };
   });
 
   describe('constructor', function () {
@@ -110,7 +107,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       const user = new User(undefined, dependencies);
 
       // when
-      user.setLocaleIfNotAlreadySet(null);
+      user.setLocaleIfNotAlreadySet(null, { localeService });
 
       // then
       expect(localeService.getCanonicalLocale).to.not.have.been.called;
@@ -125,7 +122,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
         localeService.getCanonicalLocale.returns('fr-FR');
 
         // when
-        user.setLocaleIfNotAlreadySet('fr-fr');
+        user.setLocaleIfNotAlreadySet('fr-fr', { localeService });
 
         // then
         expect(localeService.getCanonicalLocale).to.have.been.calledWithExactly('fr-fr');
