@@ -967,10 +967,10 @@
         "details": {
           "button-label": "Voir la fiche mission",
           "competence": {
-            "title": "Compétence :"
+            "title": "Compétence du CRCN travaillée :"
           },
           "objective": {
-            "title": "Objectifs :"
+            "title": "Objectifs de la mission :"
           }
         },
         "table": {

@@ -31,38 +31,40 @@ export default class MissionDetails extends Component {
         <h1 class="mission-header-informations__title">
           {{@mission.name}}
         </h1>
-        <div class="mission-header-informations__details">
-          <p class="competence-title">
-            {{t "pages.missions.mission.details.competence.title"}}
-          </p>
-          <p class="competence-name">
-            {{@mission.competenceName}}
-          </p>
-          {{#if @mission.documentationUrl}}
-            <PixButtonLink
-              class="mission-header-informations__documentation-button"
-              @href={{@mission.documentationUrl}}
-              target="_blank "
-            >
-              {{t "pages.missions.mission.details.button-label"}}</PixButtonLink>
-          {{/if}}
-        </div>
-      </div>
-
-      <div class="mission-header-objectives">
-        {{#if this.displayObjectives}}
-          <h2>
-            {{t "pages.missions.mission.details.objective.title"}}
-          </h2>
-          <ul class="mission-header-objectives__list">
-            {{#each this.displayObjectives as |objective|}}
-              <li>
-                {{objective}}
-              </li>
-            {{/each}}
-          </ul>
+        {{#if @mission.documentationUrl}}
+          <PixButtonLink
+            class="mission-header-informations__documentation-button"
+            @href={{@mission.documentationUrl}}
+            target="_blank "
+          >
+            {{t "pages.missions.mission.details.button-label"}}</PixButtonLink>
         {{/if}}
       </div>
+
+      <section class="mission-header-objectives">
+        <div>
+          {{#if this.displayObjectives}}
+            <h2>
+              {{t "pages.missions.mission.details.objective.title"}}
+            </h2>
+            <ul class="mission-header-objectives__list">
+              {{#each this.displayObjectives as |objective|}}
+                <li>
+                  {{objective}}
+                </li>
+              {{/each}}
+            </ul>
+          {{/if}}
+        </div>
+        <div class="mission-header-objectives__competence">
+          <h2>
+            {{t "pages.missions.mission.details.competence.title"}}
+          </h2>
+          <p>
+            {{@mission.competenceName}}
+          </p>
+        </div>
+      </section>
     </header>
   </template>
 }
