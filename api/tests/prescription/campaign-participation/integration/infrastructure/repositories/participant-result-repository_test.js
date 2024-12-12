@@ -105,6 +105,7 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
         userId,
         campaignId,
         sharedAt: new Date('2020-01-02'),
+        status: CampaignParticipationStatuses.SHARED,
       });
 
       databaseBuilder.factory.buildAssessment({
@@ -146,6 +147,7 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
           userId,
           campaignId,
           sharedAt: new Date('2020-01-02'),
+          status: CampaignParticipationStatuses.SHARED,
           masteryRate: 0.4,
         });
         databaseBuilder.factory.buildAssessment({ campaignParticipationId, userId });
@@ -176,6 +178,7 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
           userId,
           campaignId,
           masteryRate: 0.4,
+          status: CampaignParticipationStatuses.SHARED,
           sharedAt: new Date('2020-01-02'),
         });
         databaseBuilder.factory.buildAssessment({ campaignParticipationId, userId });
@@ -445,6 +448,7 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
         userId,
         campaignId,
         sharedAt: new Date('2020-01-02'),
+        status: CampaignParticipationStatuses.SHARED,
       });
 
       databaseBuilder.factory.buildAssessment({ campaignParticipationId, userId, state: 'completed' });
@@ -498,6 +502,7 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
         userId,
         campaignId,
         sharedAt: new Date('2020-01-02'),
+        status: CampaignParticipationStatuses.SHARED,
       });
 
       databaseBuilder.factory.buildAssessment({ campaignParticipationId, userId, state: 'completed' });
@@ -551,6 +556,7 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
           userId,
           campaignId,
           sharedAt: new Date('2020-01-02'),
+          status: CampaignParticipationStatuses.SHARED,
         });
 
         databaseBuilder.factory.buildAssessment({ campaignParticipationId, userId, state: 'completed' });
@@ -800,6 +806,7 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
           userId,
           campaignId,
           sharedAt: new Date('2020-01-02'),
+          status: CampaignParticipationStatuses.SHARED,
         });
 
         const badges = [
@@ -872,11 +879,13 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
           userId,
           campaignId,
           sharedAt: new Date('2020-01-02'),
+          status: CampaignParticipationStatuses.SHARED,
         });
         const { id: otherCampaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation({
           userId,
           campaignId: otherCampaignId,
           sharedAt: new Date('2020-01-02'),
+          status: CampaignParticipationStatuses.SHARED,
         });
 
         const badges = [
@@ -978,6 +987,7 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
         const { id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation({
           userId,
           campaignId,
+          status: CampaignParticipationStatuses.SHARED,
           sharedAt: new Date('2020-01-02'),
           masteryRate: 0.6,
         });

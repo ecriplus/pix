@@ -1,5 +1,8 @@
 import * as serializer from '../../../../../../../src/prescription/campaign-participation/infrastructure/serializers/jsonapi/participant-result-serializer.js';
-import { KnowledgeElement } from '../../../../../../../src/shared/domain/models/index.js';
+import {
+  CampaignParticipationStatuses,
+  KnowledgeElement,
+} from '../../../../../../../src/shared/domain/models/index.js';
 import { AssessmentResult } from '../../../../../../../src/shared/domain/read-models/participant-results/AssessmentResult.js';
 import { domainBuilder, expect } from '../../../../../../test-helper.js';
 
@@ -29,6 +32,7 @@ describe('Unit | Serializer | JSON API | participant-result-serializer', functio
         campaignParticipationId: 1,
         isCompleted: true,
         sharedAt: new Date('2020-01-01'),
+        status: CampaignParticipationStatuses.SHARED,
         knowledgeElements: knowledgeElements,
         acquiredBadgeIds: [3],
         participantExternalId: 'greg@lafleche.fr',

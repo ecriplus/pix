@@ -6,6 +6,7 @@ import {
   MINIMUM_DELAY_IN_DAYS_BEFORE_IMPROVING,
   MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING,
 } from '../../constants.js';
+import { CampaignParticipationStatuses } from '../../models/index.js';
 import { BadgeResult } from './BadgeResult.js';
 import { CompetenceResult } from './CompetenceResult.js';
 
@@ -27,7 +28,7 @@ class AssessmentResult {
 
     this.id = participationResults.campaignParticipationId;
     this.isCompleted = participationResults.isCompleted;
-    this.isShared = Boolean(participationResults.sharedAt);
+    this.isShared = participationResults.status === CampaignParticipationStatuses.SHARED;
     this.participantExternalId = participationResults.participantExternalId;
     this.totalSkillsCount = competences.flatMap(({ targetedSkillIds }) => targetedSkillIds).length;
     this.testedSkillsCount = knowledgeElements.length;
@@ -71,6 +72,7 @@ class AssessmentResult {
       isOrganizationLearnerActive,
       this.masteryRate,
       this.isDisabled,
+      this.isShared,
     );
     this.canReset = this._computeCanReset({
       isTargetProfileResetAllowed,
@@ -78,6 +80,7 @@ class AssessmentResult {
       isOrganizationLearnerActive,
       isDisabled: this.isDisabled,
       sharedAt,
+      isShared: this.isShared,
     });
 
     if (flashScoringResults) {
@@ -118,8 +121,16 @@ class AssessmentResult {
     return isImprovementPossible && !isShared;
   }
 
-  _computeCanRetry(isCampaignMultipleSendings, sharedAt, isOrganizationLearnerActive, masteryRate, isDisabled) {
+  _computeCanRetry(
+    isCampaignMultipleSendings,
+    sharedAt,
+    isOrganizationLearnerActive,
+    masteryRate,
+    isDisabled,
+    isShared,
+  ) {
     return (
+      isShared &&
       isCampaignMultipleSendings &&
       this._timeBeforeRetryingPassed(sharedAt) &&
       masteryRate < MAX_MASTERY_RATE &&
@@ -133,9 +144,11 @@ class AssessmentResult {
     isOrganizationLearnerActive,
     isCampaignMultipleSendings,
     isDisabled,
+    isShared,
     sharedAt,
   }) {
     return (
+      isShared &&
       isTargetProfileResetAllowed &&
       isOrganizationLearnerActive &&
       isCampaignMultipleSendings &&
@@ -149,8 +162,6 @@ class AssessmentResult {
   }
 
   _timeBeforeRetryingPassed(sharedAt) {
-    const isShared = Boolean(sharedAt);
-    if (!isShared) return false;
     return sharedAt && dayjs().diff(sharedAt, 'days', true) >= MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING;
   }
 }
