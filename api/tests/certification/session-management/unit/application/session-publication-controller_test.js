@@ -40,4 +40,39 @@ describe('Certification | Session-management | Unit | Application | Controller |
       expect(response).to.equal(serializedSession);
     });
   });
+
+  describe('#unpublish', function () {
+    it('should return the serialized session', async function () {
+      // given
+      const sessionId = 123;
+      const session = Symbol('session');
+      const serializedSession = Symbol('serializedSession');
+      const sessionManagementSerializer = { serialize: sinon.stub() };
+
+      sinon
+        .stub(usecases, 'unpublishSession')
+        .withArgs({
+          sessionId,
+        })
+        .resolves(session);
+      sessionManagementSerializer.serialize.withArgs({ session }).resolves(serializedSession);
+
+      // when
+      const response = await sessionPublicationController.unpublish(
+        {
+          params: {
+            sessionId,
+          },
+          payload: {
+            data: { attributes: { toPublish: false } },
+          },
+        },
+        hFake,
+        { sessionManagementSerializer },
+      );
+
+      // then
+      expect(response).to.equal(serializedSession);
+    });
+  });
 });

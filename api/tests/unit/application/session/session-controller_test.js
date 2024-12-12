@@ -51,43 +51,6 @@ describe('Unit | Controller | sessionController', function () {
     });
   });
 
-  describe('#publish / #unpublish', function () {
-    context('when unpublishing', function () {
-      it('should return the serialized session', async function () {
-        // given
-        const sessionId = 123;
-        const session = Symbol('session');
-        const serializedSession = Symbol('serializedSession');
-        const sessionManagementSerializer = { serialize: sinon.stub() };
-
-        sinon
-          .stub(usecases, 'unpublishSession')
-          .withArgs({
-            sessionId,
-          })
-          .resolves(session);
-        sessionManagementSerializer.serialize.withArgs({ session }).resolves(serializedSession);
-
-        // when
-        const response = await sessionController.unpublish(
-          {
-            params: {
-              id: sessionId,
-            },
-            payload: {
-              data: { attributes: { toPublish: false } },
-            },
-          },
-          hFake,
-          { sessionManagementSerializer },
-        );
-
-        // then
-        expect(response).to.equal(serializedSession);
-      });
-    });
-  });
-
   describe('#publishInBatch', function () {
     it('returns 204 when no error occurred', async function () {
       // given

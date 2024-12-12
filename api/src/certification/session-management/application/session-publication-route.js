@@ -34,6 +34,34 @@ const register = async function (server) {
         tags: ['api', 'session', 'publication'],
       },
     },
+    {
+      method: 'PATCH',
+      path: '/api/admin/sessions/{sessionId}/unpublish',
+      config: {
+        validate: {
+          params: Joi.object({
+            sessionId: identifiersType.sessionId,
+          }),
+        },
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: sessionPublicationController.unpublish,
+        notes: [
+          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
+            "- Dépublie toutes les certifications courses d'une session",
+        ],
+        tags: ['api', 'session', 'publication'],
+      },
+    },
   ]);
 };
 

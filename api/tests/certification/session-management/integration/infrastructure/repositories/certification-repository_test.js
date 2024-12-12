@@ -2,7 +2,7 @@ import * as certificationRepository from '../../../../../../src/certification/se
 import { AssessmentResult, status } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
-describe('Integration | Repository | Certification', function () {
+describe('Certification | Session-management | Integration | Infrastructure | Repositories | Certification', function () {
   describe('#getStatusesBySessionId', function () {
     it('should get status information', async function () {
       // given
@@ -80,7 +80,8 @@ describe('Integration | Repository | Certification', function () {
           // then
           const certifications = await knex('certification-courses')
             .select('id', 'isPublished', 'updatedAt', 'version')
-            .where({ sessionId });
+            .where({ sessionId })
+            .orderBy('id');
           expect(certifications).to.deep.equal([
             {
               id: 1,
@@ -105,8 +106,38 @@ describe('Integration | Repository | Certification', function () {
       },
     );
   });
+
+  describe('#unpublishCertificationCoursesBySessionId', function () {
+    const sessionId = 200;
+
+    beforeEach(function () {
+      databaseBuilder.factory.buildSession({ id: sessionId });
+      _buildValidatedCertification({ id: 1, sessionId, isPublished: true });
+      _buildRejectedCertification({ id: 2, sessionId, isPublished: true });
+      _buildCancelledCertification({ id: 3, sessionId, isPublished: true });
+      _buildErrorCertification({ id: 4, sessionId, isPublished: true });
+      _buildStartedCertification({ id: 5, sessionId, isPublished: true });
+      return databaseBuilder.commit();
+    });
+
+    it('should unpublish all certifications within a session and erase pixCertificationStatus', async function () {
+      // when
+      await certificationRepository.unpublishCertificationCoursesBySessionId({ sessionId });
+
+      // then
+      const isPublishedStates = await knex('certification-courses').pluck('isPublished').where({ sessionId });
+      expect(isPublishedStates).to.deep.equal([false, false, false, false, false]);
+    });
+  });
 });
 
+function _buildErrorCertification({ id, sessionId, isPublished }) {
+  _buildCertification({ id, sessionId, isPublished, status: status.ERROR });
+}
+
+function _buildStartedCertification({ id, sessionId, isPublished }) {
+  _buildCertification({ id, sessionId, isPublished, status: null });
+}
 function _buildValidatedCertification({ id, sessionId, isPublished }) {
   _buildCertification({ id, sessionId, isPublished, status: status.VALIDATED });
 }
