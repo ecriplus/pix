@@ -1,5 +1,5 @@
-import { copyTargetProfileBadges } from '../../../../lib/domain/usecases/copy-target-profile-badges.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { copyTargetProfileBadges } from '../../../../../src/evaluation/domain/usecases/copy-target-profile-badges.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | copy-badges', function () {
   let badgeRepositoryStub;

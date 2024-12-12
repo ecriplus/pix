@@ -1,7 +1,7 @@
-import { copyTargetProfileStages } from '../../../../lib/domain/usecases/copy-target-profile-stages.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { copyTargetProfileStages } from '../../../../../src/evaluation/domain/usecases/copy-target-profile-stages.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | copy-stages', function () {
+describe('Evaluation | Unit | Domain | UseCase | copy-stages', function () {
   let stageRepositoryStub;
 
   beforeEach(function () {
