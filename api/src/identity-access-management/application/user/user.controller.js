@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import * as localeService from '../../../shared/domain/services/locale-service.js';
 import * as userSerializer from '../../../shared/infrastructure/serializers/jsonapi/user-serializer.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
@@ -246,7 +245,7 @@ const rememberUserHasSeenChallengeTooltip = async function (request, h, dependen
   const authenticatedUserId = request.auth.credentials.userId;
   const challengeType = request.params.challengeType;
 
-  const updatedUser = await libUsecases.rememberUserHasSeenChallengeTooltip({
+  const updatedUser = await usecases.rememberUserHasSeenChallengeTooltip({
     userId: authenticatedUserId,
     challengeType,
   });
