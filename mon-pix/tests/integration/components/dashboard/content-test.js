@@ -5,33 +5,28 @@ import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 
+import { stubCurrentUserService } from '../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Dashboard | Content', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   const pixScore = 105;
-  let store;
-
-  hooks.beforeEach(function () {
-    store = this.owner.lookup('service:store');
-  });
 
   test('should render component', async function (assert) {
     // given
-    class CurrentUserStub extends Service {
-      user = store.createRecord('user', {
+    stubCurrentUserService(
+      this.owner,
+      {
         firstName: 'Banana',
         lastName: 'Split',
         email: 'banana.split@example.net',
-        profile: store.createRecord('profile', {
-          pixScore,
-        }),
         hasSeenNewDashboardInfo: false,
-      });
-    }
+        profile: { pixScore },
+      },
+      { withStoreStubbed: false },
+    );
 
-    this.owner.register('service:currentUser', CurrentUserStub);
     this.set('model', {
       campaignParticipationOverviews: [],
       campaignParticipations: [],
@@ -47,19 +42,17 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
 
   module('campaign-participation-overview rendering', function (hooks) {
     hooks.beforeEach(function () {
-      class CurrentUserStub extends Service {
-        user = store.createRecord('user', {
+      stubCurrentUserService(
+        this.owner,
+        {
           firstName: 'Banana',
           lastName: 'Split',
           email: 'banana.split@example.net',
-          profile: store.createRecord('profile', {
-            pixScore,
-          }),
           hasSeenNewDashboardInfo: false,
-        });
-      }
-
-      this.owner.register('service:currentUser', CurrentUserStub);
+          profile: { pixScore },
+        },
+        { withStoreStubbed: false },
+      );
     });
 
     test('should render campaign participation when there is at least one campaign participation overviews', async function (assert) {
@@ -104,19 +97,17 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
 
   module('recommended competence-card rendering', function (hooks) {
     hooks.beforeEach(function () {
-      class CurrentUserStub extends Service {
-        user = store.createRecord('user', {
+      stubCurrentUserService(
+        this.owner,
+        {
           firstName: 'Banana',
           lastName: 'Split',
           email: 'banana.split@example.net',
-          profile: store.createRecord('profile', {
-            pixScore,
-          }),
           hasSeenNewDashboardInfo: false,
-        });
-      }
-
-      this.owner.register('service:currentUser', CurrentUserStub);
+          profile: { pixScore },
+        },
+        { withStoreStubbed: false },
+      );
     });
 
     test('should render competence-card when there is at least one competence-card not started', async function (assert) {
@@ -188,19 +179,17 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
 
   module('improvable competence-card rendering', function (hooks) {
     hooks.beforeEach(function () {
-      class CurrentUserStub extends Service {
-        user = store.createRecord('user', {
+      stubCurrentUserService(
+        this.owner,
+        {
           firstName: 'Banana',
           lastName: 'Split',
           email: 'banana.split@example.net',
-          profile: store.createRecord('profile', {
-            pixScore,
-          }),
           hasSeenNewDashboardInfo: false,
-        });
-      }
-
-      this.owner.register('service:currentUser', CurrentUserStub);
+          profile: { pixScore },
+        },
+        { withStoreStubbed: false },
+      );
     });
 
     test('should render competence-card when there is at least one competence-card not started', async function (assert) {
@@ -272,19 +261,17 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
 
   module('started competence-card rendering', function (hooks) {
     hooks.beforeEach(function () {
-      class CurrentUserStub extends Service {
-        user = store.createRecord('user', {
+      stubCurrentUserService(
+        this.owner,
+        {
           firstName: 'Banana',
           lastName: 'Split',
           email: 'banana.split@example.net',
-          profile: store.createRecord('profile', {
-            pixScore,
-          }),
           hasSeenNewDashboardInfo: false,
-        });
-      }
-
-      this.owner.register('service:currentUser', CurrentUserStub);
+          profile: { pixScore },
+        },
+        { withStoreStubbed: false },
+      );
     });
 
     test('should render competence-card when there is at least one competence-card started', async function (assert) {
@@ -360,19 +347,18 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
   module('new dashboard info rendering', function () {
     test('should display NewInformation on dashboard if user has not close it before', async function (assert) {
       // given
-      class CurrentUserStub extends Service {
-        user = store.createRecord('user', {
+      stubCurrentUserService(
+        this.owner,
+        {
           firstName: 'Banana',
           lastName: 'Split',
           email: 'banana.split@example.net',
-          profile: store.createRecord('profile', {
-            pixScore,
-          }),
           hasSeenNewDashboardInfo: false,
-        });
-      }
+          profile: { pixScore },
+        },
+        { withStoreStubbed: false },
+      );
 
-      this.owner.register('service:currentUser', CurrentUserStub);
       this.set('model', {
         campaignParticipationOverviews: [],
         campaignParticipations: [],
@@ -388,19 +374,18 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
 
     test('should not display NewInformation on dashboard if user has close it before', async function (assert) {
       // given
-      class HasSeenNewDashboardInformationCurrentUserStub extends Service {
-        user = store.createRecord('user', {
+      stubCurrentUserService(
+        this.owner,
+        {
           firstName: 'Banana',
           lastName: 'Split',
           email: 'banana.split@example.net',
-          profile: store.createRecord('profile', {
-            pixScore,
-          }),
           hasSeenNewDashboardInfo: true,
-        });
-      }
+          profile: { pixScore },
+        },
+        { withStoreStubbed: false },
+      );
 
-      this.owner.register('service:currentUser', HasSeenNewDashboardInformationCurrentUserStub);
       this.set('model', {
         campaignParticipationOverviews: [],
         campaignParticipations: [],
@@ -424,19 +409,18 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
         }
       }
 
-      class CurrentUserStub extends Service {
-        user = store.createRecord('user', {
+      stubCurrentUserService(
+        this.owner,
+        {
           firstName: 'Banana',
           lastName: 'Split',
           email: 'banana.split@example.net',
-          profile: store.createRecord('profile', {
-            pixScore,
-          }),
           hasSeenNewDashboardInfo: false,
-        });
-      }
+          profile: { pixScore },
+        },
+        { withStoreStubbed: false },
+      );
 
-      this.owner.register('service:currentUser', CurrentUserStub);
       this.owner.register('service:currentDomain', CurrentDomainServiceStub);
       this.set('model', {
         campaignParticipationOverviews: [],
@@ -460,19 +444,19 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
           return false;
         }
       }
-      class CurrentUserStub extends Service {
-        user = store.createRecord('user', {
+
+      stubCurrentUserService(
+        this.owner,
+        {
           firstName: 'Banana',
           lastName: 'Split',
           email: 'banana.split@example.net',
-          profile: store.createRecord('profile', {
-            pixScore,
-          }),
           hasSeenNewDashboardInfo: false,
-        });
-      }
+          profile: { pixScore },
+        },
+        { withStoreStubbed: false },
+      );
 
-      this.owner.register('service:currentUser', CurrentUserStub);
       this.owner.register('service:currentDomain', CurrentDomainServiceStub);
       this.set('model', {
         campaignParticipationOverviews: [],
@@ -492,19 +476,18 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
   module('empty dashboard info rendering', function () {
     test('should display Empty Dashboard Information if user has nothing to do', async function (assert) {
       // given
-      class CurrentUserStub extends Service {
-        user = store.createRecord('user', {
+      stubCurrentUserService(
+        this.owner,
+        {
           firstName: 'Banana',
           lastName: 'Split',
           email: 'banana.split@example.net',
-          profile: store.createRecord('profile', {
-            pixScore,
-          }),
           hasSeenNewDashboardInfo: false,
-        });
-      }
+          profile: { pixScore },
+        },
+        { withStoreStubbed: false },
+      );
 
-      this.owner.register('service:currentUser', CurrentUserStub);
       this.set('model', {
         campaignParticipationOverviews: [],
         campaignParticipations: [],
@@ -522,19 +505,18 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
 
     test('should not display Empty Dashboard Information on dashboard if user has competence to continue', async function (assert) {
       // given
-      class HasSeenNewDashboardInformationCurrentUserStub extends Service {
-        user = store.createRecord('user', {
+      stubCurrentUserService(
+        this.owner,
+        {
           firstName: 'Banana',
           lastName: 'Split',
           email: 'banana.split@example.net',
-          profile: store.createRecord('profile', {
-            pixScore,
-          }),
           hasSeenNewDashboardInfo: true,
-        });
-      }
+          profile: { pixScore },
+        },
+        { withStoreStubbed: false },
+      );
 
-      this.owner.register('service:currentUser', HasSeenNewDashboardInformationCurrentUserStub);
       this.set('model', {
         campaignParticipationOverviews: [],
         campaignParticipations: [],
@@ -560,19 +542,18 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
   module('user pix score rendering', function () {
     test('should display user score', async function (assert) {
       // given
-      class CurrentUserStub extends Service {
-        user = store.createRecord('user', {
+      stubCurrentUserService(
+        this.owner,
+        {
           firstName: 'Banana',
           lastName: 'Split',
           email: 'banana.split@example.net',
-          profile: store.createRecord('profile', {
-            pixScore,
-          }),
           hasSeenNewDashboardInfo: false,
-        });
-      }
+          profile: { pixScore },
+        },
+        { withStoreStubbed: false },
+      );
 
-      this.owner.register('service:currentUser', CurrentUserStub);
       this.set('model', {
         campaignParticipationOverviews: [],
         campaignParticipations: [],
@@ -591,20 +572,19 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
   module('participation to a profile collection campaign to resume', function () {
     test('should display the banner to resume participation', async function (assert) {
       // given
-      class CurrentUserWithCodeStub extends Service {
-        user = store.createRecord('user', {
+      stubCurrentUserService(
+        this.owner,
+        {
           firstName: 'Banana',
           lastName: 'Split',
           email: 'banana.split@example.net',
-          profile: store.createRecord('profile', {
-            pixScore,
-          }),
           hasSeenNewDashboardInfo: false,
           codeForLastProfileToShare: 'SNAP1234',
-        });
-      }
+          profile: { pixScore },
+        },
+        { withStoreStubbed: false },
+      );
 
-      this.owner.register('service:currentUser', CurrentUserWithCodeStub);
       this.set('model', {
         campaignParticipationOverviews: [],
         campaignParticipations: [],
@@ -620,19 +600,18 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
 
     test('should not display the banner when there is no code', async function (assert) {
       // given
-      class CurrentUserStub extends Service {
-        user = store.createRecord('user', {
+      stubCurrentUserService(
+        this.owner,
+        {
           firstName: 'Banana',
           lastName: 'Split',
           email: 'banana.split@example.net',
-          profile: store.createRecord('profile', {
-            pixScore,
-          }),
           hasSeenNewDashboardInfo: false,
-        });
-      }
+          profile: { pixScore },
+        },
+        { withStoreStubbed: false },
+      );
 
-      this.owner.register('service:currentUser', CurrentUserStub);
       this.set('model', {
         campaignParticipationOverviews: [],
         campaignParticipations: [],

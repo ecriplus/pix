@@ -5,6 +5,7 @@ import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubCurrentUserService } from '../../../../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../../../../helpers/setup-intl-rendering';
 
 module('Integration | Components | Campaigns | Assessment | Evaluation Results Tabs | Trainings', function (hooks) {
@@ -87,7 +88,7 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
       let adapter, storeService;
 
       hooks.beforeEach(function () {
-        sinon.stub(this.owner.lookup('service:currentUser'), 'user').value({ id: 1 });
+        stubCurrentUserService(this.owner, { id: 1 });
 
         storeService = this.owner.lookup('service:store');
         adapter = storeService.adapterFor('campaign-participation-result');

@@ -6,6 +6,7 @@ import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubCurrentUserService } from '../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | campaign-start-block', function (hooks) {
@@ -44,15 +45,7 @@ module('Integration | Component | campaign-start-block', function (hooks) {
     let session;
 
     hooks.beforeEach(function () {
-      class currentUser extends Service {
-        user = {
-          firstName: 'Izuku',
-          lastName: 'Midorya',
-          isAnonymous: false,
-        };
-      }
-
-      this.owner.register('service:currentUser', currentUser);
+      stubCurrentUserService(this.owner, { firstName: 'Izuku', lastName: 'Midorya' });
 
       class SessionStub extends Service {
         isAuthenticated = true;
@@ -187,15 +180,7 @@ module('Integration | Component | campaign-start-block', function (hooks) {
 
   module('When the user is not authenticated', function (hooks) {
     hooks.beforeEach(function () {
-      class currentUser extends Service {
-        user = {
-          firstName: 'Izuku',
-          lastName: 'Midorya',
-          isAnonymous: false,
-        };
-      }
-
-      this.owner.register('service:currentUser', currentUser);
+      stubCurrentUserService(this.owner, { firstName: 'Izuku', lastName: 'Midorya' });
 
       class SessionStub extends Service {
         isAuthenticated = false;
@@ -273,15 +258,7 @@ module('Integration | Component | campaign-start-block', function (hooks) {
 
   module('When the user has isAnonymous', function (hooks) {
     hooks.beforeEach(function () {
-      class currentUser extends Service {
-        user = {
-          firstName: 'Izuku',
-          lastName: 'Midorya',
-          isAnonymous: true,
-        };
-      }
-
-      this.owner.register('service:currentUser', currentUser);
+      stubCurrentUserService(this.owner, { firstName: 'Izuku', lastName: 'Midorya', isAnonymous: true });
 
       class SessionStub extends Service {
         isAuthenticated = true;

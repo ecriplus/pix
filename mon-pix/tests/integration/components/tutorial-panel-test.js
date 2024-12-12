@@ -1,10 +1,10 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 // eslint-disable-next-line no-restricted-imports
 import { find } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 
+import { stubCurrentUserService } from '../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Tutorial Panel', function (hooks) {
@@ -47,14 +47,7 @@ module('Integration | Component | Tutorial Panel', function (hooks) {
       module('when the user is logged in', function () {
         test('should render the tutorial with actions', async function (assert) {
           // given
-          class CurrentUserStub extends Service {
-            user = {
-              firstName: 'Banana',
-              email: 'banana.split@example.net',
-              fullName: 'Banana Split',
-            };
-          }
-          this.owner.register('service:currentUser', CurrentUserStub);
+          stubCurrentUserService(this.owner, { firstName: 'Banana', lastName: 'Split' });
 
           // when
           await render(hbs`<TutorialPanel @hint={{this.hint}} @tutorials={{this.tutorials}} />`);
@@ -73,10 +66,7 @@ module('Integration | Component | Tutorial Panel', function (hooks) {
       module('when the user is not logged in', function () {
         test('should render the tutorial without actions', async function (assert) {
           // given
-          class CurrentUserStub extends Service {
-            user = null;
-          }
-          this.owner.register('service:currentUser', CurrentUserStub);
+          stubCurrentUserService(this.owner, { isAuthenticated: false });
 
           // when
           await render(hbs`<TutorialPanel @hint={{this.hint}} @tutorials={{this.tutorials}} />`);

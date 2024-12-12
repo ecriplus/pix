@@ -1,5 +1,4 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { setLocale, t } from 'ember-intl/test-support';
 import ENV from 'mon-pix/config/environment';
@@ -7,6 +6,7 @@ import PixWindow from 'mon-pix/utils/pix-window';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubCurrentUserService, stubSessionService } from '../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | data-protection-policy-information-banner', function (hooks) {
@@ -19,7 +19,7 @@ module('Integration | Component | data-protection-policy-information-banner', fu
   module('when user is not logged in', function () {
     test('does not display the data protection policy banner', async function (assert) {
       // given
-      _userIsNotLoggedIn(this);
+      stubSessionService(this.owner, { isAuthenticated: false });
 
       // when
       const screen = await render(hbs`<DataProtectionPolicyInformationBanner />`);
@@ -36,12 +36,16 @@ module('Integration | Component | data-protection-policy-information-banner', fu
     });
   });
 
-  module('when user is logged in', function () {
+  module('when user is logged in', function (hooks) {
+    hooks.beforeEach(function () {
+      stubSessionService(this.owner, { isAuthenticated: true });
+    });
+
     module('when communication banner is displayed', function () {
       test('does not display the data protection policy banner', async function (assert) {
         // given
         _communicationBannerIsDisplayed();
-        _userShouldSeeTheDataProtectionPolicyUpdateInformation(this);
+        stubCurrentUserService(this.owner, { shouldSeeDataProtectionPolicyInformationBanner: true });
 
         // when
         const screen = await render(hbs`<DataProtectionPolicyInformationBanner />`);
@@ -63,7 +67,7 @@ module('Integration | Component | data-protection-policy-information-banner', fu
         test('does not display the data protection policy banner', async function (assert) {
           // given
           _communicationBannerIsNotDisplayed();
-          _userShouldNotSeeTheDataProtectionPolicyUpdateInformation(this);
+          stubCurrentUserService(this.owner, { shouldSeeDataProtectionPolicyInformationBanner: false });
 
           // when
           const screen = await render(hbs`<DataProtectionPolicyInformationBanner />`);
@@ -83,9 +87,9 @@ module('Integration | Component | data-protection-policy-information-banner', fu
       module('when user has not seen and accepted the data protection policy update information', function () {
         test('displays the data protection policy banner', async function (assert) {
           // given
+          stubCurrentUserService(this.owner, { shouldSeeDataProtectionPolicyInformationBanner: true });
           _stubWindowLocationHostname('pix.fr');
           _communicationBannerIsNotDisplayed();
-          _userShouldSeeTheDataProtectionPolicyUpdateInformation(this);
 
           // when
           const screen = await render(hbs`<DataProtectionPolicyInformationBanner />`);
@@ -108,10 +112,10 @@ module('Integration | Component | data-protection-policy-information-banner', fu
           module('when user language is "en"', function () {
             test('displays the data protection policy banner in english', async function (assert) {
               // given
+              stubCurrentUserService(this.owner, { shouldSeeDataProtectionPolicyInformationBanner: true });
               _stubWindowLocationHostname('pix.org');
-              setLocale('en');
               _communicationBannerIsNotDisplayed();
-              _userShouldSeeTheDataProtectionPolicyUpdateInformation(this);
+              setLocale('en');
 
               // when
               const screen = await render(hbs`<DataProtectionPolicyInformationBanner />`);
@@ -133,10 +137,10 @@ module('Integration | Component | data-protection-policy-information-banner', fu
           module('when user language is "nl"', function () {
             test('displays the data protection policy banner in dutch', async function (assert) {
               // given
+              stubCurrentUserService(this.owner, { shouldSeeDataProtectionPolicyInformationBanner: true });
               _stubWindowLocationHostname('pix.org');
-              setLocale('nl');
               _communicationBannerIsNotDisplayed();
-              _userShouldSeeTheDataProtectionPolicyUpdateInformation(this);
+              setLocale('nl');
 
               // when
               const screen = await render(hbs`<DataProtectionPolicyInformationBanner />`);
@@ -158,13 +162,6 @@ module('Integration | Component | data-protection-policy-information-banner', fu
   });
 });
 
-function _userIsNotLoggedIn(component) {
-  class CurrentUserStub extends Service {
-    user = undefined;
-  }
-  component.owner.register('service:currentUser', CurrentUserStub);
-}
-
 function _communicationBannerIsDisplayed() {
   ENV.APP.BANNER_CONTENT = 'information banner text ...';
   ENV.APP.BANNER_TYPE = 'error';
@@ -173,24 +170,6 @@ function _communicationBannerIsDisplayed() {
 function _communicationBannerIsNotDisplayed() {
   ENV.APP.BANNER_CONTENT = undefined;
   ENV.APP.BANNER_TYPE = undefined;
-}
-
-function _userShouldSeeTheDataProtectionPolicyUpdateInformation(component) {
-  _stubUserWithShouldSeeTheDataProtectionPolicyUpdateInformationAs(true, component);
-}
-
-function _userShouldNotSeeTheDataProtectionPolicyUpdateInformation(component) {
-  _stubUserWithShouldSeeTheDataProtectionPolicyUpdateInformationAs(false, component);
-}
-
-function _stubUserWithShouldSeeTheDataProtectionPolicyUpdateInformationAs(shouldSeeValue, component) {
-  const store = component.owner.lookup('service:store');
-  class CurrentUserStub extends Service {
-    user = store.createRecord('user', {
-      shouldSeeDataProtectionPolicyInformationBanner: shouldSeeValue,
-    });
-  }
-  component.owner.register('service:currentUser', CurrentUserStub);
 }
 
 function _stubWindowLocationHostname(hostname) {

@@ -5,6 +5,7 @@ import { t } from 'ember-intl/test-support';
 import { setBreakpoint } from 'ember-responsive/test-support';
 import { module, test } from 'qunit';
 
+import { stubCurrentUserService } from '../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | navbar-mobile-header', function (hooks) {
@@ -44,10 +45,7 @@ module('Integration | Component | navbar-mobile-header', function (hooks) {
         isAuthenticated = true;
       }
       this.owner.register('service:session', SessionStub);
-      class CurrentUserStub extends Service {
-        user = { fullName: 'John Doe' };
-      }
-      this.owner.register('service:currentUser', CurrentUserStub);
+      stubCurrentUserService(this.owner, { firstName: 'John', lastName: 'Doe' });
       setBreakpoint('tablet');
     });
 

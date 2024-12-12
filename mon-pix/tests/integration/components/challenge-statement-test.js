@@ -7,6 +7,7 @@ import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubCurrentUserService } from '../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | ChallengeStatement', function (hooks) {
@@ -25,14 +26,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
   }
 
   hooks.beforeEach(function () {
-    class currentUser extends Service {
-      user = {
-        hasSeenFocusedChallengeTooltip: false,
-      };
-    }
-
-    this.owner.unregister('service:currentUser');
-    this.owner.register('service:currentUser', currentUser);
+    stubCurrentUserService(this.owner);
   });
 
   /*

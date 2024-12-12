@@ -1,11 +1,11 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubCurrentUserService } from '../../../../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../../../../helpers/setup-intl-rendering';
 
 module('Integration | Components | Campaigns | Assessment | Results | Evaluation Results Hero', function (hooks) {
@@ -16,13 +16,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
     hooks.beforeEach(async function () {
       // given
-      class currentUserService extends Service {
-        user = {
-          firstName: 'Hermione',
-        };
-      }
-
-      this.owner.register('service:currentUser', currentUserService);
+      stubCurrentUserService(this.owner, { firstName: 'Hermione' });
 
       this.set('campaign', { organizationId: 1 });
       this.set('campaignParticipationResult', { masteryRate: 0.755 });
@@ -331,10 +325,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       module('when user is anonymous', function () {
         test('it should display only a connection link', async function (assert) {
           // given
-          class currentUserService extends Service {
-            user = { isAnonymous: true };
-          }
-          this.owner.register('service:current-user', currentUserService);
+          stubCurrentUserService(this.owner, { isAnonymous: true });
 
           this.set('campaign', { hasCustomResultPageButton: false });
           this.set('campaignParticipationResult', { masteryRate: 0.75 });
@@ -360,12 +351,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       module('when user is connected', function () {
         test('it should display only a connection link', async function (assert) {
           // given
-          class currentUserService extends Service {
-            user = {
-              firstName: 'Hermione',
-            };
-          }
-          this.owner.register('service:currentUser', currentUserService);
+          stubCurrentUserService(this.owner, { firstName: 'Hermione' });
 
           this.set('campaign', { hasCustomResultPageButton: false });
           this.set('campaignParticipationResult', { masteryRate: 0.75 });

@@ -1,9 +1,9 @@
 import { render as renderScreen } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 
+import { stubCurrentUserService } from '../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Certifications | CertificationEnder', function (hooks) {
@@ -32,13 +32,7 @@ module('Integration | Component | Certifications | CertificationEnder', function
 
   test('should display the current user name', async function (assert) {
     // given
-    class currentUser extends Service {
-      user = {
-        fullName: 'Jim Halpert',
-      };
-    }
-
-    this.owner.register('service:currentUser', currentUser);
+    stubCurrentUserService(this.owner, { firstName: 'Jim', lastName: 'Halpert' });
 
     // when
     const screen = await renderScreen(
@@ -62,13 +56,7 @@ module('Integration | Component | Certifications | CertificationEnder', function
   module('when the assessment status is not ended by supervisor', function () {
     test('should not display the ended by supervisor text', async function (assert) {
       // given
-      class currentUser extends Service {
-        user = {
-          fullName: 'Jim Halpert',
-        };
-      }
-
-      this.owner.register('service:currentUser', currentUser);
+      stubCurrentUserService(this.owner, { firstName: 'Jim', lastName: 'Halpert' });
 
       // when
       const screen = await renderScreen(
@@ -83,13 +71,7 @@ module('Integration | Component | Certifications | CertificationEnder', function
   module('when the assessment status is ended by supervisor', function () {
     test('should display the ended by supervisor text', async function (assert) {
       // given
-      class currentUser extends Service {
-        user = {
-          fullName: 'Jim Halpert',
-        };
-      }
-
-      this.owner.register('service:currentUser', currentUser);
+      stubCurrentUserService(this.owner, { firstName: 'Jim', lastName: 'Halpert' });
 
       // when
       const screen = await renderScreen(
@@ -104,13 +86,7 @@ module('Integration | Component | Certifications | CertificationEnder', function
   module('when the assessment status is ended by finalization', function () {
     test('should display the ended by finalization text', async function (assert) {
       // given
-      class currentUser extends Service {
-        user = {
-          fullName: 'Jim Halpert',
-        };
-      }
-
-      this.owner.register('service:currentUser', currentUser);
+      stubCurrentUserService(this.owner, { firstName: 'Jim', lastName: 'Halpert' });
 
       // when
       const screen = await renderScreen(hbs`<Certifications::CertificationEnder
