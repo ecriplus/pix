@@ -7,30 +7,18 @@ import get from 'lodash/get';
 import ConfirmPopup from '../confirm-popup';
 import AuthenticationMethod from './user-detail-personal-information/authentication-method';
 
-const typesLabel = {
-  EMAIL: 'Adresse e-mail',
-  USERNAME: 'Identifiant',
-  POLE_EMPLOI: 'France Travail',
-  GAR: 'Médiacentre',
-  CNAV: 'CNAV',
-  FWB: 'Fédération Wallonie-Bruxelles',
-  PAYSDELALOIRE: 'Pays de la Loire',
-};
-
 export default class UserDetailAuthenticationMethodsComponent extends Component {
   @tracked displayRemoveAuthenticationMethodModal = false;
   @tracked isLoading = false;
   @tracked authenticationMethodType = null;
-
+  @tracked authenticationMethod = null;
+  @tracked authenticationMethodName = null;
   @service pixToast;
 
-  get translatedType() {
-    return typesLabel[this.authenticationMethodType];
-  }
-
   @action
-  toggleDisplayRemoveAuthenticationMethodModal(type) {
-    this.authenticationMethodType = type;
+  toggleDisplayRemoveAuthenticationMethodModal(authenticationMethod) {
+    this.authenticationMethodType = authenticationMethod.code;
+    this.authenticationMethodName = authenticationMethod.name;
     this.displayRemoveAuthenticationMethodModal = !this.displayRemoveAuthenticationMethodModal;
   }
 
@@ -47,7 +35,7 @@ export default class UserDetailAuthenticationMethodsComponent extends Component 
       this.pixToast.sendErrorNotification({ message: errorMessage });
     } finally {
       this.isLoading = false;
-      this.toggleDisplayRemoveAuthenticationMethodModal(null);
+      this.displayRemoveAuthenticationMethodModal = false;
     }
   }
 
@@ -62,7 +50,7 @@ export default class UserDetailAuthenticationMethodsComponent extends Component 
     </section>
 
     <ConfirmPopup
-      @message="Suppression de la méthode de connexion suivante : {{this.translatedType}}"
+      @message="Suppression de la méthode de connexion suivante : {{this.authenticationMethodName}}"
       @title="Confirmer la suppression"
       @submitTitle="Oui, je supprime"
       @confirm={{this.removeAuthenticationMethod}}

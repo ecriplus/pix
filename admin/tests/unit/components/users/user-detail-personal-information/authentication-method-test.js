@@ -23,8 +23,8 @@ module('Unit | Component | users | user-detail-personal-information/authenticati
       component.targetUserId = '12';
       component.showReassignOidcAuthenticationMethodModal = true;
       const oidcAuthenticationMethod = {
-        code: 'CNAV',
-        name: 'CNAV',
+        code: 'OIDC_EXAMPLE_NET',
+        name: 'OIDC Example',
         userHasThisOidcAuthenticationMethod: true,
         canBeRemovedFromUserAuthenticationMethods: true,
         canBeReassignedToAnotherUser: true,

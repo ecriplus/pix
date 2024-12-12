@@ -8,13 +8,6 @@ export default class UserAuthenticationMethodsController extends Controller {
 
   ERROR_MESSAGES = {
     DEFAULT: 'Une erreur est survenue.',
-    STATUS_422: {
-      POLE_EMPLOI: "L'utilisateur a déjà une méthode de connexion France Travail.",
-      GAR: "L'utilisateur a déjà une méthode de connexion Médiacentre.",
-      CNAV: "L'utilisateur a déjà une méthode de connexion CNAV.",
-      FWB: "L'utilisateur a déjà une méthode de connexion Fédération Wallonie-Bruxelles.",
-      PAYSDELALOIRE: "L'utilisateur a déjà une méthode de connexion Pays de la Loire.",
-    },
     STATUS_400: 'Cette requête est impossible',
     STATUS_404: "Cet utilisateur n'existe pas.",
   };
@@ -47,20 +40,19 @@ export default class UserAuthenticationMethodsController extends Controller {
         },
       });
       this.pixToast.sendSuccessNotification({
-        message: `La méthode de connexion a bien été déplacé vers l'utilisateur ${targetUserId}`,
+        message: `La méthode de connexion a bien été déplacée vers l'utilisateur ${targetUserId}`,
       });
       this.pixToast.sendSuccessNotification({
         message: `L'utilisateur n'a plus de méthode de connexion ${reassignedAuthenticationMethodLabel}`,
       });
     } catch (errors) {
       authenticationMethod.rollbackAttributes();
-      this._handleResponseError(errors, identityProvider);
+      this._handleResponseError(errors, reassignedAuthenticationMethodLabel);
     }
   }
 
-  _handleResponseError(errorResponse, identityProvider) {
+  _handleResponseError(errorResponse, authenticationMethodLabel) {
     const { errors } = errorResponse;
-
     if (errors) {
       errors.map((error) => {
         switch (error.status) {
@@ -71,7 +63,9 @@ export default class UserAuthenticationMethodsController extends Controller {
             this.pixToast.sendErrorNotification({ message: this.ERROR_MESSAGES.STATUS_404 });
             break;
           case '422':
-            this.pixToast.sendErrorNotification({ message: this.ERROR_MESSAGES.STATUS_422[identityProvider] });
+            this.pixToast.sendErrorNotification({
+              message: `L'utilisateur a déjà une méthode de connexion ${authenticationMethodLabel}`,
+            });
             break;
           default:
             this.pixToast.sendErrorNotification({ message: this.ERROR_MESSAGES.DEFAULT });

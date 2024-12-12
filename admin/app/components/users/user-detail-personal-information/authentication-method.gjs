@@ -84,6 +84,15 @@ export default class AuthenticationMethod extends Component {
     return userAuthenticationMethods.length > 1 || (userAuthenticationMethods.length === 1 && hasUsername && hasEmail);
   }
 
+  get emailAuthenticationMethod() {
+    return { code: 'EMAIL', name: 'Adresse e-mail' };
+  }
+  get userNameAuthenticationMethod() {
+    return { code: 'USERNAME', name: 'Identifiant' };
+  }
+  get garAuthenticationMethod() {
+    return { code: 'GAR', name: 'Médiacentre' };
+  }
   get userOidcAuthenticationMethods() {
     return this.oidcIdentityProviders.list.map((oidcIdentityProvider) => {
       const userHasThisOidcAuthenticationMethod = this.authenticationMethods.any(
@@ -237,7 +246,7 @@ export default class AuthenticationMethod extends Component {
                   class="user-authentication-method__remove-button"
                   @size="small"
                   @variant="error"
-                  @triggerAction={{fn @toggleDisplayRemoveAuthenticationMethodModal "EMAIL"}}
+                  @triggerAction={{fn @toggleDisplayRemoveAuthenticationMethodModal this.emailAuthenticationMethod}}
                 >Supprimer</PixButton>
               {{/if}}
               {{#if this.isAllowedToAddEmailAuthenticationMethod}}
@@ -273,7 +282,7 @@ export default class AuthenticationMethod extends Component {
                   class="user-authentication-method__remove-button"
                   @size="small"
                   @variant="error"
-                  @triggerAction={{fn @toggleDisplayRemoveAuthenticationMethodModal "USERNAME"}}
+                  @triggerAction={{fn @toggleDisplayRemoveAuthenticationMethodModal this.userNameAuthenticationMethod}}
                 >Supprimer</PixButton>
               {{/if}}
             {{/if}}
@@ -304,7 +313,7 @@ export default class AuthenticationMethod extends Component {
                   <PixButton
                     @size="small"
                     @variant="error"
-                    @triggerAction={{fn @toggleDisplayRemoveAuthenticationMethodModal "GAR"}}
+                    @triggerAction={{fn @toggleDisplayRemoveAuthenticationMethodModal this.garAuthenticationMethod}}
                   >Supprimer</PixButton>
                 {{/if}}
                 {{#if this.hasGarAuthenticationMethod}}
@@ -343,10 +352,7 @@ export default class AuthenticationMethod extends Component {
                       class="user-authentication-method__remove-button"
                       @size="small"
                       @variant="error"
-                      @triggerAction={{fn
-                        @toggleDisplayRemoveAuthenticationMethodModal
-                        userOidcAuthenticationMethod.code
-                      }}
+                      @triggerAction={{fn @toggleDisplayRemoveAuthenticationMethodModal userOidcAuthenticationMethod}}
                     >Supprimer</PixButton>
                   {{/if}}
                   {{#if userOidcAuthenticationMethod.canBeReassignedToAnotherUser}}
