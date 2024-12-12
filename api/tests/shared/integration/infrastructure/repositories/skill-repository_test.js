@@ -617,6 +617,20 @@ describe('Integration | Repository | skill-repository', function () {
           ]);
         });
       });
+
+      context('when invalid value given for ids argument', function () {
+        it('should return an empty array', async function () {
+          // when
+          const skills1 = await skillRepository.findOperativeByIds(null);
+          const skills2 = await skillRepository.findOperativeByIds(undefined);
+          const skills3 = await skillRepository.findOperativeByIds([]);
+
+          // then
+          expect(skills1).to.deep.equal([]);
+          expect(skills2).to.deep.equal([]);
+          expect(skills3).to.deep.equal([]);
+        });
+      });
     });
 
     describe('#get', function () {
@@ -761,6 +775,20 @@ describe('Integration | Repository | skill-repository', function () {
           ]);
         });
       });
+
+      context('when invalid value given for ids argument', function () {
+        it('should return an empty array', async function () {
+          // when
+          const skills1 = await skillRepository.findActiveByRecordIds(null);
+          const skills2 = await skillRepository.findActiveByRecordIds(undefined);
+          const skills3 = await skillRepository.findActiveByRecordIds([]);
+
+          // then
+          expect(skills1).to.deep.equal([]);
+          expect(skills2).to.deep.equal([]);
+          expect(skills3).to.deep.equal([]);
+        });
+      });
     });
 
     describe('#findByRecordIds', function () {
@@ -844,6 +872,20 @@ describe('Integration | Repository | skill-repository', function () {
               hint: skillData03_tubeBcompetenceA_actif.hint_i18n.fr,
             }),
           ]);
+        });
+      });
+
+      context('when invalid value given for ids argument', function () {
+        it('should return an empty array', async function () {
+          // when
+          const skills1 = await skillRepository.findByRecordIds(null);
+          const skills2 = await skillRepository.findByRecordIds(undefined);
+          const skills3 = await skillRepository.findByRecordIds([]);
+
+          // then
+          expect(skills1).to.deep.equal([]);
+          expect(skills2).to.deep.equal([]);
+          expect(skills3).to.deep.equal([]);
         });
       });
     });
