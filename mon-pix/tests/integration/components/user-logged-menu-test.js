@@ -1,10 +1,10 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click, triggerKeyEvent } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 
+import { stubCurrentUserService } from '../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | user logged menu', function (hooks) {
@@ -13,14 +13,7 @@ module('Integration | Component | user logged menu', function (hooks) {
   module('when rendering for logged user', function (hooks) {
     hooks.beforeEach(async function () {
       // given
-      class currentUserService extends Service {
-        user = {
-          firstName: 'Hermione',
-          fullName: 'Hermione Granger',
-        };
-      }
-
-      this.owner.register('service:currentUser', currentUserService);
+      stubCurrentUserService(this.owner, { firstName: 'Hermione', lastName: 'Granger' });
     });
 
     test('should display logged user name with a11y guidance', async function (assert) {
@@ -177,14 +170,12 @@ module('Integration | Component | user logged menu', function (hooks) {
     module('Link to "My tests"', function () {
       module('when user has at least one participation', function (hooks) {
         hooks.beforeEach(function () {
-          class currentUserService extends Service {
-            user = {
-              firstName: 'Hermione',
-              hasAssessmentParticipations: true,
-            };
-          }
-          this.owner.unregister('service:currentUser');
-          this.owner.register('service:currentUser', currentUserService);
+          stubCurrentUserService(this.owner, {
+            id: 456,
+            firstName: 'Hermione',
+            lastName: 'Granger',
+            hasAssessmentParticipations: true,
+          });
         });
 
         test('should display link to user tests', async function (assert) {
@@ -220,10 +211,7 @@ module('Integration | Component | user logged menu', function (hooks) {
 
   module('when user is unlogged or not found', function (hooks) {
     hooks.beforeEach(function () {
-      class currentUserService extends Service {
-        user = null;
-      }
-      this.owner.register('service:currentUser', currentUserService);
+      stubCurrentUserService(this.owner, { isAuthenticated: false });
     });
 
     test('should not display user information, for unlogged', async function (assert) {

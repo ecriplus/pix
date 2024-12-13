@@ -1,11 +1,11 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubCurrentUserService, stubSessionService } from '../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | campaign-start-block', function (hooks) {
@@ -44,23 +44,9 @@ module('Integration | Component | campaign-start-block', function (hooks) {
     let session;
 
     hooks.beforeEach(function () {
-      class currentUser extends Service {
-        user = {
-          firstName: 'Izuku',
-          lastName: 'Midorya',
-          isAnonymous: false,
-        };
-      }
+      stubCurrentUserService(this.owner, { firstName: 'Izuku', lastName: 'Midorya' });
+      session = stubSessionService(this.owner, { isAuthenticated: true });
 
-      this.owner.register('service:currentUser', currentUser);
-
-      class SessionStub extends Service {
-        isAuthenticated = true;
-        invalidate = sinon.stub();
-      }
-
-      this.owner.register('service:session', SessionStub);
-      session = this.owner.lookup('service:session', SessionStub);
       this.set('campaign', {});
       this.set('startCampaignParticipation', sinon.stub());
     });
@@ -187,22 +173,8 @@ module('Integration | Component | campaign-start-block', function (hooks) {
 
   module('When the user is not authenticated', function (hooks) {
     hooks.beforeEach(function () {
-      class currentUser extends Service {
-        user = {
-          firstName: 'Izuku',
-          lastName: 'Midorya',
-          isAnonymous: false,
-        };
-      }
-
-      this.owner.register('service:currentUser', currentUser);
-
-      class SessionStub extends Service {
-        isAuthenticated = false;
-        invalidate = sinon.stub();
-      }
-
-      this.owner.register('service:session', SessionStub);
+      stubCurrentUserService(this.owner, { firstName: 'Izuku', lastName: 'Midorya' });
+      stubSessionService(this.owner, { isAuthenticated: false });
       this.set('campaign', {});
       this.set('startCampaignParticipation', sinon.stub());
     });
@@ -273,22 +245,9 @@ module('Integration | Component | campaign-start-block', function (hooks) {
 
   module('When the user has isAnonymous', function (hooks) {
     hooks.beforeEach(function () {
-      class currentUser extends Service {
-        user = {
-          firstName: 'Izuku',
-          lastName: 'Midorya',
-          isAnonymous: true,
-        };
-      }
+      stubCurrentUserService(this.owner, { isAnonymous: true });
+      stubSessionService(this.owner, { isAuthenticated: true });
 
-      this.owner.register('service:currentUser', currentUser);
-
-      class SessionStub extends Service {
-        isAuthenticated = true;
-        invalidate = sinon.stub();
-      }
-
-      this.owner.register('service:session', SessionStub);
       this.set('campaign', {});
       this.set('startCampaignParticipation', sinon.stub());
     });

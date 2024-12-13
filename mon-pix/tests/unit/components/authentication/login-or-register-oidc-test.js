@@ -5,6 +5,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import createGlimmerComponent from '../../../helpers/create-glimmer-component';
+import { stubSessionService } from '../../../helpers/service-stubs.js';
 import setupIntl from '../../../helpers/setup-intl';
 
 module('Unit | Component | authentication | login-or-register-oidc', function (hooks) {
@@ -16,13 +17,8 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
       test('creates session', async function (assert) {
         // given
         const component = createGlimmerComponent('authentication/login-or-register-oidc');
-        const authenticateStub = sinon.stub();
+        const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
 
-        class SessionStub extends Service {
-          authenticate = authenticateStub;
-        }
-
-        this.owner.register('service:session', SessionStub);
         component.args.identityProviderSlug = 'super-idp';
         component.args.authenticationKey = 'super-key';
         component.isTermsOfServiceValidated = true;
@@ -31,7 +27,7 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
         await component.register();
 
         // then
-        sinon.assert.calledWith(authenticateStub, 'authenticator:oidc', {
+        sinon.assert.calledWith(sessionService.authenticate, 'authenticator:oidc', {
           authenticationKey: 'super-key',
           identityProviderSlug: 'super-idp',
           hostSlug: 'users',
@@ -45,13 +41,10 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
         test('displays error', async function (assert) {
           // given
           const component = createGlimmerComponent('authentication/login-or-register-oidc');
-          const authenticateStub = sinon.stub().rejects({ errors: [{ status: '401' }] });
 
-          class SessionStub extends Service {
-            authenticate = authenticateStub;
-          }
+          const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+          sessionService.authenticate.rejects({ errors: [{ status: '401' }] });
 
-          this.owner.register('service:session', SessionStub);
           component.args.identityProviderSlug = 'super-idp';
           component.args.authenticationKey = 'super-key';
           component.isTermsOfServiceValidated = true;
@@ -86,15 +79,12 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
           test('it displays the invalid locale error message', async function (assert) {
             // given
             const component = createGlimmerComponent('authentication/login-or-register-oidc');
-            const authenticateStub = sinon
-              .stub()
-              .rejects({ errors: [{ status: '400', code: 'INVALID_LOCALE_FORMAT', meta: { locale: 'zzzz' } }] });
 
-            class SessionStub extends Service {
-              authenticate = authenticateStub;
-            }
+            const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+            sessionService.authenticate.rejects({
+              errors: [{ status: '400', code: 'INVALID_LOCALE_FORMAT', meta: { locale: 'zzzz' } }],
+            });
 
-            this.owner.register('service:session', SessionStub);
             component.args.identityProviderSlug = 'super-idp';
             component.args.authenticationKey = 'super-key';
             component.isTermsOfServiceValidated = true;
@@ -114,15 +104,12 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
           test('it displays the unsupported locale error message', async function (assert) {
             // given
             const component = createGlimmerComponent('authentication/login-or-register-oidc');
-            const authenticateStub = sinon
-              .stub()
-              .rejects({ errors: [{ status: '400', code: 'LOCALE_NOT_SUPPORTED', meta: { locale: 'jp' } }] });
 
-            class SessionStub extends Service {
-              authenticate = authenticateStub;
-            }
+            const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+            sessionService.authenticate.rejects({
+              errors: [{ status: '400', code: 'LOCALE_NOT_SUPPORTED', meta: { locale: 'jp' } }],
+            });
 
-            this.owner.register('service:session', SessionStub);
             component.args.identityProviderSlug = 'super-idp';
             component.args.authenticationKey = 'super-key';
             component.isTermsOfServiceValidated = true;
@@ -142,13 +129,9 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
       test('displays error message with details', async function (assert) {
         // given
         const component = createGlimmerComponent('authentication/login-or-register-oidc');
-        const authenticateStub = sinon.stub().rejects({ errors: [{ status: '500', detail: 'some detail' }] });
+        const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+        sessionService.authenticate.rejects({ errors: [{ status: '500', detail: 'some detail' }] });
 
-        class SessionStub extends Service {
-          authenticate = authenticateStub;
-        }
-
-        this.owner.register('service:session', SessionStub);
         component.args.identityProviderSlug = 'super-idp';
         component.args.authenticationKey = 'super-key';
         component.isTermsOfServiceValidated = true;
@@ -163,13 +146,9 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
       test('displays default error message', async function (assert) {
         // given
         const component = createGlimmerComponent('authentication/login-or-register-oidc');
-        const authenticateStub = sinon.stub().rejects({ errors: [{ status: '500' }] });
+        const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+        sessionService.authenticate.rejects({ errors: [{ status: '500' }] });
 
-        class SessionStub extends Service {
-          authenticate = authenticateStub;
-        }
-
-        this.owner.register('service:session', SessionStub);
         component.args.identityProviderSlug = 'super-idp';
         component.args.authenticationKey = 'super-key';
         component.isTermsOfServiceValidated = true;
@@ -188,15 +167,12 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
         // given
         let inflightLoading;
         const component = createGlimmerComponent('authentication/login-or-register-oidc');
-        const authenticateStub = function () {
+        const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+        sessionService.authenticate = function () {
           inflightLoading = component.isRegisterLoading;
           return Promise.resolve();
         };
-        class SessionStub extends Service {
-          authenticate = authenticateStub;
-        }
 
-        this.owner.register('service:session', SessionStub);
         component.args.identityProviderSlug = 'super-idp';
         component.args.authenticationKey = 'super-key';
         component.isTermsOfServiceValidated = true;

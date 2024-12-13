@@ -5,6 +5,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import createGlimmerComponent from '../../helpers/create-glimmer-component';
+import { stubSessionService } from '../../helpers/service-stubs.js';
 import setupIntl from '../../helpers/setup-intl';
 
 module('Unit | Component | register-form', function (hooks) {
@@ -144,6 +145,7 @@ module('Unit | Component | register-form', function (hooks) {
     module('completes successfully', function () {
       test('registers and authenticates user with username', async function (assert) {
         // given
+        const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
         const eventStub = { preventDefault: sinon.stub() };
         const store = this.owner.lookup('service:store');
         const createdDependentUser = store.createRecord('dependent-user', {
@@ -156,18 +158,11 @@ module('Unit | Component | register-form', function (hooks) {
         component.password = 'Password12345!';
         component.username = 'lilicoptere0205';
 
-        const authenticateStub = sinon.stub();
-
-        class SessionStub extends Service {
-          authenticate = authenticateStub;
-        }
-        this.owner.register('service:session', SessionStub);
-
         // when
         await component.register(eventStub);
 
         // then
-        sinon.assert.calledWith(authenticateStub, 'authenticator:oauth2', {
+        sinon.assert.calledWith(sessionService.authenticate, 'authenticator:oauth2', {
           login: component.username,
           password: component.password,
           scope: 'mon-pix',
@@ -185,6 +180,7 @@ module('Unit | Component | register-form', function (hooks) {
     module('completes with error', function () {
       test('displays error message', async function (assert) {
         // given
+        const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
         const eventStub = { preventDefault: sinon.stub() };
         const store = this.owner.lookup('service:store');
         const createdDependentUser = store.createRecord('dependent-user', {
@@ -199,18 +195,11 @@ module('Unit | Component | register-form', function (hooks) {
         component.password = 'Password12345!';
         component.username = 'lilicoptere0205';
 
-        const authenticateStub = sinon.stub();
-
-        class SessionStub extends Service {
-          authenticate = authenticateStub;
-        }
-        this.owner.register('service:session', SessionStub);
-
         // when
         await component.register(eventStub);
 
         // then
-        sinon.assert.notCalled(authenticateStub);
+        sinon.assert.notCalled(sessionService.authenticate);
 
         assert.false(component.isCreationFormNotValid);
         assert.false(component.isLoading);
@@ -235,15 +224,11 @@ module('Unit | Component | register-form', function (hooks) {
         component.password = 'Password12345!';
         component.username = 'lilicoptere0205';
 
-        const authenticateStub = function () {
+        const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+        sessionService.authenticate = function () {
           inflightLoading = component.isLoading;
           return Promise.resolve();
         };
-
-        class SessionStub extends Service {
-          authenticate = authenticateStub;
-        }
-        this.owner.register('service:session', SessionStub);
 
         // when
         await component.register(eventStub);

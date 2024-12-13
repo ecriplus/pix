@@ -1,9 +1,9 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click, triggerEvent, triggerKeyEvent } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 
+import { stubCurrentUserService } from '../../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Tooltip', function (hooks) {
@@ -17,14 +17,7 @@ module('Integration | Component | Tooltip', function (hooks) {
     module('when user has not seen the tooltip yet', function (hooks) {
       hooks.beforeEach(async function () {
         // given
-        class currentUser extends Service {
-          user = {
-            hasSeenFocusedChallengeTooltip: false,
-            save: () => {},
-          };
-        }
-        this.owner.unregister('service:currentUser');
-        this.owner.register('service:currentUser', currentUser);
+        stubCurrentUserService(this.owner, { hasSeenFocusedChallengeTooltip: false });
 
         this.set('challenge', {
           instruction: 'La consigne de mon test',
@@ -53,14 +46,7 @@ module('Integration | Component | Tooltip', function (hooks) {
     module('when user has seen the tooltip', function (hooks) {
       hooks.beforeEach(async function () {
         // given
-        class currentUser extends Service {
-          user = {
-            hasSeenFocusedChallengeTooltip: true,
-          };
-        }
-
-        this.owner.unregister('service:currentUser');
-        this.owner.register('service:currentUser', currentUser);
+        stubCurrentUserService(this.owner, { hasSeenFocusedChallengeTooltip: true });
 
         this.set('challenge', {
           instruction: 'La consigne de mon test',
@@ -133,14 +119,7 @@ module('Integration | Component | Tooltip', function (hooks) {
     module('when user has not seen the tooltip yet', function (hooks) {
       hooks.beforeEach(async function () {
         // given
-        class currentUser extends Service {
-          user = {
-            hasSeenOtherChallengesTooltip: false,
-            save: () => {},
-          };
-        }
-        this.owner.unregister('service:currentUser');
-        this.owner.register('service:currentUser', currentUser);
+        stubCurrentUserService(this.owner, { hasSeenOtherChallengesTooltip: false });
 
         this.set('challenge', {
           instruction: 'La consigne de mon test',
@@ -169,14 +148,7 @@ module('Integration | Component | Tooltip', function (hooks) {
     module('when user has seen the tooltip', function (hooks) {
       hooks.beforeEach(async function () {
         // given
-        class currentUser extends Service {
-          user = {
-            hasSeenOtherChallengesTooltip: true,
-          };
-        }
-
-        this.owner.unregister('service:currentUser');
-        this.owner.register('service:currentUser', currentUser);
+        stubCurrentUserService(this.owner, { hasSeenOtherChallengesTooltip: true });
 
         this.set('challenge', {
           instruction: 'La consigne de mon test',

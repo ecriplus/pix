@@ -1,11 +1,11 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubSessionService } from '../../../helpers/service-stubs.js';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Autonomous Course | Landing page start block', function (hooks) {
@@ -28,7 +28,13 @@ module('Integration | Component | Autonomous Course | Landing page start block',
     assert.dom(screen.getByText('dummy landing page text')).exists();
   });
 
-  module('when user is anonymous', function () {
+  module('when user is anonymous', function (hooks) {
+    let sessionService;
+
+    hooks.beforeEach(function () {
+      sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+    });
+
     test('should display the launcher block', async function (assert) {
       // when
       const screen = await render(hbs`<AutonomousCourse::LandingPageStartBlock />`);
@@ -63,7 +69,6 @@ module('Integration | Component | Autonomous Course | Landing page start block',
     });
 
     test('should redirect to log-in form on specific button click', async function (assert) {
-      const sessionService = this.owner.lookup('service:session');
       sessionService.requireAuthenticationAndApprovedTermsOfService = sinon.stub().resolves();
 
       this.set('startCampaignParticipation', sinon.stub());
@@ -88,11 +93,7 @@ module('Integration | Component | Autonomous Course | Landing page start block',
   module('when user is logged', function () {
     test('should start campaign participation on main button click', async function (assert) {
       // given
-      class SessionStub extends Service {
-        isAuthenticated = true;
-      }
-
-      this.owner.register('service:session', SessionStub);
+      stubSessionService(this.owner, { isAuthenticated: true });
       this.set('startCampaignParticipation', sinon.stub());
 
       // when

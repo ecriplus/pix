@@ -5,28 +5,27 @@ import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubSessionService } from '../../../../../helpers/service-stubs.js';
 import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | routes/campaigns/invited/associate-sup-student-form', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  let sessionStub;
   let storeStub;
   let saveStub;
   let routerObserver;
 
   hooks.beforeEach(function () {
+    stubSessionService(this.owner, { isAuthenticated: false });
     routerObserver = this.owner.lookup('service:router');
     routerObserver.transitionTo = sinon.stub();
     saveStub = sinon.stub();
-    sessionStub = class StoreStub extends Service {};
     storeStub = class StoreStub extends Service {
       createRecord = () => ({
         save: saveStub,
         unloadRecord: () => sinon.stub(),
       });
     };
-    this.owner.register('service:session', sessionStub);
     this.owner.register('service:store', storeStub);
   });
 

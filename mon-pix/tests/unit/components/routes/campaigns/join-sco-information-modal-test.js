@@ -5,6 +5,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import createComponent from '../../../../helpers/create-glimmer-component';
+import { stubSessionService } from '../../../../helpers/service-stubs.js';
 import setupIntl from '../../../../helpers/setup-intl';
 
 module('Unit | Component | routes/campaigns/join-sco-information-modal', function (hooks) {
@@ -163,15 +164,8 @@ module('Unit | Component | routes/campaigns/join-sco-information-modal', functio
     test('should not redirect user to login page when session is invalidated', function (assert) {
       // given
       const component = createComponent('routes/campaigns/join-sco-information-modal');
-      const invalidateStub = sinon.stub().resolves();
-      const setStub = sinon.stub();
 
-      class SessionStub extends Service {
-        invalidate = invalidateStub;
-        set = setStub;
-      }
-
-      this.owner.register('service:session', SessionStub);
+      const sessionStub = stubSessionService(this.owner);
 
       class CampaignStorageStub extends Service {
         set = sinon.stub();
@@ -186,8 +180,8 @@ module('Unit | Component | routes/campaigns/join-sco-information-modal', functio
       component.goToCampaignConnectionForm();
 
       // then
-      sinon.assert.calledOnce(invalidateStub);
-      sinon.assert.calledWith(setStub, 'skipRedirectAfterSessionInvalidation', true);
+      sinon.assert.calledOnce(sessionStub.invalidate);
+      assert.true(sessionStub.skipRedirectAfterSessionInvalidation);
       assert.ok(true);
     });
   });

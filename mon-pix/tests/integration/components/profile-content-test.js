@@ -2,11 +2,11 @@
 /* eslint ember/require-tagless-components: 0 */
 
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { setBreakpoint } from 'ember-responsive/test-support';
 import { module, test } from 'qunit';
 
+import { stubSessionService } from '../../helpers/service-stubs.js';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Profile-content', function (hooks) {
@@ -16,16 +16,7 @@ module('Integration | Component | Profile-content', function (hooks) {
     let model;
 
     hooks.beforeEach(function () {
-      this.owner.register(
-        'service:session',
-        Service.extend({
-          data: {
-            authenticated: {
-              access_token: 'VALID-TOKEN',
-            },
-          },
-        }),
-      );
+      stubSessionService(this.owner, { isAuthenticated: true });
 
       model = {
         profile: {
@@ -65,7 +56,6 @@ module('Integration | Component | Profile-content', function (hooks) {
         // when
         setBreakpoint('tablet');
         this.set('model', model);
-        this.owner.register('service:session', Service.extend({ isAuthenticated: true }));
         await render(hbs`<ProfileContent @model={{this.model}} @media={{this.media}} />`);
 
         // then
@@ -80,7 +70,6 @@ module('Integration | Component | Profile-content', function (hooks) {
         // when
         setBreakpoint('mobile');
         this.set('model', model);
-        this.owner.register('service:session', Service.extend({ isAuthenticated: true }));
         await render(hbs`<ProfileContent @model={{this.model}} @media={{this.media}} />`);
 
         // then

@@ -1,10 +1,10 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { setBreakpoint } from 'ember-responsive/test-support';
 import { module, test } from 'qunit';
 
+import { stubCurrentUserService, stubSessionService } from '../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | navbar-header', function (hooks) {
@@ -28,14 +28,8 @@ module('Integration | Component | navbar-header', function (hooks) {
     test('should be rendered in mobile/tablet mode with a burger', async function (assert) {
       // given
       setBreakpoint('tablet');
-      class SessionStub extends Service {
-        isAuthenticated = true;
-      }
-      this.owner.register('service:session', SessionStub);
-      class CurrentUserStub extends Service {
-        user = { fullName: 'John Doe' };
-      }
-      this.owner.register('service:current-user', CurrentUserStub);
+      stubSessionService(this.owner, { isAuthenticated: true });
+      stubCurrentUserService(this.owner, { firstName: 'John', lastName: 'Doe' });
 
       // when
       const screen = await render(hbs`<NavbarHeader />`);
@@ -48,10 +42,7 @@ module('Integration | Component | navbar-header', function (hooks) {
     test('should be rendered in mobile/tablet mode without burger', async function (assert) {
       // given
       setBreakpoint('tablet');
-      class SessionStub extends Service {
-        isAuthenticated = false;
-      }
-      this.owner.register('service:session', SessionStub);
+      stubSessionService(this.owner, { isAuthenticated: false });
 
       // when
       const screen = await render(hbs`<NavbarHeader />`);

@@ -6,6 +6,7 @@ import AttestationResult from 'mon-pix/components/campaigns/assessment/results/e
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubSessionService } from '../../../../helpers/service-stubs.js';
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Campaign | Skill Review | attestation-result', function (hooks) {
@@ -59,22 +60,13 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
           obtained: true,
         },
       ];
-      class sessionService extends Service {
-        isAuthenticated = true;
-        data = {
-          authenticated: {
-            access_token: 'access_token',
-            user_id: 1,
-            source: 'pix',
-          },
-        };
-      }
+      stubSessionService(this.owner, { isAuthenticated: true });
+
       const fileSaverSaveStub = sinon.stub();
       class FileSaverStub extends Service {
         save = fileSaverSaveStub;
       }
 
-      this.owner.register('service:session', sessionService);
       this.owner.register('service:fileSaver', FileSaverStub);
 
       // when
@@ -84,9 +76,9 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
       // then
       assert.ok(
         fileSaverSaveStub.calledWithExactly({
-          url: '/api/users/1/attestations/SIXTH_GRADE',
+          url: '/api/users/123/attestations/SIXTH_GRADE',
           fileName: 'sensibilisation-au-numerique',
-          token: 'access_token',
+          token: 'access_token!',
         }),
       );
     });
@@ -99,23 +91,14 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
           obtained: true,
         },
       ];
-      class sessionService extends Service {
-        isAuthenticated = true;
-        data = {
-          authenticated: {
-            access_token: 'access_token',
-            user_id: 1,
-            source: 'pix',
-          },
-        };
-      }
+      stubSessionService(this.owner, { isAuthenticated: true });
+
       const onErrorStub = sinon.stub();
       const fileSaverSaveStub = sinon.stub().throws();
       class FileSaverStub extends Service {
         save = fileSaverSaveStub;
       }
 
-      this.owner.register('service:session', sessionService);
       this.owner.register('service:fileSaver', FileSaverStub);
 
       // when
@@ -127,9 +110,9 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
       // then
       assert.ok(
         fileSaverSaveStub.calledWithExactly({
-          url: '/api/users/1/attestations/SIXTH_GRADE',
+          url: '/api/users/123/attestations/SIXTH_GRADE',
           fileName: 'sensibilisation-au-numerique',
-          token: 'access_token',
+          token: 'access_token!',
         }),
       );
       assert.ok(onErrorStub.calledOnce);

@@ -1,10 +1,10 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 // eslint-disable-next-line no-restricted-imports
 import { find } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 
+import { stubCurrentUserService } from '../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Tutorials | Card', function (hooks) {
@@ -13,12 +13,9 @@ module('Integration | Component | Tutorials | Card', function (hooks) {
   module('when user is logged', function () {
     test('should render the component with actions', async function (assert) {
       // given
-      class CurrentUserStub extends Service {
-        user = { firstName: 'John' };
-      }
+      stubCurrentUserService(this.owner);
 
       const store = this.owner.lookup('service:store');
-      this.owner.register('service:currentUser', CurrentUserStub);
       this.set(
         'tutorial',
         store.createRecord('tutorial', {
@@ -51,12 +48,9 @@ module('Integration | Component | Tutorials | Card', function (hooks) {
   module('when user is not logged', function () {
     test('should render the component without actions', async function (assert) {
       // given
-      class CurrentUserStub extends Service {
-        user = null;
-      }
+      stubCurrentUserService(this.owner, { isAuthenticated: false });
 
       const store = this.owner.lookup('service:store');
-      this.owner.register('service:currentUser', CurrentUserStub);
       this.set(
         'tutorial',
         store.createRecord('tutorial', {

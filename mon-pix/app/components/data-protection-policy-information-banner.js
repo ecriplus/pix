@@ -5,6 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import ENV from 'mon-pix/config/environment';
 
 export default class DataProtectionPolicyInformationBanner extends Component {
+  @service session;
   @service currentUser;
   @service currentDomain;
   @service intl;
@@ -14,8 +15,7 @@ export default class DataProtectionPolicyInformationBanner extends Component {
   _rawBannerContent = ENV.APP.BANNER_CONTENT;
 
   get shouldDisplayDataProtectionPolicyInformation() {
-    const isUserLoggedIn = typeof this.currentUser.user !== 'undefined';
-    if (!isUserLoggedIn) {
+    if (!this.session.isAuthenticated) {
       return false;
     }
 

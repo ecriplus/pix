@@ -4,6 +4,7 @@ import SignupForm from 'mon-pix/components/authentication/signup-form';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubSessionService } from '../../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 const I18N_KEYS = {
@@ -21,8 +22,7 @@ module('Integration | Component | Authentication | SignupForm | index', function
   let sessionService;
 
   hooks.beforeEach(async function () {
-    sessionService = this.owner.lookup('service:session');
-    sinon.stub(sessionService, 'authenticateUser');
+    sessionService = stubSessionService(this.owner, { isAuthenticated: false });
   });
 
   test('it signs up successfully', async function (assert) {

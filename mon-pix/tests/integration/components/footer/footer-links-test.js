@@ -4,6 +4,7 @@ import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 
+import { stubCurrentUserService } from '../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Footer', function (hooks) {
@@ -26,11 +27,7 @@ module('Integration | Component | Footer', function (hooks) {
 
   module('when user is connected', function (hooks) {
     hooks.beforeEach(function () {
-      class CurrentUserStub extends Service {
-        user = { fullName: 'John Doe' };
-      }
-
-      this.owner.register('service:currentUser', CurrentUserStub);
+      stubCurrentUserService(this.owner);
     });
 
     test('displays the sitemap link', async function (assert) {

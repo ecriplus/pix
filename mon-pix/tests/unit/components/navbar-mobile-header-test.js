@@ -1,22 +1,16 @@
-/* eslint ember/no-classic-classes: 0 */
-/* eslint ember/require-tagless-components: 0 */
-
-import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
 import createGlimmerComponent from '../../helpers/create-glimmer-component';
+import { stubSessionService } from '../../helpers/service-stubs.js';
 
 module('Unit | Component | Navbar Mobile Header Component', function (hooks) {
   setupTest(hooks);
-  const sessionStubResolve = Service.extend({ isAuthenticated: true });
-  const sessionStubReject = Service.extend({ isAuthenticated: false });
-
   let component;
 
   module('When user is logged', function (hooks) {
     hooks.beforeEach(function () {
-      this.owner.register('service:session', sessionStubResolve);
+      stubSessionService(this.owner, { isAuthenticated: true });
       component = createGlimmerComponent('navbar-mobile-header');
     });
 
@@ -30,7 +24,7 @@ module('Unit | Component | Navbar Mobile Header Component', function (hooks) {
 
   module('When user is not logged', function (hooks) {
     hooks.beforeEach(function () {
-      this.owner.register('service:session', sessionStubReject);
+      stubSessionService(this.owner, { isAuthenticated: false });
       component = createGlimmerComponent('navbar-mobile-header');
     });
 

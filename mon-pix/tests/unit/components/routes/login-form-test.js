@@ -1,4 +1,3 @@
-import Service from '@ember/service';
 import { t } from 'ember-intl/test-support';
 import { setupTest } from 'ember-qunit';
 import ENV from 'mon-pix/config/environment';
@@ -6,6 +5,7 @@ import createGlimmerComponent from 'mon-pix/tests/helpers/create-glimmer-compone
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubSessionService } from '../../../helpers/service-stubs.js';
 import setupIntl from '../../../helpers/setup-intl';
 
 module('Unit | Component | routes/login-form', function (hooks) {
@@ -150,17 +150,12 @@ module('Unit | Component | routes/login-form', function (hooks) {
         test('isLoading is true', async function (assert) {
           // given
           let inflightLoading;
-
           const component = createGlimmerComponent('routes/login-form');
-          const authenticateStub = function () {
+          const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+          sessionService.authenticate = function () {
             inflightLoading = component.isLoading;
             return Promise.resolve();
           };
-          class SessionStub extends Service {
-            authenticate = authenticateStub;
-          }
-
-          this.owner.register('service:session', SessionStub);
 
           // when
           await component.authenticate(eventStub);

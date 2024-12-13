@@ -1,22 +1,16 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 
+import { stubCurrentUserService } from '../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | navbar-burger-menu', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   hooks.beforeEach(async function () {
-    class currentUser extends Service {
-      user = {
-        fullName: 'Bobby Carotte',
-      };
-    }
-
-    this.owner.register('service:currentUser', currentUser);
+    stubCurrentUserService(this.owner, { firstName: 'Bobby', lastName: 'Carotte' });
   });
 
   test("should display the user's fullname", async function (assert) {
@@ -52,15 +46,11 @@ module('Integration | Component | navbar-burger-menu', function (hooks) {
 
   module('when user has participations', function (hooks) {
     hooks.beforeEach(async function () {
-      class currentUser extends Service {
-        user = {
-          fullName: 'Bobby Carotte',
-          hasAssessmentParticipations: true,
-        };
-      }
-
-      this.owner.unregister('service:currentUser');
-      this.owner.register('service:currentUser', currentUser);
+      stubCurrentUserService(this.owner, {
+        firstName: 'Bobby',
+        lastName: 'Carotte',
+        hasAssessmentParticipations: true,
+      });
     });
 
     test('should display "My tests" link', async function (assert) {
@@ -74,15 +64,11 @@ module('Integration | Component | navbar-burger-menu', function (hooks) {
 
   module('when user has no participations', function (hooks) {
     hooks.beforeEach(async function () {
-      class currentUser extends Service {
-        user = {
-          fullName: 'John Doe',
-          hasAssessmentParticipations: false,
-        };
-      }
-
-      this.owner.unregister('service:currentUser');
-      this.owner.register('service:currentUser', currentUser);
+      stubCurrentUserService(this.owner, {
+        firstName: 'Bobby',
+        lastName: 'Carotte',
+        hasAssessmentParticipations: false,
+      });
     });
 
     test('should not display "My tests" link', async function (assert) {
@@ -95,15 +81,11 @@ module('Integration | Component | navbar-burger-menu', function (hooks) {
   });
   module('when user has recommended trainings', function (hooks) {
     hooks.beforeEach(async function () {
-      class currentUser extends Service {
-        user = {
-          fullName: 'John Doe',
-          hasRecommendedTrainings: true,
-        };
-      }
-
-      this.owner.unregister('service:currentUser');
-      this.owner.register('service:currentUser', currentUser);
+      stubCurrentUserService(this.owner, {
+        firstName: 'Bobby',
+        lastName: 'Carotte',
+        hasRecommendedTrainings: true,
+      });
     });
 
     test('should not display "My trainings" link', async function (assert) {

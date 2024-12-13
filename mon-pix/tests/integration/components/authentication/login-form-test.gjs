@@ -4,6 +4,7 @@ import LoginForm from 'mon-pix/components/authentication/login-form';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubSessionService } from '../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 const I18N_KEYS = {
@@ -26,8 +27,7 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
   hooks.beforeEach(async function () {
     storeService = this.owner.lookup('service:store');
     routerService = this.owner.lookup('service:router');
-    sessionService = this.owner.lookup('service:session');
-    sinon.stub(sessionService, 'authenticateUser');
+    sessionService = stubSessionService(this.owner, { isAuthenticated: false });
 
     screen = await render(<template><LoginForm /></template>);
   });

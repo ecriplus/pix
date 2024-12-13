@@ -1,7 +1,7 @@
-import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-import sinon from 'sinon';
+
+import { stubCurrentUserService } from '../../helpers/service-stubs';
 
 module('Unit | Adapter | Email-Verification-Code', function (hooks) {
   setupTest(hooks);
@@ -9,14 +9,11 @@ module('Unit | Adapter | Email-Verification-Code', function (hooks) {
   module('#buildURL', function () {
     test('should call API to send email verification code', async function (assert) {
       // given
-      const adapter = this.owner.lookup('adapter:email-verification-code');
-      const getStub = sinon.stub();
-      class CurrentUserStub extends Service {
-        user = { get: getStub.returns(123) };
-      }
-      this.owner.register('service:current-user', CurrentUserStub);
+      const currentUserService = stubCurrentUserService(this.owner, { id: 123 });
+      currentUserService.user.get.returns(123);
 
       // when
+      const adapter = this.owner.lookup('adapter:email-verification-code');
       const url = await adapter.buildURL();
 
       // then
