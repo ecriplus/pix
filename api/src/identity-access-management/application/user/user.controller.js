@@ -241,6 +241,17 @@ const getCertificationPointOfContact = async function (request) {
   return certificationPointOfContactSerializer.serialize(certificationPointOfContact);
 };
 
+const rememberUserHasSeenChallengeTooltip = async function (request, h, dependencies = { userSerializer }) {
+  const authenticatedUserId = request.auth.credentials.userId;
+  const challengeType = request.params.challengeType;
+
+  const updatedUser = await usecases.rememberUserHasSeenChallengeTooltip({
+    userId: authenticatedUserId,
+    challengeType,
+  });
+  return dependencies.userSerializer.serialize(updatedUser);
+};
+
 export const userController = {
   acceptPixCertifTermsOfService,
   acceptPixLastTermsOfService,
@@ -250,6 +261,7 @@ export const userController = {
   getCurrentUser,
   getCurrentUserAccountInfo,
   getUserAuthenticationMethods,
+  rememberUserHasSeenChallengeTooltip,
   rememberUserHasSeenLastDataProtectionPolicyInformation,
   createUser,
   selfDeleteUserAccount,

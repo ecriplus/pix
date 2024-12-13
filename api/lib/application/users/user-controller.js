@@ -4,21 +4,9 @@ import { evaluationUsecases } from '../../../src/evaluation/domain/usecases/inde
 import * as scorecardSerializer from '../../../src/evaluation/infrastructure/serializers/jsonapi/scorecard-serializer.js';
 import * as userDetailsForAdminSerializer from '../../../src/identity-access-management/infrastructure/serializers/jsonapi/user-details-for-admin.serializer.js';
 import * as certificationCenterMembershipSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
-import * as userSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/user-serializer.js';
 import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as userOrganizationForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-organization-for-admin-serializer.js';
-
-const rememberUserHasSeenChallengeTooltip = async function (request, h, dependencies = { userSerializer }) {
-  const authenticatedUserId = request.auth.credentials.userId;
-  const challengeType = request.params.challengeType;
-
-  const updatedUser = await usecases.rememberUserHasSeenChallengeTooltip({
-    userId: authenticatedUserId,
-    challengeType,
-  });
-  return dependencies.userSerializer.serialize(updatedUser);
-};
 
 const findPaginatedUserRecommendedTrainings = async function (
   request,
@@ -110,7 +98,6 @@ const userController = {
   findPaginatedUserRecommendedTrainings,
   findUserOrganizationsForAdmin,
   reassignAuthenticationMethods,
-  rememberUserHasSeenChallengeTooltip,
   resetScorecard,
 };
 

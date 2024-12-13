@@ -157,32 +157,6 @@ const register = async function (server) {
       },
     },
     {
-      method: 'PATCH',
-      path: '/api/users/{id}/has-seen-challenge-tooltip/{challengeType}',
-      config: {
-        pre: [
-          {
-            method: securityPreHandlers.checkRequestedUserIsAuthenticatedUser,
-            assign: 'requestedUserIsAuthenticatedUser',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            id: identifiersType.userId,
-            challengeType: Joi.string().valid('focused', 'other'),
-          }),
-        },
-        handler: userController.rememberUserHasSeenChallengeTooltip,
-        notes: [
-          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
-            "- Sauvegarde le fait que l'utilisateur ait vu la tooltip de type d'épreuve" +
-            '- L’id demandé doit correspondre à celui de l’utilisateur authentifié',
-          "- Le contenu de la requête n'est pas pris en compte.",
-        ],
-        tags: ['api', 'user'],
-      },
-    },
-    {
       method: 'POST',
       path: '/api/users/{userId}/competences/{competenceId}/reset',
       config: {
