@@ -186,9 +186,10 @@
   }
 
   &__level-info {
+    @extend %pix-body-m;
+
     margin-top: 20px;
     color: var(--pix-neutral-800);
-    letter-spacing: 0.019rem;
     white-space: nowrap;
     text-transform: uppercase;
   }
