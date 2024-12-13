@@ -1,8 +1,7 @@
 import 'dotenv/config';
 
-import Joi from 'joi';
-
 import { usecases } from '../../src/legal-documents/domain/usecases/index.js';
+import { isoDateParser } from '../../src/shared/application/scripts/parsers.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 
@@ -29,16 +28,7 @@ export class AddNewLegalDocumentVersion extends Script {
           describe: 'Version date of the legal document, format "YYYY-MM-DD", (ex: "2020-02-27")',
           demandOption: true,
           requiresArg: true,
-          coerce: (value) => {
-            const schema = Joi.string()
-              .pattern(/^\d{4}-\d{2}-\d{2}$/)
-              .message('Invalid date format. Expected "YYYY-MM-DD".');
-            const { error, value: validatedDate } = schema.validate(value);
-            if (error) {
-              throw new Error(error.message);
-            }
-            return new Date(validatedDate);
-          },
+          coerce: isoDateParser(),
         },
       },
     });
