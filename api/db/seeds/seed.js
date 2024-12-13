@@ -1,3 +1,4 @@
+import { config } from '../../src/shared/config.js';
 import { logger } from '../../src/shared/infrastructure/utils/logger.js';
 import { DatabaseBuilder } from '../database-builder/database-builder.js';
 import { commonBuilder } from './data/common/common-builder.js';
@@ -15,12 +16,8 @@ import { teamDevcompDataBuilder } from './data/team-devcomp/data-builder.js';
 import { teamEvaluationDataBuilder } from './data/team-evaluation/data-builder.js';
 import { teamPrescriptionDataBuilder } from './data/team-prescription/data-builder.js';
 
-const seed = async function (knex) {
+export async function seed(knex) {
   logger.info('START Seeding');
-  const seedsContext = process.env.SEEDS_CONTEXT ? process.env.SEEDS_CONTEXT.split('|') : [];
-
-  const hasToSeed = _buildContextToSeed(seedsContext);
-  logger.info({ seedsContext }, 'Seeds Context');
 
   const databaseBuilder = new DatabaseBuilder({ knex });
 
@@ -41,38 +38,38 @@ const seed = async function (knex) {
   await organizationBuilder({ databaseBuilder });
 
   // SCOPE
-  if (hasToSeed.prescription) {
+  if (config.seeds.context.prescription) {
     logger.info('Seeding : Prescription');
     await teamPrescriptionDataBuilder({ databaseBuilder });
   }
 
-  if (hasToSeed.devcomp) {
+  if (config.seeds.context.devcomp) {
     logger.info('Seeding : Devcomp');
     await teamDevcompDataBuilder({ databaseBuilder });
   }
 
-  if (hasToSeed.acces) {
+  if (config.seeds.context.acces) {
     logger.info('Seeding : Acces');
     await teamAccesDataBuilder(databaseBuilder);
   }
 
-  if (hasToSeed.junior) {
+  if (config.seeds.context.junior) {
     logger.info('Seeding : Junior');
     await team1dDataBuilder(databaseBuilder);
   }
 
-  if (hasToSeed.contenu) {
+  if (config.seeds.context.contenu) {
     logger.info('Seeding : Contenu');
     await teamContenuDataBuilder({ databaseBuilder });
   }
 
-  if (hasToSeed.certification) {
+  if (config.seeds.context.certification) {
     logger.info('Seeding : Certification');
     await complementaryCertificationBuilder({ databaseBuilder });
     await teamCertificationDataBuilder({ databaseBuilder });
   }
 
-  if (hasToSeed.evaluation) {
+  if (config.seeds.context.evaluation) {
     logger.info('Seeding : Evaluation');
     await teamEvaluationDataBuilder({ databaseBuilder });
   }
@@ -80,42 +77,4 @@ const seed = async function (knex) {
   await databaseBuilder.commit();
   await databaseBuilder.fixSequences();
   logger.info('END Seeding');
-};
-
-function _buildContextToSeed(params) {
-  if (params.length === 0) {
-    return {
-      prescription: true,
-      devcomp: true,
-      acces: true,
-      junior: true,
-      contenu: true,
-      certification: true,
-      evaluation: true,
-    };
-  }
-
-  const hasToSeed = {
-    prescription: false,
-    devcomp: false,
-    acces: false,
-    junior: false,
-    contenu: false,
-    certification: false,
-    evaluation: false,
-  };
-
-  params.forEach((seedContext) => {
-    if (seedContext === 'PRESCRIPTION') hasToSeed.prescription = true;
-    if (seedContext === 'DEVCOMP') hasToSeed.devcomp = true;
-    if (seedContext === 'JUNIOR') hasToSeed.junior = true;
-    if (seedContext === 'ACCES') hasToSeed.acces = true;
-    if (seedContext === 'CONTENU') hasToSeed.contenu = true;
-    if (seedContext === 'CERTIFICATION') hasToSeed.certification = true;
-    if (seedContext === 'EVALUATION') hasToSeed.evaluation = true;
-  });
-
-  return hasToSeed;
 }
-
-export { seed };
