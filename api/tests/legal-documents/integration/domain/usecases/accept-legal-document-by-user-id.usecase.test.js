@@ -1,9 +1,10 @@
-import { LegalDocument } from '../../../../../src/legal-documents/domain/models/LegalDocument.js';
+import { LegalDocumentService } from '../../../../../src/legal-documents/domain/models/LegalDocumentService.js';
+import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
 import { usecases } from '../../../../../src/legal-documents/domain/usecases/index.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
-const { TOS } = LegalDocument.TYPES;
-const { PIX_ORGA } = LegalDocument.SERVICES;
+const { TOS } = LegalDocumentType.VALUES;
+const { PIX_ORGA } = LegalDocumentService.VALUES;
 
 describe('Integration | Legal documents | Domain | Use case | accept-legal-document-by-user-id', function () {
   it('accepts the lastest legal document version for a user', async function () {

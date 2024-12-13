@@ -6,6 +6,7 @@ import {
   commaSeparatedNumberParser,
   commaSeparatedStringParser,
   csvFileParser,
+  isoDateParser,
 } from '../../../../../src/shared/application/scripts/parsers.js';
 import { catchErr, expect } from '../../../../test-helper.js';
 
@@ -106,6 +107,47 @@ describe('Shared | Unit | Application | Parsers', function () {
 
       // then
       expect(() => parser(input)).to.throw('"[1]" must be a number');
+    });
+  });
+
+  describe('isoDateParser', function () {
+    it('parses a valid date string in YYYY-MM-DD format', function () {
+      // given
+      const input = '2023-12-25';
+
+      // when
+      const parser = isoDateParser();
+      const result = parser(input);
+
+      // then
+      expect(result).to.be.instanceOf(Date);
+      expect(result.toISOString().startsWith('2023-12-25')).to.be.true;
+    });
+
+    it('throws an error for an invalid date format', async function () {
+      // given
+      const input = '12-25-2023';
+
+      // when
+      const parser = isoDateParser();
+      const error = await catchErr(parser)(input);
+
+      // then
+      expect(error).to.be.instanceOf(Error);
+      expect(error.message).to.equal('Invalid date format. Expected "YYYY-MM-DD".');
+    });
+
+    it('throws an error for non-date strings', async function () {
+      // given
+      const input = 'not-a-date';
+
+      // when
+      const parser = isoDateParser();
+      const error = await catchErr(parser)(input);
+
+      // then
+      expect(error).to.be.instanceOf(Error);
+      expect(error.message).to.equal('Invalid date format. Expected "YYYY-MM-DD".');
     });
   });
 });

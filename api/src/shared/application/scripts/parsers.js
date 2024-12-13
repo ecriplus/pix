@@ -50,3 +50,21 @@ export function commaSeparatedNumberParser(separator = ',') {
     return Joi.attempt(data, Joi.array().items(Joi.number()));
   };
 }
+
+/**
+ * Create a parser for date strings in the format "YYYY-MM-DD"
+ * @returns {Date}
+ */
+export function isoDateParser() {
+  return (date) => {
+    const schema = Joi.string()
+      .pattern(/^\d{4}-\d{2}-\d{2}$/)
+      .message('Invalid date format. Expected "YYYY-MM-DD".');
+
+    const { error, value: validatedDate } = schema.validate(date);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return new Date(validatedDate);
+  };
+}

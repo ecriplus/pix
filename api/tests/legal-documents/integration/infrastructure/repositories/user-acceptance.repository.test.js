@@ -1,9 +1,10 @@
-import { LegalDocument } from '../../../../../src/legal-documents/domain/models/LegalDocument.js';
+import { LegalDocumentService } from '../../../../../src/legal-documents/domain/models/LegalDocumentService.js';
+import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
 import * as userAcceptanceRepository from '../../../../../src/legal-documents/infrastructure/repositories/user-acceptance.repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
-const { TOS } = LegalDocument.TYPES;
-const { PIX_ORGA } = LegalDocument.SERVICES;
+const { TOS } = LegalDocumentType.VALUES;
+const { PIX_ORGA } = LegalDocumentService.VALUES;
 
 describe('Integration | Legal document | Infrastructure | Repository | user-acceptance', function () {
   describe('#create', function () {

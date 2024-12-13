@@ -1,9 +1,11 @@
 import { LegalDocument } from '../../../../../src/legal-documents/domain/models/LegalDocument.js';
+import { LegalDocumentService } from '../../../../../src/legal-documents/domain/models/LegalDocumentService.js';
+import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
 import * as legalDocumentRepository from '../../../../../src/legal-documents/infrastructure/repositories/legal-document.repository.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
-const { TOS } = LegalDocument.TYPES;
-const { PIX_ORGA, PIX_APP } = LegalDocument.SERVICES;
+const { TOS } = LegalDocumentType.VALUES;
+const { PIX_ORGA, PIX_APP } = LegalDocumentService.VALUES;
 
 describe('Integration | Legal document | Infrastructure | Repository | legal-document', function () {
   describe('#findLastVersionByTypeAndService', function () {
@@ -45,6 +47,22 @@ describe('Integration | Legal document | Infrastructure | Repository | legal-doc
 
       // then
       expect(lastDocument).to.be.null;
+    });
+  });
+
+  describe('#create', function () {
+    it('creates a new legal document in the database', async function () {
+      // given
+      const type = TOS;
+      const service = PIX_ORGA;
+      const versionAt = new Date('2024-12-01');
+
+      // when
+      const createdDocument = await legalDocumentRepository.create({ type, service, versionAt });
+
+      // then
+      expect(createdDocument).to.be.instanceOf(LegalDocument);
+      expect(createdDocument).to.deep.include({ type, service, versionAt });
     });
   });
 });

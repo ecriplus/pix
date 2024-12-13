@@ -1,9 +1,10 @@
 import * as legalDocumentsApi from '../../../../../src/legal-documents/application/api/legal-documents-api.js';
-import { LegalDocument } from '../../../../../src/legal-documents/domain/models/LegalDocument.js';
+import { LegalDocumentService } from '../../../../../src/legal-documents/domain/models/LegalDocumentService.js';
+import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
-const { TOS } = LegalDocument.TYPES;
-const { PIX_ORGA } = LegalDocument.SERVICES;
+const { TOS } = LegalDocumentType.VALUES;
+const { PIX_ORGA } = LegalDocumentService.VALUES;
 
 describe('Integration | Privacy | Application | Api | legal documents', function () {
   describe('#acceptLegalDocumentByUserId', function () {
