@@ -1,7 +1,8 @@
-import { LegalDocument } from '../models/LegalDocument.js';
+import { LegalDocumentService } from '../models/LegalDocumentService.js';
+import { LegalDocumentType } from '../models/LegalDocumentType.js';
 
-const { TOS } = LegalDocument.TYPES;
-const { PIX_ORGA } = LegalDocument.SERVICES;
+const { TOS } = LegalDocumentType.VALUES;
+const { PIX_ORGA } = LegalDocumentService.VALUES;
 
 /**
  * Accepts a legal document by user ID.
