@@ -29,7 +29,7 @@ export default class CurrentUserService extends Service {
   }
 
   get canAccessAttestationsPage() {
-    return this.prescriber.attestationsManagement;
+    return this.prescriber.attestationsManagement && this.isAdminInOrganization;
   }
 
   get canAccessPlacesPage() {

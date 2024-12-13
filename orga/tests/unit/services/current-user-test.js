@@ -303,7 +303,8 @@ module('Unit | Service | current-user', function (hooks) {
     });
 
     module('#canAccessAttestationsPage', function () {
-      test('should return true if organization has feature activated', function (assert) {
+      test('should return true if user is admin and organization has feature activated', function (assert) {
+        currentUserService.isAdminInOrganization = true;
         currentUserService.prescriber = {
           attestationsManagement: true,
         };
@@ -311,9 +312,19 @@ module('Unit | Service | current-user', function (hooks) {
         assert.true(currentUserService.canAccessAttestationsPage);
       });
 
-      test('should return false if organization does not have feature activated', function (assert) {
+      test('should return false if user is admin and organization does not have feature activated', function (assert) {
+        currentUserService.isAdminInOrganization = true;
         currentUserService.prescriber = {
           attestationsManagement: false,
+        };
+
+        assert.false(currentUserService.canAccessAttestationsPage);
+      });
+
+      test('should return false if user is not admin and organization has feature activated', function (assert) {
+        currentUserService.isAdminInOrganization = false;
+        currentUserService.prescriber = {
+          attestationsManagement: true,
         };
 
         assert.false(currentUserService.canAccessAttestationsPage);
