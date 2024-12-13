@@ -228,7 +228,8 @@
         "label": "Recherche sur le nom et prénom",
         "placeholder": "Nom, prénom"
       },
-      "loading": "Chargement..."
+      "loading": "Chargement...",
+      "placeholder": "-- Sélectionner --"
     },
     "form": {
       "mandatory-all-fields": "Tous les champs sont obligatoires.",
@@ -1479,6 +1480,7 @@
         "independent": "indépendant",
         "novice": "novice"
       },
+      "select-label": "Domaine",
       "table": {
         "caption": "Ce tableau affiche l'analyse des résultats de tous les participants par sujets. Il indique pour chaque ligne la compétence, le sujet, le taux de couverture ainsi que le niveau atteint",
         "headers": {

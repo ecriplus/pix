@@ -1,5 +1,6 @@
-import { render } from '@1024pix/ember-testing-library';
+import { clickByName, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
+import { click } from '@ember/test-helpers';
 import dayjs from 'dayjs';
 import { t } from 'ember-intl/test-support';
 import Statistics from 'pix-orga/components/statistics/index';
@@ -55,6 +56,7 @@ module('Integration | Component | Statistics | Index', function (hooks) {
     const model = {
       data: [
         {
+          domaine: '2. Communication et collaboration',
           competence_code: '2.1',
           competence: 'Interagir',
           sujet: 'Gérer ses contacts',
@@ -79,6 +81,7 @@ module('Integration | Component | Statistics | Index', function (hooks) {
       const model = {
         data: [
           {
+            domaine: '2. Communication et collaboration',
             competence_code: '2.1',
             competence: 'Interagir',
             sujet: 'Gérer ses contacts',
@@ -86,6 +89,7 @@ module('Integration | Component | Statistics | Index', function (hooks) {
             niveau_par_sujet: '1.50',
           },
           {
+            domaine: '2. Communication et collaboration',
             competence_code: '2.1',
             competence: 'Interagir',
             sujet: 'Gérer ses contacts',
@@ -117,6 +121,7 @@ module('Integration | Component | Statistics | Index', function (hooks) {
       const model = {
         data: [
           {
+            domaine: '2. Communication et collaboration',
             competence_code: '2.1',
             competence: 'Interagir',
             sujet: 'Gérer ses contacts',
@@ -124,6 +129,7 @@ module('Integration | Component | Statistics | Index', function (hooks) {
             niveau_par_sujet: '1.50',
           },
           {
+            domaine: '2. Communication et collaboration',
             competence_code: '2.1',
             competence: 'Interagir',
             sujet: 'Gérer ses contacts',
@@ -154,6 +160,7 @@ module('Integration | Component | Statistics | Index', function (hooks) {
       const model = {
         data: [
           {
+            domaine: '2. Communication et collaboration',
             competence_code: '2.1',
             competence: 'Foo',
             sujet: 'Gérer ses contacts',
@@ -161,6 +168,7 @@ module('Integration | Component | Statistics | Index', function (hooks) {
             niveau_par_sujet: '1.50',
           },
           {
+            domaine: '2. Communication et collaboration',
             competence_code: '2.1',
             competence: 'Interagir',
             sujet: 'Gérer ses contacts',
@@ -185,6 +193,56 @@ module('Integration | Component | Statistics | Index', function (hooks) {
       //then
       assert.ok(screen.getByRole('cell', { name: '2.1 Interagir' }));
       assert.ok(screen.getByRole('cell', { name: t('pages.statistics.level.novice') }));
+    });
+  });
+
+  module('filter', function () {
+    test('should filtered analysis', async function (assert) {
+      //given
+      const model = {
+        data: [
+          {
+            domaine: '1. Information et données',
+            competence_code: '1.1 ',
+            competence: 'Mener une recherche et une veille d’information',
+            sujet: "Indices de qualité d'une page web",
+            niveau_par_user: '1.30',
+            niveau_par_sujet: '1.50',
+          },
+          {
+            domaine: '2. Communication et collaboration',
+            competence_code: '2.1',
+            competence: 'Interagir',
+            sujet: 'Gérer ses contacts',
+            niveau_par_user: '1.30',
+            niveau_par_sujet: '1.50',
+          },
+        ],
+      };
+
+      //when
+      const screen = await render(<template><Statistics @model={{model}} /></template>);
+
+      //then
+      assert.ok(screen.getByText(t('common.pagination.page-results', { total: 2 })));
+
+      // when
+      const select = screen.getByRole('button', { name: t('pages.statistics.select-label') });
+      await click(select);
+      const option = await screen.findByRole('option', { name: '2. Communication et collaboration' });
+      await click(option);
+
+      // then
+      assert.ok(screen.getByText(t('common.pagination.page-results', { total: 1 })));
+      assert.ok(screen.getByRole('cell', { name: '2.1 Interagir' }));
+      assert.ok(screen.getByRole('cell', { name: 'Gérer ses contacts' }));
+      assert.ok(screen.getByRole('cell', { name: t('pages.statistics.level.novice') }));
+
+      // when
+      await clickByName(t('common.filters.actions.clear'));
+
+      // then
+      assert.ok(screen.getByText(t('common.pagination.page-results', { total: 2 })));
     });
   });
 });

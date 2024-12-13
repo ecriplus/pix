@@ -228,7 +228,8 @@
         "label": "Search by last name and first name",
         "placeholder": "Last name, first name"
       },
-      "loading": "Loading..."
+      "loading": "Loading...",
+      "placeholder": "-- Select --"
     },
     "form": {
       "mandatory-all-fields": "All fields are required.",
@@ -1473,6 +1474,7 @@
         "independent": "independent",
         "novice": "novice"
       },
+      "select-label": "Domain",
       "table": {
         "caption": "This table displays the analysis of all participants' results by topic. For each line, it shows the skill, the topic, the coverage rate and the level achieved.",
         "headers": {

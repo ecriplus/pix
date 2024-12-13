@@ -228,6 +228,7 @@
         "placeholder": "Achternaam, voornaam"
       },
       "loading": "Laden...",
+      "placeholder": "-- Selecteer --",
       "title": "Filters"
     },
     "form": {
@@ -1462,6 +1463,7 @@
       "title": "{count, plural, =0 {Studenten} =1 {Studenten ({count})} other {studenten ({count})}}"
     },
     "statistics": {
+      "select-label": "Domein",
       "title": "Statistieken",
       "before-date": "op",
       "gauge": {

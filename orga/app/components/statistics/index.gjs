@@ -1,6 +1,9 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 
@@ -11,10 +14,46 @@ import TagLevel from './tag-level';
 export default class Statistics extends Component {
   @service router;
 
+  @tracked currentDomainFilter = null;
+
   get analysisByTubes() {
     return this.args.model.data.sort(
       (a, b) => a.competence_code.localeCompare(b.competence_code) || a.sujet.localeCompare(b.sujet),
     );
+  }
+
+  get analysisByDomains() {
+    return this.analysisByTubes.reduce((acc, line) => {
+      const domain = line.domaine;
+      if (acc[domain]) {
+        acc[domain].push(line);
+      } else {
+        acc[domain] = [line];
+      }
+      return acc;
+    }, {});
+  }
+
+  get currentAnalysis() {
+    if (this.currentDomainFilter !== null) {
+      return this.analysisByDomains[this.currentDomainFilter];
+    }
+    return this.analysisByTubes;
+  }
+
+  get currentVisibleAnalysis() {
+    const start = this.pageSize * (this.page - 1);
+    const end = this.pageSize * this.page;
+    return this.currentAnalysis.slice(start, end);
+  }
+
+  get domainsName() {
+    return Object.keys(this.analysisByDomains).map((value) => {
+      return {
+        label: value,
+        value,
+      };
+    });
   }
 
   get pageSize() {
@@ -29,16 +68,20 @@ export default class Statistics extends Component {
     return {
       page: this.page,
       pageSize: this.pageSize,
-      rowCount: this.analysisByTubes.length,
-      pageCount: Math.ceil(this.analysisByTubes.length / this.pageSize),
+      rowCount: this.currentAnalysis.length,
+      pageCount: Math.ceil(this.currentAnalysis.length / this.pageSize),
     };
   }
 
-  get visibleAnalysisByTubes() {
-    const start = this.pageSize * (this.page - 1);
-    const end = this.pageSize * this.page;
-    return this.analysisByTubes.slice(start, end);
-  }
+  handleDomainFilter = (domain) => {
+    this.currentDomainFilter = domain;
+    this.router.replaceWith({ queryParams: { pageNumber: 1 } });
+  };
+
+  removeFilter = () => {
+    this.currentDomainFilter = null;
+    this.router.replaceWith({ queryParams: { pageNumber: 1 } });
+  };
 
   get extractedDate() {
     return dayjs(this.analysisByTubes[0]?.extraction_date).format('D MMM YYYY');
@@ -50,6 +93,21 @@ export default class Statistics extends Component {
       <span class="statistics-page-header__date">{{t "pages.statistics.before-date"}}
         {{this.extractedDate}}</span>
     </div>
+
+    <section class="statistics-page__filter">
+      <PixSelect
+        @onChange={{this.handleDomainFilter}}
+        @value={{this.currentDomainFilter}}
+        @options={{this.domainsName}}
+        @placeholder={{t "common.filters.placeholder"}}
+        @hideDefaultOption={{true}}
+      >
+        <:label>{{t "pages.statistics.select-label"}}</:label>
+      </PixSelect>
+      <PixButton @size="small" @variant="tertiary" @triggerAction={{this.removeFilter}}>{{t
+          "common.filters.actions.clear"
+        }}</PixButton>
+    </section>
 
     <section class="statistics-page__section">
       <table class="panel">
@@ -67,7 +125,7 @@ export default class Statistics extends Component {
           </tr>
         </thead>
         <tbody>
-          {{#each this.visibleAnalysisByTubes as |line|}}
+          {{#each this.currentVisibleAnalysis as |line|}}
             <tr>
               <td>{{line.competence_code}} {{line.competence}}</td>
               <td>{{line.sujet}}</td>

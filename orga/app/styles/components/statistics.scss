@@ -16,3 +16,10 @@
     }
   }
 }
+
+.statistics-page__filter {
+  display: flex;
+  gap: var(--pix-spacing-4x);
+  align-items: end;
+  margin-bottom: var(--pix-spacing-8x);
+}
