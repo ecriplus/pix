@@ -16,13 +16,11 @@
 
 .tutorial-card-content {
   &__title {
+    @extend %pix-title-xs;
+
     display: -webkit-box;
     margin-bottom: 4px;
     overflow: hidden;
-    font-weight: var(--pix-font-medium);
-    font-size: 1.25rem;
-    font-family: $font-open-sans;
-    line-height: 1.25;
     text-overflow: ellipsis;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -38,13 +36,11 @@
   }
 
   &__details {
+    @extend %pix-body-s;
+
     height: 24px;
     margin: 0;
     color: var(--pix-neutral-500);
-    font-weight: var(--pix-font-normal);
-    font-size: 0.813rem;
-    font-family: $font-roboto;
-    line-height: 1.5rem;
   }
 
   &__actions {
