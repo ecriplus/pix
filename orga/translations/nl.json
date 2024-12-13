@@ -421,7 +421,6 @@
       "title": "Certificaten",
       "description": "Selecteer de klas waarvoor je de attesten in PDF-formaat wilt exporteren.",
       "download-attestations-button": "Downloaden",
-      "placeholder": "-- Selecteer --",
       "select-label": "Selecteer een of meer klassen"
     },
     "campaign-activity": {

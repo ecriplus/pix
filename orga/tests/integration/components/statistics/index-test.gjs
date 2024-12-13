@@ -219,12 +219,24 @@ module('Integration | Component | Statistics | Index', function (hooks) {
           },
         ],
       };
+      class Router extends Service {
+        currentRoute = {
+          queryParams: {
+            pageSize: 1,
+            pageNumber: 2,
+          },
+        };
+        replaceWith = ({ queryParams }) => {
+          this.currentRoute.queryParams.pageNumber = queryParams.pageNumber;
+        };
+      }
+      this.owner.register('service:router', Router);
 
       //when
       const screen = await render(<template><Statistics @model={{model}} /></template>);
 
       //then
-      assert.ok(screen.getByText(t('common.pagination.page-results', { total: 2 })));
+      assert.ok(screen.getByText(t('common.pagination.page-info', { start: 2, end: 2, total: 2 })));
 
       // when
       const select = screen.getByRole('button', { name: t('pages.statistics.select-label') });
@@ -242,7 +254,7 @@ module('Integration | Component | Statistics | Index', function (hooks) {
       await clickByName(t('common.filters.actions.clear'));
 
       // then
-      assert.ok(screen.getByText(t('common.pagination.page-results', { total: 2 })));
+      assert.ok(screen.getByText(t('common.pagination.page-info', { start: 1, end: 1, total: 2 })));
     });
   });
 });
