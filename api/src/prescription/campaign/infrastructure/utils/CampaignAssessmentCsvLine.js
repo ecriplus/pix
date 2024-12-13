@@ -111,10 +111,10 @@ class CampaignAssessmentCsvLine {
         this.targetedKnowledgeElementsCount,
         this.learningContent.skills.length,
       ),
-      dayjs.utc(this.campaignParticipationInfo.createdAt).format('YYYY-MM-DD'),
+      dayjs.utc(this.campaignParticipationInfo.createdAt).format(),
       this._makeYesNoColumns(this.campaignParticipationInfo.isShared),
       this.campaignParticipationInfo.isShared
-        ? dayjs.utc(this.campaignParticipationInfo.sharedAt).format('YYYY-MM-DD')
+        ? dayjs.utc(this.campaignParticipationInfo.sharedAt).format()
         : this.emptyContent,
       ...(this.stageCollection.hasStage ? [this._getReachedStage()] : []),
       ...(this.campaignParticipationInfo.isShared
