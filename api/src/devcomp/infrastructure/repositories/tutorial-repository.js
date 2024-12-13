@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import * as knowledgeElementRepository from '../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
-import { config } from '../../../shared/config.js';
 import { LOCALE } from '../../../shared/domain/constants.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { LearningContentRepository } from '../../../shared/infrastructure/repositories/learning-content-repository.js';
@@ -10,15 +9,12 @@ import * as paginateModule from '../../../shared/infrastructure/utils/paginate.j
 import { Tutorial } from '../../domain/models/Tutorial.js';
 import { TutorialForUser } from '../../domain/read-models/TutorialForUser.js';
 import * as tutorialEvaluationRepository from './tutorial-evaluation-repository.js';
-import * as oldTutorialRepository from './tutorial-repository_old.js';
 import * as userSavedTutorialRepository from './user-saved-tutorial-repository.js';
 
 const { FRENCH_FRANCE } = LOCALE;
 const TABLE_NAME = 'learningcontent.tutorials';
 
 export async function findByRecordIdsForCurrentUser({ ids, userId, locale }) {
-  if (!config.featureToggles.useNewLearningContent)
-    return oldTutorialRepository.findByRecordIdsForCurrentUser({ ids, userId, locale });
   let tutorialDtos = await getInstance().getMany(ids);
   tutorialDtos = tutorialDtos.filter((tutorialDto) => tutorialDto);
   if (locale) {
@@ -33,8 +29,6 @@ export async function findByRecordIdsForCurrentUser({ ids, userId, locale }) {
 }
 
 export async function findPaginatedFilteredForCurrentUser({ userId, filters = {}, page }) {
-  if (!config.featureToggles.useNewLearningContent)
-    return oldTutorialRepository.findPaginatedFilteredForCurrentUser({ userId, filters, page });
   const userSavedTutorials = await userSavedTutorialRepository.find({ userId });
   const tutorialIds = userSavedTutorials.map(({ tutorialId }) => tutorialId);
   let tutorialDtos = await getInstance().loadMany(tutorialIds);
@@ -64,7 +58,6 @@ export async function findPaginatedFilteredForCurrentUser({ userId, filters = {}
 }
 
 export async function get({ tutorialId }) {
-  if (!config.featureToggles.useNewLearningContent) return oldTutorialRepository.get({ tutorialId });
   const tutorialDto = await getInstance().load(tutorialId);
   if (!tutorialDto) {
     throw new NotFoundError('Tutorial not found');
@@ -73,7 +66,6 @@ export async function get({ tutorialId }) {
 }
 
 export async function list({ locale = FRENCH_FRANCE }) {
-  if (!config.featureToggles.useNewLearningContent) return oldTutorialRepository.list({ locale });
   const cacheKey = `list({ locale: ${locale} })`;
   const lang = extractLangFromLocale(locale);
   const listByLangCallback = (knex) => knex.whereLike('locale', `${lang}%`).orderBy('id');
@@ -87,13 +79,6 @@ export async function findPaginatedFilteredRecommendedByUserId({
   page,
   locale = FRENCH_FRANCE,
 } = {}) {
-  if (!config.featureToggles.useNewLearningContent)
-    return oldTutorialRepository.findPaginatedFilteredRecommendedByUserId({
-      userId,
-      filters,
-      page,
-      locale,
-    });
   const invalidatedKnowledgeElements = await knowledgeElementRepository.findInvalidatedAndDirectByUserId(userId);
 
   const [userSavedTutorials, tutorialEvaluations, skills] = await Promise.all([

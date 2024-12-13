@@ -1,10 +1,8 @@
 import { knex } from '../../../../db/knex-database-connection.js';
-import { config } from '../../config.js';
 import { NotFoundError } from '../../domain/errors.js';
 import { Skill } from '../../domain/models/Skill.js';
 import { getTranslatedKey } from '../../domain/services/get-translated-text.js';
 import { LearningContentRepository } from './learning-content-repository.js';
-import * as oldSkillRepository from './skill-repository_old.js';
 
 const TABLE_NAME = 'learningcontent.skills';
 const ACTIVE_STATUS = 'actif';
@@ -12,7 +10,6 @@ const ARCHIVED_STATUS = 'archivé';
 const OPERATIVE_STATUSES = [ACTIVE_STATUS, ARCHIVED_STATUS];
 
 export async function get(id, { locale, useFallback } = { locale: null, useFallback: true }) {
-  if (!config.featureToggles.useNewLearningContent) return oldSkillRepository.get(id, { locale, useFallback });
   const skillDto = await getInstance().load(id);
   if (!skillDto) {
     throw new NotFoundError('Erreur, acquis introuvable');
@@ -21,7 +18,6 @@ export async function get(id, { locale, useFallback } = { locale: null, useFallb
 }
 
 export async function list() {
-  if (!config.featureToggles.useNewLearningContent) return oldSkillRepository.list();
   const cacheKey = 'list()';
   const listCallback = (knex) => knex.orderBy('id');
   const skillDtos = await getInstance().find(cacheKey, listCallback);
@@ -29,7 +25,6 @@ export async function list() {
 }
 
 export async function findActiveByTubeId(tubeId) {
-  if (!config.featureToggles.useNewLearningContent) return oldSkillRepository.findActiveByTubeId(tubeId);
   const cacheKey = `findActiveByTubeId(${tubeId})`;
   const findActiveByTubeIdCallback = (knex) => knex.where({ tubeId, status: ACTIVE_STATUS }).orderBy('id');
   const skillDtos = await getInstance().find(cacheKey, findActiveByTubeIdCallback);
@@ -37,7 +32,6 @@ export async function findActiveByTubeId(tubeId) {
 }
 
 export async function findOperativeByTubeId(tubeId) {
-  if (!config.featureToggles.useNewLearningContent) return oldSkillRepository.findOperativeByTubeId(tubeId);
   const cacheKey = `findOperativeByTubeId(${tubeId})`;
   const findOperativeByTubeIdCallback = (knex) =>
     knex.where({ tubeId }).whereIn('status', OPERATIVE_STATUSES).orderBy('id');
@@ -46,7 +40,6 @@ export async function findOperativeByTubeId(tubeId) {
 }
 
 export async function findActiveByCompetenceId(competenceId) {
-  if (!config.featureToggles.useNewLearningContent) return oldSkillRepository.findActiveByCompetenceId(competenceId);
   const cacheKey = `findActiveByCompetenceId(${competenceId})`;
   const findActiveByCompetenceIdCallback = (knex) => knex.where({ competenceId, status: ACTIVE_STATUS }).orderBy('id');
   const skillDtos = await getInstance().find(cacheKey, findActiveByCompetenceIdCallback);
@@ -54,7 +47,6 @@ export async function findActiveByCompetenceId(competenceId) {
 }
 
 export async function findOperativeByCompetenceId(competenceId) {
-  if (!config.featureToggles.useNewLearningContent) return oldSkillRepository.findOperativeByCompetenceId(competenceId);
   const cacheKey = `findOperativeByCompetenceId(${competenceId})`;
   const findOperativeByCompetenceIdCallback = (knex) =>
     knex.where({ competenceId }).whereIn('status', OPERATIVE_STATUSES).orderBy('id');
@@ -63,8 +55,6 @@ export async function findOperativeByCompetenceId(competenceId) {
 }
 
 export async function findOperativeByCompetenceIds(competenceIds) {
-  if (!config.featureToggles.useNewLearningContent)
-    return oldSkillRepository.findOperativeByCompetenceIds(competenceIds);
   const ids = await knex
     .pluck('id')
     .from(TABLE_NAME)
@@ -76,7 +66,6 @@ export async function findOperativeByCompetenceIds(competenceIds) {
 }
 
 export async function findOperativeByIds(ids) {
-  if (!config.featureToggles.useNewLearningContent) return oldSkillRepository.findOperativeByIds(ids);
   const skillDtos = await getInstance().getMany(ids);
   return skillDtos
     .filter((skillDto) => skillDto && OPERATIVE_STATUSES.includes(skillDto.status))
@@ -85,7 +74,6 @@ export async function findOperativeByIds(ids) {
 }
 
 export async function findByRecordIds(ids) {
-  if (!config.featureToggles.useNewLearningContent) return oldSkillRepository.findByRecordIds(ids);
   const skillDtos = await getInstance().getMany(ids);
   return skillDtos
     .filter((skillDto) => skillDto)
@@ -94,7 +82,6 @@ export async function findByRecordIds(ids) {
 }
 
 export async function findActiveByRecordIds(ids) {
-  if (!config.featureToggles.useNewLearningContent) return oldSkillRepository.findActiveByRecordIds(ids);
   const skillDtos = await getInstance().getMany(ids);
   return skillDtos
     .filter((skillDto) => skillDto && skillDto.status === ACTIVE_STATUS)

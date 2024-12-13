@@ -1,7 +1,6 @@
-import { config } from '../../../../../src/shared/config.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import * as courseRepository from '../../../../../src/shared/infrastructure/repositories/course-repository.js';
-import { catchErr, domainBuilder, expect, mockLearningContent } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Repository | course-repository', function () {
   const courseData0 = {
@@ -22,69 +21,54 @@ describe('Integration | Repository | course-repository', function () {
   };
 
   beforeEach(async function () {
-    await mockLearningContent({
+    databaseBuilder.factory.learningContent.build({
       courses: [courseData0, courseData1],
     });
+    await databaseBuilder.commit();
   });
 
-  testCourseRepository(); // eslint-disable-line mocha/no-setup-in-describe
+  describe('#get', function () {
+    context('when course found for given id', function () {
+      it('should return the course', async function () {
+        // when
+        const course = await courseRepository.get('courseId1');
 
-  describe('when using old learning content', function () {
-    beforeEach(function () {
-      config.featureToggles.useNewLearningContent = false;
+        // then
+        expect(course).to.deepEqualInstance(domainBuilder.buildCourse(courseData1));
+      });
     });
 
-    afterEach(function () {
-      config.featureToggles.useNewLearningContent = true;
-    });
+    context('when no course found', function () {
+      it('should throw a NotFound error', async function () {
+        // when
+        const err = await catchErr(courseRepository.get, courseRepository)('coucouLoulou');
 
-    testCourseRepository(); // eslint-disable-line mocha/no-setup-in-describe
+        // then
+        expect(err).to.be.instanceOf(NotFoundError);
+      });
+    });
   });
 
-  function testCourseRepository() {
-    describe('#get', function () {
-      context('when course found for given id', function () {
-        it('should return the course', async function () {
-          // when
-          const course = await courseRepository.get('courseId1');
+  describe('#getCourseName', function () {
+    context('when course found for given id', function () {
+      it('should return the course name', async function () {
+        // when
+        const courseName = await courseRepository.getCourseName('courseId0');
 
-          // then
-          expect(course).to.deepEqualInstance(domainBuilder.buildCourse(courseData1));
-        });
-      });
-
-      context('when no course found', function () {
-        it('should throw a NotFound error', async function () {
-          // when
-          const err = await catchErr(courseRepository.get, courseRepository)('coucouLoulou');
-
-          // then
-          expect(err).to.be.instanceOf(NotFoundError);
-        });
+        // then
+        expect(courseName).to.deep.equal(courseData0.name);
       });
     });
 
-    describe('#getCourseName', function () {
-      context('when course found for given id', function () {
-        it('should return the course name', async function () {
-          // when
-          const courseName = await courseRepository.getCourseName('courseId0');
+    context('when no course found', function () {
+      it('should throw a NotFound error', async function () {
+        // when
+        const err = await catchErr(courseRepository.getCourseName, courseRepository)('coucouLoulou');
 
-          // then
-          expect(courseName).to.deep.equal(courseData0.name);
-        });
-      });
-
-      context('when no course found', function () {
-        it('should throw a NotFound error', async function () {
-          // when
-          const err = await catchErr(courseRepository.getCourseName, courseRepository)('coucouLoulou');
-
-          // then
-          expect(err).to.be.instanceOf(NotFoundError);
-          expect(err.message).to.equal("Le test demandé n'existe pas");
-        });
+        // then
+        expect(err).to.be.instanceOf(NotFoundError);
+        expect(err.message).to.equal("Le test demandé n'existe pas");
       });
     });
-  }
+  });
 });

@@ -23,21 +23,19 @@ describe('Learning Content | Unit | UseCase | create-learning-content-release', 
       const tutorials = Symbol('tutorials');
       const missions = Symbol('missions');
 
-      const LearningContentCache = {
-        instance: {
-          update: sinon.stub().resolves({
-            frameworks,
-            areas,
-            competences,
-            thematics,
-            tubes,
-            skills,
-            challenges,
-            courses,
-            tutorials,
-            missions,
-          }),
-        },
+      const lcmsClient = {
+        createRelease: sinon.stub().resolves({
+          frameworks,
+          areas,
+          competences,
+          thematics,
+          tubes,
+          skills,
+          challenges,
+          courses,
+          tutorials,
+          missions,
+        }),
       };
 
       const frameworkRepository = {
@@ -83,7 +81,7 @@ describe('Learning Content | Unit | UseCase | create-learning-content-release', 
 
       // when
       await createLearningContentRelease({
-        LearningContentCache,
+        lcmsClient,
         frameworkRepository,
         areaRepository,
         competenceRepository,
@@ -97,7 +95,7 @@ describe('Learning Content | Unit | UseCase | create-learning-content-release', 
       });
 
       // then
-      expect(LearningContentCache.instance.update).to.have.been.calledOnce;
+      expect(lcmsClient.createRelease).to.have.been.calledOnce;
 
       expect(frameworkRepository.saveMany).to.have.been.calledOnceWithExactly(frameworks);
       expect(areaRepository.saveMany).to.have.been.calledOnceWithExactly(areas);

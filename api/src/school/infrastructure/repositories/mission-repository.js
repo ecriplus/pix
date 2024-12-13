@@ -4,13 +4,11 @@ import { getTranslatedKey } from '../../../shared/domain/services/get-translated
 import { LearningContentRepository } from '../../../shared/infrastructure/repositories/learning-content-repository.js';
 import { Mission, MissionContent, MissionStep } from '../../domain/models/Mission.js';
 import { MissionNotFoundError } from '../../domain/school-errors.js';
-import * as oldMissionRepository from './mission-repository_old.js';
 
 const { FRENCH_SPOKEN } = LOCALE;
 const TABLE_NAME = 'learningcontent.missions';
 
 export async function get(id, locale = FRENCH_SPOKEN) {
-  if (!config.featureToggles.useNewLearningContent) return oldMissionRepository.get(id, locale);
   const parsedIntId = parseInt(id, 10);
   if (isNaN(parsedIntId)) {
     throw new MissionNotFoundError(id);
@@ -23,7 +21,6 @@ export async function get(id, locale = FRENCH_SPOKEN) {
 }
 
 export async function findAllActiveMissions(locale = FRENCH_SPOKEN) {
-  if (!config.featureToggles.useNewLearningContent) return oldMissionRepository.findAllActiveMissions(locale);
   const cacheKey = 'findAllActiveMissions()';
   const acceptedStatuses = config.featureToggles.showExperimentalMissions
     ? ['VALIDATED', 'EXPERIMENTAL']

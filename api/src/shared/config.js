@@ -49,6 +49,9 @@ function _getLogForHumans() {
   return processOutputingToTerminal && !forceJSONLogs;
 }
 
+// Can be useful for A/B testing, leaving it here
+// while we think on how we can do better
+// eslint-disable-next-line no-unused-vars
 function isEnabledByContainerModulo(envVarValue) {
   const modulo = _getNumber(envVarValue, 0);
   if (modulo === 0) return false;
@@ -60,6 +63,30 @@ function isEnabledByContainerModulo(envVarValue) {
   if (Number.isNaN(containerIndex)) return false;
 
   return containerIndex % modulo === 0;
+}
+
+function getSeedsConfig() {
+  const context = buildSeedsContext(process.env.SEEDS_CONTEXT);
+
+  const frameworks = process.env.SEEDS_LEARNING_CONTENT_FRAMEWORKS?.split(',') ?? ['Pix', 'Droit', 'Edu', 'Modulix'];
+  if (context.junior && !frameworks.includes('Pix 1D')) {
+    frameworks.push('Pix 1D');
+  }
+
+  return {
+    context,
+    learningContent: {
+      frameworks,
+      locales: process.env.SEEDS_LEARNING_CONTENT_LOCALES?.split(',') ?? ['fr-fr', 'en'],
+    },
+  };
+}
+
+const SEEDS_CONTEXTS = ['prescription', 'devcomp', 'junior', 'acces', 'contenu', 'certification', 'evaluation'];
+
+function buildSeedsContext(value) {
+  const values = value && value.length ? value.toLowerCase().split('|') : SEEDS_CONTEXTS;
+  return Object.fromEntries(Array.from(SEEDS_CONTEXTS, (v) => [v, values.includes(v)]));
 }
 
 const configuration = (function () {
@@ -237,7 +264,6 @@ const configuration = (function () {
       showExperimentalMissions: toBoolean(process.env.FT_SHOW_EXPERIMENTAL_MISSIONS),
       showNewCampaignPresentationPage: toBoolean(process.env.FT_SHOW_NEW_CAMPAIGN_PRESENTATION_PAGE),
       showNewResultPage: toBoolean(process.env.FT_SHOW_NEW_RESULT_PAGE),
-      useNewLearningContent: isEnabledByContainerModulo(process.env.FT_USE_NEW_LEARNING_CONTENT_CONTAINER_MODULO),
     },
     hapi: {
       options: {},
@@ -361,6 +387,7 @@ const configuration = (function () {
       },
       accessTokenLifespanMs: ms(process.env.SAML_ACCESS_TOKEN_LIFESPAN || '7d'),
     },
+    seeds: getSeedsConfig(),
     sentry: {
       enabled: toBoolean(process.env.SENTRY_ENABLED),
       dsn: process.env.SENTRY_DSN,
@@ -461,7 +488,6 @@ const configuration = (function () {
     config.featureToggles.isLegalDocumentsVersioningEnabled = false;
     config.featureToggles.showNewResultPage = false;
     config.featureToggles.showExperimentalMissions = false;
-    config.featureToggles.useNewLearningContent = true;
 
     config.mailing.enabled = false;
     config.mailing.provider = 'brevo';

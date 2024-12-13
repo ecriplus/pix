@@ -1,5 +1,5 @@
 import { NotFoundError } from '../../../shared/domain/errors.js';
-import { LearningContentResourceNotFound } from '../../../shared/infrastructure/datasources/learning-content/LearningContentResourceNotFound.js';
+import { LearningContentResourceNotFound } from '../../../shared/domain/errors.js';
 import { ModuleFactory } from '../factories/module-factory.js';
 
 async function getBySlug({ slug, moduleDatasource }) {

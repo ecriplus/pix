@@ -106,102 +106,17 @@ describe('Learning Content | Unit | Domain | Usecase | Patch learning content ca
         });
 
         it(`should call save and clearCache on appropriate repository`, async function () {
-          // given
-          const learningContent = {
-            [modelName]: [
-              { attr1: 'attr1 value index 0', id: 'otherRecordId' },
-              { attr1: 'attr1 value index 1', id: recordId },
-            ],
-            someOtherModelName: [{ other: 'entry', id: recordId }],
-          };
-          const LearningContentCache = {
-            instance: {
-              get: sinon.stub().resolves(learningContent),
-              patch: sinon.stub().resolves(),
-            },
-          };
-
           // when
           await patchLearningContentCacheEntry({
             recordId,
             updatedRecord,
             modelName,
-            LearningContentCache,
             ...repositories,
           });
 
           // then
           expect(repositoriesByModel[modelName].save).to.have.been.calledOnceWithExactly(updatedRecord);
           expect(repositoriesByModel[modelName].clearCache).to.have.been.calledOnceWithExactly(recordId);
-        });
-
-        describe('when entry is already in cache', function () {
-          it('should patch learning content cache with provided updated entry', async function () {
-            // given
-            const LearningContentCache = {
-              instance: {
-                get: sinon.stub(),
-                patch: sinon.stub(),
-              },
-            };
-            const learningContent = {
-              [modelName]: [
-                { attr1: 'attr1 value index 0', id: 'otherRecordId' },
-                { attr1: 'attr1 value index 1', id: recordId },
-              ],
-              someOtherModelName: [{ other: 'entry', id: recordId }],
-            };
-            LearningContentCache.instance.get.resolves(learningContent);
-
-            // when
-            await patchLearningContentCacheEntry({
-              recordId,
-              updatedRecord,
-              modelName,
-              LearningContentCache,
-              ...repositories,
-            });
-
-            // then
-            expect(LearningContentCache.instance.patch).to.have.been.calledWithExactly({
-              operation: 'assign',
-              path: `${modelName}[1]`,
-              value: updatedRecord,
-            });
-          });
-        });
-
-        describe('when entry is not in cache', function () {
-          it('should patch learning content cache by adding provided entry', async function () {
-            // given
-            const LearningContentCache = {
-              instance: {
-                get: sinon.stub(),
-                patch: sinon.stub(),
-              },
-            };
-            const learningContent = {
-              [modelName]: [{ attr1: 'attr1 value index 0', id: 'otherRecordId' }],
-              someOtherModelName: [{ other: 'entry', id: recordId }],
-            };
-            LearningContentCache.instance.get.resolves(learningContent);
-
-            // when
-            await patchLearningContentCacheEntry({
-              recordId,
-              updatedRecord,
-              modelName,
-              LearningContentCache,
-              ...repositories,
-            });
-
-            // then
-            expect(LearningContentCache.instance.patch).to.have.been.calledWithExactly({
-              operation: 'push',
-              path: modelName,
-              value: updatedRecord,
-            });
-          });
         });
       });
     });

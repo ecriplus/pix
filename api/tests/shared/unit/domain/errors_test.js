@@ -27,6 +27,10 @@ describe('Unit | Shared | Domain | Errors', function () {
     expect(errors.InvalidVerificationCodeError).to.exist;
   });
 
+  it('should export an LearningContentResourceNotFound', function () {
+    expect(errors.LearningContentResourceNotFound).to.exist;
+  });
+
   context('OidcError', function () {
     it('exports "OidcError" class', function () {
       // then

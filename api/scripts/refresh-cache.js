@@ -5,7 +5,7 @@ import { usecases } from '../src/learning-content/domain/usecases/index.js';
 import { learningContentCache } from '../src/shared/infrastructure/caches/learning-content-cache.js';
 import { logger, SCOPES } from '../src/shared/infrastructure/utils/logger.js';
 
-logger.info('Starting refreshing Learning Content');
+logger.info({ event: SCOPES.LEARNING_CONTENT }, 'Starting refreshing Learning Content');
 
 try {
   await usecases.refreshLearningContentCache();

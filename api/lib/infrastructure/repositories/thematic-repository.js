@@ -1,15 +1,12 @@
-import { config } from '../../../src/shared/config.js';
 import { LOCALE } from '../../../src/shared/domain/constants.js';
 import { Thematic } from '../../../src/shared/domain/models/Thematic.js';
 import { getTranslatedKey } from '../../../src/shared/domain/services/get-translated-text.js';
 import { LearningContentRepository } from '../../../src/shared/infrastructure/repositories/learning-content-repository.js';
-import * as oldThematicRepository from './thematic-repository_old.js';
 
 const { FRENCH_FRANCE } = LOCALE;
 const TABLE_NAME = 'learningcontent.thematics';
 
 export async function list({ locale = FRENCH_FRANCE } = {}) {
-  if (!config.featureToggles.useNewLearningContent) return oldThematicRepository.list({ locale });
   const cacheKey = 'list()';
   const listCallback = (knex) => knex.orderBy('id');
   const thematicDtos = await getInstance().find(cacheKey, listCallback);
@@ -17,8 +14,6 @@ export async function list({ locale = FRENCH_FRANCE } = {}) {
 }
 
 export async function findByCompetenceIds(competenceIds, locale) {
-  if (!config.featureToggles.useNewLearningContent)
-    return oldThematicRepository.findByCompetenceIds(competenceIds, locale);
   const cacheKey = `findByCompetenceIds([${competenceIds.sort()}])`;
   const findByCompetenceIdsCallback = (knex) => knex.whereIn('competenceId', competenceIds).orderBy('id');
   const thematicDtos = await getInstance().find(cacheKey, findByCompetenceIdsCallback);
@@ -26,7 +21,6 @@ export async function findByCompetenceIds(competenceIds, locale) {
 }
 
 export async function findByRecordIds(ids, locale) {
-  if (!config.featureToggles.useNewLearningContent) return oldThematicRepository.findByRecordIds(ids, locale);
   const thematicDtos = await getInstance().getMany(ids);
   return thematicDtos
     .filter((thematic) => thematic)

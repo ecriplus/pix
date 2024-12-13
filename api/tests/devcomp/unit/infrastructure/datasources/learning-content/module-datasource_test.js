@@ -1,5 +1,5 @@
 import moduleDatasource from '../../../../../../src/devcomp/infrastructure/datasources/learning-content/module-datasource.js';
-import { LearningContentResourceNotFound } from '../../../../../../src/shared/infrastructure/datasources/learning-content/LearningContentResourceNotFound.js';
+import { LearningContentResourceNotFound } from '../../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../../test-helper.js';
 import { joiErrorParser } from './validation/joi-error-parser.js';
 import { moduleSchema } from './validation/module-schema.js';

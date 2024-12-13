@@ -1,6 +1,5 @@
 import * as thematicRepository from '../../../../lib/infrastructure/repositories/thematic-repository.js';
-import { config } from '../../../../src/shared/config.js';
-import { domainBuilder, expect, mockLearningContent } from '../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../test-helper.js';
 
 describe('Integration | Repository | thematic-repository', function () {
   const thematicData0 = {
@@ -33,32 +32,74 @@ describe('Integration | Repository | thematic-repository', function () {
   };
 
   beforeEach(async function () {
-    await mockLearningContent({
+    databaseBuilder.factory.learningContent.build({
       thematics: [thematicData0, thematicData3, thematicData2, thematicData1],
     });
+    await databaseBuilder.commit();
   });
 
-  // eslint-disable-next-line mocha/no-setup-in-describe
-  testThematicRepository();
+  describe('#list', function () {
+    context('when no locale provided', function () {
+      it('should return all thematics translated by default with locale FR-FR', async function () {
+        // when
+        const thematics = await thematicRepository.list();
 
-  describe('when using old learning content', function () {
-    beforeEach(function () {
-      config.featureToggles.useNewLearningContent = false;
+        // then
+        expect(thematics).to.deepEqualArray([
+          domainBuilder.buildThematic({
+            ...thematicData0,
+            name: thematicData0.name_i18n.fr,
+          }),
+          domainBuilder.buildThematic({
+            ...thematicData1,
+            name: thematicData1.name_i18n.fr,
+          }),
+          domainBuilder.buildThematic({
+            ...thematicData2,
+            name: thematicData2.name_i18n.fr,
+          }),
+          domainBuilder.buildThematic({
+            ...thematicData3,
+            name: thematicData3.name_i18n.fr,
+          }),
+        ]);
+      });
     });
 
-    afterEach(function () {
-      config.featureToggles.useNewLearningContent = true;
-    });
+    context('when a locale is provided', function () {
+      it('should return all thematics translated in the given locale or with fallback FR-FR', async function () {
+        // when
+        const thematics = await thematicRepository.list({ locale: 'en' });
 
-    testThematicRepository(); // eslint-disable-line mocha/no-setup-in-describe
+        // then
+        expect(thematics).to.deepEqualArray([
+          domainBuilder.buildThematic({
+            ...thematicData0,
+            name: thematicData0.name_i18n.en,
+          }),
+          domainBuilder.buildThematic({
+            ...thematicData1,
+            name: thematicData1.name_i18n.fr,
+          }),
+          domainBuilder.buildThematic({
+            ...thematicData2,
+            name: thematicData2.name_i18n.en,
+          }),
+          domainBuilder.buildThematic({
+            ...thematicData3,
+            name: thematicData3.name_i18n.fr,
+          }),
+        ]);
+      });
+    });
   });
 
-  function testThematicRepository() {
-    describe('#list', function () {
+  describe('#findByCompetenceIds', function () {
+    context('when thematics found by competence ids', function () {
       context('when no locale provided', function () {
-        it('should return all thematics translated by default with locale FR-FR', async function () {
+        it('should return all thematics found translated in default locale FR given by their ids', async function () {
           // when
-          const thematics = await thematicRepository.list();
+          const thematics = await thematicRepository.findByCompetenceIds(['competenceIdB', 'competenceIdA']);
 
           // then
           expect(thematics).to.deepEqualArray([
@@ -74,18 +115,14 @@ describe('Integration | Repository | thematic-repository', function () {
               ...thematicData2,
               name: thematicData2.name_i18n.fr,
             }),
-            domainBuilder.buildThematic({
-              ...thematicData3,
-              name: thematicData3.name_i18n.fr,
-            }),
           ]);
         });
       });
 
       context('when a locale is provided', function () {
-        it('should return all thematics translated in the given locale or with fallback FR-FR', async function () {
+        it('should return all thematics found translated in provided locale of fallback to default locale FR', async function () {
           // when
-          const thematics = await thematicRepository.list({ locale: 'en' });
+          const thematics = await thematicRepository.findByCompetenceIds(['competenceIdB', 'competenceIdA'], 'en');
 
           // then
           expect(thematics).to.deepEqualArray([
@@ -101,148 +138,54 @@ describe('Integration | Repository | thematic-repository', function () {
               ...thematicData2,
               name: thematicData2.name_i18n.en,
             }),
-            domainBuilder.buildThematic({
-              ...thematicData3,
-              name: thematicData3.name_i18n.fr,
-            }),
           ]);
         });
+      });
+
+      it('should ignore null and duplicates', async function () {
+        // when
+        const thematics = await thematicRepository.findByCompetenceIds([
+          'competenceIdB',
+          'competenceIdA',
+          'competenceCOUCOUMAMAN',
+          'competenceIdB',
+        ]);
+
+        // then
+        expect(thematics).to.deepEqualArray([
+          domainBuilder.buildThematic({
+            ...thematicData0,
+            name: thematicData0.name_i18n.fr,
+          }),
+          domainBuilder.buildThematic({
+            ...thematicData1,
+            name: thematicData1.name_i18n.fr,
+          }),
+          domainBuilder.buildThematic({
+            ...thematicData2,
+            name: thematicData2.name_i18n.fr,
+          }),
+        ]);
       });
     });
 
-    describe('#findByCompetenceIds', function () {
-      context('when thematics found by competence ids', function () {
-        context('when no locale provided', function () {
-          it('should return all thematics found translated in default locale FR given by their ids', async function () {
-            // when
-            const thematics = await thematicRepository.findByCompetenceIds(['competenceIdB', 'competenceIdA']);
+    context('when no thematics found for given competence ids', function () {
+      it('should return an empty array', async function () {
+        // when
+        const thematics = await thematicRepository.findByCompetenceIds(['recCouCouRoRo', 'recCouCouGabDou']);
 
-            // then
-            expect(thematics).to.deepEqualArray([
-              domainBuilder.buildThematic({
-                ...thematicData0,
-                name: thematicData0.name_i18n.fr,
-              }),
-              domainBuilder.buildThematic({
-                ...thematicData1,
-                name: thematicData1.name_i18n.fr,
-              }),
-              domainBuilder.buildThematic({
-                ...thematicData2,
-                name: thematicData2.name_i18n.fr,
-              }),
-            ]);
-          });
-        });
-
-        context('when a locale is provided', function () {
-          it('should return all thematics found translated in provided locale of fallback to default locale FR', async function () {
-            // when
-            const thematics = await thematicRepository.findByCompetenceIds(['competenceIdB', 'competenceIdA'], 'en');
-
-            // then
-            expect(thematics).to.deepEqualArray([
-              domainBuilder.buildThematic({
-                ...thematicData0,
-                name: thematicData0.name_i18n.en,
-              }),
-              domainBuilder.buildThematic({
-                ...thematicData1,
-                name: thematicData1.name_i18n.fr,
-              }),
-              domainBuilder.buildThematic({
-                ...thematicData2,
-                name: thematicData2.name_i18n.en,
-              }),
-            ]);
-          });
-        });
-
-        it('should ignore null and duplicates', async function () {
-          // when
-          const thematics = await thematicRepository.findByCompetenceIds([
-            'competenceIdB',
-            'competenceIdA',
-            'competenceCOUCOUMAMAN',
-            'competenceIdB',
-          ]);
-
-          // then
-          expect(thematics).to.deepEqualArray([
-            domainBuilder.buildThematic({
-              ...thematicData0,
-              name: thematicData0.name_i18n.fr,
-            }),
-            domainBuilder.buildThematic({
-              ...thematicData1,
-              name: thematicData1.name_i18n.fr,
-            }),
-            domainBuilder.buildThematic({
-              ...thematicData2,
-              name: thematicData2.name_i18n.fr,
-            }),
-          ]);
-        });
-      });
-
-      context('when no thematics found for given competence ids', function () {
-        it('should return an empty array', async function () {
-          // when
-          const thematics = await thematicRepository.findByCompetenceIds(['recCouCouRoRo', 'recCouCouGabDou']);
-
-          // then
-          expect(thematics).to.deep.equal([]);
-        });
+        // then
+        expect(thematics).to.deep.equal([]);
       });
     });
+  });
 
-    describe('#findByRecordIds', function () {
-      context('when thematics found by ids', function () {
-        context('when no locale provided', function () {
-          it('should return all thematics found translated in default locale FR given by their ids ordered by name', async function () {
-            // when
-            const thematics = await thematicRepository.findByRecordIds(['thematicId3', 'thematicId0']);
-
-            // then
-            expect(thematics).to.deepEqualArray([
-              domainBuilder.buildThematic({
-                ...thematicData0,
-                name: thematicData0.name_i18n.fr,
-              }),
-              domainBuilder.buildThematic({
-                ...thematicData3,
-                name: thematicData3.name_i18n.fr,
-              }),
-            ]);
-          });
-        });
-
-        context('when a locale is provided', function () {
-          it('should return all thematics found translated in provided locale of fallback to default locale FR', async function () {
-            // when
-            const thematics = await thematicRepository.findByRecordIds(['thematicId3', 'thematicId0'], 'en');
-
-            // then
-            expect(thematics).to.deepEqualArray([
-              domainBuilder.buildThematic({
-                ...thematicData0,
-                name: thematicData0.name_i18n.en,
-              }),
-              domainBuilder.buildThematic({
-                ...thematicData3,
-                name: thematicData3.name_i18n.fr,
-              }),
-            ]);
-          });
-        });
-        it('should ignore nulls and duplicates', async function () {
+  describe('#findByRecordIds', function () {
+    context('when thematics found by ids', function () {
+      context('when no locale provided', function () {
+        it('should return all thematics found translated in default locale FR given by their ids ordered by name', async function () {
           // when
-          const thematics = await thematicRepository.findByRecordIds([
-            'thematicId3',
-            'thematicId0',
-            'thematicCOUCOUPAPA',
-            'thematicId3',
-          ]);
+          const thematics = await thematicRepository.findByRecordIds(['thematicId3', 'thematicId0']);
 
           // then
           expect(thematics).to.deepEqualArray([
@@ -258,15 +201,55 @@ describe('Integration | Repository | thematic-repository', function () {
         });
       });
 
-      context('when no thematics found for given ids', function () {
-        it('should return an empty array', async function () {
+      context('when a locale is provided', function () {
+        it('should return all thematics found translated in provided locale of fallback to default locale FR', async function () {
           // when
-          const thematics = await thematicRepository.findByRecordIds(['recCouCouRoRo', 'recCouCouGabDou']);
+          const thematics = await thematicRepository.findByRecordIds(['thematicId3', 'thematicId0'], 'en');
 
           // then
-          expect(thematics).to.deep.equal([]);
+          expect(thematics).to.deepEqualArray([
+            domainBuilder.buildThematic({
+              ...thematicData0,
+              name: thematicData0.name_i18n.en,
+            }),
+            domainBuilder.buildThematic({
+              ...thematicData3,
+              name: thematicData3.name_i18n.fr,
+            }),
+          ]);
         });
       });
+      it('should ignore nulls and duplicates', async function () {
+        // when
+        const thematics = await thematicRepository.findByRecordIds([
+          'thematicId3',
+          'thematicId0',
+          'thematicCOUCOUPAPA',
+          'thematicId3',
+        ]);
+
+        // then
+        expect(thematics).to.deepEqualArray([
+          domainBuilder.buildThematic({
+            ...thematicData0,
+            name: thematicData0.name_i18n.fr,
+          }),
+          domainBuilder.buildThematic({
+            ...thematicData3,
+            name: thematicData3.name_i18n.fr,
+          }),
+        ]);
+      });
     });
-  }
+
+    context('when no thematics found for given ids', function () {
+      it('should return an empty array', async function () {
+        // when
+        const thematics = await thematicRepository.findByRecordIds(['recCouCouRoRo', 'recCouCouGabDou']);
+
+        // then
+        expect(thematics).to.deep.equal([]);
+      });
+    });
+  });
 });
