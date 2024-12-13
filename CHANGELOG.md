@@ -1,5 +1,50 @@
 # Pix Changelog
 
+## v5.2.0 (13/12/2024)
+
+
+### :rocket: Amélioration
+- [#10798](https://github.com/1024pix/pix/pull/10798) [FEATURE] Montée de version de PixUI vers la 51.2.0 (PIX-15700).
+- [#10781](https://github.com/1024pix/pix/pull/10781) [FEATURE] Script d'ajout d'un document legal (PIX-15582).
+- [#10794](https://github.com/1024pix/pix/pull/10794) [FEATURE] Ajouter de la pagination sur la page statistiques (PIX-15683).
+- [#10803](https://github.com/1024pix/pix/pull/10803) [FEATURE] Afficher dans les exports les dates aux formats UTC afin de faciliter le traitement avec l'heure (PIX-13289).
+- [#10790](https://github.com/1024pix/pix/pull/10790) [FEATURE] Changement de style pour la bannière des orga sco-1d (PIX-15672).
+- [#10793](https://github.com/1024pix/pix/pull/10793) [FEATURE] Changement de disposition (PIX-15487).
+- [#10730](https://github.com/1024pix/pix/pull/10730) [FEATURE] Affiche les participations anonymisées (Pix-15517).
+- [#10779](https://github.com/1024pix/pix/pull/10779) [FEATURE] Calculer l'obtention de l'attestation a la fin du parcours (PIX-15498).
+- [#10789](https://github.com/1024pix/pix/pull/10789) [FEATURE] Remplacer les icônes stockées par le composant PixIcon (Pix-15454).
+- [#10771](https://github.com/1024pix/pix/pull/10771) [FEATURE] Traiter les retours sur la flashcard (PIX-15324).
+- [#10751](https://github.com/1024pix/pix/pull/10751) [FEATURE] Afficher les statistiques dans Pix Orga (PIX-15455).
+- [#10769](https://github.com/1024pix/pix/pull/10769) [FEATURE] Mettre a jour le logo du ministère sur les attestation de sixième (PIX-15512).
+
+### :building_construction: Tech
+- [#10764](https://github.com/1024pix/pix/pull/10764) [TECH] Migrer send-started-participation-results-to-pole-emploi vers le contexte Prescription (PIX-15337).
+- [#10776](https://github.com/1024pix/pix/pull/10776) [TECH] Utilisation des session et currentUser service stubs dans Pix App (PIX-15677).
+- [#10800](https://github.com/1024pix/pix/pull/10800) [TECH] Améliorer les logs de la route /api/token (PIX-15710).
+- [#10804](https://github.com/1024pix/pix/pull/10804) [TECH] Revoir l'injection des dépendances du model User (PIX-15712).
+- [#10788](https://github.com/1024pix/pix/pull/10788) [TECH] Migrer les usecases de copie des badges et paliers d'un profil cible (PIX-15675).
+- [#10773](https://github.com/1024pix/pix/pull/10773) [TECH] Migrer les participation avec un statut TO_SHARE et une date de participation (PIX-15647).
+- [#10778](https://github.com/1024pix/pix/pull/10778) [TECH] Migration de la route de dépublication de session (PIX-15676).
+- [#10463](https://github.com/1024pix/pix/pull/10463) [TECH] :truck: déplace la route et les fichiers utilisé pour `user-orga-settings`.
+- [#10791](https://github.com/1024pix/pix/pull/10791) [TECH] Appliquer le nouveau shade aux composants PixReturnTo sur Pix App (PIX-15685).
+- [#10757](https://github.com/1024pix/pix/pull/10757) [TECH] Utiliser le type error sur les PixNotificationAlert.
+- [#10760](https://github.com/1024pix/pix/pull/10760) [TECH] Isoler le contexte du GAR dans le session service via des fonctions dédiés.
+
+### :bug: Correction
+- [#10797](https://github.com/1024pix/pix/pull/10797) [BUGFIX] Retirer cette petite étoile dans mon-pix (PIX-15721).
+- [#10796](https://github.com/1024pix/pix/pull/10796) [BUGFIX] Se baser sur le status d'une participation et non sur une date de partage pour le `isShared` (Pix-15648).
+- [#10795](https://github.com/1024pix/pix/pull/10795) [BUGFIX] Garantir un comportement ISO entre l'ancienne version et la nouvelle version du repository lorsqu'on passe des valeurs invalides en guise de collection (PIX-15696).
+- [#10774](https://github.com/1024pix/pix/pull/10774) [BUGFIX] Perte des infos GAR quand la page est rafraichie (PIX-12534).
+- [#10775](https://github.com/1024pix/pix/pull/10775) [BUGFIX] Corrige l'affichage du dashboard en anglais.
+- [#10759](https://github.com/1024pix/pix/pull/10759) [BUGFIX] Permettre la finalisation des sessions ayant à la fois des certifications complétés et une raison d'abandon (PIX-15524).
+- [#10772](https://github.com/1024pix/pix/pull/10772) [BUGFIX] Retirer l'externalId d'une organisation dans le menu lorsque celle ci n'en possède pas (Pix-15658).
+- [#10747](https://github.com/1024pix/pix/pull/10747) [BUGFIX] Afficher les données de campagnes supprimées non anonymisé (PIX-15613).
+- [#10738](https://github.com/1024pix/pix/pull/10738) [BUGFIX] Ajouter blocage compte utilisateur sur 2 formulaires oubliés provoquant des user-logins.failureCount supérieurs à 50 (PIX-14229).
+
+### :arrow_up: Montée de version
+- [#10782](https://github.com/1024pix/pix/pull/10782) [BUMP] Update dependency @1024pix/pix-ui to v51 (mon-pix).
+- [#10768](https://github.com/1024pix/pix/pull/10768) [BUMP] Update dependency browser-tools to v1.4.9 (.circleci).
+
 ## v5.1.0 (10/12/2024)
 
 
