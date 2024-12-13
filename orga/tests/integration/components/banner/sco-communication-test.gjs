@@ -8,6 +8,10 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Banner::Sco-communication', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  hooks.beforeEach(function () {
+    this.intl = this.owner.lookup('service:intl');
+  });
+
   module('Import Banner', function () {
     module('when prescriber’s organization is of type SCO that manages students', function () {
       [
@@ -34,7 +38,7 @@ module('Integration | Component | Banner::Sco-communication', function (hooks) {
             const screen = await render(<template><Scommunication /></template>);
 
             // then
-            assert.ok(screen.getByRole('alert'));
+            assert.ok(screen.getByText(this.intl.t('banners.import.message')));
 
             const downloadLink = screen.getByRole('link', { name: 'télécharger les résultats' });
             assert.strictEqual(downloadLink.href, 'https://cloud.pix.fr/s/WjTnkSbFs9TDcSC');

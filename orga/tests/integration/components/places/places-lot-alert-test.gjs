@@ -33,7 +33,8 @@ module('Integration | Component | Places | PlacesLotsAlert', function (hooks) {
     ];
     // when
     const screen = await render(<template><PlacesLotsAlert @placesLots={{placesLots}} /></template>);
-    const banner = screen.getByRole('alert', { value: t('banners.last-places-lot-available.message') });
+    const banner = screen.getByText(t('banners.last-places-lot-available.message', { days: 27 }));
+
     // then
     assert.strictEqual(banner.outerText, t('banners.last-places-lot-available.message', { days: 27 }));
   });
@@ -57,7 +58,7 @@ module('Integration | Component | Places | PlacesLotsAlert', function (hooks) {
     const screen = await render(<template><PlacesLotsAlert @placesLots={{placesLots}} /></template>);
 
     // then
-    assert.notOk(screen.queryByRole('alert', { value: t('banners.last-places-lot-available.message') }));
+    assert.notOk(screen.queryByText(t('banners.last-places-lot-available.message')));
   });
   test('it should not show an alert if remaining days before places lot expires in more than 30 days', async function (assert) {
     // given
@@ -73,7 +74,7 @@ module('Integration | Component | Places | PlacesLotsAlert', function (hooks) {
     const screen = await render(<template><PlacesLotsAlert @placesLots={{placesLots}} /></template>);
 
     // then
-    assert.notOk(screen.queryByRole('alert', { value: t('banners.last-places-lot-available.message') }));
+    assert.notOk(screen.queryByText(t('banners.last-places-lot-available.message')));
   });
   test('it should not show alert if there is `PENDING` placesLots', async function (assert) {
     // given
@@ -95,7 +96,7 @@ module('Integration | Component | Places | PlacesLotsAlert', function (hooks) {
     const screen = await render(<template><PlacesLotsAlert @placesLots={{placesLots}} /></template>);
 
     // then
-    assert.notOk(screen.queryByRole('alert', { value: t('banners.last-places-lot-available.message') }));
+    assert.notOk(screen.queryByText(t('banners.last-places-lot-available.message')));
   });
   test('it should not show alert if there is no ACTIVE placesLots', async function (assert) {
     // given
@@ -111,7 +112,7 @@ module('Integration | Component | Places | PlacesLotsAlert', function (hooks) {
     const screen = await render(<template><PlacesLotsAlert @placesLots={{placesLots}} /></template>);
 
     // then
-    assert.notOk(screen.queryByRole('alert', { value: t('banners.last-places-lot-available.message') }));
+    assert.notOk(screen.queryByText(t('banners.last-places-lot-available.message')));
   });
   test('it should not show alert if there is no placesLots', async function (assert) {
     // given
@@ -120,6 +121,6 @@ module('Integration | Component | Places | PlacesLotsAlert', function (hooks) {
     const screen = await render(<template><PlacesLotsAlert @placesLots={{placesLots}} /></template>);
 
     // then
-    assert.notOk(screen.queryByRole('alert', { value: t('banners.last-places-lot-available.message') }));
+    assert.notOk(screen.queryByText(t('banners.last-places-lot-available.message')));
   });
 });
