@@ -118,34 +118,8 @@ const moduleContent = {
         {
           type: 'element',
           element: {
-            id: '84726001-1665-457d-8f13-4a74dc4768ea',
-            type: 'text',
-            content:
-              '<h3>On commence avec les leçons.<br>Les leçons sont des textes, des images ou des vidéos. Les leçons sont là pour vous expliquer des concepts ou des méthodes.</h3>',
-          },
-        },
-        {
-          type: 'element',
-          element: {
             id: '048e5319-5e81-44cc-ad71-c6c0d3be611f',
             type: 'separator',
-          },
-        },
-        {
-          type: 'element',
-          element: {
-            id: 'a2372bf4-86a4-4ecc-a188-b51f4f98bca2',
-            type: 'text',
-            content:
-              '<p>Voici un texte de leçon. Parfois, il y a des émojis pour aider à la lecture&nbsp;<span aria-hidden="true">📚</span>.</p>',
-          },
-        },
-        {
-          type: 'element',
-          element: {
-            id: '4cfd27d5-0947-47af-bfb6-52467143c38b',
-            type: 'text',
-            content: '<p>Et là, voici une image&#8239;!</p>',
           },
         },
         {
@@ -211,14 +185,6 @@ const moduleContent = {
       type: 'lesson',
       title: 'Vidéo de présentation de Pix',
       components: [
-        {
-          type: 'element',
-          element: {
-            id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
-            type: 'text',
-            content: '<p>À la fin de cette vidéo, une question sera posée sur les compétences Pix.</p>',
-          },
-        },
         {
           type: 'element',
           element: {
@@ -293,32 +259,6 @@ const moduleContent = {
                 },
               ],
             },
-            {
-              elements: [
-                {
-                  id: '9c73500d-abd9-4cc4-ab2d-a3876285b13c',
-                  type: 'qcu',
-                  instruction: '<p>Les compétences de Pix sont sur 8 niveaux.</p>',
-                  proposals: [
-                    {
-                      id: '1',
-                      content: 'Vrai',
-                    },
-                    {
-                      id: '2',
-                      content: 'Faux',
-                    },
-                  ],
-                  feedbacks: {
-                    valid:
-                      '<span class="feedback__state">Correct&#8239;!</span><p> Et oui ! A noter, seulement 7 sont actifs aujourd’hui.</p>',
-                    invalid:
-                      '<span class="feedback__state">Incorrect.</span><p> Incorrect ! Il existe 8 niveaux par compétence.</p>',
-                  },
-                  solution: '1',
-                },
-              ],
-            },
           ],
         },
       ],
@@ -362,41 +302,6 @@ const moduleContent = {
                 '<span class="feedback__state">Et non&#8239;!</span><p> Pix sert à évaluer, certifier et développer ses compétences numériques.</p>',
             },
             solutions: ['1', '3', '4'],
-          },
-        },
-      ],
-    },
-    {
-      id: '2a77a10f-19a3-4544-80f9-8012dad6506a',
-      type: 'activity',
-      title: 'Activité remonter dans la page',
-      components: [
-        {
-          type: 'element',
-          element: {
-            id: '0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447',
-            type: 'qcu',
-            instruction: '<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot&#8239;?</p>',
-            proposals: [
-              {
-                id: '1',
-                content: 'Bienvenue',
-              },
-              {
-                id: '2',
-                content: 'Bonjour',
-              },
-              {
-                id: '3',
-                content: 'Nous',
-              },
-            ],
-            feedbacks: {
-              valid: '<span class="feedback__state">Correct&#8239;!</span><p> Vous avez bien remonté la page</p>',
-              invalid:
-                '<span class="feedback__state">Incorrect.</span><p> Remonter la page pour retrouver le premier mot&#8239;!</p>',
-            },
-            solution: '2',
           },
         },
       ],
@@ -473,92 +378,6 @@ const moduleContent = {
             height: 600,
           },
         },
-        {
-          type: 'element',
-          element: {
-            id: '7fe0bc5f-1988-4da6-8231-a987335f2ae5',
-            type: 'qrocm',
-            instruction: '<p>Répondez à la question suivante</p>',
-            proposals: [
-              {
-                type: 'text',
-                content: '<span>Prénom de la personne qui est en train de parler&#8239;: </span>',
-              },
-              {
-                input: 'qui-parle',
-                type: 'input',
-                inputType: 'text',
-                size: 10,
-                display: 'inline',
-                placeholder: '',
-                ariaLabel: 'Remplir le prénom de la personne qui est en train de parler dans la visioconférence',
-                defaultValue: '',
-                tolerances: ['t1', 't2', 't3'],
-                solutions: ['Katie'],
-              },
-            ],
-            feedbacks: {
-              valid: '<span class="feedback__state">Correct&#8239;!</span>',
-              invalid: '<span class="feedback__state">Incorrect&#8239;!</span>',
-            },
-          },
-        },
-      ],
-    },
-    {
-      id: 'e8db3f90-4259-4d54-9113-1c56da726d8d',
-      type: 'activity',
-      title: 'Embed auto',
-      components: [
-        {
-          type: 'element',
-          element: {
-            id: '0559b68c-68a5-4816-a06e-f1c743c391e3',
-            type: 'embed',
-            isCompletionRequired: true,
-            title: 'Simulateur de visioconférence - micro ouvert',
-            url: 'https://epreuves.pix.fr/visio/visio.html?mode=modulix-didacticiel',
-            instruction:
-              '<p>Vous participez à la visioconférence ci-dessous.</p><p>Il y a du bruit à côté de vous.</p><p>Coupez le son de votre micro pour ne pas déranger vos interlocuteurs.</p>',
-            solution: 'toto',
-            height: 600,
-          },
-        },
-      ],
-    },
-    {
-      id: '7cf75e70-8749-4392-8081-f2c02badb0fb',
-      type: 'activity',
-      title: 'Le nom de ce produit',
-      components: [
-        {
-          type: 'element',
-          element: {
-            id: '98c51fa7-03b7-49b1-8c5e-49341d35909c',
-            type: 'qrocm',
-            instruction: '<p>Quel est le nom de ce nouveau produit Pix&#8239;?</p>',
-            proposals: [
-              {
-                input: 'nom-produit',
-                type: 'input',
-                inputType: 'text',
-                size: 10,
-                display: 'block',
-                placeholder: '',
-                ariaLabel: 'Nom de ce produit',
-                defaultValue: '',
-                tolerances: ['t1'],
-                solutions: ['Modulix'],
-              },
-            ],
-            feedbacks: {
-              valid:
-                '<span class="feedback__state">Correct&#8239;!</span><p> Vous êtes prêt à explorer&nbsp;<span aria-hidden="true">🎉</span></p>',
-              invalid:
-                '<span class="feedback__state">Incorrect&#8239;!</span><p> Vous y arriverez la prochaine fois&#8239;!</p>',
-            },
-          },
-        },
       ],
     },
   ],
@@ -609,25 +428,16 @@ describe('Acceptance | Script | Get Elements as CSV', function () {
       expect(elementsListAsCsv).to
         .equal(`\ufeff"ElementId"\t"ElementType"\t"ElementPosition"\t"ElementGrainPosition"\t"ElementGrainId"\t"ElementGrainTitle"\t"ElementModuleSlug"
 "e9aef60c-f18a-471e-85c7-e50b4731b86b"\t"text"\t1\t1\t"f312c33d-e7c9-4a69-9ba0-913957b8f7dd"\t"Voici une leçon"\t"didacticiel-modulix"
-"84726001-1665-457d-8f13-4a74dc4768ea"\t"text"\t2\t1\t"f312c33d-e7c9-4a69-9ba0-913957b8f7dd"\t"Voici une leçon"\t"didacticiel-modulix"
-"048e5319-5e81-44cc-ad71-c6c0d3be611f"\t"separator"\t3\t1\t"f312c33d-e7c9-4a69-9ba0-913957b8f7dd"\t"Voici une leçon"\t"didacticiel-modulix"
-"a2372bf4-86a4-4ecc-a188-b51f4f98bca2"\t"text"\t4\t1\t"f312c33d-e7c9-4a69-9ba0-913957b8f7dd"\t"Voici une leçon"\t"didacticiel-modulix"
-"4cfd27d5-0947-47af-bfb6-52467143c38b"\t"text"\t5\t1\t"f312c33d-e7c9-4a69-9ba0-913957b8f7dd"\t"Voici une leçon"\t"didacticiel-modulix"
-"8d7687c8-4a02-4d7e-bf6c-693a6d481c78"\t"image"\t6\t1\t"f312c33d-e7c9-4a69-9ba0-913957b8f7dd"\t"Voici une leçon"\t"didacticiel-modulix"
-"901ccbaa-f4e6-4322-b863-8e8eab08a33a"\t"download"\t7\t2\t"b14df125-82d5-4d55-a660-7b34cd9ea1ab"\t"Un fichier à télécharger"\t"didacticiel-modulix"
-"31106aeb-8346-44a6-8ed4-ebaa2106a373"\t"qcu"\t8\t2\t"b14df125-82d5-4d55-a660-7b34cd9ea1ab"\t"Un fichier à télécharger"\t"didacticiel-modulix"
-"342183f7-af51-4e4e-ab4c-ebed1e195063"\t"text"\t9\t3\t"73ac3644-7637-4cee-86d4-1a75f53f0b9c"\t"Vidéo de présentation de Pix"\t"didacticiel-modulix"
-"3a9f2269-99ba-4631-b6fd-6802c88d5c26"\t"video"\t10\t3\t"73ac3644-7637-4cee-86d4-1a75f53f0b9c"\t"Vidéo de présentation de Pix"\t"didacticiel-modulix"
-"71de6394-ff88-4de3-8834-a40057a50ff4"\t"qcu"\t11\t4\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t"Voici un vrai-faux"\t"didacticiel-modulix"
-"79dc17f9-142b-4e19-bcbe-bfde4e170d3f"\t"qcu"\t12\t4\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t"Voici un vrai-faux"\t"didacticiel-modulix"
-"9c73500d-abd9-4cc4-ab2d-a3876285b13c"\t"qcu"\t13\t4\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t"Voici un vrai-faux"\t"didacticiel-modulix"
-"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t14\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"didacticiel-modulix"
-"0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447"\t"qcu"\t15\t6\t"2a77a10f-19a3-4544-80f9-8012dad6506a"\t"Activité remonter dans la page"\t"didacticiel-modulix"
-"c23436d4-6261-49f1-b50d-13a547529c29"\t"qrocm"\t16\t7\t"4ce2a31a-6584-4dae-87c6-d08b58d0f3b9"\t"Connaissez-vous bien Pix"\t"didacticiel-modulix"
-"0e3315fd-98ad-492f-9046-4aa867495d84"\t"embed"\t17\t8\t"46577fb1-aadb-49ba-b3fd-721a11da8eb4"\t"Embed non-auto"\t"didacticiel-modulix"
-"7fe0bc5f-1988-4da6-8231-a987335f2ae5"\t"qrocm"\t18\t8\t"46577fb1-aadb-49ba-b3fd-721a11da8eb4"\t"Embed non-auto"\t"didacticiel-modulix"
-"0559b68c-68a5-4816-a06e-f1c743c391e3"\t"embed"\t19\t9\t"e8db3f90-4259-4d54-9113-1c56da726d8d"\t"Embed auto"\t"didacticiel-modulix"
-"98c51fa7-03b7-49b1-8c5e-49341d35909c"\t"qrocm"\t20\t10\t"7cf75e70-8749-4392-8081-f2c02badb0fb"\t"Le nom de ce produit"\t"didacticiel-modulix"`);
+"048e5319-5e81-44cc-ad71-c6c0d3be611f"\t"separator"\t2\t1\t"f312c33d-e7c9-4a69-9ba0-913957b8f7dd"\t"Voici une leçon"\t"didacticiel-modulix"
+"8d7687c8-4a02-4d7e-bf6c-693a6d481c78"\t"image"\t3\t1\t"f312c33d-e7c9-4a69-9ba0-913957b8f7dd"\t"Voici une leçon"\t"didacticiel-modulix"
+"901ccbaa-f4e6-4322-b863-8e8eab08a33a"\t"download"\t4\t2\t"b14df125-82d5-4d55-a660-7b34cd9ea1ab"\t"Un fichier à télécharger"\t"didacticiel-modulix"
+"31106aeb-8346-44a6-8ed4-ebaa2106a373"\t"qcu"\t5\t2\t"b14df125-82d5-4d55-a660-7b34cd9ea1ab"\t"Un fichier à télécharger"\t"didacticiel-modulix"
+"3a9f2269-99ba-4631-b6fd-6802c88d5c26"\t"video"\t6\t3\t"73ac3644-7637-4cee-86d4-1a75f53f0b9c"\t"Vidéo de présentation de Pix"\t"didacticiel-modulix"
+"71de6394-ff88-4de3-8834-a40057a50ff4"\t"qcu"\t7\t4\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t"Voici un vrai-faux"\t"didacticiel-modulix"
+"79dc17f9-142b-4e19-bcbe-bfde4e170d3f"\t"qcu"\t8\t4\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t"Voici un vrai-faux"\t"didacticiel-modulix"
+"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t9\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"didacticiel-modulix"
+"c23436d4-6261-49f1-b50d-13a547529c29"\t"qrocm"\t10\t6\t"4ce2a31a-6584-4dae-87c6-d08b58d0f3b9"\t"Connaissez-vous bien Pix"\t"didacticiel-modulix"
+"0e3315fd-98ad-492f-9046-4aa867495d84"\t"embed"\t11\t7\t"46577fb1-aadb-49ba-b3fd-721a11da8eb4"\t"Embed non-auto"\t"didacticiel-modulix"`);
     });
   });
 });
