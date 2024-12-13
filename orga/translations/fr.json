@@ -1190,10 +1190,11 @@
       },
       "banner": {
         "anchor-error": "Voir la liste des erreurs",
-        "error-text": "Merci de corriger les erreurs et d’importer à nouveau le fichier.",
+        "fix-error-text": "Merci de corriger les erreurs et d’importer à nouveau le fichier.",
         "import-error": "L'import des participants a échoué.",
         "import-in-progress": "Le contenu du fichier est validé, l’import des participants est en cours.",
         "in-progress-text": "Merci de rafraîchir cette page dans quelques instants pour connaitre l’état de traitement du fichier.",
+        "retry-error-text": "Une erreur est survenue, merci d'importer plus tard ou d'écrire au support Pix",
         "upload-completed": "Le fichier a été importé le {date} par {firstName} {lastName}.",
         "upload-error": "Le fichier n'a pas pu être importé.",
         "upload-in-progress": "L’import du fichier peut prendre quelques minutes. Merci de ne pas quitter cette page.",

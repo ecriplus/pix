@@ -50,7 +50,7 @@ module('Unit | Model | organization-import-detail', function (hooks) {
       assert.ok(model.isDone);
     });
     ['UPLOADED', 'VALIDATED', 'UPLOAD_ERROR', 'VALIDATION_ERROR', 'IMPORT_ERROR'].forEach((status) => {
-      test('it should return false', function (assert) {
+      test(`it should return false ${status}`, function (assert) {
         const store = this.owner.lookup('service:store');
         const model = store.createRecord('organization-import-detail', {
           status,
@@ -61,7 +61,7 @@ module('Unit | Model | organization-import-detail', function (hooks) {
   });
   module('inProgress', function () {
     ['UPLOADED', 'VALIDATED'].forEach((status) => {
-      test('it should return true', function (assert) {
+      test(`it should return true - ${status}`, function (assert) {
         const store = this.owner.lookup('service:store');
         const model = store.createRecord('organization-import-detail', {
           status,
@@ -70,7 +70,7 @@ module('Unit | Model | organization-import-detail', function (hooks) {
       });
     });
     ['UPLOAD_ERROR', 'VALIDATION_ERROR', 'IMPORT_ERROR', 'IMPORTED'].forEach((status) => {
-      test('it should return false', function (assert) {
+      test(`it should return false - ${status}`, function (assert) {
         const store = this.owner.lookup('service:store');
         const model = store.createRecord('organization-import-detail', {
           status,

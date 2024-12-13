@@ -1104,7 +1104,8 @@
       },
       "banner": {
         "anchor-error": "De lijst met foutmeldingen bekijken",
-        "error-text": "Corrigeer de fouten en importeer het bestand opnieuw.",
+        "fix-error-text": "Corrigeer de fouten en importeer het bestand opnieuw.",
+        "retry-error-text": "Er is een fout opgetreden, importeer later of schrijf naar Pix support.",
         "import-error": "De import van deelnemers is mislukt.",
         "import-in-progress": "De inhoud van het bestand is gevalideerd en de deelnemers worden geïmporteerd.",
         "in-progress-text": "Vernieuw deze pagina over enkele ogenblikken om de status van het bestand te controleren.",
