@@ -24,6 +24,7 @@ export { createAssessmentCampaign, createProfilesCollectionCampaign };
  * @param {string} code
  * @param {string} title
  * @param {string} idPixLabel
+ * @param {string} idPixLabelType
  * @param {string} externalIdHelpImageUrl
  * @param {string} alternativeTextToExternalIdHelpImage
  * @param {string} customLandingPageText
@@ -62,6 +63,7 @@ async function createAssessmentCampaign({
   code,
   title,
   idPixLabel,
+  idPixLabelType,
   externalIdHelpImageUrl,
   alternativeTextToExternalIdHelpImage,
   customLandingPageText,
@@ -87,6 +89,7 @@ async function createAssessmentCampaign({
     code,
     title,
     idPixLabel,
+    idPixLabelType,
     externalIdHelpImageUrl,
     alternativeTextToExternalIdHelpImage,
     customLandingPageText,
@@ -443,6 +446,7 @@ function _buildCampaign({
   code,
   title,
   idPixLabel,
+  idPixLabelType,
   externalIdHelpImageUrl,
   alternativeTextToExternalIdHelpImage,
   customLandingPageText,
@@ -490,10 +494,13 @@ function _buildCampaign({
     assessmentMethod,
   });
   if (idPixLabel) {
+    const type = Object.values(CampaignExternalIdTypes).includes(idPixLabelType)
+      ? idPixLabelType
+      : CampaignExternalIdTypes.STRING;
     databaseBuilder.factory.buildCampaignFeature({
       campaignId: realCampaignId,
       featureId: FEATURE_CAMPAIGN_EXTERNAL_ID,
-      params: { type: CampaignExternalIdTypes.STRING, label: idPixLabel },
+      params: { type, label: idPixLabel },
     });
   }
   return { realCampaignId, realOrganizationId, realCreatedAt };

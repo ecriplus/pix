@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 
+import { CampaignExternalIdTypes } from '../../../../src/prescription/shared/domain/constants.js';
 import {
   PRO_MANAGING_ORGANIZATION_ID,
   PRO_ORGANIZATION_ID,
@@ -184,9 +185,10 @@ async function _createProCampaigns(databaseBuilder) {
     targetProfileId: TARGET_PROFILE_NO_BADGES_NO_STAGES_ID,
     organizationId: PRO_ORGANIZATION_ID,
     ownerId: USER_ID_ADMIN_ORGANIZATION,
-    name: "Campagne d'évaluation PRO envoi multiple",
+    name: "Campagne d'évaluation PRO envoi multiple - ExternalId EMAIL",
     code: 'PROASSMUL',
-    idPixLabel: 'IdPixLabel',
+    idPixLabel: 'gimme gimme gimme your email buddy',
+    idPixLabelType: CampaignExternalIdTypes.EMAIL,
     multipleSendings: true,
     createdAt: dayjs().subtract(30, 'days').toDate(),
     configCampaign: {
