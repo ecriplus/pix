@@ -59,14 +59,6 @@
     font-size: 0.7rem;
   }
 
-  .competence-card__competence-name {
-    z-index: 2;
-    margin: 0 3px;
-    padding-top: 10px;
-    font-weight: var(--pix-font-bold);
-    font-size: 1.17rem;
-  }
-
   .competence-card__body {
     position: absolute;
     top: 80px;
@@ -259,5 +251,15 @@
       font-size: 1rem;
       letter-spacing: 0.01rem;
     }
+  }
+}
+
+.competence-card__competence-name {
+  @extend %pix-body-l;
+
+  @include device-is('tablet') {
+    z-index: 2;
+    margin: 0 3px;
+    padding-top: 10px;
   }
 }
