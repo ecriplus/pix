@@ -64,9 +64,9 @@ export default class Session extends Model {
     return Boolean(this.hasIncident || this.hasJoiningIssue);
   }
 
-  @computed('status')
+  @computed('publishedAt')
   get isPublished() {
-    return this.status === PROCESSED;
+    return this.publishedAt !== null;
   }
 
   @computed('juryCertificationSummaries.[]')

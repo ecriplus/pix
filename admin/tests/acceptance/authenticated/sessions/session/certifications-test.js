@@ -12,7 +12,7 @@ module('Acceptance | authenticated/sessions/session/certifications', function (h
   setupMirage(hooks);
 
   module('When user has role metier', function () {
-    test('it should not show publish button', async function (assert) {
+    test('it should not show the publication button', async function (assert) {
       // given
       await authenticateAdminMemberWithRole({ isMetier: true })(server);
       server.create('session', { id: '1' });
@@ -22,6 +22,42 @@ module('Acceptance | authenticated/sessions/session/certifications', function (h
 
       // then
       assert.dom(screen.queryByText('Publier la session')).doesNotExist();
+    });
+  });
+
+  module('When user has role certif', function () {
+    test('the session can be published', async function (assert) {
+      // given
+      await authenticateAdminMemberWithRole({ isCertif: true })(server);
+
+      const juryCertificationSummary = server.create('jury-certification-summary', {
+        status: 'ok',
+        isCancelled: false,
+      });
+      server.create('session', {
+        id: '1',
+        finalizedAt: '2020-01-01',
+        publishedAt: null,
+        status: 'finalized',
+        juryCertificationSummaries: [juryCertificationSummary],
+      });
+
+      const screen = await visit('/sessions/1/certifications');
+
+      this.server.get('/admin/sessions/:id', (schema, request) => {
+        const sessionId = request.params.id;
+        const session = schema.sessions.findBy({ id: sessionId });
+        return session.update({ publishedAt: '2020-01-01' });
+      });
+
+      // when
+      await click(screen.getByRole('button', { name: 'Publier la session' }));
+      await screen.findByRole('dialog');
+      await click(screen.getByRole('button', { name: 'Confirmer' }));
+
+      // then
+      assert.dom(await screen.queryByText('Publier la session')).doesNotExist();
+      assert.dom(await screen.getByText('Dépublier la session')).exists();
     });
   });
 

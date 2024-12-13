@@ -37,7 +37,7 @@ module('Acceptance | authenticated/sessions/session/informations', function (hoo
       assert.strictEqual(currentURL(), '/sessions/1');
     });
 
-    module('When session is finalized', function () {
+    module('When session is not published', function () {
       module('When unfinalize button is clicked', function () {
         test('it should unfinalize the session', async function (assert) {
           // given
@@ -45,6 +45,7 @@ module('Acceptance | authenticated/sessions/session/informations', function (hoo
             id: '3',
             finalizedAt: new Date('2023-01-31'),
             examinerGlobalComment: 'Vraiment, super session!',
+            publishedAt: null,
             status: 'finalized',
           });
           const screen = await visit('/sessions/3');

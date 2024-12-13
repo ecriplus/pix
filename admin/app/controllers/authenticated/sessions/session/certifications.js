@@ -61,6 +61,8 @@ export default class ListController extends Controller {
       this.pixToast.sendSuccessNotification({ message: 'Les certifications ont été correctement dépubliées.' });
     } catch (e) {
       this.notifyError(e);
+    } finally {
+      await this.forceRefreshModelFromBackend();
     }
     this.hideConfirmationModal();
   }
@@ -70,6 +72,7 @@ export default class ListController extends Controller {
       await this.model.session.save({ adapterOptions: { updatePublishedCertifications: true, toPublish: true } });
     } catch (e) {
       this.notifyError(e);
+    } finally {
       await this.forceRefreshModelFromBackend();
     }
 
