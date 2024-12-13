@@ -9,18 +9,16 @@
 
 .tutorials-header {
   &__title {
+    @extend %pix-title-s;
+
     margin-bottom: var(--pix-spacing-4x);
-    font-size: 2rem;
-    font-family: $font-open-sans;
   }
 
   &__description {
+    @extend %pix-body-m;
+
     margin: 0 0 10px;
     color: var(--pix-neutral-900);
-    font-weight: var(--pix-font-normal);
-    font-size: 1rem;
-    font-family: $font-roboto;
-    line-height: 1.625rem;
   }
 }
 
@@ -28,12 +26,10 @@
   margin-bottom: 40px;
 
   &__title {
+    @extend %pix-title-xs;
+
     margin-bottom: 24px;
     color: var(--pix-neutral-900);
-    font-weight: var(--pix-font-normal);
-    font-size: 1.25rem;
-    font-family: $font-open-sans;
-    line-height: 2.125rem;
     letter-spacing: 0;
   }
 
@@ -169,16 +165,15 @@
   }
 
   &__name {
+    @extend %pix-title-m;
+
     margin: 15px 0;
-    font-size: 2rem;
-    font-family: $font-open-sans;
   }
 
   &__description {
+    @extend %pix-body-m;
+
     color: var(--pix-neutral-500);
-    font-size: 1rem;
-    font-family: $font-open-sans;
-    line-height: 1.625rem;
   }
 }
 
