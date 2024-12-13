@@ -80,38 +80,6 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
   });
 
   describe('#deserializeForSessionsImport', function () {
-    describe('when csv is empty', function () {
-      it('should throw an error', async function () {
-        const parsedCsvData = [];
-
-        // when
-        const error = await catchErr(csvSerializer.deserializeForSessionsImport)({
-          parsedCsvData,
-          hasBillingMode: true,
-        });
-
-        // then
-        expect(error).to.be.instanceOf(FileValidationError);
-        expect(error.code).to.equal('CSV_HEADERS_NOT_VALID');
-      });
-    });
-
-    describe('when csv is undefined', function () {
-      it('should throw an error', async function () {
-        const parsedCsvData = undefined;
-
-        // when
-        const error = await catchErr(csvSerializer.deserializeForSessionsImport)({
-          parsedCsvData,
-          hasBillingMode: true,
-        });
-
-        // then
-        expect(error).to.be.instanceOf(FileValidationError);
-        expect(error.code).to.equal('CSV_HEADERS_NOT_VALID');
-      });
-    });
-
     describe('when one or more headers are missing', function () {
       it('should throw an error', async function () {
         const parsedCsvData = [
@@ -1393,6 +1361,70 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
       expect(secondSession.candidates[1].line).to.equal(4);
       expect(secondSession.candidates[2].line).to.equal(5);
     });
+
+    // to prevent examiner missing error (details: https://1024pix.atlassian.net/wiki/spaces/DC/blog/edit-v2/4806377475)
+    describe('when examiner is missing', function () {
+      it('should throw an error', async function () {
+        const parsedCsvData = [
+          {
+            'Numéro de session préexistante': '',
+            '* Nom du site': 'bla',
+            '* Nom de la salle': 'bla',
+            '* Date de début (format: JJ/MM/AAAA)': '18/12/2024',
+            '* Heure de début (heure locale format: HH:MM)': '09:00',
+            '* Surveillant(s)': 'moi',
+            'Observations (optionnel)': '',
+            '* Nom de naissance': 'A',
+            '* Prénom': 'A',
+            '* Date de naissance (format: JJ/MM/AAAA)': '01/01/2000',
+            '* Sexe (M ou F)': 'F',
+            'Code INSEE de la commune de naissance': '75115',
+            'Code postal de la commune de naissance': '',
+            'Nom de la commune de naissance': '',
+            '* Pays de naissance': 'FRANCE',
+            'E-mail du destinataire des résultats (formateur, enseignant…)': '',
+            'E-mail de convocation': '',
+            'Identifiant externe': '',
+            'Temps majoré ? (exemple format: 33%)': '',
+            '* Tarification part Pix (Gratuite, Prépayée ou Payante)': 'Gratuite',
+            'Code de prépaiement (si Tarification part Pix Prépayée)': '',
+            "Pix certif complementaire ('oui' ou laisser vide)": '',
+          },
+          {
+            'Numéro de session préexistante': '',
+            '* Nom du site': 'bla',
+            '* Nom de la salle': 'bla',
+            '* Date de début (format: JJ/MM/AAAA)': '18/12/2024',
+            '* Heure de début (heure locale format: HH:MM)': '09:00',
+            '* Surveillant(s)': undefined,
+            'Observations (optionnel)': '',
+            '* Nom de naissance': 'A',
+            '* Prénom': 'A',
+            '* Date de naissance (format: JJ/MM/AAAA)': '01/01/2000',
+            '* Sexe (M ou F)': 'F',
+            'Code INSEE de la commune de naissance': '75115',
+            'Code postal de la commune de naissance': '',
+            'Nom de la commune de naissance': '',
+            '* Pays de naissance': 'FRANCE',
+            'E-mail du destinataire des résultats (formateur, enseignant…)': '',
+            'E-mail de convocation': '',
+            'Identifiant externe': '',
+            'Temps majoré ? (exemple format: 33%)': '',
+            '* Tarification part Pix (Gratuite, Prépayée ou Payante)': 'Gratuite',
+            'Code de prépaiement (si Tarification part Pix Prépayée)': '',
+            "Pix certif complementaire ('oui' ou laisser vide)": '',
+          },
+        ];
+
+        const error = await catchErr(csvSerializer.deserializeForSessionsImport)({
+          parsedCsvData,
+          hasBillingMode: true,
+        });
+
+        expect(error).to.be.instanceOf(FileValidationError);
+        expect(error.code).to.equal('CSV_HEADERS_NOT_VALID');
+      });
+    });
   });
 
   describe('#deserializeForCampaignsImport', function () {
@@ -1675,6 +1707,63 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           ];
           expect(parsedData).to.have.deep.members(expectedParsedData);
         });
+      });
+    });
+  });
+
+  describe('#verifyColumnsValueAgainstConstraints', function () {
+    it('return undefined when file is valid', async function () {
+      const csvLines = [{ 'ma colonne': 'value' }];
+      const headers = { col1: 'ma colonne' };
+
+      expect(csvSerializer.verifyColumnsValueAgainstConstraints({ csvLines, headers })).to.equal(undefined);
+    });
+
+    it('throw FileValidationError when a value is undefined', async function () {
+      const headers = {
+        col1: 'col-1',
+        col2: 'col-2',
+      };
+      const csvLines = [
+        { 'col-1': 'value', 'col-2': 'value2' },
+        { 'col-1': 'value', 'col-2': undefined },
+      ];
+
+      const error = await catchErr(csvSerializer.verifyColumnsValueAgainstConstraints)({ csvLines, headers });
+
+      expect(error).to.be.instanceOf(FileValidationError);
+      expect(error.code).to.equal('CSV_HEADERS_NOT_VALID');
+    });
+
+    context('no billing mode', function () {
+      it('dont throw FileValidationError if billingMode value is undefined', async function () {
+        const headers = {
+          col: 'col',
+          billingMode: 'mode de facturation',
+        };
+        const csvLines = [
+          { col: 'value', 'mode de facturation': 'value2' },
+          { col: 'value', 'mode de facturation': undefined },
+        ];
+
+        expect(
+          csvSerializer.verifyColumnsValueAgainstConstraints({ csvLines, headers, hasBillingMode: false }),
+        ).to.equal(undefined);
+      });
+
+      it('dont throw FileValidationError if prepaymentCode value is undefined', async function () {
+        const headers = {
+          col: 'col',
+          prepaymentCode: 'code de pré-paiement',
+        };
+        const csvLines = [
+          { col: 'value', 'code de pré-paiement': 'value2' },
+          { col: 'value', 'code de pré-paiement': undefined },
+        ];
+
+        expect(
+          csvSerializer.verifyColumnsValueAgainstConstraints({ csvLines, headers, hasBillingMode: false }),
+        ).to.equal(undefined);
       });
     });
   });
