@@ -5,6 +5,10 @@
   margin-bottom: var(--pix-spacing-8x);
 }
 
+.statistics-page-header__date {
+  @extend %pix-body-xs;
+}
+
 .statistics-page__section {
   tbody > tr {
     &:nth-child(odd) {

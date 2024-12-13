@@ -1,6 +1,7 @@
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 
 import Header from '../table/header';
@@ -39,9 +40,15 @@ export default class Statistics extends Component {
     return this.analysisByTubes.slice(start, end);
   }
 
+  get extractedDate() {
+    return dayjs(this.analysisByTubes[0]?.extraction_date).format('D MMM YYYY');
+  }
+
   <template>
     <div class="statistics-page__header">
       <h1 class="page-title">{{t "pages.statistics.title"}}</h1>
+      <span class="statistics-page-header__date">{{t "pages.statistics.before-date"}}
+        {{this.extractedDate}}</span>
     </div>
 
     <section class="statistics-page__section">
