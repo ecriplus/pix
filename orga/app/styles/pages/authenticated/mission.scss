@@ -80,8 +80,8 @@
   @extend %pix-body-l;
 
   display: grid;
-  gap: var(--pix-spacing-8x);
   grid-template-columns: 2fr 1fr;
+  gap: var(--pix-spacing-8x);
   margin-top: var(--pix-spacing-8x);
 
   h2 {
