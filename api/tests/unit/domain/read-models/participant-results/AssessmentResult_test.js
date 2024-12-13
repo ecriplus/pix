@@ -1,5 +1,5 @@
 import { constants } from '../../../../../src/shared/domain/constants.js';
-import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { CampaignParticipationStatuses, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
 import { AssessmentResult } from '../../../../../src/shared/domain/read-models/participant-results/AssessmentResult.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
@@ -43,6 +43,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
       knowledgeElements,
       acquiredBadgeIds: [],
       sharedAt: new Date(),
+      status: CampaignParticipationStatuses.SHARED,
       participantExternalId: 'greg@lafleche.fr',
     };
 
@@ -111,6 +112,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
             knowledgeElements,
             acquiredBadgeIds: [],
             sharedAt: null,
+            status: CampaignParticipationStatuses.TO_SHARE,
           };
 
           const assessmentResult = new AssessmentResult({
@@ -144,6 +146,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
             knowledgeElements,
             acquiredBadgeIds: [],
             sharedAt: null,
+            status: CampaignParticipationStatuses.TO_SHARE,
           };
 
           const assessmentResult = new AssessmentResult({
@@ -184,6 +187,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           knowledgeElements: [],
           acquiredBadgeIds: [],
           sharedAt: new Date('2021-09-25'),
+          status: CampaignParticipationStatuses.SHARED,
           masteryRate: 0.5,
         };
 
@@ -419,6 +423,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           acquiredBadgeIds: [],
           masteryRate: '0.34',
           sharedAt: new Date('2020-01-01T05:06:07Z'),
+          status: CampaignParticipationStatuses.SHARED,
           isDeleted: false,
         };
         const assessmentResult = new AssessmentResult({
@@ -445,6 +450,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           acquiredBadgeIds: [],
           masteryRate: '0.34',
           sharedAt: new Date('2020-01-01T05:06:07Z'),
+          status: CampaignParticipationStatuses.SHARED,
           isDeleted: false,
         };
         const assessmentResult = new AssessmentResult({
@@ -497,6 +503,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           acquiredBadgeIds: [],
           masteryRate: '0.34',
           sharedAt: new Date('2020-01-01T05:06:07Z'),
+          status: CampaignParticipationStatuses.SHARED,
           isDeleted: true,
         };
         const assessmentResult = new AssessmentResult({
@@ -523,6 +530,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           acquiredBadgeIds: [],
           masteryRate: '0.34',
           sharedAt: new Date('2020-01-01T05:06:07Z'),
+          status: CampaignParticipationStatuses.SHARED,
           isDeleted: false,
         };
         const assessmentResult = new AssessmentResult({
@@ -549,6 +557,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           acquiredBadgeIds: [],
           masteryRate: '0.34',
           sharedAt: new Date('2020-01-04T05:06:07Z'),
+          status: CampaignParticipationStatuses.SHARED,
           isDeleted: false,
         };
         const assessmentResult = new AssessmentResult({
@@ -577,6 +586,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
             acquiredBadgeIds: [],
             masteryRate: '0.34',
             sharedAt: new Date('2020-01-03T05:06:07Z'),
+            status: CampaignParticipationStatuses.SHARED,
             isDeleted: false,
           };
           const assessmentResult = new AssessmentResult({
@@ -604,6 +614,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           acquiredBadgeIds: [],
           masteryRate: '1',
           sharedAt: new Date('2020-01-01T05:06:07Z'),
+          status: CampaignParticipationStatuses.SHARED,
           isDeleted: false,
         };
 
@@ -634,6 +645,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
             acquiredBadgeIds: [],
             masteryRate: '0.45',
             sharedAt: new Date('2019-12-12'),
+            status: CampaignParticipationStatuses.SHARED,
             isDeleted: false,
           };
           const assessmentResult = new AssessmentResult({
@@ -663,6 +675,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
             acquiredBadgeIds: [],
             masteryRate: '0.34',
             sharedAt: new Date('2020-01-01T05:06:07Z'),
+            status: CampaignParticipationStatuses.SHARED,
             isDeleted: false,
           };
 
@@ -708,6 +721,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           acquiredBadgeIds: [],
           masteryRate: '0.34',
           sharedAt: new Date('2020-01-01T05:06:07Z'),
+          status: CampaignParticipationStatuses.SHARED,
           isDeleted: false,
         };
         const assessmentResult = new AssessmentResult({
@@ -818,6 +832,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           acquiredBadgeIds: [],
           masteryRate: '0.34',
           sharedAt: new Date('2020-01-01T05:06:07Z'),
+          status: CampaignParticipationStatuses.SHARED,
           isDeleted: true,
         };
         const assessmentResult = new AssessmentResult({
@@ -846,6 +861,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           acquiredBadgeIds: [],
           masteryRate: '0.34',
           sharedAt: new Date('2020-01-04T05:06:07Z'),
+          status: CampaignParticipationStatuses.SHARED,
           isDeleted: false,
         };
         const assessmentResult = new AssessmentResult({
@@ -873,6 +889,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
         acquiredBadgeIds: [],
         masteryRate: '0.34',
         sharedAt: new Date('2020-01-01T05:06:07Z'),
+        status: CampaignParticipationStatuses.SHARED,
         isDeleted: false,
       };
       const assessmentResult = new AssessmentResult({
@@ -976,6 +993,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           acquiredBadgeIds: [],
           assessmentCreatedAt,
           sharedAt: new Date(),
+          status: CampaignParticipationStatuses.SHARED,
         };
         const assessmentResult = new AssessmentResult({
           participationResults,
@@ -1003,6 +1021,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
             acquiredBadgeIds: [],
             assessmentCreatedAt,
             sharedAt: null,
+            status: CampaignParticipationStatuses.STARTED,
           };
           const assessmentResult = new AssessmentResult({
             participationResults,

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 import { MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING } from '../../../../shared/domain/constants.js';
-
+import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
 class PreviousCampaignParticipation {
   constructor({
     id,
@@ -27,6 +27,7 @@ class PreviousCampaignParticipation {
 
   get canReset() {
     return (
+      this.status === CampaignParticipationStatuses.SHARED &&
       this.isTargetProfileResetAllowed &&
       this.isCampaignMultipleSendings &&
       this.isOrganizationLearnerActive &&
@@ -35,9 +36,6 @@ class PreviousCampaignParticipation {
   }
 
   _isTimeBeforeRetryingPassed(sharedAt) {
-    const isShared = Boolean(sharedAt);
-    if (!isShared) return false;
-
     return dayjs().diff(sharedAt, 'days') >= MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING;
   }
 }

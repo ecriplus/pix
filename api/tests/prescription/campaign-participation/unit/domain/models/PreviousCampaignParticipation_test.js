@@ -1,4 +1,5 @@
 import { PreviousCampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/PreviousCampaignParticipation.js';
+import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { expect, sinon } from '../../../../../test-helper.js';
 
@@ -9,7 +10,7 @@ describe('Unit | Domain | Read-Models | PreviousCampaignParticipation', function
       const id = 1;
       const participantExternalId = 1;
       const validatedSkillsCount = 1;
-      const status = 'ENDED';
+      const status = CampaignParticipationStatuses.SHARED;
       const isDeleted = true;
       const isTargetProfileResetAllowed = true;
       const isOrganizationLearnerActive = true;
@@ -48,7 +49,7 @@ describe('Unit | Domain | Read-Models | PreviousCampaignParticipation', function
         id: 1,
         participantExternalId: 1,
         validatedSkillsCount: 1,
-        status: 'ENDED',
+        status: CampaignParticipationStatuses.SHARED,
         isDeleted: true,
         isTargetProfileResetAllowed: true,
         isCampaignMultipleSendings: true,
