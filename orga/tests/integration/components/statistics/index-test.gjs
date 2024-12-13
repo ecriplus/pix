@@ -1,5 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
+import dayjs from 'dayjs';
 import { t } from 'ember-intl/test-support';
 import Statistics from 'pix-orga/components/statistics/index';
 import { module, test } from 'qunit';
@@ -9,10 +10,20 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Statistics | Index', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('it should display title', async function (assert) {
+  test('it should display title and extracted date', async function (assert) {
     //given
+    const extractionDate = '2024-12-08';
     const model = {
-      data: [],
+      data: [
+        {
+          competence_code: '2.1',
+          competence: 'Interagir',
+          sujet: 'Gérer ses contacts',
+          niveau_par_user: '1.30',
+          niveau_par_sujet: '1.50',
+          extraction_date: extractionDate,
+        },
+      ],
     };
 
     //when
@@ -20,6 +31,7 @@ module('Integration | Component | Statistics | Index', function (hooks) {
 
     //then
     assert.ok(screen.getByRole('heading', { name: t('pages.statistics.title'), level: 1 }));
+    assert.ok(screen.getByText(dayjs(extractionDate).format('D MMM YYYY'), { exact: false }));
   });
 
   test('it should display table headers', async function (assert) {

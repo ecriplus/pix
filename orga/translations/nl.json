@@ -1463,6 +1463,7 @@
     },
     "statistics": {
       "title": "Statistieken",
+      "before-date": "op",
       "gauge": {
         "label": "Je deelnemers behaalden een {userLevel} op een maximaal haalbaar niveau van {tubeLevel}."
       },
