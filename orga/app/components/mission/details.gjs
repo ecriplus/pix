@@ -1,4 +1,5 @@
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
@@ -37,7 +38,9 @@ export default class MissionDetails extends Component {
             @href={{@mission.documentationUrl}}
             target="_blank "
           >
-            {{t "pages.missions.mission.details.button-label"}}</PixButtonLink>
+            <PixIcon @name="openNew" />
+            {{t "pages.missions.mission.details.button-label"}}
+          </PixButtonLink>
         {{/if}}
       </div>
 

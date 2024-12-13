@@ -959,7 +959,7 @@
       "mission": {
         "title": "Mission's information",
         "details": {
-          "button-label": "View the mission documentation",
+          "button-label": "See the educational sheet",
           "competence": {
             "title": "Targeted DigComp competence :"
           },
