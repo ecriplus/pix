@@ -45,7 +45,7 @@ describe('Prescription | Unit | Router | organization-learner-router', function 
 
     it('should throw 403 if organization does not have feature activated', async function () {
       // given
-      sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization').callsFake((request, h) => h.response(true));
+      sinon.stub(securityPreHandlers, 'checkUserIsAdminInOrganization').callsFake((request, h) => h.response(true));
       sinon.stub(securityPreHandlers, 'makeCheckOrganizationHasFeature').callsFake(
         () => (request, h) =>
           h
@@ -70,12 +70,40 @@ describe('Prescription | Unit | Router | organization-learner-router', function 
       expect(organizationLearnersController.getAttestationZipForDivisions).to.not.have.been.called;
     });
 
+    it('should throw 403 if user is not admin in organization', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'checkUserIsAdminInOrganization').callsFake((request, h) =>
+        h
+          .response({ errors: new Error('forbidden') })
+          .code(403)
+          .takeover(),
+      );
+      sinon
+        .stub(securityPreHandlers, 'makeCheckOrganizationHasFeature')
+        .callsFake(() => (request, h) => h.response(true));
+      sinon
+        .stub(organizationLearnersController, 'getAttestationZipForDivisions')
+        .callsFake((request, h) => h.response('ok'));
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      const url = '/api/organizations/1/attestations/key';
+
+      // when
+      const response = await httpTestServer.request(method, url);
+
+      // then
+      expect(response.statusCode).to.equal(403);
+      expect(organizationLearnersController.getAttestationZipForDivisions).to.not.have.been.called;
+    });
+
     it('should call prehandlers before calling controller method', async function () {
       // given
       sinon
         .stub(organizationLearnersController, 'getAttestationZipForDivisions')
         .callsFake((request, h) => h.response('ok').code(200));
-      sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization').callsFake((request, h) => h.response(true));
+      sinon.stub(securityPreHandlers, 'checkUserIsAdminInOrganization').callsFake((request, h) => h.response(true));
       sinon
         .stub(securityPreHandlers, 'makeCheckOrganizationHasFeature')
         .callsFake(() => (request, h) => h.response(true));
@@ -90,7 +118,7 @@ describe('Prescription | Unit | Router | organization-learner-router', function 
 
       // then
       expect(response.statusCode).to.equal(200);
-      expect(securityPreHandlers.checkUserBelongsToOrganization).to.have.been.calledBefore(
+      expect(securityPreHandlers.checkUserIsAdminInOrganization).to.have.been.calledBefore(
         organizationLearnersController.getAttestationZipForDivisions,
       );
       expect(securityPreHandlers.makeCheckOrganizationHasFeature).calledWithExactly(
