@@ -5,7 +5,7 @@
   margin-right: 10px;
   margin-bottom: 50px;
   margin-left: 10px;
-  padding: 20px;
+  padding: var(--pix-spacing-8x);
   text-rendering: optimizelegibility;
 
   @include device-is('desktop') {
@@ -15,20 +15,18 @@
 
 .certification-not-certifiable__button {
   margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .certification-not-certifiable__title {
-  font-size: 2rem;
-  font-family: $font-open-sans;
+  @extend %pix-title-m;
+
   text-align: center;
 }
 
 .certification-not-certifiable__text {
-  margin-top: 0;
-  font-size: 1rem;
-  font-family: $font-open-sans;
-  line-height: 27px;
+  @extend %pix-body-l;
+
+  margin-top: var(--pix-spacing-4x);
   text-align: center;
 
   @include device-is('desktop') {
