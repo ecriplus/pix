@@ -1,4 +1,4 @@
-import { clickByName, render } from '@1024pix/ember-testing-library';
+import { clickByName, getByTextWithHtml, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import dayjs from 'dayjs';
@@ -73,6 +73,23 @@ module('Integration | Component | Statistics | Index', function (hooks) {
     assert.ok(screen.getByRole('cell', { name: '2.1 Interagir' }));
     assert.ok(screen.getByRole('cell', { name: 'Gérer ses contacts' }));
     assert.ok(screen.getByRole('cell', { name: t('pages.statistics.level.novice') }));
+  });
+
+  test('it should display table description', async function (assert) {
+    //given
+    const model = {
+      data: [],
+    };
+
+    //when
+    await render(<template><Statistics @model={{model}} /></template>);
+
+    //then
+    assert.ok(
+      getByTextWithHtml(
+        'Le tableau ci-dessous vous permet de visualiser le positionnement de vos participants par sujet.<br> Le positionnement rend compte du niveau moyen de vos participants sur le niveau maximum qu’ils auraient pu atteindre.<br> Ces données tiennent compte de toutes les participations partagées dans le cadre des campagnes d’évaluation non supprimées de votre organisation.',
+      ),
+    );
   });
 
   module('pagination', function () {
