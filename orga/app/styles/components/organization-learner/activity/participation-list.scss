@@ -5,6 +5,12 @@
       font-weight: 700;
     }
 
+    &.mission-table {
+      th:last-child {
+        width: 250px;
+      }
+    }
+
     td {
       color: var(--pix-neutral-900);
     }
