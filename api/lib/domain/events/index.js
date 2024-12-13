@@ -34,8 +34,6 @@ import { logger } from '../../../src/shared/infrastructure/utils/logger.js';
 import * as eventBusBuilder from '../../infrastructure/events/EventBusBuilder.js';
 import { EventDispatcher } from '../../infrastructure/events/EventDispatcher.js';
 import { EventDispatcherLogger } from '../../infrastructure/events/EventDispatcherLogger.js';
-import * as disabledPoleEmploiNotifier from '../../infrastructure/externals/pole-emploi/disabled-pole-emploi-notifier.js';
-import * as poleEmploiNotifier from '../../infrastructure/externals/pole-emploi/pole-emploi-notifier.js';
 import * as badgeAcquisitionRepository from '../../infrastructure/repositories/badge-acquisition-repository.js';
 import * as campaignParticipationResultRepository from '../../infrastructure/repositories/campaign-participation-result-repository.js';
 import * as campaignRepository from '../../infrastructure/repositories/campaign-repository.js';
@@ -47,14 +45,6 @@ import { handleCertificationRescoring } from './handle-certification-rescoring.j
 import { handleComplementaryCertificationsScoring } from './handle-complementary-certifications-scoring.js';
 
 const { performance } = perf_hooks;
-
-function requirePoleEmploiNotifier() {
-  if (config.poleEmploi.pushEnabled) {
-    return poleEmploiNotifier;
-  } else {
-    return disabledPoleEmploiNotifier;
-  }
-}
 
 const dependencies = {
   answerRepository,
@@ -83,7 +73,6 @@ const dependencies = {
   knowledgeElementRepository,
   logger,
   organizationRepository,
-  poleEmploiNotifier: requirePoleEmploiNotifier(),
   poleEmploiSendingRepository,
   scoringCertificationService,
   skillRepository,
