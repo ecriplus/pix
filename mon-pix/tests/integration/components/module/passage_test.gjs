@@ -1050,6 +1050,47 @@ module('Integration | Component | Module | Passage', function (hooks) {
     });
   });
 
+  module('when user opens the sidebar', function () {
+    test('should push metrics event', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const element = { type: 'text', isAnswerable: false, content: 'Ceci est un grain dans un test d‘intégration' };
+      const grain1 = store.createRecord('grain', {
+        title: 'Grain title',
+        type: 'discovery',
+        id: '123-abc',
+        components: [{ type: 'element', element }],
+      });
+      const grain2 = store.createRecord('grain', {
+        title: 'Grain title',
+        type: 'activity',
+        id: '234-abc',
+        components: [{ type: 'element', element }],
+      });
+      const module = store.createRecord('module', {
+        title: 'Didacticiel',
+        grains: [grain1, grain2],
+        transitionTexts: [],
+      });
+      const passage = store.createRecord('passage');
+      const metrics = this.owner.lookup('service:metrics');
+      metrics.add = sinon.stub();
+
+      //  when
+      await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+      await clickByName('Afficher les étapes du module');
+
+      // then
+      sinon.assert.calledWithExactly(metrics.add, {
+        event: 'custom-event',
+        'pix-event-category': 'Modulix',
+        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-name': `Click sur le bouton Étape 1 sur 2 de la barre de navigation`,
+      });
+      assert.ok(true);
+    });
+  });
+
   module('when user clicks on grain’s type in sidebar', function () {
     test('should focus and scroll on matching grain element', async function (assert) {
       // given
