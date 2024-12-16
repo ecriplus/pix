@@ -1,7 +1,7 @@
-import { campaignParticipationResultRepository } from '../../../../lib/infrastructure/repositories/campaign-participation-result-repository.js';
-import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
-import { KnowledgeElement } from '../../../../src/shared/domain/models/KnowledgeElement.js';
-import { databaseBuilder, expect } from '../../../test-helper.js';
+import { campaignParticipationResultRepository } from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-result-repository.js';
+import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 const { STARTED } = CampaignParticipationStatuses;
 

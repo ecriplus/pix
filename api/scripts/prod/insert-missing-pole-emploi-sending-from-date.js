@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 
 import { disconnect, knex } from '../../db/knex-database-connection.js';
 import * as badgeAcquisitionRepository from '../../lib/infrastructure/repositories/badge-acquisition-repository.js';
-import { campaignParticipationResultRepository } from '../../lib/infrastructure/repositories/campaign-participation-result-repository.js';
 import * as campaignRepository from '../../lib/infrastructure/repositories/campaign-repository.js';
 import * as targetProfileRepository from '../../lib/infrastructure/repositories/target-profile-repository.js';
 import * as badgeRepository from '../../src/evaluation/infrastructure/repositories/badge-repository.js';
@@ -12,6 +11,7 @@ import * as userRepository from '../../src/identity-access-management/infrastruc
 import { PoleEmploiSending } from '../../src/prescription/campaign-participation/domain/models/PoleEmploiSending.js';
 import { PoleEmploiPayload } from '../../src/prescription/campaign-participation/infrastructure/externals/pole-emploi/PoleEmploiPayload.js';
 import * as campaignParticipationRepository from '../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
+import { campaignParticipationResultRepository } from '../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-result-repository.js';
 import * as poleEmploiSendingRepository from '../../src/prescription/campaign-participation/infrastructure/repositories/pole-emploi-sending-repository.js';
 import { CampaignParticipationStatuses } from '../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../src/shared/domain/models/Assessment.js';
