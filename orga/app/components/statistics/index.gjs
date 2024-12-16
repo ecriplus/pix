@@ -94,6 +94,12 @@ export default class Statistics extends Component {
         {{this.extractedDate}}</span>
     </div>
 
+    <section class="statistics-page__info">
+      <p class="statistics-page-info__paragraph">
+        {{t "pages.statistics.description" htmlSafe="true"}}
+      </p>
+    </section>
+
     <section class="statistics-page__filter">
       <PixSelect
         @onChange={{this.handleDomainFilter}}
@@ -109,7 +115,7 @@ export default class Statistics extends Component {
         }}</PixButton>
     </section>
 
-    <section class="statistics-page__section">
+    <section class="statistics-page__cover-rate">
       <table class="panel">
         <caption class="screen-reader-only">{{t "pages.statistics.table.caption"}}</caption>
         <thead>

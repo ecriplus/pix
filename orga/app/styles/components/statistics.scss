@@ -1,25 +1,35 @@
-.statistics-page__header {
-  display: flex;
-  gap: var(--pix-spacing-2x);
-  align-items: baseline;
-  margin-bottom: var(--pix-spacing-8x);
-}
+.statistics-page{
+  &__header {
+    display: flex;
+    gap: var(--pix-spacing-2x);
+    align-items: baseline;
+    margin-bottom: var(--pix-spacing-8x);
+  }
 
-.statistics-page-header__date {
-  @extend %pix-body-xs;
-}
+  &__info {
+    margin-bottom: var(--pix-spacing-8x);
+  }
 
-.statistics-page__section {
-  tbody > tr {
-    &:nth-child(odd) {
-      background-color: var(--pix-neutral-20);
+  &__filter {
+    display: flex;
+    gap: var(--pix-spacing-4x);
+    align-items: end;
+    margin-bottom: var(--pix-spacing-8x);
+  }
+
+  &__cover-rate {
+    tbody > tr {
+      &:nth-child(odd) {
+        background-color: var(--pix-neutral-20);
+      }
     }
   }
-}
 
-.statistics-page__filter {
-  display: flex;
-  gap: var(--pix-spacing-4x);
-  align-items: end;
-  margin-bottom: var(--pix-spacing-8x);
+  &-header__date {
+    @extend %pix-body-xs;
+  }
+
+  &-info__paragraph {
+    @extend %pix-body-m;
+  }
 }

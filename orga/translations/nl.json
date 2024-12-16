@@ -1465,6 +1465,7 @@
       "select-label": "Domein",
       "title": "Statistieken",
       "before-date": "op",
+      "description": "De tabel hieronder laat zien hoe je deelnemers per onderwerp zijn gepositioneerd.'<br>' Positionering geeft het gemiddelde niveau van je deelnemers weer ten opzichte van het maximale niveau dat ze hadden kunnen bereiken.'<br>' Deze gegevens houden rekening met alle deelnames die zijn gedeeld als onderdeel van de evaluatiecampagnes van je organisatie en die niet zijn verwijderd.",
       "gauge": {
         "label": "Je deelnemers behaalden een {userLevel} op een maximaal haalbaar niveau van {tubeLevel}."
       },

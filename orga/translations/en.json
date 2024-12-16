@@ -1464,6 +1464,7 @@
     "statistics": {
       "title": "Statistics",
       "before-date": "on",
+      "description": "The table below shows how your participants are positioned by subject.'<br>' Positioning reflects the average level of your participants in relation to the maximum level they could have reached.'<br>' This data takes into account all participations shared as part of your organisation's evaluation campaigns that have not been deleted.",
       "gauge": {
         "label": "On the topic, your participants achieved a level of {userLevel} out of a maximum reachable level of {tubeLevel}."
       },
