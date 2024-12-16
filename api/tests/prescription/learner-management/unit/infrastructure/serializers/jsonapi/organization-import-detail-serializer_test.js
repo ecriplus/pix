@@ -31,6 +31,7 @@ describe('Unit | Serializer | JSONAPI | organization-import-detail-serializer', 
             'created-at': createdAt,
             'created-by': { firstName: 'Richard', lastName: 'Aldana' },
             errors: [{ code: 'header', name: 'CsvImportError', meta: { line: 3 } }],
+            'has-fixable-errors': true,
           },
         },
       });
