@@ -1,20 +1,22 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
 
-const DEFAULT_PAGE_NUMBER = 1;
 export default class ListController extends Controller {
   @service pixToast;
   @service store;
 
-  @tracked pageNumber = DEFAULT_PAGE_NUMBER;
-  @tracked pageSize = 10;
-
-  get sortedCertificationJurySummaries() {
-    return this.model.juryCertificationSummaries
-      .sortBy('numberOfCertificationIssueReportsWithRequiredAction')
-      .reverse();
+  @action
+  async publishSession() {
+    try {
+      await this.model.session.save({ adapterOptions: { updatePublishedCertifications: true, toPublish: true } });
+      await this.model.juryCertificationSummaries.reload();
+      this.pixToast.sendSuccessNotification({ message: 'Les certifications ont été correctement publiées.' });
+    } catch (e) {
+      this.notifyError(e);
+    } finally {
+      await this.forceRefreshModelFromBackend();
+    }
   }
 
   @action
@@ -27,22 +29,6 @@ export default class ListController extends Controller {
       this.notifyError(e);
     } finally {
       await this.forceRefreshModelFromBackend();
-    }
-  }
-
-  @action
-  async publishSession() {
-    try {
-      await this.model.session.save({ adapterOptions: { updatePublishedCertifications: true, toPublish: true } });
-    } catch (e) {
-      this.notifyError(e);
-    } finally {
-      await this.forceRefreshModelFromBackend();
-    }
-
-    await this.model.juryCertificationSummaries.reload();
-    if (this.model.session.isPublished) {
-      this.pixToast.sendSuccessNotification({ message: 'Les certifications ont été correctement publiées.' });
     }
   }
 
