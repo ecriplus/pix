@@ -1,11 +1,11 @@
-import { click } from '@ember/test-helpers';
 import { fireEvent, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import CertificationsHeader from 'pix-admin/components/certifications/header';
+import { click } from '@ember/test-helpers';
+import CertificationsHeader from 'pix-admin/components/sessions/certifications/header';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | certifications/header', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -18,7 +18,7 @@ module('Integration | Component | certifications/header', function (hooks) {
 
   test('should display a title', async function (assert) {
     // when
-    class SessionStub extends Service { }
+    class SessionStub extends Service {}
     this.owner.register('service:accessControl', SessionStub);
     const screen = await render(<template><CertificationsHeader /></template>);
 
@@ -74,7 +74,7 @@ module('Integration | Component | certifications/header', function (hooks) {
           // when
           const screen = await render(
             <template>
-            <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
+              <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
             </template>,
           );
 
@@ -98,7 +98,7 @@ module('Integration | Component | certifications/header', function (hooks) {
           // when
           const screen = await render(
             <template>
-            <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
+              <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
             </template>,
           );
 
@@ -120,7 +120,7 @@ module('Integration | Component | certifications/header', function (hooks) {
             // when
             const screen = await render(
               <template>
-              <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
+                <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
               </template>,
             );
 
@@ -139,7 +139,7 @@ module('Integration | Component | certifications/header', function (hooks) {
             // when
             const screen = await render(
               <template>
-              <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
+                <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
               </template>,
             );
 
@@ -159,7 +159,7 @@ module('Integration | Component | certifications/header', function (hooks) {
           // when
           const screen = await render(
             <template>
-            <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
+              <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
             </template>,
           );
 
@@ -180,11 +180,11 @@ module('Integration | Component | certifications/header', function (hooks) {
             // when
             const screen = await render(
               <template>
-              <CertificationsHeader
-              @session={{session}}
-              @juryCertificationSummaries={{juryCertificationSummaries}}
-              @publishSession={{publishSession}}
-              />
+                <CertificationsHeader
+                  @session={{session}}
+                  @juryCertificationSummaries={{juryCertificationSummaries}}
+                  @publishSession={{publishSession}}
+                />
               </template>,
             );
             const publishButton = screen.getByRole('button', { name: 'Publier la session' });
@@ -209,11 +209,11 @@ module('Integration | Component | certifications/header', function (hooks) {
             // when
             const screen = await render(
               <template>
-              <CertificationsHeader
-              @session={{session}}
-              @juryCertificationSummaries={{juryCertificationSummaries}}
-              @publishSession={{publishSession}}
-              />
+                <CertificationsHeader
+                  @session={{session}}
+                  @juryCertificationSummaries={{juryCertificationSummaries}}
+                  @publishSession={{publishSession}}
+                />
               </template>,
             );
             const publishButton = screen.getByRole('button', { name: 'Publier la session' });

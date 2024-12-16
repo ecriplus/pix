@@ -1,6 +1,6 @@
 import { render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import InfoPublished from 'pix-admin/components/certifications/info-published';
+import InfoPublished from 'pix-admin/components/sessions/certifications/info-published';
 import { module, test } from 'qunit';
 
 module('Integration | Component | certifications/info-published', function (hooks) {

@@ -6,7 +6,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { not } from 'ember-truth-helpers';
 
-import ConfirmPopup from '../confirm-popup';
+import ConfirmPopup from '../../confirm-popup';
 
 export default class CertificationsHeader extends Component {
   @service accessControl;

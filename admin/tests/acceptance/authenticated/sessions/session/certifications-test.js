@@ -11,12 +11,12 @@ module('Acceptance | authenticated/sessions/session/certifications', function (h
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
-  let session;
+  let session, juryCertificationSummaries;
 
   hooks.beforeEach(async function () {
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
-    const juryCertificationSummaries = server.createList('jury-certification-summary', 11);
+    juryCertificationSummaries = server.createList('jury-certification-summary', 11);
 
     session = server.create('session', 'finalized', {
       id: '1',

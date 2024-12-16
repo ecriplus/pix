@@ -3,7 +3,7 @@
 <section>
   <div class="certification-list-page">
 
-    <Certifications::Header
+    <Sessions::Certifications::Header
       @session={{this.model.session}}
       @juryCertificationSummaries={{this.model.juryCertificationSummaries}}
       @unpublishSession={{this.unpublishSession}}
@@ -11,8 +11,8 @@
     />
 
     <div>
-      <Certifications::List
-        @certifications={{this.sortedCertificationJurySummaries}}
+      <Sessions::Certifications::List
+        @juryCertificationSummaries={{this.model.juryCertificationSummaries}}
         @pagination={{this.model.juryCertificationSummaries.meta}}
         @displayHasSeenEndTestScreenColumn={{this.model.session.displayHasSeenEndTestScreenColumn}}
       />
