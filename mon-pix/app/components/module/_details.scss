@@ -85,15 +85,16 @@
   &__title {
     @extend %pix-body-xs;
 
+    display: flex;
+    align-items: center;
     color: var(--pix-neutral-800);
-    text-align: center;
     text-transform: uppercase;
   }
 }
 
 .module-details-infos-indications-category-title {
   &__icon {
-    margin-right: var(--pix-spacing-2x);
+    margin-right: var(--pix-spacing-1x);
   }
 }
 

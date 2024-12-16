@@ -1,8 +1,8 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
@@ -135,17 +135,21 @@ export default class ModulixDetails extends Component {
         <div class="module-details-infos__indications">
           <div class="module-details-infos-indications__category">
             <div class="module-details-infos-indications-category__title">
-              <FaIcon @icon="stopwatch" class="module-details-infos-indications-category-title__icon" />{{t
-                "pages.modulix.details.duration"
-              }}
+              <PixIcon
+                @name="stopwatch"
+                class="module-details-infos-indications-category-title__icon"
+                @ariaHidden="true"
+              />{{t "pages.modulix.details.duration"}}
             </div>
             <p>{{t "pages.modulix.details.durationValue" htmlSafe=true duration=@module.details.duration}}</p>
           </div>
           <div class="module-details-infos-indications__category">
             <div class="module-details-infos-indications-category__title">
-              <FaIcon @icon="signal" class="module-details-infos-indications-category-title__icon" />{{t
-                "pages.modulix.details.level"
-              }}
+              <PixIcon
+                @name="barsUp"
+                class="module-details-infos-indications-category-title__icon"
+                @ariaHidden="true"
+              />{{t "pages.modulix.details.level"}}
             </div>
             <p>{{@module.details.level}}</p>
           </div>
