@@ -200,6 +200,13 @@ export default class ModulePassage extends Component {
   async goToGrain(grainId) {
     const element = document.getElementById(`grain_${grainId}`);
     this.modulixAutoScroll.focusAndScroll(element);
+
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Modulix',
+      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-name': `Click sur le grain ${grainId} de la barre de navigation`,
+    });
   }
 
   <template>
