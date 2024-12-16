@@ -128,7 +128,6 @@ import * as passwordGenerator from '../../domain/services/password-generator.js'
 import * as verifyCertificateCodeService from '../../domain/services/verify-certificate-code-service.js';
 import * as badgeAcquisitionRepository from '../../infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeForCalculationRepository from '../../infrastructure/repositories/badge-for-calculation-repository.js';
-import { campaignParticipationResultRepository } from '../../infrastructure/repositories/campaign-participation-result-repository.js';
 import * as campaignRepository from '../../infrastructure/repositories/campaign-repository.js';
 import * as certifiableProfileForLearningContentRepository from '../../infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../infrastructure/repositories/complementary-certification-course-result-repository.js';
@@ -212,7 +211,6 @@ const dependencies = {
   campaignManagementRepository,
   participationCompletedJobRepository,
   campaignParticipationRepository,
-  campaignParticipationResultRepository,
   campaignProfileRepository,
   campaignRepository,
   centerRepository,

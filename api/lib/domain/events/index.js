@@ -35,7 +35,6 @@ import * as eventBusBuilder from '../../infrastructure/events/EventBusBuilder.js
 import { EventDispatcher } from '../../infrastructure/events/EventDispatcher.js';
 import { EventDispatcherLogger } from '../../infrastructure/events/EventDispatcherLogger.js';
 import * as badgeAcquisitionRepository from '../../infrastructure/repositories/badge-acquisition-repository.js';
-import * as campaignParticipationResultRepository from '../../infrastructure/repositories/campaign-participation-result-repository.js';
 import * as campaignRepository from '../../infrastructure/repositories/campaign-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
@@ -53,7 +52,6 @@ const dependencies = {
   authenticationMethodRepository,
   badgeAcquisitionRepository,
   campaignRepository,
-  campaignParticipationResultRepository,
   certificationAssessmentHistoryRepository,
   certificationAssessmentRepository,
   certificationCenterRepository,

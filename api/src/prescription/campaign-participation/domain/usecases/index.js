@@ -31,6 +31,7 @@ import * as campaignAssessmentParticipationRepository from '../../infrastructure
 import * as campaignAssessmentParticipationResultRepository from '../../infrastructure/repositories/campaign-assessment-participation-result-repository.js';
 import * as campaignParticipationOverviewRepository from '../../infrastructure/repositories/campaign-participation-overview-repository.js';
 import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
+import { campaignParticipationResultRepository } from '../../infrastructure/repositories/campaign-participation-result-repository.js';
 import * as campaignProfileRepository from '../../infrastructure/repositories/campaign-profile-repository.js';
 import { repositories as campaignRepositories } from '../../infrastructure/repositories/index.js'; // needed to includes organizationFeatureAPI from another BC
 import { participationResultCalculationJobRepository } from '../../infrastructure/repositories/jobs/participation-result-calculation-job-repository.js';
@@ -96,6 +97,7 @@ const dependencies = {
   campaignParticipantRepository: campaignRepositories.campaignParticipantRepository,
   campaignParticipationOverviewRepository,
   campaignParticipationRepository,
+  campaignParticipationResultRepository,
   campaignProfileRepository,
   campaignRepository,
   targetProfileRepository,
