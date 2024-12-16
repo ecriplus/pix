@@ -49,7 +49,7 @@ module('Unit | Component | users | user-detail-personal-information/authenticati
         const user = {
           authenticationMethods: [
             {
-              identityProvider: 'CNAV',
+              identityProvider: 'OIDC_EXAMPLE_NET',
               authenticationComplement: {},
             },
           ],
