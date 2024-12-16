@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 
 import didRender from '../modifiers/did-render';
 
-const ROBOT_IMAGE_OFFSET = 76;
+const ROBOT_IMAGE_OFFSET = 68;
 
 export default class RobotDialog extends Component {
   @tracked resizeObserver;

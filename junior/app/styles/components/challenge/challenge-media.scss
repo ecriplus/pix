@@ -10,7 +10,12 @@
   }
 
   &__loaded-image {
+    max-height: 650px;
     max-width: 100%;
+
+    @include device-is('tablet') {
+      max-height: 500px;
+    }
   }
 
   &__loaded-image--hidden {

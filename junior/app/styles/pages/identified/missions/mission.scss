@@ -1,6 +1,7 @@
 .mission-page {
   &__body {
     display: flex;
+    margin-top: 16px;
     margin-left: 145px;
 
     @include device-is('tablet') {

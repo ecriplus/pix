@@ -1,11 +1,11 @@
 .challenge-item {
   display: flex;
   align-content: center;
-  margin: 35px 140px 0;
+  margin: 16px 140px 0;
   transition: all 0.4s;
 
   @include device-is('tablet') {
-    margin: 35px 120px 0;
+    margin: 16px 120px 0;
   }
 
   &--single-display {
@@ -13,7 +13,7 @@
   }
 
   &__media {
-    width: 60%;
+    width: 50%;
     height: fit-content;
     margin-right: var(--pix-spacing-6x);
     padding: var(--pix-spacing-4x);
@@ -28,7 +28,7 @@
   }
 
   &__proposals {
-    width: 40%;
+    width: 50%;
 
     &--single-display {
       width: unset;
