@@ -1,4 +1,5 @@
 import { AggregateImportError } from '../../../../../../../src/prescription/learner-management/domain/errors.js';
+import { ImportCommonOrganizationLearnersJob } from '../../../../../../../src/prescription/learner-management/domain/models/ImportCommonOrganizationLearnersJob.js';
 import { ImportOrganizationLearnerSet } from '../../../../../../../src/prescription/learner-management/domain/models/ImportOrganizationLearnerSet.js';
 import { validateOrganizationLearnersFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-from-feature/validate-organization-learners-file.js';
 import { CommonCsvLearnerParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/common-csv-learner-parser.js';
@@ -7,6 +8,7 @@ import { catchErr, expect, sinon } from '../../../../../../test-helper.js';
 describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
   let organizationImportRepositoryStub,
     organizationLearnerImportFormatRepositoryStub,
+    importCommonOrganizationLearnersJobRepositoryStub,
     commonCsvLearnerParserStub,
     importOrganizationLearnerSetStub,
     dependencieStub,
@@ -15,6 +17,7 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
     dataBuffer,
     fileEncoding,
     organizationId,
+    organizationImportId,
     dataStream,
     importFormat,
     s3Filepath;
@@ -30,11 +33,18 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
     dataStream = Symbol('DataStream');
 
     importFormat = Symbol('importFormat');
+    organizationImportId = Symbol('organizationImportId');
 
     importStorageStub = {
       readFile: sinon.stub(),
       deleteFile: sinon.stub(),
     };
+
+    importCommonOrganizationLearnersJobRepositoryStub = { performAsync: sinon.stub() };
+
+    importCommonOrganizationLearnersJobRepositoryStub.performAsync
+      .withArgs(new ImportCommonOrganizationLearnersJob({ organizationImportId }))
+      .resolves();
 
     dependencieStub = {
       createReadStream: sinon.stub(),
@@ -42,7 +52,7 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
     };
 
     organizationImportRepositoryStub = {
-      getLastByOrganizationId: sinon.stub(),
+      get: sinon.stub(),
       save: sinon.stub(),
     };
 
@@ -61,6 +71,7 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
     };
 
     organizationImportStub = {
+      organizationId,
       validate: sinon.stub(),
       filename: s3Filepath,
     };
@@ -71,9 +82,7 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
       // given
       const parsedLearners = Symbol('parsed learners');
 
-      organizationImportRepositoryStub.getLastByOrganizationId
-        .withArgs(organizationId)
-        .resolves(organizationImportStub);
+      organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImportStub);
 
       organizationLearnerImportFormatRepositoryStub.get.withArgs(organizationId).resolves(importFormat);
 
@@ -95,10 +104,11 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
 
       // when
       await validateOrganizationLearnersFile({
-        organizationId,
+        organizationImportId,
         importStorage: importStorageStub,
         organizationImportRepository: organizationImportRepositoryStub,
         organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
+        importCommonOrganizationLearnersJobRepository: importCommonOrganizationLearnersJobRepositoryStub,
         dependencies: dependencieStub,
       });
 
@@ -118,18 +128,17 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
       it('should throw and delete file on storage', async function () {
         // given
         const error = new Error('Error Happened');
-        organizationImportRepositoryStub.getLastByOrganizationId
-          .withArgs(organizationId)
-          .resolves(organizationImportStub);
+        organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImportStub);
 
         organizationLearnerImportFormatRepositoryStub.get.withArgs(organizationId).rejects(error);
 
         // when
         const validateError = await catchErr(validateOrganizationLearnersFile)({
-          organizationId,
+          organizationImportId,
           importStorage: importStorageStub,
           organizationImportRepository: organizationImportRepositoryStub,
           organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
+          importCommonOrganizationLearnersJobRepository: importCommonOrganizationLearnersJobRepositoryStub,
           dependencies: dependencieStub,
         });
 
@@ -146,18 +155,17 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
         it('should save the error', async function () {
           // given
           const error = new Error('Error Happened');
-          organizationImportRepositoryStub.getLastByOrganizationId
-            .withArgs(organizationId)
-            .resolves(organizationImportStub);
+          organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImportStub);
 
           organizationLearnerImportFormatRepositoryStub.get.withArgs(organizationId).rejects(error);
 
           // when
           await catchErr(validateOrganizationLearnersFile)({
-            organizationId,
+            organizationImportId,
             importStorage: importStorageStub,
             organizationImportRepository: organizationImportRepositoryStub,
             organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
+            importCommonOrganizationLearnersJobRepository: importCommonOrganizationLearnersJobRepositoryStub,
             dependencies: dependencieStub,
           });
 
@@ -170,18 +178,17 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
         it('should save the errors', async function () {
           // given
           const error = new Error('Error Happened');
-          organizationImportRepositoryStub.getLastByOrganizationId
-            .withArgs(organizationId)
-            .resolves(organizationImportStub);
+          organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImportStub);
 
           organizationLearnerImportFormatRepositoryStub.get.withArgs(organizationId).rejects([error, error]);
 
           // when
           await catchErr(validateOrganizationLearnersFile)({
-            organizationId,
+            organizationImportId,
             importStorage: importStorageStub,
             organizationImportRepository: organizationImportRepositoryStub,
             organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
+            importCommonOrganizationLearnersJobRepository: importCommonOrganizationLearnersJobRepositoryStub,
             dependencies: dependencieStub,
           });
 

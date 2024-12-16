@@ -17,6 +17,7 @@ import * as membershipRepository from '../../../../team/infrastructure/repositor
 import * as registrationOrganizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/registration-organization-learner-repository.js';
 import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
+import { importCommonOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-common-organization-learners-job-repository.js';
 import { importOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-organization-learners-job-repository.js';
 import { importScoCsvOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-sco-csv-organization-learners-job-repository.js';
 import { importSupOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-sup-organization-learners-job-repository.js';
@@ -59,6 +60,7 @@ import { importStorage } from '../../infrastructure/storage/import-storage.js';
 const dependencies = {
   campaignParticipationRepository,
   campaignRepository,
+  importCommonOrganizationLearnersJobRepository,
   importOrganizationLearnersJobRepository,
   importScoCsvOrganizationLearnersJobRepository,
   importStorage,
