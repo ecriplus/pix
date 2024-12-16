@@ -47,6 +47,7 @@ describe('Unit | Serializer | JSONAPI | user-details-for-admin-serializer', func
             'last-logged-at': now,
             'email-confirmed-at': now,
             'has-been-anonymised': false,
+            'has-been-anonymised-by': null,
             'anonymised-by-full-name': null,
             'is-pix-agent': false,
           },
