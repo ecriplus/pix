@@ -68,6 +68,8 @@
     }
 
     &__documentation-button {
+      display: flex;
+      gap: var(--pix-spacing-4x);
       width: fit-content;
       margin: var(--pix-spacing-4x);
     }
@@ -77,17 +79,14 @@
 .mission-header-objectives {
   @extend %pix-body-l;
 
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--pix-spacing-8x);
   margin-top: var(--pix-spacing-8x);
 
   h2 {
     margin-bottom: var(--pix-spacing-4x);
     text-decoration: underline;
-  }
-
-  &__competence {
-    margin-left: 100px;
   }
 
   &__list {
