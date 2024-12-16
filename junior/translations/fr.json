@@ -13,6 +13,13 @@
       "play": "J'écoute",
       "stop": "Stop",
       "label": "Lire la consigne à haute voix"
+    },
+    "challenge": {
+      "embed-simulator": {
+        "actions": {
+          "reset": "Recommencer"
+        }
+      }
     }
   },
   "pages": {
