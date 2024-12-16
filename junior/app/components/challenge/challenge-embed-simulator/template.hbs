@@ -15,15 +15,15 @@
   </iframe>
   {{#if @shouldDisplayRebootButton}}
     <div class="reboot-container">
-      <button
-        type="button"
+      <PixButton
         class="link link--grey reboot-container__content"
         aria-label={{t "pages.challenge.embed-simulator.actions.reset-label"}}
-        {{on "click" this.rebootSimulator}}
+        @iconBefore="refresh"
+        @variant="tertiary"
+        @triggerAction={{this.rebootSimulator}}
       >
-        <PixIcon @name="refresh" @ariaHidden={{true}} class="embed-reboot-content__icon" />
         {{t "components.challenge.embed-simulator.actions.reset"}}
-      </button>
+      </PixButton>
     </div>
   {{/if}}
 </div>

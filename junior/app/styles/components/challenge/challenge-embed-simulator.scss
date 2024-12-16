@@ -20,7 +20,11 @@
   .reboot-container {
     display: flex;
     justify-content: flex-end;
-    color: var(--pix-neutral-500);
+
+    .pix-button--tertiary {
+      color: var(--pix-neutral-500);
+      text-decoration: none;
+    }
 
     &__content {
       display: flex;
