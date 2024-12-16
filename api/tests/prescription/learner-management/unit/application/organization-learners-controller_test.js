@@ -5,12 +5,11 @@ import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Prescription | Learner Management | Application | organization-learner-controller', function () {
   describe('#importOrganizationLearnerFromFeature', function () {
-    let saveOrganizationLearnersFileStub, sendOrganizationLearnersFileStub, validateOrganizationLearnersFileStub;
+    let sendOrganizationLearnersFileStub, validateOrganizationLearnersFileStub;
 
     beforeEach(function () {
       sinon.stub(ApplicationTransaction, 'execute');
       ApplicationTransaction.execute.callsFake((callback) => callback());
-      saveOrganizationLearnersFileStub = sinon.stub(usecases, 'saveOrganizationLearnersFile');
       sendOrganizationLearnersFileStub = sinon.stub(usecases, 'sendOrganizationLearnersFile');
       validateOrganizationLearnersFileStub = sinon.stub(usecases, 'validateOrganizationLearnersFile');
     });
@@ -27,14 +26,9 @@ describe('Unit | Prescription | Learner Management | Application | organization-
 
       const response = await organizationLearnersController.importOrganizationLearnerFromFeature(request, hFake);
 
-      expect(ApplicationTransaction.execute.calledThrice, 'ApplicationTransaction.execute').to.be.true;
-      expect(
-        sinon.assert.callOrder(
-          sendOrganizationLearnersFileStub,
-          validateOrganizationLearnersFileStub,
-          saveOrganizationLearnersFileStub,
-        ),
-      ).to.not.throws;
+      expect(ApplicationTransaction.execute.calledTwice, 'ApplicationTransaction.execute').to.be.true;
+      expect(sinon.assert.callOrder(sendOrganizationLearnersFileStub, validateOrganizationLearnersFileStub)).to.not
+        .throws;
       expect(
         usecases.sendOrganizationLearnersFile.calledWithExactly({ payload, organizationId, userId }),
         'sendOrganizationLearnerFile',

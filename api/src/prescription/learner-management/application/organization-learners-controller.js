@@ -28,9 +28,6 @@ const importOrganizationLearnerFromFeature = async function (request, h) {
   await ApplicationTransaction.execute(async () => {
     await usecases.validateOrganizationLearnersFile({ organizationId });
   });
-  await ApplicationTransaction.execute(async () => {
-    await usecases.saveOrganizationLearnersFile({ organizationId });
-  });
 
   return h.response().code(204);
 };
