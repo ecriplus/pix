@@ -33,7 +33,7 @@ const validateOrganizationLearnersFile = async function ({
 
     learnerSet.addLearners(learners);
     await importCommonOrganizationLearnersJobRepository.performAsync(
-      new ImportCommonOrganizationLearnersJob({ organizationImportId: organizationImport.id }),
+      new ImportCommonOrganizationLearnersJob({ organizationImportId }),
     );
   } catch (error) {
     if (Array.isArray(error)) {
