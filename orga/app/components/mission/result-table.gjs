@@ -28,7 +28,7 @@ function getMissionResultColor(result) {
 <template>
   {{#if @missionLearners}}
     <div class="panel">
-      <table class="table content-text content-text--small participation-list__table">
+      <table class="table content-text content-text--small participation-list__table mission-table">
         <caption class="screen-reader-only">{{t
             "pages.missions.mission.table.result.caption"
             missionName=@mission.name
