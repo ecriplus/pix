@@ -2162,8 +2162,8 @@
         "more-information": "Voor meer informatie,",
         "more-information-contact-support": "kunt u contact opnemen met ondersteuning.",
         "title": "Mijn account permanent verwijderen",
-        "warning-email": "Deze actie is onomkeerbaar. {pixScore} Alle vaardigheden, cursussen en pix die je hebt verkregen worden permanent verwijderd voor het PIX-account met het e-mailadres<strong>{email}</strong>.",
-        "warning-other": "Deze actie is onomkeerbaar. {pixScore} Alle vaardigheden, cursussen en pix die je hebt behaald, worden permanent verwijderd van het PIX-account.<strong>{firstName} {lastName}</strong>."
+        "warning-email": "Deze actie is onomkeerbaar. {pixScore} Alle vaardigheden, cursussen en pix die je hebt verkregen worden permanent verwijderd voor het PIX-account met het e-mailadres <strong>{email}</strong>.",
+        "warning-other": "Deze actie is onomkeerbaar. {pixScore} Alle vaardigheden, cursussen en pix die je hebt behaald, worden permanent verwijderd van het PIX-account <strong>{firstName} {lastName}</strong>."
       },
       "email-confirmed": "Geverifieerd e-mailadres.",
       "email-verification": {
