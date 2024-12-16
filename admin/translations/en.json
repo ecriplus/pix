@@ -738,7 +738,7 @@
         "authentication-methods": "Méthodes de connexion",
         "certification-centers-list": "Pix Certif",
         "cgu": "Terms of service",
-        "cgu-aria-label" : "Terms of service",
+        "cgu-aria-label": "Terms of service",
         "details": "Informations prescrit",
         "organizations-list": "Pix Orga",
         "participations-list": "Participations",
@@ -752,6 +752,13 @@
         "success": {
           "deactivate-certification-center-membership": "Le membre a correctement été désactivé.",
           "update-certification-center-membership-role": "Le rôle du membre a été modifié."
+        }
+      },
+      "overview": {
+        "anonymisation": {
+          "default-anonymised-user-message": "Anonymised user.",
+          "self-anonymisation-message": "User anonymised by themself.",
+          "user-anonymised-by-admin-message": "User anonymised by {fullName}."
         }
       }
     },
