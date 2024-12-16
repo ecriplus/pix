@@ -1,5 +1,4 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { ApplicationTransaction } from '../../shared/infrastructure/ApplicationTransaction.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as scoOrganizationLearnerSerializer from '../infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 
@@ -22,12 +21,7 @@ const importOrganizationLearnerFromFeature = async function (request, h) {
   const organizationId = request.params.organizationId;
   const userId = request.auth.credentials.userId;
 
-  await ApplicationTransaction.execute(async () => {
-    await usecases.sendOrganizationLearnersFile({ payload: request.payload, organizationId, userId });
-  });
-  await ApplicationTransaction.execute(async () => {
-    await usecases.validateOrganizationLearnersFile({ organizationId });
-  });
+  await usecases.sendOrganizationLearnersFile({ payload: request.payload, organizationId, userId });
 
   return h.response().code(204);
 };
