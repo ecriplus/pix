@@ -228,6 +228,7 @@
         "placeholder": "Achternaam, voornaam"
       },
       "loading": "Laden...",
+      "placeholder": "-- Selecteer --",
       "title": "Filters"
     },
     "form": {
@@ -420,7 +421,6 @@
       "title": "Certificaten",
       "description": "Selecteer de klas waarvoor je de attesten in PDF-formaat wilt exporteren.",
       "download-attestations-button": "Downloaden",
-      "placeholder": "-- Selecteer --",
       "select-label": "Selecteer een of meer klassen"
     },
     "campaign-activity": {
@@ -1462,6 +1462,7 @@
       "title": "{count, plural, =0 {Studenten} =1 {Studenten ({count})} other {studenten ({count})}}"
     },
     "statistics": {
+      "select-label": "Domein",
       "title": "Statistieken",
       "before-date": "op",
       "gauge": {

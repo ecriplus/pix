@@ -38,7 +38,7 @@ export default class AttestationsSixthGrade extends Component {
         @options={{@divisions}}
         @values={{this.selectedDivisions}}
         @onChange={{this.onSelectDivision}}
-        @placeholder={{t "pages.attestations.placeholder"}}
+        @placeholder={{t "common.filters.placeholder"}}
       >
         <:label>{{t "pages.attestations.select-label"}}</:label>
         <:default as |option|>{{option.label}}</:default>

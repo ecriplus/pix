@@ -21,7 +21,7 @@ module('Integration | Component | Attestations | Sixth-grade', function (hooks) 
     assert.ok(screen.getByRole('heading', { name: t('pages.attestations.title') }));
     assert.ok(screen.getByText(t('pages.attestations.description')));
     assert.ok(screen.getByRole('textbox', { name: t('pages.attestations.select-label') }));
-    assert.ok(screen.getByPlaceholderText(t('pages.attestations.placeholder')));
+    assert.ok(screen.getByPlaceholderText(t('common.filters.placeholder')));
     assert.ok(screen.getByRole('button', { name: t('pages.attestations.download-attestations-button') }));
   });
 
