@@ -15,6 +15,7 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
     organizationImportStub,
     dataBuffer,
     fileEncoding,
+    organizationImportId,
     organizationId,
     dataStream,
     s3Filepath,
@@ -25,6 +26,7 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
     existingLearners;
 
   beforeEach(function () {
+    organizationImportId = Symbol('organizationImportId');
     organizationId = 1234;
     s3Filepath = Symbol('s3-path.csv');
     fileEncoding = Symbol('file encoding');
@@ -34,7 +36,7 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
     learnerToSave = Symbol('learner to save');
     learnerIds = Symbol('learner Ids');
 
-    importFormat = Symbol('importFormat');
+    importFormat = Symbol('OrganizationLearnerImportFormat');
 
     parsedLearners = Symbol('parsed learners');
 
@@ -49,7 +51,7 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
     };
 
     organizationImportRepositoryStub = {
-      getLastByOrganizationId: sinon.stub(),
+      get: sinon.stub(),
       save: sinon.stub(),
     };
 
@@ -81,10 +83,11 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
 
     // get latest organizationImport
     organizationImportStub = {
+      organizationId,
       process: sinon.stub(),
       filename: s3Filepath,
     };
-    organizationImportRepositoryStub.getLastByOrganizationId.withArgs(organizationId).resolves(organizationImportStub);
+    organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImportStub);
 
     // get config from feature import
     organizationLearnerImportFormatRepositoryStub.get.withArgs(organizationId).resolves(importFormat);
@@ -114,7 +117,7 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
     it('should process the file', async function () {
       // when
       await saveOrganizationLearnersFile({
-        organizationId,
+        organizationImportId,
         importStorage: importStorageStub,
         organizationImportRepository: organizationImportRepositoryStub,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
@@ -159,7 +162,7 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
 
       // when
       const saveError = await catchErr(saveOrganizationLearnersFile)({
-        organizationId,
+        organizationImportId,
         importStorage: importStorageStub,
         organizationImportRepository: organizationImportRepositoryStub,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
@@ -189,15 +192,13 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
       it('should save the error', async function () {
         // given
         const error = new Error('Error Happened');
-        organizationImportRepositoryStub.getLastByOrganizationId
-          .withArgs(organizationId)
-          .resolves(organizationImportStub);
+        organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImportStub);
 
         organizationLearnerImportFormatRepositoryStub.get.withArgs(organizationId).rejects(error);
 
         // when
         await catchErr(saveOrganizationLearnersFile)({
-          organizationId,
+          organizationImportId,
           importStorage: importStorageStub,
           organizationImportRepository: organizationImportRepositoryStub,
           organizationLearnerRepository: organizationLearnerRepositoryStub,
@@ -212,15 +213,13 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
       it('should save the errors', async function () {
         // given
         const error = new Error('Error Happened');
-        organizationImportRepositoryStub.getLastByOrganizationId
-          .withArgs(organizationId)
-          .resolves(organizationImportStub);
+        organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImportStub);
 
         organizationLearnerImportFormatRepositoryStub.get.withArgs(organizationId).rejects([error, error]);
 
         // when
         await catchErr(saveOrganizationLearnersFile)({
-          organizationId,
+          organizationImportId,
           importStorage: importStorageStub,
           organizationImportRepository: organizationImportRepositoryStub,
           organizationLearnerRepository: organizationLearnerRepositoryStub,
