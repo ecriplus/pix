@@ -12,8 +12,10 @@ export default class Item extends Component {
       }
     });
   }
+
   get isMediaWithForm() {
-    return this.args.challenge.hasForm && this.hasMedia && this.args.challenge.type !== undefined;
+    const challenge = this.args.challenge;
+    return challenge.hasForm && this.hasMedia && challenge.hasType;
   }
 
   get hasMedia() {

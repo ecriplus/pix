@@ -182,4 +182,25 @@ module('Unit | Model | Challenge', function (hooks) {
       assert.false(challenge.isQCM);
     });
   });
+
+  module('#hasType', function () {
+    test('should be true if type is set', async function (assert) {
+      const challenge = store.createRecord('challenge', {
+        type: 'QCM',
+      });
+      assert.true(challenge.hasType);
+    });
+    test('should be false if type is null', async function (assert) {
+      const challenge = store.createRecord('challenge', {
+        type: null,
+      });
+      assert.false(challenge.hasType);
+    });
+    test('should be false if type is undefined', async function (assert) {
+      const challenge = store.createRecord('challenge', {
+        type: undefined,
+      });
+      assert.false(challenge.hasType);
+    });
+  });
 });
