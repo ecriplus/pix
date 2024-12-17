@@ -1,5 +1,32 @@
 # Pix Changelog
 
+## v5.3.0 (17/12/2024)
+
+
+### :rocket: Amélioration
+- [#10802](https://github.com/1024pix/pix/pull/10802) [FEATURE] déplace le footer d'orga en base de la page (pix-15615).
+- [#10825](https://github.com/1024pix/pix/pull/10825) [FEATURE] Ajouter des descriptions dans la page statistiques (PIX-15457).
+- [#10784](https://github.com/1024pix/pix/pull/10784) [FEATURE] Ajout d'un bouton reload pour les embed (PIX-15418).
+- [#10808](https://github.com/1024pix/pix/pull/10808) [FEATURE] Ajouter les filtres par domaines sur la page statistiques (PIX-15725).
+- [#10822](https://github.com/1024pix/pix/pull/10822) [FEATURE] Mettre à jour le wording du bandeau Pix Certif pour les centres SCO sur Pix Certif (PIX-15652). .
+- [#10806](https://github.com/1024pix/pix/pull/10806) [FEATURE] Amélioration de l'affichage de la fiche pédagogique (PIX-15487).
+- [#10812](https://github.com/1024pix/pix/pull/10812) [FEATURE] Utiliser des PixIcon au lieu de FaIcon dans la page détails de Modulix (PIX-15729).
+- [#10817](https://github.com/1024pix/pix/pull/10817) [FEATURE] Ajouter la date d'extraction à la page statistiques sur Pix Orga (PIX-15458).
+- [#10810](https://github.com/1024pix/pix/pull/10810) [FEATURE] Modifier le lien pour l'interprétation des résultats en anglais sur Pix Orga (PIX-15679).
+
+### :building_construction: Tech
+- [#10832](https://github.com/1024pix/pix/pull/10832) [TECH] Corrige la conjugaison de "was" en "were" dans le script de configuration.
+- [#10813](https://github.com/1024pix/pix/pull/10813) [TECH] Migrer les résultats partagés et complétés à Pôle Emploi vers le contexte Prescription (Pix-15339).
+- [#10801](https://github.com/1024pix/pix/pull/10801) [TECH] Retirer complètement le code lié à l'ancien cache référentiel (PIX-15711).
+- [#10799](https://github.com/1024pix/pix/pull/10799) [TECH] Migrer la route User Has Seen Challenge Tooltip (PIX-15689).
+
+### :bug: Correction
+- [#10824](https://github.com/1024pix/pix/pull/10824) [BUGFIX] Corriger la mention "Terminé" sur la dernière flashcard (PIX-15735).
+- [#10818](https://github.com/1024pix/pix/pull/10818) [BUGFIX] Baisser la tailles des colonnes du tableau(PIX-14545).
+
+### :arrow_up: Montée de version
+- [#10809](https://github.com/1024pix/pix/pull/10809) [BUMP] Update dependency @1024pix/pix-ui to ^51.6.0 (mon-pix).
+
 ## v5.2.0 (13/12/2024)
 
 
