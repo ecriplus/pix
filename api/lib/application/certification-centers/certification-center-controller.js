@@ -2,22 +2,7 @@ import * as divisionSerializer from '../../../src/prescription/campaign/infrastr
 import * as certificationCenterMembershipSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import { usecases as teamUsecases } from '../../../src/team/domain/usecases/index.js';
 import { usecases } from '../../domain/usecases/index.js';
-import * as sessionSummarySerializer from '../../infrastructure/serializers/jsonapi/session-summary-serializer.js';
 import * as studentCertificationSerializer from '../../infrastructure/serializers/jsonapi/student-certification-serializer.js';
-
-const findPaginatedSessionSummaries = async function (request) {
-  const certificationCenterId = request.params.id;
-  const userId = request.auth.credentials.userId;
-  const options = request.query;
-
-  const { models: sessionSummaries, meta } = await usecases.findPaginatedCertificationCenterSessionSummaries({
-    userId,
-    certificationCenterId,
-    page: options.page,
-  });
-
-  return sessionSummarySerializer.serialize(sessionSummaries, meta);
-};
 
 const getStudents = async function (request) {
   const certificationCenterId = request.params.certificationCenterId;
@@ -91,7 +76,6 @@ const updateReferer = async function (request, h) {
 const certificationCenterController = {
   createCertificationCenterMembershipByEmail,
   findCertificationCenterMembershipsByCertificationCenter,
-  findPaginatedSessionSummaries,
   getDivisions,
   getStudents,
   updateReferer,

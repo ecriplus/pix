@@ -32,6 +32,7 @@ import * as sessionForInvigilatorKitRepository from './session-for-invigilator-k
 import * as sessionForSupervisingRepository from './session-for-supervising-repository.js';
 import * as sessionJuryCommentRepository from './session-jury-comment-repository.js';
 import * as sessionRepository from './session-repository.js';
+import * as sessionSummaryRepository from './session-summary-repository.js';
 import * as supervisorAccessRepository from './supervisor-access-repository.js';
 import * as v3CertificationCourseDetailsForAdministrationRepository from './v3-certification-course-details-for-administration-repository.js';
 
@@ -53,6 +54,7 @@ import * as v3CertificationCourseDetailsForAdministrationRepository from './v3-c
  * @typedef {certificationIssueReportRepository} CertificationIssueReportRepository
  * @typedef {sessionForSupervisingRepository} SessionForSupervisingRepository
  * @typedef {sessionJuryCommentRepository} SessionJuryCommentRepository
+ * @typedef {sessionSummaryRepository} SessionSummaryRepository
  * @typedef {sessionRepository} SessionRepository
  * @typedef {supervisorAccessRepository} SupervisorAccessRepository
  * @typedef {certificationReportRepository} CertificationReportRepository
@@ -88,6 +90,7 @@ const repositoriesWithoutInjectedDependencies = {
   sessionForInvigilatorKitRepository,
   issueReportCategoryRepository,
   sessionRepository,
+  sessionSummaryRepository,
   sessionForSupervisingRepository,
   sessionJuryCommentRepository,
   certificationRepository,
@@ -126,5 +129,6 @@ export {
   cpfExportRepository,
   flashAlgorithmConfigurationRepository,
   sessionRepositories,
+  sessionSummaryRepository,
   sharedCompetenceMarkRepository,
 };

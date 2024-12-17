@@ -1,5 +1,6 @@
 import * as cancellation from './application/cancellation-route.js';
 import * as certificationCandidate from './application/certification-candidate-route.js';
+import * as sessionSummaries from './application/certification-centers-session-summaries-route.js';
 import * as certificationCourse from './application/certification-course-route.js';
 import * as certificationDetails from './application/certification-details-route.js';
 import * as certificationIssueReport from './application/certification-issue-report-route.js';
@@ -36,6 +37,7 @@ const certificationSessionRoutes = [
   juryCertification,
   juryComment,
   session,
+  sessionSummaries,
   sessionForSupervising,
   sessionLiveAlert,
   sessionPublication,

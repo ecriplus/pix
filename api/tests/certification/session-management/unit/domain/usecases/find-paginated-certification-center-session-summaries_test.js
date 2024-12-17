@@ -1,6 +1,6 @@
-import { findPaginatedCertificationCenterSessionSummaries } from '../../../../lib/domain/usecases/find-paginated-certification-center-session-summaries.js';
-import { ForbiddenAccess } from '../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { findPaginatedCertificationCenterSessionSummaries } from '../../../../../../src/certification/session-management/domain/usecases/find-paginated-certification-center-session-summaries.js';
+import { ForbiddenAccess } from '../../../../../../src/shared/domain/errors.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Use Cases | find-paginated-certification-center-session-summaries', function () {
   const sessionSummaryRepository = {

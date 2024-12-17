@@ -272,20 +272,4 @@ describe('Unit | Router | certification-center-router', function () {
       expect(result.statusCode).to.equal(400);
     });
   });
-
-  describe('GET /api/certification-centers/{certificationCenterId}/session-summaries', function () {
-    it('should return 200', async function () {
-      // given
-      sinon.stub(certificationCenterController, 'findPaginatedSessionSummaries').returns('ok');
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const response = await httpTestServer.request('GET', '/api/certification-centers/123/session-summaries');
-
-      // then
-      expect(response.statusCode).to.equal(200);
-      sinon.assert.calledOnce(certificationCenterController.findPaginatedSessionSummaries);
-    });
-  });
 });
