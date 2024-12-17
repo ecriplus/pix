@@ -12,7 +12,6 @@ import * as certificationEvaluationCandidateRepository from '../../../src/certif
 import * as flashAlgorithmService from '../../../src/certification/flash-certification/domain/services/algorithm-methods/flash.js';
 import * as sessionPublicationService from '../../../src/certification/session-management/domain/services/session-publication-service.js';
 import * as certificationOfficerRepository from '../../../src/certification/session-management/infrastructure/repositories/certification-officer-repository.js';
-import * as sessionManagementCertificationRepository from '../../../src/certification/session-management/infrastructure/repositories/certification-repository.js';
 import * as finalizedSessionRepository from '../../../src/certification/session-management/infrastructure/repositories/finalized-session-repository.js';
 import * as juryCertificationRepository from '../../../src/certification/session-management/infrastructure/repositories/jury-certification-repository.js';
 import * as juryCertificationSummaryRepository from '../../../src/certification/session-management/infrastructure/repositories/jury-certification-summary-repository.js';
@@ -188,7 +187,6 @@ function requirePoleEmploiNotifier() {
  * @typedef {certificationChallengesService} CertificationChallengesService
  * @typedef {verifyCertificateCodeService} VerifyCertificateCodeService
  * @typedef {assessmentRepository} AssessmentRepository
- * @typedef {sessionManagementCertificationRepository} SessionManagementCertificationRepository
  */
 const dependencies = {
   accountRecoveryDemandRepository,
@@ -298,7 +296,6 @@ const dependencies = {
   scoringCertificationService,
   sessionCodeService,
   sessionEnrolmentRepository,
-  sessionManagementCertificationRepository,
   sessionPublicationService,
   sessionRepository,
   sessionSummaryRepository,

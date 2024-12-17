@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 
-import { SessionPublicationBatchResult } from '../../../src/shared/domain/models/index.js';
+import { SessionPublicationBatchResult } from '../models/SessionPublicationBatchResult.js';
 
 const publishSessionsInBatch = async function ({
   i18n,
@@ -8,7 +8,7 @@ const publishSessionsInBatch = async function ({
   publishedAt = new Date(),
   batchId = randomUUID(),
   certificationCenterRepository,
-  sessionManagementCertificationRepository,
+  certificationRepository,
   finalizedSessionRepository,
   sessionRepository,
   sharedSessionRepository,
@@ -20,7 +20,7 @@ const publishSessionsInBatch = async function ({
       const session = await sessionPublicationService.publishSession({
         sessionId,
         publishedAt,
-        certificationRepository: sessionManagementCertificationRepository,
+        certificationRepository,
         finalizedSessionRepository,
         sharedSessionRepository,
         sessionRepository,

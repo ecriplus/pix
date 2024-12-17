@@ -37,38 +37,6 @@ const register = async function (server) {
         ],
       },
     },
-    {
-      method: 'POST',
-      path: '/api/admin/sessions/publish-in-batch',
-      config: {
-        validate: {
-          payload: Joi.object({
-            data: {
-              attributes: {
-                ids: Joi.array().items(identifiersType.sessionId),
-              },
-            },
-          }),
-        },
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleCertif,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        handler: sessionController.publishInBatch,
-        notes: [
-          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
-            "- Permet de publier plusieurs sessions sans problème d'un coup",
-        ],
-        tags: ['api', 'session', 'publication'],
-      },
-    },
   ]);
 };
 
