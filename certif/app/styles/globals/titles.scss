@@ -1,5 +1,10 @@
 .page-title {
   @extend %pix-title-m;
 
-  margin: 24px 0;
+  margin-top: var(--pix-spacing-6x);
+  margin-bottom: var(--pix-spacing-6x);
+
+  @include device-is('tablet') {
+    margin-top: 0;
+  }
 }

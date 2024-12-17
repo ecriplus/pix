@@ -16,7 +16,6 @@
     margin-bottom: var(--pix-spacing-3x);
 
     @include device-is('tablet') {
-      align-items: center;
       flex-direction: row;
       margin-bottom: 0;
     }
