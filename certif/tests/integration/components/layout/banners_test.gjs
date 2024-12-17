@@ -135,7 +135,15 @@ module('Integration | Component | Layout | Banners', function (hooks) {
       const screen = await render(<template><Banners /></template>);
 
       // then
-      assert.dom(screen.queryByRole('alert')).exists();
+      assert
+        .dom(
+          screen.getByText(
+            (content) =>
+              content.startsWith('La Certification Pix se déroulera du 7 novembre 2024 au 7 mars 2025 ') &&
+              content.endsWith('Collèges : du 17 mars au 13 juin 2025.'),
+          ),
+        )
+        .exists();
     });
   });
 
@@ -185,7 +193,15 @@ module('Integration | Component | Layout | Banners', function (hooks) {
         const screen = await render(<template><Banners /></template>);
 
         // then
-        assert.dom(screen.queryByRole('alert')).doesNotExist();
+        assert
+          .dom(
+            screen.queryByText(
+              (content) =>
+                content.startsWith('La Certification Pix se déroulera du 7 novembre 2024 au 7 mars 2025 ') &&
+                content.endsWith('Collèges : du 17 mars au 13 juin 2025.'),
+            ),
+          )
+          .doesNotExist();
       });
     });
   });
