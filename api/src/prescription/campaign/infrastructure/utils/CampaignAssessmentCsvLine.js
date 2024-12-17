@@ -1,6 +1,10 @@
 import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone.js';
 import utc from 'dayjs/plugin/utc.js';
+
 dayjs.extend(utc);
+dayjs.extend(timezone);
+
 import _ from 'lodash';
 
 const STATS_COLUMNS_COUNT = 3;
@@ -111,10 +115,10 @@ class CampaignAssessmentCsvLine {
         this.targetedKnowledgeElementsCount,
         this.learningContent.skills.length,
       ),
-      dayjs.utc(this.campaignParticipationInfo.createdAt).format(),
+      dayjs.utc(this.campaignParticipationInfo.createdAt).tz('Europe/Paris').format('DD/MM/YYYY HH:mm'),
       this._makeYesNoColumns(this.campaignParticipationInfo.isShared),
       this.campaignParticipationInfo.isShared
-        ? dayjs.utc(this.campaignParticipationInfo.sharedAt).format()
+        ? dayjs.utc(this.campaignParticipationInfo.sharedAt).tz('Europe/Paris').format('DD/MM/YYYY HH:mm')
         : this.emptyContent,
       ...(this.stageCollection.hasStage ? [this._getReachedStage()] : []),
       ...(this.campaignParticipationInfo.isShared

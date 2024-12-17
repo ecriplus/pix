@@ -130,7 +130,7 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-export', functi
         '"Nom du Participant";' +
         '"Prénom du Participant";' +
         '"Envoi (O/N)";' +
-        '"Date de l\'envoi";' +
+        '"Date et heure de l\'envoi (Europe/Paris)";' +
         '"Nombre de pix total";' +
         '"Certifiable (O/N)";' +
         '"Nombre de compétences certifiables";' +
@@ -171,7 +171,7 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-export', functi
         '"Prénom du Participant";' +
         '"Classe";' +
         '"Envoi (O/N)";' +
-        '"Date de l\'envoi";' +
+        '"Date et heure de l\'envoi (Europe/Paris)";' +
         '"Nombre de pix total";' +
         '"Certifiable (O/N)";' +
         '"Nombre de compétences certifiables";' +
@@ -213,7 +213,7 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-export', functi
         '"Groupe";' +
         '"Numéro Étudiant";' +
         '"Envoi (O/N)";' +
-        '"Date de l\'envoi";' +
+        '"Date et heure de l\'envoi (Europe/Paris)";' +
         '"Nombre de pix total";' +
         '"Certifiable (O/N)";' +
         '"Nombre de compétences certifiables";' +
@@ -252,7 +252,7 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-export', functi
         '"Prénom du Participant";' +
         '"email";' +
         '"Envoi (O/N)";' +
-        '"Date de l\'envoi";' +
+        '"Date et heure de l\'envoi (Europe/Paris)";' +
         '"Nombre de pix total";' +
         '"Certifiable (O/N)";' +
         '"Nombre de compétences certifiables";' +

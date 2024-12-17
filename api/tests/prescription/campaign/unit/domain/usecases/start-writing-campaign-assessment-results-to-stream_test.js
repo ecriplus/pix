@@ -2,16 +2,12 @@ import stream from 'node:stream';
 
 const { PassThrough } = stream;
 
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc.js';
-
 import * as campaignCsvExportService from '../../../../../../src/prescription/campaign/domain/services/campaign-csv-export-service.js';
 import { startWritingCampaignAssessmentResultsToStream } from '../../../../../../src/prescription/campaign/domain/usecases/start-writing-campaign-assessment-results-to-stream.js';
 import { CampaignTypeError } from '../../../../../../src/shared/domain/errors.js';
 import { StageCollection } from '../../../../../../src/shared/domain/models/user-campaign-results/StageCollection.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { catchErr, domainBuilder, expect, sinon, streamToPromise } from '../../../../../test-helper.js';
-dayjs.extend(utc);
 
 describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-to-stream', function () {
   let campaignRepository,
@@ -112,9 +108,9 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
       '"Nom du Participant";' +
       '"Prénom du Participant";' +
       '"% de progression";' +
-      '"Date de début";' +
+      '"Date et heure de début (Europe/Paris)";' +
       '"Partage (O/N)";' +
-      '"Date du partage";' +
+      '"Date et heure du partage (Europe/Paris)";' +
       '"% maitrise de l\'ensemble des acquis du profil";' +
       `"% de maitrise des acquis de la compétence ${competence1_1.name}";` +
       `"Nombre d'acquis du profil cible dans la compétence ${competence1_1.name}";` +
@@ -172,9 +168,9 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
       '"Prénom du Participant";' +
       `"${idPixLabel}";` +
       '"% de progression";' +
-      '"Date de début";' +
+      '"Date et heure de début (Europe/Paris)";' +
       '"Partage (O/N)";' +
-      '"Date du partage";' +
+      '"Date et heure du partage (Europe/Paris)";' +
       '"% maitrise de l\'ensemble des acquis du profil";' +
       `"% de maitrise des acquis de la compétence ${learningContent.competences[0].name}";` +
       `"Nombre d'acquis du profil cible dans la compétence ${learningContent.competences[0].name}";` +
@@ -226,9 +222,9 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
       '"Nom du Participant";' +
       '"Prénom du Participant";' +
       '"% de progression";' +
-      '"Date de début";' +
+      '"Date et heure de début (Europe/Paris)";' +
       '"Partage (O/N)";' +
-      '"Date du partage";' +
+      '"Date et heure du partage (Europe/Paris)";' +
       `"${badge1.title} obtenu (O/N)";` +
       `"${badge2.title} obtenu (O/N)";` +
       '"% maitrise de l\'ensemble des acquis du profil";' +
@@ -280,9 +276,9 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
       '"Nom du Participant";' +
       '"Prénom du Participant";' +
       '"% de progression";' +
-      '"Date de début";' +
+      '"Date et heure de début (Europe/Paris)";' +
       '"Partage (O/N)";' +
-      '"Date du partage";' +
+      '"Date et heure du partage (Europe/Paris)";' +
       '"% maitrise de l\'ensemble des acquis du profil";' +
       `"% de maitrise des acquis de la compétence ${learningContent.competences[0].name}";` +
       `"Nombre d'acquis du profil cible dans la compétence ${learningContent.competences[0].name}";` +
@@ -343,9 +339,9 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
       '"Nom du Participant";' +
       '"Prénom du Participant";' +
       '"% de progression";' +
-      '"Date de début";' +
+      '"Date et heure de début (Europe/Paris)";' +
       '"Partage (O/N)";' +
-      '"Date du partage";' +
+      '"Date et heure du partage (Europe/Paris)";' +
       '"% maitrise de l\'ensemble des acquis du profil";' +
       `"% de maitrise des acquis de la compétence ${competence1_1.name}";` +
       `"Nombre d'acquis du profil cible dans la compétence ${competence1_1.name}";` +
@@ -404,9 +400,9 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
       '"Nom du Participant";' +
       '"Prénom du Participant";' +
       '"% de progression";' +
-      '"Date de début";' +
+      '"Date et heure de début (Europe/Paris)";' +
       '"Partage (O/N)";' +
-      '"Date du partage";' +
+      '"Date et heure du partage (Europe/Paris)";' +
       '"Palier obtenu (/2)";' +
       '"% maitrise de l\'ensemble des acquis du profil";' +
       `"% de maitrise des acquis de la compétence ${learningContent.competences[0].name}";` +
@@ -462,9 +458,9 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
         '"Groupe";' +
         '"Numéro Étudiant";' +
         '"% de progression";' +
-        '"Date de début";' +
+        '"Date et heure de début (Europe/Paris)";' +
         '"Partage (O/N)";' +
-        '"Date du partage";' +
+        '"Date et heure du partage (Europe/Paris)";' +
         '"% maitrise de l\'ensemble des acquis du profil";' +
         `"% de maitrise des acquis de la compétence ${learningContent.competences[0].name}";` +
         `"Nombre d'acquis du profil cible dans la compétence ${learningContent.competences[0].name}";` +
@@ -519,9 +515,9 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
         '"Prénom du Participant";' +
         '"Classe";' +
         '"% de progression";' +
-        '"Date de début";' +
+        '"Date et heure de début (Europe/Paris)";' +
         '"Partage (O/N)";' +
-        '"Date du partage";' +
+        '"Date et heure du partage (Europe/Paris)";' +
         '"% maitrise de l\'ensemble des acquis du profil";' +
         `"% de maitrise des acquis de la compétence ${learningContent.competences[0].name}";` +
         `"Nombre d'acquis du profil cible dans la compétence ${learningContent.competences[0].name}";` +
@@ -547,8 +543,10 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
 
   it('should process result for each participation and add it to csv', async function () {
     // given
-    const createdAt = new Date('2020-01-01');
-    const sharedAt = new Date('2020-02-01');
+    const createdAt = new Date('2020-02-01T10:30:00Z');
+    const createdAtFormated = '01/02/2020 11:30';
+    const sharedAt = new Date('2020-02-01T15:20:00Z');
+    const sharedAtFormated = '01/02/2020 16:20';
     const { user: admin, campaign, organization } = _buildOrganizationAndUserWithMembershipAndCampaign();
     const badge = domainBuilder.buildBadge({ title: 'badge sup' });
     const targetProfile = domainBuilder.buildTargetProfile({
@@ -596,9 +594,9 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
       '"Nom du Participant";' +
       '"Prénom du Participant";' +
       '"% de progression";' +
-      '"Date de début";' +
+      '"Date et heure de début (Europe/Paris)";' +
       '"Partage (O/N)";' +
-      '"Date du partage";' +
+      '"Date et heure du partage (Europe/Paris)";' +
       `"${badge.title} obtenu (O/N)";` +
       '"% maitrise de l\'ensemble des acquis du profil";' +
       `"% de maitrise des acquis de la compétence ${learningContent.competences[0].name}";` +
@@ -617,9 +615,9 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
       `"${participantInfo.participantLastName}";` +
       `"${participantInfo.participantFirstName}";` +
       '1;' +
-      `"${dayjs.utc(createdAt).format()}";` +
+      `"${createdAtFormated}";` +
       '"Oui";' +
-      `"${dayjs.utc(sharedAt).format()}";` +
+      `"${sharedAtFormated}";` +
       '"Oui";' +
       '1;' +
       '1;' +

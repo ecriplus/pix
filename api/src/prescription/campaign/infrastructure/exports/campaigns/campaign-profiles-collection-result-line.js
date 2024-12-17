@@ -1,6 +1,10 @@
 import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone.js';
 import utc from 'dayjs/plugin/utc.js';
+
 dayjs.extend(utc);
+dayjs.extend(timezone);
+
 import * as csvSerializer from '../../../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 
 const EMPTY_ARRAY = [];
@@ -92,7 +96,7 @@ class CampaignProfilesCollectionResultLine {
 
   _getSharedAtColumn() {
     return this.campaignParticipationResult.isShared
-      ? dayjs.utc(this.campaignParticipationResult.sharedAt).format()
+      ? dayjs.utc(this.campaignParticipationResult.sharedAt).tz('Europe/Paris').format('DD/MM/YYYY HH:mm')
       : this.notShared;
   }
 

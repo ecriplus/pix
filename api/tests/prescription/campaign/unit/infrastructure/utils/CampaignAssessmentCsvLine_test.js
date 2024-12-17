@@ -1,13 +1,8 @@
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc.js';
-
 import * as campaignParticipationService from '../../../../../../lib/domain/services/campaign-participation-service.js';
 import { CampaignAssessmentCsvLine } from '../../../../../../src/prescription/campaign/infrastructure/utils/CampaignAssessmentCsvLine.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/index.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
-
-dayjs.extend(utc);
 
 function _computeExpectedColumnsIndex(campaign, organization, badges = [], stages = [], additionalHeaders = []) {
   const studentNumberPresenceModifier = organization.type === 'SUP' && organization.isManagingStudents ? 1 : 0;
@@ -92,7 +87,8 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentCsvLine', function (
   describe('#toCsvLine', function () {
     it('should return common info', function () {
       // given
-      const createdAt = new Date('2020-01-01');
+      const createdAt = new Date('2020-03-01T10:00:00Z');
+      const createdAtFormated = '01/03/2020 11:00';
       const organization = domainBuilder.buildOrganization({ isManagingStudents: false });
       const campaign = domainBuilder.buildCampaign({ idPixLabel: null });
       const campaignParticipationInfo = domainBuilder.buildCampaignParticipationInfo({
@@ -135,7 +131,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentCsvLine', function (
       expect(csvLine[cols.PARTICIPANT_FIRST_NAME], 'participant first name').to.equal(
         campaignParticipationInfo.participantFirstName,
       );
-      expect(csvLine[cols.PARTICIPATION_CREATED_AT], 'participant created at').to.equal(dayjs.utc(createdAt).format());
+      expect(csvLine[cols.PARTICIPATION_CREATED_AT], 'participant created at').to.equal(createdAtFormated);
       expect(csvLine[cols.PARTICIPATION_PROGRESSION], 'participation progression').to.equal(0);
     });
 
@@ -333,7 +329,8 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentCsvLine', function (
     context('when participation is shared', function () {
       it('should show informations regarding a shared participation', function () {
         // given
-        const sharedAt = new Date('2020-01-01T10:10:25Z');
+        const sharedAt = new Date('2020-03-01T10:10:25Z');
+        const sharedAtFormated = '01/03/2020 11:10';
         const organization = domainBuilder.buildOrganization();
         const campaign = domainBuilder.buildCampaign({ idPixLabel: null });
         const campaignParticipationInfo = domainBuilder.buildCampaignParticipationInfo({
@@ -371,7 +368,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentCsvLine', function (
         // then
         const cols = _computeExpectedColumnsIndex(campaign, organization);
         expect(csvLine[cols.PARTICIPATION_IS_SHARED], 'is shared').to.equal('Oui');
-        expect(csvLine[cols.PARTICIPATION_SHARED_AT], 'shared at').to.equal(dayjs.utc(sharedAt).format());
+        expect(csvLine[cols.PARTICIPATION_SHARED_AT], 'shared at').to.equal(sharedAtFormated);
         expect(csvLine[cols.PARTICIPATION_PERCENTAGE], 'participation percentage').to.equal(1);
       });
     });

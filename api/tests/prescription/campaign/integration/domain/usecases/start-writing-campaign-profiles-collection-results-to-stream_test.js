@@ -1,7 +1,4 @@
 import stream from 'node:stream';
-
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc.js';
 const { PassThrough } = stream;
 
 import * as campaignRepository from '../../../../../../lib/infrastructure/repositories/campaign-repository.js';
@@ -25,7 +22,6 @@ import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.j
 import * as competenceRepository from '../../../../../../src/shared/infrastructure/repositories/competence-repository.js';
 import * as organizationRepository from '../../../../../../src/shared/infrastructure/repositories/organization-repository.js';
 import { databaseBuilder, expect, streamToPromise } from '../../../../../test-helper.js';
-dayjs.extend(utc);
 
 describe('Integration | Domain | Use Cases | start-writing-profiles-collection-campaign-results-to-stream', function () {
   describe('#startWritingCampaignProfilesCollectionResultsToStream', function () {
@@ -39,6 +35,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
 
     const createdAt = new Date('2019-02-25T10:00:00Z');
     const sharedAt = new Date('2019-03-01T23:04:05Z');
+    const sharedAtFormated = '02/03/2019 00:04';
 
     beforeEach(async function () {
       i18n = getI18n();
@@ -200,10 +197,10 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         const cells = csv.split('\n');
 
         expect(cells[0]).to.be.equals(
-          '\uFEFF"Nom de l\'organisation";"ID Campagne";"Code";"Nom de la campagne";"Nom du Participant";"Prénom du Participant";"Envoi (O/N)";"Date de l\'envoi";"Nombre de pix total";"Certifiable (O/N)";"Nombre de compétences certifiables";"Niveau pour la compétence nom en français recCompetence1";"Nombre de pix pour la compétence nom en français recCompetence1";"Niveau pour la compétence nom en français recCompetence2";"Nombre de pix pour la compétence nom en français recCompetence2"',
+          '\uFEFF"Nom de l\'organisation";"ID Campagne";"Code";"Nom de la campagne";"Nom du Participant";"Prénom du Participant";"Envoi (O/N)";"Date et heure de l\'envoi (Europe/Paris)";"Nombre de pix total";"Certifiable (O/N)";"Nombre de compétences certifiables";"Niveau pour la compétence nom en français recCompetence1";"Nombre de pix pour la compétence nom en français recCompetence1";"Niveau pour la compétence nom en français recCompetence2";"Nombre de pix pour la compétence nom en français recCompetence2"',
         );
         expect(cells[1]).to.be.equals(
-          `"Observatoire de Pix";${campaign.id};"QWERTY456";"'@Campagne de Test N°2";"'=Bono";"'@Jean";"Oui";"${dayjs.utc(sharedAt).format()}";52;"Non";2;1;12;5;40`,
+          `"Observatoire de Pix";${campaign.id};"QWERTY456";"'@Campagne de Test N°2";"'=Bono";"'@Jean";"Oui";"${sharedAtFormated}";52;"Non";2;1;12;5;40`,
         );
         expect(cells[2]).to.be.equals(
           `"Observatoire de Pix";${campaign.id};"QWERTY456";"'@Campagne de Test N°2";"'=Bono";"'@Jean";"Non";"NA";"NA";"NA";"NA";"NA";"NA";"NA";"NA"`,
@@ -263,10 +260,10 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         const cells = csv.split('\n');
 
         expect(cells[0]).to.be.equals(
-          '\uFEFF"Nom de l\'organisation";"ID Campagne";"Code";"Nom de la campagne";"Nom du Participant";"Prénom du Participant";"Mail Perso";"Envoi (O/N)";"Date de l\'envoi";"Nombre de pix total";"Certifiable (O/N)";"Nombre de compétences certifiables";"Niveau pour la compétence nom en français recCompetence1";"Nombre de pix pour la compétence nom en français recCompetence1";"Niveau pour la compétence nom en français recCompetence2";"Nombre de pix pour la compétence nom en français recCompetence2"',
+          '\uFEFF"Nom de l\'organisation";"ID Campagne";"Code";"Nom de la campagne";"Nom du Participant";"Prénom du Participant";"Mail Perso";"Envoi (O/N)";"Date et heure de l\'envoi (Europe/Paris)";"Nombre de pix total";"Certifiable (O/N)";"Nombre de compétences certifiables";"Niveau pour la compétence nom en français recCompetence1";"Nombre de pix pour la compétence nom en français recCompetence1";"Niveau pour la compétence nom en français recCompetence2";"Nombre de pix pour la compétence nom en français recCompetence2"',
         );
         expect(cells[1]).to.be.equals(
-          `"Observatoire de Pix";${campaign.id};"QWERTY456";"'@Campagne de Test N°2";"'=Bono";"'@Jean";"'+Mon mail pro";"Oui";"${dayjs.utc(sharedAt).format()}";52;"Non";2;1;12;5;40`,
+          `"Observatoire de Pix";${campaign.id};"QWERTY456";"'@Campagne de Test N°2";"'=Bono";"'@Jean";"'+Mon mail pro";"Oui";"${sharedAtFormated}";52;"Non";2;1;12;5;40`,
         );
       });
     });
@@ -396,7 +393,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
           `"'${organizationLearner.lastName}";` +
           `"'${organizationLearner.firstName}";` +
           '"Oui";' +
-          `"${dayjs.utc(sharedAt).format()}";` +
+          `"${sharedAtFormated}";` +
           '52;' +
           '"Non";' +
           '2;' +
@@ -474,7 +471,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
           `"'${organizationLearner.firstName}";` +
           `"${organizationLearner.division}";` +
           '"Oui";' +
-          `"${dayjs.utc(sharedAt).format()}";` +
+          `"${sharedAtFormated}";` +
           '52;' +
           '"Non";' +
           '2;' +
@@ -554,7 +551,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
           `"'${organizationLearner.group}";` +
           `"${organizationLearner.studentNumber}";` +
           '"Oui";' +
-          `"${dayjs.utc(sharedAt).format()}";` +
+          `"${sharedAtFormated}";` +
           '52;' +
           '"Non";' +
           '2;' +

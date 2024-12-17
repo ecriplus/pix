@@ -53,13 +53,13 @@
       "is-shared": "Delen (J/N)",
       "mastery-percentage-target-profile": "% beheersing van alle vaardigheden in het profiel",
       "progress": "% toename",
-      "shared-on": "Datum van splitsing",
+      "shared-on": "Gedeelde datum en tijd (Europa/Parijs)",
       "skill": {
         "items-successfully-completed": "Vaardigheden beheerst in de {naam} competentie",
         "mastery-percentage": "% beheersing van verworven vaardigheden {naam}",
         "total-items": "Aantal prestaties van het doelprofiel in de vaardigheid {naam}"
       },
-      "started-on": "Startdatum",
+      "started-on": "Startdatum en tijd (Europa/Parijs)",
       "status": {
         "ko": "KO",
         "not-tested": "Niet getest",
@@ -89,7 +89,7 @@
       "is-certifiable": "Certificeerbaar (J/N)",
       "is-sent": "Verzenden (J/N)",
       "pix-score": "Totaal aantal pix",
-      "sent-on": "Datum van verzending",
+      "sent-on": "Datum en tijd van verzending (Europa/Parijs)",
       "skill-level": "Niveau voor vaardigheid {naam}",
       "skill-ranking": "Aantal pix voor vaardigheid {naam}"
     }

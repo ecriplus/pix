@@ -1,15 +1,11 @@
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc.js';
-
 import { CampaignProfilesCollectionResultLine } from '../../../../../../../src/prescription/campaign/infrastructure/exports/campaigns/campaign-profiles-collection-result-line.js';
 import { PlacementProfile } from '../../../../../../../src/shared/domain/models/index.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
-dayjs.extend(utc);
 
 describe('Unit | Serializer | CSV | campaign-profiles-collection-result-line', function () {
   describe('#toCsvLine', function () {
-    let organization, campaign, competences, createdAt, sharedAt;
+    let organization, campaign, competences, createdAt, sharedAt, sharedAtFormated;
 
     // TODO: Fix this the next time the file is edited.
     // eslint-disable-next-line mocha/no-setup-in-describe
@@ -33,8 +29,9 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-result-line', f
 
     beforeEach(function () {
       createdAt = new Date('2019-02-25T10:00:00Z');
-      sharedAt = new Date('2019-03-01T23:04:05Z');
 
+      sharedAt = new Date('2019-03-01T23:04:05Z');
+      sharedAtFormated = '02/03/2019 00:04';
       const listSkills1 = domainBuilder.buildSkillCollection({ name: '@web', minLevel: 1, maxLevel: 5 });
       const listSkills2 = domainBuilder.buildSkillCollection({ name: '@url', minLevel: 1, maxLevel: 2 });
 
@@ -88,7 +85,7 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-result-line', f
           `"${campaignParticipationResultData.participantFirstName}";` +
           `"${campaignParticipationResultData.additionalInfos.hobby}";` +
           '"Oui";' +
-          `"${dayjs.utc(sharedAt).format()}";` +
+          `"${sharedAtFormated}";` +
           '13;' +
           '"Non";' +
           '0;' +
@@ -183,7 +180,7 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-result-line', f
           `"${campaignParticipationResultData.participantLastName}";` +
           `"${campaignParticipationResultData.participantFirstName}";` +
           '"Oui";' +
-          `"${dayjs.utc(sharedAt).format()}";` +
+          `"${sharedAtFormated}";` +
           '13;' +
           '"Non";' +
           '0;' +
@@ -238,7 +235,7 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-result-line', f
           `"${campaignParticipationResultData.participantLastName}";` +
           `"${campaignParticipationResultData.participantFirstName}";` +
           '"Oui";' +
-          `"${dayjs.utc(sharedAt).format()}";` +
+          `"${sharedAtFormated}";` +
           '13;' +
           '"Oui";' +
           '5;' +
@@ -421,7 +418,7 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-result-line', f
           `"${campaignParticipationResultData.participantLastName}";` +
           `"${campaignParticipationResultData.participantFirstName}";` +
           '"Oui";' +
-          `"${dayjs.utc(sharedAt).format()}";` +
+          `"${sharedAtFormated}";` +
           '13;' +
           '"Non";' +
           '0;' +
@@ -486,7 +483,7 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-result-line', f
             `"${campaignParticipationResultData.participantFirstName}";` +
             '"";' +
             '"Oui";' +
-            `"${dayjs.utc(sharedAt).format()}";` +
+            `"${sharedAtFormated}";` +
             '13;' +
             '"Non";' +
             '0;' +
@@ -545,7 +542,7 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-result-line', f
             `"${campaignParticipationResultData.participantFirstName}";` +
             `"${campaignParticipationResultData.division}";` +
             '"Oui";' +
-            `"${dayjs.utc(sharedAt).format()}";` +
+            `"${sharedAtFormated}";` +
             '13;' +
             '"Non";' +
             '0;' +
@@ -678,7 +675,7 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-result-line', f
             `"${campaignParticipationResultData.group}";` +
             '"";' +
             '"Oui";' +
-            `"${dayjs.utc(sharedAt).format()}";` +
+            `"${sharedAtFormated}";` +
             '13;' +
             '"Non";' +
             '0;' +
@@ -739,7 +736,7 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-result-line', f
             `"${campaignParticipationResultData.group}";` +
             `"${campaignParticipationResultData.studentNumber}";` +
             '"Oui";' +
-            `"${dayjs.utc(sharedAt).format()}";` +
+            `"${sharedAtFormated}";` +
             '13;' +
             '"Non";' +
             '0;' +
@@ -800,7 +797,7 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-result-line', f
             `"${campaignParticipationResultData.group}";` +
             `"${campaignParticipationResultData.studentNumber}";` +
             '"Oui";' +
-            `"${dayjs.utc(sharedAt).format()}";` +
+            `"${sharedAtFormated}";` +
             '13;' +
             '"Non";' +
             '0;' +
