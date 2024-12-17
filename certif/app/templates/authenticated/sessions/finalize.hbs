@@ -1,7 +1,11 @@
 {{page-title this.pageTitle replace=true}}
 <div class="finalize">
   <div class="finalize__title">
-    <PixReturnTo @route="authenticated.sessions.details" @model={{this.session.id}} class="previous-button">
+    <PixReturnTo
+      @route="authenticated.sessions.details"
+      @model={{this.session.id}}
+      class="previous-button hide-on-mobile"
+    >
       {{t "common.sessions.actions.return-to"}}
     </PixReturnTo>
     <h1 class="page-title">{{t "pages.session-finalization.title" sessionId=this.session.id}}</h1>
