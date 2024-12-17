@@ -53,13 +53,13 @@
       "is-shared": "Partage (O/N)",
       "mastery-percentage-target-profile": "% maitrise de l'ensemble des acquis du profil",
       "progress": "% de progression",
-      "shared-on": "Date du partage",
+      "shared-on": "Date et heure du partage (Europe/Paris)",
       "skill": {
         "items-successfully-completed": "Acquis maitrisés dans la compétence {name}",
         "mastery-percentage": "% de maitrise des acquis de la compétence {name}",
         "total-items": "Nombre d'acquis du profil cible dans la compétence {name}"
       },
-      "started-on": "Date de début",
+      "started-on": "Date et heure de début (Europe/Paris)",
       "status": {
         "ko": "KO",
         "not-tested": "Non testé",
@@ -89,7 +89,7 @@
       "is-certifiable": "Certifiable (O/N)",
       "is-sent": "Envoi (O/N)",
       "pix-score": "Nombre de pix total",
-      "sent-on": "Date de l'envoi",
+      "sent-on": "Date et heure de l'envoi (Europe/Paris)",
       "skill-level": "Niveau pour la compétence {name}",
       "skill-ranking": "Nombre de pix pour la compétence {name}"
     }

@@ -1,7 +1,5 @@
 import stream from 'node:stream';
 
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc.js';
 const { PassThrough } = stream;
 
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
@@ -11,7 +9,6 @@ import { Assessment } from '../../../../../../src/shared/domain/models/Assessmen
 import { CampaignParticipationStatuses, KnowledgeElement } from '../../../../../../src/shared/domain/models/index.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { databaseBuilder, expect, mockLearningContent, streamToPromise } from '../../../../../test-helper.js';
-dayjs.extend(utc);
 
 describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-results-to-stream', function () {
   describe('#startWritingCampaignAssessmentResultsToStream', function () {
@@ -24,7 +21,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
     let writableStream;
     let csvPromise;
     let i18n;
-    let createdAt, sharedAt;
+    let createdAt, sharedAt, createdAtFormated, sharedAtFormated;
 
     beforeEach(async function () {
       i18n = getI18n();
@@ -47,9 +44,12 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
       });
 
       // participation
-      createdAt = new Date('2019-02-25');
-      sharedAt = new Date('2019-03-01');
-
+      // heure d'hiver UTC+1
+      createdAt = new Date('2019-02-25T10:20:00Z');
+      createdAtFormated = '25/02/2019 11:20';
+      // heure d'été UTC+2
+      sharedAt = new Date('2019-06-01T09:05:00Z');
+      sharedAtFormated = '01/06/2019 11:05';
       const learningContent = {
         frameworks: [{ id: 'frameworkId', name: 'frameworkName' }],
         areas: [{ id: 'recArea1', frameworkId: 'frameworkId', competenceIds: ['recCompetence1'] }],
@@ -158,9 +158,9 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           `"'${organizationLearner.firstName}";` +
           `"${campaignParticipation.participantExternalId}";` +
           '1;' +
-          `"${dayjs.utc(createdAt).format()}";` +
+          `"${createdAtFormated}";` +
           '"Oui";' +
-          `"${dayjs.utc(sharedAt).format()}";` +
+          `"${sharedAtFormated}";` +
           '1;' +
           '"Non";' +
           '0,67;' +
@@ -298,9 +298,9 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           `"'${organizationLearner.firstName}";` +
           `"${organizationLearner.attributes.hobby}";` +
           '1;' +
-          `"${dayjs.utc(createdAt).format()}";` +
+          `"${createdAtFormated}";` +
           '"Oui";' +
-          `"${dayjs.utc(sharedAt).format()}";` +
+          `"${sharedAtFormated}";` +
           '1;' +
           '"Non";' +
           '0,67;' +
@@ -407,9 +407,9 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           `"'${organizationLearner.lastName}";` +
           `"'${organizationLearner.firstName}";` +
           '1;' +
-          `"${dayjs.utc(createdAt).format()}";` +
+          `"${createdAtFormated}";` +
           '"Oui";' +
-          `"${dayjs.utc(sharedAt).format()}";` +
+          `"${sharedAtFormated}";` +
           '1;' +
           '"Non";' +
           '0,67;' +
@@ -495,7 +495,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           `"'${organizationLearner.lastName}";` +
           `"'${organizationLearner.firstName}";` +
           '0,333;' +
-          `"${dayjs.utc(createdAt).format()}";` +
+          `"${createdAtFormated}";` +
           '"Non";' +
           `"NA";` +
           '"NA";' +
@@ -529,9 +529,10 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
     });
 
     context('multiple participations', function () {
-      let secondParticipationDateCreatedAt;
+      let secondParticipationDateCreatedAt, secondParticipationCreatedFormated;
       beforeEach(async function () {
-        secondParticipationDateCreatedAt = new Date('2019-03-05');
+        secondParticipationDateCreatedAt = new Date('2019-03-05T11:23:00Z');
+        secondParticipationCreatedFormated = '05/03/2019 12:23';
         // on utilise un nouveau learner
         participant = databaseBuilder.factory.buildUser();
 
@@ -633,7 +634,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           `"'${organizationLearner.lastName}";` +
           `"'${organizationLearner.firstName}";` +
           '0,667;' +
-          `"${dayjs.utc(secondParticipationDateCreatedAt).format()}";` +
+          `"${secondParticipationCreatedFormated}";` +
           '"Non";' +
           `"NA";` +
           '"NA";' +
@@ -658,9 +659,9 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           `"'${organizationLearner.lastName}";` +
           `"'${organizationLearner.firstName}";` +
           '1;' +
-          `"${dayjs.utc(createdAt).format()}";` +
+          `"${createdAtFormated}";` +
           '"Oui";' +
-          `"${dayjs.utc(sharedAt).format()}";` +
+          `"${sharedAtFormated}";` +
           '1;' +
           '"Non";' +
           '0,67;' +

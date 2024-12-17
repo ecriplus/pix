@@ -53,13 +53,13 @@
       "is-shared": "Compartir (sí/no)",
       "mastery-percentage-target-profile": "% de dominio de todas las competencias del perfil",
       "progress": "% de aumento",
-      "shared-on": "Fecha de separación",
+      "shared-on": "Fecha y hora del reparto (Europa/París)",
       "skill": {
         "items-successfully-completed": "Habilidades dominadas en la competencia {nombre}.",
         "mastery-percentage": "% dominio de las habilidades adquiridas {nombre}",
         "total-items": "Número de logros del perfil de destino en la habilidad {nombre}."
       },
-      "started-on": "Fecha de inicio",
+      "started-on": "Fecha y hora de inicio (Europa/París)",
       "status": {
         "ko": "KB",
         "not-tested": "No probado",
@@ -89,7 +89,7 @@
       "is-certifiable": "Certificable (sí/no)",
       "is-sent": "Enviar (sí/no)",
       "pix-score": "Número total de píxeles",
-      "sent-on": "Fecha de expedición",
+      "sent-on": "Fecha y ora de expedición (Europa/París)",
       "skill-level": "Nivel de la habilidad {nombre}",
       "skill-ranking": "Número de píxeles de la habilidad {nombre}"
     }

@@ -41,13 +41,13 @@
       "is-shared": "Shared (Y/N)",
       "mastery-percentage-target-profile": "% of items successfully completed in the target profile",
       "progress": "% of progression",
-      "shared-on": "Shared on",
+      "shared-on": "Shared on (Europe/Paris)",
       "skill": {
         "items-successfully-completed": "Items of the target profile successfully completed in the competence {name}",
         "mastery-percentage": "% of items successfully completed in the competence {name}",
         "total-items": "Number of items of the target profile in the competence {name}"
       },
-      "started-on": "Started on",
+      "started-on": "Started on (Europe/Paris)",
       "status": {
         "ko": "KO",
         "not-tested": "Not tested",
@@ -77,7 +77,7 @@
       "is-certifiable": "Eligible for certification (Y/N)",
       "is-sent": "Sent (Y/N)",
       "pix-score": "Total pix score",
-      "sent-on": "Sent on",
+      "sent-on": "Sent on (Europe/Paris)",
       "skill-level": "Level reached in the competence {name}",
       "skill-ranking": "Pix score for the competence {name}"
     }
