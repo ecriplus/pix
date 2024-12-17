@@ -4,7 +4,6 @@ import BaseAuthenticator from 'ember-simple-auth/authenticators/base';
 import fetch from 'fetch';
 import ENV from 'mon-pix/config/environment';
 import { decodeToken } from 'mon-pix/helpers/jwt';
-import RSVP from 'rsvp';
 
 export default class OidcAuthenticator extends BaseAuthenticator {
   @service intl;
@@ -49,7 +48,7 @@ export default class OidcAuthenticator extends BaseAuthenticator {
 
     const data = await response.json();
     if (!response.ok) {
-      return RSVP.reject(data);
+      return Promise.reject(data);
     }
 
     const decodedAccessToken = decodeToken(data.access_token);
@@ -65,7 +64,7 @@ export default class OidcAuthenticator extends BaseAuthenticator {
   }
 
   restore(data) {
-    return new RSVP.Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       if (!isEmpty(data['access_token'])) {
         resolve(data);
       }
