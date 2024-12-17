@@ -1,9 +1,9 @@
 import { render } from '@1024pix/ember-testing-library';
-// eslint-disable-next-line no-restricted-imports
-import { find } from '@ember/test-helpers';
+import { click, fillIn } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
 
@@ -14,6 +14,8 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
   let onCancelStub;
 
   hooks.beforeEach(function () {
+    onCancelStub = sinon.stub();
+    onSubmitStub = sinon.stub();
     this.set('onSubmitStub', onSubmitStub);
     this.set('onCancelStub', onCancelStub);
   });
@@ -28,7 +30,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
       this.set('campaign', campaign);
 
       // given
-      await render(
+      const screen = await render(
         hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
   @campaign={{this.campaign}}
   @onSubmit={{this.onSubmitStub}}
@@ -38,7 +40,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
 
       // then
       assert.dom('img').exists();
-      assert.ok(find('img').getAttribute('alt').includes(campaign.alternativeTextToExternalIdHelpImage));
+      assert.ok(screen.getByRole('img', { name: campaign.alternativeTextToExternalIdHelpImage }));
     });
   });
 
@@ -61,6 +63,120 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
 
       // then
       assert.dom('img').doesNotExist();
+    });
+  });
+
+  test('should called on submit button', async function (assert) {
+    // given
+    const campaign = {
+      idPixLabel: 'idpix',
+      idPixType: 'STRING',
+    };
+
+    this.set('campaign', campaign);
+    const screen = await render(
+      hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+  @campaign={{this.campaign}}
+  @onSubmit={{this.onSubmitStub}}
+  @onCancel={{this.onCancelStub}}
+/>`,
+    );
+
+    // when
+    await fillIn(screen.getByLabelText(/idpix/), '1234');
+    await click(screen.getByRole('button', { name: t('pages.fill-in-participant-external-id.buttons.continue') }));
+
+    // then
+    assert.ok(onSubmitStub.called);
+    assert.ok(onCancelStub.notCalled);
+  });
+
+  test('should called on cancel button', async function (assert) {
+    // given
+    const campaign = {
+      idPixLabel: 'idpix',
+      idPixType: 'STRING',
+    };
+
+    this.set('campaign', campaign);
+    const screen = await render(
+      hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+  @campaign={{this.campaign}}
+  @onSubmit={{this.onSubmitStub}}
+  @onCancel={{this.onCancelStub}}
+/>`,
+    );
+
+    // when
+    await click(screen.getByRole('button', { name: t('pages.fill-in-participant-external-id.buttons.cancel') }));
+
+    // then
+    assert.ok(onSubmitStub.notCalled);
+    assert.ok(onCancelStub.called);
+  });
+
+  module('when fill participant externalId', function () {
+    test('should display basic error when participantExternalId is empty', async function (assert) {
+      // given
+      const campaign = {
+        idPixLabel: 'idpix',
+        idPixType: 'STRING',
+      };
+
+      this.set('campaign', campaign);
+      const screen = await render(
+        hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+  @campaign={{this.campaign}}
+  @onSubmit={{this.onSubmitStub}}
+  @onCancel={{this.onCancelStub}}
+/>`,
+      );
+
+      // when
+      await fillIn(screen.getByLabelText(/idpix/), ' ');
+      await click(screen.getByRole('button', { name: t('pages.fill-in-participant-external-id.buttons.continue') }));
+
+      // then
+      assert.ok(
+        screen.getByText(
+          t('pages.fill-in-participant-external-id.errors.missing-external-id', {
+            idPixLabel: campaign.idPixLabel,
+          }),
+        ),
+      );
+    });
+
+    test('should display basic error when participantExternalId is over than 255 character', async function (assert) {
+      // given
+      const campaign = {
+        idPixLabel: 'idpix',
+        idPixType: 'STRING',
+      };
+
+      this.set('campaign', campaign);
+      const screen = await render(
+        hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+  @campaign={{this.campaign}}
+  @onSubmit={{this.onSubmitStub}}
+  @onCancel={{this.onCancelStub}}
+/>`,
+      );
+
+      // when
+      await fillIn(
+        screen.getByLabelText(/idpix/),
+        '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef',
+      );
+      await click(screen.getByRole('button', { name: t('pages.fill-in-participant-external-id.buttons.continue') }));
+
+      // then
+      assert.ok(
+        screen.getByText(
+          t('pages.fill-in-participant-external-id.errors.max-length-external-id', {
+            idPixLabel: campaign.idPixLabel,
+          }),
+        ),
+      );
     });
   });
 
@@ -147,6 +263,24 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
       test(`initialize error and previous external id`, async function (assert) {
         this.set('campaign', campaign);
 
+        // given & when
+        const screen = await render(
+          hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
+  @campaign={{this.campaign}}
+  @onSubmit={{this.onSubmitStub}}
+  @onCancel={{this.onCancelStub}}
+/>`,
+        );
+
+        // then
+        const input = screen.getByLabelText(/idpix/);
+        assert.strictEqual(input.value, '1234TOTO');
+        assert.ok(screen.getByText(t('pages.fill-in-participant-external-id.errors.invalid-external-id-email')));
+      });
+
+      test(`remove error message when update input`, async function (assert) {
+        this.set('campaign', campaign);
+
         // given
         const screen = await render(
           hbs`<Routes::Campaigns::Invited::FillInParticipantExternalId
@@ -155,9 +289,12 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
   @onCancel={{this.onCancelStub}}
 />`,
         );
-        const input = screen.getByLabelText(/idpix/);
-        assert.strictEqual(input.value, '1234TOTO');
-        assert.ok(screen.getByText(t('pages.fill-in-participant-external-id.errors.invalid-external-id-email')));
+
+        // when
+        await fillIn(screen.getByLabelText(/idpix/), '1234');
+
+        // then
+        assert.notOk(screen.queryByText(t('pages.fill-in-participant-external-id.errors.invalid-external-id-email')));
       });
     });
   });
