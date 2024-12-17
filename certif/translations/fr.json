@@ -203,6 +203,7 @@
     "external-link-title": "Ouverture dans une nouvelle fenêtre",
     "footer": {
       "a11y": "Accessibilité : partiellement conforme",
+      "aria-label": "Navigation de pied de page",
       "current-year": "© {currentYear} Pix",
       "legal-notice": "Mentions légales"
     },

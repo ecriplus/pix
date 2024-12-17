@@ -21,7 +21,7 @@ export default class Footer extends Component {
 
   <template>
     <footer class='footer'>
-      <nav class='footer__navigation'>
+      <nav class='footer__navigation' aria-label={{t 'navigation.footer.aria-label'}}>
         <ul class='footer__navigation-list'>
           <li>
             <a href={{this.legalNoticeUrl}} target='_blank' class='footer-navigation__item' rel='noopener noreferrer'>

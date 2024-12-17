@@ -1,4 +1,4 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
 import Footer from 'pix-certif/components/layout/footer';
 import { module, test } from 'qunit';
@@ -30,8 +30,9 @@ module('Integration | Component | Layout | Footer', function (hooks) {
     const screen = await render(<template><Footer /></template>);
 
     // then
+    const footerNavigation = screen.getByRole('navigation', { name: t('navigation.footer.aria-label') });
     assert
-      .dom(screen.getByRole('link', { name: t('navigation.footer.legal-notice') }))
+      .dom(within(footerNavigation).getByRole('link', { name: t('navigation.footer.legal-notice') }))
       .hasAttribute('href', 'https://pix.fr/mentions-legales');
   });
 
@@ -44,8 +45,9 @@ module('Integration | Component | Layout | Footer', function (hooks) {
     const screen = await render(<template><Footer /></template>);
 
     // then
+    const footerNavigation = screen.getByRole('navigation', { name: t('navigation.footer.aria-label') });
     assert
-      .dom(screen.getByRole('link', { name: t('navigation.footer.a11y') }))
+      .dom(within(footerNavigation).getByRole('link', { name: t('navigation.footer.a11y') }))
       .hasAttribute('href', 'https://pix.fr/accessibilite-pix-certif');
   });
 });
