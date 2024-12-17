@@ -122,7 +122,9 @@ module('Acceptance | Session pages', function (hooks) {
         module('When the session has not been published', function () {
           test('it show the disabled certificates download button', async function (assert) {
             // given
-            this.server.create('session');
+            this.server.create('session', {
+              publishedAt: null,
+            });
 
             // when
             const screen = await visit('/sessions/2');

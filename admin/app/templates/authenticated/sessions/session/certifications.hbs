@@ -3,53 +3,19 @@
 <section>
   <div class="certification-list-page">
 
-    <header class="certification-list-page__header">
-      <h2>Certifications</h2>
-      {{#if this.accessControl.hasAccessToCertificationActionsScope}}
-        <div class="btn-group" role="group">
-
-          {{#if this.model.session.isPublished}}
-            <PixButton @triggerAction={{this.displayCertificationStatusUpdateConfirmationModal}}>Dépublier la session</PixButton>
-          {{else}}
-
-            {{#if this.canPublish}}
-              <PixButton @triggerAction={{this.displayCertificationStatusUpdateConfirmationModal}}>Publier la session</PixButton>
-            {{else}}
-
-              <PixTooltip @position="left" @isWide={{true}}>
-                <:triggerElement>
-                  <PixButton
-                    @triggerAction={{this.displayCertificationStatusUpdateConfirmationModal}}
-                    @isDisabled={{true}}
-                  >
-                    Publier la session
-                  </PixButton>
-                </:triggerElement>
-                <:tooltip>
-                  Vous ne pouvez pas publier la session tant qu'elle n'est pas finalisée ou qu'il reste des
-                  certifications en erreur.
-                </:tooltip>
-              </PixTooltip>
-            {{/if}}
-
-          {{/if}}
-        </div>
-      {{/if}}
-    </header>
+    <Sessions::Certifications::Header
+      @session={{this.model.session}}
+      @juryCertificationSummaries={{this.model.juryCertificationSummaries}}
+      @unpublishSession={{this.unpublishSession}}
+      @publishSession={{this.publishSession}}
+    />
 
     <div>
-      <Certifications::List
-        @certifications={{this.sortedCertificationJurySummaries}}
+      <Sessions::Certifications::List
+        @juryCertificationSummaries={{this.model.juryCertificationSummaries}}
         @pagination={{this.model.juryCertificationSummaries.meta}}
         @displayHasSeenEndTestScreenColumn={{this.model.session.displayHasSeenEndTestScreenColumn}}
       />
     </div>
   </div>
 </section>
-
-<ConfirmPopup
-  @message={{this.confirmMessage}}
-  @confirm={{action this.toggleSessionPublication}}
-  @cancel={{action this.onCancelConfirm}}
-  @show={{this.displayConfirm}}
-/>

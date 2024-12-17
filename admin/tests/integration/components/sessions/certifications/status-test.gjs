@@ -1,6 +1,6 @@
 import { render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import Status from 'pix-admin/components/certifications/status';
+import Status from 'pix-admin/components/sessions/certifications/status';
 import { ERROR, STARTED } from 'pix-admin/models/certification';
 import { module, test } from 'qunit';
 

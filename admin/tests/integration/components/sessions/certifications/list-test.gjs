@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import { setupRenderingTest } from 'ember-qunit';
-import List from 'pix-admin/components/certifications/list';
+import List from 'pix-admin/components/sessions/certifications/list';
 import { module, test } from 'qunit';
 
 module('Integration | Component | certifications/list', function (hooks) {
@@ -14,7 +14,7 @@ module('Integration | Component | certifications/list', function (hooks) {
 
   test('should display number of certification issue reports with required action', async function (assert) {
     // given
-    const certifications = [
+    const juryCertificationSummaries = [
       store.createRecord('jury-certification-summary', {
         id: 1,
         numberOfCertificationIssueReportsWithRequiredAction: 2,
@@ -24,7 +24,11 @@ module('Integration | Component | certifications/list', function (hooks) {
     const pagination = {};
 
     // when
-    await render(<template><List @certifications={{certifications}} @pagination={{pagination}} /></template>);
+    await render(
+      <template>
+        <List @juryCertificationSummaries={{juryCertificationSummaries}} @pagination={{pagination}} />
+      </template>,
+    );
 
     const numberOfCertificationIssueReportsWithRequiredAction =
       this.element.querySelector('tbody > tr td:nth-child(5)');
@@ -33,15 +37,18 @@ module('Integration | Component | certifications/list', function (hooks) {
 
   test('should display the complementary certification', async function (assert) {
     // given
-    const juryCertificationSummaryProcessed = store.createRecord('jury-certification-summary', {
-      complementaryCertificationTakenLabel: 'Pix+ Droit Maître',
-    });
-    const certifications = [juryCertificationSummaryProcessed];
+    const juryCertificationSummaries = [
+      store.createRecord('jury-certification-summary', {
+        complementaryCertificationTakenLabel: 'Pix+ Droit Maître',
+      }),
+    ];
     const pagination = {};
 
     // when
     const screen = await render(
-      <template><List @certifications={{certifications}} @pagination={{pagination}} /></template>,
+      <template>
+        <List @juryCertificationSummaries={{juryCertificationSummaries}} @pagination={{pagination}} />
+      </template>,
     );
 
     // then
@@ -51,17 +58,18 @@ module('Integration | Component | certifications/list', function (hooks) {
   module('when displayHasSeenEndTestScreenColumn is true', function () {
     test('it should display the "Ecran de fin de test vu" column', async function (assert) {
       // given
-      const juryCertificationSummaryProcessed = store.createRecord('jury-certification-summary', {
-        hasSeenEndTestScreen: true,
-      });
-      const certifications = [juryCertificationSummaryProcessed];
+      const juryCertificationSummaries = [
+        store.createRecord('jury-certification-summary', {
+          hasSeenEndTestScreen: true,
+        }),
+      ];
       const pagination = {};
 
       // when
       const screen = await render(
         <template>
           <List
-            @certifications={{certifications}}
+            @juryCertificationSummaries={{juryCertificationSummaries}}
             @displayHasSeenEndTestScreenColumn={{true}}
             @pagination={{pagination}}
           />
@@ -76,17 +84,18 @@ module('Integration | Component | certifications/list', function (hooks) {
   module('when displayHasSeenEndTestScreenColumn is false', function () {
     test('it should not display the "Ecran de fin de test vu" column', async function (assert) {
       // given
-      const juryCertificationSummaryProcessed = store.createRecord('jury-certification-summary', {
-        hasSeenEndTestScreen: true,
-      });
-      const certifications = [juryCertificationSummaryProcessed];
+      const juryCertificationSummaries = [
+        store.createRecord('jury-certification-summary', {
+          hasSeenEndTestScreen: true,
+        }),
+      ];
       const pagination = {};
 
       // when
       const screen = await render(
         <template>
           <List
-            @certifications={{certifications}}
+            @juryCertificationSummaries={{juryCertificationSummaries}}
             @displayHasSeenEndTestScreenColumn={{false}}
             @pagination={{pagination}}
           />

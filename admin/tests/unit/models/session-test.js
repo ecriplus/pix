@@ -124,10 +124,10 @@ module('Unit | Model | session', function (hooks) {
   });
 
   module('#isPublished', function () {
-    module('when status is not PROCESSED', function () {
+    module('when the session has no publication date', function () {
       test('isPublished should be false', function (assert) {
         // given
-        const unprocessedSession = store.createRecord('session', { status: 'created' });
+        const unprocessedSession = store.createRecord('session', { publishedAt: null });
 
         // when
         const isPublished = unprocessedSession.get('isPublished');
@@ -137,10 +137,10 @@ module('Unit | Model | session', function (hooks) {
       });
     });
 
-    module('when status is PROCESSED', function () {
+    module('when the session has a publication date ', function () {
       test('isPublished should be true', function (assert) {
         // given
-        const processedSession = store.createRecord('session', { status: 'processed' });
+        const processedSession = store.createRecord('session', { publishedAt: '2020-01-01' });
 
         // when
         const isPublished = processedSession.get('isPublished');

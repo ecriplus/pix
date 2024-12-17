@@ -45,6 +45,7 @@ module('Acceptance | authenticated/sessions/session/informations', function (hoo
             id: '3',
             finalizedAt: new Date('2023-01-31'),
             examinerGlobalComment: 'Vraiment, super session!',
+            publishedAt: null,
             status: 'finalized',
           });
           const screen = await visit('/sessions/3');

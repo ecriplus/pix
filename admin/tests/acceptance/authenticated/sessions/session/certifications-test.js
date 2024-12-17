@@ -11,30 +11,56 @@ module('Acceptance | authenticated/sessions/session/certifications', function (h
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
-  module('When user has role metier', function () {
-    test('it should not show publish button', async function (assert) {
-      // given
-      await authenticateAdminMemberWithRole({ isMetier: true })(server);
-      server.create('session', { id: '1' });
+  let session, juryCertificationSummaries;
 
-      // when
-      const screen = await visit('/sessions/1/certifications');
+  hooks.beforeEach(async function () {
+    await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
-      // then
-      assert.dom(screen.queryByText('Publier la session')).doesNotExist();
+    juryCertificationSummaries = server.createList('jury-certification-summary', 11);
+
+    session = server.create('session', 'finalized', {
+      id: '1',
+      juryCertificationSummaries,
     });
   });
 
+  module('When the session is finalized', function () {
+    module('When the session is not published', function () {
+      test('it should be possible to publish the session', async function (assert) {
+        // given
+        session.update({
+          publishedAt: null,
+        });
+
+        // when
+        const screen = await visit('/sessions/1/certifications');
+        click(screen.getByRole('button', { name: 'Publier la session' }));
+        click(await screen.findByRole('button', { name: 'Confirmer' }));
+
+        assert.dom(await screen.findByRole('button', { name: 'Dépublier la session' })).exists();
+      });
+    });
+
+    module('When the session is published', function () {
+      test('it should be possible to unpublish the session', async function (assert) {
+        // given
+        session.update({
+          publishedAt: new Date(),
+        });
+
+        // when
+        const screen = await visit('/sessions/1/certifications');
+        click(screen.getByRole('button', { name: 'Dépublier la session' }));
+        click(await screen.findByRole('button', { name: 'Confirmer' }));
+
+        assert.dom(await screen.findByRole('button', { name: 'Publier la session' })).exists();
+      });
+    });
+  });
+
+  // TODO : move to Certifications::List component integration level
   module('When requesting next page from pagination', function () {
     test('it should display next page jury certificate summary', async function (assert) {
-      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-
-      const juryCertificationSummaries = server.createList('jury-certification-summary', 11);
-      server.create('session', {
-        id: '1',
-        juryCertificationSummaries,
-      });
-
       // when
       const screen = await visit('/sessions/1/certifications');
       await click(screen.getByRole('button', { name: 'Aller à la page suivante' }));
@@ -48,16 +74,9 @@ module('Acceptance | authenticated/sessions/session/certifications', function (h
     });
   });
 
+  // TODO : move to Certifications::List component integration level
   module('When requesting page 2 of certification from url', function () {
     test('it should display page 2 jury certificate summary', async function (assert) {
-      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-
-      const juryCertificationSummaries = server.createList('jury-certification-summary', 11);
-      server.create('session', {
-        id: '1',
-        juryCertificationSummaries,
-      });
-
       // when
       const screen = await visit('/sessions/1/certifications?pageNumber=2&pageSize=10');
 

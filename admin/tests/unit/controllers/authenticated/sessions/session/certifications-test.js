@@ -1,4 +1,5 @@
 import EmberObject from '@ember/object';
+import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -7,227 +8,119 @@ module('Unit | Controller | authenticated/sessions/session/certifications', func
   setupTest(hooks);
   let controller;
   let model;
+  let pixToastSendSuccessNotification;
+  let pixToastSendErrorNotification;
+  let store;
 
   hooks.beforeEach(function () {
     controller = this.owner.lookup('controller:authenticated/sessions/session/certifications');
     model = EmberObject.create({
       id: Symbol('an id'),
       certifications: [{}, {}],
-      session: { isPublished: null },
-      juryCertificationSummaries: {},
+      session: {
+        id: Symbol('session id'),
+        isPublished: false,
+        save: sinon.stub(),
+      },
+      juryCertificationSummaries: {
+        reload: sinon.stub(),
+      },
     });
+    controller.set('model', model);
+    pixToastSendSuccessNotification = sinon.stub();
+    pixToastSendErrorNotification = sinon.stub();
+    class PixToastStub extends Service {
+      sendSuccessNotification = pixToastSendSuccessNotification;
+      sendErrorNotification = pixToastSendErrorNotification;
+    }
+    this.owner.register('service:pixToast', PixToastStub);
+
+    store = this.owner.lookup('service:store');
+    store.findRecord = sinon.stub().resolves();
   });
 
-  module('#canPublish', function () {
-    module('when there is a certification in error and uncancelled', function () {
-      test('should not publish the session', async function (assert) {
+  module('#publishSession', function () {
+    module('when publish succeeded', function () {
+      test('should notify success and refresh model', async function (assert) {
         // given
-        controller.set('model', model);
-        controller.model.session.isFinalized = true;
-        controller.model.juryCertificationSummaries = [
-          { status: 'validated' },
-          { status: 'error', isCancelled: false },
-        ];
+        model.session.save.resolves();
 
         // when
-        const result = controller.canPublish;
+        await controller.publishSession();
 
         // then
-        assert.false(result);
+        assert.ok(
+          model.session.save.calledOnceWith({
+            adapterOptions: { updatePublishedCertifications: true, toPublish: true },
+          }),
+        );
+        assert.ok(store.findRecord.calledOnceWith('session', model.session.id, { reload: true }));
       });
     });
-
-    module('when there is a certification in error and cancelled', function () {
-      test('should publish the session', async function (assert) {
+    module('when publish failed', function () {
+      test('should notify failure and refresh model', async function (assert) {
         // given
-        controller.set('model', model);
-        controller.model.session.isFinalized = true;
-        controller.model.juryCertificationSummaries = [{ status: 'validated' }, { status: 'error', isCancelled: true }];
-        // when
-        const result = controller.canPublish;
+        model.session.save.rejects();
 
-        // then
-        assert.true(result);
-      });
-    });
-
-    module('when the session is not finalized', function () {
-      test('should not publish the session', async function (assert) {
-        // given
-        controller.set('model', model);
-        controller.model.session.isFinalized = false;
-        controller.model.juryCertificationSummaries = [{ status: 'started' }];
+        const store = this.owner.lookup('service:store');
+        store.findRecord = sinon.stub().resolves();
 
         // when
-        const result = controller.canPublish;
+        await controller.publishSession();
 
         // then
-        assert.false(result);
-      });
-    });
-
-    module('when there is no certification in error or started', function () {
-      test('should publish the session', async function (assert) {
-        // given
-        controller.set('model', model);
-        controller.model.session.isFinalized = true;
-        controller.model.juryCertificationSummaries = [{ status: 'validated' }, { status: 'rejected' }];
-
-        // when
-        const result = controller.canPublish;
-
-        // then
-        assert.true(result);
+        assert.ok(
+          model.session.save.calledOnceWith({
+            adapterOptions: { updatePublishedCertifications: true, toPublish: true },
+          }),
+        );
+        assert.ok(pixToastSendErrorNotification.calledOnce);
+        assert.ok(store.findRecord.calledOnceWith('session', model.session.id, { reload: true }));
       });
     });
   });
 
-  module('#displayCertificationStatusUpdateConfirmationModal', function (hooks) {
-    hooks.beforeEach(function () {
-      controller.set('model', model);
-    });
-
-    module('when session is not yet published', function () {
-      test('should update modal message to publish', async function (assert) {
+  module('#unpublishSession', function () {
+    module('when unpublish succeeded', function () {
+      test('should notify success and refresh model', async function (assert) {
         // given
-        model.canPublish = true;
-        model.session.isPublished = false;
-        model.session.isFinalized = true;
-        model.juryCertificationSummaries = [{ status: 'validated' }];
+        model.session.save.resolves();
 
         // when
-        await controller.actions.displayCertificationStatusUpdateConfirmationModal.call(controller);
+        await controller.unpublishSession();
 
         // then
-        assert.strictEqual(controller.confirmMessage, 'Souhaitez-vous publier la session ?');
-        assert.true(controller.displayConfirm);
+        assert.ok(
+          model.session.save.calledOnceWith({
+            adapterOptions: { updatePublishedCertifications: true, toPublish: false },
+          }),
+        );
+        assert.ok(model.juryCertificationSummaries.reload.calledOnce);
+        assert.ok(pixToastSendSuccessNotification.calledOnce);
+        assert.ok(store.findRecord.calledOnceWith('session', model.session.id, { reload: true }));
       });
     });
-
-    module('when session is published', function () {
-      test('should update modal message to unpublish', async function (assert) {
+    module('when unpublish failed', function () {
+      test('should notify failure and refresh model', async function (assert) {
         // given
-        model.session.isPublished = true;
-        model.session.isFinalized = true;
-        model.juryCertificationSummaries = [{ status: 'validated' }];
+        model.session.save.rejects();
+
+        const store = this.owner.lookup('service:store');
+        store.findRecord = sinon.stub().resolves();
 
         // when
-        await controller.actions.displayCertificationStatusUpdateConfirmationModal.call(controller);
+        await controller.unpublishSession();
 
         // then
-        assert.strictEqual(controller.confirmMessage, 'Souhaitez-vous dépublier la session ?');
-        assert.true(controller.displayConfirm);
+        assert.ok(
+          model.session.save.calledOnceWith({
+            adapterOptions: { updatePublishedCertifications: true, toPublish: false },
+          }),
+        );
+        assert.notOk(model.juryCertificationSummaries.reload.calledOnce);
+        assert.ok(pixToastSendErrorNotification.calledOnce);
+        assert.ok(store.findRecord.calledOnceWith('session', model.session.id, { reload: true }));
       });
-    });
-  });
-
-  module('#toggleSessionPublication', function (hooks) {
-    let notificationsStub;
-    let store;
-    let isPublishedGetterStub;
-
-    hooks.beforeEach(function () {
-      notificationsStub = { sendSuccessNotification: sinon.stub() };
-      store = this.owner.lookup('service:store');
-
-      store.findRecord = sinon.stub();
-      controller.set('model', model);
-      controller.set('pixToast', notificationsStub);
-      controller.set('displayConfirm', true);
-      controller.model.session.save = sinon.stub();
-      isPublishedGetterStub = sinon.stub();
-      sinon.stub(controller.model.session, 'isPublished').get(isPublishedGetterStub);
-      controller.model.juryCertificationSummaries = { reload: sinon.stub() };
-    });
-
-    test('should notify an error if request failed', async function (assert) {
-      // given
-      const anError = 'anError';
-      Object.assign(notificationsStub, { sendErrorNotification: sinon.stub() });
-
-      controller.model.session.save = sinon.stub().throws(anError);
-
-      // when
-      await controller.actions.toggleSessionPublication.call(controller);
-      store.findRecord.resolves(model);
-
-      // then
-      assert.throws(model.session.save, anError);
-      sinon.assert.called(notificationsStub.sendErrorNotification);
-      assert.false(controller.displayConfirm);
-    });
-
-    module('when session is not yet published', function () {
-      test('should publish all certifications', async function (assert) {
-        // given
-        isPublishedGetterStub.onCall(0).returns(false);
-        isPublishedGetterStub.onCall(1).returns(true);
-
-        // when
-        await controller.actions.toggleSessionPublication.call(controller);
-
-        // then
-        sinon.assert.calledWith(controller.model.session.save, {
-          adapterOptions: { updatePublishedCertifications: true, toPublish: true },
-        });
-        sinon.assert.calledWith(notificationsStub.sendSuccessNotification, {
-          message: 'Les certifications ont été correctement publiées.',
-        });
-        assert.false(controller.displayConfirm);
-      });
-    });
-
-    module('when session is published', function () {
-      test('should unpublish all certifications', async function (assert) {
-        // given
-        isPublishedGetterStub.onCall(0).returns(true);
-        isPublishedGetterStub.onCall(1).returns(false);
-
-        // when
-        await controller.actions.toggleSessionPublication.call(controller);
-
-        // then
-        sinon.assert.calledWith(model.session.save, {
-          adapterOptions: { updatePublishedCertifications: true, toPublish: false },
-        });
-        sinon.assert.calledWith(notificationsStub.sendSuccessNotification, {
-          message: 'Les certifications ont été correctement dépubliées.',
-        });
-        assert.false(controller.displayConfirm);
-      });
-    });
-  });
-
-  module('get sortedCertificationJurySummaries', function () {
-    test('should return jury certification summaries sorted by numberOfCertificationIssueReportsWithRequiredAction in descending order', function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const firstJuryCertificationSummary = store.createRecord('jury-certification-summary', {
-        numberOfCertificationIssueReportsWithRequiredAction: 0,
-      });
-      const secondJuryCertificationSummary = store.createRecord('jury-certification-summary', {
-        numberOfCertificationIssueReportsWithRequiredAction: 3,
-      });
-      const thirdJuryCertificationSummary = store.createRecord('jury-certification-summary', {
-        numberOfCertificationIssueReportsWithRequiredAction: 1,
-      });
-      controller.set('model', {
-        juryCertificationSummaries: [
-          firstJuryCertificationSummary,
-          secondJuryCertificationSummary,
-          thirdJuryCertificationSummary,
-        ],
-      });
-
-      // when
-      const sortedCertificationJurySummaries = controller.sortedCertificationJurySummaries;
-
-      // then
-      assert.deepEqual(sortedCertificationJurySummaries, [
-        secondJuryCertificationSummary,
-        thirdJuryCertificationSummary,
-        firstJuryCertificationSummary,
-      ]);
     });
   });
 });

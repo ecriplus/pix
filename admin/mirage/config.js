@@ -114,7 +114,16 @@ function routes() {
   this.get('/admin/sessions', findPaginatedAndFilteredSessions);
   this.get('/admin/sessions/to-publish', getToBePublishedSessions);
   this.get('/admin/sessions/with-required-action', getWithRequiredActionSessions);
-  this.patch('/admin/sessions/:id/publish', () => {
+  this.patch('/admin/sessions/:id/publish', (schema, request) => {
+    const sessionId = request.params.id;
+    const session = schema.sessions.findBy({ id: sessionId });
+    session.update({ publishedAt: new Date() });
+    return new Response(204);
+  });
+  this.patch('/admin/sessions/:id/unpublish', (schema, request) => {
+    const sessionId = request.params.id;
+    const session = schema.sessions.findBy({ id: sessionId });
+    session.update({ publishedAt: null });
     return new Response(204);
   });
   this.get('/admin/sessions/:id');
