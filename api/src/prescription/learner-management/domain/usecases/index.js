@@ -21,6 +21,7 @@ import { importCommonOrganizationLearnersJobRepository } from '../../infrastruct
 import { importOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-organization-learners-job-repository.js';
 import { importScoCsvOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-sco-csv-organization-learners-job-repository.js';
 import { importSupOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-sup-organization-learners-job-repository.js';
+import { validateCommonOrganizationImportFileJobRepository } from '../../infrastructure/repositories/jobs/validate-common-organization-learners-import-file-job-repository.js';
 import { validateCsvOrganizationImportFileJobRepository } from '../../infrastructure/repositories/jobs/validate-csv-organization-learners-import-file-job-repository.js';
 import { validateOrganizationImportFileJobRepository } from '../../infrastructure/repositories/jobs/validate-organization-learners-import-file-job-repository.js';
 import * as organizationImportRepository from '../../infrastructure/repositories/organization-import-repository.js';
@@ -82,6 +83,7 @@ const dependencies = {
   supOrganizationLearnerRepository,
   userReconciliationService,
   userRepository,
+  validateCommonOrganizationImportFileJobRepository,
   validateCsvOrganizationImportFileJobRepository,
   validateOrganizationImportFileJobRepository,
 };

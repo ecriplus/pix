@@ -4,17 +4,19 @@ import { CommonCsvLearnerParser } from '../../../infrastructure/serializers/csv/
 import { getDataBuffer } from '../../../infrastructure/utils/bufferize/get-data-buffer.js';
 import { AggregateImportError, OrganizationLearnerImportFormatNotFoundError } from '../../errors.js';
 import { OrganizationImport } from '../../models/OrganizationImport.js';
+import { ValidateCommonOrganizationImportFileJob } from '../../models/ValidateCommonOrganizationImportFileJob.js';
 
 const sendOrganizationLearnersFile = async function ({
   payload,
   userId,
   organizationId,
   organizationLearnerImportFormatRepository,
+  validateCommonOrganizationImportFileJobRepository,
   organizationImportRepository,
   importStorage,
   dependencies = { createReadStream, getDataBuffer },
 }) {
-  const organizationImport = OrganizationImport.create({ organizationId, createdBy: userId });
+  let organizationImport = OrganizationImport.create({ organizationId, createdBy: userId });
   let filename;
   let encoding;
   const errors = [];
@@ -24,6 +26,10 @@ const sendOrganizationLearnersFile = async function ({
     const organizationLearnerImportFormat = await organizationLearnerImportFormatRepository.get(organizationId);
     if (organizationLearnerImportFormat === null)
       throw new OrganizationLearnerImportFormatNotFoundError(organizationId);
+
+    await organizationImportRepository.save(organizationImport);
+
+    organizationImport = await organizationImportRepository.getLastByOrganizationId(organizationId);
 
     const readableStreamEncoding = dependencies.createReadStream(payload.path);
     const bufferEncoding = await dependencies.getDataBuffer(readableStreamEncoding);
@@ -36,6 +42,9 @@ const sendOrganizationLearnersFile = async function ({
     encoding = parser.getEncoding();
 
     filename = await importStorage.sendFile({ filepath: payload.path });
+    await validateCommonOrganizationImportFileJobRepository.performAsync(
+      new ValidateCommonOrganizationImportFileJob({ organizationImportId: organizationImport.id }),
+    );
   } catch (error) {
     if (Array.isArray(error)) {
       errors.push(...error);
