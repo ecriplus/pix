@@ -22,6 +22,9 @@ const acceptLegalDocumentByUserId = async ({
   userAcceptanceRepository,
   logger,
 }) => {
+  LegalDocumentType.assert(type);
+  LegalDocumentService.assert(service);
+
   // legacy document acceptance
   if (type === TOS && service === PIX_ORGA) {
     await userRepository.setPixOrgaCguByUserId(userId);
