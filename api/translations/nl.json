@@ -229,10 +229,10 @@
   },
   "common": {
     "email": {
-      "contactUs": "contact us here",
-      "doNotAnswer": "This is an automated email message, please do not reply.",
-      "moreOn": "More on",
-      "pixPresentation": "Pix is the online service to assess, develop and certify your digital skills."
+      "contactUs": "neem hier contact met ons op",
+      "doNotAnswer": "Dit is een automatische e-mail, antwoord niet.",
+      "moreOn": "Ontdek meer over",
+      "pixPresentation": "Pix is de openbare online service voor het beoordelen, ontwikkelen en certificeren van je digitale vaardigheden."
     }
   },
   "csv-import-values": {
@@ -389,14 +389,14 @@
   },
   "self-account-deletion-email": {
     "params": {
-      "hello": "Hello {firstName},",
-      "requestConfirmation": "Following your request, we can confirm that your Pix account and personal data have been deleted.",
-      "seeYouSoon": "We hope to see you soon for new digital adventures.",
-      "signing": "The Pix team",
-      "title": "Deleting your account",
-      "warning": "If you are not the source of this request, please contact support."
+      "hello": "Hallo {firstName},",
+      "requestConfirmation": "Na je verzoek zullen we de verwijdering van je Pix-account en je persoonlijke gegevens bevestigen.",
+      "seeYouSoon": "We hopen je snel te zien voor nieuwe digitale avonturen.",
+      "signing": "Het Pix team",
+      "title": "Je account verwijderen",
+      "warning": "Als u niet de bron van dit verzoek bent, neem dan contact op met ondersteuning."
     },
-    "subject": "Deleting your account"
+    "subject": "Je account verwijderen"
   },
   "verification-code-email": {
     "body": {
