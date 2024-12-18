@@ -1,5 +1,29 @@
 # Pix Changelog
 
+## v5.4.0 (18/12/2024)
+
+
+### :rocket: Amélioration
+- [#10845](https://github.com/1024pix/pix/pull/10845) [FEATURE] Ajouter une contrainte d'unicite sur la table profile-rewards (PIX-15781).
+- [#10826](https://github.com/1024pix/pix/pull/10826) [FEATURE] Rendre la page attestations visible seulement aux admins de l'organisation (PIX-15611).
+- [#10827](https://github.com/1024pix/pix/pull/10827) [FEATURE] Rendre asynchrone l'import à format sur PixOrga (Pix-15437).
+- [#10805](https://github.com/1024pix/pix/pull/10805) [FEATURE] Faciliter les changements de noms des fournisseurs d'identité OIDC (pix-15616).
+- [#10835](https://github.com/1024pix/pix/pull/10835) [FEATURE] formater les date dans les export de résultats en utilisant le fuseau Europe/Paris (PIX-15742).
+- [#10811](https://github.com/1024pix/pix/pull/10811) [FEATURE] Effacer le message d'erreur de saisie de l'externalId lors de la modification du précedent en erreur (PIX-15158).
+
+### :building_construction: Tech
+- [#10834](https://github.com/1024pix/pix/pull/10834) [TECH] Migrer en GJS les composants `organization-learners` de pixOrga (Pix 15749).
+- [#10842](https://github.com/1024pix/pix/pull/10842) [TECH] Migration de la route `/api/admin/sessions/publish-in-batch` (PIX-15768).
+- [#10756](https://github.com/1024pix/pix/pull/10756) [TECH] :truck: Déplacement de la route `session-summaries` vers `src`.
+- [#10819](https://github.com/1024pix/pix/pull/10819) [TECH] Utiliser de fausses données pour les test du script get-elements-csv (PIX-15633).
+
+### :bug: Correction
+- [#10815](https://github.com/1024pix/pix/pull/10815) [BUGFIX] :recycle: remaniement de la vérification des valeurs contenues dans le fichier CSV d'import de session en masse (PIX-15719).
+- [#10820](https://github.com/1024pix/pix/pull/10820) [BUGFIX] Corrige la réactivité des boutons de publication dans Pix Admin (PIX-15736).
+
+### :arrow_up: Montée de version
+- [#10783](https://github.com/1024pix/pix/pull/10783) [BUMP] Update dependency @1024pix/pix-ui to v51 (certif).
+
 ## v5.3.0 (17/12/2024)
 
 
