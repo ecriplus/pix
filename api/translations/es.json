@@ -229,10 +229,10 @@
   },
   "common": {
     "email": {
-      "contactUs": "contact us here",
-      "doNotAnswer": "This is an automated email message, please do not reply.",
-      "moreOn": "More on",
-      "pixPresentation": "Pix is the online service to assess, develop and certify your digital skills."
+      "contactUs": "contáctanos aquí",
+      "doNotAnswer": "Este es un correo electrónico automático, por favor, no respondas directamente.",
+      "moreOn": "Más información sobre",
+      "pixPresentation": "Pix es el servicio público en línea para evaluar, desarrollar y certificar tus competencias digitales."
     }
   },
   "csv-import-values": {
@@ -301,7 +301,7 @@
     "template-name": "modelo de importación"
   },
   "email-sender-name": {
-    "pix-app": "PIX - No contestar"
+    "pix-app": "PIX - No responder"
   },
   "entity-validation-errors": {
     "ACCEPT_CGU": "Debes aceptar las condiciones de uso de Pix para crear una cuenta.",
@@ -397,14 +397,14 @@
   },
   "self-account-deletion-email": {
     "params": {
-      "hello": "Hello {firstName},",
-      "requestConfirmation": "Following your request, we can confirm that your Pix account and personal data have been deleted.",
-      "seeYouSoon": "We hope to see you soon for new digital adventures.",
-      "signing": "The Pix team",
-      "title": "Deleting your account",
-      "warning": "If you are not the source of this request, please contact support."
+      "hello": "Hola {firstName},",
+      "requestConfirmation": "Tras su solicitud, le confirmaremos la eliminación de su cuenta Pix y de sus datos personales.",
+      "seeYouSoon": "Esperamos verte pronto en nuevas aventuras digitales.",
+      "signing": "El equipo Pix",
+      "title": "Eliminar su cuenta",
+      "warning": "Si usted no es la fuente de esta solicitud, póngase en contacto con el servicio de asistencia."
     },
-    "subject": "Deleting your account"
+    "subject": "Eliminar su cuenta"
   },
   "verification-code-email": {
     "body": {
