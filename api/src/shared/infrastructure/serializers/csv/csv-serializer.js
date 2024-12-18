@@ -46,10 +46,9 @@ function deserializeForSessionsImport({
 
   const csvBillingModeKey = headers.billingMode;
   const csvPrepaymentCodeKey = headers.prepaymentCode;
-  const firstCsvLine = parsedCsvData?.[0];
 
   _verifiyFileIntegrity({
-    firstCsvLine,
+    parsedCsvData,
     hasBillingMode,
     csvBillingModeKey,
     csvPrepaymentCodeKey,
@@ -311,15 +310,14 @@ function _validateComplementaryCertificationHeaders(headers, certificationCenter
 }
 
 function _verifiyFileIntegrity({
-  firstCsvLine,
+  parsedCsvData,
   hasBillingMode,
   csvBillingModeKey,
   csvPrepaymentCodeKey,
-  expectedHeadersKeys,
   certificationCenterHabilitations,
 }) {
+  const firstCsvLine = parsedCsvData[0];
   if (
-    _isCsvEmpty(firstCsvLine) ||
     _isScoAndHasBillingModeColumnsInCsv({
       hasBillingMode,
       firstCsvLine,
@@ -335,21 +333,19 @@ function _verifiyFileIntegrity({
     _validateComplementaryCertificationHeaders(complementaryCertificationHeaders, certificationCenterHabilitations);
   }
 
-  _verifyHeaders({ expectedHeadersKeys, headers, firstCsvLine, hasBillingMode });
+  verifyColumnsValueAgainstConstraints({ csvLines: parsedCsvData, headers, hasBillingMode });
 }
 
-function _verifyHeaders({ expectedHeadersKeys, firstCsvLine, headers, hasBillingMode }) {
-  expectedHeadersKeys.forEach((key) => {
-    const matchingCsvColumnValue = firstCsvLine[headers[key]];
-
-    if (_missingCsvColumn(matchingCsvColumnValue)) {
-      if (_isBillingModeOptionalAndAssociatedColumnsMissing(key, hasBillingMode)) {
-        return;
-      }
-
-      throw new FileValidationError('CSV_HEADERS_NOT_VALID');
+function verifyColumnsValueAgainstConstraints({ csvLines, headers, hasBillingMode }) {
+  for (const key in headers) {
+    if (!hasBillingMode && (key === 'billingMode' || key === 'prepaymentCode')) {
+      break;
     }
-  });
+
+    if (csvLines.map((line) => line[headers[key]]).some((e) => e === undefined)) {
+      throw new FileValidationError('CSV_DATA_REQUIRED');
+    }
+  }
 }
 
 function _isScoAndHasBillingModeColumnsInCsv({
@@ -359,14 +355,6 @@ function _isScoAndHasBillingModeColumnsInCsv({
   csvPrepaymentCodeKey,
 }) {
   return !hasBillingMode && (csvBillingModeKey in firstCsvLine || csvPrepaymentCodeKey in firstCsvLine);
-}
-
-function _missingCsvColumn(matchingCsvColumnValue) {
-  return matchingCsvColumnValue === undefined;
-}
-
-function _isBillingModeOptionalAndAssociatedColumnsMissing(key, hasBillingMode) {
-  return (key === 'billingMode' || key === 'prepaymentCode') && !hasBillingMode;
 }
 
 function _hasSessionInformation({ address, room, date, time, examiner }) {
@@ -456,10 +444,6 @@ function _generateUniqueKey({ address, room, date, time }) {
   return address + room + date + time;
 }
 
-function _isCsvEmpty(firstCsvLine) {
-  return !firstCsvLine;
-}
-
 function serializeLine(lineArray) {
   return lineArray.map(_csvSerializeValue).join(';') + '\n';
 }
@@ -470,4 +454,5 @@ export {
   deserializeForSessionsImport,
   parseForCampaignsImport,
   serializeLine,
+  verifyColumnsValueAgainstConstraints,
 };
