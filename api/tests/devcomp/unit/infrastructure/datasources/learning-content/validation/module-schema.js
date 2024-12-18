@@ -2,6 +2,7 @@ import Joi from 'joi';
 
 import { downloadElementSchema } from './element/download-schema.js';
 import { embedElementSchema } from './element/embed-schema.js';
+import { expandElementSchema } from './element/expand-schema.js';
 import { flashcardsElementSchema } from './element/flashcards-schema.js';
 import { imageElementSchema } from './element/image-schema.js';
 import { qcmElementSchema } from './element/qcm-schema.js';
@@ -30,6 +31,7 @@ const elementSchema = Joi.alternatives().conditional('.type', {
   switch: [
     { is: 'download', then: downloadElementSchema },
     { is: 'embed', then: embedElementSchema },
+    { is: 'expand', then: expandElementSchema },
     { is: 'flashcards', then: flashcardsElementSchema },
     { is: 'image', then: imageElementSchema },
     { is: 'qcu', then: qcuElementSchema },
@@ -44,6 +46,7 @@ const elementSchema = Joi.alternatives().conditional('.type', {
 const stepperElementSchema = Joi.alternatives().conditional('.type', {
   switch: [
     { is: 'download', then: downloadElementSchema },
+    { is: 'expand', then: expandElementSchema },
     { is: 'image', then: imageElementSchema },
     { is: 'qcu', then: qcuElementSchema },
     { is: 'qcm', then: qcmElementSchema },
