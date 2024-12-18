@@ -96,7 +96,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
 
         // then
         expect(error).to.be.instanceOf(FileValidationError);
-        expect(error.code).to.equal('CSV_HEADERS_NOT_VALID');
+        expect(error.code).to.equal('CSV_DATA_REQUIRED');
       });
 
       context('when billing mode header is missing', function () {
@@ -134,7 +134,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
 
             // then
             expect(error).to.be.instanceOf(FileValidationError);
-            expect(error.code).to.equal('CSV_HEADERS_NOT_VALID');
+            expect(error.code).to.equal('CSV_DATA_REQUIRED');
           });
         });
 
@@ -1422,7 +1422,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
         });
 
         expect(error).to.be.instanceOf(FileValidationError);
-        expect(error.code).to.equal('CSV_HEADERS_NOT_VALID');
+        expect(error.code).to.equal('CSV_DATA_REQUIRED');
       });
     });
   });
@@ -1732,7 +1732,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
       const error = await catchErr(csvSerializer.verifyColumnsValueAgainstConstraints)({ csvLines, headers });
 
       expect(error).to.be.instanceOf(FileValidationError);
-      expect(error.code).to.equal('CSV_HEADERS_NOT_VALID');
+      expect(error.code).to.equal('CSV_DATA_REQUIRED');
     });
 
     context('no billing mode', function () {

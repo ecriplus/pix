@@ -343,8 +343,7 @@ function verifyColumnsValueAgainstConstraints({ csvLines, headers, hasBillingMod
     }
 
     if (csvLines.map((line) => line[headers[key]]).some((e) => e === undefined)) {
-      // TODO change error code here and in certif front
-      throw new FileValidationError('CSV_HEADERS_NOT_VALID');
+      throw new FileValidationError('CSV_DATA_REQUIRED');
     }
   }
 }
