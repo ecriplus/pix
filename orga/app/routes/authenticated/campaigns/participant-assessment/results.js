@@ -1,8 +1,12 @@
 import Route from '@ember/routing/route';
 
 export default class ResultsRoute extends Route {
-  model() {
+  async model() {
     const { campaignAssessmentParticipation } = this.modelFor('authenticated.campaigns.participant-assessment');
-    return campaignAssessmentParticipation;
+    const campaignAssessmentParticipationResult =
+      await campaignAssessmentParticipation.campaignAssessmentParticipationResult;
+    const competenceResults = await campaignAssessmentParticipationResult.competenceResults;
+
+    return competenceResults.slice(0);
   }
 }

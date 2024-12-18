@@ -16,7 +16,10 @@ module('Integration | Component | Participant::Assessment::Results', function (h
 
   test('it should display a sentence when displayResults is false', async function (assert) {
     // when
-    const screen = await render(hbs`<Participant::Assessment::Results @displayResults={{false}} />`);
+    const competenceResults = [];
+
+    this.set('competenceResults', competenceResults);
+    const screen = await render(hbs`<Participant::Assessment::Results @results={{this.competenceResults}} />`);
 
     // then
     assert.dom(screen.getByText(t('pages.assessment-individual-results.table.empty'))).exists();
@@ -31,16 +34,12 @@ module('Integration | Component | Participant::Assessment::Results', function (h
       competenceMasteryRate: 0.5,
     });
 
-    const campaignAssessmentParticipationResult = store.createRecord('campaign-assessment-participation-result', {
-      competenceResults: [competenceResult],
-    });
+    const competenceResults = [competenceResult];
 
-    this.set('campaignAssessmentParticipationResult', campaignAssessmentParticipationResult);
+    this.set('competenceResults', competenceResults);
 
     // when
-    const screen = await render(
-      hbs`<Participant::Assessment::Results @results={{this.campaignAssessmentParticipationResult}} @displayResults={{true}} />`,
-    );
+    const screen = await render(hbs`<Participant::Assessment::Results @results={{this.competenceResults}} />`);
 
     // then
     assert.dom(screen.getByLabelText(t('pages.assessment-individual-results.table.row-title'))).exists();
