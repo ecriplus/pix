@@ -67,4 +67,8 @@ export default class Challenge extends Model {
   get hasForm() {
     return this.autoReply === false;
   }
+
+  get hasType() {
+    return !!this.type;
+  }
 }
