@@ -1,4 +1,5 @@
 import { IMPORT_KEY_FIELD } from '../../../../../src/prescription/learner-management/domain/constants.js';
+import { getLastByOrganizationId } from '../../../../../src/prescription/learner-management/infrastructure/repositories/organization-import-repository.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
@@ -7,7 +8,6 @@ import {
   expect,
   generateValidRequestAuthorizationHeader,
   insertUserWithRoleSuperAdmin,
-  knex,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Prescription | learner management | Application | organization-learners-management', function () {
@@ -129,11 +129,11 @@ describe('Acceptance | Prescription | learner management | Application | organiz
       // when
       const response = await server.inject(options);
 
-      const organizationLearners = await knex('organization-learners').where({ organizationId });
+      const organizationImport = await getLastByOrganizationId(organizationId);
       // then
       expect(response.statusCode).to.equal(204);
 
-      expect(organizationLearners).lengthOf(1);
+      expect(organizationImport.status).to.equals('UPLOADED');
     });
   });
 

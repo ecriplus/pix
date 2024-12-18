@@ -17,9 +17,11 @@ import * as membershipRepository from '../../../../team/infrastructure/repositor
 import * as registrationOrganizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/registration-organization-learner-repository.js';
 import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
+import { importCommonOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-common-organization-learners-job-repository.js';
 import { importOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-organization-learners-job-repository.js';
 import { importScoCsvOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-sco-csv-organization-learners-job-repository.js';
 import { importSupOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-sup-organization-learners-job-repository.js';
+import { validateCommonOrganizationImportFileJobRepository } from '../../infrastructure/repositories/jobs/validate-common-organization-learners-import-file-job-repository.js';
 import { validateCsvOrganizationImportFileJobRepository } from '../../infrastructure/repositories/jobs/validate-csv-organization-learners-import-file-job-repository.js';
 import { validateOrganizationImportFileJobRepository } from '../../infrastructure/repositories/jobs/validate-organization-learners-import-file-job-repository.js';
 import * as organizationImportRepository from '../../infrastructure/repositories/organization-import-repository.js';
@@ -59,6 +61,7 @@ import { importStorage } from '../../infrastructure/storage/import-storage.js';
 const dependencies = {
   campaignParticipationRepository,
   campaignRepository,
+  importCommonOrganizationLearnersJobRepository,
   importOrganizationLearnersJobRepository,
   importScoCsvOrganizationLearnersJobRepository,
   importStorage,
@@ -80,6 +83,7 @@ const dependencies = {
   supOrganizationLearnerRepository,
   userReconciliationService,
   userRepository,
+  validateCommonOrganizationImportFileJobRepository,
   validateCsvOrganizationImportFileJobRepository,
   validateOrganizationImportFileJobRepository,
 };

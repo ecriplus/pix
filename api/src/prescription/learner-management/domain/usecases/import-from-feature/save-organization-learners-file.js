@@ -4,7 +4,7 @@ import { AggregateImportError } from '../../errors.js';
 import { ImportOrganizationLearnerSet } from '../../models/ImportOrganizationLearnerSet.js';
 
 const saveOrganizationLearnersFile = async function ({
-  organizationId,
+  organizationImportId,
   organizationLearnerImportFormatRepository,
   organizationLearnerRepository,
   organizationImportRepository,
@@ -12,9 +12,10 @@ const saveOrganizationLearnersFile = async function ({
   dependencies = { getDataBuffer },
 }) {
   const errors = [];
-  const organizationImport = await organizationImportRepository.getLastByOrganizationId(organizationId);
+  const organizationImport = await organizationImportRepository.get(organizationImportId);
 
   try {
+    const organizationId = organizationImport.organizationId;
     const importFormat = await organizationLearnerImportFormatRepository.get(organizationId);
 
     const readableStream = await importStorage.readFile({ filename: organizationImport.filename });

@@ -1,5 +1,6 @@
 import { AggregateImportError } from '../../../../../../../src/prescription/learner-management/domain/errors.js';
 import { OrganizationImport } from '../../../../../../../src/prescription/learner-management/domain/models/OrganizationImport.js';
+import { ValidateCommonOrganizationImportFileJob } from '../../../../../../../src/prescription/learner-management/domain/models/ValidateCommonOrganizationImportFileJob.js';
 import { sendOrganizationLearnersFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-from-feature/send-organization-learners-file.js';
 import { CommonCsvLearnerParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/common-csv-learner-parser.js';
 import { catchErr, expect, sinon } from '../../../../../../test-helper.js';
@@ -7,6 +8,7 @@ import { catchErr, expect, sinon } from '../../../../../../test-helper.js';
 describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
   let organizationImportRepositoryStub,
     organizationLearnerImportFormatRepositoryStub,
+    validateCommonOrganizationImportFileJobRepositoryStub,
     organizationLearnerRepositoryStub,
     commonCsvLearnerParserStub,
     dependencieStub,
@@ -16,10 +18,12 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
     dataBuffer,
     fileEncoding,
     organizationId,
+    organizationImportId,
     payload,
     dataStream,
     s3Filepath,
     uploadedFilepath,
+    organizationImportSavedStub,
     userId;
 
   beforeEach(function () {
@@ -31,12 +35,21 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
     dataBuffer = Symbol('DataBuffer');
     dataStream = Symbol('DataStream');
     importFormat = Symbol('importFormat ');
+    organizationImportId = Symbol('organizationImportdId');
     payload = { path: uploadedFilepath };
 
     importStorageStub = {
       sendFile: sinon.stub(),
       deleteFile: sinon.stub(),
     };
+
+    validateCommonOrganizationImportFileJobRepositoryStub = {
+      performAsync: sinon.stub(),
+    };
+
+    validateCommonOrganizationImportFileJobRepositoryStub.performAsync
+      .withArgs(new ValidateCommonOrganizationImportFileJob({ organizationImportId }))
+      .resolves();
 
     dependencieStub = {
       createReadStream: sinon.stub(),
@@ -45,7 +58,14 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
 
     organizationImportRepositoryStub = {
       save: sinon.stub(),
+      getLastByOrganizationId: sinon.stub(),
     };
+
+    organizationImportSavedStub = { id: organizationImportId, upload: sinon.stub() };
+
+    organizationImportRepositoryStub.getLastByOrganizationId
+      .withArgs(organizationId)
+      .resolves(organizationImportSavedStub);
 
     commonCsvLearnerParserStub = {
       getEncoding: sinon.stub(),
@@ -91,14 +111,15 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
         organizationImportRepository: organizationImportRepositoryStub,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
         organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
+        validateCommonOrganizationImportFileJobRepository: validateCommonOrganizationImportFileJobRepositoryStub,
         dependencies: dependencieStub,
       });
 
       // then
-      expect(
-        organizationImportRepositoryStub.save.calledOnceWith(organizationImportStub),
-        'organizationImportRepositoryStub.save',
-      ).to.be.true;
+      expect(organizationImportRepositoryStub.save.getCall(0)).to.have.been.calledWithExactly(organizationImportStub);
+      expect(organizationImportRepositoryStub.save.getCall(1)).to.have.been.calledWithExactly(
+        organizationImportSavedStub,
+      );
       expect(importStorageStub.deleteFile.called, 'importStorageStub.delete').to.be.false;
     });
   });
@@ -117,6 +138,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
         organizationImportRepository: organizationImportRepositoryStub,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
         organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
+        validateCommonOrganizationImportFileJobRepository: validateCommonOrganizationImportFileJobRepositoryStub,
         dependencies: dependencieStub,
       });
 
@@ -152,6 +174,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
           organizationImportRepository: organizationImportRepositoryStub,
           organizationLearnerRepository: organizationLearnerRepositoryStub,
           organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
+          validateCommonOrganizationImportFileJobRepository: validateCommonOrganizationImportFileJobRepositoryStub,
           dependencies: dependencieStub,
         });
 
@@ -180,6 +203,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
           organizationImportRepository: organizationImportRepositoryStub,
           organizationLearnerRepository: organizationLearnerRepositoryStub,
           organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
+          validateCommonOrganizationImportFileJobRepository: validateCommonOrganizationImportFileJobRepositoryStub,
           dependencies: dependencieStub,
         });
 
@@ -210,7 +234,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
 
         importStorageStub.sendFile.withArgs({ filepath: payload.path }).resolves(s3Filepath);
 
-        organizationImportRepositoryStub.save.withArgs(organizationImportStub).rejects();
+        organizationImportRepositoryStub.save.withArgs(organizationImportSavedStub).rejects();
 
         // when
         try {
@@ -222,6 +246,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
             organizationImportRepository: organizationImportRepositoryStub,
             organizationLearnerRepository: organizationLearnerRepositoryStub,
             organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
+            validateCommonOrganizationImportFileJobRepository: validateCommonOrganizationImportFileJobRepositoryStub,
             dependencies: dependencieStub,
           });
         } catch {
@@ -246,6 +271,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
             organizationImportRepository: organizationImportRepositoryStub,
             organizationLearnerRepository: organizationLearnerRepositoryStub,
             organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
+            validateCommonOrganizationImportFileJobRepository: validateCommonOrganizationImportFileJobRepositoryStub,
             dependencies: dependencieStub,
           });
         } catch {

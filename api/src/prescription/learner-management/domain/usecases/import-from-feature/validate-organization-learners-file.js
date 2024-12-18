@@ -1,19 +1,22 @@
 import { CommonCsvLearnerParser } from '../../../infrastructure/serializers/csv/common-csv-learner-parser.js';
 import { getDataBuffer } from '../../../infrastructure/utils/bufferize/get-data-buffer.js';
 import { AggregateImportError } from '../../errors.js';
+import { ImportCommonOrganizationLearnersJob } from '../../models/ImportCommonOrganizationLearnersJob.js';
 import { ImportOrganizationLearnerSet } from '../../models/ImportOrganizationLearnerSet.js';
 
 const validateOrganizationLearnersFile = async function ({
-  organizationId,
+  organizationImportId,
   organizationLearnerImportFormatRepository,
+  importCommonOrganizationLearnersJobRepository,
   organizationImportRepository,
   importStorage,
   dependencies = { getDataBuffer },
 }) {
   const errors = [];
 
-  const organizationImport = await organizationImportRepository.getLastByOrganizationId(organizationId);
+  const organizationImport = await organizationImportRepository.get(organizationImportId);
   try {
+    const organizationId = organizationImport.organizationId;
     const importFormat = await organizationLearnerImportFormatRepository.get(organizationId);
 
     const readableStream = await importStorage.readFile({ filename: organizationImport.filename });
@@ -29,6 +32,9 @@ const validateOrganizationLearnersFile = async function ({
     });
 
     learnerSet.addLearners(learners);
+    await importCommonOrganizationLearnersJobRepository.performAsync(
+      new ImportCommonOrganizationLearnersJob({ organizationImportId }),
+    );
   } catch (error) {
     if (Array.isArray(error)) {
       errors.push(...error);
