@@ -1,10 +1,10 @@
-import { action } from '@ember/object';
+import {action} from '@ember/object';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
+import {tracked} from '@glimmer/tracking';
 
 import didRender from '../modifiers/did-render';
 
-const ROBOT_IMAGE_OFFSET = 68;
+const ROBOT_IMAGE_OFFSET = 52;
 
 export default class RobotDialog extends Component {
   @tracked resizeObserver;
