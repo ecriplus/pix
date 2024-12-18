@@ -15,6 +15,7 @@ import {
   extractLocaleFromRequest,
   extractUserIdFromRequest,
 } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { config } from '../../config.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { AssessmentEndedError } from '../../domain/errors.js';
 import { Examiner } from '../../domain/models/Examiner.js';
@@ -99,7 +100,10 @@ const completeAssessment = async function (request) {
     const assessment = await usecases.completeAssessment({ assessmentId, locale });
     await usecases.handleBadgeAcquisition({ assessment });
     await usecases.handleStageAcquisition({ assessment });
-    if (assessment.userId) await questUsecases.rewardUser({ userId: assessment.userId });
+    if (assessment.userId && config.featureToggles.isQuestEnabled) {
+      await questUsecases.rewardUser({ userId: assessment.userId });
+    }
+
     await devcompUsecases.handleTrainingRecommendation({ assessment, locale });
   });
 

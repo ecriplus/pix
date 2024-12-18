@@ -5,6 +5,7 @@ import { usecases as certificationUsecases } from '../../../../../src/certificat
 import { usecases as devcompUsecases } from '../../../../../src/devcomp/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { assessmentController } from '../../../../../src/shared/application/assessments/assessment-controller.js';
+import { config } from '../../../../../src/shared/config.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | assessment-controller', function () {
@@ -111,8 +112,21 @@ describe('Unit | Controller | assessment-controller', function () {
       });
     });
 
+    it('should not call the rewardUser usecase if the questEnabled flag is false', async function () {
+      // given
+      config.featureToggles.isQuestEnabled = false;
+      usecases.completeAssessment.resolves({ userId: 12 });
+
+      // when
+      await assessmentController.completeAssessment({ params: { id: assessmentId } });
+
+      // then
+      expect(questUsecases.rewardUser).to.have.not.been.called;
+    });
+
     it('should call the rewardUser use case if there is a userId', async function () {
       // given
+      config.featureToggles.isQuestEnabled = true;
       usecases.completeAssessment.resolves({ userId: 12 });
 
       // when
