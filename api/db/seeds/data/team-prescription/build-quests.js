@@ -1,9 +1,14 @@
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import { REWARD_TYPES } from '../../../../src/quest/domain/constants.js';
 import { COMPARISON } from '../../../../src/quest/domain/models/Quest.js';
-import { Assessment, CampaignParticipationStatuses } from '../../../../src/shared/domain/models/index.js';
+import { Assessment, CampaignParticipationStatuses, Membership } from '../../../../src/shared/domain/models/index.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/temporary-storage/index.js';
-import { AEFE_TAG, FEATURE_ATTESTATIONS_MANAGEMENT_ID, USER_ID_ADMIN_ORGANIZATION } from '../common/constants.js';
+import {
+  AEFE_TAG,
+  FEATURE_ATTESTATIONS_MANAGEMENT_ID,
+  USER_ID_ADMIN_ORGANIZATION,
+  USER_ID_MEMBER_ORGANIZATION,
+} from '../common/constants.js';
 import { TARGET_PROFILE_BADGES_STAGES_ID } from './constants.js';
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
@@ -35,7 +40,7 @@ const USERS = [
     email: 'attestation-blank@example.net',
   },
 ];
-const ORGANIZATION = { name: 'attestation', type: 'SCO', isManagingStudents: true };
+const ORGANIZATION = { name: 'Attestation', type: 'SCO', isManagingStudents: true };
 const CAMPAIGN = [
   { code: 'ATTEST001', multipleSendings: true, name: 'campagne attestation 1' },
   { code: 'ATTEST002', multipleSendings: true, name: 'campagne attestation 2' },
@@ -276,8 +281,15 @@ export const buildQuests = async (databaseBuilder) => {
   // Add admin-orga@example.net as Admin in organization
   databaseBuilder.factory.buildMembership({
     organizationId: organization.id,
-    organizationRole: 'ADMIN',
+    organizationRole: Membership.roles.ADMIN,
     userId: USER_ID_ADMIN_ORGANIZATION,
+  });
+
+  // Add member-orga@example.net as Member in organization
+  databaseBuilder.factory.buildMembership({
+    organizationId: organization.id,
+    organizationRole: Membership.roles.MEMBER,
+    userId: USER_ID_MEMBER_ORGANIZATION,
   });
 
   // Associate attestation feature to organization

@@ -42,8 +42,8 @@ const register = async function (server) {
       config: {
         pre: [
           {
-            method: securityPreHandlers.checkUserBelongsToOrganization,
-            assign: 'checkUserBelongsToOrganization',
+            method: securityPreHandlers.checkUserIsAdminInOrganization,
+            assign: 'checkUserIsAdminInOrganization',
           },
           {
             method: securityPreHandlers.makeCheckOrganizationHasFeature(
