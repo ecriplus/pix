@@ -26,6 +26,7 @@ export default class ModulixNavbar extends Component {
   @action
   openSidebar() {
     this.sidebarOpened = true;
+    this.args.onSidebarOpen();
   }
 
   @action

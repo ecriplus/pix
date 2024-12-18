@@ -197,9 +197,26 @@ export default class ModulePassage extends Component {
   }
 
   @action
+  async onSidebarOpen() {
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Modulix',
+      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-name': `Click sur le bouton Étape ${this.currentPassageStep} sur ${this.displayableGrains.length} de la barre de navigation`,
+    });
+  }
+
+  @action
   async goToGrain(grainId) {
     const element = document.getElementById(`grain_${grainId}`);
     this.modulixAutoScroll.focusAndScroll(element);
+
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Modulix',
+      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-name': `Click sur le grain ${grainId} de la barre de navigation`,
+    });
   }
 
   <template>
@@ -210,6 +227,7 @@ export default class ModulePassage extends Component {
       @module={{@module}}
       @grainsToDisplay={{this.grainsToDisplay}}
       @goToGrain={{this.goToGrain}}
+      @onSidebarOpen={{this.onSidebarOpen}}
     />
 
     <main class="module-passage">

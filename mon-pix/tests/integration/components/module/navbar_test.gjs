@@ -91,11 +91,18 @@ module('Integration | Component | Module | Navbar', function (hooks) {
     test('should display sidebar', async function (assert) {
       // given
       const module = createModule(this.owner);
+      const openSidebarStub = sinon.stub();
 
       //  when
       const screen = await render(
         <template>
-          <ModulixNavbar @currentStep={{1}} @totalSteps={{3}} @module={{module}} @grainsToDisplay={{module.grains}} />
+          <ModulixNavbar
+            @currentStep={{1}}
+            @totalSteps={{3}}
+            @module={{module}}
+            @grainsToDisplay={{module.grains}}
+            @onSidebarOpen={{openSidebarStub}}
+          />
         </template>,
       );
       const sidebarOpenButton = screen.getByRole('button', { name: 'Afficher les étapes du module' });
@@ -111,6 +118,7 @@ module('Integration | Component | Module | Navbar', function (hooks) {
       // given
       const module = createModule(this.owner);
       const threeFirstGrains = module.grains.slice(0, -1);
+      const openSidebarStub = sinon.stub();
 
       //  when
       const screen = await render(
@@ -120,6 +128,7 @@ module('Integration | Component | Module | Navbar', function (hooks) {
             @totalSteps={{4}}
             @module={{module}}
             @grainsToDisplay={{threeFirstGrains}}
+            @onSidebarOpen={{openSidebarStub}}
           />
         </template>,
       );
@@ -150,6 +159,7 @@ module('Integration | Component | Module | Navbar', function (hooks) {
         const module = createModule(this.owner);
         const threeFirstGrains = module.grains.slice(0, -1);
         const goToGrainSpy = sinon.spy();
+        const openSidebarStub = sinon.stub();
 
         //  when
         await render(
@@ -160,6 +170,7 @@ module('Integration | Component | Module | Navbar', function (hooks) {
               @module={{module}}
               @grainsToDisplay={{threeFirstGrains}}
               @goToGrain={{goToGrainSpy}}
+              @onSidebarOpen={{openSidebarStub}}
             />
           </template>,
         );
@@ -178,6 +189,7 @@ module('Integration | Component | Module | Navbar', function (hooks) {
         const module = createModule(this.owner);
         const threeFirstGrains = module.grains.slice(0, -1);
         const goToGrainMock = sinon.mock();
+        const openSidebarStub = sinon.stub();
 
         //  when
         const screen = await render(
@@ -188,6 +200,7 @@ module('Integration | Component | Module | Navbar', function (hooks) {
               @module={{module}}
               @grainsToDisplay={{threeFirstGrains}}
               @goToGrain={{goToGrainMock}}
+              @onSidebarOpen={{openSidebarStub}}
             />
           </template>,
         );
