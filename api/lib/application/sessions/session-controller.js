@@ -1,7 +1,4 @@
 import * as juryCertificationSummaryRepository from '../../../src/certification/session-management/infrastructure/repositories/jury-certification-summary-repository.js';
-import { SessionPublicationBatchError } from '../../../src/shared/application/http-errors.js';
-import { logger } from '../../../src/shared/infrastructure/utils/logger.js';
-import { usecases } from '../../domain/usecases/index.js';
 import * as juryCertificationSummarySerializer from '../../infrastructure/serializers/jsonapi/jury-certification-summary-serializer.js';
 
 const getJuryCertificationSummaries = async function (
@@ -23,39 +20,8 @@ const getJuryCertificationSummaries = async function (
   return dependencies.juryCertificationSummarySerializer.serialize(juryCertificationSummaries, pagination);
 };
 
-const publishInBatch = async function (request, h) {
-  const sessionIds = request.payload.data.attributes.ids;
-  const i18n = request.i18n;
-
-  const result = await usecases.publishSessionsInBatch({
-    sessionIds,
-    i18n,
-  });
-  if (result.hasPublicationErrors()) {
-    _logSessionBatchPublicationErrors(result);
-    throw new SessionPublicationBatchError(result.batchId);
-  }
-  return h.response().code(204);
-};
-
 const sessionController = {
   getJuryCertificationSummaries,
-  publishInBatch,
 };
 
 export { sessionController };
-
-function _logSessionBatchPublicationErrors(result) {
-  logger.warn(`One or more error occurred when publishing session in batch ${result.batchId}`);
-
-  const sessionAndError = result.publicationErrors;
-  for (const sessionId in sessionAndError) {
-    logger.warn(
-      {
-        batchId: result.batchId,
-        sessionId,
-      },
-      sessionAndError[sessionId].message,
-    );
-  }
-}

@@ -97,7 +97,6 @@ import { ScoringSimulation } from './ScoringSimulation.js';
 import { ScoringSimulationContext } from './ScoringSimulationContext.js';
 import { ScoringSimulationDataset } from './ScoringSimulationDataset.js';
 import { ScoringSimulationResult } from './ScoringSimulationResult.js';
-import { SessionPublicationBatchResult } from './SessionPublicationBatchResult.js';
 import { Skill } from './Skill.js';
 import { Solution } from './Solution.js';
 import { Student } from './Student.js';
@@ -199,7 +198,6 @@ export {
   ScoringSimulationContext,
   ScoringSimulationDataset,
   ScoringSimulationResult,
-  SessionPublicationBatchResult,
   ShareableCertificate,
   Skill,
   Solution,
