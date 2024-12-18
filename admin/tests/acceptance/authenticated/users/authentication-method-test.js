@@ -92,7 +92,7 @@ module('Acceptance | authenticated/users | authentication-method', function (hoo
       await clickByName('Valider le déplacement');
 
       // then
-      assert.dom(screen.getByText("La méthode de connexion a bien été déplacé vers l'utilisateur 1")).exists();
+      assert.dom(screen.getByText("La méthode de connexion a bien été déplacée vers l'utilisateur 1")).exists();
       assert.dom(screen.getByText("L'utilisateur n'a plus de méthode de connexion Médiacentre")).exists();
       assert.dom(screen.getByLabelText("L'utilisateur n'a pas de méthode de connexion Médiacentre")).exists();
     });
@@ -126,7 +126,7 @@ module('Acceptance | authenticated/users | authentication-method', function (hoo
       await click(screen.getByRole('button', { name: 'Valider le déplacement' }));
 
       // then
-      assert.dom(screen.getByText("La méthode de connexion a bien été déplacé vers l'utilisateur 1")).exists();
+      assert.dom(screen.getByText("La méthode de connexion a bien été déplacée vers l'utilisateur 1")).exists();
       assert.dom(screen.getByText("L'utilisateur n'a plus de méthode de connexion Partenaire OIDC")).exists();
       assert.dom(screen.getByLabelText("L'utilisateur n'a pas de méthode de connexion Partenaire OIDC")).exists();
     });

@@ -1,4 +1,5 @@
 import EmberObject from '@ember/object';
+import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -10,6 +11,7 @@ module('Unit | Controller | authenticated/users/get/authentication-methods', fun
       test('should display error message when an 422 error occurred', async function (assert) {
         // given
         const identityProvider = 'POLE_EMPLOI';
+        const organizationName = 'Pole Emploi';
         const controller = this.owner.lookup('controller:authenticated.users.get.authentication-methods');
 
         const originUserId = 1;
@@ -43,12 +45,23 @@ module('Unit | Controller | authenticated/users/get/authentication-methods', fun
         };
         controller.pixToast.sendErrorNotification.resolves();
 
+        const store = this.owner.lookup('service:store');
+        const oidcPartner = store.createRecord('oidc-identity-provider', {
+          code: identityProvider,
+          organizationName: organizationName,
+          shouldCloseSession: false,
+          source: 'idp',
+        });
+        class OidcIdentityProvidersStub extends Service {
+          list = [oidcPartner];
+        }
+        this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
+
         // when
         await controller.reassignAuthenticationMethod({ targetUserId, identityProvider });
-
         // then
         sinon.assert.calledWith(controller.pixToast.sendErrorNotification, {
-          message: controller.ERROR_MESSAGES.STATUS_422.POLE_EMPLOI,
+          message: `L'utilisateur a déjà une méthode de connexion ${organizationName}`,
         });
         assert.ok(true);
       });
