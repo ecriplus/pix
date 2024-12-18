@@ -16,8 +16,8 @@ export const rewardUser = async ({
   }
 
   const eligibilities = await eligibilityRepository.find({ userId });
-
   const rewards = await rewardRepository.getByUserId({ userId });
+
   const rewardIds = rewards.map((reward) => reward.rewardId);
 
   for (const quest of quests) {
@@ -36,6 +36,7 @@ export const rewardUser = async ({
 
     if (userHasSucceedQuest) {
       await rewardRepository.reward({ userId, rewardId: quest.rewardId });
+      rewardIds.push(quest.rewardId);
     }
   }
 };
