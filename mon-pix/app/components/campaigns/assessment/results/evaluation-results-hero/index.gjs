@@ -21,6 +21,7 @@ export default class EvaluationResultsHero extends Component {
   @service router;
   @service store;
   @service tabManager;
+  @service featureToggles;
 
   @tracked hasGlobalError = false;
   @tracked isButtonLoading = false;
@@ -48,6 +49,10 @@ export default class EvaluationResultsHero extends Component {
     return (
       hasCustomContent && (this.args.campaign.isSimplifiedAccess || this.args.campaignParticipationResult.isShared)
     );
+  }
+
+  get displayQuestResult() {
+    return this.featureToggles.featureToggles?.isQuestEnabled && this.hasQuestResults;
   }
 
   get hasQuestResults() {
@@ -174,7 +179,7 @@ export default class EvaluationResultsHero extends Component {
           </div>
         {{/if}}
 
-        {{#if this.hasQuestResults}}
+        {{#if this.displayQuestResult}}
           <AttestationResult @results={{@questResults}} @onError={{(fn this.setGlobalError true)}} />
         {{/if}}
 

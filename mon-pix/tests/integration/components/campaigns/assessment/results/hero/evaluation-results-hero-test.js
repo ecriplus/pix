@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
@@ -45,6 +46,93 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       assert.strictEqual(masteryRateElement.textContent, '76%');
 
       assert.dom(screen.getByText(t('pages.skill-review.hero.mastery-rate'))).exists();
+    });
+  });
+
+  module('display quests results', function () {
+    module('isQuestEnabled feature flag', function () {
+      test('it should not display the quest result if the flag is false', async function (assert) {
+        // given
+        class FeatureTogglesStub extends Service {
+          featureToggles = { isQuestEnabled: false };
+        }
+        this.owner.register('service:featureToggles', FeatureTogglesStub);
+
+        this.set('campaign', {
+          customResultPageText: 'My custom result page text',
+          organizationId: 1,
+        });
+
+        this.set('campaignParticipationResult', {
+          campaignParticipationBadges: [],
+          isShared: false,
+          canImprove: false,
+          masteryRate: 0.75,
+          reachedStage: { acquired: 4, total: 5 },
+        });
+
+        this.set('questResults', [
+          {
+            obtained: true,
+            profileRewardId: 12,
+            reward: { key: 'SIXTH_GRADE' },
+          },
+        ]);
+
+        // when
+        const screen = await render(
+          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
+  @campaign={{this.campaign}}
+  @questResults={{this.questResults}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
+/>`,
+        );
+
+        // then
+        assert.notOk(screen.queryByText(t('components.campaigns.attestation-result.obtained')));
+      });
+
+      test('it should display the quest result if the flag is true', async function (assert) {
+        // given
+        class FeatureTogglesStub extends Service {
+          featureToggles = { isQuestEnabled: true };
+        }
+        this.owner.register('service:featureToggles', FeatureTogglesStub);
+
+        this.set('campaign', {
+          customResultPageText: 'My custom result page text',
+          organizationId: 1,
+        });
+
+        this.set('campaignParticipationResult', {
+          campaignParticipationBadges: [],
+          isShared: false,
+          canImprove: false,
+          masteryRate: 0.75,
+          reachedStage: { acquired: 4, total: 5 },
+        });
+        this.set('questResults', [
+          {
+            obtained: true,
+            profileRewardId: 12,
+            reward: { key: 'SIXTH_GRADE' },
+          },
+        ]);
+
+        // when
+        const screen = await render(
+          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
+  @campaign={{this.campaign}}
+  @questResults={{this.questResults}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+  @isSharableCampaign={{true}}
+/>`,
+        );
+
+        // then
+        assert.ok(screen.getByText(t('components.campaigns.attestation-result.obtained')));
+      });
     });
   });
 
