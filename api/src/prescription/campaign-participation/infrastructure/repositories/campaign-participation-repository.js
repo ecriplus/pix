@@ -37,6 +37,7 @@ const updateWithSnapshot = async function (campaignParticipation) {
     userId: campaignParticipation.userId,
     snappedAt: campaignParticipation.sharedAt,
     knowledgeElements,
+    campaignParticipationId: campaignParticipation.id,
   });
 };
 

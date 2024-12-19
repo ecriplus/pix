@@ -18,13 +18,14 @@ function _toKnowledgeElementCollection({ snapshot } = {}) {
   );
 }
 
-const save = async function ({ userId, snappedAt, knowledgeElements }) {
+const save = async function ({ userId, snappedAt, knowledgeElements, campaignParticipationId }) {
   try {
     const knexConn = DomainTransaction.getConnection();
     return await knexConn('knowledge-element-snapshots').insert({
       userId,
       snappedAt,
       snapshot: JSON.stringify(knowledgeElements),
+      campaignParticipationId,
     });
   } catch (error) {
     if (knexUtils.isUniqConstraintViolated(error)) {
@@ -78,7 +79,7 @@ const findMultipleUsersFromUserIdsAndSnappedAtDates = async function (userIdsAnd
   });
 
   const results = await knex
-    .select('userId', 'snapshot', 'snappedAt')
+    .select('userId', 'snapshot', 'snappedAt', 'campaignParticipationId')
     .from('knowledge-element-snapshots')
     .whereIn(['knowledge-element-snapshots.userId', 'snappedAt'], params);
 
@@ -89,6 +90,7 @@ const findMultipleUsersFromUserIdsAndSnappedAtDates = async function (userIdsAnd
       userId: result.userId,
       snappedAt: result.snappedAt,
       knowledgeElements: mappedKnowledgeElements,
+      campaignParticipationId: result.campaignParticipationId,
     });
   });
 };

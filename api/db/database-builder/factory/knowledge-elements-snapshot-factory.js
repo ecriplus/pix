@@ -1,7 +1,7 @@
 import { databaseBuffer } from '../database-buffer.js';
 import { buildKnowledgeElement } from './build-knowledge-element.js';
 
-function buildSnapshot({ id, userId, snappedAt, knowledgeElementsAttributes }) {
+function buildSnapshot({ id, userId, snappedAt, knowledgeElementsAttributes, campaignParticipationId }) {
   const knowledgeElements = knowledgeElementsAttributes.map((attributes) => buildKnowledgeElement(attributes));
 
   const values = {
@@ -9,6 +9,7 @@ function buildSnapshot({ id, userId, snappedAt, knowledgeElementsAttributes }) {
     userId,
     snappedAt,
     snapshot: JSON.stringify(knowledgeElements),
+    campaignParticipationId,
   };
 
   return databaseBuffer.pushInsertable({
