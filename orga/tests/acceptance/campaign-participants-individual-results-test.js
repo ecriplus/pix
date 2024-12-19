@@ -27,7 +27,7 @@ module('Acceptance | Campaign Participants Individual Results', function (hooks)
 
   test('it should go to participant details', async function (assert) {
     // given
-    const organizationId = user.memberships.models.firstObject.organizationId;
+    const organizationId = user.memberships.models[0].organizationId;
     server.create('campaign', { id: 1 });
     server.create('campaignProfile', { campaignId: 1, campaignParticipationId: 1 });
     server.create('organization-participant', { id: 1, organizationId });
