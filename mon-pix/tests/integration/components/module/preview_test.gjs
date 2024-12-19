@@ -30,5 +30,15 @@ module('Integration | Component | Module | Preview', function (hooks) {
     assert.dom(screen.queryByRole('textbox', { name: 'Contenu du Module' })).doesNotExist();
   });
 
+  test('should display json textarea on button click', async function (assert) {
+    //  given
+    const screen = await render(<template><ModulixPreview /></template>);
+    const button = screen.getByRole('button', { name: 'Afficher le JSON' });
 
+    // when
+    await click(button);
+
+    // then
+    assert.dom(screen.queryByRole('textbox', { name: 'Contenu du Module' })).exists();
+  });
 });

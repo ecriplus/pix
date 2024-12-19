@@ -132,6 +132,11 @@ export default class ModulixPreview extends Component {
     return this.formattedModule.transitionTexts.find((transition) => transition.grainId === grainId);
   }
 
+  @action
+  toggleModuleCodeEditor() {
+    this.moduleCodeDisplayed = !this.moduleCodeDisplayed;
+  }
+
   <template>
     {{pageTitle this.formattedModule.title}}
 
@@ -176,7 +181,11 @@ export default class ModulixPreview extends Component {
           Modulix Editor
         </PixButtonLink>
 
-        {{#if this.moduleCodeDisplayed }}
+        <PixButton @triggerAction={{this.toggleModuleCodeEditor}}>
+          Afficher le JSON
+        </PixButton>
+
+        {{#if this.moduleCodeDisplayed}}
           <PixTextarea
             class="module-preview-form__textarea"
             @id="module"
