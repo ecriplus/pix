@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import createGlimmerComponent from 'mon-pix/tests/helpers/create-glimmer-component';
+import PixWindow from 'mon-pix/utils/pix-window';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -141,6 +142,36 @@ module('Unit | Component | Companion | Blocker', function (hooks) {
         sinon.assert.calledWith(removeEventListenerStub, 'block', onBlock);
         assert.ok(true);
       });
+    });
+  });
+
+  module('#refreshPage', function (hooks) {
+    let reloadStub;
+
+    hooks.beforeEach(function () {
+      reloadStub = sinon.stub(PixWindow, 'reload');
+    });
+
+    hooks.afterEach(function () {
+      sinon.restore();
+    });
+
+    test('should refresh the page', async function (assert) {
+      // given
+      const startCheckingExtensionIsEnabledStub = sinon.stub();
+      class PixCompanionStub extends Service {
+        startCheckingExtensionIsEnabled = startCheckingExtensionIsEnabledStub;
+        isExtensionEnabled = true;
+      }
+      this.owner.register('service:pix-companion', PixCompanionStub);
+      const component = createGlimmerComponent('companion/blocker');
+
+      // when
+      await component.refreshPage();
+
+      // then
+      sinon.assert.calledOnce(reloadStub);
+      assert.ok(true);
     });
   });
 });

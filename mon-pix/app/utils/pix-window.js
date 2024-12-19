@@ -10,10 +10,15 @@ function getLocationHref() {
   return window.location.href;
 }
 
+function reload() {
+  window.location.reload(true);
+}
+
 const PixWindow = {
   getLocationHash,
   getLocationHostname,
   getLocationHref,
+  reload,
 };
 
 export default PixWindow;
