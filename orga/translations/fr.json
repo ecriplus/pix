@@ -1475,10 +1475,10 @@
         "label": "Sur le sujet vos participants ont obtenu un niveau de {userLevel} sur un niveau maximum atteignable de {tubeLevel}."
       },
       "level": {
-        "advanced": "avancé",
-        "expert": "expert",
-        "independent": "indépendant",
-        "novice": "novice"
+        "advanced": "Avancé",
+        "expert": "Expert",
+        "independent": "Indépendant",
+        "novice": "Novice"
       },
       "select-label": "Domaine",
       "table": {

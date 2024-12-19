@@ -18,7 +18,7 @@ export default class Statistics extends Component {
 
   get analysisByTubes() {
     return this.args.model.data.sort(
-      (a, b) => a.competence_code.localeCompare(b.competence_code) || a.sujet.localeCompare(b.sujet),
+      (a, b) => a.competence_code.localeCompare(b.competence_code) || a.sujet?.localeCompare(b.sujet),
     );
   }
 
