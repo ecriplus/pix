@@ -2,7 +2,7 @@
   <SchoolCodeError @refreshAction={{this.refreshModel}} />
 {{else}}
   {{page-title (t "pages.school.division-list.page-title")}}
-  <div class="school main-selection-content">
+  <div class="school">
     <RobotDialog>
       <Bubble @message={{t "pages.school.division-list.welcome" schoolName=@model.name}} />
     </RobotDialog>
