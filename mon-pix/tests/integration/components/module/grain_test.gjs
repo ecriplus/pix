@@ -349,6 +349,32 @@ module('Integration | Component | Module | Grain', function (hooks) {
       });
     });
 
+    module('when element is an expand', function () {
+      test('should display an "Expand" element', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const title = 'An Expand title';
+        const expandElement = {
+          title,
+          content: '<p>My Content</p>',
+          type: 'expand',
+        };
+        const grain = store.createRecord('grain', {
+          title: 'Grain title',
+          components: [{ type: 'element', element: expandElement }],
+        });
+        this.set('grain', grain);
+
+        // when
+        const screen = await render(hbs`
+          <Module::Grain @grain={{this.grain}} />`);
+
+        // then
+        const details = screen.getByRole('group');
+        assert.dom(details).exists();
+      });
+    });
+
     module('when all elements are answered', function () {
       test('should not display skip button', async function (assert) {
         // given
