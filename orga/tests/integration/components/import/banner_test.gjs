@@ -200,14 +200,15 @@ module('Integration | Component | Import::Banner', function (hooks) {
   });
 
   module('errors', function () {
-    test('display validation error banner when validation failed', async function (assert) {
+    test('display validation error banner when validation failed (fix)', async function (assert) {
       const store = this.owner.lookup('service:store');
       const createdAt = new Date(2023, 1, 10);
       const organizationImportDetail = store.createRecord('organization-import-detail', {
         status: 'VALIDATION_ERROR',
         createdAt,
         createdBy: { firstName: 'Dark', lastName: 'Vador' },
-        errors: [{ code: 'UAI_MISMATCHED', meta: {} }],
+        errors: [{ meta: [{ code: 'UAI_MISMATCHED' }], name: 'AggregateImportError' }],
+        hasFixableErrors: true,
       });
       // when
       const isLoading = false;
@@ -226,6 +227,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
           exact: false,
         }),
       );
+      assert.ok(screen.getByRole('link', { name: t('pages.organization-participants-import.banner.anchor-error') }));
       assert.ok(
         screen.getByText(
           t('pages.organization-participants-import.banner.upload-completed', {
@@ -237,17 +239,23 @@ module('Integration | Component | Import::Banner', function (hooks) {
         ),
       );
 
-      assert.ok(screen.getByText(t('pages.organization-participants-import.banner.error-text'), { exact: false }));
+      assert.ok(screen.getByText(t('pages.organization-participants-import.banner.fix-error-text'), { exact: false }));
     });
 
-    test('display import error banner when import failed', async function (assert) {
+    test('display import error banner when import failed (retry)', async function (assert) {
       const store = this.owner.lookup('service:store');
       const createdAt = new Date(2023, 1, 10);
       const organizationImportDetail = store.createRecord('organization-import-detail', {
         status: 'IMPORT_ERROR',
         createdAt,
         createdBy: { firstName: 'Dark', lastName: 'Vador' },
-        errors: [{ code: 'ERROR', meta: {} }],
+        errors: [
+          {
+            name: 'OrganizationLearnersCouldNotBeSavedError',
+            message: 'An error occurred during process',
+          },
+        ],
+        hasFixableErrors: false,
       });
       // when
       const isLoading = false;
@@ -262,6 +270,9 @@ module('Integration | Component | Import::Banner', function (hooks) {
           exact: false,
         }),
       );
+      assert.notOk(
+        screen.queryByRole('link', { name: t('pages.organization-participants-import.banner.anchor-error') }),
+      );
       assert.ok(
         screen.getByText(
           t('pages.organization-participants-import.banner.upload-completed', {
@@ -272,7 +283,9 @@ module('Integration | Component | Import::Banner', function (hooks) {
           { exact: false },
         ),
       );
-      assert.ok(screen.getByText(t('pages.organization-participants-import.banner.error-text'), { exact: false }));
+      assert.ok(
+        screen.getByText(t('pages.organization-participants-import.banner.retry-error-text'), { exact: false }),
+      );
     });
   });
 
@@ -285,6 +298,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
         createdAt,
         createdBy: { firstName: 'Dark', lastName: 'Vador' },
         errors: [{ code: 'ERROR', meta: {} }],
+        hasFixableErrors: true,
       });
       // when
       const isLoading = false;

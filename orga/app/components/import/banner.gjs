@@ -63,7 +63,7 @@ export default class ImportBanner extends Component {
   }
 
   get anchorMessage() {
-    if (this.args.organizationImportDetail?.hasError) {
+    if (this.args.organizationImportDetail?.hasFixableErrors) {
       return this.intl.t('pages.organization-participants-import.banner.anchor-error');
     }
     return null;
@@ -87,7 +87,9 @@ export default class ImportBanner extends Component {
 
   get actionMessage() {
     if (this.args.organizationImportDetail?.hasError)
-      return this.intl.t('pages.organization-participants-import.banner.error-text');
+      if (this.args.organizationImportDetail?.hasFixableErrors)
+        return this.intl.t('pages.organization-participants-import.banner.fix-error-text');
+      else return this.intl.t('pages.organization-participants-import.banner.retry-error-text');
     return this.intl.t('pages.organization-participants-import.banner.in-progress-text');
   }
 

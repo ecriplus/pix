@@ -4,7 +4,7 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function (organizationImportDetail, meta) {
   return new Serializer('organization-import-detail', {
-    attributes: ['id', 'status', 'errors', 'createdBy', 'createdAt', 'updatedAt'],
+    attributes: ['id', 'status', 'errors', 'hasFixableErrors', 'createdBy', 'createdAt', 'updatedAt'],
     meta,
   }).serialize(organizationImportDetail);
 };

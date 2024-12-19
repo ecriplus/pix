@@ -5,6 +5,7 @@ export default class OrganizationImportDetail extends Model {
   @attr('date') createdAt;
   @attr('date') updatedAt;
   @attr() errors;
+  @attr() hasFixableErrors;
   @attr() createdBy;
 
   get hasError() {
