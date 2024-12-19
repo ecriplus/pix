@@ -55,6 +55,7 @@
 
 .previous-button {
   width: fit-content;
+  margin-bottom: var(--pix-spacing-6x);
 
   @extend %pix-body-s;
 }

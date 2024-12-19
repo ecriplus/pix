@@ -5,10 +5,10 @@
       @id="email"
       type="email"
       @value={{@email}}
-      class="invite-form__email-field"
       aria-required="true"
       required="required"
       {{on "change" @onUpdateEmail}}
+      rows="3"
     >
       <:label>{{t "pages.team-invite.input-label"}}</:label>
     </PixTextarea>

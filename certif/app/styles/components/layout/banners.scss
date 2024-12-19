@@ -1,3 +1,15 @@
 .banners {
-  margin-bottom: var(--pix-spacing-6x);
+  margin-bottom: 0;
+
+  &:first-child {
+    margin-top: var(--pix-spacing-6x);
+  }
+
+  @include device-is('tablet') {
+    margin-bottom: var(--pix-spacing-6x);
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
 }

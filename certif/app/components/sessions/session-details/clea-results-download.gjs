@@ -39,7 +39,11 @@ export default class SessionDetailsCleaResultsDownload extends Component {
             {{t 'pages.sessions.detail.panel-clea.description'}}
             <a class='link' href='https://cleanumerique.org/' target='_blank' rel='noopener noreferrer'>
               {{t 'pages.sessions.detail.panel-clea.link-text'}}
-              <PixIcon @name='link' @ariaHidden={{true}} class='session-details__clea-results-link-icon' />
+              <PixIcon
+                @name='openNew'
+                @title={{t 'navigation.external-link-title'}}
+                class='session-details__clea-results-link-icon'
+              />
             </a>
           </p>
 

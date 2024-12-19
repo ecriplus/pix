@@ -63,7 +63,7 @@ export default class SessionDetails extends Component {
   }
 
   <template>
-    <PixReturnTo @route='authenticated.sessions' class='previous-button'>
+    <PixReturnTo @route='authenticated.sessions' class='previous-button hide-on-mobile'>
       {{t 'pages.sessions.actions.return'}}
     </PixReturnTo>
     <SessionDetailsHeader

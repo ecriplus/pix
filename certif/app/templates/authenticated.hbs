@@ -1,13 +1,16 @@
-<PixAppLayout @variant="certif" class="authenticated-layout">
-  <Layout::Sidebar />
+<PixAppLayout @variant="certif">
+  <:navigation>
+    <Layout::Sidebar />
+  </:navigation>
 
-  <div class="authenticated">
+  <:main>
     <main>
       <Layout::Banners />
-
       {{outlet}}
     </main>
+  </:main>
 
+  <:footer>
     <Layout::Footer />
-  </div>
+  </:footer>
 </PixAppLayout>

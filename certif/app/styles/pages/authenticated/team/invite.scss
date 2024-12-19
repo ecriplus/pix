@@ -1,13 +1,7 @@
 .team-invite-page {
   @extend %pix-body-s;
 
-  margin-top: var(--pix-spacing-4x);
-
   &__form {
     margin-top: var(--pix-spacing-8x);
   }
-}
-
-.invite-form__email-field {
-  min-height: 70px;
 }

@@ -22,7 +22,9 @@ module('Integration | Component | sessions | session-details | clea-results-down
       const screen = await render(<template><SessionDetailsCleaResultsDownload @sessionId={{sessionId}} /></template>);
 
       // then
-      const pngDownloadLink = screen.getByRole('link', { name: t('pages.sessions.detail.panel-clea.link-text') });
+      const pngDownloadLink = screen.getByRole('link', {
+        name: `${t('pages.sessions.detail.panel-clea.link-text')} ${t('navigation.external-link-title')}`,
+      });
       assert.dom(pngDownloadLink).hasAttribute('href', 'https://cleanumerique.org/');
     });
   });

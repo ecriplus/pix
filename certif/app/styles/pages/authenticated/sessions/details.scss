@@ -8,7 +8,7 @@
 .session-details__header {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: var(--pix-spacing-3x);
 }
@@ -150,7 +150,6 @@
     margin: 0 0 8px;
     color: var(--pix-neutral-900);
     @extend %pix-title-xs;
-    font-weight: 500;
   }
 
   &__clea-results-download-description {
@@ -163,13 +162,13 @@
     width: 5rem;
     height: 3rem;
     margin-right: 16px;
-    fill: var(--pix-neutral-500);
+    color: var(--pix-neutral-500);
   }
 
   &__clea-results-link-icon {
-    width: 1.3rem;
-    height: 1.3rem;
-    fill: var(--pix-primary-500);
+    width: 1rem;
+    height: 1rem;
+    color: var(--pix-primary-500);
   }
 
   &__controls {
