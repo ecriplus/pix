@@ -75,6 +75,38 @@ module('Integration | Component | Statistics | Index', function (hooks) {
     assert.ok(screen.getByRole('cell', { name: t('pages.statistics.level.novice') }));
   });
 
+  test('it should display rows data when tube is null', async function (assert) {
+    //given
+    const model = {
+      data: [
+        {
+          domaine: '2. Communication et collaboration',
+          competence_code: '2.1',
+          competence: 'Foo',
+          sujet: undefined,
+          niveau_par_user: '1.30',
+          niveau_par_sujet: '1.50',
+        },
+        {
+          domaine: '3. Communication et collaboration',
+          competence_code: '3.1',
+          competence: 'Bar',
+          sujet: 'Gérer ses contacts',
+          niveau_par_user: '3.30',
+          niveau_par_sujet: '3.50',
+        },
+      ],
+    };
+
+    //when
+    const screen = await render(<template><Statistics @model={{model}} /></template>);
+
+    //then
+    assert.ok(screen.getByRole('cell', { name: '2.1 Foo' }));
+    assert.ok(screen.getByRole('cell', { name: '' }));
+    assert.ok(screen.getByRole('cell', { name: '3.1 Bar' }));
+    assert.ok(screen.getByRole('cell', { name: 'Gérer ses contacts' }));
+  });
   test('it should display table description', async function (assert) {
     //given
     const model = {
