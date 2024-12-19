@@ -46,13 +46,16 @@ b {
 }
 
 .app {
-  max-width: 1730px;
   margin: 20px;
 
   main {
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 40px);
+
+    .main-selection-content {
+      max-width: 1730px;
+    }
   }
 }
 

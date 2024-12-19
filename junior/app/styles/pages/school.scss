@@ -1,4 +1,7 @@
-.list {
+.school {
+  margin-left: 3rem;
+
+  .list {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -71,6 +74,7 @@
         width: 50%;
       }
     }
+  }
   }
 }
 

@@ -1,12 +1,15 @@
 {{page-title (t "pages.school.student-list.page-title")}}
-<RobotDialog>
-  <Bubble @message={{t "pages.school.student-list.find-name" division=@model.division}} />
-  <Bubble @message={{t "pages.school.student-list.back-to-divisions" backUrl=@model.schoolUrl}} />
-</RobotDialog>
-<div class="list">
-  {{#each @model.organizationLearners as |learner|}}
-    <PixButton @triggerAction={{fn this.identifyUser learner}} class="students__item">
-      <p>{{learner.displayName}}</p>
-    </PixButton>
-  {{/each}}
+<div class="school main-selection-content">
+
+  <RobotDialog>
+    <Bubble @message={{t "pages.school.student-list.find-name" division=@model.division}} />
+    <Bubble @message={{t "pages.school.student-list.back-to-divisions" backUrl=@model.schoolUrl}} />
+  </RobotDialog>
+  <div class="list">
+    {{#each @model.organizationLearners as |learner|}}
+      <PixButton @triggerAction={{fn this.identifyUser learner}} class="students__item">
+        <p>{{learner.displayName}}</p>
+      </PixButton>
+    {{/each}}
+  </div>
 </div>
