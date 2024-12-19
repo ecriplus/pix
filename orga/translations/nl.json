@@ -1470,10 +1470,10 @@
         "label": "Je deelnemers behaalden een {userLevel} op een maximaal haalbaar niveau van {tubeLevel}."
       },
       "level": {
-        "advanced": "geavanceerd",
-        "expert": "expert",
-        "independent": "onafhankelijk",
-        "novice": "beginnende"
+        "advanced": "Geavanceerd",
+        "expert": "Expert",
+        "independent": "Onafhankelijk",
+        "novice": "Beginnende"
       },
       "table": {
         "caption": "Deze tabel toont de resultaten van alle deelnemers per onderwerp. Voor elke regel wordt de vaardigheid, het onderwerp, het dekkingspercentage en het behaalde niveau aangegeven.",

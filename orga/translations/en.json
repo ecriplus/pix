@@ -1469,10 +1469,10 @@
         "label": "On the topic, your participants achieved a level of {userLevel} out of a maximum reachable level of {tubeLevel}."
       },
       "level": {
-        "advanced": "advanced",
-        "expert": "expert",
-        "independent": "independent",
-        "novice": "novice"
+        "advanced": "Advanced",
+        "expert": "Expert",
+        "independent": "Independent",
+        "novice": "Novice"
       },
       "select-label": "Domain",
       "table": {
