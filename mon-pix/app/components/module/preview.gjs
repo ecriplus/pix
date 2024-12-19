@@ -13,6 +13,8 @@ export default class ModulixPreview extends Component {
   @service store;
   @service modulixPreviewMode;
 
+  @tracked moduleCodeDisplayed = false;
+
   @tracked
   module = `{
   "id": "0000000a-0000-0bcd-e000-0f0000gh0000",
@@ -173,15 +175,18 @@ export default class ModulixPreview extends Component {
           {{! template-lint-disable "no-bare-strings" }}
           Modulix Editor
         </PixButtonLink>
-        <PixTextarea
-          class="module-preview-form__textarea"
-          @id="module"
-          @value={{this.module}}
-          @errorMessage={{this.errorMessage}}
-          {{on "change" this.updateModule}}
-        >
-          <:label>{{t "pages.modulix.preview.textarea-label"}}</:label>
-        </PixTextarea>
+
+        {{#if this.moduleCodeDisplayed }}
+          <PixTextarea
+            class="module-preview-form__textarea"
+            @id="module"
+            @value={{this.module}}
+            @errorMessage={{this.errorMessage}}
+            {{on "change" this.updateModule}}
+          >
+            <:label>{{t "pages.modulix.preview.textarea-label"}}</:label>
+          </PixTextarea>
+        {{/if}}
       </main>
     </div>
   </template>

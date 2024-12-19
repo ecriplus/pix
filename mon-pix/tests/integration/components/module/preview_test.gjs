@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import ModulixPreview from 'mon-pix/components/module/preview';
 import { module, test } from 'qunit';
 
@@ -20,4 +21,14 @@ module('Integration | Component | Module | Preview', function (hooks) {
     assert.dom(linkToModulixEditor).exists();
     assert.strictEqual(linkToModulixEditor.href, expectedUrl);
   });
+
+  test('should hide json textarea by default', async function (assert) {
+    //  when
+    const screen = await render(<template><ModulixPreview /></template>);
+
+    // then
+    assert.dom(screen.queryByRole('textbox', { name: 'Contenu du Module' })).doesNotExist();
+  });
+
+
 });
