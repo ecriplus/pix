@@ -1,5 +1,31 @@
 # Pix Changelog
 
+## v5.5.0 (19/12/2024)
+
+
+### :rocket: Amélioration
+- [#10831](https://github.com/1024pix/pix/pull/10831) [FEATURE] Ajouter le script pour rattraper les retard d'obtention des attestations (PIX-15510).
+- [#10857](https://github.com/1024pix/pix/pull/10857) [FEATURE] Rendre la documentation d’installation de Companion traduisible (PIX-15812).
+- [#10848](https://github.com/1024pix/pix/pull/10848) [FEATURE] Modifier le comportement du bouton de rafraîchissement lors d'un signalement (PIX-15726).
+- [#10787](https://github.com/1024pix/pix/pull/10787) [FEATURE] Script de migration des données CGUs de Pix Orga vers le nouveau modèle (PIX-15583).
+- [#10851](https://github.com/1024pix/pix/pull/10851) [FEATURE] Prendre en compte le feature toggle quest enabled (PIX-15789).
+- [#10830](https://github.com/1024pix/pix/pull/10830) [FEATURE] Suivre l'utilisation de la barre de navigation Modulix dans Matomo (PIX-15535)(PIX-14866).
+
+### :building_construction: Tech
+- [#10836](https://github.com/1024pix/pix/pull/10836) [TECH] Migration de composants en GJS (PIX-15766).
+- [#10855](https://github.com/1024pix/pix/pull/10855) [TECH] Supprimer l'action auto-merge local.
+
+### :bug: Correction
+- [#10850](https://github.com/1024pix/pix/pull/10850) [BUGFIX] Ne pas créer plusieurs récompenses de quêtes (PIX-15804).
+- [#10843](https://github.com/1024pix/pix/pull/10843) [BUGFIX] Problème d'affichage sur les leçons (PIX-15767).
+
+### :arrow_up: Montée de version
+- [#10856](https://github.com/1024pix/pix/pull/10856) [BUMP] Update dependency @1024pix/pix-ui to ^52.0.2 (certif).
+- [#10854](https://github.com/1024pix/pix/pull/10854) [BUMP] Update dependency @1024pix/pix-ui to ^51.6.1 (mon-pix).
+- [#10777](https://github.com/1024pix/pix/pull/10777) [BUMP] Update nginx Docker tag to v1.27.3.
+- [#10701](https://github.com/1024pix/pix/pull/10701) [BUMP] Update Node.js to v20.18.1.
+- [#10839](https://github.com/1024pix/pix/pull/10839) [BUMP] Update dependency @1024pix/pix-ui to v52 (certif) (PIX-15776).
+
 ## v5.4.0 (18/12/2024)
 
 
