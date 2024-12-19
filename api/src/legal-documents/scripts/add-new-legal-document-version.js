@@ -1,9 +1,7 @@
-import 'dotenv/config';
-
-import { usecases } from '../../src/legal-documents/domain/usecases/index.js';
-import { isoDateParser } from '../../src/shared/application/scripts/parsers.js';
-import { Script } from '../../src/shared/application/scripts/script.js';
-import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
+import { isoDateParser } from '../../shared/application/scripts/parsers.js';
+import { Script } from '../../shared/application/scripts/script.js';
+import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
+import { usecases } from '../domain/usecases/index.js';
 
 export class AddNewLegalDocumentVersion extends Script {
   constructor() {
