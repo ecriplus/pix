@@ -77,7 +77,12 @@ async function generateKnowledgeElementSnapshots(
         limitDate: sharedAt,
       });
       try {
-        await dependencies.knowledgeElementSnapshotRepository.save({ userId, snappedAt: sharedAt, knowledgeElements });
+        await dependencies.knowledgeElementSnapshotRepository.save({
+          userId,
+          snappedAt: sharedAt,
+          knowledgeElements,
+          campaignParticipationId: campaignParticipation.id,
+        });
       } catch (err) {
         if (!(err instanceof AlreadyExistingEntityError)) {
           throw err;

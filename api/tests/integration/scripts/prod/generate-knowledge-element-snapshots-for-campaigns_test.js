@@ -131,10 +131,13 @@ describe('Integration | Scripts | generate-knowledge-element-snapshots-for-campa
     it('should save snapshots', async function () {
       // given
       const concurrency = 1;
-      const campaignParticipationData = [{ userId: 1, sharedAt: new Date('2020-01-01') }];
+      const campaignParticipationData = [{ id: 1, userId: 1, sharedAt: new Date('2020-01-01') }];
       const expectedKnowledgeElements = ['someKnowledgeElements'];
       knowledgeElementRepositoryStub.findUniqByUserId
-        .withArgs({ userId: campaignParticipationData[0].userId, limitDate: campaignParticipationData[0].sharedAt })
+        .withArgs({
+          userId: campaignParticipationData[0].userId,
+          limitDate: campaignParticipationData[0].sharedAt,
+        })
         .resolves(expectedKnowledgeElements);
 
       // when
@@ -148,6 +151,7 @@ describe('Integration | Scripts | generate-knowledge-element-snapshots-for-campa
         userId: campaignParticipationData[0].userId,
         snappedAt: campaignParticipationData[0].sharedAt,
         knowledgeElements: expectedKnowledgeElements,
+        campaignParticipationId: campaignParticipationData[0].id,
       });
     });
   });
