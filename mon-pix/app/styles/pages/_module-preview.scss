@@ -2,7 +2,18 @@
   @extend .modulix;
 
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr;
+
+  &--with-editor {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: var(--pix-spacing-2x);
+    justify-content: flex-end;
+    padding: var(--pix-spacing-3x);
+  }
 
   &__passage {
     @extend .module-passage;

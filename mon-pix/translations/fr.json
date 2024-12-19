@@ -1622,6 +1622,7 @@
         }
       },
       "preview": {
+        "showJson": "Afficher le JSON",
         "textarea-label": "Contenu du Module"
       },
       "qcm": {

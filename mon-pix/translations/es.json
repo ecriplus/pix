@@ -1631,6 +1631,7 @@
         }
       },
       "preview": {
+        "showJson": "Show JSON",
         "textarea-label": "Contenido del módulo"
       },
       "qcm": {

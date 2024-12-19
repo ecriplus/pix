@@ -1,3 +1,4 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { on } from '@ember/modifier';
@@ -140,7 +141,23 @@ export default class ModulixPreview extends Component {
   <template>
     {{pageTitle this.formattedModule.title}}
 
-    <div class="module-preview">
+    <div class="module-preview__buttons">
+      <PixButton @triggerAction={{this.toggleModuleCodeEditor}}>
+        {{t "pages.modulix.preview.showJson"}}
+      </PixButton>
+
+      <PixButtonLink
+        @variant="secondary"
+        @href="https://1024pix.github.io/modulix-editor/"
+        @size="small"
+        target="_blank"
+      >
+        {{! template-lint-disable "no-bare-strings" }}
+        Modulix Editor
+      </PixButtonLink>
+    </div>
+
+    <div class="module-preview {{if this.moduleCodeDisplayed 'module-preview--with-editor'}}">
       <aside class="module-preview__passage">
         <div class="module-preview-passage__title">
           <h1>{{this.formattedModule.title}}</h1>
@@ -171,20 +188,6 @@ export default class ModulixPreview extends Component {
       </aside>
 
       <main class="module-preview__form">
-        <PixButtonLink
-          @variant="tertiary"
-          @href="https://1024pix.github.io/modulix-editor/"
-          @size="small"
-          target="_blank"
-        >
-          {{! template-lint-disable "no-bare-strings" }}
-          Modulix Editor
-        </PixButtonLink>
-
-        <PixButton @triggerAction={{this.toggleModuleCodeEditor}}>
-          Afficher le JSON
-        </PixButton>
-
         {{#if this.moduleCodeDisplayed}}
           <PixTextarea
             class="module-preview-form__textarea"
