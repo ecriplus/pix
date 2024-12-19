@@ -2,19 +2,19 @@ import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
 
-import { securityPreHandlers } from '../../../src/shared/application/security-pre-handlers.js';
-import { identifiersType } from '../../../src/shared/domain/types/identifiers-type.js';
+import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { sessionController } from './session-controller.js';
 
 const register = async function (server) {
   server.route([
     {
       method: 'GET',
-      path: '/api/admin/sessions/{id}/jury-certification-summaries',
+      path: '/api/admin/sessions/{sessionId}/jury-certification-summaries',
       config: {
         validate: {
           params: Joi.object({
-            id: identifiersType.sessionId,
+            sessionId: identifiersType.sessionId,
           }),
         },
         pre: [

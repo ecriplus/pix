@@ -1,6 +1,8 @@
 import * as sessionValidator from '../../shared/domain/validators/session-validator.js';
 import { usecases } from '../domain/usecases/index.js';
+import * as juryCertificationSummaryRepository from '../infrastructure/repositories/jury-certification-summary-repository.js';
 import * as jurySessionRepository from '../infrastructure/repositories/jury-session-repository.js';
+import * as juryCertificationSummarySerializer from '../infrastructure/serializers/jury-certification-summary-serializer.js';
 import * as jurySessionSerializer from '../infrastructure/serializers/jury-session-serializer.js';
 import * as sessionSerializer from '../infrastructure/serializers/session-serializer.js';
 
@@ -36,7 +38,27 @@ const getJurySession = async function (request, h, dependencies = { jurySessionS
   return dependencies.jurySessionSerializer.serialize(jurySession, hasSupervisorAccess);
 };
 
+const getJuryCertificationSummaries = async function (
+  request,
+  h,
+  dependencies = {
+    juryCertificationSummaryRepository,
+    juryCertificationSummarySerializer,
+  },
+) {
+  const { sessionId } = request.params;
+  const { page } = request.query;
+
+  const { juryCertificationSummaries, pagination } =
+    await dependencies.juryCertificationSummaryRepository.findBySessionIdPaginated({
+      sessionId,
+      page,
+    });
+  return dependencies.juryCertificationSummarySerializer.serialize(juryCertificationSummaries, pagination);
+};
+
 const sessionController = {
+  getJuryCertificationSummaries,
   findPaginatedFilteredJurySessions,
   get,
   getJurySession,

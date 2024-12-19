@@ -12,6 +12,7 @@ import * as finalize from './application/finalize-route.js';
 import * as finalizedSession from './application/finalized-session-route.js';
 import * as invigilatorKit from './application/invigilator-kit-route.js';
 import * as juryCertification from './application/jury-certification-route.js';
+import * as juryCertificationSummaries from './application/jury-certification-summaries-route.js';
 import * as juryComment from './application/jury-comment-route.js';
 import * as sessionForSupervising from './application/session-for-supervising-route.js';
 import * as sessionLiveAlert from './application/session-live-alert-route.js';
@@ -36,6 +37,7 @@ const certificationSessionRoutes = [
   invigilatorKit,
   juryCertification,
   juryComment,
+  juryCertificationSummaries,
   session,
   sessionSummaries,
   sessionForSupervising,
