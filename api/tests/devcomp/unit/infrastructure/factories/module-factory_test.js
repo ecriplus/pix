@@ -877,6 +877,53 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         const expectedFlashcards = moduleData.grains[0].components[0].element;
         validateFlashcards(flashcards, expectedFlashcards);
       });
+
+      it('should instantiate a Module with a ComponentElement which contains a Expand Element', function () {
+        // given
+        const givenData = {
+          id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          slug: 'title',
+          title: 'title',
+          isBeta: true,
+          details: {
+            image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+            description: 'Description',
+            duration: 5,
+            level: 'Débutant',
+            tabletSupport: 'comfortable',
+            objectives: ['Objective 1'],
+          },
+          grains: [
+            {
+              id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
+              type: 'lesson',
+              title: 'title',
+              components: [
+                {
+                  type: 'element',
+                  element: {
+                    id: '71de6394-ff88-4de3-8834-a40057a50ff4',
+                    type: 'expand',
+                    title: "Plus d'info sur la poésie",
+                    content: '<p>La poésie c’est cool</p>',
+                  },
+                },
+              ],
+            },
+          ],
+        };
+
+        // when
+        const module = ModuleFactory.build(givenData);
+
+        // then
+        const expand = module.grains[0].components[0].element;
+        const expectedExpand = givenData.grains[0].components[0].element;
+        expect(expand.id).to.equal(expectedExpand.id);
+        expect(expand.content).to.equal(expectedExpand.content);
+        expect(expand.title).to.equal(expectedExpand.title);
+        expect(expand.type).to.equal(expectedExpand.type);
+      });
     });
 
     describe('With ComponentStepper', function () {
