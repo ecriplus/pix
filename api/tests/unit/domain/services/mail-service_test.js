@@ -94,7 +94,7 @@ describe('Unit | Service | MailService', function () {
           from,
           to,
           template,
-          fromName: 'PIX - No contestar',
+          fromName: 'PIX - No responder',
           subject: mainTranslationsMapping.es['reset-password-demand-email'].subject,
           variables: {
             locale: SPANISH_SPOKEN,
@@ -689,7 +689,7 @@ describe('Unit | Service | MailService', function () {
       expect(options.subject).to.equal(
         translate({ phrase: 'verification-code-email.subject', locale: 'es' }, { code }),
       );
-      expect(options.fromName).to.equal('PIX - No contestar');
+      expect(options.fromName).to.equal('PIX - No responder');
       expect(options.template).to.equal('test-email-verification-code-template-id');
       expect(options.variables).to.include({
         homeName: 'pix.org',
