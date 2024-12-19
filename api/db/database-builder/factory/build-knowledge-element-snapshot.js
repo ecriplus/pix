@@ -9,6 +9,7 @@ const buildKnowledgeElementSnapshot = function ({
   userId,
   snappedAt = new Date('2020-01-01'),
   snapshot,
+  campaignParticipationId,
 } = {}) {
   const dateMinusOneDay = new Date(snappedAt.getTime() - 1000 * 60 * 60 * 24 * 7);
   userId = _.isUndefined(userId) ? buildUser().id : userId;
@@ -24,6 +25,7 @@ const buildKnowledgeElementSnapshot = function ({
     userId,
     snappedAt,
     snapshot,
+    campaignParticipationId,
   };
 
   return databaseBuffer.pushInsertable({

@@ -241,6 +241,7 @@ async function createAssessmentCampaign({
           userId,
           snappedAt: sharedAt,
           snapshot: JSON.stringify(keDataForSnapshot),
+          campaignParticipationId,
         });
 
         if (configCampaign.recommendedTrainingsIds?.length > 0) {
@@ -404,6 +405,7 @@ async function createProfilesCollectionCampaign({
         userId,
         snappedAt: sharedAt,
         snapshot: JSON.stringify(keDataForSnapshot),
+        campaignParticipationId,
       });
 
       await databaseBuilder.commit();
