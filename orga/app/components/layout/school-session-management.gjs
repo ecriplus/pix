@@ -7,6 +7,8 @@ import Component from '@glimmer/component';
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { t } from 'ember-intl';
+
+import CopyPasteButton from '../copy-paste-button';
 dayjs.extend(LocalizedFormat);
 
 export default class SchoolSessionManagement extends Component {
@@ -17,6 +19,9 @@ export default class SchoolSessionManagement extends Component {
 
   get canManageSession() {
     return this.currentUser.canAccessMissionsPage;
+  }
+  get activateSessionButtonClass() {
+    return this.sessionIsActive ? 'secondary' : 'primary';
   }
 
   get sessionIsActive() {
@@ -40,6 +45,9 @@ export default class SchoolSessionManagement extends Component {
       ? this.intl.t('navigation.school-sessions.extend-button')
       : this.intl.t('navigation.school-sessions.activate-button');
   }
+  get organizationCode() {
+    return this.currentUser.organization.schoolCode ?? '';
+  }
 
   @action
   async activateSession() {
@@ -53,34 +61,46 @@ export default class SchoolSessionManagement extends Component {
 
   <template>
     {{#if this.canManageSession}}
-      <p class="school-session__status">
+      <div class="school-code-container">
+        <h2>{{t "navigation.school-sessions.status.code-label"}}</h2>
+        <p>{{this.organizationCode}}
+          <CopyPasteButton
+            @clipBoardtext={{this.organizationCode}}
+            @successMessage="{{t 'pages.missions.list.banner.copypaste-container.button.success'}}"
+            @defaultMessage="{{t 'pages.missions.list.banner.copypaste-container.button.tooltip'}}"
+          />
+        </p>
+
+      </div>
+
+      <PixButton
+        class="school-session__button"
+        @variant={{this.activateSessionButtonClass}}
+        @triggerAction={{this.activateSession}}
+      >{{this.buttonLabel}}</PixButton>
+      <div class="school-session__status">
+
         {{#if this.sessionIsActive}}
           {{t "navigation.school-sessions.status.active-label" this.expirationDateParameter}}
         {{else}}
           {{t "navigation.school-sessions.status.inactive-label"}}
         {{/if}}
-      </p>
-      <PixTooltip @id="school-session-info-tooltip" @position="bottom" @isWide="true">
-        <:triggerElement>
-          <PixIcon
-            @name="help"
-            @plainIcon={{true}}
-            tabindex="0"
-            aria-label={{t "navigation.school-sessions.status.aria-label"}}
-            aria-describedby="school-session-info-tooltip"
-          />
-        </:triggerElement>
+        <PixTooltip @id="school-session-info-tooltip" @position="bottom" @isWide="true">
+          <:triggerElement>
+            <PixIcon
+              @name="error"
+              @plainIcon={{true}}
+              tabindex="0"
+              aria-label={{t "navigation.school-sessions.status.aria-label"}}
+              aria-describedby="school-session-info-tooltip"
+            />
+          </:triggerElement>
 
-        <:tooltip>
-          {{t "navigation.school-sessions.status.info-text" htmlSafe=true}}
-        </:tooltip>
-      </PixTooltip>
-
-      <PixButton
-        class="school-session__button"
-        @variant="secondary"
-        @triggerAction={{this.activateSession}}
-      >{{this.buttonLabel}}</PixButton>
+          <:tooltip>
+            {{t "navigation.school-sessions.status.info-text" htmlSafe=true}}
+          </:tooltip>
+        </PixTooltip>
+      </div>
     {{/if}}
   </template>
 }

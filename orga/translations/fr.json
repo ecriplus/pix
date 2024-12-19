@@ -381,6 +381,7 @@
       "status": {
         "active-label": "Session active jusqu'à {sessionExpirationDate}",
         "aria-label": "Explication sur la session",
+        "code-label": "Code école",
         "inactive-label": "Session inactive",
         "info-text": "Les missions sont accessibles par les élèves uniquement lorsque la session est active.'<br>' À la fin de la session, les élèves en cours de mission ne seront pas déconnectés.",
         "title": "Statut de la session"
@@ -945,7 +946,7 @@
             },
             "title": "Étape 2 : Pour que les élèves accèdent à l’espace Pix Junior de votre école, vous pouvez :"
           },
-          "step3": "Étape 3 : <b>Activez la session Pix Junior</b> via le bouton dans la barre de navigation. <b>Cette action est à réaliser avant chaque séance avec vos élèves</b>.",
+          "step3": "Étape 3 : <b>Activez la session Pix Junior</b> via le bouton dans la barre latérale. <b>Cette action est à réaliser avant chaque séance avec vos élèves</b>.",
           "welcome": "Pour commencer à utiliser Pix Junior :"
         },
         "caption": "Liste des missions",

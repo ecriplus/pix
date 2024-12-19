@@ -27,12 +27,14 @@ module('Integration | Components | Layout | SchoolSessionManagement', function (
       // when
       const screen = await render(<template><SchoolSessionManagement /></template>);
 
-      const tooltipText = t('navigation.school-sessions.status.info-text', { htmlSafe: true });
-      const tooltip = await screen.findByRole('tooltip', { hidden: true });
-
       // then
-      assert.ok(screen.getByLabelText(t('navigation.school-sessions.status.aria-label')));
-      assert.strictEqual(tooltip.innerHTML.trim(), tooltipText.toString());
+      const copyTooltipText = t('pages.missions.list.banner.copypaste-container.button.tooltip');
+      const infoTooltipText = t('navigation.school-sessions.status.info-text', { htmlSafe: true }).toString();
+
+      const tooltipElementList = await screen.findAllByRole('tooltip', { hidden: true });
+      const tooltipElementTextList = tooltipElementList.map((element) => element.innerHTML.trim());
+
+      assert.deepEqual(tooltipElementTextList, [copyTooltipText, infoTooltipText]);
     });
 
     module('session expiration date management', function (hooks) {
@@ -123,6 +125,7 @@ module('Integration | Components | Layout | SchoolSessionManagement', function (
       class CurrentUserStub extends Service {
         isAdminInOrganization = true;
         canAccessMissionsPage = false;
+        organization = {};
       }
 
       this.owner.register('service:current-user', CurrentUserStub);

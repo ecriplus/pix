@@ -375,6 +375,7 @@
       "status": {
         "active-label": "Active session until {sessionExpirationDate}",
         "aria-label": "How does the session work ?",
+        "code-label": "School code",
         "inactive-label": "Inactive session",
         "info-text": "Students can only access missions when the session is active.'<br>'At the end of the session, students who are in the middle of a mission will not be disconnected.",
         "title": "Session status"
@@ -939,7 +940,7 @@
             },
             "title": "Step 2 : To enable pupils to access your school's Pix Junior space, you can :"
           },
-          "step3": "Step 3 : <b> Activate the Pix Junior session </b> using the button above. <b>You should do this before each session with your pupils</b>.",
+          "step3": "Step 3 : <b> Activate the Pix Junior session </b> using the button in the sidebar. <b>You should do this before each session with your pupils</b>.",
           "welcome": "Starting to use Pix Junior :"
         },
         "caption": "List of missions",
