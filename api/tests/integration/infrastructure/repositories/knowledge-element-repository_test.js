@@ -313,12 +313,13 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
   });
 
   describe('#findSnapshotGroupedByCompetencesForUsers', function () {
-    let userId1, userId2, sandbox;
+    let userId1, userId2, campaignParticipationId, sandbox;
 
     beforeEach(function () {
       sandbox = sinon.createSandbox();
       userId1 = databaseBuilder.factory.buildUser().id;
       userId2 = databaseBuilder.factory.buildUser().id;
+      campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation().id;
       return databaseBuilder.commit();
     });
 
@@ -399,6 +400,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
           userId: userId1,
           snappedAt: dateUserId1,
           snapshot: JSON.stringify([knowledgeElement]),
+          campaignParticipationId,
         });
         await databaseBuilder.commit();
 
@@ -416,11 +418,14 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
     context('when user does not have a snapshot for this date', function () {
       context('when no date is provided along with the user', function () {
         let expectedKnowledgeElement;
+        let campaignParticipationId;
 
         beforeEach(function () {
+          campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation().id;
           expectedKnowledgeElement = databaseBuilder.factory.buildKnowledgeElement({
             userId: userId1,
             createdAt: new Date('2018-01-01'),
+            campaignParticipationId,
           });
           return databaseBuilder.commit();
         });
@@ -1010,6 +1015,8 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
     it('should return the knowledge elements in the snapshot when user has a snapshot for this date', async function () {
       // given
       const learningContent = domainBuilder.buildCampaignLearningContent.withSimpleContent();
+      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation().id;
+
       const userId = databaseBuilder.factory.buildUser().id;
       const dateUserId = new Date('2020-01-03');
       const knowledgeElement = databaseBuilder.factory.buildKnowledgeElement({
@@ -1020,6 +1027,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
         userId,
         snappedAt: dateUserId,
         snapshot: JSON.stringify([knowledgeElement]),
+        campaignParticipationId,
       });
       await databaseBuilder.commit();
 

@@ -10,6 +10,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       // given
       const snappedAt = new Date('2019-04-01');
       const userId = databaseBuilder.factory.buildUser().id;
+      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation().id;
       const knowledgeElement1 = databaseBuilder.factory.buildKnowledgeElement({
         userId,
         createdAt: new Date('2019-03-01'),
@@ -22,7 +23,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       await databaseBuilder.commit();
 
       // when
-      await knowledgeElementSnapshotRepository.save({ userId, snappedAt, knowledgeElements });
+      await knowledgeElementSnapshotRepository.save({ userId, snappedAt, knowledgeElements, campaignParticipationId });
 
       // then
       const actualUserSnapshot = await knex.select('*').from('knowledge-element-snapshots').first();
@@ -44,7 +45,8 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       // given
       const snappedAt = new Date('2019-04-01');
       const userId = databaseBuilder.factory.buildUser().id;
-      databaseBuilder.factory.buildKnowledgeElementSnapshot({ userId, snappedAt });
+      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation().id;
+      databaseBuilder.factory.buildKnowledgeElementSnapshot({ userId, snappedAt, campaignParticipationId });
       await databaseBuilder.commit();
 
       // when
@@ -52,6 +54,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
         userId,
         snappedAt,
         knowledgeElements: [],
+        campaignParticipationId,
       });
 
       // then
@@ -91,6 +94,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       it('does not save knowledge elements snapshot using a transaction', async function () {
         const snappedAt = new Date('2019-04-01');
         const userId = databaseBuilder.factory.buildUser().id;
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation().id;
         const knowledgeElement1 = databaseBuilder.factory.buildKnowledgeElement({
           userId,
           createdAt: new Date('2019-03-01'),
@@ -100,7 +104,12 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
 
         try {
           await DomainTransaction.execute(async () => {
-            await knowledgeElementSnapshotRepository.save({ userId, snappedAt, knowledgeElements });
+            await knowledgeElementSnapshotRepository.save({
+              userId,
+              snappedAt,
+              knowledgeElements,
+              campaignParticipationId,
+            });
             throw new Error();
           });
           // eslint-disable-next-line no-empty
@@ -113,12 +122,12 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
   });
 
   describe('#findByUserIdsAndSnappedAtDates', function () {
-    let userId1;
-    let userId2;
+    let userId1, userId2, campaignParticipationId;
 
     beforeEach(function () {
       userId1 = databaseBuilder.factory.buildUser().id;
       userId2 = databaseBuilder.factory.buildUser().id;
+      campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation().id;
       return databaseBuilder.commit();
     });
 
@@ -130,6 +139,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
         userId: userId1,
         snappedAt: snappedAt1,
         snapshot: JSON.stringify([knowledgeElement1]),
+        campaignParticipationId,
       });
       const snappedAt2 = new Date('2020-02-02');
       const knowledgeElement2 = databaseBuilder.factory.buildKnowledgeElement({ userId: userId2 });
@@ -137,6 +147,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
         userId: userId2,
         snappedAt: snappedAt2,
         snapshot: JSON.stringify([knowledgeElement2]),
+        campaignParticipationId,
       });
       await databaseBuilder.commit();
 
@@ -165,11 +176,15 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
     let userId1, userId2;
     let snappedAt1, snappedAt2, snappedAt3;
     let knowledgeElement1, knowledgeElement2, knowledgeElement3;
+    let campaignParticipationId1, campaignParticipationId2, campaignParticipationId3;
     let learningContent;
 
     beforeEach(async function () {
       userId1 = databaseBuilder.factory.buildUser().id;
       userId2 = databaseBuilder.factory.buildUser().id;
+      campaignParticipationId1 = 123;
+      campaignParticipationId2 = 456;
+      campaignParticipationId3 = 789;
 
       const skill1 = domainBuilder.buildSkill({ id: 'skill1', tubeId: 'tube1', competenceId: 'competence1' });
       const skill2 = domainBuilder.buildSkill({ id: 'skill2', tubeId: 'tube1', competenceId: 'competence1' });
@@ -188,6 +203,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
 
       snappedAt1 = new Date('2020-01-02');
       databaseBuilder.factory.buildCampaignParticipation({
+        id: campaignParticipationId1,
         userId: userId1,
         sharedAt: snappedAt1,
       });
@@ -200,10 +216,12 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
         userId: userId1,
         snappedAt: snappedAt1,
         snapshot: JSON.stringify([knowledgeElement1]),
+        campaignParticipationId: campaignParticipationId1,
       });
 
       snappedAt2 = new Date('2020-02-02');
       databaseBuilder.factory.buildCampaignParticipation({
+        id: campaignParticipationId2,
         userId: userId2,
         sharedAt: snappedAt2,
       });
@@ -216,10 +234,12 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
         userId: userId2,
         snappedAt: snappedAt2,
         snapshot: JSON.stringify([knowledgeElement2]),
+        campaignParticipationId: campaignParticipationId2,
       });
 
       snappedAt3 = new Date('2022-02-02');
       databaseBuilder.factory.buildCampaignParticipation({
+        id: campaignParticipationId3,
         userId: userId2,
         sharedAt: snappedAt3,
       });
@@ -232,6 +252,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
         userId: userId2,
         snappedAt: snappedAt3,
         snapshot: JSON.stringify([knowledgeElement3]),
+        campaignParticipationId: campaignParticipationId3,
       });
 
       await databaseBuilder.commit();
@@ -254,16 +275,19 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
           userId: userId1,
           snappedAt: snappedAt1,
           knowledgeElements: [knowledgeElement1],
+          campaignParticipationId: campaignParticipationId1,
         },
         {
           userId: userId2,
           snappedAt: snappedAt2,
           knowledgeElements: [knowledgeElement2],
+          campaignParticipationId: campaignParticipationId2,
         },
         {
           userId: userId2,
           snappedAt: snappedAt3,
           knowledgeElements: [knowledgeElement3],
+          campaignParticipationId: campaignParticipationId3,
         },
       ]);
     });
