@@ -198,6 +198,7 @@ import { buildSessionManagement } from './certification/session-management/build
 import { buildCompetenceForScoring } from './certification/shared/build-competence-for-scoring.js';
 import { buildJuryComment } from './certification/shared/build-jury-comment.js';
 import { buildV3CertificationScoring } from './certification/shared/build-v3-certification-scoring.js';
+import { buildCertificationResult as parcoursupCertificationResult } from './parcoursup/build-certification-result.js';
 import { buildCampaign as boundedContextCampaignBuildCampaign } from './prescription/campaign/build-campaign.js';
 import { buildCampaignParticipation as boundedContextCampaignParticipationBuildCampaignParticipation } from './prescription/campaign-participation/build-campaign-participation.js';
 import { buildStageCollection as buildStageCollectionForTargetProfileManagement } from './target-profile-management/build-stage-collection.js';
@@ -251,6 +252,10 @@ const certification = {
     buildComplementaryCertificationVersioning,
     buildComplementaryCertificationBadge: buildCertificationComplementaryCertificationBadge,
   },
+};
+
+const parcoursup = {
+  buildCertificationResult: parcoursupCertificationResult,
 };
 
 const prescription = {
@@ -436,5 +441,6 @@ export {
   buildValidation,
   buildValidator,
   certification,
+  parcoursup,
   prescription,
 };
