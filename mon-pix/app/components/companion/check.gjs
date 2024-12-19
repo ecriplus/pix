@@ -34,7 +34,7 @@ export default class CompanionCheck extends Component {
         </h1>
 
         <PixButtonLink
-          @href="https://cloud.pix.fr/s/KocingDC4mFJ3R6"
+          @href={{t "common.companion.install-documentation-url"}}
           target="_blank"
           class="companion-check__link"
           @variant="primary-bis"

@@ -48,7 +48,7 @@ export default class CompanionBlocker extends Component {
 
         <ul class="companion-blocker__list">
           <li>
-            <PixButtonLink @href="https://cloud.pix.fr/s/KocingDC4mFJ3R6" target="_blank">{{t
+            <PixButtonLink @href={{t "common.companion.install-documentation-url"}} target="_blank">{{t
                 "common.companion.not-detected.link"
               }}</PixButtonLink>
           </li>
