@@ -1,11 +1,4 @@
 .statistics-page {
-  &__header {
-    display: flex;
-    gap: var(--pix-spacing-2x);
-    align-items: baseline;
-    margin-bottom: var(--pix-spacing-8x);
-  }
-
   &__info {
     margin-bottom: var(--pix-spacing-8x);
   }

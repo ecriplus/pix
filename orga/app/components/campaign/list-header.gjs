@@ -2,17 +2,23 @@ import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
 
+import PageTitle from '../ui/page-title';
+
 <template>
   <header>
-    <div class="campaign-list-header__header">
-      <h1 class="page-title">{{t "pages.campaigns-list.title"}}</h1>
-      <PixButtonLink
-        @route="authenticated.campaigns.new"
-        class="campaign-list-header__create-campaign-button hide-on-mobile"
-      >
-        {{t "pages.campaigns-list.action.create"}}
-      </PixButtonLink>
-    </div>
+    <PageTitle>
+      <:title>
+        {{t "pages.campaigns-list.title"}}
+      </:title>
+      <:tools>
+        <PixButtonLink
+          @route="authenticated.campaigns.new"
+          class="campaign-list-header__create-campaign-button hide-on-mobile"
+        >
+          {{t "pages.campaigns-list.action.create"}}
+        </PixButtonLink>
+      </:tools>
+    </PageTitle>
 
     <nav class="panel navbar campaign-list-header__tabs" aria-label={{t "pages.campaigns-list.navigation"}}>
       <ul>

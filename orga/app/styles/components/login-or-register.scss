@@ -70,14 +70,6 @@
     @include device-is('tablet') {
       min-width: 360px;
     }
-
-    .form-title {
-      margin: var(--pix-spacing-6x) 0;
-
-      @include device-is('mobile') {
-        text-align: center;
-      }
-    }
   }
 
   &__divider {

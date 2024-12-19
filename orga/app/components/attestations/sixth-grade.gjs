@@ -6,6 +6,8 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
+import PageTitle from '../ui/page-title';
+
 export default class AttestationsSixthGrade extends Component {
   @tracked selectedDivisions = [];
 
@@ -26,11 +28,14 @@ export default class AttestationsSixthGrade extends Component {
   }
 
   <template>
-    <h1 class="attestations-page__title">{{t "pages.attestations.title"}}</h1>
-
-    <p class="attestations-page__text">
-      {{t "pages.attestations.description"}}
-    </p>
+    <PageTitle>
+      <:title>{{t "pages.attestations.title"}}</:title>
+      <:subtitle>
+        <p class="attestations-page__text">
+          {{t "pages.attestations.description"}}
+        </p>
+      </:subtitle>
+    </PageTitle>
 
     <form class="attestations-page__action" {{on "submit" this.onSubmit}}>
       <PixMultiSelect

@@ -5,9 +5,9 @@
 }
 
 .help-text {
+  @extend %pix-body-xs;
+
   color: var(--pix-neutral-500);
-  font-size: 0.75rem;
-  font-family: $font-roboto;
 }
 
 .information-text {
@@ -43,9 +43,9 @@
 }
 
 .content-text {
+  @extend %pix-body-m;
+
   color: var(--pix-neutral-500);
-  font-size: 1rem;
-  font-family: $font-roboto;
 
   &--bold {
     color: var(--pix-neutral-900);

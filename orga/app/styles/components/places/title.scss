@@ -1,9 +1,3 @@
-.places-page-header {
- display: flex;
- gap: var(--pix-spacing-2x);
- align-items: baseline;
-
- &__date {
+.places-header-date {
   @extend %pix-body-xs;
- }
 }

@@ -60,7 +60,10 @@
   </ul>
 </PixNotificationAlert>
 
-<h1 class="mission-list__title page-title">{{t "pages.missions.title"}}</h1>
+<Ui::PageTitle>
+  <:title>{{t "pages.missions.title"}}</:title>
+</Ui::PageTitle>
+
 {{#if @model.missions}}
   <div class="panel">
 

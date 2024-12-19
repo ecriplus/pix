@@ -1,6 +1,8 @@
-.new-item-form {
-  &__gdpr-information {
-    margin-top: 50px;
-    text-align: justify;
-  }
+.gdpr-information-external-id {
+  @extend %pix-body-xs;
+
+  margin-top: var(--pix-spacing-8x);
+  color: var(--pix-neutral-500);
+  text-align: justify;
 }
+

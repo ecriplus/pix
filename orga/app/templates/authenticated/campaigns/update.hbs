@@ -2,8 +2,12 @@
 {{page-title (t "pages.campaign-modification.title")}}
 
 <div>
-  <h1 class="page__title page-title">{{t "pages.campaign-modification.title"}}</h1>
-  <h2 class="page-sub-title">{{this.campaignName}}</h2>
+  <Ui::PageTitle>
+    <:title>{{t "pages.campaign-modification.title"}}</:title>
+    <:subtitle>
+      <h2 class="page-sub-title">{{this.campaignName}}</h2>
+    </:subtitle>
+  </Ui::PageTitle>
 
   <Campaign::UpdateForm
     @campaign={{@model.campaign}}

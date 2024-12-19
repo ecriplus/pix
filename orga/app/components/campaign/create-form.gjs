@@ -469,7 +469,7 @@ export default class CreateForm extends Component {
       </div>
 
       {{#if this.wantIdPix}}
-        <div class="new-item-form__gdpr-information help-text">
+        <div class="gdpr-information-external-id">
           {{t "pages.campaign-creation.legal-warning"}}
         </div>
       {{/if}}

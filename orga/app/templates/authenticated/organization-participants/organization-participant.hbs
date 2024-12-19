@@ -1,5 +1,5 @@
 <article>
-  <Learner::Header>
+  <Ui::PageTitle>
     <:breadcrumb>
       <Ui::Breadcrumb @links={{this.breadcrumbLinks}} />
     </:breadcrumb>
@@ -8,9 +8,9 @@
       {{t "common.fullname" firstName=@model.firstName lastName=@model.lastName}}
     </:title>
 
-    <:info>
+    <:tools>
       <Ui::LearnerHeaderInfo @isCertifiable={{@model.isCertifiable}} @certifiableAt={{@model.certifiableAt}} />
-    </:info>
-  </Learner::Header>
+    </:tools>
+  </Ui::PageTitle>
   {{outlet}}
 </article>

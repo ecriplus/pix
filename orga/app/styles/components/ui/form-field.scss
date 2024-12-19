@@ -16,6 +16,10 @@ $form-field-with: 500px;
   &__element {
     margin-bottom: var(--pix-spacing-4x);
 
+    & .pix-input {
+      width: 100%;
+    }
+
     @include device-is('large-screen') {
       width: $form-field-with;
     }
