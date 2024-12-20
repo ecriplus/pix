@@ -634,6 +634,80 @@
           }
         }
       ]
+    },
+    {
+      "id": "84f9134e-6a19-4673-a673-d4577355796a",
+      "type": "summary",
+      "title": "Conclusion",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "5a4495bc-22f5-4a9a-aad5-531071bf33c9",
+            "type": "text",
+            "content": "<p><strong>Pour chaque carte</strong> :</p><ol><li>Lisez la question. <span aria-hidden=\"true\">👀</span></li><li>Essayez de trouver la réponse dans votre tête. <span aria-hidden=\"true\">🤔</span></li><li>Retourner la carte en cliquant sur <i>Voir la réponse</i>. <span aria-hidden=\"true\">↪️</span></li></ol><p>Cela permet de <strong>tester votre mémoire</strong>.<span aria-hidden=\"true\">🎯</span></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "1c2619ea-2fbd-4ab1-82ad-d9a3989c8ce3",
+            "type": "flashcards",
+            "instruction": "<p></p>",
+            "title": "Titre",
+            "introImage": {
+              "url": ""
+            },
+            "cards": [
+              {
+                "id": "afa1fa77-eada-4759-94e2-f1c608c54980",
+                "recto": {
+                  "image": {
+                    "url": "https://i.imgur.com/vg3Ro1F.png"
+                  },
+                  "text": "Pour commencer à vérifier une information, quelles sont les 3 questions à se poser ?"
+                },
+                "verso": {
+                  "image": {
+                    "url": ""
+                  },
+                  "text": "<p><strong>Qui</strong> est l'auteur de l'information ?<br>De <strong>quand</strong> date l'information ?<br><strong>D'où</strong> provient l'information ?</p>"
+                }
+              },
+              {
+                "id": "be0e0732-596e-46cf-b8de-9d2f05c5aeb9",
+                "recto": {
+                  "image": {
+                    "url": "https://i.imgur.com/vg3Ro1F.png"
+                  },
+                  "text": "Dans une publication sur un réseau social, quels indices peuvent aider à détecter de fausses informations ?"
+                },
+                "verso": {
+                  "image": {
+                    "url": ""
+                  },
+                  "text": "<p>Un <strong>ton alarmiste</strong>, <br>les <strong>mots écrits en majuscules</strong>,<br>les <strong>émojis angoissants</strong>,<br>les <strong>fautes d'orthographes</strong>,<br>la <strong>demande de partage</strong>.<br><br>Plus il y en a, plus l'information a des chances d'être fausses.</p>"
+                }
+              },
+              {
+                "id": "83f58acb-67c3-49c5-8ac9-020c6bf078ac",
+                "recto": {
+                  "image": {
+                    "url": "https://i.imgur.com/vg3Ro1F.png"
+                  },
+                  "text": "Si l'on a un doute sur une information, il vaut mieux être prudent et se dire qu'elle est _______."
+                },
+                "verso": {
+                  "image": {
+                    "url": ""
+                  },
+                  "text": "<p>Si l'on a un doute sur une information, il vaut mieux être prudent et se dire qu'elle est <strong>fausse</strong>.</p>"
+                }
+              }
+            ]
+          }
+        }
+      ]
     }
   ]
 }
