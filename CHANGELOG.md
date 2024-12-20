@@ -1,5 +1,31 @@
 # Pix Changelog
 
+## v5.6.0 (20/12/2024)
+
+
+### :rocket: Amélioration
+- [#10828](https://github.com/1024pix/pix/pull/10828) [FEATURE] Optimisation de l'écran de challenge Pix Junior (PIX-15739) .
+- [#10860](https://github.com/1024pix/pix/pull/10860) [FEATURE] Ajouter une route API donnant accès au résultat de certif d'un élève (PIX-15799).
+- [#10833](https://github.com/1024pix/pix/pull/10833) [FEATURE] Adjust self delete account (PIX-15713).
+- [#10852](https://github.com/1024pix/pix/pull/10852) [FEATURE] Traduction en ES & NL de l'e-mail de suppression du compte (PIX-15805).
+- [#10814](https://github.com/1024pix/pix/pull/10814) [FEATURE] améliore les messages d'erreur d'import de prescrits.
+- [#10844](https://github.com/1024pix/pix/pull/10844) [FEATURE] campaign participation id in ke snapshots (Pix-15753).
+
+### :building_construction: Tech
+- [#10869](https://github.com/1024pix/pix/pull/10869) [TECH] :truck: déplace la route « jury certif summary ».
+
+### :bug: Correction
+- [#10867](https://github.com/1024pix/pix/pull/10867) [BUGFIX] L'icone en cas de succès d'import a disparu (PIX-15762).
+- [#10876](https://github.com/1024pix/pix/pull/10876) [BUGFIX] corriger l'affichage du dashboard en version espagnole.
+- [#10861](https://github.com/1024pix/pix/pull/10861) [BUGFIX] Afficher le tableau de la page statistiques même quand le titre du sujet est vide (PIX-15821).
+
+### :arrow_up: Montée de version
+- [#10873](https://github.com/1024pix/pix/pull/10873) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.25 (certif).
+- [#10872](https://github.com/1024pix/pix/pull/10872) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.25 (admin).
+- [#10853](https://github.com/1024pix/pix/pull/10853) [BUMP] Update Node.js to v20.18.1.
+- [#10865](https://github.com/1024pix/pix/pull/10865) [BUMP] Update dependency @1024pix/pix-ui to ^52.0.3 (orga).
+- [#10862](https://github.com/1024pix/pix/pull/10862) [BUMP] Update dependency @1024pix/pix-ui to ^52.0.3 (certif).
+
 ## v5.5.0 (19/12/2024)
 
 
