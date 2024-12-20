@@ -55,6 +55,7 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
         organization = {
           id: 12345,
           divisions,
+          isManagingStudents: true,
         };
       }
 
@@ -84,6 +85,35 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
           },
         ],
       });
+    });
+
+    test('it should return undefined if current organization is not managing students', async function (assert) {
+      // given
+      const divisions = [{ name: '3èmeA' }, { name: '2ndE' }];
+      class CurrentUserStub extends Service {
+        canAccessAttestationsPage = true;
+        organization = {
+          id: 12345,
+          divisions,
+          isManagingStudents: false,
+        };
+      }
+
+      const findRecordStub = sinon.stub();
+      class StoreStub extends Service {
+        findRecord = findRecordStub;
+      }
+
+      this.owner.register('service:current-user', CurrentUserStub);
+      this.owner.register('service:store', StoreStub);
+
+      const route = this.owner.lookup('route:authenticated/attestations');
+
+      // when
+      const actualOptions = await route.model();
+
+      // then
+      assert.deepEqual(actualOptions, undefined);
     });
   });
 });
