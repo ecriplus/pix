@@ -8,7 +8,7 @@ function todayDate() {
 }
 
 <template>
-  <PageTitle @stickCustomData={{true}}>
+  <PageTitle @spaceBetweenTools={{true}}>
     <:title>
       {{t "pages.places.title"}}
     </:title>

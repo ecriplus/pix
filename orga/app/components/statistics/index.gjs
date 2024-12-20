@@ -89,7 +89,7 @@ export default class Statistics extends Component {
   }
 
   <template>
-    <PageTitle @stickCustomData={{true}}>
+    <PageTitle @spaceBetweenTools={{true}}>
       <:title>
         {{t "pages.statistics.title"}}
       </:title>
