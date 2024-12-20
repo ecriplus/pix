@@ -45,14 +45,14 @@ const acceptPixLastTermsOfService = async function (request, h, dependencies = {
  * }} dependencies
  * @return {Promise<*>}
  */
-const acceptPixOrgaTermsOfService = async function (request, h, dependencies = { userSerializer }) {
+const acceptPixOrgaTermsOfService = async function (request, h) {
   const authenticatedUserId = request.auth.credentials.userId;
 
-  const updatedUser = await usecases.acceptPixOrgaTermsOfService({
+  await usecases.acceptPixOrgaTermsOfService({
     userId: authenticatedUserId,
   });
 
-  return dependencies.userSerializer.serialize(updatedUser);
+  return h.response().code(204);
 };
 
 /**

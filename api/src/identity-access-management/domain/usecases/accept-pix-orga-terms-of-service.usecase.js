@@ -1,10 +1,10 @@
 /**
  * @param {{
  *   userId: string,
- *   userRepository: UserRepository
+ *   legalDocumentApiRepository: legalDocumentApiRepository
  * }} params
- * @return {Promise<User>}
+ * @return {Promise<void>}
  */
-export const acceptPixOrgaTermsOfService = function ({ userId, userRepository }) {
-  return userRepository.updatePixOrgaTermsOfServiceAcceptedToTrue(userId);
+export const acceptPixOrgaTermsOfService = function ({ userId, legalDocumentApiRepository }) {
+  return legalDocumentApiRepository.acceptPixOrgaTos({ userId });
 };

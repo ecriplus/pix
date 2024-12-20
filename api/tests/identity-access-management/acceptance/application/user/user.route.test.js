@@ -499,13 +499,12 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
     });
 
     describe('Success case', function () {
-      it('returns the user with pixOrgaTermsOfServiceAccepted', async function () {
+      it('replies with 204 status code', async function () {
         // when
         const response = await server.inject(options);
 
         // then
-        expect(response.statusCode).to.equal(200);
-        expect(response.result.data.attributes['pix-orga-terms-of-service-accepted']).to.be.true;
+        expect(response.statusCode).to.equal(204);
       });
     });
   });
