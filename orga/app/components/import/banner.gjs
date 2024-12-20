@@ -96,7 +96,7 @@ export default class ImportBanner extends Component {
   <template>
     {{#if this.displaySuccess}}
       <p class="import-banner--success">
-        <PixIcon @name="circleCheck" @plainIcon={{true}} class="import-banner__icon" />
+        <PixIcon @name="checkCircle" @plainIcon={{true}} class="import-banner__icon" />
         {{this.successBanner}}
       </p>
     {{/if}}
