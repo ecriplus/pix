@@ -2162,8 +2162,8 @@
         "more-information": "Para más información,",
         "more-information-contact-support": "puede ponerse en contacto con el servicio de asistencia.",
         "title": "Eliminar mi cuenta definitivamente",
-        "warning-email": "Esta acción es irreversible. {pixScore} Todas las habilidades, cursos y píxeles que haya obtenido se eliminarán de forma permanente para la cuenta PIX que utilice la dirección de correo electrónico<strong>{email}</strong>.",
-        "warning-other": "Esta acción es irreversible. {pixScore} Todas las habilidades, cursos y píxeles que haya obtenido se eliminarán permanentemente de la cuenta PIX.<strong>{firstName} {lastName}</strong>."
+        "warning-email": "Esta acción es irreversible. {pixScore} Todas las habilidades, cursos y píxeles que haya obtenido se eliminarán de forma permanente para la cuenta PIX que utilice la dirección de correo electrónico <strong>{email}</strong>.",
+        "warning-other": "Esta acción es irreversible. {pixScore} Todas las habilidades, cursos y píxeles que haya obtenido se eliminarán permanentemente de la cuenta PIX <strong>{firstName} {lastName}</strong>."
       },
       "email-confirmed": "Dirección de correo electrónico verificada.",
       "email-verification": {

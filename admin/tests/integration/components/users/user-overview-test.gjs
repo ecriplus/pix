@@ -22,6 +22,65 @@ module('Integration | Component | users | user-overview', function (hooks) {
     });
 
     module('when the admin look at user details', function () {
+      module('when the user is anonymised', function () {
+        module('when the user has self deleted his account', function () {
+          test('displays the dedicated deletion message', async function (assert) {
+            // given
+
+            const store = this.owner.lookup('service:store');
+            const user = store.createRecord('user', {
+              id: '123',
+              firstName: '(anonymised)',
+              lastName: '(anonymised)',
+              email: null,
+              username: null,
+              hasBeenAnonymised: true,
+              hasBeenAnonymisedBy: 123,
+              anonymisedByFullName: '(anonymised) (anonymised)',
+            });
+
+            // when
+            const screen = await render(<template><UserOverview @user={{user}} /></template>);
+
+            // then
+            assert
+              .dom(screen.getByText(t('pages.user-details.overview.anonymisation.self-anonymisation-message')))
+              .exists();
+          });
+        });
+
+        module("when the user's account has been deleted by an admin member", function () {
+          test("displays the deletion message with the admin member's full name", async function (assert) {
+            // given
+            const store = this.owner.lookup('service:store');
+            const fullName = 'Laurent Bobine';
+            const user = store.createRecord('user', {
+              id: '123',
+              firstName: '(anonymised)',
+              lastName: '(anonymised)',
+              email: null,
+              username: null,
+              hasBeenAnonymised: true,
+              hasBeenAnonymisedBy: 456,
+              anonymisedByFullName: fullName,
+            });
+
+            // when
+            const screen = await render(<template><UserOverview @user={{user}} /></template>);
+
+            // then
+
+            assert
+              .dom(
+                screen.getByText(
+                  t('pages.user-details.overview.anonymisation.user-anonymised-by-admin-message', { fullName }),
+                ),
+              )
+              .exists();
+          });
+        });
+      });
+
       test('displays the update button', async function (assert) {
         // given
         const user = {
@@ -545,19 +604,27 @@ module('Integration | Component | users | user-overview', function (hooks) {
       test('displays an anonymisation message with the full name of the admin member', async function (assert) {
         // given
         const store = this.owner.lookup('service:store');
-        const user = store.createRecord('user', { hasBeenAnonymised: true, anonymisedByFullName: 'Laurent Gina' });
+        const fullName = 'Laurent Gina';
+        const user = store.createRecord('user', { hasBeenAnonymised: true, anonymisedByFullName: fullName });
 
         // when
         const screen = await render(<template><UserOverview @user={{user}} /></template>);
 
         // then
-        assert.dom(screen.getByText('Utilisateur anonymisé par Laurent Gina.')).exists();
+        assert
+          .dom(
+            screen.getByText(
+              t('pages.user-details.overview.anonymisation.user-anonymised-by-admin-message', { fullName }),
+            ),
+          )
+          .exists();
       });
 
       test('disables action buttons "Modifier" and "Anonymiser cet utilisateur"', async function (assert) {
         // given
         const store = this.owner.lookup('service:store');
-        const user = store.createRecord('user', { hasBeenAnonymised: true, anonymisedByFullName: 'Laurent Gina' });
+        const fullName = 'Laurent Gina';
+        const user = store.createRecord('user', { hasBeenAnonymised: true, anonymisedByFullName: fullName });
 
         // when
         const screen = await render(<template><UserOverview @user={{user}} /></template>);
@@ -577,7 +644,9 @@ module('Integration | Component | users | user-overview', function (hooks) {
           const screen = await render(<template><UserOverview @user={{user}} /></template>);
 
           // then
-          assert.dom(screen.getByText('Utilisateur anonymisé.')).exists();
+          assert
+            .dom(screen.getByText(t('pages.user-details.overview.anonymisation.default-anonymised-user-message')))
+            .exists();
         });
       });
     });

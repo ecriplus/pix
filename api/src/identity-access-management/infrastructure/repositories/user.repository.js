@@ -557,6 +557,7 @@ function _fromKnexDTOToUserDetailsForAdmin({
     authenticationMethods,
     userLogin,
     hasBeenAnonymised: userDTO.hasBeenAnonymised,
+    hasBeenAnonymisedBy: userDTO.hasBeenAnonymisedBy,
     updatedAt: userDTO.updatedAt,
     createdAt: userDTO.createdAt,
     anonymisedByFirstName: userDTO.anonymisedByFirstName,

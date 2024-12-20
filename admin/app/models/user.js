@@ -19,6 +19,7 @@ export default class User extends Model {
   @attr() lastLoggedAt;
   @attr() emailConfirmedAt;
   @attr() hasBeenAnonymised;
+  @attr() hasBeenAnonymisedBy;
   @attr() anonymisedByFullName;
   @attr() isPixAgent;
 

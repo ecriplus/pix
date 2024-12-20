@@ -47,9 +47,14 @@ export default class UserOverview extends Component {
   }
 
   get anonymisationMessage() {
-    return this.args.user.anonymisedByFullName
-      ? `Utilisateur anonymisé par ${this.args.user.anonymisedByFullName}.`
-      : 'Utilisateur anonymisé.';
+    if (this.args.user.id === String(this.args.user.hasBeenAnonymisedBy)) {
+      return this.intl.t('pages.user-details.overview.anonymisation.self-anonymisation-message');
+    }
+    if (this.args.user.anonymisedByFullName) {
+      const fullName = this.args.user.anonymisedByFullName;
+      return this.intl.t('pages.user-details.overview.anonymisation.user-anonymised-by-admin-message', { fullName });
+    }
+    return this.intl.t('pages.user-details.overview.anonymisation.default-anonymised-user-message');
   }
 
   get canModifyEmail() {

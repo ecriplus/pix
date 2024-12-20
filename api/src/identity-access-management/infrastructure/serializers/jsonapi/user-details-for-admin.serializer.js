@@ -30,6 +30,7 @@ const serialize = function (usersDetailsForAdmin) {
       'lastLoggedAt',
       'emailConfirmedAt',
       'hasBeenAnonymised',
+      'hasBeenAnonymisedBy',
       'anonymisedByFullName',
       'organizationLearners',
       'authenticationMethods',

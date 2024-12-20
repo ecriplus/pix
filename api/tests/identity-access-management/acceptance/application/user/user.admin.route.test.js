@@ -288,6 +288,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
           'pix-orga-terms-of-service-accepted': false,
           username: user.username,
           'has-been-anonymised': false,
+          'has-been-anonymised-by': null,
           'anonymised-by-full-name': null,
           'is-pix-agent': false,
         });
