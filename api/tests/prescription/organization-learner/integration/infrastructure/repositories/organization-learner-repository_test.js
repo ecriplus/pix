@@ -724,5 +724,23 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
         expect(result).to.be.empty;
       });
     });
+    context('when divisions is an empty array', function () {
+      it('should return all learners', async function () {
+        // given
+        databaseBuilder.factory.buildOrganizationLearner({ organizationId, division: '6eme A' });
+        databaseBuilder.factory.buildOrganizationLearner({ organizationId, division: '6eme B' });
+
+        await databaseBuilder.commit();
+
+        // when
+        const result = await organizationLearnerRepository.findOrganizationLearnersByDivisions({
+          organizationId,
+          divisions: [],
+        });
+
+        // then
+        expect(result).to.have.lengthOf(2);
+      });
+    });
   });
 });

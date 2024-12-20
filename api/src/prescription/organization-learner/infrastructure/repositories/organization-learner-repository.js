@@ -114,11 +114,15 @@ async function findPaginatedLearners({ organizationId, page, filter }) {
 }
 
 async function findOrganizationLearnersByDivisions({ organizationId, divisions }) {
+  let organizationLearners;
+
   const knexConnection = DomainTransaction.getConnection();
-  const organizationLearners = await knexConnection
-    .from('view-active-organization-learners')
-    .where({ organizationId })
-    .whereIn('division', divisions);
+  const queryBuilder = knexConnection.from('view-active-organization-learners').where({ organizationId });
+  if (divisions.length > 0) {
+    organizationLearners = await queryBuilder.whereIn('division', divisions);
+  } else {
+    organizationLearners = await queryBuilder;
+  }
   return organizationLearners.map((organizationLearner) => new OrganizationLearner(organizationLearner));
 }
 
