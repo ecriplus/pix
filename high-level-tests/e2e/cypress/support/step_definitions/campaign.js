@@ -47,7 +47,7 @@ When(`je recherche une campagne avec le nom {string}`, (campaignSearchName) => {
 });
 
 Then(`je vois le détail de la campagne {string}`, (campaignName) => {
-  cy.get('[aria-label="Nom de la campagne"]').contains(campaignName);
+  cy.findByRole('heading', { level: 1 }).contains(campaignName);
 });
 
 Then(`je vois {int} participants`, (numberOfParticipants) => {

@@ -3,6 +3,8 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
+import PageTitle from '../ui/page-title';
+
 export default class Header extends Component {
   @service currentUser;
   @service intl;
@@ -18,16 +20,17 @@ export default class Header extends Component {
   }
 
   <template>
-    <h1 class="organization-participant-list-page__header page-title">
-      {{this.title}}
-
-      {{#if this.displayImportButton}}
-        <div class="organization-participant-list-page__import-students-button hide-on-mobile">
-          <PixButtonLink @route="authenticated.import-organization-participants">
+    <PageTitle>
+      <:title>
+        {{this.title}}
+      </:title>
+      <:tools>
+        {{#if this.displayImportButton}}
+          <PixButtonLink @route="authenticated.import-organization-participants" class="hide-on-mobile">
             {{t "components.organization-participants-header.import-button"}}
           </PixButtonLink>
-        </div>
-      {{/if}}
-    </h1>
+        {{/if}}
+      </:tools>
+    </PageTitle>
   </template>
 }

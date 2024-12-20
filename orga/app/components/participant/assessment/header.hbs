@@ -1,16 +1,20 @@
-<header class="navigation">
-  <Ui::Breadcrumb @links={{this.breadcrumbLinks}} />
-</header>
-
-<header class="page__title">
-  <h1 class="page-title">{{@participation.firstName}} {{@participation.lastName}}</h1>
-  <p class="participant__link">
-    <PixIcon @name="infoUser" @plainIcon={{true}} />
-    <Participant::LinkTo @organizationLearnerId={{@participation.organizationLearnerId}}>
-      {{t "common.actions.link-to-participant"}}
-    </Participant::LinkTo>
-  </p>
-</header>
+<Ui::PageTitle>
+  <:breadcrumb>
+    <Ui::Breadcrumb @links={{this.breadcrumbLinks}} />
+  </:breadcrumb>
+  <:title>
+    {{@participation.firstName}}
+    {{@participation.lastName}}
+  </:title>
+  <:subtitle>
+    <span class="participant__link">
+      <PixIcon @name="infoUser" @plainIcon={{true}} />
+      <Participant::LinkTo @organizationLearnerId={{@participation.organizationLearnerId}}>
+        {{t "common.actions.link-to-participant"}}
+      </Participant::LinkTo>
+    </span>
+  </:subtitle>
+</Ui::PageTitle>
 
 <section class="panel panel--header">
   <header class="panel-header__headline panel-header__headline--with-right-content">

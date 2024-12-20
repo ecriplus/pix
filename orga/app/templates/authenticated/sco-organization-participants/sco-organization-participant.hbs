@@ -1,5 +1,5 @@
 <article>
-  <Learner::Header>
+  <Ui::PageTitle>
     <:breadcrumb>
       <Ui::Breadcrumb @links={{this.breadcrumbLinks}} />
     </:breadcrumb>
@@ -12,7 +12,7 @@
       }}
     </:title>
 
-    <:info>
+    <:tools>
       <Ui::LearnerHeaderInfo
         @groupName={{t "components.group.SCO"}}
         @group={{@model.organizationLearner.division}}
@@ -21,7 +21,8 @@
         @certifiableAt={{@model.organizationLearner.certifiableAt}}
         @hideCertifiableAt={{this.hasComputeOrganizationLearnerCertificabilityEnabled}}
       />
-    </:info>
-  </Learner::Header>
+    </:tools>
+  </Ui::PageTitle>
+
   {{outlet}}
 </article>

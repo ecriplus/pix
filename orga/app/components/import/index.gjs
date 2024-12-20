@@ -4,6 +4,7 @@ import { t } from 'ember-intl';
 import groupBy from 'lodash/groupBy';
 import uniq from 'lodash/uniq';
 
+import PageTitle from '../ui/page-title';
 import UiPixLoader from '../ui/pix-loader';
 import ScoOrganizationParticipantAdd from './add-sco';
 import SupOrganizationParticipantAdd from './add-sup';
@@ -100,12 +101,14 @@ export default class Import extends Component {
 
   <template>
     <article class="import-students-page">
-      <header class="import-students-page__header">
-        <h1>
+      <PageTitle>
+        <:title>
           {{t this.textsByOrganizationType.title}}
-        </h1>
-        <DownloadImportTemplateLink />
-      </header>
+        </:title>
+        <:tools>
+          <DownloadImportTemplateLink />
+        </:tools>
+      </PageTitle>
 
       <ImportBanner
         @organizationImportDetail={{@organizationImportDetail}}

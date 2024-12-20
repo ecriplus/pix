@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 
 import Header from '../table/header';
+import PageTitle from '../ui/page-title';
 import CoverRateGauge from './cover-rate-gauge';
 import TagLevel from './tag-level';
 
@@ -88,11 +89,15 @@ export default class Statistics extends Component {
   }
 
   <template>
-    <div class="statistics-page__header">
-      <h1 class="page-title">{{t "pages.statistics.title"}}</h1>
-      <span class="statistics-page-header__date">{{t "pages.statistics.before-date"}}
-        {{this.extractedDate}}</span>
-    </div>
+    <PageTitle @spaceBetweenTools={{true}}>
+      <:title>
+        {{t "pages.statistics.title"}}
+      </:title>
+      <:tools>
+        <span class="statistics-page-header__date">{{t "pages.statistics.before-date"}}
+          {{this.extractedDate}}</span>
+      </:tools>
+    </PageTitle>
 
     <section class="statistics-page__info">
       <p class="statistics-page-info__paragraph">

@@ -14,7 +14,6 @@
 @import 'globals/pix-loader';
 @import 'globals/tables';
 @import 'globals/texts';
-@import 'globals/titles';
 
 // components
 @import 'components/banner';
@@ -63,7 +62,6 @@
 @import 'pages/authenticated/attestations';
 @import 'pages/authenticated/campaigns/campaign';
 @import 'pages/authenticated/campaigns/create-form';
-@import 'pages/authenticated/campaigns/new';
 @import 'pages/authenticated/campaigns/new-item';
 @import 'pages/authenticated/campaigns/list';
 @import 'pages/authenticated/campaigns/update';

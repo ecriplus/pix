@@ -1,26 +1,28 @@
-<header class="navigation">
-  <Ui::Breadcrumb @links={{this.breadcrumbLinks}} />
-</header>
+<Ui::PageTitle>
+  <:breadcrumb>
+    <Ui::Breadcrumb @links={{this.breadcrumbLinks}} />
+  </:breadcrumb>
 
-<header class="campaign-prescriber-profile page__title">
-  <div class="page-header">
-    <h1 class="page-title">
-      {{@campaignProfile.firstName}}
-      {{@campaignProfile.lastName}}
-    </h1>
+  <:title>
+    {{@campaignProfile.firstName}}
+    {{@campaignProfile.lastName}}
+  </:title>
+  <:tools>
     {{#if (and @campaignProfile.isCertifiable @campaignProfile.isShared)}}
       <PixTag @color="green-light" class="prescriber__certifiable-tag">
         {{t "pages.profiles-individual-results.certifiable"}}
       </PixTag>
     {{/if}}
-  </div>
-  <p class="participant__link">
-    <PixIcon @name="infoUser" @plainIcon={{true}} />
-    <Participant::LinkTo @organizationLearnerId={{@campaignProfile.organizationLearnerId}}>
-      {{t "common.actions.link-to-participant"}}
-    </Participant::LinkTo>
-  </p>
-</header>
+  </:tools>
+  <:subtitle>
+    <span class="participant__link">
+      <PixIcon @name="infoUser" @plainIcon={{true}} />
+      <Participant::LinkTo @organizationLearnerId={{@campaignProfile.organizationLearnerId}}>
+        {{t "common.actions.link-to-participant"}}
+      </Participant::LinkTo>
+    </span>
+  </:subtitle>
+</Ui::PageTitle>
 
 <section class="panel panel--header">
   <header class="panel-header__headline">

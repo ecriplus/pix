@@ -5,6 +5,7 @@ import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
 import Breadcrumb from '../ui/breadcrumb';
+import PageTitle from '../ui/page-title';
 
 export default class MissionDetails extends Component {
   @service intl;
@@ -27,22 +28,26 @@ export default class MissionDetails extends Component {
 
   <template>
     <header class="mission-header">
-      <Breadcrumb @links={{this.breadcrumbLinks}} />
-      <div class="mission-header-informations">
-        <h1 class="mission-header-informations__title">
+      <PageTitle>
+        <:breadcrumb>
+          <Breadcrumb @links={{this.breadcrumbLinks}} />
+        </:breadcrumb>
+        <:title>
           {{@mission.name}}
-        </h1>
-        {{#if @mission.documentationUrl}}
-          <PixButtonLink
-            class="mission-header-informations__documentation-button"
-            @href={{@mission.documentationUrl}}
-            target="_blank "
-          >
-            <PixIcon @name="openNew" />
-            {{t "pages.missions.mission.details.button-label"}}
-          </PixButtonLink>
-        {{/if}}
-      </div>
+        </:title>
+        <:tools>
+          {{#if @mission.documentationUrl}}
+            <PixButtonLink
+              class="mission-header-informations__documentation-button"
+              @href={{@mission.documentationUrl}}
+              target="_blank "
+            >
+              <PixIcon @name="openNew" />
+              {{t "pages.missions.mission.details.button-label"}}
+            </PixButtonLink>
+          {{/if}}
+        </:tools>
+      </PageTitle>
 
       <section class="mission-header-objectives">
         <div>

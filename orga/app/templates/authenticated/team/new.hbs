@@ -2,9 +2,10 @@
 {{page-title (t "pages.team-new.title")}}
 
 <div class="new-team-page">
-  <h1 class="page__title page-title">
-    {{t "pages.team-new.title"}}
-  </h1>
+  <Ui::PageTitle>
+    <:title>{{t "pages.team-new.title"}}</:title>
+  </Ui::PageTitle>
+
   <PixNotificationAlert @type="warning" class="new-team-page__warning-banner" @withIcon={{true}}>{{t
       "pages.team-new.warning"
     }}</PixNotificationAlert>

@@ -1,10 +1,14 @@
 <div class="organization-participant-list-page__header">
-  <h1 class="page-title">{{t "pages.sco-organization-participants.title" count=@participantCount}}</h1>
-  {{#if this.currentUser.isAdminInOrganization}}
-    <div class="organization-participant-list-page__import-students-button hide-on-mobile">
-      <PixButtonLink @route="authenticated.import-organization-participants">
-        {{t "components.organization-participants-header.import-button"}}
-      </PixButtonLink>
-    </div>
-  {{/if}}
+  <Ui::PageTitle>
+    <:title>
+      {{t "pages.sco-organization-participants.title" count=@participantCount}}
+    </:title>
+    <:tools>
+      {{#if this.currentUser.isAdminInOrganization}}
+        <PixButtonLink @route="authenticated.import-organization-participants" class="hide-on-mobile">
+          {{t "components.organization-participants-header.import-button"}}
+        </PixButtonLink>
+      {{/if}}
+    </:tools>
+  </Ui::PageTitle>
 </div>

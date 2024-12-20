@@ -5,6 +5,7 @@ import { t } from 'ember-intl';
 
 import CopyPasteButton from '../../copy-paste-button';
 import Breadcrumb from '../../ui/breadcrumb';
+import PageTitle from '../../ui/page-title';
 import CampaignType from '../detail/type';
 
 export default class Header extends Component {
@@ -47,19 +48,15 @@ export default class Header extends Component {
   }
 
   <template>
-    <header class="campaign-header-title">
-      <Breadcrumb @links={{this.breadcrumbLinks}} class="campaign-header-title__breadcrumb" />
-      <div class="campaign-header-title__informations">
-        <h1 aria-label={{t "pages.campaign.name"}} class="campaign-header-title" title={{@campaign.name}}>
-          <CampaignType
-            @big={{true}}
-            @labels={{this.labels}}
-            @campaignType={{@campaign.type}}
-            @hideLabel={{true}}
-            class="campaign-header-title__type-icon"
-          />
-          <span class="campaign-header-title__name">{{@campaign.name}}</span>
-        </h1>
+    <PageTitle>
+      <:breadcrumb>
+        <Breadcrumb @links={{this.breadcrumbLinks}} class="campaign-header-title__breadcrumb" />
+      </:breadcrumb>
+      <:title>
+        <CampaignType @big={{true}} @labels={{this.labels}} @campaignType={{@campaign.type}} @hideLabel={{true}} />
+        <span class="page-title__name">{{@campaign.name}}</span>
+      </:title>
+      <:tools>
         <dl class="campaign-header-title__details">
           <div class="campaign-header-title__detail-item hide-on-mobile">
             <dt class="label-text">
@@ -103,7 +100,7 @@ export default class Header extends Component {
             </dd>
           </div>
         </dl>
-      </div>
-    </header>
+      </:tools>
+    </PageTitle>
   </template>
 }
