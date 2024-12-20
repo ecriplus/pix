@@ -5,8 +5,8 @@ import { LegalDocumentType } from '../../../../../src/legal-documents/domain/mod
 import { usecases } from '../../../../../src/legal-documents/domain/usecases/index.js';
 import { expect } from '../../../../test-helper.js';
 
-const { TOS } = LegalDocumentType.VALUES;
 const { PIX_ORGA } = LegalDocumentService.VALUES;
+const { TOS } = LegalDocumentType.VALUES;
 
 describe('Unit | Legal documents | Domain | Use case | get-legal-document-status-by-user-id', function () {
   context('when the legal document type is invalid', function () {
@@ -17,7 +17,7 @@ describe('Unit | Legal documents | Domain | Use case | get-legal-document-status
       const userId = 123;
 
       // when / then
-      await expect(usecases.getLegalDocumentStatusByUserId({ type, service, userId })).to.have.been.rejectedWith(
+      await expect(usecases.getLegalDocumentStatusByUserId({ service, type, userId })).to.have.been.rejectedWith(
         Joi.ValidationError,
       );
     });
@@ -31,7 +31,7 @@ describe('Unit | Legal documents | Domain | Use case | get-legal-document-status
       const userId = 123;
 
       // when / then
-      await expect(usecases.getLegalDocumentStatusByUserId({ type, service, userId })).to.have.been.rejectedWith(
+      await expect(usecases.getLegalDocumentStatusByUserId({ service, type, userId })).to.have.been.rejectedWith(
         Joi.ValidationError,
       );
     });

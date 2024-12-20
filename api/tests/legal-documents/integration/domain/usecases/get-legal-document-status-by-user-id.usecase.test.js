@@ -6,8 +6,8 @@ import { usecases } from '../../../../../src/legal-documents/domain/usecases/ind
 import { config } from '../../../../../src/shared/config.js';
 import { databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
-const { TOS } = LegalDocumentType.VALUES;
 const { PIX_ORGA } = LegalDocumentService.VALUES;
+const { TOS } = LegalDocumentType.VALUES;
 
 describe('Integration | Legal documents | Domain | Use case | get-legal-document-status-by-user-id', function () {
   beforeEach(async function () {
@@ -16,8 +16,8 @@ describe('Integration | Legal documents | Domain | Use case | get-legal-document
 
   it('returns the legal document status for a user', async function () {
     // given
-    const type = TOS;
     const service = PIX_ORGA;
+    const type = TOS;
     const user = databaseBuilder.factory.buildUser();
     const documentVersion = databaseBuilder.factory.buildLegalDocumentVersion({
       type,
@@ -32,7 +32,7 @@ describe('Integration | Legal documents | Domain | Use case | get-legal-document
     await databaseBuilder.commit();
 
     // when
-    const legalDocumentStatus = await usecases.getLegalDocumentStatusByUserId({ type, service, userId: user.id });
+    const legalDocumentStatus = await usecases.getLegalDocumentStatusByUserId({ userId: user.id, service, type });
 
     // then
     expect(legalDocumentStatus).to.be.an.instanceOf(LegalDocumentStatus);
@@ -46,13 +46,13 @@ describe('Integration | Legal documents | Domain | Use case | get-legal-document
   context('when the legal document version does not exist', function () {
     it('throws an error', async function () {
       // given
-      const type = TOS;
       const service = PIX_ORGA;
+      const type = TOS;
       const user = databaseBuilder.factory.buildUser();
       await databaseBuilder.commit();
 
       // when / then
-      await expect(usecases.getLegalDocumentStatusByUserId({ type, service, userId: user.id })).to.be.rejectedWith(
+      await expect(usecases.getLegalDocumentStatusByUserId({ userId: user.id, service, type })).to.be.rejectedWith(
         LegalDocumentVersionNotFoundError,
       );
     });
@@ -65,8 +65,8 @@ describe('Integration | Legal documents | Domain | Use case | get-legal-document
 
     it('returns the legal document status for a user based on PixOrga CGU', async function () {
       // given
-      const type = TOS;
       const service = PIX_ORGA;
+      const type = TOS;
       const user = databaseBuilder.factory.buildUser({
         pixOrgaTermsOfServiceAccepted: true,
         lastPixOrgaTermsOfServiceValidatedAt: new Date('2024-03-01'),
@@ -74,7 +74,7 @@ describe('Integration | Legal documents | Domain | Use case | get-legal-document
       await databaseBuilder.commit();
 
       // when
-      const legalDocumentStatus = await usecases.getLegalDocumentStatusByUserId({ type, service, userId: user.id });
+      const legalDocumentStatus = await usecases.getLegalDocumentStatusByUserId({ userId: user.id, service, type });
 
       // then
       expect(legalDocumentStatus).to.be.an.instanceOf(LegalDocumentStatus);

@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
 
 export class LegalDocument {
-  constructor({ id, type, service, versionAt }) {
+  constructor({ id, service, type, versionAt }) {
     this.id = id;
-    this.type = type;
     this.service = service;
+    this.type = type;
     this.versionAt = versionAt;
   }
 

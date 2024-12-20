@@ -10,7 +10,7 @@ import { usecases } from '../../domain/usecases/index.js';
  * @returns {Promise<void>} - A promise that resolves when the legal document is accepted.
  */
 const acceptLegalDocumentByUserId = async ({ userId, service, type }) => {
-  return usecases.acceptLegalDocumentByUserId({ type, service, userId });
+  return usecases.acceptLegalDocumentByUserId({ userId, service, type });
 };
 
 /**
@@ -23,7 +23,7 @@ const acceptLegalDocumentByUserId = async ({ userId, service, type }) => {
  * @returns {Promise<LegalDocumentStatus>} - A promise that resolves with the status of the legal document.
  */
 const getLegalDocumentStatusByUserId = async ({ userId, service, type }) => {
-  return usecases.getLegalDocumentStatusByUserId({ type, service, userId });
+  return usecases.getLegalDocumentStatusByUserId({ userId, service, type });
 };
 
 export { acceptLegalDocumentByUserId, getLegalDocumentStatusByUserId };

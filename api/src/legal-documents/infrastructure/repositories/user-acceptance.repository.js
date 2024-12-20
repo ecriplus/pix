@@ -20,11 +20,11 @@ const create = async ({ userId, legalDocumentVersionId }) => {
  *
  * @param {Object} params - The parameters for finding the user acceptance.
  * @param {string} params.userId - The ID of the user.
- * @param {string} params.type - The type of the legal document.
  * @param {string} params.service - The service associated with the legal document.
+ * @param {string} params.type - The type of the legal document.
  * @returns {Promise<Object|null>} A promise that resolves to the user acceptance record or null if not found.
  */
-const findLastForLegalDocument = async ({ userId, type, service }) => {
+const findLastForLegalDocument = async ({ userId, service, type }) => {
   const knexConnection = DomainTransaction.getConnection();
   const userAcceptanceDto = await knexConnection(TABLE_NAME)
     .select('userId', 'legalDocumentVersionId', 'acceptedAt')
@@ -33,7 +33,7 @@ const findLastForLegalDocument = async ({ userId, type, service }) => {
       'legal-document-version-user-acceptances.legalDocumentVersionId',
       'legal-document-versions.id',
     )
-    .where({ userId, type, service })
+    .where({ userId, service, type })
     .orderBy('versionAt', 'desc')
     .first();
 

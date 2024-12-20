@@ -3,8 +3,8 @@ import { LegalDocumentType } from '../../../../../src/legal-documents/domain/mod
 import * as userAcceptanceRepository from '../../../../../src/legal-documents/infrastructure/repositories/user-acceptance.repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
-const { TOS } = LegalDocumentType.VALUES;
 const { PIX_ORGA } = LegalDocumentService.VALUES;
+const { TOS } = LegalDocumentType.VALUES;
 
 describe('Integration | Legal document | Infrastructure | Repository | user-acceptance', function () {
   describe('#create', function () {

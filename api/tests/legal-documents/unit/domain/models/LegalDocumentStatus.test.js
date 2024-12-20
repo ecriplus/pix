@@ -4,8 +4,8 @@ import { LegalDocumentStatus, STATUS } from '../../../../../src/legal-documents/
 import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
 import { expect } from '../../../../test-helper.js';
 
-const { TOS } = LegalDocumentType.VALUES;
 const { PIX_ORGA } = LegalDocumentService.VALUES;
+const { TOS } = LegalDocumentType.VALUES;
 
 describe('Unit | Legal documents | Domain | Model | LegalDocumentStatus', function () {
   describe('#LegalDocumentStatus.buildForLegacyPixOrgaCgu', function () {
