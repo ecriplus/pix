@@ -19,7 +19,7 @@ module('Acceptance | Remove membership', function (hooks) {
     createPrescriberByUser({ user: adminUser });
 
     await authenticateSession(adminUser.id);
-    const organizationId = adminUser.memberships.models.firstObject.organizationId;
+    const organizationId = adminUser.memberships.models[0].organizationId;
 
     user = server.create('user', { firstName: 'John', lastName: 'Doe' });
     server.create('membership', { userId: user.id, organizationId, organizationRole: 'MEMBER' });

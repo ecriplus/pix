@@ -73,7 +73,7 @@ module('Acceptance | Sco Organization Participant List', function (hooks) {
 
       module('when prescriber is looking for students', function (hooks) {
         hooks.beforeEach(async function () {
-          organizationId = user.memberships.models.firstObject.organizationId;
+          organizationId = user.memberships.models[0].organizationId;
           server.create('sco-organization-participant', {
             organizationId,
             firstName: 'Chuck',
@@ -173,7 +173,7 @@ module('Acceptance | Sco Organization Participant List', function (hooks) {
 
       module('when student is associated', function (hooks) {
         hooks.beforeEach(async function () {
-          organizationId = user.memberships.models.firstObject.organizationId;
+          organizationId = user.memberships.models[0].organizationId;
 
           server.createList('sco-organization-participant', 5, { organizationId });
         });

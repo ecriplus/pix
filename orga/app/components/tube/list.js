@@ -24,14 +24,16 @@ export default class TubeList extends Component {
   @action
   selectTube(tube) {
     if (this.isTubeSelected(tube)) return;
-    this.selectedTubeIds.pushObject(tube.id);
+    this.selectedTubeIds = [...this.selectedTubeIds, tube.id];
   }
 
   @action
   unselectTube(tube) {
     const index = this.selectedTubeIds.indexOf(tube.id);
     if (index === -1) return;
-    this.selectedTubeIds.removeAt(index);
+    this.selectedTubeIds.splice(index, 1);
+
+    this.selectedTubeIds = [...this.selectedTubeIds];
   }
 
   getThematicState = (thematic) => {

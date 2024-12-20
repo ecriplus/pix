@@ -35,7 +35,7 @@ module('Acceptance | Organization Participant List', function (hooks) {
 
       test('it should return participant-list when having participants', async function (assert) {
         // given
-        const organizationId = user.memberships.models.firstObject.organizationId;
+        const organizationId = user.memberships.models[0].organizationId;
 
         // when
         server.create('organization-participant', { organizationId, firstName: 'Xavier', lastName: 'Charles' });
@@ -50,7 +50,7 @@ module('Acceptance | Organization Participant List', function (hooks) {
 
       test('it should filter by certificability', async function (assert) {
         // given
-        const organizationId = user.memberships.models.firstObject.organizationId;
+        const organizationId = user.memberships.models[0].organizationId;
 
         server.create('organization-participant', { organizationId, firstName: 'Jean', lastName: 'Charles' });
 

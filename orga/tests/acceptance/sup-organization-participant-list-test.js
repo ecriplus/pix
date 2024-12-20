@@ -28,7 +28,7 @@ module('Acceptance | Sup Organization Participant List', function (hooks) {
 
       await authenticateSession(user.id);
 
-      const { organizationId } = user.memberships.models.firstObject;
+      const { organizationId } = user.memberships.models[0];
       server.create('group', {
         name: 'L1',
       });
@@ -70,7 +70,7 @@ module('Acceptance | Sup Organization Participant List', function (hooks) {
 
       test('it filters by certificability', async function (assert) {
         // given
-        const organizationId = user.memberships.models.firstObject.organizationId;
+        const organizationId = user.memberships.models[0].organizationId;
 
         server.create('organization-participant', { organizationId, firstName: 'Jean', lastName: 'Charles' });
 

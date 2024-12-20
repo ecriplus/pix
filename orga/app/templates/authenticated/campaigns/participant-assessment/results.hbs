@@ -1,7 +1,3 @@
 {{page-title this.pageTitle}}
 
-<Participant::Assessment::Results
-  @results={{@model.campaignAssessmentParticipationResult}}
-  @displayResults={{gt @model.campaignAssessmentParticipationResult.sortedCompetenceResults.length 0}}
-  @class="participant-results"
-/>
+<Participant::Assessment::Results @results={{@model}} @class="participant-results" />

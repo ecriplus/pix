@@ -10,8 +10,4 @@ export default class CampaignAssessmentParticipationResult extends Model {
     inverse: 'campaignAssessmentParticipationResult',
   })
   competenceResults;
-
-  get sortedCompetenceResults() {
-    return this.hasMany('competenceResults').value().sortBy('index');
-  }
 }
