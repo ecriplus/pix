@@ -13,9 +13,10 @@
 // Components
 @import 'components/challenge/challenge-actions';
 @import 'components/challenge/challenge-embed-simulator';
-@import 'components/challenge/challenge-media';
 @import 'components/challenge/challenge-item';
 @import 'components/challenge/challenge-item-proposals';
+@import 'components/challenge/challenge-media';
+@import 'components/challenge/challenge-wrapper';
 @import 'components/delayed-element';
 @import 'components/mission-card/card';
 @import 'components/bubble';
@@ -45,24 +46,12 @@ b {
 }
 
 .app {
-  max-width: 1730px;
-
-  @include device-is('tablet') {
-    margin: 32px;
-  }
-
-  @include device-is('desktop') {
-    margin: 32px 50px;
-  }
-
-  @include device-is('large-screen') {
-    margin: 32px auto;
-  }
+  margin: 24px;
 
   main {
     display: flex;
     flex-direction: column;
-    min-height: 92vh;
+    min-height: calc(100vh - 48px);
   }
 }
 

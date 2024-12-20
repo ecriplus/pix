@@ -1,9 +1,12 @@
-.list {
+.school {
+  margin-left: 3rem;
+
+  .list {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   min-height: 300px;
-  margin: 0 auto 0 130px;
+  margin: 16px auto 0 130px;
 
   @include device-is('tablet') {
     margin-left: 115px;
@@ -71,6 +74,7 @@
         width: 50%;
       }
     }
+  }
   }
 }
 

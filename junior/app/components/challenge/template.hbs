@@ -1,5 +1,5 @@
 {{page-title (t "pages.challenge.title")}}
-<div class="container">
+<Challenge::ChallengeWrapper>
   <RobotDialog @class={{this.robotMood}}>
     {{#each @challenge.instructions as |instruction index|}}
       <DelayedElement @shouldDisplayIn={{this.bubbleDisplayDelay index}}>
@@ -32,4 +32,4 @@
       @isDisabled={{this.hasBeenAnswered}}
     />
   </DelayedElement>
-</div>
+</Challenge::ChallengeWrapper>

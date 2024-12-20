@@ -1,0 +1,13 @@
+.challenge-wrapper {
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 48px);
+  padding: var(--pix-spacing-4x);
+  background-color: rgba(var(--pix-primary-500-inline), 10%);
+  border-radius: 24px;
+
+  .container {
+    width: 100%;
+    max-width: 1440px;
+  }
+}
