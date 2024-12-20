@@ -71,7 +71,9 @@ async function _deleteOrganizationLearnersNotInList(queryBuilder, organizationId
     .update({ deletedBy: userId, deletedAt: knex.raw('CURRENT_TIMESTAMP') })
     .where({ organizationId })
     .whereNull('deletedAt')
-    .whereNotIn('studentNumber', studentNumberList)
+    .where(function () {
+      this.whereNotIn('studentNumber', studentNumberList).orWhereNull('studentNumber');
+    })
     .returning('*');
 
   const deletedOrganizationLearnerIds = deletedOrganizationLearners.map((deletedLearner) => deletedLearner.id);

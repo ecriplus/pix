@@ -479,16 +479,27 @@ describe('Integration | Infrastructure | Repository | sup-organization-learner-r
         });
 
         it('delete learners if not present in the new list', async function () {
+          databaseBuilder.factory.buildOrganizationLearner({
+            organizationId: organization.id,
+            firstName: 'Jean',
+            lastName: 'perdmesmots',
+            studentNumber: null,
+            updatedAt: new Date('2000-01-01'),
+          }).id;
+
+          await databaseBuilder.commit();
+
           await supOrganizationLearnerRepository.replaceStudents(organization.id, [], userId);
 
           const deletedOrganizationLearners = await knex('organization-learners').whereNotNull('deletedAt');
 
-          expect(deletedOrganizationLearners.length).to.be.equal(2);
-          expect(deletedOrganizationLearners[0].studentNumber).to.be.equal('4');
-          expect(deletedOrganizationLearners[1].studentNumber).to.be.equal('5');
-
-          expect(deletedOrganizationLearners[0].deletedBy).to.be.equal(userId);
-          expect(deletedOrganizationLearners[1].deletedBy).to.be.equal(userId);
+          expect(deletedOrganizationLearners.length).to.be.equal(3);
+          expect(deletedOrganizationLearners.map((learner) => learner.studentNumber)).to.be.members(['4', '5', null]);
+          expect(deletedOrganizationLearners.map((learner) => learner.deletedBy)).to.be.members([
+            userId,
+            userId,
+            userId,
+          ]);
         });
 
         it('does not update already deleted learners', async function () {
@@ -574,7 +585,10 @@ describe('Integration | Infrastructure | Repository | sup-organization-learner-r
         });
 
         it('do not delete learners from another organization', async function () {
+          const anotherOrganizationId = databaseBuilder.factory.buildOrganization().id;
+
           databaseBuilder.factory.buildOrganizationLearner({
+            organizationId: anotherOrganizationId,
             firstName: 'Kaiju',
             lastName: 'Godzilla',
             studentNumber: null,
@@ -582,6 +596,7 @@ describe('Integration | Infrastructure | Repository | sup-organization-learner-r
           });
 
           databaseBuilder.factory.buildOrganizationLearner({
+            organizationId: anotherOrganizationId,
             firstName: 'Kaiju',
             lastName: 'Gidora',
             studentNumber: '4',
