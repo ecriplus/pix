@@ -94,6 +94,7 @@ export default class List extends Component {
                       @onClearFilters={{fn withFunction @onClear reset}}
                       @numResults={{@campaigns.meta.rowCount}}
                       @canDelete={{this.canDelete}}
+                      @listOnlyCampaignsOfCurrentUser={{@hideCampaignOwnerFilter}}
                     />
                   </InElement>
                   <Headers @destinationId={{headerId}} @showCampaignOwner={{@showCampaignOwner}}>
