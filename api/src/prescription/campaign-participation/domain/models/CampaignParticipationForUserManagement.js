@@ -1,6 +1,7 @@
+import crypto from 'node:crypto';
+
 class CampaignParticipationForUserManagement {
   constructor({
-    id,
     campaignParticipationId,
     participantExternalId,
     status,
@@ -13,7 +14,7 @@ class CampaignParticipationForUserManagement {
     organizationLearnerFirstName,
     organizationLearnerLastName,
   } = {}) {
-    this.id = id;
+    this.id = crypto.randomUUID();
     this.campaignParticipationId = campaignParticipationId;
     this.createdAt = createdAt;
     this.participantExternalId = null;

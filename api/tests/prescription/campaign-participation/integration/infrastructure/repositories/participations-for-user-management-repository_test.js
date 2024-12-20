@@ -1,8 +1,13 @@
+import crypto from 'node:crypto';
+
 import { CampaignParticipationForUserManagement } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipationForUserManagement.js';
 import * as participationsForUserManagementRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/participations-for-user-management-repository.js';
-import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
+import {
+  CampaignParticipationStatuses,
+  CampaignTypes,
+} from '../../../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 const { SHARED } = CampaignParticipationStatuses;
 
@@ -13,6 +18,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
     beforeEach(async function () {
       userId = databaseBuilder.factory.buildUser().id;
       await databaseBuilder.commit();
+      sinon.stub(crypto, 'randomUUID').returns(1234);
     });
 
     context('when the given user has no participations', function () {
@@ -67,8 +73,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
           campaignParticipation.participantExternalId,
         );
       });
-
-      it('should return participations with all attributes', async function () {
+      it('should return both assessment and profiles collection participations with all attributes', async function () {
         // given
         const campaign = databaseBuilder.factory.buildCampaign({ code: 'FUNCODE' });
         const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
@@ -85,10 +90,23 @@ describe('Integration | Repository | Participations-For-User-Management', functi
           createdAt: new Date('2010-10-10'),
           sharedAt: new Date('2010-10-11'),
         });
-        const assessment = databaseBuilder.factory.buildAssessment({
+        databaseBuilder.factory.buildAssessment({
           campaignParticipationId: campaignParticipation.id,
           type: Assessment.types.CAMPAIGN,
           userId,
+        });
+        const profilesCollectionCampaign = databaseBuilder.factory.buildCampaign({
+          code: 'HIHACODE',
+          type: CampaignTypes.PROFILES_COLLECTION,
+        });
+        const profilesCollectionParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          userId,
+          organizationLearnerId: organizationLearner.id,
+          campaignId: profilesCollectionCampaign.id,
+          participantExternalId: '345',
+          status: SHARED,
+          createdAt: new Date('2010-10-12'),
+          sharedAt: new Date('2010-10-13'),
         });
         await databaseBuilder.commit();
 
@@ -98,11 +116,23 @@ describe('Integration | Repository | Participations-For-User-Management', functi
         // then
         expect(participationsForUserManagement[0]).to.be.instanceOf(CampaignParticipationForUserManagement);
         expect(participationsForUserManagement[0]).to.deep.includes({
-          id: assessment.id,
+          id: 1234,
+          campaignParticipationId: profilesCollectionParticipation.id,
+          participantExternalId: profilesCollectionParticipation.participantExternalId,
+          status: profilesCollectionParticipation.status,
+          createdAt: profilesCollectionParticipation.createdAt,
+          sharedAt: profilesCollectionParticipation.sharedAt,
+          campaignId: profilesCollectionCampaign.id,
+          campaignCode: profilesCollectionCampaign.code,
+          organizationLearnerFullName: `${organizationLearner.firstName} ${organizationLearner.lastName}`,
+        });
+        expect(participationsForUserManagement[1]).to.be.instanceOf(CampaignParticipationForUserManagement);
+        expect(participationsForUserManagement[1]).to.deep.includes({
+          id: 1234,
           campaignParticipationId: campaignParticipation.id,
           participantExternalId: campaignParticipation.participantExternalId,
           status: campaignParticipation.status,
-          createdAt: assessment.createdAt,
+          createdAt: campaignParticipation.createdAt,
           sharedAt: campaignParticipation.sharedAt,
           campaignId: campaign.id,
           campaignCode: campaign.code,
@@ -131,7 +161,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
             deletedAt: new Date('2010-10-12'),
             deletedBy: deletingUser.id,
           });
-          const assessment = databaseBuilder.factory.buildAssessment({
+          databaseBuilder.factory.buildAssessment({
             campaignParticipationId: campaignParticipation.id,
             type: Assessment.types.CAMPAIGN,
             userId,
@@ -144,11 +174,11 @@ describe('Integration | Repository | Participations-For-User-Management', functi
 
           // then
           expect(participationsForUserManagement[0]).to.deep.includes({
-            id: assessment.id,
+            id: 1234,
             campaignParticipationId: campaignParticipation.id,
             participantExternalId: campaignParticipation.participantExternalId,
             status: SHARED,
-            createdAt: assessment.createdAt,
+            createdAt: campaignParticipation.createdAt,
             sharedAt: campaignParticipation.sharedAt,
             campaignId: campaign.id,
             campaignCode: campaign.code,
@@ -156,8 +186,10 @@ describe('Integration | Repository | Participations-For-User-Management', functi
             organizationLearnerFullName: `${organizationLearner.firstName} ${organizationLearner.lastName}`,
           });
         });
+      });
 
-        it('should return participation is deleted and anonymized', async function () {
+      context('When a participation is deleted and anonymised', function () {
+        it('should return participation with deletion attributes', async function () {
           // given
           const assessment = databaseBuilder.factory.buildAssessment({
             type: Assessment.types.CAMPAIGN,
@@ -171,7 +203,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
 
           // then
           expect(participationsForUserManagement[0]).to.deep.includes({
-            id: assessment.id,
+            id: 1234,
             campaignParticipationId: null,
             participantExternalId: null,
             status: null,

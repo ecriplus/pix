@@ -1,12 +1,17 @@
+import crypto from 'node:crypto';
+
 import { CampaignParticipationForUserManagement } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipationForUserManagement.js';
-import { expect } from '../../../../../test-helper.js';
+import { expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CampaignParticipationForUserManagement', function () {
+  beforeEach(function () {
+    sinon.stub(crypto, 'randomUUID').returns(1234);
+  });
+
   describe('#constructor', function () {
     it('should not return campaign participation informations when campaignParticipationId is missing', function () {
       // given
       const campaignParticipation = new CampaignParticipationForUserManagement({
-        id: 1,
         campaignParticipationId: null,
         participantExternalId: 'externalId',
         status: 'TOTO',
@@ -21,7 +26,7 @@ describe('Unit | Domain | Models | CampaignParticipationForUserManagement', func
       });
 
       // then
-      expect(campaignParticipation.id).to.be.deep.equals(1);
+      expect(campaignParticipation.id).to.be.deep.equals(1234);
       expect(campaignParticipation.createdAt).to.be.deep.equals(new Date('2020-01-01'));
       expect(campaignParticipation.deletedAt).to.be.deep.equals(new Date('2022-01-01'));
       expect(campaignParticipation.organizationLearnerFullName).to.be.equals('-');

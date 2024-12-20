@@ -1,16 +1,25 @@
+import crypto from 'node:crypto';
+
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
   createServer,
   databaseBuilder,
   expect,
   generateValidRequestAuthorizationHeader,
+  sinon,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | GET /api/admin/users/{userId}/participations', function () {
-  let server;
+  let server, randomUUIDStub;
 
   beforeEach(async function () {
     server = await createServer();
+    randomUUIDStub = sinon.stub(crypto, 'randomUUID');
+    randomUUIDStub.returns('1234');
+  });
+
+  afterEach(function () {
+    sinon.restore();
   });
 
   it('should return participations', async function () {
@@ -23,7 +32,7 @@ describe('Acceptance | Controller | GET /api/admin/users/{userId}/participations
       campaignId: campaign.id,
       organizationLearnerId: organizationLearner.id,
     });
-    const assessment = databaseBuilder.factory.buildAssessment({
+    databaseBuilder.factory.buildAssessment({
       userId: user.id,
       campaignParticipationId: campaignParticipation.id,
       type: Assessment.types.CAMPAIGN,
@@ -43,7 +52,7 @@ describe('Acceptance | Controller | GET /api/admin/users/{userId}/participations
     expect(response.result).to.deep.equal({
       data: [
         {
-          id: assessment.id.toString(),
+          id: '1234',
           type: 'user-participations',
           attributes: {
             'campaign-participation-id': campaignParticipation.id,
