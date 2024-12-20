@@ -9,6 +9,7 @@ import { ComponentStepper } from '../../domain/models/component/ComponentStepper
 import { Step } from '../../domain/models/component/Step.js';
 import { Download } from '../../domain/models/element/Download.js';
 import { Embed } from '../../domain/models/element/Embed.js';
+import { Expand } from '../../domain/models/element/Expand.js';
 import { Card } from '../../domain/models/element/flashcards/Card.js';
 import { Flashcards } from '../../domain/models/element/flashcards/Flashcards.js';
 import { Image } from '../../domain/models/element/Image.js';
@@ -91,6 +92,8 @@ export class ModuleFactory {
         return ModuleFactory.#buildDownload(element);
       case 'embed':
         return ModuleFactory.#buildEmbed(element);
+      case 'expand':
+        return ModuleFactory.#buildExpand(element);
       case 'image':
         return ModuleFactory.#buildImage(element);
       case 'separator':
@@ -115,6 +118,7 @@ export class ModuleFactory {
         return undefined;
     }
   }
+
   static #buildDownload(element) {
     return new Download({
       id: element.id,
@@ -130,6 +134,14 @@ export class ModuleFactory {
       url: element.url,
       instruction: element.instruction,
       height: element.height,
+    });
+  }
+
+  static #buildExpand(element) {
+    return new Expand({
+      id: element.id,
+      title: element.title,
+      content: element.content,
     });
   }
 
