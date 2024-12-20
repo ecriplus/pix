@@ -1,6 +1,4 @@
-'use strict';
-
-const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+import EmberApp from 'ember-cli/lib/broccoli/ember-app.js';
 
 const sourceMapConfig = {
   production: 'source-map',
@@ -8,7 +6,7 @@ const sourceMapConfig = {
   default: 'eval-source-map',
 };
 
-module.exports = function (defaults) {
+export default function (defaults) {
   const app = new EmberApp(defaults, {
     sassOptions: {
       includePaths: ['node_modules/@1024pix/pix-ui/addon/styles'],
@@ -50,4 +48,4 @@ module.exports = function (defaults) {
       },
     },
   });
-};
+}
