@@ -10,6 +10,14 @@ const implementationType = {
   alphanumeric: Joi.string(),
 };
 
+const inePattern = new RegExp('^[0-9]{9}[a-zA-Z]{2}$');
+const inaPattern = new RegExp('^[0-9]{10}[a-zA-Z]{1}$');
+
+const studentIdentifierType = Joi.alternatives().try(
+  Joi.string().regex(inePattern).required(),
+  Joi.string().regex(inaPattern).required(),
+);
+
 const paramsToExport = {};
 const queryToExport = {};
 
@@ -81,4 +89,9 @@ paramsToExport.positiveInteger32bits = {
   max: postgreSQLSequenceEnd,
 };
 
-export { paramsToExport as identifiersType, queryToExport as optionalIdentifiersType, queriesType };
+export {
+  paramsToExport as identifiersType,
+  queryToExport as optionalIdentifiersType,
+  queriesType,
+  studentIdentifierType,
+};

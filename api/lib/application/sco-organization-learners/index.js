@@ -11,13 +11,10 @@ import {
 } from '../../../src/shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../src/shared/application/security-pre-handlers.js';
 import { config } from '../../../src/shared/config.js';
-import { identifiersType } from '../../../src/shared/domain/types/identifiers-type.js';
+import { identifiersType, studentIdentifierType } from '../../../src/shared/domain/types/identifiers-type.js';
 import { scoOrganizationLearnerController } from './sco-organization-learner-controller.js';
 
 const { passwordValidationPattern } = config.account;
-
-const inePattern = new RegExp('^[0-9]{9}[a-zA-Z]{2}$');
-const inaPattern = new RegExp('^[0-9]{10}[a-zA-Z]{1}$');
 
 const register = async function (server) {
   server.route([
@@ -230,10 +227,7 @@ const register = async function (server) {
               attributes: {
                 'first-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
                 'last-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
-                'ine-ina': Joi.alternatives().try(
-                  Joi.string().regex(inePattern).required(),
-                  Joi.string().regex(inaPattern).required(),
-                ),
+                'ine-ina': studentIdentifierType,
                 birthdate: Joi.date().format('YYYY-MM-DD').required(),
               },
             },

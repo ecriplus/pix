@@ -3,12 +3,11 @@ import BaseJoi from 'joi';
 import XRegExp from 'xregexp';
 
 import { config } from '../../../shared/config.js';
+import { studentIdentifierType } from '../../../shared/domain/types/identifiers-type.js';
 import { accountRecoveryController } from './account-recovery.controller.js';
 
 const Joi = BaseJoi.extend(JoiDate);
 const { passwordValidationPattern } = config.account;
-const inePattern = new RegExp('^[0-9]{9}[a-zA-Z]{2}$');
-const inaPattern = new RegExp('^[0-9]{10}[a-zA-Z]{1}$');
 
 export const accountRecoveryRoutes = [
   {
@@ -64,10 +63,7 @@ export const accountRecoveryRoutes = [
             attributes: {
               'first-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
               'last-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
-              'ine-ina': Joi.alternatives().try(
-                Joi.string().regex(inePattern).required(),
-                Joi.string().regex(inaPattern).required(),
-              ),
+              'ine-ina': studentIdentifierType,
               birthdate: Joi.date().format('YYYY-MM-DD').required(),
               email: Joi.string().email().required(),
             },
