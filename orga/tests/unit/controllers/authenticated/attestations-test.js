@@ -12,50 +12,100 @@ module('Unit | Controller | authenticated/attestations', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   module('#downloadSixthGradeAttestationsFile', function () {
-    test('should call the file-saver service with the right parameters', async function (assert) {
-      // given
-      this.intl = this.owner.lookup('service:intl');
-      const controller = this.owner.lookup('controller:authenticated/attestations');
+    module('when there are selected divisions', function () {
+      test('should call the file-saver service with the right parameters', async function (assert) {
+        // given
+        this.intl = this.owner.lookup('service:intl');
+        const controller = this.owner.lookup('controller:authenticated/attestations');
 
-      const token = 'a token';
-      const organizationId = 12345;
-      const selectedDivision = ['3èmea'];
+        const token = 'a token';
+        const organizationId = 12345;
+        const selectedDivision = ['3èmea'];
 
-      controller.session = {
-        isAuthenticated: true,
-        data: {
-          authenticated: {
-            access_token: token,
+        controller.session = {
+          isAuthenticated: true,
+          data: {
+            authenticated: {
+              access_token: token,
+            },
           },
-        },
-      };
+        };
 
-      controller.currentUser = {
-        organization: {
-          id: organizationId,
-        },
-      };
+        controller.currentUser = {
+          organization: {
+            id: organizationId,
+          },
+        };
 
-      controller.fileSaver = {
-        save: sinon.stub(),
-      };
+        controller.fileSaver = {
+          save: sinon.stub(),
+        };
 
-      controller.model = {
-        options: [{ label: '3èmeA', value: '3èmeA' }],
-      };
+        controller.model = {
+          options: [{ label: '3èmeA', value: '3èmeA' }],
+        };
 
-      // when
-      await controller.downloadSixthGradeAttestationsFile(selectedDivision);
+        // when
+        await controller.downloadSixthGradeAttestationsFile(selectedDivision);
 
-      // then
-      assert.ok(
-        controller.fileSaver.save.calledWith({
-          token,
-          url: `/api/organizations/${organizationId}/attestations/${SIXTH_GRADE_ATTESTATION_KEY}?divisions[]=${encodeURIComponent(selectedDivision)}`,
-          fileName: SIXTH_GRADE_ATTESTATION_FILE_NAME,
-          noContentMessageNotification: this.intl.t('pages.attestations.no-attestations'),
-        }),
-      );
+        // then
+        assert.ok(
+          controller.fileSaver.save.calledWith({
+            token,
+            url: `/api/organizations/${organizationId}/attestations/${SIXTH_GRADE_ATTESTATION_KEY}?divisions[]=${encodeURIComponent(selectedDivision)}`,
+            fileName: SIXTH_GRADE_ATTESTATION_FILE_NAME,
+            noContentMessageNotification: this.intl.t('pages.attestations.no-attestations'),
+          }),
+        );
+      });
+    });
+
+    module('when selected divisions is empty', function () {
+      test('should call the file-saver service with the right parameters', async function (assert) {
+        // given
+        this.intl = this.owner.lookup('service:intl');
+        const controller = this.owner.lookup('controller:authenticated/attestations');
+
+        const token = 'a token';
+        const organizationId = 12345;
+        const selectedDivision = [];
+
+        controller.session = {
+          isAuthenticated: true,
+          data: {
+            authenticated: {
+              access_token: token,
+            },
+          },
+        };
+
+        controller.currentUser = {
+          organization: {
+            id: organizationId,
+          },
+        };
+
+        controller.fileSaver = {
+          save: sinon.stub(),
+        };
+
+        controller.model = {
+          options: [],
+        };
+
+        // when
+        await controller.downloadSixthGradeAttestationsFile(selectedDivision);
+
+        // then
+        assert.ok(
+          controller.fileSaver.save.calledWith({
+            token,
+            url: `/api/organizations/${organizationId}/attestations/${SIXTH_GRADE_ATTESTATION_KEY}`,
+            fileName: SIXTH_GRADE_ATTESTATION_FILE_NAME,
+            noContentMessageNotification: this.intl.t('pages.attestations.no-attestations'),
+          }),
+        );
+      });
     });
 
     test('it should not call file-save service and display an error if an error occurs', async function (assert) {
