@@ -1,13 +1,13 @@
-import globals from 'globals';
+import pixRecommendedConfig from '@1024pix/eslint-plugin/config';
 import babelParser from '@babel/eslint-parser';
+import emberParser from 'ember-eslint-parser';
 import emberRecommendedConfig from 'eslint-plugin-ember/configs/recommended';
 import emberGjsRecommendedConfig from 'eslint-plugin-ember/configs/recommended-gjs';
-import qunitRecommendedConfig from 'eslint-plugin-qunit/configs/recommended';
-import prettierRecommendedConfig from 'eslint-plugin-prettier/recommended';
-import nRecommendedConfig from 'eslint-plugin-n';
-import * as pixRecommendedConfig from '@1024pix/eslint-plugin/config';
-import emberParser from 'ember-eslint-parser';
 import i18nJsonPlugin from 'eslint-plugin-i18n-json';
+import nRecommendedConfig from 'eslint-plugin-n';
+import prettierRecommendedConfig from 'eslint-plugin-prettier/recommended';
+import qunitRecommendedConfig from 'eslint-plugin-qunit/configs/recommended';
+import globals from 'globals';
 
 const unconventionalJsFiles = ['blueprints/**/files/*', 'app/vendor/*'];
 const compiledOutputFiles = ['dist/*', 'tmp/*'];
@@ -37,9 +37,9 @@ const emberPatchedParser = Object.assign(
 );
 
 export default [
-pixRecommendedConfig,
-...emberRecommendedConfig,
-...emberGjsRecommendedConfig,
+  ...pixRecommendedConfig,
+  ...emberRecommendedConfig,
+  ...emberGjsRecommendedConfig,
   qunitRecommendedConfig,
   prettierRecommendedConfig,
   {
@@ -49,22 +49,23 @@ pixRecommendedConfig,
     languageOptions: {
       globals: {
         ...globals.browser,
+        ...globals.node,
       },
       parser: babelParser,
       parserOptions: {
         ecmaVersion: 2018,
         sourceType: 'module',
-        parserOptions: {
-          requireConfigFile: false,
-          babelOptions: {
-            plugins: [['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }]],
-          },
+        requireConfigFile: false,
+        babelOptions: {
+          configFile: false,
+          babelrc: false,
+          plugins: [['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }]],
         },
       },
     },
     rules: {
-      'no-restricted-imports': ['error', { paths: ['lodash'] }],
       'no-irregular-whitespace': 'off',
+      'no-restricted-imports': ['error', { paths: ['lodash'] }],
     },
   },
   {
@@ -85,6 +86,14 @@ pixRecommendedConfig,
 
       ecmaVersion: 5,
       sourceType: 'script',
+    },
+    rules: {
+      'n/no-extraneous-import': [
+        'error',
+        {
+          allowModules: ['eslint-plugin-i18n-json'],
+        },
+      ],
     },
   },
   {
@@ -107,5 +116,5 @@ pixRecommendedConfig,
     rules: {
       ...i18nJsonPlugin.configs.recommended.rules,
     },
-  }
-]
+  },
+];
