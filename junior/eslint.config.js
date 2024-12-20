@@ -37,7 +37,7 @@ const emberPatchedParser = Object.assign(
 );
 
 export default [
-...pixRecommendedConfig,
+pixRecommendedConfig,
 ...emberRecommendedConfig,
 ...emberGjsRecommendedConfig,
   qunitRecommendedConfig,
