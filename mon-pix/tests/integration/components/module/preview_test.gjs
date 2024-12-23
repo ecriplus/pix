@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import ModulixPreview from 'mon-pix/components/module/preview';
 import { module, test } from 'qunit';
 
@@ -19,5 +20,25 @@ module('Integration | Component | Module | Preview', function (hooks) {
     const linkToModulixEditor = screen.getByRole('link', { name: linkName });
     assert.dom(linkToModulixEditor).exists();
     assert.strictEqual(linkToModulixEditor.href, expectedUrl);
+  });
+
+  test('should hide json textarea by default', async function (assert) {
+    //  when
+    const screen = await render(<template><ModulixPreview /></template>);
+
+    // then
+    assert.dom(screen.queryByRole('textbox', { name: 'Contenu du Module' })).doesNotExist();
+  });
+
+  test('should display json textarea on button click', async function (assert) {
+    //  given
+    const screen = await render(<template><ModulixPreview /></template>);
+    const button = screen.getByRole('button', { name: 'Afficher le JSON' });
+
+    // when
+    await click(button);
+
+    // then
+    assert.dom(screen.queryByRole('textbox', { name: 'Contenu du Module' })).exists();
   });
 });

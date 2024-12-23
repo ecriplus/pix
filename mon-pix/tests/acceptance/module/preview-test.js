@@ -1,5 +1,5 @@
 import { fillByLabel, visit } from '@1024pix/ember-testing-library';
-import { currentURL } from '@ember/test-helpers';
+import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -12,17 +12,18 @@ module('Acceptance | Module | Routes | Preview', function (hooks) {
   setupIntl(hooks);
 
   test('should allow to preview module', async function (assert) {
-    // given & when
+    // given
     const screen = await visit('/modules/preview');
 
-    assert.strictEqual(currentURL(), '/modules/preview');
-
+    // when
+    await click(screen.getByRole('button', { name: 'Afficher le JSON' }));
     await fillByLabel(
       'Contenu du Module',
       '{ "grains": [{ "id":"1", "type": "lesson", "title": "Preview", "components": [{ "type": "element", "element": {"type": "text", "content": "Preview du module" }}] }] }',
     );
 
     // then
+    assert.strictEqual(currentURL(), '/modules/preview');
     assert.dom(screen.getByText('Preview du module')).exists();
   });
 });
