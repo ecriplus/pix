@@ -49,93 +49,6 @@
             {
               "elements": [
                 {
-                  "id": "eff4694f-d2a9-48f1-846d-9c9f88acccfa",
-                  "type": "text",
-                  "content": "<p>Dans chacune des situations suivantes, choisissez l’action adaptée entre :</p><ul><li>un tri à un critère (sur une colonne uniquement),</li><li>&nbsp;un filtre,</li><li>un tri multicritère.</li></ul>"
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
-                  "id": "56dce1db-51b3-4e2b-ba45-ed606a3d8882",
-                  "type": "text",
-                  "content": "<p>Voici le tableau de gestion de projet créé par Jean.</p>"
-                },
-                {
-                  "id": "23e99d7a-4539-48de-83ce-afc4d84cd1bb",
-                  "type": "image",
-                  "url": "https://i.imgur.com/KOqcsMo.jpeg",
-                  "alt": "Feuille de calcul avec un tableau à 4 colonnes. Sur chaque ligne figure une tâche, son intitulé, le projet auquel elle est attachée, le client concerné et le niveau de priorité de la tâche. ",
-                  "alternativeText": "<p>Feuille de calcul avec un tableau à 4 colonnes. Sur chaque ligne figure une tâche, son intitulé, le projet auquel elle est attachée, le client concerné et le niveau de priorité de la tâche. </p>"
-                },
-                {
-                  "id": "5f84a71d-a48f-4746-8a9a-2f25d8340ad4",
-                  "type": "qcu",
-                  "instruction": "<p>Jean souhaite afficher les tâches par ordre de priorité croissant. </p><p>Que doit-il appliquer ?<br><br></p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>Un tri à un critère</p>",
-                      "feedback": "<p>Bonne réponse ! Le tri doit être fait sur un seul critère : le niveau de priorité.</p>"
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>Un filtre</p>",
-                      "feedback": "<p>Mauvaise réponse. Un filtre ne permet par d’organiser le tableau, il permet d’afficher ou non une sélection de niveaux de priorité.</p>"
-                    },
-                    {
-                      "id": "3",
-                      "content": "<p>Un tri multicritère</p>",
-                      "feedback": "<p>Mauvaise réponse. Un seul critère est en jeu dans cette situation : le niveau de priorité.</p>"
-                    }
-                  ],
-                  "solution": "1"
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
-                  "id": "248c7dc1-2caf-4659-b524-f57e17d0e6cf",
-                  "type": "text",
-                  "content": "<p>Voici le tableau de Loredana, qui comporte les élèves de son lycée, avec leurs classes et leurs choix d'option.</p>"
-                },
-                {
-                  "id": "60653c65-5f54-43e3-8f20-3e764fd0d36d",
-                  "type": "image",
-                  "url": "https://i.imgur.com/FiZjWVE.jpeg",
-                  "alt": "Feuille de calcul avec un tableau à 4 colonnes. Chaque ligne représente un élève : son prénom, son nom, sa classe et l'option choisie.",
-                  "alternativeText": "<p>Feuille de calcul avec un tableau à 4 colonnes. Chaque ligne représente un élève : son prénom, son nom, sa classe et l'option choisie.</p>"
-                },
-                {
-                  "id": "01e76883-2f58-4ba2-8d4e-3cee40660c65",
-                  "type": "qcu",
-                  "instruction": "<p>Loredana veut afficher seulement les élèves qui ont choisi l'option théâtre. </p><p>Que doit-elle appliquer ?<br><br></p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>Un tri à un critère</p>",
-                      "feedback": "<p>Mauvaise réponse.&nbsp;Le tri simple va permettre de regrouper les élèves par option, mais l’ensemble des élèves resteront affichés dans cette liste.</p>"
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>Un filtre</p>",
-                      "feedback": "<p>Bonne réponse !&nbsp;Filtrer l’option Théâtre sur la colonne « Option » lui permettra d’afficher seulement les élèves qui suivent cette option.</p>"
-                    },
-                    {
-                      "id": "3",
-                      "content": "<p>Un tri multicritère</p>",
-                      "feedback": "<p>Mauvaise réponse.&nbsp;Le tri multicritère peut permettre de regrouper les élèves par option et par classe, mais l’ensemble des élèves resteront affichés dans cette liste.</p>"
-                    }
-                  ],
-                  "solution": "2"
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
                   "id": "1d9be377-24ae-49c6-8adc-980fd0e931e0",
                   "type": "text",
                   "content": "<p>Sarah a organisé un évènement pour des enfants. Voici le tableau qui présente leurs résultats aux 3 épreuves.</p>"
@@ -147,6 +60,69 @@
                   "alt": "Feuille de calcul avec un tableau à 6 colonnes. Chaque ligne représente un enfant : son prénom, son nom, son équipe, le temps réalisé à la course d'orientation, le score aux fléchettes et la réponse apportée au quiz.",
                   "alternativeText": "<p>Feuille de calcul avec un tableau à 6 colonnes. Chaque ligne représente un enfant : son prénom, son nom, son équipe, le temps réalisé à la course d'orientation, le score aux fléchettes et la réponse apportée au quiz.</p>"
                 },
+                {
+                  "id": "eff4694f-d2a9-48f1-846d-9c9f88acccfa",
+                  "type": "text",
+                  "content": "<p>Dans chacune des situations suivantes, choisissez l’action adaptée entre :</p><ul><li>un tri à un critère (sur une colonne uniquement),</li><li>&nbsp;un filtre,</li><li>un tri multicritère.</li></ul>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "5f84a71d-a48f-4746-8a9a-2f25d8340ad4",
+                  "type": "qcu",
+                  "instruction": "<p>Sarah souhaite afficher les enfants alphabétiquement par nom.</p><p>Que doit-elle appliquer ?<br><br></p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Un tri à un critère</p>",
+                      "feedback": "<p>Bonne réponse ! Le tri doit être fait sur un seul critère : le nom des enfants.</p>"
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Un filtre</p>",
+                      "feedback": "<p>Mauvaise réponse. Un filtre ne permet par d’organiser le tableau, il permet d’afficher ou non une sélection d'enfants.</p>"
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Un tri multicritère</p>",
+                      "feedback": "<p>Mauvaise réponse. Un seul critère est en jeu dans cette situation : le nom des enfants.</p>"
+                    }
+                  ],
+                  "solution": "1"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "01e76883-2f58-4ba2-8d4e-3cee40660c65",
+                  "type": "qcu",
+                  "instruction": "<p>Sarah veut afficher les scores d'une seule équipe. </p><p>Que doit-elle appliquer ?<br><br></p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Un tri à un critère</p>",
+                      "feedback": "<p>Mauvaise réponse.&nbsp;Le tri simple va permettre de regrouper les élèves par équipe, mais l’ensemble des enfants resteront affichés.</p>"
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Un filtre</p>",
+                      "feedback": "<p>Bonne réponse ! Filtrer sur la colonne « Équipe » lui permettra d’afficher seulement les enfants de l'équipe de son choix.</p>"
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Un tri multicritère</p>",
+                      "feedback": "<p>Mauvaise réponse. Le tri multicritère peut permettre de regrouper les enfants par équipe et par score, mais l’ensemble des enfants resteront affichés.</p>"
+                    }
+                  ],
+                  "solution": "2"
+                }
+              ]
+            },
+            {
+              "elements": [
                 {
                   "id": "a98472e5-2500-4a1c-99b9-a62cccb0015c",
                   "type": "qcu",
@@ -177,14 +153,14 @@
                 {
                   "id": "3be17733-617d-4b6b-8a48-af3d3aaa636d",
                   "type": "text",
-                  "content": "<p>Le tri multicritère vous permet d’aller plus loin que le tri sur un critère (croissant ou décroissant) qui ne permet que de réordonner un tableau en suivant l’ordre d’une seule colonne. <br><br> Il est aussi complémentaire des possibilités offertes par le filtre qui fait une extraction des données qui vous intéressent, et non un classement.<br><br>Le tri multicritère permet de trier l’ensemble de données de votre tableau en cumulant des critères : un premier critère, puis un second, puis un troisième, etc.</p>"
+                  "content": "<p>Voici comment distinguer le tri multicritère du filtre et du tri sur une seule colonne.</p>"
                 },
                 {
                   "id": "f37f93e5-8b78-40b1-9628-1b07e49de08d",
                   "type": "image",
-                  "url": "https://i.imgur.com/gVN10ff.jpeg",
+                  "url": "https://i.imgur.com/f8JZTHw.jpeg",
                   "alt": "",
-                  "alternativeText": "<p>Icones génériques des options de filtre et de tri dans les logiciel de tableurs :</p><ul><li>Filtre</li><li>Tri croissant</li><li>Tri décroissant</li><li>Tri multicritère</li></ul>"
+                  "alternativeText": "<p>Infographie des options de filtre et de tri dans les logiciel de tableurs :</p><ul><li>Filtre, pour afficher seulement certaines lignes.</li><li>Tri croissant et Tri décroissant, pour trier le tableau sur une seule colonne.</li><li>Tri multicritère, pour trier le tableau sur plusieurs colonnes.</li></ul>"
                 }
               ]
             }
@@ -382,14 +358,14 @@
                 {
                   "id": "b8c69ed0-7388-4197-a700-19126f4c91d2",
                   "type": "text",
-                  "content": "<p><strong>L’onglet « Options » de la fenêtre de tri, permet de faire des réglages avancés.</strong> </p><ul><li>La sensibilité à la casse permet de prendre en compte ou d’ignorer les majuscules ou les minuscules. 🔠</li><li>L’ordre de tri personnalisé permet de trier automatiquement les jours de la semaine et les mois. Sans cette option, le tri sera alphabétique : jeudi sera donc avant lundi. 📆</li></ul>"
+                  "content": "<p><strong>La sensibilité à la casse</strong> </p><p>L’onglet « Options » de la fenêtre de tri, permet de faire des réglages avancés. La case à cocher «Sensibilité à la casse» permet de prendre en compte ou d’ignorer les majuscules ou les minuscules. 🔠</p>"
                 },
                 {
                   "id": "37ac6388-e4b2-41ac-af3a-bc1219c0f23c",
                   "type": "image",
                   "url": "https://i.imgur.com/efiCSYj.gif",
                   "alt": "",
-                  "alternativeText": "<p><br></p>"
+                  "alternativeText": ""
                 }
               ]
             },
@@ -398,12 +374,12 @@
                 {
                   "id": "8536a080-79f8-4bc1-8cb7-5c3829dca8ca",
                   "type": "text",
-                  "content": "<p><strong>Il n'y a pas besoin de sélectionner les 1001 lignes de votre tableau une par une.</strong> </p><p>Si un tableau comporte beaucoup, de lignes, il existe une solution simple pour le sélectionner en entier, sans le faire manuellement : </p><ol><li>Vérifiez que votre tableau n’a pas de lignes ou de colonnes vides.</li><li>Cliquez sur n’importe quelle case remplie de votre tableau.</li><li>Ouvrez la fenêtre de tri.<br></li></ol><p>La majorité des logiciels détectent automatiquement l’ensemble du tableau à trier.<br><br></p>"
+                  "content": "<p><strong>L’ordre de tri personnalisé. </strong> </p><p>Il permet de trier automatiquement les jours de la semaine et les mois. Sans cette option, le tri sera alphabétique : jeudi sera donc avant lundi. 📆 on trouvé également ce réglage dans l’onglet « Options » de la fenêtre de tri.</p>"
                 },
                 {
                   "id": "8dff7246-9c67-45c9-b5bd-801d12008587",
                   "type": "image",
-                  "url": "https://i.imgur.com/DYkI0yh.gif",
+                  "url": "https://i.imgur.com/efiCSYj.gif",
                   "alt": "",
                   "alternativeText": ""
                 }
