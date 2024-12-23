@@ -93,6 +93,7 @@ export default class ModulixStepper extends Component {
             @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
             @onVideoPlay={{@onVideoPlay}}
             @onFileDownload={{@onFileDownload}}
+            @onExpandToggle={{@onExpandToggle}}
           />
         {{/each}}
         {{#if this.shouldDisplayNextButton}}

@@ -218,6 +218,7 @@ export default class ModuleGrain extends Component {
                   @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
                   @onVideoPlay={{@onVideoPlay}}
                   @onFileDownload={{@onFileDownload}}
+                  @onExpandToggle={{@onExpandToggle}}
                 />
               </div>
             {{/if}}
