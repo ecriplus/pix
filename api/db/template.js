@@ -4,7 +4,12 @@
 // You can design and test your migration to avoid this by following this guide
 // https://1024pix.atlassian.net/wiki/spaces/EDTDT/pages/3849323922/Cr+er+une+migration
 
-// If your migrations target `answers` or `knowledge-elements`
+// If your migrations target :
+//
+// `answers`
+// `knowledge-elements`
+// `knowledge-element-snapshots`
+//
 // contact @team-captains, because automatic migrations are not active on `pix-datawarehouse-production`
 // this may prevent data replication to succeed the day after your migration is deployed on `pix-api-production`
 const TABLE_NAME = 'book';
