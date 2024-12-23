@@ -1268,7 +1268,8 @@
         "subtitle": "Continúa con tus pruebas de competencias, aquí encontrará las más recientes.",
         "title": "Recuperar una competencia"
       },
-      "title": "Inicio"
+      "title": "Inicio",
+      "welcome": "Bienvenido { firstName }"
     },
     "download-session-results": {
       "button": {

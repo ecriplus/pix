@@ -20,6 +20,7 @@
   @extend %pix-title-m;
 
   color: var(--pix-neutral-900);
+  text-wrap: pretty;
 }
 
 .global-page-header__description {
@@ -27,4 +28,5 @@
 
   margin-top: var(--pix-spacing-3x);
   color: var(--pix-neutral-500);
+  text-wrap: balance;
 }
