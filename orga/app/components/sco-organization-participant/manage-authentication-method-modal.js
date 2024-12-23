@@ -61,7 +61,7 @@ export default class ManageAuthenticationMethodModal extends Component {
       await dependentUser.save();
       this.generatedPassword = dependentUser.generatedPassword;
       this.isUniquePasswordVisible = !this.isUniquePasswordVisible;
-    } catch (e) {
+    } catch {
       this.notifications.sendError(this._t('error.unexpected'));
     }
   }

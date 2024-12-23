@@ -23,7 +23,7 @@ export default class CampaignTabs extends Component {
         'pix-event-action': "Cliquer sur le bouton d'export des résultats d'une campagne",
         'pix-event-name': "Clic sur le bouton d'export",
       });
-    } catch (err) {
+    } catch {
       this.notifications.sendError(this.intl.t('api-error-messages.global'));
     }
   }

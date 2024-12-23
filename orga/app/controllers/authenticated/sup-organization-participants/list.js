@@ -74,7 +74,7 @@ export default class ListController extends Controller {
       );
 
       this.send('refreshModel');
-    } catch (error) {
+    } catch {
       this.notifications.sendError(
         this.intl.t('pages.sup-organization-participants.action-bar.error-message', {
           count: listLearners.length,

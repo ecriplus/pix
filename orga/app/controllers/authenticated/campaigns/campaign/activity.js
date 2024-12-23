@@ -54,7 +54,7 @@ export default class ActivityController extends Controller {
       });
       this.send('refreshModel');
       this.notifications.sendSuccess(this.intl.t('pages.campaign-activity.delete-participation-modal.success'));
-    } catch (error) {
+    } catch {
       this.notifications.sendError(this.intl.t('pages.campaign-activity.delete-participation-modal.error'));
     }
   }
