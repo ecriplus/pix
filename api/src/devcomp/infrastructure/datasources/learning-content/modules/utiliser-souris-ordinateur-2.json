@@ -264,15 +264,15 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>4</p>",
+                "content": "<p>4</p>"
               },
               {
                 "id": "2",
-                "content": "<p>5</p>",
+                "content": "<p>5</p>"
               },
               {
                 "id": "3",
-                "content": "<p>6</p>",
+                "content": "<p>6</p>"
               }
             ],
             "feedbacks": {
