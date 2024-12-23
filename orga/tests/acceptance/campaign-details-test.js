@@ -1,6 +1,5 @@
-import { visit as visitScreen } from '@1024pix/ember-testing-library';
-import { within } from '@1024pix/ember-testing-library';
-import { click, currentURL, visit } from '@ember/test-helpers';
+import { visit, within } from '@1024pix/ember-testing-library';
+import { click, currentURL } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -39,7 +38,7 @@ module('Acceptance | Campaign Details', function (hooks) {
       server.create('campaign', { id: 1 });
 
       // when
-      await visitScreen('/campagnes/1');
+      await visit('/campagnes/1');
       await click(within(document.querySelector('main')).getByRole('link', { name: t('navigation.main.campaigns') }));
 
       // then
@@ -57,7 +56,7 @@ module('Acceptance | Campaign Details', function (hooks) {
       server.create('campaign-participant-activity', { firstName: 'toto' });
 
       // when
-      const screen = await visitScreen('/campagnes/1');
+      const screen = await visit('/campagnes/1');
 
       // then
       assert.dom(screen.getByLabelText('Navigation principale')).exists();

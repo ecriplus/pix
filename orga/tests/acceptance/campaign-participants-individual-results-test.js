@@ -1,5 +1,4 @@
-import { within } from '@1024pix/ember-testing-library';
-import { clickByName, visit as visitScreen } from '@1024pix/ember-testing-library';
+import { clickByName, visit, within } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { t } from 'ember-intl/test-support';
@@ -33,7 +32,7 @@ module('Acceptance | Campaign Participants Individual Results', function (hooks)
     server.create('organization-participant', { id: 1, organizationId });
 
     // when
-    const screen = await visitScreen('/campagnes/1/profils/1');
+    const screen = await visit('/campagnes/1/profils/1');
     await click(screen.getByRole('link', { name: t('common.actions.link-to-participant') }));
 
     // then
@@ -50,7 +49,7 @@ module('Acceptance | Campaign Participants Individual Results', function (hooks)
     server.create('campaign-assessment-participation', { id: 1, campaignId: 1, campaignAssessmentParticipationResult });
 
     // when
-    await visitScreen('/campagnes/1/evaluations/1');
+    await visit('/campagnes/1/evaluations/1');
     await click(within(document.querySelector('main')).getByRole('link', { name: t('navigation.main.campaigns') }));
 
     // then
@@ -68,7 +67,7 @@ module('Acceptance | Campaign Participants Individual Results', function (hooks)
     server.create('campaign', { id: 1, name: 'CampagneEtPrairie' });
 
     // when
-    await visitScreen('/campagnes/1/evaluations/1');
+    await visit('/campagnes/1/evaluations/1');
     await clickByName('CampagneEtPrairie');
 
     // then
@@ -85,7 +84,7 @@ module('Acceptance | Campaign Participants Individual Results', function (hooks)
     server.create('campaign-assessment-participation', { id: 1, campaignId: 1, campaignAssessmentParticipationResult });
 
     // when
-    const screen = await visitScreen('/campagnes/1/evaluations/1');
+    const screen = await visit('/campagnes/1/evaluations/1');
 
     // then
     assert.dom(screen.getByLabelText('Navigation principale')).exists();
@@ -103,7 +102,7 @@ module('Acceptance | Campaign Participants Individual Results', function (hooks)
     server.create('campaign-assessment-participation', { id: 1, campaignId: 1, campaignAssessmentParticipationResult });
 
     // when
-    const screen = await visitScreen('/campagnes/1/evaluations/1');
+    const screen = await visit('/campagnes/1/evaluations/1');
 
     // then
     assert.dom(screen.getByText('Compétences (2)')).exists();
@@ -119,7 +118,7 @@ module('Acceptance | Campaign Participants Individual Results', function (hooks)
     server.create('campaign-assessment-participation', { id: 1, campaignId: 1, campaignAssessmentParticipationResult });
 
     // when
-    const screen = await visitScreen('/campagnes/1/evaluations/1');
+    const screen = await visit('/campagnes/1/evaluations/1');
 
     // then
     assert.dom(screen.getByText('Compétences (-)')).exists();

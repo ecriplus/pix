@@ -1,6 +1,5 @@
 import { visit } from '@1024pix/ember-testing-library';
-import { click } from '@ember/test-helpers';
-import { currentURL } from '@ember/test-helpers';
+import { click, currentURL } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
