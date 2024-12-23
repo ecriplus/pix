@@ -392,7 +392,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       });
 
       context('when password is updated', function () {
-        it('replies with 200 status code', async function () {
+        it('replies with 204 status code', async function () {
           // when
           const response = await server.inject(options);
 
