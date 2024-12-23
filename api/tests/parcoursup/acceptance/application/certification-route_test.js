@@ -1,6 +1,7 @@
 import {
   createServer,
   databaseBuilder,
+  datamartBuilder,
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
 } from '../../../test-helper.js';
@@ -20,6 +21,9 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
     it('should return 200 HTTP status code and a certification for a given INE', async function () {
       // given
       const ine = '123456789OK';
+      datamartBuilder.factory.buildCertificationResult({ nationalStudentId: ine });
+      await datamartBuilder.commit();
+
       const options = {
         method: 'GET',
         url: `/api/parcoursup/students/${ine}/certification`,
