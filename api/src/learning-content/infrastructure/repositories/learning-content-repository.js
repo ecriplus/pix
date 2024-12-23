@@ -46,7 +46,7 @@ export class LearningContentRepository {
 
   /**
    * Maps an object to a DTO before insertion.
-   * @param {object} object
+   * @param {object} _object
    * @returns {object}
    */
   toDto(_object) {
