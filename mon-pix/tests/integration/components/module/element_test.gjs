@@ -45,6 +45,24 @@ module('Integration | Component | Module | Element', function (hooks) {
     assert.dom(screen.getByRole('button', { name: "Afficher l'alternative textuelle" })).exists();
   });
 
+  test('should display an element with an expand element', async function (assert) {
+    // given
+    const title = 'Expand title';
+    const element = {
+      id: '8d7687c8-4a02-4d7e-bf6c-693a6d481c78',
+      type: 'expand',
+      title,
+      content: '<p>My content</p>',
+    };
+
+    // when
+    const screen = await render(<template><ModulixElement @element={{element}} /></template>);
+
+    // then
+    const detailsElement = screen.getByRole('group');
+    assert.dom(detailsElement).exists();
+  });
+
   test('should display an element with a video element', async function (assert) {
     // given
     const element = {

@@ -3,6 +3,7 @@ import Component from '@glimmer/component';
 import { eq } from 'ember-truth-helpers';
 import DownloadElement from 'mon-pix/components/module/element/download';
 import EmbedElement from 'mon-pix/components/module/element/embed';
+import ExpandElement from 'mon-pix/components/module/element/expand';
 import FlashcardsElement from 'mon-pix/components/module/element/flashcards/flashcards';
 import ImageElement from 'mon-pix/components/module/element/image';
 import QcmElement from 'mon-pix/components/module/element/qcm';
@@ -29,6 +30,8 @@ export default class ModulixElement extends Component {
       <DownloadElement @download={{@element}} @onDownload={{@onFileDownload}} />
     {{else if (eq @element.type "embed")}}
       <EmbedElement @embed={{@element}} @onAnswer={{@onElementAnswer}} />
+    {{else if (eq @element.type "expand")}}
+      <ExpandElement @expand={{@element}} />
     {{else if (eq @element.type "separator")}}
       <SeparatorElement />
     {{else if (eq @element.type "flashcards")}}

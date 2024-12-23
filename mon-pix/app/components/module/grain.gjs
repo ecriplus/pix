@@ -19,6 +19,7 @@ export default class ModuleGrain extends Component {
   static AVAILABLE_ELEMENT_TYPES = [
     'download',
     'embed',
+    'expand',
     'flashcards',
     'image',
     'qcu',
