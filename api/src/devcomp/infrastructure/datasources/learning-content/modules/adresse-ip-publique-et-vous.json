@@ -94,7 +94,7 @@
                   ],
                   "feedbacks": {
                     "valid": "<span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">✨</span></span>",
-                    "invalid": "<span class=\"feedback__state\">Incorrect.</span><p>Avez-vous regardé <strong>en bas de l'image </strong>?</p>"
+                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Avez-vous regardé <strong>en bas de l'image </strong>?</p>"
                   },
                   "solution": "3"
                 }
@@ -122,7 +122,7 @@
                   ],
                   "feedbacks": {
                     "valid": "<span class=\"feedback__state\">Bonne réponse !<span aria-hidden=\"true\">✨</span></span>",
-                    "invalid": "<span class=\"feedback__state\">Incorrect.</span><p>Avez-vous regardé <strong>en bas de l'image </strong>?</p>"
+                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Avez-vous regardé <strong>en bas de l'image </strong>?</p>"
                   },
                   "solution": "2"
                 }
@@ -173,20 +173,23 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "C'est l'adresse qui permet d'identifier un appareil informatique connecté à internet."
+                "content": "C'est l'adresse qui permet d'identifier un appareil informatique connecté à internet.",
+                "feedback": "<span class=\"feedback__state\">Bonne réponse <span aria-hidden=\"true\">💫</span></span><p>L'adresse IP publique est l’équivalent d’une adresse postale pour identifier où est une personne.</p>"
               },
               {
                 "id": "2",
-                "content": "C’est l’adresse qui commence par \"www.\" que l’on tape pour accéder à un site internet."
+                "content": "C’est l’adresse qui commence par \"www.\" que l’on tape pour accéder à un site internet.",
+                "feedback": "<span class=\"feedback__state\">Mauvaise réponse</span>.<p>Vous pensez peut-être plutôt à l'adresse <strong>web</strong>.<br>Vous pouvez remonter voir la vidéo.<span aria-hidden=\"true\">👆</span></p>"
               },
               {
                 "id": "3",
-                "content": "C’est l’adresse qui permet d’envoyer des emails à des personnes via internet."
+                "content": "C’est l’adresse qui permet d’envoyer des emails à des personnes via internet.",
+                "feedback": "<span class=\"feedback__state\">Mauvaise réponse</span>.<p>Vous pensez peut-être plutôt à l'adresse <strong>mail</strong>.<br>Vous pouvez remonter voir la vidéo.<span aria-hidden=\"true\">👆</span></p>"
               }
             ],
             "feedbacks": {
-              "valid": "<span class=\"feedback__state\">Correct <span aria-hidden=\"true\">💫</span></span><p>L'adresse IP publique est l’équivalent d’une adresse postale pour identifier où est une personne.</p>",
-              "invalid": "<span class=\"feedback__state\">Incorrect</span>.<p>Vous pensez peut-être plutôt à l'adresse <strong>web</strong> ou l'adresse <strong>mail</strong>.<br>Vous pouvez remonter voir la vidéo.<span aria-hidden=\"true\">👆</span></p>"
+              "valid": "",
+              "invalid": ""
             },
             "solution": "1"
           }
@@ -358,8 +361,8 @@
               }
             ],
             "feedbacks": {
-              "valid": "<span class=\"feedback__state\">Correct.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Vous avez peut-être même trouvé la ville dans laquelle elle se trouve.</p>",
-              "invalid": "<span class=\"feedback__state\">Incorrect.</span><p>Pour avoir de l'aide, utiliser les indices ci-dessous.</p>"
+              "valid": "<span class=\"feedback__state\">Bonne réponse.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Vous avez peut-être même trouvé la ville dans laquelle elle se trouve.</p>",
+              "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Pour avoir de l'aide, utiliser les indices ci-dessous.</p>"
             }
           }
         },
@@ -441,8 +444,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Correct.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Ces échanges se font sur le réseau <strong>local</strong> de Mélanie</p>",
-                    "invalid": "<span class=\"feedback__state\">Incorrect.</span><p> L'adresse IP publique permet les échanges entre la box internet de Mélanie et les sites qu'elle visite.</p>"
+                    "valid": "<span class=\"feedback__state\">Bonne réponse.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Ces échanges se font sur le réseau <strong>local</strong> de Mélanie</p>",
+                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> L'adresse IP publique permet les échanges entre la box internet de Mélanie et les sites qu'elle visite.</p>"
                   },
                   "solution": "1"
                 }
@@ -465,8 +468,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Correct.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Cela permet de bien distinguer chacun des appareils de Mélanie</p>",
-                    "invalid": "<span class=\"feedback__state\">Incorrect.</span><p> L'adresse IP publique est spécifique à la box internet. Chaque appareil qui y est connecté a sa propre adresse IP privée.</p>"
+                    "valid": "<span class=\"feedback__state\">Bonne réponse.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Cela permet de bien distinguer chacun des appareils de Mélanie</p>",
+                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> L'adresse IP publique est spécifique à la box internet. Chaque appareil qui y est connecté a sa propre adresse IP privée.</p>"
                   },
                   "solution": "1"
                 }
@@ -489,8 +492,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Correct.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Cette adresse est <strong>publique</strong> donc <strong>visible</strong>.</p>",
-                    "invalid": "<span class=\"feedback__state\">Incorrect.</span><p> L'adresse IP <strong>privée</strong> (locale) de Mélanie est visible uniquement par les appareils de son réseau local.</p>"
+                    "valid": "<span class=\"feedback__state\">Bonne réponse.&nbsp;<span aria-hidden=\"true\">🎉</span></span><p>Cette adresse est <strong>publique</strong> donc <strong>visible</strong>.</p>",
+                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> L'adresse IP <strong>privée</strong> (locale) de Mélanie est visible uniquement par les appareils de son réseau local.</p>"
                   },
                   "solution": "2"
                 }
