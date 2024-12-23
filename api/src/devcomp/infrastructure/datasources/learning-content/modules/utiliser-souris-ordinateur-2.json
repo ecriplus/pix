@@ -240,7 +240,7 @@
           "element": {
             "id": "3528708a-ba19-49c2-97a2-08be8f961124",
             "type": "text",
-            "content": "\n<p><strong>Dans la zone ci-dessous, ouvrez les dossiers en suivant cet ordre :</strong> </p>\n<ul>\n    <li>Photos,</li>\n    <li>Album,</li>\n    <li>Famille,</li>\n    <li>80 ans Mamie.</li>\n</ul>\n<p>Quand vous avez terminé, répondez à la question qui suit.</p>"
+            "content": "<p><strong>Dans la zone ci-dessous, ouvrez les dossiers en suivant cet ordre :</strong> </p><ul><li>Photos,</li><li>Album,</li><li>Famille,</li><li>80 ans Mamie.</li></ul><p>Quand vous avez terminé, répondez à la question qui suit.</p>"
           }
         },
         {
@@ -276,8 +276,8 @@
               }
             ],
             "feedbacks": {
-              "valid": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Correct.</span>\n</p><p>Il y a bien 4 photos dans le dossier «&nbsp;80 ans Mamie&nbsp;». Bravo ! Vous avez fait 4 doubles-clics et réussi à naviguer dans un explorateur de fichiers.</p>",
-              "invalid": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Incorrect.</span>\n</p>\n<p><strong>Vous avez répondu au questionnaire, mais vous n'avez pas cliqué sur la bonne réponse.</strong><br>Si vous n'avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;» :</p>\n<ul>\n    <li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li>\n    <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li>\n    <li>Comptez ensuite le nombre de fichiers qui s'appellent «&nbsp;Photo&nbsp;».</li>\n</ul>"
+              "valid": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Correct.</span></p><p>Il y a bien 4 photos dans le dossier «&nbsp;80 ans Mamie&nbsp;». Bravo ! Vous avez fait 4 doubles-clics et réussi à naviguer dans un explorateur de fichiers.</p>",
+              "invalid": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Incorrect.</span></p><p><strong>Vous avez répondu au questionnaire, mais vous n'avez pas cliqué sur la bonne réponse.</strong><br>Si vous n'avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;» :</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s'appellent «&nbsp;Photo&nbsp;».</li></ul>"
             },
             "solution": "1"
           }
