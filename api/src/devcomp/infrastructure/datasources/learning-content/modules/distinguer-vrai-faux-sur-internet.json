@@ -45,7 +45,7 @@
   "grains": [
     {
       "id": "f242e81e-b182-44a1-a668-557f26b5ff8b",
-      "type": "activity",
+      "type": "discovery",
       "title": "Le titre d’un article, ce n’est pas assez !",
       "components": [
         {
@@ -581,7 +581,7 @@
     },
     {
       "id": "9f56f75e-3e2d-4a6e-8623-9b74747b236d",
-      "type": "activity",
+      "type": "challenge",
       "title": "Méthode pour vérifier une information (activité)",
       "components": [
         {
