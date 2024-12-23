@@ -48,6 +48,73 @@ module('Integration | Component | Campaign::List', function (hooks) {
   });
 
   module('When there are campaigns to display', function () {
+    module('@showCampaignOwnerFilter', function (hooks) {
+      let campaigns = [];
+
+      hooks.beforeEach(function () {
+        const store = this.owner.lookup('service:store');
+        const campaign = store.createRecord('campaign', {
+          id: '1',
+          name: 'campagne 1',
+          code: 'AAAAAA111',
+          type: 'PROFILES_COLLECTION',
+        });
+        campaigns = [campaign];
+        campaigns.meta = { rowCount: campaigns.length };
+        this.set('campaigns', campaigns);
+      });
+
+      test('it should show the owner filter ', async function (assert) {
+        // when
+        const screen = await render(
+          hbs`<Campaign::List
+  @campaigns={{this.campaigns}}
+  @onFilter={{this.noop}}
+  @onClickCampaign={{this.noop}}
+  @hideCampaignOwnerFilter={{false}}
+/>`,
+        );
+
+        // then
+        assert.ok(screen.getByLabelText(t('pages.campaigns-list.filter.by-owner')));
+      });
+      test('it should hide the owner filter ', async function (assert) {
+        // when
+        const screen = await render(
+          hbs`<Campaign::List
+  @campaigns={{this.campaigns}}
+  @onFilter={{this.noop}}
+  @onClickCampaign={{this.noop}}
+  @hideCampaignOwnerFilter={{true}}
+/>`,
+        );
+
+        // then
+        assert.notOk(screen.queryByLabelText(t('pages.campaigns-list.filter.by-owner')));
+      });
+    });
+
+    test('it should show the owner filter ', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const campaign1 = store.createRecord('campaign', {
+        id: '1',
+        name: 'campagne 1',
+        code: 'AAAAAA111',
+        type: 'PROFILES_COLLECTION',
+      });
+      const campaigns = [campaign1];
+      campaigns.meta = { rowCount: 1 };
+      this.set('campaigns', campaigns);
+
+      // when
+      const screen = await render(
+        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+      );
+
+      // then
+      assert.dom(screen.getByLabelText(t('pages.campaigns-list.filter.by-owner'))).exists();
+    });
     test('it should display a list of campaigns', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
