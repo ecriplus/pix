@@ -33,11 +33,15 @@ Links :
  */
 types.setTypeParser(types.builtins.INT8, (value) => parseInt(value));
 
+import * as datamartKnexConfigs from '../datamart/knexfile.js';
 import * as knexConfigs from './knexfile.js';
 
 const { logging, environment } = config;
 const knexConfig = knexConfigs.default[environment];
 const configuredKnex = Knex(knexConfig);
+
+const datamartKnexConfig = datamartKnexConfigs.default[environment];
+const configuredDatamartKnex = Knex(datamartKnexConfig);
 
 /* QueryBuilder Extension */
 try {
@@ -79,6 +83,7 @@ configuredKnex.on('query-response', function (response, data) {
 });
 
 async function disconnect() {
+  await configuredDatamartKnex?.destroy();
   return configuredKnex.destroy();
 }
 
@@ -123,4 +128,10 @@ async function prepareDatabaseConnection() {
   logger.info('Connection to database established.');
 }
 
-export { disconnect, emptyAllTables, configuredKnex as knex, prepareDatabaseConnection };
+export {
+  configuredDatamartKnex as datamartKnex,
+  disconnect,
+  emptyAllTables,
+  configuredKnex as knex,
+  prepareDatabaseConnection,
+};

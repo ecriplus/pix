@@ -16,8 +16,9 @@ import nock from 'nock';
 import sinon, { restore } from 'sinon';
 import sinonChai from 'sinon-chai';
 
+import { DatamartBuilder } from '../datamart/datamart-builder/datamart-builder.js';
 import { DatabaseBuilder } from '../db/database-builder/database-builder.js';
-import { disconnect, knex } from '../db/knex-database-connection.js';
+import { datamartKnex, disconnect, knex } from '../db/knex-database-connection.js';
 import * as frameworkRepository from '../lib/infrastructure/repositories/framework-repository.js';
 import * as thematicRepository from '../lib/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../lib/infrastructure/repositories/tube-repository.js';
@@ -65,6 +66,10 @@ const databaseBuilder = await DatabaseBuilder.create({
   },
 });
 
+const datamartBuilder = await DatamartBuilder.create({
+  knex: datamartKnex,
+});
+
 // TEMPORARY WORKAROUND
 databaseBuilder.factory.learningContent.injectNock(nock);
 
@@ -76,7 +81,7 @@ const { ROLES } = PIX_ADMIN;
 
 /* eslint-disable mocha/no-top-level-hooks */
 
-afterEach(function () {
+afterEach(async function () {
   restore();
   nock.cleanAll();
   frameworkRepository.clearCache();
@@ -89,6 +94,7 @@ afterEach(function () {
   courseRepository.clearCache();
   tutorialRepository.clearCache();
   missionRepository.clearCache();
+  await datamartBuilder.clean();
   return databaseBuilder.clean();
 });
 
@@ -316,6 +322,7 @@ export {
   createServerWithTestOidcProvider as createServer,
   createTempFile,
   databaseBuilder,
+  datamartBuilder,
   domainBuilder,
   EMPTY_BLANK_AND_NULL,
   expect,
