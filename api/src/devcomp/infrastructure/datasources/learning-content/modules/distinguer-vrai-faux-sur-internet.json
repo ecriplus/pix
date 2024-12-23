@@ -686,7 +686,7 @@
                   "image": {
                     "url": ""
                   },
-                  "text": "<p>Un <strong>ton alarmiste</strong>, <br>les <strong>mots écrits en majuscules</strong>,<br>les <strong>émojis angoissants</strong>,<br>les <strong>fautes d'orthographes</strong>,<br>la <strong>demande de partage</strong>.<br><br>Plus il y en a, plus l'information a des chances d'être fausses.</p>"
+                  "text": "<p>Un <strong>ton alarmiste</strong>, <br>les <strong>mots écrits en majuscules</strong>,<br>les <strong>émojis angoissants</strong>,<br>la <strong>demande de partage</strong>.<br><br>Plus il y en a, plus l'information a des chances d'être fausse.</p>"
                 }
               },
               {
@@ -695,13 +695,13 @@
                   "image": {
                     "url": "https://i.imgur.com/vg3Ro1F.png"
                   },
-                  "text": "Si l'on a un doute sur une information, il vaut mieux être prudent et se dire qu'elle est _______."
+                  "text": "Si on a un doute sur une information, il vaut mieux être prudent et se dire qu'elle est _______."
                 },
                 "verso": {
                   "image": {
                     "url": ""
                   },
-                  "text": "<p>Si l'on a un doute sur une information, il vaut mieux être prudent et se dire qu'elle est <strong>fausse</strong>.</p>"
+                  "text": "<p>Si on a un doute sur une information, il vaut mieux être prudent et se dire qu'elle est <strong>fausse</strong>.</p>"
                 }
               }
             ]
