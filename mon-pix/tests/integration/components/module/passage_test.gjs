@@ -1170,4 +1170,95 @@ module('Integration | Component | Module | Passage', function (hooks) {
       assert.ok(true);
     });
   });
+
+  module('when user opens Expand element', function () {
+    test('should push metrics event with "Ouverture" event name', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const expandElement = {
+        id: 'f5e7ce21-b71d-4054-8886-a4e9a17016ff',
+        type: 'expand',
+        isAnswerable: false,
+        title: 'Mon Expand',
+        content: "<p>Ceci est le contenu d'un expand dans mon module</p>",
+      };
+      const grain = store.createRecord('grain', {
+        title: 'Grain title',
+        type: 'discovery',
+        id: '123-abc',
+        components: [{ type: 'element', element: expandElement }],
+      });
+
+      const module = store.createRecord('module', {
+        title: 'Didacticiel',
+        grains: [grain],
+        transitionTexts: [],
+      });
+      const passage = store.createRecord('passage');
+      const metrics = this.owner.lookup('service:metrics');
+      metrics.add = sinon.stub();
+
+      //  when
+      await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+
+      const expandSummarySelector = '.modulix-expand__title';
+      await click(expandSummarySelector);
+
+      // then
+      sinon.assert.calledWithExactly(metrics.add, {
+        event: 'custom-event',
+        'pix-event-category': 'Modulix',
+        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-name': `Ouverture de l'élément Expand : ${expandElement.id}`,
+      });
+      assert.ok(true);
+    });
+  });
+
+  module('when user closes Expand element', function () {
+    test('should push metrics event with "Fermeture" event name', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const expandElement = {
+        id: 'f5e7ce21-b71d-4054-8886-a4e9a17016ff',
+        type: 'expand',
+        isAnswerable: false,
+        title: 'Mon Expand',
+        content: "<p>Ceci est le contenu d'un expand dans mon module</p>",
+      };
+      const grain = store.createRecord('grain', {
+        title: 'Grain title',
+        type: 'discovery',
+        id: '123-abc',
+        components: [{ type: 'element', element: expandElement }],
+      });
+
+      const module = store.createRecord('module', {
+        title: 'Didacticiel',
+        grains: [grain],
+        transitionTexts: [],
+      });
+      const passage = store.createRecord('passage');
+      const metrics = this.owner.lookup('service:metrics');
+      metrics.add = sinon.stub();
+
+      //  when
+      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+
+      const details = await screen.getByRole('group');
+      details.open = true;
+
+      const expandSummarySelector = '.modulix-expand__title';
+      await click(expandSummarySelector);
+
+      // then
+      sinon.assert.calledWithExactly(metrics.add, {
+        event: 'custom-event',
+        'pix-event-category': 'Modulix',
+        'pix-event-action': `Passage du module : ${module.id}`,
+        'pix-event-name': `Fermeture de l'élément Expand : ${expandElement.id}`,
+      });
+      assert.ok(true);
+    });
+  });
 });

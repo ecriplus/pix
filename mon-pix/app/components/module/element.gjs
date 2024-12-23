@@ -31,7 +31,7 @@ export default class ModulixElement extends Component {
     {{else if (eq @element.type "embed")}}
       <EmbedElement @embed={{@element}} @onAnswer={{@onElementAnswer}} />
     {{else if (eq @element.type "expand")}}
-      <ExpandElement @expand={{@element}} />
+      <ExpandElement @expand={{@element}} @onExpandToggle={{@onExpandToggle}} />
     {{else if (eq @element.type "separator")}}
       <SeparatorElement />
     {{else if (eq @element.type "flashcards")}}

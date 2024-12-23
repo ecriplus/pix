@@ -201,6 +201,7 @@ export default class ModuleGrain extends Component {
                   @onVideoPlay={{@onVideoPlay}}
                   @getLastCorrectionForElement={{this.getLastCorrectionForElement}}
                   @onFileDownload={{@onFileDownload}}
+                  @onExpandToggle={{@onExpandToggle}}
                 />
               </div>
             {{else if (eq component.type "stepper")}}

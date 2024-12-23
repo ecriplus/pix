@@ -219,6 +219,17 @@ export default class ModulePassage extends Component {
     });
   }
 
+  @action
+  async onExpandToggle({ elementId, isOpen }) {
+    const eventToggle = isOpen ? 'Ouverture' : 'Fermeture';
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Modulix',
+      'pix-event-action': `Passage du module : ${this.args.module.id}`,
+      'pix-event-name': `${eventToggle} de l'élément Expand : ${elementId}`,
+    });
+  }
+
   <template>
     {{pageTitle @module.title}}
     {{#if @module.isBeta}}
@@ -258,10 +269,11 @@ export default class ModulePassage extends Component {
             @onGrainContinue={{this.onGrainContinue}}
             @onGrainSkip={{this.onGrainSkip}}
             @shouldDisplayTerminateButton={{this.grainShouldDisplayTerminateButton index}}
-            @onModuleTerminate={{this.onModuleTerminate}}
             @hasJustAppeared={{this.hasGrainJustAppeared index}}
+            @onModuleTerminate={{this.onModuleTerminate}}
             @onVideoPlay={{this.onVideoPlay}}
             @onFileDownload={{this.onFileDownload}}
+            @onExpandToggle={{this.onExpandToggle}}
           />
         {{/each}}
       </div>
