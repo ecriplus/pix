@@ -18,11 +18,11 @@
   "transitionTexts": [
     {
       "grainId": "9953bee8-bf21-45a7-9522-4d74700b4828",
-      "content": "<p>La souris permet d’interagir avec l’ordinateur de différentes façons. Le pointeur se déplace à l’écran quand la souris glisse sur la table. Le bouton gauche permet de faire un clic gauche.&nbsp; <br>Découvrez dans ce module comment utiliser la molette, le double-clic et le clic droit.</p>"
+      "content": "<p>La souris permet d’interagir avec l’ordinateur de différentes façons. Le pointeur se déplace à l’écran quand la souris glisse sur la table. Le bouton gauche permet de faire un clic gauche.&nbsp; <br><br>Découvrez dans ce module comment utiliser la molette, le double-clic et le clic droit.</p>"
     },
     {
       "grainId": "2ad4df3c-5afe-4c8e-8316-77f05ecb7641",
-      "content": "<p><strong>Bravo !</strong> 🎉 <br>Vous êtes prêt à découvrir les autres clics et les autres boutons de la souris. Commençons par la molette.</p>"
+      "content": "<p><strong>Bravo !</strong> 🎉 <br>Vous êtes prêt. Commençons par la molette.</p>"
     },
     {
       "grainId": "48d4b5d0-7457-4071-ae6d-43dc4717ae86",
@@ -87,7 +87,7 @@
           "element": {
             "id": "6b8d384f-c15e-4abd-b392-bff1e17aee7a",
             "type": "text",
-            "content": "<p>La molette est le bouton central de la souris. Elle sert à faire défiler une page à l'écran vers le bas, ou vers le haut.</p><details><summary><strong>Si jamais votre souris n'a pas de molette</strong></summary>Rapprochez-vous de la personne qui vous accompagne pour découvrir comment cela fonctionne sur votre souris. <br>Pour faire défiler la page, il faut faire rouler la molette avec votre doigt de haut en bas, ou de bas en haut.</details>"
+            "content": "<p>La molette est le bouton central de la souris. Elle sert à faire défiler une page à l'écran vers le bas, ou vers le haut.</p><details><summary><strong>Si jamais votre souris n'a pas de molette</strong></summary>Rapprochez-vous de la personne qui vous accompagne pour découvrir comment cela fonctionne sur votre souris. </details> <p><br>Pour faire défiler la page, il faut faire rouler la molette avec votre doigt de haut en bas, ou de bas en haut.</p>"
           }
         },
         {
@@ -156,17 +156,17 @@
               {
                 "id": "1",
                 "content": "<p>Journal</p>",
-                "feedback": "<p>Incorrect. </p><p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
+                "feedback": "<p><span class=\"feedback__state\">Incorrect.</span></p><p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
               },
               {
                 "id": "2",
                 "content": "<p>Papier</p>",
-                "feedback": "<p>Correct !&nbsp; </p><p>Bravo ! Vous avez parcouru le module de haut en bas. À tout moment, vous pouvez utiliser la molette pour relire quelque chose, revoir une vidéo, etc.</p>"
+                "feedback": "<p><span class=\"feedback__state\">Correct.</span> </p><p>Bravo ! Vous avez parcouru le module de haut en bas. À tout moment, vous pouvez utiliser la molette pour relire quelque chose, revoir une vidéo, etc.</p>"
               },
               {
                 "id": "3",
                 "content": "<p>Page</p>",
-                "feedback": "<p>Incorrect. </p><p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
+                "feedback": "<p><span class=\"feedback__state\">Incorrect.</span></p><p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
               }
             ],
             "solution": "2"
@@ -192,17 +192,24 @@
           "element": {
             "id": "fc75b4ab-d92d-4ae9-8387-8bb3d683a99c",
             "type": "image",
-            "url": "https://i.imgur.com/aTMnxxv.gif",
+            "url": "https://i.imgur.com/Vm7UCzY.gif",
             "alt": "",
             "alternativeText": ""
           }
         },
         {
+            "type": "element",
+            "element": {
+              "id": "d73107b1-d15b-4f4b-af1e-9745d5c61a43",
+              "type": "separator"
+            }
+          },
+        {
           "type": "element",
           "element": {
             "id": "ec8094d6-53e4-4305-948a-74ed1d0fd443",
             "type": "text",
-            "content": "<p>📺 Dans la vidéo ci-dessous, vous allez voir comment faire un double-clic et à quoi il sert. <br>Après cette vidéo, ce sera à vous de faire des double-clics.</p><iframe width=\"100%\" height=\"410\" src=\"https://www.youtube.com/embed/cDf-Q5tHwVM\" title=\"Première marche souris - Double-clic\"></iframe>"
+            "content": "<p>📺 Dans la vidéo ci-dessous, vous allez voir comment faire un double-clic et à quoi il sert. <br>Après cette vidéo, ce sera à vous de faire des double-clics.<br></p><iframe width=\"100%\" height=\"410\" src=\"https://www.youtube.com/embed/cDf-Q5tHwVM\" title=\"Première marche souris - Double-clic\"></iframe>"
           }
         }
       ]
@@ -240,7 +247,7 @@
           "element": {
             "id": "3528708a-ba19-49c2-97a2-08be8f961124",
             "type": "text",
-            "content": "<p><strong>Dans la zone ci-dessous, ouvrez les dossiers en suivant cet ordre :</strong> </p><ul><li>Photos,</li><li>Album,</li><li>Famille,</li><li>80 ans Mamie.</li></ul><p>Quand vous avez terminé, répondez à la question qui suit.</p>"
+            "content": "<p><strong>Dans la zone ci-dessous, ouvrez les dossiers en suivant cet ordre :</strong> </p><ul><li>Photos,</li><li>Album,</li><li>Famille,</li><li>80 ans Mamie.</li></ul>"
           }
         },
         {
@@ -251,7 +258,7 @@
             "isCompletionRequired": false,
             "title": "Simulateur gestionnaire de fichier",
             "url": "https://epreuves.pix.fr/filemanager-visu/filemanager-visu.html?mode=example&lang=fr",
-            "instruction": "<p><br></p>",
+            "instruction": "Quand vous avez terminé, répondez à la question qui suit.",
             "height": 400
           }
         },
@@ -276,8 +283,8 @@
               }
             ],
             "feedbacks": {
-              "valid": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Correct.</span></p><p>Il y a bien 4 photos dans le dossier «&nbsp;80 ans Mamie&nbsp;». Bravo ! Vous avez fait 4 doubles-clics et réussi à naviguer dans un explorateur de fichiers.</p>",
-              "invalid": "<p><span class=\"\\&quot;feedback__state\\&quot;\">Incorrect.</span></p><p><strong>Vous avez répondu au questionnaire, mais vous n'avez pas cliqué sur la bonne réponse.</strong><br>Si vous n'avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;» :</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s'appellent «&nbsp;Photo&nbsp;».</li></ul>"
+              "valid": "<p><span class=\"feedback__state\">Correct.</span></p><p>Il y a bien 4 photos dans le dossier «&nbsp;80 ans Mamie&nbsp;». Bravo ! Vous avez fait 4 doubles-clics et réussi à naviguer dans un explorateur de fichiers.</p>",
+              "invalid": "<p><span class=\"feedback__state\">Incorrect.</span></p><p><strong>Vous avez répondu au questionnaire, mais vous n'avez pas cliqué sur la bonne réponse.</strong><br>Si vous n'avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;» :</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s'appellent «&nbsp;Photo&nbsp;».</li></ul>"
             },
             "solution": "1"
           }
@@ -318,7 +325,7 @@
                 {
                   "id": "74f15d05-a0b2-4e91-ab8a-55cf91c3eab1",
                   "type": "text",
-                  "content": "<iframe width=\"100%\" height=\"410\" src=\"https://www.youtube.com/embed/UzIBmJUc-Lk\" title=\"Utiliser le clic droit de la souris\" frameborder=\"0\" allowfullscreen=\"\"></iframe>"
+                  "content": "<iframe width=\"100%\" height=\"410\" src=\"https://www.youtube.com/embed/UzIBmJUc-Lk\" title=\"Utiliser le clic droit de la souris\" allowfullscreen=\"\"></iframe>"
                 }
               ]
             }
@@ -336,7 +343,7 @@
           "element": {
             "id": "fc26348a-dea8-4010-bfa6-efd0252b9516",
             "type": "text",
-            "content": "<p>Dans la zone ci-dessous, entraînez-vous à faire un clic droit puis un clic gauche à la suite.</p><p><br></p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-clicdroitpuisgauche/index.html\" width=\"100%\" height=\"394\"></iframe>"
+            "content": "<p><strong>Dans la zone ci-dessous, entraînez-vous à faire un clic droit puis un clic gauche à la suite.</strong></p><p><br></p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-clicdroitpuisgauche/index.html\" width=\"100%\" height=\"394\"></iframe>"
           }
         }
       ]
@@ -370,7 +377,7 @@
           "element": {
             "id": "fe6818f4-ad9d-4b5e-bc58-b18cd1d6cee8",
             "type": "text",
-            "content": "<p>Récapitulons tout ce que vous venez de voir dans ce module. <br><strong>Dans l'image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong> <br>Pour chaque bouton, suivez les consignes.</p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-recap3boutonsbleu/index.html\" width=\"100%\" height=\"394\"></iframe>"
+            "content": "<p>Récapitulons tout ce que vous venez de voir dans ce module. <br></p><p><strong>Dans l'image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong> <br>Pour chaque bouton, suivez les consignes.</p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-recap3boutonsbleu/index.html\" width=\"100%\" height=\"394\"></iframe>"
           }
         },
         {
@@ -385,7 +392,7 @@
           "element": {
             "id": "3dbb4032-7150-447e-ac8c-00c1302bcc84",
             "type": "text",
-            "content": "<p>📌 Les points à retenir : <br>  </p><ul><li>▶️ Le bouton gauche permet de faire des clics gauche et des double-clics pour déclencher des actions (ouvrir, faire apparaître, sélectionner, etc).</li><li>📋 Le bouton droit permet d’afficher une liste d’actions possibles.</li><li>⬆️ La molette permet de monter ou de descendre dans une page.</li></ul><p>👉 Vous pouvez maintenant Ouvrir votre fiche de synthèse.</p>"
+            "content": "<p>📌 Les points à retenir : <br>  </p><ul><li>▶️ Le bouton gauche permet de faire des clics gauche et des double-clics pour déclencher des actions (ouvrir, faire apparaître, sélectionner, etc).</li><li>📋 Le bouton droit permet d’afficher une liste d’actions possibles.</li><li>⬆️ La molette permet de monter ou de descendre dans une page.</li></ul><p><br>👉 Vous pouvez maintenant Ouvrir votre fiche de synthèse.</p>"
           }
         }
       ]
