@@ -418,7 +418,8 @@
     },
     "attestations": {
       "title": "Attestations",
-      "description": "Select the class for which you wish to export attestations in PDF format.",
+      "basic-description" : "Export all attestations in PDF format",
+      "divisions-description": "Select the class for which you wish to export attestations in PDF format.",
       "download-attestations-button": "Download",
       "no-attestations": "No attestation available",
       "select-label": "Select one or more classes"

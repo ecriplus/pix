@@ -10,61 +10,99 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Attestations | Sixth-grade', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('it should display all basics informations', async function (assert) {
-    // given
-    const onSubmit = sinon.stub();
-    const divisions = [];
+  module('when organization has divisions', function () {
+    test('it should display all specifics informations for divisions', async function (assert) {
+      // given
+      const onSubmit = sinon.stub();
+      const divisions = [];
 
-    // when
-    const screen = await render(<template><SixthGrade @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>);
-    // then
-    assert.ok(screen.getByRole('heading', { name: t('pages.attestations.title') }));
-    assert.ok(screen.getByText(t('pages.attestations.description')));
-    assert.ok(screen.getByRole('textbox', { name: t('pages.attestations.select-label') }));
-    assert.ok(screen.getByPlaceholderText(t('common.filters.placeholder')));
-    assert.ok(screen.getByRole('button', { name: t('pages.attestations.download-attestations-button') }));
-  });
-
-  test('download button is disabled if there is no selected divisions', async function (assert) {
-    // given
-    const onSubmit = sinon.stub();
-    const divisions = [];
-
-    // when
-    const screen = await render(<template><SixthGrade @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>);
-
-    // then
-    const downloadButton = await screen.getByRole('button', {
-      name: t('pages.attestations.download-attestations-button'),
-    });
-    assert.dom(downloadButton).isDisabled();
-  });
-
-  test('it should call onSubmit action with selected divisions', async function (assert) {
-    // given
-    const onSubmit = sinon.stub();
-
-    const divisions = [{ label: 'division1', value: 'division1' }];
-
-    // when
-    const screen = await render(<template><SixthGrade @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>);
-
-    const multiSelect = await screen.getByRole('textbox', { name: t('pages.attestations.select-label') });
-    await click(multiSelect);
-
-    const firstDivisionOption = await screen.findByRole('checkbox', { name: 'division1' });
-    await click(firstDivisionOption);
-
-    const downloadButton = await screen.getByRole('button', {
-      name: t('pages.attestations.download-attestations-button'),
+      // when
+      const screen = await render(<template><SixthGrade @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>);
+      // then
+      assert.ok(screen.getByRole('heading', { name: t('pages.attestations.title') }));
+      assert.ok(screen.getByText(t('pages.attestations.divisions-description')));
+      assert.ok(screen.getByRole('textbox', { name: t('pages.attestations.select-label') }));
+      assert.ok(screen.getByPlaceholderText(t('common.filters.placeholder')));
+      assert.ok(screen.getByRole('button', { name: t('pages.attestations.download-attestations-button') }));
     });
 
-    // we need to get out of input choice to click on download button, so we have to click again on the multiselect to close it
-    await click(multiSelect);
-    await click(downloadButton);
+    test('download button is disabled if there is no selected divisions', async function (assert) {
+      // given
+      const onSubmit = sinon.stub();
+      const divisions = [];
 
-    // then
-    sinon.assert.calledWithExactly(onSubmit, ['division1']);
-    assert.ok(true);
+      // when
+      const screen = await render(<template><SixthGrade @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>);
+
+      // then
+      const downloadButton = await screen.getByRole('button', {
+        name: t('pages.attestations.download-attestations-button'),
+      });
+      assert.dom(downloadButton).isDisabled();
+    });
+
+    test('it should call onSubmit action with selected divisions', async function (assert) {
+      // given
+      const onSubmit = sinon.stub();
+
+      const divisions = [{ label: 'division1', value: 'division1' }];
+
+      // when
+      const screen = await render(<template><SixthGrade @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>);
+
+      const multiSelect = await screen.getByRole('textbox', { name: t('pages.attestations.select-label') });
+      await click(multiSelect);
+
+      const firstDivisionOption = await screen.findByRole('checkbox', { name: 'division1' });
+      await click(firstDivisionOption);
+
+      const downloadButton = await screen.getByRole('button', {
+        name: t('pages.attestations.download-attestations-button'),
+      });
+
+      // we need to get out of input choice to click on download button, so we have to click again on the multiselect to close it
+      await click(multiSelect);
+      await click(downloadButton);
+
+      // then
+      sinon.assert.calledWithExactly(onSubmit, ['division1']);
+      assert.ok(true);
+    });
+  });
+
+  module('when organization does not have divisions', function () {
+    test('it should display all basics informations', async function (assert) {
+      // given
+      const onSubmit = sinon.stub();
+      const divisions = undefined;
+
+      // when
+      const screen = await render(<template><SixthGrade @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>);
+      // then
+      assert.notOk(screen.queryByRole('textbox', { name: t('pages.attestations.select-label') }));
+      assert.ok(screen.getByRole('heading', { name: t('pages.attestations.title') }));
+      assert.ok(screen.getByText(t('pages.attestations.basic-description')));
+      assert.ok(screen.getByRole('button', { name: t('pages.attestations.download-attestations-button') }));
+    });
+
+    test('it should call onSubmit action with empty divisions', async function (assert) {
+      // given
+      const onSubmit = sinon.stub();
+
+      const divisions = undefined;
+
+      // when
+      const screen = await render(<template><SixthGrade @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>);
+
+      const downloadButton = await screen.getByRole('button', {
+        name: t('pages.attestations.download-attestations-button'),
+      });
+
+      await click(downloadButton);
+
+      // then
+      sinon.assert.calledWithExactly(onSubmit, []);
+      assert.ok(true);
+    });
   });
 });

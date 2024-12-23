@@ -6,6 +6,7 @@ import { temporaryStorage } from '../../../../src/shared/infrastructure/temporar
 import {
   AEFE_TAG,
   FEATURE_ATTESTATIONS_MANAGEMENT_ID,
+  SCO_ORGANIZATION_ID,
   USER_ID_ADMIN_ORGANIZATION,
   USER_ID_MEMBER_ORGANIZATION,
 } from '../common/constants.js';
@@ -399,4 +400,20 @@ export const buildQuests = async (databaseBuilder) => {
 
   // Insert job count in temporary storage for pending user
   await profileRewardTemporaryStorage.increment(pendingUser.id);
+
+  // Create learner with profile rewards for SCO organization without import
+  const { id: otherUserId } = databaseBuilder.factory.buildUser({ firstName: 'Alex', lastName: 'Tension' });
+  databaseBuilder.factory.buildOrganizationLearner({
+    organizationId: SCO_ORGANIZATION_ID,
+    userId: otherUserId,
+  });
+  const { id: otherUserProfileRewardId } = databaseBuilder.factory.buildProfileReward({
+    userId: otherUserId,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId,
+  });
+  databaseBuilder.factory.buildOrganizationsProfileRewards({
+    organizationId: SCO_ORGANIZATION_ID,
+    profileRewardId: otherUserProfileRewardId,
+  });
 };

@@ -15,12 +15,18 @@ export default class AuthenticatedAttestationsController extends Controller {
   @action
   async downloadSixthGradeAttestationsFile(selectedDivisions) {
     try {
+      let url;
       const organizationId = this.currentUser.organization.id;
-      const formatedDivisionsForQuery = selectedDivisions
-        .map((division) => `divisions[]=${encodeURIComponent(division)}`)
-        .join('&');
+      const baseUrl = `/api/organizations/${organizationId}/attestations/${SIXTH_GRADE_ATTESTATION_KEY}`;
+      if (selectedDivisions.length > 0) {
+        const formatedDivisionsForQuery = selectedDivisions
+          .map((division) => `divisions[]=${encodeURIComponent(division)}`)
+          .join('&');
 
-      const url = `/api/organizations/${organizationId}/attestations/${SIXTH_GRADE_ATTESTATION_KEY}?${formatedDivisionsForQuery}`;
+        url = baseUrl + `?${formatedDivisionsForQuery}`;
+      } else {
+        url = baseUrl;
+      }
 
       const token = this.session.isAuthenticated ? this.session.data.authenticated.access_token : '';
 

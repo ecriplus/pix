@@ -2,14 +2,17 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixMultiSelect from '@1024pix/pix-ui/components/pix-multi-select';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { eq } from 'ember-truth-helpers';
 
 import PageTitle from '../ui/page-title';
 
 export default class AttestationsSixthGrade extends Component {
   @tracked selectedDivisions = [];
+  @service currentUser;
 
   @action
   onSubmit(event) {
@@ -30,27 +33,37 @@ export default class AttestationsSixthGrade extends Component {
   <template>
     <PageTitle>
       <:title>{{t "pages.attestations.title"}}</:title>
-      <:subtitle>
-        <p class="attestations-page__text">
-          {{t "pages.attestations.description"}}
-        </p>
-      </:subtitle>
     </PageTitle>
 
-    <form class="attestations-page__action" {{on "submit" this.onSubmit}}>
-      <PixMultiSelect
-        @isSearchable={{true}}
-        @options={{@divisions}}
-        @values={{this.selectedDivisions}}
-        @onChange={{this.onSelectDivision}}
-        @placeholder={{t "common.filters.placeholder"}}
-      >
-        <:label>{{t "pages.attestations.select-label"}}</:label>
-        <:default as |option|>{{option.label}}</:default>
-      </PixMultiSelect>
-      <PixButton @type="submit" id="download_attestations" @size="small" @isDisabled={{this.isDisabled}}>
-        {{t "pages.attestations.download-attestations-button"}}
-      </PixButton>
-    </form>
+    {{#if (eq @divisions undefined)}}
+      <div>
+        <p class="attestations-page__text">
+          {{t "pages.attestations.basic-description"}}
+        </p>
+        <PixButton @triggerAction={{this.onSubmit}} @size="small">
+          {{t "pages.attestations.download-attestations-button"}}
+        </PixButton>
+      </div>
+    {{else}}
+      <p class="attestations-page__text">
+        {{t "pages.attestations.divisions-description"}}
+      </p>
+
+      <form class="attestations-page__action" {{on "submit" this.onSubmit}}>
+        <PixMultiSelect
+          @isSearchable={{true}}
+          @options={{@divisions}}
+          @values={{this.selectedDivisions}}
+          @onChange={{this.onSelectDivision}}
+          @placeholder={{t "common.filters.placeholder"}}
+        >
+          <:label>{{t "pages.attestations.select-label"}}</:label>
+          <:default as |option|>{{option.label}}</:default>
+        </PixMultiSelect>
+        <PixButton @type="submit" id="download_attestations" @size="small" @isDisabled={{this.isDisabled}}>
+          {{t "pages.attestations.download-attestations-button"}}
+        </PixButton>
+      </form>
+    {{/if}}
   </template>
 }

@@ -417,10 +417,11 @@
       "title": "Resultaten voor {firstName} {lastName}"
     },
     "attestations": {
-      "no-attestations": "Er zijn geen certificaten beschikbaar voor jouw selectie",
       "title": "Certificaten",
-      "description": "Selecteer de klas waarvoor je de attesten in PDF-formaat wilt exporteren.",
+      "basic-description" : "Alle attesten exporteren in PDF-formaat",
+      "divisions-description": "Selecteer de klas waarvoor je de attesten in PDF-formaat wilt exporteren.",
       "download-attestations-button": "Downloaden",
+      "no-attestations": "Er zijn geen certificaten beschikbaar voor jouw selectie",
       "select-label": "Selecteer een of meer klassen"
     },
     "campaign-activity": {
