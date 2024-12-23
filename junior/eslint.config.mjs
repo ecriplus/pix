@@ -3,7 +3,7 @@ import babelParser from '@babel/eslint-parser';
 import emberParser from 'ember-eslint-parser';
 import emberRecommendedConfig from 'eslint-plugin-ember/configs/recommended';
 import emberGjsRecommendedConfig from 'eslint-plugin-ember/configs/recommended-gjs';
-// import i18nJsonPlugin from 'eslint-plugin-i18n-json';
+import i18nJsonPlugin from 'eslint-plugin-i18n-json';
 import nRecommendedConfig from 'eslint-plugin-n';
 import prettierRecommendedConfig from 'eslint-plugin-prettier/recommended';
 import qunitRecommendedConfig from 'eslint-plugin-qunit/configs/recommended';
@@ -14,7 +14,7 @@ const compiledOutputFiles = ['dist/*', 'tmp/*'];
 const dependenciesFiles = ['node_modules/*'];
 const miscFiles = ['coverage/*', '!**/.*', '**/.eslintcache'];
 const emberTryFiles = ['.node_modules.ember-try/*', 'bower.json.ember-try', 'package.json.ember-try'];
-// const nonPhraseGeneratedFiles = ['translations/en.json', 'translations/fr.json'];
+const nonPhraseGeneratedFiles = ['translations/en.json', 'translations/fr.json'];
 
 const nodeFiles = [
   'eslint.config.js',
@@ -106,15 +106,15 @@ export default [
       },
     },
   },
-  // {
-  //   files: nonPhraseGeneratedFiles,
-  //   plugins: { 'i18n-json': i18nJsonPlugin },
-  //   processor: {
-  //     meta: { name: '.json' },
-  //     ...i18nJsonPlugin.processors['.json'],
-  //   },
-  //   rules: {
-  //     ...i18nJsonPlugin.configs.recommended.rules,
-  //   },
-  // },
+  {
+    files: nonPhraseGeneratedFiles,
+    plugins: { 'i18n-json': i18nJsonPlugin },
+    processor: {
+      meta: { name: '.json' },
+      ...i18nJsonPlugin.processors['.json'],
+    },
+    rules: {
+      ...i18nJsonPlugin.configs.recommended.rules,
+    },
+  },
 ];
