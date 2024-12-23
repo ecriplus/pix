@@ -654,9 +654,9 @@
             "id": "1c2619ea-2fbd-4ab1-82ad-d9a3989c8ce3",
             "type": "flashcards",
             "instruction": "<p></p>",
-            "title": "Titre",
+            "title": "Distinguer le vrai du faux",
             "introImage": {
-              "url": ""
+              "url": "https://images.pix.fr/modulix/didacticiel/intro-flashcards.png"
             },
             "cards": [
               {
