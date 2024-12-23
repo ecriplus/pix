@@ -169,10 +169,6 @@
                 "feedback": "<p>Incorrect. </p><p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
               }
             ],
-            "feedbacks": {
-              "valid": "",
-              "invalid": ""
-            },
             "solution": "2"
           }
         }
@@ -236,8 +232,8 @@
     },
     {
       "id": "c3b07818-2cfb-4aaa-afdd-0444de95be3f",
-      "type": "lesson",
-      "title": "",
+      "type": "activity",
+      "title": "Utilisation du double clic",
       "components": [
         {
           "type": "element",
@@ -269,17 +265,14 @@
               {
                 "id": "1",
                 "content": "<p>4</p>",
-                "feedback": ""
               },
               {
                 "id": "2",
                 "content": "<p>5</p>",
-                "feedback": ""
               },
               {
                 "id": "3",
                 "content": "<p>6</p>",
-                "feedback": ""
               }
             ],
             "feedbacks": {
