@@ -1,5 +1,5 @@
-import { clickByName, visit as visitScreen, waitForElementToBeRemoved } from '@1024pix/ember-testing-library';
-import { click, currentURL, visit } from '@ember/test-helpers';
+import { clickByName, visit, waitForElementToBeRemoved } from '@1024pix/ember-testing-library';
+import { click, currentURL } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentSession } from 'ember-simple-auth/test-support';
@@ -34,7 +34,7 @@ module('Acceptance | Team List', function (hooks) {
 
       await authenticateSession(user.id);
       // when
-      const screen = await visitScreen('/equipe');
+      const screen = await visit('/equipe');
 
       // then
       assert.dom(screen.getByLabelText('Navigation principale')).exists();
@@ -51,7 +51,7 @@ module('Acceptance | Team List', function (hooks) {
         await authenticateSession(user.id);
 
         // when
-        const screen = await visitScreen('/equipe');
+        const screen = await visit('/equipe');
 
         // then
         assert.dom(screen.getByText('Équipe', { selector: 'h1' })).exists();
@@ -65,7 +65,7 @@ module('Acceptance | Team List', function (hooks) {
         await authenticateSession(user.id);
 
         // when
-        const screen = await visitScreen('/equipe');
+        const screen = await visit('/equipe');
 
         // then
         assert.strictEqual(currentURL(), '/equipe/membres');
@@ -99,7 +99,7 @@ module('Acceptance | Team List', function (hooks) {
         await authenticateSession(user.id);
 
         // when
-        const screen = await visitScreen('/equipe');
+        const screen = await visit('/equipe');
 
         // then
         assert.dom(screen.getByText('Équipe', { selector: 'h1' })).exists();
@@ -113,7 +113,7 @@ module('Acceptance | Team List', function (hooks) {
         await authenticateSession(user.id);
 
         // when
-        const screen = await visitScreen('/equipe');
+        const screen = await visit('/equipe');
 
         // then
         assert.dom(screen.getByText('Inviter un membre')).exists();
@@ -168,7 +168,7 @@ module('Acceptance | Team List', function (hooks) {
           createPrescriberByUser({ user: userLeft });
 
           await authenticateSession(leavingUser.id);
-          const screen = await visitScreen('/equipe');
+          const screen = await visit('/equipe');
 
           await click(screen.getAllByRole('button', { name: 'Gérer' })[0]);
           await click(screen.getByRole('button', { name: 'Quitter cet espace Pix Orga' }));

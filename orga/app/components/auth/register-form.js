@@ -110,7 +110,7 @@ export default class RegisterForm extends Component {
       await this._authenticate(this.email, this.password);
 
       this.password = null;
-    } catch (response) {
+    } catch {
       if (user.errors) {
         return this._updateInputsStatus(user);
       }

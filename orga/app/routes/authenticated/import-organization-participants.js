@@ -20,7 +20,7 @@ export default class ImportOrganizationParticipantsRoute extends Route {
       return await this.store.queryRecord('organization-import-detail', {
         organizationId: this.currentUser.organization.id,
       });
-    } catch (error) {
+    } catch {
       this.router.replaceWith('application');
     }
   }

@@ -85,7 +85,7 @@ export default class CampaignView extends Component {
     try {
       const campaign = this.store.peekRecord('campaign', campaignId);
       await campaign.archive();
-    } catch (err) {
+    } catch {
       this.notifications.sendError(this.intl.t('api-error-messages.global'));
     }
   }

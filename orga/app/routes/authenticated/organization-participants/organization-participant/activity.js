@@ -17,7 +17,7 @@ export default class ActivityRoute extends Route {
         organizationLearnerStatistics: activity.organizationLearnerStatistics,
         organizationLearnerParticipations: activity.organizationLearnerParticipations,
       });
-    } catch (_) {
+    } catch {
       return this.router.replaceWith('authenticated.organization-participants');
     }
   }

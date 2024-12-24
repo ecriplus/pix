@@ -93,22 +93,22 @@
       "value": "/{total} seats"
     },
     "occupied-seats-count": {
-      "title": "Seats occupied",
       "anonymous": "including {count, plural, =1 {1 seat} other {{count, number} seats}} with no-account access",
+      "title": "Seats occupied",
       "value": "/{total} seats"
     },
     "participants-average-results": {
-      "title": "Average result",
-      "information": "Find here the average results of your campaign. This includes all the participants who have completed their customised test and sent their results."
+      "information": "Find here the average results of your campaign. This includes all the participants who have completed their customised test and sent their results.",
+      "title": "Average result"
     },
     "participants-average-stages": {
-      "title": "Average rating",
-      "information": "Find here the average rating of your campaign. This includes all the participants who have completed their customised test and sent their results."
+      "information": "Find here the average rating of your campaign. This includes all the participants who have completed their customised test and sent their results.",
+      "title": "Average rating"
     },
     "participants-count": {
-      "title": "Total participants",
       "information": "Find here the total number of participations in your campaign. This includes all the participants who have entered the code and started their customised test or submitted their profile.",
-      "loader": "Loading total participants"
+      "loader": "Loading total participants",
+      "title": "Total participants"
     },
     "place-info": {
       "with-account": {
@@ -123,15 +123,14 @@
       }
     },
     "submitted-count": {
-      "title": "Submitted results",
       "information": "Find here the results submitted by your participants. This includes all the participants who have finished and clicked on the button \"Submit my results\" or \"Submit my profile\".",
       "loader": "Loading submitted results or profiles",
+      "title": "Submitted results",
       "title-profiles": "Submitted profiles"
     }
   },
   "charts": {
     "participants-by-day": {
-      "title": "Participant's activity",
       "captions": {
         "shared": "Submitted results by day",
         "shared-profile": "Submitted profiles by day",
@@ -148,25 +147,25 @@
         "shared-profile": "Submitted profiles",
         "started": "Total participants"
       },
-      "loader": "Loading participant's activity"
+      "loader": "Loading participant's activity",
+      "title": "Participant's activity"
     },
     "participants-by-mastery-percentage": {
-      "title": "Distribution of participants grouped by success rate",
       "label-a11y": "From {from, number, ::percent} to {to, number, ::percent}: {count, plural, =0 {0 participant} =1 {1 participant} other {{count, number} participants}}",
       "loader": "Loading participants grouped by success rates",
+      "title": "Distribution of participants grouped by success rate",
       "tooltip": {
-        "title": "Results {legend}",
         "label": "Number of participants : {count}",
-        "legend": "{from, number, ::percent} - {to, number, ::percent}"
+        "legend": "{from, number, ::percent} - {to, number, ::percent}",
+        "title": "Results {legend}"
       }
     },
     "participants-by-stage": {
-      "title": "Distribution of participants grouped by success rate",
       "loader": "Loading and sorting the participants grouped by success rates",
-      "participants": "{count, plural, =0 {0 participants} =1 {1 participant} other {{count, number} participants}}"
+      "participants": "{count, plural, =0 {0 participants} =1 {1 participant} other {{count, number} participants}}",
+      "title": "Distribution of participants grouped by success rate"
     },
     "participants-by-status": {
-      "title": "Statuses",
       "a11y-title": "Detail by participation status",
       "labels-a11y": {
         "completed": "{count, plural, =0 {0 participants} =1 {1 participant} other {{count, number} participants}} with pending results",
@@ -193,7 +192,8 @@
         "shared-profile": "Submitted profiles: {percentage, number, ::percent .0}",
         "started": "In progress: {percentage, number, ::percent .0}"
       },
-      "loader": "Loading statuses distribution"
+      "loader": "Loading statuses distribution",
+      "title": "Statuses"
     }
   },
   "common": {
@@ -215,7 +215,6 @@
     },
     "breadcrumb": "Breadcrumb",
     "filters": {
-      "title": "Filters",
       "actions": {
         "clear": "Clear filters"
       },
@@ -229,7 +228,8 @@
         "placeholder": "Last name, first name"
       },
       "loading": "Loading...",
-      "placeholder": "-- Select --"
+      "placeholder": "-- Select --",
+      "title": "Filters"
     },
     "form": {
       "mandatory-all-fields": "All fields are required.",
@@ -311,9 +311,9 @@
       "success": "Participants have been imported."
     },
     "organization-participants-header": {
-      "title": "{count, plural, =0 {Participants} =1 {Participant ({count})} other {Participants ({count})}}",
       "import-button": "Import",
-      "sco-title": "{count, plural, =0 {Students} =1 {Student ({count})} other {Students ({count})}}"
+      "sco-title": "{count, plural, =0 {Students} =1 {Student ({count})} other {Students ({count})}}",
+      "title": "{count, plural, =0 {Participants} =1 {Participant ({count})} other {Participants ({count})}}"
     },
     "participation-status": {
       "SHARED-ASSESSMENT": "Submitted results",
@@ -373,11 +373,11 @@
       "activate-button": "Activate session",
       "extend-button": "Extend session",
       "status": {
-        "title": "Session status",
         "active-label": "Active session until {sessionExpirationDate}",
         "aria-label": "How does the session work ?",
         "inactive-label": "Inactive session",
-        "info-text": "Students can only access missions when the session is active.'<br>'At the end of the session, students who are in the middle of a mission will not be disconnected."
+        "info-text": "Students can only access missions when the session is active.'<br>'At the end of the session, students who are in the middle of a mission will not be disconnected.",
+        "title": "Session status"
       }
     },
     "team-members": {
@@ -390,7 +390,6 @@
   },
   "pages": {
     "assessment-individual-results": {
-      "title": "Results of {firstName} {lastName}",
       "badges": "Thematic results",
       "breadcrumb-current-page-label": "Participation of {firstName} {lastName}",
       "participation-label": "Participation #{participationNumber}",
@@ -404,7 +403,6 @@
         "review": "Review"
       },
       "table": {
-        "title": "Results by competence",
         "column": {
           "competences": "Competences ({count, plural, =0 {-} other {{count}}})",
           "results": {
@@ -413,12 +411,13 @@
           }
         },
         "empty": "Pending results",
-        "row-title": "Competence"
-      }
+        "row-title": "Competence",
+        "title": "Results by competence"
+      },
+      "title": "Results of {firstName} {lastName}"
     },
     "attestations": {
-      "title": "Attestations",
-      "basic-description" : "Export all attestations in PDF format",
+      "basic-description": "Export all attestations in PDF format",
       "divisions-description": "Select the class for which you wish to export attestations in PDF format.",
       "download-attestations-button": "Download",
       "no-attestations": "No attestation available",
@@ -446,11 +445,11 @@
       "empty-state": "No participants yet!",
       "empty-state-with-copy-link": "No participants yet! Share with them the following link to join this campaign.",
       "multiple-sendings": {
-        "title": "Multiple Sendings",
         "status": {
           "disabled": "No",
           "enabled": "Yes"
-        }
+        },
+        "title": "Multiple Sendings"
       },
       "name": "Name of the campaign",
       "tab": {
@@ -461,12 +460,10 @@
       }
     },
     "campaign-activity": {
-      "title": "Activity",
       "actions": {
         "delete": "Delete"
       },
       "delete-participation-modal": {
-        "title": "Delete the participation of <strong>{firstName} {lastName}</strong>?",
         "actions": {
           "cancel": "No",
           "confirmation": "Yes, delete"
@@ -474,6 +471,7 @@
         "error": "An error occurred while removing this participation.",
         "success": "The participation has been successfully deleted",
         "text": "You are about to delete a participation, it will no longer be visible nor included in the statistics of the campaign.",
+        "title": "Delete the participation of <strong>{firstName} {lastName}</strong>?",
         "warning": {
           "assessment-campaign-participation": {
             "shared-participation": "The participant will not be able to take the test again.",
@@ -487,7 +485,6 @@
         }
       },
       "table": {
-        "title": "List of participants",
         "column": {
           "delete": "Delete participation",
           "first-name": "First name",
@@ -498,11 +495,12 @@
         "delete-button-label": "Delete participation",
         "empty": "No participants",
         "row-title": "Participant",
-        "see-results": "See results of {firstName} {lastName}"
-      }
+        "see-results": "See results of {firstName} {lastName}",
+        "title": "List of participants"
+      },
+      "title": "Activity"
     },
     "campaign-creation": {
-      "title": "Create a campaign",
       "actions": {
         "create": "Create a campaign",
         "delete": "Delete"
@@ -539,11 +537,11 @@
       },
       "no": "No",
       "owner": {
-        "title": "Campaign owner",
         "info": "The campaign owner, along with the organisation administrators, are the only ones who can modify or archive this campaign.",
         "label": "Campaign owner",
         "placeholder": "Owner’s first and last name",
-        "search-placeholder": "Search for an owner"
+        "search-placeholder": "Search for an owner",
+        "title": "Campaign owner"
       },
       "purpose": {
         "assessment": "Assess participants",
@@ -574,6 +572,7 @@
         "label": "Title of the customised test",
         "sublabel": "This field will be displayed to campaign participants."
       },
+      "title": "Create a campaign",
       "yes": "Yes"
     },
     "campaign-individual-results": {
@@ -584,7 +583,6 @@
       "title": "Review for {firstName} {lastName}"
     },
     "campaign-modification": {
-      "title": "Edit a campaign",
       "actions": {
         "edit": "Edit"
       },
@@ -595,18 +593,18 @@
         "sublabel": "This field will be displayed to campaign participants."
       },
       "owner": {
-        "title": "Owner of the campaign",
         "info": "The campaign owner, along with the organisation administrators, are the only ones who can modify or archive this campaign.",
         "label": "Owner of the campaign",
-        "placeholder": "Owner’s first and last name"
+        "placeholder": "Owner’s first and last name",
+        "title": "Owner of the campaign"
       },
       "personalised-test-title": {
         "label": "Title of the personalised test",
         "sublabel": "This field will be displayed to campaign participants."
-      }
+      },
+      "title": "Edit a campaign"
     },
     "campaign-results": {
-      "title": "Results",
       "average": "Average results",
       "filters": {
         "aria-label": "Filters on participations",
@@ -614,19 +612,18 @@
         "type": {
           "badges": "Thematic results",
           "groups": {
-            "title": "Groups",
-            "empty": "No group"
+            "empty": "No group",
+            "title": "Groups"
           },
           "stages": "Success rate",
           "status": {
-            "title": "Status",
-            "empty": "All statuses"
+            "empty": "All statuses",
+            "title": "Status"
           }
         }
       },
       "result": "Result",
       "table": {
-        "title": "List of submitted results",
         "caption": "This table lists the participants who have shared their results. For each participant, it shows their surname, first name and elements of results.",
         "column": {
           "ariaSharedResultCount": "Number of sent results",
@@ -651,27 +648,27 @@
         "evolution-tooltip": {
           "content": "Evolution of the participant between their last two shared results."
         },
-        "row-title": "Participant"
+        "row-title": "Participant",
+        "title": "List of submitted results"
       },
       "tested-items": "Items assessed",
+      "title": "Results",
       "validated-items": "Items successfully completed"
     },
     "campaign-review": {
-      "title": "Review",
       "description": "According to the target profile selected and the results of your campaign, Pix recommends focusing on the following topics, sorted by relevance {bubble}.",
       "sub-table": {
-        "title": "{count, plural, =1 {1 tutorial} other{{count} tutorials}} recommended by the Pix community",
         "column": {
           "source": {
             "value": "By {source}"
           }
         },
-        "row-title": "Tutorial"
+        "row-title": "Tutorial",
+        "title": "{count, plural, =1 {1 tutorial} other{{count} tutorials}} recommended by the Pix community"
       },
       "sub-title": "Recommendations of topics to focus on",
       "table": {
         "analysis": {
-          "title": "Review by topic",
           "caption": "Table of topics to work on, sorted by relevance. Some have additional columns showing the number of tutorials that exist related to the topic and how to access these tutorials",
           "column": {
             "relevance": {
@@ -695,10 +692,10 @@
             "strongly-recommended": "Strongly recommended",
             "very-strongly-recommended": "Very strongly recommended"
           },
-          "row-title": "Topic"
+          "row-title": "Topic",
+          "title": "Review by topic"
         },
         "competences": {
-          "title": "Results by competence",
           "column": {
             "competences": "Competences ({count})",
             "results": {
@@ -706,22 +703,23 @@
               "tooltip": "'<span class=\"screen-reader-only\">'Participants have validated'</span>' {result} % '<span class=\"screen-reader-only\">'of the competence {competence}.'</span>'"
             }
           },
-          "row-title": "Competence"
+          "row-title": "Competence",
+          "title": "Results by competence"
         },
         "empty": "Pending results"
-      }
+      },
+      "title": "Review"
     },
     "campaign-settings": {
-      "title": "Settings",
       "actions": {
         "archive": "Archive",
         "duplicate": "Duplicate",
         "edit": "Edit"
       },
       "campaign-type": {
-        "title": "Type of campaign",
         "assessment": "Assessment campaign",
-        "profiles-collection": "Profiles collection campaign"
+        "profiles-collection": "Profiles collection campaign",
+        "title": "Type of campaign"
       },
       "direct-link": "Direct link",
       "external-user-id-label": "External user ID label",
@@ -731,11 +729,11 @@
       },
       "landing-page-text": "Text to display on the starting page",
       "multiple-sendings": {
-        "title": "Multiple Sendings",
         "status": {
           "disabled": "No",
           "enabled": "Yes"
         },
+        "title": "Multiple Sendings",
         "tooltip": {
           "aria-label": "Description of multiple sendings",
           "text": "If you choose to allow multiple submissions, the participants will be able to submit their participation several times by re-entering the campaign code. Within Pix Orga you will find the latest sent."
@@ -743,11 +741,11 @@
       },
       "personalised-test-title": "Title of the customised test",
       "reset-to-zero": {
-        "title": "Reset to zero",
         "status": {
           "disabled": "No",
           "enabled": "Yes"
         },
+        "title": "Reset to zero",
         "tooltip": {
           "aria-label": "Description of Reset to zero",
           "text": "If the reset to zero function is activated, the participant can reset the entire customised test and submit their results multiple times by re-entering the campaign code."
@@ -756,10 +754,10 @@
       "target-profile": {
         "title": "Customised test",
         "tooltip": "Customised test's description"
-      }
+      },
+      "title": "Settings"
     },
     "campaigns-list": {
-      "title": "Campaigns",
       "action": {
         "campaign": {
           "archived": "Archived",
@@ -775,13 +773,13 @@
         "success-message": "{count, plural, =1 {The campaign has successfully been deleted from the list.} other {The {count} selected campaigns have successfully been deleted from the list.}}"
       },
       "deletion-modal": {
-        "title": "{count, plural, =1 {Are you sure you want to delete the selected campaign?} other {Are you sure you want to delete '<strong>'{count}'</strong>' campaigns?}}",
         "confirmation-checkbox": "I confirm that I have understood the impacts of the {count} deletions",
         "content": {
           "footer": "Please note that this action is irreversible.",
           "header": "{count, plural, =1 {This campaign} other {These campaigns}} will no longer be visible in Pix Orga.",
           "main-participation-prevent": "All campaign entries and results will be deleted."
-        }
+        },
+        "title": "{count, plural, =1 {Are you sure you want to delete the selected campaign?} other {Are you sure you want to delete '<strong>'{count}'</strong>' campaigns?}}"
       },
       "filter": {
         "by-name": "Search for a campaign",
@@ -809,10 +807,10 @@
       "tabs": {
         "all-campaigns": "All the campaigns",
         "my-campaigns": "My campaigns"
-      }
+      },
+      "title": "Campaigns"
     },
     "certifications": {
-      "title": "Certification results",
       "description": "Please select the class for which you would like to export the certification results (.csv) or download certificates (.pdf).",
       "documentation-link": "https://cloud.pix.fr/s/dqCoeH8q4fjWZjq",
       "documentation-link-label": "Interpreting the results",
@@ -825,7 +823,8 @@
         "no-results": "No certification results for the class {selectedDivision}."
       },
       "no-students-imported-yet": "In this tab, you will find the certification results and certificates of the students. You will first need to import the students database of your school.",
-      "select-label": "Class"
+      "select-label": "Class",
+      "title": "Certification results"
     },
     "join-request-form": {
       "firstname": "Votre prénom",
@@ -838,8 +837,8 @@
       "organization-code": "UAI/RNE de l'établissement"
     },
     "login": {
-      "title": "Log in",
-      "choose-language-aria-label": "Select a language"
+      "choose-language-aria-label": "Select a language",
+      "title": "Log in"
     },
     "login-form": {
       "active-or-retrieve": "Activate or retrieve your Pix Orga space",
@@ -864,13 +863,11 @@
       "password": "Password"
     },
     "login-or-register": {
-      "title": "You have been invited to join the organisation {organizationName}",
       "login-form": {
-        "title": "Already have a PIX account?",
-        "button": "Log in"
+        "button": "Log in",
+        "title": "Already have a PIX account?"
       },
       "register-form": {
-        "title": "Sign up",
         "button": "Sign up",
         "errors": {
           "default": "The service is temporarily unavailable. Please try again later.",
@@ -905,11 +902,12 @@
             "error": "Your password must contain at least 8 characters and include at least one uppercase letter, one lowercase letter and one number.",
             "label": "Password"
           }
-        }
-      }
+        },
+        "title": "Sign up"
+      },
+      "title": "You have been invited to join the organisation {organizationName}"
     },
     "missions": {
-      "title": "Missions",
       "list": {
         "actions": {
           "see-mission-details": "See details"
@@ -934,12 +932,12 @@
             "non-admin": "Step1 : <b>Ask the Pix Orga administrator</b> in your area to import students"
           },
           "step2": {
-            "title": "Step 2 : To enable pupils to access your school's Pix Junior space, you can :",
             "option1": "use the&nbsp'<'a href=\"{pixJuniorUrl}\"'>'junior.pix.fr'</a>'&nbsplink. You will be asked for your school's code each time you connect.",
             "option2": {
               "body": "or use the direct link &nbsp'<'a href=\"{pixJuniorUrl}\" target=_blank '>'junior.pix.fr/schools/{code}'</a>'",
               "hint": "You can save this bookmark on your computers."
-            }
+            },
+            "title": "Step 2 : To enable pupils to access your school's Pix Junior space, you can :"
           },
           "step3": "Step 3 : <b> Activate the Pix Junior session </b> using the button above. <b>You should do this before each session with your pupils</b>.",
           "welcome": "Starting to use Pix Junior :"
@@ -958,7 +956,6 @@
         }
       },
       "mission": {
-        "title": "Mission's information",
         "details": {
           "button-label": "See the educational sheet",
           "competence": {
@@ -1042,20 +1039,21 @@
           "activities": "Activities",
           "aria-label": "Navigation between the activity or results of the mission",
           "results": "Results"
-        }
-      }
+        },
+        "title": "Mission's information"
+      },
+      "title": "Missions"
     },
     "organization-learner": {
       "activity": {
-        "title": "Activity",
         "assessment-summary": "Customised tests participations summary",
         "cards": {
+          "shared": "Submitted: {count}",
+          "started": "In progress: {count}",
           "title": {
             "assessment": "Assessments",
             "profiles-collection": "Profile collections"
           },
-          "shared": "Submitted: {count}",
-          "started": "In progress: {count}",
           "to-share": "Pending: {count}"
         },
         "empty-state": "No activity yet. As soon as {organizationLearnerFirstName} {organizationLearnerLastName} participates in a campaign, you will be able to follow their progress here.",
@@ -1073,7 +1071,8 @@
           }
         },
         "participations-title": "List of all the participations",
-        "profile-collection-summary": "Profile collection participations summary"
+        "profile-collection-summary": "Profile collection participations summary",
+        "title": "Activity"
       },
       "header": {
         "aria-label-title": "Detail page of {firstName} {lastName}"
@@ -1090,7 +1089,6 @@
         "success-message": "{count, plural, =1 {{firstname} {lastname} has successfully been deleted from the participants list.} other {The {count} selected participants have successfully been deleted from the list.}}"
       },
       "deletion-modal": {
-        "title": "Delete '<strong>'{count, plural, =1 {{firstname} {lastname}} other {{count}}}'</strong>' {count, plural, =1 {of your} other {selected}} participants?",
         "confirmation-checkbox": "I confirm that I have understood the impacts of the {count} deletions",
         "content": {
           "footer": "Please note that this action is irreversible.",
@@ -1099,7 +1097,8 @@
           "main-new-campaign-access": "However, they will still be able to take part in new campaigns.",
           "main-participation-access": "They  will no longer be able to take part in any previous campaigns.",
           "main-participation-prevent": "All their participations to campaigns will be deleted."
-        }
+        },
+        "title": "Delete '<strong>'{count, plural, =1 {{firstname} {lastname}} other {{count}}}'</strong>' {count, plural, =1 {of your} other {selected}} participants?"
       },
       "empty-state": {
         "action": "See my campaigns",
@@ -1162,25 +1161,24 @@
       }
     },
     "organization-participants-import": {
-      "title": "Import participants",
       "actions": {
         "add-sup": {
-          "title": "Add / Edit",
           "details": "Add a list of students to the one already imported and/or edit the information of students already imported.",
-          "label": "Add students"
+          "label": "Add students",
+          "title": "Add / Edit"
         },
         "participants": {
-          "title": "Import list of participants",
           "details": "This action allows you to :",
           "details-add": "add new participants",
           "details-disable": "deactivate old participants",
           "details-update": "edit previously imported participants",
-          "label": "Import list"
+          "label": "Import list",
+          "title": "Import list of participants"
         },
         "replace": {
-          "title": "Overwrite",
           "details": "Import a new list of students in replacement of the existing one.",
-          "label": "Overwrite list"
+          "label": "Overwrite list",
+          "title": "Overwrite"
         }
       },
       "banner": {
@@ -1198,9 +1196,9 @@
         "warning-banner": "However some values were not recognised. They have been replaced by \"Not recognised\". If you need other values, please contact us at '<a href=\"mailto:sup@pix.fr\">'sup@pix.fr'</a></div>'"
       },
       "error-panel": {
-        "title": "Errors in the last file imported :",
         "error-wrapper": "Import has failed. Please check or edit your file and try to import it again.",
-        "global-error": "Import has failed. Please try again or contact us through '<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://pix.org/en/contact-form\">'the help form'</a>'."
+        "global-error": "Import has failed. Please try again or contact us through '<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://pix.org/en/contact-form\">'the help form'</a>'.",
+        "title": "Errors in the last file imported :"
       },
       "file-type-separator": " or ",
       "global-success": "Last file successfully imported on {date} by {firstName} {lastName}.",
@@ -1211,6 +1209,7 @@
         "title": "Import students"
       },
       "supported-formats": "(supported format: {types})",
+      "title": "Import participants",
       "warnings": {
         "diploma": "Diplomas unknown: {diplomas}; ",
         "study-scheme": "Study schemes unknown: {studySchemes}; "
@@ -1230,7 +1229,6 @@
       }
     },
     "places": {
-      "title": "Seats",
       "before-date": "on",
       "places-lots": {
         "statuses": {
@@ -1239,7 +1237,6 @@
           "pending": "Pending"
         },
         "table": {
-          "title": "Seats purchase history",
           "caption": "Table listing your organisation's seat purchases. For each purchase, it shows: the number of tickets, the activation date, the expiry date and the status (active, coming soon or expired). It is ordered according to the status of the purchases and their expiry date.",
           "empty-state": "No seats yet!",
           "headers": {
@@ -1247,12 +1244,13 @@
             "count": "Seats count",
             "expiration-date": "Expiration date",
             "status": "Status"
-          }
+          },
+          "title": "Seats purchase history"
         }
-      }
+      },
+      "title": "Seats"
     },
     "preselect-target-profile": {
-      "title": "Topic selection",
       "download": "Download topics selection ({ numberOfTubesSelected }) (JSON, { fileSize }kB)",
       "download-filename": "topic-selection-{ organizationName }-{ date }.json",
       "no-tube-selected": "Download topics selection (JSON, { fileSize }kB)",
@@ -1268,30 +1266,29 @@
         "is-responsive": "yes",
         "not-responsive": "no",
         "row-title": "Topic"
-      }
+      },
+      "title": "Topic selection"
     },
     "profiles-individual-results": {
-      "title": "Profile of {firstName} {lastName}",
       "breadcrumb-current-page-label": "Participation of {firstName} {lastName}",
       "certifiable": "Eligible for certification",
       "competences-certifiables": "COMP. ELIGIBLE FOR CERTIFICATION",
       "pix": "PIX",
       "pix-score": "{score, number}",
       "table": {
-        "title": "Results by competence",
         "column": {
           "level": "Level",
           "pix-score": "Pix score",
           "skill": "Competence"
         },
         "empty": "Pending results",
-        "row-title": "Competence"
-      }
+        "row-title": "Competence",
+        "title": "Results by competence"
+      },
+      "title": "Profile of {firstName} {lastName}"
     },
     "profiles-list": {
-      "title": "Submitted profiles",
       "table": {
-        "title": "List of submitted profiles",
         "caption": "This table contains the list of participants who have shared their profiles. It indicates for each participant their last name, first name, the sent date, the Pix score, the evolution, the certifiability status and the number of certifiable competences.",
         "column": {
           "ariaSharedProfileCount": "Number of profiles shared",
@@ -1321,14 +1318,15 @@
         "evolution-tooltip": {
           "content": "Evolution of the pix score between the last two profile shares."
         },
-        "row-title": "Profile"
-      }
+        "row-title": "Profile",
+        "title": "List of submitted profiles"
+      },
+      "title": "Submitted profiles"
     },
     "sco-organization-participant-activity": {
       "title": "Student activity"
     },
     "sco-organization-participants": {
-      "title": "{count, plural, =0 {Students} =1 {Student ({count})} other {Students ({count})}}",
       "action-bar": {
         "generate-username-password-button": "Generate logins and/or passwords for selected students",
         "information": "{count, plural, =1 {{count} student selected} other {{count} students selected}}",
@@ -1369,14 +1367,13 @@
         "students-count": "{count, plural, =0 {0 students} =1 {1 student} other {{count} students}}"
       },
       "generate-username-password-modal": {
-        "title": "Generate logins and/or passwords for selected students",
         "content-message-1": "Students who do not yet have a login method must go through a campaign at your school to create their PIX account.",
         "content-message-2": "A CSV file containing login details and one-time passwords will be generated.",
         "content-message-3": "Give these new one-time passwords to the students. When they log in with this password, Pix will ask them to enter a new one.",
+        "title": "Generate logins and/or passwords for selected students",
         "warning-message": "A login and password will be generated for students who have access to the Mediacentre and/or an e-mail address. Students who already have a login will have their password reset."
       },
       "manage-authentication-method-modal": {
-        "title": "Managing the student's Pix account",
         "authentication-methods": "Log in methods",
         "copied": "Copied!",
         "error": {
@@ -1410,7 +1407,8 @@
             "copy": "Copy the username",
             "label": "Username"
           }
-        }
+        },
+        "title": "Managing the student's Pix account"
       },
       "messages": {
         "password-reset-success": "The password reset of the selected students has been done successfuly."
@@ -1419,10 +1417,10 @@
       "no-participants-action": "The administrator must import the students database by clicking on the import button.",
       "page-title": "Students",
       "reset-password-modal": {
-        "title": "Réinitialisation des <strong>mots de passe</strong> des élèves avec <strong>identifiant</strong>",
         "content-message-1": "Sur {totalSelectedStudents, plural, =1 {<strong>{totalSelectedStudents} élève</strong>} other {<strong>{totalSelectedStudents} élèves</strong>}} que vous avez sélectionné, {totalAffectedStudents, plural, =0 {<strong>aucun mot de passe</strong> sera réinitialisé} =1 {le mot de passe de <strong>{totalAffectedStudents} élève</strong> va être réinitialisé.} other {les mots de passe de <strong>{totalAffectedStudents} élèves</strong> vont être réinitialisé.}}",
         "content-message-2": "Un fichier CSV sera généré contenant les identifiants ainsi que les mots de passe à usage unique.",
         "content-message-3": "Communiquez ces nouveaux mots de passe à usage unique aux élèves. Lorsqu'ils se connecteront avec ce mot de passe, Pix leur demandera d'en saisir un nouveau.",
+        "title": "Réinitialisation des <strong>mots de passe</strong> des élèves avec <strong>identifiant</strong>",
         "warning-message": "Seuls les mots de passe des accès par identifiants peuvent être réinitialisés. Les accès par adresse email et Mediacentre ne seront pas impactés."
       },
       "table": {
@@ -1461,10 +1459,10 @@
         "description": "Table of students, sorted by name. For students who have provided an authentication method, you can manage the allowed login modes and reset the student's password through a menu in 'Actions' column",
         "empty": "No students.",
         "row-title": "Student"
-      }
+      },
+      "title": "{count, plural, =0 {Students} =1 {Student ({count})} other {Students ({count})}}"
     },
     "statistics": {
-      "title": "Statistics",
       "before-date": "on",
       "description": "The table below shows how your participants are positioned by subject.'<br>' Positioning reflects the average level of your participants in relation to the maximum level they could have reached.'<br>' This data takes into account all participations shared as part of your organisation's evaluation campaigns that have not been deleted.",
       "gauge": {
@@ -1485,13 +1483,13 @@
           "skills": "Skills",
           "topics": "Topics"
         }
-      }
+      },
+      "title": "Statistics"
     },
     "sup-organization-participant-activity": {
       "title": "Student activity"
     },
     "sup-organization-participants": {
-      "title": "{count, plural, =0 {Students} =1 {Student ({count})} other {Students ({count})}}",
       "action-bar": {
         "delete-button": "Delete",
         "error-message": "{count, plural, =1 {An error has occurred. {firstname} {lastname} has not been deleted from the students list.} other {An error has occurred. The {count} selected students have not been deleted from the list}}",
@@ -1504,7 +1502,6 @@
         "show-actions": "Show actions"
       },
       "deletion-modal": {
-        "title": "Delete '<strong>'{count, plural, =1 {{firstname} {lastname}} other {{count}}}'</strong>' {count, plural, =1 {of your} other {selected}} students?",
         "content": {
           "footer": "Please note that this action is irreversible.",
           "header": "{count, plural, =1 {This student} other {These students}} will no longer be visible in Pix Orga.",
@@ -1512,10 +1509,10 @@
           "main-new-campaign-access": "However, they will still be able to take part in new campaigns.",
           "main-participation-access": "They  will no longer be able to take part in any previous campaigns.",
           "main-participation-prevent": "All their participations to campaigns will be deleted."
-        }
+        },
+        "title": "Delete '<strong>'{count, plural, =1 {{firstname} {lastname}} other {{count}}}'</strong>' {count, plural, =1 {of your} other {selected}} students?"
       },
       "edit-student-number-modal": {
-        "title": "Edit a student number",
         "actions": {
           "update": "Update"
         },
@@ -1524,7 +1521,8 @@
           "new-student-number-label": "New student number",
           "student-number": "{firstName} {lastName}'s current student number is: ",
           "success": "{firstName} {lastName}'s student number has been successfully edited."
-        }
+        },
+        "title": "Edit a student number"
       },
       "empty-state": {
         "no-participants": "No students yet!",
@@ -1549,12 +1547,12 @@
       },
       "page-title": "Students",
       "replace-students-modal": {
-        "title": "Are you sure you want to overwrite the existing students?",
         "confirm": "Yes, overwrite",
         "confirmation-checkbox": "I have fully understood the effect of this action",
         "footer-content": "Existing students in the application and included in the new import will not be deleted and will be updated if necessary.",
         "last-warning": "Please note that this action is irreversible, students who are not included in the new import will be deleted from Pix Orga.",
-        "main-content": "All of their campaign participations will be deleted. This will have an impact on the results and analytics of your campaigns. They will no longer be able to take part in any previous campaigns. However, they will still be able to take part in new campaigns."
+        "main-content": "All of their campaign participations will be deleted. This will have an impact on the results and analytics of your campaigns. They will no longer be able to take part in any previous campaigns. However, they will still be able to take part in new campaigns.",
+        "title": "Are you sure you want to overwrite the existing students?"
       },
       "table": {
         "column": {
@@ -1582,10 +1580,10 @@
         "description": "Table of students, sorted by name.You can edit the student's number through a menu in an additional column",
         "empty": "No students.",
         "row-title": "Student"
-      }
+      },
+      "title": "{count, plural, =0 {Students} =1 {Student ({count})} other {Students ({count})}}"
     },
     "team-invitations": {
-      "title": "Team invitations",
       "cancel-invitation": "Delete this invitation",
       "invitation-cancelled-succeed-message": "The invitation has been deleted.",
       "invitation-resent-succeed-message": "The invitation has been resent.",
@@ -1598,18 +1596,18 @@
         "row": {
           "aria-label": "Pending invitation"
         }
-      }
+      },
+      "title": "Team invitations"
     },
     "team-list": {
-      "title": "Team",
       "add-member-button": "Invite a member",
       "tabs": {
         "invitation": "Invitations ({count, plural, =0 {-} other {{count}}})",
         "member": "Members ({count, plural, =0 {-} other {{count}}})"
-      }
+      },
+      "title": "Team"
     },
     "team-members": {
-      "title": "Team members",
       "actions": {
         "edit-organization-membership-role": "Change role",
         "leave-organization": "Leave this Pix Orga space",
@@ -1626,8 +1624,8 @@
       },
       "modals": {
         "leave-organization": {
-          "title": "Leave this Pix Orga space",
-          "message": "Are you sure you want to leave this Pix Orga space? You will no longer have access to <strong>{organizationName}</strong>.<br/><br/>Your campaigns remain accessible to the rest of the team and will not be archived.<br/><br/>Your access to other Pix Orga spaces will not be affected.<br/><br/>You'll be disconnected."
+          "message": "Are you sure you want to leave this Pix Orga space? You will no longer have access to <strong>{organizationName}</strong>.<br/><br/>Your campaigns remain accessible to the rest of the team and will not be archived.<br/><br/>Your access to other Pix Orga spaces will not be affected.<br/><br/>You'll be disconnected.",
+          "title": "Leave this Pix Orga space"
         }
       },
       "notifications": {
@@ -1645,11 +1643,11 @@
         }
       },
       "remove-membership-modal": {
-        "title": "Are you sure you want to remove this member?",
         "actions": {
           "remove": "Yes, remove the member"
         },
-        "message": "{memberFirstName} {memberLastName} will no longer have access to this Pix Orga space.'<br>'The campaigns created by this member will still be accessible to the rest of the team."
+        "message": "{memberFirstName} {memberLastName} will no longer have access to this Pix Orga space.'<br>'The campaigns created by this member will still be accessible to the rest of the team.",
+        "title": "Are you sure you want to remove this member?"
       },
       "table": {
         "column": {
@@ -1659,10 +1657,10 @@
         },
         "empty": "No members yet",
         "row-title": "Member"
-      }
+      },
+      "title": "Team members"
     },
     "team-new": {
-      "title": "Invite a member",
       "email-requirement": "Enter here the email address of the member you want to invite.",
       "errors": {
         "default": "The service is temporarily unavailable. Please try again later.",
@@ -1680,6 +1678,7 @@
         "invitation": "An invitation has been sent to the email address {email}.",
         "multiple-invitations": "An invitation has been sent to the listed email addresses."
       },
+      "title": "Invite a member",
       "warning": "The members you add below will have access to participant results and campaign analysis. Please ensure that the people you invite are members of your organisation."
     },
     "team-new-item": {
@@ -1687,8 +1686,8 @@
       "invite-button": "Invite"
     },
     "terms-of-service": {
-      "title": "Terms and conditions of use",
-      "accept": "I accept the terms and conditions"
+      "accept": "I accept the terms and conditions",
+      "title": "Terms and conditions of use"
     }
   }
 }

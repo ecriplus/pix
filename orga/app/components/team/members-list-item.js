@@ -72,7 +72,7 @@ export default class MembersListItem extends Component {
     try {
       await membership.save();
       this.notifications.sendSuccess(this.intl.t('pages.team-members.notifications.change-member-role.success'));
-    } catch (e) {
+    } catch {
       membership.rollbackAttributes();
       this.notifications.sendError(this.intl.t('pages.team-members.notifications.change-member-role.error'));
     }
@@ -115,7 +115,7 @@ export default class MembersListItem extends Component {
       this.notifications.sendSuccess(
         this.intl.t('pages.team-members.notifications.remove-membership.success', { memberFirstName, memberLastName }),
       );
-    } catch (e) {
+    } catch {
       this.notifications.sendError(this.intl.t('pages.team-members.notifications.remove-membership.error'));
     } finally {
       this.closeRemoveMembershipModal();
@@ -134,7 +134,7 @@ export default class MembersListItem extends Component {
       );
       await this.session.waitBeforeInvalidation(5000);
       this.session.invalidate();
-    } catch (_) {
+    } catch {
       this.notifications.sendError(this.intl.t('pages.team-members.notifications.leave-organization.error'));
     } finally {
       this.closeLeaveOrganizationModal();

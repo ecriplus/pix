@@ -67,7 +67,7 @@ export default class CurrentUserService extends Service {
         const membership = await this._getMembershipByUserOrgaSettings(this.memberships.slice(), userOrgaSettings);
 
         await this._setOrganizationProperties(membership);
-      } catch (error) {
+      } catch {
         this.prescriber = null;
         this.memberships = null;
         return this.session.invalidate();
