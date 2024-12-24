@@ -1,6 +1,5 @@
 import Oppsy from '@1024pix/oppsy';
 import Hapi from '@hapi/hapi';
-import metrics from 'datadog-metrics';
 import { parse } from 'neoqs';
 
 import { setupErrorHandling } from './config/server-setup-error-handling.js';
@@ -9,7 +8,7 @@ import { authentication } from './lib/infrastructure/authentication.js';
 import { routes } from './lib/routes.js';
 import {
   attachTargetProfileRoutes,
-  complementaryCertificationRoutes,
+  complementaryCertificationRoutes
 } from './src/certification/complementary-certification/routes.js';
 import { certificationConfigurationRoutes, scoWhitelistRoutes } from './src/certification/configuration/routes.js';
 import { certificationEnrolmentRoutes } from './src/certification/enrolment/routes.js';
@@ -22,6 +21,7 @@ import { devcompRoutes } from './src/devcomp/routes.js';
 import { evaluationRoutes } from './src/evaluation/routes.js';
 import { identityAccessManagementRoutes } from './src/identity-access-management/application/routes.js';
 import { learningContentRoutes } from './src/learning-content/routes.js';
+import { Metrics } from './src/monitoring/infrastructure/metrics.js';
 import { organizationalEntitiesRoutes } from './src/organizational-entities/application/routes.js';
 import { parcoursupRoutes } from './src/parcoursup/application/routes.js';
 import { campaignRoutes } from './src/prescription/campaign/routes.js';
@@ -38,7 +38,6 @@ import { config } from './src/shared/config.js';
 import { monitoringTools } from './src/shared/infrastructure/monitoring-tools.js';
 import { plugins } from './src/shared/infrastructure/plugins/index.js';
 import { deserializer } from './src/shared/infrastructure/serializers/jsonapi/deserializer.js';
-import { logger } from './src/shared/infrastructure/utils/logger.js';
 // bounded context migration
 import { sharedRoutes } from './src/shared/routes.js';
 import { swaggers } from './src/shared/swaggers.js';
@@ -74,22 +73,11 @@ const createServer = async () => {
   const server = createBareServer();
 
   // initialisation of Datadog link for metrics publication
-  if (config.environment !== 'development' || config.featureToggles.isDirectMetricsEnabled) {
-    logger.info('Metric initialisation : linked to Datadog');
-    metrics.init({
-      host: config.infra.containerName,
-      prefix: '',
-      flushIntervalSeconds: config.infra.metricsFlushIntervalSecond,
-      defaultTags: [`service:${config.infra.appName}`],
-    });
-  } else {
-    logger.info('Metric initialisation : no reporter => no metrics sent');
-    metrics.init({ reporter: metrics.NullReporter() });
-  }
+  const metrics = new Metrics({ config });
 
   if (logOpsMetrics) {
     // OPS metrics via direct metrics
-    if (config.featureToggles.isDirectMetricsEnabled) await enableOpsMetrics(server);
+    if (config.featureToggles.isDirectMetricsEnabled) await enableOpsMetrics(server, metrics);
     // OPS metrics via Oppsy
     if (!config.featureToggles.isOppsyDisabled) await enableLegacyOpsMetrics(server);
   }
@@ -147,24 +135,32 @@ const createBareServer = function () {
   return new Hapi.server(serverConfiguration);
 };
 
-const enableOpsMetrics = async function (server) {
-  function collectMemoryStats() {
-    const memUsage = process.memoryUsage();
-    metrics.gauge(`captain.api.memory.rss`, memUsage.rss);
-    metrics.gauge('captain.api.memory.heapTotal', memUsage.heapTotal);
-    metrics.gauge('captain.api.memory.heapUsed', memUsage.heapUsed);
-    metrics.gauge('captain.api.conteneur', 1);
-  }
+const enableOpsMetrics = async function (server, metrics) {
+  metrics.addRecurrentMetrics(
+    [
+      { type: 'gauge', name: `captain.api.memory.rss`, value: 'rss' },
+      { type: 'gauge', name: 'captain.api.memory.heapTotal', value: 'heapTotal' },
+      { type: 'gauge', name: 'captain.api.memory.heapUsed', value: 'heapUsed' },
+      { type: 'gauge', name: 'captain.api.conteneur', constValue: 1 },
+    ],
+    500,
+  )(() => process.memoryUsage());
 
-  const metricsInterval = setInterval(collectMemoryStats, 5000);
-  server.pixCustomIntervals = [metricsInterval];
+  server.pixCustomIntervals = metrics.intervals;
 
   const gaugeConnections = (pool) => () => {
-    logger.info('publie les metrics de knex');
-    metrics.gauge('captain.api.knex.db_connections_used', pool.numUsed());
-    metrics.gauge('captain.api.knex.db_connections_free', pool.numFree());
-    metrics.gauge('captain.api.knex.db_connections_pending_creation', pool.numPendingCreates());
-    metrics.gauge('captain.api.knex.db_connections_pending_destroy', pool['pendingDestroys'].length);
+    metrics.addMetricPoint({ type: 'gauge', name: 'captain.api.knex.db_connections_used', value: pool.numUsed() });
+    metrics.addMetricPoint({ type: 'gauge', name: 'captain.api.knex.db_connections_free', value: pool.numFree() });
+    metrics.addMetricPoint({
+      type: 'gauge',
+      name: 'captain.api.knex.db_connections_pending_creation',
+      value: pool.numPendingCreates(),
+    });
+    metrics.addMetricPoint({
+      type: 'gauge',
+      name: 'captain.api.knex.db_connections_pending_destroy',
+      value: pool.pendingDestroys.length,
+    });
   };
 
   const client = knex.client;
@@ -181,11 +177,12 @@ const enableOpsMetrics = async function (server) {
     const statusCode = request.raw.res.statusCode;
     const responseTime = (info.completed !== undefined ? info.completed : info.responded) - info.received;
 
-    metrics.histogram('captain.api.duration', responseTime, [
-      `method:${request.route.method}`,
-      `route:${request.route.path}`,
-      `statusCode:${statusCode}`,
-    ]);
+    metrics.addMetricPoint({
+      type: 'histogram',
+      name: 'captain.api.duration',
+      tags: [`method:${request.route.method}`, `route:${request.route.path}`, `statusCode:${statusCode}`],
+      value: responseTime,
+    });
   });
 };
 
