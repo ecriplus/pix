@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import { securityPreHandlers } from '../../shared/application/security-pre-handlers.js';
 import { studentIdentifierType } from '../../shared/domain/types/identifiers-type.js';
 import { certificationController } from './certification-controller.js';
 
@@ -9,18 +8,13 @@ const register = async function (server) {
     method: 'GET',
     path: '/api/parcoursup/students/{ine}/certification',
     config: {
+      auth: 'jwt-parcoursup',
       validate: {
         params: Joi.object({
           ine: studentIdentifierType,
         }),
       },
       handler: certificationController.getCertificationResult,
-      pre: [
-        {
-          method: securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-          assign: 'hasAuthorizationToAccessAdminScope',
-        },
-      ],
       tags: ['api', 'parcoursup'],
       notes: [
         '- **Cette route est accessible uniquement à Parcours Sup**\n' +

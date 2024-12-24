@@ -88,6 +88,13 @@ const authentication = {
         validate: validateClientApplication,
       },
     },
+    {
+      name: 'jwt-parcoursup',
+      configuration: {
+        key: config.jwtConfig.parcoursup.secret,
+        validate: validateClientApplication,
+      },
+    },
   ],
 
   defaultStrategy: 'jwt-user',

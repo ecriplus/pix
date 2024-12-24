@@ -139,6 +139,12 @@ const configuration = (function () {
         scope: 'statistics',
         source: 'pixData',
       },
+      {
+        clientId: process.env.APIM_PIX_PARCOURSUP_CLIENT_ID,
+        clientSecret: process.env.APIM_PIX_PARCOURSUP_CLIENT_SECRET,
+        scope: 'parcoursup',
+        source: 'parcoursup',
+      },
     ],
     auditLogger: {
       isEnabled: toBoolean(process.env.PIX_AUDIT_LOGGER_ENABLED),
@@ -289,6 +295,10 @@ const configuration = (function () {
       },
       pixData: {
         secret: process.env.PIX_DATA_AUTH_SECRET,
+        tokenLifespan: process.env.TOKEN_LIFE_SPAN || '1h',
+      },
+      parcoursup: {
+        secret: process.env.PIX_PARCOURSUP_AUTH_SECRET,
         tokenLifespan: process.env.TOKEN_LIFE_SPAN || '1h',
       },
       certificationResults: {
@@ -539,6 +549,12 @@ const configuration = (function () {
         scope: 'statistics',
         source: 'pixData',
       },
+      {
+        clientId: 'parcoursupClientId',
+        clientSecret: 'parcoursupClientSecret',
+        scope: 'parcoursup',
+        source: 'parcoursup',
+      },
     ];
 
     config.cpf.storage = {
@@ -573,6 +589,7 @@ const configuration = (function () {
     config.jwtConfig.livretScolaire = { secret: 'secretosmose', tokenLifespan: '1h' };
     config.jwtConfig.poleEmploi = { secret: 'secretPoleEmploi', tokenLifespan: '1h' };
     config.jwtConfig.pixData = { secret: 'secretPixData', tokenLifespan: '1h' };
+    config.jwtConfig.parcoursup = { secret: 'secretPixParcoursup', tokenLifespan: '1h' };
 
     config.logging.enabled = toBoolean(process.env.TEST_LOG_ENABLED);
     config.logging.enableLogKnexQueries = false;
