@@ -545,7 +545,7 @@ module('Integration | Component | Campaign::List', function (hooks) {
       const firstCampaignCheckbox = screen.getAllByRole('checkbox')[1];
       await click(firstCampaignCheckbox);
 
-      const nextButton = await screen.findByLabelText(t('common.pagination.action.next'));
+      const nextButton = await screen.findByRole('button', { name: 'Aller à la page suivante', exact: false });
       await click(nextButton);
 
       // then

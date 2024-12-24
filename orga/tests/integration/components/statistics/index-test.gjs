@@ -159,10 +159,10 @@ module('Integration | Component | Statistics | Index', function (hooks) {
       //when
       const screen = await render(<template><Statistics @model={{model}} /></template>);
       //then
-      assert.ok(screen.getByText(t('common.pagination.page-info', { start: 1, end: 1, total: 2 })));
-      assert.ok(screen.getByLabelText(t('common.pagination.action.select-page-size')));
-      assert.ok(screen.getByRole('button', { name: t('common.pagination.action.previous') }));
-      assert.ok(screen.getByRole('button', { name: t('common.pagination.action.next') }));
+      assert.ok(screen.getByText('1-1 sur 2 éléments'));
+      assert.ok(screen.getByLabelText("Nombre d'élément à afficher par page"));
+      assert.ok(screen.getByRole('button', { name: 'Aller à la page précédente' }));
+      assert.ok(screen.getByRole('button', { name: 'Aller à la page suivante' }));
     });
 
     test('should show first page without pageNumber in query params', async function (assert) {
@@ -285,7 +285,7 @@ module('Integration | Component | Statistics | Index', function (hooks) {
       const screen = await render(<template><Statistics @model={{model}} /></template>);
 
       //then
-      assert.ok(screen.getByText(t('common.pagination.page-info', { start: 2, end: 2, total: 2 })));
+      assert.ok(screen.getByText('2-2 sur 2 éléments'));
 
       // when
       const select = screen.getByRole('button', { name: t('pages.statistics.select-label') });
@@ -294,7 +294,7 @@ module('Integration | Component | Statistics | Index', function (hooks) {
       await click(option);
 
       // then
-      assert.ok(screen.getByText(t('common.pagination.page-results', { total: 1 })));
+      assert.ok(screen.getByText('1 élément'));
       assert.ok(screen.getByRole('cell', { name: '2.1 Interagir' }));
       assert.ok(screen.getByRole('cell', { name: 'Gérer ses contacts' }));
       assert.ok(screen.getByRole('cell', { name: t('pages.statistics.level.novice') }));
@@ -303,7 +303,7 @@ module('Integration | Component | Statistics | Index', function (hooks) {
       await clickByName(t('common.filters.actions.clear'));
 
       // then
-      assert.ok(screen.getByText(t('common.pagination.page-info', { start: 1, end: 1, total: 2 })));
+      assert.ok(screen.getByText('1-1 sur 2 éléments'));
     });
   });
 });

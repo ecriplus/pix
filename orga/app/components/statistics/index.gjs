@@ -14,8 +14,13 @@ import TagLevel from './tag-level';
 
 export default class Statistics extends Component {
   @service router;
+  @service intl;
 
   @tracked currentDomainFilter = null;
+
+  get currentLocale() {
+    return this.intl.primaryLocale;
+  }
 
   get analysisByTubes() {
     return this.args.model.data.sort(
@@ -152,6 +157,6 @@ export default class Statistics extends Component {
       </table>
     </section>
 
-    <PixPagination @pagination={{this.pagination}} />
+    <PixPagination @pagination={{this.pagination}} @locale={{this.currentLocale}} />
   </template>
 }

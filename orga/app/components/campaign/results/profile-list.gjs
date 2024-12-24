@@ -1,3 +1,4 @@
+import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { array, fn } from '@ember/helper';
 import { on } from '@ember/modifier';
@@ -6,8 +7,8 @@ import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
 import { gt } from 'ember-truth-helpers';
 
+import getService from '../../../helpers/get-service.js';
 import TableHeader from '../../table/header';
-import TablePaginationControl from '../../table/pagination-control';
 import CampaignParticipationFilters from '../filter/participation-filters';
 import EvolutionHeader from './evolution-header';
 import ParticipationEvolutionIcon from './participation-evolution-icon';
@@ -144,7 +145,9 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
     </div>
 
     {{#if (gt @profiles.length 0)}}
-      <TablePaginationControl @pagination={{@profiles.meta}} />
+      {{#let (getService "service:intl") as |intl|}}
+        <PixPagination @pagination={{@profiles.meta}} @locale={{intl.primaryLocale}} />
+      {{/let}}
     {{/if}}
   </section>
 </template>

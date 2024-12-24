@@ -1,10 +1,11 @@
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { t } from 'ember-intl';
 
+import getService from '../../helpers/get-service.js';
 import Header from '../table/header';
-import PaginationControl from '../table/pagination-control';
 
 function indexNumber(index) {
   return { number: index + 1 };
@@ -98,7 +99,9 @@ function getMissionResultColor(result) {
         </tbody>
       </table>
     </div>
-    <PaginationControl @pagination={{@missionLearners.meta}} />
+    {{#let (getService "service:intl") as |intl|}}
+      <PixPagination @pagination={{@missionLearners.meta}} @locale={{intl.primaryLocale}} />
+    {{/let}}
   {{else}}
     <div class="table__empty content-text">
       {{t "pages.missions.mission.table.result.no-data"}}
