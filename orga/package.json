@@ -48,6 +48,9 @@
     },
     "ember-dayjs": {
       "ember-source": "^6.0.1"
+    },
+    "ember-source": {
+      "@glimmer/component": "^2.0.0"
     }
   },
   "devDependencies": {
@@ -67,7 +70,7 @@
     "@embroider/macros": "^1.13.5",
     "@embroider/webpack": "^4.0.0",
     "@faker-js/faker": "^8.0.0",
-    "@glimmer/component": "^1.1.2",
+    "@glimmer/component": "^2.0.0",
     "@glimmer/tracking": "^1.1.2",
     "chart.js": "^4.4.5",
     "chartjs-adapter-dayjs-4": "^1.0.4",
