@@ -5,7 +5,10 @@ import { NotFoundError } from '../../domain/errors.js';
 import { Accessibility } from '../../domain/models/Challenge.js';
 import { Challenge } from '../../domain/models/index.js';
 import * as solutionAdapter from '../../infrastructure/adapters/solution-adapter.js';
+import { child, SCOPES } from '../utils/logger.js';
 import { LearningContentRepository } from './learning-content-repository.js';
+
+const logger = child('learningcontent:repository', { event: SCOPES.LEARNING_CONTENT });
 
 const TABLE_NAME = 'learningcontent.challenges';
 const VALIDATED_STATUS = 'validé';
@@ -214,6 +217,10 @@ function toDomain({ challengeDto, webComponentTagName, webComponentProps, skill,
     challengeType: challengeDto.type,
     solution,
   });
+
+  if (OPERATIVE_STATUSES.includes(challengeDto.status) && !skill) {
+    logger.warn({ challenge: challengeDto }, 'operative challenge has no skill');
+  }
 
   return new Challenge({
     id: challengeDto.id,
