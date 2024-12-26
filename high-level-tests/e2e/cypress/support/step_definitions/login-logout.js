@@ -64,7 +64,7 @@ Then(`je suis redirigé vers le profil de {string}`, (firstName) => {
     expect(userName.text()).to.contains(firstName);
   });
   cy.get(".global-page-header__title").should((title) => {
-    expect(title.text()).to.contains("Compétences Pix");
+    expect(title.text()).to.contains("Compétences");
   });
 });
 

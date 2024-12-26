@@ -1262,7 +1262,7 @@
         "title": "Reprendre une compétence"
       },
       "title": "Accueil",
-      "welcome": "Bienvenue { firstName } 🎉"
+      "welcome": "Bonjour { firstName }"
     },
     "download-session-results": {
       "button": {
@@ -1690,7 +1690,7 @@
           "no-level": "Compétence non commencée"
         }
       },
-      "description": "Explorez à votre rythme 16 compétences numériques, réparties sur 7 niveaux. Apprenez en vous testant, gagnez des Pix et construisez votre profil numérique. à vous de jouer !",
+      "description": "Évaluez-vous à votre rythme sur 16 compétences numériques. Choisissez une compétence et commencez à gagner des pix.",
       "first-title": "Vous avez 16 compétences à tester. '<br>'On se concentre et c'est partix&nbsp;!",
       "resume-campaign-banner": {
         "accessibility": {
@@ -1706,7 +1706,7 @@
         "reminder-send-campaign": "N'oubliez pas de finaliser votre envoi !",
         "reminder-send-campaign-with-title": "Parcours \"{title}\" terminé. N'oubliez pas de finaliser votre envoi !"
       },
-      "title": "Compétences Pix",
+      "title": "Compétences",
       "total-score-helper": {
         "explanation": "'<p>'C’est le nombre maximum de pix qu’on pourra atteindre lorsque les 8 niveaux du référentiel Pix seront disponibles.'</p><p>'Aujourd’hui, '<span class=\"hexagon-score-information__text--strong\">'le maximum est de {maxReachablePixScore} pix'</span>', correspondant au niveau {maxReachableLevel}.'</p>'",
         "icon": "Information sur les pix",
@@ -2116,14 +2116,15 @@
       "title": "Mon compte"
     },
     "user-tests": {
-      "title": "Mes parcours"
+      "description": "Retrouvez ici les parcours d’évaluation que vous avez commencés ou terminés.",
+      "title": "Parcours"
     },
     "user-trainings": {
       "description": "Continuez à progresser grâce aux formations recommandées à l’issue de vos parcours d’évaluation.",
       "title": "Mes formations"
     },
     "user-tutorials": {
-      "description": "Progresser grâce aux tutos suggérés par la communauté des utilisateurs de Pix.",
+      "description": "Améliorez vos compétences numériques avec des tutoriels adaptés à votre niveau.",
       "empty-list-info": {
         "description": {
           "part1": "Au fil de vos tests, des tutos vous sont recommandés : cliquez sur l'icône marque page",
@@ -2168,7 +2169,7 @@
         "reset-aria-label": "Réinitialiser et désélectionner tous les filtres",
         "see-results": "Voir les résultats"
       },
-      "title": "Mes tutos"
+      "title": "Tutoriels"
     }
   }
 }

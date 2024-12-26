@@ -1261,7 +1261,8 @@
         "subtitle": "Resume testing your skills, find your most recent tests here.",
         "title": "In progress"
       },
-      "title": "Homepage"
+      "title": "Homepage",
+      "welcome": "Welcome { firstName }"
     },
     "download-session-results": {
       "button": {

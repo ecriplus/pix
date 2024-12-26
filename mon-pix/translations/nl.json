@@ -1268,7 +1268,8 @@
         "subtitle": "Ga door met je vaardigheidstests, vind de nieuwste hier.",
         "title": "Een vaardigheid terugnemen"
       },
-      "title": "Home"
+      "title": "Home",
+      "welcome": "Welkom { firstName }"
     },
     "download-session-results": {
       "button": {
@@ -1731,6 +1732,7 @@
           "no-level": "Vaardigheid niet gestart"
         }
       },
+      "description": "Beoordeel jezelf in je eigen tempo op 16 digitale vaardigheden. Kies een vaardigheid en begin met het verdienen van pix.",
       "first-title": "Je moet 16 vaardigheden testen. Concentreer je en ga!",
       "resume-campaign-banner": {
         "accessibility": {

@@ -10,7 +10,7 @@ Fonctionnalité: Titre des pages
     Et je vais sur Pix
     Et je suis connecté à Pix en tant que "Daenerys Targaryen"
     Lorsque je clique sur "Compétences"
-    Alors je vois le titre de la page "Compétences Pix | Pix"
+    Alors je vois le titre de la page "Compétences | Pix"
 
   Scénario: j'accède à la page compétence
     Étant donné que tous les comptes sont créés
