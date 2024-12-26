@@ -1,5 +1,15 @@
 # Pix Changelog
 
+## v5.8.0 (26/12/2024)
+
+
+### :rocket: Amélioration
+- [#10896](https://github.com/1024pix/pix/pull/10896) [FEATURE] Connecte un datamart externe pour servir les résultats de certification pour ParcourSup (PIX-15800).
+- [#10888](https://github.com/1024pix/pix/pull/10888) [FEATURE] Mise à jour des textes des nouveaux gabarits (PIX-15840).
+
+### :bug: Correction
+- [#10903](https://github.com/1024pix/pix/pull/10903) [BUGFIX] Garanti l'ordonnancement des compétences dans l'attestation de certification.
+
 ## v5.7.0 (26/12/2024)
 
 
