@@ -428,7 +428,8 @@
       "divisions-description": "Sélectionnez la classe pour laquelle vous souhaitez exporter les attestations au format PDF.",
       "download-attestations-button": "Télécharger",
       "no-attestations": "Aucune attestation disponible pour votre sélection",
-      "select-label": "Sélectionnez une ou plusieurs classes"
+      "select-label": "Sélectionnez une ou plusieurs classes",
+      "title": "Attestations"
     },
     "campaign": {
       "actions": {
