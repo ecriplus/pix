@@ -9,7 +9,9 @@ import _ from 'lodash';
 
 const STATS_COLUMNS_COUNT = 3;
 
-class CampaignAssessmentCsvLine {
+import * as csvSerializer from '../../../../../shared/infrastructure/serializers/csv/csv-serializer.js';
+import * as campaignParticipationService from '../../../domain/services/campaign-participation-service.js';
+class CampaignAssessmentResultLine {
   constructor({
     organization,
     campaign,
@@ -20,7 +22,6 @@ class CampaignAssessmentCsvLine {
     stageCollection,
     participantKnowledgeElementsByCompetenceId,
     acquiredBadges,
-    campaignParticipationService,
     translate,
   }) {
     this.organization = organization;
@@ -45,10 +46,12 @@ class CampaignAssessmentCsvLine {
   }
 
   toCsvLine() {
-    return [
+    const line = [
       ...this._makeCommonColumns(),
       ...(this.campaignParticipationInfo.isShared ? this._makeSharedColumns() : this._makeNotSharedColumns()),
     ];
+
+    return csvSerializer.serializeLine(line);
   }
 
   _makeSharedStatsColumns({ targetedSkillCount, validatedSkillCount }) {
@@ -215,4 +218,4 @@ class CampaignAssessmentCsvLine {
   }
 }
 
-export { CampaignAssessmentCsvLine };
+export { CampaignAssessmentResultLine };

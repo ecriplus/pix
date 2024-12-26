@@ -1,6 +1,5 @@
 import * as campaignParticipationService from '../../../../../lib/domain/services/campaign-participation-service.js';
-import * as csvSerializer from '../../../../shared/infrastructure/serializers/csv/csv-serializer.js';
-import { CampaignAssessmentCsvLine } from '../../infrastructure/utils/CampaignAssessmentCsvLine.js';
+import { CampaignAssessmentResultLine } from '../../infrastructure/exports/campaigns/campaign-assessment-result-line.js';
 
 export { createOneCsvLine };
 
@@ -16,7 +15,7 @@ function createOneCsvLine({
   acquiredBadges,
   translate,
 }) {
-  const line = new CampaignAssessmentCsvLine({
+  const line = new CampaignAssessmentResultLine({
     organization,
     campaign,
     campaignParticipationInfo,
@@ -30,5 +29,5 @@ function createOneCsvLine({
     translate,
   });
 
-  return csvSerializer.serializeLine(line.toCsvLine());
+  return line.toCsvLine();
 }
