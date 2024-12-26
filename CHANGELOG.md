@@ -1,5 +1,39 @@
 # Pix Changelog
 
+## v5.7.0 (26/12/2024)
+
+
+### :rocket: Amélioration
+- [#10881](https://github.com/1024pix/pix/pull/10881) [FEATURE] :sparkles: Ajoute une stratégie de contrôle plus strict pour l'accès au endpoint Parcoursup (PIX-15801).
+- [#10895](https://github.com/1024pix/pix/pull/10895) [FEATURE] Message de warning pour épreuve jouable sans acquis (PIX-15858).
+- [#10884](https://github.com/1024pix/pix/pull/10884) [FEATURE] Donner la possibilitée aux organisations sans imports de télécharger des attestations (PIX-15612).
+- [#10866](https://github.com/1024pix/pix/pull/10866) [FEATURE] Afficher un élement Expand (PIX-15773).
+- [#10868](https://github.com/1024pix/pix/pull/10868) [FEATURE] Permettre de masquer le champ JSON dans la preview modulix (PIX-15830).
+- [#10786](https://github.com/1024pix/pix/pull/10786) [FEATURE] Ajout de l'API getLegalDocumentStatusByUserId dans legal-document context (PIX-15581).
+- [#10871](https://github.com/1024pix/pix/pull/10871) [FEATURE] affiche aussi les participations à des campagnes de collecte de profil (PIX-15798).
+- [#10858](https://github.com/1024pix/pix/pull/10858) [FEATURE] Pouvoir créer un élément Expand dans le contenu d'un Module (PIX-15772).
+
+### :building_construction: Tech
+- [#10886](https://github.com/1024pix/pix/pull/10886) [TECH] Ajouter la table ke-snapshots dans la description du template de migration (PIX-15850).
+- [#10887](https://github.com/1024pix/pix/pull/10887) [TECH] Migrer PixOrga vers Eslint v9 (PIX-15851).
+- [#10841](https://github.com/1024pix/pix/pull/10841) [TECH] Suppression de l'utilisation de la dependency RSVP partout où on peut immédiatement la remplacer par Promise (PIX-15814).
+- [#10863](https://github.com/1024pix/pix/pull/10863) [TECH] Mutualiser les heading sur PixOrga (Pix-15826).
+- [#10840](https://github.com/1024pix/pix/pull/10840) [TECH] Monter la version d'ember-source orga en V6 (PIX-15770).
+
+### :bug: Correction
+- [#10885](https://github.com/1024pix/pix/pull/10885) [BUGFIX] cache le filtre du propriétaire de campagne sur la page mes campagnes (pix-15837).
+- [#10875](https://github.com/1024pix/pix/pull/10875) [BUGFIX] Autoriser la suppression / desactivation des apprenants n'ayant pas de studentNumber ou nationalStudeId (PIX-15831).
+
+### :arrow_up: Montée de version
+- [#10879](https://github.com/1024pix/pix/pull/10879) [BUMP] Update adobe/s3mock Docker tag to v3.12.0 (.circleci).
+- [#10880](https://github.com/1024pix/pix/pull/10880) [BUMP] Update adobe/s3mock Docker tag to v3.12.0 (docker).
+- [#10874](https://github.com/1024pix/pix/pull/10874) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.25 (junior).
+- [#10878](https://github.com/1024pix/pix/pull/10878) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.25 (orga).
+- [#10877](https://github.com/1024pix/pix/pull/10877) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.25 (mon-pix).
+
+### :coffee: Autre
+- [#10829](https://github.com/1024pix/pix/pull/10829) [DOC] ADR sur le nouveau système de cache de contenu pédagogique au niveau de l'API Pix (PIX-15472).
+
 ## v5.6.0 (20/12/2024)
 
 
