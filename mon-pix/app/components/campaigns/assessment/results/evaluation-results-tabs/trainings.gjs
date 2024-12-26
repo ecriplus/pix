@@ -27,6 +27,10 @@ export default class EvaluationResultsTabsTrainings extends Component {
     });
   }
 
+  get canShareResults() {
+    return this.args.isSharableCampaign && !this.args.isParticipationShared;
+  }
+
   @action
   async shareResults() {
     const adapter = this.store.adapterFor('campaign-participation-result');
@@ -62,12 +66,12 @@ export default class EvaluationResultsTabsTrainings extends Component {
   <template>
     <div
       class="evaluation-results-tab__trainings
-        {{unless @isParticipationShared 'evaluation-results-tab__trainings--with-modal'}}"
+        {{if this.canShareResults 'evaluation-results-tab__trainings--with-modal'}}"
     >
       <div
         class="evaluation-results-tab__trainings-content"
-        inert={{unless @isParticipationShared "true"}}
-        role={{unless @isParticipationShared "presentation"}}
+        inert={{if this.canShareResults "true"}}
+        role={{if this.canShareResults "presentation"}}
       >
         <h2 class="evaluation-results-tab__title">{{t "pages.skill-review.tabs.trainings.title"}}</h2>
         <p class="evaluation-results-tab__description">{{t "pages.skill-review.tabs.trainings.description"}}</p>
@@ -81,7 +85,7 @@ export default class EvaluationResultsTabsTrainings extends Component {
         </ul>
       </div>
 
-      {{#unless @isParticipationShared}}
+      {{#if this.canShareResults}}
         <div class="evaluation-results-tab__share-results-modal" role="dialog">
           <div class="evaluation-results-tab-share-results-modal__content">
             <p>{{t "pages.skill-review.tabs.trainings.modal.content" htmlSafe=true}}</p>
@@ -95,7 +99,7 @@ export default class EvaluationResultsTabsTrainings extends Component {
             {{/if}}
           </div>
         </div>
-      {{/unless}}
+      {{/if}}
     </div>
   </template>
 }

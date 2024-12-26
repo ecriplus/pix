@@ -57,6 +57,7 @@ export default class EvaluationResults extends Component {
       <EvaluationResultsTabs
         @campaign={{@model.campaign}}
         @campaignParticipationResult={{@model.campaignParticipationResult}}
+        @isSharableCampaign={{this.isSharableCampaign}}
         @trainings={{@model.trainings}}
       />
     </main>
