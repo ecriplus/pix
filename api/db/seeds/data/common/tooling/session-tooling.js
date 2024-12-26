@@ -898,7 +898,11 @@ async function _makeCandidatesCoreCertifiable(databaseBuilder, certificationCand
   // They all passed the hardest skills of each competence,
   // Thus, they will be certifiable in all pix competences, at the best level
   for (const competence of pixCompetences) {
-    coreProfileData[competence.id] = { threeMostDifficultSkillsAndChallenges: [], pixScore: 0, competence };
+    coreProfileData[competence.id] = {
+      threeMostDifficultSkillsAndChallenges: [],
+      pixScore: Math.floor(Math.random() * 56.0),
+      competence,
+    };
     const skills = await learningContent.findActiveSkillsByCompetenceId(competence.id);
     const orderedSkills = _.sortBy(skills, 'level').filter(({ level }) => level <= maxLevel);
     for (const skill of orderedSkills) {

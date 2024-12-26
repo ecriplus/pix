@@ -24,13 +24,13 @@ const buildCompetenceTree = function ({
         }),
         buildCompetence({
           name: 'Mener une recherche et une veille d’information',
-          id: 'recNv8qhaY887jQb2',
-          index: '1.2',
+          id: 'recIkYm646lrGvLNT',
+          index: '1.3',
         }),
         buildCompetence({
           name: 'Mener une recherche et une veille d’information',
-          id: 'recIkYm646lrGvLNT',
-          index: '1.3',
+          id: 'recNv8qhaY887jQb2',
+          index: '1.2',
         }),
       ],
     }),
