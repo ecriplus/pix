@@ -13,6 +13,7 @@ import {
 } from '../../../../shared/infrastructure/constants.js';
 import * as csvSerializer from '../../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
+import { CampaignAssessmentResultLine } from '../../infrastructure/exports/campaigns/campaign-assessment-result-line.js';
 
 /**
  * @typedef {import ('./index.js').CampaignRepository} CampaignRepository
@@ -53,7 +54,6 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
   knowledgeElementSnapshotRepository,
   knowledgeElementRepository,
   badgeAcquisitionRepository,
-  campaignCsvExportService,
   targetProfileRepository,
   learningContentRepository,
   stageCollectionRepository,
@@ -169,18 +169,20 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
               )
             : [];
 
-        return campaignCsvExportService.createOneCsvLine({
+        const line = new CampaignAssessmentResultLine({
           organization,
           campaign,
           campaignParticipationInfo,
-          additionalHeaders,
           targetProfile,
-          learningContent: campaignLearningContent,
+          additionalHeaders,
+          learningContent,
           stageCollection,
           participantKnowledgeElementsByCompetenceId,
           acquiredBadges,
           translate,
         });
+
+        return line.toCsvLine();
       });
 
       writableStream.write(csvLines.join(''));

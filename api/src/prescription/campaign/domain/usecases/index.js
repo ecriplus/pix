@@ -36,7 +36,6 @@ import * as divisionRepository from '../../infrastructure/repositories/division-
 import * as groupRepository from '../../infrastructure/repositories/group-repository.js';
 import { repositories as campaignRepositories } from '../../infrastructure/repositories/index.js';
 import * as targetProfileRepository from '../../infrastructure/repositories/target-profile-repository.js';
-import * as campaignCsvExportService from '../services/campaign-csv-export-service.js';
 import * as campaignUpdateValidator from '../validators/campaign-update-validator.js';
 
 /**
@@ -73,7 +72,6 @@ import * as campaignUpdateValidator from '../validators/campaign-update-validato
  * @typedef { import ('../../infrastructure/repositories/index.js').CampaignToJoinRepository} CampaignToJoinRepository
  * @typedef { import ('../../infrastructure/repositories/index.js').OrganizationMembershipRepository} OrganizationMembershipRepository
  * @typedef { import ('../../infrastructure/repositories/target-profile-repository.js')} TargetProfileRepository
- * @typedef { import ('../services/campaign-csv-export-service.js')} CampaignCsvExportService
  * @typedef { import ('../validators/campaign-update-validator.js')} CampaignUpdateValidator
  */
 const dependencies = {
@@ -84,7 +82,7 @@ const dependencies = {
   campaignAssessmentParticipationResultListRepository,
   campaignCollectiveResultRepository,
   campaignCreatorRepository,
-  campaignCsvExportService,
+
   campaignManagementRepository,
   campaignParticipantActivityRepository,
   campaignParticipationInfoRepository,

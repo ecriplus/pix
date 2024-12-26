@@ -2,7 +2,6 @@ import stream from 'node:stream';
 
 const { PassThrough } = stream;
 
-import * as campaignCsvExportService from '../../../../../../src/prescription/campaign/domain/services/campaign-csv-export-service.js';
 import { startWritingCampaignAssessmentResultsToStream } from '../../../../../../src/prescription/campaign/domain/usecases/start-writing-campaign-assessment-results-to-stream.js';
 import { CampaignTypeError } from '../../../../../../src/shared/domain/errors.js';
 import { StageCollection } from '../../../../../../src/shared/domain/models/user-campaign-results/StageCollection.js';
@@ -50,7 +49,6 @@ describe('Unit | Domain | Use Cases | start-writing-campaign-assessment-results-
       knowledgeElementSnapshotRepository,
       badgeAcquisitionRepository,
       organizationFeatureApi,
-      campaignCsvExportService,
       stageCollectionRepository,
       knowledgeElementRepository,
     };
