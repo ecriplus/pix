@@ -248,17 +248,6 @@
     },
     "loading": "Chargement en cours",
     "no-content": "Aucun contenu",
-    "pagination": {
-      "action": {
-        "next": "Aller à la page suivante",
-        "previous": "Aller à la page précédente",
-        "select-page-size": "Nombre d'élément à afficher par page"
-      },
-      "page-info": "{start, number}-{end, number} sur {total, plural, =0 {0 élément} =1 {1 élément} other {{total, number} éléments}}",
-      "page-number": "Page {current, number} / {total, number}",
-      "page-results": "{total, plural, =0 {0 élément} =1 {1 élément} other {{total, number} éléments}}",
-      "result-by-page": "Voir"
-    },
     "result": {
       "accessibility-description": "Résultat obtenu = {percentage, number, ::percent}, soit le palier {stage} sur {totalStage}",
       "percentage": "{value, number, ::percent}",
