@@ -28,10 +28,7 @@ export const getPrescriber = async function ({
 
   if (_.isEmpty(userOrgaSettings)) {
     await userOrgaSettingsRepository.create(userId, firstOrganization.id);
-    return prescriberRepository.getPrescriber(userId);
-  }
-
-  if (!_isCurrentOrganizationInMemberships(userOrgaSettings, memberships)) {
+  } else if (!_isCurrentOrganizationInMemberships(userOrgaSettings, memberships)) {
     await userOrgaSettingsRepository.update(userId, firstOrganization.id);
   }
 
