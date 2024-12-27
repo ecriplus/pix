@@ -1,11 +1,10 @@
-import lodash from 'lodash';
-
-const { find } = lodash;
-
 import boom from '@hapi/boom';
+import lodash from 'lodash';
 
 import { config } from '../../src/shared/config.js';
 import { tokenService } from '../../src/shared/domain/services/token-service.js';
+
+const { find } = lodash;
 
 const authentication = {
   schemeName: 'jwt-scheme',

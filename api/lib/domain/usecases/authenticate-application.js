@@ -1,15 +1,14 @@
 import lodash from 'lodash';
 
+import { config } from '../../../src/shared/config.js';
 import {
   ApplicationScopeNotAllowedError,
   ApplicationWithInvalidClientIdError,
   ApplicationWithInvalidClientSecretError,
 } from '../../../src/shared/domain/errors.js';
+const { apimRegisterApplicationsCredentials, jwtConfig } = config;
 
 const { find } = lodash;
-
-import { config } from '../../../src/shared/config.js';
-const { apimRegisterApplicationsCredentials, jwtConfig } = config;
 
 const authenticateApplication = async function ({ clientId, clientSecret, scope, tokenService }) {
   const application = find(apimRegisterApplicationsCredentials, { clientId });
