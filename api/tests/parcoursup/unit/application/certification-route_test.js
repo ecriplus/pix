@@ -17,7 +17,7 @@ describe('Parcoursup | Unit | Application | Routes | Certification', function ()
       httpTestServer.setupAuthentication();
       await httpTestServer.register(moduleUnderTest);
 
-      const PARCOURSUP_CLIENT_ID = 'parcoursupClientId';
+      const PARCOURSUP_CLIENT_ID = 'test-parcoursupClientId';
       const PARCOURSUP_SCOPE = 'parcoursup';
       const PARCOURSUP_SOURCE = 'parcoursup';
 
@@ -45,7 +45,7 @@ describe('Parcoursup | Unit | Application | Routes | Certification', function ()
         httpTestServer.setupAuthentication();
         await httpTestServer.register(moduleUnderTest);
 
-        const PARCOURSUP_CLIENT_ID = 'parcoursupClientId';
+        const PARCOURSUP_CLIENT_ID = 'test-parcoursupClientId';
         const PARCOURSUP_SCOPE = 'a-wrong-scope';
         const PARCOURSUP_SOURCE = 'parcoursup';
 

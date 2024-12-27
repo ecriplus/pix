@@ -106,8 +106,8 @@ describe('Acceptance | Controller | authentication-controller', function () {
   describe('POST /api/application/token', function () {
     let server;
     let options;
-    const OSMOSE_CLIENT_ID = 'apimOsmoseClientId';
-    const OSMOSE_CLIENT_SECRET = 'apimOsmoseClientSecret';
+    const OSMOSE_CLIENT_ID = 'test-apimOsmoseClientId';
+    const OSMOSE_CLIENT_SECRET = 'test-apimOsmoseClientSecret';
     const SCOPE = 'organizations-certifications-result';
 
     beforeEach(async function () {

@@ -16,7 +16,7 @@ describe('Acceptance | Application | Pole Emploi Controller', function () {
     context('Sucess case', function () {
       it('returns a 200 HTTP status code', async function () {
         // given
-        const POLE_EMPLOI_CLIENT_ID = 'poleEmploiClientId';
+        const POLE_EMPLOI_CLIENT_ID = 'test-poleEmploiClientId';
         const POLE_EMPLOI_SCOPE = 'pole-emploi-participants-result';
         const POLE_EMPLOI_SOURCE = 'poleEmploi';
         const curseur = await generateCursor({

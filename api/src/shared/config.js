@@ -532,26 +532,26 @@ const configuration = (function () {
 
     config.apimRegisterApplicationsCredentials = [
       {
-        clientId: 'apimOsmoseClientId',
-        clientSecret: 'apimOsmoseClientSecret',
+        clientId: 'test-apimOsmoseClientId',
+        clientSecret: 'test-apimOsmoseClientSecret',
         scope: 'organizations-certifications-result',
         source: 'livretScolaire',
       },
       {
-        clientId: 'poleEmploiClientId',
-        clientSecret: 'poleEmploiClientSecret',
+        clientId: 'test-poleEmploiClientId',
+        clientSecret: 'test-poleEmploiClientSecret',
         scope: 'pole-emploi-participants-result',
         source: 'poleEmploi',
       },
       {
-        clientId: 'pixDataCliendId',
+        clientId: 'test-pixDataCliendId',
         clientSecret: 'pixDataClientSecret',
         scope: 'statistics',
         source: 'pixData',
       },
       {
-        clientId: 'parcoursupClientId',
-        clientSecret: 'parcoursupClientSecret',
+        clientId: 'test-parcoursupClientId',
+        clientSecret: 'test-parcoursupClientSecret',
         scope: 'parcoursup',
         source: 'parcoursup',
       },
@@ -586,10 +586,10 @@ const configuration = (function () {
       cron: '0 3 * * *',
     };
 
-    config.jwtConfig.livretScolaire = { secret: 'secretosmose', tokenLifespan: '1h' };
-    config.jwtConfig.poleEmploi = { secret: 'secretPoleEmploi', tokenLifespan: '1h' };
-    config.jwtConfig.pixData = { secret: 'secretPixData', tokenLifespan: '1h' };
-    config.jwtConfig.parcoursup = { secret: 'secretPixParcoursup', tokenLifespan: '1h' };
+    config.jwtConfig.livretScolaire = { secret: 'test-secretOsmose', tokenLifespan: '1h' };
+    config.jwtConfig.poleEmploi = { secret: 'test-secretPoleEmploi', tokenLifespan: '1h' };
+    config.jwtConfig.pixData = { secret: 'test-secretPixData', tokenLifespan: '1h' };
+    config.jwtConfig.parcoursup = { secret: 'test-secretPixParcoursup', tokenLifespan: '1h' };
 
     config.logging.enabled = toBoolean(process.env.TEST_LOG_ENABLED);
     config.logging.enableLogKnexQueries = false;
