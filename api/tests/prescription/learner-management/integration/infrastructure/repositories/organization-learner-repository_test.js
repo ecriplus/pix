@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import * as organizationLearnerRepository from '../../../../../../lib/infrastructure/repositories/organization-learner-repository.js';
 import { OrganizationLearnerCertificabilityNotUpdatedError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
 import { CommonOrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/CommonOrganizationLearner.js';
 import { OrganizationLearnerForAdmin } from '../../../../../../src/prescription/learner-management/domain/read-models/OrganizationLearnerForAdmin.js';
@@ -29,6 +28,7 @@ import {
   UserCouldNotBeReconciledError,
 } from '../../../../../../src/shared/domain/errors.js';
 import { OrganizationLearner } from '../../../../../../src/shared/domain/models/index.js';
+import * as organizationLearnerRepository from '../../../../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Organization Learner Management | Organization Learner', function () {
