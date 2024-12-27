@@ -586,10 +586,10 @@ const configuration = (function () {
       cron: '0 3 * * *',
     };
 
-    config.jwtConfig.livretScolaire = { secret: 'test-secretOsmose', tokenLifespan: '1h' };
-    config.jwtConfig.poleEmploi = { secret: 'test-secretPoleEmploi', tokenLifespan: '1h' };
-    config.jwtConfig.pixData = { secret: 'test-secretPixData', tokenLifespan: '1h' };
-    config.jwtConfig.parcoursup = { secret: 'test-secretPixParcoursup', tokenLifespan: '1h' };
+    config.jwtConfig.livretScolaire.secret = 'test-secretOsmose';
+    config.jwtConfig.poleEmploi.secret = 'test-secretPoleEmploi';
+    config.jwtConfig.pixData.secret = 'test-secretPixData';
+    config.jwtConfig.parcoursup.secret = 'test-secretPixParcoursup';
 
     config.logging.enabled = toBoolean(process.env.TEST_LOG_ENABLED);
     config.logging.enableLogKnexQueries = false;
