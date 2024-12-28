@@ -4,9 +4,14 @@ import { tokenController } from '../../../src/identity-access-management/applica
 import { createServer, expect, sinon } from '../../test-helper.js';
 
 describe('Integration | Identity Access Management | Application | Router', function () {
+  let headers;
   let server;
 
   beforeEach(async function () {
+    headers = {
+      'content-type': 'application/x-www-form-urlencoded',
+    };
+
     sinon.stub(tokenController, 'createToken').callsFake((request, h) =>
       h.response({
         token_type: 'bearer',
@@ -20,83 +25,95 @@ describe('Integration | Identity Access Management | Application | Router', func
   describe('POST /api/token', function () {
     const method = 'POST';
     const url = '/api/token';
-    const headers = {
-      'content-type': 'application/x-www-form-urlencoded',
-    };
 
-    it('returns a response with HTTP status code 200 even if there is no scope in the request', async function () {
-      // given
-      const payload = querystring.stringify({
-        grant_type: 'password',
-        username: 'user@email.com',
-        password: 'user_password',
+    context('when grant_type is neither "password" nor "refresh_token"', function () {
+      it('returns a 400 HTTP status code', async function () {
+        // given
+        const payload = querystring.stringify({
+          grant_type: 'invalidGrantType',
+          username: 'valid@email.com',
+          password: 'valid_password',
+        });
+
+        // when
+        const response = await server.inject({ method, url, payload, auth: null, headers });
+
+        // then
+        expect(response.statusCode).to.equal(400);
       });
-
-      // when
-      const response = await server.inject({ method, url, payload, auth: null, headers });
-
-      // then
-      expect(response.statusCode).to.equal(200);
     });
 
-    it('returns a 400 when grant type is not "password"', async function () {
-      // given
-      const payload = querystring.stringify({
-        grant_type: 'authorization_code',
-        username: 'valid@email.com',
-        password: 'valid_password',
+    context('when grant_type is "password"', function () {
+      context('when username is missing', function () {
+        it('returns a 400 HTTP status code', async function () {
+          // given
+          const payload = querystring.stringify({
+            grant_type: 'password',
+            password: 'valid_password',
+          });
+
+          // when
+          const response = await server.inject({ method, url, payload, auth: null, headers });
+
+          // then
+          expect(response.statusCode).to.equal(400);
+        });
       });
 
-      // when
-      const response = await server.inject({ method, url, payload, auth: null, headers });
+      context('when password is missing', function () {
+        it('returns a 400 HTTP status code', async function () {
+          // given
+          const payload = querystring.stringify({
+            grant_type: 'password',
+            username: 'valid@email.com',
+          });
 
-      // then
-      expect(response.statusCode).to.equal(400);
-    });
+          // when
+          const response = await server.inject({ method, url, payload, auth: null, headers });
 
-    it('returns a 400 when username is missing', async function () {
-      // given
-      const payload = querystring.stringify({
-        grant_type: 'password',
-        password: 'valid_password',
+          // then
+          expect(response.statusCode).to.equal(400);
+        });
       });
 
-      // when
-      const response = await server.inject({ method, url, payload, auth: null, headers });
+      context('when "Content-Type" header is not "application/x-www-form-urlencoded"', function () {
+        it('returns a 415 HTTP status code', async function () {
+          // given
+          const headers = {
+            'content-type': 'text/html',
+          };
 
-      // then
-      expect(response.statusCode).to.equal(400);
-    });
+          const payload = querystring.stringify({
+            grant_type: 'password',
+            username: 'user.username2453  ',
+            password: 'user_password',
+            scope: 'pix-orga',
+          });
 
-    it('returns a 400 when password is missing', async function () {
-      // given
-      const payload = querystring.stringify({
-        grant_type: 'password',
-        username: 'valid@email.com',
+          // when
+          const response = await server.inject({ method, url, payload, auth: null, headers });
+
+          // then
+          expect(response.statusCode).to.equal(415);
+        });
       });
 
-      // when
-      const response = await server.inject({ method, url, payload, auth: null, headers });
+      context('when there is no scope', function () {
+        it('returns a 200 HTTP status code', async function () {
+          // given
+          const payload = querystring.stringify({
+            grant_type: 'password',
+            username: 'user@email.com',
+            password: 'user_password',
+          });
 
-      // then
-      expect(response.statusCode).to.equal(400);
-    });
+          // when
+          const response = await server.inject({ method, url, payload, auth: null, headers });
 
-    it('returns a JSON API error (415) when request "Content-Type" header is not "application/x-www-form-urlencoded"', async function () {
-      // given
-      headers['content-type'] = 'text/html';
-      const payload = querystring.stringify({
-        grant_type: 'password',
-        username: 'user.username2453  ',
-        password: 'user_password',
-        scope: 'pix-orga',
+          // then
+          expect(response.statusCode).to.equal(200);
+        });
       });
-
-      // when
-      const response = await server.inject({ method, url, payload, auth: null, headers });
-
-      // then
-      expect(response.statusCode).to.equal(415);
     });
   });
 });
