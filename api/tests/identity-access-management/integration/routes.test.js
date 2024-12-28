@@ -26,6 +26,22 @@ describe('Integration | Identity Access Management | Application | Router', func
     const method = 'POST';
     const url = '/api/token';
 
+    context('when grant_type is missing', function () {
+      it('returns a 400 HTTP status code', async function () {
+        // given
+        const payload = querystring.stringify({
+          username: 'valid@email.com',
+          password: 'valid_password',
+        });
+
+        // when
+        const response = await server.inject({ method, url, payload, auth: null, headers });
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+    });
+
     context('when grant_type is neither "password" nor "refresh_token"', function () {
       it('returns a 400 HTTP status code', async function () {
         // given
