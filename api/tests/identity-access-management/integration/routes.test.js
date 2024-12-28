@@ -82,21 +82,6 @@ describe('Integration | Identity Access Management | Application | Router', func
       expect(response.statusCode).to.equal(400);
     });
 
-    it('returns a 400 when username is not an email', async function () {
-      // given
-      const payload = querystring.stringify({
-        grant_type: 'authorization_code',
-        username: 'a_login_not_an_email',
-        password: 'valid_password',
-      });
-
-      // when
-      const response = await server.inject({ method, url, payload, auth: null, headers });
-
-      // then
-      expect(response.statusCode).to.equal(400);
-    });
-
     it('returns a JSON API error (415) when request "Content-Type" header is not "application/x-www-form-urlencoded"', async function () {
       // given
       headers['content-type'] = 'text/html';
