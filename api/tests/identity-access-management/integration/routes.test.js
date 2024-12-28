@@ -24,7 +24,7 @@ describe('Integration | Identity Access Management | Application | Router', func
       'content-type': 'application/x-www-form-urlencoded',
     };
 
-    it('should return a response with HTTP status code 200 even if there is no scope in the request', async function () {
+    it('returns a response with HTTP status code 200 even if there is no scope in the request', async function () {
       // given
       const payload = querystring.stringify({
         grant_type: 'password',
@@ -39,7 +39,7 @@ describe('Integration | Identity Access Management | Application | Router', func
       expect(response.statusCode).to.equal(200);
     });
 
-    it('should return a 400 when grant type is not "password"', async function () {
+    it('returns a 400 when grant type is not "password"', async function () {
       // given
       const payload = querystring.stringify({
         grant_type: 'authorization_code',
@@ -54,7 +54,7 @@ describe('Integration | Identity Access Management | Application | Router', func
       expect(response.statusCode).to.equal(400);
     });
 
-    it('should return a 400 when username is missing', async function () {
+    it('returns a 400 when username is missing', async function () {
       // given
       const payload = querystring.stringify({
         grant_type: 'password',
@@ -68,7 +68,7 @@ describe('Integration | Identity Access Management | Application | Router', func
       expect(response.statusCode).to.equal(400);
     });
 
-    it('should return a 400 when password is missing', async function () {
+    it('returns a 400 when password is missing', async function () {
       // given
       const payload = querystring.stringify({
         grant_type: 'password',
@@ -82,7 +82,7 @@ describe('Integration | Identity Access Management | Application | Router', func
       expect(response.statusCode).to.equal(400);
     });
 
-    it('should return a 400 when username is not an email', async function () {
+    it('returns a 400 when username is not an email', async function () {
       // given
       const payload = querystring.stringify({
         grant_type: 'authorization_code',
@@ -97,7 +97,7 @@ describe('Integration | Identity Access Management | Application | Router', func
       expect(response.statusCode).to.equal(400);
     });
 
-    it('should return a JSON API error (415) when request "Content-Type" header is not "application/x-www-form-urlencoded"', async function () {
+    it('returns a JSON API error (415) when request "Content-Type" header is not "application/x-www-form-urlencoded"', async function () {
       // given
       headers['content-type'] = 'text/html';
       const payload = querystring.stringify({
