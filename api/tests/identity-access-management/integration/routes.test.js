@@ -24,20 +24,9 @@ describe('Integration | Identity Access Management | Application | Router', func
       'content-type': 'application/x-www-form-urlencoded',
     };
 
-    let payload;
-
-    beforeEach(function () {
-      payload = querystring.stringify({
-        grant_type: 'password',
-        username: 'user.username2453  ',
-        password: 'user_password',
-        scope: 'pix-orga',
-      });
-    });
-
     it('should return a response with HTTP status code 200 even if there is no scope in the request', async function () {
       // given
-      payload = querystring.stringify({
+      const payload = querystring.stringify({
         grant_type: 'password',
         username: 'user@email.com',
         password: 'user_password',
@@ -52,7 +41,7 @@ describe('Integration | Identity Access Management | Application | Router', func
 
     it('should return a 400 when grant type is not "password"', async function () {
       // given
-      payload = querystring.stringify({
+      const payload = querystring.stringify({
         grant_type: 'authorization_code',
         username: 'valid@email.com',
         password: 'valid_password',
@@ -67,7 +56,7 @@ describe('Integration | Identity Access Management | Application | Router', func
 
     it('should return a 400 when username is missing', async function () {
       // given
-      payload = querystring.stringify({
+      const payload = querystring.stringify({
         grant_type: 'password',
         password: 'valid_password',
       });
@@ -81,7 +70,7 @@ describe('Integration | Identity Access Management | Application | Router', func
 
     it('should return a 400 when password is missing', async function () {
       // given
-      payload = querystring.stringify({
+      const payload = querystring.stringify({
         grant_type: 'password',
         username: 'valid@email.com',
       });
@@ -95,7 +84,7 @@ describe('Integration | Identity Access Management | Application | Router', func
 
     it('should return a 400 when username is not an email', async function () {
       // given
-      payload = querystring.stringify({
+      const payload = querystring.stringify({
         grant_type: 'authorization_code',
         username: 'a_login_not_an_email',
         password: 'valid_password',
@@ -111,6 +100,12 @@ describe('Integration | Identity Access Management | Application | Router', func
     it('should return a JSON API error (415) when request "Content-Type" header is not "application/x-www-form-urlencoded"', async function () {
       // given
       headers['content-type'] = 'text/html';
+      const payload = querystring.stringify({
+        grant_type: 'password',
+        username: 'user.username2453  ',
+        password: 'user_password',
+        scope: 'pix-orga',
+      });
 
       // when
       const response = await server.inject({ method, url, payload, auth: null, headers });
