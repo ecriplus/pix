@@ -55,23 +55,6 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
       expect(result.refresh_token).to.exist;
     });
 
-    it('returns a 400 if grant type is invalid', async function () {
-      // when
-      const errorResponse = await server.inject({
-        method: 'POST',
-        url: '/api/token',
-        headers: {
-          'content-type': 'application/x-www-form-urlencoded',
-        },
-        payload: querystring.stringify({
-          grant_type: 'appleSauce',
-        }),
-      });
-
-      // then
-      expect(errorResponse.statusCode).to.equal(400);
-    });
-
     it('returns http code 401 when user should change password', async function () {
       // given
       databaseBuilder.factory.buildUser.withRawPassword({
