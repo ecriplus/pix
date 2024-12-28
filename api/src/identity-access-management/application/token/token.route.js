@@ -16,17 +16,21 @@ export const tokenRoutes = [
       },
       validate: {
         payload: Joi.alternatives().try(
-          Joi.object().required().keys({
-            grant_type: 'password',
-            username: Joi.string().required(),
-            password: Joi.string().required(),
-            scope: Joi.string(),
-          }),
-          Joi.object().required().keys({
-            grant_type: 'refresh_token',
-            refresh_token: Joi.string(),
-            scope: Joi.string(),
-          }),
+          Joi.object()
+            .required()
+            .keys({
+              grant_type: Joi.string().valid('password').required(),
+              username: Joi.string().required(),
+              password: Joi.string().required(),
+              scope: Joi.string(),
+            }),
+          Joi.object()
+            .required()
+            .keys({
+              grant_type: Joi.string().valid('refresh_token').required(),
+              refresh_token: Joi.string(),
+              scope: Joi.string(),
+            }),
         ),
       },
       pre: [{ method: monitorPreHandlers.monitorApiTokenRoute }, { method: securityPreHandlers.checkIfUserIsBlocked }],
