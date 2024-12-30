@@ -8,7 +8,7 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
       it('should return the certification', async function () {
         // given
         const ine = '1234';
-        datamartBuilder.factory.buildCertificationResult({
+        const certificationResultData = {
           nationalStudentId: ine,
           organizationUai: 'UAI ETAB ELEVE',
           lastName: 'NOM-ELEVE',
@@ -17,8 +17,16 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
           status: 'validated',
           pixScore: 327,
           certificationDate: '2024-11-22T09:39:54',
+        };
+        datamartBuilder.factory.buildCertificationResult({
+          ...certificationResultData,
           competenceId: 'xzef1223443',
           competenceLevel: 3,
+        });
+        datamartBuilder.factory.buildCertificationResult({
+          ...certificationResultData,
+          competenceId: 'otherCompetenceId',
+          competenceLevel: 5,
         });
         await datamartBuilder.commit();
 
@@ -39,6 +47,10 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
             {
               id: 'xzef1223443',
               level: 3,
+            },
+            {
+              id: 'otherCompetenceId',
+              level: 5,
             },
           ],
         });

@@ -21,7 +21,7 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
     it('should return 200 HTTP status code and a certification for a given INE', async function () {
       // given
       const ine = '123456789OK';
-      datamartBuilder.factory.buildCertificationResult({
+      const certificationResultData = {
         nationalStudentId: ine,
         organizationUai: 'UAI ETAB ELEVE',
         lastName: 'NOM-ELEVE',
@@ -30,8 +30,16 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
         status: 'validated',
         pixScore: 327,
         certificationDate: '2024-11-22T09:39:54Z',
+      };
+      datamartBuilder.factory.buildCertificationResult({
+        ...certificationResultData,
         competenceId: 'xzef1223443',
         competenceLevel: 3,
+      });
+      datamartBuilder.factory.buildCertificationResult({
+        ...certificationResultData,
+        competenceId: 'otherCompetenceId',
+        competenceLevel: 5,
       });
       await datamartBuilder.commit();
 
@@ -63,6 +71,10 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
             // TODO ask DataTeam to add code and label (1.1 Mener une recherche et une veille d’information)
             id: 'xzef1223443',
             level: 3,
+          },
+          {
+            id: 'otherCompetenceId',
+            level: 5,
           },
         ],
       };
