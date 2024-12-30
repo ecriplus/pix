@@ -1,14 +1,15 @@
-'use strict';
+import pkg from '@embroider/compat';
+import { Webpack } from '@embroider/webpack';
+import EmberApp from 'ember-cli/lib/broccoli/ember-app.js';
 
-const EmberApp = require('ember-cli/lib/broccoli/ember-app');
-
+const { compatBuild } = pkg;
 const sourceMapConfig = {
   production: 'source-map',
   test: false,
   default: 'eval-source-map',
 };
 
-module.exports = function (defaults) {
+export default function (defaults) {
   const app = new EmberApp(defaults, {
     sassOptions: {
       includePaths: ['node_modules/@1024pix/pix-ui/addon/styles'],
@@ -42,12 +43,11 @@ module.exports = function (defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  const { Webpack } = require('@embroider/webpack');
-  return require('@embroider/compat').compatBuild(app, Webpack, {
+  return compatBuild(app, Webpack, {
     packagerOptions: {
       webpackConfig: {
         devtool: sourceMapConfig[process.env.CI ? 'test' : (process.env.NODE_ENV ?? 'default')],
       },
     },
   });
-};
+}

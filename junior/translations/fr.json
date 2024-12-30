@@ -1,4 +1,18 @@
 {
+  "components": {
+    "challenge": {
+      "embed-simulator": {
+        "actions": {
+          "reset": "Recommencer"
+        }
+      }
+    },
+    "oralization-button": {
+      "label": "Lire la consigne à haute voix",
+      "play": "J'écoute",
+      "stop": "Stop"
+    }
+  },
   "navigation": {
     "footer": {
       "label": "Menu de bas de page",
@@ -8,28 +22,12 @@
       "student-data-protection-policy-url": "https://pix.fr/politique-protection-donnees-personnelles-app-eleves"
     }
   },
-  "components": {
-    "oralization-button": {
-      "play": "J'écoute",
-      "stop": "Stop",
-      "label": "Lire la consigne à haute voix"
-    },
-    "challenge": {
-      "embed-simulator": {
-        "actions": {
-          "reset": "Recommencer"
-        }
-      }
-    }
-  },
   "pages": {
-    "pix-junior": "Pix Junior",
     "challenge": {
-      "title": "Mission",
       "actions": {
-        "skip": "Je ne sais pas",
         "check": "Je vérifie",
-        "continue": "Je continue"
+        "continue": "Je continue",
+        "skip": "Je ne sais pas"
       },
       "illustration": {
         "placeholder": "Chargement de l'image en cours"
@@ -41,89 +39,91 @@
         "correct-answer": "Bien joué, tu as répondu correctement !",
         "wrong-answer": "Mauvaise réponse. Tu peux passer à la suite."
       },
-      "qcu-hint": "Sélectionne une seule réponse.",
       "qcm-error": "Attention, sélectionne plusieurs réponses !",
-      "qcm-hint": "Sélectionne plusieurs réponses."
+      "qcm-hint": "Sélectionne plusieurs réponses.",
+      "qcu-hint": "Sélectionne une seule réponse.",
+      "title": "Mission"
+    },
+    "error": {
+      "backHome": "Retour à l'accueil",
+      "message": "Oups, une erreur inattendue est survenue.",
+      "refresh": "Actualiser la page",
+      "title": "Erreur"
     },
     "home": {
-      "page-title": "Page d'accueil",
       "beta": "Version Bêta",
-      "welcome": "Bienvenue sur Pix Junior !",
+      "code-description": "Le code de l'école est composé de 6 chiffres et 3 lettres.",
       "code-instruction": "Saisis le code de ton école pour accéder à ta classe",
       "code-label": "Code de l'école",
-      "code-description": "Le code de l'école est composé de 6 chiffres et 3 lettres.",
       "field-description": "Champ numéro",
-      "go-to-school": "Je valide le code"
-    },
-    "not-found": {
-      "title": "Page non trouvée",
-      "message": "La page que tu cherches n'existe pas sur Pix Junior.",
-      "backHome": "Retour à l'accueil"
+      "go-to-school": "Je valide le code",
+      "page-title": "Page d'accueil",
+      "welcome": "Bienvenue sur Pix Junior !"
     },
     "missions": {
+      "end-page": {
+        "back-to-missions": "Voir d'autres missions",
+        "details-list": "Tu as pu travailler :",
+        "result": {
+          "exceeded": "Waouh, tu sembles être incollable sur ce sujet ! Tu as relevé le défi.",
+          "not-reached": "Cette mission semble difficile, n’hésite pas à réessayer dès que tu te sens prêt.",
+          "partially-reached": "Il te manque quelques épreuves, reviens vite pour réessayer.",
+          "reached": "Bravo, tu as réussi ta mission !"
+        },
+        "title": "Fin de mission"
+      },
+      "introduction-page": {
+        "start-mission": "Démarrer la mission",
+        "title": "Introduction",
+        "welcome": "Avant de commencer, voici une présentation de ta mission"
+      },
       "list": {
-        "title": "Mes Missions",
+        "back-to-students": "Si tu n'es pas <strong>{prenom}</strong>, '<'a href=\"{backUrl}\" class=\"internal-link\" '>'clique ici pour retourner à la liste des élèves '</a>'",
         "instruction": "Bonjour <strong>{prenom}</strong>, choisis ta mission parmi celles qui te sont proposées ci-dessous !",
-        "back-to-students": "Si tu n'es pas <strong>{prenom}</strong>, <a href=\"{backUrl}\" class=\"internal-link\">clique ici pour retourner à la liste des élèves </a>",
         "status": {
           "completed": {
             "label": "Terminé"
           },
           "started": {
-            "label": "En cours",
-            "button-label": "Reprendre"
+            "button-label": "Reprendre",
+            "label": "En cours"
           },
           "to-start": {
-            "label": "À faire",
-            "button-label": "Commencer"
+            "button-label": "Commencer",
+            "label": "À faire"
           }
-        }
+        },
+        "title": "Mes Missions"
       },
       "start-page": {
-        "title": "Début de mission",
         "back-to-missions": "Voir toutes les missions",
         "cards": {
           "finished": "Terminé"
         },
         "purpose-title": "Objectifs de la mission :",
         "start-mission": "C'est parti !",
+        "title": "Début de mission",
         "welcome": "Prépare-toi à résoudre des épreuves et relever des défis."
-      },
-      "introduction-page": {
-        "title": "Introduction",
-        "welcome": "Avant de commencer, voici une présentation de ta mission",
-        "start-mission": "Démarrer la mission"
-      },
-      "end-page": {
-        "title": "Fin de mission",
-        "back-to-missions": "Voir d'autres missions",
-        "details-list": "Tu as pu travailler :",
-        "result": {
-          "exceeded": "Waouh, tu sembles être incollable sur ce sujet ! Tu as relevé le défi.",
-          "reached": "Bravo, tu as réussi ta mission !",
-          "partially-reached": "Il te manque quelques épreuves, reviens vite pour réessayer.",
-          "not-reached": "Cette mission semble difficile, n’hésite pas à réessayer dès que tu te sens prêt."
-        }
       }
     },
-    "error": {
-      "title": "Erreur",
-      "message": "Oups, une erreur inattendue est survenue.",
+    "not-found": {
       "backHome": "Retour à l'accueil",
-      "refresh": "Actualiser la page"
+      "message": "La page que tu cherches n'existe pas sur Pix Junior.",
+      "title": "Page non trouvée"
     },
+    "pix-junior": "Pix Junior",
     "school": {
+      "division-list": {
+        "page-title": "Liste des classes",
+        "welcome": "Bienvenue sur la page de l'école : <strong>{schoolName}</strong><br/>Maintenant, choisis ta classe."
+      },
       "not-found": {
         "sentence-1": "Session inactive ou école non trouvée.",
         "sentence-2": "Demande de l’aide à ton enseignant pour accéder à tes missions."
       },
-      "division-list": {
-        "page-title": "Liste des classes",
-        "welcome": "Bienvenue sur la page de l'école : <strong>{schoolName}</strong><br>Maintenant, choisis ta classe."
-      },
       "student-list": {
-        "back-to-divisions": "Si ce n'est pas ta classe, <a href=\"{backUrl}\" class=\"internal-link\">clique ici pour retourner à la liste des classes</a>",
-        "find-name": "Voici les élèves de la classe : <strong>{division}</strong><br>Clique sur ton prénom dans la liste.",
+        "back-to-divisions": "Si ce n'est pas ta classe, '<'a href=\"{backUrl}\" class=\"internal-link\" '>'clique ici pour retourner à la liste des classes'</a>'",
+        "find-name": "Voici les élèves de la classe : <strong>{division}</strong><br/>Clique sur ton prénom dans la liste.",
         "page-title": "Liste des élèves"
       }
     }
