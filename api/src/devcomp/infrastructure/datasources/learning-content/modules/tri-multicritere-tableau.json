@@ -337,7 +337,7 @@
                 {
                   "id": "05a44b3d-1c77-49fc-bab9-65e5f20c3d38",
                   "type": "text",
-                  "content": "<p><strong>Une option permet de reconnaître les en-têtes ou étiquettes de colonnes.</strong> </p><p>Si les en-têtes de votre tableau sont correctement remplies, la plupart des logiciels les détectent automatiquement.&nbsp;</p><p>Cette option s’appelle « ☑️ Mes données ont des en-têtes » ou « ☑️ La plage contient des étiquettes de colonne ».&nbsp;</p><p>Avec une détection automatique, elle sera déjà cochée. Vous pouvez aussi la cocher manuellement 👇<br><br></p>"
+                  "content": "<p><strong>Une option permet de reconnaître les en-têtes ou étiquettes de colonnes.</strong> </p><p>Si les en-têtes de votre tableau sont correctement remplies, la plupart des logiciels les détectent automatiquement.&nbsp;</p><p>Cette option s’appelle « ☑️ Mes données ont des en-têtes » ou « ☑️ La plage contient des étiquettes de colonne ».&nbsp;</p><p>Avec une détection automatique, elle sera déjà cochée. Vous pouvez aussi la cocher manuellement 👇</p>"
                 },
                 {
                   "id": "f5142469-61c8-422e-9c26-5f408ce33992",
@@ -363,7 +363,7 @@
                 {
                   "id": "37ac6388-e4b2-41ac-af3a-bc1219c0f23c",
                   "type": "image",
-                  "url": "https://i.imgur.com/jEGP1c1.png",
+                  "url": "https://i.imgur.com/DJdRtpA.jpeg",
                   "alt": "",
                   "alternativeText": ""
                 }
@@ -379,7 +379,7 @@
                 {
                   "id": "8dff7246-9c67-45c9-b5bd-801d12008587",
                   "type": "image",
-                  "url": "https://i.imgur.com/AK86ATB.png",
+                  "url": "https://i.imgur.com/pXPntis.jpeg",
                   "alt": "",
                   "alternativeText": ""
                 }
@@ -424,11 +424,11 @@
             "type": "download",
             "files": [
               {
-                "url": "https://dl.pix.fr/1733409643642/KKLYJHGBGY.ods",
+                "url": "https://dl.pix.fr/1735566875829/WHJGVKLPWZ.ods",
                 "format": "ods"
               },
               {
-                "url": "https://dl.pix.fr/1733409643641/NMKHTFJRVE.xlsx",
+                "url": "https://dl.pix.fr/1735566875579/ERCNCLEXEW.xlsx",
                 "format": "xlsx"
               }
             ]
