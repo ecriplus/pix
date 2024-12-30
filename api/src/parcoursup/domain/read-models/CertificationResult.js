@@ -1,5 +1,15 @@
 class CertificationResult {
-  constructor({ ine, organizationUai, lastName, firstName, birthdate, status, pixScore, certificationDate }) {
+  constructor({
+    ine,
+    organizationUai,
+    lastName,
+    firstName,
+    birthdate,
+    status,
+    pixScore,
+    certificationDate,
+    competences,
+  }) {
     this.ine = ine;
     this.organizationUai = organizationUai;
     this.lastName = lastName;
@@ -8,6 +18,7 @@ class CertificationResult {
     this.status = status;
     this.pixScore = pixScore;
     this.certificationDate = certificationDate;
+    this.competences = competences;
   }
 }
 

@@ -9,6 +9,7 @@ const buildCertificationResult = function ({
   status,
   pixScore,
   certificationDate,
+  competences,
 }) {
   return new CertificationResult({
     ine,
@@ -19,6 +20,7 @@ const buildCertificationResult = function ({
     status,
     pixScore,
     certificationDate,
+    competences,
   });
 };
 

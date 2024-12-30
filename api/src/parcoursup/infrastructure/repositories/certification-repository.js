@@ -19,6 +19,12 @@ const get = async ({ ine }) => {
     status: certificationResultDto.status,
     pixScore: certificationResultDto.pix_score,
     certificationDate: certificationResultDto.certification_date,
+    competences: [
+      {
+        id: certificationResultDto.competence_id,
+        level: certificationResultDto.competence_level,
+      },
+    ],
   });
 };
 

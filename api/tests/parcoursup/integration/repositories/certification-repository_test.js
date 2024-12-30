@@ -17,6 +17,8 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
           status: 'validated',
           pixScore: 327,
           certificationDate: '2024-11-22T09:39:54',
+          competenceId: 'xzef1223443',
+          competenceLevel: 3,
         });
         await datamartBuilder.commit();
 
@@ -33,6 +35,12 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
           status: 'validated',
           pixScore: 327,
           certificationDate: new Date('2024-11-22T09:39:54Z'),
+          competences: [
+            {
+              id: 'xzef1223443',
+              level: 3,
+            },
+          ],
         });
         expect(result).to.deep.equal(expectedCertification);
       });

@@ -9,6 +9,8 @@ const buildCertificationResult = function ({
   status,
   pixScore,
   certificationDate,
+  competenceId,
+  competenceLevel,
 } = {}) {
   const values = {
     national_student_id: nationalStudentId,
@@ -19,6 +21,8 @@ const buildCertificationResult = function ({
     status,
     pix_score: pixScore,
     certification_date: certificationDate,
+    competence_id: competenceId,
+    competence_level: competenceLevel,
   };
 
   datamartBuffer.pushInsertable({

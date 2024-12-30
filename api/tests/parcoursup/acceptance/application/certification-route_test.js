@@ -30,6 +30,8 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
         status: 'validated',
         pixScore: 327,
         certificationDate: '2024-11-22T09:39:54Z',
+        competenceId: 'xzef1223443',
+        competenceLevel: 3,
       });
       await datamartBuilder.commit();
 
@@ -56,6 +58,13 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
         status: 'validated',
         pixScore: 327,
         certificationDate: new Date('2024-11-22T09:39:54Z'),
+        competences: [
+          {
+            // TODO ask DataTeam to add code and label (1.1 Mener une recherche et une veille d’information)
+            id: 'xzef1223443',
+            level: 3,
+          },
+        ],
       };
 
       // when
