@@ -10,7 +10,16 @@ const get = async ({ ine }) => {
   if (!certificationResultDto) {
     throw new NotFoundError('No certifications found for given INE');
   }
-  return new CertificationResult({ ine: certificationResultDto.national_student_id });
+  return new CertificationResult({
+    ine: certificationResultDto.national_student_id,
+    organizationUai: certificationResultDto.organization_uai,
+    lastName: certificationResultDto.last_name,
+    firstName: certificationResultDto.first_name,
+    birthdate: certificationResultDto.birthdate,
+    status: certificationResultDto.status,
+    pixScore: certificationResultDto.pix_score,
+    certificationDate: certificationResultDto.certification_date,
+  });
 };
 
 export { get };

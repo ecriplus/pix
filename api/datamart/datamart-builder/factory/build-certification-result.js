@@ -1,8 +1,24 @@
 import { datamartBuffer } from '../datamart-buffer.js';
 
-const buildCertificationResult = function ({ nationalStudentId } = {}) {
+const buildCertificationResult = function ({
+  nationalStudentId,
+  organizationUai,
+  lastName,
+  firstName,
+  birthdate,
+  status,
+  pixScore,
+  certificationDate,
+} = {}) {
   const values = {
     national_student_id: nationalStudentId,
+    organization_uai: organizationUai,
+    last_name: lastName,
+    first_name: firstName,
+    birthdate,
+    status,
+    pix_score: pixScore,
+    certification_date: certificationDate,
   };
 
   datamartBuffer.pushInsertable({

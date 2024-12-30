@@ -8,14 +8,32 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
       it('should return the certification', async function () {
         // given
         const ine = '1234';
-        datamartBuilder.factory.buildCertificationResult({ nationalStudentId: ine });
+        datamartBuilder.factory.buildCertificationResult({
+          nationalStudentId: ine,
+          organizationUai: 'UAI ETAB ELEVE',
+          lastName: 'NOM-ELEVE',
+          firstName: 'PRENOM-ELEVE',
+          birthdate: '2000-01-01',
+          status: 'validated',
+          pixScore: 327,
+          certificationDate: '2024-11-22T09:39:54',
+        });
         await datamartBuilder.commit();
 
         // when
         const result = await certificationRepository.get({ ine });
 
         // then
-        const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({ ine });
+        const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
+          ine,
+          organizationUai: 'UAI ETAB ELEVE',
+          lastName: 'NOM-ELEVE',
+          firstName: 'PRENOM-ELEVE',
+          birthdate: '2000-01-01',
+          status: 'validated',
+          pixScore: 327,
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
+        });
         expect(result).to.deep.equal(expectedCertification);
       });
     });
