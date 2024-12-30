@@ -1,4 +1,3 @@
-import { BadRequestError } from '../../../shared/application/http-errors.js';
 import { tokenService } from '../../../shared/domain/services/token-service.js';
 import { usecases } from '../../domain/usecases/index.js';
 
@@ -46,8 +45,6 @@ const createToken = async function (request, h, dependencies = { tokenService })
 
     accessToken = tokensInfo.accessToken;
     expirationDelaySeconds = tokensInfo.expirationDelaySeconds;
-  } else {
-    throw new BadRequestError('Invalid grant type');
   }
 
   const userId = dependencies.tokenService.extractUserId(accessToken);
