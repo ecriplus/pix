@@ -342,7 +342,7 @@
                 {
                   "id": "f5142469-61c8-422e-9c26-5f408ce33992",
                   "type": "image",
-                  "url": "https://i.imgur.com/4GaLMMu.gif",
+                  "url": "https://i.imgur.com/xxKAMeR.gif",
                   "alt": "",
                   "alternativeText": "<p>Gif animé. Quand la case « La plage contient des étiquettes de colonne » n'est pas cochée, les colonnes proposées dans la liste déroulante sont A, B, C, etc. Quand la case est cochée, la liste déroulante propose les étiquettes de colonnes « Prénom », « Nom », « Equipe », etc.</p>"
                 },
@@ -358,12 +358,12 @@
                 {
                   "id": "b8c69ed0-7388-4197-a700-19126f4c91d2",
                   "type": "text",
-                  "content": "<p><strong>La sensibilité à la casse</strong> </p><p>L’onglet « Options » de la fenêtre de tri, permet de faire des réglages avancés. La case à cocher «Sensibilité à la casse» permet de prendre en compte ou d’ignorer les majuscules ou les minuscules. 🔠</p>"
+                  "content": "<p><strong>La sensibilité à la casse</strong> </p><p>L’onglet « Options » de la fenêtre de tri, permet de faire des réglages avancés. La case à cocher «Sensible à la casse» permet de prendre en compte ou d’ignorer les majuscules ou les minuscules. 🔠</p>"
                 },
                 {
                   "id": "37ac6388-e4b2-41ac-af3a-bc1219c0f23c",
                   "type": "image",
-                  "url": "https://i.imgur.com/efiCSYj.gif",
+                  "url": "https://i.imgur.com/jEGP1c1.png",
                   "alt": "",
                   "alternativeText": ""
                 }
@@ -379,7 +379,7 @@
                 {
                   "id": "8dff7246-9c67-45c9-b5bd-801d12008587",
                   "type": "image",
-                  "url": "https://i.imgur.com/efiCSYj.gif",
+                  "url": "https://i.imgur.com/AK86ATB.png",
                   "alt": "",
                   "alternativeText": ""
                 }
