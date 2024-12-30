@@ -5,7 +5,6 @@ import pdfLibFontkit from '@pdf-lib/fontkit';
 import { PDFDocument, rgb } from 'pdf-lib';
 
 import { LOCALE } from '../../../../../shared/domain/constants.js';
-import { CURRENT_CERTIFICATION_VERSION } from '../../../../shared/domain/constants.js';
 
 const { ENGLISH_SPOKEN, FRENCH_SPOKEN } = LOCALE;
 
@@ -22,21 +21,17 @@ async function getInvigilatorKitPdfBuffer({
   creationDate = new Date(),
   lang = FRENCH_SPOKEN,
 } = {}) {
-  let templatePath;
-  let fileName;
-  const fileVersion = sessionForInvigilatorKit.version === CURRENT_CERTIFICATION_VERSION ? '' : '-v3';
-
-  switch (lang) {
-    case ENGLISH_SPOKEN:
-      templatePath = `${dirname}/files/invigilator-kit_template.pdf`;
-      fileName = `invigilator-kit-${sessionForInvigilatorKit.id}.pdf`;
-      break;
-
-    default:
-      templatePath = `${dirname}/files/kit-surveillant_template${fileVersion}.pdf`;
-      fileName = `kit-surveillant-${sessionForInvigilatorKit.id}${fileVersion}.pdf`;
-      break;
-  }
+  const invigilatorKitPaths = {
+    [ENGLISH_SPOKEN]: {
+      templatePath: `${dirname}/files/invigilator-kit_template.pdf`,
+      fileName: `invigilator-kit-${sessionForInvigilatorKit.id}.pdf`,
+    },
+    [FRENCH_SPOKEN]: {
+      templatePath: `${dirname}/files/kit-surveillant_template.pdf`,
+      fileName: `kit-surveillant-${sessionForInvigilatorKit.id}.pdf`,
+    },
+  };
+  const { templatePath, fileName } = invigilatorKitPaths[lang] ?? invigilatorKitPaths[FRENCH_SPOKEN];
 
   const fileBuffer = await readFile(templatePath);
 
