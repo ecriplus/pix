@@ -13,7 +13,7 @@ import { config as settings } from '../../../../../src/shared/config.js';
 describe('Acceptance | API | Pole Emploi envois', function () {
   let server, options;
 
-  const POLE_EMPLOI_CLIENT_ID = 'poleEmploiClientId';
+  const POLE_EMPLOI_CLIENT_ID = 'test-poleEmploiClientId';
   const POLE_EMPLOI_SCOPE = 'pole-emploi-participants-result';
   const POLE_EMPLOI_SOURCE = 'poleEmploi';
 

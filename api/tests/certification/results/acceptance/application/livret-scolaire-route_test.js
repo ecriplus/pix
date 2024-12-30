@@ -23,7 +23,7 @@ describe('Certification | Results | Acceptance | Application | Livret Scolaire',
     const uai = '789567AA';
     let type;
     const verificationCode = 'P-123498NN';
-    const OSMOSE_CLIENT_ID = 'apimOsmoseClientId';
+    const OSMOSE_CLIENT_ID = 'test-apimOsmoseClientId';
     const OSMOSE_SCOPE = 'organizations-certifications-result';
     const OSMOSE_SOURCE = 'livretScolaire';
 

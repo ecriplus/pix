@@ -9,7 +9,7 @@ import {
 describe('Parcoursup | Acceptance | Application | certification-route', function () {
   let server;
 
-  const PARCOURSUP_CLIENT_ID = 'parcoursupClientId';
+  const PARCOURSUP_CLIENT_ID = 'test-parcoursupClientId';
   const PARCOURSUP_SCOPE = 'parcoursup';
   const PARCOURSUP_SOURCE = 'parcoursup';
 
