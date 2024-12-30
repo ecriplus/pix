@@ -4,12 +4,15 @@ import { fileURLToPath } from 'node:url';
 
 import * as languageService from '../../../../shared/domain/services/language-service.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
+import * as organizationLearnerRepository from '../../../../shared/infrastructure/repositories/organization-learner-repository.js';
+import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as attendanceSheetPdfUtils from '../../../enrolment/infrastructure/utils/pdf/attendance-sheet-pdf.js';
 import * as certificationBadgesService from '../../../shared/domain/services/certification-badges-service.js';
 import * as certificationCpfService from '../../../shared/domain/services/certification-cpf-service.js';
 import * as sessionValidator from '../../../shared/domain/validators/session-validator.js';
+import * as certificationCandidateRepository from '../../../shared/infrastructure/repositories/certification-candidate-repository.js';
 import * as complementaryCertificationBadgesRepository from '../../../shared/infrastructure/repositories/complementary-certification-badge-repository.js';
 import { enrolmentRepositories } from '../../infrastructure/repositories/index.js';
 import * as certificationCandidatesOdsService from '../services/certification-candidates-ods-service.js';
@@ -40,6 +43,9 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {import('../services/certification-candidates-ods-service.js')} CertificationCandidatesOdsService
  * @typedef {import('../../../../shared/domain/services/placement-profile-service.js')} PlacementProfileService
  * @typedef {import('../../../../shared/domain/services/language-service.js')} languageService
+ * @typedef {import('../../../../shared/infrastructure/repositories/organization-repository.js')} organizationRepository
+ * @typedef {import('../../infrastructure/repositories/organization-learner-repository.js')} organizationLearnerRepository
+ * @typedef {import('../../../shared/infrastructure/repositories/certification-candidate-repository.js')} certificationCandidateRepository
  **/
 
 /**
@@ -70,6 +76,10 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {PlacementProfileService} PlacementProfileService
  * @typedef {LanguageService} LanguageService
  * @typedef {complementaryCertificationBadgesRepository} ComplementaryCertificationBadgesRepository
+ * @typedef {organizationRepository} OrganizationRepository
+ * @typedef {organizationLearnerRepository} OrganizationLearnerRepository
+ * @typedef {certificationCandidateRepository} CertificationCandidateRepository
+ *
  **/
 const dependencies = {
   certificationBadgesService,
@@ -84,6 +94,9 @@ const dependencies = {
   placementProfileService,
   languageService,
   complementaryCertificationBadgesRepository,
+  organizationRepository,
+  organizationLearnerRepository,
+  certificationCandidateRepository,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));

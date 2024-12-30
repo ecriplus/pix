@@ -95,39 +95,6 @@ const register = async function (server) {
     ...certifRoutes,
     {
       method: 'GET',
-      path: '/api/certification-centers/{certificationCenterId}/sessions/{sessionId}/students',
-      config: {
-        validate: {
-          params: Joi.object({
-            certificationCenterId: identifiersType.certificationCenterId,
-            sessionId: identifiersType.sessionId,
-          }),
-          query: Joi.object({
-            filter: Joi.object({
-              divisions: Joi.array().items(Joi.string()),
-            }).default({}),
-            page: {
-              number: Joi.number().integer(),
-              size: Joi.number().integer(),
-            },
-          }),
-        },
-        pre: [
-          {
-            method: securityPreHandlers.checkUserIsMemberOfCertificationCenter,
-            assign: 'isMemberOfCertificationCenter',
-          },
-        ],
-        handler: certificationCenterController.getStudents,
-        notes: [
-          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
-            "- Récupération d'une liste d'élèves SCO à partir d'un identifiant de centre de certification",
-        ],
-        tags: ['api', 'certification-center', 'students', 'session'],
-      },
-    },
-    {
-      method: 'GET',
       path: '/api/certification-centers/{certificationCenterId}/divisions',
       config: {
         validate: {

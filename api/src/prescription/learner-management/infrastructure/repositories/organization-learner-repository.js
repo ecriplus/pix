@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import * as organizationLearnerRepository from '../../../../../lib/infrastructure/repositories/organization-learner-repository.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import {
   NotFoundError,
@@ -8,6 +7,7 @@ import {
   UserCouldNotBeReconciledError,
 } from '../../../../shared/domain/errors.js';
 import { OrganizationLearner } from '../../../../shared/domain/models/index.js';
+import * as organizationLearnerRepository from '../../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import { OrganizationLearnerCertificabilityNotUpdatedError } from '../../domain/errors.js';
 import { CommonOrganizationLearner } from '../../domain/models/CommonOrganizationLearner.js';
 import { OrganizationLearnerForAdmin } from '../../domain/read-models/OrganizationLearnerForAdmin.js';

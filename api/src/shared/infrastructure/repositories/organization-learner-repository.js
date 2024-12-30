@@ -1,10 +1,10 @@
-import { knex } from '../../../db/knex-database-connection.js';
-import { ORGANIZATION_FEATURE } from '../../../src/shared/domain/constants.js';
-import { OrganizationLearnerNotFound, UserNotFoundError } from '../../../src/shared/domain/errors.js';
-import { OrganizationLearner } from '../../../src/shared/domain/models/OrganizationLearner.js';
-import { ParticipantRepartition } from '../../../src/shared/domain/models/ParticipantRepartition.js';
-import { fetchPage } from '../../../src/shared/infrastructure/utils/knex-utils.js';
-import { DomainTransaction } from '../DomainTransaction.js';
+import { knex } from '../../../../db/knex-database-connection.js';
+import { ORGANIZATION_FEATURE } from '../../domain/constants.js';
+import { DomainTransaction } from '../../domain/DomainTransaction.js';
+import { OrganizationLearnerNotFound, UserNotFoundError } from '../../domain/errors.js';
+import { OrganizationLearner } from '../../domain/models/OrganizationLearner.js';
+import { ParticipantRepartition } from '../../domain/models/ParticipantRepartition.js';
+import { fetchPage } from '../utils/knex-utils.js';
 
 const findByIds = async function ({ ids }) {
   const rawOrganizationLearners = await knex

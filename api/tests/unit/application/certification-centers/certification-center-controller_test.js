@@ -1,68 +1,9 @@
 import { certificationCenterController } from '../../../../lib/application/certification-centers/certification-center-controller.js';
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { usecases as teamUsecases } from '../../../../src/team/domain/usecases/index.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Controller | certifications-center-controller', function () {
-  describe('#getStudents', function () {
-    it('should return a paginated serialized list of students', async function () {
-      // given
-      const student = domainBuilder.buildOrganizationLearner({ division: '3A' });
-
-      const request = {
-        auth: {
-          credentials: { userId: '111' },
-        },
-        params: {
-          certificationCenterId: 99,
-          sessionId: 88,
-        },
-        query: {
-          page: {
-            size: 10,
-            number: 1,
-          },
-          filter: {
-            divisions: '3A',
-          },
-        },
-      };
-
-      sinon
-        .stub(usecases, 'findStudentsForEnrolment')
-        .withArgs({
-          certificationCenterId: 99,
-          sessionId: 88,
-          page: { size: 10, number: 1 },
-          filter: { divisions: ['3A'] },
-        })
-        .resolves({
-          data: [student],
-          pagination: { page: 1, pageSize: 10, rowCount: 1, pageCount: 1 },
-        });
-
-      // when
-      const response = await certificationCenterController.getStudents(request, hFake);
-
-      // then
-      expect(response).to.deep.equal({
-        data: [
-          {
-            attributes: {
-              birthdate: student.birthdate,
-              division: student.division,
-              'first-name': student.firstName,
-              'last-name': student.lastName,
-            },
-            id: `${student.id}`,
-            type: 'students',
-          },
-        ],
-        meta: { page: 1, pageSize: 10, rowCount: 1, pageCount: 1 },
-      });
-    });
-  });
-
   describe('#getDivisions', function () {
     it('Should return a serialized list of divisions', async function () {
       // given

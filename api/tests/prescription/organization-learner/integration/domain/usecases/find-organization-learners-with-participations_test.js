@@ -1,10 +1,10 @@
-import * as libOrganizationLearnerRepository from '../../../../../../lib/infrastructure/repositories/organization-learner-repository.js';
 import { Organization } from '../../../../../../src/organizational-entities/domain/models/Organization.js';
 import { tagRepository } from '../../../../../../src/organizational-entities/infrastructure/repositories/tag.repository.js';
 import * as campaignParticipationOverviewRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-overview-repository.js';
 import { findOrganizationLearnersWithParticipations } from '../../../../../../src/prescription/organization-learner/domain/usecases/find-organization-learners-with-participations.js';
 import { OrganizationLearner } from '../../../../../../src/shared/domain/models/OrganizationLearner.js';
 import { CampaignParticipationOverview } from '../../../../../../src/shared/domain/read-models/CampaignParticipationOverview.js';
+import * as organizationLearnerRepository from '../../../../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationRepository from '../../../../../../src/shared/infrastructure/repositories/organization-repository.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
@@ -40,7 +40,7 @@ describe('Integration | UseCases | find-organization-learners-with-participation
       userIds: [user1.id, user2.id],
       campaignParticipationOverviewRepository,
       organizationRepository,
-      libOrganizationLearnerRepository,
+      libOrganizationLearnerRepository: organizationLearnerRepository,
       tagRepository,
     });
 
@@ -87,7 +87,7 @@ describe('Integration | UseCases | find-organization-learners-with-participation
       userIds: [organizationLearner.userId],
       campaignParticipationOverviewRepository,
       organizationRepository,
-      libOrganizationLearnerRepository,
+      libOrganizationLearnerRepository: organizationLearnerRepository,
       tagRepository,
     });
 
