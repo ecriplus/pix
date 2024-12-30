@@ -5,6 +5,8 @@
 }
 
 .mission-list-banner {
+  margin-bottom: var(--pix-spacing-2x);
+
   a {
     font-weight: bolder;
     text-decoration: underline;
@@ -24,17 +26,44 @@
 
   &__school-code {
     display: inline-flex;
-    margin-top: 8px;
 
     .pix-icon-button {
-       fill: var(--pix-info-700);
-     }
+      fill: var(--pix-info-700);
+    }
   }
 
   &__copypaste-container {
     display: flex;
     flex-direction: column;
     text-align: start;
+
+    .copy-paste-button {
+      &__clipboard {
+        margin: -6px 6px 0 2px;
+      }
+    }
+
+    .copy-paste-button-container {
+      margin-top: 4px;
+    }
+    
+    .pix-icon {
+      width: 1rem;
+      height: 1rem;
+    }
+
+
+    .pix-icon-button {
+      width: 1.5rem;
+      min-width: 1.5rem;
+      height: 1.5rem;
+    }
+
+
+    span, a {
+      display: flex;
+      align-items: center;
+    }
 
     #external-link-icon {
       margin-left: 4px;
@@ -57,7 +86,7 @@
     align-items: center;
     justify-content: space-between;
     margin-top: var(--pix-spacing-6x);
-    margin-bottom: var(--pix-spacing-2x); ;
+    margin-bottom: var(--pix-spacing-2x);
 
     &__title {
       @extend %pix-title-m;

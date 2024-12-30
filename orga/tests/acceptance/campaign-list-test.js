@@ -49,8 +49,8 @@ module('Acceptance | Campaign List', function (hooks) {
       // when
       const screen = await visitScreen('/campagnes');
 
-      // then
-      assert.ok(screen.getByRole('heading', 'Créez votre première campagne'));
+      //then
+      assert.ok(screen.getByRole('link', { name: t('pages.campaigns-list.action.create') }));
     });
 
     test('it should show the two tabs: my campaigns and all campaigns', async function (assert) {
@@ -65,7 +65,7 @@ module('Acceptance | Campaign List', function (hooks) {
       const screen = await visitScreen('/campagnes');
 
       // then
-      assert.ok(screen.getByRole('heading', t('pages.campaigns-list.title')));
+      assert.ok(screen.getByRole('heading', { level: 1, name: t('pages.campaigns-list.title') }));
       assert.ok(screen.getByText(t('pages.campaigns-list.tabs.my-campaigns')));
       assert.ok(screen.getByText(t('pages.campaigns-list.tabs.all-campaigns')));
     });

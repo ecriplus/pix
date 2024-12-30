@@ -373,6 +373,7 @@
       "activate-button": "De sessie activeren",
       "extend-button": "De sessie verlengen",
       "status": {
+        "code-label": "Schoolcode",
         "active-label": "Sessie actief tot {sessionExpirationDate}",
         "aria-label": "Uitleg over de sessie",
         "inactive-label": "Sessie inactief",
@@ -937,7 +938,7 @@
             },
             "title": "Stap 2: Om leerlingen toegang te geven tot de Pix Junior-ruimte van je school, kun je :"
           },
-          "step3": "Stap 3: <b>Activeer de Pix Junior sessie</b> via de knop hierboven. <b>Deze actie moet voor elke sessie met je leerlingen worden uitgevoerd</b>.",
+          "step3": "Stap 3: <b>Activeer de Pix Junior sessie</b> met de knop in de sidebar. <b>Deze actie moet voor elke sessie met je leerlingen worden uitgevoerd</b>.",
           "welcome": "Hallo en welkom bij Pix Orga!"
         },
         "caption": "Lijst van opdrachten",

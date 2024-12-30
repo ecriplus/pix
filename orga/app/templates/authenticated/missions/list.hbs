@@ -25,11 +25,13 @@
             </span>
             <div class="mission-list-banner__school-code">
               Code :&nbsp;<b>{{this.schoolCode}}</b>
-              <CopyPasteButton
-                @clipBoardtext={{this.schoolCode}}
-                @successMessage="{{t 'pages.missions.list.banner.copypaste-container.button.success'}}"
-                @defaultMessage="{{t 'pages.missions.list.banner.copypaste-container.button.tooltip'}}"
-              />
+              <div class="copy-paste-button-container">
+                <CopyPasteButton
+                  @clipBoardtext={{this.schoolCode}}
+                  @successMessage="{{t 'pages.missions.list.banner.copypaste-container.button.success'}}"
+                  @defaultMessage="{{t 'pages.missions.list.banner.copypaste-container.button.tooltip'}}"
+                />
+              </div>
             </div>
           </div>
         </li>
