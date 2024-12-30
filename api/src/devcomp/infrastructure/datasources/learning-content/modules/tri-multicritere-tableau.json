@@ -63,7 +63,7 @@
                 {
                   "id": "eff4694f-d2a9-48f1-846d-9c9f88acccfa",
                   "type": "text",
-                  "content": "<p>Dans chacune des situations suivantes, choisissez l’action adaptée entre :</p><ul><li>un tri à un critère (sur une colonne uniquement),</li><li>&nbsp;un filtre,</li><li>un tri multicritère.</li></ul>"
+                  "content": "<p>À vous de jouer&#8239;!</p><p>Dans chacune des situations suivantes, choisissez l’action adaptée entre&nbsp;:</p><ul><li>un tri à un critère (sur une colonne uniquement),</li><li>un filtre,</li><li>un tri multicritère.</li></ul>"
                 }
               ]
             },
@@ -72,7 +72,7 @@
                 {
                   "id": "5f84a71d-a48f-4746-8a9a-2f25d8340ad4",
                   "type": "qcu",
-                  "instruction": "<p>Sarah souhaite afficher les enfants alphabétiquement par nom.</p><p>Que doit-elle appliquer ?<br><br></p>",
+                  "instruction": "<p>Sarah souhaite afficher les enfants alphabétiquement par nom.</p><p>Que doit-elle appliquer&#8239;?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -99,7 +99,7 @@
                 {
                   "id": "01e76883-2f58-4ba2-8d4e-3cee40660c65",
                   "type": "qcu",
-                  "instruction": "<p>Sarah veut afficher les scores d'une seule équipe. </p><p>Que doit-elle appliquer ?<br><br></p>",
+                  "instruction": "<p>Sarah veut afficher les scores d'une seule équipe. </p><p>Que doit-elle appliquer&#8239;?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -126,22 +126,22 @@
                 {
                   "id": "a98472e5-2500-4a1c-99b9-a62cccb0015c",
                   "type": "qcu",
-                  "instruction": "<p>Sarah veut réorganiser le tableau pour obtenir un classement des participants ayant les meilleurs résultats aux épreuves (orientation, fléchettes, quiz). </p><p>Que doit-elle appliquer ?<br><br></p>",
+                  "instruction": "<p>Sarah veut réorganiser le tableau pour obtenir un classement des participants ayant les meilleurs résultats aux épreuves (orientation, fléchettes, quiz). </p><p>Que doit-elle appliquer&#8239;?></p>",
                   "proposals": [
                     {
                       "id": "1",
                       "content": "<p>Un tri à un critère</p>",
-                      "feedback": "<p>Mauvaise réponse.&nbsp;Le tri simple peut ordonner les résultats des enfants pour une épreuve, mais il ne permet pas d’établir un classement prenant en compte les trois épreuves.</p>"
+                      "feedback": "<p>Mauvaise réponse. Le tri simple peut ordonner les résultats des enfants pour une épreuve, mais il ne permet pas d’établir un classement prenant en compte les trois épreuves.</p>"
                     },
                     {
                       "id": "2",
                       "content": "<p>Un filtre</p>",
-                      "feedback": "<p>Mauvaise réponse.&nbsp;Filtrer ici ne permettrait pas d’afficher un classement, mais de restreindre l’affichage à certains scores.</p>"
+                      "feedback": "<p>Mauvaise réponse. Filtrer ici ne permettrait pas d’afficher un classement, mais de restreindre l’affichage à certains scores.</p>"
                     },
                     {
                       "id": "3",
                       "content": "<p>Un tri multicritère</p>",
-                      "feedback": "<p>Bonne réponse !&nbsp;Plusieurs critères vont permettre de faire le classement final, le tri multicritère est donc recommandé.</p>"
+                      "feedback": "<p>Bonne réponse&#8239;! Plusieurs critères vont permettre de faire le classement final, le tri multicritère est donc recommandé.</p>"
                     }
                   ],
                   "solution": "3"
@@ -158,7 +158,7 @@
                 {
                   "id": "f37f93e5-8b78-40b1-9628-1b07e49de08d",
                   "type": "image",
-                  "url": "https://i.imgur.com/f8JZTHw.jpeg",
+                  "url": "https://i.imgur.com/0dvoxXo.jpeg",
                   "alt": "",
                   "alternativeText": "<p>Infographie des options de filtre et de tri dans les logiciel de tableurs :</p><ul><li>Filtre, pour afficher seulement certaines lignes.</li><li>Tri croissant et Tri décroissant, pour trier le tableau sur une seule colonne.</li><li>Tri multicritère, pour trier le tableau sur plusieurs colonnes.</li></ul>"
                 }
@@ -186,7 +186,7 @@
           "element": {
             "id": "8707010a-2068-470f-a007-77f0e82005c1",
             "type": "text",
-            "content": "<iframe width=\"100%\" height=\"410\" src=\"\\&quot;https://www.youtube.com/watch?v=ikdJ-4ZVpOo\\&quot;\" title=\"Appliquer un tri multicritère dans un tableau\"></iframe>"
+            "content": "<iframe width=\"100%\" height=\"410\" src=\"https://www.youtube.com/watch?v=ikdJ-4ZVpOo\" title=\"Appliquer un tri multicritère dans un tableau\"></iframe>"
           }
         },
         {
@@ -256,7 +256,7 @@
           "element": {
             "id": "2ed017f2-4c7e-4f64-b0d9-59cfcd9f3e38",
             "type": "text",
-            "content": "<p>👉 Appliquez le tri multicritère suivant :&nbsp; </p><ul><li>critère 1 :&nbsp;par ordre <strong>décroissant </strong>de<strong> Score aux fléchettes</strong>&nbsp;</li><li>critère 2 : par ordre <strong>croissant </strong>de <strong>Réponse au quiz</strong></li></ul>"
+            "content": "<p>👉 Appliquez le tri multicritère suivant&nbsp;:</p><ul><li>critère 1&nbsp;: par ordre <strong>décroissant</strong>de<strong> Score aux fléchettes</strong>&nbsp;</li><li>critère 2&nbsp;: par ordre <strong>croissant </strong>de <strong>Réponse au quiz</strong></li></ul>"
           }
         },
         {
@@ -309,8 +309,8 @@
               }
             ],
             "feedbacks": {
-              "valid": "<p>Correct !&nbsp; Vous avez obtenu le classement des meilleurs tireurs aux fléchettes et parmi eux, ceux qui ont aussi réussi le quiz.&nbsp; </p><p>En inversant l’ordre de ce tri, le classement aurait été différent.</p><br>",
-              "invalid": "<p>Incorrect. Avez-vous bien utilisé un tri multicritère ?&nbsp; Vérifiez également l’ordre de vos critères de tri.&nbsp; </p><p>Pour réussir, utilisez les indices ci-dessous ou regardez à nouveau la vidéo pour vous aider 👆<br><br></p>"
+              "valid": "<p>Correct !&nbsp; Vous avez obtenu le classement des meilleurs tireurs aux fléchettes et parmi eux, ceux qui ont aussi réussi le quiz.</p><p>En inversant l’ordre de ce tri, le classement aurait été différent.</p>",
+              "invalid": "<p>Incorrect. Avez-vous bien utilisé un tri multicritère ?&nbsp; Vérifiez également l’ordre de vos critères de tri.</p><p>Pour réussir, utilisez les indices ci-dessous ou regardez à nouveau la vidéo pour vous aider 👆</p>"
             }
           }
         },
@@ -319,7 +319,7 @@
           "element": {
             "id": "82815beb-6dc8-4caf-8c26-2454ffde5458",
             "type": "text",
-            "content": "<p>🗝️ Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>En fonction de votre logiciel, le vocabulaire de tri peut être différent :</p><ul><li>La fenêtre peut s’appeler «&nbsp;Trier&nbsp;», «&nbsp;Tri personnalisé&nbsp;» ou «&nbsp;Options avancées de tri&nbsp;».</li><li>Un critère de tri peut aussi s’appeler «&nbsp;Clé de tri&nbsp;» ou «&nbsp;Niveau de tri&nbsp;».</li><li>«&nbsp;Croissant&nbsp;» peut être écrit «&nbsp;Du plus petit au plus grand&nbsp;» ou «&nbsp;A-Z&nbsp;».</li></ul></details><details><summary>Indice 2</summary><p>Pour ouvrir la fenêtre de tri sur le logiciel LibreOffice, voici la manipulation à effectuer</p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"600\" height=\"337\" src=\"https://www.hebergeur-image.com/upload/88.125.115.216-67530fa7a5525.gif\"></iframe></details><details><summary>Indice 3</summary><ul><li>Commencez par sélectionner «&nbsp;<strong>Score aux fléchettes</strong>&nbsp;» dans votre premier critère de tri. Attribuez-lui un classement <strong>«&nbsp;Décroissant&nbsp;»</strong>.</li><li>Puis, sélectionnez <strong>«&nbsp;Réponse au quiz&nbsp;»</strong> dans votre second critère de tri. Attribuez-lui le classement <strong>«&nbsp;Croissant&nbsp;»</strong> </li></ul></details>"
+            "content": "<p>🗝️ Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>En fonction de votre logiciel, le vocabulaire de tri peut être différent :</p><ul><li>La fenêtre peut s’appeler «&nbsp;Trier&nbsp;», «&nbsp;Tri personnalisé&nbsp;» ou «&nbsp;Options avancées de tri&nbsp;».</li><li>Un critère de tri peut aussi s’appeler «&nbsp;Clé de tri&nbsp;» ou «&nbsp;Niveau de tri&nbsp;».</li><li>«&nbsp;Croissant&nbsp;» peut être écrit «&nbsp;Du plus petit au plus grand&nbsp;» ou «&nbsp;A-Z&nbsp;».</li></ul></details><details><summary>Indice 2</summary><p>Pour ouvrir la fenêtre de tri sur le logiciel LibreOffice, voici la manipulation à effectuer</p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"740\" height=\"400\" src=\"https://www.hebergeur-image.com/upload/88.125.115.216-67530fa7a5525.gif\"></iframe></details><details><summary>Indice 3</summary><ul><li>Commencez par sélectionner «&nbsp;<strong>Score aux fléchettes</strong>&nbsp;» dans votre premier critère de tri. Attribuez-lui un classement <strong>«&nbsp;Décroissant&nbsp;»</strong>.</li><li>Puis, sélectionnez <strong>«&nbsp;Réponse au quiz&nbsp;»</strong> dans votre second critère de tri. Attribuez-lui le classement <strong>«&nbsp;Croissant&nbsp;»</strong> </li></ul></details>"
           }
         }
       ]
@@ -446,7 +446,7 @@
           "element": {
             "id": "d50c98d3-80b4-4cb5-a138-33d7526cd757",
             "type": "qrocm",
-            "instruction": "<p>Quel enfant est deuxième ? <br>Quel est le contenu du trésor ?<br><br></p>",
+            "instruction": "<p>Quel enfant est deuxième ? <br>Quel est le contenu du trésor ?</p>",
             "proposals": [
               {
                 "type": "text",
@@ -491,7 +491,7 @@
               }
             ],
             "feedbacks": {
-              "valid": "<p>Bravo !&nbsp; <br>Le tri avancé a bien permis de classer les enfants par découverte du trésor, puis par plus grand nombre d’énigmes résolues, puis par temps le plus court au labyrinthe.</p>",
+              "valid": "<p>Bravo&#8239;!<br>Le tri avancé a bien permis de classer les enfants par découverte du trésor, puis par plus grand nombre d’énigmes résolues, puis par temps le plus court au labyrinthe.</p>",
               "invalid": "<p>Incorrect. <br>Le classement de Sarah demande de trier selon trois critères.<br>Réessayez. Aidez-vous des indices au besoin.</p>"
             }
           }
@@ -501,7 +501,7 @@
           "element": {
             "id": "9c101788-40c6-4343-95e4-fcac920c96b7",
             "type": "text",
-            "content": "<p>❓Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>Avez-vous nettoyé ce tableau de données ? Pensez à supprimer les lignes ou colonnes vides pour qu'elles ne perturbent pas le résultat de votre tri</p></details><details><summary>Indice 2</summary><p>Voici le résultat que vous devriez obtenir. Observez bien les colonnes pour trouver l'ordre des critères de tri.</p><iframe id=\"inlineFrameExample2\" title=\"Inline Frame Example\" width=\"696\" height=\"437\" src=\"https://www.hebergeur-image.com/upload/88.125.115.216-675311daf3821.png\"> </iframe></details><details><summary>Indice 3</summary><p>Il y a 3 critères de tri nécessaires au classement de Sarah.<br>L’énoncé vous permet de trouver l’ordre des critères de tri suivant&nbsp;:</p> <ol> <li>L’étape la plus importante est bien sûr : la découverte du trésor</li> <li>La seconde épreuve est le nombre d’énigmes réussies</li> <li>Le troisième critère est le temps au labyrinthe</li> </ol><p>Ensuite, comparez l’ordre des critères de tri au tableau de l’indice 2 et déterminez le classement de chaque colonne.</p></details>"
+            "content": "<p>❓Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>Voici le résultat que vous devriez obtenir. Observez bien les colonnes pour trouver l'ordre des critères de tri.</p><iframe id=\"inlineFrameExample2\" title=\"Inline Frame Example\" width=\"640\" height=\"400\" src=\"https://www.hebergeur-image.com/upload/88.125.115.216-675311daf3821.png\"> </iframe></details><details><summary>Indice 2</summary><p>Il y a 3 critères de tri nécessaires au classement de Sarah.<br>L’énoncé vous permet de trouver l’ordre des critères de tri suivant&nbsp;:</p> <ol> <li>L’étape la plus importante est bien sûr : la découverte du trésor</li> <li>La seconde épreuve est le nombre d’énigmes réussies</li> <li>Le troisième critère est le temps au labyrinthe</li> </ol><p>Ensuite, comparez l’ordre des critères de tri au tableau de l’indice 2 et déterminez le classement de chaque colonne.</p> </details>"
           }
         }
       ]
@@ -516,7 +516,7 @@
           "element": {
             "id": "e9ac9d81-41fc-48c2-b74c-7aee31373f39",
             "type": "text",
-            "content": "<p>✅<strong>On a besoin d’un tri multicritères sur plusieurs colonnes</strong> quand on doit<strong> cumuler plusieurs critères de tri</strong> (d’abord un premier, critère, puis un second, puis un troisième, etc). <br>✔️Par exemple, quand on a besoin de discriminer des ex æquo sur un premier critère.<br><br></p>"
+            "content": "<p>✅On a besoin d’<strong>un tri multicritères sur plusieurs colonnes</strong> quand on doit<strong> cumuler plusieurs critères de tri</strong> (d’abord un premier, critère, puis un second, puis un troisième, etc). <br>✔️Par exemple, quand on a besoin de discriminer des ex æquo sur un premier critère.</p>"
           }
         },
         {
@@ -531,7 +531,7 @@
           "element": {
             "id": "d5e3be8f-f65f-4786-bf16-1d8f13e1e94c",
             "type": "text",
-            "content": "<p>🥇 <strong>L’ordre des critères de tri détermine le résultat du tri.</strong> <br>Le second critère s’applique toujours en fonction du premier. Si vous inversez les critères, vous obtiendrez un résultat visiblement différent.<br><br></p>"
+            "content": "<p>🥇 <strong>L’ordre des critères de tri détermine le résultat du tri.</strong> <br>Le second critère s’applique toujours en fonction du premier. Si vous inversez les critères, vous obtiendrez un résultat visiblement différent.</p>"
           }
         },
         {
@@ -546,7 +546,7 @@
           "element": {
             "id": "920abeb8-99e2-4891-b002-840de3eb9152",
             "type": "text",
-            "content": "<p>🔠 <strong>Le vocabulaire peut varier en fonction de votre logiciel.</strong><br>La fenêtre de tri peut s’appeler autrement selon le logiciel utilisé, avoir un pictogramme différent et peut utiliser d’autres mots pour désigner les critères de tri. <br><br></p>"
+            "content": "<p>🔠 <strong>Le vocabulaire peut varier en fonction de votre logiciel.</strong><br>La fenêtre de tri peut s’appeler autrement selon le logiciel utilisé, avoir un pictogramme différent et peut utiliser d’autres mots pour désigner les critères de tri.</p>"
           }
         }
       ]
