@@ -1,5 +1,24 @@
 # Pix Changelog
 
+## v5.9.0 (31/12/2024)
+
+
+### :rocket: Amélioration
+- [#10864](https://github.com/1024pix/pix/pull/10864) [FEATURE] Orga - Amélioration du design du menu de navigation (PIX-15769).
+- [#10909](https://github.com/1024pix/pix/pull/10909) [FEATURE] Récupération de l'entièreté des données à envoyer à Parcoursup (PIX-15882).
+- [#10908](https://github.com/1024pix/pix/pull/10908) [FEATURE] Mise à jour du template français de kit surveillant (PIX-15855).
+
+### :building_construction: Tech
+- [#10906](https://github.com/1024pix/pix/pull/10906) [TECH] Rendre le code lié à l'authentification des applications plus clair (PIX-15876).
+- [#10904](https://github.com/1024pix/pix/pull/10904) [TECH] :truck: Déplacement de la route de sélection d'étudiants pour la certification.
+- [#10907](https://github.com/1024pix/pix/pull/10907) [TECH] Rendre le code lié à l'authentification des users plus clair et corriger un test erroné (PIX-15878).
+- [#10859](https://github.com/1024pix/pix/pull/10859) [TECH] Montée de version vers PixUI 52 (PIX-15817).
+- [#10870](https://github.com/1024pix/pix/pull/10870) [TECH] Mise à jour de ESLint vers la V9 (PIX-15823).
+
+### :arrow_up: Montée de version
+- [#10912](https://github.com/1024pix/pix/pull/10912) [BUMP] Update dependency eslint-plugin-unicorn to v54 (api).
+- [#10911](https://github.com/1024pix/pix/pull/10911) [BUMP] Update dependency eslint-plugin-import-x to v4 (api).
+
 ## v5.8.0 (26/12/2024)
 
 
