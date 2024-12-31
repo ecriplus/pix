@@ -37,27 +37,16 @@ export default class SessionsFinalizeController extends Controller {
   }
 
   @action
-  async abort(certificationReport, option) {
-    const abortReason = option;
-
-    try {
-      await certificationReport.abort(abortReason);
-
-      certificationReport.abortReason = abortReason;
-    } catch (error) {
-      const select = document.getElementById(`finalization-report-abort-reason__select${certificationReport.id}`);
-
-      if (certificationReport.abortReason) {
-        select.value = certificationReport.abortReason;
-      } else {
-        select.options[0].selected = true;
-      }
-    }
+  async abort(certificationReport, abortReason) {
+    certificationReport.abortReason = abortReason;
   }
 
   @action
   async finalizeSession() {
     try {
+      for (const certificationReport of this.session.uncompletedCertificationReports) {
+        await certificationReport.abort();
+      }
       await this.session.save({ adapterOptions: { finalization: true } });
       this.pixToast.sendSuccessNotification({
         message: this.intl.t('pages.session-finalization.notification.success'),
