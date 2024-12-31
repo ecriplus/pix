@@ -89,7 +89,7 @@
     "ember-exam": "9.0.0",
     "ember-fetch": "^8.1.2",
     "ember-file-upload": "^9.1.0",
-    "ember-flatpickr": "^8.0.0",
+    "ember-flatpickr": "^8.0.1",
     "ember-inputmask5": "^4.0.2",
     "ember-intl": "^7.0.0",
     "ember-keyboard": "^9.0.0",
