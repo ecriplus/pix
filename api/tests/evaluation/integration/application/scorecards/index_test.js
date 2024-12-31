@@ -1,7 +1,7 @@
-import * as moduleUnderTest from '../../../../lib/application/users/index.js';
-import { userController } from '../../../../lib/application/users/user-controller.js';
-import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import * as moduleUnderTest from '../../../../../src/evaluation/application/scorecards/index.js';
+import { scorecardController } from '../../../../../src/evaluation/application/scorecards/scorecard-controller.js';
+import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
+import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Application | Users | Routes', function () {
   let httpTestServer;
@@ -12,7 +12,7 @@ describe('Integration | Application | Users | Routes', function () {
       .stub(securityPreHandlers, 'checkRequestedUserIsAuthenticatedUser')
       .callsFake((request, h) => h.response(true));
 
-    sinon.stub(userController, 'resetScorecard').returns('ok');
+    sinon.stub(scorecardController, 'resetScorecard').returns('ok');
 
     httpTestServer = new HttpTestServer();
     await httpTestServer.register(moduleUnderTest);
