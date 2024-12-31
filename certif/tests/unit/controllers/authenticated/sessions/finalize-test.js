@@ -2,10 +2,13 @@ import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import setupIntl from '../../../../helpers/setup-intl';
+
 const FINALIZE_PATH = 'authenticated/sessions/finalize';
 
 module('Unit | Controller | ' + FINALIZE_PATH, function (hooks) {
   setupTest(hooks);
+  setupIntl(hooks, 'fr');
 
   module('#computed uncheckedHasSeenEndTestScreenCount', function () {
     test('it should count no unchecked box if no report', function (assert) {
@@ -309,25 +312,6 @@ module('Unit | Controller | ' + FINALIZE_PATH, function (hooks) {
     });
   });
 
-  module('#abort', function () {
-    test('should abort a certification report', function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const certificationReport = store.createRecord('certification-report');
-      const controller = this.owner.lookup('controller:' + FINALIZE_PATH);
-      certificationReport.abort = sinon.stub();
-      certificationReport.abort.resolves('ok');
-      const optionSelected = 'coucou';
-
-      // when
-      controller.abort(certificationReport, optionSelected);
-
-      // then
-      sinon.assert.calledWithExactly(certificationReport.abort, 'coucou');
-      assert.ok(true);
-    });
-  });
-
   module('#action toggleIncidentDuringCertificationSession', function () {
     test('it should set hasIncident to true', function (assert) {
       // given
@@ -362,6 +346,65 @@ module('Unit | Controller | ' + FINALIZE_PATH, function (hooks) {
 
       // then
       assert.true(session.hasJoiningIssue);
+    });
+  });
+
+  module('#finalizeSession', function () {
+    module('when there are no certification reports', function () {
+      test('it finalizes the session', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const session = store.createRecord('session-management', {
+          certificationReports: [],
+        });
+        const controller = this.owner.lookup('controller:' + FINALIZE_PATH);
+        controller.session = session;
+        controller.router = {
+          transitionTo: sinon.stub(),
+        };
+        controller.pixToast = {
+          sendSuccessNotification: sinon.stub(),
+        };
+        session.save = sinon.stub();
+        session.save.resolves();
+
+        // when
+        await controller.finalizeSession();
+
+        // then
+        sinon.assert.calledWithExactly(session.save, { adapterOptions: { finalization: true } });
+        assert.ok(controller.pixToast.sendSuccessNotification.called);
+        sinon.assert.calledWithExactly(controller.router.transitionTo, 'authenticated.sessions.details', session.id);
+      });
+    });
+
+    module('when there are certification reports', function () {
+      test('it finalizes the session', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const certificationReport = store.createRecord('certification-report');
+        certificationReport.abort = sinon.stub();
+        const session = store.createRecord('session-management', {
+          certificationReports: [certificationReport],
+        });
+        const controller = this.owner.lookup('controller:' + FINALIZE_PATH);
+        controller.session = session;
+        controller.router = {
+          transitionTo: sinon.stub(),
+        };
+        controller.pixToast = {
+          sendSuccessNotification: sinon.stub(),
+        };
+        session.save = sinon.stub();
+        session.save.resolves();
+
+        // when
+        await controller.finalizeSession();
+
+        // then
+        sinon.assert.calledOnce(certificationReport.abort);
+        assert.ok(true);
+      });
     });
   });
 });

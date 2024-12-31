@@ -118,7 +118,7 @@ module('Integration | Component | finalization-confirmation-modal', function (ho
   });
 
   module('when the finalization is confirmed', () => {
-    test('it should finalize de session', async function (assert) {
+    test('it should finalize the session', async function (assert) {
       // given
       const finalizeSessionStub = sinon.stub();
       this.set('closeModal', sinon.stub());
