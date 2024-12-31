@@ -100,7 +100,10 @@ export default class EnrolledCandidates extends Component {
     certificationCandidate.extraTimePercentage = this._fromPercentageStringToDecimal(candidate.extraTimePercentage);
     const success = await this.saveCertificationCandidate(certificationCandidate);
     if (success) {
-      this.candidatesInStaging.removeObject(candidate);
+      const candidateIndex = this.candidatesInStaging.indexOf(candidate);
+      if (candidateIndex !== -1) {
+        this.candidatesInStaging.splice(candidateIndex, 1);
+      }
       this.closeNewCandidateModal();
     }
     return success;
@@ -108,7 +111,10 @@ export default class EnrolledCandidates extends Component {
 
   @action
   removeCertificationCandidateFromStaging(candidate) {
-    this.candidatesInStaging.removeObject(candidate);
+    const candidateIndex = this.abc.indexOf(candidate);
+    if (candidateIndex !== -1) {
+      this.candidatesInStaging.splice(candidateIndex, 1);
+    }
   }
 
   @action
