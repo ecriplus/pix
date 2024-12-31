@@ -49,7 +49,9 @@ export default class Sidebar extends Component {
   get allowedCertificationCenterAccesses() {
     return this.currentUser.certificationPointOfContact.allowedCertificationCenterAccesses
       .map(({ name, externalId, id }) => ({ label: externalId ? `${name} (${externalId})` : name, value: id }))
-      .sortBy('name');
+      .sort((a, b) => {
+        return a.name?.localeCompare(b.name);
+      });
   }
 
   @action
