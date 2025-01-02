@@ -19,5 +19,44 @@ describe('Parcoursup | unit | domain | usecases | get certification', function (
       // then
       expect(certification).to.deep.equal(expectedCertification);
     });
+    context('with organizationUai, last name, first name and birthdate', function () {
+      it('returns matching certification', async function () {
+        // given
+        const organizationUai = '1234567A';
+        const lastName = 'LEPONGE';
+        const firstName = 'Bob';
+        const birthdate = '2000-01-01';
+        const certificationRepository = {
+          getByStudentDetails: sinon.stub(),
+        };
+
+        const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
+          organizationUai,
+          lastName,
+          firstName,
+          birthdate,
+        });
+        certificationRepository.getByStudentDetails
+          .withArgs({
+            organizationUai,
+            lastName,
+            firstName,
+            birthdate,
+          })
+          .resolves(expectedCertification);
+
+        // when
+        const certification = await getCertificationResult({
+          organizationUai,
+          lastName,
+          firstName,
+          birthdate,
+          certificationRepository,
+        });
+
+        // then
+        expect(certification).to.deep.equal(expectedCertification);
+      });
+    });
   });
 });
