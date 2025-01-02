@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-restricted-paths
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { healthcheckController } from '../../../../../src/shared/application/healthcheck/healthcheck-controller.js';
 import { redisMonitor } from '../../../../../src/shared/infrastructure/utils/redis-monitor.js';

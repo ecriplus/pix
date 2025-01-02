@@ -6,7 +6,7 @@ async function getCsvContent({ data, delimiter = ';', eol = '\n', fileHeaders, w
   try {
     const parser = new AsyncParser({ delimiter, eol, fields: fileHeaders, withBOM });
     return parser.parse(data).promise();
-  } catch (err) {
+  } catch {
     throw new CsvParsingError();
   }
 }

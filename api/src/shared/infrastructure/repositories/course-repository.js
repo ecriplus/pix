@@ -16,7 +16,7 @@ export async function getCourseName(id) {
   try {
     const course = await get(id);
     return course.name;
-  } catch (err) {
+  } catch {
     throw new NotFoundError("Le test demandé n'existe pas");
   }
 }

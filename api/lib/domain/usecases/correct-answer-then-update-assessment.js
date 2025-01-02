@@ -27,7 +27,7 @@ const evaluateAnswer = function ({
       isCertificationEvaluation: assessment.isCertification(),
       accessibilityAdjustmentNeeded,
     });
-  } catch (error) {
+  } catch {
     throw new AnswerEvaluationError(challenge);
   }
 };

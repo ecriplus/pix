@@ -113,7 +113,7 @@ async function _buildStudentReconciliationError(userId, errorContext, userReposi
   let authenticationMethod;
   try {
     authenticationMethod = await obfuscationService.getUserAuthenticationMethodWithObfuscation(user);
-  } catch (error) {
+  } catch {
     throw new OrganizationLearnerAlreadyLinkedToInvalidUserError();
   }
 

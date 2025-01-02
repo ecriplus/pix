@@ -17,7 +17,7 @@ class DatamartBuilder {
 
     try {
       await datamartBuilder._init();
-    } catch (_) {
+    } catch {
       // Error thrown only with unit tests
     }
 

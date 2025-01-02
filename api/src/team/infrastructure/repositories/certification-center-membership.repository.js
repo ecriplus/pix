@@ -225,7 +225,7 @@ const disableById = async function ({ certificationCenterMembershipId, updatedBy
     if (result.length === 0) {
       throw new CertificationCenterMembershipDisableError();
     }
-  } catch (e) {
+  } catch {
     throw new CertificationCenterMembershipDisableError();
   }
 };

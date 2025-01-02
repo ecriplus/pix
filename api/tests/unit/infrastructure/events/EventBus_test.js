@@ -77,7 +77,7 @@ describe('Unit | Infrastructure | Events | EventBus', function () {
         try {
           await eventBus.publish(new Event());
           // eslint-disable-next-line no-empty
-        } catch (error) {}
+        } catch {}
 
         expect(subscriber2.handle).to.not.have.been.called;
       });

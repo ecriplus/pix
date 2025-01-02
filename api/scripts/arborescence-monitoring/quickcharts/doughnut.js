@@ -61,7 +61,7 @@ function _generateDoughnutChartConfiguration(doughnutData) {
               },
             },
             {
-              text: `\n\n${process.env.BRANCH_NAME}` || '\n\n\nunknown',
+              text: `\n\n${process.env.BRANCH_NAME || '\nunknown'}`,
               font: {
                 size: 12,
               },

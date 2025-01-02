@@ -3,7 +3,7 @@ import * as organizationLearnerIdentitySerializer from '../infrastructure/serial
 
 const findAssociation = async function (request, h, dependencies = { organizationLearnerIdentitySerializer }) {
   const authenticatedUserId = request.auth.credentials.userId;
-  // eslint-disable-next-line no-restricted-syntax
+
   const requestedUserId = parseInt(request.query.userId);
   const campaignCode = request.query.campaignCode;
 

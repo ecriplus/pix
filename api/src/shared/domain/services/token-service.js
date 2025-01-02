@@ -136,7 +136,7 @@ function decodeIfValid(token) {
 function getDecodedToken(token, secret = config.authentication.secret) {
   try {
     return jsonwebtoken.verify(token, secret);
-  } catch (err) {
+  } catch {
     return false;
   }
 }

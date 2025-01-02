@@ -37,7 +37,7 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
       odsBuffer,
       headers: candidateImportStructs.headers,
     });
-  } catch (err) {
+  } catch {
     _handleVersionError();
   }
   const tableHeaderTargetPropertyMap = candidateImportStructs.transformStruct;

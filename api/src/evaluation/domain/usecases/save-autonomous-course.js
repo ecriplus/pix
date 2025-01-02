@@ -23,7 +23,7 @@ const saveAutonomousCourse = async ({
 
   try {
     targetProfile = await targetProfileAdministrationRepository.get({ id: autonomousCourse.targetProfileId });
-  } catch (e) {
+  } catch {
     throw new NotFoundError(`No target profile found for ID ${autonomousCourse.targetProfileId}`);
   }
 

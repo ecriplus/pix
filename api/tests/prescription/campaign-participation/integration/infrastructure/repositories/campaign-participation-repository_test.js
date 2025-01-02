@@ -98,7 +98,7 @@ describe('Integration | Repository | Campaign Participation', function () {
             throw new Error();
           })();
           // eslint-disable-next-line no-empty
-        } catch (error) {}
+        } catch {}
 
         const snapshotInDB = await knex.select('id').from('knowledge-element-snapshots');
         const participations = await knex.select('sharedAt').from('campaign-participations');

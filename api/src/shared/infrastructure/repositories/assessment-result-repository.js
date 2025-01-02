@@ -71,7 +71,7 @@ const save = async function ({ certificationCourseId, assessmentResult }) {
       .merge(['lastAssessmentResultId']);
 
     return _toDomain({ assessmentResultDTO: savedAssessmentResultData, competencesMarksDTO: [] });
-  } catch (error) {
+  } catch {
     throw new AssessmentResultNotCreatedError();
   }
 };

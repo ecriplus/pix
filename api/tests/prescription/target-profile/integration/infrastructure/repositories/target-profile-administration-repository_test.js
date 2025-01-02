@@ -913,7 +913,7 @@ describe('Integration | Repository | Target-profile', function () {
           throw new Error();
         });
         // eslint-disable-next-line no-empty
-      } catch (error) {}
+      } catch {}
 
       // then
       const targetProfilesInDB = await knex('target-profiles').select('id');
