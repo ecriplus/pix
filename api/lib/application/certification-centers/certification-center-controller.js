@@ -1,16 +1,6 @@
-import * as divisionSerializer from '../../../src/prescription/campaign/infrastructure/serializers/jsonapi/division-serializer.js';
 import * as certificationCenterMembershipSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import { usecases as teamUsecases } from '../../../src/team/domain/usecases/index.js';
 import { usecases } from '../../domain/usecases/index.js';
-
-const getDivisions = async function (request) {
-  const certificationCenterId = request.params.certificationCenterId;
-  const divisions = await usecases.findDivisionsByCertificationCenter({
-    certificationCenterId,
-  });
-
-  return divisionSerializer.serialize(divisions);
-};
 
 const findCertificationCenterMembershipsByCertificationCenter = async function (
   request,
@@ -57,7 +47,6 @@ const updateReferer = async function (request, h) {
 const certificationCenterController = {
   createCertificationCenterMembershipByEmail,
   findCertificationCenterMembershipsByCertificationCenter,
-  getDivisions,
   updateReferer,
 };
 
