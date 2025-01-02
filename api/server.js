@@ -181,6 +181,21 @@ const setupRoutesAndPlugins = async function (server) {
     ...certificationRoutes,
     ...prescriptionRoutes,
     ...parcoursupRoutes,
+    {
+      name: 'root',
+      register: async function (server) {
+        server.route([
+          {
+            method: 'GET',
+            path: '/',
+            config: {
+              auth: false,
+              handler: (_, h) => h.response().code(204),
+            },
+          },
+        ]);
+      },
+    },
   );
   await server.register(configuration);
 };
