@@ -65,7 +65,7 @@
     "@embroider/core": "^3.4.20",
     "@embroider/macros": "^1.16.10",
     "@embroider/webpack": "^4.0.9",
-    "@formatjs/intl": "^2.10.4",
+    "@formatjs/intl": "^2.10.15",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "dayjs": "^1.11.6",
