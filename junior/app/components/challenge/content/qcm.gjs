@@ -10,9 +10,9 @@ import proposalsAsArray from 'junior/utils/proposals-as-array';
 import { pshuffle } from 'junior/utils/pshuffle';
 import valueAsArrayOfBoolean from 'junior/utils/value-as-array-of-boolean';
 
-import MarkdownToHtml from '../markdown-to-html';
+import MarkdownToHtml from '../../markdown-to-html';
 
-export default class ChallengeItemQcm extends Component {
+export default class Qcm extends Component {
   @service intl;
   checkedValues = new Set();
 
@@ -53,8 +53,8 @@ export default class ChallengeItemQcm extends Component {
   }
 
   <template>
-    <div class="challenge-item-proposals__qcm-checkboxes">
-      <p class="challenge-item-proposals__qcm-checkboxes__hint">{{t "pages.challenge.qcm-hint"}}</p>
+    <div class="challenge-content-proposals__qcm-checkboxes">
+      <p class="challenge-content-proposals__qcm-checkboxes__hint">{{t "pages.challenge.qcm-hint"}}</p>
       {{#each this.labeledCheckboxes as |labeledCheckbox|}}
         <PixCheckbox
           name="{{labeledCheckbox.value}}"

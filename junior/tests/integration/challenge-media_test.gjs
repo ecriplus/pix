@@ -1,11 +1,12 @@
 import { render } from '@1024pix/ember-testing-library';
 import { triggerEvent } from '@ember/test-helpers';
-import ChallengeMedia from 'junior/components/challenge/challenge-media';
-import { setupRenderingTest } from '../helpers';
+import ChallengeMedia from 'junior/components/challenge/content/challenge-media';
 import { module, test } from 'qunit';
 
+import { setupIntlRenderingTest } from '../helpers';
+
 module('Integration | Component | ChallengeMedia', function (hooks) {
-  setupRenderingTest(hooks);
+  setupIntlRenderingTest(hooks);
 
   module('When the media is an image', function () {
     test('displays an image', async function (assert) {

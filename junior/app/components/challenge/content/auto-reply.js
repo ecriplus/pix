@@ -1,8 +1,9 @@
 import Component from '@glimmer/component';
 import { isEmbedAllowedOrigin } from 'junior/utils/embed-allowed-origins';
 
-export default class ChallengeItemAutoReply extends Component {
+export default class AutoReply extends Component {
   postMessageHandler = null;
+
   constructor() {
     super(...arguments);
     this._addEventListener();

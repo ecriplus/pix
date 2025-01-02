@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { eq } from 'ember-truth-helpers';
 
-export default class ChallengeWebComponent extends Component {
+export default class EmbeddedWebComponent extends Component {
   @action
   handleAnswer(event) {
     this.args.setAnswerValue(event.detail[0]);

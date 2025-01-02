@@ -17,7 +17,7 @@ module('Acceptance | Displaying a QCM challenge', function (hooks) {
     // when
     const screen = await visit(`/assessments/${assessment.id}/challenges`);
     // then
-    assert.dom('.challenge-item-proposals__qcm-checkboxes').exists({ count: 1 });
+    assert.dom('.challenge-content-proposals__qcm-checkboxes').exists({ count: 1 });
     assert.dom(screen.getByText('Sélectionne les bonnes réponses.')).exists();
   });
 

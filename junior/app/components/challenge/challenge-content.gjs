@@ -2,14 +2,14 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { or } from 'ember-truth-helpers';
 
-import ChallengeActions from './challenge-actions';
-import ChallengeEmbedSimulator from './challenge-embed-simulator';
-import ChallengeItemAutoReply from './challenge-item-auto-reply';
-import ChallengeItemQcm from './challenge-item-qcm';
-import ChallengeItemQcu from './challenge-item-qcu';
-import ChallengeItemQrocm from './challenge-item-qrocm';
-import ChallengeMedia from './challenge-media';
-import ChallengeWebComponent from './challenge-web-component';
+import AutoReply from './content/auto-reply';
+import ChallengeActions from './content/challenge-actions';
+import ChallengeMedia from './content/challenge-media';
+import EmbeddedSimulator from './content/embedded-simulator';
+import EmbeddedWebComponent from './content/embedded-web-component';
+import Qcm from './content/qcm';
+import Qcu from './content/qcu';
+import Qrocm from './content/qrocm';
 
 export default class ChallengeContent extends Component {
   @tracked isRebootable = false;
@@ -41,17 +41,19 @@ export default class ChallengeContent extends Component {
   }
 
   <template>
-    <div class="challenge-item {{unless this.isMediaWithForm 'challenge-item--single-display'}}">
+    <div class="challenge-content {{unless this.isMediaWithForm 'challenge-content--single-display'}}">
       {{#if this.hasMedia}}
-        <div class="challenge-item__media {{unless this.isMediaWithForm 'challenge-item__media--single-display'}}">
+        <div
+          class="challenge-content__media {{unless this.isMediaWithForm 'challenge-content__media--single-display'}}"
+        >
           {{#if @challenge.illustrationUrl}}
-            <div class="challenge-item__image">
+            <div class="challenge-content__image">
               <ChallengeMedia @src={{@challenge.illustrationUrl}} @alt={{@challenge.illustrationAlt}} />
             </div>
           {{/if}}
           {{#if @challenge.hasValidEmbedDocument}}
-            <div class="challenge-item__embed">
-              <ChallengeEmbedSimulator
+            <div class="challenge-content__embed">
+              <EmbeddedSimulator
                 @url={{@challenge.embedUrl}}
                 @title={{@challenge.embedTitle}}
                 @height={{@challenge.embedHeight}}
@@ -62,8 +64,8 @@ export default class ChallengeContent extends Component {
             </div>
           {{/if}}
           {{#if @challenge.hasWebComponent}}
-            <div class="challenge-item__web-component">
-              <ChallengeWebComponent
+            <div class="challenge-content__web-component">
+              <EmbeddedWebComponent
                 @tagName={{@challenge.webComponentTagName}}
                 @props={{@challenge.webComponentProps}}
                 @setAnswerValue={{@setAnswerValue}}
@@ -73,25 +75,22 @@ export default class ChallengeContent extends Component {
         </div>
       {{/if}}
       <div
-        class="challenge-item__proposals {{unless this.isMediaWithForm 'challenge-item__proposals--single-display'}}"
+        class="challenge-content__proposals
+          {{unless this.isMediaWithForm 'challenge-content__proposals--single-display'}}"
       >
         {{#if @challenge.autoReply}}
-          <div class="challenge-item__autoreply">
-            <ChallengeItemAutoReply @setAnswerValue={{@setAnswerValue}} />
+          <div class="challenge-content__autoreply">
+            <AutoReply @setAnswerValue={{@setAnswerValue}} />
           </div>
         {{/if}}
         {{#if (or @challenge.isQROC @challenge.isQROCM)}}
-          <div class="challenge-item__qrocm">
-            <ChallengeItemQrocm
-              @challenge={{@challenge}}
-              @setAnswerValue={{@setAnswerValue}}
-              @isDisabled={{@isDisabled}}
-            />
+          <div class="challenge-content__qrocm">
+            <Qrocm @challenge={{@challenge}} @setAnswerValue={{@setAnswerValue}} @isDisabled={{@isDisabled}} />
           </div>
         {{/if}}
         {{#if @challenge.isQCU}}
-          <div class="challenge-item__qcu">
-            <ChallengeItemQcu
+          <div class="challenge-content__qcu">
+            <Qcu
               @challenge={{@challenge}}
               @setAnswerValue={{@setAnswerValue}}
               @assessment={{@assessment}}
@@ -100,8 +99,8 @@ export default class ChallengeContent extends Component {
           </div>
         {{/if}}
         {{#if @challenge.isQCM}}
-          <div class="challenge-item__qcm">
-            <ChallengeItemQcm
+          <div class="challenge-content__qcm">
+            <Qcm
               @challenge={{@challenge}}
               @setAnswerValue={{@setAnswerValue}}
               @setValidationWarning={{@setValidationWarning}}

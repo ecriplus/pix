@@ -10,7 +10,7 @@ import Bubble from '../bubble';
 import DelayedElement from '../delayed-element';
 import RobotDialog from '../robot-dialog';
 import ChallengeContent from './challenge-content';
-import ChallengeWrapper from './challenge-wrapper';
+import ChallengeLayout from './challenge-layout';
 const CHALLENGE_DISPLAY_DELAY = ENV.APP.CHALLENGE_DISPLAY_DELAY;
 
 export default class Challenge extends Component {
@@ -140,7 +140,7 @@ export default class Challenge extends Component {
 
   <template>
     {{pageTitle (t "pages.challenge.title")}}
-    <ChallengeWrapper>
+    <ChallengeLayout>
       <RobotDialog @class={{this.robotMood}}>
         {{#each @challenge.instructions as |instruction index|}}
           <DelayedElement @shouldDisplayIn={{this.bubbleDisplayDelay index}}>
@@ -173,6 +173,6 @@ export default class Challenge extends Component {
           @isDisabled={{this.hasBeenAnswered}}
         />
       </DelayedElement>
-    </ChallengeWrapper>
+    </ChallengeLayout>
   </template>
 }

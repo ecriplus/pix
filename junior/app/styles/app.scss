@@ -13,10 +13,10 @@
 // Components
 @import 'components/challenge/challenge-actions';
 @import 'components/challenge/challenge-embed-simulator';
-@import 'components/challenge/challenge-item';
-@import 'components/challenge/challenge-item-proposals';
-@import 'components/challenge/challenge-media';
-@import 'components/challenge/challenge-wrapper';
+@import 'components/challenge/challenge-content';
+@import 'components/challenge/challenge-content-proposals';
+@import 'components/challenge/content/challenge-media';
+@import 'components/challenge/challenge-layout';
 @import 'components/delayed-element';
 @import 'components/mission-card/card';
 @import 'components/bubble';

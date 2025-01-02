@@ -1,7 +1,8 @@
-import {render} from '@1024pix/ember-testing-library';
+import { render } from '@1024pix/ember-testing-library';
 import RobotDialog from 'junior/components/robot-dialog';
-import {setupRenderingTest} from '../helpers';
-import {module, test} from 'qunit';
+import { module, test } from 'qunit';
+
+import { setupRenderingTest } from '../helpers';
 
 module('Integration | Component | Robot-dialog', function (hooks) {
   setupRenderingTest(hooks);

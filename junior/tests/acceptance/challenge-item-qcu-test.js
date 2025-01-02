@@ -17,7 +17,7 @@ module('Acceptance | Displaying a QCU challenge', function (hooks) {
     // when
     const screen = await visit(`/assessments/${assessment.id}/challenges`);
     // then
-    assert.dom('.challenge-item-proposals__qcu-radios').exists({ count: 1 });
+    assert.dom('.challenge-content-proposals__qcu-radios').exists({ count: 1 });
     assert.dom(screen.getByText('Sélectionne la bonne réponse.')).exists();
   });
 

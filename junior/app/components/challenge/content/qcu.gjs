@@ -9,9 +9,9 @@ import proposalsAsArray from 'junior/utils/proposals-as-array';
 import { pshuffle } from 'junior/utils/pshuffle';
 import valueAsArrayOfBoolean from 'junior/utils/value-as-array-of-boolean';
 
-import MarkdownToHtml from '../markdown-to-html';
+import MarkdownToHtml from '../../markdown-to-html';
 
-export default class QcuProposals extends Component {
+export default class Qcu extends Component {
   get labeledRadios() {
     const arrayOfProposals = proposalsAsArray(this.args.challenge.proposals);
     const labeledCheckboxesList = labeledCheckboxes(arrayOfProposals, valueAsArrayOfBoolean());
@@ -36,8 +36,8 @@ export default class QcuProposals extends Component {
     this.args.setAnswerValue(checkedInputValues.join(''));
   }
   <template>
-    <div class="challenge-item-proposals__qcu-radios">
-      <p class="challenge-item-proposals__qcu-radios__hint">{{t "pages.challenge.qcu-hint"}}</p>
+    <div class="challenge-content-proposals__qcu-radios">
+      <p class="challenge-content-proposals__qcu-radios__hint">{{t "pages.challenge.qcu-hint"}}</p>
       {{#each this.labeledRadios as |labeledRadio|}}
         <PixRadioButton
           name="radio"

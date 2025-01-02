@@ -1,10 +1,11 @@
-import {render} from '@1024pix/ember-testing-library';
+import { render } from '@1024pix/ember-testing-library';
 import Bubble from 'junior/components/bubble';
-import {setupRenderingTest} from '../helpers';
-import {module, test} from 'qunit';
+import { module, test } from 'qunit';
+
+import { setupIntlRenderingTest } from '../helpers';
 
 module('Integration | Component | Bubble', function (hooks) {
-  setupRenderingTest(hooks);
+  setupIntlRenderingTest(hooks);
 
   test('displays message in a bubble', async function (assert) {
     const screen = await render(<template><Bubble @message="Bim" /></template>);

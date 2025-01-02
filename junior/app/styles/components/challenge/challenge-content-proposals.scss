@@ -1,4 +1,4 @@
-.challenge-item-proposals {
+.challenge-content-proposals {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,12 +10,12 @@
     display: inline;
   }
 
-  &__response{
-    &--short-text, &--number{
+  &__response {
+    &--short-text, &--number {
       width: 50%;
     }
 
-    &--paragraph{
+    &--paragraph {
       max-width: 100%;
     }
 
@@ -27,7 +27,7 @@
     }
   }
 
-  &__qcm-checkboxes, &__qcu-radios{
+  &__qcm-checkboxes, &__qcu-radios {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -71,13 +71,13 @@
   }
 
   .pix-checkbox__input:hover:checked {
-      background-color: var(--pix-primary-500);
+    background-color: var(--pix-primary-500);
   }
 
   input {
     width: 18px;
     height: 18px;
-    margin-left:20px;
+    margin-left: 20px;
     border: 1.5px solid var(--pix-neutral-100);
 
     &[type="checkbox"] {
@@ -103,9 +103,9 @@
   }
 }
 
-.pix-checkbox.pix1d-checkbox--disabled, .pix-radio-button.pix1d-radio--disabled  {
+.pix-checkbox.pix1d-checkbox--disabled, .pix-radio-button.pix1d-radio--disabled {
   .pix-label--inline-label {
-    &:hover{
+    &:hover {
       background-color: var(--pix-neutral-50);
       cursor: not-allowed;
     }
@@ -119,7 +119,7 @@
     border-color: var(--pix-primary-500);
     border-width: 2px;
 
-    &:hover{
+    &:hover {
       background-color: var(--pix-primary-50);
       cursor: not-allowed;
     }

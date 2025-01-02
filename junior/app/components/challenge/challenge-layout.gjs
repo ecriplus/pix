@@ -1,5 +1,5 @@
 <template>
-  <div class="challenge-wrapper">
+  <div class="challenge-layout">
     <div class="container">
       {{yield}}
     </div>

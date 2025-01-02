@@ -13,51 +13,51 @@ module('Integration | Component | challenge item', function (hooks) {
     const challenge = { hasValidEmbedDocument: true, autoReply: true };
     await render(<template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>);
 
-    assert.dom('.challenge-item__embed').exists();
-    assert.dom('.challenge-item__web-component').doesNotExist();
+    assert.dom('.challenge-content__embed').exists();
+    assert.dom('.challenge-content__web-component').doesNotExist();
   });
 
   test('displays web component', async function (assert) {
     const challenge = { hasWebComponent: true };
     await render(<template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>);
 
-    assert.dom('.challenge-item__web-component').exists();
-    assert.dom('.challenge-item__embed').doesNotExist();
+    assert.dom('.challenge-content__web-component').exists();
+    assert.dom('.challenge-content__embed').doesNotExist();
   });
 
   test('displays image', async function (assert) {
     const challenge = { hasValidEmbedDocument: false, autoReply: false, illustrationUrl: 'https://pix.fr' };
     await render(<template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>);
 
-    assert.dom('.challenge-item__image').exists();
+    assert.dom('.challenge-content__image').exists();
   });
 
   test('displays qroc', async function (assert) {
     const challenge = { hasValidEmbedDocument: false, autoReply: false, isQROC: true, proposals: 'number' };
     await render(<template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>);
 
-    assert.dom('.challenge-item__qrocm').exists();
+    assert.dom('.challenge-content__qrocm').exists();
   });
 
   test('displays qrocm', async function (assert) {
     const challenge = { hasValidEmbedDocument: false, autoReply: false, isQROCM: true, proposals: 'number' };
     await render(<template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>);
 
-    assert.dom('.challenge-item__qrocm').exists();
+    assert.dom('.challenge-content__qrocm').exists();
   });
 
   test('displays qcu', async function (assert) {
     const challenge = { hasValidEmbedDocument: false, autoReply: false, isQCU: true };
     await render(<template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>);
 
-    assert.dom('.challenge-item__qcu').exists();
+    assert.dom('.challenge-content__qcu').exists();
   });
 
   test('displays qcm', async function (assert) {
     const challenge = { hasValidEmbedDocument: false, autoReply: false, isQCM: true };
     await render(<template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>);
 
-    assert.dom('.challenge-item__qcm').exists();
+    assert.dom('.challenge-content__qcm').exists();
   });
 
   test('displays image, embed and qroc', async function (assert) {
@@ -71,9 +71,9 @@ module('Integration | Component | challenge item', function (hooks) {
 
     await render(<template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>);
 
-    assert.dom('.challenge-item__image').exists();
-    assert.dom('.challenge-item__embed').exists();
-    assert.dom('.challenge-item__qrocm').exists();
+    assert.dom('.challenge-content__image').exists();
+    assert.dom('.challenge-content__embed').exists();
+    assert.dom('.challenge-content__qrocm').exists();
   });
 
   test('displays lesson', async function (assert) {

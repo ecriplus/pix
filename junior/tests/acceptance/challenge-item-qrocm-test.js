@@ -18,7 +18,7 @@ module('Acceptance | Displaying a QROCM challenge', function (hooks) {
     // when
     const screen = await visit(`/assessments/${assessment.id}/challenges`);
     // then
-    assert.dom('.challenge-item-proposals__response').exists({ count: 2 });
+    assert.dom('.challenge-content-proposals__response').exists({ count: 2 });
     assert.dom(screen.getByText('Trouve les bonnes réponses.')).exists();
   });
 

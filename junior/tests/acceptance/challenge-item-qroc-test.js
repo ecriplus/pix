@@ -17,9 +17,8 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
     test('should render challenge information and question', async function (assert) {
       // when
       const screen = await visit(`/assessments/${assessment.id}/challenges`);
-      debugger;
       // then
-      assert.dom('.challenge-item-proposals__response').exists({ count: 1 });
+      assert.dom('.challenge-content-proposals__response').exists({ count: 1 });
       assert.dom(screen.getByText('Rue de :')).exists();
     });
 
@@ -114,7 +113,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
       // when
       const screen = await visit(`/assessments/${assessment.id}/challenges`);
       // then
-      assert.dom('.challenge-item-proposals__response').exists({ count: 1 });
+      assert.dom('.challenge-content-proposals__response').exists({ count: 1 });
       assert.dom(screen.getByText('Rue de :')).exists();
     });
 
@@ -158,7 +157,7 @@ module('Acceptance | Displaying a QROC challenge', function (hooks) {
       const screen = await visit(`/assessments/${assessment.id}/challenges`);
 
       // then
-      assert.dom('.challenge-item-proposals__response').exists({ count: 1 });
+      assert.dom('.challenge-content-proposals__response').exists({ count: 1 });
       assert.dom(screen.getByText('Select:')).exists();
     });
 
