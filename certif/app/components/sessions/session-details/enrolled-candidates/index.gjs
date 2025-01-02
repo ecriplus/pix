@@ -11,7 +11,6 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
-import { or } from 'ember-truth-helpers';
 import get from 'lodash/get';
 import toNumber from 'lodash/toNumber';
 import { SUBSCRIPTION_TYPES } from 'pix-certif/models/subscription';
@@ -29,7 +28,6 @@ export default class EnrolledCandidates extends Component {
   @service currentUser;
   @service pixToast;
   @service featureToggles;
-  @tracked candidatesInStaging = [];
   @tracked newCandidate = {};
   @tracked shouldDisplayCertificationCandidateModal = false;
   @tracked shouldDisplayEditCertificationCandidateModal = false;
@@ -100,15 +98,9 @@ export default class EnrolledCandidates extends Component {
     certificationCandidate.extraTimePercentage = this._fromPercentageStringToDecimal(candidate.extraTimePercentage);
     const success = await this.saveCertificationCandidate(certificationCandidate);
     if (success) {
-      this.candidatesInStaging.removeObject(candidate);
       this.closeNewCandidateModal();
     }
     return success;
-  }
-
-  @action
-  removeCertificationCandidateFromStaging(candidate) {
-    this.candidatesInStaging.removeObject(candidate);
   }
 
   @action
@@ -348,7 +340,7 @@ export default class EnrolledCandidates extends Component {
         {{/if}}
       </div>
       <div class='table content-text--small certification-candidates-table'>
-        {{#if (or @certificationCandidates this.candidatesInStaging)}}
+        {{#if @certificationCandidates}}
           <table>
             <caption class='screen-reader-only'>
               {{#if @shouldDisplayPrescriptionScoStudentRegistrationFeature}}

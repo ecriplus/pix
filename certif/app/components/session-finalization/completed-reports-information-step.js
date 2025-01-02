@@ -17,7 +17,7 @@ export default class CompletedReportsInformationStep extends Component {
   }
 
   get hasCheckedSomething() {
-    const hasOneOrMoreCheck = this.args.certificationReports.any((report) => report.hasSeenEndTestScreen);
+    const hasOneOrMoreCheck = this.args.certificationReports.some((report) => report.hasSeenEndTestScreen);
     return this.certificationReportsAreNotEmpty && hasOneOrMoreCheck;
   }
 
