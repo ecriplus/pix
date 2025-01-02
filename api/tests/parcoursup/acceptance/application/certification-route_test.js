@@ -17,7 +17,7 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
     server = await createServer();
   });
 
-  describe('GET /api/parcoursup/students/{ine}/certification', function () {
+  describe('GET /api/parcoursup/certification/search', function () {
     it('should return 200 HTTP status code and a certification for a given INE', async function () {
       // given
       const ine = '123456789OK';
@@ -45,7 +45,7 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
 
       const options = {
         method: 'GET',
-        url: `/api/parcoursup/students/${ine}/certification`,
+        url: `/api/parcoursup/certification/search?ine=${ine}`,
         headers: {
           authorization: generateValidRequestAuthorizationHeaderForApplication(
             PARCOURSUP_CLIENT_ID,
