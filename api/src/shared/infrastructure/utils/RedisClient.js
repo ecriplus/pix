@@ -13,7 +13,7 @@ class RedisClient {
 
     this._client.on('connect', () => logger.info({ redisClient: this._clientName }, 'Connected to server'));
     this._client.on('end', () => logger.info({ redisClient: this._clientName }, 'Disconnected from server'));
-    this._client.on('error', (err) => logger.warn({ redisClient: this._clientName, err }, 'Error encountered'));
+    this._client.on('error', (err) => logger.error({ redisClient: this._clientName, err }, 'Error encountered'));
 
     this._clientWithLock = new Redlock(
       [this._client],
