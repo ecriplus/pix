@@ -63,7 +63,7 @@
     "@ember/test-helpers": "^3.3.1",
     "@embroider/compat": "^3.7.1",
     "@embroider/core": "^3.4.20",
-    "@embroider/macros": "^1.13.3",
+    "@embroider/macros": "^1.16.10",
     "@embroider/webpack": "^4.0.0",
     "@formatjs/intl": "^2.10.4",
     "@glimmer/component": "^1.1.2",
