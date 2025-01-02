@@ -14,6 +14,7 @@ import {
 import * as csvSerializer from '../../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import { CampaignAssessmentResultLine } from '../../infrastructure/exports/campaigns/campaign-assessment-result-line.js';
+import { CampaignAssessmentExport } from '../../infrastructure/serializers/csv/campaign-assessment-export.js';
 
 /**
  * @typedef {import ('./index.js').CampaignRepository} CampaignRepository
@@ -83,16 +84,16 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
   }
 
   // Create HEADER of CSV
-  const headers = _createHeaderOfCSV({
-    targetProfile,
-    idPixLabel: campaign.idPixLabel,
+  const headers = new CampaignAssessmentExport({
+    outputStream: writableStream,
     organization,
-    translate,
+    targetProfile,
     learningContent: campaignLearningContent,
     stageCollection,
     additionalHeaders,
   });
 
+  headers.export();
   // WHY: add \uFEFF the UTF-8 BOM at the start of the text, see:
   // - https://en.wikipedia.org/wiki/Byte_order_mark
   // - https://stackoverflow.com/a/38192870
@@ -206,60 +207,3 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
 };
 
 export { startWritingCampaignAssessmentResultsToStream };
-
-function _createHeaderOfCSV({
-  targetProfile,
-  idPixLabel,
-  organization,
-  translate,
-  learningContent,
-  stageCollection,
-  additionalHeaders,
-}) {
-  const forSupStudents = organization.isSup && organization.isManagingStudents;
-  const displayDivision = organization.isSco && organization.isManagingStudents;
-
-  const extraHeaders = additionalHeaders.map((header) => header.columnName);
-
-  return [
-    translate('campaign-export.common.organization-name'),
-    translate('campaign-export.common.campaign-id'),
-    translate('campaign-export.common.campaign-code'),
-    translate('campaign-export.common.campaign-name'),
-    translate('campaign-export.assessment.target-profile-name'),
-    translate('campaign-export.common.participant-lastname'),
-    translate('campaign-export.common.participant-firstname'),
-    ...extraHeaders,
-    ...(displayDivision ? [translate('campaign-export.common.participant-division')] : []),
-    ...(forSupStudents ? [translate('campaign-export.common.participant-group')] : []),
-    ...(forSupStudents ? [translate('campaign-export.common.participant-student-number')] : []),
-    ...(idPixLabel ? [idPixLabel] : []),
-
-    translate('campaign-export.assessment.progress'),
-    translate('campaign-export.assessment.started-on'),
-    translate('campaign-export.assessment.is-shared'),
-    translate('campaign-export.assessment.shared-on'),
-    ...(stageCollection.hasStage
-      ? [translate('campaign-export.assessment.success-rate', { value: stageCollection.totalStages - 1 })]
-      : []),
-
-    ..._.flatMap(targetProfile.badges, (badge) => [
-      translate('campaign-export.assessment.thematic-result-name', { name: badge.title }),
-    ]),
-    translate('campaign-export.assessment.mastery-percentage-target-profile'),
-
-    ..._.flatMap(learningContent.competences, (competence) => [
-      translate('campaign-export.assessment.skill.mastery-percentage', { name: competence.name }),
-      translate('campaign-export.assessment.skill.total-items', { name: competence.name }),
-      translate('campaign-export.assessment.skill.items-successfully-completed', { name: competence.name }),
-    ]),
-
-    ..._.flatMap(learningContent.areas, (area) => [
-      translate('campaign-export.assessment.competence-area.mastery-percentage', { name: area.title }),
-      translate('campaign-export.assessment.competence-area.total-items', { name: area.title }),
-      translate('campaign-export.assessment.competence-area.items-successfully-completed', { name: area.title }),
-    ]),
-
-    ...(organization.showSkills ? learningContent.skillNames : []),
-  ];
-}
