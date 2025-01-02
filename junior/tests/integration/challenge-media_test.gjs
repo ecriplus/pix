@@ -1,7 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import { triggerEvent } from '@ember/test-helpers';
 import ChallengeMedia from 'junior/components/challenge/challenge-media';
-import { setupRenderingTest } from 'junior/helpers/tests';
+import { setupRenderingTest } from '../helpers';
 import { module, test } from 'qunit';
 
 module('Integration | Component | ChallengeMedia', function (hooks) {

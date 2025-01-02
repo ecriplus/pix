@@ -1,9 +1,15 @@
+import PixRadioButton from '@1024pix/pix-ui/components/pix-radio-button';
+import { fn } from '@ember/helper';
+import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 import labeledCheckboxes from 'junior/utils/labeled-checkboxes';
 import proposalsAsArray from 'junior/utils/proposals-as-array';
 import { pshuffle } from 'junior/utils/pshuffle';
 import valueAsArrayOfBoolean from 'junior/utils/value-as-array-of-boolean';
+
+import MarkdownToHtml from '../markdown-to-html';
 
 export default class QcuProposals extends Component {
   get labeledRadios() {
@@ -29,4 +35,25 @@ export default class QcuProposals extends Component {
     });
     this.args.setAnswerValue(checkedInputValues.join(''));
   }
+  <template>
+    <div class="challenge-item-proposals__qcu-radios">
+      <p class="challenge-item-proposals__qcu-radios__hint">{{t "pages.challenge.qcu-hint"}}</p>
+      {{#each this.labeledRadios as |labeledRadio|}}
+        <PixRadioButton
+          name="radio"
+          @value={{labeledRadio.value}}
+          disabled={{@isDisabled}}
+          checked={{labeledRadio.checked}}
+          {{on "click" (fn this.radioClicked labeledRadio.value)}}
+          data-value="{{labeledRadio.value}}"
+          @class="pix1d-radio {{if @isDisabled 'pix1d-radio--disabled'}}"
+          data-test="challenge-response-proposal-selector"
+        >
+          <:label>
+            <MarkdownToHtml @class="qcu-panel__text proposal-text" @markdown={{labeledRadio.label}} />
+          </:label>
+        </PixRadioButton>
+      {{/each}}
+    </div>
+  </template>
 }

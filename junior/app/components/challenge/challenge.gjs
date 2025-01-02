@@ -2,8 +2,15 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
+import { pageTitle } from 'ember-page-title';
 import ENV from 'junior/config/environment';
 
+import Bubble from '../bubble';
+import DelayedElement from '../delayed-element';
+import RobotDialog from '../robot-dialog';
+import ChallengeContent from './challenge-content';
+import ChallengeWrapper from './challenge-wrapper';
 const CHALLENGE_DISPLAY_DELAY = ENV.APP.CHALLENGE_DISPLAY_DELAY;
 
 export default class Challenge extends Component {
@@ -130,4 +137,42 @@ export default class Challenge extends Component {
     this.answer = null;
     this.router.replaceWith('assessment.resume');
   }
+
+  <template>
+    {{pageTitle (t "pages.challenge.title")}}
+    <ChallengeWrapper>
+      <RobotDialog @class={{this.robotMood}}>
+        {{#each @challenge.instructions as |instruction index|}}
+          <DelayedElement @shouldDisplayIn={{this.bubbleDisplayDelay index}}>
+            <Bubble @message={{instruction}} @oralization={{@oralization}} />
+          </DelayedElement>
+        {{/each}}
+
+        {{#if this.robotFeedback.message}}
+          <Bubble
+            @message={{this.robotFeedback.message}}
+            @status={{this.robotFeedback.status}}
+            @oralization={{@oralization}}
+            aria-live="polite"
+          />
+        {{/if}}
+      </RobotDialog>
+      <DelayedElement @shouldDisplayIn={{this.challengeItemDisplayDelay}}>
+        <ChallengeContent
+          @setAnswerValue={{this.setAnswerValue}}
+          @setValidationWarning={{this.setValidationWarning}}
+          @validateAnswer={{this.validateAnswer}}
+          @skipChallenge={{this.skipChallenge}}
+          @challenge={{@challenge}}
+          @assessment={{@assessment}}
+          @disableCheckButton={{this.disableCheckButton}}
+          @disableLessonButton={{this.disableLessonButton}}
+          @answerHasBeenValidated={{this.answerHasBeenValidated}}
+          @activity={{@activity}}
+          @resume={{this.resume}}
+          @isDisabled={{this.hasBeenAnswered}}
+        />
+      </DelayedElement>
+    </ChallengeWrapper>
+  </template>
 }

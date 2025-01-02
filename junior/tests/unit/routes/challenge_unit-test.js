@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import { setupTest } from '../../helpers/tests';
+import { setupTest } from '../../helpers';
 
 module('Unit | Route | AssessmentChallengeRoute', function (hooks) {
   setupTest(hooks);

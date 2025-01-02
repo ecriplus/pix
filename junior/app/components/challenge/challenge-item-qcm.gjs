@@ -1,10 +1,16 @@
+import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
+import { fn } from '@ember/helper';
+import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 import labeledCheckboxes from 'junior/utils/labeled-checkboxes';
 import proposalsAsArray from 'junior/utils/proposals-as-array';
 import { pshuffle } from 'junior/utils/pshuffle';
 import valueAsArrayOfBoolean from 'junior/utils/value-as-array-of-boolean';
+
+import MarkdownToHtml from '../markdown-to-html';
 
 export default class ChallengeItemQcm extends Component {
   @service intl;
@@ -45,4 +51,24 @@ export default class ChallengeItemQcm extends Component {
   _hasLessThanTwoValues() {
     return Array.from(this.checkedValues).length < 2;
   }
+
+  <template>
+    <div class="challenge-item-proposals__qcm-checkboxes">
+      <p class="challenge-item-proposals__qcm-checkboxes__hint">{{t "pages.challenge.qcm-hint"}}</p>
+      {{#each this.labeledCheckboxes as |labeledCheckbox|}}
+        <PixCheckbox
+          name="{{labeledCheckbox.value}}"
+          @class="pix1d-checkbox {{if @isDisabled 'pix1d-checkbox--disabled'}}"
+          disabled={{@isDisabled}}
+          checked={{labeledCheckbox.checked}}
+          {{on "click" (fn this.checkboxClicked labeledCheckbox.value)}}
+          data-test="challenge-response-proposal-selector"
+        >
+          <:label>
+            <MarkdownToHtml @class="proposal-text" @markdown={{labeledCheckbox.label}} />
+          </:label>
+        </PixCheckbox>
+      {{/each}}
+    </div>
+  </template>
 }
