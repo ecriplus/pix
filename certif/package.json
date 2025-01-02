@@ -117,7 +117,7 @@
     "p-queue": "^8.0.1",
     "prettier": "^3.4.2",
     "prettier-plugin-ember-template-tag": "^2.0.4",
-    "qunit": "^2.19.3",
+    "qunit": "^2.23.1",
     "qunit-dom": "^3.0.0",
     "sass": "^1.66.1",
     "sinon": "^19.0.0",
