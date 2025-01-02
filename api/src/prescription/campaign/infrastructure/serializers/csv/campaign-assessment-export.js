@@ -116,20 +116,6 @@ class CampaignAssessmentExport {
     return '\uFEFF' + csvSerializer.serializeLine(_.compact(headers));
   }
 
-  async _getUsersPlacementProfiles(campaignParticipationResultDataChunk, placementProfileService) {
-    const userIdsAndDates = campaignParticipationResultDataChunk.map(({ userId, sharedAt }) => {
-      return { userId, sharedAt };
-    });
-
-    const placementProfiles = await placementProfileService.getPlacementProfilesWithSnapshotting({
-      userIdsAndDates,
-      competences: this.competences,
-      allowExcessPixAndLevels: false,
-    });
-
-    return placementProfiles;
-  }
-
   #competenceColumnHeaders() {
     return _.flatMap(this.learningContent.competences, (competence) => [
       this.translate('campaign-export.assessment.skill.mastery-percentage', { name: competence.name }),
