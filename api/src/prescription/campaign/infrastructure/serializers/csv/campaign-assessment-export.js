@@ -1,6 +1,12 @@
 import _ from 'lodash';
 
+import {
+  CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING,
+  CONCURRENCY_HEAVY_OPERATIONS,
+} from '../../../../../shared/infrastructure/constants.js';
 import * as csvSerializer from '../../../../../shared/infrastructure/serializers/csv/csv-serializer.js';
+import { PromiseUtils } from '../../../../../shared/infrastructure/utils/promise-utils.js';
+import { CampaignAssessmentResultLine } from '../../exports/campaigns/campaign-assessment-result-line.js';
 
 class CampaignAssessmentExport {
   constructor({
@@ -10,7 +16,6 @@ class CampaignAssessmentExport {
     learningContent,
     stageCollection,
     campaign,
-    competences,
     translate,
     additionalHeaders = [],
   }) {
@@ -21,13 +26,47 @@ class CampaignAssessmentExport {
     this.learningContent = learningContent;
     this.stageCollection = stageCollection;
     this.idPixLabel = campaign.idPixLabel;
-    this.competences = competences;
+    this.competences = learningContent.competences;
     this.translate = translate;
     this.additionalHeaders = additionalHeaders;
   }
 
-  export() {
+  export(
+    campaignParticipationInfos,
+    knowledgeElementRepository,
+    badgeAcquisitionRepository,
+    knowledgeElementSnapshotRepository,
+    constants = {
+      CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING,
+      CONCURRENCY_HEAVY_OPERATIONS,
+    },
+  ) {
     this.stream.write(this.#buildHeader());
+    const campaignParticipationInfoChunks = _.chunk(
+      campaignParticipationInfos,
+      constants.CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING,
+    );
+    return PromiseUtils.map(
+      campaignParticipationInfoChunks,
+      async (campaignParticipationInfoChunk) => {
+        const sharedParticipations = campaignParticipationInfoChunk.filter(({ isShared }) => isShared);
+
+        const csvLines = await Promise.all(
+          campaignParticipationInfoChunk.map((campaignParticipationInfo) =>
+            this.#buildCSVLineForParticipation({
+              campaignParticipationInfo,
+              campaignParticipationInfoChunk,
+              knowledgeElementRepository,
+              badgeAcquisitionRepository,
+              knowledgeElementSnapshotRepository,
+              sharedParticipations,
+            }),
+          ),
+        );
+        this.stream.write(csvLines.join(''));
+      },
+      { concurrency: CONCURRENCY_HEAVY_OPERATIONS },
+    );
   }
 
   #buildHeader() {
@@ -105,6 +144,100 @@ class CampaignAssessmentExport {
       this.translate('campaign-export.assessment.competence-area.total-items', { name: area.title }),
       this.translate('campaign-export.assessment.competence-area.items-successfully-completed', { name: area.title }),
     ]);
+  }
+
+  async #buildCSVLineForParticipation({
+    campaignParticipationInfo,
+    campaignParticipationInfoChunk,
+    knowledgeElementRepository,
+    badgeAcquisitionRepository,
+    knowledgeElementSnapshotRepository,
+    sharedParticipations,
+  }) {
+    return new CampaignAssessmentResultLine({
+      organization: this.organization,
+      campaign: this.campaign,
+      campaignParticipationInfo,
+      targetProfile: this.targetProfile,
+      additionalHeaders: this.additionalHeaders,
+      learningContent: this.learningContent,
+      stageCollection: this.stageCollection,
+      participantKnowledgeElementsByCompetenceId: await this.#getParticipantKnowledgeElementsByCompetenceId({
+        campaignParticipationInfo,
+        campaignParticipationInfoChunk,
+        knowledgeElementRepository,
+        knowledgeElementSnapshotRepository,
+        sharedParticipations,
+      }),
+      acquiredBadges: await this.#getAcquiredBadgesByCampaignParticipations({
+        campaignParticipationInfoChunk,
+        badgeAcquisitionRepository,
+      }),
+      translate: this.translate,
+    }).toCsvLine();
+  }
+
+  async #getParticipantKnowledgeElementsByCompetenceId({
+    campaignParticipationInfo,
+    campaignParticipationInfoChunk,
+    knowledgeElementRepository,
+    knowledgeElementSnapshotRepository,
+    sharedParticipations,
+  }) {
+    let participantKnowledgeElementsByCompetenceId = [];
+    if (campaignParticipationInfo.isShared) {
+      const sharedKnowledgeElementsByUserIdAndCompetenceId =
+        await knowledgeElementSnapshotRepository.findMultipleUsersFromUserIdsAndSnappedAtDates(
+          sharedParticipations.map(({ userId, sharedAt }) => ({ userId, sharedAt })),
+        );
+      const sharedResultInfo = sharedKnowledgeElementsByUserIdAndCompetenceId.find(
+        (knowledElementForSharedParticipation) => {
+          const sameUserId = campaignParticipationInfo.userId === knowledElementForSharedParticipation.userId;
+          const sameDate =
+            campaignParticipationInfo.sharedAt &&
+            campaignParticipationInfo.sharedAt.getTime() === knowledElementForSharedParticipation.snappedAt.getTime();
+
+          return sameUserId && sameDate;
+        },
+      );
+
+      participantKnowledgeElementsByCompetenceId = this.learningContent.getKnowledgeElementsGroupedByCompetence(
+        sharedResultInfo.knowledgeElements,
+      );
+    } else if (campaignParticipationInfo.isCompleted === false) {
+      const startedParticipations = campaignParticipationInfoChunk.filter(
+        ({ isShared, isCompleted }) => !isShared && !isCompleted,
+      );
+
+      const othersKnowledgeElementsByUserIdAndCompetenceId = await knowledgeElementRepository.findUniqByUserIds(
+        startedParticipations.map(({ userId }) => userId),
+      );
+      const othersResultInfo = othersKnowledgeElementsByUserIdAndCompetenceId.find(
+        (knowledElementForOtherParticipation) =>
+          campaignParticipationInfo.userId === knowledElementForOtherParticipation.userId,
+      );
+      participantKnowledgeElementsByCompetenceId = this.learningContent.getKnowledgeElementsGroupedByCompetence(
+        othersResultInfo.knowledgeElements,
+      );
+    }
+    return participantKnowledgeElementsByCompetenceId;
+  }
+
+  async #getAcquiredBadgesByCampaignParticipations({ campaignParticipationInfoChunk, badgeAcquisitionRepository }) {
+    let acquiredBadgesByCampaignParticipations = null;
+
+    const campaignParticipationsIds = campaignParticipationInfoChunk.map((info) => info.campaignParticipationId);
+
+    if (this.targetProfile.hasBadges) {
+      acquiredBadgesByCampaignParticipations =
+        await badgeAcquisitionRepository.getAcquiredBadgesByCampaignParticipations({
+          campaignParticipationsIds,
+        });
+    }
+
+    return {
+      acquiredBadgesByCampaignParticipations,
+    };
   }
 }
 

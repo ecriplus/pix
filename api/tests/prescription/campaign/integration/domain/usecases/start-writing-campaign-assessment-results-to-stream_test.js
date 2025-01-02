@@ -98,23 +98,6 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           userId: participant.id,
         });
 
-        campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
-          campaignId: campaign.id,
-          organizationLearnerId: organizationLearner.id,
-          userId: participant.id,
-          participantExternalId: 'toto',
-          masteryRate: 0.67,
-          createdAt,
-          sharedAt,
-        });
-
-        databaseBuilder.factory.buildAssessment({
-          campaignParticipationId: campaignParticipation.id,
-          userId: participant.id,
-          state: Assessment.states.COMPLETED,
-          type: Assessment.types.CAMPAIGN,
-        });
-
         const ke1 = databaseBuilder.factory.buildKnowledgeElement({
           status: 'validated',
           skillId: 'recSkillWeb1',
@@ -122,27 +105,14 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           userId: participant.id,
           createdAt,
         });
-        const ke2 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'validated',
-          skillId: 'recSkillWeb2',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
-        const ke3 = databaseBuilder.factory.buildKnowledgeElement({
-          status: 'invalidated',
-          skillId: 'recSkillWeb3',
-          competenceId: 'recCompetence1',
-          userId: participant.id,
-          createdAt,
-        });
+
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: participant.id,
           snappedAt: sharedAt,
-          snapshot: JSON.stringify([ke1, ke2, ke3]),
+          snapshot: JSON.stringify([ke1]),
         });
 
-        ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
+        ['recSkillWeb1'].forEach((skillId) => {
           databaseBuilder.factory.buildCampaignSkill({
             campaignId: campaign.id,
             skillId: skillId,
