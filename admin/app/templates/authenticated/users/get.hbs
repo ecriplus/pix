@@ -20,6 +20,7 @@
 
     <LinkTo @route="authenticated.users.get.authentication-methods" @model={{@model}} class="navbar-item">
       {{t "pages.user-details.navbar.authentication-methods"}}
+      ({{@model.authenticationMethodCount}})
     </LinkTo>
 
     <LinkTo @route="authenticated.users.get.profile" @model={{@model}} class="navbar-item">

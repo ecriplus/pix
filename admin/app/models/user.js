@@ -51,4 +51,7 @@ export default class User extends Model {
   get participationCount() {
     return this.participations.length;
   }
+  get authenticationMethodCount() {
+    return this.username && this.email ? this.authenticationMethods.length + 1 : this.authenticationMethods.length;
+  }
 }
