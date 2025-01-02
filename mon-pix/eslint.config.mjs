@@ -1,13 +1,13 @@
-const emberRecommendedConfig = require('eslint-plugin-ember/configs/recommended');
-const emberGjsRecommendedConfig = require('eslint-plugin-ember/configs/recommended-gjs');
-const qunitRecommendedConfig = require('eslint-plugin-qunit/configs/recommended');
-const prettierRecommendedConfig = require('eslint-plugin-prettier/recommended');
-const nRecommendedConfig = require('eslint-plugin-n').configs['flat/recommended'];
-const pixRecommendedConfig = require('@1024pix/eslint-plugin/config');
-const globals = require('globals');
-const babelParser = require('@babel/eslint-parser');
-const emberParser = require('ember-eslint-parser');
-const i18nJsonPlugin = require('eslint-plugin-i18n-json');
+import pixRecommendedConfig from '@1024pix/eslint-plugin/config';
+import babelParser from '@babel/eslint-parser';
+import emberParser from 'ember-eslint-parser';
+import emberRecommendedConfig from 'eslint-plugin-ember/configs/recommended';
+import emberGjsRecommendedConfig from 'eslint-plugin-ember/configs/recommended-gjs';
+import i18nJsonPlugin from 'eslint-plugin-i18n-json';
+import nRecommendedConfig from 'eslint-plugin-n';
+import prettierRecommendedConfig from 'eslint-plugin-prettier/recommended';
+import qunitRecommendedConfig from 'eslint-plugin-qunit/configs/recommended';
+import globals from 'globals';
 
 const unconventionalJsFiles = ['blueprints/**/files/*', 'app/vendor/*'];
 const compiledOutputFiles = ['dist/*', 'tmp/*'];
@@ -37,7 +37,7 @@ const emberPatchedParser = Object.assign(
   emberParser,
 );
 
-module.exports = [
+export default [
   ...pixRecommendedConfig,
   ...emberRecommendedConfig,
   ...emberGjsRecommendedConfig,
@@ -50,16 +50,16 @@ module.exports = [
     languageOptions: {
       globals: {
         ...globals.browser,
+        ...globals.node,
       },
-
       parser: babelParser,
-      ecmaVersion: 2018,
-      sourceType: 'module',
-
       parserOptions: {
+        ecmaVersion: 2018,
+        sourceType: 'module',
         requireConfigFile: false,
-
         babelOptions: {
+          configFile: false,
+          babelrc: false,
           plugins: [
             [
               '@babel/plugin-proposal-decorators',
@@ -113,7 +113,7 @@ module.exports = [
     },
   },
   {
-    ...nRecommendedConfig,
+    ...nRecommendedConfig.configs['flat/recommended'],
     files: nodeFiles,
 
     languageOptions: {
