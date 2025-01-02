@@ -80,11 +80,9 @@
     }
 
     h2 {
+      @extend %pix-title-s;
+
       margin-bottom: 14px;
-      font-weight: var(--pix-font-medium);
-      font-size: 1.125rem;
-      font-family: $font-open-sans;
-      line-height: 1.875rem;
       letter-spacing: 0;
 
       @include device-is('tablet') {
@@ -94,10 +92,9 @@
     }
 
     p {
+      @extend %pix-body-s;
+
       margin: 0;
-      font-weight: var(--pix-font-normal);
-      font-size: 0.875rem;
-      line-height: 1.375rem;
       letter-spacing: 0.009rem;
     }
   }

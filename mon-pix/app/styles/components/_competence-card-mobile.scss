@@ -78,13 +78,11 @@
 }
 
 .competence-card__competence-name {
+  @extend %pix-body-l;
+
   position: relative;
-  color: inherit;
-  font-weight: var(--pix-font-medium);
-  font-size: 1.125rem;
-  font-family: inherit;
-  line-height: inherit;
-  letter-spacing: inherit;
+  color: var(--pix-neutral-0);
+  font-weight: var(--pix-font-bold);
 }
 
 .competence-card__body {
