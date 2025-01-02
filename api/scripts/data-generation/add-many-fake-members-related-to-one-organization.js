@@ -51,7 +51,7 @@ async function addManyMembersToExistingOrganization({ numberOfUsers }) {
 
   try {
     await knex.batchInsert('users', manyUsers).transacting(DomainTransaction.emptyTransaction().knexTransaction);
-  } catch (err) {
+  } catch {
     throw new UserCantBeCreatedError();
   }
 
@@ -61,7 +61,7 @@ async function addManyMembersToExistingOrganization({ numberOfUsers }) {
     await knex
       .batchInsert('memberships', manyMemberShips)
       .transacting(DomainTransaction.emptyTransaction().knexTransaction);
-  } catch (err) {
+  } catch {
     throw new MembershipUpdateError();
   }
 }

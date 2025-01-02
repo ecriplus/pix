@@ -125,7 +125,7 @@ async function checkAdminMemberHasRoleSuperAdmin(
       throw new ForbiddenAccess(PIX_ADMIN.NOT_ALLOWED_MSG);
     }
     return h.response(true);
-  } catch (e) {
+  } catch {
     return _replyForbiddenError(h);
   }
 }
@@ -143,7 +143,7 @@ async function checkAdminMemberHasRoleCertif(request, h, dependencies = { checkA
       throw new ForbiddenAccess(PIX_ADMIN.NOT_ALLOWED_MSG);
     }
     return h.response(true);
-  } catch (e) {
+  } catch {
     return _replyForbiddenError(h);
   }
 }
@@ -161,7 +161,7 @@ async function checkAdminMemberHasRoleSupport(request, h, dependencies = { check
       throw new ForbiddenAccess(PIX_ADMIN.NOT_ALLOWED_MSG);
     }
     return h.response(true);
-  } catch (e) {
+  } catch {
     return _replyForbiddenError(h);
   }
 }
@@ -179,7 +179,7 @@ async function checkAdminMemberHasRoleMetier(request, h, dependencies = { checkA
       throw new ForbiddenAccess(PIX_ADMIN.NOT_ALLOWED_MSG);
     }
     return h.response(true);
-  } catch (e) {
+  } catch {
     return _replyForbiddenError(h);
   }
 }
@@ -349,7 +349,7 @@ async function checkUserIsMemberOfCertificationCenterSessionFromCertificationIss
       certificationCourseId: certificationIssueReport.certificationCourseId,
     });
     return isMemberOfSession ? h.response(true) : _replyForbiddenError(h);
-  } catch (e) {
+  } catch {
     return _replyForbiddenError(h);
   }
 }
@@ -374,7 +374,7 @@ async function checkUserIsMemberOfCertificationCenterSessionFromCertificationCou
       certificationCourseId,
     });
     return isMemberOfSession ? h.response(true) : _replyForbiddenError(h);
-  } catch (e) {
+  } catch {
     return _replyForbiddenError(h);
   }
 }
@@ -395,7 +395,7 @@ async function checkUserBelongsToOrganizationManagingStudents(
     if (await dependencies.checkUserBelongsToOrganizationManagingStudentsUseCase.execute(userId, organizationId)) {
       return h.response(true);
     }
-  } catch (err) {
+  } catch {
     return _replyForbiddenError(h);
   }
   return _replyForbiddenError(h);
@@ -417,7 +417,7 @@ async function checkUserBelongsToScoOrganizationAndManagesStudents(
   try {
     belongsToScoOrganizationAndManageStudents =
       await dependencies.checkUserBelongsToScoOrganizationAndManagesStudentsUseCase.execute(userId, organizationId);
-  } catch (err) {
+  } catch {
     return _replyForbiddenError(h);
   }
 
@@ -510,7 +510,7 @@ async function checkUserBelongsToSupOrganizationAndManagesStudents(
   try {
     belongsToSupOrganizationAndManageStudents =
       await dependencies.checkUserBelongsToSupOrganizationAndManagesStudentsUseCase.execute(userId, organizationId);
-  } catch (err) {
+  } catch {
     return _replyForbiddenError(h);
   }
 
@@ -581,7 +581,7 @@ async function checkUserBelongsToLearnersOrganization(
       userId,
       organizationLearnerId,
     );
-  } catch (e) {
+  } catch {
     return _replyForbiddenError(h);
   }
   if (belongsToLearnersOrganization) {
@@ -622,7 +622,7 @@ async function checkUserIsMemberOfAnOrganization(
   let isMemberOfAnOrganization;
   try {
     isMemberOfAnOrganization = await dependencies.checkUserIsMemberOfAnOrganizationUseCase.execute(userId);
-  } catch (err) {
+  } catch {
     return _replyForbiddenError(h);
   }
 
@@ -705,7 +705,7 @@ async function checkUserOwnsCertificationCourse(
       certificationCourseId,
     });
     return ownsCertificationCourse ? h.response(true) : _replyForbiddenError(h);
-  } catch (e) {
+  } catch {
     return _replyForbiddenError(h);
   }
 }
@@ -734,7 +734,7 @@ async function checkUserCanDisableHisOrganizationMembership(
     }
 
     return _replyForbiddenError(h);
-  } catch (_) {
+  } catch {
     return _replyForbiddenError(h);
   }
 }
@@ -763,7 +763,7 @@ function makeCheckOrganizationHasFeature(featureKey) {
         featureKey,
       });
       return h.response(true);
-    } catch (e) {
+    } catch {
       return _replyForbiddenError(h);
     }
   };
@@ -778,7 +778,7 @@ async function checkOrganizationHasFeature(request, h, dependencies = { checkOrg
       featureKey,
     });
     return h.response(true);
-  } catch (e) {
+  } catch {
     return _replyForbiddenError(h);
   }
 }

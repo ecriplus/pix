@@ -73,7 +73,7 @@ async function _parseCsv(filePath, options) {
 async function readCsvFile(filePath) {
   try {
     await access(filePath, fs.constants.F_OK);
-  } catch (err) {
+  } catch {
     throw new NotFoundError(`Aucun fichier nommé ${filePath} n'a été trouvé !`);
   }
 

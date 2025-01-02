@@ -25,7 +25,7 @@ const optionsWithHeader = {
 async function readCsvFile(filePath) {
   try {
     await access(filePath, fs.constants.F_OK);
-  } catch (err) {
+  } catch {
     throw new NotFoundError(`File ${filePath} not found!`);
   }
 

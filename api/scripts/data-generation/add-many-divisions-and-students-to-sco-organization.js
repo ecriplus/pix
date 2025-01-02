@@ -46,7 +46,7 @@ async function addManyDivisionsAndStudentsToScoCertificationCenter(numberOfDivis
 
   try {
     await knex.batchInsert('organization-learners', manyStudents);
-  } catch (err) {
+  } catch {
     throw new OrganizationLearnersCouldNotBeSavedError();
   }
 }

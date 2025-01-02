@@ -6,7 +6,7 @@ const getCanonicalLocale = function (locale) {
 
   try {
     canonicalLocale = Intl.getCanonicalLocales(locale)[0];
-  } catch (error) {
+  } catch {
     throw new LocaleFormatError(locale);
   }
 

@@ -64,7 +64,7 @@ async function _buildOrganizationLearnerIdentities({
       hasScoGarIdentityProvider: organization.hasGarIdentityProvider,
       values: organizationLearnerIdentities,
     });
-  } catch (error) {
+  } catch {
     throw new UserNotAuthorizedToUpdatePasswordError(
       errorMessage,
       ORGANIZATION_LEARNER_DOES_NOT_BELONG_TO_ORGANIZATION_CODE,

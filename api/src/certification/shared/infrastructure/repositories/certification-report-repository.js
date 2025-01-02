@@ -51,7 +51,7 @@ export const findBySessionId = async ({ sessionId }) => {
 export const finalizeAll = async ({ certificationReports }) => {
   try {
     await Promise.all(certificationReports.map((certificationReport) => finalize(certificationReport)));
-  } catch (err) {
+  } catch {
     throw new CertificationCourseUpdateError('An error occurred while finalizing the session');
   }
 };

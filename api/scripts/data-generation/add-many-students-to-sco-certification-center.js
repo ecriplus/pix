@@ -28,7 +28,7 @@ async function addManyStudentsToScoCertificationCenter(numberOfStudents) {
     await knex
       .batchInsert('organization-learners', manyStudents)
       .transacting(DomainTransaction.emptyTransaction().knexTransaction);
-  } catch (err) {
+  } catch {
     throw new OrganizationLearnersCouldNotBeSavedError();
   }
 }

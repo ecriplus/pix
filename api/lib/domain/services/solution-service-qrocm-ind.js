@@ -92,7 +92,7 @@ function match({ answerValue, solution }) {
   try {
     answers = jsYaml.load(preTreatedAnswers, { schema: jsYaml.FAILSAFE_SCHEMA });
     solutions = jsYaml.load(preTreatedSolutions, { schema: jsYaml.FAILSAFE_SCHEMA });
-  } catch (error) {
+  } catch {
     throw new YamlParsingError();
   }
 

@@ -56,7 +56,7 @@ const update = async function (targetProfile) {
       .where({ id: targetProfile.id })
       .update(editedAttributes)
       .returning(['id', 'isSimplifiedAccess']);
-  } catch (error) {
+  } catch {
     throw new ObjectValidationError();
   }
 

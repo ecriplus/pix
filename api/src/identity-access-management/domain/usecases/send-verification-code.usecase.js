@@ -62,7 +62,7 @@ const sendVerificationCode = async function ({
       password,
       passwordHash,
     });
-  } catch (e) {
+  } catch {
     throw new InvalidPasswordForUpdateEmailError();
   }
 

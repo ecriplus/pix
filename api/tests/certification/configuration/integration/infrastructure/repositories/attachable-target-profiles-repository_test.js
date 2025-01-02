@@ -168,7 +168,6 @@ describe('Certification | Configuration | Integration | Repository | attachable-
 class TargetProfileFactory {
   #targetProfile;
   #badge;
-  #complementaryCertificationBadge;
 
   constructor(targetProfileOpts = {}) {
     const _targetProfileOpts = { outdated: false, ...targetProfileOpts };
@@ -195,9 +194,7 @@ class TargetProfileFactory {
       detachedAt: null,
       ...complementaryCertificationBadgeOpts,
     };
-    this.#complementaryCertificationBadge = databaseBuilder.factory.buildComplementaryCertificationBadge(
-      _complementaryCertificationBadgeOpts,
-    );
+    databaseBuilder.factory.buildComplementaryCertificationBadge(_complementaryCertificationBadgeOpts);
     return this;
   }
 }

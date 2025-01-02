@@ -59,7 +59,7 @@ const mapperFnc = (line) => {
       uncap: ouiNonToBoolean(line.uncap),
       multiformCap: ouiNonToBoolean(line.multiformCap),
     };
-  } catch (_e) {
+  } catch {
     logger.error(
       { targetProfileId: line.id, targetProfileName: line.name },
       "Erreur lors de la migration d'un profil cible: Ligne EXCEL incorrecte, valeur de cellule invalide",

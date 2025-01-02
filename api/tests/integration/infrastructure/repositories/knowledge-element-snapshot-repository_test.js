@@ -113,7 +113,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
             throw new Error();
           });
           // eslint-disable-next-line no-empty
-        } catch (error) {}
+        } catch {}
 
         const snapshots = await knex.select('*').from('knowledge-element-snapshots');
         expect(snapshots).to.be.empty;

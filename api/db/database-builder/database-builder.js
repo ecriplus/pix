@@ -27,7 +27,7 @@ class DatabaseBuilder {
 
     try {
       await databaseBuilder._init();
-    } catch (_) {
+    } catch {
       // Error thrown only with unit tests
     }
 

@@ -99,7 +99,7 @@ const addOrUpdateOrganizationOfOrganizationLearners = async function (organizati
       .insert(organizationLearnersToSave)
       .onConflict(knexConn.raw('("organizationId","nationalStudentId") where "deletedAt" is NULL'))
       .merge();
-  } catch (err) {
+  } catch {
     throw new OrganizationLearnersCouldNotBeSavedError();
   }
 };
@@ -259,7 +259,7 @@ const reconcileUserByNationalStudentIdAndOrganizationId = async function ({
 
     if (!rawOrganizationLearner) throw new Error();
     return new OrganizationLearner(rawOrganizationLearner);
-  } catch (error) {
+  } catch {
     throw new UserCouldNotBeReconciledError();
   }
 };
@@ -298,7 +298,7 @@ const reconcileUserToOrganizationLearner = async function ({ userId, organizatio
       .returning('*');
     if (!rawOrganizationLearner) throw new Error();
     return new OrganizationLearner(rawOrganizationLearner);
-  } catch (error) {
+  } catch {
     throw new UserCouldNotBeReconciledError();
   }
 };

@@ -5,9 +5,8 @@ import { logger } from './utils/logger.js';
 const { lcms: lcmsConfig } = config;
 const getLatestRelease = async function () {
   let signature;
-  // eslint-disable-next-line n/no-process-env
+
   if (process.env.APP) {
-    // eslint-disable-next-line n/no-process-env
     signature = `${process.env.APP}-${process.env.CONTAINER}@${process.env.REGION_NAME}`;
   } else {
     signature = 'pix-api';

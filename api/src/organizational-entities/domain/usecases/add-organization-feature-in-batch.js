@@ -54,7 +54,7 @@ export const addOrganizationFeatureInBatch = withTransaction(
     const data = csvData.map(({ featureId, organizationId, params, deleteLearner }) => {
       try {
         return new OrganizationFeature({ featureId, organizationId, params, deleteLearner });
-      } catch (err) {
+      } catch {
         throw new FeatureParamsNotProcessable();
       }
     });

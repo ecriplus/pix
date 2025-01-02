@@ -8,7 +8,7 @@ const verify = function (
   dependencies = { requestResponseUtils, assessmentRepository, validationErrorSerializer },
 ) {
   const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
-  // eslint-disable-next-line no-restricted-syntax
+
   const assessmentId = parseInt(request.params.id) || parseInt(request.params.assessmentId);
 
   return dependencies.assessmentRepository.getByAssessmentIdAndUserId(assessmentId, userId).catch(() => {

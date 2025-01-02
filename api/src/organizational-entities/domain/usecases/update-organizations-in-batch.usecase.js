@@ -81,7 +81,7 @@ export const updateOrganizationsInBatch = async function ({ filePath, organizati
           organization.updateFromOrganizationBatchUpdateDto(organizationBatchUpdateDto);
 
           await organizationForAdminRepository.update(organization);
-        } catch (error) {
+        } catch {
           throw new OrganizationBatchUpdateError({
             meta: { organizationId: organizationBatchUpdateDto.id },
           });

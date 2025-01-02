@@ -57,7 +57,7 @@ function convertYamlToJsObjects(preTreatedAnswers, yamlSolution) {
   try {
     answers = jsYaml.load(preTreatedAnswers, { schema: jsYaml.FAILSAFE_SCHEMA });
     solutions = jsYaml.load(yamlSolution, { schema: jsYaml.FAILSAFE_SCHEMA });
-  } catch (error) {
+  } catch {
     throw new YamlParsingError();
   }
   return { answers, solutions };

@@ -17,7 +17,7 @@ const update = async function (request, h, dependencies = { requestResponseUtils
   const membershipId = request.params.id;
   const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
   const membership = dependencies.membershipSerializer.deserialize(request.payload);
-  // eslint-disable-next-line no-restricted-syntax
+
   const membershipIdFromPayload = parseInt(membership.id);
   if (membershipId !== membershipIdFromPayload) {
     throw new BadRequestError();
