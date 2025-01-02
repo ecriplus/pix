@@ -123,6 +123,6 @@
     "sinon": "^19.0.2",
     "stylelint": "^16.12.0",
     "tracked-built-ins": "^3.4.0",
-    "webpack": "^5.76.2"
+    "webpack": "^5.97.1"
   }
 }
