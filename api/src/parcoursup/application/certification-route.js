@@ -36,8 +36,8 @@ const register = async function (server) {
             competences: Joi.array()
               .items(
                 Joi.object({
-                  id: Joi.string().description('identifiant unique de la compétence'),
-                  level: Joi.number().min(0).max(8).description('niveau obtenu sur la compétence'),
+                  id: Joi.string().description('Identifiant unique de la compétence'),
+                  level: Joi.number().min(0).max(8).description('Niveau obtenu sur la compétence'),
                 }).label('Competence-Result-Object'),
               )
               .description('Résultats par compétence')
