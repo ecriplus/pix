@@ -68,7 +68,93 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
 
         // then
         expect(err).to.be.instanceOf(NotFoundError);
-        expect(err.message).to.deep.equal('No certifications found for given INE');
+        expect(err.message).to.deep.equal('No certifications found for given search parameters');
+      });
+    });
+  });
+
+  describe('#getByStudentDetails', function () {
+    describe('when a certification is found', function () {
+      it('should return the certification', async function () {
+        // given
+        const organizationUai = '1234567A';
+        const lastName = 'LEPONGE';
+        const firstName = 'Bob';
+        const birthdate = '2000-01-01';
+        const certificationResultData = {
+          nationalStudentId: '1234',
+          organizationUai,
+          lastName,
+          firstName,
+          birthdate,
+          status: 'validated',
+          pixScore: 327,
+          certificationDate: '2024-11-22T09:39:54',
+        };
+        datamartBuilder.factory.buildCertificationResult({
+          ...certificationResultData,
+          competenceId: 'xzef1223443',
+          competenceLevel: 3,
+        });
+        datamartBuilder.factory.buildCertificationResult({
+          ...certificationResultData,
+          competenceId: 'otherCompetenceId',
+          competenceLevel: 5,
+        });
+        await datamartBuilder.commit();
+
+        // when
+        const result = await certificationRepository.getByStudentDetails({
+          organizationUai,
+          lastName,
+          firstName,
+          birthdate,
+        });
+
+        // then
+        const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
+          ine: '1234',
+          organizationUai,
+          lastName,
+          firstName,
+          birthdate,
+          status: 'validated',
+          pixScore: 327,
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
+          competences: [
+            {
+              id: 'xzef1223443',
+              level: 3,
+            },
+            {
+              id: 'otherCompetenceId',
+              level: 5,
+            },
+          ],
+        });
+        expect(result).to.deep.equal(expectedCertification);
+      });
+    });
+
+    describe('when no certifications are found for given organizationUai', function () {
+      it('should throw Not Found Error', async function () {
+        // given
+        const organizationUai = '1234567B';
+        const lastName = 'LEPONGE';
+        const firstName = 'Bob';
+        const birthdate = '2000-01-01';
+
+        // when
+        const err = await catchErr(certificationRepository.getByStudentDetails)({
+          organizationUai,
+          lastName,
+          firstName,
+          birthdate,
+        });
+
+        // then
+        expect(err).to.be.instanceOf(NotFoundError);
+        expect(err.message).to.deep.equal('No certifications found for given search parameters');
       });
     });
   });

@@ -3,11 +3,24 @@ import { NotFoundError } from '../../../shared/domain/errors.js';
 import { CertificationResult } from '../../domain/read-models/CertificationResult.js';
 
 const get = async ({ ine }) => {
-  const certificationResultDto = await datamartKnex('data_export_parcoursup_certif_result').where({
+  return _getBySearchParams({
     national_student_id: ine,
   });
+};
+
+const getByStudentDetails = async ({ organizationUai, lastName, firstName, birthdate }) => {
+  return _getBySearchParams({
+    organization_uai: organizationUai,
+    last_name: lastName,
+    first_name: firstName,
+    birthdate,
+  });
+};
+
+const _getBySearchParams = async (searchParams) => {
+  const certificationResultDto = await datamartKnex('data_export_parcoursup_certif_result').where(searchParams);
   if (!certificationResultDto.length) {
-    throw new NotFoundError('No certifications found for given INE');
+    throw new NotFoundError('No certifications found for given search parameters');
   }
 
   return _toDomain(certificationResultDto);
@@ -32,4 +45,4 @@ const _toDomain = (certificationResultDto) => {
   });
 };
 
-export { get };
+export { get, getByStudentDetails };
