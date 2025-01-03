@@ -1,6 +1,6 @@
-import {render} from '@1024pix/ember-testing-library';
+import { render } from '@1024pix/ember-testing-library';
 import Issue from 'junior/components/issue';
-import {module, test} from 'qunit';
+import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../helpers';
 

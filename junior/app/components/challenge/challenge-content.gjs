@@ -36,6 +36,13 @@ export default class ChallengeContent extends Component {
     );
   }
 
+  get challengeMediaClasses() {
+    const framedClass = this.args.challenge.hasWebComponent ? '' : 'challenge-content__media--framed';
+    const singleDisplayClass = this.isMediaWithForm ? '' : 'challenge-content__media--single-display';
+
+    return `challenge-content__media ${framedClass} ${singleDisplayClass}`;
+  }
+
   get shouldDisplayRebootButton() {
     return this.isRebootable && !this.args.isDisabled;
   }
@@ -43,34 +50,26 @@ export default class ChallengeContent extends Component {
   <template>
     <div class="challenge-content {{unless this.isMediaWithForm 'challenge-content--single-display'}}">
       {{#if this.hasMedia}}
-        <div
-          class="challenge-content__media {{unless this.isMediaWithForm 'challenge-content__media--single-display'}}"
-        >
+        <div class="{{this.challengeMediaClasses}}">
           {{#if @challenge.illustrationUrl}}
-            <div class="challenge-content__image">
-              <ChallengeMedia @src={{@challenge.illustrationUrl}} @alt={{@challenge.illustrationAlt}} />
-            </div>
+            <ChallengeMedia @src={{@challenge.illustrationUrl}} @alt={{@challenge.illustrationAlt}} />
           {{/if}}
           {{#if @challenge.hasValidEmbedDocument}}
-            <div class="challenge-content__embed">
-              <EmbeddedSimulator
-                @url={{@challenge.embedUrl}}
-                @title={{@challenge.embedTitle}}
-                @height={{@challenge.embedHeight}}
-                @hideSimulator={{@isDisabled}}
-                @isMediaWithForm={{this.isMediaWithForm}}
-                @shouldDisplayRebootButton={{this.shouldDisplayRebootButton}}
-              />
-            </div>
+            <EmbeddedSimulator
+              @url={{@challenge.embedUrl}}
+              @title={{@challenge.embedTitle}}
+              @height={{@challenge.embedHeight}}
+              @hideSimulator={{@isDisabled}}
+              @isMediaWithForm={{this.isMediaWithForm}}
+              @shouldDisplayRebootButton={{this.shouldDisplayRebootButton}}
+            />
           {{/if}}
           {{#if @challenge.hasWebComponent}}
-            <div class="challenge-content__web-component">
-              <EmbeddedWebComponent
-                @tagName={{@challenge.webComponentTagName}}
-                @props={{@challenge.webComponentProps}}
-                @setAnswerValue={{@setAnswerValue}}
-              />
-            </div>
+            <EmbeddedWebComponent
+              @tagName={{@challenge.webComponentTagName}}
+              @props={{@challenge.webComponentProps}}
+              @setAnswerValue={{@setAnswerValue}}
+            />
           {{/if}}
         </div>
       {{/if}}

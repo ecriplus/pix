@@ -11,7 +11,7 @@ export default class EmbeddedWebComponent extends Component {
 
   <template>
     {{#if (eq @tagName "qcu-image")}}
-      <qcu-image props={{@props}} {{on "answer" this.handleAnswer}} />
+      <qcu-image props={{@props}} {{on "answer" this.handleAnswer}} data-testid={{@tagName}} />
     {{/if}}
   </template>
 }

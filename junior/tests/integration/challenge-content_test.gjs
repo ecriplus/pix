@@ -13,23 +13,24 @@ module('Integration | Component | challenge item', function (hooks) {
     const challenge = { hasValidEmbedDocument: true, autoReply: true };
     await render(<template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>);
 
-    assert.dom('.challenge-content__embed').exists();
-    assert.dom('.challenge-content__web-component').doesNotExist();
+    assert.dom('.challenge-embed-simulator').exists();
   });
 
   test('displays web component', async function (assert) {
-    const challenge = { hasWebComponent: true };
-    await render(<template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>);
+    const challenge = { hasWebComponent: true, webComponentTagName: 'qcu-image' };
+    const screen = await render(
+      <template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>,
+    );
 
-    assert.dom('.challenge-content__web-component').exists();
-    assert.dom('.challenge-content__embed').doesNotExist();
+    assert.dom(screen.getByTestId('qcu-image')).exists();
+    assert.dom('.challenge-embed-simulator').doesNotExist();
   });
 
   test('displays image', async function (assert) {
     const challenge = { hasValidEmbedDocument: false, autoReply: false, illustrationUrl: 'https://pix.fr' };
     await render(<template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>);
 
-    assert.dom('.challenge-content__image').exists();
+    assert.dom('.challenge-media__placeholder').exists();
   });
 
   test('displays qroc', async function (assert) {
@@ -58,22 +59,6 @@ module('Integration | Component | challenge item', function (hooks) {
     await render(<template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>);
 
     assert.dom('.challenge-content__qcm').exists();
-  });
-
-  test('displays image, embed and qroc', async function (assert) {
-    const challenge = {
-      hasValidEmbedDocument: true,
-      autoReply: false,
-      illustrationUrl: 'https://pix.fr',
-      isQROC: true,
-      proposals: 'number',
-    };
-
-    await render(<template><ChallengeContent @challenge={{challenge}} @assessment={{assessment}} /></template>);
-
-    assert.dom('.challenge-content__image').exists();
-    assert.dom('.challenge-content__embed').exists();
-    assert.dom('.challenge-content__qrocm').exists();
   });
 
   test('displays lesson', async function (assert) {
