@@ -8,18 +8,26 @@ import { UserOrgaSettings } from '../../../shared/domain/models/UserOrgaSettings
 import { Prescriber } from '../../domain/read-models/Prescriber.js';
 
 /**
- * @param {string} userId
+ * @param {Object} params
+ * @property {string} params.userId
+ * @param {any} params.legalDocumentApi
  * @return {Promise<Prescriber>}
  */
-const getPrescriber = async function (userId) {
-  const user = await knex('users')
-    .select('id', 'firstName', 'lastName', 'pixOrgaTermsOfServiceAccepted', 'lang')
-    .where({ id: userId })
-    .first();
+const getPrescriber = async function ({ userId, legalDocumentApi }) {
+  const user = await knex('users').select('id', 'firstName', 'lastName', 'lang').where({ id: userId }).first();
 
   if (!user) {
     throw new UserNotFoundError(`User not found for ID ${userId}`);
   }
+
+  const pixOrgaLegalDocumentStatus = await legalDocumentApi.getLegalDocumentStatusByUserId({
+    userId,
+    service: 'pix-orga',
+    type: 'TOS',
+  });
+  user.pixOrgaTermsOfServiceAccepted = pixOrgaLegalDocumentStatus.status == 'accepted';
+  user.pixOrgaTermsOfServiceStatus = pixOrgaLegalDocumentStatus.status;
+  user.pixOrgaTermsOfServiceDocumentPath = pixOrgaLegalDocumentStatus.path;
 
   const memberships = await knex('memberships').where({ userId, disabledAt: null }).orderBy('id');
 

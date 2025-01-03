@@ -31,8 +31,7 @@ export const getPrescriber = async function ({
   } else if (!_isCurrentOrganizationInMemberships(userOrgaSettings, memberships)) {
     await userOrgaSettingsRepository.update(userId, firstOrganization.id);
   }
-
-  return prescriberRepository.getPrescriber(userId);
+  return prescriberRepository.getPrescriber({ userId });
 };
 
 function _isCurrentOrganizationInMemberships(userOrgaSettings, memberships) {
