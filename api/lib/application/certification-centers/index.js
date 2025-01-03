@@ -90,33 +90,7 @@ const register = async function (server) {
     },
   ];
 
-  server.route([
-    ...adminRoutes,
-    ...certifRoutes,
-    {
-      method: 'GET',
-      path: '/api/certification-centers/{certificationCenterId}/divisions',
-      config: {
-        validate: {
-          params: Joi.object({
-            certificationCenterId: identifiersType.certificationCenterId,
-          }),
-        },
-        pre: [
-          {
-            method: securityPreHandlers.checkUserIsMemberOfCertificationCenter,
-            assign: 'isMemberOfCertificationCenter',
-          },
-        ],
-        handler: certificationCenterController.getDivisions,
-        notes: [
-          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
-            "- Récupération d'une liste de classes à partir d'un identifiant de centre de certification",
-        ],
-        tags: ['api', 'certification-center', 'students', 'session'],
-      },
-    },
-  ]);
+  server.route([...adminRoutes, ...certifRoutes]);
 };
 
 const name = 'certification-centers-api';

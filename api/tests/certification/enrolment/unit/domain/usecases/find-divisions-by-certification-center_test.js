@@ -1,5 +1,5 @@
-import { findDivisionsByCertificationCenter } from '../../../../lib/domain/usecases/find-divisions-by-certification-center.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { findDivisionsByCertificationCenter } from '../../../../../../src/certification/enrolment/domain/usecases/find-divisions-by-certification-center.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | find-divisions-by-certification-center', function () {
   let organization;

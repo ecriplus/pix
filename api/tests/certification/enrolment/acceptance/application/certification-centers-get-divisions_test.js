@@ -3,9 +3,9 @@ import {
   databaseBuilder,
   expect,
   generateValidRequestAuthorizationHeader,
-} from '../../../test-helper.js';
+} from '../../../../test-helper.js';
 
-describe('Acceptance | Route | Certification Centers', function () {
+describe('Certification | Enrolment | Acceptance | Route | Certification Centers', function () {
   let server;
 
   beforeEach(async function () {

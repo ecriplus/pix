@@ -1,4 +1,5 @@
 import { usecases } from '../domain/usecases/index.js';
+import * as divisionSerializer from '../infrastructure/serializers/division-serializer.js';
 import * as studentCertificationSerializer from '../infrastructure/serializers/student-certification-serializer.js';
 
 const getStudents = async function (request) {
@@ -19,6 +20,15 @@ const getStudents = async function (request) {
   return studentCertificationSerializer.serialize(data, pagination);
 };
 
-const certificationCenterController = { getStudents };
+const getDivisions = async function (request) {
+  const certificationCenterId = request.params.certificationCenterId;
+  const divisions = await usecases.findDivisionsByCertificationCenter({
+    certificationCenterId,
+  });
+
+  return divisionSerializer.serialize(divisions);
+};
+
+const certificationCenterController = { getStudents, getDivisions };
 
 export { certificationCenterController };
