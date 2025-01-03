@@ -28,7 +28,7 @@
 
     <LinkTo @route="authenticated.users.get.campaign-participations" @model={{@model}} class="navbar-item">
       {{t "pages.user-details.navbar.participations-list"}}
-      ({{@model.participationsCount}})
+      ({{@model.participationCount}})
     </LinkTo>
 
     <LinkTo
@@ -38,7 +38,7 @@
       class="navbar-item"
     >
       {{t "pages.user-details.navbar.organizations-list"}}
-      ({{@model.organizationMembershipsCount}})
+      ({{@model.organizationMembershipCount}})
     </LinkTo>
 
     <LinkTo
@@ -47,7 +47,7 @@
       class="navbar-item"
     >
       {{t "pages.user-details.navbar.certification-centers-list"}}
-      ({{@model.certificationCenterMembershipsCount}})
+      ({{@model.certificationCenterMembershipCount}})
     </LinkTo>
 
     <LinkTo
