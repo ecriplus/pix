@@ -24,10 +24,14 @@ module('Acceptance | authenticated/users/get', function (hooks) {
   test('displays user detail information page', async function (assert) {
     // given
     this.intl = this.owner.lookup('service:intl');
-    const user = await _buildAndAuthenticateUser(this.server, { email: 'john.harry@example.net', username: null });
+    const user = await _buildAndAuthenticateUser(this.server, {
+      email: 'john.harry@example.net',
+      username: 'john.harry0101',
+    });
     const expectedOrganizationMembershipsCount = 2;
     const expectedParticipationCount = 1;
     const expectedCertificationCenterCount = 3;
+    const expectedAuthenticationMethodCount = 3;
 
     // when
     const screen = await visit(`/users/${user.id}`);
@@ -37,7 +41,9 @@ module('Acceptance | authenticated/users/get', function (hooks) {
 
     const userNavigation = within(screen.getByLabelText("Navigation de la section détails d'un utilisateur"));
     assert.dom(userNavigation.getByRole('link', { name: 'Informations prescrit' })).exists();
-    assert.dom(userNavigation.getByRole('link', { name: 'Méthodes de connexion' })).exists();
+    assert
+      .dom(userNavigation.getByRole('link', { name: `Méthodes de connexion (${expectedAuthenticationMethodCount})` }))
+      .exists();
     assert.dom(userNavigation.getByRole('link', { name: 'Profil' })).exists();
     assert.dom(userNavigation.getByRole('link', { name: `Participations (${expectedParticipationCount})` })).exists();
     assert
@@ -128,8 +134,18 @@ module('Acceptance | authenticated/users/get', function (hooks) {
         organizationMemberships: [organizationMembership],
         certificationCenterMemberships: [certificationCenterMembership],
       });
+      const expectedAuthenticationMethodCountBeforeAnonymisation = 3;
+      const expectedAuthenticationMethodCountAfterAnonymisation = 0;
 
       const screen = await visit(`/users/${userToAnonymise.id}`);
+      assert
+        .dom(
+          screen.getByRole('link', {
+            name: `Méthodes de connexion (${expectedAuthenticationMethodCountBeforeAnonymisation})`,
+          }),
+        )
+        .exists();
+
       await click(screen.getByRole('button', { name: 'Anonymiser cet utilisateur' }));
 
       await screen.findByRole('dialog');
@@ -140,7 +156,11 @@ module('Acceptance | authenticated/users/get', function (hooks) {
       assert.dom(screen.getByText('Nom : (anonymised)')).exists();
 
       // when & then #2
-      await click(screen.getByRole('link', { name: 'Méthodes de connexion' }));
+      await click(
+        screen.getByRole('link', {
+          name: `Méthodes de connexion (${expectedAuthenticationMethodCountAfterAnonymisation})`,
+        }),
+      );
       assert.dom(screen.getByLabelText("L'utilisateur n'a pas de méthode de connexion avec identifiant")).exists();
       assert.dom(screen.getByLabelText("L'utilisateur n'a pas de méthode de connexion avec adresse e-mail")).exists();
       assert.dom(screen.getByLabelText("L'utilisateur n'a pas de méthode de connexion Médiacentre")).exists();
@@ -218,11 +238,11 @@ module('Acceptance | authenticated/users/get', function (hooks) {
 
   module('when administrator click on remove authentication method button', function () {
     test('not displays remove link and display unchecked icon', async function (assert) {
+      const expectedAuthenticationMethodCount = 2;
       // given
       const user = await _buildAndAuthenticateUser(this.server, { email: 'john.harry@example.net', username: null });
       const screen = await visit(`/users/${user.id}`);
-      await click(screen.getByRole('link', { name: 'Méthodes de connexion' }));
-
+      await click(screen.getByRole('link', { name: `Méthodes de connexion (${expectedAuthenticationMethodCount})` }));
       // when
       await click(screen.getAllByRole('button', { name: 'Supprimer' })[0]);
 

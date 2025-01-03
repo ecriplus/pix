@@ -42,13 +42,16 @@ export default class User extends Model {
     return this.lang?.toUpperCase();
   }
 
-  get organizationMembershipsCount() {
+  get organizationMembershipCount() {
     return this.organizationMemberships.length;
   }
-  get certificationCenterMembershipsCount() {
+  get certificationCenterMembershipCount() {
     return this.certificationCenterMemberships.length;
   }
-  get participationsCount() {
+  get participationCount() {
     return this.participations.length;
+  }
+  get authenticationMethodCount() {
+    return this.username && this.email ? this.authenticationMethods.length + 1 : this.authenticationMethods.length;
   }
 }
