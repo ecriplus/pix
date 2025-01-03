@@ -11,15 +11,24 @@ const register = async function (server) {
     config: {
       auth: 'jwt-parcoursup',
       validate: {
-        query: Joi.object({
-          ine: studentIdentifierType,
-          organizationUai: Joi.string(),
-          lastName: Joi.string(),
-          firstName: Joi.string(),
-          birthdate: Joi.string(),
-        })
-          .xor('ine', 'organizationUai')
-          .and('organizationUai', 'lastName', 'firstName', 'birthdate'),
+        query: Joi.alternatives().try(
+          Joi.object({
+            ine: studentIdentifierType,
+          }),
+          Joi.object({
+            organizationUai: Joi.string().required(),
+            lastName: Joi.string().required(),
+            firstName: Joi.string().required(),
+            birthdate: Joi.string().required(),
+          }),
+          Joi.object({
+            verificationCode: Joi.string()
+              .regex(/^P-[a-zA-Z0-9]{8}$/)
+              .required(),
+            lastName: Joi.string().required(),
+            firstName: Joi.string().required(),
+          }),
+        ),
       },
       handler: certificationController.getCertificationResult,
       tags: ['api', 'parcoursup'],
