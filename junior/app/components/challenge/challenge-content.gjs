@@ -36,13 +36,6 @@ export default class ChallengeContent extends Component {
     );
   }
 
-  get challengeMediaClasses() {
-    const framedClass = this.args.challenge.hasWebComponent ? '' : 'challenge-content__media--framed';
-    const singleDisplayClass = this.isMediaWithForm ? '' : 'challenge-content__media--single-display';
-
-    return `challenge-content__media ${framedClass} ${singleDisplayClass}`;
-  }
-
   get shouldDisplayRebootButton() {
     return this.isRebootable && !this.args.isDisabled;
   }
@@ -50,7 +43,7 @@ export default class ChallengeContent extends Component {
   <template>
     <div class="challenge-content {{unless this.isMediaWithForm 'challenge-content--single-display'}}">
       {{#if this.hasMedia}}
-        <div class="{{this.challengeMediaClasses}}">
+        <div class="challenge-content__media {{unless @challenge.hasWebComponent 'challenge-content__media--framed'}}">
           {{#if @challenge.illustrationUrl}}
             <ChallengeMedia @src={{@challenge.illustrationUrl}} @alt={{@challenge.illustrationAlt}} />
           {{/if}}
@@ -73,10 +66,7 @@ export default class ChallengeContent extends Component {
           {{/if}}
         </div>
       {{/if}}
-      <div
-        class="challenge-content__proposals
-          {{unless this.isMediaWithForm 'challenge-content__proposals--single-display'}}"
-      >
+      <div class="challenge-content__proposals">
         {{#if @challenge.autoReply}}
           <div class="challenge-content__autoreply">
             <AutoReply @setAnswerValue={{@setAnswerValue}} />
