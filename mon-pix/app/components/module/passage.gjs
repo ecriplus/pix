@@ -221,6 +221,9 @@ export default class ModulePassage extends Component {
 
   <template>
     {{pageTitle @module.title}}
+    {{#if @module.isBeta}}
+      <BetaBanner />
+    {{/if}}
     <ModuleNavbar
       @currentStep={{this.currentPassageStep}}
       @totalSteps={{this.displayableGrains.length}}
@@ -231,10 +234,6 @@ export default class ModulePassage extends Component {
     />
 
     <main class="module-passage">
-      {{#if @module.isBeta}}
-        <BetaBanner />
-      {{/if}}
-
       <div class="module-passage__title">
         <h1>{{@module.title}}</h1>
       </div>
