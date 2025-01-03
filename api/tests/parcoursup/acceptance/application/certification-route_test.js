@@ -163,8 +163,8 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
     });
   });
 
-  describe('GET /api/parcoursup/certification/search?verificationCode={verificationCode}&lastName={lastName}&firstName={firstName}', function () {
-    it('should return 200 HTTP status code and a certification for a given UAI, last name, first name and birthdate', async function () {
+  describe('GET /api/parcoursup/certification/search?verificationCode={verificationCode}', function () {
+    it('should return 200 HTTP status code and a certification for a given vérificationCode', async function () {
       // given
       const verificationCode = 'P-1234567A';
       const lastName = 'NOM-ELEVE';
@@ -193,7 +193,7 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
 
       const options = {
         method: 'GET',
-        url: `/api/parcoursup/certification/search?verificationCode=${verificationCode}&lastName=${lastName}&firstName=${firstName}`,
+        url: `/api/parcoursup/certification/search?verificationCode=${verificationCode}`,
         headers: {
           authorization: generateValidRequestAuthorizationHeaderForApplication(
             PARCOURSUP_CLIENT_ID,

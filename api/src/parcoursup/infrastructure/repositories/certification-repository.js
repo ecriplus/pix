@@ -26,11 +26,9 @@ const _getBySearchParams = async (searchParams) => {
   return _toDomain(certificationResultDto);
 };
 
-const getByVerificationCode = async ({ verificationCode, lastName, firstName }) => {
+const getByVerificationCode = async ({ verificationCode }) => {
   const certificationResultDto = await datamartKnex('data_export_parcoursup_certif_result_code_validation').where({
     certification_code_verification: verificationCode,
-    last_name: lastName,
-    first_name: firstName,
   });
   if (!certificationResultDto.length) {
     throw new NotFoundError('No certifications found for given search parameters');

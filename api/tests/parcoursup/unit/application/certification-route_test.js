@@ -222,7 +222,7 @@ describe('Parcoursup | Unit | Application | Routes | Certification', function ()
     });
   });
 
-  describe('GET /parcoursup/certification/search?verificationCode={verificationCode}&lastName={lastName}&firstName={firstName}', function () {
+  describe('GET /parcoursup/certification/search?verificationCode={verificationCode}', function () {
     it('should return 200', async function () {
       //given
       sinon.stub(certificationController, 'getCertificationResult').callsFake((request, h) => h.response().code(200));
@@ -236,7 +236,7 @@ describe('Parcoursup | Unit | Application | Routes | Certification', function ()
       const PARCOURSUP_SOURCE = 'parcoursup';
 
       const method = 'GET';
-      const url = '/api/parcoursup/certification/search?verificationCode=P-1234567A&lastName=LEPONGE&firstName=BOB';
+      const url = '/api/parcoursup/certification/search?verificationCode=P-1234567A';
       const headers = {
         authorization: generateValidRequestAuthorizationHeaderForApplication(
           PARCOURSUP_CLIENT_ID,
@@ -262,7 +262,7 @@ describe('Parcoursup | Unit | Application | Routes | Certification', function ()
         const PARCOURSUP_SCOPE = 'parcoursup';
         const PARCOURSUP_SOURCE = 'parcoursup';
 
-        const url = '/api/parcoursup/certification/search?verificationCode=1234567A&lastName=LEPONGE&firstName=BOB';
+        const url = '/api/parcoursup/certification/search?verificationCode=1234567A';
         const headers = {
           authorization: generateValidRequestAuthorizationHeaderForApplication(
             PARCOURSUP_CLIENT_ID,

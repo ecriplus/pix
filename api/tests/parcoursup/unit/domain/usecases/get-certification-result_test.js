@@ -60,34 +60,26 @@ describe('Parcoursup | unit | domain | usecases | get certification', function (
       });
     });
 
-    context('with a verification code, last name and first name', function () {
+    context('with a verification code', function () {
       it('returns matching certification', async function () {
         // given
         const verificationCode = 'P-1234567A';
-        const lastName = 'LEPONGE';
-        const firstName = 'Bob';
         const certificationRepository = {
           getByVerificationCode: sinon.stub(),
         };
 
         const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
           verificationCode,
-          lastName,
-          firstName,
         });
         certificationRepository.getByVerificationCode
           .withArgs({
             verificationCode,
-            lastName,
-            firstName,
           })
           .resolves(expectedCertification);
 
         // when
         const certification = await getCertificationResult({
           verificationCode,
-          lastName,
-          firstName,
           certificationRepository,
         });
 

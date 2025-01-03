@@ -25,8 +25,6 @@ const register = async function (server) {
             verificationCode: Joi.string()
               .regex(/^P-[a-zA-Z0-9]{8}$/)
               .required(),
-            lastName: Joi.string().required(),
-            firstName: Joi.string().required(),
           }),
         ),
       },
@@ -36,7 +34,7 @@ const register = async function (server) {
         '- **Cette route est accessible uniquement à Parcoursup**\n' +
           '- avec un INE, récupère la dernière certification de l‘année en cours pour l‘élève identifié' +
           '- avec un UAI, nom, prénom et date de naissance, récupère la dernière certification de l‘année en cours pour l‘élève identifié' +
-          '- avec un code de vérification, nom et prénom, récupère la certification correspondante',
+          '- avec un code de vérification récupère la certification correspondante',
       ],
       response: {
         failAction: 'log',

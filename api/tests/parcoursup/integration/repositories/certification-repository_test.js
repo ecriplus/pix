@@ -191,8 +191,6 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
         // when
         const result = await certificationRepository.getByVerificationCode({
           verificationCode,
-          lastName,
-          firstName,
         });
 
         // then
@@ -223,14 +221,10 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
       it('should throw Not Found Error', async function () {
         // given
         const verificationCode = 'P-1234567B';
-        const lastName = 'LEPONGE';
-        const firstName = 'Bob';
 
         // when
         const err = await catchErr(certificationRepository.getByVerificationCode)({
           verificationCode,
-          lastName,
-          firstName,
         });
 
         // then

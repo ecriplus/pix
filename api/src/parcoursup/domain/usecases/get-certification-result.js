@@ -16,7 +16,7 @@ const getCertificationResult = function ({
   }
 
   if (verificationCode) {
-    return certificationRepository.getByVerificationCode({ verificationCode, lastName, firstName });
+    return certificationRepository.getByVerificationCode({ verificationCode });
   }
 };
 
