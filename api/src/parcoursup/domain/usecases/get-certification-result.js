@@ -5,6 +5,7 @@ const getCertificationResult = function ({
   firstName,
   birthdate,
   certificationRepository,
+  verificationCode,
 }) {
   if (ine) {
     return certificationRepository.get({ ine });
@@ -12,6 +13,10 @@ const getCertificationResult = function ({
 
   if (organizationUai && lastName && firstName && birthdate) {
     return certificationRepository.getByStudentDetails({ organizationUai, lastName, firstName, birthdate });
+  }
+
+  if (verificationCode && lastName && firstName) {
+    return certificationRepository.getByVerificationCode({ verificationCode, lastName, firstName });
   }
 };
 

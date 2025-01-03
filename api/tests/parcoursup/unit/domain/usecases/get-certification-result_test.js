@@ -19,6 +19,7 @@ describe('Parcoursup | unit | domain | usecases | get certification', function (
       // then
       expect(certification).to.deep.equal(expectedCertification);
     });
+
     context('with organizationUai, last name, first name and birthdate', function () {
       it('returns matching certification', async function () {
         // given
@@ -51,6 +52,42 @@ describe('Parcoursup | unit | domain | usecases | get certification', function (
           lastName,
           firstName,
           birthdate,
+          certificationRepository,
+        });
+
+        // then
+        expect(certification).to.deep.equal(expectedCertification);
+      });
+    });
+
+    context('with a verification code, last name and first name', function () {
+      it('returns matching certification', async function () {
+        // given
+        const verificationCode = 'P-1234567A';
+        const lastName = 'LEPONGE';
+        const firstName = 'Bob';
+        const certificationRepository = {
+          getByVerificationCode: sinon.stub(),
+        };
+
+        const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
+          verificationCode,
+          lastName,
+          firstName,
+        });
+        certificationRepository.getByVerificationCode
+          .withArgs({
+            verificationCode,
+            lastName,
+            firstName,
+          })
+          .resolves(expectedCertification);
+
+        // when
+        const certification = await getCertificationResult({
+          verificationCode,
+          lastName,
+          firstName,
           certificationRepository,
         });
 
