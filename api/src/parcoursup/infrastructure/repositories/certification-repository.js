@@ -26,10 +26,24 @@ const _getBySearchParams = async (searchParams) => {
   return _toDomain(certificationResultDto);
 };
 
+const getByVerificationCode = async ({ verificationCode, lastName, firstName }) => {
+  const certificationResultDto = await datamartKnex('data_export_parcoursup_certif_result_code_validation').where({
+    certification_code_verification: verificationCode,
+    last_name: lastName,
+    first_name: firstName,
+  });
+  if (!certificationResultDto.length) {
+    throw new NotFoundError('No certifications found for given search parameters');
+  }
+
+  return _toDomain(certificationResultDto);
+};
+
 const _toDomain = (certificationResultDto) => {
   return new CertificationResult({
     ine: certificationResultDto[0].national_student_id,
     organizationUai: certificationResultDto[0].organization_uai,
+    verificationCode: certificationResultDto[0].verificationCode,
     lastName: certificationResultDto[0].last_name,
     firstName: certificationResultDto[0].first_name,
     birthdate: certificationResultDto[0].birthdate,
@@ -45,4 +59,4 @@ const _toDomain = (certificationResultDto) => {
   });
 };
 
-export { get, getByStudentDetails };
+export { get, getByStudentDetails, getByVerificationCode };

@@ -47,6 +47,10 @@ class DatamartBuilder {
       rawQuery += `DELETE FROM ${tableName};`;
     });
 
+    ['data_export_parcoursup_certif_result_code_validation'].forEach((tableName) => {
+      rawQuery += `DELETE FROM ${tableName};`;
+    });
+
     try {
       await this.knex.raw(rawQuery);
     } catch {

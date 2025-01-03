@@ -158,4 +158,85 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
       });
     });
   });
+
+  describe('#getByVerificationCode', function () {
+    describe('when a certification is found', function () {
+      it('should return the certification', async function () {
+        // given
+        const verificationCode = 'P-1234567A';
+        const lastName = 'LEPONGE';
+        const firstName = 'Bob';
+        const birthdate = '2000-01-01';
+        const certificationResultData = {
+          verificationCode,
+          lastName,
+          firstName,
+          birthdate,
+          status: 'validated',
+          pixScore: 327,
+          certificationDate: '2024-11-22T09:39:54',
+        };
+        datamartBuilder.factory.buildCertificationResultCodeValidation({
+          ...certificationResultData,
+          competenceId: 'xzef1223443',
+          competenceLevel: 3,
+        });
+        datamartBuilder.factory.buildCertificationResultCodeValidation({
+          ...certificationResultData,
+          competenceId: 'otherCompetenceId',
+          competenceLevel: 5,
+        });
+        await datamartBuilder.commit();
+
+        // when
+        const result = await certificationRepository.getByVerificationCode({
+          verificationCode,
+          lastName,
+          firstName,
+        });
+
+        // then
+        const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
+          verificationCode,
+          lastName,
+          firstName,
+          birthdate,
+          status: 'validated',
+          pixScore: 327,
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
+          competences: [
+            {
+              id: 'xzef1223443',
+              level: 3,
+            },
+            {
+              id: 'otherCompetenceId',
+              level: 5,
+            },
+          ],
+        });
+        expect(result).to.deep.equal(expectedCertification);
+      });
+    });
+
+    describe('when no certifications are found for a given verification code, first name and last name', function () {
+      it('should throw Not Found Error', async function () {
+        // given
+        const verificationCode = 'P-1234567B';
+        const lastName = 'LEPONGE';
+        const firstName = 'Bob';
+
+        // when
+        const err = await catchErr(certificationRepository.getByVerificationCode)({
+          verificationCode,
+          lastName,
+          firstName,
+        });
+
+        // then
+        expect(err).to.be.instanceOf(NotFoundError);
+        expect(err.message).to.deep.equal('No certifications found for given search parameters');
+      });
+    });
+  });
 });
