@@ -7,11 +7,11 @@ describe('Parcoursup | unit | domain | usecases | get certification', function (
       // given
       const ine = '1234';
       const certificationRepository = {
-        get: sinon.stub(),
+        getByINE: sinon.stub(),
       };
 
       const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({ ine });
-      certificationRepository.get.withArgs({ ine }).resolves(expectedCertification);
+      certificationRepository.getByINE.withArgs({ ine }).resolves(expectedCertification);
 
       // when
       const certification = await getCertificationResult({ ine, certificationRepository });
@@ -28,7 +28,7 @@ describe('Parcoursup | unit | domain | usecases | get certification', function (
         const firstName = 'Bob';
         const birthdate = '2000-01-01';
         const certificationRepository = {
-          getByStudentDetails: sinon.stub(),
+          getByOrganizationUAI: sinon.stub(),
         };
 
         const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
@@ -37,7 +37,7 @@ describe('Parcoursup | unit | domain | usecases | get certification', function (
           firstName,
           birthdate,
         });
-        certificationRepository.getByStudentDetails
+        certificationRepository.getByOrganizationUAI
           .withArgs({
             organizationUai,
             lastName,

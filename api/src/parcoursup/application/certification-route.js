@@ -34,12 +34,15 @@ const register = async function (server) {
       tags: ['api', 'parcoursup'],
       notes: [
         '- **Cette route est accessible uniquement à Parcoursup**\n' +
-          '- Récupère la dernière certification de l‘année en cours pour l‘élève identifié via ses informations',
+          '- avec un INE, récupère la dernière certification de l‘année en cours pour l‘élève identifié' +
+          '- avec un UAI, nom, prénom et date de naissance, récupère la dernière certification de l‘année en cours pour l‘élève identifié' +
+          '- avec un code de vérification, nom et prénom, récupère la certification correspondante',
       ],
       response: {
         failAction: 'log',
         status: {
           200: Joi.object({
+            verificationCode: Joi.string().description('Code de vérification de la certification de l’élève'),
             organizationUai: Joi.string().description('UAI de l‘établissement scolaire'),
             ine: Joi.string().description('INE de l‘élève'),
             lastName: Joi.string().description('Nom de famille de l‘élève'),

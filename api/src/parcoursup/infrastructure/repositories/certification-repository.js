@@ -2,13 +2,13 @@ import { datamartKnex } from '../../../../db/knex-database-connection.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { CertificationResult } from '../../domain/read-models/CertificationResult.js';
 
-const get = async ({ ine }) => {
+const getByINE = async ({ ine }) => {
   return _getBySearchParams({
     national_student_id: ine,
   });
 };
 
-const getByStudentDetails = async ({ organizationUai, lastName, firstName, birthdate }) => {
+const getByOrganizationUAI = async ({ organizationUai, lastName, firstName, birthdate }) => {
   return _getBySearchParams({
     organization_uai: organizationUai,
     last_name: lastName,
@@ -59,4 +59,4 @@ const _toDomain = (certificationResultDto) => {
   });
 };
 
-export { get, getByStudentDetails, getByVerificationCode };
+export { getByINE, getByOrganizationUAI, getByVerificationCode };
