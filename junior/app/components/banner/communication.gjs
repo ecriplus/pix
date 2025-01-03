@@ -1,3 +1,4 @@
+import PixBannerAlert from '@1024pix/pix-ui/components/pix-banner-alert';
 import { htmlSafe } from '@ember/template';
 import Component from '@glimmer/component';
 import ENV from 'junior/config/environment';
@@ -15,4 +16,12 @@ export default class BannerCommunication extends Component {
   get bannerContent() {
     return htmlSafe(this._rawBannerContent);
   }
+
+  <template>
+    {{#if this.isEnabled}}
+      <PixBannerAlert @type={{this.bannerType}} class="sticker-banner">
+        {{this.bannerContent}}
+      </PixBannerAlert>
+    {{/if}}
+  </template>
 }
