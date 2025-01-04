@@ -1,8 +1,10 @@
 import * as sharedMembershipRepository from '../../../../../src/shared/infrastructure/repositories/membership-repository.js';
-import { getPrescriber } from '../../../../../src/team/domain/usecases/get-prescriber.js';
+import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { prescriberRepository } from '../../../../../src/team/infrastructure/repositories/prescriber-repository.js';
 import { userOrgaSettingsRepository } from '../../../../../src/team/infrastructure/repositories/user-orga-settings-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+
+const getPrescriber = usecases.getPrescriber;
 
 describe('Integration | Team | Domain | UseCases | get-prescriber', function () {
   context('When prescriber does not have a userOrgaSettings', function () {
