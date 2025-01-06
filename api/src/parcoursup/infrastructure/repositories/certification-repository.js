@@ -41,7 +41,6 @@ const _toDomain = (certificationResultDto) => {
   return new CertificationResult({
     ine: certificationResultDto[0].national_student_id,
     organizationUai: certificationResultDto[0].organization_uai,
-    verificationCode: certificationResultDto[0].verificationCode,
     lastName: certificationResultDto[0].last_name,
     firstName: certificationResultDto[0].first_name,
     birthdate: certificationResultDto[0].birthdate,

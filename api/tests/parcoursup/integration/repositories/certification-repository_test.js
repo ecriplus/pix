@@ -195,7 +195,6 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
 
         // then
         const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
-          verificationCode,
           lastName,
           firstName,
           birthdate,

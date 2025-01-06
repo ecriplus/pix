@@ -58,7 +58,6 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
       await databaseBuilder.commit();
 
       const expectedCertification = {
-        verificationCode: undefined,
         organizationUai: 'UAI ETAB ELEVE',
         ine,
         lastName: 'NOM-ELEVE',
@@ -133,7 +132,6 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
       await databaseBuilder.commit();
 
       const expectedCertification = {
-        verificationCode: undefined,
         organizationUai,
         ine: '123456789OK',
         lastName,
@@ -206,7 +204,6 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
       await databaseBuilder.commit();
 
       const expectedCertification = {
-        verificationCode: undefined,
         ine: undefined,
         organizationUai: undefined,
         lastName,

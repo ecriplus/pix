@@ -2,7 +2,6 @@ class CertificationResult {
   constructor({
     ine,
     organizationUai,
-    verificationCode,
     lastName,
     firstName,
     birthdate,
@@ -13,7 +12,6 @@ class CertificationResult {
   }) {
     this.ine = ine;
     this.organizationUai = organizationUai;
-    this.verificationCode = verificationCode;
     this.lastName = lastName;
     this.firstName = firstName;
     this.birthdate = birthdate;

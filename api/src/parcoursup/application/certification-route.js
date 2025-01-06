@@ -1,6 +1,9 @@
 import Joi from 'joi';
 
-import { studentIdentifierType } from '../../shared/domain/types/identifiers-type.js';
+import {
+  certificationVerificationCodeType,
+  studentIdentifierType,
+} from '../../shared/domain/types/identifiers-type.js';
 import { responseObjectErrorDoc } from '../../shared/infrastructure/open-api-doc/response-object-error-doc.js';
 import { certificationController } from './certification-controller.js';
 
@@ -22,9 +25,7 @@ const register = async function (server) {
             birthdate: Joi.string().required(),
           }),
           Joi.object({
-            verificationCode: Joi.string()
-              .regex(/^P-[a-zA-Z0-9]{8}$/)
-              .required(),
+            verificationCode: certificationVerificationCodeType.required(),
           }),
         ),
       },
@@ -34,13 +35,12 @@ const register = async function (server) {
         '- **Cette route est accessible uniquement à Parcoursup**\n' +
           '- avec un INE, récupère la dernière certification de l‘année en cours pour l‘élève identifié' +
           '- avec un UAI, nom, prénom et date de naissance, récupère la dernière certification de l‘année en cours pour l‘élève identifié' +
-          '- avec un code de vérification récupère la certification correspondante',
+          '- avec un code de vérification, récupère la certification correspondante',
       ],
       response: {
         failAction: 'log',
         status: {
           200: Joi.object({
-            verificationCode: Joi.string().description('Code de vérification de la certification de l’élève'),
             organizationUai: Joi.string().description('UAI de l‘établissement scolaire'),
             ine: Joi.string().description('INE de l‘élève'),
             lastName: Joi.string().description('Nom de famille de l‘élève'),
