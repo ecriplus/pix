@@ -108,7 +108,7 @@ export default class FeedbackPanel extends Component {
       this._sendButtonStatus = buttonStatusTypes.recorded;
       this._resetForm();
       this.toggleModalVisibility();
-    } catch (error) {
+    } catch {
       this._sendButtonStatus = buttonStatusTypes.unrecorded;
     }
   }

@@ -1,6 +1,5 @@
-// eslint-disable-next-line no-undef
 self.deprecationWorkflow = self.deprecationWorkflow || {};
-// eslint-disable-next-line no-undef
+
 self.deprecationWorkflow.config = {
   workflow: [
     { handler: 'silence', matchId: 'ember-polyfills.deprecate-assign' },

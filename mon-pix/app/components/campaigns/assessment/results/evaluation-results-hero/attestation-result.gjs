@@ -29,7 +29,7 @@ export default class AttestationResult extends Component {
 
     try {
       await this.fileSaver.save({ url, token, fileName });
-    } catch (e) {
+    } catch {
       this.args.onError();
     }
   }

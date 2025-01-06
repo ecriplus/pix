@@ -71,7 +71,7 @@ export default class UpdateExpiredPasswordForm extends Component {
 
         try {
           await this.session.authenticateUser(login, this.newPassword);
-        } catch (errorResponse) {
+        } catch {
           this.authenticationHasFailed = true;
         }
       } catch (errorResponse) {
