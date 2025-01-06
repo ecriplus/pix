@@ -106,7 +106,7 @@ module('Unit | Service | competence-evaluation', function (hooks) {
         try {
           await competenceEvaluationService.improve({ userId, competenceId });
           // eslint-disable-next-line no-empty
-        } catch (err) {}
+        } catch {}
         sinon.assert.notCalled(router.transitionTo);
         assert.ok(true);
       });

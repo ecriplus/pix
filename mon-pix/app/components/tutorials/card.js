@@ -70,7 +70,7 @@ export default class Card extends Component {
       const userSavedTutorial = this.store.createRecord('userSavedTutorial', { tutorial: this.args.tutorial });
       await userSavedTutorial.save();
       this.savingStatus = buttonStatusTypes.recorded;
-    } catch (e) {
+    } catch {
       this.savingStatus = buttonStatusTypes.unrecorded;
     }
   }
@@ -79,7 +79,7 @@ export default class Card extends Component {
     try {
       await this.args.tutorial.userSavedTutorial.destroyRecord();
       this.savingStatus = buttonStatusTypes.unrecorded;
-    } catch (e) {
+    } catch {
       this.savingStatus = buttonStatusTypes.recorded;
     }
     await this.args.afterRemove?.();
@@ -94,7 +94,7 @@ export default class Card extends Component {
       await tutorialEvaluation.save({
         adapterOptions: { tutorialId: tutorial.id, status: tutorialEvaluation.nextStatus },
       });
-    } catch (e) {
+    } catch {
       throw new Error("Un problème est survenu lors de la mise à jour de l'évaluation du tutoriel");
     } finally {
       this.evaluationStatus = tutorialEvaluation.isLiked ? buttonStatusTypes.recorded : buttonStatusTypes.unrecorded;

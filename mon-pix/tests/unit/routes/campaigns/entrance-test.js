@@ -143,7 +143,7 @@ module('Unit | Route | Entrance', function (hooks) {
       try {
         await route.afterModel(campaign);
         // eslint-disable-next-line no-empty
-      } catch (err) {}
+      } catch {}
       sinon.assert.called(campaignParticipationStub.deleteRecord);
       sinon.assert.notCalled(route.currentUser.load);
       assert.ok(true);

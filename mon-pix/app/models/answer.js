@@ -10,7 +10,7 @@ const ValueAsArrayOfString = Mixin.create({
   _valuesAsMap: computed('value', function () {
     try {
       return jsyaml.load(this.value);
-    } catch (e) {
+    } catch {
       return undefined;
     }
   }),

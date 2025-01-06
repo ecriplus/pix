@@ -21,7 +21,7 @@ function _isAnonymousUserAuthenticated() {
   try {
     const emberSimpleAuthSession = JSON.parse(window.localStorage.getItem(EMBER_SIMPLE_AUTH_LOCALSTORAGE_KEY));
     return emberSimpleAuthSession.authenticated?.authenticator === 'authenticator:anonymous';
-  } catch (error) {
+  } catch {
     return false;
   }
 }
