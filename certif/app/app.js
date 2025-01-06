@@ -1,5 +1,6 @@
 import 'flatpickr';
 import 'flatpickr/dist/l10n';
+import './deprecation-workflow';
 
 import Application from '@ember/application';
 import loadInitializers from 'ember-load-initializers';
