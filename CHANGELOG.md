@@ -1,5 +1,40 @@
 # Pix Changelog
 
+## v5.10.0 (06/01/2025)
+
+
+### :rocket: Amélioration
+- [#10935](https://github.com/1024pix/pix/pull/10935) [FEATURE]  Ajoute une route parcoursup pour la récupération de certification à partir du code de vérification (PIX-15894).
+- [#10932](https://github.com/1024pix/pix/pull/10932) [FEATURE] Afficher le nombre de méthodes de connexion actives dans Pix Admin (PIX-14787).
+- [#10889](https://github.com/1024pix/pix/pull/10889) [FEATURE] Matomo - Envoyer les events liés à l'utilisation du Expand (toggle) (PIX-15774).
+- [#10931](https://github.com/1024pix/pix/pull/10931) [FEATURE] Change l'URL du endpoint Parcoursup vers `/api/parcoursup/certification/search?ine={ine}` (PIX-15913).
+- [#10898](https://github.com/1024pix/pix/pull/10898) [FEATURE] Passage > Mettre la Beta Banner au dessus de la navbar (PIX-15698)(PIX-15832).
+- [#10930](https://github.com/1024pix/pix/pull/10930) [FEATURE] Ajout du endpoint parcoursup pour récupérer les résultats d'une certification via les données UAI, nom, prénom et date de naissance (PIX-15893).
+- [#10807](https://github.com/1024pix/pix/pull/10807) [FEATURE] Utiliser les designs tokens sur Mon Pix (PIX-15177).
+- [#10914](https://github.com/1024pix/pix/pull/10914) [FEATURE] Sauvegarder les raisons d'abandons à la finalisation (PIX-15523).
+
+### :building_construction: Tech
+- [#10892](https://github.com/1024pix/pix/pull/10892) [TECH] Montée de version PixOrga  (PIX-15856).
+- [#10933](https://github.com/1024pix/pix/pull/10933) [TECH] :truck: Déplacement de la route `/api/certification-centers/{certificationCenterId}/divisions` (PIX-15892).
+- [#10926](https://github.com/1024pix/pix/pull/10926) [TECH] Mise à jour des dépendances sur Pix Certif (PIX-15884).
+- [#10928](https://github.com/1024pix/pix/pull/10928) [TECH] Étoffer la documentation de l'endpoint Parcoursup (PIX-15891).
+- [#10927](https://github.com/1024pix/pix/pull/10927) [TECH] Retourner une 204 No Content à l'appel GET /.
+- [#10708](https://github.com/1024pix/pix/pull/10708) [TECH] :recycle:  Remaniement du filtre des compétence (récupération d'une PR ÉcriPlus).
+
+### :bug: Correction
+- [#10901](https://github.com/1024pix/pix/pull/10901) [BUGFIX] Rajouter la trad title maquante pour les Attestations (PIX-15873).
+
+### :arrow_up: Montée de version
+- [#10924](https://github.com/1024pix/pix/pull/10924) [BUMP] Update dependency eslint to v9 (api).
+- [#10922](https://github.com/1024pix/pix/pull/10922) [BUMP] Update dependency scalingo to ^0.10.0 (api).
+- [#10921](https://github.com/1024pix/pix/pull/10921) [BUMP] Update dependency postgres to v15.10.
+- [#10920](https://github.com/1024pix/pix/pull/10920) [BUMP] Update dependency browser-tools to v1.5.0 (.circleci).
+- [#10919](https://github.com/1024pix/pix/pull/10919) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.0.3 (orga).
+- [#10918](https://github.com/1024pix/pix/pull/10918) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.0.3 (junior).
+- [#10883](https://github.com/1024pix/pix/pull/10883) [BUMP] Update dependency @1024pix/pix-ui to ^49.6.0 (admin).
+- [#10882](https://github.com/1024pix/pix/pull/10882) [BUMP] Update adobe/s3mock Docker tag to v3.12.0 (dossier racine).
+- [#10913](https://github.com/1024pix/pix/pull/10913) [BUMP] Update dependency eslint-plugin-unicorn to v56 (api).
+
 ## v5.9.0 (31/12/2024)
 
 
