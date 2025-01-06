@@ -11,7 +11,7 @@ export async function getModulesListAsCsv(modules) {
       { label: 'Module', value: 'slug' },
       {
         label: 'ModuleTotalElements',
-        value: (row) => row.grains.map((grain) => grain.components.length).reduce((partialSum, a) => partialSum + a, 0),
+        value: (row) => _getTotalElementsCount(row.grains),
       },
       { label: 'ModuleLink', value: (row) => `https://app.recette.pix.fr/modules/${row.slug}` },
       { label: 'ModuleLevel', value: 'details.level' },
@@ -43,6 +43,28 @@ export async function getModulesListAsCsv(modules) {
       },
     ],
   });
+}
+
+export function _getTotalElementsCount(grains) {
+  let totalElements = 0;
+  for (const grain of grains) {
+    for (const component of grain.components) {
+      switch (component.type) {
+        case 'element':
+          totalElements += 1;
+          break;
+        case 'stepper':
+          for (const step of component.steps) {
+            totalElements += step.elements.length;
+          }
+          break;
+        default:
+          throw new Error(`Component type "${component.type}" is not available`);
+      }
+    }
+  }
+
+  return totalElements;
 }
 
 // Only run the following if the file is called directly

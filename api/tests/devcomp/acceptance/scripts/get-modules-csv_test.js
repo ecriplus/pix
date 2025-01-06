@@ -410,6 +410,6 @@ describe('Acceptance | Script | Get Modules as CSV', function () {
     expect(modulesListAsCsv).to.be.a('string');
     expect(modulesListAsCsv).to
       .equal(`\ufeff"Module"\t"ModuleTotalElements"\t"ModuleLink"\t"ModuleLevel"\t"ModuleTotalGrains"\t"ModuleTotalLessons"\t"ModuleTotalActivities"\t"ModuleTotalChallenges"\t"ModuleTotalDiscoveries"\t"ModuleTotalSummaries"\t"ModuleDuration"\t"ModuleIsBeta"
-"didacticiel-modulix"\t11\t"https://app.recette.pix.fr/modules/didacticiel-modulix"\t"Débutant"\t8\t1\t4\t1\t1\t1\t"=TEXT(5/24/60; ""mm:ss"")"\t"=TRUE"`);
+"didacticiel-modulix"\t13\t"https://app.recette.pix.fr/modules/didacticiel-modulix"\t"Débutant"\t9\t1\t5\t1\t1\t1\t"=TEXT(5/24/60; ""mm:ss"")"\t"=TRUE"`);
   });
 });
