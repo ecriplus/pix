@@ -160,4 +160,76 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
       expect(response.result).to.deep.equal(expectedCertification);
     });
   });
+
+  describe('GET /api/parcoursup/certification/search?verificationCode={verificationCode}', function () {
+    it('should return 200 HTTP status code and a certification for a given vérificationCode', async function () {
+      // given
+      const verificationCode = 'P-1234567A';
+      const lastName = 'NOM-ELEVE';
+      const firstName = 'PRENOM-ELEVE';
+      const birthdate = '2000-01-01';
+      const certificationResultData = {
+        verificationCode,
+        lastName,
+        firstName,
+        birthdate,
+        status: 'validated',
+        pixScore: 327,
+        certificationDate: '2024-11-22T09:39:54Z',
+      };
+      datamartBuilder.factory.buildCertificationResultCodeValidation({
+        ...certificationResultData,
+        competenceId: 'xzef1223443',
+        competenceLevel: 3,
+      });
+      datamartBuilder.factory.buildCertificationResultCodeValidation({
+        ...certificationResultData,
+        competenceId: 'otherCompetenceId',
+        competenceLevel: 5,
+      });
+      await datamartBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/parcoursup/certification/search?verificationCode=${verificationCode}`,
+        headers: {
+          authorization: generateValidRequestAuthorizationHeaderForApplication(
+            PARCOURSUP_CLIENT_ID,
+            PARCOURSUP_SOURCE,
+            PARCOURSUP_SCOPE,
+          ),
+        },
+      };
+
+      await databaseBuilder.commit();
+
+      const expectedCertification = {
+        ine: undefined,
+        organizationUai: undefined,
+        lastName,
+        firstName,
+        birthdate,
+        status: 'validated',
+        pixScore: 327,
+        certificationDate: new Date('2024-11-22T09:39:54Z'),
+        competences: [
+          {
+            id: 'xzef1223443',
+            level: 3,
+          },
+          {
+            id: 'otherCompetenceId',
+            level: 5,
+          },
+        ],
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result).to.deep.equal(expectedCertification);
+    });
+  });
 });

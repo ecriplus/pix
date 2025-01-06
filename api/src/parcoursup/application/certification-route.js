@@ -1,6 +1,9 @@
 import Joi from 'joi';
 
-import { studentIdentifierType } from '../../shared/domain/types/identifiers-type.js';
+import {
+  certificationVerificationCodeType,
+  studentIdentifierType,
+} from '../../shared/domain/types/identifiers-type.js';
 import { responseObjectErrorDoc } from '../../shared/infrastructure/open-api-doc/response-object-error-doc.js';
 import { certificationController } from './certification-controller.js';
 
@@ -11,21 +14,28 @@ const register = async function (server) {
     config: {
       auth: 'jwt-parcoursup',
       validate: {
-        query: Joi.object({
-          ine: studentIdentifierType,
-          organizationUai: Joi.string(),
-          lastName: Joi.string(),
-          firstName: Joi.string(),
-          birthdate: Joi.string(),
-        })
-          .xor('ine', 'organizationUai')
-          .and('organizationUai', 'lastName', 'firstName', 'birthdate'),
+        query: Joi.alternatives().try(
+          Joi.object({
+            ine: studentIdentifierType,
+          }),
+          Joi.object({
+            organizationUai: Joi.string().required(),
+            lastName: Joi.string().required(),
+            firstName: Joi.string().required(),
+            birthdate: Joi.string().required(),
+          }),
+          Joi.object({
+            verificationCode: certificationVerificationCodeType.required(),
+          }),
+        ),
       },
       handler: certificationController.getCertificationResult,
       tags: ['api', 'parcoursup'],
       notes: [
         '- **Cette route est accessible uniquement à Parcoursup**\n' +
-          '- Récupère la dernière certification de l‘année en cours pour l‘élève identifié via ses informations',
+          '- avec un INE, récupère la dernière certification de l‘année en cours pour l‘élève identifié' +
+          '- avec un UAI, nom, prénom et date de naissance, récupère la dernière certification de l‘année en cours pour l‘élève identifié' +
+          '- avec un code de vérification, récupère la certification correspondante',
       ],
       response: {
         failAction: 'log',

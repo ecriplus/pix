@@ -222,6 +222,64 @@ describe('Parcoursup | Unit | Application | Routes | Certification', function ()
     });
   });
 
+  describe('GET /parcoursup/certification/search?verificationCode={verificationCode}', function () {
+    it('should return 200', async function () {
+      //given
+      sinon.stub(certificationController, 'getCertificationResult').callsFake((request, h) => h.response().code(200));
+
+      const httpTestServer = new HttpTestServer();
+      httpTestServer.setupAuthentication();
+      await httpTestServer.register(moduleUnderTest);
+
+      const PARCOURSUP_CLIENT_ID = 'test-parcoursupClientId';
+      const PARCOURSUP_SCOPE = 'parcoursup';
+      const PARCOURSUP_SOURCE = 'parcoursup';
+
+      const method = 'GET';
+      const url = '/api/parcoursup/certification/search?verificationCode=P-1234567A';
+      const headers = {
+        authorization: generateValidRequestAuthorizationHeaderForApplication(
+          PARCOURSUP_CLIENT_ID,
+          PARCOURSUP_SOURCE,
+          PARCOURSUP_SCOPE,
+        ),
+      };
+
+      // when
+      const response = await httpTestServer.request(method, url, null, null, headers);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+
+    context('when verificationCode format is invalid', function () {
+      it('returns 400 error', async function () {
+        const httpTestServer = new HttpTestServer();
+        httpTestServer.setupAuthentication();
+        await httpTestServer.register(moduleUnderTest);
+
+        const PARCOURSUP_CLIENT_ID = 'test-parcoursupClientId';
+        const PARCOURSUP_SCOPE = 'parcoursup';
+        const PARCOURSUP_SOURCE = 'parcoursup';
+
+        const url = '/api/parcoursup/certification/search?verificationCode=1234567A';
+        const headers = {
+          authorization: generateValidRequestAuthorizationHeaderForApplication(
+            PARCOURSUP_CLIENT_ID,
+            PARCOURSUP_SOURCE,
+            PARCOURSUP_SCOPE,
+          ),
+        };
+
+        // when
+        const response = await httpTestServer.request('GET', url, null, null, headers);
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+    });
+  });
+
   describe('GET /parcoursup/certification/search?ine={ine}&organizationUai={organizationUai}', function () {
     context('when both ine and organizationUai are used', function () {
       let httpTestServer, headers;

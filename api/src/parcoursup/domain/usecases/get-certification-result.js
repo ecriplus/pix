@@ -5,13 +5,18 @@ const getCertificationResult = function ({
   firstName,
   birthdate,
   certificationRepository,
+  verificationCode,
 }) {
   if (ine) {
-    return certificationRepository.get({ ine });
+    return certificationRepository.getByINE({ ine });
   }
 
-  if (organizationUai && lastName && firstName && birthdate) {
-    return certificationRepository.getByStudentDetails({ organizationUai, lastName, firstName, birthdate });
+  if (organizationUai) {
+    return certificationRepository.getByOrganizationUAI({ organizationUai, lastName, firstName, birthdate });
+  }
+
+  if (verificationCode) {
+    return certificationRepository.getByVerificationCode({ verificationCode });
   }
 };
 

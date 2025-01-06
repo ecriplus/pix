@@ -7,11 +7,11 @@ describe('Parcoursup | unit | domain | usecases | get certification', function (
       // given
       const ine = '1234';
       const certificationRepository = {
-        get: sinon.stub(),
+        getByINE: sinon.stub(),
       };
 
       const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({ ine });
-      certificationRepository.get.withArgs({ ine }).resolves(expectedCertification);
+      certificationRepository.getByINE.withArgs({ ine }).resolves(expectedCertification);
 
       // when
       const certification = await getCertificationResult({ ine, certificationRepository });
@@ -19,6 +19,7 @@ describe('Parcoursup | unit | domain | usecases | get certification', function (
       // then
       expect(certification).to.deep.equal(expectedCertification);
     });
+
     context('with organizationUai, last name, first name and birthdate', function () {
       it('returns matching certification', async function () {
         // given
@@ -27,7 +28,7 @@ describe('Parcoursup | unit | domain | usecases | get certification', function (
         const firstName = 'Bob';
         const birthdate = '2000-01-01';
         const certificationRepository = {
-          getByStudentDetails: sinon.stub(),
+          getByOrganizationUAI: sinon.stub(),
         };
 
         const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
@@ -36,7 +37,7 @@ describe('Parcoursup | unit | domain | usecases | get certification', function (
           firstName,
           birthdate,
         });
-        certificationRepository.getByStudentDetails
+        certificationRepository.getByOrganizationUAI
           .withArgs({
             organizationUai,
             lastName,
@@ -51,6 +52,34 @@ describe('Parcoursup | unit | domain | usecases | get certification', function (
           lastName,
           firstName,
           birthdate,
+          certificationRepository,
+        });
+
+        // then
+        expect(certification).to.deep.equal(expectedCertification);
+      });
+    });
+
+    context('with a verification code', function () {
+      it('returns matching certification', async function () {
+        // given
+        const verificationCode = 'P-1234567A';
+        const certificationRepository = {
+          getByVerificationCode: sinon.stub(),
+        };
+
+        const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
+          verificationCode,
+        });
+        certificationRepository.getByVerificationCode
+          .withArgs({
+            verificationCode,
+          })
+          .resolves(expectedCertification);
+
+        // when
+        const certification = await getCertificationResult({
+          verificationCode,
           certificationRepository,
         });
 

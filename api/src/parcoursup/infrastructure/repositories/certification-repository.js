@@ -2,13 +2,13 @@ import { datamartKnex } from '../../../../db/knex-database-connection.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { CertificationResult } from '../../domain/read-models/CertificationResult.js';
 
-const get = async ({ ine }) => {
+const getByINE = async ({ ine }) => {
   return _getBySearchParams({
     national_student_id: ine,
   });
 };
 
-const getByStudentDetails = async ({ organizationUai, lastName, firstName, birthdate }) => {
+const getByOrganizationUAI = async ({ organizationUai, lastName, firstName, birthdate }) => {
   return _getBySearchParams({
     organization_uai: organizationUai,
     last_name: lastName,
@@ -19,6 +19,17 @@ const getByStudentDetails = async ({ organizationUai, lastName, firstName, birth
 
 const _getBySearchParams = async (searchParams) => {
   const certificationResultDto = await datamartKnex('data_export_parcoursup_certif_result').where(searchParams);
+  if (!certificationResultDto.length) {
+    throw new NotFoundError('No certifications found for given search parameters');
+  }
+
+  return _toDomain(certificationResultDto);
+};
+
+const getByVerificationCode = async ({ verificationCode }) => {
+  const certificationResultDto = await datamartKnex('data_export_parcoursup_certif_result_code_validation').where({
+    certification_code_verification: verificationCode,
+  });
   if (!certificationResultDto.length) {
     throw new NotFoundError('No certifications found for given search parameters');
   }
@@ -45,4 +56,4 @@ const _toDomain = (certificationResultDto) => {
   });
 };
 
-export { get, getByStudentDetails };
+export { getByINE, getByOrganizationUAI, getByVerificationCode };

@@ -10,6 +10,8 @@ const implementationType = {
   alphanumeric: Joi.string(),
 };
 
+const certificationVerificationCodeType = Joi.string().regex(/^P-[a-zA-Z0-9]{8}$/);
+
 const inePattern = new RegExp('^[0-9]{9}[a-zA-Z]{2}$');
 const inaPattern = new RegExp('^[0-9]{10}[a-zA-Z]{1}$');
 
@@ -90,6 +92,7 @@ paramsToExport.positiveInteger32bits = {
 };
 
 export {
+  certificationVerificationCodeType,
   paramsToExport as identifiersType,
   queryToExport as optionalIdentifiersType,
   queriesType,
