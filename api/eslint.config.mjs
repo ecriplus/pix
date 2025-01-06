@@ -1,42 +1,49 @@
-const { fixupPluginRules } = require('@eslint/compat');
-const babel = require('@babel/eslint-parser');
-const eslintConfig = require('@1024pix/eslint-plugin/config');
-const prettier = require('eslint-plugin-prettier/recommended');
-const chai = require('eslint-plugin-chai-expect');
-const n = require('eslint-plugin-n').configs['flat/recommended'];
-const _import = require('eslint-plugin-import-x');
-const knex = require('eslint-plugin-knex');
-const unicorn = require('eslint-plugin-unicorn');
-const mocha = require('eslint-plugin-mocha');
-const i18nJsonPlugin = require('eslint-plugin-i18n-json');
+import pixRecommendedConfig from '@1024pix/eslint-plugin/config';
+import babelParser from '@babel/eslint-parser';
+import { fixupPluginRules } from '@eslint/compat';
+import chai from 'eslint-plugin-chai-expect';
+import i18nJsonPlugin from 'eslint-plugin-i18n-json';
+import _import from 'eslint-plugin-import-x';
+import knex from 'eslint-plugin-knex';
+import mocha from 'eslint-plugin-mocha';
+import nRecommendedConfig from 'eslint-plugin-n';
+import prettierRecommendedConfig from 'eslint-plugin-prettier/recommended';
+import unicorn from 'eslint-plugin-unicorn';
 
 const nonPhraseGeneratedFiles = ['translations/en.json', 'translations/fr.json'];
 
-module.exports = [
-  ...eslintConfig,
-  prettier,
+export default [
+  ...pixRecommendedConfig,
+  prettierRecommendedConfig,
+  nRecommendedConfig.configs['flat/recommended'],
   { plugins: { 'chai-expect': fixupPluginRules(chai) } },
-  n,
   { plugins: { import: _import } },
   { plugins: { knex: fixupPluginRules(knex) } },
   { plugins: { unicorn } },
   {
+    files: ['eslint.config.mjs'],
+    languageOptions: {},
+    rules: {
+      'n/no-unpublished-import': 'off',
+    },
+  },
+  {
     files: ['**/*.cjs'],
     languageOptions: {
-      globals: { module: 'readable', require: 'readable' },
-    },
-    rules: {
-      'n/no-unpublished-require': 'off',
+      globals: { module: 'readonly', require: 'readonly' },
     },
   },
   {
     files: ['**/*.js'],
     languageOptions: {
-      parser: babel,
+      parser: babelParser,
       parserOptions: {
         ecmaVersion: 2020,
+        sourceType: 'module',
         requireConfigFile: false,
         babelOptions: {
+          configFile: false,
+          babelrc: false,
           parserOpts: {
             plugins: ['importAttributes'],
           },
