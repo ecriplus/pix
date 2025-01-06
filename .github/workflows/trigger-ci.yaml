@@ -11,7 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
       - name: Trigger CircleCI
-        uses: CircleCI-Public/trigger-circleci-pipeline-action@v1.0.5
+        uses: CircleCI-Public/trigger-circleci-pipeline-action@v1.2.0
+        with:
+          target-branch: ${{ steps.extract_branch.outputs.branch }}
         env:
           CCI_TOKEN: ${{ secrets.PIX_SERVICE_CIRCLE_CI_TOKEN }}
