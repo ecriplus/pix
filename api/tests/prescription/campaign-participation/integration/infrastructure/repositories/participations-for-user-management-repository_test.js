@@ -73,6 +73,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
           campaignParticipation.participantExternalId,
         );
       });
+
       it('should return both assessment and profiles collection participations with all attributes', async function () {
         // given
         const campaign = databaseBuilder.factory.buildCampaign({ code: 'FUNCODE' });
@@ -128,6 +129,60 @@ describe('Integration | Repository | Participations-For-User-Management', functi
         });
         expect(participationsForUserManagement[1]).to.be.instanceOf(CampaignParticipationForUserManagement);
         expect(participationsForUserManagement[1]).to.deep.includes({
+          id: 1234,
+          campaignParticipationId: campaignParticipation.id,
+          participantExternalId: campaignParticipation.participantExternalId,
+          status: campaignParticipation.status,
+          createdAt: campaignParticipation.createdAt,
+          sharedAt: campaignParticipation.sharedAt,
+          campaignId: campaign.id,
+          campaignCode: campaign.code,
+          organizationLearnerFullName: `${organizationLearner.firstName} ${organizationLearner.lastName}`,
+        });
+      });
+
+      it('should return only one participation where assessment isImproving', async function () {
+        // given
+        const campaign = databaseBuilder.factory.buildCampaign({ code: 'FUNCODE', type: CampaignTypes.ASSESSMENT });
+        const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+          firstName: 'Blanche',
+          lastName: 'Isserie',
+          userId,
+        });
+        const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          userId,
+          organizationLearnerId: organizationLearner.id,
+          campaignId: campaign.id,
+          participantExternalId: '123',
+
+          status: SHARED,
+          createdAt: new Date('2010-10-10'),
+          sharedAt: new Date('2010-10-11'),
+        });
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId: campaignParticipation.id,
+          type: Assessment.types.CAMPAIGN,
+          isImproving: false,
+          state: Assessment.states.COMPLETED,
+          updatedAt: new Date('2010-10-10'),
+          userId,
+        });
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId: campaignParticipation.id,
+          type: Assessment.types.CAMPAIGN,
+          isImproving: true,
+          state: Assessment.states.STARTED,
+          updatedAt: new Date('2010-10-11'),
+          userId,
+        });
+
+        await databaseBuilder.commit();
+        // when
+        const participationsForUserManagement = await participationsForUserManagementRepository.findByUserId(userId);
+
+        expect(participationsForUserManagement).lengthOf(1);
+        expect(participationsForUserManagement[0]).to.be.instanceOf(CampaignParticipationForUserManagement);
+        expect(participationsForUserManagement[0]).to.deep.includes({
           id: 1234,
           campaignParticipationId: campaignParticipation.id,
           participantExternalId: campaignParticipation.participantExternalId,
@@ -212,6 +267,43 @@ describe('Integration | Repository | Participations-For-User-Management', functi
             campaignId: null,
             campaignCode: null,
             deletedAt: assessment.updatedAt,
+            organizationLearnerFullName: '-',
+          });
+        });
+        it('should return only isImproving assessment participation with deletion attributes', async function () {
+          // given
+          const assessment = databaseBuilder.factory.buildAssessment({
+            type: Assessment.types.CAMPAIGN,
+            campaignParticipationId: null,
+            userId,
+            createdAt: new Date('2010-10-11'),
+            updatedAt: new Date('2010-10-12'),
+          });
+          const latestAssessment = databaseBuilder.factory.buildAssessment({
+            type: Assessment.types.CAMPAIGN,
+            userId,
+            campaignParticipationId: null,
+            createdAt: new Date('2010-10-12'),
+            updatedAt: new Date('2010-10-13'),
+            isImproving: true,
+            state: Assessment.states.STARTED,
+          });
+          await databaseBuilder.commit();
+
+          // when
+          const participationsForUserManagement = await participationsForUserManagementRepository.findByUserId(userId);
+
+          // then
+          expect(participationsForUserManagement[0]).to.deep.includes({
+            id: 1234,
+            campaignParticipationId: null,
+            participantExternalId: null,
+            status: null,
+            createdAt: assessment.createdAt,
+            sharedAt: null,
+            campaignId: null,
+            campaignCode: null,
+            deletedAt: latestAssessment.updatedAt,
             organizationLearnerFullName: '-',
           });
         });
