@@ -1,6 +1,6 @@
 {{page-title (t "pages.missions.introduction-page.title")}}
 
-<Challenge::ChallengeWrapper>
+<Challenge::ChallengeLayout>
   <div class="mission-introduction">
     <RobotDialog>
       <Bubble
@@ -10,7 +10,7 @@
     </RobotDialog>
     <div class="mission-introduction__container">
       <div class="mission-introduction__media">
-        <Challenge::ChallengeMedia
+        <Challenge::Content::ChallengeMedia
           @src={{@model.mission.introductionMediaUrl}}
           @alt={{@model.mission.introductionMediaAlt}}
           @type={{@model.mission.introductionMediaType}}
@@ -24,4 +24,4 @@
       </div>
     </div>
   </div>
-</Challenge::ChallengeWrapper>
+</Challenge::ChallengeLayout>

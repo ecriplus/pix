@@ -1,10 +1,11 @@
 import { render } from '@1024pix/ember-testing-library';
 import Issue from 'junior/components/issue';
-import { setupRenderingTest } from 'junior/helpers/tests';
 import { module, test } from 'qunit';
 
+import setupIntlRenderingTest from '../helpers';
+
 module('Integration | Component | Issue', function (hooks) {
-  setupRenderingTest(hooks);
+  setupIntlRenderingTest(hooks);
 
   test('should display a given message', async function (assert) {
     // given
