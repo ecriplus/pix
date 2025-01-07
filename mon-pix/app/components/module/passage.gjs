@@ -5,9 +5,9 @@ import { tracked } from '@glimmer/tracking';
 import { pageTitle } from 'ember-page-title';
 
 import didInsert from '../../modifiers/modifier-did-insert';
-import BetaBanner from './beta-banner';
-import ModuleGrain from './grain.js';
-import ModuleNavbar from './navbar';
+import ModuleGrain from './grain/grain';
+import BetaBanner from './layout/beta-banner';
+import ModuleNavbar from './layout/navbar';
 
 export default class ModulePassage extends Component {
   @service router;

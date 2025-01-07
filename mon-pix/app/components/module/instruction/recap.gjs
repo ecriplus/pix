@@ -1,8 +1,8 @@
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { t } from 'ember-intl';
-import ModuleBetaBanner from 'mon-pix/components/module/beta-banner';
-import ModuleObjectives from 'mon-pix/components/module/objectives';
+import ModuleObjectives from 'mon-pix/components/module/instruction/objectives';
+import ModuleBetaBanner from 'mon-pix/components/module/layout/beta-banner';
 
 <template>
   {{#if @module.isBeta}}

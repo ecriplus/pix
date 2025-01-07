@@ -2,7 +2,7 @@ import { render, within } from '@1024pix/ember-testing-library';
 import { click, findAll } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import { setBreakpoint } from 'ember-responsive/test-support';
-import ModulixDetails from 'mon-pix/components/module/details';
+import ModulixDetails from 'mon-pix/components/module/instruction/details';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 

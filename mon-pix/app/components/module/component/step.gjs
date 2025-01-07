@@ -2,10 +2,10 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
-import Element from 'mon-pix/components/module/element';
-import ModuleGrain from 'mon-pix/components/module/grain';
+import Element from 'mon-pix/components/module/component/element';
+import ModuleGrain from 'mon-pix/components/module/grain/grain';
 
-import didInsert from '../../modifiers/modifier-did-insert';
+import didInsert from '../../../modifiers/modifier-did-insert';
 
 export default class ModulixStep extends Component {
   @service modulixAutoScroll;

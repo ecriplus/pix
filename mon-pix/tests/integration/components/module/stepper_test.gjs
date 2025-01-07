@@ -1,7 +1,7 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { t } from 'ember-intl/test-support';
-import ModulixStepper from 'mon-pix/components/module/stepper';
+import ModulixStepper from 'mon-pix/components/module/component/stepper';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 

@@ -1,6 +1,6 @@
 {{#if @model.isBeta}}
   <div class="modulix-beta-banner">
-    <Module::BetaBanner />
+    <Module::Layout::BetaBanner />
   </div>
 {{/if}}
 <nav>
@@ -15,6 +15,6 @@
 </nav>
 
 <div class="modulix">
-  <Module::Details @module={{@model}} />
+  <Module::Instruction::Details @module={{@model}} />
 </div>
 <Footer />

@@ -21,7 +21,7 @@ module('Unit | Component | Module | Element', function (hooks) {
       };
       const getLastCorrectionForElementStub = sinon.stub();
       getLastCorrectionForElementStub.withArgs(element).returns('expectedLastCorrectionForElement');
-      const component = createGlimmerComponent('module/element', {
+      const component = createGlimmerComponent('module/component/element', {
         getLastCorrectionForElement: getLastCorrectionForElementStub,
         element,
       });

@@ -1,5 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
-import ModulixStep from 'mon-pix/components/module/step';
+import ModulixStep from 'mon-pix/components/module/component/step';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';

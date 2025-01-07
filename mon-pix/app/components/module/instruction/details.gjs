@@ -8,7 +8,7 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
 import ResponsiveListWideWrap from 'mon-pix/components/common/responsive-ul-wide-wrap';
-import ModuleObjectives from 'mon-pix/components/module/objectives';
+import ModuleObjectives from 'mon-pix/components/module/instruction/objectives';
 import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 
 export default class ModulixDetails extends Component {

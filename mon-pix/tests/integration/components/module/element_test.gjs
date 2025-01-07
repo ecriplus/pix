@@ -1,7 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import { findAll } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
-import ModulixElement from 'mon-pix/components/module/element';
+import ModulixElement from 'mon-pix/components/module/component/element';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
