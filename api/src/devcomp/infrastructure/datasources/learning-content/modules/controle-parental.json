@@ -18,7 +18,7 @@
   "transitionTexts": [
     {
       "grainId": "f7e0ec28-06a2-4915-bcd7-53d5f5e3b9a7",
-      "content": "<p>Max entre bientôt au collège. <span aria-hidden=\"true\">🎒</span><br>Ses parents souhaitent lui offrir son premier smartphone, mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina, demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion. <span aria-hidden=\"true\">📺</span></p>"
+      "content": "<p>Max entre bientôt au collège. <br>Ses parents souhaitent lui offrir son premier smartphone mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina, demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion. <span aria-hidden=\"true\">📺</span></p>"
     },
     {
       "grainId": "fab2ec90-8350-4f51-8700-336bcd3acade",
@@ -74,8 +74,8 @@
             "proposals": [
               {
                 "id": "1",
-                "content": "<p>Il permet d'accompagner les pratiques numériques de son enfant.</p>",
-                "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p>\n\n<p>En plus du contrôle parental, des temps de discussion entre parents et enfants sont nécessaires pour accompagner les pratiques numériques des enfants.</p>"
+                "content": "<p>Il permet d'encadrer les pratiques numériques de son enfant.</p>",
+                "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p>\n\n<p>En plus du contrôle parental, des temps de discussion entre parents et enfants sont indispensables pour accompagner les pratiques numériques des enfants.</p>"
               },
               {
                 "id": "2",
