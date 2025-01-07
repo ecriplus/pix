@@ -412,12 +412,12 @@
               {
                 "id": "1",
                 "content": "<p>oui</p>",
-                "feedback": "<p>Bravo ! <span aria-hidden=\"true\">✨</span>Pour aller plus loin, rendez-vous sur la page <a href=\"https://e-enfance.org/informer/controle-parental/\" target=\"_blank\">Activer, installer et configurer un contrôle parental</a> de l'association e-Enfance.</p>"
+                "feedback": "<p>Bravo ! <span aria-hidden=\"true\">✨</span> Vous pouvez aussi regarder sur les sites et plateformes en ligne si ils proposent des options contrôle parental.</span></p>"
               },
               {
                 "id": "2",
                 "content": "<p>non</p>",
-                "feedback": "<p>Avez-vous regardé dans les paramètres de vos appareils ? Pour aller plus loin, rendez-vous sur la page <a href=\"https://e-enfance.org/informer/controle-parental/\" target=\"_blank\">Activer, installer et configurer un contrôle parental</a> de l'association e-Enfance.</p>"
+                "feedback": "<p>Avez-vous regardé dans les paramètres de vos appareils ? Il y a souvent un symbole de roue crantée. <span aria-hidden=\"true\">⚙️</span></p>"
               }
             ],
             "feedbacks": {
@@ -425,6 +425,21 @@
               "invalid": ""
             },
             "solution": "1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "8a517ecc-2145-4bb5-9d90-afb26fe71c2f",
+      "type": "lesson",
+      "title": "Pour aller plus loin",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "14e1e0c3-b521-41bf-af4a-2757912262c1",
+            "type": "text",
+            "content": "<p>Pour aller plus loin, rendez-vous sur la page <a href=\"https://e-enfance.org/informer/controle-parental/\">Activer, installer et configurer un contrôle parental</a> de l'association e-Enfance.</p>"
           }
         }
       ]
