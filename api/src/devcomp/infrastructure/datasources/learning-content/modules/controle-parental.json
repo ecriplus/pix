@@ -300,7 +300,7 @@
           "element": {
             "id": "2b03d03b-39fd-433a-8895-1144aa69d766",
             "type": "text",
-            "content": "<h3><span aria-hidden=\"true\">📌</span> Les 4 points à retenir : </h3>\n<p><br></p>\n<ul>\n    <li>Le contrôle parental est un <strong>outil numérique pour protéger les enfants et encadrer leurs usages numériques</strong><span aria-hidden=\"true\">🛡</span></li><br>\n    <li>Le contrôle parental ne remplace pas les échanges parents-enfants, il les complète !<span aria-hidden=\"true\">🗣️</span></li><br>\n    <li>Le contrôle parental a de nombreuses fonctionnalités <strong>gestion du temps en ligne, filtrage des contenus et suivi des activités</strong>. <span aria-hidden=\"true\">⏳</span></li><br>\n    <li>Pour activer et paramétrer le contrôle parental, rendez-vous dans les <strong>paramètres</strong>. <span aria-hidden=\"true\">⚙️</span></li><br>\n</ul>"
+            "content": "<h3><span aria-hidden=\"true\">📌</span> Les 4 points à retenir : </h3>\n<p><br></p>\n<ul>\n    <li>Le contrôle parental est un <strong>outil numérique pour protéger les enfants et encadrer leurs usages numériques</strong> <span aria-hidden=\"true\">🛡</span></li><br>\n    <li>Le contrôle parental ne remplace pas les échanges parents-enfants, il les complète ! <span aria-hidden=\"true\">🗣️</span></li><br>\n    <li>Le contrôle parental a de nombreuses fonctionnalités <strong>gestion du temps en ligne, filtrage des contenus et suivi des activités</strong>. <span aria-hidden=\"true\">⏳</span></li><br>\n    <li>Pour activer et paramétrer le contrôle parental, rendez-vous dans les <strong>paramètres</strong>. <span aria-hidden=\"true\">⚙️</span></li><br>\n</ul>"
           }
         }
       ]
@@ -385,7 +385,7 @@
             ],
             "feedbacks": {
               "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Pour accompagner au mieux Max, Nina peut activer des options de contrôle parental sur les appareils et les plateformes en ligne.</p>",
-              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Relisez l’infographie et essayez à nouveau !</p>"
+              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Attention, même si Whastapp propose des options de confidentialité, il ne propose pas d'options de contrôle parental. Relisez l’infographie et essayez à nouveau !</p>"
             },
             "solutions": [
               "1",
