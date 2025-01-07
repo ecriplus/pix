@@ -2,6 +2,7 @@ import { certificationDomainErrorMappingConfiguration } from '../src/certificati
 import { devcompDomainErrorMappingConfiguration } from '../src/devcomp/application/http-error-mapper-configuration.js';
 import { evaluationDomainErrorMappingConfiguration } from '../src/evaluation/application/http-error-mapper-configuration.js';
 import { authenticationDomainErrorMappingConfiguration } from '../src/identity-access-management/application/http-error-mapper-configuration.js';
+import { legalDocumentsDomainErrorMappingConfiguration } from '../src/legal-documents/application/http-error-mapper-configuration.js';
 import { organizationalEntitiesDomainErrorMappingConfiguration } from '../src/organizational-entities/application/http-error-mapper-configuration.js';
 import { prescriptionDomainErrorMappingConfiguration } from '../src/prescription/shared/application/http-error-mapper-configuration.js';
 import { profileDomainErrorMappingConfiguration } from '../src/profile/application/http-error-mapper-configuration.js';
@@ -18,6 +19,7 @@ const setupErrorHandling = function (server) {
     ...certificationDomainErrorMappingConfiguration,
     ...devcompDomainErrorMappingConfiguration,
     ...evaluationDomainErrorMappingConfiguration,
+    ...legalDocumentsDomainErrorMappingConfiguration,
     ...prescriptionDomainErrorMappingConfiguration,
     ...schoolDomainErrorMappingConfiguration,
     ...profileDomainErrorMappingConfiguration,
