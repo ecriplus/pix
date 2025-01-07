@@ -1,7 +1,7 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as mailService from '../../../../lib/domain/services/mail-service.js';
+import * as mailService from '../../../../src/shared/domain/services/mail-service.js';
 import * as sharedMembershipRepository from '../../../../src/shared/infrastructure/repositories/membership-repository.js';
 import * as organizationRepository from '../../../../src/shared/infrastructure/repositories/organization-repository.js';
 import * as certificationCenterRepository from '../../../certification/shared/infrastructure/repositories/certification-center-repository.js';

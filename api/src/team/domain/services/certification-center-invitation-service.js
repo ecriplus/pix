@@ -1,4 +1,4 @@
-import * as maillingService from '../../../../lib/domain/services/mail-service.js';
+import * as maillingService from '../../../../src/shared/domain/services/mail-service.js';
 import {
   SendingEmailError,
   SendingEmailToInvalidDomainError,
