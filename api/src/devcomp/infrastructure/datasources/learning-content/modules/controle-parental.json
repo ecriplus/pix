@@ -431,7 +431,7 @@
     },
     {
       "id": "8a517ecc-2145-4bb5-9d90-afb26fe71c2f",
-      "type": "lesson",
+      "type": "discovery",
       "title": "Pour aller plus loin",
       "components": [
         {
@@ -439,7 +439,7 @@
           "element": {
             "id": "14e1e0c3-b521-41bf-af4a-2757912262c1",
             "type": "text",
-            "content": "<p>Pour aller plus loin, rendez-vous sur la page <a href=\"https://e-enfance.org/informer/controle-parental/\">Activer, installer et configurer un contrôle parental</a> de l'association e-Enfance.</p>"
+            "content": "<p>Pour en apprendre plus sur le contrôle parental, rendez-vous sur la page <a href=\"https://e-enfance.org/informer/controle-parental/\">Activer, installer et configurer un contrôle parental</a> de l'association e-Enfance.</p>"
           }
         }
       ]
