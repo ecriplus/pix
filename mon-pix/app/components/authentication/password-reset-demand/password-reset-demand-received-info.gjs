@@ -1,8 +1,10 @@
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import { hash } from '@ember/helper';
+import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
+import didInsert from 'mon-pix/modifiers/modifier-did-insert';
 
 export default class PasswordResetDemandReceivedInfo extends Component {
   @service intl;
@@ -10,10 +12,16 @@ export default class PasswordResetDemandReceivedInfo extends Component {
   get locale() {
     return this.intl.primaryLocale;
   }
+
+  @action
+  setFocus(element) {
+    element.focus({ focusVisible: false });
+  }
+
   <template>
     <div class="authentication-password-reset-demand-received-info">
       <img src="/images/mail.svg" alt="" />
-      <h2 class="authentication-password-reset-demand-received-info__heading">
+      <h2 class="authentication-password-reset-demand-received-info__heading" tabindex="-1" {{didInsert this.setFocus}}>
         {{t "components.authentication.password-reset-demand-received-info.heading"}}
       </h2>
       <p class="authentication-password-reset-demand-received-info__message">
