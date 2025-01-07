@@ -69,7 +69,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       const options = {
         method: 'POST',
         url: `/api/certification-reports/${certificationCourseId}/abort`,
-        payload: { data: { attributes: { 'abort-reason': 'technical' } } },
+        payload: { data: { reason: 'technical' } },
         headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
       };
 
