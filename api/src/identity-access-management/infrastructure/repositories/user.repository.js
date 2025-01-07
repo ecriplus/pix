@@ -338,17 +338,6 @@ const acceptPixLastTermsOfService = async function (id) {
   return new User(user);
 };
 
-const updatePixOrgaTermsOfServiceAcceptedToTrue = async function (id) {
-  const now = new Date();
-
-  const [user] = await knex('users')
-    .where({ id })
-    .update({ pixOrgaTermsOfServiceAccepted: true, lastPixOrgaTermsOfServiceValidatedAt: now, updatedAt: now })
-    .returning('*');
-
-  return new User(user);
-};
-
 const updatePixCertifTermsOfServiceAcceptedToTrue = async function (id) {
   const now = new Date();
 
@@ -448,7 +437,6 @@ const updateLastDataProtectionPolicySeenAt = async function ({ userId }) {
  * @property {function} updateHasSeenNewDashboardInfoToTrue
  * @property {function} updateLastDataProtectionPolicySeenAt
  * @property {function} updatePixCertifTermsOfServiceAcceptedToTrue
- * @property {function} updatePixOrgaTermsOfServiceAcceptedToTrue
  * @property {function} updateUserDetailsForAdministration
  * @property {function} updateUsername
  * @property {function} updateWithEmailConfirmed
@@ -481,7 +469,6 @@ export {
   updateHasSeenNewDashboardInfoToTrue,
   updateLastDataProtectionPolicySeenAt,
   updatePixCertifTermsOfServiceAcceptedToTrue,
-  updatePixOrgaTermsOfServiceAcceptedToTrue,
   updateUserDetailsForAdministration,
   updateUsername,
   updateWithEmailConfirmed,
