@@ -92,10 +92,11 @@ describe('Integration | Repository | Organization Learner Management | Organizat
 
       // then
       const organizationLearnerResult = await knex('organization-learners')
-        .select('deletedAt', 'deletedBy')
+        .select('updatedAt', 'deletedAt', 'deletedBy')
         .where('id', organizationLearnerId)
         .first();
 
+      expect(organizationLearnerResult.updatedAt).to.deep.equal(now);
       expect(organizationLearnerResult.deletedAt).to.deep.equal(now);
       expect(organizationLearnerResult.deletedBy).to.equal(userId);
     });

@@ -61,7 +61,7 @@ const removeByIds = function ({ organizationLearnerIds, userId }) {
   return knexConn('organization-learners')
     .whereIn('id', organizationLearnerIds)
     .whereNull('deletedAt')
-    .update({ deletedAt: new Date(), deletedBy: userId });
+    .update({ updatedAt: new Date(), deletedAt: new Date(), deletedBy: userId });
 };
 
 const disableAllOrganizationLearnersInOrganization = async function ({ organizationId, nationalStudentIds }) {
