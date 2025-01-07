@@ -7,14 +7,15 @@ import { createCertificationCenterMembershipForScoOrganizationAdminMember } from
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Team | Domain | UseCase | create-certification-center-membership-for-sco-organization-member', function () {
-  const now = new Date('2023-11-01');
+  let now;
   let membershipRepository;
   let certificationCenterRepository;
   let certificationCenterMembershipRepository;
   let clock;
 
   beforeEach(function () {
-    clock = sinon.useFakeTimers(now);
+    clock = sinon.useFakeTimers(new Date('2023-11-01'));
+    now = new Date(clock.now);
     membershipRepository = {
       get: sinon.stub(),
     };

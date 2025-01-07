@@ -35,8 +35,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-for
       findByTemporaryKey: sinon.stub(),
       findByUserId: sinon.stub(),
     };
-    now = new Date();
-    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    clock = sinon.useFakeTimers({ now: new Date(), toFake: ['Date'] });
+    now = new Date(clock.now);
   });
 
   afterEach(function () {

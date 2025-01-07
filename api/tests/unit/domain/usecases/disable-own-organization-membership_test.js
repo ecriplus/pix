@@ -4,10 +4,11 @@ import { expect, sinon } from '../../../test-helper.js';
 describe('Unit | UseCase | disable-own-membership', function () {
   let membershipRepository;
   let clock;
-  const now = new Date('2023-08-01T11:15:00Z');
+  let now;
 
   beforeEach(function () {
-    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    clock = sinon.useFakeTimers({ now: new Date('2023-08-01T11:15:00Z'), toFake: ['Date'] });
+    now = new Date(clock.now);
     membershipRepository = {
       findByUserIdAndOrganizationId: sinon.stub(),
       updateById: sinon.stub(),

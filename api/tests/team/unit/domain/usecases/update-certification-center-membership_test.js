@@ -3,11 +3,12 @@ import { updateCertificationCenterMembership } from '../../../../../src/team/dom
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Team | Domain | UseCase | update-certification-center-membership', function () {
-  const now = new Date('2023-09-12');
+  let now;
   let clock;
 
   beforeEach(function () {
-    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    clock = sinon.useFakeTimers({ now: new Date('2023-09-12'), toFake: ['Date'] });
+    now = new Date(clock.now);
   });
 
   afterEach(function () {

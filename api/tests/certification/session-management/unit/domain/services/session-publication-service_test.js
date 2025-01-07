@@ -23,7 +23,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
     finalizedSessionRepository,
     certificationCenterRepository,
     mailService;
-  const now = new Date('2019-01-01T05:06:07Z');
+  let now;
   const sessionDate = '2020-05-08';
   const recipient1 = 'email1@example.net';
   const recipient2 = 'email2@example.net';
@@ -64,7 +64,8 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
       ],
       publishedAt: null,
     });
-    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    clock = sinon.useFakeTimers({ now: new Date('2019-01-01T05:06:07Z'), toFake: ['Date'] });
+    now = new Date(clock.now);
   });
 
   afterEach(function () {

@@ -22,8 +22,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | validate-user-a
       update: sinon.stub(),
     };
 
-    now = new Date('2024-06-26');
-    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    clock = sinon.useFakeTimers({ now: new Date('2024-06-26'), toFake: ['Date'] });
+    now = new Date(clock.now);
 
     sinon.stub(monitoringTools, 'logErrorWithCorrelationIds');
   });

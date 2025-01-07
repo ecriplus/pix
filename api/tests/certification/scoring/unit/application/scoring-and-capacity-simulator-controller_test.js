@@ -8,11 +8,11 @@ describe('Unit | Application | scoringAndCapacitySimulatorController', function 
     let now;
 
     beforeEach(function () {
-      now = new Date();
       clock = sinon.useFakeTimers({
-        now,
+        now: new Date(),
         toFake: ['Date'],
       });
+      now = new Date(clock.now);
     });
 
     afterEach(async function () {
