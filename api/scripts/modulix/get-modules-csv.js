@@ -24,6 +24,18 @@ export async function getModulesListAsCsv(modules) {
         label: 'ModuleTotalActivities',
         value: (row) => row.grains.filter((grain) => grain.type === 'activity').length,
       },
+      {
+        label: 'ModuleTotalChallenges',
+        value: (row) => row.grains.filter((grain) => grain.type === 'challenge').length,
+      },
+      {
+        label: 'ModuleTotalDiscoveries',
+        value: (row) => row.grains.filter((grain) => grain.type === 'discovery').length,
+      },
+      {
+        label: 'ModuleTotalSummaries',
+        value: (row) => row.grains.filter((grain) => grain.type === 'summary').length,
+      },
       { label: 'ModuleDuration', value: (row) => `=TEXT(${row.details.duration}/24/60; "mm:ss")` },
       {
         label: 'ModuleIsBeta',

@@ -53,7 +53,7 @@ describe('Acceptance | Script | Get Modules as CSV', function () {
         grains: [
           {
             id: '47cd065b-dbf2-4adc-b5c3-02fb69cb9ec2',
-            type: 'activity',
+            type: 'discovery',
             title: 'Test Stepper',
             components: [
               {
@@ -83,7 +83,7 @@ describe('Acceptance | Script | Get Modules as CSV', function () {
           },
           {
             id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
-            type: 'lesson',
+            type: 'summary',
             title: 'Voici une leçon',
             components: [
               {
@@ -145,7 +145,7 @@ describe('Acceptance | Script | Get Modules as CSV', function () {
           },
           {
             id: '533c69b8-a836-41be-8ffc-8d4636e31224',
-            type: 'activity',
+            type: 'challenge',
             title: 'Voici un vrai-faux',
             components: [
               {
@@ -348,7 +348,7 @@ describe('Acceptance | Script | Get Modules as CSV', function () {
     // Then
     expect(modulesListAsCsv).to.be.a('string');
     expect(modulesListAsCsv).to
-      .equal(`\ufeff"Module"\t"ModuleTotalElements"\t"ModuleLink"\t"ModuleLevel"\t"ModuleTotalGrains"\t"ModuleTotalLessons"\t"ModuleTotalActivities"\t"ModuleDuration"\t"ModuleIsBeta"
-"didacticiel-modulix"\t11\t"https://app.recette.pix.fr/modules/didacticiel-modulix"\t"Débutant"\t8\t2\t6\t"=TEXT(5/24/60; ""mm:ss"")"\t"=TRUE"`);
+      .equal(`\ufeff"Module"\t"ModuleTotalElements"\t"ModuleLink"\t"ModuleLevel"\t"ModuleTotalGrains"\t"ModuleTotalLessons"\t"ModuleTotalActivities"\t"ModuleTotalChallenges"\t"ModuleTotalDiscoveries"\t"ModuleTotalSummaries"\t"ModuleDuration"\t"ModuleIsBeta"
+"didacticiel-modulix"\t11\t"https://app.recette.pix.fr/modules/didacticiel-modulix"\t"Débutant"\t8\t1\t4\t1\t1\t1\t"=TEXT(5/24/60; ""mm:ss"")"\t"=TRUE"`);
   });
 });
