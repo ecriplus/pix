@@ -107,6 +107,7 @@ import * as courseRepository from '../../../src/shared/infrastructure/repositori
 import * as organizationLearnerRepository from '../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationRepository from '../../../src/shared/infrastructure/repositories/organization-repository.js';
 import * as skillRepository from '../../../src/shared/infrastructure/repositories/skill-repository.js';
+import * as tubeRepository from '../../../src/shared/infrastructure/repositories/tube-repository.js';
 import * as userLoginRepository from '../../../src/shared/infrastructure/repositories/user-login-repository.js';
 import * as codeUtils from '../../../src/shared/infrastructure/utils/code-utils.js';
 import * as writeCsvUtils from '../../../src/shared/infrastructure/utils/csv/write-csv-utils.js';
@@ -143,7 +144,6 @@ import * as targetProfileRepository from '../../infrastructure/repositories/targ
 import * as targetProfileShareRepository from '../../infrastructure/repositories/target-profile-share-repository.js';
 import * as targetProfileTrainingRepository from '../../infrastructure/repositories/target-profile-training-repository.js';
 import * as thematicRepository from '../../infrastructure/repositories/thematic-repository.js';
-import * as tubeRepository from '../../infrastructure/repositories/tube-repository.js';
 import * as stageCollectionRepository from '../../infrastructure/repositories/user-campaign-results/stage-collection-repository.js';
 import * as userOrganizationsForAdminRepository from '../../infrastructure/repositories/user-organizations-for-admin-repository.js';
 import * as learningContentConversionService from '../services/learning-content/learning-content-conversion-service.js';

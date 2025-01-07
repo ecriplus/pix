@@ -6,11 +6,11 @@ import { LearningContent } from '../../../src/shared/domain/models/LearningConte
 import * as areaRepository from '../../../src/shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../src/shared/infrastructure/repositories/competence-repository.js';
 import * as skillRepository from '../../../src/shared/infrastructure/repositories/skill-repository.js';
+import * as tubeRepository from '../../../src/shared/infrastructure/repositories/tube-repository.js';
 import * as learningContentConversionService from '../../domain/services/learning-content/learning-content-conversion-service.js';
 import * as campaignRepository from './campaign-repository.js';
 import * as frameworkRepository from './framework-repository.js';
 import * as thematicRepository from './thematic-repository.js';
-import * as tubeRepository from './tube-repository.js';
 
 async function findByCampaignId(campaignId, locale) {
   const skills = await campaignRepository.findSkills({ campaignId });

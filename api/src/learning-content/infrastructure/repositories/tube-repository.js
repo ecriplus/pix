@@ -1,4 +1,4 @@
-import { clearCache } from '../../../../lib/infrastructure/repositories/tube-repository.js';
+import { clearCache } from '../../../shared/infrastructure/repositories/tube-repository.js';
 import { LearningContentRepository } from './learning-content-repository.js';
 
 class TubeRepository extends LearningContentRepository {
