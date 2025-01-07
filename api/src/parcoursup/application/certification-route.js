@@ -9,33 +9,35 @@ import { certificationController } from './certification-controller.js';
 
 const register = async function (server) {
   server.route({
-    method: 'GET',
+    method: 'POST',
     path: '/api/parcoursup/certification/search',
     config: {
       auth: 'jwt-parcoursup',
       validate: {
-        query: Joi.alternatives().try(
-          Joi.object({
-            ine: studentIdentifierType,
-          }),
-          Joi.object({
-            organizationUai: Joi.string().required(),
-            lastName: Joi.string().required(),
-            firstName: Joi.string().required(),
-            birthdate: Joi.string().required(),
-          }),
-          Joi.object({
-            verificationCode: certificationVerificationCodeType.required(),
-          }),
-        ),
+        payload: Joi.alternatives()
+          .try(
+            Joi.object({
+              ine: studentIdentifierType.required(),
+            }),
+            Joi.object({
+              organizationUai: Joi.string().required(),
+              lastName: Joi.string().required(),
+              firstName: Joi.string().required(),
+              birthdate: Joi.string().required(),
+            }),
+            Joi.object({
+              verificationCode: certificationVerificationCodeType.required(),
+            }),
+          )
+          .required(),
       },
       handler: certificationController.getCertificationResult,
       tags: ['api', 'parcoursup'],
       notes: [
-        '- **Cette route est accessible uniquement à Parcoursup**\n' +
-          '- avec un INE, récupère la dernière certification de l‘année en cours pour l‘élève identifié' +
-          '- avec un UAI, nom, prénom et date de naissance, récupère la dernière certification de l‘année en cours pour l‘élève identifié' +
-          '- avec un code de vérification, récupère la certification correspondante',
+        '**Cette route est accessible uniquement à Parcoursup**\n' +
+          '- Avec un INE, récupère la dernière certification de l‘année en cours pour l‘élève identifié\n' +
+          '- Avec un UAI, nom, prénom et date de naissance, récupère la dernière certification de l‘année en cours pour l‘élève identifié\n' +
+          '- Avec un code de vérification, récupère la certification correspondante',
       ],
       response: {
         failAction: 'log',
