@@ -8,10 +8,12 @@ const { deleteCampaignParticipationForAdmin } = usecases;
 describe('Unit | UseCase | delete-campaign-participation-for-admin', function () {
   //given
   let clock;
-  const now = new Date('2021-09-25');
+  let now;
 
   beforeEach(function () {
-    clock = sinon.useFakeTimers({ now: now.getTime(), toFake: ['Date'] });
+    clock = sinon.useFakeTimers({ now: new Date('2021-09-25'), toFake: ['Date'] });
+    now = new Date(clock.now);
+
     sinon.stub(DomainTransaction, 'execute');
     DomainTransaction.execute.callsFake((fn) => {
       return fn({});

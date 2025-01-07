@@ -142,7 +142,7 @@ describe('Unit | UseCase | finalize-session', function () {
     });
 
     context('When the certificationReports are valid', function () {
-      const now = new Date('2019-01-01T05:06:07Z');
+      let now;
       let clock;
 
       beforeEach(function () {
@@ -168,7 +168,8 @@ describe('Unit | UseCase | finalize-session', function () {
 
       it('should finalize session with expected arguments', async function () {
         // given
-        clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+        clock = sinon.useFakeTimers({ now: new Date('2019-01-01T05:06:07Z'), toFake: ['Date'] });
+        now = new Date(clock.now);
         const validReportForFinalization = domainBuilder.buildCertificationReport({
           examinerComment: 'signalement sur le candidat',
           hasSeenEndTestScreen: false,

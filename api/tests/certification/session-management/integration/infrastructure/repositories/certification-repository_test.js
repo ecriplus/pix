@@ -55,14 +55,14 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
     context(
       'when all certification latest assessment result are validated, rejected or certification is cancelled',
       function () {
-        let clock;
-        const now = new Date('2022-12-25');
+        let clock, now;
 
         beforeEach(function () {
           clock = sinon.useFakeTimers({
-            now,
+            now: new Date('2022-12-25'),
             toFake: ['Date'],
           });
+          now = new Date(clock.now);
         });
 
         afterEach(async function () {

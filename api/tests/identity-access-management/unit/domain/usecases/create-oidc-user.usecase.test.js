@@ -7,10 +7,11 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
   let authenticationMethodRepository, userToCreateRepository, userLoginRepository;
   let authenticationSessionService, oidcAuthenticationService, oidcAuthenticationServiceRegistry;
   let clock;
-  const now = new Date('2021-01-02');
+  let now;
 
   beforeEach(function () {
-    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    clock = sinon.useFakeTimers({ now: new Date('2021-01-02'), toFake: ['Date'] });
+    now = new Date(clock.now);
 
     authenticationMethodRepository = {
       findOneByExternalIdentifierAndIdentityProvider: sinon.stub(),

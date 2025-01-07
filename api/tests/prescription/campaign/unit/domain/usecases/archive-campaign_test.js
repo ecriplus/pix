@@ -8,8 +8,8 @@ describe('Unit | UseCase | archive-campaign', function () {
   let campaignAdministrationRepository;
 
   beforeEach(function () {
-    now = new Date('2022-01-01');
-    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    clock = sinon.useFakeTimers({ now: new Date('2022-01-01'), toFake: ['Date'] });
+    now = new Date(clock.now);
     campaignAdministrationRepository = {
       get: sinon.stub(),
       update: sinon.stub(),

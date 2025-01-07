@@ -992,7 +992,7 @@ describe('Unit | Service | Certification Challenge Service', function () {
     let learningContent;
     let learningContentRepository;
     let clock;
-    const now = new Date('2019-01-01T05:06:07Z');
+    let now;
 
     function _createTubeWithSkills({ maxLevel, tubeName, tubeId, areaName }) {
       const skills = [];
@@ -1047,7 +1047,8 @@ describe('Unit | Service | Certification Challenge Service', function () {
     }
 
     beforeEach(function () {
-      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+      clock = sinon.useFakeTimers({ now: new Date('2019-01-01T05:06:07Z'), toFake: ['Date'] });
+      now = new Date(clock.now);
       const tube1Area1 = _createTubeWithSkills({
         maxLevel: 5,
         tubeName: 'faireDesCourses',

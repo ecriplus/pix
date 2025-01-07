@@ -27,12 +27,13 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
   let certificationAssessmentHistoryRepository;
   let services;
 
-  const now = new Date('2019-01-01T05:06:07Z');
+  let now;
   let clock;
   let events;
 
   beforeEach(function () {
-    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    clock = sinon.useFakeTimers({ now: new Date('2019-01-01T05:06:07Z'), toFake: ['Date'] });
+    now = new Date(clock.now);
 
     certificationCompletedJobController = new CertificationCompletedJobController();
 
@@ -154,7 +155,7 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
           expect(certificationCourseRepository.update).to.have.been.calledWithExactly({
             certificationCourse: new CertificationCourse({
               ...certificationCourse.toDTO(),
-              completedAt: now,
+              completedAt: new Date(clock.now),
             }),
           });
           expect(events.eventDispatcher.dispatch).to.not.have.been.called;
@@ -202,7 +203,7 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
           expect(certificationCourseRepository.update).to.have.been.calledWithExactly({
             certificationCourse: new CertificationCourse({
               ...certificationCourse.toDTO(),
-              completedAt: now,
+              completedAt: new Date(clock.now),
             }),
           });
           expect(events.eventDispatcher.dispatch).to.have.been.calledOnceWithExactly(

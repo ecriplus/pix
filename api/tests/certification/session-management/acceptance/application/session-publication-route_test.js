@@ -113,8 +113,7 @@ describe('Certification | Session-Management | Acceptance | Application | Routes
             const response = await server.inject(options);
 
             // then
-            // expect(response.result.data.attributes['published-at']).to.be.an.instanceOf(Date);
-            expect(response.result.data.attributes['published-at']).deepEqualInstance(now);
+            expect(response.result.data.attributes['published-at']).to.deep.equal(now);
           });
 
           it('should update the published information', async function () {
@@ -125,7 +124,7 @@ describe('Certification | Session-Management | Acceptance | Application | Routes
             const [certificationCourse] = await knex('certification-courses').where({ id: certificationId });
             const [session] = await knex('sessions').where({ id: sessionId });
             expect(certificationCourse.isPublished).to.be.true;
-            expect(session.publishedAt).deepEqualInstance(now);
+            expect(session.publishedAt).to.deep.equal(now);
           });
         });
       });

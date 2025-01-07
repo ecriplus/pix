@@ -342,11 +342,12 @@ describe('Unit | Controller | assessment-controller-get-next-challenge', functio
         });
 
         describe('when asking for a challenge', function () {
-          const now = new Date('2019-01-01T05:06:07Z');
+          let now;
           let clock;
 
           beforeEach(function () {
-            clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+            clock = sinon.useFakeTimers({ now: new Date('2019-01-01T05:06:07Z'), toFake: ['Date'] });
+            now = new Date(clock.now);
           });
 
           afterEach(function () {
