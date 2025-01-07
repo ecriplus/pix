@@ -5,6 +5,8 @@ class Prescriber {
    *   firstName: string,
    *   lastName: string,
    *   pixOrgaTermsOfServiceAccepted: boolean,
+   *   pixOrgaTermsOfServiceStatus: string,
+   *   pixOrgaTermsOfServiceDocumentPath: string,
    *   lang: string,
    *   areNewYearOrganizationLearnersImported: boolean,
    *   participantCount: number,
@@ -18,6 +20,8 @@ class Prescriber {
     firstName,
     lastName,
     pixOrgaTermsOfServiceAccepted,
+    pixOrgaTermsOfServiceStatus,
+    pixOrgaTermsOfServiceDocumentPath,
     lang,
     areNewYearOrganizationLearnersImported,
     participantCount,
@@ -29,6 +33,8 @@ class Prescriber {
     this.firstName = firstName;
     this.lastName = lastName;
     this.pixOrgaTermsOfServiceAccepted = pixOrgaTermsOfServiceAccepted;
+    this.pixOrgaTermsOfServiceStatus = pixOrgaTermsOfServiceStatus;
+    this.pixOrgaTermsOfServiceDocumentPath = pixOrgaTermsOfServiceDocumentPath;
     this.lang = lang;
     this.areNewYearOrganizationLearnersImported = areNewYearOrganizationLearnersImported;
     this.participantCount = participantCount;

@@ -25,9 +25,6 @@ const getPrescriber = async function ({ userId, legalDocumentApi }) {
     service: 'pix-orga',
     type: 'TOS',
   });
-  user.pixOrgaTermsOfServiceAccepted = pixOrgaLegalDocumentStatus.status == 'accepted';
-  user.pixOrgaTermsOfServiceStatus = pixOrgaLegalDocumentStatus.status;
-  user.pixOrgaTermsOfServiceDocumentPath = pixOrgaLegalDocumentStatus.path;
 
   const memberships = await knex('memberships').where({ userId, disabledAt: null }).orderBy('id');
 
@@ -44,7 +41,15 @@ const getPrescriber = async function ({ userId, legalDocumentApi }) {
 
   const schools = await knex('schools').whereIn('organizationId', organizationIds);
 
-  const prescriber = _toPrescriberDomain(user, userOrgaSettings, tags, memberships, organizations, schools);
+  const prescriber = _toPrescriberDomain({
+    user,
+    pixOrgaLegalDocumentStatus,
+    userOrgaSettings,
+    tags,
+    memberships,
+    organizations,
+    schools,
+  });
 
   const currentOrganizationId = prescriber.userOrgaSettings.currentOrganization.id;
   prescriber.areNewYearOrganizationLearnersImported =
@@ -57,11 +62,23 @@ const getPrescriber = async function ({ userId, legalDocumentApi }) {
 
 export const prescriberRepository = { getPrescriber };
 
-function _toPrescriberDomain(user, userOrgaSettings, tags, memberships, organizations, schools) {
+function _toPrescriberDomain({
+  user,
+  pixOrgaLegalDocumentStatus,
+  userOrgaSettings,
+  tags,
+  memberships,
+  organizations,
+  schools,
+}) {
   const currentSchool = schools.find((school) => school.organizationId === userOrgaSettings.currentOrganizationId);
 
   return new Prescriber({
     ...user,
+    pixOrgaTermsOfServiceAccepted: pixOrgaLegalDocumentStatus.status === 'accepted',
+    pixOrgaTermsOfServiceStatus: pixOrgaLegalDocumentStatus.status,
+    pixOrgaTermsOfServiceDocumentPath: pixOrgaLegalDocumentStatus.documentPath,
+
     memberships: memberships.map(
       (membership) =>
         new Membership({

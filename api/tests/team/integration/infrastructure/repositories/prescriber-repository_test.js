@@ -72,6 +72,8 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           firstName: user.firstName,
           lastName: user.lastName,
           pixOrgaTermsOfServiceAccepted: user.pixOrgaTermsOfServiceAccepted,
+          pixOrgaTermsOfServiceStatus: 'requested',
+          pixOrgaTermsOfServiceDocumentPath: 'pix-orga-tos-2024-01-02',
           lang: user.lang,
         };
       });
@@ -83,12 +85,17 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
         });
 
         // then
+
         expect(foundPrescriber).to.be.an.instanceOf(Prescriber);
         expect(foundPrescriber.id).to.equal(expectedPrescriber.id);
         expect(foundPrescriber.firstName).to.equal(expectedPrescriber.firstName);
         expect(foundPrescriber.lastName).to.equal(expectedPrescriber.lastName);
         expect(foundPrescriber.pixOrgaTermsOfServiceAccepted).to.equal(
           expectedPrescriber.pixOrgaTermsOfServiceAccepted,
+        );
+        expect(foundPrescriber.pixOrgaTermsOfServiceStatus).to.equal(expectedPrescriber.pixOrgaTermsOfServiceStatus);
+        expect(foundPrescriber.pixOrgaTermsOfServiceDocumentPath).to.equal(
+          expectedPrescriber.pixOrgaTermsOfServiceDocumentPath,
         );
         expect(foundPrescriber.lang).to.equal(expectedPrescriber.lang);
       });
