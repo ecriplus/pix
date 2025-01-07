@@ -1,5 +1,6 @@
 import PgBoss from 'pg-boss';
 
+import { Metrics } from '../../../../../src/monitoring/infrastructure/metrics.js';
 import { JobQueue } from '../../../../../src/shared/infrastructure/jobs/JobQueue.js';
 import { JobRepository } from '../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { expect } from '../../../../test-helper.js';
@@ -45,7 +46,11 @@ describe('Integration | Infrastructure | Jobs | JobQueue', function () {
           }
         };
 
-        jobQueue.register(name, handler);
+        jobQueue.register(
+          new Metrics({ config: { featureToggles: { isDirectMetricsEnabled: false } } }),
+          name,
+          handler,
+        );
       });
 
       return promise;

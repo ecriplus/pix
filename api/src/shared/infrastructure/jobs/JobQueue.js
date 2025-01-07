@@ -7,11 +7,11 @@ class JobQueue {
     this.pgBoss = pgBoss;
   }
 
-  register(name, handlerClass) {
+  register(metrics, name, handlerClass) {
     const jobHandler = new handlerClass();
     const { teamConcurrency, teamSize } = jobHandler;
     this.pgBoss.work(name, { teamSize, teamConcurrency }, async (job) => {
-      const monitoredJobHandler = new MonitoredJobHandler(jobHandler, logger);
+      const monitoredJobHandler = new MonitoredJobHandler(metrics, jobHandler, logger);
       return monitoredJobHandler.handle({ data: job.data, jobName: name, jobId: job.id });
     });
 

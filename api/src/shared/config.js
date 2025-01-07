@@ -257,9 +257,11 @@ const configuration = (function () {
         process.env.FT_ALWAYS_OK_VALIDATE_NEXT_CHALLENGE_ENDPOINT,
       ),
       isAsyncQuestRewardingCalculationEnabled: toBoolean(process.env.FT_ENABLE_ASYNC_QUESTS_REWARDS_CALCULATION),
+      isDirectMetricsEnabled: toBoolean(process.env.FT_ENABLE_DIRECT_METRICS),
       isNeedToAdjustCertificationAccessibilityEnabled: toBoolean(
         process.env.FT_ENABLE_NEED_TO_ADJUST_CERTIFICATION_ACCESSIBILITY,
       ),
+      isOppsyDisabled: toBoolean(process.env.FT_OPPSY_DISABLED),
       isPix1dEnabled: toBoolean(process.env.FT_PIX_1D_ENABLED),
       isPixCompanionEnabled: toBoolean(process.env.FT_PIX_COMPANION_ENABLED),
       isSelfAccountDeletionEnabled: toBoolean(process.env.FT_SELF_ACCOUNT_DELETION),
@@ -276,12 +278,15 @@ const configuration = (function () {
       enableRequestMonitoring: toBoolean(process.env.ENABLE_REQUEST_MONITORING),
     },
     infra: {
+      appName: process.env.APP,
+      containerName: process.env.CONTAINER,
       concurrencyForHeavyOperations: _getNumber(process.env.INFRA_CONCURRENCY_HEAVY_OPERATIONS, 2),
       chunkSizeForCampaignResultProcessing: _getNumber(process.env.INFRA_CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING, 10),
       chunkSizeForOrganizationLearnerDataProcessing: _getNumber(
         process.env.INFRA_CHUNK_SIZE_ORGANIZATION_LEARNER_DATA_PROCESSING,
         1000,
       ),
+      metricsFlushIntervalSecond: _getNumber(process.env.METRICS_FLUSH_INTERVAL_SECOND, 15),
       startJobInWebProcess: toBoolean(process.env.START_JOB_IN_WEB_PROCESS),
     },
     jwtConfig: {
@@ -353,6 +358,9 @@ const configuration = (function () {
           targetProfileNotCertifiableTemplateId: process.env.BREVO_TARGET_PROFILE_NOT_CERTIFIABLE_TEMPLATE_ID,
         },
       },
+    },
+    metrics: {
+      flushIntervalSeconds: _getNumber(process.env.DIRECT_METRICS_FLUSH_INTERVAL, 5),
     },
     partner: {
       fetchTimeOut: ms(process.env.FETCH_TIMEOUT_MILLISECONDS || '20s'),
@@ -480,7 +488,9 @@ const configuration = (function () {
 
     config.featureToggles.deprecatePoleEmploiPushNotification = false;
     config.featureToggles.isAlwaysOkValidateNextChallengeEndpointEnabled = false;
+    config.featureToggles.isDirectMetricsEnabled = false;
     config.featureToggles.isNeedToAdjustCertificationAccessibilityEnabled = false;
+    config.featureToggles.isOppsyDisabled = false;
     config.featureToggles.isPix1dEnabled = true;
     config.featureToggles.isPixCompanionEnabled = false;
     config.featureToggles.isSelfAccountDeletionEnabled = false;

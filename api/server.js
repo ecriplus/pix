@@ -21,6 +21,7 @@ import { devcompRoutes } from './src/devcomp/routes.js';
 import { evaluationRoutes } from './src/evaluation/routes.js';
 import { identityAccessManagementRoutes } from './src/identity-access-management/application/routes.js';
 import { learningContentRoutes } from './src/learning-content/routes.js';
+import { Metrics } from './src/monitoring/infrastructure/metrics.js';
 import { organizationalEntitiesRoutes } from './src/organizational-entities/application/routes.js';
 import { parcoursupRoutes } from './src/parcoursup/application/routes.js';
 import { campaignRoutes } from './src/prescription/campaign/routes.js';
@@ -71,7 +72,16 @@ const { logOpsMetrics, port, logging } = config;
 const createServer = async () => {
   const server = createBareServer();
 
-  if (logOpsMetrics) await enableOpsMetrics(server);
+  // initialisation of Datadog link for metrics publication
+  const metrics = new Metrics({ config });
+  server.directMetrics = metrics;
+
+  if (logOpsMetrics) {
+    // OPS metrics via direct metrics
+    if (config.featureToggles.isDirectMetricsEnabled) await enableOpsMetrics(server, metrics);
+    // OPS metrics via Oppsy
+    if (!config.featureToggles.isOppsyDisabled) await enableLegacyOpsMetrics(server);
+  }
 
   setupErrorHandling(server);
 
@@ -126,7 +136,59 @@ const createBareServer = function () {
   return new Hapi.server(serverConfiguration);
 };
 
-const enableOpsMetrics = async function (server) {
+const enableOpsMetrics = async function (server, metrics) {
+  metrics.addRecurrentMetrics(
+    [
+      { type: 'gauge', name: 'captain.api.memory.rss', value: 'rss' },
+      { type: 'gauge', name: 'captain.api.memory.heapTotal', value: 'heapTotal' },
+      { type: 'gauge', name: 'captain.api.memory.heapUsed', value: 'heapUsed' },
+      { type: 'gauge', name: 'captain.api.conteneur', constValue: 1 },
+    ],
+    5000,
+    process.memoryUsage,
+  );
+
+  server.pixCustomIntervals = metrics.intervals;
+
+  const gaugeConnections = (pool) => () => {
+    metrics.addMetricPoint({ type: 'gauge', name: 'captain.api.knex.db_connections_used', value: pool.numUsed() });
+    metrics.addMetricPoint({ type: 'gauge', name: 'captain.api.knex.db_connections_free', value: pool.numFree() });
+    metrics.addMetricPoint({
+      type: 'gauge',
+      name: 'captain.api.knex.db_connections_pending_creation',
+      value: pool.numPendingCreates(),
+    });
+    metrics.addMetricPoint({
+      type: 'gauge',
+      name: 'captain.api.knex.db_connections_pending_destroy',
+      value: pool.pendingDestroys.length,
+    });
+  };
+
+  const client = knex.client;
+  gaugeConnections(client.pool)();
+
+  client.pool.on('createSuccess', gaugeConnections(client.pool));
+  client.pool.on('acquireSuccess', gaugeConnections(client.pool));
+  client.pool.on('release', gaugeConnections(client.pool));
+  client.pool.on('destroySuccess', gaugeConnections(client.pool));
+
+  server.events.on('response', (request) => {
+    const info = request.info;
+
+    const statusCode = request.raw.res.statusCode;
+    const responseTime = (info.completed !== undefined ? info.completed : info.responded) - info.received;
+
+    metrics.addMetricPoint({
+      type: 'histogram',
+      name: 'captain.api.duration',
+      tags: [`method:${request.route.method}`, `route:${request.route.path}`, `statusCode:${statusCode}`],
+      value: responseTime,
+    });
+  });
+};
+
+const enableLegacyOpsMetrics = async function (server) {
   const oppsy = new Oppsy(server);
 
   oppsy.on('ops', (data) => {

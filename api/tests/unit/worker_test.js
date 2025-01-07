@@ -1,4 +1,5 @@
 import { UserAnonymizedEventLoggingJob } from '../../src/identity-access-management/domain/models/UserAnonymizedEventLoggingJob.js';
+import { Metrics } from '../../src/monitoring/infrastructure/metrics.js';
 import { ScheduleComputeOrganizationLearnersCertificabilityJobController } from '../../src/prescription/learner-management/application/jobs/schedule-compute-organization-learners-certificability-job-controller.js';
 import { ValidateOrganizationLearnersImportFileJobController } from '../../src/prescription/learner-management/application/jobs/validate-organization-learners-import-file-job-controller.js';
 import { ValidateOrganizationImportFileJob } from '../../src/prescription/learner-management/domain/models/ValidateOrganizationImportFileJob.js';
@@ -36,6 +37,7 @@ describe('#registerJobs', function () {
 
     // then
     expect(jobQueueStub.register).to.have.been.calledWithExactly(
+      new Metrics({ config: { featureToggles: { isDirectMetricsEnabled: false } } }),
       UserAnonymizedEventLoggingJob.name,
       UserAnonymizedEventLoggingJobController,
     );
@@ -56,6 +58,7 @@ describe('#registerJobs', function () {
 
     // then
     expect(jobQueueStub.register).to.have.been.calledWithExactly(
+      new Metrics({ config: { featureToggles: { isDirectMetricsEnabled: false } } }),
       'legyNameForUserAnonymizedEventLoggingJobController',
       UserAnonymizedEventLoggingJobController,
     );
@@ -76,6 +79,7 @@ describe('#registerJobs', function () {
 
     // then
     expect(jobQueueStub.register).to.have.been.calledWithExactly(
+      new Metrics({ config: { featureToggles: { isDirectMetricsEnabled: false } } }),
       ValidateOrganizationImportFileJob.name,
       ValidateOrganizationLearnersImportFileJobController,
     );

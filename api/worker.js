@@ -7,6 +7,7 @@ import { glob } from 'glob';
 import _ from 'lodash';
 import PgBoss from 'pg-boss';
 
+import { Metrics } from './src/monitoring/infrastructure/metrics.js';
 import { JobGroup } from './src/shared/application/jobs/job-controller.js';
 import { config } from './src/shared/config.js';
 import { JobQueue } from './src/shared/infrastructure/jobs/JobQueue.js';
@@ -16,6 +17,8 @@ import { logger } from './src/shared/infrastructure/utils/logger.js';
 const isTestEnv = process.env.NODE_ENV === 'test';
 const isJobInWebProcess = process.env.START_JOB_IN_WEB_PROCESS === 'true';
 const workerDirPath = dirname(fileURLToPath(import.meta.url));
+
+const metrics = new Metrics({ config });
 
 async function startPgBoss() {
   logger.info('Starting pg-boss');
@@ -45,6 +48,7 @@ async function startPgBoss() {
 function createJobQueues(pgBoss) {
   const jobQueues = new JobQueue(pgBoss);
   process.on('SIGINT', async () => {
+    metrics.clearMetrics();
     await jobQueues.stop();
 
     // Make sure pgBoss stopped before quitting
@@ -91,11 +95,11 @@ export async function registerJobs({ jobGroup, dependencies = { startPgBoss, cre
 
     if (job.isJobEnabled) {
       logger.info(`Job "${job.jobName}" registered from module "${moduleName}."`);
-      jobQueues.register(job.jobName, ModuleClass);
+      jobQueues.register(metrics, job.jobName, ModuleClass);
 
       if (!job.jobCron && job.legacyName) {
         logger.warn(`Temporary Job" ${job.legacyName}" registered from module "${moduleName}."`);
-        jobQueues.register(job.legacyName, ModuleClass);
+        jobQueues.register(metrics, job.legacyName, ModuleClass);
       }
 
       if (job.jobCron) {
