@@ -34,7 +34,7 @@
     },
     {
       "grainId": "6e9c3dbf-34de-4652-b119-aa2a02772fdd",
-      "content": "<p>Il n’y a pas que sur les smartphones qu’il y a du contrôle parental !&nbsp; Partons à la découverte des appareils et des plateformes qui proposent du contrôle parental.</p>"
+      "content": "<p>Il n’y a pas que sur les smartphones qu’il y a des options de contrôle parental !&nbsp; Partons à la découverte des appareils et des plateformes qui proposent des options de contrôle parental.</p>"
     },
     {
       "grainId": "dde349da-a5fc-41b5-8c47-9ec5a2780165",
@@ -146,7 +146,7 @@
                 {
                   "id": "ca55f260-188e-4292-91fe-80866319f0eb",
                   "type": "qcu",
-                  "instruction": "<p>Quelle fonctionnalité du contrôle parental est adaptée ?</p>",
+                  "instruction": "<p>Quelle fonctionnalité de contrôle parental est adaptée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -182,7 +182,7 @@
                 {
                   "id": "a175d292-6210-4a62-9e0a-4caf588e7bee",
                   "type": "qcu",
-                  "instruction": "<p>Quelle fonctionnalité du contrôle parental est adaptée ?</p>",
+                  "instruction": "<p>Quelle fonctionnalité de contrôle parental est adaptée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -218,7 +218,7 @@
                 {
                   "id": "93effa58-b217-46c7-bb73-9b447a56902e",
                   "type": "qcu",
-                  "instruction": "<p>Quelle fonctionnalité du contrôle parental est adaptée ?</p>",
+                  "instruction": "<p>Quelle fonctionnalité de contrôle parental est adaptée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -325,7 +325,7 @@
             "type": "image",
             "url": "https://i.imgur.com/fI4yT0V.png",
             "alt": "",
-            "alternativeText": "<p>Infographie<strong> Où trouver du contrôle parental ?</strong> </p><ul><li>Sur les appareils :<ul><li>les appareils personnels (smarthpones, tablettes, ordinateurs, montres connectées, télévisions connectées)</li><li>les consoles de jeux (nintendo switch, xbox, playstation et d'autres)</li><li>les box internet</li></ul></li><li>En ligne :&nbsp;<ul><li>les réseaux sociaux (instagram, facebook, snapchat, tiktok, discord et d'autres)</li><li>les plateformes de jeux vidéo (electronic art, steam, roblox et d'autres)</li><li>les plateformes de vidéo à la demande (netflix, amazon prime, disney+ et d'autres)</li></ul></li><li>Pour l'activer, rendez-vous sur <strong>paramètres </strong>ou <strong>compte</strong></li><li>Puis cherchez, selon les appareils et les plateformes : supervision parentale, contrôle parental, temps d'écran, bien être numérique, connexion famille, famille et contrôle parental, centre familial ou d'autres</li><br></ul>"
+            "alternativeText": "<p>Infographie<strong> Où trouver des options contrôle parental ?</strong> </p><ul><li>Sur les appareils :<ul><li>les appareils personnels (smarthpones, tablettes, ordinateurs, montres connectées, télévisions connectées)</li><li>les consoles de jeux (nintendo switch, xbox, playstation et d'autres)</li><li>les box internet</li></ul></li><li>En ligne :&nbsp;<ul><li>les réseaux sociaux (instagram, facebook, snapchat, tiktok, discord et d'autres)</li><li>les plateformes de jeux vidéo (electronic art, steam, roblox et d'autres)</li><li>les plateformes de vidéo à la demande (netflix, amazon prime, disney+ et d'autres)</li></ul></li><li>Pour l'activer, rendez-vous sur <strong>paramètres </strong>ou <strong>compte</strong></li><li>Puis cherchez, selon les appareils et les plateformes : supervision parentale, contrôle parental, temps d'écran, bien être numérique, connexion famille, famille et contrôle parental, centre familial ou d'autres</li><br></ul>"
           }
         },
         {
