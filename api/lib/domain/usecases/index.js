@@ -90,6 +90,7 @@ import * as codeGenerator from '../../../src/shared/domain/services/code-generat
 import { cryptoService } from '../../../src/shared/domain/services/crypto-service.js';
 import * as languageService from '../../../src/shared/domain/services/language-service.js';
 import * as localeService from '../../../src/shared/domain/services/locale-service.js';
+import * as mailService from '../../../src/shared/domain/services/mail-service.js';
 import * as placementProfileService from '../../../src/shared/domain/services/placement-profile-service.js';
 import { tokenService } from '../../../src/shared/domain/services/token-service.js';
 import * as userService from '../../../src/shared/domain/services/user-service.js';
@@ -122,7 +123,6 @@ import * as membershipRepository from '../../../src/team/infrastructure/reposito
 import { organizationInvitationRepository } from '../../../src/team/infrastructure/repositories/organization-invitation.repository.js';
 import { userOrgaSettingsRepository } from '../../../src/team/infrastructure/repositories/user-orga-settings-repository.js';
 import * as certificationChallengesService from '../../domain/services/certification-challenges-service.js';
-import * as mailService from '../../domain/services/mail-service.js';
 import * as obfuscationService from '../../domain/services/obfuscation-service.js';
 import * as passwordGenerator from '../../domain/services/password-generator.js';
 import * as verifyCertificateCodeService from '../../domain/services/verify-certificate-code-service.js';

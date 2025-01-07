@@ -1,8 +1,8 @@
-import { config } from '../../../src/shared/config.js';
-import { LOCALE } from '../../../src/shared/domain/constants.js';
-import { getEmailDefaultVariables } from '../../../src/shared/mail/domain/emails-default-variables.js';
-import { mailer } from '../../../src/shared/mail/infrastructure/services/mailer.js';
-import * as translations from '../../../translations/index.js';
+import * as translations from '../../../../translations/index.js';
+import { config } from '../../config.js';
+import { getEmailDefaultVariables } from '../../mail/domain/emails-default-variables.js';
+import { mailer } from '../../mail/infrastructure/services/mailer.js';
+import { LOCALE } from '../constants.js';
 
 const { ENGLISH_SPOKEN, FRENCH_FRANCE, FRENCH_SPOKEN, DUTCH_SPOKEN, SPANISH_SPOKEN } = LOCALE;
 

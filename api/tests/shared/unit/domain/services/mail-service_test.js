@@ -1,13 +1,13 @@
-import * as mailService from '../../../../lib/domain/services/mail-service.js';
-import { config } from '../../../../src/shared/config.js';
-import { LOCALE } from '../../../../src/shared/domain/constants.js';
-import { getI18n } from '../../../../src/shared/infrastructure/i18n/i18n.js';
-import { mailer } from '../../../../src/shared/mail/infrastructure/services/mailer.js';
-import en from '../../../../translations/en.json' with { type: 'json' };
-import fr from '../../../../translations/fr.json' with { type: 'json' };
-import { es } from '../../../../translations/index.js';
-import nl from '../../../../translations/nl.json' with { type: 'json' };
-import { expect, sinon } from '../../../test-helper.js';
+import { config } from '../../../../../src/shared/config.js';
+import { LOCALE } from '../../../../../src/shared/domain/constants.js';
+import * as mailService from '../../../../../src/shared/domain/services/mail-service.js';
+import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { mailer } from '../../../../../src/shared/mail/infrastructure/services/mailer.js';
+import en from '../../../../../translations/en.json' with { type: 'json' };
+import fr from '../../../../../translations/fr.json' with { type: 'json' };
+import { es } from '../../../../../translations/index.js';
+import nl from '../../../../../translations/nl.json' with { type: 'json' };
+import { expect, sinon } from '../../../../test-helper.js';
 
 const mainTranslationsMapping = { fr, en, nl, es };
 

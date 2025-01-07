@@ -1,6 +1,6 @@
 import randomString from 'randomstring';
 
-import * as mailService from '../../../../lib/domain/services/mail-service.js';
+import * as mailService from '../../../../src/shared/domain/services/mail-service.js';
 import {
   SendingEmailError,
   SendingEmailToInvalidDomainError,

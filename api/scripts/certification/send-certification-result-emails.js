@@ -6,10 +6,10 @@ import * as url from 'node:url';
 import i18n from 'i18n';
 
 import { disconnect } from '../../db/knex-database-connection.js';
-import * as mailService from '../../lib/domain/services/mail-service.js';
 import { manageEmails } from '../../src/certification/session-management/domain/services/session-publication-service.js';
 import * as certificationCenterRepository from '../../src/certification/shared/infrastructure/repositories/certification-center-repository.js';
 import * as sharedSessionRepository from '../../src/certification/shared/infrastructure/repositories/session-repository.js';
+import * as mailService from '../../src/shared/domain/services/mail-service.js';
 import { logger } from '../../src/shared/infrastructure/utils/logger.js';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
