@@ -412,7 +412,7 @@
               {
                 "id": "1",
                 "content": "<p>oui</p>",
-                "feedback": "<p>Bravo ! <span aria-hidden=\"true\">✨</span> Vous pouvez aussi regarder sur les sites et plateformes en ligne si ils proposent des options contrôle parental.</span></p>"
+                "feedback": "<p>Bravo ! <span aria-hidden=\"true\">✨</span> Vous pouvez aussi regarder sur les sites et plateformes en ligne si ils proposent des options contrôle parental.</p>"
               },
               {
                 "id": "2",
@@ -439,7 +439,7 @@
           "element": {
             "id": "14e1e0c3-b521-41bf-af4a-2757912262c1",
             "type": "text",
-            "content": "<p>Pour en apprendre plus sur le contrôle parental, rendez-vous sur la page <a href=\"https://e-enfance.org/informer/controle-parental/\">Activer, installer et configurer un contrôle parental</a> de l'association e-Enfance.</p>"
+            "content": "<p>Pour en apprendre plus sur le contrôle parental, rendez-vous sur la page <a href=\"https://e-enfance.org/informer/controle-parental/\" target=\"_blank\">Activer, installer et configurer un contrôle parental</a> de l'association e-Enfance.</p>"
           }
         }
       ]
