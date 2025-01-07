@@ -9,7 +9,7 @@ export class Metrics {
   constructor({ config }) {
     if (!config.featureToggles.isDirectMetricsEnabled) {
       logger.info('Metric initialisation : no reporter => no metrics sent');
-      metrics.init({ reporter: metrics.NullReporter() });
+      metrics.init({ reporter: new metrics.reporters.NullReporter() });
     }
 
     if (config.featureToggles.isDirectMetricsEnabled) {
@@ -63,12 +63,12 @@ export class Metrics {
   #registerMetric({ type, name, tags }) {
     const metricSignature = `${type}|${name}|${tags}`;
     if (!Metrics.metricDefinitions[metricSignature]) {
-      logger.info(`Metric registred with : ${type}, ${name}, ${tags}`);
+      logger.info(`Metric registered with : ${type}, ${name}, ${tags}`);
       Metrics.metricDefinitions[metricSignature] = { type, name, tags };
     }
   }
 
-  clearMetrics() {
+  async clearMetrics() {
     Metrics.intervals.forEach(clearInterval);
     logger.info(JSON.stringify(Metrics.metricDefinitions));
     Object.values(Metrics.metricDefinitions).forEach((v) => {
@@ -76,6 +76,6 @@ export class Metrics {
       zero.value = 0;
       this.#addMetricPointWithoutRegistration(zero);
     });
-    metrics.flush();
+    await metrics.flush();
   }
 }
