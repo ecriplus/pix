@@ -45,7 +45,7 @@ export default class SessionsFinalizeController extends Controller {
   async finalizeSession() {
     try {
       for (const certificationReport of this.session.uncompletedCertificationReports) {
-        await certificationReport.abort();
+        await certificationReport.abort(certificationReport.abortReason);
       }
       await this.session.save({ adapterOptions: { finalization: true } });
       this.pixToast.sendSuccessNotification({

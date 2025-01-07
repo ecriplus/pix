@@ -382,7 +382,9 @@ module('Unit | Controller | ' + FINALIZE_PATH, function (hooks) {
       test('it finalizes the session', async function (assert) {
         // given
         const store = this.owner.lookup('service:store');
-        const certificationReport = store.createRecord('certification-report');
+        const certificationReport = store.createRecord('certification-report', {
+          abortReason: 'technical',
+        });
         certificationReport.abort = sinon.stub();
         const session = store.createRecord('session-management', {
           certificationReports: [certificationReport],
@@ -402,7 +404,7 @@ module('Unit | Controller | ' + FINALIZE_PATH, function (hooks) {
         await controller.finalizeSession();
 
         // then
-        sinon.assert.calledOnce(certificationReport.abort);
+        sinon.assert.calledOnceWithExactly(certificationReport.abort, certificationReport.abortReason);
         assert.ok(true);
       });
     });
