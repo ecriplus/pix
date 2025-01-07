@@ -2,23 +2,21 @@ import { acceptPixOrgaTermsOfService } from '../../../../../src/identity-access-
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | accept-pix-orga-terms-of-service', function () {
-  let userRepository;
+  let legalDocumentApiRepository;
 
   beforeEach(function () {
-    userRepository = { updatePixOrgaTermsOfServiceAcceptedToTrue: sinon.stub() };
+    legalDocumentApiRepository = { acceptPixOrgaTos: sinon.stub() };
   });
 
   it('accepts terms of service of pix-orga', async function () {
     // given
     const userId = Symbol('userId');
-    const updatedUser = Symbol('updateduser');
-    userRepository.updatePixOrgaTermsOfServiceAcceptedToTrue.resolves(updatedUser);
+    legalDocumentApiRepository.acceptPixOrgaTos.resolves();
 
     // when
-    const actualUpdatedUser = await acceptPixOrgaTermsOfService({ userId, userRepository });
+    await acceptPixOrgaTermsOfService({ userId, legalDocumentApiRepository });
 
     // then
-    expect(userRepository.updatePixOrgaTermsOfServiceAcceptedToTrue).to.have.been.calledWithExactly(userId);
-    expect(actualUpdatedUser).to.equal(updatedUser);
+    expect(legalDocumentApiRepository.acceptPixOrgaTos).to.have.been.calledWithExactly({ userId });
   });
 });

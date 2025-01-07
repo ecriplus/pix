@@ -1,5 +1,7 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 
+const TABLE_NAME = 'users';
+
 /**
  * Updates the Pix terms of service acceptance status for a user.
  *
@@ -8,7 +10,7 @@ import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
  */
 const setPixOrgaCguByUserId = async (userId) => {
   const knexConnection = DomainTransaction.getConnection();
-  await knexConnection('users').where('id', userId).update({
+  await knexConnection(TABLE_NAME).where('id', userId).update({
     pixOrgaTermsOfServiceAccepted: true,
     lastPixOrgaTermsOfServiceValidatedAt: new Date(),
   });
@@ -22,7 +24,7 @@ const setPixOrgaCguByUserId = async (userId) => {
  */
 const findPixOrgaCgusByUserId = async (userId) => {
   const knexConnection = DomainTransaction.getConnection();
-  const userPixOrgaCgus = await knexConnection('users')
+  const userPixOrgaCgus = await knexConnection(TABLE_NAME)
     .select('pixOrgaTermsOfServiceAccepted', 'lastPixOrgaTermsOfServiceValidatedAt')
     .where('id', userId)
     .first();

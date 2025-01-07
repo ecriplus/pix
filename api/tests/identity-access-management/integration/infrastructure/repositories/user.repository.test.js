@@ -1665,37 +1665,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
     });
 
-    describe('#updatePixOrgaTermsOfServiceAcceptedToTrue', function () {
-      it('returns the model with pixOrgaTermsOfServiceAccepted flag updated to true', async function () {
-        // given
-        const userId = databaseBuilder.factory.buildUser({ pixOrgaTermsOfServiceAccepted: false }).id;
-        await databaseBuilder.commit();
-
-        // when
-        const result = await userRepository.updatePixOrgaTermsOfServiceAcceptedToTrue(userId);
-
-        // then
-        expect(result).to.be.an.instanceof(User);
-        expect(result.pixOrgaTermsOfServiceAccepted).to.be.true;
-      });
-
-      it('updates the lastPixOrgaTermsOfServiceValidatedAt', async function () {
-        // given
-        const user = databaseBuilder.factory.buildUser({
-          pixOrgaTermsOfServiceAccepted: true,
-          lastPixOrgaTermsOfServiceValidatedAt: new Date('2020-01-01T00:00:00Z'),
-        });
-        await databaseBuilder.commit();
-
-        // when
-        const result = await userRepository.updatePixOrgaTermsOfServiceAcceptedToTrue(user.id);
-
-        // then
-        expect(result.lastPixOrgaTermsOfServiceValidatedAt).to.deep.equal(now);
-        expect(result.updatedAt).to.deep.equal(now);
-      });
-    });
-
     describe('#updatePixCertifTermsOfServiceAcceptedToTrue', function () {
       it('returns the model with pixCertifTermsOfServiceAccepted flag updated to true', async function () {
         // given

@@ -77,14 +77,13 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
 
     it('accepts pix orga terms of service', async function () {
       // given
-      usecases.acceptPixOrgaTermsOfService.withArgs({ userId }).resolves({});
-      userSerializer.serialize.withArgs({}).returns('ok');
+      usecases.acceptPixOrgaTermsOfService.withArgs({ userId }).resolves();
 
       // when
-      const response = await userController.acceptPixOrgaTermsOfService(request, hFake, { userSerializer });
+      const response = await userController.acceptPixOrgaTermsOfService(request, hFake);
 
       // then
-      expect(response).to.be.equal('ok');
+      expect(response.statusCode).to.equal(204);
     });
   });
 
