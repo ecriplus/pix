@@ -8,6 +8,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import get from 'lodash/get';
+import didInsert from 'mon-pix/modifiers/modifier-did-insert';
 import { FormValidation } from 'mon-pix/utils/form-validation';
 import isPasswordValid, { PASSWORD_RULES } from 'mon-pix/utils/password-validator.js';
 
@@ -102,10 +103,14 @@ export default class PasswordResetForm extends Component {
   </template>
 }
 
+const setFocus = (element) => {
+  element.focus({ focusVisible: false });
+};
+
 const PasswordResetSucceededInfo = <template>
   <div class="password-reset-succeeded-info">
     <img src="/images/success-check.svg" alt="" />
-    <h2 class="password-reset-succeeded-info__heading">
+    <h2 class="password-reset-succeeded-info__heading" tabindex="-1" {{didInsert setFocus}}>
       {{t "components.authentication.password-reset-form.success-info.message"}}
     </h2>
   </div>
