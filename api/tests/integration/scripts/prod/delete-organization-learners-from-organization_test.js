@@ -30,7 +30,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
       });
       await databaseBuilder.commit();
 
-      await deleteOrganizationLearnersFromOrganization(organizationId);
+      await deleteOrganizationLearnersFromOrganization(organizationId, now);
 
       const organizationLearnerResult = await knex('organization-learners').where({ organizationId }).first();
       const participationResult = await knex('campaign-participations').where({ organizationLearnerId }).first();
@@ -230,6 +230,36 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
       expect(organizationLearnerResult.userId).to.equal(null);
       expect(participationResult.userId).to.equal(null);
       expect(assessmentResult.campaignParticipationId).to.equal(null);
+    });
+
+    it('should not anonymize learners, nor detach participations or assessments when isAnonymizationOff is true', async function () {
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const userId = databaseBuilder.factory.buildUser().id;
+      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+        userId,
+        deletedBy: process.env.ENGINEERING_USER_ID,
+        deletedAt: new Date(),
+      }).id;
+      const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+        userId,
+        organizationLearnerId,
+      });
+      const assessmentId = databaseBuilder.factory.buildAssessment({
+        userId,
+        campaignParticipationId: campaignParticipation.id,
+      }).id;
+      await databaseBuilder.commit();
+
+      await deleteOrganizationLearnersFromOrganization(organizationId, now, true);
+
+      const organizationLearnerResult = await knex('organization-learners').where({ organizationId }).first();
+      const participationResult = await knex('campaign-participations').where({ organizationLearnerId }).first();
+      const assessmentResult = await knex('assessments').where({ id: assessmentId }).first();
+      expect(organizationLearnerResult.firstName).to.not.equal('');
+      expect(organizationLearnerResult.lastName).to.not.equal('');
+      expect(participationResult.participantExternalId).to.be.not.null;
+      expect(assessmentResult.campaignParticipationId).to.equal(campaignParticipation.id);
     });
 
     context('when date is given', function () {

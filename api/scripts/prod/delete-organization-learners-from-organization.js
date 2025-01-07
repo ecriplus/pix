@@ -4,7 +4,7 @@ import { disconnect } from '../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../lib/infrastructure/DomainTransaction.js';
 import { usecases } from '../../src/prescription/learner-management/domain/usecases/index.js';
 
-async function deleteOrganizationLearnersFromOrganization(organizationId, date) {
+async function deleteOrganizationLearnersFromOrganization(organizationId, date, isAnonymizationOff = false) {
   if (date && isNaN(Date.parse(date))) {
     throw new Error("La date passée en paramètre n'est pas valide");
   }
@@ -32,11 +32,13 @@ async function deleteOrganizationLearnersFromOrganization(organizationId, date) 
       organizationId,
     });
 
-    await _anonymizeOrganizationLearners({ organizationId });
+    if (isAnonymizationOff === false) {
+      await _anonymizeOrganizationLearners({ organizationId });
 
-    const campaignParticipations = await _anonymizeCampaignParticipations({ organizationId });
+      const campaignParticipations = await _anonymizeCampaignParticipations({ organizationId });
 
-    await _detachAssessmentFromCampaignParticipations({ campaignParticipations });
+      await _detachAssessmentFromCampaignParticipations({ campaignParticipations });
+    }
   });
 }
 
