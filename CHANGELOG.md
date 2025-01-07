@@ -1,5 +1,62 @@
 # Pix Changelog
 
+## v5.11.0 (07/01/2025)
+
+
+### :rocket: Amélioration
+- [#10894](https://github.com/1024pix/pix/pull/10894) [FEATURE] Modifier l’API permettant d’accepter les CGU afin de fonctionner avec le nouveau modèle (PIX-15588).
+- [#10943](https://github.com/1024pix/pix/pull/10943) [FEATURE] Prendre en compte les nouveaux types de grain dans les scripts CSV (PIX-15860).
+- [#10915](https://github.com/1024pix/pix/pull/10915) [FEATURE] Suppression du cadre autour des qcu-image.
+- [#10945](https://github.com/1024pix/pix/pull/10945) [FEATURE] déduplique les participations retentée (Pix-15885).
+
+### :building_construction: Tech
+- [#10962](https://github.com/1024pix/pix/pull/10962) [TECH] Limiter l'exposition des données persos en paramètre de la route parcoursup (PIX-15952) .
+- [#9870](https://github.com/1024pix/pix/pull/9870) [TECH] Ne plus utiliser Sentry sur l'API (PIX-13883).
+- [#10958](https://github.com/1024pix/pix/pull/10958) [TECH] Corrige un lien cassé dans la doc  `api-dependencies.md`.
+- [#10939](https://github.com/1024pix/pix/pull/10939) [TECH] Mise à jour Pix Certif vers 5.12 (PIX-15896).
+
+### :bug: Correction
+- [#10902](https://github.com/1024pix/pix/pull/10902) [BUGFIX] Rendre accessibles les contenus formatifs associés aux campagnes non partageables (PIX-15836).
+
+### :arrow_up: Montée de version
+- [#10982](https://github.com/1024pix/pix/pull/10982) [BUMP] Update dependency @1024pix/pix-ui to ^52.1.0 (mon-pix).
+- [#10981](https://github.com/1024pix/pix/pull/10981) [BUMP] Update dependency @1024pix/pix-ui to ^52.1.0 (junior).
+- [#10979](https://github.com/1024pix/pix/pull/10979) [BUMP] Update dependency pino-pretty to v13 (audit-logger).
+- [#10978](https://github.com/1024pix/pix/pull/10978) [BUMP] Update dependency npm-run-all2 to v7 (api).
+- [#10977](https://github.com/1024pix/pix/pull/10977) [BUMP] Update dependency mocha to v11 (api).
+- [#10976](https://github.com/1024pix/pix/pull/10976) [BUMP] Update dependency @1024pix/pix-ui to ^52.1.0 (certif).
+- [#10975](https://github.com/1024pix/pix/pull/10975) [BUMP] Update dependency @1024pix/pix-ui to ^52.1.0 (admin).
+- [#10971](https://github.com/1024pix/pix/pull/10971) [BUMP] Update dependency pino-pretty to v13 (api).
+- [#10959](https://github.com/1024pix/pix/pull/10959) [BUMP] Update dependency @ember/test-helpers to v4 (mon-pix).
+- [#10969](https://github.com/1024pix/pix/pull/10969) [BUMP] Update dependency @faker-js/faker to v9 (orga).
+- [#10970](https://github.com/1024pix/pix/pull/10970) [BUMP] Update dependency @formatjs/intl to v3 (admin).
+- [#10968](https://github.com/1024pix/pix/pull/10968) [BUMP] Update dependency ember-keyboard to v9 (mon-pix).
+- [#10966](https://github.com/1024pix/pix/pull/10966) [BUMP] Update dependency @faker-js/faker to v9 (load-testing).
+- [#10965](https://github.com/1024pix/pix/pull/10965) [BUMP] Update dependency @faker-js/faker to v8 (load-testing).
+- [#10964](https://github.com/1024pix/pix/pull/10964) [BUMP] Update dependency @faker-js/faker to v7 (load-testing).
+- [#10951](https://github.com/1024pix/pix/pull/10951) [BUMP] Update dependency @1024pix/pix-ui to v52 (admin).
+- [#10952](https://github.com/1024pix/pix/pull/10952) [BUMP] Update dependency @1024pix/pix-ui to v52 (mon-pix).
+- [#10957](https://github.com/1024pix/pix/pull/10957) [BUMP] Update dependency @ember/test-helpers to v4 (admin).
+- [#10950](https://github.com/1024pix/pix/pull/10950) [BUMP] Update dependency @1024pix/pix-ui to v51 (admin).
+- [#10955](https://github.com/1024pix/pix/pull/10955) [BUMP] Update dependency @ember/test-helpers to v4 (certif).
+- [#10953](https://github.com/1024pix/pix/pull/10953) [BUMP] Update dependency @badeball/cypress-cucumber-preprocessor to v21 (e2e).
+- [#10948](https://github.com/1024pix/pix/pull/10948) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.26 (mon-pix).
+- [#10949](https://github.com/1024pix/pix/pull/10949) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.26 (orga).
+- [#10946](https://github.com/1024pix/pix/pull/10946) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.26 (certif).
+- [#10916](https://github.com/1024pix/pix/pull/10916) [BUMP] Update CircleCI-Public/trigger-circleci-pipeline-action action to v1.2.0 (workflows).
+- [#10947](https://github.com/1024pix/pix/pull/10947) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.26 (junior).
+- [#10925](https://github.com/1024pix/pix/pull/10925) [BUMP] Update dependency @1024pix/pix-ui to v50 (admin).
+- [#10944](https://github.com/1024pix/pix/pull/10944) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.26 (admin).
+- [#10941](https://github.com/1024pix/pix/pull/10941) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.0.4 (mon-pix).
+- [#10942](https://github.com/1024pix/pix/pull/10942) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.0.4 (orga).
+- [#10938](https://github.com/1024pix/pix/pull/10938) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.0.4 (api).
+- [#10940](https://github.com/1024pix/pix/pull/10940) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.0.4 (junior).
+- [#10923](https://github.com/1024pix/pix/pull/10923) [BUMP] Update dependency @1024pix/eslint-plugin to v2 (mon-pix).
+- [#10910](https://github.com/1024pix/pix/pull/10910) [BUMP] Update dependency @1024pix/eslint-plugin to v2 (api).
+
+### :coffee: Autre
+- [#10905](https://github.com/1024pix/pix/pull/10905) [DOC] Ajouter des commentaires sur les tables liées au méchanisme de quete (PIX-14816) .
+
 ## v5.10.0 (06/01/2025)
 
 
