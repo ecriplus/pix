@@ -285,7 +285,7 @@
           "element": {
             "id": "37ff3330-b8df-47e0-80d2-e382671dc3dd",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><details><summary>Indice 1</summary><p>Le contrôle parental fait partie des paramètres de l’appareil à activer. ⚙️</p></details><details><summary>Indice 2</summary><p>Ici, le contrôle parental s’active sur l’appareil de l’enfant.</p></details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://www.image-heberg.fr/files/1733406264146730843.gif\"></iframe></details></p>"
+            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><details><summary>Indice 1</summary><p>Le contrôle parental fait partie des paramètres de l’appareil à activer. ⚙️</p></details><details><summary>Indice 2</summary><p>Ici, le contrôle parental s’active sur l’appareil de l’enfant.</p></details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://www.image-heberg.fr/files/1733406264146730843.gif\"></iframe></details><p></p>"
           }
         }
       ]
@@ -300,7 +300,7 @@
           "element": {
             "id": "2b03d03b-39fd-433a-8895-1144aa69d766",
             "type": "text",
-            "content": "<h3><span aria-hidden=\"true\">📌</span> Les 4 points à retenir :&nbsp;</h3>\n<p><br></p><ul><li>Le contrôle parental est un <strong>outil numérique pour protéger et accompagner les enfants</strong> dans leurs usages numériques.<span aria-hidden=\"true\">🛡</span>️</li><br><li>Le contrôle parental a de nombreuses fonctionnalités :&nbsp; <strong>gestion du temps en ligne, filtrage des contenus et suivi des activités</strong>.&nbsp;<span aria-hidden=\"true\">⏳</span></li><br><li>Pour trouver le contrôle parental, rendez-vous dans les <strong>paramètres</strong>. <span aria-hidden=\"true\">⚙️</span>&nbsp;</li><br><li>Le contrôle parental ne remplace pas les <strong>échanges parents-enfants</strong>, il les complète !&nbsp;<span aria-hidden=\"true\">🗣</span>️</li><br></ul>"
+            "content": "<h3><span aria-hidden=\"true\">📌</span> Les 4 points à retenir : </h3>\n<p><br></p>\n<ul>\n    <li>Le contrôle parental est un <strong>outil numérique pour protéger les enfants et encadrer leurs usages numériques</strong><span aria-hidden=\"true\">🛡</span></li><br>\n    <li>Le contrôle parental ne remplace pas les échanges parents-enfants, il les complète !<span aria-hidden=\"true\">🗣️</span></li><br>\n    <li>Le contrôle parental a de nombreuses fonctionnalités <strong>gestion du temps en ligne, filtrage des contenus et suivi des activités</strong>. <span aria-hidden=\"true\">⏳</span></li><br>\n    <li>Pour activer et paramétrer le contrôle parental, rendez-vous dans les <strong>paramètres</strong>. <span aria-hidden=\"true\">⚙️</span></li><br>\n</ul>"
           }
         }
       ]
@@ -315,7 +315,7 @@
           "element": {
             "id": "2589ce3b-fe26-42fc-aadc-eba80302f0da",
             "type": "text",
-            "content": "<p>Après cette infographie, vous devrez sélectionner où Nina peut activer des options de contrôle parental pour accompagner Max.</p>"
+            "content": "<p>Après cette image, vous devrez sélectionner où Nina peut activer des options de contrôle parental pour accompagner Max.</p>"
           }
         },
         {
