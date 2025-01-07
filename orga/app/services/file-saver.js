@@ -1,6 +1,5 @@
 import Service from '@ember/service';
 import { service } from '@ember/service';
-import fetch from 'fetch';
 
 export default class FileSaverService extends Service {
   @service notifications;
@@ -43,8 +42,13 @@ export default class FileSaverService extends Service {
 }
 
 function _fetchData({ url, token, locale }) {
+  const reqHeaders = new Headers();
+
+  reqHeaders.set('Authorization', `Bearer ${token}`);
+  reqHeaders.set('Accept-Language', locale);
+
   return fetch(url, {
-    headers: { Authorization: `Bearer ${token}`, 'Accept-Language': locale },
+    headers: reqHeaders,
   });
 }
 

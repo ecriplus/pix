@@ -1,4 +1,4 @@
-import { clickByName, fillByLabel, visit } from '@1024pix/ember-testing-library';
+import { clickByName, fillByLabel, visit, waitForElementToBeRemoved } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { t } from 'ember-intl/test-support';
@@ -388,12 +388,15 @@ module('Acceptance | Sco Organization Participant List', function (hooks) {
               await clickByName(t('common.actions.confirm'));
 
               // then
-              const resetPasswordsModal = await screen.queryByRole('dialog');
+              await waitForElementToBeRemoved(() => screen.queryByRole('dialog'));
+
+              const resetPasswordsModal = screen.queryByRole('dialog');
               assert.dom(resetPasswordsModal).isNotVisible();
 
-              const successNotification = await screen.getByText(
+              const successNotification = await screen.findByText(
                 t('pages.sco-organization-participants.messages.password-reset-success'),
               );
+
               assert.ok(successNotification);
             });
           });

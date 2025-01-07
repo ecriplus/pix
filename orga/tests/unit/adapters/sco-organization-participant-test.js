@@ -24,10 +24,14 @@ module('Unit | Adapters | sco-organization-participant', function (hooks) {
     });
   });
 
-  module('#generateOrganizationLearnersUsernamePassword', function () {
+  module('#generateOrganizationLearnersUsernamePassword', function (hooks) {
+    hooks.afterEach(() => {
+      window.fetch.restore();
+    });
+
     test('generates organization learners username with password and saves a CSV file', async function (assert) {
       // given
-      const fetch = sinon.stub().resolves();
+      const fetch = sinon.stub(window, 'fetch').returns();
       const fileSaver = { save: sinon.stub().resolves() };
       const organizationId = 1;
       const organizationLearnersIds = [23, 789];
@@ -37,7 +41,6 @@ module('Unit | Adapters | sco-organization-participant', function (hooks) {
 
       // when
       await adapter.generateOrganizationLearnersUsernamePassword({
-        fetch,
         fileSaver,
         organizationId,
         organizationLearnersIds,
@@ -46,9 +49,15 @@ module('Unit | Adapters | sco-organization-participant', function (hooks) {
 
       // then
       const expectedUrl = `${adapter.host}/${adapter.namespace}/sco-organization-learners/batch-username-password-generate`;
+
+      const reqHeaders = new Headers();
+
+      reqHeaders.set('Authorization', `Bearer ${token}`);
+      reqHeaders.set('Content-Type', 'application/json');
+
       const expectedOptions = {
         method: 'POST',
-        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        headers: reqHeaders,
         body: JSON.stringify(
           {
             data: {
