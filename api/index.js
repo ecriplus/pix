@@ -4,8 +4,6 @@ import { validateEnvironmentVariables } from './src/shared/infrastructure/valida
 
 validateEnvironmentVariables();
 
-import metrics from 'datadog-metrics';
-
 import { disconnect, prepareDatabaseConnection } from './db/knex-database-connection.js';
 import { createServer } from './server.js';
 import { config } from './src/shared/config.js';
@@ -37,18 +35,8 @@ async function _exitOnSignal(signal) {
   logger.info(`Received signal: ${signal}.`);
   logger.info('Stopping HAPI server...');
   await server.stop({ timeout: 30000 });
-  if (server.pixCustomIntervals) {
-    metrics.gauge('captain.api.conteneur', 0);
-    metrics.gauge(`captain.api.memory.rss`, 0);
-    metrics.gauge('captain.api.memory.heapTotal', 0);
-    metrics.gauge('captain.api.memory.heapUsed', 0);
-    metrics.gauge('captain.api.knex.db_connections_used', 0);
-    metrics.gauge('captain.api.knex.db_connections_free', 0);
-    metrics.gauge('captain.api.knex.db_connections_pending_creation', 0);
-    metrics.gauge('captain.api.knex.db_connections_pending_destroy', 0);
-    logger.info('Closing metrics interval and flush metrics');
-    server.pixCustomIntervals.forEach(clearInterval);
-    metrics.flush();
+  if (server.directMetrics) {
+    server.directMetrics.clearMetrics();
   }
   if (server.oppsy) {
     logger.info('Stopping HAPI Oppsy server...');

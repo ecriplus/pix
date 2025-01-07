@@ -8,7 +8,7 @@ import { authentication } from './lib/infrastructure/authentication.js';
 import { routes } from './lib/routes.js';
 import {
   attachTargetProfileRoutes,
-  complementaryCertificationRoutes
+  complementaryCertificationRoutes,
 } from './src/certification/complementary-certification/routes.js';
 import { certificationConfigurationRoutes, scoWhitelistRoutes } from './src/certification/configuration/routes.js';
 import { certificationEnrolmentRoutes } from './src/certification/enrolment/routes.js';
@@ -74,6 +74,7 @@ const createServer = async () => {
 
   // initialisation of Datadog link for metrics publication
   const metrics = new Metrics({ config });
+  server.directMetrics = metrics;
 
   if (logOpsMetrics) {
     // OPS metrics via direct metrics
@@ -138,13 +139,14 @@ const createBareServer = function () {
 const enableOpsMetrics = async function (server, metrics) {
   metrics.addRecurrentMetrics(
     [
-      { type: 'gauge', name: `captain.api.memory.rss`, value: 'rss' },
+      { type: 'gauge', name: 'captain.api.memory.rss', value: 'rss' },
       { type: 'gauge', name: 'captain.api.memory.heapTotal', value: 'heapTotal' },
       { type: 'gauge', name: 'captain.api.memory.heapUsed', value: 'heapUsed' },
       { type: 'gauge', name: 'captain.api.conteneur', constValue: 1 },
     ],
-    500,
-  )(() => process.memoryUsage());
+    5000,
+    process.memoryUsage,
+  );
 
   server.pixCustomIntervals = metrics.intervals;
 

@@ -1,10 +1,10 @@
-import { logger } from '../../shared/infrastructure/utils/logger.js';
 import metrics from 'datadog-metrics';
 
-export class Metrics {
+import { logger } from '../../shared/infrastructure/utils/logger.js';
 
+export class Metrics {
   static intervals = [];
-  static metricDefinitions = [];
+  static metricDefinitions = {};
 
   constructor({ config }) {
     if (!config.featureToggles.isDirectMetricsEnabled) {
@@ -24,6 +24,11 @@ export class Metrics {
   }
 
   addMetricPoint({ type, name, tags, value }) {
+    this.#addMetricPointWithoutRegistration({ type, name, tags, value });
+    this.#registerMetric({ type, name, tags });
+  }
+
+  #addMetricPointWithoutRegistration({ type, name, tags, value }) {
     switch (type) {
       case 'gauge':
         metrics.gauge(name, value, tags);
@@ -37,31 +42,40 @@ export class Metrics {
       default:
         throw new Error(`${type} is not supported.`);
     }
-    this.#registerMetric({ type, name, tags });
   }
 
-  addRecurrentMetrics(metricDefinitionsArray, intervalInSeconds) {
-    return (...args) => {
-      const f = (mem) => () => {
-        metricDefinitionsArray.forEach(({ type, name, tags, value, constValue }) => {
-          if (constValue) {
-            this.addMetricPoint({ type, name, tags, value: constValue });
-          } else {
-            this.addMetricPoint({ type, name, tags, value: mem()[value] });
-          }
-        });
-      };
-      Metrics.intervals.push(setInterval(f(...args), intervalInSeconds));
+  addRecurrentMetrics(metricDefinitionsArray, intervalInSeconds, valueProducer) {
+    const f = (mem) => () => {
+      metricDefinitionsArray.forEach(({ type, name, tags, value, constValue }) => {
+        if (constValue) {
+          this.#addMetricPointWithoutRegistration({ type, name, tags, value: constValue });
+        } else {
+          this.#addMetricPointWithoutRegistration({ type, name, tags, value: mem()[value] });
+        }
+      });
     };
+    Metrics.intervals.push(setInterval(f(valueProducer), intervalInSeconds));
+    metricDefinitionsArray.forEach(({ type, name, tags }) => {
+      this.#registerMetric({ type, name, tags });
+    });
   }
 
   #registerMetric({ type, name, tags }) {
-    // TODO: vérifie qu'elle n'existe pas déjà
-    // TODO: ajouter à la var static
-    // TODO: envoyer 0 lors de l'extinction du server
+    const metricSignature = `${type}|${name}|${tags}`;
+    if (!Metrics.metricDefinitions[metricSignature]) {
+      logger.info(`Metric registred with : ${type}, ${name}, ${tags}`);
+      Metrics.metricDefinitions[metricSignature] = { type, name, tags };
+    }
   }
 
   clearMetrics() {
-
+    Metrics.intervals.forEach(clearInterval);
+    logger.info(JSON.stringify(Metrics.metricDefinitions));
+    Object.values(Metrics.metricDefinitions).forEach((v) => {
+      const zero = v;
+      zero.value = 0;
+      this.#addMetricPointWithoutRegistration(zero);
+    });
+    metrics.flush();
   }
 }
