@@ -94,7 +94,7 @@
     "ember-exam": "^9.0.0",
     "ember-fetch": "^8.1.2",
     "ember-intl": "^7.0.0",
-    "ember-keyboard": "^8.0.0",
+    "ember-keyboard": "^9.0.0",
     "ember-lifeline": "^7.0.0",
     "ember-load-initializers": "^3.0.0",
     "ember-modifier": "^4.0.0",
