@@ -29,6 +29,10 @@ export default class LoginForm extends Component {
     return !this.args.isWithInvitation;
   }
 
+  get forgottenPasswordUrl() {
+    return this.url.forgottenPasswordUrl;
+  }
+
   @action
   async authenticate(event) {
     event.preventDefault();
