@@ -82,6 +82,7 @@ export default class Url extends Service {
 
   get forgottenPasswordUrl() {
     const currentLanguage = this.intl.primaryLocale;
+
     let url = `${this.pixAppUrlWithoutExtension}${this.currentDomain.getExtension()}/mot-de-passe-oublie`;
     if (currentLanguage !== FRENCH_LOCALE) {
       url += `?lang=${currentLanguage}`;
