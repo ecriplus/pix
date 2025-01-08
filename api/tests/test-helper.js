@@ -21,7 +21,6 @@ import { DatabaseBuilder } from '../db/database-builder/database-builder.js';
 import { datamartKnex, disconnect, knex } from '../db/knex-database-connection.js';
 import * as frameworkRepository from '../lib/infrastructure/repositories/framework-repository.js';
 import * as thematicRepository from '../lib/infrastructure/repositories/thematic-repository.js';
-import * as tubeRepository from '../lib/infrastructure/repositories/tube-repository.js';
 import { PIX_ADMIN } from '../src/authorization/domain/constants.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
@@ -33,6 +32,7 @@ import * as challengeRepository from '../src/shared/infrastructure/repositories/
 import * as competenceRepository from '../src/shared/infrastructure/repositories/competence-repository.js';
 import * as courseRepository from '../src/shared/infrastructure/repositories/course-repository.js';
 import * as skillRepository from '../src/shared/infrastructure/repositories/skill-repository.js';
+import * as tubeRepository from '../src/shared/infrastructure/repositories/tube-repository.js';
 import * as customChaiHelpers from './tooling/chai-custom-helpers/index.js';
 import * as domainBuilder from './tooling/domain-builder/factory/index.js';
 import { jobChai } from './tooling/jobs/expect-job.js';
