@@ -2,13 +2,15 @@ import stream from 'node:stream';
 
 const { PassThrough } = stream;
 
+import dayjs from 'dayjs';
+
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { CampaignExternalIdTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { CAMPAIGN_FEATURES, ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { CampaignParticipationStatuses, KnowledgeElement } from '../../../../../../src/shared/domain/models/index.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { databaseBuilder, expect, mockLearningContent, streamToPromise } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, mockLearningContent, sinon, streamToPromise } from '../../../../../test-helper.js';
 
 describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-results-to-stream', function () {
   describe('#startWritingCampaignAssessmentResultsToStream', function () {
@@ -22,6 +24,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
     let csvPromise;
     let i18n;
     let createdAt, sharedAt, createdAtFormated, sharedAtFormated;
+    let now;
 
     beforeEach(async function () {
       i18n = getI18n();
@@ -75,6 +78,71 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
 
       writableStream = new PassThrough();
       csvPromise = streamToPromise(writableStream);
+    });
+
+    context('general context', function () {
+      beforeEach(async function () {
+        now = new Date('1992-07-07');
+        sinon.useFakeTimers({ now, toFake: ['Date'] });
+        const externalIdFeature = databaseBuilder.factory.buildFeature(CAMPAIGN_FEATURES.EXTERNAL_ID);
+        databaseBuilder.factory.buildCampaignFeature({
+          featureId: externalIdFeature.id,
+          campaignId: campaign.id,
+          params: { label: 'Identifiant Pix', type: CampaignExternalIdTypes.STRING },
+        });
+        participant = databaseBuilder.factory.buildUser();
+        organizationLearner = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+          firstName: '@Jean',
+          lastName: '=Bono',
+          organizationId: organization.id,
+          userId: participant.id,
+        });
+
+        const ke1 = databaseBuilder.factory.buildKnowledgeElement({
+          status: 'validated',
+          skillId: 'recSkillWeb1',
+          competenceId: 'recCompetence1',
+          userId: participant.id,
+          createdAt,
+        });
+
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          userId: participant.id,
+          snappedAt: sharedAt,
+          snapshot: JSON.stringify([ke1]),
+        });
+
+        ['recSkillWeb1'].forEach((skillId) => {
+          databaseBuilder.factory.buildCampaignSkill({
+            campaignId: campaign.id,
+            skillId: skillId,
+          });
+        });
+
+        await databaseBuilder.commit();
+      });
+      it('should return the correct filename', async function () {
+        // given
+
+        // when
+        const filename = await usecases.startWritingCampaignAssessmentResultsToStream({
+          campaignId: campaign.id,
+          writableStream,
+          i18n,
+        });
+        await csvPromise;
+        dayjs();
+        const expectedFilename =
+          'Resultats-' +
+          campaign.name +
+          '-' +
+          campaign.id +
+          '-' +
+          dayjs(now).tz('Europe/Berlin').format('YYYY-MM-DD-HHmm') +
+          '.csv';
+        // then
+        expect(filename.fileName).to.equal(expectedFilename);
+      });
     });
 
     context('with externalId campaign feature', function () {
@@ -694,3 +762,5 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
     });
   });
 });
+
+// tester le filename

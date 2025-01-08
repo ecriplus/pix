@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import * as campaignParticipationService from '../../../../lib/domain/services/campaign-participation-service.js';
+import * as campaignParticipationService from '../../../prescription/campaign/domain/services/campaign-participation-service.js';
 import { CompetenceResult } from './CompetenceResult.js';
 
 class CampaignParticipationResult {

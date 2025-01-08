@@ -11,6 +11,7 @@ function buildCampaignParticipationInfo({
   createdAt = new Date('2020-01-01'),
   sharedAt = new Date('2020-02-02'),
   division,
+  group,
   masteryRate = 1,
   additionalInfos = null,
 } = {}) {
@@ -25,6 +26,7 @@ function buildCampaignParticipationInfo({
     createdAt,
     sharedAt,
     division,
+    group,
     masteryRate,
     additionalInfos,
   });
