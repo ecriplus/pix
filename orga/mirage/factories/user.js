@@ -14,7 +14,7 @@ export default Factory.extend({
     return faker.internet.exampleEmail().toLowerCase();
   },
 
-  pixOrgaTermsOfServiceAccepted() {
-    return faker.datatype.boolean();
+  pixOrgaTermsOfServiceStatus() {
+    return 'requested';
   },
 });

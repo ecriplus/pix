@@ -35,14 +35,9 @@ module('Acceptance | Missions List', function (hooks) {
       const domain = this.owner.lookup('service:currentDomain');
       sinon.stub(domain, 'getJuniorBaseUrl').returns('https://junior.pix.fr');
 
-      const user = createPrescriberForOrganization(
-        { lang: 'fr', pixOrgaTermsOfServiceAccepted: true },
-        { schoolCode: 'BLABLA123' },
-        'MEMBER',
-        {
-          MISSIONS_MANAGEMENT: true,
-        },
-      );
+      const user = createPrescriberForOrganization({ lang: 'fr' }, { schoolCode: 'BLABLA123' }, 'MEMBER', {
+        MISSIONS_MANAGEMENT: true,
+      });
       await authenticateSession(user.id);
 
       server.create('mission', { name: 'Super Mission', competenceName: 'Super competence' });
@@ -91,7 +86,7 @@ module('Acceptance | Missions List', function (hooks) {
     module('display import button', function () {
       test('should display import button if user is admin of the current school', async function (assert) {
         // given
-        const user = createPrescriberForOrganization({ lang: 'fr', pixOrgaTermsOfServiceAccepted: true }, {}, 'ADMIN', {
+        const user = createPrescriberForOrganization({ lang: 'fr' }, {}, 'ADMIN', {
           MISSIONS_MANAGEMENT: true,
         });
         await authenticateSession(user.id);
@@ -110,14 +105,9 @@ module('Acceptance | Missions List', function (hooks) {
       });
       test('should not display import button if user is member of the current school', async function (assert) {
         // given
-        const user = createPrescriberForOrganization(
-          { lang: 'fr', pixOrgaTermsOfServiceAccepted: true },
-          {},
-          'MEMBER',
-          {
-            MISSIONS_MANAGEMENT: true,
-          },
-        );
+        const user = createPrescriberForOrganization({ lang: 'fr' }, {}, 'MEMBER', {
+          MISSIONS_MANAGEMENT: true,
+        });
         await authenticateSession(user.id);
 
         server.create('mission', { name: 'Super Mission', competenceName: 'Super competence', startedBy: '' });

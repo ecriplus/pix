@@ -85,7 +85,6 @@ module('Acceptance | Team Creation', function (hooks) {
           firstName: 'Gigi',
           lastName: 'La Brochette',
           email,
-          pixOrgaTermsOfServiceAccepted: true,
         });
 
         const screen = await visit('/equipe/creation');

@@ -282,7 +282,7 @@ module('Acceptance | authentication', function (hooks) {
       test('should display session status', async function (assert) {
         const sessionExpirationDate = new Date(2024, 5, 12, 16);
         const user = createPrescriberForOrganization(
-          { lang: 'fr', pixOrgaTermsOfServiceAccepted: true },
+          { lang: 'fr' },
           {
             schoolCode: 'AZERTY',
             sessionExpirationDate,
@@ -303,7 +303,7 @@ module('Acceptance | authentication', function (hooks) {
 
       test('should handle starting session', async function (assert) {
         const user = createPrescriberForOrganization(
-          { lang: 'fr', pixOrgaTermsOfServiceAccepted: true },
+          { lang: 'fr' },
           {
             schoolCode: 'AZERTY',
             sessionExpirationDate: null,

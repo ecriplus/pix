@@ -27,7 +27,7 @@ module('Unit | Route | authenticated', function (hooks) {
       const organizationId = Symbol('organizationId');
 
       class CurrentUserStub extends Service {
-        prescriber = { placesManagement: true, pixOrgaTermsOfServiceAccepted: false };
+        prescriber = { placesManagement: true, pixOrgaTermsOfServiceStatus: 'requested' };
         organization = {
           id: organizationId,
         };
@@ -54,7 +54,10 @@ module('Unit | Route | authenticated', function (hooks) {
       const organizationId = Symbol('organizationId');
 
       class CurrentUserStub extends Service {
-        prescriber = { placesManagement: true, pixOrgaTermsOfServiceAccepted: true };
+        prescriber = {
+          placesManagement: true,
+          pixOrgaTermsOfServiceStatus: 'accepted',
+        };
         organization = {
           id: organizationId,
         };

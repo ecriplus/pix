@@ -3,7 +3,7 @@ import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 export default class Prescriber extends Model {
   @attr('string') firstName;
   @attr('string') lastName;
-  @attr('boolean') pixOrgaTermsOfServiceAccepted;
+  @attr('string') pixOrgaTermsOfServiceStatus;
   @attr('boolean') areNewYearOrganizationLearnersImported;
   @attr('number') participantCount;
   @attr('string') lang;

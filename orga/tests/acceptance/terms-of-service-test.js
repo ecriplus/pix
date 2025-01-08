@@ -25,7 +25,7 @@ module('Acceptance | terms-of-service', function (hooks) {
 
   module('When prescriber has not accepted terms of service yet', function (hooks) {
     hooks.beforeEach(async () => {
-      prescriber = createPrescriberWithPixOrgaTermsOfService({ pixOrgaTermsOfServiceAccepted: false });
+      prescriber = createPrescriberWithPixOrgaTermsOfService({ pixOrgaTermsOfServiceStatus: 'requested' });
 
       await authenticateSession(prescriber.id);
     });
@@ -78,7 +78,7 @@ module('Acceptance | terms-of-service', function (hooks) {
 
   module('When prescriber has already accepted terms of service', function (hooks) {
     hooks.beforeEach(async () => {
-      prescriber = createPrescriberWithPixOrgaTermsOfService({ pixOrgaTermsOfServiceAccepted: true });
+      prescriber = createPrescriberWithPixOrgaTermsOfService({ pixOrgaTermsOfServiceStatus: 'accepted' });
 
       await authenticateSession(prescriber.id);
     });
