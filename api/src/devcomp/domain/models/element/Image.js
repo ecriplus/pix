@@ -2,6 +2,15 @@ import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asser
 import { Element } from './Element.js';
 
 class Image extends Element {
+  /**
+   * @param{object} params
+   * @param{string} params.id
+   * @param{string} url
+   * @param{string} alt
+   * @param{string} alternativeText
+   * @param{string} legend
+   * @param{string} licence
+   */
   constructor({ id, url, alt, alternativeText, legend, licence }) {
     super({ id, type: 'image' });
 
