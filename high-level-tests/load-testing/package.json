@@ -44,7 +44,7 @@
     "eslint": "^8.46.0",
     "js2xmlparser": "^4.0.1",
     "mocha": "^11.0.0",
-    "sinon": "^18.0.0",
+    "sinon": "^19.0.0",
     "sinon-chai": "^4.0.0"
   },
   "dependencies": {
