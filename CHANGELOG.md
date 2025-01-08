@@ -1,5 +1,46 @@
 # Pix Changelog
 
+## v5.12.0 (08/01/2025)
+
+
+### :building_construction: Tech
+- [#10890](https://github.com/1024pix/pix/pull/10890) [TECH] Sortir la logique métier du usecase start-writing-campaign-assessments-results-to-stream.js (PIX-15822).
+- [#10984](https://github.com/1024pix/pix/pull/10984) [TECH] :truck: Déplace le `tube-repository` vers `src/shared`.
+- [#11002](https://github.com/1024pix/pix/pull/11002) [TECH] :package: Mise à jour de`ember-file-upload` pour pix Admin.
+- [#10997](https://github.com/1024pix/pix/pull/10997) [TECH] :package: chore(junior) mise à jour du paquet `ember-cli-mirage` de pix Junior.
+- [#10983](https://github.com/1024pix/pix/pull/10983) [TECH] :truck: déplacement du `mailService` vers `src`.
+- [#10631](https://github.com/1024pix/pix/pull/10631) [TECH] add direct metrics pushed to datadog.
+
+### :bug: Correction
+- [#11018](https://github.com/1024pix/pix/pull/11018) [BUGFIX] Permettre un arrêt graceful  du serveur.
+- [#10961](https://github.com/1024pix/pix/pull/10961) [BUGFIX] Placer le curseur de l'utilisateur sur les en-têtes des pages de réinitialisation de mot de passe (PIX-15937).
+- [#11016](https://github.com/1024pix/pix/pull/11016) [BUGFIX] Répare Pix Certif suite à la montée de version de `ember-simple-auth` en v7.
+- [#10973](https://github.com/1024pix/pix/pull/10973) [BUGFIX] Ré-ajoute la raison d'abandon du candidat (PIX-15969).
+
+### :arrow_up: Montée de version
+- [#11011](https://github.com/1024pix/pix/pull/11011) [BUMP] Update dependency ember-cli to v6 (mon-pix).
+- [#11015](https://github.com/1024pix/pix/pull/11015) [BUMP] Update dependency sinon to v19 (load-testing).
+- [#11014](https://github.com/1024pix/pix/pull/11014) [BUMP] Update dependency mocha to v11 (load-testing).
+- [#11008](https://github.com/1024pix/pix/pull/11008) [BUMP] Update dependency ember-simple-auth to v7 (certif).
+- [#11007](https://github.com/1024pix/pix/pull/11007) [BUMP] Update dependency ember-cli to v6 (certif).
+- [#11006](https://github.com/1024pix/pix/pull/11006) [BUMP] Update dependency ember-cli to v6 (admin).
+- [#11004](https://github.com/1024pix/pix/pull/11004) [BUMP] Update dependency artillery-plugin-expect to v2 (load-testing).
+- [#11005](https://github.com/1024pix/pix/pull/11005) [BUMP] Update dependency ember-qunit to v9 (certif).
+- [#10999](https://github.com/1024pix/pix/pull/10999) [BUMP] Update dependency artillery-plugin-publish-metrics to v2 (load-testing).
+- [#11001](https://github.com/1024pix/pix/pull/11001) [BUMP] Update dependency cypress to v13 (e2e).
+- [#10998](https://github.com/1024pix/pix/pull/10998) [BUMP] Update dependency artillery to v2 (load-testing).
+- [#11000](https://github.com/1024pix/pix/pull/11000) [BUMP] Update dependency chai to v5 (load-testing).
+- [#10993](https://github.com/1024pix/pix/pull/10993) [BUMP] Update dependency @formatjs/intl to v3 (mon-pix).
+- [#10992](https://github.com/1024pix/pix/pull/10992) [BUMP] Update dependency npm-run-all2 to v7 (orga).
+- [#10990](https://github.com/1024pix/pix/pull/10990) [BUMP] Update dependency npm-run-all2 to v7 (junior).
+- [#10989](https://github.com/1024pix/pix/pull/10989) [BUMP] Update dependency npm-run-all2 to v7 (e2e).
+- [#10991](https://github.com/1024pix/pix/pull/10991) [BUMP] Update dependency npm-run-all2 to v7 (mon-pix).
+- [#10324](https://github.com/1024pix/pix/pull/10324) [BUMP] Update dependency sinon to v19 (api).
+- [#10988](https://github.com/1024pix/pix/pull/10988) [BUMP] Update dependency npm-run-all2 to v7 (dossier racine).
+- [#10986](https://github.com/1024pix/pix/pull/10986) [BUMP] Update dependency @formatjs/intl to v3 (certif).
+- [#10987](https://github.com/1024pix/pix/pull/10987) [BUMP] Update dependency npm-run-all2 to v7 (admin).
+- [#10985](https://github.com/1024pix/pix/pull/10985) [BUMP] Update dependency @1024pix/pix-ui to ^52.1.0 (orga).
+
 ## v5.11.0 (07/01/2025)
 
 
