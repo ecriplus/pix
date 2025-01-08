@@ -5,11 +5,20 @@ export default class CurrentLearnerService extends Service {
     return JSON.parse(localStorage.getItem('learner'));
   }
 
-  async setLearner(learner) {
+  setLearner(learner) {
     localStorage.setItem('learner', JSON.stringify(learner));
   }
 
-  async remove() {
+  setHasSeenWarningModal() {
+    localStorage.setItem('learner-has-seen-warning-modal', 'true');
+  }
+
+  get hasSeenWarningModal() {
+    return !!localStorage.getItem('learner-has-seen-warning-modal');
+  }
+
+  remove() {
     localStorage.removeItem('learner');
+    localStorage.removeItem('learner-has-seen-warning-modal');
   }
 }
