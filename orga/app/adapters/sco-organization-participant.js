@@ -8,13 +8,7 @@ export default class ScoOrganizationParticipantAdapter extends ApplicationAdapte
     return `${this.host}/${this.namespace}/organizations/${organizationId}/sco-participants`;
   }
 
-  async generateOrganizationLearnersUsernamePassword({
-    fetch,
-    fileSaver,
-    organizationId,
-    organizationLearnersIds,
-    token,
-  }) {
+  async generateOrganizationLearnersUsernamePassword({ fileSaver, organizationId, organizationLearnersIds, token }) {
     const url = `${this.host}/${this.namespace}/sco-organization-learners/batch-username-password-generate`;
     const payload = JSON.stringify(
       {
@@ -25,9 +19,14 @@ export default class ScoOrganizationParticipantAdapter extends ApplicationAdapte
       null,
       2,
     );
+    const reqHeaders = new Headers();
+
+    reqHeaders.set('Authorization', `Bearer ${token}`);
+    reqHeaders.set('Content-Type', 'application/json');
+
     const request = fetch(url, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      headers: reqHeaders,
       body: payload,
     });
 

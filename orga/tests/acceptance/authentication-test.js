@@ -321,8 +321,11 @@ module('Acceptance | authentication', function (hooks) {
           name: t('navigation.school-sessions.activate-button'),
         });
         await click(activateButton);
+
         assert.ok(
-          screen.getByText(t('navigation.school-sessions.status.active-label', { sessionExpirationDate: '18:00' })),
+          await screen.findByText(
+            t('navigation.school-sessions.status.active-label', { sessionExpirationDate: '18:00' }),
+          ),
         );
       });
     });

@@ -3,7 +3,6 @@ import { guidFor } from '@ember/object/internals';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import fetch from 'fetch';
 import ENV from 'pix-orga/config/environment';
 
 import { CONNECTION_TYPES } from '../../helpers/connection-types';
@@ -117,7 +116,6 @@ export default class ScoList extends Component {
     const affectedStudentsIds = affectedStudents.map((affectedStudents) => affectedStudents.id);
     try {
       await this.store.adapterFor('sco-organization-participant').generateOrganizationLearnersUsernamePassword({
-        fetch,
         fileSaver: this.fileSaver,
         organizationId: this.currentUser.organization.id,
         organizationLearnersIds: affectedStudentsIds,
