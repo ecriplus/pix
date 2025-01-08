@@ -859,7 +859,8 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
   });
 
   describe('#disableMembershipsByUserId', function () {
-    const now = new Date('2022-12-05');
+    const creationDate = new Date('2022-12-05');
+    const now = new Date('2024-10-04');
     let clock;
 
     beforeEach(function () {
@@ -880,17 +881,18 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
         const firstMembership = databaseBuilder.factory.buildCertificationCenterMembership({
           userId,
           certificationCenterId: firstCertificationCenterId,
-          createdAt: now,
+          createdAt: creationDate,
         });
         const secondMembership = databaseBuilder.factory.buildCertificationCenterMembership({
           userId,
           certificationCenterId: secondCertificationCenterId,
-          createdAt: now,
+          createdAt: creationDate,
+          updatedAt: now,
         });
         databaseBuilder.factory.buildCertificationCenterMembership({
           userId: databaseBuilder.factory.buildUser().id,
           certificationCenterId: secondCertificationCenterId,
-          createdAt: now,
+          createdAt: creationDate,
         });
 
         await databaseBuilder.commit();
@@ -902,14 +904,16 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
         const expectedMemberships = [
           {
             ...firstMembership,
-            createdAt: now,
+            createdAt: creationDate,
             disabledAt: now,
+            updatedAt: now,
             updatedByUserId,
           },
           {
             ...secondMembership,
-            createdAt: now,
+            createdAt: creationDate,
             disabledAt: now,
+            updatedAt: now,
             updatedByUserId,
           },
         ];
@@ -930,19 +934,19 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
         const firstMembership = databaseBuilder.factory.buildCertificationCenterMembership({
           userId,
           certificationCenterId: firstCertificationCenterId,
-          createdAt: now,
+          createdAt: creationDate,
         });
         const secondMembership = databaseBuilder.factory.buildCertificationCenterMembership({
           userId,
           updatedByUserId,
           certificationCenterId: secondCertificationCenterId,
-          createdAt: now,
-          disabledAt: now,
+          createdAt: creationDate,
+          disabledAt: creationDate,
         });
         databaseBuilder.factory.buildCertificationCenterMembership({
           userId: databaseBuilder.factory.buildUser().id,
           certificationCenterId: secondCertificationCenterId,
-          createdAt: now,
+          createdAt: creationDate,
         });
 
         await databaseBuilder.commit();
@@ -958,6 +962,7 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
           {
             ...firstMembership,
             disabledAt: now,
+            updatedAt: now,
             updatedByUserId,
           },
         ];
@@ -981,20 +986,20 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
           userId,
           updatedByUserId,
           certificationCenterId: firstCertificationCenterId,
-          createdAt: now,
+          createdAt: creationDate,
           disabledAt: now,
         });
         databaseBuilder.factory.buildCertificationCenterMembership({
           userId,
           updatedByUserId,
           certificationCenterId: secondCertificationCenterId,
-          createdAt: now,
+          createdAt: creationDate,
           disabledAt: now,
         });
         databaseBuilder.factory.buildCertificationCenterMembership({
           userId: databaseBuilder.factory.buildUser().id,
           certificationCenterId: secondCertificationCenterId,
-          createdAt: now,
+          createdAt: creationDate,
         });
 
         await databaseBuilder.commit();
