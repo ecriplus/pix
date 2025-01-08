@@ -1,8 +1,8 @@
-import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import PixBannerAlert from '@1024pix/pix-ui/components/pix-banner-alert';
 import { t } from 'ember-intl';
 
 <template>
-  <PixNotificationAlert @type="communication" @withIcon="true" role="alert">
+  <PixBannerAlert @type="info">
     {{t "pages.modulix.beta-banner"}}
-  </PixNotificationAlert>
+  </PixBannerAlert>
 </template>
