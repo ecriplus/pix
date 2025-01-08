@@ -9,8 +9,10 @@ import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { UserOrgaSettings } from '../../../../../src/shared/domain/models/UserOrgaSettings.js';
 import { Prescriber } from '../../../../../src/team/domain/read-models/Prescriber.js';
-import { prescriberRepository } from '../../../../../src/team/infrastructure/repositories/prescriber-repository.js';
+import { repositories } from '../../../../../src/team/infrastructure/repositories/index.js';
 import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+
+const prescriberRepository = repositories.prescriberRepository;
 
 describe('Integration | Team | Infrastructure | Repository | Prescriber', function () {
   const userToInsert = {
@@ -40,7 +42,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
         await databaseBuilder.commit();
 
         // when
-        const error = await catchErr(prescriberRepository.getPrescriber)(userId);
+        const error = await catchErr(prescriberRepository.getPrescriber)({
+          userId: userId,
+        });
 
         // then
         expect(error).to.be.an.instanceOf(ForbiddenAccess);
@@ -68,21 +72,30 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           firstName: user.firstName,
           lastName: user.lastName,
           pixOrgaTermsOfServiceAccepted: user.pixOrgaTermsOfServiceAccepted,
+          pixOrgaTermsOfServiceStatus: 'requested',
+          pixOrgaTermsOfServiceDocumentPath: 'pix-orga-tos-2024-01-02',
           lang: user.lang,
         };
       });
 
       it('should return the found prescriber', async function () {
         // when
-        const foundPrescriber = await prescriberRepository.getPrescriber(user.id);
+        const foundPrescriber = await prescriberRepository.getPrescriber({
+          userId: user.id,
+        });
 
         // then
+
         expect(foundPrescriber).to.be.an.instanceOf(Prescriber);
         expect(foundPrescriber.id).to.equal(expectedPrescriber.id);
         expect(foundPrescriber.firstName).to.equal(expectedPrescriber.firstName);
         expect(foundPrescriber.lastName).to.equal(expectedPrescriber.lastName);
         expect(foundPrescriber.pixOrgaTermsOfServiceAccepted).to.equal(
           expectedPrescriber.pixOrgaTermsOfServiceAccepted,
+        );
+        expect(foundPrescriber.pixOrgaTermsOfServiceStatus).to.equal(expectedPrescriber.pixOrgaTermsOfServiceStatus);
+        expect(foundPrescriber.pixOrgaTermsOfServiceDocumentPath).to.equal(
+          expectedPrescriber.pixOrgaTermsOfServiceDocumentPath,
         );
         expect(foundPrescriber.lang).to.equal(expectedPrescriber.lang);
       });
@@ -92,7 +105,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
         const nonExistentUserId = 678;
 
         // when
-        const result = await catchErr(prescriberRepository.getPrescriber)(nonExistentUserId);
+        const result = await catchErr(prescriberRepository.getPrescriber)({
+          userId: nonExistentUserId,
+        });
 
         // then
         expect(result).to.be.instanceOf(UserNotFoundError);
@@ -103,7 +118,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
         expectedPrescriber.memberships = [membership];
 
         // when
-        const foundPrescriber = await prescriberRepository.getPrescriber(user.id);
+        const foundPrescriber = await prescriberRepository.getPrescriber({
+          userId: user.id,
+        });
 
         // then
         const firstMembership = foundPrescriber.memberships[0];
@@ -126,7 +143,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
         await databaseBuilder.commit();
 
         // when
-        const foundPrescriber = await prescriberRepository.getPrescriber(user.id);
+        const foundPrescriber = await prescriberRepository.getPrescriber({
+          userId: user.id,
+        });
 
         // then
         expect(foundPrescriber.memberships[0].id).to.equal(3000000);
@@ -138,7 +157,7 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
         expectedPrescriber.userOrgaSettings = userOrgaSettings;
 
         // when
-        const foundUser = await prescriberRepository.getPrescriber(user.id);
+        const foundUser = await prescriberRepository.getPrescriber({ userId: user.id });
 
         // then
         expect(foundUser.userOrgaSettings).to.be.an.instanceOf(UserOrgaSettings);
@@ -153,7 +172,7 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
         expectedPrescriber.userOrgaSettings = userOrgaSettings;
         const expectedOrganization = new Organization(organization);
         // when
-        const foundUser = await prescriberRepository.getPrescriber(user.id);
+        const foundUser = await prescriberRepository.getPrescriber({ userId: user.id });
 
         // then
         expect(foundUser.userOrgaSettings.currentOrganization).to.be.an.instanceOf(Organization);
@@ -171,7 +190,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           await databaseBuilder.commit();
 
           // when
-          const foundPrescriber = await prescriberRepository.getPrescriber(user.id);
+          const foundPrescriber = await prescriberRepository.getPrescriber({
+            userId: user.id,
+          });
 
           // then
           expect(foundPrescriber.userOrgaSettings.currentOrganization.tags.map((tag) => tag.name)).to.have.members([
@@ -192,7 +213,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           await databaseBuilder.commit();
 
           // when
-          const foundPrescriber = await prescriberRepository.getPrescriber(user.id);
+          const foundPrescriber = await prescriberRepository.getPrescriber({
+            userId: user.id,
+          });
 
           // then
           const schoolMembership = foundPrescriber.memberships.find(
@@ -210,7 +233,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           await databaseBuilder.commit();
 
           // when
-          const foundPrescriber = await prescriberRepository.getPrescriber(user.id);
+          const foundPrescriber = await prescriberRepository.getPrescriber({
+            userId: user.id,
+          });
 
           // then
           expect(foundPrescriber.userOrgaSettings.currentOrganization.sessionExpirationDate).to.deep.equal(
@@ -241,7 +266,7 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
             await databaseBuilder.commit();
 
             // when
-            const foundPrescriber = await prescriberRepository.getPrescriber(userId);
+            const foundPrescriber = await prescriberRepository.getPrescriber({ userId });
 
             // then
             expect(foundPrescriber.areNewYearOrganizationLearnersImported).to.be.true;
@@ -269,7 +294,7 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
             await databaseBuilder.commit();
 
             // when
-            const foundPrescriber = await prescriberRepository.getPrescriber(userId);
+            const foundPrescriber = await prescriberRepository.getPrescriber({ userId });
 
             // then
             expect(foundPrescriber.areNewYearOrganizationLearnersImported).to.be.true;
@@ -299,7 +324,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
               await databaseBuilder.commit();
 
               // when
-              const foundPrescriber = await prescriberRepository.getPrescriber(userId);
+              const foundPrescriber = await prescriberRepository.getPrescriber({
+                userId: user.id,
+              });
 
               // then
               expect(foundPrescriber.areNewYearOrganizationLearnersImported).to.be.false;
@@ -318,7 +345,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           await databaseBuilder.commit();
 
           // when
-          const foundPrescriber = await prescriberRepository.getPrescriber(user.id);
+          const foundPrescriber = await prescriberRepository.getPrescriber({
+            userId: user.id,
+          });
 
           // then
           expect(foundPrescriber.participantCount).to.equal(1);
@@ -334,7 +363,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           await databaseBuilder.commit();
 
           // when
-          const foundPrescriber = await prescriberRepository.getPrescriber(user.id);
+          const foundPrescriber = await prescriberRepository.getPrescriber({
+            userId: user.id,
+          });
 
           // then
           expect(foundPrescriber.participantCount).to.equal(0);
@@ -349,7 +380,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           await databaseBuilder.commit();
 
           // when
-          const foundPrescriber = await prescriberRepository.getPrescriber(user.id);
+          const foundPrescriber = await prescriberRepository.getPrescriber({
+            userId: user.id,
+          });
 
           // then
           expect(foundPrescriber.participantCount).to.equal(0);
@@ -366,7 +399,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           await databaseBuilder.commit();
 
           // when
-          const foundPrescriber = await prescriberRepository.getPrescriber(user.id);
+          const foundPrescriber = await prescriberRepository.getPrescriber({
+            userId: user.id,
+          });
 
           // then
           expect(foundPrescriber.participantCount).to.equal(2);
@@ -393,7 +428,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           await databaseBuilder.commit();
 
           // when
-          const foundPrescriber = await prescriberRepository.getPrescriber(user.id);
+          const foundPrescriber = await prescriberRepository.getPrescriber({
+            userId: user.id,
+          });
 
           // then
           expect(foundPrescriber.features).to.deep.equal({

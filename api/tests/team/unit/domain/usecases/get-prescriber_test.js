@@ -62,7 +62,7 @@ describe('Unit | Team | Domain | UseCase | get-prescriber', function () {
       const membership = domainBuilder.buildMembership({ user });
       sharedMembershipRepository.findByUserId.withArgs({ userId }).resolves([membership]);
       userOrgaSettingsRepository.findOneByUserId.withArgs(userId).resolves(null);
-      prescriberRepository.getPrescriber.withArgs(userId).resolves(expectedResult);
+      prescriberRepository.getPrescriber.withArgs({ userId }).resolves(expectedResult);
 
       // when
       const result = await getPrescriber({
@@ -111,7 +111,7 @@ describe('Unit | Team | Domain | UseCase | get-prescriber', function () {
         user: membership.user,
       });
       userOrgaSettingsRepository.findOneByUserId.withArgs(userId).resolves(userOrgaSettings);
-      prescriberRepository.getPrescriber.withArgs(userId).resolves(expectedResult);
+      prescriberRepository.getPrescriber.withArgs({ userId }).resolves(expectedResult);
 
       // when
       const result = await getPrescriber({

@@ -31,6 +31,8 @@ const serialize = function (prescriber) {
       'firstName',
       'lastName',
       'pixOrgaTermsOfServiceAccepted',
+      'pixOrgaTermsOfServiceStatus',
+      'pixOrgaTermsOfServiceDocumentPath',
       'areNewYearOrganizationLearnersImported',
       'participantCount',
       'lang',

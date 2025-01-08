@@ -8,18 +8,23 @@ import { UserOrgaSettings } from '../../../shared/domain/models/UserOrgaSettings
 import { Prescriber } from '../../domain/read-models/Prescriber.js';
 
 /**
- * @param {string} userId
+ * @param {Object} params
+ * @property {string} params.userId
+ * @param {any} params.legalDocumentApi
  * @return {Promise<Prescriber>}
  */
-const getPrescriber = async function (userId) {
-  const user = await knex('users')
-    .select('id', 'firstName', 'lastName', 'pixOrgaTermsOfServiceAccepted', 'lang')
-    .where({ id: userId })
-    .first();
+const getPrescriber = async function ({ userId, legalDocumentApi }) {
+  const user = await knex('users').select('id', 'firstName', 'lastName', 'lang').where({ id: userId }).first();
 
   if (!user) {
     throw new UserNotFoundError(`User not found for ID ${userId}`);
   }
+
+  const pixOrgaLegalDocumentStatus = await legalDocumentApi.getLegalDocumentStatusByUserId({
+    userId,
+    service: 'pix-orga',
+    type: 'TOS',
+  });
 
   const memberships = await knex('memberships').where({ userId, disabledAt: null }).orderBy('id');
 
@@ -36,7 +41,15 @@ const getPrescriber = async function (userId) {
 
   const schools = await knex('schools').whereIn('organizationId', organizationIds);
 
-  const prescriber = _toPrescriberDomain(user, userOrgaSettings, tags, memberships, organizations, schools);
+  const prescriber = _toPrescriberDomain({
+    user,
+    pixOrgaLegalDocumentStatus,
+    userOrgaSettings,
+    tags,
+    memberships,
+    organizations,
+    schools,
+  });
 
   const currentOrganizationId = prescriber.userOrgaSettings.currentOrganization.id;
   prescriber.areNewYearOrganizationLearnersImported =
@@ -49,11 +62,23 @@ const getPrescriber = async function (userId) {
 
 export const prescriberRepository = { getPrescriber };
 
-function _toPrescriberDomain(user, userOrgaSettings, tags, memberships, organizations, schools) {
+function _toPrescriberDomain({
+  user,
+  pixOrgaLegalDocumentStatus,
+  userOrgaSettings,
+  tags,
+  memberships,
+  organizations,
+  schools,
+}) {
   const currentSchool = schools.find((school) => school.organizationId === userOrgaSettings.currentOrganizationId);
 
   return new Prescriber({
     ...user,
+    pixOrgaTermsOfServiceAccepted: pixOrgaLegalDocumentStatus.status === 'accepted',
+    pixOrgaTermsOfServiceStatus: pixOrgaLegalDocumentStatus.status,
+    pixOrgaTermsOfServiceDocumentPath: pixOrgaLegalDocumentStatus.documentPath,
+
     memberships: memberships.map(
       (membership) =>
         new Membership({

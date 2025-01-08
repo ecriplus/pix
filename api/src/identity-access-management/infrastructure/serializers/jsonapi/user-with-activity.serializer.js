@@ -14,8 +14,6 @@ const serialize = function (users, meta) {
       'lastTermsOfServiceValidatedAt',
       'lastDataProtectionPolicySeenAt',
       'mustValidateTermsOfService',
-      'pixOrgaTermsOfServiceAccepted',
-      'pixCertifTermsOfServiceAccepted',
       'lang',
       'isAnonymous',
       'accountInfo',

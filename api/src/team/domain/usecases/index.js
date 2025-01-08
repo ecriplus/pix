@@ -13,10 +13,10 @@ import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/
 import * as certificationCenterInvitationRepository from '../../infrastructure/repositories/certification-center-invitation-repository.js';
 import { certificationCenterInvitedUserRepository } from '../../infrastructure/repositories/certification-center-invited-user.repository.js';
 import { certificationCenterMembershipRepository } from '../../infrastructure/repositories/certification-center-membership.repository.js';
+import { repositories } from '../../infrastructure/repositories/index.js';
 import * as membershipRepository from '../../infrastructure/repositories/membership.repository.js';
 import { organizationInvitationRepository } from '../../infrastructure/repositories/organization-invitation.repository.js';
 import { organizationInvitedUserRepository } from '../../infrastructure/repositories/organization-invited-user.repository.js';
-import { prescriberRepository } from '../../infrastructure/repositories/prescriber-repository.js';
 import { userOrgaSettingsRepository } from '../../infrastructure/repositories/user-orga-settings-repository.js';
 import * as certificationCenterInvitationService from '../services/certification-center-invitation-service.js';
 import { organizationInvitationService } from '../services/organization-invitation.service.js';
@@ -29,7 +29,7 @@ const dependencies = {
   certificationCenterInvitedUserRepository,
   certificationCenterRepository,
   certificationCenterInvitationRepository,
-  prescriberRepository,
+  prescriberRepository: repositories.prescriberRepository,
   membershipRepository,
   userOrgaSettingsRepository,
   certificationCenterInvitationService,
