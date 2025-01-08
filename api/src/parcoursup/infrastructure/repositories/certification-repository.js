@@ -49,7 +49,9 @@ const _toDomain = (certificationResultDto) => {
     certificationDate: certificationResultDto[0].certification_date,
     competences: certificationResultDto.map((certificationResultDto) => {
       return {
-        id: certificationResultDto.competence_id,
+        code: certificationResultDto.competence_code,
+        name: certificationResultDto.competence_name,
+        areaName: certificationResultDto.area_name,
         level: certificationResultDto.competence_level,
       };
     }),
