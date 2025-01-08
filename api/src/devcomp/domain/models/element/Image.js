@@ -2,7 +2,7 @@ import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asser
 import { Element } from './Element.js';
 
 class Image extends Element {
-  constructor({ id, url, alt, alternativeText }) {
+  constructor({ id, url, alt, alternativeText, legend, licence }) {
     super({ id, type: 'image' });
 
     assertNotNullOrUndefined(url, 'The URL is required for an image');
@@ -12,6 +12,8 @@ class Image extends Element {
     this.url = url;
     this.alt = alt;
     this.alternativeText = alternativeText;
+    this.legend = legend;
+    this.licence = licence;
   }
 }
 
