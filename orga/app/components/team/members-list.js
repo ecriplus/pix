@@ -3,6 +3,11 @@ import Component from '@glimmer/component';
 
 export default class MembersList extends Component {
   @service currentUser;
+  @service intl;
+
+  get currentLocale() {
+    return this.intl.primaryLocale;
+  }
 
   get displayManagingColumn() {
     return this.currentUser.isAdminInOrganization;

@@ -1,4 +1,5 @@
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
+import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import { array, fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -9,7 +10,6 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 import TableHeader from '../../table/header';
-import PaginationControl from '../../table/pagination-control';
 import ParticipationStatus from '../../ui/participation-status';
 import ParticipationFilters from '../filter/participation-filters';
 import DeleteParticipationModal from './delete-participation-modal';
@@ -22,6 +22,10 @@ export default class ParticipantsList extends Component {
 
   @tracked isModalOpen = false;
   @tracked participationToDelete;
+
+  get currentLocale() {
+    return this.intl.primaryLocale;
+  }
 
   get canDeleteParticipation() {
     return this.currentUser.isAdminInOrganization || this.args.campaign.ownerId == this.currentUser.prescriber?.id;
@@ -165,7 +169,7 @@ export default class ParticipantsList extends Component {
       </div>
 
       {{#if @participations}}
-        <PaginationControl @pagination={{@participations.meta}} />
+        <PixPagination @pagination={{@participations.meta}} @locale={{this.getCurrentLocale}} />
       {{/if}}
 
       <DeleteParticipationModal

@@ -72,7 +72,7 @@
             </InElement>
           {{/if}}
           <InElement @destinationId={{this.paginationId}} @waitForElement={{true}}>
-            <Table::PaginationControl @pagination={{@students.meta}} @onChange={{reset}} />
+            <PixPagination @pagination={{@students.meta}} @onChange={{reset}} @locale={{this.intl.primaryLocale}} />
           </InElement>
           <InElement @destinationId={{this.filtersId}}>
             <SupOrganizationParticipant::SupLearnerFilters

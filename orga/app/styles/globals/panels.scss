@@ -1,6 +1,7 @@
 .panel {
   @extend %pix-shadow-xs;
 
+  margin-bottom: var(--pix-spacing-8x);
   background-color: var(--pix-neutral-0);
   border: none;
   border-radius: 4px;

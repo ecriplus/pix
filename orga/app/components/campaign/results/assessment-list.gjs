@@ -1,7 +1,8 @@
+import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import { t } from 'ember-intl';
 
+import getService from '../../../helpers/get-service.js';
 import TableHeader from '../../table/header';
-import TablePaginationControl from '../../table/pagination-control';
 import CampaignParticipationFilters from '../filter/participation-filters';
 import CampaignAssessmentRow from '../results/assessment-row';
 import EvolutionHeader from './evolution-header';
@@ -87,7 +88,9 @@ import EvolutionHeader from './evolution-header';
     </div>
 
     {{#if @participations}}
-      <TablePaginationControl @pagination={{@participations.meta}} />
+      {{#let (getService "service:intl") as |intl|}}
+        <PixPagination @pagination={{@participations.meta}} @locale={{intl.primaryLocale}} />
+      {{/let}}
     {{/if}}
   </section>
 </template>

@@ -1,3 +1,4 @@
+import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import { fn } from '@ember/helper';
 import { action, get } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
@@ -8,7 +9,6 @@ import { t } from 'ember-intl';
 
 import InElement from '../in-element';
 import SelectableList from '../selectable-list';
-import PaginationControl from '../table/pagination-control';
 import DeletionModal from '../ui/deletion-modal';
 import ActionBar from './action-bar';
 import LearnerFilters from './learner-filters';
@@ -187,7 +187,11 @@ export default class List extends Component {
                 </InElement>
               {{/if}}
               <InElement @destinationId={{this.paginationId}} @waitForElement={{true}}>
-                <PaginationControl @pagination={{@participants.meta}} @onChange={{reset}} />
+                <PixPagination
+                  @pagination={{@participants.meta}}
+                  @onChange={{reset}}
+                  @locale={{this.intl.primaryLocale}}
+                />
               </InElement>
               <InElement @destinationId={{this.filtersId}}>
                 <LearnerFilters

@@ -248,17 +248,6 @@
     },
     "loading": "Loading",
     "no-content": "No content available",
-    "pagination": {
-      "action": {
-        "next": "Go to next page",
-        "previous": "Go to previous page",
-        "select-page-size": "Select the number of items by page"
-      },
-      "page-info": "{start, number}-{end, number} of {total, plural, =0 {0 items} =1 {1 item} other {{total, number} items}}",
-      "page-number": "Page {current, number} / {total, number}",
-      "page-results": "{total, plural, =0 {0 items} =1 {1 item} other {{total, number} items}}",
-      "result-by-page": "See"
-    },
     "result": {
       "accessibility-description": "Results obtained = {percentage, number, ::percent},that is success rate {stage} of {totalStage}",
       "percentage": "{value, number, ::percent}",

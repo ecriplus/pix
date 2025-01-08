@@ -860,8 +860,9 @@ module('Integration | Component | SupOrganizationParticipant::List', function (h
       await click(firstLearnerSelected);
       await click(secondLearnerSelected);
 
-      const pagination = await screen.findByLabelText(t('common.pagination.action.next'));
-      await click(pagination);
+      const nextButton = await screen.findByRole('button', { name: 'Aller à la page suivante', exact: false });
+
+      await click(nextButton);
 
       // then
       assert.false(firstLearnerSelected.checked);

@@ -36,5 +36,5 @@
 </div>
 
 {{#if @members}}
-  <Table::PaginationControl @pagination={{@members.meta}} />
+  <PixPagination @pagination={{@members.meta}} @locale={{this.currentLocale}} />
 {{/if}}

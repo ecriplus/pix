@@ -1,9 +1,9 @@
+import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { t } from 'ember-intl';
 
+import getService from '../../helpers/get-service.js';
 import Header from '../table/header';
-import PaginationControl from '../table/pagination-control';
-
 function statusColor(status) {
   return {
     'not-started': 'tertiary',
@@ -51,7 +51,9 @@ function statusColor(status) {
         </tbody>
       </table>
     </div>
-    <PaginationControl @pagination={{@missionLearners.meta}} />
+    {{#let (getService "service:intl") as |intl|}}
+      <PixPagination @pagination={{@missionLearners.meta}} @locale={{intl.primaryLocale}} />
+    {{/let}}
   {{else}}
     <div class="table__empty content-text">
       {{t "pages.missions.mission.table.activities.no-data"}}

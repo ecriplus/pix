@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
+import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import { fn, uniqueId } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -14,7 +15,6 @@ import { eq, not } from 'ember-truth-helpers';
 import InElement from '../in-element';
 import SelectableList from '../selectable-list';
 import TableHeader from '../table/header';
-import TablePaginationControl from '../table/pagination-control';
 import UiActionBar from '../ui/action-bar';
 import UiDeletionModal from '../ui/deletion-modal';
 import CampaignType from './detail/type';
@@ -123,7 +123,7 @@ export default class List extends Component {
                       @deleteCampaigns={{fn (fn withFunction this.deleteCampaigns reset) selectedCampaigns}}
                     />
                   {{/if}}
-                  <PaginationControl
+                  <PixPaginationControl
                     @destinationId={{paginationId}}
                     @onChange={{reset}}
                     @pagination={{@campaigns.meta}}
@@ -163,9 +163,9 @@ export default class List extends Component {
   </template>
 }
 
-const PaginationControl = <template>
+const PixPaginationControl = <template>
   <InElement @destinationId={{@destinationId}} @waitForElement={{true}}>
-    <TablePaginationControl @pagination={{@pagination}} @onChange={{@onChange}} />
+    <PixPagination @pagination={{@pagination}} @onChange={{@onChange}} @locale={{this.intl.primaryLocale}} />
   </InElement>
 </template>;
 

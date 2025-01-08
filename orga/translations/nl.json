@@ -247,17 +247,6 @@
       }
     },
     "loading": "Bezig met laden",
-    "pagination": {
-      "action": {
-        "next": "Naar de volgende pagina",
-        "previous": "Naar de vorige pagina",
-        "select-page-size": "Aantal onderdelen dat per pagina moet worden weergegeven"
-      },
-      "page-info": "{start, number}-{end, number} op {total, plural, =0 {0 onderdelen} =1 {1 onderdeel} other {{total, number} onderdelen}}",
-      "page-number": "Pagina {current, number} / {total, number}",
-      "page-results": "{total, plural, =0 {0 onderdelen} =1 {1 onderdeel} other {{total, number} onderdelen}}",
-      "result-by-page": "Bekijken"
-    },
     "result": {
       "accessibility-description": "Verkregen resultaat = {percentage, number, ::percent}, ofwel de succesratio {stage} op {totalStage}",
       "percentage": "{value, number, ::percent}",

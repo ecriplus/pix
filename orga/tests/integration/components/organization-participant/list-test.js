@@ -986,8 +986,9 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
       await click(firstLearnerSelected);
       await click(secondLearnerSelected);
 
-      const pagination = await screen.findByLabelText(t('common.pagination.action.next'));
-      await click(pagination);
+      const nextButton = await screen.findByRole('button', { name: 'Aller à la page suivante', exact: false });
+
+      await click(nextButton);
       assert.false(firstLearnerSelected.checked);
       assert.false(secondLearnerSelected.checked);
     });

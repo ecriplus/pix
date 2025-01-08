@@ -46,7 +46,7 @@ module('Acceptance | Campaign Assessment Results', function (hooks) {
       // then
       assert.dom(`[aria-label="${t('pages.campaign-results.table.row-title')}"]`).exists({ count: pageSize });
       assert.ok(screen.getByText('Page 1 / 2'));
-      assert.dom(screen.getByLabelText(t('common.pagination.action.select-page-size'))).hasText('50');
+      assert.dom(screen.getByLabelText("Nombre d'élément à afficher par page")).hasText('50');
     });
 
     test('it should display participant list with settings in url for pagination', async function (assert) {
@@ -62,9 +62,7 @@ module('Acceptance | Campaign Assessment Results', function (hooks) {
       // then
       assert.dom(`[aria-label="${t('pages.campaign-results.table.row-title')}"]`).exists({ count: changedPageSize });
       assert.ok(screen.getByText('Page 2 / 2'));
-      assert
-        .dom(screen.getByLabelText(t('common.pagination.action.select-page-size')))
-        .hasText(changedPageSize.toString());
+      assert.dom(screen.getByLabelText("Nombre d'élément à afficher par page")).hasText(changedPageSize.toString());
     });
 
     test('it should redirect to participant details when user clicks on row', async function (assert) {
@@ -86,15 +84,13 @@ module('Acceptance | Campaign Assessment Results', function (hooks) {
 
       // when
       const screen = await visit('/campagnes/1/resultats-evaluation');
-      await click(screen.getByLabelText(t('common.pagination.action.select-page-size')));
+      await click(screen.getByLabelText("Nombre d'élément à afficher par page"));
       await click(await screen.findByRole('option', { name: changedPageSize }));
 
       // then
       assert.dom(`[aria-label="${t('pages.campaign-results.table.row-title')}"]`).exists({ count: changedPageSize });
       assert.ok(screen.getByText('Page 1 / 2'));
-      assert
-        .dom(screen.getByLabelText(t('common.pagination.action.select-page-size')))
-        .hasText(changedPageSize.toString());
+      assert.dom(screen.getByLabelText("Nombre d'élément à afficher par page")).hasText(changedPageSize.toString());
     });
 
     test('it should change participant list page when user clicks on next page', async function (assert) {
@@ -102,7 +98,7 @@ module('Acceptance | Campaign Assessment Results', function (hooks) {
       const changedPageSize = 10;
 
       const screen = await visit('/campagnes/1/resultats-evaluation');
-      await click(screen.getByLabelText(t('common.pagination.action.select-page-size')));
+      await click(screen.getByLabelText("Nombre d'élément à afficher par page"));
       await click(await screen.findByRole('option', { name: changedPageSize }));
       const someElementFromPage1 = document.querySelector('[aria-label="Participant"]:nth-child(5)').textContent;
 
@@ -122,15 +118,13 @@ module('Acceptance | Campaign Assessment Results', function (hooks) {
       // when
       const screen = await visit(`/campagnes/1/resultats-evaluation?pageNumber=${startPage}`);
 
-      await click(screen.getByLabelText(t('common.pagination.action.select-page-size')));
+      await click(screen.getByLabelText("Nombre d'élément à afficher par page"));
       await click(await screen.findByRole('option', { name: changedPageSize }));
 
       // then
       assert.dom(`[aria-label="${t('pages.campaign-results.table.row-title')}"]`).exists({ count: changedPageSize });
       assert.ok(screen.getByText('Page 1 / 4'));
-      assert
-        .dom(screen.getByLabelText(t('common.pagination.action.select-page-size')))
-        .hasText(changedPageSize.toString());
+      assert.dom(screen.getByLabelText("Nombre d'élément à afficher par page")).hasText(changedPageSize.toString());
     });
   });
 
