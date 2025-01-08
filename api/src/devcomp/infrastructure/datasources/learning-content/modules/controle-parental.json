@@ -285,7 +285,22 @@
           "element": {
             "id": "37ff3330-b8df-47e0-80d2-e382671dc3dd",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><details><summary>Indice 1</summary><p>Le contrôle parental fait partie des paramètres de l’appareil à activer. ⚙️</p></details><details><summary>Indice 2</summary><p>Ici, le contrôle parental s’active sur l’appareil de l’enfant.</p></details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://www.image-heberg.fr/files/1733406264146730843.gif\"></iframe></details><p></p>"
+            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><details><summary>Indice 1</summary><p>Le contrôle parental fait partie des paramètres de l’appareil à activer. ⚙️</p></details><details><summary>Indice 2</summary><p>Ici, le contrôle parental s’active sur l’appareil de l’enfant.</p></details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://www.image-heberg.fr/files/1733406264146730843.gif\"></iframe></details></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "573ea439-8075-48a5-a596-6583e17cb461",
+            "type": "separator"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "e1930046-29d3-4a0d-a88c-fdb9f7dbbe29",
+            "type": "text",
+            "content": "<p>Une fois le contrôle parental activé, Nina va pouvoir le paramétrer avec Max.<br><br>💡 <strong>Bon à savoir :&nbsp;</strong>En fonction du smartphone, le nom du paramètre à activer pour le contrôle parental n'est pas toujours le même.</p>"
           }
         }
       ]
