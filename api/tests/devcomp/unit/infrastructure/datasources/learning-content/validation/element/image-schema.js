@@ -8,6 +8,8 @@ const imageElementSchema = Joi.object({
   url: Joi.string().uri().required(),
   alt: htmlNotAllowedSchema.allow('').required(),
   alternativeText: htmlSchema.allow(''),
+  legend: htmlNotAllowedSchema.allow(''),
+  licence: htmlNotAllowedSchema.allow(''),
 }).required();
 
 export { imageElementSchema };
