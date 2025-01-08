@@ -52,11 +52,15 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
       certificationDate: new Date('2024-11-22T09:39:54Z'),
       competences: [
         {
-          id: 'xzef1223443',
+          code: '1.1',
+          name: 'Mener une recherche et une veille d’information',
+          areaName: 'Informations et données',
           level: 3,
         },
         {
-          id: 'otherCompetenceId',
+          code: '1.2',
+          name: 'Gérer des données',
+          areaName: 'Informations et données',
           level: 5,
         },
       ],
@@ -64,12 +68,16 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
 
     datamartBuilder.factory.buildCertificationResult({
       ...certificationResultData,
-      competenceId: 'xzef1223443',
+      competenceCode: '1.1',
+      competenceName: 'Mener une recherche et une veille d’information',
+      areaName: 'Informations et données',
       competenceLevel: 3,
     });
     datamartBuilder.factory.buildCertificationResult({
       ...certificationResultData,
-      competenceId: 'otherCompetenceId',
+      competenceCode: '1.2',
+      competenceName: 'Gérer des données',
+      areaName: 'Informations et données',
       competenceLevel: 5,
     });
 
@@ -147,12 +155,16 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
       };
       datamartBuilder.factory.buildCertificationResultCodeValidation({
         ...certificationResultData,
-        competenceId: 'xzef1223443',
+        competenceCode: '1.1',
+        competenceName: 'Mener une recherche et une veille d’information',
+        areaName: 'Informations et données',
         competenceLevel: 3,
       });
       datamartBuilder.factory.buildCertificationResultCodeValidation({
         ...certificationResultData,
-        competenceId: 'otherCompetenceId',
+        competenceCode: '1.2',
+        competenceName: 'Gérer des données',
+        areaName: 'Informations et données',
         competenceLevel: 5,
       });
       await datamartBuilder.commit();
@@ -183,11 +195,15 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
         certificationDate: new Date('2024-11-22T09:39:54Z'),
         competences: [
           {
-            id: 'xzef1223443',
+            code: '1.1',
+            name: 'Mener une recherche et une veille d’information',
+            areaName: 'Informations et données',
             level: 3,
           },
           {
-            id: 'otherCompetenceId',
+            code: '1.2',
+            name: 'Gérer des données',
+            areaName: 'Informations et données',
             level: 5,
           },
         ],
