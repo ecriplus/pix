@@ -151,6 +151,8 @@ export class ModuleFactory {
       url: element.url,
       alt: element.alt,
       alternativeText: element.alternativeText,
+      legend: element.legend,
+      licence: element.licence,
     });
   }
 

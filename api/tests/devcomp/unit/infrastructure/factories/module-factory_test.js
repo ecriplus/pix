@@ -362,6 +362,8 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                     url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg',
                     alt: 'Alternative',
                     alternativeText: 'Alternative textuelle',
+                    legend: 'legend',
+                    licence: 'licence',
                   },
                 },
               ],
