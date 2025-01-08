@@ -48,7 +48,7 @@ async function startPgBoss() {
 function createJobQueues(pgBoss) {
   const jobQueues = new JobQueue(pgBoss);
   process.on('SIGINT', async () => {
-    metrics.clearMetrics();
+    await metrics.clearMetrics();
     await jobQueues.stop();
 
     // Make sure pgBoss stopped before quitting
