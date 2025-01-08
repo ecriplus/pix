@@ -220,7 +220,14 @@ function getComponents() {
       element: qrocmElement,
     }),
     new ComponentElement({
-      element: new Image({ id: '3', url: 'url', alt: 'alt', alternativeText: 'alternativeText' }),
+      element: new Image({
+        id: '3',
+        url: 'url',
+        alt: 'alt',
+        alternativeText: 'alternativeText',
+        licence: 'mon copyright',
+        legend: 'ma légende',
+      }),
     }),
     new ComponentElement({
       element: new Embed({
@@ -393,6 +400,8 @@ function getAttributesComponents() {
         isAnswerable: false,
         type: 'image',
         url: 'url',
+        legend: 'ma légende',
+        licence: 'mon copyright',
       },
     },
     {
