@@ -50,8 +50,7 @@ export default class Url extends Service {
   }
 
   get homeUrl() {
-    const currentLanguage = this.intl.primaryLocale;
-    return `${this.definedHomeUrl}?lang=${currentLanguage}`;
+    return `${this.definedHomeUrl}?lang=${this._getCurrentLanguage()}`;
   }
 
   get legalNoticeUrl() {
@@ -75,20 +74,20 @@ export default class Url extends Service {
   }
 
   get serverStatusUrl() {
-    const currentLanguage = this.intl.primaryLocale;
-
-    return `${PIX_STATUS_DOMAIN}?locale=${currentLanguage}`;
+    return `${PIX_STATUS_DOMAIN}?locale=${this._getCurrentLanguage()}`;
   }
 
   get forgottenPasswordUrl() {
-    const currentLanguage = this.intl.primaryLocale;
-
     let url = `${this.pixAppUrlWithoutExtension}${this.currentDomain.getExtension()}/mot-de-passe-oublie`;
-    if (currentLanguage !== FRENCH_LOCALE) {
-      url += `?lang=${currentLanguage}`;
+    if (this._getCurrentLanguage() !== FRENCH_LOCALE) {
+      url += `?lang=${this._getCurrentLanguage()}`;
     }
 
     return url;
+  }
+
+  _getCurrentLanguage() {
+    return this.intl.primaryLocale;
   }
 
   get pixJuniorSchoolUrl() {
@@ -101,13 +100,11 @@ export default class Url extends Service {
   }
 
   _computeShowcaseWebsiteUrl({ en: englishPath, fr: frenchPath, nl: dutchPath }) {
-    const currentLanguage = this.intl.primaryLocale;
-
     if (this.currentDomain.isFranceDomain) {
       return `${PIX_FR_DOMAIN}${frenchPath}`;
     }
 
-    switch (currentLanguage) {
+    switch (this._getCurrentLanguage()) {
       case FRENCH_LOCALE:
         return `${PIX_ORG_DOMAIN_FR_LOCALE}${frenchPath}`;
       case ENGLISH_LOCALE:
