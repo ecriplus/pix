@@ -15,12 +15,12 @@ const buildCertificationCenterMembership = function ({
   id = 1,
   certificationCenter = buildCertificationCenter(),
   user = _buildUser(),
-  createdAt = new Date('2020-01-01'),
+  createdAt = new Date(),
   disabledAt,
   isReferer = false,
   role = 'MEMBER',
   updatedByUserId = 1,
-  updatedAt = new Date('2023-09-12'),
+  updatedAt = new Date(),
 } = {}) {
   return new CertificationCenterMembership({
     id,
