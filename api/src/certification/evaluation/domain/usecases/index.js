@@ -2,12 +2,12 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import * as certificationChallengesService from '../../../../../lib/domain/services/certification-challenges-service.js';
-import * as verifyCertificateCodeService from '../../../../../lib/domain/services/verify-certificate-code-service.js';
 import { pickChallengeService } from '../../../../evaluation/domain/services/pick-challenge-service.js';
 import * as languageService from '../../../../shared/domain/services/language-service.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
+import * as verifyCertificateCodeService from '../../../evaluation/domain/services/verify-certificate-code-service.js';
 import * as flashAlgorithmService from '../../../flash-certification/domain/services/algorithm-methods/flash.js';
 import {
   answerRepository,

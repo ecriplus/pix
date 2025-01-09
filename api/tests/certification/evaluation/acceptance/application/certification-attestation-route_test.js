@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import * as url from 'node:url';
 
-import { generateCertificateVerificationCode } from '../../../../../lib/domain/services/verify-certificate-code-service.js';
+import { generateCertificateVerificationCode } from '../../../../../src/certification/evaluation/domain/services/verify-certificate-code-service.js';
 import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { AssessmentResult, Membership } from '../../../../../src/shared/domain/models/index.js';
 import {

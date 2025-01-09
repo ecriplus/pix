@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import * as certificationCourseRepository from '../../../src/certification/shared/infrastructure/repositories/certification-course-repository.js';
-import { config } from '../../../src/shared/config.js';
-import { CertificateVerificationCodeGenerationTooManyTrials } from '../../../src/shared/domain/errors.js';
+import { config } from '../../../../shared/config.js';
+import { CertificateVerificationCodeGenerationTooManyTrials } from '../../../../shared/domain/errors.js';
+import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 
 const availableCharacters =
   `${config.availableCharacterForCode.numbers}${config.availableCharacterForCode.letters}`.split('');
