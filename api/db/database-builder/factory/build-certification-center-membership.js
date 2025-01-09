@@ -9,14 +9,18 @@ const buildCertificationCenterMembership = function ({
   userId,
   updatedByUserId,
   certificationCenterId,
-  createdAt = new Date('2020-01-01'),
-  updatedAt = new Date('2023-09-12'),
+  createdAt = new Date(),
+  updatedAt,
   disabledAt,
   isReferer = false,
   role = 'MEMBER',
 } = {}) {
   userId = _.isUndefined(userId) ? buildUser().id : userId;
   certificationCenterId = _.isUndefined(certificationCenterId) ? buildCertificationCenter().id : certificationCenterId;
+
+  if (!updatedAt) {
+    updatedAt = disabledAt || createdAt;
+  }
 
   const values = {
     id,

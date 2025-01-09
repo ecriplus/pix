@@ -219,7 +219,7 @@ const disableById = async function ({ certificationCenterMembershipId, updatedBy
     const now = new Date();
     const result = await knex(CERTIFICATION_CENTER_MEMBERSHIP_TABLE_NAME)
       .where({ id: certificationCenterMembershipId })
-      .update({ disabledAt: now, updatedByUserId })
+      .update({ disabledAt: now, updatedAt: now, updatedByUserId })
       .returning('*');
 
     if (result.length === 0) {
@@ -268,11 +268,12 @@ const getRefererByCertificationCenterId = async function ({ certificationCenterI
 };
 
 const disableMembershipsByUserId = async function ({ userId, updatedByUserId }) {
+  const now = new Date();
   const knexConn = DomainTransaction.getConnection();
   await knexConn(CERTIFICATION_CENTER_MEMBERSHIP_TABLE_NAME)
     .whereNull('disabledAt')
     .andWhere({ userId })
-    .update({ disabledAt: new Date(), updatedByUserId });
+    .update({ disabledAt: now, updatedAt: now, updatedByUserId });
 };
 
 const update = async function (certificationCenterMembership) {

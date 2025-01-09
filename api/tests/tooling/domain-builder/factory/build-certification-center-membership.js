@@ -15,14 +15,14 @@ const buildCertificationCenterMembership = function ({
   id = 1,
   certificationCenter = buildCertificationCenter(),
   user = _buildUser(),
-  createdAt = new Date('2020-01-01'),
+  createdAt = new Date(),
   disabledAt,
   isReferer = false,
   role = 'MEMBER',
   updatedByUserId = 1,
-  updatedAt = new Date('2023-09-12'),
+  updatedAt,
 } = {}) {
-  return new CertificationCenterMembership({
+  const certificationCenterMembership = new CertificationCenterMembership({
     id,
     certificationCenter,
     user,
@@ -33,6 +33,10 @@ const buildCertificationCenterMembership = function ({
     updatedByUserId,
     updatedAt,
   });
+  if (!updatedAt) {
+    certificationCenterMembership.updatedAt = disabledAt || createdAt;
+  }
+  return certificationCenterMembership;
 };
 
 export { buildCertificationCenterMembership };
