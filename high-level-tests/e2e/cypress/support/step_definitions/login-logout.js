@@ -97,5 +97,5 @@ When(`j'accepte les CGU de Pix`, () => {
 });
 
 When(`j'accepte les CGU de Pix Orga`, () => {
-  cy.get("button").contains("J’accepte les conditions d’utilisation").click();
+  cy.get("button").contains("Accepter et continuer").click();
 });
