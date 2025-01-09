@@ -172,6 +172,7 @@ export const updateById = async ({ id, membership }) => {
 export const disableMembershipsByUserId = async function ({ userId, updatedByUserId }) {
   const knexConnection = DomainTransaction.getConnection();
   await knexConnection(MEMBERSHIPS_TABLE)
+    .whereNull('disabledAt')
     .where({ userId })
     .update({ disabledAt: new Date(), updatedAt: new Date(), updatedByUserId });
 };
