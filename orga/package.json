@@ -72,7 +72,7 @@
     "@faker-js/faker": "^9.0.0",
     "@glimmer/component": "^2.0.0",
     "@glimmer/tracking": "^1.1.2",
-    "chart.js": "^4.4.5",
+    "chart.js": "^4.4.7",
     "chartjs-adapter-dayjs-4": "^1.0.4",
     "dayjs": "^1.11.13",
     "ember-auto-import": "^2.8.1",
