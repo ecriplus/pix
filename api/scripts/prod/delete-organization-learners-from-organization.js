@@ -68,10 +68,14 @@ export class DeleteOrganizationLearnersFromOrganizationScript extends Script {
       });
 
       if (executeAnonymization) {
+        const updatedAt = new Date();
         await this.#anonymizeOrganizationLearners({ organizationId });
 
         const campaignParticipations = await this.#anonymizeCampaignParticipations({ organizationId });
-
+        const campaignParticipationsIds = campaignParticipations.map(
+          (campaignParticipation) => campaignParticipation.id,
+        );
+        await this.#detachRecommendedTrainings({ campaignParticipationsIds, updatedAt });
         await this.#detachAssessmentFromCampaignParticipations({ campaignParticipations });
       }
     });
@@ -140,6 +144,13 @@ export class DeleteOrganizationLearnersFromOrganizationScript extends Script {
         date,
       ])
       .pluck('organization-learners.id');
+  }
+
+  async #detachRecommendedTrainings({ campaignParticipationsIds, updatedAt }) {
+    const knexConnection = DomainTransaction.getConnection();
+    await knexConnection('user-recommended-trainings')
+      .update({ campaignParticipationId: null, updatedAt })
+      .whereIn('campaignParticipationId', campaignParticipationsIds);
   }
 }
 

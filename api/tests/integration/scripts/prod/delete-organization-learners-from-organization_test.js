@@ -235,6 +235,8 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
 
     it('cut references to user', async function () {
       const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const training = databaseBuilder.factory.buildTraining();
+
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
         organizationId,
@@ -248,6 +250,11 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
         userId,
         campaignParticipationId: campaignParticipation.id,
       }).id;
+      databaseBuilder.factory.buildUserRecommendedTraining({
+        campaignParticipationId: campaignParticipation.id,
+        trainingId: training.id,
+        userId: userId,
+      });
 
       await databaseBuilder.commit();
 
@@ -258,13 +265,16 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
         .first();
       const participationResult = await knex('campaign-participations').where({ id: campaignParticipation.id }).first();
       const assessmentResult = await knex('assessments').where({ id: assessmentId }).first();
+      const anonymizedRecommendedTrainingResults =
+        await knex('user-recommended-trainings').whereNull('campaignParticipationId');
 
       expect(organizationLearnerResult.userId).to.equal(null);
       expect(participationResult.userId).to.equal(null);
       expect(assessmentResult.campaignParticipationId).to.equal(null);
+      expect(anonymizedRecommendedTrainingResults).lengthOf(1);
     });
 
-    it('should not anonymize learners, nor detach participations or assessments when executeAnonymisation is false', async function () {
+    it('should not anonymize learners, nor detach participations, assessments, recommended trainings when executeAnonymisation is false', async function () {
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
@@ -281,6 +291,12 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
         userId,
         campaignParticipationId: campaignParticipation.id,
       }).id;
+      const training = databaseBuilder.factory.buildTraining();
+      databaseBuilder.factory.buildUserRecommendedTraining({
+        campaignParticipationId: campaignParticipation.id,
+        trainingId: training.id,
+        userId: userId,
+      });
       await databaseBuilder.commit();
 
       await script.handle({
@@ -291,10 +307,13 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
       const organizationLearnerResult = await knex('organization-learners').where({ organizationId }).first();
       const participationResult = await knex('campaign-participations').where({ organizationLearnerId }).first();
       const assessmentResult = await knex('assessments').where({ id: assessmentId }).first();
+      const anonymizedRecommendedTrainingResults =
+        await knex('user-recommended-trainings').whereNull('campaignParticipationId');
       expect(organizationLearnerResult.firstName).to.not.equal('');
       expect(organizationLearnerResult.lastName).to.not.equal('');
       expect(participationResult.participantExternalId).to.be.not.null;
       expect(assessmentResult.campaignParticipationId).to.equal(campaignParticipation.id);
+      expect(anonymizedRecommendedTrainingResults).lengthOf(0);
     });
 
     context('when date is given', function () {
