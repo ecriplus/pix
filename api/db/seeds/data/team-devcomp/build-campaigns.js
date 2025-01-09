@@ -2,7 +2,7 @@ import { USER_ID_ADMIN_ORGANIZATION } from '../common/constants.js';
 import { createAssessmentCampaign } from '../common/tooling/campaign-tooling.js';
 import { PIX_EDU_SMALL_TARGET_PROFILE_ID, TEAM_DEVCOMP_ORGANIZATION_ID } from './constants.js';
 
-async function _createScoCampaigns(databaseBuilder, trainingIds) {
+async function _createScoCampaigns(databaseBuilder, trainingIds, participantCount) {
   await createAssessmentCampaign({
     databaseBuilder,
     organizationId: TEAM_DEVCOMP_ORGANIZATION_ID,
@@ -12,7 +12,7 @@ async function _createScoCampaigns(databaseBuilder, trainingIds) {
     idPixLabel: 'IdPixLabel',
     targetProfileId: PIX_EDU_SMALL_TARGET_PROFILE_ID,
     configCampaign: {
-      participantCount: 3,
+      participantCount,
       profileDistribution: { beginner: 1, perfect: 1, blank: 1 },
       recommendedTrainingsIds: trainingIds,
     },
@@ -27,13 +27,13 @@ async function _createScoCampaigns(databaseBuilder, trainingIds) {
     multipleSendings: true,
     targetProfileId: PIX_EDU_SMALL_TARGET_PROFILE_ID,
     configCampaign: {
-      participantCount: 3,
+      participantCount,
       profileDistribution: { beginner: 1, perfect: 1, blank: 1 },
       recommendedTrainingsIds: trainingIds,
     },
   });
 }
 
-export function buildCampaigns(databaseBuilder, trainingIds) {
-  return _createScoCampaigns(databaseBuilder, trainingIds);
+export function buildCampaigns(databaseBuilder, trainingIds, participantCount) {
+  return _createScoCampaigns(databaseBuilder, trainingIds, participantCount);
 }
