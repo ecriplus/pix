@@ -1,5 +1,6 @@
 import * as moduleUnderTest from '../../../../../src/evaluation/application/scorecards/index.js';
 import { scorecardController } from '../../../../../src/evaluation/application/scorecards/scorecard-controller.js';
+import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Router | scorecard-router', function () {
@@ -33,6 +34,29 @@ describe('Unit | Router | scorecard-router', function () {
       const options = {
         method: 'GET',
         url: '/api/scorecards/foo/tutorials',
+      };
+
+      // when
+      const response = await httpTestServer.request(options.method, options.url);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+  });
+
+  describe('POST /api/users/{userId}/competences/{competenceId}/reset', function () {
+    it('should exist', async function () {
+      // given
+      sinon.stub(scorecardController, 'resetScorecard').returns('ok');
+      sinon
+        .stub(securityPreHandlers, 'checkRequestedUserIsAuthenticatedUser')
+        .callsFake((request, h) => h.response(true));
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      const options = {
+        method: 'POST',
+        url: '/api/users/1/competences/comp1234/reset',
       };
 
       // when

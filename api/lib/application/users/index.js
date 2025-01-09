@@ -156,32 +156,6 @@ const register = async function (server) {
         tags: ['api', 'user', 'trainings'],
       },
     },
-    {
-      method: 'POST',
-      path: '/api/users/{userId}/competences/{competenceId}/reset',
-      config: {
-        pre: [
-          {
-            method: securityPreHandlers.checkRequestedUserIsAuthenticatedUser,
-            assign: 'requestedUserIsAuthenticatedUser',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            userId: identifiersType.userId,
-            competenceId: identifiersType.competenceId,
-          }),
-        },
-        handler: userController.resetScorecard,
-        notes: [
-          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
-            "- Cette route réinitialise le niveau d'un utilisateur donné (**userId**) pour une compétence donnée (**competenceId**)",
-          '- Cette route retourne les nouvelles informations de niveau de la compétence',
-          '- L’id demandé doit correspondre à celui de l’utilisateur authentifié',
-        ],
-        tags: ['api', 'user', 'scorecard'],
-      },
-    },
   ]);
 };
 

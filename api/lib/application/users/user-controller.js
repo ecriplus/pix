@@ -1,7 +1,5 @@
 import { usecases as devcompUsecases } from '../../../src/devcomp/domain/usecases/index.js';
 import * as trainingSerializer from '../../../src/devcomp/infrastructure/serializers/jsonapi/training-serializer.js';
-import { evaluationUsecases } from '../../../src/evaluation/domain/usecases/index.js';
-import * as scorecardSerializer from '../../../src/evaluation/infrastructure/serializers/jsonapi/scorecard-serializer.js';
 import * as userDetailsForAdminSerializer from '../../../src/identity-access-management/infrastructure/serializers/jsonapi/user-details-for-admin.serializer.js';
 import * as certificationCenterMembershipSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
@@ -26,16 +24,6 @@ const findPaginatedUserRecommendedTrainings = async function (
   });
 
   return dependencies.trainingSerializer.serialize(userRecommendedTrainings, meta);
-};
-
-const resetScorecard = function (request, h, dependencies = { scorecardSerializer, requestResponseUtils }) {
-  const authenticatedUserId = request.auth.credentials.userId;
-  const competenceId = request.params.competenceId;
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
-
-  return evaluationUsecases
-    .resetScorecard({ userId: authenticatedUserId, competenceId, locale })
-    .then(dependencies.scorecardSerializer.serialize);
 };
 
 const addPixAuthenticationMethodByEmail = async function (
@@ -98,7 +86,6 @@ const userController = {
   findPaginatedUserRecommendedTrainings,
   findUserOrganizationsForAdmin,
   reassignAuthenticationMethods,
-  resetScorecard,
 };
 
 export { userController };

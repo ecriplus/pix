@@ -1,10 +1,8 @@
 import { userController } from '../../../../lib/application/users/user-controller.js';
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { usecases as devcompUsecases } from '../../../../src/devcomp/domain/usecases/index.js';
-import { evaluationUsecases } from '../../../../src/evaluation/domain/usecases/index.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { UserOrganizationForAdmin } from '../../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
-import * as requestResponseUtils from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Controller | user-controller', function () {
@@ -48,41 +46,6 @@ describe('Unit | Controller | user-controller', function () {
       });
       expect(trainingSerializer.serialize).to.have.been.calledWithExactly(userRecommendedTrainings, meta);
       expect(response).to.equal(expectedResult);
-    });
-  });
-
-  describe('#resetScorecard', function () {
-    beforeEach(function () {
-      sinon.stub(evaluationUsecases, 'resetScorecard').resolves({
-        name: 'Comp1',
-      });
-    });
-
-    it('should call the expected usecase', async function () {
-      // given
-      const scorecardSerializer = { serialize: sinon.stub() };
-      scorecardSerializer.serialize.resolves();
-      const userId = '12';
-      const competenceId = '875432';
-      const locale = 'fr-fr';
-
-      const request = {
-        auth: {
-          credentials: {
-            userId,
-          },
-        },
-        params: {
-          userId,
-          competenceId,
-        },
-      };
-
-      // when
-      await userController.resetScorecard(request, hFake, { scorecardSerializer, requestResponseUtils });
-
-      // then
-      expect(evaluationUsecases.resetScorecard).to.have.been.calledWithExactly({ userId, competenceId, locale });
     });
   });
 

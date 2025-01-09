@@ -87,4 +87,39 @@ describe('Unit | Controller | scorecard-controller', function () {
       expect(result).to.be.equal(tutorials);
     });
   });
+
+  describe('#resetScorecard', function () {
+    beforeEach(function () {
+      sinon.stub(evaluationUsecases, 'resetScorecard').resolves({
+        name: 'Comp1',
+      });
+    });
+
+    it('should call the expected usecase', async function () {
+      // given
+      const scorecardSerializer = { serialize: sinon.stub() };
+      scorecardSerializer.serialize.resolves();
+      const userId = '12';
+      const competenceId = '875432';
+      const locale = 'fr-fr';
+
+      const request = {
+        auth: {
+          credentials: {
+            userId,
+          },
+        },
+        params: {
+          userId,
+          competenceId,
+        },
+      };
+
+      // when
+      await scorecardController.resetScorecard(request, hFake, { scorecardSerializer, requestResponseUtils });
+
+      // then
+      expect(evaluationUsecases.resetScorecard).to.have.been.calledWithExactly({ userId, competenceId, locale });
+    });
+  });
 });

@@ -32,5 +32,15 @@ const findTutorials = function (request, h, dependencies = { requestResponseUtil
     .then(dependencies.tutorialSerializer.serialize);
 };
 
-const scorecardController = { getScorecard, findTutorials };
+const resetScorecard = function (request, h, dependencies = { scorecardSerializer, requestResponseUtils }) {
+  const authenticatedUserId = request.auth.credentials.userId;
+  const competenceId = request.params.competenceId;
+  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+
+  return evaluationUsecases
+    .resetScorecard({ userId: authenticatedUserId, competenceId, locale })
+    .then(dependencies.scorecardSerializer.serialize);
+};
+
+const scorecardController = { getScorecard, findTutorials, resetScorecard };
 export { scorecardController };
