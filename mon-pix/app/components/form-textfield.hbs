@@ -36,7 +36,7 @@
             class="form-textfield-icon__button"
             {{on "click" this.togglePasswordVisibility}}
           >
-            <FaIcon @icon="eye" class="fa-fw form-textfield-icon-button__eye" />
+            <PixIcon @name="eye" @plainIcon={{true}} @ariaHidden={{true}} class="form-textfield-icon-button__eye" />
           </button>
         {{else}}
           <button
@@ -45,7 +45,7 @@
             class="form-textfield-icon__button"
             {{on "click" this.togglePasswordVisibility}}
           >
-            <FaIcon @icon="eye-slash" class="fa-fw form-textfield-icon-button__eye" />
+            <PixIcon @name="eyeOff" @plainIcon={{true}} @ariaHidden={{true}} class="form-textfield-icon-button__eye" />
           </button>
         {{/if}}
       {{/if}}
