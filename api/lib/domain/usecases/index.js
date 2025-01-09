@@ -104,6 +104,7 @@ import * as assessmentResultRepository from '../../../src/shared/infrastructure/
 import * as challengeRepository from '../../../src/shared/infrastructure/repositories/challenge-repository.js';
 import * as competenceRepository from '../../../src/shared/infrastructure/repositories/competence-repository.js';
 import * as courseRepository from '../../../src/shared/infrastructure/repositories/course-repository.js';
+import * as knowledgeElementRepository from '../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as organizationLearnerRepository from '../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationRepository from '../../../src/shared/infrastructure/repositories/organization-repository.js';
 import * as skillRepository from '../../../src/shared/infrastructure/repositories/skill-repository.js';
@@ -136,7 +137,6 @@ import * as flashAssessmentResultRepository from '../../infrastructure/repositor
 import * as frameworkRepository from '../../infrastructure/repositories/framework-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import { certificationCompletedJobRepository } from '../../infrastructure/repositories/jobs/certification-completed-job-repository.js';
-import * as knowledgeElementRepository from '../../infrastructure/repositories/knowledge-element-repository.js';
 import * as learningContentRepository from '../../infrastructure/repositories/learning-content-repository.js';
 import * as organizationMemberIdentityRepository from '../../infrastructure/repositories/organization-member-identity-repository.js';
 import * as organizationTagRepository from '../../infrastructure/repositories/organization-tag-repository.js';

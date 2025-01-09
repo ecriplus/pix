@@ -27,6 +27,7 @@ import * as assessmentRepository from '../../../src/shared/infrastructure/reposi
 import * as assessmentResultRepository from '../../../src/shared/infrastructure/repositories/assessment-result-repository.js';
 import * as challengeRepository from '../../../src/shared/infrastructure/repositories/challenge-repository.js';
 import * as competenceRepository from '../../../src/shared/infrastructure/repositories/competence-repository.js';
+import * as knowledgeElementRepository from '../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as organizationRepository from '../../../src/shared/infrastructure/repositories/organization-repository.js';
 import * as skillRepository from '../../../src/shared/infrastructure/repositories/skill-repository.js';
 import { injectDefaults } from '../../../src/shared/infrastructure/utils/dependency-injection.js';
@@ -38,7 +39,6 @@ import * as badgeAcquisitionRepository from '../../infrastructure/repositories/b
 import * as campaignRepository from '../../infrastructure/repositories/campaign-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
-import * as knowledgeElementRepository from '../../infrastructure/repositories/knowledge-element-repository.js';
 import * as targetProfileRepository from '../../infrastructure/repositories/target-profile-repository.js';
 import { handleCertificationRescoring } from './handle-certification-rescoring.js';
 import { handleComplementaryCertificationsScoring } from './handle-complementary-certifications-scoring.js';

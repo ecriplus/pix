@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
-import { DomainTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
-import * as knowledgeElementRepository from '../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
-import { KnowledgeElement } from '../../../../src/shared/domain/models/KnowledgeElement.js';
-import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../test-helper.js';
+import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
+import * as knowledgeElementRepository from '../../../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
+import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Repository | knowledgeElementRepository', function () {
   describe('#batchSave', function () {

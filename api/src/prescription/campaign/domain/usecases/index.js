@@ -3,8 +3,6 @@ import { fileURLToPath } from 'node:url';
 
 import * as badgeAcquisitionRepository from '../../../../../lib/infrastructure/repositories/badge-acquisition-repository.js';
 import * as campaignRepository from '../../../../../lib/infrastructure/repositories/campaign-repository.js';
-import * as knowledgeElementRepository from '../../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
-import * as knowledgeElementSnapshotRepository from '../../../../../lib/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import * as learningContentRepository from '../../../../../lib/infrastructure/repositories/learning-content-repository.js';
 import * as stageCollectionRepository from '../../../../../lib/infrastructure/repositories/user-campaign-results/stage-collection-repository.js';
 import * as tutorialRepository from '../../../../devcomp/infrastructure/repositories/tutorial-repository.js';
@@ -14,6 +12,7 @@ import * as organizationFeatureApi from '../../../../organizational-entities/app
 import * as codeGenerator from '../../../../shared/domain/services/code-generator.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
+import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
@@ -35,6 +34,7 @@ import * as campaignReportRepository from '../../infrastructure/repositories/cam
 import * as divisionRepository from '../../infrastructure/repositories/division-repository.js';
 import * as groupRepository from '../../infrastructure/repositories/group-repository.js';
 import { repositories as campaignRepositories } from '../../infrastructure/repositories/index.js';
+import * as knowledgeElementSnapshotRepository from '../../infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import * as targetProfileRepository from '../../infrastructure/repositories/target-profile-repository.js';
 import * as campaignUpdateValidator from '../validators/campaign-update-validator.js';
 

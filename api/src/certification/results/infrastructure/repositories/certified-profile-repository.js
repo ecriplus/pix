@@ -4,7 +4,6 @@ import { LOCALE } from '../../../../shared/domain/constants.js';
 
 const { FRENCH_SPOKEN } = LOCALE;
 import { knex } from '../../../../../db/knex-database-connection.js';
-import * as knowledgeElementRepository from '../../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import {
   CertifiedArea,
@@ -15,6 +14,7 @@ import {
 } from '../../../../shared/domain/read-models/CertifiedProfile.js';
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
+import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
 

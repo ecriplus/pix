@@ -1,11 +1,11 @@
 import _ from 'lodash';
 
-import { knex } from '../../../db/knex-database-connection.js';
-import { CampaignParticipationKnowledgeElementSnapshots } from '../../../src/prescription/shared/domain/read-models/CampaignParticipationKnowledgeElementSnapshots.js';
-import { AlreadyExistingEntityError } from '../../../src/shared/domain/errors.js';
-import { KnowledgeElement } from '../../../src/shared/domain/models/KnowledgeElement.js';
-import * as knexUtils from '../../../src/shared/infrastructure/utils/knex-utils.js';
-import { DomainTransaction } from '../DomainTransaction.js';
+import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
+import { AlreadyExistingEntityError } from '../../../../shared/domain/errors.js';
+import { KnowledgeElement } from '../../../../shared/domain/models/KnowledgeElement.js';
+import * as knexUtils from '../../../../shared/infrastructure/utils/knex-utils.js';
+import { CampaignParticipationKnowledgeElementSnapshots } from '../../../shared/domain/read-models/CampaignParticipationKnowledgeElementSnapshots.js';
 
 function _toKnowledgeElementCollection({ snapshot } = {}) {
   if (!snapshot) return null;

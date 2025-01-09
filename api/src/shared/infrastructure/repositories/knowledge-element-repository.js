@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
-import { knex } from '../../../db/knex-database-connection.js';
-import { KnowledgeElement } from '../../../src/shared/domain/models/KnowledgeElement.js';
-import { DomainTransaction } from '../../infrastructure/DomainTransaction.js';
-import * as knowledgeElementSnapshotRepository from './knowledge-element-snapshot-repository.js';
+import { knex } from '../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
+import * as knowledgeElementSnapshotRepository from '../../../prescription/campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
+import { KnowledgeElement } from '../../domain/models/KnowledgeElement.js';
 
 const tableName = 'knowledge-elements';
 

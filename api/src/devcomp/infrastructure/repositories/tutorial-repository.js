@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import * as knowledgeElementRepository from '../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
 import { LOCALE } from '../../../shared/domain/constants.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
+import * as knowledgeElementRepository from '../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import { LearningContentRepository } from '../../../shared/infrastructure/repositories/learning-content-repository.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
 import * as paginateModule from '../../../shared/infrastructure/utils/paginate.js';

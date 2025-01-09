@@ -2,9 +2,9 @@ import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
 import * as campaignRepository from '../../../../../lib/infrastructure/repositories/campaign-repository.js';
-import * as knowledgeElementRepository from '../../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
+import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import { CampaignAssessmentParticipation } from '../../domain/models/CampaignAssessmentParticipation.js';
 
 const getByCampaignIdAndCampaignParticipationId = async function ({ campaignId, campaignParticipationId }) {
