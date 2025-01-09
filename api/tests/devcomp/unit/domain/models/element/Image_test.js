@@ -6,13 +6,22 @@ describe('Unit | Devcomp | Domain | Models | Element | Image', function () {
   describe('#constructor', function () {
     it('should create an image and keep attributes', function () {
       // when
-      const image = new Image({ id: 'id', url: 'url', alt: 'alt', alternativeText: 'alternativeText' });
+      const image = new Image({
+        id: 'id',
+        url: 'url',
+        alt: 'alt',
+        alternativeText: 'alternativeText',
+        legend: 'legend',
+        licence: 'licence',
+      });
 
       // then
       expect(image.id).to.equal('id');
       expect(image.url).to.equal('url');
       expect(image.alt).to.equal('alt');
       expect(image.alternativeText).to.equal('alternativeText');
+      expect(image.legend).to.equal('legend');
+      expect(image.licence).to.equal('licence');
       expect(image.type).to.equal('image');
     });
   });

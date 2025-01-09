@@ -149,7 +149,9 @@
             "type": "image",
             "url": "https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg",
             "alt": "Dessin détaillé dans l'alternative textuelle",
-            "alternativeText": "Dessin d'un ordinateur dans un univers spatial."
+            "alternativeText": "Dessin d'un ordinateur dans un univers spatial.",
+            "legend": "Faite avant le séminaire de juin 2023",
+            "licence": "©Pix Corporation & Fun, 2025, Challenge Accepted Inc. "
           }
         }
       ]
