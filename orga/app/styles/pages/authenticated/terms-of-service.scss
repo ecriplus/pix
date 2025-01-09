@@ -1,102 +1,48 @@
 .terms-of-service-page {
   display: flex;
-  flex-direction: column;
-  align-items: center; // XXX do not remove: ugly fix for ugly IE
+  align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
-  min-height: 800px;
   background: var(--pix-orga-500);
 }
 
-.terms-of-service-form {
-  justify-content: center;
-  max-width: 800px;
-  margin: auto;
-  padding: 35px 0;
-  background-color: var(--pix-neutral-0);
-  border-radius: 10px;
+.terms-of-service-acceptation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-4x);
+  max-width: 700px;
+  padding: var(--pix-spacing-8x);
+  background: var(--pix-neutral-0);
+  border-radius: var(--pix-spacing-2x);
 
-  @include device-is('mobile') {
-    width: 95%;
+  &__illustration {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-6x);
+    align-items: center;
+    padding: var(--pix-spacing-2x) 0;
   }
 
-  &__logo {
-    margin-bottom: 20px;
+  &__link {
+    @extend %pix-body-l;
 
-    & img {
-      display: flex;
-      margin: auto;
-    }
-  }
-
-  &__title {
-    width: auto;
-    margin: 0 60px 20px;
-    text-align: center;
-
-    .page-title__title {
-      word-break: unset;
-    }
-
-  }
-
-  &__line {
-    width: 100%;
-    height: 1px;
-    margin-bottom: 30px;
-    background-color: var(--pix-neutral-20);
-    border: none;
-  }
-
-  &__text {
-    @extend %pix-body-m;
-
-    height: 400px;
-    margin: 0 60px 20px;
-    padding: 0 35px;
-    overflow-x: hidden;
-    overflow-y: scroll;
-
-    @include device-is('mobile') {
-      margin: 20px 0;
-    }
-
-    p,
-    li {
-      margin-bottom: $pix-spacing-s;
-    }
-
-    ul {
-      list-style: inside;
-    }
-
-    h2,
-    h3 {
-      margin-bottom: $pix-spacing-m;
-    }
+    display: flex;
+    gap: var(--pix-spacing-1x);
+    align-items: center;
+    font-weight: var(--pix-font-bold);
+    text-decoration: underline;
   }
 
   &__actions {
     display: flex;
-    flex-direction: row;
     gap: var(--pix-spacing-6x);
-    justify-content: flex-end;
-    margin: 0 60px;
+    padding-top: var(--pix-spacing-4x);
+    border-top: 1px solid var(--pix-neutral-100);
+  }
 
-    @include device-is('mobile') {
-      flex-direction: column;
-      align-items: center;
-    }
+  &__accept-action {
+    flex-grow: 1;
   }
 }
 
-.terms-of-service-form-text {
-  &__article-title {
-    @extend %pix-title-s;
-  }
-
-  &__article-subtitle {
-    @extend %pix-title-xs;
-  }
-}
