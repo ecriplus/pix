@@ -1,3 +1,4 @@
+import Service from '@ember/service';
 import { setLocale } from 'ember-intl/test-support';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -98,6 +99,52 @@ module('Unit | Service | url', function (hooks) {
           // then
           assert.strictEqual(url, expectedUrl);
         });
+      });
+    });
+  });
+
+  module('#forgottenPasswordUrl', function () {
+    [
+      {
+        locale: 'en',
+        currentDomain: 'org',
+        expectedUrl: 'https://app.pix.org/mot-de-passe-oublie?lang=en',
+      },
+      {
+        locale: 'fr',
+        currentDomain: 'fr',
+        expectedUrl: 'https://app.pix.fr/mot-de-passe-oublie',
+      },
+      {
+        locale: 'fr',
+        currentDomain: 'org',
+        expectedUrl: 'https://app.pix.org/mot-de-passe-oublie',
+      },
+      {
+        locale: 'nl',
+        currentDomain: 'org',
+        expectedUrl: 'https://app.pix.org/mot-de-passe-oublie?lang=nl',
+      },
+    ].forEach(({ locale, expectedUrl, currentDomain }) => {
+      test(`returns forgotten password url url when locale is ${locale} and domain is ${currentDomain}`, function (assert) {
+        // given
+        const urlService = this.owner.lookup('service:url');
+        class CurrentDomainServiceStub extends Service {
+          getExtension() {
+            return currentDomain;
+          }
+        }
+        this.owner.register('service:currentDomain', CurrentDomainServiceStub);
+
+        urlService.intl = {
+          primaryLocale: locale,
+        };
+
+        // when
+        const url = urlService.forgottenPasswordUrl;
+
+        // then
+        assert.strictEqual(url, expectedUrl);
       });
     });
   });

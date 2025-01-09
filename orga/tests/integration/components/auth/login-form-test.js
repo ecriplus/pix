@@ -289,6 +289,10 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
         get isFranceDomain() {
           return false;
         }
+
+        getExtension() {
+          return '.org';
+        }
       }
       this.owner.register('service:currentDomain', CurrentDomainServiceStub);
 
@@ -306,6 +310,10 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
       class CurrentDomainServiceStub extends Service {
         get isFranceDomain() {
           return true;
+        }
+
+        getExtension() {
+          return '.fr';
         }
       }
       this.owner.register('service:currentDomain', CurrentDomainServiceStub);
