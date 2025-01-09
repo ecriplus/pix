@@ -29,17 +29,49 @@ const swaggerOptionsPoleEmploi = {
   jsonPath: '/swagger.json',
 };
 
+const swaggerOptionsParcoursup = {
+  routeTag: 'parcoursup',
+  info: {
+    title: 'Pix Paroursup open api',
+    version: packageJSON.version,
+  },
+  jsonPath: '/swagger.json',
+  securityDefinitions: {
+    bearerAuth: {
+      name: 'Authorization',
+      scheme: 'Bearer',
+      in: 'header',
+      description: 'Example: Bearer eyJ...z',
+      type: 'apiKey',
+    },
+  },
+  security: [{ bearerAuth: [], jwt: [] }],
+};
+
 const swaggerOptionsIn = {
   basePath: '/api',
   grouping: 'tags',
   routeTag: 'api',
   OAS: 'v3.0',
+  uiOptions: {
+    url: 'swagger.json',
+  },
   info: {
     title: 'Welcome to the Pix api catalog',
     version: packageJSON.version,
   },
   documentationPath: '/documentation',
   jsonPath: '/swagger.json',
+  securityDefinitions: {
+    bearerAuth: {
+      name: 'Authorization',
+      scheme: 'Bearer',
+      in: 'header',
+      description: 'Example: Bearer eyJ...z',
+      type: 'apiKey',
+    },
+  },
+  security: [{ bearerAuth: [], jwt: [] }],
 };
 
 function _buildSwaggerArgs(swaggerOptions) {
@@ -58,6 +90,7 @@ const swaggers = [
   swaggerOptionsAuthorizationServer,
   swaggerOptionsLivretScolaire,
   swaggerOptionsPoleEmploi,
+  swaggerOptionsParcoursup,
   swaggerOptionsIn,
 ].map(_buildSwaggerArgs);
 
