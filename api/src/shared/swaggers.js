@@ -32,7 +32,7 @@ const swaggerOptionsPoleEmploi = {
 const swaggerOptionsParcoursup = {
   routeTag: 'parcoursup',
   info: {
-    title: 'Pix Paroursup open api',
+    title: 'Pix Parcoursup open api',
     version: packageJSON.version,
   },
   jsonPath: '/swagger.json',
