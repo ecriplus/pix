@@ -23,11 +23,10 @@ describe('Unit | UseCase | handleStageAcquisition', function () {
     stageAcquisitionRepository = { getStageIdsByCampaignParticipation: sinon.stub(), saveStages: sinon.stub() };
     stageRepository = { getByCampaignParticipationId: sinon.stub() };
     knowledgeElementRepository = { findUniqByUserId: sinon.stub() };
-    campaignRepository = { findSkillIdsByCampaignParticipationId: sinon.stub() };
     skillRepository = { findOperativeByIds: sinon.stub() };
-    campaignSkillRepository = { getSkillIdsByCampaignId: sinon.stub() };
     campaignRepository = {
       findSkillIdsByCampaignParticipationId: sinon.stub().resolves([domainBuilder.buildSkill().id]),
+      findSkillIds: sinon.stub(),
     };
 
     getNewAcquiredStagesService = { getNewAcquiredStages: sinon.stub() };
