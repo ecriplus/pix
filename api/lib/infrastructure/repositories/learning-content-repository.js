@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { knex } from '../../../db/knex-database-connection.js';
+import * as campaignRepository from '../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import { NoSkillsInCampaignError, NotFoundError } from '../../../src/shared/domain/errors.js';
 import { LearningContent } from '../../../src/shared/domain/models/LearningContent.js';
 import * as areaRepository from '../../../src/shared/infrastructure/repositories/area-repository.js';
@@ -8,7 +9,6 @@ import * as competenceRepository from '../../../src/shared/infrastructure/reposi
 import * as skillRepository from '../../../src/shared/infrastructure/repositories/skill-repository.js';
 import * as tubeRepository from '../../../src/shared/infrastructure/repositories/tube-repository.js';
 import * as learningContentConversionService from '../../domain/services/learning-content/learning-content-conversion-service.js';
-import * as campaignRepository from './campaign-repository.js';
 import * as frameworkRepository from './framework-repository.js';
 import * as thematicRepository from './thematic-repository.js';
 

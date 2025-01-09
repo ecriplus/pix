@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { eventBus } from '../../../../lib/domain/events/index.js';
 import * as userReconciliationService from '../../../../lib/domain/services/user-reconciliation-service.js';
 import { oidcAuthenticationServiceRegistry } from '../../../../lib/domain/usecases/index.js';
-import * as campaignRepository from '../../../../lib/infrastructure/repositories/campaign-repository.js';
+import * as campaignRepository from '../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as centerRepository from '../../../certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as userRecommendedTrainingRepository from '../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import { repositories as campaignRepositories } from '../../../prescription/campaign/infrastructure/repositories/index.js';

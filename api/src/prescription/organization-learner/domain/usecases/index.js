@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
  * campaignRepository.getByCode
  * groupRepository.findByOrganizationId
  */
-import * as campaignRepository from '../../../../../lib/infrastructure/repositories/campaign-repository.js';
+import * as campaignRepository from '../../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as organizationFeaturesAPI from '../../../../organizational-entities/application/api/organization-features-api.js';
 import { tagRepository } from '../../../../organizational-entities/infrastructure/repositories/tag.repository.js';
 import * as libOrganizationLearnerRepository from '../../../../shared/infrastructure/repositories/organization-learner-repository.js';

@@ -1,5 +1,5 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
-import * as campaignRepository from '../../../../../lib/infrastructure/repositories/campaign-repository.js';
+import * as campaignRepository from '../../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
 import { ParticipantResultsShared } from '../../domain/models/ParticipantResultsShared.js';
