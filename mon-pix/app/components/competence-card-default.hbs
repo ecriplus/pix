@@ -64,7 +64,7 @@
               {{t "pages.competence-details.actions.improve.label"}}
               <span class="sr-only">{{t "pages.competence-details.for-competence" competence=@scorecard.name}}</span>
             </span>
-            <span class="competence-card-button__arrow"><FaIcon @icon="right-long" /></span>
+            <span class="competence-card-button__arrow"><PixIcon @name="arrowRight" @ariaHidden={{true}} /></span>
           </PixButton>
         {{/if}}
       {{else}}
@@ -82,7 +82,7 @@
             {{/if}}
           </span>
           <span class="competence-card-button__arrow">
-            <FaIcon @icon="right-long" />
+            <PixIcon @name="arrowRight" @ariaHidden={{true}} />
           </span>
         </LinkTo>
       {{/if}}
