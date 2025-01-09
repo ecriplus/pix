@@ -18,7 +18,22 @@ const getByOrganizationUAI = async ({ organizationUai, lastName, firstName, birt
 };
 
 const _getBySearchParams = async (searchParams) => {
-  const certificationResultDto = await datamartKnex('data_export_parcoursup_certif_result').where(searchParams);
+  const certificationResultDto = await datamartKnex('data_export_parcoursup_certif_result')
+    .select(
+      'national_student_id',
+      'organization_uai',
+      'last_name',
+      'first_name',
+      'birthdate',
+      'status',
+      'pix_score',
+      'certification_date',
+      'competence_code',
+      'competence_name',
+      'area_name',
+      'competence_level',
+    )
+    .where(searchParams);
   if (!certificationResultDto.length) {
     throw new NotFoundError('No certifications found for given search parameters');
   }
@@ -27,9 +42,22 @@ const _getBySearchParams = async (searchParams) => {
 };
 
 const getByVerificationCode = async ({ verificationCode }) => {
-  const certificationResultDto = await datamartKnex('data_export_parcoursup_certif_result_code_validation').where({
-    certification_code_verification: verificationCode,
-  });
+  const certificationResultDto = await datamartKnex('data_export_parcoursup_certif_result_code_validation')
+    .select(
+      'last_name',
+      'first_name',
+      'birthdate',
+      'status',
+      'pix_score',
+      'certification_date',
+      'competence_code',
+      'competence_name',
+      'area_name',
+      'competence_level',
+    )
+    .where({
+      certification_code_verification: verificationCode,
+    });
   if (!certificationResultDto.length) {
     throw new NotFoundError('No certifications found for given search parameters');
   }
