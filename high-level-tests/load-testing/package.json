@@ -51,7 +51,7 @@
     "artillery": "^2.0.0",
     "artillery-plugin-expect": "^2.0.0",
     "artillery-plugin-publish-metrics": "^2.0.0",
-    "eslint-plugin-yaml": "^0.5.0",
+    "eslint-plugin-yaml": "^1.0.0",
     "lodash": "^4.17.21"
   }
 }
