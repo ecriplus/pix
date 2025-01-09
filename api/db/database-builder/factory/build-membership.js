@@ -11,12 +11,15 @@ const buildMembership = function ({
   organizationId,
   userId,
   createdAt = new Date(),
-  updatedAt = new Date(),
+  updatedAt,
   disabledAt,
+  updatedByUserId,
 } = {}) {
   userId = _.isUndefined(userId) ? buildUser().id : userId;
   organizationId = _.isUndefined(organizationId) ? buildOrganization().id : organizationId;
-
+  if (!updatedAt) {
+    updatedAt = disabledAt || createdAt;
+  }
   const values = {
     id,
     organizationId,
@@ -25,6 +28,7 @@ const buildMembership = function ({
     createdAt,
     updatedAt,
     disabledAt,
+    updatedByUserId,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'memberships',
