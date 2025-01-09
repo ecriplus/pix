@@ -46,7 +46,7 @@ const register = async function (server) {
           },
         },
         handler: authenticationController.authenticateApplication,
-        tags: ['api', 'authorization-server'],
+        tags: ['api', 'authorization-server', 'parcoursup'],
       },
     },
     {
