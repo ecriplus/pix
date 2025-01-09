@@ -73,7 +73,7 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           lastName: user.lastName,
           pixOrgaTermsOfServiceAccepted: user.pixOrgaTermsOfServiceAccepted,
           pixOrgaTermsOfServiceStatus: 'requested',
-          pixOrgaTermsOfServiceDocumentPath: 'pix-orga-tos-2024-01-02',
+          pixOrgaTermsOfServiceDocumentPath: 'pix-orga-tos-2022-11-30',
           lang: user.lang,
         };
       });

@@ -26,7 +26,7 @@ describe('Unit | Legal documents | Domain | Model | LegalDocumentStatus', functi
         expect(legalDocumentStatus).to.deep.equal({
           status: STATUS.ACCEPTED,
           acceptedAt: acceptedAt,
-          documentPath: 'pix-orga-tos-2024-01-02',
+          documentPath: 'pix-orga-tos-2022-11-30',
         });
       });
     });
@@ -47,7 +47,7 @@ describe('Unit | Legal documents | Domain | Model | LegalDocumentStatus', functi
         expect(legalDocumentStatus).to.deep.equal({
           status: STATUS.REQUESTED,
           acceptedAt: null,
-          documentPath: 'pix-orga-tos-2024-01-02',
+          documentPath: 'pix-orga-tos-2022-11-30',
         });
       });
     });

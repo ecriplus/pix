@@ -81,7 +81,7 @@ describe('Integration | Legal documents | Domain | Use case | get-legal-document
       expect(legalDocumentStatus).to.deep.equal({
         status: STATUS.ACCEPTED,
         acceptedAt: new Date('2024-03-01'),
-        documentPath: 'pix-orga-tos-2024-01-02',
+        documentPath: 'pix-orga-tos-2022-11-30',
       });
     });
   });
