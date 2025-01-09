@@ -84,7 +84,7 @@ module('Unit | Service | url', function (hooks) {
         },
         {
           primaryLocale: 'nl',
-          expectedUrl: 'https://pix.org/nl-be/wettelijke-vermeldingen',
+          expectedUrl: 'https://pix.org/nl-BE/wettelijke-vermeldingen',
         },
       ].forEach(({ primaryLocale, expectedUrl }) => {
         test(`returns "pix.org" ${primaryLocale} url when locale is ${primaryLocale}`, function (assert) {
@@ -178,7 +178,7 @@ module('Unit | Service | url', function (hooks) {
         },
         {
           primaryLocale: 'nl',
-          expectedUrl: 'https://pix.org/nl-be/beleid-inzake-de-bescherming-van-persoonsgegevens',
+          expectedUrl: 'https://pix.org/nl-BE/beleid-inzake-de-bescherming-van-persoonsgegevens',
         },
       ].forEach(({ primaryLocale, expectedUrl }) => {
         test(`returns "pix.org" ${primaryLocale} url when locale is ${primaryLocale}`, function (assert) {
@@ -226,7 +226,7 @@ module('Unit | Service | url', function (hooks) {
         },
         {
           primaryLocale: 'nl',
-          expectedUrl: 'https://pix.org/nl-be/algemene-gebruiksvoorwaarden',
+          expectedUrl: 'https://pix.org/nl-BE/algemene-gebruiksvoorwaarden',
         },
       ].forEach(({ primaryLocale, expectedUrl }) => {
         test(`returns "pix.org" ${primaryLocale} url when locale is ${primaryLocale}`, function (assert) {
@@ -274,7 +274,7 @@ module('Unit | Service | url', function (hooks) {
         },
         {
           primaryLocale: 'nl',
-          expectedUrl: 'https://pix.org/nl-be/toegankelijkheid-pix-orga',
+          expectedUrl: 'https://pix.org/nl-BE/toegankelijkheid-pix-orga',
         },
       ].forEach(({ primaryLocale, expectedUrl }) => {
         test(`returns "pix.org" ${primaryLocale} url when locale is ${primaryLocale}`, function (assert) {
@@ -353,6 +353,47 @@ module('Unit | Service | url', function (hooks) {
       const pixJuniorSchoolUrl = service.pixJuniorSchoolUrl;
 
       assert.strictEqual(pixJuniorSchoolUrl, '');
+    });
+  });
+
+  module('#getLegalDocumentUrl', function () {
+    [
+      {
+        locale: 'en',
+        currentDomain: 'org',
+        expectedUrl: 'https://pix.org/en/my-custom-path',
+      },
+      {
+        locale: 'fr',
+        currentDomain: 'fr',
+        expectedUrl: 'https://pix.fr/my-custom-path',
+      },
+      {
+        locale: 'fr',
+        currentDomain: 'org',
+        expectedUrl: 'https://pix.org/fr/my-custom-path',
+      },
+      {
+        locale: 'nl',
+        currentDomain: 'org',
+        expectedUrl: 'https://pix.org/nl-BE/my-custom-path',
+      },
+    ].forEach(({ locale, expectedUrl, currentDomain }) => {
+      test(`returns legal document URL when locale is ${locale} and domain is ${currentDomain}`, function (assert) {
+        // given
+        const urlService = this.owner.lookup('service:url');
+        urlService.intl = { primaryLocale: locale };
+        class CurrentDomainServiceStub extends Service {
+          isFranceDomain = currentDomain === 'fr';
+        }
+        this.owner.register('service:currentDomain', CurrentDomainServiceStub);
+
+        // when
+        const url = urlService.getLegalDocumentUrl('my-custom-path');
+
+        // then
+        assert.strictEqual(url, expectedUrl);
+      });
     });
   });
 });

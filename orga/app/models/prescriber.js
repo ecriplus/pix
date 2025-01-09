@@ -4,6 +4,7 @@ export default class Prescriber extends Model {
   @attr('string') firstName;
   @attr('string') lastName;
   @attr('string') pixOrgaTermsOfServiceStatus;
+  @attr('string') pixOrgaTermsOfServiceDocumentPath;
   @attr('boolean') areNewYearOrganizationLearnersImported;
   @attr('number') participantCount;
   @attr('string') lang;
