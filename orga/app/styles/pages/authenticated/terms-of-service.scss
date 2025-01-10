@@ -31,12 +31,14 @@
   }
 
   &__title {
-    @extend %pix-title-s;
-
-    margin-bottom: 30px;
-    color: var(--pix-neutral-900);
+    width: auto;
+    margin: 0 60px 20px;
     text-align: center;
-    text-transform: uppercase;
+
+    .page-title__title {
+      word-break: unset;
+    }
+
   }
 
   &__line {
