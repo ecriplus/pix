@@ -2,6 +2,8 @@ import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 
 import PageTitle from '../ui/page-title';
+import CapacityAlert from './capacity-alert';
+import PlacesLotAlert from './places-lot-alert';
 
 function todayDate() {
   return dayjs().format('D MMM YYYY');
@@ -16,5 +18,9 @@ function todayDate() {
       <span class="places-header-date">{{t "pages.places.before-date"}}
         {{todayDate}}</span>
     </:tools>
+    <:notification-alert>
+      <PlacesLotAlert @placesLots={{@placesLots}} />
+      <CapacityAlert @occupied={{@occupied}} @total={{@total}} />
+    </:notification-alert>
   </PageTitle>
 </template>
