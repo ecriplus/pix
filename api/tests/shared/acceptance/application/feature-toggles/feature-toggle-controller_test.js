@@ -29,6 +29,7 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-pix1d-enabled': true,
             'is-pix-companion-enabled': false,
             'is-quest-enabled': false,
+            'is-user-token-aud-confinement-enabled': false,
             'is-self-account-deletion-enabled': false,
             'is-text-to-speech-button-enabled': false,
             'is-legal-documents-versioning-enabled': false,
