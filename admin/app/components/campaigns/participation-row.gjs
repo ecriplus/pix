@@ -1,9 +1,9 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
@@ -97,38 +97,26 @@ export default class ParticipationRow extends Component {
     {{/if}}
     {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
       {{#if @idPixLabel}}
-        <td>
-          <div class="participation-item-actions">
-            {{#if this.isEditionMode}}
-              <div class="participation-item-actions__modify">
-                <PixButton
-                  @size="small"
-                  @triggerAction={{this.updateParticipantExternalId}}
-                  class="participation-item-actions__button participation-item-actions__button--save"
-                >
-                  {{t "common.actions.save"}}
-                </PixButton>
-                <PixButton
-                  @size="small"
-                  @variant="secondary"
-                  @triggerAction={{this.cancelUpdateParticipantExternalId}}
-                  aria-label={{t "common.actions.cancel"}}
-                  class="participation-item-actions__button--icon"
-                >
-                  <FaIcon @icon="xmark" />
-                </PixButton>
-              </div>
-            {{else}}
-              <PixButton
-                @triggerAction={{this.editParticipantExternalId}}
-                @size="small"
-                class="participation-item-actions__button"
-                @iconBefore="edit"
-              >
-                {{t "common.actions.edit"}}
+        <td class="participation-item-actions">
+          {{#if this.isEditionMode}}
+            <div class="participation-item-actions__modify">
+              <PixButton @size="small" @triggerAction={{this.updateParticipantExternalId}}>
+                {{t "common.actions.save"}}
               </PixButton>
-            {{/if}}
-          </div>
+              <PixButton
+                @size="small"
+                @variant="secondary"
+                @triggerAction={{this.cancelUpdateParticipantExternalId}}
+                aria-label={{t "common.actions.cancel"}}
+              >
+                <PixIcon @name="close" @ariaHidden={{true}} />
+              </PixButton>
+            </div>
+          {{else}}
+            <PixButton @triggerAction={{this.editParticipantExternalId}} @size="small" @iconBefore="edit">
+              {{t "common.actions.edit"}}
+            </PixButton>
+          {{/if}}
         </td>
       {{/if}}
     {{/if}}

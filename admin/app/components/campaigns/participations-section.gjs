@@ -28,10 +28,10 @@ export default class ParticipationsSection extends Component {
                 <th>Date de début</th>
                 <th>Statut</th>
                 <th>Date d'envoi</th>
-                <th>Supprimée le</th>
+                <th class="table__column--medium">Supprimée le</th>
                 {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
                   {{#if @idPixLabel}}
-                    <th>Actions</th>
+                    <th class="table__column">Actions</th>
                   {{/if}}
                 {{/if}}
               </tr>
