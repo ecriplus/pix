@@ -18,9 +18,9 @@ function todayDate() {
       <span class="places-header-date">{{t "pages.places.before-date"}}
         {{todayDate}}</span>
     </:tools>
-    <:notification-alert>
+    <:notificationAlert>
       <PlacesLotAlert @placesLots={{@placesLots}} />
       <CapacityAlert @occupied={{@occupied}} @total={{@total}} />
-    </:notification-alert>
+    </:notificationAlert>
   </PageTitle>
 </template>

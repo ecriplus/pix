@@ -47,10 +47,10 @@
   }
 
   &__notification-alert {
-    margin-bottom: var(--pix-spacing-6x);
     display: flex;
     flex-direction: column;
     gap: var(--pix-spacing-2x);
+    margin-bottom: var(--pix-spacing-6x);
   }
 }
 

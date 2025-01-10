@@ -19,9 +19,9 @@ function setTitleClasses(spaceBetweenTools, centerTitle) {
       {{/if}}
     </div>
 
-    {{#if (has-block "notification-alert")}}
+    {{#if (has-block "notificationAlert")}}
       <div class="page-title__notification-alert">
-        {{yield to="notification-alert"}}
+        {{yield to="notificationAlert"}}
       </div>
     {{/if}}
 
