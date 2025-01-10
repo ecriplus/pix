@@ -5,7 +5,7 @@
   "isBeta": false,
   "details": {
     "image": "",
-    "description": "<p>Dans ce module, vous découvrirez ce qu’est un clavier et à quoi il sert.⌨️<br>Vous apprendrez à taper vos premiers caractères et à modifier du texte.<br>Pour ce module, vous devez déjà savoir utiliser une souris d’ordinateur.</p>",
+    "description": "<p>Dans ce module, vous découvrirez ce qu’est un clavier et à quoi il sert.<span aria-hidden=\"true\">⌨️</span><br>Vous apprendrez à taper vos premiers caractères et à modifier du texte.<br>Pour ce module, vous devez déjà savoir utiliser une souris d’ordinateur.</p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
@@ -38,11 +38,11 @@
     },
     {
       "grainId": "36a17bbd-4975-4f9d-878e-0759801956fd",
-      "content": "<p>Maintenant, découvrez les autres touches utiles pour modifier du texte. ⌨️</p>"
+      "content": "<p>Maintenant, découvrez les autres touches utiles pour modifier du texte. <span aria-hidden=\"true\">⌨️</span></p>"
     },
     {
       "grainId": "1b35e115-f40f-4309-bc8a-dc8122f63e25",
-      "content": "<p>Voyons si vous avez retenu l’essentiel. 🎯</p>"
+      "content": "<p>Voyons si vous avez retenu l’essentiel. <span aria-hidden=\"true\">🎯</span></p>"
     },
     {
       "grainId": "",
@@ -54,7 +54,7 @@
     },
     {
       "grainId": "9b722101-2b15-4a45-be20-6604dc9c0dbe",
-      "content": "<p>Vous allez maintenant passer à la pratique. ⌨️</p>"
+      "content": "<p>Vous allez maintenant passer à la pratique. <span aria-hidden=\"true\">⌨️</span></p>"
     }
   ],
   "grains": [
@@ -93,7 +93,7 @@
           "element": {
             "id": "cd613fa6-2903-4932-a1f7-5b7d51ac0a41",
             "type": "text",
-            "content": "<p>🔎 <strong>Observez : quel type de clavier avez-vous ?</strong><br></p>"
+            "content": "<p><span aria-hidden=\"true\">🔎</span> <strong>Observez : quel type de clavier avez-vous ?</strong><br></p>"
           }
         }
       ]
@@ -123,7 +123,7 @@
                 {
                   "id": "1f25f056-78ad-42cd-8679-49188fe4e2a2",
                   "type": "text",
-                  "content": "<p>🤔<strong>Bon à savoir</strong> </p>\n<p>Les touches peuvent être disposées de différentes manières, en fonction des modèles, des pays et de la langue. 🌍\n    </p><p>En France, on utilise le clavier AZERTY. Il porte ce nom, car les lettres A, Z, E, R, T, Y sont les six premières lettres affichées sur le clavier\n</p>"
+                  "content": "<p><span aria-hidden=\"true\">🤔</span><strong>Bon à savoir</strong> </p>\n<p>Les touches peuvent être disposées de différentes manières, en fonction des modèles, des pays et de la langue. <span aria-hidden=\"true\">🌍</span>\n    </p><p>En France, on utilise le clavier AZERTY. Il porte ce nom, car les lettres A, Z, E, R, T, Y sont les six premières lettres affichées sur le clavier\n</p>"
                 }
               ]
             },
@@ -132,7 +132,7 @@
                 {
                   "id": "24829c18-2220-4cb8-9749-296d8c314353",
                   "type": "text",
-                  "content": "<p>👇Dans l’espace ci-dessous, découvrez les zones du clavier et quelques touches que vous allez utiliser ensuite :</p>"
+                  "content": "<p><span aria-hidden=\"true\">👇</span> Dans l’espace ci-dessous, découvrez les zones du clavier et quelques touches que vous allez utiliser ensuite :</p>"
                 },
                 {
                   "id": "274d2a22-5c45-40a3-87e2-13f650f49560",
@@ -155,7 +155,7 @@
           "element": {
             "id": "e4c30736-5efe-4a0d-bacc-b41e3546d47c",
             "type": "text",
-            "content": "<p>Pour taper et modifier du texte, il faut utiliser des touches de différentes zones.</p>\n<p>👇Voici les touches essentielles :</p>"
+            "content": "<p>Pour taper et modifier du texte, il faut utiliser des touches de différentes zones.</p>\n<p><span aria-hidden=\"true\">👇</span> Voici les touches essentielles :</p>"
           }
         },
         {
@@ -206,7 +206,7 @@
                 {
                   "id": "e7390f32-cf29-49c4-af61-cb0ee142d06e",
                   "type": "text",
-                  "content": "<p>Une zone de texte est un endroit où on peut taper, modifier et effacer du texte. Pour reconnaître une zone de texte, vous pouvez vous aider du pointeur de la souris. 🖱️</p>\n<p>Lorsque vous faites glisser votre pointeur sur une zone de texte, il prend la forme d’une barre verticale.</p>"
+                  "content": "<p>Une zone de texte est un endroit où on peut taper, modifier et effacer du texte. Pour reconnaître une zone de texte, vous pouvez vous aider du pointeur de la souris. <span aria-hidden=\"true\">🖱️</span></p>\n<p>Lorsque vous faites glisser votre pointeur sur une zone de texte, il prend la forme d’une barre verticale.</p>"
                 },
                 {
                   "id": "7923e0aa-3e35-493d-8d42-0b29cdc0ed08",
@@ -254,8 +254,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p>Bonne réponse ! 🥒</p><p>Bravo ! C’est le bon mot !</p><br>",
-                    "invalid": "<p>Mauvaise réponse.🍽️ </p><p>Bravo ! Mais ce n’est pas le bon mot. Réessayez !<br></p>"
+                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span> <span aria-hidden=\"true\">🥒</span></p><p>Bravo ! C’est le bon mot !</p><br>",
+                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br><span aria-hidden=\"true\">🍽️</span></p><p>Bravo ! Mais ce n’est pas le bon mot. Réessayez !<br></p>"
                   }
                 }
               ]
@@ -334,7 +334,7 @@
                 {
                   "id": "6dee7fcf-7faf-4748-9c56-70e93d7d4914",
                   "type": "text",
-                  "content": "<p>Pour déplacer le curseur de texte, vous pouvez utiliser les <strong>Flèches directionnelles</strong>.</p>\n<p>➡️Par exemple : vous avez oublié de mettre un espace entre table et chaise, vous pouvez déplacer le curseur pour ajouter cet espace.</p>"
+                  "content": "<p>Pour déplacer le curseur de texte, vous pouvez utiliser les <strong>Flèches directionnelles</strong>.</p>\n<p><span aria-hidden=\"true\">➡️</span> Par exemple : vous avez oublié de mettre un espace entre table et chaise, vous pouvez déplacer le curseur pour ajouter cet espace.</p>"
                 },
                 {
                   "id": "5d93c1b7-2f8d-4891-9443-9a2f86104f4e",
@@ -375,7 +375,7 @@
           "element": {
             "id": "caedc436-3ab8-45a8-a4b5-c7ee5b4f38c6",
             "type": "text",
-            "content": "<p>💡Si besoin, cliquez sur <strong>Réinitialiser </strong>pour effacer toutes vos modifications.</p>"
+            "content": "<p><span aria-hidden=\"true\">💡</span> Si besoin, cliquez sur <strong>Réinitialiser </strong>pour effacer toutes vos modifications.</p>"
           }
         }
       ]
@@ -435,7 +435,7 @@
           "element": {
             "id": "73a8711f-e88e-4e3a-9611-f01dad6d5506",
             "type": "text",
-            "content": "<p>\n</p><details>\n    <summary> 🤔 Bon à savoir </summary>\n    <p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.🙌\n        Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p>\n</details>\n<p></p>"
+            "content": "<p>\n</p><details>\n    <summary> <span aria-hidden=\"true\">🤔</span> Bon à savoir </summary>\n    <p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.<span aria-hidden=\"true\">🙌</span>\n        Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p>\n</details>\n<p></p>"
           }
         }
       ]
@@ -510,8 +510,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p>Bonne réponse !&nbsp;<br></p>",
-                    "invalid": "<p>Mauvaise réponse.&nbsp;<br>\n    N'oubliez pas d'utiliser le e accentué.</p>"
+                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span>&nbsp;<br></p>",
+                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>N'oubliez pas d'utiliser le e accentué.</p>"
                   }
                 }
               ]
@@ -545,8 +545,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p>Bonne réponse !</p>",
-                    "invalid": "<p>Mauvaise réponse.<br>N'oubliez pas d'utiliser le e accentué.</p>"
+                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p>",
+                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>N'oubliez pas d'utiliser le e accentué.</p>"
                   }
                 }
               ]
@@ -580,8 +580,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p>Bonne réponse !&nbsp;</p>",
-                    "invalid": "<p>Mauvaise réponse.<br>N'oubliez pas d'utiliser les deux lettres accentuées.</p>"
+                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p>",
+                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>N'oubliez pas d'utiliser les deux lettres accentuées.</p>"
                   }
                 }
               ]
@@ -616,7 +616,7 @@
           "element": {
             "id": "bed8da7e-630d-4400-b1c2-9e250ccee7e4",
             "type": "text",
-            "content": "<p>💡Si besoin, cliquez sur <strong>Réinitialiser </strong>pour recommencer depuis le début.</p>"
+            "content": "<p><span aria-hidden=\"true\">💡</span> Si besoin, cliquez sur <strong>Réinitialiser </strong>pour recommencer depuis le début.</p>"
           }
         }
       ]
