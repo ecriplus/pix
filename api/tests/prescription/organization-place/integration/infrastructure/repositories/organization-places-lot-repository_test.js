@@ -8,7 +8,7 @@ import { DeletedError, NotFoundError } from '../../../../../../src/shared/domain
 import { catchErr, databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Organization Places Lot', function () {
-  describe('#findByOrganizationId', function () {
+  describe('#findByOrganizationIdWithJoinedUsers', function () {
     it('should return organization place model for given id', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
@@ -26,7 +26,8 @@ describe('Integration | Repository | Organization Places Lot', function () {
       await databaseBuilder.commit();
 
       // when
-      const foundOrganizationPlace = await organizationPlacesLotRepository.findByOrganizationId(organizationId);
+      const foundOrganizationPlace =
+        await organizationPlacesLotRepository.findByOrganizationIdWithJoinedUsers(organizationId);
 
       // then
       expect(foundOrganizationPlace[0].id).to.equal(placeGZ.id);
@@ -35,7 +36,6 @@ describe('Integration | Repository | Organization Places Lot', function () {
       expect(foundOrganizationPlace[0].category).to.equal(OrganizationPlacesLotManagement.categories[placeGZ.category]);
       expect(foundOrganizationPlace[0].reference).to.equal(placeGZ.reference);
       expect(foundOrganizationPlace[0].creatorFullName).to.equal(`${user.firstName} ${user.lastName}`);
-
       expect(foundOrganizationPlace[0].activationDate).to.deep.equal(placeGZ.activationDate);
       expect(foundOrganizationPlace[0].expirationDate).to.deep.equal(placeGZ.expirationDate);
     });
@@ -63,7 +63,8 @@ describe('Integration | Repository | Organization Places Lot', function () {
       await databaseBuilder.commit();
 
       // when
-      const foundOrganizationPlace = await organizationPlacesLotRepository.findByOrganizationId(organizationId);
+      const foundOrganizationPlace =
+        await organizationPlacesLotRepository.findByOrganizationIdWithJoinedUsers(organizationId);
 
       // then
       expect(foundOrganizationPlace).to.have.lengthOf(2);
@@ -80,7 +81,8 @@ describe('Integration | Repository | Organization Places Lot', function () {
       await databaseBuilder.commit();
 
       // when
-      const foundOrganizationPlace = await organizationPlacesLotRepository.findByOrganizationId(organizationId);
+      const foundOrganizationPlace =
+        await organizationPlacesLotRepository.findByOrganizationIdWithJoinedUsers(organizationId);
       // then
       expect(foundOrganizationPlace).to.have.lengthOf(0);
     });
@@ -98,7 +100,8 @@ describe('Integration | Repository | Organization Places Lot', function () {
       await databaseBuilder.commit();
 
       // when
-      const foundOrganizationPlace = await organizationPlacesLotRepository.findByOrganizationId(organizationId);
+      const foundOrganizationPlace =
+        await organizationPlacesLotRepository.findByOrganizationIdWithJoinedUsers(organizationId);
 
       // then
       expect(foundOrganizationPlace).to.have.lengthOf(0);
@@ -118,7 +121,8 @@ describe('Integration | Repository | Organization Places Lot', function () {
       await databaseBuilder.commit();
 
       // when
-      const foundOrganizationPlace = await organizationPlacesLotRepository.findByOrganizationId(organizationId);
+      const foundOrganizationPlace =
+        await organizationPlacesLotRepository.findByOrganizationIdWithJoinedUsers(organizationId);
 
       // then
       expect(foundOrganizationPlace[0].creatorFullName).to.equal(`${user.firstName} ${user.lastName}`);
@@ -142,7 +146,8 @@ describe('Integration | Repository | Organization Places Lot', function () {
         await databaseBuilder.commit();
 
         // when
-        const foundOrganizationPlace = await organizationPlacesLotRepository.findByOrganizationId(organizationId);
+        const foundOrganizationPlace =
+          await organizationPlacesLotRepository.findByOrganizationIdWithJoinedUsers(organizationId);
 
         // then
         expect(foundOrganizationPlace[0].id).to.deep.equal(organizationPlace2.id);
@@ -171,7 +176,8 @@ describe('Integration | Repository | Organization Places Lot', function () {
         await databaseBuilder.commit();
 
         // when
-        const foundOrganizationPlace = await organizationPlacesLotRepository.findByOrganizationId(organizationId);
+        const foundOrganizationPlace =
+          await organizationPlacesLotRepository.findByOrganizationIdWithJoinedUsers(organizationId);
 
         // then
         expect(foundOrganizationPlace[0].id).to.deep.equal(organizationPlace1.id);
@@ -201,7 +207,8 @@ describe('Integration | Repository | Organization Places Lot', function () {
         await databaseBuilder.commit();
 
         // when
-        const foundOrganizationPlace = await organizationPlacesLotRepository.findByOrganizationId(organizationId);
+        const foundOrganizationPlace =
+          await organizationPlacesLotRepository.findByOrganizationIdWithJoinedUsers(organizationId);
 
         // then
         expect(foundOrganizationPlace[0].id).to.deep.equal(organizationPlace2.id);
@@ -210,7 +217,7 @@ describe('Integration | Repository | Organization Places Lot', function () {
     });
   });
 
-  describe('#findAllByOrganizationId', function () {
+  describe('#findAllByOrganizationIds', function () {
     let organizationId;
 
     beforeEach(async function () {
@@ -222,7 +229,9 @@ describe('Integration | Repository | Organization Places Lot', function () {
       databaseBuilder.factory.buildOrganizationPlace({ organizationId });
       await databaseBuilder.commit();
 
-      const places = await organizationPlacesLotRepository.findAllByOrganizationId(organizationId);
+      const places = await organizationPlacesLotRepository.findAllByOrganizationIds({
+        organizationIds: [organizationId],
+      });
 
       expect(places[0]).to.be.instanceOf(PlacesLot);
     });
@@ -230,7 +239,9 @@ describe('Integration | Repository | Organization Places Lot', function () {
     it('should return empty array if there is no placeslots', async function () {
       await databaseBuilder.commit();
 
-      const places = await organizationPlacesLotRepository.findAllByOrganizationId(organizationId);
+      const places = await organizationPlacesLotRepository.findAllByOrganizationIds({
+        organizationIds: [organizationId],
+      });
 
       expect(places).to.be.empty;
     });
@@ -247,7 +258,9 @@ describe('Integration | Repository | Organization Places Lot', function () {
       });
       await databaseBuilder.commit();
 
-      const places = await organizationPlacesLotRepository.findAllByOrganizationId(organizationId);
+      const places = await organizationPlacesLotRepository.findAllByOrganizationIds({
+        organizationIds: [organizationId],
+      });
 
       expect(places).to.have.lengthOf(2);
       expect(places[0].count).to.equal(7);
@@ -260,70 +273,11 @@ describe('Integration | Repository | Organization Places Lot', function () {
       databaseBuilder.factory.buildOrganizationPlace({ organizationId });
       await databaseBuilder.commit();
 
-      const places = await organizationPlacesLotRepository.findAllByOrganizationId(anotherOrganizationId);
+      const places = await organizationPlacesLotRepository.findAllByOrganizationIds({
+        organizationIds: [anotherOrganizationId],
+      });
 
       expect(places).to.have.lengthOf(0);
-    });
-  });
-
-  describe('#findAllByOrganizationIds', function () {
-    let firstOrganizationId;
-    let secondOrganizationId;
-
-    beforeEach(async function () {
-      firstOrganizationId = databaseBuilder.factory.buildOrganization().id;
-      secondOrganizationId = databaseBuilder.factory.buildOrganization().id;
-      await databaseBuilder.commit();
-    });
-
-    it('should return empty array if there is no placesLot', async function () {
-      const organizationIds = [firstOrganizationId, secondOrganizationId];
-
-      const places = await organizationPlacesLotRepository.findAllByOrganizationIds(organizationIds);
-
-      expect(places).to.be.empty;
-    });
-
-    it('should return places if there are places for given organizationIds', async function () {
-      databaseBuilder.factory.buildOrganizationPlace({
-        organizationId: firstOrganizationId,
-        count: 7,
-      });
-      databaseBuilder.factory.buildOrganizationPlace({
-        organizationId: secondOrganizationId,
-        count: 3,
-      });
-      await databaseBuilder.commit();
-      const organizationIds = [firstOrganizationId, secondOrganizationId];
-
-      const places = await organizationPlacesLotRepository.findAllByOrganizationIds(organizationIds);
-
-      expect(places).to.have.lengthOf(2);
-      expect(places[0]).to.be.an.instanceOf(PlacesLot);
-      expect(places[1]).to.be.an.instanceOf(PlacesLot);
-
-      const firstOrganizationIdPlaces = places.find((place) => place.organizationId === firstOrganizationId);
-      expect(firstOrganizationIdPlaces.count).to.equal(7);
-
-      const secondOrganizationIdPlaces = places.find((place) => place.organizationId === secondOrganizationId);
-      expect(secondOrganizationIdPlaces.count).to.equal(3);
-    });
-
-    it('should not return places for others organization than given', async function () {
-      databaseBuilder.factory.buildOrganizationPlace({
-        organizationId: firstOrganizationId,
-        count: 7,
-      });
-      databaseBuilder.factory.buildOrganizationPlace({
-        organizationId: secondOrganizationId,
-        count: 3,
-      });
-      await databaseBuilder.commit();
-      const organizationIds = [firstOrganizationId];
-
-      const places = await organizationPlacesLotRepository.findAllByOrganizationIds(organizationIds);
-      expect(places).to.have.lengthOf(1);
-      expect(places[0].organizationId).to.equal(firstOrganizationId);
     });
   });
 
@@ -452,7 +406,7 @@ describe('Integration | Repository | Organization Places Lot', function () {
     });
   });
 
-  describe('#findAllNotDeletedByOrganizationId', function () {
+  describe('#findAllByOrganizationId when we filter out deleted places lots', function () {
     let clock;
 
     beforeEach(function () {
@@ -492,8 +446,10 @@ describe('Integration | Repository | Organization Places Lot', function () {
       await databaseBuilder.commit();
 
       // when
-      const foundOrganizationPlace =
-        await organizationPlacesLotRepository.findAllNotDeletedByOrganizationId(organizationId);
+      const foundOrganizationPlace = await organizationPlacesLotRepository.findAllByOrganizationIds({
+        organizationIds: [organizationId],
+        callOrderByAndRemoveDeleted: true,
+      });
 
       // then
       expect(foundOrganizationPlace).to.have.lengthOf(2);
@@ -510,7 +466,8 @@ describe('Integration | Repository | Organization Places Lot', function () {
       await databaseBuilder.commit();
 
       // when
-      const foundOrganizationPlace = await organizationPlacesLotRepository.findByOrganizationId(organizationId);
+      const foundOrganizationPlace =
+        await organizationPlacesLotRepository.findByOrganizationIdWithJoinedUsers(organizationId);
       // then
       expect(foundOrganizationPlace).to.have.lengthOf(0);
     });
@@ -528,7 +485,8 @@ describe('Integration | Repository | Organization Places Lot', function () {
       await databaseBuilder.commit();
 
       // when
-      const foundOrganizationPlace = await organizationPlacesLotRepository.findByOrganizationId(organizationId);
+      const foundOrganizationPlace =
+        await organizationPlacesLotRepository.findByOrganizationIdWithJoinedUsers(organizationId);
 
       // then
       expect(foundOrganizationPlace).to.have.lengthOf(0);
@@ -563,8 +521,10 @@ describe('Integration | Repository | Organization Places Lot', function () {
         await databaseBuilder.commit();
 
         // when
-        const foundOrganizationPlace =
-          await organizationPlacesLotRepository.findAllNotDeletedByOrganizationId(organizationId);
+        const foundOrganizationPlace = await organizationPlacesLotRepository.findAllByOrganizationIds({
+          organizationIds: [organizationId],
+          callOrderByAndRemoveDeleted: true,
+        });
 
         // then
         expect(foundOrganizationPlace[0].activationDate).to.deep.equal(organizationPlaceActive.activationDate);
@@ -593,8 +553,10 @@ describe('Integration | Repository | Organization Places Lot', function () {
         await databaseBuilder.commit();
 
         // when
-        const foundOrganizationPlace =
-          await organizationPlacesLotRepository.findAllNotDeletedByOrganizationId(organizationId);
+        const foundOrganizationPlace = await organizationPlacesLotRepository.findAllByOrganizationIds({
+          organizationIds: [organizationId],
+          callOrderByAndRemoveDeleted: true,
+        });
 
         // then
         expect(foundOrganizationPlace[0].expirationDate).to.deep.equal(organizationPlaceActive2.expirationDate);
@@ -622,8 +584,10 @@ describe('Integration | Repository | Organization Places Lot', function () {
         await databaseBuilder.commit();
 
         // when
-        const foundOrganizationPlace =
-          await organizationPlacesLotRepository.findAllNotDeletedByOrganizationId(organizationId);
+        const foundOrganizationPlace = await organizationPlacesLotRepository.findAllByOrganizationIds({
+          organizationIds: [organizationId],
+          callOrderByAndRemoveDeleted: true,
+        });
 
         // then
         expect(foundOrganizationPlace[0].activationDate).to.deep.equal(organizationPlaceActive2.activationDate);
@@ -653,8 +617,10 @@ describe('Integration | Repository | Organization Places Lot', function () {
         await databaseBuilder.commit();
 
         // when
-        const foundOrganizationPlace =
-          await organizationPlacesLotRepository.findAllNotDeletedByOrganizationId(organizationId);
+        const foundOrganizationPlace = await organizationPlacesLotRepository.findAllByOrganizationIds({
+          organizationIds: [organizationId],
+          callOrderByAndRemoveDeleted: true,
+        });
 
         // then
         expect(foundOrganizationPlace[0].count).to.deep.equal(organizationPlaceActive2.count);
