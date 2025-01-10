@@ -4,7 +4,7 @@
 <header class="page-header" role="banner">
   <div class="page-title">
     <LinkTo @route="authenticated.trainings.list">Tous les contenus formatifs</LinkTo>
-    <FaIcon @icon="chevron-right" />
+    <PixIcon @name="chevronRight" @ariaHidden={{true}} />
     <h1>Détail du contenu formatif
       {{@model.id}}
     </h1>
@@ -15,10 +15,10 @@
       href="https://1024pix.atlassian.net/wiki/spaces/PROD/pages/3753476097/Cr+er+un+contenu+formatif+Mode+d+emploi"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Consulter la documentation de création de contenus formatifs"
+      aria-label="Consulter la documentation de création de contenus formatifs (ouverture dans une nouvelle fenêtre)"
     >
-      <FaIcon @icon="arrow-up-right-from-square" />
-      <span>Consulter la documentation</span>
+      Consulter la documentation
+      <PixIcon @name="openNew" @ariaHidden={{true}} />
     </a>
   </div>
 </header>
