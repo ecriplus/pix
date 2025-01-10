@@ -1,13 +1,13 @@
 import lodash from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
-import * as knowledgeElementRepository from '../../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
-import * as knowledgeElementSnapshotRepository from '../../../../../lib/infrastructure/repositories/knowledge-element-snapshot-repository.js';
-import { Campaign } from '../../../../../src/shared/domain/models/Campaign.js';
 import { constants } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
+import { Campaign } from '../../../../shared/domain/models/Campaign.js';
+import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
+import * as knowledgeElementSnapshotRepository from '../../../campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
 import { CampaignParticipation } from '../../domain/models/CampaignParticipation.js';
 import { AvailableCampaignParticipation } from '../../domain/read-models/AvailableCampaignParticipation.js';

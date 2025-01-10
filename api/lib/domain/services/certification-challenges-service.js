@@ -10,8 +10,8 @@ import { Challenge } from '../../../src/shared/domain/models/Challenge.js';
 import { KnowledgeElement } from '../../../src/shared/domain/models/KnowledgeElement.js';
 import * as answerRepository from '../../../src/shared/infrastructure/repositories/answer-repository.js';
 import * as challengeRepository from '../../../src/shared/infrastructure/repositories/challenge-repository.js';
+import * as knowledgeElementRepository from '../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as certifiableProfileForLearningContentRepository from '../../infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
-import * as knowledgeElementRepository from '../../infrastructure/repositories/knowledge-element-repository.js';
 import * as learningContentRepository from '../../infrastructure/repositories/learning-content-repository.js';
 
 const pickCertificationChallenges = async function (

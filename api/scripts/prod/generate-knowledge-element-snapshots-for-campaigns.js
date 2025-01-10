@@ -3,9 +3,9 @@ import * as url from 'node:url';
 import yargs from 'yargs';
 
 import { disconnect, knex } from '../../db/knex-database-connection.js';
-import * as knowledgeElementRepository from '../../lib/infrastructure/repositories/knowledge-element-repository.js';
-import * as knowledgeElementSnapshotRepository from '../../lib/infrastructure/repositories/knowledge-element-snapshot-repository.js';
+import * as knowledgeElementSnapshotRepository from '../../src/prescription/campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import { AlreadyExistingEntityError } from '../../src/shared/domain/errors.js';
+import * as knowledgeElementRepository from '../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
 import { PromiseUtils } from '../../src/shared/infrastructure/utils/promise-utils.js';
 
 const DEFAULT_MAX_SNAPSHOT_COUNT = 5000;

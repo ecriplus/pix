@@ -5,10 +5,10 @@ import * as defaultGetNewAcquiredStagesService from '../../../../src/evaluation/
 import * as defaultStageAcquisitionRepository from '../../../../src/evaluation/infrastructure/repositories/stage-acquisition-repository.js';
 import * as defaultStageRepository from '../../../../src/evaluation/infrastructure/repositories/stage-repository.js';
 import * as defaultCampaignParticipationRepository from '../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
+import * as defaultKnowledgeElementRepositoryRepository from '../../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as defaultSkillRepository from '../../../../src/shared/infrastructure/repositories/skill-repository.js';
 import * as defaultCampaignRepository from '../../../infrastructure/repositories/campaign-repository.js';
 import * as defaultCampaignSkillRepository from '../../../infrastructure/repositories/campaign-skill-repository.js';
-import * as defaultKnowledgeElementRepositoryRepository from '../../../infrastructure/repositories/knowledge-element-repository.js';
 import * as defaultGetMasteryPercentageService from '../../services/get-mastery-percentage-service.js';
 
 /**

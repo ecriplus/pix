@@ -1,14 +1,14 @@
 import _ from 'lodash';
 
-import * as knowledgeElementRepository from '../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
-import * as knowledgeElementSnapshotRepository from '../../../../lib/infrastructure/repositories/knowledge-element-snapshot-repository.js';
-import { PlacementProfile } from '../../../../src/shared/domain/models/PlacementProfile.js';
-import { UserCompetence } from '../../../../src/shared/domain/models/UserCompetence.js';
 import { AlgorithmEngineVersion } from '../../../certification/shared/domain/models/AlgorithmEngineVersion.js';
 import * as scoringService from '../../../evaluation/domain/services/scoring/scoring-service.js';
+import * as knowledgeElementSnapshotRepository from '../../../prescription/campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
+import { PlacementProfile } from '../../domain/models/PlacementProfile.js';
+import { UserCompetence } from '../../domain/models/UserCompetence.js';
 import * as assessmentRepository from '../../infrastructure/repositories/assessment-repository.js';
 import * as assessmentResultRepository from '../../infrastructure/repositories/assessment-result-repository.js';
 import * as competenceRepository from '../../infrastructure/repositories/competence-repository.js';
+import * as knowledgeElementRepository from '../../infrastructure/repositories/knowledge-element-repository.js';
 import * as skillRepository from '../../infrastructure/repositories/skill-repository.js';
 import { PromiseUtils } from '../../infrastructure/utils/promise-utils.js';
 

@@ -1,4 +1,4 @@
-import * as knowledgeElementRepository from '../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
+import * as knowledgeElementRepository from '../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as scoringService from './scoring/scoring-service.js';
 
 const getCompetenceLevel = async function ({

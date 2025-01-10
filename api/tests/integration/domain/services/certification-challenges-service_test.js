@@ -1,9 +1,9 @@
 import * as certificationChallengesService from '../../../../lib/domain/services/certification-challenges-service.js';
-import * as knowledgeElementRepository from '../../../../lib/infrastructure/repositories/knowledge-element-repository.js';
 import { PIX_COUNT_BY_LEVEL } from '../../../../src/shared/domain/constants.js';
 import * as placementProfileService from '../../../../src/shared/domain/services/placement-profile-service.js';
 import * as answerRepository from '../../../../src/shared/infrastructure/repositories/answer-repository.js';
 import * as challengeRepository from '../../../../src/shared/infrastructure/repositories/challenge-repository.js';
+import * as knowledgeElementRepository from '../../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
 import { databaseBuilder, expect, mockLearningContent } from '../../../test-helper.js';
 
 describe('Integration | CertificationChallengeService | pickCertificationChallenge', function () {
