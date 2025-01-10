@@ -749,82 +749,134 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
   });
 
   describe('#disableMembershipsByUserId', function () {
-    context('when there is multiple memberships for the specified user id', function () {
-      it('disables all memberships of this user', async function () {
-        // given
-        const userId = databaseBuilder.factory.buildUser().id;
-        const updatedByUserId = databaseBuilder.factory.buildUser().id;
-        const anotherUserId = databaseBuilder.factory.buildUser().id;
-        const firstOrganizationId = databaseBuilder.factory.buildOrganization().id;
-        const secondOrganizationId = databaseBuilder.factory.buildOrganization().id;
-        const firstOrganizationMembership = databaseBuilder.factory.buildMembership({
-          organizationId: firstOrganizationId,
-          userId,
-          createdAt: now,
-          updatedAt: now,
+    const creationDate = new Date('2020-12-05');
+
+    context('when there are multiple memberships for the specified user id', function () {
+      context('when all memberships are active', function () {
+        it('disables all memberships of this user', async function () {
+          // given
+          const userId = databaseBuilder.factory.buildUser().id;
+          const updatedByUserId = databaseBuilder.factory.buildUser().id;
+          const anotherUserId = databaseBuilder.factory.buildUser().id;
+          const firstOrganizationId = databaseBuilder.factory.buildOrganization().id;
+          const secondOrganizationId = databaseBuilder.factory.buildOrganization().id;
+          const firstOrganizationMembership = databaseBuilder.factory.buildMembership({
+            organizationId: firstOrganizationId,
+            userId,
+            createdAt: creationDate,
+          });
+          const secondOrganizationMembership = databaseBuilder.factory.buildMembership({
+            organizationId: secondOrganizationId,
+            userId,
+            createdAt: creationDate,
+          });
+          databaseBuilder.factory.buildMembership({
+            organizationId: firstOrganizationId,
+            userId: anotherUserId,
+            createdAt: creationDate,
+          });
+
+          await databaseBuilder.commit();
+
+          const expectedMemberships = [
+            {
+              ...firstOrganizationMembership,
+              createdAt: creationDate,
+              updatedAt: now,
+              disabledAt: now,
+              updatedByUserId,
+            },
+            {
+              ...secondOrganizationMembership,
+              createdAt: creationDate,
+              updatedAt: now,
+              disabledAt: now,
+              updatedByUserId,
+            },
+          ];
+          // when
+          await membershipRepository.disableMembershipsByUserId({ userId, updatedByUserId });
+
+          // then
+          const disabledMemberships = await knex('memberships').returning('*').where({ userId });
+          expect(disabledMemberships).to.have.lengthOf(2);
+          expect(disabledMemberships).to.deep.include.members(expectedMemberships);
         });
-        const secondOrganizationMembership = databaseBuilder.factory.buildMembership({
-          organizationId: secondOrganizationId,
-          userId,
-          createdAt: now,
-          updatedAt: now,
-        });
-        databaseBuilder.factory.buildMembership({
-          organizationId: firstOrganizationId,
-          userId: anotherUserId,
-          createdAt: now,
-          updatedAt: now,
-        });
-
-        await databaseBuilder.commit();
-
-        const expectedMemberships = [
-          {
-            ...firstOrganizationMembership,
-            createdAt: now,
-            updatedAt: now,
-            disabledAt: now,
-            updatedByUserId,
-          },
-          {
-            ...secondOrganizationMembership,
-            createdAt: now,
-            updatedAt: now,
-            disabledAt: now,
-            updatedByUserId,
-          },
-        ];
-
-        // when
-        await membershipRepository.disableMembershipsByUserId({ userId, updatedByUserId });
-
-        // then
-        const disabledMemberships = await knex('memberships').returning('*').where({ userId });
-        expect(disabledMemberships).to.have.lengthOf(2);
-        expect(disabledMemberships).to.deep.include.members(expectedMemberships);
       });
-    });
+      context('when there are already disabled memberships among user memberships', function () {
+        it('disables only the memberships which are not yet disabled', async function () {
+          // given
+          const userId = databaseBuilder.factory.buildUser().id;
+          const formerDpoId = databaseBuilder.factory.buildUser().id;
+          const actualDpoId = databaseBuilder.factory.buildUser().id;
+          const firstOrganizationId = databaseBuilder.factory.buildOrganization().id;
+          const secondOrganizationId = databaseBuilder.factory.buildOrganization().id;
+          const secondMembership = databaseBuilder.factory.buildMembership({
+            userId,
+            organisationId: firstOrganizationId,
+            createdAt: creationDate,
+            updatedByUserId: formerDpoId,
+          });
 
-    context('when there is no membership for the specified user id', function () {
-      it('does nothing', async function () {
-        // given
-        const userId = databaseBuilder.factory.buildUser().id;
-        const anotherUserId = databaseBuilder.factory.buildUser().id;
-        const updatedByUserId = databaseBuilder.factory.buildUser().id;
-        const organizationId = databaseBuilder.factory.buildOrganization().id;
-        databaseBuilder.factory.buildMembership({
-          organizationId,
-          userId: anotherUserId,
+          const firstMembership = databaseBuilder.factory.buildMembership({
+            userId,
+            updatedByUserId: formerDpoId,
+            organisationId: secondOrganizationId,
+            createdAt: creationDate,
+            disabledAt: creationDate,
+          });
+          databaseBuilder.factory.buildMembership({
+            userId: databaseBuilder.factory.buildUser().id,
+            organisationId: secondOrganizationId,
+            createdAt: creationDate,
+          });
+
+          await databaseBuilder.commit();
+
+          // when
+          await membershipRepository.disableMembershipsByUserId({ userId, updatedByUserId: actualDpoId });
+
+          // then
+          const expectedMemberships = [
+            {
+              ...firstMembership,
+            },
+            {
+              ...secondMembership,
+              disabledAt: now,
+              updatedAt: now,
+              updatedByUserId: actualDpoId,
+            },
+          ];
+          const disabledMemberships = await knex('memberships')
+            .returning('*')
+            .whereNotNull('disabledAt')
+            .andWhere({ userId });
+          expect(disabledMemberships).to.have.lengthOf(2);
+          expect(disabledMemberships).to.deep.include.members(expectedMemberships);
         });
+      });
+      context('when there is no membership for the specified user id', function () {
+        it('does nothing', async function () {
+          // given
+          const userId = databaseBuilder.factory.buildUser().id;
+          const anotherUserId = databaseBuilder.factory.buildUser().id;
+          const updatedByUserId = databaseBuilder.factory.buildUser().id;
+          const organizationId = databaseBuilder.factory.buildOrganization().id;
+          databaseBuilder.factory.buildMembership({
+            organizationId,
+            userId: anotherUserId,
+          });
 
-        await databaseBuilder.commit();
+          await databaseBuilder.commit();
 
-        // when
-        await membershipRepository.disableMembershipsByUserId({ userId, updatedByUserId });
+          // when
+          await membershipRepository.disableMembershipsByUserId({ userId, updatedByUserId });
 
-        // then
-        const disabledMemberships = await knex('memberships').where({ userId });
-        expect(disabledMemberships).to.have.lengthOf(0);
+          // then
+          const disabledMemberships = await knex('memberships').where({ userId });
+          expect(disabledMemberships).to.have.lengthOf(0);
+        });
       });
     });
   });
