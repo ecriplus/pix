@@ -13,12 +13,14 @@ describe('Unit | Domain | Use Cases | get-organization-places-statistics', funct
     const placeStatisticsBuildFromStub = sinon.stub(PlaceStatistics, 'buildFrom').returns(placeStatistics);
 
     const organizationPlacesLotRepository = {
-      findAllByOrganizationId: sinon.stub(),
+      findAllByOrganizationIds: sinon.stub(),
     };
     const organizationLearnerRepository = {
       findAllLearnerWithAtLeastOneParticipationByOrganizationId: sinon.stub(),
     };
-    organizationPlacesLotRepository.findAllByOrganizationId.withArgs(organizationId).resolves(placesLots);
+    organizationPlacesLotRepository.findAllByOrganizationIds
+      .withArgs({ organizationIds: [organizationId] })
+      .resolves(placesLots);
 
     organizationLearnerRepository.findAllLearnerWithAtLeastOneParticipationByOrganizationId
       .withArgs(organizationId)

@@ -4,14 +4,16 @@ import { expect, sinon } from '../../../../../test-helper.js';
 describe('Unit | Domain | Use Cases | get-organization-places-lots', function () {
   it('should get the organization places lots', async function () {
     // given
-    const organizationId = Symbol('organizationId');
+    const organizationId = 123;
     const placesLots = Symbol('PlacesLots');
 
     const organizationPlacesLotRepository = {
-      findAllNotDeletedByOrganizationId: sinon.stub(),
+      findAllByOrganizationIds: sinon.stub(),
     };
 
-    organizationPlacesLotRepository.findAllNotDeletedByOrganizationId.withArgs(organizationId).resolves(placesLots);
+    await organizationPlacesLotRepository.findAllByOrganizationIds
+      .withArgs({ organizationIds: [organizationId], callOrderByAndRemoveDeleted: true })
+      .resolves(placesLots);
 
     // when
     const organizationPlacesLots = await getOrganizationPlacesLots({

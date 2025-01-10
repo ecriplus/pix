@@ -11,7 +11,9 @@ const getDataOrganizationsPlacesStatistics = withTransaction(async function ({
 
   const organizationWithPlacesIds = organizationWithPlaces.map((organization) => organization.id);
 
-  const placesLots = await organizationPlacesLotRepository.findAllByOrganizationIds(organizationWithPlacesIds);
+  const placesLots = await organizationPlacesLotRepository.findAllByOrganizationIds({
+    organizationIds: organizationWithPlacesIds,
+  });
 
   const placeRepartitions =
     await organizationLearnerRepository.findAllLearnerWithAtLeastOneParticipationByOrganizationIds(
