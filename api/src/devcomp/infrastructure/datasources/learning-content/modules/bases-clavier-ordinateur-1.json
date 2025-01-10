@@ -497,9 +497,7 @@
                       "placeholder": "Cliquer ici",
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
-                      "tolerances": [
-                        "t1"
-                      ],
+                      "tolerances": [],
                       "solutions": [
                         "céleri"
                       ]
@@ -532,9 +530,7 @@
                       "placeholder": "Cliquer ici",
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
-                      "tolerances": [
-                        "t1"
-                      ],
+                      "tolerances": [],
                       "solutions": [
                         "pastèque"
                       ]
@@ -567,9 +563,7 @@
                       "placeholder": "Cliquer ici",
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
-                      "tolerances": [
-                        "t1"
-                      ],
+                      "tolerances": [],
                       "solutions": [
                         "bac à glaçons"
                       ]
