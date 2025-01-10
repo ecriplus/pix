@@ -1,9 +1,9 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
@@ -100,11 +100,7 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
         <div class="member-item-actions">
           {{#if this.isEditionMode}}
             <div class="member-item-actions__modify">
-              <PixButton
-                @size="small"
-                @triggerAction={{this.updateRoleOfMember}}
-                class="member-item-actions__button member-item-actions__button--save"
-              >
+              <PixButton @size="small" @triggerAction={{this.updateRoleOfMember}} class="member-item-actions__button">
                 {{t "common.actions.save"}}
               </PixButton>
               <PixButton
@@ -112,9 +108,9 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
                 @variant="secondary"
                 @triggerAction={{this.cancelUpdateRoleOfMember}}
                 aria-label={{t "common.actions.cancel"}}
-                class="member-item-actions__button--icon"
+                class="member-item-actions__button"
               >
-                <FaIcon @icon="xmark" />
+                <PixIcon @name="close" @ariaHidden={{true}} />
               </PixButton>
             </div>
           {{else}}

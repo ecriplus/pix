@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
@@ -8,7 +9,6 @@ import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjs from 'dayjs';
@@ -294,7 +294,7 @@ export default class UserOverview extends Component {
                               aria-describedby="copy-user-email"
                               class="pix-icon-button pix-icon-button--small pix-icon-button--dark-grey"
                             >
-                              <FaIcon @icon="copy" @prefix="far" />
+                              <PixIcon @name="copy" @ariaHidden={{true}} />
                             </CopyButton>
                           </:triggerElement>
                           <:tooltip>{{this.tooltipTextEmail}}</:tooltip>
@@ -318,7 +318,7 @@ export default class UserOverview extends Component {
                               aria-describedby="copy-user-id"
                               class="pix-icon-button pix-icon-button--small pix-icon-button--dark-grey"
                             >
-                              <FaIcon @icon="copy" @prefix="far" />
+                              <PixIcon @name="copy" @ariaHidden={{true}} />
                             </CopyButton>
                           </:triggerElement>
                           <:tooltip>{{this.tooltipTextUsername}}</:tooltip>

@@ -4,24 +4,19 @@
 
   &__modify {
     display: flex;
+    gap: var(--pix-spacing-1x);
+
+    .member-item-actions__button {
+      &:last-child {
+        padding: var(--pix-spacing-2x) var(--pix-spacing-3x);
+      }
+    }
+
   }
 
   &__button {
     max-height: 30px;
-    margin-bottom: 4px;
-
-    svg {
-      margin-right: 6px;
-    }
-
-    &--save {
-      margin-right: 12px;
-    }
-
-    &--icon {
-      width: 30px;
-      height: 30px;
-    }
+    margin-bottom: var(--pix-spacing-1x);
   }
 }
 
