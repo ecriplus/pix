@@ -2,7 +2,7 @@
 <div class="join-request">
   <div class="panel join-request__panel">
     <div class="panel__image">
-      <img src="/pix-orga.svg" alt="" role="none" />
+      <img src="/pix-orga-color.svg" alt="" role="none" />
     </div>
     {{#if this.isSubmit}}
       <p class="join-request__success">
@@ -41,11 +41,10 @@
 
       <Auth::JoinRequestForm @onSubmit={{this.createScoOrganizationInvitation}} />
     {{/if}}
-    <div class="join-request-form__back">
-      <LinkTo @route="login">
-        <PixIcon @name="arrowLeft" />
-        Revenir à la page de connexion
-      </LinkTo>
-    </div>
+
+    <LinkTo @route="login" class="join-request-form__back">
+      <PixIcon @name="arrowLeft" />
+      Revenir à la page de connexion
+    </LinkTo>
   </div>
 </div>
