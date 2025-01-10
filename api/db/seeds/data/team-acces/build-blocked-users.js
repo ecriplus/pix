@@ -36,10 +36,10 @@ function _buildAlmostBlockedUser(databaseBuilder) {
 
 function _buildAlmostTemporarilyBlockedUser(databaseBuilder) {
   const temporaryBlockedUser = databaseBuilder.factory.buildUser.withRawPassword({
-    firstName: 'Little',
+    firstName: 'Small',
     lastName: 'Bear',
-    email: 'temporarily-blocked@example.net',
-    username: 'little.bear0101',
+    email: 'almost-temporarily-blocked@example.net',
+    username: 'small.bear',
     rawPassword: DEFAULT_PASSWORD,
     cgu: false,
   });
