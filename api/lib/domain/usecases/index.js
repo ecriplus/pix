@@ -127,7 +127,6 @@ import { userOrgaSettingsRepository } from '../../../src/team/infrastructure/rep
 import * as certificationChallengesService from '../../domain/services/certification-challenges-service.js';
 import * as obfuscationService from '../../domain/services/obfuscation-service.js';
 import * as passwordGenerator from '../../domain/services/password-generator.js';
-import * as verifyCertificateCodeService from '../../domain/services/verify-certificate-code-service.js';
 import * as badgeAcquisitionRepository from '../../infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeForCalculationRepository from '../../infrastructure/repositories/badge-for-calculation-repository.js';
 import * as campaignRepository from '../../infrastructure/repositories/campaign-repository.js';
@@ -185,7 +184,6 @@ function requirePoleEmploiNotifier() {
  * @typedef {certificationCourseRepository} CertificationCourseRepository
  * @typedef {userRepository} UserRepository
  * @typedef {certificationChallengesService} CertificationChallengesService
- * @typedef {verifyCertificateCodeService} VerifyCertificateCodeService
  * @typedef {assessmentRepository} AssessmentRepository
  */
 const dependencies = {
@@ -332,7 +330,6 @@ const dependencies = {
   userService,
   userToCreateRepository,
   userValidator,
-  verifyCertificateCodeService,
   writeCsvUtils,
   badgeCriteriaRepository,
   sharedSessionRepository,
