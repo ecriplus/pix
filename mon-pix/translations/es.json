@@ -190,8 +190,7 @@
           "receive-reset-button": "Reiniciar contraseña"
         },
         "contact-us-link": {
-          "link-text": "Contáctanos.",
-          "link-url": "https://pix.fr/support"
+          "link-text": "Contáctanos."
         },
         "fields": {
           "email": {

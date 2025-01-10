@@ -190,8 +190,7 @@
           "receive-reset-button": "Een reset-link ontvangen"
         },
         "contact-us-link": {
-          "link-text": "Contacteer ons",
-          "link-url": "https://pix.fr/support"
+          "link-text": "Contacteer ons"
         },
         "fields": {
           "email": {
