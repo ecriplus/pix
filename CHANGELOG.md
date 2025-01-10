@@ -1,5 +1,52 @@
 # Pix Changelog
 
+## v5.13.0 (10/01/2025)
+
+
+### :rocket: Amélioration
+- [#10980](https://github.com/1024pix/pix/pull/10980) [FEATURE] Réorganiser les fichiers de Modulix dans mon-pix/components (PIX-15127).
+- [#11039](https://github.com/1024pix/pix/pull/11039) [FEATURE] Amélioration de la documentation d'API pour Parcoursup et ajout de nouveaux seeds (PIX-16022).
+- [#10936](https://github.com/1024pix/pix/pull/10936) [FEATURE] Mettre à jour le champ UpdatedAt quand un membre d'équipe de centre de certification est désactivé (PIX-15548).
+- [#10972](https://github.com/1024pix/pix/pull/10972) [FEATURE] Ajouter un on/off sur l'anonymisation lors de la suppression de prescrits (PIX-15880).
+- [#10967](https://github.com/1024pix/pix/pull/10967) [FEATURE] Humaniser les seeds Devcomp (PIX-15835).
+- [#11022](https://github.com/1024pix/pix/pull/11022) [FEATURE] Ajouter les champs licence et légende pour l'élément Image côté API (PIX-15990).
+- [#11019](https://github.com/1024pix/pix/pull/11019) [FEATURE] Utiliser le composant BannerAlert sur la bannière beta des modules (PIX-15861).
+- [#10937](https://github.com/1024pix/pix/pull/10937) [FEATURE] Modifier l'appel Pix Orga qui récupère le status des CGU (PIX-15586).
+
+### :building_construction: Tech
+- [#11029](https://github.com/1024pix/pix/pull/11029) [TECH] Montée de version PixOrga (PIX-16024).
+- [#10917](https://github.com/1024pix/pix/pull/10917) [TECH] Migrer la route de réinitialisation de scorecard (PIX-15881).
+- [#11017](https://github.com/1024pix/pix/pull/11017) [TECH] Utilise le `competenceName`, `competenceCode` et `areaName` plutôt qu'un `id` interne (Pix-15962).
+- [#10899](https://github.com/1024pix/pix/pull/10899) [TECH] Utiliser le composant PixPagination du Design System (PIX-15862).
+- [#10960](https://github.com/1024pix/pix/pull/10960) [TECH] Montée de version PixOrga (PIX-15959).
+
+### :bug: Correction
+- [#11035](https://github.com/1024pix/pix/pull/11035) [BUGFIX] Corriger l'affichage pour rejoindre une organisation SCO sur PixOrga (PIX-16020).
+- [#11047](https://github.com/1024pix/pix/pull/11047) [BUGFIX] Update membership fields only if membership is not already deactivated (pix-16014).
+- [#10974](https://github.com/1024pix/pix/pull/10974) [BUGFIX] Modification du lien "Mot de passe oublié" de l'application www.orga.pix.org (PIX-15940).
+
+### :arrow_up: Montée de version
+- [#11058](https://github.com/1024pix/pix/pull/11058) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.2 (junior).
+- [#11026](https://github.com/1024pix/pix/pull/11026) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.1 (junior).
+- [#11050](https://github.com/1024pix/pix/pull/11050) [BUMP] Update dependency ember-simple-auth to v7 (admin).
+- [#11052](https://github.com/1024pix/pix/pull/11052) [BUMP] Update dependency eslint-plugin-n to v17 (certif).
+- [#11053](https://github.com/1024pix/pix/pull/11053) [BUMP] Update dependency eslint-plugin-yaml to v1 (load-testing).
+- [#11045](https://github.com/1024pix/pix/pull/11045) [BUMP] Update dependency ember-qunit to v9 (mon-pix).
+- [#11046](https://github.com/1024pix/pix/pull/11046) [BUMP] Update dependency ember-resolver to v13 (admin).
+- [#11040](https://github.com/1024pix/pix/pull/11040) [BUMP] Update dependency ember-qunit to v9 (junior).
+- [#11043](https://github.com/1024pix/pix/pull/11043) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.2 (orga).
+- [#11030](https://github.com/1024pix/pix/pull/11030) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.1 (orga).
+- [#11038](https://github.com/1024pix/pix/pull/11038) [BUMP] Update dependency ember-qunit to v9 (admin).
+- [#11036](https://github.com/1024pix/pix/pull/11036) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.2 (mon-pix).
+- [#11032](https://github.com/1024pix/pix/pull/11032) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.2 (certif).
+- [#11031](https://github.com/1024pix/pix/pull/11031) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.2 (admin).
+- [#11028](https://github.com/1024pix/pix/pull/11028) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.1 (mon-pix).
+- [#11027](https://github.com/1024pix/pix/pull/11027) [BUMP] Update dependency typescript-eslint to v8 (audit-logger).
+- [#11013](https://github.com/1024pix/pix/pull/11013) [BUMP] Update dependency ember-resolver to v13 (certif).
+- [#11025](https://github.com/1024pix/pix/pull/11025) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.1 (certif).
+- [#11024](https://github.com/1024pix/pix/pull/11024) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.1 (admin).
+- [#11010](https://github.com/1024pix/pix/pull/11010) [BUMP] Update dependency ember-cli to v6 (junior).
+
 ## v5.12.0 (08/01/2025)
 
 
