@@ -338,6 +338,67 @@ describe('Acceptance | Script | Get Modules as CSV', function () {
               },
             ],
           },
+          {
+            id: '59e051bd-103f-41fa-8358-5028eaa38c57\n',
+            type: 'activity',
+            title: 'Des flashcards pour mémoriser',
+            components: [
+              {
+                type: 'element',
+                element: {
+                  id: '47823e8f-a4af-44d6-96f7-5b6fc7bc6b51',
+                  type: 'flashcards',
+                  instruction:
+                    '<p>Lisez la question, essayez de trouver la réponse puis retourner la carte en cliquant dessus.<br>Cela permet de tester votre mémoire 🎯</p>',
+                  title: 'Introduction à la poésie',
+                  introImage: {
+                    url: 'https://images.pix.fr/modulix/didacticiel/intro-flashcards.png',
+                  },
+                  cards: [
+                    {
+                      id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+                      recto: {
+                        image: {
+                          url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
+                        },
+                        text: 'Qui a écrit « Le Dormeur du Val ? »',
+                      },
+                      verso: {
+                        image: {
+                          url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
+                        },
+                        text: '<p>Arthur Rimbaud</p>',
+                      },
+                    },
+                    {
+                      id: '48d0cd29-1e08-4b18-b15a-411ab83e5d3c',
+                      recto: {
+                        text: "Comment s'appelait la fille de Victor Hugo, évoquée dans le poème « Demain dès l'aube » ?",
+                      },
+                      verso: {
+                        text: '<p>Léopoldine</p>',
+                      },
+                    },
+                    {
+                      id: '2611784c-cf3f-4445-998d-d02fa568da0c',
+                      recto: {
+                        image: {
+                          url: 'https://images.pix.fr/modulix/didacticiel/icon.svg',
+                        },
+                        text: "Quel animal a des yeux « mêlés de métal et d'agathe » selon Charles Baudelaire ?",
+                      },
+                      verso: {
+                        image: {
+                          url: 'https://images.pix.fr/modulix/didacticiel/chaton.jpg',
+                        },
+                        text: '<p>Le chat</p>',
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+          },
         ],
       },
     ];
@@ -349,6 +410,6 @@ describe('Acceptance | Script | Get Modules as CSV', function () {
     expect(modulesListAsCsv).to.be.a('string');
     expect(modulesListAsCsv).to
       .equal(`\ufeff"Module"\t"ModuleTotalElements"\t"ModuleLink"\t"ModuleLevel"\t"ModuleTotalGrains"\t"ModuleTotalLessons"\t"ModuleTotalActivities"\t"ModuleTotalChallenges"\t"ModuleTotalDiscoveries"\t"ModuleTotalSummaries"\t"ModuleDuration"\t"ModuleIsBeta"
-"didacticiel-modulix"\t11\t"https://app.recette.pix.fr/modules/didacticiel-modulix"\t"Débutant"\t8\t1\t4\t1\t1\t1\t"=TEXT(5/24/60; ""mm:ss"")"\t"=TRUE"`);
+"didacticiel-modulix"\t13\t"https://app.recette.pix.fr/modules/didacticiel-modulix"\t"Débutant"\t9\t1\t5\t1\t1\t1\t"=TEXT(5/24/60; ""mm:ss"")"\t"=TRUE"`);
   });
 });

@@ -32,7 +32,18 @@ if (import.meta.url.startsWith('file:')) {
 }
 
 export function getElements(modules) {
-  const ELEMENT_TYPES = ['download', 'embed', 'image', 'qcm', 'qcu', 'qrocm', 'separator', 'text', 'video'];
+  const ELEMENT_TYPES = [
+    'download',
+    'embed',
+    'flashcards',
+    'image',
+    'qcm',
+    'qcu',
+    'qrocm',
+    'separator',
+    'text',
+    'video',
+  ];
 
   const elements = [];
   for (const module of modules) {
