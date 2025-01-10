@@ -8,8 +8,8 @@ import timezone from 'dayjs/plugin/timezone.js';
 import utc from 'dayjs/plugin/utc.js';
 import lodash from 'lodash';
 
-import * as cpfCertificationXmlExportService from '../../../../../../lib/domain/services/cpf-certification-xml-export-service.js';
 import { CpfExportBuilderJobController } from '../../../../../../src/certification/session-management/application/jobs/cpf-export-builder-job-controller.js';
+import * as cpfCertificationXmlExportService from '../../../../../../src/certification/session-management/domain/services/cpf-certification-xml-export-service.js';
 import { usecases } from '../../../../../../src/certification/session-management/domain/usecases/index.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
