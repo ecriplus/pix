@@ -1,7 +1,7 @@
 import { clickByName, clickByText, render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
-import ModulixNavbar from 'mon-pix/components/module/navbar';
+import ModulixNavbar from 'mon-pix/components/module/layout/navbar';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 

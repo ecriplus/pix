@@ -8,7 +8,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
-import ModulixGrain from 'mon-pix/components/module/grain';
+import ModulixGrain from 'mon-pix/components/module/grain/grain';
 
 export default class ModulixPreview extends Component {
   @service store;

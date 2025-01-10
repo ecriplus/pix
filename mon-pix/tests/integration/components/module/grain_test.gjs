@@ -3,7 +3,7 @@ import { clickByName, render } from '@1024pix/ember-testing-library';
 import { find } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
-import ModuleGrain from 'mon-pix/components/module/grain';
+import ModuleGrain from 'mon-pix/components/module/grain/grain';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -20,7 +20,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
     // when
     const screen = await render(hbs`
-      <Module::Grain @grain={{this.grain}} />`);
+      <Module::Grain::Grain @grain={{this.grain}} />`);
 
     // then
     assert.ok(screen.getByRole('heading', { name: grain.title, level: 2 }));
@@ -38,7 +38,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // when
       const screen = await render(hbs`
-        <Module::Grain @grain={{this.grain}} @transition={{this.transition}} />`);
+        <Module::Grain::Grain @grain={{this.grain}} @transition={{this.transition}} />`);
 
       // then
       assert.ok(screen.getByText('transition text'));
@@ -54,7 +54,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // when
       await render(hbs`
-        <Module::Grain @grain={{this.grain}} />`);
+        <Module::Grain::Grain @grain={{this.grain}} />`);
 
       // then
       assert.dom('.grain__header').doesNotExist();
@@ -70,7 +70,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // when
       const screen = await render(hbs`
-        <Module::Grain @grain={{this.grain}} />`);
+        <Module::Grain::Grain @grain={{this.grain}} />`);
 
       // then
       assert.dom(find('.grain-card--activity')).exists();
@@ -85,7 +85,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // when
       const screen = await render(hbs`
-        <Module::Grain @grain={{this.grain}} />`);
+        <Module::Grain::Grain @grain={{this.grain}} />`);
 
       // then
       assert.dom(find('.grain-card--lesson')).exists();
@@ -100,7 +100,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // when
       const screen = await render(hbs`
-        <Module::Grain @grain={{this.grain}} />`);
+        <Module::Grain::Grain @grain={{this.grain}} />`);
 
       // then
       assert.dom(find('.grain-card--lesson')).exists();
@@ -115,7 +115,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // when
       const screen = await render(hbs`
-        <Module::Grain @grain={{this.grain}} />`);
+        <Module::Grain::Grain @grain={{this.grain}} />`);
 
       // then
       assert.dom(find('.grain-card--lesson')).exists();
@@ -130,7 +130,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // when
       const screen = await render(hbs`
-        <Module::Grain @grain={{this.grain}} />`);
+        <Module::Grain::Grain @grain={{this.grain}} />`);
 
       // then
       assert.dom(find('.grain-card--discovery')).exists();
@@ -145,7 +145,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // when
       const screen = await render(hbs`
-        <Module::Grain @grain={{this.grain}} />`);
+        <Module::Grain::Grain @grain={{this.grain}} />`);
 
       // then
       assert.dom(find('.grain-card--challenge')).exists();
@@ -160,7 +160,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // when
       const screen = await render(hbs`
-        <Module::Grain @grain={{this.grain}} />`);
+        <Module::Grain::Grain @grain={{this.grain}} />`);
 
       // then
       assert.dom(find('.grain-card--summary')).exists();
@@ -186,7 +186,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
         // when
         const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} />`);
+          <Module::Grain::Grain @grain={{this.grain}} />`);
 
         // then
         assert.ok(screen.getByText('element content'));
@@ -213,7 +213,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
         // when
         const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} @passage={{this.passage}} />`);
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} />`);
 
         // then
         assert.strictEqual(screen.getAllByRole('radio').length, qcuElement.proposals.length);
@@ -273,7 +273,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
         // when
         const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} @passage={{this.passage}} />`);
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} />`);
 
         // then
         assert.ok(screen);
@@ -301,7 +301,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
         // when
         const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} />`);
+          <Module::Grain::Grain @grain={{this.grain}} />`);
 
         // then
         assert.ok(screen.getByRole('img', { name: 'alt text' }).hasAttribute('src', url));
@@ -342,7 +342,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
         // when
         const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} />`);
+          <Module::Grain::Grain @grain={{this.grain}} />`);
 
         // then
         assert.dom(screen.getByRole('button', { name: 'Commencer' })).exists();
@@ -367,7 +367,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
         // when
         const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} />`);
+          <Module::Grain::Grain @grain={{this.grain}} />`);
 
         // then
         const details = screen.getByRole('group');
@@ -393,7 +393,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
         // when
         const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
+          <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
 
         // then
         assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.skip') })).doesNotExist();
@@ -418,7 +418,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
           // when
           const screen = await render(hbs`
-            <Module::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
+            <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
 
           // then
           assert.dom(screen.queryByRole('button', { name: 'Continuer' })).exists();
@@ -440,7 +440,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
           // when
           const screen = await render(hbs`
-            <Module::Grain @grain={{this.grain}} @canMoveToNextGrain={{false}} @passage={{this.passage}} />`);
+            <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{false}} @passage={{this.passage}} />`);
 
           // then
           assert.dom(screen.queryByRole('button', { name: 'Continuer' })).doesNotExist();
@@ -464,7 +464,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
           // when
           const screen = await render(hbs`
-            <Module::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
+            <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
 
           // then
           assert.dom(screen.queryByRole('button', { name: 'Continuer' })).doesNotExist();
@@ -485,7 +485,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
           // when
           const screen = await render(hbs`
-            <Module::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
+            <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
 
           // then
           assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.skip') })).exists();
@@ -507,7 +507,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
           // when
           const screen = await render(hbs`
-            <Module::Grain @grain={{this.grain}} @canMoveToNextGrain={{false}} @passage={{this.passage}} />`);
+            <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{false}} @passage={{this.passage}} />`);
 
           // then
           assert.dom(screen.queryByRole('button', { name: 'Continuer' })).doesNotExist();
@@ -528,7 +528,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
           // when
           const screen = await render(hbs`
-            <Module::Grain @grain={{this.grain}} @canMoveToNextGrain={{false}} @passage={{this.passage}} />`);
+            <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{false}} @passage={{this.passage}} />`);
 
           // then
           assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.skip') })).doesNotExist();
@@ -555,7 +555,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
       // when
       await render(
         hbs`
-          <Module::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}}
+          <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}}
                          @onGrainContinue={{this.onGrainContinue}} />`,
       );
       await clickByName('Continuer');
@@ -585,7 +585,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
       // when
       await render(
         hbs`
-          <Module::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}}
+          <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}}
                          @onGrainContinue={{this.onGrainContinue}} @onGrainSkip={{this.onGrainSkip}}
                          @passage={{this.passage}} />`,
       );
@@ -615,7 +615,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
       // when
       await render(hbs`
-        <Module::Grain @grain={{this.grain}} @onElementRetry={{this.onElementRetry}} @canMoveToNextGrain={{true}}
+        <Module::Grain::Grain @grain={{this.grain}} @onElementRetry={{this.onElementRetry}} @canMoveToNextGrain={{true}}
                        @passage={{this.passage}} />`);
       await clickByName(t('pages.modulix.buttons.activity.retry'));
 
@@ -695,7 +695,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
         // when
         await render(hbs`
-          <Module::Grain @grain={{this.grain}} @passage={{this.passage}} @onElementAnswer={{this.onElementAnswer}} />`);
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @onElementAnswer={{this.onElementAnswer}} />`);
 
         // then
         await clickByName('radio1');
@@ -762,7 +762,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
         // when
         await render(hbs`
-          <Module::Grain @grain={{this.grain}} @passage={{this.passage}}  @onElementRetry={{this.onElementRetry}} />`);
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}}  @onElementRetry={{this.onElementRetry}} />`);
 
         // then
         await clickByName('radio1');
@@ -819,7 +819,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
           // when
           const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}}  />`);
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}}  />`);
 
           // then
           assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.grain.skip') })).exists();
@@ -869,7 +869,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
           // when
           const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}}  />`);
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}}  />`);
 
           // then
           assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.continue') })).doesNotExist();
@@ -931,7 +931,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
           // when
           const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
           await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 
           // then
@@ -980,7 +980,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
           // when
           const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
           await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 
           // then
@@ -1047,7 +1047,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
             // when
             const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
 
             // then
             assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.grain.skip') })).exists();
@@ -1096,7 +1096,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
             // when
             const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
 
             // then
             assert
@@ -1150,7 +1150,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
               // when
               const screen = await render(hbs`
-            <Module::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
+            <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
               await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 
               // then
@@ -1200,7 +1200,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
               // when
               const screen = await render(hbs`
-            <Module::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
+            <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
               await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 
               // then
@@ -1269,7 +1269,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
             // when
             const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}}  />`);
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}}  />`);
 
             // then
             assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.grain.skip') })).exists();
@@ -1329,7 +1329,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
             // when
             const screen = await render(hbs`
-          <Module::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}}  />`);
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}}  />`);
 
             // then
             assert
@@ -1405,7 +1405,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
               // when
               const screen = await render(hbs`
-                <Module::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
+                <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
 
               await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 
@@ -1468,7 +1468,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
               // when
               const screen = await render(hbs`
-                <Module::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
+                <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
 
               await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 

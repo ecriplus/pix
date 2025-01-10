@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
-import ModuleRecap from 'mon-pix/components/module/recap';
+import ModuleRecap from 'mon-pix/components/module/instruction/recap';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';

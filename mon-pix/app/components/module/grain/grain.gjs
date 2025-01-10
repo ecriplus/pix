@@ -5,9 +5,9 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
-import Element from 'mon-pix/components/module/element';
+import Element from 'mon-pix/components/module/component/element';
+import Stepper from 'mon-pix/components/module/component/stepper';
 import GrainTag from 'mon-pix/components/module/grain/tag';
-import Stepper from 'mon-pix/components/module/stepper';
 import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 import didInsert from 'mon-pix/modifiers/modifier-did-insert';
 

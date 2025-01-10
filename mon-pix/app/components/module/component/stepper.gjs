@@ -4,11 +4,11 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import ModuleGrain from 'mon-pix/components/module/grain';
-import Step from 'mon-pix/components/module/step';
+import Step from 'mon-pix/components/module/component/step';
+import ModuleGrain from 'mon-pix/components/module/grain/grain';
 import { inc } from 'mon-pix/helpers/inc';
 
-import didInsert from '../../modifiers/modifier-did-insert';
+import didInsert from '../../../modifiers/modifier-did-insert';
 
 export default class ModulixStepper extends Component {
   @service modulixAutoScroll;
