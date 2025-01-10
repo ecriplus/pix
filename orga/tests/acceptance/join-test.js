@@ -197,7 +197,7 @@ module('Acceptance | join', function (hooks) {
 
         // then
         assert.strictEqual(currentURL(), '/cgu');
-        assert.ok(screen.getByText("Conditions générales d'utilisation de la plateforme Pix Orga"));
+        assert.ok(screen.getByText(t('components.terms-of-service.title.requested')));
       });
 
       test('does not show menu nor top bar', async function (assert) {
@@ -480,7 +480,7 @@ module('Acceptance | join', function (hooks) {
 
             // then
             assert.strictEqual(currentURL(), '/cgu');
-            assert.ok(screen.getByText('Terms and Conditions of use of the Pix Orga plateform'));
+            assert.ok(screen.getByText('Please accept our Terms of service'));
           });
         });
       });
