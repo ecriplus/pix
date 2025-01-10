@@ -1,6 +1,6 @@
 import iconv from 'iconv-lite';
 
-import { CsvColumn } from '../../../../../../lib/infrastructure/serializers/csv/csv-column.js';
+import { CsvColumn } from '../../../../../../src/shared/infrastructure/serializers/csv/csv-column.js';
 import { CsvParser } from '../../../../../../src/shared/infrastructure/serializers/csv/csv-parser.js';
 import { catchErr, expect } from '../../../../../test-helper.js';
 

@@ -4,7 +4,7 @@
 
 import { createReadStream } from 'node:fs';
 
-import { CsvColumn } from '../../../../lib/infrastructure/serializers/csv/csv-column.js';
+import { CsvColumn } from '../../../../src/shared/infrastructure/serializers/csv/csv-column.js';
 import { getDataBuffer } from '../../../prescription/learner-management/infrastructure/utils/bufferize/get-data-buffer.js';
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { CsvParser } from '../../../shared/infrastructure/serializers/csv/csv-parser.js';

@@ -1,4 +1,4 @@
-import { CsvColumn } from '../../../../../../lib/infrastructure/serializers/csv/csv-column.js';
+import { CsvColumn } from '../../../../../shared/infrastructure/serializers/csv/csv-column.js';
 
 class CampaignIdsCsvHeader {
   constructor() {
