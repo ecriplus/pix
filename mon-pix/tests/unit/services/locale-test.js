@@ -27,6 +27,60 @@ module('Unit | Services | locale', function (hooks) {
     sinon.stub(intlService, 'setLocale');
   });
 
+  module('#isSupportedLocale', function () {
+    module('when locale is supported', function () {
+      test('returns true', function (assert) {
+        // given
+        const locale = 'nl-BE';
+
+        // when
+        const result = localeService.isSupportedLocale(locale);
+
+        // then
+        assert.true(result);
+      });
+    });
+
+    module('when locale is supported but not given in canonical form', function () {
+      test('returns true', function (assert) {
+        // given
+        const locale = 'nl-be';
+
+        // when
+        const result = localeService.isSupportedLocale(locale);
+
+        // then
+        assert.true(result);
+      });
+    });
+
+    module('when locale is valid but not supported', function () {
+      test('returns false', function (assert) {
+        // given
+        const locale = 'ko';
+
+        // when
+        const result = localeService.isSupportedLocale(locale);
+
+        // then
+        assert.false(result);
+      });
+    });
+
+    module('when locale is invalid', function () {
+      test('returns false', function (assert) {
+        // given
+        const locale = 'invalid_locale_in_bad_format';
+
+        // when
+        const result = localeService.isSupportedLocale(locale);
+
+        // then
+        assert.false(result);
+      });
+    });
+  });
+
   module('#handleUnsupportedLanguage', function () {
     module('when language is not supported', function () {
       test('returns default language', function (assert) {
