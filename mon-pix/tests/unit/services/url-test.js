@@ -496,7 +496,7 @@ module('Unit | Service | url', function (hooks) {
           const service = this.owner.lookup('service:url');
           service.currentDomain = { isFranceDomain: false };
           service.intl = { primaryLocale: DUTCH_INTERNATIONAL_LOCALE };
-          const expectedSupportHomeUrl = 'https://pix.org/nl-be/support';
+          const expectedSupportHomeUrl = 'https://pix.org/nl-BE/support';
 
           // when
           const supportHomeUrl = service.supportHomeUrl;

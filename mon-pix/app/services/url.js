@@ -8,6 +8,7 @@ const SPANISH_INTERNATIONAL_LOCALE = 'es';
 export default class Url extends Service {
   @service currentDomain;
   @service intl;
+  @service locale;
 
   definedHomeUrl = ENV.rootURL;
 
@@ -108,22 +109,22 @@ export default class Url extends Service {
   }
 
   get supportHomeUrl() {
-    const currentLanguage = this.intl.primaryLocale;
+    const currentLocale = this.intl.primaryLocale;
 
     if (this.currentDomain.isFranceDomain) {
       return 'https://pix.fr/support';
     }
 
-    switch (currentLanguage) {
-      case ENGLISH_INTERNATIONAL_LOCALE:
-        return 'https://pix.org/en/support';
-      case DUTCH_INTERNATIONAL_LOCALE:
-        return 'https://pix.org/nl-be/support';
-      case SPANISH_INTERNATIONAL_LOCALE:
-        return 'https://pix.org/en/support';
-      default:
-        return 'https://pix.org/fr/support';
+    let locale;
+    if (currentLocale == 'nl') {
+      locale = 'nl-BE';
+    } else if (this.locale.isSupportedLocale(currentLocale)) {
+      locale = currentLocale;
+    } else {
+      locale = ENGLISH_INTERNATIONAL_LOCALE;
     }
+
+    return `https://pix.org/${locale}/support`;
   }
 
   get serverStatusUrl() {
