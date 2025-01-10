@@ -239,7 +239,7 @@
                       "size": 10,
                       "display": "inline",
                       "placeholder": "Cliquer ici",
-                      "ariaLabel": "Cliquer ici",
+                      "ariaLabel": "",
                       "defaultValue": "",
                       "tolerances": [
                         "t1"
@@ -495,7 +495,7 @@
                       "size": 10,
                       "display": "inline",
                       "placeholder": "Cliquer ici",
-                      "ariaLabel": "",
+                      "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [
                         "t1"
@@ -530,7 +530,7 @@
                       "size": 10,
                       "display": "inline",
                       "placeholder": "Cliquer ici",
-                      "ariaLabel": "",
+                      "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [
                         "t1"
@@ -565,7 +565,7 @@
                       "size": 10,
                       "display": "inline",
                       "placeholder": "Cliquer ici",
-                      "ariaLabel": "",
+                      "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [
                         "t1"
