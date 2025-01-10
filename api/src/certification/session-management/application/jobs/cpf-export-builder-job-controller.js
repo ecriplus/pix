@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone.js';
 import utc from 'dayjs/plugin/utc.js';
 
-import * as cpfCertificationXmlExportService from '../../../../../lib/domain/services/cpf-certification-xml-export-service.js';
+import * as cpfCertificationXmlExportService from '../../../../../src/certification/session-management/domain/services/cpf-certification-xml-export-service.js';
 import { JobController } from '../../../../shared/application/jobs/job-controller.js';
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { CpfExportBuilderJob } from '../../domain/models/CpfExportBuilderJob.js';
