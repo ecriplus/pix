@@ -1,0 +1,625 @@
+{
+  "id": "654c44dc-0560-4acc-9860-4a67c923577f",
+  "slug": "bases-clavier-1",
+  "title": "Les bases du clavier (sur un ordinateur) -  1",
+  "isBeta": false,
+  "details": {
+    "image": "",
+    "description": "<p>Dans ce module, vous découvrirez ce qu’est un clavier et à quoi il sert.⌨️<br>Vous apprendrez à taper vos premiers caractères et à modifier du texte.<br>Pour ce module, vous devez déjà savoir utiliser une souris d’ordinateur.</p>",
+    "duration": 10,
+    "level": "Débutant",
+    "objectives": [
+      "<p>Utiliser les touches de base du clavier</p>",
+      "<p>Taper les caractères essentiels du clavier</p>",
+      "<p>Modifier du texte</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "transitionTexts": [
+    {
+      "grainId": "ce5797d0-074c-4a34-8004-c458df78c302",
+      "content": "<p>Dans ce module, vous allez apprendre à reconnaître les touches de base du clavier pour taper du texte.</p>"
+    },
+    {
+      "grainId": "421f64b0-a7b0-4855-8e24-3e4f86178a3e",
+      "content": "<p>À présent, vous allez découvrir les principales zones du clavier.</p>"
+    },
+    {
+      "grainId": "05985463-fbc5-43fe-8d39-038d0fa5c347",
+      "content": "<p>Vous connaissez maintenant les différentes zones du clavier. <br>Découvrez les principales touches nécessaires pour taper et modifier du texte.</p>"
+    },
+    {
+      "grainId": "62699177-a148-4297-a965-729158816d59",
+      "content": "<p>Bravo ! 🎉 Vous avez tapé vos premiers mots.<br>À présent, apprenez en plus sur la zone de texte.</p>"
+    },
+    {
+      "grainId": "e7390f32-cf29-49c4-af61-cb0ee142d06e",
+      "content": "<p>Bravo ! 🎉 Vous avez tapé vos premiers mots. <br>À présent, apprenez en plus sur la zone de texte.</p>"
+    },
+    {
+      "grainId": "36a17bbd-4975-4f9d-878e-0759801956fd",
+      "content": "<p>Maintenant, découvrez les autres touches utiles pour modifier du texte. ⌨️</p>"
+    },
+    {
+      "grainId": "1b35e115-f40f-4309-bc8a-dc8122f63e25",
+      "content": "<p>Voyons si vous avez retenu l’essentiel. 🎯</p>"
+    },
+    {
+      "grainId": "",
+      "content": ""
+    },
+    {
+      "grainId": "149c809f-17dd-418e-80d3-2fe3fa3b0e6c",
+      "content": "<p>Certaines lettres ont des accents. Voyez où les trouver sur le clavier.</p>"
+    },
+    {
+      "grainId": "9b722101-2b15-4a45-be20-6604dc9c0dbe",
+      "content": "<p>Vous allez maintenant passer à la pratique. ⌨️</p>"
+    }
+  ],
+  "grains": [
+    {
+      "id": "ce5797d0-074c-4a34-8004-c458df78c302",
+      "type": "lesson",
+      "title": "Les différents types de clavier",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "bcd20400-781c-4b7d-82c3-d348ddef88d2",
+            "type": "text",
+            "content": "<p>Le clavier fait partie de l'équipement de base d’un ordinateur, avec la souris. <br>Le clavier est composé de touches sur lesquelles on peut appuyer. Les claviers peuvent avoir différentes formes, tailles, couleurs ou disposition des touches.<br></p>\n<p>Il y a différents types de clavier : </p>\n<ul>\n    <li>les claviers avec un fil</li>\n    <li>les claviers sans fil</li>\n    <li>les claviers inclus dans l’ordinateur</li>\n</ul>\n<p>Globalement, tous ces claviers servent à faire les mêmes choses.<br></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "9bb0a0d4-0075-46eb-acaf-68e349024028",
+            "type": "image",
+            "url": "https://i.imgur.com/gXJXHwZ.png",
+            "alt": "",
+            "alternativeText": "<p>Les claviers avec un fil : photographies de 2 claviers avec fil de taille et de forme différentes.</p><p>Les claviers sans fil : photographies de 2 claviers sans fil&nbsp;de taille et de couleur différentes.</p><p>Les claviers inclus dans l'ordinateur : photographie d'un ordinateur portable.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "c0b804d6-2b23-49c6-8aec-c18fb385545a",
+            "type": "separator"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "cd613fa6-2903-4932-a1f7-5b7d51ac0a41",
+            "type": "text",
+            "content": "<p>🔎 <strong>Observez : quel type de clavier avez-vous ?</strong><br></p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "421f64b0-a7b0-4855-8e24-3e4f86178a3e",
+      "type": "discovery",
+      "title": "Les zones du clavier",
+      "components": [
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "d6bb5ad8-bd97-4116-839d-425a444fcdfd",
+                  "type": "text",
+                  "content": "<p>Il y a 4 zones principales sur un clavier :</p>"
+                },
+                {
+                  "id": "e86e4e5f-868e-4483-a995-86d89121e1a4",
+                  "type": "image",
+                  "url": "https://i.imgur.com/Df1QI7s.png",
+                  "alt": "",
+                  "alternativeText": "<ul><li>touches fonctions</li><li>caractères spéciaux et accents</li><li>lettres de l'alphabet</li><li>flèches directionnelles</li></ul>"
+                },
+                {
+                  "id": "1f25f056-78ad-42cd-8679-49188fe4e2a2",
+                  "type": "text",
+                  "content": "<p>🤔<strong>Bon à savoir</strong> </p>\n<p>Les touches peuvent être disposées de différentes manières, en fonction des modèles, des pays et de la langue. 🌍\n    </p><p>En France, on utilise le clavier AZERTY. Il porte ce nom, car les lettres A, Z, E, R, T, Y sont les six premières lettres affichées sur le clavier\n</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "24829c18-2220-4cb8-9749-296d8c314353",
+                  "type": "text",
+                  "content": "<p>👇Dans l’espace ci-dessous, découvrez les zones du clavier et quelques touches que vous allez utiliser ensuite :</p>"
+                },
+                {
+                  "id": "274d2a22-5c45-40a3-87e2-13f650f49560",
+                  "type": "text",
+                  "content": "<p>[Gdevelop]</p>"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05985463-fbc5-43fe-8d39-038d0fa5c347",
+      "type": "lesson",
+      "title": "Introduction : les touches de base",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "e4c30736-5efe-4a0d-bacc-b41e3546d47c",
+            "type": "text",
+            "content": "<p>Pour taper et modifier du texte, il faut utiliser des touches de différentes zones.</p>\n<p>👇Voici les touches essentielles :</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "6c90b56e-2e81-4320-9002-04a81fb07a39",
+            "type": "image",
+            "url": "https://i.imgur.com/d7dO78H.png",
+            "alt": "",
+            "alternativeText": "<p>Les touches du module :&nbsp;</p><ul><li>les accents</li><li>effacer et entrée</li><li>les lettres</li><li>espace</li><li>les flêches directionnelles</li><br></ul>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "62699177-a148-4297-a965-729158816d59",
+      "type": "activity",
+      "title": "La saisie de premiers mots",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "cfff35e1-f84d-48b1-95ae-4cc7f2ff79e0",
+            "type": "text",
+            "content": "<p>Pour taper du texte, il faut placer le pointeur de la souris dans une zone de texte puis cliquer.</p>\n<p><strong>Dans l’espace ci-dessous, cliquez dans la zone indiquée puis tapez les mots demandés.</strong><br>Vous pouvez essayer autant de fois que vous voulez.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "62b13b03-4b39-4893-a3ac-5b55c5a4b0a2",
+            "type": "text",
+            "content": "<p>[Gdevelop]</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b72675fd-48d4-445e-804f-6304fe70ec52",
+      "type": "activity",
+      "title": "La zone de texte",
+      "components": [
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "e7390f32-cf29-49c4-af61-cb0ee142d06e",
+                  "type": "text",
+                  "content": "<p>Une zone de texte est un endroit où on peut taper, modifier et effacer du texte. Pour reconnaître une zone de texte, vous pouvez vous aider du pointeur de la souris. 🖱️</p>\n<p>Lorsque vous faites glisser votre pointeur sur une zone de texte, il prend la forme d’une barre verticale.</p>"
+                },
+                {
+                  "id": "7923e0aa-3e35-493d-8d42-0b29cdc0ed08",
+                  "type": "image",
+                  "url": "https://i.imgur.com/b5lEyJu.png",
+                  "alt": "",
+                  "alternativeText": ""
+                },
+                {
+                  "id": "3fe83246-32a9-471a-a081-9ced72f4380a",
+                  "type": "text",
+                  "content": "<p>Vous pouvez alors cliquer, une barre verticale s’affiche et clignote. C’est le curseur de texte. Vous pouvez commencer à taper, modifier ou effacer du texte à cet endroit.</p>"
+                },
+                {
+                  "id": "cf727c42-e967-493b-ae95-59d3b15806db",
+                  "type": "image",
+                  "url": "https://i.imgur.com/dua3b7a.gif",
+                  "alt": "",
+                  "alternativeText": ""
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "f020568f-8d85-4b8a-97a2-6acefa0b5edf",
+                  "type": "qrocm",
+                  "instruction": "<p>À vous de jouer, tapez «&nbsp;cornichon&nbsp;» dans la zone de texte ci-dessous :</p>",
+                  "proposals": [
+                    {
+                      "input": "1",
+                      "type": "input",
+                      "inputType": "text",
+                      "size": 10,
+                      "display": "inline",
+                      "placeholder": "Cliquer ici",
+                      "ariaLabel": "Cliquer ici",
+                      "defaultValue": "",
+                      "tolerances": [
+                        "t1"
+                      ],
+                      "solutions": [
+                        "cornichon"
+                      ]
+                    }
+                  ],
+                  "feedbacks": {
+                    "valid": "<p>Bonne réponse ! 🥒</p><p>Bravo ! C’est le bon mot !</p><br>",
+                    "invalid": "<p>Mauvaise réponse.🍽️ </p><p>Bravo ! Mais ce n’est pas le bon mot. Réessayez !<br></p>"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "36a17bbd-4975-4f9d-878e-0759801956fd",
+      "type": "lesson",
+      "title": "Les touches espace, entrée, effacer et les flèches.",
+      "components": [
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "b9e30a99-98c1-4c59-ac9b-d9b437042c1f",
+                  "type": "text",
+                  "content": "<p>Pour modifier du texte, il faut utiliser d’autres touches que les touches lettres. <br> Voici les trois touches les plus utiles :&nbsp; <br></p>\n<ul>\n    <li><strong>Espace</strong></li>\n    <li><strong>Entrée</strong></li>\n    <li><strong>Effacer</strong></li>\n</ul>\n<p>Ces 3 touches se trouvent dans la zone Caractères spéciaux et accents.</p>"
+                },
+                {
+                  "id": "9eea4304-9aee-40be-8259-88ccd2b030b3",
+                  "type": "separator"
+                },
+                {
+                  "id": "e314ff25-bd46-475b-b18b-0ef1952735c7",
+                  "type": "text",
+                  "content": "<p>La touche <strong>Espace </strong>permet de créer un espace vide entre deux mots.</p>"
+                },
+                {
+                  "id": "b8805656-09a9-4d92-8a19-d13cd4e6149e",
+                  "type": "image",
+                  "url": "https://i.imgur.com/WjHwCtB.gif",
+                  "alt": "",
+                  "alternativeText": ""
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "b65c1d05-27b9-429e-b8aa-b63bef94c67e",
+                  "type": "text",
+                  "content": "<p>La touche <strong>Entrée </strong>permet d’aller à la ligne. Taper sur la touche Entrée déplace le curseur de texte vers le début de la ligne suivante.</p>"
+                },
+                {
+                  "id": "82fc806d-0d75-4202-85af-dfe7fca24315",
+                  "type": "image",
+                  "url": "https://i.imgur.com/kHvsYDU.gif",
+                  "alt": "",
+                  "alternativeText": ""
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "188a5ce5-c163-47d0-b718-1ac64db4283e",
+                  "type": "text",
+                  "content": "<p>La touche <strong>Effacer </strong>permet de supprimer le caractère à gauche du curseur de texte.</p>"
+                },
+                {
+                  "id": "de866e42-a119-461b-b73a-c684da091d77",
+                  "type": "image",
+                  "url": "https://i.imgur.com/2ACX4y0.gif",
+                  "alt": "",
+                  "alternativeText": ""
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "6dee7fcf-7faf-4748-9c56-70e93d7d4914",
+                  "type": "text",
+                  "content": "<p>Pour déplacer le curseur de texte, vous pouvez utiliser les <strong>Flèches directionnelles</strong>.</p>\n<p>➡️Par exemple : vous avez oublié de mettre un espace entre table et chaise, vous pouvez déplacer le curseur pour ajouter cet espace.</p>"
+                },
+                {
+                  "id": "5d93c1b7-2f8d-4891-9443-9a2f86104f4e",
+                  "type": "image",
+                  "url": "https://i.imgur.com/DcF3Imr.gif",
+                  "alt": "",
+                  "alternativeText": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1b35e115-f40f-4309-bc8a-dc8122f63e25",
+      "type": "activity",
+      "title": "La correction de textes avec espace, entrée, effacer.",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "5cea384d-f3bd-450c-b250-f6fb9a34cafa",
+            "type": "text",
+            "content": "<p><strong>Dans la zone ci-dessous, vous allez devoir modifier une liste de courses en vous aidant des touches espace, entrée, effacer et des flèches.</strong></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "247c064e-8d6f-4b8c-9298-0a12f0643e27",
+            "type": "text",
+            "content": "<p>[Gdevelop]</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "caedc436-3ab8-45a8-a4b5-c7ee5b4f38c6",
+            "type": "text",
+            "content": "<p>💡Si besoin, cliquez sur <strong>Réinitialiser </strong>pour effacer toutes vos modifications.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "0011eb40-653d-402e-8ac9-1055d4b581c4",
+      "type": "summary",
+      "title": "Récapitulatif",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "f808343d-06ca-40b2-bc0f-57b2ae0ed267",
+            "type": "text",
+            "content": "<p><strong>Zone de texte</strong><br>\n    La zone de texte est une zone dans laquelle on peut <strong>taper du texte</strong>.<br>\n    Il faut <strong>cliquer dans cette zone</strong> avant de commencer à taper.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "5caed2cc-417c-4f49-8244-caba1e616d0d",
+            "type": "separator"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "7e6184ad-715d-40a7-9203-c13675e768c3",
+            "type": "text",
+            "content": "<p><strong>Lettres</strong><br>La zone des lettres se trouve au centre du clavier.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "32888459-7185-4028-94d6-80d129cd9037",
+            "type": "separator"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "c9fa6d2c-1b66-4b58-8f60-83db1ab8d96f",
+            "type": "text",
+            "content": "<p><strong>Modification</strong><br>Pour modifier du texte, les touches de base sont : <strong>Espace</strong>, <strong>Entrée </strong>et <strong>Effacer</strong>.<br>Les<strong> flèches directionnelles</strong> permettent de déplacer le curseur de texte.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "6d97096a-da8c-40cc-940e-d276627fcc37",
+            "type": "separator"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "73a8711f-e88e-4e3a-9611-f01dad6d5506",
+            "type": "text",
+            "content": "<p>\n</p><details>\n    <summary> 🤔 Bon à savoir </summary>\n    <p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.🙌\n        Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p>\n</details>\n<p></p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "149c809f-17dd-418e-80d3-2fe3fa3b0e6c",
+      "type": "lesson",
+      "title": "Les lettres accentuées",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "a0548b0c-335a-46cc-b6e0-af84998734c2",
+            "type": "text",
+            "content": "<p>Les lettres accentuées les plus courantes (é, è, ç, à, ù) sont placées sur les touches suivantes :</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "b61388bd-29a7-40cb-b3f0-89ce7a0b5565",
+            "type": "image",
+            "url": "https://i.imgur.com/OnWGmWD.png",
+            "alt": "",
+            "alternativeText": ""
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "0f10059b-3a41-47fd-808b-9f587cf7ab0c",
+            "type": "text",
+            "content": "<p>Les lettres accentuées sont écrites en bas à gauche des touches. <br>Il suffit de taper sur la touche pour que la lettre accentuée apparaisse à l’écran.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "9b722101-2b15-4a45-be20-6604dc9c0dbe",
+      "type": "activity",
+      "title": "L’utilisation des lettres accentuées ",
+      "components": [
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "0e98fbdf-c768-4906-b31c-747b43006a46",
+                  "type": "qrocm",
+                  "instruction": "<p>Tapez dans la zone de texte ci-dessous le mot demandé.</p>",
+                  "proposals": [
+                    {
+                      "type": "text",
+                      "content": "<p>céleri :&nbsp;</p>"
+                    },
+                    {
+                      "input": "1",
+                      "type": "input",
+                      "inputType": "text",
+                      "size": 10,
+                      "display": "inline",
+                      "placeholder": "Cliquer ici",
+                      "ariaLabel": "",
+                      "defaultValue": "",
+                      "tolerances": [
+                        "t1"
+                      ],
+                      "solutions": [
+                        "céleri"
+                      ]
+                    }
+                  ],
+                  "feedbacks": {
+                    "valid": "<p>Bonne réponse !&nbsp;<br></p>",
+                    "invalid": "<p>Mauvaise réponse.&nbsp;<br>\n    N'oubliez pas d'utiliser le e accentué.</p>"
+                  }
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "208495a6-50ae-45f6-84d2-e57d0626281e",
+                  "type": "qrocm",
+                  "instruction": "<p>Tapez dans la zone de texte ci-dessous le mot demandé.</p>",
+                  "proposals": [
+                    {
+                      "type": "text",
+                      "content": "<p>pastèque :&nbsp;</p>"
+                    },
+                    {
+                      "input": "2",
+                      "type": "input",
+                      "inputType": "text",
+                      "size": 10,
+                      "display": "inline",
+                      "placeholder": "Cliquer ici",
+                      "ariaLabel": "",
+                      "defaultValue": "",
+                      "tolerances": [
+                        "t1"
+                      ],
+                      "solutions": [
+                        "pastèque"
+                      ]
+                    }
+                  ],
+                  "feedbacks": {
+                    "valid": "<p>Bonne réponse !</p>",
+                    "invalid": "<p>Mauvaise réponse.<br>N'oubliez pas d'utiliser le e accentué.</p>"
+                  }
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "bb07a5f6-1f3d-484c-b7d9-98d01f1b2535",
+                  "type": "qrocm",
+                  "instruction": "<p>Tapez dans la zone de texte ci-dessous le mot demandé.</p>",
+                  "proposals": [
+                    {
+                      "type": "text",
+                      "content": "<p>bac à glaçons</p>"
+                    },
+                    {
+                      "input": "3",
+                      "type": "input",
+                      "inputType": "text",
+                      "size": 10,
+                      "display": "inline",
+                      "placeholder": "Cliquer ici",
+                      "ariaLabel": "",
+                      "defaultValue": "",
+                      "tolerances": [
+                        "t1"
+                      ],
+                      "solutions": [
+                        "bac à glaçons"
+                      ]
+                    }
+                  ],
+                  "feedbacks": {
+                    "valid": "<p>Bonne réponse !&nbsp;</p>",
+                    "invalid": "<p>Mauvaise réponse.<br>N'oubliez pas d'utiliser les deux lettres accentuées.</p>"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "27a8a7fe-62c1-4930-823f-5c9978f71395",
+      "type": "challenge",
+      "title": "Écriture d'un morceau de phrase",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "2e384ac8-402c-4745-b187-3cb7fc3eb916",
+            "type": "text",
+            "content": "<p><strong>Dans la zone de texte ci-dessous, modifiez la phrase qui apparaît pour écrire :&nbsp;</strong> </p>\n<p>«Bravo à vous pour avoir joué ce module où vous avez appris à utiliser un clavier.»<br></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "ddec6ee3-178f-4ab5-862a-fc776e9ff6f4",
+            "type": "text",
+            "content": "<p>[Gdevelop]</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "bed8da7e-630d-4400-b1c2-9e250ccee7e4",
+            "type": "text",
+            "content": "<p>💡Si besoin, cliquez sur <strong>Réinitialiser </strong>pour recommencer depuis le début.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
