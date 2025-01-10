@@ -29,7 +29,7 @@ function isAlertVisible(placesLots) {
 
 <template>
   {{#if (isAlertVisible @placesLots)}}
-    <PixNotificationAlert class="places-lots-alert" @type="warning" @withIcon="true">
+    <PixNotificationAlert @type="warning" @withIcon="true">
       {{t "banners.last-places-lot-available.message" days=(getCountdDownDays @placesLots)}}
     </PixNotificationAlert>
   {{/if}}
