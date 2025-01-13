@@ -25,19 +25,6 @@ const findPaginatedUserRecommendedTrainings = async function (
   return dependencies.trainingSerializer.serialize(userRecommendedTrainings, meta);
 };
 
-const reassignAuthenticationMethods = async function (request, h) {
-  const authenticationMethodId = request.params.authenticationMethodId;
-  const originUserId = request.params.userId;
-  const targetUserId = request.payload.data.attributes['user-id'];
-
-  await usecases.reassignAuthenticationMethodToAnotherUser({
-    originUserId,
-    targetUserId,
-    authenticationMethodId,
-  });
-  return h.response().code(204);
-};
-
 const findUserOrganizationsForAdmin = async function (
   request,
   h,
@@ -68,7 +55,6 @@ const userController = {
   findCertificationCenterMembershipsByUser,
   findPaginatedUserRecommendedTrainings,
   findUserOrganizationsForAdmin,
-  reassignAuthenticationMethods,
 };
 
 export { userController };

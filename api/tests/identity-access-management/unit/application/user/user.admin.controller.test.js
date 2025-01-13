@@ -1,4 +1,5 @@
 import { userAdminController } from '../../../../../src/identity-access-management/application/user/user.admin.controller.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { QUERY_TYPES } from '../../../../../src/identity-access-management/domain/constants/user-query.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
@@ -278,6 +279,51 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
 
       // then
       expect(result.source).to.be.equal(updatedUserSerialized);
+    });
+  });
+
+  describe('#reassignAuthenticationMethod', function () {
+    context('when the reassigned authentication method is gar', function () {
+      it('updates GAR authentication method user id', async function () {
+        // given
+        const originUserId = domainBuilder.buildUser({ id: 1 }).id;
+        const targetUserId = domainBuilder.buildUser({ id: 2 }).id;
+        const authenticationMethodId = 123;
+
+        sinon
+          .stub(usecases, 'reassignAuthenticationMethodToAnotherUser')
+          .withArgs({ originUserId, targetUserId, authenticationMethodId })
+          .resolves();
+
+        // when
+        const request = {
+          auth: {
+            credentials: {
+              userId: originUserId,
+            },
+          },
+          params: {
+            userId: originUserId,
+            authenticationMethodId,
+          },
+          payload: {
+            data: {
+              attributes: {
+                'user-id': targetUserId,
+                'identity-provider': NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
+              },
+            },
+          },
+        };
+        await userAdminController.reassignAuthenticationMethod(request, hFake);
+
+        // then
+        expect(usecases.reassignAuthenticationMethodToAnotherUser).to.have.been.calledWithExactly({
+          originUserId,
+          targetUserId,
+          authenticationMethodId,
+        });
+      });
     });
   });
 

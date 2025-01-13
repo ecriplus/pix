@@ -1,9 +1,8 @@
 import { userController } from '../../../../lib/application/users/user-controller.js';
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { usecases as devcompUsecases } from '../../../../src/devcomp/domain/usecases/index.js';
-import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { UserOrganizationForAdmin } from '../../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Controller | user-controller', function () {
   describe('#findPaginatedUserRecommendedTrainings', function () {
@@ -46,51 +45,6 @@ describe('Unit | Controller | user-controller', function () {
       });
       expect(trainingSerializer.serialize).to.have.been.calledWithExactly(userRecommendedTrainings, meta);
       expect(response).to.equal(expectedResult);
-    });
-  });
-
-  describe('#reassignAuthenticationMethods', function () {
-    context('when the reassigned authentication method is gar', function () {
-      it('should update gar authentication method user id', async function () {
-        // given
-        const originUserId = domainBuilder.buildUser({ id: 1 }).id;
-        const targetUserId = domainBuilder.buildUser({ id: 2 }).id;
-        const authenticationMethodId = 123;
-
-        sinon
-          .stub(usecases, 'reassignAuthenticationMethodToAnotherUser')
-          .withArgs({ originUserId, targetUserId, authenticationMethodId })
-          .resolves();
-
-        // when
-        const request = {
-          auth: {
-            credentials: {
-              userId: originUserId,
-            },
-          },
-          params: {
-            userId: originUserId,
-            authenticationMethodId,
-          },
-          payload: {
-            data: {
-              attributes: {
-                'user-id': targetUserId,
-                'identity-provider': NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
-              },
-            },
-          },
-        };
-        await userController.reassignAuthenticationMethods(request, hFake);
-
-        // then
-        expect(usecases.reassignAuthenticationMethodToAnotherUser).to.have.been.calledWithExactly({
-          originUserId,
-          targetUserId,
-          authenticationMethodId,
-        });
-      });
     });
   });
 

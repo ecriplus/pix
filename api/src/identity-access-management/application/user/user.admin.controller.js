@@ -116,10 +116,30 @@ const removeAuthenticationMethod = async function (request, h) {
 };
 
 /**
+ * @param request
+ * @param h
+ * @param dependencies
+ * @returns {Promise<void>}
+ */
+const reassignAuthenticationMethod = async function (request, h) {
+  const authenticationMethodId = request.params.authenticationMethodId;
+  const originUserId = request.params.userId;
+  const targetUserId = request.payload.data.attributes['user-id'];
+
+  await usecases.reassignAuthenticationMethodToAnotherUser({
+    originUserId,
+    targetUserId,
+    authenticationMethodId,
+  });
+  return h.response().code(204);
+};
+
+/**
  * @typedef {object} UserAdminController
  * @property {function} anonymizeUser
  * @property {function} findPaginatedFilteredUsers
  * @property {function} getUserDetails
+ * @property {function} reassignAuthenticationMethod
  * @property {function} removeAuthenticationMethod
  * @property {function} unblockUserAccount
  * @property {function} updateUserDetailsByAdmin
@@ -129,6 +149,7 @@ const userAdminController = {
   anonymizeUser,
   findPaginatedFilteredUsers,
   getUserDetails,
+  reassignAuthenticationMethod,
   removeAuthenticationMethod,
   unblockUserAccount,
   updateUserDetailsByAdmin,
