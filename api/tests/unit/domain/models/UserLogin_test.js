@@ -15,7 +15,7 @@ describe('Unit | Domain | Models | UserLogin', function () {
   });
 
   describe('#incrementFailureCount', function () {
-    it('should increment failure count', function () {
+    it('increments failure count', function () {
       // given
       const userLogin = new UserLogin({ userId: 666 });
 
@@ -28,7 +28,7 @@ describe('Unit | Domain | Models | UserLogin', function () {
   });
 
   describe('#resetUserTemporaryBlocking', function () {
-    it('should reset failure count and reset temporary blocked until', function () {
+    it('resets failure count and reset temporary blocked until', function () {
       // given
       const userLogin = new UserLogin({
         userId: 666,
@@ -47,7 +47,7 @@ describe('Unit | Domain | Models | UserLogin', function () {
 
   describe('#isUserTemporaryBlocked', function () {
     describe('when temporaryBlockedUntil is in the past', function () {
-      it('should return false', function () {
+      it('returns false', function () {
         // given
         const oneHourInThePast = new Date(Date.now() - 3600 * 1000);
         const userLogin = new UserLogin({
@@ -64,7 +64,7 @@ describe('Unit | Domain | Models | UserLogin', function () {
     });
 
     describe('when temporaryBlockedUntil is in the future', function () {
-      it('should return true', function () {
+      it('returns true', function () {
         // given
         const oneHourInTheFuture = new Date(Date.now() + 3600 * 1000);
         const userLogin = new UserLogin({
@@ -81,7 +81,7 @@ describe('Unit | Domain | Models | UserLogin', function () {
     });
 
     describe('when temporaryBlockedUntil is not set', function () {
-      it('should return false', function () {
+      it('returns false', function () {
         // given
         const userLogin = new UserLogin({
           userId: 666,
@@ -98,12 +98,12 @@ describe('Unit | Domain | Models | UserLogin', function () {
   });
 
   describe('#markUserAsTemporarilyBlocked', function () {
-    it('should set temporary block until date', function () {
+    it('sets temporary block until date', function () {
       // given
-      const multipleOfThreshold = 10 * 2;
+      const multipleOfThresholdFailureCount = config.login.temporaryBlockingThresholdFailureCount * 2;
       const userLogin = new UserLogin({
         userId: 666,
-        failureCount: multipleOfThreshold,
+        failureCount: multipleOfThresholdFailureCount,
       });
 
       // when
@@ -116,7 +116,7 @@ describe('Unit | Domain | Models | UserLogin', function () {
 
   describe('#hasBeenTemporaryBlocked', function () {
     context('when user has failure count greater than 0', function () {
-      it('should return true', function () {
+      it('returns true', function () {
         // given
         const userLogin = new UserLogin({ failureCount: 1, temporaryBlockedUntil: null });
 
@@ -129,7 +129,7 @@ describe('Unit | Domain | Models | UserLogin', function () {
     });
 
     context('when user has a temporary blocked until date', function () {
-      it('should return true', function () {
+      it('returns true', function () {
         // given
         const userLogin = new UserLogin({ temporaryBlockedUntil: new Date('2022-11-28T15:00:00Z') });
 
@@ -142,7 +142,7 @@ describe('Unit | Domain | Models | UserLogin', function () {
     });
 
     context('when user has no failure count nor temporary blocked until date', function () {
-      it('should return false', function () {
+      it('returns false', function () {
         // given
         const userLogin = new UserLogin({ failureCount: 0, temporaryBlockedUntil: null });
 
@@ -159,8 +159,8 @@ describe('Unit | Domain | Models | UserLogin', function () {
     context('when user reaches the limit failure count but is not yet blocked', function () {
       it('returns false', function () {
         // given
-        const failureCount = config.login.blockingLimitFailureCount;
-        const userLogin = new UserLogin({ failureCount, blockedAt: null });
+        const blockingLimitFailureCount = config.login.blockingLimitFailureCount;
+        const userLogin = new UserLogin({ failureCount: blockingLimitFailureCount, blockedAt: null });
 
         // when
         const result = userLogin.isUserMarkedAsBlocked();
@@ -173,8 +173,8 @@ describe('Unit | Domain | Models | UserLogin', function () {
     context('when user has blockedAt date', function () {
       it('returns true', function () {
         // given
-        const failureCount = config.login.blockingLimitFailureCount;
-        const userLogin = new UserLogin({ failureCount, blockedAt: new Date('2022-11-29') });
+        const blockingLimitFailureCount = config.login.blockingLimitFailureCount;
+        const userLogin = new UserLogin({ failureCount: blockingLimitFailureCount, blockedAt: new Date('2022-11-29') });
 
         // when
         const result = userLogin.isUserMarkedAsBlocked();
@@ -187,8 +187,8 @@ describe('Unit | Domain | Models | UserLogin', function () {
     context('when user has no failure count nor blockedAt date', function () {
       it('returns false', function () {
         // given
-        const failureCount = config.login.blockingLimitFailureCount;
-        const userLogin = new UserLogin({ failureCount, blockedAt: null });
+        const blockingLimitFailureCount = config.login.blockingLimitFailureCount;
+        const userLogin = new UserLogin({ failureCount: blockingLimitFailureCount, blockedAt: null });
 
         // when
         const result = userLogin.isUserMarkedAsBlocked();
@@ -228,11 +228,11 @@ describe('Unit | Domain | Models | UserLogin', function () {
   });
 
   describe('#shouldMarkUserAsTemporarilyBlocked', function () {
-    context('when failure count is lower than failure count threshold', function () {
+    context('when failure count is lower than temporary blocking threshold failure count', function () {
       it('returns false', function () {
         // given
-        const failureCount = config.login.blockingLimitFailureCount - 1;
-        const userLogin = new UserLogin({ failureCount });
+        const lowerThanThresholdFailureCount = config.login.temporaryBlockingThresholdFailureCount - 1;
+        const userLogin = new UserLogin({ failureCount: lowerThanThresholdFailureCount });
 
         // when
         const result = userLogin.shouldMarkUserAsTemporarilyBlocked();
@@ -242,11 +242,25 @@ describe('Unit | Domain | Models | UserLogin', function () {
       });
     });
 
-    context('when failure count equals failure count threshold', function () {
+    context('when failure count is lower than a multiple of temporary blocking threshold failure count', function () {
+      it('returns false', function () {
+        // given
+        const lowerThanThresholdFailureCount = config.login.temporaryBlockingThresholdFailureCount * 2 - 1;
+        const userLogin = new UserLogin({ failureCount: lowerThanThresholdFailureCount });
+
+        // when
+        const result = userLogin.shouldMarkUserAsTemporarilyBlocked();
+
+        // then
+        expect(result).to.be.false;
+      });
+    });
+
+    context('when failure count equals a multiple of temporary blocking threshold failure count', function () {
       it('returns true', function () {
         // given
-        const failureCountThreshold = 20;
-        const userLogin = new UserLogin({ failureCount: failureCountThreshold });
+        const multipleOfThresholdFailureCount = config.login.temporaryBlockingThresholdFailureCount * 2;
+        const userLogin = new UserLogin({ failureCount: multipleOfThresholdFailureCount });
 
         // when
         const result = userLogin.shouldMarkUserAsTemporarilyBlocked();
@@ -275,8 +289,8 @@ describe('Unit | Domain | Models | UserLogin', function () {
     context('when failure count equals the limit failure count', function () {
       it('returns true', function () {
         // given
-        const failureCount = config.login.blockingLimitFailureCount;
-        const userLogin = new UserLogin({ failureCount });
+        const blockingLimitFailureCount = config.login.blockingLimitFailureCount;
+        const userLogin = new UserLogin({ failureCount: blockingLimitFailureCount });
 
         // when
         const result = userLogin.shouldMarkUserAsBlocked();
@@ -302,12 +316,12 @@ describe('Unit | Domain | Models | UserLogin', function () {
   });
 
   describe('#resetUserBlocking', function () {
-    it('should reset failure count and reset temporary blocked until', function () {
+    it('resets failure count and temporary blocked until', function () {
       // given
-      const failureCount = config.login.blockingLimitFailureCount;
+      const blockingLimitFailureCount = config.login.blockingLimitFailureCount;
       const userLogin = new UserLogin({
         userId: 666,
-        failureCount,
+        failureCount: blockingLimitFailureCount,
         temporaryBlockedUntil: new Date('2022-11-25'),
         blockedAt: new Date('2022-12-01'),
       });

@@ -15,7 +15,7 @@ import {
 const authenticationDomainErrorMappingConfiguration = [
   {
     name: AuthenticationKeyExpired.name,
-    httpErrorFn: (error) => new HttpErrors.UnauthorizedError(error.message),
+    httpErrorFn: (error) => new HttpErrors.UnauthorizedError(error.message, error.code),
   },
   {
     name: DifferentExternalIdentifierError.name,
@@ -27,8 +27,7 @@ const authenticationDomainErrorMappingConfiguration = [
   },
   {
     name: MissingOrInvalidCredentialsError.name,
-    httpErrorFn: () =>
-      new HttpErrors.UnauthorizedError("L'adresse e-mail et/ou le mot de passe saisis sont incorrects."),
+    httpErrorFn: (error) => new HttpErrors.UnauthorizedError(error.message),
   },
   {
     name: MissingUserAccountError.name,

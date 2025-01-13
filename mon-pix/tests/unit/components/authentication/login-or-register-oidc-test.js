@@ -36,14 +36,14 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
       });
     });
 
-    module('completes with error', function () {
+    module('when there are errors', function () {
       module('when authentication key has expired', function () {
         test('displays error', async function (assert) {
           // given
           const component = createGlimmerComponent('authentication/login-or-register-oidc');
 
           const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
-          sessionService.authenticate.rejects({ errors: [{ status: '401' }] });
+          sessionService.authenticate.rejects({ errors: [{ status: '401', code: 'EXPIRED_AUTHENTICATION_KEY' }] });
 
           component.args.identityProviderSlug = 'super-idp';
           component.args.authenticationKey = 'super-key';
@@ -126,7 +126,7 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
         });
       });
 
-      test('displays error message with details', async function (assert) {
+      test('displays an error message with details', async function (assert) {
         // given
         const component = createGlimmerComponent('authentication/login-or-register-oidc');
         const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
@@ -143,7 +143,7 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
         assert.strictEqual(component.registerErrorMessage, `${t('common.error')} (some detail)`);
       });
 
-      test('displays default error message', async function (assert) {
+      test('displays a default error message', async function (assert) {
         // given
         const component = createGlimmerComponent('authentication/login-or-register-oidc');
         const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
@@ -255,7 +255,7 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
       });
     });
 
-    module('completes with error', function () {
+    module('when there are errors', function () {
       module('when form is invalid', function () {
         test('does not request api for reconciliation', async function (assert) {
           // given
@@ -277,7 +277,9 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
         test('should display error', async function (assert) {
           // given
           const component = createGlimmerComponent('authentication/login-or-register-oidc');
-          component.args.onLogin = sinon.stub().rejects({ errors: [{ status: '401' }] });
+          component.args.onLogin = sinon
+            .stub()
+            .rejects({ errors: [{ status: '401', code: 'EXPIRED_AUTHENTICATION_KEY' }] });
           component.email = 'glace.alo@example.net';
           component.password = 'pix123';
           const eventStub = { preventDefault: sinon.stub() };
@@ -289,26 +291,6 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
           assert.strictEqual(
             component.loginErrorMessage,
             t('pages.login-or-register-oidc.error.expired-authentication-key'),
-          );
-        });
-      });
-
-      module('when user is not found', function () {
-        test('should display error', async function (assert) {
-          // given
-          const component = createGlimmerComponent('authentication/login-or-register-oidc');
-          component.args.onLogin = sinon.stub().rejects({ errors: [{ status: '404' }] });
-          component.email = 'glace.alo@example.net';
-          component.password = 'pix123';
-          const eventStub = { preventDefault: sinon.stub() };
-
-          // when
-          await component.login(eventStub);
-
-          // then
-          assert.strictEqual(
-            component.loginErrorMessage,
-            t('pages.login-or-register-oidc.error.login-unauthorized-error'),
           );
         });
       });
@@ -327,6 +309,58 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
 
           // then
           assert.strictEqual(component.loginErrorMessage, t('pages.login-or-register-oidc.error.account-conflict'));
+        });
+      });
+
+      module('when user account is temporarily blocked', function () {
+        test('displays error', async function (assert) {
+          // given
+          const component = createGlimmerComponent('authentication/login-or-register-oidc');
+
+          const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+          sessionService.authenticate.rejects({ errors: [{ status: '403', code: 'USER_IS_TEMPORARY_BLOCKED' }] });
+
+          component.args.identityProviderSlug = 'super-idp';
+          component.args.authenticationKey = 'super-key';
+          component.isTermsOfServiceValidated = true;
+
+          // when
+          await component.register();
+
+          // then
+          assert.deepEqual(
+            component.registerErrorMessage,
+            t('common.api-error-messages.login-user-temporary-blocked-error', {
+              url: '/mot-de-passe-oublie',
+              htmlSafe: true,
+            }),
+          );
+        });
+      });
+
+      module('when user account is blocked', function () {
+        test('displays error', async function (assert) {
+          // given
+          const component = createGlimmerComponent('authentication/login-or-register-oidc');
+
+          const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+          sessionService.authenticate.rejects({ errors: [{ status: '403', code: 'USER_IS_BLOCKED' }] });
+
+          component.args.identityProviderSlug = 'super-idp';
+          component.args.authenticationKey = 'super-key';
+          component.isTermsOfServiceValidated = true;
+
+          // when
+          await component.register();
+
+          // then
+          assert.deepEqual(
+            component.registerErrorMessage,
+            t('common.api-error-messages.login-user-blocked-error', {
+              url: 'https://support.pix.org/support/tickets/new',
+              htmlSafe: true,
+            }),
+          );
         });
       });
 
