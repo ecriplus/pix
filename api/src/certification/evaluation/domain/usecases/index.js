@@ -1,7 +1,6 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as certificationChallengesService from '../../../../../lib/domain/services/certification-challenges-service.js';
 import { pickChallengeService } from '../../../../evaluation/domain/services/pick-challenge-service.js';
 import * as languageService from '../../../../shared/domain/services/language-service.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
@@ -30,6 +29,7 @@ import * as userRepository from '../../../shared/infrastructure/repositories/use
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCompanionAlertRepository from '../../infrastructure/repositories/certification-companion-alert-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
+import * as certificationChallengesService from '../services/certification-challenges-service.js';
 /**
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
  * @typedef {certificationChallengeRepository} CertificationChallengeRepository

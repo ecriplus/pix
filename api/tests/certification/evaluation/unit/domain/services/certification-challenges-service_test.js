@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
-import * as certificationChallengesService from '../../../../lib/domain/services/certification-challenges-service.js';
-import { PIX_ORIGIN } from '../../../../src/shared/domain/constants.js';
-import { PlacementProfile } from '../../../../src/shared/domain/models/PlacementProfile.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import * as certificationChallengesService from '../../../../../../src/certification/evaluation/domain/services/certification-challenges-service.js';
+import { PIX_ORIGIN } from '../../../../../../src/shared/domain/constants.js';
+import { PlacementProfile } from '../../../../../../src/shared/domain/models/PlacementProfile.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Service | Certification Challenge Service', function () {
   const userId = 63731;
