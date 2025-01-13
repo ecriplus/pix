@@ -43,7 +43,7 @@ export default class CurrentSessionService extends SessionService {
       return;
     }
 
-    if (localeFromQueryParam && this.locale.isLanguageSupported(localeFromQueryParam)) {
+    if (localeFromQueryParam && this.locale.isSupportedLanguage(localeFromQueryParam)) {
       this.locale.setLocale(localeFromQueryParam);
       return;
     }

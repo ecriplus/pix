@@ -19,10 +19,10 @@ export default class LocaleService extends Service {
 
   handleUnsupportedLanguage(language) {
     if (!language) return;
-    return this.isLanguageSupported(language) ? language : DEFAULT_LOCALE;
+    return this.isSupportedLanguage(language) ? language : DEFAULT_LOCALE;
   }
 
-  isLanguageSupported(language) {
+  isSupportedLanguage(language) {
     return SUPPORTED_LANGUAGES.includes(language);
   }
 

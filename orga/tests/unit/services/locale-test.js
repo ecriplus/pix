@@ -78,34 +78,34 @@ module('Unit | Service | locale', function (hooks) {
     });
   });
 
-  module('#isLanguageSupported', function () {
+  module('#isSupportedLanguage', function () {
     module('when no language provided', function () {
       test('returns "false"', function (assert) {
         // when
-        const isLanguageSupported = localeService.isLanguageSupported();
+        const isSupportedLanguage = localeService.isSupportedLanguage();
 
         // then
-        assert.false(isLanguageSupported);
+        assert.false(isSupportedLanguage);
       });
     });
 
     module('when language is not supported', function () {
       test('returns "false"', function (assert) {
         // when
-        const isLanguageSupported = localeService.isLanguageSupported('not supported');
+        const isSupportedLanguage = localeService.isSupportedLanguage('not supported');
 
         // then
-        assert.false(isLanguageSupported);
+        assert.false(isSupportedLanguage);
       });
     });
 
     module('when language is supported', function () {
       test('returns "true"', function (assert) {
         // when
-        const isLanguageSupported = localeService.isLanguageSupported('fr');
+        const isSupportedLanguage = localeService.isSupportedLanguage('fr');
 
         // then
-        assert.true(isLanguageSupported);
+        assert.true(isSupportedLanguage);
       });
     });
   });

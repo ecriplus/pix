@@ -126,7 +126,7 @@ export default class Url extends Service {
     }
 
     const currentLanguage = this._getCurrentLanguage();
-    if (this.locale.isLanguageSupported(currentLanguage)) {
+    if (this.locale.isSupportedLanguage(currentLanguage)) {
       return `${websiteUrl}${translations[currentLanguage]}`;
     }
 
