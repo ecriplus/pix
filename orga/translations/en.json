@@ -847,7 +847,7 @@
       "title": "Log in"
     },
     "login-form": {
-      "active-or-retrieve": "Activate or retrieve your Pix Orga space",
+      "active-or-retrieve": "Are you a headteacher? Activate or become the administrator of your school's Pix Orga space",
       "email": "Email address",
       "errors": {
         "empty-password": "Your password can't be empty.",
