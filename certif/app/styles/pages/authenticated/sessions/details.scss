@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .session-details-page {
   display: flex;
   flex-direction: column;
@@ -177,7 +180,7 @@
     justify-content: space-between;
     margin: 1em 0;
 
-    @include device-is("desktop") {
+    @include breakpoints.device-is("desktop") {
       flex-direction: row;
     }
   }
@@ -201,7 +204,7 @@
     justify-content: right;
     padding: var(--pix-spacing-3x) var(--pix-spacing-4x);
 
-    @include device-is("desktop") {
+    @include breakpoints.device-is("desktop") {
       flex-direction: row;
       padding: var(--pix-spacing-2x) var(--pix-spacing-4x);
     }

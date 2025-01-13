@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .sidebar-footer {
   &__full-name {
     @extend %pix-body-s;

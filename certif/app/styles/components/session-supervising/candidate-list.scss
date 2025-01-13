@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .session-supervising-candidate-list-background {
   background: var(--pix-certif-500);
   border-radius: 18px 18px 0 0;
@@ -5,12 +8,12 @@
   padding: 32px 16px;
 
   .session-supervising-candidate-list {
-    @include device-is("tablet") {
+    @include breakpoints.device-is("tablet") {
       padding: 0 48px;
       margin: auto;
     }
 
-    @include device-is("desktop") {
+    @include breakpoints.device-is("desktop") {
       max-width: 672px;
       margin: auto;
     }

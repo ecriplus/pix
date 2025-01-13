@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/breakpoints';
+
 .no-session-panel {
   display: flex;
   flex-direction: column;
@@ -5,7 +7,7 @@
   align-items: center;
   text-align: center;
 
-  @include device-is('mobile') {
+  @include breakpoints.device-is('mobile') {
     padding: var(--pix-spacing-1x) 0 var(--pix-spacing-1x) 0;
   }
 

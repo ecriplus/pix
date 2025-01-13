@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .session-supervising-error-page {
   display: flex;
   flex-direction: column;
@@ -20,7 +23,7 @@
   background-color: var(--pix-neutral-0);
   border-radius: 10px;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     margin: auto;
     padding: 40px 60px;
   }

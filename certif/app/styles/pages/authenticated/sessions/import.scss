@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .import-page {
   > p {
     color: var(--pix-neutral-500);
@@ -105,7 +107,7 @@
 
   &__information {
     color: var(--pix-neutral-800);
-    font-weight: $font-medium;
+    font-weight: var(--pix-font-medium);
   }
 
   &__app-loader {

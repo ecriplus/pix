@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .login-session-supervisor-page > main > footer {
   border-radius: 0 0 10px 10px;
   background: var(--pix-neutral-20);
@@ -8,7 +11,7 @@
   letter-spacing: 0.15px;
   line-height: 22px;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     margin: auto;
     padding: 40px 60px 40px;
   }

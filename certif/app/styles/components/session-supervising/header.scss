@@ -1,12 +1,15 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .session-supervising-header {
   background: var(--pix-neutral-20);
   padding: 16px;
 
-  @include device-is("tablet") {
+  @include breakpoints.device-is("tablet") {
     padding: 40px 48px;
   }
 
-  @include device-is("desktop") {
+  @include breakpoints.device-is("desktop") {
     align-self: center;
     width: 672px;
   }

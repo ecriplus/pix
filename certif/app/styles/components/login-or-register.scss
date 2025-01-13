@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .login-or-register {
   margin: 20px 0;
 
@@ -8,17 +11,17 @@
     justify-content: space-between;
     padding: var(--pix-spacing-6x) 0 var(--pix-spacing-8x);
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       padding: var(--pix-spacing-8x);
     }
 
-    @include device-is('large-screen') {
+    @include breakpoints.device-is('large-screen') {
       padding: 40px 100px;
     }
   }
 
   &__language-switcher {
-    @include device-is('mobile') {
+    @include breakpoints.device-is('mobile') {
       margin-left: var(--pix-spacing-4x);
     }
   }
@@ -41,12 +44,12 @@
     flex-flow: row;
     justify-content: space-around;
 
-    @include device-is('large-screen') {
+    @include breakpoints.device-is('large-screen') {
       flex-flow: row;
       justify-content: space-between;
     }
 
-    @include device-is('mobile') {
+    @include breakpoints.device-is('mobile') {
       flex-direction: column;
       margin: 10px 20px 0;
     }
@@ -56,7 +59,7 @@
     display: flex;
     flex-direction: column;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       min-width: 400px;
     }
   }
@@ -65,11 +68,11 @@
     margin-top: 30px;
     border-left: 1px solid var(--pix-neutral-100);
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       margin: var(--pix-spacing-8x) var(--pix-spacing-6x) 0;
     }
 
-    @include device-is('large-screen') {
+    @include breakpoints.device-is('large-screen') {
       margin: 30px 60px 0;
     }
   }
