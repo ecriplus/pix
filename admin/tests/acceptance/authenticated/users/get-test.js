@@ -83,7 +83,7 @@ module('Acceptance | authenticated/users/get', function (hooks) {
       // when
       await fillIn(screen.getByLabelText('Prénom *', { exact: false }), 'john');
       await fillIn(screen.getByLabelText(/Nom */), 'doe');
-      await fillIn(screen.getByLabelText('Adresse e-mail *', { exact: false }), 'john.doe@example.net');
+      await fillIn(screen.getByLabelText('Adresse e-mail', { exact: false }), 'john.doe@example.net');
       await fillIn(screen.getByLabelText('Identifiant *', { exact: false }), 'john.doe0101');
       await click(screen.getByRole('button', { name: 'Langue' }));
 
