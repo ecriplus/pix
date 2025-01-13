@@ -1,13 +1,13 @@
 import randomString from 'randomstring';
 
-import * as service from '../../../../lib/domain/services/password-generator.js';
-import { expect, sinon } from '../../../test-helper.js';
+import * as service from '../../../../../src/identity-access-management/domain/services/password-generator.service.js';
+import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Service | password-generator', function () {
+describe('Unit | Identity Access Management | Domain | Service | password-generator', function () {
   let generatedPassword;
 
   context('#generateSimplePassword', function () {
-    it('should have a length of 8 characters', function () {
+    it('has a length of 8 characters', function () {
       // given & when
       generatedPassword = service.generateSimplePassword();
 
@@ -15,7 +15,7 @@ describe('Unit | Service | password-generator', function () {
       expect(generatedPassword).to.have.lengthOf(8);
     });
 
-    it('should not contains hard to read characters', function () {
+    it('does not contain hard to read characters', function () {
       // given
       const hardToReadCharacters = '[ilo]';
 
@@ -26,7 +26,7 @@ describe('Unit | Service | password-generator', function () {
       expect(RegExp(hardToReadCharacters).test(generatedPassword)).to.be.false;
     });
 
-    it('should contains 6 lowercase letters and two digits', function () {
+    it('contains 6 lowercase letters and two digits', function () {
       // given & when
       generatedPassword = service.generateSimplePassword();
 
@@ -36,7 +36,7 @@ describe('Unit | Service | password-generator', function () {
   });
 
   context('#generateComplexPassword', function () {
-    it('should have a length of 32 characters', function () {
+    it('has a length of 32 characters', function () {
       // given
       sinon.stub(randomString, 'generate');
 

@@ -42,6 +42,7 @@ import * as userRepository from '../../infrastructure/repositories/user.reposito
 import { userEmailRepository } from '../../infrastructure/repositories/user-email.repository.js';
 import { userToCreateRepository } from '../../infrastructure/repositories/user-to-create.repository.js';
 import { authenticationSessionService } from '../services/authentication-session.service.js';
+import * as passwordGeneratorService from '../services/password-generator.service.js';
 import { pixAuthenticationService } from '../services/pix-authentication-service.js';
 import { resetPasswordService } from '../services/reset-password.service.js';
 import { scoAccountRecoveryService } from '../services/sco-account-recovery.service.js';
@@ -83,6 +84,7 @@ const services = {
   cryptoService,
   mailService,
   oidcAuthenticationServiceRegistry,
+  passwordGeneratorService,
   pixAuthenticationService,
   resetPasswordService,
   scoAccountRecoveryService,

@@ -48,6 +48,7 @@ import * as stageCollectionForTargetProfileRepository from '../../../src/evaluat
 import * as stageRepository from '../../../src/evaluation/infrastructure/repositories/stage-repository.js';
 import { authenticationSessionService } from '../../../src/identity-access-management/domain/services/authentication-session.service.js';
 import { OidcAuthenticationServiceRegistry } from '../../../src/identity-access-management/domain/services/oidc-authentication-service-registry.js';
+import * as passwordGenerator from '../../../src/identity-access-management/domain/services/password-generator.service.js';
 import { pixAuthenticationService } from '../../../src/identity-access-management/domain/services/pix-authentication-service.js';
 import * as resetPasswordService from '../../../src/identity-access-management/domain/services/reset-password.service.js';
 import { scoAccountRecoveryService } from '../../../src/identity-access-management/domain/services/sco-account-recovery.service.js';
@@ -126,7 +127,6 @@ import * as membershipRepository from '../../../src/team/infrastructure/reposito
 import { organizationInvitationRepository } from '../../../src/team/infrastructure/repositories/organization-invitation.repository.js';
 import { userOrgaSettingsRepository } from '../../../src/team/infrastructure/repositories/user-orga-settings-repository.js';
 import * as obfuscationService from '../../domain/services/obfuscation-service.js';
-import * as passwordGenerator from '../../domain/services/password-generator.js';
 import * as badgeAcquisitionRepository from '../../infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeForCalculationRepository from '../../infrastructure/repositories/badge-for-calculation-repository.js';
 import * as certifiableProfileForLearningContentRepository from '../../infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
