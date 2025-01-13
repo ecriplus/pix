@@ -123,7 +123,7 @@
                 {
                   "id": "5173f727-635c-4ad9-8651-0b379e0b538e",
                   "type": "text",
-                  "content": "<p>👉&nbsp;Dans la zone ci-dessous, utilisez la molette pour découvir toute l'image.&nbsp;Vous devrez ensuite&nbsp;répondre à une question : </p>\n<ul>\n    <li>Étape 1 : Placez le pointeur sur l'image</li>\n    <li>Étape 2 : Faites rouler la molette de votre souris vers le haut et vers le bas.</li>\n    <li>Étape 3 : Déplacez l'image jusqu'à trouver le balcon le plus bas de l'immeuble.</li>\n</ul>"
+                  "content": "<p><span aria-hidden=\"true\">👉</span>&nbsp;Dans la zone ci-dessous, utilisez la molette pour découvir toute l'image. Vous devrez ensuite répondre à une question : </p><ul> <li>Étape&nbsp1&nbsp: Placez le pointeur sur l'image</li> <li>Étape&nbsp2&nbsp: Faites rouler la molette de votre souris vers le haut et vers le bas.</li> <li>Étape&nbsp3&nbsp: Déplacez l'image jusqu'à trouver le balcon le plus bas de l'immeuble.</li>  </ul>"
                 },
                 {
                   "id": "7aac23e0-6642-4ca4-928f-50e074dabc77",
@@ -138,30 +138,23 @@
                     {
                       "id": "1",
                       "content": "<p>Elle se détend au soleil.</p>",
-                      "feedback": "<p>Mauvaise réponse.<br>Ce personnage n'est pas sur le balcon le plus bas. Vous pouvez utiliser la molette pour descendre encore plus bas dans l'image.<br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>Ce personnage n'est pas sur le balcon le plus bas. Vous pouvez utiliser la molette pour descendre encore plus bas dans l'image.</p>"
                     },
                     {
                       "id": "2",
                       "content": "<p>Elle arrose ses plantes.</p>",
-                      "feedback": "<p>Bonne réponse. <br>Vous avez réussi à descendre dans toute l'image jusqu'au dernier balcon. <br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse.</span><br>Vous avez réussi à descendre dans toute l'image jusqu'au dernier balcon.</p>"
                     },
                     {
                       "id": "3",
                       "content": "<p>Elle étend son linge.</p>",
-                      "feedback": "<p>Mauvaise réponse.<br>Cette activité est celle du personnage du premier balcon de l'immeuble.&nbsp;Utilisez la molette de votre souris quand votre pointeur est sur l'image. Faites défiler l'image pour découvrir les autres fenêtres et balcons de l'immeuble.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>Cette activité est celle du personnage du premier balcon de l'immeuble.&nbsp;Utilisez la molette de votre souris quand votre pointeur est sur l'image. Faites défiler l'image pour découvrir les autres fenêtres et balcons de l'immeuble.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "",
-                    "invalid": ""
-                  },
-                  "solution": "2"
+                 "solution": "2"
                 }
               ]
-            },
-            {
-              "elements": []
-            }
+            }           
           ]
         }
       ]
