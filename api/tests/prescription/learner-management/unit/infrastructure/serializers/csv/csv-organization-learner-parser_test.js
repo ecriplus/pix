@@ -1,8 +1,8 @@
 import iconv from 'iconv-lite';
 
-import { CsvColumn } from '../../../../../../../lib/infrastructure/serializers/csv/csv-column.js';
 import { AggregateImportError } from '../../../../../../../src/prescription/learner-management/domain/errors.js';
 import { CsvOrganizationLearnerParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/csv-organization-learner-parser.js';
+import { CsvColumn } from '../../../../../../../src/shared/infrastructure/serializers/csv/csv-column.js';
 import { catchErr, expect, sinon } from '../../../../../../test-helper.js';
 
 class FakeLearnerSet {
