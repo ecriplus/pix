@@ -87,7 +87,7 @@ function routes() {
 
   this.patch('/users/:id/pix-orga-terms-of-service-acceptance', (schema, request) => {
     const user = schema.users.find(request.params.id);
-    user.update({ pixOrgaTermsOfServiceAccepted: true });
+    user.update({ pixOrgaTermsOfServiceStatus: 'accepted' });
     return user;
   });
 

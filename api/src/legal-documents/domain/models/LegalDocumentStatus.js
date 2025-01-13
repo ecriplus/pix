@@ -20,7 +20,7 @@ export class LegalDocumentStatus {
    * @returns {LegalDocumentStatus} The legal document status.
    */
   static buildForLegacyPixOrgaCgu(userPixOrgaCgu) {
-    const LEGACY_PIXORGA_TOS_PATH = 'pix-orga-tos-2024-01-02';
+    const LEGACY_PIXORGA_TOS_PATH = 'pix-orga-tos-2022-11-30';
     const { pixOrgaTermsOfServiceAccepted, lastPixOrgaTermsOfServiceValidatedAt } = userPixOrgaCgu;
 
     return new LegalDocumentStatus({

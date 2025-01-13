@@ -8,6 +8,7 @@ export const FRENCH_FRANCE_LOCALE = 'fr-FR';
 export const DEFAULT_LOCALE = FRENCH_INTERNATIONAL_LOCALE;
 export const SUPPORTED_LANGUAGES = Object.keys(languages);
 
+const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'fr-BE', 'fr-FR', 'nl-BE', 'nl'];
 const { COOKIE_LOCALE_LIFESPAN_IN_SECONDS } = config.APP;
 
 export default class LocaleService extends Service {
@@ -18,11 +19,20 @@ export default class LocaleService extends Service {
 
   handleUnsupportedLanguage(language) {
     if (!language) return;
-    return this.isLanguageSupported(language) ? language : DEFAULT_LOCALE;
+    return this.isSupportedLanguage(language) ? language : DEFAULT_LOCALE;
   }
 
-  isLanguageSupported(language) {
+  isSupportedLanguage(language) {
     return SUPPORTED_LANGUAGES.includes(language);
+  }
+
+  isSupportedLocale(locale) {
+    try {
+      const localeCanonicalName = Intl.getCanonicalLocales(locale)?.[0];
+      return SUPPORTED_LOCALES.some((supportedLocale) => localeCanonicalName == supportedLocale);
+    } catch {
+      return false;
+    }
   }
 
   hasLocaleCookie() {

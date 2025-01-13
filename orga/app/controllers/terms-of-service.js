@@ -17,7 +17,7 @@ export default class TermOfServiceController extends Controller {
   @action
   async submit() {
     await this.currentUser.prescriber.save({ adapterOptions: { acceptPixOrgaTermsOfService: true } });
-    this.currentUser.prescriber.pixOrgaTermsOfServiceAccepted = true;
+    this.currentUser.prescriber.pixOrgaTermsOfServiceStatus = 'accepted';
     this.router.transitionTo('application');
   }
 }

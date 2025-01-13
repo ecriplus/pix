@@ -27,7 +27,7 @@ module('Acceptance | Statistics', function (hooks) {
   module('When prescriber is logged in and has cover rate feature', function () {
     test('user should access to page', async function (assert) {
       // given
-      const user = createPrescriberForOrganization({ lang: 'fr', pixOrgaTermsOfServiceAccepted: true }, {}, 'ADMIN', {
+      const user = createPrescriberForOrganization({ lang: 'fr' }, {}, 'ADMIN', {
         COVER_RATE: true,
       });
       await authenticateSession(user.id);

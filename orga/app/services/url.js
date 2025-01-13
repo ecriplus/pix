@@ -1,19 +1,17 @@
 import Service, { inject as service } from '@ember/service';
 import ENV from 'pix-orga/config/environment';
 
+import { ENGLISH_INTERNATIONAL_LOCALE } from './locale.js';
+
 const FRENCH_LOCALE = 'fr';
-const ENGLISH_LOCALE = 'en';
-const DUTCH_LOCALE = 'nl';
 const PIX_FR_DOMAIN = 'https://pix.fr';
-const PIX_ORG_DOMAIN_FR_LOCALE = 'https://pix.org/fr';
-const PIX_ORG_DOMAIN_EN_LOCALE = 'https://pix.org/en';
-const PIX_ORG_DOMAIN_NL_LOCALE = 'https://pix.org/nl-be';
 const PIX_STATUS_DOMAIN = 'https://status.pix.org';
 
 export default class Url extends Service {
   @service currentDomain;
   @service currentUser;
   @service intl;
+  @service locale;
 
   SHOWCASE_WEBSITE_LOCALE_PATH = {
     ACCESSIBILITY: {
@@ -42,6 +40,10 @@ export default class Url extends Service {
   pixAppUrlWithoutExtension = ENV.APP.PIX_APP_URL_WITHOUT_EXTENSION;
 
   definedHomeUrl = ENV.rootURL;
+
+  getLegalDocumentUrl(path) {
+    return `${this._getPixWebsiteUrl()}/${path}`;
+  }
 
   get campaignsRootUrl() {
     return this.definedCampaignsRootUrl
@@ -99,20 +101,35 @@ export default class Url extends Service {
     return `${this.currentDomain.getJuniorBaseUrl()}/schools/${schoolCode}`;
   }
 
-  _computeShowcaseWebsiteUrl({ en: englishPath, fr: frenchPath, nl: dutchPath }) {
+  _getPixWebsiteUrl() {
     if (this.currentDomain.isFranceDomain) {
-      return `${PIX_FR_DOMAIN}${frenchPath}`;
+      return PIX_FR_DOMAIN;
+    }
+    const currentLocale = this.intl.primaryLocale;
+    let locale;
+    if (currentLocale == 'nl') {
+      locale = 'nl-BE';
+    } else if (this.locale.isSupportedLocale(currentLocale)) {
+      locale = currentLocale;
+    } else {
+      locale = ENGLISH_INTERNATIONAL_LOCALE;
     }
 
-    switch (this._getCurrentLanguage()) {
-      case FRENCH_LOCALE:
-        return `${PIX_ORG_DOMAIN_FR_LOCALE}${frenchPath}`;
-      case ENGLISH_LOCALE:
-        return `${PIX_ORG_DOMAIN_EN_LOCALE}${englishPath}`;
-      case DUTCH_LOCALE:
-        return `${PIX_ORG_DOMAIN_NL_LOCALE}${dutchPath}`;
-      default:
-        return 'https://pix.org/fr/mentions-legales';
+    return `https://pix.org/${locale}`;
+  }
+
+  _computeShowcaseWebsiteUrl(translations) {
+    const websiteUrl = this._getPixWebsiteUrl();
+
+    if (this.currentDomain.isFranceDomain) {
+      return `${websiteUrl}${translations.fr}`;
     }
+
+    const currentLanguage = this._getCurrentLanguage();
+    if (this.locale.isSupportedLanguage(currentLanguage)) {
+      return `${websiteUrl}${translations[currentLanguage]}`;
+    }
+
+    return 'https://pix.org/fr/mentions-legales';
   }
 }

@@ -16,8 +16,8 @@ export default class AuthenticatedRoute extends Route {
       return;
     }
 
-    const pixOrgaTermsOfServiceAccepted = get(this.currentUser, 'prescriber.pixOrgaTermsOfServiceAccepted');
-    if (!pixOrgaTermsOfServiceAccepted) {
+    const pixOrgaTermsOfServiceStatus = get(this.currentUser, 'prescriber.pixOrgaTermsOfServiceStatus');
+    if (pixOrgaTermsOfServiceStatus !== 'accepted') {
       return this.router.replaceWith('terms-of-service');
     }
   }

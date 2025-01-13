@@ -25,7 +25,7 @@ module('Acceptance | terms-of-service', function (hooks) {
 
   module('When prescriber has not accepted terms of service yet', function (hooks) {
     hooks.beforeEach(async () => {
-      prescriber = createPrescriberWithPixOrgaTermsOfService({ pixOrgaTermsOfServiceAccepted: false });
+      prescriber = createPrescriberWithPixOrgaTermsOfService({ pixOrgaTermsOfServiceStatus: 'requested' });
 
       await authenticateSession(prescriber.id);
     });
@@ -33,15 +33,11 @@ module('Acceptance | terms-of-service', function (hooks) {
     [
       {
         locale: 'en',
-        title: 'Terms and Conditions of use of the Pix Orga plateform',
-      },
-      {
-        locale: 'nl',
-        title: 'Algemene gebruiksvoorwaarden van het pix orga-platform',
+        title: 'Please accept our Terms of service',
       },
       {
         locale: 'fr',
-        title: "Conditions générales d'utilisation de la plateforme Pix Orga",
+        title: "Veuillez accepter nos Conditions Générales d'Utilisation (CGU)",
       },
     ].forEach(({ locale, title }) => {
       test(`displays the ${locale} language version of cgu page`, async function (assert) {
@@ -58,7 +54,7 @@ module('Acceptance | terms-of-service', function (hooks) {
       await visit('/cgu');
 
       // when
-      await clickByName('J’accepte les conditions d’utilisation');
+      await clickByName('Accepter et continuer');
 
       // then
       assert.strictEqual(currentURL(), '/campagnes/les-miennes');
@@ -78,7 +74,7 @@ module('Acceptance | terms-of-service', function (hooks) {
 
   module('When prescriber has already accepted terms of service', function (hooks) {
     hooks.beforeEach(async () => {
-      prescriber = createPrescriberWithPixOrgaTermsOfService({ pixOrgaTermsOfServiceAccepted: true });
+      prescriber = createPrescriberWithPixOrgaTermsOfService({ pixOrgaTermsOfServiceStatus: 'accepted' });
 
       await authenticateSession(prescriber.id);
     });

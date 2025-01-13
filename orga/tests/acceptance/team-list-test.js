@@ -138,7 +138,7 @@ module('Acceptance | Team List', function (hooks) {
             lastName: 'User',
             email: 'leaving@user.com',
             lang: 'fr',
-            pixOrgaTermsOfServiceAccepted: true,
+            pixOrgaTermsOfServiceStatus: 'accepted',
           });
           leavingUser.userOrgaSettings = server.create('user-orga-setting', { user: leavingUser, organization });
           leavingUser.memberships = [
@@ -155,7 +155,7 @@ module('Acceptance | Team List', function (hooks) {
             lastName: 'User',
             email: 'left@user.com',
             lang: 'fr',
-            pixOrgaTermsOfServiceAccepted: true,
+            pixOrgaTermsOfServiceStatus: 'accepted',
           });
           leavingUser.userOrgaSettings = server.create('user-orga-setting', { user: userLeft, organization });
           leavingUser.memberships = [

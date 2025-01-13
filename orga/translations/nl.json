@@ -311,6 +311,21 @@
       "TO_SHARE-ASSESSMENT": "In afwachting van verzending",
       "TO_SHARE-PROFILES_COLLECTION": "In afwachting van verzending"
     },
+    "terms-of-service": {
+      "actions": {
+        "accept": "Accept and continue",
+        "document-link": "Read terms of service",
+        "reject": "Decline and quit"
+      },
+      "message": {
+        "requested": "To continue using Pix, please read and accept our Terms of service.",
+        "update-requested": "We have updated our Terms of service. Please review the changes and accept them to continue."
+      },
+      "title": {
+        "requested": "Please accept our Terms of service",
+        "update-requested": "Important update to the Terms of service"
+      }
+    },
     "ui": {
       "deletion-modal": {
         "confirm-deletion": "Ja, verwijderen",
@@ -408,7 +423,7 @@
     },
     "attestations": {
       "title": "Certificaten",
-      "basic-description" : "Alle attesten exporteren in PDF-formaat",
+      "basic-description": "Alle attesten exporteren in PDF-formaat",
       "divisions-description": "Selecteer de klas waarvoor je de attesten in PDF-formaat wilt exporteren.",
       "download-attestations-button": "Downloaden",
       "no-attestations": "Er zijn geen certificaten beschikbaar voor jouw selectie",

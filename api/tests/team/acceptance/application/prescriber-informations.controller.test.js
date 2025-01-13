@@ -29,7 +29,7 @@ describe('Acceptance | Team | Application | Controller | prescriber-informations
           'last-name': user.lastName,
           'pix-orga-terms-of-service-accepted': false,
           'pix-orga-terms-of-service-status': 'requested',
-          'pix-orga-terms-of-service-document-path': 'pix-orga-tos-2024-01-02',
+          'pix-orga-terms-of-service-document-path': 'pix-orga-tos-2022-11-30',
           'are-new-year-organization-learners-imported': false,
           'participant-count': 0,
           lang: user.lang,
