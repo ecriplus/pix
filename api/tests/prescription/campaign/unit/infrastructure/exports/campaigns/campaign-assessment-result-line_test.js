@@ -693,7 +693,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
             participantKnowledgeElementsByCompetenceId: {
               [learningContent.competences[0].id]: [knowledgeElement],
             },
-            acquiredBadges: [badge.title],
+            acquiredBadges: { [campaignParticipationInfo.campaignParticipationId]: [{ title: badge.title }] },
             translate,
           });
 

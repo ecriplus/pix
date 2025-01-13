@@ -221,9 +221,7 @@ class CampaignAssessmentExport {
         });
     }
 
-    return {
-      acquiredBadgesByCampaignParticipations,
-    };
+    return acquiredBadgesByCampaignParticipations;
   }
 }
 

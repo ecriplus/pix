@@ -35,7 +35,10 @@ class CampaignAssessmentResultLine {
       _.map(participantKnowledgeElementsByCompetenceId, (knowledgeElements) => knowledgeElements.length),
     );
     this.targetedKnowledgeElementsByCompetence = participantKnowledgeElementsByCompetenceId;
-    this.acquiredBadges = acquiredBadges;
+    this.acquiredBadges =
+      acquiredBadges && acquiredBadges[campaignParticipationInfo.campaignParticipationId]
+        ? acquiredBadges[campaignParticipationInfo.campaignParticipationId].map((badge) => badge.title)
+        : [];
     this.campaignParticipationService = campaignParticipationService;
     this.translate = translate;
 
