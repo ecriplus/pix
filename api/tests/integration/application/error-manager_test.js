@@ -673,7 +673,7 @@ describe('Integration | API | Controller Error', function () {
       const response = await server.requestObject(request);
 
       expect(response.statusCode).to.equal(UNAUTHORIZED_ERROR);
-      expect(responseDetail(response)).to.equal("L'adresse e-mail et/ou le mot de passe saisis sont incorrects.");
+      expect(responseDetail(response)).to.equal('Missing or invalid credentials');
     });
 
     it('responds Unauthorized when a InvalidTemporaryKeyError error occurs', async function () {
