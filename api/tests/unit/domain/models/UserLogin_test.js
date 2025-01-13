@@ -228,10 +228,10 @@ describe('Unit | Domain | Models | UserLogin', function () {
   });
 
   describe('#shouldMarkUserAsTemporarilyBlocked', function () {
-    context('when failure count is lower than failure count threshold', function () {
+    context('when failure count is lower than temporary blocking threshold failure count', function () {
       it('returns false', function () {
         // given
-        const failureCount = config.login.blockingLimitFailureCount - 1;
+        const failureCount = config.login.temporaryBlockingThresholdFailureCount - 1;
         const userLogin = new UserLogin({ failureCount });
 
         // when
@@ -242,7 +242,7 @@ describe('Unit | Domain | Models | UserLogin', function () {
       });
     });
 
-    context('when failure count equals failure count threshold', function () {
+    context('when failure count equals a multiple of temporary blocking threshold failure count', function () {
       it('returns true', function () {
         // given
         const failureCountThreshold = config.login.temporaryBlockingThresholdFailureCount * 2;
