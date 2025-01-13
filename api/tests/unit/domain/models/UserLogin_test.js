@@ -242,6 +242,20 @@ describe('Unit | Domain | Models | UserLogin', function () {
       });
     });
 
+    context('when failure count is lower than a multiple of temporary blocking threshold failure count', function () {
+      it('returns false', function () {
+        // given
+        const lowerThanThresholdFailureCount = config.login.temporaryBlockingThresholdFailureCount * 2 - 1;
+        const userLogin = new UserLogin({ failureCount: lowerThanThresholdFailureCount });
+
+        // when
+        const result = userLogin.shouldMarkUserAsTemporarilyBlocked();
+
+        // then
+        expect(result).to.be.false;
+      });
+    });
+
     context('when failure count equals a multiple of temporary blocking threshold failure count', function () {
       it('returns true', function () {
         // given
