@@ -122,8 +122,14 @@ export default class LoginForm extends Component {
           },
         };
         break;
-      default:
-        this.globalError = HTTP_ERROR_MESSAGES[responseError.status] || HTTP_ERROR_MESSAGES['default'];
+      default: {
+        const properties = HTTP_ERROR_MESSAGES[responseError.status] || HTTP_ERROR_MESSAGES['default'];
+        if (!HTTP_ERROR_MESSAGES[responseError.status]) {
+          properties.values.supportHomeUrl = this.url.supportHomeUrl;
+        }
+        this.globalError = properties;
+        return;
+      }
     }
   }
 

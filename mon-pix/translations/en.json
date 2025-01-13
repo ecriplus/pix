@@ -56,7 +56,7 @@
       "gateway-timeout-error": "The service is being slow. Please try again later.",
       "internal-server-error": "An error occurred, our teams are working on finding a solution. Please try again later.",
       "login-unauthorized-error": "There was an error in the email address or username/password entered.",
-      "login-unexpected-error": "Unable to connect. Please try again in a few moments. If the problem persists, '<'a href=\"https://pix.org/en/support\" target=\"blank\"'>'please contact us'</a>'.",
+      "login-unexpected-error": "Unable to connect. Please try again in a few moments. If the problem persists, '<'a href=\"{supportHomeUrl}\" target=\"blank\"'>'please contact us via the help center'</a>'.",
       "login-user-blocked-error": "Your account has reached the maximum number of failed login attempts and has been temporarily blocked. Please '<'a href=\"{url}\"'>'contact us'</a>' to unblock it.",
       "login-user-temporary-blocked-error": "You have reached too many failed login attempts. Please try again later or '<'a href=\"{url}\"'>'reset your password here'</a>'."
     },
