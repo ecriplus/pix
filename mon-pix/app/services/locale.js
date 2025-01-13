@@ -8,6 +8,8 @@ export const ENGLISH_INTERNATIONAL_LOCALE = 'en';
 export const FRENCH_FRANCE_LOCALE = 'fr-FR';
 export const DEFAULT_LOCALE = FRENCH_INTERNATIONAL_LOCALE;
 
+const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'fr-BE', 'fr-FR', 'nl-BE', 'nl'];
+
 const supportedLanguages = Object.keys(languages);
 
 export default class LocaleService extends Service {
@@ -15,6 +17,15 @@ export default class LocaleService extends Service {
   @service currentDomain;
   @service intl;
   @service dayjs;
+
+  isSupportedLocale(locale) {
+    try {
+      const localeCanonicalName = Intl.getCanonicalLocales(locale)?.[0];
+      return SUPPORTED_LOCALES.some((supportedLocale) => localeCanonicalName == supportedLocale);
+    } catch {
+      return false;
+    }
+  }
 
   handleUnsupportedLanguage(language) {
     if (!language) return;

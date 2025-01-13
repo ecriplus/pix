@@ -16,6 +16,7 @@ import PasswordResetDemandReceivedInfo from './password-reset-demand-received-in
 export default class PasswordResetDemandForm extends Component {
   @service errors;
   @service requestManager;
+  @service url;
 
   @tracked globalError = this.errors.hasErrors && this.errors.shift();
   @tracked isLoading = false;
@@ -114,7 +115,7 @@ export default class PasswordResetDemandForm extends Component {
         <section class="authentication-password-reset-demand-form__help">
           <h2>
             {{t "components.authentication.password-reset-demand-form.no-email-question"}}</h2>
-          <a href="{{t 'components.authentication.password-reset-demand-form.contact-us-link.link-url'}}">
+          <a href="{{this.url.supportHomeUrl}}">
             {{t "components.authentication.password-reset-demand-form.contact-us-link.link-text"}}
           </a>
         </section>

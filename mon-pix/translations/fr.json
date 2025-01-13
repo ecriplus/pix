@@ -184,8 +184,7 @@
           "receive-reset-button": "Recevoir un lien de réinitialisation"
         },
         "contact-us-link": {
-          "link-text": "Contactez-nous",
-          "link-url": "https://pix.fr/support"
+          "link-text": "Contactez-nous"
         },
         "fields": {
           "email": {
