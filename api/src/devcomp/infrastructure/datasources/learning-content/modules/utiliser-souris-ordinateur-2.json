@@ -113,23 +113,56 @@
     {
       "id": "48d4b5d0-7457-4071-ae6d-43dc4717ae86",
       "type": "activity",
-      "title": "Utiliser la molette de la souris",
+      "title": "La molette de la souris",
       "components": [
         {
-          "type": "element",
-          "element": {
-            "id": "d2ef92b4-1f07-46b5-a140-ade263165908",
-            "type": "text",
-            "content": "<p>👉 <strong>Dans la zone ci-dessous, utilisez la molette pour déplacer l'image vers le haut et vers le bas :</strong> </p><ul><li>Étape 1 : Placez le pointeur entre les deux barres violettes</li><li>Étape 2 : Faites rouler la molette de votre souris vers le haut, ou vers le bas.</li><li>Étape 3 : Déplacez l'image jusqu'à ce que le motif rouge devienne vert et se superpose parfaitement avec l'image.</li></ul>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "fd7af902-632e-4a25-b7fd-0328dd3b5614",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-molette2image/image-immeuble.jpg\" width=\"692\" height=\"360\"></iframe>"
-          }
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "5173f727-635c-4ad9-8651-0b379e0b538e",
+                  "type": "text",
+                  "content": "<p>👉&nbsp;Dans la zone ci-dessous, utilisez la molette pour découvir toute l'image.&nbsp;Vous devrez ensuite&nbsp;répondre à une question : </p>\n<ul>\n    <li>Étape 1 : Placez le pointeur sur l'image</li>\n    <li>Étape 2 : Faites rouler la molette de votre souris vers le haut et vers le bas.</li>\n    <li>Étape 3 : Déplacez l'image jusqu'à trouver le balcon le plus bas de l'immeuble.</li>\n</ul>"
+                },
+                {
+                  "id": "7aac23e0-6642-4ca4-928f-50e074dabc77",
+                  "type": "text",
+                  "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-molette2image/test image scroll-02-02.jpg\" width=\"680\" height=\"340\"></iframe>"
+                },
+                {
+                  "id": "6c768c45-998a-4769-8dcf-18f72a15bab8",
+                  "type": "qcu",
+                  "instruction": "<p>Dans l'image ci-dessus, que fait la personne sur le balcon le plus bas ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Elle se détend au soleil.</p>",
+                      "feedback": "<p>Mauvaise réponse.<br>Ce personnage n'est pas sur le balcon le plus bas. Vous pouvez utiliser la molette pour descendre encore plus bas dans l'image.<br></p>"
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Elle arrose ses plantes.</p>",
+                      "feedback": "<p>Bonne réponse. <br>Vous avez réussi à descendre dans toute l'image jusqu'au dernier balcon. <br></p>"
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Elle étend son linge.</p>",
+                      "feedback": "<p>Mauvaise réponse.<br>Cette activité est celle du personnage du premier balcon de l'immeuble.&nbsp;Utilisez la molette de votre souris quand votre pointeur est sur l'image. Faites défiler l'image pour découvrir les autres fenêtres et balcons de l'immeuble.</p>"
+                    }
+                  ],
+                  "feedbacks": {
+                    "valid": "",
+                    "invalid": ""
+                  },
+                  "solution": "2"
+                }
+              ]
+            },
+            {
+              "elements": []
+            }
+          ]
         }
       ]
     },
