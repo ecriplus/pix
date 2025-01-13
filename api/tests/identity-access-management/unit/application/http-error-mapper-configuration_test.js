@@ -62,7 +62,7 @@ describe('Unit | Identity Access Management | Application | HttpErrorMapperConfi
       );
 
       //when
-      const error = httpErrorMapper.httpErrorFn();
+      const error = httpErrorMapper.httpErrorFn(new MissingOrInvalidCredentialsError());
 
       //then
       expect(error).to.be.instanceOf(HttpErrors.UnauthorizedError);
