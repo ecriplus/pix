@@ -92,8 +92,8 @@
               }
             ],
             "feedbacks": {
-              "valid": "<p></p>",
-              "invalid": "<p></p>"
+              "valid": "",
+              "invalid": ""
             },
             "solution": "2"
           }
@@ -184,7 +184,7 @@
                   "type": "image",
                   "url": "https://i.imgur.com/UdheHeR.png",
                   "alt": "",
-                  "alternativeText": "<p>Fiche du jeu vidéo Pixel world :</p><ul><li>Pixel world</li><li>Pixel industry</li><li>Action et aventure, Famille et enfants</li><li>3 étoilles, 21,5k</li><li>bouton Obtenir</li><li>pictogramme «!»<br></li><br></ul>"
+                  "alternativeText": "<p>Fiche du jeu vidéo Pixel world :</p><ul><li>Pixel world</li><li>Pixel industry</li><li>Action et aventure, Famille et enfants</li><li>3 étoilles, 21,5k</li><li>bouton Obtenir</li><li>pictogramme «!»</li></ul>"
                 },
                 {
                   "id": "10dfb9e3-02de-4f3f-b7d1-aae0d1991f9e",
@@ -208,8 +208,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p></p>",
-                    "invalid": "<p></p>"
+                    "valid": "",
+                    "invalid": ""
                   },
                   "solution": "1"
                 }
@@ -331,8 +331,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p></p>",
-                    "invalid": "<p></p>"
+                    "valid": "",
+                    "invalid": ""
                   },
                   "solution": "3"
                 }
@@ -374,8 +374,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p></p>",
-                    "invalid": "<p></p>"
+                    "valid": "",
+                    "invalid": ""
                   },
                   "solution": "2"
                 }
@@ -504,8 +504,8 @@
               }
             ],
             "feedbacks": {
-              "valid": "<p></p>",
-              "invalid": "<p></p>"
+              "valid": "",
+              "invalid": ""
             },
             "solution": "2"
           }
