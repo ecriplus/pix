@@ -184,7 +184,7 @@
           "receive-reset-button": "Receive a reset link"
         },
         "contact-us-link": {
-          "link-text": "Contact us"
+          "link-text": "Consult the help center"
         },
         "fields": {
           "email": {
@@ -193,7 +193,7 @@
             "placeholder": "e.g. john.smith@email.com"
           }
         },
-        "no-email-question": "No email address?",
+        "no-email-question": "Having trouble connecting to Pix?",
         "rule": "All fields are required."
       },
       "password-reset-demand-received-info": {

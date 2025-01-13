@@ -184,7 +184,7 @@
           "receive-reset-button": "Recevoir un lien de réinitialisation"
         },
         "contact-us-link": {
-          "link-text": "Contactez-nous"
+          "link-text": "Consultez le centre d'aide"
         },
         "fields": {
           "email": {
@@ -193,7 +193,7 @@
             "placeholder": "ex: jean.dupont@email.com"
           }
         },
-        "no-email-question": "Pas d’adresse e-mail renseignée ?",
+        "no-email-question": "Un problème pour vous connecter à Pix ?",
         "rule": "Tous les champs sont obligatoires."
       },
       "password-reset-demand-received-info": {
