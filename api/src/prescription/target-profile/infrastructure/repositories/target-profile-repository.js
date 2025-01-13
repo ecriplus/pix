@@ -1,9 +1,9 @@
-import { knex } from '../../../db/knex-database-connection.js';
-import { Badge } from '../../../src/evaluation/domain/models/Badge.js';
-import { NotFoundError } from '../../../src/shared/domain/errors.js';
-import { ObjectValidationError } from '../../../src/shared/domain/errors.js';
-import { TargetProfile } from '../../../src/shared/domain/models/index.js';
-import { DomainTransaction } from '../DomainTransaction.js';
+import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
+import { Badge } from '../../../../evaluation/domain/models/Badge.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
+import { ObjectValidationError } from '../../../../shared/domain/errors.js';
+import { TargetProfile } from '../../../../shared/domain/models/index.js';
 
 const TARGET_PROFILE_TABLE = 'target-profiles';
 

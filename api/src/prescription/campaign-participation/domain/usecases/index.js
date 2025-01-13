@@ -4,7 +4,6 @@ import { fileURLToPath } from 'node:url';
 import * as badgeAcquisitionRepository from '../../../../../lib/infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeForCalculationRepository from '../../../../../lib/infrastructure/repositories/badge-for-calculation-repository.js';
 import * as learningContentRepository from '../../../../../lib/infrastructure/repositories/learning-content-repository.js';
-import * as targetProfileRepository from '../../../../../lib/infrastructure/repositories/target-profile-repository.js';
 import * as stageCollectionRepository from '../../../../../lib/infrastructure/repositories/user-campaign-results/stage-collection-repository.js';
 import * as tutorialRepository from '../../../../devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as compareStagesAndAcquiredStages from '../../../../evaluation/domain/services/stages/stage-and-stage-acquisition-comparison-service.js';
@@ -24,6 +23,7 @@ import * as organizationRepository from '../../../../shared/infrastructure/repos
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
+import * as targetProfileRepository from '../../../target-profile/infrastructure/repositories/target-profile-repository.js';
 import * as disabledPoleEmploiNotifier from '../../infrastructure/externals/pole-emploi/disabled-pole-emploi-notifier.js';
 import * as poleEmploiNotifier from '../../infrastructure/externals/pole-emploi/pole-emploi-notifier.js';
 import * as campaignAnalysisRepository from '../../infrastructure/repositories/campaign-analysis-repository.js';
@@ -56,6 +56,7 @@ import * as poleEmploiSendingRepository from '../../infrastructure/repositories/
  * @typedef { import ('../../infrastructure/repositories/campaign-participation-repository.js')} CampaignParticipationRepository
  * @typedef { import ('../../infrastructure/repositories/campaign-profile-repository.js')} CampaignProfileRepository
  * @typedef { import ('../../../campaign/infrastructure/repositories/campaign-repository.js')} CampaignRepository
+ * @typedef { import ('../../../target-profile/infrastructure/repositories/target-profile-repository.js')} targetProfileRepository
  * @typedef { import ('../../../../evaluation/domain/services/stages/stage-and-stage-acquisition-comparison-service.js')} CompareStagesAndAcquiredStages
  * @typedef { import ('../../../../evaluation/infrastructure/repositories/competence-evaluation-repository.js')} CompetenceEvaluationRepository
  * @typedef { import ('../../../../shared/infrastructure/repositories/competence-repository.js')} CompetenceRepository
