@@ -4,7 +4,7 @@ import { gt } from 'ember-truth-helpers';
 
 <template>
   {{#if (gt @occupied @total)}}
-    <PixNotificationAlert class="capacity-alert" @type="error" @withIcon={{true}}>
+    <PixNotificationAlert @type="error" @withIcon={{true}}>
       {{t "banners.over-capacity.message"}}
     </PixNotificationAlert>
   {{/if}}

@@ -19,10 +19,17 @@ function setTitleClasses(spaceBetweenTools, centerTitle) {
       {{/if}}
     </div>
 
+    {{#if (has-block "notificationAlert")}}
+      <div class="page-title__notification-alert">
+        {{yield to="notificationAlert"}}
+      </div>
+    {{/if}}
+
     {{#if (has-block "subtitle")}}
       <div class="page-title__sub-title">
         {{yield to="subtitle"}}
       </div>
     {{/if}}
+
   </header>
 </template>
