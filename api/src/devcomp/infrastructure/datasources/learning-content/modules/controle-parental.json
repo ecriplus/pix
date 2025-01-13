@@ -89,8 +89,8 @@
               }
             ],
             "feedbacks": {
-              "valid": "",
-              "invalid": ""
+              "valid": "<p><br></p>",
+              "invalid": "<p><br></p>"
             },
             "solution": "1"
           }
@@ -165,7 +165,7 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "",
+                    "valid": "<p><br></p>",
                     "invalid": "<p><br></p>"
                   },
                   "solution": "2"
@@ -201,8 +201,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "",
-                    "invalid": ""
+                    "valid": "<p><br></p>",
+                    "invalid": "<p><br></p>"
                   },
                   "solution": "1"
                 }
@@ -237,8 +237,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "",
-                    "invalid": ""
+                    "valid": "<p><br></p>",
+                    "invalid": "<p><br></p>"
                   },
                   "solution": "3"
                 }
@@ -436,8 +436,8 @@
               }
             ],
             "feedbacks": {
-              "valid": "",
-              "invalid": ""
+              "valid": "<p><br></p>",
+              "invalid": "<p><br></p>"
             },
             "solution": "1"
           }
