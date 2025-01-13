@@ -30,11 +30,11 @@
     },
     {
       "grainId": "62699177-a148-4297-a965-729158816d59",
-      "content": "<p>Bravo ! 🎉 Vous avez tapé vos premiers mots.<br>À présent, apprenez en plus sur la zone de texte.</p>"
+      "content": "<pÀ vous de jouer ! <span aria-hidden=\"true\">🕹️</span> Commencez par taper des mots en utilisant uniquement les touches lettres.</p>"
     },
     {
-      "grainId": "e7390f32-cf29-49c4-af61-cb0ee142d06e",
-      "content": "<p>Bravo ! 🎉 Vous avez tapé vos premiers mots. <br>À présent, apprenez en plus sur la zone de texte.</p>"
+      "grainId": "b72675fd-48d4-445e-804f-6304fe70ec52",
+      "content": "<p>Bravo ! <span aria-hidden=\"true\">🎉</span> Vous avez tapé vos premiers mots. <br>À présent, apprenez en plus sur la zone de texte.</p>"
     },
     {
       "grainId": "36a17bbd-4975-4f9d-878e-0759801956fd",
@@ -161,7 +161,7 @@
             "type": "image",
             "url": "https://i.imgur.com/d7dO78H.png",
             "alt": "",
-            "alternativeText": "<p>Les touches du module :&nbsp;</p><ul><li>les accents</li><li>effacer et entrée</li><li>les lettres</li><li>espace</li><li>les flêches directionnelles</li><br></ul>"
+            "alternativeText": "<p>Les touches du module :&nbsp;</p><ul><li>les accents</li><li>effacer et entrée</li><li>les lettres</li><li>espace</li><li>les flêches directionnelles</li></ul>"
           }
         }
       ]
