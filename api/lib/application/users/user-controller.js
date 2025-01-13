@@ -1,6 +1,5 @@
 import { usecases as devcompUsecases } from '../../../src/devcomp/domain/usecases/index.js';
 import * as trainingSerializer from '../../../src/devcomp/infrastructure/serializers/jsonapi/training-serializer.js';
-import * as userDetailsForAdminSerializer from '../../../src/identity-access-management/infrastructure/serializers/jsonapi/user-details-for-admin.serializer.js';
 import * as certificationCenterMembershipSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
@@ -24,21 +23,6 @@ const findPaginatedUserRecommendedTrainings = async function (
   });
 
   return dependencies.trainingSerializer.serialize(userRecommendedTrainings, meta);
-};
-
-const addPixAuthenticationMethodByEmail = async function (
-  request,
-  h,
-  dependencies = { userDetailsForAdminSerializer },
-) {
-  const userId = request.params.id;
-  const email = request.payload.data.attributes.email.trim().toLowerCase();
-
-  const userUpdated = await usecases.addPixAuthenticationMethodByEmail({
-    userId,
-    email,
-  });
-  return h.response(dependencies.userDetailsForAdminSerializer.serialize(userUpdated)).created();
 };
 
 const reassignAuthenticationMethods = async function (request, h) {
@@ -81,7 +65,6 @@ const findCertificationCenterMembershipsByUser = async function (
 };
 
 const userController = {
-  addPixAuthenticationMethodByEmail,
   findCertificationCenterMembershipsByUser,
   findPaginatedUserRecommendedTrainings,
   findUserOrganizationsForAdmin,

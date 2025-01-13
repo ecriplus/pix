@@ -1,11 +1,11 @@
-import { addPixAuthenticationMethodByEmail } from '../../../../lib/domain/usecases/add-pix-authentication-method-by-email.js';
-import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
-import { AuthenticationMethod } from '../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
+import { addPixAuthenticationMethod } from '../../../../../src/identity-access-management/domain/usecases/add-pix-authentication-method.usecase.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | add-pix-authentication-method-by-email', function () {
+describe('Unit | Identity Access Management | Domain | UseCase | add-pix-authentication-method', function () {
   let userRepository, authenticationMethodRepository;
-  let passwordGenerator;
+  let passwordGeneratorService;
   let cryptoService;
 
   beforeEach(function () {
@@ -18,7 +18,7 @@ describe('Unit | UseCase | add-pix-authentication-method-by-email', function () 
       hasIdentityProviderPIX: sinon.stub(),
       create: sinon.stub(),
     };
-    passwordGenerator = {
+    passwordGeneratorService = {
       generateComplexPassword: sinon.stub(),
     };
     cryptoService = {
@@ -26,7 +26,7 @@ describe('Unit | UseCase | add-pix-authentication-method-by-email', function () 
     };
   });
 
-  it('should check if email is available', async function () {
+  it('checks if email is available', async function () {
     // given
     const email = 'newEmail@example.net';
     const generatedPassword = 'Pix12345';
@@ -34,14 +34,14 @@ describe('Unit | UseCase | add-pix-authentication-method-by-email', function () 
     const user = domainBuilder.buildUser({});
     domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider({ userId: user.id });
 
-    passwordGenerator.generateComplexPassword.returns(generatedPassword);
+    passwordGeneratorService.generateComplexPassword.returns(generatedPassword);
     cryptoService.hashPassword.resolves(hashedPassword);
 
     // when
-    await addPixAuthenticationMethodByEmail({
+    await addPixAuthenticationMethod({
       userId: user.id,
       email,
-      passwordGenerator,
+      passwordGeneratorService,
       cryptoService,
       userRepository,
       authenticationMethodRepository,
@@ -52,7 +52,7 @@ describe('Unit | UseCase | add-pix-authentication-method-by-email', function () 
   });
 
   context('when user have not a Pix authentication method', function () {
-    it('should add Pix authentication method', async function () {
+    it('adds Pix authentication method', async function () {
       // given
       const email = 'newEmail@example.net';
       const generatedPassword = 'Pix12345';
@@ -60,14 +60,14 @@ describe('Unit | UseCase | add-pix-authentication-method-by-email', function () 
       const user = domainBuilder.buildUser({});
       domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider({ userId: user.id });
 
-      passwordGenerator.generateComplexPassword.returns(generatedPassword);
+      passwordGeneratorService.generateComplexPassword.returns(generatedPassword);
       cryptoService.hashPassword.withArgs(generatedPassword).resolves(hashedPassword);
 
       // when
-      await addPixAuthenticationMethodByEmail({
+      await addPixAuthenticationMethod({
         userId: user.id,
         email,
-        passwordGenerator,
+        passwordGeneratorService,
         cryptoService,
         authenticationMethodRepository,
         userRepository,
@@ -88,7 +88,7 @@ describe('Unit | UseCase | add-pix-authentication-method-by-email', function () 
     });
   });
 
-  it('should update user with new email', async function () {
+  it('updates user with new email', async function () {
     // given
     const email = 'newEmail@example.net';
     const generatedPassword = 'Pix12345';
@@ -96,14 +96,14 @@ describe('Unit | UseCase | add-pix-authentication-method-by-email', function () 
     const user = domainBuilder.buildUser({ cgu: true });
     domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider({ userId: user.id });
 
-    passwordGenerator.generateComplexPassword.returns(generatedPassword);
+    passwordGeneratorService.generateComplexPassword.returns(generatedPassword);
     cryptoService.hashPassword.resolves(hashedPassword);
 
     // when
-    await addPixAuthenticationMethodByEmail({
+    await addPixAuthenticationMethod({
       userId: user.id,
       email,
-      passwordGenerator,
+      passwordGeneratorService,
       cryptoService,
       authenticationMethodRepository,
       userRepository,

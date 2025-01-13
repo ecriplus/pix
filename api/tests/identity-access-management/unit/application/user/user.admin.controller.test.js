@@ -4,7 +4,7 @@ import { User } from '../../../../../src/identity-access-management/domain/model
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { UserNotAuthorizedToRemoveAuthenticationMethod } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, expect, hFake, sinon } from '../../../../test-helper.js';
+import { catchErr, domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Application | Controller | Admin | User', function () {
   describe('#findPaginatedFilteredUsers', function () {
@@ -237,6 +237,47 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
       expect(userAnonymizedDetailsForAdminSerializer.serialize).to.have.been.calledWithExactly(userDetailsForAdmin);
       expect(response.statusCode).to.equal(200);
       expect(response.source).to.deep.equal(anonymizedUserSerialized);
+    });
+  });
+
+  describe('#addPixAuthenticationMethod', function () {
+    it('returns the user with the new pix authentication method', async function () {
+      // given
+      const email = '    USER@example.net    ';
+      const user = domainBuilder.buildUser();
+      const updatedUser = domainBuilder.buildUser({ ...user, email: 'user@example.net' });
+      const updatedUserSerialized = Symbol('the user with a new email and serialized');
+      sinon
+        .stub(usecases, 'addPixAuthenticationMethod')
+        .withArgs({ userId: user.id, email: 'user@example.net' })
+        .resolves(updatedUser);
+      const userDetailsForAdminSerializer = { serialize: sinon.stub() };
+      userDetailsForAdminSerializer.serialize.withArgs(updatedUser).returns(updatedUserSerialized);
+
+      // when
+      const request = {
+        auth: {
+          credentials: {
+            userId: user.id,
+          },
+        },
+        params: {
+          id: user.id,
+        },
+        payload: {
+          data: {
+            attributes: {
+              email,
+            },
+          },
+        },
+      };
+      const result = await userAdminController.addPixAuthenticationMethod(request, hFake, {
+        userDetailsForAdminSerializer,
+      });
+
+      // then
+      expect(result.source).to.be.equal(updatedUserSerialized);
     });
   });
 

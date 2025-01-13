@@ -104,4 +104,113 @@ describe('Unit | Identity Access Management | Application | Route | User', funct
       sinon.assert.notCalled(userAdminController.updateUserDetailsByAdmin);
     });
   });
+
+  describe('POST /api/admin/users/{id}/add-pix-authentication-method', function () {
+    describe('when user role is "SUPER_ADMIN"', function () {
+      it('returns 200', async function () {
+        // given
+        sinon
+          .stub(userAdminController, 'addPixAuthenticationMethod')
+          .callsFake((request, h) => h.response({}).code(201));
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+          .callsFake((request, h) => h.response(true));
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(routesUnderTest);
+        const payload = { data: { attributes: { email: 'user@rexample.net' } } };
+
+        // when
+        const { statusCode } = await httpTestServer.request(
+          'POST',
+          '/api/admin/users/1/add-pix-authentication-method',
+          payload,
+        );
+
+        // then
+        expect(statusCode).to.equal(201);
+        sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
+        sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
+        sinon.assert.calledOnce(userAdminController.addPixAuthenticationMethod);
+      });
+    });
+
+    describe('when user role is "SUPPORT"', function () {
+      it('returns 200', async function () {
+        // given
+        sinon
+          .stub(userAdminController, 'addPixAuthenticationMethod')
+          .callsFake((request, h) => h.response({}).code(201));
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport').callsFake((request, h) => h.response(true));
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(routesUnderTest);
+        const payload = { data: { attributes: { email: 'user@rexample.net' } } };
+
+        // when
+        const { statusCode } = await httpTestServer.request(
+          'POST',
+          '/api/admin/users/1/add-pix-authentication-method',
+          payload,
+        );
+
+        // then
+        expect(statusCode).to.equal(201);
+        sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
+        sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
+        sinon.assert.calledOnce(userAdminController.addPixAuthenticationMethod);
+      });
+    });
+
+    describe('when id is not a number', function () {
+      it('returns 400', async function () {
+        // given
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(routesUnderTest);
+
+        // when
+        const { statusCode, payload } = await httpTestServer.request(
+          'POST',
+          '/api/admin/users/invalid-id/add-pix-authentication-method',
+        );
+
+        // then
+        expect(statusCode).to.equal(400);
+        expect(JSON.parse(payload).errors[0].detail).to.equal('"id" must be a number');
+      });
+    });
+
+    describe("when user don't have access (CERTIF | METIER)", function () {
+      it('returns 403', async function () {
+        // given
+        sinon.stub(userAdminController, 'addPixAuthenticationMethod').returns('ok');
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(routesUnderTest);
+        const payload = { data: { attributes: { email: 'user@rexample.net' } } };
+
+        // when
+        const result = await httpTestServer.request(
+          'POST',
+          '/api/admin/users/1/add-pix-authentication-method',
+          payload,
+        );
+
+        // then
+        expect(result.statusCode).to.equal(403);
+        sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
+        sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
+        sinon.assert.notCalled(userAdminController.addPixAuthenticationMethod);
+      });
+    });
+  });
 });
