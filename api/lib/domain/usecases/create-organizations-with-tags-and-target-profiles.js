@@ -86,7 +86,7 @@ const createOrganizationsWithTagsAndTargetProfiles = async function ({
 export { createOrganizationsWithTagsAndTargetProfiles };
 
 async function _createOrganizations({ transformedOrganizationsData, organizationForAdminRepository }) {
-  return PromiseUtils.map(transformedOrganizationsData, async (organizationToCreate) => {
+  return PromiseUtils.mapSeries(transformedOrganizationsData, async (organizationToCreate) => {
     try {
       const createdOrganization = await organizationForAdminRepository.save(organizationToCreate.organization);
       return {
