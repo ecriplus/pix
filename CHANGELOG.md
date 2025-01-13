@@ -1,5 +1,40 @@
 # Pix Changelog
 
+## v5.14.0 (13/01/2025)
+
+
+### :rocket: Amélioration
+- [#11023](https://github.com/1024pix/pix/pull/11023) [FEATURE] Modification des pages de CGU (PIX-15589).
+- [#11063](https://github.com/1024pix/pix/pull/11063) [FEATURE] Ajouter un feature toggle pour le confinement des access tokens (PIX-15924).
+- [#10897](https://github.com/1024pix/pix/pull/10897) [FEATURE] Prendre en compte flashcards dans les scripts CSV (PIX-15634)(PIX-15857).
+
+### :building_construction: Tech
+- [#11012](https://github.com/1024pix/pix/pull/11012) [TECH] Refacto - méthodes dans OrganizationPlacesLotRepository (PIX-15818).
+- [#11076](https://github.com/1024pix/pix/pull/11076) [TECH] :truck: Dépalce le sérializer `csv-column` vers `src`.
+- [#11033](https://github.com/1024pix/pix/pull/11033) [TECH] :truck: Déplacement de `verify-certification-code-service` vers `src`.
+- [#11060](https://github.com/1024pix/pix/pull/11060) [TECH] :truck: Déplace le service d'export pour le CPF vers `src`.
+- [#11044](https://github.com/1024pix/pix/pull/11044) [TECH] :truck: Déplacement de deux `knowledge repositories` vers `src`.
+
+### :bug: Correction
+- [#11072](https://github.com/1024pix/pix/pull/11072) [BUGFIX] Ajoute la marge entre la PixNotificationAlert et le contenu de la page  (PIX-16050) .
+- [#11065](https://github.com/1024pix/pix/pull/11065) [BUGFIX] Sur Pix App .org corriger les liens vers le support qui ne sont pas bons sur les pages de réinitialisation du mot de passe (PIX-16033).
+- [#11069](https://github.com/1024pix/pix/pull/11069) [BUGFIX] Changer la phrase d'acceptation des CGUs dans pix-app, orga et certif (PIX-16000).
+- [#11056](https://github.com/1024pix/pix/pull/11056) [BUGFIX] Correction de la gestion des erreurs de connexion SSO OIDC (PIX-15621).
+- [#11037](https://github.com/1024pix/pix/pull/11037) [BUGFIX] Affiche le logo sur la page des cgu.
+
+### :arrow_up: Montée de version
+- [#11078](https://github.com/1024pix/pix/pull/11078) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.3 (certif).
+- [#11082](https://github.com/1024pix/pix/pull/11082) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.5 (mon-pix).
+- [#11080](https://github.com/1024pix/pix/pull/11080) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.5 (junior).
+- [#11079](https://github.com/1024pix/pix/pull/11079) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.5 (admin).
+- [#11077](https://github.com/1024pix/pix/pull/11077) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.3 (admin).
+- [#11068](https://github.com/1024pix/pix/pull/11068) [BUMP] Update dependency ember-test-selectors to v7 (admin).
+- [#11070](https://github.com/1024pix/pix/pull/11070) [BUMP] Lock file maintenance (api).
+- [#11049](https://github.com/1024pix/pix/pull/11049) [BUMP] Update dependency ember-resolver to v13 (junior).
+- [#11051](https://github.com/1024pix/pix/pull/11051) [BUMP] Update dependency eslint-plugin-cypress to v4 (e2e).
+- [#11057](https://github.com/1024pix/pix/pull/11057) [BUMP] Update dependency ember-simple-auth to v7 (mon-pix).
+- [#11054](https://github.com/1024pix/pix/pull/11054) [BUMP] Update dependency eslint to v9 (e2e).
+
 ## v5.13.0 (10/01/2025)
 
 
