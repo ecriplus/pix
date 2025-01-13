@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 import * as obfuscationService from '../../../../../lib/domain/services/obfuscation-service.js';
 import * as userReconciliationService from '../../../../../lib/domain/services/user-reconciliation-service.js';
-import * as campaignRepository from '../../../../../lib/infrastructure/repositories/campaign-repository.js';
+import * as campaignRepository from '../../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as organizationFeatureApi from '../../../../organizational-entities/application/api/organization-features-api.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
@@ -33,7 +33,7 @@ import { importStorage } from '../../infrastructure/storage/import-storage.js';
 
 /**
  * @typedef {import ('../../infrastructure/repositories/organization-feature-repository.js')} CampaignParticipationRepository
- * @typedef {import ('../../../../../lib/infrastructure/repositories/campaign-repository.js')} CampaignRepository
+ * @typedef {import ('../../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js')} CampaignRepository
  * @typedef {import ('../../infrastructure/repositories/jobs/import-organization-learners-job-repository.js')} ImportOrganizationLearnersJobRepository
  * @typedef {import ('../../infrastructure/storage/import-storage.js')} ImportStorage
  * @typedef {import ('../../infrastructure/repositories/jobs/import-sup-organization-learners-job-repository.js')} ImportSupOrganizationLearnersJobRepository

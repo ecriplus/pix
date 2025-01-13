@@ -1,14 +1,11 @@
-// eslint-disable-next-line @eslint-community/eslint-comments/disable-enable-pair
-/* eslint-disable import/no-restricted-paths */
 import * as defaultConvertLevelStagesIntoThresholdsService from '../../../../src/evaluation/domain/services/stages/convert-level-stages-into-thresholds-service.js';
 import * as defaultGetNewAcquiredStagesService from '../../../../src/evaluation/domain/services/stages/get-new-acquired-stages-service.js';
 import * as defaultStageAcquisitionRepository from '../../../../src/evaluation/infrastructure/repositories/stage-acquisition-repository.js';
 import * as defaultStageRepository from '../../../../src/evaluation/infrastructure/repositories/stage-repository.js';
+import * as defaultCampaignRepository from '../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as defaultCampaignParticipationRepository from '../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import * as defaultKnowledgeElementRepositoryRepository from '../../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as defaultSkillRepository from '../../../../src/shared/infrastructure/repositories/skill-repository.js';
-import * as defaultCampaignRepository from '../../../infrastructure/repositories/campaign-repository.js';
-import * as defaultCampaignSkillRepository from '../../../infrastructure/repositories/campaign-skill-repository.js';
 import * as defaultGetMasteryPercentageService from '../../services/get-mastery-percentage-service.js';
 
 /**
@@ -31,7 +28,6 @@ const handleStageAcquisition = async function ({
   stageRepository = defaultStageRepository,
   skillRepository = defaultSkillRepository,
   campaignRepository = defaultCampaignRepository,
-  campaignSkillRepository = defaultCampaignSkillRepository,
   stageAcquisitionRepository = defaultStageAcquisitionRepository,
   knowledgeElementRepository = defaultKnowledgeElementRepositoryRepository,
   campaignParticipationRepository = defaultCampaignParticipationRepository,
@@ -48,7 +44,10 @@ const handleStageAcquisition = async function ({
   if (!stagesForThisCampaign.length) return;
 
   if (stagesAreLevelStages(stagesForThisCampaign)) {
-    const skillIds = await campaignSkillRepository.getSkillIdsByCampaignId(campaignParticipation.campaignId);
+    const skillIds = await campaignRepository.findSkillIds({
+      campaignId: campaignParticipation.campaignId,
+      filterStatus: 'all',
+    });
     const skills = await skillRepository.findOperativeByIds(skillIds);
 
     convertLevelStagesIntoThresholdsService.convertLevelStagesIntoThresholds(stagesForThisCampaign, skills);

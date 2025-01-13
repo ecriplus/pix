@@ -68,6 +68,7 @@ import * as dataProtectionOfficerRepository from '../../../src/organizational-en
 import { organizationForAdminRepository } from '../../../src/organizational-entities/infrastructure/repositories/organization-for-admin.repository.js';
 import { tagRepository } from '../../../src/organizational-entities/infrastructure/repositories/tag.repository.js';
 import * as campaignManagementRepository from '../../../src/prescription/campaign/infrastructure/repositories/campaign-management-repository.js';
+import * as campaignRepository from '../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as divisionRepository from '../../../src/prescription/campaign/infrastructure/repositories/division-repository.js';
 import * as disabledPoleEmploiNotifier from '../../../src/prescription/campaign-participation/infrastructure/externals/pole-emploi/disabled-pole-emploi-notifier.js';
 import * as poleEmploiNotifier from '../../../src/prescription/campaign-participation/infrastructure/externals/pole-emploi/pole-emploi-notifier.js';
@@ -129,7 +130,6 @@ import * as obfuscationService from '../../domain/services/obfuscation-service.j
 import * as passwordGenerator from '../../domain/services/password-generator.js';
 import * as badgeAcquisitionRepository from '../../infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeForCalculationRepository from '../../infrastructure/repositories/badge-for-calculation-repository.js';
-import * as campaignRepository from '../../infrastructure/repositories/campaign-repository.js';
 import * as certifiableProfileForLearningContentRepository from '../../infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as flashAssessmentResultRepository from '../../infrastructure/repositories/flash-assessment-result-repository.js';

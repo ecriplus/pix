@@ -1,10 +1,10 @@
-import { knex } from '../../../db/knex-database-connection.js';
-import { CAMPAIGN_FEATURES } from '../../../src/shared/domain/constants.js';
-import { NotFoundError } from '../../../src/shared/domain/errors.js';
-import { Campaign } from '../../../src/shared/domain/models/Campaign.js';
-import * as skillRepository from '../../../src/shared/infrastructure/repositories/skill-repository.js';
-import * as tubeRepository from '../../../src/shared/infrastructure/repositories/tube-repository.js';
-import { DomainTransaction } from '../DomainTransaction.js';
+import { knex } from '../../../../../db/knex-database-connection.js';
+import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
+import { Campaign } from '../../../../shared/domain/models/Campaign.js';
+import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
+import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
 
 const areKnowledgeElementsResettable = async function ({ id }) {
   const knexConn = DomainTransaction.getConnection();
