@@ -460,6 +460,21 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           });
         });
 
+        const badge1 = databaseBuilder.factory.buildBadge({
+          title: 'Mon super badge',
+          targetProfileId: targetProfile.id,
+        });
+        databaseBuilder.factory.buildBadge({
+          title: 'Mon autre super badge',
+          targetProfileId: targetProfile.id,
+        });
+
+        databaseBuilder.factory.buildBadgeAcquisition({
+          badgeId: badge1.id,
+          userId: participant.id,
+          campaignParticipationId: campaignParticipation.id,
+        });
+
         await databaseBuilder.commit();
       });
 
@@ -479,6 +494,8 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           '"Oui";' +
           `"${sharedAtFormated}";` +
           '1;' +
+          '"Non";' +
+          '"Oui";' +
           '"Non";' +
           '0,67;' +
           '0,67;' +
@@ -762,5 +779,3 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
     });
   });
 });
-
-// tester le filename
