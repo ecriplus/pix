@@ -1,0 +1,549 @@
+{
+  "id": "875df1ff-27c1-4b41-a0a8-5ff46013f35e",
+  "slug": "jeu-video-enfant",
+  "title": "Choisir un jeu vidéo adapté à son enfant",
+  "isBeta": false,
+  "details": {
+    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "description": "<p>Les jeux vidéo, c’est comme les livres ou les films : il y en a pour tous les goûts et tous les âges. <br>Alors, si votre enfant veut jouer sur smartphone, console ou ordinateur, il faut être vigilant pour bien choisir ses jeux ! 🔎 <br>Dans ce module, découvrez des informations clés à vérifier avant de choisir un jeu vidéo.</p>",
+    "duration": 10,
+    "level": "Débutant",
+    "objectives": [
+      "<p>Identifier des informations clés sur la fiche d’un jeu vidéo</p>",
+      "<p>Vérifier si un jeu vidéo est adapté à l’âge d’un enfant grâce à la classification PEGI</p>",
+      "<p>Vérifier si un jeu vidéo propose des achats intégrés et des échanges avec d’autres joueurs.</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "transitionTexts": [
+    {
+      "grainId": "4812058e-6ccf-4d4b-889d-c5a18882292a",
+      "content": "<p>Franck a une fille de 8 ans, Marilou. Pour son anniversaire, elle voudrait un jeu vidéo dont elle a entendu parler à l’école : Dragon’s Kingdom. 🎮</p>"
+    },
+    {
+      "grainId": "935c4c4c-4705-4e2e-8c8f-a8db2a285bde",
+      "content": "<p>Avant de choisir un jeu pour sa fille, Franck peut vérifier plusieurs informations clés sur la fiche du jeu.<br>Découvrons ensemble la première information : la signalétique PEGI.<br></p>"
+    },
+    {
+      "grainId": "9a521207-4957-4512-8d24-b6e0f3d21226",
+      "content": "<p>Voyons si vous avez retenu l’essentiel. 🎯</p>"
+    },
+    {
+      "grainId": "d09b483b-c182-44be-9c55-8c570e7b70d2",
+      "content": "<p>Franck sait maintenant vérifier l’âge recommandé pour un jeu.<br>En plus, il veut éviter que Marilou dépense de l’argent en achetant des bonus dans le jeu.<br>Découvrez ce que sont les achats intégrés dans les jeux vidéo. 💸</p>"
+    },
+    {
+      "grainId": "fe9fa67b-ddfc-4932-8f5d-eba163a206b9",
+      "content": "<p>Vous savez à présent ce que sont les achats intégrés. <br>À vous de jouer pour les repérer sur des boîtes ou des fiches de jeux.</p>"
+    },
+    {
+      "grainId": "779de80b-ba18-4e95-ab6d-bbc5ce8edd5a",
+      "content": "<p>Après avoir vérifié le pictogramme d’âge PEGI et la présence d’achats intégrés, Franck peut vérifier une troisième information clé : la possibilité d’interagir avec d’autres joueurs dans le jeu. 💬</p>"
+    },
+    {
+      "grainId": "6e7dad63-ee7e-428b-a25f-08d760b00503",
+      "content": "<p>Vous connaissez à présent 3 informations clés à vérifier sur un jeu vidéo.<br>Franck sait maintenant que Dragon's kingdom, le jeu demandé par Marilou n’est pas adapté à son âge.<br>Après discussion avec elle, il souhaite lui offrir un autre jeu.🎁</p>"
+    },
+    {
+      "grainId": "4a349720-15b7-4c86-a431-344410332fd5",
+      "content": "<p>Grâce à vous Franck a choisi un jeu vidéo pour Marilou ! 👏<br>Il peut à présent jouer avec elle, pour l’accompagner dans sa découverte du jeu.</p>"
+    }
+  ],
+  "grains": [
+    {
+      "id": "4812058e-6ccf-4d4b-889d-c5a18882292a",
+      "type": "discovery",
+      "title": "La fiche d'un jeu vidéo",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "442fa2ba-d532-423b-ba89-c4ff38ff270c",
+            "type": "text",
+            "content": "<p>Avant d’acheter et de télécharger le jeu réclamé par Marilou, Franck se rend sur la fiche du jeu en ligne pour regarder les informations concernant le jeu. 👀</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "3fd2025c-f39b-4f28-9243-ac390b7106c2",
+            "type": "image",
+            "url": "https://i.imgur.com/PFLdHPX.png",
+            "alt": "",
+            "alternativeText": "<p>Jeu Craft Dragon's kingdom</p><ul><li>Epix</li><li>Tag «&nbsp;Consoles&nbsp;»</li><li>Option sélectionnée «&nbsp;Gratuit&nbsp;»<br></li><li>Ajouter au panier</li><li>PEGI 12, peur</li><li>abonnement requis pour le jeu en ligne</li><li>achats intra jeux facultatifs</li><li>de 1 à 4 joueurs</li><li>jeu en ligne facultatif</li></ul><p><br></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "3aeba304-6774-4d57-a19a-3309f2181368",
+            "type": "qcu",
+            "instruction": "<p>A votre avis, ce jeu est-il adapté pour Marilou ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>oui</p>",
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Sur la boîte ou la fiche d’un jeu, plusieurs informations permettent de savoir si un jeu est adapté pour un enfant, en fonction de son âge par exemple. Voyons cela ensemble !<br></p>"
+              },
+              {
+                "id": "2",
+                "content": "<p>non</p>",
+                "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Sur la boîte ou la fiche d’un jeu, plusieurs informations permettent de savoir si un jeu est adapté pour un enfant, en fonction de son âge par exemple. Voyons cela ensemble !</p>"
+              }
+            ],
+            "feedbacks": {
+              "valid": "",
+              "invalid": ""
+            },
+            "solution": "2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "935c4c4c-4705-4e2e-8c8f-a8db2a285bde",
+      "type": "lesson",
+      "title": "La signalétique PEGI",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "682ce2e6-b587-49f8-9860-ad0e32c62664",
+            "type": "text",
+            "content": "<p>Après cette vidéo, vous devrez donner la signification de pictogrammes de la signalétique PEGI.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "8f40df65-2254-4fb9-94b1-83d8bbe5ae7f",
+            "type": "text",
+            "content": "<p>[vidéo à venir]</p><ul><li>Connaître la signalétique PEGI&nbsp;(savoir que c’est obligatoire sur tous les jeux) </li><li>Comprendre la signification des marqueurs d’âge&nbsp;(contenus adaptés ou non selon l’âge mais pas niveaux de difficulté) </li><li>Comprendre la signification du marqueur d’accompagnement parental mais pas de focus détaillé sur les marqueurs de description(dans le reste du module, focus sur le picto achats intégrés et la mention échanges avec d’autres utilisateurs)</li></ul>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "9a521207-4957-4512-8d24-b6e0f3d21226",
+      "type": "activity",
+      "title": "Les pictogrammes de la signalétique PEGI",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "958e2877-83ba-42a4-9622-3ce3a078127d",
+            "type": "text",
+            "content": "<p>Répondez à chacune des questions suivantes à propos de <strong>la signalétique PEGI</strong>.</p>"
+          }
+        },
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "c9c01da7-3d63-45a6-a0d2-5d7f80dab582",
+                  "type": "image",
+                  "url": "https://i.imgur.com/3ZQpKrb.png",
+                  "alt": "",
+                  "alternativeText": "<p>Jaquette du jeu vidéo Les chroniques d'Alva :&nbsp;<br></p><ul><li>Illustration d'une elfe, de dos, avec une lance à la main qui regarde un chateau au loin.</li><li>Titre Les chroniques d'Alva </li><li>Pictogramme «12»<br></li></ul>"
+                },
+                {
+                  "id": "1255d0bf-0434-4add-9873-051c841af667",
+                  "type": "qcu",
+                  "instruction": "<p>Que signifie l'indication 12 sur ce jeu ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Le jeu est trop difficile pour les enfants de moins de 12 ans.</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme âge PEGI n’indique pas la difficulté d’un jeu. Un jeu avec le pictogramme PEGI 3, par exemple, peut être trop compliqué pour un enfant de 4 ans.</p>"
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Le jeu est inadapté aux enfants de moins de 12 ans.</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Le pictogramme âge PEGI indique la présence de contenu inadapté aux enfants en dessous de l’âge indiqué. Il n’indique pas la difficulté du jeu.</p>"
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Le jeu ne peut pas être vendu à un enfant de moins de 12 ans.</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme âge PEGI est indicatif. Il donne une information mais n’empêche pas la vente en fonction de l’âge.</p>"
+                    }
+                  ],
+                  "feedbacks": {
+                    "valid": "<p><br></p>",
+                    "invalid": "<p><br></p>"
+                  },
+                  "solution": "2"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "1360e72b-5248-41b0-9dfc-1d85264cb97c",
+                  "type": "image",
+                  "url": "https://i.imgur.com/UdheHeR.png",
+                  "alt": "",
+                  "alternativeText": "<p>Fiche du jeu vidéo Pixel world :</p><ul><li>Pixel world</li><li>Pixel industry</li><li>Action et aventure, Famille et enfants</li><li>3 étoilles, 21,5k</li><li>bouton Obtenir</li><li>pictogramme «!»<br></li><br></ul>"
+                },
+                {
+                  "id": "10dfb9e3-02de-4f3f-b7d1-aae0d1991f9e",
+                  "type": "qcu",
+                  "instruction": "<p>Que signifie le pictogramme «!» sur ce jeu ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Le jeu doit être utilisé accompagné des parents</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p> Ce pictogramme «!» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs, il peut donc y avoir des contenus ne convenant pas aux enfants !</p>"
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Le jeu n'a aucune recommandation PEGI.</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme «!» fait partie de la signalétique PEGI, il signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs.</p>"
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Le jeu est déconseillé aux enfants de moins de 7 ans.</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme «!» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs.&nbsp; Attention, il peut y avoir des contenus pour tous les âges.<br></p>"
+                    }
+                  ],
+                  "feedbacks": {
+                    "valid": "",
+                    "invalid": ""
+                  },
+                  "solution": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d09b483b-c182-44be-9c55-8c570e7b70d2",
+      "type": "lesson",
+      "title": "Les achats intégrés",
+      "components": [
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "5c339176-6325-4108-ac25-e8b811304d2c",
+                  "type": "image",
+                  "url": "https://i.imgur.com/E1fKSEZ.png",
+                  "alt": "",
+                  "alternativeText": ""
+                },
+                {
+                  "id": "44c670d6-fdfc-4cdd-8a8b-2304b8fe019b",
+                  "type": "text",
+                  "content": "<p>👛 Dans un jeu vidéo (gratuit ou payant), des achats de quelques centimes ou euros peuvent être proposés tout au long de la partie pour obtenir, par exemple : </p><ul><li>de la <strong>monnaie virtuelle</strong>,&nbsp;</li><li>des <strong>bonus </strong>ou des <strong>vies </strong>supplémentaires,</li><li>des améliorations pour les personnages.&nbsp;</li></ul><p>Ces achats en jeu sont appelés des <strong>achats intégrés</strong>. Si une carte bancaire est enregistrée sur l’appareil (smartphone, console…) l’achat sera débité automatiquement.</p><p>⚠️ Attention : même si ce sont des petites sommes d’argent, la facture peut vite grimper !</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "cfbb169d-45d8-4029-a62b-a2d78d33cfc4",
+                  "type": "image",
+                  "url": "https://i.imgur.com/qmjbQIS.png",
+                  "alt": "",
+                  "alternativeText": "<p>Pictogramme PEGI Achats intégré</p>"
+                },
+                {
+                  "id": "594dc9c3-d5e2-4698-82c6-62fbeca24e75",
+                  "type": "text",
+                  "content": "<p>Si un jeu contient des achats intégrés, le joueur doit obligatoirement être prévenu.</p><p>🔎 Pour le savoir, regardez la boîte ou la fiche du jeu en ligne et cherchez le <strong>pictogramme PEGI </strong>ci-dessus ou les mentions «<strong>achats intégrés</strong>» ou «<strong>achats intra-jeu facultatifs</strong>».</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "453c0d40-58b4-4cb8-b972-30c8e382d5f3",
+                  "type": "image",
+                  "url": "https://i.imgur.com/7gKZPpX.png",
+                  "alt": "",
+                  "alternativeText": ""
+                },
+                {
+                  "id": "a5bc3ebf-2417-445c-96ed-8b199ecbff52",
+                  "type": "text",
+                  "content": "<p>Certains achats intégrés sont particulièrement attirants : les loot box.<br>📦Une <strong>loot box</strong> (boîte à butins) est un <strong>objet virtuel </strong>qu’un joueur peut acheter dans le jeu mais sans savoir ce qu’il y a dedans : <strong>le contenu est aléatoire</strong>.<br> Le contenu aléatoire pousse le joueur à acheter jusqu'à obtenir l'objet souhaité, un peu comme les machines à sous des casinos.&nbsp;</p>\n<p>🤔 Bon à savoir&nbsp; Depuis mai 2020, un jeu qui propose des loot boxes doit obligatoirement indiquer «<strong>Inclut des contenus aléatoires</strong>» sur la boîte ou la fiche du jeu.</p>"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fe9fa67b-ddfc-4932-8f5d-eba163a206b9",
+      "type": "activity",
+      "title": "Identifier des jeux avec achats intégrés",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "05677303-3d47-40e0-ae61-f915014bcc07",
+            "type": "text",
+            "content": "<p>Pour chacun des jeux suivants, observez la fiche ou la boîte du jeu, puis trouvez s’il y a ou non des achats intégrés et des loot boxes.</p>"
+          }
+        },
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "14bd35de-6033-4a90-8246-02e140660d85",
+                  "type": "text",
+                  "content": "<p><strong>Observez la fiche du jeu ci-dessous, puis sélectionnez la bonne réponse.</strong></p>"
+                },
+                {
+                  "id": "f828c349-7282-4333-a267-b52be3744880",
+                  "type": "image",
+                  "url": "https://i.imgur.com/zlVhnng.png",
+                  "alt": "",
+                  "alternativeText": "<p>Jeu Lorttnite Clan :&nbsp;</p><ul><li>4 étoiles</li><li>Communauté compétitive</li><li>Commandes rapides à maîtriser</li><li>Pegi 12</li><li>violence, achats dans le jeu (inclut des éléments aléatoires)</li><li>jeu de base</li><li>gratuit</li><li>boutons : obtenir, ajouter au panier</li></ul>"
+                },
+                {
+                  "id": "6781d13a-91fb-45b5-ba52-311e290b47a1",
+                  "type": "qcu",
+                  "instruction": "<p><br></p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Il n’y a pas d’achats intégrés dans ce jeu.</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de mots tels que achats intra-jeu» ou achats intégrés» sur cette fiche ?<br></p>"
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Il y a des achats intégrés dans ce jeu, mais pas de loot boxes.</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de la mention obligatoire «Inclut des contenus aléatoires» sur cette fiche ?<br></p>"
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Il y a des achats intégrés et des loot boxes dans ce jeu.</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>La mention&nbsp; «Achats dans le jeu» est complétée par la mention obligatoire «Inclut des contenus aléatoires» <br></p>"
+                    }
+                  ],
+                  "feedbacks": {
+                    "valid": "",
+                    "invalid": ""
+                  },
+                  "solution": "3"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "98f26a65-e2c0-4c17-8e78-f8f5481b4dae",
+                  "type": "text",
+                  "content": "<p><strong>Observez la boîte du jeu ci-dessous, puis sélectionnez la bonne réponse.</strong></p>"
+                },
+                {
+                  "id": "f81697de-5d3f-4275-95cf-57ce22d366c1",
+                  "type": "image",
+                  "url": "https://i.imgur.com/CGoGCWW.png",
+                  "alt": "",
+                  "alternativeText": "<p><br></p>"
+                },
+                {
+                  "id": "915d599d-fb2d-4db9-93d8-012943d50001",
+                  "type": "qcu",
+                  "instruction": "<p><br></p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Il n’y a pas d’achats intégrés dans ce jeu.</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de mots tels que «achats intra-jeu» ou «achats intégrés» sur cette boîte ?<br></p>"
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Il y a des achats intégrés dans ce jeu, mais pas de loot boxes.<br></p>",
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Le pictogramme «Achats intégrés» est à côté du pictogramme «PEGI 7» sur cette boîte. Si le jeu contenait des Loot boxes, il y aurait aussi la mention «Inclut des contenus aléatoires».</p>"
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Il y a des achats intégrés et des loot boxes dans ce jeu.</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de la mention obligatoire «Inclut des contenus aléatoires» sur cette fiche ?<br></p>"
+                    }
+                  ],
+                  "feedbacks": {
+                    "valid": "",
+                    "invalid": ""
+                  },
+                  "solution": "2"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "779de80b-ba18-4e95-ab6d-bbc5ce8edd5a",
+      "type": "lesson",
+      "title": "Les interactions entre joueurs",
+      "components": [
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "f8910400-71fb-4d54-a447-11e21a910ed6",
+                  "type": "image",
+                  "url": "https://i.imgur.com/W42DZkO.png",
+                  "alt": "",
+                  "alternativeText": "<p><br></p>"
+                },
+                {
+                  "id": "d54a96df-a22e-4e2d-8ffa-747e035d0554",
+                  "type": "text",
+                  "content": "<p>De nombreux jeux vidéo permettent de discuter entre joueurs, que l’on joue sur smartphone, tablette, console ou ordinateur.&nbsp;<br>Que ce soit par tchat écrit ou tchat vocal, <strong>les discussions en ligne comportent des risques</strong>. 🎧&nbsp;<br>L’enfant peut être exposé à des comportements agressifs ou à des contenus inappropriés comme des images ou des vidéos explicites. 😱</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "d85a05a1-0c9d-4ce7-ad25-9333eb3a75c3",
+                  "type": "text",
+                  "content": "<p>Lors des discussions en ligne, le joueur peut entrer en contact avec des inconnus, de tous les âges.<br>⚠️ Il est<strong> impossible de savoir avec certitude qui se trouve réellement de l’autre côté de l’écran</strong>.</p>"
+                },
+                {
+                  "id": "9e9b11ab-0ffb-4dc9-917a-f5e336300ce5",
+                  "type": "image",
+                  "url": "https://i.imgur.com/pBoKLLG.png",
+                  "alt": "",
+                  "alternativeText": "<p><br></p>"
+                },
+                {
+                  "id": "fcfbd43f-872a-41ee-89bd-7396d2680923",
+                  "type": "text",
+                  "content": "<p>Des personnes avec de mauvaises intentions peuvent en profiter pour<strong> manipuler les autres joueurs</strong>, proposer des <strong>rencontres physiques dangereuses</strong> ou encore pousser les plus jeunes à <strong>partager des photos ou des informations personnelles</strong>.</p>"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "e700791f-5048-4d50-8329-e311c6b2f3e4",
+                  "type": "text",
+                  "content": "<p>Sur les boites ou les pages en ligne des jeux, la mention d'interaction entre joueurs peut prendre différentes formes : «<strong>les utilisateurs interagissent</strong>», «<strong>interaction entre les joueurs</strong>», «<strong>interactivité des utilisateurs</strong>»...<br>Il faut donc être attentif lors du choix d'un jeu vidéo. 🔎</p>"
+                },
+                {
+                  "id": "dd07e939-9aaa-4226-af59-695ac2b31da2",
+                  "type": "image",
+                  "url": "https://i.imgur.com/XKyBNac.png",
+                  "alt": "",
+                  "alternativeText": "<p>Capture d'écran de la fiche d'un jeu vidéo avec la mention&nbsp;«interactivité des utilisateurs»</p>"
+                },
+                {
+                  "id": "6b8112ec-45ab-4665-b690-9adf0b6e93ac",
+                  "type": "text",
+                  "content": "<p>⚠️<strong> Attention</strong><br>Même avec un jeu qui ne permet pas de discuter avec d’autres joueurs, <strong>ce risque n’est pas écarté</strong>. Certaines consoles permettent de discuter en ligne, tout comme les ordinateurs et les smartphones.<br>⚙️ Vous pouvez <strong>bloquer cette possibilité</strong> en paramétrant le <strong>contrôle parental</strong> de chacun de ces appareils.</p>"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6e7dad63-ee7e-428b-a25f-08d760b00503",
+      "type": "challenge",
+      "title": "Choix final",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "5403d509-05f4-4473-ab7c-18e244aa234c",
+            "type": "text",
+            "content": "<p>Comme Marilou adore les dragons, Franck a sélectionné plusieurs jeux qui pourraient lui plaire. 🐲<br>Il veut lui offrir un jeu : </p>\n<ul>\n    <li> sans contenus inadaptés pour son âge selon la signalétique PEGI</li>\n    <li>sans achats intégrés</li>\n    <li>sans interactions entre les joueurs.</li>\n</ul>\n<p>Aidez-le à choisir le plus adapté pour sa fille. <br>👇 Voici les fiches des trois jeux vidéo sur le thème des dragons que Franck a sélectionné.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "139b7a65-92b9-4d4c-ba16-1badbbe24bd1",
+            "type": "embed",
+            "isCompletionRequired": false,
+            "title": "Les 3 jeux vidéos",
+            "url": "https://epreuves-pr2133.review.pix.fr/fr/carousel/module-jvdragon.html",
+            "instruction": "<p></p>",
+            "height": 490
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "9ac76a42-e7ba-477c-a865-e0dd8617b850",
+            "type": "qcu",
+            "instruction": "<p>Parmi ces trois jeux, lequel est le plus adapté pour Marilou ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Mon petit dragon</p>",
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Ce jeu contient des achats intégrés. Avez-vous vérifié la présence d’achats intégrés ou d’interactions entre les utilisateurs dans les autres jeux ?<br></p>"
+              },
+              {
+                "id": "2",
+                "content": "<p>La quête de l'eau</p>",
+                "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Ce jeu est adapté à partir de 7 ans et ne contient ni achats intégrés ni interactions entre les joueurs dans le jeu. <br>Le pictogramme «peur» à côté du pictogramme «7» indique que le jeu contient des images ou des sons qui peuvent effrayer mais jugé par la signalétique PEGI comme adapté pour des enfants à partir de 7 ans.</p>"
+              },
+              {
+                "id": "3",
+                "content": "<p>Le tournoi des cieux</p>",
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Ce jeu propose des interactions entre les utilisateurs. Avez-vous vérifié la présence d’achats intégrés ou d’interactions entre les utilisateurs dans les autres jeux ?</p>"
+              }
+            ],
+            "feedbacks": {
+              "valid": "",
+              "invalid": ""
+            },
+            "solution": "2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "4a349720-15b7-4c86-a431-344410332fd5",
+      "type": "summary",
+      "title": "Récapitulatif",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "7346e1eb-4591-4913-9c39-9d23dfcf7db8",
+            "type": "text",
+            "content": "<p><strong>📌&nbsp; Avant d’acheter un jeu vidéo pour votre enfant, trois informations clé à vérifier :</strong></p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "99f21e69-cdb4-4428-9153-ae857a148ee7",
+            "type": "image",
+            "url": "https://i.imgur.com/04bdUz7.png",
+            "alt": "",
+            "alternativeText": "<p>Les 3 informations à vérifier :&nbsp;</p>\n<ol>\n    <li>le pictogramme d'âge de la signalétique PEGI</li>\n    <li>la présence d'achats intégrés</li>\n    <li>la possibilité de discuter avec d'autres joueurs</li>\n</ol>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "f75135d6-68f6-40b5-a8d7-59a33a23ac39",
+            "type": "text",
+            "content": "<p>👉 Et vous, aviez-vous déjà remarqué ces 3 informations sur les jeux ? 👀</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
