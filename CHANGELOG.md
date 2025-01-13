@@ -1,5 +1,15 @@
 # Pix Changelog
 
+## v5.15.0 (13/01/2025)
+
+
+### :bug: Correction
+- [#11097](https://github.com/1024pix/pix/pull/11097) [BUGFIX] Permettre de créer des organisations en masse (PIX-YOLO).
+- [#11084](https://github.com/1024pix/pix/pull/11084) [BUGFIX] Corriger l'affichage de la double mire sur PixOrga (PIX-16070).
+
+### :arrow_up: Montée de version
+- [#11093](https://github.com/1024pix/pix/pull/11093) [BUMP] Update dependency @1024pix/pix-ui to ^52.3.5 (certif).
+
 ## v5.14.0 (13/01/2025)
 
 
