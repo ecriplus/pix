@@ -12,9 +12,7 @@ module('Integration | Component | pix-toggle-deprecated', function (hooks) {
   hooks.beforeEach(async function () {
     this.set('valueFirstLabel', 'valueFirstLabel');
     this.set('valueSecondLabel', 'valueSecondLabel');
-    this.set('onToggle', function () {
-      this.set('loginWithEmail', false);
-    });
+    this.set('onToggle', function () {});
     this.set('isFirstOn', 'true');
 
     await render(
