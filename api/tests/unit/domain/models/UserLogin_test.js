@@ -100,7 +100,7 @@ describe('Unit | Domain | Models | UserLogin', function () {
   describe('#markUserAsTemporarilyBlocked', function () {
     it('sets temporary block until date', function () {
       // given
-      const multipleOfThreshold = 10 * 2;
+      const multipleOfThreshold = config.login.temporaryBlockingThresholdFailureCount * 2;
       const userLogin = new UserLogin({
         userId: 666,
         failureCount: multipleOfThreshold,
@@ -245,7 +245,7 @@ describe('Unit | Domain | Models | UserLogin', function () {
     context('when failure count equals failure count threshold', function () {
       it('returns true', function () {
         // given
-        const failureCountThreshold = 20;
+        const failureCountThreshold = config.login.temporaryBlockingThresholdFailureCount * 2;
         const userLogin = new UserLogin({ failureCount: failureCountThreshold });
 
         // when
