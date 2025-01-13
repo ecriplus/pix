@@ -4,12 +4,14 @@ import { expect, sinon } from '../../../../../test-helper.js';
 describe('Unit | Domain | Use Cases | find-organization-places', function () {
   it('should get the organization places', async function () {
     // given
-    const organizationId = Symbol('organizationId');
+    const organizationId = 123;
     const expectedOrganizationPlaces = Symbol('OrganizationPlaces');
     const organizationPlacesLotRepository = {
-      findByOrganizationId: sinon.stub(),
+      findByOrganizationIdWithJoinedUsers: sinon.stub(),
     };
-    organizationPlacesLotRepository.findByOrganizationId.withArgs(organizationId).resolves(expectedOrganizationPlaces);
+    organizationPlacesLotRepository.findByOrganizationIdWithJoinedUsers
+      .withArgs(organizationId)
+      .resolves(expectedOrganizationPlaces);
 
     // when
     const organizationPlace = await findOrganizationPlacesLot({

@@ -4,67 +4,61 @@ import { DeletedError, NotFoundError } from '../../../../shared/domain/errors.js
 import { OrganizationPlacesLotManagement } from '../../domain/read-models/OrganizationPlacesLotManagement.js';
 import { PlacesLot } from '../../domain/read-models/PlacesLot.js';
 
-const findByOrganizationId = async function (organizationId) {
-  const results = await knex('organization-places')
-    .select(
-      'organization-places.id AS id',
-      'count',
-      'activationDate',
-      'expirationDate',
-      'reference',
-      'category',
-      'users.firstName AS creatorFirstName',
-      'users.lastName AS creatorLastName',
-    )
-    .join('users', 'users.id', 'createdBy')
-    .where({ organizationId })
-    .whereNull('deletedAt')
-    .orderBy('activationDate', 'desc')
-    .orderBy('expirationDate', 'desc')
-    .orderBy('organization-places.createdAt', 'desc');
+const findByOrganizationIdWithJoinedUsers = async (organizationId) => {
+  const extraColumns = [
+    'users.firstName AS creatorFirstName',
+    'users.lastName AS creatorLastName',
+    'organization-places.reference',
+    'organization-places.category',
+  ];
+
+  const results = await baseQuery({ organizationIds: [organizationId], callOrderByAndRemoveDeleted: true })
+    .select(...extraColumns)
+    .join('users', 'users.id', 'organization-places.createdBy');
 
   return results.map((result) => {
     return new OrganizationPlacesLotManagement(result);
   });
 };
 
-//On utilise pas le findByOrganizationId car c'est un aggregat avec la table users, et les regles métiers ne sont pas utiles ici
-const findAllByOrganizationId = async function (organizationId) {
+const baseQuery = ({ organizationIds, callOrderByAndRemoveDeleted = false }) => {
   const knexConn = DomainTransaction.getConnection();
-  const placesLots = await knexConn('organization-places')
-    .select('id', 'count', 'activationDate', 'expirationDate', 'deletedAt')
-    .where({ organizationId });
-  return placesLots.map((e) => new PlacesLot(e));
+
+  let query = knexConn('organization-places')
+    .select(
+      'organization-places.id',
+      'organization-places.count',
+      'organization-places.organizationId',
+      'organization-places.activationDate',
+      'organization-places.expirationDate',
+      'organization-places.deletedAt',
+    )
+    .whereIn('organization-places.organizationId', organizationIds);
+
+  if (callOrderByAndRemoveDeleted) {
+    query = orderByAndRemoveDeleted(query);
+  }
+
+  return query;
 };
 
-const findAllByOrganizationIds = async function (organizationIds) {
-  const knexConn = DomainTransaction.getConnection();
-  const placesLots = await knexConn('organization-places')
-    .select('id', 'count', 'organizationId', 'activationDate', 'expirationDate', 'deletedAt')
-    .whereIn('organizationId', organizationIds);
-
-  return placesLots.map((e) => new PlacesLot(e));
+const findAllByOrganizationIds = async ({ organizationIds, callOrderByAndRemoveDeleted = false }) => {
+  const placesLots = await baseQuery({ organizationIds, callOrderByAndRemoveDeleted });
+  return placesLots.map((placesLot) => new PlacesLot(placesLot));
 };
 
-//On utilise pas le findByOrganizationId car c'est un aggregat avec la table users, et les regles métiers ne sont pas utiles ici
-//On utilise pas le findAllByOrganizationId car on a a pas besoin des deleted et nous avons besoin de l'ordonnance
-const findAllNotDeletedByOrganizationId = async function (organizationId) {
-  const knexConn = DomainTransaction.getConnection();
-  const placesLots = await knexConn('organization-places')
-    .select('id', 'count', 'activationDate', 'expirationDate', 'deletedAt')
-    .where({ organizationId })
-    .whereNull('deletedAt')
+const orderByAndRemoveDeleted = (query) => {
+  return query
+    .whereNull('organization-places.deletedAt')
     .orderBy(
       knex.raw(
-        'CASE WHEN "activationDate" <= now() AND "expirationDate" >= now() THEN 1 WHEN "activationDate" > now() THEN 2 ELSE 3 END',
+        'CASE WHEN "organization-places"."activationDate" <= now() AND "organization-places"."expirationDate" >= now() THEN 1 WHEN "organization-places"."activationDate" > now() THEN 2 ELSE 3 END',
       ),
       'asc',
     )
-    .orderBy('expirationDate', 'desc')
-    .orderBy('activationDate', 'desc')
-    .orderBy('createdAt', 'desc');
-
-  return placesLots.map((placesLot) => new PlacesLot(placesLot));
+    .orderBy('organization-places.expirationDate', 'desc')
+    .orderBy('organization-places.activationDate', 'desc')
+    .orderBy('organization-places.createdAt', 'desc');
 };
 
 const get = async function (id) {
@@ -105,12 +99,4 @@ const remove = async function ({ id, deletedBy }) {
   }
 };
 
-export {
-  create,
-  findAllByOrganizationId,
-  findAllByOrganizationIds,
-  findAllNotDeletedByOrganizationId,
-  findByOrganizationId,
-  get,
-  remove,
-};
+export { create, findAllByOrganizationIds, findByOrganizationIdWithJoinedUsers, get, remove };

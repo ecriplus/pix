@@ -9,11 +9,18 @@
 
 /**
  * @typedef {object} organizationPlacesLotRepository
- * @property {function} findAllByOrganizationId
+ * @property {function} findAllByOrganizationIds
  */
 
 const getOrganizationPlacesLots = async function ({ organizationId, organizationPlacesLotRepository }) {
-  return await organizationPlacesLotRepository.findAllNotDeletedByOrganizationId(organizationId);
+  if (!organizationId) {
+    throw new Error('You must provide at least one organizationId.');
+  }
+
+  return organizationPlacesLotRepository.findAllByOrganizationIds({
+    organizationIds: [organizationId],
+    callOrderByAndRemoveDeleted: true,
+  });
 };
 
 export { getOrganizationPlacesLots };

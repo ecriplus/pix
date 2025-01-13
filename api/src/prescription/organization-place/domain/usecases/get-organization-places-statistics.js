@@ -25,7 +25,13 @@ const getOrganizationPlacesStatistics = async function ({
   organizationPlacesLotRepository,
   organizationLearnerRepository,
 }) {
-  const placesLots = await organizationPlacesLotRepository.findAllByOrganizationId(organizationId);
+  if (!organizationId) {
+    throw new Error('You must provide at least one organizationId.');
+  }
+
+  const placesLots = await organizationPlacesLotRepository.findAllByOrganizationIds({
+    organizationIds: [organizationId],
+  });
 
   const placeRepartition =
     await organizationLearnerRepository.findAllLearnerWithAtLeastOneParticipationByOrganizationId(organizationId);

@@ -1,5 +1,5 @@
 const findOrganizationPlacesLot = async function ({ organizationId, organizationPlacesLotRepository }) {
-  return organizationPlacesLotRepository.findByOrganizationId(organizationId);
+  return organizationPlacesLotRepository.findByOrganizationIdWithJoinedUsers(organizationId);
 };
 
 export { findOrganizationPlacesLot };
