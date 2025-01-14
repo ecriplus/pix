@@ -60,14 +60,6 @@
         {
           "type": "element",
           "element": {
-            "id": "938ababc-7496-453a-bccd-1a493a829525",
-            "type": "text",
-            "content": "<p><a href=\"https://www.youtube.com/shorts/qsocuWHb5hE\" target=\"_blank\">Lien vers la version vidéo</a></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "3281eca4-ff14-4f28-bb65-11b2e5f70faf",
             "type": "qcu",
             "instruction": "<p>Le contrôle parental est un outil numérique. Que permet-il ?</p>",
