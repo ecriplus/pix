@@ -3,13 +3,13 @@ import { ChallengeNeutralized } from '../../../src/certification/evaluation/doma
 import { services } from '../../../src/certification/evaluation/domain/services/index.js';
 import { AssessmentResultFactory } from '../../../src/certification/scoring/domain/models/factories/AssessmentResultFactory.js';
 import { CertificationCourseRejected } from '../../../src/certification/session-management/domain/events/CertificationCourseRejected.js';
+import { CertificationJuryDone } from '../../../src/certification/session-management/domain/events/CertificationJuryDone.js';
 import CertificationRescoredByScript from '../../../src/certification/session-management/domain/events/CertificationRescoredByScript.js';
 import { AlgorithmEngineVersion } from '../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { V3_REPRODUCIBILITY_RATE } from '../../../src/shared/domain/constants.js';
 import { CertificationComputeError } from '../../../src/shared/domain/errors.js';
 import { CertificationResult } from '../../../src/shared/domain/models/CertificationResult.js';
 import { CertificationCourseUnrejected } from './CertificationCourseUnrejected.js';
-import { CertificationJuryDone } from './CertificationJuryDone.js';
 import { CertificationRescoringCompleted } from './CertificationRescoringCompleted.js';
 import { checkEventTypes } from './check-event-types.js';
 

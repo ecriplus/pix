@@ -1,7 +1,7 @@
-import { CertificationJuryDone } from '../../../../../lib/domain/events/CertificationJuryDone.js';
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import { AutoJuryDone } from '../events/AutoJuryDone.js';
+import { CertificationJuryDone } from '../events/CertificationJuryDone.js';
 import { CertificationAssessment } from '../models/CertificationAssessment.js';
 import { CertificationIssueReportResolutionAttempt } from '../models/CertificationIssueReportResolutionAttempt.js';
 import { CertificationIssueReportResolutionStrategies } from '../models/CertificationIssueReportResolutionStrategies.js';

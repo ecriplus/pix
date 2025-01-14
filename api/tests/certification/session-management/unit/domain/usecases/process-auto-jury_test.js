@@ -1,5 +1,5 @@
-import { CertificationJuryDone } from '../../../../../../lib/domain/events/CertificationJuryDone.js';
 import { AutoJuryDone } from '../../../../../../src/certification/session-management/domain/events/AutoJuryDone.js';
+import { CertificationJuryDone } from '../../../../../../src/certification/session-management/domain/events/CertificationJuryDone.js';
 import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { SessionFinalized } from '../../../../../../src/certification/session-management/domain/read-models/SessionFinalized.js';
 import { processAutoJury } from '../../../../../../src/certification/session-management/domain/usecases/process-auto-jury.js';
