@@ -2,10 +2,10 @@ import lodash from 'lodash';
 
 import { createOrganizationsWithTagsAndTargetProfiles } from '../../../../lib/domain/usecases/create-organizations-with-tags-and-target-profiles.js';
 import * as organizationValidator from '../../../../lib/domain/validators/organization-with-tags-and-target-profiles-script.js';
-import * as organizationTagRepository from '../../../../lib/infrastructure/repositories/organization-tag-repository.js';
 import * as targetProfileShareRepository from '../../../../lib/infrastructure/repositories/target-profile-share-repository.js';
 import * as dataProtectionOfficerRepository from '../../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
 import { organizationForAdminRepository } from '../../../../src/organizational-entities/infrastructure/repositories/organization-for-admin.repository.js';
+import * as organizationTagRepository from '../../../../src/organizational-entities/infrastructure/repositories/organization-tag.repository.js';
 import { tagRepository } from '../../../../src/organizational-entities/infrastructure/repositories/tag.repository.js';
 import * as schoolRepository from '../../../../src/school/infrastructure/repositories/school-repository.js';
 import { ORGANIZATION_FEATURE } from '../../../../src/shared/domain/constants.js';

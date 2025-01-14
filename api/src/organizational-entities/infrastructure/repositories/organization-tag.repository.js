@@ -1,14 +1,14 @@
 import lodash from 'lodash';
 
-import { AlreadyExistingEntityError } from '../../../src/shared/domain/errors.js';
-import * as knexUtils from '../../../src/shared/infrastructure/utils/knex-utils.js';
+import { AlreadyExistingEntityError } from '../../../shared/domain/errors.js';
+import * as knexUtils from '../../../shared/infrastructure/utils/knex-utils.js';
 
 const { omit } = lodash;
 
-import { knex } from '../../../db/knex-database-connection.js';
-import { Tag } from '../../../src/organizational-entities/domain/models/Tag.js';
-import { OrganizationTag } from '../../../src/shared/domain/models/index.js';
-import { DomainTransaction } from '../DomainTransaction.js';
+import { knex } from '../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
+import { OrganizationTag } from '../../../shared/domain/models/index.js';
+import { Tag } from '../../domain/models/Tag.js';
 
 const create = async function (organizationTag) {
   try {
