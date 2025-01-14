@@ -123,7 +123,7 @@
                 {
                   "id": "5173f727-635c-4ad9-8651-0b379e0b538e",
                   "type": "text",
-                  "content": "<p><span aria-hidden=\"true\">👉</span> Dans la zone ci-dessous, utilisez la molette pour découvir toute l'image. Vous devrez ensuite répondre à une question : </p><ul> <li>Étape&nbsp;1&nbsp;: Placez le pointeur sur l'image</li> <li>Étape&nbsp;2&nbsp;: Faites rouler la molette de votre souris vers le haut et vers le bas.</li> <li>Étape&nbsp;3&nbsp;: Déplacez l'image jusqu'à trouver le balcon le plus bas de l'immeuble.</li>  </ul>"
+                  "content": "<p><span aria-hidden=\"true\">👉</span> Dans la zone ci-dessous, utilisez la molette pour découvir toute l'image. Vous devrez ensuite répondre à une question&nbsp;:</p><ul> <li>Étape 1: Placez le pointeur sur l'image</li> <li>Étape 2 : Faites rouler la molette de votre souris vers le haut et vers le bas.</li> <li>Étape 3 : Déplacez l'image jusqu'à trouver le balcon le plus bas de l'immeuble.</li> </ul>"
                 },
                 {
                   "id": "7aac23e0-6642-4ca4-928f-50e074dabc77",
@@ -143,7 +143,7 @@
                     {
                       "id": "2",
                       "content": "<p>Elle arrose ses plantes.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse.</span><br>Vous avez réussi à descendre dans toute l'image jusqu'au dernier balcon.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse !</span><br>Vous avez réussi à descendre dans toute l'image jusqu'au dernier balcon.</p>"
                     },
                     {
                       "id": "3",
