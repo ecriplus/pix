@@ -15,8 +15,10 @@ function _createKeyValueStorage({ prefix }) {
 
 export const temporaryStorage = _createKeyValueStorage({ prefix: 'temporary-storage:' });
 export const informationBannersStorage = _createKeyValueStorage({ prefix: 'information-banners:' });
+export const featureTogglesStorage = _createKeyValueStorage({ prefix: 'feature-toggles:' });
 
 export async function quitAllStorages() {
   await temporaryStorage.quit();
   await informationBannersStorage.quit();
+  await featureTogglesStorage.quit();
 }
