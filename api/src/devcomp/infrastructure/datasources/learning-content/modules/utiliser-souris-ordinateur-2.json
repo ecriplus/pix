@@ -386,7 +386,7 @@
             "type": "embed",
             "isCompletionRequired": false,
             "title": "Gestionnaire de fichiers - supprimer photos",
-            "url": "https://epreuves-pr2088.review.pix.fr/filemanager-visu/filemanager-visu.html?lang=fr&mode=module-clic-droit",
+            "url": "https://epreuves.pix.fr/filemanager-module/filemanager-module.html?lang=fr",
             "instruction": "<p>Dans l’espace ci-dessous, pour chaque photo qui comporte le mot «&nbsp;photo&nbsp;», faites un clic droit pour afficher la liste d’action, et cliquez sur «&nbsp;Supprimer&nbsp;».</p>",
             "height": 400
           }
