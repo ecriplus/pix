@@ -64,7 +64,7 @@
           "element": {
             "id": "bcd20400-781c-4b7d-82c3-d348ddef88d2",
             "type": "text",
-            "content": "<p>Le clavier fait partie de l'équipement de base d’un ordinateur, avec la souris. <br>Le clavier est composé de touches sur lesquelles on peut appuyer. Les claviers peuvent avoir différentes formes, tailles, couleurs ou disposition des touches.<br></p>\n<p>Il y a différents types de clavier : </p>\n<ul>\n    <li>les claviers avec un fil</li>\n    <li>les claviers sans fil</li>\n    <li>les claviers inclus dans l’ordinateur</li>\n</ul>\n<p>Globalement, tous ces claviers servent à faire les mêmes choses.<br></p>"
+            "content": "<p>Le clavier fait partie de l'équipement de base d’un ordinateur, avec la souris. <br>Le clavier est composé de touches sur lesquelles on peut appuyer. Les claviers peuvent avoir différentes formes, tailles, couleurs ou disposition des touches.<br></p><p><br>Il y a différents types de clavier : </p> <ul> <li>les claviers avec un fil</li>\n    <li>les claviers sans fil</li> <li>les claviers inclus dans l’ordinateur</li>n</ul>\n<p>Globalement, tous ces claviers servent à faire les mêmes choses.<br></p>"
           }
         },
         {
@@ -176,7 +176,7 @@
           "element": {
             "id": "cfff35e1-f84d-48b1-95ae-4cc7f2ff79e0",
             "type": "text",
-            "content": "<p>Pour taper du texte, il faut placer le pointeur de la souris dans une zone de texte puis cliquer.</p>\n<p><strong>Dans l’espace ci-dessous, cliquez dans la zone indiquée puis tapez les mots demandés.</strong><br>Vous pouvez essayer autant de fois que vous voulez.</p>"
+            "content": "<p>Pour taper du texte, il faut placer le pointeur de la souris dans une zone de texte puis cliquer.</p>\n<p><strong>Dans l’espace ci-dessous, cliquez dans la zone indiquée, puis tapez les mots demandés.</strong><br>Vous pouvez essayer autant de fois que vous voulez.</p>"
           }
         },
         {
@@ -250,8 +250,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span> <span aria-hidden=\"true\">🥒</span></p><p>Bravo ! C’est le bon mot !</p><br>",
-                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br><span aria-hidden=\"true\">🍽️</span></p><p>Bravo ! Mais ce n’est pas le bon mot. Réessayez !<br></p>"
+                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span> <span aria-hidden=\"true\">🥒</span></p><p>Bravo ! C’est le bon mot !</p>",
+                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br><span aria-hidden=\"true\">🍽️</span></p><p>Bravo ! Mais ce n’est pas le bon mot. Réessayez !</p>"
                   }
                 }
               ]
@@ -273,7 +273,7 @@
                 {
                   "id": "b9e30a99-98c1-4c59-ac9b-d9b437042c1f",
                   "type": "text",
-                  "content": "<p>Pour modifier du texte, il faut utiliser d’autres touches que les touches lettres. <br> Voici les trois touches les plus utiles :&nbsp; <br></p>\n<ul>\n    <li><strong>Espace</strong></li>\n    <li><strong>Entrée</strong></li>\n    <li><strong>Effacer</strong></li>\n</ul>\n<p>Ces 3 touches se trouvent dans la zone Caractères spéciaux et accents.</p>"
+                  "content": "<p>Pour modifier du texte, il faut utiliser d’autres touches que les touches lettres.</p><br><p> Voici les trois touches les plus utiles dans la zone Caractères spéciaux et accents&nbsp:</p><ul> <li><strong>Espace</strong></li> <li><strong>Entrée</strong></li> <li><strong>Effacer</strong></li> </ul> <p>Les flèches directionnelles sont aussi très utiles pour modifier du texte.</p>"
                 },
                 {
                   "id": "9eea4304-9aee-40be-8259-88ccd2b030b3",
@@ -298,7 +298,7 @@
                 {
                   "id": "b65c1d05-27b9-429e-b8aa-b63bef94c67e",
                   "type": "text",
-                  "content": "<p>La touche <strong>Entrée </strong>permet d’aller à la ligne. Taper sur la touche Entrée déplace le curseur de texte vers le début de la ligne suivante.</p>"
+                  "content": "<p>La touche <strong>Entrée </strong>permet d’aller à la ligne.<br> Taper sur la touche Entrée déplace le curseur de texte vers le début de la ligne suivante.</p>"
                 },
                 {
                   "id": "82fc806d-0d75-4202-85af-dfe7fca24315",
@@ -355,7 +355,7 @@
           "element": {
             "id": "5cea384d-f3bd-450c-b250-f6fb9a34cafa",
             "type": "text",
-            "content": "<p><strong>Dans la zone ci-dessous, vous allez devoir modifier une liste de courses en vous aidant des touches espace, entrée, effacer et des flèches.</strong></p>"
+            "content": "<p><strong>Dans la zone ci-dessous, modifiez une liste de courses en vous aidant des touches espace, entrée, effacer et des flèches.</strong></p>"
           }
         },
         {
@@ -386,7 +386,7 @@
           "element": {
             "id": "f808343d-06ca-40b2-bc0f-57b2ae0ed267",
             "type": "text",
-            "content": "<p><strong>Zone de texte</strong><br>\n    La zone de texte est une zone dans laquelle on peut <strong>taper du texte</strong>.<br>\n    Il faut <strong>cliquer dans cette zone</strong> avant de commencer à taper.</p>"
+            "content": "<p><strong>Zone de texte</strong><br>La zone de texte est une zone dans laquelle on peut <strong>taper du texte</strong>.<br>Il faut <strong>cliquer dans cette zone</strong> avant de commencer à taper.</p>"
           }
         },
         {
@@ -431,7 +431,7 @@
           "element": {
             "id": "73a8711f-e88e-4e3a-9611-f01dad6d5506",
             "type": "text",
-            "content": "<p>\n</p><details>\n    <summary> <span aria-hidden=\"true\">🤔</span> Bon à savoir </summary>\n    <p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.<span aria-hidden=\"true\">🙌</span>\n        Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p>\n</details>\n<p></p>"
+            "content": "<p>\n</p><details>\n    <summary> <span aria-hidden=\"true\">🤔</span> Bon à savoir </summary><p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.<span aria-hidden=\"true\">🙌</span> Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p\n</details><p></p>"
           }
         }
       ]
@@ -454,7 +454,7 @@
           "element": {
             "id": "b61388bd-29a7-40cb-b3f0-89ce7a0b5565",
             "type": "image",
-            "url": "https://i.imgur.com/OnWGmWD.png",
+            "url": "https://imgur.com/a/iGrCqGx",
             "alt": "",
             "alternativeText": ""
           }
