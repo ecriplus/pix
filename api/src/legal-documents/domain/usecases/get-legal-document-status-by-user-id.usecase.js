@@ -27,7 +27,6 @@ const getLegalDocumentStatusByUserId = async ({
   LegalDocumentType.assert(type);
 
   const { isLegalDocumentsVersioningEnabled } = featureToggles;
-
   if (!isLegalDocumentsVersioningEnabled) {
     const user = await userRepository.findPixOrgaCgusByUserId(userId);
     return LegalDocumentStatus.buildForLegacyPixOrgaCgu(user);

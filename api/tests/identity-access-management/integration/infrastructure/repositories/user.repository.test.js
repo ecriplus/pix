@@ -7,9 +7,12 @@ import { InvalidOrAlreadyUsedEmailError } from '../../../../../src/identity-acce
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { UserDetailsForAdmin } from '../../../../../src/identity-access-management/domain/models/UserDetailsForAdmin.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
+import { LegalDocumentService } from '../../../../../src/legal-documents/domain/models/LegalDocumentService.js';
+import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
 import { Organization } from '../../../../../src/organizational-entities/domain/models/Organization.js';
 import { IMPORT_KEY_FIELD } from '../../../../../src/prescription/learner-management/domain/constants.js';
 import { OrganizationLearnerForAdmin } from '../../../../../src/prescription/learner-management/domain/read-models/OrganizationLearnerForAdmin.js';
+import { config } from '../../../../../src/shared/config.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import {
   AlreadyExistingEntityError,
@@ -1134,7 +1137,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
 
     describe('#getUserDetailsForAdmin', function () {
-      it('returns the found user', async function () {
+      it('returns the found user when TOS feature toggle is false', async function () {
         // given
         const createdAt = new Date('2021-01-01');
         const emailConfirmedAt = new Date('2022-01-01');
@@ -1175,6 +1178,74 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(userDetailsForAdmin.lastTermsOfServiceValidatedAt).to.deep.equal(lastTermsOfServiceValidatedAt);
         expect(userDetailsForAdmin.lastPixOrgaTermsOfServiceValidatedAt).to.deep.equal(
           lastPixOrgaTermsOfServiceValidatedAt,
+        );
+        expect(userDetailsForAdmin.lastPixCertifTermsOfServiceValidatedAt).to.deep.equal(lastLoggedAt);
+        expect(userDetailsForAdmin.lastLoggedAt).to.deep.equal(lastLoggedAt);
+        expect(userDetailsForAdmin.emailConfirmedAt).to.deep.equal(emailConfirmedAt);
+        expect(userDetailsForAdmin.hasBeenAnonymised).to.be.false;
+        expect(userDetailsForAdmin.isPixAgent).to.be.false;
+      });
+
+      it('returns the found user when TOS feature toggle is true', async function () {
+        // given
+        sinon.stub(config, 'featureToggles').value({ isLegalDocumentsVersioningEnabled: true });
+        const createdAt = new Date('2021-01-01');
+        const emailConfirmedAt = new Date('2022-01-01');
+        const lastTermsOfServiceValidatedAt = new Date('2022-01-02');
+        const lastLoggedAt = new Date('2022-01-04');
+        const userInDB = databaseBuilder.factory.buildUser({
+          firstName: 'Henri',
+          lastName: 'Cochet',
+          email: 'henri-cochet@example.net',
+          cgu: true,
+          lang: 'en',
+          locale: 'en',
+          createdAt,
+          updatedAt: createdAt,
+          lastTermsOfServiceValidatedAt,
+          lastPixCertifTermsOfServiceValidatedAt: lastLoggedAt,
+          emailConfirmedAt,
+        });
+        await databaseBuilder.factory.buildUserLogin({ userId: userInDB.id, lastLoggedAt });
+        await databaseBuilder.commit();
+
+        const { PIX_ORGA } = LegalDocumentService.VALUES;
+        const { TOS } = LegalDocumentType.VALUES;
+
+        const service = PIX_ORGA;
+        const type = TOS;
+
+        const documentVersion = databaseBuilder.factory.buildLegalDocumentVersion({
+          service,
+          type,
+          versionAt: new Date('2024-02-01'),
+        });
+        const documentVersionUserAcceptance = databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+          userId: userInDB.id,
+          legalDocumentVersionId: documentVersion.id,
+          acceptedAt: new Date('2024-03-01'),
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const userDetailsForAdmin = await userRepository.getUserDetailsForAdmin(userInDB.id);
+
+        // then
+        expect(userDetailsForAdmin).to.be.an.instanceOf(UserDetailsForAdmin);
+        expect(userDetailsForAdmin.id).to.equal(userInDB.id);
+        expect(userDetailsForAdmin.firstName).to.equal('Henri');
+        expect(userDetailsForAdmin.lastName).to.equal('Cochet');
+        expect(userDetailsForAdmin.email).to.equal('henri-cochet@example.net');
+        expect(userDetailsForAdmin.cgu).to.be.true;
+        expect(userDetailsForAdmin.createdAt).to.deep.equal(createdAt);
+        expect(userDetailsForAdmin.updatedAt).to.deep.equal(createdAt);
+        expect(userDetailsForAdmin.lang).to.equal('en');
+        expect(userDetailsForAdmin.locale).to.equal('en');
+        expect(userDetailsForAdmin.lastTermsOfServiceValidatedAt).to.deep.equal(lastTermsOfServiceValidatedAt);
+        expect(userDetailsForAdmin.pixOrgaTermsOfServiceAccepted).equals(true);
+
+        expect(userDetailsForAdmin.lastPixOrgaTermsOfServiceValidatedAt).to.deep.equal(
+          documentVersionUserAcceptance.acceptedAt,
         );
         expect(userDetailsForAdmin.lastPixCertifTermsOfServiceValidatedAt).to.deep.equal(lastLoggedAt);
         expect(userDetailsForAdmin.lastLoggedAt).to.deep.equal(lastLoggedAt);
