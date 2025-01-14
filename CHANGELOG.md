@@ -1,5 +1,20 @@
 # Pix Changelog
 
+## v5.16.0 (14/01/2025)
+
+
+### :rocket: Amélioration
+- [#11074](https://github.com/1024pix/pix/pull/11074) [FEATURE] Utiliser PixIcon dans Pix Admin - Partie 2 (PIX-16040).
+
+### :building_construction: Tech
+- [#11048](https://github.com/1024pix/pix/pull/11048) [TECH] ♻️ migration du repository `lib/infrastructure/campaign-repository.js` (PIX-16029).
+
+### :bug: Correction
+- [#11096](https://github.com/1024pix/pix/pull/11096) [BUGFIX] Corriger l'export des résultats avec présence des acquis (PIX-16080).
+
+### :arrow_up: Montée de version
+- [#11092](https://github.com/1024pix/pix/pull/11092) [BUMP] Update dependency ember-source to v6 (certif).
+
 ## v5.15.0 (13/01/2025)
 
 
