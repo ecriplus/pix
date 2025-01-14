@@ -1,5 +1,5 @@
-import { CertificationCompletedJob } from '../../../../../lib/domain/events/CertificationCompleted.js';
 import { certificationCompletedJobRepository } from '../../../../../lib/infrastructure/repositories/jobs/certification-completed-job-repository.js';
+import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { LOCALE } from '../../../../../src/shared/domain/constants.js';
 import { JobPriority } from '../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { expect } from '../../../../test-helper.js';

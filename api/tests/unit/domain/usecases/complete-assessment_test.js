@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { CertificationCompletedJob } from '../../../../lib/domain/events/CertificationCompleted.js';
 import { completeAssessment } from '../../../../lib/domain/usecases/complete-assessment.js';
+import { CertificationCompletedJob } from '../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { ParticipationCompletedJob } from '../../../../src/prescription/campaign-participation/domain/models/ParticipationCompletedJob.js';
 import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
 import { AlreadyRatedAssessmentError } from '../../../../src/shared/domain/errors.js';
