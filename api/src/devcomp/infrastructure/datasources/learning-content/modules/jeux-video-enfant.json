@@ -91,10 +91,6 @@
                 "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Sur la boîte ou la fiche d’un jeu, plusieurs informations permettent de savoir si un jeu est adapté pour un enfant, en fonction de son âge par exemple. Voyons cela ensemble !</p>"
               }
             ],
-            "feedbacks": {
-              "valid": "",
-              "invalid": ""
-            },
             "solution": "2"
           }
         }
@@ -169,10 +165,6 @@
                       "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme âge PEGI est indicatif. Il donne une information mais n’empêche pas la vente en fonction de l’âge.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<p><br></p>",
-                    "invalid": "<p><br></p>"
-                  },
                   "solution": "2"
                 }
               ]
@@ -207,10 +199,6 @@
                       "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme «!» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs.&nbsp; Attention, il peut y avoir des contenus pour tous les âges.<br></p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "",
-                    "invalid": ""
-                  },
                   "solution": "1"
                 }
               ]
@@ -330,10 +318,6 @@
                       "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>La mention&nbsp; «Achats dans le jeu» est complétée par la mention obligatoire «Inclut des contenus aléatoires» <br></p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "",
-                    "invalid": ""
-                  },
                   "solution": "3"
                 }
               ]
@@ -373,10 +357,6 @@
                       "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de la mention obligatoire «Inclut des contenus aléatoires» sur cette fiche ?<br></p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "",
-                    "invalid": ""
-                  },
                   "solution": "2"
                 }
               ]
@@ -503,10 +483,6 @@
                 "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Ce jeu propose des interactions entre les utilisateurs. Avez-vous vérifié la présence d’achats intégrés ou d’interactions entre les utilisateurs dans les autres jeux ?</p>"
               }
             ],
-            "feedbacks": {
-              "valid": "",
-              "invalid": ""
-            },
             "solution": "2"
           }
         }
