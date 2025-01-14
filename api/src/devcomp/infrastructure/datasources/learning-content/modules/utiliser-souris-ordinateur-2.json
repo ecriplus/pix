@@ -87,7 +87,7 @@
             "element": {
               "id": "6b8d384f-c15e-4abd-b392-bff1e17aee7a",
               "type": "text",
-              "content": "<p>La molette est le bouton central de la souris. Elle sert à faire défiler une page à l'écran vers le bas, ou vers le haut.</p><p><details><summary><strong>Si jamais votre souris n'a pas de molette</strong></summary>Rapprochez-vous de la personne qui vous accompagne pour découvrir comment cela fonctionne sur votre souris. </details> </p><p><br>Pour faire défiler la page, il faut faire rouler la molette avec votre doigt de haut en bas, ou de bas en haut.</p>"
+              "content": "<p>La molette est le bouton central de la souris. Elle sert à faire défiler une page à l'écran vers le bas, ou vers le haut.</p><details><summary><strong>Si jamais votre souris n'a pas de molette</strong></summary>Rapprochez-vous de la personne qui vous accompagne pour découvrir comment cela fonctionne sur votre souris. </details><p><br>Pour faire défiler la page, il faut faire rouler la molette avec votre doigt de haut en bas, ou de bas en haut.</p>"
             }
           },
           {
