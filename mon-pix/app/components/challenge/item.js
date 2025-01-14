@@ -44,7 +44,6 @@ export default class Item extends Component {
 
   _setFocusOutEventListener() {
     document.addEventListener(FOCUSEDOUT_EVENT_NAME, this._focusedoutListener);
-
     this._hadFocus = document.hasFocus();
     this._pollHasFocusInterval = setInterval(this._pollHasFocus, FOCUSEDOUT_INTERVAL);
   }
@@ -131,5 +130,10 @@ export default class Item extends Component {
   @action
   resumeAssessment(assessment) {
     this.router.transitionTo('assessments.resume', assessment.get('id'));
+  }
+
+  willDestroy() {
+    super.willDestroy(...arguments);
+    this.clearFocusOutEventListener();
   }
 }

@@ -107,11 +107,6 @@ export default class ChallengeItemQroc extends ChallengeItemGeneric {
     this.qrocProposalAnswerValue = value;
   }
 
-  @action
-  removeEmbedAutoEventListener() {
-    window.removeEventListener('message', this.postMessageHandler);
-  }
-
   get _blocks() {
     return proposalsAsBlocks(this.args.challenge.proposals).map((block) => {
       block.randomName = generateRandomString(block.input);
@@ -130,6 +125,10 @@ export default class ChallengeItemQroc extends ChallengeItemGeneric {
   get _defaultAnswer() {
     const inputBlock = this._blocks.find((block) => block.input != null);
     return inputBlock?.defaultValue ?? '';
+  }
+  willDestroy() {
+    super.willDestroy(...arguments);
+    window.removeEventListener('message', this.postMessageHandler);
   }
 }
 
