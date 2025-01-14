@@ -2,11 +2,11 @@ import { ChallengeDeneutralized } from '../../../src/certification/evaluation/do
 import { ChallengeNeutralized } from '../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
 import { services } from '../../../src/certification/evaluation/domain/services/index.js';
 import { AssessmentResultFactory } from '../../../src/certification/scoring/domain/models/factories/AssessmentResultFactory.js';
+import { CertificationCourseRejected } from '../../../src/certification/session-management/domain/events/CertificationCourseRejected.js';
 import { AlgorithmEngineVersion } from '../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { V3_REPRODUCIBILITY_RATE } from '../../../src/shared/domain/constants.js';
 import { CertificationComputeError } from '../../../src/shared/domain/errors.js';
 import { CertificationResult } from '../../../src/shared/domain/models/CertificationResult.js';
-import { CertificationCourseRejected } from './CertificationCourseRejected.js';
 import { CertificationCourseUnrejected } from './CertificationCourseUnrejected.js';
 import { CertificationJuryDone } from './CertificationJuryDone.js';
 import CertificationRescoredByScript from './CertificationRescoredByScript.js';

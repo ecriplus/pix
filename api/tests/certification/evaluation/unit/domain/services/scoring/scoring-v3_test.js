@@ -1,7 +1,7 @@
 import { CertificationCompletedJob } from '../../../../../../../lib/domain/events/CertificationCompleted.js';
-import { CertificationCourseRejected } from '../../../../../../../lib/domain/events/CertificationCourseRejected.js';
 import { CertificationJuryDone } from '../../../../../../../lib/domain/events/CertificationJuryDone.js';
 import { handleV3CertificationScoring } from '../../../../../../../src/certification/evaluation/domain/services/scoring/scoring-v3.js';
+import { CertificationCourseRejected } from '../../../../../../../src/certification/session-management/domain/events/CertificationCourseRejected.js';
 import { AlgorithmEngineVersion } from '../../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ABORT_REASONS } from '../../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { AutoJuryCommentKeys } from '../../../../../../../src/certification/shared/domain/models/JuryComment.js';
