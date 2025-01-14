@@ -142,7 +142,7 @@
                   "type": "image",
                   "url": "https://i.imgur.com/3ZQpKrb.png",
                   "alt": "",
-                  "alternativeText": "<p>Jaquette du jeu vidéo Les chroniques d'Alva :&nbsp;<br></p><ul><li>Illustration d'une elfe, de dos, avec une lance à la main qui regarde un chateau au loin.</li><li>Titre Les chroniques d'Alva </li><li>Pictogramme «12»<br></li></ul>"
+                  "alternativeText": "<p>Jaquette du jeu vidéo Les chroniques d'Alva :&nbsp;<br></p><ul><li>Illustration d'une elfe, de dos, avec une lance à la main qui regarde un chateau au loin.</li><li>Titre Les chroniques d'Alva </li><li>Pictogramme «&nbsp;12 &nbsp;»<br></li></ul>"
                 },
                 {
                   "id": "1255d0bf-0434-4add-9873-051c841af667",
@@ -176,27 +176,27 @@
                   "type": "image",
                   "url": "https://i.imgur.com/UdheHeR.png",
                   "alt": "",
-                  "alternativeText": "<p>Fiche du jeu vidéo Pixel world :</p><ul><li>Pixel world</li><li>Pixel industry</li><li>Action et aventure, Famille et enfants</li><li>3 étoilles, 21,5k</li><li>bouton Obtenir</li><li>pictogramme «!»</li></ul>"
+                  "alternativeText": "<p>Fiche du jeu vidéo Pixel world :</p><ul><li>Pixel world</li><li>Pixel industry</li><li>Action et aventure, Famille et enfants</li><li>3 étoilles, 21,5k</li><li>bouton Obtenir</li><li>pictogramme «&nbsp;! &nbsp;»</li></ul>"
                 },
                 {
                   "id": "10dfb9e3-02de-4f3f-b7d1-aae0d1991f9e",
                   "type": "qcu",
-                  "instruction": "<p>Que signifie le pictogramme «!» sur ce jeu ?</p>",
+                  "instruction": "<p>Que signifie le pictogramme «&nbsp;!&nbsp;» sur ce jeu ?</p>",
                   "proposals": [
                     {
                       "id": "1",
                       "content": "<p>Le jeu doit être utilisé accompagné des parents</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p> Ce pictogramme «!» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs, il peut donc y avoir des contenus ne convenant pas aux enfants !</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p> Ce pictogramme «&nbsp;!&nbsp;» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs, il peut donc y avoir des contenus ne convenant pas aux enfants !</p>"
                     },
                     {
                       "id": "2",
                       "content": "<p>Le jeu n'a aucune recommandation PEGI.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme «!» fait partie de la signalétique PEGI, il signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme «&nbsp;!&nbsp;» fait partie de la signalétique PEGI, il signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs.</p>"
                     },
                     {
                       "id": "3",
                       "content": "<p>Le jeu est déconseillé aux enfants de moins de 7 ans.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme «!» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs.&nbsp; Attention, il peut y avoir des contenus pour tous les âges.<br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme «&nbsp;!&nbsp;» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs.&nbsp; Attention, il peut y avoir des contenus pour tous les âges.<br></p>"
                     }
                   ],
                   "solution": "1"
@@ -243,7 +243,7 @@
                 {
                   "id": "594dc9c3-d5e2-4698-82c6-62fbeca24e75",
                   "type": "text",
-                  "content": "<p>Si un jeu contient des achats intégrés, le joueur doit obligatoirement être prévenu.</p><p>🔎 Pour le savoir, regardez la boîte ou la fiche du jeu en ligne et cherchez le <strong>pictogramme PEGI </strong>ci-dessus ou les mentions «<strong>achats intégrés</strong>» ou «<strong>achats intra-jeu facultatifs</strong>».</p>"
+                  "content": "<p>Si un jeu contient des achats intégrés, le joueur doit obligatoirement être prévenu.</p><p>🔎 Pour le savoir, regardez la boîte ou la fiche du jeu en ligne et cherchez le <strong>pictogramme PEGI </strong>ci-dessus ou les mentions «&nbsp;<strong>achats intégrés</strong>&nbsp;» ou «&nbsp;<strong>achats intra-jeu facultatifs</strong>&nbsp;».</p>"
                 }
               ]
             },
@@ -259,7 +259,7 @@
                 {
                   "id": "a5bc3ebf-2417-445c-96ed-8b199ecbff52",
                   "type": "text",
-                  "content": "<p>Certains achats intégrés sont particulièrement attirants : les loot box.<br>📦Une <strong>loot box</strong> (boîte à butins) est un <strong>objet virtuel </strong>qu’un joueur peut acheter dans le jeu mais sans savoir ce qu’il y a dedans : <strong>le contenu est aléatoire</strong>.<br> Le contenu aléatoire pousse le joueur à acheter jusqu'à obtenir l'objet souhaité, un peu comme les machines à sous des casinos.&nbsp;</p>\n<p>🤔 Bon à savoir&nbsp;<br>Depuis mai 2020, un jeu qui propose des loot boxes doit obligatoirement indiquer «<strong>Inclut des contenus aléatoires</strong>» sur la boîte ou la fiche du jeu.</p>"
+                  "content": "<p>Certains achats intégrés sont particulièrement attirants : les loot box.<br>📦Une <strong>loot box</strong> (boîte à butins) est un <strong>objet virtuel </strong>qu’un joueur peut acheter dans le jeu mais sans savoir ce qu’il y a dedans : <strong>le contenu est aléatoire</strong>.<br> Le contenu aléatoire pousse le joueur à acheter jusqu'à obtenir l'objet souhaité, un peu comme les machines à sous des casinos.&nbsp;</p>\n<p>🤔 Bon à savoir&nbsp;<br>Depuis mai 2020, un jeu qui propose des loot boxes doit obligatoirement indiquer «&nbsp;<strong>Inclut des contenus aléatoires</strong>&nbsp;» sur la boîte ou la fiche du jeu.</p>"
                 }
               ]
             }
@@ -305,17 +305,17 @@
                     {
                       "id": "1",
                       "content": "<p>Il n’y a pas d’achats intégrés dans ce jeu.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de mots tels que achats intra-jeu» ou achats intégrés» sur cette fiche ?<br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de mots tels que achats intra-jeu&nbsp;» ou achats intégrés&nbsp;» sur cette fiche ?<br></p>"
                     },
                     {
                       "id": "2",
                       "content": "<p>Il y a des achats intégrés dans ce jeu, mais pas de loot boxes.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de la mention obligatoire «Inclut des contenus aléatoires» sur cette fiche ?<br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de la mention obligatoire «&nbsp;Inclut des contenus aléatoires&nbsp;» sur cette fiche ?<br></p>"
                     },
                     {
                       "id": "3",
                       "content": "<p>Il y a des achats intégrés et des loot boxes dans ce jeu.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>La mention&nbsp; «Achats dans le jeu» est complétée par la mention obligatoire «Inclut des contenus aléatoires» <br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>La mention&nbsp; «&nbsp;Achats dans le jeu&nbsp;» est complétée par la mention obligatoire «&nbsp;Inclut des contenus aléatoires&nbsp;» <br></p>"
                     }
                   ],
                   "solution": "3"
@@ -344,17 +344,17 @@
                     {
                       "id": "1",
                       "content": "<p>Il n’y a pas d’achats intégrés dans ce jeu.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de mots tels que «achats intra-jeu» ou «achats intégrés» sur cette boîte ?<br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de mots tels que «&nbsp;achats intra-jeu&nbsp;» ou «&nbsp;achats intégrés&nbsp;» sur cette boîte ?<br></p>"
                     },
                     {
                       "id": "2",
                       "content": "<p>Il y a des achats intégrés dans ce jeu, mais pas de loot boxes.<br></p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Le pictogramme «Achats intégrés» est à côté du pictogramme «PEGI 7» sur cette boîte. Si le jeu contenait des Loot boxes, il y aurait aussi la mention «Inclut des contenus aléatoires».</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Le pictogramme «&nbsp;Achats intégrés&nbsp;» est à côté du pictogramme «&nbsp;PEGI 7&nbsp;» sur cette boîte. Si le jeu contenait des Loot boxes, il y aurait aussi la mention «&nbsp;Inclut des contenus aléatoires&nbsp;».</p>"
                     },
                     {
                       "id": "3",
                       "content": "<p>Il y a des achats intégrés et des loot boxes dans ce jeu.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de la mention obligatoire «Inclut des contenus aléatoires» sur cette fiche ?<br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de la mention obligatoire «&nbsp;Inclut des contenus aléatoires&nbsp;» sur cette fiche ?<br></p>"
                     }
                   ],
                   "solution": "2"
@@ -415,14 +415,14 @@
                 {
                   "id": "e700791f-5048-4d50-8329-e311c6b2f3e4",
                   "type": "text",
-                  "content": "<p>Sur les boites ou les pages en ligne des jeux, la mention d'interaction entre joueurs peut prendre différentes formes : «<strong>les utilisateurs interagissent</strong>», «<strong>interaction entre les joueurs</strong>», «<strong>interactivité des utilisateurs</strong>»...<br>Il faut donc être attentif lors du choix d'un jeu vidéo. 🔎</p>"
+                  "content": "<p>Sur les boites ou les pages en ligne des jeux, la mention d'interaction entre joueurs peut prendre différentes formes : «&nbsp;<strong>les utilisateurs interagissent</strong>&nbsp;», «&nbsp;<strong>interaction entre les joueurs</strong>&nbsp;», «&nbsp;<strong>interactivité des utilisateurs</strong>&nbsp;»...<br>Il faut donc être attentif lors du choix d'un jeu vidéo. 🔎</p>"
                 },
                 {
                   "id": "dd07e939-9aaa-4226-af59-695ac2b31da2",
                   "type": "image",
                   "url": "https://i.imgur.com/XKyBNac.png",
                   "alt": "",
-                  "alternativeText": "<p>Capture d'écran de la fiche d'un jeu vidéo avec la mention&nbsp;«interactivité des utilisateurs»</p>"
+                  "alternativeText": "<p>Capture d'écran de la fiche d'un jeu vidéo avec la mention&nbsp;«&nbsp;interactivité des utilisateurs&nbsp;»</p>"
                 },
                 {
                   "id": "6b8112ec-45ab-4665-b690-9adf0b6e93ac",
@@ -475,7 +475,7 @@
               {
                 "id": "2",
                 "content": "<p>La quête de l'eau</p>",
-                "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Ce jeu est adapté à partir de 7 ans et ne contient ni achats intégrés ni interactions entre les joueurs dans le jeu. <br>Le pictogramme «peur» à côté du pictogramme «7» indique que le jeu contient des images ou des sons qui peuvent effrayer mais jugé par la signalétique PEGI comme adapté pour des enfants à partir de 7 ans.</p>"
+                "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Ce jeu est adapté à partir de 7 ans et ne contient ni achats intégrés ni interactions entre les joueurs dans le jeu. <br>Le pictogramme «&nbsp;peur&nbsp;» à côté du pictogramme «&nbsp;7 &nbsp;&nbsp;» indique que le jeu contient des images ou des sons qui peuvent effrayer mais jugé par la signalétique PEGI comme adapté pour des enfants à partir de 7 ans.</p>"
               },
               {
                 "id": "3",
