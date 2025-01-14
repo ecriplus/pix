@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { tagAdminController } from './tag.admin.controller.js';
 
 const register = async function (server) {
@@ -58,6 +59,34 @@ const register = async function (server) {
           '- **Cette route est restreinte aux utilisateurs authentifiés ayant le role Super Admin**\n' +
             '- Elle permet de créer un tag',
         ],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/api/admin/tags/{id}/recently-used',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: (request, h) => tagAdminController.getRecentlyUsedTags(request, h),
+        validate: {
+          params: Joi.object({
+            id: identifiersType.tagId,
+          }),
+        },
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
+            '- Renvoie les 10 tags les plus utilisés par rapport au tag sélectionné',
+        ],
+        tags: ['api', 'tags'],
       },
     },
   ]);

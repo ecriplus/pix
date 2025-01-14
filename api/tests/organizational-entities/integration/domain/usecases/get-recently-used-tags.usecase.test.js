@@ -1,11 +1,11 @@
 import _ from 'lodash';
 
-import { getRecentlyUsedTags } from '../../../../lib/domain/usecases/get-recently-used-tags.js';
-import * as organizationTagRepository from '../../../../lib/infrastructure/repositories/organization-tag-repository.js';
-import { Tag } from '../../../../src/organizational-entities/domain/models/Tag.js';
-import { databaseBuilder, expect } from '../../../test-helper.js';
+import * as organizationTagRepository from '../../../../../lib/infrastructure/repositories/organization-tag-repository.js';
+import { Tag } from '../../../../../src/organizational-entities/domain/models/Tag.js';
+import { getRecentlyUsedTags } from '../../../../../src/organizational-entities/domain/usecases/get-recently-used-tags.usecase.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
-describe('Integration | UseCase | get-recently-used-tags', function () {
+describe('Integration | Organizational Entities | Domain | UseCase | get-recently-used-tags', function () {
   it('returns 10 recently used tags based on a tag id and ordered by the most used first', async function () {
     // given
     const basedTag = databaseBuilder.factory.buildTag({ name: 'konoha' });
