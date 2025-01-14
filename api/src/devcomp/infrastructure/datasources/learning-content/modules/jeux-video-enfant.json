@@ -70,7 +70,7 @@
             "type": "image",
             "url": "https://i.imgur.com/uaa9LtX.png",
             "alt": "",
-            "alternativeText": "<p>Jeu Craft Dragon's kingdom</p><ul><li>Epix</li><li>Tag «&nbsp;Consoles&nbsp;»</li><li>Option sélectionnée «&nbsp;Gratuit&nbsp;»<br></li><li>Ajouter au panier</li><li>PEGI 12, peur</li><li>abonnement requis pour le jeu en ligne</li><li>achats intra jeux facultatifs</li><li>de 1 à 4 joueurs</li><li>jeu en ligne facultatif</li></ul><p><br></p>"
+            "alternativeText": "<p>Jeu Craft Dragon's kingdom</p><ul><li>Epix</li><li>Tag «&nbsp;Consoles&nbsp;»</li><li>Option sélectionnée «&nbsp;Gratuit&nbsp;»<br></li><li>Ajouter au panier</li><li>PEGI 12, peur</li><li>abonnement requis pour le jeu en ligne</li><li>achats intra jeux facultatifs</li><li>de 1 à 4 joueurs</li><li>jeu en ligne facultatif</li></ul>"
           }
         },
         {
@@ -83,7 +83,7 @@
               {
                 "id": "1",
                 "content": "<p>oui</p>",
-                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Sur la boîte ou la fiche d’un jeu, plusieurs informations permettent de savoir si un jeu est adapté pour un enfant, en fonction de son âge par exemple. Voyons cela ensemble !<br></p>"
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Sur la boîte ou la fiche d’un jeu, plusieurs informations permettent de savoir si un jeu est adapté pour un enfant, en fonction de son âge par exemple. Voyons cela ensemble !</p>"
               },
               {
                 "id": "2",
@@ -142,7 +142,7 @@
                   "type": "image",
                   "url": "https://i.imgur.com/3ZQpKrb.png",
                   "alt": "",
-                  "alternativeText": "<p>Jaquette du jeu vidéo Les chroniques d'Alva :&nbsp;<br></p><ul><li>Illustration d'une elfe, de dos, avec une lance à la main qui regarde un chateau au loin.</li><li>Titre Les chroniques d'Alva </li><li>Pictogramme «&nbsp;12 &nbsp;»<br></li></ul>"
+                  "alternativeText": "<p>Jaquette du jeu vidéo Les chroniques d'Alva :&nbsp;<br></p><ul><li>Illustration d'une elfe, de dos, avec une lance à la main qui regarde un chateau au loin.</li><li>Titre Les chroniques d'Alva </li><li>Pictogramme «&nbsp;12 &nbsp;»</li></ul>"
                 },
                 {
                   "id": "1255d0bf-0434-4add-9873-051c841af667",
@@ -305,17 +305,17 @@
                     {
                       "id": "1",
                       "content": "<p>Il n’y a pas d’achats intégrés dans ce jeu.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de mots tels que achats intra-jeu&nbsp;» ou achats intégrés&nbsp;» sur cette fiche ?<br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de mots tels que achats intra-jeu&nbsp;» ou achats intégrés&nbsp;» sur cette fiche ?</p>"
                     },
                     {
                       "id": "2",
                       "content": "<p>Il y a des achats intégrés dans ce jeu, mais pas de loot boxes.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de la mention obligatoire «&nbsp;Inclut des contenus aléatoires&nbsp;» sur cette fiche ?<br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de la mention obligatoire «&nbsp;Inclut des contenus aléatoires&nbsp;» sur cette fiche ?</p>"
                     },
                     {
                       "id": "3",
                       "content": "<p>Il y a des achats intégrés et des loot boxes dans ce jeu.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>La mention&nbsp; «&nbsp;Achats dans le jeu&nbsp;» est complétée par la mention obligatoire «&nbsp;Inclut des contenus aléatoires&nbsp;» <br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>La mention&nbsp; «&nbsp;Achats dans le jeu&nbsp;» est complétée par la mention obligatoire «&nbsp;Inclut des contenus aléatoires&nbsp;»</p>"
                     }
                   ],
                   "solution": "3"
@@ -344,7 +344,7 @@
                     {
                       "id": "1",
                       "content": "<p>Il n’y a pas d’achats intégrés dans ce jeu.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de mots tels que «&nbsp;achats intra-jeu&nbsp;» ou «&nbsp;achats intégrés&nbsp;» sur cette boîte ?<br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de mots tels que «&nbsp;achats intra-jeu&nbsp;» ou «&nbsp;achats intégrés&nbsp;» sur cette boîte ?</p>"
                     },
                     {
                       "id": "2",
@@ -354,7 +354,7 @@
                     {
                       "id": "3",
                       "content": "<p>Il y a des achats intégrés et des loot boxes dans ce jeu.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de la mention obligatoire «&nbsp;Inclut des contenus aléatoires&nbsp;» sur cette fiche ?<br></p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Avez-vous vérifié la présence de la mention obligatoire «&nbsp;Inclut des contenus aléatoires&nbsp;» sur cette fiche ?</p>"
                     }
                   ],
                   "solution": "2"
@@ -470,7 +470,7 @@
               {
                 "id": "1",
                 "content": "<p>Mon petit dragon</p>",
-                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Ce jeu contient des achats intégrés. Avez-vous vérifié la présence d’achats intégrés ou d’interactions entre les utilisateurs dans les autres jeux ?<br></p>"
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Ce jeu contient des achats intégrés. Avez-vous vérifié la présence d’achats intégrés ou d’interactions entre les utilisateurs dans les autres jeux ?</p>"
               },
               {
                 "id": "2",
