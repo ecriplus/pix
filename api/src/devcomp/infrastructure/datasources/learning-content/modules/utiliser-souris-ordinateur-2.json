@@ -123,7 +123,7 @@
                 {
                   "id": "5173f727-635c-4ad9-8651-0b379e0b538e",
                   "type": "text",
-                  "content": "<p><span aria-hidden=\"true\">👉</span>&nbsp;Dans la zone ci-dessous, utilisez la molette pour découvir toute l'image. Vous devrez ensuite répondre à une question : </p><ul> <li>Étape&nbsp1&nbsp: Placez le pointeur sur l'image</li> <li>Étape&nbsp2&nbsp: Faites rouler la molette de votre souris vers le haut et vers le bas.</li> <li>Étape&nbsp3&nbsp: Déplacez l'image jusqu'à trouver le balcon le plus bas de l'immeuble.</li>  </ul>"
+                  "content": "<p><span aria-hidden=\"true\">👉</span> Dans la zone ci-dessous, utilisez la molette pour découvir toute l'image. Vous devrez ensuite répondre à une question : </p><ul> <li>Étape&nbsp;1&nbsp;: Placez le pointeur sur l'image</li> <li>Étape&nbsp;2&nbsp;: Faites rouler la molette de votre souris vers le haut et vers le bas.</li> <li>Étape&nbsp;3&nbsp;: Déplacez l'image jusqu'à trouver le balcon le plus bas de l'immeuble.</li>  </ul>"
                 },
                 {
                   "id": "7aac23e0-6642-4ca4-928f-50e074dabc77",
@@ -148,7 +148,7 @@
                     {
                       "id": "3",
                       "content": "<p>Elle étend son linge.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>Cette activité est celle du personnage du premier balcon de l'immeuble.&nbsp;Utilisez la molette de votre souris quand votre pointeur est sur l'image. Faites défiler l'image pour découvrir les autres fenêtres et balcons de l'immeuble.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>Cette activité est celle du personnage du premier balcon de l'immeuble. Utilisez la molette de votre souris quand votre pointeur est sur l'image. Faites défiler l'image pour découvrir les autres fenêtres et balcons de l'immeuble.</p>"
                     }
                   ],
                  "solution": "2"
