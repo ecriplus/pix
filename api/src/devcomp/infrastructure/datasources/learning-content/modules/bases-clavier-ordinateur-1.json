@@ -64,7 +64,7 @@
           "element": {
             "id": "bcd20400-781c-4b7d-82c3-d348ddef88d2",
             "type": "text",
-            "content": "<p>Le clavier fait partie de l'équipement de base d’un ordinateur, avec la souris. <br>Le clavier est composé de touches sur lesquelles on peut appuyer. Les claviers peuvent avoir différentes formes, tailles, couleurs ou disposition des touches.<br></p><p><br>Il y a différents types de clavier : </p> <ul> <li>les claviers avec un fil</li>\n    <li>les claviers sans fil</li> <li>les claviers inclus dans l’ordinateur</li>n</ul>\n<p>Globalement, tous ces claviers servent à faire les mêmes choses.<br></p>"
+            "content": "<p>Le clavier fait partie de l'équipement de base d’un ordinateur, avec la souris. <br>Le clavier est composé de touches sur lesquelles on peut appuyer. Les claviers peuvent avoir différentes formes, tailles, couleurs ou disposition des touches.<br></p><p><br>Il y a différents types de clavier : </p> <ul> <li>les claviers avec un fil</li> <li>les claviers sans fil</li> <li>les claviers inclus dans l’ordinateur</li> </ul> <p>Globalement, tous ces claviers servent à faire les mêmes choses.<br></p>"
           }
         },
         {
@@ -74,7 +74,7 @@
             "type": "image",
             "url": "https://i.imgur.com/gXJXHwZ.png",
             "alt": "",
-            "alternativeText": "<p>Les claviers avec un fil : photographies de 2 claviers avec fil de taille et de forme différentes.</p><p>Les claviers sans fil : photographies de 2 claviers sans fil&nbsp;de taille et de couleur différentes.</p><p>Les claviers inclus dans l'ordinateur : photographie d'un ordinateur portable.</p>"
+            "alternativeText": "<p>Les claviers avec un fil : photographies de 2 claviers avec fil de taille et de forme différentes.</p><p>Les claviers sans fil : photographies de 2 claviers sans fil de taille et de couleur différentes.</p><p>Les claviers inclus dans l'ordinateur : photographie d'un ordinateur portable.</p>"
           }
         },
         {
@@ -119,7 +119,7 @@
                 {
                   "id": "1f25f056-78ad-42cd-8679-49188fe4e2a2",
                   "type": "text",
-                  "content": "<p><span aria-hidden=\"true\">🤔</span><strong>Bon à savoir</strong> </p>\n<p>Les touches peuvent être disposées de différentes manières, en fonction des modèles, des pays et de la langue. <span aria-hidden=\"true\">🌍</span>\n    </p><p>En France, on utilise le clavier AZERTY. Il porte ce nom, car les lettres A, Z, E, R, T, Y sont les six premières lettres affichées sur le clavier\n</p>"
+                  "content": "<p><span aria-hidden=\"true\">🤔</span><strong>Bon à savoir</strong> </p>\n<p>Les touches peuvent être disposées de différentes manières, en fonction des modèles, des pays et de la langue. <span aria-hidden=\"true\">🌍</span></p><p>En France, on utilise le clavier AZERTY. Il porte ce nom, car les lettres A, Z, E, R, T, Y sont les six premières lettres affichées sur le clavier\n</p>"
                 }
               ]
             },
@@ -161,7 +161,7 @@
             "type": "image",
             "url": "https://i.imgur.com/d7dO78H.png",
             "alt": "",
-            "alternativeText": "<p>Les touches du module :&nbsp;</p><ul><li>les accents</li><li>effacer et entrée</li><li>les lettres</li><li>espace</li><li>les flêches directionnelles</li></ul>"
+            "alternativeText": "<p>Les touches du module&nbsp;:</p><ul><li>les accents</li><li>effacer et entrée</li><li>les lettres</li><li>espace</li><li>les flêches directionnelles</li></ul>"
           }
         }
       ]
@@ -273,7 +273,7 @@
                 {
                   "id": "b9e30a99-98c1-4c59-ac9b-d9b437042c1f",
                   "type": "text",
-                  "content": "<p>Pour modifier du texte, il faut utiliser d’autres touches que les touches lettres.</p><br><p> Voici les trois touches les plus utiles dans la zone Caractères spéciaux et accents&nbsp:</p><ul> <li><strong>Espace</strong></li> <li><strong>Entrée</strong></li> <li><strong>Effacer</strong></li> </ul> <p>Les flèches directionnelles sont aussi très utiles pour modifier du texte.</p>"
+                  "content": "<p>Pour modifier du texte, il faut utiliser d’autres touches que les touches lettres.</p><br><p>Voici les trois touches les plus utiles dans la zone Caractères spéciaux et accents&nbsp;:</p><ul> <li><strong>Espace</strong></li> <li><strong>Entrée</strong></li> <li><strong>Effacer</strong></li> </ul> <p>Les flèches directionnelles sont aussi très utiles pour modifier du texte.</p>"
                 },
                 {
                   "id": "9eea4304-9aee-40be-8259-88ccd2b030b3",
@@ -431,7 +431,7 @@
           "element": {
             "id": "73a8711f-e88e-4e3a-9611-f01dad6d5506",
             "type": "text",
-            "content": "<p>\n</p><details>\n    <summary> <span aria-hidden=\"true\">🤔</span> Bon à savoir </summary><p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.<span aria-hidden=\"true\">🙌</span> Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p\n</details><p></p>"
+            "content": "<details><summary> <span aria-hidden=\"true\">🤔</span> Bon à savoir </summary><p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.<span aria-hidden=\"true\">🙌</span> Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p></details>"
           }
         }
       ]
