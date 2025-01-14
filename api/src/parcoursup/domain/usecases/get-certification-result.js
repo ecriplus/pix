@@ -1,11 +1,25 @@
-const getCertificationResult = function ({
+/**
+ * @typedef {import('../../domain/usecases/index.js').CertificationRepository} CertificationRepository
+ */
+
+/**
+ * @param {Object} params
+ * @param {string} params.ine
+ * @param {string} params.organizationUai
+ * @param {string} params.lastName
+ * @param {string} params.firstName
+ * @param {string} params.birthdate - Format YYYY-MM-DD
+ * @param {string} params.verificationCode
+ * @param {CertificationRepository} params.certificationRepository
+ **/
+export const getCertificationResult = function ({
   ine,
   organizationUai,
   lastName,
   firstName,
   birthdate,
-  certificationRepository,
   verificationCode,
+  certificationRepository,
 }) {
   if (ine) {
     return certificationRepository.getByINE({ ine });
@@ -19,5 +33,3 @@ const getCertificationResult = function ({
     return certificationRepository.getByVerificationCode({ verificationCode });
   }
 };
-
-export { getCertificationResult };

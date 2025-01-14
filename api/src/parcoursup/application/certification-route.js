@@ -17,16 +17,27 @@ const register = async function (server) {
         payload: Joi.alternatives()
           .try(
             Joi.object({
-              ine: studentIdentifierType.required(),
+              ine: studentIdentifierType
+                .required()
+                .description('INE (identifiant national élève, étudiant ou apprenti)'),
             }),
             Joi.object({
-              organizationUai: Joi.string().required(),
-              lastName: Joi.string().required(),
-              firstName: Joi.string().required(),
-              birthdate: Joi.string().required(),
+              organizationUai: Joi.string()
+                .required()
+                .description(
+                  'UAI/RNE (Unité Administrative Immatriculée anciennement Répertoire National des Établissements)',
+                ),
+              lastName: Joi.string().required().description('Nom de famille de l‘élève'),
+              firstName: Joi.string().required().description('Prénom de l‘élève'),
+              birthdate: Joi.string()
+                .pattern(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/)
+                .required()
+                .description('Date de naissance au format AAAA-MM-JJ'),
             }),
             Joi.object({
-              verificationCode: certificationVerificationCodeType.required(),
+              verificationCode: certificationVerificationCodeType
+                .required()
+                .description('Code de vérification du certificat Pix à vérifier'),
             }),
           )
           .required(),
