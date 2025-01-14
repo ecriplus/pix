@@ -31,10 +31,7 @@ export default class ChallengeEmbedSimulator extends Component {
     return '';
   }
 
-  configureIframe(iframe, params) {
-    const embedUrl = params[0];
-    const thisComponent = params[1];
-
+  configureIframe = (iframe, embedUrl, thisComponent) => {
     thisComponent.isLoadingEmbed = true;
     thisComponent.isSimulatorLaunched = false;
 
@@ -63,7 +60,7 @@ export default class ChallengeEmbedSimulator extends Component {
     };
 
     window.addEventListener('message', thisComponent._embedMessageListener);
-  }
+  };
 
   @action
   launchSimulator() {

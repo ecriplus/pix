@@ -5,9 +5,9 @@ import { tracked } from '@glimmer/tracking';
 export default class LevelupNotif extends Component {
   @tracked closeLevelup = false;
 
-  resetLevelUp() {
+  resetLevelUp = () => {
     this.closeLevelup = false;
-  }
+  };
 
   @action
   close() {

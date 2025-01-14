@@ -1,4 +1,4 @@
-<div {{did-update this.resetLevelUp}}>
+<div {{modifier-did-insert this.resetLevelUp @level @competenceName}}>
   {{#unless this.closeLevelup}}
     <div class="levelup">
       <img src="/images/levelup.svg" alt="" />
