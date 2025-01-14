@@ -7,5 +7,5 @@
   disabled={{this.isTriggering}}
   aria-disabled={{this.isTriggering}}
 >
-  <FaIcon class="action-chip__icon" @prefix={{if @isCompleted "fas" "far"}} @icon="{{@icon}}" />
+  <PixIcon @name={{@icon}} @plainIcon={{if @isCompleted true false}} @ariaHidden={{true}} class="action-chip__icon" />
 </button>

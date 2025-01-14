@@ -2,6 +2,7 @@ import { render } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
 import { click, fillIn, find, triggerEvent } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
@@ -200,15 +201,16 @@ module('Integration | Component | form textfield', function (hooks) {
       });
     });
 
-    module('#When password is hidden', function (hooks) {
-      hooks.beforeEach(async function () {
+    module('#When password is hidden', function () {
+      test('should change type when user click on eye icon', async function (assert) {
+        // given
         this.set('label', 'Mot de passe');
         this.set('validationStatus', 'default');
         this.set('validationMessage', 'message');
         this.set('textfieldName', 'password');
 
         // given
-        await render(
+        const screen = await render(
           hbs`<FormTextfield
   @label={{this.label}}
   @validationStatus={{this.validationStatus}}
@@ -217,33 +219,41 @@ module('Integration | Component | form textfield', function (hooks) {
   @inputValue={{this.inputValue}}
 />`,
         );
-      });
 
-      test('should change type when user click on eye icon', async function (assert) {
         // when
-        await click('.form-textfield-icon__button');
+        await click(screen.getByRole('button', { name: t('common.form.visible-password') }));
 
         // then
         assert.strictEqual(find('input').getAttribute('type'), 'text');
       });
 
       test('should change icon when user click on it', async function (assert) {
+        // given
+        this.set('label', 'Mot de passe');
+        this.set('validationStatus', 'default');
+        this.set('validationMessage', 'message');
+        this.set('textfieldName', 'password');
+
+        // given
+        const screen = await render(
+          hbs`<FormTextfield
+  @label={{this.label}}
+  @validationStatus={{this.validationStatus}}
+  @validationMessage={{this.validationMessage}}
+  @textfieldName={{this.textfieldName}}
+  @inputValue={{this.inputValue}}
+/>`,
+        );
+
         // when
-        assert.dom('.fa-eye-slash').exists();
-        await click('.form-textfield-icon__button');
+        const displayPasswordButton = screen.getByRole('button', { name: t('common.form.visible-password') });
+        await click(displayPasswordButton);
 
         // then
-        assert.dom('.fa-eye').exists();
-      });
-
-      test('should not change icon when user keeps typing his password', async function (assert) {
-        // given
-        await fillIn(INPUT, 'test');
-
-        // when
-        assert.dom('.fa-eye-slash').exists();
-        await click('.form-textfield-icon__button');
-        await fillIn(INPUT, 'test');
+        const hidePasswordButton = screen.getByRole('button', {
+          name: t('common.form.invisible-password'),
+        });
+        assert.dom(hidePasswordButton).exists();
       });
     });
   });

@@ -8,7 +8,7 @@
       {{t "pages.send-profile.form.shared"}}
     </p>
     <LinkTo @route="authenticated" class="skill-review-share__back-to-home link">
-      <FaIcon @icon="arrow-right" aria-hidden="true" />
+      <PixIcon @name="arrowRight" @ariaHidden={{true}} />
       {{t "pages.send-profile.form.continue"}}
     </LinkTo>
   {{else if @errorMessage}}

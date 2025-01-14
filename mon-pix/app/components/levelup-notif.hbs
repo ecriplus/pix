@@ -9,7 +9,7 @@
       </div>
       <button class="levelup__close" aria-labelledby="button-label" type="button" {{on "click" this.close}}>
         <span id="button-label" hidden>{{t "common.actions.close"}}</span>
-        <FaIcon @icon="xmark" alt="" />
+        <PixIcon @name="cancel" @ariaHidden={{true}} />
       </button>
     </div>
   {{/unless}}

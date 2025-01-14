@@ -1,5 +1,5 @@
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { inject as service } from '@ember/service';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
@@ -43,7 +43,7 @@ export default class Rewards extends Component {
     </p>
     {{#if this.acquiredBadges.length}}
       <h2 class="evaluation-results-tab__badges-title evaluation-results-tab__badges-title--acquired">
-        <FaIcon @icon="circle-check" />
+        <PixIcon @name="checkCircle" @plainIcon={{true}} @ariaHidden={{true}} />
         {{t "pages.skill-review.badge-card.acquired"}}
       </h2>
       <ul class="evaluation-results-tab__badges-list">
@@ -54,7 +54,7 @@ export default class Rewards extends Component {
     {{/if}}
     {{#if this.notAcquiredBadges.length}}
       <h2 class="evaluation-results-tab__badges-title evaluation-results-tab__badges-title--not-acquired">
-        <FaIcon @icon="circle-xmark" />
+        <PixIcon @name="cancel" @plainIcon={{true}} @ariaHidden={{true}} />
         {{t "pages.skill-review.badge-card.not-acquired"}}
       </h2>
       <ul class="evaluation-results-tab__badges-list">
