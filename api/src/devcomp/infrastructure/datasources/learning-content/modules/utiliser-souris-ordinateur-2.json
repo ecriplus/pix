@@ -147,7 +147,7 @@
                           {
                             "id": "2",
                             "content": "<p>Elle arrose ses plantes.</p>",
-                            "feedback": "<p><span class=\"feedback__state\">Bonne réponse !</span><br>Vous avez réussi à descendre dans toute l'image jusqu'au dernier balcon.</p>"
+                            "feedback": "<p><span class=\"feedback__state\">Bonne réponse !</span><br>Vous avez réussi à descendre dans toute l'image jusqu'au dernier balcon.<span aria-hidden=\"true\">🏢 </span></p>"
                           },
                           {
                             "id": "3",
@@ -391,7 +391,7 @@
               "isCompletionRequired": false,
               "title": "Gestionnaire de fichiers - supprimer photos",
               "url": "https://epreuves.pix.fr/filemanager-module/filemanager-module.html?lang=fr",
-              "instruction": "<p>Dans l’espace ci-dessous, pour chaque photo qui comporte le mot «&nbsp;photo&nbsp;», faites un clic droit pour afficher la liste d’action, et cliquez sur «&nbsp;Supprimer&nbsp;».</p>",
+              "instruction": "<p>Dans l’espace ci-dessous, ouvrez le dossier « Photos ». Sur chaque photo qui comporte le mot «&nbsp;photo&nbsp;», faites un clic droit pour afficher la liste d’action, et cliquez sur «&nbsp;Supprimer&nbsp;».</p>",
               "height": 400
             }
           }
