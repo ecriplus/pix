@@ -4,7 +4,6 @@ const getCertificationResult = async function (request) {
   return usecases.getCertificationResult(request.payload);
 };
 
-const certificationController = {
+export const certificationController = {
   getCertificationResult,
 };
-export { certificationController };

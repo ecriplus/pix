@@ -10,7 +10,7 @@ import { certificationController } from './certification-controller.js';
 const register = async function (server) {
   server.route({
     method: 'POST',
-    path: '/api/parcoursup/certification/search',
+    path: '/api/application/parcoursup/certification/search',
     config: {
       auth: 'jwt-parcoursup',
       validate: {
