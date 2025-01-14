@@ -130,7 +130,6 @@ import { userOrgaSettingsRepository } from '../../../src/team/infrastructure/rep
 import * as obfuscationService from '../../domain/services/obfuscation-service.js';
 import * as badgeAcquisitionRepository from '../../infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeForCalculationRepository from '../../infrastructure/repositories/badge-for-calculation-repository.js';
-import * as certifiableProfileForLearningContentRepository from '../../infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as flashAssessmentResultRepository from '../../infrastructure/repositories/flash-assessment-result-repository.js';
 import * as frameworkRepository from '../../infrastructure/repositories/framework-repository.js';
@@ -209,7 +208,6 @@ const dependencies = {
   campaignProfileRepository,
   campaignRepository,
   centerRepository,
-  certifiableProfileForLearningContentRepository,
   certificationAssessmentRepository,
   certificationBadgesService,
   certificationCandidateRepository,
