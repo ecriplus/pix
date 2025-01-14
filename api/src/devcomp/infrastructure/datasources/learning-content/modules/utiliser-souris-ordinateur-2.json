@@ -46,7 +46,7 @@
       },
       {
         "grainId": "9227a9d5-929d-4a5f-b85b-1649695d058c",
-        "content": "<p>Maintenant que vous savez faire un clic, un double clic et utiliser la molette, découvrez le dernier bouton de la souris : le bouton droit.</p>"
+        "content": "<p>Maintenant que vous savez faire un clic, un double-clic et utiliser la molette, découvrez le dernier bouton de la souris : le bouton droit.</p>"
       },
       {
         "grainId": "22ff7ef7-cf2d-4f35-80cd-af15becebbfc",
@@ -207,7 +207,7 @@
       {
         "id": "45d3d731-5abf-4384-afc7-12dcd8d37365",
         "type": "lesson",
-        "title": "Le double clic en vidéo",
+        "title": "Le double-clic en vidéo",
         "components": [
           {
             "type": "element",
@@ -239,7 +239,7 @@
             "element": {
               "id": "ec8094d6-53e4-4305-948a-74ed1d0fd443",
               "type": "text",
-              "content": "<p>📺 Dans la vidéo ci-dessous, vous allez voir comment faire un double-clic et à quoi il sert. <br>Après cette vidéo, ce sera à vous de faire des double-clics.<br></p><iframe width=\"100%\" height=\"410\" src=\"https://www.youtube.com/embed/cDf-Q5tHwVM\" title=\"Première marche souris - Double-clic\"></iframe>"
+              "content": "<p>📺 Dans la vidéo ci-dessous, vous allez voir comment faire un double-clic et à quoi il sert. <br>Après cette vidéo, ce sera à vous de faire des doubles-clics.<br></p><iframe width=\"100%\" height=\"410\" src=\"https://www.youtube.com/embed/cDf-Q5tHwVM\" title=\"Première marche souris - Double-clic\"></iframe>"
             }
           }
         ]
@@ -247,7 +247,7 @@
       {
         "id": "f7b7e135-b49a-41e0-88fc-1cf4c45bbc0f",
         "type": "activity",
-        "title": "Premiers double-clics",
+        "title": "Premiers doubles-clics",
         "components": [
           {
             "type": "element",
@@ -270,7 +270,7 @@
       {
         "id": "c3b07818-2cfb-4aaa-afdd-0444de95be3f",
         "type": "activity",
-        "title": "Utilisation du double clic",
+        "title": "Utilisation du double-clic",
         "components": [
           {
             "type": "element",
@@ -422,7 +422,7 @@
             "element": {
               "id": "3dbb4032-7150-447e-ac8c-00c1302bcc84",
               "type": "text",
-              "content": "<p>📌 Les points à retenir : <br>  </p><ul><li>▶️ Le bouton gauche permet de faire des clics gauche et des double-clics pour déclencher des actions (ouvrir, faire apparaître, sélectionner, etc).</li><li>📋 Le bouton droit permet d’afficher une liste d’actions possibles.</li><li>⬆️ La molette permet de monter ou de descendre dans une page.</li></ul><p><br>👉 Vous pouvez maintenant Ouvrir votre fiche de synthèse.</p>"
+              "content": "<p>📌 Les points à retenir : <br>  </p><ul><li>▶️ Le bouton gauche permet de faire des clics gauche et des doubles-clics pour déclencher des actions (ouvrir, faire apparaître, sélectionner, etc).</li><li>📋 Le bouton droit permet d’afficher une liste d’actions possibles.</li><li>⬆️ La molette permet de monter ou de descendre dans une page.</li></ul><p><br>👉 Vous pouvez maintenant Ouvrir votre fiche de synthèse.</p>"
             }
           }
         ]
