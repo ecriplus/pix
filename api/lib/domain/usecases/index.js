@@ -125,7 +125,6 @@ import { certificationCenterMembershipRepository } from '../../../src/team/infra
 import * as membershipRepository from '../../../src/team/infrastructure/repositories/membership.repository.js';
 import { organizationInvitationRepository } from '../../../src/team/infrastructure/repositories/organization-invitation.repository.js';
 import { userOrgaSettingsRepository } from '../../../src/team/infrastructure/repositories/user-orga-settings-repository.js';
-import * as certificationChallengesService from '../../domain/services/certification-challenges-service.js';
 import * as obfuscationService from '../../domain/services/obfuscation-service.js';
 import * as passwordGenerator from '../../domain/services/password-generator.js';
 import * as badgeAcquisitionRepository from '../../infrastructure/repositories/badge-acquisition-repository.js';
@@ -223,7 +222,6 @@ const dependencies = {
   certificationCenterRepository,
   certificationChallengeLiveAlertRepository,
   certificationChallengeRepository,
-  certificationChallengesService,
   certificationCompanionAlertRepository,
   certificationCourseRepository,
   certificationCpfCityRepository,

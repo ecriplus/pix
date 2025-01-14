@@ -1,18 +1,18 @@
 import _ from 'lodash';
 
+import * as certifiableProfileForLearningContentRepository from '../../../../../lib/infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
+import * as learningContentRepository from '../../../../../lib/infrastructure/repositories/learning-content-repository.js';
 import {
   MAX_CHALLENGES_PER_AREA_FOR_CERTIFICATION_PLUS,
   MAX_CHALLENGES_PER_COMPETENCE_FOR_CERTIFICATION,
   PIX_ORIGIN,
-} from '../../../src/shared/domain/constants.js';
-import { CertificationChallenge } from '../../../src/shared/domain/models/CertificationChallenge.js';
-import { Challenge } from '../../../src/shared/domain/models/Challenge.js';
-import { KnowledgeElement } from '../../../src/shared/domain/models/KnowledgeElement.js';
-import * as answerRepository from '../../../src/shared/infrastructure/repositories/answer-repository.js';
-import * as challengeRepository from '../../../src/shared/infrastructure/repositories/challenge-repository.js';
-import * as knowledgeElementRepository from '../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
-import * as certifiableProfileForLearningContentRepository from '../../infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
-import * as learningContentRepository from '../../infrastructure/repositories/learning-content-repository.js';
+} from '../../../../shared/domain/constants.js';
+import { CertificationChallenge } from '../../../../shared/domain/models/CertificationChallenge.js';
+import { Challenge } from '../../../../shared/domain/models/Challenge.js';
+import { KnowledgeElement } from '../../../../shared/domain/models/KnowledgeElement.js';
+import * as answerRepository from '../../../../shared/infrastructure/repositories/answer-repository.js';
+import * as challengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
+import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 
 const pickCertificationChallenges = async function (
   placementProfile,
