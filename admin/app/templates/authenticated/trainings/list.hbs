@@ -7,10 +7,10 @@
         href="https://1024pix.atlassian.net/wiki/spaces/PROD/pages/3753476097/Cr+er+un+contenu+formatif+Mode+d+emploi"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Consulter la documentation de création de contenus formatifs"
+        aria-label="Consulter la documentation de création de contenus formatifs (ouverture dans une nouvelle fenêtre)"
       >
-        <FaIcon @icon="arrow-up-right-from-square" />
-        <span>Consulter la documentation</span>
+        Consulter la documentation
+        <PixIcon @name="openNew" @ariaHidden={{true}} />
       </a>
       <PixButtonLink @route="authenticated.trainings.new" @variant="secondary" @iconBefore="add">
         Nouveau contenu formatif

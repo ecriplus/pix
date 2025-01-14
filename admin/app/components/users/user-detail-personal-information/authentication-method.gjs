@@ -1,8 +1,8 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
@@ -226,14 +226,19 @@ export default class AuthenticationMethod extends Component {
           <td class="authentication-method-table__name-column">Adresse e-mail</td>
           <td>
             {{#if this.hasEmailAuthenticationMethod}}
-              <FaIcon
-                @icon="circle-check"
+              <PixIcon
+                @name="checkCircle"
+                @plainIcon={{true}}
+                @ariaHidden={{false}}
                 aria-label="L'utilisateur a une méthode de connexion avec adresse e-mail"
                 class="authentication-method-table__check"
               />
+
             {{else}}
-              <FaIcon
-                @icon="circle-xmark"
+              <PixIcon
+                @name="cancel"
+                @plainIcon={{true}}
+                @ariaHidden={{false}}
                 aria-label="L'utilisateur n'a pas de méthode de connexion avec adresse e-mail"
                 class="authentication-method-table__uncheck"
               />
@@ -262,14 +267,18 @@ export default class AuthenticationMethod extends Component {
           <td class="authentication-method-table__name-column">Identifiant</td>
           <td>
             {{#if this.hasUsernameAuthenticationMethod}}
-              <FaIcon
-                @icon="circle-check"
+              <PixIcon
+                @name="checkCircle"
+                @plainIcon={{true}}
+                @ariaHidden={{false}}
                 aria-label="L'utilisateur a une méthode de connexion avec identifiant"
                 class="authentication-method-table__check"
               />
             {{else}}
-              <FaIcon
-                @icon="circle-xmark"
+              <PixIcon
+                @name="cancel"
+                @plainIcon={{true}}
+                @ariaHidden={{false}}
                 aria-label="L'utilisateur n'a pas de méthode de connexion avec identifiant"
                 class="authentication-method-table__uncheck"
               />
@@ -293,14 +302,18 @@ export default class AuthenticationMethod extends Component {
           <td class="authentication-method-table__name-column">Médiacentre</td>
           <td>
             {{#if this.hasGarAuthenticationMethod}}
-              <FaIcon
-                @icon="circle-check"
+              <PixIcon
+                @name="checkCircle"
+                @plainIcon={{true}}
+                @ariaHidden={{false}}
                 aria-label="L'utilisateur a une méthode de connexion Médiacentre"
                 class="authentication-method-table__check"
               />
             {{else}}
-              <FaIcon
-                @icon="circle-xmark"
+              <PixIcon
+                @name="cancel"
+                @plainIcon={{true}}
+                @ariaHidden={{false}}
                 aria-label="L'utilisateur n'a pas de méthode de connexion Médiacentre"
                 class="authentication-method-table__uncheck"
               />
@@ -331,14 +344,18 @@ export default class AuthenticationMethod extends Component {
             <td class="authentication-method-table__name-column">{{userOidcAuthenticationMethod.name}}</td>
             <td>
               {{#if userOidcAuthenticationMethod.userHasThisOidcAuthenticationMethod}}
-                <FaIcon
-                  @icon="circle-check"
+                <PixIcon
+                  @name="checkCircle"
+                  @plainIcon={{true}}
+                  @ariaHidden={{false}}
                   aria-label="L'utilisateur a une méthode de connexion {{userOidcAuthenticationMethod.name}}"
                   class="authentication-method-table__check"
                 />
               {{else}}
-                <FaIcon
-                  @icon="circle-xmark"
+                <PixIcon
+                  @name="cancel"
+                  @plainIcon={{true}}
+                  @ariaHidden={{false}}
                   aria-label="L'utilisateur n'a pas de méthode de connexion {{userOidcAuthenticationMethod.name}}"
                   class="authentication-method-table__uncheck"
                 />

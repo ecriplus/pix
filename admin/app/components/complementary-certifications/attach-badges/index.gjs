@@ -1,10 +1,10 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
@@ -172,7 +172,7 @@ export default class AttachBadges extends Component {
 
               <PixTooltip @position="top-left" @isLight={{true}} @isWide={{true}}>
                 <:triggerElement>
-                  <FaIcon @icon="circle-question" tabindex="0" />
+                  <PixIcon @name="help" @plainIcon={{true}} @ariaHidden={{true}} />
                 </:triggerElement>
                 <:tooltip>
                   Un email sera envoyé à chaque membre de l'organisation

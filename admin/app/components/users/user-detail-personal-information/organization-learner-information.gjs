@@ -1,8 +1,8 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { fn } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 import Component from '@glimmer/component';
 import formatDate from 'pix-admin/helpers/format-date';
 
@@ -48,16 +48,20 @@ export default class OrganizationLearnerInformation extends Component {
               <td>{{formatDate organizationLearner.updatedAt}}</td>
               <td class="table-admin-organization-learners-status">
                 {{#if organizationLearner.isDisabled}}
-                  <FaIcon
-                    @icon="circle-xmark"
-                    class="organization-learners-table__status--isDisabled"
+                  <PixIcon
+                    @name="cancel"
+                    @plainIcon={{true}}
+                    @ariaHidden={{false}}
                     aria-label="Inscription désactivée"
+                    class="organization-learners-table__status--isDisabled"
                   />
                 {{else}}
-                  <FaIcon
-                    @icon="circle-check"
-                    class="organization-learners-table__status--isEnabled"
+                  <PixIcon
+                    @name="checkCircle"
+                    @plainIcon={{true}}
+                    @ariaHidden={{false}}
                     aria-label="Inscription activée"
+                    class="organization-learners-table__status--isEnabled"
                   />
                 {{/if}}
               </td>

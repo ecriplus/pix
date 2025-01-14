@@ -1,5 +1,5 @@
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 
 <template>
   <th class="attach-badges-header">
@@ -10,7 +10,9 @@ import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
       {{/unless}}
       {{#if (has-block "tooltip")}}
         <PixTooltip role="tooltip" @isLight={{true}} @isWide={{true}} @position="bottom-left" class="content_tooltip">
-          <:triggerElement><FaIcon @icon="circle-info" /></:triggerElement>
+          <:triggerElement>
+            <PixIcon @name="info" @plainIcon={{true}} @ariaHidden={{true}} />
+          </:triggerElement>
           <:tooltip>{{yield to="tooltip"}}</:tooltip>
         </PixTooltip>
       {{/if}}

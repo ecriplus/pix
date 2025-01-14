@@ -1,6 +1,6 @@
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import { LinkTo } from '@ember/routing';
-import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { eq } from 'ember-truth-helpers';
 
@@ -39,11 +39,21 @@ import { eq } from 'ember-truth-helpers';
                   <td>
                     {{#if (eq campaign.type "ASSESSMENT")}}
                       <div title="Évaluation">
-                        <FaIcon class="campaign-type__icon-assessment" @icon="tachometer" @prefix="fapix" />
+                        <PixIcon
+                          @name="speed"
+                          @plainIcon={{true}}
+                          @ariaHidden={{true}}
+                          class="campaign-type__icon-assessment"
+                        />
                       </div>
                     {{else}}
                       <div title="Collecte de profils">
-                        <FaIcon class="campaign-type__icon-profile-collection" @icon="person-export" @prefix="fapix" />
+                        <PixIcon
+                          @name="profileShare"
+                          @plainIcon={{true}}
+                          @ariaHidden={{true}}
+                          class="campaign-type__icon-profile-collection"
+                        />
                       </div>
                     {{/if}}
                   </td>
