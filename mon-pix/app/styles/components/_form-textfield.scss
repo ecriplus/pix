@@ -26,7 +26,7 @@
 
   & .form-textfield__input-field-container,
   input {
-    width: 30%;
+    flex-grow: 1;
     text-align: center;
   }
 }

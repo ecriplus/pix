@@ -71,6 +71,11 @@ export default class UpdateScoRecordFormComponent extends Component {
   }
 
   @action
+  handlePasswordInput(event) {
+    this.password = event.target.value;
+  }
+
+  @action
   async submitUpdate(event) {
     event.preventDefault();
     this.passwordValidation.status = STATUS_MAP['successStatus'];

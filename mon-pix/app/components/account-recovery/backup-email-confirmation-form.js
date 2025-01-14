@@ -56,6 +56,11 @@ export default class BackupEmailConfirmationFormComponent extends Component {
   }
 
   @action
+  handleInputChange(event) {
+    this.email = event.target.value;
+  }
+
+  @action
   async submitBackupEmailConfirmationForm(event) {
     event.preventDefault();
     this.emailValidation.status = STATUS_MAP['successStatus'];

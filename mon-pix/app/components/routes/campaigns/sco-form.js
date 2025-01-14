@@ -103,6 +103,27 @@ export default class ScoForm extends Component {
     this._validateInputYear(key, value);
   }
 
+  @action
+  handleFirstNameInput(event) {
+    this.firstName = event.target.value;
+  }
+  @action
+  handleLastNameInput(event) {
+    this.lastName = event.target.value;
+  }
+  @action
+  handleDayOfBirthInput(event) {
+    this.dayOfBirth = event.target.value;
+  }
+  @action
+  handleMonthOfBirthInput(event) {
+    this.monthOfBirth = event.target.value;
+  }
+  @action
+  handleYearOfBirthInput(event) {
+    this.yearOfBirth = event.target.value;
+  }
+
   _validateForm() {
     this._validateInputName('firstName', this.firstName);
     this._validateInputName('lastName', this.lastName);

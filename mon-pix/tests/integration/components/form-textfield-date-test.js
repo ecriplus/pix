@@ -34,7 +34,7 @@ module('Integration | Component | form textfield date', function (hooks) {
       this.set('monthValidationMessage', 'month message');
       this.set('yearValidationMessage', 'year message');
       this.set('validateStub', () => {});
-
+      this.set('handleInputStub', () => {});
       // When
       await render(hbs`<FormTextfieldDate
   @label={{this.label}}
@@ -50,6 +50,9 @@ module('Integration | Component | form textfield date', function (hooks) {
   @onValidateDay={{this.validateStub}}
   @onValidateMonth={{this.validateStub}}
   @onValidateYear={{this.validateStub}}
+  @onDayInput={{this.handleInputStub}}
+  @onMonthInput={{this.handleInputStub}}
+  @onYearInput={{this.handleInputStub}}
 />`);
     });
 
@@ -100,12 +103,21 @@ module('Integration | Component | form textfield date', function (hooks) {
       this.set('dayOfBirth', inputValueToValidate['day']);
       this.set('monthOfBirth', inputValueToValidate['month']);
       this.set('yearOfBirth', inputValueToValidate['year']);
+      this.set('handleDayInput', (event) => {
+        this.set('dayOfBirth', event.target.value);
+      });
+      this.set('handleMonthInput', (event) => {
+        this.set('monthOfBirth', event.target.value);
+      });
+      this.set('handleYearInput', (event) => {
+        this.set('yearOfBirth', event.target.value);
+      });
 
       await render(hbs`<FormTextfieldDate
   @label={{this.label}}
-  @dayInputBindingValue={{this.dayOfBirth}}
-  @monthInputBindingValue={{this.monthOfBirth}}
-  @yearInputBindingValue={{this.yearOfBirth}}
+  @dayValue={{this.dayOfBirth}}
+  @monthValue={{this.monthOfBirth}}
+  @yearValue={{this.yearOfBirth}}
   @dayValidationStatus={{this.dayValidationStatus}}
   @monthValidationStatus={{this.monthValidationStatus}}
   @yearValidationStatus={{this.yearValidationStatus}}
@@ -118,6 +130,9 @@ module('Integration | Component | form textfield date', function (hooks) {
   @onValidateDay={{this.validateStub}}
   @onValidateMonth={{this.validateStub}}
   @onValidateYear={{this.validateStub}}
+  @onDayInput={{this.handleDayInput}}
+  @onMonthInput={{this.handleMonthInput}}
+  @onYearInput={{this.handleYearInput}}
 />`);
 
       // when
@@ -150,6 +165,7 @@ module('Integration | Component | form textfield date', function (hooks) {
         this.set('monthValidationMessage', '');
         this.set('yearValidationMessage', '');
         this.set('validateStub', () => {});
+        this.set('handleInputStub', () => {});
 
         // When
         await render(hbs`<FormTextfieldDate
@@ -166,6 +182,9 @@ module('Integration | Component | form textfield date', function (hooks) {
   @onValidateDay={{this.validateStub}}
   @onValidateMonth={{this.validateStub}}
   @onValidateYear={{this.validateStub}}
+  @onDayInput={{this.handleInputStub}}
+  @onMonthInput={{this.handleInputStub}}
+  @onYearInput={{this.handleInputStub}}
 />`);
       });
 
@@ -200,6 +219,7 @@ module('Integration | Component | form textfield date', function (hooks) {
         this.set('monthValidationMessage', 'month message');
         this.set('yearValidationMessage', 'year message');
         this.set('validateStub', () => {});
+        this.set('handleInputStub', () => {});
 
         // When
         await render(hbs`<FormTextfieldDate
@@ -216,6 +236,9 @@ module('Integration | Component | form textfield date', function (hooks) {
   @onValidateDay={{this.validateStub}}
   @onValidateMonth={{this.validateStub}}
   @onValidateYear={{this.validateStub}}
+  @onDayInput={{this.handleInputStub}}
+  @onMonthInput={{this.handleInputStub}}
+  @onYearInput={{this.handleInputStub}}
 />`);
       });
 
@@ -248,6 +271,7 @@ module('Integration | Component | form textfield date', function (hooks) {
         this.set('monthValidationMessage', 'month message');
         this.set('yearValidationMessage', 'year message');
         this.set('validateStub', () => {});
+        this.set('handleInputStub', () => {});
 
         // When
         await render(hbs`<FormTextfieldDate
@@ -264,6 +288,9 @@ module('Integration | Component | form textfield date', function (hooks) {
   @onValidateDay={{this.validateStub}}
   @onValidateMonth={{this.validateStub}}
   @onValidateYear={{this.validateStub}}
+  @onDayInput={{this.handleInputStub}}
+  @onMonthInput={{this.handleInputStub}}
+  @onYearInput={{this.handleInputStub}}
 />`);
       });
 

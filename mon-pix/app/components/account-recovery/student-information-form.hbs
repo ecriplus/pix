@@ -35,7 +35,8 @@
       <FormTextfield
         @label={{t "pages.account-recovery.find-sco-record.student-information.form.ine-ina"}}
         @textfieldName="ineIna"
-        @inputBindingValue={{this.ineIna}}
+        @value={{this.ineIna}}
+        @onInput={{this.handleIneInaInput}}
         @onValidate={{this.validateIneIna}}
         @validationStatus={{this.ineInaValidation.status}}
         @validationMessage={{this.ineInaValidation.message}}
@@ -49,7 +50,8 @@
       <FormTextfield
         @label={{t "pages.account-recovery.find-sco-record.student-information.form.first-name"}}
         @textfieldName="firstName"
-        @inputBindingValue={{this.firstName}}
+        @value={{this.firstName}}
+        @onInput={{this.handleFirstNameInput}}
         @onValidate={{this.validateFirstName}}
         @validationStatus={{this.firstNameValidation.status}}
         @validationMessage={{this.firstNameValidation.message}}
@@ -62,7 +64,8 @@
       <FormTextfield
         @label={{t "pages.account-recovery.find-sco-record.student-information.form.last-name"}}
         @textfieldName="lastName"
-        @inputBindingValue={{this.lastName}}
+        @value={{this.lastName}}
+        @onInput={{this.handleLastNameInput}}
         @onValidate={{this.validateLastName}}
         @validationStatus={{this.lastNameValidation.status}}
         @validationMessage={{this.lastNameValidation.message}}
@@ -78,42 +81,43 @@
         </p>
         <div class="student-information-form__birthdate-fields">
           <div class="form-textfield__input-field-container">
-            <Input
+            <PixInput
               min="1"
               max="31"
-              @type="number"
+              type="number"
               @value={{this.dayOfBirth}}
               placeholder={{t "pages.account-recovery.find-sco-record.student-information.form.placeholder.birth-day"}}
-              id="dayOfBirth"
-              {{on "input" this.handleDayInputChange}}
+              @id="dayOfBirth"
+              {{on "input" this.handleDayInput}}
               aria-label={{t "pages.account-recovery.find-sco-record.student-information.form.label.birth-day"}}
               autocomplete="off"
             />
           </div>
           <div class="form-textfield__input-field-container">
-            <Input
+            <PixInput
               min="1"
               max="12"
-              @type="number"
+              type="number"
               @value={{this.monthOfBirth}}
               placeholder={{t
                 "pages.account-recovery.find-sco-record.student-information.form.placeholder.birth-month"
               }}
-              id="monthOfBirth"
-              {{on "input" this.handleMonthInputChange}}
+              @id="monthOfBirth"
+              {{on "input" this.handleMonthInput}}
               aria-label={{t "pages.account-recovery.find-sco-record.student-information.form.label.birth-month"}}
               autocomplete="off"
             />
           </div>
           <div class="form-textfield__input-field-container">
-            <Input
+            <PixInput
               min="1900"
-              @type="number"
+              type="number"
               @value={{this.yearOfBirth}}
               placeholder={{t "pages.account-recovery.find-sco-record.student-information.form.placeholder.birth-year"}}
-              id="yearOfBirth"
+              @id="yearOfBirth"
               aria-label={{t "pages.account-recovery.find-sco-record.student-information.form.label.birth-year"}}
               autocomplete="off"
+              {{on "input" this.handleYearInput}}
             />
           </div>
         </div>

@@ -5,13 +5,14 @@
     <label for="studentNumber" class="join-restricted-campaign__label">
       {{t "pages.join.sup.fields.student-number.label"}}
     </label>
-    <Input
+    <PixInput
       id="studentNumber"
-      @type="text"
+      type="text"
       @value={{this.studentNumber}}
       placeholder={{t "pages.join.sup.fields.student-number.label"}}
       class={{if this.errors.studentNumber "input--error"}}
       {{on "focusout" (fn this.triggerInputStringValidation "studentNumber" this.studentNumber)}}
+      {{on "input" this.handleStudentNumberInput}}
     />
     {{#if this.errors.studentNumber}}
       <div class="join-restricted-campaign__field-error" role="alert">{{this.errors.studentNumber}}</div>
@@ -22,13 +23,14 @@
     <label for="firstName" class="join-restricted-campaign__label">
       {{t "pages.join.fields.firstname.label"}}
     </label>
-    <Input
+    <PixInput
       id="firstName"
-      @type="text"
+      type="text"
       @value={{this.firstName}}
       placeholder={{t "pages.join.fields.firstname.label"}}
       class={{if this.errors.firstName "input--error"}}
       {{on "focusout" (fn this.triggerInputStringValidation "firstName" this.firstName)}}
+      {{on "input" this.handleFirstNameInput}}
     />
     {{#if this.errors.firstName}}
       <div class="join-restricted-campaign__field-error" role="alert">{{this.errors.firstName}}</div>
@@ -39,13 +41,14 @@
     <label for="lastName" class="join-restricted-campaign__label">
       {{t "pages.join.fields.lastname.label"}}
     </label>
-    <Input
+    <PixInput
       id="lastName"
-      @type="text"
+      type="text"
       @value={{this.lastName}}
       placeholder={{t "pages.join.fields.lastname.label"}}
       class={{if this.errors.lastName "input--error"}}
       {{on "focusout" (fn this.triggerInputStringValidation "lastName" this.lastName)}}
+      {{on "input" this.handleLastNameInput}}
     />
     {{#if this.errors.lastName}}
       <div class="join-restricted-campaign__field-error" role="alert">{{this.errors.lastName}}</div>
@@ -57,29 +60,32 @@
       {{t "pages.join.fields.birthdate.label"}}
     </label>
     <div class="join-restricted-campaign__birthdate">
-      <Input
-        @type="text"
+      <PixInput
+        type="text"
         @value={{this.dayOfBirth}}
         placeholder={{t "pages.join.fields.birthdate.day-format"}}
         aria-label={{t "pages.join.fields.birthdate.day-label"}}
         class={{if this.errors.dayOfBirth "input--error"}}
         {{on "focusout" (fn this.triggerInputDayValidation "dayOfBirth" this.dayOfBirth)}}
+        {{on "input" this.handleDayOfBirthInput}}
       />
-      <Input
-        @type="text"
+      <PixInput
+        type="text"
         @value={{this.monthOfBirth}}
         placeholder={{t "pages.join.fields.birthdate.month-format"}}
         aria-label={{t "pages.join.fields.birthdate.month-label"}}
         class={{if this.errors.monthOfBirth "input--error"}}
         {{on "focusout" (fn this.triggerInputMonthValidation "monthOfBirth" this.monthOfBirth)}}
+        {{on "input" this.handleMonthOfBirthInput}}
       />
-      <Input
-        @type="text"
+      <PixInput
+        type="text"
         @value={{this.yearOfBirth}}
         placeholder={{t "pages.join.fields.birthdate.year-format"}}
         aria-label={{t "pages.join.fields.birthdate.year-label"}}
         class={{if this.errors.yearOfBirth "input--error"}}
         {{on "focusout" (fn this.triggerInputYearValidation "yearOfBirth" this.yearOfBirth)}}
+        {{on "input" this.handleYearOfBirthInput}}
       />
     </div>
     {{#if this.errors.dayOfBirth}}

@@ -271,6 +271,39 @@ export default class RegisterForm extends Component {
   }
 
   @action
+  handleFirstNameInput(event) {
+    this.firstName = event.target.value;
+  }
+
+  @action
+  handleLastNameInput(event) {
+    this.lastName = event.target.value;
+  }
+
+  @action
+  handleEmailInput(event) {
+    this.email = event.target.value;
+  }
+
+  @action
+  handlePasswordInput(event) {
+    this.password = event.target.value;
+  }
+
+  @action
+  handleDayInput(event) {
+    this.dayOfBirth = event.target.value;
+  }
+  @action
+  handleMonthInput(event) {
+    this.monthOfBirth = event.target.value;
+  }
+  @action
+  handleYearInput(event) {
+    this.yearOfBirth = event.target.value;
+  }
+
+  @action
   resetForm() {
     if (this.scoOrganizationLearner) this.scoOrganizationLearner.unloadRecord();
     if (this.dependentUser) this.dependentUser.unloadRecord();

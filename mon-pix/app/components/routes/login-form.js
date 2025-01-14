@@ -21,6 +21,16 @@ export default class LoginForm extends Component {
   expectedUserId;
 
   @action
+  handleLoginInput(event) {
+    this.login = event.target.value;
+  }
+
+  @action
+  handlePasswordInput(event) {
+    this.password = event.target.value;
+  }
+
+  @action
   async authenticate(event) {
     event && event.preventDefault();
 

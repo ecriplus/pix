@@ -7,7 +7,8 @@
       <FormTextfield
         @label={{t "pages.login-or-register.register-form.fields.firstname.label"}}
         @textfieldName="firstName"
-        @inputBindingValue={{this.firstName}}
+        @value={{this.firstName}}
+        @onInput={{this.handleFirstNameInput}}
         @onValidate={{this.triggerInputStringValidation}}
         @validationStatus={{this.validation.firstName.status}}
         @validationMessage={{this.validation.firstName.message}}
@@ -22,7 +23,8 @@
       <FormTextfield
         @label={{t "pages.login-or-register.register-form.fields.lastname.label"}}
         @textfieldName="lastName"
-        @inputBindingValue={{this.lastName}}
+        @value={{this.lastName}}
+        @onInput={{this.handleLastNameInput}}
         @onValidate={{this.triggerInputStringValidation}}
         @validationStatus={{this.validation.lastName.status}}
         @validationMessage={{this.validation.lastName.message}}
@@ -39,9 +41,9 @@
         @dayTextfieldName="dayOfBirth"
         @monthTextfieldName="monthOfBirth"
         @yearTextfieldName="yearOfBirth"
-        @dayInputBindingValue={{this.dayOfBirth}}
-        @monthInputBindingValue={{this.monthOfBirth}}
-        @yearInputBindingValue={{this.yearOfBirth}}
+        @dayValue={{this.dayOfBirth}}
+        @monthValue={{this.monthOfBirth}}
+        @yearValue={{this.yearOfBirth}}
         @onValidateDay={{this.triggerInputDayValidation}}
         @onValidateMonth={{this.triggerInputMonthValidation}}
         @onValidateYear={{this.triggerInputYearValidation}}
@@ -53,6 +55,9 @@
         @yearValidationMessage={{this.validation.yearOfBirth.message}}
         @disabled={{this.matchingStudentFound}}
         @require={{true}}
+        @onDayInput={{this.handleDayInput}}
+        @onMonthInput={{this.handleMonthInput}}
+        @onYearInput={{this.handleYearInput}}
         @aria-describedby="register-error-message register-display-error-message"
       />
     </div>
@@ -98,7 +103,8 @@
             @label={{t "pages.login-or-register.register-form.fields.email.label"}}
             @help={{t "pages.login-or-register.register-form.fields.email.help"}}
             @textfieldName="email"
-            @inputBindingValue={{this.email}}
+            @value={{this.email}}
+            @onInput={{this.handleEmailInput}}
             @onValidate={{this.triggerInputEmailValidation}}
             @validationStatus={{this.validation.email.status}}
             @validationMessage={{this.validation.email.message}}
@@ -112,7 +118,8 @@
           @label={{t "pages.login-or-register.register-form.fields.password.label"}}
           @help={{t "pages.login-or-register.register-form.fields.password.help"}}
           @textfieldName="password"
-          @inputBindingValue={{this.password}}
+          @value={{this.password}}
+          @onInput={{this.handlePasswordInput}}
           @onValidate={{this.triggerInputPasswordValidation}}
           @validationStatus={{this.validation.password.status}}
           @validationMessage={{this.validation.password.message}}

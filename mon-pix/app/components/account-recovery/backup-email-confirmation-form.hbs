@@ -27,7 +27,8 @@
     <FormTextfield
       @label={{t "pages.account-recovery.find-sco-record.backup-email-confirmation.form.email"}}
       @textfieldName="email"
-      @inputBindingValue={{this.email}}
+      @value={{this.email}}
+      @onInput={{this.handleInputChange}}
       @onValidate={{this.validateEmail}}
       @validationStatus={{this.emailValidation.status}}
       @validationMessage={{this.emailValidation.message}}

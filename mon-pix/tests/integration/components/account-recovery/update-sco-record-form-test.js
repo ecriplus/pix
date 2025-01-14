@@ -15,7 +15,6 @@ module('Integration | Component | account-recovery | update-sco-record', functio
     const firstName = 'Philippe';
     this.set('firstName', firstName);
     this.set('email', newEmail);
-
     // when
     const screen = await render(
       hbs`<AccountRecovery::UpdateScoRecordForm @firstName={{this.firstName}} @email={{this.email}} />`,

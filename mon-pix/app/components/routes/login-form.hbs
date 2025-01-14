@@ -12,7 +12,8 @@
         @label={{t "pages.login-or-register.login-form.fields.login.label"}}
         @textfieldName="login"
         @validationStatus="default"
-        @inputBindingValue={{this.login}}
+        @value={{this.login}}
+        @onInput={{this.handleLoginInput}}
         @autocomplete="username"
         @aria-describedby="login-error-message update-form-error-message"
       />
@@ -23,7 +24,8 @@
         @label={{t "pages.login-or-register.login-form.fields.password.label"}}
         @textfieldName="password"
         @validationStatus="default"
-        @inputBindingValue={{this.password}}
+        @value={{this.password}}
+        @onInput={{this.handlePasswordInput}}
         @autocomplete="current-password"
         @aria-describedby="login-error-message update-form-error-message"
       />

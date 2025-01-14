@@ -24,21 +24,29 @@ module('Integration | Component | form textfield', function (hooks) {
   const INPUT_ERROR_CLASS = 'form-textfield__input--error';
 
   module('#Component rendering', function (hooks) {
+    let screen;
     hooks.beforeEach(async function () {
       this.set('label', 'nom');
       this.set('validationStatus', '');
       this.set('validationMessage', MESSAGE_TEXT);
       this.set('textfieldName', 'firstname');
-
+      this.set('value', 'georges');
       // When
-      await render(
+      screen = await render(
         hbs`<FormTextfield
   @label={{this.label}}
   @validationStatus={{this.validationStatus}}
   @validationMessage={{this.validationMessage}}
   @textfieldName={{this.textfieldName}}
+  @onInput={{this.onInput}}
+  @value={{this.value}}
 />`,
       );
+    });
+
+    test('should set initial value', function (assert) {
+      const input = screen.getByRole('textbox', { name: 'nom' });
+      assert.ok(input.value, 'georges');
     });
 
     [
@@ -80,6 +88,7 @@ module('Integration | Component | form textfield', function (hooks) {
       this.set('validationStatus', '');
       this.set('validationMessage', 'message');
       this.set('textfieldName', 'firstname');
+      this.set('onInput', () => {});
 
       await render(
         hbs`<FormTextfield
@@ -88,6 +97,7 @@ module('Integration | Component | form textfield', function (hooks) {
   @validationMessage={{this.validationMessage}}
   @textfieldName={{this.textfieldName}}
   @onValidate={{this.validate}}
+  @onInput={{this.onInput}}
 />`,
       );
 
@@ -106,7 +116,7 @@ module('Integration | Component | form textfield', function (hooks) {
         this.set('validationStatus', 'default');
         this.set('textfieldName', 'firstname');
         this.set('validationMessage', 'message');
-
+        this.set('onInput', () => {});
         // When
         await render(
           hbs`<FormTextfield
@@ -114,6 +124,7 @@ module('Integration | Component | form textfield', function (hooks) {
   @validationStatus={{this.validationStatus}}
   @validationMessage={{this.validationMessage}}
   @textfieldName={{this.textfieldName}}
+  @onInput={{this.onInput}}
 />`,
         );
       });
@@ -137,6 +148,7 @@ module('Integration | Component | form textfield', function (hooks) {
         this.set('validationStatus', 'error');
         this.set('textfieldName', 'firstname');
         this.set('validationMessage', 'message');
+        this.set('onInput', () => {});
 
         // When
         await render(
@@ -172,6 +184,7 @@ module('Integration | Component | form textfield', function (hooks) {
         this.set('validationStatus', 'success');
         this.set('validationMessage', 'message');
         this.set('textfieldName', 'firstname');
+        this.set('onInput', () => {});
 
         // When
         await render(
@@ -180,6 +193,7 @@ module('Integration | Component | form textfield', function (hooks) {
   @validationStatus={{this.validationStatus}}
   @validationMessage={{this.validationMessage}}
   @textfieldName={{this.textfieldName}}
+  @onInput={{this.onInput}}
 />`,
         );
       });
@@ -208,6 +222,7 @@ module('Integration | Component | form textfield', function (hooks) {
         this.set('validationStatus', 'default');
         this.set('validationMessage', 'message');
         this.set('textfieldName', 'password');
+        this.set('onInput', () => {});
 
         // given
         const screen = await render(
@@ -217,6 +232,7 @@ module('Integration | Component | form textfield', function (hooks) {
   @validationMessage={{this.validationMessage}}
   @textfieldName={{this.textfieldName}}
   @inputValue={{this.inputValue}}
+  @onInput={{this.onInput}}
 />`,
         );
 
@@ -233,6 +249,7 @@ module('Integration | Component | form textfield', function (hooks) {
         this.set('validationStatus', 'default');
         this.set('validationMessage', 'message');
         this.set('textfieldName', 'password');
+        this.set('onInput', () => {});
 
         // given
         const screen = await render(
@@ -242,6 +259,7 @@ module('Integration | Component | form textfield', function (hooks) {
   @validationMessage={{this.validationMessage}}
   @textfieldName={{this.textfieldName}}
   @inputValue={{this.inputValue}}
+  @onInput={{this.onInput}}
 />`,
         );
 

@@ -11,14 +11,15 @@
     <FormTextfield
       @label={{t "pages.account-recovery.update-sco-record.form.email-label"}}
       @textfieldName="email"
-      @inputBindingValue={{@email}}
+      @value={{@email}}
       @disabled={{true}}
     />
 
     <FormTextfield
       @label={{t "pages.account-recovery.update-sco-record.form.password-label"}}
       @textfieldName="password"
-      @inputBindingValue={{this.password}}
+      @value={{this.password}}
+      @onInput={{this.handlePasswordInput}}
       @onValidate={{this.validatePassword}}
       @validationStatus={{this.passwordValidation.status}}
       @validationMessage={{this.passwordValidation.message}}

@@ -14,12 +14,13 @@
       {{if @disabled 'form-textfield__input-container--disabled' this.inputContainerStatusClass}}
       {{if this.isPassword 'form-textfield__input-container--password'}}"
   >
-    <Input
-      id={{@textfieldName}}
-      @type={{this.textfieldType}}
-      @value={{@inputBindingValue}}
+    <PixInput
+      @id={{@textfieldName}}
+      type={{this.textfieldType}}
+      @value={{@value}}
       name={{@textfieldName}}
-      {{on "focusout" (fn this.onValidate @textfieldName @inputBindingValue)}}
+      {{on "focusout" (fn this.onValidate @textfieldName @value)}}
+      {{on "input" this.onInput}}
       class="form-textfield__input {{this.inputValidationStatus}}"
       autocomplete={{@autocomplete}}
       aria-describedby="{{@aria-describedby}} validationMessage-{{@textfieldName}}"

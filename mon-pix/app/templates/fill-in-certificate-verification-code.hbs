@@ -18,14 +18,15 @@
             <label for="certificate-verification-code">
               {{t "pages.fill-in-certificate-verification-code.label"}}
             </label>
-            <Input
+            <PixInput
               required
               class="input-code"
-              @type="text"
+              type="text"
               id="certificate-verification-code"
               @value={{this.certificateVerificationCode}}
               maxlength="10"
               {{on "keyup" this.clearErrors}}
+              {{on "input" this.handleVerificationCodeInput}}
             />
           </div>
 
