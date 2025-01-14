@@ -1,4 +1,4 @@
-import { CertificationCourseRejected } from '../../../../../../lib/domain/events/CertificationCourseRejected.js';
+import { CertificationCourseRejected } from '../../../../../../src/certification/session-management/domain/events/CertificationCourseRejected.js';
 import { rejectCertificationCourse } from '../../../../../../src/certification/session-management/domain/usecases/reject-certification-course.js';
 import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';

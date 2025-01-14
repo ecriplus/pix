@@ -1,4 +1,4 @@
-import { CertificationCourseRejected } from '../../../../../lib/domain/events/CertificationCourseRejected.js';
+import { CertificationCourseRejected } from '../events/CertificationCourseRejected.js';
 
 export const rejectCertificationCourse = async ({ certificationCourseId, juryId, certificationCourseRepository }) => {
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
