@@ -2,6 +2,7 @@ import HapiSwagger from 'hapi-swagger';
 
 import packageJSON from '../../package.json' with { type: 'json' };
 import { config } from './config.js';
+import { logger } from './infrastructure/utils/logger.js';
 
 const swaggerOptionsAuthorizationServer = {
   routeTag: 'authorization-server',
@@ -33,12 +34,7 @@ const swaggerOptionsPoleEmploi = {
 const swaggerOptionsParcoursup = {
   routeTag: 'parcoursup',
   OAS: 'v3.0',
-  servers: [
-    {
-      url: `${config.apiManager.url}/parcoursup/`,
-      description: 'External Partners access',
-    },
-  ],
+  servers: _buildParcoursupServers(),
   pathReplacements: [
     {
       replaceIn: 'all',
@@ -99,6 +95,28 @@ function _buildSwaggerArgs(swaggerOptions) {
       routes: { prefix: '/' + swaggerOptions.routeTag },
     },
   ];
+}
+
+function _buildParcoursupServers() {
+  try {
+    const servers = [
+      {
+        url: new URL(config.apiManager.endpoints.parcoursup, config.apiManager.url).href,
+        description: 'External Partners access',
+      },
+    ];
+
+    if (config.environment === 'development') {
+      servers.push({
+        url: `http://127.0.0.1:${config.port}/api/application`,
+        description: 'Development endpoint',
+      });
+    }
+
+    return servers;
+  } catch (error) {
+    logger.error(error);
+  }
 }
 
 const swaggers = [
