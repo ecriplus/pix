@@ -24,7 +24,7 @@ const sendStartedParticipationResultsToPoleEmploi = async ({
   const campaign = await campaignRepository.get(participation.campaignId);
   const organization = await organizationRepository.get(campaign.organizationId);
 
-  if (campaign.isAssessment() && organization.isPoleEmploi) {
+  if (campaign.isAssessment && organization.isPoleEmploi) {
     const user = await userRepository.get(participation.userId);
     const targetProfile = await targetProfileRepository.get(campaign.targetProfileId);
     const payload = PoleEmploiPayload.buildForParticipationStarted({

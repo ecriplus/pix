@@ -66,20 +66,23 @@ class Campaign {
     this.hasParticipation = participationCount > 0;
   }
 
-  isAssessment() {
+  get isAssessment() {
     return this.type === CampaignTypes.ASSESSMENT;
   }
 
-  isProfilesCollection() {
+  get isProfilesCollection() {
     return this.type === CampaignTypes.PROFILES_COLLECTION;
   }
 
-  isArchived() {
+  get isArchived() {
     return Boolean(this.archivedAt);
   }
 
   get isDeleted() {
     return Boolean(this.deletedAt);
+  }
+  get isAccessible() {
+    return !this.archivedAt && !this.deletedAt;
   }
 
   delete(userId) {
