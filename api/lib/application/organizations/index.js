@@ -8,13 +8,13 @@ import {
   sendJsonApiError,
 } from '../../../src/shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../src/shared/application/security-pre-handlers.js';
+import { MAX_FILE_SIZE_UPLOAD } from '../../../src/shared/domain/constants.js';
 import { identifiersType } from '../../../src/shared/domain/types/identifiers-type.js';
 import { organizationController } from './organization-controller.js';
 
 const ERRORS = {
   PAYLOAD_TOO_LARGE: 'PAYLOAD_TOO_LARGE',
 };
-const TWENTY_MEGABYTES = 1048576 * 20;
 
 const register = async function (server) {
   const adminRoutes = [
@@ -53,7 +53,7 @@ const register = async function (server) {
           },
         ],
         payload: {
-          maxBytes: TWENTY_MEGABYTES,
+          maxBytes: MAX_FILE_SIZE_UPLOAD,
           output: 'file',
           failAction: (request, h) => {
             return sendJsonApiError(

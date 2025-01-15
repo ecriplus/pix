@@ -4,11 +4,10 @@ const Joi = BaseJoi.extend(JoiDate);
 
 import { sendJsonApiError, UnprocessableEntityError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { MAX_FILE_SIZE_UPLOAD } from '../../../shared/domain/constants.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { usecases } from '../domain/usecases/index.js';
 import { scoOrganizationManagementController } from './sco-organization-management-controller.js';
-
-const TWENTY_MEGABYTES = 1048576 * 20;
 
 const register = async function (server) {
   server.route([
@@ -62,7 +61,7 @@ const register = async function (server) {
           }),
         },
         payload: {
-          maxBytes: TWENTY_MEGABYTES,
+          maxBytes: MAX_FILE_SIZE_UPLOAD,
           output: 'file',
           failAction: async (request, h) => {
             const authenticatedUserId = request.auth.credentials.userId;

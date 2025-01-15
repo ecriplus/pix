@@ -2,12 +2,10 @@ import Joi from 'joi';
 
 import { sendJsonApiError, UnprocessableEntityError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
-import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
+import { MAX_FILE_SIZE_UPLOAD, ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { usecases } from '../domain/usecases/index.js';
 import { organizationLearnersController } from './organization-learners-controller.js';
-
-const TWENTY_MEGABYTES = 1048576 * 20;
 
 const register = async (server) => {
   server.route([
@@ -61,7 +59,7 @@ const register = async (server) => {
           }),
         },
         payload: {
-          maxBytes: TWENTY_MEGABYTES,
+          maxBytes: MAX_FILE_SIZE_UPLOAD,
           output: 'file',
           failAction: async (request, h) => {
             const authenticatedUserId = request.auth.credentials.userId;
