@@ -26,11 +26,14 @@ export default class ModulixImageElement extends Component {
 
   <template>
     <div class="element-image">
-      <div class="element-image__container">
+      <figure class="element-image__container">
         <img class="element-image-container__image" alt={{@image.alt}} src={{@image.url}} />
-      </div>
+        <figcaption class="element-image-container__caption">{{@image.legend}}<span
+            class="element-image-container__licence"
+          >{{@image.licence}}</span></figcaption>
+      </figure>
       {{#if this.hasAlternativeText}}
-        <PixButton @variant="tertiary" @triggerAction={{this.showModal}}>
+        <PixButton class="element-image__button" @variant="tertiary" @triggerAction={{this.showModal}}>
           {{t "pages.modulix.buttons.element.alternativeText"}}
         </PixButton>
         <PixModal

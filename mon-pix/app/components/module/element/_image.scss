@@ -1,6 +1,6 @@
 .element-image {
   &__container {
-    margin: 0 auto var(--pix-spacing-3x) auto;
+    margin: 0 auto;
   }
 }
 
@@ -10,5 +10,19 @@
     width: 100%;
     object-fit: contain;
     border-radius: var(--modulix-radius-s);
+  }
+
+  &__caption {
+    @extend %pix-body-s;
+
+    margin-top: var(--pix-spacing-1x);
+    color: rgb(var(--pix-neutral-800-inline), 0.9);
+  }
+
+  &__licence {
+    @extend %pix-body-xs;
+
+    margin-left: var(--pix-spacing-1x);
+    color: var(--pix-neutral-500);
   }
 }

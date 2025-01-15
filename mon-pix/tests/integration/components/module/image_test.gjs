@@ -18,6 +18,8 @@ module('Integration | Component | Module | Image', function (hooks) {
       url,
       alt: 'alt text',
       alternativeText: 'alternative instruction',
+      legend: 'je suis une légende',
+      licence: 'Je suis une licence',
     };
 
     //  when
@@ -28,6 +30,8 @@ module('Integration | Component | Module | Image', function (hooks) {
     assert.strictEqual(findAll('.element-image').length, 1);
     assert.ok(screen.getByRole('img', { name: 'alt text' }).hasAttribute('src', url));
     assert.ok(screen.getByRole('button', { name: "Afficher l'alternative textuelle" }));
+    assert.dom(screen.getByText(imageElement.legend)).exists();
+    assert.dom(screen.getByText(imageElement.licence)).exists();
   });
 
   test('should be able to use the modal for alternative instruction', async function (assert) {
