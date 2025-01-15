@@ -1,10 +1,13 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .page-title {
   @extend %pix-title-m;
 
   margin-top: var(--pix-spacing-6x);
   margin-bottom: var(--pix-spacing-6x);
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     margin-top: 0;
   }
 }

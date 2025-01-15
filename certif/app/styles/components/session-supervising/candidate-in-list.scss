@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/breakpoints';
+
 .session-supervising-candidate-in-list {
   margin-bottom: 8px;
   border-radius: 4px;
@@ -8,7 +10,7 @@
     width: calc(100% - 32px);
     padding: 12px 16px;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       position: relative;
     }
   }
@@ -37,11 +39,11 @@
   &__status-container {
     border-radius: 12px;
     font-size: 0.75rem;
-    font-weight: $font-normal;
+    font-weight: var(--pix-font-normal);
     margin-top: var(--pix-spacing-2x);
     padding: var(--pix-spacing-1x) 0;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       margin-top: 0;
       position: absolute;
       right: var(--pix-spacing-4x);
@@ -121,7 +123,7 @@
   gap: var(--pix-spacing-2x);
   width: fit-content;
 
-  @include device-is('mobile') {
+  @include breakpoints.device-is('mobile') {
     flex-direction: column;
     align-items: flex-start;
 

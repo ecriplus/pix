@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/breakpoints';
+
 .session-list-page {
   display: flex;
   flex-direction: column;
@@ -15,7 +17,7 @@
     justify-content: space-between;
     margin-bottom: var(--pix-spacing-3x);
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       flex-direction: row;
       margin-bottom: 0;
     }
@@ -27,7 +29,7 @@
   flex-direction: column;
   gap: var(--pix-spacing-2x);
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     flex-direction: row;
   }
 }

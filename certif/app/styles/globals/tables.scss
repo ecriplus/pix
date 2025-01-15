@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .table {
   width: 100%;
   padding: var(--pix-spacing-2x);
@@ -5,7 +8,7 @@
 
   @extend %pix-body-s;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     overflow: initial;
   }
 

@@ -1,68 +1,65 @@
 @charset "utf-8";
-
-$navbar-height: 60px;
-
-@import 'pix-design-tokens';
-@import 'globals/forms';
-@import 'globals/modals';
-@import 'globals/pages';
-@import 'globals/panels';
-@import 'globals/tables';
-@import 'globals/texts';
-@import 'globals/titles';
-@import 'pages/login';
-@import 'pages/session-supervising';
-@import 'pages/session-supervising-error';
-@import 'pages/authenticated/restricted-access';
-@import 'pages/authenticated/sessions';
-@import 'pages/authenticated/sessions/add-student';
-@import 'pages/authenticated/sessions/details';
-@import 'pages/authenticated/sessions/import';
-@import 'pages/authenticated/sessions/list-items';
-@import 'pages/authenticated/sessions/no-session-panel';
-@import 'pages/authenticated/sessions/details/certification-candidates';
-@import 'pages/authenticated/sessions/details/certification-candidates-sco';
-@import 'pages/authenticated/team';
-@import 'pages/authenticated/team/invite';
-@import 'pages/terms-of-service';
-@import 'pages/join';
-@import 'components/auth/toggable-login-form';
-@import 'components/add-student-list';
-@import 'components/add-issue-report-modal';
-@import 'components/certification-candidate-details-modal/index';
-@import 'components/certification-candidate-details-modal/row';
-@import 'components/edit-candidate-modal';
-@import 'components/issue-report-modal';
-@import 'components/layout/footer';
-@import 'components/layout/sidebar';
-@import 'components/layout/banners';
-@import 'components/login-form';
-@import 'components/login-or-register';
-@import 'components/finalize';
-@import 'components/new-candidate-modal';
-@import 'components/members-list-item';
-@import 'components/finalization-confirmation-modal';
-@import 'components/register-form';
-@import 'components/select-referer-modal';
-@import 'components/session-finalization-step-container';
-@import 'components/session-delete-confirm-modal';
-@import 'components/session-finalization/reports-information-step';
-@import 'components/session-finalization/complementary-information-step';
-@import 'components/session-supervising/header';
-@import 'components/session-supervising/candidate-in-list';
-@import 'components/session-supervising/candidate-list';
-@import 'components/session-supervising/handle-live-alert-modal';
-@import 'components/session-supervising/live-alert-handled-modal';
-@import 'components/session-summary-list';
-@import 'components/team/invitations-list-item';
-@import 'components/dropdown';
-@import 'flatpickr';
+@use 'pix-design-tokens/breakpoints';
+@use 'globals/forms' as *;
+@use 'globals/modals' as *;
+@use 'globals/pages' as *;
+@use 'globals/panels' as *;
+@use 'globals/tables' as *;
+@use 'globals/texts' as *;
+@use 'globals/titles' as *;
+@use 'pages/login' as *;
+@use 'pages/session-supervising' as *;
+@use 'pages/session-supervising-error' as *;
+@use 'pages/authenticated/restricted-access' as *;
+@use 'pages/authenticated/sessions' as *;
+@use 'pages/authenticated/sessions/add-student' as *;
+@use 'pages/authenticated/sessions/details' as *;
+@use 'pages/authenticated/sessions/import' as *;
+@use 'pages/authenticated/sessions/list-items' as *;
+@use 'pages/authenticated/sessions/no-session-panel' as *;
+@use 'pages/authenticated/sessions/details/certification-candidates' as *;
+@use 'pages/authenticated/sessions/details/certification-candidates-sco' as *;
+@use 'pages/authenticated/team' as *;
+@use 'pages/authenticated/team/invite' as *;
+@use 'pages/terms-of-service' as *;
+@use 'pages/join' as *;
+@use 'components/auth/toggable-login-form' as *;
+@use 'components/add-student-list' as *;
+@use 'components/add-issue-report-modal' as *;
+@use 'components/certification-candidate-details-modal/index' as *;
+@use 'components/certification-candidate-details-modal/row' as *;
+@use 'components/edit-candidate-modal' as *;
+@use 'components/issue-report-modal' as *;
+@use 'components/layout/footer' as *;
+@use 'components/layout/sidebar' as *;
+@use 'components/layout/banners' as *;
+@use 'components/login-form' as *;
+@use 'components/login-or-register' as *;
+@use 'components/finalize' as *;
+@use 'components/new-candidate-modal' as *;
+@use 'components/members-list-item' as *;
+@use 'components/finalization-confirmation-modal' as *;
+@use 'components/register-form' as *;
+@use 'components/select-referer-modal' as *;
+@use 'components/session-finalization-step-container' as *;
+@use 'components/session-delete-confirm-modal' as *;
+@use 'components/session-finalization/reports-information-step' as *;
+@use 'components/session-finalization/complementary-information-step' as *;
+@use 'components/session-supervising/header' as *;
+@use 'components/session-supervising/candidate-in-list' as *;
+@use 'components/session-supervising/candidate-list' as *;
+@use 'components/session-supervising/handle-live-alert-modal' as *;
+@use 'components/session-supervising/live-alert-handled-modal' as *;
+@use 'components/session-summary-list' as *;
+@use 'components/team/invitations-list-item' as *;
+@use 'components/dropdown' as *;
+@use 'flatpickr' as *;
 
 /* App/Components */
-@import 'login-session-supervisor';
-@import 'login-session-supervisor/form';
-@import 'login-session-supervisor/footer';
-@import 'login-session-supervisor/header';
+@use 'login-session-supervisor' as *;
+@use 'login-session-supervisor/form' as *;
+@use 'login-session-supervisor/footer' as *;
+@use 'login-session-supervisor/header' as *;
 
 body,
 html {
@@ -85,7 +82,7 @@ input:invalid {
   box-sizing: border-box;
 }
 
-@include device-is('mobile') {
+@include breakpoints.device-is('mobile') {
   .hide-on-mobile {
     display: none;
   }

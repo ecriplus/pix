@@ -1,10 +1,13 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .session-form {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
   gap: var(--pix-spacing-3x);
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     max-width: 500px;
     gap: var(--pix-spacing-6x);
   }

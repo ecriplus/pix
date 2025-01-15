@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .label {
   display: inline-block;
   margin-bottom: var(--pix-spacing-1x);
@@ -36,7 +39,7 @@
     flex-direction: column;
     margin: var(--pix-spacing-4x) 0;
 
-    @include device-is('desktop') {
+    @include breakpoints.device-is('desktop') {
       width: 500px;
     }
 
@@ -53,7 +56,7 @@
     justify-content: space-between;
     margin-top: var(--pix-spacing-8x);
 
-    @include device-is('desktop') {
+    @include breakpoints.device-is('desktop') {
       max-width: 500px;
     }
   }

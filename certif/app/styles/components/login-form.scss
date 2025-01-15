@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .login {
   max-width: 500px;
   margin-bottom: var(--pix-spacing-4x);
@@ -5,7 +8,7 @@
   background-color: var(--pix-neutral-0);
   border-radius: 10px;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     padding: 40px 60px;
   }
 
