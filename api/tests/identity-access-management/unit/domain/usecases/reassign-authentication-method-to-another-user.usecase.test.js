@@ -1,9 +1,9 @@
-import { reassignAuthenticationMethodToAnotherUser } from '../../../../lib/domain/usecases/reassign-authentication-method-to-another-user.js';
-import * as OidcIdentityProviders from '../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
-import { AuthenticationMethodAlreadyExistsError, UserNotFoundError } from '../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import * as OidcIdentityProviders from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
+import { reassignAuthenticationMethodToAnotherUser } from '../../../../../src/identity-access-management/domain/usecases/reassign-authentication-method-to-another-user.usecase.js';
+import { AuthenticationMethodAlreadyExistsError, UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | reassign-authentication-method-to-another-user', function () {
+describe('Unit | Identity Access Management | Domain | UseCase | reassign-authentication-method-to-another-user', function () {
   let authenticationMethodRepository, userRepository;
 
   beforeEach(function () {
@@ -18,7 +18,7 @@ describe('Unit | UseCase | reassign-authentication-method-to-another-user', func
   });
 
   context('When target user already has an authentication method with same identity provider', function () {
-    it('should throw an error', async function () {
+    it('throws an error', async function () {
       // given
       const originUserId = domainBuilder.buildUser({ id: 1 }).id;
       const garAuthenticationMethodFromOriginUser = domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider({
@@ -54,7 +54,7 @@ describe('Unit | UseCase | reassign-authentication-method-to-another-user', func
   });
 
   context('When target user does not exists', function () {
-    it('should throw an error', async function () {
+    it('throws an error', async function () {
       // given
       const originUserId = domainBuilder.buildUser({ id: 1 }).id;
       const garAuthenticationMethodFromOriginUser = domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider({
@@ -82,7 +82,7 @@ describe('Unit | UseCase | reassign-authentication-method-to-another-user', func
     });
   });
 
-  it('should update gar authentication method user id', async function () {
+  it('updates GAR authentication method user id', async function () {
     // given
     const originUserId = domainBuilder.buildUser({ id: 1 }).id;
     const garAuthenticationMethodFromOriginUser = domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider({
@@ -116,7 +116,7 @@ describe('Unit | UseCase | reassign-authentication-method-to-another-user', func
     });
   });
 
-  it('should update pole emploi authentication method user id', async function () {
+  it('updates pole emploi authentication method user id', async function () {
     // given
     const originUserId = domainBuilder.buildUser({ id: 1 }).id;
     const poleEmploiAuthenticationMethodFromOriginUser =

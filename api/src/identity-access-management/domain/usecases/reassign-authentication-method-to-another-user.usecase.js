@@ -1,5 +1,15 @@
-import { AuthenticationMethodAlreadyExistsError } from '../../../src/shared/domain/errors.js';
+import { AuthenticationMethodAlreadyExistsError } from '../../../shared/domain/errors.js';
 
+/**
+ * Reassigns an authentication method from one user to another.
+ *
+ * @param {Object} params - The parameters.
+ * @param {string} params.originUserId - The ID of the user from whom the authentication method is being reassigned.
+ * @param {string} params.targetUserId - The ID of the user to whom the authentication method is being reassigned.
+ * @param {string} params.authenticationMethodId - The ID of the authentication method being reassigned.
+ * @throws {UserNotFoundError} if the target user does not exist.
+ * @throws {AuthenticationMethodAlreadyExistsError} if the target user already has an authentication method with the given identity provider.
+ */
 const reassignAuthenticationMethodToAnotherUser = async function ({
   originUserId,
   targetUserId,

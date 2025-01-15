@@ -215,6 +215,40 @@ export const userAdminRoutes = [
   },
   {
     method: 'POST',
+    path: '/api/admin/users/{userId}/authentication-methods/{authenticationMethodId}',
+    config: {
+      validate: {
+        params: Joi.object({
+          userId: identifiersType.userId,
+          authenticationMethodId: identifiersType.authenticationMethodId,
+        }),
+        payload: Joi.object({
+          data: {
+            attributes: {
+              'user-id': identifiersType.userId,
+            },
+          },
+        }),
+        options: {
+          abortEarly: false,
+        },
+      },
+      pre: [
+        {
+          method: (request, h) =>
+            securityPreHandlers.hasAtLeastOneAccessOf([
+              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+              securityPreHandlers.checkAdminMemberHasRoleSupport,
+            ])(request, h),
+        },
+      ],
+      handler: (request, h) => userAdminController.reassignAuthenticationMethod(request, h),
+      notes: ["- Permet à un administrateur de déplacer une méthode de connexion GAR d'un utilisateur à un autre"],
+      tags: ['api', 'admin', 'identity-access-management', 'user'],
+    },
+  },
+  {
+    method: 'POST',
     path: '/api/admin/users/{id}/remove-authentication',
     config: {
       pre: [
