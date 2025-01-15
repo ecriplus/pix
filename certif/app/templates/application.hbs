@@ -6,6 +6,8 @@
 
 <CommunicationBanner />
 
+<InformationBanners @banners={{this.model.informationBanner.banners}} />
+
 {{outlet}}
 
 <PixToastContainer @closeButtonAriaLabel={{t "common.notifications.close-button.extra-information"}} />
