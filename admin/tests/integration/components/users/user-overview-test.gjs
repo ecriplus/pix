@@ -515,7 +515,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
           assert.dom(screen.getByRole('textbox', { name: 'Identifiant *' })).hasValue(user.username);
         });
 
-        test('displays email', async function (assert) {
+        test('displays not required email', async function (assert) {
           // given
           const user = EmberObject.create({
             lastName: 'Harry',
@@ -529,7 +529,9 @@ module('Integration | Component | users | user-overview', function (hooks) {
           await clickByName('Modifier');
 
           // then
-          assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail *' })).exists();
+          const emailInput = screen.getByRole('textbox', { name: 'Adresse e-mail' });
+          assert.dom(emailInput).exists();
+          assert.dom(emailInput).hasNoAttribute('required');
         });
       });
 

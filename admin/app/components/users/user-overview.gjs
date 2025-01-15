@@ -82,6 +82,10 @@ export default class UserOverview extends Component {
     return hasBeenAnonymised || isPixAgent;
   }
 
+  get isEmailRequired() {
+    return this.args.user.username ? null : 'obligatoire';
+  }
+
   _initForm() {
     this.form.firstName = this.args.user.firstName;
     this.form.lastName = this.args.user.lastName;
@@ -201,7 +205,7 @@ export default class UserOverview extends Component {
             {{#if this.canModifyEmail}}
               <div class="form-field">
                 <PixInput
-                  @requiredLabel="obligatoire"
+                  @requiredLabel={{this.isEmailRequired}}
                   @errorMessage={{this.form.emailError.message}}
                   @validationStatus={{this.form.emailError.status}}
                   @value={{this.form.email}}
