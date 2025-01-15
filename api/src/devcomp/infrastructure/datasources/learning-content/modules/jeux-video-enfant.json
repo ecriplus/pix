@@ -295,7 +295,7 @@
                   "type": "image",
                   "url": "https://i.imgur.com/zlVhnng.png",
                   "alt": "",
-                  "alternativeText": "<p>Jeu Lorttnite Clan :&nbsp;</p><ul><li>4 étoiles</li><li>Communauté compétitive</li><li>Commandes rapides à maîtriser</li><li>Pegi 12</li><li>violence, achats dans le jeu (inclut des éléments aléatoires)</li><li>jeu de base</li><li>gratuit</li><li>boutons : obtenir, ajouter au panier</li></ul>"
+                  "alternativeText": "<p>Jeu Lorttnite Clan :&nbsp;</p><ul><li>4 étoiles</li><li>Communauté compétitive</li><li>Commandes rapides à maîtriser</li><li>Pegi 12</li><li>Violence, achats dans le jeu (inclut des éléments aléatoires)</li><li>Jeu de base</li><li>Gratuit</li><li>Boutons : obtenir, ajouter au panier</li></ul>"
                 },
                 {
                   "id": "6781d13a-91fb-45b5-ba52-311e290b47a1",
@@ -334,7 +334,7 @@
                   "type": "image",
                   "url": "https://i.imgur.com/CGoGCWW.png",
                   "alt": "",
-                  "alternativeText": "<p><br></p>"
+                  "alternativeText": ""
                 },
                 {
                   "id": "915d599d-fb2d-4db9-93d8-012943d50001",
@@ -385,7 +385,7 @@
                 {
                   "id": "d54a96df-a22e-4e2d-8ffa-747e035d0554",
                   "type": "text",
-                  "content": "<p>De nombreux jeux vidéo permettent de discuter entre joueurs, que l’on joue sur smartphone, tablette, console ou ordinateur.&nbsp;<br>Que ce soit par tchat écrit ou tchat vocal, <strong>les discussions en ligne comportent des risques</strong>. 🎧&nbsp;<br>L’enfant peut être exposé à des comportements agressifs ou à des contenus inappropriés comme des images ou des vidéos explicites. 😱</p>"
+                  "content": "<p>De nombreux jeux vidéo permettent de discuter entre joueurs, que l’on joue sur smartphone, tablette, console ou ordinateur.&nbsp;<br>Que ce soit par tchat écrit ou tchat vocal, <strong>les discussions en ligne comportent des risques</strong>. 🎧&nbsp;<br>L’enfant peut être exposé à des comportements agressifs ou à des contenus inappropriés comme des images ou des vidéos choquantes. 😱</p>"
                 }
               ]
             },
@@ -415,7 +415,7 @@
                 {
                   "id": "e700791f-5048-4d50-8329-e311c6b2f3e4",
                   "type": "text",
-                  "content": "<p>Sur les boites ou les pages en ligne des jeux, la mention d'interaction entre joueurs peut prendre différentes formes : «&nbsp;<strong>les utilisateurs interagissent</strong>&nbsp;», «&nbsp;<strong>interaction entre les joueurs</strong>&nbsp;», «&nbsp;<strong>interactivité des utilisateurs</strong>&nbsp;»...<br>Il faut donc être attentif lors du choix d'un jeu vidéo. 🔎</p>"
+                  "content": "<p>Sur les boîtes ou les pages en ligne des jeux, la mention d'interaction entre joueurs peut prendre différentes formes : «&nbsp;<strong>les utilisateurs interagissent</strong>&nbsp;», «&nbsp;<strong>interaction entre les joueurs</strong>&nbsp;», «&nbsp;<strong>interactivité des utilisateurs</strong>&nbsp;»...<br>Il faut donc être attentif lors du choix d'un jeu vidéo. 🔎</p>"
                 },
                 {
                   "id": "dd07e939-9aaa-4226-af59-695ac2b31da2",
@@ -427,7 +427,7 @@
                 {
                   "id": "6b8112ec-45ab-4665-b690-9adf0b6e93ac",
                   "type": "text",
-                  "content": "<p>⚠️<strong> Attention</strong><br>Même avec un jeu qui ne permet pas de discuter avec d’autres joueurs, <strong>ce risque n’est pas écarté</strong>. Certaines consoles permettent de discuter en ligne, tout comme les ordinateurs et les smartphones.<br>⚙️ Vous pouvez <strong>bloquer cette possibilité</strong> en paramétrant le <strong>contrôle parental</strong> de chacun de ces appareils.</p>"
+                  "content": "<p>⚠️<strong> Attention ! </strong><br>Même avec un jeu qui ne permet pas de discuter avec d’autres joueurs, <strong>ce risque n’est pas écarté</strong>. Certaines consoles permettent de discuter en ligne, tout comme les ordinateurs et les smartphones.<br>⚙️ Vous pouvez <strong>bloquer cette possibilité</strong> en paramétrant le <strong>contrôle parental</strong> de chacun de ces appareils.</p>"
                 }
               ]
             }
