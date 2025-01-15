@@ -1,21 +1,8 @@
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
-import { CampaignTypes } from '../../../shared/domain/constants.js';
+import { Campaign } from '../models/Campaign.js';
 
-class CampaignToJoin {
+class CampaignToJoin extends Campaign {
   constructor({
-    id,
-    code,
-    title,
-    idPixLabel,
-    idPixType,
-    customLandingPageText,
-    externalIdHelpImageUrl,
-    alternativeTextToExternalIdHelpImage,
-    archivedAt,
-    deletedAt,
-    type,
-    isForAbsoluteNovice,
-    organizationId,
     organizationName,
     organizationType,
     organizationLogoUrl,
@@ -27,68 +14,27 @@ class CampaignToJoin {
     targetProfileName,
     targetProfileImageUrl,
     targetProfileIsSimplifiedAccess,
-    customResultPageText,
-    customResultPageButtonText,
-    customResultPageButtonUrl,
-    multipleSendings,
-    assessmentMethod,
+    ...campaignAttributes
   } = {}) {
-    this.id = id;
-    this.code = code;
-    this.title = title;
-    this.type = type;
-
-    this.targetProfileName = targetProfileName;
-    this.targetProfileImageUrl = targetProfileImageUrl;
-
-    this.customLandingPageText = customLandingPageText;
-    this.customResultPageButtonText = customResultPageButtonText;
-    this.customResultPageButtonUrl = customResultPageButtonUrl;
-    this.customResultPageText = customResultPageText;
-
-    this.externalIdHelpImageUrl = externalIdHelpImageUrl;
-    this.idPixLabel = idPixLabel;
-    this.idPixType = idPixType;
-    this.alternativeTextToExternalIdHelpImage = alternativeTextToExternalIdHelpImage;
-    this.isSimplifiedAccess = targetProfileIsSimplifiedAccess;
-    this.isForAbsoluteNovice = isForAbsoluteNovice;
-
-    this.identityProvider = identityProvider;
-
-    this.organizationId = organizationId;
+    super(campaignAttributes);
     this.organizationName = organizationName;
     this.organizationType = organizationType;
     this.organizationLogoUrl = organizationLogoUrl;
     this.organizationShowNPS = organizationShowNPS;
     this.organizationFormNPSUrl = organizationFormNPSUrl;
 
-    this.multipleSendings = multipleSendings;
-    this.assessmentMethod = assessmentMethod;
+    this.targetProfileName = targetProfileName;
+    this.targetProfileImageUrl = targetProfileImageUrl;
+    this.isSimplifiedAccess = targetProfileIsSimplifiedAccess;
+
+    this.identityProvider = identityProvider;
 
     this.isRestricted = organizationIsManagingStudents || hasLearnersImportFeature;
-    this.archivedAt = archivedAt;
-    this.deletedAt = deletedAt;
-
     this.reconciliationFields = null;
   }
 
   get isReconciliationRequired() {
     return this.isRestricted && Array.isArray(this.reconciliationFields);
-  }
-
-  get isAssessment() {
-    return this.type === CampaignTypes.ASSESSMENT;
-  }
-
-  get isProfilesCollection() {
-    return this.type === CampaignTypes.PROFILES_COLLECTION;
-  }
-
-  get isAccessible() {
-    if (Boolean(this.archivedAt) || Boolean(this.deletedAt)) {
-      return false;
-    }
-    return true;
   }
 
   get isFlash() {
