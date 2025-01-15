@@ -13,7 +13,17 @@ import ModulixFeedback from 'mon-pix/components/module/feedback';
 import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 
 export default class ModuleQrocm extends ModuleElement {
-  @tracked selectedValues;
+  @tracked selectedValues = {};
+
+  constructor() {
+    super(...arguments);
+
+    this.element.proposals.forEach((proposal) => {
+      if (proposal.defaultValue) {
+        this.selectedValues[proposal.input] = proposal.defaultValue;
+      }
+    });
+  }
 
   get canValidateElement() {
     return this.element.proposals
