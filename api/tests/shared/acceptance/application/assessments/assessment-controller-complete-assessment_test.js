@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { CertificationCompletedJob } from '../../../../../lib/domain/events/CertificationCompleted.js';
 import * as badgeAcquisitionRepository from '../../../../../lib/infrastructure/repositories/badge-acquisition-repository.js';
+import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { LOCALE } from '../../../../../src/shared/domain/constants.js';
 import { Assessment, TrainingTrigger } from '../../../../../src/shared/domain/models/index.js';
 import {

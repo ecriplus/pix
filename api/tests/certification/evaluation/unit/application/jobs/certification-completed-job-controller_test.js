@@ -1,6 +1,6 @@
-import { CertificationCompletedJob } from '../../../../../../lib/domain/events/CertificationCompleted.js';
 import { CertificationScoringCompleted } from '../../../../../../lib/domain/events/CertificationScoringCompleted.js';
 import { CertificationCompletedJobController } from '../../../../../../src/certification/evaluation/application/jobs/certification-completed-job-controller.js';
+import { CertificationCompletedJob } from '../../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { AssessmentResultFactory } from '../../../../../../src/certification/scoring/domain/models/factories/AssessmentResultFactory.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import {

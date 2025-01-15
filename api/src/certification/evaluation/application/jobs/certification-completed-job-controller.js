@@ -1,6 +1,6 @@
-import { CertificationCompletedJob } from '../../../../../lib/domain/events/CertificationCompleted.js';
 import { CertificationScoringCompleted } from '../../../../../lib/domain/events/CertificationScoringCompleted.js';
 import * as events from '../../../../../lib/domain/events/index.js';
+import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { JobController } from '../../../../shared/application/jobs/job-controller.js';
 import { V3_REPRODUCIBILITY_RATE } from '../../../../shared/domain/constants.js';
 import { CertificationComputeError } from '../../../../shared/domain/errors.js';

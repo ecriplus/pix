@@ -1,5 +1,5 @@
-import { CertificationCompletedJob } from '../../../../../../../lib/domain/events/CertificationCompleted.js';
 import { CertificationJuryDone } from '../../../../../../../lib/domain/events/CertificationJuryDone.js';
+import { CertificationCompletedJob } from '../../../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { handleV3CertificationScoring } from '../../../../../../../src/certification/evaluation/domain/services/scoring/scoring-v3.js';
 import { CertificationCourseRejected } from '../../../../../../../src/certification/session-management/domain/events/CertificationCourseRejected.js';
 import { AlgorithmEngineVersion } from '../../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
