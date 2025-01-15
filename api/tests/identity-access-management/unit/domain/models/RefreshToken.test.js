@@ -16,13 +16,20 @@ describe('Unit | Identity Access Management | Domain | Model | RefreshToken', fu
   describe('#constructor', function () {
     it('builds a refresh token model', function () {
       // when
-      const refreshToken = new RefreshToken({ userId: 'userId!', scope: 'scope!', source: 'source!', value: 'token!' });
+      const refreshToken = new RefreshToken({
+        userId: 'userId!',
+        scope: 'scope!',
+        source: 'source!',
+        value: 'token!',
+        audience: 'audience!',
+      });
 
       // then
       expect(refreshToken.value).to.equal('token!');
       expect(refreshToken.userId).to.equal('userId!');
       expect(refreshToken.scope).to.equal('scope!');
       expect(refreshToken.source).to.equal('source!');
+      expect(refreshToken.audience).to.equal('audience!');
       expect(refreshToken.expirationDelaySeconds).to.equal(defaultRefreshTokenLifespanMs / 1000);
     });
 
@@ -40,6 +47,7 @@ describe('Unit | Identity Access Management | Domain | Model | RefreshToken', fu
           scope: 'pix-orga',
           source: 'source!',
           value: 'token!',
+          audience: 'audience!',
         });
 
         // then
@@ -49,7 +57,12 @@ describe('Unit | Identity Access Management | Domain | Model | RefreshToken', fu
       context('when no scope', function () {
         it('sets the default expiration delay', function () {
           // when
-          const refreshToken = new RefreshToken({ userId: 'userId!', source: 'source!', value: 'token!' });
+          const refreshToken = new RefreshToken({
+            userId: 'userId!',
+            source: 'source!',
+            value: 'token!',
+            audience: 'audience!',
+          });
 
           // then
           expect(refreshToken.expirationDelaySeconds).to.equal(defaultRefreshTokenLifespanMs / 1000);
@@ -68,6 +81,7 @@ describe('Unit | Identity Access Management | Domain | Model | RefreshToken', fu
         userId: 'userId!',
         scope: 'scope!',
         source: 'source!',
+        audience: 'audience!',
       });
 
       // then
