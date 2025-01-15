@@ -30,7 +30,7 @@
     },
     {
       "grainId": "d09b483b-c182-44be-9c55-8c570e7b70d2",
-      "content": "<p>Franck sait maintenant vérifier l’âge recommandé pour un jeu.<br>En plus, il veut éviter que Marilou dépense de l’argent en achetant des bonus dans le jeu.<br>Découvrez ce que sont les achats intégrés dans les jeux vidéo. 💸</p>"
+      "content": "<p>Franck sait maintenant vérifier l’âge recommandé pour un jeu.<br>En plus, il veut éviter que Marilou dépense de l’argent en achetant des bonus pendant qu'elle joue.<br>Découvrez ce que sont les achats intégrés dans les jeux vidéo. 💸</p>"
     },
     {
       "grainId": "fe9fa67b-ddfc-4932-8f5d-eba163a206b9",
@@ -147,12 +147,12 @@
                 {
                   "id": "1255d0bf-0434-4add-9873-051c841af667",
                   "type": "qcu",
-                  "instruction": "<p>Que signifie l'indication 12 sur ce jeu ?</p>",
+                  "instruction": "<p>Que signifie l'indication «&nbsp;12 &nbsp;» sur ce jeu ?</p>",
                   "proposals": [
                     {
                       "id": "1",
                       "content": "<p>Le jeu est trop difficile pour les enfants de moins de 12 ans.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme âge PEGI n’indique pas la difficulté d’un jeu. Un jeu avec le pictogramme PEGI 3, par exemple, peut être trop compliqué pour un enfant de 4 ans.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le pictogramme âge PEGI n’indique pas la difficulté d’un jeu. Par exemple un jeu avec le pictogramme PEGI 3 peut être trop compliqué pour un enfant de 4 ans.</p>"
                     },
                     {
                       "id": "2",
@@ -186,7 +186,7 @@
                     {
                       "id": "1",
                       "content": "<p>Le jeu doit être utilisé accompagné des parents.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p> Ce pictogramme «&nbsp;!&nbsp;» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs, il peut donc y avoir des contenus ne convenant pas aux enfants !</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p> Ce pictogramme «&nbsp;!&nbsp;» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs. Il peut donc y avoir des contenus ne convenant pas aux enfants !</p>"
                     },
                     {
                       "id": "2",
