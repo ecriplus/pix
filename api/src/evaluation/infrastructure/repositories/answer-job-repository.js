@@ -1,8 +1,8 @@
 import { AnswerJob } from '../../../quest/domain/models/AnwserJob.js';
 import { config } from '../../../shared/config.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
 import { JobRepository } from '../../../shared/infrastructure/repositories/jobs/job-repository.js';
-import { temporaryStorage } from '../../../shared/infrastructure/temporary-storage/index.js';
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
 

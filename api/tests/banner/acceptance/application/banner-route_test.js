@@ -1,4 +1,4 @@
-import { temporaryStorage } from '../../../../src/shared/infrastructure/temporary-storage/index.js';
+import { informationBannersStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { createServer, expect } from '../../../test-helper.js';
 
 let server;
@@ -38,8 +38,7 @@ describe('Acceptance | Router | banner-route', function () {
         const target = 'pix-target';
         const bannerData = { message: '[fr]Texte de la bannière[/fr][en]Banner text[/en]', severity: 'info' };
 
-        const bannerTemporaryStorage = temporaryStorage.withPrefix('information-banners:');
-        await bannerTemporaryStorage.save({ key: target, value: [bannerData], expirationDelaySeconds: 10 });
+        await informationBannersStorage.save({ key: target, value: [bannerData], expirationDelaySeconds: 10 });
         const options = {
           method: 'GET',
           url: '/api/information-banners/pix-target',

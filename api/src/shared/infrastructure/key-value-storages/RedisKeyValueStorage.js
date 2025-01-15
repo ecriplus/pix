@@ -3,27 +3,33 @@ import lodash from 'lodash';
 const { trim } = lodash;
 
 import { RedisClient } from '../utils/RedisClient.js';
-import { TemporaryStorage } from './TemporaryStorage.js';
+import { KeyValueStorage } from './KeyValueStorage.js';
 
 const EXPIRATION_PARAMETER = 'ex';
 const KEEPTTL_PARAMETER = 'keepttl';
-const PREFIX = 'temporary-storage:';
 
-class RedisTemporaryStorage extends TemporaryStorage {
-  constructor(redisUrl) {
+class RedisKeyValueStorage extends KeyValueStorage {
+  #prefix;
+
+  constructor(redisUrl, prefix) {
     super();
-    this._client = RedisTemporaryStorage.createClient(redisUrl);
+    this.#prefix = prefix;
+    this._client = RedisKeyValueStorage.createClient(redisUrl, prefix);
   }
 
-  static createClient(redisUrl) {
-    return new RedisClient(redisUrl, { name: 'temporary-storage', prefix: PREFIX });
+  static createClient(redisUrl, prefix) {
+    return new RedisClient(redisUrl, { name: 'temporary-storage', prefix });
   }
 
   async save({ key, value, expirationDelaySeconds }) {
-    const storageKey = trim(key) || RedisTemporaryStorage.generateKey();
+    const storageKey = trim(key) || RedisKeyValueStorage.generateKey();
 
     const objectAsString = JSON.stringify(value);
-    await this._client.set(storageKey, objectAsString, EXPIRATION_PARAMETER, expirationDelaySeconds);
+    if (expirationDelaySeconds) {
+      await this._client.set(storageKey, objectAsString, EXPIRATION_PARAMETER, expirationDelaySeconds);
+    } else {
+      await this._client.set(storageKey, objectAsString);
+    }
     return storageKey;
   }
 
@@ -81,7 +87,7 @@ class RedisTemporaryStorage extends TemporaryStorage {
 
   async keys(pattern) {
     const keys = await this._client.keys(pattern);
-    return keys.map((key) => key.slice(PREFIX.length));
+    return keys.map((key) => key.slice(this.#prefix.length));
   }
 
   async flushAll() {
@@ -89,4 +95,4 @@ class RedisTemporaryStorage extends TemporaryStorage {
   }
 }
 
-export { RedisTemporaryStorage };
+export { RedisKeyValueStorage };

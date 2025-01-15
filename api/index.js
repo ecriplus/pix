@@ -8,7 +8,7 @@ import { disconnect, prepareDatabaseConnection } from './db/knex-database-connec
 import { createServer } from './server.js';
 import { config } from './src/shared/config.js';
 import { learningContentCache } from './src/shared/infrastructure/caches/learning-content-cache.js';
-import { temporaryStorage } from './src/shared/infrastructure/temporary-storage/index.js';
+import { informationBannersStorage, temporaryStorage } from './src/shared/infrastructure/key-value-storages/index.js';
 import { logger } from './src/shared/infrastructure/utils/logger.js';
 import { redisMonitor } from './src/shared/infrastructure/utils/redis-monitor.js';
 
@@ -40,13 +40,15 @@ async function _exitOnSignal(signal) {
     logger.info('Stopping HAPI Oppsy server...');
     await server.oppsy.stop();
   }
-  logger.info('Closing connexions to database...');
+  logger.info('Closing connections to database...');
   await disconnect();
-  logger.info('Closing connexions to cache...');
+  logger.info('Closing connections to cache...');
   await learningContentCache.quit();
-  logger.info('Closing connexions to temporary storage...');
+  logger.info('Closing connections to temporary storage...');
   await temporaryStorage.quit();
-  logger.info('Closing connexions to redis monitor...');
+  logger.info('Closing connections to information banners storage...');
+  await informationBannersStorage.quit();
+  logger.info('Closing connections to redis monitor...');
   await redisMonitor.quit();
   logger.info('Exiting process...');
 }

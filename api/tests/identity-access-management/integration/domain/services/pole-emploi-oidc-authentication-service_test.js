@@ -6,7 +6,7 @@ import { PoleEmploiOidcAuthenticationService } from '../../../../../src/identity
 import * as authenticationMethodRepository from '../../../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
 import { userToCreateRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/user-to-create.repository.js';
 import { config } from '../../../../../src/shared/config.js';
-import { temporaryStorage } from '../../../../../src/shared/infrastructure/temporary-storage/index.js';
+import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { expect, knex } from '../../../../test-helper.js';
 
 const defaultSessionTemporaryStorage = temporaryStorage.withPrefix('oidc-session:');

@@ -1,4 +1,4 @@
-import { temporaryStorage } from '../../../shared/infrastructure/temporary-storage/index.js';
+import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
 import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
 import { RefreshToken } from '../../domain/models/RefreshToken.js';
 
