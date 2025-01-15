@@ -1,6 +1,4 @@
-import { CertificationScoringCompleted } from '../../../../../lib/domain/events/CertificationScoringCompleted.js';
 import * as events from '../../../../../lib/domain/events/index.js';
-import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { JobController } from '../../../../shared/application/jobs/job-controller.js';
 import { V3_REPRODUCIBILITY_RATE } from '../../../../shared/domain/constants.js';
 import { CertificationComputeError } from '../../../../shared/domain/errors.js';
@@ -11,6 +9,8 @@ import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmE
 import * as scoringCertificationService from '../../../shared/domain/services/scoring-certification-service.js';
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
+import { CertificationCompletedJob } from '../../domain/events/CertificationCompleted.js';
+import { CertificationScoringCompleted } from '../../domain/events/CertificationScoringCompleted.js';
 import { services } from '../../domain/services/index.js';
 
 export class CertificationCompletedJobController extends JobController {

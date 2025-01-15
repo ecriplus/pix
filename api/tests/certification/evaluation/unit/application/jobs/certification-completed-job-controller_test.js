@@ -1,6 +1,6 @@
-import { CertificationScoringCompleted } from '../../../../../../lib/domain/events/CertificationScoringCompleted.js';
 import { CertificationCompletedJobController } from '../../../../../../src/certification/evaluation/application/jobs/certification-completed-job-controller.js';
 import { CertificationCompletedJob } from '../../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
+import { CertificationScoringCompleted } from '../../../../../../src/certification/evaluation/domain/events/CertificationScoringCompleted.js';
 import { AssessmentResultFactory } from '../../../../../../src/certification/scoring/domain/models/factories/AssessmentResultFactory.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import {
@@ -9,7 +9,7 @@ import {
 } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { V3_REPRODUCIBILITY_RATE } from '../../../../../../src/shared/domain/constants.js';
 import { CertificationComputeError } from '../../../../../../src/shared/domain/errors.js';
-import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
+import { AssessmentResult } from '../../../../../../src/shared/domain/models/index.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Application | jobs | CertificationCompletedJobController', function () {

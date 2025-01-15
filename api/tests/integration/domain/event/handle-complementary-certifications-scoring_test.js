@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
-import { CertificationScoringCompleted } from '../../../../lib/domain/events/CertificationScoringCompleted.js';
 import { handleComplementaryCertificationsScoring } from '../../../../lib/domain/events/handle-complementary-certifications-scoring.js';
 import * as complementaryCertificationCourseResultRepository from '../../../../lib/infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../../../lib/infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
+import { CertificationScoringCompleted } from '../../../../src/certification/evaluation/domain/events/CertificationScoringCompleted.js';
 import { AutoJuryCommentKeys } from '../../../../src/certification/shared/domain/models/JuryComment.js';
 import * as certificationAssessmentRepository from '../../../../src/certification/shared/infrastructure/repositories/certification-assessment-repository.js';
 import * as certificationCourseRepository from '../../../../src/certification/shared/infrastructure/repositories/certification-course-repository.js';
