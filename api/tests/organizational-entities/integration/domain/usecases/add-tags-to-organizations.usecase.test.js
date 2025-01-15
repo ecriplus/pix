@@ -1,8 +1,8 @@
-import * as organizationTagRepository from '../../../../../lib/infrastructure/repositories/organization-tag-repository.js';
 import { OrganizationNotFound } from '../../../../../src/organizational-entities/domain/errors.js';
 import { TagNotFoundError } from '../../../../../src/organizational-entities/domain/errors.js';
 import { addTagsToOrganizations } from '../../../../../src/organizational-entities/domain/usecases/add-tags-to-organizations.usecase.js';
 import { organizationForAdminRepository } from '../../../../../src/organizational-entities/infrastructure/repositories/organization-for-admin.repository.js';
+import * as organizationTagRepository from '../../../../../src/organizational-entities/infrastructure/repositories/organization-tag.repository.js';
 import { tagRepository } from '../../../../../src/organizational-entities/infrastructure/repositories/tag.repository.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
 

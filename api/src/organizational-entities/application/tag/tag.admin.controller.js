@@ -12,6 +12,12 @@ const create = async function (request, h, dependencies = { tagSerializer }) {
   return h.response(dependencies.tagSerializer.serialize(createdTag)).created();
 };
 
-const tagAdminController = { findAllTags, create };
+const getRecentlyUsedTags = async function (request, h, dependencies = { tagSerializer }) {
+  const tagId = request.params.id;
+  const recentlyUsedTags = await usecases.getRecentlyUsedTags({ tagId });
+  return dependencies.tagSerializer.serialize(recentlyUsedTags);
+};
+
+const tagAdminController = { create, findAllTags, getRecentlyUsedTags };
 
 export { tagAdminController };

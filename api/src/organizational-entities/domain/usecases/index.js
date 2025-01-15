@@ -1,7 +1,6 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as organizationTagRepository from '../../../../lib/infrastructure/repositories/organization-tag-repository.js';
 import * as centerRepository from '../../../certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as learnersApi from '../../../prescription/learner-management/application/api/learners-api.js';
 import * as schoolRepository from '../../../school/infrastructure/repositories/school-repository.js';
@@ -13,6 +12,7 @@ import * as complementaryCertificationHabilitationRepository from '../../infrast
 import * as dataProtectionOfficerRepository from '../../infrastructure/repositories/data-protection-officer.repository.js';
 import * as organizationFeatureRepository from '../../infrastructure/repositories/organization-feature-repository.js';
 import { organizationForAdminRepository } from '../../infrastructure/repositories/organization-for-admin.repository.js';
+import * as organizationTagRepository from '../../infrastructure/repositories/organization-tag.repository.js';
 import { tagRepository } from '../../infrastructure/repositories/tag.repository.js';
 
 const path = dirname(fileURLToPath(import.meta.url));
