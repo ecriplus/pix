@@ -22,7 +22,7 @@ describe('Integration | Infrastructure | Repository | Banner | information-banne
         const id = 'pix-other-target';
         const storedBanner = { message: '[fr]Texte de la bannière[/fr][en]Banner text[/en]', severity: 'info' };
 
-        await informationBannersStorage.save({ key: id, value: [storedBanner], expirationDelaySeconds: 10 });
+        await informationBannersStorage.save({ key: id, value: [storedBanner] });
 
         const expectedInformationBanner = domainBuilder.banner.buildInformationBanner({
           id,

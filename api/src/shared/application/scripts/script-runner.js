@@ -6,6 +6,7 @@ import yargs from 'yargs/yargs';
 
 import { disconnect } from '../../../../db/knex-database-connection.js';
 import { learningContentCache } from '../../infrastructure/caches/learning-content-cache.js';
+import { quitAllStorages } from '../../infrastructure/key-value-storages/index.js';
 import { logger as defaultLogger } from '../../infrastructure/utils/logger.js';
 
 function isRunningFromCli(scriptFileUrl) {
@@ -55,6 +56,7 @@ export class ScriptRunner {
     } finally {
       await disconnect();
       await learningContentCache.quit();
+      await quitAllStorages();
     }
   }
 }

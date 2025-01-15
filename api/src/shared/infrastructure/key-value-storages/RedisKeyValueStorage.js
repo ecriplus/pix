@@ -18,7 +18,7 @@ class RedisKeyValueStorage extends KeyValueStorage {
   }
 
   static createClient(redisUrl, prefix) {
-    return new RedisClient(redisUrl, { name: 'temporary-storage', prefix });
+    return new RedisClient(redisUrl, { name: prefix, prefix });
   }
 
   async save({ key, value, expirationDelaySeconds }) {
