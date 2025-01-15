@@ -73,6 +73,7 @@ describe('Unit | Domain | Models | Campaign', function () {
       const campaign = domainBuilder.buildCampaign.ofTypeProfilesCollection();
 
       // when / then
+      //TODO: rewrite when we have only one Campaign model on domainBuilder
       expect(campaign.isProfilesCollection()).to.be.true;
     });
 
@@ -81,6 +82,7 @@ describe('Unit | Domain | Models | Campaign', function () {
       const campaign = domainBuilder.buildCampaign.ofTypeAssessment();
 
       // when / then
+      //TODO: rewrite when we have only one Campaign model on domainBuilder
       expect(campaign.isProfilesCollection()).to.be.false;
     });
   });

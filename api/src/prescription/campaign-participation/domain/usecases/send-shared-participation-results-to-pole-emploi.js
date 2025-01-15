@@ -27,7 +27,8 @@ const sendSharedParticipationResultsToPoleEmploi = async ({
   const campaign = await campaignRepository.get(participation.campaignId);
   const organization = await organizationRepository.get(campaign.organizationId);
 
-  if (campaign.isAssessment() && organization.isPoleEmploi) {
+  //TODO: rewrite when we have only one model for Campaign, for now tests are based on Campaign.js from api context
+  if (campaign.type === 'ASSESSMENT' && organization.isPoleEmploi) {
     const badges = await badgeRepository.findByCampaignId(participation.campaignId);
     const badgeAcquiredIds = await badgeAcquisitionRepository.getAcquiredBadgeIds({
       badgeIds: badges.map((badge) => badge.id),

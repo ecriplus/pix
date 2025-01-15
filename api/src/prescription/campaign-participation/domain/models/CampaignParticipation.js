@@ -96,7 +96,8 @@ class CampaignParticipation {
       throw new CampaignParticiationInvalidStatus(this.id, CampaignParticipationStatuses.TO_SHARE);
     }
 
-    if (this.campaign.isProfilesCollection()) {
+    //TODO: rewrite when we have only one model for Campaign, for now now tests are based on Campaign.js from api context
+    if (this.campaign.type === 'PROFILES_COLLECTION') {
       throw new CantImproveCampaignParticipationError();
     }
   }
@@ -115,7 +116,8 @@ class CampaignParticipation {
     if (this.isDeleted) {
       throw new CampaignParticipationDeletedError('Cannot share results on a deleted participation.');
     }
-    if (this.campaign.isAssessment() && lastAssessmentNotCompleted(this)) {
+    //TODO: rewrite when we have only one model for Campaign, for now tests are based on Campaign.js from api context
+    if (this.campaign.type === 'ASSESSMENT' && lastAssessmentNotCompleted(this)) {
       throw new AssessmentNotCompletedError();
     }
   }
