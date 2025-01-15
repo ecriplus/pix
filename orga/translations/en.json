@@ -884,7 +884,7 @@
             "label": "Sign up"
           },
           "cgu": {
-            "accept": "I agree to the",
+            "accept": "I accept the",
             "and": "and",
             "aria-label": "I accept the terms of use and personal data protection policy of Pix",
             "data-protection-policy": "personal data protection policy",
