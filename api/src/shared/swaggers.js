@@ -99,21 +99,12 @@ function _buildSwaggerArgs(swaggerOptions) {
 
 function _buildParcoursupServers() {
   try {
-    const servers = [
+    return [
       {
         url: new URL(config.apiManager.endpoints.parcoursup, config.apiManager.url).href,
         description: 'External Partners access',
       },
     ];
-
-    if (config.environment === 'development') {
-      servers.push({
-        url: `http://127.0.0.1:${config.port}/api/application`,
-        description: 'Development endpoint',
-      });
-    }
-
-    return servers;
   } catch (error) {
     logger.error(error);
   }
