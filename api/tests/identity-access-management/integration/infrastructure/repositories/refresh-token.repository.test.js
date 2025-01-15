@@ -15,10 +15,20 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   describe('#findByToken', function () {
     it('finds refresh token data for token', async function () {
       // given
-      const refreshToken = RefreshToken.generate({ userId: 'userId!', scope: 'scope!', source: 'source!' });
+      const refreshToken = RefreshToken.generate({
+        userId: 'userId!',
+        scope: 'scope!',
+        source: 'source!',
+        audience: 'audience!',
+      });
       await refreshTokenRepository.save({ refreshToken });
 
-      const refreshToken2 = RefreshToken.generate({ userId: 'userId!', scope: 'scope!', source: 'source!' });
+      const refreshToken2 = RefreshToken.generate({
+        userId: 'userId!',
+        scope: 'scope!',
+        source: 'source!',
+        audience: 'audience!',
+      });
       await refreshTokenRepository.save({ refreshToken: refreshToken2 });
 
       // when
@@ -32,13 +42,28 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   describe('#findAllByUserId', function () {
     it('finds all refresh token data for an user id', async function () {
       // given
-      const refreshToken = RefreshToken.generate({ userId: 'userId!', scope: 'scope!', source: 'source!' });
+      const refreshToken = RefreshToken.generate({
+        userId: 'userId!',
+        scope: 'scope!',
+        source: 'source!',
+        audience: 'audience!',
+      });
       await refreshTokenRepository.save({ refreshToken });
 
-      const refreshToken2 = RefreshToken.generate({ userId: 'userId!', scope: 'scope!', source: 'source!' });
+      const refreshToken2 = RefreshToken.generate({
+        userId: 'userId!',
+        scope: 'scope!',
+        source: 'source!',
+        audience: 'audience!',
+      });
       await refreshTokenRepository.save({ refreshToken: refreshToken2 });
 
-      const refreshToken3 = RefreshToken.generate({ userId: 'userId2!', scope: 'scope!', source: 'source!' });
+      const refreshToken3 = RefreshToken.generate({
+        userId: 'userId2!',
+        scope: 'scope!',
+        source: 'source!',
+        audience: 'audience!',
+      });
       await refreshTokenRepository.save({ refreshToken: refreshToken3 });
 
       // when
@@ -52,7 +77,12 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   describe('#save', function () {
     it('saves a refresh token', async function () {
       // given
-      const refreshToken = RefreshToken.generate({ userId: 'userId!', scope: 'scope!', source: 'source!' });
+      const refreshToken = RefreshToken.generate({
+        userId: 'userId!',
+        scope: 'scope!',
+        source: 'source!',
+        audience: 'audience!',
+      });
 
       // when
       await refreshTokenRepository.save({ refreshToken });
@@ -66,9 +96,19 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   describe('#revokeByToken', function () {
     it('revokes a refresh token', async function () {
       // given
-      const refreshToken1 = RefreshToken.generate({ userId: 'userId!', scope: 'scope!', source: 'source!' });
+      const refreshToken1 = RefreshToken.generate({
+        userId: 'userId!',
+        scope: 'scope!',
+        source: 'source!',
+        audience: 'audience!',
+      });
       await refreshTokenRepository.save({ refreshToken: refreshToken1 });
-      const refreshToken2 = RefreshToken.generate({ userId: 'userId!', scope: 'scope!', source: 'source!' });
+      const refreshToken2 = RefreshToken.generate({
+        userId: 'userId!',
+        scope: 'scope!',
+        source: 'source!',
+        audience: 'audience!',
+      });
       await refreshTokenRepository.save({ refreshToken: refreshToken2 });
 
       // when
@@ -83,11 +123,26 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   describe('#revokeAllByUserId', function () {
     it('revokes all refresh tokens for a user ID', async function () {
       // given
-      const refreshToken1 = RefreshToken.generate({ userId: 'userId!', scope: 'scope!', source: 'source!' });
+      const refreshToken1 = RefreshToken.generate({
+        userId: 'userId!',
+        scope: 'scope!',
+        source: 'source!',
+        audience: 'audience!',
+      });
       await refreshTokenRepository.save({ refreshToken: refreshToken1 });
-      const refreshToken2 = RefreshToken.generate({ userId: 'userId!', scope: 'scope!', source: 'source!' });
+      const refreshToken2 = RefreshToken.generate({
+        userId: 'userId!',
+        scope: 'scope!',
+        source: 'source!',
+        audience: 'audience!',
+      });
       await refreshTokenRepository.save({ refreshToken: refreshToken2 });
-      const refreshToken3 = RefreshToken.generate({ userId: 'userId2!', scope: 'scope!', source: 'source!' });
+      const refreshToken3 = RefreshToken.generate({
+        userId: 'userId2!',
+        scope: 'scope!',
+        source: 'source!',
+        audience: 'audience!',
+      });
       await refreshTokenRepository.save({ refreshToken: refreshToken3 });
 
       // when
