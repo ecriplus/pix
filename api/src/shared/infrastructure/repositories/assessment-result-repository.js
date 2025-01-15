@@ -8,7 +8,7 @@ import {
   JuryCommentContexts,
 } from '../../../certification/shared/domain/models/JuryComment.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { AssessmentResultNotCreatedError, MissingAssessmentId, NotFoundError } from '../../domain/errors.js';
+import { MissingAssessmentId, NotFoundError } from '../../domain/errors.js';
 import { AssessmentResult } from '../../domain/models/AssessmentResult.js';
 
 function _toDomain({ assessmentResultDTO, competencesMarksDTO }) {
@@ -47,33 +47,30 @@ const save = async function ({ certificationCourseId, assessmentResult }) {
   if (_.isNil(assessmentId)) {
     throw new MissingAssessmentId();
   }
-  try {
-    const knexConn = DomainTransaction.getConnection();
-    const [savedAssessmentResultData] = await knexConn('assessment-results')
-      .insert({
-        pixScore,
-        reproducibilityRate,
-        status,
-        emitter,
-        commentByJury,
-        id,
-        juryId,
-        assessmentId,
-        commentForCandidate: assessmentResult.commentForCandidate?.fallbackComment,
-        commentForOrganization: assessmentResult.commentForOrganization?.fallbackComment,
-        commentByAutoJury,
-      })
-      .returning('*');
 
-    await knexConn('certification-courses-last-assessment-results')
-      .insert({ certificationCourseId, lastAssessmentResultId: savedAssessmentResultData.id })
-      .onConflict('certificationCourseId')
-      .merge(['lastAssessmentResultId']);
+  const knexConn = DomainTransaction.getConnection();
+  const [savedAssessmentResultData] = await knexConn('assessment-results')
+    .insert({
+      pixScore,
+      reproducibilityRate,
+      status,
+      emitter,
+      commentByJury,
+      id,
+      juryId,
+      assessmentId,
+      commentForCandidate: assessmentResult.commentForCandidate?.fallbackComment,
+      commentForOrganization: assessmentResult.commentForOrganization?.fallbackComment,
+      commentByAutoJury,
+    })
+    .returning('*');
 
-    return _toDomain({ assessmentResultDTO: savedAssessmentResultData, competencesMarksDTO: [] });
-  } catch {
-    throw new AssessmentResultNotCreatedError();
-  }
+  await knexConn('certification-courses-last-assessment-results')
+    .insert({ certificationCourseId, lastAssessmentResultId: savedAssessmentResultData.id })
+    .onConflict('certificationCourseId')
+    .merge(['lastAssessmentResultId']);
+
+  return _toDomain({ assessmentResultDTO: savedAssessmentResultData, competencesMarksDTO: [] });
 };
 
 const findLatestLevelAndPixScoreByAssessmentId = async function ({ assessmentId, limitDate }) {

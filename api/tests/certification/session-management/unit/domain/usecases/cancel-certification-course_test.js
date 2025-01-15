@@ -1,4 +1,5 @@
 import { cancelCertificationCourse } from '../../../../../../src/certification/session-management/domain/usecases/cancel-certification-course.js';
+import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Session-management | Unit | Domain | UseCases | cancel-certification-course', function () {
@@ -14,7 +15,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
     certificationCourseRepository.update.resolves();
 
     // when
-    await cancelCertificationCourse({
+    const cancelledEvent = await cancelCertificationCourse({
       certificationCourseId: 123,
       certificationCourseRepository,
     });
@@ -22,5 +23,6 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
     // then
     expect(certificationCourse.cancel).to.have.been.calledOnce;
     expect(certificationCourseRepository.update).to.have.been.calledWithExactly({ certificationCourse });
+    expect(cancelledEvent).to.deepEqualInstance(new CertificationCancelled({ certificationCourseId: 123 }));
   });
 });

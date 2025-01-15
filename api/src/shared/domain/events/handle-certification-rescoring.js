@@ -1,3 +1,6 @@
+/**
+ * @typedef {import('./index.js').CertificationAssessmentRepository} CertificationAssessmentRepository
+ */
 import { ChallengeDeneutralized } from '../../../certification/evaluation/domain/events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../../../certification/evaluation/domain/events/ChallengeNeutralized.js';
 import { services } from '../../../certification/evaluation/domain/services/index.js';
@@ -8,7 +11,8 @@ import CertificationRescoredByScript from '../../../certification/session-manage
 import { AlgorithmEngineVersion } from '../../../certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { V3_REPRODUCIBILITY_RATE } from '../constants.js';
 import { CertificationComputeError } from '../errors.js';
-import { CertificationResult } from '../models/CertificationResult.js';
+import { CertificationResult } from '../models/index.js';
+import CertificationCancelled from './CertificationCancelled.js';
 import { CertificationCourseUnrejected } from './CertificationCourseUnrejected.js';
 import { CertificationRescoringCompleted } from './CertificationRescoringCompleted.js';
 import { checkEventTypes } from './check-event-types.js';
@@ -19,9 +23,14 @@ const eventTypes = [
   CertificationJuryDone,
   CertificationCourseRejected,
   CertificationCourseUnrejected,
+  CertificationCancelled,
   CertificationRescoredByScript,
 ];
 
+/**
+ * @param {Object} params
+ * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
+ */
 async function handleCertificationRescoring({
   event,
   assessmentResultRepository,
@@ -187,6 +196,10 @@ function _getEmitterFromEvent(event) {
 
   if (event instanceof CertificationCourseRejected || event instanceof CertificationCourseUnrejected) {
     emitter = CertificationResult.emitters.PIX_ALGO_FRAUD_REJECTION;
+  }
+
+  if (event instanceof CertificationCancelled) {
+    emitter = CertificationResult.emitters.PIX_ALGO_CANCELLATION;
   }
 
   return emitter;

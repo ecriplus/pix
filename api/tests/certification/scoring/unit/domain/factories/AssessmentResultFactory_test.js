@@ -68,6 +68,32 @@ describe('Certification | Scoring | Unit | Domain | Factories | AssessmentResult
     });
   });
 
+  describe('#buildCancelled', function () {
+    it('should return a cancelled AssessmentResult', function () {
+      // when
+      const actualAssessmentResult = AssessmentResultFactory.buildCancelledAssessmentResult({
+        pixScore: 55,
+        reproducibilityRate: 50.25,
+        assessmentId: 123,
+        juryId: 456,
+        emitter: CertificationResult.emitters.PIX_ALGO_CANCELLATION,
+      });
+
+      // then
+      const expectedAssessmentResult = domainBuilder.buildAssessmentResult({
+        assessmentId: 123,
+        juryId: 456,
+        emitter: CertificationResult.emitters.PIX_ALGO_CANCELLATION,
+        status: AssessmentResult.status.CANCELLED,
+        pixScore: 55,
+        reproducibilityRate: 50.25,
+      });
+      expectedAssessmentResult.id = undefined;
+      expectedAssessmentResult.createdAt = undefined;
+      expect(actualAssessmentResult).to.deepEqualInstance(expectedAssessmentResult);
+    });
+  });
+
   describe('#buildNotTrustableAssessmentResult', function () {
     it('should return a not trustable AssessmentResult', function () {
       // when

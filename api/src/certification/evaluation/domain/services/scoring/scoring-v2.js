@@ -12,7 +12,8 @@
 
 import _ from 'lodash';
 
-import { AssessmentResult } from '../../../../../shared/domain/models/AssessmentResult.js';
+import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
+import { AssessmentResult } from '../../../../../shared/domain/models/index.js';
 import {
   AnswerCollectionForScoring,
   CertificationAssessmentScore,
@@ -66,9 +67,12 @@ export const handleV2CertificationScoring = async ({
     id: certificationAssessment.certificationCourseId,
   });
 
+  const toBeCancelled = event instanceof CertificationCancelled;
+
   const assessmentResult = _createV2AssessmentResult({
     juryId: event?.juryId,
     emitter,
+    toBeCancelled,
     certificationCourse,
     certificationAssessment,
     certificationAssessmentScore,
@@ -258,11 +262,22 @@ function _getResult(answers, certificationChallenges, testedCompetences, allArea
 function _createV2AssessmentResult({
   juryId,
   emitter,
+  toBeCancelled,
   certificationCourse,
   certificationAssessmentScore,
   certificationAssessment,
   scoringCertificationService,
 }) {
+  if (toBeCancelled) {
+    return AssessmentResultFactory.buildCancelledAssessmentResult({
+      juryId,
+      pixScore: certificationAssessmentScore.nbPix,
+      reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
+      assessmentId: certificationAssessment.id,
+      emitter,
+    });
+  }
+
   if (certificationCourse.isRejectedForFraud()) {
     return AssessmentResultFactory.buildFraud({
       pixScore: certificationAssessmentScore.nbPix,
