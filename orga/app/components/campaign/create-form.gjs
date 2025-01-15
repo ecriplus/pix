@@ -80,10 +80,6 @@ export default class CreateForm extends Component {
     return this.args.campaign.type === 'PROFILES_COLLECTION';
   }
 
-  get isExternalIdNotSelectedChecked() {
-    return this.args.campaign.idPixLabel === null;
-  }
-
   get isExternalIdSelectedChecked() {
     return this.wantIdPix === true;
   }
@@ -364,7 +360,7 @@ export default class CreateForm extends Component {
               name="external-id-label"
               @value="false"
               {{on "change" this.doNotAskLabelIdPix}}
-              checked={{this.isExternalIdNotSelectedChecked}}
+              checked={{not this.isExternalIdSelectedChecked}}
             >
               <:label>{{t "pages.campaign-creation.no"}}</:label>
             </PixRadioButton>
