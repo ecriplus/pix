@@ -1,4 +1,4 @@
-import { CertificationJuryDone } from '../../../../lib/domain/events/CertificationJuryDone.js';
+import { CertificationJuryDone } from '../../../../src/certification/session-management/domain/events/CertificationJuryDone.js';
 import { expect } from '../../../test-helper.js';
 import { buildEventDispatcherAndHandlersForTest } from '../../../tooling/events/event-dispatcher-builder.js';
 
