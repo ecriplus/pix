@@ -8,7 +8,7 @@ import {
   CertificationIssueReportCategory,
   CertificationIssueReportSubcategories,
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
-import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
+import { AnswerStatus } from '../../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | process-auto-jury', function () {
@@ -977,14 +977,15 @@ describe('Unit | UseCase | process-auto-jury', function () {
     });
 
     describe('when the certification was ended due to finalization', function () {
-      it('does not return a CertificationJuryDone event', async function () {
+      it('returns a CertificationJuryDone event', async function () {
         // given
-        _initializeV3CourseAndAssessment({
+        const { certificationCourse } = _initializeV3CourseAndAssessment({
           certificationState: CertificationAssessment.states.ENDED_DUE_TO_FINALIZATION,
           certificationAssessmentRepository,
           certificationCourseRepository,
           certificationIssueReportRepository,
         });
+
         const sessionFinalized = new SessionFinalized({
           sessionId: 1234,
           finalizedAt: new Date(),
@@ -995,7 +996,7 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // when
-        const { autoJuryDone } = await processAutoJury({
+        const { certificationJuryDoneEvents } = await processAutoJury({
           sessionFinalized,
           certificationIssueReportRepository,
           certificationAssessmentRepository,
@@ -1003,7 +1004,11 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
 
         // then
-        expect(autoJuryDone).to.be.instanceOf(AutoJuryDone);
+        expect(certificationJuryDoneEvents[0]).to.deepEqualInstance(
+          new CertificationJuryDone({
+            certificationCourseId: certificationCourse.getId(),
+          }),
+        );
       });
     });
 
