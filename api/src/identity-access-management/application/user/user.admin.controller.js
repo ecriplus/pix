@@ -65,7 +65,6 @@ const getUserDetails = async function (request, h, dependencies = { userDetailsF
 };
 
 /**
- *
  * @param request
  * @param h
  * @param dependencies
@@ -89,6 +88,26 @@ const anonymizeUser = async function (request, h, dependencies = { userAnonymize
   return h.response(dependencies.userAnonymizedDetailsForAdminSerializer.serialize(anonymizedUser)).code(200);
 };
 
+/**
+ * @param request
+ * @param h
+ * @param dependencies
+ * @param {UserDetailsForAdminSerializer} dependencies.userDetailsForAdminSerializer
+ * @returns {Promise<*>}
+ */
+const addPixAuthenticationMethod = async function (request, h, dependencies = { userDetailsForAdminSerializer }) {
+  const userId = request.params.id;
+  const email = request.payload.data.attributes.email.trim().toLowerCase();
+  const userUpdated = await usecases.addPixAuthenticationMethod({ userId, email });
+  return h.response(dependencies.userDetailsForAdminSerializer.serialize(userUpdated)).created();
+};
+
+/**
+ * @param request
+ * @param h
+ * @param dependencies
+ * @returns {Promise<*>}
+ */
 const removeAuthenticationMethod = async function (request, h) {
   const userId = request.params.id;
   const authenticationMethodType = request.payload.data.attributes.type;
@@ -106,6 +125,7 @@ const removeAuthenticationMethod = async function (request, h) {
  * @property {function} updateUserDetailsByAdmin
  */
 const userAdminController = {
+  addPixAuthenticationMethod,
   anonymizeUser,
   findPaginatedFilteredUsers,
   getUserDetails,

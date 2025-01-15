@@ -64,39 +64,6 @@ const register = async function (server) {
     },
     {
       method: 'POST',
-      path: '/api/admin/users/{id}/add-pix-authentication-method',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-              ])(request, h),
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            id: identifiersType.userId,
-          }),
-          payload: Joi.object({
-            data: {
-              attributes: {
-                email: Joi.string().email().required(),
-              },
-            },
-          }),
-          options: {
-            allowUnknown: true,
-          },
-        },
-        handler: userController.addPixAuthenticationMethodByEmail,
-        notes: ["- Permet à un administrateur d'ajouter une méthode de connexion Pix à un utilisateur"],
-        tags: ['api', 'admin', 'user'],
-      },
-    },
-    {
-      method: 'POST',
       path: '/api/admin/users/{userId}/authentication-methods/{authenticationMethodId}',
       config: {
         validate: {

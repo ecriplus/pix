@@ -49,47 +49,6 @@ describe('Unit | Controller | user-controller', function () {
     });
   });
 
-  describe('#addPixAuthenticationMethodByEmail', function () {
-    it('should return the user with the new pix authentication method by user email', async function () {
-      // given
-      const email = '    USER@example.net    ';
-      const user = domainBuilder.buildUser();
-      const updatedUser = domainBuilder.buildUser({ ...user, email: 'user@example.net' });
-      const updatedUserSerialized = Symbol('the user with a new email and serialized');
-      sinon
-        .stub(usecases, 'addPixAuthenticationMethodByEmail')
-        .withArgs({ userId: user.id, email: 'user@example.net' })
-        .resolves(updatedUser);
-      const userDetailsForAdminSerializer = { serialize: sinon.stub() };
-      userDetailsForAdminSerializer.serialize.withArgs(updatedUser).returns(updatedUserSerialized);
-
-      // when
-      const request = {
-        auth: {
-          credentials: {
-            userId: user.id,
-          },
-        },
-        params: {
-          id: user.id,
-        },
-        payload: {
-          data: {
-            attributes: {
-              email,
-            },
-          },
-        },
-      };
-      const result = await userController.addPixAuthenticationMethodByEmail(request, hFake, {
-        userDetailsForAdminSerializer,
-      });
-
-      // then
-      expect(result.source).to.be.equal(updatedUserSerialized);
-    });
-  });
-
   describe('#reassignAuthenticationMethods', function () {
     context('when the reassigned authentication method is gar', function () {
       it('should update gar authentication method user id', async function () {

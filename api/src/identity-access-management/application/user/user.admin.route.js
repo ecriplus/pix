@@ -182,6 +182,39 @@ export const userAdminRoutes = [
   },
   {
     method: 'POST',
+    path: '/api/admin/users/{id}/add-pix-authentication-method',
+    config: {
+      pre: [
+        {
+          method: (request, h) =>
+            securityPreHandlers.hasAtLeastOneAccessOf([
+              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+              securityPreHandlers.checkAdminMemberHasRoleSupport,
+            ])(request, h),
+        },
+      ],
+      validate: {
+        params: Joi.object({
+          id: identifiersType.userId,
+        }),
+        payload: Joi.object({
+          data: {
+            attributes: {
+              email: Joi.string().email().required(),
+            },
+          },
+        }),
+        options: {
+          allowUnknown: true,
+        },
+      },
+      handler: (request, h) => userAdminController.addPixAuthenticationMethod(request, h),
+      notes: ["- Permet à un administrateur d'ajouter une méthode de connexion Pix à un utilisateur"],
+      tags: ['api', 'identity-access-management', 'admin', 'user'],
+    },
+  },
+  {
+    method: 'POST',
     path: '/api/admin/users/{id}/remove-authentication',
     config: {
       pre: [
