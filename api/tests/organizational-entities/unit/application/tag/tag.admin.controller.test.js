@@ -3,6 +3,29 @@ import { usecases } from '../../../../../src/organizational-entities/domain/usec
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Application | Controller | Admin | Tags', function () {
+  describe('#findAllTags', function () {
+    it('calls findAllTags usecase and tag serializer', async function () {
+      // given
+      const tag1 = domainBuilder.buildTag({ id: 1, name: 'TAG1' });
+      const tag2 = domainBuilder.buildTag({ id: 2, name: 'TAG2' });
+      const tag3 = domainBuilder.buildTag({ id: 3, name: 'TAG3' });
+
+      const tags = [tag1, tag2, tag3];
+
+      sinon.stub(usecases, 'findAllTags').resolves(tags);
+      const tagSerializer = {
+        serialize: sinon.stub(),
+      };
+
+      // when
+      await tagAdminController.findAllTags({}, hFake, { tagSerializer });
+
+      // then
+      expect(usecases.findAllTags).to.have.been.calledOnce;
+      expect(tagSerializer.serialize).to.have.been.calledWithExactly(tags);
+    });
+  });
+
   describe('#create', function () {
     it('returns the created tag', async function () {
       // given
