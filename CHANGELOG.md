@@ -1,5 +1,21 @@
 # Pix Changelog
 
+## v5.17.0 (15/01/2025)
+
+
+### :rocket: Amélioration
+- [#10837](https://github.com/1024pix/pix/pull/10837) [FEATURE] Changement du titre du module IA avancé LLM ChatGPT MODC-176.
+- [#11105](https://github.com/1024pix/pix/pull/11105) [FEATURE] Modifier l'appel Pix Admin qui récupère le statut des CGU.
+- [#11055](https://github.com/1024pix/pix/pull/11055) [FEATURE] Utiliser PixIcon dans Pix App - Partie 2 (PIX-15468).
+- [#11104](https://github.com/1024pix/pix/pull/11104) [FEATURE] Mise en place d’une nouvelle fonction getForwardedOrigin qui récupére l’origin HTTP de l’application (PIX-15925).
+
+### :building_construction: Tech
+- [#11095](https://github.com/1024pix/pix/pull/11095) [TECH] Migration de la route /api/admin/users/{id}/add-pix-authentication-method (PIX-16079).
+- [#11109](https://github.com/1024pix/pix/pull/11109) [TECH] :truck: déplace le code d'évènement de `certification completed` vers `src/`.
+- [#11108](https://github.com/1024pix/pix/pull/11108) [TECH] :truck: déplace le code de gestion d'évènement `Certification Course Rejected`.
+- [#11089](https://github.com/1024pix/pix/pull/11089) [TECH] :truck: Déplace le service de CertificationChallenge.
+- [#11086](https://github.com/1024pix/pix/pull/11086) [TECH] Mise à jour de PixUI sur PixOrga - Sass .
+
 ## v5.16.0 (14/01/2025)
 
 
