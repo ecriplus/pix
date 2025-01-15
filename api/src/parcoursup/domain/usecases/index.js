@@ -5,16 +5,12 @@ import { injectDependencies } from '../../../shared/infrastructure/utils/depende
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as certificationRepository from '../../infrastructure/repositories/certification-repository.js';
 
-/**
- * @typedef {import('../../infrastructure/repositories/certification-repository.js').CertificationRepository} CertificationRepository
- **/
+const path = dirname(fileURLToPath(import.meta.url));
 
 /**
  * Using {@link https://jsdoc.app/tags-type "Closure Compiler's syntax"} to document injected dependencies
  * @typedef {certificationRepository} CertificationRepository
  **/
-
-const path = dirname(fileURLToPath(import.meta.url));
 
 const dependencies = {
   certificationRepository,

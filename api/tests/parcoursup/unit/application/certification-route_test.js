@@ -11,7 +11,7 @@ describe('Parcoursup | Unit | Application | Routes | Certification', function ()
   let url, method, headers, httpTestServer;
 
   beforeEach(async function () {
-    url = '/api/parcoursup/certification/search';
+    url = '/api/application/parcoursup/certification/search';
     sinon.stub(certificationController, 'getCertificationResult').callsFake((request, h) => h.response().code(200));
 
     httpTestServer = new HttpTestServer();

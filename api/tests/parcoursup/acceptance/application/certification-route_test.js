@@ -84,12 +84,12 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
     await datamartBuilder.commit();
   });
 
-  describe('POST /api/parcoursup/certification/search', function () {
+  describe('POST /api/application/parcoursup/certification/search', function () {
     it('should return 200 HTTP status code and a certification for a given INE', async function () {
       // given
       const options = {
         method: 'POST',
-        url: `/api/parcoursup/certification/search`,
+        url: `/api/application/parcoursup/certification/search`,
         headers: {
           authorization: generateValidRequestAuthorizationHeaderForApplication(
             PARCOURSUP_CLIENT_ID,
@@ -114,7 +114,7 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
       // given
       const options = {
         method: 'POST',
-        url: `/api/parcoursup/certification/search`,
+        url: `/api/application/parcoursup/certification/search`,
         headers: {
           authorization: generateValidRequestAuthorizationHeaderForApplication(
             PARCOURSUP_CLIENT_ID,
@@ -171,7 +171,7 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
 
       const options = {
         method: 'POST',
-        url: '/api/parcoursup/certification/search',
+        url: '/api/application/parcoursup/certification/search',
         headers: {
           authorization: generateValidRequestAuthorizationHeaderForApplication(
             PARCOURSUP_CLIENT_ID,

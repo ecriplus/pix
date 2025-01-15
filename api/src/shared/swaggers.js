@@ -1,6 +1,8 @@
 import HapiSwagger from 'hapi-swagger';
 
 import packageJSON from '../../package.json' with { type: 'json' };
+import { config } from './config.js';
+import { logger } from './infrastructure/utils/logger.js';
 
 const swaggerOptionsAuthorizationServer = {
   routeTag: 'authorization-server',
@@ -31,8 +33,17 @@ const swaggerOptionsPoleEmploi = {
 
 const swaggerOptionsParcoursup = {
   routeTag: 'parcoursup',
+  OAS: 'v3.0',
+  servers: _buildParcoursupServers(),
+  pathReplacements: [
+    {
+      replaceIn: 'all',
+      pattern: /api\/application\//,
+      replacement: '',
+    },
+  ],
   info: {
-    title: 'Pix Parcoursup open api',
+    title: 'Pix Parcoursup Open Api',
     version: packageJSON.version,
   },
   jsonPath: '/swagger.json',
@@ -84,6 +95,19 @@ function _buildSwaggerArgs(swaggerOptions) {
       routes: { prefix: '/' + swaggerOptions.routeTag },
     },
   ];
+}
+
+function _buildParcoursupServers() {
+  try {
+    return [
+      {
+        url: new URL(config.apiManager.endpoints.parcoursup, config.apiManager.url).href,
+        description: 'External Partners access',
+      },
+    ];
+  } catch (error) {
+    logger.error(error);
+  }
 }
 
 const swaggers = [
