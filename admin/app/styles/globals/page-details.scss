@@ -1,10 +1,13 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .page-details {
   position: relative;
   text-wrap: pretty;
   border-top: 1px solid var(--pix-neutral-100);
   margin-block: var(--pix-spacing-4x) var(--pix-spacing-6x);
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     display: grid;
     grid-template-columns: max-content 1fr;
   }
@@ -16,7 +19,7 @@
   padding-block: var(--pix-spacing-4x) var(--pix-spacing-2x);
   color: var(--pix-neutral-800);
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     padding: var(--pix-spacing-4x) var(--pix-spacing-3x) var(--pix-spacing-3x) 0;
     border-bottom: 1px solid var(--pix-neutral-100);
   }
@@ -28,7 +31,7 @@
   padding-bottom: var(--pix-spacing-3x);
   border-bottom: 1px solid var(--pix-neutral-100);
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     padding: var(--pix-spacing-3x) 0 var(--pix-spacing-3x) var(--pix-spacing-3x);
   }
 

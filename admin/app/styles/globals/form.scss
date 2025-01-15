@@ -1,4 +1,6 @@
 /* stylelint-disable selector-class-pattern, no-invalid-double-slash-comments */
+@use 'pix-design-tokens/typography';
+
 .form {
   textarea {
     height: auto;

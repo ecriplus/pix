@@ -169,7 +169,7 @@ export default class TargetProfile extends Component {
   <template>
     {{pageTitle "Profil " @model.id " | Pix Admin" replace=true}}
     <header class="page-header">
-      <div class="page-title">
+      <div>
         <LinkTo @route="authenticated.target-profiles.list">Tous les profils cibles</LinkTo>
         <span class="wire">&nbsp;>&nbsp;</span>
         <h1>{{@model.name}}</h1>

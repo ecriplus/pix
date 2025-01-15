@@ -8,7 +8,7 @@
 .insights-section {
   &__title {
     display: inline-block;
-    margin-bottom: $pix-spacing-m;
+    margin-bottom: var(--pix-spacing-6x);
     font-size: 1.4rem;
   }
 
@@ -24,7 +24,7 @@
 }
 
 .insights__section > .pix-banner-alert {
-  margin-bottom: $pix-spacing-m;
+  margin-bottom: var(--pix-spacing-6x);
 
   ul,
   ol {

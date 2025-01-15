@@ -1,4 +1,7 @@
 /* stylelint-disable selector-class-pattern */
+@use 'pix-design-tokens/typography';
+@use "pix-design-tokens/colors";
+
 .login-page {
   position: absolute;
   top: 0;
@@ -6,7 +9,7 @@
   width: 100%;
   height: 100%;
   color: var(--pix-neutral-0);
-  background: $pix-primary-app-gradient;
+  background: colors.$pix-primary-app-gradient;
 }
 
 .login-page__main {
@@ -20,7 +23,7 @@
   text-align: center;
 
   &__title {
-    margin-bottom: $pix-spacing-s;
+    margin-bottom: var(--pix-spacing-4x);
   }
 }
 
@@ -49,13 +52,13 @@
     align-items: center;
     width: fit-content;
     margin: auto;
-    font-weight: $font-medium;
+    font-weight: var(--pix-font-medium);
     background-color: var(--pix-neutral-0);
     border: 1px solid var(--pix-neutral-800);
     border-radius: 100px;
 
       &__logo {
-        width: $pix-spacing-m;
+        width: var(--pix-spacing-6x);
         margin: var(--pix-spacing-2x) var(--pix-spacing-3x);
       }
 

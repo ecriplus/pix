@@ -1,13 +1,13 @@
 .places {
   &__resume {
-    margin-bottom: $pix-spacing-s;
-    padding-bottom: $pix-spacing-s;
+    margin-bottom: var(--pix-spacing-4x);
+    padding-bottom: var(--pix-spacing-4x);
     border-bottom: 3px solid var(--pix-neutral-20);
   }
 
   &__button {
     display: inline-flex;
-    margin-top: $pix-spacing-s;
+    margin-top: var(--pix-spacing-4x);
 
     &:hover {
       color: var(--pix-neutral-0);
@@ -28,6 +28,6 @@
   }
 
   &__button-icon {
-    margin: 0 $pix-spacing-xxs;
+    margin: 0 var(--pix-spacing-1x);
   }
 }

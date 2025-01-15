@@ -15,7 +15,7 @@
 
   &__details {
     &__list {
-      margin-bottom: $pix-spacing-m;
+      margin-bottom: var(--pix-spacing-6x);
     }
 
     .form-actions {

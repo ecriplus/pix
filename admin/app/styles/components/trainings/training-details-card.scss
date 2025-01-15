@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .training-details-card {
   display: grid;
   grid-template-columns: 1fr 180px;

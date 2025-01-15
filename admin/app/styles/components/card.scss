@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .card {
   background: var(--pix-neutral-0);
   border: 1.2px var(--pix-neutral-100) solid;
@@ -15,7 +17,8 @@
 
   &__content {
     padding: 11px 32px;
-    font-family: $font-roboto;
+
+    @extend %pix-body-s;
 
     // add to pix-ui possibility to change the layout to a component
     & > .pix-input, .pix-select {

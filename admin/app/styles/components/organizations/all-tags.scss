@@ -1,8 +1,8 @@
 .organization-recently-used-tags-list {
   display: flex;
   flex-wrap: wrap;
-  gap: $pix-spacing-xs;
-  margin-top: $pix-spacing-xs;
+  gap: var(--pix-spacing-2x);
+  margin-top: var(--pix-spacing-2x);
   padding: 0;
   list-style: none;
 
@@ -17,7 +17,7 @@
 }
 
 .organization-tags-lists-separator {
-  margin: $pix-spacing-m 0;
+  margin: var(--pix-spacing-6x) 0;
   border: 1px solid var(--pix-neutral-20);
 }
 

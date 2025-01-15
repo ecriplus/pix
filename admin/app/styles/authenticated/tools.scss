@@ -21,11 +21,11 @@
 
 .tools {
   &__warning {
-    margin-bottom: $pix-spacing-s;
+    margin-bottom: var(--pix-spacing-4x);
   }
 
   &__info {
-    margin-bottom: $pix-spacing-s;
+    margin-bottom: var(--pix-spacing-4x);
   }
 
   .pix-button {

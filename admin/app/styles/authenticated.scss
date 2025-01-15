@@ -1,17 +1,14 @@
 /* stylelint-disable selector-class-pattern */
-$app-sidebar-width-sm: 80px;
-$app-header-height: 60px;
-
 .app-container {
   display: grid;
-  grid-template-columns: $app-sidebar-width-sm 1fr;
+  grid-template-columns: 80px 1fr;
 
   .app-sidebar {
     background-color: var(--pix-neutral-800);
 
     .app-logo {
       width: 100%;
-      height: $app-header-height;
+      height: 60px;
       text-align: center;
       border-bottom: 1px solid var(--pix-neutral-900);
 
@@ -20,7 +17,7 @@ $app-header-height: 60px;
         width: 100%;
         height: 100%;
         color: var(--pix-neutral-0);
-        line-height: $app-header-height;
+        line-height: 60px;
         text-decoration: none;
         background-color: var(--pix-primary-500);
       }

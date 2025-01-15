@@ -6,7 +6,7 @@ import Nav from './nav';
   {{pageTitle "Administration"}}
   <div class="page">
     <header class="page-header">
-      <h1 class="page-title">Administration</h1>
+      <h1>Administration</h1>
       <div class="page-actions">
       </div>
     </header>

@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .admin-form--training__logo-url-input {
   @extend %pix-body-s;
 

@@ -14,7 +14,7 @@ export default class Stage extends Component {
 
   <template>
     <header class="page-header">
-      <div class="page-title">
+      <div>
         <p>
           <LinkTo @route="authenticated.target-profiles.target-profile.insights">{{@targetProfileName}}</LinkTo>
           <span class="wire">&nbsp;>&nbsp;</span>

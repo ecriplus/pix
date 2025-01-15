@@ -1,12 +1,16 @@
+@use 'pix-design-tokens/typography';
+
 .jury-comment {
   color: var(--pix-neutral-800);
-  font-family: $font-roboto;
+
+  @extend %pix-body-s;
 
   &__title {
     margin-bottom: 16px;
     font-weight: normal;
     font-size: 1.25rem;
-    font-family: $font-open-sans;
+
+    @extend %pix-title-xs;
   }
 
   &__author {
