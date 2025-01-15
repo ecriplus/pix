@@ -2,6 +2,7 @@
  * @typedef {import('../../../certification/shared/domain/models/CompetenceMark.js').CompetenceMark} CompetenceMark
  * @typedef {import('../../../certification/shared/domain/models/JuryComment.js').JuryComment} JuryComment
  */
+import { NotFinalizedCertificationError } from '../errors.js';
 import { Assessment } from './Assessment.js';
 
 /**
@@ -9,6 +10,7 @@ import { Assessment } from './Assessment.js';
  * @enum {string}
  */
 const status = Object.freeze({
+  CANCELLED: 'cancelled',
   REJECTED: 'rejected',
   VALIDATED: 'validated',
   ERROR: 'error',
@@ -99,6 +101,13 @@ class AssessmentResult {
 
   reject() {
     this.status = AssessmentResult.status.REJECTED;
+  }
+
+  cancel() {
+    if (!Object.values(AssessmentResult.status).includes(this.status)) {
+      throw new NotFinalizedCertificationError('A certification cannot be cancelled if it has not been finalized.');
+    }
+    this.status = AssessmentResult.status.CANCELLED;
   }
 }
 

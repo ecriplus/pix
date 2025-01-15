@@ -1031,6 +1031,12 @@ class AuditLoggerApiError extends DomainError {
   }
 }
 
+class NotFinalizedCertificationError extends DomainError {
+  constructor(message) {
+    super(message);
+  }
+}
+
 export {
   AccountRecoveryDemandExpired,
   AccountRecoveryUserAlreadyConfirmEmail,
@@ -1122,6 +1128,7 @@ export {
   NoSkillsInCampaignError,
   NoStagesForCampaign,
   NotEnoughDaysPassedBeforeResetCampaignParticipationError,
+  NotFinalizedCertificationError,
   NotFoundError,
   NotImplementedError,
   ObjectValidationError,
