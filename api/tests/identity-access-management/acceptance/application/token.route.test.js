@@ -37,6 +37,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         url: '/api/token',
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'orga.pix.fr',
         },
         payload: querystring.stringify({
           grant_type: 'password',
@@ -72,6 +74,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         url: '/api/token',
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'orga.pix.fr',
         },
         payload: querystring.stringify({
           grant_type: 'password',
@@ -95,6 +99,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           url: '/api/token',
           headers: {
             'content-type': 'application/x-www-form-urlencoded',
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'orga.pix.fr',
           },
           payload: querystring.stringify({
             grant_type: 'password',
@@ -135,6 +141,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
             url: '/api/token',
             headers: {
               'content-type': 'application/x-www-form-urlencoded',
+              'x-forwarded-proto': 'https',
+              'x-forwarded-host': 'orga.pix.fr',
             },
             payload: querystring.stringify({
               grant_type: 'password',
@@ -316,6 +324,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
             headers: {
               'content-type': 'application/x-www-form-urlencoded',
               cookie: `locale=${localeFromCookie}`,
+              'x-forwarded-proto': 'https',
+              'x-forwarded-host': 'orga.pix.fr',
             },
             payload: querystring.stringify({
               grant_type: 'password',
@@ -351,6 +361,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
             headers: {
               'content-type': 'application/x-www-form-urlencoded',
               cookie: `locale=${localeFromCookie}`,
+              'x-forwarded-proto': 'https',
+              'x-forwarded-host': 'orga.pix.fr',
             },
             payload: querystring.stringify({
               grant_type: 'password',
