@@ -128,10 +128,7 @@ async function _handleAutoJuryV3({ sessionFinalized, certificationCourses, certi
 }
 
 function _v3CertificationShouldBeScored(certificationAssessment) {
-  return (
-    certificationAssessment.state === CertificationAssessment.states.STARTED ||
-    certificationAssessment.state === CertificationAssessment.states.ENDED_BY_SUPERVISOR
-  );
+  return certificationAssessment.state !== CertificationAssessment.states.COMPLETED;
 }
 
 async function _autoCompleteUnfinishedTest({
