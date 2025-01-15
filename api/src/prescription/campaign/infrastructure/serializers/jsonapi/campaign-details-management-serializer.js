@@ -25,7 +25,7 @@ const serialize = function (campaignManagement, meta) {
       'customResultPageButtonUrl',
       'sharedParticipationsCount',
       'totalParticipationsCount',
-      'isTypeProfilesCollection',
+      'isProfilesCollection',
       'isTypeAssessment',
       'multipleSendings',
       'isForAbsoluteNovice',
