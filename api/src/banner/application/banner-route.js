@@ -5,9 +5,12 @@ const register = async function (server) {
     {
       method: 'GET',
       path: '/api/information-banners/{target}',
-      config: {
+      options: {
         auth: false,
         handler: bannerController.getInformationBanner,
+        cache: {
+          expiresIn: 30 * 1000,
+        },
       },
     },
   ]);
