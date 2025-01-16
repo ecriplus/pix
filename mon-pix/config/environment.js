@@ -42,6 +42,7 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       API_HOST: process.env.API_HOST || '',
+      APPLICATION_NAME: process.env.APP || 'pix-app-local',
       FT_FOCUS_CHALLENGE_ENABLED: _isFeatureEnabled(process.env.FT_FOCUS_CHALLENGE_ENABLED) || false,
       isTimerCountdownEnabled: true,
       LOAD_EXTERNAL_SCRIPT: true,
@@ -58,6 +59,13 @@ module.exports = function (environment) {
       }),
       BANNER_CONTENT: process.env.BANNER_CONTENT || '',
       BANNER_TYPE: process.env.BANNER_TYPE || '',
+      INFORMATION_BANNER_POLLING_TIME:
+        1000 *
+        _getEnvironmentVariableAsNumber({
+          environmentVariableName: process.env.INFORMATION_BANNER_POLLING_TIME,
+          defaultValue: 10,
+          minValue: 2,
+        }),
       IS_PROD_ENVIRONMENT: (process.env.REVIEW_APP === 'false' && environment === 'production') || false,
       EMBED_ALLOWED_ORIGINS: (
         process.env.EMBED_ALLOWED_ORIGINS || 'https://epreuves.pix.fr,https://1024pix.github.io'
