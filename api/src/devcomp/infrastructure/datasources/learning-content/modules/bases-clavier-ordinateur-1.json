@@ -5,7 +5,7 @@
   "isBeta": false,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>Dans ce module, vous découvrirez ce qu’est un clavier et à quoi il sert.<span aria-hidden=\"true\">⌨️</span><br>Vous apprendrez à taper vos premiers caractères et à modifier du texte.<br>Pour ce module, vous devez déjà savoir utiliser une souris d’ordinateur.</p>",
+    "description": "<p>Dans ce module, vous découvrirez ce qu’est un clavier et à quoi il sert. <span aria-hidden=\"true\">⌨️</span><br>Vous apprendrez à taper vos premiers caractères et à modifier du texte.<br>Pour ce module, vous devez déjà savoir utiliser une souris d’ordinateur.</p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
@@ -119,7 +119,7 @@
                 {
                   "id": "1f25f056-78ad-42cd-8679-49188fe4e2a2",
                   "type": "text",
-                  "content": "<p><span aria-hidden=\"true\">🤔</span><strong>Bon à savoir</strong> </p>\n<p>Les touches peuvent être disposées de différentes manières, en fonction des modèles, des pays et de la langue. <span aria-hidden=\"true\">🌍</span></p><p>En France, on utilise le clavier AZERTY. Il porte ce nom, car les lettres A, Z, E, R, T, Y sont les six premières lettres affichées sur le clavier\n</p>"
+                  "content": "<p><span aria-hidden=\"true\">🤔</span> <strong>Bon à savoir</strong> </p>\n<p>Les touches peuvent être disposées de différentes manières, en fonction des modèles, des pays et de la langue. <span aria-hidden=\"true\">🌍</span></p><p>En France, on utilise le clavier AZERTY. Il porte ce nom, car les lettres A, Z, E, R, T, Y sont les six premières lettres affichées sur le clavier\n</p>"
                 }
               ]
             },
@@ -151,7 +151,7 @@
           "element": {
             "id": "e4c30736-5efe-4a0d-bacc-b41e3546d47c",
             "type": "text",
-            "content": "<p>Pour taper et modifier du texte, il faut utiliser des touches de différentes zones.</p>\n<p><span aria-hidden=\"true\">👇</span> Voici les touches essentielles :</p>"
+            "content": "<p>Pour taper et modifier du texte, il faut utiliser des touches de différentes zones.</p><p><span aria-hidden=\"true\">👇</span> Voici les touches essentielles :</p>"
           }
         },
         {
@@ -202,7 +202,7 @@
                 {
                   "id": "e7390f32-cf29-49c4-af61-cb0ee142d06e",
                   "type": "text",
-                  "content": "<p>Une zone de texte est un endroit où on peut taper, modifier et effacer du texte. Pour reconnaître une zone de texte, vous pouvez vous aider du pointeur de la souris. <span aria-hidden=\"true\">🖱️</span></p>\n<p>Lorsque vous faites glisser votre pointeur sur une zone de texte, il prend la forme d’une barre verticale.</p>"
+                  "content": "<p>Une zone de texte est un endroit où on peut taper, modifier et effacer du texte. Pour reconnaître une zone de texte, vous pouvez vous aider du pointeur de la souris. <span aria-hidden=\"true\">🖱️</span></p><p>Lorsque vous faites glisser votre pointeur sur une zone de texte, il prend la forme d’une barre verticale.</p>"
                 },
                 {
                   "id": "7923e0aa-3e35-493d-8d42-0b29cdc0ed08",
@@ -251,7 +251,7 @@
                   ],
                   "feedbacks": {
                     "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span> <span aria-hidden=\"true\">🥒</span></p><p>Bravo ! C’est le bon mot !</p>",
-                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br><span aria-hidden=\"true\">🍽️</span></p><p>Bravo ! Mais ce n’est pas le bon mot. Réessayez !</p>"
+                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span> <span aria-hidden=\"true\">🍽️</span></p><p>Bravo ! Mais ce n’est pas le bon mot. Réessayez !</p>"
                   }
                 }
               ]
@@ -330,7 +330,7 @@
                 {
                   "id": "6dee7fcf-7faf-4748-9c56-70e93d7d4914",
                   "type": "text",
-                  "content": "<p>Pour déplacer le curseur de texte, vous pouvez utiliser les <strong>Flèches directionnelles</strong>.</p>\n<p><span aria-hidden=\"true\">➡️</span> Par exemple : vous avez oublié de mettre un espace entre table et chaise, vous pouvez déplacer le curseur pour ajouter cet espace.</p>"
+                  "content": "<p>Pour déplacer le curseur de texte, vous pouvez utiliser les <strong>Flèches directionnelles</strong>.</p><p><span aria-hidden=\"true\">➡️</span> Par exemple : vous avez oublié de mettre un espace entre table et chaise, vous pouvez déplacer le curseur pour ajouter cet espace.</p>"
                 },
                 {
                   "id": "5d93c1b7-2f8d-4891-9443-9a2f86104f4e",
