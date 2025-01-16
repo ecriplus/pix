@@ -2,9 +2,9 @@ import Joi from 'joi';
 
 import { PayloadTooLargeError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { MAX_FILE_SIZE_UPLOAD } from '../../../shared/domain/constants.js';
 import { identifiersType, queriesType } from '../../../shared/domain/types/identifiers-type.js';
 import { campaignAdministrationController } from './campaign-adminstration-controller.js';
-const TWENTY_MEGABYTES = 1048576 * 20;
 
 const ERRORS = {
   PAYLOAD_TOO_LARGE: 'PAYLOAD_TOO_LARGE',
@@ -109,7 +109,7 @@ const register = async function (server) {
           },
         ],
         payload: {
-          maxBytes: TWENTY_MEGABYTES,
+          maxBytes: MAX_FILE_SIZE_UPLOAD,
           output: 'file',
           parse: 'gunzip',
           failAction: (_, h) => {
@@ -242,7 +242,7 @@ const register = async function (server) {
           },
         ],
         payload: {
-          maxBytes: TWENTY_MEGABYTES,
+          maxBytes: MAX_FILE_SIZE_UPLOAD,
           output: 'file',
           failAction: (request, h) => {
             return sendJsonApiError(

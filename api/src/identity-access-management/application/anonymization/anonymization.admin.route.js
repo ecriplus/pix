@@ -1,11 +1,11 @@
 import { PayloadTooLargeError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { MAX_FILE_SIZE_UPLOAD } from '../../../shared/domain/constants.js';
 import { anonymizationAdminController } from './anonymization.admin.controller.js';
 
 const ERRORS = {
   PAYLOAD_TOO_LARGE: 'PAYLOAD_TOO_LARGE',
 };
-const TWENTY_MEGABYTES = 1048576 * 20;
 
 export const anonymizationAdminRoutes = [
   {
@@ -19,7 +19,7 @@ export const anonymizationAdminRoutes = [
         },
       ],
       payload: {
-        maxBytes: TWENTY_MEGABYTES,
+        maxBytes: MAX_FILE_SIZE_UPLOAD,
         output: 'file',
         failAction: (request, h) => {
           return sendJsonApiError(
