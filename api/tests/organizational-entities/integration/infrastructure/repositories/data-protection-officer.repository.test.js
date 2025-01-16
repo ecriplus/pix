@@ -80,6 +80,37 @@ describe('Integration | Organizational Entities | Repository | data-protection-o
     });
   });
 
+  describe('#deleteByOrganizationId', function () {
+    it('deletes DPO from data protection officers table by organisation id ', async function () {
+      // given
+      const organization = databaseBuilder.factory.buildOrganization();
+      const organization2 = databaseBuilder.factory.buildOrganization();
+      databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
+        firstName: 'Justin',
+        lastName: 'Ninstan',
+        email: 'justin-ninstan@example.net',
+        organizationId: organization.id,
+      });
+      databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
+        firstName: 'Justin',
+        lastName: 'Ninstan',
+        email: 'justin-ninstan@example.net',
+        organizationId: organization2.id,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+
+      await dataProtectionOfficerRepository.deleteDpoByOrganizationId(organization2.id);
+
+      // then
+      const dataProtectionOfficers = await knex('data-protection-officers').select();
+      expect(dataProtectionOfficers).to.have.lengthOf(1);
+      expect(dataProtectionOfficers[0]).to.have.property('organizationId', organization.id);
+    });
+  });
+
   describe('#get', function () {
     context('when DPO exists', function () {
       it('returns a DPO domain object', async function () {
