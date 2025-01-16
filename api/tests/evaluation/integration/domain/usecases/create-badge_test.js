@@ -1,10 +1,10 @@
 import _ from 'lodash';
 
-import * as targetProfileRepository from '../../../../../lib/infrastructure/repositories/target-profile-repository.js';
 import { Badge } from '../../../../../src/evaluation/domain/models/Badge.js';
 import { createBadge } from '../../../../../src/evaluation/domain/usecases/create-badge.js';
 import * as badgeCriteriaRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-criteria-repository.js';
 import * as badgeRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-repository.js';
+import * as targetProfileRepository from '../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
 import {
   AlreadyExistingEntityError,
   MissingBadgeCriterionError,
