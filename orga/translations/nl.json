@@ -843,7 +843,7 @@
       "organization-code": "UAI/RNE van de instelling"
     },
     "login-form": {
-      "active-or-retrieve": "Activeer of herstel je Pix Orga-ruimte",
+      "active-or-retrieve": "Are you a headteacher? Activate or become the administrator of your school's Pix Orga space",
       "email": "E-mailadres",
       "errors": {
         "empty-password": "Het veld wachtwoord is verplicht.",

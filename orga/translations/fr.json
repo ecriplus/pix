@@ -853,7 +853,7 @@
       "title": "Connectez-vous"
     },
     "login-form": {
-      "active-or-retrieve": "Activez ou récupérez votre espace Pix Orga",
+      "active-or-retrieve": "Vous êtes personnel de direction ? Activez ou devenez l'administrateur de l'espace Pix Orga de votre établissement scolaire",
       "email": "Adresse e-mail",
       "errors": {
         "empty-password": "Le champ mot de passe est obligatoire.",
