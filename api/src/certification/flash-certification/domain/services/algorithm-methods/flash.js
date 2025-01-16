@@ -40,7 +40,7 @@ function getPossibleNextChallenges({ availableChallenges, capacity = DEFAULT_CAP
 }
 
 function getCapacityAndErrorRate({ allAnswers, challenges, capacity = DEFAULT_CAPACITY, variationPercent }) {
-  if (allAnswers.length === 0) {
+  if (challenges.length === 0 || allAnswers.length === 0) {
     return { capacity, errorRate: DEFAULT_ERROR_RATE };
   }
 
