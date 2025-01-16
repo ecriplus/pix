@@ -217,14 +217,14 @@ const update = async function (organization) {
 };
 
 /**
- * @typedef {Object} OrganizationForAdminRepository
- * @property {archive} archive
- * @property {exist} exist
- * @property {findChildrenByParentOrganizationId} findChildrenByParentOrganizationId
- * @property {get} get
- * @property {save} save
- * @property {update} update
+ * @type {function}
+ * @param organizationId
+ * @return {Promise<void>}
  */
+const deleteById = async function (organizationId) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn(ORGANIZATIONS_TABLE_NAME).where({ id: organizationId }).delete();
+};
 
 async function _addOrUpdateDataProtectionOfficer(knexConn, dataProtectionOfficer) {
   await knexConn(DATA_PROTECTION_OFFICERS_TABLE_NAME)
@@ -320,4 +320,12 @@ function _toDomain(rawOrganization) {
   return organization;
 }
 
-export const organizationForAdminRepository = { archive, exist, findChildrenByParentOrganizationId, get, save, update };
+export const organizationForAdminRepository = {
+  archive,
+  exist,
+  findChildrenByParentOrganizationId,
+  get,
+  save,
+  update,
+  deleteById,
+};
