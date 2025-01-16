@@ -165,7 +165,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         const expirationDelaySeconds = '';
 
         tokenService.createAccessTokenFromUser
-          .withArgs(user.id, source)
+          .withArgs({ userId: user.id, source, audience })
           .resolves({ accessToken, expirationDelaySeconds });
 
         // when
@@ -214,7 +214,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           sinon.stub(RefreshToken, 'generate').returns(refreshToken);
 
           tokenService.createAccessTokenFromUser
-            .withArgs(user.id, source)
+            .withArgs({ userId: user.id, source, audience })
             .resolves({ accessToken, expirationDelaySeconds });
 
           // when
@@ -256,7 +256,9 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     const refreshToken = { value: 'jwt.refresh.token', userId: '456', scope, audience };
     sinon.stub(RefreshToken, 'generate').returns(refreshToken);
 
-    tokenService.createAccessTokenFromUser.withArgs(user.id, source).resolves({ accessToken, expirationDelaySeconds });
+    tokenService.createAccessTokenFromUser
+      .withArgs({ userId: user.id, source, audience })
+      .resolves({ accessToken, expirationDelaySeconds });
 
     // when
     const result = await authenticateUser({
@@ -292,7 +294,9 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     const user = domainBuilder.buildUser({ email: userEmail });
 
     pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
-    tokenService.createAccessTokenFromUser.withArgs(user.id, source).resolves({ accessToken, expirationDelaySeconds });
+    tokenService.createAccessTokenFromUser
+      .withArgs({ userId: user.id, source, audience })
+      .resolves({ accessToken, expirationDelaySeconds });
 
     // when
     await authenticateUser({
