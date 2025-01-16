@@ -33,8 +33,9 @@ describe('Certification | Session-management | Unit | Application | Controller |
     it('should fire a CertificationCancelled event', async function () {
       // given
       const certificationCourseId = 123;
+      const juryId = 456;
       const events = { eventDispatcher: { dispatch: sinon.stub() } };
-      const expectedEvent = new CertificationCancelled({ certificationCourseId });
+      const expectedEvent = new CertificationCancelled({ certificationCourseId, juryId });
       sinon.stub(usecases, 'cancelCertificationCourse');
       const request = {
         auth: {
