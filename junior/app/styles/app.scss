@@ -11,6 +11,7 @@
 @import 'globals/fonts';
 
 // Components
+@import 'components/challenge/challenge';
 @import 'components/challenge/challenge-actions';
 @import 'components/challenge/challenge-embed-simulator';
 @import 'components/challenge/challenge-content';
@@ -23,6 +24,7 @@
 @import 'components/bubble';
 @import 'components/footer';
 @import 'components/issue';
+@import 'components/identified-learner';
 @import 'components/oralization-button';
 @import 'components/robot-dialog';
 

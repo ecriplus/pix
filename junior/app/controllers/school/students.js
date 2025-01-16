@@ -14,6 +14,7 @@ export default class Students extends Controller {
   identifyUser(learner) {
     this.currentLearner.setLearner({
       id: learner.id,
+      displayName: learner.displayName,
       schoolUrl: this.model.schoolUrl,
     });
     styleToolkit.backgroundBlob.reset();

@@ -3,6 +3,12 @@
   flex-direction: column;
   align-content: center;
 
+  .header_container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
   .button-actions__icon {
     width: 20px;
     height: 20px;

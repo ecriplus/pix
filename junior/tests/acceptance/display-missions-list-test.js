@@ -20,6 +20,7 @@ module('Acceptance | Display missions list', function (hooks) {
 
     identifyLearner(this.owner, {
       id: learner.id,
+      displayName: 'learner',
       completedMissionIds: learner.completedMissionIds,
       startedMissionIds: learner.startedMissionIds,
     });
@@ -68,7 +69,12 @@ module('Acceptance | Display missions list', function (hooks) {
       )
       .exists();
 
-    const missionsList = screen.getAllByRole('button');
+    const allButton = screen.getAllByRole('button');
+    //Permet de retirer le boutton de logout de <identifiedLearner/>
+    const missionsList = allButton.filter(
+      (mission) => !mission.textContent.includes(t('components.login.logout-button')),
+    );
+
     assert.strictEqual(missionsList.length, 3);
 
     assert.true(missionsList[0].innerHTML.includes('mission_2'));

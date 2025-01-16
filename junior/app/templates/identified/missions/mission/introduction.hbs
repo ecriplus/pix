@@ -2,12 +2,15 @@
 
 <Challenge::ChallengeLayout>
   <div class="mission-introduction">
-    <RobotDialog>
-      <Bubble
-        @message={{t "pages.missions.introduction-page.welcome"}}
-        @oralization={{@model.learnerHasOralizationFeature}}
-      />
-    </RobotDialog>
+    <div class="header_container">
+      <RobotDialog>
+        <Bubble
+          @message={{t "pages.missions.introduction-page.welcome"}}
+          @oralization={{@model.learnerHasOralizationFeature}}
+        />
+      </RobotDialog>
+      <IdentifiedLearner />
+    </div>
     <div class="mission-introduction__container">
       <div class="mission-introduction__media">
         <Challenge::Content::ChallengeMedia

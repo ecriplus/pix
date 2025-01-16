@@ -1,0 +1,11 @@
+.header_container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  .identified-learner {
+    // Negative margin to set identified user outside the container on the far right
+    // Equals half of the total margin outside the challenge content + offset
+    margin-right: calc(((100% - 100vw) / 2) + 45px);
+  }
+}
