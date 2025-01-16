@@ -5,6 +5,7 @@ const createAccessTokenFromRefreshToken = async function ({
   scope,
   refreshTokenRepository,
   tokenService,
+  audience,
 }) {
   const foundRefreshToken = await refreshTokenRepository.findByToken({ token: refreshToken });
 
@@ -14,7 +15,11 @@ const createAccessTokenFromRefreshToken = async function ({
     throw new UnauthorizedError('Refresh token is invalid', 'INVALID_REFRESH_TOKEN');
   }
 
-  return tokenService.createAccessTokenFromUser(foundRefreshToken.userId, foundRefreshToken.source);
+  return tokenService.createAccessTokenFromUser({
+    userId: foundRefreshToken.userId,
+    source: foundRefreshToken.source,
+    audience,
+  });
 };
 
 export { createAccessTokenFromRefreshToken };

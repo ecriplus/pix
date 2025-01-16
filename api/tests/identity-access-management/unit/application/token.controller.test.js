@@ -99,13 +99,17 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
         const expirationDelaySeconds = 6666;
         const refreshToken = 'refresh.token';
         const request = {
-          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+          headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'x-forwarded-proto': 'http-proto',
+            'x-forwarded-host': 'pix/toto',
+          },
           payload: { grant_type: 'refresh_token', refresh_token: refreshToken, scope },
         };
 
         sinon
           .stub(usecases, 'createAccessTokenFromRefreshToken')
-          .withArgs({ refreshToken, scope })
+          .withArgs({ refreshToken, scope, audience })
           .resolves({ accessToken, expirationDelaySeconds });
 
         const tokenServiceStub = { extractUserId: sinon.stub() };

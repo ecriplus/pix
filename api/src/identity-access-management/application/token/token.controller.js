@@ -51,7 +51,7 @@ const createToken = async function (request, h, dependencies = { tokenService })
   } else if (grantType === 'refresh_token') {
     refreshToken = request.payload.refresh_token;
 
-    const tokensInfo = await usecases.createAccessTokenFromRefreshToken({ refreshToken, scope });
+    const tokensInfo = await usecases.createAccessTokenFromRefreshToken({ refreshToken, scope, audience: origin });
 
     accessToken = tokensInfo.accessToken;
     expirationDelaySeconds = tokensInfo.expirationDelaySeconds;
