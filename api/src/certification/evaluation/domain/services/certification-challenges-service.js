@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import * as certifiableProfileForLearningContentRepository from '../../../../../lib/infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
 import * as learningContentRepository from '../../../../../lib/infrastructure/repositories/learning-content-repository.js';
 import {
   MAX_CHALLENGES_PER_AREA_FOR_CERTIFICATION_PLUS,
@@ -13,6 +12,7 @@ import { KnowledgeElement } from '../../../../shared/domain/models/KnowledgeElem
 import * as answerRepository from '../../../../shared/infrastructure/repositories/answer-repository.js';
 import * as challengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
+import * as certifiableProfileForLearningContentRepository from '../../infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
 
 const pickCertificationChallenges = async function (
   placementProfile,

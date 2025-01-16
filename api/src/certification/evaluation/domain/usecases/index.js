@@ -7,6 +7,7 @@ import * as placementProfileService from '../../../../shared/domain/services/pla
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as verifyCertificateCodeService from '../../../evaluation/domain/services/verify-certificate-code-service.js';
+import * as certifiableProfileForLearningContentRepository from '../../../evaluation/infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
 import * as flashAlgorithmService from '../../../flash-certification/domain/services/algorithm-methods/flash.js';
 import {
   answerRepository,
@@ -34,6 +35,7 @@ import * as certificationChallengesService from '../services/certification-chall
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
  * @typedef {certificationChallengeRepository} CertificationChallengeRepository
  * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
+ * @typedef {certifiableProfileForLearningContentRepository} CertifiableProfileForLearningContentRepository
  */
 
 const dependencies = {
@@ -41,6 +43,7 @@ const dependencies = {
   sessionManagementCertificationChallengeRepository,
   challengeCalibrationRepository,
   certificationCandidateRepository,
+  certifiableProfileForLearningContentRepository,
   assessmentRepository,
   sharedCertificationCandidateRepository,
   verifyCertificateCodeService,
