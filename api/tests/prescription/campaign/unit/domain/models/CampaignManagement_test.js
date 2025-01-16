@@ -3,7 +3,7 @@ import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/
 import { expect } from '../../../../../test-helper.js';
 
 describe('CampaignManagement', function () {
-  it('returns correct object', function () {
+  it('returns correct object including inherited properties', function () {
     const input = {
       id: 1,
       code: 'code',
@@ -12,32 +12,37 @@ describe('CampaignManagement', function () {
       idPixLabel: 'idPixLabel',
       idPixType: 'idPixType',
       createdAt: new Date(2020, 10, 23),
+      alternativeTextToExternalIdHelpImage: null,
       archivedAt: new Date(2021, 10, 23),
+      archivedBy: null,
+      assessmentMethod: null,
       deletedAt: null,
-      creatorLastName: 'creatorLastName',
-      creatorFirstName: 'creatorFirstName',
+      deletedBy: null,
+      externalIdHelpImageUrl: null,
+      hasParticipation: true,
       creatorId: 123,
       organizationId: 456,
-      organizationName: 'organizationName',
       targetProfileId: 678,
-      targetProfileName: 'targetProfileName',
-      isForAbsoluteNovice: false,
       title: 'title',
       customLandingPageText: 'customLandingPageText',
       customResultPageText: 'customResultPageText',
       customResultPageButtonText: 'customResultPageButtonText',
       customResultPageButtonUrl: 'customResultPageButtonUrl',
+      multipleSendings: 'multipleSendings',
+      isForAbsoluteNovice: false,
+      creatorLastName: 'creatorLastName',
+      creatorFirstName: 'creatorFirstName',
+      organizationName: 'organizationName',
+      targetProfileName: 'targetProfileName',
       ownerLastName: 'ownerLastName',
       ownerFirstName: 'ownerFirstName',
       ownerId: 234,
-      multipleSendings: 'multipleSendings',
       shared: 5,
       started: 3,
       completed: 2,
     };
-    const campaignManagement = new CampaignManagement(input);
 
-    expect(campaignManagement).to.deep.equal({
+    const expected = {
       id: 1,
       code: 'code',
       name: 'name',
@@ -45,28 +50,38 @@ describe('CampaignManagement', function () {
       idPixLabel: 'idPixLabel',
       idPixType: 'idPixType',
       createdAt: new Date(2020, 10, 23),
+      alternativeTextToExternalIdHelpImage: null,
       archivedAt: new Date(2021, 10, 23),
+      archivedBy: null,
+      assessmentMethod: null,
       deletedAt: null,
-      creatorLastName: 'creatorLastName',
-      creatorFirstName: 'creatorFirstName',
+      deletedBy: null,
+      externalIdHelpImageUrl: null,
+      hasParticipation: true,
       creatorId: 123,
       organizationId: 456,
-      organizationName: 'organizationName',
       targetProfileId: 678,
-      targetProfileName: 'targetProfileName',
-      isForAbsoluteNovice: false,
       title: 'title',
       customLandingPageText: 'customLandingPageText',
       customResultPageText: 'customResultPageText',
       customResultPageButtonText: 'customResultPageButtonText',
       customResultPageButtonUrl: 'customResultPageButtonUrl',
+      multipleSendings: 'multipleSendings',
+      isForAbsoluteNovice: false,
+      creatorLastName: 'creatorLastName',
+      creatorFirstName: 'creatorFirstName',
+      organizationName: 'organizationName',
+      targetProfileName: 'targetProfileName',
       ownerLastName: 'ownerLastName',
       ownerFirstName: 'ownerFirstName',
       ownerId: 234,
-      multipleSendings: 'multipleSendings',
       sharedParticipationsCount: 5,
       totalParticipationsCount: 10,
-    });
+    };
+
+    const campaignManagement = new CampaignManagement(input);
+
+    expect(campaignManagement).to.deep.equal(expected);
   });
 
   describe('#totalParticipationsCount', function () {

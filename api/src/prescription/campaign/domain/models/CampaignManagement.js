@@ -1,72 +1,30 @@
-import { CampaignTypes } from '../../../shared/domain/constants.js';
-class CampaignManagement {
+import { Campaign } from './Campaign.js';
+
+class CampaignManagement extends Campaign {
   constructor({
-    id,
-    code,
-    name,
-    idPixLabel,
-    idPixType,
-    createdAt,
-    archivedAt,
-    deletedAt,
-    type,
     creatorLastName,
     creatorFirstName,
-    creatorId,
-    organizationId,
     organizationName,
-    targetProfileId,
     targetProfileName,
-    title,
-    customLandingPageText,
-    customResultPageText,
-    customResultPageButtonText,
-    customResultPageButtonUrl,
-    isForAbsoluteNovice,
     ownerLastName,
     ownerFirstName,
     ownerId,
     shared,
     started,
     completed,
-    multipleSendings,
+    ...campaignAttributes
   } = {}) {
-    this.id = id;
-    this.code = code;
-    this.name = name;
-    this.type = type;
-    this.idPixLabel = idPixLabel;
-    this.idPixType = idPixType;
-    this.createdAt = createdAt;
-    this.archivedAt = archivedAt;
-    this.deletedAt = deletedAt;
+    super(campaignAttributes);
     this.creatorLastName = creatorLastName;
     this.creatorFirstName = creatorFirstName;
-    this.creatorId = creatorId;
-    this.organizationId = organizationId;
     this.organizationName = organizationName;
-    this.targetProfileId = targetProfileId;
     this.targetProfileName = targetProfileName;
-    this.isForAbsoluteNovice = isForAbsoluteNovice;
-    this.title = title;
-    this.customLandingPageText = customLandingPageText;
-    this.customResultPageText = customResultPageText;
-    this.customResultPageButtonText = customResultPageButtonText;
-    this.customResultPageButtonUrl = customResultPageButtonUrl;
     this.ownerLastName = ownerLastName;
     this.ownerFirstName = ownerFirstName;
     this.ownerId = ownerId;
     this.sharedParticipationsCount = shared;
     this.totalParticipationsCount = this.#computeTotalParticipation(this.sharedParticipationsCount, started, completed);
-    this.multipleSendings = multipleSendings;
-  }
-
-  get isTypeProfilesCollection() {
-    return this.type === CampaignTypes.PROFILES_COLLECTION;
-  }
-
-  get isTypeAssessment() {
-    return this.type === CampaignTypes.ASSESSMENT;
+    this.hasParticipation = this.totalParticipationsCount > 0;
   }
 
   #computeTotalParticipation(sharedParticipationsCount, started, completed) {

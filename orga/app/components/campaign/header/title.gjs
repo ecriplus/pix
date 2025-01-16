@@ -34,7 +34,7 @@ export default class Header extends Component {
   }
 
   get shouldShowMultipleSending() {
-    return this.args.campaign.isTypeProfilesCollection || this.isMultipleSendingsForAssessmentEnabled;
+    return this.args.campaign.isProfilesCollection || this.isMultipleSendingsForAssessmentEnabled;
   }
 
   get isMultipleSendingsForAssessmentEnabled() {

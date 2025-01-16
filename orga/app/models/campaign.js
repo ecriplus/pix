@@ -58,7 +58,7 @@ export default class Campaign extends Model {
     return `${this.ownerFirstName} ${this.ownerLastName}`;
   }
 
-  get isTypeProfilesCollection() {
+  get isProfilesCollection() {
     return this.type === 'PROFILES_COLLECTION';
   }
 

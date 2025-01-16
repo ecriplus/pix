@@ -44,7 +44,7 @@ async function insertMissingPoleEmploiSendingFromDate(startDate, endDate = new D
   const campaign = await campaignRepository.get(campaignByCode.id);
   const organization = await organizationRepository.get(campaign.organizationId);
 
-  if (!campaign.isAssessment() || !organization.isPoleEmploi) {
+  if (!campaign.isAssessment || !organization.isPoleEmploi) {
     throw new Error('La campagne ne respecte pas les conditions pour générer les événements');
   }
 
