@@ -1,4 +1,9 @@
 {
+  "common": {
+    "actions": {
+      "close": "Fermer"
+    }
+  },
   "components": {
     "challenge": {
       "embed-simulator": {
@@ -6,6 +11,20 @@
           "reset": "Recommencer"
         }
       }
+    },
+    "device-warning-modal": {
+      "button": {
+        "label": "Découvrir Pix Junior"
+      },
+      "mobile": {
+        "subtitle": "Merci d'utiliser Pix Junior sur une tablette ou un ordinateur.",
+        "title": "Cette résolution n’est pas prise en compte."
+      },
+      "tablet": {
+        "subtitle": "Tourne ta tablette pour commencer à utiliser Pix Junior.",
+        "title": "Oups, ta tablette n'est pas dans le bon sens..."
+      },
+      "title": "Écran dans le mauvais sens"
     },
     "oralization-button": {
       "label": "Lire la consigne à haute voix",
