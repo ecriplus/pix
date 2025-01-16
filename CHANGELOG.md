@@ -1,5 +1,34 @@
 # Pix Changelog
 
+## v5.18.0 (16/01/2025)
+
+
+### :rocket: Amélioration
+- [#11087](https://github.com/1024pix/pix/pull/11087) [FEATURE] Ajuster la mention "Activez ou récupérer votre espace Pix Orga" car elle crée de la confusion pour nos utilisateurs (PIX-16035).
+- [#11125](https://github.com/1024pix/pix/pull/11125) [FEATURE] Ajouter plusieurs paliers d'un seul coup (PIX-15833).
+- [#11059](https://github.com/1024pix/pix/pull/11059) [FEATURE] Afficher la légende et la licence d'une image dans un module (PIX-15991).
+
+### :building_construction: Tech
+- [#11120](https://github.com/1024pix/pix/pull/11120) [TECH] :broom: Supprime des simulateurs de scoring qui ne sont plus utilisés.
+- [#11116](https://github.com/1024pix/pix/pull/11116) [TECH] :truck: Déplace le repository `audit logger` vers `src/`.
+- [#11119](https://github.com/1024pix/pix/pull/11119) [TECH] :truck: Déplace l'événement `CertificationScoringCompleted` dans `src/`.
+- [#11106](https://github.com/1024pix/pix/pull/11106) [TECH] Migration de la route /api/admin/tags/{id}/recently-used (PIX-16086).
+- [#11100](https://github.com/1024pix/pix/pull/11100) [TECH] Migration de la route GET /api/admin/tags (PIX-16084).
+- [#11112](https://github.com/1024pix/pix/pull/11112) [TECH] Ajout du prefixe application a Parcoursup (PIX-16090).
+- [#11098](https://github.com/1024pix/pix/pull/11098) [TECH] Migration de la route /api/admin/users/{userId}/authentication-methods/{methodId} (PIX-16083).
+- [#11110](https://github.com/1024pix/pix/pull/11110) [TECH] :truck: Déplace l'événement `certification jury done` vers `src/`.
+- [#11113](https://github.com/1024pix/pix/pull/11113) [TECH] :truck: Déplace `Certification rescored by script event` vers `src/`.
+
+### :bug: Correction
+- [#11102](https://github.com/1024pix/pix/pull/11102) [BUGFIX] Corriger les phrases d'acceptation des CGUs partie 2 (PIX-16000).
+- [#11121](https://github.com/1024pix/pix/pull/11121) [BUGFIX] Autoriser les certifs terminées par finalisation à être rescorées (PIX-16107).
+- [#11099](https://github.com/1024pix/pix/pull/11099) [BUGFIX] Si l'utilisateur a un identifiant renseigné alors le champ "e-mail" ne doit pas être obligatoire dans Pix Admin (PIX-15540).
+
+### :arrow_up: Montée de version
+- [#11126](https://github.com/1024pix/pix/pull/11126) [BUMP] Update dependency @1024pix/pix-ui to ^53.1.6 (orga).
+- [#11122](https://github.com/1024pix/pix/pull/11122) [BUMP] Update dependency @1024pix/pix-ui to ^53.1.6 (certif).
+- [#11091](https://github.com/1024pix/pix/pull/11091) [BUMP] Update dependency @1024pix/pix-ui to v53 (certif).
+
 ## v5.17.0 (15/01/2025)
 
 
