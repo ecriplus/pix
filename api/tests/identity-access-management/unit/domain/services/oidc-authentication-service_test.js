@@ -118,11 +118,12 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
   });
 
   describe('#createAccessToken', function () {
-    it('creates access token with user id', function () {
+    it('creates access token with user id and audience', function () {
       // given
       const userId = 42;
       const accessToken = Symbol('valid access token');
-      const payload = { user_id: userId };
+      const audience = 'http-proto://pix/toto';
+      const payload = { user_id: userId, aud: audience };
       const jwtOptions = { expiresIn: ms('48h') / 1000 };
       sinon
         .stub(jsonwebtoken, 'sign')
@@ -132,7 +133,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       const oidcAuthenticationService = new OidcAuthenticationService(settings.oidcExampleNet);
 
       // when
-      const result = oidcAuthenticationService.createAccessToken(userId);
+      const result = oidcAuthenticationService.createAccessToken({ userId, audience });
 
       // then
       expect(result).to.equal(accessToken);

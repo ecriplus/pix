@@ -73,7 +73,7 @@ async function authenticateOidcUser({
     authenticationMethodRepository,
   });
 
-  const pixAccessToken = oidcAuthenticationService.createAccessToken(user.id);
+  const pixAccessToken = oidcAuthenticationService.createAccessToken({ userId: user.id });
 
   let logoutUrlUUID;
   if (oidcAuthenticationService.shouldCloseSession) {

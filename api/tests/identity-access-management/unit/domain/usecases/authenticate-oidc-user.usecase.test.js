@@ -401,7 +401,9 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           .withArgs({ externalIdentityId, identityProvider: oidcAuthenticationService.identityProvider })
           .resolves({ id: 10 });
         oidcAuthenticationService.createAuthenticationComplement.returns(undefined);
-        oidcAuthenticationService.createAccessToken.withArgs(10).returns('accessTokenForExistingExternalUser');
+        oidcAuthenticationService.createAccessToken
+          .withArgs({ userId: 10 })
+          .returns('accessTokenForExistingExternalUser');
         oidcAuthenticationService.saveIdToken
           .withArgs({ idToken: sessionContent.idToken, userId: 10 })
           .resolves('logoutUrlUUID');

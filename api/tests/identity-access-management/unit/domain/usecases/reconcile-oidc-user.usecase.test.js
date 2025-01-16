@@ -220,7 +220,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
           expiredDate: new Date(),
         }),
       );
-      oidcAuthenticationService.createAccessToken.withArgs(userId).returns('accessToken');
+      oidcAuthenticationService.createAccessToken.withArgs({ userId }).returns('accessToken');
       oidcAuthenticationService.saveIdToken
         .withArgs({ idToken: sessionContent.idToken, userId })
         .resolves('logoutUrlUUID');

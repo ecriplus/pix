@@ -109,7 +109,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         firstName: 'Anne',
       }),
     );
-    oidcAuthenticationService.createAccessToken.withArgs(userId).returns('accessToken');
+    oidcAuthenticationService.createAccessToken.withArgs({ userId }).returns('accessToken');
 
     // when
     const result = await reconcileOidcUserForAdmin({
@@ -122,7 +122,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
     });
 
     // then
-    expect(oidcAuthenticationService.createAccessToken).to.be.calledOnceWith(userId);
+    expect(oidcAuthenticationService.createAccessToken).to.be.calledOnceWith({ userId });
     expect(userLoginRepository.updateLastLoggedAt).to.be.calledOnceWith({ userId });
     expect(result).to.equal('accessToken');
   });

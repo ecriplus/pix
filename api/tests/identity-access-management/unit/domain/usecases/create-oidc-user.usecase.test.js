@@ -102,7 +102,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
       .withArgs({ externalIdentifier: 'externalId', identityProvider: 'SOME_IDP' })
       .resolves(null);
     oidcAuthenticationService.createUserAccount.resolves(10);
-    oidcAuthenticationService.createAccessToken.withArgs(10).returns('accessTokenForExistingExternalUser');
+    oidcAuthenticationService.createAccessToken.withArgs({ userId: 10 }).returns('accessTokenForExistingExternalUser');
     oidcAuthenticationService.saveIdToken.withArgs({ idToken, userId: 10 }).resolves('logoutUrlUUID');
 
     // when

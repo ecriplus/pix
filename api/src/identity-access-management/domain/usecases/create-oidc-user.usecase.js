@@ -68,7 +68,7 @@ async function createOidcUser({
     authenticationMethodRepository,
   });
 
-  const accessToken = oidcAuthenticationService.createAccessToken(userId);
+  const accessToken = oidcAuthenticationService.createAccessToken({ userId });
 
   let logoutUrlUUID;
   if (oidcAuthenticationService.shouldCloseSession) {

@@ -58,7 +58,7 @@ export const reconcileOidcUserForAdmin = async function ({
     }),
   });
 
-  const accessToken = await oidcAuthenticationService.createAccessToken(userId);
+  const accessToken = await oidcAuthenticationService.createAccessToken({ userId });
   await userLoginRepository.updateLastLoggedAt({ userId });
 
   return accessToken;

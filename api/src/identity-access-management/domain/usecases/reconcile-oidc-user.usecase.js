@@ -52,7 +52,7 @@ export const reconcileOidcUser = async function ({
     }),
   });
 
-  const accessToken = await oidcAuthenticationService.createAccessToken(userId);
+  const accessToken = await oidcAuthenticationService.createAccessToken({ userId });
 
   let logoutUrlUUID;
   if (oidcAuthenticationService.shouldCloseSession) {
