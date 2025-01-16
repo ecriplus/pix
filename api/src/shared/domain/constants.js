@@ -2,7 +2,7 @@ import { config } from '../config.js';
 
 const LEVENSHTEIN_DISTANCE_MAX_RATE = 0.25;
 
-const MAX_FILE_SIZE_UPLOAD = 1048576 * 20;
+const MAX_FILE_SIZE_UPLOAD = 1048576 * 20; // 20 Mb
 
 const LOCALE = {
   ENGLISH_SPOKEN: 'en',
