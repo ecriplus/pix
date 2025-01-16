@@ -339,7 +339,7 @@
                     {
                       "id": "2",
                       "content": "<p>Il y a des achats intégrés dans ce jeu, mais pas de loot boxes.<br></p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Le pictogramme «&nbsp;Achats intégrés&nbsp;» est à côté du pictogramme «&nbsp;PEGI 7&nbsp;» sur cette boîte. Si le jeu contenait des Loot boxes, il y aurait aussi la mention «&nbsp;Inclut des contenus aléatoires&nbsp;».</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Le pictogramme «&nbsp;Achats intégrés&nbsp;» est à côté du pictogramme «&nbsp;PEGI 3&nbsp;» sur cette boîte. Si le jeu contenait des Loot boxes, il y aurait aussi la mention «&nbsp;Inclut des contenus aléatoires&nbsp;».</p>"
                     },
                     {
                       "id": "3",
