@@ -34,7 +34,10 @@ export default function makeServer(config) {
     urlPrefix: 'http://localhost:3000',
   };
 
-  return createServer(finalConfig);
+  const server = createServer(finalConfig);
+  server.create('information-banner', 'withoutBanners');
+
+  return server;
 }
 
 /* eslint ember/no-get: off */
@@ -572,5 +575,12 @@ function routes() {
     organization.save();
 
     return new Response(204);
+  });
+
+  this.get('/information-banners/:target', (schema, request) => {
+    const { target } = request.params;
+    console.log(target);
+    console.log(schema.informationBanners.all());
+    return schema.informationBanners.find(target);
   });
 }
