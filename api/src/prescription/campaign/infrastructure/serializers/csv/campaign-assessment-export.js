@@ -27,6 +27,7 @@ class CampaignAssessmentExport {
     this.stageCollection = stageCollection;
     this.idPixLabel = campaign.idPixLabel;
     this.competences = learningContent.competences;
+    this.areas = learningContent.areas;
     this.translate = translate;
     this.additionalHeaders = additionalHeaders;
   }
@@ -117,7 +118,7 @@ class CampaignAssessmentExport {
   }
 
   #competenceColumnHeaders() {
-    return _.flatMap(this.learningContent.competences, (competence) => [
+    return _.flatMap(this.competences, (competence) => [
       this.translate('campaign-export.assessment.skill.mastery-percentage', { name: competence.name }),
       this.translate('campaign-export.assessment.skill.total-items', { name: competence.name }),
       this.translate('campaign-export.assessment.skill.items-successfully-completed', { name: competence.name }),
@@ -125,7 +126,7 @@ class CampaignAssessmentExport {
   }
 
   #areaColumnHeaders() {
-    return _.flatMap(this.learningContent.areas, (area) => [
+    return _.flatMap(this.areas, (area) => [
       this.translate('campaign-export.assessment.competence-area.mastery-percentage', { name: area.title }),
       this.translate('campaign-export.assessment.competence-area.total-items', { name: area.title }),
       this.translate('campaign-export.assessment.competence-area.items-successfully-completed', { name: area.title }),
@@ -147,6 +148,8 @@ class CampaignAssessmentExport {
       targetProfile: this.targetProfile,
       additionalHeaders: this.additionalHeaders,
       learningContent: this.learningContent,
+      areas: this.areas,
+      competences: this.competences,
       stageCollection: this.stageCollection,
       participantKnowledgeElementsByCompetenceId: await this.#getParticipantKnowledgeElementsByCompetenceId({
         campaignParticipationInfo,
