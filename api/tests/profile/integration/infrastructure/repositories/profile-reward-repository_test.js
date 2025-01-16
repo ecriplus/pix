@@ -35,7 +35,7 @@ describe('Profile | Integration | Repository | profile-reward', function () {
       expect(result[0].rewardType).to.equal(REWARD_TYPES.ATTESTATION);
     });
 
-    it('should not throw error if user already have reward', async function () {
+    it('should not throw unicity error if user already have reward', async function () {
       // given
       const { id: userId } = databaseBuilder.factory.buildUser();
       const { rewardId } = databaseBuilder.factory.buildQuest({
