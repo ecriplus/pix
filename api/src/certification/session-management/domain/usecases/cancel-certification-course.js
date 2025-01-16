@@ -4,7 +4,7 @@
  */
 
 import CertificationCancelled from '../../../../../src/shared/domain/events/CertificationCancelled.js';
-import { SessionAlreadyFinalizedError } from '../errors.js';
+import { NotFinalizedSessionError } from '../../../../shared/domain/errors.js';
 
 /**
  * @param {Object} params
@@ -20,10 +20,9 @@ export const cancelCertificationCourse = async function ({
   sessionRepository,
 }) {
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
-  const session = await sessionRepository.get({ id: certificationCourse.id });
-
-  if (session.isFinalized) {
-    throw new SessionAlreadyFinalizedError();
+  const session = await sessionRepository.get({ id: certificationCourse.getSessionId() });
+  if (!session.isFinalized) {
+    throw new NotFinalizedSessionError();
   }
 
   certificationCourse.cancel();

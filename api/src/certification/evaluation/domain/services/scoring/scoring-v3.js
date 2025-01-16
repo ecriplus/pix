@@ -14,6 +14,7 @@
  */
 import Debug from 'debug';
 
+import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { config } from '../../../../../shared/config.js';
 import { CompetenceMark } from '../../../../../shared/domain/models/index.js';
 import { FlashAssessmentAlgorithm } from '../../../../flash-certification/domain/models/FlashAssessmentAlgorithm.js';
@@ -58,6 +59,8 @@ export const handleV3CertificationScoring = async ({
   const candidateAnswers = await answerRepository.findByAssessment(assessmentId);
   debugScoringForV3Certification(`CandidateAnswers count: ${candidateAnswers.length}`);
 
+  const toBeCancelled = event instanceof CertificationCancelled;
+
   const { allChallenges, askedChallenges, challengeCalibrations } = await dependencies.findByCertificationCourseId({
     certificationCourseId,
   });
@@ -93,6 +96,7 @@ export const handleV3CertificationScoring = async ({
   });
 
   const assessmentResult = await _createV3AssessmentResult({
+    toBeCancelled,
     allAnswers: candidateAnswers,
     emitter,
     certificationAssessment,
@@ -125,6 +129,7 @@ export const handleV3CertificationScoring = async ({
 };
 
 function _createV3AssessmentResult({
+  toBeCancelled,
   allAnswers,
   emitter,
   certificationAssessment,
@@ -132,6 +137,16 @@ function _createV3AssessmentResult({
   certificationCourse,
   juryId,
 }) {
+  if (toBeCancelled) {
+    return AssessmentResultFactory.buildCancelledAssessmentResult({
+      juryId,
+      pixScore: certificationAssessmentScore.nbPix,
+      reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
+      assessmentId: certificationAssessment.id,
+      emitter,
+    });
+  }
+
   if (certificationCourse.isRejectedForFraud()) {
     return AssessmentResultFactory.buildFraud({
       pixScore: certificationAssessmentScore.nbPix,
