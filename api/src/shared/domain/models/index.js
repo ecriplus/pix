@@ -94,8 +94,6 @@ import { PartnerCertificationScoring } from './PartnerCertificationScoring.js';
 import { PlacementProfile } from './PlacementProfile.js';
 import { ReproducibilityRate } from './ReproducibilityRate.js';
 import { ScoringSimulation } from './ScoringSimulation.js';
-import { ScoringSimulationContext } from './ScoringSimulationContext.js';
-import { ScoringSimulationDataset } from './ScoringSimulationDataset.js';
 import { ScoringSimulationResult } from './ScoringSimulationResult.js';
 import { Skill } from './Skill.js';
 import { Solution } from './Solution.js';
@@ -195,8 +193,6 @@ export {
   ReproducibilityRate,
   ResultCompetenceTree,
   ScoringSimulation,
-  ScoringSimulationContext,
-  ScoringSimulationDataset,
   ScoringSimulationResult,
   ShareableCertificate,
   Skill,
