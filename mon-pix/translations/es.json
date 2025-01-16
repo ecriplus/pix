@@ -519,6 +519,17 @@
       }
     },
     "campaign-landing": {
+      "alert-mobile-experience-modal": {
+        "title": "Parece que estás usando una pantalla pequeña",
+        "content": {
+          "paragraph1": "Algunas preguntas de este curso pueden resultar difíciles de utilizar en una pantalla pequeña.",
+          "paragraph2": "Para obtener la mejor experiencia, recomendamos utilizar una computadora."
+        },
+        "actions": {
+          "continue": "Continuar cuando lo mismo",
+          "back": "Regresar a la página de inicio"
+        }
+      },
       "assessment": {
         "action": "Empiezo",
         "announcement": "Inscríbete o conéctate a la plataforma Pix y comienza tu prueba.",
