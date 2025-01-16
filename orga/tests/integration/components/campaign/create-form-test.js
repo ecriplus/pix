@@ -829,7 +829,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
   });
 
   module('when user has not chosen yet to ask or not an external user ID', function () {
-    test('it should not fill external user ID selection', async function (assert) {
+    test('it should fill the default external user ID selection', async function (assert) {
       // when
       const screen = await render(
         hbs`<Campaign::CreateForm
@@ -847,7 +847,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
         .getByText(t('pages.campaign-creation.external-id-label.question-label'), { selector: 'legend' })
         .closest('fieldset');
 
-      assert.dom(within(externalIdentifier).getByLabelText(t('pages.campaign-creation.no'))).isNotChecked();
+      assert.dom(within(externalIdentifier).getByLabelText(t('pages.campaign-creation.no'))).isChecked();
       assert.dom(within(externalIdentifier).getByLabelText(t('pages.campaign-creation.yes'))).isNotChecked();
     });
 
