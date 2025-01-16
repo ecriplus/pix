@@ -40,6 +40,11 @@ const USERS = [
     lastName: 'attestation',
     email: 'attestation-blank@example.net',
   },
+  {
+    firstName: 'Disabled',
+    lastName: 'Attestation',
+    email: 'disabled-attestation@example.net',
+  },
 ];
 const ORGANIZATION = { name: 'Attestation', type: 'SCO', isManagingStudents: true };
 const CAMPAIGN = [
@@ -274,7 +279,8 @@ const buildCampaigns = (databaseBuilder, organization, targetProfiles) =>
 
 export const buildQuests = async (databaseBuilder) => {
   // Create USERS
-  const [successUser, successSharedUser, failedUser, pendingUser, blankUser] = buildUsers(databaseBuilder);
+  const [successUser, successSharedUser, failedUser, pendingUser, blankUser, disabledUser] =
+    buildUsers(databaseBuilder);
 
   // Create organization
   const organization = buildOrganization(databaseBuilder);
@@ -314,6 +320,7 @@ export const buildQuests = async (databaseBuilder) => {
     { userId: failedUser.id, division: '6emeA', firstName: 'attestation-failed', lastName: 'attestation-failed' },
     { userId: pendingUser.id, division: '6emeB', firstName: 'attestation-pending', lastName: 'attestation-pending' },
     { userId: blankUser.id, division: '6emeB', firstName: 'attestation-blank', lastName: 'attestation-blank' },
+    { userId: disabledUser.id, division: '6emeB', firstName: 'Disabled', lastName: 'attestation', isDisabled: true },
   ];
 
   const [
@@ -321,6 +328,7 @@ export const buildQuests = async (databaseBuilder) => {
     successSharedOrganizationLearner,
     failedOrganizationLearner,
     pendingOrganizationLearner,
+    disabledOrganizationLearner,
   ] = buildOrganizationLearners(databaseBuilder, organization, organizationLearnersData);
 
   // Create target profile
@@ -368,6 +376,11 @@ export const buildQuests = async (databaseBuilder) => {
       campaignId: campaigns[0],
       organizationLearner: pendingOrganizationLearner,
     },
+    {
+      user: disabledUser,
+      campaignId: campaigns[0],
+      organizationLearner: disabledOrganizationLearner,
+    },
   ]);
 
   // Create attestation quest
@@ -392,10 +405,21 @@ export const buildQuests = async (databaseBuilder) => {
     rewardId,
   });
 
+  const { id: disabledUserProfileRewardId } = databaseBuilder.factory.buildProfileReward({
+    userId: disabledUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId,
+  });
+
   // Create link between profile reward and organization
   databaseBuilder.factory.buildOrganizationsProfileRewards({
     organizationId: organization.id,
     profileRewardId: sharedProfileRewardId,
+  });
+
+  databaseBuilder.factory.buildOrganizationsProfileRewards({
+    organizationId: organization.id,
+    profileRewardId: disabledUserProfileRewardId,
   });
 
   // Insert job count in temporary storage for pending user

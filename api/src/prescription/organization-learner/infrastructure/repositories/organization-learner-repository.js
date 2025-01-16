@@ -117,7 +117,10 @@ async function findOrganizationLearnersByDivisions({ organizationId, divisions }
   let organizationLearners;
 
   const knexConnection = DomainTransaction.getConnection();
-  const queryBuilder = knexConnection.from('view-active-organization-learners').where({ organizationId });
+  const queryBuilder = knexConnection
+    .from('view-active-organization-learners')
+    .where({ organizationId })
+    .andWhere('isDisabled', false);
   if (divisions.length > 0) {
     organizationLearners = await queryBuilder.whereIn('division', divisions);
   } else {

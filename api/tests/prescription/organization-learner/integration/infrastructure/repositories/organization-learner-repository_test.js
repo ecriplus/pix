@@ -685,6 +685,28 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
       expect(learners).to.deep.equal([new OrganizationLearner(learner1), new OrganizationLearner(learner2)]);
     });
 
+    it('should not return disabled organization learners', async function () {
+      // given
+      const learner1 = databaseBuilder.factory.buildOrganizationLearner({ organizationId, division: '6eme A' });
+      databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+        division: '6eme A',
+        isDisabled: true,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const learners = await organizationLearnerRepository.findOrganizationLearnersByDivisions({
+        organizationId,
+        divisions: ['6eme A'],
+      });
+
+      // then
+      expect(learners).to.have.lengthOf(1);
+      expect(learners).to.deep.equal([new OrganizationLearner(learner1)]);
+    });
+
     context('when there is no organization with organizationId', function () {
       const notExistingOrganizationId = '999999';
 
