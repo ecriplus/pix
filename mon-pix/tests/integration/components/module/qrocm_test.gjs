@@ -71,6 +71,53 @@ module('Integration | Component | Module | QROCM', function (hooks) {
     assert.dom('.element-qrocm-proposals__input--block').exists({ count: 2 });
   });
 
+  test('should display a block QROCM with a default value', async function (assert) {
+    // given
+    const qrocm = {
+      id: '994b6a96-a3c2-47ae-a461-87548ac6e02b',
+      instruction: 'Mon instruction',
+      proposals: [
+        { content: '<span>Ma première proposition</span>', type: 'text' },
+        {
+          input: 'symbole',
+          inputType: 'text',
+          display: 'inline',
+          size: 1,
+          placeholder: '',
+          ariaLabel: 'input-aria',
+          defaultValue: 'tadaaa',
+          type: 'input',
+        },
+        {
+          input: 'deuxieme-partie',
+          type: 'select',
+          display: 'block',
+          placeholder: '',
+          ariaLabel: 'select-aria',
+          defaultValue: '1',
+          options: [
+            {
+              id: '1',
+              content: 'totoro',
+            },
+            {
+              id: '2',
+              content: 'taratata',
+            },
+          ],
+        },
+      ],
+      type: 'qrocm',
+    };
+    const screen = await render(<template><ModuleQrocm @element={{qrocm}} /></template>);
+
+    // then
+    const inputContent = screen.getByRole('textbox');
+    const buttonContent = find('.pix-select-button__text');
+    assert.dom(inputContent).hasValue('tadaaa');
+    assert.dom(buttonContent).hasText('totoro');
+  });
+
   test('should display an inline QROCM', async function (assert) {
     // given
     const qrocm = {

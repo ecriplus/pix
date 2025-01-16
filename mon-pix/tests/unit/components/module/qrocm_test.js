@@ -12,13 +12,13 @@ module('Unit | Component | Module | QROCM', function (hooks) {
         // given
         const store = this.owner.lookup('service:store');
         const correctionResponse = store.createRecord('correction-response', { status: 'ko' });
-        const qrocmElement = { id: '994b6a96-a3c2-47ae-a461-87548ac6e02b' };
+        const qrocmElement = { id: '994b6a96-a3c2-47ae-a461-87548ac6e02b', proposals: [] };
         store.createRecord('element-answer', {
           correction: correctionResponse,
           element: qrocmElement,
         });
         const component = createGlimmerComponent('module/element/qrocm', {
-          qrocm: qrocmElement,
+          element: qrocmElement,
           correction: correctionResponse,
         });
 
@@ -35,13 +35,13 @@ module('Unit | Component | Module | QROCM', function (hooks) {
         // given
         const store = this.owner.lookup('service:store');
         const correctionResponse = store.createRecord('correction-response', { status: 'ok' });
-        const qrocmElement = { id: 'qrocm-id' };
+        const qrocmElement = { id: 'qrocm-id', proposals: [] };
         store.createRecord('element-answer', {
           correction: correctionResponse,
           elementId: qrocmElement.id,
         });
         const component = createGlimmerComponent('module/element/qrocm', {
-          qrocm: qrocmElement,
+          element: qrocmElement,
           correction: correctionResponse,
         });
 
