@@ -1124,7 +1124,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
               await click(screen.getByRole('button', { name: "C'est parti !" }));
               await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
-              await _loginUser(screen, prescritUser);
+              await _loginUser(screen, userShouldChangePassword);
               await click(screen.getByRole('button', { name: 'Se connecter' }));
 
               // then
