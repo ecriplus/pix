@@ -107,14 +107,14 @@
                 {
                   "id": "d6bb5ad8-bd97-4116-839d-425a444fcdfd",
                   "type": "text",
-                  "content": "<p>Il y a 4 zones principales sur un clavier :</p>"
+                  "content": "<p>Il y a 3 zones principales sur un clavier :</p>"
                 },
                 {
                   "id": "e86e4e5f-868e-4483-a995-86d89121e1a4",
                   "type": "image",
-                  "url": "https://i.imgur.com/Df1QI7s.png",
+                  "url": "https://i.imgur.com/sHJP9pr.png",
                   "alt": "",
-                  "alternativeText": "<ul><li>touches fonctions</li><li>caractères spéciaux et accents</li><li>lettres de l'alphabet</li><li>flèches directionnelles</li></ul>"
+                  "alternativeText": "<ul><li>caractères spéciaux et accents</li><li>lettres de l'alphabet</li><li>flèches directionnelles</li></ul>"
                 },
                 {
                   "id": "1f25f056-78ad-42cd-8679-49188fe4e2a2",
@@ -323,7 +323,7 @@
                 {
                   "id": "188a5ce5-c163-47d0-b718-1ac64db4283e",
                   "type": "text",
-                  "content": "<p>La touche <strong>Effacer </strong>permet de supprimer le caractère à gauche du curseur de texte.</p>"
+                  "content": "<p>La touche <strong>Effacer </strong>permet de supprimer le caractère juste avant le curseur de texte.</p>"
                 },
                 {
                   "id": "de866e42-a119-461b-b73a-c684da091d77",
