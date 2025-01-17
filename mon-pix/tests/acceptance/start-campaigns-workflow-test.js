@@ -937,9 +937,9 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
-            await fillIn(screen.getLabelText('jour de naissance'), '10');
-            await fillIn(screen.getLabelText('mois de naissance'), '12');
-            await fillIn(screen.getLabelText('année de naissance'), '2000');
+            await fillIn(screen.getByLabelText('jour de naissance'), '10');
+            await fillIn(screen.getByLabelText('mois de naissance'), '12');
+            await fillIn(screen.getByLabelText('année de naissance'), '2000');
             await click(screen.getByRole('button', { name: "C'est parti !" }));
             await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
 
