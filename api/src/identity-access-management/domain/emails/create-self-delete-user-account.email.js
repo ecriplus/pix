@@ -1,6 +1,15 @@
 import { EmailFactory } from '../../../shared/mail/domain/models/EmailFactory.js';
 import { mailer } from '../../../shared/mail/infrastructure/services/mailer.js';
 
+/**
+ * Creates an email for self-deleting a user account.
+ *
+ * @param {Object} params - The parameters for creating the email.
+ * @param {string} params.locale - The locale for the email.
+ * @param {string} params.email - The recipient's email address.
+ * @param {string} params.firstName - The recipient's first name.
+ * @returns {Object} The email object.
+ */
 export function createSelfDeleteUserAccountEmail({ locale, email, firstName }) {
   const factory = new EmailFactory({ app: 'pix-app', locale });
 
