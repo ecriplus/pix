@@ -9,11 +9,7 @@ const embedElementSchema = Joi.object({
   title: htmlNotAllowedSchema.required(),
   url: Joi.string().uri().required(),
   instruction: htmlSchema.optional(),
-  solution: Joi.when('isCompletionRequired', {
-    is: true,
-    then: Joi.string().required(),
-    otherwise: Joi.any().forbidden(),
-  }),
+  solution: Joi.string().optional(),
   height: Joi.number().min(0).required(),
 }).required();
 
