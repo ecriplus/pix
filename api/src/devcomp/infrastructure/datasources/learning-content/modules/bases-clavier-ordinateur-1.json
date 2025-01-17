@@ -522,10 +522,6 @@
                   "instruction": "céleri",
                   "proposals": [
                     {
-                      "type": "text",
-                      "content": ""
-                    },
-                    {
                       "input": "1",
                       "type": "input",
                       "inputType": "text",
@@ -554,11 +550,7 @@
                   "type": "qrocm",
                   "instruction": "pastèque",
                   "proposals": [
-                    {
-                      "type": "text",
-                      "content": ""
-                    },
-                    {
+                     {
                       "input": "2",
                       "type": "input",
                       "inputType": "text",
@@ -587,10 +579,6 @@
                   "type": "qrocm",
                   "instruction": "bac à glaçons",
                   "proposals": [
-                    {
-                      "type": "text",
-                      "content": ""
-                    },
                     {
                       "input": "3",
                       "type": "input",
