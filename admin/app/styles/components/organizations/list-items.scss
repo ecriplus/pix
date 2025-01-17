@@ -2,7 +2,7 @@
   &__archived-organizations-toggle {
     display: flex;
     justify-content: flex-end;
-    padding-bottom: $pix-spacing-s;
+    padding-bottom: var(--pix-spacing-4x);
 
     p {
       margin: 0;

@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .badges-table {
   @extend %pix-body-m;
 }

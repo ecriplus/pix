@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .breadcrumb > ol {
   display: flex;
   align-items: center;
@@ -6,8 +8,8 @@
 
   h1 {
     display: inline;
-    font-weight: 500;
-    font-size: 1rem;
+
+    @extend %pix-title-s;
   }
 
   > svg {

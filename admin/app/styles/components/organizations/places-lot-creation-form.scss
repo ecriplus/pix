@@ -4,7 +4,7 @@
 }
 
 .action-buttons__cancel {
-  margin-right: $pix-spacing-xs;
+  margin-right: var(--pix-spacing-2x);
 
   &:hover {
     color: inherit;

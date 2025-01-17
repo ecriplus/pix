@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .certification-issue-report {
   display: flex;
   align-items: center;
@@ -24,13 +26,13 @@
 
     &__label {
       color: var(--pix-neutral-500);
-      font-weight: $font-medium;
-      font-family: $font-roboto;
+      font-weight: var(--pix-font-medium);
+      @extend %pix-body-s;
     }
 
     &__resolution-message {
       color: var(--pix-neutral-100);
-      font-family: $font-roboto;
+      @extend %pix-body-s;
     }
   }
 }

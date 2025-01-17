@@ -1,8 +1,10 @@
+@use 'pix-design-tokens/typography';
+
 .certification-details-v3 {
    &__container {
      display: grid;
      grid-template-columns: 1fr 1fr;
-     gap: $pix-spacing-s;
+     gap: var(--pix-spacing-4x);
    }
 
   &__title {
@@ -40,7 +42,7 @@
 
 .certification-details-v3-list {
   &__completion-date {
-    margin-right: $pix-spacing-s;
+    margin-right: var(--pix-spacing-4x);
   }
 }
 
@@ -104,6 +106,6 @@
 
 .certification-details-v3-modal{
   &__live-alert-subcategory {
-    font-weight: $font-bold;
+    font-weight: var(--pix-font-bold);
   }
 }

@@ -1,9 +1,11 @@
+@use 'pix-design-tokens/typography';
+
 .tubes-selection {
-  margin-bottom: $pix-spacing-m;
+  margin-bottom: var(--pix-spacing-6x);
   color: var(--pix-neutral-800);
 
   &__card {
-    margin-bottom: $pix-spacing-m;
+    margin-bottom: var(--pix-spacing-6x);
   }
 
   &__inline-layout {
@@ -25,7 +27,7 @@
   }
 
   &__multi-select-label {
-    padding-right: $pix-spacing-s;
+    padding-right: var(--pix-spacing-4x);
     font-weight: 500;
   }
 
@@ -143,9 +145,9 @@
     position: relative;
     align-items: center;
     padding-left: 2rem;
-    font-weight: 500;
-    font-size: 1.3rem;
-    font-family: $font-open-sans;
+
+    @extend %pix-title-xs;
+
     background-color: var(--pix-neutral-0);
 
     &:hover {

@@ -27,6 +27,6 @@
   }
 
   .pix-button {
-    margin-left: $pix-spacing-xs;
+    margin-left: var(--pix-spacing-2x);
   }
 }

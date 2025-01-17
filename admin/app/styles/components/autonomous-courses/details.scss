@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .autonomous-course-card {
   display: grid;
   grid-template-columns: 1fr 180px;
@@ -28,7 +30,7 @@
 
 .autonomous-course-card-details-value {
   &__link {
-    font-weight: $font-medium;
+    font-weight: var(--pix-font-medium);
   }
 
   &__tooltip {

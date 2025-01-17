@@ -1,8 +1,8 @@
 .selected-target-profile-form-change {
   display: flex;
   flex-direction: column;
-  gap: $pix-spacing-xs;
-  padding: $pix-spacing-s;
+  gap: var(--pix-spacing-2x);
+  padding: var(--pix-spacing-4x);
   font-size: 1.125rem;
 
   &__link {

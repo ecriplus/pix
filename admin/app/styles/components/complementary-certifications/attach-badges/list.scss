@@ -1,6 +1,6 @@
 .complementary-certification-attach-badges {
   &__description, &__error, &__section {
-    margin-top: $pix-spacing-s;
+    margin-top: var(--pix-spacing-4x);
   }
 }
 
@@ -12,14 +12,14 @@
 
     table {
       height: 100%;
-      margin-top: $pix-spacing-s;
-      margin-bottom: $pix-spacing-s;
+      margin-top: var(--pix-spacing-4x);
+      margin-bottom: var(--pix-spacing-4x);
 
       thead tr{
         height: 72px;
 
         th {
-          padding: $pix-spacing-s;
+          padding: var(--pix-spacing-4x);
           border: 1px solid var(--pix-neutral-20);
         }
       }
@@ -35,7 +35,7 @@
           }
 
           th, td {
-            padding: $pix-spacing-s;
+            padding: var(--pix-spacing-4x);
             border: 1px solid var(--pix-neutral-20);
 
             .pix-textarea, .pix-textarea textarea {

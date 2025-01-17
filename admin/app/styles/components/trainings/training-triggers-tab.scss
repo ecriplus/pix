@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .training-trigger {
   &__link {
     color: var(--pix-primary-500);
@@ -16,12 +18,12 @@
 
     display: flex;
     align-items: baseline;
-    margin-bottom: $pix-spacing-xs;
+    margin-bottom: var(--pix-spacing-2x);
     font-weight: 500;
   }
 
   &__threshold {
-    margin-left: $pix-spacing-s;
+    margin-left: var(--pix-spacing-4x);
     color: var(--pix-neutral-900);
     font-size: 1rem;
     line-height: 1.5;
@@ -34,14 +36,14 @@
   &__description {
     @extend %pix-body-m;
 
-    margin-bottom: $pix-spacing-s;
+    margin-bottom: var(--pix-spacing-4x);
   }
 
   &__toggler {
     display: inline-flex;
 
     svg {
-      margin-right: $pix-spacing-xs;
+      margin-right: var(--pix-spacing-2x);
     }
   }
 }
@@ -51,12 +53,12 @@
 
   &__actions {
     display: flex;
-    gap: $pix-spacing-m;
-    margin: $pix-spacing-m 0;
+    gap: var(--pix-spacing-6x);
+    margin: var(--pix-spacing-6x) 0;
   }
 
   &__threshold {
-    margin-bottom: $pix-spacing-m;
+    margin-bottom: var(--pix-spacing-6x);
   }
 
   .card__title {
@@ -70,7 +72,7 @@
 
 .edit-training-trigger-threshold {
   &__description {
-    margin-bottom: $pix-spacing-s;
+    margin-bottom: var(--pix-spacing-4x);
   }
 
   &__input {

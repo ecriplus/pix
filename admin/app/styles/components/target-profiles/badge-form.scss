@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .badge-form {
   &__title {
     @extend %pix-title-xs;
