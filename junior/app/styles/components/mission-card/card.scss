@@ -1,10 +1,12 @@
+@use '../../globals/fonts';
+
 .mission-card {
   &__container {
     position: relative;
     width: 248px;
     height: 368px;
     padding: var(--pix-spacing-2x);
-    font-family: $font-nunito;
+    font-family: fonts.$font-nunito;
     font-style: normal;
     background-color: var(--pix-neutral-0);
     border-radius: 16px;

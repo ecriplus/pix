@@ -1,3 +1,7 @@
+@use '../globals/fonts';
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .school-code {
   display: flex;
   flex-direction: column;
@@ -31,7 +35,7 @@
   }
 
   &__input {
-    font-family: $font-nunito;
+    font-family: fonts.$font-nunito;
     text-transform: uppercase;
   }
 
@@ -76,7 +80,7 @@
     margin-bottom: 20px;
   }
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     margin-top: 30px;
 
     .logo {
