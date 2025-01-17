@@ -1,3 +1,4 @@
+import { createResetPasswordDemandEmail } from '../../../../../src/identity-access-management/domain/emails/create-reset-password-demand.email.js';
 import { createResetPasswordDemand } from '../../../../../src/identity-access-management/domain/usecases/create-reset-password-demand.usecase.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
@@ -15,14 +16,14 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-reset-pa
     },
   };
 
-  let mailService;
+  let emailRepository;
   let resetPasswordService;
   let resetPasswordDemandRepository;
   let userRepository;
 
   beforeEach(function () {
-    mailService = {
-      sendResetPasswordDemandEmail: sinon.stub(),
+    emailRepository = {
+      sendEmail: sinon.stub(),
     };
     resetPasswordService = {
       generateTemporaryKey: sinon.stub(),
@@ -39,12 +40,15 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-reset-pa
     resetPasswordDemandRepository.create.resolves(resetPasswordDemand);
   });
 
-  it('should create a password reset demand if user email exists', async function () {
+  it('creates a password reset demand if user email exists', async function () {
+    // given
+    const expectedEmail = createResetPasswordDemandEmail({ email, locale, temporaryKey });
+
     // when
     const result = await createResetPasswordDemand({
       email,
       locale,
-      mailService,
+      emailRepository,
       resetPasswordService,
       resetPasswordDemandRepository,
       userRepository,
@@ -56,10 +60,10 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-reset-pa
     expect(userRepository.isUserExistingByEmail).to.have.been.calledWithExactly(email);
     expect(resetPasswordService.generateTemporaryKey).to.have.been.calledOnce;
     expect(resetPasswordDemandRepository.create).to.have.been.calledWithExactly({ email, temporaryKey });
-    expect(mailService.sendResetPasswordDemandEmail).to.have.been.calledWithExactly({ email, locale, temporaryKey });
+    expect(emailRepository.sendEmail).to.have.been.calledWithExactly(expectedEmail);
   });
 
-  it('should throw UserNotFoundError if user email does not exist', async function () {
+  it('throws UserNotFoundError if user email does not exist', async function () {
     // given
     userRepository.isUserExistingByEmail.throws(new UserNotFoundError());
 
@@ -67,7 +71,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-reset-pa
     const error = await catchErr(createResetPasswordDemand)({
       email,
       locale,
-      mailService,
+      emailRepository,
       resetPasswordService,
       resetPasswordDemandRepository,
       userRepository,

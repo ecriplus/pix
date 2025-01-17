@@ -1,17 +1,20 @@
+import { createResetPasswordDemandEmail } from '../emails/create-reset-password-demand.email.js';
+
 export const createResetPasswordDemand = async function ({
   email,
   locale,
-  mailService,
   resetPasswordService,
   resetPasswordDemandRepository,
   userRepository,
+  emailRepository,
 }) {
   await userRepository.isUserExistingByEmail(email);
 
   const temporaryKey = await resetPasswordService.generateTemporaryKey();
   const passwordResetDemand = await resetPasswordDemandRepository.create({ email, temporaryKey });
 
-  await mailService.sendResetPasswordDemandEmail({ email, locale, temporaryKey });
+  const resetPasswordDemandEmail = createResetPasswordDemandEmail({ email, temporaryKey, locale });
+  await emailRepository.sendEmail(resetPasswordDemandEmail);
 
   return passwordResetDemand;
 };
