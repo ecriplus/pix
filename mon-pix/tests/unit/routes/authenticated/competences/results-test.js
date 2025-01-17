@@ -50,7 +50,7 @@ module('Unit | Route | Competences | Results', function (hooks) {
       ]);
 
       findAllStub
-        .withArgs('competenceEvaluation', { reload: true, adapterOptions: { assessmentId } })
+        .withArgs('competence-evaluation', { reload: true, adapterOptions: { assessmentId } })
         .resolves(competenceEvaluationsInStore);
 
       // When

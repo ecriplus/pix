@@ -113,7 +113,7 @@ describe('Unit | Serializer | JSONAPI | tutorial-serializer', function () {
             'tutorial-evaluation': {
               data: {
                 id: tutorialEvaluationId,
-                type: 'tutorialEvaluation',
+                type: 'tutorial-evaluation',
               },
             },
             'user-saved-tutorial': {
@@ -132,7 +132,7 @@ describe('Unit | Serializer | JSONAPI | tutorial-serializer', function () {
               'tutorial-id': tutorialId,
             },
             id: tutorialEvaluationId,
-            type: 'tutorialEvaluation',
+            type: 'tutorial-evaluation',
           },
           {
             attributes: {

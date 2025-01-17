@@ -9,7 +9,7 @@ export default class ResumeRoute extends Route {
 
   model(params, transition) {
     const competenceId = transition.to.parent.params.competence_id;
-    return this.store.queryRecord('competenceEvaluation', { competenceId, startOrResume: true });
+    return this.store.queryRecord('competence-evaluation', { competenceId, startOrResume: true });
   }
 
   async redirect(competenceEvaluation) {
