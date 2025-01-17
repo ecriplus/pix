@@ -170,7 +170,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
           {
             attributes: {
               id: `recArea1_${trainingTriggerId}`,
-              code: 5,
+              code: '5',
               color: 'red',
               title: 'Super domaine',
             },
@@ -273,7 +273,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
           },
           {
             attributes: {
-              code: 5,
+              code: '5',
               color: 'red',
               id: 'recArea1_789',
               title: 'Super domaine',

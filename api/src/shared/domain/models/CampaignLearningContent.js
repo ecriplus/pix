@@ -14,11 +14,11 @@ class CampaignLearningContent {
   }
 
   get competences() {
-    return this._learningContent.competences;
+    return this._learningContent.competences.sort((a, b) => a.index.localeCompare(b.index));
   }
 
   get areas() {
-    return this._learningContent.areas;
+    return this._learningContent.areas.sort((a, b) => a.code.localeCompare(b.code));
   }
 
   findSkill(skillId) {

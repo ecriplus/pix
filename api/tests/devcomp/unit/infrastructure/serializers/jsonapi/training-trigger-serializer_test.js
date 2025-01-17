@@ -121,7 +121,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-tri
           },
           {
             attributes: {
-              code: 5,
+              code: '5',
               color: 'red',
               title: 'Super domaine',
             },

@@ -11,7 +11,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
   });
 
   describe('#toCsvLine', function () {
-    let organization, campaign, targetProfile, learningContent, stageCollection;
+    let organization, campaign, targetProfile, learningContent, stageCollection, areas, competences;
     const createdAt = new Date('2020-03-01T10:00:00Z');
     const createdAtFormated = '01/03/2020 11:00';
     const sharedAt = new Date('2020-04-01T10:00:00Z');
@@ -22,6 +22,8 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
       campaign = domainBuilder.buildCampaign({ idPixLabel: null });
       targetProfile = domainBuilder.buildTargetProfile();
       learningContent = domainBuilder.buildLearningContent.withSimpleContent();
+      areas = learningContent.areas;
+      competences = learningContent.competences;
       stageCollection = domainBuilder.buildStageCollectionForUserCampaignResults({
         campaignId: campaign.id,
         stages: [],
@@ -42,9 +44,11 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
           campaignParticipationInfo,
           targetProfile,
           learningContent,
+          competences,
+          areas,
           stageCollection,
           participantKnowledgeElementsByCompetenceId: {
-            [learningContent.competences[0].id]: [],
+            [competences[0].id]: [],
           },
           translate,
         });
@@ -91,9 +95,11 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
           campaignParticipationInfo,
           targetProfile,
           learningContent,
+          competences,
+          areas,
           stageCollection,
           participantKnowledgeElementsByCompetenceId: {
-            [learningContent.competences[0].id]: [],
+            [competences[0].id]: [],
           },
           translate,
         });
@@ -143,9 +149,11 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
             additionalHeaders,
             targetProfile,
             learningContent,
+            competences,
+            areas,
             stageCollection,
             participantKnowledgeElementsByCompetenceId: {
-              [learningContent.competences[0].id]: [],
+              [competences[0].id]: [],
             },
             translate,
           });
@@ -195,9 +203,11 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
             additionalHeaders: [],
             targetProfile,
             learningContent,
+            competences,
+            areas,
             stageCollection,
             participantKnowledgeElementsByCompetenceId: {
-              [learningContent.competences[0].id]: [],
+              [competences[0].id]: [],
             },
             translate,
           });
@@ -248,9 +258,11 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
           campaignParticipationInfo,
           targetProfile,
           learningContent,
+          competences,
+          areas,
           stageCollection,
           participantKnowledgeElementsByCompetenceId: {
-            [learningContent.competences[0].id]: [],
+            [competences[0].id]: [],
           },
           translate,
         });
@@ -308,7 +320,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
             learningContent,
             stageCollection,
             participantKnowledgeElementsByCompetenceId: {
-              [learningContent.competences[0].id]: [],
+              [competences[0].id]: [],
             },
             translate,
           });
@@ -317,7 +329,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
           const csvLine = campaignAssessmentCsvLine.toCsvLine();
 
           // then
-          const csvExcpectedLine =
+          const csvExpectedLine =
             `"${organization.name}";` +
             `${campaign.id};` +
             `"${campaign.code}";` +
@@ -332,17 +344,11 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
             `"${createdAtFormated}";` +
             '"Non";' +
             '"NA";' +
-            '"NA";' +
-            '"NA";' +
-            '"NA";' +
-            '"NA";' +
-            '"NA";' +
-            '"NA";' +
             '"NA"' +
             '\n';
 
           // then
-          expect(csvLine).to.equal(csvExcpectedLine);
+          expect(csvLine).to.equal(csvExpectedLine);
         });
       });
 
@@ -369,7 +375,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
             learningContent,
             stageCollection,
             participantKnowledgeElementsByCompetenceId: {
-              [learningContent.competences[0].id]: [],
+              [competences[0].id]: [],
             },
             translate,
           });
@@ -391,12 +397,6 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
             '0;' +
             `"${createdAtFormated}";` +
             '"Non";' +
-            '"NA";' +
-            '"NA";' +
-            '"NA";' +
-            '"NA";' +
-            '"NA";' +
-            '"NA";' +
             '"NA";' +
             '"NA"' +
             '\n';
@@ -500,6 +500,8 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
               campaignParticipationInfo,
               targetProfile,
               learningContent,
+              competences: learningContent.competences,
+              areas: learningContent.areas,
               stageCollection,
               participantKnowledgeElementsByCompetenceId,
               translate,
@@ -562,6 +564,8 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
               campaignParticipationInfo,
               targetProfile,
               learningContent,
+              competences,
+              areas,
               stageCollection,
               participantKnowledgeElementsByCompetenceId,
               translate,
@@ -581,15 +585,6 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
               '1;' +
               `"${createdAtFormated}";` +
               '"Non";' +
-              '"NA";' +
-              '"NA";' +
-              '"NA";' +
-              '"NA";' +
-              '"NA";' +
-              '"NA";' +
-              '"NA";' +
-              '"NA";' +
-              '"NA";' +
               '"NA";' +
               '"NA";' +
               '"NA";' +
@@ -625,9 +620,11 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
             campaignParticipationInfo,
             targetProfile,
             learningContent,
+            competences,
+            areas,
             stageCollection,
             participantKnowledgeElementsByCompetenceId: {
-              [learningContent.competences[0].id]: [],
+              [competences[0].id]: [],
             },
             acquiredBadges: [badge],
             translate,
@@ -689,9 +686,11 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
             campaignParticipationInfo,
             targetProfile,
             learningContent,
+            competences,
+            areas,
             stageCollection,
             participantKnowledgeElementsByCompetenceId: {
-              [learningContent.competences[0].id]: [knowledgeElement],
+              [competences[0].id]: [knowledgeElement],
             },
             acquiredBadges: { [campaignParticipationInfo.campaignParticipationId]: [{ title: badge.title }] },
             translate,
@@ -746,9 +745,11 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
             campaignParticipationInfo,
             targetProfile,
             learningContent,
+            competences,
+            areas,
             stageCollection,
             participantKnowledgeElementsByCompetenceId: {
-              [learningContent.competences[0].id]: [knowledgeElement],
+              [competences[0].id]: [knowledgeElement],
             },
             translate,
           });
@@ -849,6 +850,8 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
               campaignParticipationInfo,
               targetProfile,
               learningContent,
+              areas: learningContent.areas,
+              competences: learningContent.competences,
               stageCollection,
               participantKnowledgeElementsByCompetenceId,
               translate,
@@ -900,6 +903,8 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
               campaignParticipationInfo,
               targetProfile,
               learningContent,
+              competences: learningContent.competences,
+              areas: learningContent.areas,
               stageCollection,
               participantKnowledgeElementsByCompetenceId,
               translate,
@@ -950,6 +955,8 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
             campaignParticipationInfo,
             targetProfile,
             learningContent,
+            competences,
+            areas,
             stageCollection,
             participantKnowledgeElementsByCompetenceId,
             translate,

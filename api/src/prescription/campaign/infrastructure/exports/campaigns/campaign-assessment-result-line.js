@@ -19,6 +19,8 @@ class CampaignAssessmentResultLine {
     targetProfile,
     additionalHeaders,
     learningContent,
+    areas,
+    competences,
     stageCollection,
     participantKnowledgeElementsByCompetenceId,
     acquiredBadges,
@@ -30,6 +32,8 @@ class CampaignAssessmentResultLine {
     this.campaignParticipationInfo = campaignParticipationInfo;
     this.targetProfile = targetProfile;
     this.learningContent = learningContent;
+    this.areas = areas;
+    this.competences = competences;
     this.stageCollection = stageCollection;
     this.targetedKnowledgeElementsCount = _.sum(
       _.map(participantKnowledgeElementsByCompetenceId, (knowledgeElements) => knowledgeElements.length),
@@ -73,7 +77,7 @@ class CampaignAssessmentResultLine {
   }
 
   _makeCompetenceColumns() {
-    return _.flatMap(this.learningContent.competences, (competence) =>
+    return _.flatMap(this.competences, (competence) =>
       this._makeSharedStatsColumns({
         id: competence.id,
         ...this._getStatsForCompetence(competence),
@@ -82,7 +86,7 @@ class CampaignAssessmentResultLine {
   }
 
   _makeAreaColumns() {
-    return _.flatMap(this.learningContent.areas, ({ id, competences }) => {
+    return _.flatMap(this.areas, ({ id, competences }) => {
       const areaCompetenceStats = competences.map(this._getStatsForCompetence);
 
       const targetedSkillCount = _.sumBy(areaCompetenceStats, 'targetedSkillCount');
@@ -156,8 +160,8 @@ class CampaignAssessmentResultLine {
 
   _makeNotSharedColumns() {
     return [
-      ...this._makeEmptyColumns(this.learningContent.competences.length * STATS_COLUMNS_COUNT),
-      ...this._makeEmptyColumns(this.learningContent.areas.length * STATS_COLUMNS_COUNT),
+      ...this._makeEmptyColumns(this.competences.length * STATS_COLUMNS_COUNT),
+      ...this._makeEmptyColumns(this.areas.length * STATS_COLUMNS_COUNT),
       ...(this.organization.showSkills ? this._makeEmptyColumns(this.learningContent.skills.length) : []),
     ];
   }

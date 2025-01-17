@@ -28,7 +28,7 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
         badges: [],
       };
       stageCollection = {};
-      learningContent = { skillNames: [], competence: [], areas: [] };
+      learningContent = { skillNames: [], competences: [], areas: [] };
       campaign = {};
 
       const listSkills1 = domainBuilder.buildSkillCollection({ name: '@web', minLevel: 1, maxLevel: 5 });
