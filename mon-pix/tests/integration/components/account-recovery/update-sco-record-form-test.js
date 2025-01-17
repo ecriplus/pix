@@ -26,9 +26,16 @@ module('Integration | Component | account-recovery | update-sco-record', functio
         name: t('pages.account-recovery.update-sco-record.welcome-message', { firstName }),
       }),
     );
-    assert.ok(screen.getByText(t('pages.account-recovery.update-sco-record.fill-password')));
-    assert.ok(screen.getByRole('textbox', { name: t('pages.account-recovery.update-sco-record.form.email-label') }));
-    assert.ok(screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label')));
+    assert.ok(screen.getByText(t('pages.account-recovery.update-sco-record.fill-password'), { exact: false }));
+    assert.ok(
+      screen.getByRole('textbox', {
+        name: t('pages.account-recovery.update-sco-record.form.email-label'),
+        exact: false,
+      }),
+    );
+    assert.ok(
+      screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), { exact: false }),
+    );
 
     const submitButton = screen.getByRole('button', {
       name: t('pages.account-recovery.update-sco-record.form.login-button'),
@@ -47,7 +54,10 @@ module('Integration | Component | account-recovery | update-sco-record', functio
       const screen = await render(hbs`<AccountRecovery::UpdateScoRecordForm />`);
 
       // when
-      await fillIn(screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label')), 'pass');
+      await fillIn(
+        screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), { exact: false }),
+        'pass',
+      );
 
       // then
       const submitButton = screen.getByRole('button', {
@@ -62,7 +72,7 @@ module('Integration | Component | account-recovery | update-sco-record', functio
 
       // when
       await fillIn(
-        screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label')),
+        screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), { exact: false }),
         'pix123A*',
       );
 
@@ -79,7 +89,7 @@ module('Integration | Component | account-recovery | update-sco-record', functio
 
       // when
       await fillIn(
-        screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label')),
+        screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), { exact: false }),
         'pix123A*',
       );
       await click(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
@@ -97,7 +107,7 @@ module('Integration | Component | account-recovery | update-sco-record', functio
 
       // when
       await fillIn(
-        screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label')),
+        screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), { exact: false }),
         'pix123A*',
       );
       await click(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
@@ -116,7 +126,9 @@ module('Integration | Component | account-recovery | update-sco-record', functio
         // given
         const validPassword = 'pix123A*';
         const screen = await render(hbs`<AccountRecovery::UpdateScoRecordForm />`);
-        const passwordInput = screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'));
+        const passwordInput = screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), {
+          exact: false,
+        });
 
         // when
         await fillIn(passwordInput, validPassword);
@@ -139,7 +151,9 @@ module('Integration | Component | account-recovery | update-sco-record', functio
         const screen = await render(
           hbs`<AccountRecovery::UpdateScoRecordForm @firstName={{this.firstName}} @email={{this.email}} />`,
         );
-        const passwordInput = screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'));
+        const passwordInput = screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), {
+          exact: false,
+        });
 
         // when
         await fillIn(passwordInput, invalidPassword);
@@ -153,7 +167,9 @@ module('Integration | Component | account-recovery | update-sco-record', functio
         // given
         const password = '';
         const screen = await render(hbs`<AccountRecovery::UpdateScoRecordForm />`);
-        const passwordInput = screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'));
+        const passwordInput = screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), {
+          exact: false,
+        });
 
         // when
         await fillIn(passwordInput, password);
