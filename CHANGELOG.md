@@ -1,5 +1,27 @@
 # Pix Changelog
 
+## v5.19.0 (17/01/2025)
+
+
+### :rocket: Amélioration
+- [#11136](https://github.com/1024pix/pix/pull/11136) [FEATURE] Affichage de l'utilisateur identifié sur toutes les pages pertinentes (PIX-16095).
+- [#11129](https://github.com/1024pix/pix/pull/11129) [FEATURE] Prendre en compte la valeur par défaut des proposals "input" dans les QROCm Modulix (PIX-16034).
+- [#11132](https://github.com/1024pix/pix/pull/11132) [FEATURE] Ne pas générer les attestations des learners désactivés dans le zip pour les prescripteurs (PIX-16098).
+- [#11135](https://github.com/1024pix/pix/pull/11135) [FEATURE] Mise à jour du nom du fichier du module `chatgpt-vraiment-neutre`.
+- [#11075](https://github.com/1024pix/pix/pull/11075) [FEATURE] Ajouter des filtres dans la liste des parcours autonomes (PIX-16065).
+
+### :building_construction: Tech
+- [#11128](https://github.com/1024pix/pix/pull/11128) [TECH] Utiliser une constante partagée au lieu de recréer TWENTY_MEGABYTES à chaque fois (PIX-15819).
+- [#11085](https://github.com/1024pix/pix/pull/11085) [TECH] ♻️  migre le repository target-profile-repository dans le contexte prescription (pix-16073).
+- [#11081](https://github.com/1024pix/pix/pull/11081) [TECH] Regrouper les différents model de campagne dans l'API (PIX-15820).
+- [#11111](https://github.com/1024pix/pix/pull/11111) [TECH] :truck: Déplace `certifiable-profile-for-learning-content-repository.js` vers `src/`.
+
+### :bug: Correction
+- [#11130](https://github.com/1024pix/pix/pull/11130) [BUGFIX] Orga - avoir une option par défaut pour l'external Id dans la création de campagne (PIX-16081).
+
+### :coffee: Autre
+- [#11041](https://github.com/1024pix/pix/pull/11041) Pix 15834 display popup for smarphones and vertical tablets.
+
 ## v5.18.0 (16/01/2025)
 
 
