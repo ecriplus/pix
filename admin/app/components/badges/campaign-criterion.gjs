@@ -63,7 +63,7 @@ export default class CampaignCriterion extends Component {
               @triggerAction={{this.toggleEditModal}}
               @isDisabled={{not @isEditable}}
             >
-              Modifier le critère
+              Modifier le seuil de ce critère
             </PixButton>
           </:triggerElement>
 
@@ -85,7 +85,7 @@ export default class CampaignCriterion extends Component {
 
     {{#if @isEditable}}
       <PixModal
-        @title="Modification du critère d'obtention basé sur l'ensemble du profil cible"
+        @title="Modification du seuil du critère d'obtention basé sur l'ensemble du profil cible"
         @showModal={{this.isEditModalVisible}}
         @onCloseButtonClick={{this.toggleEditModal}}
       >

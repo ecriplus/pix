@@ -449,12 +449,12 @@ module('Acceptance | Target Profile Insights', function (hooks) {
 
         // then
         assert.strictEqual(currentURL(), '/target-profiles/1/badges/100');
-        assert.dom(screen.getByText('ID : 100')).exists();
-        assert.dom(screen.getByText('Nom du résultat thématique : tagada')).exists();
-        assert.dom(screen.getByText("Nom de l'image : image.png")).exists();
-        assert.dom(screen.getByText('Clé : KEY_BADGE_1')).exists();
-        assert.dom(screen.getByText('Message : Coucou les zamis')).exists();
-        assert.dom(screen.getByText('Message alternatif : alt COUCOU LES ZAMIS')).exists();
+        assert.dom(screen.getByText('100')).exists();
+        assert.dom(screen.getByText('tagada')).exists();
+        assert.dom(screen.getByText('image.png')).exists();
+        assert.dom(screen.getByText('KEY_BADGE_1')).exists();
+        assert.dom(screen.getByText('Coucou les zamis')).exists();
+        assert.dom(screen.getByText('alt COUCOU LES ZAMIS')).exists();
         assert.dom(screen.getByText('Certifiable')).exists();
         assert.dom(screen.getByText('Lacunes')).exists();
         assert.deepEqual(
@@ -494,7 +494,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         const screen = await visit('/target-profiles/1');
         await clickByName('Clés de lecture');
         await clickByName('Voir le détail du résultat thématique ancien titre');
-        await clickByName('Modifier');
+        await clickByName('Modifier les informations');
         await fillIn(screen.getByLabelText('Titre *', { exact: false }), 'nouveau titre');
         await fillIn(screen.getByLabelText('Clé *', { exact: false }), 'NEW_KEY');
         await fillByLabel('Message', 'nouveau message');
@@ -506,12 +506,12 @@ module('Acceptance | Target Profile Insights', function (hooks) {
 
         // then
         assert.strictEqual(currentURL(), '/target-profiles/1/badges/100');
-        assert.dom(screen.getByText('ID : 100')).exists();
-        assert.dom(screen.getByText('Nom du résultat thématique : nouveau titre')).exists();
-        assert.dom(screen.getByText("Nom de l'image : new_image.svg")).exists();
-        assert.dom(screen.getByText('Clé : NEW_KEY')).exists();
-        assert.dom(screen.getByText('Message : nouveau message')).exists();
-        assert.dom(screen.getByText('Message alternatif : nouveau alt')).exists();
+        assert.dom(screen.getByText('100')).exists();
+        assert.dom(screen.getByText('nouveau titre')).exists();
+        assert.dom(screen.getByText('new_image.svg')).exists();
+        assert.dom(screen.getByText('NEW_KEY')).exists();
+        assert.dom(screen.getByText('nouveau message')).exists();
+        assert.dom(screen.getByText('nouveau alt')).exists();
         assert.dom(screen.getByText('Certifiable')).exists();
         assert.dom(screen.queryByText('Lacunes')).doesNotExist();
         assert.dom(screen.queryByTestId('save-badge-edit')).doesNotExist();
@@ -526,13 +526,13 @@ module('Acceptance | Target Profile Insights', function (hooks) {
         const screen = await visit('/target-profiles/1');
         await clickByName('Clés de lecture');
         await clickByName('Voir le détail du résultat thématique tagada');
-        await clickByName('Modifier');
+        await clickByName('Modifier les informations');
         await fillIn(screen.getByLabelText('Titre *', { exact: false }), 'tsouintsouin');
         await clickByName('Annuler');
 
         // then
         assert.strictEqual(currentURL(), '/target-profiles/1/badges/100');
-        assert.dom(screen.getByText('Nom du résultat thématique : tagada')).exists();
+        assert.dom(screen.getByText('tagada')).exists();
         assert.dom(screen.queryByTestId('save-badge-edit')).doesNotExist();
       });
 
@@ -641,12 +641,12 @@ module('Acceptance | Target Profile Insights', function (hooks) {
 
         // then
         assert.strictEqual(currentURL(), '/target-profiles/1/badges/1');
-        assert.dom(screen.getByText('ID : 1')).exists();
-        assert.dom(screen.getByText('Nom du résultat thématique : Mon nouveau RT')).exists();
-        assert.dom(screen.getByText("Nom de l'image : troll.png")).exists();
-        assert.dom(screen.getByText('Clé : MY_BADGE')).exists();
-        assert.dom(screen.getByText('Message : message de mon RT')).exists();
-        assert.dom(screen.getByText('Message alternatif : Je mets du png je fais ce que je veux')).exists();
+        assert.dom(screen.getByText('1')).exists();
+        assert.dom(screen.getByText('Mon nouveau RT')).exists();
+        assert.dom(screen.getByText('troll.png')).exists();
+        assert.dom(screen.getByText('MY_BADGE')).exists();
+        assert.dom(screen.getByText('message de mon RT')).exists();
+        assert.dom(screen.getByText('Je mets du png je fais ce que je veux')).exists();
         assert.dom(screen.getByText('Certifiable')).exists();
         assert.dom(screen.getByText('Lacunes')).exists();
         assert.dom(screen.getByText("Critère d'obtention basé sur l'ensemble du profil cible :")).exists();
@@ -688,7 +688,7 @@ module('Acceptance | Target Profile Insights', function (hooks) {
 
         // when
         const screen = await visit(`/target-profiles/1/badges/${badge.id}`);
-        await clickByName('Modifier le critère');
+        await clickByName('Modifier le seuil de ce critère');
         await screen.findByRole('dialog');
         await fillByLabel(/Nouveau seuil d'obtention du critère :/, 99);
         await click(screen.getByRole('button', { name: 'Enregistrer' }));

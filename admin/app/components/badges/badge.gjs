@@ -15,6 +15,7 @@ import { t } from 'ember-intl';
 import set from 'ember-set-helper/helpers/set';
 import { not } from 'ember-truth-helpers';
 
+import SafeMarkdownToHtml from '../safe-markdown-to-html';
 import CampaignCriterion from './campaign-criterion';
 import CappedTubesCriterion from './capped-tubes-criterion';
 
@@ -35,14 +36,6 @@ export default class Badge extends Component {
   }
 
   IMAGE_BASE_URL = 'https://images.pix.fr/badges/';
-
-  get isCertifiableColor() {
-    return this.args.badge.isCertifiable ? 'tertiary' : null;
-  }
-
-  get isAlwaysVisibleColor() {
-    return this.args.badge.isAlwaysVisible ? 'tertiary' : null;
-  }
 
   get isCertifiableText() {
     return this.args.badge.isCertifiable ? 'Certifiable' : 'Non certifiable';
@@ -125,121 +118,127 @@ export default class Badge extends Component {
         <p>
           <LinkTo @route="authenticated.target-profiles.target-profile.insights">{{@targetProfile.name}}</LinkTo>
           <span class="wire">&nbsp;>&nbsp;</span>
-          <h1>Résultat thématique
-            {{@badge.id}}
-          </h1>
+          <h1>Résultat thématique {{@badge.id}}</h1>
         </p>
       </div>
     </header>
 
     <main class="page-body">
       <section class="page-section">
-        <div class="page-section__header">
-          <h2 class="page-section__title">{{@badge.name}}</h2>
-        </div>
-        <div class="page-section__details badge-data">
-          <div class="badge-data__image">
-            <img src={{@badge.imageUrl}} alt="" width="90px" /><br />
-          </div>
-          {{#if this.editMode}}
-            <div class="badge-edit-form">
-              <form class="form" {{on "submit" this.updateBadge}}>
-                <div class="badge-edit-form__field">
-                  <PixInput
-                    class="form-control"
-                    @value={{this.form.title}}
-                    @requiredLabel={{true}}
-                    {{on "input" (pick "target.value" (set this "form.title"))}}
-                  ><:label>Titre</:label></PixInput>
-                </div>
-                <div class="badge-edit-form__field">
-                  <PixInput
-                    class="form-control"
-                    @value={{this.form.key}}
-                    @requiredLabel={{true}}
-                    {{on "input" (pick "target.value" (set this "form.key"))}}
-                  ><:label>Clé</:label></PixInput>
-                </div>
-                <div class="badge-edit-form__field">
-                  <PixTextarea
-                    class="form-control"
-                    @value={{this.form.message}}
-                    rows="4"
-                    {{on "input" (pick "target.value" (set this "form.message"))}}
-                  ><:label>Message</:label></PixTextarea>
-                </div>
-                <div class="badge-edit-form__field">
-                  <PixInput
-                    class="form-control"
-                    @value={{this.form.imageName}}
-                    @requiredLabel={{t "common.forms.mandatory"}}
-                    {{on "input" (pick "target.value" (set this "form.imageName"))}}
-                  ><:label>Nom de l'image (svg)</:label></PixInput>
-                </div>
-                <div class="badge-edit-form__field">
-                  <PixInput
-                    class="form-control"
-                    @value={{this.form.altMessage}}
-                    @requiredLabel={{t "common.forms.mandatory"}}
-                    {{on "input" (pick "target.value" (set this "form.altMessage"))}}
-                  ><:label>Message Alternatif</:label></PixInput>
-                </div>
-                <div class="badge-edit-form__field">
-                  <PixCheckbox
-                    class="badge-form-check-field__control"
-                    @checked={{this.form.isCertifiable}}
-                    {{on "change" (toggle "form.isCertifiable" this)}}
-                  ><:label>Certifiable</:label></PixCheckbox>
-                </div>
-                <div class="badge-edit-form__field">
-                  <PixCheckbox
-                    class="badge-form-check-field__control"
-                    @type="checkbox"
-                    @checked={{this.form.isAlwaysVisible}}
-                    {{on "change" (toggle "form.isAlwaysVisible" this)}}
-                  ><:label>Lacunes</:label></PixCheckbox>
-                </div>
-                <div class="badge-edit-form__actions">
-                  <PixButton @size="small" @variant="secondary" @triggerAction={{this.cancel}}>
-                    {{t "common.actions.cancel"}}
-                  </PixButton>
-                  <PixButton @type="submit" @size="small" @variant="success" data-testid="save-badge-edit">
-                    {{t "common.actions.save"}}
-                  </PixButton>
-                </div>
-              </form>
+
+        {{#if this.editMode}}
+          <form class="form" {{on "submit" this.updateBadge}}>
+            <div class="badge-edit-form__field">
+              <PixInput
+                class="form-control"
+                @value={{this.form.title}}
+                @requiredLabel={{true}}
+                {{on "input" (pick "target.value" (set this "form.title"))}}
+              ><:label>Titre</:label></PixInput>
             </div>
-          {{else}}
-            <div>
-              <ul class="badge-data__list">
-                <li>ID : {{@badge.id}}</li>
-                <li>Nom du résultat thématique : {{@badge.title}}</li>
-                <li>Nom de l'image : {{this.imageName}}</li>
-                <li>Clé : {{@badge.key}}</li>
-                <li>Message : {{@badge.message}}</li>
-                <li>Message alternatif : {{@badge.altMessage}}</li>
-              </ul>
+            <div class="badge-edit-form__field">
+              <PixInput
+                class="form-control"
+                @value={{this.form.key}}
+                @requiredLabel={{true}}
+                {{on "input" (pick "target.value" (set this "form.key"))}}
+              ><:label>Clé</:label></PixInput>
+            </div>
+            <div class="badge-edit-form__field">
+              <PixTextarea
+                class="form-control"
+                @value={{this.form.message}}
+                rows="4"
+                {{on "input" (pick "target.value" (set this "form.message"))}}
+              ><:label>Message</:label></PixTextarea>
+            </div>
+            <div class="badge-edit-form__field">
+              <PixInput
+                class="form-control"
+                @value={{this.form.imageName}}
+                @requiredLabel={{t "common.forms.mandatory"}}
+                {{on "input" (pick "target.value" (set this "form.imageName"))}}
+              ><:label>Nom de l'image (svg)</:label></PixInput>
+            </div>
+            <div class="badge-edit-form__field">
+              <PixInput
+                class="form-control"
+                @value={{this.form.altMessage}}
+                @requiredLabel={{t "common.forms.mandatory"}}
+                {{on "input" (pick "target.value" (set this "form.altMessage"))}}
+              ><:label>Message Alternatif</:label></PixInput>
+            </div>
+            <div class="badge-edit-form__checkboxes">
+              <div>
+                <PixCheckbox
+                  @checked={{this.form.isCertifiable}}
+                  @variant="tile"
+                  {{on "change" (toggle "form.isCertifiable" this)}}
+                ><:label>Certifiable</:label></PixCheckbox>
+              </div>
+              <div>
+                <PixCheckbox
+                  @type="checkbox"
+                  @checked={{this.form.isAlwaysVisible}}
+                  @variant="tile"
+                  {{on "change" (toggle "form.isAlwaysVisible" this)}}
+                ><:label>Lacunes</:label></PixCheckbox>
+              </div>
+            </div>
+            <div class="badge-edit-form__actions">
+              <PixButton @size="small" @variant="secondary" @triggerAction={{this.cancel}}>
+                {{t "common.actions.cancel"}}
+              </PixButton>
+              <PixButton @type="submit" @size="small" @variant="success" data-testid="save-badge-edit">
+                {{t "common.actions.save"}}
+              </PixButton>
+            </div>
+          </form>
+        {{else}}
+          <div class="page-section__details badge-details">
+            <div class="badge-details__image">
+              <img src={{@badge.imageUrl}} alt="" width="90px" />
               {{#if @badge.isCertifiable}}
-                <PixTag
-                  @color={{this.isCertifiableColor}}
-                  class="badge-data__tags"
-                >{{this.isCertifiableText}}</PixTag><br />
+                <PixTag @color="success" class="badge-details__tag">
+                  {{this.isCertifiableText}}
+                </PixTag>
               {{/if}}
               {{#if @badge.isAlwaysVisible}}
-                <PixTag @color={{this.isAlwaysVisibleColor}} class="badge-data__tags">
-                  {{this.isAlwaysVisibleText}}</PixTag><br />
+                <PixTag @color="tertiary" class="badge-details__tag">
+                  {{this.isAlwaysVisibleText}}
+                </PixTag>
               {{/if}}
+            </div>
+            <div class="badge-details__content">
+              <dl class="page-details">
+                <dt class="page-details__label">ID&nbsp;:&nbsp;</dt>
+                <dd class="page-details__value">{{@badge.id}}</dd>
+                <dt class="page-details__label">Clé&nbsp;:&nbsp;</dt>
+                <dd class="page-details__value">{{@badge.key}}</dd>
+                <dt class="page-details__label">Nom du résultat thématique&nbsp;:&nbsp;</dt>
+                <dd class="page-details__value">{{@badge.title}}</dd>
+                <dt class="page-details__label">Image&nbsp;:&nbsp;</dt>
+                <dd class="page-details__value">{{this.imageName}}</dd>
+                <dt class="page-details__label">Message&nbsp;:&nbsp;</dt>
+                <dd class="page-details__value">
+                  <blockquote>
+                    <SafeMarkdownToHtml @markdown={{@badge.message}} />
+                  </blockquote>
+                </dd>
+                <dt class="page-details__label">Message alternatif&nbsp;:&nbsp;</dt>
+                <dd class="page-details__value">{{@badge.altMessage}}</dd>
+              </dl>
               <PixButton
                 @variant="secondary"
-                class="badge-data__action"
+                class="badge-details__action"
                 @size="small"
                 @triggerAction={{this.toggleEditMode}}
               >
-                {{t "common.actions.edit"}}
+                Modifier les informations
               </PixButton>
             </div>
-          {{/if}}
-        </div>
+          </div>
+        {{/if}}
       </section>
 
       <section class="badge__criteria main-admin-form">
