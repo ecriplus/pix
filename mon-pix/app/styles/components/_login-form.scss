@@ -1,8 +1,12 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   max-width: 360px;
+  gap: var(--pix-spacing-4x);
+
+  >  .pix-input, .pix-input-password {
+    width: 100%;
+  }
 
   &__error-message {
     margin-bottom: 10px;
@@ -27,9 +31,5 @@
   &__forgotten-password span {
     color: var(--pix-neutral-800);
     font-size: 0.875rem;
-  }
-
-  .login-button-container {
-    margin-top: 25px;
   }
 }
