@@ -255,8 +255,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // when
-            await fillIn(screen.getByLabelText('Prénom'), prescritUser.firstName);
-            await fillIn(screen.getByLabelText('Nom'), prescritUser.lastName);
+            await fillIn(screen.getByLabelText(/Prénom/), prescritUser.firstName);
+            await fillIn(screen.getByLabelText(/Nom/), prescritUser.lastName);
             await fillIn(screen.getByRole('spinbutton', { name: 'Jour de naissance' }), '10');
             await fillIn(screen.getByRole('spinbutton', { name: 'Mois de naissance' }), '12');
             await fillIn(screen.getByRole('spinbutton', { name: 'Année de naissance' }), '2000');
@@ -266,40 +266,19 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByText('Mon adresse e-mail'));
 
             await fillIn(screen.getByLabelText('Adresse e-mail', { exact: false }), prescritUser.email);
-            await fillIn(
-              screen.getByLabelText(
-                'Mot de passe (8 caractères minimum, dont une majuscule, une minuscule et un chiffre)',
-                { exact: false },
-              ),
-              'pix123',
-            );
+            await fillIn(screen.getByLabelText('Mot de passe', { exact: false }), 'pix123');
 
             await click(screen.getByRole('button', { name: "Je m'inscris" }));
             // then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/rejoindre/identification`);
-            assert.strictEqual(screen.getByRole('textbox', { name: '* Prénom' }).value, prescritUser.firstName);
-            assert.strictEqual(
-              screen.getByRole('textbox', { name: '* Adresse e-mail (ex: nom@exemple.fr)' }).value,
-              prescritUser.email,
-            );
-            assert.strictEqual(
-              screen.getByLabelText(
-                'Mot de passe (8 caractères minimum, dont une majuscule, une minuscule et un chiffre)',
-                { exact: false },
-              ).value,
-              'pix123',
-            );
+            assert.strictEqual(screen.getByLabelText('Prénom', { exact: false }).value, prescritUser.firstName);
+            assert.strictEqual(screen.getByLabelText('Adresse e-mail', { exact: false }).value, prescritUser.email);
+            assert.strictEqual(screen.getByLabelText('Mot de passe', { exact: false }).value, 'pix123');
 
             //go to username-based authentication window
             await click(screen.getByText('Mon identifiant'));
             assert.dom(screen.getByText('first.last1010')).exists();
-            assert.strictEqual(
-              screen.getByLabelText(
-                'Mot de passe (8 caractères minimum, dont une majuscule, une minuscule et un chiffre)',
-                { exact: false },
-              ).value,
-              'pix123',
-            );
+            assert.strictEqual(screen.getByLabelText('Mot de passe', { exact: false }).value, 'pix123');
           });
 
           test('should redirect to student sco invited page when connection is done', async function (assert) {
@@ -957,9 +936,9 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
-            await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
-            await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '12');
-            await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
+            await fillIn(screen.getLabelText('jour de naissance'), '10');
+            await fillIn(screen.getLabelText('mois de naissance'), '12');
+            await fillIn(screen.getLabelText('année de naissance'), '2000');
             await click(screen.getByRole('button', { name: "C'est parti !" }));
             await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
 
@@ -1112,6 +1091,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
               // when
               const screen = await visit(`/campagnes?externalUser=${externalUserToken}`);
+
               await fillIn(
                 screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }),
                 campaign.code,
@@ -1119,25 +1099,22 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
               await click(screen.getByRole('button', { name: 'Je commence' }));
 
-              await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
-              await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '12');
-              await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
+              await fillIn(screen.getByLabelText('jour de naissance'), '10');
+              await fillIn(screen.getByLabelText('mois de naissance'), '12');
+              await fillIn(screen.getByLabelText('année de naissance'), '2000');
               await click(screen.getByRole('button', { name: "C'est parti !" }));
               await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
-              await _loginUser(screen, userShouldChangePassword);
+              await _loginUser(screen, {
+                email: userShouldChangePassword.username,
+                password: userShouldChangePassword.password,
+              });
               await click(screen.getByRole('button', { name: 'Se connecter' }));
 
               // then
               assert.strictEqual(currentURL(), '/mise-a-jour-mot-de-passe-expire');
 
               // when
-              await fillIn(
-                screen.getByLabelText(
-                  'Mot de passe (8 caractères minimum, dont une majuscule, une minuscule et un chiffre)',
-                  { exact: false },
-                ),
-                'newPass12345!',
-              );
+              await fillIn(screen.getByLabelText('Mot de passe', { exact: false }), 'newPass12345!');
               await click(screen.getByRole('button', { name: 'Réinitialiser' }));
               // eslint-disable-next-line ember/no-settled-after-test-helper
               await settled();
