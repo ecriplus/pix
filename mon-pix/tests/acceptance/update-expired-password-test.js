@@ -12,7 +12,7 @@ import setupIntl from '../helpers/setup-intl';
 
 const ApiErrorMessages = ENV.APP.API_ERROR_MESSAGES;
 
-const PASSWORD_INPUT_LABEL = '* Mot de passe (8 caractères minimum, dont une majuscule, une minuscule et un chiffre)';
+const PASSWORD_INPUT_LABEL = /Mot de passe/;
 
 module('Acceptance | Update Expired Password', function (hooks) {
   setupApplicationTest(hooks);
