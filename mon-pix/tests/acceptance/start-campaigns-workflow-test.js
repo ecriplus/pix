@@ -109,7 +109,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               // when
               await fillIn(screen.getByRole('textbox', { name: 'Prénom' }), prescritUser.firstName);
               await fillIn(screen.getByRole('textbox', { name: 'Nom' }), prescritUser.lastName);
-              await _loginUser(screen, prescritUser);
+              await fillIn(screen.getByRole('textbox', { name: /Adresse e-mail/ }), prescritUser.email);
+              await fillIn(screen.getByLabelText(/Mot de passe/), prescritUser.password);
               await click(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
 
               // when
