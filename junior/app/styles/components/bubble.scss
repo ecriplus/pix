@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/breakpoints';
+
 .bubble-container {
   display: flex;
   margin-bottom: 8px;
@@ -11,14 +13,13 @@
   margin-left: 8px;
   padding: 8px 20px;
   font-size: 1.4rem;
-
-  @include device-is('tablet') {
-    font-size: 1.25rem;
-  }
-
   text-align: left;
   background-color: var(--pix-primary-100);
   border-radius: 16px 16px 16px 0;
+
+  @include breakpoints.device-is('tablet') {
+    font-size: 1.25rem;
+  }
 
   ul, ol {
     padding: revert;

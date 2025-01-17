@@ -1,10 +1,12 @@
+@use 'pix-design-tokens/breakpoints';
+
 .cards {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
   margin: 40px 145px;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     margin-left: 120px;
   }
 }

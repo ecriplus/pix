@@ -1,40 +1,39 @@
 @charset "utf-8";
 
 /* Pix UI */
-@import 'pix-design-tokens';
-@import 'pod-styles';
+@use 'pix-design-tokens';
 
 // Globals
-@import 'globals/buttons';
-@import 'globals/breakpoints';
-@import 'globals/colors';
-@import 'globals/fonts';
+@use 'globals/buttons' as *;
+@use 'globals/breakpoints' as *;
+@use 'globals/colors' as *;
+@use 'globals/fonts' as *;
 
 // Components
-@import 'components/challenge/challenge';
-@import 'components/challenge/challenge-actions';
-@import 'components/challenge/challenge-embed-simulator';
-@import 'components/challenge/challenge-content';
-@import 'components/challenge/challenge-content-proposals';
-@import 'components/challenge/content/challenge-media';
-@import 'components/challenge/challenge-layout';
-@import 'components/delayed-element';
-@import 'components/device-warning-modal';
-@import 'components/mission-card/card';
-@import 'components/bubble';
-@import 'components/footer';
-@import 'components/issue';
-@import 'components/identified-learner';
-@import 'components/oralization-button';
-@import 'components/robot-dialog';
+@use 'components/challenge/challenge' as *;
+@use 'components/challenge/challenge-actions' as *;
+@use 'components/challenge/challenge-embed-simulator' as *;
+@use 'components/challenge/challenge-content' as *;
+@use 'components/challenge/challenge-content-proposals' as *;
+@use 'components/challenge/content/challenge-media' as *;
+@use 'components/challenge/challenge-layout' as *;
+@use 'components/delayed-element' as *;
+@use 'components/device-warning-modal' as *;
+@use 'components/mission-card/card' as *;
+@use 'components/bubble' as *;
+@use 'components/footer' as *;
+@use 'components/issue' as *;
+@use 'components/identified-learner' as *;
+@use 'components/oralization-button' as *;
+@use 'components/robot-dialog' as *;
 
 // Pages
-@import 'pages/identified/missions/introduction';
-@import 'pages/identified/missions/list';
-@import 'pages/identified/missions/mission';
-@import 'pages/loading';
-@import 'pages/organization-code';
-@import 'pages/school';
+@use 'pages/identified/missions/introduction' as *;
+@use 'pages/identified/missions/list' as *;
+@use 'pages/identified/missions/mission' as *;
+@use 'pages/loading' as *;
+@use 'pages/organization-code' as *;
+@use 'pages/school' as *;
 
 body {
   color: var(--pix-neutral-900);
@@ -57,5 +56,3 @@ b {
     min-height: calc(100vh - 48px);
   }
 }
-
-
