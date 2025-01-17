@@ -12,12 +12,17 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
     const iss = 'https://issuer.url';
     const identityProvider = 'OIDC_EXAMPLE_NET';
     const pixAccessToken = 'pixAccessToken';
+    const audience = 'http-proto://pix/toto';
 
     let request;
 
     beforeEach(function () {
       request = {
         auth: { credentials: { userId: 123 } },
+        headers: {
+          'x-forwarded-proto': 'http-proto',
+          'x-forwarded-host': 'pix/toto',
+        },
         deserializedPayload: {
           identityProvider,
           code,
@@ -53,6 +58,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
         sessionState: state,
         state: identityProviderState,
         iss,
+        audience,
       });
       expect(request.yar.commit).to.have.been.calledOnce;
     });

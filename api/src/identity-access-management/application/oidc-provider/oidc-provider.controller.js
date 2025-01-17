@@ -3,6 +3,7 @@ import { requestResponseUtils } from '../../../shared/infrastructure/utils/reque
 import { usecases } from '../../domain/usecases/index.js';
 import * as oidcProviderSerializer from '../../infrastructure/serializers/jsonapi/oidc-identity-providers.serializer.js';
 import * as oidcSerializer from '../../infrastructure/serializers/jsonapi/oidc-serializer.js';
+import { getForwardedOrigin } from '../../infrastructure/utils/network.js';
 
 /**
  * @typedef {function} authenticateOidcUser
@@ -12,6 +13,7 @@ import * as oidcSerializer from '../../infrastructure/serializers/jsonapi/oidc-s
  */
 async function authenticateOidcUser(request, h) {
   const { code, state, iss, identityProvider: identityProviderCode, target } = request.deserializedPayload;
+  const origin = getForwardedOrigin(request.headers);
 
   const sessionState = request.yar.get('state', true);
   const nonce = request.yar.get('nonce', true);
@@ -29,6 +31,7 @@ async function authenticateOidcUser(request, h) {
     identityProviderCode,
     nonce,
     sessionState,
+    audience: origin,
   });
 
   if (result.isAuthenticationComplete) {
