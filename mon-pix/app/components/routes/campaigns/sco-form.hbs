@@ -11,7 +11,6 @@
     @value={{this.firstName}}
     placeholder={{t "pages.join.fields.firstname.label"}}
     readonly={{@areNamesDisabled}}
-    disabled={{@areNamesDisabled}}
     @validationStatus={{if this.validation.firstName "error" "default"}}
     @errorMessage={{this.validation.firstName}}
     {{on "focusout" (fn this.triggerInputStringValidation "firstName" this.firstName)}}
@@ -21,12 +20,11 @@
   </PixInput>
 
   <PixInput
-    id="lastName"
+    @id="lastName"
     type="text"
     @value={{this.lastName}}
     placeholder={{t "pages.join.fields.lastname.label"}}
     readonly={{@areNamesDisabled}}
-    disabled={{@areNamesDisabled}}
     @validationStatus={{if this.validation.lastName "error" "default"}}
     @errorMessage={{this.validation.lastName}}
     {{on "focusout" (fn this.triggerInputStringValidation "lastName" this.lastName)}}
@@ -39,7 +37,7 @@
     <p class="join-restricted-campaign__label">{{t "pages.join.fields.birthdate.label"}}</p>
     <div class="join-restricted-campaign__birthdate">
       <PixInput
-        id="dayOfBirth"
+        @id="dayOfBirth"
         type="text"
         placeholder={{t "pages.join.fields.birthdate.day-format"}}
         @value={{this.dayOfBirth}}
@@ -51,7 +49,7 @@
         <:label>{{t "pages.join.fields.birthdate.day-label"}}</:label>
       </PixInput>
       <PixInput
-        id="monthOfBirth"
+        @id="monthOfBirth"
         type="text"
         placeholder={{t "pages.join.fields.birthdate.month-format"}}
         @value={{this.monthOfBirth}}
@@ -63,7 +61,7 @@
         <:label>{{t "pages.join.fields.birthdate.month-label"}}</:label>
       </PixInput>
       <PixInput
-        id="yearOfBirth"
+        @id="yearOfBirth"
         type="text"
         placeholder={{t "pages.join.fields.birthdate.year-format"}}
         @value={{this.yearOfBirth}}
