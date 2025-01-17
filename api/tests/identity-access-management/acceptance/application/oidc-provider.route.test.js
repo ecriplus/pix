@@ -77,7 +77,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       // given
       const query = querystring.stringify({
         identity_provider: 'OIDC_EXAMPLE_NET',
-        audience: 'app',
+        target: 'app',
       });
 
       // when
@@ -273,7 +273,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       });
     });
 
-    context('when audience is admin', function () {
+    context('when target is admin', function () {
       context('when user does not have an admin role', function () {
         it('returns 403', async function () {
           // given
@@ -281,7 +281,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           const lastName = 'Doe';
           const externalIdentifier = 'sub';
 
-          payload.data.attributes.audience = 'admin';
+          payload.data.attributes.target = 'admin';
 
           const userId = databaseBuilder.factory.buildUser({
             firstName,
@@ -349,7 +349,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           const lastName = 'Doe';
           const externalIdentifier = 'sub';
 
-          payload.data.attributes.audience = 'admin';
+          payload.data.attributes.target = 'admin';
 
           const userId = databaseBuilder.factory.buildUser.withRole({
             firstName,

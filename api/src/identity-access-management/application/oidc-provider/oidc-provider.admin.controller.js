@@ -49,7 +49,7 @@ async function reconcileUserForAdmin(
 
   const oidcAuthenticationService = dependencies.oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
     identityProviderCode: identityProvider,
-    audience: PIX_ADMIN.AUDIENCE,
+    target: PIX_ADMIN.TARGET,
   });
 
   const accessToken = await usecases.reconcileOidcUserForAdmin({

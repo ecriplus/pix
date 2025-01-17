@@ -164,7 +164,7 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
       expect(service.code).to.equal('OIDC_EXAMPLE');
     });
 
-    describe('when the audience is admin', function () {
+    describe('when the target is admin', function () {
       it('returns a ready OIDC provider for Pix Admin', async function () {
         // given
         await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
@@ -172,7 +172,7 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
         // when
         const service = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
           identityProviderCode: 'OIDC_EXAMPLE_FOR_PIX_ADMIN',
-          audience: PIX_ADMIN.AUDIENCE,
+          target: PIX_ADMIN.TARGET,
         });
 
         // then

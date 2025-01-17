@@ -6,13 +6,13 @@
  * @param {OidcAuthenticationServiceRegistry} params.oidcAuthenticationServiceRegistry
  * @return {Promise<string>}
  */
-async function getAuthorizationUrl({ audience, identityProvider, oidcAuthenticationServiceRegistry }) {
+async function getAuthorizationUrl({ target, identityProvider, oidcAuthenticationServiceRegistry }) {
   await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
   await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProvider);
 
   const oidcAuthenticationService = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
     identityProviderCode: identityProvider,
-    audience,
+    target,
   });
 
   return oidcAuthenticationService.getAuthorizationUrl();

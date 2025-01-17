@@ -46,7 +46,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
 
       // then
       expect(usecases.authenticateOidcUser).to.have.been.calledWithExactly({
-        audience: undefined,
+        target: undefined,
         code,
         identityProviderCode: identityProvider,
         nonce: 'nonce',
@@ -215,7 +215,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
 
       //then
       expect(usecases.getAuthorizationUrl).to.have.been.calledWithExactly({
-        audience: undefined,
+        target: undefined,
         identityProvider: 'OIDC',
       });
       expect(request.yar.set).to.have.been.calledTwice;
@@ -249,7 +249,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
       ]);
 
       // when
-      const response = await oidcProviderController.getIdentityProviders({ query: { audience: null } }, hFake);
+      const response = await oidcProviderController.getIdentityProviders({ query: { target: null } }, hFake);
 
       // then
       expect(usecases.getReadyIdentityProviders).to.have.been.called;

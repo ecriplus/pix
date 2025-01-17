@@ -4,7 +4,7 @@ import { ForbiddenAccess } from '../../../shared/domain/errors.js';
 /**
  * @typedef {function} authenticateOidcUser
  * @param {Object} params
- * @param {string} params.audience
+ * @param {string} params.target
  * @param {string} params.code
  * @param {string} params.identityProviderCode
  * @param {string} params.nonce
@@ -19,7 +19,7 @@ import { ForbiddenAccess } from '../../../shared/domain/errors.js';
  * @return {Promise<{isAuthenticationComplete: boolean, givenName: string, familyName: string, authenticationKey: string, email: string}|{isAuthenticationComplete: boolean, pixAccessToken: string, logoutUrlUUID: string}>}
  */
 async function authenticateOidcUser({
-  audience,
+  target,
   code,
   state,
   iss,
@@ -38,7 +38,7 @@ async function authenticateOidcUser({
 
   const oidcAuthenticationService = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
     identityProviderCode,
-    audience,
+    target,
   });
 
   const sessionContent = await oidcAuthenticationService.exchangeCodeForTokens({
@@ -63,7 +63,7 @@ async function authenticateOidcUser({
     return { authenticationKey, givenName, familyName, email, isAuthenticationComplete: false };
   }
 
-  await _assertUserWithPixAdminAccess({ audience, userId: user.id, adminMemberRepository });
+  await _assertUserWithPixAdminAccess({ target, userId: user.id, adminMemberRepository });
 
   await _updateAuthenticationMethodWithComplement({
     userInfo,
@@ -109,8 +109,8 @@ async function _updateAuthenticationMethodWithComplement({
   });
 }
 
-async function _assertUserWithPixAdminAccess({ audience, userId, adminMemberRepository }) {
-  if (audience === PIX_ADMIN.AUDIENCE) {
+async function _assertUserWithPixAdminAccess({ target, userId, adminMemberRepository }) {
+  if (target === PIX_ADMIN.TARGET) {
     const adminMember = await adminMemberRepository.get({ userId });
     if (!adminMember?.hasAccessToAdminScope) {
       throw new ForbiddenAccess(

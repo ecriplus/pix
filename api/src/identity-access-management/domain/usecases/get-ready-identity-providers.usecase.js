@@ -5,10 +5,10 @@
  * @param {OidcAuthenticationServiceRegistry} params.oidcAuthenticationServiceRegistry
  * @return {Promise<OidcAuthenticationService[]|null>}
  */
-const getReadyIdentityProviders = async function ({ audience = 'app', oidcAuthenticationServiceRegistry }) {
+const getReadyIdentityProviders = async function ({ target = 'app', oidcAuthenticationServiceRegistry }) {
   await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
 
-  if (audience === 'admin') {
+  if (target === 'admin') {
     return oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesForPixAdmin();
   }
 

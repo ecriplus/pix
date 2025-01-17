@@ -11,7 +11,7 @@ import * as oidcSerializer from '../../infrastructure/serializers/jsonapi/oidc-s
  * @return {Promise<*>}
  */
 async function authenticateOidcUser(request, h) {
-  const { code, state, iss, identityProvider: identityProviderCode, audience } = request.deserializedPayload;
+  const { code, state, iss, identityProvider: identityProviderCode, target } = request.deserializedPayload;
 
   const sessionState = request.yar.get('state', true);
   const nonce = request.yar.get('nonce', true);
@@ -22,7 +22,7 @@ async function authenticateOidcUser(request, h) {
   }
 
   const result = await usecases.authenticateOidcUser({
-    audience,
+    target,
     code,
     state,
     iss,
@@ -95,9 +95,9 @@ async function findUserForReconciliation(request, h, dependencies = { oidcSerial
  * @return {Promise<Object>}
  */
 async function getAuthorizationUrl(request, h) {
-  const { identity_provider: identityProvider, audience } = request.query;
+  const { identity_provider: identityProvider, target } = request.query;
 
-  const { nonce, state, ...payload } = await usecases.getAuthorizationUrl({ audience, identityProvider });
+  const { nonce, state, ...payload } = await usecases.getAuthorizationUrl({ target, identityProvider });
 
   request.yar.set('state', state);
   request.yar.set('nonce', nonce);
@@ -113,8 +113,8 @@ async function getAuthorizationUrl(request, h) {
  * @return {Promise<*>}
  */
 async function getIdentityProviders(request, h) {
-  const audience = request.query.audience;
-  const identityProviders = await usecases.getReadyIdentityProviders({ audience });
+  const target = request.query.target;
+  const identityProviders = await usecases.getReadyIdentityProviders({ target });
   return h.response(oidcProviderSerializer.serialize(identityProviders)).code(200);
 }
 
