@@ -8,25 +8,22 @@
 
 <form onSubmit={{this.submitUpdate}} class="account-recovery__content--form">
   <div class="account-recovery__content--form-fields">
-    <FormTextfield
-      @label={{t "pages.account-recovery.update-sco-record.form.email-label"}}
-      @textfieldName="email"
-      @value={{@email}}
-      @disabled={{true}}
-    />
+    <PixInput @id="email" @value={{@email}} @disabled={{true}}>
+      <:label>{{t "pages.account-recovery.update-sco-record.form.email-label"}}</:label>
+    </PixInput>
 
-    <FormTextfield
-      @label={{t "pages.account-recovery.update-sco-record.form.password-label"}}
-      @textfieldName="password"
+    <PixInputPassword
+      @id="password"
       @value={{this.password}}
-      @onInput={{this.handlePasswordInput}}
-      @onValidate={{this.validatePassword}}
+      autocomplete="off"
+      {{on "focusout" this.validatePassword}}
+      {{on "input" this.handlePasswordInput}}
       @validationStatus={{this.passwordValidation.status}}
-      @validationMessage={{this.passwordValidation.message}}
-      @autocomplete="off"
-      @require={{true}}
-      @hideRequired={{true}}
-    />
+      @errorMessage={{this.passwordValidation.message}}
+      @requiredLabel={{true}}
+    >
+      <:label>{{t "pages.account-recovery.update-sco-record.form.password-label"}}</:label>
+    </PixInputPassword>
 
     <div class="update-sco-record-form__cgu-container">
       <PixCheckbox {{on "change" this.onChange}}>
