@@ -1,8 +1,11 @@
 {{page-title (t "pages.missions.end-page.title")}}
 <div class="mission-page">
-  <RobotDialog @class={{this.robotMood}}>
-    <Bubble @message={{t this.resultMessage}} @status="success" />
-  </RobotDialog>
+  <div class="header_container">
+    <RobotDialog @class={{this.robotMood}}>
+      <Bubble @message={{t this.resultMessage}} @status="success" />
+    </RobotDialog>
+    <IdentifiedLearner />
+  </div>
   <div class="mission-page__body">
     <MissionCard::CompletedMissionCard
       @missionLabelStatus={{t "pages.missions.list.status.completed.label"}}

@@ -1,6 +1,12 @@
 .mission-page {
   margin-top: 20px;
 
+  .header_container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
   &__body {
     display: flex;
     margin-top: 16px;

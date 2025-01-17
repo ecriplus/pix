@@ -214,6 +214,7 @@ module('Acceptance | School', function (hooks) {
         // then
         assert.deepEqual(currentLearner.learner, {
           id: 1,
+          displayName: 'Sara A.',
           schoolUrl: '/schools/MINIPIXOU',
         });
       });

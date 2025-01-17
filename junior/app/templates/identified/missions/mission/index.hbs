@@ -1,8 +1,11 @@
 {{page-title (t "pages.missions.start-page.title")}}
 <div class="mission-page">
-  <RobotDialog>
-    <Bubble @message={{t "pages.missions.start-page.welcome"}} />
-  </RobotDialog>
+  <div class="header_container">
+    <RobotDialog>
+      <Bubble @message={{t "pages.missions.start-page.welcome"}} />
+    </RobotDialog>
+    <IdentifiedLearner />
+  </div>
   <div class="mission-page__body">
 
     <MissionCard::MissionCard

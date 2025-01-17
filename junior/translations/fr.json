@@ -26,6 +26,9 @@
       },
       "title": "Écran dans le mauvais sens"
     },
+    "login": {
+      "logout-button": "Se déconnecter"
+    },
     "oralization-button": {
       "label": "Lire la consigne à haute voix",
       "play": "J'écoute",

@@ -40,8 +40,6 @@ export default class Qrocm extends Component {
       block.ariaLabel = block.autoAriaLabel ? `Réponse {${block.ariaLabel}}` : block.ariaLabel;
       return block;
     });
-    console.log(this.args.challenge);
-    console.log(proposals);
     return proposals;
   }
 

@@ -8,6 +8,7 @@ import ENV from 'junior/config/environment';
 
 import Bubble from '../bubble';
 import DelayedElement from '../delayed-element';
+import IdentifiedLearner from '../identified-learner';
 import RobotDialog from '../robot-dialog';
 import ChallengeContent from './challenge-content';
 import ChallengeLayout from './challenge-layout';
@@ -141,22 +142,25 @@ export default class Challenge extends Component {
   <template>
     {{pageTitle (t "pages.challenge.title")}}
     <ChallengeLayout>
-      <RobotDialog @class={{this.robotMood}}>
-        {{#each @challenge.instructions as |instruction index|}}
-          <DelayedElement @shouldDisplayIn={{this.bubbleDisplayDelay index}}>
-            <Bubble @message={{instruction}} @oralization={{@oralization}} />
-          </DelayedElement>
-        {{/each}}
+      <div class="header_container">
+        <RobotDialog @class={{this.robotMood}}>
+          {{#each @challenge.instructions as |instruction index|}}
+            <DelayedElement @shouldDisplayIn={{this.bubbleDisplayDelay index}}>
+              <Bubble @message={{instruction}} @oralization={{@oralization}} />
+            </DelayedElement>
+          {{/each}}
 
-        {{#if this.robotFeedback.message}}
-          <Bubble
-            @message={{this.robotFeedback.message}}
-            @status={{this.robotFeedback.status}}
-            @oralization={{@oralization}}
-            aria-live="polite"
-          />
-        {{/if}}
-      </RobotDialog>
+          {{#if this.robotFeedback.message}}
+            <Bubble
+              @message={{this.robotFeedback.message}}
+              @status={{this.robotFeedback.status}}
+              @oralization={{@oralization}}
+              aria-live="polite"
+            />
+          {{/if}}
+        </RobotDialog>
+        <IdentifiedLearner />
+      </div>
       <DelayedElement @shouldDisplayIn={{this.challengeItemDisplayDelay}}>
         <ChallengeContent
           @setAnswerValue={{this.setAnswerValue}}
