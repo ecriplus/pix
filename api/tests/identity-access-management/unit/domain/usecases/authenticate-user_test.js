@@ -51,7 +51,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         // given
         const scope = PIX_ORGA.SCOPE;
         const user = new User({ email: userEmail, memberships: [] });
-        const audience = 'audience';
+        const audience = 'https://orga.pix.fr';
         pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
 
         // when
@@ -77,7 +77,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         // given
         const scope = PIX_ADMIN.SCOPE;
         const user = new User({ email: userEmail });
-        const audience = 'audience';
+        const audience = 'https://admin.pix.fr';
 
         pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
         adminMemberRepository.get.withArgs({ userId: user.id }).resolves();
@@ -104,7 +104,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         // given
         const scope = PIX_ADMIN.SCOPE;
         const user = new User({ email: userEmail });
-        const audience = 'audience';
+        const audience = 'https://admin.pix.fr';
         const adminMember = new AdminMember({
           id: 567,
           userId: user.id,
@@ -142,7 +142,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         const scope = PIX_ADMIN.SCOPE;
         const source = 'pix';
         const user = new User({ id: 123, email: userEmail });
-        const audience = 'audience';
+        const audience = 'https://admin.pix.fr';
         const adminMember = new AdminMember({
           id: 567,
           userId: user.id,
@@ -201,7 +201,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           const accessToken = 'jwt.access.token';
           const expirationDelaySeconds = 1;
           const source = 'pix';
-          const audience = 'audience';
+          const audience = 'https://certif.pix.fr';
 
           const user = domainBuilder.buildUser({
             email: userEmail,
@@ -249,7 +249,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     const scope = 'mon-pix';
     const expirationDelaySeconds = 1;
     const user = domainBuilder.buildUser({ email: userEmail });
-    const audience = 'audience';
+    const audience = 'https://certif.pix.fr';
 
     pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
 
@@ -289,7 +289,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     const source = 'pix';
     const scope = 'mon-pix';
     const expirationDelaySeconds = 1;
-    const audience = 'audience';
+    const audience = 'https://certif.pix.fr';
 
     const user = domainBuilder.buildUser({ email: userEmail });
 
@@ -320,7 +320,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     // given
     const unknownUserEmail = 'unknown_user_email@example.net';
     pixAuthenticationService.getUserByUsernameAndPassword.rejects(new UserNotFoundError());
-    const audience = 'audience';
+    const audience = 'https://certif.pix.fr';
 
     // when
     const error = await catchErr(authenticateUser)({
@@ -339,7 +339,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
   it('should rejects an error when given password does not match the found user’s one', async function () {
     // given
     pixAuthenticationService.getUserByUsernameAndPassword.rejects(new MissingOrInvalidCredentialsError());
-    const audience = 'audience';
+    const audience = 'https://certif.pix.fr';
 
     // when
     const error = await catchErr(authenticateUser)({
@@ -359,7 +359,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     it('should throw UserShouldChangePasswordError', async function () {
       // given
       const tokenService = { createPasswordResetToken: sinon.stub() };
-      const audience = 'audience';
+      const audience = 'https://certif.pix.fr';
 
       const user = domainBuilder.buildUser({ username: 'jean.neymar2008' });
       const authenticationMethod = domainBuilder.buildAuthenticationMethod.withPixAsIdentityProviderAndRawPassword({
@@ -404,7 +404,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         const source = 'pix';
         const expirationDelaySeconds = 1;
         const user = domainBuilder.buildUser({ email: userEmail, locale: 'fr-FR' });
-        const audience = 'audience';
+        const audience = 'https://app.pix.fr';
 
         pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
         tokenService.createAccessTokenFromUser.resolves({ accessToken, expirationDelaySeconds });
@@ -436,7 +436,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           const source = 'pix';
           const scope = 'mon-pix';
           const expirationDelaySeconds = 1;
-          const audience = 'audience';
+          const audience = 'https://app.pix.fr';
           const user = domainBuilder.buildUser({ email: userEmail, locale: null });
           const setLocaleIfNotAlreadySetStub = sinon.stub(user, 'setLocaleIfNotAlreadySet');
 
@@ -470,7 +470,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           const source = 'pix';
           const scope = 'mon-pix';
           const expirationDelaySeconds = 1;
-          const audience = 'audience';
+          const audience = 'https://app.pix.fr';
           const user = domainBuilder.buildUser({ email: userEmail, locale: undefined });
 
           pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);

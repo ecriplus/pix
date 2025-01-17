@@ -12,7 +12,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
     const iss = 'https://issuer.url';
     const identityProvider = 'OIDC_EXAMPLE_NET';
     const pixAccessToken = 'pixAccessToken';
-    const audience = 'http-proto://pix/toto';
+    const audience = 'https://app.pix.fr';
 
     let request;
 
@@ -20,8 +20,8 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
       request = {
         auth: { credentials: { userId: 123 } },
         headers: {
-          'x-forwarded-proto': 'http-proto',
-          'x-forwarded-host': 'pix/toto',
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
         },
         deserializedPayload: {
           identityProvider,

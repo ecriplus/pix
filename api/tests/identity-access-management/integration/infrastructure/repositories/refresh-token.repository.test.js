@@ -19,7 +19,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         userId: 'userId!',
         scope: 'scope!',
         source: 'source!',
-        audience: 'audience!',
+        audience: 'https://app.pix.fr',
       });
       await refreshTokenRepository.save({ refreshToken });
 
@@ -27,7 +27,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         userId: 'userId!',
         scope: 'scope!',
         source: 'source!',
-        audience: 'audience!',
+        audience: 'https://certif.pixfr',
       });
       await refreshTokenRepository.save({ refreshToken: refreshToken2 });
 
@@ -46,7 +46,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         userId: 'userId!',
         scope: 'scope!',
         source: 'source!',
-        audience: 'audience!',
+        audience: 'https://orga.pix.fr',
       });
       await refreshTokenRepository.save({ refreshToken });
 
@@ -54,7 +54,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         userId: 'userId!',
         scope: 'scope!',
         source: 'source!',
-        audience: 'audience!',
+        audience: 'https://app.pix.fr',
       });
       await refreshTokenRepository.save({ refreshToken: refreshToken2 });
 
@@ -62,7 +62,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         userId: 'userId2!',
         scope: 'scope!',
         source: 'source!',
-        audience: 'audience!',
+        audience: 'https://app.pix.fr',
       });
       await refreshTokenRepository.save({ refreshToken: refreshToken3 });
 
@@ -81,7 +81,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         userId: 'userId!',
         scope: 'scope!',
         source: 'source!',
-        audience: 'audience!',
+        audience: 'https://app.pix.fr',
       });
 
       // when
@@ -100,14 +100,14 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         userId: 'userId!',
         scope: 'scope!',
         source: 'source!',
-        audience: 'audience!',
+        audience: 'https://app.pix.fr',
       });
       await refreshTokenRepository.save({ refreshToken: refreshToken1 });
       const refreshToken2 = RefreshToken.generate({
         userId: 'userId!',
         scope: 'scope!',
         source: 'source!',
-        audience: 'audience!',
+        audience: 'https://orga.pix.fr',
       });
       await refreshTokenRepository.save({ refreshToken: refreshToken2 });
 
@@ -127,21 +127,21 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         userId: 'userId!',
         scope: 'scope!',
         source: 'source!',
-        audience: 'audience!',
+        audience: 'https://app.pix.fr',
       });
       await refreshTokenRepository.save({ refreshToken: refreshToken1 });
       const refreshToken2 = RefreshToken.generate({
         userId: 'userId!',
         scope: 'scope!',
         source: 'source!',
-        audience: 'audience!',
+        audience: 'https://app.pix.fr',
       });
       await refreshTokenRepository.save({ refreshToken: refreshToken2 });
       const refreshToken3 = RefreshToken.generate({
         userId: 'userId2!',
         scope: 'scope!',
         source: 'source!',
-        audience: 'audience!',
+        audience: 'https://certif.pixfr',
       });
       await refreshTokenRepository.save({ refreshToken: refreshToken3 });
 

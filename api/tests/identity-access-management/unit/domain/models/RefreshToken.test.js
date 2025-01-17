@@ -21,7 +21,7 @@ describe('Unit | Identity Access Management | Domain | Model | RefreshToken', fu
         scope: 'scope!',
         source: 'source!',
         value: 'token!',
-        audience: 'audience!',
+        audience: 'https://app.pix.fr',
       });
 
       // then
@@ -29,7 +29,7 @@ describe('Unit | Identity Access Management | Domain | Model | RefreshToken', fu
       expect(refreshToken.userId).to.equal('userId!');
       expect(refreshToken.scope).to.equal('scope!');
       expect(refreshToken.source).to.equal('source!');
-      expect(refreshToken.audience).to.equal('audience!');
+      expect(refreshToken.audience).to.equal('https://app.pix.fr');
       expect(refreshToken.expirationDelaySeconds).to.equal(defaultRefreshTokenLifespanMs / 1000);
     });
 
@@ -47,7 +47,7 @@ describe('Unit | Identity Access Management | Domain | Model | RefreshToken', fu
           scope: 'pix-orga',
           source: 'source!',
           value: 'token!',
-          audience: 'audience!',
+          audience: 'https://app.pix.fr',
         });
 
         // then
@@ -61,7 +61,7 @@ describe('Unit | Identity Access Management | Domain | Model | RefreshToken', fu
             userId: 'userId!',
             source: 'source!',
             value: 'token!',
-            audience: 'audience!',
+            audience: 'https://app.pix.fr',
           });
 
           // then
@@ -81,7 +81,7 @@ describe('Unit | Identity Access Management | Domain | Model | RefreshToken', fu
         userId: 'userId!',
         scope: 'scope!',
         source: 'source!',
-        audience: 'audience!',
+        audience: 'https://app.pix.fr',
       });
 
       // then

@@ -33,7 +33,7 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
     const password = 'user_password';
     const scope = 'pix-orga';
     const source = 'pix';
-    const audience = 'http-proto://pix/toto';
+    const audience = 'https://app.pix.fr';
 
     /**
      * @see https://www.oauth.com/oauth2-servers/access-tokens/access-token-response/
@@ -47,8 +47,8 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
         const request = {
           headers: {
             'content-type': 'application/x-www-form-urlencoded',
-            'x-forwarded-proto': 'http-proto',
-            'x-forwarded-host': 'pix/toto',
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'app.pix.fr',
           },
           payload: {
             grant_type: 'password',
@@ -101,8 +101,8 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
         const request = {
           headers: {
             'content-type': 'application/x-www-form-urlencoded',
-            'x-forwarded-proto': 'http-proto',
-            'x-forwarded-host': 'pix/toto',
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'app.pix.fr',
           },
           payload: { grant_type: 'refresh_token', refresh_token: refreshToken, scope },
         };

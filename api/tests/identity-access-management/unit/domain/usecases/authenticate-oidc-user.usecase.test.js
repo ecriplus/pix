@@ -17,7 +17,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
     let userLoginRepository;
     let oidcAuthenticationServiceRegistry;
     const externalIdentityId = '094b83ac-2e20-4aa8-b438-0bc91748e4a6';
-    const audience = 'https://pix/toto.fr';
+    const audience = 'https://app.pix.fr';
 
     beforeEach(function () {
       oidcAuthenticationService = {
@@ -333,7 +333,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
     let userLoginRepository;
     let oidcAuthenticationServiceRegistry;
     const externalIdentityId = '094b83ac-2e20-4aa8-b438-0bc91748e4a6';
-    const audience = 'https://pix/toto.fr';
+    const audience = 'https://app.pix.fr';
 
     beforeEach(function () {
       oidcAuthenticationService = {

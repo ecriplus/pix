@@ -122,7 +122,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
       // given
       const userId = 42;
       const accessToken = Symbol('valid access token');
-      const audience = 'http-proto://pix/toto';
+      const audience = 'https://admin.pix.fr';
       const payload = { user_id: userId, aud: audience };
       const jwtOptions = { expiresIn: ms('48h') / 1000 };
       sinon

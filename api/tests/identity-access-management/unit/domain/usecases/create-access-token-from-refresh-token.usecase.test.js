@@ -12,7 +12,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | create-access-
       const expirationDelaySeconds = 1;
       const scope = 'mon-pix';
       const source = 'pix';
-      const audience = 'http-proto://pix/toto';
+      const audience = 'https://admin.pix.fr';
 
       const refreshToken = RefreshToken.generate({ userId, scope, source, audience });
 
@@ -46,7 +46,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | create-access-
       const expirationDelaySeconds = 1;
       const scope = 'mon-pix';
       const source = 'pix';
-      const audience = 'http-proto://pix/toto';
+      const audience = 'https://admin.pix.fr';
 
       const refreshToken = RefreshToken.generate({ userId, scope, source, audience });
 
@@ -82,7 +82,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | create-access-
       const expirationDelaySeconds = 1;
       const scope = 'mon-pix';
       const source = 'pix';
-      const audience = 'http-proto://pix/toto';
+      const audience = 'https://admin.pix.fr';
 
       const refreshToken = RefreshToken.generate({ userId, scope, source, audience });
 

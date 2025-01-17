@@ -48,7 +48,7 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
       sinon.stub(settings.authentication, 'secret').value('a secret');
       sinon.stub(settings.authentication, 'accessTokenLifespanMs').value(1000);
       const accessToken = 'valid access token';
-      const audience = 'http-proto://pix/toto';
+      const audience = 'https://admin.pix.fr';
       const expirationDelaySeconds = 1;
       const firstParameter = { user_id: userId, source, aud: audience };
       const secondParameter = 'a secret';
@@ -121,7 +121,7 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
     it('should return userId if the accessToken is valid', function () {
       // given
       const userId = 123;
-      const audience = 'http-proto://pix/toto';
+      const audience = 'https://admin.pix.fr';
       const accessToken = tokenService.createAccessTokenFromUser({ userId, source: 'pix', audience }).accessToken;
 
       // when
