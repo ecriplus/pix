@@ -15,112 +15,110 @@
     {{t "pages.account-recovery.find-sco-record.student-information.mandatory-all-fields"}}
   </p>
 
-  <form {{on "submit" this.submit}} class="account-recovery__content--form">
-    <div class="account-recovery__content--form-fields">
-      <div class="student-information-form__tooltip">
-        <PixTooltip
-          @position="top-left"
-          @isLight={{true}}
-          @isWide={{true}}
-          aria-label={{t "pages.account-recovery.find-sco-record.student-information.form.tooltip" htmlSafe=true}}
-        >
-          <:triggerElement>
-            <PixIcon @name="help" @plainIcon={{true}} @ariaHidden={{true}} tabindex="0" />
-          </:triggerElement>
-          <:tooltip>
-            {{t "pages.account-recovery.find-sco-record.student-information.form.tooltip" htmlSafe=true}}
-          </:tooltip>
-        </PixTooltip>
-      </div>
-      <FormTextfield
-        @label={{t "pages.account-recovery.find-sco-record.student-information.form.ine-ina"}}
-        @textfieldName="ineIna"
-        @value={{this.ineIna}}
-        @onInput={{this.handleIneInaInput}}
-        @onValidate={{this.validateIneIna}}
-        @validationStatus={{this.ineInaValidation.status}}
-        @validationMessage={{this.ineInaValidation.message}}
-        @autocomplete="off"
-        @require={{true}}
-        @hideRequired="true"
-        @placeholder="123456789XX"
-        @aria-describedby="student-information-error-message"
-      />
+  <form {{on "submit" this.submit}} class="account-recovery__form">
+    <PixInput
+      @id="ineIna"
+      type="text"
+      placeholder="123456789XX"
+      @value={{this.ineIna}}
+      {{on "focusout" this.validateIneIna}}
+      {{on "input" this.handleIneInaInput}}
+      @validationStatus={{this.ineInaValidation.status}}
+      @errorMessage={{this.ineInaValidation.message}}
+      autocomplete="off"
+    >
+      <:label>
+        {{t "pages.account-recovery.find-sco-record.student-information.form.ine-ina"}}
 
-      <FormTextfield
-        @label={{t "pages.account-recovery.find-sco-record.student-information.form.first-name"}}
-        @textfieldName="firstName"
-        @value={{this.firstName}}
-        @onInput={{this.handleFirstNameInput}}
-        @onValidate={{this.validateFirstName}}
-        @validationStatus={{this.firstNameValidation.status}}
-        @validationMessage={{this.firstNameValidation.message}}
-        @autocomplete="off"
-        @require={{true}}
-        @hideRequired="true"
-        @aria-describedby="student-information-error-message"
-      />
-
-      <FormTextfield
-        @label={{t "pages.account-recovery.find-sco-record.student-information.form.last-name"}}
-        @textfieldName="lastName"
-        @value={{this.lastName}}
-        @onInput={{this.handleLastNameInput}}
-        @onValidate={{this.validateLastName}}
-        @validationStatus={{this.lastNameValidation.status}}
-        @validationMessage={{this.lastNameValidation.message}}
-        @autocomplete="off"
-        @require={{true}}
-        @hideRequired="true"
-        @aria-describedby="student-information-error-message"
-      />
-
-      <div class="form-textfield">
-        <p class="form-textfield__label student-information-form__birthdate-label">
-          {{t "pages.account-recovery.find-sco-record.student-information.form.birthdate"}}
-        </p>
-        <div class="student-information-form__birthdate-fields">
-          <div class="form-textfield__input-field-container">
-            <PixInput
-              min="1"
-              max="31"
-              type="number"
-              @value={{this.dayOfBirth}}
-              placeholder={{t "pages.account-recovery.find-sco-record.student-information.form.placeholder.birth-day"}}
-              @id="dayOfBirth"
-              {{on "input" this.handleDayInput}}
-              aria-label={{t "pages.account-recovery.find-sco-record.student-information.form.label.birth-day"}}
-              autocomplete="off"
-            />
-          </div>
-          <div class="form-textfield__input-field-container">
-            <PixInput
-              min="1"
-              max="12"
-              type="number"
-              @value={{this.monthOfBirth}}
-              placeholder={{t
-                "pages.account-recovery.find-sco-record.student-information.form.placeholder.birth-month"
-              }}
-              @id="monthOfBirth"
-              {{on "input" this.handleMonthInput}}
-              aria-label={{t "pages.account-recovery.find-sco-record.student-information.form.label.birth-month"}}
-              autocomplete="off"
-            />
-          </div>
-          <div class="form-textfield__input-field-container">
-            <PixInput
-              min="1900"
-              type="number"
-              @value={{this.yearOfBirth}}
-              placeholder={{t "pages.account-recovery.find-sco-record.student-information.form.placeholder.birth-year"}}
-              @id="yearOfBirth"
-              aria-label={{t "pages.account-recovery.find-sco-record.student-information.form.label.birth-year"}}
-              autocomplete="off"
-              {{on "input" this.handleYearInput}}
-            />
-          </div>
+        <div class="student-information-form__tooltip">
+          <PixTooltip
+            @position="top-left"
+            @isLight={{true}}
+            @isWide={{true}}
+            aria-label={{t "pages.account-recovery.find-sco-record.student-information.form.tooltip" htmlSafe=true}}
+          >
+            <:triggerElement>
+              <PixIcon @name="help" @plainIcon={{true}} @ariaHidden={{true}} tabindex="0" />
+            </:triggerElement>
+            <:tooltip>
+              {{t "pages.account-recovery.find-sco-record.student-information.form.tooltip" htmlSafe=true}}
+            </:tooltip>
+          </PixTooltip>
         </div>
+      </:label>
+    </PixInput>
+
+    <PixInput
+      @id="firstName"
+      @value={{this.firstName}}
+      {{on "focusout" this.validateFirstName}}
+      {{on "input" this.handleFirstNameInput}}
+      @validationStatus={{this.firstNameValidation.status}}
+      @errorMessage={{this.firstNameValidation.message}}
+      autocomplete="off"
+      type="text"
+    >
+      <:label>{{t "pages.account-recovery.find-sco-record.student-information.form.first-name"}}</:label>
+    </PixInput>
+
+    <PixInput
+      @id="lastName"
+      @value={{this.lastName}}
+      {{on "focusout" this.validateLastName}}
+      {{on "input" this.handleLastNameInput}}
+      @validationStatus={{this.lastNameValidation.status}}
+      @errorMessage={{this.lastNameValidation.message}}
+      autocomplete="off"
+      type="text"
+    >
+      <:label>{{t "pages.account-recovery.find-sco-record.student-information.form.last-name"}}</:label>
+    </PixInput>
+
+    <div class="form-textfield">
+      <p class="form-textfield__label student-information-form__birthdate-label">
+        {{t "pages.account-recovery.find-sco-record.student-information.form.birthdate"}}
+      </p>
+      <div class="student-information-form__birthdate-fields">
+        <PixInput
+          min="1"
+          max="31"
+          type="number"
+          @value={{this.dayOfBirth}}
+          placeholder={{t "pages.account-recovery.find-sco-record.student-information.form.placeholder.birth-day"}}
+          @id="dayOfBirth"
+          {{on "input" this.handleDayInput}}
+          autocomplete="off"
+          @screenReaderOnly={{true}}
+        >
+          <:label>{{t "pages.account-recovery.find-sco-record.student-information.form.label.birth-day"}}</:label>
+        </PixInput>
+
+        <PixInput
+          min="1"
+          max="12"
+          type="number"
+          @value={{this.monthOfBirth}}
+          placeholder={{t "pages.account-recovery.find-sco-record.student-information.form.placeholder.birth-month"}}
+          @id="monthOfBirth"
+          {{on "input" this.handleMonthInput}}
+          autocomplete="off"
+          @screenReaderOnly={{true}}
+        >
+          <:label>{{t "pages.account-recovery.find-sco-record.student-information.form.label.birth-month"}}</:label>
+        </PixInput>
+
+        <PixInput
+          min="1900"
+          type="number"
+          @value={{this.yearOfBirth}}
+          placeholder={{t "pages.account-recovery.find-sco-record.student-information.form.placeholder.birth-year"}}
+          @id="yearOfBirth"
+          autocomplete="off"
+          {{on "input" this.handleYearInput}}
+          @screenReaderOnly={{true}}
+        >
+          <:label>{{t "pages.account-recovery.find-sco-record.student-information.form.label.birth-year"}}</:label>
+        </PixInput>
       </div>
     </div>
 
@@ -141,10 +139,8 @@
       </PixNotificationAlert>
     {{/if}}
 
-    <div class="account-recovery__content--actions">
-      <PixButton @type="submit" @isDisabled={{not this.isFormValid}}>
-        {{t "pages.account-recovery.find-sco-record.student-information.form.submit"}}
-      </PixButton>
-    </div>
+    <PixButton @type="submit" @isDisabled={{not this.isFormValid}}>
+      {{t "pages.account-recovery.find-sco-record.student-information.form.submit"}}
+    </PixButton>
   </form>
 </div>
