@@ -10,6 +10,7 @@ import { ForbiddenAccess } from '../../../shared/domain/errors.js';
  * @param {string} params.nonce
  * @param {string} params.sessionState
  * @param {string} params.state
+ * @param {string} params.audience
  * @param {AuthenticationSessionService} params.authenticationSessionService
  * @param {OidcAuthenticationServiceRegistry} params.oidcAuthenticationServiceRegistry
  * @param {AdminMemberRepository} params.adminMemberRepository
@@ -26,6 +27,7 @@ async function authenticateOidcUser({
   identityProviderCode,
   nonce,
   sessionState,
+  audience,
   authenticationSessionService,
   oidcAuthenticationServiceRegistry,
   adminMemberRepository,
@@ -73,7 +75,7 @@ async function authenticateOidcUser({
     authenticationMethodRepository,
   });
 
-  const pixAccessToken = oidcAuthenticationService.createAccessToken({ userId: user.id });
+  const pixAccessToken = oidcAuthenticationService.createAccessToken({ userId: user.id, audience });
 
   let logoutUrlUUID;
   if (oidcAuthenticationService.shouldCloseSession) {

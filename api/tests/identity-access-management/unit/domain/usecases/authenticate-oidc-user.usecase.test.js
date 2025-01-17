@@ -17,6 +17,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
     let userLoginRepository;
     let oidcAuthenticationServiceRegistry;
     const externalIdentityId = '094b83ac-2e20-4aa8-b438-0bc91748e4a6';
+    const audience = 'https://pix/toto.fr';
 
     beforeEach(function () {
       oidcAuthenticationService = {
@@ -217,6 +218,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          audience,
         });
 
         // then
@@ -245,6 +247,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          audience,
         });
 
         // then
@@ -330,6 +333,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
     let userLoginRepository;
     let oidcAuthenticationServiceRegistry;
     const externalIdentityId = '094b83ac-2e20-4aa8-b438-0bc91748e4a6';
+    const audience = 'https://pix/toto.fr';
 
     beforeEach(function () {
       oidcAuthenticationService = {
@@ -382,6 +386,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          audience,
         });
 
         // then
@@ -402,7 +407,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           .resolves({ id: 10 });
         oidcAuthenticationService.createAuthenticationComplement.returns(undefined);
         oidcAuthenticationService.createAccessToken
-          .withArgs({ userId: 10 })
+          .withArgs({ userId: 10, audience })
           .returns('accessTokenForExistingExternalUser');
         oidcAuthenticationService.saveIdToken
           .withArgs({ idToken: sessionContent.idToken, userId: 10 })
@@ -418,6 +423,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          audience,
         });
 
         // then
@@ -455,6 +461,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          audience,
         });
 
         // then
