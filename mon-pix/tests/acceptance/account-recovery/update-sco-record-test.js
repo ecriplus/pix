@@ -1,5 +1,5 @@
-import { fillByLabel, visit } from '@1024pix/ember-testing-library';
-import { click, currentURL, settled } from '@ember/test-helpers';
+import { visit } from '@1024pix/ember-testing-library';
+import { click, currentURL, fillIn, settled } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -169,7 +169,10 @@ module('Acceptance | account-recovery | UpdateScoRecordRoute', function (hooks) 
 
       const screen = await visit(`/recuperer-mon-compte/${temporaryKey}`);
 
-      await fillByLabel(t('pages.account-recovery.update-sco-record.form.password-label'), password);
+      const passwordInput = screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), {
+        exact: false,
+      });
+      await fillIn(passwordInput, password);
       await click(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
 
       // when
@@ -201,7 +204,12 @@ module('Acceptance | account-recovery | UpdateScoRecordRoute', function (hooks) 
       server.patch('/account-recovery', () => errorsApi);
 
       const screen = await visit(`/recuperer-mon-compte/${temporaryKey}`);
-      await fillByLabel(t('pages.account-recovery.update-sco-record.form.password-label'), newPassword);
+
+      const passwordInput = screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), {
+        exact: false,
+      });
+      await fillIn(passwordInput, newPassword);
+
       await click(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
 
       // when
@@ -238,7 +246,11 @@ module('Acceptance | account-recovery | UpdateScoRecordRoute', function (hooks) 
       server.patch('/account-recovery', () => errorsApi);
 
       const screen = await visit(`/recuperer-mon-compte/${temporaryKey}`);
-      await fillByLabel(t('pages.account-recovery.update-sco-record.form.password-label'), newPassword);
+
+      const passwordInput = screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), {
+        exact: false,
+      });
+      await fillIn(passwordInput, newPassword);
       await click(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
 
       // when
@@ -274,7 +286,10 @@ module('Acceptance | account-recovery | UpdateScoRecordRoute', function (hooks) 
       server.patch('/account-recovery', () => errorsApi);
 
       const screen = await visit(`/recuperer-mon-compte/${temporaryKey}`);
-      await fillByLabel(t('pages.account-recovery.update-sco-record.form.password-label'), newPassword);
+      const passwordInput = screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), {
+        exact: false,
+      });
+      await fillIn(passwordInput, newPassword);
       await click(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
 
       // when
@@ -311,7 +326,10 @@ module('Acceptance | account-recovery | UpdateScoRecordRoute', function (hooks) 
       server.patch('/account-recovery', () => errorsApi);
 
       const screen = await visit(`/recuperer-mon-compte/${temporaryKey}`);
-      await fillByLabel(t('pages.account-recovery.update-sco-record.form.password-label'), newPassword);
+      const passwordInput = screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), {
+        exact: false,
+      });
+      await fillIn(passwordInput, newPassword);
       await click(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
 
       // when
@@ -347,7 +365,10 @@ module('Acceptance | account-recovery | UpdateScoRecordRoute', function (hooks) 
       server.patch('/account-recovery', () => errorsApi);
 
       const screen = await visit(`/recuperer-mon-compte/${temporaryKey}`);
-      await fillByLabel(t('pages.account-recovery.update-sco-record.form.password-label'), newPassword);
+      const passwordInput = screen.getByLabelText(t('pages.account-recovery.update-sco-record.form.password-label'), {
+        exact: false,
+      });
+      await fillIn(passwordInput, newPassword);
       await click(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
 
       // when

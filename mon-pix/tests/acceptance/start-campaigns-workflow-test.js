@@ -21,6 +21,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
   let campaign;
 
+  async function _loginUser(screen, prescritUser) {
+    await fillIn(screen.getByLabelText('Adresse e-mail ou identifiant', { exact: false }), prescritUser.email);
+    await fillIn(screen.getByLabelText('Mot de passe', { exact: false }), prescritUser.password);
+  }
+
   hooks.beforeEach(function () {
     this.server.schema.users.create({
       mustValidateTermsOfService: true,
@@ -104,8 +109,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               // when
               await fillIn(screen.getByRole('textbox', { name: 'Prénom' }), prescritUser.firstName);
               await fillIn(screen.getByRole('textbox', { name: 'Nom' }), prescritUser.lastName);
-              await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail' }), prescritUser.email);
-              await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
+              await _loginUser(screen, prescritUser);
               await click(screen.getByRole('checkbox', { name: t('common.cgu.label') }));
 
               // when
@@ -135,8 +139,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
               await click(screen.getByRole('button', { name: 'Je commence' }));
               await click(screen.getByRole('button', { name: 'Se connecter' }));
-              await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), prescritUser.email);
-              await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
+              await _loginUser(screen, prescritUser);
               await click(screen.getByRole('button', { name: 'Se connecter' }));
 
               // then
@@ -162,11 +165,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
                 await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
                 await click(screen.getByRole('button', { name: 'Je commence' }));
                 await click(screen.getByRole('button', { name: 'Se connecter' }));
-                await fillIn(
-                  screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }),
-                  prescritUser.email,
-                );
-                await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
+                await _loginUser(screen, prescritUser);
                 await click(screen.getByRole('button', { name: 'Se connecter' }));
 
                 // then
@@ -187,8 +186,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
               await click(screen.getByRole('button', { name: 'Je commence' }));
               await click(screen.getByRole('button', { name: 'Se connecter' }));
-              await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), prescritUser.email);
-              await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
+              await _loginUser(screen, prescritUser);
               await click(screen.getByRole('button', { name: 'Se connecter' }));
 
               // when
@@ -257,8 +255,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // when
-            await fillIn(screen.getByRole('textbox', { name: '* Prénom' }), prescritUser.firstName);
-            await fillIn(screen.getByRole('textbox', { name: '* Nom' }), prescritUser.lastName);
+            await fillIn(screen.getByLabelText('Prénom'), prescritUser.firstName);
+            await fillIn(screen.getByLabelText('Nom'), prescritUser.lastName);
             await fillIn(screen.getByRole('spinbutton', { name: 'Jour de naissance' }), '10');
             await fillIn(screen.getByRole('spinbutton', { name: 'Mois de naissance' }), '12');
             await fillIn(screen.getByRole('spinbutton', { name: 'Année de naissance' }), '2000');
@@ -267,10 +265,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             //go to email-based authentication window
             await click(screen.getByText('Mon adresse e-mail'));
 
-            await fillIn(
-              screen.getByRole('textbox', { name: '* Adresse e-mail (ex: nom@exemple.fr)' }),
-              prescritUser.email,
-            );
+            await fillIn(screen.getByLabelText('Adresse e-mail', { exact: false }), prescritUser.email);
             await fillIn(
               screen.getByLabelText(
                 'Mot de passe (8 caractères minimum, dont une majuscule, une minuscule et un chiffre)',
@@ -317,8 +312,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
             // when
             await click(screen.getByRole('button', { name: 'Se connecter' }));
-            await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), prescritUser.email);
-            await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
+            await _loginUser(screen, prescritUser);
             await click(screen.getByRole('button', { name: 'Se connecter' }));
 
             // then
@@ -335,8 +329,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
             // when
             await click(screen.getByRole('button', { name: 'Se connecter' }));
-            await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), prescritUser.email);
-            await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
+            await _loginUser(screen, prescritUser);
             await click(screen.getByRole('button', { name: 'Se connecter' }));
 
             // then
@@ -391,8 +384,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
             // when
             await click(screen.getByRole('link', { name: 'Se connecter' }));
-            await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), prescritUser.email);
-            await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
+            await _loginUser(screen, prescritUser);
 
             await click(screen.getByRole('button', { name: 'Je me connecte' }));
 
@@ -972,8 +964,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
 
             // when
-            await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), prescritUser.email);
-            await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
+            await _loginUser(screen, prescritUser);
             await click(screen.getByRole('button', { name: 'Se connecter' }));
 
             const session = currentSession();
@@ -1006,8 +997,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
 
             // when
-            await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), prescritUser.email);
-            await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
+            await _loginUser(screen, prescritUser);
             await click(screen.getByRole('button', { name: 'Se connecter' }));
 
             // then
@@ -1045,8 +1035,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
 
             // when
-            await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), prescritUser.email);
-            await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
+            await _loginUser(screen, prescritUser);
             await click(screen.getByRole('button', { name: 'Se connecter' }));
 
             // then
@@ -1076,8 +1065,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
 
             // when
-            await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), prescritUser.email);
-            await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
+            await _loginUser(screen, prescritUser);
             await click(screen.getByRole('button', { name: 'Se connecter' }));
 
             // then
@@ -1136,12 +1124,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
               await click(screen.getByRole('button', { name: "C'est parti !" }));
               await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
-              await fillIn(
-                screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }),
-                userShouldChangePassword.username,
-              );
-
-              await fillIn(screen.getByLabelText('Mot de passe'), userShouldChangePassword.password);
+              await _loginUser(screen, prescritUser);
               await click(screen.getByRole('button', { name: 'Se connecter' }));
 
               // then
