@@ -23,7 +23,7 @@ module('Integration | Component | update-expired-password-form', function (hooks
     //then
     assert.dom(screen.getByRole('heading', { name: 'Réinitialiser le mot de passe' })).exists();
     assert.dom(screen.getByRole('button', { name: 'Réinitialiser' })).exists();
-    assert.dom(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exist: false })).exists();
+    assert.dom(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false })).exists();
   });
 
   module('successful cases', function () {
@@ -43,13 +43,13 @@ module('Integration | Component | update-expired-password-form', function (hooks
       );
 
       // when
-      await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exist: false }), newPassword);
-      await triggerEvent(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exist: false }), 'change');
+      await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), newPassword);
+      await triggerEvent(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), 'change');
 
       await click(screen.getByRole('button', { name: 'Réinitialiser' }));
 
       // then
-      assert.dom(screen.queryByLabelText(PASSWORD_INPUT_LABEL, { exist: false })).doesNotExist();
+      assert.dom(screen.queryByLabelText(PASSWORD_INPUT_LABEL, { exact: false })).doesNotExist();
       assert.dom(screen.getByText('Votre mot de passe a été mis à jour.')).exists();
     });
   });
@@ -71,8 +71,8 @@ module('Integration | Component | update-expired-password-form', function (hooks
       );
 
       // when
-      await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exist: false }), newPassword);
-      await triggerEvent(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exist: false }), 'change');
+      await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), newPassword);
+      await triggerEvent(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), 'change');
 
       await click(screen.getByRole('button', { name: 'Réinitialiser' }));
 

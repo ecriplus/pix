@@ -10,8 +10,8 @@ import ENV from '../../../../config/environment';
 import { stubSessionService } from '../../../helpers/service-stubs.js';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
-const EMAIL_INPUT_LABEL = '* Adresse e-mail (ex: nom@exemple.fr)';
-const PASSWORD_INPUT_LABEL = '* Mot de passe (8 caractères minimum, dont une majuscule, une minuscule et un chiffre)';
+const EMAIL_INPUT_LABEL = 'Adresse e-mail';
+const PASSWORD_INPUT_LABEL = 'Mot de passe';
 
 const EMPTY_FIRSTNAME_ERROR_MESSAGE = 'Votre prénom n’est pas renseigné.';
 const EMPTY_LASTNAME_ERROR_MESSAGE = 'Votre nom n’est pas renseigné.';
@@ -77,8 +77,8 @@ module('Integration | Component | routes/register-form', function (hooks) {
 
       await click(screen.getByText('Mon adresse e-mail'));
 
-      await fillIn(screen.getByRole('textbox', { name: EMAIL_INPUT_LABEL }), 'shi@fu.me');
-      await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL), 'Mypassword1');
+      await fillIn(screen.getByLabelText(EMAIL_INPUT_LABEL, { exact: false }), 'shi@fu.me');
+      await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), 'Mypassword1');
 
       // when
       await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
@@ -98,7 +98,7 @@ module('Integration | Component | routes/register-form', function (hooks) {
 
       await fillInputReconciliationForm({ screen, t });
       await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
-      await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL), 'Mypassword1');
+      await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), 'Mypassword1');
 
       // when
       await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
@@ -134,8 +134,8 @@ module('Integration | Component | routes/register-form', function (hooks) {
           const screen = await render(hbs`<Routes::RegisterForm />`);
 
           // when
-          await fillIn(screen.getByRole('textbox', { name: '* Prénom' }), stringFilledIn);
-          await triggerEvent(screen.getByRole('textbox', { name: '* Prénom' }), 'focusout');
+          await fillIn(screen.getByLabelText(/Prénom/, { exact: false }), stringFilledIn);
+          await triggerEvent(screen.getByLabelText(/Prénom/, { exact: false }), 'focusout');
 
           // then
           assert.dom(screen.getByText(EMPTY_FIRSTNAME_ERROR_MESSAGE)).exists();
@@ -148,8 +148,8 @@ module('Integration | Component | routes/register-form', function (hooks) {
           const screen = await render(hbs`<Routes::RegisterForm />`);
 
           // when
-          await fillIn(screen.getByRole('textbox', { name: '* Nom' }), stringFilledIn);
-          await triggerEvent(screen.getByRole('textbox', { name: '* Nom' }), 'focusout');
+          await fillIn(screen.getByLabelText(/Nom/, { exact: false }), stringFilledIn);
+          await triggerEvent(screen.getByLabelText(/Nom/, { exact: false }), 'focusout');
 
           // then
           assert.dom(screen.getByText(EMPTY_LASTNAME_ERROR_MESSAGE)).exists();
@@ -216,8 +216,8 @@ module('Integration | Component | routes/register-form', function (hooks) {
 
           // when
           await click(screen.getByText('Mon adresse e-mail'));
-          await fillIn(screen.getByRole('textbox', { name: EMAIL_INPUT_LABEL }), stringFilledIn);
-          await triggerEvent(screen.getByRole('textbox', { name: EMAIL_INPUT_LABEL }), 'focusout');
+          await fillIn(screen.getByLabelText(EMAIL_INPUT_LABEL, { exact: false }), stringFilledIn);
+          await triggerEvent(screen.getByLabelText(EMAIL_INPUT_LABEL, { exact: false }), 'focusout');
 
           // then
           assert.dom(screen.getByText(EMPTY_EMAIL_ERROR_MESSAGE)).exists();
@@ -239,8 +239,8 @@ module('Integration | Component | routes/register-form', function (hooks) {
           await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
 
           // when
-          await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL), stringFilledIn);
-          await triggerEvent(screen.getByLabelText(PASSWORD_INPUT_LABEL), 'focusout');
+          await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), stringFilledIn);
+          await triggerEvent(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), 'focusout');
 
           // then
           assert.dom(screen.getByText(INCORRECT_PASSWORD_FORMAT_ERROR_MESSAGE)).exists();
@@ -257,8 +257,8 @@ module('Integration | Component | routes/register-form', function (hooks) {
 
       // when
       await click(screen.getByText('Mon adresse e-mail'));
-      await fillIn(screen.getByRole('textbox', { name: EMAIL_INPUT_LABEL }), 'shi.fu');
-      await triggerEvent(screen.getByRole('textbox', { name: EMAIL_INPUT_LABEL }), 'focusout');
+      await fillIn(screen.getByLabelText(EMAIL_INPUT_LABEL, { exact: false }), 'shi.fu');
+      await triggerEvent(screen.getByLabelText(EMAIL_INPUT_LABEL, { exact: false }), 'focusout');
       await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
 
       // then
@@ -278,7 +278,7 @@ module('Integration | Component | routes/register-form', function (hooks) {
         await fillInputReconciliationForm({ screen, t });
         await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
 
-        await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL), 'Mypassword1');
+        await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), 'Mypassword1');
         await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
 
         // then
@@ -307,7 +307,7 @@ module('Integration | Component | routes/register-form', function (hooks) {
         await fillInputReconciliationForm({ screen, t });
         await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
 
-        await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL), 'Mypassword1');
+        await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), 'Mypassword1');
         await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
 
         // then
@@ -323,8 +323,8 @@ module('Integration | Component | routes/register-form', function (hooks) {
       await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
 
       // when
-      await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL), 'toto');
-      await triggerEvent(screen.getByLabelText(PASSWORD_INPUT_LABEL), 'focusout');
+      await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), 'toto');
+      await triggerEvent(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), 'focusout');
       await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
 
       // then
@@ -748,8 +748,8 @@ module('Integration | Component | routes/register-form', function (hooks) {
 });
 
 async function fillInputReconciliationForm({ screen, t }) {
-  await fillIn(screen.getByRole('textbox', { name: '* Prénom' }), 'Legolas');
-  await fillIn(screen.getByRole('textbox', { name: '* Nom' }), 'Vertefeuille');
+  await fillIn(screen.getByLabelText(/Prénom/, { exact: false }), 'Legolas');
+  await fillIn(screen.getByLabelText(/Nom/, { exact: false }), 'Vertefeuille');
   await fillIn(
     screen.getByRole('spinbutton', {
       name: t('pages.login-or-register.register-form.fields.birthdate.day.label'),
