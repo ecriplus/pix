@@ -2,7 +2,6 @@
 
 .form-textfield {
   position: relative;
-  margin-top: 20px;
 }
 
 .form-textfield__label {
@@ -21,14 +20,8 @@
 .form-textfield__date {
   display: flex;
   flex-flow: row nowrap;
+  gap: var(--pix-spacing-2x);
   align-items: center;
-  justify-content: space-between;
-
-  & .form-textfield__input-field-container,
-  input {
-    flex-grow: 1;
-    text-align: center;
-  }
 }
 
 .form-textfield__input-field-container {

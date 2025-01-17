@@ -1,167 +1,159 @@
 {{! template-lint-disable no-triple-curlies }}
-<div class="register-form">
-  <form {{on "submit" this.searchForMatchingStudent}}>
-    <span class="register-form__required-inputs">{{t "common.form.mandatory-fields" htmlSafe=true}}</span>
+<form {{on "submit" this.searchForMatchingStudent}} class="register-form">
+  <span class="register-form__required-inputs">{{t "common.form.mandatory-fields" htmlSafe=true}}</span>
 
-    <div id="register-firstName-container">
-      <FormTextfield
-        @label={{t "pages.login-or-register.register-form.fields.firstname.label"}}
-        @textfieldName="firstName"
-        @value={{this.firstName}}
-        @onInput={{this.handleFirstNameInput}}
-        @onValidate={{this.triggerInputStringValidation}}
-        @validationStatus={{this.validation.firstName.status}}
-        @validationMessage={{this.validation.firstName.message}}
-        @autocomplete="firstname"
-        @disabled={{this.matchingStudentFound}}
-        @require={{true}}
-        @aria-describedby="register-error-message register-display-error-message"
-      />
-    </div>
+  <PixInput
+    @id="firstName"
+    @value={{this.firstName}}
+    {{on "focusout" (fn this.triggerInputStringValidation "firstName" this.firstName)}}
+    {{on "input" this.handleFirstNameInput}}
+    @requiredLabel={{true}}
+    @validationStatus={{this.validation.firstName.status}}
+    @errorMessage={{this.validation.firstName.message}}
+    @disabled={{this.matchingStudentFound}}
+    autocomplete="firstname"
+    type="text"
+  >
+    <:label>{{t "pages.login-or-register.register-form.fields.firstname.label"}}</:label>
+  </PixInput>
 
-    <div id="register-lastName-container">
-      <FormTextfield
-        @label={{t "pages.login-or-register.register-form.fields.lastname.label"}}
-        @textfieldName="lastName"
-        @value={{this.lastName}}
-        @onInput={{this.handleLastNameInput}}
-        @onValidate={{this.triggerInputStringValidation}}
-        @validationStatus={{this.validation.lastName.status}}
-        @validationMessage={{this.validation.lastName.message}}
-        @autocomplete="lastname"
-        @disabled={{this.matchingStudentFound}}
-        @require={{true}}
-        @aria-describedby="register-error-message register-display-error-message"
-      />
-    </div>
+  <PixInput
+    @id="lastName"
+    @value={{this.lastName}}
+    {{on "focusout" (fn this.triggerInputStringValidation "lastName" this.lastName)}}
+    {{on "input" this.handleLastNameInput}}
+    @requiredLabel={{true}}
+    @validationStatus={{this.validation.lastName.status}}
+    @errorMessage={{this.validation.lastName.message}}
+    @disabled={{this.matchingStudentFound}}
+    autocomplete="lastName"
+    type="text"
+  >
+    <:label>{{t "pages.login-or-register.register-form.fields.lastname.label"}}</:label>
+  </PixInput>
 
-    <div id="register-birthdate-container">
-      <FormTextfieldDate
-        @label={{t "pages.login-or-register.register-form.fields.birthdate.label"}}
-        @dayTextfieldName="dayOfBirth"
-        @monthTextfieldName="monthOfBirth"
-        @yearTextfieldName="yearOfBirth"
-        @dayValue={{this.dayOfBirth}}
-        @monthValue={{this.monthOfBirth}}
-        @yearValue={{this.yearOfBirth}}
-        @onValidateDay={{this.triggerInputDayValidation}}
-        @onValidateMonth={{this.triggerInputMonthValidation}}
-        @onValidateYear={{this.triggerInputYearValidation}}
-        @dayValidationStatus={{this.validation.dayOfBirth.status}}
-        @monthValidationStatus={{this.validation.monthOfBirth.status}}
-        @yearValidationStatus={{this.validation.yearOfBirth.status}}
-        @dayValidationMessage={{this.validation.dayOfBirth.message}}
-        @monthValidationMessage={{this.validation.monthOfBirth.message}}
-        @yearValidationMessage={{this.validation.yearOfBirth.message}}
-        @disabled={{this.matchingStudentFound}}
-        @require={{true}}
-        @onDayInput={{this.handleDayInput}}
-        @onMonthInput={{this.handleMonthInput}}
-        @onYearInput={{this.handleYearInput}}
-        @aria-describedby="register-error-message register-display-error-message"
-      />
-    </div>
+  <FormTextfieldDate
+    @label={{t "pages.login-or-register.register-form.fields.birthdate.label"}}
+    @dayTextfieldName="dayOfBirth"
+    @monthTextfieldName="monthOfBirth"
+    @yearTextfieldName="yearOfBirth"
+    @dayValue={{this.dayOfBirth}}
+    @monthValue={{this.monthOfBirth}}
+    @yearValue={{this.yearOfBirth}}
+    @onValidateDay={{this.triggerInputDayValidation}}
+    @onValidateMonth={{this.triggerInputMonthValidation}}
+    @onValidateYear={{this.triggerInputYearValidation}}
+    @dayValidationStatus={{this.validation.dayOfBirth.status}}
+    @monthValidationStatus={{this.validation.monthOfBirth.status}}
+    @yearValidationStatus={{this.validation.yearOfBirth.status}}
+    @dayValidationMessage={{this.validation.dayOfBirth.message}}
+    @monthValidationMessage={{this.validation.monthOfBirth.message}}
+    @yearValidationMessage={{this.validation.yearOfBirth.message}}
+    @disabled={{this.matchingStudentFound}}
+    @require={{true}}
+    @onDayInput={{this.handleDayInput}}
+    @onMonthInput={{this.handleMonthInput}}
+    @onYearInput={{this.handleYearInput}}
+    @aria-describedby="register-error-message register-display-error-message"
+  />
 
-    {{#if this.errorMessage}}
-      <div class="register-form__error" aria-live="polite" id="register-error-message">{{{this.errorMessage}}}</div>
-    {{/if}}
-
-    {{#unless this.matchingStudentFound}}
-      <div class="register-button-container">
-        <PixButton id="submit-search" @type="submit" @isLoading={{this.isLoading}}>
-          {{t "pages.login-or-register.register-form.button-form"}}
-        </PixButton>
-      </div>
-    {{/unless}}
-
-  </form>
-
-  {{#if this.matchingStudentFound}}
-    <hr />
-
-    <label class="register-form__login-options">{{t "pages.login-or-register.register-form.options.text"}}</label>
-    <div id="login-mode-container">
-      <PixToggleDeprecated
-        @valueFirstLabel={{t "pages.login-or-register.register-form.options.username"}}
-        @valueSecondLabel={{t "pages.login-or-register.register-form.options.email"}}
-        @onToggle={{this.onToggle}}
-      />
-    </div>
-
-    <form {{on "submit" this.register}} autocomplete="off">
-      {{#if this.loginWithUsername}}
-        <div id="register-username-container" class="register-form-username-container">
-          <label class="register-form-username-container__label">
-            <abbr title="{{t 'common.form.mandatory'}}" class="mandatory-mark">*</abbr>
-            {{t "pages.login-or-register.register-form.fields.username.label"}}
-          </label>
-          <span class="register-form-username-container__span" data-test-username>{{this.username}}</span>
-        </div>
-      {{else}}
-        <div id="register-email-container">
-          <FormTextfield
-            @label={{t "pages.login-or-register.register-form.fields.email.label"}}
-            @help={{t "pages.login-or-register.register-form.fields.email.help"}}
-            @textfieldName="email"
-            @value={{this.email}}
-            @onInput={{this.handleEmailInput}}
-            @onValidate={{this.triggerInputEmailValidation}}
-            @validationStatus={{this.validation.email.status}}
-            @validationMessage={{this.validation.email.message}}
-            @require={{true}}
-            @aria-describedby="register-error-message register-display-error-message"
-          />
-        </div>
-      {{/if}}
-      <div id="register-password-container">
-        <FormTextfield
-          @label={{t "pages.login-or-register.register-form.fields.password.label"}}
-          @help={{t "pages.login-or-register.register-form.fields.password.help"}}
-          @textfieldName="password"
-          @value={{this.password}}
-          @onInput={{this.handlePasswordInput}}
-          @onValidate={{this.triggerInputPasswordValidation}}
-          @validationStatus={{this.validation.password.status}}
-          @validationMessage={{this.validation.password.message}}
-          @require={{true}}
-          @aria-describedby="register-error-message register-display-error-message"
-        />
-      </div>
-
-      {{#if this.displayRegisterErrorMessage}}
-        <div class="register-form__error" aria-live="polite" id="register-display-error-message">
-          {{{this.registerErrorMessage}}}
-        </div>
-      {{/if}}
-
-      <div class="register-button-container">
-        <PixButton id="submit-registration" @type="submit" @isLoading={{this.isLoading}}>
-          {{t "pages.login-or-register.register-form.button-form"}}
-        </PixButton>
-      </div>
-
-      <PixButton
-        @triggerAction={{this.resetForm}}
-        @variant="secondary"
-        @iconBefore="arrowLeft"
-        class="register-form__reset-form-button"
-      >
-        {{t "pages.login-or-register.register-form.not-me"}}
-      </PixButton>
-
-      <p class="legal-notice">
-        {{t "pages.login-or-register.register-form.rgpd-legal-notice"}}
-        <a
-          href="{{t 'pages.login-or-register.register-form.rgpd-legal-notice-url'}}"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="link--underline"
-        >
-          {{t "pages.login-or-register.register-form.rgpd-legal-notice-link"}}
-        </a>
-      </p>
-
-    </form>
+  {{#if this.errorMessage}}
+    <div class="register-form__error" aria-live="polite" id="register-error-message">{{{this.errorMessage}}}</div>
   {{/if}}
 
-</div>
+  {{#unless this.matchingStudentFound}}
+    <div class="register-button-container">
+      <PixButton id="submit-search" @type="submit" @isLoading={{this.isLoading}}>
+        {{t "pages.login-or-register.register-form.button-form"}}
+      </PixButton>
+    </div>
+  {{/unless}}
+
+</form>
+
+{{#if this.matchingStudentFound}}
+  <hr />
+
+  <label class="register-form__login-options">{{t "pages.login-or-register.register-form.options.text"}}</label>
+  <div id="login-mode-container">
+    <PixToggleDeprecated
+      @valueFirstLabel={{t "pages.login-or-register.register-form.options.username"}}
+      @valueSecondLabel={{t "pages.login-or-register.register-form.options.email"}}
+      @onToggle={{this.onToggle}}
+    />
+  </div>
+
+  <form {{on "submit" this.register}} autocomplete="off">
+    {{#if this.loginWithUsername}}
+      <div id="register-username-container" class="register-form-username-container">
+        <label class="register-form-username-container__label">
+          {{t "pages.login-or-register.register-form.fields.username.label"}}
+          <abbr title="{{t 'common.form.mandatory'}}" class="mandatory-mark">*</abbr>
+        </label>
+        <span class="register-form-username-container__span" data-test-username>{{this.username}}</span>
+      </div>
+    {{else}}
+      <PixInput
+        @id="email"
+        @value={{this.email}}
+        {{on "focusout" (fn this.triggerInputEmailValidation "email" this.email)}}
+        {{on "input" this.handleEmailInput}}
+        @requiredLabel={{true}}
+        @validationStatus={{this.validation.email.status}}
+        @errorMessage={{this.validation.email.message}}
+        @disabled={{this.matchingStudentFound}}
+        @subLabel={{t "pages.login-or-register.register-form.fields.email.help"}}
+        autocomplete="firstname"
+        type="email"
+      >
+        <:label>{{t "pages.login-or-register.register-form.fields.email.label"}}</:label>
+      </PixInput>
+    {{/if}}
+    <PixInputPassword
+      @id="password"
+      @value={{this.password}}
+      @subLabel={{t "pages.login-or-register.register-form.fields.password.help"}}
+      {{on "focusout" (fn this.triggerInputPasswordValidation "password" this.email)}}
+      {{on "input" this.handlePasswordInput}}
+      @validationStatus={{this.validation.password.status}}
+      @errorMessage={{this.validation.password.message}}
+      @requiredLabel={{true}}
+    >
+      <:label>{{t "pages.login-or-register.register-form.fields.password.label"}}</:label>
+    </PixInputPassword>
+
+    {{#if this.displayRegisterErrorMessage}}
+      <div class="register-form__error" aria-live="polite" id="register-display-error-message">
+        {{{this.registerErrorMessage}}}
+      </div>
+    {{/if}}
+
+    <div class="register-button-container">
+      <PixButton id="submit-registration" @type="submit" @isLoading={{this.isLoading}}>
+        {{t "pages.login-or-register.register-form.button-form"}}
+      </PixButton>
+    </div>
+
+    <PixButton
+      @triggerAction={{this.resetForm}}
+      @variant="secondary"
+      @iconBefore="arrowLeft"
+      class="register-form__reset-form-button"
+    >
+      {{t "pages.login-or-register.register-form.not-me"}}
+    </PixButton>
+
+    <p class="legal-notice">
+      {{t "pages.login-or-register.register-form.rgpd-legal-notice"}}
+      <a
+        href="{{t 'pages.login-or-register.register-form.rgpd-legal-notice-url'}}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="link--underline"
+      >
+        {{t "pages.login-or-register.register-form.rgpd-legal-notice-link"}}
+      </a>
+    </p>
+
+  </form>
+{{/if}}
