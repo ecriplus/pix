@@ -1,8 +1,8 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  max-width: 360px;
   gap: var(--pix-spacing-4x);
+  max-width: 360px;
 
   >  .pix-input, .pix-input-password {
     width: 100%;
