@@ -90,8 +90,11 @@ module('Acceptance | Organizations | List', function (hooks) {
         // when
         const screen = await visit('/organizations/list?type=SCO');
 
+        await click(await screen.getByRole('button', { name: 'Type' }));
+        await screen.findByRole('listbox');
+
         // then
-        assert.dom(screen.getByRole('textbox', { name: 'Type' })).hasValue('SCO');
+        assert.dom(screen.getByRole('option', { selected: true })).hasText('SCO');
       });
 
       test('it should display the current filter when organizations are filtered by externalId', async function (assert) {

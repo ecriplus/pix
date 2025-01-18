@@ -32,7 +32,7 @@ module('Integration | Component | routes/authenticated/organizations | list-item
     // then
     assert.dom('table thead tr:nth-child(2) input#id').exists();
     assert.dom('table thead tr:nth-child(2) input#name').exists();
-    assert.dom('table thead tr:nth-child(2) input#type').exists();
+    assert.dom('table thead tr:nth-child(2) button#type').exists();
     assert.dom('table thead tr:nth-child(2) input#externalId').exists();
   });
 
