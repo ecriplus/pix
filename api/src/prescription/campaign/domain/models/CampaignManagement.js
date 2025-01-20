@@ -30,6 +30,14 @@ class CampaignManagement extends Campaign {
   #computeTotalParticipation(sharedParticipationsCount, started, completed) {
     return sharedParticipationsCount + (started || 0) + completed;
   }
+
+  get isTypeProfilesCollection() {
+    return this.isProfilesCollection;
+  }
+
+  get isTypeAssessment() {
+    return this.isAssessment;
+  }
 }
 
 export { CampaignManagement };

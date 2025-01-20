@@ -3,8 +3,8 @@ import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/
 import { expect } from '../../../../../test-helper.js';
 
 describe('CampaignManagement', function () {
-  it('returns correct object including inherited properties', function () {
-    const input = {
+  let input = beforeEach(function () {
+    input = {
       id: 1,
       code: 'code',
       name: 'name',
@@ -41,7 +41,9 @@ describe('CampaignManagement', function () {
       started: 3,
       completed: 2,
     };
+  });
 
+  it('returns correct object including inherited properties', function () {
     const expected = {
       id: 1,
       code: 'code',
@@ -107,6 +109,32 @@ describe('CampaignManagement', function () {
       });
 
       expect(campaignManagement.totalParticipationsCount).to.equal(7);
+    });
+  });
+
+  describe('getters', function () {
+    describe('isTypeAssessment', function () {
+      it('should return true if campaign type is ASSESSMENT', function () {
+        const model = new CampaignManagement({ ...input, type: CampaignTypes.ASSESSMENT });
+        expect(model.isTypeAssessment).to.be.true;
+      });
+
+      it('should return false if campaign type is not ASSESSMENT', function () {
+        const model = new CampaignManagement(input);
+        expect(model.isTypeAssessment).to.be.false;
+      });
+    });
+
+    describe('isTypeProfilesCollection', function () {
+      it('should return true if campaign type is PROFILES_COLLECTION', function () {
+        const model = new CampaignManagement(input);
+        expect(model.isTypeProfilesCollection).to.be.true;
+      });
+
+      it('should return false if campaign type is not PROFILES_COLLECTION', function () {
+        const model = new CampaignManagement({ ...input, type: CampaignTypes.ASSESSMENT });
+        expect(model.isTypeProfilesCollection).to.be.false;
+      });
     });
   });
 });
