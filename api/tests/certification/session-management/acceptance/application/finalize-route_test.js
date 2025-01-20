@@ -669,8 +669,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
         });
       });
     });
-
-    // TODO: it('should rollback the finalize session operations when it fails in processAutoJury');
   });
 });
 

@@ -259,5 +259,35 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         expectedCertificationChallengesForAdministration,
       );
     });
+
+    describe('when there are no challenges', function () {
+      it('should return a V3CertificationCourseDetails without challenges', async function () {
+        // given
+        const certificationCourseId = 123;
+        const flashAlgorithmConfigurationCreationDate = new Date('2020-01-01');
+        const assessmentId = 78;
+
+        databaseBuilder.factory.buildFlashAlgorithmConfiguration({
+          maximumAssessmentLength: 3,
+          createdAt: flashAlgorithmConfigurationCreationDate,
+        });
+        databaseBuilder.factory.buildCertificationCourse({ id: certificationCourseId });
+        databaseBuilder.factory.buildAssessment({
+          id: assessmentId,
+          certificationCourseId,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const certificationChallenges =
+          await v3CertificationCourseDetailsForAdministrationRepository.getV3DetailsByCertificationCourseId({
+            certificationCourseId,
+          });
+
+        // then
+        expect(certificationChallenges.certificationChallengesForAdministration).to.deep.equal([]);
+      });
+    });
   });
 });

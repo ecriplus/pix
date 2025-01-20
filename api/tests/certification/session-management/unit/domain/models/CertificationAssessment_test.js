@@ -449,7 +449,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         });
       });
 
-      describe('where there are no challenges', function () {
+      describe('when there are no challenges', function () {
         it('should set the certification course created date as end date', function () {
           // given
           const certificationCourseCreatedAt = new Date('2020-01-01');

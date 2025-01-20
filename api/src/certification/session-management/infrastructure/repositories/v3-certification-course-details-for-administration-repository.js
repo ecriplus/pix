@@ -69,7 +69,7 @@ const getV3DetailsByCertificationCourseId = async function ({ certificationCours
       skillName: 'certification-challenges.associatedSkillName',
     })
     .from('assessments')
-    .leftJoin('certification-challenges', 'certification-challenges.courseId', 'assessments.certificationCourseId')
+    .innerJoin('certification-challenges', 'certification-challenges.courseId', 'assessments.certificationCourseId')
     .leftJoin('answers', function () {
       this.on({ 'answers.assessmentId': 'assessments.id' }).andOn({
         'answers.challengeId': 'certification-challenges.challengeId',
