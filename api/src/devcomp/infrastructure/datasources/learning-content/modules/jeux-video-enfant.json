@@ -78,17 +78,17 @@
           "element": {
             "id": "3aeba304-6774-4d57-a19a-3309f2181368",
             "type": "qcu",
-            "instruction": "<p>A votre avis, ce jeu est-il adapté pour Marilou ?</p>",
+            "instruction": "<p>A votre avis, ce jeu est-il adapté à l'âge de Marilou ?</p>",
             "proposals": [
               {
                 "id": "1",
                 "content": "<p>oui</p>",
-                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Sur la boîte ou la fiche d’un jeu, plusieurs informations permettent de savoir si un jeu est adapté pour un enfant, en fonction de son âge par exemple. Voyons cela ensemble !</p>"
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Sur la boîte ou la fiche d’un jeu, plusieurs informations permettent de savoir si un jeu est adapté pour un enfant, en fonction de son âge notamment. Voyons cela ensemble !</p>"
               },
               {
                 "id": "2",
                 "content": "<p>non</p>",
-                "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Sur la boîte ou la fiche d’un jeu, plusieurs informations permettent de savoir si un jeu est adapté pour un enfant, en fonction de son âge par exemple. Voyons cela ensemble !</p>"
+                "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Sur la boîte ou la fiche d’un jeu, plusieurs informations permettent de savoir si un jeu est adapté pour un enfant, en fonction de son âge notamment. Voyons cela ensemble !</p>"
               }
             ],
             "solution": "2"
