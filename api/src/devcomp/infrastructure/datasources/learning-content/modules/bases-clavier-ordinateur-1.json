@@ -10,7 +10,7 @@
     "level": "Débutant",
     "objectives": [
       "<p>Utiliser les touches de base du clavier</p>",
-      "<p>Taper les caractères essentiels du clavier</p>",
+      "<p>Taper les caractères essentiels avec le clavier</p>",
       "<p>Modifier du texte</p>"
     ],
     "tabletSupport": "comfortable"
@@ -64,7 +64,7 @@
           "element": {
             "id": "bcd20400-781c-4b7d-82c3-d348ddef88d2",
             "type": "text",
-            "content": "<p>Le clavier fait partie de l'équipement de base d’un ordinateur, avec la souris. <br>Le clavier est composé de touches sur lesquelles on peut appuyer.<br> Les claviers peuvent avoir différentes formes, tailles, couleurs ou disposition des touches.<br></p><p><br>Il y a différents types de clavier : </p> <ul> <li>les claviers avec un fil</li> <li>les claviers sans fil</li> <li>les claviers inclus dans l’ordinateur</li> </ul> <p>Globalement, tous ces claviers servent à faire les mêmes choses.<br></p>"
+            "content": "<p>Le clavier fait partie de l'équipement de base d’un ordinateur, avec la souris. <br>Le clavier est composé de touches sur lesquelles on peut appuyer.<br> Les claviers peuvent avoir différentes formes, tailles, couleurs ou disposition des touches.<br></p><p><br>Il y a différents types de clavier : </p> <ul> <li>les claviers avec un fil</li> <li>les claviers sans fil</li> <li>les claviers inclus dans un ordinateur</li> </ul> <p>Globalement, tous ces claviers servent à faire les mêmes choses.<br></p>"
           }
         },
         {
@@ -74,7 +74,7 @@
             "type": "image",
             "url": "https://i.imgur.com/gXJXHwZ.png",
             "alt": "",
-            "alternativeText": "<p>Les claviers avec un fil : photographies de 2 claviers avec fil de taille et de forme différentes.</p><p>Les claviers sans fil : photographies de 2 claviers sans fil de taille et de couleur différentes.</p><p>Les claviers inclus dans l'ordinateur : photographie d'un ordinateur portable.</p>"
+            "alternativeText": "<p>Photographies de plusieurs types de claviers de taille et de forme différentes :</p> <ul> <li>les claviers avec un fil</li> <li>les claviers sans fils</li> <li>les claviers inclus dans unordinateur</li> </ul>"
           }
         },
         {
@@ -107,19 +107,19 @@
                 {
                   "id": "d6bb5ad8-bd97-4116-839d-425a444fcdfd",
                   "type": "text",
-                  "content": "<p>Il y a 3 zones principales sur un clavier :</p>"
+                  "content": "<p>Il y a 3 zones principales sur un clavier :</p><ul><li>lettres de l'alphabet</li><li>caractères spéciaux et accents</li><li>flèches directionnelles</li></ul>"
                 },
                 {
                   "id": "e86e4e5f-868e-4483-a995-86d89121e1a4",
                   "type": "image",
                   "url": "https://i.imgur.com/sHJP9pr.png",
                   "alt": "",
-                  "alternativeText": "<ul><li>caractères spéciaux et accents</li><li>lettres de l'alphabet</li><li>flèches directionnelles</li></ul>"
+                  "alternativeText": "<p>Schéma des 3 zones principales sur un clavier :</p><ul><li>caractères spéciaux et accents</li><li>lettres de l'alphabet</li><li>flèches directionnelles</li></ul>"
                 },
                 {
                   "id": "1f25f056-78ad-42cd-8679-49188fe4e2a2",
                   "type": "text",
-                  "content": "<p><span aria-hidden=\"true\">🤔</span> <strong>Bon à savoir</strong> </p>\n<p>Les touches peuvent être disposées de différentes manières, en fonction des modèles, des pays et de la langue. <span aria-hidden=\"true\">🌍</span></p><p>En France, on utilise le clavier AZERTY. Il porte ce nom, car les lettres A, Z, E, R, T, Y sont les six premières lettres affichées sur le clavier\n</p>"
+                  "content": "<p><span aria-hidden=\"true\">🤔</span> <strong>Bon à savoir</strong> </p><p>Les touches peuvent être disposées de différentes manières, en fonction des modèles, des pays et de la langue. <span aria-hidden=\"true\">🌍</span></p><p>En France, on utilise le clavier AZERTY. Il porte ce nom, car les lettres A, Z, E, R, T, Y sont les six premières lettres affichées sur le clavier</p>"
                 }
               ]
             },
@@ -128,7 +128,7 @@
                 {
                   "id": "24829c18-2220-4cb8-9749-296d8c314353",
                   "type": "text",
-                  "content": "<p><span aria-hidden=\"true\">👇</span> Dans l’espace ci-dessous, découvrez les zones du clavier et quelques touches que vous allez utiliser ensuite :</p>"
+                  "content": "<p><span aria-hidden=\"true\">👇</span>  Dans l’espace ci-dessous, vous allez découvrir les zones du claviers et quelques touches que vous allez utiliser ensuite. </p><p>Taper sur une touche, c’est <strong>appuyer une fois</strong> dessus et <strong>relâcher immédiatement</strong>. </p>"
                 },
                 {
                   "id": "274d2a22-5c45-40a3-87e2-13f650f49560",
@@ -245,7 +245,7 @@
                         "t1"
                       ],
                       "solutions": [
-                        "cornichon"
+                        "cornichon", "«cornichon»", "« cornichon »"
                       ]
                     }
                   ],
@@ -307,7 +307,7 @@
                 {
                   "id": "b65c1d05-27b9-429e-b8aa-b63bef94c67e",
                   "type": "text",
-                  "content": "<p>La touche <strong>Entrée </strong>permet d’aller à la ligne.<br> Taper sur la touche Entrée déplace le curseur de texte vers le début de la ligne suivante.</p>"
+                  "content": "<p>La touche <strong>Entrée </strong>permet d’aller à la ligne.<br> La touche Entrée permet d’aller à la ligne.</p><ul> <li>Quand le curseur est à la fin d'une ligne, taper sur la touche entrée déplace le curseur vers la ligne d'en dessous.</li> <li>Quand le curseur est au milieu d'un texte, taper sur la touche entrée déplace le texte vers la ligne d'en dessous.</li></ul>"
                 },
                 {
                   "id": "82fc806d-0d75-4202-85af-dfe7fca24315",
@@ -339,7 +339,7 @@
                 {
                   "id": "6dee7fcf-7faf-4748-9c56-70e93d7d4914",
                   "type": "text",
-                  "content": "<p>Pour déplacer le curseur de texte, vous pouvez utiliser les <strong>Flèches directionnelles</strong>.</p><p><span aria-hidden=\"true\">➡️</span> Par exemple : vous avez oublié de mettre un espace entre table et chaise, vous pouvez déplacer le curseur pour ajouter cet espace.</p>"
+                  "content": "<p>Pour déplacer le curseur de texte, vous pouvez utiliser les <strong>Flèches directionnelles</strong>.</p><p><span aria-hidden=\"true\">➡️</span> Par exemple : vous avez oublié de mettre un espace entre «&nbsp;table et chaise&nbsp;» , vous pouvez déplacer le curseur pour ajouter cet espace.</p>"
                 },
                 {
                   "id": "5d93c1b7-2f8d-4891-9443-9a2f86104f4e",
