@@ -3,7 +3,7 @@ import stream from 'node:stream';
 import { tokenService } from '../../../shared/domain/services/token-service.js';
 import { escapeFileName } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
-import * as campaignDetailsManagementSerializer from '../infrastructure/serializers/jsonapi/campaign-details-management-serializer.js';
+import * as campaignDetailsManagementSerializer from '../infrastructure/serializers/jsonapi/campaign-management-serializer.js';
 import * as campaignParticipantsActivitySerializer from '../infrastructure/serializers/jsonapi/campaign-participant-activity-serializer.js';
 import * as campaignReportSerializer from '../infrastructure/serializers/jsonapi/campaign-report-serializer.js';
 import * as campaignToJoinSerializer from '../infrastructure/serializers/jsonapi/campaign-to-join-serializer.js';

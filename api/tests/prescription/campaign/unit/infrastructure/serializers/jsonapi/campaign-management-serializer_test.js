@@ -5,10 +5,7 @@ describe('Unit | Serializer | JSONAPI | campaign-management-serializer', functio
   describe('#serialize()', function () {
     it('should convert a Campaign-Management model object into JSON API data', function () {
       // given
-      const campaignManagement = domainBuilder.buildCampaignManagement({
-        id: 'campaign_management_id',
-        archivedAt: new Date('2020-10-10'),
-      });
+      const campaignManagement = domainBuilder.buildCampaignManagement();
 
       // when
       const json = serializer.serialize(campaignManagement);
@@ -19,20 +16,34 @@ describe('Unit | Serializer | JSONAPI | campaign-management-serializer', functio
           type: 'campaigns',
           id: campaignManagement.id.toString(),
           attributes: {
-            code: campaignManagement.code,
-            name: campaignManagement.name,
-            type: campaignManagement.type,
             'archived-at': campaignManagement.archivedAt,
-            'deleted-at': campaignManagement.deletedAt,
             'created-at': campaignManagement.createdAt,
-            'creator-id': campaignManagement.creatorId,
             'creator-first-name': campaignManagement.creatorFirstName,
+            'creator-id': campaignManagement.creatorId,
             'creator-last-name': campaignManagement.creatorLastName,
-            'owner-id': campaignManagement.ownerId,
+            'custom-landing-page-text': campaignManagement.customLandingPageText,
+            'custom-result-page-button-text': campaignManagement.customResultPageButtonText,
+            'custom-result-page-button-url': campaignManagement.customResultPageButtonUrl,
+            'custom-result-page-text': campaignManagement.customResultPageText,
+            'deleted-at': campaignManagement.deletedAt,
+            'id-pix-label': campaignManagement.idPixLabel,
+            'is-for-absolute-novice': campaignManagement.isForAbsoluteNovice,
+            'is-profiles-collection': campaignManagement.isProfilesCollection,
+            'is-type-assessment': campaignManagement.isTypeAssessment,
+            'multiple-sendings': campaignManagement.multipleSendings,
+            'organization-id': campaignManagement.organizationId,
+            'organization-name': campaignManagement.organizationName,
             'owner-first-name': campaignManagement.ownerFirstName,
+            'owner-id': campaignManagement.ownerId,
             'owner-last-name': campaignManagement.ownerLastName,
+            'shared-participations-count': campaignManagement.sharedParticipationsCount,
             'target-profile-id': campaignManagement.targetProfileId,
             'target-profile-name': campaignManagement.targetProfileName,
+            'total-participations-count': campaignManagement.totalParticipationsCount,
+            code: campaignManagement.code,
+            name: campaignManagement.name,
+            title: campaignManagement.title,
+            type: campaignManagement.type,
           },
         },
       });
