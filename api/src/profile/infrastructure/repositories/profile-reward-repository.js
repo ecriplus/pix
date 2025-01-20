@@ -14,11 +14,14 @@ const ATTESTATIONS_TABLE_NAME = 'attestations';
  */
 export const save = async ({ userId, rewardId, rewardType = REWARD_TYPES.ATTESTATION }) => {
   const knexConnection = await DomainTransaction.getConnection();
-  await knexConnection(PROFILE_REWARDS_TABLE_NAME).insert({
-    userId,
-    rewardId,
-    rewardType,
-  });
+  await knexConnection(PROFILE_REWARDS_TABLE_NAME)
+    .insert({
+      userId,
+      rewardId,
+      rewardType,
+    })
+    .onConflict()
+    .ignore();
 };
 
 /**

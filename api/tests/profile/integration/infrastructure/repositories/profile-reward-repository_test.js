@@ -34,6 +34,29 @@ describe('Profile | Integration | Repository | profile-reward', function () {
       expect(result[0].rewardId).to.equal(rewardId);
       expect(result[0].rewardType).to.equal(REWARD_TYPES.ATTESTATION);
     });
+
+    it('should not throw unicity error if user already have reward', async function () {
+      // given
+      const { id: userId } = databaseBuilder.factory.buildUser();
+      const { rewardId } = databaseBuilder.factory.buildQuest({
+        rewardType: REWARD_TYPES.ATTESTATION,
+        eligibilityRequirements: {},
+        successRequirements: {},
+      });
+      databaseBuilder.factory.buildProfileReward({ rewardId, userId });
+      await databaseBuilder.commit();
+
+      // when
+      await save({ userId: userId, rewardId });
+
+      // then
+      const result = await knex(PROFILE_REWARDS_TABLE_NAME).where({ userId: userId });
+
+      expect(result).to.have.lengthOf(1);
+      expect(result[0].userId).to.equal(userId);
+      expect(result[0].rewardId).to.equal(rewardId);
+      expect(result[0].rewardType).to.equal(REWARD_TYPES.ATTESTATION);
+    });
   });
 
   describe('#getById', function () {
