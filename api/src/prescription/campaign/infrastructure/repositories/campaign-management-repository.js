@@ -50,8 +50,8 @@ const get = async function (campaignId) {
   campaign = {
     ...campaign,
     ...participationCountByStatus,
-    idPixLabel: externalIdFeature?.params?.label,
-    idPixType: externalIdFeature?.params?.type,
+    externalIdLabel: externalIdFeature?.params?.label,
+    externalIdType: externalIdFeature?.params?.type,
   };
   const campaignManagement = new CampaignManagement(campaign);
   return campaignManagement;
