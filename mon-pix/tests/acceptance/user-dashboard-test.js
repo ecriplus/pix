@@ -69,7 +69,7 @@ module('Acceptance | User dashboard page', function (hooks) {
           const uncompletedCampaign = server.create(
             'campaign',
             {
-              idPixLabel: 'email',
+              externalIdLabel: 'email',
               type: ASSESSMENT,
               isArchived: false,
               title: 'My Campaign',
@@ -107,7 +107,7 @@ module('Acceptance | User dashboard page', function (hooks) {
           const unsharedCampaign = server.create(
             'campaign',
             {
-              idPixLabel: 'email',
+              externalIdLabel: 'email',
               type: ASSESSMENT,
               isArchived: false,
               code: '123',

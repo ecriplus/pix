@@ -1354,12 +1354,12 @@
         "continue": "Continuar"
       },
       "errors": {
-        "invalid-external-id": "{ idPixLabel } El suyo no es válido.",
+        "invalid-external-id": "{ externalIdLabel } El suyo no es válido.",
         "invalid-external-id-email": "La dirección de correo electrónico no es válida.",
-        "max-length-external-id": "Tu { idPixLabel } no debe superar 255 caracteres.",
-        "max-length-id-pix-label": "Tu { idPixLabel } no debe superar 255 caracteres.",
-        "missing-external-id": "Por favor, introduce tu { idPixLabel }.",
-        "missing-id-pix-label": "Por favor, introduce tu { idPixLabel }."
+        "max-length-external-id": "Tu { externalIdLabel } no debe superar 255 caracteres.",
+        "max-length-id-pix-label": "Tu { externalIdLabel } no debe superar 255 caracteres.",
+        "missing-external-id": "Por favor, introduce tu { externalIdLabel }.",
+        "missing-id-pix-label": "Por favor, introduce tu { externalIdLabel }."
       },
       "first-title": "Antes de empezar",
       "title": "Introducir mi nombre de usuario"

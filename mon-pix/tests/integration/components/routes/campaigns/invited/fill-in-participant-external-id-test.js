@@ -69,8 +69,8 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
   test('should called on submit button', async function (assert) {
     // given
     const campaign = {
-      idPixLabel: 'idpix',
-      idPixType: 'STRING',
+      externalIdLabel: 'idpix',
+      externaIdType: 'STRING',
     };
 
     this.set('campaign', campaign);
@@ -94,8 +94,8 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
   test('should called on cancel button', async function (assert) {
     // given
     const campaign = {
-      idPixLabel: 'idpix',
-      idPixType: 'STRING',
+      externalIdLabel: 'idpix',
+      externaIdType: 'STRING',
     };
 
     this.set('campaign', campaign);
@@ -119,8 +119,8 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
     test('should display basic error when participantExternalId is empty', async function (assert) {
       // given
       const campaign = {
-        idPixLabel: 'idpix',
-        idPixType: 'STRING',
+        externalIdLabel: 'idpix',
+        externaIdType: 'STRING',
       };
 
       this.set('campaign', campaign);
@@ -140,7 +140,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
       assert.ok(
         screen.getByText(
           t('pages.fill-in-participant-external-id.errors.missing-external-id', {
-            idPixLabel: campaign.idPixLabel,
+            externalIdLabel: campaign.externalIdLabel,
           }),
         ),
       );
@@ -149,8 +149,8 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
     test('should display basic error when participantExternalId is over than 255 character', async function (assert) {
       // given
       const campaign = {
-        idPixLabel: 'idpix',
-        idPixType: 'STRING',
+        externalIdLabel: 'idpix',
+        externaIdType: 'STRING',
       };
 
       this.set('campaign', campaign);
@@ -173,20 +173,20 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
       assert.ok(
         screen.getByText(
           t('pages.fill-in-participant-external-id.errors.max-length-external-id', {
-            idPixLabel: campaign.idPixLabel,
+            externalIdLabel: campaign.externalIdLabel,
           }),
         ),
       );
     });
   });
 
-  module('with idPixLabel and idPixType', function () {
+  module('with externalIdLabel and externaIdType', function () {
     module('idPixInputType', function () {
-      Object.entries({ STRING: 'text', EMAIL: 'email' }).forEach(function ([idPixType, inputType]) {
+      Object.entries({ STRING: 'text', EMAIL: 'email' }).forEach(function ([externaIdType, inputType]) {
         test(`returns ${inputType} input type`, async function (assert) {
           const campaign = {
-            idPixLabel: 'idpix',
-            idPixType,
+            externalIdLabel: 'idpix',
+            externaIdType,
           };
           this.set('campaign', campaign);
 
@@ -207,8 +207,8 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
     module('idPixSubLabel', function () {
       test(`returns email example key for input`, async function (assert) {
         const campaign = {
-          idPixLabel: 'idpix',
-          idPixType: 'EMAIL',
+          externalIdLabel: 'idpix',
+          externaIdType: 'EMAIL',
         };
         this.set('campaign', campaign);
 
@@ -223,10 +223,10 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
         const input = screen.getByLabelText(t('pages.sign-up.fields.email.help'), { exact: false });
         assert.ok(input);
       });
-      test(`not return email example for string idPixType`, async function (assert) {
+      test(`not return email example for string externaIdType`, async function (assert) {
         const campaign = {
-          idPixLabel: 'idpix',
-          idPixType: 'STRING',
+          externalIdLabel: 'idpix',
+          externaIdType: 'STRING',
         };
         this.set('campaign', campaign);
 
@@ -246,8 +246,8 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
     module('with previousError', function (hooks) {
       const campaign = {
         code: 'ABCDE1234',
-        idPixLabel: 'idpix',
-        idPixType: 'EMAIL',
+        externalIdLabel: 'idpix',
+        externaIdType: 'EMAIL',
       };
 
       hooks.beforeEach(function () {

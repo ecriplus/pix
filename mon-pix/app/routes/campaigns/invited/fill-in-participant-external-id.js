@@ -22,6 +22,6 @@ export default class FillInParticipantExternalIdRoute extends Route {
 
   shouldProvideExternalId(campaign) {
     const participantExternalId = this.campaignStorage.get(campaign.code, 'participantExternalId');
-    return campaign.idPixLabel && !participantExternalId;
+    return campaign.externalIdLabel && !participantExternalId;
   }
 }

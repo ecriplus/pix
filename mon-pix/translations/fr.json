@@ -1347,10 +1347,10 @@
         "continue": "Continuer"
       },
       "errors": {
-        "invalid-external-id": "Votre { idPixLabel } est invalide.",
+        "invalid-external-id": "Votre { externalIdLabel } est invalide.",
         "invalid-external-id-email": "L'adresse email n'est pas valide.",
-        "max-length-external-id": "Votre { idPixLabel } ne doit pas dépasser les 255 caractères.",
-        "missing-external-id": "Merci de renseigner votre { idPixLabel }."
+        "max-length-external-id": "Votre { externalIdLabel } ne doit pas dépasser les 255 caractères.",
+        "missing-external-id": "Merci de renseigner votre { externalIdLabel }."
       },
       "first-title": "Avant de commencer",
       "title": "Saisir mon identifiant"

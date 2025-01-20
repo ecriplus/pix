@@ -21,7 +21,7 @@ module('Acceptance | Campaigns | Resume Campaigns with type Assessment', functio
     await authenticate(studentInfo);
     campaign = server.create('campaign', {
       id: 23456,
-      idPixLabel: 'email',
+      externalIdLabel: 'email',
       type: ASSESSMENT,
     });
     await resumeCampaignOfTypeAssessmentByCode(campaign.code, true);

@@ -14,11 +14,11 @@ export default Factory.extend({
     return Math.random().toString(36).slice(2, 8);
   },
 
-  idPixLabel() {
+  externalIdLabel() {
     return null;
   },
 
-  idPixType() {
+  externaIdType() {
     return null;
   },
 

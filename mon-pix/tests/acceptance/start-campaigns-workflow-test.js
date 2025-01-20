@@ -52,7 +52,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
         module('When campaign is not restricted', function () {
           test('should display landing page', async function (assert) {
             // given
-            const campaign = server.create('campaign', { isRestricted: false, idPixLabel: null });
+            const campaign = server.create('campaign', { isRestricted: false, externalIdLabel: null });
             const screen = await visit('/campagnes');
 
             // when
@@ -403,7 +403,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
         module('When is a simplified access campaign', function (hooks) {
           hooks.beforeEach(function () {
-            campaign = server.create('campaign', { isSimplifiedAccess: true, idPixLabel: 'Les anonymes' });
+            campaign = server.create('campaign', { isSimplifiedAccess: true, externalIdLabel: 'Les anonymes' });
           });
 
           test('should redirect to landing page', async function (assert) {
@@ -665,7 +665,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
         module('When participant external id is not set in the url', function () {
           test('should show the identifiant page after clicking on start button in landing page', async function (assert) {
             // given & when
-            campaign = server.create('campaign', { idPixLabel: 'nom de naissance de maman' });
+            campaign = server.create('campaign', { externalIdLabel: 'nom de naissance de maman' });
             await startCampaignByCode(campaign.code);
 
             // then
@@ -676,7 +676,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
         module('When participant external id is set in the url', function () {
           test('should begin campaign participation', async function (assert) {
             // given & when
-            campaign = server.create('campaign', { idPixLabel: 'nom de naissance de maman' });
+            campaign = server.create('campaign', { externalIdLabel: 'nom de naissance de maman' });
             await startCampaignByCodeAndExternalId(campaign.code);
 
             // then
@@ -688,7 +688,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
       module('When campaign does not have external id', function () {
         test('should begin campaign participation', async function (assert) {
           // given & when
-          campaign = server.create('campaign', { idPixLabel: null });
+          campaign = server.create('campaign', { externalIdLabel: null });
           await startCampaignByCode(campaign.code);
 
           // then
@@ -699,7 +699,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
       module('When campaign does not have external id but a participant external id is set in the url', function () {
         test('should begin campaign participation', async function (assert) {
           // given & when
-          campaign = server.create('campaign', { idPixLabel: null });
+          campaign = server.create('campaign', { externalIdLabel: null });
           await startCampaignByCodeAndExternalId(campaign.code);
 
           // then
@@ -743,7 +743,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
       module('When is a simplified access campaign', function (hooks) {
         hooks.beforeEach(function () {
-          campaign = server.create('campaign', { isSimplifiedAccess: true, idPixLabel: 'Les anonymes' });
+          campaign = server.create('campaign', { isSimplifiedAccess: true, externalIdLabel: 'Les anonymes' });
         });
 
         test('should redirect to landing page', async function (assert) {
@@ -770,7 +770,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
     module('When user is logged as anonymous and campaign is simplified access', function () {
       test('should replace previous connected anonymous user', async function (assert) {
         // given
-        campaign = server.create('campaign', { isSimplifiedAccess: true, idPixLabel: 'Les anonymes' });
+        campaign = server.create('campaign', { isSimplifiedAccess: true, externalIdLabel: 'Les anonymes' });
         await currentSession().authenticate('authenticator:anonymous', { campaignCode: campaign.code });
         const session = currentSession();
         const previousUserId = session.data.authenticated['user_id'];
