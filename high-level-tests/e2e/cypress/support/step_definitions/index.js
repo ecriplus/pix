@@ -64,10 +64,6 @@ Given("je suis connecté à Pix Orga", () => {
   cy.loginOrga("daenerys.targaryen@pix.fr", "pix123");
 });
 
-Given("je suis connecté à Pix en tant qu'administrateur", () => {
-  cy.loginAdmin("samwell.tarly@pix.fr", "pix123");
-});
-
 When(`je clique sur {string}`, (label) => {
   cy.contains(label).click();
 });

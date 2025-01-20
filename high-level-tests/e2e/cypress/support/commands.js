@@ -49,32 +49,6 @@ Cypress.Commands.add('loginOrga', (username, password) => {
     form: true,
     body: getLoginBody(username, password, 'pix-orga'),
   }).then(setEmberSimpleAuthSession);
-  cy.wait(['@getCurrentUser']);
-});
-
-Cypress.Commands.add("loginAdmin", (username, password, url) => {
-  cy.intercept("/api/users/me").as("getCurrentUser");
-  cy.request({
-    url: `${Cypress.env('API_URL')}/api/token`,
-    method: 'POST',
-    form: true,
-    body: getLoginBody(username, password, 'pix-admin'),
-  }).then((response) => {
-    window.localStorage.setItem(
-      'ember_simple_auth-session',
-      JSON.stringify({
-        authenticated: {
-          authenticator: 'authenticator:oauth2',
-          token_type: 'bearer',
-          access_token: response.body.access_token,
-          scope: response.body.scope,
-          user_id: 2,
-        },
-      })
-    );
-  });
-  if (url) cy.visitMonPix(url);
-
   cy.wait(["@getCurrentUser"]);
 });
 
