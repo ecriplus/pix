@@ -61,7 +61,7 @@ export default class ParticipationRow extends Component {
         {{@participation.userFullName}}
       {{/if}}
     </td>
-    {{#if @idPixLabel}}
+    {{#if @externalIdLabel}}
       <td class="table__column table__column--break-word">
         {{#if this.isEditionMode}}
           <PixInput
@@ -96,7 +96,7 @@ export default class ParticipationRow extends Component {
       <td>-</td>
     {{/if}}
     {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
-      {{#if @idPixLabel}}
+      {{#if @externalIdLabel}}
         <td class="participation-item-actions">
           {{#if this.isEditionMode}}
             <div class="participation-item-actions__modify">

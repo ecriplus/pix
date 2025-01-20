@@ -23,7 +23,7 @@ export default class CampaignParticipationsRoute extends Route {
     return {
       participations,
       campaignId,
-      idPixLabel: campaign.idPixLabel,
+      externalIdLabel: campaign.externalIdLabel,
     };
   }
 }

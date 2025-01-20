@@ -22,15 +22,15 @@ export default class ParticipationsSection extends Component {
               <tr>
                 <th>Prescrit lié</th>
                 <th>Compte lié</th>
-                {{#if @idPixLabel}}
-                  <th>{{@idPixLabel}}</th>
+                {{#if @externalIdLabel}}
+                  <th>{{@externalIdLabel}}</th>
                 {{/if}}
                 <th>Date de début</th>
                 <th>Statut</th>
                 <th>Date d'envoi</th>
                 <th class="table__column--medium">Supprimée le</th>
                 {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
-                  {{#if @idPixLabel}}
+                  {{#if @externalIdLabel}}
                     <th class="table__column">Actions</th>
                   {{/if}}
                 {{/if}}
@@ -43,7 +43,7 @@ export default class ParticipationsSection extends Component {
                   <tr aria-label="participation">
                     <ParticipationRow
                       @participation={{participation}}
-                      @idPixLabel={{@idPixLabel}}
+                      @externalIdLabel={{@externalIdLabel}}
                       @updateParticipantExternalId={{@updateParticipantExternalId}}
                     />
                   </tr>

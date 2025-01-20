@@ -37,18 +37,20 @@ module('Integration | Component | Campaigns | participations-section', function 
     assert.strictEqual(screen.getAllByLabelText('participation').length, 2);
   });
 
-  test('it should display participantExternalId column if idPixLabel is set', async function (assert) {
+  test('it should display participantExternalId column if externalIdLabel is set', async function (assert) {
     // given
     const participation = EmberObject.create({
       participantExternalId: '123',
     });
     const participations = [participation];
-    const idPixLabel = 'identifiant';
+    const externalIdLabel = 'identifiant';
     participations.meta = { rowCount: 2 };
 
     // when
     const screen = await render(
-      <template><ParticipationsSection @participations={{participations}} @idPixLabel={{idPixLabel}} /></template>,
+      <template>
+        <ParticipationsSection @participations={{participations}} @externalIdLabel={{externalIdLabel}} />
+      </template>,
     );
 
     // then
