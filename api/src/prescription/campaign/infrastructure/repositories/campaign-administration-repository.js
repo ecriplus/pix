@@ -88,17 +88,17 @@ const save = async function (campaigns, dependencies = { skillRepository }) {
       const [createdCampaignDTO] = await trx('campaigns').insert(campaignAttributes).returning('*');
       latestCreatedCampaign = new Campaign(createdCampaignDTO);
 
-      if (campaign.idPixLabel) {
+      if (campaign.externalIdLabel) {
         const feature = await trx('features').where({ key: CAMPAIGN_FEATURES.EXTERNAL_ID.key }).first();
         const [{ params }] = await trx('campaign-features')
           .insert({
             campaignId: latestCreatedCampaign.id,
             featureId: feature.id,
-            params: { label: campaign.idPixLabel, type: campaign.idPixType },
+            params: { label: campaign.externalIdLabel, type: campaign.externalIdType },
           })
           .returning('*');
-        latestCreatedCampaign.idPixLabel = params.label;
-        latestCreatedCampaign.idPixType = params.type;
+        latestCreatedCampaign.externalIdLabel = params.label;
+        latestCreatedCampaign.externalIdType = params.type;
       }
 
       if (latestCreatedCampaign.isAssessment) {
