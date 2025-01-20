@@ -186,7 +186,7 @@
                     {
                       "id": "1",
                       "content": "<p>Le jeu doit être utilisé accompagné des parents.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p> Ce pictogramme «&nbsp;!&nbsp;» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs. Il peut donc y avoir des contenus ne convenant pas aux enfants !</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p> Ce pictogramme «&nbsp;!&nbsp;» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs. Il peut donc y avoir des contenus ne convenant pas aux enfants ! Il convient donc d'accompagner les enfants dans leur utilisation.</p>"
                     },
                     {
                       "id": "2",
