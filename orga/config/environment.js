@@ -39,8 +39,8 @@ module.exports = function (environment) {
         1000 *
         _getEnvironmentVariableAsNumber({
           environmentVariableName: process.env.INFORMATION_BANNER_POLLING_TIME,
-          defaultValue: 10,
-          minValue: 2,
+          defaultValue: 60,
+          minValue: 10,
         }),
       CAMPAIGNS_ROOT_URL: process.env.CAMPAIGNS_ROOT_URL,
       MAX_CONCURRENT_AJAX_CALLS: _getEnvironmentVariableAsNumber({

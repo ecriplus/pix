@@ -45,8 +45,8 @@ module.exports = function (environment) {
         1000 *
         _getEnvironmentVariableAsNumber({
           environmentVariableName: process.env.INFORMATION_BANNER_POLLING_TIME,
-          defaultValue: 10,
-          minValue: 2,
+          defaultValue: 60,
+          minValue: 10,
         }),
       PIX_APP_URL_WITHOUT_EXTENSION: process.env.PIX_APP_URL_WITHOUT_EXTENSION || 'https://app.pix.',
       API_ERROR_MESSAGES: {
