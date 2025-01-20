@@ -25,7 +25,7 @@ class CampaignAssessmentExport {
     this.targetProfile = targetProfile;
     this.learningContent = learningContent;
     this.stageCollection = stageCollection;
-    this.idPixLabel = campaign.idPixLabel;
+    this.externalIdLabel = campaign.externalIdLabel;
     this.competences = learningContent.competences;
     this.areas = learningContent.areas;
     this.translate = translate;
@@ -88,7 +88,7 @@ class CampaignAssessmentExport {
       ...(displayDivision ? [this.translate('campaign-export.common.participant-division')] : []),
       ...(forSupStudents ? [this.translate('campaign-export.common.participant-group')] : []),
       ...(forSupStudents ? [this.translate('campaign-export.common.participant-student-number')] : []),
-      ...(this.campaign.idPixLabel ? [this.campaign.idPixLabel] : []),
+      ...(this.campaign.externalIdLabel ? [this.campaign.externalIdLabel] : []),
 
       this.translate('campaign-export.assessment.progress'),
       this.translate('campaign-export.assessment.started-on'),
