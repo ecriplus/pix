@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+
 .no-certification-panel {
   display: flex;
   align-items: center;
@@ -5,15 +8,15 @@
   height: 200px;
   color: var(--pix-neutral-80);
   font-size: 1.063rem;
-  font-family: $font-open-sans;
+  font-family: fonts.$font-open-sans;
   background-color: var(--pix-neutral-0);
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     margin: 0 50px;
     font-size: 1.25rem;
   }
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     margin: 0 100px;
   }
 }

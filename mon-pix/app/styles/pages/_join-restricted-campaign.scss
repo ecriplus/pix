@@ -1,3 +1,7 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/fonts';
+
 .join-restricted-campaign {
   form {
     display: flex;
@@ -15,7 +19,7 @@
   &__container {
     padding-bottom: 30px;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       padding: 40px;
     }
   }
@@ -41,7 +45,7 @@
 
     margin: 0;
     font-weight: var(--pix-font-medium);
-    font-family: $font-roboto;
+    font-family: fonts.$font-roboto;
   }
 
   &__field-error {
@@ -58,7 +62,7 @@
     color: var(--pix-error-700);
     text-align: center;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       padding: 0;
     }
   }

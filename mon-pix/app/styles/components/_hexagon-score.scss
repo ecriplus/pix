@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+
 .hexagon-score {
   width: 132px;
   height: 148px;
@@ -13,20 +16,20 @@
 @mixin hexagon-score-title {
   color: var(--pix-neutral-900);
   font-size: 0.875rem;
-  font-family: $font-roboto;
+  font-family: fonts.$font-roboto;
   letter-spacing: 0.219rem;
 }
 
 @mixin hexagon-score-pix-score {
   color: var(--pix-neutral-900);
   font-size: 2.875rem;
-  font-family: $font-open-sans;
+  font-family: fonts.$font-open-sans;
 }
 
 @mixin hexagon-score-pix-total {
   color: var(--pix-neutral-500);
   font-size: 0.813rem;
-  font-family: $font-roboto;
+  font-family: fonts.$font-roboto;
   border-top: 1px solid var(--pix-neutral-100);
 }
 
@@ -64,11 +67,11 @@
     .pix-tooltip__content {
       max-width: 19rem;
 
-      @include device-is('tablet') {
+      @include breakpoints.device-is('tablet') {
         max-width: 40rem;
       }
 
-      @include device-is('desktop') {
+      @include breakpoints.device-is('desktop') {
         max-width: 19rem;
       }
     }
@@ -81,7 +84,7 @@
 
 .hexagon-score-information__text {
   font-size: 1rem;
-  font-family: $font-open-sans;
+  font-family: fonts.$font-open-sans;
   line-height: 1.6rem;
 
   &--strong {
@@ -99,7 +102,7 @@
   padding: 10px;
   font-size: 1.25rem;
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     display: none;
   }
 }

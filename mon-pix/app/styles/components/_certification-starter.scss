@@ -1,9 +1,12 @@
 /* stylelint-disable declaration-colon-newline-after */
 /* stylelint-disable function-parentheses-newline-inside */
 /* stylelint-disable no-descending-specificity */
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/fonts';
 
 .certification-starter {
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     padding: 50px 70px 40px;
   }
 }
@@ -14,7 +17,7 @@
     margin-bottom: 32px;
     padding: 12px;
 
-    @include device-is('mobile') {
+    @include breakpoints.device-is('mobile') {
       padding: 16px;
     }
   }
@@ -58,7 +61,7 @@
     margin-bottom: 20px;
     color: var(--pix-neutral-900);
     font-size: 2.625rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
     text-align: center;
   }
 }
@@ -125,7 +128,7 @@
   margin-bottom: 5px;
   color: var(--pix-neutral-800);
   font-size: 1.25rem;
-  font-family: $font-open-sans;
+  font-family: fonts.$font-open-sans;
   line-height: 28px;
   text-align: center;
 }

@@ -1,3 +1,7 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+@use '../globals/layout';
+
 #footer {
   @extend %global-container;
 
@@ -8,7 +12,7 @@
   padding-block: var(--pix-spacing-12x) var(--pix-spacing-6x);
   color: var(--pix-neutral-500);
 
-  @include device-is('mobile') {
+  @include breakpoints.device-is('mobile') {
     flex-direction: column;
   }
 }
@@ -60,7 +64,7 @@
 }
 
 .footer-links__list--align-right {
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     text-align: right;
   }
 }

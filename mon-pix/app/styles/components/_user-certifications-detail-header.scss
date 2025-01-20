@@ -1,9 +1,12 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .user-certifications-page-get__header {
   display: flex;
   margin-bottom: 32px;
   padding: 14px 24px;
 
-  @include device-is('mobile') {
+  @include breakpoints.device-is('mobile') {
     .pix-block {
       padding: 16px;
     }
@@ -56,17 +59,17 @@
     }
   }
 
-  @include device-is('mobile') {
+  @include breakpoints.device-is('mobile') {
     flex-wrap: wrap;
     justify-content: center;
     padding: 16px;
   }
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     flex-wrap: wrap;
   }
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     flex-wrap: nowrap;
   }
 }
@@ -77,7 +80,7 @@
   background-color: var(--pix-neutral-20);
   border-radius: 8px;
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     max-width: calc(var(--pix-spacing-12x) * 6);
   }
 
@@ -146,12 +149,12 @@
     }
   }
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     flex-grow: 1;
     margin-left: 0;
   }
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     flex-grow: 0;
     margin-left: auto;
   }

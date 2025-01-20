@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .certification-joiner {
   margin: var(--pix-spacing-8x) 0;
   text-rendering: optimizelegibility;

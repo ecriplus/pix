@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .user-account {
   margin-bottom: var(--pix-spacing-8x);
 
@@ -19,7 +22,7 @@
     color: var(--pix-neutral-900);
     text-align: center;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       text-align: start;
     }
   }
@@ -29,7 +32,7 @@
     flex-wrap: nowrap;
     gap: var(--pix-spacing-6x);
 
-    @include device-is('mobile') {
+    @include breakpoints.device-is('mobile') {
       flex-wrap: wrap;
     }
 
@@ -96,7 +99,7 @@
       }
     }
 
-    @include device-is('mobile') {
+    @include breakpoints.device-is('mobile') {
       flex-grow: 1;
     }
   }
@@ -109,7 +112,7 @@
     padding: var(--pix-spacing-8x);
     border-radius: var(--pix-spacing-2x);
 
-    @include device-is('mobile') {
+    @include breakpoints.device-is('mobile') {
       min-width: 100%;
       max-width: 100%;
       margin: 0;
@@ -118,7 +121,7 @@
   }
 
   &__error-message {
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       max-width: 520px;
       margin-bottom: 10px;
     }

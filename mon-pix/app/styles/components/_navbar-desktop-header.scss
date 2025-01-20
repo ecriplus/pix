@@ -1,3 +1,7 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+@use '../globals/layout';
+
 .navbar-desktop-header {
   box-shadow: rgb(0 0 0 / 6%) 0 6px 24px;
 
@@ -83,7 +87,7 @@
     max-width: unset;
     height: 3rem;
 
-    @include device-is('desktop') {
+    @include breakpoints.device-is('desktop') {
       height: 3.75rem;
     }
   }

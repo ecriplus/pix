@@ -1,10 +1,13 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .fill-in-participant-external-id {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: var(--pix-spacing-3x);
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     margin-bottom: var(--pix-spacing-6x);
     padding-top: var(--pix-spacing-12x);
     padding-bottom: var(--pix-spacing-12x);

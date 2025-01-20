@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .evaluation-results-tab__badges-title {
   @extend %pix-title-xs;
 

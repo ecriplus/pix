@@ -1,11 +1,14 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+
 .certifications-list {
   justify-content: space-around;
   color: var(--pix-neutral-800);
   font-size: 0.625rem;
-  font-family: $font-open-sans;
+  font-family: fonts.$font-open-sans;
   background-color: transparent;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     font-size: 0.875rem;
   }
 }

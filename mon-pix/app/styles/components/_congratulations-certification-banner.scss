@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .congratulations-banner {
   position: relative;
   display: flex;
@@ -12,7 +15,7 @@
   border-radius: 6px;
   text-rendering: optimizelegibility;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     padding: 24px 32px;
   }
 }
@@ -35,7 +38,7 @@
 
   @extend %pix-title-s;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     margin: var(--pix-spacing-1x) 0 var(--pix-spacing-6x) 0;
   }
 }
@@ -72,7 +75,7 @@
   color: var(--pix-neutral-900);
   text-align: center;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     align-items: center;
   }
 }
@@ -99,7 +102,7 @@
   width: 80%;
   margin-top: 24px;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     flex-direction: row;
     width: 55%;
   }
@@ -120,7 +123,7 @@
 
   @extend %pix-body-s;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     width: 45%;
     margin-bottom: 0;
   }

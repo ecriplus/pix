@@ -1,5 +1,5 @@
-@import 'assessment/results/quit-results';
-@import 'assessment/results/evaluation-results-tabs/results-details';
-@import 'assessment/results/evaluation-results-tabs/rewards';
-@import 'assessment/results/evaluation-results-tabs/trainings';
-@import 'invited/learner-reconciliation';
+@use 'assessment/results/quit-results';
+@use 'assessment/results/evaluation-results-tabs/results-details';
+@use 'assessment/results/evaluation-results-tabs/rewards';
+@use 'assessment/results/evaluation-results-tabs/trainings';
+@use 'invited/learner-reconciliation';

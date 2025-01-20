@@ -1,7 +1,9 @@
+@use 'pix-design-tokens/breakpoints';
+
 .profile-scorecards {
   --profile-scorecards-spacing: var(--pix-spacing-4x);
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     --profile-scorecards-spacing: var(--pix-spacing-6x);
   }
 }
@@ -17,7 +19,7 @@
   grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
   gap: var(--profile-scorecards-spacing);
 
-  @include device-is('mobile') {
+  @include breakpoints.device-is('mobile') {
     grid-template-columns: 1fr;
   }
 }

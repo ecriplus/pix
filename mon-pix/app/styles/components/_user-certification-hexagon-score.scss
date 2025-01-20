@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/fonts';
+
 .user-certification-hexagon-score {
   position: relative;
   display: flex;
@@ -21,7 +23,7 @@
       color: var(--pix-neutral-500);
       font-weight: lighter;
       font-size: 0.8rem;
-      font-family: $font-roboto;
+      font-family: fonts.$font-roboto;
       letter-spacing: 0.219rem;
       text-transform: uppercase;
     }
@@ -30,7 +32,7 @@
       color: var(--pix-neutral-800);
       font-weight: var(--pix-font-medium);
       font-size: 2.3rem;
-      font-family: $font-open-sans;
+      font-family: fonts.$font-open-sans;
     }
 
     &-certified {
@@ -38,7 +40,7 @@
       color: var(--pix-neutral-500);
       font-weight: var(--pix-font-medium);
       font-size: 0.7rem;
-      font-family: $font-roboto;
+      font-family: fonts.$font-roboto;
       text-transform: uppercase;
     }
   }

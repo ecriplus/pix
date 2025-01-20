@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/fonts';
+
 .user-certifications-detail-competence {
   margin-bottom: 32px;
 
@@ -105,7 +107,7 @@
   &__name {
     padding: 20px 0 20px 36px;
     color: var(--pix-neutral-800);
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
   }
 
   &__level {

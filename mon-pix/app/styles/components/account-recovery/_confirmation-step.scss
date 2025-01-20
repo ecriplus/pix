@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .confirmation-step-account-information {
   padding: 0;
   list-style: none;
@@ -14,10 +16,8 @@
   border-radius: 8px;
 
   & > div:first-of-type {
+    @extend %pix-body-m;
+
     margin-bottom: 6px;
-    color: var(--pix-neutral-800);
-    font-weight: normal;
-    font-size: 0.875rem;
-    font-family: $font-roboto;
   }
 }

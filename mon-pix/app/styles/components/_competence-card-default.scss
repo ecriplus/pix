@@ -1,6 +1,9 @@
 /* stylelint-disable no-descending-specificity */
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/fonts';
 
-@include device-is('tablet') {
+@include breakpoints.device-is('tablet') {
   .competence-card {
     height: 310px;
   }
@@ -166,7 +169,7 @@
     color: var(--pix-neutral-800);
     font-weight: var(--pix-font-bold);
     font-size: 0.938rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
     letter-spacing: 0.063rem;
     text-transform: uppercase;
   }
@@ -257,7 +260,7 @@
 .competence-card__competence-name {
   @extend %pix-body-l;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     z-index: 2;
     margin: 0 3px;
     padding-top: 10px;

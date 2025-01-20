@@ -1,3 +1,7 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/fonts';
+
 .fill-in-campaign-code {
   &__container {
     display: flex;
@@ -7,7 +11,7 @@
     margin-bottom: 32px;
     padding: 16px 16px var(--pix-spacing-4x);
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       padding: var(--pix-spacing-10x);
     }
   }
@@ -23,14 +27,14 @@
     margin-bottom: var(--pix-spacing-4x);
     color: var(--pix-neutral-900);
     font-size: 1.219rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
     text-align: center;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       width: 75vw;
     }
 
-    @include device-is('mobile') {
+    @include breakpoints.device-is('mobile') {
       width: 75vw;
     }
   }
@@ -80,11 +84,11 @@
     text-align: center;
     border-top: 1px solid var(--pix-neutral-20);
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       width: 75vw;
     }
 
-    @include device-is('mobile') {
+    @include breakpoints.device-is('mobile') {
       width: 75vw;
     }
   }

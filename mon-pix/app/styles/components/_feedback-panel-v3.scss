@@ -1,8 +1,10 @@
+@use 'pix-design-tokens/fonts';
+
 .feedback-panel-v3 {
   margin-bottom: var(--pix-spacing-10x);
   color: var(--pix-neutral-800);
   font-size: 0.875rem;
-  font-family: $font-roboto;
+  font-family: fonts.$font-roboto;
 
   &__refresh-info {
     display: flex;

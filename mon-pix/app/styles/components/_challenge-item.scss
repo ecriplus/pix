@@ -1,3 +1,7 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+@use '../globals/a11y' as *;
+
 .challenge-item {
   padding: var(--pix-spacing-1x);
 }
@@ -18,7 +22,7 @@
     color: var(--pix-primary-500);
     text-decoration: underline;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       display: inline-block;
     }
 

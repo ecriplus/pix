@@ -1,8 +1,12 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+@use 'pix-design-tokens/colors';
+
 .campaign-tutorial {
   display: flex;
   width: 100%;
   height: 100vh;
-  background: $pix-secondary-app-gradient;
+  background: colors.$pix-secondary-app-gradient;
 
   &__container {
     max-width: 800px;
@@ -10,7 +14,7 @@
     margin: auto;
     padding: 30px 40px;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       width: 800px;
       min-height: 600px;
       padding: 30px 10px;
@@ -22,11 +26,11 @@
     color: var(--pix-primary-500);
     font-weight: 600;
     font-size: 1.25rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
     line-height: 40px;
     text-align: center;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       font-size: 1.875rem;
     }
   }
@@ -44,11 +48,11 @@
   &__explanation-text {
     color: var(--pix-neutral-900);
     font-size: 1.125rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
     white-space: pre-line;
     text-align: center;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       font-size: 1.25rem;
     }
   }
@@ -60,7 +64,7 @@
     margin-top: 10px;
     margin-bottom: 30px;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       margin-top: 15px;
     }
 

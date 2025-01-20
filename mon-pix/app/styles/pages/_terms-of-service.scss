@@ -1,8 +1,11 @@
+@use "pix-design-tokens/colors";
+@use "pix-design-tokens/typography";
+
 .terms-of-service-page {
   display: flex;
   width: 100%;
   min-height: 100vh;
-  background: $pix-primary-app-gradient;
+  background: colors.$pix-primary-app-gradient;
 }
 
 .terms-of-service-form {
@@ -25,23 +28,18 @@
     }
   }
 
-  &__title,
-  &__description {
-    color: var(--pix-neutral-800);
-    font-family: $font-roboto;
+  &__title {
+    @extend %pix-title-m;
+
+    margin-bottom: 8px;
     text-align: center;
   }
 
-  &__title {
-    margin-bottom: 8px;
-    font-weight: 300;
-    font-size: 2.125rem;
-  }
-
   &__description {
+    @extend %pix-body-m;
+
     margin-bottom: 40px;
-    font-weight: normal;
-    font-size: 1rem;
+    text-align: center;
   }
 
   &__actions {

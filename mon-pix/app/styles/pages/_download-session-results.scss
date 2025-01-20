@@ -1,9 +1,12 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .download-session-results {
   max-width: max-content;
   margin: 0 auto 32px;
   padding: 48px 24px;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     padding: 48px 60px;
   }
 

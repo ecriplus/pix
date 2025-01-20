@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+
 .register-form {
   display: flex;
   flex-direction: column;
@@ -15,14 +18,14 @@
     color: var(--pix-neutral-800);
     font-weight: var(--pix-font-bold);
     font-size: 0.875rem;
-    font-family: $font-roboto;
+    font-family: fonts.$font-roboto;
   }
 
   &__required-inputs {
     color: var(--pix-neutral-500);
     font-weight: var(--pix-font-normal);
     font-size: 1rem;
-    font-family: $font-roboto;
+    font-family: fonts.$font-roboto;
   }
 
   .register-button-container {
@@ -55,7 +58,7 @@
     font-size: 0.938rem;
     text-align: center;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       padding: 10px 10px 0;
     }
   }
@@ -76,7 +79,7 @@
       padding: 15px 10px;
       color: var(--pix-neutral-100);
       font-size: 0.875rem;
-      font-family: $font-roboto;
+      font-family: fonts.$font-roboto;
       background-color: var(--pix-neutral-20);
       border-radius: 3px;
     }

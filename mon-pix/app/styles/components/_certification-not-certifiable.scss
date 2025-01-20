@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .certification-not-certifiable__panel {
   display: flex;
   flex-direction: column;
@@ -8,7 +11,7 @@
   padding: var(--pix-spacing-8x);
   text-rendering: optimizelegibility;
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     padding: 50px 70px 40px;
   }
 }
@@ -29,7 +32,7 @@
   margin-top: var(--pix-spacing-4x);
   text-align: center;
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     max-width: 850px;
   }
 }

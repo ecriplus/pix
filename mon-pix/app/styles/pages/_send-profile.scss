@@ -1,9 +1,12 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+
 .send-profile-header {
   margin-top: -160px;
   margin-bottom: 32px;
   padding: 30px 10px;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     padding: 32px 24px;
   }
 
@@ -21,7 +24,7 @@
   &__title {
     color: var(--pix-neutral-900);
     font-size: 2rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
     text-align: center;
   }
 
@@ -29,7 +32,7 @@
     margin: 30px;
     color: var(--pix-neutral-900);
     font-size: 1.25rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
     line-height: 2.5rem;
     text-align: center;
   }
@@ -68,7 +71,7 @@
     color: var(--pix-neutral-900);
     font-weight: var(--pix-font-medium);
     font-size: 1.25rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
   }
 }
 
@@ -78,14 +81,14 @@
     margin: 30px auto 60px;
     color: var(--pix-neutral-100);
     font-size: 1.375rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
     text-align: center;
   }
 
   &__back-to-home {
     font-weight: var(--pix-font-bold);
     font-size: 1rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
     text-align: center;
   }
 }

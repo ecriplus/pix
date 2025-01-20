@@ -1,7 +1,10 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+
 .user-certifications-page__container {
   padding: 0 10px;
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     justify-content: flex-start;
     padding: 0;
   }
@@ -16,10 +19,10 @@
   color: var(--pix-neutral-800);
   font-weight: var(--pix-font-medium);
   font-size: 1.75rem;
-  font-family: $font-open-sans;
+  font-family: fonts.$font-open-sans;
   line-height: 33px;
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     justify-content: flex-start;
   }
 }

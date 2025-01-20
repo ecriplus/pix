@@ -1,8 +1,11 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .user-trainings-banner {
   margin: 0 var(--pix-spacing-6x);
   padding-bottom: var(--pix-spacing-4x);
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     max-width: 1280px;
     margin: 0 auto;
     padding: var(--pix-spacing-4x) 20px;
@@ -32,7 +35,7 @@
   padding: var(--pix-spacing-6x) 20px 0;
   color: var(--pix-neutral-900);
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     padding: 40px 0 0;
   }
 
@@ -45,7 +48,7 @@
     margin: 0 auto;
     padding: 0 20px;
 
-    @include device-is('desktop') {
+    @include breakpoints.device-is('desktop') {
       max-width: 1280px;
     }
   }
@@ -58,11 +61,11 @@
     padding: 0;
     list-style: none;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    @include device-is('desktop') {
+    @include breakpoints.device-is('desktop') {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }

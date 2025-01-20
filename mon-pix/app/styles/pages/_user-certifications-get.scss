@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/breakpoints';
+
 .user-certifications-page-get {
   position: relative;
 
@@ -51,14 +53,14 @@
   }
 }
 
-@include device-is('mobile') {
+@include breakpoints.device-is('mobile') {
   @include contentInColumn;
 }
 
-@include device-is('tablet') {
+@include breakpoints.device-is('tablet') {
   @include contentInColumn;
 }
 
-@include device-is('desktop') {
+@include breakpoints.device-is('desktop') {
   @include contentInRow;
 }

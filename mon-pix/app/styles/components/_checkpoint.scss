@@ -1,8 +1,11 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+
 .checkpoint__container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: $font-open-sans;
+  font-family: fonts.$font-open-sans;
 }
 
 .checkpoint__header {
@@ -10,7 +13,7 @@
   margin: var(--pix-spacing-6x) 0 var(--pix-spacing-4x);
   padding-inline: var(--pix-spacing-2x);
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
@@ -25,14 +28,14 @@
   margin: 0;
   padding: 22px 5px;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     width: 800px;
     padding: 30px;
   }
 }
 
 .checkpoint__progression-gauge {
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     width: 65%;
   }
 }
@@ -40,7 +43,7 @@
 .checkpoint__continue-wrapper {
   display: none;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     display: flex;
   }
 }
@@ -51,13 +54,13 @@
   justify-content: center;
   text-align: center;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     justify-content: flex-end;
   }
 }
 
 .checkpoint__continue-button {
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     width: 230px;
   }
 
@@ -67,7 +70,7 @@
     margin-left: 0.5em;
     transition: all 0.25s ease-in-out;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       margin-left: 6px;
     }
   }

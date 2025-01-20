@@ -1,7 +1,10 @@
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/colors';
+
 .certification-instructions {
   min-height: 100vh;
   padding: 32px 80px;
-  background: $pix-primary-certif-gradient;
+  background: colors.$pix-primary-certif-gradient;
 }
 
 .instructions-header {
