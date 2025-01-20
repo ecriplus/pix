@@ -41,7 +41,7 @@ const get = async function (id) {
 
   return new Campaign({
     ...campaign,
-    ...{ idPixLabel: featureExternalId?.params?.label, idPixType: featureExternalId?.params?.type },
+    ...{ externalIdLabel: featureExternalId?.params?.label, externalIdType: featureExternalId?.params?.type },
     organization: { id: campaign.organizationId },
     targetProfile: { id: campaign.targetProfileId },
     creator: { id: campaign.creatorId },
