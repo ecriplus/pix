@@ -5,8 +5,7 @@ Fonctionnalité: Campagne de collecte de profils
     Étant donné que les données de test sont chargées
 
   Scénario: Je partage mon profil
-    Étant donné que je vais sur Pix
-    Et je suis connecté à Pix en tant que "Daenerys Targaryen"
+    Étant donné que je suis connecté à Pix en tant que "Daenerys Targaryen"
     Lorsque je vais sur la page d'accès à une campagne
     Et je saisis le code "LION"
     Lorsque je clique sur "Accéder au parcours"
@@ -31,8 +30,7 @@ Fonctionnalité: Campagne de collecte de profils
     Alors je vois que j'ai partagé mon profil
 
   Scénario: Je partage mon profil de manière restreinte
-    Étant donné que je vais sur Pix
-    Et je suis connecté à Pix en tant que "Daenerys Targaryen"
+    Étant donné que je suis connecté à Pix en tant que "Daenerys Targaryen"
     Et je vais sur la page d'accès à une campagne
     Lorsque je saisis le code "WOLF"
     Et je clique sur "Accéder au parcours"

@@ -5,8 +5,7 @@ Fonctionnalité: Dashboard utilisateur (page /accueil)
     Étant donné que les données de test sont chargées
 
   Scénario: Je souhaite voir mes parcours non finis et non partagés
-    Étant donné que je vais sur Pix
-    Et je suis connecté à Pix en tant que "Jaime Lannister"
+    Étant donné que je suis connecté à Pix en tant que "Jaime Lannister"
     Lorsque je vais sur mon dashboard
     Alors je vois le résumé de mes participations aux campagnes qui ne sont pas partagées
     Et je vois 2 participations aux campagnes

@@ -28,15 +28,17 @@ function setEmberSimpleAuthSession(response) {
   );
 }
 
-Cypress.Commands.add('login', (username, password) => {
-  cy.intercept('/api/users/me').as('getCurrentUser');
+Cypress.Commands.add("login", (username, password, url) => {
+  cy.intercept("/api/users/me").as("getCurrentUser");
   cy.request({
     url: `${Cypress.env('API_URL')}/api/token`,
     method: 'POST',
     form: true,
     body: getLoginBody(username, password, 'mon-pix'),
   }).then(setEmberSimpleAuthSession);
-  cy.wait(['@getCurrentUser']);
+  if (url) cy.visitMonPix(url);
+
+  cy.wait(["@getCurrentUser"]);
 });
 
 Cypress.Commands.add('loginOrga', (username, password) => {
@@ -50,8 +52,8 @@ Cypress.Commands.add('loginOrga', (username, password) => {
   cy.wait(['@getCurrentUser']);
 });
 
-Cypress.Commands.add('loginAdmin', (username, password) => {
-  cy.intercept('/api/users/me').as('getCurrentUser');
+Cypress.Commands.add("loginAdmin", (username, password, url) => {
+  cy.intercept("/api/users/me").as("getCurrentUser");
   cy.request({
     url: `${Cypress.env('API_URL')}/api/token`,
     method: 'POST',
@@ -71,7 +73,9 @@ Cypress.Commands.add('loginAdmin', (username, password) => {
       })
     );
   });
-  cy.wait(['@getCurrentUser']);
+  if (url) cy.visitMonPix(url);
+
+  cy.wait(["@getCurrentUser"]);
 });
 
 Cypress.Commands.add('loginExternalPlatformForTheFirstTime', () => {

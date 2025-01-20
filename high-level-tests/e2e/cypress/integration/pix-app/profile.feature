@@ -5,8 +5,7 @@ Fonctionnalité: Compétences
     Étant donné que les données de test sont chargées
 
   Scénario: J'accède à la page de détails d'une compétence
-    Étant donné que je vais sur Pix
-    Et je suis connecté à Pix en tant que "Daenerys Targaryen"
+    Étant donné que je suis connecté à Pix en tant que "Daenerys Targaryen"
     Lorsque je clique sur "Compétences"
     Alors je suis redirigé vers le profil de "Daenerys"
     Et la page "Profil" est correctement affichée

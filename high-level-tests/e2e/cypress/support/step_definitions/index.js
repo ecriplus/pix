@@ -49,13 +49,13 @@ Given("je vais sur la page {string}", (pathname) => {
 Given("je suis connecté à Pix en tant que {string}", (user) => {
   switch (user) {
     case "John Snow":
-      cy.login("john.snow@pix.fr", "pix123");
+      cy.login("john.snow@pix.fr", "pix123", "/");
       break;
     case "Jaime Lannister":
-      cy.login("jaime.lannister@example.net", "pix123");
+      cy.login("jaime.lannister@example.net", "pix123", "/");
       break;
     default:
-      cy.login("daenerys.targaryen@pix.fr", "pix123");
+      cy.login("daenerys.targaryen@pix.fr", "pix123", "/");
       break;
   }
 });
