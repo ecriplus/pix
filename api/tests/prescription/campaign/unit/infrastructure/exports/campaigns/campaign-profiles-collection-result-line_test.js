@@ -318,9 +318,9 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-result-line', f
       });
     });
 
-    context('When campaign has an idPixLabel', function () {
+    context('When campaign has an externalIdLabel', function () {
       beforeEach(function () {
-        campaign.idPixLabel = 'Mail Pro';
+        campaign.externalIdLabel = 'Mail Pro';
       });
 
       it('should return the line with a participant external id', function () {
