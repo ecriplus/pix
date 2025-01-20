@@ -8,8 +8,8 @@ class CampaignReport {
     name,
     code,
     title,
-    idPixLabel,
-    idPixType,
+    externalIdLabel,
+    externalIdType,
     createdAt,
     customLandingPageText,
     archivedAt,
@@ -29,8 +29,8 @@ class CampaignReport {
     this.code = code;
     this.title = title;
     this.type = type;
-    this.idPixLabel = idPixLabel;
-    this.idPixType = idPixType;
+    this.externalIdLabel = externalIdLabel;
+    this.externalIdType = externalIdType;
     this.customLandingPageText = customLandingPageText;
     this.createdAt = createdAt;
     this.archivedAt = archivedAt;
