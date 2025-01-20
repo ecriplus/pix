@@ -29,6 +29,7 @@ const VALIDATION_ERRORS = {
 export default class LoginForm extends Component {
   @service url;
   @service session;
+  @service storage;
   @service store;
   @service router;
 
@@ -72,6 +73,7 @@ export default class LoginForm extends Component {
   updateLogin(event) {
     this.login = event.target.value?.trim();
     this.validation.login.validate(this.login);
+    this.storage.setLogin(this.login);
   }
 
   @action
