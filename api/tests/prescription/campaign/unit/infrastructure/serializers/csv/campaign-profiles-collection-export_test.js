@@ -232,9 +232,9 @@ describe('Unit | Serializer | CSV | campaign-profiles-collection-export', functi
       expect(csv).to.equal(expectedHeader);
     });
 
-    it('should display idPixLabel header when campaign has one', async function () {
+    it('should display externalIdLabel header when campaign has one', async function () {
       //given
-      campaign.idPixLabel = 'email';
+      campaign.externalIdLabel = 'email';
       const campaignProfile = new CampaignProfilesCollectionExport({
         outputStream,
         organization,
