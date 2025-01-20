@@ -45,7 +45,7 @@ describe('Integration | Repository | CampaignToJoin', function () {
       expect(actualCampaign.id).to.equal(expectedCampaign.id);
       expect(actualCampaign.code).to.equal(expectedCampaign.code);
       expect(actualCampaign.title).to.equal(expectedCampaign.title);
-      expect(actualCampaign.externalId).to.equal('Id Ex');
+      expect(actualCampaign.externalIdLabel).to.equal('Id Ex');
       expect(actualCampaign.customLandingPageText).to.equal(expectedCampaign.customLandingPageText);
       expect(actualCampaign.externalIdHelpImageUrl).to.equal(expectedCampaign.externalIdHelpImageUrl);
       expect(actualCampaign.alternativeTextToExternalIdHelpImage).to.equal(

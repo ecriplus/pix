@@ -9,7 +9,7 @@ describe('Unit | Serializer | JSONAPI | campaign-to-join-serializer', function (
       const campaignToJoin = domainBuilder.buildCampaignToJoin({
         identityProvider: 'SUPER_IDP',
         hasLearnersImportFeature: true,
-        idPixType: CampaignExternalIdTypes.STRING,
+        externalIdType: CampaignExternalIdTypes.STRING,
       });
       campaignToJoin.setReconciliationFields([{ key: 'toto', value: 'titi' }]);
       // when
@@ -24,8 +24,8 @@ describe('Unit | Serializer | JSONAPI | campaign-to-join-serializer', function (
             code: campaignToJoin.code,
             title: campaignToJoin.title,
             type: campaignToJoin.type,
-            'id-pix-label': campaignToJoin.idPixLabel,
-            'id-pix-type': campaignToJoin.idPixType,
+            'external-id-label': campaignToJoin.externalIdLabel,
+            'external-id-type': campaignToJoin.externalIdType,
             'custom-landing-page-text': campaignToJoin.customLandingPageText,
             'external-id-help-image-url': campaignToJoin.externalIdHelpImageUrl,
             'alternative-text-to-external-id-help-image': campaignToJoin.alternativeTextToExternalIdHelpImage,
