@@ -435,7 +435,7 @@
           "element": {
             "id": "5403d509-05f4-4473-ab7c-18e244aa234c",
             "type": "text",
-            "content": "<p>Comme Marilou adore les dragons, Franck a sélectionné plusieurs jeux qui pourraient lui plaire. 🐲<br>Il veut lui offrir un jeu : </p>\n<ul>\n    <li> sans contenus inadaptés pour son âge selon la signalétique PEGI,</li>\n    <li>sans achats intégrés,</li>\n    <li>sans interactions entre les joueurs.</li>\n</ul>\n<p>Aidez-le à choisir le plus adapté pour sa fille de 8 ans.<br>👇 Voici les fiches des trois jeux vidéo sur le thème des dragons que Franck a sélectionnés.</p>"
+            "content": "<p>Comme Marilou adore les dragons, Franck a sélectionné plusieurs jeux qui pourraient lui plaire. 🐲<br>Il veut lui offrir un jeu : </p>\n<ul>\n    <li> sans contenus inadaptés pour son âge selon la signalétique PEGI,</li>\n    <li>sans achats intégrés,</li>\n    <li>sans possibilité de discuter avec d'autres joueurs dans le jeu.</li>\n</ul>\n<p>Aidez-le à choisir le plus adapté pour sa fille de 8 ans.<br>👇 Voici les fiches des trois jeux vidéo sur le thème des dragons que Franck a sélectionnés.</p>"
           }
         },
         {
@@ -455,7 +455,7 @@
           "element": {
             "id": "9ac76a42-e7ba-477c-a865-e0dd8617b850",
             "type": "qcu",
-            "instruction": "<p>Parmi ces trois jeux, lequel est le plus adapté pour Marilou ?</p>",
+            "instruction": "<p>Parmi ces trois jeux, lequel correspond aux critères de Franck ?</p>",
             "proposals": [
               {
                 "id": "1",
