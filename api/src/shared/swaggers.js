@@ -15,6 +15,7 @@ class PixOpenApiBaseDefinition {
       },
       jsonPath: '/swagger.json',
       documentationPath: '/documentation',
+      swaggerUIPath: '/documentation/swaggerui/',
       uiOptions: {
         url: 'swagger.json',
       },
