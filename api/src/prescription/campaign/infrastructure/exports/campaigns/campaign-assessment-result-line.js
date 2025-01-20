@@ -119,7 +119,7 @@ class CampaignAssessmentResultLine {
       ...this._division,
       ...this._group,
       ...this._studentNumber,
-      ...(this.campaign.idPixLabel ? [this.campaignParticipationInfo.participantExternalId] : []),
+      ...(this.campaign.externalIdLabel ? [this.campaignParticipationInfo.participantExternalId] : []),
       this.campaignParticipationService.progress(
         this.campaignParticipationInfo.isCompleted,
         this.targetedKnowledgeElementsCount,

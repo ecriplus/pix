@@ -19,7 +19,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
 
     beforeEach(function () {
       organization = domainBuilder.buildOrganization({ isManagingStudents: false });
-      campaign = domainBuilder.buildCampaign({ idPixLabel: null });
+      campaign = domainBuilder.buildCampaign({ externalIdLabel: null });
       targetProfile = domainBuilder.buildTargetProfile();
       learningContent = domainBuilder.buildLearningContent.withSimpleContent();
       areas = learningContent.areas;
@@ -242,9 +242,9 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
         });
       });
 
-      it('should write the participantExternalId when campaign has an idPixLabel', function () {
+      it('should write the participantExternalId when campaign has an externalIdLabel', function () {
         // given
-        const campaign = domainBuilder.buildCampaign({ idPixLabel: 'I Have One !' });
+        const campaign = domainBuilder.buildCampaign({ externalIdLabel: 'I Have One !' });
         const campaignParticipationInfo = domainBuilder.buildCampaignParticipationInfo({
           participantExternalId: 'someParticipantExternalId',
           createdAt,
@@ -300,7 +300,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
         it('should display group , student number before participantExternalId', function () {
           // given
           const organization = domainBuilder.buildOrganization({ type: 'SUP', isManagingStudents: true });
-          const campaign = domainBuilder.buildCampaign({ idPixLabel: 'I Have One !' });
+          const campaign = domainBuilder.buildCampaign({ externalIdLabel: 'I Have One !' });
           const campaignParticipationInfo = domainBuilder.buildCampaignParticipationInfo({
             studentNumber: 'someStudentNumber',
             group: 'D3',
@@ -356,7 +356,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
         it('should display division before participantExternalId', function () {
           // given
           const organization = domainBuilder.buildOrganization({ type: 'SCO', isManagingStudents: true });
-          const campaign = domainBuilder.buildCampaign({ idPixLabel: 'I Have One !' });
+          const campaign = domainBuilder.buildCampaign({ externalIdLabel: 'I Have One !' });
           const campaignParticipationInfo = domainBuilder.buildCampaignParticipationInfo({
             division: '6eme',
             participantExternalId: 'someParticipantExternalId',
