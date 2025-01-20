@@ -76,8 +76,8 @@ export default class CampaignView extends Component {
     return { source: this.args.campaign.id };
   }
 
-  get idPixTypeText() {
-    return ID_PIX_TYPES[this.args.campaign.idPixType];
+  get externalIdTypeText() {
+    return ID_PIX_TYPES[this.args.campaign.externalIdType];
   }
 
   @action
@@ -167,14 +167,14 @@ export default class CampaignView extends Component {
               </dd>
             </div>
           {{/if}}
-          {{#if @campaign.idPixLabel}}
+          {{#if @campaign.externalIdLabel}}
             <div class="campaign-settings-content">
               <dt class="label-text campaign-settings-content__label">{{t
                   "pages.campaign-settings.external-user-id-label"
                 }}
-                <span class="help-text">({{t this.idPixTypeText}})</span></dt>
+                <span class="help-text">({{t this.externalIdTypeText}})</span></dt>
 
-              <dd class="content-text campaign-settings-content__text">{{@campaign.idPixLabel}}</dd>
+              <dd class="content-text campaign-settings-content__text">{{@campaign.externalIdLabel}}</dd>
             </div>
           {{/if}}
           {{#if this.displayCampaignsRootUrl}}

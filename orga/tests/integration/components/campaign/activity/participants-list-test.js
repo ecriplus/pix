@@ -24,7 +24,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
     }
     this.owner.register('service:current-user', CurrentUserStub);
 
-    this.set('campaign', { idPixLabel: 'id', type: 'ASSESSMENT' });
+    this.set('campaign', { externalIdLabel: 'id', type: 'ASSESSMENT' });
 
     this.set('participations', [
       {
@@ -56,7 +56,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
     }
     this.owner.register('service:current-user', CurrentUserStub);
 
-    this.set('campaign', { id: '100', idPixLabel: 'id', type: 'ASSESSMENT' });
+    this.set('campaign', { id: '100', externalIdLabel: 'id', type: 'ASSESSMENT' });
 
     this.set('participations', [
       {
@@ -88,7 +88,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
       isAdminInOrganization = true;
     }
     this.owner.register('service:current-user', CurrentUserStub);
-    this.set('campaign', { id: '100', idPixLabel: 'id', type: 'ASSESSMENT' });
+    this.set('campaign', { id: '100', externalIdLabel: 'id', type: 'ASSESSMENT' });
 
     this.set('participations', [
       {
@@ -120,7 +120,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
       isAdminInOrganization = true;
     }
     this.owner.register('service:current-user', CurrentUserStub);
-    this.set('campaign', { id: '100', idPixLabel: 'id', type: 'ASSESSMENT' });
+    this.set('campaign', { id: '100', externalIdLabel: 'id', type: 'ASSESSMENT' });
 
     this.set('participations', [
       {
@@ -146,7 +146,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
   });
 
   test('[A11Y] it should have an aria label', async function (assert) {
-    this.set('campaign', { idPixLabel: 'id', type: 'ASSESSMENT' });
+    this.set('campaign', { externalIdLabel: 'id', type: 'ASSESSMENT' });
 
     this.set('participations', [
       {
@@ -179,7 +179,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
         }
         this.owner.register('service:current-user', CurrentUserStub);
 
-        this.campaign = { idPixLabel: 'id', type: 'ASSESSMENT' };
+        this.campaign = { externalIdLabel: 'id', type: 'ASSESSMENT' };
         this.participations = [
           {
             firstName: 'Joe',
@@ -208,7 +208,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
         }
         this.owner.register('service:current-user', CurrentUserStub);
 
-        this.campaign = { idPixLabel: 'id', type: 'ASSESSMENT', ownerId: 109 };
+        this.campaign = { externalIdLabel: 'id', type: 'ASSESSMENT', ownerId: 109 };
         this.participations = [
           {
             firstName: 'Joe',
@@ -237,7 +237,7 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
         }
         this.owner.register('service:current-user', CurrentUserStub);
 
-        this.campaign = { idPixLabel: 'id', type: 'ASSESSMENT', ownerId: 1 };
+        this.campaign = { externalIdLabel: 'id', type: 'ASSESSMENT', ownerId: 1 };
         this.participations = [
           {
             firstName: 'Joe',

@@ -9,11 +9,11 @@ module('Unit | Model | campaign', function (hooks) {
     const model = store.createRecord('campaign', {
       name: 'Fake name',
       code: 'ABC123',
-      idPixType: 'STRING',
+      externalIdType: 'STRING',
     });
     assert.strictEqual(model.name, 'Fake name');
     assert.strictEqual(model.code, 'ABC123');
-    assert.strictEqual(model.idPixType, 'STRING');
+    assert.strictEqual(model.externalIdType, 'STRING');
   });
 
   module('#urlToResult', function () {
@@ -66,25 +66,25 @@ module('Unit | Model | campaign', function (hooks) {
     test('returns false while campaign does not contain IdPixLabel', function (assert) {
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('campaign', {
-        idPixLabel: null,
+        externalIdLabel: null,
       });
 
       assert.false(model.hasExternalId);
     });
 
-    test('returns false while idPixLabel is empty', function (assert) {
+    test('returns false while externalIdLabel is empty', function (assert) {
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('campaign', {
-        idPixLabel: '',
+        externalIdLabel: '',
       });
 
       assert.false(model.hasExternalId);
     });
 
-    test('returns true while campaign contain idPixLabel', function (assert) {
+    test('returns true while campaign contain externalIdLabel', function (assert) {
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('campaign', {
-        idPixLabel: 'krakow',
+        externalIdLabel: 'krakow',
       });
 
       assert.true(model.hasExternalId);

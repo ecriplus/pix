@@ -34,9 +34,9 @@
 
   <div class="panel-header__body">
     <Ui::InformationWrapper>
-      {{#if (and @participation.participantExternalId @campaign.idPixLabel)}}
+      {{#if (and @participation.participantExternalId @campaign.externalIdLabel)}}
         <Ui::Information>
-          <:title>{{@campaign.idPixLabel}}</:title>
+          <:title>{{@campaign.externalIdLabel}}</:title>
           <:content>{{@participation.participantExternalId}}</:content>
         </Ui::Information>
       {{/if}}

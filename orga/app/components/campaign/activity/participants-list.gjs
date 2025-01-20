@@ -72,7 +72,7 @@ export default class ParticipantsList extends Component {
           <colgroup class="table__column">
             <col class="table__column--wide" />
             <col class="table__column--wide" />
-            {{#if @campaign.idPixLabel}}
+            {{#if @campaign.externalIdLabel}}
               <col class="table__column--medium" />
             {{/if}}
             <col class="table__column--wide" />
@@ -87,8 +87,8 @@ export default class ParticipantsList extends Component {
             <tr>
               <TableHeader>{{t "pages.campaign-activity.table.column.last-name"}}</TableHeader>
               <TableHeader>{{t "pages.campaign-activity.table.column.first-name"}}</TableHeader>
-              {{#if @campaign.idPixLabel}}
-                <TableHeader>{{@campaign.idPixLabel}}</TableHeader>
+              {{#if @campaign.externalIdLabel}}
+                <TableHeader>{{@campaign.externalIdLabel}}</TableHeader>
               {{/if}}
               <TableHeader>{{t "pages.campaign-activity.table.column.status"}}</TableHeader>
               {{#if @showParticipationCount}}
@@ -134,7 +134,7 @@ export default class ParticipantsList extends Component {
                     </LinkTo>
                   </td>
                   <td>{{participation.firstName}}</td>
-                  {{#if @campaign.idPixLabel}}
+                  {{#if @campaign.externalIdLabel}}
                     <td class="table__column table__column--break-word">{{participation.participantExternalId}}</td>
                   {{/if}}
                   <td>

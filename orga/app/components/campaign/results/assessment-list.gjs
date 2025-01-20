@@ -30,7 +30,7 @@ import EvolutionHeader from './evolution-header';
         <colgroup class="table__column">
           <col />
           <col />
-          {{#if @campaign.idPixLabel}}
+          {{#if @campaign.externalIdLabel}}
             <col class="table__column--medium" />
           {{/if}}
           <col />
@@ -47,7 +47,7 @@ import EvolutionHeader from './evolution-header';
             <TableHeader>{{t "pages.campaign-results.table.column.last-name"}}</TableHeader>
             <TableHeader>{{t "pages.campaign-results.table.column.first-name"}}</TableHeader>
             {{#if @campaign.hasExternalId}}
-              <TableHeader>{{@campaign.idPixLabel}}</TableHeader>
+              <TableHeader>{{@campaign.externalIdLabel}}</TableHeader>
             {{/if}}
             <TableHeader>{{t "pages.campaign-results.table.column.results.label"}}</TableHeader>
             {{#if @campaign.multipleSendings}}

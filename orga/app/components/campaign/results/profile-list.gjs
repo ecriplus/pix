@@ -35,7 +35,7 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
         <colgroup class="table__column">
           <col />
           <col />
-          {{#if @campaign.idPixLabel}}
+          {{#if @campaign.externalIdLabel}}
             <col class="table__column--medium" />
           {{/if}}
           <col />
@@ -53,8 +53,8 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
           <tr>
             <TableHeader>{{t "pages.profiles-list.table.column.last-name"}}</TableHeader>
             <TableHeader>{{t "pages.profiles-list.table.column.first-name"}}</TableHeader>
-            {{#if @campaign.idPixLabel}}
-              <TableHeader>{{@campaign.idPixLabel}}</TableHeader>
+            {{#if @campaign.externalIdLabel}}
+              <TableHeader>{{@campaign.externalIdLabel}}</TableHeader>
             {{/if}}
             <TableHeader @align="center">{{t "pages.profiles-list.table.column.sending-date.label"}}</TableHeader>
             <TableHeader @align="center">{{t "pages.profiles-list.table.column.pix-score.label"}}</TableHeader>
@@ -97,7 +97,7 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
                   </LinkTo>
                 </td>
                 <td>{{profile.firstName}}</td>
-                {{#if @campaign.idPixLabel}}
+                {{#if @campaign.externalIdLabel}}
                   <td class="table__column table__column--break-word">{{profile.participantExternalId}}</td>
                 {{/if}}
                 <td class="table__column--center">

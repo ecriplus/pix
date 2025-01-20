@@ -363,7 +363,7 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
     test("it should display participant's results with external id", async function (assert) {
       // given
       const campaign = store.createRecord('campaign', {
-        idPixLabel: 'identifiant externe',
+        externalIdLabel: 'identifiant externe',
       });
 
       const participations = [{ participantExternalId: '123' }];

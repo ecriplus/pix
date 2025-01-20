@@ -198,27 +198,27 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
     });
   });
 
-  module('on idPixLabel display', function () {
-    module('when idPixLabel is set', function () {
-      test('it should display the idPixLabel', async function (assert) {
+  module('on externalIdLabel display', function () {
+    module('when externalIdLabel is set', function () {
+      test('it should display the externalIdLabel', async function (assert) {
         // given
         this.campaign = store.createRecord('campaign', {
-          idPixLabel: 'idPixLabel',
+          externalIdLabel: 'externalIdLabel',
         });
 
         // when
         const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
 
         // then
-        assert.dom(screen.getByText('idPixLabel')).exists();
+        assert.dom(screen.getByText('externalIdLabel')).exists();
       });
     });
 
-    module('when idPixLabel is not set', function () {
-      test('it should not display the idPixLabel', async function (assert) {
+    module('when externalIdLabel is not set', function () {
+      test('it should not display the externalIdLabel', async function (assert) {
         // given
         this.campaign = store.createRecord('campaign', {
-          idPixLabel: null,
+          externalIdLabel: null,
         });
 
         // when
