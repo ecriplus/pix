@@ -1078,5 +1078,19 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
       // then
       expect(isScoringBlockedDueToComplementaryOnlyChallenges).to.be.false;
     });
+
+    it('should return false if there are no challenges', function () {
+      //given
+      const certificationAssessment = domainBuilder.buildCertificationAssessment({
+        certificationChallenges: [],
+        certificationAnswersByDate: [],
+      });
+
+      // when
+      const isComplementaryOnly = certificationAssessment.isScoringBlockedDueToComplementaryOnlyChallenges;
+
+      // then
+      expect(isComplementaryOnly).to.be.false;
+    });
   });
 });

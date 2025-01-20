@@ -197,7 +197,7 @@ class CertificationAssessment {
   }
 
   get isScoringBlockedDueToComplementaryOnlyChallenges() {
-    return this.isComplementaryOnly;
+    return this.certificationChallenges.length > 0 && this.isComplementaryOnly;
   }
 
   _getLastChallenge() {
