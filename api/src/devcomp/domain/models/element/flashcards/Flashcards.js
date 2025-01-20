@@ -7,8 +7,12 @@ class Flashcards extends Element {
 
     this.title = title;
     this.instruction = instruction;
-    this.introImage = introImage;
+    this.setIntroImage(introImage);
     this.cards = cards.map(({ id, recto, verso }) => new Card({ id, recto, verso }));
+  }
+
+  setIntroImage(introImage) {
+    this.introImage = introImage?.url?.length > 0 ? introImage : undefined;
   }
 }
 
