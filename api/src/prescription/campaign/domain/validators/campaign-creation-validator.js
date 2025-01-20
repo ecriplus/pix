@@ -63,7 +63,7 @@ const schema = Joi.object({
     'any.required': 'CUSTOM_RESULT_PAGE_BUTTON_URL_IS_REQUIRED_WHEN_CUSTOM_RESULT_PAGE_BUTTON_TEXT_IS_FILLED',
   }),
 
-  idPixType: Joi.when('idPixLabel', {
+  externalIdType: Joi.when('externalIdLabel', {
     is: Joi.string().required(),
     then: Joi.string()
       .required()
