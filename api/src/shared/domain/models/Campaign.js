@@ -8,8 +8,8 @@ class Campaign {
     name,
     code,
     title,
-    idPixLabel,
-    idPixType,
+    externalIdLabel,
+    externalIdType,
     externalIdHelpImageUrl,
     alternativeTextToExternalIdHelpImage,
     createdAt,
@@ -34,8 +34,8 @@ class Campaign {
     this.name = name;
     this.code = code;
     this.title = title;
-    this.idPixLabel = idPixLabel;
-    this.idPixType = idPixType;
+    this.externalIdLabel = externalIdLabel;
+    this.externalIdType = externalIdType;
     this.externalIdHelpImageUrl = externalIdHelpImageUrl;
     this.alternativeTextToExternalIdHelpImage = alternativeTextToExternalIdHelpImage;
     this.createdAt = createdAt;
