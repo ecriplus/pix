@@ -227,23 +227,23 @@
                 {
                   "id": "44c670d6-fdfc-4cdd-8a8b-2304b8fe019b",
                   "type": "text",
-                  "content": "<p>👛 Dans un jeu vidéo (gratuit ou payant), des achats de quelques centimes ou euros peuvent être proposés tout au long de la partie pour obtenir, par exemple : </p><ul><li>de la <strong>monnaie virtuelle</strong>,&nbsp;</li><li>des <strong>bonus </strong>ou des <strong>vies </strong>supplémentaires,</li><li>des améliorations pour les personnages.&nbsp;</li></ul><p>Ces achats en jeu sont appelés des <strong>achats intégrés</strong>.</p><p>⚠️ <strong>Attention</strong> :<br> Même si ce sont des petites sommes d’argent, la facture peut vite grimper ! Et si une carte bancaire est enregistrée sur l’appareil (smartphone, console…), l’achat sera débité automatiquement.</p>"
+                  "content": "<p>👛 Dans un jeu vidéo (gratuit ou payant), des achats de quelques centimes ou euros peuvent être proposés tout au long de la partie pour obtenir, par exemple : </p><ul><li>de la <strong>monnaie virtuelle</strong>,&nbsp;</li><li>des <strong>bonus </strong>ou des <strong>vies </strong>supplémentaires,</li><li>des améliorations pour les personnages.&nbsp;</li></ul><p>Ces achats en jeu sont appelés des <strong>achats intégrés</strong>.</p><p>⚠️ <strong>Attention</strong> :<br> Même si ce sont des petites sommes d’argent, la facture peut vite grimper ! Et si une carte bancaire est enregistrée sur l’appareil (smartphone, console…), l’achat sera débité automatiquement sans que vous soyez avertis.</p>"
                 }
               ]
             },
             {
               "elements": [
                 {
+                  "id": "594dc9c3-d5e2-4698-82c6-62fbeca24e75",
+                  "type": "text",
+                  "content": "<p>Si un jeu contient des achats intégrés, le joueur doit obligatoirement être prévenu.</p><p>🔎 Pour le savoir, regardez la boîte ou la fiche du jeu en ligne et cherchez le <strong>pictogramme PEGI </strong>ci-dessus ou les mentions «&nbsp;<strong>achats intégrés</strong>&nbsp;» ou «&nbsp;<strong>achats intra-jeu facultatifs</strong>&nbsp;».</p>"
+                },
+                {
                   "id": "cfbb169d-45d8-4029-a62b-a2d78d33cfc4",
                   "type": "image",
                   "url": "https://i.imgur.com/qmjbQIS.png",
                   "alt": "",
                   "alternativeText": "<p>Pictogramme PEGI Achats intégrés</p>"
-                },
-                {
-                  "id": "594dc9c3-d5e2-4698-82c6-62fbeca24e75",
-                  "type": "text",
-                  "content": "<p>Si un jeu contient des achats intégrés, le joueur doit obligatoirement être prévenu.</p><p>🔎 Pour le savoir, regardez la boîte ou la fiche du jeu en ligne et cherchez le <strong>pictogramme PEGI </strong>ci-dessus ou les mentions «&nbsp;<strong>achats intégrés</strong>&nbsp;» ou «&nbsp;<strong>achats intra-jeu facultatifs</strong>&nbsp;».</p>"
                 }
               ]
             },
