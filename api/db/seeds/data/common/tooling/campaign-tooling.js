@@ -23,8 +23,8 @@ export { createAssessmentCampaign, createProfilesCollectionCampaign };
  * @param {string} name
  * @param {string} code
  * @param {string} title
- * @param {string} idPixLabel
- * @param {string} idPixLabelType
+ * @param {string} externalIdLabel
+ * @param {string} externalIdLabelType
  * @param {string} externalIdHelpImageUrl
  * @param {string} alternativeTextToExternalIdHelpImage
  * @param {string} customLandingPageText
@@ -62,8 +62,8 @@ async function createAssessmentCampaign({
   name,
   code,
   title,
-  idPixLabel,
-  idPixLabelType,
+  externalIdLabel,
+  externalIdLabelType,
   externalIdHelpImageUrl,
   alternativeTextToExternalIdHelpImage,
   customLandingPageText,
@@ -88,8 +88,8 @@ async function createAssessmentCampaign({
     name,
     code,
     title,
-    idPixLabel,
-    idPixLabelType,
+    externalIdLabel,
+    externalIdLabelType,
     externalIdHelpImageUrl,
     alternativeTextToExternalIdHelpImage,
     customLandingPageText,
@@ -276,7 +276,7 @@ function _numberOfDaysBetweenNowAndCreationDate(date) {
  * @param {string} name
  * @param {string} code
  * @param {string} title
- * @param {string} idPixLabel
+ * @param {string} externalIdLabel
  * @param {string} externalIdHelpImageUrl
  * @param {string} alternativeTextToExternalIdHelpImage
  * @param {string} customLandingPageText
@@ -301,7 +301,7 @@ async function createProfilesCollectionCampaign({
   name,
   code,
   title,
-  idPixLabel,
+  externalIdLabel,
   externalIdHelpImageUrl,
   alternativeTextToExternalIdHelpImage,
   customLandingPageText,
@@ -326,7 +326,7 @@ async function createProfilesCollectionCampaign({
     name,
     code,
     title,
-    idPixLabel,
+    externalIdLabel,
     externalIdHelpImageUrl,
     alternativeTextToExternalIdHelpImage,
     customLandingPageText,
@@ -447,8 +447,8 @@ function _buildCampaign({
   name,
   code,
   title,
-  idPixLabel,
-  idPixLabelType,
+  externalIdLabel,
+  externalIdLabelType,
   externalIdHelpImageUrl,
   alternativeTextToExternalIdHelpImage,
   customLandingPageText,
@@ -479,7 +479,7 @@ function _buildCampaign({
     externalIdHelpImageUrl,
     alternativeTextToExternalIdHelpImage,
     customLandingPageText,
-    idPixLabel: null,
+    externalIdLabel: null,
     isForAbsoluteNovice,
     archivedAt,
     archivedBy,
@@ -495,14 +495,14 @@ function _buildCampaign({
     multipleSendings,
     assessmentMethod,
   });
-  if (idPixLabel) {
-    const type = Object.values(CampaignExternalIdTypes).includes(idPixLabelType)
-      ? idPixLabelType
+  if (externalIdLabel) {
+    const type = Object.values(CampaignExternalIdTypes).includes(externalIdLabelType)
+      ? externalIdLabelType
       : CampaignExternalIdTypes.STRING;
     databaseBuilder.factory.buildCampaignFeature({
       campaignId: realCampaignId,
       featureId: FEATURE_CAMPAIGN_EXTERNAL_ID,
-      params: { type, label: idPixLabel },
+      params: { type, label: externalIdLabel },
     });
   }
   return { realCampaignId, realOrganizationId, realCreatedAt };

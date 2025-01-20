@@ -9,7 +9,7 @@ async function _createScoCampaigns(databaseBuilder, trainingIds, participantCoun
     ownerId: USER_ID_ADMIN_ORGANIZATION,
     name: 'PIX+ EDU - SCO - envoi simple',
     code: 'EDUSIMPLE',
-    idPixLabel: 'IdPixLabel',
+    externalIdLabel: 'IdPixLabel',
     targetProfileId: PIX_EDU_SMALL_TARGET_PROFILE_ID,
     configCampaign: {
       participantCount,
@@ -23,7 +23,7 @@ async function _createScoCampaigns(databaseBuilder, trainingIds, participantCoun
     ownerId: USER_ID_ADMIN_ORGANIZATION,
     name: 'PIX+ EDU - SCO- envoi multiple',
     code: 'EDUMULTIP',
-    idPixLabel: 'IdPixLabel',
+    externalIdLabel: 'IdPixLabel',
     multipleSendings: true,
     targetProfileId: PIX_EDU_SMALL_TARGET_PROFILE_ID,
     configCampaign: {

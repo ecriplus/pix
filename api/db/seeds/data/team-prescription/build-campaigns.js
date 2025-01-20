@@ -24,7 +24,7 @@ async function _createScoCampaigns(databaseBuilder) {
     ownerId: USER_ID_ADMIN_ORGANIZATION,
     name: "Campagne d'évaluation SCO",
     code: 'SCOASSIMP',
-    idPixLabel: 'IdPixLabel',
+    externalIdLabel: 'IdPixLabel',
     createdAt: dayjs().subtract(30, 'days').toDate(),
     configCampaign: {
       participantCount: 10,
@@ -44,7 +44,7 @@ async function _createScoCampaigns(databaseBuilder) {
     ownerId: USER_ID_ADMIN_ORGANIZATION,
     name: "Campagne d'évaluation SCO envoi multiple",
     code: 'SCOASSMUL',
-    idPixLabel: 'IdPixLabel',
+    externalIdLabel: 'IdPixLabel',
     multipleSendings: true,
     createdAt: dayjs().subtract(30, 'days').toDate(),
     configCampaign: {
@@ -66,7 +66,7 @@ async function _createScoCampaigns(databaseBuilder) {
     multipleSendings: true,
     type: 'PROFILES_COLLECTION',
     code: 'SCOCOLMUL',
-    idPixLabel: 'IdPixLabel',
+    externalIdLabel: 'IdPixLabel',
     title: null,
     configCampaign: { participantCount: 3, profileDistribution: { beginner: 1, perfect: 1, blank: 1 } },
   });
@@ -80,7 +80,7 @@ async function _createSupCampaigns(databaseBuilder) {
     ownerId: USER_ID_ADMIN_ORGANIZATION,
     name: "Campagne d'évaluation SUP",
     code: 'SUPASSIMP',
-    idPixLabel: 'IdPixLabel',
+    externalIdLabel: 'IdPixLabel',
     createdAt: dayjs().subtract(30, 'days').toDate(),
     configCampaign: {
       participantCount: 10,
@@ -100,7 +100,7 @@ async function _createSupCampaigns(databaseBuilder) {
     ownerId: USER_ID_ADMIN_ORGANIZATION,
     name: "Campagne d'évaluation SUP envoi multiple",
     code: 'SUPASSMUL',
-    idPixLabel: 'IdPixLabel',
+    externalIdLabel: 'IdPixLabel',
     multipleSendings: true,
     createdAt: dayjs().subtract(30, 'days').toDate(),
     configCampaign: {
@@ -120,7 +120,7 @@ async function _createSupCampaigns(databaseBuilder) {
     ownerId: USER_ID_ADMIN_ORGANIZATION,
     name: 'Campagne de collecte de profil SUP',
     code: 'SUPCOLMUL',
-    idPixLabel: 'IdPixLabel',
+    externalIdLabel: 'IdPixLabel',
     multipleSendings: true,
     type: 'PROFILES_COLLECTION',
     title: null,
@@ -136,7 +136,7 @@ async function _createProGenericCampaigns(databaseBuilder) {
     name: 'Campagne de collecte de profil PRO',
     multipleSendings: true,
     code: 'PROGENCOL',
-    idPixLabel: 'IdPixLabel',
+    externalIdLabel: 'IdPixLabel',
     type: 'PROFILES_COLLECTION',
     title: null,
   });
@@ -149,7 +149,7 @@ async function _createProCampaigns(databaseBuilder) {
     organizationId: PRO_ORGANIZATION_ID,
     ownerId: USER_ID_ADMIN_ORGANIZATION,
     name: 'Campagne de collecte de profil PRO',
-    idPixLabel: 'IdPixLabel',
+    externalIdLabel: 'IdPixLabel',
     multipleSendings: true,
     code: 'PROCOLMUL',
     type: 'PROFILES_COLLECTION',
@@ -164,7 +164,7 @@ async function _createProCampaigns(databaseBuilder) {
     ownerId: USER_ID_ADMIN_ORGANIZATION,
     isForAbsoluteNovice: true,
     name: "Campagne d'évaluation PRO",
-    idPixLabel: 'IdPixLabel',
+    externalIdLabel: 'IdPixLabel',
     code: 'PROASSIMP',
     createdAt: dayjs().subtract(30, 'days').toDate(),
     configCampaign: {
@@ -187,8 +187,8 @@ async function _createProCampaigns(databaseBuilder) {
     ownerId: USER_ID_ADMIN_ORGANIZATION,
     name: "Campagne d'évaluation PRO envoi multiple - ExternalId EMAIL",
     code: 'PROASSMUL',
-    idPixLabel: 'gimme gimme gimme your email buddy',
-    idPixLabelType: CampaignExternalIdTypes.EMAIL,
+    externalIdLabel: 'gimme gimme gimme your email buddy',
+    externalIdLabelType: CampaignExternalIdTypes.EMAIL,
     multipleSendings: true,
     createdAt: dayjs().subtract(30, 'days').toDate(),
     configCampaign: {

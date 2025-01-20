@@ -130,7 +130,7 @@ async function createAssessmentCampaign(databaseBuilder) {
     name: 'Campagne evaluation team-eval',
     code: 'EVAL12345',
     title: 'Campagne evaluation team-evaluation',
-    idPixLabel: null,
+    externalIdLabel: null,
     externalIdHelpImageUrl: null,
     alternativeTextToExternalIdHelpImage: null,
     customLandingPageText: null,
