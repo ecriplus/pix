@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 
-class TemporaryStorage {
+class KeyValueStorage {
   static generateKey() {
     return randomUUID();
   }
@@ -65,7 +65,7 @@ class TemporaryStorage {
     const storage = this;
     return {
       async save({ key, ...args }) {
-        key = key ?? TemporaryStorage.generateKey();
+        key = key ?? KeyValueStorage.generateKey();
         await storage.save({ key: prefix + key, ...args });
         return key;
       },
@@ -122,4 +122,4 @@ class TemporaryStorage {
   }
 }
 
-export { TemporaryStorage };
+export { KeyValueStorage };

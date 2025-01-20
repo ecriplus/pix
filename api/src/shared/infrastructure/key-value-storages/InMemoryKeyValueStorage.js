@@ -4,16 +4,16 @@ import NodeCache from 'node-cache';
 
 const { trim, noop } = lodash;
 
-import { TemporaryStorage } from './TemporaryStorage.js';
+import { KeyValueStorage } from './KeyValueStorage.js';
 
-class InMemoryTemporaryStorage extends TemporaryStorage {
+class InMemoryKeyValueStorage extends KeyValueStorage {
   constructor() {
     super();
     this._client = new NodeCache();
   }
 
   async save({ key, value, expirationDelaySeconds }) {
-    const storageKey = trim(key) || InMemoryTemporaryStorage.generateKey();
+    const storageKey = trim(key) || InMemoryKeyValueStorage.generateKey();
     this._client.set(storageKey, value, expirationDelaySeconds);
     return storageKey;
   }
@@ -89,4 +89,4 @@ class InMemoryTemporaryStorage extends TemporaryStorage {
   }
 }
 
-export { InMemoryTemporaryStorage };
+export { InMemoryKeyValueStorage };

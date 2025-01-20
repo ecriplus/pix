@@ -127,6 +127,8 @@
   "scripts": {
     "clean": "rm -rf node_modules",
     "cache:refresh": "node scripts/refresh-cache",
+    "banner:add": "node banner/scripts/add.js",
+    "banner:remove": "node banner/scripts/remove.js",
     "datamart:create": "node scripts/datamart/create-datamart",
     "datamart:delete": "node scripts/datamart/drop-datamart",
     "datamart:new-migration": "npx knex --knexfile datamart/knexfile.js migrate:make --stub $PWD/db/template.js $migrationname",

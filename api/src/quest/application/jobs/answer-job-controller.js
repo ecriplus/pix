@@ -1,6 +1,6 @@
 import { JobController, JobGroup } from '../../../shared/application/jobs/job-controller.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { temporaryStorage } from '../../../shared/infrastructure/temporary-storage/index.js';
+import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
 import { AnswerJob } from '../../domain/models/AnwserJob.js';
 import { usecases } from '../../domain/usecases/index.js';
 

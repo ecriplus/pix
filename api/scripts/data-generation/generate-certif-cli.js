@@ -15,8 +15,11 @@ import { DatabaseBuilder } from '../../db/database-builder/database-builder.js';
 import { getNewSessionCode } from '../../src/certification/enrolment/domain/services/session-code-service.js';
 import { CampaignParticipationStatuses } from '../../src/shared/domain/models/index.js';
 import { learningContentCache } from '../../src/shared/infrastructure/caches/learning-content-cache.js';
+import {
+  informationBannersStorage,
+  temporaryStorage,
+} from '../../src/shared/infrastructure/key-value-storages/index.js';
 import * as skillRepository from '../../src/shared/infrastructure/repositories/skill-repository.js';
-import { temporaryStorage } from '../../src/shared/infrastructure/temporary-storage/index.js';
 import { logger } from '../../src/shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../src/shared/infrastructure/utils/promise-utils.js';
 import {
@@ -396,6 +399,7 @@ async function _disconnect() {
   logger.info('Closing connexions to cache...');
   await learningContentCache.quit();
   await temporaryStorage.quit();
+  await informationBannersStorage.quit();
   logger.info('Exiting process gracefully...');
 }
 

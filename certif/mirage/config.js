@@ -22,8 +22,10 @@ export default function makeServer(config) {
     logging: true,
     urlPrefix: 'http://localhost:3000',
   };
+  const server = createServer(finalConfig);
+  server.create('information-banner', 'withoutBanners');
 
-  return createServer(finalConfig);
+  return server;
 }
 
 function routes() {
@@ -388,6 +390,11 @@ function routes() {
 
   _configureCertificationCenterInvitationRoutes(this);
   _configureCertificationCenterMemberRoutes(this);
+
+  this.get('/information-banners/:target', (schema, request) => {
+    const { target } = request.params;
+    return schema.informationBanners.find(target);
+  });
 }
 
 function _configureCertificationCenterInvitationRoutes(context) {

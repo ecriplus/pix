@@ -2,7 +2,7 @@ import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import { REWARD_TYPES } from '../../../../src/quest/domain/constants.js';
 import { COMPARISON } from '../../../../src/quest/domain/models/Quest.js';
 import { Assessment, CampaignParticipationStatuses, Membership } from '../../../../src/shared/domain/models/index.js';
-import { temporaryStorage } from '../../../../src/shared/infrastructure/temporary-storage/index.js';
+import { temporaryStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
   AEFE_TAG,
   FEATURE_ATTESTATIONS_MANAGEMENT_ID,

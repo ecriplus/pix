@@ -36,10 +36,18 @@ module.exports = function (environment) {
 
     APP: {
       API_HOST: process.env.API_HOST || '',
+      APPLICATION_NAME: process.env.APP || 'pix-certif-local',
       BANNER: {
         CONTENT: process.env.BANNER_CONTENT || '',
         TYPE: process.env.BANNER_TYPE || '',
       },
+      INFORMATION_BANNER_POLLING_TIME:
+        1000 *
+        _getEnvironmentVariableAsNumber({
+          environmentVariableName: process.env.INFORMATION_BANNER_POLLING_TIME,
+          defaultValue: 60,
+          minValue: 10,
+        }),
       PIX_APP_URL_WITHOUT_EXTENSION: process.env.PIX_APP_URL_WITHOUT_EXTENSION || 'https://app.pix.',
       API_ERROR_MESSAGES: {
         BAD_REQUEST: {

@@ -1,5 +1,5 @@
 import { config } from '../../../../../src/shared/config.js';
-import { temporaryStorage } from '../../../../shared/infrastructure/temporary-storage/index.js';
+import { temporaryStorage } from '../../../../shared/infrastructure/key-value-storages/index.js';
 
 const sessionMassImportTemporaryStorage = temporaryStorage.withPrefix('sessions-mass-import:');
 import { randomUUID } from 'node:crypto';
@@ -19,9 +19,7 @@ const save = async function ({ sessions, userId }) {
 
 const getByKeyAndUserId = async function ({ cachedValidatedSessionsKey, userId }) {
   const key = `${userId}:${cachedValidatedSessionsKey}`;
-  const sessions = await sessionMassImportTemporaryStorage.get(key);
-
-  return sessions;
+  return sessionMassImportTemporaryStorage.get(key);
 };
 
 const remove = async function ({ cachedValidatedSessionsKey, userId }) {

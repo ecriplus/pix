@@ -37,15 +37,10 @@ describe("a11y", () => {
     ];
 
     authenticatedPages.forEach(({ url, skipFailures = false }) => {
-      beforeEach(() => {
-        // given
-        cy.visitMonPix("/");
-        cy.login("john.snow@pix.fr", "pix123");
-      });
-
       it(`${url} should be accessible`, () => {
         // when
-        cy.visitMonPix(url);
+        cy.login("john.snow@pix.fr", "pix123", url);
+
         cy.get(".app-loader").should("not.exist");
 
         cy.injectAxe();

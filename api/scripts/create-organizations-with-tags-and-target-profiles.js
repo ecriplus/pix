@@ -12,8 +12,8 @@ import * as targetProfileShareRepository from '../lib/infrastructure/repositorie
 import * as dataProtectionOfficerRepository from '../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
 import * as organizationTagRepository from '../src/organizational-entities/infrastructure/repositories/organization-tag.repository.js';
 import { tagRepository } from '../src/organizational-entities/infrastructure/repositories/tag.repository.js';
+import { informationBannersStorage, temporaryStorage } from '../src/shared/infrastructure/key-value-storages/index.js';
 import * as organizationRepository from '../src/shared/infrastructure/repositories/organization-repository.js';
-import { temporaryStorage } from '../src/shared/infrastructure/temporary-storage/index.js';
 import { organizationInvitationRepository } from '../src/team/infrastructure/repositories/organization-invitation.repository.js';
 import { checkCsvHeader, parseCsvWithHeader } from './helpers/csvHelpers.js';
 
@@ -137,6 +137,7 @@ async function main() {
       // l'import de OidcIdentityProviders dans les validateurs démarre le service redis
       // il faut donc stopper le process pour que celui ci s'arrête, il suffit d'avoir l'import du storage pour y avoir accès
       temporaryStorage.quit();
+      informationBannersStorage.quit();
     }
   }
 })();

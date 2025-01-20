@@ -1,4 +1,4 @@
-import { buildScoringAndCapacitySimulatorReport } from './/build-scoring-and-capacity-simulator-report.js';
+import { buildEmptyInformationBanner, buildInformationBanner } from './banner/build-banner-information.js';
 import { buildAccountRecoveryDemand } from './build-account-recovery-demand.js';
 import { buildActivity } from './build-activity.js';
 import { buildActivityAnswer } from './build-activity-answer.js';
@@ -126,6 +126,7 @@ import { buildReproducibilityRate } from './build-reproducibility-rate.js';
 import { buildResultCompetenceTree } from './build-result-competence-tree.js';
 import { buildSchoolAssessment } from './build-school-assessment.js';
 import { buildSCOCertificationCandidate } from './build-sco-certification-candidate.js';
+import { buildScoringAndCapacitySimulatorReport } from './build-scoring-and-capacity-simulator-report.js';
 import { buildSessionForAttendanceSheet } from './build-session-for-attendance-sheet.js';
 import { buildSessionForInvigilatorKit } from './build-session-for-invigilator-kit.js';
 import { buildSessionForSupervising } from './build-session-for-supervising.js';
@@ -204,6 +205,11 @@ import { buildCampaignParticipation as boundedContextCampaignParticipationBuildC
 import { buildStageCollection as buildStageCollectionForTargetProfileManagement } from './target-profile-management/build-stage-collection.js';
 import { buildStageCollection as buildStageCollectionForUserCampaignResults } from './user-campaign-results/build-stage-collection.js';
 
+const banner = {
+  buildEmptyInformationBanner,
+  buildInformationBanner,
+};
+
 const certification = {
   configuration: {
     buildCenter: buildConfigurationCenter,
@@ -268,6 +274,7 @@ const prescription = {
 };
 
 export {
+  banner,
   buildAccountRecoveryDemand,
   buildActivity,
   buildActivityAnswer,

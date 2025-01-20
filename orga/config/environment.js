@@ -31,9 +31,17 @@ module.exports = function (environment) {
 
     APP: {
       API_HOST: process.env.API_HOST || '',
+      APPLICATION_NAME: process.env.APP || 'pix-orga-local',
       BANNER_CONTENT: process.env.BANNER_CONTENT || '',
       CERTIFICATION_BANNER_DISPLAY_DATES: process.env.CERTIFICATION_BANNER_DISPLAY_DATES || '',
       BANNER_TYPE: process.env.BANNER_TYPE || '',
+      INFORMATION_BANNER_POLLING_TIME:
+        1000 *
+        _getEnvironmentVariableAsNumber({
+          environmentVariableName: process.env.INFORMATION_BANNER_POLLING_TIME,
+          defaultValue: 60,
+          minValue: 10,
+        }),
       CAMPAIGNS_ROOT_URL: process.env.CAMPAIGNS_ROOT_URL,
       MAX_CONCURRENT_AJAX_CALLS: _getEnvironmentVariableAsNumber({
         environmentVariableName: 'MAX_CONCURRENT_AJAX_CALLS',

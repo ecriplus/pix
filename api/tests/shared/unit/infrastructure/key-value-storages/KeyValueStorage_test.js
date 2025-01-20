@@ -1,14 +1,14 @@
-import { TemporaryStorage } from '../../../../../src/shared/infrastructure/temporary-storage/TemporaryStorage.js';
+import { KeyValueStorage } from '../../../../../src/shared/infrastructure/key-value-storages/KeyValueStorage.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', function () {
+describe('Unit | Infrastructure | key-value-storage | KeyValueStorage', function () {
   describe('#save', function () {
     it('should reject an error (because this class actually mocks an interface)', function () {
       // given
-      const temporaryStorageInstance = new TemporaryStorage();
+      const keyValueStorageInstance = new KeyValueStorage();
 
       // when
-      const result = temporaryStorageInstance.save({ value: {}, expirationDelaySeconds: 1000 });
+      const result = keyValueStorageInstance.save({ value: {}, expirationDelaySeconds: 1000 });
 
       // then
       expect(result).to.be.rejected;
@@ -18,10 +18,10 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
   describe('#decrement', function () {
     it('should reject an error (because this class actually mocks an interface)', function () {
       // given
-      const temporaryStorageInstance = new TemporaryStorage();
+      const keyValueStorageInstance = new KeyValueStorage();
 
       // when
-      const result = temporaryStorageInstance.decrement('key');
+      const result = keyValueStorageInstance.decrement('key');
 
       // then
       expect(result).to.be.rejected;
@@ -31,10 +31,10 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
   describe('#increment', function () {
     it('should reject an error (because this class actually mocks an interface)', function () {
       // given
-      const temporaryStorageInstance = new TemporaryStorage();
+      const keyValueStorageInstance = new KeyValueStorage();
 
       // when
-      const result = temporaryStorageInstance.increment('key');
+      const result = keyValueStorageInstance.increment('key');
 
       // then
       expect(result).to.be.rejected;
@@ -44,10 +44,10 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
   describe('#get', function () {
     it('should reject an error (because this class actually mocks an interface)', function () {
       // given
-      const temporaryStorageInstance = new TemporaryStorage();
+      const keyValueStorageInstance = new KeyValueStorage();
 
       // when
-      const result = temporaryStorageInstance.get('key');
+      const result = keyValueStorageInstance.get('key');
 
       // then
       expect(result).to.be.rejected;
@@ -57,10 +57,10 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
   describe('#delete', function () {
     it('should reject an error (because this class actually mocks an interface)', function () {
       // given
-      const temporaryStorageInstance = new TemporaryStorage();
+      const keyValueStorageInstance = new KeyValueStorage();
 
       // when
-      const result = temporaryStorageInstance.delete('key');
+      const result = keyValueStorageInstance.delete('key');
 
       // then
       expect(result).to.be.rejected;
@@ -70,7 +70,7 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
   describe('#generateKey', function () {
     it('should return a key from static method', function () {
       // when
-      const result = TemporaryStorage.generateKey();
+      const result = KeyValueStorage.generateKey();
 
       // then
       expect(result).to.be.ok;
@@ -82,7 +82,7 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
     let prefixedStorage;
 
     beforeEach(function () {
-      class TestStorage extends TemporaryStorage {
+      class TestStorage extends KeyValueStorage {
         save = sinon.stub();
         get = sinon.stub();
         delete = sinon.stub();
@@ -171,10 +171,10 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
   describe('#update', function () {
     it('should reject an error (because this class actually mocks an interface)', function () {
       // given
-      const temporaryStorageInstance = new TemporaryStorage();
+      const keyValueStorageInstance = new KeyValueStorage();
 
       // when
-      const result = temporaryStorageInstance.update('key', 'value');
+      const result = keyValueStorageInstance.update('key', 'value');
 
       // then
       expect(result).to.be.rejected;
@@ -184,10 +184,10 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
   describe('#quit', function () {
     it('should throw an error (because this class actually mocks an interface)', function () {
       // given
-      const temporaryStorageInstance = new TemporaryStorage();
+      const keyValueStorageInstance = new KeyValueStorage();
 
       // when
-      const call = () => temporaryStorageInstance.quit();
+      const call = () => keyValueStorageInstance.quit();
 
       // then
       expect(call).to.throw();
@@ -197,10 +197,10 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
   describe('#ttl', function () {
     it('should reject an error (because this class actually mocks an interface)', function () {
       // given
-      const temporaryStorageInstance = new TemporaryStorage();
+      const keyValueStorageInstance = new KeyValueStorage();
 
       // when
-      const result = temporaryStorageInstance.ttl('key');
+      const result = keyValueStorageInstance.ttl('key');
 
       // then
       expect(result).to.be.rejected;
@@ -210,10 +210,10 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
   describe('#expire', function () {
     it('should reject an error (because this class actually mocks an interface)', function () {
       // given
-      const temporaryStorageInstance = new TemporaryStorage();
+      const keyValueStorageInstance = new KeyValueStorage();
 
       // when
-      const result = temporaryStorageInstance.expire({ key: 'key', expirationDelaySeconds: 120 });
+      const result = keyValueStorageInstance.expire({ key: 'key', expirationDelaySeconds: 120 });
 
       // then
       expect(result).to.be.rejected;
@@ -223,10 +223,10 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
   describe('#lpush', function () {
     it('should reject an error (because this class actually mocks an interface)', function () {
       // given
-      const temporaryStorageInstance = new TemporaryStorage();
+      const keyValueStorageInstance = new KeyValueStorage();
 
       // when
-      const result = temporaryStorageInstance.lpush({ key: 'key', value: 'value' });
+      const result = keyValueStorageInstance.lpush({ key: 'key', value: 'value' });
 
       // then
       expect(result).to.be.rejected;
@@ -236,10 +236,10 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
   describe('#lrem', function () {
     it('should reject an error (because this class actually mocks an interface)', function () {
       // given
-      const temporaryStorageInstance = new TemporaryStorage();
+      const keyValueStorageInstance = new KeyValueStorage();
 
       // when
-      const result = temporaryStorageInstance.lrem({ key: 'key', valueToRemove: 'valueToRemove' });
+      const result = keyValueStorageInstance.lrem({ key: 'key', valueToRemove: 'valueToRemove' });
 
       // then
       expect(result).to.be.rejected;
@@ -249,10 +249,10 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
   describe('#lrange', function () {
     it('should reject an error (because this class actually mocks an interface)', function () {
       // given
-      const temporaryStorageInstance = new TemporaryStorage();
+      const keyValueStorageInstance = new KeyValueStorage();
 
       // when
-      const result = temporaryStorageInstance.lrange('key');
+      const result = keyValueStorageInstance.lrange('key');
 
       // then
       expect(result).to.be.rejected;
@@ -262,10 +262,10 @@ describe('Unit | Infrastructure | temporary-storage | TemporaryStorage', functio
   describe('#keys', function () {
     it('should reject an error (because this class actually mocks an interface)', function () {
       // given
-      const temporaryStorageInstance = new TemporaryStorage();
+      const keyValueStorageInstance = new KeyValueStorage();
 
       // when
-      const result = temporaryStorageInstance.keys('prefix:*');
+      const result = keyValueStorageInstance.keys('prefix:*');
 
       // then
       expect(result).to.be.rejected;

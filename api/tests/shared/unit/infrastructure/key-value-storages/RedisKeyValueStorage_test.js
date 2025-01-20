@@ -1,7 +1,7 @@
-import { RedisTemporaryStorage } from '../../../../../src/shared/infrastructure/temporary-storage/RedisTemporaryStorage.js';
+import { RedisKeyValueStorage } from '../../../../../src/shared/infrastructure/key-value-storages/RedisKeyValueStorage.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', function () {
+describe('Unit | Infrastructure | key-value-storage | RedisKeyValueStorage', function () {
   const REDIS_URL = 'redis_url';
 
   let clientStub;
@@ -21,17 +21,17 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
       keys: sinon.stub(),
     };
 
-    sinon.stub(RedisTemporaryStorage, 'createClient').withArgs(REDIS_URL).returns(clientStub);
+    sinon.stub(RedisKeyValueStorage, 'createClient').withArgs(REDIS_URL, 'some-prefix:').returns(clientStub);
   });
 
   describe('#constructor', function () {
     it('should call static method createClient', function () {
       // when
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // then
-      expect(RedisTemporaryStorage.createClient).to.have.been.called;
-      expect(redisTemporaryStorage._client).to.exist;
+      expect(RedisKeyValueStorage.createClient).to.have.been.called;
+      expect(redisKeyValueStorage._client).to.exist;
     });
   });
 
@@ -41,19 +41,19 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
       const keyParameter = '  ';
       const value = { name: 'name' };
       const expirationDelaySeconds = 1000;
-      sinon.spy(RedisTemporaryStorage, 'generateKey');
+      sinon.spy(RedisKeyValueStorage, 'generateKey');
 
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      await redisTemporaryStorage.save({
+      await redisKeyValueStorage.save({
         key: keyParameter,
         value,
         expirationDelaySeconds,
       });
 
       // then
-      expect(RedisTemporaryStorage.generateKey).to.have.been.called;
+      expect(RedisKeyValueStorage.generateKey).to.have.been.called;
     });
 
     it('should use passed key parameter if valid', async function () {
@@ -61,19 +61,19 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
       const keyParameter = 'KEY-PARAMETER';
       const value = { name: 'name' };
       const expirationDelaySeconds = 1000;
-      sinon.spy(RedisTemporaryStorage, 'generateKey');
+      sinon.spy(RedisKeyValueStorage, 'generateKey');
 
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      await redisTemporaryStorage.save({
+      await redisKeyValueStorage.save({
         key: keyParameter,
         value,
         expirationDelaySeconds,
       });
 
       // then
-      expect(RedisTemporaryStorage.generateKey).not.have.been.called;
+      expect(RedisKeyValueStorage.generateKey).not.have.been.called;
     });
 
     it('should call client set with value and EX parameters', async function () {
@@ -82,10 +82,10 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
       const value = { name: 'name' };
       const expirationDelaySeconds = 1000;
       clientStub.set.resolves();
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      await redisTemporaryStorage.save({ value, expirationDelaySeconds });
+      await redisKeyValueStorage.save({ value, expirationDelaySeconds });
 
       // then
       expect(clientStub.set).to.have.been.calledWithExactly(
@@ -101,10 +101,10 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
     it('should call client incr to increment value', async function () {
       // given
       const key = 'valueKey';
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      await redisTemporaryStorage.increment(key);
+      await redisKeyValueStorage.increment(key);
 
       // then
       expect(clientStub.incr).to.have.been.calledWith(key);
@@ -115,10 +115,10 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
     it('should call client incr to decrement value', async function () {
       // given
       const key = 'valueKey';
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      await redisTemporaryStorage.decrement(key);
+      await redisKeyValueStorage.decrement(key);
 
       // then
       expect(clientStub.decr).to.have.been.calledWith(key);
@@ -131,10 +131,10 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
       const key = 'valueKey';
       const value = { name: 'name' };
       clientStub.get.withArgs(key).resolves(JSON.stringify(value));
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      const result = await redisTemporaryStorage.get(key);
+      const result = await redisKeyValueStorage.get(key);
 
       // then
       expect(clientStub.get).to.have.been.called;
@@ -148,10 +148,10 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
       const KEEPTTL_PARAMETER = 'keepttl';
       const key = 'valueKey';
       const value = { name: 'name' };
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      await redisTemporaryStorage.update(key, value);
+      await redisKeyValueStorage.update(key, value);
 
       // then
       expect(clientStub.set).to.have.been.calledWithExactly(sinon.match.any, JSON.stringify(value), KEEPTTL_PARAMETER);
@@ -163,10 +163,10 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
       // given
       const key = 'valueKey';
       clientStub.del.withArgs(key).resolves();
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      await redisTemporaryStorage.delete(key);
+      await redisKeyValueStorage.delete(key);
 
       // then
       expect(clientStub.del).to.have.been.called;
@@ -179,10 +179,10 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
       const key = 'key';
       const expirationDelaySeconds = 120;
       clientStub.expire.resolves();
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      await redisTemporaryStorage.expire({ key, expirationDelaySeconds });
+      await redisKeyValueStorage.expire({ key, expirationDelaySeconds });
 
       // then
       expect(clientStub.expire).to.have.been.calledWithExactly(key, expirationDelaySeconds);
@@ -194,10 +194,10 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
       // given
       const key = 'key';
       clientStub.ttl.resolves(12);
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      const remainingTtl = await redisTemporaryStorage.ttl(key);
+      const remainingTtl = await redisKeyValueStorage.ttl(key);
 
       // then
       expect(clientStub.ttl).to.have.been.calledWithExactly(key);
@@ -211,10 +211,10 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
       const key = 'key';
       const value = 'valueToAdd';
       clientStub.lpush.resolves();
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      await redisTemporaryStorage.lpush(key, value);
+      await redisKeyValueStorage.lpush(key, value);
 
       // then
       expect(clientStub.lpush).to.have.been.calledWithExactly('key', 'valueToAdd');
@@ -227,10 +227,10 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
       const key = 'key';
       const value = 'valueToRemove';
       clientStub.lrem.resolves();
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      await redisTemporaryStorage.lrem(key, value);
+      await redisKeyValueStorage.lrem(key, value);
 
       // then
       expect(clientStub.lrem).to.have.been.calledWithExactly('key', 0, 'valueToRemove');
@@ -244,10 +244,10 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
       const start = 0;
       const stop = -1;
       clientStub.lrange.resolves(['value']);
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      await redisTemporaryStorage.lrange(key, start, stop);
+      await redisKeyValueStorage.lrange(key, start, stop);
 
       // then
       expect(clientStub.lrange).to.have.been.calledWithExactly('key', 0, -1);
@@ -258,11 +258,11 @@ describe('Unit | Infrastructure | temporary-storage | RedisTemporaryStorage', fu
     it('should call client keys and return matching keys', async function () {
       // given
       const pattern = 'prefix:*';
-      clientStub.keys.withArgs(pattern).resolves(['temporary-storage:key1', 'temporary-storage:key2']);
-      const redisTemporaryStorage = new RedisTemporaryStorage(REDIS_URL);
+      clientStub.keys.withArgs(pattern).resolves(['some-prefix:key1', 'some-prefix:key2']);
+      const redisKeyValueStorage = new RedisKeyValueStorage(REDIS_URL, 'some-prefix:');
 
       // when
-      const actualKeys = await redisTemporaryStorage.keys(pattern);
+      const actualKeys = await redisKeyValueStorage.keys(pattern);
 
       // then
       expect(actualKeys).to.deep.equal(['key1', 'key2']);

@@ -20,6 +20,7 @@ import getChallenge from './routes/get-challenge';
 import getChallenges from './routes/get-challenges';
 import getCompetenceEvaluationsByAssessment from './routes/get-competence-evaluations-by-assessment';
 import getFeatureToggles from './routes/get-feature-toggles';
+import getInformationBanners from './routes/get-information-banners';
 import getProgression from './routes/get-progression';
 import getQuestResults from './routes/get-quest-results';
 import getScorecard from './routes/get-scorecard';
@@ -50,7 +51,10 @@ export default function makeServer(config) {
     urlPrefix: 'http://localhost:3000',
   };
 
-  return createServer(finalConfig);
+  const server = createServer(finalConfig);
+  server.create('information-banner', 'withoutBanners');
+
+  return server;
 }
 
 /* eslint max-statements: off */
@@ -119,4 +123,6 @@ function routes() {
     '/certification-candidates/:certificationCandidateId/validate-certification-instructions',
     updateCertificationCandidates,
   );
+
+  this.get('/information-banners/:target', getInformationBanners);
 }

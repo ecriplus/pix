@@ -5,8 +5,7 @@ Fonctionnalité: Campagne d'évaluation
     Étant donné que les données de test sont chargées
 
   Scénario: Je passe un parcours prescrit
-    Étant donné que je vais sur Pix
-    Et je suis connecté à Pix en tant que "Daenerys Targaryen"
+    Étant donné que je suis connecté à Pix en tant que "Daenerys Targaryen"
     Lorsque je vais sur la page d'accès à une campagne
     Et je saisis le code "NERA"
     Lorsque je clique sur "Accéder au parcours"
@@ -33,8 +32,7 @@ Fonctionnalité: Campagne d'évaluation
     Alors je vois le lien "Mes formations" dans la navigation
 
   Scénario: Je rejoins un parcours prescrit via l'URL sans être connecté
-    Étant donné que je vais sur Pix
-    Lorsque je vais sur la campagne "WALL" avec l'identifiant "khaleesi"
+    Étant donné que je vais sur la campagne "WALL" avec l'identifiant "khaleesi"
     Alors je vois la page de "presentation" de la campagne
     Lorsque je clique sur "Je commence"
     Et je clique sur "Se connecter"
@@ -42,8 +40,7 @@ Fonctionnalité: Campagne d'évaluation
     Alors je vois la page de "didacticiel" de la campagne
 
   Scénario: Je rejoins un parcours prescrit restreint
-    Étant donné que je vais sur Pix
-    Et je suis connecté à Pix en tant que "Daenerys Targaryen"
+    Étant donné que je suis connecté à Pix en tant que "Daenerys Targaryen"
     Et je vais sur la page d'accès à une campagne
     Lorsque je saisis le code "WINTER"
     Et je clique sur "Accéder au parcours"

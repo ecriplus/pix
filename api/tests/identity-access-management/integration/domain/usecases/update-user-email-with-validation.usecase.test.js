@@ -9,7 +9,7 @@ import {
   InvalidVerificationCodeError,
   UserNotAuthorizedToUpdateEmailError,
 } from '../../../../../src/shared/domain/errors.js';
-import { temporaryStorage } from '../../../../../src/shared/infrastructure/temporary-storage/index.js';
+import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { catchErr, databaseBuilder, knex, sinon } from '../../../../test-helper.js';
 
 const verifyEmailTemporaryStorage = temporaryStorage.withPrefix('verify-email:');

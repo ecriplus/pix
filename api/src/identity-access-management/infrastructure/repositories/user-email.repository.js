@@ -1,5 +1,5 @@
 import { config } from '../../../shared/config.js';
-import { temporaryStorage } from '../../../shared/infrastructure/temporary-storage/index.js';
+import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
 import { EmailModificationDemand } from '../../domain/models/EmailModificationDemand.js';
 const verifyEmailTemporaryStorage = temporaryStorage.withPrefix('verify-email:');
 
