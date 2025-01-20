@@ -36,6 +36,7 @@ const updateCampaign = async function ({
     ownerId,
   });
 
+  // TODO : should be called inside model method updateFields
   campaignUpdateValidator.validate(campaign);
 
   return campaignAdministrationRepository.update(campaign);

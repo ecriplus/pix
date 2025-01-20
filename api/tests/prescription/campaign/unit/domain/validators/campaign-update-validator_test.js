@@ -20,7 +20,6 @@ describe('Unit | Domain | Validators | campaign-validator', function () {
     type: CampaignTypes.PROFILES_COLLECTION,
     creatorId: 4,
     organizationId: 12,
-    idPixLabel: 'Mail Pro',
     customResultPageButtonText: null,
     customResultPageButtonUrl: null,
     multipleSendings: false,
@@ -34,7 +33,6 @@ describe('Unit | Domain | Validators | campaign-validator', function () {
     title: "Campagne d'évaluation",
     creatorId: 4,
     organizationId: 12,
-    idPixLabel: 'Mail Pro',
     targetProfileId: 44,
     customResultPageButtonText: null,
     customResultPageButtonUrl: null,
@@ -50,16 +48,6 @@ describe('Unit | Domain | Validators | campaign-validator', function () {
         context('when validation is successful', function () {
           it('should not throw any error', function () {
             expect(campaignUpdateValidator.validate(campaign)).to.not.throw;
-          });
-
-          it('should resolve when idPixLabel is null', function () {
-            // when/then
-            expect(
-              campaignUpdateValidator.validate({
-                ...campaign,
-                idPixLabel: MISSING_VALUE,
-              }),
-            ).to.not.throw;
           });
 
           context('#title', function () {
@@ -241,28 +229,6 @@ describe('Unit | Domain | Validators | campaign-validator', function () {
             });
           });
 
-          context('#idPixLabel', function () {
-            it('should reject with error when idPixLabel is empty', function () {
-              // given
-              const expectedError = {
-                attribute: 'idPixLabel',
-                message: 'EXTERNAL_USER_ID_IS_REQUIRED',
-              };
-
-              try {
-                // when
-                campaignUpdateValidator.validate({
-                  ...campaign,
-                  idPixLabel: EMPTY_VALUE,
-                });
-                expect.fail('should have thrown an error');
-              } catch (entityValidationErrors) {
-                // then
-                _assertErrorMatchesWithExpectedOne(entityValidationErrors, expectedError);
-              }
-            });
-          });
-
           context('#type', function () {
             // given
             const expectedError = {
@@ -360,7 +326,6 @@ describe('Unit | Domain | Validators | campaign-validator', function () {
                 code: MISSING_VALUE,
                 type: MISSING_VALUE,
                 title: MISSING_VALUE,
-                idPixLabel: MISSING_VALUE,
                 multipleSendings: MISSING_VALUE,
                 organizationId: 1,
               };
