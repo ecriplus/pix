@@ -3,7 +3,7 @@ import Joi from 'joi';
 import { htmlNotAllowedSchema, htmlSchema, uuidSchema } from '../utils.js';
 
 const image = Joi.object({
-  url: Joi.string().uri().required(),
+  url: Joi.string().uri().allow('').required(),
 });
 
 const rectoSide = Joi.object({

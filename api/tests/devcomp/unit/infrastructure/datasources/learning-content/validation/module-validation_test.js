@@ -1,5 +1,6 @@
 import { getDownloadSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/download.sample.js';
 import { getEmbedSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/embed.sample.js';
+import { getFlashcardsSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/flashcards.sample.js';
 import { getImageSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/image.sample.js';
 import { getQcmSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/qcm.sample.js';
 import { getQcuSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/qcu.sample.js';
@@ -10,6 +11,7 @@ import { getVideoSample } from '../../../../../../../src/devcomp/infrastructure/
 import { expect } from '../../../../../../test-helper.js';
 import { downloadElementSchema } from './element/download-schema.js';
 import { embedElementSchema } from './element/embed-schema.js';
+import { flashcardsElementSchema } from './element/flashcards-schema.js';
 import { imageElementSchema } from './element/image-schema.js';
 import { qcmElementSchema } from './element/qcm-schema.js';
 import { qcuElementSchema } from './element/qcu-schema.js';
@@ -34,6 +36,15 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
     it('should validate sample embed structure', async function () {
       try {
         await embedElementSchema.validateAsync(getEmbedSample(), { abortEarly: false });
+      } catch (joiError) {
+        const formattedError = joiErrorParser.format(joiError);
+        expect(joiError).to.equal(undefined, formattedError);
+      }
+    });
+
+    it('should validate sample flashcard structure', async function () {
+      try {
+        await flashcardsElementSchema.validateAsync(getFlashcardsSample(), { abortEarly: false });
       } catch (joiError) {
         const formattedError = joiErrorParser.format(joiError);
         expect(joiError).to.equal(undefined, formattedError);
