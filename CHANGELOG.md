@@ -1,5 +1,32 @@
 # Pix Changelog
 
+## v5.20.0 (20/01/2025)
+
+
+### :rocket: Amélioration
+- [#11139](https://github.com/1024pix/pix/pull/11139) [FEATURE] Prévenir l'utilisateur prescrit sur mobile que son expérience risque d'être dégradée (PIX-16078).
+- [#10490](https://github.com/1024pix/pix/pull/10490) [FEATURE] Pouvoir choisir les fronts à déployer en RA.
+
+### :building_construction: Tech
+- [#11134](https://github.com/1024pix/pix/pull/11134) [TECH] :wrench: Ajoute une tache `npm` pour executer uniquement les fichiers de test en cours de modification.
+- [#11103](https://github.com/1024pix/pix/pull/11103) [TECH] ajoute le campaignParticipationId dans la table knowledge-element-snapshots (PIX-15755).
+- [#11142](https://github.com/1024pix/pix/pull/11142) [TECH] Ajout des headers x-forwarded-host et x-forwarded-proto pour getForwardedOrigin de l'API en integration, recette et production.
+
+### :bug: Correction
+- [#11140](https://github.com/1024pix/pix/pull/11140) [BUGFIX] Gerer les erreurs en cas de conflit avec la contrainte d'unicité de profile rewards (PIX-16129).
+- [#11147](https://github.com/1024pix/pix/pull/11147) [BUGFIX] Le champ `solution` des embeds auto-validés n'apparait pas dans l'interface de Modulix Editor (PIX-16101).
+- [#11152](https://github.com/1024pix/pix/pull/11152) [BUGFIX] Corrige le model CampaignManagement (pix-16167).
+- [#11138](https://github.com/1024pix/pix/pull/11138) [BUGFIX] Garder toujours le même ordre de colonnes dans le fichier d'export des résultats (PIX-16099).
+
+### :arrow_up: Montée de version
+- [#11154](https://github.com/1024pix/pix/pull/11154) [BUMP] Update dependency @1024pix/pix-ui to ^54.1.1 (admin).
+- [#11155](https://github.com/1024pix/pix/pull/11155) [BUMP] Update dependency @1024pix/pix-ui to v54 (orga).
+- [#11149](https://github.com/1024pix/pix/pull/11149) [BUMP] Update dependency @1024pix/pix-ui to v54 (admin).
+- [#11144](https://github.com/1024pix/pix/pull/11144) [BUMP] Update dependency scalingo to ^0.11.0 (api).
+- [#11094](https://github.com/1024pix/pix/pull/11094) [BUMP] Update dependency @1024pix/pix-ui to v53 (junior).
+- [#11141](https://github.com/1024pix/pix/pull/11141) [BUMP] Update dependency @1024pix/pix-ui to ^53.1.6 (admin).
+- [#11090](https://github.com/1024pix/pix/pull/11090) [BUMP] Update dependency @1024pix/pix-ui to v53 (admin).
+
 ## v5.19.0 (17/01/2025)
 
 
