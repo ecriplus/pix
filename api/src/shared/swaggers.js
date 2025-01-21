@@ -4,88 +4,98 @@ import packageJSON from '../../package.json' with { type: 'json' };
 import { config } from './config.js';
 import { logger } from './infrastructure/utils/logger.js';
 
-const swaggerOptionsAuthorizationServer = {
-  routeTag: 'authorization-server',
-  info: {
-    title: 'Welcome to the Pix Authorization server',
-    version: packageJSON.version,
-  },
-  jsonPath: '/swagger.json',
-};
+class PixOpenApiBaseDefinition {
+  constructor() {
+    this.swaggerConfiguration = {
+      OAS: 'v3.0',
+      basePath: '/api',
+      routeTag: 'api',
+      info: {
+        version: packageJSON.version,
+      },
+      jsonPath: '/swagger.json',
+      documentationPath: '/documentation',
+      swaggerUIPath: '/documentation/swaggerui/',
+      uiOptions: {
+        url: 'swagger.json',
+      },
+      securityDefinitions: {
+        bearerAuth: {
+          name: 'Authorization',
+          scheme: 'Bearer',
+          in: 'header',
+          description: 'Example: Bearer eyJ...z',
+          type: 'apiKey',
+        },
+      },
+      security: [{ bearerAuth: [], jwt: [] }],
+    };
+  }
+}
 
-const swaggerOptionsLivretScolaire = {
-  routeTag: 'livret-scolaire',
-  info: {
-    title: 'Welcome to the Pix LSU/LSL open api',
-    version: packageJSON.version,
-  },
-  jsonPath: '/swagger.json',
-};
+class AuthorizationServer extends PixOpenApiBaseDefinition {
+  constructor() {
+    super();
+    this.swaggerConfiguration.info.title = 'Welcome to the Pix Authorization server';
+    this.swaggerConfiguration.routeTag = 'authorization-server';
+  }
+}
 
-const swaggerOptionsPoleEmploi = {
-  routeTag: 'pole-emploi',
-  info: {
-    title: 'Pix Pôle emploi open api',
-    version: packageJSON.version,
-  },
-  jsonPath: '/swagger.json',
-};
+class LivretScolaire extends PixOpenApiBaseDefinition {
+  constructor() {
+    super();
+    this.swaggerConfiguration.info.title = 'Welcome to the Pix LSU/LSL Open Api';
+    this.swaggerConfiguration.routeTag = 'livret-scolaire';
+  }
+}
 
-const swaggerOptionsParcoursup = {
-  routeTag: 'parcoursup',
-  OAS: 'v3.0',
-  servers: _buildParcoursupServers(),
-  pathReplacements: [
-    {
-      replaceIn: 'all',
-      pattern: /api\/application\//,
-      replacement: '',
-    },
-  ],
-  info: {
-    title: 'Pix Parcoursup Open Api',
-    version: packageJSON.version,
-  },
-  jsonPath: '/swagger.json',
-  securityDefinitions: {
-    bearerAuth: {
-      name: 'Authorization',
-      scheme: 'Bearer',
-      in: 'header',
-      description: 'Example: Bearer eyJ...z',
-      type: 'apiKey',
-    },
-  },
-  security: [{ bearerAuth: [], jwt: [] }],
-};
+class PoleEmploi extends PixOpenApiBaseDefinition {
+  constructor() {
+    super();
+    this.swaggerConfiguration.info.title = 'Pix Pôle emploi Open Api';
+    this.swaggerConfiguration.routeTag = 'pole-emploi';
+  }
+}
 
-const swaggerOptionsIn = {
-  basePath: '/api',
-  grouping: 'tags',
-  routeTag: 'api',
-  OAS: 'v3.0',
-  uiOptions: {
-    url: 'swagger.json',
-  },
-  info: {
-    title: 'Welcome to the Pix api catalog',
-    version: packageJSON.version,
-  },
-  documentationPath: '/documentation',
-  jsonPath: '/swagger.json',
-  securityDefinitions: {
-    bearerAuth: {
-      name: 'Authorization',
-      scheme: 'Bearer',
-      in: 'header',
-      description: 'Example: Bearer eyJ...z',
-      type: 'apiKey',
-    },
-  },
-  security: [{ bearerAuth: [], jwt: [] }],
-};
+class Parcoursup extends PixOpenApiBaseDefinition {
+  constructor() {
+    super();
+    this.swaggerConfiguration.info.title = 'Pix Parcoursup Open Api';
+    this.swaggerConfiguration.routeTag = 'parcoursup';
+    this.#addExternalPartnersAccess();
+  }
 
-function _buildSwaggerArgs(swaggerOptions) {
+  #addExternalPartnersAccess() {
+    try {
+      this.swaggerConfiguration.servers = [
+        {
+          url: new URL(config.apiManager.endpoints.parcoursup, config.apiManager.url).href,
+          description: 'External Partners access',
+        },
+      ];
+
+      this.swaggerConfiguration.pathReplacements = [
+        {
+          replaceIn: 'all',
+          pattern: /api\/application\//,
+          replacement: '',
+        },
+      ];
+    } catch (error) {
+      logger.error(error);
+    }
+  }
+}
+
+class PixAPI extends PixOpenApiBaseDefinition {
+  constructor() {
+    super();
+    this.swaggerConfiguration.grouping = 'tags';
+    this.swaggerConfiguration.info.title = 'Welcome to the Pix api catalog';
+  }
+}
+
+const toHapiPlugin = (swaggerOptions) => {
   return [
     {
       plugin: HapiSwagger,
@@ -95,27 +105,8 @@ function _buildSwaggerArgs(swaggerOptions) {
       routes: { prefix: '/' + swaggerOptions.routeTag },
     },
   ];
-}
+};
 
-function _buildParcoursupServers() {
-  try {
-    return [
-      {
-        url: new URL(config.apiManager.endpoints.parcoursup, config.apiManager.url).href,
-        description: 'External Partners access',
-      },
-    ];
-  } catch (error) {
-    logger.error(error);
-  }
-}
-
-const swaggers = [
-  swaggerOptionsAuthorizationServer,
-  swaggerOptionsLivretScolaire,
-  swaggerOptionsPoleEmploi,
-  swaggerOptionsParcoursup,
-  swaggerOptionsIn,
-].map(_buildSwaggerArgs);
-
-export { swaggers };
+export const swaggers = [AuthorizationServer, LivretScolaire, PoleEmploi, Parcoursup, PixAPI]
+  .map((clazz) => new clazz().swaggerConfiguration)
+  .map(toHapiPlugin);
