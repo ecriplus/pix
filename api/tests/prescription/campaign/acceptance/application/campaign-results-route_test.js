@@ -535,7 +535,6 @@ describe('Acceptance | API | campaign-results-route', function () {
       campaign = databaseBuilder.factory.buildCampaign({
         name: 'Campagne de Test N°2',
         organizationId: organization.id,
-        idPixLabel: 'Identifiant entreprise',
       });
       databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: 'recSkillId1' });
 

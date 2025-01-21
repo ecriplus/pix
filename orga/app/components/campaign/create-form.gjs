@@ -24,7 +24,7 @@ export default class CreateForm extends Component {
   @service currentUser;
   @service intl;
 
-  @tracked wantIdPix = Boolean(this.args.campaign.idPixLabel);
+  @tracked wantIdPix = Boolean(this.args.campaign.externalIdLabel);
 
   get isMultipleSendingAssessmentEnabled() {
     return this.currentUser.prescriber.enableMultipleSendingAssessment;
@@ -85,21 +85,21 @@ export default class CreateForm extends Component {
   }
 
   get isExternalIdTypeNotSelectedChecked() {
-    return this.args.campaign.idPixType === '';
+    return this.args.campaign.externalIdType === '';
   }
 
   @action
   askLabelIdPix() {
     this.wantIdPix = true;
-    this.args.campaign.idPixLabel = '';
-    this.args.campaign.idPixType = '';
+    this.args.campaign.externalIdLabel = '';
+    this.args.campaign.externalIdType = '';
   }
 
   @action
   doNotAskLabelIdPix() {
     this.wantIdPix = false;
-    this.args.campaign.idPixLabel = null;
-    this.args.campaign.idPixType = '';
+    this.args.campaign.externalIdLabel = null;
+    this.args.campaign.externalIdType = '';
   }
 
   @action
@@ -142,7 +142,7 @@ export default class CreateForm extends Component {
   }
   @action
   onChangeIdPixType(event) {
-    this.args.campaign.idPixType = event.target.value;
+    this.args.campaign.externalIdType = event.target.value;
   }
 
   @action
@@ -384,8 +384,8 @@ export default class CreateForm extends Component {
               <PixRadioButton
                 name="external-id-types"
                 @value="EMAIL"
-                {{on "change" (fn this.onChangeCampaignValue "idPixType")}}
-                checked={{eq @campaign.idPixType "EMAIL"}}
+                {{on "change" (fn this.onChangeCampaignValue "externalIdType")}}
+                checked={{eq @campaign.externalIdType "EMAIL"}}
               >
                 <:label>{{t ID_PIX_TYPES.EMAIL}}</:label>
 
@@ -393,14 +393,14 @@ export default class CreateForm extends Component {
               <PixRadioButton
                 name="external-id-types"
                 @value="STRING"
-                {{on "change" (fn this.onChangeCampaignValue "idPixType")}}
-                checked={{eq @campaign.idPixType "STRING"}}
+                {{on "change" (fn this.onChangeCampaignValue "externalIdType")}}
+                checked={{eq @campaign.externalIdType "STRING"}}
               >
                 <:label>{{t ID_PIX_TYPES.STRING}}</:label>
               </PixRadioButton>
-              {{#if @errors.idPixType}}
+              {{#if @errors.externalIdType}}
                 <div class="form__error error-message">
-                  {{displayCampaignErrors @errors.idPixType}}
+                  {{displayCampaignErrors @errors.externalIdType}}
                 </div>
               {{/if}}
             </:content>
@@ -413,15 +413,15 @@ export default class CreateForm extends Component {
             @subLabel={{t "pages.campaign-creation.external-id-label.suggestion"}}
             maxlength="255"
             @requiredLabel={{t "pages.campaign-creation.external-id-label.required"}}
-            {{on "change" (fn this.onChangeCampaignValue "idPixLabel")}}
-            @value={{@campaign.idPixLabel}}
+            {{on "change" (fn this.onChangeCampaignValue "externalIdLabel")}}
+            @value={{@campaign.externalIdLabel}}
           >
             <:label>{{t "pages.campaign-creation.external-id-label.label"}}</:label>
           </PixInput>
 
-          {{#if @errors.idPixLabel}}
+          {{#if @errors.externalIdLabel}}
             <div class="form__error error-message">
-              {{displayCampaignErrors @errors.idPixLabel}}
+              {{displayCampaignErrors @errors.externalIdLabel}}
             </div>
           {{/if}}
         </FormField>

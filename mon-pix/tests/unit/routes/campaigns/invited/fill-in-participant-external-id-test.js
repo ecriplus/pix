@@ -30,7 +30,7 @@ module('Unit | Route | campaigns/invited/fill-in-participant-external-id', funct
     test('should redirect to entrance page if an external id is already set', async function (assert) {
       //given
       campaign = EmberObject.create({
-        idPixLabel: 'indentifiant externe',
+        externalIdLabel: 'indentifiant externe',
       });
       route.campaignStorage.get.withArgs(campaign.code, 'participantExternalId').returns('someID');
 
@@ -45,7 +45,7 @@ module('Unit | Route | campaigns/invited/fill-in-participant-external-id', funct
     test('should redirect to entrance page if an external id is not required', async function (assert) {
       //given
       campaign = EmberObject.create({
-        idPixLabel: null,
+        externalIdLabel: null,
       });
       route.campaignStorage.get.withArgs(campaign.code, 'participantExternalId').returns(null);
 
@@ -60,7 +60,7 @@ module('Unit | Route | campaigns/invited/fill-in-participant-external-id', funct
     test('should not redirect if an external id is required and not already set', async function (assert) {
       //given
       campaign = EmberObject.create({
-        idPixLabel: 'identifiant externe',
+        externalIdLabel: 'identifiant externe',
       });
       route.campaignStorage.get.withArgs(campaign.code, 'participantExternalId').returns(null);
 

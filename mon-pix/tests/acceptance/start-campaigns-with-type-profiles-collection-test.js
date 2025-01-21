@@ -39,8 +39,8 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
             // then
             campaign = server.create('campaign', {
               type: PROFILES_COLLECTION,
-              idPixLabel: 'Adresse e-mail',
-              idPixType: 'EMAIL',
+              externalIdLabel: 'Adresse e-mail',
+              externaIdType: 'EMAIL',
             });
             const screen = await startCampaignByCode(campaign.code);
             await fillIn(screen.getByRole('textbox', { name: FIRST_NAME_INPUT_LABEL }), campaignParticipant.firstName);
@@ -66,7 +66,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
               campaign = server.create('campaign', {
                 type: PROFILES_COLLECTION,
                 isRestricted: false,
-                idPixLabel: 'toto',
+                externalIdLabel: 'toto',
               });
               const screen = await startCampaignByCodeAndExternalId(campaign.code);
               await fillIn(
@@ -90,7 +90,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
               campaign = server.create('campaign', {
                 type: PROFILES_COLLECTION,
                 isRestricted: true,
-                idPixLabel: 'toto',
+                externalIdLabel: 'toto',
                 organizationType: 'SCO',
               });
               const screen = await visit(`/campagnes/${campaign.code}?participantExternalId=a73at01r3`);
@@ -126,7 +126,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
       module('When campaign does not have external id', function () {
         test('should redirect to send profile page after signup', async function (assert) {
           // given & when
-          campaign = server.create('campaign', { type: PROFILES_COLLECTION, idPixLabel: null });
+          campaign = server.create('campaign', { type: PROFILES_COLLECTION, externalIdLabel: null });
           const screen = await startCampaignByCode(campaign.code);
           await fillIn(screen.getByRole('textbox', { name: FIRST_NAME_INPUT_LABEL }), campaignParticipant.firstName);
           await fillIn(screen.getByRole('textbox', { name: LAST_NAME_INPUT_LABEL }), campaignParticipant.lastName);
@@ -182,7 +182,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
           campaign = server.create('campaign', {
             type: PROFILES_COLLECTION,
             isRestricted: true,
-            idPixLabel: 'nom de naissance de maman',
+            externalIdLabel: 'nom de naissance de maman',
             organizationType: 'SCO',
           });
         });
@@ -261,7 +261,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
             // given
             campaign = server.create('campaign', {
               type: PROFILES_COLLECTION,
-              idPixLabel: 'nom de naissance de maman',
+              externalIdLabel: 'nom de naissance de maman',
             });
             const screen = await startCampaignByCode(campaign.code);
 
@@ -279,7 +279,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
             // given & when
             campaign = server.create('campaign', {
               type: PROFILES_COLLECTION,
-              idPixLabel: 'nom de naissance de maman',
+              externalIdLabel: 'nom de naissance de maman',
             });
             await startCampaignByCodeAndExternalId(campaign.code);
 
@@ -292,7 +292,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
       module('When campaign does not have external id', function () {
         test('should redirect to send profile page after clicking on start button in landing page', async function (assert) {
           // given
-          campaign = server.create('campaign', { type: PROFILES_COLLECTION, idPixLabel: null });
+          campaign = server.create('campaign', { type: PROFILES_COLLECTION, externalIdLabel: null });
           const screen = await visit(`campagnes/${campaign.code}`);
 
           // when
@@ -306,7 +306,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
       module('When campaign does not have external id but a participant external id is set in the url', function () {
         test('should redirect to send profile page after clicking on start button in landing page', async function (assert) {
           // given
-          campaign = server.create('campaign', { type: PROFILES_COLLECTION, idPixLabel: null });
+          campaign = server.create('campaign', { type: PROFILES_COLLECTION, externalIdLabel: null });
           const screen = await visit(`/campagnes/${campaign.code}?participantExternalId=a73at01r3`);
 
           // when

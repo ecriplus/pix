@@ -4,8 +4,8 @@ class CampaignForCreation {
   constructor({
     name,
     title,
-    idPixLabel,
-    idPixType,
+    externalIdLabel,
+    externalIdType,
     customLandingPageText,
     type,
     targetProfileId,
@@ -20,8 +20,8 @@ class CampaignForCreation {
   } = {}) {
     this.name = name;
     this.title = title;
-    this.idPixLabel = idPixLabel?.trim() || undefined;
-    this.idPixType = idPixType?.trim() || undefined;
+    this.externalIdLabel = externalIdLabel?.trim() || undefined;
+    this.externalIdType = externalIdType?.trim() || undefined;
     this.customLandingPageText = customLandingPageText;
     this.type = type;
     this.targetProfileId = targetProfileId;

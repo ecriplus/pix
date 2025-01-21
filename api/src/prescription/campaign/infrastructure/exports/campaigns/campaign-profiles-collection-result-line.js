@@ -83,7 +83,7 @@ class CampaignProfilesCollectionResultLine {
   }
 
   _getIdPixLabelColumn() {
-    return this.campaign.idPixLabel ? [this.campaignParticipationResult.participantExternalId] : EMPTY_ARRAY;
+    return this.campaign.externalIdLabel ? [this.campaignParticipationResult.participantExternalId] : EMPTY_ARRAY;
   }
 
   _getStudentNumberColumn() {

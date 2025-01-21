@@ -217,7 +217,7 @@ describe('Integration | Repository | Campaign', function () {
       expect(result.name).to.equal(campaign.name);
     });
 
-    it('should return a Campaign with idPixLabel by its id ', async function () {
+    it('should return a Campaign with externalIdLabel by its id ', async function () {
       // when
       const feature = databaseBuilder.factory.buildFeature(CAMPAIGN_FEATURES.EXTERNAL_ID);
       databaseBuilder.factory.buildCampaignFeature({
@@ -232,8 +232,8 @@ describe('Integration | Repository | Campaign', function () {
       // then
       expect(result).to.be.an.instanceof(Campaign);
       expect(result.name).to.equal(campaign.name);
-      expect(result.idPixLabel).to.equal('identifiant pix');
-      expect(result.idPixType).to.equal(CampaignExternalIdTypes.STRING);
+      expect(result.externalIdLabel).to.equal('identifiant pix');
+      expect(result.externalIdType).to.equal(CampaignExternalIdTypes.STRING);
     });
 
     it('should throw a NotFoundError if campaign can not be found', function () {

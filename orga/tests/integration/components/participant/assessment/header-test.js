@@ -210,7 +210,7 @@ module('Integration | Component | Participant::Assessment::Header', function (ho
           participantExternalId: 'i12345',
           isShared: false,
         };
-        this.campaign = { idPixLabel: 'identifiant de l’élève' };
+        this.campaign = { externalIdLabel: 'identifiant de l’élève' };
 
         const screen = await render(
           hbs`<Participant::Assessment::Header @participation={{this.participation}} @campaign={{this.campaign}} />`,

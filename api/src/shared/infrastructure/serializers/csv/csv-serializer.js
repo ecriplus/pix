@@ -226,8 +226,8 @@ async function parseForCampaignsImport(cleanedData, { parseCsvData } = csvHelper
     organizationId: data["Identifiant de l'organisation*"],
     name: data['Nom de la campagne*'],
     targetProfileId: data['Identifiant du profil cible*'],
-    idPixLabel: data["Libellé de l'identifiant externe"],
-    idPixType:
+    externalIdLabel: data["Libellé de l'identifiant externe"],
+    externalIdType:
       data["Libellé de l'identifiant externe"]?.trim()?.length > 0
         ? data["Type de l'identifiant externe"] || 'STRING'
         : '',

@@ -110,7 +110,7 @@ module('Unit | Route | authenticated/campaigns/new', function (hooks) {
           targetProfileId: Symbol('campaign target profile id'),
           ownerId: Symbol('campaign owner id'),
           multipleSendings: Symbol('campaign multiple sendings activation'),
-          idPixLabel: Symbol('campaign external id'),
+          externalIdLabel: Symbol('campaign external id'),
           customLandingPageText: Symbol('campaign custom landing page text'),
         };
         const targetProfile = Symbol('campaign target profile');
@@ -171,7 +171,7 @@ module('Unit | Route | authenticated/campaigns/new', function (hooks) {
           description: Symbol('campaign description'),
           ownerId: Symbol('campaign owner id'),
           multipleSendings: Symbol('campaign multiple sendings activation'),
-          idPixLabel: Symbol('campaign external id'),
+          externalIdLabel: Symbol('campaign external id'),
           customLandingPageText: Symbol('campaign custom landing page text'),
         };
 

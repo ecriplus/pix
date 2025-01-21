@@ -40,7 +40,7 @@ const getByCode = async function ({ code, organizationFeatureAPI }) {
 
   return new CampaignToJoin({
     ...result,
-    ...{ idPixLabel: externalIdFeature?.params?.label, idPixType: externalIdFeature?.params?.type },
+    ...{ externalIdLabel: externalIdFeature?.params?.label, externalIdType: externalIdFeature?.params?.type },
     hasLearnersImportFeature,
   });
 };

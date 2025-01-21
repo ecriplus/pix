@@ -329,7 +329,7 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
       this.campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
-        idPixLabel: 'identifiant externe',
+        externalIdLabel: 'identifiant externe',
         participationsCount: 1,
       });
       this.profiles = [{ participantExternalId: '123' }];
@@ -357,7 +357,7 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
       this.campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
-        idPixLabel: 'identifiant externe',
+        externalIdLabel: 'identifiant externe',
         participationsCount: 1,
       });
       this.profiles = [

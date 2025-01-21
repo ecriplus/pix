@@ -302,7 +302,6 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
           name: '@Campagne de Test N°2',
           code: 'QWERTY456',
           organizationId: organization.id,
-          idPixLabel: 'Mail Perso',
           targetProfileId: null,
           type: 'PROFILES_COLLECTION',
           title: null,

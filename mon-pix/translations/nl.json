@@ -1354,12 +1354,12 @@
         "continue": "Ga verder met"
       },
       "errors": {
-        "invalid-external-id": "{ idPixLabel } De jouwe is ongeldig.",
+        "invalid-external-id": "{ externalIdLabel } De jouwe is ongeldig.",
         "invalid-external-id-email": "Het e-mailadres is ongeldig.",
-        "max-length-external-id": "Uw { idPixLabel } mag niet langer zijn dan 255 tekens.",
-        "max-length-id-pix-label": "Uw { idPixLabel } mag niet langer zijn dan 255 tekens.",
-        "missing-external-id": "Voer uw { idPixLabel } in.",
-        "missing-id-pix-label": "Voer uw { idPixLabel } in."
+        "max-length-external-id": "Uw { externalIdLabel } mag niet langer zijn dan 255 tekens.",
+        "max-length-id-pix-label": "Uw { externalIdLabel } mag niet langer zijn dan 255 tekens.",
+        "missing-external-id": "Voer uw { externalIdLabel } in.",
+        "missing-id-pix-label": "Voer uw { externalIdLabel } in."
       },
       "first-title": "Voordat u begint",
       "title": "Mijn login invoeren"

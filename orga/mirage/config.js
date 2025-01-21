@@ -385,7 +385,7 @@ function routes() {
     const campaign = {
       ...body.data.attributes,
       customLandingPageText: body.data.attributes['custom-landing-page-text'],
-      idPixLabel: body.data.attributes['id-pix-label'],
+      externalIdLabel: body.data.attributes['id-pix-label'],
       ownerFirstName: owner.firstName,
       ownerLastName: owner.lastName,
     };

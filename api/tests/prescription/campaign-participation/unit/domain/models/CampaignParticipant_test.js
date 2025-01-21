@@ -14,7 +14,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
         const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
           type: 'ASSESSMENT',
           multipleSendings: true,
-          idPixLabel: null,
+          externalIdLabel: null,
         });
         const organizationLearnerId = 12;
         const userIdentity = { id: 13 };
@@ -40,7 +40,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
         const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
           type: 'ASSESSMENT',
           multipleSendings: true,
-          idPixLabel: null,
+          externalIdLabel: null,
         });
         const organizationLearnerId = 12;
         const userIdentity = { id: 13 };
@@ -68,7 +68,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
           const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
             type: 'ASSESSMENT',
             multipleSendings: true,
-            idPixLabel: null,
+            externalIdLabel: null,
             skillCount: 1,
           });
           const userIdentity = { id: 13 };
@@ -97,7 +97,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
           const userIdentity = { id: 1 };
           const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
             type: 'ASSESSMENT',
-            idPixLabel: null,
+            externalIdLabel: null,
             skillCount: 2,
           });
 
@@ -125,7 +125,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
           const userIdentity = { id: 1 };
           const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
             type: 'ASSESSMENT',
-            idPixLabel: null,
+            externalIdLabel: null,
             skillCount: 2,
           });
 
@@ -155,7 +155,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
       it('should create a campaign campaign participation', function () {
         const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
           type: 'PROFILES_COLLECTION',
-          idPixLabel: null,
+          externalIdLabel: null,
           skillCount: 0,
         });
         const organizationLearnerId = 12;
@@ -183,7 +183,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
         const userIdentity = { id: 13 };
         const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
           type: 'PROFILES_COLLECTION',
-          idPixLabel: null,
+          externalIdLabel: null,
         });
         const campaignParticipant = new CampaignParticipant({
           campaignToStartParticipation,
@@ -204,7 +204,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
           const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
             type: 'PROFILES_COLLECTION',
             multipleSendings: true,
-            idPixLabel: null,
+            externalIdLabel: null,
           });
           const previousCampaignParticipationForUser = { status: 'SHARED', validatedSkillsCount: null, id: 1 };
           const campaignParticipant = new CampaignParticipant({
@@ -231,7 +231,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
 
       it('throws a ForbiddenAccess exception when the user is not in the organization learners on managingStudents cases', async function () {
         restrictedCampaign = domainBuilder.buildCampaignToStartParticipation({
-          idPixLabel: null,
+          externalIdLabel: null,
           isManagingStudents: true,
         });
 
@@ -251,7 +251,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
 
       it('throws a ForbiddenAccess exception when the user is not in the organization learners on feature cases', async function () {
         restrictedCampaign = domainBuilder.buildCampaignToStartParticipation({
-          idPixLabel: null,
+          externalIdLabel: null,
           hasLearnersImportFeature: true,
         });
 
@@ -291,7 +291,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
       beforeEach(function () {
         userIdentity = { id: 1, firstName: 'Helene', lastName: 'Mouton' };
         campaign = domainBuilder.buildCampaignToStartParticipation({
-          idPixLabel: null,
+          externalIdLabel: null,
           isRestricted: false,
           organizationId: 66,
         });
@@ -350,12 +350,12 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
       });
     });
 
-    context('when the campaign has an idPixType', function () {
+    context('when the campaign has an externalIdType', function () {
       let campaignToStartParticipation;
       let userIdentity;
       beforeEach(function () {
         userIdentity = { id: 1 };
-        campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({ idPixType: 'TEXT' });
+        campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({ externalIdType: 'TEXT' });
       });
 
       it('should throw an error if participantExternalId is missing in parameters', async function () {
@@ -375,8 +375,8 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
 
       it('should throw an error if participantExternalId is not a valid email', async function () {
         const campaignToStartParticipationEmail = domainBuilder.buildCampaignToStartParticipation({
-          idPixLabel: 'email',
-          idPixType: CampaignExternalIdTypes.EMAIL,
+          externalIdLabel: 'email',
+          externalIdType: CampaignExternalIdTypes.EMAIL,
         });
 
         const campaignParticipant = new CampaignParticipant({
@@ -417,8 +417,8 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
       describe('When has previous participation', function () {
         it('should get previous externalid of type email', async function () {
           campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
-            idPixLabel: 'an email please',
-            idPixType: CampaignExternalIdTypes.EMAIL,
+            externalIdLabel: 'an email please',
+            externalIdType: CampaignExternalIdTypes.EMAIL,
             multipleSendings: true,
             skillCount: 1,
           });
@@ -444,8 +444,8 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
 
       it('should get previous externalid of type email', async function () {
         campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
-          idPixLabel: 'wathever i want',
-          idPixType: CampaignExternalIdTypes.STRING,
+          externalIdLabel: 'wathever i want',
+          externalIdType: CampaignExternalIdTypes.STRING,
           multipleSendings: true,
           skillCount: 1,
         });
@@ -473,7 +473,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
       it('should improve the previous campaign participation', function () {
         const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
           multipleSendings: true,
-          idPixLabel: null,
+          externalIdLabel: null,
         });
         const userIdentity = { id: 13 };
         const previousCampaignParticipationForUser = { status: 'SHARED', id: 1 };
@@ -494,7 +494,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
       it('throws a AlreadyExistingCampaignParticipationError exception when the previous participation is not shared', async function () {
         const userIdentity = { id: 1 };
         const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
-          idPixLabel: null,
+          externalIdLabel: null,
         });
 
         const campaignParticipant = new CampaignParticipant({
@@ -520,7 +520,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
         const userIdentity = { id: 1 };
         const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
           multipleSendings: true,
-          idPixLabel: null,
+          externalIdLabel: null,
         });
 
         const campaignParticipant = new CampaignParticipant({
@@ -548,7 +548,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
             const userIdentity = { id: 1 };
             const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
               multipleSendings: true,
-              idPixLabel: null,
+              externalIdLabel: null,
               skillCount: 1,
             });
             const campaignParticipant = new CampaignParticipant({
@@ -590,7 +590,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
           const userIdentity = { id: 1 };
           const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
             multipleSendings: true,
-            idPixLabel: null,
+            externalIdLabel: null,
             skillCount: 1,
           });
           const campaignParticipant = new CampaignParticipant({
@@ -626,7 +626,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
       const userIdentity = { id: 13 };
       const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
         archivedAt: new Date('2022-01-01'),
-        idPixLabel: null,
+        externalIdLabel: null,
       });
 
       const campaignParticipant = new CampaignParticipant({
@@ -647,7 +647,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
       const userIdentity = { id: 13 };
       const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
         deletedAt: new Date('2022-01-01'),
-        idPixLabel: null,
+        externalIdLabel: null,
       });
 
       const campaignParticipant = new CampaignParticipant({
@@ -669,7 +669,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
         const userIdentity = { id: 13 };
         const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
           multipleSendings: false,
-          idPixLabel: null,
+          externalIdLabel: null,
         });
 
         const campaignParticipant = new CampaignParticipant({
@@ -693,7 +693,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
 
   context('when the organization learner is not allowed', function () {
     it('throws an error if has already participated', async function () {
-      const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({ idPixLabel: null });
+      const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({ externalIdLabel: null });
       const organizationLearnerId = 12;
       const userIdentity = { id: 13 };
       const campaignParticipant = new CampaignParticipant({
@@ -711,7 +711,7 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
     });
 
     it('throws an error if is disabled', async function () {
-      const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({ idPixLabel: null });
+      const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({ externalIdLabel: null });
       const organizationLearnerId = 12;
       const userIdentity = { id: 13 };
       const campaignParticipant = new CampaignParticipant({

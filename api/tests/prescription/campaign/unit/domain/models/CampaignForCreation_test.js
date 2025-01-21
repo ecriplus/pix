@@ -282,9 +282,9 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
       });
     });
 
-    context('idPixLabel & idPixType', function () {
-      context('when idPixLabel is empty', function () {
-        it('should save if both idPixLabel and idPixType are empty', function () {
+    context('externalIdLabel & externalIdType', function () {
+      context('when externalIdLabel is empty', function () {
+        it('should save if both externalIdLabel and externalIdType are empty', function () {
           const attributes = {
             name: 'CampaignName',
             type: CampaignTypes.ASSESSMENT,
@@ -293,8 +293,8 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
             ownerId: 2,
             organizationId: 3,
             title: '',
-            idPixLabel: '',
-            idPixType: '',
+            externalIdLabel: '',
+            externalIdType: '',
             customLandingPageText: '',
             customResultPageButtonText: null,
             customResultPageButtonUrl: null,
@@ -302,10 +302,10 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
 
           const campaignForCreation = new CampaignForCreation(attributes);
 
-          expect(campaignForCreation.idPixLabel).to.be.undefined;
-          expect(campaignForCreation.idPixType).to.be.undefined;
+          expect(campaignForCreation.externalIdLabel).to.be.undefined;
+          expect(campaignForCreation.externalIdType).to.be.undefined;
         });
-        it('should save if both idPixLabel and idPixType are not provided', function () {
+        it('should save if both externalIdLabel and externalIdType are not provided', function () {
           const attributes = {
             name: 'CampaignName',
             type: CampaignTypes.ASSESSMENT,
@@ -321,12 +321,12 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
 
           const campaignForCreation = new CampaignForCreation(attributes);
 
-          expect(campaignForCreation.idPixLabel).to.be.undefined;
-          expect(campaignForCreation.idPixType).to.be.undefined;
+          expect(campaignForCreation.externalIdLabel).to.be.undefined;
+          expect(campaignForCreation.externalIdType).to.be.undefined;
         });
       });
-      context('when idPixLabel is provided', function () {
-        it('should throws if  idPixType is empty', function () {
+      context('when externalIdLabel is provided', function () {
+        it('should throws if  externalIdType is empty', function () {
           const attributes = {
             name: 'CampaignName',
             type: CampaignTypes.ASSESSMENT,
@@ -335,8 +335,8 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
             ownerId: 2,
             organizationId: 3,
             title: '',
-            idPixLabel: 'toto',
-            idPixType: '',
+            externalIdLabel: 'toto',
+            externalIdType: '',
             customLandingPageText: '',
             customResultPageButtonText: null,
             customResultPageButtonUrl: null,
@@ -346,7 +346,7 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
             new CampaignForCreation(attributes);
           }).to.throw(EntityValidationError);
         });
-        it('should throws if idPixType is null', function () {
+        it('should throws if externalIdType is null', function () {
           const attributes = {
             name: 'CampaignName',
             type: CampaignTypes.ASSESSMENT,
@@ -355,8 +355,8 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
             ownerId: 2,
             organizationId: 3,
             title: '',
-            idPixLabel: 'toto',
-            idPixType: null,
+            externalIdLabel: 'toto',
+            externalIdType: null,
             customLandingPageText: '',
             customResultPageButtonText: null,
             customResultPageButtonUrl: null,
@@ -368,8 +368,8 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
         });
       });
 
-      context('when idPixType is empty', function () {
-        it('should throws if there is a idPixType but no idPixLabel', function () {
+      context('when externalIdType is empty', function () {
+        it('should throws if there is a externalIdType but no externalIdLabel', function () {
           const attributes = {
             name: 'CampaignName',
             type: CampaignTypes.ASSESSMENT,
@@ -378,8 +378,8 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
             ownerId: 2,
             organizationId: 3,
             title: '',
-            idPixLabel: '',
-            idPixType: 'toto',
+            externalIdLabel: '',
+            externalIdType: 'toto',
             customLandingPageText: '',
             customResultPageButtonText: null,
             customResultPageButtonUrl: null,
@@ -401,8 +401,8 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
             ownerId: 2,
             organizationId: 3,
             title: '',
-            idPixLabel: 'Mon idPixLabel',
-            idPixType: CampaignExternalIdTypes.STRING,
+            externalIdLabel: 'Mon externalIdLabel',
+            externalIdType: CampaignExternalIdTypes.STRING,
             customLandingPageText: '',
             customResultPageButtonText: null,
             customResultPageButtonUrl: null,
@@ -410,12 +410,12 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
 
           const campaignForCreation = new CampaignForCreation(attributes);
 
-          expect(campaignForCreation.idPixLabel).to.equal('Mon idPixLabel');
-          expect(campaignForCreation.idPixType).to.equal(CampaignExternalIdTypes.STRING);
+          expect(campaignForCreation.externalIdLabel).to.equal('Mon externalIdLabel');
+          expect(campaignForCreation.externalIdType).to.equal(CampaignExternalIdTypes.STRING);
         });
       });
 
-      context('when the idPixtype is not allowed', function () {
+      context('when the externalIdtype is not allowed', function () {
         it('should save given value', function () {
           const attributes = {
             name: 'CampaignName',
@@ -425,8 +425,8 @@ describe('Unit | Domain | Models | CampaignForCreation', function () {
             ownerId: 2,
             organizationId: 3,
             title: '',
-            idPixLabel: 'Mon idPixLabel',
-            idPixType: '1234',
+            externalIdLabel: 'Mon externalIdLabel',
+            externalIdType: '1234',
             customLandingPageText: '',
             customResultPageButtonText: null,
             customResultPageButtonUrl: null,

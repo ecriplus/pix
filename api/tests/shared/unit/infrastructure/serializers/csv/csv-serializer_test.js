@@ -1473,8 +1473,8 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           organizationId: 1,
           name: 'chaussette',
           targetProfileId: 1234,
-          idPixLabel: 'numéro étudiant',
-          idPixType: 'STRING',
+          externalIdLabel: 'numéro étudiant',
+          externalIdType: 'STRING',
           title: 'titre 1',
           customLandingPageText: 'descriptif 1',
           creatorId: 789,
@@ -1488,8 +1488,8 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           organizationId: 2,
           name: 'chapeau',
           targetProfileId: 1234,
-          idPixLabel: 'identifiant',
-          idPixType: 'STRING',
+          externalIdLabel: 'identifiant',
+          externalIdType: 'STRING',
           title: 'titre 2',
           customLandingPageText: 'descriptif 2',
           creatorId: 666,
@@ -1503,8 +1503,8 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           organizationId: 3,
           name: 'chausson',
           targetProfileId: 1234,
-          idPixLabel: '',
-          idPixType: '',
+          externalIdLabel: '',
+          externalIdType: '',
           title: 'titre 3',
           customLandingPageText: 'descriptif 3',
           creatorId: 123,
@@ -1645,14 +1645,14 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
       });
     });
 
-    describe('when idPixLabel is provided', function () {
-      const headerWithidPixtype =
+    describe('when externalIdLabel is provided', function () {
+      const headerWithexternalIdtype =
         "Identifiant de l'organisation*;Nom de la campagne*;Identifiant du profil cible*;Libellé de l'identifiant externe;Type de l'identifiant externe;Identifiant du créateur*;Titre du parcours;Descriptif du parcours;Envoi multiple;Identifiant du propriétaire*;Texte de la page de fin de parcours;Texte du bouton de la page de fin de parcours;URL du bouton de la page de fin de parcours\n";
 
-      describe('if idPixType is present', function () {
+      describe('if externalIdType is present', function () {
         it('should default to STRING', async function () {
           // given
-          const csv = `${headerWithidPixtype}1;chaussette;1234;numéro étudiant;;789;titre 1;descriptif 1;Oui;45`;
+          const csv = `${headerWithexternalIdtype}1;chaussette;1234;numéro étudiant;;789;titre 1;descriptif 1;Oui;45`;
 
           // when
           const parsedData = await csvSerializer.parseForCampaignsImport(csv);
@@ -1663,8 +1663,8 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
               organizationId: 1,
               name: 'chaussette',
               targetProfileId: 1234,
-              idPixLabel: 'numéro étudiant',
-              idPixType: 'STRING',
+              externalIdLabel: 'numéro étudiant',
+              externalIdType: 'STRING',
               title: 'titre 1',
               customLandingPageText: 'descriptif 1',
               creatorId: 789,
@@ -1679,7 +1679,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
         });
       });
 
-      describe('if idPixType i not present', function () {
+      describe('if externalIdType i not present', function () {
         it('should default to STRING', async function () {
           // given
           const csv = `${headerCsv}1;chaussette;1234;numéro étudiant;789;titre 1;descriptif 1;Oui;45`;
@@ -1693,8 +1693,8 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
               organizationId: 1,
               name: 'chaussette',
               targetProfileId: 1234,
-              idPixLabel: 'numéro étudiant',
-              idPixType: 'STRING',
+              externalIdLabel: 'numéro étudiant',
+              externalIdType: 'STRING',
               title: 'titre 1',
               customLandingPageText: 'descriptif 1',
               creatorId: 789,

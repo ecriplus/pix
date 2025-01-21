@@ -63,7 +63,7 @@ export default async function initUser(databaseBuilder) {
       title: `Titre principal du parcours autonome n°${i}`,
       customLandingPageText: `<strong>Lorem ipsum dolor sit amet</strong>, consectetur adipiscing elit. Mauris eget tortor ut diam dictum viverra quis at purus. Morbi id quam a massa blandit gravida.`,
       createdAt: dayjs().subtract(30, 'days').toDate(),
-      idPixLabel: null,
+      externalIdLabel: null,
       configCampaign: {
         participantCount: 0,
       },

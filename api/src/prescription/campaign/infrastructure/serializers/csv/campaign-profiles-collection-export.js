@@ -13,7 +13,7 @@ class CampaignProfilesCollectionExport {
     this.stream = outputStream;
     this.organization = organization;
     this.campaign = campaign;
-    this.idPixLabel = campaign.idPixLabel;
+    this.externalIdLabel = campaign.externalIdLabel;
     this.competences = competences;
     this.translate = translate;
     this.additionalHeaders = additionalHeaders;
@@ -64,7 +64,7 @@ class CampaignProfilesCollectionExport {
       displayGroup && this.translate('campaign-export.common.participant-group'),
       displayDivision && this.translate('campaign-export.common.participant-division'),
       displayStudentNumber && this.translate('campaign-export.common.participant-student-number'),
-      this.idPixLabel,
+      this.externalIdLabel,
       this.translate('campaign-export.profiles-collection.is-sent'),
       this.translate('campaign-export.profiles-collection.sent-on'),
       this.translate('campaign-export.profiles-collection.pix-score'),

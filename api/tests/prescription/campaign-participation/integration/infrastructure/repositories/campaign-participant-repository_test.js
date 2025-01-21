@@ -54,10 +54,10 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
       featureId = null;
     });
     context('when campaign has externalId feature', function () {
-      it('should get correct idPixLabel', async function () {
+      it('should get correct externalIdLabel', async function () {
         const campaignToStartParticipation = buildCampaignWithSkills({
           organizationId,
-          idPixLabel: 'idpix',
+          externalIdLabel: 'idpix',
         });
         const { id: userId } = databaseBuilder.factory.buildUser();
 
@@ -72,8 +72,10 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
           });
         });
 
-        expect(campaignParticipant.campaignToStartParticipation.idPixLabel).to.equal('idpix');
-        expect(campaignParticipant.campaignToStartParticipation.idPixType).to.equal(CampaignExternalIdTypes.STRING);
+        expect(campaignParticipant.campaignToStartParticipation.externalIdLabel).to.equal('idpix');
+        expect(campaignParticipant.campaignToStartParticipation.externalIdType).to.equal(
+          CampaignExternalIdTypes.STRING,
+        );
       });
     });
 
@@ -100,7 +102,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
         const campaignToStartParticipation = buildCampaignWithSkills({
           organizationId,
           multipleSendings: true,
-          idPixLabel: 'externalId',
+          externalIdLabel: 'externalId',
         });
         const { id: userId } = databaseBuilder.factory.buildUser();
 
@@ -154,7 +156,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
       it('return null', async function () {
         const campaignToStartParticipation = buildCampaignWithSkills({
           organizationId,
-          idPixLabel: 'externalId',
+          externalIdLabel: 'externalId',
         });
         const { id: userId } = databaseBuilder.factory.buildUser();
 
@@ -487,7 +489,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
       it('find campaign with operative skills', async function () {
         const campaignToStartParticipation = buildCampaignWithSkills(
           {
-            idPixLabel: 'email',
+            externalIdLabel: 'email',
             type: 'ASSESSMENT',
             isManagingStudents: true,
             deletedAt: new Date('2023-01-01'),
@@ -518,7 +520,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
       it('find skills for the correct campaign', async function () {
         const campaignToStartParticipation = buildCampaignWithSkills(
           {
-            idPixLabel: 'email',
+            externalIdLabel: 'email',
             type: 'ASSESSMENT',
             isManagingStudents: false,
             archivedAt: new Date('2022-01-01'),
@@ -531,7 +533,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
 
         buildCampaignWithSkills(
           {
-            idPixLabel: 'id',
+            externalIdLabel: 'id',
             type: 'ASSESSMENT',
             isManagingStudents: true,
             archivedAt: new Date('2022-01-02'),
@@ -652,7 +654,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
 
     it('returns campaign participation id', async function () {
       const campaignParticipant = await makeCampaignParticipant({
-        campaignAttributes: { idPixLabel: null },
+        campaignAttributes: { externalIdLabel: null },
         userIdentity,
         participantExternalId: null,
         isManagingStudents: false,
@@ -687,7 +689,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
         await databaseBuilder.commit();
 
         campaignParticipant = await makeCampaignParticipant({
-          campaignAttributes: { organizationId: orga.id, idPixLabel: null },
+          campaignAttributes: { organizationId: orga.id, externalIdLabel: null },
           userIdentity,
           participantExternalId: 'null',
           isManagingStudents: orga.isManagingStudents,
@@ -733,7 +735,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
     context('when the campaign is profile collection', function () {
       it('creates a campaign participation', async function () {
         const campaignParticipant = await makeCampaignParticipant({
-          campaignAttributes: { type: 'PROFILES_COLLECTION', idPixLabel: null },
+          campaignAttributes: { type: 'PROFILES_COLLECTION', externalIdLabel: null },
           userIdentity,
           participantExternalId: null,
           isManagingStudents: false,
@@ -754,7 +756,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
 
       it('does not create an assessment', async function () {
         const campaignParticipant = await makeCampaignParticipant({
-          campaignAttributes: { type: 'PROFILES_COLLECTION', idPixLabel: null },
+          campaignAttributes: { type: 'PROFILES_COLLECTION', externalIdLabel: null },
           userIdentity,
           participantExternalId: null,
           isManagingStudents: false,
@@ -776,7 +778,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
         const campaignParticipant = await makeCampaignParticipant({
           campaignAttributes: {
             type: 'ASSESSMENT',
-            idPixLabel: null,
+            externalIdLabel: null,
             method: 'SMART_RANDOM',
           },
           userIdentity,
@@ -809,7 +811,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
     context('when there is already an organization learner', function () {
       it('create a campaign participation linked to this organization learner', async function () {
         //GIVEN
-        const campaign = databaseBuilder.factory.buildCampaign({ idPixLabel: null });
+        const campaign = databaseBuilder.factory.buildCampaign({ externalIdLabel: null });
         const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
         await databaseBuilder.commit();
 
@@ -843,7 +845,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
       it('create a new organization learner', async function () {
         //GIVEN
         userIdentity = databaseBuilder.factory.buildUser({ firstName: 'Valentin', lastName: 'Tamare' });
-        const campaign = databaseBuilder.factory.buildCampaign({ idPixLabel: null });
+        const campaign = databaseBuilder.factory.buildCampaign({ externalIdLabel: null });
         await databaseBuilder.commit();
 
         const campaignToStartParticipation = new CampaignToStartParticipation(campaign);
@@ -880,7 +882,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
 
       it('create a campaign participation linked to the new organization learner', async function () {
         //GIVEN
-        const campaign = databaseBuilder.factory.buildCampaign({ idPixLabel: null });
+        const campaign = databaseBuilder.factory.buildCampaign({ externalIdLabel: null });
         await databaseBuilder.commit();
 
         const campaignToStartParticipation = new CampaignToStartParticipation(campaign);
@@ -959,7 +961,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
       it('does not update participation for other user or campaign', async function () {
         //GIVEN
         const campaign = databaseBuilder.factory.buildCampaign({
-          idPixLabel: null,
+          externalIdLabel: null,
           multipleSendings: true,
         });
         databaseBuilder.factory.buildCampaignParticipation({
@@ -1014,7 +1016,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
     context('when external id is asked', function () {
       it('save participant external id', async function () {
         const campaignParticipant = await makeCampaignParticipant({
-          campaignAttributes: { idPixLabel: 'some external id' },
+          campaignAttributes: { externalIdLabel: 'some external id' },
           userIdentity,
           participantExternalId: 'some participant external id',
           isManagingStudents: false,
@@ -1045,7 +1047,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
 
         const { id: campaignId } = databaseBuilder.factory.buildCampaign({
           organizationId,
-          idPixLabel: null,
+          externalIdLabel: null,
         });
         databaseBuilder.factory.buildCampaignParticipation({
           organizationLearnerId: deletedOrganizationLearnerId,
@@ -1056,7 +1058,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
         await databaseBuilder.commit();
 
         const campaignParticipant = await makeCampaignParticipant({
-          campaignAttributes: { idPixLabel: null },
+          campaignAttributes: { externalIdLabel: null },
           userIdentity,
           participantExternalId: null,
           isManagingStudents: false,
@@ -1077,7 +1079,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
         it('throws an exception AlreadyExistingCampaignParticipationError', async function () {
           //GIVEN
           const campaign = databaseBuilder.factory.buildCampaign({
-            idPixLabel: null,
+            externalIdLabel: null,
           });
           databaseBuilder.factory.buildCampaignParticipation({
             userId: userIdentity.id,
@@ -1118,7 +1120,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
         it('throws the original exception', async function () {
           //GIVEN
           const campaign = databaseBuilder.factory.buildCampaign({
-            idPixLabel: null,
+            externalIdLabel: null,
           });
 
           await databaseBuilder.commit();
@@ -1149,7 +1151,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
 
       it('throw one_active_learner', async function () {
         const campaignParticipant = await makeCampaignParticipant({
-          campaignAttributes: { idPixLabel: null },
+          campaignAttributes: { externalIdLabel: null },
           userIdentity,
           participantExternalId: null,
           isManagingStudents: false,
@@ -1170,7 +1172,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
       it('does not update data', async function () {
         const campaign = databaseBuilder.factory.buildCampaign({
           multipleSendings: true,
-          idPixLabel: null,
+          externalIdLabel: null,
         });
         const { id: previousCampaignParticipationForUserId } = databaseBuilder.factory.buildCampaignParticipation({
           userId: userIdentity.id,
@@ -1224,16 +1226,16 @@ function buildCampaignWithSkills(attributes, skills = ['skill1']) {
   });
   const campaign = databaseBuilder.factory.buildCampaign({
     ...attributes,
-    idPixLabel: `deprecated_${attributes.idPixLabel}`,
+    externalIdLabel: `deprecated_${attributes.externalIdLabel}`,
     organizationId,
   });
 
-  if (attributes.idPixLabel) {
+  if (attributes.externalIdLabel) {
     databaseBuilder.factory.buildCampaignFeature({
       campaignId: campaign.id,
       featureId,
       params: {
-        label: attributes.idPixLabel,
+        label: attributes.externalIdLabel,
         type: CampaignExternalIdTypes.STRING,
       },
     });
@@ -1244,7 +1246,7 @@ function buildCampaignWithSkills(attributes, skills = ['skill1']) {
 
   return new CampaignToStartParticipation({
     ...campaign,
-    idPixType: CampaignExternalIdTypes.STRING,
+    externalIdType: CampaignExternalIdTypes.STRING,
     hasLearnersImportFeature: false,
     ...attributes,
   });

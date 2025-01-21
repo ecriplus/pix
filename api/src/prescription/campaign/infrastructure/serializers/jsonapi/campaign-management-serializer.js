@@ -17,7 +17,7 @@ const serialize = function (campaignManagement, meta) {
       'customResultPageButtonUrl',
       'customResultPageText',
       'deletedAt',
-      'idPixLabel',
+      'externalIdLabel',
       'isForAbsoluteNovice',
       'isProfilesCollection',
       'isTypeAssessment',

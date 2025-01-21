@@ -35,14 +35,14 @@ export default class FillInParticipantExternalId extends Component {
 
     if (!this.participantExternalId.trim()) {
       this.errorMessage = this.intl.t('pages.fill-in-participant-external-id.errors.missing-external-id', {
-        idPixLabel: this.args.campaign.idPixLabel,
+        externalIdLabel: this.args.campaign.externalIdLabel,
       });
       return;
     }
 
     if (this.participantExternalId.length > 255) {
       this.errorMessage = this.intl.t('pages.fill-in-participant-external-id.errors.max-length-external-id', {
-        idPixLabel: this.args.campaign.idPixLabel,
+        externalIdLabel: this.args.campaign.externalIdLabel,
       });
       return;
     }
@@ -70,18 +70,18 @@ export default class FillInParticipantExternalId extends Component {
   }
 
   get idPixInputType() {
-    if (this.args.campaign.idPixType === 'EMAIL') {
+    if (this.args.campaign.externaIdType === 'EMAIL') {
       return 'email';
-    } else if (this.args.campaign.idPixType === 'STRING') {
+    } else if (this.args.campaign.externaIdType === 'STRING') {
       return 'text';
     }
     return null;
   }
 
   get idPixInputSubLabel() {
-    if (this.args.campaign.idPixType === 'EMAIL') {
+    if (this.args.campaign.externaIdType === 'EMAIL') {
       return this.intl.t('pages.sign-up.fields.email.help');
-    } else if (this.args.campaign.idPixInputType === 'STRING') {
+    } else if (this.args.campaign.externaIdType === 'STRING') {
       return '';
     }
     return null;
@@ -111,7 +111,7 @@ export default class FillInParticipantExternalId extends Component {
               type={{this.idPixInputType}}
               aria-autocomplete="none"
             >
-              <:label>{{@campaign.idPixLabel}}</:label>
+              <:label>{{@campaign.externalIdLabel}}</:label>
             </PixInput>
 
             {{#if @campaign.externalIdHelpImageUrl}}

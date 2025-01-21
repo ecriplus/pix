@@ -42,8 +42,8 @@ describe('Integration | Repository | Campaign Administration', function () {
 
     it('should return campaigns for given ids', async function () {
       // given
-      const firstCampaign = new Campaign(databaseBuilder.factory.buildCampaign({ idPixLabel: null }));
-      const secondCampaign = new Campaign(databaseBuilder.factory.buildCampaign({ idPixLabel: null }));
+      const firstCampaign = new Campaign(databaseBuilder.factory.buildCampaign({ externalIdLabel: null }));
+      const secondCampaign = new Campaign(databaseBuilder.factory.buildCampaign({ externalIdLabel: null }));
       databaseBuilder.factory.buildCampaign();
 
       await databaseBuilder.commit();
@@ -460,7 +460,7 @@ describe('Integration | Repository | Campaign Administration', function () {
       });
     });
 
-    context('when the campaign have an idPixLabel', function () {
+    context('when the campaign have an externalIdLabel', function () {
       it('should save the campaign with its feature', async function () {
         // given
         databaseBuilder.factory.buildFeature(CAMPAIGN_FEATURES.EXTERNAL_ID);
@@ -477,8 +477,8 @@ describe('Integration | Repository | Campaign Administration', function () {
           type: CampaignTypes.ASSESSMENT,
           targetProfileId,
           title: 'Parcours recherche internet',
-          idPixLabel: 'identifiant pix',
-          idPixType: CampaignExternalIdTypes.STRING,
+          externalIdLabel: 'identifiant pix',
+          externalIdType: CampaignExternalIdTypes.STRING,
         };
 
         // when
@@ -500,8 +500,8 @@ describe('Integration | Repository | Campaign Administration', function () {
             'targetProfile',
             'multipleSendings',
             'ownerId',
-            'idPixLabel',
-            'idPixType',
+            'externalIdLabel',
+            'externalIdType',
           ]),
         );
       });

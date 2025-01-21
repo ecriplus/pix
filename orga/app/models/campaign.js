@@ -11,8 +11,8 @@ export default class Campaign extends Model {
   @attr('nullable-string') title;
   @attr('boolean') isArchived;
   @attr('boolean') multipleSendings;
-  @attr('nullable-string') idPixLabel;
-  @attr('string') idPixType;
+  @attr('nullable-string') externalIdLabel;
+  @attr('string') externalIdType;
   @attr('nullable-text') customLandingPageText;
   @attr('string') tokenForCampaignResults;
   @attr('number') ownerId;
@@ -47,7 +47,7 @@ export default class Campaign extends Model {
   }
 
   get hasExternalId() {
-    return Boolean(this.idPixLabel);
+    return Boolean(this.externalIdLabel);
   }
 
   get hasStages() {

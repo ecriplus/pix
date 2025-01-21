@@ -26,7 +26,7 @@ describe('Unit | Serializer | JSONAPI | campaign-management-serializer', functio
             'custom-result-page-button-url': campaignManagement.customResultPageButtonUrl,
             'custom-result-page-text': campaignManagement.customResultPageText,
             'deleted-at': campaignManagement.deletedAt,
-            'id-pix-label': campaignManagement.idPixLabel,
+            'external-id-label': campaignManagement.externalIdLabel,
             'is-for-absolute-novice': campaignManagement.isForAbsoluteNovice,
             'is-profiles-collection': campaignManagement.isProfilesCollection,
             'is-type-assessment': campaignManagement.isTypeAssessment,

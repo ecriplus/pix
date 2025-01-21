@@ -300,9 +300,9 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
       expect(csv).to.equal(expectedHeader);
     });
 
-    it('display idPixLabel header when campaign has one', async function () {
+    it('display externalIdLabel header when campaign has one', async function () {
       //given
-      campaign.idPixLabel = 'email';
+      campaign.externalIdLabel = 'email';
       const campaignProfile = new CampaignAssessmentExport({
         outputStream,
         organization,

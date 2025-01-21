@@ -31,8 +31,8 @@ export default class NewRoute extends Route {
           'targetProfileId',
           'ownerId',
           'multipleSendings',
-          'idPixLabel',
-          'idPixType',
+          'externalIdLabel',
+          'externalIdType',
           'customLandingPageText',
         ]);
         campaignAttributes.name = `${this.intl.t('pages.campaign-creation.copy-of')} ${from.name}`;

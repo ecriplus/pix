@@ -4,7 +4,7 @@ import { databaseBuilder, expect, mockLearningContent } from '../../../../../tes
 
 describe('Integration | UseCases | startCampaignParticipation', function () {
   it('start a new participation', async function () {
-    const { id: campaignId } = databaseBuilder.factory.buildCampaign({ type: 'PROFILES_COLLECTION', idPixLabel: null });
+    const { id: campaignId } = databaseBuilder.factory.buildCampaign({ type: 'PROFILES_COLLECTION' });
     const { id: userId } = databaseBuilder.factory.buildUser();
     await mockLearningContent({
       skills: [],

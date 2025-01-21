@@ -27,7 +27,7 @@ const updateCampaignDetails = async function ({
     },
     isAuthorizedToUpdateIsForAbsoluteNovice,
   );
-
+  // TODO : should be called inside model method updateFields
   campaignUpdateValidator.validate(campaign);
 
   return campaignAdministrationRepository.update(campaign);

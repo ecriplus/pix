@@ -22,7 +22,7 @@ module('Acceptance | Campaigns | Resume Campaigns with type Profiles Collection'
   hooks.beforeEach(async function () {
     studentInfo = this.server.create('user', 'withEmail');
     await authenticate(studentInfo);
-    campaign = this.server.create('campaign', { idPixLabel: 'email', type: PROFILES_COLLECTION });
+    campaign = this.server.create('campaign', { externalIdLabel: 'email', type: PROFILES_COLLECTION });
     await resumeCampaignOfTypeProfilesCollectionByCode(campaign.code, true);
   });
 

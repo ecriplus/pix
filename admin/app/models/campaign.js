@@ -6,7 +6,7 @@ export default class Campaign extends Model {
   @attr('date') deletedAt;
   @attr('nullable-string') type;
   @attr('string') code;
-  @attr('nullable-string') idPixLabel;
+  @attr('nullable-string') externalIdLabel;
   @attr('date') createdAt;
   @attr('string') creatorLastName;
   @attr('string') creatorFirstName;

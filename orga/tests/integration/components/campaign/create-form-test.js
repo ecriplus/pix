@@ -777,7 +777,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
 
   test('it should fill external user ID selection (yes)', async function (assert) {
     // given
-    this.campaign.idPixLabel = 'Numéro étudiant';
+    this.campaign.externalIdLabel = 'Numéro étudiant';
 
     // when
     const screen = await render(
@@ -805,7 +805,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
 
   test('it should fill external user ID selection (no)', async function (assert) {
     // given
-    this.campaign.idPixLabel = null;
+    this.campaign.externalIdLabel = null;
 
     // when
     const screen = await render(
@@ -963,7 +963,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
 
       const checkedRadio = screen.getByLabelText(t('pages.campaign-settings.external-user-id-types.email'));
       await checkedRadio.click();
-      assert.strictEqual(this.campaign.idPixType, 'EMAIL');
+      assert.strictEqual(this.campaign.externalIdType, 'EMAIL');
     });
   });
 
@@ -1087,7 +1087,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
               message: 'CAMPAIGN_NAME_IS_REQUIRED',
             },
           ],
-          idPixLabel: [
+          externalIdLabel: [
             {
               message: 'EXTERNAL_USER_ID_IS_REQUIRED',
             },

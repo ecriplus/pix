@@ -216,7 +216,7 @@ export default async function initUser(databaseBuilder) {
     title: 'Campagne avec des paliers par niveaux - niveau à 0 ',
     code: 'EVALSTAG1',
     targetProfileId: targetProfile1.targetProfileId,
-    idPixLabel: null,
+    externalIdLabel: null,
     configCampaign: { participantCount: 0 },
   });
   const campaign2 = await tooling.campaign.createAssessmentCampaign({
@@ -227,7 +227,7 @@ export default async function initUser(databaseBuilder) {
     title: 'Campagne avec des paliers par niveaux - niveau à 0  et un "Premier Acquis"',
     code: 'EVALSTAG2',
     targetProfileId: targetProfile2.targetProfileId,
-    idPixLabel: null,
+    externalIdLabel: null,
     configCampaign: { participantCount: 0 },
   });
   const campaign3 = await tooling.campaign.createAssessmentCampaign({
@@ -238,7 +238,7 @@ export default async function initUser(databaseBuilder) {
     title: 'Campagne avec des paliers par niveau - niveau à 0 et paliers de niveaux',
     code: 'EVALSTAG3',
     targetProfileId: targetProfile3.targetProfileId,
-    idPixLabel: null,
+    externalIdLabel: null,
     customResultPageText:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget tortor ut diam dictum viverra quis at purus. Morbi id quam a massa blandit gravida.',
     customResultPageButtonUrl: 'https://pix.org',
@@ -253,7 +253,7 @@ export default async function initUser(databaseBuilder) {
     title: 'Campagne avec des paliers par seuil - seuil à 0',
     code: 'EVALSTAG4',
     targetProfileId: targetProfile4.targetProfileId,
-    idPixLabel: null,
+    externalIdLabel: null,
     configCampaign: { participantCount: 0 },
   });
   const campaign5 = await tooling.campaign.createAssessmentCampaign({
@@ -264,7 +264,7 @@ export default async function initUser(databaseBuilder) {
     title: 'Campagne avec des paliers par seuil - seuil à 0 et un "Premier Acquis"',
     code: 'EVALSTAG5',
     targetProfileId: targetProfile5.targetProfileId,
-    idPixLabel: null,
+    externalIdLabel: null,
     configCampaign: { participantCount: 0 },
   });
   const campaign6 = await tooling.campaign.createAssessmentCampaign({
@@ -275,7 +275,7 @@ export default async function initUser(databaseBuilder) {
     title: "Campagne d'évaluation SCO - seuil à 0 et paliers de seuil",
     code: 'EVALSTAG6',
     targetProfileId: targetProfile6.targetProfileId,
-    idPixLabel: null,
+    externalIdLabel: null,
     multipleSendings: true,
     configCampaign: { participantCount: 0 },
   });

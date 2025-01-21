@@ -65,7 +65,6 @@ function _buildCollegeHouseOfTheDragonOrganization(databaseBuilder) {
     assessmentMethod: 'SMART_RANDOM',
     title: null,
     customLandingPageText: null,
-    idPixLabel: null,
     createdAt: new Date('2023-07-27'),
   });
 }

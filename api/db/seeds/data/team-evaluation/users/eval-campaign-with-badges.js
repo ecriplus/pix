@@ -231,7 +231,7 @@ export default async function initUser(databaseBuilder) {
     name: "Campagne d'évaluation SCO - envoi simple",
     code: 'EVALBADGE',
     targetProfileId: targetProfileId,
-    idPixLabel: null,
+    externalIdLabel: null,
     customResultPageText:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget tortor ut diam dictum viverra quis at purus. Morbi id quam a massa blandit gravida.',
     configCampaign: { participantCount: 0 },

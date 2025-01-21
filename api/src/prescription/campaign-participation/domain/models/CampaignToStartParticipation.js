@@ -3,8 +3,8 @@ import { CampaignTypes } from '../../../shared/domain/constants.js';
 class CampaignToStartParticipation {
   constructor({
     id,
-    idPixLabel,
-    idPixType,
+    externalIdLabel,
+    externalIdType,
     archivedAt,
     type,
     isManagingStudents,
@@ -17,8 +17,8 @@ class CampaignToStartParticipation {
   } = {}) {
     this.id = id;
     this.type = type;
-    this.idPixLabel = idPixLabel;
-    this.idPixType = idPixType;
+    this.externalIdLabel = externalIdLabel;
+    this.externalIdType = externalIdType;
     this.archivedAt = archivedAt;
     this.multipleSendings = multipleSendings;
     this.assessmentMethod = assessmentMethod;

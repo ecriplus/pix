@@ -54,32 +54,32 @@ module('Integration | Component | Campaigns | participation-row', function (hook
       assert.notOk(screen.queryByRole('link', { name: '(Anonymised)' }));
     });
 
-    test('it should not display participantExternalId if idPixLabel is null', async function (assert) {
+    test('it should not display participantExternalId if externalIdLabel is null', async function (assert) {
       // given
-      const idPixLabel = null;
+      const externalIdLabel = null;
       const participation = EmberObject.create({
         participationExternalId: '123',
       });
 
       // when
       const screen = await render(
-        <template><ParticipationRow @participation={{participation}} @idPixLabel={{idPixLabel}} /></template>,
+        <template><ParticipationRow @participation={{participation}} @externalIdLabel={{externalIdLabel}} /></template>,
       );
 
       // then
       assert.dom(screen.queryByText('123')).doesNotExist();
     });
 
-    test('it should display participantExternalId and a modification button if idPixLabel is set', async function (assert) {
+    test('it should display participantExternalId and a modification button if externalIdLabel is set', async function (assert) {
       // given
-      const idPixLabel = 'identifiant';
+      const externalIdLabel = 'identifiant';
       const participation = EmberObject.create({
         participantExternalId: '123',
       });
 
       // when
       const screen = await render(
-        <template><ParticipationRow @participation={{participation}} @idPixLabel={{idPixLabel}} /></template>,
+        <template><ParticipationRow @participation={{participation}} @externalIdLabel={{externalIdLabel}} /></template>,
       );
 
       // then
@@ -117,7 +117,7 @@ module('Integration | Component | Campaigns | participation-row', function (hook
   });
 
   module("when editing participant's external id", function (hooks) {
-    const idPixLabel = 'identifiant';
+    const externalIdLabel = 'identifiant';
 
     hooks.beforeEach(async function () {
       // given
@@ -139,7 +139,7 @@ module('Integration | Component | Campaigns | participation-row', function (hook
         <template>
           <ParticipationRow
             @participation={{participation}}
-            @idPixLabel={{idPixLabel}}
+            @externalIdLabel={{externalIdLabel}}
             @updateParticipantExternalId={{updateParticipantExternalId}}
           />
         </template>,
@@ -161,7 +161,7 @@ module('Integration | Component | Campaigns | participation-row', function (hook
         <template>
           <ParticipationRow
             @participation={{participation}}
-            @idPixLabel={{idPixLabel}}
+            @externalIdLabel={{externalIdLabel}}
             @updateParticipantExternalId={{updateParticipantExternalId}}
           />
         </template>,
@@ -188,7 +188,7 @@ module('Integration | Component | Campaigns | participation-row', function (hook
         <template>
           <ParticipationRow
             @participation={{participation}}
-            @idPixLabel={{idPixLabel}}
+            @externalIdLabel={{externalIdLabel}}
             @updateParticipantExternalId={{updateParticipantExternalId}}
           />
         </template>,
@@ -215,7 +215,7 @@ module('Integration | Component | Campaigns | participation-row', function (hook
         <template>
           <ParticipationRow
             @participation={{participation}}
-            @idPixLabel={{idPixLabel}}
+            @externalIdLabel={{externalIdLabel}}
             @updateParticipantExternalId={{updateParticipantExternalId}}
           />
         </template>,
@@ -242,7 +242,7 @@ module('Integration | Component | Campaigns | participation-row', function (hook
         <template>
           <ParticipationRow
             @participation={{participation}}
-            @idPixLabel={{idPixLabel}}
+            @externalIdLabel={{externalIdLabel}}
             @updateParticipantExternalId={{updateParticipantExternalId}}
           />
         </template>,
@@ -270,11 +270,11 @@ module('Integration | Component | Campaigns | participation-row', function (hook
       const participation = EmberObject.create({
         participantExternalId: '123',
       });
-      const idPixLabel = 'identifiant';
+      const externalIdLabel = 'identifiant';
 
       //when
       const screen = await render(
-        <template><ParticipationRow @participation={{participation}} @idPixLabel={{idPixLabel}} /></template>,
+        <template><ParticipationRow @participation={{participation}} @externalIdLabel={{externalIdLabel}} /></template>,
       );
 
       // expect

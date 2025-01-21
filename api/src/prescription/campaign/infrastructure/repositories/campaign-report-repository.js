@@ -62,7 +62,7 @@ const get = async function (id) {
 
   const campaignReport = new CampaignReport({
     ...result,
-    ...{ idPixLabel: externalIdFeature?.params?.label, idPixType: externalIdFeature?.params?.type },
+    ...{ externalIdLabel: externalIdFeature?.params?.label, externalIdType: externalIdFeature?.params?.type },
     id,
   });
 

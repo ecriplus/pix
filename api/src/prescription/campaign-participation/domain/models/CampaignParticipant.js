@@ -138,12 +138,12 @@ class CampaignParticipant {
   }
 
   #isMissingExternalId(externalId) {
-    return this.campaignToStartParticipation.idPixLabel && !externalId;
+    return this.campaignToStartParticipation.externalIdLabel && !externalId;
   }
 
   #isTypeEmailInvalidExternalId(externalId) {
     return (
-      this.campaignToStartParticipation.idPixType === CampaignExternalIdTypes.EMAIL &&
+      this.campaignToStartParticipation.externalIdType === CampaignExternalIdTypes.EMAIL &&
       !emailValidationService.validateEmailSyntax(externalId)
     );
   }
