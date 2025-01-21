@@ -389,36 +389,19 @@
                 {
                   "id": "d85a05a1-0c9d-4ce7-ad25-9333eb3a75c3",
                   "type": "text",
-                  "content": "<p>Lors des discussions en ligne, le joueur peut entrer en contact avec des inconnus, de tous les âges.<br><span aria-hidden=\"true\">⚠️</span> <strong>Il est impossible de savoir avec certitude qui se trouve réellement de l’autre côté de l’écran</strong>.</p>"
+                  "content": "<p>Lors des discussions en ligne, le joueur peut entrer en contact avec des inconnus, de tous les âges.<br><span aria-hidden=\"true\">⚠️</span> <strong>Il est impossible de savoir avec certitude qui se trouve réellement de l’autre côté de l’écran</strong>.</p><p>Des personnes avec de mauvaises intentions peuvent en profiter pour<strong> manipuler les autres joueurs</strong>, proposer des <strong>rencontres physiques dangereuses</strong> ou encore pousser les plus jeunes à <strong>partager des photos ou des informations personnelles</strong>.<br></p><p>Sur les boîtes ou les pages en ligne des jeux, la mention d'interaction entre joueurs peut prendre différentes formes : «&nbsp;<strong>les utilisateurs interagissent</strong>&nbsp;», «&nbsp;<strong>interaction entre les joueurs</strong>&nbsp;», «&nbsp;<strong>interactivité des utilisateurs</strong>&nbsp;»...<br>Il faut donc être attentif lors du choix d'un jeu vidéo. <span aria-hidden=\"true\">🔎</span></p>"
                 },
                 {
                   "id": "9e9b11ab-0ffb-4dc9-917a-f5e336300ce5",
                   "type": "image",
-                  "url": "https://i.imgur.com/pBoKLLG.png",
+                  "url": "https://i.imgur.com/XKyBNac.png",
                   "alt": "",
                   "alternativeText": ""
-                },
-                {
-                  "id": "fcfbd43f-872a-41ee-89bd-7396d2680923",
-                  "type": "text",
-                  "content": "<p>Des personnes avec de mauvaises intentions peuvent en profiter pour<strong> manipuler les autres joueurs</strong>, proposer des <strong>rencontres physiques dangereuses</strong> ou encore pousser les plus jeunes à <strong>partager des photos ou des informations personnelles</strong>.</p>"
                 }
               ]
             },
             {
               "elements": [
-                {
-                  "id": "e700791f-5048-4d50-8329-e311c6b2f3e4",
-                  "type": "text",
-                  "content": "<p>Sur les boîtes ou les pages en ligne des jeux, la mention d'interaction entre joueurs peut prendre différentes formes : «&nbsp;<strong>les utilisateurs interagissent</strong>&nbsp;», «&nbsp;<strong>interaction entre les joueurs</strong>&nbsp;», «&nbsp;<strong>interactivité des utilisateurs</strong>&nbsp;»...<br>Il faut donc être attentif lors du choix d'un jeu vidéo. <span aria-hidden=\"true\">🔎</span></p>"
-                },
-                {
-                  "id": "dd07e939-9aaa-4226-af59-695ac2b31da2",
-                  "type": "image",
-                  "url": "https://i.imgur.com/XKyBNac.png",
-                  "alt": "",
-                  "alternativeText": "<p>Capture d'écran de la fiche d'un jeu vidéo avec la mention&nbsp;«&nbsp;interactivité des utilisateurs&nbsp;»</p>"
-                },
                 {
                   "id": "6b8112ec-45ab-4665-b690-9adf0b6e93ac",
                   "type": "text",
