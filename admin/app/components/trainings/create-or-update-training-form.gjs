@@ -182,7 +182,7 @@ export default class CreateOrUpdateTrainingForm extends Component {
             </PixInput>
             <small>
               <a
-                href="https://1024pix.github.io/pix-images-list/editeurs-cf.html"
+                href="https://1024pix.github.io/pix-images-list/viewer.html?directory=contenu-formatif/editeur/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
