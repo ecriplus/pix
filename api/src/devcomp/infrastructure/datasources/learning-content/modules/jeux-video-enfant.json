@@ -42,7 +42,7 @@
     },
     {
       "grainId": "6e7dad63-ee7e-428b-a25f-08d760b00503",
-      "content": "<p>Franck sait maintenant que Dragon's kingdom, le jeu demandé par Marilou n'est pas adapté à son âge.<br>Après discussion avec elle, il souhaite lui offrir un autre jeu. <span aria-hidden=\"true\">🎁</span> Maintenant que vous connaissez les 3 informations clés à vérifier, aidez Franck à choisir un jeu.</p>"
+      "content": "<p>Franck sait maintenant que Dragon's kingdom, le jeu demandé par Marilou n’est pas adapté à son âge.<br>Aidez-le à choisir un jeu vidéo pour sa fille de 8 ans.</p>"
     },
     {
       "grainId": "4a349720-15b7-4c86-a431-344410332fd5",
@@ -405,7 +405,7 @@
                 {
                   "id": "6b8112ec-45ab-4665-b690-9adf0b6e93ac",
                   "type": "text",
-                  "content": "<p><span aria-hidden=\"true\">⚠️</span><strong> Attention ! </strong><br>Même avec un jeu qui ne permet pas de discuter avec d’autres joueurs, <strong>ce risque n’est pas écarté</strong>. Certaines consoles permettent de discuter en ligne, tout comme les ordinateurs et les smartphones.<br><span aria-hidden=\"true\">⚙️</span> Vous pouvez <strong>bloquer cette possibilité</strong> en paramétrant le <strong>contrôle parental</strong> de chacun de ces appareils.</p><p>Pour accompagner vos enfants lors de leurs premiers échanges en ligne, il est important de leur parler des risques et des usages à autoriser ou non.</p>"
+                  "content": "<p><span aria-hidden=\"true\">⚠️</span><strong> Attention ! </strong><br>Même avec un jeu qui ne permet pas de discuter avec d’autres joueurs, <strong>ce risque n’est pas écarté</strong>. Certaines consoles permettent de discuter en ligne, tout comme les ordinateurs et les smartphones.<br><span aria-hidden=\"true\">⚙️</span> Vous pouvez <strong>bloquer cette possibilité</strong> en paramétrant le <strong>contrôle parental</strong> de chacun de ces appareils.</p><p>Pour accompagner vos enfants lors de leurs premiers échanges en ligne, il est important de discuter avec eux des risques et des usages à autoriser ou non.</p>"
                 }
               ]
             }
@@ -423,7 +423,7 @@
           "element": {
             "id": "5403d509-05f4-4473-ab7c-18e244aa234c",
             "type": "text",
-            "content": "<p>Comme Marilou adore les dragons, Franck a sélectionné plusieurs jeux qui pourraient lui plaire. <span aria-hidden=\"true\">🐲</span><br>Il veut lui offrir un jeu : </p><ul><li> sans contenus inadaptés pour son âge selon la signalétique PEGI,</li><li>sans achats intégrés,</li><li>sans possibilité de discuter avec d'autres joueurs dans le jeu.</li></ul><p>Aidez-le à choisir le plus adapté pour sa fille de 8 ans.<br><span aria-hidden=\"true\">👇</span> Voici les fiches des trois jeux vidéo sur le thème des dragons que Franck a sélectionnés.</p>"
+            "content": "<p>Après discussion avec sa fille, Franck souhaite lui acheter un autre jeu, sur les dragons.  <span aria-hidden=\"true\">🐲</span><br>Il veut lui offrir un jeu : </p><ul><li> sans contenus inadaptés pour son âge selon la signalétique PEGI,</li><li>sans achats intégrés,</li><li>sans possibilité de discuter avec d'autres joueurs dans le jeu.</li></ul><p>Aidez-le à choisir le plus adapté pour sa fille de 8 ans.<br><span aria-hidden=\"true\">👇</span> Voici les fiches des trois jeux vidéo sur le thème des dragons que Franck a sélectionnés.</p>"
           }
         },
         {
