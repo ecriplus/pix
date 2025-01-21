@@ -65,7 +65,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
       });
 
       const expectedToken = 'expected returned token';
-      tokenService.createAccessTokenForSaml.withArgs(user.id).resolves(expectedToken);
+      tokenService.createAccessTokenForSaml.withArgs({ userId: user.id }).resolves(expectedToken);
 
       // when
       const token = await authenticateExternalUser({
@@ -104,7 +104,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
       });
 
       const expectedToken = 'expected returned token';
-      tokenService.createAccessTokenForSaml.withArgs(user.id).resolves(expectedToken);
+      tokenService.createAccessTokenForSaml.withArgs({ userId: user.id }).resolves(expectedToken);
 
       // when
       await authenticateExternalUser({

@@ -84,7 +84,7 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
         organizationLearner,
       );
       userRepository.getBySamlId.resolves(user);
-      tokenService.createAccessTokenForSaml.withArgs(user.id).resolves(token);
+      tokenService.createAccessTokenForSaml.withArgs({ userId: user.id }).resolves(token);
 
       // when
       const result = await createUserAndReconcileToOrganizationLearnerFromExternalUser({
@@ -158,7 +158,7 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
       );
       userRepository.getBySamlId.resolves(null);
       userService.createAndReconcileUserToOrganizationLearner.resolves(user.id);
-      tokenService.createAccessTokenForSaml.withArgs(user.id).resolves(token);
+      tokenService.createAccessTokenForSaml.withArgs({ userId: user.id }).resolves(token);
 
       // when
       const result = await createUserAndReconcileToOrganizationLearnerFromExternalUser({

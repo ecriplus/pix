@@ -53,7 +53,7 @@ async function authenticateExternalUser({
       throw new UserShouldChangePasswordError(undefined, passwordResetToken);
     }
 
-    const token = tokenService.createAccessTokenForSaml(userFromCredentials.id);
+    const token = tokenService.createAccessTokenForSaml({ userId: userFromCredentials.id });
 
     await userLoginRepository.updateLastLoggedAt({ userId: userFromCredentials.id });
 

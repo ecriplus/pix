@@ -40,7 +40,7 @@ async function _getUrlWithAccessToken({
   userLoginRepository,
   authenticationMethodRepository,
 }) {
-  const token = tokenService.createAccessTokenForSaml(user.id);
+  const token = tokenService.createAccessTokenForSaml({ userId: user.id });
   await userLoginRepository.updateLastLoggedAt({ userId: user.id });
   await _saveUserFirstAndLastName({ authenticationMethodRepository, user, externalUser });
   return `/connexion/gar#${encodeURIComponent(token)}`;

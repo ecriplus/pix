@@ -28,7 +28,7 @@ function createAccessTokenFromAnonymousUser(userId) {
   return _createAccessToken({ userId, source: 'pix', expirationDelaySeconds });
 }
 
-function createAccessTokenForSaml(userId) {
+function createAccessTokenForSaml({ userId }) {
   const expirationDelaySeconds = config.saml.accessTokenLifespanMs / 1000;
   return _createAccessToken({ userId, source: 'external', expirationDelaySeconds });
 }

@@ -9,7 +9,7 @@ describe('Integration | Shared | Domain | Services | Token Service', function ()
       const userId = 123;
 
       // when
-      const result = tokenService.createAccessTokenForSaml(userId);
+      const result = tokenService.createAccessTokenForSaml({ userId });
 
       // then
       const token = tokenService.getDecodedToken(result);
