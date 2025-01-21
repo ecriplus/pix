@@ -113,7 +113,7 @@ export default class BadgeForm extends Component {
             <p class="badge-form__information">
               <a
                 class="badge-form__information--link"
-                href="https://1024pix.github.io/pix-images-list/badges.html"
+                href="https://1024pix.github.io/pix-images-list/viewer.html?directory=badges"
                 target="_blank"
                 rel="noopener noreferrer"
               >
