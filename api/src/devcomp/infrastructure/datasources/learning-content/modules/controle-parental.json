@@ -80,10 +80,6 @@
                 "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le contrôle parental ne concerne pas la surveillance de la santé.<br>Regardez à nouveau la conversation et réessayez !</p>"
               }
             ],
-            "feedbacks": {
-              "valid": "<p><br></p>",
-              "invalid": "<p><br></p>"
-            },
             "solution": "1"
           }
         }
@@ -156,10 +152,6 @@
                       "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le suivi de l’activité en ligne permet de suivre l’utilisation de la console. <br>Il ne permet pas de bloquer l’accès à un contenu en fonction de l’âge du fils de Rachel.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<p><br></p>",
-                    "invalid": "<p><br></p>"
-                  },
                   "solution": "2"
                 }
               ]
@@ -192,10 +184,6 @@
                       "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p>\n<p>Le suivi de l’activité en ligne permet de suivre l’utilisation du smartphone. <br>Il ne permet pas de définir des temps de blocage du smartphone du fils de Thibault.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<p><br></p>",
-                    "invalid": "<p><br></p>"
-                  },
                   "solution": "1"
                 }
               ]
@@ -228,10 +216,6 @@
                       "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p>\n<p>Le suivi de l’activité en ligne permet de connaître les applications utilisées le plus souvent par son enfant sur son smartphone.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "<p><br></p>",
-                    "invalid": "<p><br></p>"
-                  },
                   "solution": "3"
                 }
               ]
@@ -428,10 +412,6 @@
                 "feedback": "<p>Avez-vous regardé dans les paramètres de vos appareils ? Il y a souvent un symbole de roue crantée. <span aria-hidden=\"true\">⚙️</span></p>"
               }
             ],
-            "feedbacks": {
-              "valid": "<p><br></p>",
-              "invalid": "<p><br></p>"
-            },
             "solution": "1"
           }
         }
