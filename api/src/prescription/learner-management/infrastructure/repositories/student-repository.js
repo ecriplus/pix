@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { Student } from '../../../../shared/domain/models/Student.js';
 
 const _toStudents = function (results) {

@@ -1,7 +1,7 @@
-import { DomainTransaction } from '../../lib/infrastructure/DomainTransaction.js';
 import { usecases } from '../../src/prescription/learner-management/domain/usecases/index.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
+import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
 
 export class DeleteOrganizationLearnersFromOrganizationScript extends Script {
   constructor() {

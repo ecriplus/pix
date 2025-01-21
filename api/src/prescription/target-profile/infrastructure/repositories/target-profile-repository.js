@@ -1,6 +1,6 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
 import { Badge } from '../../../../evaluation/domain/models/Badge.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { ObjectValidationError } from '../../../../shared/domain/errors.js';
 import { TargetProfile } from '../../../../shared/domain/models/index.js';

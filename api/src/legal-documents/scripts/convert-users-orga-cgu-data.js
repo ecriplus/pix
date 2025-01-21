@@ -1,6 +1,6 @@
 import { setTimeout } from 'node:timers/promises';
 
-import { DomainTransaction } from '../../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
 import { Script } from '../../shared/application/scripts/script.js';
 import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
 import { LegalDocumentService } from '../domain/models/LegalDocumentService.js';

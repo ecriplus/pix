@@ -1,9 +1,9 @@
-import { DomainTransaction } from '../../lib/infrastructure/DomainTransaction.js';
 import { removeByOrganizationLearnerIds } from '../../src/prescription/learner-management/infrastructure/repositories/campaign-participation-repository.js';
 import { removeByIds } from '../../src/prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
 import { commaSeparatedNumberParser } from '../../src/shared/application/scripts/parsers.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
+import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
 // Définition du script
 export class DeleteAndAnonymiseOrgnizationLearnerScript extends Script {
   constructor() {

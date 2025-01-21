@@ -2,7 +2,7 @@
 /* eslint-disable import/no-restricted-paths */
 import { PGSQL_FOREIGN_KEY_VIOLATION_ERROR } from '../../../../db/pgsql-errors.js';
 import { createOrganizationsWithTagsAndTargetProfiles } from '../../../../lib/domain/usecases/create-organizations-with-tags-and-target-profiles.js';
-import { DomainTransaction as domainTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction as domainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
 import { ObjectValidationError, OrganizationTagNotFound } from '../../../../src/shared/domain/errors.js';
 import { InvalidInputDataError } from '../../../../src/shared/domain/errors.js';
 import { OrganizationForAdmin } from '../../../../src/shared/domain/models/index.js';

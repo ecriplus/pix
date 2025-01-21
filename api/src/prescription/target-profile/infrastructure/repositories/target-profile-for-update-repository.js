@@ -1,4 +1,4 @@
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 
 const TARGET_PROFILE_TABLE_NAME = 'target-profiles';
 const TARGET_PROFILE_TUBES_TABLE_NAME = 'target-profile_tubes';

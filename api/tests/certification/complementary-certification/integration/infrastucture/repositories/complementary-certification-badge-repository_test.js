@@ -3,8 +3,8 @@ import lodash from 'lodash';
 import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 const { omit } = lodash;
-import { DomainTransaction } from '../../../../../../lib/infrastructure/DomainTransaction.js';
 import * as complementaryCertificationBadgeRepository from '../../../../../../src/certification/complementary-certification/infrastructure/repositories/complementary-certification-badge-repository.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 
 describe('Integration | Infrastructure | Repository | Certification | Complementary-certification | complementary-certification-badge-repository', function () {
   context('#getAllIdsByTargetProfileId', function () {

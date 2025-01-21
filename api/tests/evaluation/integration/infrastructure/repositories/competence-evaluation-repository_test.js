@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
 import { CompetenceEvaluation } from '../../../../../src/evaluation/domain/models/CompetenceEvaluation.js';
 import * as competenceEvaluationRepository from '../../../../../src/evaluation/infrastructure/repositories/competence-evaluation-repository.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';

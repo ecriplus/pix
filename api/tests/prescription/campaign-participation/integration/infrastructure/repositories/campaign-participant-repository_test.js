@@ -1,12 +1,12 @@
 import pick from 'lodash/pick.js';
 
 import { knex } from '../../../../../../db/knex-database-connection.js';
-import { DomainTransaction } from '../../../../../../lib/infrastructure/DomainTransaction.js';
 import { CampaignParticipant } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipant.js';
 import { CampaignToStartParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignToStartParticipation.js';
 import * as campaignParticipantRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participant-repository.js';
 import { CampaignExternalIdTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import {
   AlreadyExistingCampaignParticipationError,
   OrganizationLearnersCouldNotBeSavedError,

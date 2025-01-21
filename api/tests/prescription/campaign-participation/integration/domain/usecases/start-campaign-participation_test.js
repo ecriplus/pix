@@ -1,5 +1,5 @@
-import { DomainTransaction } from '../../../../../../lib/infrastructure/DomainTransaction.js';
 import { usecases } from '../../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
 
 describe('Integration | UseCases | startCampaignParticipation', function () {

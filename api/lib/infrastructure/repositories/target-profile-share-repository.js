@@ -1,4 +1,4 @@
-import { DomainTransaction } from '../DomainTransaction.js';
+import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
 
 const batchAddTargetProfilesToOrganization = async function (organizationTargetProfiles) {
   const knexConn = DomainTransaction.getConnection();

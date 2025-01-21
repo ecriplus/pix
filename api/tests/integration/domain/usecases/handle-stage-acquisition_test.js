@@ -1,6 +1,6 @@
 import { STAGE_ACQUISITIONS_TABLE_NAME } from '../../../../db/migrations/20230721114848_create-stage_acquisitions-table.js';
 import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { DomainTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
 import { databaseBuilder, expect, knex, learningContentBuilder, mockLearningContent } from '../../../test-helper.js';
 

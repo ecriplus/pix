@@ -1,6 +1,5 @@
 import lodash from 'lodash';
 const { each, map, times, pick } = lodash;
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import * as OidcIdentityProviders from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { InvalidOrAlreadyUsedEmailError } from '../../../../../src/identity-access-management/domain/errors.js';
@@ -14,6 +13,7 @@ import { IMPORT_KEY_FIELD } from '../../../../../src/prescription/learner-manage
 import { OrganizationLearnerForAdmin } from '../../../../../src/prescription/learner-management/domain/read-models/OrganizationLearnerForAdmin.js';
 import { config } from '../../../../../src/shared/config.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import {
   AlreadyExistingEntityError,
   AlreadyRegisteredUsernameError,

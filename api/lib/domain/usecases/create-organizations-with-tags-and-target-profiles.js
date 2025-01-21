@@ -1,6 +1,7 @@
 import lodash from 'lodash';
 
 import { PGSQL_FOREIGN_KEY_VIOLATION_ERROR } from '../../../db/pgsql-errors.js';
+import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
 import { InvalidInputDataError } from '../../../src/shared/domain/errors.js';
 import {
   DomainError,
@@ -13,7 +14,6 @@ import * as codeGenerator from '../../../src/shared/domain/services/code-generat
 import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../src/shared/infrastructure/constants.js';
 import { monitoringTools } from '../../../src/shared/infrastructure/monitoring-tools.js';
 import { PromiseUtils } from '../../../src/shared/infrastructure/utils/promise-utils.js';
-import { DomainTransaction } from '../../infrastructure/DomainTransaction.js';
 
 const SEPARATOR = '_';
 

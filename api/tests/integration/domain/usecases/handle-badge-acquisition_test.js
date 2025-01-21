@@ -1,5 +1,5 @@
 import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { DomainTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
 import { databaseBuilder, expect, knex, learningContentBuilder, mockLearningContent } from '../../../test-helper.js';
 

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { AlreadyExistingEntityError } from '../../../../shared/domain/errors.js';
 import { KnowledgeElement } from '../../../../shared/domain/models/KnowledgeElement.js';
 import * as knexUtils from '../../../../shared/infrastructure/utils/knex-utils.js';

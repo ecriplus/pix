@@ -1,5 +1,5 @@
-import { DomainTransaction } from '../../../../../../lib/infrastructure/DomainTransaction.js';
 import { removeByOrganizationLearnerIds } from '../../../../../../src/prescription/learner-management/infrastructure/repositories/campaign-participation-repository.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Organization Learners Management | Campaign Participation', function () {

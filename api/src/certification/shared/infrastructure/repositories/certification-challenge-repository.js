@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import {
   logErrorWithCorrelationIds,
   logInfoWithCorrelationIds,

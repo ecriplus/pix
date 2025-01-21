@@ -1,7 +1,7 @@
 import lodash from 'lodash';
 const { omit } = lodash;
 
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import * as userService from '../../../../../src/shared/domain/services/user-service.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
