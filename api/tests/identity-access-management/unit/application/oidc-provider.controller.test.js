@@ -126,6 +126,8 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
         deserializedPayload: { identityProvider: 'OIDC', authenticationKey: 'abcde' },
         headers: {
           'accept-language': 'fr',
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
         },
         state: {
           locale: 'fr-FR',
@@ -145,6 +147,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
         authenticationKey: 'abcde',
         localeFromCookie: 'fr-FR',
         language: 'fr',
+        audience: 'https://app.pix.fr',
       });
       expect(response.statusCode).to.equal(200);
       expect(response.source).to.deep.equal({

@@ -21,6 +21,7 @@ async function createOidcUser({
   authenticationKey,
   localeFromCookie,
   language,
+  audience,
   authenticationSessionService,
   oidcAuthenticationServiceRegistry,
   authenticationMethodRepository,
@@ -68,7 +69,7 @@ async function createOidcUser({
     authenticationMethodRepository,
   });
 
-  const accessToken = oidcAuthenticationService.createAccessToken({ userId });
+  const accessToken = oidcAuthenticationService.createAccessToken({ userId, audience });
 
   let logoutUrlUUID;
   if (oidcAuthenticationService.shouldCloseSession) {

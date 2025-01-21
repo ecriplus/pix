@@ -61,12 +61,14 @@ async function createUser(request, h, dependencies = { requestResponseUtils }) {
   const { identityProvider, authenticationKey } = request.deserializedPayload;
   const localeFromCookie = request.state?.locale;
   const language = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const origin = getForwardedOrigin(request.headers);
 
   const { accessToken: access_token, logoutUrlUUID: logout_url_uuid } = await usecases.createOidcUser({
     authenticationKey,
     identityProvider,
     localeFromCookie,
     language,
+    audience: origin,
   });
 
   return h.response({ access_token, logout_url_uuid }).code(200);
