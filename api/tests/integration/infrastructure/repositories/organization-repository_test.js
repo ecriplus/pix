@@ -614,12 +614,30 @@ describe('Integration | Repository | Organization', function () {
         databaseBuilder.factory.buildOrganization({ type: 'PRO' });
         databaseBuilder.factory.buildOrganization({ type: 'SUP' });
         databaseBuilder.factory.buildOrganization({ type: 'SCO' });
+        databaseBuilder.factory.buildOrganization({ type: 'SCO-1D' });
         return databaseBuilder.commit();
       });
 
-      it('should return only Organizations matching "type" if given in filters', async function () {
+      it('should return only Organizations matching "type" if given in filters S', async function () {
         // given
         const filter = { type: 'S' };
+        const page = { number: 1, size: 10 };
+        const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 3 };
+
+        // when
+        const { models: matchingOrganizations, pagination } = await organizationRepository.findPaginatedFiltered({
+          filter,
+          page,
+        });
+
+        // then
+        expect(_.map(matchingOrganizations, 'type')).to.have.members(['SCO', 'SCO-1D', 'SUP']);
+        expect(pagination).to.deep.equal(expectedPagination);
+      });
+
+      it('should return only Organizations matching "type" if given in filters SCO', async function () {
+        // given
+        const filter = { type: 'SCO' };
         const page = { number: 1, size: 10 };
         const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 2 };
 
@@ -630,7 +648,7 @@ describe('Integration | Repository | Organization', function () {
         });
 
         // then
-        expect(_.map(matchingOrganizations, 'type')).to.have.members(['SUP', 'SCO']);
+        expect(_.map(matchingOrganizations, 'type')).to.have.members(['SCO', 'SCO-1D']);
         expect(pagination).to.deep.equal(expectedPagination);
       });
     });
