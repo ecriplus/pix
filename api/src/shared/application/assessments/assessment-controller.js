@@ -1,28 +1,29 @@
+/**
+ * @typedef {import('../../infrastructure/repositories/index.js').CertificationEvaluationRepository} CertificationEvaluationRepository
+ */
 import { Serializer as JSONAPISerializer } from 'jsonapi-serializer';
 
 import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { usecases as certificationEvaluationUsecases } from '../../../certification/evaluation/domain/usecases/index.js';
 import * as certificationVersionRepository from '../../../certification/results/infrastructure/repositories/certification-version-repository.js';
 import { usecases as certificationUsecases } from '../../../certification/session-management/domain/usecases/index.js';
-import { AlgorithmEngineVersion } from '../../../certification/shared/domain/models/AlgorithmEngineVersion.js';
-import * as certificationChallengeRepository from '../../../certification/shared/infrastructure/repositories/certification-challenge-repository.js';
 import { usecases as devcompUsecases } from '../../../devcomp/domain/usecases/index.js';
 import { Answer } from '../../../evaluation/domain/models/Answer.js';
 import { ValidatorAlwaysOK } from '../../../evaluation/domain/models/ValidatorAlwaysOK.js';
 import * as competenceEvaluationSerializer from '../../../evaluation/infrastructure/serializers/jsonapi/competence-evaluation-serializer.js';
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
-import {
-  extractLocaleFromRequest,
-  extractUserIdFromRequest,
-} from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { config } from '../../config.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { AssessmentEndedError } from '../../domain/errors.js';
 import { Examiner } from '../../domain/models/Examiner.js';
 import * as assessmentRepository from '../../infrastructure/repositories/assessment-repository.js';
+import { repositories } from '../../infrastructure/repositories/index.js';
 import * as assessmentSerializer from '../../infrastructure/serializers/jsonapi/assessment-serializer.js';
 import * as challengeSerializer from '../../infrastructure/serializers/jsonapi/challenge-serializer.js';
 import { logger } from '../../infrastructure/utils/logger.js';
+import {
+  extractLocaleFromRequest,
+  extractUserIdFromRequest,
+} from '../../infrastructure/utils/request-response-utils.js';
 
 const save = async function (request, h, dependencies = { assessmentRepository }) {
   const assessment = assessmentSerializer.deserialize(request.payload);
@@ -60,8 +61,8 @@ const getNextChallenge = async function (
   dependencies = {
     usecases,
     assessmentRepository,
-    certificationChallengeRepository,
     certificationVersionRepository,
+    repositories,
   },
 ) {
   const assessmentId = request.params.id;
@@ -74,11 +75,7 @@ const getNextChallenge = async function (
   logger.trace(logContext, 'tracing assessmentController.getNextChallenge()');
 
   try {
-    const assessment = await dependencies.assessmentRepository.get(assessmentId);
-    logContext.assessmentType = assessment.type;
-    logger.trace(logContext, 'assessment loaded');
-
-    const challenge = await _getChallenge(assessment, request, dependencies);
+    const challenge = await _getChallenge(assessmentId, request, dependencies);
     logContext.challenge = challenge;
     logger.trace(logContext, 'replying with challenge');
 
@@ -174,7 +171,24 @@ const assessmentController = {
 
 export { assessmentController };
 
-async function _getChallenge(assessment, request, dependencies) {
+/**
+ * @param {Object} dependencies
+ * @param {Object} dependencies.repositories
+ * @param {CertificationEvaluationRepository} dependencies.repositories.certificationEvaluationRepository
+ * @param {AssessmentRepository} dependencies.assessmentRepository
+ */
+async function _getChallenge(assessmentId, request, dependencies) {
+  const assessment = await dependencies.assessmentRepository.get(assessmentId);
+
+  if (assessment.isCertification()) {
+    const locale = extractLocaleFromRequest(request);
+
+    return dependencies.repositories.certificationEvaluationRepository.selectNextCertificationChallenge({
+      assessmentId,
+      locale,
+    });
+  }
+
   if (assessment.isStarted()) {
     await dependencies.assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
   }
@@ -197,18 +211,6 @@ async function _getChallengeByAssessmentType({ assessment, request, dependencies
 
   if (assessment.isPreview()) {
     return dependencies.usecases.getNextChallengeForPreview({});
-  }
-
-  if (assessment.isCertification()) {
-    const certificationCourseVersion = await dependencies.certificationVersionRepository.getByCertificationCourseId({
-      certificationCourseId: assessment.certificationCourseId,
-    });
-
-    if (AlgorithmEngineVersion.isV3(certificationCourseVersion)) {
-      return certificationEvaluationUsecases.getNextChallenge({ assessment, locale });
-    } else {
-      return certificationEvaluationUsecases.getNextChallengeForV2Certification({ assessment, locale });
-    }
   }
 
   if (assessment.isDemo()) {

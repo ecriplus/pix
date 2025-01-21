@@ -57,6 +57,7 @@ const getNextChallenge = async function ({
   const alreadyAnsweredChallengeIds = allAnswers.map(({ challengeId }) => challengeId);
 
   const excludedChallengeIds = [...alreadyAnsweredChallengeIds, ...validatedLiveAlertChallengeIds];
+
   const lastNonAnsweredCertificationChallenge =
     await sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3(
       assessment.certificationCourseId,
@@ -70,15 +71,8 @@ const getNextChallenge = async function ({
   const activeFlashCompatibleChallenges = await challengeRepository.findActiveFlashCompatible({ locale });
 
   const alreadyAnsweredChallenges = await challengeRepository.getMany(alreadyAnsweredChallengeIds);
-  const challenges = [...new Set([...alreadyAnsweredChallenges, ...activeFlashCompatibleChallenges])];
-  const algorithmConfiguration = await flashAlgorithmConfigurationRepository.getMostRecentBeforeDate(
-    certificationCourse.getStartDate(),
-  );
 
-  const assessmentAlgorithm = new FlashAssessmentAlgorithm({
-    flashAlgorithmImplementation: flashAlgorithmService,
-    configuration: algorithmConfiguration,
-  });
+  const challenges = [...new Set([...alreadyAnsweredChallenges, ...activeFlashCompatibleChallenges])];
 
   const challengesWithoutSkillsWithAValidatedLiveAlert = _excludeChallengesWithASkillWithAValidatedLiveAlert({
     validatedLiveAlertChallengeIds,
@@ -95,6 +89,14 @@ const getNextChallenge = async function ({
       : `Candidate does need any adjustment, all ${challengesWithoutSkillsWithAValidatedLiveAlert.length} have been selected`,
   );
 
+  const algorithmConfiguration = await flashAlgorithmConfigurationRepository.getMostRecentBeforeDate(
+    certificationCourse.getStartDate(),
+  );
+
+  const assessmentAlgorithm = new FlashAssessmentAlgorithm({
+    flashAlgorithmImplementation: flashAlgorithmService,
+    configuration: algorithmConfiguration,
+  });
   const possibleChallenges = assessmentAlgorithm.getPossibleNextChallenges({
     assessmentAnswers: allAnswers,
     challenges: challengesForCandidate,
