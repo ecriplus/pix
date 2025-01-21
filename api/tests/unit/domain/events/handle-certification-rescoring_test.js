@@ -1,4 +1,3 @@
-import { _forTestOnly } from '../../../../lib/domain/events/index.js';
 import { ChallengeDeneutralized } from '../../../../src/certification/evaluation/domain/events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
 import { CertificationCourseRejected } from '../../../../src/certification/session-management/domain/events/CertificationCourseRejected.js';
@@ -7,6 +6,7 @@ import { CertificationAssessment } from '../../../../src/certification/session-m
 import { AlgorithmEngineVersion } from '../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ABORT_REASONS } from '../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { CertificationComputeError } from '../../../../src/shared/domain/errors.js';
+import { _forTestOnly } from '../../../../src/shared/domain/events/index.js';
 import { AssessmentResult, CertificationResult } from '../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect, sinon } from '../../../test-helper.js';
 

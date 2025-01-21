@@ -1,11 +1,11 @@
 import fs from 'node:fs/promises';
 
-import { eventBus } from '../../../../../lib/domain/events/index.js';
 import { scoOrganizationManagementController } from '../../../../../src/prescription/learner-management/application/sco-organization-management-controller.js';
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { OrganizationLearnerParser } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-parser.js';
 import { ApplicationTransaction } from '../../../../../src/prescription/shared/infrastructure/ApplicationTransaction.js';
 import { FileValidationError } from '../../../../../src/shared/domain/errors.js';
+import { eventBus } from '../../../../../src/shared/domain/events/index.js';
 import { catchErr, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | Organizations | organization-controller', function () {
