@@ -3,6 +3,7 @@ import { buildBlockedUsers } from './build-blocked-users.js';
 import { buildCertificationCenters } from './build-certification-centers.js';
 import { buildOidcProviders } from './build-oidc-providers.js';
 import { buildOrganizationUsers } from './build-organization-users.js';
+import { buildOrganizations } from './build-organizations.js';
 import { buildPixAdminRoles } from './build-pix-admin-roles.js';
 import { buildResetPasswordUsers } from './build-reset-password-users.js';
 import { buildScoOrganizationLearners } from './build-sco-organization-learners.js';
@@ -20,6 +21,7 @@ async function teamAccesDataBuilder(databaseBuilder) {
   buildScoOrganizationLearners(databaseBuilder);
   await buildCertificationCenters(databaseBuilder);
   await buildOidcProviders(databaseBuilder);
+  await buildOrganizations(databaseBuilder);
 }
 
 export { teamAccesDataBuilder };
