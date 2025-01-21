@@ -1,4 +1,4 @@
-import { CertificationRescoringCompleted } from '../../../../lib/domain/events/CertificationRescoringCompleted.js';
+import { CertificationRescoringCompleted } from '../../../../src/shared/domain/events/CertificationRescoringCompleted.js';
 import { expect } from '../../../test-helper.js';
 import { buildEventDispatcherAndHandlersForTest } from '../../../tooling/events/event-dispatcher-builder.js';
 

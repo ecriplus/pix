@@ -1,8 +1,8 @@
-import { CertificationCourseUnrejected } from '../../../../../lib/domain/events/CertificationCourseUnrejected.js';
 import { certificationCourseController } from '../../../../../src/certification/session-management/application/certification-course-controller.js';
 import { CertificationCourseRejected } from '../../../../../src/certification/session-management/domain/events/CertificationCourseRejected.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { usecases as certificationSharedUsecases } from '../../../../../src/certification/shared/domain/usecases/index.js';
+import { CertificationCourseUnrejected } from '../../../../../src/shared/domain/events/CertificationCourseUnrejected.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Application | Controller | Certification Course', function () {
