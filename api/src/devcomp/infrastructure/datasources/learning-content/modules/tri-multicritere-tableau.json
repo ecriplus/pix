@@ -126,7 +126,7 @@
                 {
                   "id": "a98472e5-2500-4a1c-99b9-a62cccb0015c",
                   "type": "qcu",
-                  "instruction": "<p>Sarah veut réorganiser le tableau pour obtenir un classement des participants ayant les meilleurs résultats aux épreuves (orientation, fléchettes, quiz). </p><p>Que doit-elle appliquer&#8239;?</p>",
+                  "instruction": "<p> Sarah veut réorganiser le tableau pour obtenir un classement des participants en prenant en compte l’ensemble de leurs résultats (orientation, fléchettes, quiz). </p><p>Que doit-elle appliquer&#8239;?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -256,7 +256,7 @@
           "element": {
             "id": "2ed017f2-4c7e-4f64-b0d9-59cfcd9f3e38",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">👉</span> Appliquez le tri multicritère suivant&nbsp;:</p><ul><li>critère 1&nbsp;: par ordre <strong>décroissant</strong>de<strong> Score aux fléchettes</strong>&nbsp;</li><li>critère 2&nbsp;: par ordre <strong>croissant </strong>de <strong>Réponse au quiz</strong></li></ul>"
+            "content": "<p><span aria-hidden=\"true\">👉</span> Appliquez le tri multicritère suivant&nbsp;:</p><ul><li>critère 1&nbsp;: par ordre <strong>décroissant</strong> de<strong> Score aux fléchettes</strong>&nbsp;</li><li>critère 2&nbsp;: par ordre <strong>croissant </strong>de <strong>Réponse au quiz</strong></li></ul>"
           }
         },
         {
@@ -516,7 +516,7 @@
           "element": {
             "id": "e9ac9d81-41fc-48c2-b74c-7aee31373f39",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">✅</span> On a besoin d’<strong>un tri multicritères sur plusieurs colonnes</strong> quand on doit<strong> cumuler plusieurs critères de tri</strong> (d’abord un premier, critère, puis un second, puis un troisième, etc). <br>✔️Par exemple, quand on a besoin de discriminer des ex æquo sur un premier critère.</p>"
+            "content": "<p><span aria-hidden=\"true\">✅</span> On a besoin d’<strong>un tri multicritères sur plusieurs colonnes</strong> quand on doit<strong> cumuler plusieurs critères de tri</strong> (d’abord un premier critère, puis un second, puis un troisième, etc). <br>✔️Par exemple, quand on a besoin de discriminer des ex æquo sur un premier critère.</p>"
           }
         },
         {
