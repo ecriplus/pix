@@ -7,13 +7,14 @@ describe('Integration | Shared | Domain | Services | Token Service', function ()
     it('should return a valid json web token', function () {
       // given
       const userId = 123;
+      const audience = 'https://app.pix.fr';
 
       // when
-      const result = tokenService.createAccessTokenForSaml({ userId });
+      const result = tokenService.createAccessTokenForSaml({ userId, audience });
 
       // then
       const token = tokenService.getDecodedToken(result);
-      expect(token).to.include({ source: 'external', user_id: userId });
+      expect(token).to.include({ source: 'external', user_id: userId, aud: audience });
 
       const expirationDelaySeconds = token.exp - token.iat;
       const expectedExpirationDelaySeconds = settings.saml.accessTokenLifespanMs / 1000;
