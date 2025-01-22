@@ -5,7 +5,7 @@ export default function (schema, request) {
   const answers = schema.answers.where({ assessmentId, challengeId });
 
   if (answers.models.length !== 0) {
-    return answers.models.get('firstObject');
+    return answers.models[0];
   }
 
   return { data: null };

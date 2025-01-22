@@ -47,7 +47,7 @@ export default class ChallengeRoute extends Route {
       answer: this.store.queryRecord('answer', { assessmentId: assessment.id, challengeId: challenge.id }),
       currentChallengeNumber,
     }).catch((err) => {
-      const meta = 'errors' in err ? err.errors.get('firstObject').meta : null;
+      const meta = 'errors' in err ? err.errors[0].meta : null;
       if (meta.field === 'authorization') {
         this.router.transitionTo('authenticated');
         return;

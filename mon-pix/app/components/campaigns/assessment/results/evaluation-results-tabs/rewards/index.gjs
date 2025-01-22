@@ -21,7 +21,7 @@ export default class Rewards extends Component {
 
   getFilteredAndSortedBadges(acquisitionStatus) {
     return this.args.badges
-      .toArray()
+      .slice()
       .filter(({ isAcquired }) => isAcquired === acquisitionStatus)
       .sort((a, b) => b.isCertifiable - a.isCertifiable);
   }
