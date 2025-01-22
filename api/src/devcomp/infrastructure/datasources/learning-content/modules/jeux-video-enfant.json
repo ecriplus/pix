@@ -42,7 +42,7 @@
     },
     {
       "grainId": "6e7dad63-ee7e-428b-a25f-08d760b00503",
-      "content": "<p>Franck sait maintenant que Dragon's Kingdom, le jeu demandé par Marilou n’est pas adapté à son âge.<br>Aidez-le à choisir un jeu vidéo pour sa fille de 8 ans.</p>"
+      "content": "<p>Franck sait maintenant que Dragon's Kingdom, le jeu demandé par Marilou n’est pas adapté à son âge.<br>Après discussion avec sa fille de 8 ans, Franck souhaite lui acheter un autre jeu, sur les dragons. <span aria-hidden=\"true\">🐲</span></p>"
     },
     {
       "grainId": "4a349720-15b7-4c86-a431-344410332fd5",
@@ -423,7 +423,7 @@
           "element": {
             "id": "5403d509-05f4-4473-ab7c-18e244aa234c",
             "type": "text",
-            "content": "<p>Après discussion avec sa fille, Franck souhaite lui acheter un autre jeu, sur les dragons.  <span aria-hidden=\"true\">🐲</span><br>Il veut lui offrir un jeu : </p><ul><li> sans contenus inadaptés pour son âge selon la signalétique PEGI,</li><li>sans achats intégrés,</li><li>sans possibilité de discuter avec d'autres joueurs dans le jeu.</li></ul><p><span aria-hidden=\"true\">👇</span> Voici les fiches des trois jeux vidéo sur le thème des dragons que Franck a sélectionnés.</p>"
+            "content": "<p>Il veut lui offrir un jeu : </p><ul><li> sans contenus inadaptés pour son âge selon la signalétique PEGI,</li><li>sans achats intégrés,</li><li>sans possibilité de discuter avec d'autres joueurs dans le jeu.</li></ul><p><span aria-hidden=\"true\">👇</span> Voici les fiches des trois jeux vidéo sur le thème des dragons que Franck a sélectionnés.</p>"
           }
         },
         {
