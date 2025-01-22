@@ -8,6 +8,7 @@ const getSamlAuthenticationRedirectionUrl = async function ({
   authenticationMethodRepository,
   tokenService,
   config,
+  audience,
 }) {
   const { attributeMapping } = config.saml;
   const externalUser = {
@@ -21,6 +22,7 @@ const getSamlAuthenticationRedirectionUrl = async function ({
   if (user) {
     return await _getUrlWithAccessToken({
       user,
+      audience,
       externalUser,
       tokenService,
       userLoginRepository,
@@ -35,12 +37,13 @@ export { getSamlAuthenticationRedirectionUrl };
 
 async function _getUrlWithAccessToken({
   user,
+  audience,
   externalUser,
   tokenService,
   userLoginRepository,
   authenticationMethodRepository,
 }) {
-  const token = tokenService.createAccessTokenForSaml({ userId: user.id });
+  const token = tokenService.createAccessTokenForSaml({ userId: user.id, audience });
   await userLoginRepository.updateLastLoggedAt({ userId: user.id });
   await _saveUserFirstAndLastName({ authenticationMethodRepository, user, externalUser });
   return `/connexion/gar#${encodeURIComponent(token)}`;

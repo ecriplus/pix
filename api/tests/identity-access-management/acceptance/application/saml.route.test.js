@@ -195,6 +195,10 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
       // when
       const firstVisitResponse = await server.inject({
         method: 'POST',
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
         url: '/api/saml/assert',
         payload: {
           SAMLResponse: validSamlResponse.context,
@@ -228,6 +232,10 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
       // when
       const response = await server.inject({
         method: 'POST',
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
         url: '/api/saml/assert',
         payload: {
           SAMLResponse: validSamlResponse.context,
