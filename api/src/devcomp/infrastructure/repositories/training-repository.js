@@ -46,6 +46,7 @@ async function findPaginatedSummaries({ filter, page }) {
     .select(
       'trainings.id',
       'trainings.title',
+      'trainings.internalTitle',
       'trainings.isDisabled',
       knexConn.raw('coalesce("targetProfilesCount", 0) as "targetProfilesCount"'),
     )
@@ -76,6 +77,7 @@ async function findPaginatedSummariesByTargetProfileId({ targetProfileId, page }
     .select(
       'trainings.id',
       'trainings.title',
+      'trainings.internalTitle',
       knexConn.raw('coalesce("targetProfilesCount", 0) as "targetProfilesCount"'),
       'trainings.isDisabled',
     )

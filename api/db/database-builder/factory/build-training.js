@@ -4,6 +4,7 @@ import { databaseBuffer } from '../database-buffer.js';
  * @typedef {{
  *  id: number,
  *  title: string,
+ *  internalTitle: string,
  *  link: string,
  *  type: string,
  *  duration: string,
@@ -18,6 +19,7 @@ import { databaseBuffer } from '../database-buffer.js';
 function buildTraining({
   id = databaseBuffer.getNextId(),
   title = 'title',
+  internalTitle = 'internal title',
   link = 'http://mon-link.com',
   type = 'webinaire',
   duration = '06:00:00',
@@ -31,6 +33,7 @@ function buildTraining({
   const values = {
     id,
     title,
+    internalTitle,
     link,
     type,
     duration,

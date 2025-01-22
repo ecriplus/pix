@@ -141,6 +141,7 @@ describe('Integration | Repository | training-repository', function () {
 
       // then
       expect(result).to.be.instanceOf(TrainingForAdmin);
+      expect(result.internalTitle).to.equal(training.internalTitle);
       expect(result.trainingTriggers).to.have.lengthOf(1);
       expect(result.trainingTriggers[0]).to.be.instanceOf(TrainingTriggerForAdmin);
       expect(result.trainingTriggers[0].id).to.deep.equal(trainingTrigger.id);
