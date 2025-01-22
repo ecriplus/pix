@@ -8,6 +8,8 @@ describe('DeleteOrganizationsScript', function () {
     let organizationForAdminRepository;
     let organizationTagRepository;
     let dataProtectionOfficerRepository;
+    let organizationFeatureRepository;
+    let schoolRepository;
 
     beforeEach(function () {
       script = new DeleteOrganizationsScript();
@@ -15,6 +17,8 @@ describe('DeleteOrganizationsScript', function () {
       organizationForAdminRepository = { deleteById: sinon.stub() };
       organizationTagRepository = { deleteTagsByOrganizationId: sinon.stub() };
       dataProtectionOfficerRepository = { deleteDpoByOrganizationId: sinon.stub() };
+      organizationFeatureRepository = { deleteOrganizationFeatureByOrganizationId: sinon.stub() };
+      schoolRepository = { deleteByOrganizationId: sinon.stub() };
     });
 
     it('handles data correctly', async function () {
@@ -27,6 +31,8 @@ describe('DeleteOrganizationsScript', function () {
           organizationForAdminRepository,
           organizationTagRepository,
           dataProtectionOfficerRepository,
+          organizationFeatureRepository,
+          schoolRepository,
         },
       });
       expect(organizationForAdminRepository.deleteById.calledWith(1)).to.be.true;
@@ -35,6 +41,10 @@ describe('DeleteOrganizationsScript', function () {
       expect(organizationTagRepository.deleteTagsByOrganizationId.calledWith(2)).to.be.true;
       expect(dataProtectionOfficerRepository.deleteDpoByOrganizationId.calledWith(1)).to.be.true;
       expect(dataProtectionOfficerRepository.deleteDpoByOrganizationId.calledWith(2)).to.be.true;
+      expect(organizationFeatureRepository.deleteOrganizationFeatureByOrganizationId.calledWith(1)).to.be.true;
+      expect(organizationFeatureRepository.deleteOrganizationFeatureByOrganizationId.calledWith(2)).to.be.true;
+      expect(schoolRepository.deleteByOrganizationId.calledWith({ organizationId: 1 })).to.be.true;
+      expect(schoolRepository.deleteByOrganizationId.calledWith({ organizationId: 2 })).to.be.true;
     });
   });
 });

@@ -1,9 +1,11 @@
 import Joi from 'joi';
 
+import * as schoolRepository from '../../school/infrastructure/repositories/school-repository.js';
 import { csvFileParser } from '../../shared/application/scripts/parsers.js';
 import { Script } from '../../shared/application/scripts/script.js';
 import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
 import * as dataProtectionOfficerRepository from '../infrastructure/repositories/data-protection-officer.repository.js';
+import * as organizationFeatureRepository from '../infrastructure/repositories/organization-feature-repository.js';
 import { organizationForAdminRepository } from '../infrastructure/repositories/organization-for-admin.repository.js';
 import * as organizationTagRepository from '../infrastructure/repositories/organization-tag.repository.js';
 
@@ -34,7 +36,13 @@ export class DeleteOrganizationsScript extends Script {
   async handle({
     options,
     logger,
-    dependencies = { organizationForAdminRepository, organizationTagRepository, dataProtectionOfficerRepository },
+    dependencies = {
+      organizationForAdminRepository,
+      organizationTagRepository,
+      dataProtectionOfficerRepository,
+      organizationFeatureRepository,
+      schoolRepository,
+    },
   }) {
     const { file, dryRun } = options;
 
@@ -47,6 +55,10 @@ export class DeleteOrganizationsScript extends Script {
         await dependencies.dataProtectionOfficerRepository.deleteDpoByOrganizationId(organizationId);
         // delete organization tags via organization-tags.repository
         await dependencies.organizationTagRepository.deleteTagsByOrganizationId(organizationId);
+        // delete organization features via organization-feature.repository
+        await dependencies.organizationFeatureRepository.deleteOrganizationFeatureByOrganizationId(organizationId);
+        // delete school via school.repository
+        await dependencies.schoolRepository.deleteByOrganizationId({ organizationId: organizationId });
         // delete organizationvia organization-for-admin.repository
         await dependencies.organizationForAdminRepository.deleteById(organizationId);
       }
