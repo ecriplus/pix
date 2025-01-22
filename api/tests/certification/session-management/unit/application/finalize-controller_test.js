@@ -1,6 +1,6 @@
-import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { finalizeController } from '../../../../../src/certification/session-management/application/finalize-controller.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import * as events from '../../../../../src/shared/domain/events/index.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
