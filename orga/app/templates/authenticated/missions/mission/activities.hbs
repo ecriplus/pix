@@ -12,14 +12,16 @@
     @selected={{this.divisions}}
     @onSelect={{this.onSelectDivisions}}
   />
-  <Ui::SearchInputFilter
-    @field="name"
-    @value={{this.name}}
+  <PixSearchInput
+    @id="name"
+    value={{this.name}}
+    @screenReaderOnly={{true}}
     @placeholder={{t "common.filters.fullname.placeholder"}}
-    @label={{t "common.filters.fullname.label"}}
+    @debounceTimeInMs={{this.debounceTime}}
     @triggerFiltering={{this.onFilter}}
-  />
-
+  >
+    <:label>{{t "common.filters.fullname.label"}}</:label>
+  </PixSearchInput>
   <PixMultiSelect
     @options={{this.statusOptions}}
     @values={{this.statuses}}

@@ -1,12 +1,15 @@
 import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
+import PixSearchInput from '@1024pix/pix-ui/components/pix-search-input';
 import { get } from '@ember/helper';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
+import ENV from 'pix-orga/config/environment';
 
 import { getColumnName } from '../../helpers/import-format.js';
 import UiMultiSelectFilter from '../ui/multi-select-filter';
-import UiSearchInputFilter from '../ui/search-input-filter';
+
+const debounceTime = ENV.pagination.debounce;
 
 export default class LearnerFilters extends Component {
   @service intl;
@@ -51,14 +54,16 @@ export default class LearnerFilters extends Component {
       @onClearFilters={{@onResetFilter}}
       @isClearFilterButtonDisabled={{this.isClearFiltersButtonDisabled}}
     >
-      <UiSearchInputFilter
-        @field="fullName"
-        @value={{@fullName}}
+      <PixSearchInput
+        @id="fullName"
+        value={{@fullName}}
+        @screenReaderOnly={{true}}
         @placeholder={{t "common.filters.fullname.placeholder"}}
-        @label={{t "common.filters.fullname.label"}}
+        @debounceTimeInMs={{debounceTime}}
         @triggerFiltering={{@onTriggerFiltering}}
-      />
-
+      >
+        <:label>{{t "common.filters.fullname.label"}}</:label>
+      </PixSearchInput>
       {{#unless this.currentUser.canAccessMissionsPage}}
         <UiMultiSelectFilter
           @field="certificability"
@@ -72,13 +77,17 @@ export default class LearnerFilters extends Component {
       {{/unless}}
       {{#each @customFilters as |customFilter|}}
         {{#let (t (getColumnName customFilter)) as |columnName|}}
-          <UiSearchInputFilter
-            @field="extraFilters.{{customFilter}}"
-            @value={{get @customFiltersValues customFilter}}
+
+          <PixSearchInput
+            @id="extraFilters.{{customFilter}}"
+            value={{get @customFiltersValues customFilter}}
+            @screenReaderOnly={{true}}
             @placeholder={{columnName}}
-            @label={{columnName}}
+            @debounceTimeInMs={{debounceTime}}
             @triggerFiltering={{@onTriggerFiltering}}
-          />
+          >
+            <:label>{{columnName}}</:label>
+          </PixSearchInput>
         {{/let}}
       {{/each}}
     </PixFilterBanner>

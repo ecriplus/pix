@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import ENV from 'pix-orga/config/environment';
 
 const DEFAULT_PAGE_NUMBER = 1;
 
@@ -25,6 +26,10 @@ export default class MissionActivitiesController extends Controller {
 
   get learnersCount() {
     return this.model.missionLearners.meta.rowCount;
+  }
+
+  get debounceTime() {
+    return ENV.pagination.debounce;
   }
 
   @action
