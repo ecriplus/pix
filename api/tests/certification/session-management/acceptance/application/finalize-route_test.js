@@ -619,7 +619,56 @@ describe('Certification | Session Management | Acceptance | Application | Route 
       });
     });
 
-    // TODO: it('should rollback the finalize session operations when it fails in processAutoJury');
+    describe('When there were no challenges', function () {
+      describe('when session is v3', function () {
+        it('should set the finalized session as publishable', async function () {
+          // given
+          const { report, assessmentId, userId, session, certificationCourseId } =
+            await _createSessionWithoutChallenge();
+          const options = {
+            method: 'PUT',
+            payload: {
+              data: {
+                attributes: {
+                  'examiner-global-comment': null,
+                  'has-incident': false,
+                  'has-joining-issue': true,
+                },
+                included: [
+                  {
+                    id: report.id,
+                    type: 'certification-reports',
+                    attributes: {
+                      'certification-course-id': report.certificationCourseId,
+                      'examiner-comment': 'What a fine lad this one',
+                      'has-seen-end-test-screen': false,
+                      'is-completed': false,
+                      'abort-reason': 'technical',
+                    },
+                  },
+                ],
+              },
+            },
+            headers: {
+              authorization: generateValidRequestAuthorizationHeader(userId),
+            },
+            url: `/api/sessions/${session.id}/finalization`,
+          };
+
+          // when
+          const response = await server.inject(options);
+
+          // then
+          expect(response.statusCode).to.equal(200);
+          const finalizedSession = await knex('finalized-sessions').where({ sessionId: session.id }).first();
+          expect(finalizedSession.isPublishable).to.be.true;
+          const assessmentResult = await knex('assessment-results').where({ assessmentId }).first();
+          expect(assessmentResult.status).to.equal('rejected');
+          const assessment = await knex('assessments').where({ certificationCourseId }).first();
+          expect(assessment.state).to.equal('endedDueToFinalization');
+        });
+      });
+    });
   });
 });
 
@@ -729,4 +778,66 @@ const _createSession = async ({ version = 2 } = {}) => {
     session,
     options,
   };
+};
+
+const _createSessionWithoutChallenge = async () => {
+  const version = 3;
+
+  const learningContent = [
+    {
+      id: 'recArea0',
+      competences: [
+        {
+          id: 'recCompetence0',
+          index: '1.1',
+        },
+      ],
+    },
+  ];
+  const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
+  await mockLearningContent(learningContentObjects);
+
+  const userId = databaseBuilder.factory.buildUser().id;
+  const candidateId = databaseBuilder.factory.buildUser().id;
+  const session = databaseBuilder.factory.buildSession({ version });
+  databaseBuilder.factory.buildFlashAlgorithmConfiguration({
+    createdAt: new Date('2024-01-01'),
+  });
+  databaseBuilder.factory.buildScoringConfiguration({
+    createdByUserId: userId,
+    createdAt: new Date('2024-01-01'),
+  });
+  databaseBuilder.factory.buildCompetenceScoringConfiguration({
+    createdByUserId: userId,
+    createdAt: new Date('2024-01-01'),
+    configuration: [],
+  });
+  databaseBuilder.factory.buildCertificationCenterMembership({
+    userId,
+    certificationCenterId: session.certificationCenterId,
+  });
+  databaseBuilder.factory.buildCertificationCandidate({
+    sessionId: session.id,
+    userId: candidateId,
+    reconciledAt: new Date('2024-01-01'),
+  });
+  const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+    sessionId: session.id,
+    completedAt: null,
+    version,
+    abortReason: 'technical',
+    userId: candidateId,
+    createdAt: new Date('2025-01-01'),
+  }).id;
+  const assessmentId = databaseBuilder.factory.buildAssessment({
+    certificationCourseId,
+    state: Assessment.states.STARTED,
+  }).id;
+  const report = databaseBuilder.factory.buildCertificationReport({
+    sessionId: session.id,
+    certificationCourseId,
+  });
+  await databaseBuilder.commit();
+
+  return { assessmentId, report, userId, session, certificationCourseId };
 };

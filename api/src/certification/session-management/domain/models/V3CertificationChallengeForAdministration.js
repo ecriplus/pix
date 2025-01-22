@@ -23,7 +23,6 @@ export class V3CertificationChallengeForAdministration {
 
   setCompetenceDetails(list) {
     const competence = list.find(({ id }) => id === this.competenceId);
-
     this.competenceName = competence.name;
     this.competenceIndex = competence.index;
   }

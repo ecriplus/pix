@@ -1,5 +1,5 @@
 import * as flash from '../../../../../../../src/certification/flash-certification/domain/services/algorithm-methods/flash.js';
-import { AnswerStatus } from '../../../../../../../src/shared/domain/models/AnswerStatus.js';
+import { AnswerStatus } from '../../../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect } from '../../../../../../test-helper.js';
 
 describe('Integration | Domain | Algorithm-methods | Flash', function () {
@@ -91,12 +91,27 @@ describe('Integration | Domain | Algorithm-methods | Flash', function () {
   });
 
   describe('#getCapacityAndErrorRate', function () {
+    it('should return 0 when there is no challenges', function () {
+      // given
+      const challenges = [];
+
+      // when
+      const result = flash.getCapacityAndErrorRate({ challenges });
+
+      // then
+      expect(result).to.deep.equal({
+        capacity: 0,
+        errorRate: 5,
+      });
+    });
+
     it('should return 0 when there is no answers', function () {
       // given
       const allAnswers = [];
+      const challenges = [];
 
       // when
-      const result = flash.getCapacityAndErrorRate({ allAnswers });
+      const result = flash.getCapacityAndErrorRate({ allAnswers, challenges });
 
       // then
       expect(result).to.deep.equal({

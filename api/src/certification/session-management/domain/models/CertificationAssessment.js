@@ -35,8 +35,9 @@ const certificationAssessmentSchema = Joi.object({
     .integer()
     .valid(...Object.values(AlgorithmEngineVersion))
     .required(),
-  certificationChallenges: Joi.array().min(1).required(),
-  certificationAnswersByDate: Joi.array().min(0).required(),
+  // TODO: Add a minimum number of 1 challenge
+  certificationChallenges: Joi.array().required(),
+  certificationAnswersByDate: Joi.array().required(),
 });
 
 class CertificationAssessment {
@@ -92,7 +93,7 @@ class CertificationAssessment {
   endDueToFinalization() {
     if (this.state === states.STARTED) {
       this.state = states.ENDED_DUE_TO_FINALIZATION;
-      this.endedAt = this._getLastChallenge().createdAt;
+      this.endedAt = this._getLastChallenge()?.createdAt || this.createdAt;
     }
   }
 
@@ -196,7 +197,7 @@ class CertificationAssessment {
   }
 
   get isScoringBlockedDueToComplementaryOnlyChallenges() {
-    return this.isComplementaryOnly;
+    return this.certificationChallenges.length > 0 && this.isComplementaryOnly;
   }
 
   _getLastChallenge() {

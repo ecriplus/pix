@@ -8,7 +8,7 @@ import { CertificationAnswerStatusChangeAttempt } from '../../../../../../src/ce
 import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { NeutralizationAttempt } from '../../../../../../src/certification/session-management/domain/models/NeutralizationAttempt.js';
 import { ObjectValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
+import { AnswerStatus } from '../../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CertificationAssessment', function () {
@@ -24,7 +24,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         completedAt: new Date('2020-01-01'),
         state: CertificationAssessment.states.STARTED,
         version: 2,
-        certificationChallenges: ['challenge'],
+        certificationChallenges: [],
         certificationAnswersByDate: ['answer'],
       };
     });
@@ -88,13 +88,6 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
     it('should throw an ObjectValidationError when version is not valid', function () {
       // when
       expect(() => new CertificationAssessment({ ...validArguments, version: 'glouglou' })).to.throw(
-        ObjectValidationError,
-      );
-    });
-
-    it('should throw an ObjectValidationError when certificationChallenges is not valid', function () {
-      // when
-      expect(() => new CertificationAssessment({ ...validArguments, certificationChallenges: [] })).to.throw(
         ObjectValidationError,
       );
     });
@@ -432,26 +425,47 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         expect(certificationAssessment.state).to.equal(CertificationAssessment.states.ENDED_DUE_TO_FINALIZATION);
       });
 
-      it('should set endedAt date', function () {
-        // given
-        const firstChallengeDate = new Date('2020-12-31T10:00:00Z');
-        const lastChallengeDate = new Date('2020-12-31T10:02:00Z');
-        const certificationChallenge = domainBuilder.buildCertificationChallenge({
-          createdAt: firstChallengeDate,
-        });
-        const lastCertificationChallenge = domainBuilder.buildCertificationChallenge({
-          createdAt: lastChallengeDate,
-        });
-        const certificationAssessment = domainBuilder.buildCertificationAssessment({
-          state: CertificationAssessment.states.STARTED,
-          certificationChallenges: [lastCertificationChallenge, certificationChallenge],
-        });
+      describe('where there are challenges', function () {
+        it('should set the last challenge creation date as certification end date', function () {
+          // given
+          const firstChallengeDate = new Date('2020-12-31T10:00:00Z');
+          const lastChallengeDate = new Date('2020-12-31T10:02:00Z');
+          const certificationChallenge = domainBuilder.buildCertificationChallenge({
+            createdAt: firstChallengeDate,
+          });
+          const lastCertificationChallenge = domainBuilder.buildCertificationChallenge({
+            createdAt: lastChallengeDate,
+          });
+          const certificationAssessment = domainBuilder.buildCertificationAssessment({
+            state: CertificationAssessment.states.STARTED,
+            certificationChallenges: [lastCertificationChallenge, certificationChallenge],
+          });
 
-        // when
-        certificationAssessment.endDueToFinalization();
+          // when
+          certificationAssessment.endDueToFinalization();
 
-        // then
-        expect(certificationAssessment.endedAt).to.deep.equal(lastChallengeDate);
+          // then
+          expect(certificationAssessment.endedAt).to.deep.equal(lastChallengeDate);
+        });
+      });
+
+      describe('when there are no challenges', function () {
+        it('should set the certification course created date as end date', function () {
+          // given
+          const certificationCourseCreatedAt = new Date('2020-01-01');
+
+          const certificationAssessment = domainBuilder.buildCertificationAssessment({
+            state: CertificationAssessment.states.STARTED,
+            createdAt: certificationCourseCreatedAt,
+            certificationChallenges: [],
+          });
+
+          // when
+          certificationAssessment.endDueToFinalization();
+
+          // then
+          expect(certificationAssessment.endedAt).to.deep.equal(certificationCourseCreatedAt);
+        });
       });
     });
 
@@ -1063,6 +1077,20 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
 
       // then
       expect(isScoringBlockedDueToComplementaryOnlyChallenges).to.be.false;
+    });
+
+    it('should return false if there are no challenges', function () {
+      //given
+      const certificationAssessment = domainBuilder.buildCertificationAssessment({
+        certificationChallenges: [],
+        certificationAnswersByDate: [],
+      });
+
+      // when
+      const isComplementaryOnly = certificationAssessment.isScoringBlockedDueToComplementaryOnlyChallenges;
+
+      // then
+      expect(isComplementaryOnly).to.be.false;
     });
   });
 });
