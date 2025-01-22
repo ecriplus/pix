@@ -97,15 +97,19 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
               // when
               await click(screen.getByRole('button', { name: 'Se connecter' }));
 
-              await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), prescritUser.email);
-              await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
+              await fillIn(
+                screen.getByLabelText('Adresse e-mail ou identifiant', { exact: false }),
+                prescritUser.email,
+              );
+              await fillIn(screen.getByLabelText('Mot de passe', { exact: false }), prescritUser.password);
               await click(screen.getByRole('button', { name: 'Se connecter' }));
 
-              await fillIn(screen.getByRole('textbox', { name: 'Prénom' }), prescritUser.firstName);
-              await fillIn(screen.getByRole('textbox', { name: 'Nom' }), prescritUser.lastName);
-              await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
-              await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '12');
-              await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
+              await fillIn(screen.getByLabelText('Prénom'), prescritUser.firstName);
+              await fillIn(screen.getByLabelText('Nom'), prescritUser.lastName);
+              await fillIn(screen.getByLabelText('jour de naissance'), '10');
+              await fillIn(screen.getByLabelText('mois de naissance'), '12');
+              await fillIn(screen.getByLabelText('année de naissance'), '2000');
+
               await click(screen.getByRole('button', { name: t('pages.join.button') }));
               await click(screen.getByRole('button', { name: t('pages.join.sco.associate') }));
 

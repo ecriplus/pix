@@ -55,7 +55,7 @@ module('Integration | Component | account-recovery::backup-email-confirmation-fo
       );
       assert.ok(
         screen.getByRole('textbox', {
-          name: t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email'),
+          name: new RegExp(t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email')),
         }),
       );
 
@@ -95,7 +95,7 @@ module('Integration | Component | account-recovery::backup-email-confirmation-fo
       );
       assert.ok(
         screen.getByRole('textbox', {
-          name: t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email'),
+          name: new RegExp(t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email')),
         }),
       );
       assert.notOk(
@@ -129,7 +129,7 @@ module('Integration | Component | account-recovery::backup-email-confirmation-fo
       // when
       await fillIn(
         screen.getByRole('textbox', {
-          name: t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email'),
+          name: new RegExp(t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email')),
         }),
         email,
       );
@@ -153,7 +153,7 @@ module('Integration | Component | account-recovery::backup-email-confirmation-fo
       // when
       await fillIn(
         screen.getByRole('textbox', {
-          name: t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email'),
+          name: new RegExp(t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email')),
         }),
         email,
       );
@@ -178,7 +178,7 @@ module('Integration | Component | account-recovery::backup-email-confirmation-fo
         hbs`<AccountRecovery::BackupEmailConfirmationForm @firstName={{this.firstName}} @resetErrors={{this.resetErrors}} />`,
       );
       const emailInput = screen.getByRole('textbox', {
-        name: t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email'),
+        name: new RegExp(t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email')),
       });
 
       // when
@@ -202,7 +202,7 @@ module('Integration | Component | account-recovery::backup-email-confirmation-fo
       );
 
       const emailInput = screen.getByRole('textbox', {
-        name: t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email'),
+        name: new RegExp(t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email')),
       });
 
       // when
@@ -234,7 +234,7 @@ module('Integration | Component | account-recovery::backup-email-confirmation-fo
       // when
       await fillIn(
         screen.getByRole('textbox', {
-          name: t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email'),
+          name: new RegExp(t('pages.account-recovery.find-sco-record.backup-email-confirmation.form.email')),
         }),
         email,
       );

@@ -37,6 +37,11 @@ export default class CertificationStarter extends Component {
   }
 
   @action
+  handleAccessCodeInput(event) {
+    this.inputAccessCode = event.target.value;
+  }
+
+  @action
   async submit(e) {
     e.preventDefault();
     this.errorMessage = null;

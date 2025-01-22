@@ -24,18 +24,19 @@
   {{/if}}
 
   <form onSubmit={{this.submitBackupEmailConfirmationForm}}>
-    <FormTextfield
-      @label={{t "pages.account-recovery.find-sco-record.backup-email-confirmation.form.email"}}
-      @textfieldName="email"
-      @inputBindingValue={{this.email}}
-      @onValidate={{this.validateEmail}}
+    <PixInput
+      @id="email"
+      @value={{this.email}}
+      {{on "focusout" this.validateEmail}}
+      {{on "input" this.handleInputChange}}
+      @requiredLabel={{true}}
       @validationStatus={{this.emailValidation.status}}
-      @validationMessage={{this.emailValidation.message}}
-      @autocomplete="off"
-      @require={{true}}
-      @hideRequired={{true}}
-      @aria-describedby="backup-email-confirmation-already-use-error-message backup-email-confirmation-already-associated-error-message"
-    />
+      @errorMessage={{this.emailValidation.message}}
+      autocomplete="off"
+      type="text"
+    >
+      <:label>{{t "pages.account-recovery.find-sco-record.backup-email-confirmation.form.email"}}</:label>
+    </PixInput>
 
     {{#if @showAlreadyRegisteredEmailError}}
       <PixNotificationAlert

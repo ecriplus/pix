@@ -180,7 +180,7 @@ export default class EvaluationResultsHero extends Component {
         {{/if}}
 
         {{#if this.displayQuestResult}}
-          <AttestationResult @results={{@questResults}} @onError={{(fn this.setGlobalError true)}} />
+          <AttestationResult @results={{@questResults}} @onError={{fn this.setGlobalError true}} />
         {{/if}}
 
       </div>

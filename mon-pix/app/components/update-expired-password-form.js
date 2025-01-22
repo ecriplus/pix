@@ -54,6 +54,11 @@ export default class UpdateExpiredPasswordForm extends Component {
   }
 
   @action
+  handleInputChange(event) {
+    this.newPassword = event.target.value;
+  }
+
+  @action
   async handleUpdatePasswordAndAuthenticate(event) {
     event && event.preventDefault();
 

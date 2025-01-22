@@ -21,7 +21,11 @@ module('Integration | Component | account-recovery/confirmation-email-sent', fun
       )
       .exists();
     assert
-      .dom(screen.getByText(t('pages.account-recovery.find-sco-record.send-email-confirmation.send-email')))
+      .dom(
+        screen.getByText(t('pages.account-recovery.find-sco-record.send-email-confirmation.send-email'), {
+          exact: false,
+        }),
+      )
       .exists();
     assert
       .dom(screen.getByText(t('pages.account-recovery.find-sco-record.send-email-confirmation.check-spam')))

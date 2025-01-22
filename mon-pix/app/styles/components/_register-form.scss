@@ -1,9 +1,13 @@
 .register-form {
   display: flex;
   flex-direction: column;
+  gap: var(--pix-spacing-4x);
   align-items: stretch;
   max-width: 360px;
-  padding: 4px;
+
+  & .pix-input {
+    width: 100%;
+  }
 
   &__login-options {
     display: inline-block;
@@ -19,27 +23,6 @@
     font-weight: var(--pix-font-normal);
     font-size: 1rem;
     font-family: $font-roboto;
-  }
-
-  &__cgu-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 449px;
-    margin-top: 10px;
-    margin-bottom: 6px;
-
-    @include device-is('tablet') {
-      margin-top: 15px;
-      margin-bottom: 0;
-      padding: 0;
-    }
-  }
-
-  &__validation-error {
-    color: var(--pix-error-700);
-    font-weight: normal;
   }
 
   .register-button-container {

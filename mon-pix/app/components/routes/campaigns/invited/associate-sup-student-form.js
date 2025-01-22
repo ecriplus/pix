@@ -96,6 +96,36 @@ export default class AssociateSupStudentForm extends Component {
   }
 
   @action
+  handleStudentNumberInput(event) {
+    this.studentNumber = event.target.value;
+  }
+
+  @action
+  handleFirstNameInput(event) {
+    this.firstName = event.target.value;
+  }
+
+  @action
+  handleLastNameInput(event) {
+    this.lastName = event.target.value;
+  }
+
+  @action
+  handleDayOfBirthInput(event) {
+    this.dayOfBirth = event.target.value;
+  }
+
+  @action
+  handleMonthOfBirthInput(event) {
+    this.monthOfBirth = event.target.value;
+  }
+
+  @action
+  handleYearOfBirthInput(event) {
+    this.yearOfBirth = event.target.value;
+  }
+
+  @action
   async submit(event) {
     event.preventDefault();
 

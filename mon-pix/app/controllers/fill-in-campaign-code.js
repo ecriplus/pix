@@ -59,6 +59,11 @@ export default class FillInCampaignCodeController extends Controller {
   }
 
   @action
+  handleCampaignCodeInput(event) {
+    this.campaignCode = event.target.value;
+  }
+
+  @action
   async startCampaign(event) {
     event.preventDefault();
     this.clearErrorMessage();

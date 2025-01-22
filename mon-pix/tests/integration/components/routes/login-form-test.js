@@ -1,4 +1,4 @@
-import { fillByLabel, render } from '@1024pix/ember-testing-library';
+import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click, fillIn } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
@@ -17,8 +17,8 @@ module('Integration | Component | routes/login-form', function (hooks) {
     const screen = await render(hbs`<Routes::LoginForm />`);
 
     // then
-    assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' })).exists();
-    assert.dom(screen.getByLabelText('Mot de passe')).exists();
+    assert.dom(screen.getByRole('textbox', { name: /Adresse e-mail ou identifiant/ })).exists();
+    assert.dom(screen.getByLabelText(/Mot de passe/)).exists();
   });
 
   test('should display an error message when authentication fails', async function (assert) {
@@ -34,8 +34,8 @@ module('Integration | Component | routes/login-form', function (hooks) {
     sessionStub.authenticate.rejects(errorResponse);
 
     const screen = await render(hbs`<Routes::LoginForm />`);
-    await fillByLabel('Adresse e-mail ou identifiant', 'pix@example.net');
-    await fillByLabel('Mot de passe', 'Mauvais mot de passe');
+    await fillIn(screen.getByLabelText(/Adresse e-mail ou identifiant/), 'pix@example.net');
+    await fillIn(screen.getByLabelText(/Mot de passe/), 'Mauvais mot de passe');
 
     //  when
     await click(screen.getByRole('button', { name: t('pages.login-or-register.login-form.button') }));
@@ -47,7 +47,7 @@ module('Integration | Component | routes/login-form', function (hooks) {
   test('should display password when user click', async function (assert) {
     // given
     const screen = await render(hbs`<Routes::LoginForm />`);
-    const passwordInput = screen.getByLabelText('Mot de passe');
+    const passwordInput = screen.getByLabelText(/Mot de passe/);
     await fillIn(passwordInput, 'pix123');
 
     // when
@@ -65,8 +65,8 @@ module('Integration | Component | routes/login-form', function (hooks) {
 
       // when
       const screen = await render(hbs`<Routes::LoginForm />`);
-      await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), 'pix@example.net');
-      await fillIn(screen.getByLabelText('Mot de passe'), 'JeMeLoggue1024');
+      await fillIn(screen.getByRole('textbox', { name: /Adresse e-mail ou identifiant/ }), 'pix@example.net');
+      await fillIn(screen.getByLabelText(/Mot de passe/), 'JeMeLoggue1024');
       await click(screen.getByRole('button', { name: t('pages.login-or-register.login-form.button') }));
 
       // then
@@ -87,8 +87,8 @@ module('Integration | Component | routes/login-form', function (hooks) {
 
       //  when
       const screen = await render(hbs`<Routes::LoginForm />`);
-      await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), 'pix@example.net');
-      await fillIn(screen.getByLabelText('Mot de passe'), 'JeMeLoggue1024');
+      await fillIn(screen.getByRole('textbox', { name: /Adresse e-mail ou identifiant/ }), 'pix@example.net');
+      await fillIn(screen.getByLabelText(/Mot de passe/), 'JeMeLoggue1024');
       await click(screen.getByRole('button', { name: t('pages.login-or-register.login-form.button') }));
 
       // then
@@ -128,8 +128,8 @@ module('Integration | Component | routes/login-form', function (hooks) {
 
       // when
       const screen = await render(hbs`<Routes::LoginForm />`);
-      await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), 'pix@example.net');
-      await fillIn(screen.getByLabelText('Mot de passe'), 'Mauvais mot de passe');
+      await fillIn(screen.getByRole('textbox', { name: /Adresse e-mail ou identifiant/ }), 'pix@example.net');
+      await fillIn(screen.getByLabelText(/Mot de passe/), 'Mauvais mot de passe');
       await click(screen.getByRole('button', { name: t('pages.login-or-register.login-form.button') }));
 
       // then
@@ -178,8 +178,8 @@ module('Integration | Component | routes/login-form', function (hooks) {
         hbs`<Routes::LoginForm @addGarAuthenticationMethodToUser={{this.addGarAuthenticationMethodToUser}} />`,
       );
 
-      await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), 'pix@example.net');
-      await fillIn(screen.getByLabelText('Mot de passe'), 'JeMeLoggue1024');
+      await fillIn(screen.getByRole('textbox', { name: /Adresse e-mail ou identifiant/ }), 'pix@example.net');
+      await fillIn(screen.getByLabelText(/Mot de passe/), 'JeMeLoggue1024');
 
       // when
       await click(screen.getByRole('button', { name: t('pages.login-or-register.login-form.button') }));
@@ -208,8 +208,8 @@ module('Integration | Component | routes/login-form', function (hooks) {
         hbs`<Routes::LoginForm @addGarAuthenticationMethodToUser={{this.addGarAuthenticationMethodToUser}} />`,
       );
 
-      await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), 'pix@example.net');
-      await fillIn(screen.getByLabelText('Mot de passe'), 'JeMeLoggue1024');
+      await fillIn(screen.getByRole('textbox', { name: /Adresse e-mail ou identifiant/ }), 'pix@example.net');
+      await fillIn(screen.getByLabelText(/Mot de passe/), 'JeMeLoggue1024');
 
       // when
       await click(screen.getByRole('button', { name: t('pages.login-or-register.login-form.button') }));
@@ -242,8 +242,8 @@ module('Integration | Component | routes/login-form', function (hooks) {
         hbs`<Routes::LoginForm @addGarAuthenticationMethodToUser={{this.addGarAuthenticationMethodToUser}} />`,
       );
 
-      await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), 'pix@example.net');
-      await fillIn(screen.getByLabelText('Mot de passe'), 'JeMeLoggue1024');
+      await fillIn(screen.getByRole('textbox', { name: /Adresse e-mail ou identifiant/ }), 'pix@example.net');
+      await fillIn(screen.getByLabelText(/Mot de passe/), 'JeMeLoggue1024');
 
       // when
       await click(screen.getByRole('button', { name: t('pages.login-or-register.login-form.button') }));

@@ -56,21 +56,24 @@ module('Integration | Component | student-information-form', function (hooks) {
 
     // when
     await fillIn(
-      screen.getByRole('textbox', {
-        name: t('pages.account-recovery.find-sco-record.student-information.form.ine-ina'),
+      screen.getByLabelText(t('pages.account-recovery.find-sco-record.student-information.form.ine-ina'), {
+        exact: false,
       }),
       ine,
     );
     await fillIn(
-      screen.getByRole('textbox', {
-        name: t('pages.account-recovery.find-sco-record.student-information.form.first-name'),
+      screen.getByLabelText(t('pages.account-recovery.find-sco-record.student-information.form.first-name'), {
+        exact: false,
       }),
       firstName,
     );
     await fillIn(
-      screen.getByRole('textbox', {
-        name: t('pages.account-recovery.find-sco-record.student-information.form.last-name'),
-      }),
+      screen.getByLabelText(
+        new RegExp(t('pages.account-recovery.find-sco-record.student-information.form.last-name')),
+        {
+          exact: false,
+        },
+      ),
       lastName,
     );
     await fillIn(
@@ -113,9 +116,10 @@ module('Integration | Component | student-information-form', function (hooks) {
         // given
         const validIna = '1234567890A';
         const screen = await render(hbs`<AccountRecovery::StudentInformationForm />`);
-        const ineInaInput = screen.getByRole('textbox', {
-          name: t('pages.account-recovery.find-sco-record.student-information.form.ine-ina'),
-        });
+        const ineInaInput = screen.getByLabelText(
+          t('pages.account-recovery.find-sco-record.student-information.form.ine-ina'),
+          { exact: false },
+        );
 
         // when
         await fillIn(ineInaInput, validIna);
@@ -133,9 +137,10 @@ module('Integration | Component | student-information-form', function (hooks) {
         // given
         const validIna = '  1234567890A  ';
         const screen = await render(hbs`<AccountRecovery::StudentInformationForm />`);
-        const ineInaInput = screen.getByRole('textbox', {
-          name: t('pages.account-recovery.find-sco-record.student-information.form.ine-ina'),
-        });
+        const ineInaInput = screen.getByLabelText(
+          t('pages.account-recovery.find-sco-record.student-information.form.ine-ina'),
+          { exact: false },
+        );
 
         // when
         await fillIn(ineInaInput, validIna);
@@ -155,9 +160,10 @@ module('Integration | Component | student-information-form', function (hooks) {
         // given
         const invalidIneIna = '123ABCDEF';
         const screen = await render(hbs`<AccountRecovery::StudentInformationForm />`);
-        const ineInaInput = screen.getByRole('textbox', {
-          name: t('pages.account-recovery.find-sco-record.student-information.form.ine-ina'),
-        });
+        const ineInaInput = screen.getByLabelText(
+          t('pages.account-recovery.find-sco-record.student-information.form.ine-ina'),
+          { exact: false },
+        );
 
         // when
         await fillIn(ineInaInput, invalidIneIna);
@@ -175,9 +181,10 @@ module('Integration | Component | student-information-form', function (hooks) {
         // given
         const emptyIneIna = '     ';
         const screen = await render(hbs`<AccountRecovery::StudentInformationForm />`);
-        const ineInaInput = screen.getByRole('textbox', {
-          name: t('pages.account-recovery.find-sco-record.student-information.form.ine-ina'),
-        });
+        const ineInaInput = screen.getByLabelText(
+          t('pages.account-recovery.find-sco-record.student-information.form.ine-ina'),
+          { exact: false },
+        );
 
         // when
         await fillIn(ineInaInput, emptyIneIna);
@@ -196,9 +203,10 @@ module('Integration | Component | student-information-form', function (hooks) {
       // given
       const emptyLastName = '     ';
       const screen = await render(hbs`<AccountRecovery::StudentInformationForm />`);
-      const lastNameInput = screen.getByRole('textbox', {
-        name: t('pages.account-recovery.find-sco-record.student-information.form.last-name'),
-      });
+      const lastNameInput = screen.getByLabelText(
+        new RegExp(t('pages.account-recovery.find-sco-record.student-information.form.last-name')),
+        { exact: false },
+      );
 
       // when
       await fillIn(lastNameInput, emptyLastName);
@@ -216,9 +224,10 @@ module('Integration | Component | student-information-form', function (hooks) {
       // given
       const emptyFirstName = '     ';
       const screen = await render(hbs`<AccountRecovery::StudentInformationForm />`);
-      const firstNameInput = screen.getByRole('textbox', {
-        name: t('pages.account-recovery.find-sco-record.student-information.form.first-name'),
-      });
+      const firstNameInput = screen.getByLabelText(
+        t('pages.account-recovery.find-sco-record.student-information.form.first-name'),
+        { exact: false },
+      );
 
       // when
       await fillIn(firstNameInput, emptyFirstName);

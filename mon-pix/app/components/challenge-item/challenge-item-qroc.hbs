@@ -1,4 +1,4 @@
-<form {{will-destroy this.removeEmbedAutoEventListener}} {{on "submit" this.validateAnswer}}>
+<form {{on "submit" this.validateAnswer}}>
   {{#if this.showProposal}}
     <div class="rounded-panel__row challenge-response {{if @answer 'challenge-response--locked'}}">
       <h2 class="sr-only">{{t "pages.challenge.parts.answer-input"}}</h2>

@@ -1,4 +1,3 @@
-{{! template-lint-disable no-action no-triple-curlies }}
 <div class="rounded-panel campaign-landing-page__container__start">
   <div class="campaign-landing-page__start__image__container">
     <div class="campaign-landing-page__pix-logo">
@@ -19,7 +18,7 @@
     <div class="campaign-landing-page-start">
       <h1 class="campaign-landing-page-start__title">{{this.titleText}}</h1>
       {{#unless this.session.isAuthenticated}}
-        <h2 class="campaign-landing-page-start__subtitle">{{{this.announcementText}}}</h2>
+        <h2 class="campaign-landing-page-start__subtitle">{{this.announcementText}}</h2>
       {{/unless}}
       <PixButton
         @type="submit"

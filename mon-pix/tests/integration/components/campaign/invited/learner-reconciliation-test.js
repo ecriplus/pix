@@ -199,7 +199,7 @@ module('Integration | Component | Campaign | Invited | learner-reconciliation', 
         hbs`<Campaigns::Invited::LearnerReconciliation
   @reconciliationFields={{this.reconciliationFields}}
   @organizationName={{this.organizationName}}
-  @reconciliationError={{'Une erreur!!!'}}
+  @reconciliationError='Une erreur!!!'
   @mappingFields={{this.mappingFields}}
   @onSubmit={{this.onSubmit}}
 />`,

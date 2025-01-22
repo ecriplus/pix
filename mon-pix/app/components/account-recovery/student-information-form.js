@@ -145,20 +145,41 @@ export default class StudentInformationFormComponent extends Component {
   }
 
   @action
-  handleDayInputChange(event) {
-    const { value } = event.target;
+  handleIneInaInput(event) {
+    this.ineIna = event.target.value;
+  }
 
+  @action
+  handleFirstNameInput(event) {
+    this.firstName = event.target.value;
+  }
+
+  @action
+  handleLastNameInput(event) {
+    this.lastName = event.target.value;
+  }
+
+  @action
+  handleDayInput(event) {
+    const { value } = event.target;
+    this.dayOfBirth = value;
     if (value.length === 2) {
       document.getElementById('monthOfBirth').focus();
     }
   }
 
   @action
-  handleMonthInputChange(event) {
+  handleMonthInput(event) {
     const { value } = event.target;
-
+    this.monthOfBirth = value;
     if (value.length === 2) {
       document.getElementById('yearOfBirth').focus();
     }
+  }
+
+  @action
+  handleYearInput(event) {
+    const { value } = event.target;
+    this.yearOfBirth = value;
   }
 }

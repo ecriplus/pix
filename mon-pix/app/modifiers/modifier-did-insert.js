@@ -1,5 +1,5 @@
 import { modifier } from 'ember-modifier';
 
-export default modifier(function didInsert(htmlElement, [action]) {
-  action(htmlElement);
+export default modifier(function didInsert(htmlElement, [action, ...rest]) {
+  action(htmlElement, ...rest);
 });

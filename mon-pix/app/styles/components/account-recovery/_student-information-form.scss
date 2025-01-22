@@ -18,22 +18,15 @@
   }
 
   &__birthdate-label {
-    margin-bottom: 0;
+    margin-bottom: var(--pix-spacing-2x);
   }
 
   &__birthdate-fields {
     display: flex;
+    gap: var(--pix-spacing-4x);
 
-    .form-textfield__input-field-container {
-      display: block;
-      width: calc(80px + 2 * 2px);
-      height: calc(38px + 2 * 2px);
-      margin-right: 8px;
-
-      & > input {
-        width: 80px;
-        height: 38px;
-      }
+    > .pix-input {
+      width: 100%;
     }
   }
 }

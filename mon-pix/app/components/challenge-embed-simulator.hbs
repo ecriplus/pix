@@ -26,8 +26,7 @@
         class="embed__iframe"
         src="{{@embedDocument.url}}"
         title="{{@embedDocument.title}}"
-        {{did-insert this.configureIframe @embedDocument.url this}}
-        {{did-update this.configureIframe @embedDocument.url this}}
+        {{modifier-did-insert this.configureIframe @embedDocument.url this}}
         frameBorder="0"
         style="{{this.embedDocumentHeightStyle}}"
       ></iframe>

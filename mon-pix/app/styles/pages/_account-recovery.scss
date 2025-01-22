@@ -8,6 +8,16 @@
     padding: 56px 60px;
   }
 
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-4x);
+
+    > .pix-input {
+      width: 100%;
+    }
+  }
+
   &__content {
     position: relative;
     display: flex;

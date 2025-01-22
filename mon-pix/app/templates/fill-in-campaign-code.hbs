@@ -1,4 +1,3 @@
-{{! template-lint-disable no-action require-input-label no-invalid-interactive no-unknown-arguments-for-builtin-components }}
 {{page-title (t "pages.fill-in-campaign-code.title")}}
 
 <div class="pix-communication-banner">
@@ -19,15 +18,16 @@
         <form class="fill-in-campaign-code__form" autocomplete="off">
 
           <div class="fill-in-campaign-code__form-field">
-            <Input
+            <PixInput
               required
               aria-describedby="campaign-code-description"
               id="campaign-code"
               class="input-code"
-              @type="text"
+              type="text"
               @value={{this.campaignCode}}
               maxlength="9"
               {{on "keyup" this.clearErrorMessage}}
+              {{on "input" this.handleCampaignCodeInput}}
             />
           </div>
 
@@ -38,11 +38,7 @@
           {{/if}}
 
           <div class="fill-in-campaign-code__actions">
-            <PixButton
-              @type="submit"
-              class="fill-in-campaign-code__start-button"
-              @triggerAction={{action "startCampaign"}}
-            >
+            <PixButton @type="submit" class="fill-in-campaign-code__start-button" @triggerAction={{this.startCampaign}}>
               {{t "pages.fill-in-campaign-code.start"}}
             </PixButton>
           </div>
@@ -51,7 +47,7 @@
         {{#if this.showWarningMessage}}
           <div class="fill-in-campaign-code__warning">
             <span>{{this.warningMessage}}</span>
-            <a href="#" class="link" {{action this.disconnect}}>
+            <a href="#" class="link" {{on "click" this.disconnect}}>
               {{t "pages.fill-in-campaign-code.warning-message-logout"}}
             </a>
           </div>

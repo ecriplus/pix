@@ -20,6 +20,8 @@ module('Integration | Component | levelup-notif', function (hooks) {
 
   test('displays the new reached level and associated competence name', async function (assert) {
     // given
+    await render(hbs`<LevelupNotif />`);
+
     this.set('newLevel', 2);
     this.set('model', {
       title: "Mener une recherche et une veille d'information",

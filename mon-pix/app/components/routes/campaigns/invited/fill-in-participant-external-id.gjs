@@ -88,7 +88,6 @@ export default class FillInParticipantExternalId extends Component {
   }
 
   <template>
-    {{! template-lint-disable no-action require-input-label no-unknown-arguments-for-builtin-components }}
     <main role="main">
       <PixBackgroundHeader>
         <PixBlock class="fill-in-participant-external-id">
