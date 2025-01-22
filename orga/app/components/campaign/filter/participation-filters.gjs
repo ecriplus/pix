@@ -1,5 +1,6 @@
 import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
 import PixMultiSelect from '@1024pix/pix-ui/components/pix-multi-select';
+import PixSearchInput from '@1024pix/pix-ui/components/pix-search-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import PixStars from '@1024pix/pix-ui/components/pix-stars';
 import { action } from '@ember/object';
@@ -7,10 +8,12 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import ENV from 'pix-orga/config/environment';
 
 import DivisionsFilter from '../../ui/divisions-filter';
 import GroupsFilter from '../../ui/groups-filter';
-import SearchInputFilter from '../../ui/search-input-filter';
+
+const debounceTime = ENV.pagination.debounce;
 
 export default class ParticipationFilters extends Component {
   @service intl;
@@ -188,13 +191,16 @@ export default class ParticipationFilters extends Component {
           <GroupsFilter @campaign={{@campaign}} @onSelect={{this.onSelectGroup}} @selectedGroups={{@selectedGroups}} />
         {{/if}}
         {{#if this.displaySearchFilter}}
-          <SearchInputFilter
-            @field="search"
-            @value={{@searchFilter}}
+          <PixSearchInput
+            @id="search"
+            value={{@searchFilter}}
+            @screenReaderOnly={{true}}
             @placeholder={{t "common.filters.fullname.placeholder"}}
-            @label={{t "common.filters.fullname.label"}}
+            @debounceTimeInMs={{debounceTime}}
             @triggerFiltering={{@onFilter}}
-          />
+          >
+            <:label>{{t "common.filters.fullname.label"}}</:label>
+          </PixSearchInput>
         {{/if}}
         {{#if this.displayStagesFilter}}
           <PixMultiSelect

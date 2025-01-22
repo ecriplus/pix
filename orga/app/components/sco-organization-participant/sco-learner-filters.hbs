@@ -7,13 +7,17 @@
   @onClearFilters={{@onResetFilter}}
   @isClearFilterButtonDisabled={{this.isClearFiltersButtonDisabled}}
 >
-  <Ui::SearchInputFilter
-    @field="search"
-    @value={{@searchFilter}}
+
+  <PixSearchInput
+    @id="search"
+    value={{@searchFilter}}
+    @screenReaderOnly={{true}}
     @placeholder={{t "common.filters.fullname.placeholder"}}
-    @label={{t "common.filters.fullname.label"}}
+    @debounceTimeInMs={{this.debounceTime}}
     @triggerFiltering={{@onFilter}}
-  />
+  >
+    <:label>{{t "common.filters.fullname.label"}}</:label>
+  </PixSearchInput>
 
   <Ui::MultiSelectFilter
     @field="divisions"

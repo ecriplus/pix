@@ -7,20 +7,26 @@
   @onClearFilters={{@onResetFilter}}
   @isClearFilterButtonDisabled={{this.isClearFiltersButtonDisabled}}
 >
-  <Ui::SearchInputFilter
-    @field="studentNumber"
-    @value={{@studentNumberFilter}}
+  <PixSearchInput
+    @id="studentNumber"
+    value={{@studentNumberFilter}}
+    @screenReaderOnly={{true}}
     @placeholder={{t "pages.sup-organization-participants.filter.student-number.placeholder"}}
-    @label={{t "pages.sup-organization-participants.filter.student-number.label"}}
+    @debounceTimeInMs={{this.debounceTime}}
     @triggerFiltering={{@onFilter}}
-  />
-  <Ui::SearchInputFilter
-    @field="search"
-    @value={{@searchFilter}}
+  >
+    <:label>{{t "pages.sup-organization-participants.filter.student-number.label"}}</:label>
+  </PixSearchInput>
+  <PixSearchInput
+    @id="search"
+    value={{@searchFilter}}
+    @screenReaderOnly={{true}}
     @placeholder={{t "common.filters.fullname.placeholder"}}
-    @label={{t "common.filters.fullname.label"}}
+    @debounceTimeInMs={{this.debounceTime}}
     @triggerFiltering={{@onFilter}}
-  />
+  >
+    <:label>{{t "common.filters.fullname.label"}}</:label>
+  </PixSearchInput>
   <Ui::MultiSelectFilter
     @field="groups"
     @label={{t "pages.sup-organization-participants.filter.group.label"}}
