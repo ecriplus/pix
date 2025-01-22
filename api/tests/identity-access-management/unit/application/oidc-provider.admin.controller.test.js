@@ -162,6 +162,10 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
         getOidcProviderServiceByCode: sinon.stub(),
       };
       const request = {
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'admin.pix.fr',
+        },
         deserializedPayload: {
           identityProvider: 'OIDC',
           authenticationKey: '123abc',

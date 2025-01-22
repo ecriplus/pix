@@ -13,6 +13,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
     authenticationSessionService,
     oidcAuthenticationService;
   const identityProvider = 'genericOidcProviderCode';
+  const audience = 'https://admin.pix.fr';
 
   beforeEach(function () {
     authenticationMethodRepository = { create: sinon.stub(), findOneByUserIdAndIdentityProvider: sinon.stub() };
@@ -45,6 +46,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
     await reconcileOidcUserForAdmin({
       email,
       authenticationKey: 'authenticationKey',
+      audience,
       oidcAuthenticationService,
       authenticationSessionService,
       authenticationMethodRepository,
@@ -77,6 +79,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       email,
       identityProvider,
       authenticationKey: 'authenticationKey',
+      audience,
       oidcAuthenticationService,
       authenticationSessionService,
       authenticationMethodRepository,
@@ -109,11 +112,12 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         firstName: 'Anne',
       }),
     );
-    oidcAuthenticationService.createAccessToken.withArgs({ userId }).returns('accessToken');
+    oidcAuthenticationService.createAccessToken.withArgs({ userId, audience }).returns('accessToken');
 
     // when
     const result = await reconcileOidcUserForAdmin({
       authenticationKey: 'authenticationKey',
+      audience,
       oidcAuthenticationService,
       authenticationSessionService,
       authenticationMethodRepository,
@@ -122,7 +126,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
     });
 
     // then
-    expect(oidcAuthenticationService.createAccessToken).to.be.calledOnceWith({ userId });
+    expect(oidcAuthenticationService.createAccessToken).to.be.calledOnceWith({ userId, audience });
     expect(userLoginRepository.updateLastLoggedAt).to.be.calledOnceWith({ userId });
     expect(result).to.equal('accessToken');
   });
@@ -135,6 +139,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       // when
       const error = await catchErr(reconcileOidcUserForAdmin)({
         authenticationKey: 'authenticationKey',
+        audience,
         oidcAuthenticationService,
         authenticationSessionService,
         authenticationMethodRepository,
@@ -166,6 +171,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         authenticationKey: 'authenticationKey',
         email: 'anne@example.net',
         identityProvider: 'genericOidcProviderCode',
+        audience,
         oidcAuthenticationService,
         authenticationSessionService,
         authenticationMethodRepository,

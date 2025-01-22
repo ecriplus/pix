@@ -116,6 +116,10 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
       const response = await server.inject({
         method: 'POST',
         url: `/api/admin/oidc/user/reconcile`,
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'admin.pix.fr',
+        },
         payload: {
           data: {
             attributes: {
