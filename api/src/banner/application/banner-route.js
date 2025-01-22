@@ -8,9 +8,7 @@ const register = async function (server) {
       options: {
         auth: false,
         handler: bannerController.getInformationBanner,
-        cache: {
-          expiresIn: 30 * 1000,
-        },
+        cache: false,
       },
     },
   ]);
