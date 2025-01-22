@@ -21,7 +21,7 @@
       "grainId": "f242e81e-b182-44a1-a668-557f26b5ff8b"
     },
     {
-      "content": "<p>Vous l'avez remarqué, en lisant seulement le titre d’un article, c’est très difficile de savoir si une information est vraie ou fausse.&nbsp;<span aria-hidden=\"true\">🤔</span></p><p>Et parfois, ce ne sont même pas des informations ! On vous explique tout dans la vidéo suivante.<span aria-hidden=\"true\">&nbsp;📺</span></p></p>",
+      "content": "<p>Vous l'avez remarqué, en lisant seulement le titre d’un article, c’est très difficile de savoir si une information est vraie ou fausse.&nbsp;<span aria-hidden=\"true\">🤔</span></p><p>Et parfois, ce ne sont même pas des informations ! On vous explique tout dans la vidéo suivante.<span aria-hidden=\"true\">&nbsp;📺</span></p>",
       "grainId": "eb83569f-2e37-49ed-aa6f-31c420b673b9"
     },
     {
@@ -436,7 +436,7 @@
                 {
                   "id": "613bd45d-8e88-4ca5-bfa0-368be2336027",
                   "type": "text",
-                  "content": "<h3><span aria-hidden=\"true\">🔎</span> C'est l'heure d'utiliser le « Qui ? Quand ? D'où ? »</i></h3><p>Dans les exemples suivants, les informations publiées sont sûrement fausses.<br>En effet, une des réponses au « Qui ? Quand ? D'où ? » présente un problème.<br>Trouvez dans chaque exemple où se situe ce problème."
+                  "content": "<h3><span aria-hidden=\"true\">🔎</span> C'est l'heure d'utiliser le « Qui ? Quand ? D'où ? »</h3><p>Dans les exemples suivants, les informations publiées sont sûrement fausses.<br>En effet, une des réponses au « Qui ? Quand ? D'où ? » présente un problème.<br>Trouvez dans chaque exemple où se situe ce problème.</p>"
                 }
               ]
             },
