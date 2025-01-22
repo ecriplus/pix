@@ -6,16 +6,27 @@ import { logger } from './infrastructure/utils/logger.js';
 
 class PixOpenApiBaseDefinition {
   constructor() {
+    /**
+     * External API endpoint for the swagger.json
+     * @type {string}
+     * @public
+     */
+    this.endpoint = '/api';
+
+    /**
+     * Swagger configuration that builds the swagger.json and Swagger UI endpoints
+     * @type {Object}
+     * @public
+     */
     this.swaggerConfiguration = {
       OAS: 'v3.0',
-      basePath: '/api',
       routeTag: 'api',
       info: {
         version: packageJSON.version,
       },
       jsonPath: '/swagger.json',
-      documentationPath: '/documentation',
       swaggerUIPath: '/documentation/swaggerui/',
+      routesBasePath: '/documentation/swaggerui/',
       uiOptions: {
         url: 'swagger.json',
       },
@@ -36,6 +47,7 @@ class PixOpenApiBaseDefinition {
 class AuthorizationServer extends PixOpenApiBaseDefinition {
   constructor() {
     super();
+    this.endpoint = '/authorization-server';
     this.swaggerConfiguration.info.title = 'Welcome to the Pix Authorization server';
     this.swaggerConfiguration.routeTag = 'authorization-server';
   }
@@ -44,6 +56,7 @@ class AuthorizationServer extends PixOpenApiBaseDefinition {
 class LivretScolaire extends PixOpenApiBaseDefinition {
   constructor() {
     super();
+    this.endpoint = '/livret-scolaire';
     this.swaggerConfiguration.info.title = 'Welcome to the Pix LSU/LSL Open Api';
     this.swaggerConfiguration.routeTag = 'livret-scolaire';
   }
@@ -52,6 +65,7 @@ class LivretScolaire extends PixOpenApiBaseDefinition {
 class PoleEmploi extends PixOpenApiBaseDefinition {
   constructor() {
     super();
+    this.endpoint = '/pole-emploi';
     this.swaggerConfiguration.info.title = 'Pix Pôle emploi Open Api';
     this.swaggerConfiguration.routeTag = 'pole-emploi';
   }
@@ -60,28 +74,34 @@ class PoleEmploi extends PixOpenApiBaseDefinition {
 class Parcoursup extends PixOpenApiBaseDefinition {
   constructor() {
     super();
+    this.endpoint = '/api/application/parcoursup';
+    this.swaggerConfiguration.basePath = '/api/application';
     this.swaggerConfiguration.info.title = 'Pix Parcoursup Open Api';
     this.swaggerConfiguration.routeTag = 'parcoursup';
     this.#addExternalPartnersAccess();
   }
 
+  /**
+   * Create documentation partners accesspoint based on Pix backend APIM configuration
+   * @see {@link https://learn.openapis.org/specification/servers.html}
+   */
   #addExternalPartnersAccess() {
-    try {
+    const serverUrl = this.#buildUrl(config.apiManager.url);
+    if (serverUrl) {
       this.swaggerConfiguration.servers = [
         {
-          url: new URL(config.apiManager.endpoints.parcoursup, config.apiManager.url).href,
+          url: serverUrl,
           description: 'External Partners access',
         },
       ];
+    }
+  }
 
-      this.swaggerConfiguration.pathReplacements = [
-        {
-          replaceIn: 'all',
-          pattern: /api\/application\//,
-          replacement: '',
-        },
-      ];
+  #buildUrl(baseUrl) {
+    try {
+      return new URL(baseUrl).href;
     } catch (error) {
+      // Cannot crash the server for a missing URI
       logger.error(error);
     }
   }
@@ -90,23 +110,24 @@ class Parcoursup extends PixOpenApiBaseDefinition {
 class PixAPI extends PixOpenApiBaseDefinition {
   constructor() {
     super();
+    this.endpoint = '/api';
     this.swaggerConfiguration.grouping = 'tags';
     this.swaggerConfiguration.info.title = 'Welcome to the Pix api catalog';
   }
 }
 
-const toHapiPlugin = (swaggerOptions) => {
+const buildHapiPlugin = (clazz) => {
+  const apiDefinition = new clazz();
+
   return [
     {
       plugin: HapiSwagger,
-      options: swaggerOptions,
+      options: apiDefinition.swaggerConfiguration,
     },
     {
-      routes: { prefix: '/' + swaggerOptions.routeTag },
+      routes: { prefix: apiDefinition.endpoint },
     },
   ];
 };
 
-export const swaggers = [AuthorizationServer, LivretScolaire, PoleEmploi, Parcoursup, PixAPI]
-  .map((clazz) => new clazz().swaggerConfiguration)
-  .map(toHapiPlugin);
+export const swaggers = [PixAPI, AuthorizationServer, LivretScolaire, PoleEmploi, Parcoursup].map(buildHapiPlugin);

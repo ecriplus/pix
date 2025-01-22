@@ -66,7 +66,6 @@ const schema = Joi.object({
   TLD_FR: Joi.string().optional(),
   TLD_ORG: Joi.string().optional(),
   APIM_URL: Joi.string().optional(),
-  APIM_PARCOURSUP_PATH: Joi.string().optional(),
 }).options({ allowUnknown: true });
 
 const validateEnvironmentVariables = function () {

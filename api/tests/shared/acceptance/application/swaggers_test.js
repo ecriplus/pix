@@ -1,3 +1,4 @@
+import { config } from '../../../../src/shared/config.js';
 import { createServer, expect } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | Open Api', function () {
@@ -180,12 +181,12 @@ describe('Acceptance | Controller | Open Api', function () {
   });
 
   context('Parcoursup', function () {
-    describe('GET /parcoursup/swagger.json', function () {
+    describe('GET /api/application/parcoursup/swagger.json', function () {
       it('should respond with a 200', async function () {
         // given
         const options = {
           method: 'GET',
-          url: '/parcoursup/swagger.json',
+          url: '/api/application/parcoursup/swagger.json',
           headers: {},
         };
         // when
@@ -194,6 +195,7 @@ describe('Acceptance | Controller | Open Api', function () {
         // then
         expect(response.statusCode).to.equal(200);
         expect(response.result.info.title).to.deep.equal('Pix Parcoursup Open Api');
+        expect(response.result.servers[0].url).to.equal(config.apiManager.url);
       });
     });
 
@@ -202,12 +204,12 @@ describe('Acceptance | Controller | Open Api', function () {
         await server.start();
       });
 
-      describe('GET /parcoursup/documentation', function () {
+      describe('GET /api/application/parcoursup/documentation', function () {
         it('should respond with a 200', async function () {
           // given
           const options = {
             method: 'GET',
-            url: '/parcoursup/documentation/',
+            url: '/api/application/parcoursup/documentation/',
           };
 
           // when
