@@ -16,6 +16,7 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
   token,
   obfuscationService,
   tokenService,
+  audience,
   userReconciliationService,
   userService,
   authenticationMethodRepository,
@@ -114,7 +115,7 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
     }
   }
   const tokenUserId = userWithSamlId ? userWithSamlId.id : userId;
-  const accessToken = tokenService.createAccessTokenForSaml({ userId: tokenUserId });
+  const accessToken = tokenService.createAccessTokenForSaml({ userId: tokenUserId, audience });
   await userLoginRepository.updateLastLoggedAt({ userId: tokenUserId });
   return accessToken;
 };

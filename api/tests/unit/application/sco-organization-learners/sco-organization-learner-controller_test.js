@@ -19,6 +19,10 @@ describe('Unit | Application | Controller | sco-organization-learner', function 
       // given
       hFake.request = { path: {} };
       request = {
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
         payload: {
           data: {
             attributes: {
