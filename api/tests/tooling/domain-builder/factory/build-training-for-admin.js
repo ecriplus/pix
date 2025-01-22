@@ -3,6 +3,7 @@ import { TrainingForAdmin } from '../../../../src/devcomp/domain/read-models/Tra
 const buildTrainingForAdmin = function ({
   id = 'training1',
   title = 'Training 1',
+  internalTitle = 'Training 1 internal title',
   link = 'https://example.net',
   type = 'webinar',
   duration = {
@@ -18,6 +19,7 @@ const buildTrainingForAdmin = function ({
   return new TrainingForAdmin({
     id,
     title,
+    internalTitle,
     link,
     type,
     duration,
