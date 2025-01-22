@@ -8,6 +8,7 @@ import { reconcileOidcUser } from '../../../../../src/identity-access-management
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-user', function () {
+  const audience = 'https://app.pix.fr';
   context('when identityProvider is generic', function () {
     let authenticationMethodRepository,
       authenticationSessionService,
@@ -45,6 +46,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         const error = await catchErr(reconcileOidcUser)({
           authenticationKey: 'authenticationKey',
           identityProvider,
+          audience,
           authenticationSessionService,
           authenticationMethodRepository,
           oidcAuthenticationServiceRegistry,
@@ -69,6 +71,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       await reconcileOidcUser({
         authenticationKey: 'authenticationKey',
         identityProvider,
+        audience,
         authenticationSessionService,
         authenticationMethodRepository,
         oidcAuthenticationServiceRegistry,
@@ -90,6 +93,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         const error = await catchErr(reconcileOidcUser)({
           authenticationKey: 'authenticationKey',
           identityProvider,
+          audience,
           authenticationSessionService,
           authenticationMethodRepository,
           oidcAuthenticationServiceRegistry,
@@ -123,6 +127,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       await reconcileOidcUser({
         authenticationKey: 'authenticationKey',
         identityProvider,
+        audience,
         authenticationSessionService,
         authenticationMethodRepository,
         oidcAuthenticationServiceRegistry,
@@ -189,6 +194,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       await reconcileOidcUser({
         authenticationKey: 'authenticationKey',
         identityProvider,
+        audience,
         authenticationSessionService,
         authenticationMethodRepository,
         oidcAuthenticationServiceRegistry,
@@ -220,7 +226,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
           expiredDate: new Date(),
         }),
       );
-      oidcAuthenticationService.createAccessToken.withArgs(userId).returns('accessToken');
+      oidcAuthenticationService.createAccessToken.withArgs({ userId, audience }).returns('accessToken');
       oidcAuthenticationService.saveIdToken
         .withArgs({ idToken: sessionContent.idToken, userId })
         .resolves('logoutUrlUUID');
@@ -229,6 +235,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       const result = await reconcileOidcUser({
         authenticationKey: 'authenticationKey',
         identityProvider,
+        audience,
         authenticationSessionService,
         authenticationMethodRepository,
         oidcAuthenticationServiceRegistry,

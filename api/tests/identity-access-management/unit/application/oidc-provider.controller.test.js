@@ -12,12 +12,17 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
     const iss = 'https://issuer.url';
     const identityProvider = 'OIDC_EXAMPLE_NET';
     const pixAccessToken = 'pixAccessToken';
+    const audience = 'https://app.pix.fr';
 
     let request;
 
     beforeEach(function () {
       request = {
         auth: { credentials: { userId: 123 } },
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
         deserializedPayload: {
           identityProvider,
           code,
@@ -46,13 +51,14 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
 
       // then
       expect(usecases.authenticateOidcUser).to.have.been.calledWithExactly({
-        audience: undefined,
+        target: undefined,
         code,
         identityProviderCode: identityProvider,
         nonce: 'nonce',
         sessionState: state,
         state: identityProviderState,
         iss,
+        audience,
       });
       expect(request.yar.commit).to.have.been.calledOnce;
     });
@@ -120,6 +126,8 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
         deserializedPayload: { identityProvider: 'OIDC', authenticationKey: 'abcde' },
         headers: {
           'accept-language': 'fr',
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
         },
         state: {
           locale: 'fr-FR',
@@ -139,6 +147,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
         authenticationKey: 'abcde',
         localeFromCookie: 'fr-FR',
         language: 'fr',
+        audience: 'https://app.pix.fr',
       });
       expect(response.statusCode).to.equal(200);
       expect(response.source).to.deep.equal({
@@ -215,7 +224,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
 
       //then
       expect(usecases.getAuthorizationUrl).to.have.been.calledWithExactly({
-        audience: undefined,
+        target: undefined,
         identityProvider: 'OIDC',
       });
       expect(request.yar.set).to.have.been.calledTwice;
@@ -249,7 +258,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
       ]);
 
       // when
-      const response = await oidcProviderController.getIdentityProviders({ query: { audience: null } }, hFake);
+      const response = await oidcProviderController.getIdentityProviders({ query: { target: null } }, hFake);
 
       // then
       expect(usecases.getReadyIdentityProviders).to.have.been.called;
@@ -302,6 +311,10 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
     it('calls use case and return the result', async function () {
       // given
       const request = {
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
         deserializedPayload: {
           identityProvider: 'OIDC',
           authenticationKey: '123abc',
@@ -320,6 +333,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
       expect(usecases.reconcileOidcUser).to.have.been.calledWithExactly({
         authenticationKey: '123abc',
         identityProvider: 'OIDC',
+        audience: 'https://app.pix.fr',
       });
       expect(result.source).to.deep.equal({ access_token: 'accessToken', logout_url_uuid: 'logoutUrlUUID' });
     });

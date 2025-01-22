@@ -48,14 +48,15 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
       sinon.stub(settings.authentication, 'secret').value('a secret');
       sinon.stub(settings.authentication, 'accessTokenLifespanMs').value(1000);
       const accessToken = 'valid access token';
+      const audience = 'https://admin.pix.fr';
       const expirationDelaySeconds = 1;
-      const firstParameter = { user_id: userId, source };
+      const firstParameter = { user_id: userId, source, aud: audience };
       const secondParameter = 'a secret';
       const thirdParameter = { expiresIn: 1 };
       sinon.stub(jsonwebtoken, 'sign').withArgs(firstParameter, secondParameter, thirdParameter).returns(accessToken);
 
       // when
-      const result = tokenService.createAccessTokenFromUser(userId, source);
+      const result = tokenService.createAccessTokenFromUser({ userId, source, audience });
 
       // then
       expect(result).to.be.deep.equal({ accessToken, expirationDelaySeconds });
@@ -120,7 +121,8 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
     it('should return userId if the accessToken is valid', function () {
       // given
       const userId = 123;
-      const accessToken = tokenService.createAccessTokenFromUser(userId, 'pix').accessToken;
+      const audience = 'https://admin.pix.fr';
+      const accessToken = tokenService.createAccessTokenFromUser({ userId, source: 'pix', audience }).accessToken;
 
       // when
       const result = tokenService.extractUserId(accessToken);
@@ -432,7 +434,7 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
       const userId = 1;
       sinon.stub(settings.authentication, 'secret').value('SECRET_KEY');
       sinon.stub(settings.anonymous, 'accessTokenLifespanMs').value(10000);
-      const payload = { user_id: userId, source: 'pix' };
+      const payload = { user_id: userId, source: 'pix', aud: undefined };
       const secret = 'SECRET_KEY';
       const options = { expiresIn: 10 };
       sinon.stub(jsonwebtoken, 'sign').returns('VALID_ACCESS_TOKEN');

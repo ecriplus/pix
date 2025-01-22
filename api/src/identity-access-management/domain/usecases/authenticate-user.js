@@ -15,6 +15,7 @@ const authenticateUser = async function ({
   userRepository,
   userLoginRepository,
   adminMemberRepository,
+  audience,
 }) {
   try {
     const foundUser = await pixAuthenticationService.getUserByUsernameAndPassword({
@@ -30,10 +31,14 @@ const authenticateUser = async function ({
 
     await _checkUserAccessScope(scope, foundUser, adminMemberRepository);
 
-    const refreshToken = RefreshToken.generate({ userId: foundUser.id, scope, source });
+    const refreshToken = RefreshToken.generate({ userId: foundUser.id, scope, source, audience });
     await refreshTokenRepository.save({ refreshToken });
 
-    const { accessToken, expirationDelaySeconds } = await tokenService.createAccessTokenFromUser(foundUser.id, source);
+    const { accessToken, expirationDelaySeconds } = await tokenService.createAccessTokenFromUser({
+      userId: foundUser.id,
+      source,
+      audience,
+    });
 
     foundUser.setLocaleIfNotAlreadySet(localeFromCookie);
     if (foundUser.hasBeenModified) {

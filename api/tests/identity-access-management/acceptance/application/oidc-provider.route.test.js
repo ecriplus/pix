@@ -5,6 +5,7 @@ import jsonwebtoken from 'jsonwebtoken';
 import { oidcAuthenticationServiceRegistry } from '../../../../lib/domain/usecases/index.js';
 import { authenticationSessionService } from '../../../../src/identity-access-management/domain/services/authentication-session.service.js';
 import { AuthenticationSessionContent } from '../../../../src/shared/domain/models/index.js';
+import { decodeIfValid } from '../../../../src/shared/domain/services/token-service.js';
 import {
   createServer,
   databaseBuilder,
@@ -77,7 +78,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       // given
       const query = querystring.stringify({
         identity_provider: 'OIDC_EXAMPLE_NET',
-        audience: 'app',
+        target: 'app',
       });
 
       // when
@@ -254,7 +255,11 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
         const response = await server.inject({
           method: 'POST',
           url: '/api/oidc/token',
-          headers: { cookie: cookies[0] },
+          headers: {
+            cookie: cookies[0],
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'orga.pix.fr',
+          },
           payload,
         });
 
@@ -267,13 +272,17 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
          */
         // expect(getAccessTokenRequest.isDone()).to.be.true;
         expect(oidcExampleNetProvider.client.callback).to.have.been.calledOnce;
+        expect(response.result.access_token).to.exist;
+        const decodedAccessToken = await decodeIfValid(response.result.access_token);
+        expect(decodedAccessToken).to.include({
+          aud: 'https://orga.pix.fr',
+        });
         expect(response.statusCode).to.equal(200);
-        expect(response.result['access_token']).to.exist;
         expect(response.result['logout_url_uuid']).to.match(UUID_PATTERN);
       });
     });
 
-    context('when audience is admin', function () {
+    context('when target is admin', function () {
       context('when user does not have an admin role', function () {
         it('returns 403', async function () {
           // given
@@ -281,7 +290,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           const lastName = 'Doe';
           const externalIdentifier = 'sub';
 
-          payload.data.attributes.audience = 'admin';
+          payload.data.attributes.target = 'admin';
 
           const userId = databaseBuilder.factory.buildUser({
             firstName,
@@ -349,7 +358,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           const lastName = 'Doe';
           const externalIdentifier = 'sub';
 
-          payload.data.attributes.audience = 'admin';
+          payload.data.attributes.target = 'admin';
 
           const userId = databaseBuilder.factory.buildUser.withRole({
             firstName,
@@ -395,7 +404,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           const response = await server.inject({
             method: 'POST',
             url: '/api/oidc/token',
-            headers: { cookie: cookies[0] },
+            headers: { cookie: cookies[0], 'x-forwarded-proto': 'https', 'x-forwarded-host': 'admin.pix.fr' },
             payload,
           });
 
@@ -408,6 +417,11 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
            */
           // expect(getAccessTokenRequest.isDone()).to.be.true;
           expect(oidcExampleNetProvider.client.callback).to.have.been.calledOnce;
+          expect(response.result.access_token).to.exist;
+          const decodedAccessToken = await decodeIfValid(response.result.access_token);
+          expect(decodedAccessToken).to.include({
+            aud: 'https://admin.pix.fr',
+          });
           expect(response.statusCode).to.equal(200);
         });
       });
@@ -449,6 +463,8 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
         headers: {
           'accept-language': 'fr',
           cookie: 'locale=fr-FR',
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
         },
         payload: {
           data: {
@@ -465,7 +481,11 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
 
       // then
       expect(response.statusCode).to.equal(200);
-      expect(response.result['access_token']).to.exist;
+      expect(response.result.access_token).to.exist;
+      const decodedAccessToken = await decodeIfValid(response.result.access_token);
+      expect(decodedAccessToken).to.include({
+        aud: 'https://app.pix.fr',
+      });
 
       const createdUser = await knex('users').first();
       expect(createdUser.firstName).to.equal('Brice');
@@ -590,6 +610,10 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       const response = await server.inject({
         method: 'POST',
         url: `/api/oidc/user/reconcile`,
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
         payload: {
           data: {
             attributes: {
@@ -602,7 +626,11 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
 
       // then
       expect(response.statusCode).to.equal(200);
-      expect(response.result['access_token']).to.exist;
+      expect(response.result.access_token).to.exist;
+      const decodedAccessToken = await decodeIfValid(response.result.access_token);
+      expect(decodedAccessToken).to.include({
+        aud: 'https://app.pix.fr',
+      });
       expect(response.result['logout_url_uuid']).to.match(UUID_PATTERN);
     });
   });

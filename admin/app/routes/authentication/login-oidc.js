@@ -95,7 +95,7 @@ export default class LoginOidcRoute extends Route {
 
   async _handleRedirectRequest(identityProvider) {
     const response = await fetch(
-      `${ENV.APP.API_HOST}/api/oidc/authorization-url?identity_provider=${identityProvider.code}&audience=admin`,
+      `${ENV.APP.API_HOST}/api/oidc/authorization-url?identity_provider=${identityProvider.code}&target=admin`,
     );
     const { redirectTarget } = await response.json();
     this.location.replace(redirectTarget);

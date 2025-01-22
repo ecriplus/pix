@@ -33,6 +33,7 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
     const password = 'user_password';
     const scope = 'pix-orga';
     const source = 'pix';
+    const audience = 'https://app.pix.fr';
 
     /**
      * @see https://www.oauth.com/oauth2-servers/access-tokens/access-token-response/
@@ -44,7 +45,11 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
         const refreshToken = 'refresh.token';
         const localeFromCookie = 'fr-FR';
         const request = {
-          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+          headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'app.pix.fr',
+          },
           payload: {
             grant_type: 'password',
             username,
@@ -58,7 +63,7 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
 
         sinon
           .stub(usecases, 'authenticateUser')
-          .withArgs({ username, password, scope, source, localeFromCookie })
+          .withArgs({ username, password, scope, source, localeFromCookie, audience })
           .resolves({ accessToken, refreshToken, expirationDelaySeconds });
 
         const tokenServiceStub = { extractUserId: sinon.stub() };
@@ -94,13 +99,17 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
         const expirationDelaySeconds = 6666;
         const refreshToken = 'refresh.token';
         const request = {
-          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+          headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'app.pix.fr',
+          },
           payload: { grant_type: 'refresh_token', refresh_token: refreshToken, scope },
         };
 
         sinon
           .stub(usecases, 'createAccessTokenFromRefreshToken')
-          .withArgs({ refreshToken, scope })
+          .withArgs({ refreshToken, scope, audience })
           .resolves({ accessToken, expirationDelaySeconds });
 
         const tokenServiceStub = { extractUserId: sinon.stub() };

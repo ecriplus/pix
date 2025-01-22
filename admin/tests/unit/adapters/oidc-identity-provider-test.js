@@ -4,7 +4,7 @@ import { module, test } from 'qunit';
 module('Unit | Adapter | OidcIdentityProvider', function (hooks) {
   setupTest(hooks);
   module('#urlForFindAll', function () {
-    test('returns correct url for ready providers including audience parameter', function (assert) {
+    test('returns correct url for ready providers including target parameter', function (assert) {
       // given
       const adapter = this.owner.lookup('adapter:oidc-identity-provider');
 
@@ -16,7 +16,7 @@ module('Unit | Adapter | OidcIdentityProvider', function (hooks) {
       });
 
       // then
-      assert.ok(url.endsWith('/oidc/identity-providers?audience=admin'));
+      assert.ok(url.endsWith('/oidc/identity-providers?target=admin'));
     });
 
     test('returns correct url for all available providers', function (assert) {

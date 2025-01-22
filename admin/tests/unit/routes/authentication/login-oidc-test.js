@@ -60,7 +60,7 @@ module('Unit | Route | login-oidc', function (hooks) {
           // then
           sinon.assert.calledWith(
             fetchStub,
-            'http://localhost:3000/api/oidc/authorization-url?identity_provider=OIDC_PARTNER&audience=admin',
+            'http://localhost:3000/api/oidc/authorization-url?identity_provider=OIDC_PARTNER&target=admin',
           );
           sinon.assert.calledWith(route.location.replace, 'https://oidc.example.net/connexion');
           assert.ok(true);

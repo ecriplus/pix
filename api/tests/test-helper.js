@@ -113,8 +113,8 @@ function toStream(data, encoding = 'utf8') {
   });
 }
 
-function generateValidRequestAuthorizationHeader(userId = 1234, source = 'pix') {
-  const accessToken = tokenService.createAccessTokenFromUser(userId, source).accessToken;
+function generateValidRequestAuthorizationHeader(userId = 1234, source = 'pix', audience = 'http://app.pix.org') {
+  const accessToken = tokenService.createAccessTokenFromUser({ userId, source, audience }).accessToken;
   return `Bearer ${accessToken}`;
 }
 

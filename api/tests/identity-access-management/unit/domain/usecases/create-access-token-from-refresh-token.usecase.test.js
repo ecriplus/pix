@@ -12,14 +12,17 @@ describe('Unit | Identity Access Management | Domain | UseCases | create-access-
       const expirationDelaySeconds = 1;
       const scope = 'mon-pix';
       const source = 'pix';
+      const audience = 'https://admin.pix.fr';
 
-      const refreshToken = RefreshToken.generate({ userId, scope, source });
+      const refreshToken = RefreshToken.generate({ userId, scope, source, audience });
 
       const refreshTokenRepository = { findByToken: sinon.stub() };
       refreshTokenRepository.findByToken.withArgs({ token: refreshToken.value }).resolves(refreshToken);
 
       const tokenService = { createAccessTokenFromUser: sinon.stub() };
-      tokenService.createAccessTokenFromUser.withArgs(userId, source).resolves({ accessToken, expirationDelaySeconds });
+      tokenService.createAccessTokenFromUser
+        .withArgs({ userId, source, audience })
+        .resolves({ accessToken, expirationDelaySeconds });
 
       // when
       const createdAccessToken = await createAccessTokenFromRefreshToken({
@@ -27,6 +30,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | create-access-
         scope,
         refreshTokenRepository,
         tokenService,
+        audience,
       });
 
       // then
@@ -42,14 +46,17 @@ describe('Unit | Identity Access Management | Domain | UseCases | create-access-
       const expirationDelaySeconds = 1;
       const scope = 'mon-pix';
       const source = 'pix';
+      const audience = 'https://admin.pix.fr';
 
-      const refreshToken = RefreshToken.generate({ userId, scope, source });
+      const refreshToken = RefreshToken.generate({ userId, scope, source, audience });
 
       const refreshTokenRepository = { findByToken: sinon.stub() };
       refreshTokenRepository.findByToken.withArgs({ token: refreshToken.value }).resolves(null);
 
       const tokenService = { createAccessTokenFromUser: sinon.stub() };
-      tokenService.createAccessTokenFromUser.withArgs(userId, source).resolves({ accessToken, expirationDelaySeconds });
+      tokenService.createAccessTokenFromUser
+        .withArgs({ userId, source, audience })
+        .resolves({ accessToken, expirationDelaySeconds });
 
       // when
       const error = await catchErr(createAccessTokenFromRefreshToken)({
@@ -57,6 +64,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | create-access-
         scope,
         refreshTokenRepository,
         tokenService,
+        audience,
       });
 
       // then
@@ -74,14 +82,17 @@ describe('Unit | Identity Access Management | Domain | UseCases | create-access-
       const expirationDelaySeconds = 1;
       const scope = 'mon-pix';
       const source = 'pix';
+      const audience = 'https://admin.pix.fr';
 
-      const refreshToken = RefreshToken.generate({ userId, scope, source });
+      const refreshToken = RefreshToken.generate({ userId, scope, source, audience });
 
       const refreshTokenRepository = { findByToken: sinon.stub() };
       refreshTokenRepository.findByToken.withArgs({ token: refreshToken.value }).resolves(refreshToken);
 
       const tokenService = { createAccessTokenFromUser: sinon.stub() };
-      tokenService.createAccessTokenFromUser.withArgs(userId, source).resolves({ accessToken, expirationDelaySeconds });
+      tokenService.createAccessTokenFromUser
+        .withArgs({ userId, source, audience })
+        .resolves({ accessToken, expirationDelaySeconds });
 
       // when
       const error = await catchErr(createAccessTokenFromRefreshToken)({
@@ -89,6 +100,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | create-access-
         scope: 'pix-orga',
         refreshTokenRepository,
         tokenService,
+        audience,
       });
 
       // then

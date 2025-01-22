@@ -122,8 +122,12 @@ export class OidcAuthenticationService {
     }
   }
 
-  createAccessToken(userId) {
-    return jsonwebtoken.sign({ user_id: userId }, config.authentication.secret, this.accessTokenJwtOptions);
+  createAccessToken({ userId, audience }) {
+    return jsonwebtoken.sign(
+      { user_id: userId, aud: audience },
+      config.authentication.secret,
+      this.accessTokenJwtOptions,
+    );
   }
 
   async saveIdToken({ idToken, userId }) {

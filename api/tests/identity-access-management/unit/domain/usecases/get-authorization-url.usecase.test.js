@@ -4,7 +4,7 @@ import { expect, sinon } from '../../../../test-helper.js';
 describe('Unit | Identity Access Management | Domain | UseCases | get-authorization-url', function () {
   it('returns the generated authorization url', async function () {
     // given
-    const audience = 'app';
+    const target = 'app';
     const identityProvider = 'OIDC';
     const oidcAuthenticationService = {
       getAuthorizationUrl: sinon.stub().returns('https://authorization.url'),
@@ -21,7 +21,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | get-authorizat
 
     // when
     const authorizationUrl = await getAuthorizationUrl({
-      audience,
+      target,
       identityProvider,
       oidcAuthenticationServiceRegistry,
     });
@@ -33,7 +33,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | get-authorizat
     );
     expect(oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode).to.have.been.calledWithExactly({
       identityProviderCode: 'OIDC',
-      audience: 'app',
+      target: 'app',
     });
     expect(oidcAuthenticationService.getAuthorizationUrl).to.have.been.calledOnce;
     expect(authorizationUrl).to.equal('https://authorization.url');

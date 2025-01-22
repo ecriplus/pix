@@ -19,12 +19,12 @@ describe('Unit | Identity Access Management | Domain | UseCases | get-ready-iden
     };
   });
 
-  describe('when an audience is provided', function () {
-    describe('when the provided audience is equal to "admin"', function () {
+  describe('when a target is provided', function () {
+    describe('when the provided target is equal to "admin"', function () {
       it('returns oidc providers from getReadyOidcProviderServicesForPixAdmin', async function () {
         // when
         const identityProviders = await getReadyIdentityProviders({
-          audience: PIX_ADMIN.AUDIENCE,
+          target: PIX_ADMIN.TARGET,
           oidcAuthenticationServiceRegistry: oidcAuthenticationServiceRegistryStub,
         });
 
@@ -39,7 +39,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | get-ready-iden
   it('returns oidc providers from getReadyOidcProviderServices', async function () {
     // when
     const identityProviders = await getReadyIdentityProviders({
-      audience: null,
+      target: null,
       oidcAuthenticationServiceRegistry: oidcAuthenticationServiceRegistryStub,
     });
 

@@ -94,6 +94,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
     // given
     const idToken = 'idToken';
     const language = 'nl';
+    const audience = 'htttps://app.pix.fr';
     authenticationSessionService.getByKey.withArgs('AUTHENTICATION_KEY').resolves({
       sessionContent: { idToken, accessToken: 'accessToken' },
       userInfo: { firstName: 'Jean', lastName: 'Heymar', externalIdentityId: 'externalId' },
@@ -102,7 +103,9 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
       .withArgs({ externalIdentifier: 'externalId', identityProvider: 'SOME_IDP' })
       .resolves(null);
     oidcAuthenticationService.createUserAccount.resolves(10);
-    oidcAuthenticationService.createAccessToken.withArgs(10).returns('accessTokenForExistingExternalUser');
+    oidcAuthenticationService.createAccessToken
+      .withArgs({ userId: 10, audience })
+      .returns('accessTokenForExistingExternalUser');
     oidcAuthenticationService.saveIdToken.withArgs({ idToken, userId: 10 }).resolves('logoutUrlUUID');
 
     // when
@@ -111,6 +114,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
       authenticationKey: 'AUTHENTICATION_KEY',
       localeFromCookie: 'nl-BE',
       language,
+      audience,
       authenticationSessionService,
       oidcAuthenticationServiceRegistry,
       authenticationMethodRepository,

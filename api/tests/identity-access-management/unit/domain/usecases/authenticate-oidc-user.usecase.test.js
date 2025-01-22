@@ -17,6 +17,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
     let userLoginRepository;
     let oidcAuthenticationServiceRegistry;
     const externalIdentityId = '094b83ac-2e20-4aa8-b438-0bc91748e4a6';
+    const audience = 'https://app.pix.fr';
 
     beforeEach(function () {
       oidcAuthenticationService = {
@@ -48,19 +49,19 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
       };
     });
 
-    context('check access by audience', function () {
-      context('when audience is pix-admin', function () {
+    context('check access by target', function () {
+      context('when target is pix-admin', function () {
         context('when user has no role and is therefore not an admin member', function () {
           it('throws an error', async function () {
             // given
-            const audience = appMessages.PIX_ADMIN.AUDIENCE;
+            const target = appMessages.PIX_ADMIN.TARGET;
             _fakeOidcAPI({ oidcAuthenticationService, externalIdentityId });
             userRepository.findByExternalIdentifier.resolves({ id: 10 });
             adminMemberRepository.get.resolves(null);
 
             // when
             const error = await catchErr(authenticateOidcUser)({
-              audience,
+              target,
               oidcAuthenticationServiceRegistry,
               userRepository,
               adminMemberRepository,
@@ -76,7 +77,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
         context('when user has a role but admin membership is disabled', function () {
           it('throws an error', async function () {
             // given
-            const audience = appMessages.PIX_ADMIN.AUDIENCE;
+            const target = appMessages.PIX_ADMIN.TARGET;
             const adminMember = new AdminMember({
               id: 567,
               role: 'CERTIF',
@@ -88,7 +89,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
 
             // when
             const error = await catchErr(authenticateOidcUser)({
-              audience,
+              target,
               oidcAuthenticationServiceRegistry,
               userRepository,
               adminMemberRepository,
@@ -217,6 +218,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          audience,
         });
 
         // then
@@ -245,6 +247,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          audience,
         });
 
         // then
@@ -330,6 +333,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
     let userLoginRepository;
     let oidcAuthenticationServiceRegistry;
     const externalIdentityId = '094b83ac-2e20-4aa8-b438-0bc91748e4a6';
+    const audience = 'https://app.pix.fr';
 
     beforeEach(function () {
       oidcAuthenticationService = {
@@ -382,6 +386,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          audience,
         });
 
         // then
@@ -401,7 +406,9 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           .withArgs({ externalIdentityId, identityProvider: oidcAuthenticationService.identityProvider })
           .resolves({ id: 10 });
         oidcAuthenticationService.createAuthenticationComplement.returns(undefined);
-        oidcAuthenticationService.createAccessToken.withArgs(10).returns('accessTokenForExistingExternalUser');
+        oidcAuthenticationService.createAccessToken
+          .withArgs({ userId: 10, audience })
+          .returns('accessTokenForExistingExternalUser');
         oidcAuthenticationService.saveIdToken
           .withArgs({ idToken: sessionContent.idToken, userId: 10 })
           .resolves('logoutUrlUUID');
@@ -416,6 +423,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          audience,
         });
 
         // then
@@ -453,6 +461,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          audience,
         });
 
         // then
