@@ -44,7 +44,7 @@ export default class DeviceWarningModal extends Component {
       this.showModal = true;
     }
 
-    screen.orientation.addEventListener('change', () => {
+    screen.orientation?.addEventListener('change', () => {
       this.showModal = this.shouldDisplayModal();
     });
   }

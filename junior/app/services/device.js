@@ -13,9 +13,13 @@ export const types = {
 
 export default class DeviceService extends Service {
   get info() {
+    let orientation = screen.orientation?.type;
+    if (!orientation) {
+      orientation = screen.width > screen.height ? 'landscape' : 'portrait';
+    }
     return {
-      orientation: screen.orientation.type,
-      type: this.getType(screen.orientation.type),
+      orientation: orientation,
+      type: this.getType(orientation),
     };
   }
 
