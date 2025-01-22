@@ -1,5 +1,29 @@
 # Pix Changelog
 
+## v5.22.0 (22/01/2025)
+
+
+### :rocket: Amélioration
+- [#11137](https://github.com/1024pix/pix/pull/11137) [FEATURE] Ajouter la forwarded origin HTTP dans un nouvel attribut aud des AC utilisateurs lors du login (par mot de passe et SSO OIDC) (PIX-15928).
+- [#11161](https://github.com/1024pix/pix/pull/11161) [FEATURE] Remplir le mail automatiquement sur la page de réinitialisation du mot de passe si celui-ci a déjà été remplis sur la page de connexion (PIX13572).
+- [#11020](https://github.com/1024pix/pix/pull/11020) [FEATURE] Creer un script pour partager les attestations précédemment obtenues (PIX-15888) .
+- [#11178](https://github.com/1024pix/pix/pull/11178) [FEATURE] Ajouter la colonne "internalTitle" dans la table "trainings" (PIX-16211).
+
+### :building_construction: Tech
+- [#11170](https://github.com/1024pix/pix/pull/11170) [TECH] :truck: Utilise le `DomainTransation` de `src`.
+
+### :bug: Correction
+- [#11181](https://github.com/1024pix/pix/pull/11181) [BUGFIX] Pix Junior indisponible sur d'anciennes version de Safari (PIX-16209).
+- [#11158](https://github.com/1024pix/pix/pull/11158) [BUGFIX] Permettre de finaliser/publier une session dont une certif ne contient pas de challenge (PIX-16128).
+- [#11164](https://github.com/1024pix/pix/pull/11164) [BUGFIX] utiliser le PixSearchInput (Pix-16187).
+
+### :arrow_up: Montée de version
+- [#11173](https://github.com/1024pix/pix/pull/11173) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.27 (orga).
+
+### :coffee: Autre
+- [#11192](https://github.com/1024pix/pix/pull/11192) Revert [FEATURE] Prévenir l'utilisateur prescrit sur mobile que son expérience risque d'être dégradée (PIX-16078).
+- [#11186](https://github.com/1024pix/pix/pull/11186) Revert "[FEATURE] Ajouter la colonne "internalTitle" dans la table "trainings" (PIX-16211)".
+
 ## v5.21.0 (22/01/2025)
 
 
