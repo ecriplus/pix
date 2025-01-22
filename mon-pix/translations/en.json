@@ -521,17 +521,6 @@
       }
     },
     "campaign-landing": {
-      "alert-mobile-experience-modal": {
-        "actions": {
-          "back": "Return to the homepage",
-          "continue": "Continue anyway"
-        },
-        "content": {
-          "paragraph1": "Some questions in this course may be difficult to use on a small screen.",
-          "paragraph2": "For the best experience, we recommend using a computer."
-        },
-        "title": "You appear to be using a small screen"
-      },
       "assessment": {
         "action": "Begin",
         "announcement": "Sign up or log in to the Pix platform and start your test.",

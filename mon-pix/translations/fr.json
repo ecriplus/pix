@@ -521,17 +521,6 @@
       }
     },
     "campaign-landing": {
-      "alert-mobile-experience-modal": {
-        "actions": {
-          "back": "Revenir à l'écran d'accueil",
-          "continue": "Continuer quand même"
-        },
-        "content": {
-          "paragraph1": "Certaines questions de ce parcours peuvent être difficiles à utiliser sur un petit écran.",
-          "paragraph2": "Pour une expérience optimale, nous vous recommandons d’utiliser un ordinateur."
-        },
-        "title": "Vous semblez utiliser un petit écran"
-      },
       "assessment": {
         "action": "Je commence",
         "announcement": "Inscrivez-vous ou connectez-vous sur la plateforme Pix et lancez votre test.",
