@@ -1,5 +1,35 @@
 # Pix Changelog
 
+## v5.21.0 (22/01/2025)
+
+
+### :rocket: Amélioration
+- [#11117](https://github.com/1024pix/pix/pull/11117) [FEATURE] Nouvelle disposition des challenges (PIX-15935).
+- [#11124](https://github.com/1024pix/pix/pull/11124) [FEATURE] Ajout d'un script pour supprimer des orga, dpo et tags associés (PIX-16091).
+- [#11071](https://github.com/1024pix/pix/pull/11071) [FEATURE] Afficher les bannières dynamiquement.
+
+### :building_construction: Tech
+- [#11153](https://github.com/1024pix/pix/pull/11153) [TECH] Renommer idPix-Label|Type par externalId-Label|Type (Px-14685).
+- [#11143](https://github.com/1024pix/pix/pull/11143) [TECH] Rendre disponible la documentation Open Api via la gateway (PIX-16111).
+- [#11157](https://github.com/1024pix/pix/pull/11157) [TECH] Corriger la mention fr d'activation d'espace pix-orga (PIX-16179).
+
+### :bug: Correction
+- [#11169](https://github.com/1024pix/pix/pull/11169) [BUGFIX] Corriger l'url des liens vers la prévisualisation d'images (PIX-16100).
+- [#11159](https://github.com/1024pix/pix/pull/11159) [BUGFIX] Rendre optionnel l'url d'une image dans une Flashcards (PIX-16150).
+
+### :arrow_up: Montée de version
+- [#11067](https://github.com/1024pix/pix/pull/11067) [BUMP] Update dependency ember-template-lint to v6 (mon-pix).
+- [#11165](https://github.com/1024pix/pix/pull/11165) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.27 (admin).
+- [#11172](https://github.com/1024pix/pix/pull/11172) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.27 (mon-pix).
+- [#11171](https://github.com/1024pix/pix/pull/11171) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.27 (junior).
+- [#11168](https://github.com/1024pix/pix/pull/11168) [BUMP] Update dependency @1024pix/stylelint-config to ^5.1.27 (certif).
+- [#11166](https://github.com/1024pix/pix/pull/11166) [BUMP] Update dependency @1024pix/pix-ui to ^54.1.1 (certif).
+- [#11150](https://github.com/1024pix/pix/pull/11150) [BUMP] Update dependency @1024pix/pix-ui to v54 (certif).
+- [#11156](https://github.com/1024pix/pix/pull/11156) [BUMP] Update dependency @1024pix/pix-ui to ^54.1.1 (junior).
+
+### :coffee: Autre
+- [#10929](https://github.com/1024pix/pix/pull/10929) [DOC] ADR sur les migrations de données    .
+
 ## v5.20.0 (20/01/2025)
 
 
