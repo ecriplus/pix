@@ -16,11 +16,17 @@ import PasswordResetDemandReceivedInfo from './password-reset-demand-received-in
 export default class PasswordResetDemandForm extends Component {
   @service errors;
   @service requestManager;
+  @service storage;
   @service url;
 
   @tracked globalError = this.errors.hasErrors && this.errors.shift();
   @tracked isLoading = false;
   @tracked isPasswordResetDemandReceived = false;
+
+  constructor() {
+    super(...arguments);
+    this.email = this.storage.getLogin();
+  }
 
   validation = new FormValidation({
     email: {
