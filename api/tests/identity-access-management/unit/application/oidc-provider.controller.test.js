@@ -311,6 +311,10 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
     it('calls use case and return the result', async function () {
       // given
       const request = {
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
         deserializedPayload: {
           identityProvider: 'OIDC',
           authenticationKey: '123abc',
@@ -329,6 +333,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
       expect(usecases.reconcileOidcUser).to.have.been.calledWithExactly({
         authenticationKey: '123abc',
         identityProvider: 'OIDC',
+        audience: 'https://app.pix.fr',
       });
       expect(result.source).to.deep.equal({ access_token: 'accessToken', logout_url_uuid: 'logoutUrlUUID' });
     });

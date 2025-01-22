@@ -590,6 +590,10 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       const response = await server.inject({
         method: 'POST',
         url: `/api/oidc/user/reconcile`,
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
         payload: {
           data: {
             attributes: {

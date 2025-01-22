@@ -6,6 +6,7 @@ import { AuthenticationMethod } from '../models/AuthenticationMethod.js';
  * @param {Object} params
  * @param {string} params.authenticationKey
  * @param {string} params.identityProvider
+ * @param {string} params.audience
  * @param {AuthenticationSessionService} params.authenticationSessionService
  * @param {AuthenticationMethodRepository} params.authenticationMethodRepository
  * @param {OidcAuthenticationServiceRegistry} params.oidcAuthenticationServiceRegistry
@@ -19,6 +20,7 @@ export const reconcileOidcUser = async function ({
   authenticationMethodRepository,
   oidcAuthenticationServiceRegistry,
   userLoginRepository,
+  audience,
 }) {
   await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
   await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProvider);
@@ -52,7 +54,7 @@ export const reconcileOidcUser = async function ({
     }),
   });
 
-  const accessToken = await oidcAuthenticationService.createAccessToken({ userId });
+  const accessToken = await oidcAuthenticationService.createAccessToken({ userId, audience });
 
   let logoutUrlUUID;
   if (oidcAuthenticationService.shouldCloseSession) {

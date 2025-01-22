@@ -151,9 +151,12 @@ async function getRedirectLogoutUrl(request, h) {
 async function reconcileUser(request, h) {
   const { identityProvider, authenticationKey } = request.deserializedPayload;
 
+  const origin = getForwardedOrigin(request.headers);
+
   const result = await usecases.reconcileOidcUser({
     authenticationKey,
     identityProvider,
+    audience: origin,
   });
 
   return h.response({ access_token: result.accessToken, logout_url_uuid: result.logoutUrlUUID }).code(200);
