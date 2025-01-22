@@ -1,4 +1,4 @@
-import { DomainTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { monitoringTools } from '../../../shared/infrastructure/monitoring-tools.js';
 import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { ApplicationTransaction } from '../../shared/infrastructure/ApplicationTransaction.js';

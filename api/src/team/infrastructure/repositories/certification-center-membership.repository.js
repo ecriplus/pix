@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../db/knex-database-connection.js';
-import { DomainTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
 import { User } from '../../../identity-access-management/domain/models/User.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import {
   AlreadyExistingMembershipError,
   CertificationCenterMembershipCreationError,

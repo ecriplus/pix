@@ -1,7 +1,7 @@
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
 import { learnerParticipationController } from '../../../../../src/prescription/campaign-participation/application/learner-participation-controller.js';
 import { usecases } from '../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
 import { ApplicationTransaction } from '../../../../../src/prescription/shared/infrastructure/ApplicationTransaction.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | Controller | Learner-Participation', function () {

@@ -1,8 +1,8 @@
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { updateUserForAccountRecovery } from '../../../../../src/identity-access-management/domain/usecases/update-user-for-account-recovery.usecase.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | update-user-for-account-recovery', function () {

@@ -1,7 +1,7 @@
-import { DomainTransaction } from '../../../../../../lib/infrastructure/DomainTransaction.js';
 import { beginCampaignParticipationImprovement } from '../../../../../../src/prescription/campaign-participation/domain/usecases/begin-campaign-participation-improvement.js';
 import * as campaignParticipationRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import * as assessmentRepository from '../../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 

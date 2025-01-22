@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { DomainTransaction, withTransaction } from '../../../../../../lib/infrastructure/DomainTransaction.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
 import { AvailableCampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/read-models/AvailableCampaignParticipation.js';
 import * as campaignParticipationRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
@@ -10,6 +9,7 @@ import {
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { ApplicationTransaction } from '../../../../../../src/prescription/shared/infrastructure/ApplicationTransaction.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
+import { DomainTransaction, withTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';

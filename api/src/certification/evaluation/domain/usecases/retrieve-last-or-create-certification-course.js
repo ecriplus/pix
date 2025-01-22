@@ -11,8 +11,8 @@
  * @typedef {import('./index.js').AssessmentRepository} AssessmentRepository
  * @typedef {import('../../../src/shared/domain/models/CertificationCandidate.js').CertificationCandidate} CertificationCandidate
  */
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
 import { config } from '../../../../shared/config.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { LanguageNotSupportedError } from '../../../../shared/domain/errors.js';
 import {
   CandidateNotAuthorizedToJoinSessionError,

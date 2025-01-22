@@ -3,7 +3,7 @@ import * as url from 'node:url';
 import _ from 'lodash';
 
 import { disconnect, knex } from '../../db/knex-database-connection.js';
-import { DomainTransaction } from '../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
 import { OrganizationLearnersCouldNotBeSavedError } from '../../src/shared/domain/errors.js';
 import { OrganizationLearner } from '../../src/shared/domain/models/index.js';
 

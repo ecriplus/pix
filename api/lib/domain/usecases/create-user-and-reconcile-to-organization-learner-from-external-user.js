@@ -2,8 +2,8 @@ import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../src/identity-access-manage
 import { AuthenticationMethod } from '../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { User } from '../../../src/identity-access-management/domain/models/User.js';
 import { STUDENT_RECONCILIATION_ERRORS } from '../../../src/shared/domain/constants.js';
+import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
 import { CampaignCodeError, ObjectValidationError } from '../../../src/shared/domain/errors.js';
-import { DomainTransaction } from '../../infrastructure/DomainTransaction.js';
 
 const existingUserReconciliationErrors = [
   STUDENT_RECONCILIATION_ERRORS.RECONCILIATION.IN_SAME_ORGANIZATION.samlId.code,

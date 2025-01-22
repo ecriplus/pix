@@ -1,6 +1,6 @@
 import lodash from 'lodash';
 
-import { DomainTransaction } from '../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
 import { MembershipUpdateError } from '../../src/shared/domain/errors.js';
 const { times } = lodash;
 import * as url from 'node:url';

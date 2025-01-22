@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import * as knowledgeElementRepository from '../../../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
 import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';

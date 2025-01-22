@@ -1,8 +1,8 @@
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
 import { updateUserForAccountRecovery } from '../../../../../src/identity-access-management/domain/usecases/update-user-for-account-recovery.usecase.js';
 import { accountRecoveryDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/account-recovery-demand.repository.js';
 import * as authenticationMethodRepository from '../../../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
 

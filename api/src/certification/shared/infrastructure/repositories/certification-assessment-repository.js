@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { Answer } from '../../../../evaluation/domain/models/Answer.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationChallengeWithType } from '../../../../shared/domain/models/CertificationChallengeWithType.js';

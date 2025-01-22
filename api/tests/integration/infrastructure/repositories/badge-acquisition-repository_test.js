@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { DomainTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
 import * as badgeAcquisitionRepository from '../../../../lib/infrastructure/repositories/badge-acquisition-repository.js';
+import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
 import { databaseBuilder, expect, knex } from '../../../test-helper.js';
 
 describe('Integration | Repository | Badge Acquisition', function () {

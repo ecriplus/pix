@@ -1,6 +1,6 @@
-import { DomainTransaction } from '../../../../../../lib/infrastructure/DomainTransaction.js';
 import { InvalidBadgeLevelError } from '../../../../../../src/certification/complementary-certification/domain/errors.js';
 import { attachBadges } from '../../../../../../src/certification/complementary-certification/domain/usecases/attach-badges.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { MissingAttributesError, NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 

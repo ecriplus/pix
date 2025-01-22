@@ -1,4 +1,4 @@
-import { withTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { MissingBadgeCriterionError } from '../../../shared/domain/errors.js';
 
 const createBadge = withTransaction(async function ({

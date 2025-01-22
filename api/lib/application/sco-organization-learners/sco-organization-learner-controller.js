@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 
 import * as scoOrganizationLearnerSerializer from '../../../src/prescription/learner-management/infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
+import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
 import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
-import { DomainTransaction } from '../../infrastructure/DomainTransaction.js';
 import * as studentInformationForAccountRecoverySerializer from '../../infrastructure/serializers/jsonapi/student-information-for-account-recovery-serializer.js';
 
 const generateUsername = async function (request, h, dependencies = { scoOrganizationLearnerSerializer }) {

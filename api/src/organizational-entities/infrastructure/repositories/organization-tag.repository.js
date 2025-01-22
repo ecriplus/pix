@@ -6,7 +6,7 @@ import * as knexUtils from '../../../shared/infrastructure/utils/knex-utils.js';
 const { omit } = lodash;
 
 import { knex } from '../../../../db/knex-database-connection.js';
-import { DomainTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { OrganizationTag } from '../../../shared/domain/models/index.js';
 import { Tag } from '../../domain/models/Tag.js';
 

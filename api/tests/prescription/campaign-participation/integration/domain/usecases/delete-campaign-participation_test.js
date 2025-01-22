@@ -1,6 +1,6 @@
-import { DomainTransaction } from '../../../../../../lib/infrastructure/DomainTransaction.js';
 import { deleteCampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/usecases/delete-campaign-participation.js';
 import * as campaignParticipationRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | UseCases | delete-campaign-participation', function () {

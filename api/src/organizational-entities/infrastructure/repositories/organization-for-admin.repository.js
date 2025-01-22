@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../db/knex-database-connection.js';
-import { DomainTransaction } from '../../../../lib/infrastructure/DomainTransaction.js';
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { MissingAttributesError, NotFoundError } from '../../../shared/domain/errors.js';
 import { OrganizationInvitation } from '../../../team/domain/models/OrganizationInvitation.js';
 import { OrganizationForAdmin } from '../../domain/models/OrganizationForAdmin.js';

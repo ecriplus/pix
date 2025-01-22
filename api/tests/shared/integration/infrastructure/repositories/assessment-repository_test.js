@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { DomainTransaction } from '../../../../../lib/infrastructure/DomainTransaction.js';
 import { Answer } from '../../../../../src/evaluation/domain/models/Answer.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../src/shared/domain/models/AssessmentResult.js';
