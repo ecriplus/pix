@@ -519,17 +519,6 @@
       }
     },
     "campaign-landing": {
-      "alert-mobile-experience-modal": {
-        "title": "Het lijkt erop dat u een klein scherm gebruikt",
-        "content": {
-          "paragraph1": "Sommige vragen in deze cursus zijn mogelijk lastig te beantwoorden op een klein scherm.",
-          "paragraph2": "Voor de beste ervaring raden wij u aan een computer te gebruiken."
-        },
-        "actions": {
-          "continue": "Ga toch door",
-          "back": "Terug naar de startpagina"
-        }
-      },
       "assessment": {
         "action": "Ik begin",
         "announcement": "Registreer of log in op het Pix-platform en start je test.",
