@@ -5,7 +5,6 @@ import { usecases } from '../../../../../src/prescription/learner-management/dom
 import { OrganizationLearnerParser } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-parser.js';
 import { ApplicationTransaction } from '../../../../../src/prescription/shared/infrastructure/ApplicationTransaction.js';
 import { FileValidationError } from '../../../../../src/shared/domain/errors.js';
-import { eventBus } from '../../../../../src/shared/domain/events/index.js';
 import { catchErr, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | Organizations | organization-controller', function () {
@@ -28,7 +27,6 @@ describe('Unit | Application | Organizations | organization-controller', functio
       sinon.stub(fs, 'unlink').resolves();
       sinon.stub(usecases, 'uploadSiecleFile');
       sinon.stub(usecases, 'uploadCsvFile');
-      sinon.stub(eventBus, 'publish');
       sinon.stub(ApplicationTransaction, 'execute');
       sinon.stub(ApplicationTransaction, 'getTransactionAsDomainTransaction');
 
