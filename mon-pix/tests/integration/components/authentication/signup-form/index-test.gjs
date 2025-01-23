@@ -20,9 +20,11 @@ module('Integration | Component | Authentication | SignupForm | index', function
   setupIntlRenderingTest(hooks);
 
   let sessionService;
+  let urlService;
 
   hooks.beforeEach(async function () {
     sessionService = stubSessionService(this.owner, { isAuthenticated: false });
+    urlService = this.owner.lookup('service:url');
   });
 
   test('it signs up successfully', async function (assert) {
@@ -259,6 +261,7 @@ module('Integration | Component | Authentication | SignupForm | index', function
 
     test('it displays error message for other HTTP status code', async function (assert) {
       // given
+      sinon.stub(urlService, 'supportHomeUrl').value('http://support.example.net');
       sessionService.authenticateUser.rejects(_buildApiReponseError({ status: 500 }));
 
       // when
@@ -268,8 +271,8 @@ module('Integration | Component | Authentication | SignupForm | index', function
       const errorMessage = 'Impossible de se connecter. Veuillez réessayer dans quelques instants.';
       assert.dom(screen.getByText(errorMessage, { exact: false })).exists();
 
-      const errorMessageLink = screen.getByRole('link', { name: 'merci de nous contacter' });
-      assert.dom(errorMessageLink).hasAttribute('href', 'https://pix.fr/support');
+      const errorMessageLink = screen.getByRole('link', { name: 'contactez-nous via le centre d’aide' });
+      assert.dom(errorMessageLink).hasAttribute('href', urlService.supportHomeUrl);
     });
   });
 });

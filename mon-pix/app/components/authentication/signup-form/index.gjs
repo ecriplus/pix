@@ -37,6 +37,7 @@ const EMAIL_API_ERRORS = {
 export default class SignupForm extends Component {
   @service session;
   @service intl;
+  @service url;
 
   @tracked isLoading = false;
   @tracked globalError = null;
@@ -128,9 +129,14 @@ export default class SignupForm extends Component {
           values: { localeNotSupported: error.meta.locale },
         };
         return;
-      default:
-        this.globalError = HTTP_ERROR_MESSAGES[statusCode] || HTTP_ERROR_MESSAGES['default'];
+      default: {
+        const properties = HTTP_ERROR_MESSAGES[statusCode] || HTTP_ERROR_MESSAGES['default'];
+        if (!HTTP_ERROR_MESSAGES[statusCode]) {
+          properties.values.supportHomeUrl = this.url.supportHomeUrl;
+        }
+        this.globalError = properties;
         return;
+      }
     }
   }
 
