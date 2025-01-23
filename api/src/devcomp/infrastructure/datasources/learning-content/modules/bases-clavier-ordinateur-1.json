@@ -278,7 +278,7 @@
           "element": {
             "id": "f42a1f10-87a9-4607-bb81-9cde56c1d047",
             "type": "text",
-            "content": "<p>Pour modifier du texte, il faut utiliser d’autres touches que les touches lettres.</p><br><p>Voici les touches les plus utiles&nbsp;:</p><ul> <li><strong>Espace</strong></li> <li><strong>Entrée</strong></li> <li><strong>Effacer</strong></li> <li><strong>Les flèches directionnelles</strong></li> </ul> "
+            "content": "<p>Pour écrire et modifier du texte, il faut utiliser d’autres touches que les touches lettres.</p><br><p>Voici les touches les plus utiles&nbsp;:</p><ul> <li><strong>Espace</strong></li> <li><strong>Entrée</strong></li> <li><strong>Effacer</strong></li> <li><strong>Les flèches directionnelles</strong></li> </ul> "
           }
         },
         {
@@ -315,7 +315,7 @@
                 {
                   "id": "b65c1d05-27b9-429e-b8aa-b63bef94c67e",
                   "type": "text",
-                  "content": "<p>La touche <strong>Entrée </strong>permet d’aller à la ligne.<br> La touche Entrée permet d’aller à la ligne.</p><ul> <li>Quand le curseur est à la fin d'une ligne, taper sur la touche entrée déplace le curseur vers la ligne d'en dessous.</li> <li>Quand le curseur est au milieu d'un texte, taper sur la touche entrée déplace le texte vers la ligne d'en dessous.</li></ul>"
+                  "content": "<p>La touche <strong>Entrée </strong>permet d’aller à la ligne :<br>Quand vous êtes en train de taper du texte et que vous voulez écrire sur la ligne suivante, tapez sur la touche entrée pour déplacer le curseur vers la ligne d'en dessous.</p>"
                 },
                 {
                   "id": "82fc806d-0d75-4202-85af-dfe7fca24315",
@@ -347,7 +347,7 @@
                 {
                   "id": "6dee7fcf-7faf-4748-9c56-70e93d7d4914",
                   "type": "text",
-                  "content": "<p>Pour déplacer le curseur de texte, vous pouvez utiliser les <strong>Flèches directionnelles</strong>.</p><p><span aria-hidden=\"true\">➡️</span> Par exemple : vous avez oublié de mettre un espace entre «&nbsp;table et chaise&nbsp;» , vous pouvez déplacer le curseur pour ajouter cet espace.</p>"
+                  "content": "<p>Pour déplacer le curseur de texte, vous pouvez utiliser les <strong>Flèches directionnelles</strong>.</p><p><span aria-hidden=\"true\">➡️</span> Par exemple : Par exemple : vous avez oublié d’aller à la ligne entre deux mots, vous pouvez déplacer le curseur entre les deux mots pour appuyer sur la touche entrée et aller à la ligne.</p>"
                 },
                 {
                   "id": "5d93c1b7-2f8d-4891-9443-9a2f86104f4e",
