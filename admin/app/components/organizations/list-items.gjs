@@ -2,6 +2,7 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
@@ -16,8 +17,14 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
 
   searchedId = this.args.id;
   searchedName = this.args.name;
-  searchedType = this.args.type;
   searchedExternalId = this.args.externalId;
+
+  optionType = [
+    { value: 'PRO', label: 'PRO' },
+    { value: 'SCO', label: 'SCO' },
+    { value: 'SCO-1D', label: 'SCO-1D' },
+    { value: 'SUP', label: 'SUP' },
+  ];
 
   @action
   openModal(organization) {
@@ -35,6 +42,12 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
   async detachOrganizations(organizationId) {
     await this.args.detachOrganizations(organizationId);
     this.closeModal();
+  }
+
+  @action
+  filter(value) {
+    const event = { target: { value } };
+    this.args.triggerFiltering('type', event);
   }
 
   <template>
@@ -59,7 +72,13 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
                 <PixInput id="name" type="text" value={{this.searchedName}} oninput={{fn @triggerFiltering "name"}} />
               </td>
               <td>
-                <PixInput id="type" type="text" value={{this.searchedType}} oninput={{fn @triggerFiltering "type"}} />
+                <PixSelect
+                  @id="type"
+                  @options={{this.optionType}}
+                  @placeholder="- Type -"
+                  @onChange={{this.filter}}
+                  @value={{@type}}
+                />
               </td>
               <td>
                 <PixInput

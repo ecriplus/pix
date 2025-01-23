@@ -45,7 +45,7 @@ function _setSearchFiltersForQueryBuilder(qb, filter) {
     qb.whereILike('name', `%${name}%`);
   }
   if (type) {
-    qb.whereILike('type', `%${type}%`);
+    qb.where('type', type);
   }
   if (externalId) {
     qb.whereILike('externalId', `%${externalId}%`);
