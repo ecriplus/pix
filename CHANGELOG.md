@@ -1,5 +1,23 @@
 # Pix Changelog
 
+## v5.24.0 (23/01/2025)
+
+
+### :rocket: Amélioration
+- [#11191](https://github.com/1024pix/pix/pull/11191) [FEATURE] Ajouter la colonne "internalTitle" dans la table "trainings" (PIX-16222).
+- [#11177](https://github.com/1024pix/pix/pull/11177) [FEATURE] Ajouter la forwarded origin HTTP dans les tokens utilisateurs lors du login par SSO GAR (PIX-16204).
+- [#10540](https://github.com/1024pix/pix/pull/10540) [FEATURE] Création d'un module Premiere Marche : utiliser-souris-ordinateur (MODC-350).
+
+### :building_construction: Tech
+- [#11196](https://github.com/1024pix/pix/pull/11196) [TECH] Corriger la couleurs des bannières sur la page de finalisation sur Pix Certif (PIX-16236).
+
+### :bug: Correction
+- [#11200](https://github.com/1024pix/pix/pull/11200) [BUGFIX] Safari ne comprend pas les width:auto  (PIX-16206).
+- [#11088](https://github.com/1024pix/pix/pull/11088) [BUGFIX] Changer des messages sur les pages de connexion et réinitialisation (PIX-15996).
+
+### :arrow_up: Montée de version
+- [#11182](https://github.com/1024pix/pix/pull/11182) [BUMP] Update dependency ember-test-selectors to v7 (mon-pix).
+
 ## v5.23.0 (23/01/2025)
 
 
