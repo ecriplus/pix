@@ -466,7 +466,7 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
       sinon.stub(jsonwebtoken, 'sign').returns('VALID_ACCESS_TOKEN');
 
       // when
-      const result = tokenService.createAccessTokenFromAnonymousUser(userId);
+      const result = tokenService.createAccessTokenFromAnonymousUser({ userId });
 
       // then
       expect(jsonwebtoken.sign).to.have.been.calledWithExactly(payload, secret, options);

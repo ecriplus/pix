@@ -27,5 +27,5 @@ export const authenticateAnonymousUser = async function ({
   const userToAdd = UserToCreate.createAnonymous({ lang });
   const newUser = await userToCreateRepository.create({ user: userToAdd });
 
-  return tokenService.createAccessTokenFromAnonymousUser(newUser.id);
+  return tokenService.createAccessTokenFromAnonymousUser({ userId: newUser.id });
 };

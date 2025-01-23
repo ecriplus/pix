@@ -27,7 +27,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-an
   it('creates an anonymous user', async function () {
     // given
     userToCreateRepository.create.resolves({ id: 1 });
-    tokenService.createAccessTokenFromAnonymousUser.returns('access-token');
+    tokenService.createAccessTokenFromAnonymousUser.withArgs({ userId: 1 }).returns('access-token');
 
     // when
     await authenticateAnonymousUser({
@@ -57,7 +57,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-an
     const accessToken = 'access.token';
 
     userToCreateRepository.create.resolves({ id: userId });
-    tokenService.createAccessTokenFromAnonymousUser.withArgs(userId).returns(accessToken);
+    tokenService.createAccessTokenFromAnonymousUser.withArgs({ userId }).returns(accessToken);
 
     // when
     const result = await authenticateAnonymousUser({
