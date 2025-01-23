@@ -1476,6 +1476,7 @@
     "statistics": {
       "before-date": "au",
       "description": "Le tableau ci-dessous vous permet de visualiser le positionnement de vos participants par sujet.'<br>' Le positionnement rend compte du niveau moyen de vos participants sur le niveau maximum qu’ils auraient pu atteindre.'<br>' Ces données tiennent compte de toutes les participations partagées dans le cadre des campagnes d’évaluation non supprimées de votre organisation.",
+      "empty-state": "Aucune donnée disponible",
       "gauge": {
         "label": "Sur le sujet vos participants ont obtenu un niveau de {userLevel} sur un niveau maximum atteignable de {tubeLevel}."
       },

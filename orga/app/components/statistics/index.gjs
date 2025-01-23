@@ -93,70 +93,86 @@ export default class Statistics extends Component {
     return dayjs(this.analysisByTubes[0]?.extraction_date).format('D MMM YYYY');
   }
 
+  get hasDataToDisplay() {
+    return this.args.model.data && this.args.model.data.length > 0;
+  }
+
   <template>
     <PageTitle @spaceBetweenTools={{true}}>
       <:title>
         {{t "pages.statistics.title"}}
       </:title>
+
       <:tools>
-        <span class="statistics-page-header__date">{{t "pages.statistics.before-date"}}
-          {{this.extractedDate}}</span>
+        {{#if this.hasDataToDisplay}}
+          <span class="statistics-page-header__date">{{t "pages.statistics.before-date"}}
+            {{this.extractedDate}}</span>
+        {{/if}}
       </:tools>
+
     </PageTitle>
 
-    <section class="statistics-page__info">
-      <p class="statistics-page-info__paragraph">
-        {{t "pages.statistics.description" htmlSafe="true"}}
-      </p>
-    </section>
+    {{#if this.hasDataToDisplay}}
+      <section class="statistics-page__info">
+        <p class="statistics-page-info__paragraph">
+          {{t "pages.statistics.description" htmlSafe="true"}}
+        </p>
+      </section>
 
-    <section class="statistics-page__filter">
-      <PixSelect
-        @onChange={{this.handleDomainFilter}}
-        @value={{this.currentDomainFilter}}
-        @options={{this.domainsName}}
-        @placeholder={{t "common.filters.placeholder"}}
-        @hideDefaultOption={{true}}
-      >
-        <:label>{{t "pages.statistics.select-label"}}</:label>
-      </PixSelect>
-      <PixButton @size="small" @variant="tertiary" @triggerAction={{this.removeFilter}}>{{t
-          "common.filters.actions.clear"
-        }}</PixButton>
-    </section>
+      <section class="statistics-page__filter">
+        <PixSelect
+          @onChange={{this.handleDomainFilter}}
+          @value={{this.currentDomainFilter}}
+          @options={{this.domainsName}}
+          @placeholder={{t "common.filters.placeholder"}}
+          @hideDefaultOption={{true}}
+        >
+          <:label>{{t "pages.statistics.select-label"}}</:label>
+        </PixSelect>
+        <PixButton @size="small" @variant="tertiary" @triggerAction={{this.removeFilter}}>{{t
+            "common.filters.actions.clear"
+          }}</PixButton>
+      </section>
 
-    <section class="statistics-page__cover-rate">
-      <table class="panel">
-        <caption class="screen-reader-only">{{t "pages.statistics.table.caption"}}</caption>
-        <thead>
-          <tr>
-            <Header @size="wide" scope="col">{{t "pages.statistics.table.headers.skills"}}</Header>
-            <Header @size="medium" scope="col">{{t "pages.statistics.table.headers.topics"}}</Header>
-            <Header @size="medium" @align="center" scope="col">{{t
-                "pages.statistics.table.headers.positioning"
-              }}</Header>
-            <Header @align="center" @size="medium" scope="col">{{t
-                "pages.statistics.table.headers.reached-level"
-              }}</Header>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each this.currentVisibleAnalysis as |line|}}
+      <section class="statistics-page__cover-rate">
+        <table class="panel">
+          <caption class="screen-reader-only">{{t "pages.statistics.table.caption"}}</caption>
+          <thead>
             <tr>
-              <td>{{line.competence_code}} {{line.competence}}</td>
-              <td>{{line.sujet}}</td>
-              <td>
-                <CoverRateGauge @userLevel={{line.niveau_par_user}} @tubeLevel={{line.niveau_par_sujet}} />
-              </td>
-              <td class="table__column--center">
-                <TagLevel @level={{line.niveau_par_user}} />
-              </td>
+              <Header @size="wide" scope="col">{{t "pages.statistics.table.headers.skills"}}</Header>
+              <Header @size="medium" scope="col">{{t "pages.statistics.table.headers.topics"}}</Header>
+              <Header @size="medium" @align="center" scope="col">{{t
+                  "pages.statistics.table.headers.positioning"
+                }}</Header>
+              <Header @align="center" @size="medium" scope="col">{{t
+                  "pages.statistics.table.headers.reached-level"
+                }}</Header>
             </tr>
-          {{/each}}
-        </tbody>
-      </table>
-    </section>
+          </thead>
+          <tbody>
+            {{#each this.currentVisibleAnalysis as |line|}}
+              <tr>
+                <td>{{line.competence_code}} {{line.competence}}</td>
+                <td>{{line.sujet}}</td>
+                <td>
+                  <CoverRateGauge @userLevel={{line.niveau_par_user}} @tubeLevel={{line.niveau_par_sujet}} />
+                </td>
+                <td class="table__column--center">
+                  <TagLevel @level={{line.niveau_par_user}} />
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </section>
 
-    <PixPagination @pagination={{this.pagination}} @locale={{this.currentLocale}} />
+      <PixPagination @pagination={{this.pagination}} @locale={{this.currentLocale}} />
+    {{else}}
+      <section class="panel empty-state">
+        <div class="empty-state__text">
+          <p>{{t "pages.statistics.empty-state"}}</p>
+        </div>
+      </section>
+    {{/if}}
   </template>
 }
