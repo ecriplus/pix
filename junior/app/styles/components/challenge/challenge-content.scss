@@ -16,6 +16,7 @@
     grid-template-areas:
     "left  right"
     "left actions";
+    grid-template-rows: 0fr 0fr;
     grid-template-columns: 1fr 1fr;
 
     &--40-60 {

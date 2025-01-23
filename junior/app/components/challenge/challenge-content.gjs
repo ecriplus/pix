@@ -119,6 +119,7 @@ export default class ChallengeContent extends Component {
         @disableCheckButton={{@disableCheckButton}}
         @disableLessonButton={{@disableLessonButton}}
         @answerHasBeenValidated={{@answerHasBeenValidated}}
+        @responseColor={{@responseColor}}
       />
     </div>
   </template>

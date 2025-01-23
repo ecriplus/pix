@@ -1,5 +1,5 @@
 <template>
-  <div class="challenge-layout">
+  <div class="challenge-layout challenge-layout--{{@color}}">
     <div class="container">
       {{yield}}
     </div>

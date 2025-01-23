@@ -3,8 +3,21 @@
   justify-content: center;
   min-height: calc(100vh - 48px);
   padding: var(--pix-spacing-4x);
-  background-color: rgba(var(--pix-primary-500-inline), 10%);
   border-radius: 24px;
+
+  &--default {
+    background-color: rgba(var(--pix-primary-500-inline), 10%);
+  }
+
+  &--error {
+    background-color: rgba(var(--pix-error-500-inline), 10%);
+    border: 2px solid var(--pix-error-500);
+  }
+
+  &--success {
+    background-color: rgba(var(--pix-success-500-inline), 10%);
+    border: 2px solid var(--pix-success-500);
+  }
 
   .container {
     width: 100%;

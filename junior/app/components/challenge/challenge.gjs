@@ -28,6 +28,23 @@ export default class Challenge extends Component {
     return this.args.challenge.instructions.length * CHALLENGE_DISPLAY_DELAY;
   }
 
+  get layoutColor() {
+    if (this.answer?.result === 'ok') {
+      return 'success';
+    }
+    if (this.answer?.result === 'ko') {
+      return 'error';
+    }
+    return 'default';
+  }
+
+  get answerButtonColor() {
+    if (this.answer?.result === 'ok') {
+      return 'success';
+    }
+    return '';
+  }
+
   bubbleDisplayDelay(index) {
     return (index || 0) * CHALLENGE_DISPLAY_DELAY;
   }
@@ -141,7 +158,7 @@ export default class Challenge extends Component {
 
   <template>
     {{pageTitle (t "pages.challenge.title")}}
-    <ChallengeLayout>
+    <ChallengeLayout @color={{this.layoutColor}}>
       <div class="header_container">
         <RobotDialog @class={{this.robotMood}}>
           {{#each @challenge.instructions as |instruction index|}}
@@ -175,6 +192,7 @@ export default class Challenge extends Component {
           @activity={{@activity}}
           @resume={{this.resume}}
           @isDisabled={{this.hasBeenAnswered}}
+          @responseColor="{{this.answerButtonColor}}"
         />
       </DelayedElement>
     </ChallengeLayout>
