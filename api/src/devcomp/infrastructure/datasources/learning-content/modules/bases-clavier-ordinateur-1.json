@@ -423,7 +423,7 @@
           "element": {
             "id": "bb606781-2799-49d6-9985-2fabb448569e",
             "type": "text",
-            "content": "<details><summary> <span aria-hidden=\"true\">🤔</span> Bon à savoir </summary>\n    <p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.<span aria-hidden=\"true\">🙌</span> Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p>\n</details>"
+            "content": "<details><summary> <span aria-hidden=\"true\">🤔</span> Bon à savoir </summary>    <p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.<span aria-hidden=\"true\">🙌</span> Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p></details>"
           }
         }
       ]
@@ -578,7 +578,7 @@
           "element": {
             "id": "2e384ac8-402c-4745-b187-3cb7fc3eb916",
             "type": "text",
-            "content": "<p><strong>Dans la zone de texte ci-dessous, modifiez la phrase qui apparaît pour écrire :&nbsp;</strong> </p>\n<p>«Bravo à vous pour avoir joué ce module où vous avez appris à utiliser un clavier.»<br></p>"
+            "content": "<p><strong>Dans la zone de texte ci-dessous, modifiez la phrase qui apparaît pour écrire :&nbsp;</strong> </p><p>«Bravo à vous pour avoir joué ce module où vous avez appris à utiliser un clavier.»<br></p>"
           }
         },
         {
