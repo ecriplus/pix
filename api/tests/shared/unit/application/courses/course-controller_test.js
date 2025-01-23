@@ -1,6 +1,6 @@
 import { courseController } from '../../../../../src/shared/application/courses/course-controller.js';
 import { Course } from '../../../../../src/shared/domain/models/Course.js';
-import { expect, generateValidRequestAuthorizationHeader, hFake, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | course-controller', function () {
   let courseServiceStub;
@@ -25,7 +25,7 @@ describe('Unit | Controller | course-controller', function () {
       courseSerializerStub.serialize.callsFake(() => course);
       const request = {
         params: { id: 'course_id' },
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         pre: { userId },
       };
 

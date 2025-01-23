@@ -3,7 +3,7 @@ import { usecases } from '../../../../../src/certification/enrolment/domain/usec
 import {
   domainBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   hFake,
   sinon,
 } from '../../../../test-helper.js';
@@ -45,7 +45,7 @@ describe('Certification | Enrolment | Unit | Application | country-controller', 
 
       const request = {
         params: { id: 'course_id' },
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         pre: { userId },
       };
 

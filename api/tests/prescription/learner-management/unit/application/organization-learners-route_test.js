@@ -1,7 +1,7 @@
 import { organizationLearnersController } from '../../../../../src/prescription/learner-management/application/organization-learners-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/learner-management/application/organization-learners-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, generateValidRequestAuthorizationHeader, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Prescription | learner management | Application | Router | organization-learner-router', function () {
   describe('DELETE /api/admin/organization-learners/{id}/association', function () {
@@ -86,7 +86,7 @@ describe('Unit | Prescription | learner management | Application | Router | orga
     beforeEach(async function () {
       method = 'POST';
       url = '/api/organization-learners/reconcile';
-      headers = { authorization: generateValidRequestAuthorizationHeader(666) };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: 666 });
 
       reconcileCommonOrganizationLearnerStub = sinon
         .stub(organizationLearnersController, 'reconcileCommonOrganizationLearner')

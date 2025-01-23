@@ -7,7 +7,7 @@ import { usecases } from '../../../../../src/prescription/organization-place/dom
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
-import { expect, generateValidRequestAuthorizationHeader, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, sinon } from '../../../../test-helper.js';
 import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Unit | Router | organization-place-route', function () {
@@ -51,9 +51,7 @@ describe('Unit | Router | organization-place-route', function () {
       const url = `/api/admin/organizations/${idNotNumeric}/places`;
 
       // when
-      const response = await httpTestServer.request(method, url, null, null, {
-        authorization: generateValidRequestAuthorizationHeader(),
-      });
+      const response = await httpTestServer.request(method, url, null, null, generateAuthenticatedUserRequestHeaders());
 
       // then
       expect(response.statusCode).to.equal(400);
@@ -68,9 +66,7 @@ describe('Unit | Router | organization-place-route', function () {
       const url = '/api/admin/organizations/1/places';
 
       // when
-      const response = await httpTestServer.request(method, url, null, null, {
-        authorization: generateValidRequestAuthorizationHeader(),
-      });
+      const response = await httpTestServer.request(method, url, null, null, generateAuthenticatedUserRequestHeaders());
 
       // then
       expect(response.statusCode).to.equal(200);
@@ -103,9 +99,13 @@ describe('Unit | Router | organization-place-route', function () {
       };
 
       // when
-      const response = await httpTestServer.request(method, url, payload, null, {
-        authorization: generateValidRequestAuthorizationHeader(),
-      });
+      const response = await httpTestServer.request(
+        method,
+        url,
+        payload,
+        null,
+        generateAuthenticatedUserRequestHeaders(),
+      );
 
       // then
       expect(response.statusCode).to.equal(201);
@@ -133,9 +133,13 @@ describe('Unit | Router | organization-place-route', function () {
       };
 
       // when
-      const response = await httpTestServer.request(method, url, payload, null, {
-        authorization: generateValidRequestAuthorizationHeader(),
-      });
+      const response = await httpTestServer.request(
+        method,
+        url,
+        payload,
+        null,
+        generateAuthenticatedUserRequestHeaders(),
+      );
 
       // then
       expect(response.statusCode).to.equal(403);
@@ -156,9 +160,13 @@ describe('Unit | Router | organization-place-route', function () {
       };
 
       // when
-      const response = await httpTestServer.request(method, url, payload, null, {
-        authorization: generateValidRequestAuthorizationHeader(),
-      });
+      const response = await httpTestServer.request(
+        method,
+        url,
+        payload,
+        null,
+        generateAuthenticatedUserRequestHeaders(),
+      );
 
       // then
       expect(response.statusCode).to.equal(422);
@@ -178,9 +186,13 @@ describe('Unit | Router | organization-place-route', function () {
       organizationPlaceController.getOrganizationPlacesStatistics.callsFake((_, h) => h.response('ok').code(200));
 
       // when
-      const response = await httpTestServer.request(method, url, payload, null, {
-        authorization: generateValidRequestAuthorizationHeader(),
-      });
+      const response = await httpTestServer.request(
+        method,
+        url,
+        payload,
+        null,
+        generateAuthenticatedUserRequestHeaders(),
+      );
 
       // then
       expect(organizationPlaceController.getOrganizationPlacesStatistics).to.have.been.calledOnce;
@@ -197,9 +209,13 @@ describe('Unit | Router | organization-place-route', function () {
       checkOrganizationHasPlacesFeature.resolves(true);
 
       // when
-      const response = await httpTestServer.request(method, url, payload, null, {
-        authorization: generateValidRequestAuthorizationHeader(),
-      });
+      const response = await httpTestServer.request(
+        method,
+        url,
+        payload,
+        null,
+        generateAuthenticatedUserRequestHeaders(),
+      );
 
       // then
       expect(response.statusCode).to.equal(403);
@@ -215,9 +231,13 @@ describe('Unit | Router | organization-place-route', function () {
       checkOrganizationHasPlacesFeature.callsFake(respondWithError);
 
       // when
-      const response = await httpTestServer.request(method, url, payload, null, {
-        authorization: generateValidRequestAuthorizationHeader(),
-      });
+      const response = await httpTestServer.request(
+        method,
+        url,
+        payload,
+        null,
+        generateAuthenticatedUserRequestHeaders(),
+      );
 
       // then
       expect(response.statusCode).to.equal(403);
