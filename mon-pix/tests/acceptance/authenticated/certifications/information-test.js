@@ -24,7 +24,7 @@ module('Acceptance | Certifications | Information', function (hooks) {
     test('should display the certification instructions page', async function (assert) {
       // given
       server.create('certification-candidate-subscription', {
-        id: 2,
+        id: '2',
         sessionId: 123,
         eligibleSubscriptions: null,
         nonEligibleSubscription: null,
@@ -59,7 +59,7 @@ module('Acceptance | Certifications | Information', function (hooks) {
       test('should validate checkbox and redirect to the certification start page', async function (assert) {
         // given
         server.create('certification-candidate-subscription', {
-          id: 2,
+          id: '2',
           sessionId: 123,
           eligibleSubscriptions: null,
           nonEligibleSubscription: null,
@@ -100,7 +100,7 @@ module('Acceptance | Certifications | Information', function (hooks) {
       test('should redirect to the certification start page', async function (assert) {
         // given
         server.create('certification-candidate-subscription', {
-          id: 2,
+          id: '2',
           sessionId: 123,
           eligibleSubscriptions: null,
           nonEligibleSubscription: null,

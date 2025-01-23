@@ -10,7 +10,7 @@ module('Unit | Route | User-Dashboard', function (hooks) {
   module('#model', function () {
     test('should returns the model that contains campaignParticipationOverviews and scorecards', async function (assert) {
       // given
-      const scorecards = [EmberObject.create({ id: 3 }), EmberObject.create({ id: 8 })];
+      const scorecards = [EmberObject.create({ id: '3' }), EmberObject.create({ id: '8' })];
       const profile = EmberObject.create({ scorecards });
       const belongsToReloadStub = sinon.stub().returns(profile);
       const belongsToStub = sinon.stub().returns({ reload: belongsToReloadStub });
@@ -21,7 +21,7 @@ module('Unit | Route | User-Dashboard', function (hooks) {
         },
       });
 
-      const campaignParticipationOverviews = [EmberObject.create({ id: 10 })];
+      const campaignParticipationOverviews = [EmberObject.create({ id: '10' })];
       const storeStub = { query: sinon.stub().returns(campaignParticipationOverviews) };
 
       const route = this.owner.lookup('route:authenticated.user-dashboard');

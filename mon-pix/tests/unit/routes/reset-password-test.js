@@ -54,7 +54,7 @@ module('Unit | Route | reset-password', function (hooks) {
         // given
         const fetchedOwnerDetails = {
           data: {
-            id: 7,
+            id: '7',
             attributes: {
               email: 'pix@qmail.fr',
             },
@@ -62,7 +62,7 @@ module('Unit | Route | reset-password', function (hooks) {
         };
         const expectedUser = {
           data: {
-            id: 7,
+            id: '7',
             attributes: {
               email: 'pix@qmail.fr',
             },

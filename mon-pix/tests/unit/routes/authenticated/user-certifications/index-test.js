@@ -28,13 +28,13 @@ module('Unit | Route | user certifications/index', function (hooks) {
 
   test('should return connected user certifications', async function (assert) {
     // given
-    const certifications = [EmberObject.create({ id: 1 })];
+    const certifications = [EmberObject.create({ id: '1' })];
     findAll.resolves(certifications);
 
     // when
     const result = await route.model();
 
     // then
-    assert.strictEqual(result[0].id, 1);
+    assert.strictEqual(result[0].id, '1');
   });
 });

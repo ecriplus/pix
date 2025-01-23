@@ -10,7 +10,7 @@ module('Unit | Component | Assessments | Assessments', function (hooks) {
     test('should create a companion live alert and reload assessment', async function (assert) {
       // given
       const assessment = {
-        id: 123,
+        id: '123',
         isCertification: true,
         reload: sinon.stub(),
       };
@@ -25,7 +25,7 @@ module('Unit | Component | Assessments | Assessments', function (hooks) {
       await component.createLiveAlert();
 
       // then
-      sinon.assert.calledOnceWithExactly(createCompanionLiveAlertStub, { assessmentId: 123 });
+      sinon.assert.calledOnceWithExactly(createCompanionLiveAlertStub, { assessmentId: '123' });
       sinon.assert.calledOnceWithExactly(assessment.reload);
       assert.ok(true);
     });

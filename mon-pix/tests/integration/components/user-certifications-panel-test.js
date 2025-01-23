@@ -22,13 +22,13 @@ module('Integration | Component | user certifications panel', function (hooks) {
     test('should render a certifications list', async function (assert) {
       // given
       const certification1 = EmberObject.create({
-        id: 1,
+        id: '1',
         date: '2018-02-15T15:15:52.504Z',
         status: 'completed',
         certificationCenter: 'Université de Paris',
       });
       const certification2 = EmberObject.create({
-        id: 2,
+        id: '2',
         date: '2018-02-15T15:15:52.504Z',
         status: 'completed',
         certificationCenter: 'Université de Lyon',

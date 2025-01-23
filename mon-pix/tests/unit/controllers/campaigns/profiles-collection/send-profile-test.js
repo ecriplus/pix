@@ -6,7 +6,7 @@ module('Unit | Controller | campaigns/profiles-collection/send-profile', functio
   setupTest(hooks);
 
   const campaignParticipation = {
-    id: 8654,
+    id: '8654',
     isShared: false,
     save: sinon.stub(),
     set: sinon.stub().resolves(),
@@ -16,7 +16,7 @@ module('Unit | Controller | campaigns/profiles-collection/send-profile', functio
 
   const model = {
     campaign: {
-      id: 1243,
+      id: '1243',
       code: 'CODECAMPAIGN',
       isAccessible: true,
     },

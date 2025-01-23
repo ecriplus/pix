@@ -171,7 +171,7 @@ module('Integration | Component | user logged menu', function (hooks) {
       module('when user has at least one participation', function (hooks) {
         hooks.beforeEach(function () {
           stubCurrentUserService(this.owner, {
-            id: 456,
+            id: '456',
             firstName: 'Hermione',
             lastName: 'Granger',
             hasAssessmentParticipations: true,

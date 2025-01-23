@@ -32,7 +32,7 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
     hooks.beforeEach(function () {
       const answers = EmberObject.create();
       answers.reload = sinon.stub().resolves();
-      assessment = EmberObject.create({ id: 123, isDemo: true, competenceId: 'recCompetenceId', answers });
+      assessment = EmberObject.create({ id: '123', isDemo: true, competenceId: 'recCompetenceId', answers });
       assessment.save = sinon.stub().resolves();
     });
 
@@ -40,7 +40,7 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
       let nextChallenge;
 
       hooks.beforeEach(function () {
-        nextChallenge = EmberObject.create({ id: 456 });
+        nextChallenge = EmberObject.create({ id: '456' });
         queryRecordStub.resolves(nextChallenge);
         route.assessmentHasNoMoreQuestions = false;
       });
@@ -70,7 +70,7 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
               // then
               return promise.then(() => {
                 sinon.assert.calledOnce(route.router.replaceWith);
-                sinon.assert.calledWith(route.router.replaceWith, 'assessments.challenge', 123);
+                sinon.assert.calledWith(route.router.replaceWith, 'assessments.challenge', '123');
                 assert.ok(true);
               });
             });
@@ -88,7 +88,7 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
               // then
               return promise.then(() => {
                 sinon.assert.calledOnce(route.router.replaceWith);
-                sinon.assert.calledWith(route.router.replaceWith, 'assessments.checkpoint', 123);
+                sinon.assert.calledWith(route.router.replaceWith, 'assessments.checkpoint', '123');
                 assert.ok(true);
               });
             });
@@ -103,7 +103,7 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
             // then
             return promise.then(() => {
               sinon.assert.calledOnce(route.router.replaceWith);
-              sinon.assert.calledWith(route.router.replaceWith, 'assessments.challenge', 123);
+              sinon.assert.calledWith(route.router.replaceWith, 'assessments.challenge', '123');
               assert.ok(true);
             });
           });
@@ -121,7 +121,7 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
           // then
           return promise.then(() => {
             sinon.assert.calledOnce(route.router.replaceWith);
-            sinon.assert.calledWith(route.router.replaceWith, 'assessments.challenge', 123);
+            sinon.assert.calledWith(route.router.replaceWith, 'assessments.challenge', '123');
             assert.ok(true);
           });
         });
@@ -177,7 +177,7 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
               // then
               return promise.then(() => {
                 sinon.assert.calledOnce(route.router.replaceWith);
-                sinon.assert.calledWith(route.router.replaceWith, 'assessments.checkpoint', 123, {
+                sinon.assert.calledWith(route.router.replaceWith, 'assessments.checkpoint', '123', {
                   queryParams: { finalCheckpoint: true, newLevel: null, competenceLeveled: null },
                 });
                 assert.ok(true);
@@ -231,7 +231,7 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
 
           // then
           return promise.then(() => {
-            sinon.assert.calledWith(route.router.replaceWith, 'authenticated.competences.results', competenceId, 123);
+            sinon.assert.calledWith(route.router.replaceWith, 'authenticated.competences.results', competenceId, '123');
             assert.ok(true);
           });
         });
@@ -244,7 +244,7 @@ module('Unit | Route | Assessments | Resume', function (hooks) {
 
           // then
           return promise.then(() => {
-            sinon.assert.calledWith(route.router.replaceWith, 'assessments.results', 123);
+            sinon.assert.calledWith(route.router.replaceWith, 'assessments.results', '123');
             assert.ok(true);
           });
         });

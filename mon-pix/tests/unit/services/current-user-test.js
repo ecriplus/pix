@@ -10,7 +10,7 @@ module('Unit | Service | current-user', function (hooks) {
   let sessionStub;
 
   module('user is authenticated', function (hooks) {
-    const user = { id: 1 };
+    const user = { id: '1' };
     hooks.beforeEach(function () {
       sessionStub = Service.create({ isAuthenticated: true });
       storeStub = Service.create({

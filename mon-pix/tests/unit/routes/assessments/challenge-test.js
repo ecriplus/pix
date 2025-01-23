@@ -122,7 +122,7 @@ module('Unit | Route | Assessments | Challenge', function (hooks) {
 
       hooks.beforeEach(function () {
         answer = {
-          id: 3,
+          id: '3',
           challenge: {
             id: 'oldRecId',
             get: () => 'oldRecId',

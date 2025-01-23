@@ -9,7 +9,7 @@ module('Unit | Adapter | Email-Verification-Code', function (hooks) {
   module('#buildURL', function () {
     test('should call API to send email verification code', async function (assert) {
       // given
-      const currentUserService = stubCurrentUserService(this.owner, { id: 123 });
+      const currentUserService = stubCurrentUserService(this.owner, { id: '123' });
       currentUserService.user.get.returns(123);
 
       // when

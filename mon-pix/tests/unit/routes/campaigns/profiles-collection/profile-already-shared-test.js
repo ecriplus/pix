@@ -6,8 +6,8 @@ module('Unit | Route | Campaign | Profiles Collection | Profile already shared',
   setupTest(hooks);
 
   let route;
-  const campaign = { id: 123456, code: 'NEW_CODE' };
-  const user = { id: 567890 };
+  const campaign = { id: '123456', code: 'NEW_CODE' };
+  const user = { id: '567890' };
   const storeStub = {
     queryRecord: sinon.stub(),
   };

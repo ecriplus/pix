@@ -49,7 +49,7 @@ module('Unit | Route | user certifications/get', function (hooks) {
       // given
       const params = { id: certificationId };
       const retrievedCertification = EmberObject.create({
-        id: 2,
+        id: '2',
         date: '2018-02-15T15:15:52.504Z',
         status: 'validated',
         certificationCenter: 'Université de Lyon',
@@ -69,7 +69,7 @@ module('Unit | Route | user certifications/get', function (hooks) {
       // given
       const params = { id: certificationId };
       const retreivedCertification = EmberObject.create({
-        id: 2,
+        id: '2',
         date: '2018-02-15T15:15:52.504Z',
         status: 'validated',
         certificationCenter: 'Université de Lyon',
@@ -91,7 +91,7 @@ module('Unit | Route | user certifications/get', function (hooks) {
       // given
       const params = { id: certificationId };
       const retreivedCertification = EmberObject.create({
-        id: 3,
+        id: '3',
         date: '2018-02-15T15:15:52.504Z',
         status: 'rejected',
         certificationCenter: 'Université de Lyon',

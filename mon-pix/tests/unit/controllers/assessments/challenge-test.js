@@ -237,11 +237,11 @@ module('Unit | Controller | Assessments | Challenge', function (hooks) {
       controller.model = {
         assessment: {
           reload: sinon.stub(),
-          id: 123,
+          id: '123',
           state: 'started',
         },
         challenge: {
-          id: 456,
+          id: '456',
         },
       };
       const store = this.owner.lookup('service:store');
@@ -253,7 +253,7 @@ module('Unit | Controller | Assessments | Challenge', function (hooks) {
 
       // then
       assert.ok(createLiveAlertStub.calledOnce);
-      sinon.assert.calledWithExactly(createLiveAlertStub, 123, 456);
+      sinon.assert.calledWithExactly(createLiveAlertStub, '123', '456');
     });
 
     test('should reload the model', async function (assert) {
@@ -261,11 +261,11 @@ module('Unit | Controller | Assessments | Challenge', function (hooks) {
       controller.model = {
         assessment: {
           reload: sinon.stub(),
-          id: 123,
+          id: '123',
           state: 'started',
         },
         challenge: {
-          id: 456,
+          id: '456',
         },
       };
       const store = this.owner.lookup('service:store');

@@ -15,7 +15,7 @@ module('Integration | Component | user certifications detail result', function (
     test('should show the comment for candidate', async function (assert) {
       // given
       const certification = EmberObject.create({
-        id: 1,
+        id: '1',
         birthdate: new Date('2000-01-22T15:15:52Z'),
         firstName: 'Jean',
         lastName: 'Bon',
@@ -40,7 +40,7 @@ module('Integration | Component | user certifications detail result', function (
     test('should not show the comment for candidate', async function (assert) {
       // given
       const certification = EmberObject.create({
-        id: 1,
+        id: '1',
         birthdate: new Date('2000-01-22T15:15:52Z'),
         firstName: 'Jean',
         lastName: 'Bon',
@@ -65,7 +65,7 @@ module('Integration | Component | user certifications detail result', function (
     test('should show the complementary certification section', async function (assert) {
       // given
       certification = EmberObject.create({
-        id: 1,
+        id: '1',
         birthdate: new Date('2000-01-22T15:15:52Z'),
         firstName: 'Jean',
         lastName: 'Bon',
@@ -95,7 +95,7 @@ module('Integration | Component | user certifications detail result', function (
       test('should show the complementary certification badge', async function (assert) {
         // given
         certification = EmberObject.create({
-          id: 1,
+          id: '1',
           birthdate: new Date('2000-01-22T15:15:52Z'),
           firstName: 'Jean',
           lastName: 'Bon',
@@ -127,7 +127,7 @@ module('Integration | Component | user certifications detail result', function (
         test('should display the message', async function (assert) {
           // given
           certification = EmberObject.create({
-            id: 1,
+            id: '1',
             birthdate: new Date('2000-01-22T15:15:52Z'),
             firstName: 'Jean',
             lastName: 'Bon',
@@ -162,7 +162,7 @@ module('Integration | Component | user certifications detail result', function (
       test('should not show the complementary certification badge', async function (assert) {
         // given
         certification = EmberObject.create({
-          id: 1,
+          id: '1',
           birthdate: new Date('2000-01-22T15:15:52Z'),
           firstName: 'Jean',
           lastName: 'Bon',
@@ -191,7 +191,7 @@ module('Integration | Component | user certifications detail result', function (
     test('should not show the complementary certification badge section', async function (assert) {
       // given
       certification = EmberObject.create({
-        id: 1,
+        id: '1',
         birthdate: new Date('2000-01-22T15:15:52Z'),
         firstName: 'Jean',
         lastName: 'Bon',

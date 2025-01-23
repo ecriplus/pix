@@ -66,7 +66,7 @@ module('Acceptance | Challenge page banner', function (hooks) {
       let challenge;
 
       hooks.beforeEach(function () {
-        server.create('feature-toggle', { id: 0, isTextToSpeechButtonEnabled: true });
+        server.create('feature-toggle', { id: '0', isTextToSpeechButtonEnabled: true });
         assessment = server.create('assessment', 'ofCompetenceEvaluationType', {
           title: 'Assessment title',
         });

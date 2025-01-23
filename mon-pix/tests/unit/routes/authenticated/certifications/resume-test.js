@@ -19,7 +19,7 @@ module('Unit | Route | Certification | Resume', function (hooks) {
     const params = { certification_course_id: certificationCourseId };
 
     hooks.beforeEach(function () {
-      assessment = EmberObject.create({ id: 123 });
+      assessment = EmberObject.create({ id: '123' });
       getAssessmentStub = sinon.stub().returns(assessment);
       queryStub = sinon.stub().resolves({
         get: getAssessmentStub,

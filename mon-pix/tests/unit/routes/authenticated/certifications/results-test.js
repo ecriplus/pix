@@ -13,7 +13,7 @@ module('Unit | Route | Certifications | Results', function (hooks) {
       const reloadStub = sinon.stub().resolves();
       const assessment = EmberObject.create({ reload: reloadStub });
       const certificationCourse = EmberObject.create({
-        id: 1,
+        id: '1',
         assessment,
       });
       const findRecordStub = sinon.stub().resolves(certificationCourse);

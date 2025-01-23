@@ -81,7 +81,7 @@ export function stubSessionService(owner, sessionData = {}) {
 export function stubCurrentUserService(owner, userData = {}, { withStoreStubbed } = { withStoreStubbed: true }) {
   const isAuthenticated = userData.isAuthenticated ?? true;
   const isAnonymous = userData.isAnonymous || false;
-  const id = userData.id || 123;
+  const id = `${userData.id}` || '123';
   const firstName = userData.firstName || 'John';
   const lastName = userData.lastName || 'Doe';
   const fullName = `${firstName} ${lastName}`;

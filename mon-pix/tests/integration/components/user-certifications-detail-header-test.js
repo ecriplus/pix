@@ -18,7 +18,7 @@ module('Integration | Component | user certifications detail header', function (
       // given
       store = this.owner.lookup('service:store');
       certification = store.createRecord('certification', {
-        id: 1,
+        id: '1',
         birthdate: '2000-01-22',
         birthplace: 'Paris',
         firstName: 'Jean',
@@ -68,7 +68,7 @@ module('Integration | Component | user certifications detail header', function (
       // given
       const store = this.owner.lookup('service:store');
       const certification = store.createRecord('certification', {
-        id: 1,
+        id: '1',
         birthdate: '2000-01-22',
         birthplace: null,
         firstName: null,
@@ -106,7 +106,7 @@ module('Integration | Component | user certifications detail header', function (
         // given
         const store = this.owner.lookup('service:store');
         const certification = store.createRecord('certification', {
-          id: 1,
+          id: '1',
           birthdate: '2000-01-22',
           birthplace: 'Paris',
           firstName: 'Jean',
@@ -141,7 +141,7 @@ module('Integration | Component | user certifications detail header', function (
         // given
         const store = this.owner.lookup('service:store');
         const certification = store.createRecord('certification', {
-          id: 1,
+          id: '1',
           birthdate: '2000-01-22',
           birthplace: 'Paris',
           firstName: 'Jean',
@@ -176,7 +176,7 @@ module('Integration | Component | user certifications detail header', function (
         // given
         const store = this.owner.lookup('service:store');
         const certification = store.createRecord('certification', {
-          id: 1,
+          id: '1',
           birthdate: '2000-01-22',
           birthplace: 'Paris',
           firstName: 'Jean',
@@ -218,7 +218,7 @@ module('Integration | Component | user certifications detail header', function (
 
       const store = this.owner.lookup('service:store');
       const certification = store.createRecord('certification', {
-        id: 1234,
+        id: '1234',
         birthdate: '2000-01-22',
         birthplace: 'Paris',
         firstName: 'Jean',
@@ -261,7 +261,7 @@ module('Integration | Component | user certifications detail header', function (
 
       const store = this.owner.lookup('service:store');
       const certification = store.createRecord('certification', {
-        id: 1,
+        id: '1',
         birthdate: '2000-01-22',
         birthplace: 'Paris',
         firstName: 'Jean',
@@ -299,7 +299,7 @@ module('Integration | Component | user certifications detail header', function (
 
       const store = this.owner.lookup('service:store');
       const certification = store.createRecord('certification', {
-        id: 1234,
+        id: '1234',
         birthdate: '2000-01-22',
         birthplace: 'Paris',
         firstName: 'Jean',
@@ -344,7 +344,7 @@ module('Integration | Component | user certifications detail header', function (
 
       const store = this.owner.lookup('service:store');
       const certification = store.createRecord('certification', {
-        id: 1234,
+        id: '1234',
         birthdate: '2000-01-22',
         birthplace: 'Paris',
         firstName: 'Jean',

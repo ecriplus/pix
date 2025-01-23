@@ -17,7 +17,7 @@ module('Unit | Route | Assessments | Results', function (hooks) {
       const route = this.owner.lookup('route:assessments.results');
       route.router = { transitionTo: sinon.spy() };
 
-      const assessment = EmberObject.create({ id: 123, isCertification: true });
+      const assessment = EmberObject.create({ id: '123', isCertification: true });
 
       // when
       route.afterModel(assessment);
@@ -32,7 +32,7 @@ module('Unit | Route | Assessments | Results', function (hooks) {
       const route = this.owner.lookup('route:assessments.results');
       route.router = { transitionTo: sinon.spy() };
 
-      const assessment = EmberObject.create({ id: 123, isCertification: false, answers: [] });
+      const assessment = EmberObject.create({ id: '123', isCertification: false, answers: [] });
 
       // when
       route.afterModel(assessment);

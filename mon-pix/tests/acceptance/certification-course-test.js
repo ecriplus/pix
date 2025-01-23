@@ -202,14 +202,14 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             // given
             await visit('/certifications');
             this.server.schema.certificationCandidates.create({
-              id: 1,
+              id: '1',
               firstName: 'Laura',
               lastName: 'CandidatLiéUtilisateur',
               sessionId: 1,
               birthdate: '1990-01-04',
             });
             this.server.create('certification-candidate-subscription', {
-              id: 1,
+              id: '1',
               sessionId: 1,
               eligibleSubscriptions: null,
               nonEligibleSubscription: null,
@@ -236,7 +236,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             // given
             await visit('/certifications');
             this.server.create('certification-candidate-subscription', {
-              id: 2,
+              id: '2',
               sessionId: 1,
               eligibleSubscriptions: null,
               nonEligibleSubscription: null,
@@ -277,7 +277,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             assessment = certificationCourse.assessment;
 
             this.server.create('certification-candidate-subscription', {
-              id: 2,
+              id: '2',
               sessionId: 1,
               eligibleSubscriptions: null,
               nonEligibleSubscription: null,
@@ -400,7 +400,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
           lastName: 'Bravo',
         });
         this.server.create('certification-candidate-subscription', {
-          id: 2,
+          id: '2',
           sessionId: 1,
           eligibleSubscriptions: null,
           nonEligibleSubscription: null,
@@ -462,7 +462,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             server.create('challenge', 'forCertification');
             server.create('challenge', 'forCertification');
             server.create('certification-course', {
-              id: 99,
+              id: '99',
               accessCode: 'ABCD12',
               sessionId: 1,
               nbChallenges: 2,
@@ -475,7 +475,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
               state: assessmentStates.STARTED,
             });
             server.create('certification-candidate-subscription', {
-              id: 2,
+              id: '2',
               sessionId: 1,
               eligibleSubscriptions: null,
               nonEligibleSubscription: null,
@@ -554,7 +554,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             version: 2,
           });
           this.server.create('certification-candidate-subscription', {
-            id: 2,
+            id: '2',
             sessionId: 1,
             eligibleSubscriptions: null,
             nonEligibleSubscription: null,
@@ -605,7 +605,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
           });
 
           this.server.create('certification-candidate-subscription', {
-            id: 2,
+            id: '2',
             sessionId: 1,
             eligibleSubscriptions: null,
             nonEligibleSubscription: null,
@@ -651,7 +651,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             });
 
             this.server.create('certification-candidate-subscription', {
-              id: 2,
+              id: '2',
               sessionId: 1,
               eligibleSubscriptions: null,
               nonEligibleSubscription: null,

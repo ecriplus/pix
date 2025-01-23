@@ -20,7 +20,7 @@ module('Acceptance | Campaigns | Resume Campaigns with type Assessment', functio
     studentInfo = server.create('user', 'withEmail');
     await authenticate(studentInfo);
     campaign = server.create('campaign', {
-      id: 23456,
+      id: '23456',
       externalIdLabel: 'email',
       type: ASSESSMENT,
     });

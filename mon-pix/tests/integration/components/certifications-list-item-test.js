@@ -235,7 +235,7 @@ module('Integration | Component | certifications list item', function (hooks) {
         test('should show Certification annulée with comments', async function (assert) {
           // given
           const certification = EmberObject.create({
-            id: 1,
+            id: '1',
             date: '2018-02-15T15:15:52.504Z',
             status: 'cancelled',
             certificationCenter: 'Université de Paris',
@@ -296,7 +296,7 @@ module('Integration | Component | certifications list item', function (hooks) {
 
 function createCertification({ status, isPublished, commentForCandidate }) {
   return EmberObject.create({
-    id: 1,
+    id: '1',
     date: '2018-02-15T15:15:52.504Z',
     certificationCenter: 'Université de Paris',
     pixScore: 231,

@@ -14,8 +14,8 @@ module('Unit | Route | Courses | Start', function (hooks) {
   let createdAssessment;
 
   hooks.beforeEach(function () {
-    course = EmberObject.create({ id: 1, type: 'DEMO' });
-    createdAssessment = EmberObject.create({ id: 1234 });
+    course = EmberObject.create({ id: '1', type: 'DEMO' });
+    createdAssessment = EmberObject.create({ id: '1234' });
     createRecordStub = sinon.stub().returns({
       save: sinon.stub().resolves(createdAssessment),
     });

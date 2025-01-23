@@ -40,7 +40,7 @@ module('Acceptance | competences results', function (hooks) {
         level: 2,
       });
       const olderCompetence = this.server.create('competence-evaluation', {
-        id: 2,
+        id: '2',
         assessmentId: assessmentId,
         competenceId: 9,
         userId: user.id,
@@ -49,7 +49,7 @@ module('Acceptance | competences results', function (hooks) {
       olderCompetence.update({ scorecard: olderCompetenceScoreCard });
 
       this.server.create('competence-evaluation', {
-        id: 1,
+        id: '1',
         assessmentId: assessmentId,
         competenceId: competenceId,
         userId: user.id,

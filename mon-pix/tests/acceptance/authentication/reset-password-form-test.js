@@ -17,7 +17,7 @@ module('Acceptance | Reset Password Form', function (hooks) {
   test('can visit /changer-mot-de-passe when temporaryKey exists', async function (assert) {
     // given
     server.create('user', {
-      id: 1000,
+      id: '1000',
       firstName: 'Brandone',
       lastName: 'Martins',
       email: 'brandone.martins@pix.com',
@@ -39,7 +39,7 @@ module('Acceptance | Reset Password Form', function (hooks) {
   test('stays on /changer-mot-de-passe when password is successfully reset', async function (assert) {
     // given
     server.create('user', {
-      id: 1000,
+      id: '1000',
       firstName: 'Brandone',
       lastName: 'Martins',
       email: 'brandone.martins@pix.com',
@@ -67,7 +67,7 @@ module('Acceptance | Reset Password Form', function (hooks) {
   test('allows connected user to visit reset-password page', async function (assert) {
     // given
     const user = server.create('user', {
-      id: 1000,
+      id: '1000',
       firstName: 'Brandone',
       lastName: 'Martins',
       email: 'brandone.martins@pix.com',

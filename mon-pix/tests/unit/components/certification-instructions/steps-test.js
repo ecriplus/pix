@@ -42,14 +42,14 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
           };
           component.args.candidate = {
             save: saveStub,
-            id: 123,
+            id: '123',
           };
 
           // when
           await component.nextStep();
 
           // then
-          assert.ok(transitionToStub.calledWith('authenticated.certifications.start', 123));
+          assert.ok(transitionToStub.calledWith('authenticated.certifications.start', '123'));
         });
       });
     });

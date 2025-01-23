@@ -6,10 +6,10 @@ module('Unit | Route | Campaign | Assessment | Results', function (hooks) {
   setupTest(hooks);
 
   let route;
-  const campaign = { id: 123456, code: 'NEW_CODE' };
+  const campaign = { id: '123456', code: 'NEW_CODE' };
   const questResults = [{ obtained: true, reward: { key: 'reward-key' } }];
-  const campaignParticipation = { id: 1212, isShared: true, hasMany: sinon.stub() };
-  const user = { id: 567890 };
+  const campaignParticipation = { id: '1212', isShared: true, hasMany: sinon.stub() };
+  const user = { id: '567890' };
   const storeStub = {
     queryRecord: sinon.stub(),
     query: sinon.stub(),

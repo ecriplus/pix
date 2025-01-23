@@ -64,8 +64,8 @@ module('Acceptance | account-recovery | FindScoRecordRoute', function (hooks) {
   module('when submitting information form with valid data', function () {
     test('should hide student information form and show recover account confirmation step', async function (assert) {
       // given
-      this.server.create('user', { id: 1, firstName, lastName, username });
-      this.server.create('student-information', { id: 2, ineIna, firstName, lastName, birthdate });
+      this.server.create('user', { id: '1', firstName, lastName, username });
+      this.server.create('student-information', { id: '2', ineIna, firstName, lastName, birthdate });
 
       // when
       const screen = await visit('/recuperer-mon-compte');
@@ -120,8 +120,8 @@ module('Acceptance | account-recovery | FindScoRecordRoute', function (hooks) {
     module('click on "Cancel" button', function () {
       test('should return to student information form', async function (assert) {
         // given
-        this.server.create('user', { id: 1, firstName, lastName, username });
-        this.server.create('student-information', { id: 2, ineIna, firstName, lastName, birthdate });
+        this.server.create('user', { id: '1', firstName, lastName, username });
+        this.server.create('student-information', { id: '2', ineIna, firstName, lastName, birthdate });
 
         const screen = await visit('/recuperer-mon-compte');
         await fillStudentInformationFormAndSubmit();
@@ -166,13 +166,13 @@ module('Acceptance | account-recovery | FindScoRecordRoute', function (hooks) {
     test('should redirect to account recovery conflict page', async function (assert) {
       // given
       this.server.create('user', {
-        id: 1,
+        id: '1',
         firstName,
         lastName,
       });
 
       this.server.create('student-information', {
-        id: 2,
+        id: '2',
         ineIna,
         firstName,
         lastName,
@@ -197,8 +197,8 @@ module('Acceptance | account-recovery | FindScoRecordRoute', function (hooks) {
     module('click on "Confirm" button', function () {
       test('should hide recover account confirmation step and show recover account backup email confirmation', async function (assert) {
         // given
-        this.server.create('user', { id: 1, firstName, lastName, username });
-        this.server.create('student-information', { id: 2, ineIna, firstName, lastName, birthdate });
+        this.server.create('user', { id: '1', firstName, lastName, username });
+        this.server.create('student-information', { id: '2', ineIna, firstName, lastName, birthdate });
 
         const screen = await visit('/recuperer-mon-compte');
         await fillStudentInformationFormAndSubmit();
@@ -227,8 +227,8 @@ module('Acceptance | account-recovery | FindScoRecordRoute', function (hooks) {
         // given
         const email = 'john.doe@example.net';
 
-        this.server.create('user', { id: 1, firstName, lastName, username, email });
-        this.server.create('student-information', { id: 2, ineIna, firstName, lastName, birthdate });
+        this.server.create('user', { id: '1', firstName, lastName, username, email });
+        this.server.create('student-information', { id: '2', ineIna, firstName, lastName, birthdate });
 
         const screen = await visit('/recuperer-mon-compte');
         await fillStudentInformationFormAndSubmit();
@@ -255,8 +255,8 @@ module('Acceptance | account-recovery | FindScoRecordRoute', function (hooks) {
         // given
         const newEmail = 'john.doe@example.net';
 
-        this.server.create('user', { id: 1, firstName, lastName, username });
-        this.server.create('student-information', { id: 2, ineIna, firstName, lastName, birthdate });
+        this.server.create('user', { id: '1', firstName, lastName, username });
+        this.server.create('student-information', { id: '2', ineIna, firstName, lastName, birthdate });
 
         const screen = await visit('/recuperer-mon-compte');
         await fillStudentInformationFormAndSubmit();
@@ -288,8 +288,8 @@ module('Acceptance | account-recovery | FindScoRecordRoute', function (hooks) {
         // given
         const newEmail = 'john.doe@example.net';
 
-        this.server.create('user', { id: 1, firstName, lastName, username });
-        this.server.create('student-information', { id: 2, ineIna, firstName, lastName, birthdate });
+        this.server.create('user', { id: '1', firstName, lastName, username });
+        this.server.create('student-information', { id: '2', ineIna, firstName, lastName, birthdate });
 
         const errorsApi = new Response(
           403,
@@ -333,8 +333,8 @@ module('Acceptance | account-recovery | FindScoRecordRoute', function (hooks) {
         // given
         const newEmail = 'john.doe@example.net';
 
-        this.server.create('user', { id: 1, firstName, lastName, username });
-        this.server.create('student-information', { id: 2, ineIna, firstName, lastName, birthdate });
+        this.server.create('user', { id: '1', firstName, lastName, username });
+        this.server.create('student-information', { id: '2', ineIna, firstName, lastName, birthdate });
 
         const errorsApi = new Response(
           500,
@@ -379,8 +379,8 @@ module('Acceptance | account-recovery | FindScoRecordRoute', function (hooks) {
       test('should return to student information form', async function (assert) {
         // given
 
-        this.server.create('user', { id: 1, firstName, lastName, username });
-        this.server.create('student-information', { id: 2, ineIna, firstName, lastName, birthdate });
+        this.server.create('user', { id: '1', firstName, lastName, username });
+        this.server.create('student-information', { id: '2', ineIna, firstName, lastName, birthdate });
 
         const screen = await visit('/recuperer-mon-compte');
         await fillStudentInformationFormAndSubmit();

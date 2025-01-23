@@ -15,7 +15,7 @@ module('Unit | Route | Competence | Resume', function (hooks) {
   let competenceEvaluation;
 
   hooks.beforeEach(function () {
-    competenceEvaluation = EmberObject.create({ id: 123, competenceId });
+    competenceEvaluation = EmberObject.create({ id: '123', competenceId });
 
     queryRecordStub = sinon.stub().resolves(competenceEvaluation);
     storeStub = Service.create({
