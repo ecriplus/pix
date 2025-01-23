@@ -4,7 +4,7 @@ import { securityPreHandlers } from '../../../../../src/shared/application/secur
 import {
   domainBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
   sinon,
 } from '../../../../test-helper.js';
@@ -57,9 +57,7 @@ describe('Integration | Application | organization-place-controller', function (
           `/api/admin/organizations/${organizationId}/places`,
           null,
           null,
-          {
-            authorization: generateValidRequestAuthorizationHeader(),
-          },
+          generateAuthenticatedUserRequestHeaders(),
         );
 
         // then

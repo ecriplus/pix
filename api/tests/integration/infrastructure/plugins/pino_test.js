@@ -5,7 +5,7 @@ import pino from 'pino';
 import { config } from '../../../../src/shared/config.js';
 import { monitoringTools } from '../../../../src/shared/infrastructure/monitoring-tools.js';
 import * as pinoPlugin from '../../../../src/shared/infrastructure/plugins/pino.js';
-import { expect, generateValidRequestAuthorizationHeader, HttpTestServer, sinon } from '../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Integration | Infrastructure | plugins | pino', function () {
   let httpTestServer;
@@ -134,9 +134,7 @@ describe('Integration | Infrastructure | plugins | pino', function () {
 
         const method = 'GET';
         const url = '/';
-        const headers = {
-          authorization: generateValidRequestAuthorizationHeader(),
-        };
+        const headers = generateAuthenticatedUserRequestHeaders();
 
         // when
         const response = await httpTestServer.request(method, url, null, null, headers);

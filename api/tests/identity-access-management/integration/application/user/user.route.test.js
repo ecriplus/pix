@@ -5,7 +5,7 @@ import * as i18nPlugin from '../../../../../src/shared/infrastructure/plugins/i1
 import {
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
   sinon,
 } from '../../../../test-helper.js';
@@ -121,9 +121,7 @@ describe('Integration | Identity Access Management | Application | Route | User'
         const userId = databaseBuilder.factory.buildUser().id;
 
         const url = '/api/users/me';
-        const headers = {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        };
+        const headers = generateAuthenticatedUserRequestHeaders({ userId });
 
         // when
         const response = await httpTestServer.request('DELETE', url, null, null, headers);
@@ -138,9 +136,7 @@ describe('Integration | Identity Access Management | Application | Route | User'
     it('returns controller success response HTTP code', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
-      const headers = {
-        authorization: generateValidRequestAuthorizationHeader(userId),
-      };
+      const headers = generateAuthenticatedUserRequestHeaders({ userId });
       sinon.stub(userController, 'getCertificationPointOfContact').callsFake((request, h) => h.response().code(200));
 
       // when
@@ -161,9 +157,7 @@ describe('Integration | Identity Access Management | Application | Route | User'
     it('should return 400 - Bad request when challengeType is not valid', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
-      const headers = {
-        authorization: generateValidRequestAuthorizationHeader(userId),
-      };
+      const headers = generateAuthenticatedUserRequestHeaders({ userId });
       const url = `/api/users/${userId}/has-seen-challenge-tooltip/invalid`;
 
       // when
@@ -176,9 +170,7 @@ describe('Integration | Identity Access Management | Application | Route | User'
     it('should return 200 when challengeType is valid', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
-      const headers = {
-        authorization: generateValidRequestAuthorizationHeader(userId),
-      };
+      const headers = generateAuthenticatedUserRequestHeaders({ userId });
       const url = `/api/users/${userId}/has-seen-challenge-tooltip/other`;
 
       // when

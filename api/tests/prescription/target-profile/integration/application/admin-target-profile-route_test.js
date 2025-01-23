@@ -3,16 +3,14 @@ import * as moduleUnderTest from '../../../../../src/prescription/target-profile
 import {
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
   sinon,
 } from '../../../../test-helper.js';
 
 describe('Integration | Application | target-profiles-management | Routes ', function () {
   describe('DELETE /api/admin/target-profiles/{targetProfileId}/detach-organizations', function () {
-    const getHeaders = (userId) => ({
-      authorization: generateValidRequestAuthorizationHeader(userId),
-    });
+    const getHeaders = (userId) => generateAuthenticatedUserRequestHeaders({ userId });
     let httpTestServer;
     let targetProfileId, organizationId;
     let method, url, payload;

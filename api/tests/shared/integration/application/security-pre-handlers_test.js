@@ -5,7 +5,7 @@ import { ORGANIZATION_FEATURE } from '../../../../src/shared/domain/constants.js
 import {
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
   sinon,
 } from '../../../test-helper.js';
@@ -53,7 +53,7 @@ describe('Integration | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: '/api/admin/users',
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       const response = await httpServerTest.requestObject(options);
@@ -68,7 +68,7 @@ describe('Integration | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: '/api/admin/users',
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       const response = await httpServerTest.requestObject(options);
@@ -83,7 +83,7 @@ describe('Integration | Application | SecurityPreHandlers', function () {
       const response = await httpServerTest.requestObject({
         method: 'GET',
         url: '/api/admin/users',
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       });
       expect(response.statusCode).to.equal(403);
     });
@@ -96,7 +96,7 @@ describe('Integration | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: '/api/admin/users',
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       const response = await httpServerTest.requestObject(options);
@@ -152,7 +152,7 @@ describe('Integration | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: `/check/${organizationId}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await httpServerTest.requestObject(options);
@@ -170,7 +170,7 @@ describe('Integration | Application | SecurityPreHandlers', function () {
         const options = {
           method: 'GET',
           url: `/checkwithId/${organizationId}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         const response = await httpServerTest.requestObject(options);
@@ -187,7 +187,7 @@ describe('Integration | Application | SecurityPreHandlers', function () {
         const options = {
           method: 'GET',
           url: `/check/${organizationId}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         const response = await httpServerTest.requestObject(options);
@@ -232,7 +232,7 @@ describe('Integration | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: '/framework/tubes',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await httpServerTest.requestObject(options);
@@ -249,7 +249,7 @@ describe('Integration | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: '/framework/tubes',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await httpServerTest.requestObject(options);
@@ -294,7 +294,7 @@ describe('Integration | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: `/framework/${certificationCenterId}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await httpServerTest.requestObject(options);
@@ -317,7 +317,7 @@ describe('Integration | Application | SecurityPreHandlers', function () {
           const options = {
             method: 'GET',
             url: `/framework/${certificationCenterId}`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
           const response = await httpServerTest.requestObject(options);
@@ -340,7 +340,7 @@ describe('Integration | Application | SecurityPreHandlers', function () {
           const options = {
             method: 'GET',
             url: `/framework/${certificationCenterId}`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
           const response = await httpServerTest.requestObject(options);

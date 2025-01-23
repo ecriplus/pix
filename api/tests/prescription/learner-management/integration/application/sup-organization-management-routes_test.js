@@ -1,7 +1,7 @@
 import { supOrganizationManagementController } from '../../../../../src/prescription/learner-management/application/sup-organization-management-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/learner-management/application/sup-organization-management-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, generateValidRequestAuthorizationHeader, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Application | Route | sup-organization-learners', function () {
   let httpTestServer;
@@ -28,9 +28,7 @@ describe('Integration | Application | Route | sup-organization-learners', functi
     let headers;
 
     beforeEach(function () {
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(userId),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId });
     });
 
     context('when the user is authenticated', function () {
