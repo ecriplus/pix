@@ -391,7 +391,7 @@
               "isCompletionRequired": false,
               "title": "Gestionnaire de fichiers - supprimer photos",
               "url": "https://epreuves.pix.fr/filemanager-module/filemanager-module.html?lang=fr",
-              "instruction": "<p>Dans l’espace ci-dessous, ouvrez le dossier « Photos ». Sur chaque photo qui comporte le mot «&nbsp;photo&nbsp;», faites un clic droit pour afficher la liste d’action, et cliquez sur «&nbsp;Supprimer&nbsp;».</p>",
+              "instruction": "<p>Dans l’espace ci-dessous, ouvrez le dossier « Photos ».<br>Sur le fichier «photo1», faites un clic droit pour afficher la liste d’action, et cliquez sur «&nbsp;Supprimer&nbsp;».<br>Refaites la même chose sur «photo2» puis sur «photo3».</p>",
               "height": 400
             }
           }
