@@ -222,7 +222,7 @@
                 {
                   "id": "3fe83246-32a9-471a-a081-9ced72f4380a",
                   "type": "text",
-                  "content": "<p>Vous pouvez alors cliquer, une barre verticale s’affiche et clignote. C’est le <strong>curseur de texte</strong>. Vous pouvez commencer à taper, modifier ou effacer du texte à cet endroit.</p>"
+                  "content": "<p>Vous pouvez alors cliquer dans la zone, une barre verticale s’affiche et clignote. C’est le <strong>curseur de texte</strong>. Vous pouvez commencer à taper, modifier ou effacer du texte à cet endroit.</p>"
                 },
                 {
                   "id": "cf727c42-e967-493b-ae95-59d3b15806db",
