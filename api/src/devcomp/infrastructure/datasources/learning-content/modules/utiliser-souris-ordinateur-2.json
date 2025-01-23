@@ -58,7 +58,7 @@
       },
       {
         "grainId": "e01d9903-a264-4276-8032-3ccb1cb271bc",
-        "content": "<p>Bravo 🎉! Vous savez utiliser le clic droit de la souris.</p>"
+        "content": "<p>Bravo ! 🎉 Vous savez utiliser le clic droit de la souris.</p>"
       }
     ],
     "grains": [
@@ -185,18 +185,18 @@
               "proposals": [
                 {
                   "id": "1",
-                  "content": "<p>Journal</p>",
-                  "feedback": "<p><span class=\"feedback__state\">Incorrect.</span></p><p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
+                  "content": "<p>journal</p>",
+                  "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
                 },
                 {
                   "id": "2",
-                  "content": "<p>Papier</p>",
-                  "feedback": "<p><span class=\"feedback__state\">Correct.</span> </p><p>Bravo ! Vous avez parcouru le module de haut en bas. À tout moment, vous pouvez utiliser la molette pour relire quelque chose, revoir une vidéo, etc.</p>"
+                  "content": "<p>papier</p>",
+                  "feedback": "<p><span class=\"feedback__state\">Bonne réponse !</span> </p><p>Vous avez parcouru le module de haut en bas. À tout moment, vous pouvez utiliser la molette pour relire quelque chose, revoir une vidéo, etc.</p>"
                 },
                 {
                   "id": "3",
-                  "content": "<p>Page</p>",
-                  "feedback": "<p><span class=\"feedback__state\">Incorrect.</span></p><p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
+                  "content": "<p>page</p>",
+                  "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Pour remonter dans le module, faites rouler la molette doucement vers le haut et cherchez un encadré bleu clair.&nbsp; Le symbole que vous cherchez se trouve sous l’image.</p>"
                 }
               ],
               "solution": "2"
@@ -297,7 +297,7 @@
             "element": {
               "id": "e2e63f1e-7260-4404-9a09-614c24236fc2",
               "type": "qcu",
-              "instruction": "<p>Dans le dossier 80 ans Mamie, combien est-ce qu'il y a de photos ?</p>",
+              "instruction": "<p>Dans le dossier «80 ans Mamie», combien est-ce qu'il y a de photos ?</p>",
               "proposals": [
                 {
                   "id": "1",
@@ -313,8 +313,8 @@
                 }
               ],
               "feedbacks": {
-                "valid": "<p><span class=\"feedback__state\">Correct.</span></p><p>Il y a bien 4 photos dans le dossier «&nbsp;80 ans Mamie&nbsp;». Bravo ! Vous avez fait 4 doubles-clics et réussi à naviguer dans un explorateur de fichiers.</p>",
-                "invalid": "<p><span class=\"feedback__state\">Incorrect.</span></p><p><strong>Vous avez répondu au questionnaire, mais vous n'avez pas cliqué sur la bonne réponse.</strong><br>Si vous n'avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;» :</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s'appellent «&nbsp;Photo&nbsp;».</li></ul>"
+                "valid": "<p><span class=\"feedback__state\">Bonne réponse.</span></p><p>Il y a bien 4 photos dans le dossier «&nbsp;80 ans Mamie&nbsp;». Bravo ! Vous avez fait 4 doubles-clics et réussi à naviguer dans un explorateur de fichiers.</p>",
+                "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><strong>Vous avez répondu au questionnaire, mais vous n'avez pas cliqué sur la bonne réponse.</strong><br>Si vous n'avez pas trouvé le dossier «&nbsp;80 ans Mamie&nbsp;» :</p><ul><li>Cliquez sur «&nbsp;Réinitialiser&nbsp;» ci-dessus</li> <li>Suivez les étapes qui vous sont données. Vous devriez effectuer 4 doubles-clics.</li><li>Comptez ensuite le nombre de fichiers qui s'appellent «&nbsp;Photo&nbsp;».</li></ul>"
               },
               "solution": "1"
             }
