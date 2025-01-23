@@ -1,5 +1,14 @@
 # Pix Changelog
 
+## v5.23.0 (23/01/2025)
+
+
+### :rocket: Amélioration
+- [#10070](https://github.com/1024pix/pix/pull/10070) [FEATURE] Amélioration continue mdl distinguer-vrai-faux-sur-internet - coval 14/10 (MODC-5).
+
+### :bug: Correction
+- [#11187](https://github.com/1024pix/pix/pull/11187) [BUGFIX] Corriger le script de suppression en masse des orgas (PIX-16224).
+
 ## v5.22.0 (22/01/2025)
 
 
