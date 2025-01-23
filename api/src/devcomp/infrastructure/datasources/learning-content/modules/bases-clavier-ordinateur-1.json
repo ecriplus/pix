@@ -5,12 +5,12 @@
   "isBeta": false,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>Dans ce module, vous découvrirez ce qu’est un clavier et à quoi il sert. <span aria-hidden=\"true\">⌨️</span><br>Vous apprendrez à taper vos premiers caractères et à modifier du texte.<br>Pour ce module, vous devez déjà savoir utiliser une souris d’ordinateur.</p>",
+    "description": "<p>Dans ce module, découvrez ce qu’est un clavier et à quoi il sert. <span aria-hidden=\"true\">⌨️</span><br>Vous apprendrez à taper des mots simples et à modifier du texte.<br>Pour ce module, vous devez déjà savoir utiliser une souris d’ordinateur.</p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
-      "<p>Utiliser les touches de base du clavier</p>",
-      "<p>Taper les caractères essentiels avec le clavier</p>",
+      "<p>Repérer les touches de base du clavier</p>",
+      "<p>Taper des mots simples avec un clavier</p>",
       "<p>Modifier du texte</p>"
     ],
     "tabletSupport": "comfortable"
@@ -64,7 +64,7 @@
           "element": {
             "id": "bcd20400-781c-4b7d-82c3-d348ddef88d2",
             "type": "text",
-            "content": "<p>Le clavier fait partie de l'équipement de base d’un ordinateur, avec la souris. <br>Le clavier est composé de touches sur lesquelles on peut appuyer.<br> Les claviers peuvent avoir différentes formes, tailles, couleurs ou disposition des touches.<br></p><p><br>Il y a différents types de clavier : </p> <ul> <li>les claviers avec un fil</li> <li>les claviers sans fil</li> <li>les claviers inclus dans un ordinateur</li> </ul> <p>Globalement, tous ces claviers servent à faire les mêmes choses.<br></p>"
+            "content": "<p>Le clavier fait partie de l'équipement de base d’un ordinateur, avec la souris. <br>Le clavier est composé de touches sur lesquelles on peut appuyer.<br> Les claviers peuvent avoir différentes formes, tailles, couleurs ou disposition des touches.<br></p><p><br>Il y a différents types de clavier : </p> <ul> <li>les claviers avec un fil</li> <li>les claviers sans fil</li> <li>les claviers inclus dans un ordinateur</li> </ul>"
           }
         },
         {
@@ -75,6 +75,14 @@
             "url": "https://i.imgur.com/gXJXHwZ.png",
             "alt": "",
             "alternativeText": "<p>Photographies de plusieurs types de claviers de taille et de forme différentes :</p> <ul> <li>les claviers avec un fil</li> <li>les claviers sans fils</li> <li>les claviers inclus dans unordinateur</li> </ul>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "847c14dc-d58d-4faf-9886-8a2de37974c6",
+            "type": "text",
+            "content": "<p>Globalement, tous ces claviers servent à faire les mêmes choses.<br></p>"
           }
         },
         {
