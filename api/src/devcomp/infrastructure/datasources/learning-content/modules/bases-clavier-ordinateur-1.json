@@ -403,7 +403,7 @@
           "element": {
             "id": "d77ec00d-f3f0-4a22-9e90-c6dff041b780",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">📌 Résumons avant de passer à la suite :</p><ol><li>La zone de texte est une zone dans laquelle on peut taper du texte. Il faut cliquer dans cette zone avant de commencer à taper.</li><li>La zone des lettres se trouve au centre du clavier.</li><li>Pour écrire et modifier du texte, les touches de base sont : Espace, Entrée et Effacer. Les flèches directionnelles permettent de déplacer le curseur de texte.</li></ol>"
+            "content": "<p><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite :</p><ol><li>La zone de texte est une zone dans laquelle on peut taper du texte. Il faut cliquer dans cette zone avant de commencer à taper.</li><li>La zone des lettres se trouve au centre du clavier.</li><li>Pour écrire et modifier du texte, les touches de base sont : Espace, Entrée et Effacer. Les flèches directionnelles permettent de déplacer le curseur de texte.</li></ol>"
           }
         },
         {
@@ -446,7 +446,7 @@
           "element": {
             "id": "b61388bd-29a7-40cb-b3f0-89ce7a0b5565",
             "type": "image",
-            "url": "https://i.imgur.com/Y4ArfOR.png",
+            "url": "https://i.imgur.com/0ANm9TL.png",
             "alt": "",
             "alternativeText": ""
           }
