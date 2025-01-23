@@ -403,7 +403,7 @@
           "element": {
             "id": "d77ec00d-f3f0-4a22-9e90-c6dff041b780",
             "type": "text",
-            "content": "<p>📌 Résumons avant de passer à la suite :</p><ol><li>La zone de texte est une zone dans laquelle on peut taper du texte. Il faut cliquer dans cette zone avant de commencer à taper.</li><li>La zone des lettres se trouve au centre du clavier.</li><li>Pour écrire et modifier du texte, les touches de base sont : Espace, Entrée et Effacer. Les flèches directionnelles permettent de déplacer le curseur de texte.</li></ol>"
+            "content": "<p><span aria-hidden=\"true\">📌 Résumons avant de passer à la suite :</p><ol><li>La zone de texte est une zone dans laquelle on peut taper du texte. Il faut cliquer dans cette zone avant de commencer à taper.</li><li>La zone des lettres se trouve au centre du clavier.</li><li>Pour écrire et modifier du texte, les touches de base sont : Espace, Entrée et Effacer. Les flèches directionnelles permettent de déplacer le curseur de texte.</li></ol>"
           }
         },
         {
@@ -423,7 +423,7 @@
           "element": {
             "id": "bb606781-2799-49d6-9985-2fabb448569e",
             "type": "text",
-            "content": "<p>\n    <br>\n</p>\n<p>\n</p><details>\n    <summary> <span aria-hidden=\"\\&quot;true\\&quot;\">🤔</span> Bon à savoir </summary>\n    <p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.<span aria-hidden=\"\\&quot;true\\&quot;\">🙌</span> Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p>\n</details>\n<p></p>\n<p><br></p>"
+            "content": "<details><summary> <span aria-hidden=\"true\">🤔</span> Bon à savoir </summary>\n    <p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.<span aria-hidden=\"true\">🙌</span> Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p>\n</details>"
           }
         }
       ]
