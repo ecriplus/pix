@@ -372,7 +372,7 @@
           "element": {
             "id": "5cea384d-f3bd-450c-b250-f6fb9a34cafa",
             "type": "text",
-            "content": "<p><strong>Dans la zone ci-dessous, modifiez une liste de courses en vous aidant des touches espace, entrée, effacer et des flèches.</strong></p>"
+            "content": "<p><strong>Dans la zone ci-dessous, vous allez corriger une liste de courses en vous aidant des touches espace, entrée, effacer et des flèches.</strong></p>"
           }
         },
         {
@@ -388,7 +388,7 @@
           "element": {
             "id": "caedc436-3ab8-45a8-a4b5-c7ee5b4f38c6",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">💡</span> Si besoin, cliquez sur <strong>Réinitialiser </strong>pour effacer toutes vos modifications.</p>"
+            "content": "<p><span aria-hidden=\"true\">💡</span> Si besoin, cliquez sur <strong>Réinitialiser </strong>pour effacer toutes vos modifications.<br></p><p><span aria-hidden=\"true\">🙋🏽‍♂️ 🙋🏿‍♀️ 🙋‍♂️</span> En cas de difficulté, n'hésitez pas à demandez conseil à la personne qui vous accompagne.</>"
           }
         }
       ]
