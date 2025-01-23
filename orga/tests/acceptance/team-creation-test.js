@@ -8,6 +8,7 @@ import { module, test } from 'qunit';
 import authenticateSession from '../helpers/authenticate-session';
 import setupIntl from '../helpers/setup-intl';
 import { createPrescriberByUser, createUserMembershipWithRole } from '../helpers/test-init';
+import { waitForDialog } from '../helpers/wait-for';
 
 module('Acceptance | Team Creation', function (hooks) {
   setupApplicationTest(hooks);
@@ -55,6 +56,7 @@ module('Acceptance | Team Creation', function (hooks) {
       let inputLabel;
       let cancelButton;
       let inviteButton;
+      let confirmButton;
 
       hooks.beforeEach(async function () {
         user = createUserMembershipWithRole('ADMIN');
@@ -67,6 +69,7 @@ module('Acceptance | Team Creation', function (hooks) {
         inputLabel = `${t('pages.team-new-item.input-label')} *`;
         inviteButton = t('pages.team-new-item.invite-button');
         cancelButton = t('common.actions.cancel');
+        confirmButton = t('pages.team-new.invite-form-modal.confirm');
       });
 
       test('it should be accessible', async function (assert) {
@@ -95,6 +98,12 @@ module('Acceptance | Team Creation', function (hooks) {
         await clickByName(inviteButton);
 
         // then
+        await waitForDialog();
+
+        //when
+        await clickByName(confirmButton);
+
+        //then
         const organizationInvitation = server.db.organizationInvitations[server.db.organizationInvitations.length - 1];
 
         assert.strictEqual(organizationInvitation.email, email);
@@ -117,6 +126,9 @@ module('Acceptance | Team Creation', function (hooks) {
 
         // when
         await clickByName(inviteButton);
+
+        await waitForDialog();
+        await clickByName(confirmButton);
 
         // then
         assert.ok(screen.getByText(t('pages.team-new.success.multiple-invitations')));
@@ -182,6 +194,8 @@ module('Acceptance | Team Creation', function (hooks) {
 
         // when
         await clickByName(inviteButton);
+        await waitForDialog();
+        await clickByName(confirmButton);
 
         // then
 
@@ -211,6 +225,8 @@ module('Acceptance | Team Creation', function (hooks) {
 
         // when
         await clickByName(inviteButton);
+        await waitForDialog();
+        await clickByName(confirmButton);
 
         // then
 
@@ -240,6 +256,8 @@ module('Acceptance | Team Creation', function (hooks) {
 
         // when
         await clickByName(inviteButton);
+        await waitForDialog();
+        await clickByName(confirmButton);
 
         // then
 
@@ -269,6 +287,8 @@ module('Acceptance | Team Creation', function (hooks) {
 
         // when
         await clickByName(inviteButton);
+        await waitForDialog();
+        await clickByName(confirmButton);
 
         // then
 
@@ -302,6 +322,8 @@ module('Acceptance | Team Creation', function (hooks) {
 
             // When
             await clickByName(inviteButton);
+            await waitForDialog();
+            await clickByName(confirmButton);
 
             // Then
             const expectedErrorMessage = t('pages.team-new.errors.sending-email-to-invalid-email-address', {

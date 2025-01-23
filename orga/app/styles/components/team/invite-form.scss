@@ -1,0 +1,15 @@
+@use 'pix-design-tokens/typography';
+
+.invite-form {
+
+  &__email-field {
+    min-height: 70px;
+  }
+
+  &__error-message {
+    @extend %pix-body-s;
+
+    margin-top: var(--pix-spacing-2x);
+    color: var(--pix-error-700);
+  }
+}
