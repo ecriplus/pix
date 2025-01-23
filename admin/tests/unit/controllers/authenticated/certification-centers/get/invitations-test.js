@@ -85,5 +85,58 @@ module('Unit | Controller | authenticated/certification-centers/get/invitations'
       sinon.assert.calledWith(notificationErrorStub, { message: 'Une erreur s’est produite, veuillez réessayer.' });
       assert.ok(true);
     });
+
+    module('#sendNewInvitation', function () {
+      test('It sends a new invitation', async function (assert) {
+        // given
+        const controller = this.owner.lookup('controller:authenticated/certification-centers/get/invitations');
+
+        const store = this.owner.lookup('service:store');
+        const queryRecordStub = sinon.stub();
+        store.queryRecord = queryRecordStub;
+        const certificationCenterInvitation = {
+          email: 'test@example.net',
+          language: 'en',
+          role: 'member',
+          certificationCenterId: 1,
+        };
+        // when
+        await controller.sendNewCertificationCenterInvitation(certificationCenterInvitation);
+
+        // then
+        assert.ok(
+          queryRecordStub.calledWith('certification-center-invitation', {
+            ...certificationCenterInvitation,
+          }),
+        );
+      });
+
+      test('When an error occurs, it should send a notification error', async function (assert) {
+        // given
+        const controller = this.owner.lookup('controller:authenticated/certification-centers/get/invitations');
+        const store = this.owner.lookup('service:store');
+        const anError = Symbol('an error');
+        store.queryRecord = sinon.stub().rejects(anError);
+        const notifyStub = sinon.stub();
+        class ErrorResponseHandler extends Service {
+          notify = notifyStub;
+        }
+        this.owner.register('service:error-response-handler', ErrorResponseHandler);
+        const customErrors = Symbol('custom errors');
+        controller.CUSTOM_ERROR_MESSAGES = customErrors;
+        const certificationCenterInvitation = {
+          email: 'test@example.net',
+          language: 'en',
+          role: 'member',
+          certificationCenterId: 1,
+        };
+
+        // when
+        await controller.sendNewCertificationCenterInvitation(certificationCenterInvitation);
+
+        // then
+        assert.ok(notifyStub.calledWithExactly(anError, customErrors));
+      });
+    });
   });
 });

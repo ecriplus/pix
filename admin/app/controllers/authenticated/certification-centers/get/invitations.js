@@ -7,6 +7,7 @@ import isEmailValid from '../../../../utils/email-validator';
 
 export default class AuthenticatedCertificationCentersGetInvitationsController extends Controller {
   @service accessControl;
+  @service intl;
   @service pixToast;
   @service errorResponseHandler;
   @service store;
@@ -47,6 +48,25 @@ export default class AuthenticatedCertificationCentersGetInvitationsController e
       this.errorResponseHandler.notify(err, this.CUSTOM_ERROR_MESSAGES);
     }
     this.isLoading = false;
+  }
+
+  @action
+  async sendNewCertificationCenterInvitation(certificationCenterInvitation) {
+    const { email, language, role } = certificationCenterInvitation;
+    try {
+      await this.store.queryRecord('certification-center-invitation', {
+        email,
+        language,
+        role,
+        certificationCenterId: this.model.certificationCenterId,
+      });
+
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('common.invitations.send-new-confirm', { invitationEmail: email }),
+      });
+    } catch (err) {
+      this.errorResponseHandler.notify(err, this.CUSTOM_ERROR_MESSAGES);
+    }
   }
 
   _isEmailToInviteValid(email) {

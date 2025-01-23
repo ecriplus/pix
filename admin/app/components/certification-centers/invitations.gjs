@@ -1,9 +1,13 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import { fn } from '@ember/helper';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
+import { t } from 'ember-intl';
 
 export default class CertificationCenterInvitations extends Component {
+  @service intl;
+
   get sortedCertificationCenterInvitations() {
     return this.args.certificationCenterInvitations.sortBy('updatedAt').reverse();
   }
@@ -32,16 +36,27 @@ export default class CertificationCenterInvitations extends Component {
                     <td>{{invitation.roleLabel}}</td>
                     <td>{{dayjsFormat invitation.updatedAt "DD/MM/YYYY [-] HH:mm"}}</td>
                     <td>
-                      <PixButton
-                        @size="small"
-                        @variant="error"
-                        class="certification-center-invitations-actions__button"
-                        aria-label="Annuler l’invitation de {{invitation.email}}"
-                        @triggerAction={{fn @onCancelCertificationCenterInvitation invitation}}
-                        @iconBefore="delete"
-                      >
-                        Annuler l’invitation
-                      </PixButton>
+                      <div class="certification-center-invitations__actions-buttons">
+                        <PixButton
+                          @size="small"
+                          class="certification-center-invitations-actions__button"
+                          aria-label={{t "common.invitations.send-new-label" invitationEmail=invitation.email}}
+                          @triggerAction={{fn @onSendNewCertificationCenterInvitation invitation}}
+                          @iconBefore="refresh"
+                        >
+                          {{t "common.invitations.send-new"}}
+                        </PixButton>
+                        <PixButton
+                          @size="small"
+                          @variant="error"
+                          class="certification-center-invitations-actions__button"
+                          aria-label="Annuler l’invitation de {{invitation.email}}"
+                          @triggerAction={{fn @onCancelCertificationCenterInvitation invitation}}
+                          @iconBefore="delete"
+                        >
+                          Annuler l’invitation
+                        </PixButton>
+                      </div>
                     </td>
                   </tr>
                 {{/each}}
