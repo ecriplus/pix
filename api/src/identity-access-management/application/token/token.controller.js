@@ -4,7 +4,8 @@ import { getForwardedOrigin } from '../../infrastructure/utils/network.js';
 
 const authenticateAnonymousUser = async function (request, h) {
   const { campaign_code: campaignCode, lang } = request.payload;
-  const accessToken = await usecases.authenticateAnonymousUser({ campaignCode, lang });
+  const origin = getForwardedOrigin(request.headers);
+  const accessToken = await usecases.authenticateAnonymousUser({ campaignCode, lang, audience: origin });
 
   const response = {
     token_type: 'bearer',

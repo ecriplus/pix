@@ -11,10 +11,19 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
       const request = {
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
         },
         payload: { campaign_code: campaignCode, lang },
       };
-      sinon.stub(usecases, 'authenticateAnonymousUser').resolves('valid access token');
+      sinon
+        .stub(usecases, 'authenticateAnonymousUser')
+        .withArgs({
+          campaignCode,
+          audience: 'https://app.pix.fr',
+          lang,
+        })
+        .resolves('valid access token');
 
       // when
       const { statusCode, source } = await tokenController.authenticateAnonymousUser(request, hFake);
@@ -22,7 +31,6 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
       // then
       expect(statusCode).to.equal(200);
       expect(source).to.deep.equal({ access_token: 'valid access token', token_type: 'bearer' });
-      expect(usecases.authenticateAnonymousUser).to.have.been.calledWithExactly({ campaignCode, lang });
     });
   });
 

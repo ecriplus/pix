@@ -412,6 +412,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           url: '/api/token/anonymous',
           headers: {
             'content-type': 'application/x-www-form-urlencoded',
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'app.pix.fr',
           },
           payload: querystring.stringify({
             campaign_code: campaignCode,
@@ -448,6 +450,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           url: '/api/token/anonymous',
           headers: {
             'content-type': 'application/x-www-form-urlencoded',
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'app.pix.fr',
           },
           payload: querystring.stringify({
             campaign_code: simplifiedAccessCampaignCode,
@@ -468,6 +472,10 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
 
         expect(result.token_type).to.equal('bearer');
         expect(result.access_token).to.exist;
+        const decodedToken = await decodeIfValid(result.access_token);
+        expect(decodedToken).to.include({
+          aud: 'https://app.pix.fr',
+        });
       });
 
       it('creates an anonymous user', async function () {
