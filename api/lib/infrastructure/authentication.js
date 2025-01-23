@@ -1,6 +1,7 @@
 import boom from '@hapi/boom';
 import lodash from 'lodash';
 
+import { getForwardedOrigin } from '../../src/identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../src/shared/config.js';
 import { tokenService } from '../../src/shared/domain/services/token-service.js';
 
@@ -85,6 +86,15 @@ async function _checkIsAuthenticated(request, h, { key, validate }) {
   const decodedAccessToken = tokenService.getDecodedToken(accessToken, key);
   if (!decodedAccessToken) {
     return boom.unauthorized();
+  }
+
+  // Only tokens including user_id are User Access Tokens.
+  // This is why applications Access Tokens are not subject to audience validation for now.
+  if (decodedAccessToken.user_id && config.featureToggles.isUserTokenAudConfinementEnabled) {
+    const audience = getForwardedOrigin(request.headers);
+    if (decodedAccessToken.aud !== audience) {
+      return boom.unauthorized();
+    }
   }
 
   const { isValid, credentials, errorCode } = validate(decodedAccessToken, request, h);
