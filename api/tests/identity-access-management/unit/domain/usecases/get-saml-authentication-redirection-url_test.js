@@ -10,6 +10,7 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
   let authenticationMethodRepository;
   let tokenService;
   let samlSettings;
+  const audience = 'https://app.pix.fr';
 
   beforeEach(function () {
     userRepository = {
@@ -97,11 +98,12 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
       authenticationMethodRepository.findOneByUserIdAndIdentityProvider.resolves(
         domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider(),
       );
-      tokenService.createAccessTokenForSaml.returns('access-token');
+      tokenService.createAccessTokenForSaml.withArgs({ userId: 1, audience }).returns('access-token');
 
       // when
       const result = await getSamlAuthenticationRedirectionUrl({
         userAttributes,
+        audience,
         userRepository,
         userLoginRepository,
         authenticationMethodRepository,

@@ -43,17 +43,19 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
   describe('#createAccessTokenFromUser', function () {
     it('should create access token with user id and source', function () {
       // given
+      const secret = 'a secret';
       const userId = 123;
       const source = 'pix';
-      sinon.stub(settings.authentication, 'secret').value('a secret');
+
+      sinon.stub(settings.authentication, 'secret').value(secret);
       sinon.stub(settings.authentication, 'accessTokenLifespanMs').value(1000);
       const accessToken = 'valid access token';
       const audience = 'https://admin.pix.fr';
       const expirationDelaySeconds = 1;
-      const firstParameter = { user_id: userId, source, aud: audience };
-      const secondParameter = 'a secret';
-      const thirdParameter = { expiresIn: 1 };
-      sinon.stub(jsonwebtoken, 'sign').withArgs(firstParameter, secondParameter, thirdParameter).returns(accessToken);
+      const payload = { user_id: userId, source, aud: audience };
+      const secretOrPrivateKey = secret;
+      const options = { expiresIn: 1 };
+      sinon.stub(jsonwebtoken, 'sign').withArgs(payload, secretOrPrivateKey, options).returns(accessToken);
 
       // when
       const result = tokenService.createAccessTokenFromUser({ userId, source, audience });
@@ -83,6 +85,30 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
       // then
       const decodedToken = jsonwebtoken.verify(idToken, settings.authentication.secret);
       expect(omit(decodedToken, ['iat', 'exp'])).to.deep.equal(expectedTokenAttributes);
+    });
+  });
+
+  describe('#createAccessTokenForSaml', function () {
+    it('returns a valid json web token', function () {
+      // given
+      const secret = 'a secret';
+      const userId = 123;
+      const source = 'external';
+
+      sinon.stub(settings.authentication, 'secret').value(secret);
+      sinon.stub(settings.authentication, 'accessTokenLifespanMs').value(1000);
+      const accessToken = 'valid access token';
+      const audience = 'https://app.pix.fr';
+      const payload = { user_id: userId, source, aud: audience };
+      const secretOrPrivateKey = secret;
+      const options = { expiresIn: 1 };
+      sinon.stub(jsonwebtoken, 'sign').withArgs(payload, secretOrPrivateKey, options).returns(accessToken);
+
+      // when
+      const result = tokenService.createAccessTokenForSaml({ userId, audience });
+
+      // then
+      expect(result).to.be.deep.equal(accessToken);
     });
   });
 

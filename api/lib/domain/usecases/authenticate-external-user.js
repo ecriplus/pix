@@ -15,6 +15,7 @@ async function authenticateExternalUser({
   username,
   password,
   externalUserToken,
+  audience,
   expectedUserId,
   tokenService,
   pixAuthenticationService,
@@ -53,7 +54,7 @@ async function authenticateExternalUser({
       throw new UserShouldChangePasswordError(undefined, passwordResetToken);
     }
 
-    const token = tokenService.createAccessTokenForSaml(userFromCredentials.id);
+    const token = tokenService.createAccessTokenForSaml({ userId: userFromCredentials.id, audience });
 
     await userLoginRepository.updateLastLoggedAt({ userId: userFromCredentials.id });
 

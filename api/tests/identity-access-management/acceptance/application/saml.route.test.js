@@ -2,6 +2,7 @@ import _ from 'lodash';
 import samlify from 'samlify';
 
 import { config as settings } from '../../../../src/shared/config.js';
+import { decodeIfValid } from '../../../../src/shared/domain/services/token-service.js';
 import { createServer, databaseBuilder, expect, sinon } from '../../../test-helper.js';
 
 const testCertificate = `MIICCzCCAXQCCQD2MlHh/QmGmjANBgkqhkiG9w0BAQsFADBKMQswCQYDVQQGEwJG
@@ -194,6 +195,10 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
       // when
       const firstVisitResponse = await server.inject({
         method: 'POST',
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
         url: '/api/saml/assert',
         payload: {
           SAMLResponse: validSamlResponse.context,
@@ -227,6 +232,10 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
       // when
       const response = await server.inject({
         method: 'POST',
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
         url: '/api/saml/assert',
         payload: {
           SAMLResponse: validSamlResponse.context,
@@ -235,7 +244,22 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
 
       // then
       expect(response.statusCode).to.equal(302);
+      const decodedAccessToken = await _getDecodedAccessToken(response);
+      expect(decodedAccessToken).to.include({
+        aud: 'https://app.pix.fr',
+      });
       expect(response.headers.location).to.match(/^\/connexion\/gar#[-_a-zA-Z0-9.]+$/);
     });
   });
 });
+
+async function _getDecodedAccessToken(response) {
+  const token = _extractAccessTokenFromUrl(response.headers.location);
+  const decodedAccessToken = await decodeIfValid(token);
+  return decodedAccessToken;
+}
+
+function _extractAccessTokenFromUrl(url) {
+  const hashIndex = url.indexOf('#');
+  return decodeURIComponent(url.substring(hashIndex + 1));
+}

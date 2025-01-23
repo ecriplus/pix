@@ -20,6 +20,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
   let authenticationMethodRepository;
   let userRepository;
   let userLoginRepository;
+  const audience = 'https://app.pix.fr';
 
   beforeEach(function () {
     tokenService = {
@@ -65,7 +66,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
       });
 
       const expectedToken = 'expected returned token';
-      tokenService.createAccessTokenForSaml.withArgs(user.id).resolves(expectedToken);
+      tokenService.createAccessTokenForSaml.withArgs({ userId: user.id, audience }).resolves(expectedToken);
 
       // when
       const token = await authenticateExternalUser({
@@ -73,6 +74,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         password,
         externalUserToken,
         expectedUserId: user.id,
+        audience,
         tokenService,
         pixAuthenticationService,
         obfuscationService,
@@ -104,7 +106,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
       });
 
       const expectedToken = 'expected returned token';
-      tokenService.createAccessTokenForSaml.withArgs(user.id).resolves(expectedToken);
+      tokenService.createAccessTokenForSaml.withArgs({ userId: user.id, audience }).resolves(expectedToken);
 
       // when
       await authenticateExternalUser({
@@ -112,6 +114,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         password,
         externalUserToken,
         expectedUserId: user.id,
+        audience,
         tokenService,
         pixAuthenticationService,
         obfuscationService,

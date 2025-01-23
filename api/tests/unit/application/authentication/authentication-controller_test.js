@@ -13,8 +13,13 @@ describe('Unit | Application | Controller | Authentication', function () {
       };
       const externalUserToken = 'SamlJacksonToken';
       const expectedUserId = 1;
+      const audience = 'https://app.pix.fr';
 
       const request = {
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
         payload: {
           data: {
             attributes: {
@@ -35,6 +40,7 @@ describe('Unit | Application | Controller | Authentication', function () {
           password: user.password,
           externalUserToken,
           expectedUserId,
+          audience,
         })
         .resolves(accessToken);
 

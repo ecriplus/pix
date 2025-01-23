@@ -12,6 +12,7 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
   let userLoginRepository;
   let organizationLearnerRepository;
   let studentRepository;
+  const audience = 'https://app.pix.fr';
 
   beforeEach(function () {
     campaignRepository = {
@@ -84,7 +85,7 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
         organizationLearner,
       );
       userRepository.getBySamlId.resolves(user);
-      tokenService.createAccessTokenForSaml.withArgs(user.id).resolves(token);
+      tokenService.createAccessTokenForSaml.withArgs({ userId: user.id, audience }).resolves(token);
 
       // when
       const result = await createUserAndReconcileToOrganizationLearnerFromExternalUser({
@@ -93,6 +94,7 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
         token: 'a token',
         obfuscationService,
         tokenService,
+        audience,
         userReconciliationService,
         userService,
         authenticationMethodRepository,
@@ -158,7 +160,7 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
       );
       userRepository.getBySamlId.resolves(null);
       userService.createAndReconcileUserToOrganizationLearner.resolves(user.id);
-      tokenService.createAccessTokenForSaml.withArgs(user.id).resolves(token);
+      tokenService.createAccessTokenForSaml.withArgs({ userId: user.id, audience }).resolves(token);
 
       // when
       const result = await createUserAndReconcileToOrganizationLearnerFromExternalUser({
@@ -167,6 +169,7 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
         token: 'a token',
         obfuscationService,
         tokenService,
+        audience,
         userReconciliationService,
         userService,
         authenticationMethodRepository,

@@ -1,7 +1,7 @@
 import querystring from 'node:querystring';
 
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
-import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
+import { decodeIfValid, tokenService } from '../../../../src/shared/domain/services/token-service.js';
 import { createServer, databaseBuilder, expect, knex } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | authentication-controller', function () {
@@ -30,6 +30,10 @@ describe('Acceptance | Controller | authentication-controller', function () {
         const options = {
           method: 'POST',
           url: '/api/token-from-external-user',
+          headers: {
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'app.pix.fr',
+          },
           payload: {
             data: {
               attributes: {
@@ -51,6 +55,10 @@ describe('Acceptance | Controller | authentication-controller', function () {
         // then
         expect(response.statusCode).to.equal(200);
         expect(response.result.data.attributes['access-token']).to.exist;
+        const decodedAccessToken = await decodeIfValid(response.result.data.attributes['access-token']);
+        expect(decodedAccessToken).to.include({
+          aud: 'https://app.pix.fr',
+        });
       });
 
       it('should add GAR authentication method', async function () {
@@ -70,6 +78,10 @@ describe('Acceptance | Controller | authentication-controller', function () {
         const options = {
           method: 'POST',
           url: '/api/token-from-external-user',
+          headers: {
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'app.pix.fr',
+          },
           payload: {
             data: {
               attributes: {
@@ -117,6 +129,8 @@ describe('Acceptance | Controller | authentication-controller', function () {
         url: '/api/application/token',
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
         },
       };
     });
