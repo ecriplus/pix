@@ -60,7 +60,6 @@ function validateUser(decoded) {
 
 function validateClientApplication(decoded) {
   const application = find(config.apimRegisterApplicationsCredentials, { clientId: decoded.client_id });
-
   if (!application) {
     return { isValid: false, errorCode: 401 };
   }
@@ -73,27 +72,28 @@ function validateClientApplication(decoded) {
 }
 
 async function _checkIsAuthenticated(request, h, { key, validate }) {
-  if (!request.headers.authorization) {
+  const authorizationHeader = request.headers.authorization;
+  if (!authorizationHeader) {
     return boom.unauthorized(null, 'jwt');
   }
 
-  const authorizationHeader = request.headers.authorization;
   const accessToken = tokenService.extractTokenFromAuthChain(authorizationHeader);
-
   if (!accessToken) {
     return boom.unauthorized();
   }
 
   const decodedAccessToken = tokenService.getDecodedToken(accessToken, key);
-  if (decodedAccessToken) {
-    const { isValid, credentials, errorCode } = validate(decodedAccessToken, request, h);
-    if (isValid) {
-      return h.authenticated({ credentials });
-    }
+  if (!decodedAccessToken) {
+    return boom.unauthorized();
+  }
 
-    if (errorCode === 403) {
-      return boom.forbidden();
-    }
+  const { isValid, credentials, errorCode } = validate(decodedAccessToken, request, h);
+  if (isValid) {
+    return h.authenticated({ credentials });
+  }
+
+  if (errorCode === 403) {
+    return boom.forbidden();
   }
 
   return boom.unauthorized();
