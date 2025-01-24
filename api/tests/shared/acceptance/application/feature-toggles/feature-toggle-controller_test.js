@@ -21,6 +21,7 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
           type: 'feature-toggles',
           attributes: {
             'deprecate-pole-emploi-push-notification': false,
+            'dynamic-feature-toggle-system': false,
             'is-always-ok-validate-next-challenge-endpoint-enabled': false,
             'is-async-quest-rewarding-calculation-enabled': false,
             'is-direct-metrics-enabled': false,

@@ -11,6 +11,7 @@ import { Metrics } from './src/monitoring/infrastructure/metrics.js';
 import { JobGroup } from './src/shared/application/jobs/job-controller.js';
 import { config } from './src/shared/config.js';
 import { JobQueue } from './src/shared/infrastructure/jobs/JobQueue.js';
+import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
 import { importNamedExportFromFile } from './src/shared/infrastructure/utils/import-named-exports-from-directory.js';
 import { logger } from './src/shared/infrastructure/utils/logger.js';
 
@@ -48,6 +49,7 @@ async function startPgBoss() {
 function createJobQueues(pgBoss) {
   const jobQueues = new JobQueue(pgBoss);
   process.on('SIGINT', async () => {
+    await quitAllStorages();
     await metrics.clearMetrics();
     await jobQueues.stop();
 

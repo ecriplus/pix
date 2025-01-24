@@ -27,6 +27,7 @@ import * as missionRepository from '../src/school/infrastructure/repositories/mi
 import { config } from '../src/shared/config.js';
 import { Membership } from '../src/shared/domain/models/index.js';
 import * as tokenService from '../src/shared/domain/services/token-service.js';
+import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
 import * as areaRepository from '../src/shared/infrastructure/repositories/area-repository.js';
 import * as challengeRepository from '../src/shared/infrastructure/repositories/challenge-repository.js';
 import * as competenceRepository from '../src/shared/infrastructure/repositories/competence-repository.js';
@@ -94,6 +95,7 @@ afterEach(async function () {
   courseRepository.clearCache();
   tutorialRepository.clearCache();
   missionRepository.clearCache();
+  await featureToggles.resetDefaults();
   await datamartBuilder.clean();
   return databaseBuilder.clean();
 });
