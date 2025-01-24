@@ -1,5 +1,4 @@
 import { UserNotAuthorizedToAccessEntityError } from '../../../../shared/domain/errors.js';
-import { CampaignLearningContent } from '../../../../shared/domain/models/CampaignLearningContent.js';
 
 const computeCampaignAnalysis = async function ({
   userId,
@@ -16,8 +15,7 @@ const computeCampaignAnalysis = async function ({
     throw new UserNotAuthorizedToAccessEntityError('User does not have access to this campaign');
   }
 
-  const learningContent = await learningContentRepository.findByCampaignId(campaignId, locale);
-  const campaignLearningContent = new CampaignLearningContent(learningContent.frameworks);
+  const campaignLearningContent = await learningContentRepository.findByCampaignId(campaignId, locale);
   const tutorials = await tutorialRepository.list({ locale });
 
   return campaignAnalysisRepository.getCampaignAnalysis(campaignId, campaignLearningContent, tutorials);
