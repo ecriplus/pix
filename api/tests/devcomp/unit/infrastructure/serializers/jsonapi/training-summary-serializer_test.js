@@ -9,11 +9,16 @@ describe('Unit | Serializer | JSONAPI | training-summary-serializer', function (
         domainBuilder.buildTrainingSummary({
           id: 1,
           title: 'Training Summary 1',
+          internalTitle: 'Training Summary 1 internal title',
           targetProfilesCount: 1,
           prerequisiteThreshold: 2,
           goalThreshold: 30,
         }),
-        domainBuilder.buildTrainingSummary({ id: 2, title: 'Training Summary 2' }),
+        domainBuilder.buildTrainingSummary({
+          id: 2,
+          title: 'Training Summary 2',
+          internalTitle: 'Training Summary 2 internal title',
+        }),
       ];
       const meta = { pagination: { page: 1, pageSize: 3, pageCount: 1, rowCount: 2 } };
 
@@ -31,6 +36,7 @@ describe('Unit | Serializer | JSONAPI | training-summary-serializer', function (
               'prerequisite-threshold': 2,
               'target-profiles-count': 1,
               title: 'Training Summary 1',
+              'internal-title': 'Training Summary 1 internal title',
               'is-disabled': false,
             },
           },
@@ -42,6 +48,7 @@ describe('Unit | Serializer | JSONAPI | training-summary-serializer', function (
               'prerequisite-threshold': undefined,
               'target-profiles-count': 0,
               title: 'Training Summary 2',
+              'internal-title': 'Training Summary 2 internal title',
               'is-disabled': false,
             },
           },

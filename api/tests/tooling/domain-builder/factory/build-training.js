@@ -3,6 +3,7 @@ import { Training } from '../../../../src/devcomp/domain/models/Training.js';
 const buildTraining = function ({
   id = 'training1',
   title = 'Training 1',
+  internalTitle = 'Training 1 internal title',
   link = 'https://example.net',
   type = 'webinar',
   duration = {
@@ -17,6 +18,7 @@ const buildTraining = function ({
   return new Training({
     id,
     title,
+    internalTitle,
     link,
     type,
     duration,
