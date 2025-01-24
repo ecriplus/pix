@@ -101,7 +101,7 @@
     "sinon": "^19.0.0",
     "stylelint": "^16.0.0",
     "stylelint-order": "^6.0.3",
-    "tracked-built-ins": "^3.3.0",
+    "tracked-built-ins": "^4.0.0",
     "webpack": "^5.95.0",
     "xss": "^1.0.14"
   },
