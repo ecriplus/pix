@@ -187,10 +187,6 @@
                 "feedback": "<span class=\"feedback__state\">Mauvaise réponse</span>.<p>Vous pensez peut-être plutôt à l'adresse <strong>mail</strong>.<br>Vous pouvez remonter voir la vidéo.<span aria-hidden=\"true\">👆</span></p>"
               }
             ],
-            "feedbacks": {
-              "valid": "",
-              "invalid": ""
-            },
             "solution": "1"
           }
         }
