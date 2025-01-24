@@ -70,6 +70,18 @@
     </PixNotificationAlert>
   {{/if}}
 
+  <PixButton
+    class="session-supervising-header__download-button"
+    @variant="secondary"
+    @isBorderVisible={{true}}
+    @size="small"
+    aria-label={{t "pages.session-supervising.header.invigilator-kit.extra-information"}}
+    @triggerAction={{@fetchInvigilatorKit}}
+  >
+    <PixIcon @name="download" @plainIcon={{true}} @ariaHidden={{true}} />
+    {{t "pages.session-supervising.header.invigilator-kit.label"}}
+  </PixButton>
+
   <SessionSupervising::ConfirmationModal
     @showModal={{this.isConfirmationModalDisplayed}}
     @closeConfirmationModal={{this.closeConfirmationModal}}

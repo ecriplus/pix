@@ -556,6 +556,10 @@
         },
         "information": "Attention, assurez-vous que tous les candidats aient terminé leur test avant de quitter la surveillance. Pour reprendre la surveillance de cette session, vous devrez entrer à nouveau son numéro de session et son mot de passe.",
         "invigilator": "Surveillant(s)",
+        "invigilator-kit": {
+          "extra-information": "Télécharger le kit surveillant",
+          "label": "Kit surveillant"
+        },
         "room": "Salle",
         "session-id": "Session {sessionId}"
       },

@@ -556,6 +556,10 @@
         },
         "information": "Warning, make sure that all the candidates have finished their exam before exiting the invigilation. To resume the invigilation of this session, you will have to enter again it’s session number and it’s password.",
         "invigilator": "Invigilator(s)",
+        "invigilator-kit": {
+          "extra-information": "Download invigilator’s kit",
+          "label": "Invigilator’s kit"
+        },
         "room": "Room",
         "session-id": "Session {sessionId}"
       },
