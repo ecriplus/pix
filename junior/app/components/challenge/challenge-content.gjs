@@ -35,18 +35,19 @@ export default class ChallengeContent extends Component {
   }
 
   get challengeContentClassname() {
-    const hasIllustrationAndEmbed = this.args.challenge.illustrationUrl && this.args.challenge.hasEmbed;
-    const hasEmbedAndForm = this.args.challenge.hasEmbed && this.args.challenge.hasForm;
+    const hasEmbedOrWebComponent = this.args.challenge.hasEmbed || this.args.challenge.hasWebComponent;
+    const hasIllustrationAndEmbedOrWC = this.args.challenge.illustrationUrl && hasEmbedOrWebComponent;
+    const hasEmbedOrWCAndForm = hasEmbedOrWebComponent && this.args.challenge.hasForm;
     let classname = '';
 
     if (this.shouldDisplayMultipleElements) {
       classname = 'challenge-content__grid-multiple-element';
 
-      if (hasIllustrationAndEmbed) {
+      if (hasIllustrationAndEmbedOrWC) {
         classname += ' challenge-content__grid-multiple-element--40-60';
       }
 
-      if (hasEmbedAndForm) {
+      if (hasEmbedOrWCAndForm) {
         classname += ' challenge-content__grid-multiple-element--60-40';
       }
     }
