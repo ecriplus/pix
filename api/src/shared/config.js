@@ -119,9 +119,6 @@ const configuration = (function () {
     },
     apiManager: {
       url: process.env.APIM_URL || 'https://gateway.pix.fr',
-      endpoints: {
-        parcoursup: process.env.APIM_PARCOURSUP_PATH || '/parcoursup',
-      },
     },
     apimRegisterApplicationsCredentials: [
       {
@@ -630,6 +627,8 @@ const configuration = (function () {
     config.partner.fetchTimeOut = '10ms';
 
     config.identityProviderConfigKey = null;
+
+    config.apiManager.url = 'http://external-partners-access/';
   }
 
   return config;
