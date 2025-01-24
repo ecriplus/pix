@@ -24,7 +24,7 @@ export default class ChallengeActions extends Component {
       {{/unless}}
       {{#if @answerHasBeenValidated}}
         <PixButton
-          class="pix1d-button pix1d-button--success"
+          class="pix1d-button {{if @responseColor 'pix1d-button--success'}}"
           @iconAfter="arrowRight"
           @triggerAction={{@nextAction}}
           @size="large"
