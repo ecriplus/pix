@@ -86,7 +86,7 @@ export default function index(config) {
         {
           data: {
             type: 'student-information',
-            id: 3,
+            id: '3',
             attributes: {
               'first-name': foundUser.firstName,
               'last-name': foundUser.lastName,

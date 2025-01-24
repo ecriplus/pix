@@ -129,7 +129,7 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
         let adapter, storeService;
 
         hooks.beforeEach(function () {
-          stubCurrentUserService(this.owner, { id: 1 });
+          stubCurrentUserService(this.owner, { id: '1' });
 
           storeService = this.owner.lookup('service:store');
           adapter = storeService.adapterFor('campaign-participation-result');
@@ -153,7 +153,7 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
             'campaign-participation-result',
             {
               campaignId: this.campaignId,
-              userId: 1,
+              userId: '1',
             },
             { reload: true },
           );

@@ -38,8 +38,8 @@ module('Integration | Component | Sitemap::Content', function (hooks) {
   test('should display a sublist within skills containing a link to each skill', async function (assert) {
     // given
     const store = this.owner.lookup('service:store');
-    const scorecard1 = store.createRecord('scorecard', { id: 1, name: 'Name 1' });
-    const scorecard2 = store.createRecord('scorecard', { id: 2, name: 'Name 2' });
+    const scorecard1 = store.createRecord('scorecard', { id: '1', name: 'Name 1' });
+    const scorecard2 = store.createRecord('scorecard', { id: '2', name: 'Name 2' });
     const model = {
       scorecards: [scorecard1, scorecard2],
     };

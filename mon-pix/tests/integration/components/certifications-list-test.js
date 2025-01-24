@@ -16,7 +16,7 @@ module('Integration | Component | certifications list', function (hooks) {
 
   module('when there is some completed certifications', function () {
     const certification1 = EmberObject.create({
-      id: 1,
+      id: '1',
       date: '2018-02-15T15:15:52.504Z',
       status: 'validated',
       certificationCenter: 'Université de Paris',
@@ -24,7 +24,7 @@ module('Integration | Component | certifications list', function (hooks) {
       pixScore: 231,
     });
     const certification2 = EmberObject.create({
-      id: 2,
+      id: '2',
       date: '2018-02-15T15:15:52.504Z',
       status: 'rejected',
       certificationCenter: 'Université de Lyon',

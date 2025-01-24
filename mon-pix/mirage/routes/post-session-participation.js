@@ -34,7 +34,7 @@ export default function (schema, request) {
   }
 
   return schema.certificationCandidates.create({
-    id: 2,
+    id: '2',
     firstName: 'Laura',
     lastName: 'Bravo',
     sessionId: 1,

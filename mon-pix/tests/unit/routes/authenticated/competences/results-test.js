@@ -34,23 +34,33 @@ module('Unit | Route | Competences | Results', function (hooks) {
     test('should return the most recent competence-evaluation for a given assessment', async function (assert) {
       // Given
       const tutorial = {
-        id: 1,
+        id: '1',
       };
       const scorecard = {
-        id: 1,
+        id: '1',
         hasMany: sinon.stub(),
       };
       scorecard.hasMany.returns({ reload: sinon.stub().resolves([tutorial]) });
       belongsToStub = sinon.stub().returns({ reload: sinon.stub().resolves(scorecard) });
 
       const competenceEvaluationsInStore = A([
-        { id: 1, createdAt: new Date('2020-01-01'), assessment: { get: () => assessmentId }, belongsTo: belongsToStub },
-        { id: 2, createdAt: new Date('2020-02-01'), assessment: { get: () => assessmentId }, belongsTo: belongsToStub },
-        { id: 3, createdAt: new Date('2020-03-01'), assessment: { get: () => 456 }, belongsTo: belongsToStub },
+        {
+          id: '1',
+          createdAt: new Date('2020-01-01'),
+          assessment: { get: () => assessmentId },
+          belongsTo: belongsToStub,
+        },
+        {
+          id: '2',
+          createdAt: new Date('2020-02-01'),
+          assessment: { get: () => assessmentId },
+          belongsTo: belongsToStub,
+        },
+        { id: '3', createdAt: new Date('2020-03-01'), assessment: { get: () => 456 }, belongsTo: belongsToStub },
       ]);
 
       findAllStub
-        .withArgs('competenceEvaluation', { reload: true, adapterOptions: { assessmentId } })
+        .withArgs('competence-evaluation', { reload: true, adapterOptions: { assessmentId } })
         .resolves(competenceEvaluationsInStore);
 
       // When
@@ -59,8 +69,8 @@ module('Unit | Route | Competences | Results', function (hooks) {
       });
 
       // Then
-      assert.strictEqual(model.competenceEvaluation.id, 2);
-      assert.strictEqual(model.scorecard.id, 1);
+      assert.strictEqual(model.competenceEvaluation.id, '2');
+      assert.strictEqual(model.scorecard.id, '1');
     });
   });
 });

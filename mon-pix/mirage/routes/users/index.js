@@ -30,7 +30,7 @@ export default function index(config) {
     const locale = params.data.attributes['locale'];
     const cgu = params.data.attributes['cgu'];
 
-    return schema.users.create({ id: 10000, firstName, lastName, email, password, cgu, locale });
+    return schema.users.create({ id: '10000', firstName, lastName, email, password, cgu, locale });
   });
 
   config.post('/users/:id/competences/:competenceId/reset', resetScorecard);

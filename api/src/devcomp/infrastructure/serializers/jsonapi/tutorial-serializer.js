@@ -24,6 +24,7 @@ const serialize = function (tutorial = {}, pagination) {
     userSavedTutorial: userSavedTutorialAttributes,
     typeForAttribute(attribute) {
       if (attribute === 'userSavedTutorial') return 'user-saved-tutorial';
+      if (attribute === 'tutorialEvaluation') return 'tutorial-evaluation';
       return attribute;
     },
     meta: pagination,

@@ -19,7 +19,7 @@ module('Unit | Model | SharedProfileForCampaign model', function (hooks) {
     const scorecard2 = store.createRecord('scorecard', { area: area1 });
     const scorecard3 = store.createRecord('scorecard', { area: area2 });
 
-    const model = store.createRecord('sharedProfileForCampaign');
+    const model = store.createRecord('shared-profile-for-campaign');
     model.scorecards = [scorecard1, scorecard2, scorecard3];
 
     // when

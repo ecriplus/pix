@@ -152,12 +152,12 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
     test('should render the four first non started competence cards from the received arguments', async function (assert) {
       // given
       const scorecards = [
-        { id: 1, index: '1.1', isNotStarted: true, name: 'Compétence 1' },
-        { id: 2, index: '1.2', isNotStarted: true, name: 'Compétence 2' },
-        { id: 3, index: '3.1', isNotStarted: true, name: 'Compétence 3' },
-        { id: 5, index: '1.3', isNotStarted: false, name: 'Compétence 4' },
-        { id: 4, index: '2.4', isNotStarted: true, name: 'Compétence 5' },
-        { id: 6, index: '1.4', isNotStarted: true, name: 'Compétence 6' },
+        { id: '1', index: '1.1', isNotStarted: true, name: 'Compétence 1' },
+        { id: '2', index: '1.2', isNotStarted: true, name: 'Compétence 2' },
+        { id: '3', index: '3.1', isNotStarted: true, name: 'Compétence 3' },
+        { id: '5', index: '1.3', isNotStarted: false, name: 'Compétence 4' },
+        { id: '4', index: '2.4', isNotStarted: true, name: 'Compétence 5' },
+        { id: '6', index: '1.4', isNotStarted: true, name: 'Compétence 6' },
       ];
       this.set('model', {
         campaignParticipationOverviews: [],
@@ -226,12 +226,12 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
     test('should render the four first non improvable competence cards from the received arguments', async function (assert) {
       // given
       const scorecards = [
-        { id: 1, index: '1.1', isImprovable: true, name: 'Compétence 1' },
-        { id: 2, index: '1.2', isImprovable: true, name: 'Compétence 2' },
-        { id: 3, index: '3.1', isImprovable: true, name: 'Compétence 3' },
-        { id: 5, index: '1.3', isImprovable: false, name: 'Compétence 4' },
-        { id: 4, index: '2.4', isImprovable: true, name: 'Compétence 5' },
-        { id: 4, index: '1.4', isImprovable: true, name: 'Compétence 6' },
+        { id: '1', index: '1.1', isImprovable: true, name: 'Compétence 1' },
+        { id: '2', index: '1.2', isImprovable: true, name: 'Compétence 2' },
+        { id: '3', index: '3.1', isImprovable: true, name: 'Compétence 3' },
+        { id: '5', index: '1.3', isImprovable: false, name: 'Compétence 4' },
+        { id: '4', index: '2.4', isImprovable: true, name: 'Compétence 5' },
+        { id: '4', index: '1.4', isImprovable: true, name: 'Compétence 6' },
       ];
       this.set('model', {
         campaignParticipationOverviews: [],
@@ -310,12 +310,12 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
     test('should render the four first started competence cards from the received arguments', async function (assert) {
       // given
       const scorecards = [
-        { id: 1, index: '1.1', isStarted: true, name: 'Compétence 1' },
-        { id: 2, index: '1.2', isStarted: true, name: 'Compétence 2' },
-        { id: 3, index: '3.1', isStarted: true, name: 'Compétence 3' },
-        { id: 5, index: '1.3', isStarted: false, name: 'Compétence 4' },
-        { id: 4, index: '2.4', isStarted: true, name: 'Compétence 5' },
-        { id: 4, index: '1.4', isStarted: true, name: 'Compétence 6' },
+        { id: '1', index: '1.1', isStarted: true, name: 'Compétence 1' },
+        { id: '2', index: '1.2', isStarted: true, name: 'Compétence 2' },
+        { id: '3', index: '3.1', isStarted: true, name: 'Compétence 3' },
+        { id: '5', index: '1.3', isStarted: false, name: 'Compétence 4' },
+        { id: '4', index: '2.4', isStarted: true, name: 'Compétence 5' },
+        { id: '4', index: '1.4', isStarted: true, name: 'Compétence 6' },
       ];
       this.set('model', {
         campaignParticipationOverviews: [],
@@ -521,8 +521,8 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
         campaignParticipationOverviews: [],
         campaignParticipations: [],
         scorecards: [
-          { id: 1, index: '1.1', isStarted: true },
-          { id: 2, index: '1.2', isStarted: true },
+          { id: '1', index: '1.1', isStarted: true },
+          { id: '2', index: '1.2', isStarted: true },
         ],
       });
 

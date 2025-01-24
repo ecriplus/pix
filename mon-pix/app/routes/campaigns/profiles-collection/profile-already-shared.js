@@ -15,7 +15,7 @@ export default class ProfileAlreadySharedRoute extends Route {
     const user = this.currentUser.user;
     const campaign = this.modelFor('campaigns');
     try {
-      const sharedProfile = await this.store.queryRecord('sharedProfileForCampaign', {
+      const sharedProfile = await this.store.queryRecord('shared-profile-for-campaign', {
         campaignId: campaign.id,
         userId: user.id,
       });

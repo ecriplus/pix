@@ -11,7 +11,7 @@ module('Unit | Route | Entry Point', function (hooks) {
 
   hooks.beforeEach(function () {
     campaign = EmberObject.create({
-      id: 3,
+      id: '3',
       code: 'NEW_CODE',
       isAccessible: true,
     });
@@ -121,7 +121,7 @@ module('Unit | Route | Entry Point', function (hooks) {
 
     module('user connected', function (hooks) {
       hooks.beforeEach(function () {
-        route.currentUser = { user: { id: 12 } };
+        route.currentUser = { user: { id: '12' } };
         route.session.isAuthenticated = true;
       });
 
@@ -131,8 +131,8 @@ module('Unit | Route | Entry Point', function (hooks) {
 
         //then
         sinon.assert.calledWith(route.store.queryRecord, 'campaign-participation', {
-          campaignId: 3,
-          userId: 12,
+          campaignId: '3',
+          userId: '12',
         });
         assert.ok(true);
       });
@@ -176,8 +176,8 @@ module('Unit | Route | Entry Point', function (hooks) {
         //given
         route.store.queryRecord
           .withArgs('campaign-participation', {
-            campaignId: 3,
-            userId: 12,
+            campaignId: '3',
+            userId: '12',
           })
           .resolves('Ma Participation');
 
@@ -215,8 +215,8 @@ module('Unit | Route | Entry Point', function (hooks) {
           //given
           route.store.queryRecord
             .withArgs('campaign-participation', {
-              campaignId: 3,
-              userId: 12,
+              campaignId: '3',
+              userId: '12',
             })
             .resolves('Ma Participation');
 
@@ -237,7 +237,7 @@ module('Unit | Route | Entry Point', function (hooks) {
           transition = { to: { queryParams: { participantExternalId: 'externalId' } } };
           route.currentUser = {
             user: {
-              id: 12,
+              id: '12',
             },
           };
 
@@ -254,7 +254,7 @@ module('Unit | Route | Entry Point', function (hooks) {
           transition = { to: { queryParams: { externalId: 'externalId' } } };
           route.currentUser = {
             user: {
-              id: 12,
+              id: '12',
             },
           };
 
@@ -273,7 +273,7 @@ module('Unit | Route | Entry Point', function (hooks) {
           const transition = { to: { queryParams: {} } };
           route.currentUser = {
             user: {
-              id: 12,
+              id: '12',
             },
           };
 
@@ -294,7 +294,7 @@ module('Unit | Route | Entry Point', function (hooks) {
           const transition = { to: { queryParams: { retry: 'true' } } };
           route.currentUser = {
             user: {
-              id: 12,
+              id: '12',
             },
           };
 
@@ -313,7 +313,7 @@ module('Unit | Route | Entry Point', function (hooks) {
           const transition = { to: { queryParams: {} } };
           route.currentUser = {
             user: {
-              id: 12,
+              id: '12',
             },
           };
 

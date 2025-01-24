@@ -68,7 +68,7 @@ module('Unit | Adapters | tutorial-evaluation', function (hooks) {
       // given
       const tutorialId = 'tutorialId';
       const tutorial = {
-        id: 12,
+        id: '12',
         adapterOptions: { tutorialId, status: 'LIKED' },
         serialize: function () {},
       };

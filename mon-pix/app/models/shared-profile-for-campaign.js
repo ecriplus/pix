@@ -13,7 +13,7 @@ export default class SharedProfileForCampaign extends Model {
 
   get areas() {
     return uniqBy(
-      this.scorecards.map((s) => s.area),
+      this.scorecards.slice().map((s) => s.area),
       'code',
     );
   }

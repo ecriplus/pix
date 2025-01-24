@@ -18,7 +18,7 @@ export default function (schema, request) {
   }
 
   if (!tutorialEvaluation) {
-    return schema.tutorialEvaluations.create({ id: 1, tutorialId, tutorial, status });
+    return schema.tutorialEvaluations.create({ id: '1', tutorialId, tutorial, status });
   }
-  return schema.tutorialEvaluations.update({ id: 1, tutorialId, tutorial, status });
+  return schema.tutorialEvaluations.update({ id: '1', tutorialId, tutorial, status });
 }

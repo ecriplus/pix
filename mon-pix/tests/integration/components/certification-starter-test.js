@@ -198,7 +198,7 @@ module('Integration | Component | certification-starter', function (hooks) {
         test('should redirect to certifications.resume', async function (assert) {
           // given
           const certificationCourse = {
-            id: 456,
+            id: '456',
             save: sinon.stub(),
             deleteRecord: sinon.stub(),
           };
@@ -246,7 +246,7 @@ module('Integration | Component | certification-starter', function (hooks) {
           sinon.assert.calledOnce(certificationCourse.save);
           sinon.assert.calledOnce(resetStub);
           sinon.assert.calledOnce(startCertificationStub);
-          sinon.assert.calledWithExactly(routerObserver.replaceWith, 'authenticated.certifications.resume', 456);
+          sinon.assert.calledWithExactly(routerObserver.replaceWith, 'authenticated.certifications.resume', '456');
 
           assert.ok(true);
         });
@@ -276,7 +276,7 @@ module('Integration | Component | certification-starter', function (hooks) {
           this.owner.register('service:store', StoreStubService);
 
           const certificationCourse = {
-            id: 123,
+            id: '123',
             save: sinon.stub(),
             deleteRecord: sinon.stub(),
           };
@@ -313,7 +313,7 @@ module('Integration | Component | certification-starter', function (hooks) {
 
           this.owner.register('service:store', StoreStubService);
           const certificationCourse = {
-            id: 123,
+            id: '123',
             save: sinon.stub(),
             deleteRecord: sinon.stub(),
           };
@@ -349,7 +349,7 @@ module('Integration | Component | certification-starter', function (hooks) {
 
           this.owner.register('service:store', StoreStubService);
           const certificationCourse = {
-            id: 123,
+            id: '123',
             save: sinon.stub(),
             deleteRecord: sinon.stub(),
           };
@@ -386,7 +386,7 @@ module('Integration | Component | certification-starter', function (hooks) {
 
             this.owner.register('service:store', StoreStubService);
             const certificationCourse = {
-              id: 123,
+              id: '123',
               save: sinon.stub(),
               deleteRecord: sinon.stub(),
             };
@@ -426,7 +426,7 @@ module('Integration | Component | certification-starter', function (hooks) {
 
             this.owner.register('service:store', StoreStubService);
             const certificationCourse = {
-              id: 123,
+              id: '123',
               save: sinon.stub(),
               deleteRecord: sinon.stub(),
             };
@@ -468,7 +468,7 @@ module('Integration | Component | certification-starter', function (hooks) {
 
             this.owner.register('service:store', StoreStubService);
             const certificationCourse = {
-              id: 123,
+              id: '123',
               save: sinon.stub(),
               deleteRecord: sinon.stub(),
             };

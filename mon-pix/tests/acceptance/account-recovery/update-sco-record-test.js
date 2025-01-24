@@ -165,7 +165,7 @@ module('Acceptance | account-recovery | UpdateScoRecordRoute', function (hooks) 
 
       const email = 'George@example.net';
       const password = 'Password123';
-      server.create('user', { id: 2, email, password });
+      server.create('user', { id: '2', email, password });
 
       const screen = await visit(`/recuperer-mon-compte/${temporaryKey}`);
 

@@ -126,7 +126,7 @@ module('Unit | Component | Tutorial | card item', function (hooks) {
         await component.toggleSaveTutorial();
 
         // then
-        sinon.assert.calledWith(store.createRecord, 'userSavedTutorial', { tutorial });
+        sinon.assert.calledWith(store.createRecord, 'user-saved-tutorial', { tutorial });
         assert.ok(true);
       });
 

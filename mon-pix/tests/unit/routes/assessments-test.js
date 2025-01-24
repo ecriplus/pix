@@ -17,7 +17,7 @@ module('Unit | Route | Assessments', function (hooks) {
   module('#afterModel', function () {
     test('should return the title when the assessment is not a certification ', function (assert) {
       // given
-      const assessment = EmberObject.create({ id: 1, title: 'Programmer', isCertification: false });
+      const assessment = EmberObject.create({ id: '1', title: 'Programmer', isCertification: false });
 
       // when
       const model = route.afterModel(assessment);
@@ -28,7 +28,7 @@ module('Unit | Route | Assessments', function (hooks) {
 
     test('should update the title when the assessment is a certification ', function (assert) {
       // given
-      const assessment = EmberObject.create({ id: 1, title: 1223, isCertification: true });
+      const assessment = EmberObject.create({ id: '1', title: 1223, isCertification: true });
 
       // when
       const model = route.afterModel(assessment);

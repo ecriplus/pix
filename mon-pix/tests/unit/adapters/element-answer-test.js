@@ -29,7 +29,7 @@ module('Unit | Adapter | Module | ElementAnswer', function (hooks) {
     test('should build the right payload', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const passageId = 12;
+      const passageId = '12';
       const passage = store.createRecord('passage', { id: passageId });
       const adapter = this.owner.lookup('adapter:element-answer');
       adapter.ajax = sinon.stub().resolves();

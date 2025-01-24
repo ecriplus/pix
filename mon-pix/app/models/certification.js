@@ -29,7 +29,7 @@ export default class Certification extends Model {
   @attr('number') version;
 
   // includes
-  @belongsTo('resultCompetenceTree', { async: true, inverse: null }) resultCompetenceTree;
+  @belongsTo('result-competence-tree', { async: true, inverse: null }) resultCompetenceTree;
   @belongsTo('user', { async: true, inverse: 'certifications' }) user;
 
   @computed('certifiedBadgeImages.length')

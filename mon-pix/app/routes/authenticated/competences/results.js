@@ -8,7 +8,7 @@ export default class ResultsRoute extends Route {
   async model(params) {
     const assessmentId = params.assessment_id;
 
-    const competenceEvaluations = await this.store.findAll('competenceEvaluation', {
+    const competenceEvaluations = await this.store.findAll('competence-evaluation', {
       reload: true,
       adapterOptions: { assessmentId },
     });

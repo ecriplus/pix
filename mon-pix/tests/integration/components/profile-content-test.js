@@ -25,7 +25,7 @@ module('Integration | Component | Profile-content', function (hooks) {
           areas: [{ code: 0 }, { code: 1 }],
           scorecards: [
             {
-              id: 1,
+              id: '1',
               areaColor: 0,
               level: 3,
               name: 'Name',
@@ -36,7 +36,7 @@ module('Integration | Component | Profile-content', function (hooks) {
               },
             },
             {
-              id: 2,
+              id: '2',
               areaColor: 1,
               level: 2,
               name: 'Name 2',

@@ -6,8 +6,8 @@ module('Unit | Route | Campaign | Profiles Collection | Profile already shared',
   setupTest(hooks);
 
   let route;
-  const campaign = { id: 123456, code: 'NEW_CODE' };
-  const user = { id: 567890 };
+  const campaign = { id: '123456', code: 'NEW_CODE' };
+  const user = { id: '567890' };
   const storeStub = {
     queryRecord: sinon.stub(),
   };
@@ -38,7 +38,7 @@ module('Unit | Route | Campaign | Profiles Collection | Profile already shared',
     module('when participation exists', function (hooks) {
       hooks.beforeEach(function () {
         storeStub.queryRecord
-          .withArgs('sharedProfileForCampaign', { campaignId: campaign.id, userId: user.id })
+          .withArgs('shared-profile-for-campaign', { campaignId: campaign.id, userId: user.id })
           .resolves(campaign);
       });
 

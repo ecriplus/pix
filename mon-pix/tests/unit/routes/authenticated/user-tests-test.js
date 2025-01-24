@@ -10,14 +10,14 @@ module('Unit | Route | User-Tests', function (hooks) {
   module('#model', function () {
     test('should returns the model that contains campaignParticipationOverviews', async function (assert) {
       // given
-      const currentUserStub = Service.create({ user: { id: 1 } });
+      const currentUserStub = Service.create({ user: { id: '1' } });
       const store = this.owner.lookup('service:store');
       sinon.stub(store, 'query');
 
-      const campaignParticipationOverviews = [EmberObject.create({ id: 10 })];
+      const campaignParticipationOverviews = [EmberObject.create({ id: '10' })];
       store.query
         .withArgs('campaign-participation-overview', {
-          userId: 1,
+          userId: '1',
           'page[number]': 1,
           'page[size]': 100,
           'filter[states]': ['ONGOING', 'TO_SHARE', 'ENDED', 'DISABLED'],
@@ -49,7 +49,7 @@ module('Unit | Route | User-Tests', function (hooks) {
     test('should continue on user-tests if there is some campaign participations', function (assert) {
       const route = this.owner.lookup('route:authenticated/user-tests');
       sinon.stub(route.router, 'replaceWith');
-      const campaignParticipationOverviews = [EmberObject.create({ id: 10 })];
+      const campaignParticipationOverviews = [EmberObject.create({ id: '10' })];
 
       route.redirect(campaignParticipationOverviews, {});
       sinon.assert.notCalled(route.router.replaceWith);

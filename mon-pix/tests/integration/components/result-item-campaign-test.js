@@ -27,10 +27,10 @@ module('Integration | Component | result-item', function (hooks) {
     const answer = EmberObject.create({
       value: '2,4',
       result: 'ko',
-      id: 1,
+      id: '1',
       challenge: emberChallengeObject,
       assessment: {
-        id: 4,
+        id: '4',
       },
     });
 

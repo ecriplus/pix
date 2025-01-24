@@ -24,7 +24,7 @@ module('Acceptance | Password reset demand form', function (hooks) {
   test('stays on "mot de passe oublié" page, and shows success message when email sent correspond to an existing user', async function (assert) {
     // given
     this.server.create('user', {
-      id: 1,
+      id: '1',
       firstName: 'Brandone',
       lastName: 'Martins',
       email: 'brandone.martins@pix.com',
