@@ -3,8 +3,8 @@ import _ from 'lodash';
 import { LearningContent } from './LearningContent.js';
 
 class CampaignLearningContent extends LearningContent {
-  constructor(learningContent) {
-    super(learningContent);
+  constructor(frameworks) {
+    super(frameworks);
   }
 
   get areas() {
