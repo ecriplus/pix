@@ -306,11 +306,11 @@
                 "content": "<p>Qui a envoyé ce mail ?</p>"
               },
               {
-                "input": "",
+                "input": "a",
                 "type": "select",
                 "display": "inline",
                 "placeholder": "- Sélectionner -",
-                "ariaLabel": "",
+                "ariaLabel": "expéditeur mail",
                 "defaultValue": "",
                 "tolerances": [],
                 "options": [
@@ -340,11 +340,11 @@
                 "content": "<p>Qui va recevoir ce mail ?</p>"
               },
               {
-                "input": "",
+                "input": "b",
                 "type": "select",
                 "display": "inline",
                 "placeholder": "- Sélectionner - ",
-                "ariaLabel": "",
+                "ariaLabel": "destinaire mail",
                 "defaultValue": "",
                 "tolerances": [],
                 "options": [
@@ -374,11 +374,11 @@
                 "content": "<p>Quel est l'objet de ce mail ?</p>"
               },
               {
-                "input": "",
+                "input": "c",
                 "type": "select",
                 "display": "inline",
                 "placeholder": "- Sélectionner -",
-                "ariaLabel": "",
+                "ariaLabel": "objet mail",
                 "defaultValue": "",
                 "tolerances": [],
                 "options": [
