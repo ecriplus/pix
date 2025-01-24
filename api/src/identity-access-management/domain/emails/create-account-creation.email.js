@@ -2,6 +2,17 @@ import { urlBuilder } from '../../../shared/infrastructure/utils/url-builder.js'
 import { EmailFactory } from '../../../shared/mail/domain/models/EmailFactory.js';
 import { mailer } from '../../../shared/mail/infrastructure/services/mailer.js';
 
+/**
+ * Creates an account creation email.
+ *
+ * @param {Object} params - The parameters for the email.
+ * @param {string} params.locale - The locale for the email.
+ * @param {string} params.email - The recipient's email address.
+ * @param {string} params.firstName - The recipient's first name.
+ * @param {string} params.token - The token for email validation.
+ * @param {string} [params.redirectionUrl] - The redirection URL after validation.
+ * @returns {Object} The email object.
+ */
 export function createAccountCreationEmail({ locale, email, firstName, token, redirectionUrl }) {
   const factory = new EmailFactory({ app: 'pix-app', locale });
 

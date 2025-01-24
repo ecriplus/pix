@@ -13,42 +13,6 @@ const SCO_ACCOUNT_RECOVERY_TAG = 'SCO_ACCOUNT_RECOVERY';
 // FRENCH_FRANCE
 const PIX_APP_URL_FRENCH_FRANCE = `${config.domain.pixApp + config.domain.tldFr}`;
 
-// INTERNATIONAL
-const PIX_APP_URL_INTERNATIONAL = `${config.domain.pixApp + config.domain.tldOrg}`;
-
-/**
- * @param email
- * @param locale
- * @param temporaryKey
- * @returns {Promise<EmailingAttempt>}
- */
-function sendResetPasswordDemandEmail({ email, locale = FRENCH_FRANCE, temporaryKey }) {
-  const mailerConfig = _getMailerConfig(locale);
-
-  const templateVariables = {
-    locale,
-    ...mailerConfig.translation['reset-password-demand-email'].params,
-    homeName: mailerConfig.homeName,
-    homeUrl: mailerConfig.homeUrl,
-    resetUrl:
-      locale === FRENCH_FRANCE
-        ? `${PIX_APP_URL_FRENCH_FRANCE}/changer-mot-de-passe/${temporaryKey}`
-        : `${PIX_APP_URL_INTERNATIONAL}/changer-mot-de-passe/${temporaryKey}/?lang=${locale}`,
-    helpdeskURL: mailerConfig.helpdeskUrl,
-  };
-  const pixName = mailerConfig.translation['email-sender-name']['pix-app'];
-  const resetPasswordEmailSubject = mailerConfig.translation['reset-password-demand-email'].subject;
-
-  return mailer.sendEmail({
-    from: EMAIL_ADDRESS_NO_RESPONSE,
-    fromName: pixName,
-    to: email,
-    subject: resetPasswordEmailSubject,
-    template: mailer.passwordResetTemplateId,
-    variables: templateVariables,
-  });
-}
-
 /**
  * @param email
  * @param organizationName
@@ -327,7 +291,6 @@ const mailService = {
   sendOrganizationInvitationEmail,
   sendScoOrganizationInvitationEmail,
   sendCertificationCenterInvitationEmail,
-  sendResetPasswordDemandEmail,
   sendVerificationCodeEmail,
   sendCpfEmail,
   sendNotificationToOrganizationMembersForTargetProfileDetached,
@@ -340,7 +303,6 @@ const mailService = {
  * @property {function} sendCpfEmail
  * @property {function} sendNotificationToOrganizationMembersForTargetProfileDetached
  * @property {function} sendOrganizationInvitationEmail
- * @property {function} sendResetPasswordDemandEmail
  * @property {function} sendScoOrganizationInvitationEmail
  * @property {function} sendVerificationCodeEmail
  */
@@ -351,7 +313,6 @@ export {
   sendCpfEmail,
   sendNotificationToOrganizationMembersForTargetProfileDetached,
   sendOrganizationInvitationEmail,
-  sendResetPasswordDemandEmail,
   sendScoOrganizationInvitationEmail,
   sendVerificationCodeEmail,
 };

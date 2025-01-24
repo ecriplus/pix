@@ -3,7 +3,7 @@ import { createResetPasswordDemand } from '../../../../../src/identity-access-ma
 import { resetPasswordDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/reset-password-demand.repository.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
-import * as mailService from '../../../../../src/shared/domain/services/mail-service.js';
+import * as emailRepository from '../../../../../src/shared/mail/infrastructure/repositories/email.repository.js';
 import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | create-reset-password-demand', function () {
@@ -21,7 +21,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | create-r
     const result = await createResetPasswordDemand({
       email,
       locale,
-      mailService,
+      emailRepository,
       resetPasswordService,
       resetPasswordDemandRepository,
       userRepository,
@@ -40,7 +40,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | create-r
     const error = await catchErr(createResetPasswordDemand)({
       email: unknownEmail,
       locale,
-      mailService,
+      emailRepository,
       resetPasswordService,
       resetPasswordDemandRepository,
       userRepository,
