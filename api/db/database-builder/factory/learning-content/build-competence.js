@@ -10,6 +10,23 @@ export function buildCompetence({
   skillIds = [],
   thematicIds = [],
 } = {}) {
+  return buildCompetenceInDB({ id, name_i18n, description_i18n, index, origin, areaId, skillIds, thematicIds });
+}
+
+export function buildCompetenceWithNoDefaultValues({
+  id,
+  name_i18n,
+  description_i18n,
+  index,
+  origin,
+  areaId,
+  skillIds,
+  thematicIds,
+}) {
+  return buildCompetenceInDB({ id, name_i18n, description_i18n, index, origin, areaId, skillIds, thematicIds });
+}
+
+function buildCompetenceInDB({ id, name_i18n, description_i18n, index, origin, areaId, skillIds, thematicIds }) {
   const values = {
     id,
     name_i18n,

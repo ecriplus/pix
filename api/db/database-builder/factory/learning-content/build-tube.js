@@ -13,6 +13,62 @@ export function buildTube({
   isMobileCompliant = true,
   isTabletCompliant = true,
 } = {}) {
+  return buildTubeInDB({
+    id,
+    name,
+    title,
+    description,
+    practicalTitle_i18n,
+    practicalDescription_i18n,
+    competenceId,
+    thematicId,
+    skillIds,
+    isMobileCompliant,
+    isTabletCompliant,
+  });
+}
+
+export function buildTubeWithNoDefaultValues({
+  id,
+  name,
+  title,
+  description,
+  practicalTitle_i18n,
+  practicalDescription_i18n,
+  competenceId,
+  thematicId,
+  skillIds,
+  isMobileCompliant,
+  isTabletCompliant,
+}) {
+  return buildTubeInDB({
+    id,
+    name,
+    title,
+    description,
+    practicalTitle_i18n,
+    practicalDescription_i18n,
+    competenceId,
+    thematicId,
+    skillIds,
+    isMobileCompliant,
+    isTabletCompliant,
+  });
+}
+
+function buildTubeInDB({
+  id,
+  name,
+  title,
+  description,
+  practicalTitle_i18n,
+  practicalDescription_i18n,
+  competenceId,
+  thematicId,
+  skillIds,
+  isMobileCompliant,
+  isTabletCompliant,
+}) {
   const values = {
     id,
     name,

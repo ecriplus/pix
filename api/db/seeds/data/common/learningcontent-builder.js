@@ -42,7 +42,7 @@ export async function learningContentBuilder({ databaseBuilder }) {
     );
   });
 
-  databaseBuilder.factory.learningContent.build(learningContent);
+  databaseBuilder.factory.learningContent.build(learningContent, { noDefaultValues: true });
   await databaseBuilder.commit();
 }
 

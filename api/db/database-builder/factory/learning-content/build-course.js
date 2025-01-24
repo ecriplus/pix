@@ -8,6 +8,14 @@ export function buildCourse({
   competences = [],
   challenges = [],
 } = {}) {
+  return buildCourseInDB({ id, name, description, isActive, competences, challenges });
+}
+
+export function buildCourseWithNoDefaultValues({ id, name, description, isActive, competences, challenges }) {
+  return buildCourseInDB({ id, name, description, isActive, competences, challenges });
+}
+
+function buildCourseInDB({ id, name, description, isActive, competences, challenges }) {
   const values = {
     id,
     name,
