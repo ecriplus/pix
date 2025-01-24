@@ -1,5 +1,31 @@
 # Pix Changelog
 
+## v5.25.0 (24/01/2025)
+
+
+### :rocket: Amélioration
+- [#11204](https://github.com/1024pix/pix/pull/11204) [FEATURE] Envoi automatique de la réponse pour les embed avec auto-validation (PIX-16156).
+- [#11199](https://github.com/1024pix/pix/pull/11199) [FEATURE] Lancer les tests Modulix dans une github action (PIX-16245).
+- [#11183](https://github.com/1024pix/pix/pull/11183) [FEATURE] Supprimer les liens d'évitements inutiles dans Modulix (PIX-16030).
+- [#11209](https://github.com/1024pix/pix/pull/11209) [FEATURE] Amélioration du feedback  (PIX-16096).
+- [#11151](https://github.com/1024pix/pix/pull/11151) [FEATURE] Filtrer les organisations en sélectionnant le type (PIX-16125).
+
+### :building_construction: Tech
+- [#11115](https://github.com/1024pix/pix/pull/11115) [TECH] Nouveau système de feature toggles.
+- [#11198](https://github.com/1024pix/pix/pull/11198) [TECH] Rendre swagger.json disponible via reverse proxy (PIX-16228).
+- [#11215](https://github.com/1024pix/pix/pull/11215) [TECH] Ne pas mettre de valeur par défaut dans les builders du learning content lors de la création de seeds.
+- [#11162](https://github.com/1024pix/pix/pull/11162) [TECH] Migrer le usecase de l'envoi de participation completed dans le BC Prescription (Pix-16197).
+- [#11146](https://github.com/1024pix/pix/pull/11146) [TECH] Migrer l'email de reset de mot de passe (PIX-16161).
+- [#11190](https://github.com/1024pix/pix/pull/11190) [TECH] Renommer le model "OrganizationImport" en "OrganizationImportStatus" (PIX-15824).
+
+### :arrow_up: Montée de version
+- [#11213](https://github.com/1024pix/pix/pull/11213) [BUMP] Update dependency @1024pix/pix-ui to ^54.2.0 (orga).
+- [#11212](https://github.com/1024pix/pix/pull/11212) [BUMP] Update dependency @1024pix/pix-ui to ^54.2.0 (junior).
+- [#11211](https://github.com/1024pix/pix/pull/11211) [BUMP] Update dependency @1024pix/pix-ui to ^54.2.0 (certif).
+- [#11210](https://github.com/1024pix/pix/pull/11210) [BUMP] Update dependency @1024pix/pix-ui to ^54.2.0 (admin).
+- [#11066](https://github.com/1024pix/pix/pull/11066) [BUMP] Update dependency ember-source to v6 (mon-pix).
+- [#11195](https://github.com/1024pix/pix/pull/11195) [BUMP] Update dependency redis to v7.2.7.
+
 ## v5.24.0 (23/01/2025)
 
 
