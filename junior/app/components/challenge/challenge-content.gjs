@@ -107,7 +107,11 @@ export default class ChallengeContent extends Component {
       {{/if}}
       {{#if @challenge.autoReply}}
         <div class="challenge-content__autoreply">
-          <AutoReply @setAnswerValue={{@setAnswerValue}} />
+          <AutoReply
+            @validateAnswer={{@validateAnswer}}
+            @isEmbedAutoValidated={{@challenge.isEmbedAutoValidated}}
+            @setAnswerValue={{@setAnswerValue}}
+          />
         </div>
       {{/if}}
       <ChallengeActions

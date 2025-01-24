@@ -127,8 +127,7 @@ export default class Challenge extends Component {
       await this.answer.save({ adapterOptions: { assessmentId: this.#assessmentId, isPreview: this.#isPreview } });
       this.answerHasBeenValidated = true;
       this.scrollToTop();
-      // eslint-disable-next-line no-unused-vars
-    } catch (error) {
+    } catch {
       this.answer.rollbackAttributes();
     }
   }
