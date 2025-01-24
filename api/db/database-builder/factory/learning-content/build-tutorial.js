@@ -9,6 +9,14 @@ export function buildTutorial({
   link = 'link Tutoriel A',
   locale = 'fr',
 } = {}) {
+  return buildTutorialInDB({ id, duration, format, title, source, link, locale });
+}
+
+export function buildTutorialWithNoDefaultValues({ id, duration, format, title, source, link, locale }) {
+  return buildTutorialInDB({ id, duration, format, title, source, link, locale });
+}
+
+function buildTutorialInDB({ id, duration, format, title, source, link, locale }) {
   const values = {
     id,
     duration,

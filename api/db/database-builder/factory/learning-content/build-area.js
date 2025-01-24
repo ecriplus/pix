@@ -9,6 +9,14 @@ export function buildArea({
   frameworkId = null,
   competenceIds = [],
 } = {}) {
+  return buildAreaInDB({ id, code, name, title_i18n, color, frameworkId, competenceIds });
+}
+
+export function buildAreaWithNoDefaultValues({ id, code, name, title_i18n, color, frameworkId, competenceIds }) {
+  return buildAreaInDB({ id, code, name, title_i18n, color, frameworkId, competenceIds });
+}
+
+function buildAreaInDB({ id, code, name, title_i18n, color, frameworkId, competenceIds }) {
   const values = {
     id,
     code,

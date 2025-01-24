@@ -1,6 +1,14 @@
 import { databaseBuffer } from '../../database-buffer.js';
 
 export function buildFramework({ id = 'frameworkPix', name = 'Pix' } = {}) {
+  return buildFrameworkInDB({ id, name });
+}
+
+export function buildFrameworkWithNoDefaultValues({ id, name }) {
+  return buildFrameworkInDB({ id, name });
+}
+
+function buildFrameworkInDB({ id, name }) {
   const values = {
     id,
     name,

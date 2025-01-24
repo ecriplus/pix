@@ -14,6 +14,66 @@ export function buildSkill({
   learningMoreTutorialIds = [],
   hint_i18n = { fr: 'Un indice' },
 } = {}) {
+  return buildSkillInDB({
+    id,
+    name,
+    status,
+    pixValue,
+    version,
+    level,
+    hintStatus,
+    competenceId,
+    tubeId,
+    tutorialIds,
+    learningMoreTutorialIds,
+    hint_i18n,
+  });
+}
+
+export function buildSkillWithNoDefaultValues({
+  id,
+  name,
+  status,
+  pixValue,
+  version,
+  level,
+  hintStatus,
+  competenceId,
+  tubeId,
+  tutorialIds,
+  learningMoreTutorialIds,
+  hint_i18n,
+}) {
+  return buildSkillInDB({
+    id,
+    name,
+    status,
+    pixValue,
+    version,
+    level,
+    hintStatus,
+    competenceId,
+    tubeId,
+    tutorialIds,
+    learningMoreTutorialIds,
+    hint_i18n,
+  });
+}
+
+function buildSkillInDB({
+  id,
+  name,
+  status,
+  pixValue,
+  version,
+  level,
+  hintStatus,
+  competenceId,
+  tubeId,
+  tutorialIds,
+  learningMoreTutorialIds,
+  hint_i18n,
+}) {
   const values = {
     id,
     name,

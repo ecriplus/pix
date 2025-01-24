@@ -7,6 +7,26 @@ export function buildThematic({
   competenceId = null,
   tubeIds = [],
 } = {}) {
+  return buildThematicInDB({
+    id,
+    name_i18n,
+    index,
+    competenceId,
+    tubeIds,
+  });
+}
+
+export function buildThematicWithNoDefaultValues({ id, name_i18n, index, competenceId, tubeIds }) {
+  return buildThematicInDB({
+    id,
+    name_i18n,
+    index,
+    competenceId,
+    tubeIds,
+  });
+}
+
+function buildThematicInDB({ id, name_i18n, index, competenceId, tubeIds }) {
   const values = {
     id,
     name_i18n,

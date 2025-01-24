@@ -14,6 +14,66 @@ export function buildMission({
   cardImageUrl = 'cardImageUrl Mission A',
   competenceId = null,
 } = {}) {
+  return buildMissionInDB({
+    id,
+    status,
+    name_i18n,
+    content,
+    learningObjectives_i18n,
+    validatedObjectives_i18n,
+    introductionMediaType,
+    introductionMediaUrl,
+    introductionMediaAlt_i18n,
+    documentationUrl,
+    cardImageUrl,
+    competenceId,
+  });
+}
+
+export function buildMissionWithNoDefaultValues({
+  id,
+  status,
+  name_i18n,
+  content,
+  learningObjectives_i18n,
+  validatedObjectives_i18n,
+  introductionMediaType,
+  introductionMediaUrl,
+  introductionMediaAlt_i18n,
+  documentationUrl,
+  cardImageUrl,
+  competenceId,
+}) {
+  return buildMissionInDB({
+    id,
+    status,
+    name_i18n,
+    content,
+    learningObjectives_i18n,
+    validatedObjectives_i18n,
+    introductionMediaType,
+    introductionMediaUrl,
+    introductionMediaAlt_i18n,
+    documentationUrl,
+    cardImageUrl,
+    competenceId,
+  });
+}
+
+function buildMissionInDB({
+  id,
+  status,
+  name_i18n,
+  content,
+  learningObjectives_i18n,
+  validatedObjectives_i18n,
+  introductionMediaType,
+  introductionMediaUrl,
+  introductionMediaAlt_i18n,
+  documentationUrl,
+  cardImageUrl,
+  competenceId,
+}) {
   const values = {
     id,
     status,
