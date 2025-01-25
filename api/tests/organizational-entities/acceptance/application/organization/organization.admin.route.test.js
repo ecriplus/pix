@@ -6,7 +6,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../../test-helper.js';
@@ -72,7 +72,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         const response = await server.inject({
           method: 'GET',
           url: `/api/admin/organizations/${organization.id}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(admin.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
         });
 
         // then
@@ -154,7 +154,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         const response = await server.inject({
           method: 'GET',
           url: `/api/admin/organizations/999`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(admin.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
         });
 
         // then
@@ -193,7 +193,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         const promise = server.inject({
           method: 'GET',
           url: `/api/admin/organizations/999`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(nonSuperAdminUserId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: nonSuperAdminUserId }),
         });
 
         // then
@@ -234,7 +234,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         method: 'PATCH',
         url: `/api/admin/organizations/${organization.id}`,
         payload,
-        headers: { authorization: generateValidRequestAuthorizationHeader() },
+        headers: generateAuthenticatedUserRequestHeaders(),
       };
 
       // when
@@ -265,7 +265,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
         const options = {
           method: 'POST',
-          headers: { authorization: generateValidRequestAuthorizationHeader(admin.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
           url: '/api/admin/organizations/add-organization-features',
           payload: iconv.encode(input, 'UTF-8'),
         };
@@ -299,7 +299,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(admin.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
             payload: {
               childOrganizationId: childOrganization.id,
             },
@@ -338,7 +338,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               const options = {
                 method: 'POST',
                 url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-                headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+                headers: generateAuthenticatedUserRequestHeaders({ userId }),
                 payload: {
                   childOrganizationId,
                 },
@@ -362,7 +362,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             const options = {
               method: 'POST',
               url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-              headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+              headers: generateAuthenticatedUserRequestHeaders({ userId }),
               payload: {
                 childOrganizationId,
               },
@@ -396,7 +396,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             const options = {
               method: 'POST',
               url: `/api/admin/organizations/985421/attach-child-organization`,
-              headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+              headers: generateAuthenticatedUserRequestHeaders({ userId }),
               payload: {
                 childOrganizationId,
               },
@@ -416,7 +416,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             const options = {
               method: 'POST',
               url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-              headers: { authorization: generateValidRequestAuthorizationHeader(admin.id) },
+              headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
               payload: {
                 childOrganizationId: 984512,
               },
@@ -440,7 +440,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(admin.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
             payload: {
               childOrganizationId: parentOrganizationId,
             },
@@ -475,7 +475,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(admin.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
             payload: {
               childOrganizationId,
             },
@@ -510,7 +510,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(admin.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
             payload: {
               childOrganizationId,
             },
@@ -542,7 +542,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(admin.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
             payload: {
               childOrganizationId,
             },
@@ -580,7 +580,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(admin.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
             payload: {
               childOrganizationId,
             },
@@ -625,7 +625,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
         const options = {
           method: 'POST',
-          headers: { authorization: generateValidRequestAuthorizationHeader(admin.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
           url: '/api/admin/organizations/update-organizations',
           payload: iconv.encode(input, 'UTF-8'),
         };
@@ -652,7 +652,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             const options = {
               method: 'POST',
               url: `/api/admin/organizations/update-organizations`,
-              headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+              headers: generateAuthenticatedUserRequestHeaders({ userId }),
               payload: iconv.encode(input, 'UTF-8'),
             };
 
@@ -674,7 +674,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/update-organizations`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload: iconv.encode(input, 'UTF-8'),
           };
 
@@ -718,7 +718,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
         const options = {
           method: 'POST',
-          headers: { authorization: generateValidRequestAuthorizationHeader(admin.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
           url: '/api/admin/organizations/import-tags-csv',
           payload: iconv.encode(input, 'UTF-8'),
         };

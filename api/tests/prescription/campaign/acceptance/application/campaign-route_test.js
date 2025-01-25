@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -29,7 +29,7 @@ describe('Acceptance | API | Campaign Route', function () {
       const options = {
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/divisions`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       const response = await server.inject(options);
@@ -53,7 +53,7 @@ describe('Acceptance | API | Campaign Route', function () {
       const options = {
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/groups`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       const response = await server.inject(options);
@@ -142,7 +142,7 @@ describe('Acceptance | API | Campaign Route', function () {
         const request = {
           method: 'GET',
           url,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
         const expectedResult = {
           data: {
@@ -284,7 +284,7 @@ describe('Acceptance | API | Campaign Route', function () {
         const request = {
           method: 'GET',
           url,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
         const expectedResult = {
           data: {
@@ -420,7 +420,7 @@ describe('Acceptance | API | Campaign Route', function () {
       const options = {
         method: 'GET',
         url: `/api/campaigns/${campaign.code}/presentation-steps`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);

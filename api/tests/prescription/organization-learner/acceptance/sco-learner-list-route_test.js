@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../test-helper.js';
 
@@ -33,7 +33,7 @@ describe('Acceptance | Application | sco-leaner-list-route', function () {
       options = {
         method: 'GET',
         url: `/api/organizations/${organization.id}/sco-participants`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
     });
 
@@ -100,7 +100,7 @@ describe('Acceptance | Application | sco-leaner-list-route', function () {
           options = {
             method: 'GET',
             url: `/api/organizations/${organization.id}/sco-participants?filter[certificability][]=eligible`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           };
 
           // when
@@ -115,7 +115,7 @@ describe('Acceptance | Application | sco-leaner-list-route', function () {
           options = {
             method: 'GET',
             url: `/api/organizations/${organization.id}/sco-participants?filter[certificability][]=eligible&filter[certificability][]=not-available`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           };
 
           // when
@@ -131,7 +131,7 @@ describe('Acceptance | Application | sco-leaner-list-route', function () {
           options = {
             method: 'GET',
             url: `/api/organizations/${organization.id}/sco-participants?filter[connectionTypes][]=none`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           };
 
           // when
@@ -146,7 +146,7 @@ describe('Acceptance | Application | sco-leaner-list-route', function () {
           options = {
             method: 'GET',
             url: `/api/organizations/${organization.id}/sco-participants?filter[connectionTypes][]=none&filter[connectionTypes][]=email`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           };
 
           // when
@@ -174,7 +174,7 @@ describe('Acceptance | Application | sco-leaner-list-route', function () {
         // given
         const userId = databaseBuilder.factory.buildUser.withMembership().id;
         await databaseBuilder.commit();
-        options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
         // when
         const response = await server.inject(options);
@@ -189,7 +189,7 @@ describe('Acceptance | Application | sco-leaner-list-route', function () {
         const userId = databaseBuilder.factory.buildUser.withMembership({ organizationId }).id;
         await databaseBuilder.commit();
 
-        options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
         options.url = `/api/organizations/${organizationId}/sco-participants`;
 
         // when

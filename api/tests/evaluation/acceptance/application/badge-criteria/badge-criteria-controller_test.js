@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../../test-helper.js';
@@ -32,9 +32,7 @@ describe('Acceptance | API | Badge Criteria', function () {
       const response = await server.inject({
         method: 'PATCH',
         url: `/api/admin/badge-criteria/${initialBadgeCriterion.id}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: {
           data: {
             type: 'badge-criteria',

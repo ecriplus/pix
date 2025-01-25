@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | session-controller-get-attendance-sheet', function () {
@@ -33,7 +33,7 @@ describe('Acceptance | Controller | session-controller-get-attendance-sheet', fu
         method: 'GET',
         url: `/api/sessions/${sessionIdAllowed}/attendance-sheet`,
         payload: {},
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       // when

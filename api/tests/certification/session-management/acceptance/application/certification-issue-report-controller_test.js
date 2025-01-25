@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../../test-helper.js';
@@ -26,9 +26,7 @@ describe('Acceptance | Controller | certification-issue-report-controller', func
       const response = await server.inject({
         method: 'DELETE',
         url: `/api/certification-issue-reports/${certificationIssueReportId}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       });
 
       // then
@@ -52,9 +50,7 @@ describe('Acceptance | Controller | certification-issue-report-controller', func
       const request = {
         method: 'PATCH',
         url: `/api/certification-issue-reports/${certificationIssueReportId}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: {
           data: {
             resolution: 'resolved',

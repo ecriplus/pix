@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | session-controller-get-supervisor-kit-pdf', function () {
@@ -40,7 +40,7 @@ describe('Acceptance | Controller | session-controller-get-supervisor-kit-pdf', 
         method: 'GET',
         url: `/api/sessions/${sessionIdAllowed}/supervisor-kit`,
         payload: {},
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
       // when
       const promise = server.inject(options);

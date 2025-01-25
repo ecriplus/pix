@@ -12,7 +12,7 @@ import {
   databaseBuilder,
   domainBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   sinon,
 } from '../../../../test-helper.js';
@@ -195,7 +195,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       options = {
         method: 'GET',
         url: '/api/users/me',
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       return databaseBuilder.commit();
@@ -274,7 +274,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       const response = await server.inject({
         method: 'GET',
         url: '/api/users/my-account',
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       });
 
       // then
@@ -306,9 +306,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       const options = {
         method: 'GET',
         url: `/api/users/${user.id}/authentication-methods`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(user.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       // when
@@ -411,7 +409,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       options = {
         method: 'PATCH',
         url: `/api/users/${user.id}/pix-terms-of-service-acceptance`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       return databaseBuilder.commit();
@@ -432,7 +430,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       it('responds with a 403 - forbidden access - if requested user is not the same as authenticated user', async function () {
         // given
         const otherUserId = 9999;
-        options.headers.authorization = generateValidRequestAuthorizationHeader(otherUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
 
         // when
         const response = await server.inject(options);
@@ -465,7 +463,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       options = {
         method: 'PATCH',
         url: `/api/users/${user.id}/pix-orga-terms-of-service-acceptance`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       return databaseBuilder.commit();
@@ -486,7 +484,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       it('responds with a 403 - forbidden access - if requested user is not the same as authenticated user', async function () {
         // given
         const otherUserId = 9999;
-        options.headers.authorization = generateValidRequestAuthorizationHeader(otherUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
 
         // when
         const response = await server.inject(options);
@@ -517,7 +515,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       options = {
         method: 'PATCH',
         url: `/api/users/${user.id}/pix-certif-terms-of-service-acceptance`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       return databaseBuilder.commit();
@@ -538,7 +536,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       it('responds with a 403 - forbidden access - if requested user is not the same as authenticated user', async function () {
         // given
         const otherUserId = 9999;
-        options.headers.authorization = generateValidRequestAuthorizationHeader(otherUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
 
         // when
         const response = await server.inject(options);
@@ -570,7 +568,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       options = {
         method: 'PATCH',
         url: `/api/users/${user.id}/lang/${newLang}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       return databaseBuilder.commit();
@@ -591,7 +589,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       it('responds with a 403 - forbidden access - if requested user is not the same as authenticated user', async function () {
         // given
         const otherUserId = 9999;
-        options.headers.authorization = generateValidRequestAuthorizationHeader(otherUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
 
         // when
         const response = await server.inject(options);
@@ -649,7 +647,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         const response = await server.inject({
           method: 'PATCH',
           url: `/api/users/${user.id}/has-seen-last-data-protection-policy-information`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         });
 
         // then
@@ -670,7 +668,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         options = {
           method: 'PATCH',
           url: `/api/users/${user.id}/has-seen-challenge-tooltip/${challengeType}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         };
 
         return databaseBuilder.commit();
@@ -690,7 +688,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       it('should respond with a 403 - forbidden access - if requested user is not the same as authenticated user', async function () {
         // given
         const otherUserId = 9999;
-        options.headers.authorization = generateValidRequestAuthorizationHeader(otherUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
 
         // when
         const response = await server.inject(options);
@@ -709,7 +707,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         options = {
           method: 'PATCH',
           url: `/api/users/${user.id}/has-seen-challenge-tooltip/${challengeType}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         };
 
         await databaseBuilder.commit();
@@ -728,7 +726,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         options = {
           method: 'PATCH',
           url: `/api/users/${user.id}/has-seen-challenge-tooltip/${challengeType}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         };
 
         await databaseBuilder.commit();
@@ -797,10 +795,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         method: 'PUT',
         url: `/api/users/${user.id}/email/verification-code`,
         payload,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(user.id),
-          'accept-language': locale,
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id, acceptLanguage: locale }),
       };
 
       // when
@@ -837,10 +832,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         method: 'PUT',
         url: `/api/users/${user.id}/email/verification-code`,
         payload,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(user.id),
-          'accept-language': locale,
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id, acceptLanguage: locale }),
       };
 
       // when
@@ -879,10 +871,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         method: 'PUT',
         url: '/api/users/999/email/verification-code',
         payload,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(user.id),
-          'accept-language': locale,
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id, acceptLanguage: locale }),
       };
 
       // when
@@ -921,10 +910,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         method: 'PUT',
         url: `/api/users/${user.id}/email/verification-code`,
         payload,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(user.id),
-          'accept-language': locale,
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id, acceptLanguage: locale }),
       };
 
       // when
@@ -963,9 +949,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         method: 'POST',
         url: `/api/users/${user.id}/update-email`,
         payload,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(user.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       // when
@@ -991,9 +975,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       const options = {
         method: 'DELETE',
         url: '/api/users/me',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when
@@ -1043,7 +1025,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       const options = {
         method: 'GET',
         url: '/api/certification-point-of-contacts/me',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when

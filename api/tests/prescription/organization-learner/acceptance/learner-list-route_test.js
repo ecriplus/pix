@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../test-helper.js';
 
@@ -42,7 +42,7 @@ describe('Acceptance | Application | learner-list-route', function () {
       const request = {
         method: 'GET',
         url: `/api/organizations/${organizationId}/participants`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when
@@ -81,7 +81,7 @@ describe('Acceptance | Application | learner-list-route', function () {
       const request = {
         method: 'GET',
         url: '/api/organizations/' + organization.id + '/divisions',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when

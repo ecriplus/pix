@@ -10,7 +10,7 @@ import {
   databaseBuilder,
   domainBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   sinon,
 } from '../../../../test-helper.js';
@@ -123,9 +123,7 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
         options = {
           method: 'POST',
           url: `/api/sessions/${sessionId}/certification-candidates`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(userId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload,
         };
 
@@ -249,9 +247,7 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
         options = {
           method: 'POST',
           url: `/api/sessions/${sessionId}/certification-candidates`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(userId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload,
         };
 

@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertOrganizationUserWithRoleAdmin,
   insertUserWithRoleSuperAdmin,
 } from '../../../../../tests/test-helper.js';
@@ -27,7 +27,7 @@ describe('Acceptance | Team | Route | Admin | organization-invitation', function
         const response = await server.inject({
           method: 'GET',
           url: `/api/admin/organizations/${organizationId}/invitations`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(adminMember.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
         });
 
         // then
@@ -64,7 +64,7 @@ describe('Acceptance | Team | Route | Admin | organization-invitation', function
         const response = await server.inject({
           method: 'GET',
           url: `/api/admin/organizations/${organizationId}/invitations`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(nonSuperAdminUserId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: nonSuperAdminUserId }),
         });
 
         // then
@@ -88,9 +88,7 @@ describe('Acceptance | Team | Route | Admin | organization-invitation', function
       const options = {
         method: 'DELETE',
         url: `/api/admin/organizations/${organization.id}/invitations/${invitation.id}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(adminMember.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
       };
 
       await databaseBuilder.commit();
@@ -126,9 +124,7 @@ describe('Acceptance | Team | Route | Admin | organization-invitation', function
         method: 'POST',
         url: `/api/admin/organizations/${organization.id}/invitations`,
         payload,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
 
       await databaseBuilder.commit();

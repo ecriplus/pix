@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -20,7 +20,7 @@ describe('Certification | Session-management | Acceptance | Application | Routes
       const options = {
         method: 'PATCH',
         url: '/api/admin/certification-courses/123/cancel',
-        headers: { authorization: generateValidRequestAuthorizationHeader() },
+        headers: generateAuthenticatedUserRequestHeaders(),
       };
       await insertUserWithRoleSuperAdmin();
       await databaseBuilder.commit();
@@ -40,7 +40,7 @@ describe('Certification | Session-management | Acceptance | Application | Routes
       const options = {
         method: 'PATCH',
         url: '/api/admin/certification-courses/123/uncancel',
-        headers: { authorization: generateValidRequestAuthorizationHeader() },
+        headers: generateAuthenticatedUserRequestHeaders(),
       };
       await insertUserWithRoleSuperAdmin();
       await databaseBuilder.commit();

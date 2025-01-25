@@ -1,7 +1,7 @@
 import {
   createServer,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
   nock,
@@ -71,9 +71,7 @@ describe('Acceptance | API | Courses', function () {
           const options = {
             method: 'GET',
             url: '/api/courses/rec_active_course_id',
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
           const response = await server.inject(options);
 
@@ -92,9 +90,7 @@ describe('Acceptance | API | Courses', function () {
           const options = {
             method: 'GET',
             url: '/api/courses/rec_inactive_course_id',
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
           const response = await server.inject(options);
 
@@ -110,9 +106,7 @@ describe('Acceptance | API | Courses', function () {
         const options = {
           method: 'GET',
           url: '/api/courses/COUCOUCOUCOCUOC',
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(userId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
         const response = await server.inject(options);
 

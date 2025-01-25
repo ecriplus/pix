@@ -8,7 +8,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   learningContentBuilder,
   mockLearningContent,
@@ -124,7 +124,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
         const response = await server.inject({
           method: 'GET',
           url: '/api/attestation/1234?isFrenchDomainExtension=true&lang=fr',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         });
 
         // then
@@ -149,7 +149,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
       const response = await server.inject({
         method: 'GET',
         url: '/api/admin/sessions/4567/attestations',
-        headers: { authorization: generateValidRequestAuthorizationHeader(superAdmin.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       });
 
       // then
@@ -222,7 +222,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
       const options = {
         method: 'GET',
         url: `/api/organizations/${organization.id}/certification-attestations?division=aDivision&isFrenchDomainExtension=true&lang=fr`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(adminIsManagingStudent.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminIsManagingStudent.id }),
       };
 
       // when

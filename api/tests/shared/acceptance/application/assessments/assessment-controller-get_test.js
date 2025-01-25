@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -43,10 +43,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
           options = {
             method: 'GET',
             url: `/api/assessments/${assessmentId}`,
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-              'accept-language': FRENCH_SPOKEN,
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN }),
           };
 
           // when
@@ -120,10 +117,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
       options = {
         method: 'GET',
         url: `/api/assessments/${assessmentId}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-          'accept-language': FRENCH_SPOKEN,
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN }),
       };
 
       // when
@@ -149,10 +143,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
       options = {
         method: 'GET',
         url: `/api/assessments/${assessmentId}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-          'accept-language': FRENCH_SPOKEN,
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN }),
       };
 
       // when
@@ -206,10 +197,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
       }).id;
       await databaseBuilder.commit();
       options = {
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-          'accept-language': FRENCH_SPOKEN,
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN }),
         method: 'GET',
         url: `/api/assessments/${assessmentId}`,
       };
@@ -247,10 +235,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
       const options = {
         method: 'GET',
         url: `/api/assessments/${assessmentId}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-          'accept-language': FRENCH_SPOKEN,
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN }),
       };
 
       // when
@@ -264,10 +249,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
       const options = {
         method: 'GET',
         url: `/api/assessments/${assessmentId}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-          'accept-language': FRENCH_SPOKEN,
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN }),
       };
 
       // when
@@ -283,10 +265,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
       const options = {
         method: 'GET',
         url: `/api/assessments/${assessmentId}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-          'accept-language': FRENCH_SPOKEN,
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN }),
       };
 
       // when

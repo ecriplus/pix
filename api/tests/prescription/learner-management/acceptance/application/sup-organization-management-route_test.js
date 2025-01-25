@@ -1,11 +1,12 @@
 import { SupOrganizationLearnerImportHeader } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-import-header.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
+import * as tokenService from '../../../../../src/shared/domain/services/token-service.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 const i18n = getI18n();
@@ -52,7 +53,7 @@ describe('Acceptance | Application | organization-controller-sup-organization-le
 
     it('should return an 204 status after updating higher organization learner', async function () {
       // given
-      options.headers.authorization = generateValidRequestAuthorizationHeader(user.id);
+      options.headers = generateAuthenticatedUserRequestHeaders({ userId: user.id });
       options.payload.data = {
         attributes: {
           'student-number': '12345',
@@ -96,9 +97,7 @@ describe('Acceptance | Application | organization-controller-sup-organization-le
         const options = {
           method: 'POST',
           url: `/api/organizations/${organization.id}/sup-organization-learners/import-csv`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(connectedUser.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
           payload: buffer,
         };
 
@@ -112,9 +111,7 @@ describe('Acceptance | Application | organization-controller-sup-organization-le
         const options = {
           method: 'POST',
           url: '/api/organizations/123/sup-organization-learners/import-csv',
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(connectedUser.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
           payload: buffer,
         };
 
@@ -139,9 +136,7 @@ describe('Acceptance | Application | organization-controller-sup-organization-le
         const options = {
           method: 'POST',
           url: `/api/organizations/${organization.id}/sup-organization-learners/import-csv`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(connectedUser.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
           payload: buffer,
         };
 
@@ -167,9 +162,7 @@ describe('Acceptance | Application | organization-controller-sup-organization-le
           const options = {
             method: 'POST',
             url: `/api/organizations/${organization.id}/sup-organization-learners/import-csv`,
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(connectedUser.id),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
             payload: buffer,
           };
 
@@ -209,9 +202,7 @@ describe('Acceptance | Application | organization-controller-sup-organization-le
         const options = {
           method: 'POST',
           url: `/api/organizations/${organization.id}/sup-organization-learners/replace-csv`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(connectedUser.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
           payload: buffer,
         };
 
@@ -225,9 +216,7 @@ describe('Acceptance | Application | organization-controller-sup-organization-le
         const options = {
           method: 'POST',
           url: '/api/organizations/123/sup-organization-learners/replace-csv',
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(connectedUser.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
           payload: buffer,
         };
 
@@ -244,8 +233,11 @@ describe('Acceptance | Application | organization-controller-sup-organization-le
 
     beforeEach(async function () {
       userId = databaseBuilder.factory.buildUser().id;
-      const authHeader = generateValidRequestAuthorizationHeader(userId);
-      accessToken = authHeader.replace('Bearer ', '');
+      accessToken = tokenService.createAccessTokenFromUser({
+        userId,
+        source: 'pix',
+        audience: 'https://orga.pix.org',
+      }).accessToken;
     });
 
     context("when it's a SUP organization", function () {

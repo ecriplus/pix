@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Team | Application | Routes | certification-center-membership ', function () {
@@ -26,9 +26,7 @@ describe('Acceptance | Team | Application | Routes | certification-center-member
       await databaseBuilder.commit();
 
       options = {
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(certificationCenterMember.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: certificationCenterMember.id }),
         method: 'GET',
         url: `/api/certification-centers/${certificationCenter.id}/members`,
       };

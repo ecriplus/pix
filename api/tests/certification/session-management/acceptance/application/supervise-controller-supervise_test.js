@@ -3,7 +3,7 @@ import {
   databaseBuilder,
   domainBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../../test-helper.js';
 
@@ -26,7 +26,7 @@ describe('Acceptance | Controller | Certification | Session management | session
     databaseBuilder.factory.buildSession(session);
     await databaseBuilder.commit();
 
-    const headers = { authorization: generateValidRequestAuthorizationHeader(3456, 'pix-certif') };
+    const headers = generateAuthenticatedUserRequestHeaders({ userId: 3456, source: 'pix-certif' });
 
     const options = {
       headers,

@@ -5,7 +5,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Team | Application | Controller | prescriber-informations', function () {
@@ -147,7 +147,7 @@ describe('Acceptance | Team | Application | Controller | prescriber-informations
       options = {
         method: 'GET',
         url: `/api/prescription/prescribers/${user.id}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
     });
 
@@ -166,7 +166,7 @@ describe('Acceptance | Team | Application | Controller | prescriber-informations
       it('should respond with a 403 - forbidden access - if requested user is not the same as authenticated user', async function () {
         // given
         const otherUserId = 9999;
-        options.headers.authorization = generateValidRequestAuthorizationHeader(otherUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
 
         // when
         const response = await server.inject(options);

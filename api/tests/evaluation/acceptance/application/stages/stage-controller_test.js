@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -55,9 +55,7 @@ describe('Acceptance | API | Stages', function () {
           const options = {
             method: 'PATCH',
             url: `/api/admin/stages/${stageId}`,
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload: {
               data: {
                 attributes: {

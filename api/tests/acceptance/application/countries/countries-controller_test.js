@@ -1,4 +1,4 @@
-import { createServer, expect, generateValidRequestAuthorizationHeader } from '../../../test-helper.js';
+import { createServer, expect, generateAuthenticatedUserRequestHeaders } from '../../../test-helper.js';
 
 describe('Acceptance | API | countries-controller', function () {
   let server;
@@ -13,9 +13,7 @@ describe('Acceptance | API | countries-controller', function () {
       const options = {
         method: 'GET',
         url: '/api/countries',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader({ userId: 12345 }),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: 12345 }),
       };
 
       // when

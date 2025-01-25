@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../../test-helper.js';
 
@@ -44,7 +44,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
 
       await databaseBuilder.commit();
 
-      const headers = { authorization: generateValidRequestAuthorizationHeader(supervisorId, 'pix-certif') };
+      const headers = generateAuthenticatedUserRequestHeaders({ userId: supervisorId, source: 'pix-certif' });
 
       const options = {
         headers,
@@ -72,7 +72,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
 
         await databaseBuilder.commit();
 
-        const headers = { authorization: generateValidRequestAuthorizationHeader(supervisorId, 'pix-certif') };
+        const headers = generateAuthenticatedUserRequestHeaders({ userId: supervisorId, source: 'pix-certif' });
 
         const options = {
           headers,

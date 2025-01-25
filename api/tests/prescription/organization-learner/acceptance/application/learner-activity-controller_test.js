@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | organization-learners-management', function () {
@@ -36,7 +36,7 @@ describe('Acceptance | Controller | organization-learners-management', function 
         const options = {
           method: 'GET',
           url: `/api/organization-learners/${organizationLearnerId}/activity`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
         // when
         const response = await server.inject(options);

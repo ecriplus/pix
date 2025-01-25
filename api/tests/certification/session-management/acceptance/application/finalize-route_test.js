@@ -9,7 +9,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -48,7 +48,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         await databaseBuilder.commit();
-        options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
         // when
         const response = await server.inject(options);
@@ -73,7 +73,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           });
 
           await databaseBuilder.commit();
-          options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+          options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
           // when
           await server.inject(options);
@@ -169,9 +169,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
                 ],
               },
             },
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             url: `/api/sessions/${session.id}/finalization`,
           };
 
@@ -263,9 +261,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
                 ],
               },
             },
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             url: `/api/sessions/${session.id}/finalization`,
           };
 
@@ -368,9 +364,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
                 ],
               },
             },
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             url: `/api/sessions/${session.id}/finalization`,
           };
 
@@ -400,7 +394,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           });
 
           await databaseBuilder.commit();
-          options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+          options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
           // when
           await server.inject(options);
@@ -480,9 +474,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
                 ],
               },
             },
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             url: `/api/sessions/${session.id}/finalization`,
           };
 
@@ -602,9 +594,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
                 ],
               },
             },
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             url: `/api/sessions/${session.id}/finalization`,
           };
 
@@ -649,9 +639,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
                 ],
               },
             },
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             url: `/api/sessions/${session.id}/finalization`,
           };
 

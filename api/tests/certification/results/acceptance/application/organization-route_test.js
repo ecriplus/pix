@@ -5,7 +5,7 @@ import { Membership } from '../../../../../src/shared/domain/models/Membership.j
 import {
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -74,7 +74,7 @@ describe('Certification | Results | Acceptance | Application | Routes | organiza
       const options = {
         method: 'GET',
         url: `/api/organizations/${organization.id}/certification-results?division=aDivision`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       // when

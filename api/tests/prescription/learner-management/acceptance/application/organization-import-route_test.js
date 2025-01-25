@@ -6,7 +6,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Application | organization-import', function () {
@@ -46,9 +46,7 @@ describe('Acceptance | Application | organization-import', function () {
       options = {
         method: 'GET',
         url: `/api/organizations/${organization.id}/import-information`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(connectedUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
       };
       // when
       const response = await server.inject(options);
@@ -78,9 +76,7 @@ describe('Acceptance | Application | organization-import', function () {
       options = {
         method: 'GET',
         url: `/api/organizations/${organization.id}/import-information`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(connectedUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
       };
       // when
       const response = await server.inject(options);
@@ -116,9 +112,7 @@ describe('Acceptance | Application | organization-import', function () {
       options = {
         method: 'GET',
         url: `/api/organizations/${organization.id}/import-information`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(connectedUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
       };
       // when
       const response = await server.inject(options);
@@ -144,9 +138,7 @@ describe('Acceptance | Application | organization-import', function () {
       options = {
         method: 'POST',
         url: `/api/admin/import-organization-learners-format`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(connectedUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
         payload: buffer,
       };
       // when

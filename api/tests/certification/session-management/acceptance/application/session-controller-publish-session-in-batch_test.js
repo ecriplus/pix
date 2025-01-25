@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('POST /api/admin/sessions/publish-in-batch', function () {
@@ -17,7 +17,7 @@ describe('POST /api/admin/sessions/publish-in-batch', function () {
     server = await createServer();
     // given
     userId = databaseBuilder.factory.buildUser.withRole().id;
-    options.headers = { authorization: generateValidRequestAuthorizationHeader(userId) };
+    options.headers = generateAuthenticatedUserRequestHeaders({ userId });
     return databaseBuilder.commit();
   });
 

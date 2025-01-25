@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../../test-helper.js';
 
@@ -59,7 +59,7 @@ describe('Acceptance | Route | target-profiles', function () {
         const options = {
           method: 'POST',
           url: `/api/admin/target-profiles/${targetProfileId}/badges/`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           payload: {
             data: {
               type: 'badge-creations',
@@ -142,7 +142,7 @@ describe('Acceptance | Route | target-profiles', function () {
         const options = {
           method: 'POST',
           url: `/api/admin/target-profiles/${targetProfileId}/badges/`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           payload: {
             data: {
               type: 'badge-creations',
@@ -196,7 +196,7 @@ describe('Acceptance | Route | target-profiles', function () {
         const options = {
           method: 'POST',
           url: `/api/admin/target-profiles/${targetProfileId}/badges/`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           payload: {
             data: {
               type: 'badge-creations',

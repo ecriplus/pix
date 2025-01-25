@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | answer-controller-find', function () {
@@ -21,7 +21,7 @@ describe('Acceptance | Controller | answer-controller-find', function () {
         options = {
           method: 'GET',
           url: `/api/answers?challengeId=${challengeId}&assessmentId=salut`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
       });
 
@@ -57,7 +57,7 @@ describe('Acceptance | Controller | answer-controller-find', function () {
         options = {
           method: 'GET',
           url: `/api/answers?challengeId=${challengeId}&assessmentId=${assessment.id}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
       });
 
@@ -107,7 +107,7 @@ describe('Acceptance | Controller | answer-controller-find', function () {
         options = {
           method: 'GET',
           url: `/api/answers?challengeId=${challengeId}&assessmentId=${assessment.id}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId + 3) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: userId + 3 }),
         };
       });
 
@@ -169,7 +169,7 @@ describe('Acceptance | Controller | answer-controller-find', function () {
         options = {
           method: 'GET',
           url: `/api/answers?assessmentId=${assessment.id}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
       });
 
@@ -216,7 +216,7 @@ describe('Acceptance | Controller | answer-controller-find', function () {
         options = {
           method: 'GET',
           url: `/api/answers?assessmentId=${assessment.id}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId + 3) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: userId + 3 }),
         };
       });
 

@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../test-helper.js';
 
@@ -45,9 +45,7 @@ describe('Acceptance | API | Certification center invitations', function () {
           const response = await server.inject({
             method: 'PATCH',
             url: `/api/certification-center-invitations/${certificationCenterInvitation.id}`,
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(adminUser.id),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
           });
 
           // then
@@ -98,9 +96,7 @@ describe('Acceptance | API | Certification center invitations', function () {
           const response = await server.inject({
             method: 'PATCH',
             url: `/api/certification-center-invitations/${certificationCenterInvitation.id}`,
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(user.id),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           });
 
           // then

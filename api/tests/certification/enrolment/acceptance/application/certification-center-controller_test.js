@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -32,7 +32,7 @@ describe('Acceptance | API | Certification Center', function () {
         const request = {
           method: 'GET',
           url: `/api/certification-centers/${certificationCenter.id}/sessions/${session.id}/students?page[size]=10&page[number]=1`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         };
 
         // when
@@ -60,7 +60,7 @@ describe('Acceptance | API | Certification Center', function () {
         const request = {
           method: 'GET',
           url: `/api/certification-centers/${certificationCenter.id}/sessions/${session.id}/students?page[size]=10&page[number]=1`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         };
 
         // when

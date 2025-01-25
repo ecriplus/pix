@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   mockLearningContent,
 } from '../../../test-helper.js';
@@ -83,7 +83,7 @@ describe('Acceptance | Controller | users-controller-get-user-profile-for-admin'
 
       it('should respond with a 403 - forbidden access - if requested user is not admin', async function () {
         // given
-        options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
         // when
         const response = await server.inject(options);
@@ -96,7 +96,7 @@ describe('Acceptance | Controller | users-controller-get-user-profile-for-admin'
     describe('Success case', function () {
       beforeEach(async function () {
         const superAdmin = await insertUserWithRoleSuperAdmin();
-        options.headers.authorization = generateValidRequestAuthorizationHeader(superAdmin.id);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id });
 
         await mockLearningContent(learningContent);
 

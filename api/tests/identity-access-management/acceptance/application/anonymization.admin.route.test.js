@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../test-helper.js';
 
@@ -45,7 +45,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
 
         const options = {
           method: 'POST',
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           url: '/api/admin/anonymize/gar',
           payload: input,
         };

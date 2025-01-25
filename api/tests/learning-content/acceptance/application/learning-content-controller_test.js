@@ -1,4 +1,4 @@
-import { createServer, expect, generateValidRequestAuthorizationHeader } from '../../../test-helper.js';
+import { createServer, expect, generateAuthenticatedUserRequestHeaders } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | lcms-controller', function () {
   let server;
@@ -33,7 +33,7 @@ describe('Acceptance | Controller | lcms-controller', function () {
         const response = await server.inject({
           method: 'PATCH',
           url: '/api/cache/challenges/recChallengeId',
-          headers: { authorization: generateValidRequestAuthorizationHeader(nonSuperAdminUserId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: nonSuperAdminUserId }),
           payload: {
             id: 'recChallengeId',
             param: 'updatedModelParam',
@@ -68,7 +68,7 @@ describe('Acceptance | Controller | lcms-controller', function () {
         const response = await server.inject({
           method: 'PATCH',
           url: '/api/cache',
-          headers: { authorization: generateValidRequestAuthorizationHeader(nonSuperAdminUserId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: nonSuperAdminUserId }),
         });
 
         // then

@@ -8,7 +8,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
   sinon,
@@ -45,7 +45,7 @@ describe('Acceptance | Application | organization-controller', function () {
         method: 'POST',
         url: '/api/admin/organizations',
         payload,
-        headers: { authorization: generateValidRequestAuthorizationHeader() },
+        headers: generateAuthenticatedUserRequestHeaders(),
       };
     });
 
@@ -70,7 +70,7 @@ describe('Acceptance | Application | organization-controller', function () {
               },
             },
           },
-          headers: { authorization: generateValidRequestAuthorizationHeader(superAdminUserId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdminUserId }),
         });
 
         // then
@@ -131,7 +131,7 @@ describe('Acceptance | Application | organization-controller', function () {
       it('should respond with a 403 - forbidden access - if user has not role Super Admin', function () {
         // given
         const nonSuperAdminUserId = 9999;
-        options.headers.authorization = generateValidRequestAuthorizationHeader(nonSuperAdminUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: nonSuperAdminUserId });
 
         // when
         const promise = server.inject(options);
@@ -165,9 +165,7 @@ describe('Acceptance | Application | organization-controller', function () {
       const response = await server.inject({
         method: 'POST',
         url: `/api/admin/organizations/import-csv`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdminUserId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdminUserId }),
         payload: buffer,
       });
 
@@ -235,7 +233,7 @@ describe('Acceptance | Application | organization-controller', function () {
         method: 'GET',
         url: '/api/admin/organizations',
         payload: {},
-        headers: { authorization: generateValidRequestAuthorizationHeader(userSuperAdmin.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: userSuperAdmin.id }),
       };
 
       return databaseBuilder.commit();
@@ -256,7 +254,7 @@ describe('Acceptance | Application | organization-controller', function () {
       it('should respond with a 403 - forbidden access - if user has not role Super Admin', async function () {
         // given
         const nonSuperAdminUserId = 9999;
-        options.headers.authorization = generateValidRequestAuthorizationHeader(nonSuperAdminUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: nonSuperAdminUserId });
 
         // when
         const response = await server.inject(options);
@@ -360,9 +358,7 @@ describe('Acceptance | Application | organization-controller', function () {
       options = {
         method: 'GET',
         url: `/api/organizations/${organizationId}/campaigns`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
     });
 
@@ -388,9 +384,7 @@ describe('Acceptance | Application | organization-controller', function () {
         options = {
           method: 'GET',
           url: `/api/organizations/${organizationId}/campaigns`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(userId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         // when
@@ -545,7 +539,7 @@ describe('Acceptance | Application | organization-controller', function () {
       const response = await server.inject({
         method: 'GET',
         url: `/api/organizations/${organizationId}/member-identities`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(member1.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: member1.id }),
       });
 
       // then
@@ -613,7 +607,7 @@ describe('Acceptance | Application | organization-controller', function () {
       const response = await server.inject({
         method: 'PATCH',
         url: `/api/organizations/${organizationId}/resend-invitation`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(adminUserId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUserId }),
         payload: {
           data: {
             type: 'organization-invitations',
@@ -676,7 +670,7 @@ describe('Acceptance | Application | organization-controller', function () {
       const response = await server.inject({
         method: 'POST',
         url: `/api/admin/organizations/${organizationId}/archive`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(adminUser.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
       });
 
       // then
@@ -698,7 +692,7 @@ describe('Acceptance | Application | organization-controller', function () {
           const request = {
             method: 'GET',
             url: '/api/admin/organizations/986532/children',
-            headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
           // when
@@ -721,7 +715,7 @@ describe('Acceptance | Application | organization-controller', function () {
           const request = {
             method: 'GET',
             url: `/api/admin/organizations/${organizationId}/children`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
           // when
@@ -750,7 +744,7 @@ describe('Acceptance | Application | organization-controller', function () {
             const request = {
               method: 'GET',
               url: `/api/admin/organizations/${parentOrganizationId}/children`,
-              headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+              headers: generateAuthenticatedUserRequestHeaders({ userId }),
             };
             // when
             const response = await server.inject(request);

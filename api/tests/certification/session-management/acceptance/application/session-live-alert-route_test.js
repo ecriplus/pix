@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../../test-helper.js';
 
@@ -43,9 +43,7 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
 
         await databaseBuilder.commit();
 
-        const headers = {
-          authorization: generateValidRequestAuthorizationHeader(supervisorUserId, 'pix-certif'),
-        };
+        const headers = generateAuthenticatedUserRequestHeaders({ userId: supervisorUserId, source: 'pix-certif' });
         const options = {
           headers,
           method: 'PATCH',
@@ -80,9 +78,10 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
 
         await databaseBuilder.commit();
 
-        const headers = {
-          authorization: generateValidRequestAuthorizationHeader(userNotLinkedToTheSessionId, 'pix-certif'),
-        };
+        const headers = generateAuthenticatedUserRequestHeaders({
+          userId: userNotLinkedToTheSessionId,
+          source: 'pix-certif',
+        });
         const options = {
           headers,
           method: 'PATCH',
@@ -131,9 +130,7 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
 
         await databaseBuilder.commit();
 
-        const headers = {
-          authorization: generateValidRequestAuthorizationHeader(supervisorUserId, 'pix-certif'),
-        };
+        const headers = generateAuthenticatedUserRequestHeaders({ userId: supervisorUserId, source: 'pix-certif' });
         const options = {
           headers,
           method: 'PATCH',
@@ -173,9 +170,10 @@ describe('Certification | Session | Acceptance | Application | Routes | session-
 
         await databaseBuilder.commit();
 
-        const headers = {
-          authorization: generateValidRequestAuthorizationHeader(userNotLinkedToTheSessionId, 'pix-certif'),
-        };
+        const headers = generateAuthenticatedUserRequestHeaders({
+          userId: userNotLinkedToTheSessionId,
+          source: 'pix-certif',
+        });
         const options = {
           headers,
           method: 'PATCH',

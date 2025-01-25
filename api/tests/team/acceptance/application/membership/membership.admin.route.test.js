@@ -5,7 +5,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Team | Admin | Route | membership', function () {
@@ -49,9 +49,7 @@ describe('Acceptance | Team | Admin | Route | membership', function () {
             },
           },
         },
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(adminUserId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUserId }),
       };
     });
 
@@ -159,9 +157,7 @@ describe('Acceptance | Team | Admin | Route | membership', function () {
             },
           },
         },
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(adminUserId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUserId }),
       };
     });
 
@@ -212,7 +208,7 @@ describe('Acceptance | Team | Admin | Route | membership', function () {
         });
         await databaseBuilder.commit();
 
-        options.headers.authorization = generateValidRequestAuthorizationHeader(notAdminUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: notAdminUserId });
 
         // when
         const response = await server.inject(options);
@@ -253,7 +249,7 @@ describe('Acceptance | Team | Admin | Route | membership', function () {
       const response = await server.inject({
         method: 'GET',
         url: `/api/admin/organizations/${organization.id}/memberships?filter[email]=&filter[firstName]=&filter[lastName]=&filter[organizationRole]=`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userSuperAdmin.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: userSuperAdmin.id }),
       });
 
       // then

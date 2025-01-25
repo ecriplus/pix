@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -19,9 +19,7 @@ describe('Acceptance | Route | Create Organization Places Lot', function () {
       const options = {
         method: 'POST',
         url: `/api/admin/organizations/${organizationId}/places`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(adminUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
         payload: {
           data: {
             attributes: {

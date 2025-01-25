@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -241,7 +241,7 @@ describe('Certification | Enrolment | Acceptance | Routes | User', function () {
       method: 'GET',
       url: `/api/users/${user.id}/is-certifiable`,
       payload: {},
-      headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+      headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
     };
 
     return databaseBuilder.commit();

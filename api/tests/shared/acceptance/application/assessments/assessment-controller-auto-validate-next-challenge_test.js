@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
   learningContentBuilder,
@@ -83,9 +83,7 @@ describe('Acceptance | API | assessment-controller-auto-validate-next-challenge'
       const response = await server.inject({
         method: 'POST',
         url: `/api/admin/assessments/${assessmentId}/always-ok-validate-next-challenge`,
-        headers: {
-          authorization: `Bearer ${generateValidRequestAuthorizationHeader(userId)}`,
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       });
 
       // then

@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | API | assessment-controller-find-competence-evaluations', function () {
@@ -22,9 +22,7 @@ describe('Acceptance | API | assessment-controller-find-competence-evaluations',
       const options = {
         method: 'GET',
         url: `/api/assessments/${assessmentId}/competence-evaluations`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when

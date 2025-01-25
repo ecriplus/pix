@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | sup-organization-learners', function () {
@@ -17,13 +17,13 @@ describe('Acceptance | Controller | sup-organization-learners', function () {
     let organizationId;
     const studentNumber = '54321';
     let organizationLearnerId;
-    let authorizationToken;
+    let headers;
 
     beforeEach(async function () {
       organizationId = databaseBuilder.factory.buildOrganization({ isManagingStudents: true, type: 'SUP' }).id;
 
       const user = databaseBuilder.factory.buildUser();
-      authorizationToken = generateValidRequestAuthorizationHeader(user.id);
+      headers = generateAuthenticatedUserRequestHeaders({ userId: user.id });
       organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ organizationId }).id;
       databaseBuilder.factory.buildMembership({
         organizationId,
@@ -38,9 +38,7 @@ describe('Acceptance | Controller | sup-organization-learners', function () {
         const options = {
           method: 'PATCH',
           url: `/api/organizations/${organizationId}/sup-organization-learners/${organizationLearnerId}`,
-          headers: {
-            authorization: authorizationToken,
-          },
+          headers,
           payload: {
             data: {
               attributes: {

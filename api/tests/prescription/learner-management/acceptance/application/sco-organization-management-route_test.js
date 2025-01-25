@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../../test-helper.js';
 
@@ -47,7 +47,7 @@ describe('Acceptance | Route | sco-organization-management-route', function () {
     context('associate user with firstName, lastName and birthdate', function () {
       it('should return an 200 status after having successfully associated user to organizationLearner', async function () {
         // given
-        options.headers.authorization = generateValidRequestAuthorizationHeader(user.id);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: user.id });
         options.payload.data = {
           attributes: {
             'campaign-code': campaign.code,
@@ -81,7 +81,7 @@ describe('Acceptance | Route | sco-organization-management-route', function () {
       context('When withReconciliation query param is set to false', function () {
         it('should not reconcile user and return a 204 No Content', async function () {
           // given
-          options.headers.authorization = generateValidRequestAuthorizationHeader(user.id);
+          options.headers = generateAuthenticatedUserRequestHeaders({ userId: user.id });
           options.payload.data = {
             attributes: {
               'campaign-code': campaign.code,

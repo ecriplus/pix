@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -20,9 +20,7 @@ describe('Acceptance | Team | Route | Admin-member', function () {
 
       // when
       const response = await server.inject({
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(admin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
         method: 'GET',
         url: '/api/admin/admin-members/me',
       });
@@ -40,9 +38,7 @@ describe('Acceptance | Team | Route | Admin-member', function () {
 
         // when
         const response = await server.inject({
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(user.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           method: 'GET',
           url: '/api/admin/admin-members/me',
         });
@@ -71,9 +67,7 @@ describe('Acceptance | Team | Route | Admin-member', function () {
 
       // when
       const response = await server.inject({
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(admin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
         method: 'GET',
         url: `/api/admin/admin-members`,
       });
@@ -105,9 +99,7 @@ describe('Acceptance | Team | Route | Admin-member', function () {
 
         // when
         const { statusCode, result } = await server.inject({
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(adminMemberWithRoleSuperAdmin.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminMemberWithRoleSuperAdmin.id }),
           method: 'POST',
           url: '/api/admin/admin-members',
           payload: {
@@ -143,9 +135,7 @@ describe('Acceptance | Team | Route | Admin-member', function () {
 
       // when
       const response = await server.inject({
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         method: 'PATCH',
         url: `/api/admin/admin-members/${pixAdminRole.id}`,
         payload: {
@@ -177,9 +167,7 @@ describe('Acceptance | Team | Route | Admin-member', function () {
 
       // when
       const response = await server.inject({
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         method: 'PUT',
         url: `/api/admin/admin-members/${adminMemberToDeactivate.id}/deactivate`,
       });

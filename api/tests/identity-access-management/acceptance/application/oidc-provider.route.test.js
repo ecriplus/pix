@@ -10,7 +10,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   sinon,
 } from '../../../test-helper.js';
@@ -59,7 +59,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       const options = {
         method: 'GET',
         url: '/api/oidc/redirect-logout-url?identity_provider=OIDC_EXAMPLE_NET&logout_url_uuid=86e1338f-304c-41a8-9472-89fe1b9748a1',
-        headers: { authorization: generateValidRequestAuthorizationHeader() },
+        headers: generateAuthenticatedUserRequestHeaders(),
       };
 
       // when

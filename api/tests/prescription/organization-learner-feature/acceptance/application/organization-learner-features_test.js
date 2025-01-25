@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Organization learner features', function () {
@@ -33,9 +33,7 @@ describe('Acceptance | Organization learner features', function () {
       const options = {
         method: 'POST',
         url: `/api/organizations/${organization.id}/organization-learners/${organizationLearner.id}/features/${feature.key}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(notAdminUserId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: notAdminUserId }),
       };
 
       const response = await server.inject(options);
@@ -73,9 +71,7 @@ describe('Acceptance | Organization learner features', function () {
       const options = {
         method: 'DELETE',
         url: `/api/organizations/${organization.id}/organization-learners/${organizationLearner.id}/features/${feature.key}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(notAdminUserId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: notAdminUserId }),
       };
 
       const response = await server.inject(options);

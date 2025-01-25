@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../test-helper.js';
 
@@ -28,7 +28,7 @@ describe('Acceptance | Application | sup-leaner-list-route', function () {
       options = {
         method: 'GET',
         url: `/api/organizations/${organization.id}/sup-participants`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
     });
 
@@ -75,7 +75,7 @@ describe('Acceptance | Application | sup-leaner-list-route', function () {
         // given
         const userId = databaseBuilder.factory.buildUser.withMembership().id;
         await databaseBuilder.commit();
-        options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
         // when
         const response = await server.inject(options);
@@ -90,7 +90,7 @@ describe('Acceptance | Application | sup-leaner-list-route', function () {
         const userId = databaseBuilder.factory.buildUser.withMembership({ organizationId }).id;
         await databaseBuilder.commit();
 
-        options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
         options.url = `/api/organizations/${organizationId}/sup-participants`;
 
         // when
@@ -108,7 +108,7 @@ describe('Acceptance | Application | sup-leaner-list-route', function () {
           options = {
             method: 'GET',
             url: `/api/organizations/${organization.id}/sup-participants?filter[groups][]=L5`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           };
 
           // when
@@ -122,7 +122,7 @@ describe('Acceptance | Application | sup-leaner-list-route', function () {
           options = {
             method: 'GET',
             url: `/api/organizations/${organization.id}/sup-participants?filter[groups][]=L5&filter[groups][]=D3`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           };
 
           // when
@@ -138,7 +138,7 @@ describe('Acceptance | Application | sup-leaner-list-route', function () {
         options = {
           method: 'GET',
           url: `/api/organizations/${organization.id}/sup-participants?filter[studentNumber]=L5645745`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         };
 
         // when
@@ -154,7 +154,7 @@ describe('Acceptance | Application | sup-leaner-list-route', function () {
           options = {
             method: 'GET',
             url: `/api/organizations/${organization.id}/sup-participants?filter[certificability][]=eligible`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           };
 
           // when
@@ -168,7 +168,7 @@ describe('Acceptance | Application | sup-leaner-list-route', function () {
           options = {
             method: 'GET',
             url: `/api/organizations/${organization.id}/sup-participants?filter[certificability][]=eligible&filter[certificability][]=not-available`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           };
 
           // when

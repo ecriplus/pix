@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -52,9 +52,7 @@ describe('Acceptance | Controller | user-tutorial-controller', function () {
       options = {
         method: 'PUT',
         url: '/api/users/tutorials/tutorialId',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       await mockLearningContent(learningContent);
@@ -147,9 +145,7 @@ describe('Acceptance | Controller | user-tutorial-controller', function () {
       options = {
         method: 'GET',
         url: `/api/users/${userId}/tutorials?filter[competences]=recCompetence1&filter[type]=saved`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       learningContentObjects = learningContentBuilder.fromAreas([
@@ -472,9 +468,7 @@ describe('Acceptance | Controller | user-tutorial-controller', function () {
       options = {
         method: 'DELETE',
         url: '/api/users/tutorials/tutorialId',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       await mockLearningContent(learningContent);

@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -237,10 +237,7 @@ describe('Acceptance | Route | Certification Courses', function () {
 
         // when
         await server.inject({
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(1),
-            'accept-language': 'FR',
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: 1, acceptLanguage: 'FR' }),
           method: 'POST',
           payload: {
             data: {
@@ -277,10 +274,7 @@ describe('Acceptance | Route | Certification Courses', function () {
 
         // when
         const response = await server.inject({
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(1),
-            'accept-language': 'FR',
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: 1, acceptLanguage: 'FR' }),
           method: 'POST',
           payload: {
             data: {

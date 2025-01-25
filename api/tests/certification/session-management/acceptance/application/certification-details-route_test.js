@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   learningContentBuilder,
   mockLearningContent,
@@ -23,9 +23,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         const options = {
           method: 'GET',
           url: '/api/admin/certifications/1234/details',
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(),
-          },
+          headers: generateAuthenticatedUserRequestHeaders(),
         };
 
         const learningContent = [

@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../../test-helper.js';
 
@@ -32,14 +32,10 @@ describe('Acceptance | Application | flash-assessment-configuration-route', func
     describe('when called without a super admin role', function () {
       it('should return a 403', async function () {
         // given
-        const authorization = generateValidRequestAuthorizationHeader();
-
         const options = {
           method: 'GET',
           url: '/api/admin/flash-assessment-configuration',
-          headers: {
-            authorization,
-          },
+          headers: generateAuthenticatedUserRequestHeaders(),
         };
         // when
         const response = await server.inject(options);
@@ -68,14 +64,10 @@ describe('Acceptance | Application | flash-assessment-configuration-route', func
 
           await databaseBuilder.commit();
 
-          const authorization = generateValidRequestAuthorizationHeader(superAdmin.id);
-
           const options = {
             method: 'GET',
             url: '/api/admin/flash-assessment-configuration',
-            headers: {
-              authorization,
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
           };
 
           // when
@@ -107,14 +99,10 @@ describe('Acceptance | Application | flash-assessment-configuration-route', func
     describe('when called without a super admin role', function () {
       it('should return a 403', async function () {
         // given
-        const authorization = generateValidRequestAuthorizationHeader();
-
         const options = {
           method: 'POST',
           url: '/api/admin/flash-assessment-configuration',
-          headers: {
-            authorization,
-          },
+          headers: generateAuthenticatedUserRequestHeaders(),
           payload: {},
         };
 
@@ -141,14 +129,10 @@ describe('Acceptance | Application | flash-assessment-configuration-route', func
 
           await databaseBuilder.commit();
 
-          const authorization = generateValidRequestAuthorizationHeader(superAdmin.id);
-
           const options = {
             method: 'POST',
             url: '/api/admin/flash-assessment-configuration',
-            headers: {
-              authorization,
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: {
               lol: 0.5,
             },
@@ -176,14 +160,10 @@ describe('Acceptance | Application | flash-assessment-configuration-route', func
 
           await databaseBuilder.commit();
 
-          const authorization = generateValidRequestAuthorizationHeader(superAdmin.id);
-
           const options = {
             method: 'POST',
             url: '/api/admin/flash-assessment-configuration',
-            headers: {
-              authorization,
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: {
               variationPercent: 0.5,
             },

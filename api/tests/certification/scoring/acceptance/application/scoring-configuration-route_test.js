@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../../test-helper.js';
 
@@ -32,14 +32,10 @@ describe('Acceptance | Application | scoring-configuration-route', function () {
     describe('when called without a super admin role', function () {
       it('should return a 403', async function () {
         // given
-        const authorization = generateValidRequestAuthorizationHeader();
-
         const options = {
           method: 'POST',
           url: '/api/admin/competence-for-scoring-configuration',
-          headers: {
-            authorization,
-          },
+          headers: generateAuthenticatedUserRequestHeaders(),
           payload: [
             {
               competence: '1.1',
@@ -74,14 +70,10 @@ describe('Acceptance | Application | scoring-configuration-route', function () {
 
           await databaseBuilder.commit();
 
-          const authorization = generateValidRequestAuthorizationHeader(superAdmin.id);
-
           const options = {
             method: 'POST',
             url: '/api/admin/competence-for-scoring-configuration',
-            headers: {
-              authorization,
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: {
               lol: 0.5,
             },
@@ -104,14 +96,10 @@ describe('Acceptance | Application | scoring-configuration-route', function () {
 
           await databaseBuilder.commit();
 
-          const authorization = generateValidRequestAuthorizationHeader(superAdmin.id);
-
           const options = {
             method: 'POST',
             url: '/api/admin/competence-for-scoring-configuration',
-            headers: {
-              authorization,
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: [
               {
                 competence: '1.1',
@@ -161,14 +149,10 @@ describe('Acceptance | Application | scoring-configuration-route', function () {
     describe('when called without a super admin role', function () {
       it('should return a 403', async function () {
         // given
-        const authorization = generateValidRequestAuthorizationHeader();
-
         const options = {
           method: 'POST',
           url: '/api/admin/certification-scoring-configuration',
-          headers: {
-            authorization,
-          },
+          headers: generateAuthenticatedUserRequestHeaders(),
           payload: [
             {
               meshLevel: 1,
@@ -198,14 +182,10 @@ describe('Acceptance | Application | scoring-configuration-route', function () {
 
           await databaseBuilder.commit();
 
-          const authorization = generateValidRequestAuthorizationHeader(superAdmin.id);
-
           const options = {
             method: 'POST',
             url: '/api/admin/certification-scoring-configuration',
-            headers: {
-              authorization,
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: {
               lol: 0.5,
             },
@@ -228,14 +208,10 @@ describe('Acceptance | Application | scoring-configuration-route', function () {
 
           await databaseBuilder.commit();
 
-          const authorization = generateValidRequestAuthorizationHeader(superAdmin.id);
-
           const options = {
             method: 'POST',
             url: '/api/admin/certification-scoring-configuration',
-            headers: {
-              authorization,
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: [
               {
                 meshLevel: 1,

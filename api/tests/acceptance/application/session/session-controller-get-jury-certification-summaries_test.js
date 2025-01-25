@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | session-controller-get-jury-certification-summaries', function () {
@@ -36,7 +36,7 @@ describe('Acceptance | Controller | session-controller-get-jury-certification-su
           method: 'GET',
           url: `/api/admin/sessions/${sessionId}/jury-certification-summaries`,
           payload: {},
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         });
 
         // then
@@ -126,7 +126,7 @@ describe('Acceptance | Controller | session-controller-get-jury-certification-su
           method: 'GET',
           url: `/api/admin/sessions/${sessionId}/jury-certification-summaries`,
           payload: {},
-          headers: { authorization: generateValidRequestAuthorizationHeader(superAdminId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdminId }),
         };
 
         return databaseBuilder.commit();

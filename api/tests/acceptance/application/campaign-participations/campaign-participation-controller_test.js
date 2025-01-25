@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | API | Campaign Participations', function () {
@@ -29,7 +29,7 @@ describe('Acceptance | API | Campaign Participations', function () {
       const options = {
         method: 'GET',
         url: `/api/campaign-participations/${campaignParticipation.id}/trainings`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       // when

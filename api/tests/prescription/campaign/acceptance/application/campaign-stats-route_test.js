@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -64,7 +64,7 @@ describe('Acceptance | API | Campaign Stats Route', function () {
       const response = await server.inject({
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/stats/participations-by-stage`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       });
 
       // then
@@ -93,7 +93,7 @@ describe('Acceptance | API | Campaign Stats Route', function () {
       const response = await server.inject({
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/stats/participations-by-stage`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       });
 
       // then
@@ -113,7 +113,7 @@ describe('Acceptance | API | Campaign Stats Route', function () {
       const response = await server.inject({
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/stats/participations-by-status`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       });
 
       // then
@@ -132,7 +132,7 @@ describe('Acceptance | API | Campaign Stats Route', function () {
       const response = await server.inject({
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/stats/participations-by-status`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       });
 
       // then
@@ -152,7 +152,7 @@ describe('Acceptance | API | Campaign Stats Route', function () {
       const response = await server.inject({
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/stats/participations-by-day`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       });
 
       // then
@@ -181,7 +181,7 @@ describe('Acceptance | API | Campaign Stats Route', function () {
       const options = {
         method: 'GET',
         url: `/api/campaigns/${campaignId}/stats/participations-by-mastery-rate`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const { statusCode, result } = await server.inject(options);

@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleCertif,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
@@ -23,7 +23,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | T
       const options = {
         method: 'GET',
         url: '/api/admin/tags',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const expectedTags = [
@@ -60,7 +60,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | T
       const options = {
         method: 'GET',
         url: '/api/admin/tags',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when
@@ -93,7 +93,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | T
               },
             },
           },
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         });
 
         // then
@@ -124,7 +124,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | T
               },
             },
           },
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         });
 
         // then
@@ -161,7 +161,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | T
         const { statusCode, result } = await server.inject({
           method: 'GET',
           url: `/api/admin/tags/${basedTag.id}/recently-used`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         });
 
         // then
@@ -197,7 +197,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | T
         const { statusCode } = await server.inject({
           method: 'GET',
           url: `/api/admin/tags/${basedTag.id}/recently-used`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         });
 
         // then

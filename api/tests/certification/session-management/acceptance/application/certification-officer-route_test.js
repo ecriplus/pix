@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Acceptance | Application | Routes | certification-officer', function () {
@@ -23,7 +23,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         const response = await server.inject({
           method: 'PATCH',
           url: '/api/admin/sessions/12/certification-officer-assignment',
-          headers: { authorization: generateValidRequestAuthorizationHeader(certificationOfficerId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: certificationOfficerId }),
         });
 
         // then
@@ -41,7 +41,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           // when
           const response = await server.inject({
             method: 'PATCH',
-            headers: { authorization: generateValidRequestAuthorizationHeader(certificationOfficerId) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: certificationOfficerId }),
             url: '/api/admin/sessions/test/certification-officer-assignment',
           });
 
@@ -60,7 +60,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
             // when
             const response = await server.inject({
               method: 'PATCH',
-              headers: { authorization: generateValidRequestAuthorizationHeader(certificationOfficerId) },
+              headers: generateAuthenticatedUserRequestHeaders({ userId: certificationOfficerId }),
               url: '/api/admin/sessions/1/certification-officer-assignment',
             });
 
@@ -83,7 +83,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
             // when
             const response = await server.inject({
               method: 'PATCH',
-              headers: { authorization: generateValidRequestAuthorizationHeader(certificationOfficerId) },
+              headers: generateAuthenticatedUserRequestHeaders({ userId: certificationOfficerId }),
               url: `/api/admin/sessions/${sessionId}/certification-officer-assignment`,
             });
 

@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -46,7 +46,7 @@ describe('Acceptance | API | assessment-controller-pause-assessment', function (
       options = {
         method: 'POST',
         url: `/api/assessments/${assessment.id}/alert`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         payload: {
           data: {
             attributes: {
@@ -63,7 +63,7 @@ describe('Acceptance | API | assessment-controller-pause-assessment', function (
     it('should respond with a 401 if requested user is not the same as the user of the assessment', async function () {
       // given
       const otherUserId = 9999;
-      options.headers.authorization = generateValidRequestAuthorizationHeader(otherUserId);
+      options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
       options.payload = {};
 
       // when

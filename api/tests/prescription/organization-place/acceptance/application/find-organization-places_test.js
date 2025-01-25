@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -28,9 +28,7 @@ describe('Acceptance | Route | Find Organization Places', function () {
       const options = {
         method: 'GET',
         url: `/api/admin/organizations/${organizationId}/places`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(adminUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
       };
 
       await databaseBuilder.commit();
@@ -56,9 +54,7 @@ describe('Acceptance | Route | Find Organization Places', function () {
       const options = {
         method: 'GET',
         url: `/api/admin/organizations/${organizationId}/places`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(adminUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
       };
 
       await databaseBuilder.commit();

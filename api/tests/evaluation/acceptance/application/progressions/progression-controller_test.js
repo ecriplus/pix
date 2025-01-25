@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -87,9 +87,7 @@ describe('Acceptance | API | Progressions', function () {
           const options = {
             method: 'GET',
             url: `/api/progressions/${progressionId}`,
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
           // when
@@ -109,9 +107,7 @@ describe('Acceptance | API | Progressions', function () {
           const options = {
             method: 'GET',
             url: `/api/progressions/${progressionId}`,
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
           // when

@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -88,10 +88,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-locale-man
           const options = {
             method: 'GET',
             url: `/api/assessments/${assessmentId}/next`,
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-              'accept-language': FRENCH_FRANCE,
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_FRANCE }),
           };
 
           // when

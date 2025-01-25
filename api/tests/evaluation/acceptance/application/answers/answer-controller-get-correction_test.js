@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   mockLearningContent,
 } from '../../../../test-helper.js';
 
@@ -12,10 +12,7 @@ const { FRENCH_FRANCE } = LOCALE;
 const buildOptions = (answerId, userId) => ({
   method: 'GET',
   url: `/api/answers/${answerId}/correction`,
-  headers: {
-    authorization: generateValidRequestAuthorizationHeader(userId),
-    'accept-language': FRENCH_FRANCE,
-  },
+  headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_FRANCE }),
 });
 const solution =
   'l1:\n- chien\n- chat\n- cochon\nl2:\n- pigeon\n- poulet\n- veau\nl3:\n- canard\n- couincouin\nl4:\n- mouton';
@@ -197,10 +194,7 @@ describe('Acceptance | Controller | answer-controller-get-correction', function 
         const options = {
           method: 'GET',
           url: `/api/answers/${answer.id}/correction`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(userId),
-            'accept-language': FRENCH_FRANCE,
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_FRANCE }),
         };
 
         const expectedBody = {
@@ -351,7 +345,7 @@ describe('Acceptance | Controller | answer-controller-get-correction', function 
       const options = {
         method: 'GET',
         url: `/api/answers/${answer.id}/correction`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId + 3) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: userId + 3 }),
       };
 
       // when
@@ -366,7 +360,7 @@ describe('Acceptance | Controller | answer-controller-get-correction', function 
       const options = {
         method: 'GET',
         url: '/api/answers/1/correction',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when

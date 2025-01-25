@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | user-orga-settings-controller', function () {
@@ -71,7 +71,7 @@ describe('Acceptance | Controller | user-orga-settings-controller', function () 
 
     context('When user is authenticated', function () {
       beforeEach(async function () {
-        options.headers = { authorization: generateValidRequestAuthorizationHeader(userId) };
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
       });
 
       it('should update and return 200 HTTP status code', async function () {

@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   mockLearningContent,
 } from '../../../../test-helper.js';
 
@@ -47,9 +47,7 @@ describe('Acceptance | Controller | tutorial-evaluations-controller', function (
         options = {
           method: 'PUT',
           url: '/api/users/tutorials/tutorialId/evaluate',
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(4444),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: 4444 }),
           payload: {
             data: {
               type: 'tutorial-evaluations',
@@ -93,9 +91,7 @@ describe('Acceptance | Controller | tutorial-evaluations-controller', function (
         options = {
           method: 'PUT',
           url: '/api/users/tutorials/tutorialId/evaluate',
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(4444),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: 4444 }),
           payload: {
             data: {
               type: 'tutorial-evaluations',

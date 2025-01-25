@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   mockLearningContent,
 } from '../../../test-helper.js';
 
@@ -83,7 +83,7 @@ describe('Acceptance | Controller | users-controller-get-user-profile', function
       it('should respond with a 403 - forbidden access - if requested user is not the same as authenticated user', async function () {
         // given
         const otherUserId = 9999;
-        options.headers.authorization = generateValidRequestAuthorizationHeader(otherUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
 
         // when
         const response = await server.inject(options);
@@ -95,7 +95,7 @@ describe('Acceptance | Controller | users-controller-get-user-profile', function
 
     describe('Success case', function () {
       beforeEach(async function () {
-        options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
         await mockLearningContent(learningContent);
 

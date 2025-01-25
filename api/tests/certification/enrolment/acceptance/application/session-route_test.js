@@ -6,7 +6,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -43,7 +43,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
             },
           },
         },
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
       return databaseBuilder.commit();
     });
@@ -120,7 +120,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
       const options = {
         method: 'PATCH',
         url: `/api/sessions/${session.id}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         payload,
       };
 
@@ -141,7 +141,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
       const options = {
         method: 'PATCH',
         url: `/api/sessions/${session.id}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(unauthorizedUser.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: unauthorizedUser.id }),
         payload,
       };
 
@@ -172,9 +172,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
 
       await databaseBuilder.commit();
       const options = {
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         method: 'DELETE',
         url: `/api/sessions/${sessionId}`,
       };
@@ -208,9 +206,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
 
       await databaseBuilder.commit();
       const options = {
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         method: 'GET',
         url: `/api/sessions/${sessionId}`,
       };
@@ -392,7 +388,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
               },
             },
           },
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         return databaseBuilder.commit();
@@ -516,7 +512,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
                 },
               },
             },
-            headers: { authorization: generateValidRequestAuthorizationHeader(onlyComplementarySubscriptionUserId) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: onlyComplementarySubscriptionUserId }),
           };
 
           // when
@@ -576,7 +572,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
               },
             },
           },
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         return databaseBuilder.commit();

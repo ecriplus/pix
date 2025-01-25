@@ -5,7 +5,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   sinon,
 } from '../../../../test-helper.js';
 
@@ -44,7 +44,7 @@ describe('Acceptance | Controller | GET /api/admin/users/{userId}/participations
     const response = await server.inject({
       method: 'GET',
       url: `/api/admin/users/${user.id}/participations`,
-      headers: { authorization: generateValidRequestAuthorizationHeader(admin.id) },
+      headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
     });
 
     // then

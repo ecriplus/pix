@@ -8,7 +8,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -429,9 +429,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
     options = {
       method: 'PATCH',
       url: `/api/assessments/${assessment.id}/complete-assessment`,
-      headers: {
-        authorization: generateValidRequestAuthorizationHeader(user.id),
-      },
+      headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
     };
   });
 
@@ -439,7 +437,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
     context('when user is not the owner of the assessment', function () {
       it('should return a 401 HTTP status code', async function () {
         // given
-        options.headers.authorization = generateValidRequestAuthorizationHeader(user.id + 1);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: user.id + 1 });
 
         // when
         const response = await server.inject(options);
@@ -604,7 +602,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
         it('should complete the certification assessment', async function () {
           // given
           options.url = `/api/assessments/${certificationAssessmentId}/complete-assessment`;
-          options.headers.authorization = generateValidRequestAuthorizationHeader(certifiableUserId);
+          options.headers = generateAuthenticatedUserRequestHeaders({ userId: certifiableUserId });
 
           // when
           const response = await server.inject(options);
@@ -642,7 +640,7 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
             await databaseBuilder.commit();
 
             options.url = `/api/assessments/${certificationAssessment.id}/complete-assessment`;
-            options.headers.authorization = generateValidRequestAuthorizationHeader(certifiableUserId);
+            options.headers = generateAuthenticatedUserRequestHeaders({ userId: certifiableUserId });
 
             // when
             const response = await server.inject(options);
@@ -724,6 +722,6 @@ async function _createAndCompleteCampaignParticipation({ user, campaign, badge, 
   await databaseBuilder.commit();
 
   options.url = `/api/assessments/${campaignAssessment.id}/complete-assessment`;
-  options.headers.authorization = generateValidRequestAuthorizationHeader(user.id);
+  options.headers = generateAuthenticatedUserRequestHeaders({ userId: user.id });
   await server.inject(options);
 }

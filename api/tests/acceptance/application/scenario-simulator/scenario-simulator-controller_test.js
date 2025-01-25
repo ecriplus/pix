@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   mockLearningContent,
   parseJsonStream,
 } from '../../../test-helper.js';
@@ -14,7 +14,7 @@ const {
 
 describe('Acceptance | Controller | scenario-simulator-controller', function () {
   let server;
-  let adminAuthorization;
+  let adminAuthorizationHeaders;
   let validPayload;
 
   beforeEach(async function () {
@@ -27,7 +27,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
       createdAt: new Date('2022-02-01'),
     });
 
-    adminAuthorization = generateValidRequestAuthorizationHeader(adminId);
+    adminAuthorizationHeaders = generateAuthenticatedUserRequestHeaders({ userId: adminId });
     await databaseBuilder.commit();
 
     validPayload = {
@@ -149,7 +149,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
 
     it('should return a report with the same number of simulation scenario reports as the number of challenges in the configuration', async function () {
       // given
-      options.headers.authorization = adminAuthorization;
+      options.headers = adminAuthorizationHeaders;
       options.payload = validPayload;
 
       // when
@@ -172,7 +172,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
     describe('when there is no connected user', function () {
       it('should return status code 401', async function () {
         // given
-        options.headers.authorization = undefined;
+        options.headers = {};
 
         // when
         const response = await server.inject(options);
@@ -186,7 +186,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
       it('should return status code 403', async function () {
         // given
         const { id: userId } = databaseBuilder.factory.buildUser();
-        options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
         await databaseBuilder.commit();
         options.payload = validPayload;
 
@@ -201,7 +201,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
     describe('when request payload is invalid', function () {
       it('should return status code 400', async function () {
         // given
-        options.headers.authorization = adminAuthorization;
+        options.headers = adminAuthorizationHeaders;
         options.payload = {
           wrongField: [],
         };

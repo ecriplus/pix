@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
   learningContentBuilder,
@@ -107,9 +107,7 @@ describe('Acceptance | Controller | training-controller', function () {
       const response = await server.inject({
         method: 'GET',
         url: `/api/admin/trainings/${trainingId}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       });
 
       // then
@@ -189,7 +187,7 @@ describe('Acceptance | Controller | training-controller', function () {
             },
           },
         },
-        headers: { authorization: generateValidRequestAuthorizationHeader(superAdmin.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       });
 
       // then
@@ -223,9 +221,7 @@ describe('Acceptance | Controller | training-controller', function () {
         options = {
           method: 'PATCH',
           url: `/api/admin/trainings/${training.id}`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
           payload: {
             data: {
               type: 'trainings',
@@ -292,9 +288,7 @@ describe('Acceptance | Controller | training-controller', function () {
         options = {
           method: 'GET',
           url: `/api/admin/training-summaries?page[number]=1&page[size]=2`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         };
 
         const expectedResponse = {
@@ -387,9 +381,7 @@ describe('Acceptance | Controller | training-controller', function () {
       const options = {
         method: 'PUT',
         url: `/api/admin/trainings/${trainingId}/triggers`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: {
           data: {
             type: 'training-triggers',
@@ -466,9 +458,7 @@ describe('Acceptance | Controller | training-controller', function () {
       const response = await server.inject({
         method: 'GET',
         url: `/api/admin/trainings/${training.id}/target-profile-summaries`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       });
 
       // then
@@ -504,7 +494,7 @@ describe('Acceptance | Controller | training-controller', function () {
         const options = {
           method: 'POST',
           url: `/api/admin/trainings/${trainingId}/attach-target-profiles`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload: {
             'target-profile-ids': [alreadyAttachedTargetProfileId, toAttachTargetProfileId],
           },

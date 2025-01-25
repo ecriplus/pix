@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | membership-controller', function () {
@@ -54,9 +54,7 @@ describe('Acceptance | Controller | membership-controller', function () {
             },
           },
         },
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(organizationAdminUserId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: organizationAdminUserId }),
       };
     });
 
@@ -76,7 +74,7 @@ describe('Acceptance | Controller | membership-controller', function () {
       it('should respond with a 403 if user does not have the role Admin in organization', async function () {
         // given
         const notOrganizationAdminUserId = databaseBuilder.factory.buildUser().id;
-        options.headers.authorization = generateValidRequestAuthorizationHeader(notOrganizationAdminUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: notOrganizationAdminUserId });
 
         // when
         const response = await server.inject(options);
@@ -124,9 +122,7 @@ describe('Acceptance | Controller | membership-controller', function () {
           payload: {
             organizationId,
           },
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(organizationAdminUserId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: organizationAdminUserId }),
         };
 
         // when

@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Acceptance | Application | Routes | certification-report', function () {
@@ -46,9 +46,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
             type: 'certification-issue-reports',
           },
         },
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
       await databaseBuilder.commit();
 
@@ -70,7 +68,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         method: 'POST',
         url: `/api/certification-reports/${certificationCourseId}/abort`,
         payload: { data: { reason: 'technical' } },
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when

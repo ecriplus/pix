@@ -6,7 +6,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   nock,
 } from '../../../../test-helper.js';
@@ -52,7 +52,7 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
       const request = {
         method: 'GET',
         url: `/api/organizations/${organizationId}/attestations/${attestation.key}?divisions[]=6emeA`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when
@@ -102,7 +102,7 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
         const options = {
           method: 'GET',
           url: `/api/organizations/${organizationId}/organization-learners-level-by-tubes`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         // when

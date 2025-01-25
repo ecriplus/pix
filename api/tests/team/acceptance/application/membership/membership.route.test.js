@@ -5,7 +5,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Team | Application | Route | membership', function () {
@@ -69,9 +69,7 @@ describe('Acceptance | Team | Application | Route | membership', function () {
             },
           },
         },
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(adminUserId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUserId }),
       };
     });
 
@@ -122,7 +120,7 @@ describe('Acceptance | Team | Application | Route | membership', function () {
         });
         await databaseBuilder.commit();
 
-        options.headers.authorization = generateValidRequestAuthorizationHeader(notAdminUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: notAdminUserId });
 
         // when
         const response = await server.inject(options);
@@ -170,7 +168,7 @@ describe('Acceptance | Team | Application | Route | membership', function () {
         const response = await server.inject({
           method: 'GET',
           url: `/api/organizations/${organizationId}/memberships/?filter[email]=&filter[firstName]=&filter[lastName]=&filter[organizationRole]=`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(adminOfTheOrganization.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminOfTheOrganization.id }),
         });
 
         // then
@@ -272,7 +270,7 @@ describe('Acceptance | Team | Application | Route | membership', function () {
         const response = await server.inject({
           method: 'GET',
           url: `/api/organizations/${organizationId}/memberships`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         });
 
         // then

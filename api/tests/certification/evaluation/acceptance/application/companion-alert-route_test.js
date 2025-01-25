@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../../test-helper.js';
 
@@ -25,7 +25,7 @@ describe('Certification | Evaluation | Acceptance | Application | Routes | compa
       options = {
         method: 'POST',
         url: `/api/assessments/${assessment.id}/companion-alert`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       return databaseBuilder.commit();
@@ -34,7 +34,7 @@ describe('Certification | Evaluation | Acceptance | Application | Routes | compa
     it('should respond with a 401 if requested user is not the same as the user of the assessment', async function () {
       // given
       const otherUserId = 9999;
-      options.headers.authorization = generateValidRequestAuthorizationHeader(otherUserId);
+      options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
       options.payload = {};
 
       // when

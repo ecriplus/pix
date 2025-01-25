@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | API | Campaign Management Controller', function () {
@@ -23,7 +23,7 @@ describe('Acceptance | API | Campaign Management Controller', function () {
       const response = await server.inject({
         method: 'GET',
         url: `/api/admin/campaigns/${campaign.id}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       });
 
       // then

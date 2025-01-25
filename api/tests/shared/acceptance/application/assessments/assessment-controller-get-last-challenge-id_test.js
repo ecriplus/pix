@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -36,9 +36,7 @@ describe('Acceptance | API | assessment-controller-get-last-challenge-id', funct
         options = {
           method: 'GET',
           url: `/api/assessments/${assessmentId}/last-challenge-id`,
-          headers: {
-            authorization: `Bearer ${generateValidRequestAuthorizationHeader(userId)}`,
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
       });
 
@@ -75,9 +73,7 @@ describe('Acceptance | API | assessment-controller-get-last-challenge-id', funct
         options = {
           method: 'GET',
           url: `/api/assessments/${assessmentId}/last-challenge-id`,
-          headers: {
-            authorization: `Bearer ${generateValidRequestAuthorizationHeader(userId)}`,
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         const response = await server.inject(options);

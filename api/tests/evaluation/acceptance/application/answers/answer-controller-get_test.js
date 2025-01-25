@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | answer-controller-get', function () {
@@ -27,7 +27,7 @@ describe('Acceptance | Controller | answer-controller-get', function () {
         options = {
           method: 'GET',
           url: `/api/answers/${answer.id}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
       });
 
@@ -70,7 +70,7 @@ describe('Acceptance | Controller | answer-controller-get', function () {
         options = {
           method: 'GET',
           url: '/api/answers/salut',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId + 1) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: userId + 1 }),
         };
       });
 
@@ -98,7 +98,7 @@ describe('Acceptance | Controller | answer-controller-get', function () {
         options = {
           method: 'GET',
           url: `/api/answers/${answer.id}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId + 1) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: userId + 1 }),
         };
       });
 
