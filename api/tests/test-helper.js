@@ -134,11 +134,6 @@ function generateAuthenticatedUserRequestHeaders({
   };
 }
 
-function generateValidRequestAuthorizationHeader(userId = 1234, source = 'pix', audience = 'http://app.pix.org') {
-  const accessToken = tokenService.createAccessTokenFromUser({ userId, source, audience }).accessToken;
-  return `Bearer ${accessToken}`;
-}
-
 function generateValidRequestAuthorizationHeaderForApplication(clientId = 'client-id-name', source, scope) {
   const application = _.find(apimRegisterApplicationsCredentials, { clientId });
   if (application) {
@@ -349,7 +344,6 @@ export {
   expect,
   generateAuthenticatedUserRequestHeaders,
   generateIdTokenForExternalUser,
-  generateValidRequestAuthorizationHeader,
   generateValidRequestAuthorizationHeaderForApplication,
   hFake,
   HttpTestServer,
