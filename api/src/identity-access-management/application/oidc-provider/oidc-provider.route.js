@@ -7,7 +7,7 @@ export const oidcProviderRoutes = [
   {
     method: 'GET',
     path: '/api/oidc/identity-providers',
-    config: {
+    options: {
       validate: {
         query: Joi.object({
           target: Joi.string().optional().default('app'),
