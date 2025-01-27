@@ -122,7 +122,7 @@ module('Unit | Service | pix-companion', function (hooks) {
         setTimeout: sinon.stub(),
       };
       windowStub.setTimeout.callsFake((callback, timeout) => {
-        assert.strictEqual(timeout, 100);
+        assert.strictEqual(timeout, 500);
         callback();
       });
       pixCompanion._isExtensionEnabled = true;

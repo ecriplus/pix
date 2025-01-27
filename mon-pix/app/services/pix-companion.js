@@ -35,7 +35,7 @@ export default class PixCompanion extends Service {
   }
 
   checkExtensionIsEnabled(windowRef = window) {
-    const pong = promiseWithResolverAndTimeout(100, windowRef);
+    const pong = promiseWithResolverAndTimeout(500, windowRef);
     const pongListener = (event) => {
       try {
         this.version = event.detail?.version;
