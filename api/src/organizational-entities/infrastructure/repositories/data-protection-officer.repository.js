@@ -35,11 +35,6 @@ async function create(dataProtectionOfficer) {
   return new DataProtectionOfficer(dataProtectionOfficerRow);
 }
 
-async function deleteDpoByOrganizationId(organizationId) {
-  const knexConn = DomainTransaction.getConnection();
-  await knexConn(DATA_PROTECTION_OFFICERS_TABLE_NAME).where({ organizationId }).delete();
-}
-
 async function update(dataProtectionOfficer) {
   const knexConn = DomainTransaction.getConnection();
   const { firstName, lastName, email, organizationId, certificationCenterId } = dataProtectionOfficer;
@@ -59,4 +54,4 @@ async function update(dataProtectionOfficer) {
   return new DataProtectionOfficer(dataProtectionOfficerRow);
 }
 
-export { batchAddDataProtectionOfficerToOrganization, create, deleteDpoByOrganizationId, get, update };
+export { batchAddDataProtectionOfficerToOrganization, create, get, update };
