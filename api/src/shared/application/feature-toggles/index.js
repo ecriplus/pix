@@ -9,7 +9,7 @@ const register = async function (server) {
         auth: false,
         handler: featureToggleController.getActiveFeatures,
         tags: ['api'],
-        cache: { expiresIn: 30 * 1000 },
+        cache: false,
       },
     },
     // TODO: Test route to be removed soon
