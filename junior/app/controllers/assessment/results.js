@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import { action } from '@ember/object';
 
 export default class Missions extends Controller {
   get validatedObjectives() {
@@ -20,5 +21,20 @@ export default class Missions extends Controller {
       default:
         return 'default';
     }
+  }
+
+  @action
+  isStepSuccessFul(stepIndex) {
+    return this.model.assessment.result.steps?.[stepIndex] === 'reached';
+  }
+
+  get resultsTitle() {
+    let titleBaseTranslationKey = 'pages.missions.end-page.details-list';
+    if (this.model.assessment.result.global === 'exceeded' || this.model.assessment.result.global === 'reached') {
+      titleBaseTranslationKey += '.' + 'successful';
+    } else {
+      titleBaseTranslationKey += '.' + 'need-progress';
+    }
+    return titleBaseTranslationKey;
   }
 }

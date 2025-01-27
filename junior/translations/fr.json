@@ -85,7 +85,10 @@
     "missions": {
       "end-page": {
         "back-to-missions": "Voir d'autres missions",
-        "details-list": "Tu as pu travailler :",
+        "details-list": {
+          "need-progress": "Dans cette mission, tu as travaillé :",
+          "successful": "Dans cette mission, tu as réussi les objectifs :"
+        },
         "result": {
           "exceeded": "Waouh, tu sembles être incollable sur ce sujet ! Tu as relevé le défi.",
           "not-reached": "Cette mission semble difficile, n’hésite pas à réessayer dès que tu te sens prêt.",
