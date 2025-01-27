@@ -1,6 +1,9 @@
 import { campaignDetailController } from '../../../../../src/prescription/campaign/application/campaign-detail-controller.js';
 import { usecases } from '../../../../../src/prescription/campaign/domain/usecases/index.js';
+import { LOCALE } from '../../../../../src/shared/domain/constants.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+
+const { FRENCH_SPOKEN } = LOCALE;
 
 describe('Unit | Application | Controller | Campaign detail', function () {
   describe('#getByCode', function () {
@@ -11,13 +14,15 @@ describe('Unit | Application | Controller | Campaign detail', function () {
       const code = 'AZERTY123';
       const serializedCampaignToJoin = Symbol('Serialized CampaignToJoin');
       const campaignToJoin = domainBuilder.buildCampaignToJoin({ code, identityProvider: 'SUPER_IDP' });
+      const locale = FRENCH_SPOKEN;
       const request = {
         query: { filter: { code } },
       };
       dependencies = {
+        extractLocaleFromRequest: sinon.stub().returns(locale),
         campaignToJoinSerializer: { serialize: sinon.stub() },
       };
-      sinon.stub(usecases, 'getCampaignByCode').withArgs({ code }).resolves(campaignToJoin);
+      sinon.stub(usecases, 'getCampaignByCode').withArgs({ code, locale }).resolves(campaignToJoin);
 
       dependencies.campaignToJoinSerializer.serialize.withArgs(campaignToJoin).returns(serializedCampaignToJoin);
       // when

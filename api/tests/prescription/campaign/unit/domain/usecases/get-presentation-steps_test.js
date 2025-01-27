@@ -6,7 +6,6 @@ import { getPresentationSteps } from '../../../../../../src/prescription/campaig
 import { LOCALE } from '../../../../../../src/shared/domain/constants.js';
 import { CampaignCodeError, UserNotAuthorizedToAccessEntityError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, expect, sinon } from '../../../../../test-helper.js';
-
 const { FRENCH_SPOKEN } = LOCALE;
 
 describe('Unit | Domain | Use Cases | get-presentation-steps', function () {

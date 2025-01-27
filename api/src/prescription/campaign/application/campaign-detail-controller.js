@@ -1,6 +1,7 @@
 import stream from 'node:stream';
 
 import { tokenService } from '../../../shared/domain/services/token-service.js';
+import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { escapeFileName } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as campaignDetailsManagementSerializer from '../infrastructure/serializers/jsonapi/campaign-management-serializer.js';
@@ -14,12 +15,14 @@ const getByCode = async function (
   request,
   _,
   dependencies = {
+    extractLocaleFromRequest,
     campaignToJoinSerializer,
   },
 ) {
   const { code } = request.query.filter;
+  const locale = dependencies.extractLocaleFromRequest(request);
 
-  const campaignToJoin = await usecases.getCampaignByCode({ code });
+  const campaignToJoin = await usecases.getCampaignByCode({ code, locale });
   return dependencies.campaignToJoinSerializer.serialize(campaignToJoin);
 };
 

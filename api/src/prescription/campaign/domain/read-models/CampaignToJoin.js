@@ -31,6 +31,8 @@ class CampaignToJoin extends Campaign {
 
     this.isRestricted = organizationIsManagingStudents || hasLearnersImportFeature;
     this.reconciliationFields = null;
+    this.isMobileCompliant = null;
+    this.isTabletCompliant = null;
   }
 
   get isReconciliationRequired() {
@@ -43,6 +45,11 @@ class CampaignToJoin extends Campaign {
 
   setReconciliationFields(reconciliationFields) {
     this.reconciliationFields = reconciliationFields;
+  }
+
+  setMediaCompliance({ isMobileCompliant, isTabletCompliant }) {
+    this.isMobileCompliant = isMobileCompliant;
+    this.isTabletCompliant = isTabletCompliant;
   }
 }
 
