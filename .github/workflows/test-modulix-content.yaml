@@ -39,7 +39,7 @@ jobs:
           exit $ERROR_CODE
 
       - name: Comment PR with Test Modulix Error details
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: ${{ failure() }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
