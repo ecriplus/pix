@@ -59,15 +59,4 @@ async function findAllOrganizationFeaturesFromOrganizationId({ organizationId })
   return organizationFeatures.map((organizationFeature) => new OrganizationFeatureItem(organizationFeature));
 }
 
-/**
- * @function
- * @name delete
- *
- * @param {number} organizationId
- */
-async function deleteOrganizationFeatureByOrganizationId(organizationId) {
-  const knexConn = DomainTransaction.getConnection();
-  await knexConn('organization-features').where({ organizationId }).delete();
-}
-
-export { deleteOrganizationFeatureByOrganizationId, findAllOrganizationFeaturesFromOrganizationId, saveInBatch };
+export { findAllOrganizationFeaturesFromOrganizationId, saveInBatch };
