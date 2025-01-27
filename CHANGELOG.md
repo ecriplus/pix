@@ -1,5 +1,23 @@
 # Pix Changelog
 
+## v5.26.0 (27/01/2025)
+
+
+### :rocket: Amélioration
+- [#10891](https://github.com/1024pix/pix/pull/10891) [FEATURE] Màj feedback module adresse-ip-publique-et-vous.
+- [#11221](https://github.com/1024pix/pix/pull/11221) [FEATURE] Monté de version webPack  (PIX-16263).
+- [#10893](https://github.com/1024pix/pix/pull/10893) [FEATURE] Create Module utiliser-souris-ordinateur-2.json (MODC-194).
+- [#11223](https://github.com/1024pix/pix/pull/11223) [FEATURE] Montée de version qunit (PIX-16624).
+- [#11224](https://github.com/1024pix/pix/pull/11224) [FEATURE] mise à jour tracked-built-ins (PIX-16267).
+
+### :building_construction: Tech
+- [#11219](https://github.com/1024pix/pix/pull/11219) [TECH] Mise à jour des dépendances ember optional-features et embroider (PIX-16262).
+- [#11217](https://github.com/1024pix/pix/pull/11217) [TECH] Mise à jour des dépendances de lint, prettier et sass (PIX-16261).
+- [#11167](https://github.com/1024pix/pix/pull/11167) [TECH] :truck: :broom: Déplacement et nettoyage du contenu du répertoire `lib/domain/events` .
+
+### :bug: Correction
+- [#11193](https://github.com/1024pix/pix/pull/11193) [BUGFIX] Pose d'un verrou pour limiter la création de challenge en certification (PIX-16165).
+
 ## v5.25.0 (24/01/2025)
 
 
