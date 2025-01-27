@@ -23,7 +23,7 @@ describe('Unit | Domain | Models | Badge', function () {
         message: 'original message',
         title: 'original title',
         key: 'originalKey',
-        isCertifiable: false,
+        isCertifiable: true,
         targetProfileId: 456,
         isAlwaysVisible: false,
         complementaryCertificationBadge: null,
@@ -35,7 +35,7 @@ describe('Unit | Domain | Models | Badge', function () {
         message: 'new message',
         title: 'new title',
         key: 'newKey',
-        isCertifiable: true,
+        isCertifiable: false,
         isAlwaysVisible: true,
       };
 
@@ -48,7 +48,7 @@ describe('Unit | Domain | Models | Badge', function () {
       expect(badge.message).to.equal('new message');
       expect(badge.title).to.equal('new title');
       expect(badge.key).to.equal('newKey');
-      expect(badge.isCertifiable).to.equal(true);
+      expect(badge.isCertifiable).to.equal(false);
       expect(badge.isAlwaysVisible).to.equal(true);
     });
 
