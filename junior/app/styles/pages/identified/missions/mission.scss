@@ -64,6 +64,16 @@
 
     .details-list {
 
+      li {
+        display: flex;
+        align-items: flex-start;
+      }
+
+      img {
+        width: 21px;
+        margin: 4px;
+      }
+
       &__title {
         margin-bottom: 16px;
         font-weight: 800;

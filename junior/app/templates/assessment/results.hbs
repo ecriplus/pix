@@ -14,11 +14,17 @@
     />
 
     <div class="mission-page__details">
-      <p class="details-list__title details-list__title--big">{{t "pages.missions.end-page.details-list"}}</p>
+      <p class="details-list__title details-list__title--big">{{t this.resultsTitle}}</p>
       <ul class="details-list">
-        {{#each this.validatedObjectives as |element|}}
+        {{#each this.validatedObjectives as |element index|}}
+
           <li>
-            <MarkdownToHtml @markdown={{element}} class="details-list__item" />
+            {{#if (this.isStepSuccessFul index)}}
+              <img src="/images/icons/valid.svg" alt="Valid" />
+            {{else}}
+              <img src="/images/icons/not-valid.svg" alt="Invalid" />
+            {{/if}}
+            <MarkdownToHtml @markdown="{{element}}" class="details-list__item" />
           </li>
         {{/each}}
       </ul>
