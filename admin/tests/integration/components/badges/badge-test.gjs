@@ -26,11 +26,11 @@ module('Integration | Component | badges/badge', function (hooks) {
     const screen = await render(<template><Badge @badge={{badge}} /></template>);
 
     // then
-    assert.dom(screen.getByText(`ID : ${badge.id}`)).exists();
-    assert.dom(screen.getByText(`Nom du résultat thématique : ${badge.title}`)).exists();
-    assert.dom(screen.getByText(`Message : ${badge.message}`)).exists();
-    assert.dom(screen.getByText(`Clé : ${badge.key}`)).exists();
-    assert.dom(screen.getByText(`Message alternatif : ${badge.altMessage}`)).exists();
+    assert.dom(screen.getByText(badge.id)).exists();
+    assert.dom(screen.getByText(badge.title)).exists();
+    assert.dom(screen.getByText(badge.message)).exists();
+    assert.dom(screen.getByText(badge.key)).exists();
+    assert.dom(screen.getByText(badge.altMessage)).exists();
     assert.dom(screen.getByText('Certifiable')).exists();
     assert.dom(screen.getByText('Lacunes')).exists();
     assert.dom(screen.getByRole('presentation')).exists();

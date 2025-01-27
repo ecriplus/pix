@@ -1,57 +1,50 @@
 @use 'pix-design-tokens/typography';
 
-.badge-data {
+.badge-details {
   display: flex;
 
   &__image {
-    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 1rem 3rem 0 0;
   }
 
-  &__tags {
-    margin: 8px 0;
+  &__content {
+    flex-grow: 1;
+  }
+
+  &__tag:not(:first-child) {
+    margin-top: 0.5rem;
   }
 
   &__action {
-    margin-top: 12px;
+    margin-left: auto;
   }
-
-  &__list {
-    padding: 0;
-    list-style: none;
-  }
-}
-
-.badge-criteria-competences {
-  list-style-type: none;
 }
 
 .badge-edit-form {
   width: 50%;
 
   &__field {
-    margin-bottom: 12px;
+    margin-bottom: 1rem;
 
     .pix-input {
       width: 100%;
     }
   }
 
+  &__checkboxes {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
   &__actions {
     display: flex;
-    justify-content: space-between;
-    max-width: 220px;
-    margin-bottom: 12px;
+    gap: 1rem;
+    margin-top: 1rem;
   }
-}
-
-.badge-edit-form-field {
-  &__label {
-    width: 100%;
-  }
-}
-
-.skill-sets-table {
-  margin: 20px 0;
 }
 
 .badge-criterion__header {

@@ -42,10 +42,10 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
           <template><CampaignCriterion @criterion={{criterion}} @isEditable={{false}} /></template>,
         );
 
-        fireEvent.mouseOver(screen.getByRole('button', { name: 'Modifier le critère' }));
+        fireEvent.mouseOver(screen.getByRole('button', { name: 'Modifier le seuil de ce critère' }));
 
         // then
-        assert.true(screen.getByRole('button', { name: 'Modifier le critère' }).disabled);
+        assert.true(screen.getByRole('button', { name: 'Modifier le seuil de ce critère' }).disabled);
         assert.dom(screen.getByText(/Non modifiable car le profil cible est relié à une campagne/)).exists();
         assert.notOk(screen.queryByText(/Modification du critère d'obtention basé sur l'ensemble du profil cible/));
       });
@@ -65,7 +65,7 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
         const screen = await render(
           <template><CampaignCriterion @criterion={{criterion}} @isEditable={{true}} /></template>,
         );
-        await clickByName('Modifier le critère');
+        await clickByName('Modifier le seuil de ce critère');
         const modal = within(await screen.findByRole('dialog'));
         // then
         assert.notOk(this.element.querySelector('.pix-modal__overlay--hidden'));
@@ -85,7 +85,7 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
         const screen = await render(
           <template><CampaignCriterion @criterion={{criterion}} @isEditable={{true}} /></template>,
         );
-        await clickByName('Modifier le critère');
+        await clickByName('Modifier le seuil de ce critère');
         const modal = within(await screen.findByRole('dialog'));
         await click(modal.getByRole('button', { name: 'Annuler' }));
         assert.dom(this.element.querySelector('.pix-modal__overlay--hidden')).exists();
@@ -110,7 +110,7 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
         const screen = await render(
           <template><CampaignCriterion @criterion={{criterion}} @isEditable={{true}} /></template>,
         );
-        await clickByName('Modifier le critère');
+        await clickByName('Modifier le seuil de ce critère');
         const modal = within(await screen.findByRole('dialog'));
         // given
         criterion.save.resolves();
@@ -148,7 +148,7 @@ module('Integration | Component | Badges::CampaignCriterion', function (hooks) {
         const screen = await render(
           <template><CampaignCriterion @criterion={{criterion}} @isEditable={{true}} /></template>,
         );
-        await clickByName('Modifier le critère');
+        await clickByName('Modifier le seuil de ce critère');
         const modal = within(await screen.findByRole('dialog'));
         // given
         criterion.save.throws({

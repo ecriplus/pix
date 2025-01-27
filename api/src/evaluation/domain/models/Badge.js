@@ -1,3 +1,6 @@
+import lodash from 'lodash';
+const { isNil } = lodash;
+
 const UPDATABLE_PROPERTIES = ['message', 'altMessage', 'key', 'title', 'imageUrl', 'isCertifiable', 'isAlwaysVisible'];
 
 class Badge {
@@ -27,7 +30,7 @@ class Badge {
 
   updateBadgeProperties(badgeToUpdate) {
     UPDATABLE_PROPERTIES.forEach((property) => {
-      if (badgeToUpdate[property]) this[property] = badgeToUpdate[property];
+      if (!isNil(badgeToUpdate[property])) this[property] = badgeToUpdate[property];
     });
   }
 
