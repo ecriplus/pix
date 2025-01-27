@@ -10,6 +10,7 @@ function _toDomain(invitationDTO) {
     email: invitationDTO.email,
     code: invitationDTO.code,
     role: invitationDTO.role,
+    locale: invitationDTO.locale,
     updatedAt: invitationDTO.updatedAt,
     certificationCenterId: invitationDTO.certificationCenterId,
     certificationCenterName: invitationDTO.certificationCenterName,
@@ -24,7 +25,7 @@ function _toDomain(invitationDTO) {
  */
 const findPendingByCertificationCenterId = async function ({ certificationCenterId }) {
   const pendingCertificationCenterInvitations = await knex(CERTIFICATION_CENTER_INVITATIONS)
-    .select('id', 'email', 'certificationCenterId', 'updatedAt', 'role')
+    .select('id', 'email', 'certificationCenterId', 'updatedAt', 'role', 'locale')
     .where({ certificationCenterId, status: CertificationCenterInvitation.StatusType.PENDING })
     .orderBy('updatedAt', 'desc');
   return pendingCertificationCenterInvitations.map(_toDomain);
@@ -96,7 +97,7 @@ const findOnePendingByEmailAndCertificationCenterId = async function ({ email, c
 const create = async function (invitation) {
   const [newInvitation] = await knex(CERTIFICATION_CENTER_INVITATIONS)
     .insert(invitation)
-    .returning(['id', 'email', 'code', 'certificationCenterId', 'updatedAt', 'role']);
+    .returning(['id', 'email', 'code', 'certificationCenterId', 'updatedAt', 'role', 'locale']);
 
   const { name: certificationCenterName } = await knex('certification-centers')
     .select('name')
@@ -115,7 +116,7 @@ const update = async function (certificationCenterInvitation) {
   const [updatedCertificationCenterInvitation] = await knex('certification-center-invitations')
     .update({ updatedAt: new Date() })
     .where({ id: certificationCenterInvitation.id })
-    .returning(['id', 'email', 'code', 'certificationCenterId', 'updatedAt', 'role']);
+    .returning(['id', 'email', 'code', 'certificationCenterId', 'updatedAt', 'role', 'locale']);
 
   const { name: certificationCenterName } = await knex('certification-centers')
     .select('name')
