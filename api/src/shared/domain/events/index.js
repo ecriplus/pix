@@ -40,11 +40,14 @@ import * as competenceRepository from '../../infrastructure/repositories/compete
 import * as knowledgeElementRepository from '../../infrastructure/repositories/knowledge-element-repository.js';
 import * as organizationRepository from '../../infrastructure/repositories/organization-repository.js';
 import * as skillRepository from '../../infrastructure/repositories/skill-repository.js';
-import { injectDefaults } from '../../infrastructure/utils/dependency-injection.js';
+import { injectDefaults, injectDependencies } from '../../infrastructure/utils/dependency-injection.js';
 import { logger } from '../../infrastructure/utils/logger.js';
 
 const { performance } = perf_hooks;
 
+/**
+ * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
+ */
 const dependencies = {
   answerRepository,
   assessmentRepository,
@@ -119,4 +122,10 @@ const _forTestOnly = {
   },
 };
 
-export { _forTestOnly, eventBus, eventDispatcher };
+/**
+ * Using {@link https://jsdoc.app/tags-type "Closure Compiler's syntax"} to document injected dependencies
+ * @typedef {handleCertificationRescoring} HandleCertificationRescoring
+ */
+const handlersAsServices = injectDependencies(handlersToBeInjected, dependencies);
+
+export { _forTestOnly, eventBus, eventDispatcher, handlersAsServices };

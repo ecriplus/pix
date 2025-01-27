@@ -1,9 +1,9 @@
-import { cancelCertificationCourse } from '../../../../../../src/certification/session-management/domain/usecases/cancel-certification-course.js';
+import { cancel } from '../../../../../../src/certification/session-management/domain/usecases/cancel.js';
 import { NotFinalizedSessionError } from '../../../../../../src/shared/domain/errors.js';
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Certification | Session-management | Unit | Domain | UseCases | cancel-certification-course', function () {
+describe('Certification | Session-management | Unit | Domain | UseCases | cancel', function () {
   describe('when session is finalized', function () {
     it('should cancel the certification course', async function () {
       // given
@@ -20,22 +20,32 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       const sessionRepository = {
         get: sinon.stub(),
       };
+      const certificationRescoringRepository = {
+        execute: sinon.stub(),
+      };
       certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
       certificationCourseRepository.update.resolves();
+      certificationRescoringRepository.execute.resolves();
       sessionRepository.get.withArgs({ id: certificationCourse.getSessionId() }).resolves(session);
 
       // when
-      const cancelledEvent = await cancelCertificationCourse({
+      await cancel({
         certificationCourseId: 123,
+        juryId,
         certificationCourseRepository,
         sessionRepository,
-        juryId,
+        certificationRescoringRepository,
       });
 
       // then
       expect(certificationCourse.cancel).to.have.been.calledOnce;
       expect(certificationCourseRepository.update).to.have.been.calledWithExactly({ certificationCourse });
-      expect(cancelledEvent).to.deepEqualInstance(new CertificationCancelled({ certificationCourseId: 123, juryId }));
+      expect(certificationRescoringRepository.execute).to.have.been.calledWithExactly({
+        certificationCancelledEvent: new CertificationCancelled({
+          certificationCourseId: certificationCourse.getId(),
+          juryId,
+        }),
+      });
     });
   });
 
@@ -58,7 +68,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       sessionRepository.get.withArgs({ id: certificationCourse.getSessionId() }).resolves(session);
 
       // when
-      const error = await catchErr(cancelCertificationCourse)({
+      const error = await catchErr(cancel)({
         certificationCourseId: 123,
         certificationCourseRepository,
         sessionRepository,

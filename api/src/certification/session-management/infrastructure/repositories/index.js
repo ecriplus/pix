@@ -1,3 +1,4 @@
+import { handlersAsServices as libServices } from '../../../../../src/shared/domain/events/index.js';
 import * as certificationIssueReportRepository from '../../../../certification/shared/infrastructure/repositories/certification-issue-report-repository.js';
 import * as issueReportCategoryRepository from '../../../../certification/shared/infrastructure/repositories/issue-report-category-repository.js';
 import * as answerRepository from '../../../../shared/infrastructure/repositories/answer-repository.js';
@@ -21,6 +22,7 @@ import * as certificationCandidateRepository from './certification-candidate-rep
 import * as certificationCompanionAlertRepository from './certification-companion-alert-repository.js';
 import * as certificationOfficerRepository from './certification-officer-repository.js';
 import * as certificationRepository from './certification-repository.js';
+import * as certificationRescoringRepository from './certification-rescoring-repository.js';
 import * as competenceMarkRepository from './competence-mark-repository.js';
 import * as courseAssessmentResultRepository from './course-assessment-result-repository.js';
 import * as cpfExportRepository from './cpf-export-repository.js';
@@ -75,6 +77,7 @@ import * as v3CertificationCourseDetailsForAdministrationRepository from './v3-c
  * @typedef {juryCertificationSummaryRepository} JuryCertificationSummaryRepository
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
  * @typedef {typeof certificationCompanionAlertRepository} CertificationCompanionAlertRepository
+ * @typedef {certificationRescoringRepository} CertificationRescoringRepository
  */
 const repositoriesWithoutInjectedDependencies = {
   assessmentRepository,
@@ -109,13 +112,17 @@ const repositoriesWithoutInjectedDependencies = {
   certificationCpfCountryRepository,
   certificationCandidateRepository,
   certificationCompanionAlertRepository,
+  certificationRescoringRepository,
 };
 
 /**
  * Using {@link https://jsdoc.app/tags-type "Closure Compiler's syntax"} to document injected dependencies
- *
+ * @typedef {libServices} LibServices
  */
-const dependencies = {};
+const dependencies = {
+  libServices,
+};
+
 const sessionRepositories = injectDependencies(repositoriesWithoutInjectedDependencies, dependencies);
 export {
   answerRepository,

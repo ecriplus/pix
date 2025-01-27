@@ -1,6 +1,7 @@
 /**
  * @typedef {import('./index.js'.CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('./index.js'.SessionRepository} SessionRepository
+ * @typedef {import('./index.js'.CertificationRescoringRepository} CertificationRescoringRepository
  */
 
 import CertificationCancelled from '../../../../../src/shared/domain/events/CertificationCancelled.js';
@@ -11,13 +12,14 @@ import { NotFinalizedSessionError } from '../../../../shared/domain/errors.js';
  * @param {number} params.certificationCourseId
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {SessionRepository} params.sessionRepository
- * @returns {Promise<CertificationCancelled>}
+ * @param {CertificationRescoringRepository} params.certificationRescoringRepository
  */
-export const cancelCertificationCourse = async function ({
+export const cancel = async function ({
   certificationCourseId,
   juryId,
   certificationCourseRepository,
   sessionRepository,
+  certificationRescoringRepository,
 }) {
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
   const session = await sessionRepository.get({ id: certificationCourse.getSessionId() });
@@ -28,5 +30,10 @@ export const cancelCertificationCourse = async function ({
   certificationCourse.cancel();
   await certificationCourseRepository.update({ certificationCourse });
 
-  return new CertificationCancelled({ certificationCourseId: certificationCourse.getId(), juryId });
+  const certificationCancelledEvent = new CertificationCancelled({
+    certificationCourseId: certificationCourse.getId(),
+    juryId,
+  });
+
+  return certificationRescoringRepository.execute({ certificationCancelledEvent });
 };

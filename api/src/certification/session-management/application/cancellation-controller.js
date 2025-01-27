@@ -1,11 +1,9 @@
-import * as events from '../../../../src/shared/domain/events/index.js';
 import { usecases } from '../domain/usecases/index.js';
 
-const cancel = async function (request, h, dependencies = { events }) {
+const cancel = async function (request, h) {
   const juryId = request.auth.credentials.userId;
   const certificationCourseId = request.params.certificationCourseId;
-  const certificationCancelledEvent = await usecases.cancelCertificationCourse({ certificationCourseId, juryId });
-  await dependencies.events.eventDispatcher.dispatch(certificationCancelledEvent);
+  await usecases.cancel({ certificationCourseId, juryId });
 
   return h.response().code(204);
 };
