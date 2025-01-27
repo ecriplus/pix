@@ -24,6 +24,7 @@ const validationScheme = Joi.object({
   role: Joi.string()
     .valid(...Object.values(roles))
     .optional(),
+  locale: Joi.string().optional(),
   updatedAt: Joi.date().optional(),
   status: Joi.string()
     .valid(...Object.values(statuses))
@@ -34,11 +35,22 @@ const validationScheme = Joi.object({
 });
 
 export class CertificationCenterInvitation {
-  constructor({ id, email, updatedAt, role, status, certificationCenterId, certificationCenterName, code } = {}) {
+  constructor({
+    id,
+    email,
+    updatedAt,
+    role,
+    locale,
+    status,
+    certificationCenterId,
+    certificationCenterName,
+    code,
+  } = {}) {
     this.id = id;
     this.email = email;
     this.updatedAt = updatedAt;
     this.role = role;
+    this.locale = locale;
     this.status = status;
     this.certificationCenterId = certificationCenterId;
     this.certificationCenterName = certificationCenterName;
@@ -47,7 +59,7 @@ export class CertificationCenterInvitation {
     validateEntity(validationScheme, this);
   }
 
-  static create({ email, certificationCenterId, updatedAt = new Date(), code = this.generateCode(), role }) {
+  static create({ email, certificationCenterId, updatedAt = new Date(), code = this.generateCode(), role, locale }) {
     const certificationCenterToCreate = new CertificationCenterInvitation({
       email,
       certificationCenterId,
@@ -55,6 +67,7 @@ export class CertificationCenterInvitation {
       updatedAt,
       code,
       role,
+      locale,
     });
     delete certificationCenterToCreate.id;
     delete certificationCenterToCreate.certificationCenterName;

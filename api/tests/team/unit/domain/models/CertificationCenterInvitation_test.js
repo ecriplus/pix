@@ -16,6 +16,7 @@ describe('Unit | Domain | Models | CertificationCenterInvitation', function () {
         updatedAt: today,
         status: 'pending',
         role: 'ADMIN',
+        locale: 'fr',
         certificationCenterId: 10,
         certificationCenterName: 'La Raclette des Pixous',
         code: 'ABCDE',
@@ -38,6 +39,7 @@ describe('Unit | Domain | Models | CertificationCenterInvitation', function () {
         updatedAt: today,
         status: 'pending',
         role: 'SUPER',
+        locale: 'fr',
         certificationCenterId: 10,
         certificationCenterName: 'La Raclette des Pixous',
       };
@@ -133,6 +135,7 @@ describe('Unit | Domain | Models | CertificationCenterInvitation', function () {
         updatedAt: now,
         code: '666AAALLL9',
         role: 'ADMIN',
+        locale: 'fr',
       });
 
       // /then
@@ -144,6 +147,7 @@ describe('Unit | Domain | Models | CertificationCenterInvitation', function () {
         updatedAt: now,
         code: '666AAALLL9',
         role: 'ADMIN',
+        locale: 'fr',
       });
     });
   });
