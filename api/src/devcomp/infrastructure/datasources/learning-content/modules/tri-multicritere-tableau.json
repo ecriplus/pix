@@ -209,7 +209,7 @@
           "element": {
             "id": "9a6bb28f-563f-420f-9ea8-767e25af815b",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">📋</span> Sarah veut établir le classement des épreuves individuelles, selon les règles suivantes :</p><blockquote><em>Le ou la gagnant(e) aura le meilleur score aux fléchettes. <br>En cas d’ex æquo, on choisira le meilleur résultat au quiz</em></blockquote>"
+            "content": "<p><span aria-hidden=\"true\">📋</span> Sarah veut établir le classement des épreuves individuelles, selon les règles suivantes :</p><blockquote><em>Le ou la gagnant(e) aura le meilleur score aux fléchettes. <br>En cas d’ex æquo, on choisira le meilleur résultat au quiz.</em></blockquote>"
           }
         },
         {
@@ -358,7 +358,7 @@
                 {
                   "id": "b8c69ed0-7388-4197-a700-19126f4c91d2",
                   "type": "text",
-                  "content": "<p><strong>La sensibilité à la casse</strong> </p><p>L’onglet « Options » de la fenêtre de tri, permet de faire des réglages avancés. La case à cocher «Sensible à la casse» permet de prendre en compte ou d’ignorer les majuscules ou les minuscules. <span aria-hidden=\"true\">🔠</span></p>"
+                  "content": "<p><strong>La sensibilité à la casse.</strong> </p><p>L’onglet « Options » de la fenêtre de tri, permet de faire des réglages avancés. La case à cocher «Sensible à la casse» permet de prendre en compte ou d’ignorer les majuscules ou les minuscules. <span aria-hidden=\"true\">🔠</span></p>"
                 },
                 {
                   "id": "37ac6388-e4b2-41ac-af3a-bc1219c0f23c",
