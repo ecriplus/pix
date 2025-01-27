@@ -1,6 +1,5 @@
 import fs from 'node:fs/promises';
 
-import { eventBus } from '../../../../../lib/domain/events/index.js';
 import { scoOrganizationManagementController } from '../../../../../src/prescription/learner-management/application/sco-organization-management-controller.js';
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { OrganizationLearnerParser } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-parser.js';
@@ -28,7 +27,6 @@ describe('Unit | Application | Organizations | organization-controller', functio
       sinon.stub(fs, 'unlink').resolves();
       sinon.stub(usecases, 'uploadSiecleFile');
       sinon.stub(usecases, 'uploadCsvFile');
-      sinon.stub(eventBus, 'publish');
       sinon.stub(ApplicationTransaction, 'execute');
       sinon.stub(ApplicationTransaction, 'getTransactionAsDomainTransaction');
 

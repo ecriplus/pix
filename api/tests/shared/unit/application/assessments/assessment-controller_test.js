@@ -1,4 +1,3 @@
-import * as events from '../../../../../lib/domain/events/index.js';
 import { usecases } from '../../../../../lib/domain/usecases/index.js';
 import { usecases as certificationUsecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { usecases as devcompUsecases } from '../../../../../src/devcomp/domain/usecases/index.js';
@@ -6,6 +5,7 @@ import { usecases as questUsecases } from '../../../../../src/quest/domain/useca
 import { assessmentController } from '../../../../../src/shared/application/assessments/assessment-controller.js';
 import { config } from '../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
+import * as events from '../../../../../src/shared/domain/events/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | assessment-controller', function () {

@@ -1,6 +1,14 @@
-import { Event } from '../../../../lib/domain/events/Event.js';
 import { EventBus } from '../../../../lib/infrastructure/events/EventBus.js';
 import { expect, sinon } from '../../../test-helper.js';
+
+class Event {
+  get attributes() {
+    return {
+      event: this.constructor.name,
+      attributes: { ...this },
+    };
+  }
+}
 
 describe('Unit | Infrastructure | Events | EventBus', function () {
   describe('#publish', function () {

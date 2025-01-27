@@ -1,4 +1,4 @@
-import * as events from '../../../../lib/domain/events/index.js';
+import * as events from '../../../shared/domain/events/index.js';
 import { usecases } from '../domain/usecases/index.js';
 
 const neutralizeChallenge = async function (request, h, dependencies = { events }) {

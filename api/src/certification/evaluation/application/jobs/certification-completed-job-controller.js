@@ -1,7 +1,7 @@
-import * as events from '../../../../../lib/domain/events/index.js';
 import { JobController } from '../../../../shared/application/jobs/job-controller.js';
 import { V3_REPRODUCIBILITY_RATE } from '../../../../shared/domain/constants.js';
 import { CertificationComputeError } from '../../../../shared/domain/errors.js';
+import * as events from '../../../../shared/domain/events/index.js';
 import { AssessmentResult } from '../../../../shared/domain/models/index.js';
 import { AssessmentResultFactory } from '../../../scoring/domain/models/factories/AssessmentResultFactory.js';
 import { assessmentResultRepository } from '../../../session-management/infrastructure/repositories/index.js';

@@ -1,5 +1,5 @@
-import * as events from '../../../../lib/domain/events/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import * as events from '../../../shared/domain/events/index.js';
 import * as certificationReportSerializer from '../../shared/infrastructure/serializers/jsonapi/certification-report-serializer.js';
 import { usecases } from '../domain/usecases/index.js';
 

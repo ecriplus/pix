@@ -1,5 +1,5 @@
-import * as events from '../../../../lib/domain/events/index.js';
-import { usecases as certificationSharedUsecases } from '../../../../src/certification/shared/domain/usecases/index.js';
+import * as events from '../../../shared/domain/events/index.js';
+import { usecases as certificationSharedUsecases } from '../../shared/domain/usecases/index.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as certificationSerializer from '../infrastructure/serializers/certification-serializer.js';
 import * as juryCommentSerializer from '../infrastructure/serializers/jury-comment-serializer.js';

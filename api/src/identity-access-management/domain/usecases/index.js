@@ -1,16 +1,16 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { eventBus } from '../../../../lib/domain/events/index.js';
 import * as userReconciliationService from '../../../../lib/domain/services/user-reconciliation-service.js';
 import { oidcAuthenticationServiceRegistry } from '../../../../lib/domain/usecases/index.js';
-import * as campaignRepository from '../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as centerRepository from '../../../certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as userRecommendedTrainingRepository from '../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
+import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import { repositories as campaignRepositories } from '../../../prescription/campaign/infrastructure/repositories/index.js';
 import * as campaignParticipationRepository from '../../../prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import * as prescriptionOrganizationLearnerRepository from '../../../prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
 import { config } from '../../../shared/config.js';
+import { eventBus } from '../../../shared/domain/events/index.js';
 import { cryptoService } from '../../../shared/domain/services/crypto-service.js';
 import { mailService } from '../../../shared/domain/services/mail-service.js';
 import { tokenService } from '../../../shared/domain/services/token-service.js';

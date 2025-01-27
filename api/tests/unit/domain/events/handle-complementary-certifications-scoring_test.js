@@ -1,7 +1,7 @@
 import range from 'lodash/range.js';
 
-import { _forTestOnly } from '../../../../lib/domain/events/index.js';
 import { ComplementaryCertificationCourseResult } from '../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
+import { _forTestOnly } from '../../../../src/shared/domain/events/index.js';
 import { status as assessmentResultStatuses } from '../../../../src/shared/domain/models/AssessmentResult.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
 
