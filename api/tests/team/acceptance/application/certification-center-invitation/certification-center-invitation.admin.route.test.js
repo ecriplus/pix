@@ -58,6 +58,7 @@ describe('Acceptance | Team | Application | Route | Admin | Certification Center
           attributes: {
             email: 'alex.terieur@example.net',
             role: 'MEMBER',
+            language: 'fr',
             'updated-at': now,
           },
         },
@@ -67,6 +68,7 @@ describe('Acceptance | Team | Application | Route | Admin | Certification Center
           attributes: {
             email: 'sarah.pelle@example.net',
             role: 'ADMIN',
+            language: 'fr',
             'updated-at': now,
           },
         },
@@ -119,6 +121,7 @@ describe('Acceptance | Team | Application | Route | Admin | Certification Center
         'updated-at': now,
         email: 'some.user@example.net',
         role: 'ADMIN',
+        language: 'fr',
       });
     });
   });

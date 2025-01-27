@@ -61,6 +61,7 @@ describe('Acceptance | API | Certification center invitations', function () {
               attributes: {
                 email: updatedCertificationCenterInvitation.email,
                 role: updatedCertificationCenterInvitation.role,
+                language: updatedCertificationCenterInvitation.locale,
                 'updated-at': updatedCertificationCenterInvitation.updatedAt,
               },
             },
