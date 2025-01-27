@@ -8,6 +8,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-an
   let campaignToJoinRepository;
   let userToCreateRepository;
   let tokenService;
+  const audience = 'https://app.pix.fr';
 
   beforeEach(function () {
     campaignCode = 'SIMPLIFIE';
@@ -27,11 +28,12 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-an
   it('creates an anonymous user', async function () {
     // given
     userToCreateRepository.create.resolves({ id: 1 });
-    tokenService.createAccessTokenFromAnonymousUser.returns('access-token');
+    tokenService.createAccessTokenFromAnonymousUser.withArgs({ userId: 1, audience }).returns('access-token');
 
     // when
     await authenticateAnonymousUser({
       campaignCode,
+      audience,
       lang,
       campaignToJoinRepository,
       userToCreateRepository,
@@ -57,11 +59,12 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-an
     const accessToken = 'access.token';
 
     userToCreateRepository.create.resolves({ id: userId });
-    tokenService.createAccessTokenFromAnonymousUser.withArgs(userId).returns(accessToken);
+    tokenService.createAccessTokenFromAnonymousUser.withArgs({ userId, audience }).returns(accessToken);
 
     // when
     const result = await authenticateAnonymousUser({
       campaignCode,
+      audience,
       campaignToJoinRepository,
       userToCreateRepository,
       tokenService,
