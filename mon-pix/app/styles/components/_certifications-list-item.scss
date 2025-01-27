@@ -1,4 +1,6 @@
-@import 'certifications-list';
+@use 'certifications-list';
+@use 'pix-design-tokens/breakpoints';
+
 
 .certifications-list-item {
   padding: 5px;
@@ -11,7 +13,7 @@
   margin-right: 10px;
   margin-bottom: 1px;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     width: 12px;
     margin-bottom: 3px;
   }
@@ -42,7 +44,7 @@
 
   height: 30px;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     height: 60px;
     font-size: 1rem;
   }
@@ -109,7 +111,7 @@
   background: url('/images/background/hexa-pix.svg') no-repeat;
   background-size: cover;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     width: 36px;
     height: 40px;
   }
@@ -123,7 +125,7 @@
     letter-spacing: -1px;
     vertical-align: middle;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       font-weight: 500;
       font-size: 0.875rem;
     }

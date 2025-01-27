@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .element-download {
   &__intro {
     margin-bottom: var(--pix-spacing-2x);

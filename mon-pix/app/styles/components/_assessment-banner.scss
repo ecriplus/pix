@@ -1,3 +1,7 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+@use "pix-design-tokens/colors";
+
 .assessment-banner {
   display: flex;
   align-items: flex-start;
@@ -5,7 +9,7 @@
   width: 100%;
   min-height: 180px;
   color: var(--pix-neutral-0);
-  background: $pix-primary-app-gradient;
+  background: colors.$pix-primary-app-gradient;
   box-shadow: 0 2px 8px 0 rgb(0 0 0 / 10%);
 }
 
@@ -17,7 +21,7 @@
   margin-top: var(--pix-spacing-6x);
   padding: 0 10px;
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     padding: 0;
   }
 }
@@ -27,7 +31,7 @@
 
   margin: 0;
 
-  @include device-is('mobile') {
+  @include breakpoints.device-is('mobile') {
     position: absolute;
     display: block;
     width: 1px;
@@ -39,7 +43,7 @@
     clip: rect(0, 0, 0, 0);
   }
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     font-weight: var(--pix-font-normal);
   }
 }
@@ -54,7 +58,7 @@
   margin: 0 10px;
   background: var(--pix-neutral-20);
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     margin: 0 12px;
   }
 }

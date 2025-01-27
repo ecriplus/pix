@@ -1,10 +1,13 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .account-recovery {
   display: flex;
   min-height: 100vh;
   padding: 30px;
   background-color: var(--pix-neutral-0);
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     padding: 56px 60px;
   }
 
@@ -24,7 +27,7 @@
     flex-direction: column;
     background-color: var(--pix-neutral-0);
 
-    @include device-is('desktop') {
+    @include breakpoints.device-is('desktop') {
       flex: 1 1 0;
       flex-direction: row;
       align-items: center;
@@ -48,7 +51,7 @@
     &--image {
       display: none;
 
-      @include device-is('desktop') {
+      @include breakpoints.device-is('desktop') {
         display: flex;
         flex-basis: 40%;
         justify-content: flex-end;
@@ -63,11 +66,11 @@
     &--step {
       padding-top: 30px;
 
-      @include device-is('tablet') {
+      @include breakpoints.device-is('tablet') {
         max-width: 600px;
       }
 
-      @include device-is('desktop') {
+      @include breakpoints.device-is('desktop') {
         flex-basis: 60%;
         padding-top: 0;
       }
@@ -86,8 +89,8 @@
 
     &--information-text {
       margin: 0;
-      color: var(--pix-neutral-900);
-      font-family: $font-roboto;
+
+      @extend %pix-body-s;
 
       a {
         color: var(--pix-communication-dark);

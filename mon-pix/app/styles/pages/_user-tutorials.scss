@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .user-tutorials-banner__filters {
   display: flex;
   flex-wrap: wrap;
@@ -17,7 +20,7 @@
     margin-bottom: var(--pix-spacing-8x);
     row-gap: var(--pix-spacing-4x);
 
-    @include device-is('desktop') {
+    @include breakpoints.device-is('desktop') {
       grid-template-columns: 1fr 1fr;
       column-gap: var(--pix-spacing-6x);
     }
@@ -28,7 +31,7 @@
     padding: 6rem 0;
     text-align: center;
 
-    @include device-is('desktop') {
+    @include breakpoints.device-is('desktop') {
       display: flex;
       flex-direction: row-reverse;
       gap: 100px;
@@ -50,7 +53,7 @@
     margin-top: var(--pix-spacing-6x);
     color: var(--pix-neutral-900);
 
-    @include device-is('desktop') {
+    @include breakpoints.device-is('desktop') {
       margin-top: 0;
     }
   }

@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+
 .tooltip {
   &__tag {
     position: relative;
@@ -12,7 +15,7 @@
     background-size: contain;
     border: none;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       width: 85px;
       height: 80px;
       margin-top: -25px;
@@ -49,7 +52,7 @@
     border-radius: 15px;
     box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%);
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       top: -60px;
       right: 80px;
     }
@@ -64,7 +67,7 @@
       border-width: 15px;
       content: ' ';
 
-      @include device-is('tablet') {
+      @include breakpoints.device-is('tablet') {
         top: 80px;
       }
     }
@@ -84,7 +87,7 @@
     margin-bottom: 16px;
     font-weight: var(--pix-font-medium);
     font-size: 1.125rem;
-    font-family: $font-roboto;
+    font-family: fonts.$font-roboto;
     line-height: 1rem;
   }
 
@@ -92,7 +95,7 @@
     display: block;
     font-weight: var(--pix-font-normal);
     font-size: 0.875rem;
-    font-family: $font-roboto;
+    font-family: fonts.$font-roboto;
     line-height: 1.375rem;
     letter-spacing: 0;
     text-align: left;

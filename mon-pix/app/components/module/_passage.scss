@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .module-passage {
   max-width: var(--modulix-max-content-width);
   margin: 0 auto;

@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/fonts';
+
 .login-form {
   display: flex;
   flex-direction: column;
@@ -12,7 +14,7 @@
     margin-bottom: 10px;
     color: var(--pix-error-500);
     font-size: 0.75rem;
-    font-family: $font-roboto;
+    font-family: fonts.$font-roboto;
 
     & a {
       text-decoration: underline;

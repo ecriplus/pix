@@ -1,9 +1,12 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+
 .button {
   padding: 5px;
   color: var(--pix-neutral-0);
   font-weight: 500;
   font-size: 1rem;
-  font-family: $font-roboto;
+  font-family: fonts.$font-roboto;
   letter-spacing: 0.012rem;
   text-align: center;
   background-color: var(--pix-primary-500);
@@ -162,7 +165,7 @@
     }
   }
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     padding: 14px 20px;
   }
 }
@@ -191,8 +194,7 @@
 }
 
 .link {
-  // Il nous manque un token bleu pour les liens
-  color: $pix-primary;
+  color: var(--pix-tertiary-500);
   text-decoration: none;
   background-color: inherit;
   border: none;

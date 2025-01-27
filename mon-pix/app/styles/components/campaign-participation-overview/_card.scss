@@ -1,3 +1,7 @@
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/fonts';
+@use 'pix-design-tokens/shadows';
+
 .campaign-participation-overview-card {
   @extend %pix-shadow-xs;
 
@@ -8,7 +12,6 @@
   justify-content: space-between;
   height: 290px;
   padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
-  font-family: $font-roboto;
   background: var(--pix-neutral-0);
   border-radius: 8px;
 
@@ -27,6 +30,8 @@
 
 
   &__content {
+    @extend %pix-body-l;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,9 +39,6 @@
     min-height: 50px;
     max-height: 50px;
     margin-bottom: 12px;
-    color: var(--pix-neutral-800);
-    font-weight: var(--pix-font-medium);
-    font-size: 1.125rem;
     background-color: var(--pix-neutral-20);
     border-radius: 4px;
   }
@@ -52,7 +54,7 @@
   &--archived {
     font-weight: var(--pix-font-normal);
     font-size: 0.75rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
     text-align: center;
   }
 }

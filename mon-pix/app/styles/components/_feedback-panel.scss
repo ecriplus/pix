@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 .feedback-panel {
   z-index: 1;
   padding: 0 var(--pix-spacing-4x);
@@ -103,7 +106,7 @@
       max-width: 100%;
     }
 
-    @include device-is('mobile') {
+    @include breakpoints.device-is('mobile') {
       width: auto;
     }
   }

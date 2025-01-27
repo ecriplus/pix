@@ -1,8 +1,10 @@
+@use "pix-design-tokens/colors";
+
 .background-banner {
   width: 100%;
   min-height: 270px;
   color: var(--pix-neutral-0);
-  background: $pix-primary-app-gradient;
+  background: colors.$pix-primary-app-gradient;
   box-shadow: 0 2px 8px 0 rgb(0 0 0 / 10%);
 }
 

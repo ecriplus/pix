@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/breakpoints';
+
 .authentication-layout {
   width: 100%;
   min-height: 100vh;
@@ -15,7 +17,7 @@
   }
 }
 
-@include device-is('tablet'){
+@include breakpoints.device-is('tablet'){
   .authentication-layout {
     .authentication-layout__main {
       width: 70%;
@@ -24,7 +26,7 @@
   }
 }
 
-@include device-is('desktop') {
+@include breakpoints.device-is('desktop') {
   .authentication-layout {
       display: grid;
       grid-template-columns: repeat(12, minmax(0, 1fr));

@@ -1,3 +1,7 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/fonts';
+
 .comparison-window {
   width: calc(100% - 1rem);
   max-width: 990px;
@@ -37,7 +41,7 @@
     border: 1.3px dashed var(--pix-neutral-500);
     border-radius: 5px;
 
-    @include device-is('desktop') {
+    @include breakpoints.device-is('desktop') {
       margin: 0 40px 20px;
     }
   }
@@ -49,10 +53,10 @@
     color: var(--pix-neutral-900);
     font-weight: var(--pix-font-medium);
     font-size: 1.063rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
     text-align: center;
 
-    @include device-is('desktop') {
+    @include breakpoints.device-is('desktop') {
       line-height: 26px;
     }
   }

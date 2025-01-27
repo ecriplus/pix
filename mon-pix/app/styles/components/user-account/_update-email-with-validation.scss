@@ -1,8 +1,11 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+
 .update-email-with-validation {
   display: flex;
   flex-direction: column;
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     padding: 10px 0;
   }
 
@@ -12,7 +15,7 @@
     flex-direction: column;
     max-width: 260px;
 
-    @include device-is('mobile') {
+    @include breakpoints.device-is('mobile') {
       max-width: 100%;
     }
   }
@@ -29,11 +32,11 @@
     padding: 32px 0 16px;
     color: var(--pix-neutral-800);
     font-size: 0.875rem;
-    font-family: $font-roboto;
+    font-family: fonts.$font-roboto;
     line-height: 1.5rem;
     border-top: 1px solid var(--pix-neutral-20);
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       margin-right: 8px;
       line-height: 1.2rem;
       letter-spacing: 0.13px;
@@ -52,7 +55,7 @@
       margin-left: 24px;
     }
 
-    @include device-is('mobile') {
+    @include breakpoints.device-is('mobile') {
       flex-direction: column-reverse;
 
       button:last-child {

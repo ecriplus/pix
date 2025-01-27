@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/fonts';
+
 .assessment-results {
   display: flex;
   flex-direction: column;
@@ -31,7 +33,7 @@
 .assessment-results__title {
   margin: 0 0 30px;
   font-weight: var(--pix-font-medium);
-  font-family: $font-open-sans;
+  font-family: fonts.$font-open-sans;
   text-transform: uppercase;
 }
 
@@ -59,7 +61,7 @@
   color: var(--pix-neutral-0);
   font-weight: var(--pix-font-medium);
   font-size: 1rem;
-  font-family: $font-open-sans;
+  font-family: fonts.$font-open-sans;
   text-align: center;
   text-transform: uppercase;
 }

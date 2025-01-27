@@ -3,13 +3,15 @@
 /* Rule added because of linter and DOM checking limitations */
 
 /* See https://stylelint.io/user-guide/rules/list/no-descending-specificity/#dom-limitations for further detail */
+@use 'pix-design-tokens/breakpoints';
+@use '../globals/a11y' as *;
 
 .qcu-solution-panel {
   a {
     color: var(--pix-primary-500);
     text-decoration: underline;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       display: inline-block;
     }
 

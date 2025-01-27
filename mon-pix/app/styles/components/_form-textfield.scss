@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/breakpoints';
+
 /* stylelint-disable no-descending-specificity */
 
 .form-textfield {
@@ -39,7 +41,7 @@
     border: 2px solid var(--pix-primary-500);
   }
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     height: 50px;
   }
 }

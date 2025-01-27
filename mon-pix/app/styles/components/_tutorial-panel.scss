@@ -1,3 +1,7 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+@use '../globals/text' as *;
+
 .tutorial-panel {
   display: flex;
   flex-direction: column;
@@ -11,7 +15,7 @@
   margin-bottom: 10px;
   padding: 20px 0 40px;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     flex-direction: row;
   }
 }
@@ -48,7 +52,7 @@
 
 .tutorial-panel__hint-content {
   font-size: 1.125rem;
-  font-family: $font-open-sans;
+  font-family: fonts.$font-open-sans;
 
   ul,
   ol {

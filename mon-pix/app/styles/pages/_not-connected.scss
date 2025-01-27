@@ -1,9 +1,12 @@
+@use 'pix-design-tokens/breakpoints';
+@use "pix-design-tokens/colors";
+
 .not-connected {
   height: 100vh;
   padding-top: 5%;
-  background: $pix-primary-app-gradient;
+  background: colors.$pix-primary-app-gradient;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     padding-right: 20%;
     padding-left: 20%;
   }

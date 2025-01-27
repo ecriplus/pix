@@ -1,4 +1,8 @@
-@import 'challenge-embed-simulator';
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/fonts';
+@use 'challenge-embed-simulator';
+@use '../globals/a11y' as *;
 
 .challenge-statement {
   /* XXX required to let "help tooltip" displaying well even if instruction section is short (1 line) */
@@ -10,14 +14,14 @@
   justify-content: space-between;
   margin: 20px 20px 16px;
   font-size: 0.938rem;
-  font-family: $font-open-sans;
+  font-family: fonts.$font-open-sans;
 
   hr {
     border-top: 1px solid var(--pix-neutral-20);
     border-bottom: none;
   }
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     font-size: 1.25rem;
   }
 }
@@ -72,7 +76,7 @@
       color: var(--pix-primary-500);
       text-decoration: underline;
 
-      @include device-is('tablet') {
+      @include breakpoints.device-is('tablet') {
         display: inline-block;
       }
 

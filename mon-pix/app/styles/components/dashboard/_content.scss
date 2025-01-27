@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
 @mixin add-dashboard-content-separator() {
   padding: var(--pix-spacing-8x) 0;
   border-bottom: 1px solid var(--pix-neutral-20);
@@ -42,7 +45,7 @@
     grid-area: certif;
   }
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     grid-template-areas:
       'banner banner banner banner banner banner'
       'score score score certif certif certif'
@@ -81,7 +84,7 @@
     }
   }
 
-  @include device-is('large-screen') {
+  @include breakpoints.device-is('large-screen') {
     grid-template-areas:
       'main main main score'
       'main main main certif'
@@ -140,7 +143,7 @@
     border-radius: 10px;
     box-shadow: 0 1px 0 0 rgb(23 43 77 / 12%);
 
-    @include device-is('large-screen') {
+    @include breakpoints.device-is('large-screen') {
       margin-left: 34px;
       font-size: 0.8125rem;
     }
@@ -200,7 +203,7 @@
   &__button {
     display: none;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       display: block;
     }
   }

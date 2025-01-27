@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/breakpoints';
+
 .personal-information-item {
   display: flex;
   align-content: flex-start;
@@ -32,7 +34,7 @@
   }
 }
 
-@include device-is('mobile') {
+@include breakpoints.device-is('mobile') {
   .personal-information {
     padding: 0;
   }

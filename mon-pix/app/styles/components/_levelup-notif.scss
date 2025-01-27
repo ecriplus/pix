@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+
 .levelup {
   position: fixed;
   top: 10px;
@@ -16,7 +19,7 @@
   animation-duration: 1s;
   user-select: none;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     width: 362px;
   }
 
@@ -30,7 +33,7 @@
     left: 45px;
     font-weight: var(--pix-font-bold);
     font-size: 1.5rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
   }
 
   &__competence {
@@ -69,20 +72,20 @@
     margin-bottom: 2px;
     font-weight: var(--pix-font-bold);
     font-size: 1rem;
-    font-family: $font-open-sans;
+    font-family: fonts.$font-open-sans;
     text-transform: uppercase;
 
-    @include device-is('mobile') {
+    @include breakpoints.device-is('mobile') {
       font-size: 0.875rem;
     }
   }
 
   &__name {
     font-size: 0.875rem;
-    font-family: $font-roboto;
+    font-family: fonts.$font-roboto;
     line-height: 1.125rem;
 
-    @include device-is('mobile') {
+    @include breakpoints.device-is('mobile') {
       font-size: 0.813rem;
     }
   }

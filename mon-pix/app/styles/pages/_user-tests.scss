@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+
 .user-tests__header {
   padding-top: 0;
 }
@@ -10,31 +13,30 @@
   width: 100%;
   max-width: 980px;
   height: 270px;
-  margin: auto;
-  margin-bottom: 16px;
+  margin: auto auto 16px;
   padding: 0 20px;
-  font-family: $font-roboto;
+  font-family: fonts.$font-roboto;
   text-align: center;
 
-  @include device-is('tablet') {
+  @include breakpoints.device-is('tablet') {
     text-align: left;
   }
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     padding: 0;
   }
 
   &__icon {
     display: none;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       position: absolute;
       right: 50px;
       bottom: 0;
       display: block;
     }
 
-    @include device-is('desktop') {
+    @include breakpoints.device-is('desktop') {
       right: 70px;
     }
   }
@@ -53,9 +55,9 @@
   max-width: 980px;
   margin: auto;
   padding: 0 20px;
-  font-family: $font-roboto;
+  font-family: fonts.$font-roboto;
 
-  @include device-is('desktop') {
+  @include breakpoints.device-is('desktop') {
     padding: 0;
   }
 }

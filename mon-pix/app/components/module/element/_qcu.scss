@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .element-qcu {
   &__instruction {
     margin-bottom: var(--pix-spacing-2x);

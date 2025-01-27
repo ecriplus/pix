@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/typography';
+
 .evaluation-results {
   min-height: 100dvh;
   padding: var(--pix-spacing-12x) var(--pix-spacing-4x);

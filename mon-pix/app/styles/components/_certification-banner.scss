@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/colors';
+
 .blur-banner {
   filter: blur(30px);
 }
@@ -10,12 +13,12 @@
     width: 100%;
     height: 270px;
     color: var(--pix-neutral-0);
-    background: $pix-primary-certif-gradient;
+    background: colors.$pix-primary-certif-gradient;
     box-shadow: 0 2px 8px 0 rgb(0 0 0 / 10%);
   }
 }
 
-@include device-is('tablet') {
+@include breakpoints.device-is('tablet') {
   .assessment-banner {
     &__title {
       display: block;

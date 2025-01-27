@@ -1,3 +1,7 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/fonts';
+@use '../globals/a11y' as *;
+
 .tutorial-item {
   margin-bottom: 24px;
   border-bottom: 1px solid var(--pix-neutral-20);
@@ -30,7 +34,7 @@
     line-height: 1.875rem;
     letter-spacing: 0;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       font-weight: var(--pix-font-medium);
     }
 
@@ -44,7 +48,7 @@
     color: var(--pix-neutral-100);
     font-weight: var(--pix-font-normal);
     font-size: 0.875rem;
-    font-family: $font-roboto;
+    font-family: fonts.$font-roboto;
     line-height: 1.5rem;
 
     .tutorial-content__format {

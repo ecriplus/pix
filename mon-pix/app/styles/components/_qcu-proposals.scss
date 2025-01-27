@@ -1,9 +1,12 @@
+@use 'pix-design-tokens/breakpoints';
+@use '../globals/a11y' as *;
+
 .qcu-proposals {
   a {
     color: var(--pix-primary-500);
     text-decoration: underline;
 
-    @include device-is('tablet') {
+    @include breakpoints.device-is('tablet') {
       display: inline-block;
     }
 

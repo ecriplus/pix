@@ -1,3 +1,6 @@
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/shadows';
+
 .module-details {
   margin: 0 auto;
   padding-bottom: var(--pix-spacing-12x);
