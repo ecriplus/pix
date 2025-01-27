@@ -52,9 +52,4 @@ const getRecentlyUsedTags = async function ({ tagId, numberOfRecentTags }) {
   return tags.map(({ tagId: id, name }) => new Tag({ id, name }));
 };
 
-const deleteTagsByOrganizationId = async function (organizationId) {
-  const knexConn = DomainTransaction.getConnection();
-  await knexConn('organization-tags').where({ organizationId }).delete();
-};
-
-export { batchCreate, create, deleteTagsByOrganizationId, getRecentlyUsedTags, isExistingByOrganizationIdAndTagId };
+export { batchCreate, create, getRecentlyUsedTags, isExistingByOrganizationIdAndTagId };
