@@ -1675,6 +1675,8 @@
       "email-requirement": "Saisissez ici l'adresse e-mail du membre que vous souhaitez inviter.",
       "errors": {
         "default": "Le service est momentanément indisponible. Veuillez réessayer ultérieurement.",
+        "invalid-input": "Les données que vous avez soumises ne sont pas au bon format",
+        "mandatory-email-field": "Ce champ est obligatoire",
         "sending-email-to-invalid-email-address": "L'envoi d'e-mail pour l'adresse {email} a échoué. Le serveur d'envoi a répondu : \"{errorMessage}\"",
         "status": {
           "400": "Le format de l'adresse e-mail est incorrect.",
@@ -1682,6 +1684,12 @@
           "412": "Ce membre a déjà été ajouté.",
           "500": "Quelque chose s'est mal passé. Veuillez réessayer."
         }
+      },
+      "invite-form-modal": {
+        "confirm": "Valider",
+        "question": "Voulez-vous continuer ? ",
+        "title": "Confirmer l’ajout de nouveaux membres dans l'équipe",
+        "warning": "Les membres que vous ajoutez auront accès aux résultats des participants et à l’analyse des campagnes."
       },
       "invited-members": "À la réception de l'e-mail, les invités pourront choisir de se créer un compte Pix ou de se connecter avec un compte Pix existant.",
       "several-email-requirement": "Vous pouvez inviter plusieurs membres en séparant les adresses e-mails par des virgules.",

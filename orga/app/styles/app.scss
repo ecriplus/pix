@@ -40,6 +40,7 @@
 @use 'components/progress-bar' as *;
 @use 'components/register-form' as *;
 @use 'components/team' as *;
+@use 'components/team/invite-form' as *;
 @use 'components/login-or-register' as *;
 @use 'components/manage-authentication-method-modal' as *;
 @use 'components/participation-filters' as *;

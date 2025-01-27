@@ -31,4 +31,5 @@ When(`j'invite {string} à rejoindre l'organisation`, (emailAddresses) => {
     .parent()
     .within(() => cy.get("textarea").type(emailAddresses));
   cy.get("button").contains("Inviter").click();
+  cy.get("button").contains("Valider").click();
 });
