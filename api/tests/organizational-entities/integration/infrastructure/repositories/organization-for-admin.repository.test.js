@@ -869,22 +869,4 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       expect(nbOrganizationsAfterUpdate).to.equal(nbOrganizationsBeforeUpdate);
     });
   });
-
-  describe('#deleteById', function () {
-    it('deletes organization by id', async function () {
-      // given
-      const organization = databaseBuilder.factory.buildOrganization();
-      const organization2 = databaseBuilder.factory.buildOrganization();
-      await databaseBuilder.commit();
-
-      // when
-      await organizationForAdminRepository.deleteById(organization.id);
-
-      // then
-      const organizationDeleted = await knex('organizations').where({ id: organization.id });
-      expect(organizationDeleted).to.have.lengthOf(0);
-      const organizationNotDeleted = await knex('organizations').where({ id: organization2.id });
-      expect(organizationNotDeleted).to.have.lengthOf(1);
-    });
-  });
 });
