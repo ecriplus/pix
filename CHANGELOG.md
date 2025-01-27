@@ -1,5 +1,18 @@
 # Pix Changelog
 
+## v5.27.0 (27/01/2025)
+
+
+### :rocket: Amélioration
+- [#11201](https://github.com/1024pix/pix/pull/11201) [FEATURE] Ajouter une modale de confirmation des invitations sur Pix Orga (pix-14535).
+
+### :building_construction: Tech
+- [#11226](https://github.com/1024pix/pix/pull/11226) [TECH] Retirer le script de suppression en masse d'organisations (PIX-16269).
+
+### :bug: Correction
+- [#11232](https://github.com/1024pix/pix/pull/11232) [BUGFIX] Autoriser un temps de réponse plus long pour le ping Companion (PIX-16287).
+- [#11225](https://github.com/1024pix/pix/pull/11225) [BUGFIX] Afficher les webcomponent sur 60% de la largeur quand ils sont en colonne.
+
 ## v5.26.0 (27/01/2025)
 
 
