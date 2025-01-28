@@ -79,7 +79,7 @@
             "instruction": "<p>Utilisez votre clavier pour taper «&nbsp;voilà le zèbre déçu&nbsp;» dans la zone de texte ci-dessous :</p>",
             "proposals": [
               {
-                "input": "",
+                "input": "zebre-decu",
                 "type": "input",
                 "inputType": "text",
                 "size": 24,
@@ -88,8 +88,7 @@
                 "ariaLabel": "zone de saisie",
                 "defaultValue": "",
                 "tolerances": [
-                  "t1",
-                  "t2"
+                  "t1"
                 ],
                 "solutions": [
                   "voilà le zèbre déçu",
@@ -320,13 +319,13 @@
             "instruction": "<p>Recopiez la phrase ci-dessus dans la zone de texte :</p>",
             "proposals": [
               {
-                "input": "",
+                "input": "pommes-la",
                 "type": "input",
                 "inputType": "text",
-                "size": 0,
+                "size": 50,
                 "display": "inline",
                 "placeholder": "recopiez la phrase ",
-                "ariaLabel": "50",
+                "ariaLabel": "zone de saisie",
                 "defaultValue": "",
                 "tolerances": [
                   "t1"
@@ -438,10 +437,10 @@
             "type": "embed",
             "isCompletionRequired": true,
             "title": "Formulaire",
-            "url": "",
+            "url": "https://epreuves.pix.fr/visio/visio.html?mode=modulix-didacticiel",
             "instruction": "<p>Remplissez le formulaire ci-dessous avec les informations concernant Jean-Tobias.</p>",
-            "solution": "",
-            "height": 0
+            "solution": "toto",
+            "height": 600
           }
         }
       ]
