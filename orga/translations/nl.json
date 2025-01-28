@@ -313,17 +313,17 @@
     },
     "terms-of-service": {
       "actions": {
-        "accept": "Accept and continue",
-        "document-link": "Read terms of service",
-        "reject": "Decline and quit"
+        "accept": "Accepteren en doorgaan",
+        "document-link": "Gebruiksvoorwaarden lezen",
+        "reject": "Weigeren en stoppen"
       },
       "message": {
-        "requested": "To continue using Pix, please read and accept our Terms of service.",
-        "update-requested": "We have updated our Terms of service. Please review the changes and accept them to continue."
+        "requested": "Lees en accepteer onze servicevoorwaarden om Pix te blijven gebruiken.",
+        "update-requested": "We hebben onze Servicevoorwaarden bijgewerkt. Bekijk de wijzigingen en accepteer ze om verder te gaan."
       },
       "title": {
-        "requested": "Please accept our Terms of service",
-        "update-requested": "Important update to the Terms of service"
+        "requested": "Accepteer onze servicevoorwaarden",
+        "update-requested": "Belangrijke update van de servicevoorwaarden"
       }
     },
     "ui": {
