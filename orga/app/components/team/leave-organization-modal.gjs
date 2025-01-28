@@ -1,0 +1,34 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import { t } from 'ember-intl';
+
+<template>
+  <PixModal
+    @title="{{t 'pages.team-members.modals.leave-organization.title'}}"
+    @showModal={{@isOpen}}
+    @onCloseButtonClick={{@onClose}}
+  >
+    <:content>
+      <p class="leave-organization-modal">
+        {{t "pages.team-members.modals.leave-organization.message" organizationName=@organizationName htmlSafe=true}}
+      </p>
+    </:content>
+    <:footer>
+      <div class="leave-organization-modal__action-buttons--container">
+        <ul class="leave-organization-modal__action-buttons--list">
+          <li>
+            <PixButton @triggerAction={{@onClose}} @variant="tertiary">
+              {{t "common.actions.cancel"}}
+            </PixButton>
+          </li>
+
+          <li>
+            <PixButton @triggerAction={{@onSubmit}} @variant="error">
+              {{t "common.actions.confirm"}}
+            </PixButton>
+          </li>
+        </ul>
+      </div>
+    </:footer>
+  </PixModal>
+</template>
