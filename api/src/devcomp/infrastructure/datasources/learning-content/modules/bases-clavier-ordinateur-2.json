@@ -5,12 +5,12 @@
   "isBeta": false,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>Pour taper certains caractères, il suffit d’appuyer une fois sur une touche. Pour d’autres c’est un peu plus compliqué ! <br>Dans ce module vous allez apprendre à taper des caractères qui nécessitent d’appuyer sur deux touches en même temps : les majuscules ou la ponctuation par exemple.</p>",
+    "description": "<p>Pour taper certains caractères, il suffit d’appuyer une fois sur une touche. Pour d’autres c’est un peu plus compliqué ! <br>Dans ce module, vous apprendrez à taper des caractères en appuyant sur deux touches en même temps : les majuscules ou la ponctuation par exemple.</p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
       "<p>Taper du texte comprenant des majuscules, chiffres et caractères spéciaux</p>",
-      "<p>Comprendre la place des caractères (symboles) sur les touches</p>",
+      "<p>Comprendre la place des caractères sur les touches</p>",
       "<p>Taper des caractères qui nécessitent d'utiliser plusieurs touches</p>"
     ],
     "tabletSupport": "inconvenient"
@@ -50,11 +50,11 @@
     },
     {
       "grainId": "bf9b4d7e-5d6a-4fc9-9f63-0bfc71d18982",
-      "content": "<p>Voyons si vous avez retenu l’essentiel. 🎯</p>"
+      "content": "<p>Résumons l'essentiel. 🎯</p>"
     },
     {
       "grainId": "5ddc7207-feb0-494f-b32b-a33eb162e5f3",
-      "content": "<p>Si vous voulez explorer les différentes touches, testez-vous dans ce mini-jeu.</p>"
+      "content": "<p>Pour explorer les différentes touches, testez-vous dans ce mini-jeu.</p>"
     }
   ],
   "grains": [
@@ -98,7 +98,7 @@
             ],
             "feedbacks": {
               "valid": "<p>Bonne réponse ! 🎉<br>Bravo ! 🦓 Vous savez utiliser le clavier pour taper des lettres, des espaces et des caractères accentués.</p>",
-              "invalid": "<p>Mauvaise réponse. </p><p>Pour retrouver les caractères dont vous avez besoin, vous pouvez utiliser les indices. N’hésitez pas à réessayer.<br><br></p>"
+              "invalid": "<p>Mauvaise réponse. </p><p>Pour retrouver les caractères dont vous avez besoin, vous pouvez utiliser les indices. N’hésitez pas à réessayer.</p>"
             }
           }
         },
@@ -125,7 +125,7 @@
             "id": "8c18c2f0-b9f0-4ca6-8a77-92fb0604dbb9",
             "type": "expand",
             "title": "Indice 2",
-            "content": "<p>Les touches nécessaires pour écrire la phrase sont en couleur dans l’image ci-dessous.</p><p><br></p><p>IMAGE A INSERER</p>"
+            "content": "<p>Les touches nécessaires pour écrire la phrase sont indiquées dans l’image ci-dessous.</p><p>IMAGE A INSERER</p>"
           }
         }
       ]
@@ -167,7 +167,7 @@
           "element": {
             "id": "6764fe09-6a2f-47a1-b368-f9083a9e0a26",
             "type": "text",
-            "content": "<p>La <strong>touche majuscule ⇧</strong> du clavier permet de faire apparaître des lettres majuscules.</p>\n<p><br></p>\n<p>🤔<strong>Le saviez-vous ?</strong><br>Sur la touche majuscule ⇧ il y a souvent une flèche vers le haut. Dites vous que c’est la touche qui fait grandir les lettres.</p>"
+            "content": "<p>La <strong>touche majuscule ⇧</strong> du clavier permet de taper des lettres majuscules.</p><p><br></p><p>🤔<strong>Le saviez-vous ?</strong><br>Sur la touche majuscule ⇧ il y a souvent une flèche vers le haut. On peut dire que c’est la touche qui fait grandir les lettres.</p>"
           }
         },
         {
@@ -182,7 +182,7 @@
           "element": {
             "id": "00987892-9248-401d-94a2-f9418c8ff5e6",
             "type": "text",
-            "content": "<p>Par exemple, pour taper un P, restez appuyé sur la touche majuscule ⇧ et appuyez brièvement sur la touche P.</p>\n<p><br>Dès que vous relâchez la touche majuscule ⇧, les lettres que vous tapez sont minuscules.</p>"
+            "content": "<p>Par exemple, pour taper un P, gardez un doigt appuyé sur la <strong>touche majuscule ⇧</strong> et appuyez brièvement sur la touche P avec un autre doigt.</p><p><br>Dès que vous relâchez la touche majuscule ⇧, les lettres que vous tapez sont en minuscules.</p>"
           }
         },
         {
@@ -202,7 +202,7 @@
           "element": {
             "id": "04fe4d77-15c4-475d-915f-ba04f69f9674",
             "type": "text",
-            "content": "<p>💡<strong> Astuce</strong><br>Pour taper plusieurs majuscules, restez appuyé sur la touche majuscule ⇧ et tapez la première lettre, puis la deuxième, etc.</p>"
+            "content": "<p>💡<strong> Astuce</strong><br>Pour taper plusieurs majuscules à la suite, restez appuyé sur la touche majuscule ⇧ et tapez la première lettre, puis la deuxième, etc.</p>"
           }
         }
       ]
@@ -240,7 +240,7 @@
           "element": {
             "id": "422c00a6-3220-4e15-9f2b-f045298eaf0c",
             "type": "text",
-            "content": "<p>Sur les touches lettres, il n’y a qu’un seul caractère.&nbsp; Sur les touches de la zone «&nbsp;Chiffres, caractères spéciaux et accents&nbsp;», il peut y avoir jusqu’à 3 caractères.</p><p>La<strong> touche majuscule ⇧</strong>&nbsp; permet de faire apparaître le <strong>caractère situé en haut des touches</strong>.</p>"
+            "content": "<p>Sur certaines touches, il n’y a qu’un seul caractère. <br>Sur d’autres touches, il peut y avoir 2 ou même 3 caractères. <br>La<strong> touche majuscule ⇧</strong>&nbsp; permet de taper le <strong>caractère situé en haut des touches</strong>.</p>"
           }
         },
         {
@@ -289,7 +289,7 @@
             "id": "863077ce-8e5e-438a-b82f-2b4afc723ef0",
             "type": "expand",
             "title": "🤔Bon à savoir",
-            "content": "<p>Certains claviers ont un pavé numérique à droite des flèches directionnelles, c'est-à-dire des touches supplémentaires avec tous les chiffres. Vous pouvez l’utiliser pour taper les chiffres sans utiliser la touche majuscule.</p><p><br></p><p>IMAGE&nbsp;A INSERER</p>"
+            "content": "<p>Certains claviers ont un pavé numérique à droite des flèches directionnelles. Le pavé numérique contient des touches supplémentaires avec tous les chiffres. Vous pouvez l’utiliser pour taper les chiffres sans utiliser la touche majuscule.</p><p>IMAGE A INSERER</p>"
           }
         }
       ]
@@ -305,8 +305,8 @@
             "id": "425252e0-7cf9-4031-8e28-6079d0d147a7",
             "type": "image",
             "url": "https://i.imgur.com/EA43mrF.png",
-            "alt": "la phrase \"Coucou, peux-tu mettre ces 3 pommes là ?\" est écrite",
-            "alternativeText": "<p>Coucou, peux-tu mettre ces 3 pommes là ?</p>",
+            "alt": "la phrase \"Coucou, peux-tu mettre ces 3 pommes à cet endroit ?\" est écrite",
+            "alternativeText": "<p>Coucou, peux-tu mettre ces 3 pommes à cet endroit ?</p>",
             "legend": "",
             "licence": ""
           }
@@ -331,13 +331,13 @@
                   "t1"
                 ],
                 "solutions": [
-                  "Coucou, peux-tu mettre ces 3 pommes là ?"
+                  "Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"
                 ]
               }
             ],
             "feedbacks": {
-              "valid": "<p>Bonne réponse ! 🍏🍏🍏 </p><p>Bravo, vous maîtrisez la touche majuscule ⇧.<br><br></p>",
-              "invalid": "<p>Mauvaise réponse.&nbsp;🍎🍎🍎</p><p>Pour taper les caractères spéciaux, faites bien attention à leur position sur la touche.<br><br></p>"
+              "valid": "<p>Bonne réponse ! 🍏🍏🍏 </p><p>Bravo, vous maîtrisez la touche majuscule ⇧.</p>",
+              "invalid": "<p>Mauvaise réponse.&nbsp;🍎🍎🍎</p><p>Pour taper les caractères spéciaux, faites bien attention à leur position sur la touche. Elle vous indique si vous avez besoin d’utiliser la touche majuscule ⇧.</p>"
             }
           }
         }
