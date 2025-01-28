@@ -1303,8 +1303,6 @@
         "missing-code": "Por favor, introduce un código.",
         "not-found": "Tu código es incorrecto, comprueba el formato (por ejemplo, ABCDEF234) o ponte en contacto con el organizador."
       },
-      "explanation-link": "https://support.pix.org/fr/support/solutions/articles/15000029147-qu-est-ce-qu-un-code-parcours-et-comment-l-utiliser-",
-      "explanation-message": "¿Qué es un código de test y cómo se utiliza?",
       "first-title-connected": "{ firstName }, introduce tu código",
       "first-title-not-connected": "Introduce tu código",
       "label": "Introducir tu código para empezar.",

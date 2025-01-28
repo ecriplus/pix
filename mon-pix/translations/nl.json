@@ -1303,8 +1303,6 @@
         "missing-code": "Voer een code in.",
         "not-found": "Je code is verkeerd, controleer de indeling (bijv. ABCDEF234) of neem contact op met de organisator."
       },
-      "explanation-link": "https://pix.org/nl-be/wat-is-een-code-en-hoe-gebruik-je-die",
-      "explanation-message": "Wat is een routecode en hoe gebruik je die?",
       "first-title-connected": "{ firstName }, voer uw code in",
       "first-title-not-connected": "Voer uw code in",
       "label": "Voer je code in om te beginnen.",
