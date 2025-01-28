@@ -125,7 +125,7 @@
             "id": "8c18c2f0-b9f0-4ca6-8a77-92fb0604dbb9",
             "type": "expand",
             "title": "Indice 2",
-            "content": "<p>Les touches nécessaires pour écrire la phrase sont indiquées dans l’image ci-dessous.</p><p>IMAGE A INSERER</p>"
+            "content": "<p>Les touches nécessaires pour écrire la phrase sont indiquées dans l’image ci-dessous.</p><iframe width=\"700\" height=\"410\" src=\"https://i.imgur.com/3W5sRR5.png" title=\"Touches essentielles du clavier\"></iframe>"
           }
         }
       ]
@@ -192,7 +192,7 @@
             "type": "image",
             "url": "https://i.imgur.com/S7d0o1u.jpeg",
             "alt": "Dessin d'un clavier, une main appuie sur majuscule, l'autre main appuie sur le touche P.",
-            "alternativeText": "<p><br></p>",
+            "alternativeText": "",
             "legend": "",
             "licence": ""
           }
@@ -248,7 +248,7 @@
           "element": {
             "id": "8825fd1b-f7d3-4ace-bf5e-8637f8c308e4",
             "type": "image",
-            "url": "https://i.imgur.com/4legaCD.png",
+            "url": "https://i.imgur.com/BL4JEYa.jpeg",
             "alt": "Schéma d'une touche comportant deux caractères. ",
             "alternativeText": "<ul><li>Quand on appuie sur cette touche en appuyant en même temps sur la touche Majuscule, c'est le 1 (qui est présent en haut de la touche) qui est tapé à l'écran.</li><li>Quand on appuie seulement sur cette touche, c'est le &amp; (qui est présent en bas de la touche) qui est tapé à l'écran.</li></ul>",
             "legend": "",
@@ -281,7 +281,7 @@
             "id": "863077ce-8e5e-438a-b82f-2b4afc723ef0",
             "type": "expand",
             "title": "🤔 Bon à savoir",
-            "content": "<p>Certains claviers ont un pavé numérique à droite des flèches directionnelles. Le pavé numérique contient des touches supplémentaires avec tous les chiffres. Vous pouvez l’utiliser pour taper les chiffres sans utiliser la touche majuscule.</p><p>IMAGE A INSERER</p>"
+            "content": "<p>Certains claviers ont un pavé numérique à droite des flèches directionnelles. Le pavé numérique contient des touches supplémentaires avec tous les chiffres. Vous pouvez l’utiliser pour taper les chiffres sans utiliser la touche majuscule.</p><iframe width=\"700\" height=\"410\" src=\"https://i.imgur.com/THGUtEa.jpeg" title=\"Clavier comprenant un pavé numérique\"></iframe>"
           }
         }
       ]
@@ -296,7 +296,7 @@
           "element": {
             "id": "425252e0-7cf9-4031-8e28-6079d0d147a7",
             "type": "image",
-            "url": "https://i.imgur.com/EA43mrF.png",
+            "url": "https://i.imgur.com/CqlU8D0.jpeg",
             "alt": "la phrase \"Coucou, peux-tu mettre ces 3 pommes à cet endroit ?\" est écrite",
             "alternativeText": "<p>Coucou, peux-tu mettre ces 3 pommes à cet endroit ?</p>",
             "legend": "",
@@ -347,7 +347,7 @@
             "type": "image",
             "url": "https://i.imgur.com/dcAPp7x.png",
             "alt": "",
-            "alternativeText": "<p><br></p>",
+            "alternativeText": "",
             "legend": "",
             "licence": ""
           }
@@ -365,9 +365,9 @@
           "element": {
             "id": "6c7f82e6-5630-4f60-bf6d-a5509e1247ca",
             "type": "image",
-            "url": "https://i.imgur.com/Dbeol2N.jpeg",
+            "url": "https://i.imgur.com/PwfPqUJ.jpeg",
             "alt": "",
-            "alternativeText": "<p><br></p>",
+            "alternativeText": "",
             "legend": "",
             "licence": ""
           }
@@ -455,7 +455,7 @@
           "element": {
             "id": "c90b7a08-fbc8-4f6a-bd94-8bab7e5a809e",
             "type": "image",
-            "url": "https://i.imgur.com/yaRJzWK.png",
+            "url": "https://i.imgur.com/ta6lSjJ.jpeg",
             "alt": "",
             "alternativeText": "<ul><li>Pour taper un caractère en haut de la touche, il faut appuyer sur la touche majuscule ⇧ en même temps que la touche du caractère.</li><li>Pour taper un caractère en bas à gauche de la touche, il faut uniquement appuyer sur la touche du caractère.</li><li>Pour taper un caractère en bas à droite de la touche,&nbsp; il faut appuyer sur la touche Alt Gr en même temps que la touche du caractère.</li><li>Pour taper une majuscule, il faut appuyer sur la touche majuscule ⇧ en même temps que la touche lettre.</li></ul>",
             "legend": "",
