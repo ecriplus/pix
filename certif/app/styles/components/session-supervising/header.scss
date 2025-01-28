@@ -6,7 +6,7 @@
   padding: 16px;
 
   @include breakpoints.device-is("tablet") {
-    padding: 40px 48px;
+    padding: var(--pix-spacing-10x) var(--pix-spacing-12x) var(--pix-spacing-8x) var(--pix-spacing-12x);
   }
 
   @include breakpoints.device-is("desktop") {
@@ -70,6 +70,16 @@
       width: 1rem;
       height: 1rem;
       fill: var(--pix-primary-500);
+    }
+  }
+
+  &__download-button {
+    margin-top: var(--pix-spacing-3x);
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+      margin-right: var(--pix-spacing-1x);
     }
   }
 }

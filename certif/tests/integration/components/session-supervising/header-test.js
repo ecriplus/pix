@@ -53,6 +53,8 @@ module('Integration | Component | SessionSupervising::Header', function (hooks) 
 
     assert.strictEqual(termsList[3].textContent.trim(), "Code d'accès (candidats)");
     assert.strictEqual(definitionsList[3].textContent.trim(), 'ACCES1');
+
+    assert.dom(screen.getByRole('button', { name: 'Télécharger le kit surveillant' })).exists();
   });
 
   module("when 'Quitter' button is clicked", function () {

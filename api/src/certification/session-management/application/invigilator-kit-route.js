@@ -1,8 +1,9 @@
 import Joi from 'joi';
 
+import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
-import { authorization } from '../../shared/application/pre-handlers/authorization.js';
 import { invigilatorKitController } from './invigilator-kit-controller.js';
+import { authorization } from './pre-handlers/authorization.js';
 
 const register = async function (server) {
   server.route([
@@ -17,7 +18,11 @@ const register = async function (server) {
         },
         pre: [
           {
-            method: authorization.verifySessionAuthorization,
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                authorization.checkUserHaveCertificationCenterMembershipForSession,
+                authorization.checkUserHaveInvigilatorAccessForSession,
+              ])(request, h),
             assign: 'authorizationCheck',
           },
         ],

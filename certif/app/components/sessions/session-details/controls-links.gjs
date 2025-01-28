@@ -7,7 +7,6 @@ import { t } from 'ember-intl';
   <div class='session-details__controls-links'>
     <span class='session-details__controls-title'>{{t 'pages.sessions.detail.downloads.label'}}</span>
     <PixButtonLink
-      class='session-details__controls-download-button'
       href='{{@urlToDownloadSessionIssueReportSheet}}'
       @variant='secondary'
       @isBorderVisible={{true}}
@@ -21,7 +20,6 @@ import { t } from 'ember-intl';
       {{t 'pages.sessions.detail.downloads.incident-report.label'}}
     </PixButtonLink>
     <PixButton
-      class='session-details__controls-download-button'
       @variant='secondary'
       @isBorderVisible={{true}}
       @size='small'
@@ -33,7 +31,6 @@ import { t } from 'ember-intl';
     </PixButton>
     {{#if @shouldDisplayDownloadButton}}
       <PixButton
-        class='session-details__controls-download-button'
         @triggerAction={{@fetchAttendanceSheet}}
         @variant='secondary'
         @isBorderVisible={{true}}

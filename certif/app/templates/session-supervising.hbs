@@ -1,7 +1,7 @@
 {{page-title (t "pages.session-supervising.title" sessionId=@model.id)}}
 
 <div class="session-supervising-page">
-  <SessionSupervising::Header @session={{@model}} />
+  <SessionSupervising::Header @session={{@model}} @fetchInvigilatorKit={{this.fetchInvigilatorKit}} />
   <SessionSupervising::CandidateList
     @authorizeTestResume={{this.authorizeTestResume}}
     @endAssessmentBySupervisor={{this.endAssessmentBySupervisor}}

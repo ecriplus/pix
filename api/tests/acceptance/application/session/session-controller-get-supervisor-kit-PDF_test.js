@@ -20,7 +20,6 @@ describe('Acceptance | Controller | session-controller-get-supervisor-kit-pdf', 
       user = databaseBuilder.factory.buildUser();
       databaseBuilder.factory.buildOrganization({ externalId: 'EXT1234' });
       const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({ externalId: 'EXT1234' }).id;
-      databaseBuilder.factory.buildCertificationCenterMembership({ userId: user.id, certificationCenterId });
 
       const otherUserId = databaseBuilder.factory.buildUser().id;
       const otherCertificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
@@ -30,6 +29,7 @@ describe('Acceptance | Controller | session-controller-get-supervisor-kit-pdf', 
       });
 
       sessionIdAllowed = databaseBuilder.factory.buildSession({ certificationCenterId }).id;
+      databaseBuilder.factory.buildSupervisorAccess({ userId: user.id, sessionId: sessionIdAllowed });
 
       await databaseBuilder.commit();
     });
