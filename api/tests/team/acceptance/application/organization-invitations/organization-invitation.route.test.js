@@ -345,6 +345,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
                 status: OrganizationInvitation.StatusType.PENDING,
                 'updated-at': firstOrganizationInvitation.updatedAt,
                 role: firstOrganizationInvitation.role,
+                lang: firstOrganizationInvitation.locale,
               },
             },
             {
@@ -355,6 +356,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
                 status: OrganizationInvitation.StatusType.PENDING,
                 'updated-at': secondOrganizationInvitation.updatedAt,
                 role: secondOrganizationInvitation.role,
+                lang: secondOrganizationInvitation.locale,
               },
             },
           ],
@@ -450,6 +452,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
               email: user1.email,
               status,
               role: null,
+              lang: 'fr-fr',
             },
           },
           {
@@ -459,6 +462,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
               email: user2.email,
               status,
               role: null,
+              lang: 'fr-fr',
             },
           },
         ];

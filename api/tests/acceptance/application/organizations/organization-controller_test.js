@@ -630,6 +630,7 @@ describe('Acceptance | Application | organization-controller', function () {
             email: userToReInvite.email,
             status: OrganizationInvitation.StatusType.PENDING,
             role: null,
+            lang: 'fr',
             'updated-at': now,
           },
         },
