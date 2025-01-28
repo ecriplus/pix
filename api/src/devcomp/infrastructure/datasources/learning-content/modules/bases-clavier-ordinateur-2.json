@@ -22,7 +22,7 @@
     },
     {
       "grainId": "7ff9a355-6e89-4ab1-9c66-76ab054b97e3",
-      "content": "<p>Bravo ! 🎉 </p><p>Vous êtes prêt. Voyons comment taper des lettres majuscules.</p>"
+      "content": "<p>Bravo ! <span aria-hidden=\"true\">🎉</span> </p><p>Vous êtes prêt. Voyons comment taper des lettres majuscules.</p>"
     },
     {
       "grainId": "409aa009-7bd9-4202-b00e-5537ceb5e9e7",
@@ -50,7 +50,7 @@
     },
     {
       "grainId": "bf9b4d7e-5d6a-4fc9-9f63-0bfc71d18982",
-      "content": "<p>Résumons l'essentiel. 🎯</p>"
+      "content": "<p>Résumons l'essentiel. <span aria-hidden=\"true\">🎯</span></p>"
     },
     {
       "grainId": "5ddc7207-feb0-494f-b32b-a33eb162e5f3",
@@ -97,8 +97,8 @@
               }
             ],
             "feedbacks": {
-              "valid": "<p>Bonne réponse ! 🎉<br>Bravo ! 🦓 Vous savez utiliser le clavier pour taper des lettres, des espaces et des caractères accentués.</p>",
-              "invalid": "<p>Mauvaise réponse. </p><p>Pour retrouver les caractères dont vous avez besoin, vous pouvez utiliser les indices. N’hésitez pas à réessayer.</p>"
+              "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span><br>Bravo ! <span aria-hidden=\"true\">🦓</span> Vous savez utiliser le clavier pour taper des lettres, des espaces et des caractères accentués.</p>",
+              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Pour retrouver les caractères dont vous avez besoin, vous pouvez utiliser les indices. N’hésitez pas à réessayer.</p>"
             }
           }
         },
@@ -107,7 +107,7 @@
           "element": {
             "id": "0b771dad-3e31-4e0a-809e-6abd65653adb",
             "type": "text",
-            "content": "<p>🗝️ Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous :</p>"
+            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous :</p>"
           }
         },
         {
@@ -167,7 +167,7 @@
           "element": {
             "id": "6764fe09-6a2f-47a1-b368-f9083a9e0a26",
             "type": "text",
-            "content": "<p>La <strong>touche majuscule ⇧</strong> du clavier permet de taper des lettres majuscules.<br></p><p>🤔<strong>Le saviez-vous ?</strong><br>Sur la touche majuscule ⇧ il y a souvent une flèche vers le haut. On peut dire que c’est la touche qui fait grandir les lettres.</p>"
+            "content": "<p>La <strong>touche majuscule ⇧</strong> du clavier permet de taper des lettres majuscules.<br></p><p><span aria-hidden=\"true\">🤔</span><strong>Le saviez-vous ?</strong><br>Sur la touche majuscule ⇧ il y a souvent une flèche vers le haut. On peut dire que c’est la touche qui fait grandir les lettres.</p>"
           }
         },
         {
@@ -202,7 +202,7 @@
           "element": {
             "id": "04fe4d77-15c4-475d-915f-ba04f69f9674",
             "type": "text",
-            "content": "<p>💡<strong> Astuce</strong><br>Pour taper plusieurs majuscules à la suite, restez appuyé sur la touche majuscule ⇧ et tapez la première lettre, puis la deuxième, etc.</p>"
+            "content": "<p><span aria-hidden=\"true\">💡</span><strong> Astuce</strong><br>Pour taper plusieurs majuscules à la suite, restez appuyé sur la touche majuscule ⇧ et tapez la première lettre, puis la deuxième, etc.</p>"
           }
         }
       ]
@@ -288,7 +288,7 @@
           "element": {
             "id": "863077ce-8e5e-438a-b82f-2b4afc723ef0",
             "type": "expand",
-            "title": "🤔Bon à savoir",
+            "title": "<span aria-hidden=\"true\">🤔</span> Bon à savoir",
             "content": "<p>Certains claviers ont un pavé numérique à droite des flèches directionnelles. Le pavé numérique contient des touches supplémentaires avec tous les chiffres. Vous pouvez l’utiliser pour taper les chiffres sans utiliser la touche majuscule.</p><p>IMAGE A INSERER</p>"
           }
         }
@@ -336,8 +336,8 @@
               }
             ],
             "feedbacks": {
-              "valid": "<p>Bonne réponse ! 🍏🍏🍏 </p><p>Bravo, vous maîtrisez la touche majuscule ⇧.</p>",
-              "invalid": "<p>Mauvaise réponse.&nbsp;🍎🍎🍎</p><p>Pour taper les caractères spéciaux, faites bien attention à leur position sur la touche. Elle vous indique si vous avez besoin d’utiliser la touche majuscule ⇧.</p>"
+              "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🍏🍏🍏</span></span></p><p>Bravo, vous maîtrisez la touche majuscule ⇧.</p>",
+              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse. <span aria-hidden=\"true\">🍎🍎🍎</span></span></p><p>Pour taper les caractères spéciaux, faites bien attention à leur position sur la touche. Elle vous indique si vous avez besoin d’utiliser la touche majuscule ⇧.</p>"
             }
           }
         }
@@ -455,7 +455,7 @@
           "element": {
             "id": "185a37d3-64dd-48e0-92b0-470bd34b4e9f",
             "type": "text",
-            "content": "<p>📌 Pour savoir comment faire apparaître un caractère, il faut regarder <strong>sa position sur la touche</strong> :</p>"
+            "content": "<p><span aria-hidden=\"true\">📌</span> Pour savoir comment faire apparaître un caractère, il faut regarder <strong>sa position sur la touche</strong> :</p>"
           }
         },
         {
