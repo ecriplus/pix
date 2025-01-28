@@ -167,7 +167,7 @@
           "element": {
             "id": "6764fe09-6a2f-47a1-b368-f9083a9e0a26",
             "type": "text",
-            "content": "<p>La <strong>touche majuscule ⇧</strong> du clavier permet de taper des lettres majuscules.<br></p><p><span aria-hidden=\"true\">🤔</span><strong>Le saviez-vous ?</strong><br>Sur la touche majuscule ⇧ il y a souvent une flèche vers le haut. On peut dire que c’est la touche qui fait grandir les lettres.</p>"
+            "content": "<p>La <strong>touche majuscule ⇧</strong> du clavier permet de taper des lettres majuscules.</p><p><br><span aria-hidden=\"true\">🤔</span><strong>Le saviez-vous ?</strong><br>Sur la touche majuscule ⇧ il y a souvent une flèche vers le haut. On peut dire que c’est la touche qui fait grandir les lettres.</p>"
           }
         },
         {
@@ -280,7 +280,7 @@
           "element": {
             "id": "863077ce-8e5e-438a-b82f-2b4afc723ef0",
             "type": "expand",
-            "title": "<span aria-hidden=\"true\">🤔</span> Bon à savoir",
+            "title": "🤔 Bon à savoir",
             "content": "<p>Certains claviers ont un pavé numérique à droite des flèches directionnelles. Le pavé numérique contient des touches supplémentaires avec tous les chiffres. Vous pouvez l’utiliser pour taper les chiffres sans utiliser la touche majuscule.</p><p>IMAGE A INSERER</p>"
           }
         }
