@@ -73,7 +73,7 @@ export default class AuthenticatedCertificationCentersGetInvitationsController e
         },
       });
       this.pixToast.sendSuccessNotification({ message: 'Cette invitation a bien été annulée.' });
-    } catch (error) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: 'Une erreur s’est produite, veuillez réessayer.' });
     }
   }

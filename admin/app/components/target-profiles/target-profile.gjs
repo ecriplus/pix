@@ -93,7 +93,7 @@ export default class TargetProfile extends Component {
       await this.args.model.save({ adapterOptions: { markTargetProfileAsSimplifiedAccess: true } });
 
       this.pixToast.sendSuccessNotification({ message: 'Ce profil cible a bien été marqué comme accès simplifié.' });
-    } catch (responseError) {
+    } catch {
       const genericErrorMessage = this.intl.t('common.notifications.generic-error');
       this.pixToast.sendErrorNotification({ message: genericErrorMessage });
     }

@@ -51,7 +51,7 @@ export default class TargetProfileOrganizationsController extends Controller {
         await this.pixToast.sendSuccessNotification({ message });
         this.router.transitionTo('authenticated.target-profiles.target-profile.organizations');
       }
-    } catch (responseError) {
+    } catch {
       return this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }

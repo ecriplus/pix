@@ -34,7 +34,7 @@ export default class AuthenticatedSessionsAllRoute extends Route {
           size: params.pageSize,
         },
       });
-    } catch (err) {
+    } catch {
       return [];
     }
 

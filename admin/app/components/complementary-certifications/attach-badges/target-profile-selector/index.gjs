@@ -42,7 +42,7 @@ export default class TargetProfileSelectorComponent extends Component {
           label: `${attachableTargetProfile.id} - ${attachableTargetProfile.name}`,
           value: attachableTargetProfile,
         }));
-      } catch (e) {
+      } catch {
         this.args.onError('Une erreur est survenue lors de la recherche de profils cibles.');
       } finally {
         this.isAttachableTargetProfilesLoading = false;

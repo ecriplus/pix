@@ -17,7 +17,7 @@ export default class New extends Controller {
     try {
       this.model.setProperties(attributes);
       await this.model.save({ adapterOptions: { organizationId: this.model.organizationId } });
-    } catch (errorResponse) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: 'Erreur lors de la création du lot de place.' });
       this.errors = this.model.errors;
     }

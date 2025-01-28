@@ -14,7 +14,7 @@ export default class UsersCertificationCenterMembershipsController extends Contr
       this.pixToast.sendSuccessNotification({
         message: this.intl.t('pages.user-details.notifications.success.update-certification-center-membership-role'),
       });
-    } catch (_) {
+    } catch {
       certificationCenterMembership.rollbackAttributes();
       this.pixToast.sendErrorNotification({
         message: this.intl.t('pages.user-details.notifications.failure.update-certification-center-membership-role'),
@@ -29,7 +29,7 @@ export default class UsersCertificationCenterMembershipsController extends Contr
       this.pixToast.sendSuccessNotification({
         message: this.intl.t('pages.user-details.notifications.success.deactivate-certification-center-membership'),
       });
-    } catch (_) {
+    } catch {
       this.pixToast.sendErrorNotification({
         message: this.intl.t('pages.user-details.notifications.failure.deactivate-certification-center-membership'),
       });

@@ -45,7 +45,7 @@ export default class TrainingEditTriggersController extends Controller {
         .save({ adapterOptions: { tubes: this.selectedTubes, trainingId: this.model.training.id } });
       this.pixToast.sendSuccessNotification({ message: 'Le déclencheur a été créé avec succès.' });
       this.goBackToTraining();
-    } catch (error) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }

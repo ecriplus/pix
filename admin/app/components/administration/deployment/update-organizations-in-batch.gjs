@@ -71,7 +71,7 @@ export default class UpdateOrganizationsInBatch extends Component {
       }
 
       this.errorResponseHandler.notify(await response.json());
-    } catch (error) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
     } finally {
       this.isLoading = false;

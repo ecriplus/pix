@@ -46,7 +46,7 @@ export default class IndexController extends Controller {
       await this.sessionModel.save({ adapterOptions: { unfinalize: true } });
       await this.sessionModel.reload();
       this.pixToast.sendSuccessNotification({ message: 'La session a bien été définalisée' });
-    } catch (err) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: 'Erreur lors de la définalisation de la session' });
     }
     this.cancelModal();
@@ -94,7 +94,7 @@ export default class IndexController extends Controller {
       const link = await adapter.getDownloadLink({ id: this.model.id, lang: this.intl.primaryLocale });
       await navigator.clipboard.writeText(link.sessionResultsLink);
       this._displaySuccessTooltip();
-    } catch (err) {
+    } catch {
       this._displayErrorTooltip();
     }
     window.setTimeout(() => this._hideTooltip(), 2000);
@@ -107,7 +107,7 @@ export default class IndexController extends Controller {
     const token = this.session.data.authenticated.access_token;
     try {
       await this.fileSaver.save({ url, token });
-    } catch (error) {
+    } catch {
       this.pixToast.sendErrorNotification({
         message: "Une erreur est survenue, les attestations n'ont pas pu être téléchargées.",
       });
@@ -119,7 +119,7 @@ export default class IndexController extends Controller {
     try {
       await this.sessionModel.save({ adapterOptions: { isComment: true, comment } });
       this.sessionModel.reload();
-    } catch (error) {
+    } catch {
       this.pixToast.sendErrorNotification({
         message: "Une erreur est survenue pendant l'enregistrement du commentaire. ",
       });
@@ -157,7 +157,7 @@ export default class IndexController extends Controller {
     try {
       await this.sessionModel.save({ adapterOptions: { certificationOfficerAssignment: true } });
       this.pixToast.sendSuccessNotification({ message: 'La session vous a correctement été assignée' });
-    } catch (_) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: "Erreur lors de l'assignation à la session" });
     }
   }

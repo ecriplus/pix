@@ -34,7 +34,7 @@ export default class ListRoute extends Route {
         queryType: params.queryType,
       });
       return users;
-    } catch (error) {
+    } catch {
       return [];
     }
   }

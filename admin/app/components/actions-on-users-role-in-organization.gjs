@@ -38,7 +38,7 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
       this.args.organizationMembership.organizationRole = this.selectedNewRole;
       await this.args.organizationMembership.save();
       this.pixToast.sendSuccessNotification({ message: 'Le rôle du membre a été mis à jour avec succès.' });
-    } catch (e) {
+    } catch {
       this.pixToast.sendErrorNotification({
         message: 'Une erreur est survenue lors de la mise à jour du rôle du membre.',
       });
@@ -69,7 +69,7 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
     try {
       await this.args.organizationMembership.destroyRecord({ adapterOptions: { disable: true } });
       this.pixToast.sendSuccessNotification({ message: 'Le membre a été désactivé avec succès.' });
-    } catch (e) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue lors de la désactivation du membre.' });
     } finally {
       this.displayConfirm = false;

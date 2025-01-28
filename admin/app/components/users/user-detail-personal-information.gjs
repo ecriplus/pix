@@ -28,7 +28,7 @@ export default class UserDetailPersonalInformationComponent extends Component {
     try {
       await this.organizationLearnerToDissociate.destroyRecord();
       this.pixToast.sendSuccessNotification({ message: DISSOCIATE_SUCCESS_NOTIFICATION_MESSAGE });
-    } catch (response) {
+    } catch {
       const errorMessage = 'Une erreur est survenue !';
       this.pixToast.sendErrorNotification({ message: errorMessage });
     } finally {

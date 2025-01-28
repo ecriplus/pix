@@ -18,7 +18,7 @@ export default class CampaignParticipationsController extends Controller {
     try {
       await campaignParticipation.save();
       this.pixToast.sendSuccessNotification({ message: "L'id externe du participant été mis à jour avec succès." });
-    } catch (_) {
+    } catch {
       this.pixToast.sendErrorNotification({
         message: "Une erreur est survenue lors de la mise à jour de l'id externe du participant.",
       });

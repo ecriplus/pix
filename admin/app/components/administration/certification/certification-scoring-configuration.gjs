@@ -25,7 +25,7 @@ export default class CertificationScoringConfiguration extends Component {
     try {
       await adapter.updateCertificationScoringConfiguration(this.certificationScoringConfiguration);
       this.pixToast.sendSuccessNotification({ message: 'Configuration enregistrée' });
-    } catch (_) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: "La config n'a pas pu être ajoutée" });
     }
   }

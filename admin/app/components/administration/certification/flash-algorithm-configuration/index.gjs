@@ -25,7 +25,7 @@ export default class FlashAlgorithmConfiguration extends Component {
     try {
       await adapter.createRecord(this.form);
       this.pixToast.sendSuccessNotification({ message: 'La configuration a été créée' });
-    } catch (errorResponse) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: "La configuration n'a pu être créée" });
     }
   }

@@ -41,14 +41,14 @@
       }
     },
     "filters": {
-      "title": "Filters",
       "actions": {
         "clear": "Clear filters"
       },
       "target-profile": {
         "label": "Category",
         "placeholder": "Pix+, Other ..."
-      }
+      },
+      "title": "Filters"
     },
     "forms": {
       "loading": "Loading...",
@@ -74,15 +74,14 @@
   "components": {
     "administration": {
       "add-organization-features-in-batch": {
-        "title": "Enable features on organizations",
         "description": "Note: Trying to enable already existing features on organizations would produce an error.",
         "notifications": {
           "success": "Features have been enabled."
         },
+        "title": "Enable features on organizations",
         "upload-button": "Import CSV file"
       },
       "anonymize-gar-import": {
-        "title": "Anonymize GAR Data",
         "description": "Note: Anonymization should be done once a year. Provide the list of user IDs to be anonymized.",
         "notifications": {
           "error": {
@@ -93,26 +92,26 @@
             "partial": "GAR data has been anonymized for {garAnonymizedUserCount} users for a total of {total}."
           }
         },
+        "title": "Anonymize GAR Data",
         "upload-button": "Anonymize from a CSV file"
       },
       "oidc-providers-import": {
-        "title": "OIDC Providers import",
         "description": "Note: Trying to import already existing OIDC Providers would produce an error.",
         "notifications": {
           "success": "The OIDC Providers have been created."
         },
+        "title": "OIDC Providers import",
         "upload-button": "Import JSON file"
       },
       "organization-import-format": {
-        "title": "Update existing import formats",
         "description": "Only existing format imports will be updated. If the name does not match, no format import will be created.",
         "notifications": {
           "success": "Format imports are updated correctly"
         },
+        "title": "Update existing import formats",
         "upload-button": "Importing a JSON file"
       },
       "organization-tags-import": {
-        "title": "Bulk addition of tags on organisations",
         "description": "Allow to add tags to organisations. Each line of the CSV file must be made of the ID of an organisation, followed by the name of a tag.",
         "notifications": {
           "errors": {
@@ -120,18 +119,18 @@
           },
           "success": "Tags have been added to the organisations."
         },
+        "title": "Bulk addition of tags on organisations",
         "upload-button": "Import CSV file"
       },
       "organizations-import": {
-        "title": "Mass creation of organizations",
         "description": "Existing organizations will not be changed.",
         "notifications": {
           "success": "The organizations have been created."
         },
+        "title": "Mass creation of organizations",
         "upload-button": "Import CSV file"
       },
       "swap-campaign-codes": {
-        "title": "Switch campaign codes",
         "description": "Allow to switch campaign codes from two different campaigns. Campaigns must be on the same organization.",
         "form": {
           "button": "Switch",
@@ -144,10 +143,10 @@
             "swap-code-error": "May be one of your campaign id doesn't exist. Check and retry."
           },
           "success": "Campaign code switch success"
-        }
+        },
+        "title": "Switch campaign codes"
       },
       "update-campaign-code": {
-        "title": "Update campaign code",
         "description": "Allow to modify the campaign code from the campaign ID. The campaign's code must be unique and composed of 9 uppercase alphanumeric characters.",
         "form": {
           "button": "Update",
@@ -161,10 +160,10 @@
             "unique-code-error": "Campaign's code is not unique."
           },
           "success": "Campaign code update succeed."
-        }
+        },
+        "title": "Update campaign code"
       },
       "update-organizations-in-batch": {
-        "title": "Mass modification of organisations",
         "description": "Note: Only columns with a value will be modified.",
         "notifications": {
           "errors": {
@@ -175,16 +174,15 @@
           },
           "success": "The organisations have been modified."
         },
+        "title": "Mass modification of organisations",
         "upload-button": "Import CSV file"
       }
     },
     "autonomous-courses": {
-      "title": "Tous les parcours autonomes",
       "actions": {
         "new": "Nouveau parcours autonome"
       },
       "list": {
-        "title": "Liste des parcours autonomes",
         "headers": {
           "createdAt": "Date de création",
           "id": "Id",
@@ -195,10 +193,10 @@
         "status": {
           "active": "Actif",
           "archived": "Archivé"
-        }
+        },
+        "title": "Liste des parcours autonomes"
       },
       "new": {
-        "title": "Nouveau parcours autonome",
         "create-autonomous-course": "Créer le parcours autonome",
         "target-profile": {
           "category-label": "Sélectionner une ou plusieurs catégories de profils cibles",
@@ -208,11 +206,11 @@
           "sub-label": "Le profil cible doit être en accès simplifié et relié à l’organisation \"Organisation pour les parcours autonomes\""
         },
         "technical-informations": {
-          "title": "Informations techniques",
-          "label": "Nom interne"
+          "label": "Nom interne",
+          "title": "Informations techniques"
         },
+        "title": "Nouveau parcours autonome",
         "user-information": {
-          "title": "Informations pour les utilisateurs",
           "homepage": {
             "label": "Texte de la page d'accueil",
             "placeholder": "Exemple : description, objectifs..."
@@ -221,9 +219,11 @@
             "label": "Nom public <small>(50 caractères maximum)</small>",
             "placeholder": "Exemple : Le super nom de mon parcours autonome",
             "sub-label": "Le nom du parcours autonome sera affiché sur la page de démarrage du candidat."
-          }
+          },
+          "title": "Informations pour les utilisateurs"
         }
       },
+      "title": "Tous les parcours autonomes",
       "update": {
         "custom-landing-page": {
           "label": "Texte de la page d'accueil",
@@ -284,14 +284,14 @@
     "complementary-certifications": {
       "target-profiles": {
         "badges-list": {
-          "title": "Badges certifiés du profil cible actuel",
           "header": {
             "id": "ID du RT certifiant",
             "image-url": "Image du badge certifié",
             "level": "Niveau du badge certifié",
             "minimum-earned-pix": "Nombre de pix minimum",
             "name": "Nom du badge certifié"
-          }
+          },
+          "title": "Badges certifiés du profil cible actuel"
         }
       }
     },
@@ -402,29 +402,28 @@
     "administration": {
       "certification": {
         "certification-scoring-configuration": {
-          "title": "Mesh configuration for global score",
           "form": {
             "label": "Add certification score configuration (JSON)"
-          }
+          },
+          "title": "Mesh configuration for global score"
         },
         "competence-scoring-configuration": {
-          "title": "Configuration of thresholds by skill",
           "form": {
             "label": "Level configuration by skill added (JSON)"
-          }
+          },
+          "title": "Configuration of thresholds by skill"
         },
         "flash-algorithm-configuration": {
-          "title": "Configuration de l’algorithme de déroulé du test",
           "form": {
             "challengesBetweenSameCompetence": "Nombre de questions entre 2 questions de la même compétence",
             "enablePassageByAllCompetences": "Forcer le passage par les 16 compétences",
             "limitToOneQuestionPerTube": "Limiter à une question par sujet",
             "maximumAssessmentLength": "Nombre de questions",
             "variationPercent": "Capage de la capacité (en % )"
-          }
+          },
+          "title": "Configuration de l’algorithme de déroulé du test"
         },
         "sco-whitelist": {
-          "title": "SCO whitelist",
           "export": {
             "button": "Export whitelist (CSV)",
             "error": "Could not download SCO whitelist."
@@ -435,10 +434,10 @@
             "error": "Could not save SCO whitelist",
             "success": "SCO whitelist saved."
           },
-          "instructions": "Recommended: make an export, modify the export, and import the modified version."
+          "instructions": "Recommended: make an export, modify the export, and import the modified version.",
+          "title": "SCO whitelist"
         },
         "scoring-simulator": {
-          "title": "Scoring simulator",
           "actions": {
             "submit": "Generate profile"
           },
@@ -460,7 +459,8 @@
               "level": "Level"
             },
             "label": "Level by competence"
-          }
+          },
+          "title": "Scoring simulator"
         }
       },
       "navigation": {
@@ -488,14 +488,13 @@
     "certification-centers": {
       "information-view": {
         "habilitations": {
-          "title": "Habilitated to the following complementary certifications",
           "aria-label": {
             "active": "Habilitated to {complementaryCertificationLabel}",
             "inactive": "Not habilitated to {complementaryCertificationLabel}"
-          }
+          },
+          "title": "Habilitated to the following complementary certifications"
         },
         "pilot-features": {
-          "title": "Pilot features",
           "is-complementary-alone-pilot": {
             "aria-label": {
               "active": "is pilot Pix/Pix+ compatibility test phase",
@@ -509,7 +508,8 @@
               "inactive": "is not V3 certification pilot"
             },
             "label": "V3 certification pilot"
-          }
+          },
+          "title": "Pilot features"
         }
       },
       "notifications": {
@@ -527,14 +527,12 @@
       }
     },
     "certifications": {
-      "title": "Certifications",
       "actions": {
         "load": {
           "label": "Charger"
         }
       },
       "certification": {
-        "title": "Certif",
         "details": {
           "title": "Details",
           "v3": {
@@ -567,14 +565,14 @@
               "ended-due-to-finalization": "Date et heure d’affichage de la dernière question proposée au candidat."
             },
             "general-informations": {
-              "title": "Certification N°{certificationCourseId}",
               "labels": {
                 "abort-reason": "Reason for withdrawal",
                 "created-at": "Created on",
                 "ended-at": "Completed on",
                 "ended-by": "Certification completed by",
                 "pix-score": "Score (in pix)"
-              }
+              },
+              "title": "Certification N°{certificationCourseId}"
             },
             "live-alert-modal": {
               "title": {
@@ -583,7 +581,6 @@
               }
             },
             "more-informations": {
-              "title": "Additional information",
               "labels": {
                 "numberof-aband-answers": "Number of questions abandoned",
                 "numberof-answered-questions": "Number of questions answered",
@@ -591,10 +588,10 @@
                 "numberof-ok-questions": "Number of questions OK",
                 "numberof-validated-live-alerts": "Number of technical problems validated",
                 "total-numberof-questions": "Total number of questions"
-              }
+              },
+              "title": "Additional information"
             },
             "questions-list": {
-              "title": "List of questions",
               "actions": {
                 "challenge-preview": {
                   "extra-information": "Link to test preview (opens in new window)",
@@ -620,7 +617,8 @@
                 "competence": "Competence concerned",
                 "number": "N°",
                 "skill": "Name of the asset"
-              }
+              },
+              "title": "List of questions"
             }
           }
         },
@@ -633,11 +631,12 @@
             },
             "label": "Result details by competence"
           }
-        }
-      }
+        },
+        "title": "Certif"
+      },
+      "title": "Certifications"
     },
     "login": {
-      "title": "Access to this Pix Admin space is limited to administrators.",
       "api-error-messages": {
         "login-no-permission": "You don't have the permission to connect."
       },
@@ -652,7 +651,8 @@
       },
       "google": {
         "label": "Log in via Google"
-      }
+      },
+      "title": "Access to this Pix Admin space is limited to administrators."
     },
     "organization": {
       "navbar": {
@@ -660,7 +660,6 @@
       }
     },
     "organization-children": {
-      "title": "Children organisations",
       "empty-table": "No child organisation",
       "notifications": {
         "error": {
@@ -673,7 +672,8 @@
         "success": {
           "attach-child-organization": "The child organization has been linked to the parent organization"
         }
-      }
+      },
+      "title": "Children organisations"
     },
     "sessions": {
       "informations": {
@@ -691,8 +691,8 @@
           "label": "Duplicate this target profile"
         },
         "modal": {
-          "title": "Confirm the target profile duplication ?",
-          "label": "Confirming will duplicate the current target profiles with tubes, badges and stages."
+          "label": "Confirming will duplicate the current target profiles with tubes, badges and stages.",
+          "title": "Confirm the target profile duplication ?"
         },
         "notifications": {
           "success": "The target profile has been duplicated."
@@ -722,12 +722,12 @@
         },
         "triggers": {
           "goal": {
-            "title": "Goal",
-            "alternative-title": "Add a goal threshold to not exceed"
+            "alternative-title": "Add a goal threshold to not exceed",
+            "title": "Goal"
           },
           "prerequisite": {
-            "title": "Prerequisite",
-            "alternative-title": "Add a prerequisite threshold to reach"
+            "alternative-title": "Add a prerequisite threshold to reach",
+            "title": "Prerequisite"
           },
           "tabName": "Triggers"
         }

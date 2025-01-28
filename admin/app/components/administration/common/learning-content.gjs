@@ -18,7 +18,7 @@ export default class LearningContent extends Component {
       this.pixToast.sendSuccessNotification({
         message: 'La demande de rechargement du cache a bien été prise en compte.',
       });
-    } catch (_) {
+    } catch {
       const genericErrorMessage = this.intl.t('common.notifications.generic-error');
       this.pixToast.sendErrorNotification({ message: genericErrorMessage });
     }
@@ -31,7 +31,7 @@ export default class LearningContent extends Component {
       this.pixToast.sendSuccessNotification({
         message: 'La création de la version du référentiel et le rechargement du cache a bien été prise en compte.',
       });
-    } catch (_) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }
