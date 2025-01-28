@@ -157,7 +157,7 @@
                     {
                       "id": "2",
                       "content": "<p>Le jeu est inadapté aux enfants de moins de 12 ans.</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Le pictogramme âge PEGI indique la présence de contenu inadapté aux enfants en dessous de l’âge indiqué. Il n’indique pas la difficulté du jeu.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span></p><p>Le pictogramme âge PEGI indique la présence de contenus inadaptés aux enfants en dessous de l’âge indiqué. Il n’indique pas la difficulté du jeu.</p>"
                     },
                     {
                       "id": "3",
