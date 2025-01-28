@@ -1,5 +1,22 @@
 # Pix Changelog
 
+## v5.28.0 (28/01/2025)
+
+
+### :rocket: Amélioration
+- [#11233](https://github.com/1024pix/pix/pull/11233) [FEATURE] Ajout de puces dynamiques à la page de résultat d'une mission (PIX-16278).
+- [#11207](https://github.com/1024pix/pix/pull/11207) [FEATURE] Ajouter la forwarded origin HTTP pour les parcours autonomes anonymes (PIX-16244).
+- [#11145](https://github.com/1024pix/pix/pull/11145) [FEATURE] Améliorer la page de détails de résultats thématique (PIX-16154).
+
+### :building_construction: Tech
+- [#11189](https://github.com/1024pix/pix/pull/11189) [TECH] Suppression de la mise en cache sur certaines routes pour gérer le cache par Baleen.
+
+### :arrow_up: Montée de version
+- [#11216](https://github.com/1024pix/pix/pull/11216) [BUMP] Update dependency eslint to v9 (audit-logger).
+- [#11236](https://github.com/1024pix/pix/pull/11236) [BUMP] Update dependency @badeball/cypress-cucumber-preprocessor to v22 (e2e).
+- [#11234](https://github.com/1024pix/pix/pull/11234) [BUMP] Update actions/github-script action to v7 (workflows).
+- [#11127](https://github.com/1024pix/pix/pull/11127) [BUMP] Update dependency @1024pix/pix-ui to v53 (mon-pix).
+
 ## v5.27.0 (27/01/2025)
 
 
