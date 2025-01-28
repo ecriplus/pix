@@ -36,7 +36,7 @@ export default class TargetProfileOrganizationsRoute extends Route {
     };
     try {
       organizations = await this.store.query('organization', queryParams);
-    } catch (e) {
+    } catch {
       organizations = [];
     }
 

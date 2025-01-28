@@ -22,7 +22,7 @@ export default class DeleteModal extends Component {
         message: `Le lot de place ${this.args.organizationPlacesLot.reference} a été supprimé.`,
       });
       this.args.refreshModel();
-    } catch (error) {
+    } catch {
       this.pixToast.sendErrorNotification({
         message: `Le lot de place ${this.args.organizationPlacesLot.reference} n'a pas été supprimé.`,
       });

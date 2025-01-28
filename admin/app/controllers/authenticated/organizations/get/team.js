@@ -77,7 +77,7 @@ export default class GetTeamController extends Controller {
 
       this.userEmailToAdd = null;
       this.pixToast.sendSuccessNotification({ message: 'Accès attribué avec succès.' });
-    } catch (_) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }

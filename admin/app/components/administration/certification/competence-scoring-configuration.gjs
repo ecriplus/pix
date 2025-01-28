@@ -25,7 +25,7 @@ export default class CompetenceScoringConfiguration extends Component {
     try {
       await adapter.updateCompetenceScoringConfiguration(this.competenceScoringConfiguration);
       this.pixToast.sendSuccessNotification({ message: 'Configuration enregistrée' });
-    } catch (_) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: "La config n'a pas pu être ajoutée" });
     }
   }

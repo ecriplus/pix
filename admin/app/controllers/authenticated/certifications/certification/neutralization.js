@@ -23,7 +23,7 @@ export default class NeutralizationController extends Controller {
       return this.pixToast.sendSuccessNotification({
         message: `La question n°${questionIndex} a été neutralisée avec succès.`,
       });
-    } catch (_) {
+    } catch {
       return this.pixToast.sendErrorNotification({
         message: `Une erreur est survenue lors de la neutralisation de la question n°${questionIndex}.`,
       });
@@ -44,7 +44,7 @@ export default class NeutralizationController extends Controller {
       return this.pixToast.sendSuccessNotification({
         message: `La question n°${questionIndex} a été dé-neutralisée avec succès.`,
       });
-    } catch (_) {
+    } catch {
       return this.pixToast.sendErrorNotification({
         message: `Une erreur est survenue lors de la dé-neutralisation de la question n°${questionIndex}.`,
       });

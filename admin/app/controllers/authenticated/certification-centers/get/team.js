@@ -65,7 +65,7 @@ export default class AuthenticatedCertificationCentersGetTeamController extends 
       certificationCenterMembership.deleteRecord();
       await certificationCenterMembership.save();
       this.pixToast.sendSuccessNotification({ message: 'Le membre a correctement été désactivé.' });
-    } catch (_) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: "Une erreur est survenue, le membre n'a pas été désactivé." });
     }
   }
@@ -79,7 +79,7 @@ export default class AuthenticatedCertificationCentersGetTeamController extends 
           'pages.certification-centers.notifications.success.update-certification-center-membership-role',
         ),
       });
-    } catch (_) {
+    } catch {
       certificationCenterMembership.rollbackAttributes();
       this.pixToast.sendErrorNotification({
         message: this.intl.t(

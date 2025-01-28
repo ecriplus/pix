@@ -27,7 +27,7 @@ export default class Training extends Controller {
       await this.model.save();
       this.pixToast.sendSuccessNotification({ message: 'Le contenu formatif a été mis à jour avec succès.' });
       this.toggleEditMode();
-    } catch (error) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }

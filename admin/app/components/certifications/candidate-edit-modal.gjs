@@ -122,7 +122,7 @@ export default class CandidateEditModal extends Component {
     try {
       await this.args.onFormSubmit();
       this._initForm();
-    } catch (_) {
+    } catch {
       this.args.candidate.updateInformation(informationBeforeUpdate);
     }
   }

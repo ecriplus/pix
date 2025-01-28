@@ -18,7 +18,7 @@ export default class NewController extends Controller {
       await this.model.save();
       this.pixToast.sendSuccessNotification({ message: 'L’organisation a été créée avec succès.' });
       this.router.transitionTo('authenticated.organizations.get.all-tags', this.model.id);
-    } catch (error) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }

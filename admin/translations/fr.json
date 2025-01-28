@@ -41,14 +41,14 @@
       }
     },
     "filters": {
-      "title": "Filtres",
       "actions": {
         "clear": "Effacer les filtres"
       },
       "target-profile": {
         "label": "Catégorie",
         "placeholder": "Pix+, Autres..."
-      }
+      },
+      "title": "Filtres"
     },
     "forms": {
       "loading": "Chargement...",
@@ -74,15 +74,14 @@
   "components": {
     "administration": {
       "add-organization-features-in-batch": {
-        "title": "Activation de fonctionnalités",
         "description": "Note: Chercher à activer à nouveau des fonctionnalités déjà existantes sur une organisation renverrait une erreur.",
         "notifications": {
           "success": "Les fonctionnalités ont bien été activés."
         },
+        "title": "Activation de fonctionnalités",
         "upload-button": "Importer un fichier CSV"
       },
       "anonymize-gar-import": {
-        "title": "Anonymiser les données du GAR",
         "description": "Note: Anonymisation à effectuer 1 fois par an. Fournir la liste des identifiants utilisateurs à anonymiser.",
         "notifications": {
           "error": {
@@ -93,34 +92,34 @@
             "partial": "Les données du GAR ont été anonymisées pour {garAnonymizedUserCount} utilisateurs sur un total de {total}."
           }
         },
+        "title": "Anonymiser les données du GAR",
         "upload-button": "Anonymiser à partir d'un fichier CSV"
       },
       "campaigns-import": {
-        "title": "Création de campagnes en masse",
         "description": "Les campagnes déjà existantes ne seront pas modifiées. Il n'y a pas de contrôle pour empêcher les doublons.",
         "notifications": {
           "success": "Les campagnes ont bien été créées."
         },
+        "title": "Création de campagnes en masse",
         "upload-button": "Importer un fichier CSV"
       },
       "oidc-providers-import": {
-        "title": "Import d’OIDC Providers",
         "description": "Note: Chercher à importer à nouveau des OIDC Providers déjà existants renverrait une erreur.",
         "notifications": {
           "success": "Les OIDC Providers ont bien été créés."
         },
+        "title": "Import d’OIDC Providers",
         "upload-button": "Importer un fichier JSON"
       },
       "organization-import-format": {
-        "title": "Mise à jour d'import à format existants",
         "description": "Seul les imports à format existants seront mis à jour. Dans le cas où le nom ne correspond pas, il n'y aura pas de création d'import à format.",
         "notifications": {
           "success": "Les imports à formats sont bien mis à jour"
         },
+        "title": "Mise à jour d'import à format existants",
         "upload-button": "Importer un fichier JSON"
       },
       "organization-tags-import": {
-        "title": "Ajout de tags en masse sur des organisations",
         "description": "Permet d’ajouter des tags à des organisations. Chaque ligne du fichier CSV doit être constituée de l’ID d’une organisation, suivie du nom d’un tag.",
         "notifications": {
           "errors": {
@@ -128,18 +127,18 @@
           },
           "success": "Les tags ont bien été ajoutés aux organisations."
         },
+        "title": "Ajout de tags en masse sur des organisations",
         "upload-button": "Importer un fichier CSV"
       },
       "organizations-import": {
-        "title": "Création d'organisations en masse",
         "description": "Les organisations déjà existantes ne seront pas modifiées.",
         "notifications": {
           "success": "Les organisations ont bien été créées."
         },
+        "title": "Création d'organisations en masse",
         "upload-button": "Importer un fichier CSV"
       },
       "swap-campaign-codes": {
-        "title": "Échanger les codes campagnes",
         "description": "Permet d'échanger le code campagne entre de deux campagnes. Les campagnes doivent faire partie de la même organisation.",
         "form": {
           "button": "Échanger",
@@ -152,10 +151,10 @@
             "swap-code-error": "Vérifiez que les ID de campagnes saisies existent"
           },
           "success": "Les codes campagnes ont bien été échangé."
-        }
+        },
+        "title": "Échanger les codes campagnes"
       },
       "update-campaign-code": {
-        "title": "Modifier le code d'une campagne",
         "description": "Permet de modifier le code campagne à partir de l'identifiant d'une campagne. Le code campagne doit être unique et composé de 9 caractères alphanumériques en majuscules.",
         "form": {
           "button": "Modifier",
@@ -169,10 +168,10 @@
             "unique-code-error": "Le code est déjà utilisé dans une autre campagne."
           },
           "success": "Le code campagne a bien été modifié."
-        }
+        },
+        "title": "Modifier le code d'une campagne"
       },
       "update-organizations-in-batch": {
-        "title": "Modification des organisations en masse",
         "description": "Note: Seules les colonnes ayant une valeur seront modifiées.",
         "notifications": {
           "errors": {
@@ -183,16 +182,15 @@
           },
           "success": "Les organisations ont bien été modifiées."
         },
+        "title": "Modification des organisations en masse",
         "upload-button": "Importer un fichier CSV"
       }
     },
     "autonomous-courses": {
-      "title": "Tous les parcours autonomes",
       "actions": {
         "new": "Nouveau parcours autonome"
       },
       "list": {
-        "title": "Liste des parcours autonomes",
         "headers": {
           "createdAt": "Date de création",
           "id": "Id",
@@ -203,10 +201,10 @@
         "status": {
           "active": "Actif",
           "archived": "Archivé"
-        }
+        },
+        "title": "Liste des parcours autonomes"
       },
       "new": {
-        "title": "Nouveau parcours autonome",
         "create-autonomous-course": "Créer le parcours autonome",
         "target-profile": {
           "category-label": "Sélectionner une ou plusieurs catégories de profils cibles",
@@ -216,11 +214,11 @@
           "sub-label": "Le profil cible doit être en accès simplifié et relié à l’organisation \"Organisation pour les parcours autonomes\""
         },
         "technical-informations": {
-          "title": "Informations techniques",
-          "label": "Nom interne"
+          "label": "Nom interne",
+          "title": "Informations techniques"
         },
+        "title": "Nouveau parcours autonome",
         "user-information": {
-          "title": "Informations pour les utilisateurs",
           "homepage": {
             "label": "Texte de la page d'accueil",
             "placeholder": "Exemple : description, objectifs..."
@@ -229,9 +227,11 @@
             "label": "Nom public <small>(50 caractères maximum)</small>",
             "placeholder": "Exemple : Le super nom de mon parcours autonome",
             "sub-label": "Le nom du parcours autonome sera affiché sur la page de démarrage du candidat."
-          }
+          },
+          "title": "Informations pour les utilisateurs"
         }
       },
+      "title": "Tous les parcours autonomes",
       "update": {
         "custom-landing-page": {
           "label": "Texte de la page d'accueil",
@@ -292,14 +292,14 @@
     "complementary-certifications": {
       "target-profiles": {
         "badges-list": {
-          "title": "Badges certifiés du profil cible actuel",
           "header": {
             "id": "ID du RT certifiant",
             "image-url": "Image du badge certifié",
             "level": "Niveau du badge certifié",
             "minimum-earned-pix": "Nombre de pix minimum",
             "name": "Nom du badge certifié"
-          }
+          },
+          "title": "Badges certifiés du profil cible actuel"
         }
       }
     },
@@ -412,29 +412,28 @@
     "administration": {
       "certification": {
         "certification-scoring-configuration": {
-          "title": "Configuration des mailles pour le score global",
           "form": {
             "label": "Ajout de la configuration de score de certification (JSON)"
-          }
+          },
+          "title": "Configuration des mailles pour le score global"
         },
         "competence-scoring-configuration": {
-          "title": "Configuration des seuils par compétence",
           "form": {
             "label": "Ajout de la configuration de niveau par compétence (JSON)"
-          }
+          },
+          "title": "Configuration des seuils par compétence"
         },
         "flash-algorithm-configuration": {
-          "title": "Configuration de l’algorithme de déroulé du test",
           "form": {
             "challengesBetweenSameCompetence": "Nombre de questions entre 2 questions de la même compétence",
             "enablePassageByAllCompetences": "Forcer le passage par les 16 compétences",
             "limitToOneQuestionPerTube": "Limiter à une question par sujet",
             "maximumAssessmentLength": "Nombre de questions",
             "variationPercent": "Capage de la capacité (en % )"
-          }
+          },
+          "title": "Configuration de l’algorithme de déroulé du test"
         },
         "sco-whitelist": {
-          "title": "Liste blanche centres SCO",
           "export": {
             "button": "Exporter la liste blanche (format CSV)",
             "error": "Échec de la récupération de la liste blanche."
@@ -445,10 +444,10 @@
             "error": "Échec de l'enregistrement de la liste blanche",
             "success": "Liste blanche enregistrée."
           },
-          "instructions": "Recommandation: exporter la liste, modifier l'export, et envoyer la version modifiée."
+          "instructions": "Recommandation: exporter la liste, modifier l'export, et envoyer la version modifiée.",
+          "title": "Liste blanche centres SCO"
         },
         "scoring-simulator": {
-          "title": "Simulateur de scoring",
           "actions": {
             "submit": "Générer un profil"
           },
@@ -470,7 +469,8 @@
               "level": "Niveau"
             },
             "label": "Niveau par compétence"
-          }
+          },
+          "title": "Simulateur de scoring"
         }
       },
       "navigation": {
@@ -498,14 +498,13 @@
     "certification-centers": {
       "information-view": {
         "habilitations": {
-          "title": "Habilitations aux certifications complémentaires",
           "aria-label": {
             "active": "Habilité pour {complementaryCertificationLabel}",
             "inactive": "Non habilité pour {complementaryCertificationLabel}"
-          }
+          },
+          "title": "Habilitations aux certifications complémentaires"
         },
         "pilot-features": {
-          "title": "Fonctionnalités pilotes",
           "is-complementary-alone-pilot": {
             "aria-label": {
               "active": "Est pilote phase test compatibilité Pix v3 / Pix+",
@@ -519,7 +518,8 @@
               "inactive": "N'est pas pilote certification V3"
             },
             "label": "pilote certification V3"
-          }
+          },
+          "title": "Fonctionnalités pilotes"
         }
       },
       "notifications": {
@@ -537,14 +537,12 @@
       }
     },
     "certifications": {
-      "title": "Certifications",
       "actions": {
         "load": {
           "label": "Charger"
         }
       },
       "certification": {
-        "title": "Certif",
         "details": {
           "title": "Détails",
           "v3": {
@@ -577,14 +575,14 @@
               "ended-due-to-finalization": "Date et heure d’affichage de la dernière question proposée au candidat."
             },
             "general-informations": {
-              "title": "Certification N°{certificationCourseId}",
               "labels": {
                 "abort-reason": "Raison de l'abandon",
                 "created-at": "Créée le",
                 "ended-at": "Terminée le",
                 "ended-by": "Certification terminée par",
                 "pix-score": "Score (en pix)"
-              }
+              },
+              "title": "Certification N°{certificationCourseId}"
             },
             "live-alert-modal": {
               "title": {
@@ -593,7 +591,6 @@
               }
             },
             "more-informations": {
-              "title": "Informations complémentaires",
               "labels": {
                 "numberof-aband-answers": "Nombre de question abandonnées",
                 "numberof-answered-questions": "Nombre de question répondues",
@@ -601,10 +598,10 @@
                 "numberof-ok-questions": "Nombre de question OK",
                 "numberof-validated-live-alerts": "Nombre de problèmes techniques validés",
                 "total-numberof-questions": "Nombre total de questions"
-              }
+              },
+              "title": "Informations complémentaires"
             },
             "questions-list": {
-              "title": "Liste des questions",
               "actions": {
                 "challenge-preview": {
                   "extra-information": "Lien vers l'aperçu de l'épreuve (Ouverture dans une nouvelle fenêtre)",
@@ -630,7 +627,8 @@
                 "competence": "Compétence concernée",
                 "number": "N°",
                 "skill": "Nom de l'acquis"
-              }
+              },
+              "title": "Liste des questions"
             }
           }
         },
@@ -643,11 +641,12 @@
             },
             "label": "Détails du résultat par compétence"
           }
-        }
-      }
+        },
+        "title": "Certif"
+      },
+      "title": "Certifications"
     },
     "login": {
-      "title": "L'accès à Pix Admin est limité aux administrateurs de la plateforme",
       "api-error-messages": {
         "login-no-permission": "Vous n'avez pas les droits pour vous connecter."
       },
@@ -662,7 +661,8 @@
       },
       "google": {
         "label": "Se connecter avec Google"
-      }
+      },
+      "title": "L'accès à Pix Admin est limité aux administrateurs de la plateforme"
     },
     "organization": {
       "navbar": {
@@ -670,7 +670,6 @@
       }
     },
     "organization-children": {
-      "title": "Organisations filles",
       "empty-table": "Aucune organisation fille",
       "notifications": {
         "error": {
@@ -683,7 +682,8 @@
         "success": {
           "attach-child-organization": "L'organisation fille a bien été liée à l'organisation mère"
         }
-      }
+      },
+      "title": "Organisations filles"
     },
     "organizations": {
       "notifications": {
@@ -708,8 +708,8 @@
           "label": "Dupliquer ce profil cible"
         },
         "modal": {
-          "title": "Dupliquer le profil cible ?",
-          "label": "Cette action dupliquera le profil cible avec ses sujets, résultats thématiques et paliers."
+          "label": "Cette action dupliquera le profil cible avec ses sujets, résultats thématiques et paliers.",
+          "title": "Dupliquer le profil cible ?"
         },
         "notifications": {
           "success": "Le profil cible a bien été copié."
@@ -735,23 +735,23 @@
     "trainings": {
       "training": {
         "targetProfiles": {
-          "title": "Rattacher un ou plusieurs profils cibles",
-          "tabName": "Profils cibles associés"
+          "tabName": "Profils cibles associés",
+          "title": "Rattacher un ou plusieurs profils cibles"
         },
         "triggers": {
           "goal": {
-            "title": "Objectif à ne pas dépasser",
             "alternative-title": "Ajouter un objectif à ne pas dépasser",
             "edit": {
               "description": "Si l’apprenant réussit les acquis des sujets sélectionnés alors le contenu formatif ne lui sera pas proposé."
-            }
+            },
+            "title": "Objectif à ne pas dépasser"
           },
           "prerequisite": {
-            "title": "Prérequis",
             "alternative-title": "Ajouter un prérequis",
             "edit": {
               "description": "Si l’apprenant réussit tous les acquis des sujets sélectionnés alors le contenu formatif lui sera proposé."
-            }
+            },
+            "title": "Prérequis"
           },
           "tabName": "Déclencheurs"
         }

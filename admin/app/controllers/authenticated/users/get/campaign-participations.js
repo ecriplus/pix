@@ -14,7 +14,7 @@ export default class UserCampaignParticipationsController extends Controller {
       await this.model.reload();
       this.send('refreshModel');
       this.pixToast.sendSuccessNotification({ message: 'La participation du prescrit a été supprimée avec succès.' });
-    } catch (_) {
+    } catch {
       this.pixToast.sendErrorNotification({
         message: 'Une erreur est survenue lors de la suppression de la participation.',
       });

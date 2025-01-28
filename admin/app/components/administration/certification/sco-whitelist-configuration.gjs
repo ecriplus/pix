@@ -45,7 +45,7 @@ export default class ScoWhitelistConfiguration extends Component {
           message: this.intl.t(`pages.administration.certification.sco-whitelist.import.${errorKey}`),
         });
       }
-    } catch (error) {
+    } catch {
       this.pixToast.sendErrorNotification({
         message: this.intl.t('pages.administration.certification.sco-whitelist.import.error'),
       });
@@ -60,7 +60,7 @@ export default class ScoWhitelistConfiguration extends Component {
       const fileName = 'sco-whitelist.csv';
       const token = this.session.data.authenticated.access_token;
       await this.fileSaver.save({ url, fileName, token });
-    } catch (error) {
+    } catch {
       this.pixToast.sendErrorNotification({
         message: this.intl.t('pages.administration.certification.sco-whitelist.export.error'),
       });

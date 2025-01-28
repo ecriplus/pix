@@ -44,7 +44,7 @@ export default class OidcProvidersImport extends Component {
       jsonResponse.errors.forEach((error) => {
         this.pixToast.sendErrorNotification({ message: error.detail });
       });
-    } catch (error) {
+    } catch {
       this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
     } finally {
       this.isLoading = false;

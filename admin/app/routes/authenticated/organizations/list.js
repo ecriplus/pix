@@ -30,7 +30,7 @@ export default class ListRoute extends Route {
           size: params.pageSize,
         },
       });
-    } catch (error) {
+    } catch {
       model = [];
     }
     return model;
