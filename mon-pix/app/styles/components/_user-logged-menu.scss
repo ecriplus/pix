@@ -2,68 +2,42 @@
 @use 'pix-design-tokens/fonts';
 
 .logged-user-details {
-  display: flex;
-  margin: auto 0;
-}
-
-.caret {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin: auto 0 auto 2px;
-  border-color: var(--pix-neutral-500) transparent transparent transparent;
-  border-style: solid;
-  border-width: 4px 4px 0;
-}
-
-.logged-user-name__link {
-  color: var(--pix-neutral-500);
-  font-size: 1rem;
-  text-decoration: none;
-  cursor: pointer;
-
-  &:visited,
-  &:focus,
-  &:active {
-    color: var(--pix-neutral-500);
-    text-decoration: none;
-  }
-
-  &:hover {
-    color: var(--pix-primary-700);
-    text-decoration: none;
-
-    > .caret {
-      border-color: var(--pix-primary-700) transparent transparent transparent;
-    }
-  }
+  position: relative;
 }
 
 .logged-user-name {
-  display: flex;
-  align-items: center;
-  max-width: 150px;
-  padding: 0;
-  overflow: hidden;
+  position: relative;
+  padding-right: 1em;
   color: var(--pix-neutral-500);
-  font-family: fonts.$font-roboto;
-  letter-spacing: 0.031rem;
-  white-space: nowrap;
-  text-align: right;
-  text-transform: capitalize;
-  text-overflow: ellipsis;
-  word-break: break-all;
-  background-color: transparent;
-  border: none;
+  font-weight: var(--pix-font-medium);
+  font-size: 1rem;
 
-  @include breakpoints.device-is('tablet') {
-    max-width: none;
+  &:hover {
+    color: var(--pix-neutral-800);
+  }
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    display: block;
+    width: 0.5em;
+    height: 0.5em;
+    border-right: 2px solid currentcolor;
+    border-bottom: 2px solid currentcolor;
+    transform: translateY(-80%) rotate(45deg);
+    content: '';
+  }
+
+  &[aria-expanded="true"]::after {
+    transform: translateY(-30%) rotate(-135deg);
   }
 }
 
+/* Popover menu */
 .logged-user-menu {
   position: absolute;
-  top: 80px;
+  top: calc(100% + 1rem);
   right: 0;
   z-index: 999;
   min-width: 240px;
