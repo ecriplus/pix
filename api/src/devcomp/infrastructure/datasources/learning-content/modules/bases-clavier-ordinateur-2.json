@@ -22,7 +22,7 @@
     },
     {
       "grainId": "7ff9a355-6e89-4ab1-9c66-76ab054b97e3",
-      "content": "<p>Bravo ! 🎉 </p><p>Vous êtes prêt. Voyons comment taper des lettres majuscules.<br><br></p>"
+      "content": "<p>Bravo ! 🎉 </p><p>Vous êtes prêt. Voyons comment taper des lettres majuscules.</p>"
     },
     {
       "grainId": "409aa009-7bd9-4202-b00e-5537ceb5e9e7",
@@ -34,7 +34,7 @@
     },
     {
       "grainId": "d310a45d-b3e1-4875-9c8e-55d39368d039",
-      "content": "<p>Grâce à la touche majuscule ⇧ , vous pouvez donc taper des caractères spéciaux, de la ponctuation et des chiffres. À vous d’essayer !<br><br></p>"
+      "content": "<p>Grâce à la touche majuscule ⇧ , vous pouvez donc taper des caractères spéciaux, de la ponctuation et des chiffres. À vous d’essayer !</p>"
     },
     {
       "grainId": "6c6d1b74-2d4f-4939-8318-038c1bd56bc0",
@@ -167,7 +167,7 @@
           "element": {
             "id": "6764fe09-6a2f-47a1-b368-f9083a9e0a26",
             "type": "text",
-            "content": "<p>La <strong>touche majuscule ⇧</strong> du clavier permet de taper des lettres majuscules.</p><p><br></p><p>🤔<strong>Le saviez-vous ?</strong><br>Sur la touche majuscule ⇧ il y a souvent une flèche vers le haut. On peut dire que c’est la touche qui fait grandir les lettres.</p>"
+            "content": "<p>La <strong>touche majuscule ⇧</strong> du clavier permet de taper des lettres majuscules.<br></p><p>🤔<strong>Le saviez-vous ?</strong><br>Sur la touche majuscule ⇧ il y a souvent une flèche vers le haut. On peut dire que c’est la touche qui fait grandir les lettres.</p>"
           }
         },
         {
@@ -365,7 +365,7 @@
           "element": {
             "id": "423d899e-e24d-4666-8f74-17c137279122",
             "type": "text",
-            "content": "<p>La <strong>touche Alt&nbsp;Gr</strong> permet de faire apparaître les caractères situés en bas à droite des touches. Elle s’utilise de la même manière que la touche majuscule.&nbsp; <br><br>Pour taper le caractère situé en bas à droite sur la touche, maintenez appuyée la <strong>touche Alt&nbsp;Gr</strong> et appuyez brièvement sur la touche du caractère.</p>"
+            "content": "<p>La <strong>touche Alt&nbsp;Gr</strong> permet de faire apparaître les caractères situés en bas à droite des touches. Elle s’utilise de la même manière que la touche majuscule.&nbsp;<br>Pour taper le caractère situé en bas à droite sur la touche, maintenez appuyée la <strong>touche Alt&nbsp;Gr</strong> et appuyez brièvement sur la touche du caractère.</p>"
           }
         },
         {
