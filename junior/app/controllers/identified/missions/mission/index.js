@@ -13,8 +13,8 @@ export default class MissionDetailsController extends Controller {
       .classList.replace('details-action__loader', 'details-action__loader--visible');
   }
 
-  get learningObjectives() {
-    return this.model.learningObjectives.split('\n');
+  get validatedObjectives() {
+    return this.model.validatedObjectives.split('\n');
   }
 
   get routeUrl() {

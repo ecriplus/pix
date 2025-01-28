@@ -20,7 +20,7 @@
         }}</LinkTo>
       <p class="details-list__title details-list__title--big">{{t "pages.missions.start-page.purpose-title"}}</p>
       <ul class="details-list">
-        {{#each this.learningObjectives as |element|}}
+        {{#each this.validatedObjectives as |element|}}
           <li>
             <MarkdownToHtml @markdown={{element}} class="details-list__item" />
           </li>
