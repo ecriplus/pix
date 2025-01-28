@@ -14,9 +14,9 @@
 
   &__grid-multiple-element {
     grid-template-areas:
-    "left  right"
+    "left right"
     "left actions";
-    grid-template-rows: 0fr 0fr;
+    grid-template-rows: 0fr 1fr;
     grid-template-columns: 1fr 1fr;
 
     &--40-60 {
