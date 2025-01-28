@@ -9,6 +9,7 @@ on:
 jobs:
   trigger-ci:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false && github.event.pull_request.state == 'open'
 
     steps:
       - name: Extract branch name
