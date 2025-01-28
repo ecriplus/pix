@@ -2,9 +2,11 @@ import { render as renderScreen } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { stubCurrentUserService } from '../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | user certifications detail header', function (hooks) {
@@ -16,6 +18,7 @@ module('Integration | Component | user certifications detail header', function (
 
     hooks.beforeEach(async function () {
       // given
+      stubCurrentUserService(this.owner);
       store = this.owner.lookup('service:store');
       certification = store.createRecord('certification', {
         id: '1',
@@ -92,6 +95,7 @@ module('Integration | Component | user certifications detail header', function (
 
   module('when domain is french', function (hooks) {
     hooks.beforeEach(function () {
+      stubCurrentUserService(this.owner, { lang: 'fr' });
       class CurrentDomainServiceStub extends Service {
         get isFranceDomain() {
           return true;
@@ -246,9 +250,34 @@ module('Integration | Component | user certifications detail header', function (
       });
       assert.ok(true);
     });
+
+    test('should display a link to the results explanation', async function (assert) {
+      // given
+      stubCurrentUserService(this.owner, { lang: 'en' });
+      const store = this.owner.lookup('service:store');
+      const certification = store.createRecord('certification', {
+        birthdate: '2000-01-22',
+        date: new Date('2018-02-15T15:15:52Z'),
+        isPublished: true,
+        status: 'validated',
+      });
+      this.set('certification', certification);
+
+      // when
+      const screen = await renderScreen(hbs`<UserCertificationsDetailHeader @certification={{this.certification}} />`);
+
+      // then
+      assert
+        .dom(screen.getByRole('link', { name: t('pages.certificate.learn-about-certification-results') }))
+        .hasAttribute('href', 'https://pix.fr/certification-comprendre-score-niveau');
+    });
   });
 
-  module('when domain is not french', function () {
+  module('when domain is not french', function (hooks) {
+    hooks.beforeEach(function () {
+      stubCurrentUserService(this.owner, { lang: 'en' });
+    });
+
     test('should not display the professionalizing warning', async function (assert) {
       // given
       class CurrentDomainServiceStub extends Service {
@@ -327,11 +356,63 @@ module('Integration | Component | user certifications detail header', function (
       });
       assert.ok(true);
     });
+
+    module('when user is a French reader', function () {
+      test('should display a link to the results explanation', async function (assert) {
+        // given
+        stubCurrentUserService(this.owner, { lang: 'fr' });
+
+        const store = this.owner.lookup('service:store');
+        const certification = store.createRecord('certification', {
+          birthdate: '2000-01-22',
+          date: new Date('2018-02-15T15:15:52Z'),
+          isPublished: true,
+          status: 'validated',
+        });
+        this.set('certification', certification);
+
+        // when
+        const screen = await renderScreen(
+          hbs`<UserCertificationsDetailHeader @certification={{this.certification}} />`,
+        );
+
+        // then
+        assert
+          .dom(screen.getByRole('link', { name: t('pages.certificate.learn-about-certification-results') }))
+          .hasAttribute('href', 'https://pix.org/fr/certification-comprendre-score-niveau');
+      });
+    });
+
+    module('when user is not a French reader', function () {
+      test('should not display a link to the results explanation', async function (assert) {
+        // given
+        stubCurrentUserService(this.owner, { lang: 'en' });
+        const store = this.owner.lookup('service:store');
+        const certification = store.createRecord('certification', {
+          birthdate: '2000-01-22',
+          date: new Date('2018-02-15T15:15:52Z'),
+          isPublished: true,
+          status: 'validated',
+        });
+        this.set('certification', certification);
+
+        // when
+        const screen = await renderScreen(
+          hbs`<UserCertificationsDetailHeader @certification={{this.certification}} />`,
+        );
+
+        // then
+        assert
+          .dom(screen.queryByRole('link', { name: t('pages.certificate.learn-about-certification-results') }))
+          .doesNotExist();
+      });
+    });
   });
 
   module('when there is an error during the download of the attestation', function () {
     test('should show the common error message', async function (assert) {
       // given
+      stubCurrentUserService(this.owner);
       const fileSaverSaveStub = sinon.stub();
 
       class FileSaverStub extends Service {

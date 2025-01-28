@@ -37,6 +37,16 @@
           {{t "pages.certificate.professionalizing-warning"}}</p>
       {{/if}}
 
+      {{#if this.displayCertificationResultsExplanation}}
+        <PixButtonLink
+          @href={{this.certificationResultsExplanationUrl}}
+          target="_blank"
+          rel="noopener noreferrer"
+          @variant="tertiary"
+          @iconAfter="openNew"
+        > {{t "pages.certificate.learn-about-certification-results"}}</PixButtonLink>
+      {{/if}}
+
     </div>
   </div>
   {{#if @certification.verificationCode}}

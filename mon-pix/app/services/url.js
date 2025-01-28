@@ -132,6 +132,14 @@ export default class Url extends Service {
     return `https://status.pix.org/?locale=${currentLanguage}`;
   }
 
+  get certificationResultsExplanationUrl() {
+    if (this.currentDomain.isFranceDomain) {
+      return 'https://pix.fr/certification-comprendre-score-niveau';
+    }
+
+    return 'https://pix.org/fr/certification-comprendre-score-niveau';
+  }
+
   get _showcaseWebsiteUrl() {
     const currentLanguage = this.intl.primaryLocale;
 

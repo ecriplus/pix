@@ -67,6 +67,7 @@ export function stubSessionService(owner, sessionData = {}) {
  * @param {string} [userData.firstName='John'] - The first name of the user.
  * @param {string} [userData.lastName='Doe'] - The last name of the user.
  * @param {string} [userData.email] - The email of the user.
+ * @param {string} [userData.lang] - The language of the user.
  * @param {Object} [userData.profile] - The profile of the user.
  * @param {boolean} [userData.mustValidateTermsOfService=false] - Indicates if the user must validate terms of service.
  * @param {boolean} [userData.hasRecommendedTrainings=false] - Indicates if the user has recommended trainings.
@@ -85,6 +86,7 @@ export function stubCurrentUserService(owner, userData = {}, { withStoreStubbed 
   const firstName = userData.firstName || 'John';
   const lastName = userData.lastName || 'Doe';
   const fullName = `${firstName} ${lastName}`;
+  const lang = userData.lang || 'fr';
   const email = userData.email || `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.net`;
   const codeForLastProfileToShare = userData.codeForLastProfileToShare || null;
   const mustValidateTermsOfService = userData.mustValidateTermsOfService || false;
@@ -123,6 +125,7 @@ export function stubCurrentUserService(owner, userData = {}, { withStoreStubbed 
             firstName,
             lastName,
             fullName,
+            lang,
             profile,
             codeForLastProfileToShare,
             mustValidateTermsOfService,
