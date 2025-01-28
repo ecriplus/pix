@@ -1296,8 +1296,6 @@
         "missing-code": "Please enter a code.",
         "not-found": "Your code is incorrect. Please check its format (ex: ABCDEF234) or contact the organiser."
       },
-      "explanation-link": "https://support.pix.org/en/support/solutions/articles/15000029147-what-is-a-customised-test-code-and-how-do-i-use-it-",
-      "explanation-message": "What is a customised test code and how do I use it?",
       "first-title-connected": "{ firstName }, enter your code",
       "first-title-not-connected": "Enter your code",
       "label": "Enter your code to start",

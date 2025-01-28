@@ -36,25 +36,6 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
     });
   });
 
-  module('Explanation link', function () {
-    test('should redirect on the right support page', async function (assert) {
-      // given
-      await authenticate(user);
-      await visit('/campagnes');
-
-      // when
-      await clickByLabel(t('pages.fill-in-campaign-code.explanation-message'));
-
-      // then
-      assert
-        .dom(
-          '[href="https://support.pix.org/fr/support/solutions/articles/15000029147-qu-est-ce-qu-un-code-parcours-et-comment-l-utiliser-"]',
-        )
-        .exists();
-      assert.dom('[target="_blank"]').exists();
-    });
-  });
-
   module('when user is not connected to his Mediacentre', function () {
     module('and starts a campaign with GAR as identity provider', function () {
       test('should not redirect the user and display a modal', async function (assert) {

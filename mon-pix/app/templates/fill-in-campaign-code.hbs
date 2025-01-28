@@ -53,16 +53,6 @@
           </div>
         {{/if}}
 
-        <div class="fill-in-campaign-code__explanation">
-          <a
-            href={{t "pages.fill-in-campaign-code.explanation-link"}}
-            class="link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {{t "pages.fill-in-campaign-code.explanation-message"}}
-          </a>
-        </div>
       </PixBlock>
       {{#if this.canDisplayLanguageSwitcher}}
         <LanguageSwitcher @selectedLanguage={{this.selectedLanguage}} @onLanguageChange={{this.onLanguageChange}} />
