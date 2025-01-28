@@ -4,14 +4,28 @@ import packageJSON from '../../package.json' with { type: 'json' };
 import { config } from './config.js';
 import { logger } from './infrastructure/utils/logger.js';
 
+/**
+ * System wide Open API configuration
+ * Contains basic Open Api configuration
+ * @abstract
+ */
 class PixOpenApiBaseDefinition {
-  constructor() {
+  /**
+   * @param {Object} params
+   * @param {string} params.endpoint API documentation endpoint
+   *                                 example: "endpoint=/test"
+   */
+  constructor({ endpoint }) {
+    if (!endpoint) {
+      throw new TypeError('Open Api definition requires an endpoint definition');
+    }
+
     /**
-     * External API endpoint for the swagger.json
+     * Open Api endpoint definition will be exposed under this endpoint
      * @type {string}
      * @public
      */
-    this.endpoint = '/api';
+    this.endpoint = endpoint;
 
     /**
      * Swagger configuration that builds the swagger.json and Swagger UI endpoints
@@ -22,11 +36,11 @@ class PixOpenApiBaseDefinition {
       OAS: 'v3.0',
       routeTag: 'api',
       info: {
+        title: 'Welcome to the Pix api catalog',
         version: packageJSON.version,
       },
       jsonPath: '/swagger.json',
       swaggerUIPath: '/documentation/swaggerui/',
-      routesBasePath: '/documentation/swaggerui/',
       uiOptions: {
         url: 'swagger.json',
       },
@@ -35,7 +49,7 @@ class PixOpenApiBaseDefinition {
           name: 'Authorization',
           scheme: 'Bearer',
           in: 'header',
-          description: 'Example: Bearer eyJ...z',
+          description: 'Example: "Bearer <MY_TOKEN>" (without the double quote)',
           type: 'apiKey',
         },
       },
@@ -46,8 +60,7 @@ class PixOpenApiBaseDefinition {
 
 class AuthorizationServer extends PixOpenApiBaseDefinition {
   constructor() {
-    super();
-    this.endpoint = '/authorization-server';
+    super({ endpoint: '/authorization-server' });
     this.swaggerConfiguration.info.title = 'Welcome to the Pix Authorization server';
     this.swaggerConfiguration.routeTag = 'authorization-server';
   }
@@ -55,8 +68,7 @@ class AuthorizationServer extends PixOpenApiBaseDefinition {
 
 class LivretScolaire extends PixOpenApiBaseDefinition {
   constructor() {
-    super();
-    this.endpoint = '/livret-scolaire';
+    super({ endpoint: '/livret-scolaire' });
     this.swaggerConfiguration.info.title = 'Welcome to the Pix LSU/LSL Open Api';
     this.swaggerConfiguration.routeTag = 'livret-scolaire';
   }
@@ -64,20 +76,46 @@ class LivretScolaire extends PixOpenApiBaseDefinition {
 
 class PoleEmploi extends PixOpenApiBaseDefinition {
   constructor() {
-    super();
-    this.endpoint = '/pole-emploi';
+    super({ endpoint: '/pole-emploi' });
     this.swaggerConfiguration.info.title = 'Pix Pôle emploi Open Api';
     this.swaggerConfiguration.routeTag = 'pole-emploi';
   }
 }
 
-class Parcoursup extends PixOpenApiBaseDefinition {
+class PixAPI extends PixOpenApiBaseDefinition {
   constructor() {
-    super();
-    this.endpoint = '/api/application/parcoursup';
+    super({ endpoint: '/api' });
+    this.swaggerConfiguration.grouping = 'tags';
+  }
+}
+
+/**
+ * Open API definitions that are exposed via APIM
+ * Extend this class to expose tour endpoints via the ApiManager
+ * @abstract
+ */
+class ApiManagerAccess extends PixOpenApiBaseDefinition {
+  /**
+   * @param {Object} params
+   * @param {string} params.appIdentifier will expose API documentation under this identifier
+   *                                       example: "appIdentifier=test" produces "/documentation/test"
+   */
+  constructor({ appIdentifier }) {
+    if (!appIdentifier) {
+      throw new TypeError('API manager configuration requires an app identifier');
+    }
+
+    // Api Manager documentation are all grouped under same endpoint
+    super({ endpoint: '/documentation' });
+
+    // Group Swagger static assets under our app endpoint
+    this.swaggerConfiguration.documentationPath = `/${appIdentifier}`;
+    this.swaggerConfiguration.swaggerUIPath = `/${appIdentifier}/`;
+    this.swaggerConfiguration.jsonPath = `/${appIdentifier}/openapi.json`;
+    this.swaggerConfiguration.uiOptions.url = `${this.endpoint}${this.swaggerConfiguration.jsonPath}`;
+
+    // UI won't display the internal api base path externally
     this.swaggerConfiguration.basePath = '/api/application';
-    this.swaggerConfiguration.info.title = 'Pix Parcoursup Open Api';
-    this.swaggerConfiguration.routeTag = 'parcoursup';
     this.#addExternalPartnersAccess();
   }
 
@@ -107,12 +145,11 @@ class Parcoursup extends PixOpenApiBaseDefinition {
   }
 }
 
-class PixAPI extends PixOpenApiBaseDefinition {
+class Parcoursup extends ApiManagerAccess {
   constructor() {
-    super();
-    this.endpoint = '/api';
-    this.swaggerConfiguration.grouping = 'tags';
-    this.swaggerConfiguration.info.title = 'Welcome to the Pix api catalog';
+    super({ appIdentifier: 'parcoursup' });
+    this.swaggerConfiguration.info.title = 'Pix Parcoursup Open Api';
+    this.swaggerConfiguration.routeTag = 'parcoursup';
   }
 }
 
