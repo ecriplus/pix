@@ -43,12 +43,18 @@ export default class Organization extends Model {
       PLACES_MANAGEMENT: 'PLACES_MANAGEMENT',
       COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: 'COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY',
       LEARNER_IMPORT: 'LEARNER_IMPORT',
+      ATTESTATIONS_MANAGEMENT: 'ATTESTATIONS_MANAGEMENT',
     };
   }
 
   get isComputeCertificabilityEnabled() {
     if (!this.features) return false;
     return this.features[Organization.featureList.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY].active;
+  }
+
+  get isAttestationsEnabled() {
+    if (!this.features) return false;
+    return this.features[Organization.featureList.ATTESTATIONS_MANAGEMENT].active;
   }
 
   get isLearnerImportEnabled() {

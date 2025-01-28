@@ -187,6 +187,9 @@ export default class OrganizationInformationSection extends Component {
             {{#if @organization.isComputeCertificabilityEnabled}}
               <li>Certificabilité automatique activée</li>
             {{/if}}
+            {{#if @organization.isAttestationsEnabled}}
+              <li>{{t "components.organizations.information-section-view.features.attestations"}}</li>
+            {{/if}}
 
           </ul>
           {{#if this.accessControl.hasAccessToOrganizationActionsScope}}

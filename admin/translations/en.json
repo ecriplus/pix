@@ -342,6 +342,9 @@
       },
       "information-section-view": {
         "child-organization": "Child organization",
+        "features": {
+          "attestations": "Attestations enabled"
+        },
         "parent-organization": "Parent organization"
       }
     },

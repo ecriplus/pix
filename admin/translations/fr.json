@@ -350,6 +350,9 @@
       },
       "information-section-view": {
         "child-organization": "Organisation fille",
+        "features": {
+          "attestations": "Attestations activée"
+        },
         "parent-organization": "Organisation mère"
       }
     },

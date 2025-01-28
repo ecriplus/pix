@@ -48,6 +48,50 @@ module('Unit | Model | organization', function (hooks) {
     });
   });
 
+  module('#isAttestationsEnabled', function () {
+    module('#get', function () {
+      test('it returns true when feature is enabled', function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const model = store.createRecord('organization', {
+          features: { ['ATTESTATIONS_MANAGEMENT']: { active: true } },
+        });
+
+        // when
+        const isAttestationsEnabled = model.isAttestationsEnabled;
+
+        // then
+        assert.true(isAttestationsEnabled);
+      });
+
+      test('it returns false when feature is disabled', function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const model = store.createRecord('organization', {
+          features: { ['ATTESTATIONS_MANAGEMENT']: { active: false } },
+        });
+
+        // when
+        const isAttestationsEnabled = model.isAttestationsEnabled;
+
+        // then
+        assert.false(isAttestationsEnabled);
+      });
+
+      test('it returns false when no features are provided', function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const model = store.createRecord('organization', {});
+
+        // when
+        const isAttestationsEnabled = model.isAttestationsEnabled;
+
+        // then
+        assert.false(isAttestationsEnabled);
+      });
+    });
+  });
+
   module('#isLearnerImportEnabled', function () {
     module('#get', function () {
       test('it returns true when feature is enabled', function (assert) {
