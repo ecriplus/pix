@@ -175,12 +175,10 @@ class CampaignAssessmentExport {
   }) {
     let participantKnowledgeElementsByCompetenceId = [];
     if (campaignParticipationInfo.isShared) {
-      //TODO: replace here
       const sharedKnowledgeElementsByUserIdAndCompetenceId =
         await knowledgeElementSnapshotRepository.findMultipleUsersFromUserIdsAndSnappedAtDates(
           sharedParticipations.map(({ userId, sharedAt }) => ({ userId, sharedAt })),
         );
-      //TODO: replace here
       const sharedResultInfo = sharedKnowledgeElementsByUserIdAndCompetenceId.find(
         (knowledElementForSharedParticipation) => {
           const sameUserId = campaignParticipationInfo.userId === knowledElementForSharedParticipation.userId;
@@ -199,7 +197,6 @@ class CampaignAssessmentExport {
       const startedParticipations = campaignParticipationInfoChunk.filter(
         ({ isShared, isCompleted }) => !isShared && !isCompleted,
       );
-      //TODO: replace here
       const othersKnowledgeElementsByUserIdAndCompetenceId = await knowledgeElementRepository.findUniqByUserIds(
         startedParticipations.map(({ userId }) => userId),
       );
