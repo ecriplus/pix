@@ -32,7 +32,7 @@ export const updateUserForAccountRecovery = async function ({
   const hasAnAuthenticationMethodFromPix = await authenticationMethodRepository.hasIdentityProviderPIX({ userId });
 
   if (hasAnAuthenticationMethodFromPix) {
-    await authenticationMethodRepository.updateChangedPassword({
+    await authenticationMethodRepository.updatePassword({
       userId,
       hashedPassword,
     });

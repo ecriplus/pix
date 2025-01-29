@@ -21,7 +21,7 @@ export const revokeAccessForUsers = async function ({
 
     // Revoke current user password
     try {
-      await authenticationMethodRepository.updateChangedPassword({ userId, hashedPassword: '[revoked]' });
+      await authenticationMethodRepository.updatePassword({ userId, hashedPassword: '[revoked]' });
     } catch (error) {
       if (!(error instanceof AuthenticationMethodNotFoundError)) throw error;
     }

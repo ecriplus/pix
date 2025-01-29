@@ -22,7 +22,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-for
     authenticationMethodRepository = {
       hasIdentityProviderPIX: sinon.stub(),
       create: sinon.stub(),
-      updateChangedPassword: sinon.stub(),
+      updatePassword: sinon.stub(),
     };
     scoAccountRecoveryService = {
       retrieveAndValidateAccountRecoveryDemand: sinon.stub(),
@@ -113,7 +113,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-user-for
       });
 
       // then
-      expect(authenticationMethodRepository.updateChangedPassword).to.have.been.calledWithExactly({
+      expect(authenticationMethodRepository.updatePassword).to.have.been.calledWithExactly({
         userId: user.id,
         hashedPassword,
       });

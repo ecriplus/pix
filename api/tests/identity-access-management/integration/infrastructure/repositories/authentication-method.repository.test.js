@@ -141,7 +141,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
   });
 
-  describe('#updateChangedPassword', function () {
+  describe('#updatePassword', function () {
     let userId;
     let clock;
 
@@ -155,7 +155,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       clock.restore();
     });
 
-    it('should update the password in database', async function () {
+    it('updates the password in database', async function () {
       // given
       const authenticationMethodId =
         databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
@@ -165,7 +165,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       await databaseBuilder.commit();
 
       // when
-      await authenticationMethodRepository.updateChangedPassword({
+      await authenticationMethodRepository.updatePassword({
         userId,
         hashedPassword: newHashedPassword,
       });
@@ -177,7 +177,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(authenticationComplement.password).to.equal(newHashedPassword);
     });
 
-    it('should return the updated AuthenticationMethod', async function () {
+    it('returns the updated AuthenticationMethod', async function () {
       // given
       const originalAuthenticationMethod =
         domainBuilder.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
@@ -191,7 +191,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       await databaseBuilder.commit();
 
       // when
-      const updatedAuthenticationMethod = await authenticationMethodRepository.updateChangedPassword({
+      const updatedAuthenticationMethod = await authenticationMethodRepository.updatePassword({
         userId,
         hashedPassword: newHashedPassword,
       });
@@ -207,7 +207,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(updatedAuthenticationMethod).to.deepEqualInstance(expectedAuthenticationMethod);
     });
 
-    it('should disable changing password', async function () {
+    it('disables changing password by default', async function () {
       // given
       databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
         userId,
@@ -217,7 +217,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       await databaseBuilder.commit();
 
       // when
-      const updatedAuthenticationMethod = await authenticationMethodRepository.updateChangedPassword({
+      const updatedAuthenticationMethod = await authenticationMethodRepository.updatePassword({
         userId,
         hashedPassword: newHashedPassword,
       });
@@ -226,12 +226,32 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(updatedAuthenticationMethod.authenticationComplement.shouldChangePassword).to.be.false;
     });
 
-    it('should throw AuthenticationMethodNotFoundError when user id not found', async function () {
+    it('enables changing password', async function () {
+      // given
+      databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
+        userId,
+        hashedPassword,
+        shouldChangePassword: false,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const updatedAuthenticationMethod = await authenticationMethodRepository.updatePassword({
+        userId,
+        hashedPassword: newHashedPassword,
+        shouldChangePassword: true,
+      });
+
+      // then
+      expect(updatedAuthenticationMethod.authenticationComplement.shouldChangePassword).to.be.true;
+    });
+
+    it('throws AuthenticationMethodNotFoundError when user id not found', async function () {
       // given
       const wrongUserId = 0;
 
       // when
-      const error = await catchErr(authenticationMethodRepository.updateChangedPassword)({
+      const error = await catchErr(authenticationMethodRepository.updatePassword)({
         userId: wrongUserId,
         hashedPassword,
       });
@@ -240,7 +260,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(error).to.be.instanceOf(AuthenticationMethodNotFoundError);
     });
 
-    it('should be DomainTransaction compliant', async function () {
+    it('is DomainTransaction compliant', async function () {
       // given
       const authenticationMethod =
         databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
@@ -252,7 +272,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       // when
       await catchErr(async function () {
         await DomainTransaction.execute(async () => {
-          await authenticationMethodRepository.updateChangedPassword({ userId, hashedPassword: 'coucou' });
+          await authenticationMethodRepository.updatePassword({ userId, hashedPassword: 'coucou' });
           throw new Error('Error occurs in transaction');
         });
       })();

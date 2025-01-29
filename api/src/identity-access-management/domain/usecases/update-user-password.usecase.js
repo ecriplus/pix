@@ -33,7 +33,7 @@ export const updateUserPassword = withTransaction(async function ({
   await resetPasswordService.invalidateResetPasswordDemand(user.email, temporaryKey, resetPasswordDemandRepository);
 
   const hashedPassword = await cryptoService.hashPassword(password);
-  await authenticationMethodRepository.updateChangedPassword({
+  await authenticationMethodRepository.updatePassword({
     userId: user.id,
     hashedPassword,
   });

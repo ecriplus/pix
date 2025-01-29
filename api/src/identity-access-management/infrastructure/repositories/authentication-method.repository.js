@@ -132,13 +132,13 @@ const removeAllAuthenticationMethodsByUserId = async function ({ userId }) {
   return knexConn(AUTHENTICATION_METHODS_TABLE).where({ userId }).del();
 };
 
-const updateChangedPassword = async function ({ userId, hashedPassword }) {
+const updatePassword = async function ({ userId, hashedPassword, shouldChangePassword = false }) {
+  const knexConn = DomainTransaction.getConnection();
   const authenticationComplement = new AuthenticationMethod.PixAuthenticationComplement({
     password: hashedPassword,
-    shouldChangePassword: false,
+    shouldChangePassword,
   });
 
-  const knexConn = DomainTransaction.getConnection();
   const [authenticationMethodDTO] = await knexConn(AUTHENTICATION_METHODS_TABLE)
     .where({
       userId,
@@ -155,7 +155,6 @@ const updateChangedPassword = async function ({ userId, hashedPassword }) {
 
 const updatePasswordThatShouldBeChanged = async function ({ userId, hashedPassword }) {
   const knexConn = DomainTransaction.getConnection();
-
   const authenticationComplement = new AuthenticationMethod.PixAuthenticationComplement({
     password: hashedPassword,
     shouldChangePassword: true,
@@ -175,12 +174,13 @@ const updatePasswordThatShouldBeChanged = async function ({ userId, hashedPasswo
 };
 
 const updateExpiredPassword = async function ({ userId, hashedPassword }) {
+  const knexConn = DomainTransaction.getConnection();
   const authenticationComplement = new AuthenticationMethod.PixAuthenticationComplement({
     password: hashedPassword,
     shouldChangePassword: false,
   });
 
-  const [authenticationMethodDTO] = await knex(AUTHENTICATION_METHODS_TABLE)
+  const [authenticationMethodDTO] = await knexConn(AUTHENTICATION_METHODS_TABLE)
     .where({
       userId,
       identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
@@ -290,7 +290,7 @@ const anonymizeByUserIds = async function ({ userIds }) {
  * @property {function} update
  * @property {function} updateAuthenticationComplementByUserIdAndIdentityProvider
  * @property {function} updateAuthenticationMethodUserId
- * @property {function} updateChangedPassword
+ * @property {function} updatePassword
  * @property {function} updateExpiredPassword
  * @property {function} updateExternalIdentifierByUserIdAndIdentityProvider
  * @property {function} updatePasswordThatShouldBeChanged
@@ -310,9 +310,9 @@ export {
   update,
   updateAuthenticationComplementByUserIdAndIdentityProvider,
   updateAuthenticationMethodUserId,
-  updateChangedPassword,
   updateExpiredPassword,
   updateExternalIdentifierByUserIdAndIdentityProvider,
+  updatePassword,
   updatePasswordThatShouldBeChanged,
 };
 
