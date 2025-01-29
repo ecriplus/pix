@@ -6,7 +6,6 @@ const ROLE_LABELS = {
 };
 
 export default class OrganizationMembership extends Model {
-  @attr() updatedAt;
   @attr() disabledAt;
   @attr() organizationRole;
   @attr() organizationId;

@@ -1,7 +1,6 @@
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 
 import ActionsOnUsersRoleInOrganization from '../actions-on-users-role-in-organization';
 
@@ -26,7 +25,6 @@ export default class UserOrganizationMemberships extends Component {
               <th>Nom</th>
               <th>Type</th>
               <th>Identifiant externe</th>
-              <th>Dernière modification</th>
               <th>Rôle</th>
               {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
                 <th>Actions</th>
@@ -47,7 +45,6 @@ export default class UserOrganizationMemberships extends Component {
                   <td>{{organizationMembership.organizationName}}</td>
                   <td>{{organizationMembership.organizationType}}</td>
                   <td>{{organizationMembership.organizationExternalId}}</td>
-                  <td>{{dayjsFormat organizationMembership.updatedAt "DD/MM/YYYY [-] HH:mm"}}</td>
                   <ActionsOnUsersRoleInOrganization @organizationMembership={{organizationMembership}} />
                 </tr>
               {{/each}}
