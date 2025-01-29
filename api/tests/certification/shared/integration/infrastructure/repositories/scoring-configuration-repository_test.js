@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { knex } from '../../../../../../db/knex-database-connection.js';
 import { V3CertificationScoring } from '../../../../../../src/certification/shared/domain/models/V3CertificationScoring.js';
 import {
@@ -8,9 +6,7 @@ import {
   saveCompetenceForScoringConfiguration,
 } from '../../../../../../src/certification/shared/infrastructure/repositories/scoring-configuration-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
-import { buildArea, buildCompetence, buildFramework } from '../../../../../tooling/domain-builder/factory/index.js';
-import { buildLearningContent } from '../../../../../tooling/learning-content-builder/index.js';
+import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | scoring-configuration-repository', function () {
   describe('#getLatestByDateAndLocale', function () {
@@ -44,28 +40,21 @@ describe('Integration | Repository | scoring-configuration-repository', function
       const secondConfigurationDate = new Date('2020-01-01T08:00:00Z');
       const thirdConfigurationDate = new Date('2021-01-01T08:00:00Z');
 
-      const getAreaCode = (competenceCode) => competenceCode.split('.').shift();
-      const competenceLevelIntervalsWithAreaCode = competenceScoringConfiguration.map((competenceLevelInterval) => ({
-        ...competenceLevelInterval,
-        areaCode: getAreaCode(competenceLevelInterval.competence),
-      }));
-      const competenceLevelIntervalsByArea = _.groupBy(competenceLevelIntervalsWithAreaCode, 'areaCode');
-      const areas = Object.entries(competenceLevelIntervalsByArea).map(([areaCode, competenceLevelIntervals]) => {
-        const areaId = `recArea${areaCode}`;
-
-        const competences = competenceLevelIntervals.map((competenceLevelInterval) => {
-          const competenceIndex = competenceLevelInterval.competence;
-          const competenceId = `recCompetence${competenceIndex}`;
-
-          return buildCompetence({ id: competenceId, areaId, index: competenceIndex });
-        });
-
-        return buildArea({ id: areaId, frameworkId, code: areaCode, competences });
+      const externalFramework = databaseBuilder.factory.learningContent.buildFramework({
+        id: frameworkId,
+        name: 'someFramework',
       });
-      const framework = buildFramework({ id: frameworkId, name: 'someFramework', areas });
-      const learningContent = buildLearningContent([framework]);
-
-      await mockLearningContent(learningContent);
+      const competence = databaseBuilder.factory.learningContent.buildCompetence({
+        id: 'recCompetence1',
+        index: '1.1',
+        areaId: 'recArea1',
+      });
+      databaseBuilder.factory.learningContent.buildArea({
+        id: 'recArea1',
+        frameworkId: externalFramework.id,
+        code: '1',
+        competenceIds: [competence.id],
+      });
 
       databaseBuilder.factory.buildCompetenceScoringConfiguration({
         configuration: competenceScoringConfiguration,
