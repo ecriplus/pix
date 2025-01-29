@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
 const schema = Joi.object({
+  ACCESS_TOKEN_LIFESPAN: Joi.string().optional(),
   AUTH_SECRET: Joi.string().required(),
   AUTONOMOUS_COURSES_ORGANIZATION_ID: Joi.number().required(),
   API_DATA_URL: Joi.string().uri().optional(),
@@ -59,6 +60,7 @@ const schema = Joi.object({
   POLE_EMPLOI_SENDING_URL: Joi.string().uri().optional(),
   POLE_EMPLOI_TOKEN_URL: Joi.string().uri().optional(),
   REDIS_URL: Joi.string().uri().optional(),
+  REVOKED_USER_ACCESS_LIFESPAN: Joi.string().optional(),
   SCO_ACCOUNT_RECOVERY_KEY_LIFETIME_MINUTES: Joi.number().integer().min(1).optional(),
   TEST_DATABASE_URL: Joi.string().optional(),
   TEST_LOG_ENABLED: Joi.string().optional().valid('true', 'false'),
