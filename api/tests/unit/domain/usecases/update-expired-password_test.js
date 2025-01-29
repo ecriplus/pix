@@ -34,7 +34,7 @@ describe('Unit | UseCase | update-expired-password', function () {
       extractUserId: sinon.stub(),
     };
     authenticationMethodRepository = {
-      updateExpiredPassword: sinon.stub(),
+      updatePassword: sinon.stub(),
       findOneByUserIdAndIdentityProvider: sinon.stub(),
     };
 
@@ -63,7 +63,7 @@ describe('Unit | UseCase | update-expired-password', function () {
       userId: user.id,
       identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
     });
-    expect(authenticationMethodRepository.updateExpiredPassword).to.have.been.calledOnceWith({
+    expect(authenticationMethodRepository.updatePassword).to.have.been.calledOnceWith({
       userId: user.id,
       hashedPassword,
     });

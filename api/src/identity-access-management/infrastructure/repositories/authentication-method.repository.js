@@ -153,27 +153,6 @@ const updatePassword = async function ({ userId, hashedPassword, shouldChangePas
   return _toDomain(authenticationMethodDTO);
 };
 
-const updateExpiredPassword = async function ({ userId, hashedPassword }) {
-  const knexConn = DomainTransaction.getConnection();
-  const authenticationComplement = new AuthenticationMethod.PixAuthenticationComplement({
-    password: hashedPassword,
-    shouldChangePassword: false,
-  });
-
-  const [authenticationMethodDTO] = await knexConn(AUTHENTICATION_METHODS_TABLE)
-    .where({
-      userId,
-      identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
-    })
-    .update({ authenticationComplement, updatedAt: new Date() })
-    .returning(COLUMNS);
-
-  if (!authenticationMethodDTO) {
-    throw new AuthenticationMethodNotFoundError(`Authentication method PIX for User ID ${userId} not found.`);
-  }
-  return _toDomain(authenticationMethodDTO);
-};
-
 const updateExternalIdentifierByUserIdAndIdentityProvider = async function ({
   externalIdentifier,
   userId,
@@ -271,7 +250,6 @@ const anonymizeByUserIds = async function ({ userIds }) {
  * @property {function} updateAuthenticationComplementByUserIdAndIdentityProvider
  * @property {function} updateAuthenticationMethodUserId
  * @property {function} updatePassword
- * @property {function} updateExpiredPassword
  * @property {function} updateExternalIdentifierByUserIdAndIdentityProvider
  */
 export {
@@ -289,7 +267,6 @@ export {
   update,
   updateAuthenticationComplementByUserIdAndIdentityProvider,
   updateAuthenticationMethodUserId,
-  updateExpiredPassword,
   updateExternalIdentifierByUserIdAndIdentityProvider,
   updatePassword,
 };
