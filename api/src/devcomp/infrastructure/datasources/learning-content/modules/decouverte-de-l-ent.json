@@ -101,7 +101,7 @@
           "element": {
             "id": "ec3e85be-af00-45e4-b5e4-f7453d617457",
             "type": "image",
-            "url": "https://i.imgur.com/BiJBrpw.png",
+            "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_schema.png",
             "alt": "",
             "alternativeText": ""
           }
@@ -126,7 +126,7 @@
           "element": {
             "id": "ac8b3ad5-dade-42be-9991-c4a7cd8d2827",
             "type": "image",
-            "url": "https://i.imgur.com/ROU05ql.png",
+            "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_accueil.jpg",
             "alt": "",
             "alternativeText": ""
           }
@@ -278,7 +278,7 @@
                 {
                   "id": "2780195f-aa4b-48e9-8aed-6a516281d590",
                   "type": "image",
-                  "url": "https://imgur.com/YRaydPs.png",
+                  "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_applis.jpg",
                   "alt": "",
                   "alternativeText": ""
                 },
@@ -322,7 +322,7 @@
                 {
                   "id": "5bed69d3-bc84-45ea-b378-ad040f77868f",
                   "type": "image",
-                  "url": "https://i.imgur.com/ph7lMFa.png",
+                  "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_message.jpg",
                   "alt": "",
                   "alternativeText": ""
                 },
@@ -356,7 +356,7 @@
                 {
                   "id": "339f5cb0-bcb1-4725-9ddd-9088cb9a6c74",
                   "type": "image",
-                  "url": "https://imgur.com/Tav2CuP.png",
+                  "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_devoirs.jpg",
                   "alt": "",
                   "alternativeText": ""
                 },
@@ -519,14 +519,14 @@
             "instruction": "<p><br></p>",
             "title": "L'espace numérique de travail",
             "introImage": {
-              "url": "https://images.pix.fr/modulix/didacticiel/intro-flashcards.png"
+              "url": "https://images.pix.fr/modulix/didactitiel/intro-flashcards.png"
             },
             "cards": [
               {
                 "id": "afa1fa77-eada-4759-94e2-f1c608c54980",
                 "recto": {
                   "image": {
-                    "url": "https://i.imgur.com/vg3Ro1F.png"
+                    "url": "https://images.pix.fr/modulix/recto-flashcards.png"
                   },
                   "text": "Qu'est ce qu'un ENT ?"
                 },
@@ -541,7 +541,7 @@
                 "id": "83f58acb-67c3-49c5-8ac9-020c6bf078ac",
                 "recto": {
                   "image": {
-                    "url": "https://i.imgur.com/vg3Ro1F.png"
+                    "url": "https://images.pix.fr/modulix/recto-flashcards.png"
                   },
                   "text": "Quelles personnes peuvent utiliser l'ENT d'un établissement scolaire ?"
                 },
@@ -556,7 +556,7 @@
                 "id": "95ee9711-0957-48d1-abfc-a147a5cfbcd4",
                 "recto": {
                   "image": {
-                    "url": "https://i.imgur.com/vg3Ro1F.png"
+                    "url": "https://images.pix.fr/modulix/recto-flashcards.png"
                   },
                   "text": "Quel compte un parent doit-il utiliser pour envoyer un message à un enseignant sur l'ENT ?"
                 },
@@ -571,7 +571,7 @@
                 "id": "be0e0732-596e-46cf-b8de-9d2f05c5aeb9",
                 "recto": {
                   "image": {
-                    "url": "https://i.imgur.com/vg3Ro1F.png"
+                    "url": "https://images.pix.fr/modulix/recto-flashcards.png"
                   },
                   "text": "Quelle fonctionnalité de l'ENT permet de consulter les devoirs de son enfant ?"
                 },
