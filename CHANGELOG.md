@@ -1,5 +1,29 @@
 # Pix Changelog
 
+## v5.29.0 (29/01/2025)
+
+
+### :rocket: Amélioration
+- [#11245](https://github.com/1024pix/pix/pull/11245) [FEATURE] Supprimer le lien "Qu'est-ce qu'un code parcours et comment l'utiliser ?" (PIX-16248).
+- [#11228](https://github.com/1024pix/pix/pull/11228) [FEATURE] Permettre de télécharger le kit dans l'espace surveillant sur Pix Certif (PIX-16250).
+- [#11227](https://github.com/1024pix/pix/pull/11227) [FEATURE] Ajouter un affichage dans le cas ou il n'y a pas de données de statistiques Pix Orga (PIX-16229).
+- [#11205](https://github.com/1024pix/pix/pull/11205) [FEATURE] Traduction en NL des CGU (PIX-16183).
+
+### :building_construction: Tech
+- [#11243](https://github.com/1024pix/pix/pull/11243) [TECH] Met à jour les dépendances sur PixOrga (PIX-16297).
+- [#11257](https://github.com/1024pix/pix/pull/11257) [TECH] Suppression endpoint deprecated Parcoursup (PIX-16109).
+- [#11248](https://github.com/1024pix/pix/pull/11248) [TECH]  Parcoursup : configuration compatible API manager pour exposer la documentation (PIX-16304).
+- [#11249](https://github.com/1024pix/pix/pull/11249) [TECH] Ne plus lancer la CI des PRs au statut draft.
+
+### :arrow_up: Montée de version
+- [#11260](https://github.com/1024pix/pix/pull/11260) [BUMP] Update dependency globals to v15.14.0 (admin).
+- [#11251](https://github.com/1024pix/pix/pull/11251) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.0.5 (junior).
+- [#11254](https://github.com/1024pix/pix/pull/11254) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.0.5 (orga).
+- [#11242](https://github.com/1024pix/pix/pull/11242) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.0.5 (api).
+- [#11252](https://github.com/1024pix/pix/pull/11252) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.0.5 (mon-pix).
+- [#11185](https://github.com/1024pix/pix/pull/11185) [BUMP] Update dependency eslint to v9 (admin).
+- [#11174](https://github.com/1024pix/pix/pull/11174) [BUMP] Update dependency @1024pix/pix-ui to v54 (mon-pix).
+
 ## v5.28.0 (28/01/2025)
 
 
