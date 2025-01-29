@@ -47,6 +47,8 @@ class ChallengeRepository extends LearningContentRepository {
     locales,
     competenceId,
     skillId,
+    hasEmbedInternalValidation,
+    noValidationNeeded,
   }) {
     return {
       id,
@@ -86,6 +88,8 @@ class ChallengeRepository extends LearningContentRepository {
       locales,
       competenceId,
       skillId,
+      hasEmbedInternalValidation,
+      noValidationNeeded,
     };
   }
 
