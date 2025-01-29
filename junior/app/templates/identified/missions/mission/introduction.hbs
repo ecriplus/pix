@@ -5,7 +5,12 @@
     <div class="header_container">
       <RobotDialog>
         <Bubble
-          @message={{t "pages.missions.introduction-page.welcome"}}
+          @message={{t "pages.missions.introduction-page.robot-text.0"}}
+          @oralization={{@model.learnerHasOralizationFeature}}
+        />
+
+        <Bubble
+          @message={{t "pages.missions.introduction-page.robot-text.1"}}
           @oralization={{@model.learnerHasOralizationFeature}}
         />
       </RobotDialog>

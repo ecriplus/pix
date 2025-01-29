@@ -1,0 +1,22 @@
+{{page-title (t "pages.missions.feedback.title")}}
+<Challenge::ChallengeLayout @color="{{this.feedbackClassName}}">
+
+  <div class="feedback">
+    <div class="robot-container">
+
+      <RobotDialog @class={{this.robotMood}} @robotOffSet={{120}}>
+        {{#each this.robotFeedBackMessage as |message|}}
+          <Bubble @message={{message}} />
+        {{/each}}
+
+      </RobotDialog>
+      <PixButton
+        @variant={{this.backHomeButtonVariant}}
+        class="issue-button"
+        @size="large"
+        @triggerAction={{this.routeUrl}}
+      >{{this.buttonLabel}}</PixButton>
+    </div>
+
+  </div>
+</Challenge::ChallengeLayout>

@@ -5,8 +5,8 @@ export default class ResumeRoute extends Route {
   @service router;
   @service store;
 
-  async redirect(assessment, transition) {
-    if (transition.from.name === 'challenge-preview') {
+  async afterModel(assessment, transition) {
+    if (transition.from?.name === 'challenge-preview') {
       return this.router.replaceWith('organization-code');
     }
     if (transition.to.queryParams.assessmentHasNoMoreQuestions === 'true') {
@@ -16,6 +16,6 @@ export default class ResumeRoute extends Route {
   }
 
   _routeToResults(assessment) {
-    return this.router.replaceWith('assessment.results', assessment.id);
+    return this.router.transitionTo('assessment.feedback', assessment.id);
   }
 }

@@ -1,0 +1,26 @@
+.feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 185px;
+  }
+
+  button {
+    width: fit-content;
+    margin-top: 46px;
+    margin-left: 190px;
+  }
+
+  .robot-speaking {
+    width: fit-content;
+
+    .bubbles {
+      margin-left: 190px;
+    }
+  }
+}

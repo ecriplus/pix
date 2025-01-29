@@ -35,6 +35,8 @@
 @use 'pages/loading' as *;
 @use 'pages/organization-code' as *;
 @use 'pages/school' as *;
+@use 'pages/assessments/feedback' as *;
+
 
 body {
   color: var(--pix-neutral-900);

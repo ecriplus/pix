@@ -97,10 +97,46 @@
         },
         "title": "Fin de mission"
       },
+      "feedback": {
+        "result": {
+          "exceeded": {
+            "button-label": "Voir ce que tu as réussi",
+            "robot-text": {
+              "0": "Tu as terminé la mission.",
+              "1": "Bravo ! Tu es incollable sur le sujet et tu as réussi le défi !"
+            }
+          },
+          "not-reached": {
+            "button-label": "Voir ce que tu as travaillé",
+            "robot-text": {
+              "0": "Cette mission semble difficile pour toi.",
+              "1": "Avec de l’aide, tu pourras réessayer et progresser."
+            }
+          },
+          "partially-reached": {
+            "button-label": "Voir ce que tu as travaillé",
+            "robot-text": {
+              "0": "Tout ne semble pas encore acquis pour toi.",
+              "1": "As-tu bien tout lu ? Tu pourras bientôt réessayer la mission."
+            }
+          },
+          "reached": {
+            "button-label": "Voir ce que tu as réussi",
+            "robot-text": {
+              "0": "Tu as terminé la mission.",
+              "1": "Bravo ! Tu as atteint les objectifs de la mission."
+            }
+          }
+        },
+        "title": "Encouragements"
+      },
       "introduction-page": {
+        "robot-text": {
+          "0": "Des élèves ont besoin de ton aide.",
+          "1": "Découvrons ensemble ta nouvelle mission !"
+        },
         "start-mission": "Démarrer la mission",
-        "title": "Introduction",
-        "welcome": "Avant de commencer, voici une présentation de ta mission"
+        "title": "Introduction"
       },
       "list": {
         "back-to-students": "Si tu n'es pas <strong>{prenom}</strong>, '<'a href=\"{backUrl}\" class=\"internal-link\" '>'clique ici pour retourner à la liste des élèves '</a>'",
