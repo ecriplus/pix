@@ -1,13 +1,11 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import * as learningContentRepository from '../../../../../lib/infrastructure/repositories/learning-content-repository.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { CampaignLearningContent } from '../../../../shared/domain/models/CampaignLearningContent.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import { CampaignAssessmentParticipationResult } from '../../domain/models/CampaignAssessmentParticipationResult.js';
 
 const getByCampaignIdAndCampaignParticipationId = async function ({ campaignId, campaignParticipationId, locale }) {
-  const learningContent = await learningContentRepository.findByCampaignId(campaignId, locale);
-  const campaignLearningContent = new CampaignLearningContent(learningContent);
+  const campaignLearningContent = await learningContentRepository.findByCampaignId(campaignId, locale);
   const result = await _fetchCampaignAssessmentParticipationResultAttributesFromCampaignParticipation(
     campaignId,
     campaignParticipationId,

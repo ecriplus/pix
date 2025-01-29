@@ -5,7 +5,6 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 import { CampaignTypeError } from '../../../../shared/domain/errors.js';
-import { CampaignLearningContent } from '../../../../shared/domain/models/index.js';
 import { CampaignAssessmentExport } from '../../infrastructure/serializers/csv/campaign-assessment-export.js';
 
 /**
@@ -64,7 +63,6 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
   const targetProfile = await targetProfileRepository.getByCampaignId(campaign.id);
   const learningContent = await learningContentRepository.findByCampaignId(campaign.id, i18n.getLocale());
   const stageCollection = await stageCollectionRepository.findStageCollection({ campaignId });
-  const campaignLearningContent = new CampaignLearningContent(learningContent);
 
   const organization = await organizationRepository.get(campaign.organizationId);
   const campaignParticipationInfos = await campaignParticipationInfoRepository.findByCampaignId(campaign.id);
@@ -79,7 +77,7 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
     outputStream: writableStream,
     organization,
     targetProfile,
-    learningContent: campaignLearningContent,
+    learningContent,
     stageCollection,
     campaign,
     translate,

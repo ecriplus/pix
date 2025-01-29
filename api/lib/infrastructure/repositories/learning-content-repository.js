@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { knex } from '../../../db/knex-database-connection.js';
 import * as campaignRepository from '../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import { NoSkillsInCampaignError, NotFoundError } from '../../../src/shared/domain/errors.js';
+import { CampaignLearningContent } from '../../../src/shared/domain/models/CampaignLearningContent.js';
 import { LearningContent } from '../../../src/shared/domain/models/LearningContent.js';
 import * as areaRepository from '../../../src/shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../src/shared/infrastructure/repositories/competence-repository.js';
@@ -17,7 +18,7 @@ async function findByCampaignId(campaignId, locale) {
 
   const frameworks = await _getLearningContentBySkillIds(skills, locale);
 
-  return new LearningContent(frameworks);
+  return new CampaignLearningContent(frameworks);
 }
 
 async function findByTargetProfileId(targetProfileId, locale) {

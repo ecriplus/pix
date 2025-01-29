@@ -1,5 +1,4 @@
 import { UserNotAuthorizedToAccessEntityError } from '../../../../shared/domain/errors.js';
-import { CampaignLearningContent } from '../../../../shared/domain/models/CampaignLearningContent.js';
 import { CampaignParticipationDeletedError } from '../errors.js';
 
 const computeCampaignParticipationAnalysis = async function ({
@@ -28,8 +27,7 @@ const computeCampaignParticipationAnalysis = async function ({
     return null;
   }
 
-  const learningContent = await learningContentRepository.findByCampaignId(campaignId, locale);
-  const campaignLearningContent = new CampaignLearningContent(learningContent);
+  const campaignLearningContent = await learningContentRepository.findByCampaignId(campaignId, locale);
   const tutorials = await tutorialRepository.list({ locale });
 
   return campaignAnalysisRepository.getCampaignParticipationAnalysis(
