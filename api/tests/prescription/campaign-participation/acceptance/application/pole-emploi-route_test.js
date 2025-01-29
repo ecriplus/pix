@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   generateValidRequestAuthorizationHeaderForApplication,
 } from '../../../../test-helper.js';
 
@@ -144,7 +144,7 @@ describe('Acceptance | API | Pole Emploi envois', function () {
         options = {
           method: 'GET',
           url: '/api/pole-emploi/envois',
-          headers: { authorization: generateValidRequestAuthorizationHeader() },
+          headers: generateAuthenticatedUserRequestHeaders(),
         };
 
         // when

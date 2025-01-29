@@ -9,7 +9,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 EventEmitter.defaultMaxListeners = 60;
@@ -49,9 +49,7 @@ describe('Acceptance | Application | organization-controller-import-sco-organiza
       options = {
         method: 'POST',
         url: `/api/organizations/${organizationId}/sco-organization-learners/import-siecle`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(connectedUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
       };
     });
 
@@ -132,7 +130,7 @@ describe('Acceptance | Application | organization-controller-import-sco-organiza
           const userId = databaseBuilder.factory.buildUser.withMembership().id;
           await databaseBuilder.commit();
 
-          options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+          options.headers = generateAuthenticatedUserRequestHeaders({ userId });
         });
 
         it('should respond with a 403 - Forbidden access', async function () {
@@ -157,7 +155,7 @@ describe('Acceptance | Application | organization-controller-import-sco-organiza
           }).id;
           await databaseBuilder.commit();
 
-          options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+          options.headers = generateAuthenticatedUserRequestHeaders({ userId });
           options.url = `/api/organizations/${organizationId}/sco-organization-learners/import-siecle`;
         });
 
@@ -183,7 +181,7 @@ describe('Acceptance | Application | organization-controller-import-sco-organiza
           }).id;
           await databaseBuilder.commit();
 
-          options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+          options.headers = generateAuthenticatedUserRequestHeaders({ userId });
           options.url = `/api/organizations/${organizationId}/sco-organization-learners/import-siecle`;
         });
 
@@ -209,7 +207,7 @@ describe('Acceptance | Application | organization-controller-import-sco-organiza
           }).id;
           await databaseBuilder.commit();
 
-          options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+          options.headers = generateAuthenticatedUserRequestHeaders({ userId });
           options.url = `/api/organizations/${organizationId}/sco-organization-learners/import-siecle`;
         });
 

@@ -3,7 +3,7 @@ import { identityAccessManagementRoutes } from '../../../../src/identity-access-
 import {
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
 } from '../../../test-helper.js';
 
@@ -31,7 +31,7 @@ describe('Integration | Identity Access Management | Application | Route | Anony
             data: {},
           },
           null,
-          { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         );
 
         // then
@@ -51,7 +51,7 @@ describe('Integration | Identity Access Management | Application | Route | Anony
 
         const options = {
           method: 'POST',
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           url: '/api/admin/anonymize/gar',
           payload: input,
         };
@@ -76,7 +76,7 @@ describe('Integration | Identity Access Management | Application | Route | Anony
 
         const options = {
           method: 'POST',
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           url: '/api/admin/anonymize/gar',
           payload: input,
         };

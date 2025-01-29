@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | users-controller-find-users', function () {
@@ -27,7 +27,7 @@ describe('Acceptance | users-controller-find-users', function () {
     options = {
       method: 'GET',
       url: '/api/admin/users',
-      headers: { authorization: generateValidRequestAuthorizationHeader(userSuperAdminId) },
+      headers: generateAuthenticatedUserRequestHeaders({ userId: userSuperAdminId }),
     };
 
     await databaseBuilder.commit();
@@ -51,7 +51,7 @@ describe('Acceptance | users-controller-find-users', function () {
       it('should respond with a 403 - forbidden access - if user has not role Super Admin', function () {
         // given
         const nonSuperAdminUserId = 9999;
-        options.headers.authorization = generateValidRequestAuthorizationHeader(nonSuperAdminUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: nonSuperAdminUserId });
 
         // when
         const promise = server.inject(options);

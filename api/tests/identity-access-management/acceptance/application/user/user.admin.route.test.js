@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
   sinon,
@@ -29,7 +29,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
       const response = await server.inject({
         method: 'PUT',
         url: `/api/admin/users/${userId}/unblock`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(superAdmin.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       });
 
       // then
@@ -67,7 +67,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
           requestOptions = {
             method: 'GET',
             url: `/api/admin/users${params}`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           };
           // when
           const response = await server.inject(requestOptions);
@@ -90,7 +90,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
           requestOptions = {
             method: 'GET',
             url: `/api/admin/users${params}`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           };
           // when
           const response = await server.inject(requestOptions);
@@ -115,7 +115,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
       const options = {
         method: 'PATCH',
         url: `/api/admin/users/${user.id}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         payload: {
           data: {
             id: user.id,
@@ -176,7 +176,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
         const options = {
           method: 'PATCH',
           url: `/api/admin/users/${user.id}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           payload: {
             data: {
               id: user.id,
@@ -228,9 +228,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
           method: 'GET',
           url: `/api/admin/users/${user.id}`,
           payload: {},
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(otherUserId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: otherUserId }),
         });
 
         // then
@@ -261,9 +259,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
           method: 'GET',
           url: `/api/admin/users/${user.id}`,
           payload: {},
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         });
 
         // then
@@ -374,7 +370,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
         method: 'POST',
         url: `/api/admin/users/${userId}/anonymize`,
         payload: {},
-        headers: { authorization: generateValidRequestAuthorizationHeader(superAdmin.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       });
     });
 
@@ -427,9 +423,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
       const response = await server.inject({
         method: 'POST',
         url: `/api/admin/users/${user.id}/add-pix-authentication-method`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: {
           data: {
             id: user.id,
@@ -471,7 +465,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
             },
           },
         },
-        headers: { authorization: generateValidRequestAuthorizationHeader(superAdmin.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
       return databaseBuilder.commit();
     });
@@ -529,9 +523,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
       const response = await server.inject({
         method: 'POST',
         url: `/api/admin/users/${originUserId}/authentication-methods/${authenticationMethodId}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: {
           data: {
             attributes: {
@@ -564,9 +556,7 @@ describe('Acceptance | Identity Access Management | Application | Route | Admin 
       const response = await server.inject({
         method: 'POST',
         url: `/api/admin/users/${originUserId}/authentication-methods/${authenticationMethodId}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: {
           data: {
             attributes: {

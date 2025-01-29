@@ -5,7 +5,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../../test-helper.js';
@@ -19,7 +19,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         const server = await createServer();
 
         const options = {
-          headers: { authorization: generateValidRequestAuthorizationHeader() },
+          headers: generateAuthenticatedUserRequestHeaders(),
           method: 'PATCH',
           url: '/api/admin/certification-courses/1',
           payload: {
@@ -61,7 +61,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         }).id;
 
         options = {
-          headers: { authorization: generateValidRequestAuthorizationHeader() },
+          headers: generateAuthenticatedUserRequestHeaders(),
           method: 'PATCH',
           url: `/api/admin/certification-courses/${certificationCourseId}`,
           payload: {
@@ -151,7 +151,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         const response = await server.inject({
           method: 'PATCH',
           url: `/api/admin/certification-courses/${certificationCourse.id}/reject`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         });
 
         // then
@@ -236,7 +236,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         const response = await server.inject({
           method: 'PATCH',
           url: `/api/admin/certification-courses/${certificationCourse.id}/reject`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         });
 
         // then
@@ -320,7 +320,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       const response = await server.inject({
         method: 'PATCH',
         url: `/api/admin/certification-courses/${certificationCourse.id}/unreject`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       });
 
       // then
@@ -372,7 +372,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       options = {
         method: 'POST',
         url: `/api/admin/certification-courses/${certificationCourseId}/assessment-results`,
-        headers: { authorization: generateValidRequestAuthorizationHeader() },
+        headers: generateAuthenticatedUserRequestHeaders(),
         payload: {
           data: {
             attributes: {
@@ -387,7 +387,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
     it('should respond with a 403 - forbidden access - if user has not role Super Admin', async function () {
       // given
       const nonSuperAdminUserId = 9999;
-      options.headers.authorization = generateValidRequestAuthorizationHeader(nonSuperAdminUserId);
+      options.headers = generateAuthenticatedUserRequestHeaders({ userId: nonSuperAdminUserId });
 
       // when
       const response = await server.inject(options);
@@ -435,14 +435,14 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       options = {
         method: 'GET',
         url: `/api/admin/certification-courses-v3/${certificationCourse.id}/details`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
     });
 
     it('should respond with a 403 - forbidden access - if user is not an admin member', async function () {
       // given
       const nonAdminMemberUserId = 9999;
-      options.headers.authorization = generateValidRequestAuthorizationHeader(nonAdminMemberUserId);
+      options.headers = generateAuthenticatedUserRequestHeaders({ userId: nonAdminMemberUserId });
 
       // when
       const response = await server.inject(options);

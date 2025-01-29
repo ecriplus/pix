@@ -1,6 +1,7 @@
 import boom from '@hapi/boom';
 import lodash from 'lodash';
 
+import { getForwardedOrigin } from '../../src/identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../src/shared/config.js';
 import { tokenService } from '../../src/shared/domain/services/token-service.js';
 
@@ -60,7 +61,6 @@ function validateUser(decoded) {
 
 function validateClientApplication(decoded) {
   const application = find(config.apimRegisterApplicationsCredentials, { clientId: decoded.client_id });
-
   if (!application) {
     return { isValid: false, errorCode: 401 };
   }
@@ -73,27 +73,37 @@ function validateClientApplication(decoded) {
 }
 
 async function _checkIsAuthenticated(request, h, { key, validate }) {
-  if (!request.headers.authorization) {
+  const authorizationHeader = request.headers.authorization;
+  if (!authorizationHeader) {
     return boom.unauthorized(null, 'jwt');
   }
 
-  const authorizationHeader = request.headers.authorization;
   const accessToken = tokenService.extractTokenFromAuthChain(authorizationHeader);
-
   if (!accessToken) {
     return boom.unauthorized();
   }
 
   const decodedAccessToken = tokenService.getDecodedToken(accessToken, key);
-  if (decodedAccessToken) {
-    const { isValid, credentials, errorCode } = validate(decodedAccessToken, request, h);
-    if (isValid) {
-      return h.authenticated({ credentials });
-    }
+  if (!decodedAccessToken) {
+    return boom.unauthorized();
+  }
 
-    if (errorCode === 403) {
-      return boom.forbidden();
+  // Only tokens including user_id are User Access Tokens.
+  // This is why applications Access Tokens are not subject to audience validation for now.
+  if (decodedAccessToken.user_id && config.featureToggles.isUserTokenAudConfinementEnabled) {
+    const audience = getForwardedOrigin(request.headers);
+    if (decodedAccessToken.aud !== audience) {
+      return boom.unauthorized();
     }
+  }
+
+  const { isValid, credentials, errorCode } = validate(decodedAccessToken, request, h);
+  if (isValid) {
+    return h.authenticated({ credentials });
+  }
+
+  if (errorCode === 403) {
+    return boom.forbidden();
   }
 
   return boom.unauthorized();

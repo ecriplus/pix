@@ -7,7 +7,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   sinon,
 } from '../../../../test-helper.js';
 
@@ -27,7 +27,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | enrolm
       options = {
         method: 'POST',
         url: '/api/sessions/1/enrol-students-to-session',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
       return databaseBuilder.commit();
     });
@@ -55,7 +55,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | enrolm
         options = {
           method: 'PUT',
           url: '/api/sessions/2.1/enrol-students-to-session',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
       });
 
@@ -111,7 +111,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | enrolm
         options = {
           method: 'PUT',
           url: `/api/sessions/${sessionId}/enrol-students-to-session`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload,
         };
       });
@@ -200,7 +200,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | enrolm
         method: 'GET',
         url: `/api/sessions/${sessionIdAllowed}/candidates-import-sheet`,
         payload: {},
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
       // when
       const response = await server.inject(options);
@@ -386,7 +386,7 @@ function generateOptions({ odsFilePath, userId, sessionId }) {
   return {
     method: 'POST',
     url: `/api/sessions/${sessionId}/certification-candidates/import`,
-    headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+    headers: generateAuthenticatedUserRequestHeaders({ userId }),
     payload: fs.createReadStream(odsFilePath),
   };
 }

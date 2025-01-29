@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -16,9 +16,7 @@ describe('Acceptance | API | complementary-certification-controller', function (
       const options = {
         method: 'GET',
         url: '/api/admin/complementary-certifications/' + complementaryCertificationId + '/target-profiles',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
       const attachedAt = new Date('2019-01-01');
 

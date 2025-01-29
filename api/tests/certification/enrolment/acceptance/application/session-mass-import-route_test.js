@@ -6,7 +6,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   sinon,
 } from '../../../../test-helper.js';
@@ -73,9 +73,7 @@ describe('Acceptance | Controller | Session | session-mass-import-route', functi
         const options = {
           method: 'POST',
           url: `/api/certification-centers/${certificationCenterId}/sessions/validate-for-mass-import`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(userId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload: newBuffer,
         };
 
@@ -132,9 +130,7 @@ describe('Acceptance | Controller | Session | session-mass-import-route', functi
             const options = {
               method: 'POST',
               url: `/api/certification-centers/${certificationCenterId}/sessions/validate-for-mass-import`,
-              headers: {
-                authorization: generateValidRequestAuthorizationHeader(userId),
-              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId }),
               payload: newBuffer,
             };
 
@@ -202,9 +198,7 @@ describe('Acceptance | Controller | Session | session-mass-import-route', functi
           const options = {
             method: 'POST',
             url: `/api/certification-centers/${certificationCenterId}/sessions/confirm-for-mass-import`,
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload: { data: { attributes: { cachedValidatedSessionsKey: newCachedSessionUUID } } },
           };
 
@@ -261,9 +255,7 @@ describe('Acceptance | Controller | Session | session-mass-import-route', functi
           const options = {
             method: 'POST',
             url: `/api/certification-centers/${certificationCenterId}/sessions/confirm-for-mass-import`,
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload: { data: { attributes: { cachedValidatedSessionsKey: newCachedSessionUUID } } },
           };
 
@@ -309,9 +301,7 @@ describe('Acceptance | Controller | Session | session-mass-import-route', functi
       const options = {
         method: 'GET',
         url: `/api/certification-centers/${certificationCenterId}/import`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when

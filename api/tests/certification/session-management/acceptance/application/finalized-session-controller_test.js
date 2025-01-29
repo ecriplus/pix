@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -36,7 +36,7 @@ describe('Certification | Session-management | Acceptance | Application | finali
     });
     context('When user is authorized', function () {
       beforeEach(function () {
-        options.headers = { authorization: generateValidRequestAuthorizationHeader() };
+        options.headers = generateAuthenticatedUserRequestHeaders();
       });
 
       it('should return a 200 status code response with JSON API serialized', async function () {
@@ -89,7 +89,7 @@ describe('Certification | Session-management | Acceptance | Application | finali
           method: 'GET',
           url: '/api/admin/sessions/with-required-action',
           payload: {},
-          headers: { authorization: generateValidRequestAuthorizationHeader() },
+          headers: generateAuthenticatedUserRequestHeaders(),
         };
 
         // when
@@ -124,7 +124,7 @@ describe('Certification | Session-management | Acceptance | Application | finali
             method: 'GET',
             url: '/api/admin/sessions/with-required-action?filter[version]=3',
             payload: {},
-            headers: { authorization: generateValidRequestAuthorizationHeader() },
+            headers: generateAuthenticatedUserRequestHeaders(),
           };
 
           // when

@@ -6,7 +6,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -125,7 +125,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
       options = {
         method: 'GET',
         url: `/api/certifications/${certificationCourse.id}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when
@@ -259,7 +259,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
       options = {
         method: 'GET',
         url: `/api/certifications/${certificationCourse.id}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(unauthenticatedUserId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: unauthenticatedUserId }),
       };
 
       // when
@@ -375,7 +375,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
         options = {
           method: 'GET',
           url: '/api/certifications',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
         // when
         const response = await server.inject(options);
@@ -466,7 +466,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
         options = {
           method: 'GET',
           url: '/api/certifications',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
         // when
         const response = await server.inject(options);

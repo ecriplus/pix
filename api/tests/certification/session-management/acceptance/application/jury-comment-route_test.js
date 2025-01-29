@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -22,9 +22,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
             },
           },
         },
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(),
-        },
+        headers: generateAuthenticatedUserRequestHeaders(),
         url: `/api/admin/sessions/${session.id}/comment`,
       };
       await databaseBuilder.commit();
@@ -45,9 +43,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       const session = databaseBuilder.factory.buildSession();
       await databaseBuilder.commit();
       const options = {
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(),
-        },
+        headers: generateAuthenticatedUserRequestHeaders(),
         method: 'DELETE',
         url: `/api/admin/sessions/${session.id}/comment`,
       };

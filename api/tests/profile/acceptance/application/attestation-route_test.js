@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Profile | Acceptance | Application | Attestation Route ', function () {
@@ -21,7 +21,7 @@ describe('Profile | Acceptance | Application | Attestation Route ', function () 
       await databaseBuilder.commit();
       const options = {
         method: 'GET',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         url: `/api/users/${userId}/attestations/${attestationKey}`,
       };
 

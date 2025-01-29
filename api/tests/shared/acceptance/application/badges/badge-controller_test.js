@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -45,7 +45,7 @@ describe('Acceptance | API | Badges', function () {
       options = {
         method: 'PATCH',
         url: `/api/admin/badges/${badge.id}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         payload: {
           data: {
             type: 'badges',
@@ -79,7 +79,7 @@ describe('Acceptance | API | Badges', function () {
       options = {
         method: 'DELETE',
         url: `/api/admin/badges/${badge.id}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when
@@ -98,7 +98,7 @@ describe('Acceptance | API | Badges', function () {
       options = {
         method: 'DELETE',
         url: `/api/admin/badges/${badge.id}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when

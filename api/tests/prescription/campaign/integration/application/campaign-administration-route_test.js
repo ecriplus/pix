@@ -7,7 +7,7 @@ import { ObjectValidationError } from '../../../../../src/shared/domain/errors.j
 import {
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
   sinon,
 } from '../../../../test-helper.js';
@@ -40,9 +40,7 @@ describe('Integration | Application | Route | campaign administration router', f
       httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
 
-      const headers = {
-        authorization: generateValidRequestAuthorizationHeader(simpleUserId),
-      };
+      const headers = generateAuthenticatedUserRequestHeaders({ userId: simpleUserId });
 
       const payload = {
         firstCampaignId: 2,
@@ -66,9 +64,7 @@ describe('Integration | Application | Route | campaign administration router', f
       httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
 
-      const headers = {
-        authorization: generateValidRequestAuthorizationHeader(simpleUserId),
-      };
+      const headers = generateAuthenticatedUserRequestHeaders({ userId: simpleUserId });
 
       const payload = {
         campaignCode: 'CAMPAIGN',
@@ -106,9 +102,7 @@ describe('Integration | Application | Route | campaign administration router', f
       httpTestServer.setupDeserialization();
       await httpTestServer.register(moduleUnderTest);
 
-      const headers = {
-        authorization: generateValidRequestAuthorizationHeader(userId),
-      };
+      const headers = generateAuthenticatedUserRequestHeaders({ userId });
 
       // when
       const response = await httpTestServer.request(method, url, payload, null, headers);

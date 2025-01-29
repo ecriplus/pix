@@ -9,7 +9,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
 } from '../../../../../test-helper.js';
@@ -78,7 +78,7 @@ describe('Acceptance | API | Certification Course', function () {
     describe('Resource access management', function () {
       it('should respond with a 403 - forbidden access - if user is not linked to the certification course', function () {
         // given
-        options.headers.authorization = generateValidRequestAuthorizationHeader(otherUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
 
         // when
         const promise = server.inject(options);
@@ -92,7 +92,7 @@ describe('Acceptance | API | Certification Course', function () {
 
     it('should return the certification course', async function () {
       // given
-      options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+      options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
       // when
       const response = await server.inject(options);
@@ -496,10 +496,7 @@ function _createRequestOptions(
   const options = {
     method: 'POST',
     url: '/api/certification-courses',
-    headers: {
-      authorization: generateValidRequestAuthorizationHeader(userId),
-      'accept-language': `${locale}`,
-    },
+    headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: locale }),
     payload,
   };
 

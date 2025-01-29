@@ -1,7 +1,7 @@
 import { frameworksController } from '../../../../lib/application/frameworks/frameworks-controller.js';
 import * as moduleUnderTest from '../../../../lib/application/frameworks/index.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, generateValidRequestAuthorizationHeader, HttpTestServer, sinon } from '../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Unit | Application | Frameworks | Routes', function () {
   describe('GET /api/admin/frameworks', function () {
@@ -120,9 +120,7 @@ describe('Unit | Application | Frameworks | Routes', function () {
       const httpTestServer = new HttpTestServer();
       httpTestServer.setupAuthentication();
       await httpTestServer.register(moduleUnderTest);
-      const headers = {
-        authorization: generateValidRequestAuthorizationHeader(),
-      };
+      const headers = generateAuthenticatedUserRequestHeaders();
 
       // when
       const { statusCode } = await httpTestServer.request(method, url, null, null, headers);

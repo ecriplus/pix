@@ -5,7 +5,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Application | SecurityPreHandlers', function () {
@@ -31,7 +31,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'PATCH',
         url: '/api/cache',
-        headers: { authorization: generateValidRequestAuthorizationHeader() },
+        headers: generateAuthenticatedUserRequestHeaders(),
       };
 
       // when
@@ -64,7 +64,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: '/test_route/3',
-        headers: { authorization: generateValidRequestAuthorizationHeader(2) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: 2 }),
       };
 
       // when
@@ -85,7 +85,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       userId = databaseBuilder.factory.buildUser().id;
       options = {
         method: 'GET',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       await databaseBuilder.commit();
@@ -152,7 +152,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       userId = databaseBuilder.factory.buildUser().id;
       organizationId = databaseBuilder.factory.buildOrganization().id;
       options = {
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         method: 'GET',
         url: `/api/organizations/${organizationId}/invitations`,
       };
@@ -223,7 +223,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: `/test_route/${organizationId}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -246,7 +246,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: `/test_route/${organizationId}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -280,7 +280,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: `/test_route/${organizationId}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -303,7 +303,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: `/test_route/${organizationId}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -324,7 +324,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       options = {
         method: 'GET',
         url: `/api/organizations/${organizationId}/memberships`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       await databaseBuilder.commit();
@@ -363,7 +363,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
 
       databaseBuilder.factory.options = {
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         method: 'GET',
         url: `/api/organizations/${certificationCenterId}/invitations`,
       };
@@ -386,7 +386,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       options = {
         method: 'GET',
         url: `/test_route/certification-centers/admin/${certificationCenterId}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
     });
 
@@ -446,7 +446,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: `/test_route_user_is_member_of_one_organization`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -469,7 +469,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: `/test_route_user_is_member_of_one_organization`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -491,7 +491,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       const options = {
         method: 'GET',
         url: `/test_route_user_is_member_of_one_organization`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -515,7 +515,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
         await databaseBuilder.commit();
 
         const options = {
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           method: 'POST',
           url: '/api/memberships/me/disable',
           payload: { organizationId },
@@ -542,7 +542,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       await databaseBuilder.commit();
 
       const options = {
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         method: 'GET',
         url: `/api/organizations/${organizationId}/place-statistics`,
       };

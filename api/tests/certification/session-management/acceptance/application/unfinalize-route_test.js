@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Acceptance | Application | Controller | unfinalize', function () {
@@ -18,9 +18,7 @@ describe('Certification | Session Management | Acceptance | Application | Contro
       const options = {
         method: 'PATCH',
         url: '/api/admin/sessions/123/unfinalize',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when

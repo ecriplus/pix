@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Route | Get Organizations Places Lots', function () {
@@ -35,9 +35,7 @@ describe('Acceptance | Route | Get Organizations Places Lots', function () {
       const options = {
         method: 'GET',
         url: `/api/organizations/${organizationId}/places-lots`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when

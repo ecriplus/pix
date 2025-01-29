@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   mockLearningContent,
 } from '../../../../test-helper.js';
 
@@ -133,7 +133,7 @@ describe('Acceptance | Controller | scorecard-controller', function () {
 
     context('Success case', function () {
       beforeEach(async function () {
-        options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
         databaseBuilder.factory.buildKnowledgeElement({
           userId,
@@ -258,10 +258,7 @@ describe('Acceptance | Controller | scorecard-controller', function () {
         databaseBuilder.factory.buildUserSavedTutorial({ id: 10500, userId, tutorialId: tutorialWebId });
         await databaseBuilder.commit();
 
-        options.headers = {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-          'accept-language': FRENCH_SPOKEN,
-        };
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_SPOKEN });
 
         databaseBuilder.factory.buildKnowledgeElement({
           userId,
@@ -372,9 +369,7 @@ describe('Acceptance | Controller | scorecard-controller', function () {
             method: 'POST',
             url: `/api/users/${userId}/competences/${competenceId}/reset`,
             payload: {},
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
           await server.inject(options);

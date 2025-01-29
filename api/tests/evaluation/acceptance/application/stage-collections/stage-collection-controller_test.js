@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -31,9 +31,7 @@ describe('Acceptance | Controller | stage-collection', function () {
         const options = {
           method: 'PATCH',
           url: `/api/admin/stage-collections/${targetProfile.id}`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(user.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           payload: {
             data: {
               type: 'stage-collections',
@@ -84,9 +82,7 @@ describe('Acceptance | Controller | stage-collection', function () {
         const options = {
           method: 'PATCH',
           url: `/api/admin/stage-collections/${targetProfile.id}`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(user.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           payload: {
             data: {
               type: 'stage-collections',

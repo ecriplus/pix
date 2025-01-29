@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   mockLearningContent,
 } from '../../../test-helper.js';
 
@@ -201,9 +201,7 @@ describe('Acceptance | Controller | frameworks-controller', function () {
         const options = {
           method: 'GET',
           url: `/api/frameworks/pix/areas-for-user`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(userId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         const expectedResult = {
@@ -446,9 +444,7 @@ describe('Acceptance | Controller | frameworks-controller', function () {
       const options = {
         method: 'GET',
         url: `/api/admin/frameworks/fmk1/areas`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(user.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       // when

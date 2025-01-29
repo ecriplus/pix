@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Team | Application | Admin | Routes | certification-center-membership', function () {
@@ -45,9 +45,7 @@ describe('Acceptance | Team | Application | Admin | Routes | certification-cente
               },
             },
           },
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(pixAgentWithAdminRole.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: pixAgentWithAdminRole.id }),
         };
         await databaseBuilder.commit();
 
@@ -101,9 +99,7 @@ describe('Acceptance | Team | Application | Admin | Routes | certification-cente
                 },
               },
             },
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(pixAgentWithCertifRole.id),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: pixAgentWithCertifRole.id }),
           };
 
           await databaseBuilder.commit();
@@ -160,9 +156,7 @@ describe('Acceptance | Team | Application | Admin | Routes | certification-cente
                 },
               },
             },
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(pixAgentWithSupportRole.id),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: pixAgentWithSupportRole.id }),
           };
           await databaseBuilder.commit();
 

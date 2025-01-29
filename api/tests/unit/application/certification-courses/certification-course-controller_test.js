@@ -2,7 +2,7 @@ import { certificationCourseController } from '../../../../src/certification/eva
 import { usecases } from '../../../../src/certification/evaluation/domain/usecases/index.js';
 import { CertificationCourse } from '../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { usecases as certificationSharedUsecases } from '../../../../src/certification/shared/domain/usecases/index.js';
-import { expect, generateValidRequestAuthorizationHeader, hFake, sinon } from '../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Controller | certification-course-controller', function () {
   let certificationCourseSerializer;
@@ -92,7 +92,7 @@ describe('Unit | Controller | certification-course-controller', function () {
       certificationCourseSerializer.serialize.withArgs(certificationCourse).resolves(certificationCourse);
       const request = {
         params: { id: certificationCourseId },
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         auth: { credentials: { userId } },
       };
 

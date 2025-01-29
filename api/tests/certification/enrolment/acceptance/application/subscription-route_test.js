@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -97,7 +97,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | subscr
       const options = {
         method: 'GET',
         url: `/api/certification-candidates/${candidate.id}/subscriptions`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId, 'pix-certif') },
+        headers: generateAuthenticatedUserRequestHeaders({ userId, source: 'pix-certif' }),
       };
 
       // when

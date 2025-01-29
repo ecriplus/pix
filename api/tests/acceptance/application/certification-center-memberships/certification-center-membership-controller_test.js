@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../test-helper.js';
 
@@ -40,9 +40,7 @@ describe('Acceptance | API | Certification Center Membership', function () {
             const request = {
               method: 'DELETE',
               url: `/api/admin/certification-center-memberships/${certificationCenterMembership.id}`,
-              headers: {
-                authorization: generateValidRequestAuthorizationHeader(pixAgentWithCertifRole.id),
-              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId: pixAgentWithCertifRole.id }),
             };
 
             await databaseBuilder.commit();
@@ -64,9 +62,7 @@ describe('Acceptance | API | Certification Center Membership', function () {
             const request = {
               method: 'DELETE',
               url: `/api/admin/certification-center-memberships/${certificationCenterMembership.id}`,
-              headers: {
-                authorization: generateValidRequestAuthorizationHeader(userWithoutRole.id),
-              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId: userWithoutRole.id }),
             };
 
             await databaseBuilder.commit();
@@ -87,9 +83,7 @@ describe('Acceptance | API | Certification Center Membership', function () {
             const request = {
               method: 'DELETE',
               url: `/api/admin/certification-center-memberships/${nonexistentCertificationCenterMembershipId}`,
-              headers: {
-                authorization: generateValidRequestAuthorizationHeader(pixAgentWithAdminRole.id),
-              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId: pixAgentWithAdminRole.id }),
             };
 
             await databaseBuilder.commit();
@@ -141,9 +135,7 @@ describe('Acceptance | API | Certification Center Membership', function () {
                 },
               },
             },
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(certifCenterAdminUser.id),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: certifCenterAdminUser.id }),
           };
           await databaseBuilder.commit();
 
@@ -190,9 +182,7 @@ describe('Acceptance | API | Certification Center Membership', function () {
                   },
                 },
               },
-              headers: {
-                authorization: generateValidRequestAuthorizationHeader(certifCenterMemberUser.id),
-              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId: certifCenterMemberUser.id }),
             };
             await databaseBuilder.commit();
 
@@ -231,9 +221,7 @@ describe('Acceptance | API | Certification Center Membership', function () {
                   },
                 },
               },
-              headers: {
-                authorization: generateValidRequestAuthorizationHeader(certifCenterAdminUser.id),
-              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId: certifCenterAdminUser.id }),
             };
             await databaseBuilder.commit();
 
@@ -267,9 +255,7 @@ describe('Acceptance | API | Certification Center Membership', function () {
                   },
                 },
               },
-              headers: {
-                authorization: generateValidRequestAuthorizationHeader(certifCenterAdminUser.id),
-              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId: certifCenterAdminUser.id }),
             };
             await databaseBuilder.commit();
 
@@ -309,9 +295,7 @@ describe('Acceptance | API | Certification Center Membership', function () {
             const request = {
               method: 'DELETE',
               url: `/api/certification-center-memberships/${certificationCenterMembership.id}`,
-              headers: {
-                authorization: generateValidRequestAuthorizationHeader(pixCertifAdminUser.id),
-              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId: pixCertifAdminUser.id }),
             };
 
             await databaseBuilder.commit();
@@ -333,9 +317,7 @@ describe('Acceptance | API | Certification Center Membership', function () {
             const request = {
               method: 'DELETE',
               url: `/api/certification-center-memberships/${certificationCenterMembership.id}`,
-              headers: {
-                authorization: generateValidRequestAuthorizationHeader(userWithoutRole.id),
-              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId: userWithoutRole.id }),
             };
 
             await databaseBuilder.commit();

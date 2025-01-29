@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | answer-controller-update', function () {
@@ -25,7 +25,7 @@ describe('Acceptance | Controller | answer-controller-update', function () {
         method: 'PATCH',
         url: '/api/answers/' + answer.id,
         payload: {},
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
     });
 

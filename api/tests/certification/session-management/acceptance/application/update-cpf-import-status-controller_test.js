@@ -5,7 +5,7 @@ import * as url from 'node:url';
 import {
   createServer,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   nock,
 } from '../../../../test-helper.js';
@@ -48,7 +48,7 @@ describe('Acceptance | Controller | Session | update-cpf-import-status-controlle
       const options = {
         method: 'PUT',
         url: '/api/admin/cpf/receipts',
-        headers: { authorization: generateValidRequestAuthorizationHeader(superAdmin.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
 
       // when
@@ -64,7 +64,7 @@ describe('Acceptance | Controller | Session | update-cpf-import-status-controlle
         const options = {
           method: 'PUT',
           url: '/api/admin/cpf/receipts',
-          headers: { authorization: generateValidRequestAuthorizationHeader(1) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: 1 }),
         };
 
         // when

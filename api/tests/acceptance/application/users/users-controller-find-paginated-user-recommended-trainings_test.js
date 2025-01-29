@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | users-controller-find-paginated-user-recommended-trainings', function () {
@@ -12,14 +12,13 @@ describe('Acceptance | Controller | users-controller-find-paginated-user-recomme
 
   beforeEach(async function () {
     userId = databaseBuilder.factory.buildUser({}).id;
-    const authorization = generateValidRequestAuthorizationHeader(userId);
 
     await databaseBuilder.commit();
     options = {
       method: 'GET',
       url: `/api/users/${userId}/trainings`,
       payload: {},
-      headers: { authorization },
+      headers: generateAuthenticatedUserRequestHeaders({ userId }),
     };
     server = await createServer();
   });

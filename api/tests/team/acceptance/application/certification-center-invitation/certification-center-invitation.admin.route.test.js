@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   sinon,
 } from '../../../../test-helper.js';
@@ -45,7 +45,7 @@ describe('Acceptance | Team | Application | Route | Admin | Certification Center
       const response = await server.inject({
         method: 'GET',
         url: `/api/admin/certification-centers/${certificationCenterId}/invitations`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(adminUser.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
       });
 
       // then
@@ -97,9 +97,7 @@ describe('Acceptance | Team | Application | Route | Admin | Certification Center
 
       // when
       const { result, statusCode } = await server.inject({
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(adminMember.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
         method: 'POST',
         payload: {
           data: {
@@ -140,9 +138,7 @@ describe('Acceptance | Team | Application | Route | Admin | Certification Center
       const response = await server.inject({
         method: 'DELETE',
         url: `/api/admin/certification-center-invitations/${certificationCenterInvitation.id}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(adminMember.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
       });
 
       // then

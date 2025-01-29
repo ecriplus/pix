@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -29,7 +29,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
     context('when user is Super Admin', function () {
       beforeEach(function () {
-        options.headers = { authorization: generateValidRequestAuthorizationHeader() };
+        options.headers = generateAuthenticatedUserRequestHeaders();
       });
 
       it('should return a 200 status code response with JSON API serialized', async function () {
@@ -107,7 +107,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
     context('when user is not SuperAdmin', function () {
       beforeEach(function () {
-        options.headers = { authorization: generateValidRequestAuthorizationHeader(1111) };
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: 1111 });
       });
 
       it('should return 403 HTTP status code ', async function () {
@@ -162,7 +162,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
     context('when user is Super Admin', function () {
       beforeEach(function () {
-        options.headers = { authorization: generateValidRequestAuthorizationHeader() };
+        options.headers = generateAuthenticatedUserRequestHeaders();
       });
 
       it('should return a 200 status code response with JSON API serialized', async function () {
@@ -214,7 +214,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
     context('when user is not SuperAdmin', function () {
       beforeEach(function () {
-        options.headers = { authorization: generateValidRequestAuthorizationHeader(1111) };
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: 1111 });
       });
 
       it('should return 403 HTTP status code ', async function () {
@@ -256,9 +256,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
       await databaseBuilder.commit();
       const options = {
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         method: 'GET',
         url: `/api/sessions/${sessionId}/management`,
       };

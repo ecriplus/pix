@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   mockLearningContent,
 } from '../../../test-helper.js';
@@ -91,7 +91,7 @@ function _setupRequestOptions({ userId, challengeId, assessmentId }) {
   return {
     method: 'POST',
     url: '/api/answers',
-    headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+    headers: generateAuthenticatedUserRequestHeaders({ userId }),
     payload: {
       data: {
         type: 'answers',

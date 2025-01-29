@@ -5,7 +5,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -83,7 +83,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
         {
           method: 'POST',
           url: '/api/campaigns',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload,
         },
         payload,
@@ -132,7 +132,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
         {
           method: 'POST',
           url: '/api/campaigns',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload,
         },
         payload,
@@ -207,7 +207,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
         {
           method: 'POST',
           url: '/api/campaigns',
-          headers: { authorization: generateValidRequestAuthorizationHeader(anotherUserId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: anotherUserId }),
           payload,
         },
         payload,
@@ -245,9 +245,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
         const options = {
           method: 'POST',
           url: '/api/admin/campaigns',
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(userId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload: buffer,
         };
         const response = await server.inject(options);
@@ -267,9 +265,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
         const options = {
           method: 'POST',
           url: '/api/admin/campaigns',
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(userId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         const response = await server.inject(options);
@@ -294,9 +290,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
       const options = {
         method: 'POST',
         url: '/api/admin/campaigns/swap-codes',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         payload,
       };
 
@@ -316,7 +310,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
       const response = await server.inject({
         method: 'PATCH',
         url: `/api/admin/campaigns/${campaign.id}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         payload: {
           data: {
             attributes: {
@@ -344,7 +338,6 @@ describe('Acceptance | API | campaign-administration-route', function () {
       const userId = databaseBuilder.factory.buildUser.withRole({ role: ROLES.SUPER_ADMIN }).id;
       const campaignId = databaseBuilder.factory.buildCampaign({ code: 'ABCEFG123' }).id;
       await databaseBuilder.commit();
-      const authorization = generateValidRequestAuthorizationHeader(userId);
       const payload = {
         campaignCode: 'GOODCODE1',
       };
@@ -352,7 +345,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
       const options = {
         method: 'PATCH',
         url: `/api/admin/campaigns/${campaignId}/update-code`,
-        headers: { authorization },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         payload,
       };
 
@@ -374,7 +367,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
       const response = await server.inject({
         method: 'PUT',
         url: `/api/campaigns/${campaign.id}/archive`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       });
 
       // then
@@ -397,7 +390,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
       const response = await server.inject({
         method: 'PUT',
         url: `/api/campaigns/${campaign.id}/archive`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       });
 
       // then
@@ -418,7 +411,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
       const response = await server.inject({
         method: 'DELETE',
         url: `/api/campaigns/${campaign.id}/archive`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       });
 
       // then
@@ -441,7 +434,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
       const response = await server.inject({
         method: 'DELETE',
         url: `/api/campaigns/${campaign.id}/archive`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       });
 
       // then
@@ -466,9 +459,7 @@ describe('Acceptance | API | campaign-administration-route', function () {
       const options = {
         method: 'POST',
         url: `/api/admin/campaigns/archive-campaigns`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         payload: buffer,
       };
 

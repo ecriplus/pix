@@ -1,7 +1,7 @@
 import { organizationController } from '../../../../lib/application/organizations/organization-controller.js';
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { Organization } from '../../../../src/shared/domain/models/index.js';
-import { expect, generateValidRequestAuthorizationHeader, hFake, sinon } from '../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Application | Organizations | organization-controller', function () {
   describe('#findPaginatedFilteredOrganizations', function () {
@@ -132,9 +132,7 @@ describe('Unit | Application | Organizations | organization-controller', functio
       const organizationId = 1234;
       const userId = 10;
       const request = {
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         params: { id: organizationId },
       };
 

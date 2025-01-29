@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Acceptance | Application | Routes | session-for-supervising', function () {
@@ -28,7 +28,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       databaseBuilder.factory.buildSupervisorAccess({ userId, sessionId: 121 });
       await databaseBuilder.commit();
 
-      const headers = { authorization: generateValidRequestAuthorizationHeader(userId, 'pix-certif') };
+      const headers = generateAuthenticatedUserRequestHeaders({ userId, source: 'pix-certif' });
 
       const options = {
         headers,

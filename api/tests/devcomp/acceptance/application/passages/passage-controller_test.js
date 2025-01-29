@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../../test-helper.js';
 
@@ -70,9 +70,7 @@ describe('Acceptance | Controller | passage-controller', function () {
               },
             },
           },
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(user.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         });
 
         // then

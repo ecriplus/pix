@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -33,14 +33,10 @@ describe('Acceptance | Application | scoring-and-capacity-simulator-route', func
     describe('when called without a super admin role', function () {
       it('should return a 403', async function () {
         // given
-        const authorization = generateValidRequestAuthorizationHeader();
-
         const options = {
           method: 'POST',
           url: '/api/admin/simulate-score-or-capacity',
-          headers: {
-            authorization,
-          },
+          headers: generateAuthenticatedUserRequestHeaders(),
           payload: {
             data: {
               capacity: 1,
@@ -67,14 +63,10 @@ describe('Acceptance | Application | scoring-and-capacity-simulator-route', func
 
           await databaseBuilder.commit();
 
-          const authorization = generateValidRequestAuthorizationHeader(superAdmin.id);
-
           const options = {
             method: 'POST',
             url: '/api/admin/simulate-score-or-capacity',
-            headers: {
-              authorization,
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: {
               data: {
                 toto: 1,
@@ -492,14 +484,10 @@ describe('Acceptance | Application | scoring-and-capacity-simulator-route', func
 
           await databaseBuilder.commit();
 
-          const authorization = generateValidRequestAuthorizationHeader(superAdmin.id);
-
           const options = {
             method: 'POST',
             url: '/api/admin/simulate-score-or-capacity',
-            headers: {
-              authorization,
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: {
               data: {
                 score: 127,

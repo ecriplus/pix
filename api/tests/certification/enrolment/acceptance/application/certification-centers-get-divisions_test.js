@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Certification | Enrolment | Acceptance | Route | Certification Centers', function () {
@@ -34,9 +34,7 @@ describe('Certification | Enrolment | Acceptance | Route | Certification Centers
 
       // when
       const { result, statusCode } = await server.inject({
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         method: 'GET',
         payload: {},
         url: `/api/certification-centers/${certificationCenterId}/divisions`,

@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   generateValidRequestAuthorizationHeaderForApplication,
 } from '../../../../test-helper.js';
 import {
@@ -323,7 +323,7 @@ describe('Certification | Results | Acceptance | Application | Livret Scolaire',
         options = {
           method: 'GET',
           url: '/api/organizations/9999/certifications',
-          headers: { authorization: generateValidRequestAuthorizationHeader() },
+          headers: generateAuthenticatedUserRequestHeaders(),
         };
 
         // when

@@ -3,8 +3,8 @@ import {
   createServer,
   databaseBuilder,
   expect,
+  generateAuthenticatedUserRequestHeaders,
   generateIdTokenForExternalUser,
-  generateValidRequestAuthorizationHeader,
   knex,
 } from '../../../test-helper.js';
 
@@ -337,7 +337,7 @@ describe('Acceptance | Controller | sco-organization-learners', function () {
       const response = await server.inject({
         method: 'POST',
         url: '/api/sco-organization-learners/password-update',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         payload: {
           data: {
             attributes: {
@@ -377,7 +377,7 @@ describe('Acceptance | Controller | sco-organization-learners', function () {
       options = {
         method: 'POST',
         url: '/api/sco-organization-learners/username-password-generation',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         payload: {
           data: {
             attributes: {
@@ -538,7 +538,7 @@ describe('Acceptance | Controller | sco-organization-learners', function () {
         const { headers, payload, statusCode } = await server.inject({
           method: 'POST',
           url: '/api/sco-organization-learners/batch-username-password-generate',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload: {
             data: {
               attributes: {

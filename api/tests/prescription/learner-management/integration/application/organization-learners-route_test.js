@@ -4,7 +4,7 @@ import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants
 import {
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
   sinon,
 } from '../../../../test-helper.js';
@@ -43,12 +43,10 @@ describe('Integration | Application | Organization Learners Management | Routes'
       const simpleUserId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildMembership({ organizationId, userId: simpleUserId, organizationRole: 'MEMBER' });
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(simpleUserId),
-      };
-      payload = {
-        listLearners: [123],
-      };
+      (headers = generateAuthenticatedUserRequestHeaders({ userId: simpleUserId })),
+        (payload = {
+          listLearners: [123],
+        });
 
       // when
       const response = await httpTestServer.request(method, url, payload, null, headers);
@@ -63,9 +61,7 @@ describe('Integration | Application | Organization Learners Management | Routes'
       const adminUser = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildMembership({ organizationId, userId: adminUser, organizationRole: 'ADMIN' });
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(adminUser),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: adminUser });
       payload = {
         listLearners: [123],
       };
@@ -83,9 +79,7 @@ describe('Integration | Application | Organization Learners Management | Routes'
       const adminUser = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildMembership({ organizationId, userId: adminUser, organizationRole: 'ADMIN' });
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(adminUser),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: adminUser });
       payload = {
         listLearners: [123],
       };
@@ -103,9 +97,7 @@ describe('Integration | Application | Organization Learners Management | Routes'
       const adminUser = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildMembership({ organizationId, userId: adminUser, organizationRole: 'ADMIN' });
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(adminUser),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: adminUser });
       payload = {
         listLearners: ['VIVEDIABLO'],
       };
@@ -137,9 +129,7 @@ describe('Integration | Application | Organization Learners Management | Routes'
       const wrongUrl = `/api/organizations/noop/import-organization-learners`;
       const user = databaseBuilder.factory.buildUser().id;
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(user),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: user });
       payload = buffer;
 
       // when
@@ -169,9 +159,7 @@ describe('Integration | Application | Organization Learners Management | Routes'
       const simpleUserId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildMembership({ organizationId, userId: simpleUserId, organizationRole: 'MEMBER' });
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(simpleUserId),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: simpleUserId });
       payload = buffer;
 
       // when
@@ -187,9 +175,7 @@ describe('Integration | Application | Organization Learners Management | Routes'
       const adminUser = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildMembership({ organizationId, userId: adminUser, organizationRole: 'ADMIN' });
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(adminUser),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: adminUser });
       payload = buffer;
 
       // when
@@ -211,9 +197,7 @@ describe('Integration | Application | Organization Learners Management | Routes'
       databaseBuilder.factory.buildOrganizationFeature({ featureId, organizationId });
 
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(adminUser),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: adminUser });
       payload = buffer;
 
       // when
@@ -233,9 +217,7 @@ describe('Integration | Application | Organization Learners Management | Routes'
       databaseBuilder.factory.buildOrganizationFeature({ featureId, organizationId });
 
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(adminUser),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: adminUser });
       payload = buffer;
 
       // when

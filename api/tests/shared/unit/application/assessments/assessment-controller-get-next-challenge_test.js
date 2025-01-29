@@ -3,7 +3,7 @@ import { assessmentController } from '../../../../../src/shared/application/asse
 import { LOCALE } from '../../../../../src/shared/domain/constants.js';
 import { AssessmentEndedError } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { domainBuilder, expect, generateValidRequestAuthorizationHeader, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, generateAuthenticatedUserRequestHeaders, sinon } from '../../../../test-helper.js';
 
 const { FRENCH_FRANCE, FRENCH_SPOKEN } = LOCALE;
 
@@ -225,10 +225,7 @@ describe('Unit | Controller | assessment-controller-get-next-challenge', functio
           const locale = FRENCH_SPOKEN;
           const request = {
             params: { id: 1 },
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-              'accept-language': locale,
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: locale }),
           };
           // when
           await assessmentController.getNextChallenge(request, null, dependencies);
@@ -259,10 +256,7 @@ describe('Unit | Controller | assessment-controller-get-next-challenge', functio
             const locale = FRENCH_SPOKEN;
             const request = {
               params: { id: 1 },
-              headers: {
-                authorization: generateValidRequestAuthorizationHeader(1),
-                'accept-language': locale,
-              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId: 1, locale }),
             };
 
             // when
@@ -299,10 +293,7 @@ describe('Unit | Controller | assessment-controller-get-next-challenge', functio
             const locale = FRENCH_SPOKEN;
             const request = {
               params: { id: 1 },
-              headers: {
-                authorization: generateValidRequestAuthorizationHeader(1),
-                'accept-language': locale,
-              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId: 1, locale }),
             };
 
             // when

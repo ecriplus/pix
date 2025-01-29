@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -59,7 +59,7 @@ describe('Certification | Session-management | Acceptance | complementary-certif
       const options = {
         method: 'POST',
         url: '/api/admin/complementary-certification-course-results',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         payload: {
           data: {
             attributes: {

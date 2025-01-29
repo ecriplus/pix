@@ -6,7 +6,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -74,7 +74,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
         userId,
       });
 
-      options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+      options.headers = generateAuthenticatedUserRequestHeaders({ userId });
       options.url = `/api/campaigns/${campaign.id}`;
 
       await databaseBuilder.commit();
@@ -130,7 +130,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
         organizationRole: Membership.roles.MEMBER,
       });
 
-      options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+      options.headers = generateAuthenticatedUserRequestHeaders({ userId });
       options.url = `/api/campaigns/${campaign.id}/csv-profiles-collection-results`;
 
       await databaseBuilder.commit();
@@ -216,7 +216,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
         organizationRole: Membership.roles.MEMBER,
       });
 
-      options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+      options.headers = generateAuthenticatedUserRequestHeaders({ userId });
       options.url = `/api/campaigns/${campaign.id}/csv-assessment-results`;
 
       await databaseBuilder.commit();
@@ -313,7 +313,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       const options = {
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/participants-activity`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -326,7 +326,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       const options = {
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/participants-activity?page[number]=1&page[size]=1`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -340,7 +340,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       const options = {
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/participants-activity?filter[divisions][]=5eme`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -355,7 +355,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       const options = {
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/participants-activity?filter[status]=STARTED`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -370,7 +370,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       const options = {
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/participants-activity?filter[search]=Mary M`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -385,7 +385,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       const options = {
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/participants-activity?filter[groups][]=L1`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -400,7 +400,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       const options = {
         method: 'GET',
         url: `/api/campaigns/${campaign.id}/participants-activity?filter[status]=bad`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -422,7 +422,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       const options = {
         method: 'GET',
         url: `/api/organizations/${organizationId}/campaigns?filter[name]=&filter[status]=&filter[isOwnedByMe]=true&page[number]=1&page[size]=50`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const response = await server.inject(options);
@@ -444,7 +444,7 @@ describe('Acceptance | API | campaign-detail-route', function () {
       const options = {
         method: 'GET',
         url: `/api/organizations/${organizationId}/campaigns?filter[name]=&filter[status]=&filter[ownerName]=&page[number]=1&page[size]=50`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       const response = await server.inject(options);

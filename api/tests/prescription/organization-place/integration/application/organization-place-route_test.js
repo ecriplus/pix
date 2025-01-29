@@ -2,7 +2,7 @@ import { organizationPlaceController } from '../../../../../src/prescription/org
 import * as moduleUnderTest from '../../../../../src/prescription/organization-place/application/organization-place-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
-import { expect, generateValidRequestAuthorizationHeader, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Application | organization-place-route', function () {
   describe('GET /api/admin/organizations/:id/places', function () {
@@ -21,9 +21,7 @@ describe('Integration | Application | organization-place-route', function () {
       await httpTestServer.register(moduleUnderTest);
 
       // when
-      const response = await httpTestServer.request(method, url, null, null, {
-        authorization: generateValidRequestAuthorizationHeader(),
-      });
+      const response = await httpTestServer.request(method, url, null, null, generateAuthenticatedUserRequestHeaders());
 
       // then
       expect(response.statusCode).to.equal(200);
@@ -51,9 +49,13 @@ describe('Integration | Application | organization-place-route', function () {
         await httpTestServer.register(moduleUnderTest);
 
         // when
-        const response = await httpTestServer.request(method, url, null, null, {
-          authorization: generateValidRequestAuthorizationHeader(),
-        });
+        const response = await httpTestServer.request(
+          method,
+          url,
+          null,
+          null,
+          generateAuthenticatedUserRequestHeaders(),
+        );
 
         // then
         expect(organizationPlaceController.findOrganizationPlacesLot).to.not.have.been.called;
@@ -97,9 +99,13 @@ describe('Integration | Application | organization-place-route', function () {
       await httpTestServer.register(moduleUnderTest);
 
       // when
-      const response = await httpTestServer.request(method, url, payload, null, {
-        authorization: generateValidRequestAuthorizationHeader(),
-      });
+      const response = await httpTestServer.request(
+        method,
+        url,
+        payload,
+        null,
+        generateAuthenticatedUserRequestHeaders(),
+      );
 
       // then
       expect(organizationPlaceController.getOrganizationPlacesLots).to.have.been.calledOnce;
@@ -114,9 +120,13 @@ describe('Integration | Application | organization-place-route', function () {
       checkOrganizationHasPlacesFeature.resolves(true);
 
       // when
-      const response = await httpTestServer.request(method, url, payload, null, {
-        authorization: generateValidRequestAuthorizationHeader(),
-      });
+      const response = await httpTestServer.request(
+        method,
+        url,
+        payload,
+        null,
+        generateAuthenticatedUserRequestHeaders(),
+      );
 
       // then
       expect(organizationPlaceController.getOrganizationPlacesLots).to.not.have.been.called;
@@ -129,9 +139,13 @@ describe('Integration | Application | organization-place-route', function () {
       checkOrganizationHasPlacesFeature.callsFake((request, h) => h.response({ errors: new Error('forbidden') }));
 
       // when
-      const response = await httpTestServer.request(method, url, payload, null, {
-        authorization: generateValidRequestAuthorizationHeader(),
-      });
+      const response = await httpTestServer.request(
+        method,
+        url,
+        payload,
+        null,
+        generateAuthenticatedUserRequestHeaders(),
+      );
 
       // then
       expect(organizationPlaceController.getOrganizationPlacesLots).to.not.have.been.called;
@@ -145,9 +159,13 @@ describe('Integration | Application | organization-place-route', function () {
       checkOrganizationHasPlacesFeature.resolves(true);
 
       // when
-      const response = await httpTestServer.request(method, url, payload, null, {
-        authorization: generateValidRequestAuthorizationHeader(),
-      });
+      const response = await httpTestServer.request(
+        method,
+        url,
+        payload,
+        null,
+        generateAuthenticatedUserRequestHeaders(),
+      );
 
       // then
       expect(organizationPlaceController.getOrganizationPlacesLots).to.not.have.been.called;

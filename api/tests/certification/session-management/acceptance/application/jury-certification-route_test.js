@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -117,9 +117,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       const options = {
         method: 'GET',
         url: '/api/admin/certifications/123',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(user.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       // when

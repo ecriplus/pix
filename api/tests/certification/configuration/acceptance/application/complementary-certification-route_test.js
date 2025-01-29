@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -21,9 +21,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       const options = {
         method: 'GET',
         url: '/api/admin/complementary-certifications',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
       databaseBuilder.factory.buildComplementaryCertification({
         id: 1,
@@ -73,9 +71,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         const options = {
           method: 'GET',
           url: '/api/admin/complementary-certifications/attachable-target-profiles',
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         };
 
         databaseBuilder.factory.buildTargetProfile({
@@ -111,9 +107,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         const options = {
           method: 'GET',
           url: '/api/admin/complementary-certifications/attachable-target-profiles?searchTerm=that%20way',
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         };
 
         databaseBuilder.factory.buildTargetProfile({

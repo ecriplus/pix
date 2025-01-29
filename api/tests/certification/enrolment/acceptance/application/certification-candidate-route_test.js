@@ -6,7 +6,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../../test-helper.js';
 
@@ -88,7 +88,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
             },
           },
         },
-        headers: { authorization: generateValidRequestAuthorizationHeader(certificationCenterUserId, 'pix-certif') },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: certificationCenterUserId, source: 'pix-certif' }),
       };
 
       // when
@@ -147,7 +147,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
         method: 'GET',
         url: `/api/sessions/${sessionId}/certification-candidates`,
         payload: {},
-        headers: { authorization: generateValidRequestAuthorizationHeader(certificationCenterUserId, 'pix-certif') },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: certificationCenterUserId, source: 'pix-certif' }),
       };
 
       // when
@@ -184,7 +184,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
         method: 'PATCH',
         url: `/api/certification-candidates/${candidateId}/validate-certification-instructions`,
         payload: {},
-        headers: { authorization: generateValidRequestAuthorizationHeader(candidateUserId, 'pix') },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: candidateUserId, source: 'pix' }),
       };
 
       // when
@@ -234,7 +234,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
         method: 'GET',
         url: `/api/certification-candidates/${candidateId}`,
         payload: {},
-        headers: { authorization: generateValidRequestAuthorizationHeader(candidateUserId, 'pix') },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: candidateUserId, source: 'pix' }),
       };
 
       // when
@@ -309,7 +309,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
             },
           },
         },
-        headers: { authorization: generateValidRequestAuthorizationHeader(certificationCenterUserId, 'pix-certif') },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: certificationCenterUserId, source: 'pix-certif' }),
       };
 
       // when
@@ -366,7 +366,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
         method: 'DELETE',
         url: `/api/sessions/${sessionId}/certification-candidates/${candidateId}`,
         payload: {},
-        headers: { authorization: generateValidRequestAuthorizationHeader(certificationCenterUserId, 'pix-certif') },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: certificationCenterUserId, source: 'pix-certif' }),
       };
 
       // when

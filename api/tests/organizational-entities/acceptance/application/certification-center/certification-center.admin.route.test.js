@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -24,7 +24,7 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
 
     context('when user is Super Admin', function () {
       beforeEach(function () {
-        request.headers = { authorization: generateValidRequestAuthorizationHeader() };
+        request.headers = generateAuthenticatedUserRequestHeaders();
       });
 
       it('returns a list of certificationCenter, with their name and id', async function () {
@@ -129,7 +129,7 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
 
     context('when user is not SuperAdmin', function () {
       beforeEach(function () {
-        request.headers = { authorization: generateValidRequestAuthorizationHeader(1111) };
+        request.headers = generateAuthenticatedUserRequestHeaders({ userId: 1111 });
       });
 
       it('returns a 403 HTTP status code ', async function () {
@@ -171,7 +171,7 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
         const response = await server.inject({
           method: 'POST',
           url: '/api/admin/certification-centers',
-          headers: { authorization: generateValidRequestAuthorizationHeader() },
+          headers: generateAuthenticatedUserRequestHeaders(),
           payload: {
             data: {
               type: 'certification-center',
@@ -212,7 +212,7 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
         const response = await server.inject({
           method: 'POST',
           url: '/api/admin/certification-centers',
-          headers: { authorization: generateValidRequestAuthorizationHeader(111) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: 111 }),
           payload: {
             data: {
               type: 'certification-center',
@@ -264,7 +264,7 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
 
     context('when user is Super Admin', function () {
       beforeEach(function () {
-        request.headers = { authorization: generateValidRequestAuthorizationHeader() };
+        request.headers = generateAuthenticatedUserRequestHeaders();
       });
 
       it('returns 200 HTTP status', async function () {
@@ -337,7 +337,7 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
 
     context('when user is not SuperAdmin', function () {
       beforeEach(function () {
-        request.headers = { authorization: generateValidRequestAuthorizationHeader(1111) };
+        request.headers = generateAuthenticatedUserRequestHeaders({ userId: 1111 });
       });
 
       it('returns 403 HTTP status code ', async function () {
@@ -370,9 +370,7 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
 
         // when
         const { result, statusCode } = await server.inject({
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(adminMember.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
           method: 'PATCH',
           payload: {
             data: {

@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../test-helper.js';
@@ -37,7 +37,7 @@ describe('Acceptance | API | Certification Center', function () {
       const request = {
         method: 'GET',
         url: '/api/certification-centers/' + certificationCenter.id + '/divisions',
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       // when
@@ -63,9 +63,7 @@ describe('Acceptance | API | Certification Center', function () {
 
         // when
         const response = await server.inject({
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(),
-          },
+          headers: generateAuthenticatedUserRequestHeaders(),
           method: 'GET',
           url: `/api/admin/certification-centers/${certificationCenter.id}/certification-center-memberships`,
         });
@@ -91,9 +89,7 @@ describe('Acceptance | API | Certification Center', function () {
 
         // when
         const response = await server.inject({
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(),
-          },
+          headers: generateAuthenticatedUserRequestHeaders(),
           method: 'GET',
           url: `/api/admin/certification-centers/${certificationCenter.id}/certification-center-memberships`,
         });
@@ -172,9 +168,7 @@ describe('Acceptance | API | Certification Center', function () {
       databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
       await databaseBuilder.commit();
       const request = {
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         method: 'GET',
         url: `/api/certification-centers/${certificationCenterId}/session-summaries?page[number]=1&page[size]=10`,
       };
@@ -214,9 +208,7 @@ describe('Acceptance | API | Certification Center', function () {
       databaseBuilder.factory.buildUser({ email });
 
       request = {
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(),
-        },
+        headers: generateAuthenticatedUserRequestHeaders(),
         method: 'POST',
         url: `/api/admin/certification-centers/${certificationCenterId}/certification-center-memberships`,
         payload: { email },
@@ -236,7 +228,7 @@ describe('Acceptance | API | Certification Center', function () {
     context('when user is not SuperAdmin', function () {
       it('should return 403 HTTP status code ', async function () {
         // given
-        request.headers.authorization = generateValidRequestAuthorizationHeader(1111);
+        request.headers = generateAuthenticatedUserRequestHeaders({ userId: 1111 });
 
         // when
         const response = await server.inject(request);
@@ -339,7 +331,7 @@ describe('Acceptance | API | Certification Center', function () {
         method: 'POST',
         url: `/api/certif/certification-centers/${certificationCenterId}/update-referer`,
         payload,
-        headers: { authorization: generateValidRequestAuthorizationHeader(certificationCenterMemberId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: certificationCenterMemberId }),
       };
 
       // when
@@ -382,7 +374,7 @@ describe('Acceptance | API | Certification Center', function () {
           method: 'POST',
           url: `/api/certification-centers/${certificationCenterId}/session`,
           payload,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         // when
@@ -433,7 +425,7 @@ describe('Acceptance | API | Certification Center', function () {
           method: 'POST',
           url: `/api/certification-centers/${certificationCenterId}/session`,
           payload,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         // when

@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -18,9 +18,7 @@ describe('Acceptance | Route | Delete Organizations Places Lot', function () {
       const options = {
         method: 'DELETE',
         url: `/api/admin/organizations/${organizationPlace.organizationId}/places/${organizationPlace.id}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(adminUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
       };
 
       await databaseBuilder.commit();
@@ -41,9 +39,7 @@ describe('Acceptance | Route | Delete Organizations Places Lot', function () {
       const options = {
         method: 'DELETE',
         url: `/api/admin/organizations/${organizationPlace.organizationId}/places/123156`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(adminUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
       };
 
       await databaseBuilder.commit();
@@ -67,9 +63,7 @@ describe('Acceptance | Route | Delete Organizations Places Lot', function () {
       const options = {
         method: 'DELETE',
         url: `/api/admin/organizations/${organizationPlace.organizationId}/places/${organizationPlace.id}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(adminUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
       };
 
       await databaseBuilder.commit();

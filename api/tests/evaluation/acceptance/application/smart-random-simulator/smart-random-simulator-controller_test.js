@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | API | Smart Random Simulator', function () {
@@ -68,9 +68,7 @@ describe('Acceptance | API | Smart Random Simulator', function () {
           options = {
             method: 'POST',
             url: '/api/admin/smart-random-simulator/get-next-challenge',
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload: buildPayload(),
           };
           response = await server.inject(options);
@@ -187,9 +185,7 @@ describe('Acceptance | API | Smart Random Simulator', function () {
           options = {
             method: 'POST',
             url: '/api/admin/smart-random-simulator/get-next-challenge',
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload: buildPayload(false),
           };
           response = await server.inject(options);

@@ -4,7 +4,7 @@ import { logo3Mb } from '../../../integration/application/organizations-administ
 import {
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
   sinon,
 } from '../../../test-helper.js';
@@ -40,9 +40,7 @@ describe('Integration | Organizational Entities | Application | Route | Organiza
       const wrongUrl = '/api/admin/organizations/coucou';
       const simpleUserId = databaseBuilder.factory.buildUser().id;
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(simpleUserId),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: simpleUserId });
 
       // when
       const response = await httpTestServer.request(method, wrongUrl, null, null, headers);
@@ -55,9 +53,7 @@ describe('Integration | Organizational Entities | Application | Route | Organiza
       // given
       const simpleUserId = databaseBuilder.factory.buildUser().id;
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(simpleUserId),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: simpleUserId });
 
       // when
       const response = await httpTestServer.request(method, url, null, null, headers);
@@ -70,9 +66,7 @@ describe('Integration | Organizational Entities | Application | Route | Organiza
       // given
       const certifUserId = databaseBuilder.factory.buildUser.withRole({ role: 'CERTIF' }).id;
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(certifUserId),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: certifUserId });
 
       // when
       const response = await httpTestServer.request(method, url, null, null, headers);
@@ -85,9 +79,7 @@ describe('Integration | Organizational Entities | Application | Route | Organiza
       // given
       const supportUserId = databaseBuilder.factory.buildUser.withRole({ role: 'SUPPORT' }).id;
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(supportUserId),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: supportUserId });
 
       // when
       await httpTestServer.request(method, url, null, null, headers);
@@ -100,9 +92,7 @@ describe('Integration | Organizational Entities | Application | Route | Organiza
       // given
       const adminUserId = databaseBuilder.factory.buildUser.withRole({ role: 'SUPER_ADMIN' }).id;
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(adminUserId),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: adminUserId });
 
       // when
       await httpTestServer.request(method, url, null, null, headers);
@@ -115,9 +105,7 @@ describe('Integration | Organizational Entities | Application | Route | Organiza
       // given
       const metierUserId = databaseBuilder.factory.buildUser.withRole({ role: 'METIER' }).id;
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(metierUserId),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: metierUserId });
 
       // when
       await httpTestServer.request(method, url, null, null, headers);
@@ -130,9 +118,7 @@ describe('Integration | Organizational Entities | Application | Route | Organiza
       // given
       const metierUserId = databaseBuilder.factory.buildUser.withRole({ role: 'METIER' }).id;
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(metierUserId),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: metierUserId });
 
       const payload = {
         data: {

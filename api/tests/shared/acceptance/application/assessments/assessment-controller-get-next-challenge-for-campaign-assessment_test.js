@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -114,7 +114,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-campai
         const options = {
           method: 'GET',
           url: `/api/assessments/${assessmentId}/next`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         const lastQuestionDate = new Date();

@@ -3,7 +3,7 @@ import * as moduleUnderTest from '../../../../../src/prescription/campaign/appli
 import {
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
   sinon,
 } from '../../../../test-helper.js';
@@ -43,9 +43,7 @@ describe('Integration | Application | campaign-results-route', function () {
       const simpleUserId = databaseBuilder.factory.buildUser().id;
       await databaseBuilder.commit();
 
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(simpleUserId),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: simpleUserId });
 
       // when
       const response = await httpTestServer.request(method, url, null, null, headers);
@@ -60,9 +58,7 @@ describe('Integration | Application | campaign-results-route', function () {
       const userId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildMembership({ organizationId, userId, organizationRole: 'MEMBER' });
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(userId),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId });
 
       // when
       const response = await httpTestServer.request(method, wrongUrl, null, null, headers);
@@ -106,9 +102,7 @@ describe('Integration | Application | campaign-results-route', function () {
       const simpleUserId = databaseBuilder.factory.buildUser().id;
       await databaseBuilder.commit();
 
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(simpleUserId),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: simpleUserId });
 
       // when
       const response = await httpTestServer.request(method, url, null, null, headers);
@@ -123,9 +117,7 @@ describe('Integration | Application | campaign-results-route', function () {
       const userId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildMembership({ organizationId, userId, organizationRole: 'MEMBER' });
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(userId),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId });
 
       // when
       const response = await httpTestServer.request(method, wrongUrl, null, null, headers);

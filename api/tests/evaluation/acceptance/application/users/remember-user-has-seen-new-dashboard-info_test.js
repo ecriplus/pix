@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | users-controller-has-seen-new-dashboard-info', function () {
@@ -18,7 +18,7 @@ describe('Acceptance | Controller | users-controller-has-seen-new-dashboard-info
     options = {
       method: 'PATCH',
       url: `/api/users/${user.id}/has-seen-new-dashboard-info`,
-      headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+      headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
     };
 
     return databaseBuilder.commit();
@@ -39,7 +39,7 @@ describe('Acceptance | Controller | users-controller-has-seen-new-dashboard-info
     it('should respond with a 403 - forbidden access - if requested user is not the same as authenticated user', async function () {
       // given
       const otherUserId = 9999;
-      options.headers.authorization = generateValidRequestAuthorizationHeader(otherUserId);
+      options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
 
       // when
       const response = await server.inject(options);

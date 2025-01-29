@@ -5,7 +5,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -121,7 +121,7 @@ describe('Acceptance | Controller | users-controller-reset-scorecard', function 
       it('should respond with a 403 - forbidden access - if requested user is not the same as authenticated user', async function () {
         // given
         const otherUserId = 9999;
-        options.headers.authorization = generateValidRequestAuthorizationHeader(otherUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
 
         // when
         const response = await server.inject(options);
@@ -135,7 +135,7 @@ describe('Acceptance | Controller | users-controller-reset-scorecard', function 
       const competenceEvaluationId = 111;
 
       beforeEach(async function () {
-        options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
         databaseBuilder.factory.buildCompetenceEvaluation({
           id: competenceEvaluationId,
@@ -168,7 +168,7 @@ describe('Acceptance | Controller | users-controller-reset-scorecard', function 
       const createdAt = new Date('2019-01-01');
 
       beforeEach(async function () {
-        options.headers.authorization = generateValidRequestAuthorizationHeader(userId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
         sinon.useFakeTimers({
           now: new Date('2019-01-10'),

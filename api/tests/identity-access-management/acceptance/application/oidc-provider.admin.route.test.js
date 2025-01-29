@@ -6,7 +6,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../test-helper.js';
@@ -43,7 +43,7 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
         method: 'POST',
         url: '/api/admin/oidc-providers/import',
         payload,
-        headers: { authorization: generateValidRequestAuthorizationHeader(superAdmin.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
 
       // when
@@ -63,7 +63,7 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
       const options = {
         method: 'GET',
         url: '/api/admin/oidc/identity-providers',
-        headers: { authorization: generateValidRequestAuthorizationHeader(superAdmin.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
 
       // when

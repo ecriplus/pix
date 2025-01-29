@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
   learningContentBuilder,
@@ -82,9 +82,7 @@ describe('Acceptance | API | Autonomous Course', function () {
           const options = {
             method: 'POST',
             url: '/api/admin/autonomous-courses',
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload,
           };
           const response = await server.inject(options);
@@ -165,9 +163,7 @@ describe('Acceptance | API | Autonomous Course', function () {
       const response = await server.inject({
         method: 'GET',
         url: '/api/admin/autonomous-courses',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       });
 
       // then
@@ -225,9 +221,7 @@ describe('Acceptance | API | Autonomous Course', function () {
       const response = await server.inject({
         method: 'GET',
         url: `/api/admin/autonomous-courses/${autonomousCourseId}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       });
 
       // then
@@ -273,9 +267,7 @@ describe('Acceptance | API | Autonomous Course', function () {
       const response = await server.inject({
         method: 'PATCH',
         url: `/api/admin/autonomous-courses/${autonomousCourseId}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: {
           data: {
             type: 'autonomous-courses',
@@ -351,7 +343,7 @@ describe('Acceptance | API | Autonomous Course', function () {
       const options = {
         method: 'GET',
         url: `/api/admin/autonomous-courses/target-profiles`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       const expectedResult = [

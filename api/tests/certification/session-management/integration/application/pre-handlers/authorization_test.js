@@ -2,7 +2,7 @@ import { authorization } from '../../../../../../src/certification/session-manag
 import {
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
 } from '../../../../../test-helper.js';
 
@@ -54,7 +54,7 @@ describe('Certification | Session-Management | Integration | Application | Pre-H
           const options = {
             method: 'GET',
             url: `/api/test/sessions/${sessionId}/supervisor-kit`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
           // when
@@ -81,7 +81,7 @@ describe('Certification | Session-Management | Integration | Application | Pre-H
           const options = {
             method: 'GET',
             url: `/api/test/sessions/${sessionId}/supervisor-kit`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
           };
 
           // when
@@ -136,7 +136,7 @@ describe('Certification | Session-Management | Integration | Application | Pre-H
         const options = {
           method: 'GET',
           url: `/api/test/sessions/${sessionId}/supervisor-kit`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         // when
@@ -160,7 +160,7 @@ describe('Certification | Session-Management | Integration | Application | Pre-H
         const options = {
           method: 'GET',
           url: `/api/test/sessions/${sessionId}/supervisor-kit`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
         // when

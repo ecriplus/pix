@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -46,9 +46,7 @@ describe('Acceptance | API | Competence Evaluations', function () {
           const options = {
             method: 'POST',
             url: '/api/competence-evaluations/start-or-resume',
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload: { competenceId },
           };
           const response = await server.inject(options);
@@ -64,9 +62,7 @@ describe('Acceptance | API | Competence Evaluations', function () {
           const options = {
             method: 'POST',
             url: '/api/competence-evaluations/start-or-resume',
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload: { competenceId },
           };
           databaseBuilder.factory.buildCompetenceEvaluation({ competenceId, userId });
@@ -88,9 +84,7 @@ describe('Acceptance | API | Competence Evaluations', function () {
           const options = {
             method: 'POST',
             url: '/api/competence-evaluations/start-or-resume',
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload: { competenceId: 'WRONG_ID' },
           };
 
@@ -142,9 +136,7 @@ describe('Acceptance | API | Competence Evaluations', function () {
             const options = {
               method: 'PUT',
               url: '/api/competence-evaluations/improve',
-              headers: {
-                authorization: generateValidRequestAuthorizationHeader(userId),
-              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId }),
               payload: { competenceId },
             };
 
@@ -183,9 +175,7 @@ describe('Acceptance | API | Competence Evaluations', function () {
             const options = {
               method: 'PUT',
               url: '/api/competence-evaluations/improve',
-              headers: {
-                authorization: generateValidRequestAuthorizationHeader(userId),
-              },
+              headers: generateAuthenticatedUserRequestHeaders({ userId }),
               payload: { competenceId },
             };
 
@@ -204,9 +194,7 @@ describe('Acceptance | API | Competence Evaluations', function () {
           const options = {
             method: 'PUT',
             url: '/api/competence-evaluations/improve',
-            headers: {
-              authorization: generateValidRequestAuthorizationHeader(userId),
-            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload: { competenceId: 'WRONG_ID' },
           };
 

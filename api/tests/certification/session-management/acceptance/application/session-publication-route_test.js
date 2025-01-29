@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   sinon,
 } from '../../../../test-helper.js';
@@ -27,7 +27,7 @@ describe('Certification | Session-Management | Acceptance | Application | Routes
       it('should return a 403 error code', async function () {
         // given
         options.url = '/api/admin/sessions/1/publish';
-        options.headers = { authorization: generateValidRequestAuthorizationHeader(userId) };
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
         // when
         const response = await server.inject(options);
@@ -41,7 +41,7 @@ describe('Certification | Session-Management | Acceptance | Application | Routes
       beforeEach(function () {
         // given
         userId = databaseBuilder.factory.buildUser.withRole().id;
-        options.headers = { authorization: generateValidRequestAuthorizationHeader(userId) };
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
         return databaseBuilder.commit();
       });
 
@@ -197,7 +197,7 @@ describe('Certification | Session-Management | Acceptance | Application | Routes
       it('should return a 403 error code', async function () {
         // given
         options.url = '/api/admin/sessions/1/unpublish';
-        options.headers = { authorization: generateValidRequestAuthorizationHeader(userId) };
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
         // when
         const response = await server.inject(options);
@@ -211,7 +211,7 @@ describe('Certification | Session-Management | Acceptance | Application | Routes
       beforeEach(function () {
         // given
         userId = databaseBuilder.factory.buildUser.withRole().id;
-        options.headers = { authorization: generateValidRequestAuthorizationHeader(userId) };
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId });
         return databaseBuilder.commit();
       });
 

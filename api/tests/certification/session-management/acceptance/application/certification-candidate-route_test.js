@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Acceptance | Application | Routes | certification-candidate', function () {
@@ -51,7 +51,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           const options = {
             method: 'POST',
             url: `/api/certification-candidates/${candidate.id}/authorize-to-start`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(supervisorUserId, 'pix-certif') },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: supervisorUserId, source: 'pix-certif' }),
             payload: { 'authorized-to-start': true },
           };
 
@@ -105,7 +105,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           const options = {
             method: 'POST',
             url: `/api/certification-candidates/${candidate.id}/authorize-to-resume`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(supervisorUserId, 'pix-certif') },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: supervisorUserId, source: 'pix-certif' }),
           };
 
           // when
@@ -164,7 +164,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           const options = {
             method: 'PATCH',
             url: `/api/certification-candidates/1001/end-assessment-by-supervisor`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(supervisorUserId, 'pix-certif') },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: supervisorUserId, source: 'pix-certif' }),
           };
 
           // when

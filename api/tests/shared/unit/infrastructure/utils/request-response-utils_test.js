@@ -4,7 +4,7 @@ import {
   extractLocaleFromRequest,
   extractUserIdFromRequest,
 } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
-import { expect, generateValidRequestAuthorizationHeader } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
 const { ENGLISH_SPOKEN, FRENCH_FRANCE, FRENCH_SPOKEN } = LOCALE;
 
@@ -14,7 +14,7 @@ describe('Unit | Utils | Request Utils', function () {
       // given
       const userId = 4;
       const request = {
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
       // when
       const result = extractUserIdFromRequest(request);

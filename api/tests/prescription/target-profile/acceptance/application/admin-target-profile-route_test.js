@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
   MockDate,
@@ -71,7 +71,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
         const options = {
           method: 'PATCH',
           url: `/api/admin/target-profiles/${targetProfile.id}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           payload: {
             data: {
               attributes: {
@@ -108,7 +108,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
         const options = {
           method: 'PATCH',
           url: `/api/admin/target-profiles/${targetProfile.id}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           payload: {
             data: {
               attributes: {
@@ -218,7 +218,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       const response = await server.inject({
         method: 'GET',
         url: `/api/admin/target-profiles/${targetProfile.id}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       });
 
       // then
@@ -249,7 +249,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       const response = await server.inject({
         method: 'GET',
         url: `/api/admin/target-profiles/${targetProfile.id}?filter[badges]=certifiable`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       });
 
       // then
@@ -392,7 +392,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
           method: 'GET',
           url: `/api/admin/target-profiles/${targetProfileId}/content-json`,
           payload: {},
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         };
 
         // when
@@ -416,7 +416,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
           method: 'GET',
           url: `/api/admin/target-profiles/${targetProfileId}/learning-content-pdf?language=fr`,
           payload: {},
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         };
 
         // when
@@ -443,7 +443,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       const options = {
         method: 'POST',
         url: `/api/admin/target-profiles/${targetProfileId}/attach-organizations`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         payload: {
           'organization-ids': [organization1.id, organization2.id],
         },
@@ -482,7 +482,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       const options = {
         method: 'POST',
         url: `/api/admin/target-profiles/${targetProfileId}/copy-organizations`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         payload: {
           'target-profile-id': existingTargetProfileId,
         },
@@ -526,7 +526,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
         const options = {
           method: 'POST',
           url: `/api/admin/organizations/${organizationId}/attach-target-profiles`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload: {
             'target-profile-ids': [alreadyAttachedTargetProfileId, toAttachTargetProfileId],
           },
@@ -551,7 +551,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
         const options = {
           method: 'POST',
           url: `/api/admin/organizations/${organizationId}/attach-target-profiles`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload: {
             'target-profile-ids': [alreadyAttachedTargetProfileId, 6000, toAttachTargetProfileId],
           },
@@ -588,7 +588,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       const options = {
         method: 'DELETE',
         url: `/api/admin/target-profiles/${targetProfileId}/detach-organizations`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         payload: {
           data: {
             attributes: {
@@ -614,7 +614,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       const options = {
         method: 'PUT',
         url: `/api/admin/target-profiles/${targetProfile.id}/outdate`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         payload: {
           data: {
             attributes: {
@@ -644,9 +644,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       const options = {
         method: 'PUT',
         url: `/api/admin/target-profiles/${targetProfile.id}/simplified-access`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(user.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       // when
@@ -697,7 +695,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       const options = {
         method: 'GET',
         url: `/api/admin/target-profiles/${targetProfileId}/organizations`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       // when
@@ -748,7 +746,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       const response = await server.inject({
         method: 'POST',
         url: `/api/admin/target-profiles/${targetProfile.id}/copy`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       });
 
       // then
@@ -806,7 +804,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       const options = {
         method: 'GET',
         url: `/api/admin/organizations/${organizationId}/target-profile-summaries`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when
@@ -840,7 +838,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       const options = {
         method: 'GET',
         url: `/api/admin/target-profile-summaries`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when
@@ -878,7 +876,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       const options = {
         method: 'POST',
         url: '/api/admin/target-profiles',
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         payload: {
           data: {
             attributes: {

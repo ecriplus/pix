@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -81,7 +81,7 @@ describe('Acceptance | API | assessment-controller-update-last-challenge-state',
         options = {
           method: 'PATCH',
           url: `/api/assessments/${assessment.id}/last-challenge-state/${newState}`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         };
 
         return databaseBuilder.commit();
@@ -90,7 +90,7 @@ describe('Acceptance | API | assessment-controller-update-last-challenge-state',
       it('should respond with a 401 if requested user is not the same as the user of the assessment', async function () {
         // given
         const otherUserId = 9999;
-        options.headers.authorization = generateValidRequestAuthorizationHeader(otherUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
         options.payload = {};
 
         // when
@@ -133,7 +133,7 @@ describe('Acceptance | API | assessment-controller-update-last-challenge-state',
           const options = {
             method: 'PATCH',
             url: `/api/assessments/${assessmentId}/last-challenge-state/${state}`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload: {},
           };
 
@@ -159,7 +159,7 @@ describe('Acceptance | API | assessment-controller-update-last-challenge-state',
           const options = {
             method: 'PATCH',
             url: `/api/assessments/${assessmentId}/last-challenge-state/${state}`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload,
           };
 
@@ -200,7 +200,7 @@ describe('Acceptance | API | assessment-controller-update-last-challenge-state',
           const options = {
             method: 'PATCH',
             url: `/api/assessments/${assessmentId}/last-challenge-state/${state}`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload,
           };
 
@@ -241,7 +241,7 @@ describe('Acceptance | API | assessment-controller-update-last-challenge-state',
           const options = {
             method: 'PATCH',
             url: `/api/assessments/${assessmentId}/last-challenge-state/${state}`,
-            headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
             payload,
           };
 

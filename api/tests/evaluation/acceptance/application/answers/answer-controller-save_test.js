@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -82,7 +82,7 @@ describe('Acceptance | Controller | answer-controller-save', function () {
         postAnswersOptions = {
           method: 'POST',
           url: '/api/answers',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload: {
             data: {
               type: 'answers',
@@ -200,7 +200,7 @@ describe('Acceptance | Controller | answer-controller-save', function () {
         postAnswersOptions = {
           method: 'POST',
           url: '/api/answers',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId + 3) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: userId + 3 }),
           payload: {
             data: {
               type: 'answers',
@@ -243,7 +243,7 @@ describe('Acceptance | Controller | answer-controller-save', function () {
         postAnswersOptions = {
           method: 'POST',
           url: '/api/answers',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload: {},
         };
         promise = server.inject(postAnswersOptions);
@@ -297,7 +297,7 @@ describe('Acceptance | Controller | answer-controller-save', function () {
         postAnswersOptions = {
           method: 'POST',
           url: '/api/answers',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload: {
             data: {
               type: 'answers',
@@ -375,7 +375,7 @@ describe('Acceptance | Controller | answer-controller-save', function () {
         postAnswersOptions = {
           method: 'POST',
           url: '/api/answers',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           payload: {
             data: {
               type: 'answers',

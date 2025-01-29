@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   learningContentBuilder,
   mockLearningContent,
@@ -51,7 +51,7 @@ describe('Acceptance | Route | target-profile', function () {
         const options = {
           method: 'GET',
           url: `/api/organizations/${linkedOrganization.id}/target-profiles`,
-          headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         };
 
         // when
@@ -267,9 +267,7 @@ describe('Acceptance | Route | target-profile', function () {
       const options = {
         method: 'GET',
         url: `/api/frameworks/for-target-profile-submission`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when

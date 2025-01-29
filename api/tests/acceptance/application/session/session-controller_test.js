@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | session-controller', function () {
@@ -37,7 +37,7 @@ describe('Acceptance | Controller | session-controller', function () {
           method: 'GET',
           url: `/api/sessions/${sessionId}/certification-candidates`,
           payload: {},
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         });
 
         // then
@@ -122,7 +122,7 @@ describe('Acceptance | Controller | session-controller', function () {
           method: 'GET',
           url: `/api/sessions/${sessionId}/certification-candidates`,
           payload: {},
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         });
 
         // then
@@ -135,7 +135,7 @@ describe('Acceptance | Controller | session-controller', function () {
           method: 'GET',
           url: `/api/sessions/${sessionId}/certification-candidates`,
           payload: {},
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         });
 
         // then

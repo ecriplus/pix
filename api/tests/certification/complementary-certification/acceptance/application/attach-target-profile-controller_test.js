@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../../test-helper.js';
@@ -95,7 +95,7 @@ describe('Acceptance | Controller | Complementary certification | attach-target-
             },
           },
         },
-        headers: { authorization: generateValidRequestAuthorizationHeader(superAdmin.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
       await databaseBuilder.commit();
 

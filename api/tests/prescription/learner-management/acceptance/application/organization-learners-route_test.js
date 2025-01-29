@@ -6,7 +6,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -30,9 +30,7 @@ describe('Acceptance | Prescription | learner management | Application | organiz
         const options = {
           method: 'DELETE',
           url: `/api/admin/organization-learners/${organizationLearner.id}/association`,
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         };
 
         const response = await server.inject(options);
@@ -57,9 +55,7 @@ describe('Acceptance | Prescription | learner management | Application | organiz
       options = {
         method: 'DELETE',
         url: `/api/organizations/${organizationId}/organization-learners`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         payload: {
           listLearners: [firstOrganizationLearnerId, secondOrganizationLearnerId],
         },
@@ -121,9 +117,7 @@ describe('Acceptance | Prescription | learner management | Application | organiz
       options = {
         method: 'POST',
         url: `/api/organizations/${organizationId}/import-organization-learners`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(connectedUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
         payload: buffer,
       };
       // when
@@ -208,9 +202,7 @@ describe('Acceptance | Prescription | learner management | Application | organiz
       const options = {
         method: 'POST',
         url: `/api/organization-learners/reconcile`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(connectedUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
         payload: {
           data: {
             attributes: {
@@ -266,7 +258,7 @@ describe('Acceptance | Prescription | learner management | Application | organiz
       databaseBuilder.factory.buildOrganizationLearner({ userId: user.id, nationalStudentId });
       await databaseBuilder.commit();
 
-      options.headers.authorization = generateValidRequestAuthorizationHeader(user.id);
+      options.headers = generateAuthenticatedUserRequestHeaders({ userId: user.id });
       options.payload.data = {
         attributes: {
           'campaign-code': campaign.code,

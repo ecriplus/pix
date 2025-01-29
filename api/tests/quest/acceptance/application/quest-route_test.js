@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Quest | Acceptance | Application | Quest Route ', function () {
@@ -34,7 +34,7 @@ describe('Quest | Acceptance | Application | Quest Route ', function () {
       await databaseBuilder.commit();
       const options = {
         method: 'GET',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         url: `/api/campaign-participations/${campaignParticipationId}/quest-results`,
       };
 

@@ -6,7 +6,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertOrganizationUserWithRoleAdmin,
 } from '../../../../../tests/test-helper.js';
 
@@ -326,7 +326,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
       options = {
         method: 'GET',
         url: `/api/organizations/${organizationId}/invitations`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(adminUserId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUserId }),
       };
 
       await databaseBuilder.commit();
@@ -392,7 +392,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
         // given
         const nonSuperAdminUserId = databaseBuilder.factory.buildUser().id;
         await databaseBuilder.commit();
-        options.headers.authorization = generateValidRequestAuthorizationHeader(nonSuperAdminUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: nonSuperAdminUserId });
 
         // when
         const response = await server.inject(options);
@@ -424,7 +424,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
       options = {
         method: 'POST',
         url: `/api/organizations/${organization.id}/invitations`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(adminUserId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUserId }),
         payload: {
           data: {
             type: 'organization-invitations',
@@ -494,7 +494,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
         // given
         const nonAdminUserId = databaseBuilder.factory.buildUser().id;
         await databaseBuilder.commit();
-        options.headers.authorization = generateValidRequestAuthorizationHeader(nonAdminUserId);
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: nonAdminUserId });
 
         // when
         const response = await server.inject(options);
@@ -527,9 +527,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
       const options = {
         method: 'DELETE',
         url: `/api/organizations/${organization.id}/invitations/${invitation.id}`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(adminUser.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
       };
 
       await databaseBuilder.commit();

@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | session-controller-delete-certification-candidate', function () {
@@ -26,9 +26,7 @@ describe('Acceptance | Controller | session-controller-delete-certification-cand
 
       options = {
         method: 'DELETE',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(userId),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
       return databaseBuilder.commit();
     });

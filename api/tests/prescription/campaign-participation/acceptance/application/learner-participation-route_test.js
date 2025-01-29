@@ -11,7 +11,7 @@ import {
   databaseBuilder,
   domainBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -61,7 +61,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
       options = {
         method: 'PATCH',
         url: `/api/campaign-participations/${campaignParticipationId}`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
     });
 
@@ -125,7 +125,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
     };
 
     beforeEach(async function () {
-      options.headers = { authorization: generateValidRequestAuthorizationHeader(user.id) };
+      options.headers = generateAuthenticatedUserRequestHeaders({ userId: user.id });
       const targetProfileId = databaseBuilder.factory.buildTargetProfile({ areKnowledgeElementsResettable: true }).id;
       databaseBuilder.factory.buildTargetProfileTube({ tubeId: 'tubeId1', targetProfileId });
       databaseBuilder.factory.buildKnowledgeElement({
@@ -303,7 +303,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
       options = {
         method: 'PATCH',
         url: `/api/campaign-participations/${campaignParticipationId}/begin-improvement`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when
@@ -332,7 +332,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
       options = {
         method: 'PATCH',
         url: `/api/campaign-participations/${campaignParticipationId}/begin-improvement`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when
@@ -361,7 +361,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
       options = {
         method: 'PATCH',
         url: `/api/campaign-participations/${campaignParticipationId}/begin-improvement`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when
@@ -447,7 +447,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
       options = {
         method: 'GET',
         url: `/api/users/${userId}/campaigns/${campaign.id}/profile`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
     });
 

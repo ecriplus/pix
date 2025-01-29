@@ -3,7 +3,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../../test-helper.js';
 
@@ -34,9 +34,7 @@ describe('Acceptance | Team | Application | Route | Certification Center Invitat
         await databaseBuilder.commit();
 
         request = {
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(userId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           method: 'POST',
           url: `/api/certification-centers/${certificationCenterId}/invitations`,
           payload: {},
@@ -58,9 +56,7 @@ describe('Acceptance | Team | Application | Route | Certification Center Invitat
         await databaseBuilder.commit();
 
         request = {
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(userId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           method: 'POST',
           url: `/api/certification-centers/${certificationCenterId}/invitations`,
           payload: {
@@ -107,9 +103,7 @@ describe('Acceptance | Team | Application | Route | Certification Center Invitat
         await databaseBuilder.commit();
 
         request = {
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(userId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           method: 'GET',
           url: `/api/certification-centers/${certificationCenterId}/invitations`,
           payload: { certificationCenterId },
@@ -134,9 +128,7 @@ describe('Acceptance | Team | Application | Route | Certification Center Invitat
         await databaseBuilder.commit();
 
         request = {
-          headers: {
-            authorization: generateValidRequestAuthorizationHeader(userId),
-          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           method: 'GET',
           url: `/api/certification-centers/${certificationCenterId}/invitations`,
           payload: { certificationCenterId },
@@ -250,9 +242,7 @@ describe('Acceptance | Team | Application | Route | Certification Center Invitat
       await databaseBuilder.commit();
 
       request = {
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(user.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
         method: 'DELETE',
         url: `/api/certification-center-invitations/${certificationCenterInvitation.id}`,
       };

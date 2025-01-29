@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Route | target-profiles', function () {
@@ -30,7 +30,7 @@ describe('Acceptance | Route | target-profiles', function () {
       const options = {
         method: 'GET',
         url: `/api/admin/target-profiles/${targetProfileId}/training-summaries`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       // when

@@ -115,9 +115,23 @@ function toStream(data, encoding = 'utf8') {
   });
 }
 
-function generateValidRequestAuthorizationHeader(userId = 1234, source = 'pix', audience = 'http://app.pix.org') {
+function generateAuthenticatedUserRequestHeaders({
+  userId = 1234,
+  source = 'pix',
+  audience = 'https://app.pix.org',
+  acceptLanguage,
+} = {}) {
+  const url = new URL(audience);
+  const protoHeader = url.protocol.slice(0, -1);
+  const hostHeader = url.hostname;
   const accessToken = tokenService.createAccessTokenFromUser({ userId, source, audience }).accessToken;
-  return `Bearer ${accessToken}`;
+
+  return {
+    authorization: `Bearer ${accessToken}`,
+    'x-forwarded-proto': protoHeader,
+    'x-forwarded-host': hostHeader,
+    ...(acceptLanguage && { 'accept-language': acceptLanguage }),
+  };
 }
 
 function generateValidRequestAuthorizationHeaderForApplication(clientId = 'client-id-name', source, scope) {
@@ -328,8 +342,8 @@ export {
   domainBuilder,
   EMPTY_BLANK_AND_NULL,
   expect,
+  generateAuthenticatedUserRequestHeaders,
   generateIdTokenForExternalUser,
-  generateValidRequestAuthorizationHeader,
   generateValidRequestAuthorizationHeaderForApplication,
   hFake,
   HttpTestServer,

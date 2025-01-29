@@ -3,7 +3,7 @@ import * as moduleUnderTest from '../../../../../src/prescription/target-profile
 import {
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
   sinon,
 } from '../../../../test-helper.js';
@@ -40,9 +40,7 @@ describe('Integration | Application | target-profile-route', function () {
       const lambdaUser = databaseBuilder.factory.buildUser().id;
       url = `/api/organizations/${organizationId}/target-profiles`;
       // given
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(lambdaUser),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: lambdaUser });
 
       // when
       const response = await httpTestServer.request(method, url, null, null, headers);
@@ -57,9 +55,7 @@ describe('Integration | Application | target-profile-route', function () {
       const adminUser = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildMembership({ organizationId, userId: adminUser, organizationRole: 'ADMIN' });
       await databaseBuilder.commit();
-      headers = {
-        authorization: generateValidRequestAuthorizationHeader(adminUser),
-      };
+      headers = generateAuthenticatedUserRequestHeaders({ userId: adminUser });
       payload = {
         listLearners: [123],
       };

@@ -2,7 +2,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
 } from '../../../test-helper.js';
 
 describe('Profile | Acceptance | Application | Share Profile Route ', function () {
@@ -23,7 +23,7 @@ describe('Profile | Acceptance | Application | Share Profile Route ', function (
         await databaseBuilder.commit();
         const options = {
           method: 'POST',
-          headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
           url: `/api/users/${userId}/profile/share-reward`,
           payload: {
             data: {
@@ -54,7 +54,7 @@ describe('Profile | Acceptance | Application | Share Profile Route ', function (
       await databaseBuilder.commit();
       const options = {
         method: 'POST',
-        headers: { authorization: generateValidRequestAuthorizationHeader(userId) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         url: `/api/users/${userId}/profile/share-reward`,
         payload: {
           data: {

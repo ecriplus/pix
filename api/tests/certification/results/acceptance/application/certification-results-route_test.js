@@ -7,7 +7,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
 } from '../../../../test-helper.js';
 
@@ -48,7 +48,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
       const request = {
         method: 'GET',
         url: `/api/sessions/${sessionId}/certified-clea-candidate-data`,
-        headers: { authorization: generateValidRequestAuthorizationHeader(user.id) },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
       };
 
       await databaseBuilder.commit();
@@ -217,7 +217,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
         await databaseBuilder.commit();
 
         // when
-        options.headers = { authorization: generateValidRequestAuthorizationHeader() };
+        options.headers = generateAuthenticatedUserRequestHeaders();
         const response = await server.inject(options);
 
         // then
@@ -238,7 +238,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
         await insertUserWithRoleSuperAdmin();
 
         // when
-        options.headers = { authorization: generateValidRequestAuthorizationHeader(1111) };
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: 1111 });
         const response = await server.inject(options);
 
         // then

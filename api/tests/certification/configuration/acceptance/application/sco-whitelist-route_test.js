@@ -4,7 +4,7 @@ import {
   createServer,
   databaseBuilder,
   expect,
-  generateValidRequestAuthorizationHeader,
+  generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../../test-helper.js';
@@ -24,9 +24,7 @@ describe('Certification | Configuration | Acceptance | API | sco-whitelist-route
       const options = {
         method: 'POST',
         url: '/api/admin/sco-whitelist',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: buffer,
       };
       databaseBuilder.factory.buildCertificationCenter({
@@ -68,9 +66,7 @@ describe('Certification | Configuration | Acceptance | API | sco-whitelist-route
       const options = {
         method: 'POST',
         url: '/api/admin/sco-whitelist',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: buffer,
       };
       databaseBuilder.factory.buildCertificationCenter({
@@ -123,9 +119,7 @@ describe('Certification | Configuration | Acceptance | API | sco-whitelist-route
       const options = {
         method: 'GET',
         url: '/api/admin/sco-whitelist',
-        headers: {
-          authorization: generateValidRequestAuthorizationHeader(superAdmin.id),
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
 
       databaseBuilder.factory.buildCertificationCenter({
