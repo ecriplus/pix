@@ -13,6 +13,7 @@ const serialize = function (organizations, meta) {
         record.dataProtectionOfficerLastName = dataProtectionOfficer.lastName;
         record.dataProtectionOfficerEmail = dataProtectionOfficer.email;
       }
+
       return record;
     },
     attributes: [

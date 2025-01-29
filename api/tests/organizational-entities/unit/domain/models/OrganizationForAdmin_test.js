@@ -5,6 +5,12 @@ import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin', function () {
   describe('features', function () {
+    it('should throw an error if a feature format is not valid', function () {
+      expect(() => {
+        new OrganizationForAdmin({ features: { MY_FEATURE: true } });
+      }).to.throw();
+    });
+
     context('for sco organizations', function () {
       context('when organization isManagingStudent is true', function () {
         it('builds an OrganizationForAdmin with compute organization learner certificability enabled', function () {
@@ -609,18 +615,18 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // given
       const givenOrganization = new OrganizationForAdmin({
         features: {
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: false,
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
         },
       });
 
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
-        features: { [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true },
+        features: { [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true } },
       });
 
       // then
-      expect(givenOrganization.features).to.includes({
-        [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true,
+      expect(givenOrganization.features).to.deep.includes({
+        [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
       });
     });
 
@@ -628,18 +634,18 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // given
       const givenOrganization = new OrganizationForAdmin({
         features: {
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true,
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
         },
       });
 
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
-        features: { [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: false },
+        features: { [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false } },
       });
 
       // then
-      expect(givenOrganization.features).to.includes({
-        [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: false,
+      expect(givenOrganization.features).to.deep.includes({
+        [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
       });
     });
   });

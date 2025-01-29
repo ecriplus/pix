@@ -26,7 +26,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
         identityProviderForCampaigns: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
         features: {
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true,
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
         },
         name: 'motherSco',
       });
@@ -43,7 +43,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
         identityProviderForCampaigns: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
         features: {
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true,
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
         },
         parentOrganizationId: parentOrganization.id,
         parentOrganizationName: parentOrganization.name,
@@ -160,8 +160,8 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         dataProtectionOfficerLastName: 'Ptipeu',
         dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
         features: {
-          [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: true,
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true,
+          [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: true },
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
         },
       };
 
@@ -210,10 +210,12 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         dataProtectionOfficerLastName: organizationAttributes.dataProtectionOfficerLastName,
         dataProtectionOfficerEmail: organizationAttributes.dataProtectionOfficerEmail,
         features: {
-          [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]:
-            organizationAttributes.features.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY,
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]:
-            organizationAttributes.features.MULTIPLE_SENDING_ASSESSMENT,
+          [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: {
+            active: organizationAttributes.features.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.active,
+          },
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: {
+            active: organizationAttributes.features.MULTIPLE_SENDING_ASSESSMENT.active,
+          },
         },
       });
       expect(organization).to.be.instanceOf(OrganizationForAdmin);

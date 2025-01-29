@@ -665,7 +665,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         id: organization.id,
         documentationUrl: 'https://pix.fr/',
         features: {
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true,
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
         },
       });
 

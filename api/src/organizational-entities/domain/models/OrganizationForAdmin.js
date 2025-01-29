@@ -1,3 +1,4 @@
+import Joi from 'joi';
 import differenceBy from 'lodash/differenceBy.js';
 
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
@@ -6,6 +7,10 @@ import { DataProtectionOfficer } from './DataProtectionOfficer.js';
 const CREDIT_DEFAULT_VALUE = 0;
 const PAD_TARGET_LENGTH = 3;
 const PAD_STRING = '0';
+
+const schema = Joi.object({
+  features: Joi.object().pattern(Joi.string(), Joi.object({ active: Joi.boolean(), params: Joi.object().empty(null) })),
+}).unknown();
 
 class OrganizationForAdmin {
   #provinceCode;
@@ -91,6 +96,16 @@ class OrganizationForAdmin {
     this.tagsToAdd = [];
     this.tagsToRemove = [];
     this.code = code;
+
+    this.#validate();
+  }
+
+  #validate() {
+    const { error } = schema.validate(this);
+
+    if (error) {
+      throw error;
+    }
   }
 
   get provinceCode() {
