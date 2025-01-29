@@ -1,5 +1,6 @@
 import { UserLogin } from '../../../../../src/identity-access-management/domain/models/UserLogin.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
+import { config } from '../../../../../src/shared/config.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | unblockUserAccount', function () {
@@ -7,11 +8,12 @@ describe('Integration | Identity Access Management | Domain | UseCase | unblockU
     // given
     const userId = databaseBuilder.factory.buildUser({ email: 'email@example.net' }).id;
     databaseBuilder.factory.buildUser({ email: 'alreadyexist@example.net' });
+    const blockingLimitFailureCount = config.login.blockingLimitFailureCount;
     const userLoginId = databaseBuilder.factory.buildUserLogin({
       userId,
-      failureCount: 50,
-      blockedAt: new Date('2022-11-11'),
+      failureCount: blockingLimitFailureCount,
       temporaryBlockedUntil: new Date('2022-11-10'),
+      blockedAt: new Date('2022-11-11'),
     }).id;
     await databaseBuilder.commit();
 
