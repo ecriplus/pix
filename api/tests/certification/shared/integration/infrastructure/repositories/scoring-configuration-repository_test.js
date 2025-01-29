@@ -5,6 +5,7 @@ import {
   saveCertificationScoringConfiguration,
   saveCompetenceForScoringConfiguration,
 } from '../../../../../../src/certification/shared/infrastructure/repositories/scoring-configuration-repository.js';
+import { PIX_ORIGIN } from '../../../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 
@@ -12,7 +13,6 @@ describe('Integration | Repository | scoring-configuration-repository', function
   describe('#getLatestByDateAndLocale', function () {
     beforeEach(async function () {
       const userId = databaseBuilder.factory.buildUser().id;
-      const frameworkId = 'frameworkId';
 
       const competenceScoringConfiguration = [
         {
@@ -40,20 +40,39 @@ describe('Integration | Repository | scoring-configuration-repository', function
       const secondConfigurationDate = new Date('2020-01-01T08:00:00Z');
       const thirdConfigurationDate = new Date('2021-01-01T08:00:00Z');
 
+      // A competence that has the same index but not of Pix Origin
+      const competenceIndex = '1.1';
       const externalFramework = databaseBuilder.factory.learningContent.buildFramework({
-        id: frameworkId,
+        id: 'externalFrameworkId',
         name: 'someFramework',
       });
-      const competence = databaseBuilder.factory.learningContent.buildCompetence({
+      const externalCompetence = databaseBuilder.factory.learningContent.buildCompetence({
         id: 'recCompetence1',
-        index: '1.1',
+        index: competenceIndex,
         areaId: 'recArea1',
       });
       databaseBuilder.factory.learningContent.buildArea({
         id: 'recArea1',
         frameworkId: externalFramework.id,
         code: '1',
-        competenceIds: [competence.id],
+        competenceIds: [externalCompetence.id],
+      });
+
+      const pixOriginFramework = databaseBuilder.factory.learningContent.buildFramework({
+        id: PIX_ORIGIN,
+        name: 'PixOriginFramework',
+      });
+      const pixOriginCompetence = databaseBuilder.factory.learningContent.buildCompetence({
+        id: 'recPixOriginCompetence2',
+        index: competenceIndex,
+        areaId: 'recArea2',
+        origin: PIX_ORIGIN,
+      });
+      databaseBuilder.factory.learningContent.buildArea({
+        id: 'recArea2',
+        frameworkId: pixOriginFramework.id,
+        code: '1',
+        competenceIds: [pixOriginCompetence.id],
       });
 
       databaseBuilder.factory.buildCompetenceScoringConfiguration({
@@ -124,7 +143,7 @@ describe('Integration | Repository | scoring-configuration-repository', function
       });
     });
 
-    it('should return a list of competences for scoring', async function () {
+    it('should return a list of Pix Origin competences for scoring', async function () {
       // given
       const date = new Date('2020-07-01T08:00:00Z');
 
@@ -133,6 +152,7 @@ describe('Integration | Repository | scoring-configuration-repository', function
 
       // then
       expect(result).to.be.instanceOf(V3CertificationScoring);
+      expect(result._competencesForScoring[0].competenceId).to.be.equal('recPixOriginCompetence2');
       expect(result._competencesForScoring[0].intervals.length).not.to.be.equal(0);
       expect(result._certificationScoringConfiguration[0].bounds.min).to.be.equal(-5.12345);
       expect(result._certificationScoringConfiguration[7].bounds.max).to.be.equal(6.56789);
