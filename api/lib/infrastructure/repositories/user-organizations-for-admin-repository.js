@@ -5,7 +5,6 @@ const findByUserId = async function (userId) {
   const organizations = await knex('memberships')
     .select({
       id: 'memberships.id',
-      updatedAt: 'memberships.updatedAt',
       organizationRole: 'memberships.organizationRole',
       organizationId: 'memberships.organizationId',
       organizationName: 'organizations.name',

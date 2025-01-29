@@ -108,7 +108,6 @@ describe('Integration | Repository | user-organizations-for-admin', function () 
           .to.be.instanceOf(UserOrganizationForAdmin)
           .to.has.all.keys(
             'id',
-            'updatedAt',
             'organizationRole',
             'organizationId',
             'organizationName',
@@ -121,7 +120,6 @@ describe('Integration | Repository | user-organizations-for-admin', function () 
           .to.be.instanceOf(UserOrganizationForAdmin)
           .to.has.all.keys(
             'id',
-            'updatedAt',
             'organizationRole',
             'organizationId',
             'organizationName',
