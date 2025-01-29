@@ -12,6 +12,10 @@ class CampaignLearningContent extends LearningContent {
   get competences() {
     return super.competences.sort((a, b) => a.index.localeCompare(b.index));
   }
+
+  get skills() {
+    return this.competences.flatMap((competence) => competence.skills.sort((a, b) => a.name.localeCompare(b.name)));
+  }
 }
 
 export { CampaignLearningContent };
