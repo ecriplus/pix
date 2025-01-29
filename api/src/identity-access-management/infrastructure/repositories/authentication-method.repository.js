@@ -153,26 +153,6 @@ const updatePassword = async function ({ userId, hashedPassword, shouldChangePas
   return _toDomain(authenticationMethodDTO);
 };
 
-const updatePasswordThatShouldBeChanged = async function ({ userId, hashedPassword }) {
-  const knexConn = DomainTransaction.getConnection();
-  const authenticationComplement = new AuthenticationMethod.PixAuthenticationComplement({
-    password: hashedPassword,
-    shouldChangePassword: true,
-  });
-  const [authenticationMethodDTO] = await knexConn(AUTHENTICATION_METHODS_TABLE)
-    .where({
-      userId,
-      identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
-    })
-    .update({ authenticationComplement, updatedAt: new Date() })
-    .returning(COLUMNS);
-
-  if (!authenticationMethodDTO) {
-    throw new AuthenticationMethodNotFoundError(`Authentication method PIX for User ID ${userId} not found.`);
-  }
-  return _toDomain(authenticationMethodDTO);
-};
-
 const updateExpiredPassword = async function ({ userId, hashedPassword }) {
   const knexConn = DomainTransaction.getConnection();
   const authenticationComplement = new AuthenticationMethod.PixAuthenticationComplement({
@@ -246,7 +226,7 @@ const batchUpsertPasswordThatShouldBeChanged = function ({ usersToUpdateWithNewP
   return Promise.all(
     usersToUpdateWithNewPassword.map(async ({ userId, hashedPassword }) => {
       if (await hasIdentityProviderPIX({ userId })) {
-        return updatePasswordThatShouldBeChanged({ userId, hashedPassword });
+        return updatePassword({ userId, hashedPassword, shouldChangePassword: true });
       } else {
         return createPasswordThatShouldBeChanged({ userId, hashedPassword });
       }
@@ -293,7 +273,6 @@ const anonymizeByUserIds = async function ({ userIds }) {
  * @property {function} updatePassword
  * @property {function} updateExpiredPassword
  * @property {function} updateExternalIdentifierByUserIdAndIdentityProvider
- * @property {function} updatePasswordThatShouldBeChanged
  */
 export {
   anonymizeByUserIds,
@@ -313,7 +292,6 @@ export {
   updateExpiredPassword,
   updateExternalIdentifierByUserIdAndIdentityProvider,
   updatePassword,
-  updatePasswordThatShouldBeChanged,
 };
 
 function _toDomain(authenticationMethodDTO) {

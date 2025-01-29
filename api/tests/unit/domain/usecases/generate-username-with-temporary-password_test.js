@@ -48,7 +48,7 @@ describe('Unit | UseCase | generate-username-with-temporary-password', function 
     };
     authenticationMethodRepository = {
       hasIdentityProviderPIX: sinon.stub().resolves(),
-      updatePasswordThatShouldBeChanged: sinon.stub().resolves(),
+      updatePassword: sinon.stub().resolves(),
     };
     userRepository = {
       updateUsername: sinon.stub(),
