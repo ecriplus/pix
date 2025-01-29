@@ -23,6 +23,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
           LEARNER_IMPORT: { active: false },
           MULTIPLE_SENDING_ASSESSMENT: { active: false },
           COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: { active: false },
+          ATTESTATIONS_MANAGEMENT: { active: false },
         },
       });
       this.server.create('organization', { id: '1234' });

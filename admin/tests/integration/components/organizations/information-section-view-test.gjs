@@ -1,6 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
+import { t } from 'ember-intl/test-support';
 import InformationSectionView from 'pix-admin/components/organizations/information-section-view';
 import { module, test } from 'qunit';
 
@@ -319,30 +320,65 @@ module('Integration | Component | organizations/information-section-view', funct
     });
 
     module('Features', function () {
-      module('when compute certificability is true', function () {
-        test('should display this information', async function (assert) {
-          // given
-          const organization = EmberObject.create({
-            isComputeCertificabilityEnabled: true,
-          });
+      module('Compute certificability', function () {
+        module('when compute certificability is true', function () {
+          test('should display this information', async function (assert) {
+            // given
+            const organization = EmberObject.create({
+              isComputeCertificabilityEnabled: true,
+            });
 
-          // when
-          const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
-          // then
-          assert.ok(screen.getByText('Certificabilité automatique activée'));
+            // when
+            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            // then
+            assert.ok(screen.getByText('Certificabilité automatique activée'));
+          });
+        });
+
+        module('when compute certificability is false', function () {
+          test('should not display this information', async function (assert) {
+            // given
+            const organization = EmberObject.create({
+              isComputeCertificabilityEnabled: false,
+            });
+
+            // when
+            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            // then
+            assert.notOk(screen.queryByText('Certificabilité automatique activée'));
+          });
         });
       });
-      module('when compute certificability is false', function () {
-        test('should not display this information', async function (assert) {
-          // given
-          const organization = EmberObject.create({
-            isComputeCertificabilityEnabled: false,
-          });
 
-          // when
-          const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
-          // then
-          assert.notOk(screen.queryByText('Certificabilité automatique activée'));
+      module('Attestations', function () {
+        module('when attestations is enabled', function () {
+          test('should display this information', async function (assert) {
+            // given
+            const organization = EmberObject.create({
+              isAttestationsEnabled: true,
+            });
+
+            // when
+            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            // then
+            assert.ok(screen.getByText(t('components.organizations.information-section-view.features.attestations')));
+          });
+        });
+
+        module('when attestations is not enabled', function () {
+          test('should not display this information', async function (assert) {
+            // given
+            const organization = EmberObject.create({
+              isAttestationsEnabled: false,
+            });
+
+            // when
+            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            // then
+            assert.notOk(
+              screen.queryByText(t('components.organizations.information-section-view.features.attestations')),
+            );
+          });
         });
       });
     });
