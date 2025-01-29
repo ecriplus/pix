@@ -23,4 +23,8 @@ export class RefreshToken {
     const { refreshTokenLifespanMs, refreshTokenLifespanMsByScope } = config.authentication;
     return (refreshTokenLifespanMsByScope[this.scope] || refreshTokenLifespanMs) / 1000;
   }
+
+  hasSameAudience(audience) {
+    return this.audience === audience;
+  }
 }
