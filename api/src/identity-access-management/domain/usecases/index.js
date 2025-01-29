@@ -38,6 +38,7 @@ import { oidcProviderRepository } from '../../infrastructure/repositories/oidc-p
 import * as privacyUsersApiRepository from '../../infrastructure/repositories/privacy-users-api.repository.js';
 import { refreshTokenRepository } from '../../infrastructure/repositories/refresh-token.repository.js';
 import { resetPasswordDemandRepository } from '../../infrastructure/repositories/reset-password-demand.repository.js';
+import { revokedUserAccessRepository } from '../../infrastructure/repositories/revoked-user-access.repository.js';
 import * as userRepository from '../../infrastructure/repositories/user.repository.js';
 import { userEmailRepository } from '../../infrastructure/repositories/user-email.repository.js';
 import { userToCreateRepository } from '../../infrastructure/repositories/user-to-create.repository.js';
@@ -71,6 +72,7 @@ const repositories = {
   privacyUsersApiRepository,
   refreshTokenRepository,
   resetPasswordDemandRepository,
+  revokedUserAccessRepository,
   userAnonymizedEventLoggingJobRepository,
   userEmailRepository,
   userLoginRepository,

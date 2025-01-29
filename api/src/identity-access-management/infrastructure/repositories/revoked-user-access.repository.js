@@ -7,7 +7,14 @@ import { RevokedUserAccess } from '../../domain/models/RevokedUserAccess.js';
 const revokedUserAccessTemporaryStorage = temporaryStorage.withPrefix('revoked-user-access:');
 const revokedUserAccessLifespanMs = config.authentication.revokedUserAccessLifespanMs;
 
-const saveForUser = async function (userId, revokeUntil) {
+/**
+ * Saves the revoke date for a user in the temporary storage.
+ *
+ * @param {Object} params - The params object.
+ * @param {string} params.userId - The ID of the user to revoke access for.
+ * @param {Date} params.revokeUntil - The date until the user's access should be revoked.
+ */
+export const saveForUser = async function ({ userId, revokeUntil }) {
   if (!userId) {
     throw new UserIdIsRequiredError();
   }
@@ -23,6 +30,12 @@ const saveForUser = async function (userId, revokeUntil) {
   });
 };
 
+/**
+ * Retrieves the revoked access for a user from the temporary storage.
+ *
+ * @param {string} userId - The ID of the user to retrieve the revocation date for.
+ * @returns {RevokedUserAccess} - The revoked user access object.
+ */
 const findByUserId = async function (userId) {
   const value = await revokedUserAccessTemporaryStorage.get(userId);
   return new RevokedUserAccess(value);
