@@ -1,6 +1,7 @@
 import boom from '@hapi/boom';
 import lodash from 'lodash';
 
+import { revokedUserAccessRepository } from '../../src/identity-access-management/infrastructure/repositories/revoked-user-access.repository.js';
 import { getForwardedOrigin } from '../../src/identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../src/shared/config.js';
 import { tokenService } from '../../src/shared/domain/services/token-service.js';
@@ -90,7 +91,13 @@ async function _checkIsAuthenticated(request, h, { key, validate }) {
 
   // Only tokens including user_id are User Access Tokens.
   // This is why applications Access Tokens are not subject to audience validation for now.
-  if (decodedAccessToken.user_id && config.featureToggles.isUserTokenAudConfinementEnabled) {
+  const userId = decodedAccessToken.user_id;
+  if (config.featureToggles.isUserTokenAudConfinementEnabled && userId) {
+    const revokedUserAccess = await revokedUserAccessRepository.findByUserId(userId);
+    if (revokedUserAccess.isAccessTokenRevoked(decodedAccessToken)) {
+      return boom.unauthorized();
+    }
+
     const audience = getForwardedOrigin(request.headers);
     if (decodedAccessToken.aud !== audience) {
       return boom.unauthorized();
