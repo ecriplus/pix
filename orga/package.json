@@ -43,14 +43,14 @@
     "test:watch": "ember exam --serve --reporter dot"
   },
   "overrides": {
-    "eslint-plugin-ember": {
-      "ember-eslint-parser": "^0.5.7"
-    },
     "ember-dayjs": {
       "ember-source": "^6.0.1"
     },
-    "ember-source": {
-      "@glimmer/component": "^2.0.0"
+    "ember-data": {
+      "@ember/test-helpers": "^5.0.0"
+    },
+    "ember-intl": {
+      "@ember/test-helpers": "^5.0.0"
     }
   },
   "devDependencies": {
@@ -64,7 +64,7 @@
     "@babel/plugin-proposal-decorators": "^7.25.9",
     "@ember/optional-features": "^2.0.0",
     "@ember/string": "^4.0.0",
-    "@ember/test-helpers": "^4.0.4",
+    "@ember/test-helpers": "^5.0.0",
     "@embroider/compat": "^3.8.0",
     "@embroider/core": "^3.5.0",
     "@embroider/macros": "^1.16.10",
@@ -104,7 +104,7 @@
     "ember-template-lint-plugin-prettier": "^5.0.0",
     "ember-truth-helpers": "^4.0.3",
     "eslint": "^9.17.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-ember": "^12.3.3",
     "eslint-plugin-i18n-json": "^4.0.1",
     "eslint-plugin-n": "^17.15.1",
