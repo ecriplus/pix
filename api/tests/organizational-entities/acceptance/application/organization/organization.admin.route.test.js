@@ -106,6 +106,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               features: {
                 [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false, params: null },
                 [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: true, params: null },
+                [ORGANIZATION_FEATURE.SHOW_SKILLS.key]: { active: false, params: null },
+                [ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key]: { active: true, params: null },
+                [ORGANIZATION_FEATURE.SHOW_NPS.key]: { active: false, params: null },
               },
             },
             id: organization.id.toString(),

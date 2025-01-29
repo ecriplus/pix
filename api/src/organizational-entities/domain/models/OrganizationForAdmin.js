@@ -53,15 +53,11 @@ class OrganizationForAdmin {
     this.logoUrl = logoUrl;
     this.externalId = externalId;
     this.provinceCode = provinceCode;
-    this.isManagingStudents = isManagingStudents;
     this.credit = credit;
     this.email = email;
     this.documentationUrl = documentationUrl;
     this.createdBy = createdBy;
     this.createdAt = createdAt;
-    this.showNPS = showNPS;
-    this.formNPSUrl = formNPSUrl;
-    this.showSkills = showSkills;
     this.archivedAt = archivedAt;
     this.archivistFirstName = archivistFirstName;
     this.archivistLastName = archivistLastName;
@@ -78,7 +74,30 @@ class OrganizationForAdmin {
     this.identityProviderForCampaigns = identityProviderForCampaigns;
     this.tags = tags;
     this.tagIds = tagIds;
+
+    // @deprecated you should use value stored in features property
+    this.isManagingStudents = isManagingStudents;
+    // @deprecated you should use value stored in features property
+    this.showNPS = showNPS;
+    // @deprecated you should use value stored in features property
+    this.formNPSUrl = formNPSUrl;
+    // @deprecated you should use value stored in features property
+    this.showSkills = showSkills;
+
     this.features = features;
+
+    this.features[ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key] = {
+      active: isManagingStudents,
+      params: null,
+    };
+    this.features[ORGANIZATION_FEATURE.SHOW_SKILLS.key] = {
+      active: showSkills,
+      params: null,
+    };
+    this.features[ORGANIZATION_FEATURE.SHOW_NPS.key] = {
+      active: showNPS,
+      params: showNPS ? { formNPSUrl: formNPSUrl } : null,
+    };
     if (this.type === 'SCO' && this.isManagingStudents) {
       this.features[ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key] = {
         active: true,

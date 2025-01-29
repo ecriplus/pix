@@ -11,6 +11,28 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       }).to.throw();
     });
 
+    context('legacy features', function () {
+      it('put legacy features to new feature format', function () {
+        // given
+        const expectedOrganization = domainBuilder.buildOrganizationForAdmin({
+          showSkills: false,
+          isManagingStudents: true,
+          showNPS: true,
+          formNPSUrl: 'https://some-url.com',
+        });
+
+        // when
+        const organization = new OrganizationForAdmin(expectedOrganization);
+
+        // then
+        expect(organization.features).to.deep.includes({
+          [ORGANIZATION_FEATURE.SHOW_SKILLS.key]: { active: false, params: null },
+          [ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key]: { active: true, params: null },
+          [ORGANIZATION_FEATURE.SHOW_NPS.key]: { active: true, params: { formNPSUrl: 'https://some-url.com' } },
+        });
+      });
+    });
+
     context('for sco organizations', function () {
       context('when organization isManagingStudent is true', function () {
         it('builds an OrganizationForAdmin with compute organization learner certificability enabled', function () {
@@ -42,7 +64,8 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
           const organization = new OrganizationForAdmin(expectedOrganization);
 
           // then
-          expect(organization.features).to.deep.equal({});
+          expect(organization.features[ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]).to.be
+            .undefined;
         });
       });
     });
