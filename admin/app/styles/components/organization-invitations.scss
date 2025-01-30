@@ -12,7 +12,14 @@
     text-align: center;
   }
 
-  &-actions__button {
+  &__actions-buttons   {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      width: 13rem;
+      margin:  0.2rem;
+    }
 
     svg {
       margin-right: 6px;

@@ -2,6 +2,7 @@ import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import dayjs from 'dayjs';
+import { setupIntl } from 'ember-intl/test-support';
 import { setupRenderingTest } from 'ember-qunit';
 import Invitations from 'pix-admin/components/organizations/invitations';
 import { module, test } from 'qunit';
@@ -9,6 +10,7 @@ import sinon from 'sinon';
 
 module('Integration | Component | organization-invitations', function (hooks) {
   setupRenderingTest(hooks);
+  setupIntl(hooks, 'fr');
 
   module('when the admin member have access to organization scope', function (hooks) {
     hooks.beforeEach(function () {
@@ -40,6 +42,7 @@ module('Integration | Component | organization-invitations', function (hooks) {
           {
             email: 'riri@example.net',
             role: 'ADMIN',
+            lang: 'fr',
             roleInFrench: 'Administrateur',
             updatedAt: dayjs('2019-10-08T10:50:00Z').utcOffset(2),
           },
@@ -47,11 +50,13 @@ module('Integration | Component | organization-invitations', function (hooks) {
             email: 'fifi@example.net',
             role: 'MEMBER',
             roleInFrench: 'Membre',
+            lang: 'en',
             updatedAt: dayjs('2019-10-08T10:50:00Z').utcOffset(2),
           },
           {
             email: 'loulou@example.net',
             role: null,
+            lang: 'nl',
             roleInFrench: '-',
             updatedAt: dayjs('2019-10-08T10:50:00Z').utcOffset(2),
           },

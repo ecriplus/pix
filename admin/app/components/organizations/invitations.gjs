@@ -3,9 +3,11 @@ import { fn } from '@ember/helper';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
+import { t } from 'ember-intl';
 
 export default class OrganizationInvitations extends Component {
   @service accessControl;
+  @service intl;
 
   get sortedInvitations() {
     return this.args.invitations.sortBy('updatedAt').reverse();
@@ -38,16 +40,25 @@ export default class OrganizationInvitations extends Component {
                     <td>{{dayjsFormat invitation.updatedAt "DD/MM/YYYY [-] HH:mm"}}</td>
                     {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
                       <td>
-                        <PixButton
-                          @size="small"
-                          @variant="error"
-                          class="organization-invitations-actions__button"
-                          aria-label="Annuler l’invitation de {{invitation.email}}"
-                          @triggerAction={{fn @onCancelOrganizationInvitation invitation}}
-                          @iconBefore="delete"
-                        >
-                          Annuler l’invitation
-                        </PixButton>
+                        <div class="organization-invitations__actions-buttons">
+                          <PixButton
+                            @size="small"
+                            aria-label={{t "common.invitations.send-new-label" invitationEmail=invitation.email}}
+                            @triggerAction={{fn @onSendNewInvitation invitation}}
+                            @iconBefore="refresh"
+                          >
+                            {{t "common.invitations.send-new"}}
+                          </PixButton>
+                          <PixButton
+                            @size="small"
+                            @variant="error"
+                            aria-label="Annuler l’invitation de {{invitation.email}}"
+                            @triggerAction={{fn @onCancelOrganizationInvitation invitation}}
+                            @iconBefore="delete"
+                          >
+                            Annuler l’invitation
+                          </PixButton>
+                        </div>
                       </td>
                     {{/if}}
                   </tr>
