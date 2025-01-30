@@ -356,4 +356,46 @@ describe('Unit | Devcomp | Application | Trainings | Controller | training-contr
       expect(usecases.attachTargetProfilesToTraining).to.have.been.calledWithExactly({ trainingId, targetProfileIds });
     });
   });
+
+  describe('#findPaginatedTrainingsSummariesByTargetProfileId', function () {
+    it('should return trainings summaries', async function () {
+      // given
+      const targetProfileId = 123;
+      const expectedResult = Symbol('serialized-training-summaries');
+      const trainingSummaries = Symbol('trainingSummaries');
+      const meta = Symbol('meta');
+      const useCaseParameters = {
+        targetProfileId,
+        page: { size: 2, number: 1 },
+      };
+
+      sinon.stub(usecases, 'findPaginatedTargetProfileTrainingSummaries').resolves({
+        trainings: trainingSummaries,
+        meta,
+      });
+
+      const trainingSummarySerializer = {
+        serialize: sinon.stub(),
+      };
+      trainingSummarySerializer.serialize.withArgs(trainingSummaries, meta).returns(expectedResult);
+
+      // when
+      const response = await trainingController.findPaginatedTrainingsSummariesByTargetProfileId(
+        {
+          params: {
+            id: targetProfileId,
+          },
+          query: {
+            page: { size: 2, number: 1 },
+          },
+        },
+        hFake,
+        { trainingSummarySerializer },
+      );
+
+      // then
+      expect(usecases.findPaginatedTargetProfileTrainingSummaries).to.have.been.calledWithExactly(useCaseParameters);
+      expect(response).to.deep.equal(expectedResult);
+    });
+  });
 });

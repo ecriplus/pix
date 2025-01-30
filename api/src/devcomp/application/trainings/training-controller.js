@@ -77,8 +77,24 @@ const detachTargetProfile = async function (request, h) {
   return h.response({}).code(204);
 };
 
+const findPaginatedTrainingsSummariesByTargetProfileId = async function (
+  request,
+  h,
+  dependencies = { trainingSummarySerializer },
+) {
+  const { page } = request.query;
+  const targetProfileId = request.params.id;
+
+  const { trainings, meta } = await usecases.findPaginatedTargetProfileTrainingSummaries({
+    targetProfileId,
+    page,
+  });
+  return dependencies.trainingSummarySerializer.serialize(trainings, meta);
+};
+
 const trainingController = {
   findPaginatedTrainingSummaries,
+  findPaginatedTrainingsSummariesByTargetProfileId,
   findTargetProfileSummaries,
   getById,
   create,
