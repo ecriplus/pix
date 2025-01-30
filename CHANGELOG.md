@@ -1,5 +1,25 @@
 # Pix Changelog
 
+## v5.30.0 (30/01/2025)
+
+
+### :rocket: Amélioration
+- [#11184](https://github.com/1024pix/pix/pull/11184) [FEATURE] Permettre la navigation au clavier dans le menu Modulix (PIX-16031).
+- [#11266](https://github.com/1024pix/pix/pull/11266) [FEATURE] Afficher dans les détails d'une organisation si la fonctionnalitée Attestations est activée (PIX-15550).
+- [#11267](https://github.com/1024pix/pix/pull/11267) [FEATURE] RBE maj du didacticiel Modulix.
+- [#11208](https://github.com/1024pix/pix/pull/11208) [FEATURE] Conditionner la validation des AT utilisateurs en comparant l’aud des AT utilisateurs à la forwardedOrigin (PIX-15944).
+- [#11256](https://github.com/1024pix/pix/pull/11256) [FEATURE] Changer la valeur par défaut de la limite du blocage définitif d’un compte utilisateur à 30 (PIX-16309).
+- [#11229](https://github.com/1024pix/pix/pull/11229) [FEATURE] Ajout d'une contrainte d'unicité sur campaignParticipationId dans les Ke Snapshots (PIX-16258).
+- [#10934](https://github.com/1024pix/pix/pull/10934) [FEATURE] Module IA générative intermédiaire MODC-441 .
+
+### :building_construction: Tech
+- [#11230](https://github.com/1024pix/pix/pull/11230) [TECH] Changer les headers X-Forwarded-xxx utilisés pour la fonction getForwardedOrigin (PIX-16282).
+- [#11206](https://github.com/1024pix/pix/pull/11206) [TECH] CampaignLearningContent hérite de LearningContent (PIX-16195).
+
+### :bug: Correction
+- [#11276](https://github.com/1024pix/pix/pull/11276) [BUGFIX] Autoriser les IDs de réponse supérieurs à 2**31-1 (PIX-16337).
+- [#11220](https://github.com/1024pix/pix/pull/11220) [BUGFIX] Ordonner les skillName afin de garantir l'ordre des colonnes lors de l'export de résultat (Pix-16196).
+
 ## v5.29.0 (29/01/2025)
 
 
