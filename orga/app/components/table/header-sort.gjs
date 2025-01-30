@@ -1,5 +1,8 @@
+import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
+
+import TableHeader from './header';
 
 export default class HeaderSort extends Component {
   get classname() {
@@ -32,4 +35,22 @@ export default class HeaderSort extends Component {
       this.args.onSort('asc');
     }
   }
+
+  <template>
+    <TableHeader @size={{@size}} @align={{@align}} aria-sort={{@order}} ...attributes>
+      <span class={{this.classname}}>
+        {{yield}}
+        {{#unless @isDisabled}}
+          <PixIconButton
+            @iconName={{this.icon}}
+            @triggerAction={{this.toggleSort}}
+            @withBackground={{false}}
+            @size="small"
+            @color="dark-grey"
+            aria-label={{this.ariaLabel}}
+          />
+        {{/unless}}
+      </span>
+    </TableHeader>
+  </template>
 }
