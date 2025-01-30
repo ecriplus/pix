@@ -1,5 +1,15 @@
 # Pix Changelog
 
+## v5.31.0 (30/01/2025)
+
+
+### :rocket: Amélioration
+- [#11246](https://github.com/1024pix/pix/pull/11246) [FEATURE] Ajouter un bouton pour renvoyer une invitation à rejoindre une orga sur Pix Admin (PIX-10014).
+
+### :building_construction: Tech
+- [#11277](https://github.com/1024pix/pix/pull/11277) [TECH] Ajouter "ORDER BY id" sur une requête dans le script de partage de profil  (PIX-16342).
+- [#11273](https://github.com/1024pix/pix/pull/11273) [TECH] Mise à jour de la version des web-components.
+
 ## v5.30.0 (30/01/2025)
 
 
