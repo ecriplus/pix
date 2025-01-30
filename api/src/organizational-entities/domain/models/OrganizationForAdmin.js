@@ -181,11 +181,13 @@ class OrganizationForAdmin {
     this.identityProviderForCampaigns = identityProviderForCampaigns;
   }
 
-  updateIsManagingStudents(isManagingStudents, features) {
+  updateIsManagingStudents(features) {
     const hasLearnerImportFeature =
       features[ORGANIZATION_FEATURE.LEARNER_IMPORT.key] && features[ORGANIZATION_FEATURE.LEARNER_IMPORT.key].active;
 
-    this.isManagingStudents = hasLearnerImportFeature ? false : isManagingStudents;
+    this.isManagingStudents = hasLearnerImportFeature
+      ? false
+      : features[ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key].active;
   }
 
   updateWithDataProtectionOfficerAndTags(organization, dataProtectionOfficer = {}, tags = []) {
@@ -199,8 +201,8 @@ class OrganizationForAdmin {
     this.externalId = organization.externalId;
     this.provinceCode = organization.provinceCode;
     this.documentationUrl = organization.documentationUrl;
-    this.updateIsManagingStudents(organization.isManagingStudents, organization.features);
-    this.showSkills = organization.showSkills;
+    this.updateIsManagingStudents(organization.features);
+    this.showSkills = organization.features[ORGANIZATION_FEATURE.SHOW_SKILLS.key].active;
     this.updateIdentityProviderForCampaigns(organization.identityProviderForCampaigns);
     this.dataProtectionOfficer.updateInformation(dataProtectionOfficer);
     this.features = organization.features;

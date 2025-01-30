@@ -14,9 +14,14 @@ module('Unit | Component | organizations/information-section-edit', function (ho
       const organization = store.createRecord('organization', {
         id: 1,
         features: {
-          PLACES_MANAGEMENT: { active: false },
+          IS_MANAGING_STUDENTS: { active: false },
+          SHOW_NPS: { active: false, params: { formNPSUrl: 'plop' } },
+          SHOW_SKILLS: { active: false },
+          LEARNER_IMPORT: { active: false },
           MULTIPLE_SENDING_ASSESSMENT: { active: false },
+          PLACES_MANAGEMENT: { active: false },
           COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: { active: false },
+          ATTESTATIONS_MANAGEMENT: { active: false },
         },
       });
       const component = createGlimmerComponent('component:organizations/information-section-edit', {

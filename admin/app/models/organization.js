@@ -9,13 +9,11 @@ export default class Organization extends Model {
   @attr('nullable-string') logoUrl;
   @attr('nullable-string') externalId;
   @attr('nullable-string') provinceCode;
-  @attr('boolean') isManagingStudents;
   @attr('number') credit;
   @attr('nullable-string') email;
   @attr() createdBy;
   @attr('date') createdAt;
   @attr('nullable-string') documentationUrl;
-  @attr('boolean') showSkills;
   @attr('nullable-string') archivistFullName;
   @attr('date') archivedAt;
   @attr('nullable-string') creatorFullName;
@@ -41,14 +39,42 @@ export default class Organization extends Model {
       PLACES_MANAGEMENT: 'PLACES_MANAGEMENT',
       COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: 'COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY',
       LEARNER_IMPORT: 'LEARNER_IMPORT',
+      IS_MANAGING_STUDENTS: 'IS_MANAGING_STUDENTS',
       SHOW_NPS: 'SHOW_NPS',
+      SHOW_SKILLS: 'SHOW_SKILLS',
       ATTESTATIONS_MANAGEMENT: 'ATTESTATIONS_MANAGEMENT',
     };
+  }
+
+  get isManagingStudents() {
+    if (!this.features) return false;
+    return this.features[Organization.featureList.IS_MANAGING_STUDENTS].active;
+  }
+
+  set isManagingStudents(value) {
+    if (!this.features) {
+      this.features = {};
+      this.features[Organization.featureList.IS_MANAGING_STUDENTS] = {};
+    }
+    this.features[Organization.featureList.IS_MANAGING_STUDENTS].active = value;
   }
 
   get showNPS() {
     if (!this.features) return false;
     return this.features[Organization.featureList.SHOW_NPS].active;
+  }
+
+  get showSkills() {
+    if (!this.features) return false;
+    return this.features[Organization.featureList.SHOW_SKILLS].active;
+  }
+
+  set showSkills(value) {
+    if (!this.features) {
+      this.features = {};
+      this.features[Organization.featureList.SHOW_SKILLS] = {};
+    }
+    this.features[Organization.featureList.SHOW_SKILLS].active = value;
   }
 
   get formNPSUrl() {

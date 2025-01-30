@@ -25,6 +25,8 @@ module('Acceptance | Organizations | Information management', function (hooks) {
           COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: { active: false },
           ATTESTATIONS_MANAGEMENT: { active: false },
           SHOW_NPS: { active: false },
+          SHOW_SKILLS: { active: false },
+          IS_MANAGING_STUDENTS: { active: false },
         },
       });
       this.server.create('organization', { id: '1234' });

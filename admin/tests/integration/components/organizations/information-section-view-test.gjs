@@ -11,11 +11,22 @@ module('Integration | Component | organizations/information-section-view', funct
   setupIntlRenderingTest(hooks);
 
   module('when user has access', function (hooks) {
+    let features;
     hooks.beforeEach(function () {
       class AccessControlStub extends Service {
         hasAccessToOrganizationActionsScope = true;
       }
       this.owner.register('service:access-control', AccessControlStub);
+      features = {
+        IS_MANAGING_STUDENTS: { active: false },
+        SHOW_NPS: { active: false, params: { formNPSUrl: 'plop' } },
+        SHOW_SKILLS: { active: false },
+        LEARNER_IMPORT: { active: false },
+        MULTIPLE_SENDING_ASSESSMENT: { active: false },
+        PLACES_MANAGEMENT: { active: false },
+        COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: { active: false },
+        ATTESTATIONS_MANAGEMENT: { active: false },
+      };
     });
 
     test('it renders general information about organization', async function (assert) {
@@ -221,15 +232,17 @@ module('Integration | Component | organizations/information-section-view', funct
         assert.dom(screen.getByText('Archivée le 22/02/2022 par Rob Lochon.')).exists();
       });
     });
-
     module('when organization is parent', function () {
       test('it should display parent label', async function (assert) {
         //given
         const store = this.owner.lookup('service:store');
-        const child = store.createRecord('organization', { type: 'SCO', isManagingStudents: true });
+        const child = store.createRecord('organization', {
+          type: 'SCO',
+          features,
+        });
         const organization = store.createRecord('organization', {
           type: 'SCO',
-          isManagingStudents: true,
+          features,
           children: [child],
         });
 
@@ -245,10 +258,14 @@ module('Integration | Component | organizations/information-section-view', funct
       test('it displays child label and parent organization name', async function (assert) {
         //given
         const store = this.owner.lookup('service:store');
-        const parentOrganization = store.createRecord('organization', { id: 5, type: 'SCO', isManagingStudents: true });
+        const parentOrganization = store.createRecord('organization', {
+          id: 5,
+          type: 'SCO',
+          features,
+        });
         const organization = store.createRecord('organization', {
           type: 'SCO',
-          isManagingStudents: true,
+          features,
           parentOrganizationId: parentOrganization.id,
           parentOrganizationName: 'Shibusen',
         });
@@ -269,7 +286,7 @@ module('Integration | Component | organizations/information-section-view', funct
         const organization = store.createRecord('organization', {
           type: 'SCO',
           name: 'notParent',
-          isManagingStudents: true,
+          features,
         });
 
         // when
