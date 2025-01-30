@@ -263,6 +263,7 @@ const configuration = (function () {
       ),
       isOppsyDisabled: toBoolean(process.env.FT_OPPSY_DISABLED),
       isPix1dEnabled: toBoolean(process.env.FT_PIX_1D_ENABLED),
+      isPixAppNewLayoutEnabled: toBoolean(process.env.FT_PIXAPP_NEW_LAYOUT_ENABLED),
       isPixCompanionEnabled: toBoolean(process.env.FT_PIX_COMPANION_ENABLED),
       isSelfAccountDeletionEnabled: toBoolean(process.env.FT_SELF_ACCOUNT_DELETION),
       isQuestEnabled: toBoolean(process.env.FT_ENABLE_QUESTS),
@@ -493,6 +494,7 @@ const configuration = (function () {
     config.featureToggles.isNeedToAdjustCertificationAccessibilityEnabled = false;
     config.featureToggles.isOppsyDisabled = false;
     config.featureToggles.isPix1dEnabled = true;
+    config.featureToggles.isPixAppNewLayoutEnabled = true;
     config.featureToggles.isPixCompanionEnabled = false;
     config.featureToggles.isSelfAccountDeletionEnabled = false;
     config.featureToggles.isQuestEnabled = false;

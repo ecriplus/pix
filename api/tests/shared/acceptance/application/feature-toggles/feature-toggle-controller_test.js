@@ -28,6 +28,7 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-need-to-adjust-certification-accessibility-enabled': false,
             'is-oppsy-disabled': false,
             'is-pix1d-enabled': true,
+            'is-pix-app-new-layout-enabled': true,
             'is-pix-companion-enabled': false,
             'is-quest-enabled': false,
             'is-user-token-aud-confinement-enabled': true,
