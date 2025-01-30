@@ -27,7 +27,7 @@ describe('Integration | Profile | Scripts | sixth-grade-organization-share  ', f
         databaseBuilder.factory.buildOrganizationLearner({ organizationId: firstOrganizationId, userId }),
       );
 
-      // build an other organization learner for userId 3
+      // build another organization learner for userId 3
       databaseBuilder.factory.buildOrganizationLearner({ organizationId: secondOrganizationId, userId: 3 });
 
       // build profile rewards
