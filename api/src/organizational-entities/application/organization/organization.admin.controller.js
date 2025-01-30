@@ -11,10 +11,10 @@ const addTagsToOrganizations = async function (request, h) {
 };
 
 const attachChildOrganization = async function (request, h) {
-  const { childOrganizationId } = request.payload;
+  const { childOrganizationIds } = request.payload;
   const { organizationId: parentOrganizationId } = request.params;
 
-  await usecases.attachChildOrganizationToOrganization({ childOrganizationId, parentOrganizationId });
+  await usecases.attachChildOrganizationToOrganization({ childOrganizationIds, parentOrganizationId });
 
   return h.response().code(204);
 };
