@@ -10,8 +10,6 @@ export default class Organization extends Model {
   @attr('nullable-string') externalId;
   @attr('nullable-string') provinceCode;
   @attr('boolean') isManagingStudents;
-  @attr('boolean') showNPS;
-  @attr('string') formNPSUrl;
   @attr('number') credit;
   @attr('nullable-string') email;
   @attr() createdBy;
@@ -43,8 +41,20 @@ export default class Organization extends Model {
       PLACES_MANAGEMENT: 'PLACES_MANAGEMENT',
       COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: 'COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY',
       LEARNER_IMPORT: 'LEARNER_IMPORT',
+      SHOW_NPS: 'SHOW_NPS',
       ATTESTATIONS_MANAGEMENT: 'ATTESTATIONS_MANAGEMENT',
     };
+  }
+
+  get showNPS() {
+    if (!this.features) return false;
+    return this.features[Organization.featureList.SHOW_NPS].active;
+  }
+
+  get formNPSUrl() {
+    if (!this.features) return false;
+    if (!this.showNPS) return null;
+    return this.features[Organization.featureList.SHOW_NPS].params.formNPSUrl;
   }
 
   get isComputeCertificabilityEnabled() {
