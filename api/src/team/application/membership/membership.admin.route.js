@@ -7,6 +7,34 @@ import { membershipController } from './membership.controller.js';
 
 export const membershipAdminRoutes = [
   {
+    method: 'GET',
+    path: '/api/admin/users/{id}/organizations',
+    config: {
+      pre: [
+        {
+          method: (request, h) =>
+            securityPreHandlers.hasAtLeastOneAccessOf([
+              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+              securityPreHandlers.checkAdminMemberHasRoleCertif,
+              securityPreHandlers.checkAdminMemberHasRoleSupport,
+              securityPreHandlers.checkAdminMemberHasRoleMetier,
+            ])(request, h),
+        },
+      ],
+      validate: {
+        params: Joi.object({
+          id: identifiersType.userId,
+        }),
+      },
+      handler: membershipAdminController.findUserOrganizationsForAdmin,
+      notes: [
+        "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
+          '- Elle permet à un administrateur de lister les organisations auxquelles appartient l´utilisateur',
+      ],
+      tags: ['api', 'admin', 'user', 'organizations'],
+    },
+  },
+  {
     method: 'POST',
     path: '/api/admin/memberships',
     config: {
