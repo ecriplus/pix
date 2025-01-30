@@ -1,7 +1,8 @@
+import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 
-export default class LinkTo extends Component {
+export default class extends Component {
   @service currentUser;
 
   get route() {
@@ -12,4 +13,8 @@ export default class LinkTo extends Component {
     }
     return 'authenticated.organization-participants.organization-participant';
   }
+
+  <template>
+    <LinkTo class="link" @route={{this.route}} @model={{@organizationLearnerId}} ...attributes>{{yield}}</LinkTo>
+  </template>
 }
