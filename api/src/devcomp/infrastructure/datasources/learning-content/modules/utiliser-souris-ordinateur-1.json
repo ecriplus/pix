@@ -111,9 +111,13 @@
         {
           "type": "element",
           "element": {
-            "id": "c2f89648-1f06-4e58-b5a5-422677d24417",
-            "type": "text",
-            "content": "<iframe width=\"700\" height=\"410\" src=\"https://www.youtube.com/embed/oGwHYZcs5fE\" title=\"Première marche souris - Prise en main de la souris\"></iframe>"
+            "id": "56541ee2-cf5f-4966-b17b-96a1b7266868",
+            "type": "video",
+            "title": "Prendre en main la souris",
+            "url": "https://videos.pix.fr/modulix/utiliser-souris-ordinateur-1/souris_prise_en_main.mp4",
+            "poster": "",
+            "subtitles": "",
+            "transcription": ""
           }
         }
       ]
@@ -164,9 +168,13 @@
         {
           "type": "element",
           "element": {
-            "id": "52a71515-a085-4a85-8c43-86e06c1cb9b8",
-            "type": "text",
-            "content": "<iframe width=\"100%\" height=\"410\" src=\"https://www.youtube.com/embed/cktRk8PySII\" title=\"Première marche souris - Déplacer la souris\"></iframe>"
+            "id": "abe223ab-ad36-4b14-b349-abc8590eb94e",
+            "type": "video",
+            "title": "Déplacer la souris",
+            "url": "https://videos.pix.fr/modulix/utiliser-souris-ordinateur-1/deplacer_la_souris.mp4",
+            "poster": "",
+            "subtitles": "",
+            "transcription": ""
           }
         }
       ]
