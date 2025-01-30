@@ -76,7 +76,7 @@ export class SixthGradeOrganizationShare extends Script {
    */
   async fetchProfileRewards(limit, offset) {
     const knexConnection = DomainTransaction.getConnection();
-    return await knexConnection('profile-rewards').select('userId', 'id').limit(limit).offset(offset);
+    return await knexConnection('profile-rewards').select('userId', 'id').limit(limit).offset(offset).orderBy('id');
   }
 
   async fetchUserOrganizations(userId) {
