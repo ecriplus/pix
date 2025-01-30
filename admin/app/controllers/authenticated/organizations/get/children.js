@@ -10,12 +10,12 @@ export default class AuthenticatedOrganizationsGetChildrenController extends Con
   @service store;
 
   @action
-  async handleFormSubmitted(childOrganizationId) {
+  async handleFormSubmitted(childOrganizationIds) {
     const organizationAdapter = this.store.adapterFor('organization');
     const parentOrganizationId = this.model.organization.id;
 
     try {
-      await organizationAdapter.attachChildOrganization({ childOrganizationId, parentOrganizationId });
+      await organizationAdapter.attachChildOrganization({ childOrganizationIds, parentOrganizationId });
       this.pixToast.sendSuccessNotification({
         message: this.intl.t('pages.organization-children.notifications.success.attach-child-organization'),
       });

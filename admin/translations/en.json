@@ -332,9 +332,9 @@
       },
       "children": {
         "attach-child-form": {
-          "input-information": "ID of organisation to add",
-          "input-label": "Add a child organisation",
-          "name": "Add a child organisation form"
+          "input-information": "ID of organisation(s) to add",
+          "input-label": "Add one or more child organisations",
+          "name": "Add child organisation(s) form"
         }
       },
       "children-list": {

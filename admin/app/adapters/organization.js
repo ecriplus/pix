@@ -44,8 +44,8 @@ export default class OrganizationAdapter extends ApplicationAdapter {
     return this.ajax(url, 'POST', { data: payload });
   }
 
-  attachChildOrganization({ childOrganizationId, parentOrganizationId }) {
+  attachChildOrganization({ childOrganizationIds, parentOrganizationId }) {
     const url = `${this.host}/${this.namespace}/organizations/${parentOrganizationId}/attach-child-organization`;
-    return this.ajax(url, 'POST', { data: { childOrganizationId } });
+    return this.ajax(url, 'POST', { data: { childOrganizationIds } });
   }
 }

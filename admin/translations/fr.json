@@ -340,9 +340,9 @@
       },
       "children": {
         "attach-child-form": {
-          "input-information": "ID de l'organisation à ajouter",
-          "input-label": "Ajouter une organisation fille",
-          "name": "Formulaire d'ajout d'une organisation fille"
+          "input-information": "ID d'organisation(s) à ajouter",
+          "input-label": "Ajouter une ou plusieurs organisations filles",
+          "name": "Formulaire d'ajout d'organisation(s) fille(s)"
         }
       },
       "children-list": {
