@@ -1,5 +1,15 @@
 # Pix Changelog
 
+## v5.32.0 (30/01/2025)
+
+
+### :building_construction: Tech
+- [#11275](https://github.com/1024pix/pix/pull/11275) [TECH] Corriger le test flaky d'une méthode dans le repository target-profiles.
+- [#11253](https://github.com/1024pix/pix/pull/11253) [TECH] Migre des composants de PixOrga au format GJS (PIX-16308).
+
+### :bug: Correction
+- [#11268](https://github.com/1024pix/pix/pull/11268) [BUGFIX] Récupérer uniquement les compétences sur le référentiel Pix Coeur pour le scoring V3 (PIX-16272).
+
 ## v5.31.0 (30/01/2025)
 
 
