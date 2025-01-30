@@ -1,10 +1,10 @@
-import * as serializer from '../../../../../lib/infrastructure/serializers/jsonapi/user-organization-for-admin-serializer.js';
-import { UserOrganizationForAdmin } from '../../../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
-import { expect } from '../../../../test-helper.js';
+import { UserOrganizationForAdmin } from '../../../../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
+import * as serializer from '../../../../../../src/team/infrastructure/serializers/jsonapi/user-organization-for-admin-serializer.js';
+import { expect } from '../../../../../test-helper.js';
 
-describe('Unit | Serializer | JSONAPI | user-organization-for-admin-serializer', function () {
+describe('Unit | Team | Serializer | JSONAPI | user-organization-for-admin-serializer', function () {
   describe('#serialize', function () {
-    it('should serialize a user’s organization memberships', function () {
+    it('serializes a user’s organization memberships', function () {
       // given
       const userOrganizationForAdmin1 = new UserOrganizationForAdmin({
         id: 42,
