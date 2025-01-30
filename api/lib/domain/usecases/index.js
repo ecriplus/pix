@@ -178,7 +178,6 @@ import * as targetProfileTrainingRepository from '../../infrastructure/repositor
 import * as thematicRepository from '../../infrastructure/repositories/thematic-repository.js';
 // Not used in lib
 import * as stageCollectionRepository from '../../infrastructure/repositories/user-campaign-results/stage-collection-repository.js';
-import * as userOrganizationsForAdminRepository from '../../infrastructure/repositories/user-organizations-for-admin-repository.js';
 import * as learningContentConversionService from '../services/learning-content/learning-content-conversion-service.js';
 import * as userReconciliationService from '../services/user-reconciliation-service.js';
 import * as organizationCreationValidator from '../validators/organization-creation-validator.js';
@@ -336,7 +335,6 @@ const dependencies = {
   userAnonymizedEventLoggingJobRepository,
   userEmailRepository,
   userLoginRepository,
-  userOrganizationsForAdminRepository,
   userOrgaSettingsRepository,
   userRecommendedTrainingRepository: repositories.userRecommendedTrainingRepository,
   userReconciliationService,
