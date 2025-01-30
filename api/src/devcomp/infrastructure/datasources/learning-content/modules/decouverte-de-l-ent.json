@@ -280,7 +280,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_applis.jpg",
                   "alt": "",
-                  "alternativeText": "<p>Page «&nbsp;Mes applis&nbsp;» d'un ENT avec la liste des applications disponibles :&nbsp;</p><ul>    <li>Messagerie</li>    <li>Cahier de textes</li>    <li>Emploi du temps</li>    <li>Documents</li>    <li>Blog</li><br></ul>"
+                  "alternativeText": "<p>Page «&nbsp;Mes applis&nbsp;» d'un ENT avec la liste des applications disponibles :&nbsp;</p><ul>    <li>Messagerie</li>    <li>Cahier de textes</li>    <li>Emploi du temps</li>    <li>Documents</li>    <li>Blog</li></ul>"
                 },
                 {
                   "id": "dacb6bd7-a151-4b00-bca8-4de1ab39891a",
@@ -358,7 +358,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_devoirs.jpg",
                   "alt": "",
-                  "alternativeText": "<p>Page « Cahier de texte&nbsp;» d'un ENT :</p><ul>    <li>&nbsp;un menu latéral avec les applications&nbsp; :        <ul>            <li> Accueil, </li>            <li>Messagerie (2), </li>            <li>Cahier de texte, </li>            <li>Emploi du temps, </li>            <li>Documents, </li>            <li>Actualités            </li>        </ul>    </li>    <li>au centre, cahier de texte de l'élève avec les cours et devoirs à venir : <ul>            <li>Vendredi 6 septembre :&nbsp;<ul><li>Histoire-géographie - 6ème B - L'empire romain</li><li>Mathématiques - 6ème B - Les ensembles de nombres</li></ul></li><li>Lundi 9 septembre :&nbsp;<ul><li>Mathématiques - 6ème B - Exercice donné le 06/09/2024 - à faire</li><li>Français - 6ème B - Les compléments circonstanciels</li></ul></li><li>Mardi 10 septembre :&nbsp;<ul><li>Mathématiques - 6ème B - Les ensembles de nombres</li><li>Français - 6ème B - Devoir à la maison donné le 05/09/2024 - à faire</li></ul></li>        </ul>    </li>    <li>en haut à droite, l'accès au compte personnel de Martin Pommard<br></li></ul></li>"
+                  "alternativeText": "<p>Page « Cahier de texte&nbsp;» d'un ENT :</p><ul>    <li>&nbsp;un menu latéral avec les applications&nbsp; :        <ul>            <li> Accueil, </li>            <li>Messagerie (2), </li>            <li>Cahier de texte, </li>            <li>Emploi du temps, </li>            <li>Documents, </li>            <li>Actualités            </li>        </ul>    </li>    <li>au centre, cahier de texte de l'élève avec les cours et devoirs à venir : <ul>            <li>Vendredi 6 septembre :&nbsp;<ul><li>Histoire-géographie - 6ème B - L'empire romain</li><li>Mathématiques - 6ème B - Les ensembles de nombres</li></ul></li><li>Lundi 9 septembre :&nbsp;<ul><li>Mathématiques - 6ème B - Exercice donné le 06/09/2024 - à faire</li><li>Français - 6ème B - Les compléments circonstanciels</li></ul></li><li>Mardi 10 septembre :&nbsp;<ul><li>Mathématiques - 6ème B - Les ensembles de nombres</li><li>Français - 6ème B - Devoir à la maison donné le 05/09/2024 - à faire</li></ul></li>        </ul>    </li>    <li>en haut à droite, l'accès au compte personnel de Martin Pommard<br></li></ul>"
                 },
                 {
                   "id": "85ef8964-a248-4a9d-a087-091a4aefd30a",
