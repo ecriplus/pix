@@ -88,6 +88,7 @@ describe('Acceptance | Controller | training-controller', function () {
         attributes: {
           id: trainingId,
           title: trainingAttributes.title,
+          'internal-title': trainingAttributes.internalTitle,
           type: trainingAttributes.type,
           link: trainingAttributes.link,
           locale: trainingAttributes.locale,
@@ -154,6 +155,7 @@ describe('Acceptance | Controller | training-controller', function () {
         id: '101064',
         attributes: {
           title: 'Titre du training',
+          'internal-title': null,
           link: 'https://training-link.org',
           type: 'webinaire',
           duration: {
@@ -176,6 +178,7 @@ describe('Acceptance | Controller | training-controller', function () {
             type: 'trainings',
             attributes: {
               title: 'Titre du training',
+              internalTitle: 'Titre interne du training',
               link: 'https://training-link.org',
               type: 'webinaire',
               duration: {
@@ -300,6 +303,7 @@ describe('Acceptance | Controller | training-controller', function () {
               'prerequisite-threshold': undefined,
               'target-profiles-count': 0,
               title: training.title,
+              'internal-title': training.internalTitle,
               'is-disabled': false,
             },
           },

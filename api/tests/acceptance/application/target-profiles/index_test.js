@@ -48,6 +48,7 @@ describe('Acceptance | Route | target-profiles', function () {
             'is-disabled': false,
             'target-profiles-count': 1,
             title: 'title',
+            'internal-title': 'internal title',
           },
         },
       ];
