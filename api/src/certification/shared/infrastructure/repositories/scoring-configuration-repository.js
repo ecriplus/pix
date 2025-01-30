@@ -6,7 +6,8 @@ import { V3CertificationScoring } from '../../domain/models/V3CertificationScori
 
 export const getLatestByDateAndLocale = async ({ locale, date }) => {
   const allAreas = await areaRepository.list();
-  const competenceList = await competenceRepository.list({ locale });
+  // NOTE : only works for certification of core competencies
+  const competenceList = await competenceRepository.listPixCompetencesOnly({ locale });
 
   const competenceScoringConfiguration = await knex('competence-scoring-configurations')
     .select('configuration')

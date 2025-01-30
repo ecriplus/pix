@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { knex } from '../../../../../../db/knex-database-connection.js';
 import { V3CertificationScoring } from '../../../../../../src/certification/shared/domain/models/V3CertificationScoring.js';
 import {
@@ -7,16 +5,14 @@ import {
   saveCertificationScoringConfiguration,
   saveCompetenceForScoringConfiguration,
 } from '../../../../../../src/certification/shared/infrastructure/repositories/scoring-configuration-repository.js';
+import { PIX_ORIGIN } from '../../../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
-import { buildArea, buildCompetence, buildFramework } from '../../../../../tooling/domain-builder/factory/index.js';
-import { buildLearningContent } from '../../../../../tooling/learning-content-builder/index.js';
+import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | scoring-configuration-repository', function () {
   describe('#getLatestByDateAndLocale', function () {
     beforeEach(async function () {
       const userId = databaseBuilder.factory.buildUser().id;
-      const frameworkId = 'frameworkId';
 
       const competenceScoringConfiguration = [
         {
@@ -44,28 +40,11 @@ describe('Integration | Repository | scoring-configuration-repository', function
       const secondConfigurationDate = new Date('2020-01-01T08:00:00Z');
       const thirdConfigurationDate = new Date('2021-01-01T08:00:00Z');
 
-      const getAreaCode = (competenceCode) => competenceCode.split('.').shift();
-      const competenceLevelIntervalsWithAreaCode = competenceScoringConfiguration.map((competenceLevelInterval) => ({
-        ...competenceLevelInterval,
-        areaCode: getAreaCode(competenceLevelInterval.competence),
-      }));
-      const competenceLevelIntervalsByArea = _.groupBy(competenceLevelIntervalsWithAreaCode, 'areaCode');
-      const areas = Object.entries(competenceLevelIntervalsByArea).map(([areaCode, competenceLevelIntervals]) => {
-        const areaId = `recArea${areaCode}`;
-
-        const competences = competenceLevelIntervals.map((competenceLevelInterval) => {
-          const competenceIndex = competenceLevelInterval.competence;
-          const competenceId = `recCompetence${competenceIndex}`;
-
-          return buildCompetence({ id: competenceId, areaId, index: competenceIndex });
-        });
-
-        return buildArea({ id: areaId, frameworkId, code: areaCode, competences });
-      });
-      const framework = buildFramework({ id: frameworkId, name: 'someFramework', areas });
-      const learningContent = buildLearningContent([framework]);
-
-      await mockLearningContent(learningContent);
+      // Competences exist in multiple frameworks with the same index
+      // Here, we need to get only competences that are part of the PIX_ORIGIN framework
+      const competenceIndex = '1.1';
+      buildFramework({ competenceIndex, origin: 'external' });
+      buildFramework({ competenceIndex, origin: PIX_ORIGIN });
 
       databaseBuilder.factory.buildCompetenceScoringConfiguration({
         configuration: competenceScoringConfiguration,
@@ -135,7 +114,7 @@ describe('Integration | Repository | scoring-configuration-repository', function
       });
     });
 
-    it('should return a list of competences for scoring', async function () {
+    it('should return a list of Pix Origin competences for scoring', async function () {
       // given
       const date = new Date('2020-07-01T08:00:00Z');
 
@@ -144,6 +123,7 @@ describe('Integration | Repository | scoring-configuration-repository', function
 
       // then
       expect(result).to.be.instanceOf(V3CertificationScoring);
+      expect(result._competencesForScoring[0].competenceId).to.be.equal(`${PIX_ORIGIN}Competence`);
       expect(result._competencesForScoring[0].intervals.length).not.to.be.equal(0);
       expect(result._certificationScoringConfiguration[0].bounds.min).to.be.equal(-5.12345);
       expect(result._certificationScoringConfiguration[7].bounds.max).to.be.equal(6.56789);
@@ -188,3 +168,22 @@ describe('Integration | Repository | scoring-configuration-repository', function
     });
   });
 });
+
+function buildFramework({ competenceIndex, origin }) {
+  const framework = databaseBuilder.factory.learningContent.buildFramework({
+    id: `${origin}FrameworkId`,
+    name: `${origin}Framework`,
+  });
+  const competence = databaseBuilder.factory.learningContent.buildCompetence({
+    id: `${origin}Competence`,
+    index: competenceIndex,
+    areaId: `${origin}Area`,
+    origin,
+  });
+  databaseBuilder.factory.learningContent.buildArea({
+    id: `${origin}Area`,
+    frameworkId: framework.id,
+    code: '1',
+    competenceIds: [competence.id],
+  });
+}
