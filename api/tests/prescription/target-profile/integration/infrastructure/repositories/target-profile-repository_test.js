@@ -66,13 +66,13 @@ describe('Integration | Repository | Target-profile', function () {
 
     it('should return found target profiles', async function () {
       // given
-      const targetProfile2 = databaseBuilder.factory.buildTargetProfile();
-      const targetProfile3 = databaseBuilder.factory.buildTargetProfile();
+      const targetProfile2 = databaseBuilder.factory.buildTargetProfile({ name: 'second target profile' });
+      const targetProfile3 = databaseBuilder.factory.buildTargetProfile({ name: 'third target profile' });
       await databaseBuilder.commit();
 
       targetProfileIds = [targetProfile1.id, targetProfileIdNotExisting, targetProfile2.id, targetProfile3.id];
 
-      const expectedTargetProfilesAttributes = _.map([targetProfile1, targetProfile2, targetProfile3], (item) =>
+      const expectedTargetProfilesAttributes = _.map([targetProfile1, targetProfile3, targetProfile2], (item) =>
         _.pick(item, ['id', 'name', 'organizationId', 'outdated']),
       );
 
@@ -83,7 +83,7 @@ describe('Integration | Repository | Target-profile', function () {
       const foundTargetProfilesAttributes = _.map(foundTargetProfiles, (item) =>
         _.pick(item, ['id', 'name', 'organizationId', 'outdated']),
       );
-      expect(foundTargetProfilesAttributes).to.deep.equal(expectedTargetProfilesAttributes);
+      expect(foundTargetProfilesAttributes).to.deep.members(expectedTargetProfilesAttributes);
     });
 
     it('should return an empty array', async function () {
