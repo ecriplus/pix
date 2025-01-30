@@ -1,5 +1,5 @@
 import { clickByName, clickByText, render } from '@1024pix/ember-testing-library';
-import { click } from '@ember/test-helpers';
+import { click, tab } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixNavbar from 'mon-pix/components/module/layout/navbar';
 import { module, test } from 'qunit';
@@ -137,20 +137,53 @@ module('Integration | Component | Module | Navbar', function (hooks) {
 
       // then
       assert.strictEqual(
-        screen.getByRole('link', { name: 'Découverte' }).textContent.trim(),
+        screen.getByRole('button', { name: 'Découverte' }).textContent.trim(),
         t('pages.modulix.grain.tag.discovery'),
       );
       assert.strictEqual(
-        screen.getByRole('link', { name: 'Activité' }).textContent.trim(),
+        screen.getByRole('button', { name: 'Activité' }).textContent.trim(),
         t('pages.modulix.grain.tag.activity'),
       );
       assert.strictEqual(
-        screen.getByRole('link', { name: 'Leçon' }).textContent.trim(),
+        screen.getByRole('button', { name: 'Leçon' }).textContent.trim(),
         t('pages.modulix.grain.tag.lesson'),
       );
-      assert.dom(screen.getByRole('link', { name: 'Leçon' })).hasAria('current', 'step');
+      assert.dom(screen.getByRole('button', { name: 'Leçon' })).hasAria('current', 'step');
 
-      assert.dom(screen.queryByRole('link', { name: "Récap'" })).doesNotExist();
+      assert.dom(screen.queryByRole('button', { name: "Récap'" })).doesNotExist();
+    });
+
+    test('should allow tabulation in sidebar', async function (assert) {
+      // given
+      const module = createModule(this.owner);
+      const threeFirstGrains = module.grains.slice(0, -1);
+      const openSidebarStub = sinon.stub();
+
+      //  when
+      await render(
+        <template>
+          <ModulixNavbar
+            @currentStep={{3}}
+            @totalSteps={{4}}
+            @module={{module}}
+            @grainsToDisplay={{threeFirstGrains}}
+            @onSidebarOpen={{openSidebarStub}}
+          />
+        </template>,
+      );
+      await clickByName('Afficher les étapes du module');
+      await waitForDialog();
+      await tab();
+
+      // then
+      await tab();
+      assert.strictEqual(document.activeElement.textContent.trim(), t('pages.modulix.grain.tag.discovery'));
+
+      await tab();
+      assert.strictEqual(document.activeElement.textContent.trim(), t('pages.modulix.grain.tag.activity'));
+
+      await tab();
+      assert.strictEqual(document.activeElement.textContent.trim(), t('pages.modulix.grain.tag.lesson'));
     });
 
     module('when user clicks on grain’s type', function () {

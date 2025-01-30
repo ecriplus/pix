@@ -75,13 +75,15 @@ export default class ModulixNavbar extends Component {
         <nav>
           <ul>
             {{#each this.grainsWithIdAndTranslatedType as |grain index|}}
-              <li
-                class="module-sidebar__list-item {{if (eq index this.currentGrainIndex) 'current-grain'}}"
-                aria-current={{if (eq index this.currentGrainIndex) "step"}}
-                {{on "click" (fn this.onMenuItemClick grain.id)}}
-                role="link"
-              >
-                {{grain.type}}
+              <li>
+                <button
+                  type="button"
+                  class="module-sidebar__list-item {{if (eq index this.currentGrainIndex) 'current-grain'}}"
+                  aria-current={{if (eq index this.currentGrainIndex) "step"}}
+                  {{on "click" (fn this.onMenuItemClick grain.id)}}
+                >
+                  {{grain.type}}
+                </button>
               </li>
             {{/each}}
           </ul>

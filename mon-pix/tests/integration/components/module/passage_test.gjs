@@ -1121,7 +1121,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
       await clickByName('Afficher les étapes du module');
       await waitForDialog();
-      const item = screen.getByRole('link', { name: 'Découverte' });
+      const item = screen.getByRole('button', { name: 'Découverte' });
       await click(item);
 
       //  then
@@ -1157,7 +1157,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
       await clickByName('Afficher les étapes du module');
       await waitForDialog();
-      const item = screen.getByRole('link', { name: 'Découverte' });
+      const item = screen.getByRole('button', { name: 'Découverte' });
       await click(item);
 
       // then
