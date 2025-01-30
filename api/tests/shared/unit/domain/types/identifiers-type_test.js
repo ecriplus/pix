@@ -4,7 +4,7 @@ import {
   queriesType,
 } from '../../../../../src/shared/domain/types/identifiers-type.js';
 import { expect } from '../../../../test-helper.js';
-const { userId, competenceId } = identifiersType;
+const { userId, competenceId, answerId } = identifiersType;
 const { organizationId } = optionalIdentifiersType;
 
 describe('Unit | Domain | Type | identifier-types', function () {
@@ -83,6 +83,47 @@ describe('Unit | Domain | Type | identifier-types', function () {
 
           // then
           expect(error.message).to.equal('"value" length must be less than or equal to 255 characters long');
+        });
+      });
+    });
+
+    describe('#answerId', function () {
+      describe('when id is greater than 2**32', function () {
+        it('should be valid', function () {
+          // given
+          const id = (2 ** 33).toString(10);
+
+          // when
+          const { error } = answerId.validate(id);
+
+          // then
+          expect(error).to.be.undefined;
+        });
+      });
+
+      describe('when id is lower than 1', function () {
+        it('should throw an error', function () {
+          // given
+          const id = '0';
+
+          // when
+          const { error } = answerId.validate(id);
+
+          // then
+          expect(error.message).to.equal('"value" must be greater than or equal to 1');
+        });
+      });
+
+      describe('when id is greater than 2**63 - 1', function () {
+        it('should throw an error', function () {
+          // given
+          const id = (2 ** 63).toString(10);
+
+          // when
+          const { error } = answerId.validate(id);
+
+          // then
+          expect(error.message).to.equal('"value" must be a safe number');
         });
       });
     });
