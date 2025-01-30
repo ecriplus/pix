@@ -8,10 +8,10 @@ import didRender from '../../../modifiers/did-render';
 
 export default class EmbeddedSimulator extends Component {
   get embedDocumentHeightStyle() {
-    const baseHeight = this.args.height ?? '600';
-    const itemMedia = document.getElementsByClassName('challenge-content__media ')[0];
-    const height = this.args.isMediaWithForm ? (baseHeight * itemMedia.offsetWidth) / 710 : baseHeight;
-    return htmlSafe(`height: ${height}px; max-height: ${baseHeight}px`);
+    const { isGDevelop, height: configuredHeight } = this.args;
+    const height = configuredHeight ?? '600';
+    const cssProperties = isGDevelop ? `max-height: ${height}px; aspect-ratio: 860/680` : `height: ${height}px`;
+    return htmlSafe(cssProperties);
   }
 
   @action

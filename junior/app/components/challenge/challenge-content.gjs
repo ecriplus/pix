@@ -71,6 +71,7 @@ export default class ChallengeContent extends Component {
             @url={{@challenge.embedUrl}}
             @title={{@challenge.embedTitle}}
             @height={{@challenge.embedHeight}}
+            @isGDevelop={{@challenge.isEmbedGDevelop}}
             @hideSimulator={{@isDisabled}}
             @isMediaWithForm={{this.isMediaWithForm}}
             @shouldDisplayRebootButton={{this.shouldDisplayRebootButton}}

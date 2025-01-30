@@ -39,6 +39,14 @@ export default class Challenge extends Model {
     return !!embedUrl && !!this.embedTitle && !this.hasWebComponent && embedUrl.toLowerCase().indexOf('https://') === 0; // fixes bug on IE: startsWith in not supported (PR #242)
   }
 
+  get isEmbedGDevelop() {
+    if (this.hasEmbed) {
+      const embedUrl = this.embedUrl;
+      return embedUrl.toLowerCase().indexOf('https://1024pix.github.io/') === 0;
+    }
+    return false;
+  }
+
   get hasWebComponent() {
     return !!this.webComponentProps && !!this.webComponentTagName;
   }
