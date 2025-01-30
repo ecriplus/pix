@@ -2,10 +2,12 @@ import Joi from 'joi';
 import _ from 'lodash';
 
 const postgreSQLSequenceDefaultStart = 1;
-const postgreSQLSequenceEnd = 2 ** 31 - 1;
+const postgreSQLSequenceInt32BitEnd = 2 ** 31 - 1;
+const postgreSQLSequenceInt64BitEnd = 2 ** 63 - 1;
 
 const implementationType = {
-  positiveInteger32bits: Joi.number().integer().min(postgreSQLSequenceDefaultStart).max(postgreSQLSequenceEnd),
+  positiveInteger32bits: Joi.number().integer().min(postgreSQLSequenceDefaultStart).max(postgreSQLSequenceInt32BitEnd),
+  positiveInteger64bits: Joi.number().integer().min(postgreSQLSequenceDefaultStart).max(postgreSQLSequenceInt64BitEnd),
   alphanumeric255: Joi.string().max(255),
   alphanumeric: Joi.string(),
 };
@@ -39,7 +41,6 @@ const queriesType = {
 
 const typesPositiveInteger32bits = [
   'adminMemberId',
-  'answerId',
   'assessmentId',
   'authenticationMethodId',
   'autonomousCourseId',
@@ -79,16 +80,19 @@ const typesPositiveInteger32bits = [
   'userOrgaSettingsId',
 ];
 
+const typesPositiveInteger64bits = ['answerId'];
+
 const typesAlphanumeric = ['courseId', 'tutorialId'];
 const typesAlphanumeric255 = ['challengeId', 'competenceId', 'frameworkId', 'tubeId', 'code', 'skillId'];
 
 _assignValueToExport(typesPositiveInteger32bits, implementationType.positiveInteger32bits);
+_assignValueToExport(typesPositiveInteger64bits, implementationType.positiveInteger64bits);
 _assignValueToExport(typesAlphanumeric, implementationType.alphanumeric);
 _assignValueToExport(typesAlphanumeric255, implementationType.alphanumeric255);
 
 paramsToExport.positiveInteger32bits = {
   min: postgreSQLSequenceDefaultStart,
-  max: postgreSQLSequenceEnd,
+  max: postgreSQLSequenceInt32BitEnd,
 };
 
 export {
