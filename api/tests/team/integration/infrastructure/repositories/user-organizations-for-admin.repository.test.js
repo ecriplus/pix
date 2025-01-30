@@ -1,11 +1,11 @@
-import * as userOrganizationsForAdminRepository from '../../../../lib/infrastructure/repositories/user-organizations-for-admin-repository.js';
-import { UserOrganizationForAdmin } from '../../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
-import { databaseBuilder, expect } from '../../../test-helper.js';
+import { UserOrganizationForAdmin } from '../../../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
+import { userOrganizationsForAdminRepository } from '../../../../../src/team/infrastructure/repositories/user-organizations-for-admin.repository.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
-describe('Integration | Repository | user-organizations-for-admin', function () {
+describe('Integration | Team | Infrastructure | Repository | user-organizations-for-admin', function () {
   context('#findByUserId', function () {
     context('When user doesn’t exist', function () {
-      it('should return an empty list', async function () {
+      it('returns an empty list', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser({ id: 1 }).id;
 
@@ -30,7 +30,7 @@ describe('Integration | Repository | user-organizations-for-admin', function () 
     });
 
     context('When user isn’t member of any organization', function () {
-      it('should return an empty list', async function () {
+      it('returns an empty list', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser({ id: 1 }).id;
 
@@ -56,7 +56,7 @@ describe('Integration | Repository | user-organizations-for-admin', function () 
     });
 
     context('When user is member of some organizations', function () {
-      it('should return a list with the organizations the user is member of', async function () {
+      it('returns a list with the organizations the user is member of', async function () {
         // given
         const user = databaseBuilder.factory.buildUser({ firstName: 'Otto', lastName: 'KARR' });
         const anotherUser = databaseBuilder.factory.buildUser({ firstName: 'Corinne', lastName: 'TITEGOUTTE' });
