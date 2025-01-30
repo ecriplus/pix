@@ -193,7 +193,6 @@ class DatabaseBuilder {
 
     const publicResults = await this.knex.raw(_constructRawQuery('public'));
     const learningContentResults = await this.knex.raw(_constructRawQuery('learningcontent'));
-    const pgbossResults = await this.knex.raw(_constructRawQuery('pgboss'));
 
     this.tablesOrderedByDependencyWithDirtinessMap = [];
 
@@ -206,13 +205,6 @@ class DatabaseBuilder {
     learningContentResults.rows.forEach(({ table_name }) => {
       this.tablesOrderedByDependencyWithDirtinessMap.push({
         table: `learningcontent.${table_name}`,
-        isDirty: false,
-      });
-    });
-    pgbossResults.rows.forEach(({ table_name }) => {
-      if (table_name === 'version') return;
-      this.tablesOrderedByDependencyWithDirtinessMap.push({
-        table: `pgboss.${table_name}`,
         isDirty: false,
       });
     });
@@ -240,7 +232,6 @@ class DatabaseBuilder {
         const tableName = databaseHelpers.getTableNameFromInsertSqlQuery(queryData.sql);
 
         if (!_.isEmpty(tableName)) {
-          if (tableName === 'pgboss.version') return;
           this._setTableAsDirty(tableName);
         }
       }
