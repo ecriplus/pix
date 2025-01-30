@@ -103,7 +103,7 @@
             "type": "image",
             "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_schema.png",
             "alt": "",
-            "alternativeText": "<p>Image avec :</p> <ul> <li>au centre, un écran d'ordinateur et un smartphone qui affichent l'écran d'accueil d'un ENT</li> <li>autour, avec des flèches vers les deux écrans, un groupe de parents, un groupe d'élèves, un groupe de professeurs, un groupe de personnels d'éducation.</li> "
+            "alternativeText": "<p>Image avec : </p><ul><li>au centre, un ordinateur et un smartphone qui affichent l'écran d'accueil d'un ENT</li><li>autour de l'ordinateur et du smartphone, avec des flèches dans leur direction, un groupe de parents, un groupe d'élèves, un groupe de professeurs, un groupe de personnels d'éducation.</li></ul>"
           }
         },
         {
@@ -128,7 +128,7 @@
             "type": "image",
             "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_accueil.jpg",
             "alt": "",
-            "alternativeText": "<p>Page d'accueil d'un ENT :</p> <ul> <li>Un menu avec les applications Accueil, Messagerie, Cahier de texte, Emploi du temps, Documents, Actualités.</li> <li>Au centre, un accès rapide à l'emploi du temps, au travail à faire et au suivi des notes. </li><li>En haut à droite, l'accès au compte personnel de Martin Pommard</li>"
+            "alternativeText": "<p>Page d'accueil d'un ENT :</p><ul>    <li>à gauche, un menu latéral avec les applications&nbsp; : <ul>            <li>Accueil, Messagerie, Cahier de texte, Emploi du temps, Documents, Actualités</li>        </ul>    </li>    <li>au centre, un accès rapide : <ul>            <li>à l'emploi du temps, au travail à faire et au suivi des notes</li>        </ul>    </li>    <li>en haut à droite, l'accès au compte personnel de Martin Pommard<br></li></ul>"
           }
         },
         {
@@ -280,7 +280,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_applis.jpg",
                   "alt": "",
-                  "alternativeText": "<p>Page d'un ENT avec la liste des applications disponibles : messagerie, cahier de textes, emploi du temps, documents et blog. "
+                  "alternativeText": "<p>Page «&nbsp;Mes applis&nbsp;» d'un ENT avec la liste des applications disponibles :&nbsp;</p><ul>    <li>Messagerie</li>    <li>Cahier de textes</li>    <li>Emploi du temps</li>    <li>Documents</li>    <li>Blog</li><br></ul>"
                 },
                 {
                   "id": "dacb6bd7-a151-4b00-bca8-4de1ab39891a",
@@ -288,9 +288,14 @@
                   "instruction": "<p>Martin veut savoir à quelle heure Ava a cours de sport.</p><p>Quelle fonctionnalité doit-il utiliser&#8239;?</p>",
                   "proposals": [
                     {
-                      "id": "2",
-                      "content": "<p>le blog</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le blog permet de suivre la vie de la classe, mais ce n’est pas l’application à utiliser dans ce cas.</p>"
+                      "id": "1",
+                      "content": "<p>la messagerie</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>La messagerie permet de contacter les professeurs, mais ce n’est pas l’application à utiliser dans ce cas.</p>"
+                    },
+                    {
+                      "id": "5",
+                      "content": "<p>le cahier de textes</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le cahier de textes numérique permet d’avoir un suivi régulier du travail effectué en classe, mais ce n’est pas l’application à utiliser dans ce cas.</p>"
                     },
                     {
                       "id": "3",
@@ -298,19 +303,14 @@
                       "feedback": "<p><span class=\"feedback__state\">Bonne réponse&#8239;! <span aria-hidden=\"true\">🎉</span></span></p><p>L’emploi du temps permet de connaître les cours d’Ava heure par heure, jour par jour.</p>"
                     },
                     {
-                      "id": "1",
-                      "content": "<p>la messagerie</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>La messagerie permet de contacter les professeurs, mais ce n’est pas l’application à utiliser dans ce cas.</p>"
-                    },
-                    {
                       "id": "4",
-                      "content": "<p>l'espace documentaire</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>L’espace documentaire permet de consulter des documents partagés, mais ce n’est pas l’application à utiliser dans ce cas.</p>"
+                      "content": "<p>Documents</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>L’application Documents permet de consulter des documents partagés, mais ce n’est pas l’application à utiliser dans ce cas.</p>"
                     },
                     {
-                      "id": "5",
-                      "content": "<p>le cahier de textes</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le cahier de textes numérique permet d’avoir un suivi régulier du travail effectué en classe, mais ce n’est pas l’application à utiliser dans ce cas.</p>"
+                      "id": "2",
+                      "content": "<p>le blog</p>",
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le blog permet de suivre la vie de la classe, mais ce n’est pas l’application à utiliser dans ce cas.</p>"
                     }
                   ],
                   "solution": "3"
@@ -324,7 +324,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_message.jpg",
                   "alt": "",
-                  "alternativeText": "<p>Page Accueil d'un ENT :</p> <ul> <li>à gauche, menu avec les applications : Accueil, Messagerie (2), Cahier de texte, Emploi du temps, Documents, Actualités</li> <li>au centre, un accès rapide à 3 actualités concernant le collège </li><li>à droite, accès au compte personnel de Martin Pommard puis menu Mes applis : messagerie '2), cahier de textes, emploi du temps</li>"
+                  "alternativeText": "<p>Page «&nbsp;Actualités&nbsp;» d'un ENT :</p><ul>    <li>à gauche, un menu latéral avec les applications&nbsp; :        <ul>            <li> Accueil, </li>            <li>Messagerie (2), </li>            <li>Cahier de texte, </li>            <li>Emploi du temps, </li>            <li>Documents, </li>            <li>Actualités            </li>        </ul>    </li>    <li>        au centre, un accès rapide à 3 actualités concernant le collège</li>    <li>        à droite, l'accès au compte personnel de Martin Pommard et un menu mes applis avec : <ul>            <li>messagerie (2), </li>            <li>cahier de textes, </li>            <li>emploi du temps<br><br></li>        </ul>    </li></ul>"
                 },
                 {
                   "id": "d83eba7d-cfe9-4e7b-ada6-fbcbaa17be23",
@@ -358,7 +358,7 @@
                   "type": "image",
                   "url": "https://images.pix.fr/modulix/decouverte-de-l-ent/ent_devoirs.jpg",
                   "alt": "",
-                  "alternativeText": "<p>Page Cahier de textes d'un ENT :</p> <ul> <li>à gauche, menu avec les applications : Accueil, Messagerie (2), Cahier de texte, Emploi du temps, Documents, Actualités</li> <li>au centre, un accès rapide au Cahier de texte avec la liste des cours et des devoirs à venir.</li>"
+                  "alternativeText": "<p>Page « Cahier de texte&nbsp;» d'un ENT :</p><ul>    <li>&nbsp;un menu latéral avec les applications&nbsp; :        <ul>            <li> Accueil, </li>            <li>Messagerie (2), </li>            <li>Cahier de texte, </li>            <li>Emploi du temps, </li>            <li>Documents, </li>            <li>Actualités            </li>        </ul>    </li>    <li>au centre, cahier de texte de l'élève avec les cours et devoirs à venir : <ul>            <li>Vendredi 6 septembre :&nbsp;<ul><li>Histoire-géographie - 6ème B - L'empire romain</li><li>Mathématiques - 6ème B - Les ensembles de nombres</li></ul></li><li>Lundi 9 septembre :&nbsp;<ul><li>Mathématiques - 6ème B - Exercice donné le 06/09/2024 - à faire</li><li>Français - 6ème B - Les compléments circonstanciels</li></ul></li><li>Mardi 10 septembre :&nbsp;<ul><li>Mathématiques - 6ème B - Les ensembles de nombres</li><li>Français - 6ème B - Devoir à la maison donné le 05/09/2024 - à faire</li></ul></li>        </ul>    </li>    <li>en haut à droite, l'accès au compte personnel de Martin Pommard<br></li></ul></li>"
                 },
                 {
                   "id": "85ef8964-a248-4a9d-a087-091a4aefd30a",
