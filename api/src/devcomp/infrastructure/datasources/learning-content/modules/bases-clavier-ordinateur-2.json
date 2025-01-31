@@ -26,11 +26,11 @@
     },
     {
       "grainId": "409aa009-7bd9-4202-b00e-5537ceb5e9e7",
-      "content": "<p>Passez à la pratique !</p>"
+      "content": "<p>Passons à la pratique ! <span aria-hidden=\"true\">⌨️</span></p>"
     },
     {
       "grainId": "b66ba0b8-ea0b-4fc2-b80e-9fc23854d735",
-      "content": "<p>Vous savez à présent que la touche majuscule sert à taper des lettres en majuscules. Elle peut aussi servir à taper d’autres caractères.</p>"
+      "content": "<p>Vous savez maintenant que la touche majuscule sert à taper des lettres en majuscules. Elle peut aussi servir à taper d’autres caractères.</p>"
     },
     {
       "grainId": "d310a45d-b3e1-4875-9c8e-55d39368d039",
@@ -87,9 +87,7 @@
                 "placeholder": "Tapez ici",
                 "ariaLabel": "zone de saisie",
                 "defaultValue": "",
-                "tolerances": [
-                  "t1"
-                ],
+                "tolerances": [],
                 "solutions": [
                   "voilà le zèbre déçu",
                   "« voilà le zèbre déçu »"
@@ -140,7 +138,7 @@
           "element": {
             "id": "c176da55-aad3-4dc2-a7fa-e680abd27ebd",
             "type": "text",
-            "content": "<p>Pour taper certains caractères, il faut <strong>appuyer sur plusieurs touches en même temps</strong>. </p>\n<p>Commençons par voir comment taper les lettres majuscules.</p>"
+            "content": "<p>Pour taper certains caractères, il faut <strong>appuyer sur plusieurs touches en même temps</strong>. </p> <p>C'est le cas pour taper des lettres majuscules.</p>"
           }
         },
         {
@@ -157,7 +155,7 @@
             "type": "image",
             "url": "https://i.imgur.com/odFZeVB.png",
             "alt": "Schéma d'un clavier, les deux touches majuscules sont en couleur.",
-            "alternativeText": "<p>Il y a deux touches majuscules sur le clavier, une à gauche, et une à droite.&nbsp; Chacune comporte le symbole d'une flèche.</p>",
+            "alternativeText": "<p>Il y a deux touches majuscules sur le clavier, une à gauche, et une à droite. Chacune comporte le symbole d'une flèche vers le haut.</p>",
             "legend": "",
             "licence": ""
           }
@@ -240,7 +238,7 @@
           "element": {
             "id": "422c00a6-3220-4e15-9f2b-f045298eaf0c",
             "type": "text",
-            "content": "<p>Sur certaines touches, il n’y a qu’un seul caractère. <br>Sur d’autres touches, il peut y avoir 2 ou même 3 caractères. <br>La<strong> touche majuscule ⇧</strong>&nbsp; permet de taper le <strong>caractère situé en haut des touches</strong>.</p>"
+            "content": "<p>Sur certaines touches, il n’y a qu’un seul caractère. <br>Sur d’autres touches, il peut y avoir 2 ou même 3 caractères. <br>La<strong> touche majuscule&nbsp;⇧</strong> permet de taper le <strong>caractère situé en haut des touches</strong>, comme par exemple les chiffres.</p>"
           }
         },
         {
@@ -260,7 +258,7 @@
           "element": {
             "id": "02d17109-d2df-4b5f-83a0-dde1f1fd4e8b",
             "type": "text",
-            "content": "<p>Comme pour les lettres majuscules, pour taper le caractère du haut d’une touche, restez appuyé sur la<strong> touche majuscule ⇧ </strong>et appuyez brièvement sur la touche du caractère.</p>"
+            "content": "<p>Comme pour les lettres majuscules, pour taper le caractère du haut d’une touche, restez appuyé sur la<strong> touche majuscule ⇧ </strong>et appuyez sur la touche du caractère.</p>"
           }
         },
         {
@@ -357,7 +355,7 @@
           "element": {
             "id": "423d899e-e24d-4666-8f74-17c137279122",
             "type": "text",
-            "content": "<p>La <strong>touche Alt&nbsp;Gr</strong> permet de faire apparaître les caractères situés en bas à droite des touches. Elle s’utilise de la même manière que la touche majuscule.&nbsp;<br>Pour taper le caractère situé en bas à droite sur la touche, maintenez appuyée la <strong>touche Alt&nbsp;Gr</strong> et appuyez brièvement sur la touche du caractère.</p>"
+            "content": "<p>La <strong>touche Alt&nbsp;Gr</strong> permet de faire apparaître les caractères situés en bas à droite des touches. Elle s’utilise de la même manière que la touche majuscule.&nbsp;<br>Pour taper le caractère situé en bas à droite sur la touche, maintenez appuyée la <strong>touche Alt&nbsp;Gr</strong> et appuyez sur la touche du caractère.</p>"
           }
         },
         {
@@ -417,7 +415,7 @@
             "type": "image",
             "url": "https://i.imgur.com/aTIEvLr.png",
             "alt": "Carte d'identité de Jean-Tobias Piéchaud",
-            "alternativeText": "<p>Carte d'identité contenant les informations suivantes :</p><ul><li>Piéchaud, </li><li>Jean-Tobias </li><li>26/03/1984</li><li>téléphone : 06 39 98 12 74</li><li>mail : jean-tobias.piechaud@pixmail.com</li></ul>",
+            "alternativeText": "<p>Carte d'identité contenant les informations suivantes :</p><ul><li>Piéchaud, </li><li>Jean-Tobias </li><li>26/03/1984</li><li>téléphone : 06 39 98 12 74</li><li>mail : j-t.piechaud@pixmail.org</li></ul>",
             "legend": "",
             "licence": ""
           }
@@ -430,7 +428,7 @@
             "isCompletionRequired": true,
             "title": "Formulaire",
             "url": "https://epreuves.pix.fr/visio/visio.html?mode=modulix-didacticiel",
-            "instruction": "<p>Remplissez le formulaire ci-dessous avec les informations concernant Jean-Tobias.</p>",
+            "instruction": "<p>Remplissez le formulaire ci-dessous avec les informations concernant Jean-Tobias puis cliquez sur envoyer.</p>",
             "solution": "toto",
             "height": 600
           }
@@ -447,7 +445,7 @@
           "element": {
             "id": "185a37d3-64dd-48e0-92b0-470bd34b4e9f",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">📌</span> Pour savoir comment faire apparaître un caractère, il faut regarder <strong>sa position sur la touche</strong> :</p>"
+            "content": "<p><span aria-hidden=\"true\">📌</span> Pour savoir comment taper un caractère, il faut connaître <strong>sa position sur la touche</strong> :</p>"
           }
         },
         {
@@ -474,7 +472,7 @@
           "element": {
             "id": "ca8c63e7-b192-4c9a-8f99-a4e54a2ea826",
             "type": "text",
-            "content": "<p><strong>Dans l'espace ci-dessous, pour chaque niveau, tapez les caractères à l’écran dans la zone de texte pour les faire disparaître.</strong></p>"
+            "content": "<p><strong>Dans l'espace ci-dessous, pour chaque niveau, tapez les caractères à l’écran dans la zone de texte pour les faire disparaître dans le temps imparti.</strong></p>"
           }
         },
         {
