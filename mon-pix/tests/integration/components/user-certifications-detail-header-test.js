@@ -140,7 +140,7 @@ module('Integration | Component | user certifications detail header', function (
       });
     });
 
-    module('when certification is delivered before 2022-01-01', function () {
+    module('when certification is v2 and delivered before 2022-01-01', function () {
       test('should not display the professionalizing warning', async function (assert) {
         // given
         const store = this.owner.lookup('service:store');
@@ -260,6 +260,7 @@ module('Integration | Component | user certifications detail header', function (
         date: new Date('2018-02-15T15:15:52Z'),
         isPublished: true,
         status: 'validated',
+        version: 3,
       });
       this.set('certification', certification);
 
@@ -368,6 +369,7 @@ module('Integration | Component | user certifications detail header', function (
           date: new Date('2018-02-15T15:15:52Z'),
           isPublished: true,
           status: 'validated',
+          version: 3,
         });
         this.set('certification', certification);
 

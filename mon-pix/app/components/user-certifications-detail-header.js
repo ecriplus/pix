@@ -25,7 +25,7 @@ export default class UserCertificationsDetailHeader extends Component {
   }
 
   get displayCertificationResultsExplanation() {
-    return this.currentDomain.isFranceDomain || this.isUserFrenchReader;
+    return this.args.certification.isV3 && (this.currentDomain.isFranceDomain || this.isUserFrenchReader);
   }
 
   get certificationResultsExplanationUrl() {
