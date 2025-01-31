@@ -10,8 +10,8 @@ import TrainingCard from '../../../../training/card';
 
 export default class EvaluationResultsTabsTrainings extends Component {
   @service currentUser;
-  @service store;
   @service metrics;
+  @service campaignParticipationResult;
 
   @tracked isShareResultsLoading = false;
   @tracked isShareResultsError = false;
@@ -33,22 +33,15 @@ export default class EvaluationResultsTabsTrainings extends Component {
 
   @action
   async shareResults() {
-    const adapter = this.store.adapterFor('campaign-participation-result');
-
     try {
       this.isShareResultsError = false;
       this.isShareResultsLoading = true;
 
-      await adapter.share(this.args.campaignParticipationResultId);
+      const campaignParticipationResultToShare = this.args.campaignParticipationResult;
+      await this.campaignParticipationResult.share(campaignParticipationResultToShare, this.args.questResults);
 
-      await this.store.queryRecord(
-        'campaign-participation-result',
-        {
-          campaignId: this.args.campaignId,
-          userId: this.currentUser.user.id,
-        },
-        { reload: true },
-      );
+      campaignParticipationResultToShare.isShared = true;
+      campaignParticipationResultToShare.canImprove = false;
 
       this.metrics.add({
         event: 'custom-event',

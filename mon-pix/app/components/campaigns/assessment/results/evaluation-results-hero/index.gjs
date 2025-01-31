@@ -22,6 +22,7 @@ export default class EvaluationResultsHero extends Component {
   @service store;
   @service tabManager;
   @service featureToggles;
+  @service campaignParticipationResult;
 
   @tracked hasGlobalError = false;
   @tracked isButtonLoading = false;
@@ -101,13 +102,8 @@ export default class EvaluationResultsHero extends Component {
       this.isButtonLoading = true;
 
       const campaignParticipationResult = this.args.campaignParticipationResult;
-      const adapter = this.store.adapterFor('campaign-participation-result');
 
-      if (this.hasQuestResults && this.args.questResults[0].obtained) {
-        await adapter.shareProfileReward(campaignParticipationResult.id, this.args.questResults[0].profileRewardId);
-      }
-
-      await adapter.share(campaignParticipationResult.id);
+      await this.campaignParticipationResult.share(campaignParticipationResult, this.args.questResults);
 
       campaignParticipationResult.isShared = true;
       campaignParticipationResult.canImprove = false;
