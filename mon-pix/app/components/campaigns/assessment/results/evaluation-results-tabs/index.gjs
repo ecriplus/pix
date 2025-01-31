@@ -63,7 +63,8 @@ export default class EvaluationResultsTabs extends Component {
                 @trainings={{@trainings}}
                 @isParticipationShared={{@campaignParticipationResult.isShared}}
                 @isSharableCampaign={{@isSharableCampaign}}
-                @campaignParticipationResultId={{@campaignParticipationResult.id}}
+                @questResults={{@questResults}}
+                @campaignParticipationResult={{@campaignParticipationResult}}
                 @campaignId={{@campaign.id}}
               />
             </Panel>

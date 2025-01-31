@@ -126,43 +126,28 @@ module('Integration | Components | Campaigns | Assessment | Evaluation Results T
       });
 
       module('when clicking on the share results button', function (hooks) {
-        let adapter, storeService;
+        let campaignParticipationResultService;
 
         hooks.beforeEach(function () {
           stubCurrentUserService(this.owner, { id: '1' });
-
-          storeService = this.owner.lookup('service:store');
-          adapter = storeService.adapterFor('campaign-participation-result');
+          campaignParticipationResultService = this.owner.lookup('service:campaign-participation-result');
         });
 
-        test('it should call the share method of the adapter and reload campaign-participation-result model', async function (assert) {
+        test('it should call the campaignParticipationResult service', async function (assert) {
           // given
-          const createShareStub = sinon.stub(adapter, 'share');
-          sinon.stub(storeService, 'queryRecord');
+          const campaignParticipationResultServiceStub = sinon.stub(campaignParticipationResultService, 'share');
 
           // when
           await click(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
 
           // then
-          assert.ok(createShareStub.calledOnce);
-          sinon.assert.calledWithExactly(createShareStub, 1);
-
-          assert.ok(storeService.queryRecord.calledOnce);
-          sinon.assert.calledWithExactly(
-            storeService.queryRecord,
-            'campaign-participation-result',
-            {
-              campaignId: this.campaignId,
-              userId: '1',
-            },
-            { reload: true },
-          );
+          assert.true(campaignParticipationResultServiceStub.calledOnce);
         });
 
         module('when share action fails', function () {
           test('it should display an error message', async function (assert) {
             // given
-            sinon.stub(adapter, 'share').rejects();
+            sinon.stub(campaignParticipationResultService, 'share').rejects();
 
             // when
             await click(screen.queryByRole('button', { name: t('pages.skill-review.actions.send') }));
