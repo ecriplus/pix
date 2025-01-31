@@ -42,7 +42,7 @@
     },
     {
       "grainId": "4a80afba-d2ef-4f58-a328-a0fc9f204aca",
-      "content": "<p>Maintenant que vous savez déplacer votre souris, découvrez les différents boutons de la souris !<span aria-hidden=\"\\&quot;true\\&quot;\">🖱️️</span></p>"
+      "content": "<p>Maintenant que vous savez déplacer votre souris, découvrez les différents boutons de la souris !<span aria-hidden=\"true\">🖱️️</span></p>"
     },
     {
       "grainId": "83f44f19-e8de-4248-bfc7-e38f19190138",
@@ -50,7 +50,7 @@
     },
     {
       "grainId": "b491a99e-2774-469e-a63e-e2d0fb1120f2",
-      "content": "<p>Vous allez maintenant passer à la pratique. <span aria-hidden=\"\\&quot;true\\&quot;\">👇</span></p>"
+      "content": "<p>Vous allez maintenant passer à la pratique. <span aria-hidden=\"true\">👇</span></p>"
     },
     {
       "grainId": "03e0657a-7caf-49eb-8dfb-da0f5e52b7ba",
@@ -58,7 +58,7 @@
     },
     {
       "grainId": "efba1e45-54ca-4829-b203-1e74b9269045",
-      "content": "<p>Le clic gauche sert à ouvrir des pages internet ou à démarrer des vidéos. Pour chacune de ses actions, le pointeur change de forme.</p>\n<p><span aria-hidden=\"\\&quot;true\\&quot;\">🖱️</span>️ À vous de jouer ! <br><br></p>"
+      "content": "<p>Le clic gauche sert à ouvrir des pages internet ou à démarrer des vidéos. Pour chacune de ses actions, le pointeur change de forme.</p><p><span aria-hidden=\"true\">🖱️</span>️ À vous de jouer !</p>"
     }
   ],
   "grains": [
@@ -72,7 +72,7 @@
           "element": {
             "id": "48708070-39c3-4af4-8914-ab61d61dfee8",
             "type": "text",
-            "content": "<p>La souris fait partie de l'équipement de base d’un ordinateur, avec le clavier.</p>\n<p>Les souris peuvent avoir différentes formes, tailles ou couleurs. </p>\n<p>Il y a deux types de souris : </p>\n<ul>\n    <li>les souris avec un fil</li>\n    <li>les souris sans fil</li>\n</ul>\n<p>Globalement, toutes ces souris servent à faire les mêmes choses.</p>"
+            "content": "<p>La souris fait partie de l'équipement de base d’un ordinateur, avec le clavier.</p><p>Les souris peuvent avoir différentes formes, tailles ou couleurs. </p><p>Il y a deux types de souris : </p><ul><li>les souris avec un fil</li><li>les souris sans fil</li></ul><p>Globalement, toutes ces souris servent à faire les mêmes choses.</p>"
           }
         },
         {
@@ -82,7 +82,7 @@
             "type": "image",
             "url": "https://i.imgur.com/0bI4zEN.png",
             "alt": "-",
-            "alternativeText": "<ul><li>Les souris avec un fil : photographies de 4 souris avec fil de taille, forme et couleur différentes.</li><li>Les souris sans fil : photographies de 3 souris sans fil&nbsp;différentes reliées par des connecteurs USB Bluetooth .</li></ul>"
+            "alternativeText": "<ul><li>Les souris avec un fil : photographies de 4 souris avec fil de taille, forme et couleur différentes.</li><li>Les souris sans fil : photographies de 3 souris sans fil différentes reliées par des connecteurs USB Bluetooth .</li></ul>"
           }
         },
         {
@@ -111,9 +111,13 @@
         {
           "type": "element",
           "element": {
-            "id": "c2f89648-1f06-4e58-b5a5-422677d24417",
-            "type": "text",
-            "content": "<iframe width=\"700\" height=\"410\" src=\"https://www.youtube.com/embed/oGwHYZcs5fE\" title=\"Première marche souris - Prise en main de la souris\"></iframe>"
+            "id": "56541ee2-cf5f-4966-b17b-96a1b7266868",
+            "type": "video",
+            "title": "Prendre en main la souris",
+            "url": "https://videos.pix.fr/modulix/utiliser-souris-ordinateur-1/souris_prise_en_main.mp4",
+            "poster": "https://i.imgur.com/lA2jUAY.jpeg",
+            "subtitles": "",
+            "transcription": ""
           }
         }
       ]
@@ -164,9 +168,13 @@
         {
           "type": "element",
           "element": {
-            "id": "52a71515-a085-4a85-8c43-86e06c1cb9b8",
-            "type": "text",
-            "content": "<iframe width=\"100%\" height=\"410\" src=\"https://www.youtube.com/embed/cktRk8PySII\" title=\"Première marche souris - Déplacer la souris\"></iframe>"
+            "id": "abe223ab-ad36-4b14-b349-abc8590eb94e",
+            "type": "video",
+            "title": "Déplacer la souris",
+            "url": "https://videos.pix.fr/modulix/utiliser-souris-ordinateur-1/deplacer_la_souris.mp4",
+            "poster": "https://i.imgur.com/jC8keAF.jpeg",
+            "subtitles": "",
+            "transcription": ""
           }
         }
       ]
@@ -266,7 +274,7 @@
           "element": {
             "id": "98a59942-5506-4c18-b16a-97ce2010103b",
             "type": "text",
-            "content": "<p><strong><span aria-hidden=\"\\&quot;true\\&quot;\">🔎</span> Observez : combien de boutons a votre souris d’ordinateur ?</strong></p>"
+            "content": "<p><strong><span aria-hidden=\"true\">🔎</span> Observez : combien de boutons a votre souris d’ordinateur ?</strong></p>"
           }
         }
       ]
@@ -314,7 +322,7 @@
           "element": {
             "id": "a510f893-7d93-4e4f-b8a4-0dd978324c70",
             "type": "text",
-            "content": "<p>Voyons comment faire un clic gauche. <span aria-hidden=\"\\&quot;true\\&quot;\">👇</span></p>"
+            "content": "<p>Voyons comment faire un clic gauche. <span aria-hidden=\"true\">👇</span></p>"
           }
         },
         {
@@ -395,7 +403,7 @@
             "type": "image",
             "url": "https://i.imgur.com/G6t4f0c.png",
             "alt": "",
-            "alternativeText": "<p>image des 4 formes de pointeur les plus courantes : la flèche, la main, la barre verticale, et la roue ou le sablier.&nbsp;</p>"
+            "alternativeText": "<p>image des 4 formes de pointeur les plus courantes : la flèche, la main, la barre verticale, et la roue ou le sablier.</p>"
           }
         },
         {
@@ -489,7 +497,7 @@
           "element": {
             "id": "3480a769-41ea-47e8-990b-c5f8089542e7",
             "type": "text",
-            "content": "<ul>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">🖐️</span>La souris glisse sur la table grâce à votre main.</li>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">🖥️</span> À l'écran, le pointeur suit le mouvement de la souris.</li>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">👉</span> Cliquer veut dire appuyer brièvement sur un bouton de la souris.</li>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">▶️</span> Cliquer permet d'interagir avec l’ordinateur.</li>\n    <li><span aria-hidden=\"\\&quot;true\\&quot;\">🖱️Le pointeur de la souris change de forme quand on peut cliquer.</span></li>\n</ul>"
+            "content": "<ul> <li><span aria-hidden=\"true\">🖐️</span>La souris glisse sur la table grâce à votre main.</li> <li><span aria-hidden=\"true\">🖥️</span> À l'écran, le pointeur suit le mouvement de la souris.</li> <li><span aria-hidden=\"true\">👉</span> Cliquer veut dire appuyer brièvement sur un bouton de la souris.</li> <li><span aria-hidden=\"true\">▶️</span> Cliquer permet d'interagir avec l’ordinateur.</li> <li><span aria-hidden=\"true\">🖱️Le pointeur de la souris change de forme quand on peut cliquer.</span></li></ul>"
           }
         },
         {
