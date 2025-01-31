@@ -27,13 +27,13 @@ export const cancel = async function ({
     throw new NotFinalizedSessionError();
   }
 
-  certificationCourse.cancel();
-  await certificationCourseRepository.update({ certificationCourse });
-
   const certificationCancelledEvent = new CertificationCancelled({
-    certificationCourseId: certificationCourse.getId(),
+    certificationCourseId,
     juryId,
   });
 
-  return certificationRescoringRepository.execute({ event: certificationCancelledEvent });
+  await certificationRescoringRepository.execute({ event: certificationCancelledEvent });
+
+  certificationCourse.cancel();
+  await certificationCourseRepository.update({ certificationCourse });
 };
