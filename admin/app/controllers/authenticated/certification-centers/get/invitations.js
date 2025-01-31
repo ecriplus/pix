@@ -27,10 +27,8 @@ export default class AuthenticatedCertificationCentersGetInvitationsController e
 
   @action
   async createInvitation(language, role) {
-    this.isLoading = true;
     const email = this.userEmailToInvite?.trim();
     if (!this._isEmailToInviteValid(email)) {
-      this.isLoading = false;
       return;
     }
 
@@ -47,7 +45,6 @@ export default class AuthenticatedCertificationCentersGetInvitationsController e
     } catch (err) {
       this.errorResponseHandler.notify(err, this.CUSTOM_ERROR_MESSAGES);
     }
-    this.isLoading = false;
   }
 
   @action
