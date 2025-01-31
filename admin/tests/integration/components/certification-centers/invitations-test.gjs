@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import { setupIntl } from 'ember-intl/test-support';
 import { setupRenderingTest } from 'ember-qunit';
 import Invitations from 'pix-admin/components/certification-centers/invitations';
 import { module, test } from 'qunit';
@@ -6,6 +7,7 @@ import sinon from 'sinon';
 
 module('Integration | Component | Certification Centers | Invitations', function (hooks) {
   setupRenderingTest(hooks);
+  setupIntl(hooks, 'fr');
 
   module('when there is no certification center invitations', function () {
     test('should show "Aucune invitation en attente"', async function (assert) {

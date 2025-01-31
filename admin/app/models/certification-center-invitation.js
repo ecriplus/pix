@@ -7,6 +7,7 @@ export default class CertificationCenterInvitationModel extends Model {
   @attr email;
   @attr updatedAt;
   @attr role;
+  @attr language;
 
   @belongsTo('certification-center', { async: true, inverse: null }) certificationCenter;
 

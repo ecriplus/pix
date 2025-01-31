@@ -23,7 +23,7 @@ const createOrUpdateCertificationCenterInvitationForAdmin = async function ({
   const shouldCreateInvitation = !alreadyExistingPendingInvitationForThisEmail;
 
   if (shouldCreateInvitation) {
-    const newInvitation = CertificationCenterInvitation.create({ email, role, certificationCenterId });
+    const newInvitation = CertificationCenterInvitation.create({ email, role, locale, certificationCenterId });
     certificationCenterInvitation = await certificationCenterInvitationRepository.create(newInvitation);
     isInvitationCreated = true;
   } else {

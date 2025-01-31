@@ -4,7 +4,7 @@ import { CertificationCenterInvitedUser } from '../../domain/models/Certificatio
 
 const get = async function ({ certificationCenterInvitationId, email }) {
   const invitation = await knex('certification-center-invitations')
-    .select('id', 'certificationCenterId', 'code', 'status', 'role')
+    .select('id', 'certificationCenterId', 'code', 'status', 'role', 'locale')
     .where({ id: certificationCenterInvitationId })
     .first();
   if (!invitation) {
@@ -21,6 +21,7 @@ const get = async function ({ certificationCenterInvitationId, email }) {
     invitation,
     status: invitation.status,
     role: invitation.role,
+    locale: invitation.locale,
   });
 };
 

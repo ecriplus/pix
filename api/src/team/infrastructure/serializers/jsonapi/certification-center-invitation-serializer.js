@@ -10,7 +10,13 @@ const serialize = function (invitations) {
 
 const serializeForAdmin = function (invitations) {
   return new Serializer('certification-center-invitations', {
-    attributes: ['email', 'updatedAt', 'role'],
+    transform: (invitation) => {
+      return {
+        ...invitation,
+        language: invitation.locale,
+      };
+    },
+    attributes: ['email', 'updatedAt', 'role', 'language'],
   }).serialize(invitations);
 };
 

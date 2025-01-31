@@ -40,6 +40,7 @@ describe('Unit | Team | Serializer | JSONAPI | certification-center-invitation-s
         certificationCenterId: 666,
         email: 'anne.atole@example.net',
         role: 'MEMBER',
+        locale: 'fr',
         updatedAt: now,
       });
 
@@ -55,6 +56,7 @@ describe('Unit | Team | Serializer | JSONAPI | certification-center-invitation-s
             email: 'anne.atole@example.net',
             'updated-at': now,
             role: 'MEMBER',
+            language: 'fr',
           },
         },
       });

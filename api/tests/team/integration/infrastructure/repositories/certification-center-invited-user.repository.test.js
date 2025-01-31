@@ -36,6 +36,7 @@ describe('Integration | Team | Infrastructure | Repositories | CertificationCent
         code: 'ABCDE123',
         status: 'pending',
         role: CertificationCenterInvitation.Roles.MEMBER,
+        locale: certificationCenterInvitation.locale,
       };
 
       // when
@@ -53,6 +54,7 @@ describe('Integration | Team | Infrastructure | Repositories | CertificationCent
           invitation,
           status: certificationCenterInvitation.status,
           role: CertificationCenterInvitation.Roles.MEMBER,
+          locale: certificationCenterInvitation.locale,
         }),
       );
     });

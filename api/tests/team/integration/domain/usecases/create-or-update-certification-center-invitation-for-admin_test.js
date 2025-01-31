@@ -50,6 +50,7 @@ describe('Integration | Team | UseCase | create-or-update-certification-center-i
       certificationCenterId,
       mailService,
       role: 'MEMBER',
+      locale: 'fr',
     });
 
     // then
@@ -69,6 +70,7 @@ describe('Integration | Team | UseCase | create-or-update-certification-center-i
       certificationCenterName: 'Centre des Pixous',
       updatedAt: now,
       role: 'MEMBER',
+      locale: 'fr',
     });
     expect(result.certificationCenterInvitation.code).to.exist;
   });
@@ -109,6 +111,7 @@ describe('Integration | Team | UseCase | create-or-update-certification-center-i
       updatedAt: now,
       code: 'AAALLLPPP1',
       role: 'MEMBER',
+      locale: 'fr',
     });
   });
 
