@@ -1,4 +1,5 @@
 import { PopulateCampaignParticipationIdScript } from '../../../../scripts/prod/populate-campaign-participation-id-in-knowledge-element-snapshot.js';
+import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
 
 describe('Script | Prod | Delete Organization Learners From Organization', function () {
@@ -38,7 +39,7 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
         userId: user.id,
       });
 
-      campaign = databaseBuilder.factory.buildCampaign();
+      campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.PROFILES_COLLECTION });
       otherCampaign = databaseBuilder.factory.buildCampaign();
       await databaseBuilder.commit();
     });
