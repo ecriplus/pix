@@ -2,6 +2,7 @@
 import { equal } from '@ember/object/computed';
 import Model, { attr, hasMany } from '@ember-data/model';
 import dayjs from 'dayjs';
+import pick from 'lodash/pick';
 
 export default class Organization extends Model {
   @attr('nullable-string') name;
@@ -46,88 +47,18 @@ export default class Organization extends Model {
     };
   }
 
-  get isManagingStudents() {
-    if (!this.features) return false;
-    return this.features[Organization.featureList.IS_MANAGING_STUDENTS].active;
-  }
-
-  set isManagingStudents(value) {
-    if (!this.features) {
-      this.features = {};
-      this.features[Organization.featureList.IS_MANAGING_STUDENTS] = {};
-    }
-    this.features[Organization.featureList.IS_MANAGING_STUDENTS].active = value;
-  }
-
-  get showNPS() {
-    if (!this.features) return false;
-    return this.features[Organization.featureList.SHOW_NPS].active;
-  }
-
-  get showSkills() {
-    if (!this.features) return false;
-    return this.features[Organization.featureList.SHOW_SKILLS].active;
-  }
-
-  set showSkills(value) {
-    if (!this.features) {
-      this.features = {};
-      this.features[Organization.featureList.SHOW_SKILLS] = {};
-    }
-    this.features[Organization.featureList.SHOW_SKILLS].active = value;
-  }
-
-  get formNPSUrl() {
-    if (!this.features) return false;
-    if (!this.showNPS) return null;
-    return this.features[Organization.featureList.SHOW_NPS].params.formNPSUrl;
-  }
-
-  get isComputeCertificabilityEnabled() {
-    if (!this.features) return false;
-    return this.features[Organization.featureList.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY].active;
-  }
-
-  get isAttestationsEnabled() {
-    if (!this.features) return false;
-    return this.features[Organization.featureList.ATTESTATIONS_MANAGEMENT].active;
+  static get editableFeatureList() {
+    return pick(
+      Organization.featureList,
+      'MULTIPLE_SENDING_ASSESSMENT',
+      'IS_MANAGING_STUDENTS',
+      'SHOW_SKILLS',
+      'PLACES_MANAGEMENT',
+    );
   }
 
   get isLearnerImportEnabled() {
-    if (!this.features) return false;
     return this.features[Organization.featureList.LEARNER_IMPORT].active;
-  }
-
-  get learnerImportFormatName() {
-    if (!this.isLearnerImportEnabled) return null;
-    return this.features[Organization.featureList.LEARNER_IMPORT].params.name;
-  }
-
-  get isMultipleSendingAssessmentEnabled() {
-    if (!this.features) return false;
-    return this.features[Organization.featureList.MULTIPLE_SENDING_ASSESSMENT].active;
-  }
-
-  set isMultipleSendingAssessmentEnabled(value) {
-    if (!this.features) {
-      this.features = {};
-      this.features[Organization.featureList.MULTIPLE_SENDING_ASSESSMENT] = {};
-    }
-    this.features[Organization.featureList.MULTIPLE_SENDING_ASSESSMENT].active = value;
-  }
-
-  get isPlacesManagementEnabled() {
-    if (!this.features) return false;
-    return this.features[Organization.featureList.PLACES_MANAGEMENT].active;
-  }
-
-  set isPlacesManagementEnabled(value) {
-    if (!this.features) {
-      this.features = {};
-      this.features[Organization.featureList.PLACES_MANAGEMENT] = {};
-    }
-
-    this.features[Organization.featureList.PLACES_MANAGEMENT].active = value;
   }
 
   async hasMember(userId) {

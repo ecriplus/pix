@@ -2,13 +2,17 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
-import { fn } from '@ember/helper';
+import { concat, fn, get } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { and, eq, not } from 'ember-truth-helpers';
+import lodashGet from 'lodash/get';
+import set from 'lodash/set';
+import Organization from 'pix-admin/models/organization';
 
 export default class OrganizationInformationSectionEditionMode extends Component {
   @service accessControl;
@@ -55,7 +59,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
   @action
   updateFormCheckBoxValue(key) {
-    this.form[key] = !this.form[key];
+    set(this.form, key, !lodashGet(this.form, key));
   }
 
   @action
@@ -84,12 +88,10 @@ export default class OrganizationInformationSectionEditionMode extends Component
     this.args.organization.set('dataProtectionOfficerEmail', this.form.dataProtectionOfficerEmail);
     this.args.organization.set('email', this.form.email);
     this.args.organization.set('credit', this.form.credit);
-    this.args.organization.set('isManagingStudents', this.form.isManagingStudents);
     this.args.organization.set('documentationUrl', this.form.documentationUrl);
-    this.args.organization.set('showSkills', this.form.showSkills);
     this.args.organization.set('identityProviderForCampaigns', this.form.identityProviderForCampaigns);
-    this.args.organization.set('isMultipleSendingAssessmentEnabled', this.form.isMultipleSendingAssessmentEnabled);
-    this.args.organization.set('isPlacesManagementEnabled', this.form.isPlacesManagementEnabled);
+
+    this.args.organization.set('features', this.form.features);
 
     this.closeAndResetForm();
     return this.args.onSubmit();
@@ -104,13 +106,11 @@ export default class OrganizationInformationSectionEditionMode extends Component
     this.form.dataProtectionOfficerEmail = this.args.organization.dataProtectionOfficerEmail;
     this.form.email = this.args.organization.email;
     this.form.credit = this.args.organization.credit;
-    this.form.isManagingStudents = this.args.organization.isManagingStudents;
     this.form.documentationUrl = this.args.organization.documentationUrl;
-    this.form.showSkills = this.args.organization.showSkills;
-    this.form.isMultipleSendingAssessmentEnabled = this.args.organization.isMultipleSendingAssessmentEnabled;
-    this.form.isPlacesManagementEnabled = this.args.organization.isPlacesManagementEnabled;
     this.form.identityProviderForCampaigns =
       this.args.organization.identityProviderForCampaigns ?? this.noIdentityProviderOption.value;
+
+    this.form.features = JSON.parse(JSON.stringify(this.args.organization.features));
   }
 
   <template>
@@ -199,13 +199,6 @@ export default class OrganizationInformationSectionEditionMode extends Component
         </div>
 
         <div class="form-field">
-          <PixCheckbox
-            @checked={{this.form.showSkills}}
-            {{on "change" (fn this.updateFormCheckBoxValue "showSkills")}}
-          ><:label>Affichage des acquis dans l'export de résultats</:label></PixCheckbox>
-        </div>
-
-        <div class="form-field">
           <PixSelect
             @options={{this.identityProviderOptions}}
             @value={{this.form.identityProviderForCampaigns}}
@@ -225,33 +218,12 @@ export default class OrganizationInformationSectionEditionMode extends Component
           ><:label>Adresse e-mail d'activation SCO</:label></PixInput>
         </div>
 
-        {{#if this.isManagingStudentAvailable}}
-          <div class="form-field">
-            <PixCheckbox
-              @checked={{this.form.isManagingStudents}}
-              {{on "change" (fn this.updateFormCheckBoxValue "isManagingStudents")}}
-            ><:label>Gestion d’élèves/étudiants</:label></PixCheckbox>
-          </div>
-        {{/if}}
+        <FeaturesForm
+          @features={{this.form.features}}
+          @updateFormCheckBoxValue={{this.updateFormCheckBoxValue}}
+          @isManagingStudentAvailable={{this.isManagingStudentAvailable}}
+        />
 
-        <div class="form-field">
-          <PixCheckbox
-            @id="isMultipleSendingAssessmentEnabled"
-            @checked={{this.form.isMultipleSendingAssessmentEnabled}}
-            {{on "change" (fn this.updateFormCheckBoxValue "isMultipleSendingAssessmentEnabled")}}
-          >
-            <:label>Activer l'envoi multiple pour les campagnes de type évaluation</:label>
-          </PixCheckbox>
-        </div>
-        <div class="form-field">
-          <PixCheckbox
-            @id="isPlacesManagementEnabled"
-            @checked={{this.form.isPlacesManagementEnabled}}
-            {{on "change" (fn this.updateFormCheckBoxValue "isPlacesManagementEnabled")}}
-          >
-            <:label>Activer la page Places sur PixOrga</:label>
-          </PixCheckbox>
-        </div>
         <div class="form-actions">
           <PixButton @size="small" @variant="secondary" @triggerAction={{this.closeAndResetForm}}>
             {{t "common.actions.cancel"}}
@@ -264,3 +236,25 @@ export default class OrganizationInformationSectionEditionMode extends Component
     </div>
   </template>
 }
+
+function keys(obj) {
+  return Object.keys(obj);
+}
+
+const FeaturesForm = <template>
+  {{#each (keys Organization.editableFeatureList) as |feature|}}
+    {{#let
+      (get @features feature) (concat "components.organizations.information-section-view.features." feature)
+      as |organizationFeature featureLabel|
+    }}
+      {{#if (not (and (eq feature "IS_MANAGING_STUDENTS") (not @isManagingStudentAvailable)))}}
+        <div class="form-field">
+          <PixCheckbox
+            @checked={{organizationFeature.active}}
+            {{on "change" (fn @updateFormCheckBoxValue (concat "features." feature ".active"))}}
+          ><:label>{{t featureLabel}}</:label></PixCheckbox>
+        </div>
+      {{/if}}
+    {{/let}}
+  {{/each}}
+</template>;

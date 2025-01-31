@@ -86,25 +86,11 @@ const Validations = buildValidations({
       }),
     ],
   },
-  isManagingStudents: {
-    validators: [
-      validator('inclusion', {
-        in: [true, false],
-      }),
-    ],
-  },
   documentationUrl: {
     validators: [
       validator('absolute-url', {
         allowBlank: true,
         message: "Le lien n'est pas valide.",
-      }),
-    ],
-  },
-  showSkills: {
-    validators: [
-      validator('inclusion', {
-        in: [true, false],
       }),
     ],
   },
@@ -119,9 +105,7 @@ export default class OrganizationForm extends Model.extend(Validations) {
   @attr('string') dataProtectionOfficerEmail;
   @attr('string') email;
   @attr('number') credit;
-  @attr('string') isManagingStudents;
   @attr('string') documentationUrl;
-  @attr('boolean') showSkills;
   @attr() identityProviderForCampaigns;
 
   #getErrorAttribute(name) {

@@ -25,10 +25,9 @@ module('Integration | Component | organizations/information-section-edit', funct
       provinceCode: 'h50',
       email: 'sco.generic.account@example.net',
       isOrganizationSCO: true,
-      isManagingStudents: false,
       credit: 0,
       documentationUrl: 'https://pix.fr/',
-      showSkills: false,
+      features: {},
     });
 
     test("it should show error message if organization's name is empty", async function (assert) {

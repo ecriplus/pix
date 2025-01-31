@@ -1,11 +1,6 @@
 import ApplicationSerializer from './application';
 
 export default class Organization extends ApplicationSerializer {
-  attrs = {
-    formNPSUrl: {
-      key: 'form-nps-url',
-    },
-  };
   serialize(snapshot) {
     const json = super.serialize(...arguments);
 
