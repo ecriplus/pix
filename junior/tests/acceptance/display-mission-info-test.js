@@ -14,7 +14,7 @@ module('Acceptance | Display informations about the mission', function (hooks) {
     const screen = await visit(`/missions/${mission.id}`);
     // then
     assert.dom(screen.getByText('Recherche sur internet')).exists();
-    assert.dom(screen.getByText('learningObjectives')).exists();
+    assert.dom(screen.getByText('validatedObjectives')).exists();
     assert.dom(screen.getByText(t('pages.missions.start-page.start-mission'))).exists();
   });
 });

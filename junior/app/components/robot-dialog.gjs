@@ -26,7 +26,7 @@ export default class RobotDialog extends Component {
     const robotImage = window.document.querySelector('.robot-speaking__logo');
     if (robotImage) {
       robotImage.style.transition = `all 0.4s ease-in-out`;
-      robotImage.style.transform = `translateY(${bubblesHeight - ROBOT_IMAGE_OFFSET}px)`;
+      robotImage.style.transform = `translateY(${bubblesHeight - (this.args.robotOffSet || ROBOT_IMAGE_OFFSET)}px)`;
     }
   }
 

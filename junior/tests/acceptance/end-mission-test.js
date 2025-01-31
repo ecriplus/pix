@@ -35,7 +35,8 @@ module('Acceptance | End mission', function (hooks) {
     const assessment = this.server.create('assessment', { missionId: mission.id, result: { global: 'exceeded' } });
     identifyLearner(this.owner);
     const screen = await visit(`/assessments/${assessment.id}/results`);
-    assert.dom(screen.getByText(t('pages.missions.end-page.result.exceeded'))).exists();
+    assert.dom(screen.getByText(t('pages.missions.feedback.result.exceeded.robot-text.0'))).exists();
+    assert.dom(screen.getByText(t('pages.missions.feedback.result.exceeded.robot-text.1'))).exists();
   });
 
   test('when mission goal has been reached', async function (assert) {
@@ -46,7 +47,8 @@ module('Acceptance | End mission', function (hooks) {
     });
     identifyLearner(this.owner);
     const screen = await visit(`/assessments/${assessment.id}/results`);
-    assert.dom(screen.getByText(t('pages.missions.end-page.result.reached'))).exists();
+    assert.dom(screen.getByText(t('pages.missions.feedback.result.reached.robot-text.0'))).exists();
+    assert.dom(screen.getByText(t('pages.missions.feedback.result.reached.robot-text.1'))).exists();
   });
 
   test('when mission goal has been partially reached', async function (assert) {
@@ -57,7 +59,8 @@ module('Acceptance | End mission', function (hooks) {
     });
     identifyLearner(this.owner);
     const screen = await visit(`/assessments/${assessment.id}/results`);
-    assert.dom(screen.getByText(t('pages.missions.end-page.result.partially-reached'))).exists();
+    assert.dom(screen.getByText(t('pages.missions.feedback.result.partially-reached.robot-text.0'))).exists();
+    assert.dom(screen.getByText(t('pages.missions.feedback.result.partially-reached.robot-text.1'))).exists();
   });
 
   test('when mission goal has not been reached', async function (assert) {
@@ -68,7 +71,8 @@ module('Acceptance | End mission', function (hooks) {
     });
     identifyLearner(this.owner);
     const screen = await visit(`/assessments/${assessment.id}/results`);
-    assert.dom(screen.getByText(t('pages.missions.end-page.result.not-reached'))).exists();
+    assert.dom(screen.getByText(t('pages.missions.feedback.result.not-reached.robot-text.0'))).exists();
+    assert.dom(screen.getByText(t('pages.missions.feedback.result.not-reached.robot-text.1'))).exists();
   });
 
   test('redirect to home page after clicking on return button', async function (assert) {

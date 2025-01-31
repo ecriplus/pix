@@ -8,7 +8,7 @@ module('Unit | Route | AssessmentResumeRoute', function (hooks) {
 
   module('#redirect', function () {
     module('When there is an other challenge', function () {
-      test('should call the assessment challenge route', function (assert) {
+      test('should call the assessment challenge route', async function (assert) {
         const route = this.owner.lookup('route:assessment.resume');
         const assessment = { id: '2', missionId: '1' };
         const transition = {
@@ -17,7 +17,7 @@ module('Unit | Route | AssessmentResumeRoute', function (hooks) {
         };
         sinon.stub(route.router, 'replaceWith');
 
-        route.redirect(assessment, transition);
+        await route.afterModel(assessment, transition);
 
         assert.ok(route.router.replaceWith.calledWith('assessment.challenge', assessment.id));
       });
@@ -31,11 +31,11 @@ module('Unit | Route | AssessmentResumeRoute', function (hooks) {
           from: { name: 'assessment.challenge' },
           to: { queryParams: { assessmentHasNoMoreQuestions: 'true' } },
         };
-        sinon.stub(route.router, 'replaceWith');
+        sinon.stub(route.router, 'transitionTo');
 
-        await route.redirect(assessment, transition);
+        await route.afterModel(assessment, transition);
 
-        assert.ok(route.router.replaceWith.calledWith('assessment.results', assessment.id));
+        assert.ok(route.router.transitionTo.calledWith('assessment.feedback', assessment.id));
       });
     });
   });

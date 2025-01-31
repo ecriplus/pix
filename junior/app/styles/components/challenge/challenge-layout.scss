@@ -19,6 +19,24 @@
     border: 2px solid var(--pix-success-500);
   }
 
+  &--feedback {
+    background-color: rgba(var(--pix-secondary-500-inline), 10%);
+  }
+
+  &--feedback--success {
+    background-color: rgba(var(--pix-secondary-500-inline), 10%);
+    background-image: url("/images/background-stars-success.svg");
+  }
+
+  &--result {
+    background-color: rgba(var(--pix-secondary-500-inline), 10%);
+  }
+
+  &--result--success {
+    background-color: rgba(var(--pix-secondary-500-inline), 10%);
+    background-image: url("/images/background-success-result-page.svg");
+  }
+
   .container {
     width: 100%;
     max-width: 1440px;

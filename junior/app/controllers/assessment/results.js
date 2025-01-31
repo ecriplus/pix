@@ -1,13 +1,30 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 
 export default class Missions extends Controller {
+  @service intl;
+
   get validatedObjectives() {
     return this.model.mission.validatedObjectives?.split('\n') ?? [];
   }
 
   get resultMessage() {
     return 'pages.missions.end-page.result.' + this.model.assessment.result.global;
+  }
+
+  get robotFeedBackMessage() {
+    const translationKeyArray = `pages.missions.feedback.result.${this.model.assessment.result?.global ?? 'not-reached'}.robot-text`;
+
+    return [this.intl.t(translationKeyArray + '.0'), this.intl.t(translationKeyArray + '.1')];
+  }
+
+  get feedbackClassName() {
+    if (this.model.assessment?.result?.global === 'exceeded' || this.model.assessment?.result?.global === 'reached') {
+      return 'result--success';
+    } else {
+      return 'result';
+    }
   }
 
   get robotMood() {
