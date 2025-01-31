@@ -85,7 +85,7 @@ import CertificationComments from './comments';
         <CertificationInfoField @value={{@certification.publishedText}} @edition={{false}} @label="Publiée :" />
       </div>
 
-      <div class="certification-informations__card {{if @editingCandidateInformations 'border-primary'}}">
+      <div class="certification-informations__card">
         <h2 class="certification-informations__card__title">Candidat</h2>
         <div class="certification-info-field">
           <span>Prénom :</span>
