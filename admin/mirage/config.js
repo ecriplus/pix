@@ -647,8 +647,8 @@ function _configureOrganizationsRoutes(context) {
 
   context.post('/admin/organizations/:organizationId/attach-child-organization', (schema, request) => {
     const parentOrganization = schema.organizations.find(request.params.organizationId);
-    const { childOrganizationId } = JSON.parse(request.requestBody);
-    const childOrganization = schema.organizations.find(childOrganizationId);
+    const { childOrganizationIds } = JSON.parse(request.requestBody);
+    const childOrganization = schema.organizations.find(childOrganizationIds[0]);
 
     childOrganization.update({
       parentOrganizationId: parentOrganization.id,

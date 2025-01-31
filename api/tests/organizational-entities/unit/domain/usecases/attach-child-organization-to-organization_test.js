@@ -1,11 +1,16 @@
 import { UnableToAttachChildOrganizationToParentOrganizationError } from '../../../../../src/organizational-entities/domain/errors.js';
 import { attachChildOrganizationToOrganization } from '../../../../../src/organizational-entities/domain/usecases/attach-child-organization-to-organization.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Domain | UseCases | attach-child-organization-to-organization', function () {
+describe('Unit | Organizational Entities | Domain | UseCases | attach-child-organization-to-organization', function () {
   let organizationForAdminRepository;
 
   beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+      return callback();
+    });
+
     organizationForAdminRepository = {
       findChildrenByParentOrganizationId: sinon.stub(),
       get: sinon.stub(),
@@ -17,12 +22,12 @@ describe('Unit | Domain | UseCases | attach-child-organization-to-organization',
     context('when attaching child organization to itself', function () {
       it('throws an UnableToAttachChildOrganizationToParentOrganization error', async function () {
         // given
-        const childOrganizationId = 1;
+        const childOrganizationIds = '1,2,3';
         const parentOrganizationId = 1;
 
         // when
         const error = await catchErr(attachChildOrganizationToOrganization)({
-          childOrganizationId,
+          childOrganizationIds,
           parentOrganizationId,
           organizationForAdminRepository,
         });
@@ -31,7 +36,7 @@ describe('Unit | Domain | UseCases | attach-child-organization-to-organization',
         expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
         expect(error.message).to.equal('Unable to attach child organization to itself');
         expect(error.code).to.equal('UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ITSELF');
-        expect(error.meta).to.deep.equal({ childOrganizationId, parentOrganizationId });
+        expect(error.meta).to.deep.equal({ childOrganizationId: 1, parentOrganizationId });
       });
     });
 
@@ -43,7 +48,7 @@ describe('Unit | Domain | UseCases | attach-child-organization-to-organization',
           name: 'Child Organization',
           parentOrganizationId: 321,
         });
-        const childOrganizationId = childOrganization.id;
+        const childOrganizationIds = `${childOrganization.id}`;
         const parentOrganizationId = 1;
 
         organizationForAdminRepository.get.resolves(childOrganization);
@@ -51,7 +56,7 @@ describe('Unit | Domain | UseCases | attach-child-organization-to-organization',
 
         // when
         const error = await catchErr(attachChildOrganizationToOrganization)({
-          childOrganizationId,
+          childOrganizationIds,
           parentOrganizationId,
           organizationForAdminRepository,
         });
@@ -62,7 +67,7 @@ describe('Unit | Domain | UseCases | attach-child-organization-to-organization',
         expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
         expect(error.message).to.equal('Unable to attach already attached child organization');
         expect(error.code).to.equal('UNABLE_TO_ATTACH_ALREADY_ATTACHED_CHILD_ORGANIZATION');
-        expect(error.meta).to.deep.equal({ childOrganizationId });
+        expect(error.meta).to.deep.equal({ childOrganizationId: 123 });
       });
     });
 
@@ -81,7 +86,7 @@ describe('Unit | Domain | UseCases | attach-child-organization-to-organization',
           type: 'PRO',
           parentOrganizationId: grandParentOrganizationId,
         });
-        const childOrganizationId = childOrganization.id;
+
         const parentOrganizationId = parentOrganization.id;
 
         organizationForAdminRepository.get.onCall(0).resolves(childOrganization);
@@ -90,7 +95,7 @@ describe('Unit | Domain | UseCases | attach-child-organization-to-organization',
 
         // when
         const error = await catchErr(attachChildOrganizationToOrganization)({
-          childOrganizationId,
+          childOrganizationIds: '123',
           parentOrganizationId,
           organizationForAdminRepository,
         });
@@ -134,7 +139,7 @@ describe('Unit | Domain | UseCases | attach-child-organization-to-organization',
 
         // when
         const error = await catchErr(attachChildOrganizationToOrganization)({
-          childOrganizationId,
+          childOrganizationIds: '123',
           parentOrganizationId,
           organizationForAdminRepository,
         });
@@ -182,7 +187,7 @@ describe('Unit | Domain | UseCases | attach-child-organization-to-organization',
 
         // when
         const error = await catchErr(attachChildOrganizationToOrganization)({
-          childOrganizationId,
+          childOrganizationIds: '123,5',
           parentOrganizationId,
           organizationForAdminRepository,
         });
@@ -206,26 +211,41 @@ describe('Unit | Domain | UseCases | attach-child-organization-to-organization',
   });
 
   context('success cases', function () {
-    it('attach child organization to parent organization', async function () {
+    it('attach each child organization to parent organization', async function () {
       // given
       const parentOrganizationId = 12;
-      const childOrganization = domainBuilder.buildOrganizationForAdmin({ id: 1234 });
+      const parentOrganization = domainBuilder.buildOrganizationForAdmin({ id: parentOrganizationId });
+      const firstChildOrganization = domainBuilder.buildOrganizationForAdmin({ id: 1234 });
+      const secondChildOrganization = domainBuilder.buildOrganizationForAdmin({ id: 567 });
 
-      organizationForAdminRepository.get.resolves(childOrganization);
-      organizationForAdminRepository.findChildrenByParentOrganizationId.resolves([]);
-      organizationForAdminRepository.update.resolves();
+      organizationForAdminRepository.get.onCall(0).resolves(firstChildOrganization);
+      organizationForAdminRepository.get.onCall(1).resolves(parentOrganization);
+
+      organizationForAdminRepository.get.onCall(2).resolves(secondChildOrganization);
+      organizationForAdminRepository.get.onCall(3).resolves(parentOrganization);
+
+      organizationForAdminRepository.findChildrenByParentOrganizationId.onCall(0).resolves([]);
+      organizationForAdminRepository.findChildrenByParentOrganizationId.onCall(1).resolves([]);
 
       // when
       await attachChildOrganizationToOrganization({
-        childOrganizationId: childOrganization.id,
+        childOrganizationIds: '1234, 567',
         parentOrganizationId,
         organizationForAdminRepository,
       });
 
       // then
-      const expectedChildOrganization = domainBuilder.buildOrganizationForAdmin({ id: 1234, parentOrganizationId });
-      expect(organizationForAdminRepository.get).to.have.been.calledWithExactly(childOrganization.id);
-      expect(organizationForAdminRepository.update).to.have.been.calledWith(expectedChildOrganization);
+      const expectedFirstChildOrganization = domainBuilder.buildOrganizationForAdmin({
+        id: 1234,
+        parentOrganizationId,
+      });
+      const expectedSecondChildOrganization = domainBuilder.buildOrganizationForAdmin({
+        id: 567,
+        parentOrganizationId,
+      });
+
+      expect(organizationForAdminRepository.update).to.have.been.calledWith(expectedFirstChildOrganization);
+      expect(organizationForAdminRepository.update).to.have.been.calledWith(expectedSecondChildOrganization);
     });
   });
 });

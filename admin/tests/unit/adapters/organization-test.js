@@ -68,18 +68,18 @@ module('Unit | Adapters | organization', function (hooks) {
   module('#attachChildOrganization', function () {
     test('sends an HTTP POST request', async function (assert) {
       // given
-      const childOrganizationId = 123;
+      const childOrganizationIds = '123,456';
       const parentOrganizationId = 2;
 
       // when
-      await adapter.attachChildOrganization({ childOrganizationId, parentOrganizationId });
+      await adapter.attachChildOrganization({ childOrganizationIds, parentOrganizationId });
 
       // then
       assert.true(
         adapter.ajax.calledOnceWithExactly(
           'http://localhost:3000/api/admin/organizations/2/attach-child-organization',
           'POST',
-          { data: { childOrganizationId } },
+          { data: { childOrganizationIds } },
         ),
       );
     });

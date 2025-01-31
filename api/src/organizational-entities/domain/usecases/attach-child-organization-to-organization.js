@@ -1,26 +1,35 @@
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
 
-async function attachChildOrganizationToOrganization({
-  childOrganizationId,
-  parentOrganizationId,
-  organizationForAdminRepository,
-}) {
-  _assertChildAndParentOrganizationIdsAreDifferent({ childOrganizationId, parentOrganizationId });
-  await _assertChildOrganizationDoesNotHaveChildren({ childOrganizationId, organizationForAdminRepository });
+const attachChildOrganizationToOrganization = withTransaction(
+  async ({ childOrganizationIds, parentOrganizationId, organizationForAdminRepository }) => {
+    const childOrganizationIdsArray = childOrganizationIds.split(',').map(Number);
 
-  const childOrganizationForAdmin = await organizationForAdminRepository.get(childOrganizationId);
+    for (const childOrganizationId of childOrganizationIdsArray) {
+      _assertChildAndParentOrganizationIdsAreDifferent({
+        childOrganizationId,
+        parentOrganizationId,
+      });
+      await _assertChildOrganizationDoesNotHaveChildren({ childOrganizationId, organizationForAdminRepository });
 
-  _assertChildOrganizationNotAlreadyAttached(childOrganizationForAdmin);
+      const childOrganizationForAdmin = await organizationForAdminRepository.get(childOrganizationId);
 
-  const parentOrganizationForAdmin = await organizationForAdminRepository.get(parentOrganizationId);
+      _assertChildOrganizationNotAlreadyAttached(childOrganizationForAdmin);
 
-  _assertParentOrganizationIsNotChildOrganization(parentOrganizationForAdmin);
-  _assertChildOrganizationHaveSameTypeAsParentOrganization({ childOrganizationForAdmin, parentOrganizationForAdmin });
+      const parentOrganizationForAdmin = await organizationForAdminRepository.get(parentOrganizationId);
 
-  childOrganizationForAdmin.updateParentOrganizationId(parentOrganizationId);
+      _assertParentOrganizationIsNotChildOrganization(parentOrganizationForAdmin);
+      _assertChildOrganizationHaveSameTypeAsParentOrganization({
+        childOrganizationForAdmin,
+        parentOrganizationForAdmin,
+      });
 
-  await organizationForAdminRepository.update(childOrganizationForAdmin);
-}
+      childOrganizationForAdmin.updateParentOrganizationId(parentOrganizationId);
+
+      await organizationForAdminRepository.update(childOrganizationForAdmin);
+    }
+  },
+);
 
 export { attachChildOrganizationToOrganization };
 

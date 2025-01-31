@@ -282,14 +282,22 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
   describe('POST /api/admin/organizations/{organizationId}/attach-child-organization', function () {
     context('success cases', function () {
       let parentOrganizationId;
-      let childOrganization;
+      let firstChildOrganization;
+      let secondChildOrganization;
 
       beforeEach(async function () {
         parentOrganizationId = databaseBuilder.factory.buildOrganization({
           name: 'Parent Organization',
           type: 'SCO',
         }).id;
-        childOrganization = databaseBuilder.factory.buildOrganization({ name: 'Parent Organization', type: 'SCO' });
+        firstChildOrganization = databaseBuilder.factory.buildOrganization({
+          name: 'child Organization',
+          type: 'SCO',
+        });
+        secondChildOrganization = databaseBuilder.factory.buildOrganization({
+          name: 'child Organization',
+          type: 'SCO',
+        });
         await databaseBuilder.commit();
       });
 
@@ -301,7 +309,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
             headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
             payload: {
-              childOrganizationId: childOrganization.id,
+              childOrganizationIds: `${firstChildOrganization.id},${secondChildOrganization.id}`,
             },
           };
 
@@ -309,9 +317,15 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const response = await server.inject(options);
 
           // then
-          const updatedChildOrganization = await knex('organizations').where({ id: childOrganization.id }).first();
+          const updatedFirstChildOrganization = await knex('organizations')
+            .where({ id: firstChildOrganization.id })
+            .first();
+          const updatedSecondChildOrganization = await knex('organizations')
+            .where({ id: secondChildOrganization.id })
+            .first();
           expect(response.statusCode).to.equal(204);
-          expect(updatedChildOrganization.parentOrganizationId).to.equal(parentOrganizationId);
+          expect(updatedFirstChildOrganization.parentOrganizationId).to.equal(parentOrganizationId);
+          expect(updatedSecondChildOrganization.parentOrganizationId).to.equal(parentOrganizationId);
         });
       });
     });
@@ -340,7 +354,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
                 url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
                 headers: generateAuthenticatedUserRequestHeaders({ userId }),
                 payload: {
-                  childOrganizationId,
+                  childOrganizationIds: `${childOrganizationId}`,
                 },
               };
 
@@ -364,7 +378,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
               headers: generateAuthenticatedUserRequestHeaders({ userId }),
               payload: {
-                childOrganizationId,
+                childOrganizationIds: `${childOrganizationId}`,
               },
             };
 
@@ -398,7 +412,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               url: `/api/admin/organizations/985421/attach-child-organization`,
               headers: generateAuthenticatedUserRequestHeaders({ userId }),
               payload: {
-                childOrganizationId,
+                childOrganizationIds: `${childOrganizationId}`,
               },
             };
 
@@ -418,7 +432,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
               headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
               payload: {
-                childOrganizationId: 984512,
+                childOrganizationIds: '984512',
               },
             };
 
@@ -442,7 +456,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
             headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
             payload: {
-              childOrganizationId: parentOrganizationId,
+              childOrganizationIds: `${parentOrganizationId}`,
             },
           };
 
@@ -477,7 +491,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
             headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
             payload: {
-              childOrganizationId,
+              childOrganizationIds: `${childOrganizationId}`,
             },
           };
 
@@ -512,7 +526,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
             headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
             payload: {
-              childOrganizationId,
+              childOrganizationIds: `${childOrganizationId}`,
             },
           };
 
@@ -544,7 +558,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
             headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
             payload: {
-              childOrganizationId,
+              childOrganizationIds: `${childOrganizationId}`,
             },
           };
 
@@ -582,7 +596,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
             headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
             payload: {
-              childOrganizationId,
+              childOrganizationIds: `${childOrganizationId}`,
             },
           };
 

@@ -42,7 +42,7 @@ module('Unit | Controller | authenticated/organizations/get/children', function 
       assert.true(store.adapterFor.calledWithExactly('organization'));
       assert.true(
         organizationAdapter.attachChildOrganization.calledWithExactly({
-          childOrganizationId: '1234',
+          childOrganizationIds: '1234',
           parentOrganizationId: '12',
         }),
       );

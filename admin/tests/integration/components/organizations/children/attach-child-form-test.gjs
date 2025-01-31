@@ -13,9 +13,13 @@ module('Integration | Component |  organizations/children/attach-child-form', fu
     const screen = await renderScreen(<template><AttachChildForm /></template>);
 
     // then
-    assert.dom(screen.getByRole('form', { name: `Formulaire d'ajout d'une organisation fille` })).exists();
+    assert.dom(screen.getByRole('form', { name: `Formulaire d'ajout d'organisation(s) fille(s)` })).exists();
     assert
-      .dom(screen.getByRole('textbox', { name: `Ajouter une organisation fille ID de l'organisation à ajouter` }))
+      .dom(
+        screen.getByRole('textbox', {
+          name: `Ajouter une ou plusieurs organisations filles ID d'organisation(s) à ajouter`,
+        }),
+      )
       .exists();
     assert.dom(screen.getByRole('button', { name: 'Ajouter' })).exists();
   });
@@ -25,7 +29,7 @@ module('Integration | Component |  organizations/children/attach-child-form', fu
       // given
       const onFormSubmitted = sinon.stub();
       const screen = await renderScreen(<template><AttachChildForm @onFormSubmitted={{onFormSubmitted}} /></template>);
-      await fillByLabel(`Ajouter une organisation fille ID de l'organisation à ajouter`, '12345');
+      await fillByLabel(`Ajouter une ou plusieurs organisations filles ID d'organisation(s) à ajouter`, '12345');
 
       // when
       await clickByName('Ajouter');
@@ -33,7 +37,11 @@ module('Integration | Component |  organizations/children/attach-child-form', fu
       // then
       assert.true(onFormSubmitted.calledOnceWithExactly('12345'));
       assert
-        .dom(screen.getByRole('textbox', { name: `Ajouter une organisation fille ID de l'organisation à ajouter` }))
+        .dom(
+          screen.getByRole('textbox', {
+            name: `Ajouter une ou plusieurs organisations filles ID d'organisation(s) à ajouter`,
+          }),
+        )
         .hasValue('');
     });
   });

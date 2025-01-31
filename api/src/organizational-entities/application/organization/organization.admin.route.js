@@ -96,7 +96,7 @@ const register = async function (server) {
             organizationId: identifiersType.organizationId,
           }),
           payload: Joi.object({
-            childOrganizationId: identifiersType.organizationId,
+            childOrganizationIds: Joi.string().required(),
           }),
         },
         handler: (request, h) => organizationAdminController.attachChildOrganization(request, h),

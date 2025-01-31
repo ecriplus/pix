@@ -14,15 +14,15 @@ module('Unit | Component | organizations/children/attach-child-form', function (
   });
 
   module('when form input value changes', function () {
-    test('updates "childOrganization" component attribute', function (assert) {
+    test('updates "childOrganizationIds" component attribute', function (assert) {
       // given
-      const event = { target: { value: '5432' } };
+      const event = { target: { value: '5432,789' } };
 
       // when
       component.childOrganizationInputValueChanged(event);
 
       // then
-      assert.strictEqual(component.childOrganization, '5432');
+      assert.strictEqual(component.childOrganizationIds, '5432,789');
     });
   });
 
@@ -32,7 +32,7 @@ module('Unit | Component | organizations/children/attach-child-form', function (
       const onFormSubmitted = sinon.stub();
       const event = { preventDefault: sinon.stub() };
 
-      component.childOrganization = '1234';
+      component.childOrganizationIds = '1234';
       component.args.onFormSubmitted = onFormSubmitted;
 
       // when
@@ -41,7 +41,7 @@ module('Unit | Component | organizations/children/attach-child-form', function (
       // then
       assert.true(event.preventDefault.calledOnce);
       assert.true(onFormSubmitted.calledOnceWithExactly('1234'));
-      assert.strictEqual(component.childOrganization, '');
+      assert.strictEqual(component.childOrganizationIds, '');
     });
   });
 });

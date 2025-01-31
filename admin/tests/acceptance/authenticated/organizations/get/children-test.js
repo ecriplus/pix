@@ -66,7 +66,7 @@ module('Acceptance | Organizations | Children', function (hooks) {
       const screen = await visit(`/organizations/${parentOrganizationId}/children`);
 
       // then
-      assert.dom(screen.getByRole('form', { name: `Formulaire d'ajout d'une organisation fille` })).exists();
+      assert.dom(screen.getByRole('form', { name: `Formulaire d'ajout d'organisation(s) fille(s)` })).exists();
     });
 
     module('when attaching child organization', function () {
@@ -75,7 +75,7 @@ module('Acceptance | Organizations | Children', function (hooks) {
         const parentOrganization = this.server.create('organization', { id: 1, name: 'Parent Organization Name' });
         this.server.create('organization', { id: 2, name: 'Child Organization Name' });
         const screen = await visit(`/organizations/${parentOrganization.id}/children`);
-        await fillByLabel(`Ajouter une organisation fille ID de l'organisation à ajouter`, '2');
+        await fillByLabel(`Ajouter une ou plusieurs organisations filles ID d'organisation(s) à ajouter`, '2');
 
         // when
         await clickByName('Ajouter');
@@ -102,7 +102,9 @@ module('Acceptance | Organizations | Children', function (hooks) {
         const screen = await visit(`/organizations/${parentOrganizationId}/children`);
 
         // then
-        assert.dom(screen.queryByRole('form', { name: `Formulaire d'ajout d'une organisation fille` })).doesNotExist();
+        assert
+          .dom(screen.queryByRole('form', { name: `Formulaire d'ajout d'organisation(s) fille(s)` }))
+          .doesNotExist();
       });
     });
   });

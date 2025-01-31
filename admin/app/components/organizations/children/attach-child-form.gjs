@@ -7,18 +7,18 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 export default class OrganizationsChildrenAttachChildFormComponent extends Component {
-  @tracked childOrganization = '';
+  @tracked childOrganizationIds = '';
 
   @action
   childOrganizationInputValueChanged(event) {
-    this.childOrganization = event.target.value;
+    this.childOrganizationIds = event.target.value;
   }
 
   @action
   submitForm(event) {
     event.preventDefault();
-    this.args.onFormSubmitted(this.childOrganization);
-    this.childOrganization = '';
+    this.args.onFormSubmitted(this.childOrganizationIds);
+    this.childOrganizationIds = '';
   }
 
   <template>
@@ -29,9 +29,9 @@ export default class OrganizationsChildrenAttachChildFormComponent extends Compo
     >
       <div class="organization__attach-child-form__content">
         <PixInput
-          @id="child-organization"
+          @id="child-organizations"
           @subLabel={{t "components.organizations.children.attach-child-form.input-information"}}
-          value={{this.childOrganization}}
+          value={{this.childOrganizationIds}}
           {{on "change" this.childOrganizationInputValueChanged}}
         >
           <:label>{{t "components.organizations.children.attach-child-form.input-label"}}</:label>
