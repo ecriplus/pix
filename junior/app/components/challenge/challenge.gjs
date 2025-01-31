@@ -50,7 +50,9 @@ export default class Challenge extends Component {
   }
 
   get disableCheckButton() {
-    return this.answerValue === null || this.answerValue === '';
+    const autoReplyAndAnswerNotValidated = this.args.challenge.isEmbedAutoValidated && !this.answerHasBeenValidated;
+
+    return autoReplyAndAnswerNotValidated || this.answerValue === null || this.answerValue === '';
   }
 
   get disableLessonButton() {
