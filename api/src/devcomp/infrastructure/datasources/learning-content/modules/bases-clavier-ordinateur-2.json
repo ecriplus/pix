@@ -246,7 +246,7 @@
           "element": {
             "id": "8825fd1b-f7d3-4ace-bf5e-8637f8c308e4",
             "type": "image",
-            "url": "https://i.imgur.com/BL4JEYa.jpeg",
+            "url": "https://i.imgur.com/54F0jFf.jpeg",
             "alt": "Schéma d'une touche comportant deux caractères. ",
             "alternativeText": "<ul><li>Quand on appuie sur cette touche en appuyant en même temps sur la touche Majuscule, c'est le 1 (qui est présent en haut de la touche) qui est tapé à l'écran.</li><li>Quand on appuie seulement sur cette touche, c'est le &amp; (qui est présent en bas de la touche) qui est tapé à l'écran.</li></ul>",
             "legend": "",
@@ -353,9 +353,29 @@
         {
           "type": "element",
           "element": {
+            "id": "2852b780-a88f-4142-84b4-c575ef63201d",
+            "type": "text",
+            "content": "<p>La <strong>touche Alt&nbsp;Gr</strong> permet de faire apparaître les caractères situés en bas à droite des touches. Elle s’utilise de la même manière que la touche majuscule.</p>"
+          }
+        },
+           {
+          "type": "element",
+          "element": {
+            "id": "172ad359-9878-4308-940a-5cdf64019769",
+            "type": "image",
+            "url": "https://i.imgur.com/Px4JGyt.jpeg",
+            "alt": "",
+            "alternativeText": "",
+            "legend": "",
+            "licence": ""
+          }
+        },
+        {
+          "type": "element",
+          "element": {
             "id": "423d899e-e24d-4666-8f74-17c137279122",
             "type": "text",
-            "content": "<p>La <strong>touche Alt&nbsp;Gr</strong> permet de faire apparaître les caractères situés en bas à droite des touches. Elle s’utilise de la même manière que la touche majuscule.&nbsp;<br>Pour taper le caractère situé en bas à droite sur la touche, maintenez appuyée la <strong>touche Alt&nbsp;Gr</strong> et appuyez sur la touche du caractère.</p>"
+            "content": "<p>Pour taper le caractère situé en bas à droite sur la touche, maintenez appuyée la <strong>touche Alt&nbsp;Gr</strong> et appuyez sur la touche du caractère.</p>"
           }
         },
         {
@@ -363,7 +383,7 @@
           "element": {
             "id": "6c7f82e6-5630-4f60-bf6d-a5509e1247ca",
             "type": "image",
-            "url": "https://i.imgur.com/PwfPqUJ.jpeg",
+            "url": "https://i.imgur.com/LnTMLS7.jpeg",
             "alt": "",
             "alternativeText": "",
             "legend": "",
@@ -413,7 +433,7 @@
           "element": {
             "id": "2db48eb5-d71e-4050-9aeb-0aab60d10da6",
             "type": "image",
-            "url": "https://i.imgur.com/aTIEvLr.png",
+            "url": "https://i.imgur.com/dH03MS3.png",
             "alt": "Carte d'identité de Jean-Tobias Piéchaud",
             "alternativeText": "<p>Carte d'identité contenant les informations suivantes :</p><ul><li>Piéchaud, </li><li>Jean-Tobias </li><li>26/03/1984</li><li>téléphone : 06 39 98 12 74</li><li>mail : j-t.piechaud@pixmail.org</li></ul>",
             "legend": "",
