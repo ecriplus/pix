@@ -111,7 +111,7 @@ export default class ChallengeContent extends Component {
         <div class="challenge-content__autoreply">
           <AutoReply
             @validateAnswer={{@validateAnswer}}
-            @isEmbedAutoValidated={{@challenge.isEmbedAutoValidated}}
+            @hasEmbedInternalValidation={{@challenge.hasEmbedInternalValidation}}
             @setAnswerValue={{@setAnswerValue}}
           />
         </div>
@@ -121,7 +121,7 @@ export default class ChallengeContent extends Component {
         @skipChallenge={{@skipChallenge}}
         @level={{@activity.level}}
         @nextAction={{@resume}}
-        @isLesson={{@challenge.isLesson}}
+        @noValidationNeeded={{@challenge.noValidationNeeded}}
         @disableCheckButton={{@disableCheckButton}}
         @disableLessonButton={{@disableLessonButton}}
         @answerHasBeenValidated={{@answerHasBeenValidated}}

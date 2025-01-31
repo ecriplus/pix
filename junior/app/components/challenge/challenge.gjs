@@ -50,7 +50,8 @@ export default class Challenge extends Component {
   }
 
   get disableCheckButton() {
-    const autoReplyAndAnswerNotValidated = this.args.challenge.isEmbedAutoValidated && !this.answerHasBeenValidated;
+    const autoReplyAndAnswerNotValidated =
+      this.args.challenge.hasEmbedInternalValidation && !this.answerHasBeenValidated;
 
     return autoReplyAndAnswerNotValidated || this.answerValue === null || this.answerValue === '';
   }

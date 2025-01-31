@@ -20,7 +20,7 @@ export default class AutoReply extends Component {
     if (message && message.answer && message.from === 'pix') {
       this.args.setAnswerValue(message.answer);
 
-      if (this.args.isEmbedAutoValidated) {
+      if (this.args.hasEmbedInternalValidation) {
         this.args.validateAnswer();
       }
     }

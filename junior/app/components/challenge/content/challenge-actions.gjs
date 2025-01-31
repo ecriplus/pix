@@ -10,7 +10,7 @@ export default class ChallengeActions extends Component {
 
   <template>
     <div class="challenge-actions">
-      {{#unless (or this.hideSkipButton @isLesson)}}
+      {{#unless (or this.hideSkipButton @noValidationNeeded)}}
         <PixButton class="pix1d-button pix1d-button--skip" @triggerAction={{@skipChallenge}} @size="large">
           <span>
             {{t "pages.challenge.actions.skip"}}
@@ -28,7 +28,7 @@ export default class ChallengeActions extends Component {
             {{t "pages.challenge.actions.continue"}}
           </span>
         </PixButton>
-      {{else if @isLesson}}
+      {{else if @noValidationNeeded}}
         <PixButton
           class="pix1d-button"
           @iconAfter="arrowRight"

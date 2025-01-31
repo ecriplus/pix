@@ -7,7 +7,7 @@ export default Factory.extend({
   embedTitle: 'Applications',
   proposals: 'Rue de : ${Rue#}',
   autoReply: false,
-  focused: false,
+  noValidationNeeded: false,
 
   withInstructions: trait({
     instructions: ['Dans le village de Montrésor (37, France), sur quelle rue débouche la rue des Perrières ?'],
@@ -15,7 +15,7 @@ export default Factory.extend({
 
   lesson: trait({
     instructions: ['Dans le village de Montrésor (37, France), sur quelle rue débouche la rue des Perrières ?'],
-    focused: true,
+    noValidationNeeded: true,
   }),
 
   QROCWithTextArea: trait({

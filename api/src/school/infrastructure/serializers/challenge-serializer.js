@@ -17,8 +17,6 @@ const serialize = function (challenges) {
       'illustrationAlt',
       'format',
       'autoReply',
-      'focused',
-      'timer',
       'shuffled',
       'hasEmbedInternalValidation',
       'noValidationNeeded',
