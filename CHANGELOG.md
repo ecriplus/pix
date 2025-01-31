@@ -1,5 +1,13 @@
 # Pix Changelog
 
+## v5.33.0 (31/01/2025)
+
+
+### :rocket: Amélioration
+- [#11278](https://github.com/1024pix/pix/pull/11278) [FEATURE] Appliquer un ratio aux embeds GDevelop (PIX-16168).
+- [#11258](https://github.com/1024pix/pix/pull/11258) [FEATURE] Create module decouverte-de-l-ent.json.
+- [#11271](https://github.com/1024pix/pix/pull/11271) [FEATURE] Ne plus afficher la colonne "memberships.updatedat" dans Pix Admin (PIX-15618).
+
 ## v5.32.0 (30/01/2025)
 
 
