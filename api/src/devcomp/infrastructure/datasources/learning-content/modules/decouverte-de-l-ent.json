@@ -5,7 +5,7 @@
   "isBeta": true,
  "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>Aujourd’hui, le numérique fait partie du quotidien des familles, à la maison comme à l’école&#8239;! <span aria-hidden=\"\\&quot;true\\&quot;\">🎒</span></p><p>Dans ce module, partez à la découverte de l’espace numérique de travail (ENT), l’outil numérique utilisé dans les établissements scolaires.</p>",
+    "description": "<p>Aujourd’hui, le numérique fait partie du quotidien des familles, à la maison comme à l’école&#8239;! <span aria-hidden=\"true\">🎒</span></p><p>Dans ce module, partez à la découverte de l’espace numérique de travail (ENT), l’outil numérique utilisé dans les établissements scolaires.</p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
@@ -18,7 +18,7 @@
   "transitionTexts": [
     {
       "grainId": "fd85068b-9126-4a6f-a53c-0179252c7b73",
-      "content": "<p>Ava vient de finir sa première semaine au collège.<span aria-hidden=\"true\">🎒</span></p><p>À la maison, Ava raconte sa journée à son père, Martin.</p><p>Lancez la vidéo pour voir leur discussion.<span aria-hidden=\"\\&quot;true\\&quot;\"> ▶️ </span></p>"
+      "content": "<p>Ava vient de finir sa première semaine au collège.<span aria-hidden=\"true\">🎒</span></p><p>À la maison, Ava raconte sa journée à son père, Martin.</p><p>Lancez la vidéo pour voir leur discussion.<span aria-hidden=\"true\"> ▶️ </span></p>"
     },
     {
       "grainId": "f2c81b8b-1574-4304-bd69-8ed05f579794",
@@ -39,6 +39,10 @@
     {
       "grainId": "6c2e4b2c-bc41-4fd3-a8e3-d904fcede740",
       "content": "<p>À présent, revenons en vidéo sur les différents comptes qui existent sur l'ENT et plus particulièrement sur le compte parent.</p>"
+    },
+    {
+      "grainId": "84f9134e-6a19-4673-a673-d4577355796a",
+      "content": "<p>Maintenant, testez votre mémoire. <span aria-hidden=\"true\">🎯</span></p>"
     }
   ],
   "grains": [
@@ -111,7 +115,7 @@
           "element": {
             "id": "d3f646e0-1c3d-42bf-a604-9e8e9c2a29a9",
             "type": "text",
-            "content": "<h3>L’espace numérique de travail (ENT) est le service en ligne proposé par l’établissement scolaire.</h3><p></p><p>L’ENT est utilisé par les élèves, les enseignants, les parents et les personnels d’éducation (CPE, principal, ...).</p><p>Il est accessible sur ordinateur, smartphone et tablette.</p><p><span aria-hidden=\"\\&quot;true\\&quot;\">💡</span> L’ENT est sécurisé et il protège l’accès aux données personnelles des parents et des enfants.</p>"
+            "content": "<h3>L’espace numérique de travail (ENT) est le service en ligne proposé par l’établissement scolaire.</h3><p></p><p>L’ENT est utilisé par les élèves, les enseignants, les parents et les personnels d’éducation (CPE, principal, ...).</p><p>Il est accessible sur ordinateur, smartphone et tablette.</p><p><span aria-hidden=\"true\">💡</span> L’ENT est sécurisé et il protège l’accès aux données personnelles des parents et des enfants.</p>"
           }
         },
         {
@@ -136,7 +140,7 @@
           "element": {
             "id": "9751eb8f-09c7-4a6b-898f-47c84220386e",
             "type": "text",
-            "content": "<h3>L’ENT permet aux parents de suivre au quotidien la scolarité de leurs enfants&nbsp;:</h3> <p><br></p><ul><li>voir l’emploi du temps,</li><li>communiquer avec l’établissement scolaire,</li><li>consulter le cahier de textes numérique.</li></ul><p><span aria-hidden=\"true\">👉</span> En début d’année, l’établissement scolaire donne les informations pour se connecter à l’ENT&nbsp;: le lien vers l’ENT, un identifiant et un mot de passe. Il faut conserver ces informations tout au long de l'année. </p><p>Souvent, le compte Educonnect permet de se connecter à l'ENT.</p>"
+            "content": "<h3>L’ENT permet aux parents de suivre au quotidien la scolarité de leurs enfants&nbsp;:</h3><ul><li>voir l’emploi du temps,</li><li>communiquer avec l’établissement scolaire,</li><li>consulter le cahier de textes numérique.</li></ul><p><span aria-hidden=\"true\">👉</span> En début d’année, l’établissement scolaire donne les informations pour se connecter à l’ENT&nbsp;: le lien vers l’ENT, un identifiant et un mot de passe. Il faut conserver ces informations tout au long de l'année. </p><p>Souvent, le compte Educonnect permet de se connecter à l'ENT.</p>"
           }
         },
         {
@@ -182,7 +186,7 @@
                     {
                       "id": "1",
                       "content": "<p>vrai</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse&#8239;!<span aria-hidden=\"true\">🎉</span></span></p><p>L’ENT est accessible sur ordinateur, smartphone et tablette.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse&#8239;! <span aria-hidden=\"true\">🎉</span></span></p><p>L’ENT est accessible sur ordinateur, smartphone et tablette.</p>"
                     },
                     {
                       "id": "2",
@@ -204,7 +208,7 @@
                     {
                       "id": "1",
                       "content": "<p>vrai</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse&#8239;!<span aria-hidden=\"true\">🎉</span></span></p><p>Les informations pour se connecter sont fournies en début d’année par le collège.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse&#8239;! <span aria-hidden=\"true\">🎉</span></span></p><p>Les informations pour se connecter sont fournies en début d’année par le collège.</p>"
                     },
                     {
                       "id": "2",
@@ -231,7 +235,7 @@
                     {
                       "id": "2",
                       "content": "<p>faux</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse&#8239;!<span aria-hidden=\"true\">🎉</span></span></p><p>En fonction de leur département, les collèges n’utilisent pas le même ENT.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse&#8239;! <span aria-hidden=\"true\">🎉</span></span></p><p>En fonction de leur département, les collèges n’utilisent pas le même ENT.</p>"
                     }
                   ],
                   "solution": "2"
@@ -252,7 +256,7 @@
           "element": {
             "id": "0468f3c9-f946-4309-9768-4fda3f28a4b2",
             "type": "text",
-            "content": "<h3><span aria-hidden=\"\\&quot;true\\&quot;\"> 📌 </span> Résumons avant de passer à la suite&nbsp;:</h3><p><br></p><ul>    <li>L’ENT est utilisé par les parents, les élèves, les professeurs et les personnels d’éducation.</li>    <li>Vous pouvez accéder à l’ENT avec un identifiant et un mot de passe, fournis par l'établissement scolaire, depuis un ordinateur, une tablette, un smartphone.</li>    <li>Tous les établissements scolaires n'utilisent pas le même ENT. Les ENT proposent tous des fonctionnalités qui se ressemblent&nbsp;: messagerie, emploi du temps, cahier de textes, ...</li></ul>"
+            "content": "<h3><span aria-hidden=\"true\"> 📌 </span> Résumons avant de passer à la suite&nbsp;:</h3><ul>    <li>L’ENT est utilisé par les parents, les élèves, les professeurs et les personnels d’éducation.</li>    <li>Vous pouvez accéder à l’ENT avec un identifiant et un mot de passe, fournis par l'établissement scolaire, depuis un ordinateur, une tablette, un smartphone.</li>    <li>Tous les établissements scolaires n'utilisent pas le même ENT. Les ENT proposent tous des fonctionnalités qui se ressemblent&nbsp;: messagerie, emploi du temps, cahier de textes, ...</li></ul>"
           }
         }
       ]
@@ -304,7 +308,7 @@
                     },
                     {
                       "id": "4",
-                      "content": "<p>Documents</p>",
+                      "content": "<p>les documents</p>",
                       "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>L’application Documents permet de consulter des documents partagés, mais ce n’est pas l’application à utiliser dans ce cas.</p>"
                     },
                     {
@@ -508,7 +512,7 @@
           "element": {
             "id": "5a4495bc-22f5-4a9a-aad5-531071bf33c9",
             "type": "text",
-            "content": "<p><strong>Pour chaque carte</strong>&nbsp;:&nbsp; </p><ol>    <li>Lisez la question. <span aria-hidden=\"true\">👀</span></li>    <li>Essayez de trouver la réponse dans votre tête. <span aria-hidden=\"\\&quot;true\\&quot;\">🤔</span></li>    <li>Retourner la carte en cliquant sur Voir la réponse. <span aria-hidden=\"\\&quot;true\\&quot;\">↪️</span></li></ol><p>Cela permet de <strong>tester votre mémoire</strong>.<span aria-hidden=\"\\&quot;true\\&quot;\">🎯</span></p>"
+            "content": "<p><strong>Pour chaque carte</strong>&nbsp;:&nbsp; </p><ol>    <li>Lisez la question. <span aria-hidden=\"true\">👀</span></li>    <li>Essayez de trouver la réponse dans votre tête. <span aria-hidden=\"true\">🤔</span></li>    <li>Retourner la carte en cliquant sur Voir la réponse. <span aria-hidden=\"true\">↪️</span></li></ol>"
           }
         },
         {
