@@ -48,6 +48,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
           locales: ['fr'],
           competenceId: 'competenceIdA',
           skillId: 'skillIdA',
+          hasEmbedInternalValidation: true,
+          noValidationNeeded: true,
         },
         {
           id: 'challengeIdB',
@@ -87,6 +89,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
           locales: ['en', 'nl'],
           competenceId: 'competenceIdB',
           skillId: 'skillIdB',
+          hasEmbedInternalValidation: true,
+          noValidationNeeded: false,
         },
         {
           id: 'challengeIdC',
@@ -126,6 +130,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
           locales: ['en'],
           competenceId: 'competenceIdC',
           skillId: 'skillIdC',
+          hasEmbedInternalValidation: false,
+          noValidationNeeded: true,
         },
       ];
 
@@ -174,6 +180,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
           locales: ['fr'],
           competenceId: 'competenceIdA',
           skillId: 'skillIdA',
+          hasEmbedInternalValidation: true,
+          noValidationNeeded: true,
         },
         {
           id: 'challengeIdB',
@@ -213,6 +221,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
           locales: ['en', 'nl'],
           competenceId: 'competenceIdB',
           skillId: 'skillIdB',
+          hasEmbedInternalValidation: true,
+          noValidationNeeded: false,
         },
         {
           id: 'challengeIdC',
@@ -252,6 +262,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
           locales: ['en'],
           competenceId: 'competenceIdC',
           skillId: 'skillIdC',
+          hasEmbedInternalValidation: false,
+          noValidationNeeded: true,
         },
       ]);
     });
@@ -297,6 +309,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
           locales: ['fr'],
           competenceId: 'competenceIdA',
           skillId: 'skillIdA',
+          hasEmbedInternalValidation: true,
+          noValidationNeeded: false,
         });
         databaseBuilder.factory.learningContent.buildChallenge({
           id: 'challengeIdB',
@@ -336,6 +350,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
           locales: ['en', 'nl'],
           competenceId: 'competenceIdB',
           skillId: 'skillIdB',
+          hasEmbedInternalValidation: false,
+          noValidationNeeded: true,
         });
         await databaseBuilder.commit();
 
@@ -378,6 +394,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
             locales: ['fr', 'fr-fr'],
             competenceId: 'competenceIdA modified',
             skillId: 'skillIdA modified',
+            hasEmbedInternalValidation: false,
+            noValidationNeeded: true,
           },
           {
             id: 'challengeIdC',
@@ -417,6 +435,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
             locales: ['en'],
             competenceId: 'competenceIdC',
             skillId: 'skillIdC',
+            hasEmbedInternalValidation: true,
+            noValidationNeeded: true,
           },
         ];
 
@@ -465,6 +485,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
             locales: ['fr', 'fr-fr'],
             competenceId: 'competenceIdA modified',
             skillId: 'skillIdA modified',
+            hasEmbedInternalValidation: false,
+            noValidationNeeded: true,
           },
           {
             id: 'challengeIdB',
@@ -504,6 +526,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
             locales: ['en', 'nl'],
             competenceId: 'competenceIdB',
             skillId: 'skillIdB',
+            hasEmbedInternalValidation: false,
+            noValidationNeeded: true,
           },
           {
             id: 'challengeIdC',
@@ -543,6 +567,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
             locales: ['en'],
             competenceId: 'competenceIdC',
             skillId: 'skillIdC',
+            hasEmbedInternalValidation: true,
+            noValidationNeeded: true,
           },
         ]);
       });
@@ -595,6 +621,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
         locales: ['fr'],
         competenceId: 'competenceIdA',
         skillId: 'skillIdA',
+        hasEmbedInternalValidation: true,
+        noValidationNeeded: true,
       };
 
       // when
@@ -646,6 +674,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
         locales: ['fr'],
         competenceId: 'competenceIdA',
         skillId: 'skillIdA',
+        hasEmbedInternalValidation: true,
+        noValidationNeeded: true,
       });
     });
 
@@ -689,6 +719,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
         locales: ['fr'],
         competenceId: 'competenceIdA',
         skillId: 'skillIdA',
+        hasEmbedInternalValidation: true,
+        noValidationNeeded: true,
       });
       await databaseBuilder.commit();
       const challengeDto = {
@@ -729,6 +761,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
         locales: ['fr', 'fr-fr'],
         competenceId: 'competenceIdA modified',
         skillId: 'skillIdA modified',
+        hasEmbedInternalValidation: false,
+        noValidationNeeded: false,
       };
 
       // when
@@ -780,6 +814,8 @@ describe('Learning Content | Integration | Repositories | Challenge', function (
         locales: ['fr', 'fr-fr'],
         competenceId: 'competenceIdA modified',
         skillId: 'skillIdA modified',
+        hasEmbedInternalValidation: false,
+        noValidationNeeded: false,
       });
     });
   });

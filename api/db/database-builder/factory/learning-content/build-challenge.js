@@ -38,6 +38,8 @@ export function buildChallenge({
   locales = ['fr'],
   competenceId = null,
   skillId = null,
+  hasEmbedInternalValidation = false,
+  noValidationNeeded = false,
 } = {}) {
   return buildChallengeInDB({
     id,
@@ -77,6 +79,8 @@ export function buildChallenge({
     locales,
     competenceId,
     skillId,
+    hasEmbedInternalValidation,
+    noValidationNeeded,
   });
 }
 
@@ -118,6 +122,8 @@ export function buildChallengeWithNoDefaultValues({
   locales,
   competenceId,
   skillId,
+  hasEmbedInternalValidation,
+  noValidationNeeded,
 }) {
   return buildChallengeInDB({
     id,
@@ -157,6 +163,8 @@ export function buildChallengeWithNoDefaultValues({
     locales,
     competenceId,
     skillId,
+    hasEmbedInternalValidation,
+    noValidationNeeded,
   });
 }
 
@@ -198,6 +206,8 @@ function buildChallengeInDB({
   locales,
   competenceId,
   skillId,
+  hasEmbedInternalValidation,
+  noValidationNeeded,
 }) {
   const values = {
     id,
@@ -237,6 +247,8 @@ function buildChallengeInDB({
     locales,
     competenceId,
     skillId,
+    hasEmbedInternalValidation,
+    noValidationNeeded,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'learningcontent.challenges',
