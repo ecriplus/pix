@@ -89,6 +89,8 @@ class Challenge {
     alternativeVersion,
     blindnessCompatibility,
     colorBlindnessCompatibility,
+    hasEmbedInternalValidation,
+    noValidationNeeded,
   } = {}) {
     this.id = id;
     this.answer = answer;
@@ -121,6 +123,8 @@ class Challenge {
     this.alternativeVersion = alternativeVersion;
     this.blindnessCompatibility = blindnessCompatibility;
     this.colorBlindnessCompatibility = colorBlindnessCompatibility;
+    this.hasEmbedInternalValidation = hasEmbedInternalValidation;
+    this.noValidationNeeded = noValidationNeeded;
   }
 
   isTimed() {

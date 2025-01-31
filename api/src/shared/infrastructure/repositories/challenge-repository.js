@@ -256,6 +256,8 @@ function toDomain({ challengeDto, webComponentTagName, webComponentProps, skill,
     blindnessCompatibility: challengeDto.accessibility1,
     colorBlindnessCompatibility: challengeDto.accessibility2,
     successProbabilityThreshold,
+    hasEmbedInternalValidation: challengeDto.hasEmbedInternalValidation,
+    noValidationNeeded: challengeDto.noValidationNeeded,
   });
 }
 

@@ -29,6 +29,8 @@ describe('Unit | Serializer | challenge-serializer', function () {
         focused: false,
         illustrationAlt: 'alt',
         autoReply: false,
+        hasEmbedInternalValidation: true,
+        noValidationNeeded: true,
       });
 
       // when
@@ -58,6 +60,8 @@ describe('Unit | Serializer | challenge-serializer', function () {
             timer: 300,
             'illustration-alt': 'alt',
             'auto-reply': false,
+            'has-embed-internal-validation': true,
+            'no-validation-needed': true,
           },
         },
       });

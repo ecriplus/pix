@@ -44,6 +44,8 @@ describe('Integration | Repository | challenge-repository', function () {
     locales: ['fr', 'nl'],
     competenceId: 'competenceId00',
     skillId: 'skillId00',
+    hasEmbedInternalValidation: true,
+    noValidationNeeded: true,
   };
   const challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson = {
     id: 'challengeId01',
@@ -83,6 +85,8 @@ describe('Integration | Repository | challenge-repository', function () {
     locales: ['fr', 'en'],
     competenceId: 'competenceId00',
     skillId: 'skillId00',
+    hasEmbedInternalValidation: true,
+    noValidationNeeded: true,
   };
   const challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson = {
     id: 'challengeId02',
@@ -531,6 +535,8 @@ describe('Integration | Repository | challenge-repository', function () {
                 }),
                 webComponentTagName: 'web-component',
                 webComponentProps: { prop1: 'value1', prop2: 'value2' },
+                hasEmbedInternalValidation: true,
+                noValidationNeeded: true,
               }),
             );
           });
@@ -584,6 +590,8 @@ describe('Integration | Repository | challenge-repository', function () {
                 difficulty: skillData00_tube00competence00_actif.level,
                 hint: skillData00_tube00competence00_actif.hint_i18n.fr,
               }),
+              hasEmbedInternalValidation: true,
+              noValidationNeeded: true,
             }),
           );
         });
