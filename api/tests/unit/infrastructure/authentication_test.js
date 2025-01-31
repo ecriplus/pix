@@ -1,4 +1,6 @@
 import { authentication } from '../../../lib/infrastructure/authentication.js';
+import { RevokedUserAccess } from '../../../src/identity-access-management/domain/models/RevokedUserAccess.js';
+import { revokedUserAccessRepository } from '../../../src/identity-access-management/infrastructure/repositories/revoked-user-access.repository.js';
 import { tokenService } from '../../../src/shared/domain/services/token-service.js';
 import { expect, sinon } from '../../test-helper.js';
 
@@ -107,6 +109,45 @@ describe('Unit | Infrastructure | Authentication', function () {
             const response = await authenticate(request, h);
 
             // then
+            expect(response.output.payload).to.include({
+              statusCode: 401,
+              error: 'Unauthorized',
+              message: 'Unauthorized',
+            });
+          });
+        });
+
+        describe('when the user access is revoked', function () {
+          it('should throw an error', async function () {
+            // given
+            const date = new Date();
+            const revokedUserAccess = new RevokedUserAccess(date.getTime() / 1000);
+            sinon.stub(revokedUserAccessRepository, 'findByUserId').resolves(revokedUserAccess);
+            sinon.stub(revokedUserAccess, 'isAccessTokenRevoked').returns(true);
+
+            const request = {
+              headers: {
+                authorization: 'Bearer token',
+                'x-forwarded-proto': 'https',
+                'x-forwarded-host': 'app.pix.fr',
+              },
+            };
+            const h = { authenticated: sinon.stub() };
+            tokenService.extractTokenFromAuthChain.withArgs('Bearer token').returns('token');
+            tokenService.getDecodedToken.withArgs('token', 'dummy-secret').returns({
+              user_id: 'user_id',
+              aud: 'https://app.pix.fr',
+            });
+
+            // when
+            const { authenticate } = authentication.scheme(undefined, {
+              key: 'dummy-secret',
+              validate: sinon.stub().returns({ isValid: true, credentials: {}, errorCode: null }),
+            });
+            const response = await authenticate(request, h);
+
+            // then
+            expect(h.authenticated).to.not.have.been.called;
             expect(response.output.payload).to.include({
               statusCode: 401,
               error: 'Unauthorized',
