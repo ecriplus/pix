@@ -41,7 +41,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       expect(certificationCourse.cancel).to.have.been.calledOnce;
       expect(certificationCourseRepository.update).to.have.been.calledWithExactly({ certificationCourse });
       expect(certificationRescoringRepository.execute).to.have.been.calledWithExactly({
-        certificationCancelledEvent: new CertificationCancelled({
+        event: new CertificationCancelled({
           certificationCourseId: certificationCourse.getId(),
           juryId,
         }),

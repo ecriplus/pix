@@ -11,7 +11,7 @@ describe('Integration | Repository | certification-rescoring-repository', functi
 
       // when
       const error = await catchErr(sessionRepositories.certificationRescoringRepository.execute)({
-        certificationCancelledEvent,
+        event: certificationCancelledEvent,
       });
 
       // then

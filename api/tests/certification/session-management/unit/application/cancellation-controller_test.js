@@ -30,22 +30,27 @@ describe('Certification | Session-management | Unit | Application | Controller |
     });
   });
 
-  describe('#uncancelCertificationCourse', function () {
-    it('should call uncancel-certification-course usecase', async function () {
+  describe('#uncancel', function () {
+    it('should call uncancel usecase', async function () {
       // given
-      sinon.stub(usecases, 'uncancelCertificationCourse');
+      sinon.stub(usecases, 'uncancel');
       const request = {
+        auth: {
+          credentials: {
+            userId: 345,
+          },
+        },
         params: {
           certificationCourseId: 123,
         },
       };
-      usecases.uncancelCertificationCourse.resolves();
+      usecases.uncancel.resolves();
 
       // when
       await cancellationController.uncancel(request, hFake);
 
       // then
-      expect(usecases.uncancelCertificationCourse).to.have.been.calledWithExactly({ certificationCourseId: 123 });
+      expect(usecases.uncancel).to.have.been.calledWithExactly({ certificationCourseId: 123, juryId: 345 });
     });
   });
 });

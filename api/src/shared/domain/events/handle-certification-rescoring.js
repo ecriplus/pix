@@ -15,6 +15,7 @@ import { CertificationResult } from '../models/index.js';
 import CertificationCancelled from './CertificationCancelled.js';
 import { CertificationCourseUnrejected } from './CertificationCourseUnrejected.js';
 import { CertificationRescoringCompleted } from './CertificationRescoringCompleted.js';
+import CertificationUncancelled from './CertificationUncancelled.js';
 import { checkEventTypes } from './check-event-types.js';
 
 const eventTypes = [
@@ -25,6 +26,7 @@ const eventTypes = [
   CertificationCourseUnrejected,
   CertificationCancelled,
   CertificationRescoredByScript,
+  CertificationUncancelled,
 ];
 
 /**
@@ -190,7 +192,11 @@ function _getEmitterFromEvent(event) {
     emitter = CertificationResult.emitters.PIX_ALGO_NEUTRALIZATION;
   }
 
-  if (event instanceof CertificationJuryDone || event instanceof CertificationRescoredByScript) {
+  if (
+    event instanceof CertificationJuryDone ||
+    event instanceof CertificationRescoredByScript ||
+    event instanceof CertificationUncancelled
+  ) {
     emitter = CertificationResult.emitters.PIX_ALGO_AUTO_JURY;
   }
 

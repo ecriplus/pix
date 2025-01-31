@@ -9,8 +9,10 @@ const cancel = async function (request, h) {
 };
 
 const uncancel = async function (request, h) {
+  const juryId = request.auth.credentials.userId;
   const certificationCourseId = request.params.certificationCourseId;
-  await usecases.uncancelCertificationCourse({ certificationCourseId });
+  await usecases.uncancel({ certificationCourseId, juryId });
+
   return h.response().code(204);
 };
 
