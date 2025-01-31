@@ -33,6 +33,8 @@ const serialize = function (campaignsToJoin) {
       'customResultPageButtonUrl',
       'multipleSendings',
       'isFlash',
+      'isMobileCompliant',
+      'isTabletCompliant',
     ],
   }).serialize(campaignsToJoin);
 };

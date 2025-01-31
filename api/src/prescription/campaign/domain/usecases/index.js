@@ -36,6 +36,7 @@ import * as groupRepository from '../../infrastructure/repositories/group-reposi
 import { repositories as campaignRepositories } from '../../infrastructure/repositories/index.js';
 import * as knowledgeElementSnapshotRepository from '../../infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import * as targetProfileRepository from '../../infrastructure/repositories/target-profile-repository.js';
+import * as campaignMediaComplianceService from '../services/campaign-media-compliance-service.js';
 import * as campaignUpdateValidator from '../validators/campaign-update-validator.js';
 
 /**
@@ -73,6 +74,7 @@ import * as campaignUpdateValidator from '../validators/campaign-update-validato
  * @typedef { import ('../../infrastructure/repositories/index.js').OrganizationMembershipRepository} OrganizationMembershipRepository
  * @typedef { import ('../../infrastructure/repositories/target-profile-repository.js')} TargetProfileRepository
  * @typedef { import ('../validators/campaign-update-validator.js')} CampaignUpdateValidator
+ * @typedef { import ('../services/campaign-media-compliance-service')} CampaignMediaComplianceService
  */
 const dependencies = {
   badgeAcquisitionRepository,
@@ -110,6 +112,7 @@ const dependencies = {
   targetProfileRepository, // TODO
   tutorialRepository,
   userRepository,
+  campaignMediaComplianceService,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));

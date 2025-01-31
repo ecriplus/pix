@@ -1,26 +1,39 @@
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
+import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { LOCALE } from '../../../../../../src/shared/domain/constants.js';
 import { expect, sinon } from '../../../../../test-helper.js';
+
+const { FRENCH_SPOKEN } = LOCALE;
 
 describe('Unit | UseCase | get-campaign-by-code', function () {
   let code,
+    locale,
     organizationId,
     campaignToJoinRepositoryStub,
     campaignToJoinModelStub,
-    organizationLearnerImportFormatRepositoryStub;
+    organizationLearnerImportFormatRepositoryStub,
+    campaignMediaComplianceServiceStub;
 
   beforeEach(function () {
     code = Symbol('CODE');
+    locale = FRENCH_SPOKEN;
     organizationId = Symbol('OrganizationId');
     campaignToJoinRepositoryStub = {
       getByCode: sinon.stub(),
     };
 
     campaignToJoinModelStub = {
+      type: CampaignTypes.ASSESSMENT,
       setReconciliationFields: sinon.stub(),
+      setMediaCompliance: sinon.stub(),
     };
 
     organizationLearnerImportFormatRepositoryStub = {
       get: sinon.stub(),
+    };
+
+    campaignMediaComplianceServiceStub = {
+      getMediaCompliance: sinon.stub(),
     };
   });
 
@@ -31,13 +44,16 @@ describe('Unit | UseCase | get-campaign-by-code', function () {
     // when
     const actualCampaignToJoin = await usecases.getCampaignByCode({
       code,
+      locale,
       campaignToJoinRepository: campaignToJoinRepositoryStub,
       organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
+      campaignMediaComplianceService: campaignMediaComplianceServiceStub,
     });
 
     // then
     expect(actualCampaignToJoin).to.deep.equal(campaignToJoinModelStub);
     expect(organizationLearnerImportFormatRepositoryStub.get.notCalled).to.be.true;
+    expect(campaignMediaComplianceServiceStub.getMediaCompliance.called).to.be.true;
   });
 
   it('should call import format when isRestricted Campaign', async function () {
@@ -51,8 +67,10 @@ describe('Unit | UseCase | get-campaign-by-code', function () {
     // when
     await usecases.getCampaignByCode({
       code,
+      locale,
       campaignToJoinRepository: campaignToJoinRepositoryStub,
       organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
+      campaignMediaComplianceService: campaignMediaComplianceServiceStub,
     });
 
     // then
@@ -73,8 +91,10 @@ describe('Unit | UseCase | get-campaign-by-code', function () {
     // when
     await usecases.getCampaignByCode({
       code,
+      locale,
       campaignToJoinRepository: campaignToJoinRepositoryStub,
       organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
+      campaignMediaComplianceService: campaignMediaComplianceServiceStub,
     });
 
     // then
