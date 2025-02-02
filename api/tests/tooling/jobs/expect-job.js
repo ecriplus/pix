@@ -1,4 +1,7 @@
 import { assert, Assertion } from 'chai';
+import _ from 'lodash';
+
+import { JobRepository } from '../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 
 export const jobChai = (knex) => (_chai, utils) => {
   utils.addProperty(Assertion.prototype, 'performed', function () {
@@ -11,48 +14,59 @@ export const jobChai = (knex) => (_chai, utils) => {
 
   Assertion.addMethod('withJobsCount', async function (expectedCount) {
     const jobName = this._obj;
-    const jobs = await knex('pgboss.job').where({ name: jobName });
+    const jobs = await JobRepository.pgBoss.fetch(jobName, expectedCount + 1, { includeMetadata: true });
+    const actualCount = jobs?.length ?? 0;
+
     assert.strictEqual(
-      jobs.length,
+      actualCount,
       expectedCount,
-      `expected ${jobName} to have been performed ${expectedCount} times, but it was performed ${jobs.length} times`,
+      `expected ${jobName} to have been performed ${expectedCount} times, but it was performed ${actualCount} times`,
     );
+    const unorderedJobs = jobs?.map(
+      ({ id, name, data, retrylimit, retrydelay, retrybackoff, expire_in_seconds, priority }) => ({
+        id,
+        name,
+        data,
+        retryLimit: retrylimit,
+        retryDelay: retrydelay,
+        retryBackoff: retrybackoff,
+        expireIn: Math.round(expire_in_seconds),
+        priority,
+      }),
+    );
+    return _.orderBy(unorderedJobs, 'id');
   });
 
   Assertion.addMethod('withJob', async function (jobData) {
-    await this.withJobsCount(1);
+    const jobs = await this.withJobsCount(1);
 
     const jobName = this._obj;
-    const jobs = await knex('pgboss.job').select(knex.raw(`*, expirein::varchar`)).where({ name: jobName });
     assert.deepInclude(jobs[0], jobData, `Job '${jobName}' was performed with a different payload`);
   });
 
   Assertion.addMethod('withCronJobsCount', async function (expectedCount) {
     const jobName = this._obj;
-    const jobs = await knex('pgboss.schedule').where({ name: jobName });
+    const allJobs = (await JobRepository.pgBoss.getSchedules()) ?? [];
+    const jobs = allJobs.filter(({ name }) => name === jobName);
     assert.strictEqual(
       jobs.length,
       expectedCount,
       `expected ${jobName} to have been performed ${expectedCount} times, but it was performed ${jobs.length} times`,
     );
+    return jobs;
   });
 
   Assertion.addMethod('withCronJob', async function (jobData) {
-    await this.withCronJobsCount(1);
+    const jobs = await this.withCronJobsCount(1);
 
     const jobName = this._obj;
-    const job = await knex('pgboss.schedule')
-      .select('name', 'cron', 'data', 'options')
-      .where({ name: jobName })
-      .first();
-    assert.deepInclude(job, jobData, `Job '${jobName}' was schedule with a different payload`);
+    assert.deepInclude(jobs[0], jobData, `Job '${jobName}' was schedule with a different payload`);
   });
 
   Assertion.addMethod('withJobPayloads', async function (payloads) {
-    await this.withJobsCount(payloads.length);
+    const jobs = await this.withJobsCount(payloads.length);
 
     const jobName = this._obj;
-    const jobs = await knex('pgboss.job').where({ name: jobName });
     const actualPayloads = jobs.map((job) => job.data);
     assert.deepEqual(actualPayloads, payloads, `Job '${jobName}' was performed with a different payload`);
   });
