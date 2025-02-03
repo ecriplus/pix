@@ -30,7 +30,7 @@ describe('Unit | Shared | Domain | Service | user-service', function () {
     };
     authenticationMethodRepository = {
       create: sinon.stub(),
-      updatePasswordThatShouldBeChanged: sinon.stub(),
+      updatePassword: sinon.stub(),
       createPasswordThatShouldBeChanged: sinon.stub(),
     };
     organizationLearnerRepository = {

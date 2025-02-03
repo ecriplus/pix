@@ -141,7 +141,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
   });
 
-  describe('#updateChangedPassword', function () {
+  describe('#updatePassword', function () {
     let userId;
     let clock;
 
@@ -155,7 +155,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       clock.restore();
     });
 
-    it('should update the password in database', async function () {
+    it('updates the password in database', async function () {
       // given
       const authenticationMethodId =
         databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
@@ -165,7 +165,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       await databaseBuilder.commit();
 
       // when
-      await authenticationMethodRepository.updateChangedPassword({
+      await authenticationMethodRepository.updatePassword({
         userId,
         hashedPassword: newHashedPassword,
       });
@@ -177,7 +177,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(authenticationComplement.password).to.equal(newHashedPassword);
     });
 
-    it('should return the updated AuthenticationMethod', async function () {
+    it('returns the updated AuthenticationMethod', async function () {
       // given
       const originalAuthenticationMethod =
         domainBuilder.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
@@ -191,7 +191,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       await databaseBuilder.commit();
 
       // when
-      const updatedAuthenticationMethod = await authenticationMethodRepository.updateChangedPassword({
+      const updatedAuthenticationMethod = await authenticationMethodRepository.updatePassword({
         userId,
         hashedPassword: newHashedPassword,
       });
@@ -207,7 +207,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(updatedAuthenticationMethod).to.deepEqualInstance(expectedAuthenticationMethod);
     });
 
-    it('should disable changing password', async function () {
+    it('disables changing password by default', async function () {
       // given
       databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
         userId,
@@ -217,7 +217,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       await databaseBuilder.commit();
 
       // when
-      const updatedAuthenticationMethod = await authenticationMethodRepository.updateChangedPassword({
+      const updatedAuthenticationMethod = await authenticationMethodRepository.updatePassword({
         userId,
         hashedPassword: newHashedPassword,
       });
@@ -226,12 +226,32 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(updatedAuthenticationMethod.authenticationComplement.shouldChangePassword).to.be.false;
     });
 
-    it('should throw AuthenticationMethodNotFoundError when user id not found', async function () {
+    it('enables changing password', async function () {
+      // given
+      databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
+        userId,
+        hashedPassword,
+        shouldChangePassword: false,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const updatedAuthenticationMethod = await authenticationMethodRepository.updatePassword({
+        userId,
+        hashedPassword: newHashedPassword,
+        shouldChangePassword: true,
+      });
+
+      // then
+      expect(updatedAuthenticationMethod.authenticationComplement.shouldChangePassword).to.be.true;
+    });
+
+    it('throws AuthenticationMethodNotFoundError when user id not found', async function () {
       // given
       const wrongUserId = 0;
 
       // when
-      const error = await catchErr(authenticationMethodRepository.updateChangedPassword)({
+      const error = await catchErr(authenticationMethodRepository.updatePassword)({
         userId: wrongUserId,
         hashedPassword,
       });
@@ -240,7 +260,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       expect(error).to.be.instanceOf(AuthenticationMethodNotFoundError);
     });
 
-    it('should be DomainTransaction compliant', async function () {
+    it('is DomainTransaction compliant', async function () {
       // given
       const authenticationMethod =
         databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
@@ -252,7 +272,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       // when
       await catchErr(async function () {
         await DomainTransaction.execute(async () => {
-          await authenticationMethodRepository.updateChangedPassword({ userId, hashedPassword: 'coucou' });
+          await authenticationMethodRepository.updatePassword({ userId, hashedPassword: 'coucou' });
           throw new Error('Error occurs in transaction');
         });
       })();
@@ -510,118 +530,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
   });
 
-  describe('#updatePasswordThatShouldBeChanged', function () {
-    let userId;
-    let clock;
-
-    beforeEach(async function () {
-      clock = sinon.useFakeTimers({ now: new Date('2020-01-02'), toFake: ['Date'] });
-      userId = databaseBuilder.factory.buildUser().id;
-      await databaseBuilder.commit();
-    });
-
-    afterEach(function () {
-      clock.restore();
-    });
-
-    it('should update password in database and set shouldChangePassword to true', async function () {
-      // given
-      databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
-        id: 123,
-        userId,
-        hashedPassword,
-        shouldChangePassword: false,
-      });
-      await databaseBuilder.commit();
-
-      // when
-      await authenticationMethodRepository.updatePasswordThatShouldBeChanged({
-        userId,
-        hashedPassword: newHashedPassword,
-      });
-
-      // then
-      const [authenticationComplement] = await knex('authentication-methods')
-        .pluck('authenticationComplement')
-        .where({ id: 123 });
-      expect(authenticationComplement.password).to.equal(newHashedPassword);
-      expect(authenticationComplement.shouldChangePassword).to.be.true;
-    });
-
-    it('should return an updated AuthenticationMethod', async function () {
-      // given
-      const originalAuthenticationMethod =
-        domainBuilder.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
-          id: 123,
-          userId,
-          hashedPassword,
-          shouldChangePassword: false,
-        });
-      databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider(originalAuthenticationMethod);
-      await databaseBuilder.commit();
-
-      // when
-      const updatedAuthenticationMethod = await authenticationMethodRepository.updatePasswordThatShouldBeChanged({
-        userId,
-        hashedPassword: newHashedPassword,
-      });
-
-      // then
-      const expectedAuthenticationMethod =
-        domainBuilder.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
-          id: 123,
-          userId,
-          hashedPassword: newHashedPassword,
-          shouldChangePassword: true,
-          updatedAt: new Date(),
-        });
-      expect(updatedAuthenticationMethod).to.deepEqualInstance(expectedAuthenticationMethod);
-    });
-
-    it('should throw AuthenticationMethodNotFoundError when user id not found', async function () {
-      // given
-      const wrongUserId = 0;
-
-      // when
-      const error = await catchErr(authenticationMethodRepository.updatePasswordThatShouldBeChanged)({
-        userId: wrongUserId,
-        hashedPassword,
-      });
-
-      // then
-      expect(error).to.be.instanceOf(AuthenticationMethodNotFoundError);
-    });
-
-    it('should be DomainTransaction compliant', async function () {
-      // given
-      databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
-        id: 123,
-        userId,
-        hashedPassword,
-        shouldChangePassword: false,
-      });
-      await databaseBuilder.commit();
-
-      // when
-      await catchErr(async function () {
-        await DomainTransaction.execute(async () => {
-          await authenticationMethodRepository.updatePasswordThatShouldBeChanged({
-            userId,
-            hashedPassword: newHashedPassword,
-          });
-          throw new Error('Error occurs in transaction');
-        });
-      })();
-
-      // then
-      const [authenticationComplement] = await knex('authentication-methods')
-        .pluck('authenticationComplement')
-        .where({ id: 123 });
-      expect(authenticationComplement.password).to.equal(hashedPassword);
-      expect(authenticationComplement.shouldChangePassword).to.be.false;
-    });
-  });
-
   describe('#createPasswordThatShouldBeChanged', function () {
     let userId;
 
@@ -701,77 +609,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       // then
       const nonExistingAuthenticationMethod = await knex('authentication-methods').where({ userId }).first();
       expect(nonExistingAuthenticationMethod).to.not.exist;
-    });
-  });
-
-  describe('#updateExpiredPassword', function () {
-    let userId;
-    let clock;
-
-    beforeEach(async function () {
-      clock = sinon.useFakeTimers({ now: new Date('2020-01-02'), toFake: ['Date'] });
-      userId = databaseBuilder.factory.buildUser({ shouldChangePassword: true }).id;
-      databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
-        id: 123,
-        userId,
-        hashedPassword,
-        shouldChangePassword: true,
-      });
-      await databaseBuilder.commit();
-    });
-
-    afterEach(function () {
-      clock.restore();
-    });
-
-    it('should update the password in database and set shouldChangePassword to false', async function () {
-      // when
-      await authenticationMethodRepository.updateExpiredPassword({
-        userId,
-        hashedPassword: newHashedPassword,
-      });
-
-      // then
-      const [authenticationComplement] = await knex('authentication-methods')
-        .pluck('authenticationComplement')
-        .where({ id: 123 });
-      expect(authenticationComplement.password).to.equal(newHashedPassword);
-      expect(authenticationComplement.shouldChangePassword).to.be.false;
-    });
-
-    it('should return the updated AuthenticationMethod', async function () {
-      // given
-      const expectedAuthenticationMethod =
-        domainBuilder.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
-          id: 123,
-          userId,
-          hashedPassword: newHashedPassword,
-          shouldChangePassword: false,
-          updatedAt: new Date(),
-        });
-
-      // when
-      const updatedAuthenticationMethod = await authenticationMethodRepository.updateExpiredPassword({
-        userId,
-        hashedPassword: newHashedPassword,
-      });
-
-      // then
-      expect(updatedAuthenticationMethod).to.deepEqualInstance(expectedAuthenticationMethod);
-    });
-
-    it('should throw AuthenticationMethodNotFoundError when user id is not found', async function () {
-      // given
-      const wrongUserId = 0;
-
-      // when
-      const error = await catchErr(authenticationMethodRepository.updateExpiredPassword)({
-        userId: wrongUserId,
-        hashedPassword,
-      });
-
-      // then
-      expect(error).to.be.instanceOf(AuthenticationMethodNotFoundError);
     });
   });
 

@@ -45,7 +45,7 @@ describe('Unit | UseCase | update-organization-learner-dependent-user-password',
       hashPassword: sinon.stub().resolves(encryptedPassword),
     };
     authenticationMethodRepository = {
-      updatePasswordThatShouldBeChanged: sinon.stub(),
+      updatePassword: sinon.stub(),
     };
     prescriptionOrganizationLearnerRepository = {
       getLearnerInfo: sinon.stub().resolves(student),
@@ -53,7 +53,7 @@ describe('Unit | UseCase | update-organization-learner-dependent-user-password',
     userRepository = {
       get: sinon.stub().resolves(userStudent),
       getWithMemberships: sinon.stub().resolves(userMember),
-      updatePasswordThatShouldBeChanged: sinon.stub().resolves(),
+      updatePassword: sinon.stub().resolves(),
     };
   });
 
@@ -108,9 +108,10 @@ describe('Unit | UseCase | update-organization-learner-dependent-user-password',
 
     // then
     expect(cryptoService.hashPassword).to.have.been.calledWithExactly(generatedPassword);
-    expect(authenticationMethodRepository.updatePasswordThatShouldBeChanged).to.have.been.calledWithExactly({
+    expect(authenticationMethodRepository.updatePassword).to.have.been.calledWithExactly({
       userId: userStudent.id,
       hashedPassword: encryptedPassword,
+      shouldChangePassword: true,
     });
   });
 

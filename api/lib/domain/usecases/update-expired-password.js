@@ -39,7 +39,7 @@ const updateExpiredPassword = async function ({
 
   const hashedPassword = await cryptoService.hashPassword(newPassword);
 
-  await authenticationMethodRepository.updateExpiredPassword({
+  await authenticationMethodRepository.updatePassword({
     userId: foundUser.id,
     hashedPassword,
   });

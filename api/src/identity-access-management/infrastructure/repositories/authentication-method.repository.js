@@ -132,55 +132,14 @@ const removeAllAuthenticationMethodsByUserId = async function ({ userId }) {
   return knexConn(AUTHENTICATION_METHODS_TABLE).where({ userId }).del();
 };
 
-const updateChangedPassword = async function ({ userId, hashedPassword }) {
-  const authenticationComplement = new AuthenticationMethod.PixAuthenticationComplement({
-    password: hashedPassword,
-    shouldChangePassword: false,
-  });
-
+const updatePassword = async function ({ userId, hashedPassword, shouldChangePassword = false }) {
   const knexConn = DomainTransaction.getConnection();
-  const [authenticationMethodDTO] = await knexConn(AUTHENTICATION_METHODS_TABLE)
-    .where({
-      userId,
-      identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
-    })
-    .update({ authenticationComplement, updatedAt: new Date() })
-    .returning(COLUMNS);
-
-  if (!authenticationMethodDTO) {
-    throw new AuthenticationMethodNotFoundError(`Authentication method PIX for User ID ${userId} not found.`);
-  }
-  return _toDomain(authenticationMethodDTO);
-};
-
-const updatePasswordThatShouldBeChanged = async function ({ userId, hashedPassword }) {
-  const knexConn = DomainTransaction.getConnection();
-
   const authenticationComplement = new AuthenticationMethod.PixAuthenticationComplement({
     password: hashedPassword,
-    shouldChangePassword: true,
+    shouldChangePassword,
   });
+
   const [authenticationMethodDTO] = await knexConn(AUTHENTICATION_METHODS_TABLE)
-    .where({
-      userId,
-      identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
-    })
-    .update({ authenticationComplement, updatedAt: new Date() })
-    .returning(COLUMNS);
-
-  if (!authenticationMethodDTO) {
-    throw new AuthenticationMethodNotFoundError(`Authentication method PIX for User ID ${userId} not found.`);
-  }
-  return _toDomain(authenticationMethodDTO);
-};
-
-const updateExpiredPassword = async function ({ userId, hashedPassword }) {
-  const authenticationComplement = new AuthenticationMethod.PixAuthenticationComplement({
-    password: hashedPassword,
-    shouldChangePassword: false,
-  });
-
-  const [authenticationMethodDTO] = await knex(AUTHENTICATION_METHODS_TABLE)
     .where({
       userId,
       identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
@@ -246,7 +205,7 @@ const batchUpsertPasswordThatShouldBeChanged = function ({ usersToUpdateWithNewP
   return Promise.all(
     usersToUpdateWithNewPassword.map(async ({ userId, hashedPassword }) => {
       if (await hasIdentityProviderPIX({ userId })) {
-        return updatePasswordThatShouldBeChanged({ userId, hashedPassword });
+        return updatePassword({ userId, hashedPassword, shouldChangePassword: true });
       } else {
         return createPasswordThatShouldBeChanged({ userId, hashedPassword });
       }
@@ -290,10 +249,8 @@ const anonymizeByUserIds = async function ({ userIds }) {
  * @property {function} update
  * @property {function} updateAuthenticationComplementByUserIdAndIdentityProvider
  * @property {function} updateAuthenticationMethodUserId
- * @property {function} updateChangedPassword
- * @property {function} updateExpiredPassword
+ * @property {function} updatePassword
  * @property {function} updateExternalIdentifierByUserIdAndIdentityProvider
- * @property {function} updatePasswordThatShouldBeChanged
  */
 export {
   anonymizeByUserIds,
@@ -310,10 +267,8 @@ export {
   update,
   updateAuthenticationComplementByUserIdAndIdentityProvider,
   updateAuthenticationMethodUserId,
-  updateChangedPassword,
-  updateExpiredPassword,
   updateExternalIdentifierByUserIdAndIdentityProvider,
-  updatePasswordThatShouldBeChanged,
+  updatePassword,
 };
 
 function _toDomain(authenticationMethodDTO) {

@@ -17,7 +17,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       const revokedTimeStamp = Math.floor(revokeUntil.getTime() / 1000);
 
       // when
-      await revokedUserAccessRepository.saveForUser(12345, revokeUntil);
+      await revokedUserAccessRepository.saveForUser({ userId: 12345, revokeUntil });
 
       // then
       const result = await revokedUserAccessTemporaryStorage.get(12345);
@@ -30,7 +30,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       // given
       const revokeUntil = new Date();
       const revokeTimeStamp = Math.floor(new Date().getTime() / 1000);
-      await revokedUserAccessRepository.saveForUser(12345, revokeUntil);
+      await revokedUserAccessRepository.saveForUser({ userId: 12345, revokeUntil });
 
       // when
       const result = await revokedUserAccessRepository.findByUserId(12345);

@@ -36,9 +36,10 @@ const updateOrganizationLearnerDependentUserPassword = async function ({
   const generatedPassword = passwordGenerator.generateSimplePassword();
   const hashedPassword = await cryptoService.hashPassword(generatedPassword);
 
-  await authenticationMethodRepository.updatePasswordThatShouldBeChanged({
+  await authenticationMethodRepository.updatePassword({
     userId: userStudent.id,
     hashedPassword,
+    shouldChangePassword: true,
   });
 
   return { generatedPassword, organizationLearnerId };
