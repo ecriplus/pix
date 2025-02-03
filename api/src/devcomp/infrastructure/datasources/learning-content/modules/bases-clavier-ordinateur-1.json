@@ -82,7 +82,7 @@
           "element": {
             "id": "847c14dc-d58d-4faf-9886-8a2de37974c6",
             "type": "text",
-            "content": "<p>Globalement, tous ces claviers servent à faire les mêmes choses.<br></p>"
+            "content": "<p>Tous ces claviers permettent de faire la même chose.<br></p>"
           }
         },
         {
@@ -115,14 +115,14 @@
                 {
                   "id": "d6bb5ad8-bd97-4116-839d-425a444fcdfd",
                   "type": "text",
-                  "content": "<p>Il y a 3 zones principales sur un clavier :</p><ul><li>lettres de l'alphabet</li><li>caractères spéciaux et accents</li><li>flèches directionnelles</li></ul>"
+                  "content": "<p>Il y a 3 zones principales sur un clavier :</p><ul><li>lettres de l'alphabet</li><li>chiffres, caractères spéciaux et accents</li><li>flèches directionnelles</li></ul>"
                 },
                 {
                   "id": "e86e4e5f-868e-4483-a995-86d89121e1a4",
                   "type": "image",
                   "url": "https://i.imgur.com/Cl7Tz1R.png",
                   "alt": "",
-                  "alternativeText": "<p>Schéma des 3 zones principales sur un clavier :</p><ul><li>caractères spéciaux et accents</li><li>lettres de l'alphabet</li><li>flèches directionnelles</li></ul>"
+                  "alternativeText": "<p>Schéma des 3 zones principales sur un clavier :</p><ul><li>chiffres, caractères spéciaux et accents</li><li>lettres de l'alphabet</li><li>flèches directionnelles</li></ul>"
                 },
                 {
                   "id": "1f25f056-78ad-42cd-8679-49188fe4e2a2",
@@ -169,7 +169,7 @@
             "type": "image",
             "url": "https://i.imgur.com/KosRqGF.png",
             "alt": "",
-            "alternativeText": "<p>Les touches du module&nbsp;:</p><ul><li>les accents</li><li>effacer et entrée</li><li>les lettres</li><li>espace</li><li>les flêches directionnelles</li></ul>"
+            "alternativeText": "<p>Les touches du module&nbsp;:</p><ul><li>les accents</li><li>effacer et entrée</li><li>les lettres</li><li>l'espace</li><li>les flêches directionnelles</li></ul>"
           }
         }
       ]
@@ -210,7 +210,7 @@
                 {
                   "id": "e7390f32-cf29-49c4-af61-cb0ee142d06e",
                   "type": "text",
-                  "content": "<p>Une <strong>zone de texte</strong> est un endroit où on peut <strong>taper, modifier et effacer du texte</strong>. Pour reconnaître une zone de texte, vous pouvez vous aider du pointeur de la souris. <span aria-hidden=\"true\">🖱️</span></p><p>Lorsque vous faites glisser votre pointeur sur une zone de texte, il prend la forme d’une barre verticale.</p>"
+                  "content": "<p>Une <strong>zone de texte</strong> est un endroit où on peut <strong>taper, modifier et effacer du texte</strong>. Pour reconnaître une zone de texte, vous pouvez vous aider du pointeur de la souris. <span aria-hidden=\"true\">🖱️</span><br></p><p>Lorsque vous faites glisser votre pointeur sur une zone de texte, il prend la forme d’une barre verticale.</p>"
                 },
                 {
                   "id": "7923e0aa-3e35-493d-8d42-0b29cdc0ed08",
@@ -421,9 +421,10 @@
         {
           "type": "element",
           "element": {
-            "id": "bb606781-2799-49d6-9985-2fabb448569e",
-            "type": "text",
-            "content": "<details><summary> <span aria-hidden=\"true\">🤔</span> Bon à savoir </summary>    <p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.<span aria-hidden=\"true\">🙌</span> Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p></details>"
+            "id": "388eb851-d9c2-4434-89a1-5879d80467b2",
+            "type": "expand",
+            "title": "<span aria-hidden=\"true\">🤔</span> Bon à savoir",
+            "content": "<p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.<span aria-hidden=\"true\">🙌</span> Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p>"
           }
         }
       ]
@@ -578,7 +579,7 @@
           "element": {
             "id": "2e384ac8-402c-4745-b187-3cb7fc3eb916",
             "type": "text",
-            "content": "<p><strong>Dans la zone de texte ci-dessous, modifiez la phrase qui apparaît pour écrire :&nbsp;</strong> </p><p>«Bravo à vous pour avoir joué ce module où vous avez appris à utiliser un clavier.»<br></p>"
+            "content": "<p><strong>Dans la zone de texte ci-dessous, modifiez la phrase qui apparaît pour écrire :&nbsp;</strong> </p><p>«Quelle bonne idée d'avoir mis de la purée de cornichons dans le bac à glaçons.»<br></p>"
           }
         },
         {
