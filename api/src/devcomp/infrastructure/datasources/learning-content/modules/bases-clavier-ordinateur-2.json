@@ -492,7 +492,7 @@
           "element": {
             "id": "ca8c63e7-b192-4c9a-8f99-a4e54a2ea826",
             "type": "text",
-            "content": "<p><strong>Dans l'espace ci-dessous, pour chaque niveau, tapez les caractères à l’écran dans la zone de texte pour les faire disparaître.</strong></p>"
+            "content": "<p><strong>Dans l'espace ci-dessous, pour chaque niveau, tapez les caractères à l’écran dans la zone de texte pour les faire disparaître avant le temps imparti.</strong></p>"
           }
         },
         {
