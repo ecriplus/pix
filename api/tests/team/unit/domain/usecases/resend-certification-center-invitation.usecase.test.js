@@ -1,4 +1,4 @@
-import { resendCertificationCenterInvitation } from '../../../../../src/team/domain/usecases/resend-certification-center-invitation.js';
+import { resendCertificationCenterInvitation } from '../../../../../src/team/domain/usecases/resend-certification-center-invitation.usecase.js';
 import { expect, sinon } from '../../../../test-helper.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
