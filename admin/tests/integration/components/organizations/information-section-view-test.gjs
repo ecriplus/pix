@@ -239,6 +239,7 @@ module('Integration | Component | organizations/information-section-view', funct
         assert.dom(screen.getByText('Archivée le 22/02/2022 par Rob Lochon.')).exists();
       });
     });
+
     module('when organization is parent', function () {
       test('it should display parent label', async function (assert) {
         //given
@@ -454,6 +455,52 @@ module('Integration | Component | organizations/information-section-view', funct
                 )}`,
               ),
             );
+          });
+        });
+      });
+
+      module('Net Promoter Score', function () {
+        module('when NPS is enabled', function () {
+          test('should display a link to formNPSUrl', async function (assert) {
+            // given
+            const NPSUrl = 'http://example.net';
+            const organization = EmberObject.create({
+              features: {
+                SHOW_NPS: { active: true, params: { formNPSUrl: NPSUrl } },
+              },
+            });
+
+            // when
+            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+
+            // then
+            assert.ok(
+              screen.getByText(`${t('components.organizations.information-section-view.features.SHOW_NPS')} :`),
+            );
+            assert.ok(screen.getByRole('link', { name: NPSUrl }));
+          });
+        });
+
+        module('when NPS is not enabled', function () {
+          test('should display text with no and not the link', async function (assert) {
+            // given
+            const NPSUrl = 'http://example.net';
+            const organization = EmberObject.create({
+              features: {
+                SHOW_NPS: { active: false, params: { formNPSUrl: NPSUrl } },
+              },
+            });
+
+            // when
+            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+
+            // then
+            assert.ok(
+              screen.getByText(
+                `${t('components.organizations.information-section-view.features.SHOW_NPS')} : ${t('common.words.no')}`,
+              ),
+            );
+            assert.notOk(screen.queryByRole('link', { name: NPSUrl }));
           });
         });
       });
