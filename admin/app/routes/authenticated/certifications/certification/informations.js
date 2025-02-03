@@ -8,8 +8,10 @@ export default class CertificationInformationsRoute extends Route {
 
   async model() {
     const certification = await this.modelFor('authenticated.certifications.certification').reload();
+    const session = await this.store.findRecord('session', certification.sessionId);
     const certificationIssueReports = await certification.certificationIssueReports;
     return RSVP.hash({
+      session,
       certification,
       certificationIssueReports,
       countries: this.store.findAll('country'),
