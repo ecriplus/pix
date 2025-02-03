@@ -507,4 +507,36 @@ module('Unit | Service | url', function (hooks) {
       });
     });
   });
+
+  module('#certificationResultsExplanationUrl', function () {
+    module('when domain extension is .fr', function () {
+      test('returns the pix.fr website certification details page', function (assert) {
+        // given
+        const service = this.owner.lookup('service:url');
+        service.currentDomain = { isFranceDomain: true };
+        const expectedCertificationResultsExplanationUrl = 'https://pix.fr/certification-comprendre-score-niveau';
+
+        // when
+        const certificationResultsExplanationUrl = service.certificationResultsExplanationUrl;
+
+        // then
+        assert.strictEqual(certificationResultsExplanationUrl, expectedCertificationResultsExplanationUrl);
+      });
+    });
+
+    module('when domain extension is .org', function () {
+      test('returns the pix.org website certification details page', function (assert) {
+        // given
+        const service = this.owner.lookup('service:url');
+        service.currentDomain = { isFranceDomain: false };
+        const expectedCertificationResultsExplanationUrl = 'https://pix.org/fr/certification-comprendre-score-niveau';
+
+        // when
+        const certificationResultsExplanationUrl = service.certificationResultsExplanationUrl;
+
+        // then
+        assert.strictEqual(certificationResultsExplanationUrl, expectedCertificationResultsExplanationUrl);
+      });
+    });
+  });
 });

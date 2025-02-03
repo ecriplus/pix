@@ -10,12 +10,26 @@ export default class UserCertificationsDetailHeader extends Component {
   @service fileSaver;
   @service session;
   @service currentDomain;
+  @service currentUser;
+  @service url;
 
   @tracked tooltipText = this.intl.t('pages.certificate.verification-code.copy');
   @tracked attestationDownloadErrorMessage = null;
 
   get birthdateMidnightLocalTime() {
     return parseISODateOnly(this.args.certification.birthdate);
+  }
+
+  get isUserFrenchReader() {
+    return this.currentUser.user && this.currentUser.user.lang === 'fr';
+  }
+
+  get displayCertificationResultsExplanation() {
+    return this.args.certification.isV3 && (this.currentDomain.isFranceDomain || this.isUserFrenchReader);
+  }
+
+  get certificationResultsExplanationUrl() {
+    return this.url.certificationResultsExplanationUrl;
   }
 
   @action

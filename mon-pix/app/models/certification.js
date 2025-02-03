@@ -50,6 +50,10 @@ export default class Certification extends Model {
     );
   }
 
+  get isV3() {
+    return this.version === 3;
+  }
+
   get maxReachablePixCountOnCertificationDate() {
     return this.maxReachableLevelOnCertificationDate * 8 * 16;
   }
