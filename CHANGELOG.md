@@ -1,5 +1,34 @@
 # Pix Changelog
 
+## v5.34.0 (03/02/2025)
+
+
+### :rocket: Amélioration
+- [#11240](https://github.com/1024pix/pix/pull/11240) [FEATURE]  Ajout d'un écran de feedback intermédiaire à la fin de la mission  (PIX-16279).
+- [#11280](https://github.com/1024pix/pix/pull/11280) [FEATURE] Pouvoir ajouter plusieurs orgas enfants en une seule saisie dans Pix-Admin (PIX-10865).
+- [#11283](https://github.com/1024pix/pix/pull/11283) [FEATURE] Ajout videos module souris-1.
+- [#11270](https://github.com/1024pix/pix/pull/11270) [FEATURE] Créer une fonction de révocation des accès utilisateurs (PIX-15947).
+- [#11281](https://github.com/1024pix/pix/pull/11281) [FEATURE] Utiliser le nouveau layout dans PixApp (PIX-16302).
+- [#11222](https://github.com/1024pix/pix/pull/11222) [FEATURE] Indiquer si la campagne est compatible mobile et/ou tablette (PIX-16089).
+- [#11148](https://github.com/1024pix/pix/pull/11148) [FEATURE] Ports-connexions-essentiels - V2 - dette MVP (MODC-5).
+- [#11203](https://github.com/1024pix/pix/pull/11203) [FEATURE] Ajouter un bouton pour renvoyer l'invitation à un centre de certification dans pix admin (PIX-10018).
+
+### :building_construction: Tech
+- [#11287](https://github.com/1024pix/pix/pull/11287) [TECH] Ne plus planifier de job unitaire pour chaque calcul de certificabilité.
+- [#11259](https://github.com/1024pix/pix/pull/11259) [TECH] Ajout de nouvelles colonnes pour les challenges pix-junior.
+- [#11282](https://github.com/1024pix/pix/pull/11282) [TECH] Mauvais competenceId sur certaines competence-marks V3 (PIX-16328).
+
+### :bug: Correction
+- [#11297](https://github.com/1024pix/pix/pull/11297) [BUGFIX] Corriger le bug d'affichage de la page de résultat (PIX-16318).
+- [#11295](https://github.com/1024pix/pix/pull/11295) [BUGFIX] Fix sur les réponses envoyées en double sur les embeds auto-validés (PIX-16363).
+- [#11238](https://github.com/1024pix/pix/pull/11238) [BUGFIX] Problème de retour à la ligne sur les navigateur safari (PIX-16293).
+- [#11244](https://github.com/1024pix/pix/pull/11244) [BUGFIX] Fix sur le dépassement d'image/texte dans les cadres Pix Junior (PIX-16296).
+
+### :arrow_up: Montée de version
+- [#11291](https://github.com/1024pix/pix/pull/11291) [BUMP] Update dependency @1024pix/pix-ui to ^54.3.0 (junior).
+- [#11293](https://github.com/1024pix/pix/pull/11293) [BUMP] Update dependency @1024pix/pix-ui to ^54.3.0 (orga).
+- [#11292](https://github.com/1024pix/pix/pull/11292) [BUMP] Update dependency @1024pix/pix-ui to ^54.3.0 (mon-pix).
+
 ## v5.33.0 (31/01/2025)
 
 
