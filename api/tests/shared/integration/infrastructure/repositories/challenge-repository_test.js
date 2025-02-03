@@ -485,6 +485,7 @@ describe('Integration | Repository | challenge-repository', function () {
 
         // then
         expect(err).to.be.instanceOf(NotFoundError);
+        expect(err).to.have.property('message', 'Épreuve introuvable');
       });
     });
 
@@ -618,6 +619,7 @@ describe('Integration | Repository | challenge-repository', function () {
 
           // then
           expect(err).to.be.instanceOf(NotFoundError);
+          expect(err).to.have.property('message', 'Épreuve introuvable');
         });
       });
       context('when all challenges are found', function () {
@@ -774,6 +776,7 @@ describe('Integration | Repository | challenge-repository', function () {
 
           // then
           expect(err).to.be.instanceOf(NotFoundError);
+          expect(err).to.have.property('message', 'Épreuve introuvable');
         });
       });
       context('when all challenges are found', function () {
