@@ -1,8 +1,11 @@
 import { NotFoundError } from '../../../src/shared/domain/errors.js';
 import { Framework } from '../../../src/shared/domain/models/index.js';
 import { LearningContentRepository } from '../../../src/shared/infrastructure/repositories/learning-content-repository.js';
+import { child, SCOPES } from '../../../src/shared/infrastructure/utils/logger.js';
 
 const TABLE_NAME = 'learningcontent.frameworks';
+
+const logger = child('learningcontent:repository', { event: SCOPES.LEARNING_CONTENT });
 
 export async function list() {
   const cacheKey = 'list';
@@ -16,6 +19,7 @@ export async function getByName(name) {
   const findByNameCallback = (knex) => knex.where('name', name).limit(1);
   const [frameworkDto] = await getInstance().find(cacheKey, findByNameCallback);
   if (!frameworkDto) {
+    logger.warn({ frameworkName: name }, 'Référentiel introuvable');
     throw new NotFoundError(`Framework not found for name ${name}`);
   }
   return toDomain(frameworkDto);
