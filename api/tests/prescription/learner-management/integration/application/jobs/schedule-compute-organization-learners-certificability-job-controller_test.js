@@ -32,31 +32,64 @@ describe('Integration | Infrastructure | Jobs | scheduleComputeOrganizationLearn
       };
     });
 
-    it('should schedule multiple ComputeCertificabilityJob', async function () {
-      // given
-      const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
-        new ScheduleComputeOrganizationLearnersCertificabilityJobController();
+    context('when computation is asynchronous', function () {
+      it('should schedule multiple ComputeCertificabilityJob', async function () {
+        // given
+        const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
+          new ScheduleComputeOrganizationLearnersCertificabilityJobController();
 
-      // when
-      await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
-        data: { skipLoggedLastDayCheck: true, onlyNotComputed: false },
-        dependencies: {
-          logger,
-          organizationLearnerRepository,
-          computeCertificabilityJobRepository,
-          config: {
-            features: {
-              scheduleComputeOrganizationLearnersCertificability: {
-                chunkSize: 2,
-                cron: '0 21 * * *',
+        // when
+        await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
+          data: { skipLoggedLastDayCheck: true, onlyNotComputed: false },
+          dependencies: {
+            logger,
+            organizationLearnerRepository,
+            computeCertificabilityJobRepository,
+            config: {
+              features: {
+                scheduleComputeOrganizationLearnersCertificability: {
+                  chunkSize: 2,
+                  cron: '0 21 * * *',
+                  synchronously: false,
+                },
               },
             },
           },
-        },
-      });
-      // then
+        });
 
-      await expect('ComputeCertificabilityJob').to.have.been.performed.withJobsCount(2);
+        // then
+        await expect('ComputeCertificabilityJob').to.have.been.performed.withJobsCount(2);
+      });
+    });
+
+    context('when computation is synchronous', function () {
+      it('should not schedule any ComputeCertificabilityJob', async function () {
+        // given
+        const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
+          new ScheduleComputeOrganizationLearnersCertificabilityJobController();
+
+        // when
+        await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
+          data: { skipLoggedLastDayCheck: true, onlyNotComputed: false },
+          dependencies: {
+            logger,
+            organizationLearnerRepository,
+            computeCertificabilityJobRepository,
+            config: {
+              features: {
+                scheduleComputeOrganizationLearnersCertificability: {
+                  chunkSize: 2,
+                  cron: '0 21 * * *',
+                  synchronously: true,
+                },
+              },
+            },
+          },
+        });
+
+        // then
+        await expect('ComputeCertificabilityJob').to.have.been.performed.withJobsCount(0);
+      });
     });
   });
 });

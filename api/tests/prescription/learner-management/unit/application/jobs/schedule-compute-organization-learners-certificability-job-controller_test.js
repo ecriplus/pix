@@ -3,6 +3,7 @@ import timezone from 'dayjs/plugin/timezone.js';
 import utc from 'dayjs/plugin/utc.js';
 
 import { ScheduleComputeOrganizationLearnersCertificabilityJobController } from '../../../../../../src/prescription/learner-management/application/jobs/schedule-compute-organization-learners-certificability-job-controller.js';
+import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { expect, knex, sinon } from '../../../../../test-helper.js';
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -66,185 +67,364 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
       clock.restore();
     });
 
-    it('should schedule multiple ComputeCertificabilityJob', async function () {
-      // given
-      const skipLoggedLastDayCheck = undefined;
-      const onlyNotComputed = undefined;
-
-      organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability
-        .withArgs({
-          fromUserActivityDate,
-          toUserActivityDate,
-          skipLoggedLastDayCheck,
-          onlyNotComputed,
-        })
-        .resolves(3);
-      organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
-        .withArgs({
-          fromUserActivityDate,
-          toUserActivityDate,
-          limit: 2,
-          offset: 0,
-          skipLoggedLastDayCheck,
-          onlyNotComputed,
-        })
-        .resolves([1, 2]);
-      organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
-        .withArgs({
-          fromUserActivityDate,
-          toUserActivityDate,
-          limit: 2,
-          offset: 2,
-          skipLoggedLastDayCheck,
-          onlyNotComputed,
-        })
-        .resolves([3]);
-      const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
-        new ScheduleComputeOrganizationLearnersCertificabilityJobController();
-
-      // when
-      await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
-        dependencies: {
-          logger,
-          organizationLearnerRepository,
-          computeCertificabilityJobRepository,
-          config,
-        },
+    context('when computation is asynchronous', function () {
+      beforeEach(function () {
+        config.features.scheduleComputeOrganizationLearnersCertificability.synchronously = false;
       });
 
-      // then
-      expect(computeCertificabilityJobRepository.performAsync.getCall(0).args[0]).to.be.deep.equal(
-        {
-          organizationLearnerId: 1,
-        },
-        {
-          organizationLearnerId: 2,
-        },
-      );
-      expect(computeCertificabilityJobRepository.performAsync.getCall(1).args[0]).to.be.deep.equal({
-        organizationLearnerId: 3,
-      });
-    });
+      it('should schedule multiple ComputeCertificabilityJob', async function () {
+        // given
+        const skipLoggedLastDayCheck = undefined;
+        const onlyNotComputed = undefined;
 
-    it('should take options from event', async function () {
-      // given
-      const skipLoggedLastDayCheck = true;
-      const onlyNotComputed = true;
-
-      organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability
-        .withArgs({
-          fromUserActivityDate,
-          toUserActivityDate,
-          skipLoggedLastDayCheck,
-          onlyNotComputed,
-        })
-        .resolves(3);
-      organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
-        .withArgs({
-          fromUserActivityDate,
-          toUserActivityDate,
-          limit: 2,
-          offset: 0,
-          skipLoggedLastDayCheck,
-          onlyNotComputed,
-        })
-        .resolves([1, 2]);
-      organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
-        .withArgs({
-          fromUserActivityDate,
-          toUserActivityDate,
-          limit: 2,
-          offset: 2,
-          skipLoggedLastDayCheck,
-          onlyNotComputed,
-        })
-        .resolves([3]);
-      const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
-        new ScheduleComputeOrganizationLearnersCertificabilityJobController();
-
-      // when
-      await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
-        data: {
-          skipLoggedLastDayCheck,
-          onlyNotComputed,
-        },
-        dependencies: {
-          logger,
-          organizationLearnerRepository,
-          computeCertificabilityJobRepository,
-          config,
-        },
-      });
-
-      // then
-      expect(computeCertificabilityJobRepository.performAsync.getCall(0).args[0]).to.be.deep.equal(
-        { organizationLearnerId: 1 },
-        { organizationLearnerId: 2 },
-      );
-      expect(computeCertificabilityJobRepository.performAsync.getCall(1).args[0]).to.be.deep.equal({
-        organizationLearnerId: 3,
-      });
-    });
-
-    it('should test pagination with a lot of results', async function () {
-      // given
-      const skipLoggedLastDayCheck = undefined;
-      const onlyNotComputed = undefined;
-
-      const chunkCount = 10;
-      const limit = 3;
-
-      config.features.scheduleComputeOrganizationLearnersCertificability.chunkSize = limit;
-
-      organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability
-        .withArgs({
-          fromUserActivityDate,
-          toUserActivityDate,
-          skipLoggedLastDayCheck,
-          onlyNotComputed,
-        })
-        .resolves(30);
-
-      for (let index = 0; index < chunkCount; index++) {
-        organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
+        organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability
           .withArgs({
-            limit,
-            offset: index * limit,
             fromUserActivityDate,
             toUserActivityDate,
             skipLoggedLastDayCheck,
             onlyNotComputed,
           })
-          .resolves([index * limit + 1, index * limit + 2, index * limit + 3]);
-      }
+          .resolves(3);
+        organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
+          .withArgs({
+            fromUserActivityDate,
+            toUserActivityDate,
+            limit: 2,
+            offset: 0,
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          })
+          .resolves([1, 2]);
+        organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
+          .withArgs({
+            fromUserActivityDate,
+            toUserActivityDate,
+            limit: 2,
+            offset: 2,
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          })
+          .resolves([3]);
+        const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
+          new ScheduleComputeOrganizationLearnersCertificabilityJobController();
 
-      const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
-        new ScheduleComputeOrganizationLearnersCertificabilityJobController();
+        // when
+        await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
+          dependencies: {
+            logger,
+            organizationLearnerRepository,
+            computeCertificabilityJobRepository,
+            config,
+          },
+        });
 
-      // when
-      await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
-        dependencies: {
-          logger,
-          organizationLearnerRepository,
-          computeCertificabilityJobRepository,
-          config,
-        },
-      });
-
-      // then
-      for (let index = 0; index < chunkCount; index++) {
-        expect(computeCertificabilityJobRepository.performAsync.getCall(index).args[0]).to.be.deep.equal(
+        // then
+        expect(computeCertificabilityJobRepository.performAsync.getCall(0).args[0]).to.be.deep.equal(
           {
-            organizationLearnerId: index * limit + 1,
+            organizationLearnerId: 1,
           },
           {
-            organizationLearnerId: index * limit + 2,
-          },
-          {
-            organizationLearnerId: index * limit + 3,
+            organizationLearnerId: 2,
           },
         );
-      }
+        expect(computeCertificabilityJobRepository.performAsync.getCall(1).args[0]).to.be.deep.equal({
+          organizationLearnerId: 3,
+        });
+      });
+
+      it('should take options from event', async function () {
+        // given
+        const skipLoggedLastDayCheck = true;
+        const onlyNotComputed = true;
+
+        organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability
+          .withArgs({
+            fromUserActivityDate,
+            toUserActivityDate,
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          })
+          .resolves(3);
+        organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
+          .withArgs({
+            fromUserActivityDate,
+            toUserActivityDate,
+            limit: 2,
+            offset: 0,
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          })
+          .resolves([1, 2]);
+        organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
+          .withArgs({
+            fromUserActivityDate,
+            toUserActivityDate,
+            limit: 2,
+            offset: 2,
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          })
+          .resolves([3]);
+        const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
+          new ScheduleComputeOrganizationLearnersCertificabilityJobController();
+
+        // when
+        await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
+          data: {
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          },
+          dependencies: {
+            logger,
+            organizationLearnerRepository,
+            computeCertificabilityJobRepository,
+            config,
+          },
+        });
+
+        // then
+        expect(computeCertificabilityJobRepository.performAsync.getCall(0).args[0]).to.be.deep.equal(
+          { organizationLearnerId: 1 },
+          { organizationLearnerId: 2 },
+        );
+        expect(computeCertificabilityJobRepository.performAsync.getCall(1).args[0]).to.be.deep.equal({
+          organizationLearnerId: 3,
+        });
+      });
+
+      it('should test pagination with a lot of results', async function () {
+        // given
+        const skipLoggedLastDayCheck = undefined;
+        const onlyNotComputed = undefined;
+
+        const chunkCount = 10;
+        const limit = 3;
+
+        config.features.scheduleComputeOrganizationLearnersCertificability.chunkSize = limit;
+
+        organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability
+          .withArgs({
+            fromUserActivityDate,
+            toUserActivityDate,
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          })
+          .resolves(30);
+
+        for (let index = 0; index < chunkCount; index++) {
+          organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
+            .withArgs({
+              limit,
+              offset: index * limit,
+              fromUserActivityDate,
+              toUserActivityDate,
+              skipLoggedLastDayCheck,
+              onlyNotComputed,
+            })
+            .resolves([index * limit + 1, index * limit + 2, index * limit + 3]);
+        }
+
+        const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
+          new ScheduleComputeOrganizationLearnersCertificabilityJobController();
+
+        // when
+        await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
+          dependencies: {
+            logger,
+            organizationLearnerRepository,
+            computeCertificabilityJobRepository,
+            config,
+          },
+        });
+
+        // then
+        for (let index = 0; index < chunkCount; index++) {
+          expect(computeCertificabilityJobRepository.performAsync.getCall(index).args[0]).to.be.deep.equal(
+            {
+              organizationLearnerId: index * limit + 1,
+            },
+            {
+              organizationLearnerId: index * limit + 2,
+            },
+            {
+              organizationLearnerId: index * limit + 3,
+            },
+          );
+        }
+      });
+    });
+
+    context('when computation is synchronous', function () {
+      beforeEach(function () {
+        config.features.scheduleComputeOrganizationLearnersCertificability.synchronously = true;
+        sinon.stub(usecases, 'computeOrganizationLearnerCertificability');
+      });
+
+      it('should call usecase directly', async function () {
+        // given
+        const skipLoggedLastDayCheck = undefined;
+        const onlyNotComputed = undefined;
+
+        organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability
+          .withArgs({
+            fromUserActivityDate,
+            toUserActivityDate,
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          })
+          .resolves(3);
+        organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
+          .withArgs({
+            fromUserActivityDate,
+            toUserActivityDate,
+            limit: 2,
+            offset: 0,
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          })
+          .resolves([1, 2]);
+        organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
+          .withArgs({
+            fromUserActivityDate,
+            toUserActivityDate,
+            limit: 2,
+            offset: 2,
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          })
+          .resolves([3]);
+        const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
+          new ScheduleComputeOrganizationLearnersCertificabilityJobController();
+
+        // when
+        await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
+          dependencies: {
+            logger,
+            organizationLearnerRepository,
+            computeCertificabilityJobRepository,
+            config,
+          },
+        });
+
+        // then
+        expect(usecases.computeOrganizationLearnerCertificability).to.have.been.calledThrice;
+        expect(computeCertificabilityJobRepository.performAsync).to.not.have.been.called;
+      });
+
+      it('should take options from event', async function () {
+        // given
+        const skipLoggedLastDayCheck = true;
+        const onlyNotComputed = true;
+
+        organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability
+          .withArgs({
+            fromUserActivityDate,
+            toUserActivityDate,
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          })
+          .resolves(3);
+        organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
+          .withArgs({
+            fromUserActivityDate,
+            toUserActivityDate,
+            limit: 2,
+            offset: 0,
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          })
+          .resolves([1, 2]);
+        organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
+          .withArgs({
+            fromUserActivityDate,
+            toUserActivityDate,
+            limit: 2,
+            offset: 2,
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          })
+          .resolves([3]);
+        const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
+          new ScheduleComputeOrganizationLearnersCertificabilityJobController();
+
+        // when
+        await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
+          data: {
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          },
+          dependencies: {
+            logger,
+            organizationLearnerRepository,
+            computeCertificabilityJobRepository,
+            config,
+          },
+        });
+
+        // then
+        expect(usecases.computeOrganizationLearnerCertificability).have.been.calledWithExactly({
+          organizationLearnerId: 1,
+        });
+        expect(usecases.computeOrganizationLearnerCertificability).have.been.calledWithExactly({
+          organizationLearnerId: 2,
+        });
+        expect(usecases.computeOrganizationLearnerCertificability).have.been.calledWithExactly({
+          organizationLearnerId: 3,
+        });
+      });
+
+      it('should test pagination with a lot of results', async function () {
+        // given
+        const skipLoggedLastDayCheck = undefined;
+        const onlyNotComputed = undefined;
+
+        const chunkCount = 10;
+        const limit = 3;
+
+        config.features.scheduleComputeOrganizationLearnersCertificability.chunkSize = limit;
+
+        organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability
+          .withArgs({
+            fromUserActivityDate,
+            toUserActivityDate,
+            skipLoggedLastDayCheck,
+            onlyNotComputed,
+          })
+          .resolves(30);
+
+        for (let index = 0; index < chunkCount; index++) {
+          organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability
+            .withArgs({
+              limit,
+              offset: index * limit,
+              fromUserActivityDate,
+              toUserActivityDate,
+              skipLoggedLastDayCheck,
+              onlyNotComputed,
+            })
+            .resolves([index * limit + 1, index * limit + 2, index * limit + 3]);
+        }
+
+        const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
+          new ScheduleComputeOrganizationLearnersCertificabilityJobController();
+
+        // when
+        await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
+          dependencies: {
+            logger,
+            organizationLearnerRepository,
+            computeCertificabilityJobRepository,
+            config,
+          },
+        });
+
+        // then
+        for (let index = 0; index < chunkCount; index++) {
+          expect(usecases.computeOrganizationLearnerCertificability.getCall(index).args[0]).to.be.deep.equal({
+            organizationLearnerId: index + 1,
+          });
+        }
+      });
     });
   });
 });
