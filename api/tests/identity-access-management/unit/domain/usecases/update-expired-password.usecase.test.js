@@ -1,11 +1,11 @@
-import { updateExpiredPassword } from '../../../../lib/domain/usecases/update-expired-password.js';
-import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
-import { UserNotFoundError } from '../../../../src/shared/domain/errors.js';
-import { ForbiddenAccess } from '../../../../src/shared/domain/errors.js';
-import { logger } from '../../../../src/shared/infrastructure/utils/logger.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { updateExpiredPassword } from '../../../../../src/identity-access-management/domain/usecases/update-expired-password.usecase.js';
+import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
+import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | update-expired-password', function () {
+describe('Unit | Identity Access Management | Domain | UseCase | update-expired-password', function () {
   const passwordResetToken = 'PASSWORD_RESET_TOKEN';
   const newPassword = 'Password02';
   const hashedPassword = 'ABCDEF123';
@@ -44,7 +44,7 @@ describe('Unit | UseCase | update-expired-password', function () {
     cryptoService.hashPassword.resolves(hashedPassword);
   });
 
-  it('should update user password with a hashed password and return username', async function () {
+  it('updates user password with a hashed password and return username', async function () {
     // when
     const login = await updateExpiredPassword({
       passwordResetToken,
@@ -71,7 +71,7 @@ describe('Unit | UseCase | update-expired-password', function () {
   });
 
   context('when user does not have a username', function () {
-    it('should return user email', async function () {
+    it('returns user email', async function () {
       // given
       const user = domainBuilder.buildUser({ username: null, email: 'armand.talo@example.net' });
       userRepository.get.resolves(user);
@@ -92,7 +92,7 @@ describe('Unit | UseCase | update-expired-password', function () {
   });
 
   context('when userId not exist', function () {
-    it('should throw UserNotFoundError', async function () {
+    it('throws UserNotFoundError', async function () {
       // given
       userRepository.get.rejects(new UserNotFoundError());
 
@@ -107,7 +107,7 @@ describe('Unit | UseCase | update-expired-password', function () {
       expect(error).to.be.instanceOf(UserNotFoundError);
     });
 
-    it('should log error', async function () {
+    it('logs error', async function () {
       // given
       userRepository.get.rejects(new UserNotFoundError());
       sinon.stub(logger, 'warn');
@@ -125,7 +125,7 @@ describe('Unit | UseCase | update-expired-password', function () {
   });
 
   context('When changing password is not required', function () {
-    it('should throw ForbiddenAccess', async function () {
+    it('throws ForbiddenAccess', async function () {
       // given
       const authenticationMethod = domainBuilder.buildAuthenticationMethod.withPixAsIdentityProviderAndRawPassword({
         userId: 100,
