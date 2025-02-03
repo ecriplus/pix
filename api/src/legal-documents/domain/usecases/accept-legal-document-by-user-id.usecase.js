@@ -31,8 +31,12 @@ const acceptLegalDocumentByUserId = withTransaction(
       return;
     }
 
-    const existUserAcceptance = await userAcceptanceRepository.findLastForLegalDocument({ userId, service, type });
-    if (existUserAcceptance) {
+    const doesUserAcceptanceAlreadyExist = await userAcceptanceRepository.findLastForLegalDocument({
+      userId,
+      service,
+      type,
+    });
+    if (doesUserAcceptanceAlreadyExist) {
       return;
     }
 
