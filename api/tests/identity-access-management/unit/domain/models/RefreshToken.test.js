@@ -102,4 +102,25 @@ describe('Unit | Identity Access Management | Domain | Model | RefreshToken', fu
       expect(refreshToken.value).to.equal('userId!:XXX-123-456');
     });
   });
+
+  describe('#hasSameAudience', function () {
+    it('returns true with same audience otherwise false', function () {
+      // given
+      const refreshToken = new RefreshToken({
+        userId: 'userId!',
+        scope: 'pix-orga',
+        source: 'source!',
+        value: 'token!',
+        audience: 'https://app.pix.fr',
+      });
+
+      // when
+      const withSameAudience = refreshToken.hasSameAudience('https://app.pix.fr');
+      const withDifferentAudience = refreshToken.hasSameAudience('https://orga.pix.fr');
+
+      // then
+      expect(withSameAudience).to.be.true;
+      expect(withDifferentAudience).to.be.false;
+    });
+  });
 });

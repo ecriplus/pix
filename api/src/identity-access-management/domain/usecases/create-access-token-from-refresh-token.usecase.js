@@ -1,4 +1,5 @@
 import { UnauthorizedError } from '../../../shared/application/http-errors.js';
+import { config } from '../../../shared/config.js';
 
 const createAccessTokenFromRefreshToken = async function ({
   refreshToken,
@@ -9,9 +10,16 @@ const createAccessTokenFromRefreshToken = async function ({
 }) {
   const foundRefreshToken = await refreshTokenRepository.findByToken({ token: refreshToken });
 
-  if (!foundRefreshToken) throw new UnauthorizedError('Refresh token is invalid', 'INVALID_REFRESH_TOKEN');
+  if (!foundRefreshToken) {
+    throw new UnauthorizedError('Refresh token is invalid', 'INVALID_REFRESH_TOKEN');
+  }
 
   if (scope && foundRefreshToken.scope && scope !== foundRefreshToken.scope) {
+    throw new UnauthorizedError('Refresh token is invalid', 'INVALID_REFRESH_TOKEN');
+  }
+
+  const { isUserTokenAudConfinementEnabled } = config.featureToggles;
+  if (isUserTokenAudConfinementEnabled && !foundRefreshToken.hasSameAudience(audience)) {
     throw new UnauthorizedError('Refresh token is invalid', 'INVALID_REFRESH_TOKEN');
   }
 
