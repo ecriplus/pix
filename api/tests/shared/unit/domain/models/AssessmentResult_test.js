@@ -39,37 +39,21 @@ describe('Unit | Domain | Models | AssessmentResult', function () {
       expect(isValidated).to.be.true;
     });
 
-    it('should return false if the assessment result is rejected', function () {
-      // given
-      const assessmentResult = domainBuilder.buildAssessmentResult.rejected();
+    // eslint-disable-next-line mocha/no-setup-in-describe
+    [AssessmentResult.status.CANCELLED, AssessmentResult.status.REJECTED, AssessmentResult.status.ERROR].forEach(
+      (assessmentResultStatus) => {
+        it(`should return false if the assessment result is ${assessmentResultStatus}`, function () {
+          // given
+          const assessmentResult = domainBuilder.buildAssessmentResult();
+          assessmentResult.status = assessmentResultStatus;
 
-      // when
-      const isValidated = assessmentResult.isValidated();
+          // when
+          const isValidated = assessmentResult.isValidated();
 
-      // then
-      expect(isValidated).to.be.false;
-    });
-
-    it('should return false if the assessment result is in error', function () {
-      // given
-      const assessmentResult = domainBuilder.buildAssessmentResult.error();
-
-      // when
-      const isValidated = assessmentResult.isValidated();
-
-      // then
-      expect(isValidated).to.be.false;
-    });
-
-    it('should return false if the assessment result is started', function () {
-      // given
-      const assessmentResult = domainBuilder.buildAssessmentResult.started();
-
-      // when
-      const isValidated = assessmentResult.isValidated();
-
-      // then
-      expect(isValidated).to.be.false;
-    });
+          // then
+          expect(isValidated).to.be.false;
+        });
+      },
+    );
   });
 });

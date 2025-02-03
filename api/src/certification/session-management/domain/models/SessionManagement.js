@@ -71,6 +71,10 @@ class SessionManagement {
     return this.publishedAt !== null;
   }
 
+  get isFinalized() {
+    return this.finalizedAt !== null;
+  }
+
   isSupervisable(invigilatorPassword) {
     return this.invigilatorPassword === invigilatorPassword;
   }

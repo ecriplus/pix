@@ -1,3 +1,6 @@
+/**
+ * @typedef {import('./index.js').CertificationAssessmentRepository} CertificationAssessmentRepository
+ */
 import { ChallengeDeneutralized } from '../../../certification/evaluation/domain/events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../../../certification/evaluation/domain/events/ChallengeNeutralized.js';
 import { services } from '../../../certification/evaluation/domain/services/index.js';
@@ -8,9 +11,11 @@ import CertificationRescoredByScript from '../../../certification/session-manage
 import { AlgorithmEngineVersion } from '../../../certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { V3_REPRODUCIBILITY_RATE } from '../constants.js';
 import { CertificationComputeError } from '../errors.js';
-import { CertificationResult } from '../models/CertificationResult.js';
+import { CertificationResult } from '../models/index.js';
+import CertificationCancelled from './CertificationCancelled.js';
 import { CertificationCourseUnrejected } from './CertificationCourseUnrejected.js';
 import { CertificationRescoringCompleted } from './CertificationRescoringCompleted.js';
+import CertificationUncancelled from './CertificationUncancelled.js';
 import { checkEventTypes } from './check-event-types.js';
 
 const eventTypes = [
@@ -19,9 +24,15 @@ const eventTypes = [
   CertificationJuryDone,
   CertificationCourseRejected,
   CertificationCourseUnrejected,
+  CertificationCancelled,
   CertificationRescoredByScript,
+  CertificationUncancelled,
 ];
 
+/**
+ * @param {Object} params
+ * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
+ */
 async function handleCertificationRescoring({
   event,
   assessmentResultRepository,
@@ -181,12 +192,20 @@ function _getEmitterFromEvent(event) {
     emitter = CertificationResult.emitters.PIX_ALGO_NEUTRALIZATION;
   }
 
-  if (event instanceof CertificationJuryDone || event instanceof CertificationRescoredByScript) {
+  if (
+    event instanceof CertificationJuryDone ||
+    event instanceof CertificationRescoredByScript ||
+    event instanceof CertificationUncancelled
+  ) {
     emitter = CertificationResult.emitters.PIX_ALGO_AUTO_JURY;
   }
 
   if (event instanceof CertificationCourseRejected || event instanceof CertificationCourseUnrejected) {
     emitter = CertificationResult.emitters.PIX_ALGO_FRAUD_REJECTION;
+  }
+
+  if (event instanceof CertificationCancelled) {
+    emitter = CertificationResult.emitters.PIX_ALGO_CANCELLATION;
   }
 
   return emitter;

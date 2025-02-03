@@ -4,40 +4,53 @@ import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Certification | Session-management | Unit | Application | Controller | cancellation', function () {
   describe('#cancel', function () {
-    it('should call cancel-certification-course usecase', async function () {
+    it('should call cancel usecase', async function () {
       // given
-      sinon.stub(usecases, 'cancelCertificationCourse');
+      sinon.stub(usecases, 'cancel');
       const request = {
+        auth: {
+          credentials: {
+            userId: 345,
+          },
+        },
         params: {
           certificationCourseId: 123,
         },
       };
-      usecases.cancelCertificationCourse.resolves();
+      usecases.cancel.resolves();
 
       // when
       await cancellationController.cancel(request, hFake);
 
       // then
-      expect(usecases.cancelCertificationCourse).to.have.been.calledWithExactly({ certificationCourseId: 123 });
+      expect(usecases.cancel).to.have.been.calledWithExactly({
+        certificationCourseId: 123,
+        juryId: 345,
+      });
     });
   });
 
-  describe('#uncancelCertificationCourse', function () {
-    it('should call uncancel-certification-course usecase', async function () {
+  describe('#uncancel', function () {
+    it('should call uncancel usecase', async function () {
       // given
-      sinon.stub(usecases, 'uncancelCertificationCourse');
+      sinon.stub(usecases, 'uncancel');
       const request = {
+        auth: {
+          credentials: {
+            userId: 345,
+          },
+        },
         params: {
           certificationCourseId: 123,
         },
       };
-      usecases.uncancelCertificationCourse.resolves();
+      usecases.uncancel.resolves();
 
       // when
       await cancellationController.uncancel(request, hFake);
 
       // then
-      expect(usecases.uncancelCertificationCourse).to.have.been.calledWithExactly({ certificationCourseId: 123 });
+      expect(usecases.uncancel).to.have.been.calledWithExactly({ certificationCourseId: 123, juryId: 345 });
     });
   });
 });

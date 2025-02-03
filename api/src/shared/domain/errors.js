@@ -1031,6 +1031,12 @@ class AuditLoggerApiError extends DomainError {
   }
 }
 
+class NotFinalizedSessionError extends DomainError {
+  constructor(message = 'A certification course cannot be cancelled while session has not been finalized.') {
+    super(message);
+  }
+}
+
 export {
   AccountRecoveryDemandExpired,
   AccountRecoveryUserAlreadyConfirmEmail,
@@ -1122,6 +1128,7 @@ export {
   NoSkillsInCampaignError,
   NoStagesForCampaign,
   NotEnoughDaysPassedBeforeResetCampaignParticipationError,
+  NotFinalizedSessionError,
   NotFoundError,
   NotImplementedError,
   ObjectValidationError,

@@ -16,6 +16,7 @@ import { ABORT_REASONS } from '../../../../../../../src/certification/shared/dom
 import { AutoJuryCommentKeys } from '../../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import * as scoringService from '../../../../../../../src/evaluation/domain/services/scoring/scoring-service.js';
 import { CertificationComputeError } from '../../../../../../../src/shared/domain/errors.js';
+import CertificationCancelled from '../../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { AssessmentResult, status } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { CertificationResult } from '../../../../../../../src/shared/domain/models/index.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
@@ -385,6 +386,66 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
             commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
               commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS,
             }),
+          });
+
+          expect(assessmentResultRepository.save).to.have.been.calledWithExactly({
+            certificationCourseId: 123,
+            assessmentResult: expectedAssessmentResult,
+          });
+        });
+      });
+
+      context('when certification is cancelled', function () {
+        it('builds and save a cancelled assessment result', async function () {
+          // given
+          const certificationCourseId = 123;
+          const juryId = 456;
+          const event = new CertificationCancelled({ certificationCourseId, juryId });
+          const certificationCourse = domainBuilder.buildCertificationCourse({
+            id: certificationCourseId,
+            abortReason: null,
+            isCancelled: true,
+          });
+          const certificationAssessmentScore = domainBuilder.buildCertificationAssessmentScore({
+            competenceMarks: [],
+            percentageCorrectAnswers: 49,
+            hasEnoughNonNeutralizedChallengesToBeTrusted: true,
+          });
+          const certificationAssessment = domainBuilder.buildCertificationAssessment({
+            id: 45674567,
+            certificationCourseId,
+            userId: 4567,
+          });
+          const savedAssessmentResult = { id: 123123 };
+
+          dependencies.calculateCertificationAssessmentScore.resolves(certificationAssessmentScore);
+          scoringCertificationService.isLackOfAnswersForTechnicalReason.returns(false);
+          certificationCourseRepository.get
+            .withArgs({ id: certificationAssessment.certificationCourseId })
+            .resolves(certificationCourse);
+          assessmentResultRepository.save.resolves(savedAssessmentResult);
+          competenceMarkRepository.save.resolves();
+
+          // when
+          await handleV2CertificationScoring({
+            event,
+            emitter: CertificationResult.emitters.PIX_ALGO_CANCELLATION,
+            certificationAssessment,
+            assessmentResultRepository,
+            certificationCourseRepository,
+            competenceMarkRepository,
+            scoringCertificationService,
+            dependencies,
+          });
+
+          // then
+          const expectedAssessmentResult = new AssessmentResult({
+            pixScore: 0,
+            reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
+            status: AssessmentResult.status.CANCELLED,
+            assessmentId: certificationAssessment.id,
+            emitter: CertificationResult.emitters.PIX_ALGO_CANCELLATION,
+            juryId,
           });
 
           expect(assessmentResultRepository.save).to.have.been.calledWithExactly({

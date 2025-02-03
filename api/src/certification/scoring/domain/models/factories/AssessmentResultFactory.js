@@ -14,6 +14,17 @@ export class AssessmentResultFactory {
     });
   }
 
+  static buildCancelledAssessmentResult({ pixScore, reproducibilityRate, assessmentId, juryId, emitter }) {
+    return new AssessmentResult({
+      emitter,
+      pixScore,
+      reproducibilityRate,
+      status: AssessmentResult.status.CANCELLED,
+      assessmentId,
+      juryId,
+    });
+  }
+
   static buildStandardAssessmentResult({ pixScore, reproducibilityRate, status, assessmentId, juryId, emitter }) {
     return new AssessmentResult({
       emitter,
