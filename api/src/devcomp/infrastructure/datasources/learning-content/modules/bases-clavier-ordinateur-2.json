@@ -268,7 +268,7 @@
             "type": "image",
             "url": "https://i.imgur.com/AJIoLZu.jpeg",
             "alt": "Dessin d'un clavier, une main appuie sur la touche majuscule, l'autre sur la touche du point d'interrogation et de la virgule.",
-            "alternativeText": "<p><br></p>",
+            "alternativeText": "",
             "legend": "",
             "licence": ""
           }
@@ -279,7 +279,7 @@
             "id": "863077ce-8e5e-438a-b82f-2b4afc723ef0",
             "type": "expand",
             "title": "🤔 Bon à savoir",
-            "content": "<p>Certains claviers ont un pavé numérique à droite des flèches directionnelles. Le pavé numérique contient des touches supplémentaires avec tous les chiffres. Vous pouvez l’utiliser pour taper les chiffres sans utiliser la touche majuscule.</p><iframe width=\"700\" height=\"410\" src=\"http://www.image-heberg.fr/files/17380845144190712148.jpg\" title=\"Clavier comprenant un pavé numérique\"></iframe>"
+            "content": "<p>Certains claviers ont un pavé numérique à droite des flèches directionnelles. Le pavé numérique contient des touches supplémentaires avec tous les chiffres. Vous pouvez l’utiliser pour taper les chiffres sans utiliser la touche majuscule.</p><img src=\"http://www.image-heberg.fr/files/17380845144190712148.jpg\" alte=\"Clavier comprenant un pavé numérique\">"
           }
         }
       ]
@@ -465,7 +465,7 @@
           "element": {
             "id": "185a37d3-64dd-48e0-92b0-470bd34b4e9f",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">📌</span> Pour savoir comment taper un caractère, il faut connaître <strong>sa position sur la touche</strong> :</p>"
+            "content": "<p><span aria-hidden=\"true\">📌</span> Pour savoir comment taper un caractère, il faut connaître <strong>sa position sur la touche</strong>&nbsp;:</p>"
           }
         },
         {
@@ -492,7 +492,7 @@
           "element": {
             "id": "ca8c63e7-b192-4c9a-8f99-a4e54a2ea826",
             "type": "text",
-            "content": "<p><strong>Dans l'espace ci-dessous, pour chaque niveau, tapez les caractères à l’écran dans la zone de texte pour les faire disparaître dans le temps imparti.</strong></p>"
+            "content": "<p><strong>Dans l'espace ci-dessous, pour chaque niveau, tapez les caractères à l’écran dans la zone de texte pour les faire disparaître.</strong></p>"
           }
         },
         {
