@@ -165,7 +165,7 @@
           "element": {
             "id": "6764fe09-6a2f-47a1-b368-f9083a9e0a26",
             "type": "text",
-            "content": "<p>La <strong>touche majuscule ⇧</strong> du clavier permet de taper des lettres majuscules.</p><p><br><span aria-hidden=\"true\">🤔</span><strong>Le saviez-vous ?</strong><br>Sur la touche majuscule ⇧ il y a souvent une flèche vers le haut. On peut dire que c’est la touche qui fait grandir les lettres.</p>"
+            "content": "<p>La <strong>touche majuscule ⇧</strong> du clavier permet de taper des lettres majuscules.</p><p><br><span aria-hidden=\"true\">🤔</span><strong><span aria-hidden=\"true\">💡</span>&nbsp;Astuce</strong><br>Sur la touche majuscule ⇧ il y a souvent une flèche vers le haut. On peut dire que c’est la touche qui fait grandir les lettres.</p>"
           }
         },
         {
@@ -363,7 +363,7 @@
           "element": {
             "id": "172ad359-9878-4308-940a-5cdf64019769",
             "type": "image",
-            "url": "https://i.imgur.com/Px4JGyt.jpeg",
+            "url": "https://i.imgur.com/NYPpOQ7.jpeg",
             "alt": "",
             "alternativeText": "",
             "legend": "",
