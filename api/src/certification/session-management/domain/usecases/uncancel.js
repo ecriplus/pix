@@ -15,7 +15,7 @@ import CertificationUncancelled from '../../../../shared/domain/events/Certifica
  * @param {CertificationRescoringRepository} params.certificationRescoringRepository
  * @param {SessionRepository} params.SessionRepository
  */
-const uncancel = async function ({
+export const uncancel = async function ({
   certificationCourseId,
   juryId,
   certificationCourseRepository,
@@ -31,12 +31,10 @@ const uncancel = async function ({
   certificationCourse.uncancel();
   await certificationCourseRepository.update({ certificationCourse });
 
-  const certificationUncancelledEvent = new CertificationUncancelled({
+  const event = new CertificationUncancelled({
     certificationCourseId: certificationCourse.getId(),
     juryId,
   });
 
-  return certificationRescoringRepository.execute({ event: certificationUncancelledEvent });
+  return certificationRescoringRepository.execute({ event });
 };
-
-export { uncancel };
