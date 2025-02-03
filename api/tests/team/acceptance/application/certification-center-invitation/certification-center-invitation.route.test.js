@@ -179,53 +179,93 @@ describe('Acceptance | Team | Application | Route | Certification Center Invitat
     });
   });
 
-  describe('POST /api/certification-center-invitations/{id}/accept', function () {
-    it('it returns an HTTP code 204', async function () {
-      // given
-      databaseBuilder.factory.buildUser({ id: 293, email: 'user@example.net' });
-      const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
-      const certificationCenterInvitation = databaseBuilder.factory.buildCertificationCenterInvitation({
-        id: 123,
-        code: 'AZERT123',
-        certificationCenterId: certificationCenter.id,
-        status: CertificationCenterInvitation.StatusType.PENDING,
+  describe(`PATCH /api/certification-center-invitations/{id}`, function () {
+    context('when user is admin of the certification center', function () {
+      let adminUser;
+      let certificationCenter;
+
+      beforeEach(async function () {
+        adminUser = databaseBuilder.factory.buildUser();
+        certificationCenter = databaseBuilder.factory.buildCertificationCenter();
+        databaseBuilder.factory.buildCertificationCenterMembership({
+          userId: adminUser.id,
+          certificationCenterId: certificationCenter.id,
+          role: 'ADMIN',
+        });
+
+        await databaseBuilder.commit();
       });
 
-      await databaseBuilder.commit();
+      it('returns a 200 HTTP status code with updated certification center invitation', async function () {
+        // given
+        const certificationCenterInvitation = databaseBuilder.factory.buildCertificationCenterInvitation({
+          certificationCenterId: certificationCenter.id,
+        });
 
-      // when
-      const result = await server.inject({
-        headers: {
-          authorization: false,
-        },
-        method: 'POST',
-        url: `/api/certification-center-invitations/${certificationCenterInvitation.id}/accept`,
-        payload: {
+        await databaseBuilder.commit();
+
+        // when
+        const response = await server.inject({
+          method: 'PATCH',
+          url: `/api/certification-center-invitations/${certificationCenterInvitation.id}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
+        });
+
+        // then
+        const updatedCertificationCenterInvitation = await knex(CERTIFICATION_CENTER_INVITATIONS_TABLE_NAME)
+          .where({ id: certificationCenterInvitation.id })
+          .first();
+
+        expect(response.statusCode).to.equal(200);
+        expect(response.result).to.deep.equal({
           data: {
-            id: '123_AZERT123',
-            type: 'certification-center-invitations-responses',
+            type: 'certification-center-invitations',
+            id: `${updatedCertificationCenterInvitation.id}`,
             attributes: {
-              code: 'AZERT123',
-              email: 'user@example.net',
+              email: updatedCertificationCenterInvitation.email,
+              role: updatedCertificationCenterInvitation.role,
+              language: updatedCertificationCenterInvitation.locale,
+              'updated-at': updatedCertificationCenterInvitation.updatedAt,
             },
           },
-        },
+        });
+      });
+    });
+
+    context('when user is not admin of the certification center', function () {
+      let user;
+      let certificationCenter;
+
+      beforeEach(async function () {
+        user = databaseBuilder.factory.buildUser();
+        certificationCenter = databaseBuilder.factory.buildCertificationCenter();
+        databaseBuilder.factory.buildCertificationCenterMembership({
+          userId: user.id,
+          certificationCenterId: certificationCenter.id,
+          role: 'MEMBER',
+        });
+
+        await databaseBuilder.commit();
       });
 
-      // then
-      expect(result.statusCode).to.equal(204);
+      it('returns a 403 HTTP status code', async function () {
+        // given
+        const certificationCenterInvitation = databaseBuilder.factory.buildCertificationCenterInvitation({
+          certificationCenterId: certificationCenter.id,
+        });
 
-      const membership = await knex('certification-center-memberships')
-        .select('userId')
-        .where({ certificationCenterId: certificationCenter.id })
-        .first();
-      const invitation = await knex('certification-center-invitations')
-        .select('status')
-        .where({ certificationCenterId: certificationCenter.id })
-        .first();
+        await databaseBuilder.commit();
 
-      expect(membership.userId).to.equal(293);
-      expect(invitation.status).to.equal(CertificationCenterInvitation.StatusType.ACCEPTED);
+        // when
+        const response = await server.inject({
+          method: 'PATCH',
+          url: `/api/certification-center-invitations/${certificationCenterInvitation.id}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+        });
+
+        // then
+        expect(response.statusCode).to.equal(403);
+      });
     });
   });
 
@@ -294,6 +334,56 @@ describe('Acceptance | Team | Application | Route | Certification Center Invitat
         expect(statusCode).to.equal(403);
         expect(cancelledCertificationCenterInvitation.status).to.equal('pending');
       });
+    });
+  });
+
+  describe('POST /api/certification-center-invitations/{id}/accept', function () {
+    it('it returns an HTTP code 204', async function () {
+      // given
+      databaseBuilder.factory.buildUser({ id: 293, email: 'user@example.net' });
+      const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
+      const certificationCenterInvitation = databaseBuilder.factory.buildCertificationCenterInvitation({
+        id: 123,
+        code: 'AZERT123',
+        certificationCenterId: certificationCenter.id,
+        status: CertificationCenterInvitation.StatusType.PENDING,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await server.inject({
+        headers: {
+          authorization: false,
+        },
+        method: 'POST',
+        url: `/api/certification-center-invitations/${certificationCenterInvitation.id}/accept`,
+        payload: {
+          data: {
+            id: '123_AZERT123',
+            type: 'certification-center-invitations-responses',
+            attributes: {
+              code: 'AZERT123',
+              email: 'user@example.net',
+            },
+          },
+        },
+      });
+
+      // then
+      expect(result.statusCode).to.equal(204);
+
+      const membership = await knex('certification-center-memberships')
+        .select('userId')
+        .where({ certificationCenterId: certificationCenter.id })
+        .first();
+      const invitation = await knex('certification-center-invitations')
+        .select('status')
+        .where({ certificationCenterId: certificationCenter.id })
+        .first();
+
+      expect(membership.userId).to.equal(293);
+      expect(invitation.status).to.equal(CertificationCenterInvitation.StatusType.ACCEPTED);
     });
   });
 });
