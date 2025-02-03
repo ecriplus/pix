@@ -2,10 +2,13 @@ import { PIX_ORIGIN } from '../../domain/constants.js';
 import { NotFoundError } from '../../domain/errors.js';
 import { Area } from '../../domain/models/Area.js';
 import { getTranslatedKey } from '../../domain/services/get-translated-text.js';
+import { child, SCOPES } from '../utils/logger.js';
 import * as competenceRepository from './competence-repository.js';
 import { LearningContentRepository } from './learning-content-repository.js';
 
 const TABLE_NAME = 'learningcontent.areas';
+
+const logger = child('learningcontent:repository', { event: SCOPES.LEARNING_CONTENT });
 
 export async function list({ locale } = {}) {
   const cacheKey = 'list()';
@@ -57,6 +60,7 @@ export async function getAreaCodeByCompetenceId(competenceId) {
 export async function get({ id, locale }) {
   const areaDto = await getInstance().load(id);
   if (!areaDto) {
+    logger.warn({ areaId: id }, 'Domaine introuvable');
     throw new NotFoundError(`Area "${id}" not found.`);
   }
   return toDomain(areaDto, locale);
