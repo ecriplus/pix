@@ -2,6 +2,7 @@ import { knex } from '../../../../db/knex-database-connection.js';
 import { NotFoundError } from '../../domain/errors.js';
 import { Skill } from '../../domain/models/Skill.js';
 import { getTranslatedKey } from '../../domain/services/get-translated-text.js';
+import { child, SCOPES } from '../utils/logger.js';
 import { LearningContentRepository } from './learning-content-repository.js';
 
 const TABLE_NAME = 'learningcontent.skills';
@@ -9,9 +10,12 @@ const ACTIVE_STATUS = 'actif';
 const ARCHIVED_STATUS = 'archivé';
 const OPERATIVE_STATUSES = [ACTIVE_STATUS, ARCHIVED_STATUS];
 
+const logger = child('learningcontent:repository', { event: SCOPES.LEARNING_CONTENT });
+
 export async function get(id, { locale, useFallback } = { locale: null, useFallback: true }) {
   const skillDto = await getInstance().load(id);
   if (!skillDto) {
+    logger.warn({ skillId: id }, 'Acquis introuvable');
     throw new NotFoundError('Erreur, acquis introuvable');
   }
   return toDomain(skillDto, locale, useFallback);
