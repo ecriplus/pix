@@ -20,7 +20,8 @@ const ACCESSIBLE_STATUSES = [Accessibility.RAS, Accessibility.OK];
 export async function get(id, { forCorrection = false } = {}) {
   const challengeDto = await getInstance().load(id);
   if (!challengeDto) {
-    throw new NotFoundError();
+    logger.warn({ challengeId: id }, 'Épreuve introuvable');
+    throw new NotFoundError('Épreuve introuvable');
   }
   if (forCorrection) {
     return {
@@ -45,9 +46,11 @@ export async function get(id, { forCorrection = false } = {}) {
 
 export async function getMany(ids, locale) {
   const challengeDtos = await getInstance().loadMany(ids);
-  if (challengeDtos.some((challengeDto) => !challengeDto)) {
-    throw new NotFoundError();
-  }
+  challengeDtos.forEach((challengeDto, index) => {
+    if (challengeDto) return;
+    logger.warn({ challengeId: ids[index] }, 'Épreuve introuvable');
+    throw new NotFoundError('Épreuve introuvable');
+  });
   const localeChallengeDtos = locale
     ? challengeDtos.filter((challengeDto) => challengeDto.locales.includes(locale))
     : challengeDtos;

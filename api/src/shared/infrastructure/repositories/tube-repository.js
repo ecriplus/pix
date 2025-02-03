@@ -2,14 +2,18 @@ import { knex } from '../../../../db/knex-database-connection.js';
 import { LearningContentResourceNotFound } from '../../domain/errors.js';
 import { Tube } from '../../domain/models/Tube.js';
 import { getTranslatedKey } from '../../domain/services/get-translated-text.js';
+import { child, SCOPES } from '../utils/logger.js';
 import { LearningContentRepository } from './learning-content-repository.js';
 
 const TABLE_NAME = 'learningcontent.tubes';
 const ACTIVE_STATUS = 'actif';
 
+const logger = child('learningcontent:repository', { event: SCOPES.LEARNING_CONTENT });
+
 export async function get(id) {
   const tubeDto = await getInstance().load(id);
   if (!tubeDto) {
+    logger.warn({ tubeId: id }, 'Tube introuvable');
     throw new LearningContentResourceNotFound();
   }
   return toDomain(tubeDto);
