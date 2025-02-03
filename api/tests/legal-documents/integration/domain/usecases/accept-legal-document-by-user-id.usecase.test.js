@@ -29,6 +29,30 @@ describe('Integration | Legal documents | Domain | Use case | accept-legal-docum
     expect(userAcceptance).to.exist;
   });
 
+  context('when user has already accepted the legal document', function () {
+    it('does not throw an exception', async function () {
+      // given
+      const user = databaseBuilder.factory.buildUser();
+      const document = databaseBuilder.factory.buildLegalDocumentVersion({ service: PIX_ORGA, type: TOS });
+      databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+        userId: user.id,
+        legalDocumentVersionId: document.id,
+        acceptedAt: new Date('2024-03-01'),
+      });
+      await databaseBuilder.commit();
+
+      // when
+      await usecases.acceptLegalDocumentByUserId({ userId: user.id, service: PIX_ORGA, type: TOS });
+
+      // then
+      const userAcceptance = await knex('legal-document-version-user-acceptances')
+        .where('userId', user.id)
+        .where('legalDocumentVersionId', document.id)
+        .first();
+      expect(userAcceptance).to.exist;
+    });
+  });
+
   context('when the legal document is the Terms of Service for Pix Orga', function () {
     it('accepts the Pix Orga CGUs in the legacy and legal document model', async function () {
       // given

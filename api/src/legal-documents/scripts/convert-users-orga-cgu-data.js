@@ -84,6 +84,7 @@ export class ConvertUsersOrgaCguData extends Script {
     return knexConnection('users')
       .select('*')
       .where('pixOrgaTermsOfServiceAccepted', true)
+      .orderBy('id')
       .limit(batchSize)
       .offset(offset);
   }
