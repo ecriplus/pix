@@ -1,0 +1,34 @@
+import { UserOrganizationForAdmin } from '../../../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
+import { membershipAdminController } from '../../../../../src/team/application/membership/membership.admin.controller.js';
+import { usecases } from '../../../../../src/team/domain/usecases/index.js';
+import { expect, hFake, sinon } from '../../../../test-helper.js';
+
+describe('Unit | Team | Application | Controller | Membership Admin', function () {
+  describe('#findUserOrganizationsForAdmin', function () {
+    it('returns user’s organization memberships', async function () {
+      // given
+      const organizationMemberships = [new UserOrganizationForAdmin()];
+      const organizationMembershipsSerialized = Symbol('an array of user’s organization memberships serialized');
+
+      const userOrganizationForAdminSerializer = { serialize: sinon.stub() };
+      userOrganizationForAdminSerializer.serialize
+        .withArgs(organizationMemberships)
+        .returns(organizationMembershipsSerialized);
+
+      sinon.stub(usecases, 'findUserOrganizationsForAdmin').resolves(organizationMemberships);
+
+      // when
+      const request = {
+        params: {
+          id: 1,
+        },
+      };
+      await membershipAdminController.findUserOrganizationsForAdmin(request, hFake, {
+        userOrganizationForAdminSerializer,
+      });
+
+      // then
+      expect(usecases.findUserOrganizationsForAdmin).to.have.been.calledWithExactly({ userId: 1 });
+    });
+  });
+});

@@ -1,8 +1,8 @@
-import { findUserOrganizationsForAdmin } from '../../../../lib/domain/usecases/find-user-organizations-for-admin.js';
-import { expect, sinon } from '../../../test-helper.js';
+import { findUserOrganizationsForAdmin } from '../../../../../src/team/domain/usecases/find-user-organizations-for-admin.usecase.js';
+import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | findUserOrganizationsForAdmin', function () {
-  it('should fetch user’s organization memberships', async function () {
+describe('Unit | Team | Domain | UseCase | findUserOrganizationsForAdmin', function () {
+  it('fetches user’s organization memberships', async function () {
     const userId = 1;
 
     const userOrganizationsForAdminRepository = {

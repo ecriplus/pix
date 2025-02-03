@@ -1,7 +1,6 @@
 import { userController } from '../../../../lib/application/users/user-controller.js';
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { usecases as devcompUsecases } from '../../../../src/devcomp/domain/usecases/index.js';
-import { UserOrganizationForAdmin } from '../../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
 import { expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Controller | user-controller', function () {
@@ -45,32 +44,6 @@ describe('Unit | Controller | user-controller', function () {
       });
       expect(trainingSerializer.serialize).to.have.been.calledWithExactly(userRecommendedTrainings, meta);
       expect(response).to.equal(expectedResult);
-    });
-  });
-
-  describe('#findUserOrganizationsForAdmin', function () {
-    it('should return user’s organization memberships', async function () {
-      // given
-      const organizationMemberships = [new UserOrganizationForAdmin()];
-      const organizationMembershipsSerialized = Symbol('an array of user’s organization memberships serialized');
-
-      const userOrganizationForAdminSerializer = { serialize: sinon.stub() };
-      userOrganizationForAdminSerializer.serialize
-        .withArgs(organizationMemberships)
-        .returns(organizationMembershipsSerialized);
-
-      sinon.stub(usecases, 'findUserOrganizationsForAdmin').resolves(organizationMemberships);
-
-      // when
-      const request = {
-        params: {
-          id: 1,
-        },
-      };
-      await userController.findUserOrganizationsForAdmin(request, hFake, { userOrganizationForAdminSerializer });
-
-      // then
-      expect(usecases.findUserOrganizationsForAdmin).to.have.been.calledWithExactly({ userId: 1 });
     });
   });
 

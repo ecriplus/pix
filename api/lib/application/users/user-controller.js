@@ -3,7 +3,6 @@ import * as trainingSerializer from '../../../src/devcomp/infrastructure/seriali
 import * as certificationCenterMembershipSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
-import * as userOrganizationForAdminSerializer from '../../infrastructure/serializers/jsonapi/user-organization-for-admin-serializer.js';
 
 const findPaginatedUserRecommendedTrainings = async function (
   request,
@@ -25,18 +24,6 @@ const findPaginatedUserRecommendedTrainings = async function (
   return dependencies.trainingSerializer.serialize(userRecommendedTrainings, meta);
 };
 
-const findUserOrganizationsForAdmin = async function (
-  request,
-  h,
-  dependencies = { userOrganizationForAdminSerializer },
-) {
-  const userId = request.params.id;
-  const organizations = await usecases.findUserOrganizationsForAdmin({
-    userId,
-  });
-  return h.response(dependencies.userOrganizationForAdminSerializer.serialize(organizations));
-};
-
 const findCertificationCenterMembershipsByUser = async function (
   request,
   h,
@@ -54,7 +41,6 @@ const findCertificationCenterMembershipsByUser = async function (
 const userController = {
   findCertificationCenterMembershipsByUser,
   findPaginatedUserRecommendedTrainings,
-  findUserOrganizationsForAdmin,
 };
 
 export { userController };

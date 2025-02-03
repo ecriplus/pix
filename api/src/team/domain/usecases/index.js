@@ -18,6 +18,7 @@ import * as membershipRepository from '../../infrastructure/repositories/members
 import { organizationInvitationRepository } from '../../infrastructure/repositories/organization-invitation.repository.js';
 import { organizationInvitedUserRepository } from '../../infrastructure/repositories/organization-invited-user.repository.js';
 import { userOrgaSettingsRepository } from '../../infrastructure/repositories/user-orga-settings-repository.js';
+import { userOrganizationsForAdminRepository } from '../../infrastructure/repositories/user-organizations-for-admin.repository.js';
 import * as certificationCenterInvitationService from '../services/certification-center-invitation-service.js';
 import { organizationInvitationService } from '../services/organization-invitation.service.js';
 
@@ -40,6 +41,7 @@ const dependencies = {
   organizationRepository,
   refreshTokenRepository,
   sharedMembershipRepository,
+  userOrganizationsForAdminRepository,
   userRepository,
 };
 

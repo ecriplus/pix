@@ -1,5 +1,5 @@
-import { knex } from '../../../db/knex-database-connection.js';
-import { UserOrganizationForAdmin } from '../../../src/shared/domain/read-models/UserOrganizationForAdmin.js';
+import { knex } from '../../../../db/knex-database-connection.js';
+import { UserOrganizationForAdmin } from '../../../shared/domain/read-models/UserOrganizationForAdmin.js';
 
 const findByUserId = async function (userId) {
   const organizations = await knex('memberships')
@@ -18,4 +18,4 @@ const findByUserId = async function (userId) {
   return organizations.map((attributes) => new UserOrganizationForAdmin(attributes));
 };
 
-export { findByUserId };
+export const userOrganizationsForAdminRepository = { findByUserId };
