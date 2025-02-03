@@ -52,4 +52,27 @@ describe('Integration | Identity Access Management | Application | Route | passw
       expect(response.statusCode).to.equal(200);
     });
   });
+
+  describe('POST /api/expired-password-updates', function () {
+    it('returns 201 http status code', async function () {
+      // given
+      const method = 'POST';
+      const url = '/api/expired-password-updates';
+      const payload = {
+        data: {
+          attributes: {
+            'password-reset-token': 'PASSWORD_RESET_TOKEN',
+            'new-password': 'Password123',
+          },
+        },
+      };
+      sinon.stub(passwordController, 'updateExpiredPassword').callsFake((request, h) => h.response().created());
+
+      // when
+      const response = await httpTestServer.request(method, url, payload);
+
+      // then
+      expect(response.statusCode).to.equal(201);
+    });
+  });
 });
