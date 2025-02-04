@@ -1,5 +1,4 @@
 import { knex } from '../../db/knex-database-connection.js';
-import { CampaignTypes } from '../../src/prescription/shared/domain/constants.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 
@@ -73,6 +72,11 @@ export class PopulateCampaignParticipationIdScript extends Script {
         .whereIn('knowledge-element-snapshots.id', ids);
 
       totalUddatedRows += updatedRows;
+      logger.info(
+        { event: 'PopulateCampaignParticipationIdScript' },
+        `loop: ${updatedRows} rows updated from "knwoledge-element-snapshots"`,
+      );
+
       ids = await getEmptyParticipationKnowlegdeElementSnapshotIds(ids[ids.length - 1] + 1, options.chunkSize);
       if (ids.length > 0 && options.pauseDuration > 0) {
         await dependencies.pause(options.pauseDuration);
@@ -95,7 +99,7 @@ export class PopulateCampaignParticipationIdScript extends Script {
     const anonymisedParticipations = await knex('campaign-participations')
       .select(['campaign-participations.id', 'sharedAt'])
       .join('campaigns', function () {
-        this.on('campaigns.id', 'campaign-participations.campaignId').onVal('campaigns.type', CampaignTypes.ASSESSMENT);
+        this.on('campaigns.id', 'campaign-participations.campaignId');
       })
       .whereNull('userId')
       .whereNotNull('sharedAt');
