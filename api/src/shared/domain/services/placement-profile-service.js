@@ -170,6 +170,7 @@ async function getPlacementProfileWithSnapshotting({ userId, limitDate, competen
     competences,
     allowExcessPixAndLevels,
   });
+
   return new PlacementProfile({
     userId,
     profileDate: limitDate,
