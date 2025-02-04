@@ -73,10 +73,12 @@ describe('Unit | Devcomp | Application | Trainings | Controller | training-contr
   describe('#create', function () {
     const deserializedTraining = {
       title: 'Training title',
+      internalTitle: 'Training internal title',
       duration: '2d2h2m',
     };
     const createdTraining = {
       title: 'Training title',
+      internalTitle: 'Training internal title',
       duration: {
         days: 2,
         hours: 2,
@@ -100,6 +102,7 @@ describe('Unit | Devcomp | Application | Trainings | Controller | training-contr
         data: {
           attributes: {
             title: 'A new training',
+            internalTitle: 'A new internal training title',
             locale: 'fr',
             duration: {
               days: 2,
@@ -122,6 +125,7 @@ describe('Unit | Devcomp | Application | Trainings | Controller | training-contr
       // given
       const expectedSerializedTraining = {
         title: 'A new training',
+        internalTitle: 'A new internal training title',
         duration: {
           hours: 5,
         },
@@ -135,6 +139,7 @@ describe('Unit | Devcomp | Application | Trainings | Controller | training-contr
           data: {
             attributes: {
               title: 'A new training',
+              internalTitle: 'A new internal training title',
               duration: {
                 hours: 5,
               },
