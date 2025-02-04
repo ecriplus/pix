@@ -30,6 +30,8 @@ export default class Challenge extends Model {
   @attr('boolean') shuffled;
   @attr() webComponentProps;
   @attr('string') webComponentTagName;
+  @attr('boolean') hasEmbedInternalValidation;
+  @attr('boolean') noValidationNeeded;
 
   @hasMany('activity-answer', { async: true, inverse: 'challenge' }) activityAnswers;
 
@@ -52,7 +54,7 @@ export default class Challenge extends Model {
   }
 
   get isLesson() {
-    return !!this.focused;
+    return !!this.focused || !!this.noValidationNeeded;
   }
 
   get isQROC() {
@@ -80,7 +82,7 @@ export default class Challenge extends Model {
   }
 
   get isEmbedAutoValidated() {
-    return this.timer !== null && this.timer >= 0;
+    return (this.timer !== null && this.timer >= 0) || !!this.hasEmbedInternalValidation;
   }
 
   get hasMedia() {

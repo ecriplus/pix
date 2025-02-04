@@ -37,6 +37,8 @@ const buildChallenge = function ({
   competenceId = 'recCOMP1',
   webComponentTagName,
   webComponentProps,
+  hasEmbedInternalValidation = false,
+  noValidationNeeded = false,
 } = {}) {
   return new Challenge({
     id,
@@ -73,6 +75,8 @@ const buildChallenge = function ({
     skill,
     // references
     competenceId,
+    hasEmbedInternalValidation,
+    noValidationNeeded,
   });
 };
 
@@ -109,6 +113,8 @@ const buildChallengeWithWebComponent = function ({
   skill = buildSkill(),
   // references
   competenceId = 'recCOMP1',
+  hasEmbedInternalValidation,
+  noValidationNeeded,
 } = {}) {
   return new Challenge({
     id,
@@ -143,6 +149,8 @@ const buildChallengeWithWebComponent = function ({
     skill,
     // references
     competenceId,
+    hasEmbedInternalValidation,
+    noValidationNeeded,
   });
 };
 

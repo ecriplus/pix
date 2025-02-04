@@ -20,6 +20,8 @@ const serialize = function (challenges) {
       'focused',
       'timer',
       'shuffled',
+      'hasEmbedInternalValidation',
+      'noValidationNeeded',
     ],
     transform: (challenge) => {
       return {
