@@ -8,6 +8,7 @@ describe('Unit | Domain | Read-Models | TrainingForAdmin', function () {
       const training = domainBuilder.buildTrainingForAdmin({
         id: 1,
         title: 'Training 1',
+        internalTitle: 'Training 1 internal title',
         link: 'https://example.net',
         type: 'webinar',
         duration: { hours: 5 },
@@ -21,6 +22,7 @@ describe('Unit | Domain | Read-Models | TrainingForAdmin', function () {
       // then
       expect(training.id).to.equal(1);
       expect(training.title).to.equal('Training 1');
+      expect(training.internalTitle).to.equal('Training 1 internal title');
       expect(training.link).to.equal('https://example.net');
       expect(training.type).to.equal('webinar');
       expect(training.duration).to.deep.equal({ hours: 5 });

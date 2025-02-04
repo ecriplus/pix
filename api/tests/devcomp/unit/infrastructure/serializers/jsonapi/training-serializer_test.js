@@ -74,6 +74,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
             },
             'editor-logo-url': 'https://images.pix.fr/contenu-formatif/editeur/editor_logo_url.svg',
             'editor-name': 'Ministère education nationale',
+            'internal-title': 'Training 1 internal title',
             'is-disabled': false,
             'is-recommendable': true,
             link: 'https://example.net',
@@ -332,6 +333,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
         data: {
           attributes: {
             title: 'Training 1',
+            'internal-title': 'Training 1 internal title',
             link: 'https://example.net',
             type: 'webinar',
             duration: {
@@ -377,6 +379,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
         data: {
           attributes: {
             title: 'Training 1',
+            'internal-title': 'Training 1 internal title',
             link: 'https://example.net',
             type: 'webinar',
             duration: {

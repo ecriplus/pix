@@ -3,6 +3,7 @@ import { TrainingSummary } from '../../../../src/devcomp/domain/read-models/Trai
 const buildTrainingSummary = function ({
   id = 1,
   title = 'Training Summary 1',
+  internalTitle = 'Training Summary 1 internal title',
   prerequisiteThreshold,
   goalThreshold,
   targetProfilesCount = 0,
@@ -11,6 +12,7 @@ const buildTrainingSummary = function ({
   return new TrainingSummary({
     id,
     title,
+    internalTitle,
     prerequisiteThreshold,
     goalThreshold,
     targetProfilesCount,

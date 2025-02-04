@@ -2,6 +2,7 @@ class Training {
   constructor({
     id,
     title,
+    internalTitle,
     link,
     type,
     duration,
@@ -13,6 +14,7 @@ class Training {
   } = {}) {
     this.id = id;
     this.title = title;
+    this.internalTitle = internalTitle;
     this.link = link;
     this.type = type;
     this.duration = { ...duration }; // Prevent use of PostgresInterval object
