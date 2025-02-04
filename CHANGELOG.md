@@ -1,5 +1,24 @@
 # Pix Changelog
 
+## v5.35.0 (04/02/2025)
+
+
+### :rocket: Amélioration
+- [#11250](https://github.com/1024pix/pix/pull/11250) [FEATURE] Ajout d'un lien vers les explications de résultats sur le Certificat Pix (PIX-16247).
+- [#11262](https://github.com/1024pix/pix/pull/11262) [FEATURE] Vérifier l'audience à l'utilisation du Refresh Token (PIX-15949).
+- [#11269](https://github.com/1024pix/pix/pull/11269) [FEATURE] Script pour révoquer les accès d'utilisateurs (PIX-15950).
+
+### :building_construction: Tech
+- [#11286](https://github.com/1024pix/pix/pull/11286) [TECH] Migration de la route /api/admin/users/{id}/organizations (PIX-16360).
+- [#11131](https://github.com/1024pix/pix/pull/11131) [TECH] Créer un nouvel assessment result lorsqu'on annule et désannule une certification sur Pix Admin (PIX-16045).
+- [#11303](https://github.com/1024pix/pix/pull/11303) [TECH] Ajouts de logs d’erreurs de lecture du Learning Content (PIX-16374).
+
+### :bug: Correction
+- [#11304](https://github.com/1024pix/pix/pull/11304) [BUGFIX] Vérification des CGUs acceptées avant acceptation (PIX-16377).
+
+### :arrow_up: Montée de version
+- [#11239](https://github.com/1024pix/pix/pull/11239) [BUMP] Update node.
+
 ## v5.34.0 (03/02/2025)
 
 
