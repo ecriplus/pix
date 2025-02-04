@@ -51,24 +51,4 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
       expect(response.result).to.deep.equal(expectedData);
     });
   });
-
-  describe('GET /api/test-origin-soon-to-be-remove. Test route soon to be removed.', function () {
-    const options = {
-      method: 'GET',
-      url: '/api/test-origin-soon-to-be-remove',
-      headers: { 'x-forwarded-proto': 'http', 'x-forwarded-host': 'test.pix.org' },
-    };
-
-    it('returns an empty string because the calling application HTTP Origin', async function () {
-      // given
-      const expectedData = 'http://test.pix.org';
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(200);
-      expect(response.result).to.deep.equal(expectedData);
-    });
-  });
 });
