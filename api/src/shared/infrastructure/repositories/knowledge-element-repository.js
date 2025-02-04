@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../db/knex-database-connection.js';
-import * as knowledgeElementSnapshotRepository from '../../../prescription/campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { KnowledgeElement } from '../../domain/models/KnowledgeElement.js';
 
@@ -41,24 +40,6 @@ async function findAssessedByUserIdAndLimitDateQuery({ userId, limitDate, skillI
     (knowledgeElementRow) => new KnowledgeElement(knowledgeElementRow),
   );
   return _applyFilters(knowledgeElements);
-}
-
-async function findSnapshotForUsers(userIdsAndDates) {
-  const knowledgeElementsGroupedByUser =
-    await knowledgeElementSnapshotRepository.findByUserIdsAndSnappedAtDates(userIdsAndDates);
-
-  for (const [userIdStr, knowledgeElementsFromSnapshot] of Object.entries(knowledgeElementsGroupedByUser)) {
-    const userId = parseInt(userIdStr);
-    let knowledgeElements = knowledgeElementsFromSnapshot;
-    if (!knowledgeElements) {
-      knowledgeElements = await findAssessedByUserIdAndLimitDateQuery({
-        userId,
-        limitDate: userIdsAndDates[userId],
-      });
-    }
-    knowledgeElementsGroupedByUser[userId] = knowledgeElements;
-  }
-  return knowledgeElementsGroupedByUser;
 }
 
 const findUniqByUserIds = function (userIds) {
@@ -105,12 +86,6 @@ const findUniqByUserIdGroupedByCompetenceId = async function ({ userId, limitDat
   return _.groupBy(knowledgeElements, 'competenceId');
 };
 
-const findValidatedGroupedByTubesWithinCampaign = async function (userIdsAndDates, campaignLearningContent) {
-  const knowledgeElementsGroupedByUser = await findSnapshotForUsers(userIdsAndDates);
-
-  return campaignLearningContent.getValidatedKnowledgeElementsGroupedByTube(_.flatMap(knowledgeElementsGroupedByUser));
-};
-
 const findInvalidatedAndDirectByUserId = async function (userId) {
   const invalidatedKnowledgeElements = await knex(tableName)
     .where({
@@ -133,11 +108,9 @@ export {
   batchSave,
   findAssessedByUserIdAndLimitDateQuery,
   findInvalidatedAndDirectByUserId,
-  findSnapshotForUsers,
   findUniqByUserId,
   findUniqByUserIdAndAssessmentId,
   findUniqByUserIdAndCompetenceId,
   findUniqByUserIdGroupedByCompetenceId,
   findUniqByUserIds,
-  findValidatedGroupedByTubesWithinCampaign,
 };
