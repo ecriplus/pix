@@ -78,8 +78,10 @@ module('Acceptance | Route | routes/authenticated/certifications/certification',
       // given
       this.server.create('user', { id: 888 });
 
+      const session = this.server.create('session');
       const certification = this.server.create('certification', {
         id: 123,
+        sessionId: session.id,
         firstName: 'Bora Horza',
         lastName: 'Gobuchul',
         birthdate: '1987-07-24',
@@ -108,9 +110,10 @@ module('Acceptance | Route | routes/authenticated/certifications/certification',
     test('it should display the neutralization tab', async function (assert) {
       // given
       this.server.create('user', { id: 888 });
-
+      const session = this.server.create('session');
       const certification = this.server.create('certification', {
         id: 123,
+        sessionId: session.id,
         firstName: 'Bora Horza',
         lastName: 'Gobuchul',
         birthdate: '1987-07-24',

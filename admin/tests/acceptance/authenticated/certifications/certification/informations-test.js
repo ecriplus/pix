@@ -10,7 +10,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
-  let certification;
+  let certification, session;
 
   hooks.beforeEach(async function () {
     this.server.create('user', { id: 888 });
@@ -25,8 +25,13 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
       name: 'GROENLAND',
     });
 
+    session = this.server.create('session', {
+      finalizedAt: new Date('2020-01-01'),
+    });
+
     certification = this.server.create('certification', {
       id: 123,
+      sessionId: session.id,
       firstName: 'Bora Horza',
       lastName: 'Gobuchul',
       birthdate: '1987-07-24',
@@ -34,6 +39,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
       userId: 888,
       sex: 'M',
       isCancelled: false,
+      isPublished: false,
       isRejectedForFraud: false,
       birthCountry: 'JAPON',
       birthInseeCode: '99217',
@@ -768,109 +774,182 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
     });
 
     module('Certification cancellation', function () {
-      module('Cancel', function (hooks) {
-        hooks.beforeEach(async function () {
-          certification.update({ status: 'validated' });
+      module('Cancel', function () {
+        let screen;
+        module('when session is finalized and not published yet', function (hooks) {
+          hooks.beforeEach(async function () {
+            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+            screen = await visit(`/certifications/${certification.id}`);
+          });
+
+          module('when cancellation button is clicked', function () {
+            test('should display confirmation popup for cancellation', async function (assert) {
+              // given
+              // when
+              await clickByName('Annuler la certification');
+
+              await screen.findByRole('dialog');
+              // then
+              assert
+                .dom(
+                  screen.getByText(
+                    'Êtes-vous sûr·e de vouloir annuler cette certification ? Cliquez sur confirmer pour poursuivre.',
+                  ),
+                )
+                .exists();
+            });
+          });
+
+          module('in the confirmation popup', function () {
+            module('when aborting action', function () {
+              test('should not cancel the certification', async function (assert) {
+                // given
+                await clickByName('Annuler la certification');
+                await screen.findByRole('dialog');
+
+                // when
+                await clickByName('Fermer');
+
+                // then
+                assert.dom(screen.getByRole('button', { name: 'Annuler la certification' })).exists();
+              });
+            });
+
+            module('when confirming action', function () {
+              test('should cancel the certification', async function (assert) {
+                // given
+                await clickByName('Annuler la certification');
+                await screen.findByRole('dialog');
+
+                // when
+                await clickByName('Confirmer');
+
+                // then
+                assert.dom(await screen.findByRole('button', { name: 'Désannuler la certification' })).exists();
+              });
+            });
+          });
         });
 
-        test('should display confirmation popup for cancellation when certification is not yet cancelled and cancellation button is clicked', async function (assert) {
-          // given
-          await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-          const screen = await visit(`/certifications/${certification.id}`);
+        module('when session is not finalized', function (hooks) {
+          hooks.beforeEach(async function () {
+            session.update({ finalizedAt: null });
+            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+            screen = await visit(`/certifications/${certification.id}`);
+          });
 
-          // when
-          await clickByName('Annuler la certification');
-
-          await screen.findByRole('dialog');
-          // then
-          assert
-            .dom(
-              screen.getByText(
-                'Êtes-vous sûr·e de vouloir annuler cette certification ? Cliquez sur confirmer pour poursuivre.',
-              ),
-            )
-            .exists();
+          test('should not display the cancellation button', function (assert) {
+            // given
+            // when
+            // then
+            assert.dom(screen.queryByRole('button', { name: 'Annuler la certification' })).doesNotExist();
+          });
         });
 
-        test('should not cancel the certification when aborting action in the confirmation popup', async function (assert) {
-          // given
-          await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-          const screen = await visit(`/certifications/${certification.id}`);
-          await clickByName('Annuler la certification');
+        module('when session is finalized and published', function (hooks) {
+          hooks.beforeEach(async function () {
+            certification.update({ isPublished: true });
+            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+            screen = await visit(`/certifications/${certification.id}`);
+          });
 
-          await screen.findByRole('dialog');
-          // when
-          await clickByName('Fermer');
-
-          // then
-          assert.dom(screen.getByRole('button', { name: 'Annuler la certification' })).exists();
-        });
-
-        test('should cancel the certification when confirming action in the confirmation popup', async function (assert) {
-          // given
-          await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-          const screen = await visit(`/certifications/${certification.id}`);
-          await clickByName('Annuler la certification');
-          await screen.findByRole('dialog');
-
-          // when
-          await clickByName('Confirmer');
-
-          // then
-          assert.dom(await screen.findByRole('button', { name: 'Désannuler la certification' })).exists();
+          test('should not display the cancellation button', function (assert) {
+            // given
+            // when
+            // then
+            assert.dom(screen.queryByRole('button', { name: 'Annuler la certification' })).doesNotExist();
+          });
         });
       });
 
       module('Uncancel', function (hooks) {
+        let screen;
         hooks.beforeEach(async function () {
           certification.update({ isCancelled: true });
         });
 
-        test('should display confirmation popup for uncancellation when certification is cancelled and uncancellation button is clicked', async function (assert) {
-          // given
-          await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-          const screen = await visit(`/certifications/${certification.id}`);
+        module('when session is finalized and not published yet', function (hooks) {
+          hooks.beforeEach(async function () {
+            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+            screen = await visit(`/certifications/${certification.id}`);
+          });
 
-          // when
-          await clickByName('Désannuler la certification');
-          await screen.findByRole('dialog');
-          // then
-          assert
-            .dom(
-              screen.getByText(
-                'Êtes-vous sûr·e de vouloir désannuler cette certification ? Cliquez sur confirmer pour poursuivre.',
-              ),
-            )
-            .exists();
+          module('when certification is cancelled and uncancellation button is clicked', function () {
+            test('should display confirmation popup for uncancellation', async function (assert) {
+              // given
+              // when
+              await click(screen.getByRole('button', { name: 'Désannuler la certification' }));
+              await screen.findByRole('dialog');
+
+              // then
+              assert
+                .dom(
+                  screen.getByText(
+                    'Êtes-vous sûr·e de vouloir désannuler cette certification ? Cliquez sur confirmer pour poursuivre.',
+                  ),
+                )
+                .exists();
+            });
+          });
+
+          module('in the confirmation popup', function () {
+            module('when aborting action', function () {
+              test('should not uncancel the certification', async function (assert) {
+                // given
+                await click(screen.getByRole('button', { name: 'Désannuler la certification' }));
+                await screen.findByRole('dialog');
+
+                // when
+                await clickByName('Fermer');
+
+                // then
+                assert.dom(screen.getByRole('button', { name: 'Désannuler la certification' })).exists();
+              });
+            });
+
+            module('when confirming action', function () {
+              test('should uncancel the certification', async function (assert) {
+                // given
+                await click(screen.getByRole('button', { name: 'Désannuler la certification' }));
+                await screen.findByRole('dialog');
+                // when
+                await clickByName('Confirmer');
+
+                // then
+                assert.dom(await screen.findByRole('button', { name: 'Annuler la certification' })).exists();
+              });
+            });
+          });
         });
 
-        test('should not uncancel the certification when aborting action in the confirmation popup', async function (assert) {
-          // given
-          await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-          const screen = await visit(`/certifications/${certification.id}`);
-          await clickByName('Désannuler la certification');
+        module('when session is not finalized', function (hooks) {
+          hooks.beforeEach(async function () {
+            session.update({ finalizedAt: null });
+            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+            screen = await visit(`/certifications/${certification.id}`);
+          });
 
-          await screen.findByRole('dialog');
-
-          // when
-          await clickByName('Fermer');
-
-          // then
-          assert.dom(screen.getByRole('button', { name: 'Désannuler la certification' })).exists();
+          test('should not display the uncancellation button', function (assert) {
+            // given
+            // when
+            // then
+            assert.dom(screen.queryByRole('button', { name: 'Désannuler la certification' })).doesNotExist();
+          });
         });
 
-        test('should uncancel the certification when confirming action in the confirmation popup', async function (assert) {
-          // given
-          await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-          const screen = await visit(`/certifications/${certification.id}`);
-          await clickByName('Désannuler la certification');
+        module('when session is finalized and published', function (hooks) {
+          hooks.beforeEach(async function () {
+            certification.update({ isPublished: true });
+            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+            screen = await visit(`/certifications/${certification.id}`);
+          });
 
-          await screen.findByRole('dialog');
-          // when
-          await clickByName('Confirmer');
-
-          // then
-          assert.dom(await screen.findByRole('button', { name: 'Annuler la certification' })).exists();
+          test('should not display the uncancellation button', function (assert) {
+            // given
+            // when
+            // then
+            assert.dom(screen.queryByRole('button', { name: 'Désannuler la certification' })).doesNotExist();
+          });
         });
       });
     });
