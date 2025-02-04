@@ -89,7 +89,6 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
           user_id: userId,
           refresh_token: refreshToken,
           expires_in: expirationDelaySeconds,
-          scope,
         };
         expect(response.source).to.deep.equal(expectedResponseResult);
         expect(response.statusCode).to.equal(200);
@@ -117,7 +116,7 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
 
         sinon
           .stub(usecases, 'createAccessTokenFromRefreshToken')
-          .withArgs({ refreshToken, scope, audience })
+          .withArgs({ refreshToken, audience })
           .resolves({ accessToken, expirationDelaySeconds });
 
         const tokenServiceStub = { extractUserId: sinon.stub() };
@@ -135,7 +134,6 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
           user_id: userId,
           refresh_token: refreshToken,
           expires_in: expirationDelaySeconds,
-          scope,
         };
         expect(response.source).to.deep.equal(expectedResponseResult);
         expect(response.statusCode).to.equal(200);

@@ -29,7 +29,6 @@ export const tokenRoutes = [
             .keys({
               grant_type: Joi.string().valid('refresh_token').required(),
               refresh_token: Joi.string(),
-              scope: Joi.string(),
             }),
         ),
       },

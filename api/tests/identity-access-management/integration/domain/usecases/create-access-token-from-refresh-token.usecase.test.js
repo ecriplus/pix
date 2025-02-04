@@ -19,17 +19,15 @@ describe('Integration | Identity Access Management | Domain | UseCases | create-
   context('when refresh token is valid', function () {
     it('creates a new access token', async function () {
       // given
-      const scope = 'mon-pix';
       const source = 'pix';
       const audience = 'https://app.pix.fr';
 
-      const refreshToken = RefreshToken.generate({ userId, scope, source, audience });
+      const refreshToken = RefreshToken.generate({ userId, source, audience });
       await refreshTokenRepository.save({ refreshToken });
 
       // when
       const { accessToken, expirationDelaySeconds } = await usecases.createAccessTokenFromRefreshToken({
         refreshToken: refreshToken.value,
-        scope,
         audience,
       });
 
@@ -42,39 +40,12 @@ describe('Integration | Identity Access Management | Domain | UseCases | create-
   context('when refresh token is not valid', function () {
     it('throws an unauthorized error ', async function () {
       // given
-      const scope = 'mon-pix';
       const audience = 'https://app.pix.fr';
       const unknownRefreshToken = 'unknown-refresh-token';
 
       // when
       const error = await catchErr(usecases.createAccessTokenFromRefreshToken)({
         refreshToken: unknownRefreshToken,
-        scope,
-        audience,
-      });
-
-      // then
-      expect(error).to.instanceOf(UnauthorizedError);
-      expect(error.message).to.equal('Refresh token is invalid');
-      expect(error.code).to.equal('INVALID_REFRESH_TOKEN');
-    });
-  });
-
-  context('when the refresh token scope is not the same', function () {
-    it('throws an unauthorized error', async function () {
-      // given
-      const scope = 'mon-pix';
-      const source = 'pix';
-      const audience = 'https://app.pix.fr';
-      const badScope = 'pix-admin';
-
-      const refreshToken = RefreshToken.generate({ userId, scope, source, audience });
-      await refreshTokenRepository.save({ refreshToken });
-
-      // when
-      const error = await catchErr(usecases.createAccessTokenFromRefreshToken)({
-        refreshToken: refreshToken.value,
-        scope: badScope,
         audience,
       });
 
@@ -91,18 +62,16 @@ describe('Integration | Identity Access Management | Domain | UseCases | create-
         // given
         sinon.stub(config.featureToggles, 'isUserTokenAudConfinementEnabled').value(true);
 
-        const scope = 'mon-pix';
         const source = 'pix';
         const audience = 'https://app.pix.fr';
         const badAudience = 'https://orga.pix.fr';
 
-        const refreshToken = RefreshToken.generate({ userId, scope, source, audience });
+        const refreshToken = RefreshToken.generate({ userId, source, audience });
         await refreshTokenRepository.save({ refreshToken });
 
         // when
         const error = await catchErr(usecases.createAccessTokenFromRefreshToken)({
           refreshToken: refreshToken.value,
-          scope,
           audience: badAudience,
         });
 
@@ -118,18 +87,16 @@ describe('Integration | Identity Access Management | Domain | UseCases | create-
         // given
         sinon.stub(config.featureToggles, 'isUserTokenAudConfinementEnabled').value(false);
 
-        const scope = 'mon-pix';
         const source = 'pix';
         const audience = 'https://app.pix.fr';
         const badAudience = 'https://orga.pix.fr';
 
-        const refreshToken = RefreshToken.generate({ userId, scope, source, audience });
+        const refreshToken = RefreshToken.generate({ userId, source, audience });
         await refreshTokenRepository.save({ refreshToken });
 
         // when
         const { accessToken, expirationDelaySeconds } = await usecases.createAccessTokenFromRefreshToken({
           refreshToken: refreshToken.value,
-          scope,
           audience: badAudience,
         });
 
