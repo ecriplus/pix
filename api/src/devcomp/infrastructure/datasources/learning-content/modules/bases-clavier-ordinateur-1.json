@@ -238,7 +238,7 @@
                 {
                   "id": "f020568f-8d85-4b8a-97a2-6acefa0b5edf",
                   "type": "qrocm",
-                  "instruction": "<p>À vous de jouer, la phrase ci-dessous comporte deux zones de texte. Complétez la phrase ainsi : «Le bocal de cornichons est vide.».</p>",
+                  "instruction": "<p>À vous de jouer, la phrase ci-dessous comporte deux zones de texte. Complétez la phrase ainsi : «&nbsp;Le bocal de cornichons est vide.&nbsp;».</p>",
                   "proposals": [
                     {
                       "type": "text",
@@ -282,7 +282,7 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span> <span aria-hidden=\"true\">🥒</span></p><p>Bravo ! Vous avez bien complété la phrase.</p>",
+                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🥒</span></p><p>Bravo ! Vous avez bien complété la phrase.</p>",
                     "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span> <span aria-hidden=\"true\">🍽️</span></p><p>Bien tenté ! Mais la phrase n’est pas identique. Réessayez !</p>"
                   }
                 }
