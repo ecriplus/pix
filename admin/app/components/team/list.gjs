@@ -64,13 +64,13 @@ export default class List extends Component {
   }
 
   @action
-  async deactivateAdminMember(adminMemberToDeactivate) {
+  async deactivateAdminMember() {
     try {
       await this.adminMemberToDeactivate.save({ adapterOptions: { method: 'deactivate' } });
       await this.args.refreshValues();
       this.toggleDisplayConfirm();
       this.pixToast.sendSuccessNotification({
-        message: `L'agent ${adminMemberToDeactivate.firstName} ${adminMemberToDeactivate.lastName} n'a plus accès à Pix Admin.`,
+        message: `L'agent ${this.adminMemberToDeactivate.firstName} ${this.adminMemberToDeactivate.lastName} n'a plus accès à Pix Admin.`,
       });
     } catch (errorResponse) {
       this.toggleDisplayConfirm();
@@ -172,7 +172,7 @@ export default class List extends Component {
       @message={{this.confirmPopUpMessage}}
       @title="Désactivation d'un agent Pix"
       @submitTitle="Confirmer"
-      @confirm={{fn this.deactivateAdminMember this.adminMemberToDeactivate}}
+      @confirm={{this.deactivateAdminMember}}
       @cancel={{this.toggleDisplayConfirm}}
       @show={{this.displayConfirm}}
     />
