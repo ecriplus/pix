@@ -20,6 +20,7 @@ describe('Integration | Repository | Campaign Participation', function () {
   describe('#updateWithSnapshot', function () {
     let clock;
     let campaignParticipation;
+    let ke;
     const frozenTime = new Date('1987-09-01T00:00:00Z');
 
     beforeEach(async function () {
@@ -28,7 +29,7 @@ describe('Integration | Repository | Campaign Participation', function () {
         sharedAt: null,
       });
 
-      databaseBuilder.factory.buildKnowledgeElement({
+      ke = databaseBuilder.factory.buildKnowledgeElement({
         userId: campaignParticipation.userId,
         createdAt: new Date('1985-09-01T00:00:00Z'),
       });
@@ -75,8 +76,22 @@ describe('Integration | Repository | Campaign Participation', function () {
       });
 
       // then
-      const snapshotInDB = await knex.select('id').from('knowledge-element-snapshots');
+      const snapshotInDB = await knex.pluck('snapshot').from('knowledge-element-snapshots');
       expect(snapshotInDB).to.have.lengthOf(1);
+      expect(snapshotInDB).to.deep.equal([
+        [
+          {
+            id: ke.id,
+            answerId: ke.answerId,
+            competenceId: ke.competenceId,
+            createdAt: ke.createdAt.toISOString(),
+            earnedPix: 2,
+            skillId: ke.skillId,
+            source: ke.source,
+            status: ke.status,
+          },
+        ],
+      ]);
     });
 
     context('when there is a transaction', function () {
