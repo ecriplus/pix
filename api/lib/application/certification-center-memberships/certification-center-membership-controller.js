@@ -5,17 +5,6 @@ import { usecases as teamUsecases } from '../../../src/team/domain/usecases/inde
 import { certificationCenterMembershipRepository } from '../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
 import { usecases } from '../../domain/usecases/index.js';
 
-const disableFromPixAdmin = async function (request, h, dependencies = { requestResponseUtils }) {
-  const certificationCenterMembershipId = request.params.id;
-  const pixAgentUserId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
-
-  await usecases.disableCertificationCenterMembershipFromPixAdmin({
-    certificationCenterMembershipId,
-    updatedByUserId: pixAgentUserId,
-  });
-  return h.response().code(204);
-};
-
 const disableFromPixCertif = async function (request, h, dependencies = { requestResponseUtils }) {
   const certificationCenterMembershipId = request.params.certificationCenterMembershipId;
   const currentUserId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
@@ -58,7 +47,6 @@ const updateFromPixCertif = async function (
 };
 
 const certificationCenterMembershipController = {
-  disableFromPixAdmin,
   disableFromPixCertif,
   updateFromPixCertif,
 };

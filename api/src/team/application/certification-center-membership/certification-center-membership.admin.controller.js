@@ -29,8 +29,20 @@ const updateRole = async function (
   );
 };
 
+const disableFromPixAdmin = async function (request, h, dependencies = { requestResponseUtils }) {
+  const certificationCenterMembershipId = request.params.id;
+  const pixAgentUserId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+
+  await usecases.disableCertificationCenterMembershipFromPixAdmin({
+    certificationCenterMembershipId,
+    updatedByUserId: pixAgentUserId,
+  });
+  return h.response().code(204);
+};
+
 const certificationCenterMembershipAdminController = {
   updateRole,
+  disableFromPixAdmin,
 };
 
 export { certificationCenterMembershipAdminController };
