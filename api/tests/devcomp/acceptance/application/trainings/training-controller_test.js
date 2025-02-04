@@ -212,6 +212,7 @@ describe('Acceptance | Controller | training-controller', function () {
         await databaseBuilder.commit();
         const updatedTraining = {
           title: 'new title',
+          internalTitle: 'new internal title',
           editorName: 'editor name',
           editorLogoUrl: 'https://images.pix.fr/contenu-formatif/editeur/logo.svg',
           duration: {
@@ -230,6 +231,7 @@ describe('Acceptance | Controller | training-controller', function () {
               type: 'trainings',
               attributes: {
                 title: updatedTraining.title,
+                'internal-title': updatedTraining.internalTitle,
                 'editor-name': updatedTraining.editorName,
                 'editor-logo-url': updatedTraining.editorLogoUrl,
                 duration: {
@@ -249,6 +251,7 @@ describe('Acceptance | Controller | training-controller', function () {
             id: '1',
             attributes: {
               title: updatedTraining.title,
+              internalTitle: updatedTraining.internalTitle,
               link: training.link,
               duration: training.duration,
               editorName: updatedTraining.editorName,
@@ -266,6 +269,9 @@ describe('Acceptance | Controller | training-controller', function () {
         expect(response.result.data.type).to.deep.equal(expectedResponse.data.type);
         expect(response.result.data.id).to.exist;
         expect(response.result.data.attributes.title).to.deep.equal(expectedResponse.data.attributes.title);
+        expect(response.result.data.attributes['internal-title']).to.deep.equal(
+          expectedResponse.data.attributes.internalTitle,
+        );
         expect(response.result.data.attributes.link).to.deep.equal(expectedResponse.data.attributes.link);
         expect(response.result.data.attributes['editor-name']).to.deep.equal(
           expectedResponse.data.attributes.editorName,
