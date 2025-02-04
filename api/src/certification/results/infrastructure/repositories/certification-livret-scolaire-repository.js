@@ -56,7 +56,17 @@ const getCertificatesByOrganizationUAI = async function (uai) {
         .whereRaw('"last-certification-courses"."isCancelled"= false')
         .whereRaw('"certification-courses"."createdAt" < "last-certification-courses"."createdAt"'),
     )
-
+    .whereNotExists(
+      knex
+        .select(1)
+        .from('certification-courses-last-assessment-results')
+        .innerJoin(
+          'assessment-results',
+          'certification-courses-last-assessment-results.lastAssessmentResultId',
+          'assessment-results.assessmentId',
+        )
+        .whereRaw('"assessment-results"."status" = \'cancelled\''),
+    )
     .where({ 'certification-courses.isCancelled': false })
     .where({ 'view-active-organization-learners.isDisabled': false })
     .whereRaw('LOWER("organizations"."externalId") = LOWER(?)', uai)

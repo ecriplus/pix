@@ -107,7 +107,136 @@ describe('Integration | Repository | Certification-ls ', function () {
       expect(certificationResults).to.deep.equal([]);
     });
 
-    it('should not return cancelled certification for a given UAI', async function () {
+    it('should return certification for a given uai when last assessment result is not cancelled', async function () {
+      // given
+      const organizationId = buildOrganization(uai).id;
+      const user = buildUser();
+      const organizationLearner = buildOrganizationLearner({
+        userId: user.id,
+        organizationId,
+      });
+
+      const { id: certificationCenterId, name: certificationCenter } = databaseBuilder.factory.buildCertificationCenter(
+        { name: 'some name' },
+      );
+
+      const session = databaseBuilder.factory.buildSession({
+        certificationCenterId,
+        certificationCenter,
+      });
+
+      const candidate = databaseBuilder.factory.buildCertificationCandidate({
+        sessionId: session.id,
+        organizationLearnerId: organizationLearner.id,
+        userId: user.id,
+      });
+      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
+
+      const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
+        userId: user.id,
+        isCancelled: false,
+      });
+
+      const assessment = databaseBuilder.factory.buildAssessment({
+        certificationCourseId: certificationCourse.id,
+        userId: user.id,
+      });
+      const assessmentResult = databaseBuilder.factory.buildAssessmentResult({
+        assessmentId: assessment.id,
+        status: 'cancelled',
+      });
+
+      competenceMarks.forEach((cm) => {
+        databaseBuilder.factory.buildCompetenceMark({
+          assessmentResultId: assessmentResult.id,
+          competence_code: cm.code,
+          level: cm.level,
+        });
+      });
+
+      const lastAssessmentResult = databaseBuilder.factory.buildAssessmentResult({
+        assessmentId: assessment.id,
+        status: 'validated',
+      });
+
+      competenceMarks.forEach((cm) => {
+        databaseBuilder.factory.buildCompetenceMark({
+          assessmentResultId: lastAssessmentResult.id,
+          competence_code: cm.code,
+          level: cm.level,
+        });
+      });
+
+      databaseBuilder.factory.buildCertificationCourseLastAssessmentResult({
+        certificationCourseId: certificationCourse.id,
+        lastAssessmentResultId: lastAssessmentResult.id,
+      });
+
+      await databaseBuilder.commit();
+
+      const expected = {
+        id: certificationCourse.id,
+        firstName: organizationLearner.firstName,
+        middleName: organizationLearner.middleName,
+        thirdName: organizationLearner.thirdName,
+        lastName: organizationLearner.lastName,
+        nationalStudentId: organizationLearner.nationalStudentId,
+        birthdate: organizationLearner.birthdate,
+        date: certificationCourse.createdAt,
+        verificationCode: certificationCourse.verificationCode,
+        deliveredAt: session.publishedAt,
+        certificationCenter: session.certificationCenter,
+        status: status.VALIDATED,
+        pixScore: 456,
+        competenceResults: [
+          {
+            competenceId: '1.1',
+            level: 6,
+          },
+          {
+            competenceId: '5.2',
+            level: 4,
+          },
+        ],
+      };
+
+      // when
+      const certificationResults = await certificationLsRepository.getCertificatesByOrganizationUAI(uai);
+
+      // then
+      expect(certificationResults).to.deep.equal([expected]);
+    });
+
+    it("should not return cancelled certification for a given uai by assessmentresults.status === 'cancelled'", async function () {
+      // given
+      const organizationId = buildOrganization(uai).id;
+      const user = buildUser();
+      const organizationLearner = buildOrganizationLearner({
+        userid: user.id,
+        organizationId,
+      });
+      const { assessmentId } = buildValidatedPublishedCertificationData({
+        user,
+        organizationLearner,
+        verificationCode,
+        pixScore,
+        competenceMarks,
+      });
+      databaseBuilder.factory.buildAssessmentResult({
+        assessmentId,
+        status: 'cancelled',
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const certificationResults = await certificationLsRepository.getCertificatesByOrganizationUAI(uai);
+
+      // then
+      expect(certificationResults).to.deep.equal([]);
+    });
+
+    it('should not return cancelled certification for a given UAI by certificationCourses.isCancelled to true', async function () {
       // given
       const organizationId = buildOrganization(uai).id;
       const user = buildUser();
