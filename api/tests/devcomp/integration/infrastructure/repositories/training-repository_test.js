@@ -582,6 +582,7 @@ describe('Integration | Repository | training-repository', function () {
       // given
       const training = {
         title: 'Titre du training',
+        internalTitle: 'Titre interne du training',
         link: 'https://training-link.org',
         type: 'webinaire',
         duration: '6h',
