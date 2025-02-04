@@ -406,5 +406,18 @@
       "warningMessage": "If this wasn’t you, please reset your password as soon as possible in order to secure your account."
     },
     "subject": "Your Pix code is {code}"
+  },
+  "warning-connection-email": {
+    "params": {
+      "context": "We noticed a new connection to your Pix account after a period of inactivity of 12 months or more.",
+      "disclaimer": "If this connection really comes from you, no action is necessary.",
+      "hello": "Hello {firstName},",
+      "resetMyPassword": "Set a new password",
+      "signing": "Pix team",
+      "supportContact": "If in doubt or if you have any questions, our support is available to help you.",
+      "thanks": "Thank you for your vigilance,",
+      "warningMessage": "If this is not the case, we invite you to change your password immediately to secure your account by clicking on the button below:"
+    },
+    "subject": "Recent activity on your Pix account"
   }
 }

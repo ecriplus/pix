@@ -420,5 +420,18 @@
       "warningMessage": "Si ce n'était pas vous, nous vous invitons à réinitialiser votre mot de passe au plus vite afin de sécuriser votre compte."
     },
     "subject": "Votre code Pix est {code}"
+  },
+  "warning-connection-email": {
+    "params": {
+      "hello": "Bonjour {firstName},",
+      "context": "Nous avons remarqué une nouvelle connexion à votre compte Pix après une période d’inactivité de 12 mois ou plus.",
+      "disclaimer": "Si cette connexion provient bien de vous, aucune action n’est nécessaire.",
+      "warningMessage": "Si ce n’est pas le cas, nous vous invitons à changer votre mot de passe immédiatement pour sécuriser votre compte en cliquant sur le bouton ci-dessous :",
+      "resetMyPassword": "Définir un nouveau mot de passe",
+      "supportContact": "En cas de doute ou si vous avez des questions, notre support est à votre disposition pour vous aider.",
+      "thanks": "Merci de votre vigilance,",
+      "signing": "L'équipe Pix"
+    },
+    "subject": "Activité récente sur votre compte Pix"
   }
 }
