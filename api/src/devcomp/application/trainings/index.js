@@ -127,6 +127,7 @@ const register = async function (server) {
               attributes: Joi.object({
                 link: Joi.string().uri().required(),
                 title: Joi.string().required(),
+                'internal-title': Joi.string().optional(),
                 duration: Joi.object({
                   days: Joi.number().min(0).default(0),
                   hours: Joi.number().min(0).max(23).default(0),
@@ -175,6 +176,7 @@ const register = async function (server) {
               attributes: Joi.object({
                 link: Joi.string().allow(null),
                 title: Joi.string().allow(null),
+                'internal-title': Joi.string().allow(null),
                 duration: Joi.object({
                   days: Joi.number().min(0).required(),
                   hours: Joi.number().min(0).max(23).required(),

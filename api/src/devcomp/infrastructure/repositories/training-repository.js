@@ -135,6 +135,7 @@ async function create({ training }) {
   const knexConn = DomainTransaction.getConnection();
   const pickedAttributes = pick(training, [
     'title',
+    'internalTitle',
     'link',
     'type',
     'duration',
@@ -149,6 +150,7 @@ async function create({ training }) {
 async function update({ id, attributesToUpdate }) {
   const pickedAttributesToUpdate = pick(attributesToUpdate, [
     'title',
+    'internalTitle',
     'link',
     'type',
     'duration',
