@@ -58,7 +58,7 @@ _.each(customChaiHelpers, chaiUse);
 chaiUse(jobChai(pgBoss));
 try {
   await pgBoss.start();
-} catch (_) {
+} catch {
   // pgBoss is not available on unit tests
 }
 
@@ -105,7 +105,7 @@ afterEach(async function () {
   await datamartBuilder.clean();
   try {
     await pgBoss.clearStorage();
-  } catch (_) {
+  } catch {
     // pgBoss is not available on unit tests
   }
   return databaseBuilder.clean();

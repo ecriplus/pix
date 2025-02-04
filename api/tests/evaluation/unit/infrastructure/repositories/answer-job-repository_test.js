@@ -1,6 +1,5 @@
 import { AnswerJobRepository } from '../../../../../src/evaluation/infrastructure/repositories/answer-job-repository.js';
 import { config } from '../../../../../src/shared/config.js';
-import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { pgBoss } from '../../../../../src/shared/infrastructure/repositories/jobs/pg-boss.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
