@@ -2,6 +2,7 @@ import { stdSerializers } from 'pino';
 
 import { monitoringTools } from '../../../../src/shared/infrastructure/monitoring-tools.js';
 import { generateHash } from '../../../identity-access-management/infrastructure/utils/crypto.js';
+import { getForwardedOrigin } from '../../../identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../config.js';
 import { logger } from '../utils/logger.js';
 
@@ -20,9 +21,10 @@ function requestSerializer(req) {
   // monitor api token route
   const context = monitoringTools.getContext();
   if (context?.request?.route?.path === '/api/token') {
-    const { username, refresh_token, grant_type, scope } = context.request.payload || {};
+    const { username, refresh_token, grant_type } = context.request.payload || {};
+    const origin = getForwardedOrigin(context.request.headers);
     enhancedReq.grantType = grant_type || '-';
-    enhancedReq.scope = scope || '-';
+    enhancedReq.audience = origin || '-';
     enhancedReq.usernameHash = generateHash(username) || '-';
     enhancedReq.refreshTokenHash = generateHash(refresh_token) || '-';
   }

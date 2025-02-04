@@ -1,6 +1,7 @@
 import { monitoringTools } from '../../shared/infrastructure/monitoring-tools.js';
 import { generateHash } from '../infrastructure/utils/crypto.js';
 
+// TODO: Add audience in it ?
 async function monitorApiTokenRoute(request, h, dependencies = { monitoringTools }) {
   const { username, refresh_token, grant_type, scope } = request.payload;
 
@@ -18,7 +19,6 @@ async function monitorApiTokenRoute(request, h, dependencies = { monitoringTools
       message: 'Authentication attempt',
       hash,
       grant_type,
-      scope,
     });
   } else {
     dependencies.monitoringTools.logWarnWithCorrelationIds({
