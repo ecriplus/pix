@@ -16,11 +16,13 @@ import CertificationComments from './comments';
 
 export default class Informations extends Component {
   get displayCancelCertificationButton() {
-    return !this.args.certification.isCancelled && this.args.session.finalizedAt;
+    return (
+      !this.args.certification.isCancelled && !this.args.certification.isPublished && this.args.session.finalizedAt
+    );
   }
 
   get displayUncancelCertificationButton() {
-    return this.args.certification.isCancelled && this.args.session.finalizedAt;
+    return this.args.certification.isCancelled && !this.args.certification.isPublished && this.args.session.finalizedAt;
   }
 
   <template>

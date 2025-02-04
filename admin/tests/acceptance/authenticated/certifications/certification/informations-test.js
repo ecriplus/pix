@@ -39,6 +39,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
       userId: 888,
       sex: 'M',
       isCancelled: false,
+      isPublished: false,
       isRejectedForFraud: false,
       birthCountry: 'JAPON',
       birthInseeCode: '99217',
@@ -775,7 +776,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
     module('Certification cancellation', function () {
       module('Cancel', function () {
         let screen;
-        module('when session is finalized', function (hooks) {
+        module('when session is finalized and not published yet', function (hooks) {
           hooks.beforeEach(async function () {
             await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
             screen = await visit(`/certifications/${certification.id}`);
@@ -844,6 +845,21 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
             assert.dom(screen.queryByRole('button', { name: 'Annuler la certification' })).doesNotExist();
           });
         });
+
+        module('when session is finalized and published', function (hooks) {
+          hooks.beforeEach(async function () {
+            certification.update({ isPublished: true });
+            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+            screen = await visit(`/certifications/${certification.id}`);
+          });
+
+          test('should not display the cancellation button', function (assert) {
+            // given
+            // when
+            // then
+            assert.dom(screen.queryByRole('button', { name: 'Annuler la certification' })).doesNotExist();
+          });
+        });
       });
 
       module('Uncancel', function (hooks) {
@@ -852,7 +868,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
           certification.update({ isCancelled: true });
         });
 
-        module('when session is finalized', function (hooks) {
+        module('when session is finalized and not published yet', function (hooks) {
           hooks.beforeEach(async function () {
             await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
             screen = await visit(`/certifications/${certification.id}`);
@@ -913,7 +929,22 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
             screen = await visit(`/certifications/${certification.id}`);
           });
 
-          test('should not display the cancellation button', function (assert) {
+          test('should not display the uncancellation button', function (assert) {
+            // given
+            // when
+            // then
+            assert.dom(screen.queryByRole('button', { name: 'Désannuler la certification' })).doesNotExist();
+          });
+        });
+
+        module('when session is finalized and published', function (hooks) {
+          hooks.beforeEach(async function () {
+            certification.update({ isPublished: true });
+            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+            screen = await visit(`/certifications/${certification.id}`);
+          });
+
+          test('should not display the uncancellation button', function (assert) {
             // given
             // when
             // then
