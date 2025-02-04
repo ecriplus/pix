@@ -11,17 +11,6 @@ module('Integration | Component | Global | App Layout', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   hooks.beforeEach(function () {
-    stubCurrentUserService(
-      this.owner,
-      {
-        firstName: 'Banana',
-        lastName: 'Split',
-        email: 'banana.split@example.net',
-        profile: { pixScore: 100 },
-      },
-      { withStoreStubbed: false },
-    );
-
     class FeatureTogglesStub extends Service {
       featureToggles = { isPixAppNewLayoutEnabled: true };
     }
@@ -52,37 +41,7 @@ module('Integration | Component | Global | App Layout', function (hooks) {
   });
 
   module('main header', function () {
-    test('it should display the user pix score', async function (assert) {
-      // given & when
-      const screen = await render(<template><AppLayout /></template>);
-
-      // then
-      assert.dom(screen.getByRole('link', { name: '100 Pix' })).exists();
-    });
-
-    test('it should display a campaign code link', async function (assert) {
-      // given & when
-      const screen = await render(<template><AppLayout /></template>);
-
-      // then
-      assert.dom(screen.getByRole('link', { name: t('navigation.main.code') })).exists();
-    });
-
-    test('it should display the UserLoggedMenu component', async function (assert) {
-      // given & when
-      const screen = await render(<template><AppLayout /></template>);
-
-      // then
-      assert
-        .dom(
-          screen.getByRole('button', {
-            name: `Banana ${t('navigation.user-logged-menu.details')}`,
-          }),
-        )
-        .exists();
-    });
-
-    module('on mobile device', function () {
+    module('when user is not connected', function () {
       test('it should not be displayed', async function (assert) {
         // given & when
         class MediaServiceStub extends Service {
@@ -94,6 +53,66 @@ module('Integration | Component | Global | App Layout', function (hooks) {
 
         // then
         assert.dom(screen.queryByRole('link', { name: '100 Pix' })).doesNotExist();
+      });
+    });
+
+    module('when user is connected', function (hooks) {
+      hooks.beforeEach(function () {
+        stubCurrentUserService(
+          this.owner,
+          {
+            firstName: 'Banana',
+            lastName: 'Split',
+            email: 'banana.split@example.net',
+            profile: { pixScore: 100 },
+          },
+          { withStoreStubbed: false },
+        );
+      });
+
+      test('it should display the user pix score', async function (assert) {
+        // given & when
+        const screen = await render(<template><AppLayout /></template>);
+
+        // then
+        assert.dom(screen.getByRole('link', { name: '100 Pix' })).exists();
+      });
+
+      test('it should display a campaign code link', async function (assert) {
+        // given & when
+        const screen = await render(<template><AppLayout /></template>);
+
+        // then
+        assert.dom(screen.getByRole('link', { name: t('navigation.main.code') })).exists();
+      });
+
+      test('it should display the UserLoggedMenu component', async function (assert) {
+        // given & when
+        const screen = await render(<template><AppLayout /></template>);
+
+        // then
+        assert
+          .dom(
+            screen.getByRole('button', {
+              name: `Banana ${t('navigation.user-logged-menu.details')}`,
+            }),
+          )
+          .exists();
+      });
+
+      module('on mobile device', function () {
+        test('it should not be displayed', async function (assert) {
+          // given & when
+          class MediaServiceStub extends Service {
+            isMobile = true;
+          }
+          this.owner.register('service:media', MediaServiceStub);
+
+          const screen = await render(<template><AppLayout /></template>);
+
+          // then
+          assert.dom(screen.queryByRole('link', { name: '100 Pix' })).doesNotExist();
+        });
       });
     });
   });

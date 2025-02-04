@@ -10,8 +10,13 @@ import AppMainHeader from './app-main-header';
 import AppNavigation from './app-navigation';
 
 export default class AppLayout extends Component {
+  @service currentUser;
   @service media;
   @service featureToggles;
+
+  get displayAppMainHeader() {
+    return this.currentUser.user && !this.media.isMobile;
+  }
 
   <template>
     {{#if this.featureToggles.featureToggles.isPixAppNewLayoutEnabled}}
@@ -24,9 +29,9 @@ export default class AppLayout extends Component {
         </:navigation>
         <:main>
           <div>
-            {{#unless this.media.isMobile}}
+            {{#if this.displayAppMainHeader}}
               <AppMainHeader />
-            {{/unless}}
+            {{/if}}
             {{yield}}
           </div>
         </:main>

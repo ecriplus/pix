@@ -13,9 +13,6 @@ module('Integration | Component | Global | App Navigation', function (hooks) {
   module('logos', function () {
     module('when it is not the french domain', function () {
       test('it should only display the Pix logo', async function (assert) {
-        // given
-        _stubCurrentUser(this.owner);
-
         // when
         const screen = await render(<template><AppNavigation /></template>);
 
@@ -30,9 +27,6 @@ module('Integration | Component | Global | App Navigation', function (hooks) {
 
     module('when it is the french domain', function () {
       test('it should only display the Pix logo', async function (assert) {
-        // given
-        _stubCurrentUser(this.owner);
-
         class CurrentDomainServiceStub extends Service {
           get isFranceDomain() {
             return true;
@@ -50,50 +44,75 @@ module('Integration | Component | Global | App Navigation', function (hooks) {
   });
 
   module('links list', function () {
-    test('it should always display a links list', async function (assert) {
-      // given
-      _stubCurrentUser(this.owner);
-
-      // when
-      const screen = await render(<template><AppNavigation /></template>);
-
-      // then
-      const nav = screen.getByLabelText('navigation principale');
-
-      assert.dom(within(nav).getByRole('link', { name: t('navigation.main.dashboard') })).exists();
-      assert.dom(within(nav).getByRole('link', { name: t('navigation.main.skills') })).exists();
-      assert.dom(within(nav).getByRole('link', { name: t('navigation.main.start-certification') })).exists();
-      assert.dom(within(nav).getByRole('link', { name: t('navigation.main.tutorials') })).exists();
-
-      assert.dom(within(nav).queryByRole('link', { name: t('navigation.user.tests') })).doesNotExist();
-      assert.dom(within(nav).queryByRole('link', { name: t('navigation.main.trainings') })).doesNotExist();
-    });
-
-    module('when user has started assessments', function () {
-      test('it should display a specific link', async function (assert) {
+    module('when user is connected', function () {
+      test('it should always display a links list', async function (assert) {
         // given
-        _stubCurrentUser(this.owner, { hasAssessmentParticipations: true });
+        _stubCurrentUser(this.owner);
 
         // when
         const screen = await render(<template><AppNavigation /></template>);
 
         // then
         const nav = screen.getByLabelText('navigation principale');
-        assert.dom(within(nav).getByRole('link', { name: t('navigation.user.tests') })).exists();
+
+        assert.dom(within(nav).getByRole('link', { name: t('navigation.main.dashboard') })).exists();
+        assert.dom(within(nav).getByRole('link', { name: t('navigation.main.skills') })).exists();
+        assert.dom(within(nav).getByRole('link', { name: t('navigation.main.start-certification') })).exists();
+        assert.dom(within(nav).getByRole('link', { name: t('navigation.main.tutorials') })).exists();
+
+        assert.dom(within(nav).queryByRole('link', { name: t('navigation.user.tests') })).doesNotExist();
+        assert.dom(within(nav).queryByRole('link', { name: t('navigation.main.trainings') })).doesNotExist();
+
+        assert.dom(within(nav).queryByRole('link', { name: t('navigation.not-logged.sign-in') })).doesNotExist();
+        assert.dom(within(nav).queryByRole('link', { name: t('navigation.not-logged.sign-up') })).doesNotExist();
+      });
+
+      module('when user has started assessments', function () {
+        test('it should display a specific link', async function (assert) {
+          // given
+          _stubCurrentUser(this.owner, { hasAssessmentParticipations: true });
+
+          // when
+          const screen = await render(<template><AppNavigation /></template>);
+
+          // then
+          const nav = screen.getByLabelText('navigation principale');
+          assert.dom(within(nav).getByRole('link', { name: t('navigation.user.tests') })).exists();
+        });
+      });
+
+      module('when user has recommended trainings', function () {
+        test('it should display a specific link', async function (assert) {
+          // given
+          _stubCurrentUser(this.owner, { hasRecommendedTrainings: true });
+
+          // when
+          const screen = await render(<template><AppNavigation /></template>);
+
+          // then
+          const nav = screen.getByLabelText('navigation principale');
+          assert.dom(within(nav).getByRole('link', { name: t('navigation.main.trainings') })).exists();
+        });
       });
     });
 
-    module('when user has recommended trainings', function () {
-      test('it should display a specific link', async function (assert) {
-        // given
-        _stubCurrentUser(this.owner, { hasRecommendedTrainings: true });
-
+    module('when user is not connected', function () {
+      test('it should only display sign-in and sign-up links', async function (assert) {
         // when
         const screen = await render(<template><AppNavigation /></template>);
 
         // then
         const nav = screen.getByLabelText('navigation principale');
-        assert.dom(within(nav).getByRole('link', { name: t('navigation.main.trainings') })).exists();
+
+        assert.dom(within(nav).getByRole('link', { name: t('navigation.not-logged.sign-in') })).exists();
+        assert.dom(within(nav).getByRole('link', { name: t('navigation.not-logged.sign-up') })).exists();
+
+        assert.dom(within(nav).queryByRole('link', { name: t('navigation.main.dashboard') })).doesNotExist();
+        assert.dom(within(nav).queryByRole('link', { name: t('navigation.main.skills') })).doesNotExist();
+        assert.dom(within(nav).queryByRole('link', { name: t('navigation.main.start-certification') })).doesNotExist();
+        assert.dom(within(nav).queryByRole('link', { name: t('navigation.main.tutorials') })).doesNotExist();
+        assert.dom(within(nav).queryByRole('link', { name: t('navigation.user.tests') })).doesNotExist();
+        assert.dom(within(nav).queryByRole('link', { name: t('navigation.main.trainings') })).doesNotExist();
       });
     });
   });
@@ -132,6 +151,7 @@ module('Integration | Component | Global | App Navigation', function (hooks) {
       assert.dom(within(footer).getByRole('link', { name: t('navigation.main.code') })).exists();
       assert.dom(within(footer).getByText('Banana Split')).exists();
       assert.dom(within(footer).getByRole('link', { name: t('navigation.user.account') })).exists();
+      assert.dom(within(footer).getByRole('link', { name: t('navigation.user.certifications') })).exists();
       assert.dom(within(footer).getByRole('link', { name: t('navigation.user.sign-out') })).exists();
       assert.dom(within(footer).getByRole('link', { name: t('navigation.footer.help-center') })).exists();
     });

@@ -39,28 +39,37 @@ export default class AppNavigation extends Component {
         <PixLogo @color="white" />
       </:brand>
       <:navElements>
-        <PixNavigationButton @route="authenticated.user-dashboard" @icon="home">
-          {{t "navigation.main.dashboard"}}
-        </PixNavigationButton>
-        <PixNavigationButton @route="authenticated.profile" @icon="star">
-          {{t "navigation.main.skills"}}
-        </PixNavigationButton>
-        {{#if this.showAssessmentsNavItem}}
-          <PixNavigationButton @route="authenticated.user-tests" @icon="conversionPath">
-            {{t "navigation.user.tests"}}
+        {{#if this.currentUser.user}}
+          <PixNavigationButton @route="authenticated.user-dashboard" @icon="home">
+            {{t "navigation.main.dashboard"}}
           </PixNavigationButton>
-        {{/if}}
-        <PixNavigationButton @route="authenticated.certifications" @icon="newRealease">
-          {{t "navigation.main.start-certification"}}
-        </PixNavigationButton>
-        {{#if this.showTrainingsNavItem}}
-          <PixNavigationButton @route="authenticated.user-trainings" @icon="book">
-            {{t "navigation.main.trainings"}}
+          <PixNavigationButton @route="authenticated.profile" @icon="star">
+            {{t "navigation.main.skills"}}
           </PixNavigationButton>
+          {{#if this.showAssessmentsNavItem}}
+            <PixNavigationButton @route="authenticated.user-tests" @icon="conversionPath">
+              {{t "navigation.user.tests"}}
+            </PixNavigationButton>
+          {{/if}}
+          <PixNavigationButton @route="authenticated.certifications" @icon="newRealease">
+            {{t "navigation.main.start-certification"}}
+          </PixNavigationButton>
+          {{#if this.showTrainingsNavItem}}
+            <PixNavigationButton @route="authenticated.user-trainings" @icon="book">
+              {{t "navigation.main.trainings"}}
+            </PixNavigationButton>
+          {{/if}}
+          <PixNavigationButton @route="authenticated.user-tutorials" @icon="bookmark">
+            {{t "navigation.main.tutorials"}}
+          </PixNavigationButton>
+        {{else}}
+          <PixButtonLink @route="authentication.login" @variant="primary-bis" @iconBefore="login">
+            {{t "navigation.not-logged.sign-in"}}
+          </PixButtonLink>
+          <PixButtonLink @route="inscription" @variant="primary">
+            {{t "navigation.not-logged.sign-up"}}
+          </PixButtonLink>
         {{/if}}
-        <PixNavigationButton @route="authenticated.user-tutorials" @icon="bookmark">
-          {{t "navigation.main.tutorials"}}
-        </PixNavigationButton>
       </:navElements>
       <:footer>
         {{#if this.media.isMobile}}
@@ -74,6 +83,9 @@ export default class AppNavigation extends Component {
           </PixButtonLink>
           <PixNavigationSeparator />
           <strong>{{this.currentUser.user.fullName}}</strong>
+          <PixButtonLink @route="authenticated.user-certifications" @variant="tertiary" @iconBefore="awards">
+            {{t "navigation.user.certifications"}}
+          </PixButtonLink>
           <PixButtonLink @route="authenticated.user-account" @iconBefore="shieldPerson">
             {{t "navigation.user.account"}}
           </PixButtonLink>
