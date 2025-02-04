@@ -27,9 +27,11 @@ export default class UserOverview extends Component {
   @service pixToast;
   @service references;
   @service store;
+  @service oidcIdentityProviders;
 
   @tracked displayAnonymizeModal = false;
   @tracked isEditionMode = false;
+  @tracked authenticationMethods = [];
 
   languages = this.references.availableLanguages;
   locales = this.references.availableLocales;
@@ -39,6 +41,9 @@ export default class UserOverview extends Component {
   constructor() {
     super(...arguments);
     this.form = this.store.createRecord('user-form');
+    Promise.resolve(this.args.user.authenticationMethods).then((authenticationMethods) => {
+      this.authenticationMethods = authenticationMethods;
+    });
   }
 
   get externalURL() {
@@ -84,6 +89,15 @@ export default class UserOverview extends Component {
 
   get isEmailRequired() {
     return this.args.user.username ? null : 'obligatoire';
+  }
+
+  get hasSsoAuthentication() {
+    const oidcProvidersCodes = this.oidcIdentityProviders.list.map((provider) => provider.code);
+    return this.authenticationMethods.any(
+      (authenticationMethod) =>
+        oidcProvidersCodes.includes(authenticationMethod.identityProvider) ||
+        authenticationMethod.identityProvider === 'GAR',
+    );
   }
 
   _initForm() {
@@ -329,6 +343,13 @@ export default class UserOverview extends Component {
                         </PixTooltip>
                       {{/if}}
                     {{/if}}
+                  </span>
+                </li>
+                <li class="user-detail-personal-information-section__user-informations flex space-between gap-4x">
+                  <span>
+                    {{t "components.users.user-overview.sso"}}
+                    :
+                    {{#if this.hasSsoAuthentication}}{{t "common.words.yes"}}{{else}}{{t "common.words.no"}}{{/if}}
                   </span>
                 </li>
               </ul>

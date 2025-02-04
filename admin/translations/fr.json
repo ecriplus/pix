@@ -421,6 +421,9 @@
           }
         },
         "copied": "Copié !"
+      },
+      "user-overview": {
+        "sso": "SSO"
       }
     }
   },
