@@ -2,7 +2,6 @@ import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING } from '../../../../../src/shared/infrastructure/constants.js';
-import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import { CampaignAnalysis } from '../../../campaign/domain/read-models/CampaignAnalysis.js';
 import * as knowledgeElementSnapshotRepository from '../../../campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
@@ -47,9 +46,10 @@ const getCampaignParticipationAnalysis = async function (
     participantCount: 1,
   });
 
-  const knowledgeElementsByTube = await knowledgeElementRepository.findValidatedGroupedByTubesWithinCampaign(
-    { [campaignParticipation.userId]: campaignParticipation.sharedAt },
-    campaignLearningContent,
+  const snapshot = await knowledgeElementSnapshotRepository.findByCampaignParticipationIds([campaignParticipation.id]);
+
+  const knowledgeElementsByTube = campaignLearningContent.getValidatedKnowledgeElementsGroupedByTube(
+    snapshot[campaignParticipation.id],
   );
   campaignAnalysis.addToTubeRecommendations({ knowledgeElementsByTube });
 

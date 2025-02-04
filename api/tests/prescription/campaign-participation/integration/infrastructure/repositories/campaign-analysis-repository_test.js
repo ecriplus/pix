@@ -445,7 +445,26 @@ describe('Integration | Repository | Campaign analysis repository', function () 
           false,
         );
         userId = userWithCampaignParticipation.userId;
-        campaignParticipation = { userId, sharedAt };
+        const beforeCampaignParticipationShareDate = new Date('2019-01-01');
+
+        const keData = [
+          { userId, skillId: 'recUrl1', status: 'validated', createdAt: beforeCampaignParticipationShareDate },
+          { userId, skillId: 'recUrl2', status: 'invalidated', createdAt: beforeCampaignParticipationShareDate },
+          { userId, skillId: 'recFile2', status: 'validated', createdAt: beforeCampaignParticipationShareDate },
+          { userId, skillId: 'recFile3', status: 'validated', createdAt: beforeCampaignParticipationShareDate },
+          {
+            userId,
+            skillId: 'someUntargetedSkill',
+            status: 'validated',
+            createdAt: beforeCampaignParticipationShareDate,
+          },
+        ];
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          userId,
+          snapshot: JSON.stringify(keData),
+          campaignParticipationId: userWithCampaignParticipation.campaignParticipation.id,
+        });
+        campaignParticipation = { userId, sharedAt, id: userWithCampaignParticipation.campaignParticipation.id };
 
         const url1 = domainBuilder.buildSkill({ id: 'recUrl1', tubeId: 'recTubeUrl', name: '@url1', difficulty: 1 });
         const url2 = domainBuilder.buildSkill({ id: 'recUrl2', tubeId: 'recTubeUrl', name: '@url2', difficulty: 2 });
@@ -537,30 +556,6 @@ describe('Integration | Repository | Campaign analysis repository', function () 
       });
 
       context('participation details', function () {
-        beforeEach(function () {
-          const beforeCampaignParticipationShareDate = new Date('2019-01-01');
-
-          _.each(
-            [
-              { userId, skillId: 'recUrl1', status: 'validated', createdAt: beforeCampaignParticipationShareDate },
-              { userId, skillId: 'recUrl2', status: 'invalidated', createdAt: beforeCampaignParticipationShareDate },
-              { userId, skillId: 'recFile2', status: 'validated', createdAt: beforeCampaignParticipationShareDate },
-              { userId, skillId: 'recFile3', status: 'validated', createdAt: beforeCampaignParticipationShareDate },
-              {
-                userId,
-                skillId: 'someUntargetedSkill',
-                status: 'validated',
-                createdAt: beforeCampaignParticipationShareDate,
-              },
-            ],
-            (knowledgeElement) => {
-              databaseBuilder.factory.buildKnowledgeElement(knowledgeElement);
-            },
-          );
-
-          return databaseBuilder.commit();
-        });
-
         it('should resolves an analysis based on participant score ignoring untargeted or non validated knowledge elements', async function () {
           // when
           const tutorials = [];
