@@ -184,7 +184,6 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
   });
 
   context('V2 Profile', function () {
-    //TODO: créer des campaignParticipation
     describe('#getPlacementProfile', function () {
       it('should assign 0 pixScore and level of 0 to user competence when not assessed', async function () {
         // when

@@ -21,7 +21,6 @@ const participantResultsSharedRepository = {
     const skillIds = await campaignRepository.findSkillIdsByCampaignParticipationId({
       campaignParticipationId,
     });
-    // Go directly through ke snapshots
     const knowledgeElements = await knowledgeElementSnapshotRepository.findByCampaignParticipationIds([
       campaignParticipationId,
     ]);

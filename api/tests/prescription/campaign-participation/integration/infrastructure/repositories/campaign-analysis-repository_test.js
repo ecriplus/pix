@@ -399,12 +399,7 @@ describe('Integration | Repository | Campaign analysis repository', function () 
             userId: userWithCampaignParticipationFred.userId,
             campaignParticipationId: userWithCampaignParticipationFred.campaignParticipation.id,
             snappedAt: userWithCampaignParticipationFred.campaignParticipation.sharedAt,
-            snapshot: JSON.stringify(
-              knowledgeElements.filter(
-                ({ userId, createdAt }) =>
-                  userId === userWithCampaignParticipationFred.userId && createdAt <= shareDate,
-              ),
-            ),
+            snapshot: JSON.stringify(knowledgeElements.filter(({ createdAt }) => createdAt <= shareDate)),
           });
           return databaseBuilder.commit();
         });
