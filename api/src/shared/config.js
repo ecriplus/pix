@@ -354,6 +354,7 @@ const configuration = (function () {
           passwordResetTemplateId: process.env.BREVO_PASSWORD_RESET_TEMPLATE_ID,
           selfAccountDeletionTemplateId: process.env.BREVO_SELF_ACCOUNT_DELETION_TEMPLATE_ID,
           targetProfileNotCertifiableTemplateId: process.env.BREVO_TARGET_PROFILE_NOT_CERTIFIABLE_TEMPLATE_ID,
+          warningConnectionTemplateId: process.env.BREVO_BREVO_WARNING_CONNECTION_TEMPLATE_ID,
         },
       },
     },

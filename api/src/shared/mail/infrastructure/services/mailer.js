@@ -107,6 +107,9 @@ class Mailer {
   get selfAccountDeletionTemplateId() {
     return mailing[this._providerName].templates.selfAccountDeletionTemplateId;
   }
+  get warningConnectionTemplateId() {
+    return mailing[this._providerName].templates.warningConnexionTemplateId;
+  }
 }
 
 const mailer = new Mailer();
