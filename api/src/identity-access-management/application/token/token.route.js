@@ -2,7 +2,6 @@ import Joi from 'joi';
 
 import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
-import { monitorPreHandlers } from '../monitor-pre-handlers.js';
 import { tokenController } from './token.controller.js';
 
 export const tokenRoutes = [
@@ -32,7 +31,7 @@ export const tokenRoutes = [
             }),
         ),
       },
-      pre: [{ method: monitorPreHandlers.monitorApiTokenRoute }, { method: securityPreHandlers.checkIfUserIsBlocked }],
+      pre: [{ method: securityPreHandlers.checkIfUserIsBlocked }],
       handler: (request, h) => tokenController.createToken(request, h),
       tags: ['identity-access-management', 'api', 'token'],
       notes: [
