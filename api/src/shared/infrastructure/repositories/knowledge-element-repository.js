@@ -33,7 +33,7 @@ function _findByUserIdAndLimitDateQuery({ userId, limitDate, skillIds = [] }) {
   });
 }
 
-async function _findAssessedByUserIdAndLimitDateQuery({ userId, limitDate, skillIds }) {
+async function findAssessedByUserIdAndLimitDateQuery({ userId, limitDate, skillIds }) {
   const knowledgeElementRows = await _findByUserIdAndLimitDateQuery({ userId, limitDate, skillIds });
 
   const knowledgeElements = _.map(
@@ -51,7 +51,7 @@ async function findSnapshotForUsers(userIdsAndDates) {
     const userId = parseInt(userIdStr);
     let knowledgeElements = knowledgeElementsFromSnapshot;
     if (!knowledgeElements) {
-      knowledgeElements = await _findAssessedByUserIdAndLimitDateQuery({
+      knowledgeElements = await findAssessedByUserIdAndLimitDateQuery({
         userId,
         limitDate: userIdsAndDates[userId],
       });
@@ -64,7 +64,7 @@ async function findSnapshotForUsers(userIdsAndDates) {
 const findUniqByUserIds = function (userIds) {
   return Promise.all(
     userIds.map(async (userId) => {
-      const knowledgeElements = await _findAssessedByUserIdAndLimitDateQuery({
+      const knowledgeElements = await findAssessedByUserIdAndLimitDateQuery({
         userId,
       });
 
@@ -81,7 +81,7 @@ const batchSave = async function ({ knowledgeElements }) {
 };
 
 const findUniqByUserId = function ({ userId, limitDate, skillIds }) {
-  return _findAssessedByUserIdAndLimitDateQuery({ userId, limitDate, skillIds });
+  return findAssessedByUserIdAndLimitDateQuery({ userId, limitDate, skillIds });
 };
 
 const findUniqByUserIdAndAssessmentId = async function ({ userId, assessmentId }) {
@@ -96,7 +96,7 @@ const findUniqByUserIdAndAssessmentId = async function ({ userId, assessmentId }
 };
 
 const findUniqByUserIdAndCompetenceId = async function ({ userId, competenceId }) {
-  const knowledgeElements = await _findAssessedByUserIdAndLimitDateQuery({ userId });
+  const knowledgeElements = await findAssessedByUserIdAndLimitDateQuery({ userId });
   return knowledgeElements.filter((knowledgeElement) => knowledgeElement.competenceId === competenceId);
 };
 
@@ -131,6 +131,7 @@ const findInvalidatedAndDirectByUserId = async function (userId) {
 
 export {
   batchSave,
+  findAssessedByUserIdAndLimitDateQuery,
   findInvalidatedAndDirectByUserId,
   findSnapshotForUsers,
   findUniqByUserId,
