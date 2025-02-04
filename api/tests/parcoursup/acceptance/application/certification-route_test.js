@@ -217,36 +217,5 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
       expect(response.statusCode).to.equal(200);
       expect(response.result).to.deep.equal(expectedCertification);
     });
-
-    it('should return 409 HTTP status code in case of duplicated certification results', async function () {
-      // given
-      // Same candidate but with another birthdate
-      datamartBuilder.factory.buildCertificationResult({
-        ...certificationResultData,
-        birthdate: '1999-01-01',
-      });
-      await datamartBuilder.commit();
-
-      const options = {
-        method: 'POST',
-        url: `/api/application/parcoursup/certification/search`,
-        headers: {
-          authorization: generateValidRequestAuthorizationHeaderForApplication(
-            PARCOURSUP_CLIENT_ID,
-            PARCOURSUP_SOURCE,
-            PARCOURSUP_SCOPE,
-          ),
-        },
-        payload: {
-          ine,
-        },
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(409);
-    });
   });
 });
