@@ -238,8 +238,12 @@
                 {
                   "id": "f020568f-8d85-4b8a-97a2-6acefa0b5edf",
                   "type": "qrocm",
-                  "instruction": "<p>À vous de jouer, tapez le mot «&nbsp;cornichon&nbsp;» dans la zone de texte ci-dessous :</p>",
+                  "instruction": "<p>À vous de jouer, la phrase ci-dessous comporte deux zones de texte. Complétez la phrase ainsi : «Le bocal de cornichons est vide.».</p>",
                   "proposals": [
+                    {
+                      "type": "text",
+                      "content": "<span>Le bocal de</span>"
+                    },
                     {
                       "input": "1",
                       "type": "input",
@@ -249,17 +253,37 @@
                       "placeholder": "Cliquer ici",
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
-                      "tolerances": [
-                        "t1"
-                      ],
+                      "tolerances": [],
                       "solutions": [
-                        "cornichon", "«cornichon»", "« cornichon »"
+                        "cornichons"
                       ]
+                    },
+                    {
+                      "type": "text",
+                      "content": "<span>est</span>"
+                    },
+                    {
+                      "input": "2",
+                      "type": "input",
+                      "inputType": "text",
+                      "size": 8,
+                      "display": "inline",
+                      "placeholder": "Cliquer ici",
+                      "ariaLabel": "Cliquer ici",
+                      "defaultValue": "",
+                      "tolerances": [],
+                      "solutions": [
+                        "vide"
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "content": "<span>.</span>"
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span> <span aria-hidden=\"true\">🥒</span></p><p>Bravo ! C’est le bon mot !</p>",
-                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span> <span aria-hidden=\"true\">🍽️</span></p><p>Bien tenté ! Mais ce n’est pas le bon mot. Réessayez !</p>"
+                    "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🎉</span></span> <span aria-hidden=\"true\">🥒</span></p><p>Bravo ! Vous avez bien complété la phrase.</p>",
+                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span> <span aria-hidden=\"true\">🍽️</span></p><p>Bien tenté ! Mais la phrase n’est pas identique. Réessayez !</p>"
                   }
                 }
               ]
