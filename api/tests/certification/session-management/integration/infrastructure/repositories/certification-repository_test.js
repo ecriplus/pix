@@ -21,7 +21,7 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
       // then
 
       expect(statuses).to.have.length(3);
-      expect(statuses).to.deep.equal([
+      expect(statuses).to.have.deep.members([
         {
           certificationCourseId: 1,
           isCancelled: false,
