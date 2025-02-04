@@ -283,7 +283,7 @@
                   ],
                   "feedbacks": {
                     "valid": "<p><span class=\"feedback__state\">Bonne réponse ! <span aria-hidden=\"true\">🥒</span></span><br>Bravo ! Vous avez bien complété la phrase.</p>",
-                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span> <span aria-hidden=\"true\">🍽️</span></span><br>Bien tenté ! Mais la phrase n’est pas identique. Réessayez !</p>"
+                    "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse. <span aria-hidden=\"true\">🍽️</span></span><br>Bien tenté ! Mais la phrase n’est pas identique. Réessayez !</p>"
                   }
                 }
               ]
