@@ -12,8 +12,6 @@ $grain-card-border-radius: var(--pix-spacing-4x);
 
   &--active {
     @extend .auto-scroll;
-
-    outline: none;
   }
 
   &:last-child {
@@ -28,6 +26,15 @@ $grain-card-border-radius: var(--pix-spacing-4x);
 
   &__card {
     border-radius: $grain-card-border-radius 0 $grain-card-border-radius $grain-card-border-radius;
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    .grain__card {
+      outline: 2px solid var(--pix-neutral-500);
+      outline-offset: -2px;
+    }
   }
 }
 
