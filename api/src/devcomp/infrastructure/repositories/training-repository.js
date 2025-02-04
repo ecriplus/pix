@@ -150,6 +150,7 @@ async function create({ training }) {
 async function update({ id, attributesToUpdate }) {
   const pickedAttributesToUpdate = pick(attributesToUpdate, [
     'title',
+    'internalTitle',
     'link',
     'type',
     'duration',
