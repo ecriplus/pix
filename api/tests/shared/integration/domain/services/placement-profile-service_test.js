@@ -1,12 +1,16 @@
 import { LOCALE } from '../../../../../src/shared/domain/constants.js';
-import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import {
+  CampaignParticipationStatuses,
+  CampaignTypes,
+  KnowledgeElement,
+} from '../../../../../src/shared/domain/models/index.js';
 import * as placementProfileService from '../../../../../src/shared/domain/services/placement-profile-service.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
 const { ENGLISH_SPOKEN } = LOCALE;
 
 describe('Shared | Integration | Domain | Services | Placement Profile Service', function () {
-  let userId, assessmentId;
+  let userId, assessmentId, campaignParticipation;
   let skillRemplir2DB;
 
   beforeEach(function () {
@@ -94,7 +98,14 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
       tubeId: 'Requin',
     });
     userId = databaseBuilder.factory.buildUser().id;
-    assessmentId = databaseBuilder.factory.buildAssessment({ userId }).id;
+    campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+      userId,
+      status: CampaignParticipationStatuses.SHARED,
+    });
+    assessmentId = databaseBuilder.factory.buildAssessment({
+      userId,
+      campaignParticipationId: campaignParticipation.id,
+    }).id;
     return databaseBuilder.commit();
   });
 
@@ -173,6 +184,7 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
   });
 
   context('V2 Profile', function () {
+    //TODO: créer des campaignParticipation
     describe('#getPlacementProfile', function () {
       it('should assign 0 pixScore and level of 0 to user competence when not assessed', async function () {
         // when
@@ -682,12 +694,20 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
       },
     ];
 
-    it('should assign 0 pixScore and level of 0 to user competence when not assessed', async function () {
+    it('should assign 0 pixScore and level of 0 to user competence when campaign is TO_SHARE', async function () {
       // when
+      const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.PROFILES_COLLECTION });
+      const campaignParticipationProfileCollection = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign.id,
+        userId,
+        status: CampaignParticipationStatuses.TO_SHARE,
+      });
+
       const actualPlacementProfile = await placementProfileService.getPlacementProfileWithSnapshotting({
         userId,
         limitDate: new Date(),
         competences,
+        campaignParticipationId: campaignParticipationProfileCollection.id,
       });
 
       // then
@@ -725,13 +745,21 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
     describe('PixScore by competences', function () {
       it('should assign pixScore and level to user competence based on knowledge elements', async function () {
         // given
-        databaseBuilder.factory.buildKnowledgeElement({
+        const knowledgeElement = databaseBuilder.factory.buildKnowledgeElement({
           competenceId: 'competenceRecordIdTwo',
           skillId: 'recRemplir2',
           earnedPix: 23,
           userId,
           assessmentId,
         });
+
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          userId,
+          snappedAt: campaignParticipation.sharedAt,
+          campaignParticipationId: campaignParticipation.id,
+          snapshot: JSON.stringify([knowledgeElement]),
+        });
+
         await databaseBuilder.commit();
 
         // when
@@ -739,6 +767,7 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
           userId,
           limitDate: new Date(),
           competences,
+          campaignParticipationId: campaignParticipation.id,
         });
 
         // then
@@ -756,7 +785,7 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
 
       it('should include both inferred and direct KnowlegdeElements to compute PixScore', async function () {
         // given
-        databaseBuilder.factory.buildKnowledgeElement({
+        const ke1 = databaseBuilder.factory.buildKnowledgeElement({
           competenceId: 'competenceRecordIdTwo',
           skillId: 'recRemplir2',
           earnedPix: 8,
@@ -765,7 +794,7 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
           assessmentId,
         });
 
-        databaseBuilder.factory.buildKnowledgeElement({
+        const ke2 = databaseBuilder.factory.buildKnowledgeElement({
           competenceId: 'competenceRecordIdTwo',
           skillId: 'recRemplir4',
           earnedPix: 9,
@@ -773,6 +802,14 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
           userId,
           assessmentId,
         });
+
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          userId,
+          snappedAt: campaignParticipation.sharedAt,
+          campaignParticipationId: campaignParticipation.id,
+          snapshot: JSON.stringify([ke1, ke2]),
+        });
+
         await databaseBuilder.commit();
 
         // when
@@ -780,6 +817,7 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
           userId,
           limitDate: new Date(),
           competences,
+          campaignParticipationId: campaignParticipation.id,
         });
 
         // then
@@ -788,12 +826,20 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
 
       context('when we dont want to limit pix score', function () {
         it('should not limit pixScore and level to the max reachable for user competence based on knowledge elements', async function () {
-          databaseBuilder.factory.buildKnowledgeElement({
+          const ke = databaseBuilder.factory.buildKnowledgeElement({
             competenceId: 'competenceRecordIdOne',
             earnedPix: 64,
             userId,
             assessmentId,
           });
+
+          databaseBuilder.factory.buildKnowledgeElementSnapshot({
+            userId,
+            snappedAt: campaignParticipation.sharedAt,
+            campaignParticipationId: campaignParticipation.id,
+            snapshot: JSON.stringify([ke]),
+          });
+
           await databaseBuilder.commit();
 
           // when
@@ -802,6 +848,7 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
             limitDate: new Date(),
             competences,
             allowExcessPixAndLevels: true,
+            campaignParticipationId: campaignParticipation.id,
           });
 
           // then
@@ -815,12 +862,20 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
 
       context('when we want to limit pix score', function () {
         it('should limit pixScore to 40 and level to 5', async function () {
-          databaseBuilder.factory.buildKnowledgeElement({
+          const ke = databaseBuilder.factory.buildKnowledgeElement({
             competenceId: 'competenceRecordIdOne',
             earnedPix: 64,
             userId,
             assessmentId,
           });
+
+          databaseBuilder.factory.buildKnowledgeElementSnapshot({
+            userId,
+            snappedAt: campaignParticipation.sharedAt,
+            campaignParticipationId: campaignParticipation.id,
+            snapshot: JSON.stringify([ke]),
+          });
+
           await databaseBuilder.commit();
 
           // when
@@ -829,6 +884,7 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
             limitDate: new Date(),
             competences,
             allowExcessPixAndLevels: false,
+            campaignParticipationId: campaignParticipation.id,
           });
 
           // then
