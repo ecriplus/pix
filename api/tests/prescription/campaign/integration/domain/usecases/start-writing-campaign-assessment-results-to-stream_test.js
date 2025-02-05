@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { CampaignExternalIdTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { CAMPAIGN_FEATURES, ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { CampaignParticipationStatuses, KnowledgeElement } from '../../../../../../src/shared/domain/models/index.js';
@@ -108,7 +109,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: participant.id,
           snappedAt: sharedAt,
-          snapshot: JSON.stringify([ke1]),
+          snapshot: new KnowledgeElementCollection([ke1]).toSnapshot(),
         });
 
         ['recSkillWeb1'].forEach((skillId) => {
@@ -201,8 +202,8 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: participant.id,
           snappedAt: sharedAt,
-          snapshot: JSON.stringify([ke1, ke2, ke3]),
           campaignParticipationId: campaignParticipation.id,
+          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3]).toSnapshot(),
         });
 
         ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
@@ -341,8 +342,8 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: participant.id,
           snappedAt: sharedAt,
-          snapshot: JSON.stringify([ke1, ke2, ke3]),
           campaignParticipationId: campaignParticipation.id,
+          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3]).toSnapshot(),
         });
 
         ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
@@ -451,8 +452,8 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: participant.id,
           snappedAt: sharedAt,
-          snapshot: JSON.stringify([ke1, ke2, ke3]),
           campaignParticipationId: campaignParticipation.id,
+          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3]).toSnapshot(),
         });
 
         ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
@@ -697,8 +698,8 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: participant.id,
           snappedAt: sharedAt,
-          snapshot: JSON.stringify([ke1, ke2, ke3]),
           campaignParticipationId: campaignParticipation.id,
+          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3]).toSnapshot(),
         });
 
         ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {

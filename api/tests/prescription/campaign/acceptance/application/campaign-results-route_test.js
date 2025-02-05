@@ -1,3 +1,4 @@
+import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
   createServer,
@@ -577,7 +578,7 @@ describe('Acceptance | API | campaign-results-route', function () {
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId,
         campaignParticipationId: campaignParticipation.id,
-        snapshot: JSON.stringify([ke]),
+        snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
         snappedAt: campaignParticipation.sharedAt,
       });
 

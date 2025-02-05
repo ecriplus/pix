@@ -4,6 +4,7 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 const { STARTED, TO_SHARE, SHARED } = CampaignParticipationStatuses;
@@ -171,8 +172,8 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: campaignParticipation.userId,
           snappedAt: campaignParticipation.sharedAt,
-          snapshot: JSON.stringify([ke1, ke2]),
           campaignParticipationId: campaignParticipation.id,
+          snapshot: new KnowledgeElementCollection([ke1, ke2]).toSnapshot(),
         });
 
         await databaseBuilder.commit();

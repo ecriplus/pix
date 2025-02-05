@@ -11,6 +11,7 @@ import {
   CampaignExternalIdTypes,
   CampaignParticipationStatuses,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import {
   CAMPAIGN_FEATURES,
   MAX_REACHABLE_LEVEL,
@@ -177,7 +178,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: participationShared.userId,
           snappedAt: participationShared.sharedAt,
-          snapshot: JSON.stringify([ke1, ke2, ke3, ke4, ke5]),
+          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3, ke4, ke5]).toSnapshot(),
           campaignParticipationId: participationShared.id,
         });
 
@@ -250,7 +251,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: participationShared.userId,
           snappedAt: participationShared.sharedAt,
-          snapshot: JSON.stringify([ke1, ke2, ke3, ke4, ke5]),
+          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3, ke4, ke5]).toSnapshot(),
           campaignParticipationId: participationShared.id,
         });
 
@@ -399,7 +400,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: participationShared.userId,
           snappedAt: participationShared.sharedAt,
-          snapshot: JSON.stringify([ke1, ke2, ke3, ke4, ke5]),
+          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3, ke4, ke5]).toSnapshot(),
           campaignParticipationId: participationShared.id,
         });
         await databaseBuilder.commit();
@@ -482,7 +483,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: participationShared.userId,
           snappedAt: participationShared.sharedAt,
-          snapshot: JSON.stringify([ke1, ke2, ke3, ke4, ke5]),
+          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3, ke4, ke5]).toSnapshot(),
           campaignParticipationId: participationShared.id,
         });
 
@@ -568,7 +569,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: participationShared.userId,
           snappedAt: participationShared.sharedAt,
-          snapshot: JSON.stringify([ke1, ke2, ke3, ke4, ke5]),
+          snapshot: new KnowledgeElementCollection([ke1, ke2, ke3, ke4, ke5]).toSnapshot(),
           campaignParticipationId: participationShared.id,
         });
 

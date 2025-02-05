@@ -9,6 +9,7 @@ import { Campaign } from '../../../../shared/domain/models/Campaign.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as knowledgeElementSnapshotRepository from '../../../campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
+import { KnowledgeElementCollection } from '../../../shared/domain/models/KnowledgeElementCollection.js';
 import { CampaignParticipation } from '../../domain/models/CampaignParticipation.js';
 import { AvailableCampaignParticipation } from '../../domain/read-models/AvailableCampaignParticipation.js';
 
@@ -36,7 +37,7 @@ const updateWithSnapshot = async function (campaignParticipation) {
   await knowledgeElementSnapshotRepository.save({
     userId: campaignParticipation.userId,
     snappedAt: campaignParticipation.sharedAt,
-    knowledgeElements,
+    snapshot: new KnowledgeElementCollection(knowledgeElements).toSnapshot(),
     campaignParticipationId: campaignParticipation.id,
   });
 };

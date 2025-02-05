@@ -10,13 +10,15 @@ class KnowledgeElementCollection {
   get latestUniqNonResetKnowledgeElements() {
     return _(this.knowledgeElements)
       .orderBy('createdAt', 'desc')
-      .reject({ status: KnowledgeElement.StatusType.RESET })
       .uniqBy('skillId')
+      .reject({ status: KnowledgeElement.StatusType.RESET })
       .value();
   }
 
   toSnapshot() {
-    return JSON.stringify(this.latestUniqNonResetKnowledgeElements.map((ke) => _.omit(ke, ['assessmentId', 'userId'])));
+    return JSON.stringify(
+      this.latestUniqNonResetKnowledgeElements.map((ke) => _.omit(ke, ['id', 'assessmentId', 'userId'])),
+    );
   }
 }
 

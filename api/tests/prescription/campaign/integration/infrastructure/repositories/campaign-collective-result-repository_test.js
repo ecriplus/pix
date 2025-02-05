@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { CampaignCollectiveResult } from '../../../../../../src/prescription/campaign/domain/read-models/CampaignCollectiveResult.js';
 import * as campaignCollectiveResultRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-collective-result-repository.js';
 import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
@@ -471,7 +469,9 @@ describe('Integration | Repository | Campaign collective result repository', fun
             userId: fredId,
             campaignParticipationId: userWithCampaignParticipationFred.campaignParticipation.id,
             snappedAt: userWithCampaignParticipationFred.sharedAt,
-            snapshot: JSON.stringify(knowledgeElements.map(domainBuilder.buildKnowledgeElement)),
+            snapshot: new KnowledgeElementCollection(
+              knowledgeElements.map(domainBuilder.buildKnowledgeElement),
+            ).toSnapshot(),
           });
 
           return databaseBuilder.commit();
@@ -984,7 +984,7 @@ describe('Integration | Repository | Campaign collective result repository', fun
           databaseBuilder.factory.buildKnowledgeElementSnapshot({
             userId: userId,
             snappedAt: campaignParticipation.sharedAt,
-            snapshot: JSON.stringify([knowledgeElement]),
+            snapshot: new KnowledgeElementCollection([knowledgeElement]).toSnapshot(),
             campaignParticipationId: campaignParticipation.id,
           });
 
@@ -1067,26 +1067,20 @@ describe('Integration | Repository | Campaign collective result repository', fun
           ];
 
           const knowledgeElementsAlice = knowledgeElementsDataAlice.map(databaseBuilder.factory.buildKnowledgeElement);
-          const snapshotsAlice = _(knowledgeElementsAlice).orderBy('createdAt', 'desc').uniqBy('skillId').value();
 
           const knowledgeElementsBob = knowledgeElementsDataBob.map(databaseBuilder.factory.buildKnowledgeElement);
-          const snapshotsBob = _(knowledgeElementsBob)
-            .filter((o) => o.createdAt <= campaignParticipationShareDate)
-            .orderBy('createdAt', 'desc')
-            .uniqBy('skillId')
-            .value();
 
           databaseBuilder.factory.buildKnowledgeElementSnapshot({
             userId: userWithCampaignParticipationAlice.userId,
             snappedAt: userWithCampaignParticipationAlice.campaignParticipation.sharedAt,
-            snapshot: JSON.stringify(snapshotsAlice),
+            snapshot: new KnowledgeElementCollection(knowledgeElementsAlice).toSnapshot(),
             campaignParticipationId: userWithCampaignParticipationAlice.campaignParticipation.id,
           });
 
           databaseBuilder.factory.buildKnowledgeElementSnapshot({
             userId: userWithCampaignParticipationBob.userId,
             snappedAt: userWithCampaignParticipationBob.campaignParticipation.sharedAt,
-            snapshot: JSON.stringify(snapshotsBob),
+            snapshot: new KnowledgeElementCollection(knowledgeElementsBob).toSnapshot(),
             campaignParticipationId: userWithCampaignParticipationBob.campaignParticipation.id,
           });
 

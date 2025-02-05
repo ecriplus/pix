@@ -1,3 +1,4 @@
+import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { LOCALE } from '../../../../../src/shared/domain/constants.js';
 import {
   CampaignParticipationStatuses,
@@ -529,8 +530,8 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: userId,
           snappedAt: sharedAt,
-          snapshot: JSON.stringify([ke]),
           campaignParticipationId: campaignParticipation.id,
+          snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
         });
 
         await databaseBuilder.commit();
@@ -580,8 +581,8 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId: userId,
           snappedAt: sharedAt,
-          snapshot: JSON.stringify([ke1, ke2]),
           campaignParticipationId: campaignParticipation.id,
+          snapshot: new KnowledgeElementCollection([ke1, ke2]).toSnapshot(),
         });
         await databaseBuilder.commit();
 
@@ -606,8 +607,10 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
           });
 
           databaseBuilder.factory.buildKnowledgeElementSnapshot({
-            snapshot: JSON.stringify([ke]),
             campaignParticipationId: campaignParticipation.id,
+            userId: userId,
+            snappedAt: campaignParticipation.sharedAt,
+            snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
           });
 
           await databaseBuilder.commit();
@@ -640,7 +643,9 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
 
           databaseBuilder.factory.buildKnowledgeElementSnapshot({
             campaignParticipationId: campaignParticipation.id,
-            snapshot: JSON.stringify([ke]),
+            userId: userId,
+            snappedAt: campaignParticipation.sharedAt,
+            snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
           });
 
           await databaseBuilder.commit();

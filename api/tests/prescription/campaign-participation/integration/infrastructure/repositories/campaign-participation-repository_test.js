@@ -81,7 +81,6 @@ describe('Integration | Repository | Campaign Participation', function () {
       expect(snapshotInDB).to.deep.equal([
         [
           {
-            id: ke.id,
             answerId: ke.answerId,
             competenceId: ke.competenceId,
             createdAt: ke.createdAt.toISOString(),

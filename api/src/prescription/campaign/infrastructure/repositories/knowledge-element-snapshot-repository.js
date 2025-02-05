@@ -5,13 +5,13 @@ import { KnowledgeElement } from '../../../../shared/domain/models/KnowledgeElem
 import * as knexUtils from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { CampaignParticipationKnowledgeElementSnapshots } from '../../../shared/domain/read-models/CampaignParticipationKnowledgeElementSnapshots.js';
 
-const save = async function ({ userId, snappedAt, knowledgeElements, campaignParticipationId }) {
+const save = async function ({ userId, snappedAt, snapshot, campaignParticipationId }) {
   try {
     const knexConn = DomainTransaction.getConnection();
     return await knexConn('knowledge-element-snapshots').insert({
       userId,
       snappedAt,
-      snapshot: JSON.stringify(knowledgeElements),
+      snapshot,
       campaignParticipationId,
     });
   } catch (error) {

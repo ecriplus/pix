@@ -1,4 +1,5 @@
 import * as knowledgeElementSnapshotRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
+import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { AlreadyExistingEntityError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
@@ -146,7 +147,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId1,
         snappedAt: snappedAt1,
-        snapshot: JSON.stringify([knowledgeElement1]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement1]).toSnapshot(),
         campaignParticipationId,
       });
 
@@ -176,7 +177,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId1,
         snappedAt: snappedAt1,
-        snapshot: JSON.stringify([knowledgeElement1]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement1]).toSnapshot(),
         campaignParticipationId,
       });
       const snappedAt2 = new Date('2020-02-02');
@@ -184,7 +185,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId2,
         snappedAt: snappedAt2,
-        snapshot: JSON.stringify([knowledgeElement2]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement2]).toSnapshot(),
         campaignParticipationId: secondCampaignParticipationId,
       });
 
@@ -193,7 +194,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId2,
         snappedAt: snappedAt3,
-        snapshot: JSON.stringify([knowledgeElement3]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement3]).toSnapshot(),
         campaignParticipationId: otherCampaignParticipationId,
       });
 
@@ -271,7 +272,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId1,
         snappedAt: snappedAt1,
-        snapshot: JSON.stringify([knowledgeElement1]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement1]).toSnapshot(),
         campaignParticipationId: campaignParticipationId1,
       });
 
@@ -289,7 +290,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId2,
         snappedAt: snappedAt2,
-        snapshot: JSON.stringify([knowledgeElement2]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement2]).toSnapshot(),
         campaignParticipationId: campaignParticipationId2,
       });
 
@@ -307,7 +308,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId2,
         snappedAt: snappedAt3,
-        snapshot: JSON.stringify([knowledgeElement3]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement3]).toSnapshot(),
         campaignParticipationId: campaignParticipationId3,
       });
 
