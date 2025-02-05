@@ -9,6 +9,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
+import ENV from 'pix-admin/config/environment';
 
 import formatDate from '../../helpers/format-date';
 import ConfirmPopup from '../confirm-popup';
@@ -49,6 +50,11 @@ export default class TargetProfile extends Component {
 
   get hasLinkedAutonomousCourse() {
     return Boolean(this.args.model.hasLinkedAutonomousCourse);
+  }
+
+  get externalURL() {
+    const urlDashboardPrefix = ENV.APP.TARGET_PROFILE_DASHBOARD_URL;
+    return urlDashboardPrefix && `${urlDashboardPrefix}?id=${this.args.model.id}`;
   }
 
   displayBooleanState = (bool) => {
@@ -235,21 +241,26 @@ export default class TargetProfile extends Component {
             @route="authenticated.target-profiles.edit"
             @model={{@model.id}}
             @size="small"
-            @variant="secondary"
+            @variant="primary"
           >
             {{t "common.actions.edit"}}
           </PixButtonLink>
-          <div class="target-profile__actions-separator"></div>
 
-          {{#unless @model.isSimplifiedAccess}}
-            <PixButton
-              @size="small"
-              @variant="secondary"
-              @triggerAction={{this.toggleDisplaySimplifiedAccessPopupConfirm}}
-            >
-              Marquer comme accès simplifié
-            </PixButton>
-          {{/unless}}
+          <PixButton @size="small" @variant="primary" @triggerAction={{this.openCopyModal}}>{{t
+              "pages.target-profiles.copy.button.label"
+            }}</PixButton>
+
+          <Copy @isOpen={{this.showCopyModal}} @onClose={{this.closeCopyModal}} @onSubmit={{this.copyTargetProfile}} />
+
+          <div class="target-profile__actions-separator"></div>
+          <PixButtonLink
+            @variant="secondary"
+            @href="{{this.externalURL}}"
+            @size="small"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Tableau de bord
+          </PixButtonLink>
 
           <PixButton @triggerAction={{this.downloadJSON}} @size="small" @variant="success">
             Télécharger le profil cible (JSON)
@@ -259,14 +270,14 @@ export default class TargetProfile extends Component {
             Télécharger le profil cible (PDF)
           </PixButton>
 
-          <PixButton @size="small" @triggerAction={{this.openCopyModal}}>{{t
-              "pages.target-profiles.copy.button.label"
-            }}</PixButton>
-
-          <Copy @isOpen={{this.showCopyModal}} @onClose={{this.closeCopyModal}} @onSubmit={{this.copyTargetProfile}} />
+          <div class="target-profile__actions-separator"></div>
+          {{#unless @model.isSimplifiedAccess}}
+            <PixButton @size="small" @variant="error" @triggerAction={{this.toggleDisplaySimplifiedAccessPopupConfirm}}>
+              Marquer comme accès simplifié
+            </PixButton>
+          {{/unless}}
 
           {{#unless @model.outdated}}
-            <div class="target-profile__actions-spacer"></div>
             <PixButton @size="small" @variant="error" @triggerAction={{this.toggleDisplayConfirm}}>
               Marquer comme obsolète
             </PixButton>
