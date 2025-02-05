@@ -11,10 +11,8 @@ export const createResetPasswordDemand = async function ({
   await userRepository.isUserExistingByEmail(email);
 
   const temporaryKey = await resetPasswordService.generateTemporaryKey();
-  const passwordResetDemand = await resetPasswordDemandRepository.create({ email, temporaryKey });
+  await resetPasswordDemandRepository.create({ email, temporaryKey });
 
   const resetPasswordDemandEmail = createResetPasswordDemandEmail({ email, temporaryKey, locale });
   await emailRepository.sendEmail(resetPasswordDemandEmail);
-
-  return passwordResetDemand;
 };

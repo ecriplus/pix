@@ -55,24 +55,15 @@ describe('Unit | Identity Access Management | Application | Controller | passwor
     });
 
     context('when all went well', function () {
-      it('replies with serialized reset password demand', async function () {
+      it('returns a 204 HTTP status code', async function () {
         // when
         const response = await passwordController.createResetPasswordDemand(request, hFake);
 
         // then
-        expect(response.statusCode).to.equal(201);
+        expect(response.statusCode).to.equal(204);
         expect(usecases.createResetPasswordDemand).to.have.been.calledWithExactly({
           email,
           locale,
-        });
-        expect(response.source).to.deep.equal({
-          data: {
-            attributes: {
-              email: 'user@example.net',
-            },
-            id: '1',
-            type: 'password-reset-demands',
-          },
         });
       });
     });

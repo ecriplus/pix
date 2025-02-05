@@ -1,24 +1,19 @@
 import * as userSerializer from '../../../shared/infrastructure/serializers/jsonapi/user-serializer.js';
 import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
-import * as resetPasswordSerializer from '../../infrastructure/serializers/jsonapi/reset-password.serializer.js';
 
 const checkResetDemand = async function (request, h, dependencies = { userSerializer }) {
   const temporaryKey = request.params.temporaryKey;
   const user = await usecases.getUserByResetPasswordDemand({ temporaryKey });
   return dependencies.userSerializer.serialize(user);
 };
-const createResetPasswordDemand = async function (request, h, dependencies = { resetPasswordSerializer }) {
+const createResetPasswordDemand = async function (request, h) {
   const email = request.payload.email;
   const locale = extractLocaleFromRequest(request);
 
-  const resetPasswordDemand = await usecases.createResetPasswordDemand({
-    email,
-    locale,
-  });
-  const serializedPayload = dependencies.resetPasswordSerializer.serialize(resetPasswordDemand);
+  await usecases.createResetPasswordDemand({ email, locale });
 
-  return h.response(serializedPayload).created();
+  return h.response().code(204);
 };
 
 const updateExpiredPassword = async function (request, h) {

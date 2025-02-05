@@ -43,12 +43,12 @@ describe('Acceptance | Identity Access Management | Application | Route | passwo
       });
 
       context('when given email exists', function () {
-        it('replies with 201', async function () {
+        it('returns a 204 HTTP status code', async function () {
           // when
           const response = await server.inject(options);
 
           // then
-          expect(response.statusCode).to.equal(201);
+          expect(response.statusCode).to.equal(204);
         });
       });
     });
@@ -86,12 +86,12 @@ describe('Acceptance | Identity Access Management | Application | Route | passwo
       });
 
       context('when given email exists', function () {
-        it('replies with 201', async function () {
+        it('returns a 204 HTTP status code', async function () {
           // when
           const response = await server.inject(options);
 
           // then
-          expect(response.statusCode).to.equal(201);
+          expect(response.statusCode).to.equal(204);
         });
       });
     });

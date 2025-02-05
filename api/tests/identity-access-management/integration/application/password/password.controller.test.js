@@ -22,7 +22,7 @@ describe('Integration | Identity Access Management | Application | Controller | 
     };
     const payload = { email };
 
-    it('returns a 201 HTTP status code with a response', async function () {
+    it('returns a 204 HTTP status code', async function () {
       // given
       const request = { headers, payload };
 
@@ -34,16 +34,7 @@ describe('Integration | Identity Access Management | Application | Controller | 
       const response = await passwordController.createResetPasswordDemand(request, hFake);
 
       // then
-      expect(response.statusCode).to.equal(201);
-      sinon.assert.match(response.source, {
-        data: {
-          attributes: {
-            email: 'user@example.net',
-          },
-          id: sinon.match.string,
-          type: 'password-reset-demands',
-        },
-      });
+      expect(response.statusCode).to.equal(204);
     });
 
     context('when user account does not exist with given email', function () {

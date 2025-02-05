@@ -4,7 +4,7 @@ import { resetPasswordDemandRepository } from '../../../../../src/identity-acces
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import * as emailRepository from '../../../../../src/shared/mail/infrastructure/repositories/email.repository.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | create-reset-password-demand', function () {
   const email = 'user@example.net';
@@ -16,9 +16,9 @@ describe('Integration | Identity Access Management | Domain | UseCase | create-r
     await databaseBuilder.commit();
   });
 
-  it('returns a reset password demand', async function () {
+  it('creates a reset password demand', async function () {
     // when
-    const result = await createResetPasswordDemand({
+    await createResetPasswordDemand({
       email,
       locale,
       emailRepository,
@@ -28,8 +28,8 @@ describe('Integration | Identity Access Management | Domain | UseCase | create-r
     });
 
     // then
-    expect(result.email).to.deep.equal(email);
-    expect(result.temporaryKey).to.be.ok;
+    const resetPasswordDemand = await knex('reset-password-demands').where({ email }).first();
+    expect(resetPasswordDemand).to.exist;
   });
 
   it('throws UserNotFoundError if no user account exists with this email', async function () {
