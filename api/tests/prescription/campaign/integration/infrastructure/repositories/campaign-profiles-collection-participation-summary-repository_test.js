@@ -172,6 +172,7 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
           userId: campaignParticipation.userId,
           snappedAt: campaignParticipation.sharedAt,
           snapshot: JSON.stringify([ke1, ke2]),
+          campaignParticipationId: campaignParticipation.id,
         });
 
         await databaseBuilder.commit();

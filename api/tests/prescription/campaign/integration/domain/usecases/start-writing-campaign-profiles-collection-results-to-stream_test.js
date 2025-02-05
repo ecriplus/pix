@@ -32,6 +32,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
     let writableStream;
     let csvPromise;
     let i18n;
+    let ke1, ke2, ke3, ke4, ke5;
 
     const createdAt = new Date('2019-02-25T10:00:00Z');
     const sharedAt = new Date('2019-03-01T23:04:05Z');
@@ -49,7 +50,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
 
       participant = databaseBuilder.factory.buildUser();
 
-      const ke1 = databaseBuilder.factory.buildKnowledgeElement({
+      ke1 = databaseBuilder.factory.buildKnowledgeElement({
         status: 'validated',
         pixScore: 2,
         skillId: skillWeb1.id,
@@ -58,7 +59,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         userId: participant.id,
         createdAt,
       });
-      const ke2 = databaseBuilder.factory.buildKnowledgeElement({
+      ke2 = databaseBuilder.factory.buildKnowledgeElement({
         status: 'validated',
         pixScore: 2,
         skillId: skillWeb2.id,
@@ -67,7 +68,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         userId: participant.id,
         createdAt,
       });
-      const ke3 = databaseBuilder.factory.buildKnowledgeElement({
+      ke3 = databaseBuilder.factory.buildKnowledgeElement({
         status: 'invalidated',
         pixScore: 2,
         skillId: skillWeb3.id,
@@ -76,7 +77,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         userId: participant.id,
         createdAt,
       });
-      const ke4 = databaseBuilder.factory.buildKnowledgeElement({
+      ke4 = databaseBuilder.factory.buildKnowledgeElement({
         status: 'validated',
         skillId: skillUrl1.id,
         earnedPix: 2,
@@ -84,19 +85,13 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         userId: participant.id,
         createdAt,
       });
-      const ke5 = databaseBuilder.factory.buildKnowledgeElement({
+      ke5 = databaseBuilder.factory.buildKnowledgeElement({
         status: 'validated',
         skillId: skillUrl8.id,
         earnedPix: 64,
         competenceId: 'recCompetence2',
         userId: participant.id,
         createdAt,
-      });
-
-      databaseBuilder.factory.buildKnowledgeElementSnapshot({
-        userId: participant.id,
-        snappedAt: sharedAt,
-        snapshot: JSON.stringify([ke1, ke2, ke3, ke4, ke5]),
       });
 
       databaseBuilder.factory.learningContent.buildFramework({
@@ -156,15 +151,18 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         });
 
         organizationLearner = { firstName: '@Jean', lastName: '=Bono' };
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(organizationLearner, {
-          createdAt,
-          sharedAt,
-          status: CampaignParticipationStatuses.SHARED,
-          campaignId: campaign.id,
-          userId: participant.id,
-          pixScore: 52,
-          isImproved: true,
-        });
+        const participationShared = databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
+          organizationLearner,
+          {
+            createdAt,
+            sharedAt,
+            status: CampaignParticipationStatuses.SHARED,
+            campaignId: campaign.id,
+            userId: participant.id,
+            pixScore: 52,
+            isImproved: true,
+          },
+        );
 
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(organizationLearner, {
           createdAt,
@@ -174,6 +172,13 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
           userId: participant.id,
           pixScore: 0,
           isImproved: false,
+        });
+
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          userId: participationShared.userId,
+          snappedAt: participationShared.sharedAt,
+          snapshot: JSON.stringify([ke1, ke2, ke3, ke4, ke5]),
+          campaignParticipationId: participationShared.id,
         });
 
         await databaseBuilder.commit();
@@ -228,15 +233,25 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         });
 
         organizationLearner = { firstName: '@Jean', lastName: '=Bono' };
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(organizationLearner, {
-          createdAt,
-          sharedAt,
-          status: CampaignParticipationStatuses.SHARED,
-          participantExternalId: '+Mon mail pro',
-          campaignId: campaign.id,
-          userId: participant.id,
-          pixScore: 52,
-          isImproved: true,
+        const participationShared = databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
+          organizationLearner,
+          {
+            createdAt,
+            sharedAt,
+            status: CampaignParticipationStatuses.SHARED,
+            participantExternalId: '+Mon mail pro',
+            campaignId: campaign.id,
+            userId: participant.id,
+            pixScore: 52,
+            isImproved: true,
+          },
+        );
+
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          userId: participationShared.userId,
+          snappedAt: participationShared.sharedAt,
+          snapshot: JSON.stringify([ke1, ke2, ke3, ke4, ke5]),
+          campaignParticipationId: participationShared.id,
         });
 
         await databaseBuilder.commit();
@@ -370,14 +385,23 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         });
 
         organizationLearner = { firstName: '@Jean', lastName: '=Bono' };
-        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(organizationLearner, {
-          createdAt,
-          sharedAt,
-          campaignId: campaign.id,
-          userId: participant.id,
-          pixScore: 52,
-        });
+        const participationShared = databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
+          organizationLearner,
+          {
+            createdAt,
+            sharedAt,
+            campaignId: campaign.id,
+            userId: participant.id,
+            pixScore: 52,
+          },
+        );
 
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          userId: participationShared.userId,
+          snappedAt: participationShared.sharedAt,
+          snapshot: JSON.stringify([ke1, ke2, ke3, ke4, ke5]),
+          campaignParticipationId: participationShared.id,
+        });
         await databaseBuilder.commit();
       });
 
@@ -446,13 +470,20 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
           title: null,
         });
 
-        databaseBuilder.factory.buildCampaignParticipation({
+        const participationShared = databaseBuilder.factory.buildCampaignParticipation({
           createdAt,
           sharedAt,
           campaignId: campaign.id,
           userId: participant.id,
           organizationLearnerId: organizationLearner.id,
           pixScore: 52,
+        });
+
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          userId: participationShared.userId,
+          snappedAt: participationShared.sharedAt,
+          snapshot: JSON.stringify([ke1, ke2, ke3, ke4, ke5]),
+          campaignParticipationId: participationShared.id,
         });
 
         await databaseBuilder.commit();
@@ -525,13 +556,20 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
           title: null,
         });
 
-        databaseBuilder.factory.buildCampaignParticipation({
+        const participationShared = databaseBuilder.factory.buildCampaignParticipation({
           createdAt,
           sharedAt,
           campaignId: campaign.id,
           userId: participant.id,
           organizationLearnerId: organizationLearner.id,
           pixScore: 52,
+        });
+
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          userId: participationShared.userId,
+          snappedAt: participationShared.sharedAt,
+          snapshot: JSON.stringify([ke1, ke2, ke3, ke4, ke5]),
+          campaignParticipationId: participationShared.id,
         });
 
         await databaseBuilder.commit();

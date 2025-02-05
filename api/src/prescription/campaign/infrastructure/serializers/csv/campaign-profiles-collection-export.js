@@ -80,12 +80,14 @@ class CampaignProfilesCollectionExport {
   }
 
   async _getUsersPlacementProfiles(campaignParticipationResultDataChunk, placementProfileService) {
-    const userIdsAndDates = campaignParticipationResultDataChunk.map(({ userId, sharedAt }) => {
-      return { userId, sharedAt };
-    });
+    const participations = campaignParticipationResultDataChunk.map(
+      ({ id: campaignParticipationId, userId, sharedAt }) => {
+        return { campaignParticipationId, userId, sharedAt };
+      },
+    );
 
     const placementProfiles = await placementProfileService.getPlacementProfilesWithSnapshotting({
-      userIdsAndDates,
+      participations,
       competences: this.competences,
       allowExcessPixAndLevels: false,
     });

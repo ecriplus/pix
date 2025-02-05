@@ -116,12 +116,12 @@ async function _makeMemoizedGetPlacementProfileForUser(results) {
   const sharedResultsChunks = await PromiseUtils.mapSeries(
     chunk(sharedResults, CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING),
     (sharedResultsChunk) => {
-      const userIdsAndDates = sharedResultsChunk.map(({ userId, sharedAt }) => {
-        return { userId, sharedAt };
+      const participations = sharedResultsChunk.map(({ campaignParticipationId, userId, sharedAt }) => {
+        return { campaignParticipationId, userId, sharedAt };
       });
 
       return placementProfileService.getPlacementProfilesWithSnapshotting({
-        userIdsAndDates,
+        participations,
         allowExcessPixAndLevels: false,
         competences,
       });

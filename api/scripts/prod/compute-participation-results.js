@@ -104,11 +104,11 @@ async function _getCampaignParticipationChunks(campaign) {
 async function _computeResults(skillIds, competences, campaignParticipations) {
   const knowledgeElementByUser = await _getKnowledgeElementsByUser(campaignParticipations);
 
-  const userIdsAndDates = campaignParticipations.map(({ userId, sharedAt }) => {
-    return { userId, sharedAt };
+  const participations = campaignParticipations.map(({ userId, sharedAt, id }) => {
+    return { userId, sharedAt, campaignParticipationId: id };
   });
   const placementProfiles = await placementProfileService.getPlacementProfilesWithSnapshotting({
-    userIdsAndDates,
+    participations,
     competences,
     allowExcessPixAndLevels: false,
   });

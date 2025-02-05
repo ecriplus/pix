@@ -270,7 +270,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
     });
   });
 
-  describe('#findMultipleUsersFromUserIdsAndSnappedAtDates', function () {
+  describe('#findCampaignParticipationKnowledgeElementSnapshots', function () {
     let userId1, userId2;
     let snappedAt1, snappedAt2, snappedAt3;
     let knowledgeElement1, knowledgeElement2, knowledgeElement3;
@@ -360,10 +360,10 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
     it('should find knowledge elements snapshoted grouped by campaign participation id for given userIds and their respective dates', async function () {
       // when
       const knowledgeElementsByUserId =
-        await knowledgeElementSnapshotRepository.findMultipleUsersFromUserIdsAndSnappedAtDates([
-          { userId: userId1, sharedAt: snappedAt1 },
-          { userId: userId2, sharedAt: snappedAt2 },
-          { userId: userId2, sharedAt: snappedAt3 },
+        await knowledgeElementSnapshotRepository.findCampaignParticipationKnowledgeElementSnapshots([
+          campaignParticipationId1,
+          campaignParticipationId2,
+          campaignParticipationId3,
         ]);
 
       // then
@@ -371,50 +371,18 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
 
       expect(knowledgeElementsByUserId).to.deep.members([
         {
-          userId: userId1,
-          snappedAt: snappedAt1,
           knowledgeElements: [knowledgeElement1],
           campaignParticipationId: campaignParticipationId1,
         },
         {
-          userId: userId2,
-          snappedAt: snappedAt2,
           knowledgeElements: [knowledgeElement2],
           campaignParticipationId: campaignParticipationId2,
         },
         {
-          userId: userId2,
-          snappedAt: snappedAt3,
           knowledgeElements: [knowledgeElement3],
           campaignParticipationId: campaignParticipationId3,
         },
       ]);
-    });
-
-    it('should return empty list of snapshoted knowledge elements given unmatching dates', async function () {
-      // when
-      const snappedAt = new Date('2023-02-01');
-      const knowledgeElementsByUserId =
-        await knowledgeElementSnapshotRepository.findMultipleUsersFromUserIdsAndSnappedAtDates([
-          { userId: userId1, sharedAt: snappedAt },
-        ]);
-
-      // then
-      expect(knowledgeElementsByUserId).lengthOf(0);
-    });
-
-    it('should return empty list of snapshoted knowledge elements given unmatching userId', async function () {
-      const userId = databaseBuilder.factory.buildUser().id;
-
-      await databaseBuilder.commit();
-      // when
-      const knowledgeElementsByUserId =
-        await knowledgeElementSnapshotRepository.findMultipleUsersFromUserIdsAndSnappedAtDates([
-          { userId, sharedAt: snappedAt1 },
-        ]);
-
-      // then
-      expect(knowledgeElementsByUserId).lengthOf(0);
     });
   });
 });

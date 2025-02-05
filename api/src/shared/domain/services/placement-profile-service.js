@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { AlgorithmEngineVersion } from '../../../certification/shared/domain/models/AlgorithmEngineVersion.js';
 import * as scoringService from '../../../evaluation/domain/services/scoring/scoring-service.js';
 import * as knowledgeElementSnapshotRepository from '../../../prescription/campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
@@ -34,7 +32,7 @@ async function getPlacementProfile({
 
 async function _createUserCompetencesV1({ competences, userLastAssessments, limitDate }) {
   return PromiseUtils.mapSeries(competences, async (competence) => {
-    const assessment = _.find(userLastAssessments, { competenceId: competence.id });
+    const assessment = userLastAssessments.find((userAssessment) => userAssessment.competenceId === competence.id);
     let estimatedLevel = 0;
     let pixScore = 0;
     if (assessment) {
@@ -130,19 +128,27 @@ async function _generatePlacementProfile({ userId, profileDate, competences, all
   });
 }
 
-async function getPlacementProfilesWithSnapshotting({ userIdsAndDates, competences, allowExcessPixAndLevels = true }) {
-  const knowledgeElementsByUserIdAndDates =
-    await knowledgeElementSnapshotRepository.findMultipleUsersFromUserIdsAndSnappedAtDates(userIdsAndDates);
+async function getPlacementProfilesWithSnapshotting({ participations, competences, allowExcessPixAndLevels = true }) {
+  const campaignParticipationIds = participations.map(({ campaignParticipationId }) => campaignParticipationId);
+  const knowledgeElementsParticipations =
+    await knowledgeElementSnapshotRepository.findCampaignParticipationKnowledgeElementSnapshots(
+      campaignParticipationIds,
+    );
 
-  return userIdsAndDates.map(({ userId, sharedAt }) => {
-    const keForUser = knowledgeElementsByUserIdAndDates.find((knowledgeElementsByUserIdAndDates) => {
-      const sameUserId = knowledgeElementsByUserIdAndDates.userId === userId;
-      const sameDate = sharedAt && knowledgeElementsByUserIdAndDates.snappedAt.getTime() === sharedAt.getTime();
-
-      return sameUserId && sameDate;
+  return participations.map((participation) => {
+    const keForParticipation = knowledgeElementsParticipations.find((knowledgeElementsParticipation) => {
+      return knowledgeElementsParticipation.campaignParticipationId === participation.campaignParticipationId;
     });
 
-    const knowledgeElementsByCompetence = keForUser ? _.groupBy(keForUser.knowledgeElements, 'competenceId') : [];
+    const knowledgeElementsByCompetence = keForParticipation.knowledgeElements
+      ? keForParticipation.knowledgeElements.reduce((acc, ke) => {
+          if (!acc[ke.competenceId]) {
+            acc[ke.competenceId] = [];
+          }
+          acc[ke.competenceId].push(ke);
+          return acc;
+        }, {})
+      : {};
 
     const userCompetences = _createUserCompetencesV2({
       knowledgeElementsByCompetence,
@@ -151,8 +157,8 @@ async function getPlacementProfilesWithSnapshotting({ userIdsAndDates, competenc
     });
 
     return new PlacementProfile({
-      userId,
-      profileDate: sharedAt,
+      userId: participation.userId,
+      profileDate: participation.sharedAt,
       userCompetences,
     });
   });
@@ -167,7 +173,15 @@ async function getPlacementProfileWithSnapshotting({
 }) {
   const snapshots = await knowledgeElementSnapshotRepository.findByCampaignParticipationIds([campaignParticipationId]);
   const knowledgeElements = snapshots[campaignParticipationId];
-  const knowledgeElementsByCompetence = _.groupBy(knowledgeElements, 'competenceId');
+  const knowledgeElementsByCompetence = knowledgeElements
+    ? knowledgeElements.reduce((acc, ke) => {
+        if (!acc[ke.competenceId]) {
+          acc[ke.competenceId] = [];
+        }
+        acc[ke.competenceId].push(ke);
+        return acc;
+      }, {})
+    : {};
 
   const userCompetences = _createUserCompetencesV2({
     knowledgeElementsByCompetence,
@@ -189,7 +203,7 @@ function _matchingDirectlyValidatedSkillsForCompetence(knowledgeElementsForCompe
       return skillMap.get(ke.skillId);
     });
 
-  return _.compact(competenceSkills);
+  return competenceSkills.filter(Boolean);
 }
 
 export { getPlacementProfile, getPlacementProfilesWithSnapshotting, getPlacementProfileWithSnapshotting };
