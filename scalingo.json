@@ -16,6 +16,10 @@
     "DOMAIN_PIX_CERTIF": {
       "generator": "template",
       "template": "https://certif-pr%PR_NUMBER%.review.pix"
+    },
+    "PIX_API_URL": {
+      "generator": "template",
+      "template": "https://api-pr%PR_NUMBER%.review.pix.fr"
     }
   },
   "scripts": {
