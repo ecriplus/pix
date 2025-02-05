@@ -1324,7 +1324,8 @@
         "wrong-format": "Veuillez vérifier le format de votre code (P-XXXXXXXX)."
       },
       "first-title": "Vérifier un certificat Pix",
-      "label": "Code de vérification (P-XXXXXXXX)",
+      "label": "Code de vérification",
+      "sub-label": "Exemple: P-XXXXXXXX",
       "title": "Vérifier un certificat Pix",
       "verify": "Vérifier le certificat"
     },

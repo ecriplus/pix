@@ -1,3 +1,4 @@
+import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -14,60 +15,37 @@ module('Unit | Controller | Fill in certificate verification Code', function (ho
     storeStub = { queryRecord: sinon.stub() };
     controller.router.transitionTo = sinon.stub();
     controller.set('store', storeStub);
-    controller.set('errorMessage', null);
-    controller.set('certificateVerificationCode', null);
-    controller.set('showNotFoundCertificationErrorMessage', false);
+    controller.set('apiErrorMessage', null);
   });
 
   module('#checkCertificate', function () {
-    test('should set error when certificateVerificationCode code is empty', async function (assert) {
-      // given
-      controller.set('certificateVerificationCode', '');
-      const event = { preventDefault: sinon.stub() };
+    module('when no certificate is found', function () {
+      test('should set apiErrorMessage with specific message', async function (assert) {
+        // given
+        storeStub.queryRecord.rejects({ errors: [{ status: '404' }] });
 
-      // when
-      await controller.actions.checkCertificate.call(controller, event);
+        // when
+        await controller.actions.checkCertificate.call(controller, 'P-222BBB78');
 
-      // then
-      assert.strictEqual(controller.get('errorMessage'), 'Merci de renseigner le code de vérification.');
+        // then
+        assert.strictEqual(
+          controller.get('apiErrorMessage'),
+          t('pages.fill-in-certificate-verification-code.errors.not-found'),
+        );
+      });
     });
 
-    test('should set error when certificateVerificationCode code is not matching the right format', async function (assert) {
-      // given
-      controller.set('certificateVerificationCode', 'P-879888');
-      const event = { preventDefault: sinon.stub() };
+    module('when certificate is found', function () {
+      test('should not set apiErrorMessage', async function (assert) {
+        // given
+        storeStub.queryRecord.resolves({ result: { status: '200' } });
 
-      // when
-      await controller.actions.checkCertificate.call(controller, event);
+        // when
+        await controller.actions.checkCertificate.call(controller, 'P-222BBB78');
 
-      // then
-      assert.strictEqual(controller.get('errorMessage'), 'Veuillez vérifier le format de votre code (P-XXXXXXXX).');
-    });
-
-    test('should set showNotFoundCertificationErrorMessage to true when no certificate is found', async function (assert) {
-      // given
-      controller.set('certificateVerificationCode', 'P-222BBB78');
-      storeStub.queryRecord.rejects({ errors: [{ status: '404' }] });
-      const event = { preventDefault: sinon.stub() };
-
-      // when
-      await controller.actions.checkCertificate.call(controller, event);
-
-      // then
-      assert.true(controller.get('showNotFoundCertificationErrorMessage'));
-    });
-
-    test('should NOT set showNotFoundCertificationErrorMessage to true when a certificate is found', async function (assert) {
-      // given
-      controller.set('certificateVerificationCode', 'P-222BBBDD');
-      storeStub.queryRecord.resolves({ result: { status: '200' } });
-      const event = { preventDefault: sinon.stub() };
-
-      // when
-      await controller.actions.checkCertificate.call(controller, event);
-
-      // then
-      assert.false(controller.get('showNotFoundCertificationErrorMessage'));
+        // then
+        assert.strictEqual(controller.apiErrorMessage, null);
+      });
     });
   });
 });

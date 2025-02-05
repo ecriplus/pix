@@ -2,73 +2,42 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import ENV from 'mon-pix/config/environment';
 
 export default class FillInCertificateVerificationCode extends Controller {
   @service store;
   @service intl;
   @service router;
 
-  certificateVerificationCode = null;
-
-  codeRegex = /^P-[0-9A-Z]{8}$/i;
-
-  @tracked
-  errorMessage = null;
-
-  @tracked
-  showNotFoundCertificationErrorMessage = false;
+  @tracked apiErrorMessage = null;
 
   @action
-  handleVerificationCodeInput(event) {
-    this.certificateVerificationCode = event.target.value;
-  }
-
-  @action
-  async checkCertificate(e) {
-    e.preventDefault();
-    this.clearErrors();
-
-    if (!this.certificateVerificationCode) {
-      this.errorMessage = this.intl.t('pages.fill-in-certificate-verification-code.errors.missing-code');
-      return;
-    }
-
-    if (!this.isVerificationCodeValid()) {
-      this.errorMessage = this.intl.t('pages.fill-in-certificate-verification-code.errors.wrong-format');
-      return;
-    }
-
+  async checkCertificate(certificateVerificationCode) {
     try {
       const certification = await this.store.queryRecord('certification', {
-        verificationCode: this.certificateVerificationCode.toUpperCase(),
+        verificationCode: certificateVerificationCode.toUpperCase(),
       });
       this.router.transitionTo('shared-certification', certification);
-      return;
     } catch (error) {
       this.onVerificateCertificationCodeError(error);
     }
+  }
+
+  @action
+  async clearErrors() {
+    this.apiErrorMessage = null;
   }
 
   onVerificateCertificationCodeError(error) {
     if (error.errors) {
       const { status } = error.errors[0];
       if (status === '404') {
-        this.showNotFoundCertificationErrorMessage = true;
+        this.apiErrorMessage = this.intl.t('pages.fill-in-certificate-verification-code.errors.not-found');
       } else {
-        throw error;
+        this.apiErrorMessage = error;
       }
     } else {
-      throw error;
+      this.apiErrorMessage = this.intl.t(ENV.APP.API_ERROR_MESSAGES.INTERNAL_SERVER_ERROR.I18N_KEY);
     }
-  }
-
-  isVerificationCodeValid() {
-    return this.codeRegex.test(this.certificateVerificationCode);
-  }
-
-  @action
-  clearErrors() {
-    this.errorMessage = null;
-    this.showNotFoundCertificationErrorMessage = false;
   }
 }

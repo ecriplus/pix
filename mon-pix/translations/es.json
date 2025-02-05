@@ -1330,7 +1330,8 @@
         "wrong-format": "Comprueba el formato del código (P-XXXXXXXX)."
       },
       "first-title": "Comprobar un certificado Pix",
-      "label": "Código de comprobación (P-XXXXXXXX)",
+      "label": "Código de comprobación",
+      "sub-label": "Ejemplo: P-XXXXXXXX",
       "title": "Comprobar un certificado Pix",
       "verify": "Comprobar el certificado"
     },

@@ -1330,7 +1330,8 @@
         "wrong-format": "Controleer het formaat van je code (P-XXXXXXXX)."
       },
       "first-title": "Een Pix-certificaat controleren",
-      "label": "Verificatiecode (P-XXXXXXXX)",
+      "label": "Verificatiecode",
+      "sub-label": "voorbeeld: P-XXXXXXXX",
       "title": "Een Pix-certificaat controleren",
       "verify": "Controleer het certificaat"
     },

@@ -2,26 +2,27 @@
 @use 'pix-design-tokens/typography';
 
 .fill-in-certificate-verification-code {
-  max-width: max-content;
-  margin: 0 auto 32px;
-  padding: 48px 24px;
-  text-align: center;
+  width: 75%;
+  margin: 0 auto var(--pix-spacing-8x);
+  padding: var(--pix-spacing-12x) var(--pix-spacing-6x);
 
   @extend %pix-body-m;
 
   @include breakpoints.device-is('tablet') {
-    padding: 48px 60px;
+    padding: var(--pix-spacing-12x) 60px;
   }
 
   &__title {
+    text-align: center;
+
     @extend %pix-title-m;
   }
 
   &__description {
-    max-width: 500px;
     margin: var(--pix-spacing-6x) 0;
     color: var(--pix-neutral-500);
-    line-height: 22px;
+    line-height: 1.375rem;
+    text-align: center;
   }
 
   &__form {
@@ -29,38 +30,8 @@
     flex-direction: column;
     align-items: center;
 
-    .form__input-and-label {
-      display: flex;
-      flex-direction: column;
-
-      label {
-        margin-bottom: 6px;
-        line-height: 22px;
-        letter-spacing: 0.15px;
-        text-align: left;
-
-        @extend %pix-body-s;
-      }
-
-      input {
-        width: 15.3ch;
-      }
-
-      @media all and (-ms-high-contrast: none) {
-        input {
-          width: 17.4ch;
-        }
-      }
-    }
-
     .form__actions {
       margin: var(--pix-spacing-6x) 0;
-    }
-
-    .form__error--validation {
-      color: var(--pix-error-700);
-
-      @extend %pix-body-s;
     }
   }
 }

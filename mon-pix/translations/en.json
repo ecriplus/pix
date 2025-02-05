@@ -1320,11 +1320,12 @@
       "errors": {
         "missing-code": "Please enter the verification code in this format: P-XXXXXXXX",
         "not-found": "There is no corresponding Pix Certificate.",
-        "unallowed-access": "Please fill out the field above with the verification code in this format: P-XXXXXXXX",
-        "wrong-format": "Please check your verification code"
+        "unallowed-access": "Please fill out the field above with the verification code in this format: P-XXXXXXXX.",
+        "wrong-format": "Please check your verification code."
       },
       "first-title": "Verify the score of a Pix Certificate",
-      "label": "Verification code (P-XXXXXXXX)",
+      "label": "Verification code",
+      "sub-label": "Example: P-XXXXXXXX",
       "title": "Verify the authenticity of a Pix Certificate",
       "verify": "Verify the score"
     },
