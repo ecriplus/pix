@@ -725,6 +725,16 @@
     },
     "trainings": {
       "training": {
+        "details": {
+          "contentType": "Content type : ",
+          "duration": "Duration : ",
+          "editorLogo": "Editor logo : ",
+          "editorName": "Editor name : ",
+          "internalTitle": "Internal title : ",
+          "localizedLanguage": "Localized language : ",
+          "publishedOn": "Published on : ",
+          "status": "Status : "
+        },
         "targetProfiles": {
           "tabName": "Target Profiles"
         },

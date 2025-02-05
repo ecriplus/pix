@@ -742,6 +742,16 @@
     },
     "trainings": {
       "training": {
+        "details": {
+          "contentType": "Type de contenu :",
+          "duration": "Durée :",
+          "editorLogo": "Logo de l'éditeur :",
+          "editorName": "Nom d'éditeur :",
+          "internalTitle": "Titre interne :",
+          "localizedLanguage": "Langue localisée :",
+          "publishedOn": "Publié sur :",
+          "status": "Statut :"
+        },
         "targetProfiles": {
           "tabName": "Profils cibles associés",
           "title": "Rattacher un ou plusieurs profils cibles"

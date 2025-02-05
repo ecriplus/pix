@@ -1,13 +1,15 @@
 import { render } from '@1024pix/ember-testing-library';
-import { setupRenderingTest } from 'ember-qunit';
 import TrainingDetailsCard from 'pix-admin/components/trainings/training-details-card';
 import { module, test } from 'qunit';
 
+import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+
 module('Integration | Component | Trainings::TrainingDetailsCard', function (hooks) {
-  setupRenderingTest(hooks);
+  setupIntlRenderingTest(hooks);
 
   const training = {
     title: 'Un contenu formatif',
+    internalTitle: 'Mon titre interne',
     link: 'https://un-contenu-formatif',
     type: 'webinaire',
     locale: 'fr-fr',
@@ -24,7 +26,8 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
     const screen = await render(<template><TrainingDetailsCard @training={{training}} /></template>);
 
     // then
-    assert.dom(screen.getByText('Un contenu formatif')).exists();
+    assert.dom(screen.getByRole('heading', { level: 1, name: 'Un contenu formatif' })).exists();
+    assert.dom(screen.getByText('Mon titre interne')).exists();
     assert.dom(screen.getByText('https://un-contenu-formatif')).exists();
     assert.dom(screen.getByText('webinaire')).exists();
     assert.dom(screen.getByText('2j')).exists();
