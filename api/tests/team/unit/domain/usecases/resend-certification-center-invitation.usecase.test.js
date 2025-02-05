@@ -1,6 +1,6 @@
-import { resendCertificationCenterInvitation } from '../../../../lib/domain/usecases/resend-certification-center-invitation.js';
-import { expect, sinon } from '../../../test-helper.js';
-import { domainBuilder } from '../../../tooling/domain-builder/domain-builder.js';
+import { resendCertificationCenterInvitation } from '../../../../../src/team/domain/usecases/resend-certification-center-invitation.usecase.js';
+import { expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Domain | UseCases | resendCertificationCenterInvitation', function () {
   it('resends the certification center invitation and returns it', async function () {
