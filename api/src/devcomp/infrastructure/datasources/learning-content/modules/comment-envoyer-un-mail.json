@@ -28,7 +28,7 @@
       "content": "<p>Vous savez maintenant comment envoyer un mail.</p><p>Vous allez pouvoir aider Rayan à contacter Michel, son nouveau professeur de théâtre. <span aria-hidden=\"true\">📩</span></p>"
     },
     {
-      "grainId": "",
+      "grainId": "3bfa2ae1-cf67-48ce-bc59-1dd129ca2366",
       "content": "<p>Dans un mail, chaque champ a un rôle bien précis. </p><p>Voyons si vous avez retenu l’essentiel. <span aria-hidden=\"true\">🎯</span></p>"
     },
     {
@@ -61,9 +61,9 @@
             "type": "embed",
             "isCompletionRequired": false,
             "title": "Carrousel d'images",
-            "url": "https://epreuves.pix.fr/carousel.html?mode=modulix-mail.json",
+            "url": "https://epreuves.pix.fr/fr/carousel/modulix_envoyer_mail.html",
             "instruction": "",
-            "height": 400
+            "height": 450
           }
         },
         {
@@ -89,10 +89,6 @@
                 "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Ce théâtre a contacté Rayan avec une messagerie instantanée.</p><p>Cherchez l’offre avec des adresses mail écrites et essayez à nouveau.</p>"
               }
             ],
-            "feedbacks": {
-              "valid": "",
-              "invalid": ""
-            },
             "solution": "1"
           }
         }
@@ -145,7 +141,7 @@
             "type": "embed",
             "isCompletionRequired": false,
             "title": "",
-            "url": "",
+            "url": "https://epreuves.pix.fr/pixmail-envoi/pixmail-envoi.html?mode=modulix-mail",
             "instruction": "<p></p>",
             "height": 500
           }
@@ -155,7 +151,7 @@
           "element": {
             "id": "f7429e02-e27c-4f12-ba79-80785ad66925",
             "type": "text",
-            "content": "<p>🗝️ Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous :&nbsp;</p><details><summary>Indice 1</summary>Cliquez sur Nouveau message en haut à droite pour créer un mail.</details><details><summary>Indice 2</summary>Complétez les 3 champs avec les textes écrits dans la consigne.</details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"600\" height=\"450\" src=\"https://www.image-heberg.fr/files/1733406264146730843.gif\"></iframe></details></details>"
+            "content": "<p>🗝️ Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous :&nbsp;</p><details><summary>Indice 1</summary>Cliquez sur Nouveau message en haut à gauche pour créer un mail.</details><details><summary>Indice 2</summary>Complétez les 3 champs avec les textes écrits dans la consigne.</details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://www.image-heberg.fr/files/1738339954456303332.gif\"></iframe></details></details>"
           }
         }
       ]
@@ -194,11 +190,7 @@
                       "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><span aria-hidden=\"true\">🎉</span><p>Le champ À sert à indiquer le destinataire du mail. Il est obligatoire de le compléter pour que le mail soit envoyé et qu'une personne le reçoive.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "",
-                    "invalid": ""
-                  },
-                  "solution": ""
+                  "solution": "1"
                 }
               ]
             },
@@ -220,10 +212,6 @@
                       "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Le champ Objet sert à expliquer rapidement le contenu du mail. S’il n’est pas complété, le champ sera rempli automatiquement avec <code>(aucun objet)</code>.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "",
-                    "invalid": ""
-                  },
                   "solution": "2"
                 }
               ]
@@ -318,11 +306,11 @@
                 "content": "<p>Qui a envoyé ce mail ?</p>"
               },
               {
-                "input": "",
+                "input": "a",
                 "type": "select",
                 "display": "inline",
                 "placeholder": "- Sélectionner -",
-                "ariaLabel": "",
+                "ariaLabel": "expéditeur mail",
                 "defaultValue": "",
                 "tolerances": [],
                 "options": [
@@ -352,11 +340,11 @@
                 "content": "<p>Qui va recevoir ce mail ?</p>"
               },
               {
-                "input": "",
+                "input": "b",
                 "type": "select",
                 "display": "inline",
                 "placeholder": "- Sélectionner - ",
-                "ariaLabel": "",
+                "ariaLabel": "destinaire mail",
                 "defaultValue": "",
                 "tolerances": [],
                 "options": [
@@ -386,11 +374,11 @@
                 "content": "<p>Quel est l'objet de ce mail ?</p>"
               },
               {
-                "input": "",
+                "input": "c",
                 "type": "select",
                 "display": "inline",
                 "placeholder": "- Sélectionner -",
-                "ariaLabel": "",
+                "ariaLabel": "objet mail",
                 "defaultValue": "",
                 "tolerances": [],
                 "options": [
@@ -453,10 +441,6 @@
                 "feedback": "<p>Pour réussir, retournez voir la vidéo ou demandez de l'aide si vous êtes accompagné.<br>Si vous n'avez pas d'adresse mail, vous pouvez vous en créer une gratuitement sur internet.</p>"
               }
             ],
-            "feedbacks": {
-              "valid": "",
-              "invalid": ""
-            },
             "solution": ""
           }
         }
