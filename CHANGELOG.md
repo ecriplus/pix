@@ -1,5 +1,34 @@
 # Pix Changelog
 
+## v5.36.0 (05/02/2025)
+
+
+### :rocket: Amélioration
+- [#11296](https://github.com/1024pix/pix/pull/11296) [FEATURE] Pix Junior - Utiliser les options de validation de challenge provenant de Pix Editor.
+- [#11323](https://github.com/1024pix/pix/pull/11323) [FEATURE] [API] Pouvoir enregistrer un titre interne d’un CF (PIX-16218).
+- [#11300](https://github.com/1024pix/pix/pull/11300) [FEATURE] Ne pas afficher les boutons d'annulation si la session n'est pas finalisée (PIX-16141).
+- [#11306](https://github.com/1024pix/pix/pull/11306) [FEATURE] API-Pouvoir retourner le titre interne d’un CF depuis l’API (PIX-16219).
+
+### :building_construction: Tech
+- [#11315](https://github.com/1024pix/pix/pull/11315) [TECH] Migrer la route DELETE /api/admin/certification-center-memberships/{id} (PIX-16387).
+- [#11321](https://github.com/1024pix/pix/pull/11321) [TECH] Ajouter une route /api/healthcheck/forwarded-origin (PIX-16368).
+- [#11318](https://github.com/1024pix/pix/pull/11318) [TECH] Utilise l'`AssessmentResult` qui a été annulé en plus du statut `isCancelled` pour le repo du LSU/LSL (PIX-16394).
+- [#11279](https://github.com/1024pix/pix/pull/11279) [TECH] findSnapshotForUsers appelé directement dans les autres repos (Pix-16338).
+
+### :bug: Correction
+- [#11322](https://github.com/1024pix/pix/pull/11322) [BUGFIX] Fix regression de css sur l'introduction (PIX-16413).
+- [#11302](https://github.com/1024pix/pix/pull/11302) [BUGFIX] Corriger les informations dans le toaster de désactivation des utilisateurs de Pix admin (PIX-13604).
+- [#11307](https://github.com/1024pix/pix/pull/11307) [BUGFIX] Gérer les pages hors connexion dans le nouveau gabarit (PIX-16378).
+- [#11290](https://github.com/1024pix/pix/pull/11290) [BUGFIX] Raccrocher les collecte de profile anonymisé avec leur Knowledge-element-snapshots (PIX-16326).
+
+### :arrow_up: Montée de version
+- [#11320](https://github.com/1024pix/pix/pull/11320) [BUMP] Update dependency @1024pix/pix-ui to ^54.5.0 (mon-pix) (PIX-16401) (PIX-16284).
+- [#11327](https://github.com/1024pix/pix/pull/11327) [BUMP] Update dependency @1024pix/pix-ui to ^54.6.0 (certif).
+- [#11326](https://github.com/1024pix/pix/pull/11326) [BUMP] Update dependency @1024pix/pix-ui to ^54.6.0 (admin).
+- [#11324](https://github.com/1024pix/pix/pull/11324) [BUMP] Update dependency @1024pix/pix-ui to ^54.5.0 (admin).
+- [#11316](https://github.com/1024pix/pix/pull/11316) [BUMP] Update dependency @1024pix/pix-ui to ^54.3.0 (certif).
+- [#11309](https://github.com/1024pix/pix/pull/11309) [BUMP] Update dependency @1024pix/pix-ui to ^54.3.0 (admin).
+
 ## v5.35.0 (04/02/2025)
 
 
