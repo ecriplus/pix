@@ -24,7 +24,7 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
     const screen = await render(<template><TrainingDetailsCard @training={{training}} /></template>);
 
     // then
-    assert.dom(screen.getByText('Un contenu formatif')).exists();
+    assert.dom(screen.getByRole('heading', { level: 1, name: 'Un contenu formatif' })).exists();
     assert.dom(screen.getByText('https://un-contenu-formatif')).exists();
     assert.dom(screen.getByText('webinaire')).exists();
     assert.dom(screen.getByText('2j')).exists();
