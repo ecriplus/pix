@@ -14,7 +14,6 @@ const getCampaignCollectiveResult = async function (campaignId, campaignLearning
   });
 
   const userIdsAndSharedDatesChunks = await _getChunksSharedParticipationsWithUserIdsAndDates(campaignId);
-
   let participantCount = 0;
   for (const userIdsAndSharedDates of userIdsAndSharedDatesChunks) {
     participantCount += userIdsAndSharedDates.length;

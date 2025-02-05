@@ -3,8 +3,8 @@ import _ from 'lodash';
 import { CampaignCollectiveResult } from '../../../../../../src/prescription/campaign/domain/read-models/CampaignCollectiveResult.js';
 import * as campaignCollectiveResultRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-collective-result-repository.js';
 import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
-
 const { STARTED } = CampaignParticipationStatuses;
 
 function _createUserWithSharedCampaignParticipation(userName, campaignId, sharedAt, isImproved) {
@@ -887,54 +887,50 @@ describe('Integration | Repository | Campaign collective result repository', fun
           ];
 
           const knowledgeElementsAlice = knowledgeElementsDataAlice.map(databaseBuilder.factory.buildKnowledgeElement);
-          const snapshotsAlice = _(knowledgeElementsAlice).orderBy('createdAt', 'desc').uniqBy('skillId').value();
 
           databaseBuilder.factory.buildKnowledgeElementSnapshot({
             userId: userWithCampaignParticipationAlice.userId,
             snappedAt: userWithCampaignParticipationAlice.campaignParticipation.sharedAt,
-            snapshot: JSON.stringify(snapshotsAlice),
+            snapshot: new KnowledgeElementCollection(
+              knowledgeElementsAlice.filter(({ createdAt }) => createdAt <= campaignParticipationShareDate),
+            ).toSnapshot(),
             campaignParticipationId: userWithCampaignParticipationAlice.campaignParticipation.id,
           });
 
           const knowledgeElementsCharlie = knowledgeElementsDataCharlie.map(
             databaseBuilder.factory.buildKnowledgeElement,
           );
-          const snapshotsCharlie = _(knowledgeElementsCharlie)
-            .filter((o) => o.createdAt <= campaignParticipationShareDate)
-            .orderBy('createdAt', 'desc')
-            .uniqBy('skillId')
-            .value();
 
           databaseBuilder.factory.buildKnowledgeElementSnapshot({
             userId: userWithCampaignParticipationCharlie.userId,
             snappedAt: userWithCampaignParticipationCharlie.campaignParticipation.sharedAt,
-            snapshot: JSON.stringify(snapshotsCharlie),
+            snapshot: new KnowledgeElementCollection(
+              knowledgeElementsCharlie.filter(({ createdAt }) => createdAt <= campaignParticipationShareDate),
+            ).toSnapshot(),
             campaignParticipationId: userWithCampaignParticipationCharlie.campaignParticipation.id,
           });
 
           const knowledgeElementsBob = knowledgeElementsDataBob.map(databaseBuilder.factory.buildKnowledgeElement);
-          const snapshotsBob = _(knowledgeElementsBob)
-            .filter((o) => o.createdAt <= campaignParticipationShareDate)
-            .orderBy('createdAt', 'desc')
-            .uniqBy('skillId')
-            .value();
 
           databaseBuilder.factory.buildKnowledgeElementSnapshot({
             userId: userWithCampaignParticipationBob.userId,
             snappedAt: userWithCampaignParticipationBob.campaignParticipation.sharedAt,
-            snapshot: JSON.stringify(snapshotsBob),
+            snapshot: new KnowledgeElementCollection(
+              knowledgeElementsBob.filter(({ createdAt }) => createdAt <= campaignParticipationShareDate),
+            ).toSnapshot(),
             campaignParticipationId: userWithCampaignParticipationBob.campaignParticipation.id,
           });
 
           knowledgeElementsDataDan.map(databaseBuilder.factory.buildKnowledgeElement);
 
           const knowledgeElementsElo = knowledgeElementsDataElo.map(databaseBuilder.factory.buildKnowledgeElement);
-          const snapshotsElo = _(knowledgeElementsElo).orderBy('createdAt', 'desc').uniqBy('skillId').value();
 
           databaseBuilder.factory.buildKnowledgeElementSnapshot({
             userId: userWithCampaignParticipationElo.userId,
             snappedAt: userWithCampaignParticipationElo.campaignParticipation.sharedAt,
-            snapshot: JSON.stringify(snapshotsElo),
+            snapshot: new KnowledgeElementCollection(
+              knowledgeElementsElo.filter(({ createdAt }) => createdAt <= campaignParticipationShareDate),
+            ).toSnapshot(),
             campaignParticipationId: userWithCampaignParticipationElo.campaignParticipation.id,
           });
 
