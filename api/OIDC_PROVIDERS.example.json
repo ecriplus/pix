@@ -19,5 +19,27 @@
       "logoutUrl": "https://seeds.example.net/logout",
       "afterLogoutUrl": "https://app.dev.pix.org"
     }
+  },
+  {
+    "identityProvider": "oidcFromSeedsNotVisible",
+    "organizationName": "SEEDSNOTVISIBLE",
+    "scope": "openid profile",
+    "slug": "seeds-not-visible",
+    "source": "sso-oidc-seeds-not-visible",
+    "clientId": "XXXI",
+    "clientSecret": "YYYZ",
+    "accessTokenLifespan": "72h",
+    "enabled": true,
+    "openidConfigurationUrl": "https://seeds.example.net/.well-known/openid-configuration",
+    "redirectUri": "https://app.dev.pix.org/connexion/seeds",
+    "shouldCloseSession": true,
+    "openidClientExtraMetadata": {
+      "token_endpoint_auth_method": "client_secret_post"
+    },
+    "additionalRequiredProperties": {
+      "logoutUrl": "https://seeds.example.net/logout",
+      "afterLogoutUrl": "https://app.dev.pix.org"
+    },
+    "isVisible": false
   }
 ]
