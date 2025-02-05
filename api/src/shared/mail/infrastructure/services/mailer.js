@@ -108,7 +108,7 @@ class Mailer {
     return mailing[this._providerName].templates.selfAccountDeletionTemplateId;
   }
   get warningConnectionTemplateId() {
-    return mailing[this._providerName].templates.warningConnexionTemplateId;
+    return mailing[this._providerName].templates.warningConnectionTemplateId;
   }
 }
 

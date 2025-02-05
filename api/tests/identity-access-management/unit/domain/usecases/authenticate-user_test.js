@@ -1,4 +1,5 @@
 import { PIX_ADMIN, PIX_CERTIF, PIX_ORGA } from '../../../../../src/authorization/domain/constants.js';
+import { createWarningConnectionEmail } from '../../../../../src/identity-access-management/domain/emails/create-warning-connection.email.js';
 import {
   MissingOrInvalidCredentialsError,
   UserShouldChangePasswordError,
@@ -10,6 +11,7 @@ import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { AdminMember } from '../../../../../src/shared/domain/models/AdminMember.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { UserLogin } from '../../../../../src/identity-access-management/domain/models/UserLogin.js';
 
 describe('Unit | Identity Access Management | Domain | UseCases | authenticate-user', function () {
   let refreshTokenRepository;
@@ -18,12 +20,18 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
   let userLoginRepository;
   let adminMemberRepository;
   let pixAuthenticationService;
+  let emailRepository;
+  let clock;
 
   const userEmail = 'user@example.net';
   const password = 'Password1234';
   const localeFromCookie = 'fr';
 
   beforeEach(function () {
+    clock = sinon.useFakeTimers({
+      now: new Date('2025-01-01'),
+      toFake: ['Date'],
+    });
     refreshTokenRepository = {
       save: sinon.stub(),
     };
@@ -36,6 +44,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     };
     userLoginRepository = {
       updateLastLoggedAt: sinon.stub(),
+      findByUserId: sinon.stub(),
     };
     adminMemberRepository = {
       get: sinon.stub(),
@@ -43,6 +52,12 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     pixAuthenticationService = {
       getUserByUsernameAndPassword: sinon.stub(),
     };
+
+    emailRepository = { sendEmailAsync: sinon.stub() };
+  });
+
+  afterEach(async function () {
+    clock.restore();
   });
 
   context('check acces by pix scope', function () {
@@ -357,6 +372,145 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     expect(error).to.be.an.instanceOf(MissingOrInvalidCredentialsError);
   });
 
+  context('when user has connected after a long period since last connection date', function () {
+    context('when user has an email', function () {
+      it('should send a connection warning email', async function () {
+        // given
+        const accessToken = 'jwt.access.token';
+        const source = 'pix';
+        const scope = 'mon-pix';
+        const expirationDelaySeconds = 1;
+        const audience = 'https://certif.pix.fr';
+
+      const user = domainBuilder.buildUser({ email: userEmail });
+      const userLogins = new UserLogin({
+        id: 1,
+        userId: user.id,
+        lastLoggedAt: '2020-01-01',
+      });
+
+        const expectedEmail = createWarningConnectionEmail({
+          email: user.email,
+          firstName: user.firstName,
+          locale: user.locale,
+        });
+
+        pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
+        tokenService.createAccessTokenFromUser
+          .withArgs({ userId: user.id, source, audience })
+          .resolves({ accessToken, expirationDelaySeconds });
+
+        userLoginRepository.findByUserId.resolves(userLogins);
+
+        // when
+        await authenticateUser({
+          username: userEmail,
+          password,
+          source,
+          scope,
+          pixAuthenticationService,
+          refreshTokenRepository,
+          tokenService,
+          userRepository,
+          userLoginRepository,
+          emailRepository,
+          audience,
+        });
+
+        // then
+        expect(emailRepository.sendEmailAsync).to.have.been.calledWithExactly(expectedEmail);
+      });
+    });
+    context('when user has no email', function () {
+      it('should not send a connection warning email', async function () {
+        // given
+        const accessToken = 'jwt.access.token';
+        const source = 'pix';
+        const scope = 'mon-pix';
+        const expirationDelaySeconds = 1;
+        const audience = 'https://certif.pix.fr';
+        const username = 'lorie.amie';
+        const user = domainBuilder.buildUser({ username: username });
+
+        user.email = null;
+
+        const userLogins = new UserLogin({
+          id: 1,
+          userId: user.id,
+          lastLoggedAt: '2020-01-01',
+        });
+
+        pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
+        tokenService.createAccessTokenFromUser
+          .withArgs({ userId: user.id, source, audience })
+          .resolves({ accessToken, expirationDelaySeconds });
+
+        userLoginRepository.findByUserId.resolves(userLogins);
+
+        // when
+        await authenticateUser({
+          username: username,
+          password,
+          source,
+          scope,
+          pixAuthenticationService,
+          refreshTokenRepository,
+          tokenService,
+          userRepository,
+          userLoginRepository,
+          emailRepository,
+          audience,
+        });
+
+        // then
+        expect(emailRepository.sendEmailAsync).to.have.not.been.called;
+      });
+    });
+  });
+
+  context('when user has connected before the connection warning period', function () {
+    it('should not send a connection warning email', async function () {
+      // given
+      const accessToken = 'jwt.access.token';
+      const source = 'pix';
+      const scope = 'mon-pix';
+      const expirationDelaySeconds = 1;
+      const audience = 'https://certif.pix.fr';
+
+      const user = domainBuilder.buildUser({ email: userEmail });
+      const userLogins = new UserLogin({
+        id: 1,
+        userId: user.id,
+        lastLoggedAt: '2024-12-01',
+      });
+
+      pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
+      tokenService.createAccessTokenFromUser
+        .withArgs({ userId: user.id, source, audience })
+        .resolves({ accessToken, expirationDelaySeconds });
+
+      userLoginRepository.findByUserId.resolves(userLogins);
+
+      // when
+      await authenticateUser({
+        username: userEmail,
+        password,
+        source,
+        scope,
+        pixAuthenticationService,
+        refreshTokenRepository,
+        tokenService,
+        userRepository,
+        userLoginRepository,
+        emailRepository,
+        audience,
+      });
+
+      // then
+      expect(emailRepository.sendEmailAsync).not.to.have.been.called;
+    });
+  });
+
   context('when user should change password', function () {
     it('should throw UserShouldChangePasswordError', async function () {
       // given
@@ -426,7 +580,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         });
 
         // then
-        expect(userRepository.update).to.not.have.been.called;
+        expect(userRepository.update).not.to.have.been.called;
       });
     });
 
@@ -494,7 +648,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           });
 
           // then
-          expect(userRepository.update).to.not.have.been.called;
+          expect(userRepository.update).not.to.have.been.called;
         });
       });
     });

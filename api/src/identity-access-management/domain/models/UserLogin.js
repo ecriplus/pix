@@ -34,6 +34,18 @@ class UserLogin {
     return this.failureCount % config.login.temporaryBlockingThresholdFailureCount === 0;
   }
 
+  shouldSendConnectionWarning() {
+    if (!this.lastLoggedAt) {
+      return false;
+    }
+
+    const emailConnectionWarningPeriodMs = config.login.emailConnectionWarningPeriod;
+    const nowMs = new Date().getTime();
+
+    const userLastConnexionMs = new Date(this.lastLoggedAt).getTime();
+    return nowMs - userLastConnexionMs >= emailConnectionWarningPeriodMs;
+  }
+
   markUserAsTemporarilyBlocked() {
     const commonRatio = Math.pow(2, this.failureCount / config.login.temporaryBlockingThresholdFailureCount - 1);
     this.temporaryBlockedUntil = new Date(Date.now() + config.login.temporaryBlockingBaseTimeMs * commonRatio);

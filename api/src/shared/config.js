@@ -330,6 +330,7 @@ const configuration = (function () {
       ),
       temporaryBlockingBaseTimeMs: ms(process.env.LOGIN_TEMPORARY_BLOCKING_BASE_TIME || '2m'),
       blockingLimitFailureCount: _getNumber(process.env.LOGIN_BLOCKING_LIMIT_FAILURE_COUNT || 30),
+      emailConnectionWarningPeriod: ms(process.env.EMAIL_CONNECTION_WARNING_PERIOD || '1y'),
     },
     logOpsMetrics: toBoolean(process.env.LOG_OPS_METRICS),
     mailing: {
@@ -354,7 +355,7 @@ const configuration = (function () {
           passwordResetTemplateId: process.env.BREVO_PASSWORD_RESET_TEMPLATE_ID,
           selfAccountDeletionTemplateId: process.env.BREVO_SELF_ACCOUNT_DELETION_TEMPLATE_ID,
           targetProfileNotCertifiableTemplateId: process.env.BREVO_TARGET_PROFILE_NOT_CERTIFIABLE_TEMPLATE_ID,
-          warningConnectionTemplateId: process.env.BREVO_BREVO_WARNING_CONNECTION_TEMPLATE_ID,
+          warningConnectionTemplateId: process.env.BREVO_WARNING_CONNECTION_TEMPLATE_ID,
         },
       },
     },
@@ -522,6 +523,7 @@ const configuration = (function () {
     config.mailing.brevo.templates.acquiredCleaResultTemplateId = 'test-acquired-clea-result-template-id';
     config.mailing.brevo.templates.targetProfileNotCertifiableTemplateId =
       'test-target-profile-no-certifiable-template-id';
+    config.mailing.brevo.templates.warningConnectionTemplateId = 'test-warning-connection-template-id';
 
     config.bcryptNumberOfSaltRounds = 1;
 
