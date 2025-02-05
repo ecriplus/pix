@@ -21,6 +21,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
 
     // then
     assert.dom(screen.getByLabelText('Titre')).exists();
+    assert.dom(screen.getByLabelText('Titre à usage interne')).exists();
     assert.dom(screen.getByLabelText('Lien')).exists();
     assert.dom(screen.getByLabelText('Format')).exists();
     assert.dom(screen.getByLabelText('Jours (JJ)')).exists();
@@ -66,6 +67,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       const editorLogo = 'un-logo.svg';
       const model = {
         title: 'Un contenu formatif',
+        internalTitle: 'Mon titre interne',
         link: 'https://un-contenu-formatif',
         type: 'webinaire',
         locale: 'fr-fr',
@@ -84,6 +86,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
 
       // then
       assert.dom(screen.getByLabelText('Titre')).hasValue(model.title);
+      assert.dom(screen.getByLabelText('Titre à usage interne')).hasValue(model.internalTitle);
       assert.dom(screen.getByLabelText('Lien')).hasValue(model.link);
       assert.strictEqual(screen.getByLabelText('Format').innerText, typeCategories[model.type]);
       assert.dom(screen.getByLabelText('Jours (JJ)')).hasValue(model.duration.days.toString());
