@@ -12,10 +12,12 @@ export default class CertificationStarter extends Component {
   @service pixCompanion;
 
   @tracked inputAccessCode = '';
-  @tracked errorMessage = null;
-  @tracked technicalErrorInfo = '';
+  @tracked apiErrorMessage = null;
+  @tracked validationErrorMessage = null;
+  @tracked technicalErrorInformation = null;
   @tracked classNames = [];
   @tracked certificationCourse = null;
+  @tracked validationStatus = 'default';
 
   get accessCode() {
     return this.inputAccessCode.toUpperCase();
@@ -42,11 +44,21 @@ export default class CertificationStarter extends Component {
   }
 
   @action
+  clearErrorMessage() {
+    this.apiErrorMessage = null;
+    this.validationStatus = 'default';
+    this.validationErrorMessage = null;
+    this.technicalErrorInformation = null;
+  }
+
+  @action
   async submit(e) {
     e.preventDefault();
-    this.errorMessage = null;
+    this.clearErrorMessage();
+
     if (!this.accessCode) {
-      this.errorMessage = this.intl.t('pages.certification-start.error-messages.access-code-error');
+      this.validationStatus = 'error';
+      this.validationErrorMessage = this.intl.t('pages.certification-start.error-messages.missing-code');
       return;
     }
 
@@ -63,22 +75,24 @@ export default class CertificationStarter extends Component {
       newCertificationCourse.deleteRecord();
       const statusCode = error.errors?.[0]?.status;
       if (statusCode === '404') {
-        this.errorMessage = this.intl.t('pages.certification-start.error-messages.access-code-error');
+        this.apiErrorMessage = this.intl.t('pages.certification-start.error-messages.access-code-error');
       } else if (statusCode === '412') {
-        this.errorMessage = this.intl.t('pages.certification-start.error-messages.session-not-accessible');
+        this.apiErrorMessage = this.intl.t('pages.certification-start.error-messages.session-not-accessible');
       } else if (statusCode === '403') {
         const errorCode = error.errors?.[0]?.code;
         if (errorCode === 'CANDIDATE_NOT_AUTHORIZED_TO_JOIN_SESSION') {
-          this.errorMessage = this.intl.t('pages.certification-start.error-messages.candidate-not-authorized-to-start');
+          this.apiErrorMessage = this.intl.t(
+            'pages.certification-start.error-messages.candidate-not-authorized-to-start',
+          );
         } else if (errorCode === 'CANDIDATE_NOT_AUTHORIZED_TO_RESUME_SESSION') {
-          this.errorMessage = this.intl.t(
+          this.apiErrorMessage = this.intl.t(
             'pages.certification-start.error-messages.candidate-not-authorized-to-resume',
           );
         }
       } else {
         // This should not happen, but in case it does, let give as much info as possible
-        this.technicalErrorInfo = `${error.message} ${error.stack}`;
-        this.errorMessage = this.intl.t('pages.certification-start.error-messages.generic');
+        this.technicalErrorInformation = `${error.message} ${error.stack}`;
+        this.apiErrorMessage = this.intl.t('pages.certification-start.error-messages.generic');
       }
     }
   }

@@ -193,6 +193,28 @@ module('Integration | Component | certification-starter', function (hooks) {
   });
 
   module('#submit', function () {
+    module('when access code is not provided', function () {
+      test('should display an error message', async function (assert) {
+        // given
+        this.set('certificationCandidateSubscription', { sessionId: 123 });
+        const screen = await render(
+          hbs`<CertificationStarter @certificationCandidateSubscription={{this.certificationCandidateSubscription}} />`,
+        );
+        await fillIn(
+          screen.getByRole('textbox', {
+            name: `${t('pages.certification-start.access-code')} *`,
+          }),
+          '',
+        );
+
+        // when
+        await clickByLabel(t('pages.certification-start.actions.submit'));
+
+        // then
+        assert.dom(screen.getByText(t('pages.certification-start.error-messages.missing-code'))).exists();
+      });
+    });
+
     module('when access code is provided', function () {
       module('when the creation of certification course is successful', function () {
         test('should redirect to certifications.resume', async function (assert) {
@@ -228,10 +250,15 @@ module('Integration | Component | certification-starter', function (hooks) {
           routerObserver.replaceWith = sinon.stub();
 
           this.set('certificationCandidateSubscription', { sessionId: 123 });
-          await render(
+          const screen = await render(
             hbs`<CertificationStarter @certificationCandidateSubscription={{this.certificationCandidateSubscription}} />`,
           );
-          await fillIn('#certificationStarterSessionCode', 'ABC123');
+          await fillIn(
+            screen.getByRole('textbox', {
+              name: `${t('pages.certification-start.access-code')} *`,
+            }),
+            'ABC123',
+          );
           routerObserver.replaceWith.returns('ok');
 
           // when
@@ -285,7 +312,12 @@ module('Integration | Component | certification-starter', function (hooks) {
           const screen = await render(
             hbs`<CertificationStarter @certificationCandidateSubscription={{this.certificationCandidateSubscription}} />`,
           );
-          await fillIn('#certificationStarterSessionCode', 'ABC123');
+          await fillIn(
+            screen.getByRole('textbox', {
+              name: `${t('pages.certification-start.access-code')} *`,
+            }),
+            'ABC123',
+          );
           certificationCourse.save.rejects({ errors: [{ status: '404' }] });
 
           // when
@@ -322,7 +354,12 @@ module('Integration | Component | certification-starter', function (hooks) {
           const screen = await render(
             hbs`<CertificationStarter @certificationCandidateSubscription={{this.certificationCandidateSubscription}} />`,
           );
-          await fillIn('#certificationStarterSessionCode', 'ABC123');
+          await fillIn(
+            screen.getByRole('textbox', {
+              name: `${t('pages.certification-start.access-code')} *`,
+            }),
+            'ABC123',
+          );
           certificationCourse.save.rejects({ errors: [{ status: '404' }] });
 
           // when
@@ -358,7 +395,12 @@ module('Integration | Component | certification-starter', function (hooks) {
           const screen = await render(
             hbs`<CertificationStarter @certificationCandidateSubscription={{this.certificationCandidateSubscription}} />`,
           );
-          await fillIn('#certificationStarterSessionCode', 'ABC123');
+          await fillIn(
+            screen.getByRole('textbox', {
+              name: `${t('pages.certification-start.access-code')} *`,
+            }),
+            'ABC123',
+          );
           certificationCourse.save.rejects({ errors: [{ status: '412' }] });
 
           // when
@@ -395,7 +437,12 @@ module('Integration | Component | certification-starter', function (hooks) {
             const screen = await render(
               hbs`<CertificationStarter @certificationCandidateSubscription={{this.certificationCandidateSubscription}} />`,
             );
-            await fillIn('#certificationStarterSessionCode', 'ABC123');
+            await fillIn(
+              screen.getByRole('textbox', {
+                name: `${t('pages.certification-start.access-code')} *`,
+              }),
+              'ABC123',
+            );
             certificationCourse.save.rejects({
               errors: [{ status: '403', code: 'CANDIDATE_NOT_AUTHORIZED_TO_JOIN_SESSION' }],
             });
@@ -435,7 +482,12 @@ module('Integration | Component | certification-starter', function (hooks) {
             const screen = await render(
               hbs`<CertificationStarter @certificationCandidateSubscription={{this.certificationCandidateSubscription}} />`,
             );
-            await fillIn('#certificationStarterSessionCode', 'ABC123');
+            await fillIn(
+              screen.getByRole('textbox', {
+                name: `${t('pages.certification-start.access-code')} *`,
+              }),
+              'ABC123',
+            );
             certificationCourse.save.rejects({
               errors: [{ status: '403', code: 'CANDIDATE_NOT_AUTHORIZED_TO_RESUME_SESSION' }],
             });
@@ -477,7 +529,12 @@ module('Integration | Component | certification-starter', function (hooks) {
             const screen = await render(
               hbs`<CertificationStarter @certificationCandidateSubscription={{this.certificationCandidateSubscription}} />`,
             );
-            await fillIn('#certificationStarterSessionCode', 'ABC123');
+            await fillIn(
+              screen.getByRole('textbox', {
+                name: `${t('pages.certification-start.access-code')} *`,
+              }),
+              'ABC123',
+            );
             certificationCourse.save.throws(new Error("Détails de l'erreur à envoyer à Pix"));
 
             // when
