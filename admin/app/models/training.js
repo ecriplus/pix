@@ -23,6 +23,7 @@ export const optionsLocaleList = formatList(localeCategories);
 
 export default class Training extends Model {
   @attr('string') title;
+  @attr('string') internalTitle;
   @attr('string') link;
   @attr('string') type;
   @attr('string') locale;

@@ -22,6 +22,8 @@ export default class TrainingDetailsCard extends Component {
         <h1 class="training-details-card__title">{{@training.title}}</h1>
         <StateTag @isDisabled={{@training.isDisabled}} />
         <dl class="training-details-card__details">
+          <dt class="training-details-card__details-label">Titre interne&nbsp;:&nbsp;</dt>
+          <dd class="training-details-card__details-value">{{@training.internalTitle}}</dd>
           <dt class="training-details-card__details-label">Publié sur&nbsp;:&nbsp;</dt>
           <dd class="training-details-card__details-value">
             <a
