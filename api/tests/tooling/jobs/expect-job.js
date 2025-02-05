@@ -37,7 +37,11 @@ export const jobChai = (pgBoss) => (_chai, utils) => {
     const jobs = await this.withJobsCount(1);
 
     const jobName = this._obj;
-    assert.deepOwnInclude(jobs[0], jobData, `Job '${jobName}' was performed with a different payload`);
+    assert.deepOwnInclude(
+      jobs[0],
+      jobData,
+      `Job '${jobName}' was performed with a different payload (${JSON.stringify(jobData)} was expected but performed with ${JSON.stringify(jobs[0])})`,
+    );
   });
 
   Assertion.addMethod('withCronJobsCount', async function (expectedCount) {
@@ -56,7 +60,11 @@ export const jobChai = (pgBoss) => (_chai, utils) => {
     const jobs = await this.withCronJobsCount(1);
 
     const jobName = this._obj;
-    assert.deepOwnInclude(jobs[0], jobData, `Job '${jobName}' was schedule with a different payload`);
+    assert.deepOwnInclude(
+      jobs[0],
+      jobData,
+      `Job '${jobName}' was schedule with a different payload (${JSON.stringify(jobData)} was expected but performed with ${JSON.stringify(jobs[0])})`,
+    );
   });
 
   Assertion.addMethod('withJobPayloads', async function (payloads) {
@@ -64,7 +72,7 @@ export const jobChai = (pgBoss) => (_chai, utils) => {
 
     const jobName = this._obj;
     const actualPayloads = jobs.map((job) => job.data);
-    assert.deepEqual(actualPayloads, payloads, `Job '${jobName}' was performed with a different payload`);
+    assert.sameDeepMembers(actualPayloads, payloads, `Job '${jobName}' was performed with a different payload`);
   });
 
   Assertion.addMethod('withJobPayload', async function (payload) {
