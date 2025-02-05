@@ -2,9 +2,8 @@ import { resetPasswordService } from '../../../../../src/identity-access-managem
 import { createResetPasswordDemand } from '../../../../../src/identity-access-management/domain/usecases/create-reset-password-demand.usecase.js';
 import { resetPasswordDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/reset-password-demand.repository.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
-import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import * as emailRepository from '../../../../../src/shared/mail/infrastructure/repositories/email.repository.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | create-reset-password-demand', function () {
   const email = 'user@example.net';
@@ -32,21 +31,22 @@ describe('Integration | Identity Access Management | Domain | UseCase | create-r
     expect(resetPasswordDemand).to.exist;
   });
 
-  it('throws UserNotFoundError if no user account exists with this email', async function () {
-    // given
-    const unknownEmail = 'unknown@example.net';
+  context('when user account does not exist with given email', function () {
+    it('does not throw an error', async function () {
+      // given
+      const unknownEmail = 'unknown@example.net';
 
-    // when
-    const error = await catchErr(createResetPasswordDemand)({
-      email: unknownEmail,
-      locale,
-      emailRepository,
-      resetPasswordService,
-      resetPasswordDemandRepository,
-      userRepository,
+      // when & then
+      expect(
+        createResetPasswordDemand({
+          email: unknownEmail,
+          locale,
+          emailRepository,
+          resetPasswordService,
+          resetPasswordDemandRepository,
+          userRepository,
+        }),
+      ).not.to.be.rejected;
     });
-
-    // then
-    expect(error).to.be.an.instanceOf(UserNotFoundError);
   });
 });
