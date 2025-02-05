@@ -51,6 +51,8 @@ export class FeatureTogglesClient {
         await this.storage.save({ key, value: featureToggle.defaultValue });
       }
     }
+
+    await this.storage.save({ key: '_config', value: this.config });
   }
 
   /**
