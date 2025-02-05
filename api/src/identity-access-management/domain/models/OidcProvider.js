@@ -19,6 +19,7 @@ export class OidcProvider {
     shouldCloseSession,
     slug,
     source,
+    isVisible,
   } = {}) {
     this.accessTokenLifespan = accessTokenLifespan;
     this.additionalRequiredProperties = additionalRequiredProperties;
@@ -39,6 +40,7 @@ export class OidcProvider {
     this.shouldCloseSession = shouldCloseSession;
     this.slug = slug;
     this.source = source;
+    this.isVisible = isVisible;
   }
 
   /**
