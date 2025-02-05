@@ -1,4 +1,5 @@
 import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 
 import { localeCategories } from '../../models/training';
 import StateTag from './state-tag';
@@ -22,9 +23,9 @@ export default class TrainingDetailsCard extends Component {
         <h1 class="training-details-card__title">{{@training.title}}</h1>
         <StateTag @isDisabled={{@training.isDisabled}} />
         <dl class="training-details-card__details">
-          <dt class="training-details-card__details-label">Titre interne&nbsp;:&nbsp;</dt>
+          <dt class="training-details-card__details-label">{{t "pages.trainings.training.details.internalTitle"}}</dt>
           <dd class="training-details-card__details-value">{{@training.internalTitle}}</dd>
-          <dt class="training-details-card__details-label">Publié sur&nbsp;:&nbsp;</dt>
+          <dt class="training-details-card__details-label">{{t "pages.trainings.training.details.publishedOn"}}</dt>
           <dd class="training-details-card__details-value">
             <a
               href={{@training.link}}
@@ -35,17 +36,19 @@ export default class TrainingDetailsCard extends Component {
               {{@training.link}}
             </a>
           </dd>
-          <dt class="training-details-card__details-label">Type de contenu&nbsp;:&nbsp;</dt>
+          <dt class="training-details-card__details-label">{{t "pages.trainings.training.details.contentType"}}</dt>
           <dd class="training-details-card__details-value">{{@training.type}}</dd>
-          <dt class="training-details-card__details-label">Durée&nbsp;:&nbsp;</dt>
+          <dt class="training-details-card__details-label">{{t "pages.trainings.training.details.duration"}}</dt>
           <dd class="training-details-card__details-value">{{this.formattedDuration}}</dd>
-          <dt class="training-details-card__details-label">Langue localisée&nbsp;:&nbsp;</dt>
+          <dt class="training-details-card__details-label">{{t
+              "pages.trainings.training.details.localizedLanguage"
+            }}</dt>
           <dd class="training-details-card__details-value">{{this.formattedLocale}}</dd>
-          <dt class="training-details-card__details-label">Nom d'éditeur&nbsp;:&nbsp;</dt>
+          <dt class="training-details-card__details-label">{{t "pages.trainings.training.details.editorName"}}</dt>
           <dd class="training-details-card__details-value">{{@training.editorName}}</dd>
-          <dt class="training-details-card__details-label">Logo de l'éditeur&nbsp;:&nbsp;</dt>
+          <dt class="training-details-card__details-label">{{t "pages.trainings.training.details.editorLogo"}}</dt>
           <dd class="training-details-card__details-value">{{@training.editorLogoUrl}}</dd>
-          <dt class="training-details-card__details-label">Statut&nbsp;:&nbsp;</dt>
+          <dt class="training-details-card__details-label">{{t "pages.trainings.training.details.status"}}</dt>
           <dd class="training-details-card__details-value">{{if
               @training.isRecommendable
               "Déclenchable"

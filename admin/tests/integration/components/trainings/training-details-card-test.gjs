@@ -1,10 +1,9 @@
 import { render } from '@1024pix/ember-testing-library';
-import { setupRenderingTest } from 'ember-qunit';
 import TrainingDetailsCard from 'pix-admin/components/trainings/training-details-card';
 import { module, test } from 'qunit';
 
 module('Integration | Component | Trainings::TrainingDetailsCard', function (hooks) {
-  setupRenderingTest(hooks);
+  setupIntlRenderingTest(hooks);
 
   const training = {
     title: 'Un contenu formatif',
