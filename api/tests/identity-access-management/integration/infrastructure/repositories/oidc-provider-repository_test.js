@@ -25,6 +25,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repositori
           scope: 'openid profile',
           slug: 'oidc-example-net',
           source: 'oidcexamplenet',
+          isVisible: true,
         };
 
         // when
