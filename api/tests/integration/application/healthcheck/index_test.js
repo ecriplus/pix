@@ -57,4 +57,27 @@ describe('Integration | Application | Route | healthcheckRouter', function () {
       expect(healthCheckController.checkRedisStatus).to.have.been.calledOnce;
     });
   });
+
+  describe('GET /api/healthcheck/forwarded-origin', function () {
+    context('when forwarded origin is not obtained', function () {
+      it('returns an HTTP status code 500', async function () {
+        // given
+        const options = {
+          method: 'GET',
+          url: '/api/healthcheck/forwarded-origin',
+          headers: {
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host-is-missing': 'there is a problem with the nginx configuration',
+          },
+        };
+
+        // when
+        const response = await httpTestServer.requestObject(options);
+
+        // then
+        expect(response.statusCode).to.equal(500);
+        expect(response.result).to.equal('Obtaining Forwarded Origin failed');
+      });
+    });
+  });
 });

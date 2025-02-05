@@ -29,6 +29,16 @@ const register = async function (server) {
         tags: ['api'],
       },
     },
+    {
+      method: 'GET',
+      path: '/api/healthcheck/forwarded-origin',
+      config: {
+        auth: false,
+        handler: healthcheckController.checkForwardedOriginStatus,
+        notes: ['- **Cette route est publique**\n' + '- Récupération de l’origine HTTP de l’application appelante\n'],
+        tags: ['api', 'healthcheck'],
+      },
+    },
   ]);
 };
 
