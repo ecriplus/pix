@@ -20,6 +20,10 @@
     "PIX_API_URL": {
       "generator": "template",
       "template": "https://api-pr%PR_NUMBER%.review.pix.fr"
+    },
+    "PR_NUMBER": {
+      "generator": "template",
+      "template": "%PR_NUMBER%"
     }
   },
   "scripts": {
