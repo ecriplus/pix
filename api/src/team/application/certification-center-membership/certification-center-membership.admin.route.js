@@ -26,4 +26,28 @@ export const certificationCenterMembershipAdminRoutes = [
       tags: ['api', 'team', 'admin', 'certification-center-membership'],
     },
   },
+  {
+    method: 'DELETE',
+    path: '/api/admin/certification-center-memberships/{id}',
+    config: {
+      handler: certificationCenterMembershipAdminController.disableFromPixAdmin,
+      pre: [
+        {
+          method: (request, h) =>
+            securityPreHandlers.hasAtLeastOneAccessOf([
+              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+              securityPreHandlers.checkAdminMemberHasRoleCertif,
+              securityPreHandlers.checkAdminMemberHasRoleSupport,
+              securityPreHandlers.checkAdminMemberHasRoleMetier,
+            ])(request, h),
+          assign: 'hasAuthorizationToAccessAdminScope',
+        },
+      ],
+      notes: [
+        "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès**\n" +
+          '- Désactivation d‘un lien entre un utilisateur et un centre de certification\n',
+      ],
+      tags: ['api', 'certification-center-membership'],
+    },
+  },
 ];
