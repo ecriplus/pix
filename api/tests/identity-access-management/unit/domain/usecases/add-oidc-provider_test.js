@@ -46,6 +46,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | add-oidc-provi
       shouldCloseSession: true,
       slug: 'oidc-example-net',
       source: 'oidcexamplenet',
+      isVisible: true,
     };
 
     // when
@@ -77,6 +78,90 @@ describe('Unit | Identity Access Management | Domain | UseCases | add-oidc-provi
       shouldCloseSession: true,
       slug: 'oidc-example-net',
       source: 'oidcexamplenet',
+      isVisible: true,
+    });
+    expect(cryptoService.encrypt).to.have.been.calledWithExactly('secret');
+    expect(oidcProviderRepository.create).to.have.been.calledWithExactly(expectedOidcProviderProperties);
+  });
+
+  it('creates an OIDC Provider in the oidc-provider-repository and visibility to false', async function () {
+    // given
+    const oidcProviderRepository = {
+      create: sinon.stub(),
+    };
+    const cryptoService = {
+      encrypt: sinon.stub().resolves('#%@!!!!!!!!!!!!!'),
+    };
+    const addOidcProviderValidator = {
+      validate: sinon.stub(),
+    };
+    const oidcProviderProperties = {
+      accessTokenLifespan: '7d',
+      clientId: 'client',
+      clientSecret: 'secret',
+      shouldCloseSession: true,
+      identityProvider: 'OIDC_EXAMPLE_NET',
+      openidConfigurationUrl: 'https://oidc.example.net/.well-known/openid-configuration',
+      organizationName: 'OIDC Example',
+      redirectUri: 'https://app.dev.pix.org/connexion/oidc-example-net',
+      scope: 'openid profile',
+      slug: 'oidc-example-net',
+      source: 'oidcexamplenet',
+      isVisible: false,
+    };
+    const expectedOidcProviderProperties = {
+      accessTokenLifespan: '7d',
+      additionalRequiredProperties: undefined,
+      claimMapping: undefined,
+      claimsToStore: undefined,
+      clientId: 'client',
+      enabled: undefined,
+      enabledForPixAdmin: undefined,
+      encryptedClientSecret: '#%@!!!!!!!!!!!!!',
+      extraAuthorizationUrlParameters: undefined,
+      identityProvider: 'OIDC_EXAMPLE_NET',
+      openidClientExtraMetadata: undefined,
+      openidConfigurationUrl: 'https://oidc.example.net/.well-known/openid-configuration',
+      organizationName: 'OIDC Example',
+      postLogoutRedirectUri: undefined,
+      redirectUri: 'https://app.dev.pix.org/connexion/oidc-example-net',
+      scope: 'openid profile',
+      shouldCloseSession: true,
+      slug: 'oidc-example-net',
+      source: 'oidcexamplenet',
+      isVisible: false,
+    };
+
+    // when
+    await addOidcProvider({
+      ...oidcProviderProperties,
+      oidcProviderRepository,
+      cryptoService,
+      addOidcProviderValidator,
+    });
+
+    // then
+    expect(addOidcProviderValidator.validate).to.have.been.calledWith({
+      accessTokenLifespan: '7d',
+      additionalRequiredProperties: undefined,
+      claimMapping: undefined,
+      claimsToStore: undefined,
+      clientId: 'client',
+      clientSecret: 'secret',
+      enabled: undefined,
+      enabledForPixAdmin: undefined,
+      extraAuthorizationUrlParameters: undefined,
+      identityProvider: 'OIDC_EXAMPLE_NET',
+      openidClientExtraMetadata: undefined,
+      openidConfigurationUrl: 'https://oidc.example.net/.well-known/openid-configuration',
+      organizationName: 'OIDC Example',
+      postLogoutRedirectUri: undefined,
+      redirectUri: 'https://app.dev.pix.org/connexion/oidc-example-net',
+      scope: 'openid profile',
+      shouldCloseSession: true,
+      slug: 'oidc-example-net',
+      source: 'oidcexamplenet',
+      isVisible: false,
     });
     expect(cryptoService.encrypt).to.have.been.calledWithExactly('secret');
     expect(oidcProviderRepository.create).to.have.been.calledWithExactly(expectedOidcProviderProperties);
