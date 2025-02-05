@@ -14,6 +14,7 @@ describe('Unit | Serializer | JSONAPI | target-profile-for-specifier-serializer'
         description: 'description',
         category: 'SUBJECT',
         areKnowledgeElementsResettable: true,
+        isSimplifiedAccess: true,
       });
 
       const meta = { some: 'meta' };
@@ -30,6 +31,7 @@ describe('Unit | Serializer | JSONAPI | target-profile-for-specifier-serializer'
             description: 'description',
             category: 'SUBJECT',
             'are-knowledge-elements-resettable': true,
+            'is-simplified-access': true,
           },
         },
         meta,

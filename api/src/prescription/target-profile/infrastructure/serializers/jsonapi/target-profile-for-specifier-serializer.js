@@ -12,6 +12,7 @@ const serialize = function (targetProfiles, meta) {
       'description',
       'category',
       'areKnowledgeElementsResettable',
+      'isSimplifiedAccess',
     ],
     meta,
   }).serialize(targetProfiles);
