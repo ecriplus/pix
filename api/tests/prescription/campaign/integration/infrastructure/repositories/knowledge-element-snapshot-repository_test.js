@@ -121,57 +121,6 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
     });
   });
 
-  describe('#findByUserIdsAndSnappedAtDates', function () {
-    let userId1, userId2, campaignParticipationId;
-
-    beforeEach(function () {
-      userId1 = databaseBuilder.factory.buildUser().id;
-      userId2 = databaseBuilder.factory.buildUser().id;
-      campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation().id;
-      return databaseBuilder.commit();
-    });
-
-    it('should find knowledge elements snapshoted grouped by userId for userIds and their respective dates', async function () {
-      // given
-      const snappedAt1 = new Date('2020-01-02');
-      const knowledgeElement1 = databaseBuilder.factory.buildKnowledgeElement({ userId: userId1 });
-      databaseBuilder.factory.buildKnowledgeElementSnapshot({
-        userId: userId1,
-        snappedAt: snappedAt1,
-        snapshot: JSON.stringify([knowledgeElement1]),
-        campaignParticipationId,
-      });
-      const snappedAt2 = new Date('2020-02-02');
-      const knowledgeElement2 = databaseBuilder.factory.buildKnowledgeElement({ userId: userId2 });
-      databaseBuilder.factory.buildKnowledgeElementSnapshot({
-        userId: userId2,
-        snappedAt: snappedAt2,
-        snapshot: JSON.stringify([knowledgeElement2]),
-        campaignParticipationId,
-      });
-      await databaseBuilder.commit();
-
-      // when
-      const knowledgeElementsByUserId = await knowledgeElementSnapshotRepository.findByUserIdsAndSnappedAtDates({
-        [userId1]: snappedAt1,
-        [userId2]: snappedAt2,
-      });
-
-      // then
-      expect(knowledgeElementsByUserId[userId1]).to.deep.equal([knowledgeElement1]);
-      expect(knowledgeElementsByUserId[userId2]).to.deep.equal([knowledgeElement2]);
-    });
-
-    it('should return null associated to userId when user does not have a snapshot', async function () {
-      // when
-      const knowledgeElementsByUserId = await knowledgeElementSnapshotRepository.findByUserIdsAndSnappedAtDates({
-        [userId1]: new Date('2020-04-01T00:00:00Z'),
-      });
-
-      expect(knowledgeElementsByUserId[userId1]).to.be.null;
-    });
-  });
-
   describe('#findByCampaignParticipationIds', function () {
     let userId1, userId2, campaignParticipationId, secondCampaignParticipationId, otherCampaignParticipationId;
 
@@ -258,15 +207,6 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
         [campaignParticipationId]: [knowledgeElement1],
         [secondCampaignParticipationId]: [knowledgeElement2],
       });
-    });
-
-    it('should return null associated to userId when user does not have a snapshot', async function () {
-      // when
-      const knowledgeElementsByUserId = await knowledgeElementSnapshotRepository.findByUserIdsAndSnappedAtDates({
-        [userId1]: new Date('2020-04-01T00:00:00Z'),
-      });
-
-      expect(knowledgeElementsByUserId[userId1]).to.be.null;
     });
   });
 
