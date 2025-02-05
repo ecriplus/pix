@@ -78,8 +78,8 @@ module('Acceptance | Trainings | Training', function (hooks) {
         await visit(`/trainings/list`);
         await clickByName('Nouveau contenu formatif');
 
-        await fillByLabel('Titre', 'Nouveau contenu formatif');
-        await fillByLabel('Titre à usage interne', 'Mon titre interne');
+        await fillByLabel('Titre :', 'Nouveau contenu formatif');
+        await fillByLabel('Titre interne :', 'Mon titre interne');
         await fillByLabel('Lien', 'http://www.example.net');
         await click(screen.getByText('Webinaire'));
 
@@ -164,8 +164,8 @@ module('Acceptance | Trainings | Training', function (hooks) {
 
         // when
         await click(screen.getByRole('button', { name: 'Modifier' }));
-        await fillByLabel('Titre', 'Nouveau contenu formatif modifié');
-        await fillByLabel('Titre à usage interne', 'Mon titre interne');
+        await fillByLabel('Titre :', 'Nouveau contenu formatif modifié');
+        await fillByLabel('Titre interne :', 'Mon titre interne');
         await click(screen.getByRole('button', { name: 'Modifier le contenu formatif' }));
 
         // then

@@ -102,7 +102,7 @@ export default class CreateOrUpdateTrainingForm extends Component {
             @value={{this.form.title}}
             {{on "change" (fn this.updateForm "title")}}
           >
-            <:label>Titre</:label>
+            <:label>{{t "pages.trainings.training.details.title"}}</:label>
           </PixInput>
           <PixInput
             @id="trainingInternalTitle"
@@ -111,7 +111,7 @@ export default class CreateOrUpdateTrainingForm extends Component {
             @value={{this.form.internalTitle}}
             {{on "change" (fn this.updateForm "internalTitle")}}
           >
-            <:label>Titre à usage interne</:label>
+            <:label>{{t "pages.trainings.training.details.internalTitle"}}</:label>
           </PixInput>
           <PixInput
             @id="trainingLink"
