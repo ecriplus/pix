@@ -65,7 +65,7 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
     });
 
     // when
-    const screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
+    let screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
     await click(screen.getByLabelText('I am the right answer!'));
 
     const verifyButton = screen.getByRole('button', { name: 'Vérifier' });
@@ -83,8 +83,7 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
       return screen.queryByRole('heading', { name: 'Bravo ! Module terminé', level: 1 });
     });
 
-    const backToDetailsButton = screen.getByRole('link', { name: 'Revenir aux détails du module' });
-    await click(backToDetailsButton);
+    screen = await visit('/modules/bien-ecrire-son-adresse-mail/');
 
     const startModuleButton = screen.getByRole('button', { name: 'Commencer le module' });
     await click(startModuleButton);

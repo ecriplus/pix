@@ -112,4 +112,15 @@ module('Integration | Component | Module | Recap', function (hooks) {
     );
     assert.ok(screen.getByText('Objectif 1'));
   });
+
+  test('should display link to go to homepage', async function (assert) {
+    // given
+    const store = this.owner.lookup('service:store');
+    const module = store.createRecord('module', { id: 'mon-slug', title: 'Module title', isBeta: true });
+    // when
+    const screen = await render(<template><ModuleRecap @module={{module}} /></template>);
+
+    // then
+    assert.dom(screen.getByRole('link', { name: 'Continuer mon expérience sur Pix' })).exists();
+  });
 });

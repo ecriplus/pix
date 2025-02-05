@@ -5,12 +5,15 @@ import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
+import { authenticate } from '../../helpers/authentication';
 import setupIntl from '../../helpers/setup-intl';
 
 module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
   setupIntl(hooks);
+
+  let user;
 
   module('when user arrive on the module recap page', function (hooks) {
     let screen;
@@ -20,6 +23,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
         type: 'text',
         content: '<h3>content</h3>',
       };
+      user = server.create('user', 'withEmail');
 
       const grain = server.create('grain', {
         id: 'grain1',
@@ -38,6 +42,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
           objectives: ['Objectif #1'],
         },
       });
+      await authenticate(user);
 
       screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
       await clickByName('Terminer');
@@ -50,14 +55,14 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
     });
 
     module('when module has status beta', function () {
-      test('should display the links to details button and to form builder', async function (assert) {
+      test('should display the links to homepage button and to form builder', async function (assert) {
         // when
         const formLink = screen.getByRole('link', { name: t('pages.modulix.recap.goToForm') });
 
         // then
         const passage = server.schema.passages.all().models[0];
         assert.ok(formLink);
-        assert.ok(screen.queryByRole('link', { name: t('pages.modulix.recap.backToModuleDetails') }));
+        assert.ok(screen.queryByRole('link', { name: t('pages.modulix.recap.goToHomepage') }));
         assert.strictEqual(
           formLink.getAttribute('href'),
           `https://form-eu.123formbuilder.com/71180/modulix-experimentation?2850087=${passage.id}`,
@@ -65,12 +70,12 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
       });
     });
 
-    test('should navigate to details page by clicking on back to module details button', async function (assert) {
+    test('should navigate to homepage by clicking on go to homepage button', async function (assert) {
       // when
-      await click(screen.getByRole('link', { name: t('pages.modulix.recap.backToModuleDetails') }));
+      await click(screen.getByRole('link', { name: t('pages.modulix.recap.goToHomepage') }));
 
       // then
-      assert.strictEqual(currentURL(), '/modules/bien-ecrire-son-adresse-mail/details');
+      assert.strictEqual(currentURL(), '/accueil');
     });
   });
 });

@@ -1636,6 +1636,7 @@
       "recap": {
         "backToModuleDetails": "Revenir aux détails du module",
         "goToForm": "Répondre au questionnaire",
+        "goToHomepage": "Continuer mon expérience sur Pix",
         "subtitle": "Vous avez atteint les objectifs suivants :",
         "title": "Bravo ! Module terminé"
       },
