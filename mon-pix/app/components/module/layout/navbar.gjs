@@ -70,7 +70,12 @@ export default class ModulixNavbar extends Component {
       </div>
     </nav>
 
-    <PixSidebar @title={{@module.title}} @showSidebar={{this.sidebarOpened}} @onClose={{this.closeSidebar}}>
+    <PixSidebar
+      @title={{@module.title}}
+      @showSidebar={{this.sidebarOpened}}
+      @onClose={{this.closeSidebar}}
+      @focusOnClose={{false}}
+    >
       <:content>
         <nav>
           <ul>

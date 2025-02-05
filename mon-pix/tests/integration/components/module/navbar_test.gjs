@@ -214,6 +214,7 @@ module('Integration | Component | Module | Navbar', function (hooks) {
         // then
         sinon.assert.calledOnce(goToGrainSpy);
         sinon.assert.calledWithExactly(goToGrainSpy, '234-abc');
+        assert.strictEqual(document.activeElement.textContent.trim(), t('pages.modulix.grain.tag.activity'));
         assert.ok(true);
       });
 
