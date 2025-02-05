@@ -11,7 +11,6 @@ import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { AdminMember } from '../../../../../src/shared/domain/models/AdminMember.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
-import { UserLogin } from '../../../../../src/identity-access-management/domain/models/UserLogin.js';
 
 describe('Unit | Identity Access Management | Domain | UseCases | authenticate-user', function () {
   let refreshTokenRepository;
@@ -382,12 +381,12 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         const expirationDelaySeconds = 1;
         const audience = 'https://certif.pix.fr';
 
-      const user = domainBuilder.buildUser({ email: userEmail });
-      const userLogins = new UserLogin({
-        id: 1,
-        userId: user.id,
-        lastLoggedAt: '2020-01-01',
-      });
+        const user = domainBuilder.buildUser({ email: userEmail });
+        const userLogins = domainBuilder.identityAccessManagement.buildUserLogin({
+          id: 1,
+          userId: user.id,
+          lastLoggedAt: '2020-01-01',
+        });
 
         const expectedEmail = createWarningConnectionEmail({
           email: user.email,
@@ -434,7 +433,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
 
         user.email = null;
 
-        const userLogins = new UserLogin({
+        const userLogins = domainBuilder.identityAccessManagement.buildUserLogin({
           id: 1,
           userId: user.id,
           lastLoggedAt: '2020-01-01',
@@ -478,7 +477,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       const audience = 'https://certif.pix.fr';
 
       const user = domainBuilder.buildUser({ email: userEmail });
-      const userLogins = new UserLogin({
+      const userLogins = domainBuilder.identityAccessManagement.buildUserLogin({
         id: 1,
         userId: user.id,
         lastLoggedAt: '2024-12-01',
