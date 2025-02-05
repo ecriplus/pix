@@ -2,6 +2,8 @@ import { render } from '@1024pix/ember-testing-library';
 import TrainingDetailsCard from 'pix-admin/components/trainings/training-details-card';
 import { module, test } from 'qunit';
 
+import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+
 module('Integration | Component | Trainings::TrainingDetailsCard', function (hooks) {
   setupIntlRenderingTest(hooks);
 
