@@ -1,7 +1,10 @@
 import { PrivateCertificate } from '../../../../../../src/certification/results/domain/models/PrivateCertificate.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
-import { status as assessmentResultStatuses } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
+import {
+  AssessmentResult,
+  status as assessmentResultStatuses,
+} from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | PrivateCertificate', function () {
@@ -33,7 +36,12 @@ describe('Unit | Domain | Models | PrivateCertificate', function () {
 
     it('builds a cancelled PrivateCertificate', async function () {
       // when
-      const privateCertificate = PrivateCertificate.buildFrom({ ...commonData, isCancelled: true });
+      // isCancelled will be removed
+      const privateCertificate = PrivateCertificate.buildFrom({
+        ...commonData,
+        assessmentResultStatus: AssessmentResult.status.CANCELLED,
+        isCancelled: true,
+      });
 
       // then
       const expectedPrivateCertificate = domainBuilder.buildPrivateCertificate.cancelled(commonData);

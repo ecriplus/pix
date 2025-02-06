@@ -81,6 +81,7 @@ const findPrivateCertificatesByUserId = async function ({ userId }) {
 };
 
 const getPrivateCertificate = async function (id, { locale } = {}) {
+  // isCancelled will be removed
   const certificationCourseDTO = await _selectPrivateCertificates()
     .where('certification-courses.id', '=', id)
     .groupBy('certification-courses.id', 'sessions.id', 'assessment-results.id')
@@ -159,6 +160,7 @@ function _selectCertificationAttestations() {
 }
 
 function _selectPrivateCertificates() {
+  // isCancelled will be removed
   return _getCertificateQuery().select({
     id: 'certification-courses.id',
     firstName: 'certification-courses.firstName',
