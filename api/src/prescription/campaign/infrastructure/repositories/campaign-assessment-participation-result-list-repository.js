@@ -32,7 +32,7 @@ function _getParticipantsResultList(campaignId, stageCollection, filters) {
     .with('campaign_participation_summaries', (qb) => _getParticipations(qb, campaignId, stageCollection, filters))
     .select('*')
     .from('campaign_participation_summaries')
-    .modify(_filterByBadgeAcquisitionsOut, filters)
+    .modify(_filterByThematicResultAcquisitionsOut, filters)
     .orderByRaw('LOWER(??) ASC, LOWER(??) ASC', ['lastName', 'firstName']);
 }
 
@@ -75,7 +75,7 @@ function _getParticipations(qb, campaignId, stageCollection, filters) {
     .where('campaign-participations.deletedAt', 'IS', null)
     .modify(_filterByDivisions, filters)
     .modify(_filterByGroups, filters)
-    .modify(_addAcquiredBadgeIds, filters)
+    .modify(_addAcquiredThematicResultsIds, filters)
     .modify(_filterByStage, stageCollection, filters)
     .modify(_filterBySearch, filters)
     .modify(_orderBy, filters);
@@ -115,8 +115,8 @@ function _filterBySearch(queryBuilder, filters) {
   }
 }
 
-function _addAcquiredBadgeIds(queryBuilder, filters) {
-  if (filters.badges) {
+function _addAcquiredThematicResultsIds(queryBuilder, filters) {
+  if (filters.acquiredThematicResults) {
     queryBuilder
       .select(knex.raw('ARRAY_AGG("badgeId") OVER (PARTITION BY "campaign-participations"."id") as badges_acquired'))
       .join('badge-acquisitions', 'badge-acquisitions.campaignParticipationId', 'campaign-participations.id')
@@ -133,15 +133,15 @@ function _orderBy(queryBuilder, filters) {
       nulls: 'last',
     },
   ];
-  if (filters.badges) {
+  if (filters.acquiredThematicResults) {
     orderByClauses.unshift({ column: 'campaign-participations.id' });
   }
   queryBuilder.orderBy(orderByClauses);
 }
 
-function _filterByBadgeAcquisitionsOut(queryBuilder, filters) {
-  if (filters.badges) {
-    queryBuilder.whereRaw(':badgeIds <@ "badges_acquired"', { badgeIds: filters.badges });
+function _filterByThematicResultAcquisitionsOut(queryBuilder, filters) {
+  if (filters.acquiredThematicResults) {
+    queryBuilder.whereRaw(':badgeIds <@ "badges_acquired"', { badgeIds: filters.acquiredThematicResults });
   }
 }
 

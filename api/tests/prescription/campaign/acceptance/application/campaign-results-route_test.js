@@ -23,6 +23,8 @@ describe('Acceptance | API | campaign-results-route', function () {
 
     let campaign;
     let userId;
+    let badge;
+    let assessment1;
 
     beforeEach(async function () {
       userId = databaseBuilder.factory.buildUser().id;
@@ -59,7 +61,9 @@ describe('Acceptance | API | campaign-results-route', function () {
         campaignId: campaign.id,
       };
 
-      databaseBuilder.factory.buildAssessmentFromParticipation(
+      badge = databaseBuilder.factory.buildBadge({ targetProfileId: campaign.targetProfileId });
+
+      assessment1 = databaseBuilder.factory.buildAssessmentFromParticipation(
         campaignParticipation,
         {
           organizationId: organization.id,
@@ -79,6 +83,12 @@ describe('Acceptance | API | campaign-results-route', function () {
         },
         participant2,
       );
+
+      databaseBuilder.factory.buildBadgeAcquisition({
+        badgeId: badge.id,
+        userId: assessment1.userId,
+        campaignParticipationId: assessment1.campaignParticipationId,
+      });
 
       return databaseBuilder.commit();
     });
@@ -111,6 +121,21 @@ describe('Acceptance | API | campaign-results-route', function () {
       const participation = response.result.data[0].attributes;
       expect(response.result.data).to.have.lengthOf(1);
       expect(participation['first-name']).to.equal(participant2.firstName);
+    });
+
+    it('should return the participation results for an assessment campaign filter by acquired thematic results', async function () {
+      const options = {
+        method: 'GET',
+        url: `/api/campaigns/${campaign.id}/assessment-results?page[number]=1&page[size]=10&filter[acquiredThematicResults][]=${badge.id}`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+      };
+
+      const response = await server.inject(options);
+
+      expect(response.statusCode).to.equal(200);
+      const participation = response.result.data[0].attributes;
+      expect(response.result.data).to.have.lengthOf(1);
+      expect(participation['first-name']).to.equal(participant1.firstName);
     });
   });
 
