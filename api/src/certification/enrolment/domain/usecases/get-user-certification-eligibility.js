@@ -31,7 +31,11 @@ const getUserCertificationEligibility = async function ({
     await complementaryCertificationCourseRepository.findByUserId({
       userId,
     });
-  const userPixCertifications = await pixCertificationRepository.findByUserId({ userId });
+
+  const validatedUserPixCertifications = await _getValidatedUserPixCertifications({
+    userId,
+    pixCertificationRepository,
+  });
 
   const certificationEligibilities = [];
   for (const acquiredBadge of userAcquiredBadges) {
@@ -45,13 +49,6 @@ const getUserCertificationEligibility = async function ({
     let areEligibilityConditionsFulfilledForCurrentLevel = false;
     let areEligibilityConditionsFulfilledForLowerLevel = false;
     const isClea = acquiredBadge.complementaryCertificationKey === ComplementaryCertificationKeys.CLEA;
-
-    const validatedUserPixCertifications = userPixCertifications.filter(
-      (pixCertification) =>
-        !pixCertification.isCancelled &&
-        !pixCertification.isRejectedForFraud &&
-        pixCertification.status === AssessmentResult.status.VALIDATED,
-    );
 
     const lowerLevelAcquiredBadgeWithOffsetVersion = _getLowerLevelBadge(
       allComplementaryCertificationBadgesForSameTargetProfile,
@@ -170,6 +167,17 @@ function _getLowerLevelBadge(allComplementaryCertificationBadgesForSameTargetPro
     .filter((badge) => badge.id != acquiredBadge.complementaryCertificationBadgeId)
     .maxBy('level')
     .value();
+}
+
+async function _getValidatedUserPixCertifications({ userId, pixCertificationRepository }) {
+  const userPixCertifications = await pixCertificationRepository.findByUserId({ userId });
+
+  return userPixCertifications.filter(
+    (pixCertification) =>
+      !pixCertification.isCancelled &&
+      !pixCertification.isRejectedForFraud &&
+      pixCertification.status === AssessmentResult.status.VALIDATED,
+  );
 }
 
 export { getUserCertificationEligibility };
