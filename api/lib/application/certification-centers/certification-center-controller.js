@@ -15,23 +15,6 @@ const findCertificationCenterMembershipsByCertificationCenter = async function (
   return dependencies.certificationCenterMembershipSerializer.serialize(certificationCenterMemberships);
 };
 
-const createCertificationCenterMembershipByEmail = async function (
-  request,
-  h,
-  dependencies = { certificationCenterMembershipSerializer },
-) {
-  const certificationCenterId = request.params.certificationCenterId;
-  const { email } = request.payload;
-
-  const certificationCenterMembership = await usecases.createCertificationCenterMembershipByEmail({
-    certificationCenterId,
-    email,
-  });
-  return h
-    .response(dependencies.certificationCenterMembershipSerializer.serialize(certificationCenterMembership))
-    .created();
-};
-
 const updateReferer = async function (request, h) {
   const certificationCenterId = request.params.certificationCenterId;
   const { userId, isReferer } = request.payload.data.attributes;
@@ -45,7 +28,6 @@ const updateReferer = async function (request, h) {
 };
 
 const certificationCenterController = {
-  createCertificationCenterMembershipByEmail,
   findCertificationCenterMembershipsByCertificationCenter,
   updateReferer,
 };

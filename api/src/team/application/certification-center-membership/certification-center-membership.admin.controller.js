@@ -40,9 +40,27 @@ const disableFromPixAdmin = async function (request, h, dependencies = { request
   return h.response().code(204);
 };
 
+const createCertificationCenterMembershipByEmail = async function (
+  request,
+  h,
+  dependencies = { certificationCenterMembershipSerializer },
+) {
+  const certificationCenterId = request.params.certificationCenterId;
+  const { email } = request.payload;
+
+  const certificationCenterMembership = await usecases.createCertificationCenterMembershipByEmail({
+    certificationCenterId,
+    email,
+  });
+  return h
+    .response(dependencies.certificationCenterMembershipSerializer.serialize(certificationCenterMembership))
+    .created();
+};
+
 const certificationCenterMembershipAdminController = {
   updateRole,
   disableFromPixAdmin,
+  createCertificationCenterMembershipByEmail,
 };
 
 export { certificationCenterMembershipAdminController };

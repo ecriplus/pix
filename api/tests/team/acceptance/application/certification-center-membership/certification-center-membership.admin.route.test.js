@@ -250,4 +250,108 @@ describe('Acceptance | Team | Application | Admin | Routes | certification-cente
       });
     });
   });
+
+  describe('POST /api/admin/certification-centers/{certificationCenterId}/certification-center-memberships', function () {
+    let certificationCenterId;
+    let email;
+    let request;
+
+    beforeEach(async function () {
+      email = 'new.member@example.net';
+
+      certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+      const adminId = databaseBuilder.factory.buildUser.withRole().id;
+      databaseBuilder.factory.buildUser({ email });
+
+      request = {
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminId }),
+        method: 'POST',
+        url: `/api/admin/certification-centers/${certificationCenterId}/certification-center-memberships`,
+        payload: { email },
+      };
+
+      await databaseBuilder.commit();
+    });
+
+    it('should return 201 HTTP status', async function () {
+      // when
+      const response = await server.inject(request);
+
+      // then
+      expect(response.statusCode).to.equal(201);
+    });
+
+    context('when user is not SuperAdmin', function () {
+      it('should return 403 HTTP status code ', async function () {
+        // given
+        request.headers = generateAuthenticatedUserRequestHeaders({ userId: 1111 });
+
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(403);
+      });
+    });
+
+    context('when user is not authenticated', function () {
+      it('should return 401 HTTP status code', async function () {
+        // given
+        request.headers.authorization = 'invalid.access.token';
+
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(401);
+      });
+    });
+
+    context('when certification center does not exist', function () {
+      it('should return 404 HTTP status code', async function () {
+        // given
+        request.url = '/api/admin/certification-centers/1/certification-center-memberships';
+
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+    });
+
+    context("when user's email does not exist", function () {
+      it('should return 404 HTTP status code', async function () {
+        // given
+        request.payload.email = 'notexist@example.net';
+
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(404);
+      });
+    });
+
+    context('when user is already member of the certification center', function () {
+      it('should return 412 HTTP status code', async function () {
+        // given
+        email = 'alreadyExist@example.net';
+        const userId = databaseBuilder.factory.buildUser({ email }).id;
+        databaseBuilder.factory.buildCertificationCenterMembership({
+          certificationCenterId,
+          userId,
+        });
+        request.payload.email = email;
+
+        await databaseBuilder.commit();
+
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(412);
+      });
+    });
+  });
 });

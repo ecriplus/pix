@@ -35,39 +35,6 @@ const register = async function (server) {
         tags: ['api', 'admin', 'certification-center-membership'],
       },
     },
-    {
-      method: 'POST',
-      path: '/api/admin/certification-centers/{certificationCenterId}/certification-center-memberships',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleCertif,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-                securityPreHandlers.checkAdminMemberHasRoleMetier,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            certificationCenterId: identifiersType.certificationCenterId,
-          }),
-          payload: Joi.object().required().keys({
-            email: Joi.string().email().required(),
-          }),
-        },
-        handler: certificationCenterController.createCertificationCenterMembershipByEmail,
-        notes: [
-          "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès**\n" +
-            "- Création d‘un nouveau membre d'un centre de certification,\n" +
-            "à partir de l'adresse e-mail d'un utilisateur.",
-        ],
-        tags: ['api', 'certification-center-membership'],
-      },
-    },
   ];
   const certifRoutes = [
     {
