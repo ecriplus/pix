@@ -1,5 +1,24 @@
 # Pix Changelog
 
+## v5.37.0 (06/02/2025)
+
+
+### :rocket: Amélioration
+- [#11345](https://github.com/1024pix/pix/pull/11345) [FEATURE] Avoir un champ "Titre interne" lors de l'édition et création d’un CF (PIX-16435).
+- [#11328](https://github.com/1024pix/pix/pull/11328) [FEATURE] Passage module chatgpt-vraiment-neutre en tabletSupport=comfortable.
+- [#11334](https://github.com/1024pix/pix/pull/11334) [FEATURE] Ajouter le champ titre interne dans la page de détails du CF (PIX-16068).
+- [#11289](https://github.com/1024pix/pix/pull/11289) [FEATURE] Ajouter un script pour envoyer des invitations à rejoindre une organisation en masse (PIX-16265).
+
+### :building_construction: Tech
+- [#11314](https://github.com/1024pix/pix/pull/11314) [TECH] Migrer la route PATCH patch /api/certification-center-invitations/{certificationCenterInvitationId} (PIX-16392).
+- [#11284](https://github.com/1024pix/pix/pull/11284) [TECH] ajoute la méthode findSnapshotByCampaignParticipationId (PIX-16339).
+
+### :arrow_up: Montée de version
+- [#11336](https://github.com/1024pix/pix/pull/11336) [BUMP] Update dependency @1024pix/pix-ui to ^54.6.0 (orga).
+
+### :coffee: Autre
+- [#11353](https://github.com/1024pix/pix/pull/11353) Revert "[BUMP] Update dependency redis to v7.2.7".
+
 ## v5.36.0 (05/02/2025)
 
 
