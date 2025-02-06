@@ -7,7 +7,14 @@ describe('Unit | Identity Access Management | Infrastructure | Serializer | JSON
       // given
       const code = 'OIDC_PARTNER';
       const organizationName = 'Partenaire OIDC';
-      const oidc = { slug: 'oidc-partner', code, organizationName, source: 'oidc-external', shouldCloseSession: true };
+      const oidc = {
+        slug: 'oidc-partner',
+        code,
+        organizationName,
+        source: 'oidc-external',
+        shouldCloseSession: true,
+        isVisible: true,
+      };
 
       // when
       const json = serializer.serialize(oidc);
@@ -23,6 +30,7 @@ describe('Unit | Identity Access Management | Infrastructure | Serializer | JSON
             slug: 'oidc-partner',
             'should-close-session': true,
             source: 'oidc-external',
+            'is-visible': true,
           },
         },
       };
