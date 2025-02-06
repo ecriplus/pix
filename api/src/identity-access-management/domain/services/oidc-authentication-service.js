@@ -44,6 +44,7 @@ export class OidcAuthenticationService {
       scope = DEFAULT_SCOPE,
       slug,
       source,
+      isVisible = true,
       claimMapping,
     },
     { sessionTemporaryStorage = defaultSessionTemporaryStorage } = {},
@@ -66,6 +67,7 @@ export class OidcAuthenticationService {
     this.sessionTemporaryStorage = sessionTemporaryStorage;
     this.slug = slug;
     this.source = source;
+    this.isVisible = isVisible;
 
     claimMapping = claimMapping || DEFAULT_CLAIM_MAPPING;
 

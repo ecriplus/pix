@@ -34,6 +34,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         // then
         expect(oidcAuthenticationService.shouldCloseSession).to.be.false;
         expect(oidcAuthenticationService.scope).to.equal('openid profile');
+        expect(oidcAuthenticationService.isVisible).to.equal(true);
       });
     });
 
