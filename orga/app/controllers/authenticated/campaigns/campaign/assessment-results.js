@@ -11,7 +11,7 @@ export default class AssessmentResultsController extends Controller {
   @tracked pageSize = 50;
   @tracked divisions = [];
   @tracked groups = [];
-  @tracked badges = [];
+  @tracked acquiredThematicResults = [];
   @tracked stages = [];
   @tracked search = null;
 
@@ -42,7 +42,7 @@ export default class AssessmentResultsController extends Controller {
     this.pageNumber = null;
     this.divisions = [];
     this.groups = [];
-    this.badges = [];
+    this.acquiredThematicResults = [];
     this.stages = [];
     this.search = null;
   }

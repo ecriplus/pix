@@ -424,7 +424,7 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         await click(await screen.findByRole('checkbox', { name: 'Les bases' }));
 
         // then
-        assert.ok(triggerFiltering.calledWith('badges', ['badge1']));
+        assert.ok(triggerFiltering.calledWith('acquiredThematicResults', ['badge1']));
       });
     });
 
