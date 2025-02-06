@@ -1,4 +1,5 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
+import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
 import { Certificate } from '../../domain/read-models/livret-scolaire/Certificate.js';
 
 const getCertificatesByOrganizationUAI = async function (uai) {
@@ -65,7 +66,7 @@ const getCertificatesByOrganizationUAI = async function (uai) {
           'certification-courses-last-assessment-results.lastAssessmentResultId',
           'assessment-results.assessmentId',
         )
-        .whereRaw('"assessment-results"."status" = \'cancelled\''),
+        .whereRaw('"assessment-results"."status" = ?', AssessmentResult.status.CANCELLED),
     )
     .where({ 'certification-courses.isCancelled': false })
     .where({ 'view-active-organization-learners.isDisabled': false })
