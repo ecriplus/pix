@@ -73,6 +73,7 @@ module.exports = function (environment) {
         minValue: 1,
       }),
       ORGANIZATION_DASHBOARD_URL: process.env.ORGANIZATION_DASHBOARD_URL,
+      TARGET_PROFILE_DASHBOARD_URL: process.env.TARGET_PROFILE_DASHBOARD_URL,
       CERTIFICATION_CENTER_DASHBOARD_URL: process.env.CERTIFICATION_CENTER_DASHBOARD_URL,
       USER_DASHBOARD_URL: process.env.USER_DASHBOARD_URL,
       MAX_LEVEL: 8,
@@ -124,6 +125,7 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.APP.TARGET_PROFILE_DASHBOARD_URL = 'https://exemple.net';
     if (analyticsEnabled) {
       ENV.matomo.url = process.env.WEB_ANALYTICS_URL;
       ENV.matomo.debug = true;
@@ -133,12 +135,12 @@ module.exports = function (environment) {
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
-
     ENV.APP.API_HOST = 'http://localhost:3000';
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
+    ENV.APP.TARGET_PROFILE_DASHBOARD_URL = 'https://example.net';
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;

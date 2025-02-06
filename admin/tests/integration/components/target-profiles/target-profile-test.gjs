@@ -1,6 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
 import TargetProfile from 'pix-admin/components/target-profiles/target-profile';
+import ENV from 'pix-admin/config/environment';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -40,6 +41,18 @@ module('Integration | Component | TargetProfile', function (hooks) {
         assert.ok(_findByListItemText(screen, 'Parcours Accès Simplifié : Non'));
         assert.ok(_findByListItemText(screen, `${t('pages.target-profiles.resettable-checkbox.label')} : Non`));
         assert.ok(_findByListItemText(screen, `${t('pages.target-profiles.tubes-count')} : ${model.tubesCount}`));
+      });
+      test('it should display link to a metabase dashboard', async function (assert) {
+        //given
+        const model = { ...targetProfileSampleData };
+
+        // when
+        const screen = await render(<template><TargetProfile @model={{model}} /></template>);
+
+        //then
+        const buttonLink = screen.getByRole('link', { name: 'Tableau de bord' });
+        assert.ok(buttonLink);
+        assert.strictEqual(buttonLink.getAttribute('href'), `${ENV.APP.TARGET_PROFILE_DASHBOARD_URL}?id=${model.id}`);
       });
     });
 
