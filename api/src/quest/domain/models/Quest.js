@@ -6,9 +6,10 @@ export const COMPARISON = {
 };
 
 class Quest {
-  constructor({ id, createdAt, rewardType, eligibilityRequirements, successRequirements, rewardId }) {
+  constructor({ id, createdAt, updatedAt, rewardType, eligibilityRequirements, successRequirements, rewardId }) {
     this.id = id;
     this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
     this.rewardType = rewardType;
     this.rewardId = rewardId;
     this.eligibilityRequirements = eligibilityRequirements;

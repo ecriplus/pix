@@ -1,9 +1,61 @@
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import * as questRepository from '../../../../../src/quest/infrastructure/repositories/quest-repository.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Quest | Integration | Repository | quest', function () {
+  describe('#saveInBatch', function () {
+    it('should save quests', async function () {
+      const { id: rewardId } = databaseBuilder.factory.buildAttestation();
+      const questInDatabase = databaseBuilder.factory.buildQuest({
+        createdAt: new Date('2020-01-01T00:00:00Z'),
+        updatedAt: new Date('2020-01-01T00:00:00Z'),
+        rewardId,
+      });
+      databaseBuilder.factory.buildQuest({
+        createdAt: new Date('2021-02-02T00:00:00Z'),
+        updatedAt: new Date('2021-02-02T00:00:00Z'),
+        rewardId,
+      });
+      await databaseBuilder.commit();
+      await databaseBuilder.fixSequences();
+
+      const expectedNewQuest = new Quest({
+        id: undefined,
+        rewardType: 'attestations',
+        rewardId,
+        eligibilityRequirements: { eligibility: 'eligibility' },
+        successRequirements: { success: 'success' },
+      });
+
+      // when
+      await questRepository.saveInBatch({
+        quests: [
+          expectedNewQuest,
+          new Quest({
+            ...questInDatabase,
+          }),
+        ],
+      });
+
+      // then
+      const [firstQuest, secondQuest, thirdQuest] = await knex('quests').orderBy('id');
+      expect(firstQuest.updatedAt).to.not.deep.equal(new Date('2020-01-01T00:00:00Z'));
+      expect(secondQuest.updatedAt).to.deep.equal(new Date('2021-02-02T00:00:00Z'));
+      sinon.assert.match(
+        new Quest(thirdQuest),
+        sinon.match(
+          new Quest({
+            ...expectedNewQuest,
+            id: sinon.match.number,
+            createdAt: sinon.match.date,
+            updatedAt: sinon.match.date,
+          }),
+        ),
+      );
+    });
+  });
+
   describe('#findAll', function () {
     it('should return all quests', async function () {
       // given

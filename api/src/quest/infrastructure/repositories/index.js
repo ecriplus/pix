@@ -5,6 +5,7 @@ import * as rewardApi from '../../../profile/application/api/reward-api.js';
 import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import * as eligibilityRepository from './eligibility-repository.js';
+import * as questRepository from './quest-repository.js';
 import * as rewardRepository from './reward-repository.js';
 import * as successRepository from './success-repository.js';
 
@@ -14,6 +15,7 @@ const repositoriesWithoutInjectedDependencies = {
   eligibilityRepository,
   successRepository,
   rewardRepository,
+  questRepository,
 };
 
 const dependencies = {

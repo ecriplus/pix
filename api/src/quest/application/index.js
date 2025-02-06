@@ -1,8 +1,14 @@
 import Joi from 'joi';
 
+import { PayloadTooLargeError, sendJsonApiError } from '../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../shared/application/security-pre-handlers.js';
+import { MAX_FILE_SIZE_UPLOAD } from '../../shared/domain/constants.js';
 import { identifiersType } from '../../shared/domain/types/identifiers-type.js';
 import { questController } from './quest-controller.js';
+
+const ERRORS = {
+  PAYLOAD_TOO_LARGE: 'PAYLOAD_TOO_LARGE',
+};
 
 const register = async function (server) {
   server.route([
@@ -26,6 +32,36 @@ const register = async function (server) {
             "- Récupère le résultat d'une quête pour une participation et un user donné",
         ],
         tags: ['api', 'quest'],
+      },
+    },
+    {
+      method: 'POST',
+      path: '/api/admin/quests',
+      config: {
+        pre: [
+          {
+            method: (request, h) => securityPreHandlers.checkAdminMemberHasRoleSuperAdmin(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        payload: {
+          maxBytes: MAX_FILE_SIZE_UPLOAD,
+          output: 'file',
+          failAction: (request, h) => {
+            return sendJsonApiError(
+              new PayloadTooLargeError('An error occurred, payload is too large', ERRORS.PAYLOAD_TOO_LARGE, {
+                maxSize: '20',
+              }),
+              h,
+            );
+          },
+        },
+        handler: (request, h) => questController.createOrUpdateQuestsInBatch(request, h),
+        tags: ['api', 'admin', 'quests'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle SUPER_ADMIN permettant un accès à l'application d'administration de Pix**\n" +
+            '- Elle permet de créer ou mettre à jour des quêtes',
+        ],
       },
     },
   ]);
