@@ -14,6 +14,67 @@ describe('Acceptance | Team | Application | Admin | Routes | certification-cente
     server = await createServer();
   });
 
+  describe('GET /api/admin/users/{id}/certification-center-memberships', function () {
+    let user;
+    let certificationCenter;
+    let certificationCenterMembership;
+
+    it("returns a 200 HTTP status code with user's memberships", async function () {
+      // given
+      user = databaseBuilder.factory.buildUser();
+      const pixAgentWithAdminRole = databaseBuilder.factory.buildUser.withRole({ role: 'SUPER_ADMIN' });
+
+      certificationCenter = databaseBuilder.factory.buildCertificationCenter();
+      certificationCenterMembership = databaseBuilder.factory.buildCertificationCenterMembership({
+        certificationCenterId: certificationCenter.id,
+        userId: user.id,
+      });
+
+      await databaseBuilder.commit();
+
+      const request = {
+        method: 'GET',
+        url: `/api/admin/users/${user.id}/certification-center-memberships`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: pixAgentWithAdminRole.id }),
+      };
+
+      // when
+      const response = await server.inject(request);
+
+      // then
+      const expectedUserMembership = {
+        data: [
+          {
+            type: 'certification-center-memberships',
+            id: certificationCenterMembership.id.toString(),
+            attributes: {
+              role: 'MEMBER',
+              'created-at': response.result.data[0].attributes['created-at'],
+              'updated-at': response.result.data[0].attributes['updated-at'],
+            },
+            relationships: {
+              'certification-center': {
+                data: {
+                  id: `${certificationCenter.id}`,
+                  type: 'certificationCenters',
+                },
+              },
+              user: {
+                data: {
+                  id: `${user.id}`,
+                  type: 'users',
+                },
+              },
+            },
+          },
+        ],
+      };
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data).to.have.lengthOf(1);
+      expect(_.omit(response.result, 'included')).to.deep.equal(expectedUserMembership);
+    });
+  });
+
   describe('PATCH /api/admin/certification-center-memberships/{id}', function () {
     let certificationCenter;
     let certificationCenterMembership;
