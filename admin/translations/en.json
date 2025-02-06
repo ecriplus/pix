@@ -733,7 +733,8 @@
           "internalTitle": "Internal title : ",
           "localizedLanguage": "Localized language : ",
           "publishedOn": "Published on : ",
-          "status": "Status : "
+          "status": "Status : ",
+          "title": "Title : "
         },
         "targetProfiles": {
           "tabName": "Target Profiles"

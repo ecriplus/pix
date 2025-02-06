@@ -750,7 +750,8 @@
           "internalTitle": "Titre interne :",
           "localizedLanguage": "Langue localisée :",
           "publishedOn": "Publié sur :",
-          "status": "Statut :"
+          "status": "Statut :",
+          "title": "Titre :"
         },
         "targetProfiles": {
           "tabName": "Profils cibles associés",

@@ -15,6 +15,7 @@ import Card from '../card';
 
 class Form {
   @tracked title;
+  @tracked internalTitle;
   @tracked link;
   @tracked type;
   @tracked duration = {
@@ -27,8 +28,9 @@ class Form {
   @tracked editorName;
   @tracked isDisabled;
 
-  constructor({ title, link, type, duration, locale, editorLogoUrl, editorName, isDisabled } = {}) {
+  constructor({ title, internalTitle, link, type, duration, locale, editorLogoUrl, editorName, isDisabled } = {}) {
     this.title = title || null;
+    this.internalTitle = internalTitle || null;
     this.link = link || null;
     this.type = type || null;
     this.duration = duration || { days: 0, hours: 0, minutes: 0 };
@@ -70,6 +72,7 @@ export default class CreateOrUpdateTrainingForm extends Component {
 
     const training = {
       title: this.form.title,
+      internalTitle: this.form.internalTitle,
       link: this.form.link,
       type: this.form.type,
       duration: this.form.duration,
@@ -99,7 +102,16 @@ export default class CreateOrUpdateTrainingForm extends Component {
             @value={{this.form.title}}
             {{on "change" (fn this.updateForm "title")}}
           >
-            <:label>Titre</:label>
+            <:label>{{t "pages.trainings.training.details.title"}}</:label>
+          </PixInput>
+          <PixInput
+            @id="trainingInternalTitle"
+            required={{true}}
+            aria-required={{true}}
+            @value={{this.form.internalTitle}}
+            {{on "change" (fn this.updateForm "internalTitle")}}
+          >
+            <:label>{{t "pages.trainings.training.details.internalTitle"}}</:label>
           </PixInput>
           <PixInput
             @id="trainingLink"
