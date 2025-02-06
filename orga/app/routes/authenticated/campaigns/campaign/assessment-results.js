@@ -19,7 +19,7 @@ export default class AssessmentResultsRoute extends Route {
     groups: {
       refreshModel: true,
     },
-    badges: {
+    acquiredThematicResults: {
       refreshModel: true,
     },
     stages: {
@@ -54,7 +54,7 @@ export default class AssessmentResultsRoute extends Route {
       filter: {
         divisions: params.divisions,
         groups: params.groups,
-        badges: params.badges,
+        acquiredThematicResults: params.acquiredThematicResults,
         stages: params.stages,
         search: params.search,
       },
@@ -68,7 +68,7 @@ export default class AssessmentResultsRoute extends Route {
       controller.pageSize = 50;
       controller.divisions = [];
       controller.groups = [];
-      controller.badges = [];
+      controller.acquiredThematicResults = [];
       controller.stages = [];
       controller.search = null;
     }

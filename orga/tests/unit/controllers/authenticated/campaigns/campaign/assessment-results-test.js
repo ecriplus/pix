@@ -43,7 +43,7 @@ module('Unit | Controller | authenticated/campaigns/campaign/assessment-results'
       controller.set('pageNumber', 1);
       controller.set('divisions', ['3eme']);
       controller.set('groups', ['L1']);
-      controller.set('badges', ['badge1']);
+      controller.set('acquiredThematicResult', ['thematic-result']);
       controller.set('stages', ['stage1']);
       controller.set('search', 'dam');
 
@@ -55,7 +55,7 @@ module('Unit | Controller | authenticated/campaigns/campaign/assessment-results'
       assert.deepEqual(controller.search, null);
       assert.deepEqual(controller.divisions, []);
       assert.deepEqual(controller.groups, []);
-      assert.deepEqual(controller.badges, []);
+      assert.deepEqual(controller.acquiredThematicResults, []);
       assert.deepEqual(controller.stages, []);
     });
   });
