@@ -35,7 +35,7 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
         await datamartBuilder.commit();
 
         // when
-        const result = await certificationRepository.getByINE({ ine });
+        const results = await certificationRepository.getByINE({ ine });
 
         // then
         const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
@@ -48,21 +48,21 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
           pixScore: 327,
           certificationDate: new Date('2024-11-22T09:39:54Z'),
           competences: [
-            {
+            domainBuilder.parcoursup.buildCompetence({
               code: '1.1',
               name: 'Mener une recherche et une veille d’information',
               areaName: 'Informations et données',
               level: 3,
-            },
-            {
+            }),
+            domainBuilder.parcoursup.buildCompetence({
               code: '1.2',
               name: 'Gérer des données',
               areaName: 'Informations et données',
               level: 5,
-            },
+            }),
           ],
         });
-        expect(result).to.deep.equal(expectedCertification);
+        expect(results).to.deep.equal([expectedCertification]);
       });
     });
 
@@ -116,7 +116,7 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
         await datamartBuilder.commit();
 
         // when
-        const result = await certificationRepository.getByOrganizationUAI({
+        const results = await certificationRepository.getByOrganizationUAI({
           organizationUai,
           lastName,
           firstName,
@@ -134,21 +134,21 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
           pixScore: 327,
           certificationDate: new Date('2024-11-22T09:39:54Z'),
           competences: [
-            {
+            domainBuilder.parcoursup.buildCompetence({
               code: '1.1',
               name: 'Mener une recherche et une veille d’information',
               areaName: 'Informations et données',
               level: 3,
-            },
-            {
+            }),
+            domainBuilder.parcoursup.buildCompetence({
               code: '1.2',
               name: 'Gérer des données',
               areaName: 'Informations et données',
               level: 5,
-            },
+            }),
           ],
         });
-        expect(result).to.deep.equal(expectedCertification);
+        expect(results).to.deep.equal([expectedCertification]);
       });
     });
 
@@ -209,7 +209,7 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
         await datamartBuilder.commit();
 
         // when
-        const result = await certificationRepository.getByVerificationCode({
+        const results = await certificationRepository.getByVerificationCode({
           verificationCode,
         });
 
@@ -222,21 +222,21 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
           pixScore: 327,
           certificationDate: new Date('2024-11-22T09:39:54Z'),
           competences: [
-            {
+            domainBuilder.parcoursup.buildCompetence({
               code: '1.1',
               name: 'Mener une recherche et une veille d’information',
               areaName: 'Informations et données',
               level: 3,
-            },
-            {
+            }),
+            domainBuilder.parcoursup.buildCompetence({
               code: '1.2',
               name: 'Gérer des données',
               areaName: 'Informations et données',
               level: 5,
-            },
+            }),
           ],
         });
-        expect(result).to.deep.equal(expectedCertification);
+        expect(results).to.deep.equal([expectedCertification]);
       });
     });
 

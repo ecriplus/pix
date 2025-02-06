@@ -15,7 +15,8 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
     PARCOURSUP_CLIENT_ID,
     PARCOURSUP_SCOPE,
     PARCOURSUP_SOURCE,
-    expectedCertification;
+    expectedCertification,
+    certificationResultData;
 
   beforeEach(async function () {
     server = await createServer();
@@ -30,7 +31,7 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
     firstName = 'PRENOM-ELEVE';
     birthdate = '2000-01-01';
 
-    const certificationResultData = {
+    certificationResultData = {
       nationalStudentId: ine,
       organizationUai,
       lastName,

@@ -1,4 +1,20 @@
-class CertificationResult {
+/**
+ * @typedef {import('./Competence.js').Competence} Competence
+ */
+
+export class CertificationResult {
+  /**
+   * @param {Object} props
+   * @param {string} props.[ine]
+   * @param {string} props.[organizationUai]
+   * @param {string} props.lastName
+   * @param {string} props.firstName
+   * @param {string} props.birthdate
+   * @param {string} props.status
+   * @param {string} props.pixScore
+   * @param {Date} props.certificationDate
+   * @param {Array<Competence>} props.competences
+   */
   constructor({
     ine,
     organizationUai,
@@ -21,5 +37,3 @@ class CertificationResult {
     this.competences = competences;
   }
 }
-
-export { CertificationResult };

@@ -1,5 +1,6 @@
 import { certificationController } from '../../../../src/parcoursup/application/certification-controller.js';
 import * as moduleUnderTest from '../../../../src/parcoursup/application/certification-route.js';
+import { MoreThanOneMatchingCertificationError } from '../../../../src/parcoursup/domain/errors.js';
 import {
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
@@ -8,11 +9,11 @@ import {
 } from '../../../test-helper.js';
 
 describe('Parcoursup | Unit | Application | Routes | Certification', function () {
-  let url, method, headers, httpTestServer;
+  let url, method, headers, httpTestServer, controllerStub;
 
   beforeEach(async function () {
     url = '/api/application/parcoursup/certification/search';
-    sinon.stub(certificationController, 'getCertificationResult').callsFake((request, h) => h.response().code(200));
+    controllerStub = sinon.stub(certificationController, 'getCertificationResult');
 
     httpTestServer = new HttpTestServer();
     httpTestServer.setupAuthentication();
@@ -33,45 +34,51 @@ describe('Parcoursup | Unit | Application | Routes | Certification', function ()
   });
 
   describe('POST /parcoursup/certification/search', function () {
-    it('should return 200 with a valid ine params in body', async function () {
-      //given
-      const payload = {
-        ine: '123456789OK',
-      };
-      // when
-      const response = await httpTestServer.request(method, url, payload, null, headers);
+    context('return a result', function () {
+      beforeEach(function () {
+        controllerStub.callsFake((request, h) => h.response().code(200));
+      });
 
-      // then
-      expect(response.statusCode).to.equal(200);
-    });
+      it('with a valid ine params in body', async function () {
+        //given
+        const payload = {
+          ine: '123456789OK',
+        };
+        // when
+        const response = await httpTestServer.request(method, url, payload, null, headers);
 
-    it('should return 200 with with valid organizationUai, lastName, firstName and birthdate in body params', async function () {
-      //given
-      const payload = {
-        organizationUai: '1234567A',
-        lastName: 'LEPONGE',
-        firstName: 'BOB',
-        birthdate: '2000-01-01',
-      };
+        // then
+        expect(response.statusCode).to.equal(200);
+      });
 
-      // when
-      const response = await httpTestServer.request(method, url, payload, null, headers);
+      it('with valid organizationUai, lastName, firstName and birthdate in body params', async function () {
+        //given
+        const payload = {
+          organizationUai: '1234567A',
+          lastName: 'LEPONGE',
+          firstName: 'BOB',
+          birthdate: '2000-01-01',
+        };
 
-      // then
-      expect(response.statusCode).to.equal(200);
-    });
+        // when
+        const response = await httpTestServer.request(method, url, payload, null, headers);
 
-    it('should return 200 with a valide verificationCode params in body', async function () {
-      //given
-      const payload = {
-        verificationCode: 'P-1234567A',
-      };
+        // then
+        expect(response.statusCode).to.equal(200);
+      });
 
-      // when
-      const response = await httpTestServer.request(method, url, payload, null, headers);
+      it('with a valid verificationCode params in body', async function () {
+        //given
+        const payload = {
+          verificationCode: 'P-1234567A',
+        };
 
-      // then
-      expect(response.statusCode).to.equal(200);
+        // when
+        const response = await httpTestServer.request(method, url, payload, null, headers);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+      });
     });
 
     context('return 400 error', function () {
@@ -183,6 +190,24 @@ describe('Parcoursup | Unit | Application | Routes | Certification', function ()
 
         // then
         expect(response.statusCode).to.equal(400);
+      });
+    });
+
+    context('return 409 error', function () {
+      it('with duplicated certification results', async function () {
+        // given
+        const payload = {
+          verificationCode: 'P-1234567A',
+        };
+        controllerStub.throws(function () {
+          return new MoreThanOneMatchingCertificationError();
+        });
+
+        // when
+        const response = await httpTestServer.request(method, url, payload, null, headers);
+
+        // then
+        expect(response.statusCode).to.equal(409);
       });
     });
 
