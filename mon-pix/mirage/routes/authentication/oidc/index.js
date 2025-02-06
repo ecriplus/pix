@@ -44,6 +44,7 @@ export default function (config) {
             slug: 'partenaire-oidc',
             'should-close-session': false,
             source: 'oidc-externe',
+            'is-visible': true,
           },
         },
       ],
