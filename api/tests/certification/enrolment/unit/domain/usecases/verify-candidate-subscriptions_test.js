@@ -158,7 +158,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
       [
         domainBuilder.certification.enrolment.buildPixCertification({
           pixScore: 123,
-          status: AssessmentResult.status.VALIDATED,
+          status: AssessmentResult.status.CANCELLED,
           isCancelled: true,
           isRejectedForFraud: false,
         }),
