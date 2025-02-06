@@ -105,6 +105,7 @@ export const handleV3CertificationScoring = async ({
     juryId: event?.juryId,
   });
 
+  // isCancelled will be removed
   if (_hasV3CertificationLacksOfAnswersForTechnicalReason({ allAnswers: candidateAnswers, certificationCourse })) {
     certificationCourse.cancel();
   }

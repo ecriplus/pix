@@ -124,6 +124,7 @@ function _doesNeedEligibilityCheck(session, candidate) {
 }
 
 function _hasValidCoreCertification(userPixCertifications) {
+  // isCancelled will be removed
   return _.some(
     userPixCertifications,
     (certification) =>
@@ -134,6 +135,7 @@ function _hasValidCoreCertification(userPixCertifications) {
 }
 
 function _getHighestUserValidPixScore(userPixCertifications) {
+  // isCancelled will be removed
   const validPixCertifications = _.chain(userPixCertifications)
     .filter(
       (pixCertification) =>

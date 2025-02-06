@@ -193,7 +193,7 @@ function _isAnyCertificationNotPublishable(certificationStatuses) {
 
 function _hasCertificationInError(certificationStatus) {
   return certificationStatus.some(
-    // DEPRECATED : isCancelled will be remove
+    // DEPRECATED : isCancelled will be removed
     ({ pixCertificationStatus, isCancelled }) =>
       pixCertificationStatus === AssessmentResult.status.ERROR && !isCancelled,
   );

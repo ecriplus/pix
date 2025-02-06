@@ -172,6 +172,7 @@ function _getLowerLevelBadge(allComplementaryCertificationBadgesForSameTargetPro
 async function _getValidatedUserPixCertifications({ userId, pixCertificationRepository }) {
   const userPixCertifications = await pixCertificationRepository.findByUserId({ userId });
 
+  // isCancelled will be removed
   return userPixCertifications.filter(
     (pixCertification) =>
       !pixCertification.isCancelled &&

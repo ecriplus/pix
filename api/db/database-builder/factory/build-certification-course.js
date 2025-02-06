@@ -5,6 +5,7 @@ import { databaseBuffer } from '../database-buffer.js';
 import { buildSession } from './build-session.js';
 import { buildUser } from './build-user.js';
 
+// isCancelled will be removed
 const buildCertificationCourse = function ({
   id = databaseBuffer.getNextId(),
   lastName = 'last-name',
