@@ -1,7 +1,7 @@
 import * as certificationResultRepository from '../../../../../../src/certification/results/infrastructure/repositories/certification-result-repository.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
-import { CertificationResult } from '../../../../../../src/shared/domain/models/index.js';
+import { AssessmentResult, CertificationResult } from '../../../../../../src/shared/domain/models/index.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Results | Integration | Infrastructure | Repository | Certification Result', function () {
@@ -49,13 +49,13 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
       const assessmentResultId1 = databaseBuilder.factory.buildAssessmentResult.last({
         certificationCourseId: certificationCourseId1,
         pixScore: 123,
-        status: CertificationResult.status.VALIDATED,
+        status: AssessmentResult.status.VALIDATED,
         commentForOrganization: 'Un commentaire orga 1',
       }).id;
       databaseBuilder.factory.buildAssessmentResult.last({
         certificationCourseId: certificationCourseId2,
         pixScore: 0,
-        status: CertificationResult.status.REJECTED,
+        status: AssessmentResult.status.REJECTED,
         commentForOrganization: 'Un commentaire orga 2',
       }).id;
       databaseBuilder.factory.buildCompetenceMark({
@@ -162,7 +162,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
       const assessmentResultId = databaseBuilder.factory.buildAssessmentResult({
         assessmentId,
         pixScore: 123,
-        status: CertificationResult.status.VALIDATED,
+        status: AssessmentResult.status.VALIDATED,
         commentForOrganization: 'Un commentaire orga 1',
       }).id;
       databaseBuilder.factory.buildCompetenceMark({
@@ -543,8 +543,14 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
       databaseBuilder.factory.buildAssessmentResult.last({
         certificationCourseId: certificationCourseId2,
         pixScore: 0,
-        status: CertificationResult.status.REJECTED,
+        status: AssessmentResult.status.REJECTED,
         commentForOrganization: 'Un commentaire orga 2',
+      }).id;
+      databaseBuilder.factory.buildAssessmentResult.last({
+        certificationCourseId: certificationCourseId3,
+        pixScore: 0,
+        status: AssessmentResult.status.CANCELLED,
+        commentForOrganization: 'Un commentaire orga',
       }).id;
 
       databaseBuilder.factory.buildCompetenceMark({
@@ -625,13 +631,13 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         createdAt: new Date('2020-10-10'),
         sessionId,
         status: CertificationResult.status.CANCELLED,
-        pixScore: null,
+        pixScore: 0,
         commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
-          fallbackComment: null,
+          fallbackComment: 'Un commentaire orga',
         }),
         competencesWithMark: [],
         complementaryCertificationCourseResults: [],
-        emitter: null,
+        emitter: 'PIX-ALGO',
       });
       const expectedThirdCertificationResult = domainBuilder.buildCertificationResult({
         id: certificationCourseId1,
@@ -690,7 +696,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
       const assessmentResultId = databaseBuilder.factory.buildAssessmentResult({
         assessmentId,
         pixScore: 123,
-        status: CertificationResult.status.VALIDATED,
+        status: AssessmentResult.status.VALIDATED,
         commentForOrganization: 'Un commentaire orga 1',
       }).id;
       databaseBuilder.factory.buildCompetenceMark({

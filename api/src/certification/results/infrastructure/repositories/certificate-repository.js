@@ -212,7 +212,6 @@ function _selectShareableCertificates() {
           ORDER BY "competence-marks"."competence_code" asc
         )`),
     })
-
     .where('assessment-results.status', AssessmentResult.status.VALIDATED)
     .where('certification-courses.isPublished', true)
     .where('certification-courses.isCancelled', false);

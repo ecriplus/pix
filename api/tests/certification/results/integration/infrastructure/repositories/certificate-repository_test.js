@@ -2,7 +2,7 @@ import * as certificateRepository from '../../../../../../src/certification/resu
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { AssessmentResult, status } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
+import { AssessmentResult } from '../../../../../../src/shared/domain/models/index.js';
 import {
   catchErr,
   databaseBuilder,
@@ -1050,7 +1050,10 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           certificationCenterId,
         });
 
-        _buildCertificationAttestationWithSeveralResults(certificationAttestationData, status.VALIDATED);
+        _buildCertificationAttestationWithSeveralResults(
+          certificationAttestationData,
+          AssessmentResult.status.VALIDATED,
+        );
         _linkCertificationAttestationToOrganization({
           certificationAttestationData,
           organizationLearnerId: 55,
@@ -1070,7 +1073,10 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           certificationCenterId,
           version: SESSIONS_VERSIONS.V2,
         });
-        _buildCertificationAttestationWithSeveralResults(certificationAttestationDataRejected, status.REJECTED);
+        _buildCertificationAttestationWithSeveralResults(
+          certificationAttestationDataRejected,
+          AssessmentResult.status.REJECTED,
+        );
         const candidate = databaseBuilder.factory.buildCertificationCandidate({
           userId: 456,
           sessionId: certificationAttestationDataRejected.sessionId,
@@ -1284,7 +1290,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildAssessmentResult.last({
         certificationCourseId,
         pixScore: privateCertificateData.pixScore,
-        status: 'validated',
+        status: AssessmentResult.status.VALIDATED,
       });
 
       await databaseBuilder.commit();
@@ -1336,7 +1342,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildAssessmentResult.last({
         certificationCourseId,
         pixScore: privateCertificateData.pixScore,
-        status: 'validated',
+        status: AssessmentResult.status.VALIDATED,
       });
 
       await databaseBuilder.commit();
@@ -1389,7 +1395,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildAssessmentResult.last({
         certificationCourseId,
         pixScore: privateCertificateData.pixScore,
-        status: 'rejected',
+        status: AssessmentResult.status.REJECTED,
       });
       await databaseBuilder.commit();
 
@@ -1592,7 +1598,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildAssessmentResult({
         certificationCourseId,
         pixScore: privateCertificateData.pixScore,
-        status: 'validated',
+        status: AssessmentResult.status.VALIDATED,
       });
       await databaseBuilder.commit();
 
@@ -1645,7 +1651,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildAssessmentResult.last({
         certificationCourseId,
         pixScore: privateCertificateData.pixScore,
-        status: 'validated',
+        status: AssessmentResult.status.VALIDATED,
       });
       await databaseBuilder.commit();
 
@@ -1699,7 +1705,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildAssessmentResult.last({
         certificationCourseId,
         pixScore: privateCertificateData.pixScore,
-        status: 'rejected',
+        status: AssessmentResult.status.REJECTED,
       });
       await databaseBuilder.commit();
 
@@ -2222,7 +2228,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildAssessmentResult({
         assessmentId,
         pixScore: shareableCertificateData.pixScore,
-        status: 'validated',
+        status: AssessmentResult.status.CANCELLED,
       });
       await databaseBuilder.commit();
 
@@ -2274,7 +2280,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildAssessmentResult({
         assessmentId,
         pixScore: shareableCertificateData.pixScore,
-        status: 'validated',
+        status: AssessmentResult.status.VALIDATED,
       });
       await databaseBuilder.commit();
 
@@ -2326,7 +2332,7 @@ describe('Integration | Infrastructure | Repository | Certification', function (
       databaseBuilder.factory.buildAssessmentResult({
         assessmentId,
         pixScore: shareableCertificateData.pixScore,
-        status: 'rejected',
+        status: AssessmentResult.status.REJECTED,
       });
       await databaseBuilder.commit();
 
@@ -2703,7 +2709,7 @@ function _buildRejected(certificationAttestationData) {
   databaseBuilder.factory.buildAssessmentResult.last({
     certificationCourseId: certificationAttestationData.id,
     pixScore: certificationAttestationData.pixScore,
-    status: 'rejected',
+    status: AssessmentResult.status.REJECTED,
   });
 }
 
@@ -2754,7 +2760,7 @@ async function _buildValidPrivateCertificate(privateCertificateData, buildCompet
   const assessmentResultId = databaseBuilder.factory.buildAssessmentResult.last({
     certificationCourseId,
     pixScore: privateCertificateData.pixScore,
-    status: 'validated',
+    status: AssessmentResult.status.VALIDATED,
     commentForCandidate: privateCertificateData.commentForCandidate,
     commentByAutoJury: privateCertificateData.commentByAutoJury,
     createdAt: new Date('2021-01-01'),
@@ -2795,7 +2801,7 @@ async function _buildValidPrivateCertificateWithSeveralResults(privateCertificat
   const { id: lastAssessmentResultId } = databaseBuilder.factory.buildAssessmentResult.last({
     certificationCourseId,
     pixScore: privateCertificateData.pixScore,
-    status: 'validated',
+    status: AssessmentResult.status.VALIDATED,
     commentForCandidate: privateCertificateData.commentForCandidate,
     createdAt: new Date('2021-03-01'),
   });
@@ -2827,7 +2833,7 @@ function _buildValidCertificationAttestation(certificationAttestationData, build
   const assessmentResultId = databaseBuilder.factory.buildAssessmentResult.last({
     certificationCourseId: certificationAttestationData.id,
     pixScore: certificationAttestationData.pixScore,
-    status: 'validated',
+    status: AssessmentResult.status.VALIDATED,
     createdAt: new Date('2020-01-02'),
   }).id;
 
@@ -2852,7 +2858,10 @@ function _buildSession({ userId, sessionId, publishedAt, certificationCenter }) 
   });
 }
 
-function _buildCertificationAttestationWithSeveralResults(certificationAttestationData, status = 'validated') {
+function _buildCertificationAttestationWithSeveralResults(
+  certificationAttestationData,
+  status = AssessmentResult.status.VALIDATED,
+) {
   databaseBuilder.factory.buildCertificationCourse({
     id: certificationAttestationData.id,
     firstName: certificationAttestationData.firstName,
@@ -2873,7 +2882,7 @@ function _buildCertificationAttestationWithSeveralResults(certificationAttestati
   const assessmentResultId1 = databaseBuilder.factory.buildAssessmentResult({
     assessmentId,
     pixScore: certificationAttestationData.pixScore,
-    status: 'rejected',
+    status: AssessmentResult.status.REJECTED,
     createdAt: new Date('2019-01-01'),
   }).id;
   const assessmentResultId2 = databaseBuilder.factory.buildAssessmentResult.last({
@@ -2942,7 +2951,7 @@ async function _buildValidPrivateCertificateWithAcquiredAndNotAcquiredBadges({
   databaseBuilder.factory.buildAssessmentResult.last({
     certificationCourseId,
     pixScore: privateCertificateData.pixScore,
-    status: 'validated',
+    status: AssessmentResult.status.VALIDATED,
     commentForCandidate: privateCertificateData.commentForCandidate,
     createdAt: new Date('2021-01-01'),
   });
@@ -3011,7 +3020,7 @@ async function _buildValidShareableCertificate(shareableCertificateData, buildCo
   const assessmentResultId = databaseBuilder.factory.buildAssessmentResult.last({
     certificationCourseId: shareableCertificateData.id,
     pixScore: shareableCertificateData.pixScore,
-    status: 'validated',
+    status: AssessmentResult.status.VALIDATED,
     createdAt: new Date('2020-01-02'),
   }).id;
 
@@ -3051,7 +3060,7 @@ async function _buildValidShareableCertificateWithAcquiredBadges({ shareableCert
   const assessmentResultId = databaseBuilder.factory.buildAssessmentResult.last({
     certificationCourseId,
     pixScore: shareableCertificateData.pixScore,
-    status: 'validated',
+    status: AssessmentResult.status.VALIDATED,
   }).id;
 
   acquiredBadges?.forEach(
