@@ -1,4 +1,4 @@
-import { status as assessmentResultStatuses } from '../../../../shared/domain/models/AssessmentResult.js';
+import { AssessmentResult } from '../../../../shared/domain/models/index.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
 
 /**
@@ -74,6 +74,10 @@ class PrivateCertificate {
     this.version = version;
   }
 
+  /**
+   * @param {Object} props
+   * @param {boolean} props.isCancelled - will be removed
+   */
   static buildFrom({
     id,
     firstName,
@@ -130,10 +134,11 @@ class PrivateCertificate {
 }
 
 function _computeStatus(assessmentResultStatus, isCancelled) {
-  if (isCancelled) return status.CANCELLED;
-  if (assessmentResultStatus === assessmentResultStatuses.VALIDATED) return status.VALIDATED;
-  if (assessmentResultStatus === assessmentResultStatuses.REJECTED) return status.REJECTED;
-  if (assessmentResultStatus === assessmentResultStatuses.ERROR) return status.ERROR;
+  // isCancelled will be removed
+  if (isCancelled || assessmentResultStatus === AssessmentResult.status.CANCELLED) return status.CANCELLED;
+  if (assessmentResultStatus === AssessmentResult.status.VALIDATED) return status.VALIDATED;
+  if (assessmentResultStatus === AssessmentResult.status.REJECTED) return status.REJECTED;
+  if (assessmentResultStatus === AssessmentResult.status.ERROR) return status.ERROR;
   return status.STARTED;
 }
 

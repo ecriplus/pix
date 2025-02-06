@@ -2,7 +2,7 @@ import * as certificateRepository from '../../../../../../src/certification/resu
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { SESSIONS_VERSIONS } from '../../../../../../src/certification/shared/domain/models/SessionVersion.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { status } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
+import { AssessmentResult, status } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import {
   catchErr,
   databaseBuilder,
@@ -2708,6 +2708,7 @@ function _buildRejected(certificationAttestationData) {
 }
 
 function _buildCancelled(certificationAttestationData) {
+  // isCancelled will be removed
   databaseBuilder.factory.buildCertificationCourse({
     id: certificationAttestationData.id,
     firstName: certificationAttestationData.firstName,
@@ -2725,7 +2726,7 @@ function _buildCancelled(certificationAttestationData) {
   databaseBuilder.factory.buildAssessmentResult.last({
     certificationCourseId: certificationAttestationData.id,
     pixScore: certificationAttestationData.pixScore,
-    status: 'validated',
+    status: AssessmentResult.status.CANCELLED,
   });
 }
 
