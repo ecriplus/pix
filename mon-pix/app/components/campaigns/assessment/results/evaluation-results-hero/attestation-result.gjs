@@ -11,6 +11,7 @@ import kebabCase from 'lodash/kebabCase';
 export default class AttestationResult extends Component {
   @service session;
   @service fileSaver;
+  @service metrics;
   @service intl;
 
   get result() {
@@ -23,7 +24,7 @@ export default class AttestationResult extends Component {
 
   @action async onClick() {
     const { access_token: token, user_id: userId } = this.session.data.authenticated;
-
+    this.sendMetrics();
     const url = `/api/users/${userId}/attestations/${this.result.reward.key}`;
     const fileName = kebabCase(deburr(this.intl.t(this.resultTitle)));
 
@@ -32,6 +33,15 @@ export default class AttestationResult extends Component {
     } catch {
       this.args.onError();
     }
+  }
+
+  sendMetrics() {
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Fin de parcours',
+      'pix-event-action': 'Cliquer sur le bouton Télécharger (attestation)',
+      'pix-event-name': 'Clic sur le bouton Télécharger (attestation)',
+    });
   }
 
   <template>

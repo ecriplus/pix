@@ -52,7 +52,7 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
       assert.dom(screen.getByRole('button', { name: downloadButtonTitle })).exists();
     });
 
-    test('it should download the attestation on download button click', async function (assert) {
+    test('it should download the attestation on download button click and send metrics', async function (assert) {
       // given
       const result = [
         {
@@ -69,6 +69,13 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
 
       this.owner.register('service:fileSaver', FileSaverStub);
 
+      class MetricsStub extends Service {
+        add = metricsAddStub;
+      }
+      const metricsAddStub = sinon.stub().resolves();
+
+      this.owner.register('service:metrics', MetricsStub);
+
       // when
       const screen = await render(<template><AttestationResult @results={{result}} /></template>);
       await click(screen.getByRole('button', { name: t('common.actions.download') }));
@@ -79,6 +86,15 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
           url: '/api/users/123/attestations/SIXTH_GRADE',
           fileName: 'sensibilisation-au-numerique',
           token: 'access_token!',
+        }),
+      );
+
+      assert.ok(
+        metricsAddStub.calledWithExactly({
+          event: 'custom-event',
+          'pix-event-category': 'Fin de parcours',
+          'pix-event-action': 'Cliquer sur le bouton Télécharger (attestation)',
+          'pix-event-name': 'Clic sur le bouton Télécharger (attestation)',
         }),
       );
     });
