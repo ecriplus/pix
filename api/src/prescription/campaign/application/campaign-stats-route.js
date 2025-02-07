@@ -22,6 +22,21 @@ const register = async function (server) {
     },
     {
       method: 'GET',
+      path: '/api/campaigns/{campaignId}/stats/badge-acquisitions',
+      config: {
+        validate: {
+          params: Joi.object({ campaignId: identifiersType.campaignId }),
+        },
+        handler: campaignStatsController.getBadgeAcquisitions,
+        notes: [
+          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
+            "- Récupération des statistiques d'obtention de badges",
+        ],
+        tags: ['api', 'campaign', 'stats'],
+      },
+    },
+    {
+      method: 'GET',
       path: '/api/campaigns/{campaignId}/stats/participations-by-status',
       config: {
         validate: {
