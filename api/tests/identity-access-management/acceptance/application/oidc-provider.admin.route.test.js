@@ -37,6 +37,7 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
           scope: 'openid profile email',
           slug: 'google',
           source: 'google',
+          isVisible: true,
         },
       ];
       const options = {
