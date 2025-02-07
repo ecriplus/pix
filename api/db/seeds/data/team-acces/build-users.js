@@ -10,6 +10,17 @@ function _buildUserWithPoleEmploiAuthenticationMethod(databaseBuilder) {
   });
 }
 
+function _buildOidcUser(databaseBuilder) {
+  const user = databaseBuilder.factory.buildUser({
+    firstName: 'Oidc',
+    lastName: 'User',
+    email: 'oidc-user@example.net',
+  });
+  databaseBuilder.factory.buildAuthenticationMethod.withSeedAsIdentityProvider({
+    userId: user.id,
+  });
+}
+
 function _buildUsers(databaseBuilder) {
   databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Salvor',
@@ -39,4 +50,5 @@ function _buildUsers(databaseBuilder) {
 export function buildUsers(databaseBuilder) {
   _buildUsers(databaseBuilder);
   _buildUserWithPoleEmploiAuthenticationMethod(databaseBuilder);
+  _buildOidcUser(databaseBuilder);
 }

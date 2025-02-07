@@ -83,12 +83,14 @@ module('Integration | Component | users | user-overview', function (hooks) {
 
       test('displays the update button', async function (assert) {
         // given
+        const store = this.owner.lookup('service:store');
         const user = {
           firstName: 'John',
           lastName: 'Harry',
           email: 'john.harry@example.net',
           username: 'john.harry0102',
         };
+        user.authenticationMethods = [await store.createRecord('authentication-method', { identityProvider: 'abc' })];
 
         // when
         const screen = await render(<template><UserOverview @user={{user}} /></template>);
@@ -392,6 +394,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
     module('When the admin member click to update user details', function () {
       test('displays the edit and cancel buttons', async function (assert) {
         // given
+        const store = this.owner.lookup('service:store');
         const user = {
           firstName: 'John',
           lastName: 'Harry',
@@ -399,6 +402,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
           username: null,
           lang: null,
         };
+        user.authenticationMethods = [await store.createRecord('authentication-method', { identityProvider: 'abc' })];
 
         // when
         const screen = await render(<template><UserOverview @user={{user}} /></template>);
@@ -416,6 +420,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
           firstName: 'John',
           email: 'john.harry@gmail.com',
           username: null,
+          authenticationMethods: [],
         });
 
         // when
@@ -450,6 +455,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
           firstName: 'John',
           email: 'john.harry@gmail.com',
           username: null,
+          authenticationMethods: [],
         });
 
         // when
@@ -469,6 +475,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
             firstName: 'John',
             email: 'john.harry@gmail.com',
             username: null,
+            authenticationMethods: [],
           });
 
           // when
@@ -486,6 +493,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
             firstName: 'John',
             email: 'john.harry@gmail.com',
             username: null,
+            authenticationMethods: [],
           });
 
           // when
@@ -505,6 +513,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
             firstName: 'John',
             email: null,
             username: 'user.name1212',
+            authenticationMethods: [],
           });
 
           // when
@@ -522,6 +531,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
             firstName: 'John',
             email: null,
             username: 'user.name1212',
+            authenticationMethods: [],
           });
 
           // when
@@ -543,6 +553,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
             firstName: 'John',
             email: null,
             username: undefined,
+            authenticationMethods: [],
           });
 
           // when
@@ -563,6 +574,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
           firstName: 'John',
           email: 'john.harry@gmail.com',
           username: null,
+          authenticationMethods: [],
         });
 
         const screen = await render(<template><UserOverview @user={{user}} /></template>);
@@ -588,6 +600,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
           firstName: 'John',
           email: 'john.harry@gmail.com',
           username: null,
+          authenticationMethods: [],
         });
 
         const screen = await render(<template><UserOverview @user={{user}} /></template>);
@@ -660,6 +673,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
           firstName: 'John',
           email: 'john.harry@gmail.com',
           isPixAgent: true,
+          authenticationMethods: [],
         });
 
         // when
@@ -675,11 +689,85 @@ module('Integration | Component | users | user-overview', function (hooks) {
         assert.dom(anonymizationDisabledTooltip).exists();
       });
     });
+
+    module('Displays SSO information', function (hooks) {
+      class OidcIdentityProvidersStub extends Service {
+        get list() {
+          return [
+            {
+              code: 'SUNLIGHT_NAVIGATIONS',
+              organizationName: 'Sunlight Navigations',
+            },
+          ];
+        }
+      }
+
+      hooks.beforeEach(function () {
+        this.owner.register('service:oidc-identity-providers', OidcIdentityProvidersStub);
+      });
+
+      test('When user has not SSO authentication method', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const user = {
+          firstName: 'John',
+          lastName: 'Harry',
+          email: 'john.harry@example.net',
+          username: 'john.harry0102',
+        };
+        user.authenticationMethods = [await store.createRecord('authentication-method', { identityProvider: 'abc' })];
+
+        // when
+        const screen = await render(<template><UserOverview @user={{user}} /></template>);
+
+        // then
+        assert.dom(screen.getByText('SSO : Non')).exists();
+      });
+
+      test('When user has OIDC authentication method', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const user = {
+          firstName: 'John',
+          lastName: 'Harry',
+          email: 'john.harry@example.net',
+          username: 'john.harry0102',
+        };
+        user.authenticationMethods = [
+          await store.createRecord('authentication-method', { identityProvider: 'SUNLIGHT_NAVIGATIONS' }),
+        ];
+
+        // when
+        const screen = await render(<template><UserOverview @user={{user}} /></template>);
+
+        // then
+        assert.dom(screen.getByText('SSO : Oui')).exists();
+      });
+
+      test('When user has GAR authentication method', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const user = {
+          firstName: 'John',
+          lastName: 'Harry',
+          email: 'john.harry@example.net',
+          username: 'john.harry0102',
+        };
+        user.authenticationMethods = [await store.createRecord('authentication-method', { identityProvider: 'GAR' })];
+
+        // when
+        const screen = await render(<template><UserOverview @user={{user}} /></template>);
+
+        // then
+        assert.dom(screen.getByText('SSO : Oui')).exists();
+      });
+    });
   });
 
   module('When the admin member does not have access to users actions scope', function () {
     test('does not display the action buttons "Modifier" and "Anonymiser cet utilisateur"', async function (assert) {
       // given
+      const store = this.owner.lookup('service:store');
       class AccessControlStub extends Service {
         hasAccessToUsersActionsScope = false;
       }
@@ -690,6 +778,7 @@ module('Integration | Component | users | user-overview', function (hooks) {
         email: 'john.harry@example.net',
         username: 'john.harry0102',
       };
+      user.authenticationMethods = [await store.createRecord('authentication-method', { identityProvider: 'abc' })];
       this.owner.register('service:access-control', AccessControlStub);
 
       // when

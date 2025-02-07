@@ -132,6 +132,35 @@ buildAuthenticationMethod.withPoleEmploiAsIdentityProvider = function ({
   });
 };
 
+buildAuthenticationMethod.withSeedAsIdentityProvider = function ({
+  id = databaseBuffer.getNextId(),
+  externalIdentifier,
+  userId,
+}) {
+  userId = isUndefined(userId) ? buildUser().id : userId;
+
+  let generatedIdentifier = externalIdentifier;
+  if (!generatedIdentifier) {
+    generatedIdentifier = `externalIdentifier-${id}`;
+  }
+  const values = {
+    id,
+    identityProvider: 'oidcFromSeeds',
+    externalIdentifier: generatedIdentifier,
+    userId,
+    authenticationComplement: new AuthenticationMethod.OidcAuthenticationComplement({
+      firstName: 'oidc',
+      lastName: 'user',
+    }),
+    createdAt: new Date('2020-01-01'),
+    updatedAt: new Date('2020-01-02'),
+  };
+  return databaseBuffer.pushInsertable({
+    tableName: 'authentication-methods',
+    values,
+  });
+};
+
 buildAuthenticationMethod.withIdentityProvider = function ({
   id = databaseBuffer.getNextId(),
   identityProvider,
