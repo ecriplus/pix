@@ -4,10 +4,11 @@ import Model, { attr } from '@ember-data/model';
 import dayjs from 'dayjs';
 import find from 'lodash/find';
 
-import { certificationStatuses } from './certification';
+import { assessmentStates, certificationStatuses } from './certification';
 
-export const ENDED_BY_SUPERVISOR = 'endedBySupervisor';
-export const juryCertificationSummaryStatuses = [{ value: ENDED_BY_SUPERVISOR, label: 'Terminée par le surveillant' }];
+export const juryCertificationSummaryStatuses = [
+  { value: assessmentStates.ENDED_BY_SUPERVISOR, label: 'Terminée par le surveillant' },
+];
 
 const statuses = [...certificationStatuses, ...juryCertificationSummaryStatuses];
 export default class JuryCertificationSummary extends Model {

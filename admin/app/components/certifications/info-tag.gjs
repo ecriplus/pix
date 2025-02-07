@@ -5,7 +5,7 @@ import PixTag from '@1024pix/pix-ui/components/pix-tag';
     {{#if @record.isPublished}}
       <PixTag @color="success">Publiée</PixTag>
     {{/if}}
-    {{#if @record.isCancelled}}
+    {{#if @record.isCertificationCancelled}}
       <PixTag @color="error">Annulée</PixTag>
     {{/if}}
   </div>

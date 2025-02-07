@@ -1,5 +1,6 @@
 import { applyEmberDataSerializers, discoverEmberDataModels } from 'ember-cli-mirage';
 import { createServer, Response } from 'miragejs';
+import { assessmentResultStatus } from 'pix-admin/models/certification';
 
 import { createAdminMember } from './handlers/admin-members';
 import {
@@ -561,7 +562,7 @@ function routes() {
   this.patch('/admin/certification-courses/:id/cancel', (schema, request) => {
     const certificationId = request.params.id;
     const certificationToUpdate = schema.certifications.find(certificationId);
-    certificationToUpdate.update({ isCancelled: true });
+    certificationToUpdate.update({ isCancelled: true, status: assessmentResultStatus.CANCELLED });
 
     return new Response(204);
   });
@@ -569,7 +570,7 @@ function routes() {
   this.patch('/admin/certification-courses/:id/uncancel', (schema, request) => {
     const certificationId = request.params.id;
     const certificationToUpdate = schema.certifications.find(certificationId);
-    certificationToUpdate.update({ isCancelled: false });
+    certificationToUpdate.update({ isCancelled: false, status: assessmentResultStatus.REJECTED });
 
     return new Response(204);
   });

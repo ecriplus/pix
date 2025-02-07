@@ -2,6 +2,7 @@ import { clickByName, fillByLabel, visit, within } from '@1024pix/ember-testing-
 import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupApplicationTest } from 'ember-qunit';
+import { assessmentResultStatus } from 'pix-admin/models/certification';
 import { module, test } from 'qunit';
 
 import { authenticateAdminMemberWithRole } from '../../../../helpers/test-init';
@@ -45,6 +46,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
       birthInseeCode: '99217',
       birthPostalCode: null,
       version: 2,
+      status: assessmentResultStatus.REJECTED,
       competencesWithMark: [
         {
           id: 152825,
@@ -865,7 +867,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
       module('Uncancel', function (hooks) {
         let screen;
         hooks.beforeEach(async function () {
-          certification.update({ isCancelled: true });
+          certification.update({ isCancelled: true, status: assessmentResultStatus.CANCELLED });
         });
 
         module('when session is finalized and not published yet', function (hooks) {
@@ -912,6 +914,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
                 // given
                 await click(screen.getByRole('button', { name: 'Désannuler la certification' }));
                 await screen.findByRole('dialog');
+
                 // when
                 await clickByName('Confirmer');
 

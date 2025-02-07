@@ -1,6 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import { setupRenderingTest } from 'ember-qunit';
 import InfoTag from 'pix-admin/components/certifications/info-tag';
+import { assessmentResultStatus } from 'pix-admin/models/certification';
 import { module, test } from 'qunit';
 
 module('Integration | Component | certifications/info-tag', function (hooks) {
@@ -35,7 +36,11 @@ module('Integration | Component | certifications/info-tag', function (hooks) {
   module('when certification is cancelled', function () {
     test('it renders cancelled tag', async function (assert) {
       // given
-      const certification = { isCancelled: true };
+      const store = this.owner.lookup('service:store');
+      const certification = store.createRecord('certification', {
+        isCancelled: true,
+        status: assessmentResultStatus.CANCELLED,
+      });
 
       // when
       const screen = await render(<template><InfoTag @record={{certification}} /></template>);

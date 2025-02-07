@@ -1,4 +1,5 @@
 import { setupTest } from 'ember-qunit';
+import { assessmentResultStatus, assessmentStates } from 'pix-admin/models/certification';
 import { module, test } from 'qunit';
 
 module('Unit | Model | certification', function (hooks) {
@@ -184,10 +185,11 @@ module('Unit | Model | certification', function (hooks) {
 
   module('#statusLabelAndValue', function () {
     [
-      { value: 'started', label: 'Démarrée' },
-      { value: 'error', label: 'En erreur' },
-      { value: 'validated', label: 'Validée' },
-      { value: 'rejected', label: 'Rejetée' },
+      { value: assessmentStates.STARTED, label: 'Démarrée' },
+      { value: assessmentResultStatus.ERROR, label: 'En erreur' },
+      { value: assessmentResultStatus.VALIDATED, label: 'Validée' },
+      { value: assessmentResultStatus.REJECTED, label: 'Rejetée' },
+      { value: assessmentResultStatus.CANCELLED, label: 'Annulée' },
     ].forEach((certificationStatus) => {
       test('it should return the right pair of label and value', function (assert) {
         // given
