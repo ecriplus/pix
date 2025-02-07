@@ -251,6 +251,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
         {
           code: 'SOME_OIDC_PROVIDER',
           source: 'some_oidc_provider',
+          isVisible: true,
           organizationName: 'Some OIDC Provider',
           slug: 'some-oidc-provider',
           shouldCloseSession: false,
@@ -273,6 +274,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
           'organization-name': 'Some OIDC Provider',
           slug: 'some-oidc-provider',
           'should-close-session': false,
+          'is-visible': true,
         },
       });
     });
