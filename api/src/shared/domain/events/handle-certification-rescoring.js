@@ -134,6 +134,7 @@ async function _handleV3CertificationScoring({
     dependencies: { findByCertificationCourseId: services.findByCertificationCourseId },
   });
 
+  // isCancelled will be removed
   if (certificationCourse.isCancelled()) {
     await certificationCourseRepository.update({ certificationCourse });
   }

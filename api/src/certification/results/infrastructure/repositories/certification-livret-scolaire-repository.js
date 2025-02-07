@@ -3,6 +3,7 @@ import { AssessmentResult } from '../../../../shared/domain/models/AssessmentRes
 import { Certificate } from '../../domain/read-models/livret-scolaire/Certificate.js';
 
 const getCertificatesByOrganizationUAI = async function (uai) {
+  // isCancelled will be removed
   const result = await knex
     .select({
       id: 'certification-courses.id',

@@ -17,7 +17,7 @@ import { SessionAlreadyPublishedError } from '../errors.js';
 
 const { some, uniqBy } = lodash;
 
-import { status } from '../../../../shared/domain/models/AssessmentResult.js';
+import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 
 /**
@@ -42,9 +42,7 @@ async function publishSession({
 
   const certificationStatuses = await certificationRepository.getStatusesBySessionId(sessionId);
 
-  const hasCertificationInError = _hasCertificationInError(certificationStatuses);
-  const hasCertificationWithNoAssessmentResultStatus = _hasCertificationWithNoScoring(certificationStatuses);
-  if (hasCertificationInError || hasCertificationWithNoAssessmentResultStatus) {
+  if (_isAnyCertificationNotPublishable(certificationStatuses)) {
     throw new CertificationCourseNotPublishableError(sessionId);
   }
 
@@ -187,14 +185,23 @@ async function _updateFinalizedSession(finalizedSessionRepository, sessionId, pu
   await finalizedSessionRepository.save({ finalizedSession });
 }
 
+function _isAnyCertificationNotPublishable(certificationStatuses) {
+  const hasCertificationInError = _hasCertificationInError(certificationStatuses);
+  const hasCertificationWithNoAssessmentResultStatus = _hasCertificationWithNoScoring(certificationStatuses);
+  return hasCertificationInError || hasCertificationWithNoAssessmentResultStatus;
+}
+
 function _hasCertificationInError(certificationStatus) {
   return certificationStatus.some(
-    ({ pixCertificationStatus, isCancelled }) => pixCertificationStatus === status.ERROR && !isCancelled,
+    // DEPRECATED : isCancelled will be removed
+    ({ pixCertificationStatus, isCancelled }) =>
+      pixCertificationStatus === AssessmentResult.status.ERROR && !isCancelled,
   );
 }
 
 function _hasCertificationWithNoScoring(certificationStatuses) {
   return certificationStatuses.some(
+    // DEPRECATED : isCancelled will be remove
     ({ pixCertificationStatus, isCancelled }) => pixCertificationStatus === null && !isCancelled,
   );
 }

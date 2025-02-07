@@ -2,6 +2,7 @@ import { knex } from '../../../../../db/knex-database-connection.js';
 import { PixCertification } from '../../domain/models/PixCertification.js';
 
 export async function findByUserId({ userId }) {
+  // isCancelled will be removed
   const results = await knex('certification-courses')
     .select(
       'certification-courses.isRejectedForFraud',

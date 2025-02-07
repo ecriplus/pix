@@ -1,6 +1,7 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 
 const getStatusesBySessionId = async function (sessionId) {
+  // isCancelled will be removed
   return knex('certification-courses')
     .select({
       certificationCourseId: 'certification-courses.id',

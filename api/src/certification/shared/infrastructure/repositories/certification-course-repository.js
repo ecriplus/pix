@@ -260,6 +260,7 @@ function _adaptModelToDb(certificationCourse) {
 }
 
 function _pickUpdatableProperties(certificationCourse) {
+  // isCancelled will be removed
   return _.pick(certificationCourse.toDTO(), [
     'id',
     'isCancelled',

@@ -260,6 +260,7 @@ async function createStartedSession({
   certificationCandidates.forEach((certificationCandidate) => {
     if (!certificationCandidate.userId) return;
 
+    // isCancelled will be removed
     const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
       userId: certificationCandidate.userId,
       sessionId,
@@ -1100,6 +1101,7 @@ function _makeCandidatesPassCertification({
   configSession,
 }) {
   for (const certificationCandidate of certificationCandidates) {
+    // isCancelled will be removed
     const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
       userId: certificationCandidate.userId,
       sessionId,

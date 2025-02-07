@@ -1,3 +1,10 @@
+/**
+ * @typedef {import('../../../../shared/domain/models/Assessment.js').Assessment} Assessment
+ * @typedef {import('../../../../shared/domain/models/Challenge.js').Challenge} Challenge
+ * @typedef {import('./CertificationIssueReport.js').CertificationIssueReport} CertificationIssueReport
+ * @typedef {import('../../../session-management/domain/models/ComplementaryCertificationCourse.js').ComplementaryCertificationCourse} ComplementaryCertificationCourse
+ * @typedef {import('./AlgorithmEngineVersion.js').AlgorithmEngineVersion} AlgorithmEngineVersion
+ */
 import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 import _ from 'lodash';
@@ -13,6 +20,38 @@ export const ABORT_REASONS = {
 };
 
 class CertificationCourse {
+  /**
+   * @param {Object} props
+   * @param {number} props.id
+   * @param {string} props.firstName
+   * @param {string} props.lastName
+   * @param {Date} props.birthdate
+   * @param {string} props.birthplace
+   * @param {string} props.birthPostalCode
+   * @param {string} props.birthINSEECode
+   * @param {string} props.birthCountry
+   * @param {string} props.sex
+   * @param {number} props.externalId
+   * @param {boolean} props.hasSeenEndTestScreen
+   * @param {Date} props.createdAt
+   * @param {Date} props.completedAt
+   * @param {boolean} props.isPublished
+   * @param {string} props.verificationCode
+   * @param {Assessment} props.assessment
+   * @param {Array<Challenge>} props.challenges
+   * @param {Array<CertificationIssueReport>} props.certificationIssueReports
+   * @param {number} props.userId
+   * @param {number} props.sessionId
+   * @param {Date} props.maxReachableLevelOnCertificationDate
+   * @param {boolean} props.isCancelled - will be removed
+   * @param {string} props.abortReason
+   * @param {Array<ComplementaryCertificationCourse>} props.complementaryCertificationCourses
+   * @param {number} props.numberOfChallenges
+   * @param {AlgorithmEngineVersion} props.version
+   * @param {boolean} props.isRejectedForFraud
+   * @param {boolean} props.isAdjustedForAccessibility
+   * @param {string} props.lang
+   */
   constructor({
     id,
     firstName,
@@ -119,14 +158,17 @@ class CertificationCourse {
     this._certificationIssueReports.push(issueReport);
   }
 
+  // isCancelled will be removed
   isCancelled() {
     return this._isCancelled;
   }
 
+  // isCancelled will be removed
   cancel() {
     this._isCancelled = true;
   }
 
+  // isCancelled will be removed
   uncancel() {
     this._isCancelled = false;
   }

@@ -131,6 +131,7 @@ export {
 };
 
 function _selectCertificationAttestations() {
+  // isCancelled will be removed
   return _getCertificateQuery()
     .select({
       id: 'certification-courses.id',
@@ -190,6 +191,7 @@ function _selectPrivateCertificates() {
 }
 
 function _selectShareableCertificates() {
+  // isCancelled will be removed
   return _getCertificateQuery()
     .select({
       id: 'certification-courses.id',

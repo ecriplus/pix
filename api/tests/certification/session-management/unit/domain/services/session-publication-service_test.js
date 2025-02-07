@@ -9,7 +9,7 @@ import {
   manageEmails,
   publishSession,
 } from '../../../../../../src/certification/session-management/domain/services/session-publication-service.js';
-import { status } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
+import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { EmailingAttempt } from '../../../../../../src/shared/domain/models/index.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
@@ -164,7 +164,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
             sharedSessionRepository.getWithCertificationCandidates.withArgs({ id: 'sessionId' }).resolves(session);
             certificationRepository.getStatusesBySessionId
               .withArgs('sessionId')
-              .resolves([{ pixCertificationStatus: status.ERROR }]);
+              .resolves([{ pixCertificationStatus: AssessmentResult.status.ERROR }]);
 
             // when
             const error = await catchErr(publishSession)({
@@ -182,6 +182,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
         });
 
         context('when the certification is cancelled', function () {
+          // DEPRECATED : will be remove when isCancelled will be remove
           it('should not throw', async function () {
             // given
             const session = domainBuilder.certification.sessionManagement.buildSession({
@@ -199,7 +200,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
             sharedSessionRepository.getWithCertificationCandidates.withArgs({ id: 'sessionId' }).resolves(session);
             certificationRepository.getStatusesBySessionId
               .withArgs('sessionId')
-              .resolves([{ pixCertificationStatus: status.ERROR, isCancelled: true }]);
+              .resolves([{ pixCertificationStatus: AssessmentResult.status.ERROR, isCancelled: true }]);
             finalizedSessionRepository.get.resolves(domainBuilder.buildFinalizedSession());
 
             // when/then
@@ -246,6 +247,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           });
         });
         context('when the certification is cancelled', function () {
+          // DEPRECATED : will be remove when isCancelled will be remove
           it('should not throw', async function () {
             // given
             const session = domainBuilder.certification.sessionManagement.buildSession({
