@@ -131,4 +131,5 @@ export const JobRetry = Object.freeze({
 export const JobExpireIn = Object.freeze({
   DEFAULT: '00:15:00',
   HIGH: '00:30:00',
+  FOUR_HOURS: '04:00:00',
 });

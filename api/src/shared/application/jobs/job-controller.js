@@ -2,6 +2,7 @@ import Joi from 'joi';
 
 import { config } from '../../config.js';
 import { EntityValidationError } from '../../domain/errors.js';
+import { JobExpireIn } from '../../infrastructure/repositories/jobs/job-repository.js';
 
 export const JobGroup = {
   DEFAULT: 'default',
@@ -11,7 +12,8 @@ export const JobGroup = {
 export class JobController {
   constructor(jobName, options = {}) {
     this.jobName = jobName;
-    this.jobGroup = options.jobGroup || JobGroup.DEFAULT;
+    this.jobGroup = options.jobGroup ?? JobGroup.DEFAULT;
+    this.expireIn = options.expireIn ?? JobExpireIn.DEFAULT;
 
     this.#validate();
   }

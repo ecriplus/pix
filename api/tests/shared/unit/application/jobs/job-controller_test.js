@@ -1,5 +1,6 @@
 import { JobController, JobGroup } from '../../../../../src/shared/application/jobs/job-controller.js';
 import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
+import { JobExpireIn } from '../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { catchErrSync, expect } from '../../../../test-helper.js';
 
 describe('Unit | Shared | Application | Jobs | JobController', function () {
@@ -29,6 +30,7 @@ describe('Unit | Shared | Application | Jobs | JobController', function () {
     // given
     const jobName = 'jobName';
     const jobGroup = JobGroup.DEFAULT;
+    const expireIn = JobExpireIn.DEFAULT;
 
     // when
     const controller = new JobController(jobName);
@@ -37,6 +39,7 @@ describe('Unit | Shared | Application | Jobs | JobController', function () {
     expect(controller).to.be.instanceOf(JobController).and.to.deep.equal({
       jobName,
       jobGroup,
+      expireIn,
     });
   });
 
