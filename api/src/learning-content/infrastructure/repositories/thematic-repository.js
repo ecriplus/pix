@@ -1,4 +1,4 @@
-import { clearCache } from '../../../../lib/infrastructure/repositories/thematic-repository.js';
+import { clearCache } from '../../../shared/infrastructure/repositories/thematic-repository.js';
 import { LearningContentRepository } from './learning-content-repository.js';
 
 class ThematicRepository extends LearningContentRepository {

@@ -1,7 +1,7 @@
-import { LOCALE } from '../../../src/shared/domain/constants.js';
-import { Thematic } from '../../../src/shared/domain/models/Thematic.js';
-import { getTranslatedKey } from '../../../src/shared/domain/services/get-translated-text.js';
-import { LearningContentRepository } from '../../../src/shared/infrastructure/repositories/learning-content-repository.js';
+import { LOCALE } from '../../domain/constants.js';
+import { Thematic } from '../../domain/models/Thematic.js';
+import { getTranslatedKey } from '../../domain/services/get-translated-text.js';
+import { LearningContentRepository } from './learning-content-repository.js';
 
 const { FRENCH_FRANCE } = LOCALE;
 const TABLE_NAME = 'learningcontent.thematics';
