@@ -4,7 +4,7 @@ import { expect, sinon } from '../../../../test-helper.js';
 describe('Unit | Devcomp | Domain | UseCases | find-paginated-training-summaries', function () {
   it('should find filtered training summaries with pagination', async function () {
     // given
-    const filter = { id: 1 };
+    const filter = { id: 1, internalTitle: 'internal title' };
     const page = { number: 1, size: 2 };
 
     const trainingRepository = {
