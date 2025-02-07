@@ -1,4 +1,5 @@
 import { setupTest } from 'ember-qunit';
+import { assessmentResultStatus } from 'pix-admin/models/certification';
 import { module, test } from 'qunit';
 
 import createGlimmerComponent from '../../../../helpers/create-glimmer-component';
@@ -68,7 +69,7 @@ module('Unit | Component | certifications/certification/details-v3', function (h
         details: {
           isRejectedForFraud: false,
           isCancelled: false,
-          assessmentResultStatus: 'validated',
+          assessmentResultStatus: assessmentResultStatus.VALIDATED,
         },
         expectedValue: 'pages.certifications.certification.details.v3.assessment-result-status.validated',
       },
@@ -76,7 +77,7 @@ module('Unit | Component | certifications/certification/details-v3', function (h
         details: {
           isRejectedForFraud: false,
           isCancelled: false,
-          assessmentResultStatus: 'rejected',
+          assessmentResultStatus: assessmentResultStatus.REJECTED,
         },
         expectedValue: 'pages.certifications.certification.details.v3.assessment-result-status.rejected',
       },
@@ -84,7 +85,7 @@ module('Unit | Component | certifications/certification/details-v3', function (h
         details: {
           isRejectedForFraud: false,
           isCancelled: false,
-          assessmentResultStatus: 'error',
+          assessmentResultStatus: assessmentResultStatus.ERROR,
         },
         expectedValue: 'pages.certifications.certification.details.v3.assessment-result-status.error',
       },
@@ -92,7 +93,7 @@ module('Unit | Component | certifications/certification/details-v3', function (h
         details: {
           isRejectedForFraud: false,
           isCancelled: true,
-          assessmentResultStatus: 'validated',
+          assessmentResultStatus: assessmentResultStatus.CANCELLED,
         },
         expectedValue: 'pages.certifications.certification.details.v3.assessment-result-status.cancelled',
       },
@@ -100,7 +101,7 @@ module('Unit | Component | certifications/certification/details-v3', function (h
         details: {
           isRejectedForFraud: true,
           isCancelled: false,
-          assessmentResultStatus: 'validated',
+          assessmentResultStatus: assessmentResultStatus.VALIDATED,
         },
         expectedValue: 'pages.certifications.certification.details.v3.assessment-result-status.fraud',
       },
@@ -125,7 +126,7 @@ module('Unit | Component | certifications/certification/details-v3', function (h
         details: {
           isRejectedForFraud: false,
           isCancelled: false,
-          assessmentResultStatus: 'validated',
+          assessmentResultStatus: assessmentResultStatus.VALIDATED,
         },
         expectedValue: 'success',
       },
@@ -133,7 +134,7 @@ module('Unit | Component | certifications/certification/details-v3', function (h
         details: {
           isRejectedForFraud: false,
           isCancelled: false,
-          assessmentResultStatus: 'rejected',
+          assessmentResultStatus: assessmentResultStatus.REJECTED,
         },
         expectedValue: 'error',
       },
@@ -141,7 +142,7 @@ module('Unit | Component | certifications/certification/details-v3', function (h
         details: {
           isRejectedForFraud: false,
           isCancelled: false,
-          assessmentResultStatus: 'error',
+          assessmentResultStatus: assessmentResultStatus.ERROR,
         },
         expectedValue: 'error',
       },
@@ -149,7 +150,7 @@ module('Unit | Component | certifications/certification/details-v3', function (h
         details: {
           isRejectedForFraud: false,
           isCancelled: true,
-          assessmentResultStatus: 'validated',
+          assessmentResultStatus: assessmentResultStatus.CANCELLED,
         },
         expectedValue: 'error',
       },
@@ -157,7 +158,7 @@ module('Unit | Component | certifications/certification/details-v3', function (h
         details: {
           isRejectedForFraud: true,
           isCancelled: false,
-          assessmentResultStatus: 'validated',
+          assessmentResultStatus: assessmentResultStatus.VALIDATED,
         },
         expectedValue: 'error',
       },
