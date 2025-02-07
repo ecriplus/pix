@@ -15,6 +15,7 @@ export default class CertificationsHeader extends Component {
   @tracked confirmMessage = null;
 
   get canPublish() {
+    // isCancelled will be removed
     return (
       !this.args.juryCertificationSummaries.some(
         (certification) => certification.status === 'error' && !certification.isCancelled,

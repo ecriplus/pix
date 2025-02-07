@@ -50,6 +50,7 @@ export default class JuryCertificationSummary extends Model {
 
   @computed('status', 'isCancelled')
   get statusLabel() {
+    // isCancelled will be removed
     if (this.isCancelled) return 'Annulée';
     const statusWithLabel = find(statuses, { value: this.status });
     return statusWithLabel?.label;
