@@ -9,12 +9,14 @@ export default class AuthenticatedAttestationsController extends Controller {
   @service fileSaver;
   @service session;
   @service currentUser;
+  @service metrics;
   @service notifications;
   @service intl;
 
   @action
   async downloadSixthGradeAttestationsFile(selectedDivisions) {
     try {
+      this.sendMetrics();
       let url;
       const organizationId = this.currentUser.organization.id;
       const baseUrl = `/api/organizations/${organizationId}/attestations/${SIXTH_GRADE_ATTESTATION_KEY}`;
@@ -41,5 +43,14 @@ export default class AuthenticatedAttestationsController extends Controller {
     } catch (error) {
       this.notifications.sendError(error.message, { autoClear: false });
     }
+  }
+
+  sendMetrics() {
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Attestations',
+      'pix-event-action': 'Cliquer sur le bouton Télécharger sur la page Attestations',
+      'pix-event-name': 'Clic sur le bouton Télécharger (attestations)',
+    });
   }
 }

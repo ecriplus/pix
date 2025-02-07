@@ -58,6 +58,23 @@ module('Unit | Controller | authenticated/attestations', function (hooks) {
           }),
         );
       });
+      test('should call send metrics when download button is clicked', async function (assert) {
+        const metrics = this.owner.lookup('service:metrics');
+        metrics.add = sinon.stub();
+        const controller = this.owner.lookup('controller:authenticated/attestations');
+        const selectedDivision = ['3èmea'];
+
+        //when
+        await controller.downloadSixthGradeAttestationsFile(selectedDivision);
+
+        sinon.assert.calledWithExactly(metrics.add, {
+          event: 'custom-event',
+          'pix-event-category': 'Attestations',
+          'pix-event-action': 'Cliquer sur le bouton Télécharger sur la page Attestations',
+          'pix-event-name': 'Clic sur le bouton Télécharger (attestations)',
+        });
+        assert.ok(true);
+      });
     });
 
     module('when selected divisions is empty', function () {
