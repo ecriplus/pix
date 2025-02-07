@@ -31,6 +31,7 @@ const OIDC_PROVIDERS_TABLE_NAME = 'oidc-providers';
  * @param {boolean} oidcProviderProperties.shouldCloseSession
  * @param {string} oidcProviderProperties.slug
  * @param {string} oidcProviderProperties.source
+ * @param {boolean} oidcProviderProperties.isVisible
  * @param {Object} dependencies
  * @returns {Promise<any[]>}
  */

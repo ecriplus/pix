@@ -28,6 +28,7 @@ const schema = Joi.object({
   shouldCloseSession: Joi.boolean().optional().default(false),
   slug: Joi.string().required(),
   source: Joi.string().optional(),
+  isVisible: Joi.boolean().optional().default(true),
 });
 
 /**

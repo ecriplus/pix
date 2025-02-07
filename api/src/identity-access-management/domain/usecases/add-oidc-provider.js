@@ -23,6 +23,7 @@
  * @param {boolean} params.shouldCloseSession
  * @param {string} params.slug
  * @param {string} params.source
+ * @param {boolean} params.isVisible
  * @param {OidcProviderRepository} params.oidcProviderRepository
  * @param {CryptoService} params.cryptoService
  * @returns {Promise<void>}
@@ -47,6 +48,7 @@ const addOidcProvider = async function ({
   shouldCloseSession,
   slug,
   source,
+  isVisible = true,
   oidcProviderRepository,
   cryptoService,
   addOidcProviderValidator,
@@ -71,6 +73,7 @@ const addOidcProvider = async function ({
     shouldCloseSession,
     slug,
     source,
+    isVisible,
   });
 
   const encryptedClientSecret = await cryptoService.encrypt(clientSecret);
@@ -95,6 +98,7 @@ const addOidcProvider = async function ({
     shouldCloseSession,
     slug,
     source,
+    isVisible,
   });
 };
 

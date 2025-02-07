@@ -24,6 +24,7 @@ export async function buildOidcProvider({
   shouldCloseSession,
   slug,
   source,
+  isVisible,
 }) {
   const encryptedClientSecret = await cryptoService.encrypt(clientSecret);
 
@@ -48,6 +49,7 @@ export async function buildOidcProvider({
     shouldCloseSession,
     slug,
     source,
+    isVisible,
   };
 
   return databaseBuffer.pushInsertable({
