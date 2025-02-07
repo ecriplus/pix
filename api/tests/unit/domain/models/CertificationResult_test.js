@@ -126,6 +126,7 @@ describe('Unit | Domain | Models | CertificationResult', function () {
       });
     });
 
+    // isCancelled will be removed
     context('status', function () {
       // Rule disabled to allow dynamic generated tests. See https://github.com/lo1tuma/eslint-plugin-mocha/blob/master/docs/rules/no-setup-in-describe.md#disallow-setup-in-describe-blocks-mochano-setup-in-describe
       // eslint-disable-next-line mocha/no-setup-in-describe
@@ -134,7 +135,7 @@ describe('Unit | Domain | Models | CertificationResult', function () {
           statusName: 'cancelled',
           isCancelled: true,
 
-          assessmentResultStatus: CERTIFICATION_RESULT_STATUS_VALIDATED,
+          assessmentResultStatus: CERTIFICATION_RESULT_STATUS_CANCELLED,
           validationFunction: 'isCancelled',
         },
         {

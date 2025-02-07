@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { CompetenceMark } from '../../../certification/shared/domain/models/CompetenceMark.js';
 import { ComplementaryCertificationCourseResult } from '../../../certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { JuryComment, JuryCommentContexts } from '../../../certification/shared/domain/models/JuryComment.js';
+import { AssessmentResult } from './AssessmentResult.js';
 
 /**
  * @readonly
@@ -79,7 +80,11 @@ class CertificationResult {
 
   static from({ certificationResultDTO }) {
     let certificationStatus;
-    if (certificationResultDTO.isCancelled) {
+    // isCancelled will be removed
+    if (
+      certificationResultDTO.isCancelled ||
+      certificationResultDTO.assessmentResultStatus === AssessmentResult.status.CANCELLED
+    ) {
       certificationStatus = status.CANCELLED;
     } else {
       certificationStatus = certificationResultDTO?.assessmentResultStatus ?? status.STARTED;

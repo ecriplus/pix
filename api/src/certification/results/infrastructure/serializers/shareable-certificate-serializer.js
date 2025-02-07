@@ -38,7 +38,6 @@ const attributes = [
   'firstName',
   'deliveredAt',
   'isPublished',
-  'isCancelled',
   'lastName',
   'pixScore',
   'resultCompetenceTree',
