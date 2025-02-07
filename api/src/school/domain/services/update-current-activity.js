@@ -9,8 +9,7 @@ export async function updateCurrentActivity({
   missionRepository,
 }) {
   const lastActivity = await activityRepository.getLastActivity(assessmentId);
-  const answers = await activityAnswerRepository.findByActivity(lastActivity.id);
-  const lastAnswer = answers.at(-1);
+  const lastAnswer = await activityAnswerRepository.findLastByActivity(lastActivity.id);
 
   if (lastAnswer.result.isOK() || lastActivity.isTutorial) {
     const { missionId } = await missionAssessmentRepository.getByAssessmentId(assessmentId);
@@ -27,6 +26,6 @@ export async function updateCurrentActivity({
 }
 
 function _isActivityFinished(mission, lastActivity, lastAnswer) {
-  const challengeIds = mission.getChallengeIds(new ActivityInfo(lastActivity));
-  return challengeIds.at(-1).includes(lastAnswer.challengeId);
+  const lastChallengeIds = mission.getLastChallengeIds(new ActivityInfo(lastActivity));
+  return lastChallengeIds.includes(lastAnswer.challengeId);
 }

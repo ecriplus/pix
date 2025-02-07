@@ -234,4 +234,30 @@ describe('Unit | Domain | School', function () {
       expect(challengeIndex).to.equal(1);
     });
   });
+
+  describe('#getLastChallengeIds', function () {
+    it('should index of given challenge in given activity', function () {
+      const mission = domainBuilder.buildMission({
+        content: {
+          steps: [
+            {
+              tutorialChallenges: [
+                ['tutorial-challenge-id-1'],
+                ['tutorial-challenge-id-2'],
+                ['tutorial-challenge-id-3'],
+              ],
+            },
+          ],
+        },
+      });
+      const lastChallengeIds = mission.getLastChallengeIds(
+        new ActivityInfo({
+          level: Activity.levels.TUTORIAL,
+          stepIndex: 0,
+        }),
+      );
+
+      expect(lastChallengeIds).to.deep.equal(['tutorial-challenge-id-3']);
+    });
+  });
 });

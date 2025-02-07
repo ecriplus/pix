@@ -6,22 +6,22 @@ import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStat
 import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Repository | activityAnswerRepository', function () {
-  describe('#findByActivity', function () {
+  describe('#findLastByActivity', function () {
     context('when activity does not exists', function () {
-      it('should return an empty array', async function () {
+      it('should return undefined', async function () {
         // given
         databaseBuilder.factory.buildActivity({ id: 123, level: Activity.levels.TUTORIAL });
         await databaseBuilder.commit();
 
         // when
-        const foundAnswers = await activityAnswerRepository.findByActivity(456);
+        const lastAnswer = await activityAnswerRepository.findLastByActivity(456);
 
         // then
-        expect(foundAnswers).to.be.empty;
+        expect(lastAnswer).to.be.undefined;
       });
     });
     context('when there is no answer for the activity', function () {
-      it('should return an empty array', async function () {
+      it('should return undefined', async function () {
         // given
         // no answer activity
         databaseBuilder.factory.buildActivity({ id: 123 });
@@ -33,10 +33,10 @@ describe('Integration | Repository | activityAnswerRepository', function () {
         await databaseBuilder.commit();
 
         // when
-        const foundAnswers = await activityAnswerRepository.findByActivity(123);
+        const lastAnswer = await activityAnswerRepository.findLastByActivity(123);
 
         // then
-        expect(foundAnswers).to.be.empty;
+        expect(lastAnswer).to.be.undefined;
       });
     });
     context('when activity has some activity answers', function () {
@@ -45,22 +45,23 @@ describe('Integration | Repository | activityAnswerRepository', function () {
         databaseBuilder.factory.buildActivity({ id: 123 });
         databaseBuilder.factory.buildActivityAnswer({
           activityId: 123,
+          challengeId: 'challenge1',
           createdAt: new Date('2023-06-01T15:01:00Z'),
           result: 'ko',
         });
         databaseBuilder.factory.buildActivityAnswer({
           activityId: 123,
+          challengeId: 'challenge2',
           createdAt: new Date('2023-06-01T15:00:00Z'),
           result: 'ok',
         });
         await databaseBuilder.commit();
 
         // when
-        const foundAnswers = await activityAnswerRepository.findByActivity(123);
+        const lastAnswer = await activityAnswerRepository.findLastByActivity(123);
 
         // then
-        expect(foundAnswers[0].result).to.deep.equal(AnswerStatus.OK);
-        expect(foundAnswers[1].result).to.deep.equal(AnswerStatus.KO);
+        expect(lastAnswer.result).to.deep.equal(AnswerStatus.KO);
       });
     });
   });

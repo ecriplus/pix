@@ -89,11 +89,13 @@ describe('Integration | UseCase | update current activity', function () {
             activityId,
             challengeId: 'di_challenge_id',
             result,
+            createdAt: new Date('2020-01-01T10:00:00Z'),
           });
           databaseBuilder.factory.buildActivityAnswer({
             activityId,
             challengeId: 'di_next_challenge_id',
             result,
+            createdAt: new Date('2020-01-01T10:01:00Z'),
           });
 
           await databaseBuilder.commit();
@@ -289,11 +291,13 @@ describe('Integration | UseCase | update current activity', function () {
             activityId,
             challengeId: 'va_challenge_id',
             result: AnswerStatus.statuses.OK,
+            createdAt: new Date('2020-01-01T10:00:00Z'),
           });
           databaseBuilder.factory.buildActivityAnswer({
             activityId,
             challengeId: 'va_next_challenge_id',
             result: AnswerStatus.statuses.OK,
+            createdAt: new Date('2020-01-01T10:01:00Z'),
           });
 
           await databaseBuilder.commit();

@@ -14,22 +14,26 @@ function _adaptAnswerToDb(answer) {
 }
 
 function _toDomain(answerDTO) {
+  if (answerDTO === undefined) {
+    return undefined;
+  }
   return new ActivityAnswer({
     ...answerDTO,
     result: answerStatusDatabaseAdapter.fromSQLString(answerDTO.result),
   });
 }
 
-function _toDomainArray(answerDTOs) {
-  return _.map(answerDTOs, _toDomain);
-}
-
 const COLUMNS = Object.freeze(['id', 'challengeId', 'activityId', 'value', 'result', 'resultDetails']);
 
-const findByActivity = async function (activityId) {
+const findLastByActivity = async function (activityId) {
   const knexConn = DomainTransaction.getConnection();
-  const answerDTOs = await knexConn.select(COLUMNS).from('activity-answers').where({ activityId }).orderBy('createdAt');
-  return _toDomainArray(answerDTOs);
+  const [lastAnswer] = await knexConn
+    .select(COLUMNS)
+    .from('activity-answers')
+    .where({ activityId })
+    .orderBy('createdAt', 'desc')
+    .limit(1);
+  return _toDomain(lastAnswer);
 };
 
 const save = async function (answer) {
@@ -39,4 +43,4 @@ const save = async function (answer) {
   return _toDomain(savedAnswerDTO);
 };
 
-export { findByActivity, save };
+export { findLastByActivity, save };
