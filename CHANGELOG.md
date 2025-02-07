@@ -1,5 +1,31 @@
 # Pix Changelog
 
+## v5.38.0 (07/02/2025)
+
+
+### :rocket: Amélioration
+- [#11356](https://github.com/1024pix/pix/pull/11356) [FEATURE] Mesurer l'utilisation du bouton "Télécharger" des attestations (PIX-14954).
+- [#11340](https://github.com/1024pix/pix/pull/11340) [FEATURE] Accéder à un board metabase sur les PC depuis PixAdmin (PIX-16427).
+- [#11335](https://github.com/1024pix/pix/pull/11335) [FEATURE] Ajouter la colone isVisible dans la table oidc-providers (PIX-16077).
+- [#11343](https://github.com/1024pix/pix/pull/11343) [FEATURE] Utiliser PixCode dans la vérification des certificats sur Pix App (PIX-16429).
+- [#11294](https://github.com/1024pix/pix/pull/11294) [FEATURE] : Ajout videos module souris-2.
+- [#11341](https://github.com/1024pix/pix/pull/11341) [FEATURE] Gestion des doublons d'INE dans Parcoursup (PIX-16361).
+
+### :building_construction: Tech
+- [#11360](https://github.com/1024pix/pix/pull/11360) [TECH] Utiliser l'`AssessmentResult.status` dans les manipulations de CSV de certification (PIX-16458).
+- [#11362](https://github.com/1024pix/pix/pull/11362) [TECH] renome le filtre badge en acquiredThematicResults (Pix-16349).
+- [#11358](https://github.com/1024pix/pix/pull/11358) [TECH] Utiliser le status annulée de l'assessment-result pour l'accès aux certifications (PIX-16459).
+- [#11308](https://github.com/1024pix/pix/pull/11308) [TECH] Amélioration de l'utilisation de pgBoss.
+- [#11355](https://github.com/1024pix/pix/pull/11355) [TECH] :recycle: Utilise le statut d'`assessmentResult` pour l'éligibilité dans le bandeau pixApp et la réconciliation (PIX-16455).
+- [#11325](https://github.com/1024pix/pix/pull/11325) [TECH] :recycle: Utilise l'enum de `AssessmentResult.status` plutôt qu'une valeur en dur.
+
+### :arrow_up: Montée de version
+- [#11329](https://github.com/1024pix/pix/pull/11329) [BUMP] Update dependency @1024pix/pix-ui to ^54.6.0 (junior).
+- [#11333](https://github.com/1024pix/pix/pull/11333) [BUMP] Update dependency @1024pix/pix-ui to ^54.6.0 (mon-pix).
+
+### :coffee: Autre
+- [#11367](https://github.com/1024pix/pix/pull/11367) Revert "[TECH] renome le filtre badge en acquiredThematicResults (Pix-16349)".
+
 ## v5.37.0 (06/02/2025)
 
 
