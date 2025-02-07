@@ -1,6 +1,7 @@
 import { knex } from '../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
 
+const BADGE_TABLE = 'badges';
 const BADGE_ACQUISITIONS_TABLE = 'badge-acquisitions';
 
 const createOrUpdate = async function ({ badgeAcquisitionsToCreate = [] }) {
@@ -28,15 +29,23 @@ const getAcquiredBadgeIds = async function ({ badgeIds, userId }) {
   return knexConn(BADGE_ACQUISITIONS_TABLE).pluck('badgeId').where({ userId }).whereIn('badgeId', badgeIds);
 };
 
+/**
+ * @param {number[]} campaignParticipationsIds
+ */
+const getAcquiredBadgesForCampaignParticipations = (campaignParticipationsIds) =>
+  DomainTransaction.getConnection()(BADGE_ACQUISITIONS_TABLE)
+    .where(`${BADGE_ACQUISITIONS_TABLE}.campaignParticipationId`, 'IN', campaignParticipationsIds)
+    .orderBy(`${BADGE_ACQUISITIONS_TABLE}.id`);
+
 const getAcquiredBadgesByCampaignParticipations = async function ({ campaignParticipationsIds }) {
   const knexConn = DomainTransaction.getConnection();
-  const badges = await knexConn('badges')
-    .distinct('badges.id')
-    .select('badge-acquisitions.campaignParticipationId AS campaignParticipationId', 'badges.*')
-    .from('badges')
-    .join(BADGE_ACQUISITIONS_TABLE, 'badges.id', 'badge-acquisitions.badgeId')
-    .where('badge-acquisitions.campaignParticipationId', 'IN', campaignParticipationsIds)
-    .orderBy('badges.id');
+  const badges = await knexConn(BADGE_TABLE)
+    .distinct(`${BADGE_TABLE}.id`)
+    .select(`${BADGE_ACQUISITIONS_TABLE}.campaignParticipationId AS campaignParticipationId`, `${BADGE_TABLE}.*`)
+    .from(BADGE_TABLE)
+    .join(BADGE_ACQUISITIONS_TABLE, `${BADGE_TABLE}.id`, `${BADGE_ACQUISITIONS_TABLE}.badgeId`)
+    .where(`${BADGE_ACQUISITIONS_TABLE}.campaignParticipationId`, 'IN', campaignParticipationsIds)
+    .orderBy(`${BADGE_TABLE}.id`);
 
   const acquiredBadgesByCampaignParticipations = {};
   for (const badge of badges) {
@@ -49,4 +58,9 @@ const getAcquiredBadgesByCampaignParticipations = async function ({ campaignPart
   return acquiredBadgesByCampaignParticipations;
 };
 
-export { createOrUpdate, getAcquiredBadgeIds, getAcquiredBadgesByCampaignParticipations };
+export {
+  createOrUpdate,
+  getAcquiredBadgeIds,
+  getAcquiredBadgesByCampaignParticipations,
+  getAcquiredBadgesForCampaignParticipations,
+};
