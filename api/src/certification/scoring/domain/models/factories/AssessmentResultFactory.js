@@ -110,7 +110,6 @@ export class AssessmentResultFactory {
   static buildLackOfAnswersForTechnicalReason({
     pixScore,
     reproducibilityRate,
-    status,
     assessmentId,
     juryId,
     emitter,
@@ -130,7 +129,7 @@ export class AssessmentResultFactory {
       emitter,
       pixScore,
       reproducibilityRate,
-      status,
+      status: AssessmentResult.status.CANCELLED,
       assessmentId,
       juryId,
       competenceMarks,

@@ -172,7 +172,6 @@ function _createV3AssessmentResult({
     return AssessmentResultFactory.buildLackOfAnswersForTechnicalReason({
       pixScore: certificationAssessmentScore.nbPix,
       reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
-      status: certificationAssessmentScore.status,
       assessmentId: certificationAssessment.id,
       emitter,
       juryId,

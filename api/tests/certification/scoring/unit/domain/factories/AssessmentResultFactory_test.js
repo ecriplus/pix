@@ -197,4 +197,36 @@ describe('Certification | Scoring | Unit | Domain | Factories | AssessmentResult
       expect(actualAssessmentResult).to.deepEqualInstance(expectedAssessmentResult);
     });
   });
+
+  describe('#buildLackOfAnswersForTechnicalReason', function () {
+    it('should return a cancelled AssessmentResult', function () {
+      // when
+      const actualAssessmentResult = AssessmentResultFactory.buildLackOfAnswersForTechnicalReason({
+        emitter: CertificationResult.emitters.PIX_ALGO,
+        pixScore: 0,
+        reproducibilityRate: 49,
+        assessmentId: 123,
+        juryId: 456,
+      });
+
+      // then
+      const expectedAssessmentResult = domainBuilder.buildAssessmentResult({
+        status: AssessmentResult.status.CANCELLED,
+        pixScore: 0,
+        reproducibilityRate: 49,
+        assessmentId: 123,
+        juryId: 456,
+        emitter: CertificationResult.emitters.PIX_ALGO,
+        commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
+          commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_LACK_OF_ANSWERS_FOR_TECHNICAL_REASON,
+        }),
+        commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
+          commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_LACK_OF_ANSWERS_FOR_TECHNICAL_REASON,
+        }),
+      });
+      expectedAssessmentResult.id = undefined;
+      expectedAssessmentResult.createdAt = undefined;
+      expect(actualAssessmentResult).to.deepEqualInstance(expectedAssessmentResult);
+    });
+  });
 });
