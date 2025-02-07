@@ -71,6 +71,7 @@ const get = async function ({ certificationCourseId }) {
 export { get };
 
 function _selectJuryCertifications() {
+  // isCancelled will be removed
   return knex
     .select({
       certificationCourseId: 'certification-courses.id',
