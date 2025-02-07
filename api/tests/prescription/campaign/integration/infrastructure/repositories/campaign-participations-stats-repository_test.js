@@ -248,16 +248,20 @@ describe('Integration | Repository | Campaign Participations Stats', function ()
 
     it('returns the list of the campaign', async function () {
       databaseBuilder.factory.buildCampaignParticipation({ masteryRate: 0 });
-      databaseBuilder.factory.buildCampaignParticipation({ campaignId, masteryRate: 0, validatedSkillsCount: 0 });
+      const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+        masteryRate: 0,
+        validatedSkillsCount: 0,
+      }).id;
       await databaseBuilder.commit();
 
       const result = await campaignParticipationsStatsRepository.getAllParticipationsByCampaignId(campaignId);
 
-      expect(result).to.deep.equal([{ masteryRate: '0.00', validatedSkillsCount: 0 }]);
+      expect(result).to.deep.equal([{ masteryRate: '0.00', validatedSkillsCount: 0, id: campaignParticipationId }]);
     });
 
     it('returns the list of only isImproved=false participations', async function () {
-      databaseBuilder.factory.buildCampaignParticipation({
+      const { id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation({
         campaignId,
         masteryRate: 0,
         validatedSkillsCount: 0,
@@ -273,11 +277,11 @@ describe('Integration | Repository | Campaign Participations Stats', function ()
 
       const result = await campaignParticipationsStatsRepository.getAllParticipationsByCampaignId(campaignId);
 
-      expect(result).to.deep.equal([{ masteryRate: '0.00', validatedSkillsCount: 0 }]);
+      expect(result).to.deep.equal([{ masteryRate: '0.00', validatedSkillsCount: 0, id: campaignParticipationId }]);
     });
 
     it('returns the list of not deleted participations', async function () {
-      databaseBuilder.factory.buildCampaignParticipation({
+      const { id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation({
         campaignId,
         masteryRate: 0,
         deletedAt: null,
@@ -293,7 +297,7 @@ describe('Integration | Repository | Campaign Participations Stats', function ()
 
       const result = await campaignParticipationsStatsRepository.getAllParticipationsByCampaignId(campaignId);
 
-      expect(result).to.deep.equal([{ masteryRate: '0.00', validatedSkillsCount: 0 }]);
+      expect(result).to.deep.equal([{ masteryRate: '0.00', validatedSkillsCount: 0, id: campaignParticipationId }]);
     });
   });
 
