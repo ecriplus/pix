@@ -5,7 +5,6 @@ import * as campaignParticipationRepository from '../../../profile/infrastructur
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
-import * as questRepository from '../../infrastructure/repositories/quest-repository.js';
 
 const path = dirname(fileURLToPath(import.meta.url));
 
@@ -17,7 +16,7 @@ const dependencies = {
   eligibilityRepository: repositories.eligibilityRepository,
   rewardRepository: repositories.rewardRepository,
   successRepository: repositories.successRepository,
-  questRepository,
+  questRepository: repositories.questRepository,
   campaignParticipationRepository,
 };
 

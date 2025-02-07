@@ -1,3 +1,5 @@
+import chunk from 'lodash/chunk.js';
+
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { Quest } from '../../domain/models/Quest.js';
 
@@ -11,4 +13,17 @@ const findAll = async () => {
   return toDomain(quests);
 };
 
-export { findAll };
+const saveInBatch = async ({ quests }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  const chunks = chunk(quests, 10);
+
+  for (const chunk of chunks) {
+    await knexConn('quests')
+      .insert(chunk.map((c) => ({ ...c, updatedAt: new Date() })))
+      .onConflict('id')
+      .merge();
+  }
+};
+
+export { findAll, saveInBatch };

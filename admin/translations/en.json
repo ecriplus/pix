@@ -181,6 +181,14 @@
         },
         "title": "Mass modification of organisations",
         "upload-button": "Import CSV file"
+      },
+      "upsert-quests-in-batch": {
+        "description": "Beware: there are no validation when importing a CSV file. Check with a spécialiste in the doubt ;)",
+        "notifications": {
+          "success": "Quests have been imported."
+        },
+        "title": "Create and update quests",
+        "upload-button": "Import CSV file"
       }
     },
     "autonomous-courses": {

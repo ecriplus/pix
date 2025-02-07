@@ -1,8 +1,12 @@
+import iconv from 'iconv-lite';
+
 import {
   createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  insertUserWithRoleSuperAdmin,
+  knex,
 } from '../../../test-helper.js';
 
 describe('Quest | Acceptance | Application | Quest Route ', function () {
@@ -44,6 +48,31 @@ describe('Quest | Acceptance | Application | Quest Route ', function () {
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result.data).to.have.lengthOf(1);
+    });
+  });
+
+  describe('POST /api/admin/quests', function () {
+    it('responds with a 204 - no content', async function () {
+      // given
+      const admin = await insertUserWithRoleSuperAdmin();
+      await databaseBuilder.commit();
+      const input = `Quest ID;Json configuration for quest
+        ;{"rewardType":"coucou","rewardId":null,"eligibilityRequirements":{"eligibility":"eligibility"},"successRequirements":{"success":"success"}}`;
+
+      const options = {
+        method: 'POST',
+        headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+        url: '/api/admin/quests',
+        payload: iconv.encode(input, 'UTF-8'),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      const questsInDB = await knex('quests').select('*');
+      expect(response.statusCode).to.equal(204);
+      expect(questsInDB.length).to.equal(1);
     });
   });
 });

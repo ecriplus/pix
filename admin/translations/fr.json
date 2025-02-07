@@ -189,6 +189,14 @@
         },
         "title": "Modification des organisations en masse",
         "upload-button": "Importer un fichier CSV"
+      },
+      "upsert-quests-in-batch": {
+        "description": "Attention: aucune validation n'est effectuée lors de l'import. Consultez un spécialiste dans le doute ;)",
+        "notifications": {
+          "success": "Les quêtes ont bien été importées."
+        },
+        "title": "Création et modification de quêtes",
+        "upload-button": "Importer un fichier CSV"
       }
     },
     "autonomous-courses": {

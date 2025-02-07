@@ -13,8 +13,16 @@ const getQuestResults = async function (request, h, dependencies = { questResult
   return h.response(serializedQuestResults);
 };
 
+const createOrUpdateQuestsInBatch = async function (request, h) {
+  await usecases.createOrUpdateQuestsInBatch({
+    filePath: request.payload.path,
+  });
+  return h.response().code(204);
+};
+
 const questController = {
   getQuestResults,
+  createOrUpdateQuestsInBatch,
 };
 
 export { questController };
