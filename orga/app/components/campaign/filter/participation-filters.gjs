@@ -147,8 +147,8 @@ export default class ParticipationFilters extends Component {
   }
 
   @action
-  onSelectBadge(acquiredThematicResults) {
-    this.args.onFilter('acquiredThematicResults', acquiredThematicResults);
+  onSelectBadge(badges) {
+    this.args.onFilter('badges', badges);
   }
 
   @action

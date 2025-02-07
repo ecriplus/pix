@@ -70,7 +70,7 @@ async function _createTargetProfileWithBadgesStages(databaseBuilder) {
     cappedTubesDTO,
     badgeId: BADGES_TUBES_CAMP_ID,
     altMessage: '1 RT double critère Campaign & Tubes',
-    imageUrl: 'https://images.pix.fr/badges/Badge_OLYMPIX.svg',
+    imageUrl: 'some_image.svg',
     message: '1 RT double critère Campaign & Tubes',
     title: '1 RT double critère Campaign & Tubes',
     key: `SOME_KEY_FOR_RT_${BADGES_TUBES_CAMP_ID}`,
@@ -84,7 +84,7 @@ async function _createTargetProfileWithBadgesStages(databaseBuilder) {
     cappedTubesDTO,
     badgeId: BADGES_CAMP_ID,
     altMessage: '1 RT simple critère Campaign',
-    imageUrl: 'https://images.pix.fr/badges/abcpix/Jevalue_des_informations.svg',
+    imageUrl: 'some_other_image.svg',
     message: '1 RT simple critère Campaign',
     title: '1 RT simple critère Campaign',
     key: `SOME_KEY_FOR_RT_${BADGES_CAMP_ID}`,
@@ -92,7 +92,6 @@ async function _createTargetProfileWithBadgesStages(databaseBuilder) {
     isAlwaysVisible: true,
     configBadge,
   });
-
   await createStages({
     databaseBuilder,
     targetProfileId,

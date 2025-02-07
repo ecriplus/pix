@@ -769,7 +769,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
       });
     });
 
-    context('when there is a filter on acquired thematic results', function () {
+    context('when there is a filter on badges', function () {
       let badge1;
       let badge2;
       let user1;
@@ -802,7 +802,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
         databaseBuilder.factory.learningContent.build(learningContentObjects);
         await databaseBuilder.commit();
       });
-      it('returns participants which have one thematic result', async function () {
+      it('returns participants which have one badge', async function () {
         const campaignParticipation1 = databaseBuilder.factory.buildCampaignParticipation({
           campaignId: campaign.id,
           userId: user1.id,
@@ -837,7 +837,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
         // when
         const { participations } = await campaignAssessmentParticipationResultListRepository.findPaginatedByCampaignId({
           campaignId: campaign.id,
-          filters: { acquiredThematicResults: [badge1.id] },
+          filters: { badges: [badge1.id] },
         });
 
         const participantExternalIds = participations.map((result) => result.participantExternalId);
@@ -846,7 +846,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
         expect(participantExternalIds).to.exactlyContain(['The good']);
       });
 
-      it('returns participants which have several thematic results', async function () {
+      it('returns participants which have several badges', async function () {
         const campaignParticipation1 = databaseBuilder.factory.buildCampaignParticipation({
           campaignId: campaign.id,
           userId: user1.id,
@@ -879,7 +879,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
         // when
         const { participations } = await campaignAssessmentParticipationResultListRepository.findPaginatedByCampaignId({
           campaignId: campaign.id,
-          filters: { acquiredThematicResults: [badge1.id, badge2.id] },
+          filters: { badges: [badge1.id, badge2.id] },
         });
 
         const participantExternalIds = participations.map((result) => result.participantExternalId);

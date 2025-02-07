@@ -19,7 +19,7 @@ const register = async function (server) {
             filter: Joi.object({
               divisions: Joi.array().items(Joi.string()),
               groups: Joi.array().items(Joi.string()),
-              acquiredThematicResults: [Joi.number().integer(), Joi.array().items(Joi.number().integer())],
+              badges: [Joi.number().integer(), Joi.array().items(Joi.number().integer())],
               stages: [Joi.number().integer(), Joi.array().items(Joi.number().integer())],
               search: Joi.string().empty(''),
             }).default({}),
