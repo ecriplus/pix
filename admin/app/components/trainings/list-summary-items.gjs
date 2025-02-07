@@ -9,7 +9,7 @@ import StateTag from './state-tag';
 
 export default class TrainingListSummaryItems extends Component {
   searchedId = this.args.id;
-  searchedTitle = this.args.title;
+  searchedInternalTitle = this.args.internalTitle;
 
   <template>
     <div class="content-text content-text--small">
@@ -46,8 +46,8 @@ export default class TrainingListSummaryItems extends Component {
                 <td>
                   <PixInput
                     type="text"
-                    value={{this.searchedTitle}}
-                    oninput={{fn @triggerFiltering "title"}}
+                    value={{this.searchedInternalTitle}}
+                    oninput={{fn @triggerFiltering "internalTitle"}}
                     aria-label="Filtrer les contenus formatifs par un titre"
                   />
                 </td>

@@ -29,7 +29,7 @@ module('Unit | Route | authenticated/trainings/list', function (hooks) {
         // when
         await route.model(params);
         expectedQueryArgs.filter = {
-          title: '',
+          internalTitle: '',
           id: '',
         };
 
@@ -42,10 +42,10 @@ module('Unit | Route | authenticated/trainings/list', function (hooks) {
     module('when queryParams filters are truthy', function () {
       test('it should call store.query with filters containing trimmed values', async function (assert) {
         // given
-        params.title = 'someTitle';
+        params.internalTitle = 'someTitle';
         params.id = 'someId';
         expectedQueryArgs.filter = {
-          title: 'someTitle',
+          internalTitle: 'someTitle',
           id: 'someId',
         };
 

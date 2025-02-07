@@ -24,17 +24,17 @@ module('Unit | Controller | authenticated/trainings/list', function (hooks) {
       });
     });
 
-    module('updating title', function () {
-      test('it should update controller title field', async function (assert) {
+    module('updating internalTitle', function () {
+      test('it should update controller internalTitle field', async function (assert) {
         // given
-        controller.title = 'someTitle';
+        controller.internalTitle = 'someTitle';
         const expectedValue = 'someOtherTitle';
 
         // when
-        await controller.updateFilters({ title: expectedValue });
+        await controller.updateFilters({ internalTitle: expectedValue });
 
         // then
-        assert.strictEqual(controller.title, expectedValue);
+        assert.strictEqual(controller.internalTitle, expectedValue);
       });
     });
   });

@@ -11,7 +11,7 @@ export default class ListRoute extends Route {
     pageNumber: { refreshModel: true },
     pageSize: { refreshModel: true },
     id: { refreshModel: true },
-    title: { refreshModel: true },
+    internalTitle: { refreshModel: true },
   };
 
   beforeModel() {
@@ -25,7 +25,7 @@ export default class ListRoute extends Route {
       trainingSummaries = await this.store.query('training-summary', {
         filter: {
           id: params.id ? params.id.trim() : '',
-          title: params.title ? params.title.trim() : '',
+          internalTitle: params.internalTitle ? params.internalTitle.trim() : '',
         },
         page: {
           number: params.pageNumber,
@@ -46,7 +46,7 @@ export default class ListRoute extends Route {
       controller.pageNumber = 1;
       controller.pageSize = 10;
       controller.id = null;
-      controller.title = null;
+      controller.internalTitle = null;
     }
   }
 }

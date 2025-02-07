@@ -80,9 +80,9 @@ module('Acceptance | Trainings | List', function (hooks) {
           server.create('training-summary', { id: 2, internalTitle: 'Deuxième' });
         });
 
-        test('it should display the current filter when trainings are filtered by title', async function (assert) {
+        test('it should display the current filter when trainings are filtered by internal title', async function (assert) {
           // when
-          const screen = await visit('/trainings/list?title=Premier');
+          const screen = await visit('/trainings/list?internalTitle=Premier');
 
           // then
           assert
