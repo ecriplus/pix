@@ -138,10 +138,12 @@ import * as assessmentResultRepository from '../../../src/shared/infrastructure/
 import * as challengeRepository from '../../../src/shared/infrastructure/repositories/challenge-repository.js';
 import * as competenceRepository from '../../../src/shared/infrastructure/repositories/competence-repository.js';
 import * as courseRepository from '../../../src/shared/infrastructure/repositories/course-repository.js';
+import * as frameworkRepository from '../../../src/shared/infrastructure/repositories/framework-repository.js';
 import * as knowledgeElementRepository from '../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as organizationLearnerRepository from '../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationRepository from '../../../src/shared/infrastructure/repositories/organization-repository.js';
 import * as skillRepository from '../../../src/shared/infrastructure/repositories/skill-repository.js';
+import * as thematicRepository from '../../../src/shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../../../src/shared/infrastructure/repositories/tube-repository.js';
 import * as userLoginRepository from '../../../src/shared/infrastructure/repositories/user-login-repository.js';
 // Not used in lib
@@ -167,7 +169,6 @@ import * as badgeAcquisitionRepository from '../../infrastructure/repositories/b
 import * as badgeForCalculationRepository from '../../infrastructure/repositories/badge-for-calculation-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as flashAssessmentResultRepository from '../../infrastructure/repositories/flash-assessment-result-repository.js';
-import * as frameworkRepository from '../../infrastructure/repositories/framework-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import { certificationCompletedJobRepository } from '../../infrastructure/repositories/jobs/certification-completed-job-repository.js';
 // Not used in lib
@@ -176,7 +177,6 @@ import * as organizationMemberIdentityRepository from '../../infrastructure/repo
 import * as targetProfileShareRepository from '../../infrastructure/repositories/target-profile-share-repository.js';
 // Not used in lib
 import * as targetProfileTrainingRepository from '../../infrastructure/repositories/target-profile-training-repository.js';
-import * as thematicRepository from '../../infrastructure/repositories/thematic-repository.js';
 // Not used in lib
 import * as stageCollectionRepository from '../../infrastructure/repositories/user-campaign-results/stage-collection-repository.js';
 import * as learningContentConversionService from '../services/learning-content/learning-content-conversion-service.js';

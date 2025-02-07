@@ -1,10 +1,10 @@
 import _ from 'lodash';
 
-import * as thematicRepository from '../../../../lib/infrastructure/repositories/thematic-repository.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import * as areaRepository from '../../../shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../shared/infrastructure/repositories/competence-repository.js';
+import * as thematicRepository from '../../../shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../../../shared/infrastructure/repositories/tube-repository.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { TrainingTrigger } from '../../domain/models/TrainingTrigger.js';

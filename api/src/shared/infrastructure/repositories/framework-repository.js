@@ -1,7 +1,7 @@
-import { NotFoundError } from '../../../src/shared/domain/errors.js';
-import { Framework } from '../../../src/shared/domain/models/index.js';
-import { LearningContentRepository } from '../../../src/shared/infrastructure/repositories/learning-content-repository.js';
-import { child, SCOPES } from '../../../src/shared/infrastructure/utils/logger.js';
+import { NotFoundError } from '../../domain/errors.js';
+import { Framework } from '../../domain/models/index.js';
+import { child, SCOPES } from '../utils/logger.js';
+import { LearningContentRepository } from './learning-content-repository.js';
 
 const TABLE_NAME = 'learningcontent.frameworks';
 
