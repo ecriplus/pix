@@ -1,4 +1,7 @@
+import Joi from 'joi';
+
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { certificationCenterMembershipAdminController } from './certification-center-membership.admin.controller.js';
 
 export const certificationCenterMembershipAdminRoutes = [
@@ -46,6 +49,39 @@ export const certificationCenterMembershipAdminRoutes = [
       notes: [
         "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès**\n" +
           '- Désactivation d‘un lien entre un utilisateur et un centre de certification\n',
+      ],
+      tags: ['api', 'certification-center-membership'],
+    },
+  },
+  {
+    method: 'POST',
+    path: '/api/admin/certification-centers/{certificationCenterId}/certification-center-memberships',
+    config: {
+      pre: [
+        {
+          method: (request, h) =>
+            securityPreHandlers.hasAtLeastOneAccessOf([
+              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+              securityPreHandlers.checkAdminMemberHasRoleCertif,
+              securityPreHandlers.checkAdminMemberHasRoleSupport,
+              securityPreHandlers.checkAdminMemberHasRoleMetier,
+            ])(request, h),
+          assign: 'hasAuthorizationToAccessAdminScope',
+        },
+      ],
+      validate: {
+        params: Joi.object({
+          certificationCenterId: identifiersType.certificationCenterId,
+        }),
+        payload: Joi.object().required().keys({
+          email: Joi.string().email().required(),
+        }),
+      },
+      handler: certificationCenterMembershipAdminController.createCertificationCenterMembershipByEmail,
+      notes: [
+        "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès**\n" +
+          "- Création d‘un nouveau membre d'un centre de certification,\n" +
+          "à partir de l'adresse e-mail d'un utilisateur.",
       ],
       tags: ['api', 'certification-center-membership'],
     },

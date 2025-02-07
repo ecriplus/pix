@@ -1,9 +1,9 @@
-import { createCertificationCenterMembershipByEmail } from '../../../../lib/domain/usecases/create-certification-center-membership-by-email.js';
-import * as userRepository from '../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
-import { AlreadyExistingEntityError, UserNotFoundError } from '../../../../src/shared/domain/errors.js';
-import { CertificationCenterMembership } from '../../../../src/shared/domain/models/CertificationCenterMembership.js';
-import { certificationCenterMembershipRepository } from '../../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../test-helper.js';
+import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
+import { AlreadyExistingEntityError, UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { CertificationCenterMembership } from '../../../../../src/shared/domain/models/CertificationCenterMembership.js';
+import { createCertificationCenterMembershipByEmail } from '../../../../../src/team/domain/usecases/create-certification-center-membership-by-email.usecase.js';
+import { certificationCenterMembershipRepository } from '../../../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | UseCases | create-certification-center-membership-by-email', function () {
   let certificationCenterId;

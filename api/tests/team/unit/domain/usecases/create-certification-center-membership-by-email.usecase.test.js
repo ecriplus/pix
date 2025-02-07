@@ -1,7 +1,7 @@
-import { createCertificationCenterMembershipByEmail } from '../../../../lib/domain/usecases/create-certification-center-membership-by-email.js';
-import { AlreadyExistingEntityError } from '../../../../src/shared/domain/errors.js';
-import { UserNotFoundError } from '../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../test-helper.js';
+import { AlreadyExistingEntityError } from '../../../../../src/shared/domain/errors.js';
+import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { createCertificationCenterMembershipByEmail } from '../../../../../src/team/domain/usecases/create-certification-center-membership-by-email.usecase.js';
+import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | create-certification-center-membership-by-email', function () {
   const certificationCenterId = 1;
