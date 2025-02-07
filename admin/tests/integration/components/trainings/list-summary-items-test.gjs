@@ -1,10 +1,11 @@
 import { render } from '@1024pix/ember-testing-library';
-import { setupRenderingTest } from 'ember-qunit';
 import ListSummaryItems from 'pix-admin/components/trainings/list-summary-items';
 import { module, test } from 'qunit';
 
+import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+
 module('Integration | Component | list-summary-items', function (hooks) {
-  setupRenderingTest(hooks);
+  setupIntlRenderingTest(hooks);
 
   const noop = () => {};
 

@@ -3,6 +3,7 @@ import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import { fn } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 
 import StateTag from './state-tag';
 
@@ -14,15 +15,23 @@ export default class TrainingListSummaryItems extends Component {
     <div class="content-text content-text--small">
       <div class="table-admin">
         <table>
-          <caption class="screen-reader-only">Liste des contenus formatifs</caption>
+          <caption class="screen-reader-only">{{t "pages.trainings.training.list.caption"}}</caption>
           <thead>
             <tr>
-              <th class="table__column table__column--id" id="training-id" scope="col">ID</th>
-              <th id="training-internal-title" scope="col">Titre à usage interne</th>
-              <th id="training-prerequisite-threshold" scope="col" class="col-status">Prérequis</th>
-              <th id="training-goal-threshold" scope="col" class="col-status">Objectif à ne pas dépasser</th>
-              <th id="training-target-profile-count" scope="col" class="col-status">Profils cibles associés</th>
-              <th id="training-state" scope="col" class="col-status">État</th>
+              <th class="table__column table__column--id" id="training-id" scope="col">{{t
+                  "pages.trainings.training.list.id"
+                }}</th>
+              <th id="training-internal-title" scope="col">{{t "pages.trainings.training.list.internalTitle"}}</th>
+              <th id="training-prerequisite-threshold" scope="col" class="col-status">{{t
+                  "pages.trainings.training.list.prerequisite"
+                }}</th>
+              <th id="training-goal-threshold" scope="col" class="col-status">{{t
+                  "pages.trainings.training.list.goalThreshold"
+                }}</th>
+              <th id="training-target-profile-count" scope="col" class="col-status">{{t
+                  "pages.trainings.training.list.targetProfileCount"
+                }}</th>
+              <th id="training-state" scope="col" class="col-status">{{t "pages.trainings.training.list.status"}}</th>
             </tr>
             {{#if @triggerFiltering}}
               <tr>
@@ -79,7 +88,7 @@ export default class TrainingListSummaryItems extends Component {
         </table>
 
         {{#unless @summaries}}
-          <div class="table__empty">Aucun résultat</div>
+          <div class="table__empty">{{t "pages.trainings.training.list.noResult"}}</div>
         {{/unless}}
       </div>
     </div>
