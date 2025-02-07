@@ -477,7 +477,7 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
     it('should assign 0 pixScore and level of 0 to user competence when not assessed', async function () {
       // when
       const actualPlacementProfiles = await placementProfileService.getPlacementProfilesWithSnapshotting({
-        userIdsAndDates: [{ userId, sharedAt: new Date() }],
+        participations: [{ campaignParticipationId: campaignParticipation.id }],
         competences,
       });
 
@@ -530,13 +530,14 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
           userId: userId,
           snappedAt: sharedAt,
           snapshot: JSON.stringify([ke]),
+          campaignParticipationId: campaignParticipation.id,
         });
 
         await databaseBuilder.commit();
 
         // when
         const actualPlacementProfiles = await placementProfileService.getPlacementProfilesWithSnapshotting({
-          userIdsAndDates: [{ userId, sharedAt }],
+          participations: [{ campaignParticipationId: campaignParticipation.id }],
           competences,
         });
 
@@ -580,12 +581,13 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
           userId: userId,
           snappedAt: sharedAt,
           snapshot: JSON.stringify([ke1, ke2]),
+          campaignParticipationId: campaignParticipation.id,
         });
         await databaseBuilder.commit();
 
         // when
         const actualPlacementProfiles = await placementProfileService.getPlacementProfilesWithSnapshotting({
-          userIdsAndDates: [{ userId, sharedAt }],
+          participations: [{ campaignParticipationId: campaignParticipation.id }],
           competences,
         });
 
@@ -595,7 +597,6 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
 
       context('when we dont want to limit pix score', function () {
         it('should not limit pixScore and level to the max reachable for user competence based on knowledge elements', async function () {
-          const sharedAt = new Date('2022-01-05');
           const ke = databaseBuilder.factory.buildKnowledgeElement({
             competenceId: 'competenceRecordIdOne',
             earnedPix: 64,
@@ -605,16 +606,15 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
           });
 
           databaseBuilder.factory.buildKnowledgeElementSnapshot({
-            userId: userId,
-            snappedAt: sharedAt,
             snapshot: JSON.stringify([ke]),
+            campaignParticipationId: campaignParticipation.id,
           });
 
           await databaseBuilder.commit();
 
           // when
           const actualPlacementProfiles = await placementProfileService.getPlacementProfilesWithSnapshotting({
-            userIdsAndDates: [{ userId, sharedAt }],
+            participations: [{ campaignParticipationId: campaignParticipation.id }],
             competences,
             allowExcessPixAndLevels: true,
           });
@@ -630,7 +630,6 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
 
       context('when we want to limit pix score', function () {
         it('should limit pixScore to 40 and level to 5', async function () {
-          const sharedAt = new Date('2022-01-05');
           const ke = databaseBuilder.factory.buildKnowledgeElement({
             competenceId: 'competenceRecordIdOne',
             earnedPix: 64,
@@ -640,8 +639,7 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
           });
 
           databaseBuilder.factory.buildKnowledgeElementSnapshot({
-            userId: userId,
-            snappedAt: sharedAt,
+            campaignParticipationId: campaignParticipation.id,
             snapshot: JSON.stringify([ke]),
           });
 
@@ -649,7 +647,7 @@ describe('Shared | Integration | Domain | Services | Placement Profile Service',
 
           // when
           const actualPlacementProfiles = await placementProfileService.getPlacementProfilesWithSnapshotting({
-            userIdsAndDates: [{ userId, sharedAt }],
+            participations: [{ campaignParticipationId: campaignParticipation.id }],
             competences,
             allowExcessPixAndLevels: false,
           });

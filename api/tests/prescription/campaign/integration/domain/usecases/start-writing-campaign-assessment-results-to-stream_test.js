@@ -202,6 +202,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           userId: participant.id,
           snappedAt: sharedAt,
           snapshot: JSON.stringify([ke1, ke2, ke3]),
+          campaignParticipationId: campaignParticipation.id,
         });
 
         ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
@@ -341,6 +342,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           userId: participant.id,
           snappedAt: sharedAt,
           snapshot: JSON.stringify([ke1, ke2, ke3]),
+          campaignParticipationId: campaignParticipation.id,
         });
 
         ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
@@ -450,6 +452,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           userId: participant.id,
           snappedAt: sharedAt,
           snapshot: JSON.stringify([ke1, ke2, ke3]),
+          campaignParticipationId: campaignParticipation.id,
         });
 
         ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {
@@ -613,7 +616,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
     });
 
     context('multiple participations', function () {
-      let secondParticipationDateCreatedAt, secondParticipationCreatedFormated;
+      let secondCampaignParticipation, secondParticipationDateCreatedAt, secondParticipationCreatedFormated;
       beforeEach(async function () {
         secondParticipationDateCreatedAt = new Date('2019-03-05T11:23:00Z');
         secondParticipationCreatedFormated = '05/03/2019 12:23';
@@ -645,7 +648,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
         });
 
         // second participation
-        campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+        secondCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
           status: CampaignParticipationStatuses.STARTED,
           campaignId: campaign.id,
           organizationLearnerId: organizationLearner.id,
@@ -655,7 +658,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
         });
 
         databaseBuilder.factory.buildAssessment({
-          campaignParticipationId: campaignParticipation.id,
+          campaignParticipationId: secondCampaignParticipation.id,
           userId: participant.id,
           state: Assessment.states.STARTED,
           type: Assessment.types.CAMPAIGN,
@@ -695,6 +698,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
           userId: participant.id,
           snappedAt: sharedAt,
           snapshot: JSON.stringify([ke1, ke2, ke3]),
+          campaignParticipationId: campaignParticipation.id,
         });
 
         ['recSkillWeb1', 'recSkillWeb2', 'recSkillWeb3'].forEach((skillId) => {

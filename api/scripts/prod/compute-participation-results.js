@@ -102,32 +102,32 @@ async function _getCampaignParticipationChunks(campaign) {
 }
 
 async function _computeResults(skillIds, competences, campaignParticipations) {
-  const knowledgeElementByUser = await _getKnowledgeElementsByUser(campaignParticipations);
+  const knowledgeElementByCampaignParticipationId =
+    await _getKnowledgeElementsByCampaignParticipation(campaignParticipations);
 
-  const userIdsAndDates = campaignParticipations.map(({ userId, sharedAt }) => {
-    return { userId, sharedAt };
+  const participations = campaignParticipations.map(({ userId, sharedAt, id }) => {
+    return { userId, sharedAt, campaignParticipationId: id };
   });
   const placementProfiles = await placementProfileService.getPlacementProfilesWithSnapshotting({
-    userIdsAndDates,
+    participations,
     competences,
     allowExcessPixAndLevels: false,
   });
   return campaignParticipations.map(({ userId, id }) => {
     return new ParticipantResultsShared({
       campaignParticipationId: id,
-      knowledgeElements: knowledgeElementByUser[userId],
+      knowledgeElements: knowledgeElementByCampaignParticipationId[id],
       skillIds,
       placementProfile: placementProfiles.find((placementProfile) => placementProfile.userId === userId),
     });
   });
 }
 
-async function _getKnowledgeElementsByUser(campaignParticipations) {
-  const sharingDateByUserId = {};
-  campaignParticipations.forEach(({ userId, sharedAt }) => (sharingDateByUserId[userId] = sharedAt));
-  const knowledgeElementByUser =
-    await knowlegeElementSnapshotRepository.findByUserIdsAndSnappedAtDates(sharingDateByUserId);
-  return knowledgeElementByUser;
+async function _getKnowledgeElementsByCampaignParticipation(campaignParticipations) {
+  const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
+  const knowledgeElementByCampaingParticipationId =
+    await knowlegeElementSnapshotRepository.findByCampaignParticipationIds(campaignParticipationIds);
+  return knowledgeElementByCampaingParticipationId;
 }
 
 function _toSQLValues(participantsResults) {
