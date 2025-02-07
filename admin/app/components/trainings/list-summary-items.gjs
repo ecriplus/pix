@@ -18,7 +18,7 @@ export default class TrainingListSummaryItems extends Component {
           <thead>
             <tr>
               <th class="table__column table__column--id" id="training-id" scope="col">ID</th>
-              <th id="training-titre" scope="col">Titre</th>
+              <th id="training-internal-title" scope="col">Titre à usage interne</th>
               <th id="training-prerequisite-threshold" scope="col" class="col-status">Prérequis</th>
               <th id="training-goal-threshold" scope="col" class="col-status">Objectif à ne pas dépasser</th>
               <th id="training-target-profile-count" scope="col" class="col-status">Profils cibles associés</th>
@@ -55,9 +55,9 @@ export default class TrainingListSummaryItems extends Component {
               {{#each @summaries as |summary|}}
                 <tr aria-label="Contenu formatif">
                   <td headers="training-id" class="table__column table__column--id">{{summary.id}}</td>
-                  <td headers="training-title">
+                  <td headers="training-internal-title">
                     <LinkTo @route="authenticated.trainings.training" @model={{summary.id}}>
-                      {{summary.title}}
+                      {{summary.internalTitle}}
                     </LinkTo>
                   </td>
                   <td headers="training-prerequisite-threshold">

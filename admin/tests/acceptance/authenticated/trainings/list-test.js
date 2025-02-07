@@ -46,14 +46,14 @@ module('Acceptance | Trainings | List', function (hooks) {
         server.createList('training-summary', 10);
         server.create('training-summary', {
           id: 11,
-          title: 'Formation 11',
+          internalTitle: 'Formation 11',
           prerequisiteThreshold: 33,
           goalThreshold: 88,
           targetProfilesCount: 40,
         });
         server.create('training-summary', {
           id: 12,
-          title: 'Formation 12',
+          internalTitle: 'Formation 12',
           prerequisiteThreshold: 34,
           goalThreshold: 89,
           targetProfilesCount: 41,
@@ -76,8 +76,8 @@ module('Acceptance | Trainings | List', function (hooks) {
 
       module('when filters are used', function (hooks) {
         hooks.beforeEach(async () => {
-          server.create('training-summary', { id: 1, title: 'Premier' });
-          server.create('training-summary', { id: 2, title: 'Deuxième' });
+          server.create('training-summary', { id: 1, internalTitle: 'Premier' });
+          server.create('training-summary', { id: 2, internalTitle: 'Deuxième' });
         });
 
         test('it should display the current filter when trainings are filtered by title', async function (assert) {
@@ -114,8 +114,8 @@ module('Acceptance | Trainings | List', function (hooks) {
 
       test('it should redirect to training details page when clicking on training name in the list', async function (assert) {
         // given
-        server.create('training-summary', { id: 1, title: 'Formation 1' });
-        server.create('training', { id: 1, title: 'Formation 1' });
+        server.create('training-summary', { id: 1, internalTitle: 'Formation 1' });
+        server.create('training', { id: 1, internalTitle: 'Formation 1' });
         const screen = await visit('/trainings/list');
 
         // when
