@@ -82,7 +82,7 @@ it('should add a row in the table "organizations"', async () => {
 
 ### Unitaire
 Exemple:
-* use-case [ici](https://github.com/1024pix/pix/blob/dev/api/tests/unit/domain/usecases/update-expired-password_test.js)
+* use-case [ici](https://github.com/1024pix/pix/blob/dev/api/tests/unit/domain/usecases/update-expired-password.usecase.test.js)
 * composant avec un service, non stubbé [ici](https://github.com/1024pix/pix/blob/1a582f93335925e122a6ef83b06644ea44477aa0/api/tests/unit/domain/models/CampaignTubeRecommendation_test.js)
 
 ### Intégration

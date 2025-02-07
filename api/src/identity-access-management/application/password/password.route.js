@@ -1,6 +1,10 @@
 import Joi from 'joi';
+import XRegExp from 'xregexp';
 
+import { config } from '../../../shared/config.js';
 import { passwordController } from './password.controller.js';
+
+const { passwordValidationPattern } = config.account;
 
 export const passwordRoutes = [
   {
@@ -37,6 +41,27 @@ export const passwordRoutes = [
         'Route publique',
         'Cette route permet la redirection vers le formulaire de reset de mot de passe si la demande est bien dans la liste',
       ],
+      tags: ['api', 'passwords'],
+    },
+  },
+  {
+    method: 'POST',
+    path: '/api/expired-password-updates',
+    config: {
+      auth: false,
+      handler: (request, h) => passwordController.updateExpiredPassword(request, h),
+      validate: {
+        payload: Joi.object({
+          data: {
+            attributes: {
+              'password-reset-token': Joi.string().required(),
+              'new-password': Joi.string().pattern(XRegExp(passwordValidationPattern)).required(),
+            },
+            type: Joi.string(),
+          },
+        }),
+      },
+      notes: ['Route publique', 'Cette route permet de mettre à jour un mot de passe expiré'],
       tags: ['api', 'passwords'],
     },
   },
