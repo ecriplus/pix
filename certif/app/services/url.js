@@ -52,7 +52,7 @@ export default class Url extends Service {
 
   get joiningIssueSheetUrl() {
     if (this.#isFrenchSpoken()) {
-      return 'https://cloud.pix.fr/s/zf3fGimWwPQCeWF/download/Probl%C3%A8mes%20d%27acc%C3%A8s%20en%20session.pdf';
+      return 'https://cloud.pix.fr/s/b8BFXX94Ys2WGxM/download/Probl%C3%A8mes%20d%27acc%C3%A8s%20en%20session.pdf';
     }
 
     return 'https://cloud.pix.fr/s/JmBn2q5rpzgrjxN/download';
