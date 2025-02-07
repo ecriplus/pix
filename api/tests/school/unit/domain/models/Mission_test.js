@@ -36,7 +36,7 @@ describe('Unit | Domain | School', function () {
       });
     });
 
-    it('should call challengeRepository#get with challenge id of accurate number in activity', function () {
+    it('should return challenge id of accurate index in activity', function () {
       const mission = domainBuilder.buildMission({
         content: {
           steps: [
@@ -208,6 +208,30 @@ describe('Unit | Domain | School', function () {
 
         expect(challengeIds).to.deep.equal(expectedChallengeIds);
       });
+    });
+  });
+
+  describe('#getChallengeIndex', function () {
+    it('should return the index of given challenge in given activity', function () {
+      const mission = domainBuilder.buildMission({
+        content: {
+          steps: [
+            {
+              tutorialChallenges: [
+                ['tutorial-challenge-id-1'],
+                ['tutorial-challenge-id-2'],
+                ['tutorial-challenge-id-3'],
+              ],
+            },
+          ],
+        },
+      });
+      const challengeIndex = mission.getChallengeIndex(
+        new ActivityInfo({ level: Activity.levels.TUTORIAL, stepIndex: 0 }),
+        'tutorial-challenge-id-2',
+      );
+
+      expect(challengeIndex).to.equal(1);
     });
   });
 });

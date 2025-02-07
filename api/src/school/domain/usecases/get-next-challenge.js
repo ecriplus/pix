@@ -18,9 +18,11 @@ export async function getNextChallenge({
   const mission = await missionRepository.get(missionId);
   const answers = await activityAnswerRepository.findByActivity(activity.id);
 
+  const activityInfo = new ActivityInfo({ level: activity.level, stepIndex: activity.stepIndex });
+  const previousChallengeIndex = mission.getChallengeIndex(activityInfo, answers.at(-1).challengeId);
   const challengeId = mission.getChallengeId({
-    activityInfo: new ActivityInfo({ level: activity.level, stepIndex: activity.stepIndex }),
-    challengeIndex: answers.length,
+    activityInfo,
+    challengeIndex: previousChallengeIndex + 1,
     alternativeVersion: activity.alternativeVersion,
   });
 

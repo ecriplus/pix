@@ -15,7 +15,7 @@ export async function updateCurrentActivity({
   if (lastAnswer.result.isOK() || lastActivity.isTutorial) {
     const { missionId } = await missionAssessmentRepository.getByAssessmentId(assessmentId);
     const mission = await missionRepository.get(missionId);
-    if (_isActivityFinished(mission, lastActivity, answers)) {
+    if (_isActivityFinished(mission, lastActivity, lastAnswer)) {
       return activityRepository.updateStatus({ activityId: lastActivity.id, status: Activity.status.SUCCEEDED });
     }
     return lastActivity;
@@ -26,6 +26,7 @@ export async function updateCurrentActivity({
   return activityRepository.updateStatus({ activityId: lastActivity.id, status: Activity.status.SKIPPED });
 }
 
-function _isActivityFinished(mission, lastActivity, answers) {
-  return mission.getChallengeIds(new ActivityInfo(lastActivity)).length === answers.length;
+function _isActivityFinished(mission, lastActivity, lastAnswer) {
+  const challengeIds = mission.getChallengeIds(new ActivityInfo(lastActivity));
+  return challengeIds.at(-1).includes(lastAnswer.challengeId);
 }
