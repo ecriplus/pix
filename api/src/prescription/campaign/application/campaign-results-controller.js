@@ -14,8 +14,8 @@ const findAssessmentParticipationResults = async function (request) {
   if (filters.groups && !Array.isArray(filters.groups)) {
     filters.groups = [filters.groups];
   }
-  if (filters.acquiredThematicResults && !Array.isArray(filters.acquiredThematicResults)) {
-    filters.acquiredThematicResults = [filters.acquiredThematicResults];
+  if (filters.badges && !Array.isArray(filters.badges)) {
+    filters.badges = [filters.badges];
   }
   if (filters.stages && !Array.isArray(filters.stages)) {
     filters.stages = [filters.stages];

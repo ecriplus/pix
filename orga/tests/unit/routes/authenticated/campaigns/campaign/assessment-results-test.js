@@ -24,7 +24,7 @@ module('Unit | Route | authenticated/campaigns/campaign/assessment-results', fun
         pageSize: 2,
         divisions: ['4eme'],
         groups: [],
-        acquiredThematicResults: [],
+        badges: [],
         stages: [],
         search: null,
         campaignId: 3,
@@ -44,7 +44,7 @@ module('Unit | Route | authenticated/campaigns/campaign/assessment-results', fun
           filter: {
             divisions: params.divisions,
             groups: params.groups,
-            acquiredThematicResults: params.acquiredThematicResults,
+            badges: params.badges,
             stages: params.stages,
             search: params.search,
           },
@@ -84,10 +84,10 @@ module('Unit | Route | authenticated/campaigns/campaign/assessment-results', fun
         assert.deepEqual(controller.groups, []);
       });
 
-      test('it reset acquiredThematicResults', function (assert) {
-        const controller = { acquiredThematicResults: ['10'] };
+      test('it reset badges', function (assert) {
+        const controller = { badges: ['10'] };
         route.resetController(controller, true);
-        assert.deepEqual(controller.acquiredThematicResults, []);
+        assert.deepEqual(controller.badges, []);
       });
 
       test('it reset stages', function (assert) {
