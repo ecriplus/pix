@@ -3,8 +3,8 @@
  */
 import _ from 'lodash';
 
-import * as badgeForCalculationRepository from '../../../../../lib/infrastructure/repositories/badge-for-calculation-repository.js';
 import * as certifiableBadgeAcquisitionRepository from '../../../../../lib/infrastructure/repositories/certifiable-badge-acquisition-repository.js';
+import * as badgeForCalculationRepository from '../../../../shared/infrastructure/repositories/badge-for-calculation-repository.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 

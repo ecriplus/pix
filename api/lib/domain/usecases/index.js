@@ -135,6 +135,7 @@ import * as answerRepository from '../../../src/shared/infrastructure/repositori
 import * as areaRepository from '../../../src/shared/infrastructure/repositories/area-repository.js';
 import * as assessmentRepository from '../../../src/shared/infrastructure/repositories/assessment-repository.js';
 import * as assessmentResultRepository from '../../../src/shared/infrastructure/repositories/assessment-result-repository.js';
+import * as badgeForCalculationRepository from '../../../src/shared/infrastructure/repositories/badge-for-calculation-repository.js';
 import * as challengeRepository from '../../../src/shared/infrastructure/repositories/challenge-repository.js';
 import * as competenceRepository from '../../../src/shared/infrastructure/repositories/competence-repository.js';
 import * as courseRepository from '../../../src/shared/infrastructure/repositories/course-repository.js';
@@ -166,7 +167,6 @@ import { organizationInvitationRepository } from '../../../src/team/infrastructu
 import { userOrgaSettingsRepository } from '../../../src/team/infrastructure/repositories/user-orga-settings-repository.js';
 import * as obfuscationService from '../../domain/services/obfuscation-service.js';
 import * as badgeAcquisitionRepository from '../../infrastructure/repositories/badge-acquisition-repository.js';
-import * as badgeForCalculationRepository from '../../infrastructure/repositories/badge-for-calculation-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as flashAssessmentResultRepository from '../../infrastructure/repositories/flash-assessment-result-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
