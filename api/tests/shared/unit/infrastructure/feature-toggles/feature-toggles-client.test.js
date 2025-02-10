@@ -18,7 +18,7 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
   });
 
   describe('init', function () {
-    it('initialize the storage with default values', async function () {
+    it('initialize the storage with config and default values', async function () {
       // given
       const featureToggles = new FeatureTogglesClient(storage);
 
@@ -26,6 +26,9 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
       await featureToggles.init(config);
 
       // then
+      const savedConfig = await storage.get('_config');
+      expect(savedConfig).to.deep.equal(config);
+
       const all = await featureToggles.all();
       expect(all).to.deep.equal({ myToggle1: false, myToggle2: true, myToggle3: 'foo' });
     });
@@ -44,7 +47,7 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
 
       // then
       const keys = await storage.keys('*');
-      expect(keys).to.deep.equal(['myToggle1', 'myToggle4']);
+      expect(keys).to.deep.equal(['myToggle1', 'myToggle4', '_config']);
 
       const all = await featureToggles.all();
       expect(all).to.deep.equal({ myToggle1: false, myToggle4: 1 });
