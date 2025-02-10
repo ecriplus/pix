@@ -85,7 +85,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               'external-id': organization.externalId,
               'parent-organization-id': organization.parentOrganizationId,
               'parent-organization-name': null,
-              'province-code': organization.provinceCode,
+              'province-code': '045',
               'is-managing-students': organization.isManagingStudents,
               credit: organization.credit,
               email: organization.email,

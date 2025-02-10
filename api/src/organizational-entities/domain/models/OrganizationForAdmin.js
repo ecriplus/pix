@@ -4,8 +4,12 @@ import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import { DataProtectionOfficer } from './DataProtectionOfficer.js';
 
 const CREDIT_DEFAULT_VALUE = 0;
+const PAD_TARGET_LENGTH = 3;
+const PAD_STRING = '0';
 
 class OrganizationForAdmin {
+  #provinceCode;
+
   constructor({
     id,
     name,
@@ -89,6 +93,14 @@ class OrganizationForAdmin {
     this.code = code;
   }
 
+  get provinceCode() {
+    return this.#provinceCode;
+  }
+
+  set provinceCode(provinceCode) {
+    this.#provinceCode = provinceCode ? provinceCode.padStart(PAD_TARGET_LENGTH, PAD_STRING) : '';
+  }
+
   get archivistFullName() {
     return this.archivistFirstName && this.archivistLastName
       ? `${this.archivistFirstName} ${this.archivistLastName}`
@@ -131,10 +143,6 @@ class OrganizationForAdmin {
     this.parentOrganizationId = parentOrganizationId;
   }
 
-  updateProvinceCode(provinceCode) {
-    this.provinceCode = provinceCode;
-  }
-
   updateIdentityProviderForCampaigns(identityProviderForCampaigns) {
     this.identityProviderForCampaigns = identityProviderForCampaigns;
   }
@@ -155,7 +163,7 @@ class OrganizationForAdmin {
     this.email = organization.email;
     this.credit = organization.credit;
     this.externalId = organization.externalId;
-    this.updateProvinceCode(organization.provinceCode);
+    this.provinceCode = organization.provinceCode;
     this.documentationUrl = organization.documentationUrl;
     this.updateIsManagingStudents(organization.isManagingStudents, organization.features);
     this.showSkills = organization.showSkills;
