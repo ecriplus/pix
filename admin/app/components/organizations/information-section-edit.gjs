@@ -9,7 +9,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import { and, eq, not } from 'ember-truth-helpers';
+import { notEq, or } from 'ember-truth-helpers';
 import lodashGet from 'lodash/get';
 import set from 'lodash/set';
 import Organization from 'pix-admin/models/organization';
@@ -110,7 +110,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
     this.form.identityProviderForCampaigns =
       this.args.organization.identityProviderForCampaigns ?? this.noIdentityProviderOption.value;
 
-    this.form.features = JSON.parse(JSON.stringify(this.args.organization.features));
+    this.form.features = structuredClone(this.args.organization.features);
   }
 
   <template>
@@ -247,7 +247,7 @@ const FeaturesForm = <template>
       (get @features feature) (concat "components.organizations.information-section-view.features." feature)
       as |organizationFeature featureLabel|
     }}
-      {{#if (not (and (eq feature "IS_MANAGING_STUDENTS") (not @isManagingStudentAvailable)))}}
+      {{#if (or @isManagingStudentAvailable (notEq feature "IS_MANAGING_STUDENTS"))}}
         <div class="form-field">
           <PixCheckbox
             @checked={{organizationFeature.active}}
