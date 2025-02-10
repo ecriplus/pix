@@ -1,7 +1,7 @@
-import { usecases } from '../../../../lib/domain/usecases/index.js';
-import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
-import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
-import { databaseBuilder, expect, knex, learningContentBuilder, mockLearningContent } from '../../../test-helper.js';
+import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
+import { databaseBuilder, expect, knex, learningContentBuilder, mockLearningContent } from '../../../../test-helper.js';
 
 describe('Integration | Usecase | Handle Badge Acquisition', function () {
   let userId, assessment, badgeCompleted;
@@ -113,7 +113,7 @@ describe('Integration | Usecase | Handle Badge Acquisition', function () {
       it('should not affect the database', async function () {
         await DomainTransaction.execute(async (domainTransaction) => {
           // when
-          await usecases.handleBadgeAcquisition({
+          await evaluationUsecases.handleBadgeAcquisition({
             assessment,
           });
 

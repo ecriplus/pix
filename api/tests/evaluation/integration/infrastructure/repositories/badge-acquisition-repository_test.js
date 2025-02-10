@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import * as badgeAcquisitionRepository from '../../../../lib/infrastructure/repositories/badge-acquisition-repository.js';
-import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
-import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import * as badgeAcquisitionRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Repository | Badge Acquisition', function () {
   describe('#createOrUpdate', function () {

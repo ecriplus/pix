@@ -9,6 +9,7 @@ import { usecases as certificationUsecases } from '../../../certification/sessio
 import { usecases as devcompUsecases } from '../../../devcomp/domain/usecases/index.js';
 import { Answer } from '../../../evaluation/domain/models/Answer.js';
 import { ValidatorAlwaysOK } from '../../../evaluation/domain/models/ValidatorAlwaysOK.js';
+import { evaluationUsecases } from '../../../evaluation/domain/usecases/index.js';
 import * as competenceEvaluationSerializer from '../../../evaluation/infrastructure/serializers/jsonapi/competence-evaluation-serializer.js';
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import { config } from '../../config.js';
@@ -95,7 +96,7 @@ const completeAssessment = async function (request) {
 
   await DomainTransaction.execute(async () => {
     const assessment = await usecases.completeAssessment({ assessmentId, locale });
-    await usecases.handleBadgeAcquisition({ assessment });
+    await evaluationUsecases.handleBadgeAcquisition({ assessment });
     await usecases.handleStageAcquisition({ assessment });
     if (assessment.userId && config.featureToggles.isQuestEnabled) {
       await questUsecases.rewardUser({ userId: assessment.userId });

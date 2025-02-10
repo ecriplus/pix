@@ -1,5 +1,5 @@
-import { knex } from '../../../db/knex-database-connection.js';
-import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
+import { knex } from '../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 
 const BADGE_TABLE = 'badges';
 const BADGE_ACQUISITIONS_TABLE = 'badge-acquisitions';

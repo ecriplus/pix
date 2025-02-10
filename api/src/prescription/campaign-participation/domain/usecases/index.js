@@ -1,11 +1,11 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as badgeAcquisitionRepository from '../../../../../lib/infrastructure/repositories/badge-acquisition-repository.js';
 import * as learningContentRepository from '../../../../../lib/infrastructure/repositories/learning-content-repository.js';
 import * as stageCollectionRepository from '../../../../../lib/infrastructure/repositories/user-campaign-results/stage-collection-repository.js';
 import * as tutorialRepository from '../../../../devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as compareStagesAndAcquiredStages from '../../../../evaluation/domain/services/stages/stage-and-stage-acquisition-comparison-service.js';
+import * as badgeAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeRepository from '../../../../evaluation/infrastructure/repositories/badge-repository.js';
 import * as competenceEvaluationRepository from '../../../../evaluation/infrastructure/repositories/competence-evaluation-repository.js';
 import * as stageAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/stage-acquisition-repository.js';
@@ -45,8 +45,8 @@ import * as poleEmploiSendingRepository from '../../infrastructure/repositories/
 /**
  * @typedef { import ('../../../../shared/infrastructure/repositories/area-repository.js')} AreaRepository
  * @typedef { import ('../../../../shared/infrastructure/repositories/assessment-repository.js')} AssessmentRepository
- * @typedef { import ('../../../../../lib/infrastructure/repositories/badge-acquisition-repository.js')} BadgeAcquisitionRepository
- * @typedef { import ('../../../../../lib/infrastructure/repositories/badge-for-calculation-repository.js')} BadgeForCalculationRepository
+ * @typedef { import ('../../../../evaluation/infrastructure/repositories/badge-acquisition-repository.js')} BadgeAcquisitionRepository
+ * @typedef { import ('../../../../shared/infrastructure/repositories/badge-for-calculation-repository.js')} BadgeForCalculationRepository
  * @typedef { import ('../../../../../evaluation/infrastructure/repositories/badge-repository.js')} BadgeRepository
  * @typedef { import ('../../infrastructure/repositories/campaign-analysis-repository.js')} CampaignAnalysisRepository
  * @typedef { import ('../../infrastructure/repositories/campaign-assessment-participation-repository.js')} CampaignAssessmentParticipationRepository

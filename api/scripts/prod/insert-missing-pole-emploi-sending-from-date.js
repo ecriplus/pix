@@ -3,7 +3,7 @@ import * as url from 'node:url';
 import dayjs from 'dayjs';
 
 import { disconnect, knex } from '../../db/knex-database-connection.js';
-import * as badgeAcquisitionRepository from '../../lib/infrastructure/repositories/badge-acquisition-repository.js';
+import * as badgeAcquisitionRepository from '../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeRepository from '../../src/evaluation/infrastructure/repositories/badge-repository.js';
 import * as userRepository from '../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import * as campaignRepository from '../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';

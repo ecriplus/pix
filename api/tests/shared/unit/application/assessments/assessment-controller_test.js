@@ -1,6 +1,7 @@
 import { usecases } from '../../../../../lib/domain/usecases/index.js';
 import { usecases as certificationUsecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { usecases as devcompUsecases } from '../../../../../src/devcomp/domain/usecases/index.js';
+import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { assessmentController } from '../../../../../src/shared/application/assessments/assessment-controller.js';
 import { config } from '../../../../../src/shared/config.js';
@@ -73,12 +74,12 @@ describe('Unit | Controller | assessment-controller', function () {
       });
 
       sinon.stub(usecases, 'completeAssessment');
-      sinon.stub(usecases, 'handleBadgeAcquisition');
+      sinon.stub(evaluationUsecases, 'handleBadgeAcquisition');
       sinon.stub(devcompUsecases, 'handleTrainingRecommendation');
       sinon.stub(usecases, 'handleStageAcquisition');
       sinon.stub(questUsecases, 'rewardUser');
       usecases.completeAssessment.resolves(assessment);
-      usecases.handleBadgeAcquisition.resolves();
+      evaluationUsecases.handleBadgeAcquisition.resolves();
       sinon.stub(events.eventDispatcher, 'dispatch');
     });
 
@@ -95,7 +96,7 @@ describe('Unit | Controller | assessment-controller', function () {
       await assessmentController.completeAssessment({ params: { id: assessmentId } });
 
       // then
-      expect(usecases.handleBadgeAcquisition).to.have.been.calledWithExactly({ assessment });
+      expect(evaluationUsecases.handleBadgeAcquisition).to.have.been.calledWithExactly({ assessment });
     });
 
     it('should call the handleTrainingRecommendation use case', async function () {
