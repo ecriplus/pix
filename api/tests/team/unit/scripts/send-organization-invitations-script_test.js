@@ -1,5 +1,7 @@
 import * as url from 'node:url';
 
+import Joi from 'joi';
+
 import { SendOrganizationInvitationsScript } from '../../../../src/team/scripts/send-organization-invitations-script.js';
 import { expect, sinon } from '../../../test-helper.js';
 
@@ -20,6 +22,21 @@ describe('unit | team | scripts | send-organization-invitations-script', functio
       expect(fileData).to.be.deep.equal([
         { 'Organization ID': 1, email: 'test@example.net', locale: 'fr', role: 'MEMBER' },
       ]);
+    });
+
+    it('refuses with an incorrect email', async function () {
+      // given
+      const testCsvFile = `${currentDirectory}files/send-incorrecte-organization-invitations.csv`;
+      const script = new SendOrganizationInvitationsScript();
+
+      // when
+      const { options } = script.metaInfo;
+
+      // then
+      await expect(options.file.coerce(testCsvFile)).to.be.rejectedWith(
+        Joi.ValidationError,
+        /"value" must be a valid email/,
+      );
     });
   });
 

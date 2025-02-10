@@ -14,14 +14,14 @@ const DEFAULT_THROTTE_DELAY = 1000;
 
 const columnsSchemas = [
   { name: 'Organization ID', schema: Joi.number() },
-  { name: 'email', schema: Joi.string().trim().replace(' ', '').lowercase() },
+  { name: 'email', schema: Joi.string().trim().replace(' ', '').lowercase().email() },
   { name: 'locale', schema: Joi.string().trim().lowercase() },
   {
     name: 'role',
     schema: Joi.string()
       .trim()
       .optional()
-      .valid(...Object.values(OrganizationInvitation.RoleType)),
+      .valid(...Object.values(OrganizationInvitation.RoleType), ''),
   },
 ];
 
