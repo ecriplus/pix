@@ -6,16 +6,15 @@ import * as emailRepository from '../../../../../src/shared/mail/infrastructure/
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | create-reset-password-demand', function () {
-  const email = 'user@example.net';
   const locale = 'fr';
 
-  beforeEach(async function () {
+  it('creates a reset password demand', async function () {
+    // given
+    const email = 'user@example.net';
     const userId = databaseBuilder.factory.buildUser({ email }).id;
     databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({ userId });
     await databaseBuilder.commit();
-  });
 
-  it('creates a reset password demand', async function () {
     // when
     await createResetPasswordDemand({
       email,
