@@ -94,7 +94,25 @@ export class LearningContentRepository {
    * @returns {Promise<(object|null)[]>}
    */
   async loadMany(ids) {
-    return this.#dataloader.loadMany(ids);
+    return this.#loadMany(ids);
+  }
+
+  /**
+   * Loads several entities by ID.
+   * @param {string[]|number[]} ids
+   * @param {string=} cacheKey for debug purposes only
+   * @returns {Promise<(object|null)[]>}
+   */
+  async #loadMany(ids, cacheKey) {
+    const dtos = await this.#dataloader.loadMany(ids);
+
+    if (dtos[0] instanceof Error) {
+      const err = dtos[0];
+      logger.error({ tableName: this.#tableName, cacheKey, err }, 'error while loading entities by ids');
+      throw new Error('error while loading entities by ids', { cause: err });
+    }
+
+    return dtos;
   }
 
   /**
@@ -105,7 +123,8 @@ export class LearningContentRepository {
    */
   async #loadDtos(callback, cacheKey) {
     const ids = await callback(knex.pluck(`${this.#tableName}.id`).from(this.#tableName));
-    const dtos = await this.#dataloader.loadMany(ids);
+
+    const dtos = await this.#loadMany(ids, cacheKey);
 
     logger.debug({ tableName: this.#tableName, cacheKey }, 'caching find result');
     this.#findCache.set(cacheKey, dtos);
