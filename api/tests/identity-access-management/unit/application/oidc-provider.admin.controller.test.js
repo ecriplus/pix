@@ -110,12 +110,14 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
           code: 'LIMONADE_OIDC_PROVIDER',
           source: 'limonade_oidc_provider',
           organizationName: 'Limonade OIDC Provider',
+          isVisible: true,
           slug: 'limonade-oidc-provider',
           shouldCloseSession: false,
         },
         {
           code: 'KOMBUCHA_OIDC_PROVIDER',
           source: 'kombucha_oidc_provider',
+          isVisible: true,
           organizationName: 'Kombucha OIDC Provider',
           slug: 'kombucha-oidc-provider',
           shouldCloseSession: true,
@@ -139,6 +141,7 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
             slug: 'limonade-oidc-provider',
             'should-close-session': false,
             source: 'limonade_oidc_provider',
+            'is-visible': true,
           },
         },
         {
@@ -150,6 +153,7 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
             slug: 'kombucha-oidc-provider',
             'should-close-session': true,
             source: 'kombucha_oidc_provider',
+            'is-visible': true,
           },
         },
       ]);

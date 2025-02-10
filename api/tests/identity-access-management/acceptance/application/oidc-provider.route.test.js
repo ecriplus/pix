@@ -47,6 +47,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
             slug: 'oidc-example-net',
             'should-close-session': true,
             source: 'oidcexamplenet',
+            'is-visible': true,
           },
         },
       ]);

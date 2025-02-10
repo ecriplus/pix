@@ -12,9 +12,10 @@ const serialize = function (oidcIdentityProviders) {
         slug: oidcIdentityProvider.slug,
         shouldCloseSession: oidcIdentityProvider.shouldCloseSession,
         source: oidcIdentityProvider.source,
+        isVisible: oidcIdentityProvider.isVisible,
       };
     },
-    attributes: ['code', 'organizationName', 'slug', 'shouldCloseSession', 'source'],
+    attributes: ['code', 'organizationName', 'slug', 'shouldCloseSession', 'source', 'isVisible'],
   }).serialize(oidcIdentityProviders);
 };
 

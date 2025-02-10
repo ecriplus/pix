@@ -6,4 +6,5 @@ export default class OidcIdentityProvider extends Model {
   @attr() slug;
   @attr() shouldCloseSession;
   @attr() source;
+  @attr() isVisible;
 }

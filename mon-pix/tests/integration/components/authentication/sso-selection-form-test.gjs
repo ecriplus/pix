@@ -10,10 +10,10 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 class OidcProvidersServiceStub extends Service {
   get list() {
     return [
-      { id: 'cem', code: 'CEM', organizationName: 'ConnectEtMoi' },
-      { id: 'sc', code: 'SC', organizationName: 'StarConnect' },
-      { id: 'hidden1', code: 'FWB', organizationName: 'Not displayed provider 1' },
-      { id: 'hidden2', code: 'GOOGLE', organizationName: 'Not displayed provider 2' },
+      { id: 'cem', code: 'CEM', organizationName: 'ConnectEtMoi', isVisible: true },
+      { id: 'sc', code: 'SC', organizationName: 'StarConnect', isVisible: true },
+      { id: 'hidden1', code: 'FWB', organizationName: 'Not displayed provider 1', isVisible: true },
+      { id: 'hidden2', code: 'GOOGLE', organizationName: 'Not displayed provider 2', isVisible: true },
     ];
   }
 }

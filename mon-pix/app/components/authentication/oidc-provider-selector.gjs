@@ -10,10 +10,9 @@ export default class OidcProviderSelector extends Component {
   get providerOptions() {
     const { providers = [] } = this.args;
 
-    const options = providers.map((provider) => ({
-      label: provider.organizationName,
-      value: provider.id,
-    }));
+    const options = providers.reduce((acc, provider) => {
+      return provider.isVisible ? [...acc, { label: provider.organizationName, value: provider.id }] : acc;
+    }, []);
 
     return options.sort((option1, option2) => option1.label.localeCompare(option2.label));
   }
