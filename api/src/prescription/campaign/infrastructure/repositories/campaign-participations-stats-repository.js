@@ -46,17 +46,14 @@ async function _getCumulativeParticipationCountsByDay(campaignId, column) {
   return data.map(({ day, count }) => ({ day, count: Number(count) }));
 }
 
-const getAllParticipationsByCampaignId = async function (campaignId) {
-  const result = await knex
-    .select('masteryRate', 'validatedSkillsCount')
+const getAllParticipationsByCampaignId = (campaignId) =>
+  knex
+    .select('id', 'masteryRate', 'validatedSkillsCount')
     .from('campaign-participations')
     .where('campaign-participations.campaignId', '=', campaignId)
     .where('campaign-participations.isImproved', '=', false)
     .where('campaign-participations.deletedAt', 'is', null)
     .where('campaign-participations.status', 'SHARED');
-
-  return result;
-};
 
 const countParticipationsByStatus = async function (campaignId, campaignType) {
   const row = await knex('campaign-participations')

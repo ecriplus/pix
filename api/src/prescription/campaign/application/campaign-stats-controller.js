@@ -1,4 +1,5 @@
 import { usecases } from '../domain/usecases/index.js';
+import * as badgeAcquisitionsStatisticsSerializer from '../infrastructure/serializers/jsonapi/badge-acquisitions-statistics-serializer.js';
 import * as participationsByStageSerializer from '../infrastructure/serializers/jsonapi/campaign-participations-count-by-stage-serializer.js';
 import * as participationsByDaySerializer from '../infrastructure/serializers/jsonapi/campaign-participations-counts-by-day-serializer.js';
 import * as participationsByStatusSerializer from '../infrastructure/serializers/jsonapi/campaign-participations-counts-by-status-serializer.js';
@@ -39,6 +40,18 @@ const getParticipationsByDay = async function (request) {
   });
 };
 
+const getBadgeAcquisitions = async (request) => {
+  const { userId } = request.auth.credentials;
+  const { campaignId } = request.params;
+
+  const badgesAcquisitionStatistics = await usecases.getBadgeAcquisitionsStatistics({ userId, campaignId });
+
+  return badgeAcquisitionsStatisticsSerializer.serialize({
+    campaignId,
+    data: badgesAcquisitionStatistics,
+  });
+};
+
 const getParticipationsCountByMasteryRate = async function (request) {
   const { userId } = request.auth.credentials;
   const { campaignId } = request.params;
@@ -56,6 +69,7 @@ const campaignStatsController = {
   getParticipationsByStatus,
   getParticipationsByDay,
   getParticipationsCountByMasteryRate,
+  getBadgeAcquisitions,
 };
 
 export { campaignStatsController };

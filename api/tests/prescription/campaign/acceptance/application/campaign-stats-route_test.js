@@ -190,4 +190,43 @@ describe('Acceptance | API | Campaign Stats Route', function () {
       expect(result.data.attributes['result-distribution']).to.deep.equal([{ count: 1, masteryRate: '0.50' }]);
     });
   });
+
+  describe('GET /api/campaigns/{campaignId}/stats/badge-acquisitions', function () {
+    it('should return participation by badge', async function () {
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const createdBadge = databaseBuilder.factory.buildBadge({ targetProfileId, title: 'badge1' });
+
+      const userId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildMembership({ organizationId, userId });
+
+      const campaignId = databaseBuilder.factory.buildCampaign({ targetProfileId, organizationId }).id;
+      const campaignParticipation1 = databaseBuilder.factory.buildCampaignParticipation({ campaignId });
+
+      databaseBuilder.factory.buildBadgeAcquisition({
+        userId: campaignParticipation1.userId,
+        campaignParticipationId: campaignParticipation1.id,
+        badgeId: createdBadge.id,
+      });
+
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/campaigns/${campaignId}/stats/badge-acquisitions`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+      };
+
+      const { statusCode, result } = await server.inject(options);
+
+      expect(statusCode).to.equal(200);
+
+      const firstBadgeStats = result.data.attributes.data[0];
+      const { badge, count, percentage } = firstBadgeStats;
+
+      expect(badge).to.deep.equal(badge);
+      expect(count).to.equal(1);
+      expect(percentage).to.equal(100);
+    });
+  });
 });

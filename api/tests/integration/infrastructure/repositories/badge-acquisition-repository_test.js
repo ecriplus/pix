@@ -79,6 +79,50 @@ describe('Integration | Repository | Badge Acquisition', function () {
     });
   });
 
+  describe('#getAcquiredBadgesForCampaignParticipations', function () {
+    let campaignParticipationId;
+    let campaignParticipationId2;
+    let campaignParticipationId3;
+
+    beforeEach(async function () {
+      const badgeId = databaseBuilder.factory.buildBadge().id;
+      const badgeId2 = databaseBuilder.factory.buildBadge().id;
+      const badgeId3 = databaseBuilder.factory.buildBadge().id;
+      const userId = databaseBuilder.factory.buildUser().id;
+
+      campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({ userId }).id;
+      campaignParticipationId2 = databaseBuilder.factory.buildCampaignParticipation({ userId }).id;
+      campaignParticipationId3 = databaseBuilder.factory.buildCampaignParticipation({ userId }).id;
+      [
+        { userId, badgeId, campaignParticipationId },
+        { userId, badgeId: badgeId, campaignParticipationId: campaignParticipationId2 },
+        { userId, badgeId: badgeId2, campaignParticipationId: campaignParticipationId2 },
+        { userId, badgeId: badgeId3, campaignParticipationId: campaignParticipationId3 },
+      ].forEach(databaseBuilder.factory.buildBadgeAcquisition);
+
+      await databaseBuilder.commit();
+    });
+
+    it('should return badges acquisitions for the given campaign participations', async function () {
+      // when
+      const acquiredBadges = await badgeAcquisitionRepository.getAcquiredBadgesForCampaignParticipations([
+        campaignParticipationId,
+        campaignParticipationId2,
+      ]);
+
+      expect(acquiredBadges).to.have.lengthOf(3);
+      expect(
+        acquiredBadges.filter((badge) => badge.campaignParticipationId === campaignParticipationId),
+      ).to.have.lengthOf(1);
+      expect(
+        acquiredBadges.filter((badge) => badge.campaignParticipationId === campaignParticipationId2),
+      ).to.have.lengthOf(2);
+      expect(
+        acquiredBadges.filter((badge) => badge.campaignParticipationId === campaignParticipationId3),
+      ).to.have.lengthOf(0);
+    });
+  });
+
   describe('#getAcquiredBadgeIds', function () {
     let userId;
     let badgeId;
