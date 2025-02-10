@@ -30,7 +30,7 @@ describe('Acceptance | Identity Access Management | Application | Route | passwo
       });
 
       context('when given email doesn’t exist', function () {
-        it('replies with 404', async function () {
+        it('replies with 204', async function () {
           // given
           options.payload.email = 'unknown@example.net';
 
@@ -38,17 +38,17 @@ describe('Acceptance | Identity Access Management | Application | Route | passwo
           const response = await server.inject(options);
 
           // then
-          expect(response.statusCode).to.equal(404);
+          expect(response.statusCode).to.equal(204);
         });
       });
 
       context('when given email exists', function () {
-        it('replies with 201', async function () {
+        it('returns a 204 HTTP status code', async function () {
           // when
           const response = await server.inject(options);
 
           // then
-          expect(response.statusCode).to.equal(201);
+          expect(response.statusCode).to.equal(204);
         });
       });
     });
@@ -73,7 +73,7 @@ describe('Acceptance | Identity Access Management | Application | Route | passwo
       });
 
       context('when given email doesn’t exist', function () {
-        it('replies with 404', async function () {
+        it('replies with 204', async function () {
           // given
           options.payload.data.attributes.email = 'unknown@example.net';
 
@@ -81,17 +81,17 @@ describe('Acceptance | Identity Access Management | Application | Route | passwo
           const response = await server.inject(options);
 
           // then
-          expect(response.statusCode).to.equal(404);
+          expect(response.statusCode).to.equal(204);
         });
       });
 
       context('when given email exists', function () {
-        it('replies with 201', async function () {
+        it('returns a 204 HTTP status code', async function () {
           // when
           const response = await server.inject(options);
 
           // then
-          expect(response.statusCode).to.equal(201);
+          expect(response.statusCode).to.equal(204);
         });
       });
     });

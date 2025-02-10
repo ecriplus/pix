@@ -1,3 +1,4 @@
+import { UserNotFoundError } from '../../../shared/domain/errors.js';
 import { createResetPasswordDemandEmail } from '../emails/create-reset-password-demand.email.js';
 
 export const createResetPasswordDemand = async function ({
@@ -8,13 +9,19 @@ export const createResetPasswordDemand = async function ({
   userRepository,
   emailRepository,
 }) {
-  await userRepository.isUserExistingByEmail(email);
+  try {
+    await userRepository.isUserExistingByEmail(email);
+  } catch (error) {
+    if (error instanceof UserNotFoundError) {
+      return;
+    } else {
+      throw error;
+    }
+  }
 
   const temporaryKey = await resetPasswordService.generateTemporaryKey();
-  const passwordResetDemand = await resetPasswordDemandRepository.create({ email, temporaryKey });
+  await resetPasswordDemandRepository.create({ email, temporaryKey });
 
   const resetPasswordDemandEmail = createResetPasswordDemandEmail({ email, temporaryKey, locale });
   await emailRepository.sendEmail(resetPasswordDemandEmail);
-
-  return passwordResetDemand;
 };

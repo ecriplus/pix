@@ -1,18 +1,10 @@
 import { passwordController } from '../../../../../src/identity-access-management/application/password/password.controller.js';
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
 import { PasswordResetDemandNotFoundError } from '../../../../../src/identity-access-management/domain/errors.js';
+import { MissingOrInvalidCredentialsError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
-import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { InvalidTemporaryKeyError } from '../../../../../src/shared/domain/errors.js';
-import {
-  catchErr,
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  hFake,
-  HttpTestServer,
-  sinon,
-} from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, hFake, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Application | Controller | password', function () {
   describe('#createResetPasswordDemand', function () {
@@ -22,7 +14,7 @@ describe('Integration | Identity Access Management | Application | Controller | 
     };
     const payload = { email };
 
-    it('returns a 201 HTTP status code with a response', async function () {
+    it('returns a 204 HTTP status code', async function () {
       // given
       const request = { headers, payload };
 
@@ -34,28 +26,19 @@ describe('Integration | Identity Access Management | Application | Controller | 
       const response = await passwordController.createResetPasswordDemand(request, hFake);
 
       // then
-      expect(response.statusCode).to.equal(201);
-      sinon.assert.match(response.source, {
-        data: {
-          attributes: {
-            email: 'user@example.net',
-          },
-          id: sinon.match.string,
-          type: 'password-reset-demands',
-        },
-      });
+      expect(response.statusCode).to.equal(204);
     });
 
     context('when user account does not exist with given email', function () {
-      it('throws a UserNotFoundError', async function () {
+      it('returns a 204 HTTP status code', async function () {
         // given
         const request = { headers, payload };
 
         // when
-        const error = await catchErr(passwordController.createResetPasswordDemand)(request, hFake);
+        const response = await passwordController.createResetPasswordDemand(request, hFake);
 
         // then
-        expect(error).to.be.instanceOf(UserNotFoundError);
+        expect(response.statusCode).to.equal(204);
       });
     });
   });
@@ -115,15 +98,15 @@ describe('Integration | Identity Access Management | Application | Controller | 
         expect(response.statusCode).to.equal(404);
       });
 
-      it('should respond an HTTP response with status code 404 when UserNotFoundError', async function () {
+      it('responds an HTTP response with status code 401 when MissingOrInvalidCredentialsError', async function () {
         // given
-        usecases.getUserByResetPasswordDemand.rejects(new UserNotFoundError());
+        usecases.getUserByResetPasswordDemand.rejects(new MissingOrInvalidCredentialsError());
 
         // when
         const response = await httpTestServer.request(method, url);
 
         // then
-        expect(response.statusCode).to.equal(404);
+        expect(response.statusCode).to.equal(401);
       });
     });
   });
