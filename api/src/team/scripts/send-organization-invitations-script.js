@@ -21,7 +21,7 @@ const columnsSchemas = [
     schema: Joi.string()
       .trim()
       .optional()
-      .valid(...Object.values(OrganizationInvitation.RoleType)),
+      .valid(...Object.values(OrganizationInvitation.RoleType), ''),
   },
 ];
 
