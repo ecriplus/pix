@@ -58,6 +58,16 @@ class Mission {
     }
   }
 
+  getLastChallengeIds(activityInfo) {
+    return this.getChallengeIds(activityInfo).at(-1);
+  }
+
+  getChallengeIndex(activityInfo, challengeId) {
+    return this.getChallengeIds(activityInfo).findIndex((challengeVersionIds) =>
+      challengeVersionIds.includes(challengeId),
+    );
+  }
+
   get stepCount() {
     return this.content.steps.length;
   }

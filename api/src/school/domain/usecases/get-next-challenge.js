@@ -16,11 +16,17 @@ export async function getNextChallenge({
   }
   const { missionId } = await missionAssessmentRepository.getByAssessmentId(assessmentId);
   const mission = await missionRepository.get(missionId);
-  const answers = await activityAnswerRepository.findByActivity(activity.id);
+  const lastAnswer = await activityAnswerRepository.findLastByActivity(activity.id);
 
+  const activityInfo = new ActivityInfo({ level: activity.level, stepIndex: activity.stepIndex });
+  let challengeIndex = 0;
+  if (lastAnswer) {
+    const previousChallengeIndex = mission.getChallengeIndex(activityInfo, lastAnswer?.challengeId);
+    challengeIndex = previousChallengeIndex + 1;
+  }
   const challengeId = mission.getChallengeId({
-    activityInfo: new ActivityInfo({ level: activity.level, stepIndex: activity.stepIndex }),
-    challengeIndex: answers.length,
+    activityInfo,
+    challengeIndex,
     alternativeVersion: activity.alternativeVersion,
   });
 
