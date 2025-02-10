@@ -17,7 +17,7 @@ class JuryCertification {
    * @param {Date} props.createdAt
    * @param {Date} props.completedAt
    * @param {string} props.status
-   * @param {boolean} props.isCancelled
+   * @param {boolean} props.isCancelled - will be removed
    * @param {boolean} props.isPublished
    * @param {boolean} props.isRejectedForFraud
    * @param {number} props.juryId
@@ -91,6 +91,7 @@ class JuryCertification {
     this.version = version;
   }
 
+  // isCancelled will be removed
   static from({
     juryCertificationDTO,
     certificationIssueReports,

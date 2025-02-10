@@ -3,20 +3,27 @@ import { computed } from '@ember/object';
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import dayjs from 'dayjs';
 
-export const ACQUIRED = 'acquired';
-export const REJECTED = 'rejected';
-export const NOT_TAKEN = 'not_taken';
-export const partnerCertificationStatusToDisplayName = {
-  [ACQUIRED]: 'Validée',
-  [REJECTED]: 'Rejetée',
+export const assessmentStates = {
+  COMPLETED: 'completed',
+  STARTED: 'started',
+  ABORTED: 'aborted',
+  ENDED_BY_SUPERVISOR: 'endedBySupervisor',
+  ENDED_DUE_TO_FINALIZATION: 'endedDueToFinalization',
 };
-export const STARTED = 'started';
-export const ERROR = 'error';
+
+export const assessmentResultStatus = {
+  CANCELLED: 'cancelled',
+  ERROR: 'error',
+  VALIDATED: 'validated',
+  REJECTED: 'rejected',
+};
+
 export const certificationStatuses = [
-  { value: STARTED, label: 'Démarrée' },
-  { value: ERROR, label: 'En erreur' },
-  { value: 'validated', label: 'Validée' },
-  { value: 'rejected', label: 'Rejetée' },
+  { value: assessmentResultStatus.CANCELLED, label: 'Annulée' },
+  { value: assessmentStates.STARTED, label: 'Démarrée' },
+  { value: assessmentResultStatus.ERROR, label: 'En erreur' },
+  { value: assessmentResultStatus.VALIDATED, label: 'Validée' },
+  { value: assessmentResultStatus.REJECTED, label: 'Rejetée' },
 ];
 
 export default class Certification extends Model {
@@ -71,6 +78,11 @@ export default class Certification extends Model {
   get publishedText() {
     const value = this.isPublished;
     return value ? 'Oui' : 'Non';
+  }
+
+  // isCancelled will be removed
+  get isCertificationCancelled() {
+    return this.isCancelled || this.status === assessmentResultStatus.CANCELLED;
   }
 
   get hasComplementaryCertifications() {

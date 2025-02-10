@@ -24,6 +24,7 @@ const getV3DetailsByCertificationCourseId = async function ({ certificationCours
     .where({ 'assessments.certificationCourseId': certificationCourseId })
     .orderBy('validated-live-alerts.createdAt', 'ASC');
 
+  // isCancelled will be removed
   const certificationCourseDTO = await knex
     .select({
       isRejectedForFraud: 'certification-courses.isRejectedForFraud',

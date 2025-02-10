@@ -13,9 +13,10 @@ import { t } from 'ember-intl';
 import { lt } from 'ember-truth-helpers';
 
 import DayjsFormatDuration from '../../../helpers/dayjs-format-duration';
+import { assessmentStates } from '../../../models/certification';
 import { AnswerStatus } from '../../../models/certification-challenges-for-administration';
 import { subcategoryToCode, subcategoryToLabel } from '../../../models/certification-issue-report';
-import { abortReasons, assessmentStates } from '../../../models/v3-certification-course-details-for-administration';
+import { abortReasons } from '../../../models/v3-certification-course-details-for-administration';
 
 const successColor = 'success';
 const errorColor = 'error';
@@ -100,9 +101,10 @@ export default class DetailsV3 extends Component {
   }
 
   get detailStatusLabel() {
-    const { assessmentResultStatus, isCancelled, isRejectedForFraud } = this.args.details;
-    if (isCancelled) {
-      return assessmentResultStatusLabelAndColor('cancelled').label;
+    const { assessmentResultStatus, isRejectedForFraud } = this.args.details;
+    // isCancelled will be removed
+    if (this.args.details.isCertificationCancelled) {
+      return assessmentResultStatusLabelAndColor(assessmentResultStatus).label;
     }
     if (isRejectedForFraud) {
       return assessmentResultStatusLabelAndColor('fraud').label;
@@ -111,8 +113,8 @@ export default class DetailsV3 extends Component {
   }
 
   get detailStatusColor() {
-    const { assessmentResultStatus, isCancelled, isRejectedForFraud } = this.args.details;
-    if (isCancelled) {
+    const { assessmentResultStatus, isRejectedForFraud } = this.args.details;
+    if (this.args.details.isCertificationCancelled) {
       return assessmentResultStatusLabelAndColor('cancelled').color;
     }
     if (isRejectedForFraud) {

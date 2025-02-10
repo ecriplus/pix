@@ -1,7 +1,7 @@
 import { render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import Status from 'pix-admin/components/sessions/certifications/status';
-import { ERROR, STARTED } from 'pix-admin/models/certification';
+import { assessmentResultStatus, assessmentStates } from 'pix-admin/models/certification';
 import { module, test } from 'qunit';
 
 module('Integration | Component | certifications/status', function (hooks) {
@@ -14,21 +14,23 @@ module('Integration | Component | certifications/status', function (hooks) {
   });
 
   module('#isStatusBlocking', function () {
-    [{ status: ERROR }, { status: STARTED }].forEach((juryCertificationSummary) => {
-      test(`it renders ${juryCertificationSummary.status} in red`, async function (assert) {
-        // given
-        const record = store.createRecord('jury-certification-summary', {
-          ...juryCertificationSummary,
-          isFlaggedAborted: false,
+    [{ status: assessmentResultStatus.ERROR }, { status: assessmentStates.STARTED }].forEach(
+      (juryCertificationSummary) => {
+        test(`it renders ${juryCertificationSummary.status} in red`, async function (assert) {
+          // given
+          const record = store.createRecord('jury-certification-summary', {
+            ...juryCertificationSummary,
+            isFlaggedAborted: false,
+          });
+
+          // when
+          await render(<template><Status @record={{record}} /></template>);
+
+          // then
+          assert.dom('span.certification-list-page__cell--important').exists();
         });
-
-        // when
-        await render(<template><Status @record={{record}} /></template>);
-
-        // then
-        assert.dom('span.certification-list-page__cell--important').exists();
-      });
-    });
+      },
+    );
 
     test('it renders status in red if certification has been flagged as aborted', async function (assert) {
       // given
