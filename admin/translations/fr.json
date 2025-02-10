@@ -762,7 +762,17 @@
           "localizedLanguage": "Langue localisée :",
           "publishedOn": "Publié sur :",
           "status": "Statut :",
-          "title": "Titre :"
+          "title": "Titre public :"
+        },
+        "list": {
+          "caption": "Liste des contenus formatifs",
+          "goalThreshold": "Objectif à ne pas dépasser",
+          "id": "ID",
+          "internalTitle": "Titre à usage interne",
+          "noResult": "Aucun résultat",
+          "prerequisite": "Prérequis",
+          "status": "État",
+          "targetProfileCount": "Profils cibles associés"
         },
         "targetProfiles": {
           "tabName": "Profils cibles associés",

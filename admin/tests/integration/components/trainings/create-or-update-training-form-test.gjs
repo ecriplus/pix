@@ -20,7 +20,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
     );
 
     // then
-    assert.dom(screen.getByLabelText('Titre :')).exists();
+    assert.dom(screen.getByLabelText('Titre public :')).exists();
     assert.dom(screen.getByLabelText('Titre interne :')).exists();
     assert.dom(screen.getByLabelText('Lien')).exists();
     assert.dom(screen.getByLabelText('Format')).exists();
@@ -85,7 +85,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       );
 
       // then
-      assert.dom(screen.getByLabelText('Titre :')).hasValue(model.title);
+      assert.dom(screen.getByLabelText('Titre public :')).hasValue(model.title);
       assert.dom(screen.getByLabelText('Titre interne :')).hasValue(model.internalTitle);
       assert.dom(screen.getByLabelText('Lien')).hasValue(model.link);
       assert.strictEqual(screen.getByLabelText('Format').innerText, typeCategories[model.type]);

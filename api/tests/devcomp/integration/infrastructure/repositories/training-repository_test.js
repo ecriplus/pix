@@ -236,16 +236,28 @@ describe('Integration | Repository | training-repository', function () {
 
       it('should return filtered by title results', async function () {
         // given
-        const trainingSummary1 = domainBuilder.buildTrainingSummary({ id: 1, title: 'test' });
-        const trainingSummary2 = domainBuilder.buildTrainingSummary({ id: 2, title: 'test 2' });
-        const trainingSummary3 = domainBuilder.buildTrainingSummary({ id: 3, title: 'dummy' });
+        const trainingSummary1 = domainBuilder.buildTrainingSummary({
+          id: 1,
+          title: 'test',
+          internalTitle: 'internal test',
+        });
+        const trainingSummary2 = domainBuilder.buildTrainingSummary({
+          id: 2,
+          title: 'test 2',
+          internalTitle: 'internal test 2',
+        });
+        const trainingSummary3 = domainBuilder.buildTrainingSummary({
+          id: 3,
+          title: 'dummy',
+          internalTitle: 'internal dummy',
+        });
 
         databaseBuilder.factory.buildTraining({ ...trainingSummary1 });
         databaseBuilder.factory.buildTraining({ ...trainingSummary2 });
         databaseBuilder.factory.buildTraining({ ...trainingSummary3 });
 
         await databaseBuilder.commit();
-        const filter = { title: 'test' };
+        const filter = { internalTitle: 'test' };
         const page = {};
 
         // when

@@ -745,7 +745,17 @@
           "localizedLanguage": "Localized language : ",
           "publishedOn": "Published on : ",
           "status": "Status : ",
-          "title": "Title : "
+          "title": "Public title : "
+        },
+        "list": {
+          "caption": "Trainings list",
+          "goalThreshold": "Goal Threshold",
+          "id": "ID",
+          "internalTitle": "Title for internal use",
+          "noResult": "No result",
+          "prerequisite": "Prerequisite",
+          "status": "Status",
+          "targetProfileCount": "Associated Targets Profiles"
         },
         "targetProfiles": {
           "tabName": "Target Profiles"

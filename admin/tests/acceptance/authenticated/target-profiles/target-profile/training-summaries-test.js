@@ -71,9 +71,9 @@ module('Acceptance | Target Profile Training Summaries', function (hooks) {
 
     module('with multiple trainings', function (hooks) {
       hooks.beforeEach(async function () {
-        server.create('training', { id: 456, title: 'My training', targetProfileIds: [1] });
-        server.create('training-summary', { id: 456, title: 'My training', targetProfileIds: [1] });
-        server.create('training-summary', { id: 789, title: 'My other training', targetProfileIds: [1] });
+        server.create('training', { id: 456, internalTitle: 'My training', targetProfileIds: [1] });
+        server.create('training-summary', { id: 456, internalTitle: 'My training', targetProfileIds: [1] });
+        server.create('training-summary', { id: 789, internalTitle: 'My other training', targetProfileIds: [1] });
       });
 
       test('should list trainings', async function (assert) {

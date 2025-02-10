@@ -225,9 +225,9 @@ function _toDomainSummary({ trainingSummary, trainingTriggers }) {
 }
 
 function _applyFilters(qb, filter) {
-  const { title, id } = filter;
-  if (title) {
-    qb.whereILike('title', `%${title}%`);
+  const { internalTitle, id } = filter;
+  if (internalTitle) {
+    qb.whereILike('internalTitle', `%${internalTitle}%`);
   }
   if (id) {
     qb.where({ id });

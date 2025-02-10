@@ -14,13 +14,13 @@ export default class ListController extends Controller {
     return this.accessControl.hasAccessToTrainingsActionsScope;
   }
 
-  queryParams = ['pageNumber', 'pageSize', 'id', 'title'];
+  queryParams = ['pageNumber', 'pageSize', 'id', 'internalTitle'];
   DEBOUNCE_MS = config.pagination.debounce;
 
   @tracked pageNumber = DEFAULT_PAGE_NUMBER;
   @tracked pageSize = 10;
   @tracked id = null;
-  @tracked title = null;
+  @tracked internalTitle = null;
 
   updateFilters(filters) {
     for (const filterKey of Object.keys(filters)) {

@@ -32,7 +32,7 @@ const register = async function (server) {
           query: Joi.object({
             filter: Joi.object({
               id: Joi.number().empty('').allow(null).optional(),
-              title: Joi.string().empty('').allow(null).optional(),
+              internalTitle: Joi.string().empty('').allow(null).optional(),
             }).default({}),
             page: {
               number: Joi.number().integer().empty('').allow(null).optional(),
