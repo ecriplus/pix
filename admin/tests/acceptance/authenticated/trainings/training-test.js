@@ -33,6 +33,7 @@ module('Acceptance | Trainings | Training', function (hooks) {
       server.create('training', {
         id: 1,
         title: 'Devenir tailleur de citrouille',
+        internalTitle: 'Devenir tailleur de citrouille parce que c‘est génial',
         link: 'http://www.example2.net',
         type: 'autoformation',
         duration: { days: 0, hours: 10, minutes: 0 },
@@ -46,6 +47,7 @@ module('Acceptance | Trainings | Training', function (hooks) {
       server.create('training', {
         id: 2,
         title: 'Apprendre à piloter des chauves-souris',
+        internalTitle: 'Apprendre à piloter des chauves-souris comme Batman',
         link: 'http://www.example2.net',
         type: 'webinaire',
         duration: { days: 0, hours: 10, minutes: 0 },
@@ -78,7 +80,7 @@ module('Acceptance | Trainings | Training', function (hooks) {
         await visit(`/trainings/list`);
         await clickByName('Nouveau contenu formatif');
 
-        await fillByLabel('Titre :', 'Nouveau contenu formatif');
+        await fillByLabel('Titre public :', 'Nouveau contenu formatif');
         await fillByLabel('Titre interne :', 'Mon titre interne');
         await fillByLabel('Lien', 'http://www.example.net');
         await click(screen.getByText('Webinaire'));
@@ -134,7 +136,7 @@ module('Acceptance | Trainings | Training', function (hooks) {
 
       // then
       assert.strictEqual(currentURL(), `/trainings/${trainingId}/triggers`);
-      assert.dom(screen.getByRole('heading', { name: 'Apprendre à piloter des chauves-souris' })).exists();
+      assert.dom(screen.getByRole('heading', { name: 'Apprendre à piloter des chauves-souris comme Batman' })).exists();
       assert.dom(screen.getByRole('link', { name: triggersTabName })).exists();
       assert.dom(screen.getByRole('link', { name: triggersTabName })).hasClass('active');
       assert.dom(screen.getByRole('link', { name: targetProfilesTabName })).exists();
@@ -164,12 +166,12 @@ module('Acceptance | Trainings | Training', function (hooks) {
 
         // when
         await click(screen.getByRole('button', { name: 'Modifier' }));
-        await fillByLabel('Titre :', 'Nouveau contenu formatif modifié');
+        await fillByLabel('Titre public :', 'Nouveau contenu formatif modifié');
         await fillByLabel('Titre interne :', 'Mon titre interne');
         await click(screen.getByRole('button', { name: 'Modifier le contenu formatif' }));
 
         // then
-        assert.dom(screen.getByRole('heading', { name: 'Nouveau contenu formatif modifié' })).exists();
+        assert.dom(screen.getByRole('heading', { name: 'Mon titre interne' })).exists();
       });
     });
 

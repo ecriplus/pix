@@ -20,11 +20,11 @@ export default class TrainingDetailsCard extends Component {
     {{! template-lint-disable no-redundant-role }}
     <article class="training-details-card" role="article">
       <div class="training-details-card__content">
-        <h1 class="training-details-card__title">{{@training.title}}</h1>
+        <h1 class="training-details-card__title">{{@training.internalTitle}}</h1>
         <StateTag @isDisabled={{@training.isDisabled}} />
         <dl class="training-details-card__details">
-          <dt class="training-details-card__details-label">{{t "pages.trainings.training.details.internalTitle"}}</dt>
-          <dd class="training-details-card__details-value">{{@training.internalTitle}}</dd>
+          <dt class="training-details-card__details-label">{{t "pages.trainings.training.details.title"}}</dt>
+          <dd class="training-details-card__details-value">{{@training.title}}</dd>
           <dt class="training-details-card__details-label">{{t "pages.trainings.training.details.publishedOn"}}</dt>
           <dd class="training-details-card__details-value">
             <a
