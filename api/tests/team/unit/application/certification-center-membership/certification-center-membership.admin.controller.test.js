@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../../lib/domain/usecases/index.js';
 import { certificationCenterMembershipAdminController } from '../../../../../src/team/application/certification-center-membership/certification-center-membership.admin.controller.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
@@ -133,7 +132,7 @@ describe('Unit | Team | Application | Controller | CertificationCenterMembership
           .returns(certificationCenterMembershipsSerialized);
 
         sinon
-          .stub(libUsecases, 'findCertificationCenterMembershipsByUser')
+          .stub(usecases, 'findCertificationCenterMembershipsByUser')
           .withArgs({ userId: 12345 })
           .resolves(certificationCenterMemberships);
 

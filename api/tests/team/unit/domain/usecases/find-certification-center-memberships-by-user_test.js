@@ -1,7 +1,7 @@
-import { findCertificationCenterMembershipsByUser } from '../../../../lib/domain/usecases/find-certification-center-memberships-by-user.js';
-import { expect, sinon } from '../../../test-helper.js';
+import { findCertificationCenterMembershipsByUser } from '../../../../../src/team/domain/usecases/find-certification-center-memberships-by-user.js';
+import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | find-certification-center-memberships-by-user', function () {
+describe('Unit | Team | Domain | UseCase | find-certification-center-memberships-by-user', function () {
   let certificationCenterMembershipRepository;
 
   beforeEach(function () {
