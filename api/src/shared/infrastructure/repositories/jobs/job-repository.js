@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
+import { DomainTransaction } from '../../../domain/DomainTransaction.js';
 import { EntityValidationError } from '../../../domain/errors.js';
-import { pgBoss } from './pg-boss.js';
 
 export class JobRepository {
   #schema = Joi.object({
@@ -46,19 +46,24 @@ export class JobRepository {
   #buildPayload(data) {
     return {
       name: this.name,
+      retrylimit: this.retry.retryLimit,
+      retrydelay: this.retry.retryDelay,
+      retrybackoff: this.retry.retryBackoff,
+      expirein: this.expireIn,
       data,
-      retryLimit: this.retry.retryLimit,
-      retryDelay: this.retry.retryDelay,
-      retryBackoff: this.retry.retryBackoff,
-      expireInSeconds: this.expireIn,
-      onComplete: true,
+      on_complete: true,
       priority: this.priority,
     };
   }
 
   async #send(jobs) {
-    await pgBoss.insert(jobs);
-    return { rowCount: jobs.length };
+    const knexConn = DomainTransaction.getConnection();
+
+    const results = await knexConn.batchInsert('pgboss.job', jobs);
+
+    const rowCount = results.reduce((total, batchResult) => total + (batchResult.rowCount || 0), 0);
+
+    return { rowCount };
   }
 
   async performAsync(...datas) {
@@ -118,12 +123,12 @@ export const JobRetry = Object.freeze({
 });
 
 /**
- * Job expireIn. define few config to set expireInSeconds field
+ * Job expireIn. define few config to set expireIn field
  * @see https://github.com/timgit/pg-boss/blob/9.0.3/docs/readme.md#insertjobs
  * @readonly
  * @enum {string}
  */
 export const JobExpireIn = Object.freeze({
-  DEFAULT: 15 * 60,
-  HIGH: 30 * 60,
+  DEFAULT: '00:15:00',
+  HIGH: '00:30:00',
 });
