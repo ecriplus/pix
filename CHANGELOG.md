@@ -1,5 +1,31 @@
 # Pix Changelog
 
+## v5.39.0 (10/02/2025)
+
+
+### :rocket: Amélioration
+- [#11383](https://github.com/1024pix/pix/pull/11383) [FEATURE] Rendre le champ titre interne obligatoire (PIX-16461) (PIX-16068).
+- [#11363](https://github.com/1024pix/pix/pull/11363) [FEATURE] Filtrer les SSO sur la page de connexion de Pix app (PIX-16391).
+- [#11376](https://github.com/1024pix/pix/pull/11376) [FEATURE] Afficher le titre interne comme titre dans la liste des contenus formatifs et la section côté Profil Cible (PIX-16462).
+- [#11310](https://github.com/1024pix/pix/pull/11310) [FEATURE] Indiquer si l'utilisateur se connecte via SSO sur Pix admin (PIX-14788).
+- [#11344](https://github.com/1024pix/pix/pull/11344) [FEATURE] Evolution de l'import des OIDC pour prendre en compte la variable isVisible (PIX-16390).
+- [#11366](https://github.com/1024pix/pix/pull/11366) [FEATURE] Pouvoir créer et modifier des quêtes via PixAdmin (PIX-16388).
+- [#11359](https://github.com/1024pix/pix/pull/11359) [FEATURE] Page de fin de module : changer le bouton "revenir aux détails du module"(PIX-16426).
+
+### :building_construction: Tech
+- [#11381](https://github.com/1024pix/pix/pull/11381) [TECH] Revert de la PR-11308 sur l'amélioration de PGBoss.
+- [#11348](https://github.com/1024pix/pix/pull/11348) [TECH] Stocker la config des features toggles dans Redis.
+- [#11374](https://github.com/1024pix/pix/pull/11374) [TECH] Bouger les derniers repositories Learning Content de lib à shared (PIX-16481).
+- [#11337](https://github.com/1024pix/pix/pull/11337) [TECH] Récupère le snapshot avec l'id d'une participation à une campagne (pix-15758).
+- [#11305](https://github.com/1024pix/pix/pull/11305) [TECH] Migrer la route POST /api/expired-password-updates (PIX-16367).
+- [#11357](https://github.com/1024pix/pix/pull/11357) [TECH] Migration de la route POST /api/admin/certification-centers/{certificationCenterId}/certification-center-memberships (PIX-16451).
+- [#11365](https://github.com/1024pix/pix/pull/11365) [TECH] Déprécie l'utilisation du `isCancelled` au profit du status du dernier `AssessmentResult`.
+- [#11369](https://github.com/1024pix/pix/pull/11369) [TECH] Mettre à jour Pix-UI dans la dernière version sur Pix-Orga (PIX-16473).
+
+### :coffee: Autre
+- [#11372](https://github.com/1024pix/pix/pull/11372) [FIX] #16477 Update a nextcloud doc link.
+- [#11107](https://github.com/1024pix/pix/pull/11107) [DOC] Ajout d'un document décrivant les pratiques à suivre concernant les traductions pour les devs.
+
 ## v5.38.0 (07/02/2025)
 
 
