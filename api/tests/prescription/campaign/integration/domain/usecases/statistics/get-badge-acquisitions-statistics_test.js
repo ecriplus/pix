@@ -1,3 +1,4 @@
+import BadgeAcquisitionParticipationStatistic from '../../../../../../../src/prescription/campaign/domain/read-models/BadgeAcquisitionParticipationStatistic.js';
 import { usecases } from '../../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect } from '../../../../../../test-helper.js';
@@ -129,6 +130,18 @@ describe('Integration | UseCase | Statistics | get-badge-acquisitions-statistics
         });
 
         await databaseBuilder.commit();
+      });
+
+      it('should return an array of BadgeAcquisitionParticipationStatistic', async function () {
+        // when
+        const result = await usecases.getBadgeAcquisitionsStatistics({
+          userId,
+          campaignId,
+        });
+
+        // then
+        expect(result).to.have.lengthOf(3);
+        expect(result[0]).to.be.instanceOf(BadgeAcquisitionParticipationStatistic);
       });
 
       it('should return the expected badges statistics', async function () {

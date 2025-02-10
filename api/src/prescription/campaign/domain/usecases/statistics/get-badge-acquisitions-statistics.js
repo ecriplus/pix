@@ -1,4 +1,5 @@
 import { UserNotAuthorizedToAccessEntityError } from '../../../../../shared/domain/errors.js';
+import BadgeAcquisitionParticipationStatistic from '../../read-models/BadgeAcquisitionParticipationStatistic.js';
 
 /**
  *
@@ -10,7 +11,7 @@ import { UserNotAuthorizedToAccessEntityError } from '../../../../../shared/doma
  * @param badgeRepository
  * @param badgeAcquisitionRepository
  *
- * @returns {Promise<{badge : Badge, count: number, percentage: number}[]>}
+ * @returns {Promise<BadgeAcquisitionParticipationStatistic[]>}
  */
 const getBadgeAcquisitionsStatistics = async function ({
   userId,
@@ -39,11 +40,11 @@ const getBadgeAcquisitionsStatistics = async function ({
   return badges.map((badge) => {
     const acquiredBadges = badgesAcquisitions.filter((badgeAcquisition) => badgeAcquisition.badgeId === badge.id);
 
-    return {
+    return new BadgeAcquisitionParticipationStatistic({
       badge,
       count: acquiredBadges.length,
-      percentage: participations.length ? Math.round((acquiredBadges.length / participations.length) * 100) : 0,
-    };
+      totalParticipationCount: participations.length,
+    });
   });
 };
 
