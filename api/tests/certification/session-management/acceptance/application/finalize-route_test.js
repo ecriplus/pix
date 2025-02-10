@@ -4,7 +4,12 @@ import {
   CertificationIssueReportSubcategories,
 } from '../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { SESSIONS_VERSIONS } from '../../../../../src/certification/shared/domain/models/SessionVersion.js';
-import { AnswerStatus, Assessment, CertificationResult } from '../../../../../src/shared/domain/models/index.js';
+import {
+  AnswerStatus,
+  Assessment,
+  AssessmentResult,
+  CertificationResult,
+} from '../../../../../src/shared/domain/models/index.js';
 import {
   createServer,
   databaseBuilder,
@@ -651,7 +656,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           const finalizedSession = await knex('finalized-sessions').where({ sessionId: session.id }).first();
           expect(finalizedSession.isPublishable).to.be.true;
           const assessmentResult = await knex('assessment-results').where({ assessmentId }).first();
-          expect(assessmentResult.status).to.equal('rejected');
+          expect(assessmentResult.status).to.equal(AssessmentResult.status.CANCELLED);
           const assessment = await knex('assessments').where({ certificationCourseId }).first();
           expect(assessment.state).to.equal('endedDueToFinalization');
         });
