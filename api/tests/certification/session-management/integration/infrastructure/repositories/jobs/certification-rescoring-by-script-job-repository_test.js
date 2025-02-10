@@ -14,9 +14,9 @@ describe('Integration | Certification | Infrastructure | Repository | Jobs | cer
 
       // then
       await expect(CertificationRescoringByScriptJob.name).to.have.been.performed.withJob({
-        retryLimit: 0,
-        retryDelay: 0,
-        retryBackoff: false,
+        retrylimit: 0,
+        retrydelay: 0,
+        retrybackoff: false,
         data: {
           certificationCourseId: 777,
         },

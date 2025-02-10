@@ -32,9 +32,9 @@ describe('Integration | Prescription | Application | Jobs | garAnonymizedBatchEv
 
       // then
       await expect(GarAnonymizedBatchEventsLoggingJob.name).to.have.been.performed.withJob({
-        retryLimit: 10,
-        retryDelay: 30,
-        retryBackoff: true,
+        retrylimit: 10,
+        retrydelay: 30,
+        retrybackoff: true,
         data: {
           userIds: [13, 42],
           updatedByUserId: 777,
