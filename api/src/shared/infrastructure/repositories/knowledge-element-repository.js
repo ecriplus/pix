@@ -1,23 +1,11 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../db/knex-database-connection.js';
+import { KnowledgeElementCollection } from '../../../prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { KnowledgeElement } from '../../domain/models/KnowledgeElement.js';
 
 const tableName = 'knowledge-elements';
-
-function _getUniqMostRecents(knowledgeElements) {
-  return _(knowledgeElements).orderBy('createdAt', 'desc').uniqBy('skillId').value();
-}
-
-function _dropResetKnowledgeElements(knowledgeElements) {
-  return _.reject(knowledgeElements, { status: KnowledgeElement.StatusType.RESET });
-}
-
-function _applyFilters(knowledgeElements) {
-  const uniqsMostRecentPerSkill = _getUniqMostRecents(knowledgeElements);
-  return _dropResetKnowledgeElements(uniqsMostRecentPerSkill);
-}
 
 function _findByUserIdAndLimitDateQuery({ userId, limitDate, skillIds = [] }) {
   const knexConn = DomainTransaction.getConnection();
@@ -35,11 +23,10 @@ function _findByUserIdAndLimitDateQuery({ userId, limitDate, skillIds = [] }) {
 async function findAssessedByUserIdAndLimitDateQuery({ userId, limitDate, skillIds }) {
   const knowledgeElementRows = await _findByUserIdAndLimitDateQuery({ userId, limitDate, skillIds });
 
-  const knowledgeElements = _.map(
-    knowledgeElementRows,
-    (knowledgeElementRow) => new KnowledgeElement(knowledgeElementRow),
+  const keCollection = new KnowledgeElementCollection(
+    knowledgeElementRows.map((knowledgeElementRow) => new KnowledgeElement(knowledgeElementRow)),
   );
-  return _applyFilters(knowledgeElements);
+  return keCollection.latestUniqNonResetKnowledgeElements;
 }
 
 const findUniqByUserIds = function (userIds) {
@@ -69,11 +56,10 @@ const findUniqByUserIdAndAssessmentId = async function ({ userId, assessmentId }
   const query = _findByUserIdAndLimitDateQuery({ userId });
   const knowledgeElementRows = await query.where({ assessmentId });
 
-  const knowledgeElements = _.map(
-    knowledgeElementRows,
-    (knowledgeElementRow) => new KnowledgeElement(knowledgeElementRow),
+  const keCollection = new KnowledgeElementCollection(
+    knowledgeElementRows.map((knowledgeElementRow) => new KnowledgeElement(knowledgeElementRow)),
   );
-  return _applyFilters(knowledgeElements);
+  return keCollection.latestUniqNonResetKnowledgeElements;
 };
 
 const findUniqByUserIdAndCompetenceId = async function ({ userId, competenceId }) {

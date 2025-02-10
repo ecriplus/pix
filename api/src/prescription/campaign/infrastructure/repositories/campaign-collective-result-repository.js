@@ -13,13 +13,12 @@ const getCampaignCollectiveResult = async function (campaignId, campaignLearning
     campaignLearningContent,
   });
 
-  const userIdsAndSharedDatesChunks = await _getChunksSharedParticipationsWithUserIdsAndDates(campaignId);
-
+  const sharedCampaignParticipationIdsChunks = await _getChunksSharedParticipations(campaignId);
   let participantCount = 0;
-  for (const userIdsAndSharedDates of userIdsAndSharedDatesChunks) {
-    participantCount += userIdsAndSharedDates.length;
+  for (const campaignParticipationIds of sharedCampaignParticipationIdsChunks) {
+    participantCount += campaignParticipationIds.length;
     const knowledgeElementsGroupedByCampaignParticipationId =
-      await knowledgeElementSnapshotRepository.findByCampaignParticipationIds(userIdsAndSharedDates);
+      await knowledgeElementSnapshotRepository.findByCampaignParticipationIds(campaignParticipationIds);
     const knowledgeElements = Object.values(knowledgeElementsGroupedByCampaignParticipationId).flat();
     const validatedTargetedKnowledgeElementsCountByCompetenceId =
       campaignLearningContent.countValidatedTargetedKnowledgeElementsByCompetence(knowledgeElements);
@@ -32,7 +31,7 @@ const getCampaignCollectiveResult = async function (campaignId, campaignLearning
 
 export { getCampaignCollectiveResult };
 
-async function _getChunksSharedParticipationsWithUserIdsAndDates(campaignId) {
+async function _getChunksSharedParticipations(campaignId) {
   const results = await knex
     .from('campaign-participations')
     .max('id')

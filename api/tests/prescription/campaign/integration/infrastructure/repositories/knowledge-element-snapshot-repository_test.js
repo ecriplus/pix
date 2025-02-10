@@ -1,7 +1,7 @@
 import * as knowledgeElementSnapshotRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
+import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { AlreadyExistingEntityError } from '../../../../../../src/shared/domain/errors.js';
-import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | KnowledgeElementSnapshotRepository', function () {
@@ -19,26 +19,23 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
         userId,
         createdAt: new Date('2019-03-01'),
       });
-      const knowledgeElements = [knowledgeElement1, knowledgeElement2];
+      const knowledgeElements = new KnowledgeElementCollection([knowledgeElement1, knowledgeElement2]);
       await databaseBuilder.commit();
 
       // when
-      await knowledgeElementSnapshotRepository.save({ userId, snappedAt, knowledgeElements, campaignParticipationId });
+      await knowledgeElementSnapshotRepository.save({
+        userId,
+        snappedAt,
+        snapshot: knowledgeElements.toSnapshot(),
+        campaignParticipationId,
+      });
 
       // then
       const actualUserSnapshot = await knex.select('*').from('knowledge-element-snapshots').first();
       expect(actualUserSnapshot.userId).to.deep.equal(userId);
       expect(actualUserSnapshot.snappedAt).to.deep.equal(snappedAt);
-      const actualKnowledgeElements = [];
-      for (const knowledgeElementData of actualUserSnapshot.snapshot) {
-        actualKnowledgeElements.push(
-          new KnowledgeElement({
-            ...knowledgeElementData,
-            createdAt: new Date(knowledgeElementData.createdAt),
-          }),
-        );
-      }
-      expect(actualKnowledgeElements).to.deep.equal(knowledgeElements);
+
+      expect(actualUserSnapshot.snapshot).to.deep.equal(JSON.parse(knowledgeElements.toSnapshot()));
     });
 
     it('should throw an error if knowledge elements snapshot already exist for userId and a date', async function () {
@@ -53,7 +50,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       const error = await catchErr(knowledgeElementSnapshotRepository.save)({
         userId,
         snappedAt,
-        knowledgeElements: [],
+        snapshot: JSON.stringify([]),
         campaignParticipationId,
       });
 
@@ -65,30 +62,28 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       it('saves knowledge elements snapshot using a transaction', async function () {
         const snappedAt = new Date('2019-04-01');
         const userId = databaseBuilder.factory.buildUser().id;
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation().id;
+
         const knowledgeElement1 = databaseBuilder.factory.buildKnowledgeElement({
           userId,
           createdAt: new Date('2019-03-01'),
         });
-        const knowledgeElements = [knowledgeElement1];
+        const knowledgeElements = new KnowledgeElementCollection([knowledgeElement1]);
+
         await databaseBuilder.commit();
 
-        await DomainTransaction.execute(() => {
-          return knowledgeElementSnapshotRepository.save({ userId, snappedAt, knowledgeElements });
+        await DomainTransaction.execute(async () => {
+          await knowledgeElementSnapshotRepository.save({
+            userId,
+            snappedAt,
+            snapshot: knowledgeElements.toSnapshot(),
+            campaignParticipationId,
+          });
         });
-
         const actualUserSnapshot = await knex.select('*').from('knowledge-element-snapshots').first();
         expect(actualUserSnapshot.userId).to.deep.equal(userId);
         expect(actualUserSnapshot.snappedAt).to.deep.equal(snappedAt);
-        const actualKnowledgeElements = [];
-        for (const knowledgeElementData of actualUserSnapshot.snapshot) {
-          actualKnowledgeElements.push(
-            new KnowledgeElement({
-              ...knowledgeElementData,
-              createdAt: new Date(knowledgeElementData.createdAt),
-            }),
-          );
-        }
-        expect(actualKnowledgeElements).to.deep.equal(knowledgeElements);
+        expect(actualUserSnapshot.snapshot).to.deep.equal(JSON.parse(knowledgeElements.toSnapshot()));
       });
 
       it('does not save knowledge elements snapshot using a transaction', async function () {
@@ -152,7 +147,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId1,
         snappedAt: snappedAt1,
-        snapshot: JSON.stringify([knowledgeElement1]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement1]).toSnapshot(),
         campaignParticipationId,
       });
 
@@ -163,7 +158,16 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
         secondCampaignParticipationId,
       ]);
       // then
-      expect(knowledgeElementsByUserId).to.deep.equal({ [campaignParticipationId]: [knowledgeElement1] });
+      expect(knowledgeElementsByUserId).to.deep.equal({
+        [campaignParticipationId]: [
+          {
+            ...knowledgeElement1,
+            id: undefined,
+            assessmentId: undefined,
+            userId: undefined,
+          },
+        ],
+      });
     });
 
     it('should find knowledge elements snapshoted grouped by campaignParticipationIds', async function () {
@@ -173,7 +177,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId1,
         snappedAt: snappedAt1,
-        snapshot: JSON.stringify([knowledgeElement1]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement1]).toSnapshot(),
         campaignParticipationId,
       });
       const snappedAt2 = new Date('2020-02-02');
@@ -181,7 +185,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId2,
         snappedAt: snappedAt2,
-        snapshot: JSON.stringify([knowledgeElement2]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement2]).toSnapshot(),
         campaignParticipationId: secondCampaignParticipationId,
       });
 
@@ -190,7 +194,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId2,
         snappedAt: snappedAt3,
-        snapshot: JSON.stringify([knowledgeElement3]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement3]).toSnapshot(),
         campaignParticipationId: otherCampaignParticipationId,
       });
 
@@ -204,8 +208,22 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
 
       // then
       expect(knowledgeElementsByUserId).to.deep.equals({
-        [campaignParticipationId]: [knowledgeElement1],
-        [secondCampaignParticipationId]: [knowledgeElement2],
+        [campaignParticipationId]: [
+          {
+            ...knowledgeElement1,
+            id: undefined,
+            assessmentId: undefined,
+            userId: undefined,
+          },
+        ],
+        [secondCampaignParticipationId]: [
+          {
+            ...knowledgeElement2,
+            id: undefined,
+            assessmentId: undefined,
+            userId: undefined,
+          },
+        ],
       });
     });
   });
@@ -254,7 +272,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId1,
         snappedAt: snappedAt1,
-        snapshot: JSON.stringify([knowledgeElement1]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement1]).toSnapshot(),
         campaignParticipationId: campaignParticipationId1,
       });
 
@@ -272,7 +290,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId2,
         snappedAt: snappedAt2,
-        snapshot: JSON.stringify([knowledgeElement2]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement2]).toSnapshot(),
         campaignParticipationId: campaignParticipationId2,
       });
 
@@ -290,7 +308,7 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId: userId2,
         snappedAt: snappedAt3,
-        snapshot: JSON.stringify([knowledgeElement3]),
+        snapshot: new KnowledgeElementCollection([knowledgeElement3]).toSnapshot(),
         campaignParticipationId: campaignParticipationId3,
       });
 
@@ -311,15 +329,36 @@ describe('Integration | Repository | KnowledgeElementSnapshotRepository', functi
 
       expect(knowledgeElementsByUserId).to.deep.members([
         {
-          knowledgeElements: [knowledgeElement1],
+          knowledgeElements: [
+            {
+              ...knowledgeElement1,
+              id: undefined,
+              assessmentId: undefined,
+              userId: undefined,
+            },
+          ],
           campaignParticipationId: campaignParticipationId1,
         },
         {
-          knowledgeElements: [knowledgeElement2],
+          knowledgeElements: [
+            {
+              ...knowledgeElement2,
+              id: undefined,
+              assessmentId: undefined,
+              userId: undefined,
+            },
+          ],
           campaignParticipationId: campaignParticipationId2,
         },
         {
-          knowledgeElements: [knowledgeElement3],
+          knowledgeElements: [
+            {
+              ...knowledgeElement3,
+              id: undefined,
+              assessmentId: undefined,
+              userId: undefined,
+            },
+          ],
           campaignParticipationId: campaignParticipationId3,
         },
       ]);

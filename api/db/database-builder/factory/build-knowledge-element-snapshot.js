@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { KnowledgeElementCollection } from '../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildKnowledgeElement } from './build-knowledge-element.js';
 import { buildUser } from './build-user.js';
@@ -17,7 +18,7 @@ const buildKnowledgeElementSnapshot = function ({
     const knowledgeElements = [];
     knowledgeElements.push(buildKnowledgeElement({ userId, createdAt: dateMinusOneDay }));
     knowledgeElements.push(buildKnowledgeElement({ userId, createdAt: dateMinusOneDay }));
-    snapshot = JSON.stringify(knowledgeElements);
+    snapshot = new KnowledgeElementCollection(knowledgeElements).toSnapshot();
   }
 
   const values = {

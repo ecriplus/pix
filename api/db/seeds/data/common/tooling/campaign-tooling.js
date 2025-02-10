@@ -5,6 +5,7 @@ import {
   CampaignExternalIdTypes,
   CampaignParticipationStatuses,
 } from '../../../../../src/prescription/shared/domain/constants.js';
+import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { Assessment, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
 import { getPlacementProfile } from '../../../../../src/shared/domain/services/placement-profile-service.js';
 import { FEATURE_CAMPAIGN_EXTERNAL_ID } from '../constants.js';
@@ -240,7 +241,7 @@ async function createAssessmentCampaign({
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
           userId,
           snappedAt: sharedAt,
-          snapshot: JSON.stringify(keDataForSnapshot),
+          snapshot: new KnowledgeElementCollection(keDataForSnapshot).toSnapshot(),
           campaignParticipationId,
         });
 
@@ -404,7 +405,7 @@ async function createProfilesCollectionCampaign({
       databaseBuilder.factory.buildKnowledgeElementSnapshot({
         userId,
         snappedAt: sharedAt,
-        snapshot: JSON.stringify(keDataForSnapshot),
+        snapshot: new KnowledgeElementCollection(keDataForSnapshot).toSnapshot(),
         campaignParticipationId,
       });
 
