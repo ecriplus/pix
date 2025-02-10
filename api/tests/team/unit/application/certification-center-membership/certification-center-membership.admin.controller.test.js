@@ -1,3 +1,4 @@
+import { usecases as libUsecases } from '../../../../../lib/domain/usecases/index.js';
 import { certificationCenterMembershipAdminController } from '../../../../../src/team/application/certification-center-membership/certification-center-membership.admin.controller.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
@@ -114,6 +115,45 @@ describe('Unit | Team | Application | Controller | CertificationCenterMembership
       });
 
       expect(response.statusCode).to.equal(204);
+    });
+  });
+
+  describe('#findCertificationCenterMembershipsByUser', function () {
+    describe('#findCertificationCenterMembershipsByUser', function () {
+      it("returns user's certification centers", async function () {
+        // given
+        const certificationCenterMemberships = Symbol("a list of user's certification center memberships");
+        const certificationCenterMembershipsSerialized = Symbol(
+          "a list of user's certification center memberships serialized",
+        );
+
+        const certificationCenterMembershipSerializer = { serializeForAdmin: sinon.stub() };
+        certificationCenterMembershipSerializer.serializeForAdmin
+          .withArgs(certificationCenterMemberships)
+          .returns(certificationCenterMembershipsSerialized);
+
+        sinon
+          .stub(libUsecases, 'findCertificationCenterMembershipsByUser')
+          .withArgs({ userId: 12345 })
+          .resolves(certificationCenterMemberships);
+
+        // when
+        const request = {
+          params: {
+            id: 12345,
+          },
+        };
+        const result = await certificationCenterMembershipAdminController.findCertificationCenterMembershipsByUser(
+          request,
+          hFake,
+          {
+            certificationCenterMembershipSerializer,
+          },
+        );
+
+        // then
+        expect(result.source).to.equal(certificationCenterMembershipsSerialized);
+      });
     });
   });
 });

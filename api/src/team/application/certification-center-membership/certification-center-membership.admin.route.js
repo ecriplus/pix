@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import { userController } from '../../../../lib/application/users/user-controller.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { certificationCenterMembershipAdminController } from './certification-center-membership.admin.controller.js';
@@ -26,10 +25,10 @@ export const certificationCenterMembershipAdminRoutes = [
           id: identifiersType.userId,
         }),
       },
-      handler: userController.findCertificationCenterMembershipsByUser,
+      handler: certificationCenterMembershipAdminController.findCertificationCenterMembershipsByUser,
       notes: [
         "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
-        '- Elle permet à un administrateur de lister les centres de certification auxquels appartient l´utilisateur',
+          '- Elle permet à un administrateur de lister les centres de certification auxquels appartient l´utilisateur',
       ],
       tags: ['api', 'admin', 'user', 'certification-centers'],
     },

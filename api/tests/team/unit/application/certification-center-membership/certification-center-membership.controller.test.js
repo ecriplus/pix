@@ -2,7 +2,7 @@ import { certificationCenterMembershipController } from '../../../../../src/team
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Team | Application | Controller | CertificationCenterMembership', function () {
+describe('Unit | Team | Application | Admin | Controller | CertificationCenterMembership', function () {
   describe('#findCertificationCenterMemberships', function () {
     it('returns the serialized membership', async function () {
       // given

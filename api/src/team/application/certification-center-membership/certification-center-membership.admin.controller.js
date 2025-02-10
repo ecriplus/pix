@@ -1,3 +1,4 @@
+import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { BadRequestError } from '../../../shared/application/http-errors.js';
 import * as certificationCenterMembershipSerializer from '../../../shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
@@ -57,10 +58,25 @@ const createCertificationCenterMembershipByEmail = async function (
     .created();
 };
 
+const findCertificationCenterMembershipsByUser = async function (
+  request,
+  h,
+  dependencies = { certificationCenterMembershipSerializer },
+) {
+  const userId = request.params.id;
+  const certificationCenterMemberships = await libUsecases.findCertificationCenterMembershipsByUser({
+    userId,
+  });
+  return h.response(
+    dependencies.certificationCenterMembershipSerializer.serializeForAdmin(certificationCenterMemberships),
+  );
+};
+
 const certificationCenterMembershipAdminController = {
   updateRole,
   disableFromPixAdmin,
   createCertificationCenterMembershipByEmail,
+  findCertificationCenterMembershipsByUser
 };
 
 export { certificationCenterMembershipAdminController };
