@@ -178,7 +178,7 @@ describe('Acceptance | Controller | training-controller', function () {
             type: 'trainings',
             attributes: {
               title: 'Titre du training',
-              internalTitle: 'Titre interne du training',
+              'internal-title': 'Titre interne du training',
               link: 'https://training-link.org',
               type: 'webinaire',
               duration: {

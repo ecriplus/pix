@@ -140,6 +140,7 @@ describe('Unit | Devcomp | Application | Trainings | Router | training-router', 
           attributes: {
             link: 'http://www.example.net',
             title: 'ma formation',
+            'internal-title': 'Ma formation',
             duration: { days: 2, hours: 2, minutes: 2 },
             type: 'webinaire',
             locale: 'fr-fr',
@@ -247,6 +248,7 @@ describe('Unit | Devcomp | Application | Trainings | Router | training-router', 
             attributes: {
               link: 'http://www.example.net',
               title: 'ma formation',
+              'internal-title': 'Ma formation',
               duration: { days: 2, hours: 2, minutes: 2 },
               type: 'webinaire',
               locale: 'fr-fr',
@@ -285,6 +287,7 @@ describe('Unit | Devcomp | Application | Trainings | Router | training-router', 
             attributes: {
               link: 'example',
               title: 'ma formation',
+              'internal-title': 'Ma formation',
               duration: { days: 2, hours: 2, minutes: 2 },
               type: 'webinaire',
               locale: 'fr-fr',
@@ -321,6 +324,7 @@ describe('Unit | Devcomp | Application | Trainings | Router | training-router', 
           data: {
             attributes: {
               title: 'ma formation',
+              'internal-title': 'Ma formation',
               duration: { days: 2, hours: 2, minutes: 2 },
               type: 'webinaire',
               locale: 'fr-fr',
@@ -354,6 +358,42 @@ describe('Unit | Devcomp | Application | Trainings | Router | training-router', 
         const invalidPayload = {
           data: {
             attributes: {
+              'internal-title': 'Ma formation',
+              link: 'http://www.example.net',
+              duration: { days: 2, hours: 2, minutes: 2 },
+              type: 'webinaire',
+              locale: 'fr-fr',
+              'editor-name': 'ministère',
+              'editor-logo-url': 'http://www.image.pix.fr/image.svg',
+            },
+          },
+        };
+        sinon.stub(trainingController, 'create').returns('ok');
+
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier').callsFake((request, h) => h.response(true));
+
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request('POST', '/api/admin/trainings', invalidPayload);
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+
+      it('should return 400 if in the payload there is no internal title', async function () {
+        // given
+        const invalidPayload = {
+          data: {
+            attributes: {
+              title: 'Ma formation',
               link: 'http://www.example.net',
               duration: { days: 2, hours: 2, minutes: 2 },
               type: 'webinaire',
