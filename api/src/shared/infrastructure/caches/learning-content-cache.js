@@ -44,16 +44,19 @@ export class LearningContentCache {
     try {
       for await (const message of this.#pubSub.subscribe(this.#name)) {
         if (message.type === 'clear') {
-          logger.debug({ name: this.#name }, 'clearing cache');
+          logger.debug({ cacheName: this.#name }, 'clearing cache');
           this.#map.clear();
         }
         if (message.type === 'delete') {
-          logger.debug({ name: this.#name, key: message.key }, 'deleting cache key');
+          logger.debug({ cacheName: this.#name, key: message.key }, 'deleting cache key');
           this.#map.delete(message.key);
         }
       }
     } catch (err) {
-      logger.err({ err }, 'Error when subscribing to events for managing Learning Content Cache');
+      logger.err(
+        { cacheName: this.#name, err },
+        'Error when subscribing to events for managing Learning Content Cache',
+      );
       throw err;
     }
   }
