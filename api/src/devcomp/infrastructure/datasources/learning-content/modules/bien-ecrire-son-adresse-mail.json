@@ -2,6 +2,7 @@
   "id": "f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d",
   "slug": "bien-ecrire-son-adresse-mail",
   "title": "Bien écrire une adresse mail",
+  "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg",
     "description": "Écrire une adresse mail, c'est la première étape pour communiquer avec vos contacts. Dans ce module, découvrez les différentes parties de l'adresse mail et apprenez à éviter des erreurs courantes.",
