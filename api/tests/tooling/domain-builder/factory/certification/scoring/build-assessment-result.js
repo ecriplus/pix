@@ -24,18 +24,10 @@ buildAssessmentResult.standard = function ({
   });
 };
 
-buildAssessmentResult.notTrustable = function ({
-  pixScore,
-  reproducibilityRate,
-  status,
-  assessmentId,
-  juryId,
-  emitter,
-} = {}) {
+buildAssessmentResult.notTrustable = function ({ pixScore, reproducibilityRate, assessmentId, juryId, emitter } = {}) {
   return AssessmentResultFactory.buildNotTrustableAssessmentResult({
     pixScore,
     reproducibilityRate,
-    status,
     assessmentId,
     juryId,
     emitter,
@@ -67,7 +59,6 @@ buildAssessmentResult.insufficientCorrectAnswers = function ({
 buildAssessmentResult.lackOfAnswersForTechnicalReason = function ({
   pixScore,
   reproducibilityRate,
-  status,
   assessmentId,
   juryId,
   competenceMarks,
@@ -76,7 +67,6 @@ buildAssessmentResult.lackOfAnswersForTechnicalReason = function ({
   return AssessmentResultFactory.buildLackOfAnswersForTechnicalReason({
     pixScore,
     reproducibilityRate,
-    status,
     assessmentId,
     juryId,
     competenceMarks,

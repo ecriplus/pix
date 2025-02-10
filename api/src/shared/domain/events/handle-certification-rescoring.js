@@ -89,7 +89,9 @@ async function _handleV2CertificationScoring({
         certificationAssessment,
       });
 
-    await _cancelCertificationCourseIfNotTrustableOrLackOfAnswersForTechnicalReason({
+    // isCancelled will be removed
+    // this block will be removed
+    await _toggleCertificationCourseCancellationIfNotTrustableOrLackOfAnswersForTechnicalReason({
       certificationCourse,
       hasEnoughNonNeutralizedChallengesToBeTrusted:
         certificationAssessmentScore.hasEnoughNonNeutralizedChallengesToBeTrusted,
@@ -146,7 +148,7 @@ async function _handleV3CertificationScoring({
   });
 }
 
-async function _cancelCertificationCourseIfNotTrustableOrLackOfAnswersForTechnicalReason({
+async function _toggleCertificationCourseCancellationIfNotTrustableOrLackOfAnswersForTechnicalReason({
   certificationCourse,
   hasEnoughNonNeutralizedChallengesToBeTrusted,
   certificationCourseRepository,

@@ -572,7 +572,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
             emitter: 'PIX-ALGO-NEUTRALIZATION',
             pixScore: 30,
             reproducibilityRate: 80,
-            status: AssessmentResult.status.VALIDATED,
             assessmentId: 123,
             juryId: 7,
           });
@@ -622,7 +621,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
               emitter: 'PIX-ALGO-NEUTRALIZATION',
               pixScore: 0,
               reproducibilityRate: 45,
-              status: AssessmentResult.status.REJECTED,
               assessmentId: 123,
               juryId: 7,
             });
@@ -903,7 +901,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V2', funct
                 domainBuilder.certification.scoring.buildAssessmentResult.lackOfAnswersForTechnicalReason({
                   pixScore: 0,
                   reproducibilityRate: 33,
-                  status: AssessmentResult.status.REJECTED,
                   assessmentId: 123,
                   emitter: CertificationResult.emitters.PIX_ALGO_NEUTRALIZATION,
                   juryId: 7,

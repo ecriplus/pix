@@ -36,7 +36,7 @@ export class AssessmentResultFactory {
     });
   }
 
-  static buildNotTrustableAssessmentResult({ pixScore, reproducibilityRate, status, assessmentId, juryId, emitter }) {
+  static buildNotTrustableAssessmentResult({ pixScore, reproducibilityRate, assessmentId, juryId, emitter }) {
     const commentForCandidate = new JuryComment({
       context: JuryCommentContexts.CANDIDATE,
       commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_NEUTRALIZATION,
@@ -53,7 +53,7 @@ export class AssessmentResultFactory {
       commentForOrganization,
       pixScore,
       reproducibilityRate,
-      status,
+      status: AssessmentResult.status.CANCELLED,
       assessmentId,
       juryId,
     });
