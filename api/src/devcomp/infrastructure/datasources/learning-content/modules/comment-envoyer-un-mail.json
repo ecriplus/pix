@@ -127,7 +127,7 @@
           "element": {
             "id": "e67e0363-7de1-4408-9336-d2604895dcff",
             "type": "text",
-            "content": "<p>Rayan utilise l'application ci-dessous comme boîte mail.<br>Aidez Rayan à envoyer un nouveau mail : </p><ul><li>à : <strong>michel@pixmail.org</strong></li><li>avec l’objet : <strong>Heure prochain cours débutant</strong></li><li>avec le message :</li><strong>Bonjour Michel,<br>à quelle heure est le prochain cours ?<br>Merci, Rayan</strong></li></ul>"
+            "content": "<p>Rayan utilise l'application ci-dessous comme boîte mail.<br>Aidez Rayan à envoyer un nouveau mail : </p><ul><li>à : <strong>michel@pixmail.org</strong></li><li>avec l’objet : <strong>Heure prochain cours débutant</strong></li><li>avec le message :<strong>Bonjour Michel,<br>à quelle heure est le prochain cours ?<br>Merci, Rayan</strong></li></ul>"
           }
         },
         {
@@ -396,7 +396,7 @@
             ],
             "feedbacks": {
               "valid": "<p><span class=\"feedback__state\">Bonne réponse !</span><span aria-hidden=\"true\">🎉</span></p>",
-              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><p>Observez à nouveau le mail et réessayez.</p>"
+              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Observez à nouveau le mail et réessayez.</p>"
             }
           }
         }
