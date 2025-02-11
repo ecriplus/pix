@@ -658,7 +658,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
     });
   });
 
-  context('#updateProvinceCode', function () {
+  context('#provinceCode', function () {
     it('updates ProvinceCode', function () {
       // given
       const initialProvinceCode = '44200';
@@ -667,9 +667,26 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
         provinceCode: initialProvinceCode,
       });
       // when
-      givenOrganization.updateProvinceCode(newProvinceCode);
+      givenOrganization.provinceCode = newProvinceCode;
       // then
       expect(givenOrganization.provinceCode).to.equal(newProvinceCode);
+    });
+
+    context('when there is no 3 numbers', function () {
+      it('normalizes provinceCode by padding', function () {
+        // given
+        const initialProvinceCode = '6';
+        const newProvinceCode = '44';
+        const givenOrganization = new OrganizationForAdmin({
+          provinceCode: initialProvinceCode,
+        });
+
+        // when
+        givenOrganization.provinceCode = newProvinceCode;
+
+        // then
+        expect(givenOrganization.provinceCode).to.equal('044');
+      });
     });
   });
 
@@ -746,8 +763,8 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       );
 
       // then
-      const expectedOrganization = domainBuilder.buildOrganizationForAdmin({ provinceCode });
-      expect(organizationToUpdate.provinceCode).to.equal(provinceCode);
+      const expectedOrganization = domainBuilder.buildOrganizationForAdmin({ provinceCode: `0${provinceCode}` });
+      expect(organizationToUpdate.provinceCode).to.equal(`0${provinceCode}`);
       expect(organizationToUpdate).to.deep.equal(expectedOrganization);
     });
 
