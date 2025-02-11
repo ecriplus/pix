@@ -17,7 +17,7 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
     const routerStub = { transitionTo: sinon.stub() };
     eventStub = { preventDefault: sinon.stub() };
     controller.set('router', routerStub);
-    controller.set('errorMessage', null);
+    controller.set('apiErrorMessage', null);
     controller.set('campaignCode', null);
   });
 
@@ -114,17 +114,6 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
       });
     });
 
-    test('should set error when campaign code is empty', async function (assert) {
-      // given
-      controller.set('campaignCode', '');
-
-      // when
-      await controller.actions.startCampaign.call(controller, eventStub);
-
-      // then
-      assert.strictEqual(controller.get('errorMessage'), 'Veuillez saisir un code.');
-    });
-
     test('should set error when no campaign found with code', async function (assert) {
       // given
       const campaignCode = 'azerty1';
@@ -142,7 +131,7 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
 
       // then
       assert.strictEqual(
-        controller.get('errorMessage'),
+        controller.get('apiErrorMessage'),
         controller.intl.t('pages.fill-in-campaign-code.errors.not-found'),
       );
     });
@@ -164,57 +153,9 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
 
       // then
       assert.strictEqual(
-        controller.get('errorMessage'),
+        controller.get('apiErrorMessage'),
         'Oups ! nous ne parvenons pas à vous trouver. Vérifiez vos informations afin de continuer ou prévenez l’organisateur.',
       );
-    });
-  });
-
-  module('get firstTitle', function () {
-    module('When user is not authenticated', function () {
-      test('should return the not connected first title', function (assert) {
-        // given
-        stubSessionService(this.owner, { isAuthenticated: false });
-        const expectedFirstTitle = controller.intl.t('pages.fill-in-campaign-code.first-title-not-connected');
-
-        // when
-        const firstTitle = controller.firstTitle;
-
-        // then
-        assert.strictEqual(firstTitle, expectedFirstTitle);
-      });
-    });
-
-    module('When user is authenticated', function () {
-      test('should return the connected first title with user firstName', function (assert) {
-        // given
-        stubSessionService(this.owner, { isAuthenticated: true });
-        const currentUserService = stubCurrentUserService(this.owner);
-        const expectedFirstTitle = controller.intl.t('pages.fill-in-campaign-code.first-title-connected', {
-          firstName: currentUserService.user.firstName,
-        });
-
-        // when
-        const firstTitle = controller.firstTitle;
-
-        // then
-        assert.strictEqual(firstTitle, expectedFirstTitle);
-      });
-    });
-
-    module('When user is anonymous', function () {
-      test('should return the not connected first title', function (assert) {
-        // given
-        stubSessionService(this.owner, { isAuthenticated: true });
-        stubCurrentUserService(this.owner, { isAnonymous: true });
-        const expectedFirstTitle = controller.intl.t('pages.fill-in-campaign-code.first-title-not-connected');
-
-        // when
-        const firstTitle = controller.firstTitle;
-
-        // then
-        assert.strictEqual(firstTitle, expectedFirstTitle);
-      });
     });
   });
 
@@ -255,59 +196,6 @@ module('Unit | Controller | Fill in Campaign Code', function (hooks) {
 
       // then
       assert.false(isUserAuthenticatedByGAR);
-    });
-  });
-
-  module('get showWarningMessage', function () {
-    test('should return true if user is authenticated and not anonymous', function (assert) {
-      // given
-      stubSessionService(this.owner, { isAuthenticated: true });
-      stubCurrentUserService(this.owner, { isAnonymous: false });
-
-      // when
-      const showWarningMessage = controller.showWarningMessage;
-
-      // then
-      assert.true(showWarningMessage);
-    });
-
-    test('should return false if user is not authenticated', function (assert) {
-      // given
-      stubSessionService(this.owner, { isAuthenticated: false });
-      stubCurrentUserService(this.owner);
-
-      // when
-      const showWarningMessage = controller.showWarningMessage;
-
-      // then
-      assert.false(showWarningMessage);
-    });
-
-    test('should return false if user is authenticated and anonymous', function (assert) {
-      // given
-      stubSessionService(this.owner, { isAuthenticated: true });
-      stubCurrentUserService(this.owner, { isAnonymous: true });
-
-      // when
-      const showWarningMessage = controller.showWarningMessage;
-
-      // then
-      assert.false(showWarningMessage);
-    });
-  });
-
-  module('#disconnect', function () {
-    test('should invalidate the session', function (assert) {
-      // given
-      const sessionService = stubSessionService(this.owner, { isAuthenticated: true });
-      stubCurrentUserService(this.owner);
-
-      // when
-      controller.disconnect();
-
-      // then
-      sinon.assert.calledOnce(sessionService.invalidate);
-      assert.ok(true);
     });
   });
 });

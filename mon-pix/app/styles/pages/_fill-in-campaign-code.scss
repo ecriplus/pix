@@ -4,11 +4,8 @@
 
 .fill-in-campaign-code {
   &__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 100%;
-    margin-bottom: 32px;
+    margin-bottom: var(--pix-spacing-8x);
     padding: 16px 16px var(--pix-spacing-4x);
 
     @include breakpoints.device-is('tablet') {
@@ -18,17 +15,17 @@
 
   &__title {
     margin-bottom: var(--pix-spacing-8x);
-    font-size: 2rem;
     text-align: center;
+
+    @extend %pix-title-m;
   }
 
   &__instruction {
-    max-width: 600px;
+    max-width: fit-content;
     margin-bottom: var(--pix-spacing-4x);
-    color: var(--pix-neutral-900);
-    font-size: 1.219rem;
-    font-family: fonts.$font-open-sans;
     text-align: center;
+
+    @extend %pix-body-l;
 
     @include breakpoints.device-is('tablet') {
       width: 75vw;
@@ -39,35 +36,11 @@
     }
   }
 
-  &__form-field {
-    display: inline-block;
-    margin-bottom: var(--pix-spacing-4x);
-    text-align: left;
-
-    input {
-      width: 13.6ch;
-    }
-  }
-
   &__form {
     display: flex;
     flex-direction: column;
+    gap: var(--pix-spacing-4x);
     align-items: center;
-    justify-content: space-between;
-  }
-
-  &__actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: var(--pix-spacing-4x);
-  }
-
-  &__error {
-    margin-bottom: var(--pix-spacing-4x);
-    color: var(--pix-warning-700);
-    font-size: 0.875rem;
-    text-align: center;
   }
 
   &__warning {
@@ -76,21 +49,6 @@
     color: var(--pix-neutral-900);
     font-size: 0.875rem;
     text-align: center;
-  }
-
-  &__explanation {
-    max-width: 600px;
-    padding-top: 25px;
-    text-align: center;
-    border-top: 1px solid var(--pix-neutral-20);
-
-    @include breakpoints.device-is('tablet') {
-      width: 75vw;
-    }
-
-    @include breakpoints.device-is('mobile') {
-      width: 75vw;
-    }
   }
 }
 
