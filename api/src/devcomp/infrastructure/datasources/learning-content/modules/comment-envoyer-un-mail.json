@@ -62,7 +62,7 @@
             "isCompletionRequired": false,
             "title": "Carrousel d'images",
             "url": "https://epreuves.pix.fr/fr/carousel/modulix_envoyer_mail.html",
-            "instruction": "&nbsp;",
+            "instruction": "<p></p>",
             "height": 450
           }
         },
@@ -136,7 +136,7 @@
             "id": "dc699b80-4534-42fa-90a7-5d42600e0064",
             "type": "embed",
             "isCompletionRequired": false,
-            "title": "",
+            "title": "Simulateur PixMail",
             "url": "https://epreuves.pix.fr/pixmail-envoi/pixmail-envoi.html?mode=modulix-mail",
             "instruction": "<p></p>",
             "height": 500
