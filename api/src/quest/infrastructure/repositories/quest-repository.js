@@ -26,4 +26,9 @@ const saveInBatch = async ({ quests }) => {
   }
 };
 
-export { findAll, saveInBatch };
+const deleteByIds = async ({ questIds }) => {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('quests').whereIn('id', questIds).delete();
+};
+
+export { deleteByIds, findAll, saveInBatch };
