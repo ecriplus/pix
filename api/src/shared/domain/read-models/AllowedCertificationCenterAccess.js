@@ -3,6 +3,8 @@ import { config } from '../../config.js';
 
 const { features } = config;
 class AllowedCertificationCenterAccess {
+  #isInWhitelist = false;
+
   constructor({ center, isRelatedToManagingStudentsOrganization, relatedOrganizationTags }) {
     this.id = center.id;
     this.name = center.name;
@@ -11,6 +13,7 @@ class AllowedCertificationCenterAccess {
     this.type = center.type;
     this.habilitations = center.habilitations;
     this.isV3Pilot = center.isV3Pilot;
+    this.#isInWhitelist = !!center.isInWhitelist;
     this.isRelatedToManagingStudentsOrganization = isRelatedToManagingStudentsOrganization;
     this.relatedOrganizationTags = relatedOrganizationTags;
   }
@@ -63,7 +66,7 @@ class AllowedCertificationCenterAccess {
   }
 
   isInWhitelist() {
-    return features.pixCertifScoBlockedAccessWhitelist.includes(this.externalId.toUpperCase());
+    return this.#isInWhitelist;
   }
 
   get pixCertifScoBlockedAccessDateLycee() {

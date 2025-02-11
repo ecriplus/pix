@@ -3,16 +3,14 @@ import { domainBuilder, expect, sinon } from '../../../test-helper.js';
 
 describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', function () {
   context('#isInWhitelist', function () {
-    let originalEnvValueWhitelist, originalEnvValueDateCollege, originalEnvValueDateLycee;
+    let originalEnvValueDateCollege, originalEnvValueDateLycee;
 
     beforeEach(function () {
-      originalEnvValueWhitelist = settings.features.pixCertifScoBlockedAccessWhitelist;
       originalEnvValueDateCollege = settings.features.pixCertifScoBlockedAccessDateCollege;
       originalEnvValueDateLycee = settings.features.pixCertifScoBlockedAccessDateLycee;
     });
 
     afterEach(function () {
-      settings.features.pixCertifScoBlockedAccessWhitelist = originalEnvValueWhitelist;
       settings.features.pixCertifScoBlockedAccessDateCollege = originalEnvValueDateCollege;
       settings.features.pixCertifScoBlockedAccessDateLycee = originalEnvValueDateLycee;
     });
@@ -21,7 +19,7 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
       // given
       settings.features.pixCertifScoBlockedAccessWhitelist = ['EXAMPLE1', 'EXAMPLE2'];
       const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
-        externalId: 'EXAMPLE2',
+        isInWhitelist: true,
       });
 
       // when
@@ -43,20 +41,6 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
 
       // then
       expect(isInWhiteList).to.be.false;
-    });
-
-    it('should be case insensitive', function () {
-      // given
-      settings.features.pixCertifScoBlockedAccessWhitelist = ['EXAMPLE1', 'EXAMPLE2'];
-      const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
-        externalId: 'exAmpLe1',
-      });
-
-      // when
-      const isInWhiteList = allowedCertificationCenterAccess.isInWhitelist();
-
-      // then
-      expect(isInWhiteList).to.be.true;
     });
   });
 
@@ -386,7 +370,7 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
       clock = sinon.useFakeTimers({ now: new Date('2020-01-01'), toFake: ['Date'] });
       const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
         ...validData,
-        externalId: 'WHITELISTED',
+        isInWhitelist: true,
       });
 
       // when
@@ -460,7 +444,7 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
       clock = sinon.useFakeTimers({ now: new Date('2020-01-01'), toFake: ['Date'] });
       const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
         ...validData,
-        externalId: 'WHITELISTED',
+        isInWhitelist: true,
       });
 
       // when
@@ -543,7 +527,7 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
       clock = sinon.useFakeTimers({ now: new Date('2020-01-01'), toFake: ['Date'] });
       const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
         ...validData,
-        externalId: 'WHITELISTED',
+        isInWhitelist: true,
       });
 
       // when
@@ -620,7 +604,7 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
       clock = sinon.useFakeTimers({ now: new Date('2020-01-01'), toFake: ['Date'] });
       const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
         ...validData,
-        externalId: 'WHITELISTED',
+        isInWhitelist: true,
       });
 
       // when
