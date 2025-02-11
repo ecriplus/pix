@@ -136,6 +136,7 @@ buildAuthenticationMethod.withOidcProviderAsIdentityProvider = function ({
   id = databaseBuffer.getNextId(),
   externalIdentifier,
   userId,
+  identityProvider,
 }) {
   userId = isUndefined(userId) ? buildUser().id : userId;
 
@@ -145,7 +146,7 @@ buildAuthenticationMethod.withOidcProviderAsIdentityProvider = function ({
   }
   const values = {
     id,
-    identityProvider: 'oidcFromSeeds',
+    identityProvider,
     externalIdentifier: generatedIdentifier,
     userId,
     authenticationComplement: new AuthenticationMethod.OidcAuthenticationComplement({
