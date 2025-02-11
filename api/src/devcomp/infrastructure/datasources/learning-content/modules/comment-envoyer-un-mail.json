@@ -4,7 +4,7 @@
   "title": "Comment envoyer un mail ? ",
   "isBeta": true,
   "details": {
-    "image": "",
+    "image": "https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg",
     "description": "En contexte professionnel et associatif ou pour communiquer avec des proches, envoyer des mails est indispensable.<br>Dans ce module, découvrez les étapes pour envoyer un mail simplement et le rôle des champs dans un mail.",
     "duration": 10,
     "level": "Débutant",
@@ -62,7 +62,7 @@
             "isCompletionRequired": false,
             "title": "Carrousel d'images",
             "url": "https://epreuves.pix.fr/fr/carousel/modulix_envoyer_mail.html",
-            "instruction": "",
+            "instruction": "&nbsp;",
             "height": 450
           }
         },
@@ -230,10 +230,6 @@
                       "feedback": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>La personne qui envoie le mail (expéditeur) doit être connectée à un compte avec une adresse mail. C’est cette adresse qui est automatiquement écrite dans le champ <code>De</code>.</p>"
                     }
                   ],
-                  "feedbacks": {
-                    "valid": "",
-                    "invalid": ""
-                  },
                   "solution": "1"
                 }
               ]
@@ -437,7 +433,7 @@
                 "feedback": "<p>Pour réussir, retournez voir la vidéo ou demandez de l'aide si vous êtes accompagné.<br>Si vous n'avez pas d'adresse mail, vous pouvez vous en créer une gratuitement sur internet.</p>"
               }
             ],
-            "solution": ""
+            "solution": "1"
           }
         }
       ]
