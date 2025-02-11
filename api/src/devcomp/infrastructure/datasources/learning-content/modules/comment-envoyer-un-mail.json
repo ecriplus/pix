@@ -112,7 +112,7 @@
           "element": {
             "id": "fd39cc63-32f7-46eb-9f8a-55623878e0d1",
             "type": "text",
-            "content": "<iframe title=\"Comment envoyer un mail ?\" width=\"560\" height=\"315\" src=\"https://tube-numerique-educatif.apps.education.fr/videos/embed/7d256f26-7777-4277-aa64-ca0084e1363b?title=0&amp;warningTitle=0&amp;peertubeLink=0&amp;p2p=0\" frameborder=\"0\" allowfullscreen=\"\" sandbox=\"allow-same-origin allow-scripts allow-popups allow-forms\"></iframe>"
+            "content": "<iframe title=\"Comment envoyer un mail ?\" width=\"560\" height=\"315\" src=\"https://tube-numerique-educatif.apps.education.fr/videos/embed/7d256f26-7777-4277-aa64-ca0084e1363b?title=0&amp;warningTitle=0&amp;peertubeLink=0&amp;p2p=0\" allowfullscreen=\"\" sandbox=\"allow-same-origin allow-scripts allow-popups allow-forms\"></iframe>"
           }
         }
       ]
@@ -127,7 +127,7 @@
           "element": {
             "id": "e67e0363-7de1-4408-9336-d2604895dcff",
             "type": "text",
-            "content": "<p>Rayan utilise l'application ci-dessous comme boîte mail.<br>Aidez Rayan à envoyer un nouveau mail : </p><ul><li>à : <strong>michel@pixmail.org</strong></li><li>avec l’objet : <strong>Heure prochain cours débutant</strong></li><li>avec le message :</li><strong>Bonjour Michel,<br>à quelle heure est le prochain cours ?<br>Merci, Rayan</strong></ul>"
+            "content": "<p>Rayan utilise l'application ci-dessous comme boîte mail.<br>Aidez Rayan à envoyer un nouveau mail : </p><ul><li>à : <strong>michel@pixmail.org</strong></li><li>avec l’objet : <strong>Heure prochain cours débutant</strong></li><li>avec le message :</li><strong>Bonjour Michel,<br>à quelle heure est le prochain cours ?<br>Merci, Rayan</strong></li></ul>"
           }
         },
         {
@@ -147,7 +147,7 @@
           "element": {
             "id": "f7429e02-e27c-4f12-ba79-80785ad66925",
             "type": "text",
-            "content": "<p>🗝️ Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous :&nbsp;</p><details><summary>Indice 1</summary>Cliquez sur Nouveau message en haut à gauche pour créer un mail.</details><details><summary>Indice 2</summary>Complétez les 3 champs avec les textes écrits dans la consigne.</details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://www.image-heberg.fr/files/1738339954456303332.gif\"></iframe></details></details>"
+            "content": "<p>🗝️ Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous :&nbsp;</p><details><summary>Indice 1</summary>Cliquez sur Nouveau message en haut à gauche pour créer un mail.</details><details><summary>Indice 2</summary>Complétez les 3 champs avec les textes écrits dans la consigne.</details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://www.image-heberg.fr/files/1738339954456303332.gif\"></iframe></details>"
           }
         }
       ]
@@ -395,8 +395,8 @@
               }
             ],
             "feedbacks": {
-              "valid": "<p><span class=\"feedback__state\">Bonne réponse !</span><span aria-hidden=\"true\">🎉</span>",
-              "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Observez à nouveau le mail et réessayez.</p>"
+              "valid": "<p><span class=\"feedback__state\">Bonne réponse !</span><span aria-hidden=\"true\">🎉</span></p>",
+              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><p>Observez à nouveau le mail et réessayez.</p>"
             }
           }
         }
