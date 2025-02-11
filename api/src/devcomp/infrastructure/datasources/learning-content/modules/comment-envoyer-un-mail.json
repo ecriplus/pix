@@ -258,7 +258,7 @@
             "type": "image",
             "url": "https://i.imgur.com/GXJ6ihZ.png",
             "alt": "",
-            "alternativeText": "<p></p>"
+            "alternativeText": "<p>Le champ Objet permet de donner un titre au mail. Il permet de vite connaître le sujet du mail. Le champ De indique la personne qui envoie le mail. Le champ À indique la personne qui reçoit le mail.</p>"
           }
         }
       ]
@@ -283,7 +283,7 @@
             "type": "image",
             "url": "https://i.imgur.com/iQWPTJW.png",
             "alt": "",
-            "alternativeText": ""
+            "alternativeText": "<ul><li>22 octobre 2024 (il y a 8 jours)</li> <li>De : michel@pixmail.com</li> <li>À :leo@laposte.net; anna@gmail.com; hamed@orange.fr</li><li> Objet : Costume pour le 27 octobre</li> <li>Bonjour à tous, Pensez à amener vos costumes de chevaliers pour la dernière scène. Pas besoin de prévenir Jennifer, Marine, Clément et Rayan : ils seront absents. Rendez-vous comme d'habitude au 7 rue Babylone à 18h.À bientôt ! Le Théâtre Lumière</li></ul>"
           }
         },
         {
@@ -295,7 +295,7 @@
             "proposals": [
               {
                 "type": "text",
-                "content": "<p>Qui a envoyé ce mail ?</p>"
+                "content": "<span>Qui a envoyé ce mail ?</span>"
               },
               {
                 "input": "a",
@@ -329,7 +329,7 @@
               },
               {
                 "type": "text",
-                "content": "<p>Qui va recevoir ce mail ?</p>"
+                "content": "<span>Qui va recevoir ce mail ?</span>"
               },
               {
                 "input": "b",
@@ -363,7 +363,7 @@
               },
               {
                 "type": "text",
-                "content": "<p>Quel est l'objet de ce mail ?</p>"
+                "content": "<span>Quel est l'objet de ce mail ?</span>"
               },
               {
                 "input": "c",
@@ -391,7 +391,9 @@
                     "content": "Costumes pour le 27 octobre"
                   }
                 ],
-                "solutions": []
+                "solutions": [
+                  "4"
+                ]
               }
             ],
             "feedbacks": {
