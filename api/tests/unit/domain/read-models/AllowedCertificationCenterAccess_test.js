@@ -17,7 +17,6 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
 
     it('should return true when certification center is in whitelist', function () {
       // given
-      settings.features.pixCertifScoBlockedAccessWhitelist = ['EXAMPLE1', 'EXAMPLE2'];
       const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
         isInWhitelist: true,
       });
@@ -31,7 +30,6 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
 
     it('should return false when certification center is not in whitelist', function () {
       // given
-      settings.features.pixCertifScoBlockedAccessWhitelist = ['EXAMPLE1', 'EXAMPLE2'];
       const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
         externalId: 'EXAMPLE3',
       });
@@ -321,7 +319,6 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     let clock;
 
     beforeEach(function () {
-      settings.features.pixCertifScoBlockedAccessWhitelist = ['WHITELISTED'];
       settings.features.pixCertifScoBlockedAccessDateCollege = '2021-01-01';
       validData = {
         externalId: 'NOT_WHITELISTED',
@@ -410,7 +407,6 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     let clock;
 
     beforeEach(function () {
-      settings.features.pixCertifScoBlockedAccessWhitelist = ['WHITELISTED'];
       settings.features.pixCertifScoBlockedAccessDateLycee = '2021-01-01';
       validData = {
         externalId: 'NOT_WHITELISTED',
@@ -493,7 +489,6 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     let clock;
 
     beforeEach(function () {
-      settings.features.pixCertifScoBlockedAccessWhitelist = ['WHITELISTED'];
       settings.features.pixCertifScoBlockedAccessDateLycee = '2021-01-01';
       validData = {
         externalId: 'NOT_WHITELISTED',
@@ -570,7 +565,6 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     let clock;
 
     beforeEach(function () {
-      settings.features.pixCertifScoBlockedAccessWhitelist = ['WHITELISTED'];
       settings.features.pixCertifScoBlockedAccessDateLycee = '2021-01-01';
       validData = {
         externalId: 'NOT_WHITELISTED',
