@@ -64,4 +64,52 @@ describe('Unit | Application | Controller | Campaign Results', function () {
       expect(errorCatched).to.be.instanceof(UserNotAuthorizedToAccessEntityError);
     });
   });
+
+  describe('#findAssessmentParticipationResults', function () {
+    const campaignId = 1;
+    const userId = 1;
+    const locale = FRENCH_SPOKEN;
+    let campaignAssessmentResultMinimalSerializer;
+    let pageSymbol, filterSymbol, resultSymbol, serializerResponseSymbol;
+
+    beforeEach(function () {
+      sinon.stub(usecases, 'findAssessmentParticipationResultList');
+      campaignAssessmentResultMinimalSerializer = {
+        serialize: sinon.stub(),
+      };
+      pageSymbol = Symbol('pageSymbol');
+      filterSymbol = Symbol('filter');
+      resultSymbol = Symbol('result');
+      serializerResponseSymbol = Symbol('serialize');
+    });
+
+    it('should return serialized results', async function () {
+      // given
+      usecases.findAssessmentParticipationResultList
+        .withArgs({
+          campaignId,
+          page: pageSymbol,
+          filters: filterSymbol,
+        })
+        .resolves(resultSymbol);
+      campaignAssessmentResultMinimalSerializer.serialize.withArgs(resultSymbol).resolves(serializerResponseSymbol);
+      const request = {
+        auth: { credentials: { userId } },
+        params: { campaignId },
+        query: {
+          page: pageSymbol,
+          filter: filterSymbol,
+        },
+        headers: { 'accept-language': locale },
+      };
+
+      // when
+      const response = await campaignResultsController.findAssessmentParticipationResults(request, hFake, {
+        campaignAssessmentResultMinimalSerializer,
+      });
+
+      // then
+      expect(response).to.equal(serializerResponseSymbol);
+    });
+  });
 });
