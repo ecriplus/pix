@@ -21,6 +21,11 @@ const questCsvHeader = {
       name: 'Json configuration for quest',
       isRequired: true,
     }),
+    new CsvColumn({
+      property: 'deleteQuest',
+      name: 'Delete quest',
+      isRequired: false,
+    }),
   ],
 };
 
@@ -32,15 +37,31 @@ export const createOrUpdateQuestsInBatch = withTransaction(
    * @returns {Promise<void>}
    */
   async ({ filePath, questRepository }) => {
+    const deleteQuestIds = [];
+    const updatedOrNewQuest = [];
+
     const stream = createReadStream(filePath);
     const buffer = await getDataBuffer(stream);
 
     const csvParser = new CsvParser(buffer, questCsvHeader);
     const csvData = csvParser.parse();
-    const data = csvData.map(({ questId, content }) => {
-      return new Quest({ id: questId || undefined, ...JSON.parse(content) });
+
+    csvData.forEach(({ questId, content, deleteQuest }) => {
+      if (deleteQuest && questId) {
+        deleteQuestIds.push(questId);
+      } else {
+        updatedOrNewQuest.push(new Quest({ id: questId || undefined, ...JSON.parse(content) }));
+      }
     });
 
-    return questRepository.saveInBatch({ quests: data });
+    if (deleteQuestIds.length > 0) {
+      await questRepository.deleteByIds({ questIds: deleteQuestIds });
+    }
+
+    if (updatedOrNewQuest.length > 0) {
+      await questRepository.saveInBatch({ quests: updatedOrNewQuest });
+    }
+
+    return true;
   },
 );

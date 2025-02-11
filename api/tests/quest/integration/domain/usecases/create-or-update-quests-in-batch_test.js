@@ -17,13 +17,15 @@ describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-b
       `Quest ID;Json configuration for quest
     ;{"rewardType":"coucou","rewardId":null,"eligibilityRequirements":{"eligibility":"eligibility"},"successRequirements":{"success":"success"}}`,
     );
-    const spy = sinon.spy(repositories.questRepository, 'saveInBatch');
+    const spySave = sinon.spy(repositories.questRepository, 'saveInBatch');
+    const spyDelete = sinon.spy(repositories.questRepository, 'deleteByIds');
 
     // when
     await usecases.createOrUpdateQuestsInBatch({ filePath });
 
     // then
-    expect(spy).to.have.been.calledWithExactly({
+    expect(spyDelete.called).to.be.false;
+    expect(spySave).to.have.been.calledWithExactly({
       quests: [
         new Quest({
           id: undefined,
@@ -35,6 +37,26 @@ describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-b
           successRequirements: { success: 'success' },
         }),
       ],
+    });
+  });
+
+  it('should delete the passed quests in file', async function () {
+    // given
+    filePath = await createTempFile(
+      'test.csv',
+      `Quest ID;Json configuration for quest;deleteQuest
+    3;{"rewardType":"coucou","rewardId":null,"eligibilityRequirements":{"eligibility":"eligibility"},"successRequirements":{"success":"success"}};true`,
+    );
+    const spySave = sinon.spy(repositories.questRepository, 'saveInBatch');
+    const spyDelete = sinon.spy(repositories.questRepository, 'deleteByIds');
+
+    // when
+    await usecases.createOrUpdateQuestsInBatch({ filePath });
+
+    // then
+    expect(spySave.called).to.be.false;
+    expect(spyDelete).to.have.been.calledWithExactly({
+      questIds: ['3'],
     });
   });
 });
