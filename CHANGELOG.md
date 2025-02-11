@@ -1,5 +1,27 @@
 # Pix Changelog
 
+## v5.40.0 (11/02/2025)
+
+
+### :rocket: Amélioration
+- [#11235](https://github.com/1024pix/pix/pull/11235) [FEATURE] Create Module bases-clavier-ordinateur-2.json (MODC-606).
+- [#11062](https://github.com/1024pix/pix/pull/11062) [FEATURE] Create Module bases-clavier-ordinateur-1.json (MODC-204).
+- [#11380](https://github.com/1024pix/pix/pull/11380) [FEATURE] Ne pas faire fuiter l'information qu'un compte existe ou non dans la route /api/password-reset-demands  (PIX-16365).
+- [#11375](https://github.com/1024pix/pix/pull/11375) [FEATURE]  Ajouter une route pour retourner les badges acquis lors des participations d'une campagne (PIX-16240).
+
+### :building_construction: Tech
+- [#11378](https://github.com/1024pix/pix/pull/11378) [TECH] :package: Déplace le repo `badgeForCalculation` vers `src/`.
+- [#11339](https://github.com/1024pix/pix/pull/11339) [TECH] ne plus enregistrer les userId / assessmentId dans les snapshot (Pix-16285).
+- [#11370](https://github.com/1024pix/pix/pull/11370) [TECH] Déprécier l'utilisation du isCancelled au profit du status du dernier AssessmentResult sur Pix Admin (PIX-16470).
+- [#11371](https://github.com/1024pix/pix/pull/11371) [TECH] Afficher un statut annulée en cas de certification avec problème technique et - 20 questions (PIX-16476).
+
+### :bug: Correction
+- [#11379](https://github.com/1024pix/pix/pull/11379) [BUGFIX] Corriger le script d'envoi d'invitation à rejoindre une organisation en masse (PIX-16498).
+- [#11373](https://github.com/1024pix/pix/pull/11373) [BUGFIX] Tolérance aux doublons dans les réponses sur Pix Junior.
+
+### :coffee: Autre
+- [#11163](https://github.com/1024pix/pix/pull/11163) [DOC] Ajout d'un document décrivant les pratiques à suivre concernant les erreurs pour les devs.
+
 ## v5.39.0 (10/02/2025)
 
 
