@@ -117,7 +117,7 @@ function _buildOidcProvidersForPixAdmin(databaseBuilder) {
   );
 }
 
-async function _buildOidcProvidersFromEnv(databaseBuilder) {
+function _buildOidcProvidersFromEnv(databaseBuilder) {
   const oidcProvidersJson = process.env.OIDC_PROVIDERS;
   if (!oidcProvidersJson) {
     debugOidcProvidersSeeds('No environment variable OIDC_PROVIDERS defined, no loading from environment.');
@@ -125,13 +125,9 @@ async function _buildOidcProvidersFromEnv(databaseBuilder) {
   }
 
   const oidcProviders = JSON.parse(oidcProvidersJson);
-  await Promise.all(
-    oidcProviders.map(async (oidcProviderPropertiesWithRawClientSecret) => {
-      debugOidcProvidersSeeds(
-        `Loading configuration for OIDC provider "${oidcProviderPropertiesWithRawClientSecret.identityProvider}"…`,
-      );
+  oidcProviders.forEach((oidcProviderProperties) => {
+    debugOidcProvidersSeeds(`Loading configuration for OIDC provider "${oidcProviderProperties}"…`);
 
-      return databaseBuilder.factory.buildOidcProvider({ ...oidcProviderPropertiesWithRawClientSecret });
-    }),
-  );
+    databaseBuilder.factory.buildOidcProvider(oidcProviderProperties);
+  });
 }
