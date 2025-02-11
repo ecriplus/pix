@@ -934,6 +934,137 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
       });
     });
 
+    context('when there is a filter on unacquiredBadges', function () {
+      let badge1, badge2;
+      let user1, user2;
+      let participation1, participation2;
+
+      beforeEach(async function () {
+        campaign = databaseBuilder.factory.buildAssessmentCampaignForSkills({}, [{ id: 'Skill1' }]);
+        badge1 = databaseBuilder.factory.buildBadge({ key: 'badge1', targetProfileId: campaign.targetProfileId });
+        badge2 = databaseBuilder.factory.buildBadge({ key: 'badge2', targetProfileId: campaign.targetProfileId });
+        user1 = databaseBuilder.factory.buildUser();
+        user2 = databaseBuilder.factory.buildUser();
+
+        participation1 = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+          userId: user1.id,
+        });
+        participation2 = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+          userId: user2.id,
+        });
+
+        await databaseBuilder.commit();
+      });
+
+      it('returns participants which does not have badge1', async function () {
+        databaseBuilder.factory.buildBadgeAcquisition({
+          badgeId: badge1.id,
+          userId: participation1.userId,
+          campaignParticipationId: participation1.id,
+        });
+        databaseBuilder.factory.buildBadgeAcquisition({
+          badgeId: badge2.id,
+          userId: participation2.userId,
+          campaignParticipationId: participation2.id,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { participations } = await campaignAssessmentParticipationResultListRepository.findPaginatedByCampaignId({
+          campaignId: campaign.id,
+          filters: { unacquiredBadges: [badge1.id] },
+        });
+
+        const participantExternalIds = participations.map((result) => result.campaignParticipationId);
+
+        // then
+        expect(participantExternalIds).to.exactlyContain([participation2.id]);
+      });
+
+      it('returns participants which does not have badge1 nor badge2', async function () {
+        databaseBuilder.factory.buildBadgeAcquisition({
+          badgeId: badge1.id,
+          userId: participation1.userId,
+          campaignParticipationId: participation1.id,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { participations } = await campaignAssessmentParticipationResultListRepository.findPaginatedByCampaignId({
+          campaignId: campaign.id,
+          filters: { unacquiredBadges: [badge1.id, badge2.id] },
+        });
+
+        const participantExternalIds = participations.map((result) => result.campaignParticipationId);
+
+        // then
+        expect(participantExternalIds).to.exactlyContain([participation2.id]);
+      });
+
+      it('returns no participant that have badge1 or badge2', async function () {
+        databaseBuilder.factory.buildBadgeAcquisition({
+          badgeId: badge1.id,
+          userId: participation1.userId,
+          campaignParticipationId: participation1.id,
+        });
+
+        databaseBuilder.factory.buildBadgeAcquisition({
+          badgeId: badge2.id,
+          userId: participation2.userId,
+          campaignParticipationId: participation2.id,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { participations } = await campaignAssessmentParticipationResultListRepository.findPaginatedByCampaignId({
+          campaignId: campaign.id,
+          filters: { unacquiredBadges: [badge1.id, badge2.id] },
+        });
+
+        // then
+        expect(participations).to.be.empty;
+      });
+    });
+
+    context('when there is a filter on both unacquiredBadges and badges', function () {
+      let badge1;
+      let user1;
+      let participation1;
+
+      beforeEach(async function () {
+        campaign = databaseBuilder.factory.buildAssessmentCampaignForSkills({}, [{ id: 'Skill1' }]);
+        badge1 = databaseBuilder.factory.buildBadge({ key: 'badge1', targetProfileId: campaign.targetProfileId });
+        user1 = databaseBuilder.factory.buildUser();
+
+        participation1 = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+          userId: user1.id,
+        });
+        await databaseBuilder.commit();
+      });
+
+      it('returns no participant if acquired and unacquired badge have an id in common', async function () {
+        databaseBuilder.factory.buildBadgeAcquisition({
+          badgeId: badge1.id,
+          userId: participation1.userId,
+          campaignParticipationId: participation1.id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const { participations } = await campaignAssessmentParticipationResultListRepository.findPaginatedByCampaignId({
+          campaignId: campaign.id,
+          filters: { badges: [badge1.id], unacquiredBadges: [badge1.id] },
+        });
+
+        // then
+        expect(participations).to.be.empty;
+      });
+    });
+
     context('when there is a filter on stage', function () {
       beforeEach(async function () {
         const learningContent = [

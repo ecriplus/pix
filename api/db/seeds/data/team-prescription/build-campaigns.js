@@ -143,6 +143,10 @@ async function _createProGenericCampaigns(databaseBuilder) {
 }
 
 async function _createProCampaigns(databaseBuilder) {
+  await databaseBuilder.factory.buildTargetProfileShare({
+    targetProfileId: TARGET_PROFILE_BADGES_STAGES_ID,
+    organizationId: PRO_ORGANIZATION_ID,
+  });
   await createProfilesCollectionCampaign({
     campaignId: CAMPAIGN_PROCOLMUL_ID,
     databaseBuilder,
