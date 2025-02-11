@@ -4,16 +4,14 @@ import CertificationInfoField from '../../info-field';
 
 <template>
   <div class="certification-informations__card">
-    <h2 class="certification-informations__card__title">
-      <div class="certification-informations__tag--float">
-        {{#if @certification.isPublished}}
-          <PixTag @color="success">Publiée</PixTag>
-        {{/if}}
-        {{#if @certification.isCertificationCancelled}}
-          <PixTag @color="error">Annulée</PixTag>
-        {{/if}}
-      </div>
+    <h2 class="certification-informations__card__title certification-informations__card__title--state">
       État
+      {{#if @certification.isPublished}}
+        <PixTag @color="success">Publiée</PixTag>
+      {{/if}}
+      {{#if @certification.isCertificationCancelled}}
+        <PixTag @color="error">Annulée</PixTag>
+      {{/if}}
     </h2>
     <CertificationInfoField
       @value={{@session.id}}
