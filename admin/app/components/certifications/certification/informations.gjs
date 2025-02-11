@@ -10,9 +10,9 @@ import ConfirmPopup from '../../confirm-popup';
 import CandidateEditModal from '../candidate-edit-modal';
 import CertificationCompetenceList from '../competence-list';
 import CertificationInfoField from '../info-field';
-import CertificationInfoTag from '../info-tag';
 import CertificationIssueReports from '../issue-reports';
 import CertificationComments from './comments';
+import CertificationInformationState from './informations/state';
 
 export default class Informations extends Component {
   get displayCancelCertificationButton() {
@@ -81,26 +81,7 @@ export default class Informations extends Component {
 
       </div>
       <div class="certification-informations__row">
-        <div class="certification-informations__card">
-          <h2 class="certification-informations__card__title">
-            <CertificationInfoTag @record={{@certification}} @float={{true}} />
-            État
-          </h2>
-          <CertificationInfoField
-            @value={{@session.id}}
-            @edition={{false}}
-            @label="Session :"
-            @linkRoute="authenticated.sessions.session"
-          />
-          <CertificationInfoField
-            @value={{@certification.statusLabelAndValue.label}}
-            @edition={{false}}
-            @label="Statut :"
-          />
-          <CertificationInfoField @value={{@certification.creationDate}} @edition={{false}} @label="Créée le :" />
-          <CertificationInfoField @value={{@certification.completionDate}} @edition={{false}} @label="Terminée le :" />
-          <CertificationInfoField @value={{@certification.publishedText}} @edition={{false}} @label="Publiée :" />
-        </div>
+        <CertificationInformationState @certification={{@certification}} @session={{@session}} />
 
         <div class="certification-informations__card">
           <h2 class="certification-informations__card__title">Candidat</h2>
