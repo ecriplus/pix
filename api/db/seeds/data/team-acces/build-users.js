@@ -15,7 +15,7 @@ function _buildUserWithPoleEmploiAuthenticationMethod(databaseBuilder) {
 function _buildOidcUser(databaseBuilder) {
   const user = databaseBuilder.factory.buildUser({
     firstName: 'Oidc',
-    lastName: 'User',
+    lastName: 'OIDC',
     email: 'oidc-user@example.net',
   });
   databaseBuilder.factory.buildAuthenticationMethod.withOidcProviderAsIdentityProvider({
