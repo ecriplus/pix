@@ -117,12 +117,6 @@ export default class FillInCampaignCodeController extends Controller {
   }
 
   @action
-  navigateToCampaignEntryPoint() {
-    this.closeModal();
-    this.router.transitionTo('campaigns.entry-point', this.campaign.code);
-  }
-
-  @action
   onLanguageChange(language) {
     this.selectedLanguage = language;
     this.locale.setLocale(this.selectedLanguage);
