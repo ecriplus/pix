@@ -16,7 +16,7 @@ function _buildOidcUser(databaseBuilder) {
     lastName: 'User',
     email: 'oidc-user@example.net',
   });
-  databaseBuilder.factory.buildAuthenticationMethod.withSeedAsIdentityProvider({
+  databaseBuilder.factory.buildAuthenticationMethod.withOidcProviderAsIdentityProvider({
     userId: user.id,
   });
 }

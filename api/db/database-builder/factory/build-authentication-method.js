@@ -132,7 +132,7 @@ buildAuthenticationMethod.withPoleEmploiAsIdentityProvider = function ({
   });
 };
 
-buildAuthenticationMethod.withSeedAsIdentityProvider = function ({
+buildAuthenticationMethod.withOidcProviderAsIdentityProvider = function ({
   id = databaseBuffer.getNextId(),
   externalIdentifier,
   userId,
