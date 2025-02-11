@@ -46,10 +46,6 @@
     padding: var(--pix-spacing-3x) var(--pix-spacing-2x);
     white-space: normal;
 
-    &:first-child {
-      display: none;
-    }
-
     &:hover, &:focus {
       background: var(--pix-primary-100);
     }
