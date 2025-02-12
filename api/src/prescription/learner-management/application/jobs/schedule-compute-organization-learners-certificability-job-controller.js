@@ -9,6 +9,7 @@ import { JobExpireIn } from '../../../../shared/infrastructure/repositories/jobs
 import * as organizationLearnerRepository from '../../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { computeCertificabilityJobRepository } from '../../../learner-management/infrastructure/repositories/jobs/compute-certificability-job-repository.js';
+import { ComputeOrganizationLearnerCertificabilityJobProvidedDateError } from '../../domain/errors.js';
 import { usecases } from '../../domain/usecases/index.js';
 
 class ScheduleComputeOrganizationLearnersCertificabilityJobController extends JobScheduleController {
@@ -27,8 +28,16 @@ class ScheduleComputeOrganizationLearnersCertificabilityJobController extends Jo
     data = {},
     dependencies = { organizationLearnerRepository, computeCertificabilityJobRepository, config, logger },
   }) {
-    const skipLoggedLastDayCheck = data?.skipLoggedLastDayCheck;
+    const skipActivityDate = data?.skipActivityDate;
     const onlyNotComputed = data?.onlyNotComputed;
+    const providedDateRange = data?.providedDateRange;
+
+    if (providedDateRange) {
+      dependencies.logger.info(
+        `ScheduleComputeOrganizationLearnersCertificabilityJobHandler - providedDateRange : ${providedDateRange.startDate}-${providedDateRange.endDate}`,
+      );
+    }
+
     const {
       chunkSize,
       cron: cronConfig,
@@ -37,16 +46,26 @@ class ScheduleComputeOrganizationLearnersCertificabilityJobController extends Jo
 
     const isolationLevel = 'repeatable read';
 
-    const parsedCron = cronParser.parseExpression(cronConfig, { tz: 'Europe/Paris' });
-    const toUserActivityDate = parsedCron.prev().toDate();
-
-    const fromUserActivityDate = dayjs(toUserActivityDate).subtract(1, 'day').toDate();
+    let toUserActivityDate, fromUserActivityDate;
+    if (providedDateRange && providedDateRange.startDate && providedDateRange.endDate) {
+      const parseStartDate = dayjs(providedDateRange.startDate, 'YYYY-MM-DD');
+      const parseEndDate = dayjs(providedDateRange.endDate, 'YYYY-MM-DD');
+      if (!parseStartDate.isValid() || !parseEndDate.isValid() || parseStartDate.isAfter(parseEndDate)) {
+        throw new ComputeOrganizationLearnerCertificabilityJobProvidedDateError();
+      }
+      fromUserActivityDate = parseStartDate.toDate();
+      toUserActivityDate = parseEndDate.toDate();
+    } else {
+      const parsedCron = cronParser.parseExpression(cronConfig, { tz: 'Europe/Paris' });
+      toUserActivityDate = parsedCron.prev().toDate();
+      fromUserActivityDate = dayjs(toUserActivityDate).subtract(1, 'day').toDate();
+    }
 
     return await DomainTransaction.execute(
       async () => {
         const count =
           await dependencies.organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability({
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             fromUserActivityDate,
             toUserActivityDate,
             onlyNotComputed,
@@ -69,7 +88,7 @@ class ScheduleComputeOrganizationLearnersCertificabilityJobController extends Jo
               offset,
               fromUserActivityDate,
               toUserActivityDate,
-              skipLoggedLastDayCheck,
+              skipActivityDate,
               onlyNotComputed,
             });
 

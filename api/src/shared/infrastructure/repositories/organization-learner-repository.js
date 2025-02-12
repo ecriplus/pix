@@ -131,7 +131,7 @@ const isActive = async function ({ userId, campaignId }) {
 };
 
 async function countByOrganizationsWhichNeedToComputeCertificability({
-  skipLoggedLastDayCheck = false,
+  skipActivityDate = false,
   onlyNotComputed = false,
   fromUserActivityDate,
   toUserActivityDate,
@@ -139,9 +139,10 @@ async function countByOrganizationsWhichNeedToComputeCertificability({
   const queryBuilder = _queryBuilderForCertificability({
     fromUserActivityDate,
     toUserActivityDate,
-    skipLoggedLastDayCheck,
+    skipActivityDate,
     onlyNotComputed,
   });
+
   const [{ count }] = await queryBuilder.count('view-active-organization-learners.id');
   return count;
 }
@@ -151,13 +152,13 @@ function findByOrganizationsWhichNeedToComputeCertificability({
   offset,
   fromUserActivityDate,
   toUserActivityDate,
-  skipLoggedLastDayCheck = false,
+  skipActivityDate = false,
   onlyNotComputed = false,
 } = {}) {
   const queryBuilder = _queryBuilderForCertificability({
     fromUserActivityDate,
     toUserActivityDate,
-    skipLoggedLastDayCheck,
+    skipActivityDate,
     onlyNotComputed,
   });
 
@@ -177,7 +178,7 @@ function findByOrganizationsWhichNeedToComputeCertificability({
 function _queryBuilderForCertificability({
   fromUserActivityDate,
   toUserActivityDate,
-  skipLoggedLastDayCheck,
+  skipActivityDate,
   onlyNotComputed,
 }) {
   const knexConn = DomainTransaction.getConnection();
@@ -193,14 +194,14 @@ function _queryBuilderForCertificability({
     .where('features.key', '=', ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key)
     .where('view-active-organization-learners.isDisabled', false)
     .modify(function (queryBuilder) {
-      if (!skipLoggedLastDayCheck) {
+      if (!skipActivityDate) {
         queryBuilder.join('user-logins', function () {
           this.on('view-active-organization-learners.userId', 'user-logins.userId')
             .andOnVal('user-logins.lastLoggedAt', '>', fromUserActivityDate)
             .andOnVal('user-logins.lastLoggedAt', '<=', toUserActivityDate);
         });
       }
-      if (skipLoggedLastDayCheck && onlyNotComputed) {
+      if (onlyNotComputed) {
         queryBuilder.whereNull('view-active-organization-learners.isCertifiable');
       }
     });
