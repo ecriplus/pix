@@ -9,6 +9,7 @@
 
 /* pages */
 @use 'login' as *;
+@use 'layout/sidebar' as *;
 @use 'authenticated' as *;
 @use 'authenticated/campaigns/get' as *;
 @use 'authenticated/certifications/index' as *;
