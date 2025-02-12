@@ -47,7 +47,7 @@ export const createOrUpdateQuestsInBatch = withTransaction(
     const csvData = csvParser.parse();
 
     csvData.forEach(({ questId, content, deleteQuest }) => {
-      if (deleteQuest && questId) {
+      if (deleteQuest?.toLowerCase() === 'oui' && questId) {
         deleteQuestIds.push(questId);
       } else {
         updatedOrNewQuest.push(new Quest({ id: questId || undefined, ...JSON.parse(content) }));
