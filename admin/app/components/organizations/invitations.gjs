@@ -26,6 +26,7 @@ export default class OrganizationInvitations extends Component {
                 <tr>
                   <th>Adresse e-mail</th>
                   <th>Rôle</th>
+                  <th>{{t "common.invitations.invitation-locale"}}</th>
                   <th>Date de dernier envoi</th>
                   {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
                     <th>Actions</th>
@@ -37,6 +38,7 @@ export default class OrganizationInvitations extends Component {
                   <tr aria-label="Invitation en attente de {{invitation.email}}">
                     <td>{{invitation.email}}</td>
                     <td>{{invitation.roleInFrench}}</td>
+                    <td>{{invitation.lang}}</td>
                     <td>{{dayjsFormat invitation.updatedAt "DD/MM/YYYY [-] HH:mm"}}</td>
                     {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
                       <td>

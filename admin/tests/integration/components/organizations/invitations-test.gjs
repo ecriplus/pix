@@ -76,6 +76,9 @@ module('Integration | Component | organization-invitations', function (hooks) {
         assert.dom(screen.getByText('Membre')).exists();
         assert.dom(screen.getByText('Administrateur')).exists();
         assert.dom(screen.getByText('-')).exists();
+        assert.dom(screen.getByText('fr')).exists();
+        assert.dom(screen.getByText('en')).exists();
+        assert.dom(screen.getByText('nl')).exists();
         assert.dom(screen.queryByText('Aucune invitation en attente')).doesNotExist();
       });
 

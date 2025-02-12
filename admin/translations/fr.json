@@ -56,6 +56,7 @@
       "mandatory-fields": "Les champs marqués de '<abbr title=\"obligatoire\" class=\"mandatory-mark\">'*'</abbr>' sont obligatoires"
     },
     "invitations": {
+      "invitation-locale": "Locale",
       "send-new": "Renvoyer l'invitation",
       "send-new-confirm": "Un email a bien été renvoyé à {invitationEmail}",
       "send-new-label": "Renvoyer l'invitation à {invitationEmail}"
