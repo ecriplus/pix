@@ -91,12 +91,12 @@ describe('Acceptance | Controller | passage-controller', function () {
         {
           case: 'QCU',
           moduleId: 'bien-ecrire-son-adresse-mail',
-          elementId: '29195dde-b603-488f-a554-f391fbdf3b24',
-          userResponse: ['1'],
-          expectedUserResponseValue: '1',
+          elementId: '845fe6d7-7ac5-46bb-a5d6-0419148b3978',
+          userResponse: ['2'],
+          expectedUserResponseValue: '2',
           expectedFeedback:
-            '<p class="feedback__state">Oui, aucun problème&#8239;!</p><p class="pix-list-inline">Seuls certains caractères sont interdits, comme</p><ul><li>é</li><li>â</li><li>&amp;</li><li>@</li><li>$</li><li>*</li><li>€</li><li>£</li><li>etc.</li></ul>',
-          expectedSolution: '1',
+            '<p class="feedback__state">Bonne réponse&#8239;!&nbsp;<span aria-hidden="true">🎉</span></p><p>Une adresse mail est <strong>unique</strong>.<br>Au moment de la création d\'une adresse mail, vous saurez si un identifiant est disponible ou pas.</p>',
+          expectedSolution: '2',
         },
         {
           case: 'QROCM-ind',
@@ -105,7 +105,7 @@ describe('Acceptance | Controller | passage-controller', function () {
           userResponse: [{ input: 'email', answer: 'naomizao457@yahoo.com' }],
           expectedUserResponseValue: { email: 'naomizao457@yahoo.com' },
           expectedFeedback:
-            '<span class="feedback__state">Correct.&nbsp;<span aria-hidden="true">🎉</span></span><p>Tout est dans l\'ordre&nbsp;: l\'identifiant, l\'arobase puis le fournisseur d\'adresse mail</p>',
+            '<span class="feedback__state">Bravo !&nbsp;<span aria-hidden="true">💫</span></span><p>Tout est dans l\'ordre&nbsp;: l\'identifiant, l\'arobase puis le fournisseur d\'adresse mail</p>',
           expectedSolution: {
             email: ['naomizao457@yahoo.com', 'naomizao457@yahoo.fr'],
           },
