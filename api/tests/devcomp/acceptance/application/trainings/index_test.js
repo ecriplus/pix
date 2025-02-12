@@ -523,4 +523,33 @@ describe('Acceptance | Controller | training-controller', function () {
       });
     });
   });
+
+  describe('DELETE /api/admin/trainings/{trainingId}/target-profiles/{targetProfileId}', function () {
+    it('should detach target profile from given training', async function () {
+      // given
+      const adminUser = await insertUserWithRoleSuperAdmin();
+      const userId = adminUser.id;
+      const trainingId = databaseBuilder.factory.buildTraining().id;
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      databaseBuilder.factory.buildTargetProfileTraining({
+        trainingId,
+        targetProfileId,
+      });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'DELETE',
+        url: `/api/admin/trainings/${trainingId}/target-profiles/${targetProfileId}`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      const result = await knex('target-profile-trainings').where({ trainingId, targetProfileId });
+      expect(response.statusCode).to.equal(204);
+      expect(result).to.deepEqualArray([]);
+    });
+  });
 });
