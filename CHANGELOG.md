@@ -1,5 +1,22 @@
 # Pix Changelog
 
+## v5.41.0 (12/02/2025)
+
+
+### :rocket: Amélioration
+- [#11312](https://github.com/1024pix/pix/pull/11312) [FEATURE] Ajout de metrics sur le filtre RT (PIX-16345).
+- [#11231](https://github.com/1024pix/pix/pull/11231) [FEATURE] Créer un script pour supprimer des références dans "snapshot" de la table "knowledge-element-snapshots" (PIX-15756).
+- [#11350](https://github.com/1024pix/pix/pull/11350) [FEATURE] Reprise mdl bien-ecrire-son-adresse-mail pour coval 16/10 (MODC-2) (closed PR#10189).
+
+### :building_construction: Tech
+- [#11388](https://github.com/1024pix/pix/pull/11388) [TECH] Déprécier l'utilisation du `isCancelled` au profit du statut de l'assessment-result (PIX-16046).
+- [#11402](https://github.com/1024pix/pix/pull/11402) [TECH] corrige le test flaky sur admin.
+- [#11389](https://github.com/1024pix/pix/pull/11389) [TECH] ♻️ migre le usecase et les repo associé aux badge acquisition (Pix-16518).
+
+### :bug: Correction
+- [#11384](https://github.com/1024pix/pix/pull/11384) [BUGFIX] Éviter les corruptions de cache du Learning Content (PIX-16501).
+- [#11382](https://github.com/1024pix/pix/pull/11382) [BUGFIX] Ajouter automatiquement un 0 devant le département s'il ne contient que 2 chiffres (PIX-13151).
+
 ## v5.40.0 (11/02/2025)
 
 
