@@ -22,8 +22,8 @@ describe('Unit | Serializer | JSONAPI | badge-acquisitions-statistics-serializer
           id: '1',
           attributes: {
             data: [
-              { badge: badge1, percentage: 12, count: 1 },
               { badge: badge2, percentage: 24, count: 2 },
+              { badge: badge1, percentage: 12, count: 1 },
             ],
           },
         },
