@@ -63,8 +63,11 @@ const register = async function (server) {
               firstName: Joi.string().description('Prénom de l‘élève'),
               birthdate: Joi.date().description('Date de naissance au format AAAA-MM-JJ'),
               status: Joi.string().description('Statut de la certification'),
-              pixScore: Joi.number().min(0).max(1024).description('Score en nombre de pix'),
+              pixScore: Joi.number().min(0).max(1024).description('Score global en nombre de pix'),
               certificationDate: Joi.date().description('Date de passage de la certification'),
+              globalLevel: Joi.string().description(
+                'Niveau global de la certification, défini en fonction du score global Pix obtenu',
+              ),
               competences: Joi.array()
                 .items(
                   Joi.object({
