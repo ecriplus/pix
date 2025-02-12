@@ -76,12 +76,14 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
       let event;
       let certificationAssessment;
       let certificationCourse;
+      let assessmentResult;
       const assessmentResultId = 99;
       const assessmentId = 1214;
       const certificationCourseId = 1234;
       const userId = 4567;
       const certificationCourseStartDate = new Date('2022-02-01');
       let scoringConfiguration;
+      const scoreForCapacity = 438;
       let baseFlashAlgorithmConfig;
 
       beforeEach(function () {
@@ -111,11 +113,18 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
           .withArgs({ locale: 'fr', date: certificationCourse.getStartDate() })
           .resolves(scoringConfiguration);
 
-        assessmentResultRepository.save.resolves(
-          domainBuilder.buildAssessmentResult({
-            id: assessmentResultId,
-          }),
-        );
+        assessmentResult = domainBuilder.buildAssessmentResult({
+          id: assessmentResultId,
+          emitter: AssessmentResult.emitters.PIX_ALGO,
+          pixScore: scoreForCapacity,
+          reproducibilityRate: 100,
+          status: AssessmentResult.status.VALIDATED,
+          competenceMarks: [],
+          assessmentId: 123,
+          juryId: 1,
+        });
+
+        assessmentResultRepository.save.resolves(assessmentResult);
         competenceMarkRepository.save.resolves();
 
         baseFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
@@ -139,7 +148,6 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
         const answers = generateAnswersForChallenges({ challenges });
 
         const expectedCapacity = 2;
-        const scoreForCapacity = 438;
         const { certificationCourseId } = certificationAssessment;
 
         const capacityHistory = [
@@ -202,7 +210,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
         });
 
         // when
-        await handleV3CertificationScoring({
+        const expectedCertificationCourse = await handleV3CertificationScoring({
           event,
           emitter: AssessmentResult.emitters.PIX_ALGO,
           certificationAssessment,
@@ -222,14 +230,16 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
         const expectedResult = {
           certificationCourseId,
           assessmentResult: new AssessmentResult({
-            emitter: AssessmentResult.emitters.PIX_ALGO,
-            pixScore: scoreForCapacity,
-            reproducibilityRate: 100,
-            status: AssessmentResult.status.VALIDATED,
-            competenceMarks: [],
-            assessmentId: 123,
+            emitter: assessmentResult.emitter,
+            pixScore: assessmentResult.pixScore,
+            reproducibilityRate: assessmentResult.reproducibilityRate,
+            status: assessmentResult.status,
+            competenceMarks: assessmentResult.competenceMarks,
+            assessmentId: assessmentResult.assessmentId,
           }),
         };
+
+        expect(expectedCertificationCourse).to.deep.equal(abortedCertificationCourse);
 
         expect(assessmentResultRepository.save).to.have.been.calledWith(expectedResult);
         expect(certificationAssessmentHistoryRepository.save).to.have.been.calledWithExactly(
