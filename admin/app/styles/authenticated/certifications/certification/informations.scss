@@ -65,6 +65,13 @@
     &__title {
       margin-bottom: 0.75rem;
       font-size: 1.25rem;
+
+      &--state {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--pix-spacing-2x) var(--pix-spacing-4x);
+        justify-content: space-between;
+      }
     }
 
     &__list {
