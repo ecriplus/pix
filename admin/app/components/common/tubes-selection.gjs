@@ -157,7 +157,7 @@ export default class TubesSelection extends Component {
     );
   }
 
-  _onFileLoad(event) {
+  async _onFileLoad(event) {
     try {
       const data = JSON.parse(event.target.result);
 
@@ -172,7 +172,7 @@ export default class TubesSelection extends Component {
         throw new Error("Le format du fichier n'est pas reconnu.");
       }
 
-      this.refreshAreas();
+      await this.refreshAreas();
       this._triggerOnChange();
       this.pixToast.sendSuccessNotification({ message: 'Fichier bien importé.' });
     } catch (error) {
