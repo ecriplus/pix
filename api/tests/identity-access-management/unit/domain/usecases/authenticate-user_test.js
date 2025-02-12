@@ -329,6 +329,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       userRepository,
       userLoginRepository,
       refreshTokenRepository,
+      pixAuthenticationService,
       audience,
     });
 
@@ -348,6 +349,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       userRepository,
       userLoginRepository,
       refreshTokenRepository,
+      pixAuthenticationService,
       audience,
     });
 
