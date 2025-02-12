@@ -51,4 +51,32 @@ module('Integration | Component | Campaign::Charts::ResultDistribution', functio
       assert.dom(screen.getByRole('heading', { name: t('charts.participants-by-stage.title') })).exists();
     });
   });
+  module('when the campaign has badges', function (hooks) {
+    hooks.beforeEach(async function () {
+      sinon
+        .stub(adapter, 'getParticipationsByStage')
+        .resolves({ data: { attributes: { data: [{ id: 100498, value: 0 }] } } });
+      dataFetcher = sinon.stub(adapter, 'getBadgeAcquisitions');
+    });
+    test('it should display chart for campaign badges acquisitions', async function (assert) {
+      dataFetcher.resolves({ data: { attributes: { data: [] } } });
+      this.campaign = { id: '12', hasStages: true, hasBadges: true };
+
+      const screen = await render(hbs`<Campaign::Charts::ResultDistribution @campaign={{this.campaign}} />`);
+      assert.ok(screen.queryByText(t('cards.badges-acquisitions.title')));
+    });
+  });
+  module('when the campaign has no badges', function (hooks) {
+    hooks.beforeEach(async function () {
+      dataFetcher = sinon.stub(adapter, 'getParticipationsByStage');
+    });
+    test('it should not display chart for campaign badges acquisitions', async function (assert) {
+      this.onSelectStage = () => {};
+      dataFetcher.resolves({ data: { attributes: { data: [{ id: 100498, value: 0 }] } } });
+      this.campaign = { id: '12', hasStages: true, hasBadges: false };
+
+      const screen = await render(hbs`<Campaign::Charts::ResultDistribution @campaign={{this.campaign}} />`);
+      assert.notOk(screen.queryByText(t('cards.badges-acquisitions.title')));
+    });
+  });
 });

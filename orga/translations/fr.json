@@ -92,6 +92,11 @@
       "title": "Places disponibles",
       "value": "/{total} places"
     },
+    "badges-acquisitions": {
+      "information": "Retrouvez ici le nombre de Résultats Thématiques obtenus par vos participants dans cette campagne ainsi que leur pourcentage d’obtention. ",
+      "obtained": "obtenus",
+      "title": "Résultats thématiques"
+    },
     "occupied-seats-count": {
       "anonymous": "dont {count, plural, =1 {1 place} other {{count, number} places}} avec un accès sans compte",
       "title": "Places occupées",

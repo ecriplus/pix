@@ -1,0 +1,45 @@
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/breakpoints';
+
+.badge-acquisitions {
+  @include breakpoints.device-is('desktop') {
+    width: 33.33%;
+  }
+
+  width: 100%;
+
+  &__list {
+  display: grid;
+  grid-row-gap: var(--pix-spacing-1x);
+  grid-column-gap: var(--pix-spacing-4x);
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  width: fit-content;
+
+  li:nth-child(4n) {
+    flex-basis: 100%;
+}
+}
+
+&__count{
+  @extend %pix-title-xs;
+}
+
+&__percentage {
+  @extend %pix-body-xs;
+}
+
+  &__list-item {
+    display: flex;
+    gap: var(--pix-spacing-2x);
+    align-items: center;
+    height: 40px;
+    font-weight: 700;
+
+    img {
+      width: 32px;
+      height: 36px;
+    }
+
+    }
+}
