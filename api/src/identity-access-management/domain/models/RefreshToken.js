@@ -22,7 +22,12 @@ export class RefreshToken {
     return config.authentication.refreshTokenLifespanMs / 1000;
   }
 
+  get isLegacyRefreshToken() {
+    return !this.audience;
+  }
+
   hasSameAudience(audience) {
+    if (this.isLegacyRefreshToken) return true;
     return this.audience === audience;
   }
 }
