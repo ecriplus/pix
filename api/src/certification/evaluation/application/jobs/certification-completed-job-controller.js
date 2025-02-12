@@ -6,7 +6,6 @@ import { AssessmentResult } from '../../../../shared/domain/models/index.js';
 import { AssessmentResultFactory } from '../../../scoring/domain/models/factories/AssessmentResultFactory.js';
 import { assessmentResultRepository } from '../../../session-management/infrastructure/repositories/index.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
-import * as scoringCertificationService from '../../../shared/domain/services/scoring-certification-service.js';
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import { CertificationCompletedJob } from '../../domain/events/CertificationCompleted.js';
@@ -24,7 +23,6 @@ export class CertificationCompletedJobController extends JobController {
       assessmentResultRepository,
       certificationAssessmentRepository,
       certificationCourseRepository,
-      scoringCertificationService,
       services,
       events,
     },
@@ -35,7 +33,6 @@ export class CertificationCompletedJobController extends JobController {
       assessmentResultRepository,
       certificationAssessmentRepository,
       certificationCourseRepository,
-      scoringCertificationService,
       services,
       events,
     } = dependencies;
@@ -59,7 +56,6 @@ export class CertificationCompletedJobController extends JobController {
         certificationAssessment,
         assessmentResultRepository,
         certificationCourseRepository,
-        scoringCertificationService,
         services,
       });
     }
@@ -74,7 +70,6 @@ async function _handleV2CertificationScoring({
   certificationAssessment,
   assessmentResultRepository,
   certificationCourseRepository,
-  scoringCertificationService,
   services,
 }) {
   const emitter = AssessmentResult.emitters.PIX_ALGO;
@@ -86,16 +81,6 @@ async function _handleV2CertificationScoring({
     });
 
     certificationCourse.complete({ now: new Date() });
-
-    const lackOfAnswersForTechnicalReason = await scoringCertificationService.isLackOfAnswersForTechnicalReason({
-      certificationCourse,
-      certificationAssessmentScore,
-    });
-
-    if (lackOfAnswersForTechnicalReason) {
-      certificationCourse.cancel();
-    }
-
     await certificationCourseRepository.update({ certificationCourse });
 
     return new CertificationScoringCompleted({
@@ -131,9 +116,7 @@ async function _handleV3CertificationScoring({
     dependencies: { findByCertificationCourseId: services.findByCertificationCourseId },
   });
 
-  if (!certificationCourse.isCancelled()) {
-    certificationCourse.complete({ now: new Date() });
-  }
+  certificationCourse.complete({ now: new Date() });
   await certificationCourseRepository.update({ certificationCourse });
 
   return new CertificationScoringCompleted({

@@ -100,7 +100,6 @@ describe('Certification | Scoring | Unit | Domain | Factories | AssessmentResult
       const actualAssessmentResult = AssessmentResultFactory.buildNotTrustableAssessmentResult({
         pixScore: 55,
         reproducibilityRate: 50.25,
-        status: AssessmentResult.status.VALIDATED,
         assessmentId: 123,
         juryId: 456,
         emitter: 'Moi',
@@ -111,7 +110,7 @@ describe('Certification | Scoring | Unit | Domain | Factories | AssessmentResult
         assessmentId: 123,
         juryId: 456,
         emitter: 'Moi',
-        status: AssessmentResult.status.VALIDATED,
+        status: AssessmentResult.status.CANCELLED,
         pixScore: 55,
         reproducibilityRate: 50.25,
         competenceMarks: [],

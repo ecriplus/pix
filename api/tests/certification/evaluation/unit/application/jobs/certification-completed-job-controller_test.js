@@ -14,7 +14,6 @@ import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-help
 
 describe('Unit | Certification | Application | jobs | CertificationCompletedJobController', function () {
   let certificationCompletedJobController;
-  let scoringCertificationService;
   let certificationAssessmentRepository;
   let assessmentResultRepository;
   let certificationCourseRepository;
@@ -37,9 +36,6 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
 
     certificationCompletedJobController = new CertificationCompletedJobController();
 
-    scoringCertificationService = {
-      isLackOfAnswersForTechnicalReason: sinon.stub(),
-    };
     services = {
       handleV2CertificationScoring: sinon.stub(),
       handleV3CertificationScoring: sinon.stub(),
@@ -97,7 +93,6 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
 
           const dependencies = {
             certificationAssessmentRepository,
-            scoringCertificationService,
             services,
           };
 
@@ -134,7 +129,6 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
             assessmentResultRepository,
             certificationCourseRepository,
             competenceMarkRepository,
-            scoringCertificationService,
             certificationAssessmentRepository,
             services,
           };
@@ -184,14 +178,12 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
             certificationCourse,
             certificationAssessmentScore,
           });
-          scoringCertificationService.isLackOfAnswersForTechnicalReason.resolves(false);
 
           const dependencies = {
             assessmentResultRepository,
             certificationAssessmentRepository,
             certificationCourseRepository,
             competenceMarkRepository,
-            scoringCertificationService,
             services,
             events,
           };
@@ -213,59 +205,6 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
               reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
             }),
           );
-        });
-
-        context('when the certification stopped due to technical issue', function () {
-          it('should cancel the certification course', async function () {
-            // given
-            const certificationCourse = domainBuilder.buildCertificationCourse({
-              id: certificationCourseId,
-              abortReason: ABORT_REASONS.TECHNICAL,
-              completedAt: null,
-            });
-            const certificationAssessmentScore = domainBuilder.buildCertificationAssessmentScore({
-              competenceMarks: [],
-              percentageCorrectAnswers: 49,
-              hasEnoughNonNeutralizedChallengesToBeTrusted: true,
-            });
-
-            certificationCourseRepository.update.resolves(certificationCourse);
-            services.handleV2CertificationScoring.resolves({
-              certificationCourse,
-              certificationAssessmentScore,
-            });
-            scoringCertificationService.isLackOfAnswersForTechnicalReason
-              .withArgs({ certificationAssessmentScore, certificationCourse })
-              .resolves(true);
-
-            const dependencies = {
-              assessmentResultRepository,
-              certificationCourseRepository,
-              competenceMarkRepository,
-              scoringCertificationService,
-              certificationAssessmentRepository,
-              services,
-              events,
-            };
-
-            // when
-            await certificationCompletedJobController.handle({ data, dependencies });
-
-            // then
-            expect(certificationCourseRepository.update).to.have.been.calledWithExactly({
-              certificationCourse: new CertificationCourse({
-                ...certificationCourse.toDTO(),
-                isCancelled: true,
-              }),
-            });
-            expect(events.eventDispatcher.dispatch).to.have.been.calledOnceWithExactly(
-              new CertificationScoringCompleted({
-                userId,
-                certificationCourseId: certificationCourseId,
-                reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
-              }),
-            );
-          });
         });
       });
 
@@ -302,7 +241,6 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
             certificationAssessmentRepository,
             certificationCourseRepository,
             competenceMarkRepository,
-            scoringCertificationService,
             services,
             events,
           };
@@ -381,7 +319,6 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
               certificationCourseRepository,
               scoringConfigurationRepository,
               competenceMarkRepository,
-              scoringCertificationService,
               services,
               certificationAssessmentRepository,
               flashAlgorithmConfigurationRepository,
@@ -399,57 +336,6 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
                 ...certificationCourse.toDTO(),
                 completedAt: now,
                 abortReason: ABORT_REASONS.CANDIDATE,
-              }),
-            });
-            expect(events.eventDispatcher.dispatch).to.have.been.calledOnceWithExactly(
-              new CertificationScoringCompleted({
-                userId,
-                certificationCourseId: certificationCourseId,
-                reproducibilityRate: V3_REPRODUCIBILITY_RATE,
-              }),
-            );
-          });
-        });
-
-        describe('when the candidate did not finish due to technical difficulties', function () {
-          it('cancels the certification', async function () {
-            // given
-            const abortedCertificationCourse = domainBuilder.buildCertificationCourse({
-              id: certificationCourseId,
-              createdAt: certificationCourseStartDate,
-              isCancelled: true,
-              completedAt: null,
-              abortReason: ABORT_REASONS.TECHNICAL,
-            });
-
-            services.handleV3CertificationScoring.resolves(abortedCertificationCourse);
-
-            const dependencies = {
-              certificationChallengeRepository,
-              answerRepository,
-              assessmentResultRepository,
-              certificationCourseRepository,
-              scoringConfigurationRepository,
-              competenceMarkRepository,
-              scoringCertificationService,
-              services,
-              certificationAssessmentRepository,
-              flashAlgorithmConfigurationRepository,
-              flashAlgorithmService,
-              certificationAssessmentHistoryRepository,
-              events,
-            };
-
-            // when
-            await certificationCompletedJobController.handle({ data, dependencies });
-
-            // then
-            expect(certificationCourseRepository.update).to.have.been.calledOnceWithExactly({
-              certificationCourse: new CertificationCourse({
-                ...certificationCourse.toDTO(),
-                isCancelled: true,
-                completedAt: null,
-                abortReason: ABORT_REASONS.TECHNICAL,
               }),
             });
             expect(events.eventDispatcher.dispatch).to.have.been.calledOnceWithExactly(
@@ -483,7 +369,6 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
               certificationCourseRepository,
               scoringConfigurationRepository,
               competenceMarkRepository,
-              scoringCertificationService,
               services,
               certificationAssessmentRepository,
               flashAlgorithmConfigurationRepository,
@@ -534,7 +419,6 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
                 certificationCourseRepository,
                 scoringConfigurationRepository,
                 competenceMarkRepository,
-                scoringCertificationService,
                 services,
                 certificationAssessmentRepository,
                 flashAlgorithmConfigurationRepository,
@@ -585,7 +469,6 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
                 certificationCourseRepository,
                 scoringConfigurationRepository,
                 competenceMarkRepository,
-                scoringCertificationService,
                 services,
                 certificationAssessmentRepository,
                 flashAlgorithmConfigurationRepository,

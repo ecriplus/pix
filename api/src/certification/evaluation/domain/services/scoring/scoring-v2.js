@@ -13,7 +13,6 @@
 import _ from 'lodash';
 
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
-import { AssessmentResult } from '../../../../../shared/domain/models/index.js';
 import {
   AnswerCollectionForScoring,
   CertificationAssessmentScore,
@@ -291,7 +290,6 @@ function _createV2AssessmentResult({
     return AssessmentResultFactory.buildNotTrustableAssessmentResult({
       pixScore: certificationAssessmentScore.nbPix,
       reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
-      status: certificationAssessmentScore.status,
       assessmentId: certificationAssessment.id,
       emitter,
       juryId,
@@ -306,7 +304,6 @@ function _createV2AssessmentResult({
       pixScore: certificationAssessmentScore.nbPix,
       reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
       assessmentId: certificationAssessment.id,
-      status: AssessmentResult.status.REJECTED,
       juryId,
     });
   }

@@ -32,7 +32,6 @@ import * as sessionSummaryRepository from '../../../src/certification/session-ma
 import * as supervisorAccessRepository from '../../../src/certification/session-management/infrastructure/repositories/supervisor-access-repository.js';
 // Not used in lib
 import * as certificationBadgesService from '../../../src/certification/shared/domain/services/certification-badges-service.js';
-import * as scoringCertificationService from '../../../src/certification/shared/domain/services/scoring-certification-service.js';
 import * as certificationAssessmentRepository from '../../../src/certification/shared/infrastructure/repositories/certification-assessment-repository.js';
 // Not used in lib
 import * as certificationCandidateRepository from '../../../src/certification/shared/infrastructure/repositories/certification-candidate-repository.js';
@@ -302,7 +301,6 @@ const dependencies = {
   schoolRepository,
   scoAccountRecoveryService,
   scorecardService,
-  scoringCertificationService,
   sessionCodeService,
   sessionEnrolmentRepository,
   sessionPublicationService,

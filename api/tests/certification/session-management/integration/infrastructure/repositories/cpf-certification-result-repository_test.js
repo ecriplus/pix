@@ -48,7 +48,7 @@ describe('Integration | Repository | CpfCertificationResult', function () {
       });
     });
 
-    context('when the certification course is cancelled', function () {
+    context('when the certification is cancelled', function () {
       it('should return 0', async function () {
         // given
         const startDate = new Date('2022-01-01');
@@ -67,6 +67,7 @@ describe('Integration | Repository | CpfCertificationResult', function () {
         const count = await cpfCertificationResultRepository.countExportableCertificationCoursesByTimeRange({
           startDate,
           endDate,
+          assessmentResultStatus: AssessmentResult.status.CANCELLED,
         });
 
         // then
