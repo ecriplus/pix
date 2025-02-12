@@ -57,4 +57,37 @@ describe('Integration | Repository | target-profile-training-repository', functi
       expect(exisitingTargetProfileTraining[0].updatedAt).to.deep.equal(now);
     });
   });
+
+  describe('#remove', function () {
+    it('should return true when training/target-profile is removed', async function () {
+      // given
+      const targetProfile = databaseBuilder.factory.buildTargetProfile();
+      const training = databaseBuilder.factory.buildTraining();
+      databaseBuilder.factory.buildTargetProfileTraining({
+        trainingId: training.id,
+        targetProfileId: targetProfile.id,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const removedResult = await targetProfileTrainingRepository.remove({
+        trainingId: training.id,
+        targetProfileId: targetProfile.id,
+      });
+
+      // then
+      expect(removedResult).to.be.true;
+    });
+
+    it('should return false when training/target-profile is not found', async function () {
+      // when
+      const removedResult = await targetProfileTrainingRepository.remove({
+        trainingId: 1,
+        targetProfileId: 2,
+      });
+
+      // then
+      expect(removedResult).to.be.false;
+    });
+  });
 });

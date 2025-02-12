@@ -68,6 +68,15 @@ const attachTargetProfiles = async function (request, h) {
   return h.response({}).code(204);
 };
 
+const detachTargetProfile = async function (request, h) {
+  const { trainingId, targetProfileId } = request.params;
+  await usecases.detachTargetProfilesFromTraining({
+    trainingId,
+    targetProfileId,
+  });
+  return h.response({}).code(204);
+};
+
 const trainingController = {
   findPaginatedTrainingSummaries,
   findTargetProfileSummaries,
@@ -76,6 +85,7 @@ const trainingController = {
   update,
   createOrUpdateTrigger,
   attachTargetProfiles,
+  detachTargetProfile,
 };
 
 export { trainingController };

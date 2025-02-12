@@ -15,4 +15,10 @@ const create = async function ({ trainingId, targetProfileIds }) {
   return attachedTargetProfileIds.map(({ targetProfileId }) => targetProfileId);
 };
 
-export { create };
+const remove = async function ({ trainingId, targetProfileId }) {
+  const knexConn = DomainTransaction.getConnection();
+  const removedLines = await knexConn(TABLE_NAME).delete().where({ trainingId, targetProfileId });
+  return removedLines > 0;
+};
+
+export { create, remove };

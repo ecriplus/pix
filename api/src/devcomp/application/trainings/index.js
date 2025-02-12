@@ -286,6 +286,34 @@ const register = async function (server) {
         ],
       },
     },
+    {
+      method: 'DELETE',
+      path: '/api/admin/trainings/{trainingId}/target-profiles/{targetProfileId}',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            trainingId: identifiersType.trainingId,
+            targetProfileId: identifiersType.targetProfileId,
+          }),
+        },
+        handler: (request, h) => trainingsController.detachTargetProfile(request, h),
+        tags: ['api', 'admin', 'target-profiles', 'trainings'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
+            '- Elle permet de détacher un contenu formatif d’un profil cible',
+        ],
+      },
+    },
   ]);
 };
 
