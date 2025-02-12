@@ -55,6 +55,7 @@
       "mandatory": "Champ obligatoire",
       "mandatory-fields": "The fields marked '<abbr title=\"required\" class=\"mandatory-mark\">'*'</abbr>' are required"
     },
+    "home-page": "Pix Admin homepage",
     "invitations": {
       "invitation-locale": "Locale",
       "send-new": "Resend the invitation",
@@ -327,6 +328,21 @@
           "users": "Utilisateurs"
         },
         "label": "Navigation principale"
+      },
+      "sidebar": {
+        "administration": "Administration",
+        "autonomous-courses": "Autonomous courses",
+        "certification-centers": "Certif centers",
+        "certifications": "Certifications",
+        "complementary-certifications": "Compl. certifications",
+        "logout": "Log out",
+        "organizations": "Organizations",
+        "sessions": "Certif sessions",
+        "target-profiles": "Target profiles",
+        "team": "Team",
+        "tools": "Tools",
+        "trainings": "Trainings",
+        "users": "Users"
       }
     },
     "memberships-section": {
