@@ -1,7 +1,7 @@
-import * as moduleUnderTest from '../../../../lib/application/certification-center-memberships/index.js';
-import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { certificationCenterMembershipController } from '../../../../src/team/application/certification-center-membership/certification-center-membership.controller.js';
-import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
+import { certificationCenterMembershipController } from '../../../../../src/team/application/certification-center-membership/certification-center-membership.controller.js';
+import { teamRoutes } from '../../../../../src/team/application/routes.js';
+import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Application | certification-center-memberships | certification-center-membership-controller', function () {
   let httpTestServer;
@@ -12,7 +12,7 @@ describe('Integration | Application | certification-center-memberships | certifi
       .callsFake((request, h) => h.response('ok').code(200));
     sinon.stub(securityPreHandlers, 'checkUserIsAdminOfCertificationCenter').returns(() => true);
     httpTestServer = new HttpTestServer();
-    await httpTestServer.register(moduleUnderTest);
+    await httpTestServer.register(teamRoutes);
   });
 
   describe('PATCH  /api/certification-centers/{certificationCenterId}/certification-center-memberships/{id}', function () {

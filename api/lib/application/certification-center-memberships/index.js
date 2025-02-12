@@ -7,30 +7,6 @@ import { certificationCenterMembershipController } from './certification-center-
 const register = async function (server) {
   const globalRoutes = [
     {
-      method: 'PATCH',
-      path: '/api/certification-centers/{certificationCenterId}/certification-center-memberships/{id}',
-      config: {
-        validate: {
-          params: Joi.object({
-            certificationCenterId: identifiersType.certificationCenterId,
-            id: identifiersType.certificationCenterMembershipId,
-          }),
-        },
-        handler: certificationCenterMembershipController.updateFromPixCertif,
-        pre: [
-          {
-            method: securityPreHandlers.checkUserIsAdminOfCertificationCenter,
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        notes: [
-          "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès**\n" +
-            "- Modification du rôle d'un membre d'un centre de certification\n",
-        ],
-        tags: ['api', 'certification-center-membership'],
-      },
-    },
-    {
       method: 'DELETE',
       path: '/api/certification-center-memberships/{certificationCenterMembershipId}',
       config: {
