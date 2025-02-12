@@ -253,6 +253,7 @@ const configuration = (function () {
       ),
       isOppsyDisabled: toBoolean(process.env.FT_OPPSY_DISABLED),
       isPix1dEnabled: toBoolean(process.env.FT_PIX_1D_ENABLED),
+      isPixAdminNewSidebarEnabled: toBoolean(process.env.FT_PIX_ADMIN_NEW_SIDEBAR_ENABLED),
       isPixAppNewLayoutEnabled: toBoolean(process.env.FT_PIXAPP_NEW_LAYOUT_ENABLED),
       isPixCompanionEnabled: toBoolean(process.env.FT_PIX_COMPANION_ENABLED),
       isSelfAccountDeletionEnabled: toBoolean(process.env.FT_SELF_ACCOUNT_DELETION),
