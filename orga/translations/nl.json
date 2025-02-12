@@ -258,6 +258,10 @@
         "percent": "percentage",
         "star": "ster"
       },
+      "simplified-access": {
+        "with-account": "Toegang account",
+        "without-account": "Toegang zonder account"
+      },
       "subjects": "Onderwerpen: {value, number}",
       "thematic-results": "Thematische resultaten: {value, number}"
     },

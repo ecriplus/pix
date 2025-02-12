@@ -259,6 +259,10 @@
         "percent": "pourcentage",
         "star": "étoile"
       },
+      "simplified-access": {
+        "with-account": "Accès avec compte",
+        "without-account": "Accès sans compte"
+      },
       "subjects": "Sujets : {value, number}",
       "thematic-results": "Résultats thématiques : {value, number}"
     }

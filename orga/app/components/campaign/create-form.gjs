@@ -40,6 +40,10 @@ export default class CreateForm extends Component {
         value: targetProfile.id,
         label: targetProfile.name,
         category: this.intl.t(`pages.campaign-creation.tags.${targetProfile.category}`),
+        icon: targetProfile.isSimplifiedAccess ? 'accountOff' : 'users',
+        iconTitle: targetProfile.isSimplifiedAccess
+          ? 'common.target-profile-details.simplified-access.without-account'
+          : 'common.target-profile-details.simplified-access.with-account',
         order: 'OTHER' === targetProfile.category ? 1 : 0,
       };
     });
@@ -301,6 +305,7 @@ export default class CreateForm extends Component {
                     @hasBadges={{gt @campaign.targetProfile.thematicResultCount 0}}
                     @targetProfileTubesCount={{@campaign.targetProfile.tubeCount}}
                     @targetProfileThematicResultCount={{@campaign.targetProfile.thematicResultCount}}
+                    @simplifiedAccess={{@campaign.targetProfile.isSimplifiedAccess}}
                   />
                 </:message>
               </ExplanationCard>

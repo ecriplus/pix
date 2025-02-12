@@ -371,8 +371,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
         await clickByName(t('pages.campaign-creation.purpose.assessment'));
 
         await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-        await click(await screen.findByRole('option', { name: 'targetProfile1' }));
-
+        await click(await screen.findByRole('option', { description: 'targetProfile1' }));
         // then
         assert.dom(screen.getByText('description1')).exists();
         assert.dom(screen.getByText(t('common.target-profile-details.subjects', { value: 11 }))).exists();
@@ -414,10 +413,73 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
         await clickByName(t('pages.campaign-creation.purpose.assessment'));
 
         await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-        await click(await screen.findByRole('option', { name: 'targetProfile1' }));
+        await click(await screen.findByRole('option', { description: 'targetProfile1' }));
 
         // then
         assert.dom(screen.getByText(t('common.target-profile-details.results.common'))).exists();
+      });
+
+      module('simplified access', function () {
+        test('it should display with simplified access', async function (assert) {
+          // given
+          this.targetProfiles = [
+            store.createRecord('target-profile', {
+              id: '1',
+              name: 'targetProfile1',
+              isSimplifiedAccess: true,
+            }),
+          ];
+
+          // when
+          const screen = await render(
+            hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @targetProfiles={{this.targetProfiles}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+          );
+
+          await clickByName(t('pages.campaign-creation.purpose.assessment'));
+
+          await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
+          await click(await screen.findByRole('option', { description: 'targetProfile1' }));
+
+          // then
+          assert.ok(screen.getByText(t('common.target-profile-details.simplified-access.without-account')));
+        });
+
+        test('it should display without simplified access', async function (assert) {
+          // given
+          this.targetProfiles = [
+            store.createRecord('target-profile', {
+              id: '1',
+              name: 'targetProfile1',
+              isSimplifiedAccess: false,
+            }),
+          ];
+
+          // when
+          const screen = await render(
+            hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @targetProfiles={{this.targetProfiles}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+          );
+          await clickByName(t('pages.campaign-creation.purpose.assessment'));
+
+          await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
+          await click(await screen.findByRole('option', { description: 'targetProfile1' }));
+
+          // then
+          assert.ok(screen.getByText(t('common.target-profile-details.simplified-access.with-account')));
+        });
       });
 
       module('Displaying options and categories', function () {
@@ -605,7 +667,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
         await clickByName(t('pages.campaign-creation.purpose.assessment'));
 
         await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-        await click(await screen.findByRole('option', { name: 'targetProfile1' }));
+        await click(await screen.findByRole('option', { description: 'targetProfile1' }));
 
         // then
         assert.dom(screen.getByText(t('common.target-profile-details.results.common'))).exists();
@@ -650,7 +712,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
           await clickByName(t('pages.campaign-creation.purpose.assessment'));
 
           await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-          await click(await screen.findByRole('option', { name: 'targetProfile1' }));
+          await click(await screen.findByRole('option', { description: 'targetProfile1' }));
 
           // then
           assert
@@ -701,7 +763,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
           await clickByName(t('pages.campaign-creation.purpose.assessment'));
 
           await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-          await click(await screen.findByRole('option', { name: 'targetProfile1' }));
+          await click(await screen.findByRole('option', { description: 'targetProfile1' }));
 
           // then
           assert
@@ -1029,7 +1091,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
     await fillByLabel(`${t('pages.campaign-creation.name.label')} *`, 'Ma campagne');
     await clickByName(t('pages.campaign-creation.purpose.assessment'));
     await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-    await click(await screen.findByRole('option', { name: targetProfile.name }));
+    await click(await screen.findByRole('option', { description: targetProfile.name }));
 
     // when
     await clickByName(t('pages.campaign-creation.actions.create'));
