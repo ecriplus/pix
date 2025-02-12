@@ -1,6 +1,6 @@
 import { PIX_ADMIN, PIX_ORGA } from '../../../authorization/domain/constants.js';
-import { ForbiddenAccess, LocaleFormatError, LocaleNotSupportedError } from '../../../shared/domain/errors.js';
-import { MissingOrInvalidCredentialsError, UserShouldChangePasswordError } from '../errors.js';
+import { ForbiddenAccess, UserNotFoundError } from '../../../shared/domain/errors.js';
+import { MissingOrInvalidCredentialsError, PasswordNotMatching, UserShouldChangePasswordError } from '../errors.js';
 import { RefreshToken } from '../models/RefreshToken.js';
 
 const authenticateUser = async function ({
@@ -49,15 +49,11 @@ const authenticateUser = async function ({
 
     return { accessToken, refreshToken: refreshToken.value, expirationDelaySeconds };
   } catch (error) {
-    if (
-      error instanceof ForbiddenAccess ||
-      error instanceof UserShouldChangePasswordError ||
-      error instanceof LocaleFormatError ||
-      error instanceof LocaleNotSupportedError
-    ) {
+    if (error instanceof UserNotFoundError || error instanceof PasswordNotMatching) {
+      throw new MissingOrInvalidCredentialsError();
+    } else {
       throw error;
     }
-    throw new MissingOrInvalidCredentialsError();
   }
 };
 
