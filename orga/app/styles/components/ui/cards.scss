@@ -13,8 +13,17 @@
   &__title {
     @extend %pix-title-xs;
 
+    display: flex;
+    gap: 4px;
     margin-top: 0;
     margin-bottom: 32px;
     color: var(--pix-neutral-500);
+  }
+
+  &__tooltip-icon {
+    width: 1rem;
+    height:1rem;
+    margin: 0 var(--pix-spacing-2x);
+    fill: var(--pix-neutral-500);
   }
 }
