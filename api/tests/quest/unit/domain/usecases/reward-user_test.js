@@ -81,7 +81,6 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
       const quest = {
         isEligible: () => true,
         isSuccessful: () => false,
-        successRequirements: [{ data: { ids: [Symbol('skillId')] } }],
         rewardId: 1,
       };
       questRepository.findAll.resolves([quest]);

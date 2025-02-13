@@ -22,7 +22,7 @@ import { KnowledgeElementDTO } from './models/KnowledgeElementDTO.js';
  * @param {Payload} payload
  * @returns {Promise<Array<KnowledgeElementDTO>>}
  */
-export async function findFilteredMostRecentByUser({ userId, skillIds }) {
+export async function findFilteredMostRecentByUser({ userId, skillIds = [] }) {
   const knowledgeElements = await evaluationUsecases.findFilteredMostRecentKnowledgeElementsByUser({
     userId,
     skillIds,

@@ -9,17 +9,15 @@ describe('Quest | Unit | Infrastructure | repositories | success', function () {
     it('should call Knowledge Elements API', async function () {
       // given
       const userId = Symbol('userId');
-      const skillIds = Symbol('skillIds');
       const knowledgeElements = Symbol('knowledgeElements');
       const knowledgeElementsApi = {
         findFilteredMostRecentByUser: sinon.stub(),
       };
-      knowledgeElementsApi.findFilteredMostRecentByUser.withArgs({ userId, skillIds }).resolves(knowledgeElements);
+      knowledgeElementsApi.findFilteredMostRecentByUser.withArgs({ userId }).resolves(knowledgeElements);
 
       // when
       const result = await successRepository.find({
         userId,
-        skillIds,
         knowledgeElementsApi,
       });
 
