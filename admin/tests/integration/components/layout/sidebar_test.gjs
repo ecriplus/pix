@@ -291,7 +291,7 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
     const screen = await render(<template><Sidebar /></template>);
 
     // then
-    assert.dom(screen.getByRole('link', { name: 'Centres de certif' })).exists();
+    assert.dom(screen.getByRole('link', { name: 'Centres de certifications' })).exists();
   });
 
   module('Certifications tab', function () {
@@ -336,7 +336,7 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
       const screen = await render(<template><Sidebar /></template>);
 
       // then
-      assert.dom(screen.getByRole('link', { name: 'Certifications compl.' })).exists();
+      assert.dom(screen.getByRole('link', { name: 'Certifications complémentaires' })).exists();
     });
   });
 

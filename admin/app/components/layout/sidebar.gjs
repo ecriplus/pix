@@ -25,106 +25,98 @@ export default class Sidebar extends Component {
         </LinkTo>
       </:brand>
       <:navElements>
-        <ul>
-          <li>
-            <PixNavigationButton
-              class="sidebar__link"
-              @route="authenticated.organizations"
-              @icon="buildings"
-              @ariaHidden={{true}}
-            >
-              {{t "components.layout.sidebar.organizations"}}
-            </PixNavigationButton>
-          </li>
-          <li>
-            <PixNavigationButton class="sidebar__link" @route="authenticated.users" @icon="infoUser">
-              {{t "components.layout.sidebar.users"}}
-            </PixNavigationButton>
-          </li>
-          <PixNavigationButton class="sidebar__link" @route="authenticated.certification-centers" @icon="mapPin">
-            {{t "components.layout.sidebar.certification-centers"}}
+
+        <PixNavigationButton
+          class="sidebar__link"
+          @route="authenticated.organizations"
+          @icon="buildings"
+          @ariaHidden={{true}}
+        >
+          {{t "components.layout.sidebar.organizations"}}
+        </PixNavigationButton>
+
+        <PixNavigationButton class="sidebar__link" @route="authenticated.users" @icon="infoUser">
+          {{t "components.layout.sidebar.users"}}
+        </PixNavigationButton>
+        <PixNavigationButton
+          class="sidebar__link"
+          @route="authenticated.certification-centers"
+          @icon="mapPin"
+          aria-label={{t "components.layout.sidebar.certification-centers-label"}}
+        >
+          {{t "components.layout.sidebar.certification-centers"}}
+        </PixNavigationButton>
+        <PixNavigationButton class="sidebar__link" @route="authenticated.sessions" @icon="session">
+          {{t "components.layout.sidebar.sessions"}}
+        </PixNavigationButton>
+        {{#if this.accessControl.hasAccessToCertificationActionsScope}}
+          <PixNavigationButton
+            class="sidebar__link"
+            @route="authenticated.certifications"
+            @icon="newRealease"
+            aria-label={{t "components.layout.sidebar.certifications"}}
+          >
+            {{t "components.layout.sidebar.certifications"}}
           </PixNavigationButton>
-          <li>
-            <PixNavigationButton class="sidebar__link" @route="authenticated.sessions" @icon="session">
-              {{t "components.layout.sidebar.sessions"}}
-            </PixNavigationButton>
-          </li>
-          {{#if this.accessControl.hasAccessToCertificationActionsScope}}
-            <li>
-              <PixNavigationButton class="sidebar__link" @route="authenticated.certifications" @icon="newRealease">
-                {{t "components.layout.sidebar.certifications"}}
-              </PixNavigationButton>
-            </li>
-          {{/if}}
-          <li>
-            <PixNavigationButton
-              class="sidebar__link"
-              @route="authenticated.complementary-certifications"
-              @icon="extension"
-            >
-              {{t "components.layout.sidebar.complementary-certifications"}}
-            </PixNavigationButton>
-          </li>
-          {{#if this.accessControl.hasAccessToTargetProfilesActionsScope}}
-            <li>
-              <PixNavigationButton class="sidebar__link" @route="authenticated.target-profiles" @icon="assignment">
-                {{t "components.layout.sidebar.target-profiles"}}
-              </PixNavigationButton>
-            </li>
-          {{/if}}
+        {{/if}}
+        <PixNavigationButton
+          class="sidebar__link"
+          @route="authenticated.complementary-certifications"
+          @icon="extension"
+          aria-label={{t "components.layout.sidebar.complementary-certifications-label"}}
+        >
+          {{t "components.layout.sidebar.complementary-certifications"}}
+        </PixNavigationButton>
+        {{#if this.accessControl.hasAccessToTargetProfilesActionsScope}}
+          <PixNavigationButton class="sidebar__link" @route="authenticated.target-profiles" @icon="assignment">
+            {{t "components.layout.sidebar.target-profiles"}}
+          </PixNavigationButton>
+        {{/if}}
 
-          {{#if
-            (or
-              this.currentUser.adminMember.isSuperAdmin
-              this.currentUser.adminMember.isMetier
-              this.currentUser.adminMember.isSupport
-            )
-          }}
-            <li>
-              <PixNavigationButton class="sidebar__link" @route="authenticated.autonomous-courses" @icon="signpost">
-                {{t "components.layout.sidebar.autonomous-courses"}}
-              </PixNavigationButton>
-            </li>
-          {{/if}}
+        {{#if
+          (or
+            this.currentUser.adminMember.isSuperAdmin
+            this.currentUser.adminMember.isMetier
+            this.currentUser.adminMember.isSupport
+          )
+        }}
+          <PixNavigationButton class="sidebar__link" @route="authenticated.autonomous-courses" @icon="signpost">
+            {{t "components.layout.sidebar.autonomous-courses"}}
+          </PixNavigationButton>
+        {{/if}}
 
-          {{#if this.currentUser.adminMember.isSuperAdmin}}
-            <li>
-              <PixNavigationButton class="sidebar__link" @route="authenticated.team" @icon="users">
-                {{t "components.layout.sidebar.team"}}
-              </PixNavigationButton>
-            </li>
-          {{/if}}
+        {{#if this.currentUser.adminMember.isSuperAdmin}}
+          <PixNavigationButton class="sidebar__link" @route="authenticated.team" @icon="users">
+            {{t "components.layout.sidebar.team"}}
+          </PixNavigationButton>
+        {{/if}}
 
-          {{#if this.accessControl.hasAccessToTrainings}}
-            <li>
-              <PixNavigationButton class="sidebar__link" @route="authenticated.trainings" @icon="book">
-                {{t "components.layout.sidebar.trainings"}}
-              </PixNavigationButton>
-            </li>
-          {{/if}}
-          {{#if (or this.currentUser.adminMember.isSuperAdmin this.currentUser.adminMember.isMetier)}}
-            <li>
-              <PixNavigationButton class="sidebar__link" @route="authenticated.tools" @icon="tools">
-                {{t "components.layout.sidebar.tools"}}
-              </PixNavigationButton>
-            </li>
-          {{/if}}
-          {{#if this.currentUser.adminMember.isSuperAdmin}}
-            <li>
-              <PixNavigationButton class="sidebar__link" @route="authenticated.administration" @icon="shieldPerson">
-                {{t "components.layout.sidebar.administration"}}
-              </PixNavigationButton>
-            </li>
-          {{/if}}
+        {{#if this.accessControl.hasAccessToTrainings}}
 
-        </ul>
+          <PixNavigationButton class="sidebar__link" @route="authenticated.trainings" @icon="book">
+            {{t "components.layout.sidebar.trainings"}}
+          </PixNavigationButton>
+
+        {{/if}}
+        {{#if (or this.currentUser.adminMember.isSuperAdmin this.currentUser.adminMember.isMetier)}}
+
+          <PixNavigationButton class="sidebar__link" @route="authenticated.tools" @icon="tools">
+            {{t "components.layout.sidebar.tools"}}
+          </PixNavigationButton>
+
+        {{/if}}
+        {{#if this.currentUser.adminMember.isSuperAdmin}}
+
+          <PixNavigationButton class="sidebar__link" @route="authenticated.administration" @icon="shieldPerson">
+            {{t "components.layout.sidebar.administration"}}
+          </PixNavigationButton>
+
+        {{/if}}
+
       </:navElements>
       <:footer>
-
         <p class="sidebar-footer__full-name">{{this.userFullName}}</p>
-
         <PixButtonLink @variant="tertiary" @route="logout">{{t "components.layout.sidebar.logout"}}</PixButtonLink>
-
       </:footer>
     </PixNavigation>
   </template>
