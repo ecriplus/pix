@@ -330,7 +330,6 @@ const configuration = (function () {
       isQuestEnabled: toBoolean(process.env.FT_ENABLE_QUESTS),
       isUserTokenAudConfinementEnabled: toBoolean(process.env.FT_USER_TOKEN_AUD_CONFINEMENT_ENABLED),
       isTextToSpeechButtonEnabled: toBoolean(process.env.FT_ENABLE_TEXT_TO_SPEECH_BUTTON),
-      isLegalDocumentsVersioningEnabled: toBoolean(process.env.FT_NEW_LEGAL_DOCUMENTS_VERSIONING),
       setupEcosystemBeforeStart: toBoolean(process.env.FT_SETUP_ECOSYSTEM_BEFORE_START) || false,
       showExperimentalMissions: toBoolean(process.env.FT_SHOW_EXPERIMENTAL_MISSIONS),
       showNewCampaignPresentationPage: toBoolean(process.env.FT_SHOW_NEW_CAMPAIGN_PRESENTATION_PAGE),
@@ -565,7 +564,6 @@ const configuration = (function () {
     config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
     config.featureToggles.isUserTokenAudConfinementEnabled = true;
     config.featureToggles.isTextToSpeechButtonEnabled = false;
-    config.featureToggles.isLegalDocumentsVersioningEnabled = false;
     config.featureToggles.showNewResultPage = false;
     config.featureToggles.showExperimentalMissions = false;
 
