@@ -27,7 +27,7 @@ describe('Acceptance | Team | Application | Controller | prescriber-informations
         attributes: {
           'first-name': user.firstName,
           'last-name': user.lastName,
-          'pix-orga-terms-of-service-status': 'unknown',
+          'pix-orga-terms-of-service-status': 'requested',
           'pix-orga-terms-of-service-document-path': null,
           'are-new-year-organization-learners-imported': false,
           'participant-count': 0,

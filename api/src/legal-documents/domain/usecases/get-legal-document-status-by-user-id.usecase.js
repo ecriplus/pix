@@ -1,4 +1,3 @@
-import { LegalDocumentVersionNotFoundError } from '../errors.js';
 import { LegalDocumentService } from '../models/LegalDocumentService.js';
 import { LegalDocumentStatus } from '../models/LegalDocumentStatus.js';
 import { LegalDocumentType } from '../models/LegalDocumentType.js';
@@ -19,13 +18,17 @@ const getLegalDocumentStatusByUserId = async ({
   type,
   legalDocumentRepository,
   userAcceptanceRepository,
+  logger,
 }) => {
   LegalDocumentService.assert(service);
   LegalDocumentType.assert(type);
 
   const lastLegalDocument = await legalDocumentRepository.findLastVersionByTypeAndService({ service, type });
 
-  if (!lastLegalDocument) throw new LegalDocumentVersionNotFoundError();
+  if (!lastLegalDocument) {
+    logger.warn(`Unknown legal document version found for ${service} and ${type}`);
+    return LegalDocumentStatus.notFound();
+  }
 
   const lastUserAcceptance = await userAcceptanceRepository.findLastForLegalDocument({ userId, service, type });
 

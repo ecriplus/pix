@@ -35,4 +35,8 @@ export class LegalDocumentStatus {
 
     return new LegalDocumentStatus({ status: STATUS.UPDATE_REQUESTED, acceptedAt: null, documentPath });
   }
+
+  static notFound() {
+    return new LegalDocumentStatus({ status: STATUS.REQUESTED, acceptedAt: null, documentPath: null });
+  }
 }

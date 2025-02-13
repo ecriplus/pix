@@ -1,8 +1,5 @@
 import { legalDocumentsDomainErrorMappingConfiguration } from '../../../../../src/legal-documents/application/http-error-mapper-configuration.js';
-import {
-  LegalDocumentInvalidDateError,
-  LegalDocumentVersionNotFoundError,
-} from '../../../../../src/legal-documents/domain/errors.js';
+import { LegalDocumentInvalidDateError } from '../../../../../src/legal-documents/domain/errors.js';
 import { HttpErrors } from '../../../../../src/shared/application/http-errors.js';
 import { DomainErrorMappingConfiguration } from '../../../../../src/shared/application/models/domain-error-mapping-configuration.js';
 import { expect } from '../../../../test-helper.js';
@@ -29,21 +26,6 @@ describe('Unit | Legal Documents | Application | HttpErrorMapperConfiguration', 
 
       //then
       expect(error).to.be.instanceOf(HttpErrors.UnprocessableEntityError);
-    });
-  });
-
-  context('when mapping "LegalDocumentVersionNotFoundError"', function () {
-    it('returns an NotFound Http Error', function () {
-      //given
-      const httpErrorMapper = legalDocumentsDomainErrorMappingConfiguration.find(
-        (httpErrorMapper) => httpErrorMapper.name === LegalDocumentVersionNotFoundError.name,
-      );
-
-      //when
-      const error = httpErrorMapper.httpErrorFn(new LegalDocumentVersionNotFoundError());
-
-      //then
-      expect(error).to.be.instanceOf(HttpErrors.NotFoundError);
     });
   });
 });

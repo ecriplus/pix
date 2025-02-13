@@ -83,4 +83,15 @@ describe('Unit | Legal documents | Domain | Model | LegalDocumentStatus', functi
       });
     });
   });
+
+  describe('#LegalDocumentStatus.notFound', function () {
+    it('returns an legal document status as request when legal document is not found', function () {
+      // given / when
+      const legalDocumentStatus = LegalDocumentStatus.notFound();
+
+      // then
+      expect(legalDocumentStatus).to.be.instanceof(LegalDocumentStatus);
+      expect(legalDocumentStatus).to.deep.equal({ status: STATUS.REQUESTED, acceptedAt: null, documentPath: null });
+    });
+  });
 });

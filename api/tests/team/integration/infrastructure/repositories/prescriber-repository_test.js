@@ -73,7 +73,7 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           id: user.id,
           firstName: user.firstName,
           lastName: user.lastName,
-          pixOrgaTermsOfServiceStatus: 'unknown',
+          pixOrgaTermsOfServiceStatus: 'requested',
           pixOrgaTermsOfServiceDocumentPath: null,
           lang: user.lang,
         };

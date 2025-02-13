@@ -1,4 +1,3 @@
-import { LegalDocumentVersionNotFoundError } from '../../../../../src/legal-documents/domain/errors.js';
 import { LegalDocumentService } from '../../../../../src/legal-documents/domain/models/LegalDocumentService.js';
 import { LegalDocumentStatus, STATUS } from '../../../../../src/legal-documents/domain/models/LegalDocumentStatus.js';
 import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
@@ -38,18 +37,20 @@ describe('Integration | Legal documents | Domain | Use case | get-legal-document
     });
   });
 
-  context('when the legal document version does not exist', function () {
-    it('throws an error', async function () {
+  context('when the legal document version not found', function () {
+    it('returns the requested legal document status', async function () {
       // given
       const service = PIX_ORGA;
       const type = TOS;
       const user = databaseBuilder.factory.buildUser();
       await databaseBuilder.commit();
 
-      // when / then
-      await expect(usecases.getLegalDocumentStatusByUserId({ userId: user.id, service, type })).to.be.rejectedWith(
-        LegalDocumentVersionNotFoundError,
-      );
+      // when
+      const legalDocumentStatus = await usecases.getLegalDocumentStatusByUserId({ userId: user.id, service, type });
+
+      // then
+      expect(legalDocumentStatus).to.be.an.instanceOf(LegalDocumentStatus);
+      expect(legalDocumentStatus).to.deep.equal({ status: STATUS.REQUESTED, acceptedAt: null, documentPath: null });
     });
   });
 });
