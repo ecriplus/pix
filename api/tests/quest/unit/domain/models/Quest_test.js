@@ -2,7 +2,7 @@ import { COMPARISON as CRITERION_PROPERTY_COMPARISON } from '../../../../../src/
 import { Eligibility, TYPES } from '../../../../../src/quest/domain/models/Eligibility.js';
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import { COMPARISON } from '../../../../../src/quest/domain/models/Quest.js';
-import { COMPOSE_TYPE } from '../../../../../src/quest/domain/models/Requirement.js';
+import { COMPOSE_TYPE, SKILL_PROFILE_TYPE } from '../../../../../src/quest/domain/models/Requirement.js';
 import { Success } from '../../../../../src/quest/domain/models/Success.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
 import { expect } from '../../../../test-helper.js';
@@ -23,6 +23,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
             comparison: COMPARISON.ALL,
           },
         ],
+        successRequirements: [],
       });
 
       const eligibility = new Eligibility({ organization: { type: 'SCO' } });
@@ -44,6 +45,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
             comparison: COMPARISON.ALL,
           },
         ],
+        successRequirements: [],
       });
 
       const eligibility = new Eligibility({ organization: { type: 'PRO' } });
@@ -53,50 +55,103 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
   });
 
   describe('#isSuccessful', function () {
-    let quest;
-
-    before(function () {
+    it('returns true when all requirements are met', function () {
       // given
-      const successRequirements = [
-        {
-          type: 'skill',
-          data: {
-            ids: [1, 2, 3],
-            threshold: 50,
+      const quest = new Quest({
+        eligibilityRequirements: [],
+        successRequirements: [
+          {
+            requirement_type: SKILL_PROFILE_TYPE,
+            data: {
+              skillIds: ['skillA', 'skillB'],
+              threshold: 100,
+            },
           },
-        },
-      ];
-      quest = new Quest({ successRequirements, eligibilityRequirements: [] });
-    });
-
-    it('should return true if success requirements are met', function () {
-      // when
+          {
+            requirement_type: SKILL_PROFILE_TYPE,
+            data: {
+              skillIds: ['skillC', 'skillD'],
+              threshold: 50,
+            },
+          },
+        ],
+      });
       const success = new Success({
         knowledgeElements: [
-          { status: KnowledgeElement.StatusType.VALIDATED },
-          { status: KnowledgeElement.StatusType.VALIDATED },
-          { status: KnowledgeElement.StatusType.VALIDATED },
-          { status: KnowledgeElement.StatusType.INVALIDATED },
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillA' },
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillB' },
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillC' },
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillD' },
         ],
       });
 
-      //then
-      expect(quest.isSuccessful(success)).to.equal(true);
+      expect(quest.isSuccessful(success)).to.be.true;
     });
 
-    it('should return false if success requirements are not met', function () {
-      // when
+    it('returns false when at least one requirement is not met', function () {
+      // given
+      const quest = new Quest({
+        eligibilityRequirements: [],
+        successRequirements: [
+          {
+            requirement_type: SKILL_PROFILE_TYPE,
+            data: {
+              skillIds: ['skillA', 'skillB'],
+              threshold: 100,
+            },
+          },
+          {
+            requirement_type: SKILL_PROFILE_TYPE,
+            data: {
+              skillIds: ['skillC', 'skillD'],
+              threshold: 50,
+            },
+          },
+        ],
+      });
       const success = new Success({
         knowledgeElements: [
-          { status: KnowledgeElement.StatusType.VALIDATED },
-          { status: KnowledgeElement.StatusType.INVALIDATED },
-          { status: KnowledgeElement.StatusType.INVALIDATED },
-          { status: KnowledgeElement.StatusType.INVALIDATED },
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillA' },
+          { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillB' },
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillC' },
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillD' },
         ],
       });
 
-      // then
-      expect(quest.isSuccessful(success)).to.equal(false);
+      expect(quest.isSuccessful(success)).to.be.false;
+    });
+
+    it('returns false when none of the requirements are met', function () {
+      // given
+      const quest = new Quest({
+        eligibilityRequirements: [],
+        successRequirements: [
+          {
+            requirement_type: SKILL_PROFILE_TYPE,
+            data: {
+              skillIds: ['skillA', 'skillB'],
+              threshold: 100,
+            },
+          },
+          {
+            requirement_type: SKILL_PROFILE_TYPE,
+            data: {
+              skillIds: ['skillC', 'skillD'],
+              threshold: 50,
+            },
+          },
+        ],
+      });
+      const success = new Success({
+        knowledgeElements: [
+          { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillA' },
+          { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillB' },
+          { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillC' },
+          { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillD' },
+        ],
+      });
+
+      expect(quest.isSuccessful(success)).to.be.false;
     });
   });
 
@@ -139,7 +194,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
             comparison: COMPARISON.ALL,
           },
         ];
-        const quest = new Quest({ eligibilityRequirements });
+        const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
         const campaignParticipations = [
           { id: 10, targetProfileId: 1 },
           { id: 11, targetProfileId: 3 },
@@ -191,7 +246,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
             comparison: COMPARISON.ALL,
           },
         ];
-        const quest = new Quest({ eligibilityRequirements });
+        const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
         const campaignParticipations = [
           { id: 10, targetProfileId: 1 },
           { id: 11, targetProfileId: 3 },
@@ -225,7 +280,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
             comparison: COMPARISON.ALL,
           },
         ];
-        const quest = new Quest({ eligibilityRequirements });
+        const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
         const campaignParticipations = [{ id: 10 }, { id: 11 }];
         const eligibilityData = new Eligibility({ organization, organizationLearner, campaignParticipations });
         const campaignParticipationIdToCheck = 11;
@@ -264,7 +319,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
             comparison: COMPARISON.ALL,
           },
         ];
-        const quest = new Quest({ eligibilityRequirements });
+        const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
         const campaignParticipations = [{ id: 10 }, { id: 11 }];
         const eligibilityData = new Eligibility({ organization, organizationLearner, campaignParticipations });
         const campaignParticipationIdToCheck = 11;
@@ -303,7 +358,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
             comparison: COMPARISON.ALL,
           },
         ];
-        const quest = new Quest({ eligibilityRequirements });
+        const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
         const campaignParticipations = [{ id: 10 }, { id: 11 }];
         const eligibilityData = new Eligibility({ organization, organizationLearner, campaignParticipations });
         const campaignParticipationIdToCheck = 10;
@@ -373,7 +428,15 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
             ],
           },
         ],
-        successRequirements: { some: 'success' },
+        successRequirements: [
+          {
+            requirement_type: SKILL_PROFILE_TYPE,
+            data: {
+              skillIds: ['id1', 'id2'],
+              threshold: 70,
+            },
+          },
+        ],
       });
 
       // when
@@ -430,7 +493,15 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
             ],
           },
         ],
-        successRequirements: { some: 'success' },
+        successRequirements: [
+          {
+            requirement_type: SKILL_PROFILE_TYPE,
+            data: {
+              skillIds: ['id1', 'id2'],
+              threshold: 70,
+            },
+          },
+        ],
       });
     });
   });

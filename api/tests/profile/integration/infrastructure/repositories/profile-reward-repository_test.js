@@ -19,7 +19,7 @@ describe('Profile | Integration | Repository | profile-reward', function () {
       const { rewardId } = databaseBuilder.factory.buildQuest({
         rewardType: REWARD_TYPES.ATTESTATION,
         eligibilityRequirements: [],
-        successRequirements: {},
+        successRequirements: [],
       });
       await databaseBuilder.commit();
 
@@ -41,7 +41,7 @@ describe('Profile | Integration | Repository | profile-reward', function () {
       const { rewardId } = databaseBuilder.factory.buildQuest({
         rewardType: REWARD_TYPES.ATTESTATION,
         eligibilityRequirements: [],
-        successRequirements: {},
+        successRequirements: [],
       });
       databaseBuilder.factory.buildProfileReward({ rewardId, userId });
       await databaseBuilder.commit();
@@ -131,7 +131,7 @@ describe('Profile | Integration | Repository | profile-reward', function () {
       const { rewardId: firstRewardId } = databaseBuilder.factory.buildQuest({
         rewardType: REWARD_TYPES.ATTESTATION,
         eligibilityRequirements: [],
-        successRequirements: {},
+        successRequirements: [],
       });
       const otherAttestation = databaseBuilder.factory.buildAttestation({
         templateName: 'otherTemplateName',
@@ -141,7 +141,7 @@ describe('Profile | Integration | Repository | profile-reward', function () {
         rewardType: REWARD_TYPES.ATTESTATION,
         rewardId: otherAttestation.id,
         eligibilityRequirements: [],
-        successRequirements: {},
+        successRequirements: [],
       });
       databaseBuilder.factory.buildProfileReward({
         rewardId: firstRewardId,

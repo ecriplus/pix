@@ -13,6 +13,8 @@ const findAll = async () => {
   return toDomain(quests);
 };
 
+// envisager de mettre tableau vide en valeur par défaut des requirements si pas renseigné pour pas péter le code
+// ensuite
 const saveInBatch = async ({ quests }) => {
   const knexConn = DomainTransaction.getConnection();
 

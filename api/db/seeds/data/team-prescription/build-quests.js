@@ -3,7 +3,7 @@ import { REWARD_TYPES } from '../../../../src/quest/domain/constants.js';
 import { COMPARISON as CRITERION_PROPERTY_COMPARISON } from '../../../../src/quest/domain/models/CriterionProperty.js';
 import { TYPES } from '../../../../src/quest/domain/models/Eligibility.js';
 import { COMPARISON } from '../../../../src/quest/domain/models/Quest.js';
-import { COMPOSE_TYPE } from '../../../../src/quest/domain/models/Requirement.js';
+import { COMPOSE_TYPE, SKILL_PROFILE_TYPE } from '../../../../src/quest/domain/models/Requirement.js';
 import { Assessment, CampaignParticipationStatuses, Membership } from '../../../../src/shared/domain/models/index.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
@@ -238,9 +238,9 @@ const buildSixthGradeQuests = (
 
   const questSuccessRequirements = [
     {
-      type: 'skill',
+      requirement_type: SKILL_PROFILE_TYPE,
       data: {
-        ids: [CAMPAIGN_SKILLS[1], CAMPAIGN_SKILLS[2]].flat(),
+        skillIds: [CAMPAIGN_SKILLS[1], CAMPAIGN_SKILLS[2]].flat(),
         threshold: 50,
       },
     },

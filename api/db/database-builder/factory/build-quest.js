@@ -11,7 +11,7 @@ const buildQuest = function ({
   rewardType = REWARD_TYPES.ATTESTATION,
   rewardId,
   eligibilityRequirements = [],
-  successRequirements,
+  successRequirements = [],
 } = {}) {
   rewardId = isUndefined(rewardId) && rewardType === REWARD_TYPES.ATTESTATION ? buildAttestation().id : rewardId;
   const eligibilityRequirementsForDB = JSON.stringify(eligibilityRequirements);

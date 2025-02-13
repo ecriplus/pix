@@ -1,4 +1,3 @@
-import { KnowledgeElement } from '../../../shared/domain/models/index.js';
 import { TYPES as ELIGIBILITY_TYPES } from './Eligibility.js';
 import { COMPOSE_TYPE, ComposedRequirement } from './Requirement.js';
 
@@ -9,6 +8,7 @@ export const COMPARISON = {
 
 class Quest {
   #eligibilityRequirements;
+  #successRequirements;
 
   constructor({ id, createdAt, updatedAt, rewardType, eligibilityRequirements, successRequirements, rewardId }) {
     this.id = id;
@@ -21,12 +21,20 @@ class Quest {
       comparison: COMPARISON.ALL,
     });
 
-    this.successRequirements = successRequirements;
+    this.#successRequirements = new ComposedRequirement({
+      data: successRequirements,
+      comparison: COMPARISON.ALL,
+    });
   }
 
   // je crois que ce getter sert à rien
   get eligibilityRequirements() {
     return this.#eligibilityRequirements.data;
+  }
+
+  // je crois que ce getter sert à rien
+  get successRequirements() {
+    return this.#successRequirements.data;
   }
 
   /**
@@ -72,13 +80,7 @@ class Quest {
    * @param {Success} success
    */
   isSuccessful(success) {
-    const skillsCount = this.successRequirements[0].data.ids.length;
-    const threshold = this.successRequirements[0].data.threshold / 100;
-    const skillsValidatedCount = success.knowledgeElements.filter(
-      (knowledgeElement) => knowledgeElement.status === KnowledgeElement.StatusType.VALIDATED,
-    ).length;
-
-    return skillsValidatedCount / skillsCount >= threshold;
+    return this.#successRequirements.isFulfilled(success);
   }
 
   toDTO() {
@@ -89,7 +91,7 @@ class Quest {
       rewardType: this.rewardType,
       rewardId: this.rewardId,
       eligibilityRequirements: this.#eligibilityRequirements.data.map((item) => item.toDTO()),
-      successRequirements: this.successRequirements,
+      successRequirements: this.#successRequirements.data.map((item) => item.toDTO()),
     };
   }
 

@@ -33,6 +33,7 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
   });
 
   // TODO demander si ce cas est possible (hors cuRL douteux) ?
+  // EDIT : cas de l'accès simplifié !
   it('should return empty array when there is no eligibility', async function () {
     // given
     const wrongCampaignParticipationId = 30;
