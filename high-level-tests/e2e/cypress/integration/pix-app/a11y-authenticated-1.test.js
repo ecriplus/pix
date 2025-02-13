@@ -20,6 +20,8 @@ describe("a11y", () => {
     cy.task("db:fixture", "assessments");
     cy.task("db:fixture", "answers");
     cy.task("db:fixture", "knowledge-elements");
+    cy.task("db:fixture", "legal-document-versions");
+    cy.task("db:fixture", "legal-document-version-user-acceptances");
   });
 
   describe("Authenticated pages", () => {
