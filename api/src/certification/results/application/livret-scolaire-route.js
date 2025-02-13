@@ -10,7 +10,7 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/organizations/{uai}/certifications',
       config: {
-        auth: 'jwt-livret-scolaire',
+        auth: { strategy: 'jwt-livret-scolaire', access: { scope: ['organizations-certifications-result'] } },
         handler: livretScolaireController.getCertificationsByOrganizationUAI,
         notes: [
           '- **API for LSU/LSL qui nécessite une authentification de type client credential grant**\n' +
