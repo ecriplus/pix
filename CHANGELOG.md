@@ -1,5 +1,22 @@
 # Pix Changelog
 
+## v5.42.0 (13/02/2025)
+
+
+### :rocket: Amélioration
+- [#11405](https://github.com/1024pix/pix/pull/11405) [FEATURE] Ajouter une colone locale dans le tableau des invitations à rejoindre une orga en attente sur Pix admin (Pix-16380).
+- [#11403](https://github.com/1024pix/pix/pull/11403) [FEATURE] Ajouter un endpoint pour supprimer la liaison entre un Profil Cible et un Contenu Formatif (PIX-16512).
+
+### :building_construction: Tech
+- [#11399](https://github.com/1024pix/pix/pull/11399) [TECH] Améliorer les seeds des SSO (OIDC Providers) (PIX-16538).
+- [#11401](https://github.com/1024pix/pix/pull/11401) [TECH] Bump des dépendances Audit Logger mineures et patchs.
+- [#11395](https://github.com/1024pix/pix/pull/11395) [TECH] Ajouter un sous-composant d'affichage de l'état d'une certification (PIX-16534).
+- [#11400](https://github.com/1024pix/pix/pull/11400) [TECH] Utiliser partout la même logique explicite MissingOrInvalidCredentialsError qui ne fait pas fuiter les informations (PIX-16543).
+
+### :bug: Correction
+- [#11394](https://github.com/1024pix/pix/pull/11394) [BUGFIX] Réparer l'apparence de la liste déroulante de SSO pour qu'elle retrouve son style pyjama (PIX-16535).
+- [#11385](https://github.com/1024pix/pix/pull/11385) [BUGFIX] Corriger le decalage entre capacities et certification-challenges (PIX-16457).
+
 ## v5.41.0 (12/02/2025)
 
 
