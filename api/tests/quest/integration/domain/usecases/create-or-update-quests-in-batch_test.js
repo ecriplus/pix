@@ -17,13 +17,15 @@ describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-b
       `Quest ID;Json configuration for quest
     ;{"rewardType":"coucou","rewardId":null,"eligibilityRequirements":{"eligibility":"eligibility"},"successRequirements":{"success":"success"}}`,
     );
-    const spy = sinon.spy(repositories.questRepository, 'saveInBatch');
+    const spySave = sinon.spy(repositories.questRepository, 'saveInBatch');
+    const spyDelete = sinon.spy(repositories.questRepository, 'deleteByIds');
 
     // when
     await usecases.createOrUpdateQuestsInBatch({ filePath });
 
     // then
-    expect(spy).to.have.been.calledWithExactly({
+    expect(spyDelete.called).to.be.false;
+    expect(spySave).to.have.been.calledWithExactly({
       quests: [
         new Quest({
           id: undefined,
@@ -35,6 +37,41 @@ describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-b
           successRequirements: { success: 'success' },
         }),
       ],
+    });
+  });
+
+  it('should delete the passed quests in file only when there is a "Oui" in the column, else it will pass it as to update', async function () {
+    // given
+    filePath = await createTempFile(
+      'test.csv',
+      `Quest ID;Json configuration for quest;deleteQuest
+    3;{"rewardType":"coucou","rewardId":null,"eligibilityRequirements":{"eligibility":"eligibility"},"successRequirements":{"success":"success"}};OUI
+    5;{"rewardType":"bonjour","rewardId":null,"eligibilityRequirements":{"eligibility":"une autre eli"},"successRequirements":{"success":"une autre success"}};oui
+    4;{"rewardType":"salut","rewardId":null,"eligibilityRequirements":{"eligibility":"some other eli"},"successRequirements":{"success":"some other success"}};Non
+    `,
+    );
+    const spySave = sinon.spy(repositories.questRepository, 'saveInBatch');
+    const spyDelete = sinon.spy(repositories.questRepository, 'deleteByIds');
+
+    // when
+    await usecases.createOrUpdateQuestsInBatch({ filePath });
+
+    // then
+    expect(spySave).to.have.been.calledWithExactly({
+      quests: [
+        new Quest({
+          id: '4',
+          createdAt: undefined,
+          updatedAt: undefined,
+          rewardType: 'salut',
+          rewardId: null,
+          eligibilityRequirements: { eligibility: 'some other eli' },
+          successRequirements: { success: 'some other success' },
+        }),
+      ],
+    });
+    expect(spyDelete).to.have.been.calledWithExactly({
+      questIds: ['3', '5'],
     });
   });
 });

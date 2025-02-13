@@ -90,4 +90,42 @@ describe('Quest | Integration | Repository | quest', function () {
       expect(quests).to.have.lengthOf(3);
     });
   });
+
+  describe('#deleteByIds', function () {
+    it('should delete quest given ids', async function () {
+      // given
+      databaseBuilder.factory.buildQuest({
+        id: 1,
+        rewardType: REWARD_TYPES.ATTESTATION,
+        rewardId: 2,
+        eligibilityRequirements: { toto: 'tata' },
+        successRequirements: { titi: 'tutu' },
+      });
+      databaseBuilder.factory.buildQuest({
+        id: 2,
+        rewardType: REWARD_TYPES.ATTESTATION,
+        rewardId: 2,
+        eligibilityRequirements: { toto: 'tata' },
+        successRequirements: { titi: 'tutu' },
+      });
+      databaseBuilder.factory.buildQuest({
+        id: 3,
+        rewardType: REWARD_TYPES.ATTESTATION,
+        rewardId: 2,
+        eligibilityRequirements: { toto: 'tata' },
+        successRequirements: { titi: 'tutu' },
+      });
+      await databaseBuilder.commit();
+      await databaseBuilder.fixSequences();
+
+      // when
+      await questRepository.deleteByIds({ questIds: ['1', 3] });
+
+      const quests = await questRepository.findAll();
+
+      // then
+      expect(quests).to.have.lengthOf(1);
+      expect(quests[0].id).to.equal(2);
+    });
+  });
 });
