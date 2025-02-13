@@ -14,7 +14,7 @@ const revokedUserAccessLifespanMs = config.authentication.revokedUserAccessLifes
  * @param {string} params.userId - The ID of the user to revoke access for.
  * @param {Date} params.revokeUntil - The date until the user's access should be revoked.
  */
-export const saveForUser = async function ({ userId, revokeUntil }) {
+const saveForUser = async function ({ userId, revokeUntil }) {
   if (!userId) {
     throw new UserIdIsRequiredError();
   }
