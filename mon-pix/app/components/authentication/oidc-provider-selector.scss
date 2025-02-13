@@ -42,24 +42,16 @@
     background-color : var(--pix-neutral-20);
   }
 
-  .pix-select-options-category__option {
+  .pix-select-list-category__option {
     padding: var(--pix-spacing-3x) var(--pix-spacing-2x);
     white-space: normal;
 
-    &:first-child {
-      display: none;
+    &:nth-child(even) {
+      background: var(--pix-neutral-0);
     }
 
     &:hover, &:focus {
       background: var(--pix-primary-100);
-    }
-
-    &:nth-child(even) {
-      background: var(--pix-neutral-0);
-
-      &:hover, &:focus {
-        background: var(--pix-primary-100);
-      }
     }
   }
 }
