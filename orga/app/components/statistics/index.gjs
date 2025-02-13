@@ -139,7 +139,7 @@ export default class Statistics extends Component {
           <caption class="screen-reader-only">{{t "pages.statistics.table.caption"}}</caption>
           <thead>
             <tr>
-              <Header @size="wide" scope="col">{{t "pages.statistics.table.headers.skills"}}</Header>
+              <Header @size="wide" scope="col">{{t "pages.statistics.table.headers.competences"}}</Header>
               <Header @size="medium" scope="col">{{t "pages.statistics.table.headers.topics"}}</Header>
               <Header @size="medium" @align="center" scope="col">{{t
                   "pages.statistics.table.headers.positioning"

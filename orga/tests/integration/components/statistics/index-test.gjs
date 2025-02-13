@@ -55,7 +55,7 @@ module('Integration | Component | Statistics | Index', function (hooks) {
       const screen = await render(<template><Statistics @model={{model}} /></template>);
 
       //then
-      assert.ok(screen.getByRole('columnheader', { name: t('pages.statistics.table.headers.skills') }));
+      assert.ok(screen.getByRole('columnheader', { name: t('pages.statistics.table.headers.competences') }));
       assert.ok(screen.getByRole('columnheader', { name: t('pages.statistics.table.headers.topics') }));
       assert.ok(screen.getByRole('columnheader', { name: t('pages.statistics.table.headers.reached-level') }));
       assert.ok(screen.getByRole('columnheader', { name: t('pages.statistics.table.headers.positioning') }));
