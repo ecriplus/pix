@@ -800,6 +800,7 @@
         "candidate-not-authorized-to-resume": "Please contact your invigilator to resume your certification test.",
         "candidate-not-authorized-to-start": "Your invigilator has not confirmed your presence in the test room. Therefore, you cannot start your certification test yet. Please inform your invigilator.",
         "generic": "An unexpected server error has occurred.",
+        "missing-code": "You have not entered your access code.",
         "session-not-accessible": "The certification session is no longer available.",
         "unknown": {
           "summary-label": "Show more details:"

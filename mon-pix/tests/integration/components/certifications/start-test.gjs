@@ -33,7 +33,7 @@ module('Integration | Component | Certifications | start', function (hooks) {
     );
 
     // then
-    assert.dom(screen.queryByRole('heading', { level: 2, name: t('pages.certification-start.first-title') })).exists();
+    assert.dom(screen.queryByRole('heading', { level: 1, name: t('pages.certification-start.first-title') })).exists();
   });
 
   test('it displays companion blocker page when extension is disabled', async function (assert) {
