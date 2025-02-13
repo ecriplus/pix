@@ -5,6 +5,7 @@ import { KnowledgeElementDTO } from './models/KnowledgeElementDTO.js';
  * @typedef KnowledgeElementDTO
  * @type {object}
  * @property {string} status
+ * @property {string} skillId
  */
 
 /**
