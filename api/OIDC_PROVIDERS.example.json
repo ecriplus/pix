@@ -1,66 +1,42 @@
 [
   {
-    "identityProvider": "oidcFromSeeds",
-    "organizationName": "SEEDS",
+    "identityProvider": "OIDC_EXAMPLE_NET_FROM_FILE-A",
+    "organizationName": "OIDC Example A from file",
     "scope": "openid profile",
-    "slug": "seeds",
-    "source": "sso-oidc-seeds",
-    "clientId": "XXX",
-    "clientSecret": "YYY",
+    "slug": "file-a-oidc-example-net",
+    "source": "file-a-oidc-example-net",
+    "clientId": "a-XXX",
+    "clientSecret": "a-YYY",
     "accessTokenLifespan": "48h",
     "enabled": true,
-    "openidConfigurationUrl": "https://seeds.example.net/.well-known/openid-configuration",
-    "redirectUri": "https://app.dev.pix.org/connexion/seeds",
-    "shouldCloseSession": true,
-    "openidClientExtraMetadata": {
-      "token_endpoint_auth_method": "client_secret_post"
-    },
-    "additionalRequiredProperties": {
-      "logoutUrl": "https://seeds.example.net/logout",
-      "afterLogoutUrl": "https://app.dev.pix.org"
-    }
+    "openidConfigurationUrl": "https://file-a.oidc.example.net/.well-known/openid-configuration",
+    "redirectUri": "https://app.dev.pix.org/connexion/file-a-oidc-example-net"
   },
   {
-    "identityProvider": "oidcFromSeeds2",
-    "organizationName": "SEEDS2",
+    "identityProvider": "OIDC_EXAMPLE_NET_FROM_FILE-B",
+    "organizationName": "OIDC Example B from file",
     "scope": "openid profile",
-    "slug": "seeds2",
-    "source": "sso-oidc-seeds",
-    "clientId": "XXX",
-    "clientSecret": "YYY",
+    "slug": "file-b-oidc-example-net",
+    "source": "file-b-oidc-example-net",
+    "clientId": "b-XXX",
+    "clientSecret": "b-YYY",
     "accessTokenLifespan": "48h",
     "enabled": true,
-    "openidConfigurationUrl": "https://seeds.example.net/.well-known/openid-configuration",
-    "redirectUri": "https://app.dev.pix.org/connexion/seeds",
-    "shouldCloseSession": true,
-    "openidClientExtraMetadata": {
-      "token_endpoint_auth_method": "client_secret_post"
-    },
-    "additionalRequiredProperties": {
-      "logoutUrl": "https://seeds.example.net/logout",
-      "afterLogoutUrl": "https://app.dev.pix.org"
-    }
-  },
+    "openidConfigurationUrl": "https://file-b.oidc.example.net/.well-known/openid-configuration",
+    "redirectUri": "https://app.dev.pix.org/connexion/file-b-oidc-example-net"
+   },
   {
-    "identityProvider": "oidcFromSeedsNotVisible",
-    "organizationName": "SEEDSNOTVISIBLE",
+    "identityProvider": "OIDC_EXAMPLE_NET_FROM_FILE-C",
+    "organizationName": "OIDC Example C from file",
     "scope": "openid profile",
-    "slug": "seeds-not-visible",
-    "source": "sso-oidc-seeds-not-visible",
-    "clientId": "XXXI",
-    "clientSecret": "YYYZ",
-    "accessTokenLifespan": "72h",
+    "slug": "file-c-oidc-example-net",
+    "source": "file-c-oidc-example-net",
+    "clientId": "c-XXX",
+    "clientSecret": "c-YYY",
+    "accessTokenLifespan": "48h",
     "enabled": true,
-    "openidConfigurationUrl": "https://seeds.example.net/.well-known/openid-configuration",
-    "redirectUri": "https://app.dev.pix.org/connexion/seeds",
-    "shouldCloseSession": true,
-    "openidClientExtraMetadata": {
-      "token_endpoint_auth_method": "client_secret_post"
-    },
-    "additionalRequiredProperties": {
-      "logoutUrl": "https://seeds.example.net/logout",
-      "afterLogoutUrl": "https://app.dev.pix.org"
-    },
-    "isVisible": false
+    "openidConfigurationUrl": "https://file-c.oidc.example.net/.well-known/openid-configuration",
+    "redirectUri": "https://app.dev.pix.org/connexion/file-c-oidc-example-net",
+     "isVisible": false
   }
 ]

@@ -20,8 +20,8 @@ async function teamAccesDataBuilder(databaseBuilder) {
   buildArchivedOrganizations(databaseBuilder);
   buildScoOrganizationLearners(databaseBuilder);
   await buildCertificationCenters(databaseBuilder);
-  await buildOidcProviders(databaseBuilder);
-  await buildOrganizations(databaseBuilder);
+  buildOidcProviders(databaseBuilder);
+  buildOrganizations(databaseBuilder);
 }
 
 export { teamAccesDataBuilder };

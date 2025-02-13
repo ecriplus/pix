@@ -1,3 +1,5 @@
+import { OIDC_PROVIDER_EXAMPLE_NET_IDENTITY_PROVIDER } from './constants.js';
+
 function _buildUserWithPoleEmploiAuthenticationMethod(databaseBuilder) {
   const user = databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Paul',
@@ -13,11 +15,12 @@ function _buildUserWithPoleEmploiAuthenticationMethod(databaseBuilder) {
 function _buildOidcUser(databaseBuilder) {
   const user = databaseBuilder.factory.buildUser({
     firstName: 'Oidc',
-    lastName: 'User',
+    lastName: 'OIDC',
     email: 'oidc-user@example.net',
   });
-  databaseBuilder.factory.buildAuthenticationMethod.withSeedAsIdentityProvider({
+  databaseBuilder.factory.buildAuthenticationMethod.withOidcProviderAsIdentityProvider({
     userId: user.id,
+    identityProvider: OIDC_PROVIDER_EXAMPLE_NET_IDENTITY_PROVIDER,
   });
 }
 
