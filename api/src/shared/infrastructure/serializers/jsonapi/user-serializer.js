@@ -14,7 +14,6 @@ const serialize = function (users, meta) {
       'cgu',
       'lastTermsOfServiceValidatedAt',
       'mustValidateTermsOfService',
-      'pixOrgaTermsOfServiceAccepted',
       'pixCertifTermsOfServiceAccepted',
       'lang',
       'locale',
@@ -84,7 +83,6 @@ const deserialize = function (json) {
     locale: json.data.attributes.locale,
     lastTermsOfServiceValidatedAt: json.data.attributes['lastTermsOfServiceValidatedAt'],
     mustValidateTermsOfService: json.data.attributes['must-validate-terms-of-service'],
-    pixOrgaTermsOfServiceAccepted: json.data.attributes['pix-orga-terms-of-service-accepted'],
     pixCertifTermsOfServiceAccepted: json.data.attributes['pix-certif-terms-of-service-accepted'],
   });
 };

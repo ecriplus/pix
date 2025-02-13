@@ -122,11 +122,13 @@ const getUserDetailsForAdmin = async function (userId) {
   if (!userDTO) {
     throw new UserNotFoundError(`User not found for ID ${userId}`);
   }
+
   const pixOrgaLegalDocumentStatus = await legalDocumentApi.getLegalDocumentStatusByUserId({
     userId,
     service: 'pix-orga',
     type: 'TOS',
   });
+
   const authenticationMethodsDTO = await knex('authentication-methods')
     .select([
       'authentication-methods.id',
@@ -593,7 +595,6 @@ function _toDomainFromDTO({
   return new User({
     id: userDTO.id,
     cgu: userDTO.cgu,
-    pixOrgaTermsOfServiceAccepted: userDTO.pixOrgaTermsOfServiceAccepted,
     pixCertifTermsOfServiceAccepted: userDTO.pixCertifTermsOfServiceAccepted,
     email: userDTO.email,
     emailConfirmedAt: userDTO.emailConfirmedAt,
@@ -602,7 +603,6 @@ function _toDomainFromDTO({
     knowledgeElements: userDTO.knowledgeElements,
     lastName: userDTO.lastName,
     lastTermsOfServiceValidatedAt: userDTO.lastTermsOfServiceValidatedAt,
-    lastPixOrgaTermsOfServiceValidatedAt: userDTO.lastPixOrgaTermsOfServiceValidatedAt,
     lastPixCertifTermsOfServiceValidatedAt: userDTO.lastPixCertifTermsOfServiceValidatedAt,
     hasSeenAssessmentInstructions: userDTO.hasSeenAssessmentInstructions,
     hasSeenNewDashboardInfo: userDTO.hasSeenNewDashboardInfo,

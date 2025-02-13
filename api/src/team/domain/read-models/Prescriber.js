@@ -4,7 +4,6 @@ class Prescriber {
    *   id: string,
    *   firstName: string,
    *   lastName: string,
-   *   pixOrgaTermsOfServiceAccepted: boolean,
    *   pixOrgaTermsOfServiceStatus: string,
    *   pixOrgaTermsOfServiceDocumentPath: string,
    *   lang: string,
@@ -19,7 +18,6 @@ class Prescriber {
     id,
     firstName,
     lastName,
-    pixOrgaTermsOfServiceAccepted,
     pixOrgaTermsOfServiceStatus,
     pixOrgaTermsOfServiceDocumentPath,
     lang,
@@ -32,7 +30,6 @@ class Prescriber {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.pixOrgaTermsOfServiceAccepted = pixOrgaTermsOfServiceAccepted;
     this.pixOrgaTermsOfServiceStatus = pixOrgaTermsOfServiceStatus;
     this.pixOrgaTermsOfServiceDocumentPath = pixOrgaTermsOfServiceDocumentPath;
     this.lang = lang;

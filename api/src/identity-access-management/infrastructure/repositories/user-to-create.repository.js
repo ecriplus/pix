@@ -94,7 +94,6 @@ function _toUserDomain(userDTO) {
     lastTermsOfServiceValidatedAt: userDTO.lastTermsOfServiceValidatedAt,
     hasSeenNewDashboardInfo: Boolean(userDTO.hasSeenNewDashboardInfo),
     mustValidateTermsOfService: Boolean(userDTO.mustValidateTermsOfService),
-    pixOrgaTermsOfServiceAccepted: Boolean(userDTO.pixOrgaTermsOfServiceAccepted),
     pixCertifTermsOfServiceAccepted: Boolean(userDTO.pixCertifTermsOfServiceAccepted),
     hasSeenAssessmentInstructions: Boolean(userDTO.hasSeenAssessmentInstructions),
   });

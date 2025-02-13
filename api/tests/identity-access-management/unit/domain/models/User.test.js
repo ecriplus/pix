@@ -600,11 +600,9 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
         'emailConfirmedAt',
         'cgu',
         'lastTermsOfServiceValidatedAt',
-        'lastPixOrgaTermsOfServiceValidatedAt',
         'lastPixCertifTermsOfServiceValidatedAt',
         'lastDataProtectionPolicySeenAt',
         'mustValidateTermsOfService',
-        'pixOrgaTermsOfServiceAccepted',
         'pixCertifTermsOfServiceAccepted',
         'hasSeenAssessmentInstructions',
         'hasSeenOtherChallengesTooltip',
@@ -650,7 +648,6 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       expect(anonymizedUser.hasBeenAnonymised).to.be.true;
       expect(anonymizedUser.hasBeenAnonymisedBy).to.equal(adminId);
       expect(anonymizedUser.lastTermsOfServiceValidatedAt).to.be.null;
-      expect(anonymizedUser.lastPixOrgaTermsOfServiceValidatedAt).to.be.null;
       expect(anonymizedUser.lastPixCertifTermsOfServiceValidatedAt).to.be.null;
       expect(anonymizedUser.lastDataProtectionPolicySeenAt).to.be.null;
       expect(anonymizedUser.createdAt.toISOString()).to.equal('2012-12-01T00:00:00.000Z');

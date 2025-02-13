@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
 
+import { buildLegalDocumentVersion } from '../../../../../db/database-builder/factory/build-legal-document-version.js';
+import { buildLegalDocumentVersionUserAcceptance } from '../../../../../db/database-builder/factory/build-legal-document-version-user-acceptance.js';
 import { Organization } from '../../../../../src/organizational-entities/domain/models/Organization.js';
 import { Tag } from '../../../../../src/organizational-entities/domain/models/Tag.js';
 import { config as settings } from '../../../../../src/shared/config.js';
@@ -71,9 +73,8 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           id: user.id,
           firstName: user.firstName,
           lastName: user.lastName,
-          pixOrgaTermsOfServiceAccepted: user.pixOrgaTermsOfServiceAccepted,
-          pixOrgaTermsOfServiceStatus: 'requested',
-          pixOrgaTermsOfServiceDocumentPath: 'pix-orga-tos-2022-11-30',
+          pixOrgaTermsOfServiceStatus: 'unknown',
+          pixOrgaTermsOfServiceDocumentPath: null,
           lang: user.lang,
         };
       });
@@ -85,14 +86,10 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
         });
 
         // then
-
         expect(foundPrescriber).to.be.an.instanceOf(Prescriber);
         expect(foundPrescriber.id).to.equal(expectedPrescriber.id);
         expect(foundPrescriber.firstName).to.equal(expectedPrescriber.firstName);
         expect(foundPrescriber.lastName).to.equal(expectedPrescriber.lastName);
-        expect(foundPrescriber.pixOrgaTermsOfServiceAccepted).to.equal(
-          expectedPrescriber.pixOrgaTermsOfServiceAccepted,
-        );
         expect(foundPrescriber.pixOrgaTermsOfServiceStatus).to.equal(expectedPrescriber.pixOrgaTermsOfServiceStatus);
         expect(foundPrescriber.pixOrgaTermsOfServiceDocumentPath).to.equal(
           expectedPrescriber.pixOrgaTermsOfServiceDocumentPath,
@@ -177,6 +174,32 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
         // then
         expect(foundUser.userOrgaSettings.currentOrganization).to.be.an.instanceOf(Organization);
         expect(foundUser.userOrgaSettings.currentOrganization).to.deep.contains(expectedOrganization);
+      });
+
+      context('when user has accepted the Pix Orga CGU', function () {
+        it('returns the correct CGU status', async function () {
+          // given
+          const documentVersion = buildLegalDocumentVersion({
+            service: 'pix-orga',
+            type: 'TOS',
+            versionAt: new Date('2024-01-01'),
+          });
+          buildLegalDocumentVersionUserAcceptance({
+            userId: user.id,
+            legalDocumentVersionId: documentVersion.id,
+            acceptedAt: new Date('2025-01-01'),
+          });
+          await databaseBuilder.commit();
+
+          // when
+          const foundPrescriber = await prescriberRepository.getPrescriber({
+            userId: user.id,
+          });
+
+          // then
+          expect(foundPrescriber.pixOrgaTermsOfServiceStatus).to.equal('accepted');
+          expect(foundPrescriber.pixOrgaTermsOfServiceDocumentPath).to.equal('pix-orga-tos-2024-01-01');
+        });
       });
 
       context('when current organization defined in user-orga-settings has tags', function () {
