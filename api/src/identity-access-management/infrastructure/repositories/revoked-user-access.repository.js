@@ -34,7 +34,7 @@ const saveForUser = async function ({ userId, revokeUntil }) {
  * Retrieves the revoked access for a user from the temporary storage.
  *
  * @param {string} userId - The ID of the user to retrieve the revocation date for.
- * @returns {RevokedUserAccess} - The revoked user access object.
+ * @returns {Promise<RevokedUserAccess>} - The revoked user access object.
  */
 const findByUserId = async function (userId) {
   const value = await revokedUserAccessTemporaryStorage.get(userId);
