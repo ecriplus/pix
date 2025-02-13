@@ -51,6 +51,7 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
       status: 'validated',
       pixScore: 327,
       certificationDate: new Date('2024-11-22T09:39:54Z'),
+      globalLevel: '',
       competences: [
         {
           code: '1.1',
@@ -194,6 +195,7 @@ describe('Parcoursup | Acceptance | Application | certification-route', function
         status: 'validated',
         pixScore: 327,
         certificationDate: new Date('2024-11-22T09:39:54Z'),
+        globalLevel: '',
         competences: [
           {
             code: '1.1',
