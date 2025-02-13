@@ -5,7 +5,6 @@ import { injectDependencies } from '../../../shared/infrastructure/utils/depende
 import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import * as legalDocumentRepository from '../../infrastructure/repositories/legal-document.repository.js';
-import * as userRepository from '../../infrastructure/repositories/user.repository.js';
 import * as userAcceptanceRepository from '../../infrastructure/repositories/user-acceptance.repository.js';
 
 const path = dirname(fileURLToPath(import.meta.url));
@@ -13,7 +12,6 @@ const path = dirname(fileURLToPath(import.meta.url));
 const repositories = {
   legalDocumentRepository,
   userAcceptanceRepository,
-  userRepository,
 };
 
 const dependencies = Object.assign({ logger }, repositories);

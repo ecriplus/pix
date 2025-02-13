@@ -12,25 +12,6 @@ export class LegalDocumentStatus {
   }
 
   /**
-   * Builds a LegalDocumentStatus based on legacy PixOrga CGU.
-   *
-   * @param {Object} userPixOrgaCgu - The user object.
-   * @param {boolean} userPixOrgaCgu.pixOrgaTermsOfServiceAccepted - Indicates if the PixOrga terms of service are accepted.
-   * @param {Date} userPixOrgaCgu.lastPixOrgaTermsOfServiceValidatedAt - The date when the PixOrga terms of service were last validated.
-   * @returns {LegalDocumentStatus} The legal document status.
-   */
-  static buildForLegacyPixOrgaCgu(userPixOrgaCgu) {
-    const LEGACY_PIXORGA_TOS_PATH = 'pix-orga-tos-2022-11-30';
-    const { pixOrgaTermsOfServiceAccepted, lastPixOrgaTermsOfServiceValidatedAt } = userPixOrgaCgu;
-
-    return new LegalDocumentStatus({
-      status: pixOrgaTermsOfServiceAccepted ? STATUS.ACCEPTED : STATUS.REQUESTED,
-      acceptedAt: lastPixOrgaTermsOfServiceValidatedAt,
-      documentPath: LEGACY_PIXORGA_TOS_PATH,
-    });
-  }
-
-  /**
    * Builds a LegalDocumentStatus based on the last document version and user acceptance.
    *
    * @param {Object} lastDocumentVersion - The last document version object.

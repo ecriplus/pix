@@ -11,7 +11,6 @@ import { LegalDocumentType } from '../../../../../src/legal-documents/domain/mod
 import { Organization } from '../../../../../src/organizational-entities/domain/models/Organization.js';
 import { IMPORT_KEY_FIELD } from '../../../../../src/prescription/learner-management/domain/constants.js';
 import { OrganizationLearnerForAdmin } from '../../../../../src/prescription/learner-management/domain/read-models/OrganizationLearnerForAdmin.js';
-import { config } from '../../../../../src/shared/config.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import {
@@ -1186,9 +1185,8 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(userDetailsForAdmin.isPixAgent).to.be.false;
       });
 
-      it('returns the found user when TOS feature toggle is true', async function () {
+      it('returns the found user', async function () {
         // given
-        sinon.stub(config, 'featureToggles').value({ isLegalDocumentsVersioningEnabled: true });
         const createdAt = new Date('2021-01-01');
         const emailConfirmedAt = new Date('2022-01-01');
         const lastTermsOfServiceValidatedAt = new Date('2022-01-02');

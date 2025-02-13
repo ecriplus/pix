@@ -8,51 +8,6 @@ const { PIX_ORGA } = LegalDocumentService.VALUES;
 const { TOS } = LegalDocumentType.VALUES;
 
 describe('Unit | Legal documents | Domain | Model | LegalDocumentStatus', function () {
-  describe('#LegalDocumentStatus.buildForLegacyPixOrgaCgu', function () {
-    context('when the user has accepted the Pix Orga CGU', function () {
-      it('returns an "accepted" legal document status', function () {
-        // given
-        const acceptedAt = new Date('2024-01-01');
-        const userPixOrgaCgu = {
-          pixOrgaTermsOfServiceAccepted: true,
-          lastPixOrgaTermsOfServiceValidatedAt: acceptedAt,
-        };
-
-        // when
-        const legalDocumentStatus = LegalDocumentStatus.buildForLegacyPixOrgaCgu(userPixOrgaCgu);
-
-        // then
-        expect(legalDocumentStatus).to.be.instanceof(LegalDocumentStatus);
-        expect(legalDocumentStatus).to.deep.equal({
-          status: STATUS.ACCEPTED,
-          acceptedAt: acceptedAt,
-          documentPath: 'pix-orga-tos-2022-11-30',
-        });
-      });
-    });
-
-    context('when the user has not accepted the Pix Orga CGU', function () {
-      it('returns a "requested" legal document status', function () {
-        // given
-        const userPixOrgaCgu = {
-          pixOrgaTermsOfServiceAccepted: false,
-          lastPixOrgaTermsOfServiceValidatedAt: null,
-        };
-
-        // when
-        const legalDocumentStatus = LegalDocumentStatus.buildForLegacyPixOrgaCgu(userPixOrgaCgu);
-
-        // then
-        expect(legalDocumentStatus).to.be.instanceof(LegalDocumentStatus);
-        expect(legalDocumentStatus).to.deep.equal({
-          status: STATUS.REQUESTED,
-          acceptedAt: null,
-          documentPath: 'pix-orga-tos-2022-11-30',
-        });
-      });
-    });
-  });
-
   describe('#LegalDocumentStatus.build', function () {
     context('when the user has accepted the last document version', function () {
       it('returns an "accepted" legal document status', function () {

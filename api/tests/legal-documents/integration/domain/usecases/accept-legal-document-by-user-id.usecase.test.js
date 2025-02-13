@@ -53,25 +53,10 @@ describe('Integration | Legal documents | Domain | Use case | accept-legal-docum
     });
   });
 
-  context('when the legal document is the Terms of Service for Pix Orga', function () {
-    it('accepts the Pix Orga CGUs in the legacy and legal document model', async function () {
+  context('when no legal document is found', function () {
+    it('logs an error', async function () {
       // given
-      const user = databaseBuilder.factory.buildUser({ pixOrgaTermsOfServiceAccepted: false });
-      databaseBuilder.factory.buildLegalDocumentVersion({ service: PIX_ORGA, type: TOS });
-
-      await databaseBuilder.commit();
-
-      // when
-      await usecases.acceptLegalDocumentByUserId({ userId: user.id, service: PIX_ORGA, type: TOS });
-
-      // then
-      const updatedUser = await knex('users').where('id', user.id).first();
-      expect(updatedUser.pixOrgaTermsOfServiceAccepted).to.equal(true);
-    });
-
-    it('logs an error, when no legal document is found', async function () {
-      // given
-      const user = databaseBuilder.factory.buildUser({ pixOrgaTermsOfServiceAccepted: false });
+      const user = databaseBuilder.factory.buildUser();
       const loggerStub = { warn: sinon.stub() };
       await databaseBuilder.commit();
 
