@@ -1,6 +1,6 @@
 import { KnowledgeElement } from '../../../shared/domain/models/index.js';
 import { TYPES as ELIGIBILITY_TYPES } from './Eligibility.js';
-import { COMPOSE_TYPE, EligibilityRequirement } from './EligibilityRequirement.js';
+import { COMPOSE_TYPE, ComposedRequirement } from './Requirement.js';
 
 export const COMPARISON = {
   ALL: 'all',
@@ -16,8 +16,7 @@ class Quest {
     this.updatedAt = updatedAt;
     this.rewardType = rewardType;
     this.rewardId = rewardId;
-    this.#eligibilityRequirements = new EligibilityRequirement({
-      requirement_type: COMPOSE_TYPE,
+    this.#eligibilityRequirements = new ComposedRequirement({
       data: eligibilityRequirements,
       comparison: COMPARISON.ALL,
     });
@@ -25,6 +24,7 @@ class Quest {
     this.successRequirements = successRequirements;
   }
 
+  // je crois que ce getter sert à rien
   get eligibilityRequirements() {
     return this.#eligibilityRequirements.data;
   }
@@ -48,26 +48,24 @@ class Quest {
     const eligibilityRequirements = otherRequirements;
     if (campaignParticipationRequirements.length > 0) {
       eligibilityRequirements.push(
-        new EligibilityRequirement({
-          requirement_type: COMPOSE_TYPE,
+        new ComposedRequirement({
           data: campaignParticipationRequirements,
           comparison: COMPARISON.ONE_OF,
         }),
       );
     }
-    const scopedEligibilityRequirements = new EligibilityRequirement({
-      requirement_type: COMPOSE_TYPE,
+    const scopedEligibilityRequirements = new ComposedRequirement({
       data: eligibilityRequirements,
       comparison: COMPARISON.ALL,
     });
-    return scopedEligibilityRequirements.isEligible(scopedEligibility);
+    return scopedEligibilityRequirements.isFulfilled(scopedEligibility);
   }
 
   /**
    * @param {Eligibility} eligibility
    */
   isEligible(eligibility) {
-    return this.#eligibilityRequirements.isEligible(eligibility);
+    return this.#eligibilityRequirements.isFulfilled(eligibility);
   }
 
   /**
@@ -102,8 +100,7 @@ class Quest {
         const subRequirements = this.#omitRequirementsByType(requirement.data, type);
         if (subRequirements.length > 0) {
           result.push(
-            new EligibilityRequirement({
-              requirement_type: requirement.requirement_type,
+            new ComposedRequirement({
               data: subRequirements,
               comparison: requirement.comparison,
             }),

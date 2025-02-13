@@ -2,8 +2,8 @@ import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import { REWARD_TYPES } from '../../../../src/quest/domain/constants.js';
 import { COMPARISON as CRITERION_PROPERTY_COMPARISON } from '../../../../src/quest/domain/models/CriterionProperty.js';
 import { TYPES } from '../../../../src/quest/domain/models/Eligibility.js';
-import { COMPOSE_TYPE } from '../../../../src/quest/domain/models/EligibilityRequirement.js';
 import { COMPARISON } from '../../../../src/quest/domain/models/Quest.js';
+import { COMPOSE_TYPE } from '../../../../src/quest/domain/models/Requirement.js';
 import { Assessment, CampaignParticipationStatuses, Membership } from '../../../../src/shared/domain/models/index.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {

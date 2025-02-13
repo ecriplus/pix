@@ -4,8 +4,8 @@ import { CertificationCompletedJob } from '../../../../../src/certification/eval
 import * as badgeAcquisitionRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import { COMPARISON as CRITERION_PROPERTY_COMPARISON } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import { TYPES } from '../../../../../src/quest/domain/models/Eligibility.js';
-import { COMPOSE_TYPE } from '../../../../../src/quest/domain/models/EligibilityRequirement.js';
 import { COMPARISON } from '../../../../../src/quest/domain/models/Quest.js';
+import { COMPOSE_TYPE } from '../../../../../src/quest/domain/models/Requirement.js';
 import { LOCALE } from '../../../../../src/shared/domain/constants.js';
 import { Assessment, TrainingTrigger } from '../../../../../src/shared/domain/models/index.js';
 import {

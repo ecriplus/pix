@@ -1,8 +1,8 @@
 import { COMPARISON as CRITERION_PROPERTY_COMPARISON } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import { Eligibility, TYPES } from '../../../../../src/quest/domain/models/Eligibility.js';
-import { COMPOSE_TYPE } from '../../../../../src/quest/domain/models/EligibilityRequirement.js';
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import { COMPARISON } from '../../../../../src/quest/domain/models/Quest.js';
+import { COMPOSE_TYPE } from '../../../../../src/quest/domain/models/Requirement.js';
 import { Success } from '../../../../../src/quest/domain/models/Success.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
 import { expect } from '../../../../test-helper.js';
