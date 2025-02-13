@@ -1,5 +1,5 @@
-import * as solutionServiceQCM from '../../../../lib/domain/services/solution-service-qcm.js';
 import { Validation } from '../../../shared/domain/models/Validation.js';
+import * as solutionServiceQCM from '../services/solution/solution-service-qcm.js';
 import { Validator } from './Validator.js';
 
 /**
