@@ -13,7 +13,6 @@ const serialize = function (usersAnonymizedDetailsForAdmin) {
       'hasBeenAnonymised',
       'anonymisedByFullName',
       'updatedAt',
-      'pixOrgaTermsOfServiceAccepted',
       'pixCertifTermsOfServiceAccepted',
       'authenticationMethods',
     ],

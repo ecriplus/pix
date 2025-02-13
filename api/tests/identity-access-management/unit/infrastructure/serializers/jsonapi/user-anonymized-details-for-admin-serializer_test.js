@@ -24,7 +24,6 @@ describe('Unit | Identity Access Management | Serializer | JSONAPI | user-anonym
             email: modelObject.email,
             username: modelObject.username,
             cgu: modelObject.cgu,
-            'pix-orga-terms-of-service-accepted': modelObject.pixOrgaTermsOfServiceAccepted,
             'pix-certif-terms-of-service-accepted': modelObject.pixCertifTermsOfServiceAccepted,
             'has-been-anonymised': modelObject.hasBeenAnonymised,
             'anonymised-by-full-name': modelObject.anonymisedByFullName,
