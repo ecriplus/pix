@@ -1490,9 +1490,9 @@
       "table": {
         "caption": "Ce tableau affiche l'analyse des résultats de tous les participants par sujets. Il indique pour chaque ligne la compétence, le sujet, le taux de couverture ainsi que le niveau atteint",
         "headers": {
+          "competences": "Compétences",
           "positioning": "Positionnement",
           "reached-level": "Niveau atteint",
-          "skills": "Compétences",
           "topics": "Sujets"
         }
       },
