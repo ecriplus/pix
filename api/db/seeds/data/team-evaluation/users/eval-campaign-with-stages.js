@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
 import * as tooling from '../../common/tooling/index.js';
+import { acceptPixOrgaTermsOfService } from '../../common/tooling/legal-documents.js';
 import { TEAM_EVALUATION_OFFSET_ID } from '../constants.js';
 
 export default async function initUser(databaseBuilder) {
@@ -18,23 +19,24 @@ export default async function initUser(databaseBuilder) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
     rawPassword: 'pix123',
     shouldChangePassword: false,
   });
 
-  // 2. Link user to organization
+  // 2. Accept Pix Orga Terms of Service
+  acceptPixOrgaTermsOfService(databaseBuilder, ALL_PURPOSE_ID);
+
+  // 3. Link user to organization
   databaseBuilder.factory.buildMembership({
     userId: user.id,
     organizationId: TEAM_EVALUATION_OFFSET_ID,
     organizationRole: 'ADMIN',
   });
 
-  // 3. Transform it into an organization learner
+  // 4. Transform it into an organization learner
   const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
     userId: user.id,
     organizationId: TEAM_EVALUATION_OFFSET_ID,

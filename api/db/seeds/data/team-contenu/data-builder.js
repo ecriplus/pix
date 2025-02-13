@@ -1,4 +1,5 @@
 import * as tooling from '../common/tooling/index.js';
+import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
 
 const TEAM_CONTENU_OFFSET_ID = 5000;
 // IDS
@@ -48,14 +49,15 @@ function _createProOrganization(databaseBuilder) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
     rawPassword: 'pix123',
     shouldChangePassword: false,
   });
+
+  acceptPixOrgaTermsOfService(databaseBuilder, PRO_ORGANIZATION_USER_ID);
+
   databaseBuilder.factory.buildMembership({
     userId: PRO_ORGANIZATION_USER_ID,
     organizationId: PRO_ORGANIZATION_ID,
@@ -77,14 +79,15 @@ function _createProCertificationCenter(databaseBuilder) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
     rawPassword: 'pix123',
     shouldChangePassword: false,
   });
+
+  acceptPixOrgaTermsOfService(databaseBuilder, PRO_CERTIFICATION_CENTER_USER_ID);
+
   databaseBuilder.factory.buildCertificationCenterMembership({
     userId: PRO_CERTIFICATION_CENTER_USER_ID,
     certificationCenterId: PRO_CERTIFICATION_CENTER_ID,
@@ -266,13 +269,13 @@ async function _createCertifiableUser(databaseBuilder) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
     shouldChangePassword: false,
   }).id;
+
+  acceptPixOrgaTermsOfService(databaseBuilder, CERTIFIABLE_USER_ID);
 
   await tooling.profile.createCertifiableProfile({
     databaseBuilder,
@@ -289,13 +292,13 @@ async function _createPerfectProfileUser(databaseBuilder) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
     shouldChangePassword: false,
   }).id;
+
+  acceptPixOrgaTermsOfService(databaseBuilder, PERFECT_PROFILE_USER_ID);
 
   await tooling.profile.createPerfectProfile({
     databaseBuilder,

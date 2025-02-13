@@ -1,7 +1,11 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { Membership } from '../../../../src/shared/domain/models/Membership.js';
 import { PIX_PUBLIC_TARGET_PROFILE_ID, REAL_PIX_SUPER_ADMIN_ID } from '../common/constants.js';
-import { PIX_ORGA_ADMIN_LEAVING_ID, PIX_ORGA_ALL_ORGA_ID } from './build-organization-users.js';
+import {
+  PIX_ORGA_ADMIN_LEAVING_ID,
+  PIX_ORGA_ALL_ORGA_ID,
+  PIX_ORGA_CGU_UPDATED_ID,
+} from './build-organization-users.js';
 import {
   ACCESS_SCO_BAUDELAIRE_EXTERNAL_ID,
   ACCESS_SCO_NO_GAR_EXTERNAL_ID,
@@ -49,6 +53,11 @@ function _buildCollegeHouseOfTheDragonOrganization(databaseBuilder) {
     },
     {
       userId: PIX_ORGA_ADMIN_LEAVING_ID,
+      organizationId: organization.id,
+      organizationRole: Membership.roles.ADMIN,
+    },
+    {
+      userId: PIX_ORGA_CGU_UPDATED_ID,
       organizationId: organization.id,
       organizationRole: Membership.roles.ADMIN,
     },

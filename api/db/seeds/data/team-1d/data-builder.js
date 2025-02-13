@@ -7,6 +7,7 @@ import {
   USER_ID_MEMBER_ORGANIZATION,
 } from '../common/constants.js';
 import * as tooling from '../common/tooling/index.js';
+import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
 
 const TEAM_1D_OFFSET_ID = 9000;
 
@@ -21,7 +22,7 @@ async function team1dDataBuilder(databaseBuilder) {
 }
 
 async function _createSco1dUser(databaseBuilder) {
-  await databaseBuilder.factory.buildUser.withRawPassword({
+  databaseBuilder.factory.buildUser.withRawPassword({
     id: TEAM_1D_USER_ID,
     firstName: 'Jules',
     lastName: 'Ferry',
@@ -29,14 +30,13 @@ async function _createSco1dUser(databaseBuilder) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: true,
     pixCertifTermsOfServiceAccepted: true,
     hasSeenAssessmentInstructions: false,
     rawPassword: 'pix123',
     shouldChangePassword: false,
   });
+  acceptPixOrgaTermsOfService(databaseBuilder, TEAM_1D_USER_ID);
   await databaseBuilder.commit();
 }
 

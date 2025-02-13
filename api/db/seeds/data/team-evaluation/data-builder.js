@@ -1,4 +1,5 @@
 import * as tooling from '../common/tooling/index.js';
+import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
 import createAutonomousCourses from './autonomous-courses/create-autonomous-courses.js';
 import {
   ASSESSMENT_CAMPAIGN_PIX_ID,
@@ -38,14 +39,15 @@ function createScoOrganization(databaseBuilder) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
     rawPassword: 'pix123',
     shouldChangePassword: false,
   });
+
+  acceptPixOrgaTermsOfService(databaseBuilder, SCO_ORGANIZATION_USER_ID);
+
   databaseBuilder.factory.buildMembership({
     userId: SCO_ORGANIZATION_USER_ID,
     organizationId: SCO_ORGANIZATION_ID,
