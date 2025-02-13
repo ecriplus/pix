@@ -31,7 +31,7 @@ const authenticateUser = async function ({
 
     await _checkUserAccessScope(scope, foundUser, adminMemberRepository);
 
-    const refreshToken = RefreshToken.generate({ userId: foundUser.id, scope, source, audience });
+    const refreshToken = RefreshToken.generate({ userId: foundUser.id, source, audience });
     await refreshTokenRepository.save({ refreshToken });
 
     const { accessToken, expirationDelaySeconds } = await tokenService.createAccessTokenFromUser({

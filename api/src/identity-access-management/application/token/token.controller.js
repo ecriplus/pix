@@ -30,7 +30,6 @@ const createToken = async function (request, h, dependencies = { tokenService })
   const origin = getForwardedOrigin(request.headers);
 
   const grantType = request.payload.grant_type;
-  const scope = request.payload.scope;
 
   if (grantType === 'password') {
     const { username, password, scope } = request.payload;
@@ -52,7 +51,7 @@ const createToken = async function (request, h, dependencies = { tokenService })
   } else if (grantType === 'refresh_token') {
     refreshToken = request.payload.refresh_token;
 
-    const tokensInfo = await usecases.createAccessTokenFromRefreshToken({ refreshToken, scope, audience: origin });
+    const tokensInfo = await usecases.createAccessTokenFromRefreshToken({ refreshToken, audience: origin });
 
     accessToken = tokensInfo.accessToken;
     expirationDelaySeconds = tokensInfo.expirationDelaySeconds;
@@ -67,7 +66,6 @@ const createToken = async function (request, h, dependencies = { tokenService })
       access_token: accessToken,
       refresh_token: refreshToken,
       expires_in: expirationDelaySeconds,
-      scope,
     })
     .code(200)
     .header('Content-Type', 'application/json;charset=UTF-8')

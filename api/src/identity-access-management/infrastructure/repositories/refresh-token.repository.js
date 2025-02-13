@@ -41,11 +41,11 @@ async function findAllByUserId({ userId }) {
  * @return {Promise<void>}
  */
 async function save({ refreshToken }) {
-  const { value, userId, scope, source, expirationDelaySeconds, audience } = refreshToken;
+  const { value, userId, source, expirationDelaySeconds, audience } = refreshToken;
 
   await refreshTokenTemporaryStorage.save({
     key: value,
-    value: { type: 'refresh_token', userId, scope, source, audience },
+    value: { type: 'refresh_token', userId, source, audience },
     expirationDelaySeconds,
   });
 

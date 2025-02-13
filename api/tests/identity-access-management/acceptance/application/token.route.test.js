@@ -111,7 +111,6 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
             grant_type: 'password',
             username: userEmailAddress,
             password: userPassword,
-            scope: 'pix-orga',
           }),
         });
 
@@ -127,7 +126,6 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           payload: querystring.stringify({
             grant_type: 'refresh_token',
             refresh_token: accessTokenResult.refresh_token,
-            scope: 'pix-orga',
           }),
         });
 
@@ -142,45 +140,6 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         });
         expect(result.user_id).to.equal(userId);
         expect(result.refresh_token).to.exist;
-      });
-
-      context('when the scope is different from the refresh token one', function () {
-        it('returns a 401 (unauthorized)', async function () {
-          // given
-          const { result: accessTokenResult } = await server.inject({
-            method: 'POST',
-            url: '/api/token',
-            headers: {
-              'content-type': 'application/x-www-form-urlencoded',
-              'x-forwarded-proto': 'https',
-              'x-forwarded-host': 'orga.pix.fr',
-            },
-            payload: querystring.stringify({
-              grant_type: 'password',
-              username: userEmailAddress,
-              password: userPassword,
-              scope: 'pix-app',
-            }),
-          });
-
-          // when
-          const differentScope = 'pix-admin';
-          const response = await server.inject({
-            method: 'POST',
-            url: '/api/token',
-            headers: {
-              'content-type': 'application/x-www-form-urlencoded',
-            },
-            payload: querystring.stringify({
-              grant_type: 'refresh_token',
-              refresh_token: accessTokenResult.refresh_token,
-              scope: differentScope,
-            }),
-          });
-
-          // then
-          expect(response.statusCode).to.equal(401);
-        });
       });
     });
 
