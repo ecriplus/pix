@@ -2181,6 +2181,7 @@
           "unknown-error": "Se ha producido un error. Vuelve a intentarlo o ponte en contacto con el servicio de asistencia."
         },
         "send-back-the-code": "volver a enviarme el código",
+        "time-code-validation": "El código recibido es válido durante 10 minutos",
         "title": "Comprobación de tu dirección de correo electrónico",
         "update-successful": "Tu dirección de correo electrónico ha sido modificada."
       },

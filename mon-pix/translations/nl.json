@@ -2182,6 +2182,7 @@
           "unknown-error": "Er is een fout opgetreden. Probeer het opnieuw of neem contact op met de klantenservice."
         },
         "send-back-the-code": "stuur me de code",
+        "time-code-validation": "De ontvangen code is 10 minuten geldig",
         "title": "Je e-mailadres controleren",
         "update-successful": "Je e-mailadres is gewijzigd!"
       },

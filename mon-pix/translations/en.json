@@ -2099,6 +2099,7 @@
           "unknown-error": "An error has occurred. Please try again or contact the support."
         },
         "send-back-the-code": "Send the code again",
+        "time-code-validation": "The code received is valid for 10 minutes",
         "title": "Verify your email address",
         "update-successful": "Your email address has been changed!"
       },
