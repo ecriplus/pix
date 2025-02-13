@@ -62,6 +62,7 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
         id: '1',
         name: 'campagne 1',
         participationsCount: 1,
+        badges: [],
       });
       this.set('campaign', campaign);
     });
@@ -149,7 +150,7 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
 
     test('it should display badge and tooltip', async function (assert) {
       // given
-      const badge = store.createRecord('badge', { id: '1', imageUrl: 'url-badge', title: 'je suis un badge' });
+      const badge = store.createRecord('badge', { id: 1, imageUrl: 'url-badge', title: 'je suis un badge' });
       const campaign = store.createRecord('campaign', {
         targetProfileThematicResultCount: 1,
         badges: [badge],
@@ -176,7 +177,7 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
       );
 
       // then
-      assert.ok(screen.getByRole('img', { src: 'url-badge', description: 'je suis un badge' }));
+      assert.ok(screen.getByRole('img', { src: 'url-badge', description: /je suis un badge/ }));
     });
 
     module('campaign has multiple sending enabled', function () {
@@ -469,7 +470,7 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
         badges: [badge],
       });
 
-      const participations = [{}];
+      const participations = [];
       participations.meta = { rowCount: 1 };
 
       this.set('campaign', campaign);

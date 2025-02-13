@@ -634,6 +634,10 @@
       },
       "result": "Result",
       "table": {
+        "badge-tooltip": {
+          "acquired": "Acquired",
+          "unacquired": "Unacquired"
+        },
         "caption": "This table lists the participants who have shared their results. For each participant, it shows their surname, first name and elements of results.",
         "column": {
           "ariaSharedResultCount": "Number of sent results",
