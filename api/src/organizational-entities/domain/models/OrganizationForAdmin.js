@@ -1,3 +1,4 @@
+import Joi from 'joi';
 import differenceBy from 'lodash/differenceBy.js';
 
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
@@ -6,6 +7,10 @@ import { DataProtectionOfficer } from './DataProtectionOfficer.js';
 const CREDIT_DEFAULT_VALUE = 0;
 const PAD_TARGET_LENGTH = 3;
 const PAD_STRING = '0';
+
+const schema = Joi.object({
+  features: Joi.object().pattern(Joi.string(), Joi.object({ active: Joi.boolean(), params: Joi.object().empty(null) })),
+}).unknown();
 
 class OrganizationForAdmin {
   #provinceCode;
@@ -48,15 +53,11 @@ class OrganizationForAdmin {
     this.logoUrl = logoUrl;
     this.externalId = externalId;
     this.provinceCode = provinceCode;
-    this.isManagingStudents = isManagingStudents;
     this.credit = credit;
     this.email = email;
     this.documentationUrl = documentationUrl;
     this.createdBy = createdBy;
     this.createdAt = createdAt;
-    this.showNPS = showNPS;
-    this.formNPSUrl = formNPSUrl;
-    this.showSkills = showSkills;
     this.archivedAt = archivedAt;
     this.archivistFirstName = archivistFirstName;
     this.archivistLastName = archivistLastName;
@@ -73,7 +74,30 @@ class OrganizationForAdmin {
     this.identityProviderForCampaigns = identityProviderForCampaigns;
     this.tags = tags;
     this.tagIds = tagIds;
+
+    // @deprecated you should use value stored in features property
+    this.isManagingStudents = isManagingStudents;
+    // @deprecated you should use value stored in features property
+    this.showNPS = showNPS;
+    // @deprecated you should use value stored in features property
+    this.formNPSUrl = formNPSUrl;
+    // @deprecated you should use value stored in features property
+    this.showSkills = showSkills;
+
     this.features = features;
+
+    this.features[ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key] = {
+      active: isManagingStudents,
+      params: null,
+    };
+    this.features[ORGANIZATION_FEATURE.SHOW_SKILLS.key] = {
+      active: showSkills,
+      params: null,
+    };
+    this.features[ORGANIZATION_FEATURE.SHOW_NPS.key] = {
+      active: showNPS,
+      params: showNPS ? { formNPSUrl: formNPSUrl } : null,
+    };
     if (this.type === 'SCO' && this.isManagingStudents) {
       this.features[ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key] = {
         active: true,
@@ -91,6 +115,16 @@ class OrganizationForAdmin {
     this.tagsToAdd = [];
     this.tagsToRemove = [];
     this.code = code;
+
+    this.#validate();
+  }
+
+  #validate() {
+    const { error } = schema.validate(this);
+
+    if (error) {
+      throw error;
+    }
   }
 
   get provinceCode() {
@@ -147,11 +181,13 @@ class OrganizationForAdmin {
     this.identityProviderForCampaigns = identityProviderForCampaigns;
   }
 
-  updateIsManagingStudents(isManagingStudents, features) {
+  updateIsManagingStudents(features) {
     const hasLearnerImportFeature =
       features[ORGANIZATION_FEATURE.LEARNER_IMPORT.key] && features[ORGANIZATION_FEATURE.LEARNER_IMPORT.key].active;
 
-    this.isManagingStudents = hasLearnerImportFeature ? false : isManagingStudents;
+    this.isManagingStudents = hasLearnerImportFeature
+      ? false
+      : features[ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key].active;
   }
 
   updateWithDataProtectionOfficerAndTags(organization, dataProtectionOfficer = {}, tags = []) {
@@ -165,8 +201,8 @@ class OrganizationForAdmin {
     this.externalId = organization.externalId;
     this.provinceCode = organization.provinceCode;
     this.documentationUrl = organization.documentationUrl;
-    this.updateIsManagingStudents(organization.isManagingStudents, organization.features);
-    this.showSkills = organization.showSkills;
+    this.updateIsManagingStudents(organization.features);
+    this.showSkills = organization.features[ORGANIZATION_FEATURE.SHOW_SKILLS.key].active;
     this.updateIdentityProviderForCampaigns(organization.identityProviderForCampaigns);
     this.dataProtectionOfficer.updateInformation(dataProtectionOfficer);
     this.features = organization.features;

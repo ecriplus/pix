@@ -236,7 +236,14 @@ async function _disableFeatures(knexConn, features, organizationId) {
     .where('organization-features.organizationId', organizationId)
     .whereIn(
       'features.key',
-      _.keys(features).filter((key) => features[key].active === false),
+      _.keys(
+        // These features does not exist in database for now.
+        _.omit(features, [
+          ORGANIZATION_FEATURE.SHOW_SKILLS.key,
+          ORGANIZATION_FEATURE.SHOW_NPS.key,
+          ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key,
+        ]),
+      ).filter((key) => features[key].active === false),
     )
     .delete();
 }
@@ -247,7 +254,14 @@ async function _enableFeatures(knexConn, featuresToEnable, organizationId) {
 
   await knexConn(ORGANIZATION_FEATURES_TABLE_NAME)
     .insert(
-      _.keys(featuresToEnable)
+      _.keys(
+        // These features does not exist in database for now.
+        _.omit(featuresToEnable, [
+          ORGANIZATION_FEATURE.SHOW_SKILLS.key,
+          ORGANIZATION_FEATURE.SHOW_NPS.key,
+          ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key,
+        ]),
+      )
         .filter((key) => featuresToEnable[key].active)
         .map((key) => ({
           organizationId,

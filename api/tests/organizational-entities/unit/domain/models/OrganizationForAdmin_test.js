@@ -5,6 +5,34 @@ import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin', function () {
   describe('features', function () {
+    it('should throw an error if a feature format is not valid', function () {
+      expect(() => {
+        new OrganizationForAdmin({ features: { MY_FEATURE: true } });
+      }).to.throw();
+    });
+
+    context('legacy features', function () {
+      it('put legacy features to new feature format', function () {
+        // given
+        const expectedOrganization = domainBuilder.buildOrganizationForAdmin({
+          showSkills: false,
+          isManagingStudents: true,
+          showNPS: true,
+          formNPSUrl: 'https://some-url.com',
+        });
+
+        // when
+        const organization = new OrganizationForAdmin(expectedOrganization);
+
+        // then
+        expect(organization.features).to.deep.includes({
+          [ORGANIZATION_FEATURE.SHOW_SKILLS.key]: { active: false, params: null },
+          [ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key]: { active: true, params: null },
+          [ORGANIZATION_FEATURE.SHOW_NPS.key]: { active: true, params: { formNPSUrl: 'https://some-url.com' } },
+        });
+      });
+    });
+
     context('for sco organizations', function () {
       context('when organization isManagingStudent is true', function () {
         it('builds an OrganizationForAdmin with compute organization learner certificability enabled', function () {
@@ -36,7 +64,8 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
           const organization = new OrganizationForAdmin(expectedOrganization);
 
           // then
-          expect(organization.features).to.deep.equal({});
+          expect(organization.features[ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]).to.be
+            .undefined;
         });
       });
     });
@@ -123,6 +152,15 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
   });
 
   context('#updateWithDataProtectionOfficerAndTags', function () {
+    let features;
+    beforeEach(function () {
+      features = {
+        LEARNER_IMPORT: { active: false },
+        IS_MANAGING_STUDENTS: { active: false },
+        SHOW_SKILLS: { active: false },
+        COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: { active: false },
+      };
+    });
     it('updates organization name', function () {
       // given
       const originalName = 'original name';
@@ -132,7 +170,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       });
 
       // when
-      givenOrganization.updateWithDataProtectionOfficerAndTags({ name: newName, features: {} });
+      givenOrganization.updateWithDataProtectionOfficerAndTags({ name: newName, features });
 
       // then
       expect(givenOrganization.name).to.equal(newName);
@@ -147,7 +185,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       });
 
       // when
-      givenOrganization.updateWithDataProtectionOfficerAndTags({ name: newName, features: {} });
+      givenOrganization.updateWithDataProtectionOfficerAndTags({ name: newName, features });
 
       // then
       expect(givenOrganization.name).to.equal(originalName);
@@ -164,7 +202,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
         type: newType,
-        features: {},
+        features,
       });
 
       // then
@@ -182,7 +220,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
         type: newType,
-        features: {},
+        features,
       });
 
       // then
@@ -200,7 +238,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
         identityProviderForCampaigns: newIdentityProviderForCampaigns,
-        features: {},
+        features,
       });
 
       // then
@@ -218,7 +256,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
         logoUrl: newLogoUrl,
-        features: {},
+        features,
       });
 
       // then
@@ -236,7 +274,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
         logoUrl: newLogoUrl,
-        features: {},
+        features,
       });
 
       // then
@@ -254,7 +292,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
         externalId: newExternalId,
-        features: {},
+        features,
       });
 
       // then
@@ -272,7 +310,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
         provinceCode: newProvinceCode,
-        features: {},
+        features,
       });
 
       // then
@@ -288,8 +326,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
 
         // when
         givenOrganization.updateWithDataProtectionOfficerAndTags({
-          isManagingStudents: true,
-          features: {},
+          features: { ...features, IS_MANAGING_STUDENTS: { active: true } },
         });
 
         // then
@@ -300,13 +337,11 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
         // given
         const givenOrganization = new OrganizationForAdmin({
           isManagingStudents: false,
-          features: { LEARNER_IMPORT: { active: false } },
         });
 
         // when
         givenOrganization.updateWithDataProtectionOfficerAndTags({
-          isManagingStudents: true,
-          features: {},
+          features: { ...features, IS_MANAGING_STUDENTS: { active: true } },
         });
 
         // then
@@ -317,13 +352,11 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
         // given
         const givenOrganization = new OrganizationForAdmin({
           isManagingStudents: false,
-          features: {},
         });
 
         // when
         givenOrganization.updateWithDataProtectionOfficerAndTags({
-          isManagingStudents: true,
-          features: { LEARNER_IMPORT: { active: true } },
+          features: { ...features, LEARNER_IMPORT: { active: true } },
         });
 
         // then
@@ -336,15 +369,11 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       const givenOrganization = new OrganizationForAdmin({
         isManagingStudents: false,
         type: 'SCO',
-        features: {
-          [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: false, params: null },
-        },
       });
 
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
-        isManagingStudents: true,
-        features: {},
+        features: { ...features, IS_MANAGING_STUDENTS: { active: true } },
       });
 
       // then
@@ -365,7 +394,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
         });
 
         // when
-        givenOrganization.updateWithDataProtectionOfficerAndTags({ features: {} }, {}, [{ name: 'AEFE', id: 1 }]);
+        givenOrganization.updateWithDataProtectionOfficerAndTags({ features }, {}, [{ name: 'AEFE', id: 1 }]);
 
         // then
         expect(
@@ -384,7 +413,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
         });
 
         // when
-        givenOrganization.updateWithDataProtectionOfficerAndTags({ features: {} });
+        givenOrganization.updateWithDataProtectionOfficerAndTags({ features });
 
         // then
         expect(
@@ -403,7 +432,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
         });
 
         // when
-        givenOrganization.updateWithDataProtectionOfficerAndTags({ features: {} }, {}, [{ name: 'AEFE', id: 1 }]);
+        givenOrganization.updateWithDataProtectionOfficerAndTags({ features }, {}, [{ name: 'AEFE', id: 1 }]);
 
         // then
         expect(
@@ -422,7 +451,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
         });
 
         // when
-        givenOrganization.updateWithDataProtectionOfficerAndTags({ features: {} }, {}, [{ name: 'AEFE', id: 1 }]);
+        givenOrganization.updateWithDataProtectionOfficerAndTags({ features }, {}, [{ name: 'AEFE', id: 1 }]);
 
         // then
         expect(
@@ -443,8 +472,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
 
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
-        isManagingStudents: false,
-        features: {},
+        features: { ...features, IS_MANAGING_STUDENTS: { active: false } },
       });
 
       // then
@@ -465,8 +493,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
 
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
-        isManagingStudents: true,
-        features: {},
+        features: { ...features, IS_MANAGING_STUDENTS: { active: true } },
       });
 
       // then
@@ -486,7 +513,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
         email: newEmail,
-        features: {},
+        features,
       });
 
       // then
@@ -504,7 +531,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
         credit: newCredits,
-        features: {},
+        features,
       });
 
       // then
@@ -522,7 +549,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
         documentationUrl: newDocumentationUrl,
-        features: {},
+        features,
       });
 
       // then
@@ -537,8 +564,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
 
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
-        showSkills: true,
-        features: {},
+        features: { ...features, SHOW_SKILLS: { active: true } },
       });
 
       // then
@@ -556,7 +582,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       });
 
       // when
-      givenOrganization.updateWithDataProtectionOfficerAndTags({ id: organizationId, features: {} }, {}, [
+      givenOrganization.updateWithDataProtectionOfficerAndTags({ id: organizationId, features }, {}, [
         { id: newTagId },
       ]);
 
@@ -575,7 +601,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
 
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags(
-        { features: {} },
+        { features },
         { firstName: 'Alex', lastName: 'Terieur', email: 'alex.terieur@example.net' },
       );
 
@@ -597,7 +623,7 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
 
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags(
-        { features: {} },
+        { features },
         { firstName: '', lastName: '', email: '' },
       );
 
@@ -609,18 +635,18 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // given
       const givenOrganization = new OrganizationForAdmin({
         features: {
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: false,
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
         },
       });
 
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
-        features: { [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true },
+        features: { ...features, [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true } },
       });
 
       // then
-      expect(givenOrganization.features).to.includes({
-        [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true,
+      expect(givenOrganization.features).to.deep.includes({
+        [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
       });
     });
 
@@ -628,18 +654,18 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // given
       const givenOrganization = new OrganizationForAdmin({
         features: {
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true,
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
         },
       });
 
       // when
       givenOrganization.updateWithDataProtectionOfficerAndTags({
-        features: { [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: false },
+        features: { ...features, [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false } },
       });
 
       // then
-      expect(givenOrganization.features).to.includes({
-        [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: false,
+      expect(givenOrganization.features).to.deep.includes({
+        [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
       });
     });
   });

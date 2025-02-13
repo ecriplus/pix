@@ -51,6 +51,18 @@ const ORGANIZATION_FEATURE = {
     key: 'COVER_RATE',
     description: "Permet l'affichage de la page statistiques sur Pix Orga",
   },
+  SHOW_SKILLS: {
+    key: 'SHOW_SKILLS',
+    description: "Permet l'ajout des acquis dans l'export de résultats",
+  },
+  IS_MANAGING_STUDENTS: {
+    key: 'IS_MANAGING_STUDENTS',
+    description: "Permet l'activation de l'import pour le SCO et le SUP",
+  },
+  SHOW_NPS: {
+    key: 'SHOW_NPS',
+    description: "Permet l'affichage d'un lien vers le formulaire du Net Promoter Score",
+  },
 };
 
 const CAMPAIGN_FEATURES = {

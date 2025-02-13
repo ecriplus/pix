@@ -2,6 +2,7 @@ import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
 import { click, fillIn } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import InformationSection from 'pix-admin/components/organizations/information-section';
 import { module, test } from 'qunit';
 
@@ -25,10 +26,9 @@ module('Integration | Component | organizations/information-section', function (
       provinceCode: 'h50',
       email: 'sco.generic.account@example.net',
       isOrganizationSCO: true,
-      isManagingStudents: false,
       credit: 0,
       documentationUrl: 'https://pix.fr/',
-      showSkills: false,
+      features: {},
     });
 
     test('it should toggle edition mode on click to edit button', async function (assert) {
@@ -68,10 +68,10 @@ module('Integration | Component | organizations/information-section', function (
       await fillIn(screen.getByLabelText('Nom *', { exact: false }), 'new name');
       await fillByLabel('Identifiant externe', 'new externalId');
       await fillByLabel('Département (en 3 chiffres)', 'new provinceCode');
-      await clickByName('Gestion d’élèves/étudiants');
+      await clickByName("Gestion d'élèves/étudiants");
       await fillByLabel('Lien vers la documentation', 'new documentationUrl');
       await clickByName("Affichage des acquis dans l'export de résultats");
-      await clickByName("Activer l'envoi multiple pour les campagnes de type évaluation");
+      await clickByName("Envoi multiple sur les campagnes d'évaluation");
 
       // when
       await clickByName('Annuler');
@@ -81,9 +81,31 @@ module('Integration | Component | organizations/information-section', function (
       assert.dom(screen.getByText(`Identifiant externe : ${organization.externalId}`)).exists();
       assert.dom(screen.getByText(`Département : ${organization.provinceCode}`)).exists();
       assert.dom(screen.getByRole('link', { name: organization.documentationUrl })).exists();
-      assert.dom(screen.getByText(`Gestion d’élèves/étudiants : Non`)).exists();
-      assert.dom(screen.getByText("Affichage des acquis dans l'export de résultats : Non")).exists();
-      assert.dom(screen.getByText("Activer l'envoi multiple sur les campagnes d'évaluation : Non")).exists();
+      assert
+        .dom(
+          screen.getByText(
+            `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')} : ${t(
+              'common.words.no',
+            )}`,
+          ),
+        )
+        .exists();
+      assert
+        .dom(
+          screen.getByText(
+            `${t('components.organizations.information-section-view.features.SHOW_SKILLS')} : ${t('common.words.no')}`,
+          ),
+        )
+        .exists();
+      assert
+        .dom(
+          screen.getByText(
+            `${t('components.organizations.information-section-view.features.MULTIPLE_SENDING_ASSESSMENT')} : ${t(
+              'common.words.no',
+            )}`,
+          ),
+        )
+        .exists();
     });
 
     test('it should submit the form if there is no error', async function (assert) {
@@ -116,14 +138,14 @@ module('Integration | Component | organizations/information-section', function (
       await fillByLabel('Identifiant externe', 'new externalId');
       await fillByLabel('Département (en 3 chiffres)', '   ');
       await fillByLabel('Crédits', 50);
-      await clickByName('Gestion d’élèves/étudiants');
+      await clickByName("Gestion d'élèves/étudiants");
       await fillByLabel('Lien vers la documentation', 'https://pix.fr/');
       await clickByName('SSO');
       await screen.findByRole('listbox');
       await click(screen.getByRole('option', { name: 'organization 2' }));
       await clickByName("Affichage des acquis dans l'export de résultats");
-      await clickByName("Activer l'envoi multiple pour les campagnes de type évaluation");
-      await clickByName('Activer la page Places sur PixOrga');
+      await clickByName("Envoi multiple sur les campagnes d'évaluation");
+      await clickByName('Affichage de la page Places sur PixOrga');
 
       // when
       await clickByName('Enregistrer');
@@ -133,11 +155,35 @@ module('Integration | Component | organizations/information-section', function (
       assert.dom(screen.getByText('Identifiant externe : new externalId')).exists();
       assert.dom(screen.queryByText('Département : ')).doesNotExist();
       assert.dom(screen.getByText('Crédits : 50')).exists();
-      assert.dom(screen.getByText('Gestion d’élèves/étudiants : Oui')).exists();
+      assert
+        .dom(
+          screen.getByText(
+            `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')} : ${t(
+              'common.words.yes',
+            )}`,
+          ),
+        )
+        .exists();
       assert.dom(screen.getByRole('link', { name: 'https://pix.fr/' })).exists();
       assert.dom(screen.getByText('SSO : organization 2')).exists();
-      assert.dom(screen.getByText("Activer l'envoi multiple sur les campagnes d'évaluation : Oui")).exists();
-      assert.dom(screen.getByText('Activer la page Places sur PixOrga : Oui')).exists();
+      assert
+        .dom(
+          screen.getByText(
+            `${t('components.organizations.information-section-view.features.MULTIPLE_SENDING_ASSESSMENT')} : ${t(
+              'common.words.yes',
+            )}`,
+          ),
+        )
+        .exists();
+      assert
+        .dom(
+          screen.getByText(
+            `${t('components.organizations.information-section-view.features.PLACES_MANAGEMENT')} : ${t(
+              'common.words.yes',
+            )}`,
+          ),
+        )
+        .exists();
     });
   });
 });

@@ -365,7 +365,15 @@
       "information-section-view": {
         "child-organization": "Organisation fille",
         "features": {
-          "attestations": "Attestations activée"
+          "ATTESTATIONS_MANAGEMENT": "Attestations",
+          "COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY": "Certificabilité automatique",
+          "IS_MANAGING_STUDENTS": "Gestion d'élèves/étudiants",
+          "LEARNER_IMPORT": "Import",
+          "MULTIPLE_SENDING_ASSESSMENT": "Envoi multiple sur les campagnes d'évaluation",
+          "PLACES_MANAGEMENT": "Affichage de la page Places sur PixOrga",
+          "SHOW_NPS": "Affichage du Net Promoter Score",
+          "SHOW_SKILLS": "Affichage des acquis dans l'export de résultats",
+          "title": "Fonctionnalités"
         },
         "parent-organization": "Organisation mère"
       }

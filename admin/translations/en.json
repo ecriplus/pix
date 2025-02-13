@@ -357,7 +357,15 @@
       "information-section-view": {
         "child-organization": "Child organization",
         "features": {
-          "attestations": "Attestations enabled"
+          "ATTESTATIONS_MANAGEMENT": "Attestations",
+          "COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY": "Automatic certificability",
+          "IS_MANAGING_STUDENTS": "Managing students",
+          "LEARNER_IMPORT": "Import",
+          "MULTIPLE_SENDING_ASSESSMENT": "Multiple sending on assessment campaigns",
+          "PLACES_MANAGEMENT": "Display the Places page on PixOrga",
+          "SHOW_NPS": "Net Promoter Score display",
+          "SHOW_SKILLS": "Displaying skills in the results export",
+          "title": "Features"
         },
         "parent-organization": "Parent organization"
       }

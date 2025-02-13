@@ -2,12 +2,15 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
+import { concat, get } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { eq } from 'ember-truth-helpers';
 import ENV from 'pix-admin/config/environment';
+import Organization from 'pix-admin/models/organization';
 
 export default class OrganizationInformationSection extends Component {
   @service oidcIdentityProviders;
@@ -52,12 +55,6 @@ export default class OrganizationInformationSection extends Component {
     const urlDashboardPrefix = ENV.APP.ORGANIZATION_DASHBOARD_URL;
     return urlDashboardPrefix && urlDashboardPrefix + this.args.organization.id;
   }
-
-  displayBooleanState = (bool) => {
-    const yes = this.intl.t('common.words.yes');
-    const no = this.intl.t('common.words.no');
-    return bool ? yes : no;
-  };
 
   <template>
     <div class="organization__data">
@@ -143,55 +140,12 @@ export default class OrganizationInformationSection extends Component {
             <br />
 
             <li>Adresse e-mail d'activation SCO : {{@organization.email}}</li>
-
-            <br />
-
-            <li>Lien vers le formulaire du Net Promoter Score :
-              {{#if @organization.formNPSUrl}}
-                <a
-                  href="{{@organization.formNPSUrl}}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >{{@organization.formNPSUrl}}</a>
-              {{else}}
-                Non spécifié
-              {{/if}}
-            </li>
-            <li>Affichage du Net Promoter Score :
-              {{this.displayBooleanState @organization.showNPS}}
-            </li>
-          </ul>
-          <h3 class="page-section__title page-section__title--sub">Fonctionnalités disponibles : </h3>
-          <ul class="organization-information-section__details__list">
-            <li>Affichage des acquis dans l'export de résultats :
-              {{this.displayBooleanState @organization.showSkills}}
-            </li>
-            {{#if this.isManagingStudentAvailable}}
-              <li>Gestion d’élèves/étudiants :
-                {{this.displayBooleanState @organization.isManagingStudents}}
-              </li>
-            {{/if}}
-            <li>Activer l'envoi multiple sur les campagnes d'évaluation :
-              {{this.displayBooleanState @organization.isMultipleSendingAssessmentEnabled}}
-            </li>
-            <li>Activer la page Places sur PixOrga :
-              {{this.displayBooleanState @organization.isPlacesManagementEnabled}}
-            </li>
             {{#if @organization.code}}
               <br />
               <li>Code : {{@organization.code}}</li>
             {{/if}}
-            {{#if @organization.isLearnerImportEnabled}}
-              <li>Import activé ({{@organization.learnerImportFormatName}})</li>
-            {{/if}}
-            {{#if @organization.isComputeCertificabilityEnabled}}
-              <li>Certificabilité automatique activée</li>
-            {{/if}}
-            {{#if @organization.isAttestationsEnabled}}
-              <li>{{t "components.organizations.information-section-view.features.attestations"}}</li>
-            {{/if}}
-
           </ul>
+          <FeaturesSection @features={{@organization.features}} />
           {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
             <div class="form-actions">
               <PixButton @variant="secondary" @size="small" @triggerAction={{@toggleEditMode}}>
@@ -219,3 +173,63 @@ export default class OrganizationInformationSection extends Component {
     </div>
   </template>
 }
+
+function keys(obj) {
+  return Object.keys(obj);
+}
+
+const FeaturesSection = <template>
+  <h3 class="page-section__title page-section__title--sub">{{t
+      "components.organizations.information-section-view.features.title"
+    }}
+    :
+  </h3>
+  <ul class="organization-information-section__details__list">
+    {{#each (keys Organization.featureList) as |feature|}}
+      {{#let
+        (get @features feature) (concat "components.organizations.information-section-view.features." feature)
+        as |organizationFeature featureLabel|
+      }}
+        <li>
+          {{#if (eq feature "SHOW_NPS")}}
+            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
+              <a
+                rel="noopener noreferrer"
+                href={{organizationFeature.params.formNPSUrl}}
+                target="_blank"
+              >{{organizationFeature.params.formNPSUrl}}</a>
+            </Feature>
+          {{else if (eq feature "LEARNER_IMPORT")}}
+            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
+              {{organizationFeature.params.name}}
+            </Feature>
+          {{else if (eq feature "ATTESTATIONS_MANAGEMENT")}}
+            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
+              6ème
+            </Feature>
+          {{else}}
+            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}} />
+          {{/if}}
+        </li>
+      {{/let}}
+    {{/each}}
+  </ul>
+</template>;
+
+function displayBooleanState(bool) {
+  return bool ? 'common.words.yes' : 'common.words.no';
+}
+
+const Feature = <template>
+  {{@label}}
+  :
+  {{#if (has-block)}}
+    {{#if @value}}
+      {{yield}}
+    {{else}}
+      {{t "common.words.no"}}
+    {{/if}}
+  {{else}}
+    {{t (displayBooleanState @value)}}
+  {{/if}}
+</template>;

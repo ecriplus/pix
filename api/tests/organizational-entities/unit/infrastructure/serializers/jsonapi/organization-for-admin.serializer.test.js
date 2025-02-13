@@ -26,7 +26,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
         identityProviderForCampaigns: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
         features: {
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true,
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
         },
         name: 'motherSco',
       });
@@ -43,7 +43,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
         identityProviderForCampaigns: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
         features: {
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true,
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
         },
         parentOrganizationId: parentOrganization.id,
         parentOrganizationName: parentOrganization.name,
@@ -151,17 +151,17 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         logoUrl: null,
         externalId: 'ABCD123',
         provinceCode: '64',
-        isManagingStudents: false,
         createdBy: 10,
         documentationUrl: 'https://pix.fr/',
-        showSkills: false,
         identityProviderForCampaigns: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
         dataProtectionOfficerFirstName: 'Justin',
         dataProtectionOfficerLastName: 'Ptipeu',
         dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
         features: {
-          [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: true,
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true,
+          [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: true },
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
+          [ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key]: { active: true },
+          [ORGANIZATION_FEATURE.SHOW_SKILLS.key]: { active: true },
         },
       };
 
@@ -178,10 +178,8 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             'logo-url': organizationAttributes.logoUrl,
             'external-id': organizationAttributes.externalId,
             'province-code': organizationAttributes.provinceCode,
-            'is-managing-students': organizationAttributes.isManagingStudents,
             'created-by': organizationAttributes.createdBy,
             'documentation-url': organizationAttributes.documentationUrl,
-            'show-skills': organizationAttributes.showSkills,
             'identity-provider-for-campaigns': organizationAttributes.identityProviderForCampaigns,
             'data-protection-officer-first-name': organizationAttributes.dataProtectionOfficerFirstName,
             'data-protection-officer-last-name': organizationAttributes.dataProtectionOfficerLastName,
@@ -201,19 +199,21 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         logoUrl: organizationAttributes.logoUrl,
         externalId: organizationAttributes.externalId,
         provinceCode: organizationAttributes.provinceCode,
-        isManagingStudents: organizationAttributes.isManagingStudents,
+        isManagingStudents: organizationAttributes.features[ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key].active,
         createdBy: organizationAttributes.createdBy,
         documentationUrl: organizationAttributes.documentationUrl,
-        showSkills: organizationAttributes.showSkills,
+        showSkills: organizationAttributes.features[ORGANIZATION_FEATURE.SHOW_SKILLS.key].active,
         identityProviderForCampaigns: organizationAttributes.identityProviderForCampaigns,
         dataProtectionOfficerFirstName: organizationAttributes.dataProtectionOfficerFirstName,
         dataProtectionOfficerLastName: organizationAttributes.dataProtectionOfficerLastName,
         dataProtectionOfficerEmail: organizationAttributes.dataProtectionOfficerEmail,
         features: {
-          [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]:
-            organizationAttributes.features.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY,
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]:
-            organizationAttributes.features.MULTIPLE_SENDING_ASSESSMENT,
+          [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: {
+            active: organizationAttributes.features.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.active,
+          },
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: {
+            active: organizationAttributes.features.MULTIPLE_SENDING_ASSESSMENT.active,
+          },
         },
       });
       expect(organization).to.be.instanceOf(OrganizationForAdmin);
@@ -230,7 +230,10 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         logoUrl: null,
         externalId: 'ABCD123',
         provinceCode: '64',
-        isManagingStudents: true,
+        features: {
+          [ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key]: { active: true },
+          [ORGANIZATION_FEATURE.SHOW_SKILLS.key]: { active: true },
+        },
       };
       const tagAttributes1 = { id: '4', type: 'tags' };
       const tagAttributes2 = { id: '2', type: 'tags' };
@@ -246,7 +249,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             logoUrl: organizationAttributes.logoUrl,
             'external-id': organizationAttributes.externalId,
             'province-code': organizationAttributes.provinceCode,
-            'is-managing-students': organizationAttributes.isManagingStudents,
+            features: organizationAttributes.features,
           },
           relationships: {
             tags: {
