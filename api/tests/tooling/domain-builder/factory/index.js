@@ -199,6 +199,7 @@ import { buildSessionManagement } from './certification/session-management/build
 import { buildCompetenceForScoring } from './certification/shared/build-competence-for-scoring.js';
 import { buildJuryComment } from './certification/shared/build-jury-comment.js';
 import { buildV3CertificationScoring } from './certification/shared/build-v3-certification-scoring.js';
+import { buildUserLogin } from './identity-access-management/build-user-login.js';
 import { buildCertificationResult as parcoursupCertificationResult } from './parcoursup/build-certification-result.js';
 import { buildCompetence as parcoursupCompetence } from './parcoursup/build-competence.js';
 import { buildCampaign as boundedContextCampaignBuildCampaign } from './prescription/campaign/build-campaign.js';
@@ -273,6 +274,10 @@ const prescription = {
   campaignParticipation: {
     buildCampaignParticipation: boundedContextCampaignParticipationBuildCampaignParticipation,
   },
+};
+
+const identityAccessManagement = {
+  buildUserLogin,
 };
 
 export {
@@ -450,6 +455,7 @@ export {
   buildValidation,
   buildValidator,
   certification,
+  identityAccessManagement,
   parcoursup,
   prescription,
 };

@@ -16,7 +16,6 @@ export function createResetPasswordDemandEmail({ email, temporaryKey, locale = L
   const factory = new EmailFactory({ app: 'pix-app', locale });
 
   const { i18n, defaultVariables } = factory;
-
   const pixAppUrl = urlBuilder.getPixAppBaseUrl(locale);
 
   return factory.buildEmail({

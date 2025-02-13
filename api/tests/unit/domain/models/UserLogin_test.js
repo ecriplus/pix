@@ -1,6 +1,6 @@
 import { UserLogin } from '../../../../src/identity-access-management/domain/models/UserLogin.js';
 import { config } from '../../../../src/shared/config.js';
-import { expect, sinon } from '../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../test-helper.js';
 
 describe('Unit | Domain | Models | UserLogin', function () {
   let clock;
@@ -311,6 +311,50 @@ describe('Unit | Domain | Models | UserLogin', function () {
 
         // then
         expect(result).to.be.true;
+      });
+    });
+  });
+
+  describe('#shouldSendConnectionWarning', function () {
+    context('when user has connected after a long period since last connection date', function () {
+      it('returns true', function () {
+        // given
+        const emailConnectionWarningPeriodMs = config.login.emailConnectionWarningPeriod;
+        const lastConnectionDate = new Date(Date.now() - emailConnectionWarningPeriodMs);
+        const userLogin = domainBuilder.identityAccessManagement.buildUserLogin({ lastLoggedAt: lastConnectionDate });
+
+        // when
+        const result = userLogin.shouldSendConnectionWarning();
+
+        // then
+        expect(result).to.be.true;
+      });
+    });
+
+    context('when user has connected before the connection warning period', function () {
+      it('returns false', function () {
+        // given
+        const lastConnectionDate = new Date(Date.now() - 1);
+        const userLogin = domainBuilder.identityAccessManagement.buildUserLogin({ lastLoggedAt: lastConnectionDate });
+
+        // when
+        const result = userLogin.shouldSendConnectionWarning();
+
+        // then
+        expect(result).to.be.false;
+      });
+    });
+
+    context("when user's last connection is not specified", function () {
+      it('returns false', function () {
+        // given
+        const userLogin = domainBuilder.identityAccessManagement.buildUserLogin();
+
+        // when
+        const result = userLogin.shouldSendConnectionWarning();
+
+        // then
+        expect(result).to.be.false;
       });
     });
   });

@@ -1,5 +1,6 @@
 import { PIX_ADMIN, PIX_ORGA } from '../../../authorization/domain/constants.js';
 import { ForbiddenAccess, UserNotFoundError } from '../../../shared/domain/errors.js';
+import { createWarningConnectionEmail } from '../emails/create-warning-connection.email.js';
 import { MissingOrInvalidCredentialsError, PasswordNotMatching, UserShouldChangePasswordError } from '../errors.js';
 import { RefreshToken } from '../models/RefreshToken.js';
 
@@ -15,6 +16,7 @@ const authenticateUser = async function ({
   userRepository,
   userLoginRepository,
   adminMemberRepository,
+  emailRepository,
   audience,
 }) {
   try {
@@ -45,6 +47,16 @@ const authenticateUser = async function ({
       await userRepository.update({ id: foundUser.id, locale: foundUser.locale });
     }
 
+    const userLogin = await userLoginRepository.findByUserId(foundUser.id);
+    if (foundUser.email && userLogin?.shouldSendConnectionWarning()) {
+      await emailRepository.sendEmailAsync(
+        createWarningConnectionEmail({
+          locale: foundUser.locale,
+          email: foundUser.email,
+          firstName: foundUser.firstName,
+        }),
+      );
+    }
     await userLoginRepository.updateLastLoggedAt({ userId: foundUser.id });
 
     return { accessToken, refreshToken: refreshToken.value, expirationDelaySeconds };
