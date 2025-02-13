@@ -13,12 +13,12 @@ const ApiErrorMessages = ENV.APP.API_ERROR_MESSAGES;
 module('Integration | Component | login-form', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('it displays login information', async function (assert) {
+  test('it displays login logo and information', async function (assert) {
     // when
     const screen = await render(<template><LoginForm /></template>);
 
     // then
-    assert.dom(screen.getByText('Pix Admin')).exists();
+    assert.dom(screen.getByRole('img', { name: 'Pix Admin' })).hasAttribute('src', '/admin-logo.svg');
     assert.dom(screen.getByText("L'accès à Pix Admin est limité aux administrateurs de la plateforme")).exists();
   });
 

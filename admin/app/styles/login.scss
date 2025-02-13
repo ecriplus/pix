@@ -17,10 +17,18 @@
   margin: 0 auto;
 }
 
-.login-page__header {
+.login-page-header {
   height: 129px;
   margin-top: var(--pix-spacing-12x);
   text-align: center;
+
+  &__logo {
+    display: block;
+    width: 173px;
+    height: 63px;
+    margin: 0 auto;
+    margin-bottom: var(--pix-spacing-3x);
+  }
 
   &__title {
     margin-bottom: var(--pix-spacing-4x);

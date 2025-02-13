@@ -68,6 +68,7 @@
       },
       "generic-error": "An error occurred."
     },
+    "pix-admin": "Pix Admin",
     "roles": {
       "admin": "Administrator",
       "auto": "Automatic",
