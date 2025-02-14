@@ -1,6 +1,5 @@
 import lodash from 'lodash';
 
-import { getEnabledTreatments, useLevenshteinRatio } from '../../../../../lib/domain/services/services-utils.js';
 import { validateAnswer } from '../../../../../lib/domain/services/string-comparison-service.js';
 import { applyPreTreatments, applyTreatments } from '../../../../../lib/domain/services/validation-treatments.js';
 import { AnswerStatus } from '../../../../shared/domain/models/AnswerStatus.js';
@@ -9,6 +8,7 @@ import {
   isNumeric,
   splitIntoWordsAndRemoveBackspaces,
 } from '../../../../shared/infrastructure/utils/string-utils.js';
+import { getEnabledTreatments, useLevenshteinRatio } from '../services-utils.js';
 const CHALLENGE_NUMBER_FORMAT = 'nombre';
 const { every, isEmpty, isString, map } = lodash;
 
