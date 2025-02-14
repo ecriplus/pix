@@ -1,5 +1,22 @@
 # Pix Changelog
 
+## v5.43.0 (14/02/2025)
+
+
+### :rocket: Amélioration
+- [#11396](https://github.com/1024pix/pix/pull/11396) [FEATURE] Liste blanche ouverture SCO via BDD (PIX-15544).
+- [#11397](https://github.com/1024pix/pix/pull/11397) [FEATURE] Utiliser PixCode dans le code campagne sur PixApp (PIX-16449).
+- [#11412](https://github.com/1024pix/pix/pull/11412) [FEATURE] Remplacer skills par competences dans le tableau de la page statistiques (PIX-16411).
+- [#11393](https://github.com/1024pix/pix/pull/11393) [FEATURE] Autoriser la suppression de Quetes via PixAdmin (Pix-16533).
+- [#11351](https://github.com/1024pix/pix/pull/11351) [FEATURE] Utiliser PixCode dans le code candidat pour l'entrée en certification sur Pix App (PIX-16448).
+- [#11342](https://github.com/1024pix/pix/pull/11342) [FEATURE] Envoyer un email d'avertissement si l'utilisateur ne s'est pas connecté depuis 12 mois ou plus (PIX-16126).
+- [#11317](https://github.com/1024pix/pix/pull/11317) [FEATURE] Suppression du scope pour les RT utilisateurs (PIX-15926).
+- [#10724](https://github.com/1024pix/pix/pull/10724) [FEATURE] création module PPN#2 Controle parental.
+- [#11409](https://github.com/1024pix/pix/pull/11409) [FEATURE] Ajouter la durée du code de validation du changement d'email sur Pix-app (PIX-14088).
+
+### :building_construction: Tech
+- [#11272](https://github.com/1024pix/pix/pull/11272) [TECH] Uniformise le code des fonctionnalités d'organisation sur PixAdmin (PIX-16319).
+
 ## v5.42.0 (13/02/2025)
 
 
