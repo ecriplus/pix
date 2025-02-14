@@ -49,7 +49,9 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           const screen = await visit('/campagnes');
 
           // then
-          assert.dom(screen.getByRole('button', { name: 'Accéder au parcours' })).exists();
+          assert
+            .dom(screen.getByRole('heading', { name: t('pages.fill-in-campaign-code.first-title-not-connected') }))
+            .exists();
         });
       });
 
@@ -61,8 +63,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             const screen = await visit('/campagnes');
 
             // when
-            await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaign.code);
-            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await fillIn(
+              screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+              campaign.code,
+            );
+            await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
 
             // then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
@@ -92,10 +97,10 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               const campaign = server.create('campaign', { isRestricted: false });
               const screen = await visit('/campagnes');
               await fillIn(
-                screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }),
+                screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
                 campaign.code,
               );
-              await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+              await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
 
               // then
               assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
@@ -134,10 +139,10 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
               // when
               await fillIn(
-                screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }),
+                screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
                 campaign.code,
               );
-              await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+              await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
               await click(screen.getByRole('button', { name: 'Je commence' }));
               await click(screen.getByRole('button', { name: 'Se connecter' }));
               await _loginUser(screen, prescritUser);
@@ -160,10 +165,10 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
                 // when
                 await fillIn(
-                  screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }),
+                  screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
                   campaign.code,
                 );
-                await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+                await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
                 await click(screen.getByRole('button', { name: 'Je commence' }));
                 await click(screen.getByRole('button', { name: 'Se connecter' }));
                 await _loginUser(screen, prescritUser);
@@ -181,10 +186,10 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               const screen = await visit('/campagnes');
               prescritUser.mustValidateTermsOfService = true;
               await fillIn(
-                screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }),
+                screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
                 campaign.code,
               );
-              await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+              await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
               await click(screen.getByRole('button', { name: 'Je commence' }));
               await click(screen.getByRole('button', { name: 'Se connecter' }));
               await _loginUser(screen, prescritUser);
@@ -339,8 +344,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             const screen = await visit('/campagnes');
 
             // when
-            await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaign.code);
-            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await fillIn(
+              screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+              campaign.code,
+            );
+            await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
 
             // then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
@@ -406,26 +414,15 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           const screen = await visit('/campagnes');
 
           // when
-          await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaignCode);
-          await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+          await fillIn(
+            screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+            campaignCode,
+          );
+          await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
 
           // then
           assert.strictEqual(currentURL(), '/campagnes');
           assert.dom(screen.getByText(t('pages.fill-in-campaign-code.errors.not-found'))).exists();
-        });
-      });
-
-      module('When user validates with empty campaign code', function () {
-        test('should display an error', async function (assert) {
-          // given
-          const screen = await visit('/campagnes');
-
-          // when
-          await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
-
-          // then
-          assert.strictEqual(currentURL(), '/campagnes');
-          assert.dom(screen.getByText('Veuillez saisir un code.')).exists();
         });
       });
 
@@ -494,8 +491,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             const screen = await visit('/campagnes');
 
             //when
-            await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaign.code);
-            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await fillIn(
+              screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+              campaign.code,
+            );
+            await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
 
             //then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
@@ -596,8 +596,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           const screen = await visit('/campagnes');
 
           //when
-          await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaign.code);
-          await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+          await fillIn(
+            screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+            campaign.code,
+          );
+          await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
 
           //then
           assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
@@ -749,8 +752,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
         // when
         const screen = await visit('/campagnes');
-        await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaign.code);
-        await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+        await fillIn(
+          screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+          campaign.code,
+        );
+        await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
         await click(screen.getByRole('button', { name: 'Je commence' }));
 
         const currentUserId = session.data.authenticated['user_id'];
@@ -779,8 +785,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             const screen = await visit(`/campagnes?externalUser=${externalUserToken}`);
 
             // when
-            await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaign.code);
-            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await fillIn(
+              screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+              campaign.code,
+            );
+            await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
 
             // then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
@@ -797,8 +806,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             const screen = await visit(`/campagnes?externalUser=${externalUserToken}`);
 
             // when
-            await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaign.code);
-            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await fillIn(
+              screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+              campaign.code,
+            );
+            await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // then
@@ -816,8 +828,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             const screen = await visit(`/campagnes?externalUser=${externalUserToken}`);
 
             // when
-            await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaign.code);
-            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await fillIn(
+              screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+              campaign.code,
+            );
+            await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             //then
@@ -836,8 +851,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             const screen = await visit(`/campagnes?externalUser=${externalUserToken}`);
 
             // given
-            await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaign.code);
-            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await fillIn(
+              screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+              campaign.code,
+            );
+            await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // when
@@ -883,10 +901,10 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
 
               // when
               await fillIn(
-                screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }),
+                screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
                 campaign.code,
               );
-              await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+              await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
 
               // then
               assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
@@ -933,8 +951,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             });
 
             const screen = await visit(`/campagnes?externalUser=${externalUserToken}`);
-            await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaign.code);
-            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await fillIn(
+              screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+              campaign.code,
+            );
+            await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             await fillIn(screen.getByLabelText('jour de naissance'), '10');
@@ -966,8 +987,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             server.post('/token-from-external-user', () => errorsApi);
 
             const screen = await visit(`/campagnes?externalUser=${externalUserToken}`);
-            await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaign.code);
-            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await fillIn(
+              screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+              campaign.code,
+            );
+            await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
@@ -1004,8 +1028,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             server.post('/token-from-external-user', () => errorsApi);
 
             const screen = await visit(`/campagnes?externalUser=${externalUserToken}`);
-            await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaign.code);
-            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await fillIn(
+              screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+              campaign.code,
+            );
+            await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
@@ -1034,8 +1061,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             server.post('/token-from-external-user', () => new Response(500));
 
             const screen = await visit(`/campagnes?externalUser=${externalUserToken}`);
-            await fillIn(screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }), campaign.code);
-            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await fillIn(
+              screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
+              campaign.code,
+            );
+            await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
@@ -1094,10 +1124,10 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
               const screen = await visit(`/campagnes?externalUser=${externalUserToken}`);
 
               await fillIn(
-                screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }),
+                screen.getByRole('textbox', { name: `${t('pages.fill-in-campaign-code.label')} *` }),
                 campaign.code,
               );
-              await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+              await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
               await click(screen.getByRole('button', { name: 'Je commence' }));
 
               await fillIn(screen.getByLabelText('jour de naissance'), '10');

@@ -48,7 +48,7 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
 
         // when
         const screen = await visit(`/campagnes`);
-        await fillIn(screen.getByLabelText(t('pages.fill-in-campaign-code.label')), campaign.code);
+        await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), campaign.code);
         await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
 
         // then
@@ -67,7 +67,7 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
 
           // when
           const screen = await visit(`/campagnes`);
-          await fillIn(screen.getByLabelText(t('pages.fill-in-campaign-code.label')), campaign.code);
+          await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), campaign.code);
           await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
           await waitForDialog();
           await click(screen.getByRole('link', { name: 'Continuer' }));
@@ -88,7 +88,7 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
 
           // when
           const screen = await visit(`/campagnes`);
-          await fillIn(screen.getByLabelText(t('pages.fill-in-campaign-code.label')), campaign.code);
+          await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), campaign.code);
           await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
           await waitForDialog();
           await click(screen.getByRole('button', { name: 'Quitter' }));
@@ -106,7 +106,7 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
 
         // when
         const screen = await visit(`/campagnes`);
-        await fillIn(screen.getByLabelText(t('pages.fill-in-campaign-code.label')), campaign.code);
+        await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), campaign.code);
         await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
 
         // then

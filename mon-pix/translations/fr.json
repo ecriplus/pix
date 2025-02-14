@@ -1300,7 +1300,7 @@
       },
       "first-title-connected": "{ firstName }, saisissez votre code",
       "first-title-not-connected": "Saisissez votre code",
-      "label": "Saisir votre code pour commencer.",
+      "label": "Saisir votre code pour commencer",
       "mediacentre-start-campaign-modal": {
         "actions": {
           "continue": "Continuer",

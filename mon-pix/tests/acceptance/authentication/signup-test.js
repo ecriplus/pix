@@ -62,7 +62,7 @@ module('Acceptance | authentication | Signup', function (hooks) {
 
       // when
       const screen = await visit('/campagnes');
-      await fillByLabel(t('pages.fill-in-campaign-code.label'), campaign.code);
+      await fillByLabel(`${t('pages.fill-in-campaign-code.label')} *`, campaign.code);
       await clickByName(t('pages.fill-in-campaign-code.start'), campaign.code);
       await clickByName(t('pages.campaign-landing.assessment.action'));
 
