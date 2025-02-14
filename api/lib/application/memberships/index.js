@@ -2,42 +2,11 @@ import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../src/shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../src/shared/domain/types/identifiers-type.js';
-import { membershipController } from './membership-controller.js';
+import { membershipController } from '../../../src/team/application/membership/membership.controller.js';
+import { membershipController as libMembershipController } from './membership-controller.js';
 
 const register = async function (server) {
-  const adminRoutes = [
-    {
-      method: 'POST',
-      path: '/api/admin/memberships/{id}/disable',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-                securityPreHandlers.checkAdminMemberHasRoleMetier,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            id: identifiersType.membershipId,
-          }),
-        },
-        handler: membershipController.disable,
-        tags: ['api'],
-        notes: [
-          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
-            "- Elle permet la désactivation d'un membre",
-        ],
-      },
-    },
-  ];
-
   server.route([
-    ...adminRoutes,
     {
       method: 'POST',
       path: '/api/memberships/me/disable',
@@ -57,7 +26,7 @@ const register = async function (server) {
             organizationId: identifiersType.organizationId,
           }),
         },
-        handler: membershipController.disableOwnOrganizationMembership,
+        handler: libMembershipController.disableOwnOrganizationMembership,
         tags: ['api'],
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés en tant qu'administrateur de l'organisation\n" +
