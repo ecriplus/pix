@@ -35,6 +35,7 @@ export function getElements(modules) {
   const ELEMENT_TYPES = [
     'download',
     'embed',
+    'expand',
     'flashcards',
     'image',
     'qcm',
