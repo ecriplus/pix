@@ -8,7 +8,8 @@ export async function getModulesListAsCsv(modules) {
     data: modules,
     delimiter: '\t',
     fileHeaders: [
-      { label: 'Module', value: 'slug' },
+      { label: 'ModuleSlug', value: 'slug' },
+      { label: 'ModuleTitle', value: 'title' },
       {
         label: 'ModuleTotalElements',
         value: (row) => _getTotalElementsCount(row.grains),
