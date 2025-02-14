@@ -41,7 +41,7 @@ describe('Unit | Identity Access Management | Domain | Email | create-warning-co
   });
 
   describe('when the locale is en', function () {
-    it('provides the correct reset password URL', function () {
+    it('provides the correct urls', function () {
       // given
       const emailParams = {
         email: 'toto@example.net',
@@ -54,34 +54,19 @@ describe('Unit | Identity Access Management | Domain | Email | create-warning-co
       const email = createWarningConnectionEmail(emailParams);
 
       // then
-      const { resetUrl } = email.variables;
-      const expectedUrl =
-        'https://app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fapp.pix.org%2Fmot-de-passe-oublie%3Flang%3Den';
-      expect(resetUrl).to.equal(expectedUrl);
-    });
+      const { helpDeskUrl, resetUrl } = email.variables;
+      const expectedSupportUrl =
+        'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fpix.org%2Fen%2Fsupport';
 
-    it('provides the correct help desk URL', function () {
-      // given
-      const emailParams = {
-        email: 'toto@example.net',
-        locale: 'en',
-        firstName: 'John',
-        validationToken: 'token',
-      };
-
-      // when
-      const email = createWarningConnectionEmail(emailParams);
-
-      // then
-      const { helpDeskUrl } = email.variables;
-      const expectedUrl =
-        'https://app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fpix.org%2Fen%2Fsupport';
-      expect(helpDeskUrl).to.equal(expectedUrl);
+      const expectedResetUrl =
+        'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.org%2Fmot-de-passe-oublie%3Flang%3Den';
+      expect(resetUrl).to.equal(expectedResetUrl);
+      expect(helpDeskUrl).to.equal(expectedSupportUrl);
     });
   });
 
   describe('when the locale is fr-fr', function () {
-    it('provides the correct reset password URL', function () {
+    it('provides the correct urls', function () {
       // given
       const emailParams = {
         email: 'toto@example.net',
@@ -94,17 +79,22 @@ describe('Unit | Identity Access Management | Domain | Email | create-warning-co
       const email = createWarningConnectionEmail(emailParams);
 
       // then
-      const { resetUrl } = email.variables;
-      const expectedUrl =
-        'https://app.pix.fr/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fapp.pix.fr%2Fmot-de-passe-oublie%3Flang%3Dfr';
-      expect(resetUrl).to.equal(expectedUrl);
+      const { helpDeskUrl, resetUrl } = email.variables;
+      const expectedSupportUrl =
+        'https://test.app.pix.fr/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fpix.fr%2Fsupport';
+      const expectedResetUrl =
+        'https://test.app.pix.fr/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.fr%2Fmot-de-passe-oublie%3Flang%3Dfr';
+      expect(resetUrl).to.equal(expectedResetUrl);
+      expect(helpDeskUrl).to.equal(expectedSupportUrl);
     });
+  });
 
-    it('provides the correct help desk URL', function () {
+  describe('when the locale is fr', function () {
+    it('provides the correct urls', function () {
       // given
       const emailParams = {
         email: 'toto@example.net',
-        locale: 'fr-fr',
+        locale: 'fr',
         firstName: 'John',
         validationToken: 'token',
       };
@@ -113,15 +103,18 @@ describe('Unit | Identity Access Management | Domain | Email | create-warning-co
       const email = createWarningConnectionEmail(emailParams);
 
       // then
-      const { helpDeskUrl } = email.variables;
-      const expectedUrl =
-        'https://app.pix.fr/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fpix.fr%2Fsupport';
-      expect(helpDeskUrl).to.equal(expectedUrl);
+      const { helpDeskUrl, resetUrl } = email.variables;
+      const expectedSupportUrl =
+        'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fpix.org%2Ffr%2Fsupport';
+      const expectedResetUrl =
+        'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.org%2Fmot-de-passe-oublie%3Flang%3Dfr';
+      expect(resetUrl).to.equal(expectedResetUrl);
+      expect(helpDeskUrl).to.equal(expectedSupportUrl);
     });
   });
 
   describe('when the locale is nl-BE', function () {
-    it('provides the correct reset password URL', function () {
+    it('provides the correct urls', function () {
       // given
       const emailParams = {
         email: 'toto@example.net',
@@ -134,11 +127,14 @@ describe('Unit | Identity Access Management | Domain | Email | create-warning-co
       const email = createWarningConnectionEmail(emailParams);
 
       // then
-      const { resetUrl } = email.variables;
-      const expectedUrl =
-        'https://app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fapp.pix.org%2Fmot-de-passe-oublie%3Flang%3Dnl';
+      const { resetUrl, helpDeskUrl } = email.variables;
+      const expectedResetUrl =
+        'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.org%2Fmot-de-passe-oublie%3Flang%3Dnl';
 
-      expect(resetUrl).to.equal(expectedUrl);
+      const expectedSupportUrl =
+        'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fpix.org%2Fnl-be%2Fsupport';
+      expect(resetUrl).to.equal(expectedResetUrl);
+      expect(helpDeskUrl).to.equal(expectedSupportUrl);
     });
   });
 });

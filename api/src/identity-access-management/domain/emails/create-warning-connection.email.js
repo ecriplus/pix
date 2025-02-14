@@ -16,7 +16,14 @@ import { mailer } from '../../../shared/mail/infrastructure/services/mailer.js';
 export function createWarningConnectionEmail({ locale, email, firstName, validationToken }) {
   locale = locale || LOCALE.FRENCH_FRANCE;
   const lang = new Intl.Locale(locale).language;
-  const factory = new EmailFactory({ app: 'pix-app', locale });
+  let localeSupport;
+  if (locale.toLowerCase() === LOCALE.FRENCH_FRANCE) {
+    localeSupport = LOCALE.FRENCH_FRANCE;
+  } else {
+    localeSupport = lang;
+  }
+
+  const factory = new EmailFactory({ app: 'pix-app', locale: localeSupport });
 
   const { i18n, defaultVariables } = factory;
   const pixAppUrl = urlBuilder.getPixAppBaseUrl(locale);
@@ -30,7 +37,7 @@ export function createWarningConnectionEmail({ locale, email, firstName, validat
       homeName: defaultVariables.homeName,
       homeUrl: defaultVariables.homeUrl,
       helpDeskUrl: urlBuilder.getEmailValidationUrl({
-        locale,
+        locale: localeSupport,
         redirectUrl: defaultVariables.helpdeskUrl,
         token: validationToken,
       }),
@@ -44,7 +51,11 @@ export function createWarningConnectionEmail({ locale, email, firstName, validat
       disclaimer: i18n.__('warning-connection-email.params.disclaimer'),
       warningMessage: i18n.__('warning-connection-email.params.warningMessage'),
       resetMyPassword: i18n.__('warning-connection-email.params.resetMyPassword'),
-      resetUrl: urlBuilder.getEmailValidationUrl({ locale, redirectUrl: resetUrl, token: validationToken }),
+      resetUrl: urlBuilder.getEmailValidationUrl({
+        locale: localeSupport,
+        redirectUrl: resetUrl,
+        token: validationToken,
+      }),
       supportContact: i18n.__('warning-connection-email.params.supportContact'),
       thanks: i18n.__('warning-connection-email.params.thanks'),
       signing: i18n.__('warning-connection-email.params.signing'),
