@@ -109,7 +109,7 @@ export default class List extends Component {
               <tr aria-label={{concat member.firstName " " member.lastName}}>
                 <td>{{member.firstName}}</td>
                 <td>{{member.lastName}}</td>
-                <td>{{member.email}}</td>
+                <td class="break-word">{{member.email}}</td>
                 <td>
                   {{#if member.isInEditionMode}}
                     <PixSelect

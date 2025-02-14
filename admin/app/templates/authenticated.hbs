@@ -1,3 +1,16 @@
-<Layout>
-  {{outlet}}
-</Layout>
+{{#if this.shouldDisplayNewSidebar}}
+  <PixAppLayout @variant="primary">
+    <:navigation>
+      <Layout::Sidebar />
+    </:navigation>
+    <:main>
+      <main>
+        {{outlet}}
+      </main>
+    </:main>
+  </PixAppLayout>
+{{else}}
+  <Layout>
+    {{outlet}}
+  </Layout>
+{{/if}}

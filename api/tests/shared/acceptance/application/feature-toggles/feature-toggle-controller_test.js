@@ -29,6 +29,7 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-oppsy-disabled': false,
             'is-pix1d-enabled': true,
             'is-pix-app-new-layout-enabled': true,
+            'is-pix-admin-new-sidebar-enabled': false,
             'is-pix-companion-enabled': false,
             'is-quest-enabled': false,
             'is-user-token-aud-confinement-enabled': true,

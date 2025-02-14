@@ -80,8 +80,8 @@ export default class LoginForm extends Component {
   }
 
   <template>
-    <header class="login-page__header">
-      <h1 class="login-page__header__title">Pix Admin</h1>
+    <header class="login-page-header">
+      <img class="login-page-header__logo" src="/admin-logo.svg" alt={{t "common.pix-admin"}} />
       <p class="login-form__information">{{t "pages.login.title"}}</p>
     </header>
 

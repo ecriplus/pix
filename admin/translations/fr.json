@@ -55,6 +55,7 @@
       "mandatory": "Champ obligatoire",
       "mandatory-fields": "Les champs marqués de '<abbr title=\"obligatoire\" class=\"mandatory-mark\">'*'</abbr>' sont obligatoires"
     },
+    "home-page": "Page d'accueil de Pix Admin",
     "invitations": {
       "invitation-locale": "Locale",
       "send-new": "Renvoyer l'invitation",
@@ -67,6 +68,7 @@
       },
       "generic-error": "Une erreur est survenue."
     },
+    "pix-admin": "Pix Admin",
     "roles": {
       "admin": "Administrateur",
       "auto": "Automatique",
@@ -335,6 +337,24 @@
           "users": "Utilisateurs"
         },
         "label": "Navigation principale"
+      },
+      "sidebar": {
+        "administration": "Administration",
+        "autonomous-courses": "Parcours autonomes",
+        "certification-centers": "Centres de certif",
+        "certification-centers-label": "Centres de certifications",
+        "certifications": "Certifications",
+        "complementary-certifications": "Certifications compl.",
+        "complementary-certifications-label": "Certifications complémentaires",
+        "logout": "Se déconnecter",
+        "organizations": "Organisations",
+        "sessions": "Sessions de certif",
+        "sessions-label": "Sessions de certifications",
+        "target-profiles": "Profils cibles",
+        "team": "Équipe",
+        "tools": "Outils",
+        "trainings": "Contenus formatifs",
+        "users": "Utilisateurs"
       }
     },
     "memberships-section": {

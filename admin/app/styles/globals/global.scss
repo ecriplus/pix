@@ -35,7 +35,7 @@ abbr {
   }
 }
 
-a:not(.pix-button, .login-form__oidc-connect-link) {
+a:not(.pix-button, .sidebar__link, .login-form__oidc-connect-link) {
   color: var(--pix-tertiary-500);
   text-decoration: underline;
 

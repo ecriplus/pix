@@ -52,7 +52,7 @@ export default class CertificationCenterListItems extends Component {
                 </td>
                 <td>{{certificationCenter.name}}</td>
                 <td>{{certificationCenter.type}}</td>
-                <td>{{certificationCenter.externalId}}</td>
+                <td class="break-word">{{certificationCenter.externalId}}</td>
               </tr>
             {{/each}}
           </tbody>
