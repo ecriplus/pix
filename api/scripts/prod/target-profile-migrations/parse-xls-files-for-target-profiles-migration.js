@@ -15,7 +15,7 @@ const { performance } = perf_hooks;
 import XLSX from 'xlsx';
 
 import { disconnect, knex } from '../../../db/knex-database-connection.js';
-import { normalizeAndRemoveAccents } from '../../../lib/domain/services/validation-treatments.js';
+import { normalizeAndRemoveAccents } from '../../../src/evaluation/domain/services/validation-treatments.js';
 import { learningContentCache as cache } from '../../../src/shared/infrastructure/caches/learning-content-cache.js';
 import * as tubeRepository from '../../../src/shared/infrastructure/repositories/tube-repository.js';
 import { logger } from '../../../src/shared/infrastructure/utils/logger.js';
