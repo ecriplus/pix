@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { getElements, getElementsListAsCsv } from '../../../../scripts/modulix/get-elements-csv.js';
 import { expect } from '../../../test-helper.js';
 import moduleContent from './test-module.json' with { type: 'json' };
@@ -36,6 +38,58 @@ describe('Acceptance | Script | Get Elements as CSV', function () {
       expect(elementsListAsJs.every((element) => element.grainPosition !== undefined)).to.be.true;
       expect(elementsListAsJs.every((element) => element.grainId !== undefined)).to.be.true;
       expect(elementsListAsJs.every((element) => element.grainTitle !== undefined)).to.be.true;
+    });
+
+    it('should warn when an element has an unknown type', function () {
+      // Given
+      const logStub = sinon.stub(console, 'warn');
+      const elementWithUnknownType = {
+        type: 'element',
+        element: {
+          id: '048e5319-5e81-44cc-ad71-c6c0d3be666g',
+          type: 'notatype',
+        },
+      };
+      const moduleWithUnknownType = {
+        id: '6282925d-4775-4bca-b513-4c3009ec5886',
+        slug: 'didacticiel-modulix',
+        title: 'Didacticiel Modulix',
+        isBeta: true,
+        details: {
+          image: 'https://images.pix.fr/modulix/placeholder-details.svg',
+          description: '<p>Découvrez avec ce didacticiel comment fonctionne Modulix !</p>',
+          duration: 5,
+          level: 'Débutant',
+          tabletSupport: 'inconvenient',
+          objectives: ['Naviguer dans Modulix', 'Découvrir les leçons et les activités'],
+        },
+        transitionTexts: [],
+        grains: [
+          {
+            id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
+            type: 'discovery',
+            title: 'Voici une leçon',
+            components: [
+              {
+                type: 'element',
+                element: {
+                  id: '88fd4558-a3d5-41e9-a7f0-896076529e90',
+                  type: 'separatnor',
+                },
+              },
+              elementWithUnknownType,
+            ],
+          },
+        ],
+      };
+
+      // When
+      getElements([moduleWithUnknownType]);
+
+      // Then
+      expect(logStub).to.be.have.been.calledWithExactly(
+        `Ignored element 048e5319-5e81-44cc-ad71-c6c0d3be666g with unknown type "notatype".`,
+      );
     });
   });
 
