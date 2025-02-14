@@ -1,10 +1,10 @@
 import jsYaml from 'js-yaml';
 
-import { validateAnswer } from '../../../../../lib/domain/services/string-comparison-service.js';
 import { applyPreTreatments, applyTreatments } from '../../../../../lib/domain/services/validation-treatments.js';
 import { YamlParsingError } from '../../../../shared/domain/errors.js';
 import { AnswerStatus } from '../../../../shared/domain/models/AnswerStatus.js';
 import { getEnabledTreatments, useLevenshteinRatio } from '../services-utils.js';
+import { validateAnswer } from '../string-comparison-service.js';
 
 function applyTreatmentsToSolutions(solutions, enabledTreatments) {
   return Object.fromEntries(
