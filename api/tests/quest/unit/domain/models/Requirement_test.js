@@ -1,14 +1,12 @@
-import { COMPARISON as CRITERION_PROPERTY_COMPARISON } from '../../../../../src/quest/domain/models/CriterionProperty.js';
-import { TYPES } from '../../../../../src/quest/domain/models/Eligibility.js';
+import { COMPARISONS as CRITERION_PROPERTY_COMPARISONS } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
-import { COMPARISON } from '../../../../../src/quest/domain/models/Quest.js';
 import {
   buildRequirement,
-  COMPOSE_TYPE,
+  COMPARISONS,
   ComposedRequirement,
   ObjectRequirement,
-  SKILL_PROFILE_TYPE,
   SkillProfileRequirement,
+  TYPES,
 } from '../../../../../src/quest/domain/models/Requirement.js';
 import { Success } from '../../../../../src/quest/domain/models/Success.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
@@ -20,8 +18,8 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
       it('should build a ComposedRequirement', function () {
         // given
         const buildData = {
-          requirement_type: COMPOSE_TYPE,
-          comparison: COMPARISON.ALL,
+          requirement_type: TYPES.COMPOSE,
+          comparison: COMPARISONS.ALL,
           data: [],
         };
 
@@ -37,8 +35,8 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
       it('should build an ObjectRequirement', function () {
         // given
         const buildData = {
-          requirement_type: TYPES.ORGANIZATION,
-          comparison: COMPARISON.ALL,
+          requirement_type: TYPES.OBJECT.ORGANIZATION,
+          comparison: COMPARISONS.ALL,
           data: {},
         };
 
@@ -54,8 +52,8 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
       it('should build an ObjectRequirement', function () {
         // given
         const buildData = {
-          requirement_type: TYPES.ORGANIZATION_LEARNER,
-          comparison: COMPARISON.ALL,
+          requirement_type: TYPES.OBJECT.ORGANIZATION_LEARNER,
+          comparison: COMPARISONS.ALL,
           data: {},
         };
 
@@ -71,8 +69,8 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
       it('should build an ObjectRequirement', function () {
         // given
         const buildData = {
-          requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISON.ALL,
+          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: COMPARISONS.ALL,
           data: {},
         };
 
@@ -88,7 +86,7 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
       it('should build an SkillProfileRequirement', function () {
         // given
         const buildData = {
-          requirement_type: SKILL_PROFILE_TYPE,
+          requirement_type: TYPES.SKILL_PROFILE,
           comparison: 'irrelevant',
           data: {},
         };
@@ -106,7 +104,7 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
         // given
         const buildData = {
           requirement_type: 'yolo',
-          comparison: COMPARISON.ALL,
+          comparison: COMPARISONS.ALL,
           data: {},
         };
 
@@ -121,27 +119,27 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
       it('should build the same instance whether we are passing through raw requirements or instanciated requirements', function () {
         // given
         const requirementA = new ComposedRequirement({
-          comparison: COMPARISON.ALL,
+          comparison: COMPARISONS.ALL,
           data: [
             {
-              requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+              requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
               data: {
                 targetProfileId: {
                   data: 1,
-                  comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                  comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                 },
               },
-              comparison: COMPARISON.ONE_OF,
+              comparison: COMPARISONS.ONE_OF,
             },
             {
-              requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+              requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
               data: {
                 targetProfileId: {
                   data: 2,
-                  comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                  comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                 },
               },
-              comparison: COMPARISON.ALL,
+              comparison: COMPARISONS.ALL,
             },
           ],
         });
@@ -160,27 +158,27 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
       describe('when comparison is ALL', function () {
         it('should return true if all requirements are met', function () {
           const requirement = new ComposedRequirement({
-            comparison: COMPARISON.ALL,
+            comparison: COMPARISONS.ALL,
             data: [
               {
-                requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                 data: {
                   targetProfileId: {
                     data: 1,
-                    comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                    comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                   },
                 },
-                comparison: COMPARISON.ALL,
+                comparison: COMPARISONS.ALL,
               },
               {
-                requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                 data: {
                   targetProfileId: {
                     data: 2,
-                    comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                    comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                   },
                 },
-                comparison: COMPARISON.ALL,
+                comparison: COMPARISONS.ALL,
               },
             ],
           });
@@ -193,27 +191,27 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
 
         it('should return false if all requirements are not met', function () {
           const requirement = new ComposedRequirement({
-            comparison: COMPARISON.ALL,
+            comparison: COMPARISONS.ALL,
             data: [
               {
-                requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                 data: {
                   targetProfileId: {
                     data: 1,
-                    comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                    comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                   },
                 },
-                comparison: COMPARISON.ALL,
+                comparison: COMPARISONS.ALL,
               },
               {
-                requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                 data: {
                   targetProfileId: {
                     data: 2,
-                    comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                    comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                   },
                 },
-                comparison: COMPARISON.ALL,
+                comparison: COMPARISONS.ALL,
               },
             ],
           });
@@ -228,27 +226,27 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
       describe('when comparison is ONE_OF', function () {
         it('should return true if one of the requirements is met', function () {
           const requirement = new ComposedRequirement({
-            comparison: COMPARISON.ONE_OF,
+            comparison: COMPARISONS.ONE_OF,
             data: [
               {
-                requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                 data: {
                   targetProfileId: {
                     data: 1,
-                    comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                    comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                   },
                 },
-                comparison: COMPARISON.ALL,
+                comparison: COMPARISONS.ALL,
               },
               {
-                requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                 data: {
                   targetProfileId: {
                     data: 2,
-                    comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                    comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                   },
                 },
-                comparison: COMPARISON.ALL,
+                comparison: COMPARISONS.ALL,
               },
             ],
           });
@@ -261,27 +259,27 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
 
         it('should return false if none of the requirements are met', function () {
           const requirement = new ComposedRequirement({
-            comparison: COMPARISON.ONE_OF,
+            comparison: COMPARISONS.ONE_OF,
             data: [
               {
-                requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                 data: {
                   targetProfileId: {
                     data: 1,
-                    comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                    comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                   },
                 },
-                comparison: COMPARISON.ALL,
+                comparison: COMPARISONS.ALL,
               },
               {
-                requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                 data: {
                   targetProfileId: {
                     data: 2,
-                    comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                    comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                   },
                 },
-                comparison: COMPARISON.ALL,
+                comparison: COMPARISONS.ALL,
               },
             ],
           });
@@ -300,43 +298,43 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
         const rootRequirement = new ComposedRequirement({
           data: [
             {
-              requirement_type: TYPES.ORGANIZATION,
+              requirement_type: TYPES.OBJECT.ORGANIZATION,
               data: {
                 keyA: {
                   data: 'valueA',
-                  comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                  comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                 },
               },
-              comparison: COMPARISON.ALL,
+              comparison: COMPARISONS.ALL,
             },
             {
-              requirement_type: COMPOSE_TYPE,
+              requirement_type: TYPES.COMPOSE,
               data: [
                 {
-                  requirement_type: TYPES.ORGANIZATION_LEARNER,
+                  requirement_type: TYPES.OBJECT.ORGANIZATION_LEARNER,
                   data: {
                     keyB: {
                       data: 'valueB',
-                      comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                      comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                     },
                   },
-                  comparison: COMPARISON.ONE_OF,
+                  comparison: COMPARISONS.ONE_OF,
                 },
                 {
-                  requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                  requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                   data: {
                     keyC: {
                       data: 'valueC',
-                      comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                      comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                     },
                   },
-                  comparison: COMPARISON.ONE_OF,
+                  comparison: COMPARISONS.ONE_OF,
                 },
               ],
-              comparison: COMPARISON.ALL,
+              comparison: COMPARISONS.ALL,
             },
           ],
-          comparison: COMPARISON.ALL,
+          comparison: COMPARISONS.ALL,
         });
 
         // when
@@ -344,46 +342,46 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
 
         // then
         expect(DTO).to.deep.equal({
-          requirement_type: COMPOSE_TYPE,
+          requirement_type: TYPES.COMPOSE,
           data: [
             {
-              requirement_type: TYPES.ORGANIZATION,
+              requirement_type: TYPES.OBJECT.ORGANIZATION,
               data: {
                 keyA: {
                   data: 'valueA',
-                  comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                  comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                 },
               },
-              comparison: COMPARISON.ALL,
+              comparison: COMPARISONS.ALL,
             },
             {
-              requirement_type: COMPOSE_TYPE,
+              requirement_type: TYPES.COMPOSE,
               data: [
                 {
-                  requirement_type: TYPES.ORGANIZATION_LEARNER,
+                  requirement_type: TYPES.OBJECT.ORGANIZATION_LEARNER,
                   data: {
                     keyB: {
                       data: 'valueB',
-                      comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                      comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                     },
                   },
-                  comparison: COMPARISON.ONE_OF,
+                  comparison: COMPARISONS.ONE_OF,
                 },
                 {
-                  requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                  requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                   data: {
                     keyC: {
                       data: 'valueC',
-                      comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                      comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
                     },
                   },
-                  comparison: COMPARISON.ONE_OF,
+                  comparison: COMPARISONS.ONE_OF,
                 },
               ],
-              comparison: COMPARISON.ALL,
+              comparison: COMPARISONS.ALL,
             },
           ],
-          comparison: COMPARISON.ALL,
+          comparison: COMPARISONS.ALL,
         });
       });
     });
@@ -394,12 +392,12 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
       it('should build the same instance whether we are passing through raw criterion or instanciated criterion', function () {
         // given
         const requirementA = new ObjectRequirement({
-          requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
-          comparison: COMPARISON.ALL,
+          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: COMPARISONS.ALL,
           data: {
             targetProfileId: {
               data: 1,
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
             },
           },
         });
@@ -418,12 +416,12 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
       describe('when dataInput attribute is not an array', function () {
         it('it should return true if criterion is valid', function () {
           const requirement = new ObjectRequirement({
-            requirement_type: TYPES.ORGANIZATION,
-            comparison: COMPARISON.ALL,
+            requirement_type: TYPES.OBJECT.ORGANIZATION,
+            comparison: COMPARISONS.ALL,
             data: {
               type: {
                 data: 'SCO',
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
               },
             },
           });
@@ -438,12 +436,12 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
 
         it('it should return false if criterion is not valid', function () {
           const requirement = new ObjectRequirement({
-            requirement_type: TYPES.ORGANIZATION,
-            comparison: COMPARISON.ALL,
+            requirement_type: TYPES.OBJECT.ORGANIZATION,
+            comparison: COMPARISONS.ALL,
             data: {
               type: {
                 data: 'SCO',
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
               },
             },
           });
@@ -460,12 +458,12 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
       describe('when dataInput attribute is an array', function () {
         it('it should return true if one of the dataInput item validate criterion', function () {
           const requirement = new ObjectRequirement({
-            requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
-            comparison: COMPARISON.ALL,
+            requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: COMPARISONS.ALL,
             data: {
               targetProfileId: {
                 data: 1,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
               },
             },
           });
@@ -478,12 +476,12 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
 
         it('it should return false if none of the dataInput item validate criterion', function () {
           const requirement = new ObjectRequirement({
-            requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
-            comparison: COMPARISON.ALL,
+            requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: COMPARISONS.ALL,
             data: {
               targetProfileId: {
                 data: 3,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
               },
             },
           });
@@ -500,14 +498,14 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
       it('should transform into a DTO', function () {
         // given
         const requirement = new ObjectRequirement({
-          requirement_type: TYPES.ORGANIZATION,
+          requirement_type: TYPES.OBJECT.ORGANIZATION,
           data: {
             keyA: {
               data: 'valueA',
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
             },
           },
-          comparison: COMPARISON.ALL,
+          comparison: COMPARISONS.ALL,
         });
 
         // when
@@ -515,14 +513,14 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
 
         // then
         expect(DTO).to.deep.equal({
-          requirement_type: TYPES.ORGANIZATION,
+          requirement_type: TYPES.OBJECT.ORGANIZATION,
           data: {
             keyA: {
               data: 'valueA',
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
             },
           },
-          comparison: COMPARISON.ALL,
+          comparison: COMPARISONS.ALL,
         });
       });
     });
@@ -609,7 +607,7 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
 
         // then
         expect(DTO).to.deep.equal({
-          requirement_type: SKILL_PROFILE_TYPE,
+          requirement_type: TYPES.SKILL_PROFILE,
           data: {
             skillIds: ['id1', 'id2'],
             threshold: 70,

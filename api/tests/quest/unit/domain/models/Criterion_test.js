@@ -1,5 +1,5 @@
 import { Criterion } from '../../../../../src/quest/domain/models/Criterion.js';
-import { COMPARISON as CRITERION_PROPERTY_COMPARISON } from '../../../../../src/quest/domain/models/CriterionProperty.js';
+import { COMPARISONS as CRITERION_PROPERTY_COMPARISONS } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | Criterion ', function () {
@@ -10,11 +10,11 @@ describe('Quest | Unit | Domain | Models | Criterion ', function () {
           data: {
             something: {
               data: true,
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
             },
             otherthing: {
               data: true,
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
             },
           },
         });
@@ -32,11 +32,11 @@ describe('Quest | Unit | Domain | Models | Criterion ', function () {
           data: {
             something: {
               data: true,
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
             },
             otherthing: {
               data: true,
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
             },
           },
         });
@@ -56,11 +56,11 @@ describe('Quest | Unit | Domain | Models | Criterion ', function () {
           data: {
             something: {
               data: true,
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
             },
             otherthing: {
               data: true,
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
             },
           },
         });
@@ -78,11 +78,11 @@ describe('Quest | Unit | Domain | Models | Criterion ', function () {
           data: {
             something: {
               data: true,
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
             },
             otherthing: {
               data: true,
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
             },
           },
         });
@@ -104,11 +104,11 @@ describe('Quest | Unit | Domain | Models | Criterion ', function () {
         data: {
           some: {
             data: 'awesome',
-            comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+            comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
           },
           cool: {
             data: 'stuff',
-            comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+            comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
           },
         },
       });
@@ -120,11 +120,11 @@ describe('Quest | Unit | Domain | Models | Criterion ', function () {
       expect(DTO).to.deep.equal({
         some: {
           data: 'awesome',
-          comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+          comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
         },
         cool: {
           data: 'stuff',
-          comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+          comparison: CRITERION_PROPERTY_COMPARISONS.EQUAL,
         },
       });
     });

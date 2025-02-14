@@ -1,4 +1,4 @@
-import { COMPARISON, CriterionProperty } from '../../../../../src/quest/domain/models/CriterionProperty.js';
+import { COMPARISONS, CriterionProperty } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | CriterionProperty', function () {
@@ -8,7 +8,7 @@ describe('Quest | Unit | Domain | Models | CriterionProperty', function () {
         const criterionProperty = new CriterionProperty({
           key: 'something',
           data: true,
-          comparison: COMPARISON.EQUAL,
+          comparison: COMPARISONS.EQUAL,
         });
 
         const result = criterionProperty.check({ something: true });
@@ -20,7 +20,7 @@ describe('Quest | Unit | Domain | Models | CriterionProperty', function () {
         const criterionProperty = new CriterionProperty({
           key: 'something',
           data: true,
-          comparison: COMPARISON.EQUAL,
+          comparison: COMPARISONS.EQUAL,
         });
 
         const result = criterionProperty.check({ something: false });
@@ -35,7 +35,7 @@ describe('Quest | Unit | Domain | Models | CriterionProperty', function () {
           const criterionProperty = new CriterionProperty({
             key: 'something',
             data: [1, 2],
-            comparison: COMPARISON.ONE_OF,
+            comparison: COMPARISONS.ONE_OF,
           });
 
           const result = criterionProperty.check({ something: 1 });
@@ -47,7 +47,7 @@ describe('Quest | Unit | Domain | Models | CriterionProperty', function () {
           const criterionProperty = new CriterionProperty({
             key: 'something',
             data: [1, 2],
-            comparison: COMPARISON.ONE_OF,
+            comparison: COMPARISONS.ONE_OF,
           });
 
           const result = criterionProperty.check({ something: 3 });
@@ -62,7 +62,7 @@ describe('Quest | Unit | Domain | Models | CriterionProperty', function () {
             const criterionProperty = new CriterionProperty({
               key: 'something',
               data: [1, 2],
-              comparison: COMPARISON.ALL,
+              comparison: COMPARISONS.ALL,
             });
 
             const result = criterionProperty.check({ something: [1, 2, 3] });
@@ -74,7 +74,7 @@ describe('Quest | Unit | Domain | Models | CriterionProperty', function () {
             const criterionProperty = new CriterionProperty({
               key: 'something',
               data: [1, 2],
-              comparison: COMPARISON.ALL,
+              comparison: COMPARISONS.ALL,
             });
 
             const result = criterionProperty.check({ something: [1, 3] });
@@ -88,7 +88,7 @@ describe('Quest | Unit | Domain | Models | CriterionProperty', function () {
             const criterionProperty = new CriterionProperty({
               key: 'something',
               data: [1, 2],
-              comparison: COMPARISON.ONE_OF,
+              comparison: COMPARISONS.ONE_OF,
             });
 
             const result = criterionProperty.check({ something: [1, 3] });
@@ -100,7 +100,7 @@ describe('Quest | Unit | Domain | Models | CriterionProperty', function () {
             const criterionProperty = new CriterionProperty({
               key: 'something',
               data: [1, 2],
-              comparison: COMPARISON.ONE_OF,
+              comparison: COMPARISONS.ONE_OF,
             });
 
             const result = criterionProperty.check({ something: [3] });

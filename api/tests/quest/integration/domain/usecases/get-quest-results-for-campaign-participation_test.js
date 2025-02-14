@@ -1,6 +1,8 @@
-import { COMPARISON as CRITERION_PROPERTY_COMPARISON } from '../../../../../src/quest/domain/models/CriterionProperty.js';
-import { TYPES } from '../../../../../src/quest/domain/models/Eligibility.js';
-import { COMPARISON } from '../../../../../src/quest/domain/models/Quest.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../src/quest/domain/models/Quest.js';
 import { QuestResult } from '../../../../../src/quest/domain/models/QuestResult.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
@@ -46,34 +48,34 @@ describe('Quest | Integration | Domain | Usecases | getQuestResultsForCampaignPa
         rewardId,
         eligibilityRequirements: [
           {
-            requirement_type: TYPES.ORGANIZATION,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
             data: {
               type: {
                 data: 'SCO',
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
           {
-            requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
             data: {
               targetProfileId: {
                 data: firstTargetProfile.id,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
           {
-            requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
             data: {
               targetProfileId: {
                 data: secondTargetProfile.id,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
         ],
         successRequirements: [],
@@ -144,44 +146,44 @@ describe('Quest | Integration | Domain | Usecases | getQuestResultsForCampaignPa
         rewardId,
         eligibilityRequirements: [
           {
-            requirement_type: TYPES.ORGANIZATION,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
             data: {
               type: {
                 data: 'SCO',
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
           {
-            requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
             data: {
               targetProfileId: {
                 data: firstTargetProfile.id,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
           {
-            requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
             data: {
               targetProfileId: {
                 data: secondTargetProfile.id,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
           {
-            requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
             data: {
               targetProfileId: {
                 data: thirdTargetProfile.id,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
         ],
         successRequirements: [],
@@ -210,14 +212,14 @@ describe('Quest | Integration | Domain | Usecases | getQuestResultsForCampaignPa
       rewardId,
       eligibilityRequirements: [
         {
-          requirement_type: TYPES.ORGANIZATION,
+          requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
           data: {
             type: {
               data: 'SCO',
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
           },
-          comparison: COMPARISON.ALL,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
         },
       ],
       successRequirements: [],
@@ -255,24 +257,24 @@ describe('Quest | Integration | Domain | Usecases | getQuestResultsForCampaignPa
       rewardId,
       eligibilityRequirements: [
         {
-          requirement_type: TYPES.ORGANIZATION,
+          requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
           data: {
             type: {
               data: 'SCO',
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
           },
-          comparison: COMPARISON.ALL,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
         },
         {
-          requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
           data: {
             targetProfileId: {
               data: targetProfileId,
-              comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+              comparison: CRITERION_COMPARISONS.EQUAL,
             },
           },
-          comparison: COMPARISON.ALL,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
         },
       ],
       successRequirements: [],

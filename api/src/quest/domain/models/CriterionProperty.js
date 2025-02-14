@@ -1,6 +1,6 @@
 import { ComparisonNotImplementedError } from '../errors.js';
 
-export const COMPARISON = {
+export const COMPARISONS = {
   EQUAL: 'equal',
   ONE_OF: 'some',
   ALL: 'every',
@@ -34,20 +34,20 @@ export class CriterionProperty {
     const dataAttr = item[this.#key];
     if (Array.isArray(criterionAttr)) {
       if (Array.isArray(dataAttr)) {
-        if (this.#comparison === COMPARISON.ALL) {
+        if (this.#comparison === COMPARISONS.ALL) {
           return criterionAttr.every((valueToTest) => dataAttr.includes(valueToTest));
-        } else if (this.#comparison === COMPARISON.ONE_OF) {
+        } else if (this.#comparison === COMPARISONS.ONE_OF) {
           return criterionAttr.some((valueToTest) => dataAttr.includes(valueToTest));
         }
         throw new ComparisonNotImplementedError(this.#comparison);
       } else {
-        if (this.#comparison === COMPARISON.ONE_OF) {
+        if (this.#comparison === COMPARISONS.ONE_OF) {
           return criterionAttr.some((valueToTest) => valueToTest === dataAttr);
         }
         throw new ComparisonNotImplementedError(this.#comparison);
       }
     } else {
-      if (this.#comparison === COMPARISON.EQUAL) {
+      if (this.#comparison === COMPARISONS.EQUAL) {
         return dataAttr === criterionAttr;
       }
       throw new ComparisonNotImplementedError(this.#comparison);

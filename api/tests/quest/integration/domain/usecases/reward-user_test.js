@@ -1,8 +1,9 @@
 import { PROFILE_REWARDS_TABLE_NAME } from '../../../../../db/migrations/20240820101213_add-profile-rewards-table.js';
-import { COMPARISON as CRITERION_PROPERTY_COMPARISON } from '../../../../../src/quest/domain/models/CriterionProperty.js';
-import { TYPES } from '../../../../../src/quest/domain/models/Eligibility.js';
-import { COMPARISON } from '../../../../../src/quest/domain/models/Quest.js';
-import { SKILL_PROFILE_TYPE } from '../../../../../src/quest/domain/models/Requirement.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../src/quest/domain/models/Quest.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
@@ -57,19 +58,19 @@ const setupContext = async (
   const quest = databaseBuilder.factory.buildQuest({
     eligibilityRequirements: [
       {
-        requirement_type: TYPES.ORGANIZATION,
-        comparison: COMPARISON.ALL,
+        requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
+        comparison: REQUIREMENT_COMPARISONS.ALL,
         data: {
           type: {
             data: questOrganization,
-            comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+            comparison: CRITERION_COMPARISONS.EQUAL,
           },
         },
       },
     ],
     successRequirements: [
       {
-        requirement_type: SKILL_PROFILE_TYPE,
+        requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
         data: {
           skillIds: ['skillId1', 'skillId2', 'skillId3'],
           threshold: 50,
@@ -158,19 +159,19 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
         rewardId,
         eligibilityRequirements: [
           {
-            requirement_type: TYPES.ORGANIZATION,
-            comparison: COMPARISON.ALL,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
             data: {
               type: {
                 data: questOrganization,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
           },
         ],
         successRequirements: [
           {
-            requirement_type: SKILL_PROFILE_TYPE,
+            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
             data: {
               skillIds: ['skillId1', 'skillId2', 'skillId3'],
               threshold: 50,
@@ -182,19 +183,19 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
         rewardId,
         eligibilityRequirements: [
           {
-            requirement_type: TYPES.ORGANIZATION,
-            comparison: COMPARISON.ALL,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
             data: {
               type: {
                 data: questOrganization,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
           },
         ],
         successRequirements: [
           {
-            requirement_type: SKILL_PROFILE_TYPE,
+            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
             data: {
               skillIds: ['skillId1', 'skillId2', 'skillId3'],
               threshold: 50,

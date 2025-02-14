@@ -1,10 +1,14 @@
-import { TYPES as ELIGIBILITY_TYPES } from './Eligibility.js';
-import { COMPOSE_TYPE, ComposedRequirement } from './Requirement.js';
+import { COMPARISONS as _CRITERION_COMPARISONS } from './CriterionProperty.js';
+import {
+  COMPARISONS as _REQUIREMENT_COMPARISONS,
+  ComposedRequirement,
+  TYPES as _REQUIREMENT_TYPES,
+} from './Requirement.js';
 
-export const COMPARISON = {
-  ALL: 'all',
-  ONE_OF: 'one-of',
-};
+// warning, manque d'homogénéité sur les fonctions de comparaison, fixme !
+export const REQUIREMENT_COMPARISONS = _REQUIREMENT_COMPARISONS;
+export const CRITERION_COMPARISONS = _CRITERION_COMPARISONS;
+export const REQUIREMENT_TYPES = _REQUIREMENT_TYPES;
 
 class Quest {
   #eligibilityRequirements;
@@ -18,12 +22,12 @@ class Quest {
     this.rewardId = rewardId;
     this.#eligibilityRequirements = new ComposedRequirement({
       data: eligibilityRequirements,
-      comparison: COMPARISON.ALL,
+      comparison: REQUIREMENT_COMPARISONS.ALL,
     });
 
     this.#successRequirements = new ComposedRequirement({
       data: successRequirements,
-      comparison: COMPARISON.ALL,
+      comparison: REQUIREMENT_COMPARISONS.ALL,
     });
   }
 
@@ -46,11 +50,11 @@ class Quest {
 
     const campaignParticipationRequirements = this.#flattenRequirementsByType(
       this.#eligibilityRequirements.data,
-      ELIGIBILITY_TYPES.CAMPAIGN_PARTICIPATIONS,
+      REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
     );
     const otherRequirements = this.#omitRequirementsByType(
       this.#eligibilityRequirements.data,
-      ELIGIBILITY_TYPES.CAMPAIGN_PARTICIPATIONS,
+      REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
     );
 
     const eligibilityRequirements = otherRequirements;
@@ -58,13 +62,13 @@ class Quest {
       eligibilityRequirements.push(
         new ComposedRequirement({
           data: campaignParticipationRequirements,
-          comparison: COMPARISON.ONE_OF,
+          comparison: REQUIREMENT_COMPARISONS.ONE_OF,
         }),
       );
     }
     const scopedEligibilityRequirements = new ComposedRequirement({
       data: eligibilityRequirements,
-      comparison: COMPARISON.ALL,
+      comparison: REQUIREMENT_COMPARISONS.ALL,
     });
     return scopedEligibilityRequirements.isFulfilled(scopedEligibility);
   }
@@ -98,7 +102,7 @@ class Quest {
   #omitRequirementsByType(requirements, type) {
     const result = [];
     for (const requirement of requirements) {
-      if (requirement.requirement_type === COMPOSE_TYPE) {
+      if (requirement.requirement_type === REQUIREMENT_TYPES.COMPOSE) {
         const subRequirements = this.#omitRequirementsByType(requirement.data, type);
         if (subRequirements.length > 0) {
           result.push(
@@ -118,10 +122,10 @@ class Quest {
   #flattenRequirementsByType(requirements, type) {
     let result = [];
     const filteredRequirements = requirements.filter((requirement) =>
-      [type, COMPOSE_TYPE].includes(requirement.requirement_type),
+      [type, REQUIREMENT_TYPES.COMPOSE].includes(requirement.requirement_type),
     );
     for (const requirement of filteredRequirements) {
-      if (requirement.requirement_type === COMPOSE_TYPE) {
+      if (requirement.requirement_type === REQUIREMENT_TYPES.COMPOSE) {
         result = result.concat(this.#flattenRequirementsByType(requirement.data, type));
       } else {
         result.push(requirement);

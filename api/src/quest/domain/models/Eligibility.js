@@ -1,9 +1,3 @@
-export const TYPES = {
-  ORGANIZATION_LEARNER: 'organizationLearner',
-  ORGANIZATION: 'organization',
-  CAMPAIGN_PARTICIPATIONS: 'campaignParticipations',
-};
-
 export class Eligibility {
   constructor({ organizationLearner, organization, campaignParticipations = [] }) {
     this.organizationLearner = {

@@ -1,12 +1,22 @@
 import { Criterion } from './Criterion.js';
-import { TYPES } from './Eligibility.js';
-import { COMPARISON } from './Quest.js';
 
-export const COMPOSE_TYPE = 'compose';
-export const SKILL_PROFILE_TYPE = 'skillProfile';
+export const COMPARISONS = {
+  ALL: 'all',
+  ONE_OF: 'one-of',
+};
+
+export const TYPES = {
+  COMPOSE: 'compose',
+  SKILL_PROFILE: 'skillProfile',
+  OBJECT: {
+    ORGANIZATION_LEARNER: 'organizationLearner',
+    ORGANIZATION: 'organization',
+    CAMPAIGN_PARTICIPATIONS: 'campaignParticipations',
+  },
+};
 
 function getComparisonFunction(comparison) {
-  return comparison === COMPARISON.ONE_OF ? 'some' : 'every';
+  return comparison === COMPARISONS.ONE_OF ? 'some' : 'every';
 }
 
 class BaseRequirement {
@@ -41,7 +51,7 @@ export class ComposedRequirement extends BaseRequirement {
   #subRequirements = null;
 
   constructor({ data, comparison }) {
-    super({ requirement_type: COMPOSE_TYPE, comparison });
+    super({ requirement_type: TYPES.COMPOSE, comparison });
     this.#subRequirements = data.map((subRequirement) => {
       if (subRequirement instanceof BaseRequirement) {
         return subRequirement;
@@ -119,7 +129,7 @@ export class SkillProfileRequirement extends BaseRequirement {
   #threshold;
 
   constructor({ data }) {
-    super({ requirement_type: SKILL_PROFILE_TYPE, comparison: null });
+    super({ requirement_type: TYPES.SKILL_PROFILE, comparison: null });
     this.#skillIds = data.skillIds;
     this.#threshold = data.threshold;
   }
@@ -165,12 +175,12 @@ export class SkillProfileRequirement extends BaseRequirement {
  * @returns {BaseRequirement}
  */
 export function buildRequirement({ requirement_type, data, comparison }) {
-  const objectTypes = Object.values(TYPES);
-  if (requirement_type === COMPOSE_TYPE) {
+  const objectTypes = Object.values(TYPES.OBJECT);
+  if (requirement_type === TYPES.COMPOSE) {
     return new ComposedRequirement({ data, comparison });
   } else if (objectTypes.includes(requirement_type)) {
     return new ObjectRequirement({ requirement_type, data, comparison });
-  } else if (requirement_type === SKILL_PROFILE_TYPE) {
+  } else if (requirement_type === TYPES.SKILL_PROFILE) {
     return new SkillProfileRequirement({ data });
   }
   throw new Error(`Unknown requirement_type "${requirement_type}"`);

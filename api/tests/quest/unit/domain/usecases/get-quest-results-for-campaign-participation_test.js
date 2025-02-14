@@ -1,6 +1,10 @@
-import { COMPARISON as CRITERION_PROPERTY_COMPARISON } from '../../../../../src/quest/domain/models/CriterionProperty.js';
-import { Eligibility, TYPES } from '../../../../../src/quest/domain/models/Eligibility.js';
-import { COMPARISON, Quest } from '../../../../../src/quest/domain/models/Quest.js';
+import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
+import {
+  CRITERION_COMPARISONS,
+  Quest,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../src/quest/domain/models/Quest.js';
 import { getQuestResultsForCampaignParticipation } from '../../../../../src/quest/domain/usecases/get-quest-results-for-campaign-participation.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
@@ -74,14 +78,14 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
         id: 10,
         eligibilityRequirements: [
           {
-            requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
             data: {
               targetProfileId: {
                 data: wrongTargetProfileId,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
         ],
         successRequirements: [],

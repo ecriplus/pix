@@ -1,8 +1,10 @@
-import { COMPARISON as CRITERION_PROPERTY_COMPARISON } from '../../../../../src/quest/domain/models/CriterionProperty.js';
-import { Eligibility, TYPES } from '../../../../../src/quest/domain/models/Eligibility.js';
-import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
-import { COMPARISON } from '../../../../../src/quest/domain/models/Quest.js';
-import { COMPOSE_TYPE, SKILL_PROFILE_TYPE } from '../../../../../src/quest/domain/models/Requirement.js';
+import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
+import {
+  CRITERION_COMPARISONS,
+  Quest,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../src/quest/domain/models/Quest.js';
 import { Success } from '../../../../../src/quest/domain/models/Success.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
 import { expect } from '../../../../test-helper.js';
@@ -13,14 +15,14 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
       const quest = new Quest({
         eligibilityRequirements: [
           {
-            requirement_type: TYPES.ORGANIZATION,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
             data: {
               type: {
                 data: 'SCO',
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
         ],
         successRequirements: [],
@@ -35,14 +37,14 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
       const quest = new Quest({
         eligibilityRequirements: [
           {
-            requirement_type: TYPES.ORGANIZATION,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
             data: {
               type: {
                 data: 'SCO',
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
         ],
         successRequirements: [],
@@ -61,14 +63,14 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         eligibilityRequirements: [],
         successRequirements: [
           {
-            requirement_type: SKILL_PROFILE_TYPE,
+            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
             data: {
               skillIds: ['skillA', 'skillB'],
               threshold: 100,
             },
           },
           {
-            requirement_type: SKILL_PROFILE_TYPE,
+            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
             data: {
               skillIds: ['skillC', 'skillD'],
               threshold: 50,
@@ -94,14 +96,14 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         eligibilityRequirements: [],
         successRequirements: [
           {
-            requirement_type: SKILL_PROFILE_TYPE,
+            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
             data: {
               skillIds: ['skillA', 'skillB'],
               threshold: 100,
             },
           },
           {
-            requirement_type: SKILL_PROFILE_TYPE,
+            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
             data: {
               skillIds: ['skillC', 'skillD'],
               threshold: 50,
@@ -127,14 +129,14 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         eligibilityRequirements: [],
         successRequirements: [
           {
-            requirement_type: SKILL_PROFILE_TYPE,
+            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
             data: {
               skillIds: ['skillA', 'skillB'],
               threshold: 100,
             },
           },
           {
-            requirement_type: SKILL_PROFILE_TYPE,
+            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
             data: {
               skillIds: ['skillC', 'skillD'],
               threshold: 50,
@@ -164,34 +166,34 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         // given
         const eligibilityRequirements = [
           {
-            requirement_type: TYPES.ORGANIZATION,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
             data: {
               type: {
                 data: 'SCO',
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
           {
-            requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
             data: {
               targetProfileId: {
                 data: 1,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
           {
-            requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
             data: {
               targetProfileId: {
                 data: 2,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
         ];
         const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
@@ -216,34 +218,34 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         // given
         const eligibilityRequirements = [
           {
-            requirement_type: TYPES.ORGANIZATION,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
             data: {
               type: {
                 data: 'SCO',
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
           {
-            requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
             data: {
               targetProfileId: {
                 data: 1,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
           {
-            requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
             data: {
               targetProfileId: {
                 data: 2,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
         ];
         const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
@@ -270,14 +272,14 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         // given
         const eligibilityRequirements = [
           {
-            requirement_type: TYPES.ORGANIZATION,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
             data: {
               type: {
                 data: 'PRO',
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
         ];
         const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
@@ -299,24 +301,24 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         // given
         const eligibilityRequirements = [
           {
-            requirement_type: TYPES.ORGANIZATION,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
             data: {
               type: {
                 data: 'SCO',
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
           {
-            requirement_type: TYPES.ORGANIZATION_LEARNER,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION_LEARNER,
             data: {
               id: {
                 data: 456,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
         ];
         const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
@@ -338,24 +340,24 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         // given
         const eligibilityRequirements = [
           {
-            requirement_type: TYPES.ORGANIZATION,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
             data: {
               type: {
                 data: 'SCO',
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
           {
-            requirement_type: TYPES.ORGANIZATION_LEARNER,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION_LEARNER,
             data: {
               type: {
                 id: 123,
-                comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                comparison: CRITERION_COMPARISONS.EQUAL,
               },
             },
-            comparison: COMPARISON.ALL,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
           },
         ];
         const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
@@ -386,51 +388,51 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         rewardId: 456,
         eligibilityRequirements: [
           {
-            requirement_type: COMPOSE_TYPE,
-            comparison: COMPARISON.ONE_OF,
+            requirement_type: REQUIREMENT_TYPES.COMPOSE,
+            comparison: REQUIREMENT_COMPARISONS.ONE_OF,
             data: [
               {
-                requirement_type: COMPOSE_TYPE,
-                comparison: COMPARISON.ALL,
+                requirement_type: REQUIREMENT_TYPES.COMPOSE,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: [
                   {
-                    requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                    requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                     data: {
                       targetProfileId: {
                         data: 1,
-                        comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                        comparison: CRITERION_COMPARISONS.EQUAL,
                       },
                     },
-                    comparison: COMPARISON.ONE_OF,
+                    comparison: REQUIREMENT_COMPARISONS.ONE_OF,
                   },
                   {
-                    requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                    requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                     data: {
                       targetProfileId: {
                         data: 2,
-                        comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                        comparison: CRITERION_COMPARISONS.EQUAL,
                       },
                     },
-                    comparison: COMPARISON.ALL,
+                    comparison: REQUIREMENT_COMPARISONS.ALL,
                   },
                 ],
               },
               {
-                requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                 data: {
                   targetProfileId: {
                     data: 3,
-                    comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
-                comparison: COMPARISON.ONE_OF,
+                comparison: REQUIREMENT_COMPARISONS.ONE_OF,
               },
             ],
           },
         ],
         successRequirements: [
           {
-            requirement_type: SKILL_PROFILE_TYPE,
+            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
             data: {
               skillIds: ['id1', 'id2'],
               threshold: 70,
@@ -451,51 +453,51 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         rewardId: 456,
         eligibilityRequirements: [
           {
-            requirement_type: COMPOSE_TYPE,
-            comparison: COMPARISON.ONE_OF,
+            requirement_type: REQUIREMENT_TYPES.COMPOSE,
+            comparison: REQUIREMENT_COMPARISONS.ONE_OF,
             data: [
               {
-                requirement_type: COMPOSE_TYPE,
-                comparison: COMPARISON.ALL,
+                requirement_type: REQUIREMENT_TYPES.COMPOSE,
+                comparison: REQUIREMENT_COMPARISONS.ALL,
                 data: [
                   {
-                    requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                    requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                     data: {
                       targetProfileId: {
                         data: 1,
-                        comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                        comparison: CRITERION_COMPARISONS.EQUAL,
                       },
                     },
-                    comparison: COMPARISON.ONE_OF,
+                    comparison: REQUIREMENT_COMPARISONS.ONE_OF,
                   },
                   {
-                    requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                    requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                     data: {
                       targetProfileId: {
                         data: 2,
-                        comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                        comparison: CRITERION_COMPARISONS.EQUAL,
                       },
                     },
-                    comparison: COMPARISON.ALL,
+                    comparison: REQUIREMENT_COMPARISONS.ALL,
                   },
                 ],
               },
               {
-                requirement_type: TYPES.CAMPAIGN_PARTICIPATIONS,
+                requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
                 data: {
                   targetProfileId: {
                     data: 3,
-                    comparison: CRITERION_PROPERTY_COMPARISON.EQUAL,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
                   },
                 },
-                comparison: COMPARISON.ONE_OF,
+                comparison: REQUIREMENT_COMPARISONS.ONE_OF,
               },
             ],
           },
         ],
         successRequirements: [
           {
-            requirement_type: SKILL_PROFILE_TYPE,
+            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
             data: {
               skillIds: ['id1', 'id2'],
               threshold: 70,
