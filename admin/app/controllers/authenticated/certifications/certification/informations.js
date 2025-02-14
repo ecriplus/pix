@@ -19,11 +19,6 @@ export default class CertificationInformationsController extends Controller {
   @service pixToast;
   @service intl;
 
-  @tracked displayConfirm = false;
-  @tracked modalTitle = null;
-  @tracked confirmMessage = '';
-  @tracked confirmErrorMessage = '';
-  @tracked confirmAction = this.onCancelCertificationConfirmation;
   @tracked isCandidateEditModalOpen = false;
   @tracked displayJuryLevelSelect = false;
 
@@ -87,11 +82,6 @@ export default class CertificationInformationsController extends Controller {
     await this.certification.reload();
   }
 
-  @action
-  onCancelConfirm() {
-    this.displayConfirm = false;
-  }
-
   saveAssessmentResult(commentByJury) {
     this.certification.commentByJury = commentByJury;
     return this.certification.save({ adapterOptions: { updateJuryComment: true } });
@@ -109,100 +99,6 @@ export default class CertificationInformationsController extends Controller {
   @action
   onUpdateLevel(code, value) {
     this._updatePropForCompetence(code, value, 'level', 'score');
-  }
-
-  @action
-  onCancelCertificationButtonClick() {
-    const confirmMessage =
-      'Êtes-vous sûr·e de vouloir annuler cette certification ? Cliquez sur confirmer pour poursuivre.';
-    this.confirmAction = this.onCancelCertificationConfirmation;
-    this.confirmMessage = confirmMessage;
-    this.displayConfirm = true;
-  }
-
-  @action
-  onUncancelCertificationButtonClick() {
-    const confirmMessage =
-      'Êtes-vous sûr·e de vouloir désannuler cette certification ? Cliquez sur confirmer pour poursuivre.';
-    this.confirmAction = this.onUncancelCertificationConfirmation;
-    this.confirmMessage = confirmMessage;
-    this.displayConfirm = true;
-  }
-
-  @action
-  onRejectCertificationButtonClick() {
-    const confirmMessage =
-      'Êtes-vous sûr·e de vouloir rejeter cette certification ? Cliquez sur confirmer pour poursuivre.';
-    this.modalTitle = 'Confirmer le rejet de la certification';
-    this.confirmAction = this.onRejectCertificationConfirmation;
-    this.confirmMessage = confirmMessage;
-    this.displayConfirm = true;
-  }
-
-  get shouldDisplayUnrejectCertificationButton() {
-    return this.certification.status === 'rejected' && this.certification.isRejectedForFraud;
-  }
-
-  get shouldDisplayRejectCertificationButton() {
-    return this.certification.status !== 'rejected';
-  }
-
-  @action
-  onUnrejectCertificationButtonClick() {
-    const confirmMessage =
-      'Êtes-vous sûr·e de vouloir annuler le rejet de cette certification ? Cliquez sur confirmer pour poursuivre.';
-    this.modalTitle = "Confirmer l'annulation du rejet de la certification";
-    this.confirmAction = this.onUnrejectCertificationConfirmation;
-    this.confirmMessage = confirmMessage;
-    this.displayConfirm = true;
-  }
-
-  @action
-  async onCancelCertificationConfirmation() {
-    try {
-      await this.certification.save({ adapterOptions: { isCertificationCancel: true } });
-      await this.certification.reload();
-    } catch {
-      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
-    }
-
-    this.displayConfirm = false;
-  }
-
-  @action
-  async onUncancelCertificationConfirmation() {
-    try {
-      await this.certification.save({ adapterOptions: { isCertificationUncancel: true } });
-      await this.certification.reload();
-    } catch {
-      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
-    }
-
-    this.displayConfirm = false;
-  }
-
-  @action
-  async onRejectCertificationConfirmation() {
-    try {
-      await this.certification.save({ adapterOptions: { isCertificationReject: true } });
-      await this.certification.reload();
-    } catch {
-      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
-    }
-
-    this.displayConfirm = false;
-  }
-
-  @action
-  async onUnrejectCertificationConfirmation() {
-    try {
-      await this.certification.save({ adapterOptions: { isCertificationUnreject: true } });
-      await this.certification.reload();
-    } catch {
-      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
-    }
-
-    this.displayConfirm = false;
   }
 
   @action
