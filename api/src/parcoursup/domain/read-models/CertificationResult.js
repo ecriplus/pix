@@ -13,6 +13,7 @@ export class CertificationResult {
    * @param {string} props.status
    * @param {string} props.pixScore
    * @param {Date} props.certificationDate
+   * @param {string} props.globalLevel
    * @param {Array<Competence>} props.competences
    */
   constructor({
@@ -24,6 +25,7 @@ export class CertificationResult {
     status,
     pixScore,
     certificationDate,
+    globalLevel = '',
     competences,
   }) {
     this.ine = ine;
@@ -34,6 +36,7 @@ export class CertificationResult {
     this.status = status;
     this.pixScore = pixScore;
     this.certificationDate = certificationDate;
+    this.globalLevel = globalLevel;
     this.competences = competences;
   }
 }
