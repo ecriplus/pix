@@ -16,6 +16,10 @@ export async function getModulesListAsCsv(modules) {
         label: 'ModuleIsBeta',
         value: (row) => (row.isBeta ? '=TRUE' : '=FALSE'),
       },
+      {
+        label: 'ModuleObjectives',
+        value: (row) => row.details.objectives.join('.'),
+      },
       { label: 'ModuleTotalGrains', value: 'grains.length' },
       {
         label: 'ModuleTotalLessons',
