@@ -63,6 +63,16 @@
                   {{if row.outdated "Obsolète" "Actif"}}
                 </:cell>
               </PixTableColumn>
+              <PixTableColumn @context={{context}} class="table__column--wide">
+                <:header>
+                  Actions
+                </:header>
+                <:cell>
+                  <PixButton @variant="error" @iconBefore="delete" >
+                    Détacher
+                  </PixButton>
+                </:cell>
+              </PixTableColumn>
             </:columns>
           </PixTable>
         {{/if}}
