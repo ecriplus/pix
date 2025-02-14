@@ -12,4 +12,11 @@ export default class TrainingAdapter extends ApplicationAdapter {
     const url = `${this.host}/${this.namespace}/trainings/${trainingId}/attach-target-profiles`;
     return this.ajax(url, 'POST', { data: payload });
   }
+
+  async detachTargetProfile(options) {
+    const { targetProfileId, trainingId } = options;
+
+    const url = `${this.host}/${this.namespace}/trainings/${trainingId}/target-profiles/${targetProfileId}`;
+    return this.ajax(url, 'DELETE');
+  }
 }
