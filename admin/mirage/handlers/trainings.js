@@ -75,6 +75,17 @@ function attachTargetProfilesToTraining(schema, request) {
   return new Response(204);
 }
 
+function detachTargetProfileFromTraining(schema, request) {
+  const { trainingId, targetProfileId } = request.params;
+
+  const training = schema.trainings.find(trainingId);
+
+  const updatedTargetProfiles = training.targetProfileSummaryIds.filter((profileId) => profileId !== targetProfileId);
+  training.update({ targetProfileSummaryIds: updatedTargetProfiles });
+
+  return new Response(204);
+}
+
 function updateTraining(schema, request) {
   const trainingId = request.params.id;
   const params = JSON.parse(request.requestBody);
@@ -127,6 +138,7 @@ export {
   attachTargetProfilesToTraining,
   createOrUpdateTrainingTrigger,
   createTraining,
+  detachTargetProfileFromTraining,
   findPaginatedTrainingSummaries,
   getTargetProfileSummariesForTraining,
   getTraining,

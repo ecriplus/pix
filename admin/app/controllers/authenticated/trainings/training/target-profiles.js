@@ -61,6 +61,26 @@ export default class TrainingDetailsTargetProfilesController extends Controller 
     }
   }
 
+  @action
+  async detachTargetProfile(targetProfileSummary) {
+    const { id: trainingId } = this.model.training;
+    const { targetProfileSummaries } = this.model;
+    const { id: targetProfileId } = targetProfileSummary;
+    try {
+      const adapter = this.store.adapterFor('training');
+      await adapter.detachTargetProfile({
+        trainingId,
+        targetProfileId,
+      });
+      await targetProfileSummaries.reload();
+      return this.pixToast.sendSuccessNotification({
+        message: `Profil cible détaché avec succès !`,
+      });
+    } catch (responseError) {
+      this._handleResponseError(responseError);
+    }
+  }
+
   _handleResponseError({ errors }) {
     if (!errors) {
       return this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });

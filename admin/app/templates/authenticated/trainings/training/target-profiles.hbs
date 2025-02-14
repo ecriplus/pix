@@ -31,28 +31,50 @@
     <div class="content-text content-text--small">
       <div class="table-admin">
         {{#if @model.targetProfileSummaries}}
-          <table aria-labelledby="page-section-title">
-            <thead>
-              <tr>
-                <th scope="col" class="table__column table__column--id">ID</th>
-                <th scope="col">Nom du profil cible</th>
-                <th scope="col">Statut</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each @model.training.sortedTargetProfileSummaries as |summary|}}
-                <tr aria-label="Profil cible">
-                  <td class="table__column table__column--id">{{summary.id}}</td>
-                  <td headers="target-profile-name">
-                    <LinkTo @route="authenticated.target-profiles.target-profile" @model={{summary.id}}>
-                      {{summary.name}}
-                    </LinkTo>
-                  </td>
-                  <td>{{if summary.outdated "Obsolète" "Actif"}}</td>
-                </tr>
-              {{/each}}
-            </tbody>
-          </table>
+          <PixTable
+            @variant="primary"
+            @data={{@model.training.sortedTargetProfileSummaries}}
+            @caption="Profil cible associé au contenu"
+          >
+            <:columns as |row context|>
+              <PixTableColumn @context={{context}} class="table__column--wide">
+                <:header>
+                  ID
+                </:header>
+                <:cell>
+                  {{row.id}}
+                </:cell>
+              </PixTableColumn>
+              <PixTableColumn @context={{context}} class="table__column--wide">
+                <:header>
+                  Nom du profil cible
+                </:header>
+                <:cell>
+                  <LinkTo @route="authenticated.target-profiles.target-profile" @model={{row.id}}>
+                    {{row.name}}
+                  </LinkTo>
+                </:cell>
+              </PixTableColumn>
+              <PixTableColumn @context={{context}} class="table__column--wide">
+                <:header>
+                  Statut
+                </:header>
+                <:cell>
+                  {{if row.outdated "Obsolète" "Actif"}}
+                </:cell>
+              </PixTableColumn>
+              <PixTableColumn @context={{context}} class="table__column--wide">
+                <:header>
+                  Actions
+                </:header>
+                <:cell>
+                  <PixButton @variant="error" @iconBefore="delete" @triggerAction={{fn this.detachTargetProfile row}}>
+                    Détacher
+                  </PixButton>
+                </:cell>
+              </PixTableColumn>
+            </:columns>
+          </PixTable>
         {{/if}}
 
         {{#unless @model.targetProfileSummaries}}

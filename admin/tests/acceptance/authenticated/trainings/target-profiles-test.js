@@ -16,6 +16,7 @@ module('Acceptance | Trainings | Target profiles', function (hooks) {
   hooks.beforeEach(async function () {
     trainingId = 2;
 
+    const targetProfileSummary = server.create('target-profile-summary', { id: 1111, name: 'Super profil cible 2' });
     server.create('training', {
       id: 2,
       title: 'Devenir tailleur de citrouille',
@@ -27,6 +28,7 @@ module('Acceptance | Trainings | Target profiles', function (hooks) {
       editorLogoUrl: 'https://mon-logo.svg',
       prerequisiteThreshold: null,
       goalThreshold: null,
+      targetProfileSummaries: [targetProfileSummary],
     });
     server.create('target-profile', {});
   });
@@ -64,6 +66,17 @@ module('Acceptance | Trainings | Target profiles', function (hooks) {
 
         // then
         assert.dom(await screen.findByRole('link', { name: 'Super profil cible' })).exists();
+      });
+
+      test('it should be able to detach a target profile to a training', async function (assert) {
+        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+
+        // when
+        const screen = await visit(`/trainings/${trainingId}/target-profiles`);
+        await clickByName('Détacher');
+
+        // then
+        assert.dom(await screen.findByText('Aucun profil cible associé à ce contenu formatif')).exists();
       });
     });
 

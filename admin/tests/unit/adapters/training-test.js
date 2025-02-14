@@ -28,4 +28,20 @@ module('Unit | Adapter | Training ', function (hooks) {
       assert.ok(true);
     });
   });
+  module('#detachTargetProfile', function () {
+    test('should trigger an ajax call with the right url, method and payload', async function (assert) {
+      // given
+      sinon.stub(adapter, 'ajax').resolves();
+      const trainingId = 1;
+      const targetProfileId = 2;
+      const expectedUrl = `http://localhost:3000/api/admin/trainings/${trainingId}/target-profiles/${targetProfileId}`;
+
+      // when
+      await adapter.detachTargetProfile({ trainingId, targetProfileId });
+
+      // then
+      sinon.assert.calledWith(adapter.ajax, expectedUrl, 'DELETE');
+      assert.ok(true);
+    });
+  });
 });
