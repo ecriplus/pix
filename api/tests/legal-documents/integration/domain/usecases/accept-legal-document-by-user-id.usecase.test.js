@@ -53,6 +53,39 @@ describe('Integration | Legal documents | Domain | Use case | accept-legal-docum
     });
   });
 
+  context('when user must accept a new legal document version', function () {
+    it('accepts the new legal document version for a user', async function () {
+      // given
+      const user = databaseBuilder.factory.buildUser();
+      const document = databaseBuilder.factory.buildLegalDocumentVersion({
+        service: PIX_ORGA,
+        type: TOS,
+        versionAt: '2024-01-01',
+      });
+      databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+        userId: user.id,
+        legalDocumentVersionId: document.id,
+        acceptedAt: new Date('2024-03-01'),
+      });
+      const newDocument = databaseBuilder.factory.buildLegalDocumentVersion({
+        service: PIX_ORGA,
+        type: TOS,
+        versionAt: '2025-01-01',
+      });
+      await databaseBuilder.commit();
+
+      // when
+      await usecases.acceptLegalDocumentByUserId({ userId: user.id, service: PIX_ORGA, type: TOS });
+
+      // then
+      const userAcceptance = await knex('legal-document-version-user-acceptances')
+        .where('userId', user.id)
+        .where('legalDocumentVersionId', newDocument.id)
+        .first();
+      expect(userAcceptance).to.exist;
+    });
+  });
+
   context('when no legal document is found', function () {
     it('logs an error', async function () {
       // given

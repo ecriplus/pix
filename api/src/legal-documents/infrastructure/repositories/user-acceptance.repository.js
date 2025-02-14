@@ -42,4 +42,24 @@ const findLastForLegalDocument = async ({ userId, service, type }) => {
   return userAcceptanceDto;
 };
 
-export { create, findLastForLegalDocument };
+/**
+ * Finds the user acceptance record for a specific legal document version id.
+ *
+ * @param {Object} params - The parameters for finding the user acceptance.
+ * @param {string} params.userId - The ID of the user.
+ * @param {string} params.legalDocumentVersionId - The ID of the legal document version
+ * @returns {Promise<Object|null>} A promise that resolves to the user acceptance record or null if not found.
+ */
+const findByLegalDocumentVersionId = async ({ userId, legalDocumentVersionId }) => {
+  const knexConnection = DomainTransaction.getConnection();
+  const userAcceptanceDto = await knexConnection(TABLE_NAME)
+    .select('userId', 'legalDocumentVersionId', 'acceptedAt')
+    .where({ userId, legalDocumentVersionId })
+    .first();
+
+  if (!userAcceptanceDto) return null;
+
+  return userAcceptanceDto;
+};
+
+export { create, findByLegalDocumentVersionId, findLastForLegalDocument };

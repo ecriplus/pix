@@ -22,11 +22,11 @@ const acceptLegalDocumentByUserId = withTransaction(
       return;
     }
 
-    const doesUserAcceptanceAlreadyExist = await userAcceptanceRepository.findLastForLegalDocument({
+    const doesUserAcceptanceAlreadyExist = await userAcceptanceRepository.findByLegalDocumentVersionId({
       userId,
-      service,
-      type,
+      legalDocumentVersionId: legalDocument.id,
     });
+
     if (doesUserAcceptanceAlreadyExist) {
       return;
     }
