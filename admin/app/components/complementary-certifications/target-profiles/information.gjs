@@ -28,8 +28,8 @@ export default class Information extends Component {
         {{#if this.isMultipleCurrentTargetProfiles}}
           <PixToggleButton @toggled={{@switchToggle}} @onChange={{@switchTargetProfile}} @screenReaderOnly={{true}}>
             <:label>Accéder aux détails des profils cibles courants</:label>
-            <:on>Profil 1</:on>
-            <:off>Profil 2</:off>
+            <:viewA>Profil 1</:viewA>
+            <:viewB>Profil 2</:viewB>
           </PixToggleButton>
         {{/if}}
         {{#if this.hasAccessToAttachNewTargetProfile}}
