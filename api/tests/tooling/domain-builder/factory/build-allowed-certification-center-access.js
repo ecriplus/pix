@@ -12,6 +12,7 @@ function buildAllowedCertificationCenterAccess({
   habilitations = [],
   isV3Pilot = false,
   features = [],
+  isInWhitelist,
 } = {}) {
   return new AllowedCertificationCenterAccess({
     center: {
@@ -22,6 +23,7 @@ function buildAllowedCertificationCenterAccess({
       habilitations,
       isV3Pilot,
       features,
+      isInWhitelist,
     },
     isRelatedToManagingStudentsOrganization,
     relatedOrganizationTags,

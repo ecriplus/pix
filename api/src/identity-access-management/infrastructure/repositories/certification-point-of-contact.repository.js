@@ -21,6 +21,7 @@ const getAllowedCenterAccesses = async function (centerList) {
       id: 'certification-centers.id',
       externalId: 'certification-centers.externalId',
       type: 'certification-centers.type',
+      isInWhitelist: 'certification-centers.isScoBlockedAccessWhitelist',
       isRelatedToManagingStudentsOrganization: 'organizations.isManagingStudents',
       tags: knex.raw('array_agg(?? order by ??)', ['tags.name', 'tags.name']),
       habilitations: knex.raw(
@@ -125,6 +126,7 @@ function _toDomain({ allowedAccessDTOs, centerList }) {
     return new AllowedCertificationCenterAccess({
       center: {
         ...center,
+        isInWhitelist: allowedCenterAccessDTO.isInWhitelist,
         habilitations: _cleanHabilitations(allowedCenterAccessDTO),
       },
       isRelatedToManagingStudentsOrganization: Boolean(allowedCenterAccessDTO.isRelatedToManagingStudentsOrganization),

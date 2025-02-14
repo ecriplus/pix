@@ -121,6 +121,39 @@ describe('Integration | Identity Access Management |  Repository | Certification
         expect(access).to.be.instanceOf(AllowedCertificationCenterAccess);
       });
     });
+
+    it('returns the whitelist status of a center', async function () {
+      // given
+      const certificationCenterScoWhitelisted = databaseBuilder.factory.buildCertificationCenter({
+        name: 'Centre SCO',
+        type: CertificationCenter.types.SCO,
+        isScoBlockedAccessWhitelist: true,
+      });
+      membership = databaseBuilder.factory.buildCertificationCenterMembership({
+        certificationCenterId: certificationCenterScoWhitelisted.id,
+        userId: userWithMembership.id,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const { authorizedCenterIds } = await certificationPointOfContactRepository.getAuthorizedCenterIds(
+        userWithMembership.id,
+      );
+      const centerList = await Promise.all(
+        authorizedCenterIds.map((authorizedCenterId) => centerRepository.getById({ id: authorizedCenterId })),
+      );
+
+      const allowedCertificationCenterAccesses =
+        await certificationPointOfContactRepository.getAllowedCenterAccesses(centerList);
+
+      // then
+      expect(
+        allowedCertificationCenterAccesses.map((e) => ({ id: e.id, isInWhitelist: e.isInWhitelist() })),
+      ).to.have.deep.members([
+        { id: certificationCenter.id, isInWhitelist: false },
+        { id: certificationCenterScoWhitelisted.id, isInWhitelist: true },
+      ]);
+    });
   });
 
   describe('#getPointOfContact', function () {
