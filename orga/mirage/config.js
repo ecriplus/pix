@@ -579,8 +579,6 @@ function routes() {
 
   this.get('/information-banners/:target', (schema, request) => {
     const { target } = request.params;
-    console.log(target);
-    console.log(schema.informationBanners.all());
     return schema.informationBanners.find(target);
   });
 }
