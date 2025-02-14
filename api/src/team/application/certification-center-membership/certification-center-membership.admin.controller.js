@@ -57,10 +57,25 @@ const createCertificationCenterMembershipByEmail = async function (
     .created();
 };
 
+const findCertificationCenterMembershipsByUser = async function (
+  request,
+  h,
+  dependencies = { certificationCenterMembershipSerializer },
+) {
+  const userId = request.params.id;
+  const certificationCenterMemberships = await usecases.findCertificationCenterMembershipsByUser({
+    userId,
+  });
+  return h.response(
+    dependencies.certificationCenterMembershipSerializer.serializeForAdmin(certificationCenterMemberships),
+  );
+};
+
 const certificationCenterMembershipAdminController = {
   updateRole,
   disableFromPixAdmin,
   createCertificationCenterMembershipByEmail,
+  findCertificationCenterMembershipsByUser,
 };
 
 export { certificationCenterMembershipAdminController };
