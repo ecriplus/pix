@@ -1,10 +1,11 @@
 const INITIAL_ID = 100000;
 const databaseBuffer = {
-  objectsToInsert: [],
+  objectsToInsert: {},
   nextId: INITIAL_ID,
 
   pushInsertable({ tableName, values }) {
-    this.objectsToInsert.push({ tableName, values });
+    if (!this.objectsToInsert[tableName]) this.objectsToInsert[tableName] = [];
+    this.objectsToInsert[tableName].push(values);
 
     return values;
   },
@@ -14,7 +15,7 @@ const databaseBuffer = {
   },
 
   purge() {
-    this.objectsToInsert = [];
+    this.objectsToInsert = {};
   },
 };
 

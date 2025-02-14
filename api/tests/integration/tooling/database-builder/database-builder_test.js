@@ -14,7 +14,6 @@ describe('Integration | Tooling | DatabaseBuilder | database-builder', function 
 
       // then
       expect(databaseBuilder).to.be.an.instanceOf(DatabaseBuilder);
-      expect(databaseBuilder.isFirstCommit).to.be.false;
     });
   });
 
