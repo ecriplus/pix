@@ -166,11 +166,14 @@ const setupDeserialization = function (server) {
 };
 
 const setupAuthentication = function (server) {
-  server.auth.scheme(authentication.schemeName, authentication.scheme);
-  authentication.strategies.forEach((strategy) => {
-    server.auth.strategy(strategy.name, authentication.schemeName, strategy.configuration);
-  });
-  server.auth.default(authentication.defaultStrategy);
+  server.auth.scheme(authentication.schemes.jwt.name, authentication.schemes.jwt.scheme);
+  const jwtApplicationStrategy = authentication.strategies.jwtApplication;
+  server.auth.strategy(
+    jwtApplicationStrategy.name,
+    jwtApplicationStrategy.schemeName,
+    jwtApplicationStrategy.configuration,
+  );
+  server.auth.default(jwtApplicationStrategy.name);
 };
 
 const setupRoutesAndPlugins = async function (server) {

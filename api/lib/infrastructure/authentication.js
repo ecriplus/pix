@@ -30,6 +30,15 @@ const strategies = {
     },
   },
 
+  jwtApplication: {
+    name: 'jwt-application',
+    schemeName: schemes.jwt.name,
+    configuration: {
+      key: config.authentication.secret,
+      validate: validateClientApplication,
+    },
+  },
+
   jwtLivretScolaire: {
     name: 'jwt-livret-scolaire',
     schemeName: schemes.jwt.name,
