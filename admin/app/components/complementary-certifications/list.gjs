@@ -1,5 +1,8 @@
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 
 export default class List extends Component {
   get sortedComplementaryCertifications() {
@@ -7,33 +10,27 @@ export default class List extends Component {
   }
 
   <template>
-    <div class="content-text content-text--small">
-      <div class="table-admin">
-        <table>
-          <thead>
-            <tr>
-              <th class="table__column--id">ID</th>
-              <th>Nom</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {{#each this.sortedComplementaryCertifications as |complementaryCertification|}}
-              <tr>
-                <td class="table__column--id">{{complementaryCertification.id}}</td>
-                <td>
-                  <LinkTo
-                    @route="authenticated.complementary-certifications.complementary-certification"
-                    @model={{complementaryCertification.id}}
-                  >
-                    {{complementaryCertification.label}}
-                  </LinkTo>
-                </td>
-              </tr>
-            {{/each}}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <PixTable @data={{this.sortedComplementaryCertifications}}>
+      <:columns as |row sortedComplementaryCertification|>
+        <PixTableColumn @context={{sortedComplementaryCertification}} class="table__column--medium">
+          <:header>
+            {{t "components.complementary-certifications.list.id"}}
+          </:header>
+          <:cell>
+            {{row.id}}
+          </:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{sortedComplementaryCertification}}>
+          <:header>
+            {{t "components.complementary-certifications.list.name"}}
+          </:header>
+          <:cell>
+            <LinkTo @route="authenticated.complementary-certifications.complementary-certification" @model={{row.id}}>
+              {{row.label}}
+            </LinkTo>
+          </:cell>
+        </PixTableColumn>
+      </:columns>
+    </PixTable>
   </template>
 }

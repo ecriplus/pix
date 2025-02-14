@@ -298,6 +298,10 @@
       }
     },
     "complementary-certifications": {
+      "list": {
+        "id": "ID",
+        "name": "Nom"
+      },
       "target-profiles": {
         "badges-list": {
           "header": {
@@ -309,7 +313,8 @@
           },
           "title": "Badges certifiés du profil cible actuel"
         }
-      }
+      },
+      "title": "Toutes les certifications complémentaires"
     },
     "layout": {
       "menu-bar": {
