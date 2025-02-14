@@ -320,6 +320,14 @@
             "name": "Nom du badge certifié"
           },
           "title": "Badges certifiés du profil cible actuel"
+        },
+        "history-list": {
+          "headers": {
+            "attached-at": "Date de rattachement",
+            "detached-at": "Date de détachement",
+            "name": "Nom du profil cible"
+          },
+          "title": "Historique des profils cibles rattachés"
         }
       },
       "title": "Toutes les certifications complémentaires"

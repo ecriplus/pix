@@ -1,11 +1,12 @@
 import { render } from '@1024pix/ember-testing-library';
 import dayjs from 'dayjs';
-import { setupRenderingTest } from 'ember-qunit';
 import History from 'pix-admin/components/complementary-certifications/target-profiles/history';
 import { module, test } from 'qunit';
 
+import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
+
 module('Integration | Component | complementary-certifications/target-profiles/history', function (hooks) {
-  setupRenderingTest(hooks);
+  setupIntlRenderingTest(hooks);
 
   test("it should display history for complementary certification's target profiles", async function (assert) {
     // given
