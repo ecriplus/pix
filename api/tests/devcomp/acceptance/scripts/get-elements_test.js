@@ -12,7 +12,7 @@ describe('Acceptance | Script | Get Elements as CSV', function () {
   });
 
   describe('#getElements', function () {
-    it('should filter out elements that are not activities', async function () {
+    it('should only handle known element types', async function () {
       // When
       const elementsListAsJs = await getElements(modulesListAsJs);
 
