@@ -55,11 +55,11 @@ class HttpTestServer {
   }
 
   setupAuthentication() {
-    this.hapiServer.auth.scheme(authentication.schemeName, authentication.scheme);
-    authentication.strategies.forEach((strategy) =>
-      this.hapiServer.auth.strategy(strategy.name, authentication.schemeName, strategy.configuration),
+    this.hapiServer.auth.scheme(authentication.schemes.jwt.name, authentication.schemes.jwt.scheme);
+    Object.values(authentication.strategies).forEach((strategy) =>
+      this.hapiServer.auth.strategy(strategy.name, strategy.schemeName, strategy.configuration),
     );
-    this.hapiServer.auth.default(authentication.defaultStrategy);
+    this.hapiServer.auth.default(authentication.strategies.jwtUser.name);
   }
 
   setupDeserialization() {
