@@ -179,7 +179,10 @@ export default class ListItems extends Component {
                   </LinkTo>
                 </td>
                 <td headers="certification-center-name">{{session.certificationCenterName}}</td>
-                <td headers="session-external-id">{{session.certificationCenterExternalId}}</td>
+                <td
+                  class="break-word table__column"
+                  headers="session-external-id"
+                >{{session.certificationCenterExternalId}}</td>
                 {{#if session.certificationCenterType}}
                   <td headers="certification-center-category" class="session-list__item--align-center">
                     {{session.certificationCenterType}}
