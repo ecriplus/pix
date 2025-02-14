@@ -68,7 +68,7 @@
                   Actions
                 </:header>
                 <:cell>
-                  <PixButton @variant="error" @iconBefore="delete" >
+                  <PixButton @variant="error" @iconBefore="delete" @triggerAction={{fn this.detachTargetProfile row}}>
                     Détacher
                   </PixButton>
                 </:cell>
