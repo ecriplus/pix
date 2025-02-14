@@ -259,6 +259,10 @@
         "percent": "percentage",
         "star": "stars"
       },
+      "simplified-access": {
+        "with-account": "Access with account",
+        "without-account": "Access without account"
+      },
       "subjects": "Topics: {value, number}",
       "thematic-results": "Thematic results: {value, number}"
     }

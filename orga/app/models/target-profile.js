@@ -8,4 +8,5 @@ export default class TargetProfile extends Model {
   @attr('boolean') hasStage;
   @attr('string') category;
   @attr('boolean') areKnowledgeElementsResettable;
+  @attr('boolean') isSimplifiedAccess;
 }

@@ -60,7 +60,7 @@ module('Acceptance | Campaign Creation', function (hooks) {
       await fillByLabel('Nom de la campagne *', 'Ma Campagne');
       await clickByName('Évaluer les participants');
       await click(screen.getByLabelText(`${t('pages.campaign-creation.target-profiles-list-label')} *`));
-      await click(await screen.findByRole('option', { name: expectedTargetProfileName }));
+      await click(await screen.findByRole('option', { description: expectedTargetProfileName }));
 
       const externalIdentifier = screen
         .getByText('Souhaitez-vous demander un identifiant externe ?', { selector: 'legend' })
@@ -105,7 +105,7 @@ module('Acceptance | Campaign Creation', function (hooks) {
       await fillByLabel('Nom de la campagne *', 'Ma Campagne');
       await clickByName('Évaluer les participants');
       await click(screen.getByLabelText(`${t('pages.campaign-creation.target-profiles-list-label')} *`));
-      await click(await screen.findByRole('option', { name: expectedTargetProfileName }));
+      await click(await screen.findByRole('option', { description: expectedTargetProfileName }));
 
       const title = `${t('pages.campaign-creation.test-title.label')} ${t('pages.campaign-creation.test-title.sublabel')}`;
 
@@ -127,7 +127,7 @@ module('Acceptance | Campaign Creation', function (hooks) {
       await fillByLabel('Nom de la campagne *', 'Ma Campagne');
       await clickByName('Évaluer les participants');
       await click(screen.getByLabelText(`${t('pages.campaign-creation.target-profiles-list-label')} *`));
-      await click(await screen.findByRole('option', { name: targetProfileName }));
+      await click(await screen.findByRole('option', { description: targetProfileName }));
 
       // when
       await clickByName('Créer la campagne');
@@ -147,7 +147,7 @@ module('Acceptance | Campaign Creation', function (hooks) {
       await fillByLabel('Nom de la campagne *', 'Ma Campagne');
       await clickByName('Évaluer les participants');
       await click(screen.getByLabelText(`${t('pages.campaign-creation.target-profiles-list-label')} *`));
-      await click(await screen.findByRole('option', { name: expectedTargetProfileName }));
+      await click(await screen.findByRole('option', { description: expectedTargetProfileName }));
       const externalIdentifier = screen
         .getByText('Souhaitez-vous demander un identifiant externe ?', { selector: 'legend' })
         .closest('fieldset');
