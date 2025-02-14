@@ -266,6 +266,63 @@ describe('Acceptance | Team | Admin | Route | membership', function () {
     });
   });
 
+  describe('POST /api/admin/memberships/{id}/disable', function () {
+    let options;
+    let adminUserId;
+    let userId;
+    let organizationId;
+    let membershipId;
+
+    beforeEach(async function () {
+      const externalId = 'externalId';
+      adminUserId = databaseBuilder.factory.buildUser.withRole().id;
+      organizationId = databaseBuilder.factory.buildOrganization({ externalId, type: 'SCO' }).id;
+      userId = databaseBuilder.factory.buildUser().id;
+      membershipId = databaseBuilder.factory.buildMembership({
+        organizationId,
+        userId,
+        organizationRole: Membership.roles.MEMBER,
+      }).id;
+      databaseBuilder.factory.buildCertificationCenter({ externalId });
+
+      await databaseBuilder.commit();
+      options = {
+        method: 'POST',
+        url: `/api/admin/memberships/${membershipId}/disable`,
+        payload: {
+          data: {
+            id: membershipId.toString(),
+            type: 'memberships',
+            relationships: {
+              user: {
+                data: {
+                  type: 'users',
+                  id: userId,
+                },
+              },
+              organization: {
+                data: {
+                  type: 'organizations',
+                  id: organizationId,
+                },
+              },
+            },
+          },
+        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUserId }),
+      };
+    });
+
+    it('returns 204 if user is Pix Admin', async function () {
+      // given
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(204);
+    });
+  });
+
   describe('GET /api/admin/organizations/{id}/memberships', function () {
     it('returns the matching membership as JSON API', async function () {
       // given
