@@ -109,7 +109,7 @@ async function validateClientApplication(decodedAccessToken) {
   return {
     isValid: true,
     credentials: {
-      client_id: decodedAccessToken.clientId,
+      client_id: decodedAccessToken.client_id,
       scope: decodedAccessToken.scope,
       source: decodedAccessToken.source,
     },
