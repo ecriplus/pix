@@ -5,27 +5,20 @@ import * as campaignAssessmentResultMinimalSerializer from '../infrastructure/se
 import * as campaignCollectiveResultSerializer from '../infrastructure/serializers/jsonapi/campaign-collective-result-serializer.js';
 import * as campaignProfilesCollectionParticipationSummarySerializer from '../infrastructure/serializers/jsonapi/campaign-profiles-collection-participation-summary-serializer.js';
 
-const findAssessmentParticipationResults = async function (request) {
+const findAssessmentParticipationResults = async function (
+  request,
+  h,
+  dependencies = { campaignAssessmentResultMinimalSerializer },
+) {
   const { campaignId } = request.params;
   const { page, filter: filters } = request.query;
-  if (filters.divisions && !Array.isArray(filters.divisions)) {
-    filters.divisions = [filters.divisions];
-  }
-  if (filters.groups && !Array.isArray(filters.groups)) {
-    filters.groups = [filters.groups];
-  }
-  if (filters.badges && !Array.isArray(filters.badges)) {
-    filters.badges = [filters.badges];
-  }
-  if (filters.stages && !Array.isArray(filters.stages)) {
-    filters.stages = [filters.stages];
-  }
+
   const paginatedParticipations = await usecases.findAssessmentParticipationResultList({
     campaignId,
     page,
     filters,
   });
-  return campaignAssessmentResultMinimalSerializer.serialize(paginatedParticipations);
+  return dependencies.campaignAssessmentResultMinimalSerializer.serialize(paginatedParticipations);
 };
 
 const findProfilesCollectionParticipations = async function (request) {

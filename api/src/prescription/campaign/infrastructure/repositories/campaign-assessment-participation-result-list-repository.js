@@ -32,7 +32,8 @@ function _getParticipantsResultList(campaignId, stageCollection, filters) {
     .with('campaign_participation_summaries', (qb) => _getParticipations(qb, campaignId, stageCollection, filters))
     .select('*')
     .from('campaign_participation_summaries')
-    .modify(_filterByBadgeAcquisitionsOut, filters)
+    .modify(_filterByAcquiredBadges, filters)
+    .modify(_filterByUnacquiredBadges, filters)
     .orderByRaw('LOWER(??) ASC, LOWER(??) ASC', ['lastName', 'firstName']);
 }
 
@@ -116,10 +117,10 @@ function _filterBySearch(queryBuilder, filters) {
 }
 
 function _addAcquiredBadgeIds(queryBuilder, filters) {
-  if (filters.badges) {
+  if (filters.badges || filters.unacquiredBadges) {
     queryBuilder
       .select(knex.raw('ARRAY_AGG("badgeId") OVER (PARTITION BY "campaign-participations"."id") as badges_acquired'))
-      .join('badge-acquisitions', 'badge-acquisitions.campaignParticipationId', 'campaign-participations.id')
+      .leftJoin('badge-acquisitions', 'badge-acquisitions.campaignParticipationId', 'campaign-participations.id')
       .distinctOn('campaign-participations.id', 'campaign-participations.organizationLearnerId');
   }
 }
@@ -133,15 +134,23 @@ function _orderBy(queryBuilder, filters) {
       nulls: 'last',
     },
   ];
-  if (filters.badges) {
+  if (filters.badges || filters.unacquiredBadges) {
     orderByClauses.unshift({ column: 'campaign-participations.id' });
   }
   queryBuilder.orderBy(orderByClauses);
 }
 
-function _filterByBadgeAcquisitionsOut(queryBuilder, filters) {
+function _filterByAcquiredBadges(queryBuilder, filters) {
   if (filters.badges) {
     queryBuilder.whereRaw(':badgeIds <@ "badges_acquired"', { badgeIds: filters.badges });
+  }
+}
+
+function _filterByUnacquiredBadges(queryBuilder, filters) {
+  if (filters.unacquiredBadges) {
+    queryBuilder.whereRaw(':badgeIds && "badges_acquired" is false', {
+      badgeIds: filters.unacquiredBadges,
+    });
   }
 }
 

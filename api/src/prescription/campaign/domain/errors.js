@@ -58,8 +58,18 @@ class CampaignParticipationDoesNotBelongToUser extends DomainError {
   }
 }
 
+class AssessmentParticipationResultFilterError extends DomainError {
+  constructor() {
+    super(
+      'Filtering on both acquired and unacquired using the same badge id is impossible',
+      'ASSESSMENT_PARTICIPATION_RESULT_FILTER_ERROR',
+    );
+  }
+}
+
 export {
   ArchivedCampaignError,
+  AssessmentParticipationResultFilterError,
   CampaignCodeFormatError,
   CampaignParticipationDoesNotBelongToUser,
   CampaignUniqueCodeError,
