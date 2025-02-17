@@ -10,6 +10,10 @@ class DomainTransaction {
   }
 
   static execute(lambda, transactionConfig) {
+    const existingConn = DomainTransaction.getConnection();
+    if (existingConn.isTransaction) {
+      return lambda();
+    }
     return knex.transaction((trx) => {
       const domainTransaction = new DomainTransaction(trx);
       return asyncLocalStorage.run({ transaction: domainTransaction }, lambda, domainTransaction);

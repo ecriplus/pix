@@ -1,0 +1,290 @@
+import { DomainTransaction, withTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
+import { catchErr, expect, knex } from '../../../../tests/test-helper.js';
+
+describe('Shared | Integration | Domain | DomainTransaction', function () {
+  context('behaviour when nesting', function () {
+    context('withTransaction in withTransaction', function () {
+      it('should use the same transaction all the way', async function () {
+        // given
+        let didIGoAllTheWayToTheEnd = false;
+        const addTwoFeaturesInTwoNestedWithTransaction = withTransaction(async function () {
+          const knexConnA = DomainTransaction.getConnection();
+
+          // check empty in scope A
+          const keys0 = await knexConnA('features').pluck('key');
+          expect(keys0, 'it starts with an empty table').to.deepEqualArray([]);
+
+          // insert in scope A
+          await knexConnA('features').insert({ key: 'scopeA' });
+
+          // check has one in scope A
+          const keys1 = await knexConnA('features').pluck('key');
+          expect(keys1, '"scopeA" has been inserted in first layer').to.deepEqualArray(['scopeA']);
+
+          // nested scope
+          await withTransaction(async function () {
+            const knexConnB = DomainTransaction.getConnection();
+
+            // check already has one in scope B
+            const keys1 = await knexConnB('features').pluck('key');
+            expect(keys1, '"scopeA" found in second layer').to.deepEqualArray(['scopeA']);
+
+            // insert in scope B
+            await knexConnB('features').insert({ key: 'scopeB' });
+
+            // check has two in scope B
+            const keys2 = await knexConnB('features').pluck('key').orderBy('key');
+            expect(keys2, '"scopeB" also inserted, but in second layer').to.deepEqualArray(['scopeA', 'scopeB']);
+            didIGoAllTheWayToTheEnd = true;
+          })();
+        });
+
+        // when
+        await addTwoFeaturesInTwoNestedWithTransaction();
+
+        // then
+        expect(didIGoAllTheWayToTheEnd).to.be.true;
+        const finalKeys = await knex('features').pluck('key').orderBy('key');
+        expect(finalKeys).to.deepEqualArray(['scopeA', 'scopeB']);
+      });
+
+      it('should rollback everything when something goes wrong in the nested scope', async function () {
+        // given
+        const addTwoFeaturesInTwoNestedWithTransaction = withTransaction(async function () {
+          const knexConnA = DomainTransaction.getConnection();
+
+          await knexConnA('features').insert({ key: 'scopeA' });
+
+          await withTransaction(async function () {
+            const knexConnB = DomainTransaction.getConnection();
+
+            await knexConnB('features').insert({ key: 'scopeB' });
+
+            throw new Error("Let's rollback !");
+          })();
+        });
+
+        // when
+        const err = await catchErr(addTwoFeaturesInTwoNestedWithTransaction)();
+
+        // then
+        expect(err.message).to.equal("Let's rollback !");
+        const { count } = await knex('features').count('id').first();
+        expect(count).to.equal(0);
+      });
+    });
+
+    context('withTransaction in DomainTransaction.execute', function () {
+      it('should use the same transaction all the way', async function () {
+        // given
+        let didIGoAllTheWayToTheEnd = false;
+        const addTwoFeaturesInDomainTrExecuteAndWithTransaction = async function () {
+          const knexConnA = DomainTransaction.getConnection();
+
+          // check empty in scope A
+          const keys0 = await knexConnA('features').pluck('key');
+          expect(keys0, 'it starts with an empty table').to.deepEqualArray([]);
+
+          // insert in scope A
+          await knexConnA('features').insert({ key: 'scopeA' });
+
+          // check has one in scope A
+          const keys1 = await knexConnA('features').pluck('key');
+          expect(keys1, '"scopeA" has been inserted in first layer').to.deepEqualArray(['scopeA']);
+
+          // nested scope
+          await withTransaction(async function () {
+            const knexConnB = DomainTransaction.getConnection();
+
+            // check already has one in scope B
+            const keys1 = await knexConnB('features').pluck('key');
+            expect(keys1, '"scopeA" found in second layer').to.deepEqualArray(['scopeA']);
+
+            // insert in scope B
+            await knexConnB('features').insert({ key: 'scopeB' });
+
+            // check has two in scope B
+            const keys2 = await knexConnB('features').pluck('key').orderBy('key');
+            expect(keys2, '"scopeB" also inserted, but in second layer').to.deepEqualArray(['scopeA', 'scopeB']);
+            didIGoAllTheWayToTheEnd = true;
+          })();
+        };
+
+        // when
+        await DomainTransaction.execute(addTwoFeaturesInDomainTrExecuteAndWithTransaction);
+
+        // then
+        expect(didIGoAllTheWayToTheEnd).to.be.true;
+        const finalKeys = await knex('features').pluck('key').orderBy('key');
+        expect(finalKeys).to.deepEqualArray(['scopeA', 'scopeB']);
+      });
+
+      it('should rollback everything when something goes wrong in the nested scope', async function () {
+        // given
+        const addTwoFeaturesInDomainTrExecuteAndWithTransaction = async function () {
+          const knexConnA = DomainTransaction.getConnection();
+
+          await knexConnA('features').insert({ key: 'scopeA' });
+
+          await withTransaction(async function () {
+            const knexConnB = DomainTransaction.getConnection();
+
+            await knexConnB('features').insert({ key: 'scopeB' });
+
+            throw new Error("Let's rollback !");
+          })();
+        };
+
+        // when
+        const err = await catchErr(DomainTransaction.execute)(addTwoFeaturesInDomainTrExecuteAndWithTransaction);
+
+        // then
+        expect(err.message).to.equal("Let's rollback !");
+        const { count } = await knex('features').count('id').first();
+        expect(count).to.equal(0);
+      });
+    });
+
+    context('DomainTransaction.execute in DomainTransaction.execute', function () {
+      it('should use the same transaction all the way', async function () {
+        // given
+        let didIGoAllTheWayToTheEnd = false;
+        const addTwoFeaturesInTwoDomainTrExecute = async function () {
+          const knexConnA = DomainTransaction.getConnection();
+
+          // check empty in scope A
+          const keys0 = await knexConnA('features').pluck('key');
+          expect(keys0, 'it starts with an empty table').to.deepEqualArray([]);
+
+          // insert in scope A
+          await knexConnA('features').insert({ key: 'scopeA' });
+
+          // check has one in scope A
+          const keys1 = await knexConnA('features').pluck('key');
+          expect(keys1, '"scopeA" has been inserted in first layer').to.deepEqualArray(['scopeA']);
+
+          // nested scope
+          await DomainTransaction.execute(async function () {
+            const knexConnB = DomainTransaction.getConnection();
+
+            // check already has one in scope B
+            const keys1 = await knexConnB('features').pluck('key');
+            expect(keys1, '"scopeA" found in second layer').to.deepEqualArray(['scopeA']);
+
+            // insert in scope B
+            await knexConnB('features').insert({ key: 'scopeB' });
+
+            // check has two in scope B
+            const keys2 = await knexConnB('features').pluck('key').orderBy('key');
+            expect(keys2, '"scopeB" also inserted, but in second layer').to.deepEqualArray(['scopeA', 'scopeB']);
+            didIGoAllTheWayToTheEnd = true;
+          });
+        };
+
+        // when
+        await DomainTransaction.execute(addTwoFeaturesInTwoDomainTrExecute);
+
+        // then
+        expect(didIGoAllTheWayToTheEnd).to.be.true;
+        const finalKeys = await knex('features').pluck('key').orderBy('key');
+        expect(finalKeys).to.deepEqualArray(['scopeA', 'scopeB']);
+      });
+
+      it('should rollback everything when something goes wrong in the nested scope', async function () {
+        // given
+        const addTwoFeaturesInTwoDomainTrExecute = async function () {
+          const knexConnA = DomainTransaction.getConnection();
+
+          await knexConnA('features').insert({ key: 'scopeA' });
+
+          await DomainTransaction.execute(async function () {
+            const knexConnB = DomainTransaction.getConnection();
+
+            await knexConnB('features').insert({ key: 'scopeB' });
+
+            throw new Error("Let's rollback !");
+          });
+        };
+
+        // when
+        const err = await catchErr(DomainTransaction.execute)(addTwoFeaturesInTwoDomainTrExecute);
+
+        // then
+        expect(err.message).to.equal("Let's rollback !");
+        const { count } = await knex('features').count('id').first();
+        expect(count).to.equal(0);
+      });
+    });
+
+    context('DomainTransaction.execute in withTransaction', function () {
+      it('should use the same transaction all the way', async function () {
+        // given
+        let didIGoAllTheWayToTheEnd = false;
+        const addTwoFeaturesInWithTransactioAndDomainTrExecute = withTransaction(async function () {
+          const knexConnA = DomainTransaction.getConnection();
+
+          // check empty in scope A
+          const keys0 = await knexConnA('features').pluck('key');
+          expect(keys0, 'it starts with an empty table').to.deepEqualArray([]);
+
+          // insert in scope A
+          await knexConnA('features').insert({ key: 'scopeA' });
+
+          // check has one in scope A
+          const keys1 = await knexConnA('features').pluck('key');
+          expect(keys1, '"scopeA" has been inserted in first layer').to.deepEqualArray(['scopeA']);
+
+          // nested scope
+          await DomainTransaction.execute(async function () {
+            const knexConnB = DomainTransaction.getConnection();
+
+            // check already has one in scope B
+            const keys1 = await knexConnB('features').pluck('key');
+            expect(keys1, '"scopeA" found in second layer').to.deepEqualArray(['scopeA']);
+
+            // insert in scope B
+            await knexConnB('features').insert({ key: 'scopeB' });
+
+            // check has two in scope B
+            const keys2 = await knexConnB('features').pluck('key').orderBy('key');
+            expect(keys2, '"scopeB" also inserted, but in second layer').to.deepEqualArray(['scopeA', 'scopeB']);
+            didIGoAllTheWayToTheEnd = true;
+          });
+        });
+
+        // when
+        await addTwoFeaturesInWithTransactioAndDomainTrExecute();
+
+        // then
+        expect(didIGoAllTheWayToTheEnd).to.be.true;
+        const finalKeys = await knex('features').pluck('key').orderBy('key');
+        expect(finalKeys).to.deepEqualArray(['scopeA', 'scopeB']);
+      });
+
+      it('should rollback everything when something goes wrong in the nested scope', async function () {
+        // given
+        const addTwoFeaturesInWithTransactioAndDomainTrExecute = withTransaction(async function () {
+          const knexConnA = DomainTransaction.getConnection();
+
+          await knexConnA('features').insert({ key: 'scopeA' });
+
+          await DomainTransaction.execute(async function () {
+            const knexConnB = DomainTransaction.getConnection();
+
+            await knexConnB('features').insert({ key: 'scopeB' });
+
+            throw new Error("Let's rollback !");
+          });
+        });
+
+        // when
+        const err = await catchErr(addTwoFeaturesInWithTransactioAndDomainTrExecute)();
+
+        // then
+        expect(err.message).to.equal("Let's rollback !");
+        const { count } = await knex('features').count('id').first();
+        expect(count).to.equal(0);
+      });
+    });
+  });
+});
