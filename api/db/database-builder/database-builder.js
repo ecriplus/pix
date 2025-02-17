@@ -1,4 +1,6 @@
 /* eslint-disable knex/avoid-injections */
+import _ from 'lodash';
+
 import { databaseBuffer as defaultDatabaseBuffer } from './database-buffer.js';
 import * as databaseHelpers from './database-helpers.js';
 import { factory } from './factory/index.js';
@@ -9,6 +11,7 @@ const READONLY_TABLES = [
   'view-active-organization-learners',
   'pgboss.version',
 ];
+const CHUNK_SIZE = 1000;
 
 /**
  * @class DatabaseBuilder
@@ -58,7 +61,9 @@ export class DatabaseBuilder {
     try {
       await this.knex.transaction(async (trx) => {
         for (const [tableName, objectsToInsert] of orderedObjectsToInsert) {
-          await this.knex.batchInsert(tableName, objectsToInsert).transacting(trx);
+          for (const chunk of _.chunk(objectsToInsert, CHUNK_SIZE)) {
+            await trx.insert(chunk).into(tableName);
+          }
           this.#dirtyTables.add(tableName);
         }
       });
