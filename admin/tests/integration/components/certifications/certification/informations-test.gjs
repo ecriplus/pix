@@ -13,6 +13,19 @@ module('Integration | Component | Certifications | Certification | Informations'
     store = this.owner.lookup('service:store');
   });
 
+  test('should display the global actions block', async function (assert) {
+    // given
+    const certification = store.createRecord('certification', { userId: 1, competencesWithMark: [] });
+    const session = store.createRecord('session', { id: 7404 });
+
+    // when
+    const screen = await render(
+      <template><CertificationInformations @certification={{certification}} @session={{session}} /></template>,
+    );
+
+    // then
+    assert.dom(screen.getByRole('link', { name: "Voir les détails de l'utilisateur" })).exists();
+  });
   test('should display certification state card', async function (assert) {
     // given
     const certification = store.createRecord('certification', { competencesWithMark: [] });
