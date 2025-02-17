@@ -216,6 +216,16 @@ const update = async function (organization) {
     .where({ id: organization.id });
 };
 
+/**
+ * @type {function}
+ * @param organizationId
+ * @return {Promise<void>}
+ */
+const deleteById = async function (organizationId) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn(ORGANIZATIONS_TABLE_NAME).where({ id: organizationId }).delete();
+};
+
 async function _addOrUpdateDataProtectionOfficer(knexConn, dataProtectionOfficer) {
   await knexConn(DATA_PROTECTION_OFFICERS_TABLE_NAME)
     .insert(dataProtectionOfficer)
@@ -331,4 +341,5 @@ export const organizationForAdminRepository = {
   get,
   save,
   update,
+  deleteById,
 };

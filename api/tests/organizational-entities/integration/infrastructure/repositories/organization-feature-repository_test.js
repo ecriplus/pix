@@ -190,4 +190,21 @@ describe('Integration | Repository | Organization-for-admin', function () {
       expect(results).to.be.lengthOf(0);
     });
   });
+
+  describe('#deleteOrganizationFeatureByOrganizationId', function () {
+    it('should delete all organization features from an organization', async function () {
+      // given
+      const organization = databaseBuilder.factory.buildOrganization();
+      const feature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.PLACES_MANAGEMENT);
+      databaseBuilder.factory.buildOrganizationFeature({ organizationId: organization.id, featureId: feature.id });
+      await databaseBuilder.commit();
+
+      // when
+      await organizationFeatureRepository.deleteOrganizationFeatureByOrganizationId(organization.id);
+
+      // then
+      const result = await knex('organization-features').where({ organizationId: organization.id });
+      expect(result).to.have.lengthOf(0);
+    });
+  });
 });

@@ -168,4 +168,20 @@ describe('Integration | Repository | School', function () {
       expect(sessionExpirationDate).to.equal(undefined);
     });
   });
+
+  describe('#deleteByOrganizationId', function () {
+    it('should delete the school corresponding to the organizationId', async function () {
+      // given
+      const organization = databaseBuilder.factory.buildOrganization();
+      databaseBuilder.factory.buildSchool({ organizationId: organization.id });
+      await databaseBuilder.commit();
+
+      // when
+      await repositories.schoolRepository.deleteByOrganizationId({ organizationId: organization.id });
+
+      // then
+      const school = await knex('schools').first();
+      expect(school).to.be.undefined;
+    });
+  });
 });
