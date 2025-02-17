@@ -1,37 +1,3 @@
-import { fileURLToPath } from 'node:url';
-
-import moduleDatasource from '../../src/devcomp/infrastructure/datasources/learning-content/module-datasource.js';
-import { getCsvContent } from '../../src/shared/infrastructure/utils/csv/write-csv-utils.js';
-
-export async function getAnswerableElementsListAsCsv(modules) {
-  const elements = getAnswerableElements(modules);
-
-  return await getCsvContent({
-    data: elements,
-    delimiter: '\t',
-    fileHeaders: [
-      { label: 'ElementId', value: 'id' },
-      { label: 'ElementType', value: 'type' },
-      { label: 'ActivityElementPosition', value: (row) => row.activityElementPosition + 1 },
-      { label: 'ElementInstruction', value: 'instruction' },
-      { label: 'ElementGrainPosition', value: (row) => row.grainPosition + 1 },
-      { label: 'ElementGrainId', value: 'grainId' },
-      { label: 'ElementGrainTitle', value: 'grainTitle' },
-      { label: 'ElementModuleSlug', value: 'moduleSlug' },
-    ],
-  });
-}
-
-// Only run the following if the file is called directly
-if (import.meta.url.startsWith('file:')) {
-  const modulePath = fileURLToPath(import.meta.url);
-
-  if (process.argv[1] === modulePath) {
-    const modules = await moduleDatasource.list();
-    console.log(await getAnswerableElementsListAsCsv(modules));
-  }
-}
-
 export function getAnswerableElements(modules) {
   const ANSWERABLE_ELEMENT_TYPES = ['qcm', 'qcu', 'qrocm'];
 

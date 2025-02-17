@@ -1,8 +1,5 @@
-import {
-  getAnswerableElements,
-  getAnswerableElementsListAsCsv,
-} from '../../../../scripts/modulix/get-answerable-elements-csv.js';
-import { expect } from '../../../test-helper.js';
+import { getAnswerableElements } from '../../../../../scripts/modulix/utils/get-answerable-elements.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Acceptance | Script | Get Answerable Elements as CSV', function () {
   const modulesListAsJs = [
@@ -363,23 +360,6 @@ describe('Acceptance | Script | Get Answerable Elements as CSV', function () {
       expect(elementsListAsJs.every((element) => element.grainPosition !== undefined)).to.be.true;
       expect(elementsListAsJs.every((element) => element.grainId !== undefined)).to.be.true;
       expect(elementsListAsJs.every((element) => element.grainTitle !== undefined)).to.be.true;
-    });
-  });
-
-  describe('#getAnswerableElementsListAsCsv', function () {
-    it(`should return elements list as CSV`, async function () {
-      // When
-      const elementsListAsCsv = await getAnswerableElementsListAsCsv(modulesListAsJs);
-
-      // Then
-      expect(elementsListAsCsv).to.be.a('string');
-      expect(elementsListAsCsv).to
-        .equal(`\ufeff"ElementId"\t"ElementType"\t"ActivityElementPosition"\t"ElementInstruction"\t"ElementGrainPosition"\t"ElementGrainId"\t"ElementGrainTitle"\t"ElementModuleSlug"
-"71de6394-ff88-4de3-8834-a40057a50ff4"\t"qcu"\t1\t"<p>Pix évalue 16 compétences numériques différentes.</p>"\t4\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t"Voici un vrai-faux"\t"didacticiel-modulix"
-"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"didacticiel-modulix"
-"0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447"\t"qcu"\t3\t"<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot&#8239;?</p>"\t6\t"2a77a10f-19a3-4544-80f9-8012dad6506a"\t"Activité remonter dans la page"\t"didacticiel-modulix"
-"c23436d4-6261-49f1-b50d-13a547529c29"\t"qrocm"\t4\t"<p>Compléter le texte suivant :</p>"\t7\t"4ce2a31a-6584-4dae-87c6-d08b58d0f3b9"\t"Connaissez-vous bien Pix"\t"didacticiel-modulix"
-"98c51fa7-03b7-49b1-8c5e-49341d35909c"\t"qrocm"\t5\t"<p>Quel est le nom de ce nouveau produit Pix&#8239;?</p>"\t8\t"7cf75e70-8749-4392-8081-f2c02badb0fb"\t"Le nom de ce produit"\t"didacticiel-modulix"`);
     });
   });
 });
