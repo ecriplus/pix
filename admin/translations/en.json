@@ -752,6 +752,18 @@
           "v3": "V3 sessions to be published"
         }
       },
+      "table": {
+        "required-actions": {
+          "checkbox-label": "Afficher uniquement mes sessions",
+          "headers": {
+            "assigned-officer-name": "Qui ?",
+            "certification-name": "Centre de certification",
+            "finalization-date": "Date de finalisation",
+            "id": "ID",
+            "session-date": "Date de session"
+          }
+        }
+      },
       "title": "Toutes les sessions"
     },
     "target-profiles": {
