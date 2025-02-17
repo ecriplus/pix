@@ -97,7 +97,7 @@ async function main(filePath) {
     console.log('Emptying existing countries in database... ');
     await trx('certification-cpf-countries').del();
     console.log('Inserting countries in database... ');
-    await trx.batchInsert('certification-cpf-countries', countries);
+    await knex.batchInsert('certification-cpf-countries', countries).transacting(trx);
     await trx.commit();
     console.log('ok');
 

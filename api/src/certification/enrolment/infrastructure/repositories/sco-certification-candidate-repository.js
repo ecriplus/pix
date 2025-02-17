@@ -29,7 +29,7 @@ const addNonEnrolledCandidatesToSession = async function ({ sessionId, scoCertif
         allSubscriptionsDTO.push(subscriptionDTO);
       }
     }
-    await trx.batchInsert('certification-subscriptions', allSubscriptionsDTO);
+    await knex.batchInsert('certification-subscriptions', allSubscriptionsDTO).transacting(trx);
   });
 };
 

@@ -60,8 +60,7 @@ export class JobRepository {
   async #send(jobs) {
     const knexConn = DomainTransaction.getConnection();
 
-    //const results = await knex.batchInsert('pgboss.job', jobs).transacting(knexConn.isTransaction ? knexConn : null);
-    const results = await knexConn.batchInsert('pgboss.job', jobs);
+    const results = await knex.batchInsert('pgboss.job', jobs).transacting(knexConn.isTransaction ? knexConn : null);
 
     const rowCount = results.reduce((total, batchResult) => total + (batchResult.rowCount || 0), 0);
 

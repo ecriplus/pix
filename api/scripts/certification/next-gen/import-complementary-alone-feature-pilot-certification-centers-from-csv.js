@@ -92,7 +92,9 @@ async function main(filePath) {
       .leftJoin('features', 'features.id', 'certification-center-features.featureId')
       .where('features.key', CERTIFICATION_FEATURES.CAN_REGISTER_FOR_A_COMPLEMENTARY_CERTIFICATION_ALONE.key)
       .del();
-    const batchInfo = await trx.batchInsert('certification-center-features', certificationCentersPilotsList);
+    const batchInfo = await knex
+      .batchInsert('certification-center-features', certificationCentersPilotsList)
+      .transacting(trx);
     const insertedLines = _getInsertedLineNumber(batchInfo);
     logger.info('✅ ');
     await trx.commit();

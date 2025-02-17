@@ -268,7 +268,7 @@ async function _createUsers({ count, uniqId, trx }) {
     });
   }
   const chunkSize = _getChunkSize(userData[0]);
-  const users = await trx.batchInsert('users', userData.flat(), chunkSize).returning('id');
+  const users = await knex.batchInsert('users', userData.flat(), chunkSize).transacting(trx).returning('id');
   return users.map((user) => user.id);
 }
 
@@ -296,8 +296,9 @@ async function _createOrganizationLearners({ userIds, organizationId, uniqId, tr
     organizationLearnerData.push(organizationLearnerSpecificBuilder({ userId, organizationId, identifier }));
   }
   const chunkSize = _getChunkSize(organizationLearnerData[0]);
-  return trx
+  return knex
     .batchInsert('organization-learners', organizationLearnerData.flat(), chunkSize)
+    .transacting(trx)
     .returning(['id', 'userId']);
 }
 
@@ -355,7 +356,7 @@ async function _createAssessments({ userAndCampaignParticipationIds, trx }) {
     });
   }
   const chunkSize = _getChunkSize(assessmentData[0]);
-  return trx.batchInsert('assessments', assessmentData.flat(), chunkSize).returning(['id', 'userId']);
+  return knex.batchInsert('assessments', assessmentData.flat(), chunkSize).transacting(trx).returning(['id', 'userId']);
 }
 
 async function _createCampaignParticipations({ campaignId, trx, organizationLearnerAndUserIds }) {
@@ -377,7 +378,10 @@ async function _createCampaignParticipations({ campaignId, trx, organizationLear
     });
   }
   const chunkSize = _getChunkSize(participationData[0]);
-  return trx.batchInsert('campaign-participations', participationData.flat(), chunkSize).returning(['id', 'userId']);
+  return knex
+    .batchInsert('campaign-participations', participationData.flat(), chunkSize)
+    .transacting(trx)
+    .returning(['id', 'userId']);
 }
 
 async function _createAnswersAndKnowledgeElements({ campaignId, userAndAssessmentIds, trx }) {
@@ -391,8 +395,9 @@ async function _createAnswersAndKnowledgeElements({ campaignId, userAndAssessmen
     });
   }
   const chunkSize = _getChunkSize(answerData[0]);
-  const answerRecordedData = await trx
+  const answerRecordedData = await knex
     .batchInsert('answers', answerData.flat(), chunkSize)
+    .transacting(trx)
     .returning(['id', 'assessmentId']);
   _log('\tOK');
 
@@ -467,7 +472,7 @@ async function _createBadgeAcquisitions({ targetProfile, userAndCampaignParticip
     }
   }
   const chunkSize = _getChunkSize(badgeAcquisitionData[0]);
-  await trx.batchInsert('badge-acquisitions', badgeAcquisitionData.flat(), chunkSize);
+  await knex.batchInsert('badge-acquisitions', badgeAcquisitionData.flat(), chunkSize).transacting(trx);
   _log(`\t${badgeAcquisitionData.flat().length} acquisitions de badge créées`);
 }
 

@@ -44,7 +44,10 @@ const findUniqByUserIds = function (userIds) {
 const batchSave = async function ({ knowledgeElements }) {
   const knexConn = DomainTransaction.getConnection();
   const knowledgeElementsToSave = knowledgeElements.map((ke) => _.omit(ke, ['id', 'createdAt']));
-  const savedKnowledgeElements = await knexConn.batchInsert(tableName, knowledgeElementsToSave).returning('*');
+  const savedKnowledgeElements = await knex
+    .batchInsert(tableName, knowledgeElementsToSave)
+    .transacting(knexConn.isTransaction ? knexConn : null)
+    .returning('*');
   return savedKnowledgeElements.map((ke) => new KnowledgeElement(ke));
 };
 

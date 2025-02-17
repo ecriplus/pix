@@ -28,7 +28,7 @@ const create = async function (organizationTag) {
 const batchCreate = async function (organizationsTags) {
   const knexConn = DomainTransaction.getConnection();
 
-  return knexConn.batchInsert('organization-tags', organizationsTags);
+  return knex.batchInsert('organization-tags', organizationsTags).transacting(knexConn.isTransaction ? knexConn : null);
 };
 
 const isExistingByOrganizationIdAndTagId = async function ({ organizationId, tagId }) {

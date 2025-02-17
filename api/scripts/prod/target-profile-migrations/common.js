@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { knex } from '../../../db/knex-database-connection.js';
 import * as skillRepository from '../../../src/shared/infrastructure/repositories/skill-repository.js';
 import * as tubeRepository from '../../../src/shared/infrastructure/repositories/tube-repository.js';
 
@@ -37,7 +38,7 @@ const autoMigrateTargetProfile = async function (id, trx) {
     return { ...tube, targetProfileId: id };
   });
   await trx('target-profiles').update({ migration_status: 'AUTO' }).where({ id });
-  await trx.batchInsert('target-profile_tubes', completeTubes);
+  await knex.batchInsert('target-profile_tubes', completeTubes).transacting(trx);
 };
 
 export { autoMigrateTargetProfile };

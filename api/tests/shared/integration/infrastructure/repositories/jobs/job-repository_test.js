@@ -86,7 +86,7 @@ describe('Integration | Infrastructure | Repositories | Jobs | job-repository', 
     });
 
     context('when a transaction ongoing in DomainTransaction', function () {
-      it('should use the existing transaction', async function () {
+      it('should use the same existing transaction', async function () {
         // given
         const name = 'JobTest';
         const jobs = [{ jobParam: 1 }, { jobParam: 2 }];

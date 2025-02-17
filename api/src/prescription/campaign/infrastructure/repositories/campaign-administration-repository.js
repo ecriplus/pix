@@ -113,7 +113,7 @@ const save = async function (campaigns, dependencies = { skillRepository }) {
             ...rightLevelSkills.map((skill) => ({ skillId: skill.id, campaignId: latestCreatedCampaign.id })),
           );
         }
-        await trx.batchInsert('campaign_skills', skillData);
+        await knex.batchInsert('campaign_skills', skillData).transacting(trx);
       }
     }
     await trx.commit();

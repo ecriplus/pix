@@ -85,7 +85,7 @@ const create = async function ({ targetProfileForCreation }) {
     tubeId: tube.id,
     level: tube.level,
   }));
-  await knexConn.batchInsert('target-profile_tubes', tubesData);
+  await knex.batchInsert('target-profile_tubes', tubesData).transacting(knexConn.isTransaction ? knexConn : null);
 
   return targetProfileId;
 };
