@@ -8,13 +8,18 @@ export async function getModulesListAsCsv(modules) {
     data: modules,
     delimiter: '\t',
     fileHeaders: [
-      { label: 'Module', value: 'slug' },
-      {
-        label: 'ModuleTotalElements',
-        value: (row) => _getTotalElementsCount(row.grains),
-      },
-      { label: 'ModuleLink', value: (row) => `https://app.recette.pix.fr/modules/${row.slug}` },
+      { label: 'ModuleSlug', value: 'slug' },
+      { label: 'ModuleTitle', value: 'title' },
       { label: 'ModuleLevel', value: 'details.level' },
+      { label: 'ModuleLink', value: (row) => `https://app.recette.pix.fr/modules/${row.slug}` },
+      {
+        label: 'ModuleIsBeta',
+        value: (row) => (row.isBeta ? '=TRUE' : '=FALSE'),
+      },
+      {
+        label: 'ModuleObjectives',
+        value: (row) => row.details.objectives.join('.'),
+      },
       { label: 'ModuleTotalGrains', value: 'grains.length' },
       {
         label: 'ModuleTotalLessons',
@@ -38,8 +43,8 @@ export async function getModulesListAsCsv(modules) {
       },
       { label: 'ModuleDuration', value: (row) => `=TEXT(${row.details.duration}/24/60; "mm:ss")` },
       {
-        label: 'ModuleIsBeta',
-        value: (row) => (row.isBeta ? '=TRUE' : '=FALSE'),
+        label: 'ModuleTotalElements',
+        value: (row) => _getTotalElementsCount(row.grains),
       },
     ],
   });
