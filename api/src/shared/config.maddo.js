@@ -9,6 +9,7 @@ import ms from 'ms';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
+// eslint-disable-next-line no-unused-vars
 function parseJSONEnv(varName) {
   if (process.env[varName]) {
     return JSON.parse(process.env[varName]);
@@ -25,6 +26,7 @@ function _getNumber(numberAsString, defaultValue) {
   return isNaN(number) ? defaultValue : number;
 }
 
+// eslint-disable-next-line no-unused-vars
 function _getDate(dateAsString) {
   if (!dateAsString) {
     return null;
@@ -37,6 +39,7 @@ function _getDate(dateAsString) {
   return dateAsMoment.toDate();
 }
 
+// eslint-disable-next-line no-unused-vars
 function _removeTrailingSlashFromUrl(url) {
   return url.replace(/\/$/, '');
 }
@@ -90,101 +93,36 @@ function buildSeedsContext(value) {
 const schema = Joi.object({
   ACCESS_TOKEN_LIFESPAN: Joi.string().optional(),
   AUTH_SECRET: Joi.string().required(),
-  AUTONOMOUS_COURSES_ORGANIZATION_ID: Joi.number().required(),
-  API_DATA_URL: Joi.string().uri().optional(),
-  API_DATA_USERNAME: Joi.string().optional(),
-  API_DATA_PASSWORD: Joi.string().optional(),
-  API_DATA_QUERIES: Joi.string().optional(),
-  BREVO_ACCOUNT_CREATION_TEMPLATE_ID: Joi.number().optional(),
-  BREVO_API_KEY: Joi.string().optional(),
-  BREVO_ORGANIZATION_INVITATION_SCO_TEMPLATE_ID: Joi.number().optional(),
-  BREVO_ORGANIZATION_INVITATION_TEMPLATE_ID: Joi.number().optional(),
-  BREVO_PASSWORD_RESET_TEMPLATE_ID: Joi.number().optional(),
-  BREVO_SELF_ACCOUNT_DELETION_TEMPLATE_ID: Joi.number().optional(),
-  CONTAINER_VERSION: Joi.string().optional(),
-  CPF_EXPORTS_STORAGE_ACCESS_KEY_ID: Joi.string().optional(),
-  CPF_EXPORTS_STORAGE_BUCKET_NAME: Joi.string().optional(),
-  CPF_EXPORTS_STORAGE_ENDPOINT: Joi.string().optional(),
-  CPF_EXPORTS_STORAGE_PRE_SIGNED_EXPIRES_IN: Joi.number().optional(),
-  CPF_EXPORTS_STORAGE_REGION: Joi.string().optional(),
-  CPF_EXPORTS_STORAGE_SECRET_ACCESS_KEY: Joi.string().optional(),
-  CPF_PLANNER_JOB_CHUNK_SIZE: Joi.number().optional(),
-  CPF_PLANNER_JOB_CRON: Joi.string().optional(),
-  CPF_PLANNER_JOB_MINIMUM_RELIABILITY_PERIOD: Joi.number().optional(),
-  CPF_PLANNER_JOB_MONTHS_TO_PROCESS: Joi.number().optional(),
-  CPF_RECEIPTS_STORAGE_ACCESS_KEY_ID: Joi.string().optional(),
-  CPF_RECEIPTS_STORAGE_BUCKET_NAME: Joi.string().optional(),
-  CPF_RECEIPTS_STORAGE_ENDPOINT: Joi.string().optional(),
-  CPF_RECEIPTS_STORAGE_REGION: Joi.string().optional(),
-  CPF_RECEIPTS_STORAGE_SECRET_ACCESS_KEY: Joi.string().optional(),
-  CPF_SEND_EMAIL_JOB_CRON: Joi.string().optional(),
-  CPF_SEND_EMAIL_JOB_RECIPIENT: Joi.string().optional(),
+
   DATABASE_CONNECTION_POOL_MAX_SIZE: Joi.number().integer().min(0).optional(),
   DATABASE_CONNECTION_POOL_MIN_SIZE: Joi.number().integer().min(0).optional(),
-  DATABASE_URL: Joi.string().uri().optional(),
-  DOMAIN_PIX: Joi.string().optional(),
-  DOMAIN_PIX_APP: Joi.string().optional(),
-  DOMAIN_PIX_ORGA: Joi.string().optional(),
-  EMAIL_VALIDATION_DEMAND_TEMPORARY_STORAGE_LIFESPAN: Joi.string().optional().default('3d'),
+  DATABASE_URL: Joi.string().uri().optional().required(),
+
+  DATAMART_DATABASE_URL: Joi.string().uri().optional().required(),
+  TEST_DATAMART_DATABASE_URL: Joi.string().uri().optional(),
+
   ENABLE_KNEX_PERFORMANCE_MONITORING: Joi.string().optional().valid('true', 'false'),
-  FORCE_DROP_DATABASE: Joi.string().optional().valid('true', 'false'),
-  FT_ALWAYS_OK_VALIDATE_NEXT_CHALLENGE: Joi.string().optional().valid('true', 'false'),
-  FT_ENABLE_NEED_TO_ADJUST_CERTIFICATION_ACCESSIBILITY: Joi.string().optional().valid('true', 'false'),
-  FT_ENABLE_TEXT_TO_SPEECH_BUTTON: Joi.string().optional().valid('true', 'false'),
-  FT_PIX_COMPANION_ENABLED: Joi.string().optional().valid('true', 'false'),
+
   KNEX_ASYNC_STACKTRACE_ENABLED: Joi.string().optional().valid('true', 'false'),
-  LCMS_API_KEY: Joi.string().required(),
-  LCMS_API_URL: Joi.string().uri().required(),
+
   LOG_ENABLED: Joi.string().required().valid('true', 'false'),
   LOG_FOR_HUMANS: Joi.string().optional().valid('true', 'false'),
   LOG_LEVEL: Joi.string().optional().valid('silent', 'fatal', 'error', 'warn', 'info', 'debug', 'trace'),
   LOG_OPS_METRICS: Joi.string().optional().valid('true', 'false'),
-  MAILING_ENABLED: Joi.string().optional().valid('true', 'false'),
-  MAILING_PROVIDER: Joi.string().optional().valid('brevo', 'mailpit'),
+
   NODE_ENV: Joi.string().optional().valid('development', 'test', 'production'),
-  POLE_EMPLOI_CLIENT_ID: Joi.string().optional(),
-  POLE_EMPLOI_CLIENT_SECRET: Joi.string().optional(),
-  POLE_EMPLOI_SENDING_URL: Joi.string().uri().optional(),
-  POLE_EMPLOI_TOKEN_URL: Joi.string().uri().optional(),
-  REDIS_URL: Joi.string().uri().optional(),
-  REVOKED_USER_ACCESS_LIFESPAN: Joi.string().optional(),
-  SCO_ACCOUNT_RECOVERY_KEY_LIFETIME_MINUTES: Joi.number().integer().min(1).optional(),
+
+  REDIS_URL: Joi.string().uri().optional().required(),
+
   TEST_DATABASE_URL: Joi.string().optional(),
   TEST_LOG_ENABLED: Joi.string().optional().valid('true', 'false'),
   TEST_REDIS_URL: Joi.string().optional(),
-  TLD_FR: Joi.string().optional(),
-  TLD_ORG: Joi.string().optional(),
-  APIM_URL: Joi.string().optional(),
+
+  APIM_URL: Joi.string().optional().required(),
 }).options({ allowUnknown: true });
 
 const configuration = (function () {
   const config = {
-    import: {
-      storage: {
-        client: {
-          accessKeyId: process.env.IMPORT_STORAGE_ACCESS_KEY_ID,
-          secretAccessKey: process.env.IMPORT_STORAGE_SECRET_ACCESS_KEY,
-          endpoint: process.env.IMPORT_STORAGE_ENDPOINT,
-          region: process.env.IMPORT_STORAGE_REGION,
-          bucket: process.env.IMPORT_STORAGE_BUCKET_NAME,
-          forcePathStyle: true,
-        },
-      },
-    },
-    account: {
-      passwordValidationPattern: '^(?=.*\\p{Lu})(?=.*\\p{Ll})(?=.*\\d).{8,}$',
-    },
-    anonymous: {
-      accessTokenLifespanMs: ms(process.env.ANONYMOUS_ACCESS_TOKEN_LIFESPAN || '4h'),
-    },
-    apiData: {
-      url: process.env.API_DATA_URL,
-      credentials: {
-        username: process.env.API_DATA_USERNAME,
-        password: process.env.API_DATA_PASSWORD,
-      },
-      queries: parseJSONEnv('API_DATA_QUERIES'),
-    },
     apiManager: {
       url: process.env.APIM_URL || 'https://gateway.pix.fr',
     },
@@ -223,6 +161,12 @@ const configuration = (function () {
       secret: process.env.AUTH_SECRET,
       accessTokenLifespanMs: ms(process.env.ACCESS_TOKEN_LIFESPAN || '20m'),
       refreshTokenLifespanMs: ms(process.env.REFRESH_TOKEN_LIFESPAN || '7d'),
+      refreshTokenLifespanMsByScope: {
+        'mon-pix': ms(process.env.REFRESH_TOKEN_LIFESPAN_MON_PIX || '7d'),
+        'pix-orga': ms(process.env.REFRESH_TOKEN_LIFESPAN_PIX_ORGA || '7d'),
+        'pix-certif': ms(process.env.REFRESH_TOKEN_LIFESPAN_PIX_CERTIF || '7d'),
+        'pix-admin': ms(process.env.REFRESH_TOKEN_LIFESPAN_PIX_ADMIN || '7d'),
+      },
       revokedUserAccessLifespanMs: ms(process.env.REVOKED_USER_ACCESS_LIFESPAN || '7d'),
       tokenForCampaignResultLifespan: process.env.CAMPAIGN_RESULT_ACCESS_TOKEN_LIFESPAN || '1h',
       tokenForStudentReconciliationLifespan: '1h',
@@ -233,10 +177,6 @@ const configuration = (function () {
         expirationDelaySeconds:
           parseInt(process.env.AUTHENTICATION_SESSION_TEMPORARY_STORAGE_EXP_DELAY_SECONDS, 10) || 1140,
       },
-    },
-    availableCharacterForCode: {
-      letters: 'BCDFGHJKMPQRTVWXY',
-      numbers: '2346789',
     },
     bcryptNumberOfSaltRounds: _getNumber(process.env.BCRYPT_NUMBER_OF_SALT_ROUNDS, 10),
     caching: {
@@ -285,58 +225,9 @@ const configuration = (function () {
     dataProtectionPolicy: {
       updateDate: process.env.DATA_PROTECTION_POLICY_UPDATE_DATE || null,
     },
-    domain: {
-      tldFr: process.env.TLD_FR || '.fr',
-      tldOrg: process.env.TLD_ORG || '.org',
-      pix: process.env.DOMAIN_PIX || 'https://pix',
-      pixApp: process.env.DOMAIN_PIX_APP || 'https://app.pix',
-      pixOrga: process.env.DOMAIN_PIX_ORGA || 'https://orga.pix',
-      pixCertif: process.env.DOMAIN_PIX_CERTIF || 'https://certif.pix',
-    },
     environment: process.env.NODE_ENV || 'development',
-    features: {
-      dayBeforeImproving: _getNumber(process.env.DAY_BEFORE_IMPROVING, 4),
-      dayBeforeRetrying: _getNumber(process.env.DAY_BEFORE_RETRYING, 4),
-      dayBeforeCompetenceResetV2: _getNumber(process.env.DAY_BEFORE_COMPETENCE_RESET_V2, 7),
-      garAccessV2: toBoolean(process.env.GAR_ACCESS_V2),
-      maxReachableLevel: _getNumber(process.env.MAX_REACHABLE_LEVEL, 5),
-      newYearOrganizationLearnersImportDate: _getDate(process.env.NEW_YEAR_ORGANIZATION_LEARNERS_IMPORT_DATE),
-      numberOfChallengesForFlashMethod: _getNumber(process.env.NUMBER_OF_CHALLENGES_FOR_FLASH_METHOD),
-      successProbabilityThreshold: parseFloat(process.env.SUCCESS_PROBABILITY_THRESHOLD ?? '0.95'),
-      pixCertifScoBlockedAccessDateLycee: process.env.PIX_CERTIF_SCO_BLOCKED_ACCESS_DATE_LYCEE,
-      pixCertifScoBlockedAccessDateCollege: process.env.PIX_CERTIF_SCO_BLOCKED_ACCESS_DATE_COLLEGE,
-      scheduleComputeOrganizationLearnersCertificability: {
-        cron: process.env.SCHEDULE_COMPUTE_LEARNERS_CERTIFICABILITY_JOB_CRON || '0 21 * * *',
-        chunkSize: process.env.SCHEDULE_COMPUTE_LEARNERS_CERTIFICABILITY_CHUNK_SIZE || 1000,
-        synchronously: process.env.SCHEDULE_COMPUTE_LEARNERS_CERTIFICABILITY_SYNCHRONOUSLY || false,
-      },
-      scoAccountRecoveryKeyLifetimeMinutes: process.env.SCO_ACCOUNT_RECOVERY_KEY_LIFETIME_MINUTES,
-    },
-    featureToggles: {
-      deprecatePoleEmploiPushNotification: toBoolean(process.env.DEPRECATE_PE_PUSH_NOTIFICATION),
-      isAlwaysOkValidateNextChallengeEndpointEnabled: toBoolean(
-        process.env.FT_ALWAYS_OK_VALIDATE_NEXT_CHALLENGE_ENDPOINT,
-      ),
-      isAsyncQuestRewardingCalculationEnabled: toBoolean(process.env.FT_ENABLE_ASYNC_QUESTS_REWARDS_CALCULATION),
-      isDirectMetricsEnabled: toBoolean(process.env.FT_ENABLE_DIRECT_METRICS),
-      isNeedToAdjustCertificationAccessibilityEnabled: toBoolean(
-        process.env.FT_ENABLE_NEED_TO_ADJUST_CERTIFICATION_ACCESSIBILITY,
-      ),
-      isOppsyDisabled: toBoolean(process.env.FT_OPPSY_DISABLED),
-      isPix1dEnabled: toBoolean(process.env.FT_PIX_1D_ENABLED),
-      isPixAdminNewSidebarEnabled: toBoolean(process.env.FT_PIX_ADMIN_NEW_SIDEBAR_ENABLED),
-      isPixAppNewLayoutEnabled: toBoolean(process.env.FT_PIXAPP_NEW_LAYOUT_ENABLED),
-      isPixCompanionEnabled: toBoolean(process.env.FT_PIX_COMPANION_ENABLED),
-      isSelfAccountDeletionEnabled: toBoolean(process.env.FT_SELF_ACCOUNT_DELETION),
-      isQuestEnabled: toBoolean(process.env.FT_ENABLE_QUESTS),
-      isUserTokenAudConfinementEnabled: toBoolean(process.env.FT_USER_TOKEN_AUD_CONFINEMENT_ENABLED),
-      isTextToSpeechButtonEnabled: toBoolean(process.env.FT_ENABLE_TEXT_TO_SPEECH_BUTTON),
-      isLegalDocumentsVersioningEnabled: toBoolean(process.env.FT_NEW_LEGAL_DOCUMENTS_VERSIONING),
-      setupEcosystemBeforeStart: toBoolean(process.env.FT_SETUP_ECOSYSTEM_BEFORE_START) || false,
-      showExperimentalMissions: toBoolean(process.env.FT_SHOW_EXPERIMENTAL_MISSIONS),
-      showNewCampaignPresentationPage: toBoolean(process.env.FT_SHOW_NEW_CAMPAIGN_PRESENTATION_PAGE),
-      showNewResultPage: toBoolean(process.env.FT_SHOW_NEW_RESULT_PAGE),
-    },
+    features: {},
+    featureToggles: {},
     hapi: {
       options: {},
       enableRequestMonitoring: toBoolean(process.env.ENABLE_REQUEST_MONITORING),
@@ -375,10 +266,6 @@ const configuration = (function () {
         tokenLifespan: process.env.CERTIFICATION_RESULTS_JWT_TOKEN_LIFE_SPAN || '30d',
       },
     },
-    lcms: {
-      url: _removeTrailingSlashFromUrl(process.env.CYPRESS_LCMS_API_URL || process.env.LCMS_API_URL || ''),
-      apiKey: process.env.CYPRESS_LCMS_API_KEY || process.env.LCMS_API_KEY,
-    },
     logging: {
       enabled: toBoolean(process.env.LOG_ENABLED),
       logLevel: process.env.LOG_LEVEL || 'info',
@@ -396,35 +283,8 @@ const configuration = (function () {
       ),
       temporaryBlockingBaseTimeMs: ms(process.env.LOGIN_TEMPORARY_BLOCKING_BASE_TIME || '2m'),
       blockingLimitFailureCount: _getNumber(process.env.LOGIN_BLOCKING_LIMIT_FAILURE_COUNT || 30),
-      emailConnectionWarningPeriod: ms(process.env.EMAIL_CONNECTION_WARNING_PERIOD || '1y'),
     },
     logOpsMetrics: toBoolean(process.env.LOG_OPS_METRICS),
-    mailing: {
-      enabled: toBoolean(process.env.MAILING_ENABLED),
-      provider: process.env.MAILING_PROVIDER || 'mailpit',
-      smtpUrl: process.env.MAILING_SMTP_URL || 'smtp://username:password@localhost:1025/',
-      mailpit: {
-        templates: {},
-      },
-      brevo: {
-        apiKey: process.env.BREVO_API_KEY,
-        templates: {
-          accountCreationTemplateId: process.env.BREVO_ACCOUNT_CREATION_TEMPLATE_ID,
-          accountRecoveryTemplateId: process.env.BREVO_ACCOUNT_RECOVERY_TEMPLATE_ID,
-          acquiredCleaResultTemplateId: process.env.BREVO_CLEA_ACQUIRED_RESULT_TEMPLATE_ID,
-          certificationCenterInvitationTemplateId: process.env.BREVO_CERTIFICATION_CENTER_INVITATION_TEMPLATE_ID,
-          certificationResultTemplateId: process.env.BREVO_CERTIFICATION_RESULT_TEMPLATE_ID,
-          cpfEmailTemplateId: process.env.BREVO_CPF_TEMPLATE_ID,
-          emailVerificationCodeTemplateId: process.env.BREVO_EMAIL_VERIFICATION_CODE_TEMPLATE_ID,
-          organizationInvitationTemplateId: process.env.BREVO_ORGANIZATION_INVITATION_TEMPLATE_ID,
-          organizationInvitationScoTemplateId: process.env.BREVO_ORGANIZATION_INVITATION_SCO_TEMPLATE_ID,
-          passwordResetTemplateId: process.env.BREVO_PASSWORD_RESET_TEMPLATE_ID,
-          selfAccountDeletionTemplateId: process.env.BREVO_SELF_ACCOUNT_DELETION_TEMPLATE_ID,
-          targetProfileNotCertifiableTemplateId: process.env.BREVO_TARGET_PROFILE_NOT_CERTIFIABLE_TEMPLATE_ID,
-          warningConnectionTemplateId: process.env.BREVO_WARNING_CONNECTION_TEMPLATE_ID,
-        },
-      },
-    },
     metrics: {
       flushIntervalSeconds: _getNumber(process.env.DIRECT_METRICS_FLUSH_INTERVAL, 5),
     },
@@ -461,16 +321,6 @@ const configuration = (function () {
     },
     port: parseInt(process.env.PORT, 10) || 3000,
     rootPath: path.normalize(__dirname + '/..'),
-    saml: {
-      spConfig: parseJSONEnv('SAML_SP_CONFIG'),
-      idpConfig: parseJSONEnv('SAML_IDP_CONFIG'),
-      attributeMapping: parseJSONEnv('SAML_ATTRIBUTE_MAPPING') || {
-        samlId: 'IDO',
-        firstName: 'PRE',
-        lastName: 'NOM',
-      },
-      accessTokenLifespanMs: ms(process.env.SAML_ACCESS_TOKEN_LIFESPAN || '7d'),
-    },
     seeds: getSeedsConfig(),
     temporaryKey: {
       secret: process.env.AUTH_SECRET,
@@ -485,38 +335,9 @@ const configuration = (function () {
       expirationDelaySeconds: parseInt(process.env.TEMPORARY_STORAGE_EXPIRATION_DELAY_SECONDS, 10) || 600,
       redisUrl: process.env.REDIS_URL,
     },
-    temporaryStorageForEmailValidationDemand: {
-      expirationDelaySeconds: ms(process.env.EMAIL_VALIDATION_DEMAND_TEMPORARY_STORAGE_LIFESPAN || '3d') / 1000,
-    },
-    v3Certification: {
-      numberOfChallengesPerCourse: parseInt(process.env.V3_CERTIFICATION_NUMBER_OF_CHALLENGES_PER_COURSE, 10) || 20,
-      defaultProbabilityToPickChallenge: parseInt(process.env.DEFAULT_PROBABILITY_TO_PICK_CHALLENGE, 10) || 51,
-      defaultCandidateCapacity: -3,
-      challengesBetweenSameCompetence: 2,
-      scoring: {
-        minimumAnswersRequiredToValidateACertification: 20,
-        maximumReachableScore: 895,
-      },
-      maxReachableLevel: 7,
-    },
-    version: process.env.CONTAINER_VERSION || 'development',
-    autonomousCourse: {
-      autonomousCoursesOrganizationId: parseInt(process.env.AUTONOMOUS_COURSES_ORGANIZATION_ID, 10),
-    },
   };
 
   if (process.env.NODE_ENV === 'test') {
-    config.apiData = {
-      url: 'http://example.net',
-      credentials: {
-        username: 'user',
-        password: 'passowrd',
-      },
-      queries: {
-        coverRateByTubes: 'coverage-rate-query-id',
-      },
-    };
-
     config.auditLogger.isEnabled = true;
     config.auditLogger.baseUrl = 'http://audit-logger.local';
     config.auditLogger.clientSecret = 'client-super-secret';
@@ -534,72 +355,11 @@ const configuration = (function () {
 
     config.port = 0;
 
-    config.lcms.apiKey = 'test-api-key';
-    config.lcms.url = 'https://lcms-test.pix.fr/api';
-
-    config.domain.tldFr = '.fr';
-    config.domain.tldOrg = '.org';
-    config.domain.pix = 'https://pix';
-    config.domain.pixOrga = 'https://orga.pix';
-    config.domain.pixApp = 'https://test.app.pix';
-
-    config.features.dayBeforeRetrying = 4;
-    config.features.dayBeforeImproving = 4;
-    config.features.dayBeforeCompetenceResetV2 = 7;
-    config.features.garAccessV2 = false;
-    config.features.maxReachableLevel = 5;
-    config.features.numberOfChallengesForFlashMethod = 10;
-    config.features.pixCertifScoBlockedAccessDateLycee = null;
-    config.features.pixCertifScoBlockedAccessDateCollege = null;
-
-    config.featureToggles.deprecatePoleEmploiPushNotification = false;
-    config.featureToggles.isAlwaysOkValidateNextChallengeEndpointEnabled = false;
-    config.featureToggles.isDirectMetricsEnabled = false;
-    config.featureToggles.isNeedToAdjustCertificationAccessibilityEnabled = false;
-    config.featureToggles.isOppsyDisabled = false;
-    config.featureToggles.isPix1dEnabled = true;
-    config.featureToggles.isPixAppNewLayoutEnabled = true;
-    config.featureToggles.isPixCompanionEnabled = false;
-    config.featureToggles.isSelfAccountDeletionEnabled = false;
-    config.featureToggles.isQuestEnabled = false;
-    config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
-    config.featureToggles.isUserTokenAudConfinementEnabled = true;
-    config.featureToggles.isTextToSpeechButtonEnabled = false;
-    config.featureToggles.isLegalDocumentsVersioningEnabled = false;
-    config.featureToggles.showNewResultPage = false;
-    config.featureToggles.showExperimentalMissions = false;
-
-    config.mailing.enabled = false;
-    config.mailing.provider = 'brevo';
-    config.mailing.smtpUrl = 'smtp://username:password@localhost:1025/';
-
-    config.mailing.brevo.apiKey = 'test-api-key';
-    config.mailing.brevo.templates.accountCreationTemplateId = 'test-account-creation-template-id';
-    config.mailing.brevo.templates.organizationInvitationTemplateId = 'test-organization-invitation-demand-template-id';
-    config.mailing.brevo.templates.organizationInvitationScoTemplateId =
-      'test-organization-invitation-sco-demand-template-id';
-    config.mailing.brevo.templates.certificationCenterInvitationTemplateId =
-      'test-certification-center-invitation-template-id';
-    config.mailing.brevo.templates.certificationResultTemplateId = 'test-certification-result-template-id';
-    config.mailing.brevo.templates.passwordResetTemplateId = 'test-password-reset-template-id';
-    config.mailing.brevo.templates.emailChangeTemplateId = 'test-email-change-template-id';
-    config.mailing.brevo.templates.accountRecoveryTemplateId = 'test-account-recovery-template-id';
-    config.mailing.brevo.templates.emailVerificationCodeTemplateId = 'test-email-verification-code-template-id';
-    config.mailing.brevo.templates.cpfEmailTemplateId = 'test-cpf-email-template-id';
-    config.mailing.brevo.templates.acquiredCleaResultTemplateId = 'test-acquired-clea-result-template-id';
-    config.mailing.brevo.templates.targetProfileNotCertifiableTemplateId =
-      'test-target-profile-no-certifiable-template-id';
-    config.mailing.brevo.templates.warningConnectionTemplateId = 'test-warning-connection-template-id';
-
-    config.bcryptNumberOfSaltRounds = 1;
-
     config.authentication.secret = 'the-password-must-be-at-least-32-characters-long';
 
     config.temporaryKey.secret = 'the-password-must-be-at-least-32-characters-long';
 
     config.temporaryStorage.redisUrl = process.env.TEST_REDIS_URL;
-
-    config.saml.accessTokenLifespanMs = 1000;
 
     config.apimRegisterApplicationsCredentials = [
       {
@@ -674,19 +434,6 @@ const configuration = (function () {
 
     config.redis = {
       url: process.env.TEST_REDIS_URL,
-    };
-
-    config.import = {
-      storage: {
-        client: {
-          accessKeyId: 'nothing',
-          secretAccessKey: 'nothing',
-          endpoint: process.env.TEST_IMPORT_STORAGE_ENDPOINT,
-          region: 'nothing',
-          bucket: process.env.TEST_IMPORT_STORAGE_BUCKET_NAME,
-          forcePathStyle: true,
-        },
-      },
     };
 
     config.dataProtectionPolicy.updateDate = '2022-12-25 00:00:01';

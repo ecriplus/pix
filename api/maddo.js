@@ -1,9 +1,8 @@
 import 'dotenv/config';
 
 import { disconnect, prepareDatabaseConnection } from './db/knex-database-connection.js';
-import { createServer } from './server.js';
-import { config, schema as configSchema } from './src/shared/config.js';
-import { learningContentCache } from './src/shared/infrastructure/caches/learning-content-cache.js';
+import { createMaddoServer } from './server.maddo.js';
+import { config, schema as configSchema } from './src/shared/config.maddo.js';
 import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
 import { logger } from './src/shared/infrastructure/utils/logger.js';
 import { redisMonitor } from './src/shared/infrastructure/utils/redis-monitor.js';
@@ -26,7 +25,7 @@ const start = async function () {
   if (config.featureToggles.setupEcosystemBeforeStart) {
     await _setupEcosystem();
   }
-  server = await createServer();
+  server = await createMaddoServer();
   await server.start();
 };
 
@@ -42,8 +41,6 @@ async function _exitOnSignal(signal) {
   logger.info('Closing connections to database...');
   await disconnect();
   logger.info('Closing connections to cache...');
-  await learningContentCache.quit();
-  logger.info('Closing connections to storages...');
   await quitAllStorages();
   logger.info('Closing connections to redis monitor...');
   await redisMonitor.quit();
@@ -60,9 +57,6 @@ process.on('SIGINT', () => {
 (async () => {
   try {
     await start();
-    if (config.infra.startJobInWebProcess) {
-      import('./worker.js');
-    }
   } catch (error) {
     logger.error(error);
     throw error;
