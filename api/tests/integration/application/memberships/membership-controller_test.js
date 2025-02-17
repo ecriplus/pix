@@ -1,6 +1,6 @@
 import * as moduleUnderTest from '../../../../lib/application/memberships/index.js';
-import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
+import { usecases } from '../../../../src/team/domain/usecases/index.js';
 import { domainBuilder, expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Integration | Application | Memberships | membership-controller', function () {

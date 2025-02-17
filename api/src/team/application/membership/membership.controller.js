@@ -13,6 +13,14 @@ const create = async function (request, h, dependencies = { membershipSerializer
   return h.response(dependencies.membershipSerializer.serializeForAdmin(membership)).created();
 };
 
+const disable = async function (request, h) {
+  const membershipId = request.params.id;
+  const userId = requestResponseUtils.extractUserIdFromRequest(request);
+
+  await usecases.disableMembership({ membershipId, userId });
+  return h.response().code(204);
+};
+
 const update = async function (request, h, dependencies = { requestResponseUtils, membershipSerializer }) {
   const membershipId = request.params.id;
   const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
@@ -42,6 +50,6 @@ const findPaginatedFilteredMemberships = async function (request) {
   return membershipSerializer.serialize(memberships, pagination);
 };
 
-const membershipController = { create, findPaginatedFilteredMemberships, update };
+const membershipController = { create, disable, findPaginatedFilteredMemberships, update };
 
 export { membershipController };

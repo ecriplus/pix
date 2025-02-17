@@ -3,7 +3,7 @@ import { membershipController } from '../../../../../src/team/application/member
 import { teamRoutes } from '../../../../../src/team/application/routes.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Team | Application | Route | Membership', function () {
+describe('Unit | Team | Application | Admin | Route | Membership', function () {
   describe('POST /api/admin/memberships', function () {
     it('returns forbidden access if admin member has CERTIF role', async function () {
       // given
@@ -68,6 +68,51 @@ describe('Unit | Team | Application | Route | Membership', function () {
 
       // then
       expect(response.statusCode).to.equal(403);
+    });
+  });
+
+  describe('POST /api/admin/memberships/{id}/disable', function () {
+    it('returns 204 if user is Pix Admin', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+      sinon.stub(membershipController, 'disable').callsFake((request, h) => h.response().code(204));
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(teamRoutes);
+      const membershipId = 123;
+
+      // when
+      const response = await httpTestServer.request('POST', `/api/admin/memberships/${membershipId}/disable`);
+
+      // then
+      expect(response.statusCode).to.equal(204);
+      expect(membershipController.disable).to.have.been.called;
+    });
+
+    it('returns forbidden access if admin member has CERTIF role', async function () {
+      // given
+      sinon.stub(membershipController, 'disable');
+
+      sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleCertif').callsFake((request, h) => h.response(true));
+      sinon
+        .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+        .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+      sinon
+        .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+        .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+      sinon
+        .stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier')
+        .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(teamRoutes);
+
+      // when
+      const response = await httpTestServer.request('POST', '/api/admin/memberships/1/disable');
+
+      // then
+      expect(response.statusCode).to.equal(403);
+      expect(membershipController.disable).to.have.not.been.called;
     });
   });
 });

@@ -1,8 +1,8 @@
-import { disableMembership } from '../../../../lib/domain/usecases/disable-membership.js';
-import { MembershipUpdateError } from '../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../test-helper.js';
+import { MembershipUpdateError } from '../../../../../src/shared/domain/errors.js';
+import { disableMembership } from '../../../../../src/team/domain/usecases/disable-membership.usecase.js';
+import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | disable-membership', function () {
+describe('Unit | Team | Domain | UseCase | disable-membership', function () {
   let membershipRepository;
 
   beforeEach(function () {

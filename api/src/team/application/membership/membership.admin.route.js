@@ -139,4 +139,32 @@ export const membershipAdminRoutes = [
       ],
     },
   },
+  {
+    method: 'POST',
+    path: '/api/admin/memberships/{id}/disable',
+    config: {
+      pre: [
+        {
+          method: (request, h) =>
+            securityPreHandlers.hasAtLeastOneAccessOf([
+              securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+              securityPreHandlers.checkAdminMemberHasRoleSupport,
+              securityPreHandlers.checkAdminMemberHasRoleMetier,
+            ])(request, h),
+          assign: 'hasAuthorizationToAccessAdminScope',
+        },
+      ],
+      validate: {
+        params: Joi.object({
+          id: identifiersType.membershipId,
+        }),
+      },
+      handler: (request, h) => membershipController.disable(request, h),
+      tags: ['api'],
+      notes: [
+        "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
+          "- Elle permet la désactivation d'un membre",
+      ],
+    },
+  },
 ];
