@@ -35,6 +35,7 @@ export function getElements(modules) {
   const ELEMENT_TYPES = [
     'download',
     'embed',
+    'expand',
     'flashcards',
     'image',
     'qcm',
@@ -53,6 +54,7 @@ export function getElements(modules) {
       for (const component of grain.components) {
         if (component.type === 'element') {
           if (!ELEMENT_TYPES.includes(component.element.type)) {
+            console.warn(`Ignored element ${component.element.id} with unknown type "${component.element.type}".`);
             continue;
           }
 
