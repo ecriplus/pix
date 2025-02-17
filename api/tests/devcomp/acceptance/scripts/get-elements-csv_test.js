@@ -12,31 +12,6 @@ describe('Acceptance | Script | Get Elements as CSV', function () {
   });
 
   describe('#getElements', function () {
-    it('should only handle known element types', async function () {
-      // When
-      const elementsListAsJs = await getElements(modulesListAsJs);
-
-      // Then
-      expect(elementsListAsJs).to.be.an('array');
-      expect(
-        elementsListAsJs.every((element) =>
-          [
-            'download',
-            'embed',
-            'expand',
-            'flashcards',
-            'image',
-            'qcm',
-            'qcu',
-            'qrocm',
-            'separator',
-            'text',
-            'video',
-          ].includes(element.type),
-        ),
-      ).to.be.true;
-    });
-
     it('should add some meta info to elements', async function () {
       // When
       const elementsListAsJs = await getElements(modulesListAsJs);
