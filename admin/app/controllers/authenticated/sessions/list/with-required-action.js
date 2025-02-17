@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 // eslint-disable-next-line ember/no-computed-properties-in-native-classes
-import { computed } from '@ember/object';
+import { action, computed } from '@ember/object';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
@@ -10,7 +10,7 @@ export default class AuthenticatedSessionsWithRequiredActionListController exten
   @tracked assignedToSelfOnly = false;
 
   @computed('assignedToSelfOnly', 'currentUser.adminMember.fullName', 'model.withRequiredAction')
-  get filteredSessions() {
+  get sessionsList() {
     const sessions = this.model;
     if (this.assignedToSelfOnly) {
       return sessions.filter(
@@ -18,5 +18,14 @@ export default class AuthenticatedSessionsWithRequiredActionListController exten
       );
     }
     return sessions;
+  }
+
+  get hasSessionsToProcess() {
+    return this.model.length;
+  }
+
+  @action filterAssignedSessions() {
+    this.assignedToSelfOnly = !this.assignedToSelfOnly;
+    this.sessionsList;
   }
 }

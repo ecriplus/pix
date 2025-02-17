@@ -1,12 +1,11 @@
 {{page-title "Sessions à traiter"}}
-<span class="session-list__self-toogle">
-  <p>{{t "pages.sessions.table.required-actions.checkbox-label"}}</p>
-  <XToggle
-    @size="small"
-    @theme="light"
-    @value={{this.assignedToSelfOnly}}
-    @onToggle={{fn (mut this.assignedToSelfOnly)}}
-  />
-</span>
 
-<WithRequiredActionSessions::ListItems @withRequiredActionSessions={{this.filteredSessions}} />
+{{#if this.hasSessionsToProcess}}
+  <div class="session-list__assigned-to-process-session">
+    <PixCheckbox @checked={{this.assignedToSelfOnly}} {{on "change" this.filterAssignedSessions}}>
+      <:label>{{t "pages.sessions.table.required-actions.checkbox-label"}}</:label>
+    </PixCheckbox>
+  </div>
+{{/if}}
+
+<WithRequiredActionSessions::ListItems @withRequiredActionSessions={{this.sessionsList}} />
