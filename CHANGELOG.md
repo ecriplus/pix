@@ -1,5 +1,22 @@
 # Pix Changelog
 
+## v5.44.0 (17/02/2025)
+
+
+### :rocket: Amélioration
+- [#11354](https://github.com/1024pix/pix/pull/11354) [FEATURE] Création de l’API MADDO (PIX-16420).
+- [#11404](https://github.com/1024pix/pix/pull/11404) [FEATURE] Ajouter la nouvelle barre de navigation dans Pix Admin (PIX-16550) .
+- [#11408](https://github.com/1024pix/pix/pull/11408) [FEATURE] Ajouter un icône dans la liste des profils cible pour afficher le type d'accès au parcours (PIX-16384).
+- [#11413](https://github.com/1024pix/pix/pull/11413) [FEATURE] Ajouter une action Détacher dans la liste des Contenus Formatifs (PIX-16511)(PIX-7393).
+
+### :building_construction: Tech
+- [#11424](https://github.com/1024pix/pix/pull/11424) [TECH] Simplifier la création des migrations.
+- [#11410](https://github.com/1024pix/pix/pull/11410) [TECH] Ajouter le niveau global dans la documentation Parcoursup (PIX-16471).
+- [#11386](https://github.com/1024pix/pix/pull/11386) [TECH] Migrer la route Admin qui liste les adhésions aux centres de certification d'un utilisateur (PIX-16452).
+
+### :arrow_up: Montée de version
+- [#11419](https://github.com/1024pix/pix/pull/11419) [BUMP] Update dependency @1024pix/pix-ui to ^54.9.0 (orga).
+
 ## v5.43.0 (14/02/2025)
 
 
