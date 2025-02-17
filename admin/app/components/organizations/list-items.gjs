@@ -121,7 +121,7 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
         </table>
 
         {{#unless @organizations}}
-          <div class="table__empty">Aucun résultat</div>
+          <div class="table__empty">{{t "common.tables.empty-result"}}</div>
         {{/unless}}
       </div>
     </div>

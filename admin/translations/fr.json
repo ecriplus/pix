@@ -74,6 +74,9 @@
       "auto": "Automatique",
       "member": "Membre"
     },
+    "tables": {
+      "empty-result": "Aucun résultat"
+    },
     "words": {
       "no": "Non",
       "yes": "Oui"
@@ -784,7 +787,7 @@
           "button-label": "Publier toutes les sessions",
           "cell": {
             "publish-button": {
-              "aria-label": "Publier la session numéro",
+              "aria-label": "Publier la session numéro {sessionId}",
               "label": "Publier"
             }
           },
@@ -796,9 +799,10 @@
             "session-date": "Date de session"
           },
           "modals": {
-            "batch-publications":"Vous vous apprêtez à publier {length} session(s) de certification, souhaitez vous poursuivre ?",
-            "publication":"Souhaitez-vous publier la session ?"
-          }        }
+            "batch-publications": "Vous vous apprêtez à publier {length} session(s) de certification, souhaitez vous poursuivre ?",
+            "publication": "Souhaitez-vous publier la session ?"
+          }
+        }
       },
       "title": "Toutes les sessions"
     },

@@ -4,6 +4,7 @@ import { fn } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 import formatDate from 'pix-admin/helpers/format-date';
 
 export default class OrganizationLearnerInformation extends Component {
@@ -81,7 +82,7 @@ export default class OrganizationLearnerInformation extends Component {
             </tr>
           {{else}}
             <tr>
-              <td colspan="9" class="table-admin-empty">Aucun résultat</td>
+              <td colspan="9" class="table-admin-empty">{{t "common.tables.empty-result"}}</td>
             </tr>
           {{/each}}
         </tbody>

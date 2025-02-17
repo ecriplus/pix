@@ -6,6 +6,7 @@ import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
 import map from 'lodash/map';
 import { statusToDisplayName } from 'pix-admin/models/session';
 
@@ -202,7 +203,7 @@ export default class ListItems extends Component {
       </table>
 
       {{#unless @sessions}}
-        <div class="table__empty">Aucun résultat</div>
+        <div class="table__empty">{{t "common.tables.empty-result"}}</div>
       {{/unless}}
     </div>
 

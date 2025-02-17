@@ -1,14 +1,15 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { setupRenderingTest } from 'ember-qunit';
 import OrganizationLearnerInformation from 'pix-admin/components/users/user-detail-personal-information/organization-learner-information';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
+
 module(
   'Integration | Component | users | user-detail-personal-information | organization-learner-information',
   function (hooks) {
-    setupRenderingTest(hooks);
+    setupIntlRenderingTest(hooks);
 
     module('When the admin member has access to users actions scope', function () {
       class AccessControlStub extends Service {

@@ -5,6 +5,7 @@ import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 import ENV from 'pix-admin/config/environment';
 
 export default class SearchBar extends Component {
@@ -43,7 +44,7 @@ export default class SearchBar extends Component {
 
         {{#if @isNoResult}}
           <span class="attach-target-profile-search__no-result">
-            Aucun résultat
+            {{t "common.tables.empty-result"}}
           </span>
         {{/if}}
 

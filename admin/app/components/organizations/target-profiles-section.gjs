@@ -198,7 +198,7 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
           </table>
 
           {{#unless @targetProfileSummaries}}
-            <div class="table__empty">Aucun résultat</div>
+            <div class="table__empty">{{t "common.tables.empty-result"}}</div>
           {{/unless}}
         </div>
       </div>

@@ -3,6 +3,7 @@ import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import { fn } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 
 export default class CertificationCenterListItems extends Component {
   searchedId = this.args.id;
@@ -60,7 +61,7 @@ export default class CertificationCenterListItems extends Component {
       </table>
 
       {{#unless @certificationCenters}}
-        <div class="table__empty">Aucun résultat</div>
+        <div class="table__empty">{{t "common.tables.empty-result"}}</div>
       {{/unless}}
     </div>
 

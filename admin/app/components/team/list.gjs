@@ -164,7 +164,7 @@ export default class List extends Component {
         {{/if}}
       </table>
       {{#unless @members}}
-        <div class="table__empty">Aucun résultat</div>
+        <div class="table__empty">{{t "common.tables.empty-result"}}</div>
       {{/unless}}
     </div>
 

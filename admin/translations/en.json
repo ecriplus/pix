@@ -74,6 +74,9 @@
       "auto": "Automatic",
       "member": "Member"
     },
+    "tables": {
+      "empty-result": "Aucun résultat"
+    },
     "words": {
       "no": "No",
       "yes": "Yes"
@@ -779,8 +782,8 @@
             "session-date": "Date de session"
           },
           "modals": {
-            "batch-publications":"Vous vous apprêtez à publier {length} session(s) de certification, souhaitez vous poursuivre ?",
-            "publication":"Souhaitez-vous publier la session ?"
+            "batch-publications": "Vous vous apprêtez à publier {length} session(s) de certification, souhaitez vous poursuivre ?",
+            "publication": "Souhaitez-vous publier la session ?"
           }
         }
       },
