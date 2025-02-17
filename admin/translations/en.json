@@ -742,9 +742,17 @@
         "unfinalization-confirmation-modal": "Are you sure you want to unfinalize this session ? Click on confirm to process."
       },
       "list": {
-        "v3-required-actions": "V3 sessions with required actions",
-        "v3-to-be-published": "V3 sessions to be published"
-      }
+        "all": "Toutes les sessions",
+        "required-actions": {
+          "v2": "Sessions with required actions",
+          "v3": "V3 sessions with required actions"
+        },
+        "to-be-published": {
+          "v2": "Sessions to be published",
+          "v3": "V3 sessions to be published"
+        }
+      },
+      "title": "Toutes les sessions"
     },
     "target-profiles": {
       "copy": {

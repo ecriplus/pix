@@ -759,9 +759,17 @@
         "unfinalization-confirmation-modal": "Êtes-vous sûr.e de vouloir définaliser cette session ? Cliquez sur confirmer pour poursuivre."
       },
       "list": {
-        "v3-required-actions": "Sessions à traiter V3",
-        "v3-to-be-published": "Sessions à publier V3"
-      }
+        "all": "Toutes les sessions",
+        "required-actions": {
+          "v2": "Sessions à traiter",
+          "v3": "Sessions à traiter V3"
+        },
+        "to-be-published": {
+          "v2": "Sessions à publier",
+          "v3": "Sessions à publier V3"
+        }
+      },
+      "title": "Toutes les sessions"
     },
     "target-profiles": {
       "copy": {
