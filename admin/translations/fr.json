@@ -779,7 +779,26 @@
             "id": "ID",
             "session-date": "Date de session"
           }
-        }
+        },
+        "to-be-published": {
+          "button-label": "Publier toutes les sessions",
+          "cell": {
+            "publish-button": {
+              "aria-label": "Publier la session numéro",
+              "label": "Publier"
+            }
+          },
+          "headers": {
+            "actions": "Actions",
+            "certification-name": "Centre de certification",
+            "finalization-date": "Date de finalisation",
+            "id": "ID",
+            "session-date": "Date de session"
+          },
+          "modals": {
+            "batch-publications":"Vous vous apprêtez à publier {length} session(s) de certification, souhaitez vous poursuivre ?",
+            "publication":"Souhaitez-vous publier la session ?"
+          }        }
       },
       "title": "Toutes les sessions"
     },
