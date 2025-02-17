@@ -6,6 +6,7 @@ import { ValidateOrganizationImportFileJob } from '../../src/prescription/learne
 import { UserAnonymizedEventLoggingJobController } from '../../src/shared/application/jobs/audit-log/user-anonymized-event-logging-job-controller.js';
 import { JobGroup } from '../../src/shared/application/jobs/job-controller.js';
 import { config } from '../../src/shared/config.js';
+import { JobExpireIn } from '../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { registerJobs } from '../../worker.js';
 import { catchErr, expect, sinon } from '../test-helper.js';
 
@@ -136,7 +137,7 @@ describe('#registerJobs', function () {
       expect(jobQueueStub.scheduleCronJob).to.have.been.calledWithExactly({
         name: 'ScheduleComputeOrganizationLearnersCertificabilityJob',
         cron: '0 21 * * *',
-        options: { tz: 'Europe/Paris' },
+        options: { tz: 'Europe/Paris', expireIn: JobExpireIn.FOUR_HOURS },
       });
     });
 

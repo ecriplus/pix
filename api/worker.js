@@ -105,7 +105,11 @@ export async function registerJobs({ jobGroup, dependencies = { startPgBoss, cre
       }
 
       if (job.jobCron) {
-        await jobQueues.scheduleCronJob({ name: job.jobName, cron: job.jobCron, options: { tz: 'Europe/Paris' } });
+        await jobQueues.scheduleCronJob({
+          name: job.jobName,
+          cron: job.jobCron,
+          options: { tz: 'Europe/Paris', expireIn: job.expireIn },
+        });
         logger.info(`Cron for job "${job.jobName}" scheduled "${job.jobCron}"`);
 
         // For cronJob we need to unschedule older cron
