@@ -1,7 +1,7 @@
 /**
- * @typedef {import('../../domain/usecases/index.js').CertificationRepository} CertificationRepository
- * @typedef {import('../read-models/CertificationResult.js').CertificationResult} CertificationResult
- * @typedef {import('../../../shared/domain/errors.js').NotFoundError} NotFoundError
+ * @typedef {import('./index.js').CertificationParcoursupRepository} CertificationParcoursupRepository
+ * @typedef {import('../read-models/parcoursup/CertificationResult.js').CertificationResult} CertificationResult
+ * @typedef {import('../../../../shared/domain/errors.js').NotFoundError} NotFoundError
  */
 
 import { MoreThanOneMatchingCertificationError } from '../errors.js';
@@ -14,34 +14,34 @@ import { MoreThanOneMatchingCertificationError } from '../errors.js';
  * @param {string} params.firstName
  * @param {string} params.birthdate - Format YYYY-MM-DD
  * @param {string} params.verificationCode
- * @param {CertificationRepository} params.certificationRepository
+ * @param {CertificationParcoursupRepository} params.certificationParcoursupRepository
  *
  * @returns {CertificationResult} matching candidate certification result
  * @throws {MoreThanOneMatchingCertificationError} in some cases (INE for example) there might be duplicates
  * @throws {NotFoundError} if no certification exists for this candidate
  **/
-export const getCertificationResult = async ({
+export const getCertificationResultForParcoursup = async ({
   ine,
   organizationUai,
   lastName,
   firstName,
   birthdate,
   verificationCode,
-  certificationRepository,
+  certificationParcoursupRepository,
 }) => {
   let certifications = [];
 
   if (ine) {
-    certifications = await certificationRepository.getByINE({ ine });
+    certifications = await certificationParcoursupRepository.getByINE({ ine });
   } else if (organizationUai) {
-    certifications = await certificationRepository.getByOrganizationUAI({
+    certifications = await certificationParcoursupRepository.getByOrganizationUAI({
       organizationUai,
       lastName,
       firstName,
       birthdate,
     });
   } else if (verificationCode) {
-    certifications = await certificationRepository.getByVerificationCode({ verificationCode });
+    certifications = await certificationParcoursupRepository.getByVerificationCode({ verificationCode });
   }
 
   if (certifications.length !== 1) {

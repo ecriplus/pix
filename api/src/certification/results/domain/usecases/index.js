@@ -10,6 +10,7 @@ import * as certificationReportRepository from '../../../shared/infrastructure/r
 import * as sharedSessionRepository from '../../../shared/infrastructure/repositories/session-repository.js';
 import * as certificateRepository from '../../infrastructure/repositories/certificate-repository.js';
 import * as certificationLivretScolaireRepository from '../../infrastructure/repositories/certification-livret-scolaire-repository.js';
+import * as certificationParcoursupRepository from '../../infrastructure/repositories/certification-parcoursup-repository.js';
 import * as certificationResultRepository from '../../infrastructure/repositories/certification-result-repository.js';
 import * as cleaCertifiedCandidateRepository from '../../infrastructure/repositories/clea-certified-candidate-repository.js';
 import * as competenceTreeRepository from '../../infrastructure/repositories/competence-tree-repository.js';
@@ -22,6 +23,7 @@ import * as scoCertificationCandidateRepository from '../../infrastructure/repos
  * @typedef {scoCertificationCandidateRepository} ScoCertificationCandidateRepository
  * @typedef {certificationCourseRepository} CertificationCourseRepository
  * @typedef {certificateRepository} CertificateRepository
+ * @typedef {certificationParcoursupRepository} CertificationParcoursupRepository
  * @typedef {certificationReportRepository} CertificationReportRepository
  * @typedef {cleaCertifiedCandidateRepository} CleaCertifiedCandidateRepository
  * @typedef {sessionEnrolmentRepository} SessionEnrolmentRepository
@@ -35,6 +37,7 @@ const dependencies = {
   certificationResultRepository,
   scoCertificationCandidateRepository,
   certificateRepository,
+  certificationParcoursupRepository,
   certificationReportRepository,
   cleaCertifiedCandidateRepository,
   sessionEnrolmentRepository,

@@ -1,9 +1,9 @@
 import { usecases } from '../domain/usecases/index.js';
 
-const getCertificationResult = async function (request) {
+const getCertificationResultForParcoursup = async function (request) {
   const { ine, organizationUai, lastName, firstName, birthdate, verificationCode } = request.payload;
 
-  return usecases.getCertificationResult({
+  return usecases.getCertificationResultForParcoursup({
     ine,
     organizationUai,
     lastName,
@@ -13,6 +13,6 @@ const getCertificationResult = async function (request) {
   });
 };
 
-export const certificationController = {
-  getCertificationResult,
+export const parcoursupController = {
+  getCertificationResultForParcoursup,
 };
