@@ -412,7 +412,7 @@ async function main(filePath) {
     logger.info('Inserting cities in database... ');
     trx = await knex.transaction();
     await trx('certification-cpf-cities').del();
-    const batchInfo = await trx.batchInsert('certification-cpf-cities', cities);
+    const batchInfo = await knex.batchInsert('certification-cpf-cities', cities).transacting(trx);
     const insertedLines = _getInsertedLineNumber(batchInfo);
     logger.info('✅ ');
     await trx.commit();

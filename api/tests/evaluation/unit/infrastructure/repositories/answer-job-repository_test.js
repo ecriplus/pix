@@ -1,11 +1,14 @@
 import { AnswerJobRepository } from '../../../../../src/evaluation/infrastructure/repositories/answer-job-repository.js';
 import { config } from '../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Evaluation | Unit | Infrastructure | Repositories | AnswerJobRepository', function () {
   beforeEach(function () {
     sinon.stub(config, 'featureToggles');
+    sinon.stub(knex, 'batchInsert').callsFake(() => ({
+      transacting: sinon.stub().resolves([{ rowCount: 1 }]),
+    }));
     config.featureToggles.isQuestEnabled = true;
     config.featureToggles.isAsyncQuestRewardingCalculationEnabled = true;
   });
