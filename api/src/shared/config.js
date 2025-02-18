@@ -350,6 +350,7 @@ const configuration = (function () {
         process.env.INFRA_CHUNK_SIZE_ORGANIZATION_LEARNER_DATA_PROCESSING,
         1000,
       ),
+      engineeringUserId: process.env.ENGINEERING_USER_ID,
       metricsFlushIntervalSecond: _getNumber(process.env.METRICS_FLUSH_INTERVAL_SECOND, 15),
       startJobInWebProcess: toBoolean(process.env.START_JOB_IN_WEB_PROCESS),
     },
@@ -696,6 +697,8 @@ const configuration = (function () {
     config.identityProviderConfigKey = null;
 
     config.apiManager.url = 'http://external-partners-access/';
+
+    config.infra.engineeringUserId = 800;
   }
 
   return config;
