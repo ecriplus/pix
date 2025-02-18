@@ -1,0 +1,55 @@
+import { parcoursupController } from '../../../../../src/certification/results/application/parcoursup-controller.js';
+import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
+import { LOCALE } from '../../../../../src/shared/domain/constants.js';
+import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { expect, hFake, sinon } from '../../../../test-helper.js';
+const { FRENCH_FRANCE } = LOCALE;
+
+describe('Certification | Results | Unit | Application | parcoursup-controller', function () {
+  describe('#getCertificationResultForParcoursup', function () {
+    it('should return a serialized certification result for parcoursup', async function () {
+      // given
+      const request = {
+        payload: {
+          ine: Symbol('ine'),
+          organizationUai: Symbol('organizationUai'),
+          lastName: Symbol('lastName'),
+          firstName: Symbol('firstName'),
+          birthdate: Symbol('birthdate'),
+          verificationCode: Symbol('verificationCode'),
+        },
+      };
+
+      const certificationResultForParcoursup = {
+        pixScore: Symbol('pixScore'),
+        certificationDate: Symbol('certificationDate'),
+      };
+      sinon.stub(usecases, 'getCertificationResultForParcoursup');
+      usecases.getCertificationResultForParcoursup
+        .withArgs({ ...request.payload })
+        .resolves(certificationResultForParcoursup);
+
+      const globalMeshLevel = Symbol('globalMeshLevel');
+      sinon.stub(usecases, 'getGlobalMeshLevel');
+      usecases.getGlobalMeshLevel
+        .withArgs({ ...certificationResultForParcoursup, i18n: getI18n(FRENCH_FRANCE) })
+        .resolves(globalMeshLevel);
+
+      const dependencies = {
+        parcoursupCertificationSerializer: {
+          serialize: sinon.stub(),
+        },
+      };
+
+      // when
+      await parcoursupController.getCertificationResultForParcoursup(request, hFake, dependencies);
+
+      // then
+      expect(dependencies.parcoursupCertificationSerializer.serialize).to.have.been.calledOnceWithExactly({
+        certificationResult: certificationResultForParcoursup,
+        globalMeshLevel,
+        translate: getI18n(FRENCH_FRANCE).__,
+      });
+    });
+  });
+});

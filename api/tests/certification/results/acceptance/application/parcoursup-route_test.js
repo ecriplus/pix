@@ -1,5 +1,7 @@
+import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import {
   createServer,
+  databaseBuilder,
   datamartBuilder,
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
@@ -51,7 +53,7 @@ describe('Certification | Results | Acceptance | Application | parcoursup-route'
       status: 'validated',
       pixScore: 327,
       certificationDate: new Date('2024-11-22T09:39:54Z'),
-      globalLevel: '',
+      globalLevel: 'Indépendant 1',
       competences: [
         {
           code: '1.1',
@@ -84,6 +86,18 @@ describe('Certification | Results | Acceptance | Application | parcoursup-route'
     });
 
     await datamartBuilder.commit();
+
+    const superAdmin = databaseBuilder.factory.buildUser.withRole({
+      role: PIX_ADMIN.ROLES.SUPER_ADMIN,
+    });
+    databaseBuilder.factory.buildCompetenceScoringConfiguration({
+      createdByUserId: superAdmin.id,
+      configuration: [],
+    });
+    databaseBuilder.factory.buildScoringConfiguration({
+      createdByUserId: superAdmin.id,
+    });
+    await databaseBuilder.commit();
   });
 
   describe('POST /api/application/parcoursup/certification/search', function () {
@@ -195,7 +209,7 @@ describe('Certification | Results | Acceptance | Application | parcoursup-route'
         status: 'validated',
         pixScore: 327,
         certificationDate: new Date('2024-11-22T09:39:54Z'),
-        globalLevel: '',
+        globalLevel: 'Indépendant 1',
         competences: [
           {
             code: '1.1',
