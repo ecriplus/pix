@@ -197,42 +197,6 @@ module('Acceptance | authenticated/certification-centers/get', function (hooks) 
         .dom(screen.getByText("Une erreur est survenue, le centre de certification n'a pas été mis à jour."))
         .exists();
     });
-
-    module('when the certification is updated with v3Pilot with a feature pilot', function () {
-      test('should display an error notification', async function (assert) {
-        // given
-        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-        const certificationCenter = server.create('certification-center', {
-          name: 'Center 1',
-          externalId: 'ABCDEF',
-          type: 'SCO',
-        });
-        this.server.patch(
-          `/admin/certification-centers/${certificationCenter.id}`,
-          { errors: [{ code: 'PILOT_FEATURES_CONFLICT' }] },
-          403,
-        );
-        const screen = await visit(`/certification-centers/${certificationCenter.id}`);
-        await clickByName('Modifier');
-        await click(
-          screen.getByRole('checkbox', {
-            name: 'Pilote Certification V3 (ce centre de certification ne pourra organiser que des sessions V3)',
-          }),
-        );
-
-        // when
-        await clickByName('Enregistrer');
-
-        // then
-        assert
-          .dom(
-            screen.getByText(
-              'Il y a une incompatibilité entre les fonctionnalités pilotes auxquelles vous souhaitez habiliter le centre. Merci de rafraîchir la page.',
-            ),
-          )
-          .exists();
-      });
-    });
   });
 
   module('tab navigation', function () {

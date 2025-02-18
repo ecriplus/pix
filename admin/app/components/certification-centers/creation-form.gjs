@@ -32,11 +32,6 @@ export default class CertificationCenterForm extends Component {
   }
 
   @action
-  handleIsV3PilotChange(event) {
-    this.args.certificationCenter.isV3Pilot = event.target.checked;
-  }
-
-  @action
   handleDataProtectionOfficerFirstNameChange(event) {
     this.args.certificationCenter.dataProtectionOfficerFirstName = event.target.value;
   }
@@ -121,12 +116,6 @@ export default class CertificationCenterForm extends Component {
       >
         <:label>Adresse e-mail du DPO</:label>
       </PixInput>
-
-      <div class="form-field">
-        <PixCheckbox @id="isV3Pilot" @size="small" onChange={{this.handleIsV3PilotChange}}>
-          <:label>{{t "components.certification-centers.is-v3-pilot-label"}}</:label>
-        </PixCheckbox>
-      </div>
 
       <section>
         <h2 class="habilitations-title">Habilitations aux certifications complémentaires</h2>

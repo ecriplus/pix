@@ -27,45 +27,6 @@ module('Integration | Component | certification-centers/creation-form', function
     assert.dom(screen.getByText('Identifiant externe')).exists();
     assert.dom(screen.getByRole('button', { name: 'Annuler' })).exists();
     assert.dom(screen.getByText('Ajouter')).exists();
-    assert
-      .dom(
-        screen.getByRole('checkbox', {
-          name: 'Pilote Certification V3 (ce centre de certification ne pourra organiser que des sessions V3)',
-        }),
-      )
-      .exists();
-  });
-
-  module('#handleIsV3PilotChange', function () {
-    test('should add isV3Pilot to certification center on checked checkbox', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const certificationCenter = store.createRecord('certification-center');
-      const habilitations = [];
-      const onSubmit = () => {};
-      const onCancel = () => {};
-
-      const screen = await render(
-        <template>
-          <CreationForm
-            @habilitations={{habilitations}}
-            @certificationCenter={{certificationCenter}}
-            @onSubmit={{onSubmit}}
-            @onCancel={{onCancel}}
-          />
-        </template>,
-      );
-
-      // when
-      await click(
-        screen.getByRole('checkbox', {
-          name: 'Pilote Certification V3 (ce centre de certification ne pourra organiser que des sessions V3)',
-        }),
-      );
-
-      // then
-      assert.true(certificationCenter.isV3Pilot);
-    });
   });
 
   module('#selectCertificationCenterType', function () {

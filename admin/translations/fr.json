@@ -289,7 +289,6 @@
       }
     },
     "certification-centers": {
-      "is-v3-pilot-label": "Pilote Certification V3 (ce centre de certification ne pourra organiser que des sessions V3)",
       "membership-item": {
         "actions": {
           "edit-role": "Modifier le rôle"
@@ -595,11 +594,6 @@
         },
         "success": {
           "update-certification-center-membership-role": "Le rôle du membre a été modifié."
-        },
-        "update": {
-          "errors": {
-            "pilot-features-incompatibilities": "Il y a une incompatibilité entre les fonctionnalités pilotes auxquelles vous souhaitez habiliter le centre. Merci de rafraîchir la page."
-          }
         }
       }
     },
