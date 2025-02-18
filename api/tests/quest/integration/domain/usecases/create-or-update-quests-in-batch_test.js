@@ -45,9 +45,9 @@ describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-b
     filePath = await createTempFile(
       'test.csv',
       `Quest ID;Json configuration for quest;deleteQuest
-    3;{"rewardType":"coucou","rewardId":null,"eligibilityRequirements":[],"successRequirements":{"success":"success"}};OUI
-    5;{"rewardType":"bonjour","rewardId":null,"eligibilityRequirements":[],"successRequirements":{"success":"une autre success"}};oui
-    4;{"rewardType":"salut","rewardId":null,"eligibilityRequirements":[],"successRequirements":{"success":"some other success"}};Non
+    3;{"rewardType":"coucou","rewardId":null,"eligibilityRequirements":[],"successRequirements":[]};OUI
+    5;{"rewardType":"bonjour","rewardId":null,"eligibilityRequirements":[],"successRequirements":[]};oui
+    4;{"rewardType":"salut","rewardId":null,"eligibilityRequirements":[],"successRequirements":[]};Non
     `,
     );
     const spySave = sinon.spy(repositories.questRepository, 'saveInBatch');
@@ -66,7 +66,7 @@ describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-b
           rewardType: 'salut',
           rewardId: null,
           eligibilityRequirements: [],
-          successRequirements: { success: 'some other success' },
+          successRequirements: [],
         }),
       ],
     });

@@ -97,21 +97,21 @@ describe('Quest | Integration | Repository | quest', function () {
         rewardType: REWARD_TYPES.ATTESTATION,
         rewardId: 2,
         eligibilityRequirements: [],
-        successRequirements: { titi: 'tutu' },
+        successRequirements: [],
       });
       databaseBuilder.factory.buildQuest({
         id: 2,
         rewardType: REWARD_TYPES.ATTESTATION,
         rewardId: 2,
         eligibilityRequirements: [],
-        successRequirements: { titi: 'tutu' },
+        successRequirements: [],
       });
       databaseBuilder.factory.buildQuest({
         id: 3,
         rewardType: REWARD_TYPES.ATTESTATION,
         rewardId: 2,
         eligibilityRequirements: [],
-        successRequirements: { titi: 'tutu' },
+        successRequirements: [],
       });
       await databaseBuilder.commit();
       await databaseBuilder.fixSequences();
