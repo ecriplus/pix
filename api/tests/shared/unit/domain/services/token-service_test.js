@@ -4,7 +4,6 @@ import jsonwebtoken from 'jsonwebtoken';
 
 import { config, config as settings } from '../../../../../src/shared/config.js';
 import {
-  ForbiddenAccess,
   InvalidExternalUserTokenError,
   InvalidResultRecipientTokenError,
   InvalidSessionResultTokenError,
@@ -14,32 +13,6 @@ import { tokenService } from '../../../../../src/shared/domain/services/token-se
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Shared | Domain | Services | Token Service', function () {
-  describe('#createTokenForCampaignResults', function () {
-    it('should create an access token with user id and campaign id', function () {
-      // given
-      const generatedAccessToken = 'Valid-Access-Token';
-      const userId = 123;
-      const campaignId = 456;
-
-      sinon.stub(settings.authentication, 'secret').value('a secret');
-      sinon.stub(settings.authentication, 'tokenForCampaignResultLifespan').value(10);
-      sinon.stub(jsonwebtoken, 'sign').returns(generatedAccessToken);
-
-      // when
-      const accessTokenForCampaignResults = tokenService.createTokenForCampaignResults({ userId, campaignId });
-
-      // then
-      expect(accessTokenForCampaignResults).to.equal(generatedAccessToken);
-      expect(jsonwebtoken.sign).to.have.been.calledWithExactly(
-        { access_id: userId, campaign_id: campaignId },
-        'a secret',
-        {
-          expiresIn: 10,
-        },
-      );
-    });
-  });
-
   describe('#createAccessTokenFromUser', function () {
     it('should create access token with user id and source', function () {
       // given
@@ -166,35 +139,6 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
 
       // then
       expect(result).to.equal(null);
-    });
-  });
-
-  describe('#extractCampaignResultsTokenContent', function () {
-    context('valid token', function () {
-      it('should return userId and campaignId if the accessToken is valid', function () {
-        // given
-        const accessToken = tokenService.createTokenForCampaignResults({ userId: 123, campaignId: 456 });
-
-        // when
-        const { userId, campaignId } = tokenService.extractCampaignResultsTokenContent(accessToken);
-
-        // then
-        expect(userId).to.equal(123);
-        expect(campaignId).to.equal(456);
-      });
-    });
-
-    context('invalid token', function () {
-      it('should return null', async function () {
-        // given
-        const accessToken = 'WRONG_DATA';
-
-        // when
-        const error = await catchErr(tokenService.extractCampaignResultsTokenContent)(accessToken);
-
-        // then
-        expect(error).to.be.an.instanceof(ForbiddenAccess);
-      });
     });
   });
 

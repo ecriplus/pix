@@ -2,7 +2,6 @@ import jsonwebtoken from 'jsonwebtoken';
 
 import { config } from '../../../../src/shared/config.js';
 import {
-  ForbiddenAccess,
   InvalidExternalUserTokenError,
   InvalidResultRecipientTokenError,
   InvalidSessionResultTokenError,
@@ -48,17 +47,6 @@ function createAccessTokenFromApplication(
     },
     secret,
     { expiresIn },
-  );
-}
-
-function createTokenForCampaignResults({ userId, campaignId }) {
-  return jsonwebtoken.sign(
-    {
-      access_id: userId,
-      campaign_id: campaignId,
-    },
-    config.authentication.secret,
-    { expiresIn: config.authentication.tokenForCampaignResultLifespan },
   );
 }
 
@@ -187,14 +175,6 @@ function extractClientId(token, secret = config.authentication.secret) {
   return decoded.client_id || null;
 }
 
-function extractCampaignResultsTokenContent(token) {
-  const decoded = getDecodedToken(token);
-  if (decoded === false) {
-    throw new ForbiddenAccess();
-  }
-  return { userId: decoded.access_id, campaignId: decoded.campaign_id };
-}
-
 async function extractExternalUserFromIdToken(token) {
   const externalUser = await getDecodedToken(token);
 
@@ -215,7 +195,6 @@ const tokenService = {
   createAccessTokenForSaml,
   createAccessTokenFromApplication,
   createAccessTokenFromAnonymousUser,
-  createTokenForCampaignResults,
   createIdTokenForUserReconciliation,
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
@@ -229,7 +208,6 @@ const tokenService = {
   extractTokenFromAuthChain,
   extractUserId,
   extractClientId,
-  extractCampaignResultsTokenContent,
 };
 
 /**
@@ -245,9 +223,7 @@ export {
   createCertificationResultsLinkToken,
   createIdTokenForUserReconciliation,
   createPasswordResetToken,
-  createTokenForCampaignResults,
   decodeIfValid,
-  extractCampaignResultsTokenContent,
   extractCertificationResultsByRecipientEmailLink,
   extractCertificationResultsLink,
   extractClientId,

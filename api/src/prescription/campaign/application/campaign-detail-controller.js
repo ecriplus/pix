@@ -1,6 +1,5 @@
 import stream from 'node:stream';
 
-import { tokenService } from '../../../shared/domain/services/token-service.js';
 import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { escapeFileName } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
@@ -31,16 +30,13 @@ const getById = async function (
   _,
   dependencies = {
     campaignReportSerializer,
-    tokenService,
   },
 ) {
   const { userId } = request.auth.credentials;
   const { campaignId } = request.params;
 
-  const tokenForCampaignResults = dependencies.tokenService.createTokenForCampaignResults({ userId, campaignId });
-
   const campaign = await usecases.getCampaign({ campaignId, userId });
-  return dependencies.campaignReportSerializer.serialize(campaign, {}, { tokenForCampaignResults });
+  return dependencies.campaignReportSerializer.serialize(campaign);
 };
 
 const getCampaignDetails = async function (request) {

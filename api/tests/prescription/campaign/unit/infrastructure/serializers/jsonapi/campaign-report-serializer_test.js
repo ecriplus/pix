@@ -112,7 +112,6 @@ describe('Unit | Serializer | JSONAPI | campaign-report-serializer', function ()
             'target-profile-tubes-count': report.targetProfileTubesCount,
             'target-profile-thematic-result-count': report.targetProfileThematicResultCount,
             'target-profile-are-knowledge-elements-resettable': report.targetProfileAreKnowledgeElementsResettable,
-            'token-for-campaign-results': report.tokenForCampaignResults,
             'participations-count': report.participationsCount,
             'shared-participations-count': report.sharedParticipationsCount,
             'average-result': report.averageResult,
