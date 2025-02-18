@@ -7,11 +7,15 @@ import yargs from 'yargs/yargs';
 import { disconnect } from '../../../../db/knex-database-connection.js';
 import { learningContentCache } from '../../infrastructure/caches/learning-content-cache.js';
 import { quitAllStorages } from '../../infrastructure/key-value-storages/index.js';
-import { logger as defaultLogger } from '../../infrastructure/utils/logger.js';
+import { child } from '../../infrastructure/utils/logger.js';
 
 function isRunningFromCli(scriptFileUrl) {
   const modulePath = url.fileURLToPath(scriptFileUrl);
   return process.argv[1] === modulePath;
+}
+
+function loggerForScriptClass(ScriptClass) {
+  return child(`script:${ScriptClass.name}`, { event: ScriptClass.name });
 }
 
 /**
@@ -26,7 +30,11 @@ export class ScriptRunner {
    * @param {typeof Script} ScriptClass - The script class to be instantiated and executed.
    * @param {object} [dependencies] - The script runner dependencies (logger, isRunningFromCli)
    */
-  static async execute(scriptFileUrl, ScriptClass, dependencies = { logger: defaultLogger, isRunningFromCli }) {
+  static async execute(
+    scriptFileUrl,
+    ScriptClass,
+    dependencies = { logger: loggerForScriptClass(ScriptClass), isRunningFromCli },
+  ) {
     const { logger, isRunningFromCli } = dependencies;
 
     if (!isRunningFromCli(scriptFileUrl)) return;
@@ -46,7 +54,7 @@ export class ScriptRunner {
 
       if (args.length > 0) logger.info(`Arguments: ${args.join(' ')}`);
 
-      await script.run(parsedOptions);
+      await script.run(parsedOptions, logger);
 
       logger.info(`Script execution successful.`);
     } catch (error) {
