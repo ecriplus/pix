@@ -188,6 +188,8 @@ import { buildUserCertificationEligibility } from './certification/enrolment/bui
 import { buildV3CertificationEligibility } from './certification/enrolment/build-v3-certification-eligibility.js';
 import { buildEvaluationCandidate } from './certification/evaluation/build-candidate.js';
 import { buildFlashAssessmentAlgorithm } from './certification/flash-certification/build-flash-assessment-algorithm.js';
+import { buildCertificationResult as parcoursupCertificationResult } from './certification/results/parcoursup/build-certification-result.js';
+import { buildCompetence as parcoursupCompetence } from './certification/results/parcoursup/build-competence.js';
 import { buildAssessmentResult as buildCertificationScoringAssessmentResult } from './certification/scoring/build-assessment-result.js';
 import { buildCertificationAssessmentHistory } from './certification/scoring/build-certification-assessment-history.js';
 import { buildCertificationChallengeCapacity } from './certification/scoring/build-certification-challenge-capacity.js';
@@ -200,8 +202,6 @@ import { buildCompetenceForScoring } from './certification/shared/build-competen
 import { buildJuryComment } from './certification/shared/build-jury-comment.js';
 import { buildV3CertificationScoring } from './certification/shared/build-v3-certification-scoring.js';
 import { buildUserLogin } from './identity-access-management/build-user-login.js';
-import { buildCertificationResult as parcoursupCertificationResult } from './parcoursup/build-certification-result.js';
-import { buildCompetence as parcoursupCompetence } from './parcoursup/build-competence.js';
 import { buildCampaign as boundedContextCampaignBuildCampaign } from './prescription/campaign/build-campaign.js';
 import { buildCampaignParticipation as boundedContextCampaignParticipationBuildCampaignParticipation } from './prescription/campaign-participation/build-campaign-participation.js';
 import { buildStageCollection as buildStageCollectionForTargetProfileManagement } from './target-profile-management/build-stage-collection.js';
@@ -260,11 +260,12 @@ const certification = {
     buildComplementaryCertificationVersioning,
     buildComplementaryCertificationBadge: buildCertificationComplementaryCertificationBadge,
   },
-};
-
-const parcoursup = {
-  buildCertificationResult: parcoursupCertificationResult,
-  buildCompetence: parcoursupCompetence,
+  results: {
+    parcoursup: {
+      buildCertificationResult: parcoursupCertificationResult,
+      buildCompetence: parcoursupCompetence,
+    },
+  },
 };
 
 const prescription = {
@@ -456,6 +457,5 @@ export {
   buildValidator,
   certification,
   identityAccessManagement,
-  parcoursup,
   prescription,
 };

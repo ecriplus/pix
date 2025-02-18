@@ -3,9 +3,9 @@ import {
   datamartBuilder,
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
-} from '../../../test-helper.js';
+} from '../../../../test-helper.js';
 
-describe('Parcoursup | Acceptance | Application | certification-route', function () {
+describe('Certification | Results | Acceptance | Application | parcoursup-route', function () {
   let server,
     ine,
     organizationUai,

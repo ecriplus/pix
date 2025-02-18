@@ -1,19 +1,19 @@
-import { certificationController } from '../../../../src/parcoursup/application/certification-controller.js';
-import * as moduleUnderTest from '../../../../src/parcoursup/application/certification-route.js';
-import { MoreThanOneMatchingCertificationError } from '../../../../src/parcoursup/domain/errors.js';
+import { parcoursupController } from '../../../../../src/certification/results/application/parcoursup-controller.js';
+import * as moduleUnderTest from '../../../../../src/certification/results/application/parcoursup-route.js';
+import { MoreThanOneMatchingCertificationError } from '../../../../../src/certification/results/domain/errors.js';
 import {
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
   HttpTestServer,
   sinon,
-} from '../../../test-helper.js';
+} from '../../../../test-helper.js';
 
-describe('Parcoursup | Unit | Application | Routes | Certification', function () {
+describe('Certification | Results | Unit | Application | Routes | Parcoursup', function () {
   let url, method, headers, httpTestServer, controllerStub;
 
   beforeEach(async function () {
     url = '/api/application/parcoursup/certification/search';
-    controllerStub = sinon.stub(certificationController, 'getCertificationResult');
+    controllerStub = sinon.stub(parcoursupController, 'getCertificationResultForParcoursup');
 
     httpTestServer = new HttpTestServer();
     httpTestServer.setupAuthentication();

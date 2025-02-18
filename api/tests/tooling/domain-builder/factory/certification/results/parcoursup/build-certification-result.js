@@ -1,4 +1,4 @@
-import { CertificationResult } from '../../../../../src/parcoursup/domain/read-models/CertificationResult.js';
+import { CertificationResult } from '../../../../../../../src/certification/results/domain/read-models/parcoursup/CertificationResult.js';
 
 const buildCertificationResult = function ({
   ine,

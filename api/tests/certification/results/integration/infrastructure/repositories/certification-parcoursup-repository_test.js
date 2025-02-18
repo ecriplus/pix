@@ -1,8 +1,8 @@
-import * as certificationRepository from '../../../../../api/src/parcoursup/infrastructure/repositories/certification-repository.js';
-import { NotFoundError } from '../../../../src/shared/domain/errors.js';
-import { catchErr, datamartBuilder, domainBuilder, expect } from '../../../test-helper.js';
+import * as certificationRepository from '../../../../../../src/certification/results/infrastructure/repositories/certification-parcoursup-repository.js';
+import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
+import { catchErr, datamartBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
-describe('Parcoursup | Infrastructure | Integration | Repositories | certification', function () {
+describe('Certification | Results | Infrastructure | Integration | Repositories | certification-parcoursup', function () {
   describe('#getByINE', function () {
     describe('when a certification is found', function () {
       it('should return the certification', async function () {
@@ -38,7 +38,7 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
         const results = await certificationRepository.getByINE({ ine });
 
         // then
-        const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
+        const expectedCertification = domainBuilder.certification.results.parcoursup.buildCertificationResult({
           ine,
           organizationUai: 'UAI ETAB ELEVE',
           lastName: 'NOM-ELEVE',
@@ -48,13 +48,13 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
           pixScore: 327,
           certificationDate: new Date('2024-11-22T09:39:54Z'),
           competences: [
-            domainBuilder.parcoursup.buildCompetence({
+            domainBuilder.certification.results.parcoursup.buildCompetence({
               code: '1.1',
               name: 'Mener une recherche et une veille d’information',
               areaName: 'Informations et données',
               level: 3,
             }),
-            domainBuilder.parcoursup.buildCompetence({
+            domainBuilder.certification.results.parcoursup.buildCompetence({
               code: '1.2',
               name: 'Gérer des données',
               areaName: 'Informations et données',
@@ -124,7 +124,7 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
         });
 
         // then
-        const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
+        const expectedCertification = domainBuilder.certification.results.parcoursup.buildCertificationResult({
           ine: '1234',
           organizationUai,
           lastName,
@@ -134,13 +134,13 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
           pixScore: 327,
           certificationDate: new Date('2024-11-22T09:39:54Z'),
           competences: [
-            domainBuilder.parcoursup.buildCompetence({
+            domainBuilder.certification.results.parcoursup.buildCompetence({
               code: '1.1',
               name: 'Mener une recherche et une veille d’information',
               areaName: 'Informations et données',
               level: 3,
             }),
-            domainBuilder.parcoursup.buildCompetence({
+            domainBuilder.certification.results.parcoursup.buildCompetence({
               code: '1.2',
               name: 'Gérer des données',
               areaName: 'Informations et données',
@@ -214,7 +214,7 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
         });
 
         // then
-        const expectedCertification = domainBuilder.parcoursup.buildCertificationResult({
+        const expectedCertification = domainBuilder.certification.results.parcoursup.buildCertificationResult({
           lastName,
           firstName,
           birthdate,
@@ -222,13 +222,13 @@ describe('Parcoursup | Infrastructure | Integration | Repositories | certificati
           pixScore: 327,
           certificationDate: new Date('2024-11-22T09:39:54Z'),
           competences: [
-            domainBuilder.parcoursup.buildCompetence({
+            domainBuilder.certification.results.parcoursup.buildCompetence({
               code: '1.1',
               name: 'Mener une recherche et une veille d’information',
               areaName: 'Informations et données',
               level: 3,
             }),
-            domainBuilder.parcoursup.buildCompetence({
+            domainBuilder.certification.results.parcoursup.buildCompetence({
               code: '1.2',
               name: 'Gérer des données',
               areaName: 'Informations et données',

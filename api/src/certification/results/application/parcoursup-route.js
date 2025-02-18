@@ -3,9 +3,9 @@ import Joi from 'joi';
 import {
   certificationVerificationCodeType,
   studentIdentifierType,
-} from '../../shared/domain/types/identifiers-type.js';
-import { responseObjectErrorDoc } from '../../shared/infrastructure/open-api-doc/response-object-error-doc.js';
-import { certificationController } from './certification-controller.js';
+} from '../../../shared/domain/types/identifiers-type.js';
+import { responseObjectErrorDoc } from '../../../shared/infrastructure/open-api-doc/response-object-error-doc.js';
+import { parcoursupController } from './parcoursup-controller.js';
 
 const register = async function (server) {
   server.route([
@@ -43,7 +43,7 @@ const register = async function (server) {
             )
             .required(),
         },
-        handler: certificationController.getCertificationResult,
+        handler: parcoursupController.getCertificationResultForParcoursup,
         tags: ['api', 'parcoursup'],
         notes: [
           '**Cette route est accessible uniquement à Parcoursup**\n' +

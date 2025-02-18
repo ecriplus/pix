@@ -24,7 +24,6 @@ import { identityAccessManagementRoutes } from './src/identity-access-management
 import { learningContentRoutes } from './src/learning-content/routes.js';
 import { Metrics } from './src/monitoring/infrastructure/metrics.js';
 import { organizationalEntitiesRoutes } from './src/organizational-entities/application/routes.js';
-import { parcoursupRoutes } from './src/parcoursup/application/routes.js';
 import { campaignRoutes } from './src/prescription/campaign/routes.js';
 import { campaignParticipationsRoutes } from './src/prescription/campaign-participation/routes.js';
 import { learnerManagementRoutes } from './src/prescription/learner-management/routes.js';
@@ -243,7 +242,6 @@ const setupRoutesAndPlugins = async function (server) {
     learningContentRoutes,
     ...certificationRoutes,
     ...prescriptionRoutes,
-    ...parcoursupRoutes,
     bannerRoutes,
     {
       name: 'root',
