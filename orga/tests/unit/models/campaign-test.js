@@ -23,7 +23,6 @@ module('Unit | Model | campaign', function (hooks) {
         id: '1',
         name: 'Fake name',
         code: 'ABC123',
-        tokenForCampaignResults: 'token',
         type: 'ASSESSMENT',
       });
       assert.strictEqual(model.urlToResult, 'http://localhost:3000/api/campaigns/1/csv-assessment-results');
@@ -35,7 +34,6 @@ module('Unit | Model | campaign', function (hooks) {
         id: '1',
         name: 'Fake name',
         code: 'ABC123',
-        tokenForCampaignResults: 'token',
         type: 'PROFILES_COLLECTION',
       });
       assert.strictEqual(model.urlToResult, 'http://localhost:3000/api/campaigns/1/csv-profiles-collection-results');

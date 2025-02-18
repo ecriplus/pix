@@ -14,7 +14,6 @@ export default class Campaign extends Model {
   @attr('nullable-string') externalIdLabel;
   @attr('string') externalIdType;
   @attr('nullable-text') customLandingPageText;
-  @attr('string') tokenForCampaignResults;
   @attr('number') ownerId;
   @attr('string') ownerLastName;
   @attr('string') ownerFirstName;

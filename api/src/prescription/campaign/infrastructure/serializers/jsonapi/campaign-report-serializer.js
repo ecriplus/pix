@@ -2,11 +2,10 @@ import jsonapiSerializer from 'jsonapi-serializer';
 
 const { Serializer } = jsonapiSerializer;
 
-const serialize = function (campaignReports, meta, { tokenForCampaignResults } = {}) {
+const serialize = function (campaignReports, meta) {
   return new Serializer('campaign', {
     transform: (record) => {
       const campaign = Object.assign({}, record);
-      campaign.tokenForCampaignResults = tokenForCampaignResults;
       campaign.isArchived = record.isArchived;
       return campaign;
     },
@@ -18,7 +17,6 @@ const serialize = function (campaignReports, meta, { tokenForCampaignResults } =
       'createdAt',
       'customLandingPageText',
       'isArchived',
-      'tokenForCampaignResults',
       'externalIdLabel',
       'externalIdType',
       'targetProfileId',
