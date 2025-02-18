@@ -1,5 +1,28 @@
 # Pix Changelog
 
+## v5.45.0 (18/02/2025)
+
+
+### :rocket: Amélioration
+- [#11433](https://github.com/1024pix/pix/pull/11433) [FEATURE] Déplacer get-answerable-elements hors de la liste des scripts extract CSV de Modulix (PIX-16025).
+- [#10900](https://github.com/1024pix/pix/pull/10900) [FEATURE] Création du module comment-envoyer-un-mail.
+- [#11429](https://github.com/1024pix/pix/pull/11429) [FEATURE] Ajouter PixTable dans les certifications complémentaires sur Pix Admin (PIX-16588).
+- [#11101](https://github.com/1024pix/pix/pull/11101) [FEATURE] Create module PPN#3 Jeux vidéo.
+- [#11392](https://github.com/1024pix/pix/pull/11392) [FEATURE] ajoute le fitre lacune dans la route `/assessment-results` (pix-16350).
+- [#11425](https://github.com/1024pix/pix/pull/11425) [FEATURE] Ajouter l'expand dans le script get-elements.csv (PIX-16133).
+- [#10748](https://github.com/1024pix/pix/pull/10748) [FEATURE] Création - Module tri multicritère avancé (MODC-174).
+- [#11422](https://github.com/1024pix/pix/pull/11422) [FEATURE] Remise à jour du script `get-modules-csv` (PIX-16132).
+
+### :building_construction: Tech
+- [#11414](https://github.com/1024pix/pix/pull/11414) [TECH] Rattrapage des certifications annulées (PIX-16047).
+- [#11428](https://github.com/1024pix/pix/pull/11428) [TECH] Réécriture du database builder pour accélérer les seeds.
+- [#11427](https://github.com/1024pix/pix/pull/11427) [TECH] Simplifier l'usage de stratégie de connexions au sein de l'API (PIX-16585).
+- [#11423](https://github.com/1024pix/pix/pull/11423) [TECH] Migrer la route POST api/admin/memberships/{id}/disable .
+- [#11398](https://github.com/1024pix/pix/pull/11398) [TECH] Ajouter un sous-composant d'affichage des actions sur une certification (PIX-16542).
+
+### :bug: Correction
+- [#11430](https://github.com/1024pix/pix/pull/11430) [BUGFIX] Augmente la durée maximum du job de calcul de la certificabilité.
+
 ## v5.44.0 (17/02/2025)
 
 
