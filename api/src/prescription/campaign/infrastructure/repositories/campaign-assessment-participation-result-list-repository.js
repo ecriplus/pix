@@ -22,6 +22,7 @@ async function findPaginatedByCampaignId({
     pagination,
   };
 }
+
 async function _getResultListPaginated(campaignId, stageCollection, filters, page) {
   const query = _getParticipantsResultList(campaignId, stageCollection, filters);
   return fetchPage(query, page);

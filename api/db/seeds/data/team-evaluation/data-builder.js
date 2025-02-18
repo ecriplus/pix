@@ -125,6 +125,7 @@ async function createCoreTargetProfile(databaseBuilder) {
     includeFirstSkill: true,
   });
 }
+
 async function createAssessmentCampaign(databaseBuilder) {
   await tooling.campaign.createAssessmentCampaign({
     databaseBuilder,

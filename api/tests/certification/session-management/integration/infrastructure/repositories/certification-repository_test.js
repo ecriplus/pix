@@ -138,6 +138,7 @@ function _buildErrorCertification({ id, sessionId, isPublished }) {
 function _buildStartedCertification({ id, sessionId, isPublished }) {
   _buildCertification({ id, sessionId, isPublished, status: null });
 }
+
 function _buildValidatedCertification({ id, sessionId, isPublished }) {
   _buildCertification({ id, sessionId, isPublished, status: status.VALIDATED });
 }

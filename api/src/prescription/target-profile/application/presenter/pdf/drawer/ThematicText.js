@@ -41,6 +41,7 @@ function _computeMarginTopThematic(text, positionY, positionYAfterTubes) {
   }
   return (positionY - positionYAfterTubes - FontManager.thematicFontHeight - thematicHeight) / 2;
 }
+
 /**
  * @param text{string}
  * @returns {number}

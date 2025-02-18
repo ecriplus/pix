@@ -119,6 +119,7 @@ function _computeLikelihood(answeredChallenge, answer, previousLikelihood) {
     return previousLikelihood[index] * probability;
   });
 }
+
 function _computeNormalizedPosteriori(likelihood, normalizedGaussian) {
   const posteriori = samples.map((_, index) => likelihood[index] * normalizedGaussian[index]);
 

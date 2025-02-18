@@ -26,9 +26,11 @@ function calculateScoringInformationForCompetence({
 function getBlockedLevel(level) {
   return Math.min(level, MAX_REACHABLE_LEVEL);
 }
+
 function getBlockedPixScore(pixScore) {
   return Math.min(pixScore, MAX_REACHABLE_PIX_BY_COMPETENCE);
 }
+
 function _getPixScoreForOneCompetence(exactlyEarnedPix, allowExcessPix = false) {
   const userEarnedPix = _.floor(exactlyEarnedPix);
   if (allowExcessPix) {
