@@ -11,6 +11,8 @@ export const commonBuilder = async function ({ databaseBuilder }) {
   _createSupportAdmin(databaseBuilder);
   _createMetierAdmin(databaseBuilder);
 
+  createClientApplications(databaseBuilder);
+
   await _createPublicTargetProfile(databaseBuilder);
   await databaseBuilder.commit();
 };
@@ -57,6 +59,33 @@ function _createCertifAdmin(databaseBuilder) {
     rawPassword: DEFAULT_PASSWORD,
   });
   databaseBuilder.factory.buildPixAdminRole({ userId: REAL_PIX_SUPER_ADMIN_ID + 3, role: ROLES.CERTIF });
+}
+
+function createClientApplications(databaseBuilder) {
+  databaseBuilder.factory.buildClientApplication({
+    name: 'livretScolaire',
+    clientId: 'livretScolaire',
+    clientSecret: 'livretScolaireSecret',
+    scopes: ['organizations-certifications-result'],
+  });
+  databaseBuilder.factory.buildClientApplication({
+    name: 'poleEmploi',
+    clientId: 'poleEmploi',
+    clientSecret: 'poleemploisecret',
+    scopes: ['pole-emploi-participants-result'],
+  });
+  databaseBuilder.factory.buildClientApplication({
+    name: 'pixData',
+    clientId: 'pixData',
+    clientSecret: 'pixdatasecret',
+    scopes: ['statistics'],
+  });
+  databaseBuilder.factory.buildClientApplication({
+    name: 'parcoursup',
+    clientId: 'parcoursup',
+    clientSecret: 'parcoursupsecret',
+    scopes: ['parcoursup'],
+  });
 }
 
 function _createPublicTargetProfile(databaseBuilder) {
