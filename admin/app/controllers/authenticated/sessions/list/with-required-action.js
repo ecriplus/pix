@@ -24,7 +24,7 @@ export default class AuthenticatedSessionsWithRequiredActionListController exten
     return this.model.length;
   }
 
-  @action filterAssignedSessions() {
+  @action toggleAssignedSessionsDisplay() {
     this.assignedToSelfOnly = !this.assignedToSelfOnly;
     this.sessionsList;
   }

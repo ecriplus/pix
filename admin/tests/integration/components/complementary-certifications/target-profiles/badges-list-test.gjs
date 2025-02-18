@@ -1,8 +1,8 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import BadgesList from 'pix-admin/components/complementary-certifications/target-profiles/badges-list';
 import { module, test } from 'qunit';
 
-import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest, { t } from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | complementary-certifications/target-profiles/badges-list', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -30,12 +30,15 @@ module('Integration | Component | complementary-certifications/target-profiles/b
     const screen = await render(<template><BadgesList @currentTargetProfile={{currentTargetProfile}} /></template>);
 
     // then
-    assert.dom(screen.getByRole('columnheader', { name: 'Image du badge certifié' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'Nom du badge certifié' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'Niveau du badge certifié' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'ID du RT certifiant' })).exists();
-    assert.dom(screen.getByRole('row', { name: 'Badge Cascade Badge Cascade 3 1023' })).exists();
-    assert.dom(screen.getByRole('row', { name: 'Badge Volcan Badge Volcan 1 1025' })).exists();
+    const table = screen.getByRole('table', {
+      name: t('components.complementary-certifications.target-profiles.badges-list.caption'),
+    });
+    assert.dom(within(table).getByRole('columnheader', { name: 'Image du badge certifié' })).exists();
+    assert.dom(within(table).getByRole('columnheader', { name: 'Nom du badge certifié' })).exists();
+    assert.dom(within(table).getByRole('columnheader', { name: 'Niveau du badge certifié' })).exists();
+    assert.dom(within(table).getByRole('columnheader', { name: 'ID du RT certifiant' })).exists();
+    assert.dom(within(table).getByRole('row', { name: 'Badge Cascade Badge Cascade 3 1023' })).exists();
+    assert.dom(within(table).getByRole('row', { name: 'Badge Volcan Badge Volcan 1 1025' })).exists();
   });
 
   test('it should contain a link for each target profile badge', async function (assert) {

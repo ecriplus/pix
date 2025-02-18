@@ -40,14 +40,14 @@ export default class ToBePublishedSessionsList extends Component {
   }
   <template>
     {{#if @toBePublishedSessions}}
-      <PixTable @data={{@toBePublishedSessions}}>
+      <PixTable @data={{@toBePublishedSessions}} @caption={{t "pages.sessions.table.to-be-published.caption"}}>
         <:columns as |row toBePublishedSession|>
           <PixTableColumn @context={{toBePublishedSession}}>
             <:header>
               {{t "pages.sessions.table.to-be-published.headers.id"}}
             </:header>
             <:cell>
-              <LinkTo @route="authenticated.sessions.session" @model={{toBePublishedSession.id}}>
+              <LinkTo @route="authenticated.sessions.session" @model={{row.id}}>
                 {{row.id}}
               </LinkTo>
             </:cell>

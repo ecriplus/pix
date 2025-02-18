@@ -2,7 +2,7 @@
 
 {{#if this.hasSessionsToProcess}}
   <div class="session-list__assigned-to-process-session">
-    <PixCheckbox @checked={{this.assignedToSelfOnly}} {{on "change" this.filterAssignedSessions}}>
+    <PixCheckbox @checked={{this.assignedToSelfOnly}} {{on "change" this.toggleAssignedSessionsDisplay}}>
       <:label>{{t "pages.sessions.table.required-actions.checkbox-label"}}</:label>
     </PixCheckbox>
   </div>

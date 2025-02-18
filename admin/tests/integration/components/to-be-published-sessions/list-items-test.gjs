@@ -1,12 +1,12 @@
-import { clickByName, render } from '@1024pix/ember-testing-library';
+import { clickByName, render, within } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import ListItems from 'pix-admin/components/to-be-published-sessions/list-items';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest, { t } from '../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | routes/authenticated/to-be-published-sessions | list-items', function (hooks) {
+module('Integration | Component | to-be-published-sessions | list-items', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('it should display to be published sessions list', async function (assert) {
@@ -43,10 +43,10 @@ module('Integration | Component | routes/authenticated/to-be-published-sessions 
     const screen = await render(<template><ListItems @toBePublishedSessions={{toBePublishedSessions}} /></template>);
 
     // then
-    assert.dom('table tbody tr').exists({ count: 3 });
-    assert.dom(screen.getByText('Centre SCO des Anne-Étoiles')).exists();
-    assert.dom(screen.getByText('Pix Center')).exists();
-    assert.dom(screen.getByText('Hogwarts')).exists();
+    const table = screen.getByRole('table', { name: t('pages.sessions.table.to-be-published.caption') });
+    assert.dom(within(table).getByText('Centre SCO des Anne-Étoiles')).exists();
+    assert.dom(within(table).getByText('Pix Center')).exists();
+    assert.dom(within(table).getByText('Hogwarts')).exists();
   });
 
   test('it should "Aucun résultat" if there are no sessions to show', async function (assert) {
