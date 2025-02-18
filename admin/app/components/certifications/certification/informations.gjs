@@ -1,13 +1,12 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 
-import CandidateEditModal from '../candidate-edit-modal';
 import CertificationCompetenceList from '../competence-list';
 import CertificationInfoField from '../info-field';
 import CertificationIssueReports from '../issue-reports';
 import CertificationComments from './comments';
+import CertificationInformationCandidate from './informations/candidate';
 import CertificationInformationGlobalActions from './informations/global-actions';
 import CertificationInformationState from './informations/state';
 
@@ -18,52 +17,7 @@ import CertificationInformationState from './informations/state';
     </div>
     <div class="certification-informations__row">
       <CertificationInformationState @certification={{@certification}} @session={{@session}} />
-
-      <div class="certification-informations__card">
-        <h2 class="certification-informations__card__title">Candidat</h2>
-        <div class="certification-info-field">
-          <span>Prénom :</span>
-          <span>{{@certification.firstName}}</span>
-        </div>
-        <div class="certification-info-field">
-          <span>Nom de famille :</span>
-          <span>{{@certification.lastName}}</span>
-        </div>
-        <div class="certification-info-field">
-          <span>Date de naissance :</span>
-          <span>{{dayjsFormat @certification.birthdate "DD/MM/YYYY" allow-empty=true}}</span>
-        </div>
-        <div class="certification-info-field">
-          <span>Sexe :</span>
-          <span>{{@certification.sex}}</span>
-        </div>
-        <div class="certification-info-field">
-          <span>Commune de naissance :</span>
-          <span>{{@certification.birthplace}}</span>
-        </div>
-        <div class="certification-info-field">
-          <span>Code postal de naissance :</span>
-          <span>{{@certification.birthPostalCode}}</span>
-        </div>
-        <div class="certification-info-field">
-          <span>Code INSEE de naissance :</span>
-          <span>{{@certification.birthInseeCode}}</span>
-        </div>
-        <div class="certification-info-field">
-          <span>Pays de naissance :</span>
-          <span>{{@certification.birthCountry}}</span>
-        </div>
-
-        <div class="candidate-informations__actions">
-          <PixButton
-            @size="small"
-            @triggerAction={{@openCandidateEditModal}}
-            aria-label="Modifier les informations du candidat"
-          >
-            Modifier infos candidat
-          </PixButton>
-        </div>
-      </div>
+      <CertificationInformationCandidate @certification={{@certification}} />
     </div>
 
     {{#if @certification.hasComplementaryCertifications}}
@@ -194,14 +148,4 @@ import CertificationInformationState from './informations/state';
       </div>
     </div>
   </div>
-
-  {{#if @isCandidateEditModalOpen}}
-    <CandidateEditModal
-      @onCancelButtonsClicked={{@closeCandidateEditModal}}
-      @onFormSubmit={{@onCandidateInformationSave}}
-      @candidate={{@certification}}
-      @countries={{@countries}}
-      @isDisplayed={{@isCandidateEditModalOpen}}
-    />
-  {{/if}}
 </template>
