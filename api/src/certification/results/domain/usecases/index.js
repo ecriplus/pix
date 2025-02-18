@@ -7,6 +7,7 @@ import { importNamedExportsFromDirectory } from '../../../../shared/infrastructu
 import * as sessionEnrolmentRepository from '../../../enrolment/infrastructure/repositories/session-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import * as certificationReportRepository from '../../../shared/infrastructure/repositories/certification-report-repository.js';
+import * as scoringConfigurationRepository from '../../../shared/infrastructure/repositories/scoring-configuration-repository.js';
 import * as sharedSessionRepository from '../../../shared/infrastructure/repositories/session-repository.js';
 import * as certificateRepository from '../../infrastructure/repositories/certificate-repository.js';
 import * as certificationLivretScolaireRepository from '../../infrastructure/repositories/certification-livret-scolaire-repository.js';
@@ -15,6 +16,7 @@ import * as certificationResultRepository from '../../infrastructure/repositorie
 import * as cleaCertifiedCandidateRepository from '../../infrastructure/repositories/clea-certified-candidate-repository.js';
 import * as competenceTreeRepository from '../../infrastructure/repositories/competence-tree-repository.js';
 import * as scoCertificationCandidateRepository from '../../infrastructure/repositories/sco-certification-candidate-repository.js';
+import * as pixScoreToMeshLevelService from '../services/pix-score-to-mesh-level.js';
 
 /**
  * Using {@link https://jsdoc.app/tags-type "Closure Compiler's syntax"} to document injected dependencies
@@ -30,6 +32,8 @@ import * as scoCertificationCandidateRepository from '../../infrastructure/repos
  * @typedef {sharedSessionRepository} SharedSessionRepository
  * @typedef {certificationLivretScolaireRepository} CertificationLivretScolaireRepository
  * @typedef {competenceTreeRepository} CompetenceTreeRepository
+ * @typedef {scoringConfigurationRepository} ScoringConfigurationRepository
+ * @typedef {pixScoreToMeshLevelService} PixScoreToMeshLevelService
  **/
 
 const dependencies = {
@@ -44,6 +48,8 @@ const dependencies = {
   sharedSessionRepository,
   competenceTreeRepository,
   certificationLivretScolaireRepository,
+  scoringConfigurationRepository,
+  pixScoreToMeshLevelService,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));
