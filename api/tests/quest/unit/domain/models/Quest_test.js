@@ -57,6 +57,24 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
   });
 
   describe('#isSuccessful', function () {
+    it('returns true when successfulRequirement is empty', function () {
+      // given
+      const quest = new Quest({
+        eligibilityRequirements: [],
+        successRequirements: [],
+      });
+      const success = new Success({
+        knowledgeElements: [
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillA' },
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillB' },
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillC' },
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillD' },
+        ],
+      });
+
+      expect(quest.isSuccessful(success)).to.be.true;
+    });
+
     it('returns true when all requirements are met', function () {
       // given
       const quest = new Quest({

@@ -27,6 +27,7 @@ function buildParenthoodQuest(databaseBuilder) {
   databaseBuilder.factory.buildQuest({
     rewardType: REWARD_TYPES.ATTESTATION,
     rewardId,
+    successRequirements: [],
     eligibilityRequirements: [
       {
         requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
