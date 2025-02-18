@@ -31,7 +31,7 @@ describe('Unit | Tooling | DatabaseBuilder | database-buffer', function () {
       databaseBuffer.pushInsertable({ tableName, values });
 
       // then
-      expect(databaseBuffer.objectsToInsert).to.deep.equal([{ tableName, values }]);
+      expect(databaseBuffer.objectsToInsert).to.deep.equal({ [tableName]: [values] });
     });
 
     it('should return inserted values', function () {

@@ -1,32 +1,49 @@
 /* eslint-disable knex/avoid-injections */
 import _ from 'lodash';
 
-import { databaseBuffer } from './database-buffer.js';
+import { databaseBuffer as defaultDatabaseBuffer } from './database-buffer.js';
 import * as databaseHelpers from './database-helpers.js';
 import { factory } from './factory/index.js';
+
+const READONLY_TABLES = [
+  'knex_migrations',
+  'knex_migrations_lock',
+  'view-active-organization-learners',
+  'pgboss.version',
+];
+const CHUNK_SIZE = 1000;
 
 /**
  * @class DatabaseBuilder
  * @property {Factory} factory
  */
-class DatabaseBuilder {
-  constructor({ knex, emptyFirst = true, beforeEmptyDatabase = () => undefined }) {
+export class DatabaseBuilder {
+  #beforeEmptyDatabase;
+  #emptyFirst;
+  #databaseBuffer;
+
+  #isFirstCommit = true;
+
+  #tablesOrderedByDependency;
+  #insertPriority;
+  #deletePriority;
+  #dirtyTables = new Set();
+
+  constructor({ knex, emptyFirst = true, databaseBuffer = defaultDatabaseBuffer, beforeEmptyDatabase }) {
     this.knex = knex;
-    this.databaseBuffer = databaseBuffer;
-    this.tablesOrderedByDependencyWithDirtinessMap = [];
-    this.isFirstCommit = true;
     this.factory = factory;
-    this.emptyFirst = emptyFirst;
-    this._beforeEmptyDatabase = beforeEmptyDatabase;
+    this.#databaseBuffer = databaseBuffer;
+    this.#emptyFirst = emptyFirst;
+    this.#beforeEmptyDatabase = beforeEmptyDatabase;
 
     this.#addListeners();
   }
 
-  static async create({ knex, emptyFirst = true, beforeEmptyDatabase = () => undefined }) {
+  static async create({ knex, emptyFirst = true, beforeEmptyDatabase }) {
     const databaseBuilder = new DatabaseBuilder({ knex, emptyFirst, beforeEmptyDatabase });
 
     try {
-      await databaseBuilder._init();
+      await databaseBuilder.#init();
     } catch {
       // Error thrown only with unit tests
     }
@@ -35,46 +52,43 @@ class DatabaseBuilder {
   }
 
   async commit() {
-    if (this.isFirstCommit) {
-      await this._init();
-    }
+    await this.#init();
+
+    const orderedObjectsToInsert = Object.entries(this.#databaseBuffer.objectsToInsert).sort(
+      ([tableName1], [tableName2]) => this.#insertPriority.get(tableName1) - this.#insertPriority.get(tableName2),
+    );
+
     try {
-      const trx = await this.knex.transaction();
-      for (const objectToInsert of this.databaseBuffer.objectsToInsert) {
-        await trx(objectToInsert.tableName).insert(objectToInsert.values);
-        this._setTableAsDirty(objectToInsert.tableName);
-      }
-      await trx.commit();
+      await this.knex.transaction(async (trx) => {
+        for (const [tableName, objectsToInsert] of orderedObjectsToInsert) {
+          for (const chunk of _.chunk(objectsToInsert, CHUNK_SIZE)) {
+            await trx.insert(chunk).into(tableName);
+          }
+          this.#dirtyTables.add(tableName);
+        }
+      });
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(`Erreur dans databaseBuilder.commit() : ${err}`);
-      this._purgeDirtiness();
+      this.#dirtyTables.clear();
       throw err;
     } finally {
-      this.databaseBuffer.objectsToInsert = [];
+      this.#databaseBuffer.objectsToInsert = [];
     }
   }
 
   async clean() {
-    let rawQuery = '';
-
-    this._selectDirtyTables()
-      .map((tableName) => {
-        return tableName
-          .split('.')
-          .map((element) => `"${element}"`)
-          .join('.');
-      })
-      .forEach((tableName) => {
-        rawQuery += `DELETE FROM ${tableName};`;
-      });
-
-    if (rawQuery !== '') {
-      await this.knex.raw(rawQuery);
+    if (this.#dirtyTables.size) {
+      await this.knex.raw(
+        Array.from(this.#dirtyTables)
+          .sort((tableName1, tableName2) => this.#deletePriority.get(tableName1) - this.#deletePriority.get(tableName2))
+          .map(deleteFrom)
+          .join('\n'),
+      );
     }
 
-    this.databaseBuffer.purge();
-    this._purgeDirtiness();
+    this.#databaseBuffer.purge();
+    this.#dirtyTables.clear();
   }
 
   /**
@@ -90,22 +104,20 @@ class DatabaseBuilder {
    * i.e. ERROR: duplicate key value violates unique constraint "pk_***"
    */
   async fixSequences() {
-    const dirtyTables = this._selectDirtyTables();
-    if (dirtyTables.length === 0) {
-      return;
-    }
-    const dirtyTablesSequencesInfo = await this._getSequencesInfo(dirtyTables);
+    if (!this.#dirtyTables.size) return;
+
+    const dirtyTablesSequencesInfo = await this.#getDirtyTablesSequencesInfo();
 
     for (const dirtyTablesSequence of dirtyTablesSequencesInfo) {
       const { tableName, sequenceName } = dirtyTablesSequence;
-      const sequenceRestartAtNumber = (await this._getTableMaxId(tableName)) + 1;
+      const sequenceRestartAtNumber = (await this.#getTableMaxId(tableName)) + 1;
       if (sequenceRestartAtNumber !== 0) {
         await this.knex.raw(`ALTER SEQUENCE "${sequenceName}" RESTART WITH ${sequenceRestartAtNumber};`);
       }
     }
   }
 
-  async _getSequencesInfo(dirtyTables) {
+  async #getDirtyTablesSequencesInfo() {
     const database = this.knex.client.database();
 
     const rawSequencesInfo = await this.knex
@@ -113,7 +125,7 @@ class DatabaseBuilder {
       .select('table_name', 'column_default')
       .whereRaw("column_default like 'nextval%'")
       .where({ table_catalog: database, column_name: 'id' })
-      .whereIn('table_name', dirtyTables);
+      .whereIn('table_name', Array.from(this.#dirtyTables));
 
     const sequencesInfo = rawSequencesInfo.map(({ table_name, column_default }) => ({
       tableName: table_name,
@@ -122,39 +134,29 @@ class DatabaseBuilder {
     return sequencesInfo;
   }
 
-  async _getTableMaxId(tableName) {
+  async #getTableMaxId(tableName) {
     const { max } = await this.knex.from(tableName).max('id').first();
     return max;
   }
 
-  async _init() {
-    await this._initTablesOrderedByDependencyWithDirtinessMap();
-    if (this.emptyFirst) {
-      await this._emptyDatabase();
+  async #init() {
+    if (!this.#isFirstCommit) return;
+    await this.#loadTables();
+    if (this.#emptyFirst) {
+      await this.#emptyDatabase();
     }
-    this.isFirstCommit = false;
+    this.#isFirstCommit = false;
   }
 
-  async _emptyDatabase() {
-    this._beforeEmptyDatabase();
-    const sortedTableNames = _.without(
-      _.map(this.tablesOrderedByDependencyWithDirtinessMap, 'table'),
-      'knex_migrations',
-      'knex_migrations_lock',
-      'view-active-organization-learners',
-    )
-      .map((tableName) => {
-        return tableName
-          .split('.')
-          .map((element) => `"${element}"`)
-          .join('.');
-      })
-      .join();
+  async #emptyDatabase() {
+    this.#beforeEmptyDatabase?.();
+
+    const sortedTableNames = this.#tablesOrderedByDependency.map(sanitizeTableName).join(',');
 
     return this.knex.raw(`TRUNCATE ${sortedTableNames}`);
   }
 
-  async _initTablesOrderedByDependencyWithDirtinessMap() {
+  async #loadTables() {
     // See this link : https://stackoverflow.com/questions/51279588/sort-tables-in-order-of-dependency-postgres
     function _constructRawQuery(namespace) {
       return `with recursive fk_tree as (
@@ -195,43 +197,17 @@ class DatabaseBuilder {
     const learningContentResults = await this.knex.raw(_constructRawQuery('learningcontent'));
     const pgbossResults = await this.knex.raw(_constructRawQuery('pgboss'));
 
-    this.tablesOrderedByDependencyWithDirtinessMap = [];
+    this.#tablesOrderedByDependency = [
+      ...publicResults.rows.map(({ table_name }) => table_name),
+      ...learningContentResults.rows.map(({ table_name }) => `learningcontent.${table_name}`),
+      ...pgbossResults.rows.map(({ table_name }) => `pgboss.${table_name}`),
+    ].filter((tableName) => !READONLY_TABLES.includes(tableName));
 
-    publicResults.rows.forEach(({ table_name }) => {
-      this.tablesOrderedByDependencyWithDirtinessMap.push({
-        table: table_name,
-        isDirty: false,
-      });
-    });
-    learningContentResults.rows.forEach(({ table_name }) => {
-      this.tablesOrderedByDependencyWithDirtinessMap.push({
-        table: `learningcontent.${table_name}`,
-        isDirty: false,
-      });
-    });
-    pgbossResults.rows.forEach(({ table_name }) => {
-      if (table_name === 'version') return;
-      this.tablesOrderedByDependencyWithDirtinessMap.push({
-        table: `pgboss.${table_name}`,
-        isDirty: false,
-      });
-    });
-  }
+    this.#deletePriority = new Map(this.#tablesOrderedByDependency.map((tableName, index) => [tableName, index]));
 
-  _setTableAsDirty(table) {
-    const tableWithDirtiness = _.find(this.tablesOrderedByDependencyWithDirtinessMap, { table });
-    if (tableWithDirtiness) tableWithDirtiness.isDirty = true;
-  }
-
-  _selectDirtyTables() {
-    const dirtyTableObjects = _.filter(this.tablesOrderedByDependencyWithDirtinessMap, { isDirty: true });
-    return _.map(dirtyTableObjects, 'table');
-  }
-
-  _purgeDirtiness() {
-    _.each(this.tablesOrderedByDependencyWithDirtinessMap, (table) => {
-      table.isDirty = false;
-    });
+    this.#insertPriority = new Map(
+      this.#tablesOrderedByDependency.toReversed().map((tableName, index) => [tableName, index]),
+    );
   }
 
   #addListeners() {
@@ -239,14 +215,23 @@ class DatabaseBuilder {
       if (queryData.method?.toLowerCase() === 'insert') {
         const tableName = databaseHelpers.getTableNameFromInsertSqlQuery(queryData.sql);
 
-        if (!_.isEmpty(tableName)) {
-          if (tableName === 'pgboss.version') return;
-          this._setTableAsDirty(tableName);
-        }
+        if (!tableName || tableName === '') return;
+        if (tableName === 'pgboss.version') return;
+
+        this.#dirtyTables.add(tableName);
       }
     });
   }
 }
 /* eslint-enable knex/avoid-injections */
 
-export { DatabaseBuilder };
+function sanitizeTableName(tableName) {
+  return tableName
+    .split('.')
+    .map((name) => `"${name}"`)
+    .join('.');
+}
+
+function deleteFrom(tableName) {
+  return `DELETE FROM ${sanitizeTableName(tableName)};`;
+}
