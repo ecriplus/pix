@@ -1,5 +1,4 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
-import EmberObject from '@ember/object';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setFlatpickrDate } from 'ember-flatpickr/test-support/helpers';
@@ -15,17 +14,23 @@ module('Integration | Component | certifications/candidate-edit-modal', function
 
   hooks.beforeEach(async function () {
     store = this.owner.lookup('service:store');
+    sinon
+      .stub(store, 'findAll')
+      .withArgs('country')
+      .resolves([
+        store.createRecord('country', { code: '99101', name: 'DANEMARK' }),
+        store.createRecord('country', { code: '99100', name: 'FRANCE' }),
+      ]);
   });
 
   module('#display', function () {
     test('it should display the modal', async function (assert) {
       // given
       this.candidate = store.createRecord('certification', { birthdate: '2000-12-15' });
-      this.countries = [];
 
       // when
       const screen = await render(
-        hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} @countries={{this.countries}} />`,
+        hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
       );
 
       // then
@@ -46,14 +51,10 @@ module('Integration | Component | certifications/candidate-edit-modal', function
         birthplace: 'Torreilles',
         birthCountry: 'FRANCE',
       });
-      this.countries = [
-        store.createRecord('country', { code: '99101', name: 'DANEMARK' }),
-        store.createRecord('country', { code: '99100', name: 'FRANCE' }),
-      ];
 
       // when
       const screen = await render(
-        hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} @countries={{this.countries}} />`,
+        hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
       );
 
       // then
@@ -75,14 +76,10 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'Torreilles',
           birthCountry: 'FRANCE',
         });
-        this.countries = [
-          store.createRecord('country', { code: '99101', name: 'DANEMARK' }),
-          store.createRecord('country', { code: '99100', name: 'FRANCE' }),
-        ];
 
         // when
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} @countries={{this.countries}} />`,
+          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
         );
 
         // then
@@ -101,14 +98,10 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'Torreilles',
           birthCountry: 'FRANCE',
         });
-        this.countries = [
-          store.createRecord('country', { code: '99101', name: 'DANEMARK' }),
-          store.createRecord('country', { code: '99100', name: 'FRANCE' }),
-        ];
 
         // when
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} @countries={{this.countries}} />`,
+          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
         );
 
         // then
@@ -129,14 +122,10 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'Copenhague',
           birthCountry: 'DANEMARK',
         });
-        this.countries = [
-          store.createRecord('country', { code: '99101', name: 'DANEMARK' }),
-          store.createRecord('country', { code: '99100', name: 'FRANCE' }),
-        ];
 
         // when
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} @countries={{this.countries}} />`,
+          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
         );
 
         // then
@@ -160,14 +149,10 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'Torreilles',
           birthCountry: 'FRANCE',
         });
-        this.countries = [
-          store.createRecord('country', { code: '99101', name: 'DANEMARK' }),
-          store.createRecord('country', { code: '99100', name: 'FRANCE' }),
-        ];
 
         // when
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} @countries={{this.countries}} />`,
+          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
         );
 
         // then
@@ -191,14 +176,10 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'Torreilles',
           birthCountry: 'FRANCE',
         });
-        this.countries = [
-          store.createRecord('country', { code: '99101', name: 'DANEMARK' }),
-          store.createRecord('country', { code: '99100', name: 'FRANCE' }),
-        ];
 
         // when
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} @countries={{this.countries}} />`,
+          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
         );
 
         // then
@@ -222,17 +203,12 @@ module('Integration | Component | certifications/candidate-edit-modal', function
         birthplace: 'Copenhague',
         birthCountry: 'DANEMARK',
       });
-      this.countries = [
-        store.createRecord('country', { code: '99101', name: 'DANEMARK' }),
-        store.createRecord('country', { code: '99100', name: 'FRANCE' }),
-      ];
       this.onCancelButtonsClickedStub = sinon.stub();
       const screen = await render(
         hbs`<Certifications::CandidateEditModal
   @isDisplayed={{true}}
   @candidate={{this.candidate}}
   @onCancelButtonsClicked={{this.onCancelButtonsClickedStub}}
-  @countries={{this.countries}}
 />`,
       );
 
@@ -275,17 +251,12 @@ module('Integration | Component | certifications/candidate-edit-modal', function
         birthCountry: 'DANEMARK',
       });
       const initialCandidateInformation = this.candidate.getInformation();
-      this.countries = [
-        store.createRecord('country', { code: '99101', name: 'DANEMARK' }),
-        store.createRecord('country', { code: '99100', name: 'FRANCE' }),
-      ];
       this.onCancelButtonsClickedStub = sinon.stub();
       const screen = await render(
         hbs`<Certifications::CandidateEditModal
   @isDisplayed={{true}}
   @candidate={{this.candidate}}
   @onCancelButtonsClicked={{this.onCancelButtonsClickedStub}}
-  @countries={{this.countries}}
 />`,
       );
       await fillByLabel('Nom de famille', 'Belmans');
@@ -312,14 +283,12 @@ module('Integration | Component | certifications/candidate-edit-modal', function
     test('it should call the onCancelButtonsClicked action', async function (assert) {
       // given
       this.candidate = store.createRecord('certification', { birthdate: '2000-12-15' });
-      this.countries = [];
       this.onCancelButtonsClickedStub = sinon.stub();
       await render(
         hbs`<Certifications::CandidateEditModal
   @isDisplayed={{true}}
   @candidate={{this.candidate}}
   @onCancelButtonsClicked={{this.onCancelButtonsClickedStub}}
-  @countries={{this.countries}}
 />`,
       );
 
@@ -335,14 +304,12 @@ module('Integration | Component | certifications/candidate-edit-modal', function
     test('it should not call the onFormSubmit action if a field is not filled', async function (assert) {
       // given
       this.candidate = store.createRecord('certification', { birthdate: '2000-12-15' });
-      this.countries = [];
       this.onFormSubmitStub = sinon.stub();
       await render(
         hbs`<Certifications::CandidateEditModal
   @isDisplayed={{true}}
   @candidate={{this.candidate}}
   @onFormSubmit={{this.onFormSubmitStub}}
-  @countries={{this.countries}}
 />`,
       );
 
@@ -364,17 +331,12 @@ module('Integration | Component | certifications/candidate-edit-modal', function
         birthplace: 'Copenhague',
         birthCountry: 'DANEMARK',
       });
-      this.countries = [
-        EmberObject.create({ code: '99101', name: 'DANEMARK' }),
-        EmberObject.create({ code: '99100', name: 'FRANCE' }),
-      ];
       this.onFormSubmitStub = sinon.stub();
       const screen = await render(
         hbs`<Certifications::CandidateEditModal
   @isDisplayed={{true}}
   @candidate={{this.candidate}}
   @onFormSubmit={{this.onFormSubmitStub}}
-  @countries={{this.countries}}
 />`,
       );
       await fillByLabel('Nom de famille', 'Belmans');
@@ -410,17 +372,12 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'PARIS 15',
           birthCountry: 'FRANCE',
         });
-        this.countries = [
-          store.createRecord('country', { code: '99101', name: 'DANEMARK' }),
-          store.createRecord('country', { code: '99100', name: 'FRANCE' }),
-        ];
         this.onFormSubmitStub = sinon.stub();
         this.onFormSubmitStub.resolves();
         const screen = await render(
           hbs`<Certifications::CandidateEditModal
   @isDisplayed={{true}}
   @candidate={{this.candidate}}
-  @countries={{this.countries}}
   @onFormSubmit={{this.onFormSubmitStub}}
 />`,
         );
@@ -460,17 +417,12 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'Copenhague',
           birthCountry: 'DANEMARK',
         });
-        this.countries = [
-          store.createRecord('country', { code: '99101', name: 'DANEMARK' }),
-          store.createRecord('country', { code: '99100', name: 'FRANCE' }),
-        ];
         this.onFormSubmitStub = sinon.stub();
         this.onFormSubmitStub.resolves();
         const screen = await render(
           hbs`<Certifications::CandidateEditModal
   @isDisplayed={{true}}
   @candidate={{this.candidate}}
-  @countries={{this.countries}}
   @onFormSubmit={{this.onFormSubmitStub}}
 />`,
         );
@@ -511,17 +463,12 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'Copenhague',
           birthCountry: 'DANEMARK',
         });
-        this.countries = [
-          store.createRecord('country', { code: '99101', name: 'DANEMARK' }),
-          store.createRecord('country', { code: '99100', name: 'FRANCE' }),
-        ];
         this.onFormSubmitStub = sinon.stub();
         this.onFormSubmitStub.resolves();
         const screen = await render(
           hbs`<Certifications::CandidateEditModal
   @isDisplayed={{true}}
   @candidate={{this.candidate}}
-  @countries={{this.countries}}
   @onFormSubmit={{this.onFormSubmitStub}}
 />`,
         );
@@ -564,12 +511,8 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'PARIS 15',
           birthCountry: 'FRANCE',
         });
-        this.countries = [
-          store.createRecord('country', { code: '99101', name: 'DANEMARK' }),
-          store.createRecord('country', { code: '99100', name: 'FRANCE' }),
-        ];
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} @countries={{this.countries}} />`,
+          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
         );
 
         // when
@@ -596,9 +539,8 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'PARIS 15',
           birthCountry: 'FRANCE',
         });
-        this.countries = [];
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} @countries={{this.countries}} />`,
+          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
         );
 
         // when
@@ -623,9 +565,8 @@ module('Integration | Component | certifications/candidate-edit-modal', function
           birthplace: 'PARIS 15',
           birthCountry: 'FRANCE',
         });
-        this.countries = [];
         const screen = await render(
-          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} @countries={{this.countries}} />`,
+          hbs`<Certifications::CandidateEditModal @isDisplayed={{true}} @candidate={{this.candidate}} />`,
         );
 
         // when
