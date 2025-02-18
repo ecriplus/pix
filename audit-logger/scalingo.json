@@ -1,0 +1,53 @@
+{
+  "name": "Pix Review App",
+  "env": {
+    "REVIEW_APP": {
+      "description": "Indicates that the application is a review app",
+      "value": "true"
+    },
+    "DOMAIN_PIX_APP": {
+      "generator": "template",
+      "template": "https://app-pr%PR_NUMBER%.review.pix"
+    },
+    "DOMAIN_PIX_ORGA": {
+      "generator": "template",
+      "template": "https://orga-pr%PR_NUMBER%.review.pix"
+    },
+    "DOMAIN_PIX_CERTIF": {
+      "generator": "template",
+      "template": "https://certif-pr%PR_NUMBER%.review.pix"
+    },
+    "PIX_API_URL": {
+      "generator": "template",
+      "template": "https://api-pr%PR_NUMBER%.review.pix.fr"
+    },
+    "PR_NUMBER": {
+      "generator": "template",
+      "template": "%PR_NUMBER%"
+    }
+  },
+  "scripts": {
+    "first-deploy": "./scripts/scalingo-post-ra-creation.sh"
+  },
+  "addons": [
+    {
+      "plan": "postgresql:postgresql-sandbox",
+      "options": {
+        "version": "15.10"
+      }
+    },
+    {
+      "plan": "redis:redis-sandbox",
+      "options": {
+        "version": "7.2.5"
+      }
+    }
+  ],
+  "formation": {
+    "web": {
+      "amount": 1,
+      "size": "S"
+    }
+  },
+  "stack": "scalingo-22"
+}
