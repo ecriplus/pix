@@ -2,7 +2,7 @@ import { fileURLToPath } from 'node:url';
 
 import moduleDatasource from '../../src/devcomp/infrastructure/datasources/learning-content/module-datasource.js';
 import { getCsvContent } from '../../src/shared/infrastructure/utils/csv/write-csv-utils.js';
-import { getAnswerableElements } from './get-answerable-elements-csv.js';
+import { getAnswerableElements } from './utils/get-answerable-elements.js';
 
 export async function getProposalsListAsCsv(modules) {
   const elements = getAnswerableElements(modules);

@@ -1,5 +1,5 @@
-import { getAnswerableElements } from '../../../../scripts/modulix/get-answerable-elements-csv.js';
 import { getProposals, getProposalsListAsCsv } from '../../../../scripts/modulix/get-proposals-csv.js';
+import { getAnswerableElements } from '../../../../scripts/modulix/utils/get-answerable-elements.js';
 import { expect } from '../../../test-helper.js';
 
 describe('Acceptance | Script | Get Proposals as CSV', function () {
