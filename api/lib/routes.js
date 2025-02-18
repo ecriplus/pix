@@ -7,7 +7,6 @@ import * as frameworks from './application/frameworks/index.js';
 import * as memberships from './application/memberships/index.js';
 import * as organizations from './application/organizations/index.js';
 import * as scoOrganizationLearners from './application/sco-organization-learners/index.js';
-import * as targetProfiles from './application/target-profiles/index.js';
 import * as users from './application/users/index.js';
 
 const routes = [
@@ -19,7 +18,6 @@ const routes = [
   memberships,
   organizations,
   scoOrganizationLearners,
-  targetProfiles,
   frameworks,
   users,
 ];
