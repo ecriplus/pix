@@ -5,6 +5,7 @@ import { revokedUserAccessRepository } from '../../src/identity-access-managemen
 import { getForwardedOrigin } from '../../src/identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../src/shared/config.js';
 import { tokenService } from '../../src/shared/domain/services/token-service.js';
+import { monitoringTools } from '../../src/shared/infrastructure/monitoring-tools.js';
 
 const { find } = lodash;
 
@@ -88,11 +89,22 @@ async function validateUser(decodedAccessToken, { request, revokedUserAccessRepo
   if (config.featureToggles.isUserTokenAudConfinementEnabled && userId) {
     const revokedUserAccess = await revokedUserAccessRepository.findByUserId(userId);
     if (revokedUserAccess.isAccessTokenRevoked(decodedAccessToken)) {
+      monitoringTools.logWarnWithCorrelationIds({
+        message: 'Revoked user AccessToken usage',
+        decodedAccessToken,
+      });
+
       return { isValid: false };
     }
 
     const audience = getForwardedOrigin(request.headers);
     if (decodedAccessToken.aud !== audience) {
+      monitoringTools.logWarnWithCorrelationIds({
+        message: 'User AccessToken audience mismatch',
+        audience,
+        decodedAccessToken,
+      });
+
       return { isValid: false };
     }
   }
