@@ -5,6 +5,7 @@
 import { findIntervalIndexFromScore } from '../../../scoring/domain/models/CapacitySimulator.js';
 // TODO : bounded context violation
 import { CertificationAssessmentScoreV3 } from '../../../scoring/domain/models/CertificationAssessmentScoreV3.js';
+import { GlobalCertificationLevel } from '../../../shared/domain/models/GlobalCertificationLevel.js';
 
 const SCORING_CONFIGURATION_WEIGHT = CertificationAssessmentScoreV3.weightsAndCoefficients.map(({ weight }) => weight);
 
@@ -14,9 +15,11 @@ const SCORING_CONFIGURATION_WEIGHT = CertificationAssessmentScoreV3.weightsAndCo
  * @param {V3CertificationScoring} params.scoringConfiguration
  */
 export const getMeshLevel = ({ pixScore, scoringConfiguration }) => {
-  return findIntervalIndexFromScore({
-    score: pixScore,
-    weights: SCORING_CONFIGURATION_WEIGHT,
-    scoringIntervalsLength: scoringConfiguration.getNumberOfIntervals(),
+  return new GlobalCertificationLevel({
+    meshLevel: findIntervalIndexFromScore({
+      score: pixScore,
+      weights: SCORING_CONFIGURATION_WEIGHT,
+      scoringIntervalsLength: scoringConfiguration.getNumberOfIntervals(),
+    }),
   });
 };
