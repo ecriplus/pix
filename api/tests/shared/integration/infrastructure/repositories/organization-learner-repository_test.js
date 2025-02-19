@@ -8,7 +8,7 @@ import { OrganizationLearner } from '../../../../../src/shared/domain/models/ind
 import * as organizationLearnerRepository from '../../../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
-describe('Integration ¨| Infrastructure | Repository | organization-learner-repository', function () {
+describe('Integration | Infrastructure | Repository | organization-learner-repository', function () {
   describe('#findByIds', function () {
     it('should return all the organizationLearners for given organizationLearner IDs', async function () {
       // given
@@ -998,7 +998,7 @@ describe('Integration ¨| Infrastructure | Repository | organization-learner-rep
       expect(result).to.equal(0);
     });
 
-    context('when "skipLoggedLastDayCheck" option is passed', function () {
+    context('when "skipActivityDate" option is passed', function () {
       it('should return count of all organization learners', async function () {
         // given
         const userRecentlyConnectedId = databaseBuilder.factory.buildUser().id;
@@ -1017,7 +1017,7 @@ describe('Integration ¨| Infrastructure | Repository | organization-learner-rep
         const result = await DomainTransaction.execute(async () => {
           return organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability({
             fromUserActivityDate,
-            skipLoggedLastDayCheck: true,
+            skipActivityDate: true,
           });
         });
 
@@ -1025,7 +1025,7 @@ describe('Integration ¨| Infrastructure | Repository | organization-learner-rep
         expect(result).to.equal(2);
       });
 
-      it('should not count organization learners not reconciliated with option skipLoggedLastDayCheck', async function () {
+      it('should not count organization learners not reconciliated with option skipActivityDate', async function () {
         // given
         const { organizationId } = databaseBuilder.factory.buildOrganizationLearner({ userId: null });
 
@@ -1036,7 +1036,7 @@ describe('Integration ¨| Infrastructure | Repository | organization-learner-rep
         const result = await DomainTransaction.execute(async () => {
           return organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability({
             fromUserActivityDate,
-            skipLoggedLastDayCheck: true,
+            skipActivityDate: true,
           });
         });
 
@@ -1046,26 +1046,6 @@ describe('Integration ¨| Infrastructure | Repository | organization-learner-rep
     });
 
     context('when "onlyNotComputed" option is passed', function () {
-      it('should not use this option if "skipLoggedLastDayCheck" is not true', async function () {
-        // given
-        const { organizationId } = databaseBuilder.factory.buildOrganizationLearner({ isCertifiable: null });
-
-        databaseBuilder.factory.buildOrganizationFeature({ featureId, organizationId });
-        await databaseBuilder.commit();
-
-        // when
-        const result = await DomainTransaction.execute(async () => {
-          return organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability({
-            fromUserActivityDate,
-            skipLoggedLastDayCheck: false,
-            onlyNotComputed: true,
-          });
-        });
-
-        // then
-        expect(result).to.equal(0);
-      });
-
       it('should return count of organization learners with no certificability', async function () {
         // given
         const { organizationId } = databaseBuilder.factory.buildOrganizationLearner({ isCertifiable: null });
@@ -1077,7 +1057,7 @@ describe('Integration ¨| Infrastructure | Repository | organization-learner-rep
         const result = await DomainTransaction.execute(async () => {
           return organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability({
             fromUserActivityDate,
-            skipLoggedLastDayCheck: true,
+            skipActivityDate: true,
             onlyNotComputed: true,
           });
         });
@@ -1098,7 +1078,7 @@ describe('Integration ¨| Infrastructure | Repository | organization-learner-rep
         const result = await DomainTransaction.execute(async () => {
           return organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability({
             fromUserActivityDate,
-            skipLoggedLastDayCheck: true,
+            skipActivityDate: true,
             onlyNotComputed: true,
           });
         });
@@ -1240,7 +1220,7 @@ describe('Integration ¨| Infrastructure | Repository | organization-learner-rep
       expect(result).to.deep.equal([]);
     });
 
-    context('when "skippLoggedLastDayCheck" option is passed', function () {
+    context('when "skipActivityDate" option is passed', function () {
       it('should return all organization learners', async function () {
         // given
         const userRecentlyConnectedId = databaseBuilder.factory.buildUser().id;
@@ -1263,7 +1243,7 @@ describe('Integration ¨| Infrastructure | Repository | organization-learner-rep
         // when
         const result = await DomainTransaction.execute(async () => {
           return organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability({
-            skipLoggedLastDayCheck: true,
+            skipActivityDate: true,
 
             fromUserActivityDate,
             toUserActivityDate,
@@ -1277,7 +1257,7 @@ describe('Integration ¨| Infrastructure | Repository | organization-learner-rep
         ]);
       });
 
-      it('should not return an organization learner not reconciliated with option skipLoggedLastDayCheck', async function () {
+      it('should not return an organization learner not reconciliated with option skipActivityDate', async function () {
         // given
         const { organizationId } = databaseBuilder.factory.buildOrganizationLearner({ userId: null });
 
@@ -1289,7 +1269,7 @@ describe('Integration ¨| Infrastructure | Repository | organization-learner-rep
           return organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability({
             fromUserActivityDate,
             toUserActivityDate,
-            skipLoggedLastDayCheck: true,
+            skipActivityDate: true,
           });
         });
 
@@ -1313,7 +1293,7 @@ describe('Integration ¨| Infrastructure | Repository | organization-learner-rep
           return organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability({
             fromUserActivityDate,
             toUserActivityDate,
-            skipLoggedLastDayCheck: true,
+            skipActivityDate: true,
             onlyNotComputed: true,
           });
         });
@@ -1338,38 +1318,13 @@ describe('Integration ¨| Infrastructure | Repository | organization-learner-rep
           return organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability({
             fromUserActivityDate,
             toUserActivityDate,
-            skipLoggedLastDayCheck: true,
+            skipActivityDate: true,
             onlyNotComputed: true,
           });
         });
 
         // then
         expect(result).to.deep.equal([learnerNeverBeenComputed]);
-      });
-
-      it('should not use this option if "skipLoggedLastDayCheck" is not true', async function () {
-        // given
-        const { organizationId } = databaseBuilder.factory.buildOrganizationLearner({ isCertifiable: true });
-        databaseBuilder.factory.buildOrganizationLearner({
-          isCertifiable: null,
-          organizationId,
-        });
-
-        databaseBuilder.factory.buildOrganizationFeature({ featureId, organizationId });
-        await databaseBuilder.commit();
-
-        // when
-        const result = await DomainTransaction.execute(async () => {
-          return organizationLearnerRepository.findByOrganizationsWhichNeedToComputeCertificability({
-            fromUserActivityDate,
-            toUserActivityDate,
-            skipLoggedLastDayCheck: false,
-            onlyNotComputed: true,
-          });
-        });
-
-        // then
-        expect(result).to.be.empty;
       });
     });
 

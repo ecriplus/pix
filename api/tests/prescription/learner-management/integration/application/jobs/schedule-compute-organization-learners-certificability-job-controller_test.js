@@ -40,7 +40,7 @@ describe('Integration | Infrastructure | Jobs | scheduleComputeOrganizationLearn
 
         // when
         await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
-          data: { skipLoggedLastDayCheck: true, onlyNotComputed: false },
+          data: { skipActivityDate: true, onlyNotComputed: false },
           dependencies: {
             logger,
             organizationLearnerRepository,
@@ -70,7 +70,7 @@ describe('Integration | Infrastructure | Jobs | scheduleComputeOrganizationLearn
 
         // when
         await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
-          data: { skipLoggedLastDayCheck: true, onlyNotComputed: false },
+          data: { skipActivityDate: true, onlyNotComputed: false },
           dependencies: {
             logger,
             organizationLearnerRepository,

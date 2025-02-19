@@ -3,8 +3,9 @@ import timezone from 'dayjs/plugin/timezone.js';
 import utc from 'dayjs/plugin/utc.js';
 
 import { ScheduleComputeOrganizationLearnersCertificabilityJobController } from '../../../../../../src/prescription/learner-management/application/jobs/schedule-compute-organization-learners-certificability-job-controller.js';
+import { ComputeOrganizationLearnerCertificabilityJobProvidedDateError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { expect, knex, sinon } from '../../../../../test-helper.js';
+import { catchErr, expect, knex, sinon } from '../../../../../test-helper.js';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -74,14 +75,14 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
 
       it('should schedule multiple ComputeCertificabilityJob', async function () {
         // given
-        const skipLoggedLastDayCheck = undefined;
+        const skipActivityDate = undefined;
         const onlyNotComputed = undefined;
 
         organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability
           .withArgs({
             fromUserActivityDate,
             toUserActivityDate,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves(3);
@@ -91,7 +92,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
             toUserActivityDate,
             limit: 2,
             offset: 0,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves([1, 2]);
@@ -101,7 +102,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
             toUserActivityDate,
             limit: 2,
             offset: 2,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves([3]);
@@ -134,14 +135,17 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
 
       it('should take options from event', async function () {
         // given
-        const skipLoggedLastDayCheck = true;
+        const skipActivityDate = false;
         const onlyNotComputed = true;
+        const providedDateRange = { startDate: '2024-03-01', endDate: '2024-03-03' };
 
+        fromUserActivityDate = dayjs(providedDateRange.startDate, 'YYYY-MM-DD').toDate();
+        toUserActivityDate = dayjs(providedDateRange.endDate, 'YYYY-MM-DD').toDate();
         organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability
           .withArgs({
             fromUserActivityDate,
             toUserActivityDate,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves(3);
@@ -151,7 +155,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
             toUserActivityDate,
             limit: 2,
             offset: 0,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves([1, 2]);
@@ -161,7 +165,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
             toUserActivityDate,
             limit: 2,
             offset: 2,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves([3]);
@@ -171,8 +175,9 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
         // when
         await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
           data: {
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
+            providedDateRange,
           },
           dependencies: {
             logger,
@@ -194,7 +199,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
 
       it('should test pagination with a lot of results', async function () {
         // given
-        const skipLoggedLastDayCheck = undefined;
+        const skipActivityDate = undefined;
         const onlyNotComputed = undefined;
 
         const chunkCount = 10;
@@ -206,7 +211,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
           .withArgs({
             fromUserActivityDate,
             toUserActivityDate,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves(30);
@@ -218,7 +223,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
               offset: index * limit,
               fromUserActivityDate,
               toUserActivityDate,
-              skipLoggedLastDayCheck,
+              skipActivityDate,
               onlyNotComputed,
             })
             .resolves([index * limit + 1, index * limit + 2, index * limit + 3]);
@@ -262,14 +267,14 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
 
       it('should call usecase directly', async function () {
         // given
-        const skipLoggedLastDayCheck = undefined;
+        const skipActivityDate = undefined;
         const onlyNotComputed = undefined;
 
         organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability
           .withArgs({
             fromUserActivityDate,
             toUserActivityDate,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves(3);
@@ -279,7 +284,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
             toUserActivityDate,
             limit: 2,
             offset: 0,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves([1, 2]);
@@ -289,7 +294,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
             toUserActivityDate,
             limit: 2,
             offset: 2,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves([3]);
@@ -311,16 +316,68 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
         expect(computeCertificabilityJobRepository.performAsync).to.not.have.been.called;
       });
 
+      it('should throw when end date is before start date', async function () {
+        // given
+        const skipActivityDate = false;
+        const onlyNotComputed = true;
+        const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
+          new ScheduleComputeOrganizationLearnersCertificabilityJobController();
+
+        // when
+        const err = await catchErr(scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle)({
+          data: {
+            skipActivityDate,
+            onlyNotComputed,
+            providedDateRange: { startDate: '2024-03-04', endDate: '2024-03-03' },
+          },
+          dependencies: {
+            logger,
+            organizationLearnerRepository,
+            computeCertificabilityJobRepository,
+            config,
+          },
+        });
+
+        // then
+        expect(err).to.be.instanceOf(ComputeOrganizationLearnerCertificabilityJobProvidedDateError);
+      });
+
+      it('should throw when one or more given dates are not valid', async function () {
+        // given
+        const scheduleComputeOrganizationLearnersCertificabilityJobHandler =
+          new ScheduleComputeOrganizationLearnersCertificabilityJobController();
+
+        // when
+        const err = await catchErr(scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle)({
+          data: {
+            providedDateRange: { startDate: 123, endDate: 123 },
+          },
+          dependencies: {
+            logger,
+            organizationLearnerRepository,
+            computeCertificabilityJobRepository,
+            config,
+          },
+        });
+
+        // then
+        expect(err).to.be.instanceOf(ComputeOrganizationLearnerCertificabilityJobProvidedDateError);
+      });
+
       it('should take options from event', async function () {
         // given
-        const skipLoggedLastDayCheck = true;
+        const skipActivityDate = false;
         const onlyNotComputed = true;
+        const providedDateRange = { startDate: '2024-03-01', endDate: '2024-03-03' };
+
+        fromUserActivityDate = dayjs(providedDateRange.startDate, 'YYYY-MM-DD').toDate();
+        toUserActivityDate = dayjs(providedDateRange.endDate, 'YYYY-MM-DD').toDate();
 
         organizationLearnerRepository.countByOrganizationsWhichNeedToComputeCertificability
           .withArgs({
             fromUserActivityDate,
             toUserActivityDate,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves(3);
@@ -330,7 +387,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
             toUserActivityDate,
             limit: 2,
             offset: 0,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves([1, 2]);
@@ -340,7 +397,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
             toUserActivityDate,
             limit: 2,
             offset: 2,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves([3]);
@@ -350,8 +407,9 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
         // when
         await scheduleComputeOrganizationLearnersCertificabilityJobHandler.handle({
           data: {
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
+            providedDateRange,
           },
           dependencies: {
             logger,
@@ -375,7 +433,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
 
       it('should test pagination with a lot of results', async function () {
         // given
-        const skipLoggedLastDayCheck = undefined;
+        const skipActivityDate = undefined;
         const onlyNotComputed = undefined;
 
         const chunkCount = 10;
@@ -387,7 +445,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
           .withArgs({
             fromUserActivityDate,
             toUserActivityDate,
-            skipLoggedLastDayCheck,
+            skipActivityDate,
             onlyNotComputed,
           })
           .resolves(30);
@@ -399,7 +457,7 @@ describe('Unit | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCert
               offset: index * limit,
               fromUserActivityDate,
               toUserActivityDate,
-              skipLoggedLastDayCheck,
+              skipActivityDate,
               onlyNotComputed,
             })
             .resolves([index * limit + 1, index * limit + 2, index * limit + 3]);
