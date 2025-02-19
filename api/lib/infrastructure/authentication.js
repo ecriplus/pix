@@ -36,42 +36,6 @@ const strategies = {
       validate: validateClientApplication,
     },
   },
-
-  jwtLivretScolaire: {
-    name: 'jwt-livret-scolaire',
-    schemeName: schemes.jwt.name,
-    configuration: {
-      key: config.jwtConfig.livretScolaire.secret,
-      validate: validateClientApplication,
-    },
-  },
-
-  jwtPoleEmploi: {
-    name: 'jwt-pole-emploi',
-    schemeName: schemes.jwt.name,
-    configuration: {
-      key: config.jwtConfig.poleEmploi.secret,
-      validate: validateClientApplication,
-    },
-  },
-
-  jwtPixData: {
-    name: 'jwt-pix-data',
-    schemeName: schemes.jwt.name,
-    configuration: {
-      key: config.jwtConfig.pixData.secret,
-      validate: validateClientApplication,
-    },
-  },
-
-  jwtParcoursup: {
-    name: 'jwt-parcoursup',
-    schemeName: schemes.jwt.name,
-    configuration: {
-      key: config.jwtConfig.parcoursup.secret,
-      validate: validateClientApplication,
-    },
-  },
 };
 
 const authentication = {
