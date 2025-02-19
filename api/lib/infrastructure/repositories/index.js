@@ -8,11 +8,6 @@ import { fromDatasourceObject } from '../../../src/shared/infrastructure/adapter
 import { injectDependencies } from '../../../src/shared/infrastructure/utils/dependency-injection.js';
 import * as correctionRepository from './correction-repository.js';
 
-/**
- * Using {@link https://jsdoc.app/tags-type "Closure Compiler's syntax"} to document injected dependencies
- *
- * @typedef {complementaryCertificationRepository} ComplementaryCertificationRepository
- */
 const repositoriesWithoutInjectedDependencies = {
   correctionRepository,
   trainingRepository,
