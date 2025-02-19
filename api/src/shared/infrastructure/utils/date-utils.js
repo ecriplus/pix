@@ -33,6 +33,7 @@ function formatDate(params, outputFormat) {
   return dayjs(...params).format(outputFormat);
 }
 
+// todo laura remove me
 function getNowDate() {
   return new Date();
 }

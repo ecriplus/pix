@@ -32,12 +32,12 @@ describe('Unit | Domain | Use Cases | correct-answer-then-update-assessment', fu
     answerRepository,
     challengeRepository,
     skillRepository,
-    campaignRepository,
-    flashAssessmentResultRepository,
     scorecardService,
     knowledgeElementRepository,
     certificationChallengeLiveAlertRepository,
     certificationEvaluationCandidateRepository,
+    campaignRepository,
+    flashAssessmentResultRepository,
     flashAlgorithmService,
     algorithmDataFetcherService,
     answerJobRepository;
@@ -57,12 +57,12 @@ describe('Unit | Domain | Use Cases | correct-answer-then-update-assessment', fu
     skillRepository = { findActiveByCompetenceId: sinon.stub() };
     campaignRepository = { findSkillsByCampaignParticipationId: sinon.stub() };
     flashAssessmentResultRepository = { save: sinon.stub() };
+    flashAlgorithmService = { getCapacityAndErrorRate: sinon.stub() };
+    algorithmDataFetcherService = { fetchForFlashLevelEstimation: sinon.stub() };
     scorecardService = { computeScorecard: sinon.stub() };
     knowledgeElementRepository = { findUniqByUserIdAndAssessmentId: sinon.stub() };
     certificationChallengeLiveAlertRepository = { getOngoingOrValidatedByChallengeIdAndAssessmentId: sinon.stub() };
     certificationEvaluationCandidateRepository = { findByAssessmentId: sinon.stub() };
-    flashAlgorithmService = { getCapacityAndErrorRate: sinon.stub() };
-    algorithmDataFetcherService = { fetchForFlashLevelEstimation: sinon.stub() };
     answerJobRepository = {
       performAsync: sinon.stub(),
     };
