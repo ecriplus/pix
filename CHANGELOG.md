@@ -1,5 +1,19 @@
 # Pix Changelog
 
+## v5.47.0 (19/02/2025)
+
+
+### :rocket: Amélioration
+- [#11449](https://github.com/1024pix/pix/pull/11449) [FEATURE] Forcer une longueur minimum sur la solution des QROCM (PIX-16609).
+
+### :building_construction: Tech
+- [#11407](https://github.com/1024pix/pix/pull/11407) [TECH] ajoute un param providedDate au job de calcul de certificabilité (Pix-16544).
+- [#11451](https://github.com/1024pix/pix/pull/11451) [TECH] Suppression du message de dépréciation au lancement des tests.
+- [#11391](https://github.com/1024pix/pix/pull/11391) [TECH] Script pour relier des réponses en doublon à un autre assessment (PIX-16235).
+
+### :coffee: Autre
+- [#11455](https://github.com/1024pix/pix/pull/11455) Revert "[FEATURE] Utiliser les applications clientes en BdD".
+
 ## v5.46.0 (19/02/2025)
 
 
