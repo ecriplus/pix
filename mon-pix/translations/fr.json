@@ -251,8 +251,8 @@
     },
     "campaigns": {
       "attestation-result": {
-        "SIXTH_GRADE": {
-          "title": "Sensibilisation au numérique"
+        "title": {
+          "digital-awarness": "Sensibilisation au numérique"
         },
         "computing": "Attestation en cours de calcul",
         "computing-description": "Un problème technique nous empêche de vous informer sur l'obtention de votre attestation. Veuillez vous reconnecter demain sur Pix, section 'Mon parcours', pour consulter vos résultats. Nous nous excusons pour la gêne occasionnée.",

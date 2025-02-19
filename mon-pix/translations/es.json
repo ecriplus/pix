@@ -261,8 +261,8 @@
         "computing-description": "Un problema técnico nos ha impedido informarle de sus resultados. Por favor, conéctese de nuevo mañana en Pix, en la sección \"Mi curso\", para comprobar sus resultados. Le pedimos disculpas por las molestias ocasionadas.",
         "not-obtained": "Certificado no obtenido :",
         "obtained": "Certificado obtenido",
-        "SIXTH_GRADE": {
-          "title": "Conciencia digital"
+        "title": {
+          "digital-awarness": "Conciencia digital"
         }
       },
       "results-loader": {

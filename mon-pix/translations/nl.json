@@ -261,8 +261,8 @@
         "computing-description": "Door een technisch probleem kunnen we je niet informeren over je resultaten. Log morgen opnieuw in op Pix, in de 'Mijn cursus' sectie, om je resultaten te bekijken. Onze excuses voor het ongemak.",
         "not-obtained": "Certificaat niet verkregen :",
         "obtained": "Verkregen certificaat",
-        "SIXTH_GRADE": {
-          "title": "Digitaal bewustzijn"
+        "title": {
+          "digital-awarness": "Digitaal bewustzijn"
         }
       },
       "results-loader": {

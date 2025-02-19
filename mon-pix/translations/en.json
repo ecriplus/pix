@@ -251,8 +251,8 @@
     },
     "campaigns": {
       "attestation-result": {
-        "SIXTH_GRADE": {
-          "title": "Digital awareness"
+        "title": {
+          "digital-awarness": "Digital awareness"
         },
         "computing": "Attestation being calculated",
         "computing-description": "A technical problem prevents us from informing you about obtaining your certificate. Please reconnect tomorrow on Pix, section 'My journey', to consult your results. We apologize for the inconvenience caused.",
