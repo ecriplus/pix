@@ -79,7 +79,6 @@ import * as resetPasswordService from '../../../src/identity-access-management/d
 import { scoAccountRecoveryService } from '../../../src/identity-access-management/domain/services/sco-account-recovery.service.js';
 import { accountRecoveryDemandRepository } from '../../../src/identity-access-management/infrastructure/repositories/account-recovery-demand.repository.js';
 import * as authenticationMethodRepository from '../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
-import { clientApplicationRepository } from '../../../src/identity-access-management/infrastructure/repositories/client-application.repository.js';
 import { emailValidationDemandRepository } from '../../../src/identity-access-management/infrastructure/repositories/email-validation-demand.repository.js';
 // Not used in lib
 import { userAnonymizedEventLoggingJobRepository } from '../../../src/identity-access-management/infrastructure/repositories/jobs/user-anonymized-event-logging-job-repository.js';
@@ -245,7 +244,6 @@ const dependencies = {
   certificationCpfCityRepository,
   certificationOfficerRepository,
   challengeRepository,
-  clientApplicationRepository,
   codeGenerator,
   codeUtils,
   competenceEvaluationRepository,

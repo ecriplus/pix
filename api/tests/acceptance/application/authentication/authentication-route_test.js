@@ -133,14 +133,6 @@ describe('Acceptance | Controller | authentication-controller', function () {
           'x-forwarded-host': 'app.pix.fr',
         },
       };
-
-      databaseBuilder.factory.buildClientApplication({
-        name: 'osmose',
-        clientId: OSMOSE_CLIENT_ID,
-        clientSecret: OSMOSE_CLIENT_SECRET,
-        scopes: [SCOPE],
-      });
-      await databaseBuilder.commit();
     });
 
     it('should return an 200 with accessToken when clientId, client secret and scope are registred', async function () {
