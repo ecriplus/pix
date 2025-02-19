@@ -207,7 +207,7 @@ describe('Quest | Integration | Domain | Usecases | getQuestResultsForCampaignPa
       userId,
     });
     const rewardId = databaseBuilder.factory.buildAttestation().id;
-    const questId = databaseBuilder.factory.buildQuest({
+    databaseBuilder.factory.buildQuest({
       rewardType: 'attestations',
       rewardId,
       eligibilityRequirements: [
@@ -229,10 +229,7 @@ describe('Quest | Integration | Domain | Usecases | getQuestResultsForCampaignPa
 
     const result = await usecases.getQuestResultsForCampaignParticipation({ userId, campaignParticipationId });
 
-    expect(result[0]).to.be.instanceOf(QuestResult);
-    expect(result[0].id).to.equal(questId);
-    expect(result[0].obtained).to.equal(false);
-    expect(result[0].reward.id).to.equal(rewardId);
+    expect(result.length).to.equal(0);
   });
 
   it('should not return quest results for other campaign participation', async function () {

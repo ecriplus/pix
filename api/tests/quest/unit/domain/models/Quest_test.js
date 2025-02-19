@@ -286,75 +286,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
     });
 
     context('eligibilityRequirement without campaignParticipation type', function () {
-      it('return false when none of eligiblityRequirement is eligible', function () {
-        // given
-        const eligibilityRequirements = [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
-            data: {
-              type: {
-                data: 'PRO',
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-          },
-        ];
-        const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
-        const campaignParticipations = [{ id: 10 }, { id: 11 }];
-        const eligibilityData = new Eligibility({ organization, organizationLearner, campaignParticipations });
-        const campaignParticipationIdToCheck = 11;
-
-        // when
-        const isContributing = quest.isCampaignParticipationContributingToQuest({
-          eligibility: eligibilityData,
-          campaignParticipationId: campaignParticipationIdToCheck,
-        });
-
-        // then
-        expect(isContributing).to.be.false;
-      });
-
-      it('return false when eligibilityRequirement is partially eligible', function () {
-        // given
-        const eligibilityRequirements = [
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
-            data: {
-              type: {
-                data: 'SCO',
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-          },
-          {
-            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION_LEARNER,
-            data: {
-              id: {
-                data: 456,
-                comparison: CRITERION_COMPARISONS.EQUAL,
-              },
-            },
-            comparison: REQUIREMENT_COMPARISONS.ALL,
-          },
-        ];
-        const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
-        const campaignParticipations = [{ id: 10 }, { id: 11 }];
-        const eligibilityData = new Eligibility({ organization, organizationLearner, campaignParticipations });
-        const campaignParticipationIdToCheck = 11;
-
-        // when
-        const isContributing = quest.isCampaignParticipationContributingToQuest({
-          eligibility: eligibilityData,
-          campaignParticipationId: campaignParticipationIdToCheck,
-        });
-
-        // then
-        expect(isContributing).to.be.false;
-      });
-
-      it('return true if all eligibilityRequirement is valid', function () {
+      it('return false', function () {
         // given
         const eligibilityRequirements = [
           {
@@ -390,7 +322,7 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         });
 
         // then
-        expect(isContributing).to.be.true;
+        expect(isContributing).to.be.false;
       });
     });
   });

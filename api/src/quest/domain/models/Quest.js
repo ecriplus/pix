@@ -4,8 +4,11 @@ import {
   ComposedRequirement,
   TYPES as _REQUIREMENT_TYPES,
 } from './Requirement.js';
+/**
+ * @typedef {import ('./Eligibility.js').Eligibility} Eligibility
+ * @typedef {import ('./Success.js').Success} Success
+ */
 
-// warning, manque d'homogénéité sur les fonctions de comparaison, fixme !
 export const REQUIREMENT_COMPARISONS = _REQUIREMENT_COMPARISONS;
 export const CRITERION_COMPARISONS = _CRITERION_COMPARISONS;
 export const REQUIREMENT_TYPES = _REQUIREMENT_TYPES;
@@ -52,25 +55,16 @@ class Quest {
       this.#eligibilityRequirements.data,
       REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
     );
-    const otherRequirements = this.#omitRequirementsByType(
-      this.#eligibilityRequirements.data,
-      REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-    );
 
-    const eligibilityRequirements = otherRequirements;
     if (campaignParticipationRequirements.length > 0) {
-      eligibilityRequirements.push(
-        new ComposedRequirement({
-          data: campaignParticipationRequirements,
-          comparison: REQUIREMENT_COMPARISONS.ONE_OF,
-        }),
-      );
+      const a = new ComposedRequirement({
+        data: campaignParticipationRequirements,
+        comparison: REQUIREMENT_COMPARISONS.ONE_OF,
+      });
+      return a.isFulfilled(scopedEligibility);
     }
-    const scopedEligibilityRequirements = new ComposedRequirement({
-      data: eligibilityRequirements,
-      comparison: REQUIREMENT_COMPARISONS.ALL,
-    });
-    return scopedEligibilityRequirements.isFulfilled(scopedEligibility);
+
+    return false;
   }
 
   /**
@@ -97,26 +91,6 @@ class Quest {
       eligibilityRequirements: this.#eligibilityRequirements.data.map((item) => item.toDTO()),
       successRequirements: this.#successRequirements.data.map((item) => item.toDTO()),
     };
-  }
-
-  #omitRequirementsByType(requirements, type) {
-    const result = [];
-    for (const requirement of requirements) {
-      if (requirement.requirement_type === REQUIREMENT_TYPES.COMPOSE) {
-        const subRequirements = this.#omitRequirementsByType(requirement.data, type);
-        if (subRequirements.length > 0) {
-          result.push(
-            new ComposedRequirement({
-              data: subRequirements,
-              comparison: requirement.comparison,
-            }),
-          );
-        }
-      } else if (requirement.requirement_type !== type) {
-        result.push(requirement);
-      }
-    }
-    return result;
   }
 
   #flattenRequirementsByType(requirements, type) {
