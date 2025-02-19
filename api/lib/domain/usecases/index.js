@@ -13,7 +13,6 @@ import * as centerRepository from '../../../src/certification/enrolment/infrastr
 import * as certificationCpfCityRepository from '../../../src/certification/enrolment/infrastructure/repositories/certification-cpf-city-repository.js';
 // Not used in lib
 import * as sessionEnrolmentRepository from '../../../src/certification/enrolment/infrastructure/repositories/session-repository.js';
-import * as certificationEvaluationCandidateRepository from '../../../src/certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
 import * as flashAlgorithmService from '../../../src/certification/flash-certification/domain/services/algorithm-methods/flash.js';
 // Not used in lib
 import * as sessionPublicationService from '../../../src/certification/session-management/domain/services/session-publication-service.js';
@@ -55,10 +54,8 @@ import { getCompetenceLevel } from '../../../src/evaluation/domain/services/get-
 // Not used in lib
 import * as improvementService from '../../../src/evaluation/domain/services/improvement-service.js';
 import { pickChallengeService } from '../../../src/evaluation/domain/services/pick-challenge-service.js';
-import * as scorecardService from '../../../src/evaluation/domain/services/scorecard-service.js';
 // Not used in lib
 import * as stageAndStageAcquisitionComparisonService from '../../../src/evaluation/domain/services/stages/stage-and-stage-acquisition-comparison-service.js';
-import { answerJobRepository } from '../../../src/evaluation/infrastructure/repositories/answer-job-repository.js';
 // Not used in lib
 import * as badgeCriteriaRepository from '../../../src/evaluation/infrastructure/repositories/badge-criteria-repository.js';
 // Not used in lib
@@ -190,7 +187,6 @@ const oidcAuthenticationServiceRegistry = new OidcAuthenticationServiceRegistry(
  * @typedef {certificationBadgesService} CertificationBadgesService
  * @typedef {certificationCenterRepository} CertificationCenterRepository
  * @typedef {certificationRepository} CertificationRepository
- * @typedef {certificationEvaluationCandidateRepository} CertificationEvaluationCandidateRepository
  * @typedef {complementaryCertificationRepository} ComplementaryCertificationRepository
  * @typedef {complementaryCertificationCourseRepository} ComplementaryCertificationCourseRepository
  * @typedef {finalizedSessionRepository} FinalizedSessionRepository
@@ -214,7 +210,6 @@ const dependencies = {
   accountRecoveryDemandRepository,
   certificationCompletedJobRepository,
   activityAnswerRepository,
-  answerJobRepository,
   adminMemberRepository,
   algorithmDataFetcherService,
   answerRepository,
@@ -231,7 +226,6 @@ const dependencies = {
   certificationAssessmentRepository,
   certificationBadgesService,
   certificationCandidateRepository,
-  certificationEvaluationCandidateRepository,
   certificationCenterForAdminRepository,
   certificationCenterInvitationRepository,
   certificationCenterInvitationService,
@@ -302,7 +296,6 @@ const dependencies = {
   resetPasswordService,
   schoolRepository,
   scoAccountRecoveryService,
-  scorecardService,
   sessionCodeService,
   sessionEnrolmentRepository,
   sessionPublicationService,
