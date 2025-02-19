@@ -7,8 +7,6 @@ import PageTitle from '../ui/page-title';
 
 export default class ScoHeaderActions extends Component {
   @service currentUser;
-  @service session;
-  @service intl;
 
   <template>
     <div class="organization-participant-list-page__header">
