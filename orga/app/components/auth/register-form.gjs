@@ -1,7 +1,14 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
+import PixInput from '@1024pix/pix-ui/components/pix-input';
+import PixInputPassword from '@1024pix/pix-ui/components/pix-input-password';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
 import isEmpty from 'lodash/isEmpty';
 import ENV from 'pix-orga/config/environment';
 
@@ -232,4 +239,122 @@ export default class RegisterForm extends Component {
     const scope = ENV.APP.AUTHENTICATION.SCOPE;
     return this.session.authenticate('authenticator:oauth2', email, password, scope);
   }
+
+  <template>
+    <div class="register-form">
+      <form {{on "submit" this.register}}>
+        <p class="register-form__information">{{t "common.form.mandatory-all-fields"}}</p>
+        <div class="input-container">
+          <PixInput
+            @id="register-firstName"
+            name="firstName"
+            type="firstName"
+            {{on "change" this.validateFirstName}}
+            @errorMessage={{this.validation.firstName.message}}
+            @validationStatus={{this.validation.firstName.status}}
+            required={{true}}
+            aria-required="true"
+            autocomplete="given-name"
+          >
+            <:label>{{t "pages.login-or-register.register-form.fields.first-name.label"}}</:label>
+          </PixInput>
+        </div>
+
+        <div class="input-container">
+          <PixInput
+            @id="register-lastName"
+            name="lastName"
+            type="lastName"
+            {{on "change" this.validateLastName}}
+            @errorMessage={{this.validation.lastName.message}}
+            @validationStatus={{this.validation.lastName.status}}
+            required={{true}}
+            aria-required="true"
+            autocomplete="family-name"
+          >
+            <:label>{{t "pages.login-or-register.register-form.fields.last-name.label"}}</:label>
+          </PixInput>
+
+        </div>
+
+        <div class="input-container">
+          <PixInput
+            @id="register-email"
+            name="email"
+            type="email"
+            {{on "change" this.validateEmail}}
+            @errorMessage={{if
+              (this._getErrorMessageForField "email")
+              (this._getErrorMessageForField "email")
+              this.validation.email.message
+            }}
+            @validationStatus={{this.validation.email.status}}
+            required={{true}}
+            aria-required="true"
+            autocomplete="email"
+          >
+            <:label>{{t "pages.login-or-register.register-form.fields.email.label"}}</:label>
+          </PixInput>
+        </div>
+
+        <div class="input-container">
+          <PixInputPassword
+            @id="register-password"
+            name="password"
+            autocomplete="current-password"
+            required={{true}}
+            aria-required="true"
+            {{on "change" this.validatePassword}}
+            @errorMessage={{this.validation.password.message}}
+            @validationStatus={{this.validation.password.status}}
+          >
+            <:label>{{t "pages.login-or-register.register-form.fields.password.label"}}</:label>
+          </PixInputPassword>
+        </div>
+
+        <div id="register-cgu-container" class="input-container">
+          <div class="checkbox-container">
+            <PixCheckbox
+              @checked={{this.cgu}}
+              required={{true}}
+              {{on "click" this.updateCgu}}
+              {{on "focusout" this.validateCgu}}
+              @screenReaderOnly={{true}}
+            >
+              <:label>
+                {{t "pages.login-or-register.register-form.fields.cgu.aria-label"}}
+              </:label>
+            </PixCheckbox>
+
+            <p class="register-form__cgu-label">
+              {{t "pages.login-or-register.register-form.fields.cgu.accept"}}
+              <a href={{this.cguUrl}} class="link" target="_blank" rel="noopener noreferrer">
+                {{t "pages.login-or-register.register-form.fields.cgu.terms-of-use"}}
+              </a>
+              {{t "pages.login-or-register.register-form.fields.cgu.and"}}
+              <a href={{this.dataProtectionPolicyUrl}} class="link" target="_blank" rel="noopener noreferrer">
+                {{t "pages.login-or-register.register-form.fields.cgu.data-protection-policy"}}
+              </a>
+            </p>
+          </div>
+          {{#if this.cguValidationMessage}}
+            <p class="register-form__cgu-error" role="alert">{{this.cguValidationMessage}}</p>
+          {{/if}}
+        </div>
+
+        {{#if this.errorMessage}}
+          <PixNotificationAlert @type="error">
+            {{this.errorMessage}}
+          </PixNotificationAlert>
+        {{/if}}
+
+        <div class="input-container">
+          <PixButton @type="submit" @isLoading={{this.isLoading}}>
+            {{t "pages.login-or-register.register-form.fields.button.label"}}
+          </PixButton>
+        </div>
+
+      </form>
+    </div>
+  </template>
 }
