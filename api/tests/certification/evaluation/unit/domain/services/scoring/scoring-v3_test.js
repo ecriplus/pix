@@ -26,6 +26,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
       flashAlgorithmService,
       scoringDegradationService,
       scoringConfigurationRepository,
+      certificationChallengeLiveAlertRepository,
       baseFlashAlgorithmConfiguration,
       dependencies;
     let clock;
@@ -57,6 +58,9 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
         getLatestByDateAndLocale: sinon.stub().callsFake((a) => {
           throw new Error(`Args mismatch: ${a}`);
         }),
+      };
+      certificationChallengeLiveAlertRepository = {
+        getLiveAlertValidatedChallengeIdsByAssessmentId: sinon.stub(),
       };
 
       baseFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
@@ -171,6 +175,10 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
         answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
 
+        certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+          .withArgs({ assessmentId: certificationAssessment.id })
+          .resolves([]);
+
         certificationCourseRepository.get
           .withArgs({ id: certificationAssessment.certificationCourseId })
           .resolves(abortedCertificationCourse);
@@ -223,6 +231,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
           flashAlgorithmConfigurationRepository,
           flashAlgorithmService,
           scoringConfigurationRepository,
+          certificationChallengeLiveAlertRepository,
           dependencies,
         });
 
@@ -258,6 +267,143 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
         );
       });
 
+      describe('when there are validated live alerts', function () {
+        it('should save the score without taking challenges with alert into account', async function () {
+          // given
+          const certificationCourseStartDate = new Date('2022-01-01');
+          const validatedLiveAlertChallengeId = 'chall0';
+          const certificationAssessment = domainBuilder.buildCertificationAssessment({
+            version: AlgorithmEngineVersion.V3,
+          });
+
+          const abortedCertificationCourse = domainBuilder.buildCertificationCourse({
+            createdAt: certificationCourseStartDate,
+          });
+          const numberOfChallengesWithOneLiveAlert = maximumAssessmentLength + 1;
+
+          const challenges = generateChallengeList({ length: numberOfChallengesWithOneLiveAlert });
+          const challengeCalibrations = challenges.map(_generateCertificationChallengeForChallenge);
+          const challengesCalibrationsWithoutLiveAlerts = challengeCalibrations.slice(1);
+          const challengesWithoutLiveAlerts = challenges.slice(1);
+          const answers = generateAnswersForChallenges({ challenges: challengesWithoutLiveAlerts });
+
+          const expectedCapacity = 2;
+          const { certificationCourseId } = certificationAssessment;
+
+          const capacityHistory = [
+            domainBuilder.buildCertificationChallengeCapacity({
+              certificationChallengeId: challengesCalibrationsWithoutLiveAlerts[0].certificationChallengeId,
+              capacity: expectedCapacity,
+            }),
+          ];
+
+          const certificationAssessmentHistory = domainBuilder.buildCertificationAssessmentHistory({
+            capacityHistory,
+          });
+
+          scoringConfigurationRepository.getLatestByDateAndLocale
+            .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
+            .resolves(scoringConfiguration);
+
+          flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
+            .withArgs(certificationCourseStartDate)
+            .resolves(baseFlashAlgorithmConfig);
+
+          answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
+
+          certificationCourseRepository.get
+            .withArgs({ id: certificationAssessment.certificationCourseId })
+            .resolves(abortedCertificationCourse);
+
+          flashAlgorithmService.getCapacityAndErrorRate
+            .withArgs({
+              challenges: challengesWithoutLiveAlerts,
+              allAnswers: answers,
+              capacity: sinon.match.number,
+              variationPercent: undefined,
+            })
+            .returns({
+              capacity: expectedCapacity,
+            });
+
+          flashAlgorithmService.getCapacityAndErrorRateHistory
+            .withArgs({
+              challenges: challengesCalibrationsWithoutLiveAlerts,
+              allAnswers: answers,
+              capacity: sinon.match.number,
+              variationPercent: undefined,
+            })
+            .returns([
+              {
+                capacity: expectedCapacity,
+              },
+            ]);
+
+          dependencies.findByCertificationCourseId.resolves({
+            allChallenges: challenges,
+            askedChallenges: challenges,
+            challengeCalibrations,
+          });
+
+          certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+            .withArgs({ assessmentId: certificationAssessment.id })
+            .resolves([validatedLiveAlertChallengeId]);
+
+          const event = new CertificationJuryDone({
+            certificationCourseId,
+          });
+
+          // when
+          const expectedCertificationCourse = await handleV3CertificationScoring({
+            event,
+            emitter: AssessmentResult.emitters.PIX_ALGO,
+            certificationAssessment,
+            locale: 'fr',
+            answerRepository,
+            assessmentResultRepository,
+            certificationAssessmentHistoryRepository,
+            certificationCourseRepository,
+            competenceMarkRepository,
+            flashAlgorithmConfigurationRepository,
+            flashAlgorithmService,
+            scoringConfigurationRepository,
+            certificationChallengeLiveAlertRepository,
+            dependencies,
+          });
+
+          // then
+          const expectedResult = {
+            certificationCourseId,
+            assessmentResult: new AssessmentResult({
+              emitter: assessmentResult.emitter,
+              pixScore: assessmentResult.pixScore,
+              reproducibilityRate: assessmentResult.reproducibilityRate,
+              status: assessmentResult.status,
+              competenceMarks: assessmentResult.competenceMarks,
+              assessmentId: assessmentResult.assessmentId,
+            }),
+          };
+
+          expect(expectedCertificationCourse).to.deep.equal(abortedCertificationCourse);
+
+          expect(assessmentResultRepository.save).to.have.been.calledWith(expectedResult);
+          expect(certificationAssessmentHistoryRepository.save).to.have.been.calledWithExactly(
+            certificationAssessmentHistory,
+          );
+          expect(competenceMarkRepository.save).to.have.been.calledWithExactly(
+            domainBuilder.buildCompetenceMark({
+              id: undefined,
+              assessmentResultId: 99,
+              area_code: '1',
+              competenceId: 'recCompetenceId',
+              competence_code: '1.1',
+              level: 2,
+              score: 0,
+            }),
+          );
+        });
+      });
+
       describe('when at least the minimum number of answers required by the config has been answered', function () {
         describe('when the certification was completed', function () {
           it('builds and save an assessment result with a validated status', async function () {
@@ -283,6 +429,10 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               askedChallenges: answeredChallenges,
               challengeCalibrations,
             });
+
+            certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+              .withArgs({ assessmentId: certificationAssessment.id })
+              .resolves([]);
 
             answerRepository.findByAssessment.withArgs(assessmentId).resolves(answers);
             certificationCourseRepository.get.withArgs({ id: certificationCourseId }).resolves(certificationCourse);
@@ -328,6 +478,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
+              certificationChallengeLiveAlertRepository,
               dependencies,
             });
 
@@ -382,6 +533,10 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 capacityHistory,
               });
 
+              certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+                .withArgs({ assessmentId: certificationAssessment.id })
+                .resolves([]);
+
               dependencies.findByCertificationCourseId.resolves({
                 allChallenges,
                 askedChallenges: allChallenges,
@@ -432,6 +587,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
                 flashAlgorithmConfigurationRepository,
                 flashAlgorithmService,
                 scoringConfigurationRepository,
+                certificationChallengeLiveAlertRepository,
                 dependencies,
               });
 
@@ -543,6 +699,10 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               .withArgs(certificationCourseStartDate)
               .resolves(baseFlashAlgorithmConfiguration);
 
+            certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+              .withArgs({ assessmentId: certificationAssessment.id })
+              .resolves([]);
+
             flashAlgorithmService.getCapacityAndErrorRate
               .withArgs({
                 challenges: answeredChallenges,
@@ -586,6 +746,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
+              certificationChallengeLiveAlertRepository,
               dependencies,
             });
 
@@ -655,6 +816,10 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               .withArgs({ id: certificationCourseId })
               .resolves(abortedCertificationCourse);
 
+            certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+              .withArgs({ assessmentId: certificationAssessment.id })
+              .resolves([]);
+
             flashAlgorithmService.getCapacityAndErrorRate
               .withArgs({
                 challenges: answeredChallenges,
@@ -696,6 +861,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
+              certificationChallengeLiveAlertRepository,
               dependencies,
             });
 
@@ -781,6 +947,10 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
 
+            certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+              .withArgs({ assessmentId: certificationAssessment.id })
+              .resolves([]);
+
             certificationCourseRepository.get
               .withArgs({ id: abortedCertificationCourse.getId() })
               .resolves(abortedCertificationCourse);
@@ -823,6 +993,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
+              certificationChallengeLiveAlertRepository,
               dependencies,
             });
 
@@ -889,6 +1060,10 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             const challengesAfterCalibration = answeredChallenges.slice(1);
 
+            certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+              .withArgs({ assessmentId: certificationAssessment.id })
+              .resolves([]);
+
             dependencies.findByCertificationCourseId.resolves({
               allChallenges: [challengeExcludedFromCalibration, ...challengesAfterCalibration],
               askedChallenges: [challengeExcludedFromCalibration, ...challengesAfterCalibration],
@@ -944,6 +1119,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
+              certificationChallengeLiveAlertRepository,
               dependencies,
               scoringDegradationService,
             });
@@ -1013,6 +1189,10 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
 
+            certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+              .withArgs({ assessmentId: certificationAssessment.id })
+              .resolves([]);
+
             certificationCourseRepository.get
               .withArgs({ id: certificationAssessment.certificationCourseId })
               .resolves(abortedCertificationCourse);
@@ -1062,6 +1242,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               certificationCourseRepository,
               competenceMarkRepository,
               flashAlgorithmConfigurationRepository,
+              certificationChallengeLiveAlertRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
               dependencies,
@@ -1136,6 +1317,10 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
 
+            certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+              .withArgs({ assessmentId: certificationAssessment.id })
+              .resolves([]);
+
             certificationCourseRepository.get
               .withArgs({ id: certificationAssessment.certificationCourseId })
               .resolves(abortedCertificationCourse);
@@ -1182,6 +1367,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
+              certificationChallengeLiveAlertRepository,
               dependencies,
             });
 
@@ -1250,6 +1436,10 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
 
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
 
+            certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+              .withArgs({ assessmentId: certificationAssessment.id })
+              .resolves([]);
+
             certificationCourseRepository.get
               .withArgs({ id: certificationAssessment.certificationCourseId })
               .resolves(abortedCertificationCourse);
@@ -1309,6 +1499,7 @@ describe('Certification | Shared | Unit | Domain | Services | Scoring V3', funct
               flashAlgorithmConfigurationRepository,
               flashAlgorithmService,
               scoringConfigurationRepository,
+              certificationChallengeLiveAlertRepository,
               dependencies,
             });
 
