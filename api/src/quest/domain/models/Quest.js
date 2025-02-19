@@ -5,8 +5,7 @@ import {
   TYPES as _REQUIREMENT_TYPES,
 } from './Requirement.js';
 /**
- * @typedef {import ('./Eligibility.js').Eligibility} Eligibility
- * @typedef {import ('./Success.js').Success} Success
+ * @typedef {import ('./DataForQuest.js').DataForQuest} DataForQuest
  */
 
 export const REQUIREMENT_COMPARISONS = _REQUIREMENT_COMPARISONS;
@@ -34,22 +33,20 @@ class Quest {
     });
   }
 
-  // je crois que ce getter sert à rien
   get eligibilityRequirements() {
     return this.#eligibilityRequirements.data;
   }
 
-  // je crois que ce getter sert à rien
   get successRequirements() {
     return this.#successRequirements.data;
   }
 
   /**
-   * @param {Eligibility} eligibility
+   * @param {DataForQuest} data
    * @param {number} campaignParticipationId
    */
-  isCampaignParticipationContributingToQuest({ eligibility, campaignParticipationId }) {
-    const scopedEligibility = eligibility.buildEligibilityScopedByCampaignParticipationId({ campaignParticipationId });
+  isCampaignParticipationContributingToQuest({ data, campaignParticipationId }) {
+    const scopedData = data.buildDataForQuestScopedByCampaignParticipationId({ campaignParticipationId });
 
     const campaignParticipationRequirements = this.#flattenRequirementsByType(
       this.#eligibilityRequirements.data,
@@ -61,24 +58,24 @@ class Quest {
         data: campaignParticipationRequirements,
         comparison: REQUIREMENT_COMPARISONS.ONE_OF,
       });
-      return a.isFulfilled(scopedEligibility);
+      return a.isFulfilled(scopedData);
     }
 
     return false;
   }
 
   /**
-   * @param {Eligibility} eligibility
+   * @param {DataForQuest} data
    */
-  isEligible(eligibility) {
-    return this.#eligibilityRequirements.isFulfilled(eligibility);
+  isEligible(data) {
+    return this.#eligibilityRequirements.isFulfilled(data);
   }
 
   /**
-   * @param {Success} success
+   * @param {DataForQuest} data
    */
-  isSuccessful(success) {
-    return this.#successRequirements.isFulfilled(success);
+  isSuccessful(data) {
+    return this.#successRequirements.isFulfilled(data);
   }
 
   toDTO() {

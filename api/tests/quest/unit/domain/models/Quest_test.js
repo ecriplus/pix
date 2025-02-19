@@ -1,3 +1,4 @@
+import { DataForQuest } from '../../../../../src/quest/domain/models/DataForQuest.js';
 import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
 import {
   CRITERION_COMPARISONS,
@@ -29,8 +30,9 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
       });
 
       const eligibility = new Eligibility({ organization: { type: 'SCO' } });
+      const data = new DataForQuest({ eligibility });
 
-      expect(quest.isEligible(eligibility)).to.be.true;
+      expect(quest.isEligible(data)).to.be.true;
     });
 
     it('return false', function () {
@@ -51,8 +53,9 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
       });
 
       const eligibility = new Eligibility({ organization: { type: 'PRO' } });
+      const data = new DataForQuest({ eligibility });
 
-      expect(quest.isEligible(eligibility)).to.be.false;
+      expect(quest.isEligible(data)).to.be.false;
     });
   });
 
@@ -71,8 +74,9 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillD' },
         ],
       });
+      const data = new DataForQuest({ success });
 
-      expect(quest.isSuccessful(success)).to.be.true;
+      expect(quest.isSuccessful(data)).to.be.true;
     });
 
     it('returns true when all requirements are met', function () {
@@ -104,8 +108,9 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillD' },
         ],
       });
+      const data = new DataForQuest({ success });
 
-      expect(quest.isSuccessful(success)).to.be.true;
+      expect(quest.isSuccessful(data)).to.be.true;
     });
 
     it('returns false when at least one requirement is not met', function () {
@@ -137,8 +142,9 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillD' },
         ],
       });
+      const data = new DataForQuest({ success });
 
-      expect(quest.isSuccessful(success)).to.be.false;
+      expect(quest.isSuccessful(data)).to.be.false;
     });
 
     it('returns false when none of the requirements are met', function () {
@@ -170,8 +176,9 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillD' },
         ],
       });
+      const data = new DataForQuest({ success });
 
-      expect(quest.isSuccessful(success)).to.be.false;
+      expect(quest.isSuccessful(data)).to.be.false;
     });
   });
 
@@ -219,12 +226,13 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           { id: 10, targetProfileId: 1 },
           { id: 11, targetProfileId: 3 },
         ];
-        const eligibilityData = new Eligibility({ organization, organizationLearner, campaignParticipations });
+        const eligibility = new Eligibility({ organization, organizationLearner, campaignParticipations });
+        const data = new DataForQuest({ eligibility });
         const campaignParticipationIdToCheck = 11;
 
         // when
         const isContributing = quest.isCampaignParticipationContributingToQuest({
-          eligibility: eligibilityData,
+          data,
           campaignParticipationId: campaignParticipationIdToCheck,
         });
 
@@ -271,12 +279,13 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
           { id: 10, targetProfileId: 1 },
           { id: 11, targetProfileId: 3 },
         ];
-        const eligibilityData = new Eligibility({ organization, organizationLearner, campaignParticipations });
+        const eligibility = new Eligibility({ organization, organizationLearner, campaignParticipations });
+        const data = new DataForQuest({ eligibility });
         const campaignParticipationIdToCheck = 10;
 
         // when
         const isContributing = quest.isCampaignParticipationContributingToQuest({
-          eligibility: eligibilityData,
+          data,
           campaignParticipationId: campaignParticipationIdToCheck,
         });
 
@@ -312,12 +321,13 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         ];
         const quest = new Quest({ eligibilityRequirements, successRequirements: [] });
         const campaignParticipations = [{ id: 10 }, { id: 11 }];
-        const eligibilityData = new Eligibility({ organization, organizationLearner, campaignParticipations });
+        const eligibility = new Eligibility({ organization, organizationLearner, campaignParticipations });
+        const data = new DataForQuest({ eligibility });
         const campaignParticipationIdToCheck = 10;
 
         // when
         const isContributing = quest.isCampaignParticipationContributingToQuest({
-          eligibility: eligibilityData,
+          data,
           campaignParticipationId: campaignParticipationIdToCheck,
         });
 

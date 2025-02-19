@@ -1,3 +1,5 @@
+import { DataForQuest } from '../models/DataForQuest.js';
+
 export const getQuestResultsForCampaignParticipation = async ({
   userId,
   campaignParticipationId,
@@ -12,20 +14,21 @@ export const getQuestResultsForCampaignParticipation = async ({
   }
 
   const eligibilities = await eligibilityRepository.find({ userId });
-  const eligibility = eligibilities.find((eligibility) =>
-    eligibility.hasCampaignParticipation(campaignParticipationId),
-  );
-  if (!eligibility) {
+  const dataForQuest = eligibilities
+    .map((eligibility) => new DataForQuest({ eligibility }))
+    .find((dataForQuest) => dataForQuest.hasCampaignParticipation(campaignParticipationId));
+
+  if (!dataForQuest) {
     return [];
   }
 
   const questsRelatedToCampaignParticipation = quests.filter((q) =>
-    q.isCampaignParticipationContributingToQuest({ eligibility, campaignParticipationId }),
+    q.isCampaignParticipationContributingToQuest({ data: dataForQuest, campaignParticipationId }),
   );
 
   const questResults = [];
   for (const quest of questsRelatedToCampaignParticipation) {
-    const isEligible = quest.isEligible(eligibility);
+    const isEligible = quest.isEligible(dataForQuest);
     if (!isEligible) continue;
     const questResult = await rewardRepository.getByQuestAndUserId({ userId, quest });
     questResults.push(questResult);
