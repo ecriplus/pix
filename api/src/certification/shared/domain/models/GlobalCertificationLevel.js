@@ -16,7 +16,12 @@ export class GlobalCertificationLevel {
   }
 
   getLevelLabel(translate) {
-    return translate(`certification.global.meshlevel.${this.meshLevel}`);
+    const translationKey = `certification.global.meshlevel.${this.meshLevel}`;
+    const translation = translate(translationKey);
+    if (translation === translationKey) {
+      return '';
+    }
+    return translation;
   }
 
   #validate() {

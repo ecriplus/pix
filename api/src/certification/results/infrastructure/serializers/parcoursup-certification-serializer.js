@@ -10,18 +10,17 @@
  * @param {Object} params.translate
  */
 const serialize = ({ certificationResult, globalMeshLevel, translate }) => {
-  // TODO: tests
   return {
-    ine: certificationResult.ine,
     organizationUai: certificationResult.organizationUai,
-    lastName: certificationResult.lastName,
+    ine: certificationResult.ine,
     firstName: certificationResult.firstName,
+    lastName: certificationResult.lastName,
     birthdate: certificationResult.birthdate,
     status: certificationResult.status,
     pixScore: certificationResult.pixScore,
+    globalLevel: globalMeshLevel.getLevelLabel(translate),
     certificationDate: certificationResult.certificationDate,
     competences: certificationResult.competences,
-    globalLevel: globalMeshLevel.getLevelLabel(translate),
   };
 };
 

@@ -19,5 +19,21 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
       // then
       expect(translatedLabel).to.equal(translate('certification.global.meshlevel.1'));
     });
+
+    context('when there is no translation', function () {
+      it('should return an empty string', function () {
+        // given
+        const aMeshLevelWihoutranslation = 0;
+        const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({
+          meshLevel: aMeshLevelWihoutranslation,
+        });
+
+        // when
+        const translatedLabel = globalMeshLevel.getLevelLabel(translate);
+
+        // then
+        expect(translatedLabel).to.equal('');
+      });
+    });
   });
 });

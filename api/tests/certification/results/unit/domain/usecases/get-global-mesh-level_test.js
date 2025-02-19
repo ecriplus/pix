@@ -18,6 +18,7 @@ describe('Certification | Results | Unit | Domain | UseCases | get-global-mesh-l
   it('should return the global mesh level', async function () {
     // given
     const i18n = getI18n();
+    const pixScore = 12;
     const certificationDate = new Date();
 
     const scoringConfiguration = domainBuilder.buildV3CertificationScoring({});
@@ -28,7 +29,7 @@ describe('Certification | Results | Unit | Domain | UseCases | get-global-mesh-l
 
     // when
     const result = await getGlobalMeshLevel({
-      pixScore: 12,
+      pixScore,
       certificationDate,
       i18n,
       scoringConfigurationRepository,
@@ -42,7 +43,7 @@ describe('Certification | Results | Unit | Domain | UseCases | get-global-mesh-l
       locale: i18n.getLocale(),
     });
     expect(pixScoreToMeshLevelService.getMeshLevel).to.have.been.calledOnceWithExactly({
-      pixScore: 12,
+      pixScore,
       scoringConfiguration,
     });
   });
