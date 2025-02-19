@@ -19,6 +19,7 @@ import {
   USER_ID_MEMBER_ORGANIZATION,
 } from './constants.js';
 import { organization } from './tooling/index.js';
+import { acceptPixOrgaTermsOfService } from './tooling/legal-documents.js';
 
 async function _createScoOrganization(databaseBuilder) {
   await organization.createOrganization({
@@ -131,8 +132,8 @@ function _createUserAdminForOrganizations(databaseBuilder) {
     lang: 'fr',
     rawPassword: DEFAULT_PASSWORD,
     shouldChangePassword: false,
-    pixOrgaTermsOfServiceAccepted: true,
   });
+  acceptPixOrgaTermsOfService(databaseBuilder, USER_ID_ADMIN_ORGANIZATION);
 }
 
 function _createUserMemberForOrganizations(databaseBuilder) {
@@ -145,8 +146,8 @@ function _createUserMemberForOrganizations(databaseBuilder) {
     lang: 'en',
     rawPassword: DEFAULT_PASSWORD,
     shouldChangePassword: false,
-    pixOrgaTermsOfServiceAccepted: true,
   });
+  acceptPixOrgaTermsOfService(databaseBuilder, USER_ID_MEMBER_ORGANIZATION);
 }
 
 export async function organizationBuilder({ databaseBuilder }) {

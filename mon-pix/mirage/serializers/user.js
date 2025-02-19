@@ -8,7 +8,6 @@ export default ApplicationSerializer.extend({
     'username',
     'cgu',
     'lang',
-    'pixOrgaTermsOfServiceAccepted',
     'pixCertifTermsOfServiceAccepted',
     'hasSeenAssessmentInstructions',
     'hasSeenNewDashboardInfo',

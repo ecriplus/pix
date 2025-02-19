@@ -14,6 +14,7 @@ import {
 import * as campaignTooling from '../common/tooling/campaign-tooling.js';
 import * as tooling from '../common/tooling/index.js';
 import { getV3CertificationChallenges } from '../common/tooling/learning-content.js';
+import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
 import { createCompetenceScoringConfiguration } from './create-competence-scoring-configuration.js';
 import { createScoringConfiguration } from './create-scoring-configuration.js';
 
@@ -93,14 +94,14 @@ async function _createScoCertificationCenter({ databaseBuilder }) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
     rawPassword: 'pix123',
     shouldChangePassword: false,
   });
+
+  acceptPixOrgaTermsOfService(databaseBuilder, SCO_CERTIFICATION_MANAGING_STUDENTS_CERTIFICATION_CENTER_USER_ID);
 
   await tooling.certificationCenter.createCertificationCenter({
     databaseBuilder,
@@ -136,14 +137,14 @@ async function _createV3PilotCertificationCenter({ databaseBuilder }) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
     rawPassword: 'pix123',
     shouldChangePassword: false,
   });
+
+  acceptPixOrgaTermsOfService(databaseBuilder, V3_CERTIFICATION_CENTER_USER_ID);
 
   await tooling.certificationCenter.createCertificationCenter({
     databaseBuilder,
@@ -182,14 +183,14 @@ async function _createProCertificationCenter({ databaseBuilder }) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
     rawPassword: 'pix123',
     shouldChangePassword: false,
   });
+
+  acceptPixOrgaTermsOfService(databaseBuilder, PRO_ADMIN_CERTIFICATION_CENTER_USER_ID);
 
   databaseBuilder.factory.buildUser.withRawPassword({
     id: PRO_MEMBER_CERTIFICATION_CENTER_USER_ID,
@@ -199,14 +200,14 @@ async function _createProCertificationCenter({ databaseBuilder }) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
     rawPassword: 'pix123',
     shouldChangePassword: false,
   });
+
+  acceptPixOrgaTermsOfService(databaseBuilder, PRO_MEMBER_CERTIFICATION_CENTER_USER_ID);
 
   await tooling.certificationCenter.createCertificationCenter({
     databaseBuilder,
@@ -233,14 +234,15 @@ async function _createScoOrganization({ databaseBuilder }) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
     rawPassword: 'pix123',
     shouldChangePassword: false,
   });
+
+  acceptPixOrgaTermsOfService(databaseBuilder, SCO_CERTIFICATION_MANAGING_STUDENTS_ORGANIZATION_USER_ID);
+
   await tooling.organization.createOrganization({
     databaseBuilder,
     organizationId: SCO_MANAGING_STUDENTS_ORGANIZATION_ID,
@@ -265,14 +267,15 @@ async function _createProOrganization({ databaseBuilder }) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
     rawPassword: 'pix123',
     shouldChangePassword: false,
   });
+
+  acceptPixOrgaTermsOfService(databaseBuilder, PRO_ORGANIZATION_USER_ID);
+
   await tooling.organization.createOrganization({
     databaseBuilder,
     organizationId: PRO_ORGANIZATION_ID,
@@ -407,13 +410,13 @@ async function _createSuccessCertifiableUser({ databaseBuilder }) {
     cgu: true,
     lang: 'fr',
     lastTermsOfServiceValidatedAt: new Date(),
-    lastPixOrgaTermsOfServiceValidatedAt: new Date(),
     mustValidateTermsOfService: false,
-    pixOrgaTermsOfServiceAccepted: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
     shouldChangePassword: false,
   }).id;
+
+  acceptPixOrgaTermsOfService(databaseBuilder, CERTIFIABLE_SUCCESS_USER_ID);
 
   await tooling.profile.createPerfectProfile({
     databaseBuilder,

@@ -2,8 +2,7 @@ import * as legalDocumentsApi from '../../../../../src/legal-documents/applicati
 import { LegalDocumentService } from '../../../../../src/legal-documents/domain/models/LegalDocumentService.js';
 import { LegalDocumentStatus, STATUS } from '../../../../../src/legal-documents/domain/models/LegalDocumentStatus.js';
 import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
-import { config } from '../../../../../src/shared/config.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 const { PIX_ORGA } = LegalDocumentService.VALUES;
 const { TOS } = LegalDocumentType.VALUES;
@@ -32,7 +31,6 @@ describe('Integration | Privacy | Application | Api | legal documents', function
   describe('#getLegalDocumentStatusByUserId', function () {
     it('returns the legal document status for a user', async function () {
       // given
-      sinon.stub(config, 'featureToggles').value({ isLegalDocumentsVersioningEnabled: true });
       const service = PIX_ORGA;
       const type = TOS;
       const user = databaseBuilder.factory.buildUser();

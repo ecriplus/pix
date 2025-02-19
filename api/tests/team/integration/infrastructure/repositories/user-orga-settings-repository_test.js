@@ -13,7 +13,6 @@ describe('Integration | Team | Infrastructure | Repository | UserOrgaSettings', 
     'email',
     'username',
     'cgu',
-    'pixOrgaTermsOfServiceAccepted',
     'pixCertifTermsOfServiceAccepted',
   ];
 
@@ -116,7 +115,7 @@ describe('Integration | Team | Infrastructure | Repository | UserOrgaSettings', 
       // then
       expect(updatedUserOrgaSettings.id).to.equal(userOrgaSettings.id);
       expect(updatedUserOrgaSettings.updatedAt).to.deep.equal(now);
-      expect(updatedUserOrgaSettings.user).to.deep.equal(user);
+      expect(updatedUserOrgaSettings.user).to.deep.include(user);
       expect(updatedUserOrgaSettings.currentOrganization).to.deep.equal(newOrganization);
     });
   });

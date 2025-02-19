@@ -1,19 +1,13 @@
-import { LegalDocumentVersionNotFoundError } from '../../../../../src/legal-documents/domain/errors.js';
 import { LegalDocumentService } from '../../../../../src/legal-documents/domain/models/LegalDocumentService.js';
 import { LegalDocumentStatus, STATUS } from '../../../../../src/legal-documents/domain/models/LegalDocumentStatus.js';
 import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
 import { usecases } from '../../../../../src/legal-documents/domain/usecases/index.js';
-import { config } from '../../../../../src/shared/config.js';
-import { databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 const { PIX_ORGA } = LegalDocumentService.VALUES;
 const { TOS } = LegalDocumentType.VALUES;
 
 describe('Integration | Legal documents | Domain | Use case | get-legal-document-status-by-user-id', function () {
-  beforeEach(async function () {
-    sinon.stub(config, 'featureToggles').value({ isLegalDocumentsVersioningEnabled: true });
-  });
-
   it('returns the legal document status for a user', async function () {
     // given
     const service = PIX_ORGA;
@@ -43,34 +37,12 @@ describe('Integration | Legal documents | Domain | Use case | get-legal-document
     });
   });
 
-  context('when the legal document version does not exist', function () {
-    it('throws an error', async function () {
+  context('when the legal document version not found', function () {
+    it('returns the requested legal document status', async function () {
       // given
       const service = PIX_ORGA;
       const type = TOS;
       const user = databaseBuilder.factory.buildUser();
-      await databaseBuilder.commit();
-
-      // when / then
-      await expect(usecases.getLegalDocumentStatusByUserId({ userId: user.id, service, type })).to.be.rejectedWith(
-        LegalDocumentVersionNotFoundError,
-      );
-    });
-  });
-
-  context('when the feature toggle isLegalDocumentsVersioningEnabled is false', function () {
-    beforeEach(async function () {
-      sinon.stub(config, 'featureToggles').value({ isLegalDocumentsVersioningEnabled: false });
-    });
-
-    it('returns the legal document status for a user based on PixOrga CGU', async function () {
-      // given
-      const service = PIX_ORGA;
-      const type = TOS;
-      const user = databaseBuilder.factory.buildUser({
-        pixOrgaTermsOfServiceAccepted: true,
-        lastPixOrgaTermsOfServiceValidatedAt: new Date('2024-03-01'),
-      });
       await databaseBuilder.commit();
 
       // when
@@ -78,11 +50,7 @@ describe('Integration | Legal documents | Domain | Use case | get-legal-document
 
       // then
       expect(legalDocumentStatus).to.be.an.instanceOf(LegalDocumentStatus);
-      expect(legalDocumentStatus).to.deep.equal({
-        status: STATUS.ACCEPTED,
-        acceptedAt: new Date('2024-03-01'),
-        documentPath: 'pix-orga-tos-2022-11-30',
-      });
+      expect(legalDocumentStatus).to.deep.equal({ status: STATUS.REQUESTED, acceptedAt: null, documentPath: null });
     });
   });
 });

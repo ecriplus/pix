@@ -10,7 +10,6 @@ describe('Unit | Team | Infrastructure | Serializer | JSONAPI | prescriber', fun
 
     beforeEach(function () {
       user = domainBuilder.buildUser({
-        pixOrgaTermsOfServiceAccepted: true,
         memberships: [],
         certificationCenterMemberships: [],
       });
@@ -37,7 +36,6 @@ describe('Unit | Team | Infrastructure | Serializer | JSONAPI | prescriber', fun
           lastName: user.lastName,
           areNewYearOrganizationLearnersImported: false,
           participantCount: 0,
-          pixOrgaTermsOfServiceAccepted: user.pixOrgaTermsOfServiceAccepted,
           memberships: [membership],
           userOrgaSettings,
           features: {
@@ -85,7 +83,6 @@ describe('Unit | Team | Infrastructure | Serializer | JSONAPI | prescriber', fun
           lastName: user.lastName,
           areNewYearOrganizationLearnersImported: false,
           participantCount: 0,
-          pixOrgaTermsOfServiceAccepted: user.pixOrgaTermsOfServiceAccepted,
           memberships: [membership],
           userOrgaSettings,
           features: {
@@ -175,7 +172,6 @@ describe('Unit | Team | Infrastructure | Serializer | JSONAPI | prescriber', fun
           lastName: user.lastName,
           areNewYearOrganizationLearnersImported: false,
           participantCount: 0,
-          pixOrgaTermsOfServiceAccepted: user.pixOrgaTermsOfServiceAccepted,
           pixOrgaTermsOfServiceStatus: 'accepted',
           pixOrgaTermsOfServiceDocumentPath: 'dummy',
           memberships: [membership],
@@ -246,7 +242,6 @@ function createExpectedPrescriberSerializedWithOneMoreField({
       attributes: {
         'first-name': prescriber.firstName,
         'last-name': prescriber.lastName,
-        'pix-orga-terms-of-service-accepted': prescriber.pixOrgaTermsOfServiceAccepted,
         'pix-orga-terms-of-service-status': prescriber.pixOrgaTermsOfServiceStatus,
         'pix-orga-terms-of-service-document-path': prescriber.pixOrgaTermsOfServiceDocumentPath,
         'are-new-year-organization-learners-imported': prescriber.areNewYearOrganizationLearnersImported,
@@ -357,7 +352,6 @@ function createExpectedPrescriberSerialized({ prescriber, membership, userOrgaSe
       attributes: {
         'first-name': prescriber.firstName,
         'last-name': prescriber.lastName,
-        'pix-orga-terms-of-service-accepted': prescriber.pixOrgaTermsOfServiceAccepted,
         'pix-orga-terms-of-service-status': prescriber.pixOrgaTermsOfServiceStatus,
         'pix-orga-terms-of-service-document-path': prescriber.pixOrgaTermsOfServiceDocumentPath,
         'are-new-year-organization-learners-imported': prescriber.areNewYearOrganizationLearnersImported,

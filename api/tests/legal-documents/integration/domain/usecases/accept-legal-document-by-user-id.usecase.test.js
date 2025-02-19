@@ -53,25 +53,43 @@ describe('Integration | Legal documents | Domain | Use case | accept-legal-docum
     });
   });
 
-  context('when the legal document is the Terms of Service for Pix Orga', function () {
-    it('accepts the Pix Orga CGUs in the legacy and legal document model', async function () {
+  context('when user must accept a new legal document version', function () {
+    it('accepts the new legal document version for a user', async function () {
       // given
-      const user = databaseBuilder.factory.buildUser({ pixOrgaTermsOfServiceAccepted: false });
-      databaseBuilder.factory.buildLegalDocumentVersion({ service: PIX_ORGA, type: TOS });
-
+      const user = databaseBuilder.factory.buildUser();
+      const document = databaseBuilder.factory.buildLegalDocumentVersion({
+        service: PIX_ORGA,
+        type: TOS,
+        versionAt: '2024-01-01',
+      });
+      databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+        userId: user.id,
+        legalDocumentVersionId: document.id,
+        acceptedAt: new Date('2024-03-01'),
+      });
+      const newDocument = databaseBuilder.factory.buildLegalDocumentVersion({
+        service: PIX_ORGA,
+        type: TOS,
+        versionAt: '2025-01-01',
+      });
       await databaseBuilder.commit();
 
       // when
       await usecases.acceptLegalDocumentByUserId({ userId: user.id, service: PIX_ORGA, type: TOS });
 
       // then
-      const updatedUser = await knex('users').where('id', user.id).first();
-      expect(updatedUser.pixOrgaTermsOfServiceAccepted).to.equal(true);
+      const userAcceptance = await knex('legal-document-version-user-acceptances')
+        .where('userId', user.id)
+        .where('legalDocumentVersionId', newDocument.id)
+        .first();
+      expect(userAcceptance).to.exist;
     });
+  });
 
-    it('logs an error, when no legal document is found', async function () {
+  context('when no legal document is found', function () {
+    it('logs an error', async function () {
       // given
-      const user = databaseBuilder.factory.buildUser({ pixOrgaTermsOfServiceAccepted: false });
+      const user = databaseBuilder.factory.buildUser();
       const loggerStub = { warn: sinon.stub() };
       await databaseBuilder.commit();
 

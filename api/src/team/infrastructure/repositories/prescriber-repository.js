@@ -75,7 +75,6 @@ function _toPrescriberDomain({
 
   return new Prescriber({
     ...user,
-    pixOrgaTermsOfServiceAccepted: pixOrgaLegalDocumentStatus.status === 'accepted',
     pixOrgaTermsOfServiceStatus: pixOrgaLegalDocumentStatus.status,
     pixOrgaTermsOfServiceDocumentPath: pixOrgaLegalDocumentStatus.documentPath,
 

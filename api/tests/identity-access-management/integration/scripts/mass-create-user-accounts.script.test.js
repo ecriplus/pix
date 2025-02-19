@@ -80,7 +80,6 @@ describe('Integration | Identity Access Management | Scripts | mass-create-user-
         lastName: 'Kilo',
         email: 'sandy-kilo@example.net',
         cgu: true,
-        pixOrgaTermsOfServiceAccepted: false,
         pixCertifTermsOfServiceAccepted: false,
         hasSeenAssessmentInstructions: false,
         username: null,
@@ -92,7 +91,6 @@ describe('Integration | Identity Access Management | Scripts | mass-create-user-
         emailConfirmedAt: null,
         hasSeenFocusedChallengeTooltip: false,
         hasSeenOtherChallengesTooltip: false,
-        lastPixOrgaTermsOfServiceValidatedAt: null,
         lastPixCertifTermsOfServiceValidatedAt: null,
       });
       expect(firstUserFound.createdAt).to.deep.equal(now);

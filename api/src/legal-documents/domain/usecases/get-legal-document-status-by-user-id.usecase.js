@@ -1,5 +1,3 @@
-import { config } from '../../../shared/config.js';
-import { LegalDocumentVersionNotFoundError } from '../errors.js';
 import { LegalDocumentService } from '../models/LegalDocumentService.js';
 import { LegalDocumentStatus } from '../models/LegalDocumentStatus.js';
 import { LegalDocumentType } from '../models/LegalDocumentType.js';
@@ -18,23 +16,19 @@ const getLegalDocumentStatusByUserId = async ({
   userId,
   service,
   type,
-  userRepository,
   legalDocumentRepository,
   userAcceptanceRepository,
-  featureToggles = config.featureToggles,
+  logger,
 }) => {
   LegalDocumentService.assert(service);
   LegalDocumentType.assert(type);
 
-  const { isLegalDocumentsVersioningEnabled } = featureToggles;
-  if (!isLegalDocumentsVersioningEnabled) {
-    const user = await userRepository.findPixOrgaCgusByUserId(userId);
-    return LegalDocumentStatus.buildForLegacyPixOrgaCgu(user);
-  }
-
   const lastLegalDocument = await legalDocumentRepository.findLastVersionByTypeAndService({ service, type });
 
-  if (!lastLegalDocument) throw new LegalDocumentVersionNotFoundError();
+  if (!lastLegalDocument) {
+    logger.warn(`Unknown legal document version found for ${service} and ${type}`);
+    return LegalDocumentStatus.notFound();
+  }
 
   const lastUserAcceptance = await userAcceptanceRepository.findLastForLegalDocument({ userId, service, type });
 

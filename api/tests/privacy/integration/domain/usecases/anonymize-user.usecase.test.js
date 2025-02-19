@@ -118,7 +118,6 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     expect(anonymizedUser.hasBeenAnonymised).to.be.true;
     expect(anonymizedUser.hasBeenAnonymisedBy).to.equal(admin.id);
     expect(anonymizedUser.lastTermsOfServiceValidatedAt).to.be.null;
-    expect(anonymizedUser.lastPixOrgaTermsOfServiceValidatedAt).to.be.null;
     expect(anonymizedUser.lastPixCertifTermsOfServiceValidatedAt).to.be.null;
     expect(anonymizedUser.lastDataProtectionPolicySeenAt).to.be.null;
   });

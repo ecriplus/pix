@@ -1,11 +1,15 @@
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
 import { DEFAULT_PASSWORD, PIX_PUBLIC_TARGET_PROFILE_ID, REAL_PIX_SUPER_ADMIN_ID } from './constants.js';
+import { acceptPixOrgaTermsOfService, createPixOrgaTermsOfService } from './tooling/legal-documents.js';
 import { createTargetProfile } from './tooling/target-profile-tooling.js';
 
 const { ROLES } = PIX_ADMIN;
 
 export const commonBuilder = async function ({ databaseBuilder }) {
-  // admin account
+  // legal-document
+  createPixOrgaTermsOfService(databaseBuilder);
+
+  // admin accounts
   _createSuperAdmin(databaseBuilder);
   _createCertifAdmin(databaseBuilder);
   _createSupportAdmin(databaseBuilder);
@@ -26,39 +30,46 @@ function _createSuperAdmin(databaseBuilder) {
     rawPassword: DEFAULT_PASSWORD,
   });
   databaseBuilder.factory.buildPixAdminRole({ userId: REAL_PIX_SUPER_ADMIN_ID, role: ROLES.SUPER_ADMIN });
+  acceptPixOrgaTermsOfService(databaseBuilder, REAL_PIX_SUPER_ADMIN_ID);
 }
 
 function _createMetierAdmin(databaseBuilder) {
+  const userId = REAL_PIX_SUPER_ADMIN_ID + 1;
   databaseBuilder.factory.buildUser.withRawPassword({
-    id: REAL_PIX_SUPER_ADMIN_ID + 1,
+    id: userId,
     firstName: 'Admin',
     lastName: 'Metier',
     email: 'metieradmin@example.net',
     rawPassword: DEFAULT_PASSWORD,
   });
-  databaseBuilder.factory.buildPixAdminRole({ userId: REAL_PIX_SUPER_ADMIN_ID + 1, role: ROLES.METIER });
+  databaseBuilder.factory.buildPixAdminRole({ userId, role: ROLES.METIER });
+  acceptPixOrgaTermsOfService(databaseBuilder, userId);
 }
 
 function _createSupportAdmin(databaseBuilder) {
+  const userId = REAL_PIX_SUPER_ADMIN_ID + 2;
   databaseBuilder.factory.buildUser.withRawPassword({
-    id: REAL_PIX_SUPER_ADMIN_ID + 2,
+    id: userId,
     firstName: 'Admin',
     lastName: 'Support',
     email: 'supportadmin@example.net',
     rawPassword: DEFAULT_PASSWORD,
   });
-  databaseBuilder.factory.buildPixAdminRole({ userId: REAL_PIX_SUPER_ADMIN_ID + 2, role: ROLES.SUPPORT });
+  databaseBuilder.factory.buildPixAdminRole({ userId, role: ROLES.SUPPORT });
+  acceptPixOrgaTermsOfService(databaseBuilder, userId);
 }
 
 function _createCertifAdmin(databaseBuilder) {
+  const userId = REAL_PIX_SUPER_ADMIN_ID + 3;
   databaseBuilder.factory.buildUser.withRawPassword({
-    id: REAL_PIX_SUPER_ADMIN_ID + 3,
+    id: userId,
     firstName: 'Admin',
     lastName: 'Certif',
     email: 'certifadmin@example.net',
     rawPassword: DEFAULT_PASSWORD,
   });
-  databaseBuilder.factory.buildPixAdminRole({ userId: REAL_PIX_SUPER_ADMIN_ID + 3, role: ROLES.CERTIF });
+  databaseBuilder.factory.buildPixAdminRole({ userId, role: ROLES.CERTIF });
+  acceptPixOrgaTermsOfService(databaseBuilder, userId);
 }
 
 function createClientApplications(databaseBuilder) {

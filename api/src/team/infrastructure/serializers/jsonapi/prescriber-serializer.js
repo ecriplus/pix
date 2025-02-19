@@ -30,7 +30,6 @@ const serialize = function (prescriber) {
     attributes: [
       'firstName',
       'lastName',
-      'pixOrgaTermsOfServiceAccepted',
       'pixOrgaTermsOfServiceStatus',
       'pixOrgaTermsOfServiceDocumentPath',
       'areNewYearOrganizationLearnersImported',

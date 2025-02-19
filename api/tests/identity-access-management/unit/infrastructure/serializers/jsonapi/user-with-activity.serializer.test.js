@@ -19,7 +19,6 @@ describe('Unit | Identity Access Management | Infrastructure | Serializer | JSON
           isAnonymous: false,
           lastTermsOfServiceValidatedAt: '2020-05-04T13:18:26.323Z',
           mustValidateTermsOfService: true,
-          pixOrgaTermsOfServiceAccepted: false,
           pixCertifTermsOfServiceAccepted: false,
           hasSeenAssessmentInstructions: false,
           hasSeenFocusedChallengeTooltip: false,

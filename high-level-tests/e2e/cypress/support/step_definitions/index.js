@@ -28,11 +28,15 @@ Given("les données de test sont chargées", () => {
   cy.task("db:fixture", "training-trigger-tubes");
   cy.task("db:fixture", "features");
   cy.task("db:fixture", "campaign-features");
+  cy.task("db:fixture", "legal-document-versions");
+  cy.task("db:fixture", "legal-document-version-user-acceptances");
 });
 
 Given("tous les comptes sont créés", () => {
   cy.task("db:fixture", "users");
   cy.task("db:fixture", "authentication-methods");
+  cy.task("db:fixture", "legal-document-versions");
+  cy.task("db:fixture", "legal-document-version-user-acceptances");
 });
 
 Given("je vais sur Pix", () => {

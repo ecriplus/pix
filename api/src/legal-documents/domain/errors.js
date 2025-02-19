@@ -9,10 +9,4 @@ class LegalDocumentInvalidDateError extends DomainError {
   }
 }
 
-class LegalDocumentVersionNotFoundError extends DomainError {
-  constructor() {
-    super('No legal document version found for service and type', 'LEGAL_DOCUMENT_VERSION_NOT_FOUND');
-  }
-}
-
-export { LegalDocumentInvalidDateError, LegalDocumentVersionNotFoundError };
+export { LegalDocumentInvalidDateError };

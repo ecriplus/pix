@@ -458,7 +458,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
     let options;
 
     beforeEach(async function () {
-      user = databaseBuilder.factory.buildUser({ pixOrgaTermsOfServiceAccepted: false });
+      user = databaseBuilder.factory.buildUser();
 
       options = {
         method: 'PATCH',

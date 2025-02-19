@@ -15,7 +15,6 @@ class User {
       id,
       cgu,
       createdAt,
-      pixOrgaTermsOfServiceAccepted,
       pixCertifTermsOfServiceAccepted,
       email,
       emailConfirmedAt,
@@ -24,7 +23,6 @@ class User {
       knowledgeElements,
       lastName,
       lastTermsOfServiceValidatedAt,
-      lastPixOrgaTermsOfServiceValidatedAt,
       lastPixCertifTermsOfServiceValidatedAt,
       lastDataProtectionPolicySeenAt,
       hasSeenAssessmentInstructions,
@@ -63,11 +61,9 @@ class User {
     this.cgu = cgu;
     this.createdAt = createdAt;
     this.lastTermsOfServiceValidatedAt = lastTermsOfServiceValidatedAt;
-    this.lastPixOrgaTermsOfServiceValidatedAt = lastPixOrgaTermsOfServiceValidatedAt;
     this.lastPixCertifTermsOfServiceValidatedAt = lastPixCertifTermsOfServiceValidatedAt;
     this.lastDataProtectionPolicySeenAt = lastDataProtectionPolicySeenAt;
     this.mustValidateTermsOfService = mustValidateTermsOfService;
-    this.pixOrgaTermsOfServiceAccepted = pixOrgaTermsOfServiceAccepted;
     this.pixCertifTermsOfServiceAccepted = pixCertifTermsOfServiceAccepted;
     this.hasSeenAssessmentInstructions = hasSeenAssessmentInstructions;
     this.hasSeenOtherChallengesTooltip = hasSeenOtherChallengesTooltip;
@@ -156,7 +152,6 @@ class User {
       hasBeenAnonymised: true,
       hasBeenAnonymisedBy: anonymizedByUserId,
       lastTermsOfServiceValidatedAt: null,
-      lastPixOrgaTermsOfServiceValidatedAt: null,
       lastPixCertifTermsOfServiceValidatedAt: null,
       lastDataProtectionPolicySeenAt: null,
     });
@@ -174,11 +169,9 @@ class User {
       emailConfirmedAt: this.emailConfirmedAt,
       cgu: this.cgu,
       lastTermsOfServiceValidatedAt: this.lastTermsOfServiceValidatedAt,
-      lastPixOrgaTermsOfServiceValidatedAt: this.lastPixOrgaTermsOfServiceValidatedAt,
       lastPixCertifTermsOfServiceValidatedAt: this.lastPixCertifTermsOfServiceValidatedAt,
       lastDataProtectionPolicySeenAt: this.lastDataProtectionPolicySeenAt,
       mustValidateTermsOfService: this.mustValidateTermsOfService,
-      pixOrgaTermsOfServiceAccepted: this.pixOrgaTermsOfServiceAccepted,
       pixCertifTermsOfServiceAccepted: this.pixCertifTermsOfServiceAccepted,
       hasSeenAssessmentInstructions: this.hasSeenAssessmentInstructions,
       hasSeenOtherChallengesTooltip: this.hasSeenOtherChallengesTooltip,

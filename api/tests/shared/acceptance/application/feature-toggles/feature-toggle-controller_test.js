@@ -35,7 +35,6 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-user-token-aud-confinement-enabled': true,
             'is-self-account-deletion-enabled': false,
             'is-text-to-speech-button-enabled': false,
-            'is-legal-documents-versioning-enabled': false,
             'setup-ecosystem-before-start': false,
             'show-experimental-missions': false,
             'show-new-campaign-presentation-page': false,

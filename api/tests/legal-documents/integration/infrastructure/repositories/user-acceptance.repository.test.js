@@ -120,4 +120,61 @@ describe('Integration | Legal document | Infrastructure | Repository | user-acce
       });
     });
   });
+
+  describe('#findByLegalDocumentVersionId', function () {
+    it('finds the last user acceptance record for a legal document id.', async function () {
+      // given
+      const user = databaseBuilder.factory.buildUser();
+      const oldDocumentVersion = databaseBuilder.factory.buildLegalDocumentVersion({
+        type: TOS,
+        service: PIX_ORGA,
+        versionAt: new Date('2023-01-01'),
+      });
+      databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+        userId: user.id,
+        legalDocumentVersionId: oldDocumentVersion.id,
+        acceptedAt: new Date('2023-02-01'),
+      });
+      const newDocumentVersion = databaseBuilder.factory.buildLegalDocumentVersion({
+        type: TOS,
+        service: PIX_ORGA,
+        versionAt: new Date('2024-02-01'),
+      });
+      databaseBuilder.factory.buildLegalDocumentVersionUserAcceptance({
+        userId: user.id,
+        legalDocumentVersionId: newDocumentVersion.id,
+        acceptedAt: new Date('2024-03-01'),
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const userAcceptance = await userAcceptanceRepository.findByLegalDocumentVersionId({
+        userId: user.id,
+        legalDocumentVersionId: newDocumentVersion.id,
+      });
+
+      // then
+      expect(userAcceptance.legalDocumentVersionId).to.equal(newDocumentVersion.id);
+      expect(userAcceptance.userId).to.equal(user.id);
+      expect(userAcceptance.acceptedAt).to.deep.equal(new Date('2024-03-01'));
+    });
+
+    context('when user has not accepted the document', function () {
+      it('returns null', async function () {
+        // given
+        const user = databaseBuilder.factory.buildUser();
+        const documentVersion = databaseBuilder.factory.buildLegalDocumentVersion({ type: TOS, service: PIX_ORGA });
+        await databaseBuilder.commit();
+
+        // when
+        const userAcceptance = await userAcceptanceRepository.findByLegalDocumentVersionId({
+          userId: user.id,
+          legalDocumentVersionId: documentVersion.id,
+        });
+
+        // then
+        expect(userAcceptance).to.be.null;
+      });
+    });
+  });
 });

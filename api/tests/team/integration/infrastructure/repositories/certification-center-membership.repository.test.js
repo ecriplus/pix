@@ -803,13 +803,11 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
         expect(result.id).to.equal(refererCertificationCenterMembership.id);
         expect(result.user).to.deepEqualInstanceOmitting(domainBuilder.buildUser({ ...user }), [
           'cgu',
-          'pixOrgaTermsOfServiceAccepted',
           'pixCertifTermsOfServiceAccepted',
           'emailConfirmedAt',
           'knowledgeElements',
           'lastName',
           'lastTermsOfServiceValidatedAt',
-          'lastPixOrgaTermsOfServiceValidatedAt',
           'lastPixCertifTermsOfServiceValidatedAt',
           'hasSeenAssessmentInstructions',
           'hasSeenNewDashboardInfo',
