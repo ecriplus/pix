@@ -30,7 +30,7 @@ async function importModules() {
 
   for (const file of files) {
     const fileURL = pathToFileURL(join(path, file.name));
-    const module = await import(fileURL, { assert: { type: 'json' } });
+    const module = await import(fileURL, { with: { type: 'json' } });
     imports.modules.push(module.default);
   }
 
