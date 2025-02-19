@@ -44,7 +44,7 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
     {{/if}}
     {{#if @hasBadges}}
       <td class="participant-list__badges">
-        <CampaignBadges @badges={{@participation.badges}} />
+        <CampaignBadges @badges={{@badges}} @acquiredBadges={{@participation.badges}} />
       </td>
     {{/if}}
   </tr>

@@ -2,6 +2,7 @@ import { SCO_MANAGING_ORGANIZATION_ID } from '../common/constants.js';
 import { createBadge, createStages, createTargetProfile } from '../common/tooling/target-profile-tooling.js';
 import {
   BADGES_CAMP_ID,
+  BADGES_CAMPAIGN_UNACQUIRED_ID,
   BADGES_TUBES_CAMP_ID,
   TARGET_PROFILE_BADGES_STAGES_ID,
   TARGET_PROFILE_NO_BADGES_NO_STAGES_ID,
@@ -42,18 +43,6 @@ async function _createTargetProfileWithBadgesStages(databaseBuilder) {
     ],
   };
 
-  const configBadge = {
-    criteria: [
-      {
-        scope: 'CappedTubes',
-        threshold: 60,
-      },
-      {
-        scope: 'CampaignParticipation',
-        threshold: 50,
-      },
-    ],
-  };
   const { targetProfileId, cappedTubesDTO } = await createTargetProfile({
     databaseBuilder,
     targetProfileId: TARGET_PROFILE_BADGES_STAGES_ID,
@@ -70,27 +59,67 @@ async function _createTargetProfileWithBadgesStages(databaseBuilder) {
     cappedTubesDTO,
     badgeId: BADGES_TUBES_CAMP_ID,
     altMessage: '1 RT double critère Campaign & Tubes',
-    imageUrl: 'https://images.pix.fr/badges/abcpix_je_navigue_sur_internet.svg',
-    message: '1 RT double critère Campaign & Tubes',
-    title: '1 RT double critère Campaign & Tubes',
+    imageUrl: 'https://images.pix.fr/badges/Badge_OLYMPIX.svg',
+    message: '1 RT double critère Campaign & Tubes 60/50',
+    title: '1 RT double critère Campaign & Tubes 60/50',
     key: `SOME_KEY_FOR_RT_${BADGES_TUBES_CAMP_ID}`,
     isCertifiable: false,
     isAlwaysVisible: true,
-    configBadge,
+    configBadge: {
+      criteria: [
+        {
+          scope: 'CappedTubes',
+          threshold: 60,
+        },
+        {
+          scope: 'CampaignParticipation',
+          threshold: 50,
+        },
+      ],
+    },
   });
+
   await createBadge({
     databaseBuilder,
     targetProfileId,
     cappedTubesDTO,
     badgeId: BADGES_CAMP_ID,
     altMessage: '1 RT simple critère Campaign',
-    imageUrl: 'https://images.pix.fr/badges/Badge_OLYMPIX.svg',
-    message: '1 RT simple critère Campaign',
-    title: '1 RT simple critère Campaign',
+    imageUrl: 'https://images.pix.fr/badges/Badge_Pixome%CC%80tre-Lune.svg',
+    message: '1 RT simple critère Campaign 20',
+    title: '1 RT simple critère Campaign 20',
     key: `SOME_KEY_FOR_RT_${BADGES_CAMP_ID}`,
     isCertifiable: false,
     isAlwaysVisible: true,
-    configBadge,
+    configBadge: {
+      criteria: [
+        {
+          scope: 'CampaignParticipation',
+          threshold: 20,
+        },
+      ],
+    },
+  });
+  await createBadge({
+    databaseBuilder,
+    targetProfileId,
+    cappedTubesDTO,
+    badgeId: BADGES_CAMPAIGN_UNACQUIRED_ID,
+    altMessage: 'Badge DadiCool',
+    imageUrl: 'https://images.pix.fr/badges/abcpix_je_navigue_sur_internet.svg',
+    message: '1 RT Campaign 100',
+    title: '1 RT Campaign 100',
+    key: `SOME_KEY_FOR_RT_${BADGES_CAMPAIGN_UNACQUIRED_ID}`,
+    isCertifiable: false,
+    isAlwaysVisible: true,
+    configBadge: {
+      criteria: [
+        {
+          scope: 'CampaignParticipation',
+          threshold: 100,
+        },
+      ],
+    },
   });
   await createStages({
     databaseBuilder,

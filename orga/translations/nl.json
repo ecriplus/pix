@@ -598,6 +598,10 @@
       },
       "result": "Resultaat",
       "table": {
+        "badge-tooltip": {
+          "acquired": "Verworven",
+          "unacquired": "Niet verworven"
+        },
         "caption": "In deze tabel staan de deelnemers die hun resultaten hebben gedeeld. Voor elke deelnemer worden de achternaam, voornaam en resultaten weergegeven.",
         "column": {
           "ariaSharedResultCount": "Aantal verzonden resultaten",

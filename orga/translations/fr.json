@@ -640,6 +640,10 @@
       },
       "result": "Résultat",
       "table": {
+        "badge-tooltip": {
+          "acquired": "Acquis",
+          "unacquired": "Non acquis"
+        },
         "caption": "Ce tableau comporte la liste des participants ayant partagé leurs résultats. Il indique pour chaque participant leur nom, prénom et des éléments de résultats.",
         "column": {
           "ariaSharedResultCount": "Nombre de résultats envoyés",

@@ -4,7 +4,7 @@ import { t } from 'ember-intl';
 import getService from '../../../helpers/get-service.js';
 import TableHeader from '../../table/header';
 import CampaignParticipationFilters from '../filter/participation-filters';
-import CampaignAssessmentRow from '../results/assessment-row';
+import CampaignAssessmentRow from './assessment-row';
 import EvolutionHeader from './evolution-header';
 
 <template>
@@ -74,6 +74,7 @@ import EvolutionHeader from './evolution-header';
                 @participation={{participation}}
                 @campaignId={{@campaign.id}}
                 @stages={{@campaign.stages}}
+                @badges={{@campaign.badges}}
                 @onClickParticipant={{@onClickParticipant}}
                 @displayParticipationCount={{@campaign.multipleSendings}}
               />
