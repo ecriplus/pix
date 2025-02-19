@@ -94,7 +94,7 @@ function createClientApplications(databaseBuilder) {
   databaseBuilder.factory.buildClientApplication({
     name: 'parcoursup',
     clientId: 'parcoursup',
-    clientSecret: 'parcoursupsecret',
+    clientSecret: 'parcoursup-secret-de-trente-deux-caracteres',
     scopes: ['parcoursup'],
   });
 }
