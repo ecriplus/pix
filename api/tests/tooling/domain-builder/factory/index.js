@@ -189,6 +189,7 @@ import { buildUserCertificationEligibility } from './certification/enrolment/bui
 import { buildV3CertificationEligibility } from './certification/enrolment/build-v3-certification-eligibility.js';
 import { buildEvaluationCandidate } from './certification/evaluation/build-candidate.js';
 import { buildFlashAssessmentAlgorithm } from './certification/flash-certification/build-flash-assessment-algorithm.js';
+import { buildGlobalCertificationLevel } from './certification/results/build-global-mesh-level.js';
 import { buildCertificationResult as parcoursupCertificationResult } from './certification/results/parcoursup/build-certification-result.js';
 import { buildCompetence as parcoursupCompetence } from './certification/results/parcoursup/build-competence.js';
 import { buildAssessmentResult as buildCertificationScoringAssessmentResult } from './certification/scoring/build-assessment-result.js';
@@ -262,6 +263,7 @@ const certification = {
     buildComplementaryCertificationBadge: buildCertificationComplementaryCertificationBadge,
   },
   results: {
+    buildGlobalCertificationLevel,
     parcoursup: {
       buildCertificationResult: parcoursupCertificationResult,
       buildCompetence: parcoursupCompetence,

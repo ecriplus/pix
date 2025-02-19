@@ -1,15 +1,38 @@
+import { LOCALE } from '../../../shared/domain/constants.js';
+import { getI18n } from '../../../shared/infrastructure/i18n/i18n.js';
+const { FRENCH_FRANCE } = LOCALE;
 import { usecases } from '../domain/usecases/index.js';
+import * as parcoursupCertificationSerializer from '../infrastructure/serializers/parcoursup-certification-serializer.js';
 
-const getCertificationResultForParcoursup = async function (request) {
+const getCertificationResultForParcoursup = async function (
+  request,
+  h,
+  dependencies = {
+    parcoursupCertificationSerializer,
+  },
+) {
+  const i18n = getI18n(FRENCH_FRANCE);
   const { ine, organizationUai, lastName, firstName, birthdate, verificationCode } = request.payload;
 
-  return usecases.getCertificationResultForParcoursup({
+  const certificationResult = await usecases.getCertificationResultForParcoursup({
     ine,
     organizationUai,
     lastName,
     firstName,
     birthdate,
     verificationCode,
+  });
+
+  const globalMeshLevel = await usecases.getGlobalMeshLevel({
+    pixScore: certificationResult.pixScore,
+    certificationDate: certificationResult.certificationDate,
+    i18n,
+  });
+
+  return dependencies.parcoursupCertificationSerializer.serialize({
+    certificationResult,
+    globalMeshLevel,
+    translate: i18n.__,
   });
 };
 
