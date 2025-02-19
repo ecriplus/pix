@@ -1,7 +1,13 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixInput from '@1024pix/pix-ui/components/pix-input';
+import PixInputPassword from '@1024pix/pix-ui/components/pix-input-password';
+import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import ENV from 'pix-orga/config/environment';
@@ -181,4 +187,80 @@ export default class LoginForm extends Component {
         return ENV.APP.API_ERROR_MESSAGES.INTERNAL_SERVER_ERROR.I18N_KEY;
     }
   }
+
+  <template>
+    <div class="login-form">
+
+      {{#unless @isWithInvitation}}
+        <p class="login-form__information">{{t "pages.login-form.is-only-accessible"}}</p>
+      {{/unless}}
+
+      {{#if @hasInvitationAlreadyBeenAccepted}}
+        <p class="login-form__invitation-error">{{t "pages.login-form.invitation-already-accepted"}}</p>
+      {{/if}}
+
+      {{#if @isInvitationCancelled}}
+        <p class="login-form__invitation-error">{{t "pages.login-form.invitation-was-cancelled"}}</p>
+      {{/if}}
+
+      {{#if this.errorMessage}}
+        <p id="login-form-error-message" class="login-form__error-message" role="alert">
+          {{this.errorMessage}}
+        </p>
+      {{/if}}
+
+      <form class="login-form__input-container" {{on "submit" this.authenticate}}>
+        <p class="login-form__mandatory-information">{{t "common.form.mandatory-all-fields"}}</p>
+
+        <PixInput
+          @id="login-email"
+          name="login"
+          type="email"
+          {{on "focusout" this.validateEmail}}
+          {{on "input" this.updateEmail}}
+          @errorMessage={{this.emailValidationMessage}}
+          @validationStatus={{if this.emailValidationMessage "error" "default"}}
+          required={{true}}
+          aria-required="true"
+          autocomplete="email"
+        >
+          <:label>{{t "pages.login-form.email"}}</:label>
+        </PixInput>
+
+        <PixInputPassword
+          @id="login-password"
+          name="password"
+          autocomplete="current-password"
+          required={{true}}
+          aria-required={{true}}
+          {{on "focusout" this.validatePassword}}
+          {{on "input" this.validatePassword}}
+          @errorMessage={{this.passwordValidationMessage}}
+          @validationStatus={{if this.passwordValidationMessage "error" "default"}}
+        >
+          <:label>{{t "pages.login-form.password"}}</:label>
+        </PixInputPassword>
+
+        <PixButton @type="submit" @isLoading={{this.isLoading}}>
+          {{t "pages.login-form.login"}}
+        </PixButton>
+
+        <div class="login-form__forgotten-password">
+          <a href="{{this.forgottenPasswordUrl}}" target="_blank" rel="noopener noreferrer">
+            {{t "pages.login-form.forgot-password"}}
+          </a>
+        </div>
+
+        {{#if this.displayRecoveryLink}}
+          <div>
+            <div class="login-form__recover-access-link help-text">
+              <LinkTo @route="join-request" class="link">{{t "pages.login-form.active-or-retrieve"}}</LinkTo>
+            </div>
+            <div class="login-form__recover-access-message help-text">({{t "pages.login-form.only-for-admin"}})</div>
+          </div>
+        {{/if}}
+
+      </form>
+    </div>
+  </template>
 }
