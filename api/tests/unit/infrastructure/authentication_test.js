@@ -1,4 +1,4 @@
-import { authentication, validateUser } from '../../../lib/infrastructure/authentication.js';
+import { authentication, validateClientApplication, validateUser } from '../../../lib/infrastructure/authentication.js';
 import { RevokedUserAccess } from '../../../src/identity-access-management/domain/models/RevokedUserAccess.js';
 import { revokedUserAccessRepository } from '../../../src/identity-access-management/infrastructure/repositories/revoked-user-access.repository.js';
 import { tokenService } from '../../../src/shared/domain/services/token-service.js';
@@ -265,6 +265,58 @@ describe('Unit | Infrastructure | Authentication', function () {
 
           // then
           expect(h.authenticated).to.have.been.calledWithExactly({ credentials: { userId: undefined } });
+        });
+      });
+    });
+  });
+
+  describe('#validateClientApplication', function () {
+    describe('when there is a clientId', function () {
+      it('should call h.authenticated with credentials', async function () {
+        const request = { headers: { authorization: 'Bearer token' } };
+        const h = { authenticated: sinon.stub() };
+        const decodedAccessToken = {
+          client_id: 'client_id',
+          scope: 'scope',
+          source: 'source',
+        };
+        tokenService.extractTokenFromAuthChain.withArgs('Bearer token').returns('token');
+        tokenService.getDecodedToken.withArgs('token', 'dummy-secret').returns(decodedAccessToken);
+
+        const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
+          key: 'dummy-secret',
+          validate: validateClientApplication,
+        });
+        await authenticate(request, h);
+
+        // then
+        expect(h.authenticated).to.have.been.calledWithExactly({ credentials: decodedAccessToken });
+      });
+    });
+
+    describe('when there is no clientId', function () {
+      it('should return Unauthorized', async function () {
+        const request = { headers: { authorization: 'Bearer token' } };
+        const h = { authenticated: sinon.stub() };
+        const decodedAccessToken = {
+          scope: 'scope',
+          source: 'source',
+        };
+        tokenService.extractTokenFromAuthChain.withArgs('Bearer token').returns('token');
+        tokenService.getDecodedToken.withArgs('token', 'dummy-secret').returns(decodedAccessToken);
+
+        const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
+          key: 'dummy-secret',
+          validate: validateClientApplication,
+        });
+        const response = await authenticate(request, h);
+
+        // then
+        expect(h.authenticated).to.not.have.been.called;
+        expect(response.output.payload).to.include({
+          statusCode: 401,
+          error: 'Unauthorized',
+          message: 'Unauthorized',
         });
       });
     });

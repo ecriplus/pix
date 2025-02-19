@@ -56,8 +56,6 @@ _.each(customChaiHelpers, chaiUse);
 
 chaiUse(jobChai(knex));
 
-const { apimRegisterApplicationsCredentials, jwtConfig } = config;
-
 const databaseBuilder = await DatabaseBuilder.create({
   knex,
   beforeEmptyDatabase: () => {
@@ -135,16 +133,13 @@ function generateAuthenticatedUserRequestHeaders({
 }
 
 function generateValidRequestAuthorizationHeaderForApplication(clientId = 'client-id-name', source, scope) {
-  const application = _.find(apimRegisterApplicationsCredentials, { clientId });
-  if (application) {
-    const accessToken = tokenService.createAccessTokenFromApplication(
-      application.clientId,
-      source,
-      scope,
-      jwtConfig[application.source].secret,
-    );
-    return `Bearer ${accessToken}`;
-  }
+  const accessToken = tokenService.createAccessTokenFromApplication(
+    clientId,
+    source,
+    scope,
+    config.authentication.secret,
+  );
+  return `Bearer ${accessToken}`;
 }
 
 function generateIdTokenForExternalUser(externalUser) {

@@ -13,7 +13,7 @@ const register = async function (server) {
       method: 'POST',
       path: '/api/application/parcoursup/certification/search',
       config: {
-        auth: { strategy: 'jwt-parcoursup', access: { scope: 'parcoursup' } },
+        auth: { strategy: 'jwt-application', access: { scope: 'parcoursup' } },
         validate: {
           payload: Joi.alternatives()
             .try(

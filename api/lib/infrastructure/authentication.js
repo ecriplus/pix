@@ -1,13 +1,10 @@
 import boom from '@hapi/boom';
-import lodash from 'lodash';
 
 import { revokedUserAccessRepository } from '../../src/identity-access-management/infrastructure/repositories/revoked-user-access.repository.js';
 import { getForwardedOrigin } from '../../src/identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../src/shared/config.js';
 import { tokenService } from '../../src/shared/domain/services/token-service.js';
 import { monitoringTools } from '../../src/shared/infrastructure/monitoring-tools.js';
-
-const { find } = lodash;
 
 const schemes = {
   jwt: {
@@ -112,10 +109,9 @@ async function validateUser(decodedAccessToken, { request, revokedUserAccessRepo
   return { isValid: true, credentials: { userId: decodedAccessToken.user_id } };
 }
 
-async function validateClientApplication(decodedAccessToken) {
-  const application = find(config.apimRegisterApplicationsCredentials, { clientId: decodedAccessToken.client_id });
-  if (!application) {
-    return { isValid: false, errorCode: 401 };
+export async function validateClientApplication(decodedAccessToken) {
+  if (!decodedAccessToken.client_id) {
+    return { isValid: false };
   }
 
   return {

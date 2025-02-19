@@ -232,29 +232,5 @@ describe('Certification | Results | Unit | Application | Routes | Parcoursup', f
       // then
       expect(response.statusCode).to.equal(403);
     });
-
-    it('should return 401 with the wrong clientId', async function () {
-      //given
-      const PARCOURSUP_CLIENT_ID = 'wrongClientId';
-      const PARCOURSUP_SCOPE = 'parcoursup';
-      const PARCOURSUP_SOURCE = 'parcoursup';
-
-      const payload = {
-        ine: '123456789OK',
-      };
-      headers = {
-        authorization: generateValidRequestAuthorizationHeaderForApplication(
-          PARCOURSUP_CLIENT_ID,
-          PARCOURSUP_SOURCE,
-          PARCOURSUP_SCOPE,
-        ),
-      };
-
-      // when
-      const response = await httpTestServer.request(method, url, payload, null, headers);
-
-      // then
-      expect(response.statusCode).to.equal(401);
-    });
   });
 });
