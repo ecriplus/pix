@@ -1,27 +1,20 @@
 import { authenticateApplication } from '../../../../lib/domain/usecases/authenticate-application.js';
-import { PasswordNotMatching } from '../../../../src/identity-access-management/domain/errors.js';
-import { config } from '../../../../src/shared/config.js';
 import {
   ApplicationScopeNotAllowedError,
   ApplicationWithInvalidClientIdError,
   ApplicationWithInvalidClientSecretError,
 } from '../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { catchErr, expect, sinon } from '../../../test-helper.js';
 
 describe('Unit | Usecase | authenticate-application', function () {
   context('when application is not found', function () {
     it('should throw an error', async function () {
-      const payload = {
+      const client = {
         clientId: Symbol('id'),
         clientSecret: Symbol('secret'),
       };
 
-      const clientApplicationRepository = {
-        findByClientId: sinon.stub(),
-      };
-      clientApplicationRepository.findByClientId.withArgs(payload.clientId).resolves(undefined);
-
-      const err = await catchErr(authenticateApplication)({ ...payload, clientApplicationRepository });
+      const err = await catchErr(authenticateApplication)(client);
 
       expect(err).to.be.instanceOf(ApplicationWithInvalidClientIdError);
     });
@@ -30,29 +23,12 @@ describe('Unit | Usecase | authenticate-application', function () {
   context('when application is found', function () {
     context('when client secrets are different', function () {
       it('should throw an error', async function () {
-        const payload = {
+        const client = {
           clientId: 'test-apimOsmoseClientId',
-          clientSecret: 'mauvais-secret',
+          clientSecret: Symbol('toto'),
         };
 
-        const clientApplicationRepository = {
-          findByClientId: sinon.stub(),
-        };
-        const application = domainBuilder.buildClientApplication({
-          name: 'test-apimOsmoseClientId',
-          clientSecret: 'mon-secret',
-          scopes: [],
-        });
-        clientApplicationRepository.findByClientId.withArgs(payload.clientId).resolves(application);
-
-        const cryptoService = {
-          checkPassword: sinon.stub(),
-        };
-        cryptoService.checkPassword
-          .withArgs({ password: payload.clientSecret, passwordHash: application.clientSecret })
-          .rejects(new PasswordNotMatching());
-
-        const err = await catchErr(authenticateApplication)({ ...payload, clientApplicationRepository, cryptoService });
+        const err = await catchErr(authenticateApplication)(client);
 
         expect(err).to.be.instanceOf(ApplicationWithInvalidClientSecretError);
       });
@@ -60,30 +36,13 @@ describe('Unit | Usecase | authenticate-application', function () {
 
     context('when client scopes are different', function () {
       it('should throw an error', async function () {
-        const payload = {
+        const client = {
           clientId: 'test-apimOsmoseClientId',
-          clientSecret: 'bon-secret',
+          clientSecret: 'test-apimOsmoseClientSecret',
           scope: 'mauvais-scope',
         };
 
-        const clientApplicationRepository = {
-          findByClientId: sinon.stub(),
-        };
-        const application = domainBuilder.buildClientApplication({
-          name: 'test-apimOsmoseClientId',
-          clientSecret: 'bon-secret',
-          scopes: ['bon-scope'],
-        });
-        clientApplicationRepository.findByClientId.withArgs(payload.clientId).resolves(application);
-
-        const cryptoService = {
-          checkPassword: sinon.stub(),
-        };
-        cryptoService.checkPassword
-          .withArgs({ password: payload.clientSecret, passwordHash: application.clientSecret })
-          .resolves();
-
-        const err = await catchErr(authenticateApplication)({ ...payload, clientApplicationRepository, cryptoService });
+        const err = await catchErr(authenticateApplication)(client);
 
         expect(err).to.be.instanceOf(ApplicationScopeNotAllowedError);
       });
@@ -91,50 +50,21 @@ describe('Unit | Usecase | authenticate-application', function () {
 
     context('when given information is correct', function () {
       it('should return created token', async function () {
-        const payload = {
+        const client = {
           clientId: 'test-apimOsmoseClientId',
-          clientSecret: 'bon-secret',
-          scope: 'bon-scope',
+          clientSecret: 'test-apimOsmoseClientSecret',
+          scope: 'organizations-certifications-result',
         };
-
-        const clientApplicationRepository = {
-          findByClientId: sinon.stub(),
-        };
-        const application = domainBuilder.buildClientApplication({
-          name: 'mon-application',
-          clientId: 'test-apimOsmoseClientId',
-          clientSecret: 'bon-secret',
-          scopes: ['bon-scope'],
-        });
-        clientApplicationRepository.findByClientId.withArgs(payload.clientId).resolves(application);
-
-        const cryptoService = {
-          checkPassword: sinon.stub(),
-        };
-        cryptoService.checkPassword
-          .withArgs({ password: payload.clientSecret, passwordHash: application.clientSecret })
-          .resolves();
 
         const tokenService = {
           createAccessTokenFromApplication: sinon.stub(),
         };
         const expectedToken = Symbol('Mon Super token');
         tokenService.createAccessTokenFromApplication
-          .withArgs(
-            application.clientId,
-            application.name,
-            payload.scope,
-            config.authentication.secret,
-            config.authentication.accessTokenLifespanMs,
-          )
+          .withArgs(client.clientId, 'livretScolaire', client.scope, 'test-secretOsmose', '4h')
           .resolves(expectedToken);
 
-        const token = await authenticateApplication({
-          ...payload,
-          tokenService,
-          clientApplicationRepository,
-          cryptoService,
-        });
+        const token = await authenticateApplication({ ...client, tokenService });
 
         expect(token).to.be.equal(expectedToken);
       });
