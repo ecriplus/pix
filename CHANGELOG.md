@@ -1,5 +1,29 @@
 # Pix Changelog
 
+## v5.46.0 (19/02/2025)
+
+
+### :rocket: Amélioration
+- [#11434](https://github.com/1024pix/pix/pull/11434) [FEATURE] Migrer les applications en BDD (PIX-16590).
+
+### :building_construction: Tech
+- [#11285](https://github.com/1024pix/pix/pull/11285) [TECH] Déplacer la route des contenus formatifs vers le domaine Dev Comp (PIX-16249).
+- [#11442](https://github.com/1024pix/pix/pull/11442) [TECH] Déplacer le domaine parcoursup dans certification/results (PIX-16604).
+- [#11443](https://github.com/1024pix/pix/pull/11443) [TECH] Suppression du token d’accès aux résultats de campagne (PIX-16610).
+- [#11439](https://github.com/1024pix/pix/pull/11439) [TECH] :construction_worker: Ne pas déployer d'addon REDIS ou PG pour les fronts.
+- [#11444](https://github.com/1024pix/pix/pull/11444) [TECH] Contextualiser les loggers de Scripts par défaut.
+- [#11435](https://github.com/1024pix/pix/pull/11435) [TECH] Eviter de créer des transactions nestées lorsqu'on utilise la fonction `batchInsert` de knex dans le cadre d'une DomainTransaction.
+- [#11411](https://github.com/1024pix/pix/pull/11411) [TECH] Ajouter des logs spécifiques pour certains tokens problématiques (audience mismatch, revoked token) (PIX-16551).
+
+### :bug: Correction
+- [#11438](https://github.com/1024pix/pix/pull/11438) [BUGFIX] Les appels imbriqués aux méthodes d'exécution de code en transaction de la DomainTransaction n'utilisent pas la même transaction.
+
+### :arrow_up: Montée de version
+- [#11432](https://github.com/1024pix/pix/pull/11432) [BUMP] Update Node.js to v20.18.3.
+
+### :coffee: Autre
+- [#11436](https://github.com/1024pix/pix/pull/11436) Revert "[TECH] Retirer le script de suppression en masse d'organisations (PIX-16269)".
+
 ## v5.45.0 (18/02/2025)
 
 
