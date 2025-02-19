@@ -2,8 +2,8 @@ import { ComparisonNotImplementedError } from '../errors.js';
 
 export const COMPARISONS = {
   EQUAL: 'equal',
-  ONE_OF: 'some',
-  ALL: 'every',
+  ONE_OF: 'one-of',
+  ALL: 'all',
 };
 
 export class CriterionProperty {
