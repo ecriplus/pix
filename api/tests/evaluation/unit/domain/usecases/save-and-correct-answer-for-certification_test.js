@@ -21,7 +21,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
   let validator;
   let correctAnswerValue;
   let answer;
-  let dateUtils;
+  let clock;
   let candidate;
   let answerRepository,
     challengeRepository,
@@ -40,14 +40,12 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       accessibilityAdjustmentNeeded: true,
     });
     nowDate.setMilliseconds(1);
+    clock = sinon.useFakeTimers({ now: nowDate, toFake: ['Date'] });
     sinon.stub(KnowledgeElement, 'createKnowledgeElementsForAnswer');
     answerRepository = { saveWithKnowledgeElements: sinon.stub() };
     challengeRepository = { get: sinon.stub() };
     answerJobRepository = {
       performAsync: sinon.stub(),
-    };
-    dateUtils = {
-      getNowDate: sinon.stub(),
     };
     certificationChallengeLiveAlertRepository = { getOngoingOrValidatedByChallengeIdAndAssessmentId: sinon.stub() };
     certificationEvaluationCandidateRepository = { findByAssessmentId: sinon.stub() };
@@ -68,18 +66,19 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
     challenge = domainBuilder.buildChallenge({ id: answer.challengeId, validator });
     challengeRepository.get.resolves(challenge);
 
-    dateUtils.getNowDate.returns(nowDate);
-
     dependencies = {
       forceOKAnswer,
       answerRepository,
       challengeRepository,
       certificationChallengeLiveAlertRepository,
       certificationEvaluationCandidateRepository,
-      dateUtils,
       answerJobRepository,
       correctionService,
     };
+  });
+
+  afterEach(async function () {
+    clock.restore();
   });
 
   context('when an answer for that challenge is not for an asked challenge', function () {

@@ -8,7 +8,6 @@ export async function saveAndCorrectAnswerForDemoAndPreview({
   answerRepository,
   challengeRepository,
   correctionService,
-  dateUtils,
 } = {}) {
   if (assessment.lastChallengeId && assessment.lastChallengeId !== answer.challengeId) {
     throw new ChallengeNotAskedError();
@@ -25,7 +24,7 @@ export async function saveAndCorrectAnswerForDemoAndPreview({
     accessibilityAdjustmentNeeded: false,
     forceOKAnswer,
   });
-  const now = dateUtils.getNowDate();
+  const now = new Date();
   const lastQuestionDate = assessment.lastQuestionDate || now;
   correctedAnswer.setTimeSpentFrom({ now, lastQuestionDate });
 

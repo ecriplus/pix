@@ -12,7 +12,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
   let validator;
   let correctAnswerValue;
   let answer;
-  let dateUtils;
+  let clock;
   let answerRepository, challengeRepository;
 
   const nowDate = new Date('2021-03-11T11:00:04Z');
@@ -23,12 +23,10 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
 
   beforeEach(function () {
     nowDate.setMilliseconds(1);
+    clock = sinon.useFakeTimers({ now: nowDate, toFake: ['Date'] });
     sinon.stub(KnowledgeElement, 'createKnowledgeElementsForAnswer');
     answerRepository = { saveWithKnowledgeElements: sinon.stub() };
     challengeRepository = { get: sinon.stub() };
-    dateUtils = {
-      getNowDate: sinon.stub(),
-    };
 
     const challengeId = 'oneChallengeId';
     assessment = domainBuilder.buildAssessment({
@@ -45,15 +43,16 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
     challenge = domainBuilder.buildChallenge({ id: answer.challengeId, validator });
     challengeRepository.get.resolves(challenge);
 
-    dateUtils.getNowDate.returns(nowDate);
-
     dependencies = {
       forceOKAnswer,
       answerRepository,
       challengeRepository,
-      dateUtils,
       correctionService,
     };
+  });
+
+  afterEach(async function () {
+    clock.restore();
   });
 
   context('when an answer for that challenge is not for an asked challenge', function () {

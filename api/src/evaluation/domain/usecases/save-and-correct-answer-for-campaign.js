@@ -23,7 +23,6 @@ export async function saveAndCorrectAnswerForCampaign({
   algorithmDataFetcherService,
   flashAssessmentResultRepository,
   campaignRepository,
-  dateUtils,
 } = {}) {
   if (assessment.userId !== userId) {
     throw new ForbiddenAccess('User is not allowed to add an answer for this assessment.');
@@ -43,7 +42,7 @@ export async function saveAndCorrectAnswerForCampaign({
     accessibilityAdjustmentNeeded: false,
     forceOKAnswer,
   });
-  const now = dateUtils.getNowDate();
+  const now = new Date();
   const lastQuestionDate = assessment.lastQuestionDate || now;
   correctedAnswer.setTimeSpentFrom({ now, lastQuestionDate });
 

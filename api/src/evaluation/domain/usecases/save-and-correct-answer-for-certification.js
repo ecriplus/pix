@@ -18,7 +18,6 @@ export async function saveAndCorrectAnswerForCertification({
   certificationChallengeLiveAlertRepository,
   certificationEvaluationCandidateRepository,
   correctionService,
-  dateUtils,
 } = {}) {
   if (assessment.userId !== userId) {
     throw new ForbiddenAccess('User is not allowed to add an answer for this assessment.');
@@ -57,7 +56,7 @@ export async function saveAndCorrectAnswerForCertification({
     accessibilityAdjustmentNeeded: certificationCandidate.accessibilityAdjustmentNeeded,
     forceOKAnswer,
   });
-  const now = dateUtils.getNowDate();
+  const now = new Date();
   const lastQuestionDate = assessment.lastQuestionDate || now;
   correctedAnswer.setTimeSpentFrom({ now, lastQuestionDate });
 
