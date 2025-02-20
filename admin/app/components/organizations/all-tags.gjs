@@ -149,7 +149,7 @@ export default class OrganizationAllTags extends Component {
           {{/each}}
         </ul>
       {{else}}
-        <p>Aucun résultat.</p>
+        <p>{{t "common.tables.empty-result"}}</p>
       {{/if}}
     </section>
   </template>

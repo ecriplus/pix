@@ -1,45 +1,61 @@
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
+import { t } from 'ember-intl';
 
 <template>
-  <div class="content-text content-text--small table-admin__wrapper session-list">
-    <table class="table-admin table-admin__auto-width">
-      <thead>
-        <tr>
-          <th class="table__column table__column--id">ID</th>
-          <th>Centre de certification</th>
-          <th>Date de session</th>
-          <th>Date de finalisation</th>
-          <th>Qui ?</th>
-        </tr>
-      </thead>
-
-      {{#if @withRequiredActionSessions}}
-        <tbody>
-          {{#each @withRequiredActionSessions as |withRequiredActionSession|}}
-            <tr>
-              <td class="table__column table__column--id">
-                <LinkTo @route="authenticated.sessions.session" @model={{withRequiredActionSession.id}}>
-                  {{withRequiredActionSession.id}}
-                </LinkTo>
-              </td>
-              <td>{{withRequiredActionSession.certificationCenterName}}</td>
-              <td>{{withRequiredActionSession.printableDateAndTime}}</td>
-              <td>{{withRequiredActionSession.printableFinalizationDate}}</td>
-              <td class="session-list__item--align-center">
-                {{#if withRequiredActionSession.assignedCertificationOfficerName}}
-                  {{withRequiredActionSession.assignedCertificationOfficerName}}
-                {{else}}
-                  -
-                {{/if}}
-              </td>
-            </tr>
-          {{/each}}
-        </tbody>
-      {{/if}}
-    </table>
-
-    {{#unless @withRequiredActionSessions}}
-      <div class="table__empty">Aucun résultat</div>
-    {{/unless}}
-  </div>
+  {{#if @withRequiredActionSessions}}
+    <PixTable @data={{@withRequiredActionSessions}} @caption={{t "pages.sessions.table.required-actions.caption"}}>
+      <:columns as |row withRequiredActionSession|>
+        <PixTableColumn @context={{withRequiredActionSession}} class="table__column--medium">
+          <:header>
+            {{t "pages.sessions.table.required-actions.headers.id"}}
+          </:header>
+          <:cell>
+            <LinkTo @route="authenticated.sessions.session" @model={{row.id}}>
+              {{row.id}}
+            </LinkTo>
+          </:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{withRequiredActionSession}}>
+          <:header>
+            {{t "pages.sessions.table.required-actions.headers.certification-name"}}
+          </:header>
+          <:cell>
+            {{row.certificationCenterName}}
+          </:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{withRequiredActionSession}}>
+          <:header>
+            {{t "pages.sessions.table.required-actions.headers.session-date"}}
+          </:header>
+          <:cell>
+            {{row.printableDateAndTime}}
+          </:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{withRequiredActionSession}}>
+          <:header>
+            {{t "pages.sessions.table.required-actions.headers.finalization-date"}}
+          </:header>
+          <:cell>
+            {{row.printableFinalizationDate}}
+          </:cell>
+        </PixTableColumn>
+        <PixTableColumn @context={{withRequiredActionSession}}>
+          <:header>
+            {{t "pages.sessions.table.required-actions.headers.assigned-officer-name"}}
+          </:header>
+          <:cell>
+            {{#if row.assignedCertificationOfficerName}}
+              {{row.assignedCertificationOfficerName}}
+            {{else}}
+              -
+            {{/if}}
+          </:cell>
+        </PixTableColumn>
+      </:columns>
+    </PixTable>
+  {{else}}
+    <div class="table__empty">{{t "common.tables.empty-result"}}</div>
+  {{/if}}
 </template>

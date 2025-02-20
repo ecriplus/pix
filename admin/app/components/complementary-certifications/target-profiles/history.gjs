@@ -9,7 +9,10 @@ import { t } from 'ember-intl';
     <h2 class="complementary-certification-details__history-title">
       {{t "components.complementary-certifications.target-profiles.history-list.title"}}
     </h2>
-    <PixTable @data={{@targetProfilesHistory}}>
+    <PixTable
+      @data={{@targetProfilesHistory}}
+      @caption={{t "components.complementary-certifications.target-profiles.history-list.caption"}}
+    >
       <:columns as |row targetProfileHistory|>
         <PixTableColumn @context={{targetProfileHistory}}>
           <:header>

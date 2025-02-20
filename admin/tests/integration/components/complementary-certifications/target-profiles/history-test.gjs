@@ -1,9 +1,9 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import dayjs from 'dayjs';
 import History from 'pix-admin/components/complementary-certifications/target-profiles/history';
 import { module, test } from 'qunit';
 
-import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest, { t } from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | complementary-certifications/target-profiles/history', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -29,12 +29,15 @@ module('Integration | Component | complementary-certifications/target-profiles/h
     );
 
     // then
-    assert.dom(screen.getByRole('columnheader', { name: 'Nom du profil cible' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'Date de rattachement' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'Date de détachement' })).exists();
-    assert.dom(screen.getByRole('row', { name: 'Target Cascade 10/10/2023 -' })).exists();
-    assert.dom(screen.getByRole('row', { name: 'Target Volcan 08/10/2019 08/10/2020' })).exists();
-    assert.dom(screen.getByRole('link', { name: 'Target Cascade' })).exists();
-    assert.dom(screen.getByRole('link', { name: 'Target Volcan' })).exists();
+    const table = screen.getByRole('table', {
+      name: t('components.complementary-certifications.target-profiles.history-list.caption'),
+    });
+    assert.dom(within(table).getByRole('columnheader', { name: 'Nom du profil cible' })).exists();
+    assert.dom(within(table).getByRole('columnheader', { name: 'Date de rattachement' })).exists();
+    assert.dom(within(table).getByRole('columnheader', { name: 'Date de détachement' })).exists();
+    assert.dom(within(table).getByRole('row', { name: 'Target Cascade 10/10/2023 -' })).exists();
+    assert.dom(within(table).getByRole('row', { name: 'Target Volcan 08/10/2019 08/10/2020' })).exists();
+    assert.dom(within(table).getByRole('link', { name: 'Target Cascade' })).exists();
+    assert.dom(within(table).getByRole('link', { name: 'Target Volcan' })).exists();
   });
 });

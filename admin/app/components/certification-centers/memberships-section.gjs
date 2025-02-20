@@ -1,3 +1,5 @@
+import { t } from 'ember-intl';
+
 import MembershipItem from './membership-item';
 
 <template>
@@ -36,7 +38,7 @@ import MembershipItem from './membership-item';
         </table>
 
         {{#unless @certificationCenterMemberships}}
-          <div class="table__empty">Aucun résultat</div>
+          <div class="table__empty">{{t "common.tables.empty-result"}}</div>
         {{/unless}}
       </div>
     </div>

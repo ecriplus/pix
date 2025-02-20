@@ -10,7 +10,10 @@ export default class List extends Component {
   }
 
   <template>
-    <PixTable @data={{this.sortedComplementaryCertifications}}>
+    <PixTable
+      @data={{this.sortedComplementaryCertifications}}
+      @caption={{t "components.complementary-certifications.list.caption"}}
+    >
       <:columns as |row sortedComplementaryCertification|>
         <PixTableColumn @context={{sortedComplementaryCertification}} class="table__column--medium">
           <:header>

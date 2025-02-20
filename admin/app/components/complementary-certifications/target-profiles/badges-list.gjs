@@ -19,7 +19,10 @@ export default class BadgesList extends Component {
       <h2 class="complementary-certification-details__badges-title">
         {{t "components.complementary-certifications.target-profiles.badges-list.title"}}
       </h2>
-      <PixTable @data={{this.currentTargetProfileBadges}}>
+      <PixTable
+        @data={{this.currentTargetProfileBadges}}
+        @caption={{t "components.complementary-certifications.target-profiles.badges-list.caption"}}
+      >
         <:columns as |row currentTargetProfileBadge|>
           <PixTableColumn @context={{currentTargetProfileBadge}}>
             <:header>

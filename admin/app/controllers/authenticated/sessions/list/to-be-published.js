@@ -10,6 +10,11 @@ export default class SessionToBePublishedController extends Controller {
   @service accessControl;
   @tracked shouldShowModal = false;
 
+  get hasSessionsToPublish() {
+    const sessionsToPublish = this.model.length;
+    return sessionsToPublish && this.accessControl.hasAccessToCertificationActionsScope;
+  }
+
   @action
   async publishSession(toBePublishedSession) {
     const adapter = this.store.adapterFor('to-be-published-session');

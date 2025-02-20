@@ -7,14 +7,10 @@
     margin: 20px 10px 10px;
   }
 
-  &__self-toogle {
+  &__assigned-to-process-session {
     display: flex;
     justify-content: flex-end;
-    padding-bottom: 10px;
-
-    p {
-      margin: 0;
-    }
+    margin-bottom: var(--pix-spacing-3x);
   }
 
   &__item--align-center {
@@ -25,8 +21,7 @@
 .session-to-be-publish {
   &__publish-all {
     display: flex;
-    flex-direction: row-reverse;
-    width: 100%;
-    margin-bottom: 16px;
+    justify-content: flex-end;
+    margin-bottom: var(--pix-spacing-3x);
   }
 }

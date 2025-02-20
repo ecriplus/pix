@@ -1,5 +1,6 @@
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import { LinkTo } from '@ember/routing';
+import { t } from 'ember-intl';
 
 <template>
   <div class="content-text content-text--small">
@@ -34,7 +35,7 @@ import { LinkTo } from '@ember/routing';
     </table>
 
     {{#unless @users}}
-      <div class="table__empty">Aucun résultat</div>
+      <div class="table__empty">{{t "common.tables.empty-result"}}</div>
     {{/unless}}
   </div>
 

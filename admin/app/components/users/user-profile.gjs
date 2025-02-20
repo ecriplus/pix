@@ -1,3 +1,5 @@
+import { t } from 'ember-intl';
+
 <template>
   <h2 class="page-section__title">Profil utilisateur</h2>
 
@@ -25,7 +27,7 @@
           </tr>
         {{else}}
           <tr>
-            <td colspan="10" class="table-admin-empty">Aucun résultat</td>
+            <td colspan="10" class="table-admin-empty">{{t "common.tables.empty-result"}}</td>
           </tr>
         {{/each}}
       </tbody>

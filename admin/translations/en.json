@@ -74,6 +74,9 @@
       "auto": "Automatic",
       "member": "Member"
     },
+    "tables": {
+      "empty-result": "Aucun résultat"
+    },
     "words": {
       "no": "No",
       "yes": "Yes"
@@ -299,11 +302,13 @@
     },
     "complementary-certifications": {
       "list": {
+        "caption": "Liste des certifications complémentaires, comprenant l'identifiant unique et le nom.",
         "id": "ID",
         "name": "Nom"
       },
       "target-profiles": {
         "badges-list": {
+          "caption": "Liste des résultats thématiques (RT) certifiant liés au profil cible, comprenant l'identifiant unique, l'image associée, le niveau, le nombre de pix minimum pour l'obtenir et le nom du badge.",
           "header": {
             "id": "ID du RT certifiant",
             "image-url": "Image du badge certifié",
@@ -314,6 +319,7 @@
           "title": "Badges certifiés du profil cible actuel"
         },
         "history-list": {
+          "caption": "Liste des profils cibles (actuellement rattaché ou ayant étés rattachés à la complémentaire). Contient la date de rattachement et de détachement et le nom.",
           "headers": {
             "attached-at": "Date de rattachement",
             "detached-at": "Date de détachement",
@@ -742,9 +748,51 @@
         "unfinalization-confirmation-modal": "Are you sure you want to unfinalize this session ? Click on confirm to process."
       },
       "list": {
-        "v3-required-actions": "V3 sessions with required actions",
-        "v3-to-be-published": "V3 sessions to be published"
-      }
+        "all": "Toutes les sessions",
+        "required-actions": {
+          "v2": "Sessions with required actions",
+          "v3": "V3 sessions with required actions"
+        },
+        "to-be-published": {
+          "v2": "Sessions to be published",
+          "v3": "V3 sessions to be published"
+        }
+      },
+      "table": {
+        "required-actions": {
+          "caption": "Liste des sessions nécessitant un traitement par un interne Pix. Contient l'identifiant unique de la session, le nom du centre de certification, la date de finalisation et le nom de l'interne en charge du traitement.",
+          "checkbox-label": "Afficher uniquement mes sessions",
+          "headers": {
+            "assigned-officer-name": "Qui ?",
+            "certification-name": "Centre de certification",
+            "finalization-date": "Date de finalisation",
+            "id": "ID",
+            "session-date": "Date de session"
+          }
+        },
+        "to-be-published": {
+          "button-label": "Publier toutes les sessions",
+          "caption": "Liste des sessions pouvant être publiées. Contient l'identifiant unique de la session, le nom du centre de certification, la date de finalisation et un bouton pour publier la session. Ce bouton est disponible uniquement pour les internes Pix ayant les droits.",
+          "cell": {
+            "publish-button": {
+              "aria-label": "Publier la session numéro",
+              "label": "Publier"
+            }
+          },
+          "headers": {
+            "actions": "Actions",
+            "certification-name": "Centre de certification",
+            "finalization-date": "Date de finalisation",
+            "id": "ID",
+            "session-date": "Date de session"
+          },
+          "modals": {
+            "batch-publications": "Vous vous apprêtez à publier {length} session(s) de certification, souhaitez vous poursuivre ?",
+            "publication": "Souhaitez-vous publier la session ?"
+          }
+        }
+      },
+      "title": "Toutes les sessions"
     },
     "target-profiles": {
       "copy": {

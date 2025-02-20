@@ -1,6 +1,7 @@
 import { visit } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { createAuthenticateSession } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
@@ -165,8 +166,7 @@ module('Acceptance | authenticated/sessions/list/with required action', function
         const screen = await visit('/sessions/list/with-required-action');
 
         // when
-        await click('.x-toggle-btn');
-
+        await click(screen.getByRole('checkbox', { name: t('pages.sessions.table.required-actions.checkbox-label') }));
         // then
         assert.dom('table tbody tr').exists({ count: 1 });
         assert.dom(screen.getByText('Centre SCO des Anne-Étoiles')).exists();
