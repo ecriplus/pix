@@ -83,7 +83,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['MULTIPLE_SENDING_ASSESSMENT']: true },
+        features: { ['MULTIPLE_SENDING_ASSESSMENT']: { active: true, params: null } },
       });
       // when
       const enableMultipleSendingAssessment = model.enableMultipleSendingAssessment;
@@ -96,7 +96,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['MULTIPLE_SENDING_ASSESSMENT']: false },
+        features: { ['MULTIPLE_SENDING_ASSESSMENT']: { active: false, params: null } },
       });
       // when
       const enableMultipleSendingAssessment = model.enableMultipleSendingAssessment;
@@ -111,7 +111,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given && when
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['CAMPAIGN_WITHOUT_USER_PROFILE']: true },
+        features: { ['CAMPAIGN_WITHOUT_USER_PROFILE']: { active: true, params: null } },
       });
 
       // then
@@ -122,7 +122,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given && when
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['CAMPAIGN_WITHOUT_USER_PROFILE']: false },
+        features: { ['CAMPAIGN_WITHOUT_USER_PROFILE']: { active: false, params: null } },
       });
 
       // then
@@ -135,7 +135,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY']: true },
+        features: { ['COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY']: { active: true, params: null } },
       });
       // when
       const computeOrganizationLearnerCertificability = model.computeOrganizationLearnerCertificability;
@@ -148,7 +148,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY']: false },
+        features: { ['COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY']: { active: false, params: null } },
       });
       // when
       const computeOrganizationLearnerCertificability = model.computeOrganizationLearnerCertificability;
@@ -163,7 +163,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['PLACES_MANAGEMENT']: true },
+        features: { ['PLACES_MANAGEMENT']: { active: true, params: null } },
       });
       // when
       const placesManagement = model.placesManagement;
@@ -176,7 +176,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['PLACES_MANAGEMENT']: false },
+        features: { ['PLACES_MANAGEMENT']: { active: false, params: null } },
       });
       // when
       const placesManagement = model.placesManagement;
@@ -191,7 +191,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['ATTESTATIONS_MANAGEMENT']: true },
+        features: { ['ATTESTATIONS_MANAGEMENT']: { active: true, params: null } },
       });
       // when
       const attestationsManagement = model.attestationsManagement;
@@ -204,7 +204,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['ATTESTATIONS_MANAGEMENT']: false },
+        features: { ['ATTESTATIONS_MANAGEMENT']: { active: false, params: null } },
       });
       // when
       const attestationsManagement = model.attestationsManagement;
@@ -219,7 +219,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['MISSIONS_MANAGEMENT']: true },
+        features: { ['MISSIONS_MANAGEMENT']: { active: true, params: null } },
       });
       // when
       const missionsManagement = model.missionsManagement;
@@ -232,7 +232,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['MISSIONS_MANAGEMENT']: false },
+        features: { ['MISSIONS_MANAGEMENT']: { active: false, params: null } },
       });
       // when
       const missionsManagement = model.missionsManagement;
@@ -247,7 +247,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['LEARNER_IMPORT']: true },
+        features: { ['LEARNER_IMPORT']: { active: true, params: null } },
       });
 
       // when
@@ -261,7 +261,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['LEARNER_IMPORT']: false },
+        features: { ['LEARNER_IMPORT']: { active: false, params: null } },
       });
 
       // when
@@ -277,7 +277,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['COVER_RATE']: true },
+        features: { ['COVER_RATE']: { active: true, params: null } },
       });
 
       // when
@@ -291,7 +291,7 @@ module('Unit | Model | prescriber', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('prescriber', {
-        features: { ['COVER_RATE']: false },
+        features: { ['COVER_RATE']: { active: false, params: null } },
       });
 
       // when

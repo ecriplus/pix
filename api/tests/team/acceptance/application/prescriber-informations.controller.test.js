@@ -33,8 +33,8 @@ describe('Acceptance | Team | Application | Controller | prescriber-informations
           'participant-count': 0,
           lang: user.lang,
           features: {
-            [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: false,
-            [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: false,
+            [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false, params: null },
+            [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: false, params: null },
           },
         },
         relationships: {

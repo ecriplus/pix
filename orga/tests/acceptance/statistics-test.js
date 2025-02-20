@@ -28,7 +28,7 @@ module('Acceptance | Statistics', function (hooks) {
     test('user should access to page', async function (assert) {
       // given
       const user = createPrescriberForOrganization({ lang: 'fr' }, {}, 'ADMIN', {
-        COVER_RATE: true,
+        COVER_RATE: { active: true, params: null },
       });
       await authenticateSession(user.id);
 

@@ -348,6 +348,7 @@ export const buildQuests = async (databaseBuilder) => {
   databaseBuilder.factory.buildOrganizationFeature({
     organizationId: organization.id,
     featureId: FEATURE_ATTESTATIONS_MANAGEMENT_ID,
+    params: JSON.stringify([ATTESTATIONS.SIXTH_GRADE]),
   });
 
   // Associate tag to organization

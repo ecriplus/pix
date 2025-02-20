@@ -36,7 +36,7 @@ module('Acceptance | Missions List', function (hooks) {
       sinon.stub(domain, 'getJuniorBaseUrl').returns('https://junior.pix.fr');
 
       const user = createPrescriberForOrganization({ lang: 'fr' }, { schoolCode: 'BLABLA123' }, 'MEMBER', {
-        MISSIONS_MANAGEMENT: true,
+        MISSIONS_MANAGEMENT: { active: true, params: null },
       });
       await authenticateSession(user.id);
 
@@ -56,7 +56,7 @@ module('Acceptance | Missions List', function (hooks) {
         // given
         const user = createUserWithMembershipAndTermsOfServiceAccepted();
         const prescriber = createPrescriberByUser({ user });
-        prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: true };
+        prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: { active: true, params: null } };
         await authenticateSession(user.id);
 
         server.create('mission', { name: 'Super Mission', competenceName: 'Super competence', startedBy: 'CM2' });
@@ -71,7 +71,7 @@ module('Acceptance | Missions List', function (hooks) {
         // given
         const user = createUserWithMembershipAndTermsOfServiceAccepted();
         const prescriber = createPrescriberByUser({ user });
-        prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: true };
+        prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: { active: true, params: null } };
         await authenticateSession(user.id);
 
         server.create('mission', { name: 'Super Mission', competenceName: 'Super competence', startedBy: '' });
@@ -87,7 +87,7 @@ module('Acceptance | Missions List', function (hooks) {
       test('should display import button if user is admin of the current school', async function (assert) {
         // given
         const user = createPrescriberForOrganization({ lang: 'fr' }, {}, 'ADMIN', {
-          MISSIONS_MANAGEMENT: true,
+          MISSIONS_MANAGEMENT: { active: true, params: null },
         });
         await authenticateSession(user.id);
         server.create('mission', { name: 'Super Mission', competenceName: 'Super competence', startedBy: '' });
@@ -106,7 +106,7 @@ module('Acceptance | Missions List', function (hooks) {
       test('should not display import button if user is member of the current school', async function (assert) {
         // given
         const user = createPrescriberForOrganization({ lang: 'fr' }, {}, 'MEMBER', {
-          MISSIONS_MANAGEMENT: true,
+          MISSIONS_MANAGEMENT: { active: true, params: null },
         });
         await authenticateSession(user.id);
 
@@ -130,7 +130,7 @@ module('Acceptance | Missions List', function (hooks) {
       // given
       const user = createUserWithMembershipAndTermsOfServiceAccepted();
       const prescriber = createPrescriberByUser({ user });
-      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: true };
+      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: { active: true, params: null } };
       await authenticateSession(user.id);
 
       // when
@@ -144,7 +144,7 @@ module('Acceptance | Missions List', function (hooks) {
       // given
       const user = createUserWithMembershipAndTermsOfServiceAccepted();
       const prescriber = createPrescriberByUser({ user });
-      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: true };
+      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: { active: true, params: null } };
       await authenticateSession(user.id);
 
       server.create('mission', { id: 1, name: 'Super Mission', competenceName: 'Super competence' });
@@ -161,7 +161,7 @@ module('Acceptance | Missions List', function (hooks) {
     test('should not access to my-campaigns page', async function (assert) {
       const user = createUserWithMembershipAndTermsOfServiceAccepted();
       const prescriber = createPrescriberByUser({ user });
-      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: true };
+      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: { active: true, params: null } };
       await authenticateSession(user.id);
 
       server.create('mission', { id: 1, name: 'Super Mission', competenceName: 'Super competence' });
@@ -175,7 +175,7 @@ module('Acceptance | Missions List', function (hooks) {
     test('should not access to all-campaigns page', async function (assert) {
       const user = createUserWithMembershipAndTermsOfServiceAccepted();
       const prescriber = createPrescriberByUser({ user });
-      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: true };
+      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: { active: true, params: null } };
       await authenticateSession(user.id);
 
       server.create('mission', { id: 1, name: 'Super Mission', competenceName: 'Super competence' });
