@@ -4,13 +4,7 @@ import * as placementProfileService from '../../../../shared/domain/services/pla
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
 import * as knowledgeElementSnapshotRepository from '../../../campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import { ParticipantResultsShared } from '../../domain/models/ParticipantResultsShared.js';
-
-function _fetchUserIdAndSharedAt(campaignParticipationId) {
-  return knex('campaign-participations')
-    .select('userId', 'sharedAt')
-    .where('campaign-participations.id', campaignParticipationId)
-    .first();
-}
+import * as campaignParticipationRepository from './campaign-participation-repository.js';
 
 const participantResultsSharedRepository = {
   async save(participantResultShared) {
@@ -24,15 +18,13 @@ const participantResultsSharedRepository = {
     const knowledgeElements = await knowledgeElementSnapshotRepository.findByCampaignParticipationIds([
       campaignParticipationId,
     ]);
-    const { userId, sharedAt } = await _fetchUserIdAndSharedAt(campaignParticipationId);
     const competences = await competenceRepository.listPixCompetencesOnly();
+    const { userId, sharedAt, id } = await campaignParticipationRepository.get(campaignParticipationId);
 
-    const placementProfile = await placementProfileService.getPlacementProfileWithSnapshotting({
-      userId,
-      limitDate: sharedAt,
-      allowExcessPixAndLevels: false,
+    const [placementProfile] = await placementProfileService.getPlacementProfilesWithSnapshotting({
+      participations: [{ userId, sharedAt, campaignParticipationId: id }],
       competences,
-      campaignParticipationId,
+      allowExcessPixAndLevels: false,
     });
 
     return new ParticipantResultsShared({
