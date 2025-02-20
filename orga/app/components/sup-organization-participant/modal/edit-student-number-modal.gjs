@@ -1,7 +1,12 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixInput from '@1024pix/pix-ui/components/pix-input';
+import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
 
 export default class EditStudentNumberModal extends Component {
   @service notifications;
@@ -63,4 +68,46 @@ export default class EditStudentNumberModal extends Component {
     this.newStudentNumber = null;
     this.error = null;
   }
+
+  <template>
+    <PixModal
+      @title={{t "pages.sup-organization-participants.edit-student-number-modal.title"}}
+      @showModal={{@display}}
+      @onCloseButtonClick={{this.close}}
+    >
+      <:content>
+        <div class="edit-student-number-modal">
+          {{#if @student.studentNumber}}
+            <p>
+              {{t
+                "pages.sup-organization-participants.edit-student-number-modal.form.student-number"
+                firstName=@student.firstName
+                lastName=@student.lastName
+              }}<span class="edit-student-number-modal__student-number">{{@student.studentNumber}}</span></p>
+          {{/if}}
+
+          <div class="input-container">
+            <PixInput @id="editStudentNumber" {{on "change" this.setStudentNumber}}>
+              <:label>{{t
+                  "pages.sup-organization-participants.edit-student-number-modal.form.new-student-number-label"
+                }}</:label>
+            </PixInput>
+
+            <div class="form__error error-message">
+              {{this.error}}
+            </div>
+          </div>
+        </div>
+      </:content>
+      <:footer>
+        <PixButton @triggerAction={{this.close}} @variant="secondary">
+          {{t "common.actions.cancel"}}
+        </PixButton>
+
+        <PixButton @triggerAction={{this.updateStudentNumber}} @isDisabled={{this.isDisabled}}>
+          {{t "pages.sup-organization-participants.edit-student-number-modal.actions.update"}}
+        </PixButton>
+      </:footer>
+    </PixModal>
+  </template>
 }
