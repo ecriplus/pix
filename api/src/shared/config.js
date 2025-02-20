@@ -188,32 +188,6 @@ const configuration = (function () {
     apiManager: {
       url: process.env.APIM_URL || 'https://gateway.pix.fr',
     },
-    apimRegisterApplicationsCredentials: [
-      {
-        clientId: process.env.APIM_OSMOSE_CLIENT_ID,
-        clientSecret: process.env.APIM_OSMOSE_CLIENT_SECRET,
-        scope: 'organizations-certifications-result',
-        source: 'livretScolaire',
-      },
-      {
-        clientId: process.env.APIM_POLE_EMPLOI_CLIENT_ID,
-        clientSecret: process.env.APIM_POLE_EMPLOI_CLIENT_SECRET,
-        scope: 'pole-emploi-participants-result',
-        source: 'poleEmploi',
-      },
-      {
-        clientId: process.env.APIM_PIX_DATA_CLIENT_ID,
-        clientSecret: process.env.APIM_PIX_DATA_CLIENT_SECRET,
-        scope: 'statistics',
-        source: 'pixData',
-      },
-      {
-        clientId: process.env.APIM_PIX_PARCOURSUP_CLIENT_ID,
-        clientSecret: process.env.APIM_PIX_PARCOURSUP_CLIENT_SECRET,
-        scope: 'parcoursup',
-        source: 'parcoursup',
-      },
-    ],
     auditLogger: {
       isEnabled: toBoolean(process.env.PIX_AUDIT_LOGGER_ENABLED),
       baseUrl: process.env.PIX_AUDIT_LOGGER_BASE_URL,
@@ -353,22 +327,6 @@ const configuration = (function () {
       startJobInWebProcess: toBoolean(process.env.START_JOB_IN_WEB_PROCESS),
     },
     jwtConfig: {
-      livretScolaire: {
-        secret: process.env.LIVRET_SCOLAIRE_AUTH_SECRET,
-        tokenLifespan: process.env.TOKEN_LIFE_SPAN || '1h',
-      },
-      poleEmploi: {
-        secret: process.env.POLE_EMPLOI_AUTH_SECRET,
-        tokenLifespan: process.env.TOKEN_LIFE_SPAN || '1h',
-      },
-      pixData: {
-        secret: process.env.PIX_DATA_AUTH_SECRET,
-        tokenLifespan: process.env.TOKEN_LIFE_SPAN || '1h',
-      },
-      parcoursup: {
-        secret: process.env.PIX_PARCOURSUP_AUTH_SECRET,
-        tokenLifespan: process.env.TOKEN_LIFE_SPAN || '1h',
-      },
       certificationResults: {
         scope: process.env.CERTIFICATION_RESULTS_JWT_SCOPE || 'certificationResultsLink',
         tokenLifespan: process.env.CERTIFICATION_RESULTS_JWT_TOKEN_LIFE_SPAN || '30d',
@@ -599,33 +557,6 @@ const configuration = (function () {
 
     config.saml.accessTokenLifespanMs = 1000;
 
-    config.apimRegisterApplicationsCredentials = [
-      {
-        clientId: 'test-apimOsmoseClientId',
-        clientSecret: 'test-apimOsmoseClientSecret',
-        scope: 'organizations-certifications-result',
-        source: 'livretScolaire',
-      },
-      {
-        clientId: 'test-poleEmploiClientId',
-        clientSecret: 'test-poleEmploiClientSecret',
-        scope: 'pole-emploi-participants-result',
-        source: 'poleEmploi',
-      },
-      {
-        clientId: 'test-pixDataCliendId',
-        clientSecret: 'pixDataClientSecret',
-        scope: 'statistics',
-        source: 'pixData',
-      },
-      {
-        clientId: 'test-parcoursupClientId',
-        clientSecret: 'test-parcoursupClientSecret',
-        scope: 'parcoursup',
-        source: 'parcoursup',
-      },
-    ];
-
     config.cpf.storage = {
       cpfExports: {
         client: {
@@ -654,12 +585,6 @@ const configuration = (function () {
       recipient: 'team-all-star-certif-de-ouf@example.net',
       cron: '0 3 * * *',
     };
-
-    config.jwtConfig.livretScolaire.secret = 'test-secretOsmose';
-    config.jwtConfig.livretScolaire.tokenLifespan = '4h';
-    config.jwtConfig.poleEmploi.secret = 'test-secretPoleEmploi';
-    config.jwtConfig.pixData.secret = 'test-secretPixData';
-    config.jwtConfig.parcoursup.secret = 'test-secretPixParcoursup';
 
     config.logging.enabled = toBoolean(process.env.TEST_LOG_ENABLED);
     config.logging.enableLogKnexQueries = false;

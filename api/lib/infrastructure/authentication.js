@@ -1,13 +1,10 @@
 import boom from '@hapi/boom';
-import lodash from 'lodash';
 
 import { revokedUserAccessRepository } from '../../src/identity-access-management/infrastructure/repositories/revoked-user-access.repository.js';
 import { getForwardedOrigin } from '../../src/identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../src/shared/config.js';
 import { tokenService } from '../../src/shared/domain/services/token-service.js';
 import { monitoringTools } from '../../src/shared/infrastructure/monitoring-tools.js';
-
-const { find } = lodash;
 
 const schemes = {
   jwt: {
@@ -39,42 +36,6 @@ const strategies = {
       validate: validateClientApplication,
     },
   },
-
-  jwtLivretScolaire: {
-    name: 'jwt-livret-scolaire',
-    schemeName: schemes.jwt.name,
-    configuration: {
-      key: config.jwtConfig.livretScolaire.secret,
-      validate: validateClientApplication,
-    },
-  },
-
-  jwtPoleEmploi: {
-    name: 'jwt-pole-emploi',
-    schemeName: schemes.jwt.name,
-    configuration: {
-      key: config.jwtConfig.poleEmploi.secret,
-      validate: validateClientApplication,
-    },
-  },
-
-  jwtPixData: {
-    name: 'jwt-pix-data',
-    schemeName: schemes.jwt.name,
-    configuration: {
-      key: config.jwtConfig.pixData.secret,
-      validate: validateClientApplication,
-    },
-  },
-
-  jwtParcoursup: {
-    name: 'jwt-parcoursup',
-    schemeName: schemes.jwt.name,
-    configuration: {
-      key: config.jwtConfig.parcoursup.secret,
-      validate: validateClientApplication,
-    },
-  },
 };
 
 const authentication = {
@@ -86,7 +47,11 @@ async function validateUser(decodedAccessToken, { request, revokedUserAccessRepo
   // Only tokens including user_id are User Access Tokens.
   // This is why applications Access Tokens are not subject to audience validation for now.
   const userId = decodedAccessToken.user_id;
-  if (config.featureToggles.isUserTokenAudConfinementEnabled && userId) {
+  if (!userId) {
+    return { isValid: false };
+  }
+
+  if (config.featureToggles.isUserTokenAudConfinementEnabled) {
     const revokedUserAccess = await revokedUserAccessRepository.findByUserId(userId);
     if (revokedUserAccess.isAccessTokenRevoked(decodedAccessToken)) {
       monitoringTools.logWarnWithCorrelationIds({
@@ -112,10 +77,9 @@ async function validateUser(decodedAccessToken, { request, revokedUserAccessRepo
   return { isValid: true, credentials: { userId: decodedAccessToken.user_id } };
 }
 
-async function validateClientApplication(decodedAccessToken) {
-  const application = find(config.apimRegisterApplicationsCredentials, { clientId: decodedAccessToken.client_id });
-  if (!application) {
-    return { isValid: false, errorCode: 401 };
+export async function validateClientApplication(decodedAccessToken) {
+  if (!decodedAccessToken.client_id) {
+    return { isValid: false };
   }
 
   return {

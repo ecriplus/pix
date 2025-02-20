@@ -149,7 +149,7 @@ const register = async (server) => {
       method: 'GET',
       path: '/api/data/organization-places',
       config: {
-        auth: 'jwt-pix-data',
+        auth: { strategy: 'jwt-application', access: { scope: 'statistics' } },
         handler: organizationPlaceController.getDataOrganizationsPlacesStatistics,
         tags: ['api', 'organization-places', 'data'],
         notes: [
