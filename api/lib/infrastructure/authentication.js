@@ -47,7 +47,11 @@ async function validateUser(decodedAccessToken, { request, revokedUserAccessRepo
   // Only tokens including user_id are User Access Tokens.
   // This is why applications Access Tokens are not subject to audience validation for now.
   const userId = decodedAccessToken.user_id;
-  if (config.featureToggles.isUserTokenAudConfinementEnabled && userId) {
+  if (!userId) {
+    return { isValid: false };
+  }
+
+  if (config.featureToggles.isUserTokenAudConfinementEnabled) {
     const revokedUserAccess = await revokedUserAccessRepository.findByUserId(userId);
     if (revokedUserAccess.isAccessTokenRevoked(decodedAccessToken)) {
       monitoringTools.logWarnWithCorrelationIds({

@@ -1,6 +1,7 @@
 import { authentication, validateClientApplication, validateUser } from '../../../lib/infrastructure/authentication.js';
 import { RevokedUserAccess } from '../../../src/identity-access-management/domain/models/RevokedUserAccess.js';
 import { revokedUserAccessRepository } from '../../../src/identity-access-management/infrastructure/repositories/revoked-user-access.repository.js';
+import { config } from '../../../src/shared/config.js';
 import { tokenService } from '../../../src/shared/domain/services/token-service.js';
 import { expect, sinon } from '../../test-helper.js';
 
@@ -84,6 +85,44 @@ describe('Unit | Infrastructure | Authentication', function () {
   });
 
   describe('#validateUser', function () {
+    describe('when there is no user Id', function () {
+      it('should throw an error', async function () {
+        // given
+        const request = {
+          headers: {
+            authorization: 'Bearer token',
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'app.pix.fr',
+          },
+        };
+        const h = { authenticated: sinon.stub() };
+        tokenService.extractTokenFromAuthChain.withArgs('Bearer token').returns('token');
+        tokenService.getDecodedToken.withArgs('token', 'dummy-secret').returns({
+          aud: 'https://app.pix.fr',
+        });
+
+        sinon.stub(config.featureToggles, 'isUserTokenAudConfinementEnabled').value(false);
+
+        // when
+        const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
+          key: 'dummy-secret',
+          validate: (decodedAccessToken, options) =>
+            validateUser(decodedAccessToken, {
+              ...options,
+              revokedUserAccessRepository,
+            }),
+        });
+        const response = await authenticate(request, h);
+
+        // then
+        expect(response.output.payload).to.include({
+          statusCode: 401,
+          error: 'Unauthorized',
+          message: 'Unauthorized',
+        });
+      });
+    });
+
     describe('when isUserTokenAudConfinementEnabled is enabled', function () {
       describe('when there is a user Id', function () {
         describe('when the audience is different from the forwarded origin', function () {
@@ -233,38 +272,6 @@ describe('Unit | Infrastructure | Authentication', function () {
             // then
             expect(h.authenticated).to.have.been.calledWithExactly({ credentials: { userId: 'user_id' } });
           });
-        });
-      });
-
-      describe('when there is no user Id', function () {
-        it('should not throw an error', async function () {
-          // given
-          const request = {
-            headers: {
-              authorization: 'Bearer token',
-              'x-forwarded-proto': 'https',
-              'x-forwarded-host': 'app.pix.fr',
-            },
-          };
-          const h = { authenticated: sinon.stub() };
-          tokenService.extractTokenFromAuthChain.withArgs('Bearer token').returns('token');
-          tokenService.getDecodedToken.withArgs('token', 'dummy-secret').returns({
-            aud: 'https://app.pix.fr',
-          });
-
-          // when
-          const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
-            key: 'dummy-secret',
-            validate: (decodedAccessToken, options) =>
-              validateUser(decodedAccessToken, {
-                ...options,
-                revokedUserAccessRepository,
-              }),
-          });
-          await authenticate(request, h);
-
-          // then
-          expect(h.authenticated).to.have.been.calledWithExactly({ credentials: { userId: undefined } });
         });
       });
     });
