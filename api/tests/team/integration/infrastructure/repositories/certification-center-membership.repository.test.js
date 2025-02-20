@@ -906,6 +906,7 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
             disabledAt: now,
             updatedAt: now,
             updatedByUserId,
+            lastAccessedAt: null,
           },
           {
             ...secondMembership,
@@ -913,6 +914,7 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
             disabledAt: now,
             updatedAt: now,
             updatedByUserId,
+            lastAccessedAt: null,
           },
         ];
         const disabledMemberships = await knex('certification-center-memberships')
@@ -956,12 +958,14 @@ describe('Integration | Team | Infrastructure | Repository | Certification Cente
         const expectedMemberships = [
           {
             ...secondMembership,
+            lastAccessedAt: null,
           },
           {
             ...firstMembership,
             disabledAt: now,
             updatedAt: now,
             updatedByUserId,
+            lastAccessedAt: null,
           },
         ];
         const disabledMemberships = await knex('certification-center-memberships')
