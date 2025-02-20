@@ -76,7 +76,6 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
   context('when no answer already exists', function () {
     let completedAnswer;
     let savedAnswer;
-    let scorecard;
 
     beforeEach(function () {
       completedAnswer = domainBuilder.buildAnswer(answer);
