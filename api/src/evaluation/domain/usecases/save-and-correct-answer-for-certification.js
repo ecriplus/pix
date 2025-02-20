@@ -1,4 +1,3 @@
-import { AnswerJob } from '../../../quest/domain/models/AnwserJob.js';
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedBySupervisorError,
@@ -13,7 +12,6 @@ export async function saveAndCorrectAnswerForCertification({
   assessment,
   forceOKAnswer = false,
   answerRepository,
-  answerJobRepository,
   challengeRepository,
   certificationChallengeLiveAlertRepository,
   certificationEvaluationCandidateRepository,
@@ -62,10 +60,6 @@ export async function saveAndCorrectAnswerForCertification({
 
   const answerSaved = await answerRepository.saveWithKnowledgeElements(correctedAnswer, []);
   answerSaved.levelup = {};
-
-  if (userId) {
-    await answerJobRepository.performAsync(new AnswerJob({ userId }));
-  }
 
   return answerSaved;
 }

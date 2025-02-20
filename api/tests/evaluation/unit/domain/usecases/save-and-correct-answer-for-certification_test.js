@@ -26,8 +26,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
   let answerRepository,
     challengeRepository,
     certificationChallengeLiveAlertRepository,
-    certificationEvaluationCandidateRepository,
-    answerJobRepository;
+    certificationEvaluationCandidateRepository;
 
   const nowDate = new Date('2021-03-11T11:00:04Z');
   const locale = 'fr';
@@ -44,9 +43,6 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
     sinon.stub(KnowledgeElement, 'createKnowledgeElementsForAnswer');
     answerRepository = { saveWithKnowledgeElements: sinon.stub() };
     challengeRepository = { get: sinon.stub() };
-    answerJobRepository = {
-      performAsync: sinon.stub(),
-    };
     certificationChallengeLiveAlertRepository = { getOngoingOrValidatedByChallengeIdAndAssessmentId: sinon.stub() };
     certificationEvaluationCandidateRepository = { findByAssessmentId: sinon.stub() };
 
@@ -72,7 +68,6 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       challengeRepository,
       certificationChallengeLiveAlertRepository,
       certificationEvaluationCandidateRepository,
-      answerJobRepository,
       correctionService,
     };
   });
