@@ -1,5 +1,5 @@
-import * as solutionServiceQROCMInd from '../../../../lib/domain/services/solution-service-qrocm-ind.js';
 import { Validation } from '../../../shared/domain/models/Validation.js';
+import * as solutionServiceQROCMInd from '../services/solution/solution-service-qrocm-ind.js';
 import { Validator } from './Validator.js';
 
 /**

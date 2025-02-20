@@ -1,13 +1,13 @@
 import levenshtein from 'fast-levenshtein';
 import jsYaml from 'js-yaml';
 
-import { LEVENSHTEIN_DISTANCE_MAX_RATE } from '../../../src/shared/domain/constants.js';
-import { YamlParsingError } from '../../../src/shared/domain/errors.js';
-import { AnswerStatus } from '../../../src/shared/domain/models/AnswerStatus.js';
-import { _ } from '../../../src/shared/infrastructure/utils/lodash-utils.js';
-import { logger } from '../../../src/shared/infrastructure/utils/logger.js';
-import { useLevenshteinRatio } from './services-utils.js';
-import { applyPreTreatments, applyTreatments } from './validation-treatments.js';
+import { LEVENSHTEIN_DISTANCE_MAX_RATE } from '../../../../shared/domain/constants.js';
+import { YamlParsingError } from '../../../../shared/domain/errors.js';
+import { AnswerStatus } from '../../../../shared/domain/models/AnswerStatus.js';
+import { _ } from '../../../../shared/infrastructure/utils/lodash-utils.js';
+import { logger } from '../../../../shared/infrastructure/utils/logger.js';
+import { useLevenshteinRatio } from '../services-utils.js';
+import { applyPreTreatments, applyTreatments } from '../validation-treatments.js';
 
 function _applyTreatmentsToSolutions(solutions, enabledTreatments, qrocBlocksTypes = {}) {
   return _.forEach(solutions, (solution, solutionKey) => {

@@ -4,6 +4,11 @@ import fp from 'lodash/fp.js';
 const { pipe } = fp;
 import randomString from 'randomstring';
 
+import { isOneStringCloseEnoughFromMultipleStrings } from '../../../src/evaluation/domain/services/string-comparison-service.js';
+import {
+  normalizeAndRemoveAccents,
+  removeSpecialCharacters,
+} from '../../../src/evaluation/domain/services/validation-treatments.js';
 import { LEVENSHTEIN_DISTANCE_MAX_RATE, STUDENT_RECONCILIATION_ERRORS } from '../../../src/shared/domain/constants.js';
 import {
   AlreadyRegisteredUsernameError,
@@ -12,8 +17,6 @@ import {
   OrganizationLearnerAlreadyLinkedToUserError,
 } from '../../../src/shared/domain/errors.js';
 import { areTwoStringsCloseEnough } from '../../../src/shared/domain/services/string-comparison-service.js';
-import { isOneStringCloseEnoughFromMultipleStrings } from './string-comparison-service.js';
-import { normalizeAndRemoveAccents, removeSpecialCharacters } from './validation-treatments.js';
 
 const STRICT_MATCH_RATIO = 0;
 

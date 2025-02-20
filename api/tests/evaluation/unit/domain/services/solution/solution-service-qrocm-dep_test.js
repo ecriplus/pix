@@ -2,10 +2,10 @@ import {
   getCorrection,
   getCorrectionDetails,
   match,
-} from '../../../../lib/domain/services/solution-service-qrocm-dep.js';
-import { YamlParsingError } from '../../../../src/shared/domain/errors.js';
-import { AnswerStatus } from '../../../../src/shared/domain/models/AnswerStatus.js';
-import { catchErr, expect, sinon } from '../../../test-helper.js';
+} from '../../../../../../src/evaluation/domain/services/solution/solution-service-qrocm-dep.js';
+import { YamlParsingError } from '../../../../../../src/shared/domain/errors.js';
+import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
+import { catchErr, expect, sinon } from '../../../../../test-helper.js';
 
 const ANSWER_OK = AnswerStatus.OK;
 const ANSWER_KO = AnswerStatus.KO;
