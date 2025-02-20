@@ -11,15 +11,20 @@ export class User {
     this.#lastName = lastName;
   }
 
-  get fullName() {
-    return capitalize(this.#firstName) + ' ' + this.#lastName.toUpperCase();
+  get firstName() {
+    return capitalize(this.#firstName.toLowerCase());
+  }
+
+  get lastName() {
+    return this.#lastName.toUpperCase();
   }
 
   toForm(createdAt, locale) {
     const map = new Map();
 
-    map.set('fullName', this.fullName);
-    map.set('filename', this.fullName + Date.now());
+    map.set('firstName', this.firstName);
+    map.set('lastName', this.lastName);
+    map.set('filename', this.firstName + '_' + this.lastName + '_' + Date.now());
     map.set('date', createdAt.toLocaleDateString(locale));
 
     return map;

@@ -251,13 +251,13 @@
     },
     "campaigns": {
       "attestation-result": {
-        "title": {
-          "digital-awarness": "Digital awareness"
-        },
         "computing": "Attestation being calculated",
         "computing-description": "A technical problem prevents us from informing you about obtaining your certificate. Please reconnect tomorrow on Pix, section 'My journey', to consult your results. We apologize for the inconvenience caused.",
         "not-obtained": "Attestation not obtained",
-        "obtained": "Attestation obtained"
+        "obtained": "Attestation obtained",
+        "title": {
+          "digital-awarness": "Digital awareness"
+        }
       },
       "results-loader": {
         "steps": {

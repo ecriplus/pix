@@ -35,7 +35,7 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
       ];
 
       const screen = await render(<template><AttestationResult @results={{result}} /></template>);
-      const rewardTitle = t(`components.campaigns.attestation-result.${result[0].reward.key}.title`);
+      const rewardTitle = t(`components.campaigns.attestation-result.title.digital-awarness`);
       assert.dom(screen.getByText(rewardTitle)).exists();
     });
 
@@ -158,7 +158,7 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
       ];
 
       const screen = await render(<template><AttestationResult @results={{result}} /></template>);
-      const rewardTitle = t(`components.campaigns.attestation-result.SIXTH_GRADE.title`);
+      const rewardTitle = t(`components.campaigns.attestation-result.title.digital-awarness`);
       assert.dom(screen.getByText(rewardTitle)).exists();
     });
 

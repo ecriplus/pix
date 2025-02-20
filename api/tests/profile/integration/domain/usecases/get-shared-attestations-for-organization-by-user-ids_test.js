@@ -22,8 +22,8 @@ describe('Profile | Integration | Domain | get-shared-attestations-for-organizat
     it('should return profile rewards for given userIds', async function () {
       const locale = 'FR-fr';
       const attestation = databaseBuilder.factory.buildAttestation();
-      const firstUser = new User(databaseBuilder.factory.buildUser({ firstName: 'Alex', lastName: 'Terieur' }));
-      const secondUser = new User(databaseBuilder.factory.buildUser({ firstName: 'Theo', lastName: 'Courant' }));
+      const firstUser = new User(databaseBuilder.factory.buildUser({ firstName: 'alex', lastName: 'Terieur' }));
+      const secondUser = new User(databaseBuilder.factory.buildUser({ firstName: 'theo', lastName: 'Courant' }));
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId: firstUser.id });
       databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId: secondUser.id });
@@ -58,7 +58,8 @@ describe('Profile | Integration | Domain | get-shared-attestations-for-organizat
         data: [firstUser.toForm(firstProfileReward.createdAt, locale)],
         templateName: attestation.templateName,
       });
-      expect(results.data[0].get('fullName')).to.equal('Alex TERIEUR');
+      expect(results.data[0].get('firstName')).to.equal('Alex');
+      expect(results.data[0].get('lastName')).to.equal('TERIEUR');
     });
 
     it('should return AttestationNotFound error if attestation does not exist', async function () {
