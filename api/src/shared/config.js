@@ -281,7 +281,7 @@ const configuration = (function () {
       scheduleComputeOrganizationLearnersCertificability: {
         cron: process.env.SCHEDULE_COMPUTE_LEARNERS_CERTIFICABILITY_JOB_CRON || '0 21 * * *',
         chunkSize: process.env.SCHEDULE_COMPUTE_LEARNERS_CERTIFICABILITY_CHUNK_SIZE || 1000,
-        synchronously: process.env.SCHEDULE_COMPUTE_LEARNERS_CERTIFICABILITY_SYNCHRONOUSLY || false,
+        synchronously: toBoolean(process.env.SCHEDULE_COMPUTE_LEARNERS_CERTIFICABILITY_SYNCHRONOUSLY),
       },
       scoAccountRecoveryKeyLifetimeMinutes: process.env.SCO_ACCOUNT_RECOVERY_KEY_LIFETIME_MINUTES,
     },
