@@ -24,6 +24,7 @@ function getKnowlegdeElementSnapshotLimit(firstId, limit = DEFAULT_CHUNK_SIZE) {
     .where('id', '>=', firstId)
     .orderBy('id', 'asc');
 }
+
 function getKnowlegdeElementSnapshotCount() {
   return getKnowlegdeElementSnapshotsQuery().count({ count: 1 }).first();
 }

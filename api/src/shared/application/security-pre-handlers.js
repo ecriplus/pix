@@ -768,6 +768,7 @@ function makeCheckOrganizationHasFeature(featureKey) {
     }
   };
 }
+
 async function checkOrganizationHasFeature(request, h, dependencies = { checkOrganizationHasFeatureUseCase }) {
   try {
     const organizationId = request.params.organizationId || request.params.id;
