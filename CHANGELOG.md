@@ -1,5 +1,19 @@
 # Pix Changelog
 
+## v5.48.0 (20/02/2025)
+
+
+### :rocket: Amélioration
+- [#11417](https://github.com/1024pix/pix/pull/11417) [FEATURE] Affiche tous les badges du PC (Pix-16352).
+- [#11448](https://github.com/1024pix/pix/pull/11448) [FEATURE] Ajout du score global dans les resultats Parcoursup (PIX-16548).
+
+### :building_construction: Tech
+- [#11301](https://github.com/1024pix/pix/pull/11301) [TECH] Passer à node 22.
+- [#11415](https://github.com/1024pix/pix/pull/11415) [TECH] Suppression du FT_NEW_LEGAL_DOCUMENTS_VERSIONING (PIX-15591).
+
+### :bug: Correction
+- [#11440](https://github.com/1024pix/pix/pull/11440) [BUGFIX] Corriger une traduction anglaise sur le mail d'invitation à rejoindre un centre de certification (PIX-16587).
+
 ## v5.47.0 (19/02/2025)
 
 
