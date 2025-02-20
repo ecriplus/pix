@@ -1,11 +1,11 @@
 import { render } from '@1024pix/ember-testing-library';
 import { setupMirage } from 'ember-cli-mirage/test-support';
-import Header from 'pix-admin/components/complementary-certifications/attach-badges/badges/header';
+import ContentHeader from 'pix-admin/components/complementary-certifications/attach-badges/badges/content-header';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | ComplementaryCertifications::AttachBadges::Badges::Header', function (hooks) {
+module('Integration | Component | ComplementaryCertifications::AttachBadges::Badges::ContentHeader', function (hooks) {
   setupIntlRenderingTest(hooks);
   setupMirage(hooks);
 
@@ -13,9 +13,9 @@ module('Integration | Component | ComplementaryCertifications::AttachBadges::Bad
     // given & when
     const screen = await render(
       <template>
-        <Header>
+        <ContentHeader>
           LABEL
-        </Header>
+        </ContentHeader>
       </template>,
     );
 
@@ -29,10 +29,10 @@ module('Integration | Component | ComplementaryCertifications::AttachBadges::Bad
     // given & when
     const screen = await render(
       <template>
-        <Header>
+        <ContentHeader>
           <:default>Label</:default>
           <:tooltip>A compléter</:tooltip>
-        </Header>
+        </ContentHeader>
       </template>,
     );
 
@@ -45,9 +45,9 @@ module('Integration | Component | ComplementaryCertifications::AttachBadges::Bad
       // given & when
       const screen = await render(
         <template>
-          <Header>
+          <ContentHeader>
             LABEL
-          </Header>
+          </ContentHeader>
         </template>,
       );
 

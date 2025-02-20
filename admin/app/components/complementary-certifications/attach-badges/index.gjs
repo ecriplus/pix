@@ -185,14 +185,13 @@ export default class AttachBadges extends Component {
         <div class="attach-target-profile__actions">
           <PixButton
             @type="submit"
-            @size="large"
             @isDisabled={{this.isSubmitDisabled}}
             aria-disabled={{this.isSubmitDisabled}}
             @isLoading={{this.isSubmitting}}
           >
             Rattacher le profil cible
           </PixButton>
-          <PixButton @size="large" @variant="secondary" @triggerAction={{this.onCancel}}>
+          <PixButton @variant="secondary" @triggerAction={{this.onCancel}}>
             {{t "common.actions.cancel"}}
           </PixButton>
         </div>

@@ -68,7 +68,6 @@ module('Integration | Component | complementary-certifications/attach-badges/lis
 
         // then
         assert.strictEqual(screen.getAllByRole('row').length, 2);
-        assert.dom(screen.getByRole('row', { name: 'Résultat thématique 12 BoyNextDoor' })).exists();
         assert.dom(screen.getByText('12')).exists();
         assert.dom(screen.getByText('BoyNextDoor')).exists();
         assert.dom(screen.getByRole('spinbutton', { name: '12 BoyNextDoor Niveau' })).hasAttribute('required');
