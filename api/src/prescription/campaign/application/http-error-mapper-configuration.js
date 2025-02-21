@@ -5,8 +5,10 @@ import {
   CampaignUniqueCodeError,
   IsForAbsoluteNoviceUpdateError,
   MultipleSendingsUpdateError,
+  OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError,
   SwapCampaignMismatchOrganizationError,
   UnknownCampaignId,
+  UserNotAuthorizedToCreateCampaignError,
 } from '../../campaign/domain/errors.js';
 
 const campaignDomainErrorMappingConfiguration = [
@@ -39,6 +41,14 @@ const campaignDomainErrorMappingConfiguration = [
   {
     name: CampaignParticipationDoesNotBelongToUser.name,
     httpErrorFn: (error) => new HttpErrors.ForbiddenError(error.message, error.code, error.meta),
+  },
+  {
+    name: UserNotAuthorizedToCreateCampaignError.name,
+    httpErrorFn: (error) => new HttpErrors.ForbiddenError(error.message),
+  },
+  {
+    name: OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError.name,
+    httpErrorFn: (error) => new HttpErrors.ForbiddenError(error.message),
   },
 ];
 
