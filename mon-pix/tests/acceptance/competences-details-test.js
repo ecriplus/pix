@@ -2,6 +2,7 @@ import { visit } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
 import { click, currentURL, find } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -67,10 +68,10 @@ module("Acceptance | Competence details | Afficher la page de détails d'une co
 
     test('should transition to /competences when the user clicks on return', async function (assert) {
       // given
-      await visit(`/competences/${scorecardWithPoints.description}/details`);
+      const screen = await visit(`/competences/${scorecardWithPoints.description}/details`);
 
       // when
-      await click('.pix-return-to');
+      await click(screen.getByRole('link', { name: t('navigation.back-to-profile') }));
 
       // then
       assert.strictEqual(currentURL(), '/competences');

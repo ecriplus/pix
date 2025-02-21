@@ -65,7 +65,8 @@
   }
 
   &__header {
-    padding: 14px 14px 0;
+    width: fit-content;
+    padding: var(--pix-spacing-3x) var(--pix-spacing-3x) 0;
   }
 
   &__resume-or-start-button,
