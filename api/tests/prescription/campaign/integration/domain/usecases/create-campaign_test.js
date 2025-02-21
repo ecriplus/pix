@@ -6,7 +6,7 @@ import { createCampaign } from '../../../../../../src/prescription/campaign/doma
 import * as campaignAdministrationRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
 import * as campaignCreatorRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-creator-repository.js';
 import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
-import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
+import { CAMPAIGN_FEATURES, ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import * as codeGenerator from '../../../../../../src/shared/domain/services/code-generator.js';
 import { databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
 
@@ -42,6 +42,42 @@ describe('Integration | UseCases | create-campaign', function () {
     const campaign = {
       name: 'a name',
       type: CampaignTypes.ASSESSMENT,
+      title: 'a title',
+      externalIdLabel: 'id Pix label',
+      externalIdType: 'STRING',
+      customLandingPageText: 'Hello',
+      creatorId: userId,
+      ownerId: userId,
+      organizationId,
+      targetProfileId,
+    };
+
+    const expectedAttributes = ['type', 'title', 'externalIdLabel', 'name', 'customLandingPageText'];
+
+    // when
+    const result = await createCampaign({
+      campaign,
+      userRepository,
+      campaignAdministrationRepository,
+      campaignCreatorRepository,
+      codeGenerator,
+    });
+
+    // then
+    expect(result).to.be.an.instanceOf(Campaign);
+
+    expect(_.pick(result, expectedAttributes)).to.deep.equal(_.pick(campaign, expectedAttributes));
+  });
+
+  it('should save a new campaign of type EXAM', async function () {
+    const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.CAMPAIGN_WITHOUT_USER_PROFILE).id;
+
+    databaseBuilder.factory.buildOrganizationFeature({ featureId, organizationId });
+    await databaseBuilder.commit();
+    // given
+    const campaign = {
+      name: 'a name',
+      type: CampaignTypes.EXAM,
       title: 'a title',
       externalIdLabel: 'id Pix label',
       externalIdType: 'STRING',
