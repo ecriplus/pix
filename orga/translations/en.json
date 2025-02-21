@@ -742,6 +742,7 @@
       },
       "campaign-type": {
         "assessment": "Assessment campaign",
+        "exam": "Campagne de type examen",
         "profiles-collection": "Profiles collection campaign",
         "title": "Type of campaign"
       },

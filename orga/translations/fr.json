@@ -748,6 +748,7 @@
       },
       "campaign-type": {
         "assessment": "Campagne d'évaluation",
+        "exam": "Campagne de type examen",
         "profiles-collection": "Campagne de collecte de profils",
         "title": "Type de la campagne"
       },

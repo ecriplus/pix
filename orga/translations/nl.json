@@ -706,6 +706,7 @@
       },
       "campaign-type": {
         "assessment": "Beoordelingscampagne",
+        "exam": "Campagne de type examen",
         "profiles-collection": "Verzamelcampagne profielen",
         "title": "Soort campagne"
       },
