@@ -1,3 +1,5 @@
+import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
+import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 
@@ -22,4 +24,17 @@ export default class Thematic extends Component {
       this.args.unselectThematic(this.args.thematic);
     }
   }
+
+  <template>
+    <th scope="row" rowspan={{@thematic.tubes.length}}>
+      <PixCheckbox
+        @id="thematic-{{@thematic.id}}"
+        @checked={{this.isChecked}}
+        @isIndeterminate={{this.isIndeterminate}}
+        {{on "click" this.toggleThematic}}
+      >
+        <:label>{{@thematic.name}}</:label>
+      </PixCheckbox>
+    </th>
+  </template>
 }
