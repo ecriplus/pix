@@ -25,22 +25,6 @@ module('Integration | Component | certification-centers/information-edit', funct
   const onSubmit = sinon.stub();
 
   module('certification center edit form validation', function () {
-    test('it should display a checkbox to edit the isV3Pilot certification center status ', async function (assert) {
-      // when
-      const screen = await render(
-        <template><InformationEdit @certificationCenter={{certificationCenter}} /></template>,
-      );
-
-      // then
-      assert
-        .dom(
-          screen.getByRole('checkbox', {
-            name: 'Pilote Certification V3 (ce centre de certification ne pourra organiser que des sessions V3)',
-          }),
-        )
-        .exists();
-    });
-
     test("it should show an error message if certification center's name is empty", async function (assert) {
       // given
       const screen = await render(
@@ -210,11 +194,6 @@ module('Integration | Component | certification-centers/information-edit', funct
         await fillByLabel('Prénom du DPO', 'newFirstname');
         await fillByLabel('Nom du DPO', 'newLastname');
         await fillByLabel('Adresse e-mail du DPO', 'newMail@example.net');
-        await click(
-          screen.getByRole('checkbox', {
-            name: 'Pilote Certification V3 (ce centre de certification ne pourra organiser que des sessions V3)',
-          }),
-        );
 
         await click(screen.getByRole('button', { name: 'Enregistrer' }));
 
@@ -226,7 +205,7 @@ module('Integration | Component | certification-centers/information-edit', funct
         assert.strictEqual(certificationCenter.dataProtectionOfficerFirstName, 'newFirstname');
         assert.strictEqual(certificationCenter.dataProtectionOfficerLastName, 'newLastname');
         assert.strictEqual(certificationCenter.dataProtectionOfficerEmail, 'newMail@example.net');
-        assert.false(certificationCenter.isV3Pilot);
+        assert.true(certificationCenter.isV3Pilot);
       });
 
       test('it should add the habilitation to the certification center', async function (assert) {

@@ -7,7 +7,7 @@ const save = async function (certificationCenter) {
     name: certificationCenter.name,
     type: certificationCenter.type,
     externalId: certificationCenter.externalId,
-    isV3Pilot: certificationCenter.isV3Pilot,
+    isV3Pilot: true,
   });
   return _toDomain(certificationCenterCreated);
 };

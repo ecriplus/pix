@@ -20,13 +20,11 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       const certificationCenterId = 1;
       const certificationCenterName = 'CertificationCenterName';
       const certificationCenterType = 'SCO';
-      const certificationCenterIsV3Pilot = true;
 
       const center = databaseBuilder.factory.buildCertificationCenter({
         id: certificationCenterId,
         name: certificationCenterName,
         type: certificationCenterType,
-        isV3Pilot: certificationCenterIsV3Pilot,
       });
 
       const certificationCenterForAdmin = new CenterForAdmin({
@@ -41,7 +39,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       expect(savedCertificationCenter.id).to.exist;
       expect(savedCertificationCenter.name).to.equal(certificationCenterName);
       expect(savedCertificationCenter.type).to.equal(certificationCenterType);
-      expect(savedCertificationCenter.isV3Pilot).to.equal(certificationCenterIsV3Pilot);
+      expect(savedCertificationCenter.isV3Pilot).to.equal(true);
     });
   });
 

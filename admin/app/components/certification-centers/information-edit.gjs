@@ -40,11 +40,6 @@ export default class InformationEdit extends Component {
   }
 
   @action
-  updateIsV3Pilot(event) {
-    this.form.set('isV3Pilot', event.target.checked);
-  }
-
-  @action
   async updateGrantedHabilitation(habilitation) {
     const habilitations = await this.form.habilitations;
     if (habilitations.includes(habilitation)) {
@@ -70,7 +65,6 @@ export default class InformationEdit extends Component {
     this.args.certificationCenter.set('dataProtectionOfficerFirstName', this.form.dataProtectionOfficerFirstName);
     this.args.certificationCenter.set('dataProtectionOfficerLastName', this.form.dataProtectionOfficerLastName);
     this.args.certificationCenter.set('dataProtectionOfficerEmail', this.form.dataProtectionOfficerEmail);
-    this.args.certificationCenter.set('isV3Pilot', this.form.isV3Pilot);
 
     this.args.toggleEditMode();
     return this.args.onSubmit();
@@ -85,7 +79,6 @@ export default class InformationEdit extends Component {
       'dataProtectionOfficerFirstName',
       'dataProtectionOfficerLastName',
       'dataProtectionOfficerEmail',
-      'isV3Pilot',
     );
     this.form.setProperties({ ...properties, habilitations });
   }
@@ -183,10 +176,6 @@ export default class InformationEdit extends Component {
           {{this.form.validations.attrs.dataProtectionOfficerEmail.message}}
         </span>
       {{/if}}
-
-      <PixCheckbox @id="isV3Pilot" @size="small" onChange={{this.updateIsV3Pilot}} @checked={{this.form.isV3Pilot}}>
-        <:label>{{t "components.certification-centers.is-v3-pilot-label"}}</:label>
-      </PixCheckbox>
 
       <span class="field-label">Habilitations aux certifications complémentaires</span>
       <ul class="form-field certification-center-information__edit-form__habilitations-checkbox-list">
