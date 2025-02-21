@@ -2,6 +2,7 @@ import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants
 import { CampaignTypes } from '../../../shared/domain/constants.js';
 import {
   OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError,
+  OrganizationNotAuthorizedToCreateCampaignError,
   UserNotAuthorizedToCreateCampaignError,
 } from '../errors.js';
 import { CampaignForCreation } from './CampaignForCreation.js';
@@ -11,18 +12,20 @@ class CampaignCreator {
     this.availableTargetProfileIds = availableTargetProfileIds;
     this.isMultipleSendingsAssessmentEnable =
       organizationFeatures[ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key];
+    this.isCampaignWithoutUserProfileEnable =
+      organizationFeatures[ORGANIZATION_FEATURE.CAMPAIGN_WITHOUT_USER_PROFILE.key];
   }
 
   createCampaign(campaignAttributes) {
     const { type, targetProfileId, multipleSendings, organizationId } = campaignAttributes;
 
     if (type === CampaignTypes.ASSESSMENT) {
-      _checkAssessmentCampaignCreationAllowed(targetProfileId, this.availableTargetProfileIds);
-      _checkAssessmentCampaignMultipleSendingsCreationAllowed(
-        multipleSendings,
-        this.isMultipleSendingsAssessmentEnable,
-        organizationId,
-      );
+      this.#checkAssessmentCampaignCreationAllowed(targetProfileId);
+      this.#checkAssessmentCampaignMultipleSendingsCreationAllowed(multipleSendings, organizationId);
+    }
+
+    if (type === CampaignTypes.EXAM) {
+      this.#checkCampaignTypeExamCreationAllowed(organizationId);
     }
 
     return new CampaignForCreation(campaignAttributes);
@@ -39,6 +42,12 @@ class CampaignCreator {
   #checkAssessmentCampaignMultipleSendingsCreationAllowed(multipleSendings, organizationId) {
     if (!this.isMultipleSendingsAssessmentEnable && multipleSendings) {
       throw new OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError(organizationId);
+    }
+  }
+
+  #checkCampaignTypeExamCreationAllowed(organizationId) {
+    if (!this.isCampaignWithoutUserProfileEnable) {
+      throw new OrganizationNotAuthorizedToCreateCampaignError(organizationId, CampaignTypes.EXAM);
     }
   }
 }

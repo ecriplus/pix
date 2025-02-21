@@ -1,5 +1,6 @@
 import {
   OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError,
+  OrganizationNotAuthorizedToCreateCampaignError,
   UserNotAuthorizedToCreateCampaignError,
 } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import { CampaignCreator } from '../../../../../../src/prescription/campaign/domain/models/CampaignCreator.js';
@@ -109,6 +110,44 @@ describe('Unit | Domain | Models | CampaignCreator', function () {
           const error = await catchErr(creator.createCampaign, creator)(campaignData);
 
           expect(error).to.be.instanceOf(OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError);
+        });
+      });
+
+      describe('campaign without user profile', function () {
+        it('throws an error when campaign without user profile is not available', async function () {
+          organizationFeatures[ORGANIZATION_FEATURE.CAMPAIGN_WITHOUT_USER_PROFILE.key] = false;
+          const availableTargetProfileIds = [1, 2];
+          const creator = new CampaignCreator({ availableTargetProfileIds, organizationFeatures });
+          const campaignData = {
+            name: 'campagne utilisateur',
+            type: CampaignTypes.EXAM,
+            creatorId: 1,
+            ownerId: 1,
+            organizationId: 2,
+            targetProfileId: 2,
+          };
+
+          const error = await catchErr(creator.createCampaign, creator)(campaignData);
+
+          expect(error).to.be.instanceOf(OrganizationNotAuthorizedToCreateCampaignError);
+        });
+
+        it('should create a campaign if type exam when feature is enable', async function () {
+          organizationFeatures[ORGANIZATION_FEATURE.CAMPAIGN_WITHOUT_USER_PROFILE.key] = true;
+          const availableTargetProfileIds = [1, 2];
+          const creator = new CampaignCreator({ availableTargetProfileIds, organizationFeatures });
+          const campaignData = {
+            name: 'campagne utilisateur',
+            type: CampaignTypes.EXAM,
+            creatorId: 1,
+            ownerId: 1,
+            organizationId: 2,
+            targetProfileId: 2,
+          };
+
+          const result = creator.createCampaign(campaignData);
+
+          expect(result.type).to.be.equal(CampaignTypes.EXAM);
         });
       });
 
