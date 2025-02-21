@@ -22,6 +22,7 @@ export default class Prescriber extends Model {
       LEARNER_IMPORT: 'LEARNER_IMPORT',
       ORALIZATION: 'ORALIZATION',
       COVER_RATE: 'COVER_RATE',
+      CAMPAIGN_WITHOUT_USER_PROFILE: 'CAMPAIGN_WITHOUT_USER_PROFILE',
     };
   }
 
@@ -35,6 +36,10 @@ export default class Prescriber extends Model {
 
   get enableMultipleSendingAssessment() {
     return this.features[Prescriber.featureList.MULTIPLE_SENDING_ASSESSMENT];
+  }
+
+  get enableCampaignWithoutUserProfile() {
+    return this.features[Prescriber.featureList.CAMPAIGN_WITHOUT_USER_PROFILE];
   }
 
   get computeOrganizationLearnerCertificability() {
