@@ -1,5 +1,8 @@
+import { config } from '../../src/shared/config.js';
 import { datamartBuffer } from './datamart-buffer.js';
 import { factory } from './factory/index.js';
+
+const datamartDbSchema = config.parcoursup.databaseSchema;
 
 /**
  * @class DatamartBuilder
@@ -43,11 +46,12 @@ class DatamartBuilder {
   async clean() {
     let rawQuery = '';
 
-    ['data_export_parcoursup_certif_result', 'data_export_parcoursup_certif_result_code_validation'].forEach(
-      (tableName) => {
-        rawQuery += `DELETE FROM ${tableName};`;
-      },
-    );
+    [
+      `${datamartDbSchema}.data_export_parcoursup_certif_result`,
+      `${datamartDbSchema}.data_export_parcoursup_certif_result_code_validation`,
+    ].forEach((tableName) => {
+      rawQuery += `DELETE FROM ${tableName};`;
+    });
 
     try {
       await this.knex.raw(rawQuery);

@@ -9,6 +9,7 @@ const baseConfiguration = {
   migrationsDirectory: './migrations/',
   seedsDirectory: './seeds/',
   databaseUrl: process.env.DATAMART_DATABASE_URL,
+  databaseSchema: process.env.DATAMART_DATABASE_SCHEMA || 'public',
 };
 
 const environments = {

@@ -1,7 +1,10 @@
 import { datamartKnex } from '../../../../../db/knex-database-connection.js';
+import { config } from '../../../../shared/config.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationResult } from '../../domain/read-models/parcoursup/CertificationResult.js';
 import { Competence } from '../../domain/read-models/parcoursup/Competence.js';
+
+const datamartDbSchema = config.parcoursup.databaseSchema;
 
 const getByINE = async ({ ine }) => {
   return _getBySearchParams({
@@ -19,7 +22,7 @@ const getByOrganizationUAI = async ({ organizationUai, lastName, firstName, birt
 };
 
 const _getBySearchParams = async (searchParams) => {
-  const certificationResultDto = await datamartKnex('data_export_parcoursup_certif_result')
+  const certificationResultDto = await datamartKnex(`${datamartDbSchema}.data_export_parcoursup_certif_result`)
     .select({
       national_student_id: 'national_student_id',
       organization_uai: 'organization_uai',
@@ -58,7 +61,9 @@ const _getBySearchParams = async (searchParams) => {
 };
 
 const getByVerificationCode = async ({ verificationCode }) => {
-  const certificationResultDto = await datamartKnex('data_export_parcoursup_certif_result_code_validation')
+  const certificationResultDto = await datamartKnex(
+    `${datamartDbSchema}.data_export_parcoursup_certif_result_code_validation`,
+  )
     .select({
       last_name: 'last_name',
       first_name: 'first_name',

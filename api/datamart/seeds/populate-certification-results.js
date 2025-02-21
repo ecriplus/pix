@@ -1,18 +1,18 @@
 import { faker } from '@faker-js/faker';
 
+import { config } from '../../src/shared/config.js';
 import caseINEok from './cases/ine-ok.js';
-import caseSameINEDifferentPerson from './cases/same-INE-different-person.js';
+import caseSameINEDifferentPerson from './cases/same-ine-different-person.js';
 import caseSamePersonDifferentBirthdate from './cases/same-person-different-birthdate.js';
 import caseSpecialNames from './cases/special-names.js';
 import caseUAIok from './cases/uai-ok.js';
 import caseVerificationCodeOK from './cases/verification-code-only.js';
 
+const datamartDbSchema = config.parcoursup.databaseSchema;
 const NUMBER_OF_SEEDS = Number(process.env.DATAMART_NUMBER_OF_SEEDS) || 100;
 
 const insertScoDatamart = async (knex) => {
-  const scoDatamart = 'data_export_parcoursup_certif_result';
-
-  await knex(scoDatamart).truncate();
+  const scoDatamart = `${datamartDbSchema}.data_export_parcoursup_certif_result`;
 
   // Case 1 : INE ok
   await knex.batchInsert(scoDatamart, faker.helpers.multiple(caseINEok, { count: NUMBER_OF_SEEDS }).flat());
@@ -33,7 +33,7 @@ const insertScoDatamart = async (knex) => {
 };
 
 const insertGeneralPublicDatamart = async (knex) => {
-  const generalPublicDatamart = 'data_export_parcoursup_certif_result_code_validation';
+  const generalPublicDatamart = `${datamartDbSchema}.data_export_parcoursup_certif_result_code_validation`;
   await knex(generalPublicDatamart).truncate();
   await knex.batchInsert(
     generalPublicDatamart,
