@@ -559,6 +559,8 @@
         "title": "Campaign owner"
       },
       "purpose": {
+        "exam": "exam",
+        "exam-info": "Une campagne d’évaluation permet de tester les participants sur des sujets précis, sans prendre en compte le profil utilisateur.",
         "assessment": "Assess participants",
         "assessment-info": "An assessment campaign tests participants on specific topics.",
         "label": "What is the purpose of your campaign?",

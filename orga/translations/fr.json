@@ -566,6 +566,8 @@
       },
       "purpose": {
         "assessment": "Évaluer les participants",
+        "exam": "exam",
+        "exam-info": "Une campagne d’évaluation permet de tester les participants sur des sujets précis, sans prendre en compte le profil utilisateur.",
         "assessment-info": "Une campagne d’évaluation permet de tester les participants sur des sujets précis.",
         "label": "Quel est l'objectif de votre campagne ?",
         "profiles-collection": "Collecter les profils Pix des participants",
