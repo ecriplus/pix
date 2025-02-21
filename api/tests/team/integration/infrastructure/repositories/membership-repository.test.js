@@ -785,6 +785,7 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
               updatedAt: now,
               disabledAt: now,
               updatedByUserId,
+              lastAccessedAt: null,
             },
             {
               ...secondOrganizationMembership,
@@ -792,6 +793,7 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
               updatedAt: now,
               disabledAt: now,
               updatedByUserId,
+              lastAccessedAt: null,
             },
           ];
           // when
@@ -840,12 +842,14 @@ describe('Integration | Team | Infrastructure | Repository | membership-reposito
           const expectedMemberships = [
             {
               ...firstMembership,
+              lastAccessedAt: null,
             },
             {
               ...secondMembership,
               disabledAt: now,
               updatedAt: now,
               updatedByUserId: actualDpoId,
+              lastAccessedAt: null,
             },
           ];
           const disabledMemberships = await knex('memberships')
