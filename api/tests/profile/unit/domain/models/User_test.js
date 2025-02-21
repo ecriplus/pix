@@ -16,12 +16,20 @@ describe('Unit | Profile | Domain | Models | User', function () {
     clock.restore();
   });
 
-  it('should return fullname', function () {
+  it('should return lastName', function () {
     // when
     const user = new User({ firstName: 'Théo', lastName: 'Courant' });
 
     // then
-    expect(user.fullName).to.equal('Théo COURANT');
+    expect(user.lastName).to.equal('COURANT');
+  });
+
+  it('should return firstName', function () {
+    // when
+    const user = new User({ firstName: 'théo', lastName: 'Courant' });
+
+    // then
+    expect(user.firstName).to.equal('Théo');
   });
 
   it('should transform to form', function () {
@@ -33,8 +41,9 @@ describe('Unit | Profile | Domain | Models | User', function () {
     const form = user.toForm(date, 'FR-fr');
 
     // then
-    expect(form.get('fullName')).to.deep.equal(user.fullName);
-    expect(form.get('filename')).to.deep.equal(user.fullName + Date.now());
+    expect(form.get('firstName')).to.deep.equal(user.firstName);
+    expect(form.get('lastName')).to.deep.equal(user.lastName);
+    expect(form.get('filename')).to.deep.equal(user.firstName + '_' + user.lastName + '_' + Date.now());
     expect(form.get('date')).to.deep.equal('02/10/2024');
   });
 });

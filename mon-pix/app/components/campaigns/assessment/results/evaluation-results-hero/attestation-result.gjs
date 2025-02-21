@@ -19,7 +19,7 @@ export default class AttestationResult extends Component {
   }
 
   get resultTitle() {
-    return `components.campaigns.attestation-result.${this.result.reward.key}.title`;
+    return `components.campaigns.attestation-result.title.digital-awarness`;
   }
 
   @action async onClick() {
