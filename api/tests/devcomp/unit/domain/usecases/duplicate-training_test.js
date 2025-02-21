@@ -72,7 +72,7 @@ describe('Unit | Devcomp | Domain | UseCases | duplicate-training', function () 
       get: sinon.stub().resolves(training),
       create: sinon.stub().resolves(newTraining),
     };
-    const trainingTriggersRepositoryStub = {
+    const trainingTriggerRepositoryStub = {
       findByTrainingIdForAdmin: sinon.stub().resolves([trainingTrigger]),
       createOrUpdate: sinon.stub(),
     };
@@ -83,7 +83,7 @@ describe('Unit | Devcomp | Domain | UseCases | duplicate-training', function () 
     const result = await duplicateTraining({
       trainingId,
       trainingRepository: trainingRepositoryStub,
-      trainingTriggersRepository: trainingTriggersRepositoryStub,
+      trainingTriggerRepository: trainingTriggerRepositoryStub,
     });
 
     // then
@@ -91,8 +91,8 @@ describe('Unit | Devcomp | Domain | UseCases | duplicate-training', function () 
     expect(trainingRepositoryStub.create).to.have.been.calledWithExactly({
       training,
     });
-    expect(trainingTriggersRepositoryStub.findByTrainingIdForAdmin).to.have.been.calledWithExactly({ trainingId });
-    expect(trainingTriggersRepositoryStub.createOrUpdate).to.have.been.calledWithExactly({
+    expect(trainingTriggerRepositoryStub.findByTrainingIdForAdmin).to.have.been.calledWithExactly({ trainingId });
+    expect(trainingTriggerRepositoryStub.createOrUpdate).to.have.been.calledWithExactly({
       trainingId: newTraining.id,
       triggerTubesForCreation: [
         { tubeId: tube1.id, level: 1 },
