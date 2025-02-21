@@ -50,7 +50,7 @@ const serialize = function (campaignReports, meta) {
     badges: {
       ref: 'id',
       included: true,
-      attributes: ['title'],
+      attributes: ['title', 'altMessage', 'imageUrl'],
     },
     campaignCollectiveResult: {
       ref: 'id',
