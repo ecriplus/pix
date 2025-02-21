@@ -92,6 +92,11 @@
       "title": "Beschikbare plaatsen",
       "value": "/{total} plaatsen"
     },
+    "badges-acquisitions": {
+      "information": "Hier vind je het aantal thematische resultaten die je deelnemers in deze campagne hebben behaald en hun percentage.",
+      "obtained": "verkregen",
+      "title": "Thematische resultaten"
+    },
     "occupied-seats-count": {
       "anonymous": "inclusief {count, plural, =1 {1 plaats} other {{count, number} plaatsen}} met toegang zonder account",
       "title": "Plaatsen bezet",

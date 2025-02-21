@@ -92,6 +92,11 @@
       "title": "Seats available",
       "value": "/{total} seats"
     },
+    "badges-acquisitions": {
+      "information": "Find here the number of Thematic Results obtained by your participants in this campaign as well as their percentage.",
+      "obtained": "obtained",
+      "title": "Thematic results"
+    },
     "occupied-seats-count": {
       "anonymous": "including {count, plural, =1 {1 seat} other {{count, number} seats}} with no-account access",
       "title": "Seats occupied",

@@ -1,3 +1,5 @@
+@use 'pix-design-tokens/breakpoints';
+
 .participants-by-stage {
   position: relative;
   display: flex;
@@ -33,6 +35,10 @@
   }
 
   &__container {
+    @include breakpoints.device-is('mobile') {
+      display: none;
+    }
+
     flex-grow: 1;
 
     .pix-tooltip__content {
