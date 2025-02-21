@@ -16,6 +16,7 @@ describe('Integration | UseCase | find-assessment-participation-result-list', fu
       organizationId,
       userId,
     });
+
     campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
     databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: skill.id });
 
