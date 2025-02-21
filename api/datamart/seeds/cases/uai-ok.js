@@ -1,0 +1,37 @@
+import { faker } from '@faker-js/faker';
+
+import {
+  COMPETENCES,
+  generateCertifCourseId,
+  generateCompetenceLevel,
+  generatePixScore,
+  generateStatus,
+  orgaUAIGenerator,
+} from './tools.js';
+
+const generateOrgaUai = orgaUAIGenerator();
+
+/**
+ * A student that has a V3 certification and that can be found by UAI but not by INE
+ */
+export default function () {
+  const orgaUAI = generateOrgaUai();
+
+  const studentBase = {
+    certification_courses_id: generateCertifCourseId(),
+    organization_uai: orgaUAI,
+    national_student_id: null, // We do not want it to be accessible by INE
+    last_name: 'Famille' + orgaUAI,
+    first_name: 'Prenom' + orgaUAI,
+    birthdate: '1999-11-12',
+    status: generateStatus(),
+    pix_score: generatePixScore(),
+    certification_date: faker.date.between({ from: '2024-01-01', to: '2024-11-04' }),
+  };
+
+  return COMPETENCES.map((competence) => ({
+    ...studentBase,
+    ...competence,
+    competence_level: generateCompetenceLevel(),
+  }));
+}
