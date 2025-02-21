@@ -8,7 +8,7 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
   describe('#getByIdForAnswerVerification', function () {
     it('should return an element from a component element', async function () {
       // given
-      const moduleId = 'didacticiel-modulix';
+      const moduleId = 'bac-a-sable';
       const elementId = '71de6394-ff88-4de3-8834-a40057a50ff4';
       const element = new QCUForAnswerVerification({
         id: elementId,
@@ -37,8 +37,8 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
       };
       moduleDatasourceStub.getBySlug.withArgs(moduleId).resolves({
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
-        slug: 'didacticiel-modulix',
-        title: 'Didacticiel Modulix',
+        slug: 'bac-a-sable',
+        title: 'Bac à sable',
         details: {
           image: 'https://images.pix.fr/modulix/placeholder-details.svg',
           description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',
@@ -97,7 +97,7 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
 
     it('should return an element from a component stepper', async function () {
       // given
-      const moduleId = 'didacticiel-modulix';
+      const moduleId = 'bac-a-sable';
       const elementId = '71de6394-ff88-4de3-8834-a40057a50ff4';
       const element = new QCUForAnswerVerification({
         id: elementId,
@@ -126,8 +126,8 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
       };
       moduleDatasourceStub.getBySlug.withArgs(moduleId).resolves({
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
-        slug: 'didacticiel-modulix',
-        title: 'Didacticiel Modulix',
+        slug: 'bac-a-sable',
+        title: 'Bac à sable',
         details: {
           image: 'https://images.pix.fr/modulix/placeholder-details.svg',
           description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',
@@ -259,8 +259,8 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
       // given
       const moduleData = {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
-        slug: 'didacticiel-modulix',
-        title: 'Didacticiel Modulix',
+        slug: 'bac-a-sable',
+        title: 'Bac à sable',
         details: {
           image: 'https://images.pix.fr/modulix/placeholder-details.svg',
           description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',

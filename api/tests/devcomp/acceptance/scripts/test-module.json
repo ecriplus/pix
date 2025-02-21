@@ -1,7 +1,7 @@
 {
   "id": "6282925d-4775-4bca-b513-4c3009ec5886",
-  "slug": "didacticiel-modulix",
-  "title": "Didacticiel Modulix",
+  "slug": "bac-a-sable",
+  "title": "Bac à sable",
   "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
@@ -9,10 +9,7 @@
     "duration": 5,
     "level": "Débutant",
     "tabletSupport": "inconvenient",
-    "objectives": [
-      "Naviguer dans Modulix",
-      "Découvrir les leçons et les activités"
-    ]
+    "objectives": ["Naviguer dans Modulix", "Découvrir les leçons et les activités"]
   },
   "transitionTexts": [
     {
@@ -301,11 +298,7 @@
               "valid": "<span class=\"feedback__state\">Correct&#8239;!</span><p>Vous nous avez bien cernés&nbsp;:)</p>",
               "invalid": "<span class=\"feedback__state\">Et non&#8239;!</span><p> Pix sert à évaluer, certifier et développer ses compétences numériques.</p>"
             },
-            "solutions": [
-              "1",
-              "3",
-              "4"
-            ]
+            "solutions": ["1", "3", "4"]
           }
         }
       ]
@@ -335,13 +328,8 @@
                 "placeholder": "",
                 "ariaLabel": "Mot à trouver",
                 "defaultValue": "",
-                "tolerances": [
-                  "t1",
-                  "t3"
-                ],
-                "solutions": [
-                  "Groupement"
-                ]
+                "tolerances": ["t1", "t3"],
+                "solutions": ["Groupement"]
               },
               {
                 "type": "text",
@@ -357,9 +345,7 @@
                 "ariaLabel": "Année à trouver",
                 "defaultValue": "",
                 "tolerances": [],
-                "solutions": [
-                  "2016"
-                ]
+                "solutions": ["2016"]
               }
             ],
             "feedbacks": {
