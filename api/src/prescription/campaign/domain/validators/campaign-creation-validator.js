@@ -7,7 +7,7 @@ import { CampaignExternalIdTypes, CampaignTypes } from '../../../shared/domain/c
 const { first } = lodash;
 const schema = Joi.object({
   type: Joi.string()
-    .valid(CampaignTypes.ASSESSMENT, CampaignTypes.PROFILES_COLLECTION)
+    .valid(...Object.values(CampaignTypes))
     .required()
     .error((errors) => first(errors))
     .messages({
@@ -89,7 +89,7 @@ const schema = Joi.object({
           then: Joi.valid(null).optional(),
         },
         {
-          is: Joi.string().required().valid(CampaignTypes.ASSESSMENT),
+          is: Joi.string().required().valid(CampaignTypes.ASSESSMENT, CampaignTypes.EXAM),
           then: Joi.required(),
         },
       ],
