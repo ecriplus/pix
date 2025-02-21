@@ -201,6 +201,26 @@ describe('Acceptance | Controller | training-controller', function () {
     });
   });
 
+  describe('POST /api/admin/trainings/{trainingId}/duplicate', function () {
+    it('should duplicate an existing training and response with a 201', async function () {
+      // given
+      const superAdmin = await insertUserWithRoleSuperAdmin();
+      const training = databaseBuilder.factory.buildTraining();
+      await databaseBuilder.commit();
+
+      // when
+      const response = await server.inject({
+        method: 'POST',
+        url: `/api/admin/trainings/${training.id}/duplicate`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+      });
+
+      // then
+      expect(response.statusCode).to.equal(201);
+      expect(response.result.trainingId).to.exist;
+    });
+  });
+
   describe('PATCH /api/admin/trainings/{trainingId}', function () {
     let options;
 

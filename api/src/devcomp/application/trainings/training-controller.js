@@ -35,6 +35,12 @@ const create = async function (request, h, dependencies = { trainingSerializer }
   return h.response(dependencies.trainingSerializer.serialize(createdTraining)).created();
 };
 
+const duplicate = async function (request, h) {
+  const trainingId = request.params.trainingId;
+  const createdTraining = await usecases.duplicateTraining({ trainingId });
+  return h.response({ trainingId: createdTraining.id }).created();
+};
+
 const update = async function (request, h, dependencies = { trainingSerializer }) {
   const { trainingId } = request.params;
   const training = await dependencies.trainingSerializer.deserialize(request.payload);
@@ -98,6 +104,7 @@ const trainingController = {
   findTargetProfileSummaries,
   getById,
   create,
+  duplicate,
   update,
   createOrUpdateTrigger,
   attachTargetProfiles,

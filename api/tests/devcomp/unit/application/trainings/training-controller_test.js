@@ -156,6 +156,34 @@ describe('Unit | Devcomp | Application | Trainings | Controller | training-contr
     });
   });
 
+  describe('#duplicate', function () {
+    const createdTraining = {
+      id: 124,
+      title: 'Training title',
+      internalTitle: '[Copie] Training internal title',
+      duration: {
+        days: 2,
+        hours: 2,
+        minutes: 2,
+      },
+    };
+
+    it('should call the duplicateTraining use-case', async function () {
+      // given
+      sinon.stub(usecases, 'duplicateTraining').resolves(createdTraining);
+      const trainingId = 123;
+      const request = { params: { trainingId } };
+      const expectedSerializedTraining = { trainingId: createdTraining.id };
+
+      // when
+      const response = await trainingController.duplicate(request, hFake);
+
+      // then
+      expect(usecases.duplicateTraining).to.have.been.calledOnceWithExactly({ trainingId });
+      expect(response.source).to.deep.equal(expectedSerializedTraining);
+    });
+  });
+
   describe('#update', function () {
     const deserializedTraining = { title: 'new title' };
     const updatedTraining = { title: 'new title' };
