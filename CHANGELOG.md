@@ -1,5 +1,27 @@
 # Pix Changelog
 
+## v5.49.0 (21/02/2025)
+
+
+### :rocket: Amélioration
+- [#11441](https://github.com/1024pix/pix/pull/11441) [FEATURE] Créer un centre de certification en pilote V3 par défaut (PIX-16601).
+- [#11437](https://github.com/1024pix/pix/pull/11437) [FEATURE] Ajouter PixTable dans les tableaux des sessions sur Pix Admin (PIX-16591).
+- [#11456](https://github.com/1024pix/pix/pull/11456) [FEATURE] Utiliser les applications clientes en Bdd.
+
+### :building_construction: Tech
+- [#11457](https://github.com/1024pix/pix/pull/11457) [TECH] Utiliser la CLI de GitHub pour commenter les pull request de modulix.
+- [#11454](https://github.com/1024pix/pix/pull/11454) [TECH] Créer nouvel usecase de duplication d'un CF (PIX-16643).
+- [#11416](https://github.com/1024pix/pix/pull/11416) [TECH] Déplacer les services solution dans le scope evaluation (PIX-16574).
+
+### :bug: Correction
+- [#11466](https://github.com/1024pix/pix/pull/11466) [BUGFIX] Convertir la valeur de la variable de certificabilitée en booléen (PIX-16515).
+
+### :arrow_up: Montée de version
+- [#11463](https://github.com/1024pix/pix/pull/11463) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.0 (junior).
+- [#11462](https://github.com/1024pix/pix/pull/11462) [BUMP] Update nginx Docker tag to v1.27.4.
+- [#11461](https://github.com/1024pix/pix/pull/11461) [BUMP] Update dependency browser-tools to v1.5.2 (.circleci).
+- [#11445](https://github.com/1024pix/pix/pull/11445) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.0 (api).
+
 ## v5.48.0 (20/02/2025)
 
 
