@@ -1,13 +1,15 @@
 {{page-title this.pageTitle replace=true}}
 <div class="finalize">
   <div class="finalize__title">
-    <PixReturnTo
+    <PixButtonLink
       @route="authenticated.sessions.details"
       @model={{this.session.id}}
+      @variant="tertiary"
+      @iconBefore="arrowLeft"
       class="previous-button hide-on-mobile"
     >
       {{t "common.sessions.actions.return-to"}}
-    </PixReturnTo>
+    </PixButtonLink>
     <h1 class="page-title">{{t "pages.session-finalization.title" sessionId=this.session.id}}</h1>
   </div>
   <SessionFinalizationStepContainer

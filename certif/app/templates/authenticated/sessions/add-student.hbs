@@ -1,13 +1,14 @@
 {{page-title this.pageTitle replace=true}}
 <div class="add-student">
-
-  <PixReturnTo
+  <PixButtonLink
     @route="authenticated.sessions.details.certification-candidates"
     @model={{@model.session.id}}
+    @variant="tertiary"
+    @iconBefore="arrowLeft"
     class="previous-button hide-on-mobile"
   >
     {{t "common.sessions.actions.return-to"}}
-  </PixReturnTo>
+  </PixButtonLink>
 
   <h1 class="page-title">{{t "pages.sco.enrol-candidates-in-session.title"}}</h1>
   <PixNotificationAlert @type="info" @withIcon={{true}} class="add-student__info-message">

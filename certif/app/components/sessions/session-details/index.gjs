@@ -1,4 +1,4 @@
-import PixReturnTo from '@1024pix/pix-ui/components/pix-return-to';
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -63,9 +63,14 @@ export default class SessionDetails extends Component {
   }
 
   <template>
-    <PixReturnTo @route='authenticated.sessions' class='previous-button hide-on-mobile'>
+    <PixButtonLink
+      @route='authenticated.sessions'
+      @variant='tertiary'
+      @iconBefore='arrowLeft'
+      class='previous-button hide-on-mobile'
+    >
       {{t 'pages.sessions.actions.return'}}
-    </PixReturnTo>
+    </PixButtonLink>
     <SessionDetailsHeader
       @sessionId={{@model.session.id}}
       @sessionDate={{@model.session.date}}
