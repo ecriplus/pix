@@ -1,0 +1,11 @@
+<template>
+  <div class="form-field">
+    <div class="form-field__element">
+      {{yield}}
+    </div>
+
+    <div class="form-field__information">
+      {{yield to="information"}}
+    </div>
+  </div>
+</template>

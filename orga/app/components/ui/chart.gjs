@@ -48,4 +48,11 @@ export default class EmberChart extends Component {
     this.chart.destroy();
     super.willDestroy();
   }
+
+  <template>
+    <div class="chart" ...attributes>
+      <canvas id={{this.chartId}} width={{@width}} height={{@height}}>
+      </canvas>
+    </div>
+  </template>
 }

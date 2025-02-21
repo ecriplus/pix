@@ -1,3 +1,4 @@
+import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 
@@ -13,6 +14,12 @@ export default class ParticipationStatus extends Component {
     const { status, campaignType } = this.args;
     return this.intl.t(`components.participation-status.${status}-${campaignType}`);
   }
+
+  <template>
+    <PixTag @color={{this.color}}>
+      {{this.label}}
+    </PixTag>
+  </template>
 }
 
 const COLORS = {
