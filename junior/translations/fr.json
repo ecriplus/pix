@@ -74,10 +74,9 @@
     },
     "home": {
       "beta": "Version Bêta",
-      "code-description": "Le code de l'école est composé de 6 chiffres et 3 lettres.",
+      "code-description": "Remplir le code de l'école, composé de 6 chiffres et 3 lettres.",
       "code-instruction": "Saisis le code de ton école pour accéder à ta classe",
       "code-label": "Code de l'école",
-      "field-description": "Champ numéro",
       "go-to-school": "Je valide le code",
       "page-title": "Page d'accueil",
       "welcome": "Bienvenue sur Pix Junior !"

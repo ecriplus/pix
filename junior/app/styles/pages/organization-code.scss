@@ -35,8 +35,8 @@
   }
 
   &__input {
-    font-family: fonts.$font-nunito;
-    text-transform: uppercase;
+    display: flex;
+    padding-top: var(--pix-spacing-4x);
   }
 
   &__rotated-bubble {
