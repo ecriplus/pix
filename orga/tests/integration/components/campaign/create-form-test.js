@@ -146,41 +146,29 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
       .exists();
   });
 
-  module('when campaign is of type ASSESSMENT', function () {
-    test('it should have checked ASSESSMENT', async function (assert) {
-      // given
-      this.campaign.type = 'ASSESSMENT';
-      // when
-      const screen = await render(
-        hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @targetProfiles={{this.targetProfiles}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-      );
-
-      // then
-      assert.dom(screen.getByLabelText(t('pages.campaign-creation.purpose.assessment'))).isChecked();
-    });
-
-    test('it should fill target-profile fields', async function (assert) {
-      // given
-      const targetProfile = store.createRecord('target-profile', {
-        id: '1',
-        name: 'Target profile 1',
-        description: 'Description 1',
-        category: 'Category 1',
+  [
+    {
+      status: 'ASSESSMENT',
+      purpose: 'pages.campaign-creation.purpose.assessment',
+      explanation: 'pages.campaign-creation.purpose.assessment-info',
+    },
+    {
+      status: 'EXAM',
+      purpose: 'pages.campaign-creation.purpose.exam',
+      explanation: 'pages.campaign-creation.purpose.exam-info',
+    },
+  ].forEach(async function (campaignType) {
+    module(`when campaign is of type ${campaignType.status}`, function (hooks) {
+      hooks.beforeEach(function () {
+        prescriber.features.CAMPAIGN_WITHOUT_USER_PROFILE = true;
       });
-      this.targetProfiles = [targetProfile];
-      this.campaign.type = 'ASSESSMENT';
-      this.campaign.targetProfile = targetProfile;
 
-      // when
-      const screen = await render(
-        hbs`<Campaign::CreateForm
+      test(`it should have checked ${campaignType.status}`, async function (assert) {
+        // given
+        this.campaign.type = campaignType.status;
+        // when
+        const screen = await render(
+          hbs`<Campaign::CreateForm
   @campaign={{this.campaign}}
   @onSubmit={{this.createCampaignSpy}}
   @onCancel={{this.cancelSpy}}
@@ -188,24 +176,27 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
   @targetProfiles={{this.targetProfiles}}
   @membersSortedByFullName={{this.defaultMembers}}
 />`,
-      );
+        );
 
-      // then
-      const targetProfileField = screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), {
-        exact: false,
+        // then
+        assert.dom(screen.getByLabelText(t(campaignType.purpose))).isChecked();
       });
-      assert.strictEqual(targetProfileField.innerText, targetProfile.name);
-    });
 
-    test('it should fill multiple sendings fields', async function (assert) {
-      // given
-      prescriber.features.MULTIPLE_SENDING_ASSESSMENT = true;
-      this.campaign.type = 'ASSESSMENT';
-      this.campaign.multipleSendings = true;
+      test('it should fill target-profile fields', async function (assert) {
+        // given
+        const targetProfile = store.createRecord('target-profile', {
+          id: '1',
+          name: 'Target profile 1',
+          description: 'Description 1',
+          category: 'Category 1',
+        });
+        this.targetProfiles = [targetProfile];
+        this.campaign.type = campaignType.status;
+        this.campaign.targetProfile = targetProfile;
 
-      // when
-      const screen = await render(
-        hbs`<Campaign::CreateForm
+        // when
+        const screen = await render(
+          hbs`<Campaign::CreateForm
   @campaign={{this.campaign}}
   @onSubmit={{this.createCampaignSpy}}
   @onCancel={{this.cancelSpy}}
@@ -213,22 +204,24 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
   @targetProfiles={{this.targetProfiles}}
   @membersSortedByFullName={{this.defaultMembers}}
 />`,
-      );
+        );
 
-      // then
-      const radiogroup = screen.getByRole('radiogroup', {
-        name: t('pages.campaign-creation.multiple-sendings.assessments.question-label'),
+        // then
+        const targetProfileField = screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), {
+          exact: false,
+        });
+        assert.strictEqual(targetProfileField.innerText, targetProfile.name);
       });
-      assert.dom(within(radiogroup).getByLabelText(t('pages.campaign-creation.yes'))).isChecked();
-    });
 
-    test('it should explain which informations will be visible to organization-learners', async function () {
-      // given
-      this.campaign.type = 'ASSESSMENT';
+      test('it should fill multiple sendings fields', async function (assert) {
+        // given
+        prescriber.features.MULTIPLE_SENDING_ASSESSMENT = true;
+        this.campaign.type = campaignType.status;
+        this.campaign.multipleSendings = true;
 
-      // when
-      const screen = await render(
-        hbs`<Campaign::CreateForm
+        // when
+        const screen = await render(
+          hbs`<Campaign::CreateForm
   @campaign={{this.campaign}}
   @onSubmit={{this.createCampaignSpy}}
   @onCancel={{this.cancelSpy}}
@@ -236,19 +229,559 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
   @targetProfiles={{this.targetProfiles}}
   @membersSortedByFullName={{this.defaultMembers}}
 />`,
-      );
+        );
 
-      // then
-      const testTitleSublabel = screen.getAllByLabelText(t('pages.campaign-creation.landing-page-text.sublabel'), {
-        exact: false,
-      })[0];
-      const landingPageSublabel = screen.getAllByLabelText(t('pages.campaign-creation.landing-page-text.sublabel'), {
-        exact: false,
-      })[1];
+        // then
+        const radiogroup = screen.getByRole('radiogroup', {
+          name: t('pages.campaign-creation.multiple-sendings.assessments.question-label'),
+        });
+        assert.dom(within(radiogroup).getByLabelText(t('pages.campaign-creation.yes'))).isChecked();
+      });
 
-      assert.ok(testTitleSublabel);
-      assert.ok(landingPageSublabel);
+      test('it should explain which informations will be visible to organization-learners', async function () {
+        // given
+        this.campaign.type = campaignType.status;
+
+        // when
+        const screen = await render(
+          hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @targetProfiles={{this.targetProfiles}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+        );
+
+        // then
+        const testTitleSublabel = screen.getAllByLabelText(t('pages.campaign-creation.landing-page-text.sublabel'), {
+          exact: false,
+        })[0];
+        const landingPageSublabel = screen.getAllByLabelText(t('pages.campaign-creation.landing-page-text.sublabel'), {
+          exact: false,
+        })[1];
+
+        assert.ok(testTitleSublabel);
+        assert.ok(landingPageSublabel);
+      });
     });
+
+    module(`when user choose to create a campaign of type ${campaignType.status}`, function (hooks) {
+      hooks.beforeEach(function () {
+        prescriber.features.CAMPAIGN_WITHOUT_USER_PROFILE = true;
+      });
+
+      test('it should display fields for campaign title and target profile', async function (assert) {
+        // when
+        const screen = await render(
+          hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @targetProfiles={{this.targetProfiles}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+        );
+        await clickByName(t(campaignType.purpose));
+
+        // then
+        assert.dom(screen.getByText(t('pages.campaign-creation.test-title.label'))).exists();
+        assert.dom(screen.getByText(t('pages.campaign-creation.purpose.label'))).exists();
+      });
+
+      test(`it should display the purpose explanation of an ${campaignType.status} campaign`, async function (assert) {
+        // when
+        const screen = await render(
+          hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @targetProfiles={{this.targetProfiles}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+        );
+        await clickByName(t(campaignType.purpose));
+
+        // then
+        assert.dom(screen.getByText(t(campaignType.explanation))).exists();
+      });
+
+      module('when the user chose a target profile', function () {
+        test('it should display informations about target profile', async function (assert) {
+          // given
+          this.targetProfiles = [
+            store.createRecord('target-profile', {
+              id: '1',
+              name: 'targetProfile1',
+              description: 'description1',
+              tubeCount: 11,
+              thematicResultCount: 12,
+              hasStage: true,
+            }),
+            store.createRecord('target-profile', {
+              id: '2',
+              name: 'targetProfile2',
+              description: 'description2',
+              tubeCount: 21,
+              thematicResultCount: 22,
+              hasStage: false,
+            }),
+          ];
+
+          // when
+          const screen = await render(
+            hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @targetProfiles={{this.targetProfiles}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+          );
+          await clickByName(t(campaignType.purpose));
+
+          await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
+          await click(await screen.findByRole('option', { description: 'targetProfile1' }));
+          // then
+          assert.dom(screen.getByText('description1')).exists();
+          assert.dom(screen.getByText(t('common.target-profile-details.subjects', { value: 11 }))).exists();
+          assert.dom(screen.getByText(t('common.target-profile-details.thematic-results', { value: 12 }))).exists();
+        });
+
+        test('it should display a message about result', async function (assert) {
+          // given
+          this.targetProfiles = [
+            store.createRecord('target-profile', {
+              id: '1',
+              name: 'targetProfile1',
+              description: 'description1',
+              tubeCount: 11,
+              thematicResultCount: 12,
+              hasStage: true,
+            }),
+            store.createRecord('target-profile', {
+              id: '2',
+              name: 'targetProfile2',
+              description: 'description2',
+              tubeCount: 21,
+              thematicResultCount: 22,
+              hasStage: false,
+            }),
+          ];
+
+          // when
+          const screen = await render(
+            hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @targetProfiles={{this.targetProfiles}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+          );
+          await clickByName(t(campaignType.purpose));
+
+          await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
+          await click(await screen.findByRole('option', { description: 'targetProfile1' }));
+
+          // then
+          assert.dom(screen.getByText(t('common.target-profile-details.results.common'))).exists();
+        });
+
+        module('simplified access', function () {
+          test('it should display with simplified access', async function (assert) {
+            // given
+            this.targetProfiles = [
+              store.createRecord('target-profile', {
+                id: '1',
+                name: 'targetProfile1',
+                isSimplifiedAccess: true,
+              }),
+            ];
+
+            // when
+            const screen = await render(
+              hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @targetProfiles={{this.targetProfiles}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+            );
+
+            await clickByName(t(campaignType.purpose));
+
+            await click(
+              screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }),
+            );
+            await click(await screen.findByRole('option', { description: 'targetProfile1' }));
+
+            // then
+            assert.ok(screen.getByText(t('common.target-profile-details.simplified-access.without-account')));
+          });
+
+          test('it should display without simplified access', async function (assert) {
+            // given
+            this.targetProfiles = [
+              store.createRecord('target-profile', {
+                id: '1',
+                name: 'targetProfile1',
+                isSimplifiedAccess: false,
+              }),
+            ];
+
+            // when
+            const screen = await render(
+              hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @targetProfiles={{this.targetProfiles}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+            );
+            await clickByName(t(campaignType.purpose));
+
+            await click(
+              screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }),
+            );
+            await click(await screen.findByRole('option', { description: 'targetProfile1' }));
+
+            // then
+            assert.ok(screen.getByText(t('common.target-profile-details.simplified-access.with-account')));
+          });
+        });
+
+        module('Displaying options and categories', function () {
+          test('it should display options in alphapetical order', async function (assert) {
+            // given
+            this.targetProfiles = [
+              store.createRecord('target-profile', {
+                id: '1',
+                name: 'targetProfile4',
+                description: 'description4',
+                tubeCount: 11,
+                thematicResultCount: 12,
+                hasStage: true,
+                category: 'B',
+              }),
+              store.createRecord('target-profile', {
+                id: '2',
+                name: 'targetProfile3',
+                description: 'description3',
+                tubeCount: 21,
+                thematicResultCount: 22,
+                hasStage: false,
+                category: 'B',
+              }),
+              store.createRecord('target-profile', {
+                id: '3',
+                name: 'targetProfile2',
+                description: 'description2',
+                tubeCount: 33,
+                thematicResultCount: 12,
+                hasStage: true,
+                category: 'A',
+              }),
+              store.createRecord('target-profile', {
+                id: '4',
+                name: 'targetProfile1',
+                description: 'description1',
+                tubeCount: 44,
+                thematicResultCount: 12,
+                hasStage: true,
+                category: 'A',
+              }),
+            ];
+
+            // when
+            const screen = await render(
+              hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @targetProfiles={{this.targetProfiles}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+            );
+            await clickByName(t(campaignType.purpose));
+
+            await click(
+              screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }),
+            );
+            let options = await screen.findAllByRole('option');
+
+            // then
+            options = options.map((option) => {
+              return option.innerText;
+            });
+            assert.deepEqual(options, ['targetProfile1', 'targetProfile2', 'targetProfile3', 'targetProfile4']);
+          });
+
+          test('it should display options with OTHER category at last position', async function (assert) {
+            // given
+            this.targetProfiles = [
+              store.createRecord('target-profile', {
+                id: '2',
+                name: 'targetProfile3',
+                description: 'description3',
+                tubeCount: 21,
+                thematicResultCount: 22,
+                hasStage: false,
+                category: 'OTHER',
+              }),
+              store.createRecord('target-profile', {
+                id: '1',
+                name: 'targetProfile4',
+                description: 'description4',
+                tubeCount: 11,
+                thematicResultCount: 12,
+                hasStage: true,
+                category: 'A',
+              }),
+            ];
+
+            // when
+            const screen = await render(
+              hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @targetProfiles={{this.targetProfiles}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+            );
+            await clickByName(t(campaignType.purpose));
+
+            await click(
+              screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }),
+            );
+            let options = await screen.findAllByRole('option');
+
+            // then
+            options = options.map((option) => {
+              return option.innerText;
+            });
+            assert.deepEqual(options, ['targetProfile4', 'targetProfile3']);
+          });
+        });
+      });
+
+      module('when the user wants to clear the content of the target profile input', function (hooks) {
+        hooks.beforeEach(function () {
+          this.targetProfiles = [
+            store.createRecord('target-profile', {
+              id: '1',
+              name: 'targetProfile1',
+              description: 'description1',
+            }),
+          ];
+        });
+      });
+
+      module('multiple sending', function () {
+        test('it should not display multiple sendings field', async function (assert) {
+          // when
+          const screen = await render(
+            hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @targetProfiles={{this.targetProfiles}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+          );
+          await clickByName(t(campaignType.purpose));
+
+          // then
+          assert
+            .dom(screen.queryByLabelText(t('pages.campaign-creation.multiple-sendings.assessments.question-label')))
+            .doesNotExist();
+          assert
+            .dom(screen.queryByLabelText(t('pages.campaign-creation.multiple-sendings.assessments.info')))
+            .doesNotExist();
+        });
+
+        test('it should display multiple sendings field', async function (assert) {
+          // given
+          this.targetProfiles = [
+            store.createRecord('target-profile', {
+              id: '1',
+              name: 'targetProfile1',
+              description: 'description1',
+              tubeCount: 11,
+              thematicResultCount: 12,
+              hasStage: true,
+            }),
+            store.createRecord('target-profile', {
+              id: '2',
+              name: 'targetProfile2',
+              description: 'description2',
+              tubeCount: 21,
+              thematicResultCount: 22,
+              hasStage: false,
+            }),
+          ];
+          prescriber.features.MULTIPLE_SENDING_ASSESSMENT = true;
+
+          // when
+          const screen = await render(
+            hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @targetProfiles={{this.targetProfiles}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+          );
+          await clickByName(t(campaignType.purpose));
+
+          await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
+          await click(await screen.findByRole('option', { description: 'targetProfile1' }));
+
+          // then
+          assert.dom(screen.getByText(t('common.target-profile-details.results.common'))).exists();
+        });
+
+        module('when target profile are knowledge elements resettable', function () {
+          test('it should display specific message', async function (assert) {
+            // given
+            prescriber.features.MULTIPLE_SENDING_ASSESSMENT = true;
+
+            this.targetProfiles = [
+              store.createRecord('target-profile', {
+                id: '1',
+                name: 'targetProfile1',
+                description: 'description1',
+                tubeCount: 11,
+                thematicResultCount: 12,
+                hasStage: true,
+                areKnowledgeElementsResettable: true,
+              }),
+              store.createRecord('target-profile', {
+                id: '2',
+                name: 'targetProfile2',
+                description: 'description2',
+                tubeCount: 21,
+                thematicResultCount: 22,
+                hasStage: false,
+              }),
+            ];
+
+            // when
+            const screen = await render(
+              hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @targetProfiles={{this.targetProfiles}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+            );
+            await clickByName(t(campaignType.purpose));
+
+            await click(
+              screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }),
+            );
+            await click(await screen.findByRole('option', { description: 'targetProfile1' }));
+
+            // then
+            assert
+              .dom(
+                screen.getByText(t('pages.campaign-creation.multiple-sendings.knowledge-elements-resettable'), {
+                  exact: false,
+                }),
+              )
+              .exists();
+          });
+        });
+
+        module('when target profile are not knowledge elements resettable', function () {
+          test('it should not display specific message', async function (assert) {
+            // given
+            this.targetProfiles = [
+              store.createRecord('target-profile', {
+                id: '1',
+                name: 'targetProfile1',
+                description: 'description1',
+                tubeCount: 11,
+                thematicResultCount: 12,
+                hasStage: true,
+                areKnowledgeElementsResettable: false,
+              }),
+              store.createRecord('target-profile', {
+                id: '2',
+                name: 'targetProfile2',
+                description: 'description2',
+                tubeCount: 21,
+                thematicResultCount: 22,
+                hasStage: false,
+              }),
+            ];
+            prescriber.features.MULTIPLE_SENDING_ASSESSMENT = true;
+
+            // when
+            const screen = await render(
+              hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @targetProfiles={{this.targetProfiles}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+            );
+            await clickByName(t(campaignType.purpose));
+
+            await click(
+              screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }),
+            );
+            await click(await screen.findByRole('option', { description: 'targetProfile1' }));
+
+            // then
+            assert
+              .dom(
+                screen.queryByText(t('pages.campaign-creation.multiple-sendings.knowledge-elements-resettable'), {
+                  exact: false,
+                }),
+              )
+              .doesNotExist();
+          });
+        });
+      });
+    });
+  });
+
+  test('should not display EXAM type when feature is not enable', async function () {
+    // given
+    prescriber.features.CAMPAIGN_WITHOUT_USER_PROFILE = false;
+
+    // when
+    const screen = await render(
+      hbs`<Campaign::CreateForm
+  @campaign={{this.campaign}}
+  @onSubmit={{this.createCampaignSpy}}
+  @onCancel={{this.cancelSpy}}
+  @errors={{this.errors}}
+  @targetProfiles={{this.targetProfiles}}
+  @membersSortedByFullName={{this.defaultMembers}}
+/>`,
+    );
+
+    assert.notOk(screen.queryByLabelText(t('pages.campaign-creation.purpose.exam')));
   });
 
   module('when campaign is of type PROFILES_COLLECTION', function () {
@@ -293,488 +826,6 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
         name: t('pages.campaign-creation.multiple-sendings.profiles.question-label'),
       });
       assert.dom(within(radiogroup).getByLabelText(t('pages.campaign-creation.yes'))).isChecked();
-    });
-  });
-
-  module('when user choose to create a campaign of type ASSESSMENT', function () {
-    test('it should display fields for campaign title and target profile', async function (assert) {
-      // when
-      const screen = await render(
-        hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @targetProfiles={{this.targetProfiles}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-      );
-      await clickByName(t('pages.campaign-creation.purpose.assessment'));
-
-      // then
-      assert.dom(screen.getByText(t('pages.campaign-creation.test-title.label'))).exists();
-      assert.dom(screen.getByText(t('pages.campaign-creation.purpose.label'))).exists();
-    });
-
-    test('it should display the purpose explanation of an assessment campaign', async function (assert) {
-      // when
-      const screen = await render(
-        hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @targetProfiles={{this.targetProfiles}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-      );
-      await clickByName(t('pages.campaign-creation.purpose.assessment'));
-
-      // then
-      assert.dom(screen.getByText(t('pages.campaign-creation.purpose.assessment-info'))).exists();
-      assert.dom(screen.queryByText(t('pages.campaign-creation.purpose.profiles-collection-info'))).doesNotExist();
-    });
-
-    module('when the user chose a target profile', function () {
-      test('it should display informations about target profile', async function (assert) {
-        // given
-        this.targetProfiles = [
-          store.createRecord('target-profile', {
-            id: '1',
-            name: 'targetProfile1',
-            description: 'description1',
-            tubeCount: 11,
-            thematicResultCount: 12,
-            hasStage: true,
-          }),
-          store.createRecord('target-profile', {
-            id: '2',
-            name: 'targetProfile2',
-            description: 'description2',
-            tubeCount: 21,
-            thematicResultCount: 22,
-            hasStage: false,
-          }),
-        ];
-
-        // when
-        const screen = await render(
-          hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @targetProfiles={{this.targetProfiles}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-        );
-        await clickByName(t('pages.campaign-creation.purpose.assessment'));
-
-        await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-        await click(await screen.findByRole('option', { description: 'targetProfile1' }));
-        // then
-        assert.dom(screen.getByText('description1')).exists();
-        assert.dom(screen.getByText(t('common.target-profile-details.subjects', { value: 11 }))).exists();
-        assert.dom(screen.getByText(t('common.target-profile-details.thematic-results', { value: 12 }))).exists();
-      });
-
-      test('it should display a message about result', async function (assert) {
-        // given
-        this.targetProfiles = [
-          store.createRecord('target-profile', {
-            id: '1',
-            name: 'targetProfile1',
-            description: 'description1',
-            tubeCount: 11,
-            thematicResultCount: 12,
-            hasStage: true,
-          }),
-          store.createRecord('target-profile', {
-            id: '2',
-            name: 'targetProfile2',
-            description: 'description2',
-            tubeCount: 21,
-            thematicResultCount: 22,
-            hasStage: false,
-          }),
-        ];
-
-        // when
-        const screen = await render(
-          hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @targetProfiles={{this.targetProfiles}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-        );
-        await clickByName(t('pages.campaign-creation.purpose.assessment'));
-
-        await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-        await click(await screen.findByRole('option', { description: 'targetProfile1' }));
-
-        // then
-        assert.dom(screen.getByText(t('common.target-profile-details.results.common'))).exists();
-      });
-
-      module('simplified access', function () {
-        test('it should display with simplified access', async function (assert) {
-          // given
-          this.targetProfiles = [
-            store.createRecord('target-profile', {
-              id: '1',
-              name: 'targetProfile1',
-              isSimplifiedAccess: true,
-            }),
-          ];
-
-          // when
-          const screen = await render(
-            hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @targetProfiles={{this.targetProfiles}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-          );
-
-          await clickByName(t('pages.campaign-creation.purpose.assessment'));
-
-          await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-          await click(await screen.findByRole('option', { description: 'targetProfile1' }));
-
-          // then
-          assert.ok(screen.getByText(t('common.target-profile-details.simplified-access.without-account')));
-        });
-
-        test('it should display without simplified access', async function (assert) {
-          // given
-          this.targetProfiles = [
-            store.createRecord('target-profile', {
-              id: '1',
-              name: 'targetProfile1',
-              isSimplifiedAccess: false,
-            }),
-          ];
-
-          // when
-          const screen = await render(
-            hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @targetProfiles={{this.targetProfiles}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-          );
-          await clickByName(t('pages.campaign-creation.purpose.assessment'));
-
-          await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-          await click(await screen.findByRole('option', { description: 'targetProfile1' }));
-
-          // then
-          assert.ok(screen.getByText(t('common.target-profile-details.simplified-access.with-account')));
-        });
-      });
-
-      module('Displaying options and categories', function () {
-        test('it should display options in alphapetical order', async function (assert) {
-          // given
-          this.targetProfiles = [
-            store.createRecord('target-profile', {
-              id: '1',
-              name: 'targetProfile4',
-              description: 'description4',
-              tubeCount: 11,
-              thematicResultCount: 12,
-              hasStage: true,
-              category: 'B',
-            }),
-            store.createRecord('target-profile', {
-              id: '2',
-              name: 'targetProfile3',
-              description: 'description3',
-              tubeCount: 21,
-              thematicResultCount: 22,
-              hasStage: false,
-              category: 'B',
-            }),
-            store.createRecord('target-profile', {
-              id: '3',
-              name: 'targetProfile2',
-              description: 'description2',
-              tubeCount: 33,
-              thematicResultCount: 12,
-              hasStage: true,
-              category: 'A',
-            }),
-            store.createRecord('target-profile', {
-              id: '4',
-              name: 'targetProfile1',
-              description: 'description1',
-              tubeCount: 44,
-              thematicResultCount: 12,
-              hasStage: true,
-              category: 'A',
-            }),
-          ];
-
-          // when
-          const screen = await render(
-            hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @targetProfiles={{this.targetProfiles}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-          );
-          await clickByName(t('pages.campaign-creation.purpose.assessment'));
-
-          await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-          let options = await screen.findAllByRole('option');
-
-          // then
-          options = options.map((option) => {
-            return option.innerText;
-          });
-          assert.deepEqual(options, ['targetProfile1', 'targetProfile2', 'targetProfile3', 'targetProfile4']);
-        });
-
-        test('it should display options with OTHER category at last position', async function (assert) {
-          // given
-          this.targetProfiles = [
-            store.createRecord('target-profile', {
-              id: '2',
-              name: 'targetProfile3',
-              description: 'description3',
-              tubeCount: 21,
-              thematicResultCount: 22,
-              hasStage: false,
-              category: 'OTHER',
-            }),
-            store.createRecord('target-profile', {
-              id: '1',
-              name: 'targetProfile4',
-              description: 'description4',
-              tubeCount: 11,
-              thematicResultCount: 12,
-              hasStage: true,
-              category: 'A',
-            }),
-          ];
-
-          // when
-          const screen = await render(
-            hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @targetProfiles={{this.targetProfiles}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-          );
-          await clickByName(t('pages.campaign-creation.purpose.assessment'));
-
-          await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-          let options = await screen.findAllByRole('option');
-
-          // then
-          options = options.map((option) => {
-            return option.innerText;
-          });
-          assert.deepEqual(options, ['targetProfile4', 'targetProfile3']);
-        });
-      });
-    });
-
-    module('when the user wants to clear the content of the target profile input', function (hooks) {
-      hooks.beforeEach(function () {
-        this.targetProfiles = [
-          store.createRecord('target-profile', {
-            id: '1',
-            name: 'targetProfile1',
-            description: 'description1',
-          }),
-        ];
-      });
-    });
-
-    module('multiple sending', function () {
-      test('it should not display multiple sendings field', async function (assert) {
-        // when
-        const screen = await render(
-          hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @targetProfiles={{this.targetProfiles}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-        );
-        await clickByName(t('pages.campaign-creation.purpose.assessment'));
-
-        // then
-        assert
-          .dom(screen.queryByLabelText(t('pages.campaign-creation.multiple-sendings.assessments.question-label')))
-          .doesNotExist();
-        assert
-          .dom(screen.queryByLabelText(t('pages.campaign-creation.multiple-sendings.assessments.info')))
-          .doesNotExist();
-      });
-
-      test('it should display multiple sendings field', async function (assert) {
-        // given
-        this.targetProfiles = [
-          store.createRecord('target-profile', {
-            id: '1',
-            name: 'targetProfile1',
-            description: 'description1',
-            tubeCount: 11,
-            thematicResultCount: 12,
-            hasStage: true,
-          }),
-          store.createRecord('target-profile', {
-            id: '2',
-            name: 'targetProfile2',
-            description: 'description2',
-            tubeCount: 21,
-            thematicResultCount: 22,
-            hasStage: false,
-          }),
-        ];
-        prescriber.features.MULTIPLE_SENDING_ASSESSMENT = true;
-
-        // when
-        const screen = await render(
-          hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @targetProfiles={{this.targetProfiles}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-        );
-        await clickByName(t('pages.campaign-creation.purpose.assessment'));
-
-        await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-        await click(await screen.findByRole('option', { description: 'targetProfile1' }));
-
-        // then
-        assert.dom(screen.getByText(t('common.target-profile-details.results.common'))).exists();
-      });
-
-      module('when target profile are knowledge elements resettable', function () {
-        test('it should display specific message', async function (assert) {
-          // given
-          prescriber.features.MULTIPLE_SENDING_ASSESSMENT = true;
-
-          this.targetProfiles = [
-            store.createRecord('target-profile', {
-              id: '1',
-              name: 'targetProfile1',
-              description: 'description1',
-              tubeCount: 11,
-              thematicResultCount: 12,
-              hasStage: true,
-              areKnowledgeElementsResettable: true,
-            }),
-            store.createRecord('target-profile', {
-              id: '2',
-              name: 'targetProfile2',
-              description: 'description2',
-              tubeCount: 21,
-              thematicResultCount: 22,
-              hasStage: false,
-            }),
-          ];
-
-          // when
-          const screen = await render(
-            hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @targetProfiles={{this.targetProfiles}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-          );
-          await clickByName(t('pages.campaign-creation.purpose.assessment'));
-
-          await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-          await click(await screen.findByRole('option', { description: 'targetProfile1' }));
-
-          // then
-          assert
-            .dom(
-              screen.getByText(t('pages.campaign-creation.multiple-sendings.knowledge-elements-resettable'), {
-                exact: false,
-              }),
-            )
-            .exists();
-        });
-      });
-
-      module('when target profile are not knowledge elements resettable', function () {
-        test('it should not display specific message', async function (assert) {
-          // given
-          this.targetProfiles = [
-            store.createRecord('target-profile', {
-              id: '1',
-              name: 'targetProfile1',
-              description: 'description1',
-              tubeCount: 11,
-              thematicResultCount: 12,
-              hasStage: true,
-              areKnowledgeElementsResettable: false,
-            }),
-            store.createRecord('target-profile', {
-              id: '2',
-              name: 'targetProfile2',
-              description: 'description2',
-              tubeCount: 21,
-              thematicResultCount: 22,
-              hasStage: false,
-            }),
-          ];
-          prescriber.features.MULTIPLE_SENDING_ASSESSMENT = true;
-
-          // when
-          const screen = await render(
-            hbs`<Campaign::CreateForm
-  @campaign={{this.campaign}}
-  @targetProfiles={{this.targetProfiles}}
-  @onSubmit={{this.createCampaignSpy}}
-  @onCancel={{this.cancelSpy}}
-  @errors={{this.errors}}
-  @membersSortedByFullName={{this.defaultMembers}}
-/>`,
-          );
-          await clickByName(t('pages.campaign-creation.purpose.assessment'));
-
-          await click(screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }));
-          await click(await screen.findByRole('option', { description: 'targetProfile1' }));
-
-          // then
-          assert
-            .dom(
-              screen.queryByText(t('pages.campaign-creation.multiple-sendings.knowledge-elements-resettable'), {
-                exact: false,
-              }),
-            )
-            .doesNotExist();
-        });
-      });
     });
   });
 
