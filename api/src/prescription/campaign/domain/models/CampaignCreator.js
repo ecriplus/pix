@@ -27,23 +27,19 @@ class CampaignCreator {
 
     return new CampaignForCreation(campaignAttributes);
   }
-}
 
-function _checkAssessmentCampaignCreationAllowed(targetProfileId, availableTargetProfileIds) {
-  if (targetProfileId && !availableTargetProfileIds.includes(targetProfileId)) {
-    throw new UserNotAuthorizedToCreateCampaignError(
-      `Organization does not have an access to the profile ${targetProfileId}`,
-    );
+  #checkAssessmentCampaignCreationAllowed(targetProfileId) {
+    if (targetProfileId && !this.availableTargetProfileIds.includes(targetProfileId)) {
+      throw new UserNotAuthorizedToCreateCampaignError(
+        `Organization does not have an access to the profile ${targetProfileId}`,
+      );
+    }
   }
-}
 
-function _checkAssessmentCampaignMultipleSendingsCreationAllowed(
-  multipleSendings,
-  isMultipleSendingsAssessmentEnable,
-  organizationId,
-) {
-  if (!isMultipleSendingsAssessmentEnable && multipleSendings) {
-    throw new OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError(organizationId);
+  #checkAssessmentCampaignMultipleSendingsCreationAllowed(multipleSendings, organizationId) {
+    if (!this.isMultipleSendingsAssessmentEnable && multipleSendings) {
+      throw new OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError(organizationId);
+    }
   }
 }
 
