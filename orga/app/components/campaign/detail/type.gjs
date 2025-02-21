@@ -5,17 +5,25 @@ import Component from '@glimmer/component';
 export default class CampaignType extends Component {
   @service intl;
 
-  get picto() {
+  get iconConfig() {
     const { campaignType } = this.args;
-    return campaignType === 'ASSESSMENT' ? 'speed' : 'profileShare';
+    switch (campaignType) {
+      case 'ASSESSMENT':
+        return { icon: 'speed', class: 'campaign-type__icon--assessment' };
+      case 'PROFILES_COLLECTION':
+        return { icon: 'profileShare', class: 'campaign-type__icon--profile-collection' };
+      case 'EXAM':
+        return { icon: 'school', class: 'campaign-type__icon--exam' };
+      default:
+        return { icon: 'close', class: '' };
+    }
   }
 
   get pictoCssClass() {
-    const classes = [];
-    const { campaignType } = this.args;
-    classes.push(
-      campaignType === 'ASSESSMENT' ? 'campaign-type__icon-assessment' : 'campaign-type__icon-profile-collection',
-    );
+    const classes = ['campaign-type__icon'];
+
+    classes.push(this.iconConfig.class);
+
     if (this.args.big) {
       classes.push(classes[0] + '--big');
     }
@@ -31,18 +39,30 @@ export default class CampaignType extends Component {
   }
 
   get label() {
-    const { campaignType, labels } = this.args;
+    const informationLabels = {
+      ASSESSMENT: 'components.campaign.type.information.ASSESSMENT',
+      PROFILES_COLLECTION: 'components.campaign.type.information.PROFILES_COLLECTION',
+      EXAM: 'components.campaign.type.information.EXAM',
+    };
 
-    return this.intl.t(labels[campaignType]);
+    const explanationLabels = {
+      ASSESSMENT: 'components.campaign.type.explanation.ASSESSMENT',
+      PROFILES_COLLECTION: 'components.campaign.type.explanation.PROFILES_COLLECTION',
+      EXAM: 'components.campaign.type.explanation.EXAM',
+    };
+
+    const { campaignType, displayInformationLabel } = this.args;
+
+    return this.intl.t(displayInformationLabel ? informationLabels[campaignType] : explanationLabels[campaignType]);
   }
 
   <template>
     <span class="campaign-type">
       <PixIcon
         class={{this.pictoCssClass}}
-        @name={{this.picto}}
-        aria-hidden="{{this.pictoAriaHidden}}"
-        aria-label={{this.pictoTitle}}
+        @name={{this.iconConfig.icon}}
+        @ariaHidden={{this.pictoAriaHidden}}
+        @title={{this.pictoTitle}}
         ...attributes
       />
       {{#unless @hideLabel}}

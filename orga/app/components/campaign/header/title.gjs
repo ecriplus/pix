@@ -26,13 +26,6 @@ export default class Header extends Component {
     ];
   }
 
-  get labels() {
-    return {
-      ASSESSMENT: 'components.campaign.type.explanation.ASSESSMENT',
-      PROFILES_COLLECTION: 'components.campaign.type.explanation.PROFILES_COLLECTION',
-    };
-  }
-
   get shouldShowMultipleSending() {
     return this.args.campaign.isProfilesCollection || this.isMultipleSendingsForAssessmentEnabled;
   }
@@ -53,7 +46,7 @@ export default class Header extends Component {
         <Breadcrumb @links={{this.breadcrumbLinks}} class="campaign-header-title__breadcrumb" />
       </:breadcrumb>
       <:title>
-        <CampaignType @big={{true}} @labels={{this.labels}} @campaignType={{@campaign.type}} @hideLabel={{true}} />
+        <CampaignType @big={{true}} @campaignType={{@campaign.type}} @hideLabel={{true}} />
         <span class="page-title__name">{{@campaign.name}}</span>
       </:title>
       <:tools>

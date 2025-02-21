@@ -277,10 +277,12 @@
       "type": {
         "explanation": {
           "ASSESSMENT": "Campagne d'évaluation",
+          "EXAM": "exam",
           "PROFILES_COLLECTION": "Campagne de collecte de profil"
         },
         "information": {
           "ASSESSMENT": "Évaluation",
+          "EXAM": "exam",
           "PROFILES_COLLECTION": "Collecte de profil"
         }
       }
@@ -566,9 +568,9 @@
       },
       "purpose": {
         "assessment": "Évaluer les participants",
+        "assessment-info": "Une campagne d’évaluation permet de tester les participants sur des sujets précis.",
         "exam": "exam",
         "exam-info": "Une campagne d’évaluation permet de tester les participants sur des sujets précis, sans prendre en compte le profil utilisateur.",
-        "assessment-info": "Une campagne d’évaluation permet de tester les participants sur des sujets précis.",
         "label": "Quel est l'objectif de votre campagne ?",
         "profiles-collection": "Collecter les profils Pix des participants",
         "profiles-collection-info": "Une campagne de collecte de profils permet de récupérer le profil des participants : niveaux par compétence et score pix.",

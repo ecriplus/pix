@@ -277,10 +277,12 @@
       "type": {
         "explanation": {
           "ASSESSMENT": "Campaign of type assessment",
+          "EXAM": "exam",
           "PROFILES_COLLECTION": "Campaign of type profiles collection"
         },
         "information": {
           "ASSESSMENT": "Assessment",
+          "EXAM": "exam",
           "PROFILES_COLLECTION": "Profiles collection"
         }
       }
@@ -559,10 +561,10 @@
         "title": "Campaign owner"
       },
       "purpose": {
-        "exam": "exam",
-        "exam-info": "Une campagne d’évaluation permet de tester les participants sur des sujets précis, sans prendre en compte le profil utilisateur.",
         "assessment": "Assess participants",
         "assessment-info": "An assessment campaign tests participants on specific topics.",
+        "exam": "exam",
+        "exam-info": "Une campagne d’évaluation permet de tester les participants sur des sujets précis, sans prendre en compte le profil utilisateur.",
         "label": "What is the purpose of your campaign?",
         "profiles-collection": "Collect the participants' Pix profiles",
         "profiles-collection-info": "A profile collection campaign retrieves the participants’ Pix profile: their level for each competence and their pix score.",

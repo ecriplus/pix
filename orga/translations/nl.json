@@ -277,10 +277,12 @@
       "type": {
         "explanation": {
           "ASSESSMENT": "Beoordelingscampagne",
-          "PROFILES_COLLECTION": "Campagne profielverzameling"
+          "PROFILES_COLLECTION": "Campagne profielverzameling",
+          "EXAM": "exam"
         },
         "information": {
           "ASSESSMENT": "Beoordeling",
+          "EXAM": "exam",
           "PROFILES_COLLECTION": "Profielverzameling"
         }
       }
