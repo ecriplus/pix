@@ -16,4 +16,12 @@ export default class InElement extends Component {
       this.destinationElement = document.getElementById(this.args.destinationId);
     }
   }
+
+  <template>
+    {{#if this.destinationElement}}
+      {{#in-element this.destinationElement}}
+        {{yield}}
+      {{/in-element}}
+    {{/if}}
+  </template>
 }

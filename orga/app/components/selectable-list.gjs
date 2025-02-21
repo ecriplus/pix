@@ -1,3 +1,4 @@
+import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -42,4 +43,11 @@ export default class SelectableList extends Component {
   isSelected(item) {
     return this.selectedItems.includes(item);
   }
+
+  <template>
+    {{#each @items as |item index|}}
+      {{yield item (fn this.toggle item) (this.isSelected item) index to="item"}}
+    {{/each}}
+    {{yield this.allSelected this.someSelected this.toggleAll this.selectedItems this.reset to="manager"}}
+  </template>
 }

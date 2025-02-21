@@ -1,5 +1,7 @@
+import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 import languages from 'pix-orga/languages';
 
 const FRENCH_LANGUAGE = 'fr';
@@ -32,4 +34,18 @@ export default class LanguageSwitcher extends Component {
 
     return [frenchLanguageOption, ...optionsWithoutFrSortedByLabel];
   }
+
+  <template>
+    <PixSelect
+      @id="language-switcher"
+      @screenReaderOnly={{true}}
+      @iconName="globe"
+      @value={{this.selectedLanguage}}
+      @options={{this.availableLanguages}}
+      @onChange={{this.onChange}}
+      @hideDefaultOption="true"
+    >
+      <:label>{{t "pages.login.choose-language-aria-label"}}</:label>
+    </PixSelect>
+  </template>
 }
