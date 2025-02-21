@@ -30,6 +30,8 @@ describe('Unit | Serializer | JSONAPI | campaign-report-serializer', function ()
           {
             id: 123,
             title: 'badge123',
+            imageUrl: 'badge.svg',
+            altMessage: 'message',
           },
         ],
       });
@@ -141,6 +143,8 @@ describe('Unit | Serializer | JSONAPI | campaign-report-serializer', function ()
           {
             attributes: {
               title: report.badges[0].title,
+              'image-url': report.badges[0].imageUrl,
+              'alt-message': report.badges[0].altMessage,
             },
             id: report.badges[0].id.toString(),
             type: 'badges',
