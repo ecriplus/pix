@@ -38,6 +38,10 @@ const ORGANIZATION_FEATURE = {
     key: 'MULTIPLE_SENDING_ASSESSMENT',
     description: "Permet d'activer l'envoi multiple sur les campagnes d'évaluation",
   },
+  CAMPAIGN_WITHOUT_USER_PROFILE: {
+    key: 'CAMPAIGN_WITHOUT_USER_PROFILE',
+    description: 'Passer une campagne sans prendre en compte le contenu du profil utilisateur',
+  },
   COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: {
     key: 'COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY',
     description: "Permet d'activer la remontée automatique de la certificabilité des prescrits",
