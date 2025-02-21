@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import {
   createServer,
   databaseBuilder,
@@ -38,6 +40,61 @@ describe('Acceptance | Team | Application | Routes | certification-center-member
       expect(response.statusCode).to.equal(200);
       expect(response.result.data[0].id).to.equal(certificationCenterMember.id.toString());
       expect(response.result.data[1].id).to.equal(user2.id.toString());
+    });
+  });
+
+  describe('PATCH /api/certification-centers/{certificationCenterId}/certification-center-memberships/{id}', function () {
+    context('Success cases', function () {
+      it('returns a 200 HTTP status code with the updated certification center membership', async function () {
+        // given
+        const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
+        const user = databaseBuilder.factory.buildUser();
+        const certificationCenterMembership = databaseBuilder.factory.buildCertificationCenterMembership({
+          certificationCenterId: certificationCenter.id,
+          userId: user.id,
+        });
+        const certifCenterAdminUser = databaseBuilder.factory.buildUser.withCertificationCenterMembership({
+          certificationCenterId: certificationCenter.id,
+          role: 'ADMIN',
+        });
+        await databaseBuilder.commit();
+
+        const request = {
+          method: 'PATCH',
+          url: `/api/certification-centers/${certificationCenter.id}/certification-center-memberships/${certificationCenterMembership.id}`,
+          payload: {
+            id: user.id,
+            data: {
+              'certification-center-membership-id': certificationCenterMembership.id.toString(),
+              type: 'certification-center-memberships',
+              attributes: {
+                role: 'ADMIN',
+              },
+            },
+          },
+          headers: generateAuthenticatedUserRequestHeaders({ userId: certifCenterAdminUser.id }),
+        };
+
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        const expectedUpdatedCertificationCenterMembership = {
+          data: {
+            type: 'members',
+            id: user.id.toString(),
+            attributes: {
+              'certification-center-membership-id': certificationCenterMembership.id,
+              'first-name': certifCenterAdminUser.firstName,
+              'is-referer': false,
+              'last-name': certifCenterAdminUser.lastName,
+              role: 'ADMIN',
+            },
+          },
+        };
+        expect(_.omit(response.result, 'included')).to.deep.equal(expectedUpdatedCertificationCenterMembership);
+      });
     });
   });
 });

@@ -1,8 +1,4 @@
-import { ForbiddenError } from '../../../src/shared/application/http-errors.js';
-import * as certificationCenterMembershipSerializer from '../../../src/shared/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
-import { usecases as teamUsecases } from '../../../src/team/domain/usecases/index.js';
-import { certificationCenterMembershipRepository } from '../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
 import { usecases } from '../../domain/usecases/index.js';
 
 const disableFromPixCertif = async function (request, h, dependencies = { requestResponseUtils }) {
@@ -16,39 +12,8 @@ const disableFromPixCertif = async function (request, h, dependencies = { reques
   return h.response().code(204);
 };
 
-const updateFromPixCertif = async function (
-  request,
-  h,
-  dependencies = { requestResponseUtils, certificationCenterMembershipSerializer },
-) {
-  const certificationCenterId = request.params.certificationCenterId;
-  const certificationCenterMembershipId = request.params.id;
-  const certificationCenterMembership = dependencies.certificationCenterMembershipSerializer.deserialize(
-    request.payload,
-  );
-  const currentUserId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
-
-  const foundCertificationCenterId = await certificationCenterMembershipRepository.getCertificationCenterId(
-    certificationCenterMembershipId,
-  );
-  if (foundCertificationCenterId !== certificationCenterId) {
-    throw new ForbiddenError('Wrong certification center');
-  }
-
-  const updatedCertificationCenterMembership = await teamUsecases.updateCertificationCenterMembership({
-    certificationCenterMembershipId,
-    role: certificationCenterMembership.role,
-    updatedByUserId: currentUserId,
-  });
-
-  return h.response(
-    dependencies.certificationCenterMembershipSerializer.serializeMembers(updatedCertificationCenterMembership),
-  );
-};
-
 const certificationCenterMembershipController = {
   disableFromPixCertif,
-  updateFromPixCertif,
 };
 
 export { certificationCenterMembershipController };
