@@ -1,19 +1,19 @@
 {
   "id": "6282925d-4775-4bca-b513-4c3009ec5886",
-  "slug": "didacticiel-modulix",
-  "title": "Didacticiel Modulix",
+  "slug": "bac-a-sable",
+  "title": "Bac à sable",
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Découvrez avec ce didacticiel comment fonctionne Modulix !</p>",
+    "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient normalement l'intégralité des fonctionnalités disponibles à date.</p>",
     "duration": 5,
     "level": "Débutant",
     "tabletSupport": "inconvenient",
-    "objectives": ["Naviguer dans Modulix", "Découvrir les leçons et les activités"]
+    "objectives": ["Non régression fonctionnelle"]
   },
   "transitionTexts": [
     {
-      "content": "<p>Bonjour et bienvenue dans ce didacticiel Modulix. Vous allez pouvoir facilement découvrir comment fonctionne ce nouveau produit Pix.<br>C'est partix&#8239;!</p>",
+      "content": "<p>Bonjour et bienvenue dans le bac à sable de Modulix. Vous allez pouvoir facilement découvrir comment fonctionne ce nouveau produit Pix.<br>C'est partix&#8239;!</p>",
       "grainId": "f312c33d-e7c9-4a69-9ba0-913957b8f7dd"
     },
     {
@@ -33,7 +33,7 @@
       "grainId": "2a77a10f-19a3-4544-80f9-8012dad6506a"
     },
     {
-      "content": "<p>Vous arrivez à la fin de ce didacticiel. Une dernière activité et vous serez prêt à explorer tous les modules que vous souhaitez&#8239;!<span aria-hidden=\"true\">🌟</span> </p>",
+      "content": "<p>Vous arrivez à la fin de ce module. Une dernière activité et vous serez prêt à explorer tous les modules que vous souhaitez&#8239;!<span aria-hidden=\"true\">🌟</span> </p>",
       "grainId": "7cf75e70-8749-4392-8081-f2c02badb0fb"
     }
   ],

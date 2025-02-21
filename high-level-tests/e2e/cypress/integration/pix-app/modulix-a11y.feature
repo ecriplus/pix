@@ -2,7 +2,7 @@
 Fonctionnalité: Accessibilité de Modulix
 
   Contexte:
-    Étant donné que je lance le module "didacticiel-modulix"
+    Étant donné que je lance le module "bac-a-sable"
 
   Scénario: Je valide l'accessibilité de la page de détails
     Quand j'attends 500 ms
