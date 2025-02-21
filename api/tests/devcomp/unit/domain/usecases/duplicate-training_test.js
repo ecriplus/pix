@@ -66,7 +66,12 @@ describe('Unit | Devcomp | Domain | UseCases | duplicate-training', function () 
       editorLogoUrl: 'https://editor.logo.url',
       trainingTriggers: [trainingTrigger],
     });
-    const newTraining = { ...training, id: 654321 };
+    const trainingToCreate = {
+      ...training,
+      internalTitle: '[Copie] Training 1 internal title',
+    };
+    const newTrainingId = 654321;
+    const newTraining = { ...trainingToCreate, id: newTrainingId };
 
     const trainingRepositoryStub = {
       get: sinon.stub().resolves(training),
@@ -89,11 +94,11 @@ describe('Unit | Devcomp | Domain | UseCases | duplicate-training', function () 
     // then
     expect(trainingRepositoryStub.get).to.have.been.calledWithExactly({ trainingId });
     expect(trainingRepositoryStub.create).to.have.been.calledWithExactly({
-      training,
+      training: trainingToCreate,
     });
     expect(trainingTriggerRepositoryStub.findByTrainingIdForAdmin).to.have.been.calledWithExactly({ trainingId });
     expect(trainingTriggerRepositoryStub.createOrUpdate).to.have.been.calledWithExactly({
-      trainingId: newTraining.id,
+      trainingId: newTrainingId,
       triggerTubesForCreation: [
         { tubeId: tube1.id, level: 1 },
         { tubeId: tube2.id, level: 2 },
@@ -102,6 +107,6 @@ describe('Unit | Devcomp | Domain | UseCases | duplicate-training', function () 
       type: trainingTrigger.type,
       threshold: trainingTrigger.threshold,
     });
-    expect(result).to.equal(newTraining);
+    expect(result).to.deep.equal(newTraining);
   });
 });

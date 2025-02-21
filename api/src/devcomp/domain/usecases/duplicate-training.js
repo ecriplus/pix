@@ -2,7 +2,12 @@ import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 
 const duplicateTraining = withTransaction(async ({ trainingId, trainingRepository, trainingTriggerRepository }) => {
   const training = await trainingRepository.get({ trainingId });
-  const newTraining = await trainingRepository.create({ training });
+  const newTraining = await trainingRepository.create({
+    training: {
+      ...training,
+      internalTitle: `[Copie] ${training.internalTitle}`,
+    },
+  });
   const trainingTriggers = await trainingTriggerRepository.findByTrainingIdForAdmin({ trainingId });
 
   for (const trainingTrigger of trainingTriggers) {
