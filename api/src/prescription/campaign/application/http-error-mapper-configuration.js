@@ -6,6 +6,7 @@ import {
   IsForAbsoluteNoviceUpdateError,
   MultipleSendingsUpdateError,
   OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError,
+  OrganizationNotAuthorizedToCreateCampaignError,
   SwapCampaignMismatchOrganizationError,
   UnknownCampaignId,
   UserNotAuthorizedToCreateCampaignError,
@@ -48,6 +49,10 @@ const campaignDomainErrorMappingConfiguration = [
   },
   {
     name: OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError.name,
+    httpErrorFn: (error) => new HttpErrors.ForbiddenError(error.message),
+  },
+  {
+    name: OrganizationNotAuthorizedToCreateCampaignError.name,
     httpErrorFn: (error) => new HttpErrors.ForbiddenError(error.message),
   },
 ];
