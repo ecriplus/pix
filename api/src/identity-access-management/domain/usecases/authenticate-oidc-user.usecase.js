@@ -69,7 +69,7 @@ async function authenticateOidcUser({
     return { authenticationKey, givenName, familyName, email, isAuthenticationComplete: false };
   }
 
-  await _assertUserWithPixAdminAccess({ target, userId: user.id, adminMemberRepository });
+  await _assertUserHasAccessToApplication({ target, user, adminMemberRepository });
 
   await _updateAuthenticationMethodWithComplement({
     userInfo,
@@ -120,9 +120,9 @@ async function _updateAuthenticationMethodWithComplement({
   });
 }
 
-async function _assertUserWithPixAdminAccess({ target, userId, adminMemberRepository }) {
+async function _assertUserHasAccessToApplication({ target, user, adminMemberRepository }) {
   if (target === PIX_ADMIN.TARGET) {
-    const adminMember = await adminMemberRepository.get({ userId });
+    const adminMember = await adminMemberRepository.get({ userId: user.id });
     if (!adminMember?.hasAccessToAdminScope) {
       throw new ForbiddenAccess(
         'User does not have the rights to access the application',
