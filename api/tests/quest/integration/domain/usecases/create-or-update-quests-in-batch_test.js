@@ -15,7 +15,7 @@ describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-b
     filePath = await createTempFile(
       'test.csv',
       `Quest ID;Json configuration for quest
-    ;{"rewardType":"coucou","rewardId":null,"eligibilityRequirements":{"eligibility":"eligibility"},"successRequirements":{"success":"success"}}`,
+    ;{"rewardType":"coucou","rewardId":null,"eligibilityRequirements":[],"successRequirements":[]}`,
     );
     const spySave = sinon.spy(repositories.questRepository, 'saveInBatch');
     const spyDelete = sinon.spy(repositories.questRepository, 'deleteByIds');
@@ -33,8 +33,8 @@ describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-b
           updatedAt: undefined,
           rewardType: 'coucou',
           rewardId: null,
-          eligibilityRequirements: { eligibility: 'eligibility' },
-          successRequirements: { success: 'success' },
+          eligibilityRequirements: [],
+          successRequirements: [],
         }),
       ],
     });
@@ -45,9 +45,9 @@ describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-b
     filePath = await createTempFile(
       'test.csv',
       `Quest ID;Json configuration for quest;deleteQuest
-    3;{"rewardType":"coucou","rewardId":null,"eligibilityRequirements":{"eligibility":"eligibility"},"successRequirements":{"success":"success"}};OUI
-    5;{"rewardType":"bonjour","rewardId":null,"eligibilityRequirements":{"eligibility":"une autre eli"},"successRequirements":{"success":"une autre success"}};oui
-    4;{"rewardType":"salut","rewardId":null,"eligibilityRequirements":{"eligibility":"some other eli"},"successRequirements":{"success":"some other success"}};Non
+    3;{"rewardType":"coucou","rewardId":null,"eligibilityRequirements":[],"successRequirements":[]};OUI
+    5;{"rewardType":"bonjour","rewardId":null,"eligibilityRequirements":[],"successRequirements":[]};oui
+    4;{"rewardType":"salut","rewardId":null,"eligibilityRequirements":[],"successRequirements":[]};Non
     `,
     );
     const spySave = sinon.spy(repositories.questRepository, 'saveInBatch');
@@ -65,8 +65,8 @@ describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-b
           updatedAt: undefined,
           rewardType: 'salut',
           rewardId: null,
-          eligibilityRequirements: { eligibility: 'some other eli' },
-          successRequirements: { success: 'some other success' },
+          eligibilityRequirements: [],
+          successRequirements: [],
         }),
       ],
     });

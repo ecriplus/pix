@@ -13,16 +13,24 @@ const findAll = async () => {
   return toDomain(quests);
 };
 
+// envisager de mettre tableau vide en valeur par défaut des requirements si pas renseigné pour pas péter le code
+// ensuite
 const saveInBatch = async ({ quests }) => {
   const knexConn = DomainTransaction.getConnection();
 
   const chunks = chunk(quests, 10);
 
   for (const chunk of chunks) {
-    await knexConn('quests')
-      .insert(chunk.map((c) => ({ ...c, updatedAt: new Date() })))
-      .onConflict('id')
-      .merge();
+    const dtoToSaveInDB = chunk.map((quest) => {
+      const dto = quest.toDTO();
+      return {
+        ...dto,
+        eligibilityRequirements: JSON.stringify(dto.eligibilityRequirements),
+        successRequirements: JSON.stringify(dto.successRequirements),
+        updatedAt: new Date(),
+      };
+    });
+    await knexConn('quests').insert(dtoToSaveInDB).onConflict('id').merge();
   }
 };
 

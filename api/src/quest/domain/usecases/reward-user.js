@@ -1,3 +1,5 @@
+import { DataForQuest } from '../models/DataForQuest.js';
+
 export const rewardUser = async ({
   userId,
   questRepository,
@@ -8,7 +10,6 @@ export const rewardUser = async ({
   if (!userId) {
     return;
   }
-
   const quests = await questRepository.findAll();
 
   if (quests.length === 0) {
@@ -21,9 +22,11 @@ export const rewardUser = async ({
   const rewardIds = rewards.map((reward) => reward.rewardId);
 
   for (const quest of quests) {
-    const isEligibleForQuest = eligibilities.some((eligibility) => quest.isEligible(eligibility));
+    const dataForQuest = eligibilities
+      .map((eligibility) => new DataForQuest({ eligibility }))
+      .find((dataForQuest) => quest.isEligible(dataForQuest));
 
-    if (!isEligibleForQuest) {
+    if (!dataForQuest) {
       continue;
     }
 
@@ -31,8 +34,9 @@ export const rewardUser = async ({
       continue;
     }
 
-    const success = await successRepository.find({ userId, skillIds: quest.successRequirements[0].data.ids });
-    const userHasSucceedQuest = quest.isSuccessful(success);
+    const success = await successRepository.find({ userId });
+    dataForQuest.success = success;
+    const userHasSucceedQuest = quest.isSuccessful(dataForQuest);
 
     if (userHasSucceedQuest) {
       await rewardRepository.reward({ userId, rewardId: quest.rewardId });

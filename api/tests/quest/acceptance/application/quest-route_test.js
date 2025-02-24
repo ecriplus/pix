@@ -1,6 +1,11 @@
 import iconv from 'iconv-lite';
 
 import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../src/quest/domain/models/Quest.js';
+import {
   createServer,
   databaseBuilder,
   expect,
@@ -23,17 +28,59 @@ describe('Quest | Acceptance | Application | Quest Route ', function () {
       const { id: organizationLearnerId, userId } = databaseBuilder.factory.buildOrganizationLearner({
         organizationId,
       });
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      const campaignId = databaseBuilder.factory.buildCampaign({
+        targetProfileId,
+      }).id;
       const { id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation({
         organizationLearnerId,
         userId,
+        campaignId,
       });
       const rewardId = databaseBuilder.factory.buildAttestation().id;
       databaseBuilder.factory.buildQuest({
         rewardType: 'attestations',
         rewardId,
-        eligibilityRequirements: [],
+        eligibilityRequirements: [
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
+            data: {
+              type: {
+                data: 'SCO',
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+          },
+          {
+            requirement_type: REQUIREMENT_TYPES.COMPOSE,
+            data: [
+              {
+                requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+                data: {
+                  targetProfileId: {
+                    data: targetProfileId,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
+                  },
+                },
+                comparison: REQUIREMENT_COMPARISONS.ALL,
+              },
+              {
+                requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+                data: {
+                  targetProfileId: {
+                    data: targetProfileId + 8,
+                    comparison: CRITERION_COMPARISONS.EQUAL,
+                  },
+                },
+                comparison: REQUIREMENT_COMPARISONS.ALL,
+              },
+            ],
+            comparison: REQUIREMENT_COMPARISONS.ONE_OF,
+          },
+        ],
         successRequirements: [],
-      }).id;
+      });
 
       await databaseBuilder.commit();
       const options = {
@@ -56,8 +103,9 @@ describe('Quest | Acceptance | Application | Quest Route ', function () {
       // given
       const admin = await insertUserWithRoleSuperAdmin();
       await databaseBuilder.commit();
-      const input = `Quest ID;Json configuration for quest
-        ;{"rewardType":"coucou","rewardId":null,"eligibilityRequirements":{"eligibility":"eligibility"},"successRequirements":{"success":"success"}}`;
+      // TODO j'ai l'impression qu'en séparateur en ; il capte pas les différents headers
+      const input = `Quest ID,Json configuration for quest
+,"{""rewardType"":""coucou"",""rewardId"":null,""eligibilityRequirements"":[{""requirement_type"":""organization"",""data"":{""type"":""SCO""},""comparison"":""all""}],""successRequirements"":[{""requirement_type"":""skillProfile"",""data"":{""skillIds"":[""skillA"",""skillB""],""threshold"":66}}]}"`;
 
       const options = {
         method: 'POST',

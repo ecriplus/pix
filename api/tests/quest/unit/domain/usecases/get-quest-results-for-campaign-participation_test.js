@@ -1,11 +1,14 @@
 import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
-import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
+import {
+  CRITERION_COMPARISONS,
+  Quest,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../src/quest/domain/models/Quest.js';
 import { getQuestResultsForCampaignParticipation } from '../../../../../src/quest/domain/usecases/get-quest-results-for-campaign-participation.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipation', function () {
-  let campaignParticipationRepository;
-
   let questRepository, eligibilityRepository, rewardRepository, campaignParticipationId, userId;
 
   beforeEach(function () {
@@ -13,7 +16,6 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
     campaignParticipationId = 2;
     questRepository = { findAll: sinon.stub() };
     eligibilityRepository = { find: sinon.stub() };
-    campaignParticipationRepository = { getCampaignByParticipationId: sinon.stub() };
     rewardRepository = { getByQuestAndUserId: sinon.stub() };
   });
 
@@ -34,6 +36,8 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
     expect(result).to.have.lengthOf(0);
   });
 
+  // TODO demander si ce cas est possible (hors cuRL douteux) ?
+  // EDIT : cas de l'accès simplifié !
   it('should return empty array when there is no eligibility', async function () {
     // given
     const wrongCampaignParticipationId = 30;
@@ -59,7 +63,6 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
       userId,
       questRepository,
       eligibilityRepository,
-      campaignParticipationRepository,
       rewardRepository,
     });
 
@@ -74,16 +77,22 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
       new Quest({
         id: 10,
         eligibilityRequirements: [
-          { type: 'campaignParticipations', data: { targetProfileIds: [wrongTargetProfileId] } },
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            data: {
+              targetProfileId: {
+                data: wrongTargetProfileId,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+          },
         ],
         successRequirements: [],
         rewardType: 'attestations',
         rewardId: 20,
       }),
     ]);
-    campaignParticipationRepository.getCampaignByParticipationId
-      .withArgs({ campaignParticipationId })
-      .resolves([{ targetProfileId: 40 }]);
 
     eligibilityRepository.find.withArgs({ userId }).resolves([
       new Eligibility({
@@ -97,7 +106,6 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
       userId,
       questRepository,
       eligibilityRepository,
-      campaignParticipationRepository,
       rewardRepository,
     });
 

@@ -1,6 +1,10 @@
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import { REWARD_TYPES } from '../../../../src/quest/domain/constants.js';
-import { COMPARISON } from '../../../../src/quest/domain/models/Quest.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../src/quest/domain/models/Quest.js';
 import { Assessment, CampaignParticipationStatuses, Membership } from '../../../../src/shared/domain/models/index.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
@@ -10,9 +14,38 @@ import {
   USER_ID_ADMIN_ORGANIZATION,
   USER_ID_MEMBER_ORGANIZATION,
 } from '../common/constants.js';
-import { TARGET_PROFILE_BADGES_STAGES_ID } from './constants.js';
+import { TARGET_PROFILE_BADGES_STAGES_ID, TARGET_PROFILE_NO_BADGES_NO_STAGES_ID } from './constants.js';
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
+
+function buildParenthoodQuest(databaseBuilder) {
+  const { id: rewardId } = databaseBuilder.factory.buildAttestation({
+    templateName: 'parenthood-attestation-template',
+    key: ATTESTATIONS.PARENTHOOD,
+  });
+
+  databaseBuilder.factory.buildQuest({
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId,
+    successRequirements: [],
+    eligibilityRequirements: [
+      {
+        requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+        comparison: REQUIREMENT_COMPARISONS.ALL,
+        data: {
+          targetProfileId: {
+            data: TARGET_PROFILE_NO_BADGES_NO_STAGES_ID,
+            comparison: CRITERION_COMPARISONS.EQUAL,
+          },
+          status: {
+            data: [CampaignParticipationStatuses.SHARED, CampaignParticipationStatuses.TO_SHARE],
+            comparison: CRITERION_COMPARISONS.ONE_OF,
+          },
+        },
+      },
+    ],
+  });
+}
 
 const USERS = [
   {
@@ -107,9 +140,18 @@ const TARGET_PROFILE_TUBES = [
 ];
 
 const CAMPAIGN_SKILLS = [
-  ['skill2wQfMYrOHlL6HI', 'skill1QAVccgLO16Rx8', 'skillX5Rpk2rucNfnF', 'skill1aj7jVAKrVgUye', 'reczOCGv8pz976Acl'],
-  ['skill2wQfMYrOHlL6HI', 'skill1QAVccgLO16Rx8', 'skillX5Rpk2rucNfnF'],
-  ['skill1aj7jVAKrVgUye', 'reczOCGv8pz976Acl', 'skill2mIMdudcltFsaz'],
+  [
+    'recb0ZHKckwrnZeb8',
+    'recgOc2OreHCosoRp',
+    'skill28d761IHIaQs6c',
+    'skill1Jk1w9oDk9twVU',
+    'skill1uRSMtd7N6THAn',
+    'skill1KIPisxUY59N2w',
+    'skill1XYyr7gZO4VdHG',
+    'skill26VkJRWfPciwSG',
+  ],
+  ['recb0ZHKckwrnZeb8', 'recgOc2OreHCosoRp', 'skill28d761IHIaQs6c', 'skill1Jk1w9oDk9twVU'],
+  ['skill1uRSMtd7N6THAn', 'skill1KIPisxUY59N2w', 'skill1XYyr7gZO4VdHG', 'skill26VkJRWfPciwSG'],
 ];
 
 const buildUsers = (databaseBuilder) => USERS.map((user) => databaseBuilder.factory.buildUser.withRawPassword(user));
@@ -155,35 +197,80 @@ const buildSixthGradeQuests = (
   rewardId,
   [firstTargetProfile, secondTargetProfile, thirdTargetProfile],
 ) => {
-  const firstQuestRequirement = [
+  const questEligibilityRequirements = [
     {
-      type: 'organization',
+      requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
       data: {
-        type: 'SCO',
+        type: {
+          data: 'SCO',
+          comparison: CRITERION_COMPARISONS.EQUAL,
+        },
       },
-      comparison: COMPARISON.ALL,
+      comparison: REQUIREMENT_COMPARISONS.ALL,
     },
     {
-      type: 'organization',
+      requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
       data: {
-        isManagingStudents: true,
-        tags: [AEFE_TAG.name],
+        isManagingStudents: {
+          data: true,
+          comparison: CRITERION_COMPARISONS.EQUAL,
+        },
+        tags: {
+          data: [AEFE_TAG.name],
+          comparison: CRITERION_COMPARISONS.ALL,
+        },
       },
-      comparison: COMPARISON.ONE_OF,
+      comparison: REQUIREMENT_COMPARISONS.ONE_OF,
     },
     {
-      type: 'campaignParticipations',
-      data: {
-        targetProfileIds: [firstTargetProfile.id],
-      },
-      comparison: COMPARISON.ALL,
+      requirement_type: REQUIREMENT_TYPES.COMPOSE,
+      data: [
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          data: {
+            targetProfileId: {
+              data: firstTargetProfile.id,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+        {
+          requirement_type: REQUIREMENT_TYPES.COMPOSE,
+          data: [
+            {
+              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              data: {
+                targetProfileId: {
+                  data: thirdTargetProfile.id,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
+                },
+              },
+              comparison: REQUIREMENT_COMPARISONS.ALL,
+            },
+            {
+              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              data: {
+                targetProfileId: {
+                  data: secondTargetProfile.id,
+                  comparison: CRITERION_COMPARISONS.EQUAL,
+                },
+              },
+              comparison: REQUIREMENT_COMPARISONS.ALL,
+            },
+          ],
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+        },
+      ],
+      comparison: REQUIREMENT_COMPARISONS.ONE_OF,
     },
   ];
-  const firstQuestSuccessRequirements = [
+
+  const questSuccessRequirements = [
     {
-      type: 'skill',
+      requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
       data: {
-        ids: CAMPAIGN_SKILLS[0],
+        skillIds: [CAMPAIGN_SKILLS[1], CAMPAIGN_SKILLS[2]].flat(),
         threshold: 50,
       },
     },
@@ -192,50 +279,8 @@ const buildSixthGradeQuests = (
   databaseBuilder.factory.buildQuest({
     rewardType: REWARD_TYPES.ATTESTATION,
     rewardId,
-    eligibilityRequirements: firstQuestRequirement,
-    successRequirements: firstQuestSuccessRequirements,
-  });
-
-  const secondQuestEligibilityRequirements = [
-    {
-      type: 'organization',
-      data: {
-        type: 'SCO',
-      },
-      comparison: COMPARISON.ALL,
-    },
-    {
-      type: 'organization',
-      data: {
-        isManagingStudents: true,
-        tags: [AEFE_TAG.name],
-      },
-      comparison: COMPARISON.ONE_OF,
-    },
-    {
-      type: 'campaignParticipations',
-      data: {
-        targetProfileIds: [secondTargetProfile.id, thirdTargetProfile.id],
-      },
-      comparison: COMPARISON.ALL,
-    },
-  ];
-
-  const secondQuestSuccessRequirements = [
-    {
-      type: 'skill',
-      data: {
-        ids: [CAMPAIGN_SKILLS[1], CAMPAIGN_SKILLS[2]].flat(),
-        threshold: 50,
-      },
-    },
-  ];
-
-  databaseBuilder.factory.buildQuest({
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId,
-    eligibilityRequirements: secondQuestEligibilityRequirements,
-    successRequirements: secondQuestSuccessRequirements,
+    eligibilityRequirements: questEligibilityRequirements,
+    successRequirements: questSuccessRequirements,
   });
 };
 
@@ -319,8 +364,8 @@ export const buildQuests = async (databaseBuilder) => {
     },
     { userId: failedUser.id, division: '6emeA', firstName: 'attestation-failed', lastName: 'attestation-failed' },
     { userId: pendingUser.id, division: '6emeB', firstName: 'attestation-pending', lastName: 'attestation-pending' },
-    { userId: blankUser.id, division: '6emeB', firstName: 'attestation-blank', lastName: 'attestation-blank' },
     { userId: disabledUser.id, division: '6emeB', firstName: 'Disabled', lastName: 'attestation', isDisabled: true },
+    { userId: blankUser.id, division: '6emeB', firstName: 'attestation-blank', lastName: 'attestation-blank' },
   ];
 
   const [
@@ -391,6 +436,7 @@ export const buildQuests = async (databaseBuilder) => {
 
   // Create quests
   buildSixthGradeQuests(databaseBuilder, rewardId, targetProfiles);
+  buildParenthoodQuest(databaseBuilder);
 
   // Create reward for success user
   databaseBuilder.factory.buildProfileReward({

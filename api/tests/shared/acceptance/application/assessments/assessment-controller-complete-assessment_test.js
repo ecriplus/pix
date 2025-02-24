@@ -2,6 +2,11 @@ import _ from 'lodash';
 
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import * as badgeAcquisitionRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../src/quest/domain/models/Quest.js';
 import { LOCALE } from '../../../../../src/shared/domain/constants.js';
 import { Assessment, TrainingTrigger } from '../../../../../src/shared/domain/models/index.js';
 import {
@@ -454,6 +459,77 @@ describe('Acceptance | Controller | assessment-controller-complete-assessment', 
 
         // then
         expect(response.statusCode).to.equal(204);
+      });
+
+      context('when there are quests', function () {
+        it('should complete the assessment', async function () {
+          // given
+          const organizationId = databaseBuilder.factory.buildOrganization({ type: 'SCO' }).id;
+          const { id: organizationLearnerId, userId } = databaseBuilder.factory.buildOrganizationLearner({
+            organizationId,
+          });
+          const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+          const campaignId = databaseBuilder.factory.buildCampaign({
+            targetProfileId,
+          }).id;
+          databaseBuilder.factory.buildCampaignParticipation({
+            organizationLearnerId,
+            userId,
+            campaignId,
+          });
+          const rewardId = databaseBuilder.factory.buildAttestation().id;
+          databaseBuilder.factory.buildQuest({
+            rewardType: 'attestations',
+            rewardId,
+            eligibilityRequirements: [
+              {
+                requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
+                data: {
+                  type: {
+                    data: 'SCO',
+                    comparison: CRITERION_COMPARISONS.EQUAL,
+                  },
+                },
+                comparison: REQUIREMENT_COMPARISONS.ALL,
+              },
+              {
+                requirement_type: REQUIREMENT_TYPES.COMPOSE,
+                data: [
+                  {
+                    requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+                    data: {
+                      targetProfileId: {
+                        data: targetProfileId,
+                        comparison: CRITERION_COMPARISONS.EQUAL,
+                      },
+                    },
+                    comparison: REQUIREMENT_COMPARISONS.ALL,
+                  },
+                  {
+                    requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+                    data: {
+                      targetProfileId: {
+                        data: targetProfileId + 8,
+                        comparison: CRITERION_COMPARISONS.EQUAL,
+                      },
+                    },
+                    comparison: REQUIREMENT_COMPARISONS.ALL,
+                  },
+                ],
+                comparison: REQUIREMENT_COMPARISONS.ONE_OF,
+              },
+            ],
+            successRequirements: [],
+          });
+
+          await databaseBuilder.commit();
+
+          // when
+          const response = await server.inject(options);
+
+          // then
+          expect(response.statusCode).to.equal(204);
+        });
       });
     });
 

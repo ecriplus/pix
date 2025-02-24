@@ -1,5 +1,9 @@
 import { PROFILE_REWARDS_TABLE_NAME } from '../../../../../db/migrations/20240820101213_add-profile-rewards-table.js';
-import { COMPARISON } from '../../../../../src/quest/domain/models/Quest.js';
+import {
+  CRITERION_COMPARISONS,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../src/quest/domain/models/Quest.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
@@ -54,18 +58,21 @@ const setupContext = async (
   const quest = databaseBuilder.factory.buildQuest({
     eligibilityRequirements: [
       {
-        type: 'organization',
-        comparison: COMPARISON.ALL,
+        requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
+        comparison: REQUIREMENT_COMPARISONS.ALL,
         data: {
-          type: questOrganization,
+          type: {
+            data: questOrganization,
+            comparison: CRITERION_COMPARISONS.EQUAL,
+          },
         },
       },
     ],
     successRequirements: [
       {
-        type: 'skills',
+        requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
         data: {
-          ids: ['skillId1', 'skillId2', 'skillId3'],
+          skillIds: ['skillId1', 'skillId2', 'skillId3'],
           threshold: 50,
         },
       },
@@ -84,7 +91,7 @@ const setupContext = async (
 
 describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
   context('when user is eligible and meets success requirements', function () {
-    before(async function () {
+    beforeEach(async function () {
       await setupContext(userId);
     });
 
@@ -152,18 +159,21 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
         rewardId,
         eligibilityRequirements: [
           {
-            type: 'organization',
-            comparison: COMPARISON.ALL,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
             data: {
-              type: questOrganization,
+              type: {
+                data: questOrganization,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
             },
           },
         ],
         successRequirements: [
           {
-            type: 'skills',
+            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
             data: {
-              ids: ['skillId1', 'skillId2', 'skillId3'],
+              skillIds: ['skillId1', 'skillId2', 'skillId3'],
               threshold: 50,
             },
           },
@@ -173,18 +183,21 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
         rewardId,
         eligibilityRequirements: [
           {
-            type: 'organization',
-            comparison: COMPARISON.ALL,
+            requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
             data: {
-              type: questOrganization,
+              type: {
+                data: questOrganization,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
             },
           },
         ],
         successRequirements: [
           {
-            type: 'skills',
+            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
             data: {
-              ids: ['skillId1', 'skillId2', 'skillId3'],
+              skillIds: ['skillId1', 'skillId2', 'skillId3'],
               threshold: 50,
             },
           },
@@ -205,7 +218,7 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
   });
 
   context('when user is not eligible', function () {
-    before(async function () {
+    beforeEach(async function () {
       await setupContext(userId, false);
     });
 
@@ -220,7 +233,7 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
   });
 
   context('when user is eligible but does not meet success requirements', function () {
-    before(async function () {
+    beforeEach(async function () {
       await setupContext(userId, true, false);
     });
 
@@ -235,7 +248,7 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
   });
 
   context('when user has already earned a reward for the quest', function () {
-    before(async function () {
+    beforeEach(async function () {
       await setupContext(userId, true, true, true);
     });
 
