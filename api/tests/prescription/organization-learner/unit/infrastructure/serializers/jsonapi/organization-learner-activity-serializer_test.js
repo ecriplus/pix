@@ -1,6 +1,7 @@
 import { OrganizationLearnerActivity } from '../../../../../../../src/prescription/organization-learner/domain/read-models/OrganizationLearnerActivity.js';
 import { OrganizationLearnerParticipation } from '../../../../../../../src/prescription/organization-learner/domain/read-models/OrganizationLearnerParticipation.js';
 import * as serializer from '../../../../../../../src/prescription/organization-learner/infrastructure/serializers/jsonapi/organization-learner-activity-serializer.js';
+import { CampaignTypes } from '../../../../../../../src/prescription/shared/domain/constants.js';
 import { expect } from '../../../../../../test-helper.js';
 
 describe('Unit | Serializer | JSONAPI | organization-learner-participation-serialize', function () {
@@ -13,7 +14,7 @@ describe('Unit | Serializer | JSONAPI | organization-learner-participation-seria
           new OrganizationLearnerParticipation({
             id: '99999',
             campaignId: '123',
-            campaignType: 'PROFILES_COLLECTION',
+            campaignType: CampaignTypes.PROFILES_COLLECTION,
             campaignName: 'La 1ère campagne',
             createdAt: '2000-01-01T10:00:00Z',
             sharedAt: '2000-02-01T10:00:00Z',
@@ -24,7 +25,7 @@ describe('Unit | Serializer | JSONAPI | organization-learner-participation-seria
           new OrganizationLearnerParticipation({
             id: '100000',
             campaignId: '456',
-            campaignType: 'ASSESSMENT',
+            campaignType: CampaignTypes.ASSESSMENT,
             campaignName: 'La 2ème campagne',
             createdAt: '2000-03-01T10:00:00Z',
             sharedAt: '2000-04-01T10:00:00Z',
@@ -35,14 +36,14 @@ describe('Unit | Serializer | JSONAPI | organization-learner-participation-seria
         ],
         statistics: [
           {
-            campaignType: 'ASSESSMENT',
+            campaignType: CampaignTypes.ASSESSMENT,
             shared: 0,
             started: 1,
             to_share: 0,
             total: 1,
           },
           {
-            campaignType: 'PROFILES_COLLECTION',
+            campaignType: CampaignTypes.PROFILES_COLLECTION,
             shared: 1,
             to_share: 0,
             total: 1,
