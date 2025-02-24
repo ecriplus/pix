@@ -76,10 +76,11 @@ export default [
       ],
     },
   },
-  mocha.configs.flat.recommended,
   {
+    ...mocha.configs.flat.recommended,
     files: ['tests/**/*.js'],
     rules: {
+      ...mocha.configs.flat.recommended.rules,
       'mocha/no-hooks-for-single-case': 'off',
       'mocha/no-exclusive-tests': 'error',
       'mocha/no-pending-tests': 'error',

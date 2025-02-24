@@ -19,6 +19,7 @@ import sinonChai from 'sinon-chai';
 import { DatamartBuilder } from '../datamart/datamart-builder/datamart-builder.js';
 import { DatabaseBuilder } from '../db/database-builder/database-builder.js';
 import { datamartKnex, disconnect, knex } from '../db/knex-database-connection.js';
+import { createMaddoServer } from '../server.maddo.js';
 import { PIX_ADMIN } from '../src/authorization/domain/constants.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
@@ -330,10 +331,12 @@ const testErr = new Error('Fake Error');
 export {
   catchErr,
   catchErrSync,
+  createMaddoServer,
   createServerWithTestOidcProvider as createServer,
   createTempFile,
   databaseBuilder,
   datamartBuilder,
+  datamartKnex,
   domainBuilder,
   EMPTY_BLANK_AND_NULL,
   expect,

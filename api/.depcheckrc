@@ -4,6 +4,7 @@ ignores:
     'hapi-swagger',
     'hapi-sentry',
     'mocha-junit-reporter',
+    'pg-query-stream',
   ]
 #  @babel/plugin-syntax-import-attributes is used by eslint
 # see https://github.com/babel/babel/blob/main/packages/babel-plugin-syntax-import-attributes/README.md
