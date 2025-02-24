@@ -1,11 +1,13 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixMultiSelect from '@1024pix/pix-ui/components/pix-multi-select';
+import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { and, eq } from 'ember-truth-helpers';
 
 import PageTitle from './ui/page-title';
 
@@ -21,14 +23,18 @@ export default class Attestations extends Component {
     );
   }
 
-  get displayAttestations() {
+  get availableAttestations() {
     if (this.displaySixthGrade) {
       const attestations = this.currentUser.prescriber.availableAttestations.filter(
         (attestation) => attestation != SIXTH_GRADE_ATTESTATION_KEY,
       );
-      return attestations.length > 0;
+      return attestations;
     }
-    return this.currentUser.prescriber.availableAttestations.length > 0;
+    return this.currentUser.prescriber.availableAttestations;
+  }
+
+  get displayAttestations() {
+    return this.availableAttestations.length > 0;
   }
 
   <template>
@@ -40,18 +46,38 @@ export default class Attestations extends Component {
       <SixthGrade @divisions={{@divisions}} @onSubmit={{@onSubmit}} />
     {{/if}}
 
+    {{#if (and this.displaySixthGrade this.displayAttestations)}}
+      <div class="attestations-page__separator" />
+    {{/if}}
+
     {{#if this.displayAttestations}}
-      <OtherAttestations @onSubmit={{@onSubmit}} />
+      <OtherAttestations @attestations={{this.availableAttestations}} @onSubmit={{@onSubmit}} />
     {{/if}}
   </template>
 }
 
 class OtherAttestations extends Component {
+  @tracked selectedAttestation = null;
+
+  get options() {
+    return this.args.attestations.map((attestation) => ({ value: attestation, label: attestation }));
+  }
+
   @action
   onSubmit(event) {
     event.preventDefault();
 
-    this.args.onSubmit(SIXTH_GRADE_ATTESTATION_KEY, []);
+    this.args.onSubmit(this.selectedAttestation, []);
+    this.selectedAttestation = null;
+  }
+
+  @action
+  onSelectedAttestationChange(value) {
+    if (value === '') {
+      this.selectedAttestation = null;
+    } else {
+      this.selectedAttestation = value;
+    }
   }
 
   <template>
@@ -59,9 +85,24 @@ class OtherAttestations extends Component {
       <p class="attestations-page__text">
         {{t "pages.attestations.basic-description"}}
       </p>
-      <PixButton @triggerAction={{this.onSubmit}} @size="small">
-        {{t "pages.attestations.download-attestations-button"}}
-      </PixButton>
+      <form class="attestations-page__action" {{on "submit" this.onSubmit}}>
+        <PixSelect
+          @value={{this.selectedAttestation}}
+          @options={{this.options}}
+          @onChange={{this.onSelectedAttestationChange}}
+          @placeholder={{t "common.filters.placeholder"}}
+        >
+          <:label>Attestation</:label>
+        </PixSelect>
+        <PixButton
+          @type="submit"
+          @isDisabled={{eq this.selectedAttestation null}}
+          @triggerAction={{this.onSubmit}}
+          @size="small"
+        >
+          {{t "pages.attestations.download-attestations-button"}}
+        </PixButton>
+      </form>
     </div>
   </template>
 }
@@ -101,7 +142,7 @@ class SixthGrade extends Component {
         <:label>{{t "pages.attestations.select-label"}}</:label>
         <:default as |option|>{{option.label}}</:default>
       </PixMultiSelect>
-      <PixButton @type="submit" id="download_attestations" @size="small" @isDisabled={{this.isDisabled}}>
+      <PixButton @type="submit" @size="small" @isDisabled={{this.isDisabled}}>
         {{t "pages.attestations.download-attestations-button"}}
       </PixButton>
     </form>

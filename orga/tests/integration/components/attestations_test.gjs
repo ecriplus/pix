@@ -8,7 +8,7 @@ import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
-module.only('Integration | Component | Attestations', function (hooks) {
+module('Integration | Component | Attestations', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   hooks.beforeEach(function () {
@@ -136,6 +136,12 @@ module.only('Integration | Component | Attestations', function (hooks) {
       const downloadButton = await screen.getByRole('button', {
         name: t('pages.attestations.download-attestations-button'),
       });
+
+      const select = await screen.getByLabelText('Attestation');
+      await click(select);
+
+      const firstOption = await screen.findByRole('option', { name: SIXTH_GRADE_ATTESTATION_KEY });
+      await click(firstOption);
 
       await click(downloadButton);
 
