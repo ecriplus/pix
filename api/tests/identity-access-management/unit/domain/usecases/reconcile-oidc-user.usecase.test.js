@@ -5,17 +5,21 @@ import {
 } from '../../../../../src/identity-access-management/domain/errors.js';
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { reconcileOidcUser } from '../../../../../src/identity-access-management/domain/usecases/reconcile-oidc-user.usecase.js';
+import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-user', function () {
   const audience = 'https://app.pix.fr';
+  const requestedApplication = new RequestedApplication('app');
+
   context('when identityProvider is generic', function () {
     let authenticationMethodRepository,
       authenticationSessionService,
       identityProvider,
       oidcAuthenticationService,
       oidcAuthenticationServiceRegistry,
-      userLoginRepository;
+      userLoginRepository,
+      lastUserApplicationConnectionsRepository;
 
     beforeEach(function () {
       identityProvider = 'genericOidcProviderCode';
@@ -34,6 +38,10 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         loadOidcProviderServices: sinon.stub().resolves(),
         configureReadyOidcProviderServiceByCode: sinon.stub().resolves(),
         getOidcProviderServiceByCode: sinon.stub().returns(oidcAuthenticationService),
+      };
+
+      lastUserApplicationConnectionsRepository = {
+        upsert: sinon.stub(),
       };
     });
 
@@ -76,6 +84,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         authenticationMethodRepository,
         oidcAuthenticationServiceRegistry,
         userLoginRepository,
+        lastUserApplicationConnectionsRepository,
+        requestedApplication,
       });
 
       // then
@@ -116,6 +126,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         sessionContent,
         userInfo,
       });
+
       oidcAuthenticationService.createAuthenticationComplement.withArgs({ userInfo, sessionContent }).returns(
         new AuthenticationMethod.OidcAuthenticationComplement({
           accessToken: 'accessToken',
@@ -132,6 +143,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         authenticationMethodRepository,
         oidcAuthenticationServiceRegistry,
         userLoginRepository,
+        requestedApplication,
+        lastUserApplicationConnectionsRepository,
       });
 
       // then
@@ -142,6 +155,44 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         AuthenticationMethod.OidcAuthenticationComplement,
       );
     });
+
+    it('saves the last user application connection', async function () {
+      // given
+      const sessionContent = { idToken: 'idToken' };
+      const externalIdentifier = 'external_id';
+      const userId = 1;
+      const userInfo = { userId, externalIdentityId: externalIdentifier, firstName: 'Anne' };
+      authenticationSessionService.getByKey.resolves({
+        sessionContent,
+        userInfo,
+      });
+      oidcAuthenticationService.createAuthenticationComplement.withArgs({ userInfo, sessionContent }).returns(
+        new AuthenticationMethod.OidcAuthenticationComplement({
+          accessToken: 'accessToken',
+          expiredDate: new Date(),
+        }),
+      );
+
+      // when
+      await reconcileOidcUser({
+        authenticationKey: 'authenticationKey',
+        identityProvider,
+        audience,
+        authenticationSessionService,
+        authenticationMethodRepository,
+        oidcAuthenticationServiceRegistry,
+        userLoginRepository,
+        requestedApplication,
+        lastUserApplicationConnectionsRepository,
+      });
+
+      // then
+      expect(lastUserApplicationConnectionsRepository.upsert).to.be.calledWithExactly({
+        userId,
+        application: 'app',
+        lastLoggedAt: sinon.match.instanceOf(Date),
+      });
+    });
   });
 
   context('when identityProvider is POLE_EMPLOI', function () {
@@ -150,7 +201,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       identityProvider,
       oidcAuthenticationService,
       oidcAuthenticationServiceRegistry,
-      userLoginRepository;
+      userLoginRepository,
+      lastUserApplicationConnectionsRepository;
 
     beforeEach(function () {
       identityProvider = POLE_EMPLOI.code;
@@ -170,6 +222,10 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         loadOidcProviderServices: sinon.stub().resolves(),
         configureReadyOidcProviderServiceByCode: sinon.stub().resolves(),
         getOidcProviderServiceByCode: sinon.stub().returns(oidcAuthenticationService),
+      };
+
+      lastUserApplicationConnectionsRepository = {
+        upsert: sinon.stub(),
       };
     });
 
@@ -199,6 +255,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         authenticationMethodRepository,
         oidcAuthenticationServiceRegistry,
         userLoginRepository,
+        requestedApplication,
+        lastUserApplicationConnectionsRepository,
       });
 
       // then
@@ -240,6 +298,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         authenticationMethodRepository,
         oidcAuthenticationServiceRegistry,
         userLoginRepository,
+        requestedApplication,
+        lastUserApplicationConnectionsRepository,
       });
 
       // then

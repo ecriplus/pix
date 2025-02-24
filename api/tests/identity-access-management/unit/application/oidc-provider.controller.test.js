@@ -1,5 +1,6 @@
 import { oidcProviderController } from '../../../../src/identity-access-management/application/oidc-provider/oidc-provider.controller.js';
 import { usecases } from '../../../../src/identity-access-management/domain/usecases/index.js';
+import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { BadRequestError, UnauthorizedError } from '../../../../src/shared/application/http-errors.js';
 import { catchErr, domainBuilder, expect, hFake, sinon } from '../../../test-helper.js';
 
@@ -322,6 +323,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
           authenticationKey: '123abc',
         },
       };
+      const requestedApplication = new RequestedApplication('app');
 
       sinon.stub(usecases, 'reconcileOidcUser').resolves({
         accessToken: 'accessToken',
@@ -336,6 +338,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
         authenticationKey: '123abc',
         identityProvider: 'OIDC',
         audience: 'https://app.pix.fr',
+        requestedApplication,
       });
       expect(result.source).to.deep.equal({ access_token: 'accessToken', logout_url_uuid: 'logoutUrlUUID' });
     });

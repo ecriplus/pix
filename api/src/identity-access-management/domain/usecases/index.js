@@ -33,6 +33,7 @@ import { emailValidationDemandRepository } from '../../infrastructure/repositori
 import { eventLoggingJobRepository } from '../../infrastructure/repositories/jobs/event-logging-job.repository.js';
 import { garAnonymizedBatchEventsLoggingJobRepository } from '../../infrastructure/repositories/jobs/gar-anonymized-batch-events-logging-job-repository.js';
 import { userAnonymizedEventLoggingJobRepository } from '../../infrastructure/repositories/jobs/user-anonymized-event-logging-job-repository.js';
+import { lastUserApplicationConnectionsRepository } from '../../infrastructure/repositories/last-user-application-connections.repository.js';
 import { legalDocumentApiRepository } from '../../infrastructure/repositories/legal-document-api.repository.js';
 import { oidcProviderRepository } from '../../infrastructure/repositories/oidc-provider-repository.js';
 import * as privacyUsersApiRepository from '../../infrastructure/repositories/privacy-users-api.repository.js';
@@ -64,6 +65,7 @@ const repositories = {
   emailValidationDemandRepository,
   emailRepository,
   eventLoggingJobRepository,
+  lastUserApplicationConnectionsRepository,
   legalDocumentApiRepository,
   membershipRepository,
   oidcProviderRepository,

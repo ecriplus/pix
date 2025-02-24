@@ -3,7 +3,7 @@ import { requestResponseUtils } from '../../../shared/infrastructure/utils/reque
 import { usecases } from '../../domain/usecases/index.js';
 import * as oidcProviderSerializer from '../../infrastructure/serializers/jsonapi/oidc-identity-providers.serializer.js';
 import * as oidcSerializer from '../../infrastructure/serializers/jsonapi/oidc-serializer.js';
-import { getForwardedOrigin } from '../../infrastructure/utils/network.js';
+import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/utils/network.js';
 
 /**
  * @typedef {function} authenticateOidcUser
@@ -152,11 +152,13 @@ async function reconcileUser(request, h) {
   const { identityProvider, authenticationKey } = request.deserializedPayload;
 
   const origin = getForwardedOrigin(request.headers);
+  const requestedApplication = RequestedApplication.fromOrigin(origin);
 
   const result = await usecases.reconcileOidcUser({
     authenticationKey,
     identityProvider,
     audience: origin,
+    requestedApplication,
   });
 
   return h.response({ access_token: result.accessToken, logout_url_uuid: result.logoutUrlUUID }).code(200);
