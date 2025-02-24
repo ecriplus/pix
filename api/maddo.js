@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 import { disconnect, prepareDatabaseConnection } from './db/knex-database-connection.js';
 import { createMaddoServer } from './server.maddo.js';
-import { config, schema as configSchema } from './src/shared/config.maddo.js';
+import { config, schema as configSchema } from './src/shared/config.js';
 import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
 import { logger } from './src/shared/infrastructure/utils/logger.js';
 import { redisMonitor } from './src/shared/infrastructure/utils/redis-monitor.js';
