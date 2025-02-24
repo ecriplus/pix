@@ -9,12 +9,17 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
   let rewardRepository;
 
   let dependencies;
+  let logger;
 
   beforeEach(function () {
     userId = 1;
 
     questRepository = {
       findAll: sinon.stub(),
+    };
+
+    logger = {
+      error: sinon.stub(),
     };
 
     eligibilityRepository = {
@@ -30,6 +35,7 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
       eligibilityRepository,
       successRepository,
       rewardRepository,
+      logger,
     };
   });
 
@@ -119,5 +125,17 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
       });
       expect(successRepository.find).to.not.have.been.called;
     });
+  });
+
+  it('ensure that quest system does not throw error', async function () {
+    const error = new Error('my error');
+    dependencies.questRepository.findAll.throws(error);
+
+    await rewardUser({
+      userId,
+      ...dependencies,
+    });
+
+    expect(logger.error).have.been.calledWithExactly({ event: 'quest-reward' }, error);
   });
 });
