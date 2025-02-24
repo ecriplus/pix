@@ -180,10 +180,18 @@ module('Acceptance | Trainings | Training', function (hooks) {
         await visit(`/trainings/${trainingId}`);
 
         // when
-        const duplicateButton = await screen.getByRole('button', { name: 'Dupliquer ce contenu formatif' });
+        await clickByName('Dupliquer ce contenu formatif');
+        await screen.findByRole('button', { name: 'Valider' });
+        await clickByName('Valider');
 
         // then
-        assert.dom(duplicateButton).exists();
+        assert.strictEqual(currentURL(), '/trainings/3/details');
+        const title = await screen.findByRole('heading', {
+          name: `[Copie] Apprendre à piloter des chauves-souris comme Batman`,
+          level: 1,
+        });
+        assert.dom(title).exists();
+        assert.strictEqual(currentURL(), '/trainings/3/triggers');
       });
     });
 

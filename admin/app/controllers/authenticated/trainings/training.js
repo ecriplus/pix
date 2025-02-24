@@ -31,4 +31,14 @@ export default class Training extends Controller {
       this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }
+
+  @action
+  triggerDuplication() {
+    this.showModal = true;
+  }
+
+  @action
+  closeModal() {
+    this.showModal = false;
+  }
 }

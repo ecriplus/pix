@@ -38,8 +38,11 @@
       <div class="training-details-card__actions">
         <PixButton @size="small" @variant="secondary" @triggerAction={{this.toggleEditMode}}>Modifier
         </PixButton>
-        <PixButton @size="small" @variant="primary" @triggerAction={{this.triggerDuplication}}>Dupliquer ce contenu formatif
-        </PixButton>
+        <Trainings::DuplicateTraining
+          @isOpen={{this.showModal}}
+          @onClose={{this.closeModal}}
+          @onDuplicate={{this.triggerDuplication}}>
+        </Trainings::DuplicateTraining>
       </div>
       {{/if}}
     {{/if}}
