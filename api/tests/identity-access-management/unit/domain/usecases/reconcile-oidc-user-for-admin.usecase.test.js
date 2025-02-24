@@ -4,6 +4,7 @@ import {
 } from '../../../../../src/identity-access-management/domain/errors.js';
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { reconcileOidcUserForAdmin } from '../../../../../src/identity-access-management/domain/usecases/reconcile-oidc-user-for-admin.usecase.js';
+import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-user-for-admin', function () {
@@ -11,9 +12,11 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
     userRepository,
     userLoginRepository,
     authenticationSessionService,
+    lastUserApplicationConnectionsRepository,
     oidcAuthenticationService;
   const identityProvider = 'genericOidcProviderCode';
   const audience = 'https://admin.pix.fr';
+  const requestedApplication = new RequestedApplication('admin');
 
   beforeEach(function () {
     authenticationMethodRepository = { create: sinon.stub(), findOneByUserIdAndIdentityProvider: sinon.stub() };
@@ -24,6 +27,10 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       identityProvider,
       createAccessToken: sinon.stub(),
       createAuthenticationComplement: sinon.stub(),
+    };
+
+    lastUserApplicationConnectionsRepository = {
+      upsert: sinon.stub(),
     };
   });
 
@@ -52,6 +59,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       authenticationMethodRepository,
       userRepository,
       userLoginRepository,
+      requestedApplication,
+      lastUserApplicationConnectionsRepository,
     });
 
     // then
@@ -85,6 +94,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       authenticationMethodRepository,
       userRepository,
       userLoginRepository,
+      requestedApplication,
+      lastUserApplicationConnectionsRepository,
     });
 
     // then
@@ -123,12 +134,54 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       authenticationMethodRepository,
       userRepository,
       userLoginRepository,
+      requestedApplication,
+      lastUserApplicationConnectionsRepository,
     });
 
     // then
     expect(oidcAuthenticationService.createAccessToken).to.be.calledOnceWith({ userId, audience });
     expect(userLoginRepository.updateLastLoggedAt).to.be.calledOnceWith({ userId });
     expect(result).to.equal('accessToken');
+  });
+
+  it('saves the last user application connection', async function () {
+    // given
+    const email = 'anne@example.net';
+    const externalIdentifier = 'external_id';
+    const userInfo = { externalIdentityId: externalIdentifier, firstName: 'Sarah', email };
+    const userId = 1;
+    authenticationSessionService.getByKey.resolves({
+      sessionContent: {},
+      userInfo,
+    });
+    authenticationMethodRepository.findOneByUserIdAndIdentityProvider.resolves(null);
+    userRepository.getByEmail.resolves({ email: 'anne@example.net', id: userId });
+    oidcAuthenticationService.createAuthenticationComplement.withArgs({ userInfo }).returns(
+      new AuthenticationMethod.OidcAuthenticationComplement({
+        firstName: 'Anne',
+      }),
+    );
+    oidcAuthenticationService.createAccessToken.withArgs({ userId, audience }).returns('accessToken');
+
+    // when
+    await reconcileOidcUserForAdmin({
+      authenticationKey: 'authenticationKey',
+      audience,
+      oidcAuthenticationService,
+      authenticationSessionService,
+      authenticationMethodRepository,
+      userRepository,
+      userLoginRepository,
+      requestedApplication,
+      lastUserApplicationConnectionsRepository,
+    });
+
+    // then
+    expect(lastUserApplicationConnectionsRepository.upsert).to.be.calledWithExactly({
+      userId,
+      application: 'admin',
+      lastLoggedAt: sinon.match.instanceOf(Date),
+    });
   });
 
   context('when authentication key is expired', function () {

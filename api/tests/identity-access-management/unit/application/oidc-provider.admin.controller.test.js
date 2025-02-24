@@ -1,5 +1,6 @@
 import { oidcProviderAdminController } from '../../../../src/identity-access-management/application/oidc-provider/oidc-provider.admin.controller.js';
 import { usecases } from '../../../../src/identity-access-management/domain/usecases/index.js';
+import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
 import { expect, hFake, sinon } from '../../../test-helper.js';
 
@@ -180,11 +181,22 @@ describe('Unit | Identity Access Management | Application | Controller | Admin |
           email: 'user@example.net',
         },
       };
+      const requestedApplication = new RequestedApplication('admin');
 
       const dependencies = {
         oidcAuthenticationServiceRegistry: oidcAuthenticationServiceRegistryStub,
       };
-      sinon.stub(usecases, 'reconcileOidcUserForAdmin').resolves('accessToken');
+      sinon
+        .stub(usecases, 'reconcileOidcUserForAdmin')
+        .withArgs({
+          email: 'user@example.net',
+          identityProvider,
+          authenticationKey: '123abc',
+          audience: 'https://admin.pix.fr',
+          requestedApplication,
+          oidcAuthenticationService: sinon.match.any,
+        })
+        .resolves('accessToken');
 
       // when
       const result = await oidcProviderAdminController.reconcileUserForAdmin(request, hFake, dependencies);
