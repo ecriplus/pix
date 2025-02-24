@@ -1,13 +1,13 @@
 import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
-import SixthGrade from 'pix-orga/components/attestations/sixth-grade';
+import Attestations from 'pix-orga/components/attestations';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
-module('Integration | Component | Attestations | Sixth-grade', function (hooks) {
+module('Integration | Component | Attestations', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   module('when organization has divisions', function () {
@@ -17,7 +17,9 @@ module('Integration | Component | Attestations | Sixth-grade', function (hooks) 
       const divisions = [];
 
       // when
-      const screen = await render(<template><SixthGrade @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>);
+      const screen = await render(
+        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
+      );
       // then
       assert.ok(screen.getByRole('heading', { name: t('pages.attestations.title') }));
       assert.ok(screen.getByText(t('pages.attestations.divisions-description')));
@@ -32,7 +34,9 @@ module('Integration | Component | Attestations | Sixth-grade', function (hooks) 
       const divisions = [];
 
       // when
-      const screen = await render(<template><SixthGrade @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>);
+      const screen = await render(
+        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
+      );
 
       // then
       const downloadButton = await screen.getByRole('button', {
@@ -48,7 +52,9 @@ module('Integration | Component | Attestations | Sixth-grade', function (hooks) 
       const divisions = [{ label: 'division1', value: 'division1' }];
 
       // when
-      const screen = await render(<template><SixthGrade @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>);
+      const screen = await render(
+        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
+      );
 
       const multiSelect = await screen.getByRole('textbox', { name: t('pages.attestations.select-label') });
       await click(multiSelect);
@@ -77,7 +83,9 @@ module('Integration | Component | Attestations | Sixth-grade', function (hooks) 
       const divisions = undefined;
 
       // when
-      const screen = await render(<template><SixthGrade @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>);
+      const screen = await render(
+        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
+      );
       // then
       assert.notOk(screen.queryByRole('textbox', { name: t('pages.attestations.select-label') }));
       assert.ok(screen.getByRole('heading', { name: t('pages.attestations.title') }));
@@ -92,7 +100,9 @@ module('Integration | Component | Attestations | Sixth-grade', function (hooks) 
       const divisions = undefined;
 
       // when
-      const screen = await render(<template><SixthGrade @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>);
+      const screen = await render(
+        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
+      );
 
       const downloadButton = await screen.getByRole('button', {
         name: t('pages.attestations.download-attestations-button'),
