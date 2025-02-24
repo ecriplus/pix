@@ -470,6 +470,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         ];
 
         function stepperIsFinished() {}
+
         function onStepperNextStepStub() {}
 
         const screen = await render(
@@ -513,6 +514,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         ];
 
         function stepperIsFinished() {}
+
         function onStepperNextStepStub() {}
 
         const screen = await render(
