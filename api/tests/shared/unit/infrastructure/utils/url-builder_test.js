@@ -119,25 +119,25 @@ describe('Unit | Shared | Infrastructure | Utils | url-builder', function () {
       it('returns email validation URL with domain .fr', function () {
         // given
         const redirectUrl = 'https://app.pix.fr/connexion';
-        const expectedParams = new URLSearchParams({ redirect_url: redirectUrl });
 
         // when
         const url = urlBuilder.getEmailValidationUrl({ redirectUrl });
 
         // then
-        expect(url).to.equal(
-          `${config.domain.pixApp + config.domain.tldFr}/api/users/validate-email?${expectedParams.toString()}`,
-        );
+        expect(url).to.equal(redirectUrl);
       });
     });
 
     context('when redirect_url is not given', function () {
       it('returns email validation URL with domain .fr', function () {
+        // given
+        const token = '00000000-0000-0000-0000-000000000000';
+
         // when
-        const url = urlBuilder.getEmailValidationUrl();
+        const url = urlBuilder.getEmailValidationUrl({ token });
 
         // then
-        expect(url).to.equal(`${config.domain.pixApp + config.domain.tldFr}/api/users/validate-email?`);
+        expect(url).to.equal(`${config.domain.pixApp + config.domain.tldFr}/api/users/validate-email?token=${token}`);
       });
     });
   });
