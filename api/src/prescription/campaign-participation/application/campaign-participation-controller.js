@@ -1,6 +1,7 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
+import * as anonymisedCampaignAssessmentSerializer from '../infrastructure/serializers/jsonapi/anonymised-campaign-assessment-serializer.js';
 import * as availableCampaignParticipationsSerializer from '../infrastructure/serializers/jsonapi/available-campaign-participation-serializer.js';
 import * as campaignAnalysisSerializer from '../infrastructure/serializers/jsonapi/campaign-analysis-serializer.js';
 import * as campaignAssessmentParticipationResultSerializer from '../infrastructure/serializers/jsonapi/campaign-assessment-participation-result-serializer.js';
@@ -10,7 +11,6 @@ import * as campaignParticipationSerializer from '../infrastructure/serializers/
 import * as campaignProfileSerializer from '../infrastructure/serializers/jsonapi/campaign-profile-serializer.js';
 import * as participantResultSerializer from '../infrastructure/serializers/jsonapi/participant-result-serializer.js';
 import * as participationForCampaignManagementSerializer from '../infrastructure/serializers/jsonapi/participation-for-campaign-management-serializer.js';
-
 const getUserCampaignParticipationToCampaign = function (
   request,
   h,
@@ -153,6 +153,22 @@ const getCampaignParticipationOverviews = async function (
   );
 };
 
+const getAnonymisedCampaignAssessments = async function (
+  request,
+  h,
+  dependencies = {
+    anonymisedCampaignAssessmentSerializer,
+  },
+) {
+  const authenticatedUserId = request.auth.credentials.userId;
+
+  const assessments = await usecases.findUserAnonymisedCampaignAssessments({
+    userId: authenticatedUserId,
+  });
+
+  return dependencies.anonymisedCampaignAssessmentSerializer.serialize(assessments);
+};
+
 const getUserCampaignAssessmentResult = async function (
   request,
   _,
@@ -179,6 +195,7 @@ const campaignParticipationController = {
   deleteParticipation,
   findPaginatedParticipationsForCampaignManagement,
   getAnalysis,
+  getAnonymisedCampaignAssessments,
   getCampaignAssessmentParticipation,
   getCampaignAssessmentParticipationResult,
   getCampaignParticipationOverviews,
