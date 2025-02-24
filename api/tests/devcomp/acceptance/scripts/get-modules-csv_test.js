@@ -7,8 +7,8 @@ describe('Acceptance | Script | Get Modules as CSV', function () {
     const modulesListAsJs = [
       {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
-        slug: 'didacticiel-modulix',
-        title: 'Didacticiel Modulix',
+        slug: 'bac-a-sable',
+        title: 'Bac à sable',
         isBeta: true,
         details: {
           image: 'https://images.pix.fr/modulix/placeholder-details.svg',
@@ -410,6 +410,6 @@ describe('Acceptance | Script | Get Modules as CSV', function () {
     expect(modulesListAsCsv).to.be.a('string');
     expect(modulesListAsCsv).to
       .equal(`\ufeff"ModuleSlug"\t"ModuleTitle"\t"ModuleLevel"\t"ModuleLink"\t"ModuleIsBeta"\t"ModuleObjectives"\t"ModuleTotalGrains"\t"ModuleTotalLessons"\t"ModuleTotalActivities"\t"ModuleTotalChallenges"\t"ModuleTotalDiscoveries"\t"ModuleTotalSummaries"\t"ModuleDuration"\t"ModuleTotalElements"
-"didacticiel-modulix"\t"Didacticiel Modulix"\t"Débutant"\t"https://app.recette.pix.fr/modules/didacticiel-modulix"\t"=TRUE"\t"Naviguer dans Modulix.Découvrir les leçons et les activités"\t9\t1\t5\t1\t1\t1\t"=TEXT(5/24/60; ""mm:ss"")"\t13`);
+"bac-a-sable"\t"Bac à sable"\t"Débutant"\t"https://app.recette.pix.fr/modules/bac-a-sable"\t"=TRUE"\t"Naviguer dans Modulix.Découvrir les leçons et les activités"\t9\t1\t5\t1\t1\t1\t"=TEXT(5/24/60; ""mm:ss"")"\t13`);
   });
 });

@@ -112,7 +112,7 @@ describe('Acceptance | Controller | passage-controller', function () {
         },
         {
           case: 'QCM',
-          moduleId: 'didacticiel-modulix',
+          moduleId: 'bac-a-sable',
           elementId: '30701e93-1b4d-4da4-b018-fa756c07d53f',
           userResponse: ['1', '3', '4'],
           expectedUserResponseValue: ['1', '3', '4'],

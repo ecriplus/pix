@@ -5,8 +5,8 @@ describe('Acceptance | Script | Get Answerable Elements as CSV', function () {
   const modulesListAsJs = [
     {
       id: '6282925d-4775-4bca-b513-4c3009ec5886',
-      slug: 'didacticiel-modulix',
-      title: 'Didacticiel Modulix',
+      slug: 'bac-a-sable',
+      title: 'Bac à sable',
       details: {
         image: 'https://images.pix.fr/modulix/placeholder-details.svg',
         description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',

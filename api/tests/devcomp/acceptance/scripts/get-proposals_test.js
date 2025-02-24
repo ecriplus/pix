@@ -6,8 +6,8 @@ describe('Acceptance | Script | Get Proposals as CSV', function () {
   const modulesListAsJs = [
     {
       id: '6282925d-4775-4bca-b513-4c3009ec5886',
-      slug: 'didacticiel-modulix',
-      title: 'Didacticiel Modulix',
+      slug: 'bac-a-sable',
+      title: 'Bac à sable',
       details: {
         image: 'https://images.pix.fr/modulix/placeholder-details.svg',
         description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',
@@ -381,16 +381,16 @@ describe('Acceptance | Script | Get Proposals as CSV', function () {
       expect(proposalsListAsCsv).to.be.a('string');
       expect(proposalsListAsCsv).to
         .equal(`\ufeff"ProposalElementId"\t"ProposalElementType"\t"ProposalActivityElementPosition"\t"ProposalElementInstruction"\t"ProposalId"\t"ProposalContent"\t"ProposalIsSolution"\t"ProposalGrainPosition"\t"ProposalGrainId"\t"ProposalGrainTitle"\t"ProposalModuleSlug"
-"71de6394-ff88-4de3-8834-a40057a50ff4"\t"qcu"\t1\t"<p>Pix évalue 16 compétences numériques différentes.</p>"\t"'1"\t"'Vrai"\t"=TRUE"\t4\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t"Voici un vrai-faux"\t"didacticiel-modulix"
-"71de6394-ff88-4de3-8834-a40057a50ff4"\t"qcu"\t1\t"<p>Pix évalue 16 compétences numériques différentes.</p>"\t"'2"\t"'Faux"\t"=FALSE"\t4\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t"Voici un vrai-faux"\t"didacticiel-modulix"
-"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'1"\t"'Evaluer ses connaissances et savoir-faire sur 16 compétences du numérique"\t"=TRUE"\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"didacticiel-modulix"
-"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'2"\t"'Développer son savoir-faire sur les jeux de type TPS"\t"=FALSE"\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"didacticiel-modulix"
-"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'3"\t"'Développer ses compétences numériques"\t"=TRUE"\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"didacticiel-modulix"
-"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'4"\t"'Certifier ses compétences Pix"\t"=TRUE"\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"didacticiel-modulix"
-"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'5"\t"'Evaluer ses compétences de logique et compréhension mathématique"\t"=FALSE"\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"didacticiel-modulix"
-"0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447"\t"qcu"\t3\t"<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot&#8239;?</p>"\t"'1"\t"'Bienvenue"\t"=FALSE"\t6\t"2a77a10f-19a3-4544-80f9-8012dad6506a"\t"Activité remonter dans la page"\t"didacticiel-modulix"
-"0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447"\t"qcu"\t3\t"<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot&#8239;?</p>"\t"'2"\t"'Bonjour"\t"=TRUE"\t6\t"2a77a10f-19a3-4544-80f9-8012dad6506a"\t"Activité remonter dans la page"\t"didacticiel-modulix"
-"0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447"\t"qcu"\t3\t"<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot&#8239;?</p>"\t"'3"\t"'Nous"\t"=FALSE"\t6\t"2a77a10f-19a3-4544-80f9-8012dad6506a"\t"Activité remonter dans la page"\t"didacticiel-modulix"`);
+"71de6394-ff88-4de3-8834-a40057a50ff4"\t"qcu"\t1\t"<p>Pix évalue 16 compétences numériques différentes.</p>"\t"'1"\t"'Vrai"\t"=TRUE"\t4\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t"Voici un vrai-faux"\t"bac-a-sable"
+"71de6394-ff88-4de3-8834-a40057a50ff4"\t"qcu"\t1\t"<p>Pix évalue 16 compétences numériques différentes.</p>"\t"'2"\t"'Faux"\t"=FALSE"\t4\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t"Voici un vrai-faux"\t"bac-a-sable"
+"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'1"\t"'Evaluer ses connaissances et savoir-faire sur 16 compétences du numérique"\t"=TRUE"\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"bac-a-sable"
+"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'2"\t"'Développer son savoir-faire sur les jeux de type TPS"\t"=FALSE"\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"bac-a-sable"
+"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'3"\t"'Développer ses compétences numériques"\t"=TRUE"\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"bac-a-sable"
+"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'4"\t"'Certifier ses compétences Pix"\t"=TRUE"\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"bac-a-sable"
+"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'5"\t"'Evaluer ses compétences de logique et compréhension mathématique"\t"=FALSE"\t5\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t"Les 3 piliers de Pix"\t"bac-a-sable"
+"0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447"\t"qcu"\t3\t"<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot&#8239;?</p>"\t"'1"\t"'Bienvenue"\t"=FALSE"\t6\t"2a77a10f-19a3-4544-80f9-8012dad6506a"\t"Activité remonter dans la page"\t"bac-a-sable"
+"0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447"\t"qcu"\t3\t"<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot&#8239;?</p>"\t"'2"\t"'Bonjour"\t"=TRUE"\t6\t"2a77a10f-19a3-4544-80f9-8012dad6506a"\t"Activité remonter dans la page"\t"bac-a-sable"
+"0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447"\t"qcu"\t3\t"<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot&#8239;?</p>"\t"'3"\t"'Nous"\t"=FALSE"\t6\t"2a77a10f-19a3-4544-80f9-8012dad6506a"\t"Activité remonter dans la page"\t"bac-a-sable"`);
     });
   });
 });
