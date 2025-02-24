@@ -15,11 +15,9 @@ export default class CertificationInformationsController extends Controller {
 
   // Properties
   @alias('model.certification') certification;
-  @alias('model.countries') countries;
   @service pixToast;
   @service intl;
 
-  @tracked isCandidateEditModalOpen = false;
   @tracked displayJuryLevelSelect = false;
 
   @tracked selectedJuryLevel = null;
@@ -102,24 +100,6 @@ export default class CertificationInformationsController extends Controller {
   }
 
   @action
-  async onCandidateInformationSave() {
-    try {
-      await this.saveCertificationCourse();
-      this.pixToast.sendSuccessNotification({ message: 'Les informations du candidat ont bien été enregistrées.' });
-      this.isCandidateEditModalOpen = false;
-    } catch (error) {
-      if (error.errors && error.errors.length > 0) {
-        error.errors.forEach((error) => {
-          this.pixToast.sendErrorNotification({ message: error.detail });
-        });
-      } else {
-        this.pixToast.sendErrorNotification({ message: error });
-      }
-      throw error;
-    }
-  }
-
-  @action
   async onJuryCommentSave(commentByJury) {
     try {
       await this.saveAssessmentResult(commentByJury);
@@ -129,16 +109,6 @@ export default class CertificationInformationsController extends Controller {
       this.pixToast.sendErrorNotification({ message: "Le commentaire du jury n'a pas pu être enregistré." });
       return false;
     }
-  }
-
-  @action
-  openCandidateEditModal() {
-    this.isCandidateEditModalOpen = true;
-  }
-
-  @action
-  closeCandidateEditModal() {
-    this.isCandidateEditModalOpen = false;
   }
 
   @action

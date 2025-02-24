@@ -14,7 +14,6 @@ export default class CertificationInformationsRoute extends Route {
       session,
       certification,
       certificationIssueReports,
-      countries: this.store.findAll('country'),
     });
   }
 

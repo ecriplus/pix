@@ -361,35 +361,6 @@ module('Unit | Controller | authenticated/certifications/certification/informati
     });
   });
 
-  module('#onCandidateInformationSave', () => {
-    test('it closes the modal', async function (assert) {
-      // given
-      controller.saveCertificationCourse = sinon.stub().resolves();
-      controller.isCandidateEditModalOpen = true;
-
-      // when
-      await controller.onCandidateInformationSave();
-
-      // then
-      assert.false(controller.isCandidateEditModalOpen);
-    });
-
-    test('it saves candidates infos', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const certification = store.createRecord('certification', { competencesWithMark });
-      certification.save = sinon.stub().resolves();
-      controller.certification = certification;
-
-      // when
-      await controller.onCandidateInformationSave();
-
-      // then
-      sinon.assert.calledWith(certification.save, { adapterOptions: { updateJuryComment: false } });
-      assert.ok(true);
-    });
-  });
-
   module('#editJury', function () {
     test('it should set displayJuryLevelSelect to true', function (assert) {
       // given

@@ -87,24 +87,6 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
   });
 
   module('certification information read', function () {
-    test('it displays candidate information', async function (assert) {
-      // given
-      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-
-      // when
-      const screen = await visit(`/certifications/${certification.id}`);
-
-      // then
-      assert.dom(_getInfoNodeFromLabel(screen, 'Prénom :').getByText('Bora Horza')).exists();
-      assert.dom(_getInfoNodeFromLabel(screen, 'Nom de famille :').getByText('Gobuchul')).exists();
-      assert.dom(_getInfoNodeFromLabel(screen, 'Date de naissance :').getByText('24/07/1987')).exists();
-      assert.dom(_getInfoNodeFromLabel(screen, 'Sexe :').getByText('M')).exists();
-      assert.dom(_getInfoNodeFromLabel(screen, 'Commune de naissance :').getByText('Sorpen')).exists();
-      assert.dom(_getInfoNodeFromLabel(screen, 'Code INSEE de naissance :').getByText('99217')).exists();
-      assert.dom(_getInfoNodeFromLabel(screen, 'Code postal de naissance :').getByText('')).exists();
-      assert.dom(_getInfoNodeFromLabel(screen, 'Pays de naissance :').getByText('JAPON')).exists();
-    });
-
     test('it displays the score details by competence', async function (assert) {
       // given
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
@@ -561,139 +543,6 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         assert.strictEqual(screen.getAllByText('Pix+ Édu Initié (entrée dans le métier)').length, 2);
         assert.strictEqual(screen.getAllByText('Pix+ Édu Avancé').length, 1);
       });
-
-      module('when candidate certification was enrolled with CPF data', function () {
-        module('when editing candidate information succeeds', function () {
-          test('should save the candidate information data when modifying them', async function (assert) {
-            // given
-            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-            const screen = await visit('/certifications/123');
-            await clickByName('Modifier les informations du candidat');
-            await screen.findByRole('dialog');
-            // when
-            await fillByLabel('Nom de famille', 'Summers');
-            await fillByLabel('Commune de naissance', 'Sunnydale');
-            await clickByName('Enregistrer');
-
-            // then
-            assert.dom(_getInfoNodeFromLabel(screen, 'Prénom :').getByText('Bora Horza')).exists();
-            assert.dom(_getInfoNodeFromLabel(screen, 'Nom de famille :').getByText('Summers')).exists();
-            assert.dom(_getInfoNodeFromLabel(screen, 'Date de naissance :').getByText('24/07/1987')).exists();
-            assert.dom(_getInfoNodeFromLabel(screen, 'Sexe :').getByText('M')).exists();
-            assert.dom(_getInfoNodeFromLabel(screen, 'Commune de naissance :').getByText('Sunnydale')).exists();
-            assert.dom(_getInfoNodeFromLabel(screen, 'Code INSEE de naissance :').getByText('99217')).exists();
-            assert.dom(_getInfoNodeFromLabel(screen, 'Pays de naissance :').getByText('JAPON')).exists();
-          });
-
-          test('should display a success notification', async function (assert) {
-            // given
-            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-            const screen = await visit('/certifications/123');
-            await clickByName('Modifier les informations du candidat');
-            await screen.findByRole('dialog');
-            // when
-            await fillByLabel('Nom de famille', 'Summers');
-            await fillByLabel('Commune de naissance', 'Sunnydale');
-            await clickByName('Enregistrer');
-
-            // then
-            assert.dom(screen.getByText('Les informations du candidat ont bien été enregistrées.')).exists();
-          });
-
-          test('should close the modal', async function (assert) {
-            // given
-            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-            const screen = await visit('/certifications/123');
-            await clickByName('Modifier les informations du candidat');
-            await screen.findByRole('dialog');
-            // when
-            await fillByLabel('Nom de famille', 'Summers');
-            await fillByLabel('Commune de naissance', 'Sunnydale');
-            await clickByName('Enregistrer');
-
-            // then
-            assert.dom(screen.queryByText('Modifier les informations du candidat')).doesNotExist();
-          });
-        });
-
-        module('when editing candidate information fails', function () {
-          test('should display an error notification', async function (assert) {
-            // given
-            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-            this.server.patch(
-              'admin/certification-courses/:id',
-              () => ({
-                errors: [{ detail: "Candidate's first name must not be blank or empty" }],
-              }),
-              422,
-            );
-            const screen = await visit(`/certifications/${certification.id}`);
-            await clickByName('Modifier les informations du candidat');
-            await screen.findByRole('dialog');
-
-            await fillByLabel('Nom de famille', 'Summers');
-
-            // when
-            await clickByName('Enregistrer');
-            // then
-            assert.dom(await screen.findByText("Candidate's first name must not be blank or empty")).exists();
-          });
-
-          test('should leave the modal opened', async function (assert) {
-            // given
-            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-            this.server.patch(
-              'admin/certification-courses/:id',
-              () => ({
-                errors: [{ detail: "Candidate's first name must not be blank or empty" }],
-              }),
-              422,
-            );
-            const screen = await visit(`/certifications/${certification.id}`);
-            await clickByName('Modifier les informations du candidat');
-            await screen.findByRole('dialog');
-
-            await fillByLabel('Nom de famille', 'Summers');
-
-            // when
-            await clickByName('Enregistrer');
-
-            // then
-            assert.dom(screen.getByRole('heading', { name: 'Modifier les informations du candidat' })).exists();
-          });
-
-          test('should leave candidate information untouched when aborting the edition', async function (assert) {
-            // given
-            await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-            this.server.patch(
-              'admin/certification-courses/:id',
-              () => ({
-                errors: [{ detail: "Candidate's first name must not be blank or empty" }],
-              }),
-              422,
-            );
-            const screen = await visit(`/certifications/${certification.id}`);
-            await clickByName('Modifier les informations du candidat');
-
-            await screen.findByRole('dialog');
-
-            await fillByLabel('Nom de famille', 'Summers');
-            await clickByName('Enregistrer');
-
-            // when
-            await clickByName('Fermer');
-
-            // then
-            assert.dom(_getInfoNodeFromLabel(screen, 'Prénom :').getByText('Bora Horza')).exists();
-            assert.dom(_getInfoNodeFromLabel(screen, 'Nom de famille :').getByText('Gobuchul')).exists();
-            assert.dom(_getInfoNodeFromLabel(screen, 'Date de naissance :').getByText('24/07/1987')).exists();
-            assert.dom(_getInfoNodeFromLabel(screen, 'Sexe :').getByText('M')).exists();
-            assert.dom(_getInfoNodeFromLabel(screen, 'Commune de naissance :').getByText('Sorpen')).exists();
-            assert.dom(_getInfoNodeFromLabel(screen, 'Code INSEE de naissance :').getByText('99217')).exists();
-            assert.dom(_getInfoNodeFromLabel(screen, 'Pays de naissance :').getByText('JAPON')).exists();
-          });
-        });
-      });
     });
 
     module('Certification issue reports section', function () {
@@ -856,8 +705,4 @@ async function _switchCertificationDetail(screen, sessionId, certificationId) {
   await click(screen.getByRole('link', { name: sessionId }));
   await click(screen.getByLabelText('Liste des certifications de la session'));
   await click(screen.getByRole('link', { name: certificationId }));
-}
-
-function _getInfoNodeFromLabel(screen, label) {
-  return within(screen.getByText(label).nextElementSibling);
 }

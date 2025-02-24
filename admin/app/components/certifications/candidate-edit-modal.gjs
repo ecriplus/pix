@@ -13,12 +13,15 @@ import PixRadioButton from '@1024pix/pix-ui/components/pix-radio-button';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
+import { service } from '@ember/service';
 import pick from 'ember-composable-helpers/helpers/pick';
 import EmberFlatpickr from 'ember-flatpickr/components/ember-flatpickr';
 import set from 'ember-set-helper/helpers/set';
-import { eq } from 'ember-truth-helpers';
+import { eq, or } from 'ember-truth-helpers';
 
 export default class CandidateEditModal extends Component {
+  @service store;
+
   @tracked firstName;
   @tracked lastName;
   @tracked birthdate;
@@ -27,6 +30,7 @@ export default class CandidateEditModal extends Component {
   @tracked birthInseeCode;
   @tracked birthPostalCode;
   @tracked birthCountry;
+  @tracked countries = [];
 
   @tracked selectedBirthGeoCodeOption;
   @tracked selectedCountryInseeCode;
@@ -73,7 +77,7 @@ export default class CandidateEditModal extends Component {
   }
 
   get countryOptions() {
-    return this.args.countries.map((country) => {
+    return this.countries.map((country) => {
       return { label: country.name, value: country.code };
     });
   }
@@ -147,7 +151,7 @@ export default class CandidateEditModal extends Component {
     }
   }
 
-  _initForm() {
+  async _initForm() {
     const candidate = this.args.candidate;
     this.firstName = candidate.firstName;
     this.lastName = candidate.lastName;
@@ -155,6 +159,9 @@ export default class CandidateEditModal extends Component {
     this.sex = candidate.sex;
     this.birthCountry = candidate.birthCountry;
     this._initBirthInformation(candidate);
+    this.countries = this.store.peekAll('country').length
+      ? this.store.peekAll('country')
+      : await this.store.findAll('country');
   }
 
   _initBirthInformation(candidate) {
@@ -187,7 +194,7 @@ export default class CandidateEditModal extends Component {
   }
 
   _getCountryName() {
-    const country = this.args.countries.find((country) => country.code === this.selectedCountryInseeCode);
+    const country = this.countries.find((country) => country.code === this.selectedCountryInseeCode);
     return country.name;
   }
 
@@ -254,7 +261,7 @@ export default class CandidateEditModal extends Component {
               @onChange={{this.updateBirthdate}}
               @dateFormat="Y-m-d"
               @locale="fr"
-              @date={{this.birthdate}}
+              @date={{or this.birthdate ""}}
             />
           </div>
 

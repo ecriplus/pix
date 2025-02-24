@@ -1,6 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import CertificationInformations from 'pix-admin/components/certifications/certification/informations';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
@@ -11,6 +12,7 @@ module('Integration | Component | Certifications | Certification | Informations'
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
+    sinon.stub(store, 'findAll').withArgs('country').resolves([]);
   });
 
   test('should display the global actions block', async function (assert) {
@@ -26,6 +28,7 @@ module('Integration | Component | Certifications | Certification | Informations'
     // then
     assert.dom(screen.getByRole('link', { name: "Voir les détails de l'utilisateur" })).exists();
   });
+
   test('should display certification state card', async function (assert) {
     // given
     const certification = store.createRecord('certification', { competencesWithMark: [] });
@@ -38,5 +41,19 @@ module('Integration | Component | Certifications | Certification | Informations'
 
     // then
     assert.dom(screen.getByRole('heading', { name: 'État' })).exists();
+  });
+
+  test('should display the certification candidate card', async function (assert) {
+    // given
+    const certification = store.createRecord('certification', { competencesWithMark: [] });
+    const session = store.createRecord('session', { id: 7404 });
+
+    // when
+    const screen = await render(
+      <template><CertificationInformations @certification={{certification}} @session={{session}} /></template>,
+    );
+
+    // then
+    assert.dom(screen.getByRole('heading', { name: 'Candidat' })).exists();
   });
 });
