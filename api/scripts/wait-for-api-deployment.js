@@ -21,7 +21,6 @@ while (true) {
 async function fetchApiInfoURL() {
   console.info('Fetching', apiInfoURL.href);
 
-  // eslint-disable-next-line n/no-unsupported-features/node-builtins
   const res = await fetch(apiInfoURL);
   if (!res.ok) {
     if (res.status === 404) {
