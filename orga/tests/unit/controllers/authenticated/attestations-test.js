@@ -1,8 +1,5 @@
 import Service from '@ember/service';
-import {
-  SIXTH_GRADE_ATTESTATION_FILE_NAME,
-  SIXTH_GRADE_ATTESTATION_KEY,
-} from 'pix-orga/controllers/authenticated/attestations';
+import { FILE_NAME, SIXTH_GRADE_ATTESTATION_KEY } from 'pix-orga/controllers/authenticated/attestations';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -11,7 +8,7 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Unit | Controller | authenticated/attestations', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('#downloadSixthGradeAttestationsFile', function () {
+  module('#downloadAttestations', function () {
     module('when there are selected divisions', function () {
       test('should call the file-saver service with the right parameters', async function (assert) {
         // given
@@ -46,14 +43,14 @@ module('Unit | Controller | authenticated/attestations', function (hooks) {
         };
 
         // when
-        await controller.downloadSixthGradeAttestationsFile(selectedDivision);
+        await controller.downloadAttestations(SIXTH_GRADE_ATTESTATION_KEY, selectedDivision);
 
         // then
         assert.ok(
           controller.fileSaver.save.calledWith({
             token,
             url: `/api/organizations/${organizationId}/attestations/${SIXTH_GRADE_ATTESTATION_KEY}?divisions[]=${encodeURIComponent(selectedDivision)}`,
-            fileName: SIXTH_GRADE_ATTESTATION_FILE_NAME,
+            fileName: FILE_NAME,
             noContentMessageNotification: this.intl.t('pages.attestations.no-attestations'),
           }),
         );
@@ -65,7 +62,7 @@ module('Unit | Controller | authenticated/attestations', function (hooks) {
         const selectedDivision = ['3èmea'];
 
         //when
-        await controller.downloadSixthGradeAttestationsFile(selectedDivision);
+        await controller.downloadAttestations(SIXTH_GRADE_ATTESTATION_KEY, selectedDivision);
 
         sinon.assert.calledWithExactly(metrics.add, {
           event: 'custom-event',
@@ -111,14 +108,14 @@ module('Unit | Controller | authenticated/attestations', function (hooks) {
         };
 
         // when
-        await controller.downloadSixthGradeAttestationsFile(selectedDivision);
+        await controller.downloadAttestations(SIXTH_GRADE_ATTESTATION_KEY, selectedDivision);
 
         // then
         assert.ok(
           controller.fileSaver.save.calledWith({
             token,
             url: `/api/organizations/${organizationId}/attestations/${SIXTH_GRADE_ATTESTATION_KEY}`,
-            fileName: SIXTH_GRADE_ATTESTATION_FILE_NAME,
+            fileName: FILE_NAME,
             noContentMessageNotification: this.intl.t('pages.attestations.no-attestations'),
           }),
         );
@@ -152,7 +149,7 @@ module('Unit | Controller | authenticated/attestations', function (hooks) {
       const errorMock = sinon.stub();
 
       // when
-      await controller.downloadSixthGradeAttestationsFile(selectedDivision);
+      await controller.downloadAttestations(SIXTH_GRADE_ATTESTATION_KEY, selectedDivision);
 
       // then
       sinon.assert.calledWith(errorMock, errorMessage, { autoClear: false });

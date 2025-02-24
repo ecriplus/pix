@@ -10,6 +10,8 @@ import { eq } from 'ember-truth-helpers';
 
 import PageTitle from './ui/page-title';
 
+export const SIXTH_GRADE_ATTESTATION_KEY = 'SIXTH_GRADE';
+
 export default class Attestations extends Component {
   @service currentUser;
 
@@ -17,7 +19,7 @@ export default class Attestations extends Component {
   onSubmit(event) {
     event.preventDefault();
 
-    this.args.onSubmit([]);
+    this.args.onSubmit(SIXTH_GRADE_ATTESTATION_KEY, []);
   }
 
   <template>
@@ -47,7 +49,7 @@ class SixthGrade extends Component {
   onSubmit(event) {
     event.preventDefault();
 
-    this.args.onSubmit(this.selectedDivisions);
+    this.args.onSubmit(SIXTH_GRADE_ATTESTATION_KEY, this.selectedDivisions);
   }
 
   @action

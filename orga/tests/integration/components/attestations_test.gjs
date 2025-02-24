@@ -1,7 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
-import Attestations from 'pix-orga/components/attestations';
+import Attestations, { SIXTH_GRADE_ATTESTATION_KEY } from 'pix-orga/components/attestations';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -71,7 +71,7 @@ module('Integration | Component | Attestations', function (hooks) {
       await click(downloadButton);
 
       // then
-      sinon.assert.calledWithExactly(onSubmit, ['division1']);
+      sinon.assert.calledWithExactly(onSubmit, SIXTH_GRADE_ATTESTATION_KEY, ['division1']);
       assert.ok(true);
     });
   });
@@ -111,7 +111,7 @@ module('Integration | Component | Attestations', function (hooks) {
       await click(downloadButton);
 
       // then
-      sinon.assert.calledWithExactly(onSubmit, []);
+      sinon.assert.calledWithExactly(onSubmit, SIXTH_GRADE_ATTESTATION_KEY, []);
       assert.ok(true);
     });
   });
