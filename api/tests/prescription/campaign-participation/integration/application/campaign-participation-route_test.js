@@ -21,6 +21,10 @@ describe('Integration | Application | Route | campaignParticipationRouter', func
       .stub(campaignParticipationController, 'getUserCampaignAssessmentResult')
       .callsFake((request, h) => h.response('ok').code(200));
 
+    sinon
+      .stub(campaignParticipationController, 'getAnonymisedCampaignAssessments')
+      .callsFake((request, h) => h.response('ok').code(200));
+
     httpTestServer = new HttpTestServer();
     await httpTestServer.register(moduleUnderTest);
   });
@@ -201,6 +205,35 @@ describe('Integration | Application | Route | campaignParticipationRouter', func
 
         // then
         expect(response.statusCode).to.equal(400);
+      });
+    });
+  });
+
+  describe('GET /users/{userId}/anonymised-campaign-assessments', function () {
+    context('When authenticated user mismatch requested user or user is not authenticated ', function () {
+      beforeEach(function () {
+        securityPreHandlers.checkRequestedUserIsAuthenticatedUser.callsFake((request, h) => {
+          return Promise.resolve(h.response().code(403).takeover());
+        });
+      });
+
+      it('should return a 403 HTTP response', async function () {
+        // when
+        const response = await httpTestServer.request('GET', '/api/users/1234/anonymised-campaign-assessments');
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        expect(campaignParticipationController.getAnonymisedCampaignAssessments).not.called;
+      });
+    });
+    context('When userId is not an integer', function () {
+      it('should return 400 - Bad request when userId is not an integer', async function () {
+        // when
+        const response = await httpTestServer.request('GET', '/api/users/NOTANID/anonymised-campaign-assessments');
+
+        // then
+        expect(response.statusCode).to.equal(400);
+        expect(campaignParticipationController.getAnonymisedCampaignAssessments).not.called;
       });
     });
   });

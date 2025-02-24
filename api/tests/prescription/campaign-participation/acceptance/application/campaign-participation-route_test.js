@@ -858,6 +858,49 @@ describe('Acceptance | API | Campaign Participations', function () {
     });
   });
 
+  describe('GET /users/{userId}/anonymised-campaign-assessments', function () {
+    let userId;
+    let options;
+    const skillId = 'recSkillId';
+
+    beforeEach(function () {
+      const user = databaseBuilder.factory.buildUser();
+      userId = user.id;
+
+      databaseBuilder.factory.learningContent.buildSkill({ id: skillId });
+
+      return databaseBuilder.commit();
+    });
+
+    it('should return anonymised campaign assessment', async function () {
+      // given
+      const deletedCampaignParticipation =
+        databaseBuilder.factory.campaignParticipationOverviewFactory.buildDeletedAndAnonymised({
+          userId,
+          createdAt: new Date('2021-01-12'),
+          sharedAt: new Date('2021-01-14'),
+          deleted: new Date('2023-12-24'),
+          assessmentCreatedAt: new Date('2021-01-12'),
+          campaignSkills: [skillId],
+        });
+
+      await databaseBuilder.commit();
+      options = {
+        method: 'GET',
+        url: `/api/users/${userId}/anonymised-campaign-assessments`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      const assessmentIds = response.result.data.map(({ id }) => Number(id));
+      expect(assessmentIds).to.deep.equals([deletedCampaignParticipation.assessment.id]);
+    });
+  });
+
   describe('GET /users/{userId}/campaigns/{campaignId}/campaign-participations', function () {
     let options;
 
