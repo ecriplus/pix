@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import Attestations, { SIXTH_GRADE_ATTESTATION_KEY } from 'pix-orga/components/attestations';
@@ -7,10 +8,37 @@ import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
-module('Integration | Component | Attestations', function (hooks) {
+module.only('Integration | Component | Attestations', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('when organization has divisions', function () {
+  hooks.beforeEach(function () {
+    class CurrentUserStub extends Service {
+      prescriber = { availableAttestations: [SIXTH_GRADE_ATTESTATION_KEY] };
+    }
+
+    this.owner.register('service:current-user', CurrentUserStub);
+  });
+
+  module('when organization has divisions, SIXTH_GRADE attestation and another attestation', function () {
+    test('it displays both way to download attestations', async function (assert) {
+      // given
+      const currentUser = this.owner.lookup('service:current-user');
+      currentUser.prescriber.availableAttestations = [SIXTH_GRADE_ATTESTATION_KEY, 'PARENTHOOD'];
+      const onSubmit = sinon.stub();
+      const divisions = [];
+
+      // when
+      const screen = await render(
+        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert.ok(screen.getByText(t('pages.attestations.divisions-description')));
+      assert.ok(screen.getByText(t('pages.attestations.basic-description')));
+    });
+  });
+
+  module('when organization has divisions and SIXTH_GRADE attestation', function () {
     test('it should display all specifics informations for divisions', async function (assert) {
       // given
       const onSubmit = sinon.stub();
@@ -20,6 +48,7 @@ module('Integration | Component | Attestations', function (hooks) {
       const screen = await render(
         <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
       );
+
       // then
       assert.ok(screen.getByRole('heading', { name: t('pages.attestations.title') }));
       assert.ok(screen.getByText(t('pages.attestations.divisions-description')));
@@ -76,7 +105,7 @@ module('Integration | Component | Attestations', function (hooks) {
     });
   });
 
-  module('when organization does not have divisions', function () {
+  module('when organization does not have divisions and SIXTH_GRADE attestation', function () {
     test('it should display all basics informations', async function (assert) {
       // given
       const onSubmit = sinon.stub();

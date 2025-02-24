@@ -6,7 +6,6 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import { eq } from 'ember-truth-helpers';
 
 import PageTitle from './ui/page-title';
 
@@ -15,6 +14,39 @@ export const SIXTH_GRADE_ATTESTATION_KEY = 'SIXTH_GRADE';
 export default class Attestations extends Component {
   @service currentUser;
 
+  get displaySixthGrade() {
+    return (
+      this.currentUser.prescriber.availableAttestations.includes(SIXTH_GRADE_ATTESTATION_KEY) &&
+      this.args.divisions != undefined
+    );
+  }
+
+  get displayAttestations() {
+    if (this.displaySixthGrade) {
+      const attestations = this.currentUser.prescriber.availableAttestations.filter(
+        (attestation) => attestation != SIXTH_GRADE_ATTESTATION_KEY,
+      );
+      return attestations.length > 0;
+    }
+    return this.currentUser.prescriber.availableAttestations.length > 0;
+  }
+
+  <template>
+    <PageTitle>
+      <:title>{{t "pages.attestations.title"}}</:title>
+    </PageTitle>
+
+    {{#if this.displaySixthGrade}}
+      <SixthGrade @divisions={{@divisions}} @onSubmit={{@onSubmit}} />
+    {{/if}}
+
+    {{#if this.displayAttestations}}
+      <OtherAttestations @onSubmit={{@onSubmit}} />
+    {{/if}}
+  </template>
+}
+
+class OtherAttestations extends Component {
   @action
   onSubmit(event) {
     event.preventDefault();
@@ -23,22 +55,14 @@ export default class Attestations extends Component {
   }
 
   <template>
-    <PageTitle>
-      <:title>{{t "pages.attestations.title"}}</:title>
-    </PageTitle>
-
-    {{#if (eq @divisions undefined)}}
-      <div>
-        <p class="attestations-page__text">
-          {{t "pages.attestations.basic-description"}}
-        </p>
-        <PixButton @triggerAction={{this.onSubmit}} @size="small">
-          {{t "pages.attestations.download-attestations-button"}}
-        </PixButton>
-      </div>
-    {{else}}
-      <SixthGrade @divisions={{@divisions}} @onSubmit={{@onSubmit}} />
-    {{/if}}
+    <div>
+      <p class="attestations-page__text">
+        {{t "pages.attestations.basic-description"}}
+      </p>
+      <PixButton @triggerAction={{this.onSubmit}} @size="small">
+        {{t "pages.attestations.download-attestations-button"}}
+      </PixButton>
+    </div>
   </template>
 }
 
