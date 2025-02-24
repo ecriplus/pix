@@ -1,5 +1,5 @@
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
-import { DEFAULT_PASSWORD, PIX_PUBLIC_TARGET_PROFILE_ID, REAL_PIX_SUPER_ADMIN_ID } from './constants.js';
+import { PIX_PUBLIC_TARGET_PROFILE_ID, REAL_PIX_SUPER_ADMIN_ID } from './constants.js';
 import { acceptPixOrgaTermsOfService, createPixOrgaTermsOfService } from './tooling/legal-documents.js';
 import { createTargetProfile } from './tooling/target-profile-tooling.js';
 
@@ -27,7 +27,6 @@ function _createSuperAdmin(databaseBuilder) {
     firstName: 'Admin',
     lastName: 'Admin',
     email: 'superadmin@example.net',
-    rawPassword: DEFAULT_PASSWORD,
   });
   databaseBuilder.factory.buildPixAdminRole({ userId: REAL_PIX_SUPER_ADMIN_ID, role: ROLES.SUPER_ADMIN });
   acceptPixOrgaTermsOfService(databaseBuilder, REAL_PIX_SUPER_ADMIN_ID);
@@ -40,7 +39,6 @@ function _createMetierAdmin(databaseBuilder) {
     firstName: 'Admin',
     lastName: 'Metier',
     email: 'metieradmin@example.net',
-    rawPassword: DEFAULT_PASSWORD,
   });
   databaseBuilder.factory.buildPixAdminRole({ userId, role: ROLES.METIER });
   acceptPixOrgaTermsOfService(databaseBuilder, userId);
@@ -53,7 +51,6 @@ function _createSupportAdmin(databaseBuilder) {
     firstName: 'Admin',
     lastName: 'Support',
     email: 'supportadmin@example.net',
-    rawPassword: DEFAULT_PASSWORD,
   });
   databaseBuilder.factory.buildPixAdminRole({ userId, role: ROLES.SUPPORT });
   acceptPixOrgaTermsOfService(databaseBuilder, userId);
@@ -66,7 +63,6 @@ function _createCertifAdmin(databaseBuilder) {
     firstName: 'Admin',
     lastName: 'Certif',
     email: 'certifadmin@example.net',
-    rawPassword: DEFAULT_PASSWORD,
   });
   databaseBuilder.factory.buildPixAdminRole({ userId, role: ROLES.CERTIF });
   acceptPixOrgaTermsOfService(databaseBuilder, userId);

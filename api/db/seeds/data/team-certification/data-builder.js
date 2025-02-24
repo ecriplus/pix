@@ -97,8 +97,6 @@ async function _createScoCertificationCenter({ databaseBuilder }) {
     mustValidateTermsOfService: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
-    rawPassword: 'pix123',
-    shouldChangePassword: false,
   });
 
   acceptPixOrgaTermsOfService(databaseBuilder, SCO_CERTIFICATION_MANAGING_STUDENTS_CERTIFICATION_CENTER_USER_ID);
@@ -140,8 +138,6 @@ async function _createV3PilotCertificationCenter({ databaseBuilder }) {
     mustValidateTermsOfService: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
-    rawPassword: 'pix123',
-    shouldChangePassword: false,
   });
 
   acceptPixOrgaTermsOfService(databaseBuilder, V3_CERTIFICATION_CENTER_USER_ID);
@@ -186,8 +182,6 @@ async function _createProCertificationCenter({ databaseBuilder }) {
     mustValidateTermsOfService: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
-    rawPassword: 'pix123',
-    shouldChangePassword: false,
   });
 
   acceptPixOrgaTermsOfService(databaseBuilder, PRO_ADMIN_CERTIFICATION_CENTER_USER_ID);
@@ -203,8 +197,6 @@ async function _createProCertificationCenter({ databaseBuilder }) {
     mustValidateTermsOfService: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
-    rawPassword: 'pix123',
-    shouldChangePassword: false,
   });
 
   acceptPixOrgaTermsOfService(databaseBuilder, PRO_MEMBER_CERTIFICATION_CENTER_USER_ID);
@@ -237,8 +229,6 @@ async function _createScoOrganization({ databaseBuilder }) {
     mustValidateTermsOfService: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
-    rawPassword: 'pix123',
-    shouldChangePassword: false,
   });
 
   acceptPixOrgaTermsOfService(databaseBuilder, SCO_CERTIFICATION_MANAGING_STUDENTS_ORGANIZATION_USER_ID);
@@ -270,8 +260,6 @@ async function _createProOrganization({ databaseBuilder }) {
     mustValidateTermsOfService: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
-    rawPassword: 'pix123',
-    shouldChangePassword: false,
   });
 
   acceptPixOrgaTermsOfService(databaseBuilder, PRO_ORGANIZATION_USER_ID);

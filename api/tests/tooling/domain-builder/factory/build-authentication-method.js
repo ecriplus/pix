@@ -1,11 +1,15 @@
 import lodash from 'lodash';
 const { isUndefined } = lodash;
 
+import { DEFAULT_PASSWORD } from '../../../../db/constants.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import * as OidcIdentityProviders from '../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { AuthenticationMethod } from '../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { User } from '../../../../src/identity-access-management/domain/models/User.js';
 import { cryptoService } from '../../../../src/shared/domain/services/crypto-service.js';
+
+// eslint-disable-next-line no-sync
+const DEFAULT_HASHED_PASSWORD = cryptoService.hashPasswordSync(DEFAULT_PASSWORD);
 
 function _buildUser() {
   return new User({
@@ -46,21 +50,19 @@ buildAuthenticationMethod.withGarAsIdentityProvider = function ({
 
 buildAuthenticationMethod.withPixAsIdentityProviderAndRawPassword = function ({
   id,
-  rawPassword = 'pix123',
+  rawPassword = DEFAULT_PASSWORD,
   shouldChangePassword = false,
   userId,
   createdAt,
   updatedAt,
 } = {}) {
-  // eslint-disable-next-line no-sync
-  const password = cryptoService.hashPasswordSync(rawPassword);
   userId = isUndefined(userId) ? _buildUser().id : userId;
 
   return new AuthenticationMethod({
     id,
     identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
     authenticationComplement: new AuthenticationMethod.PixAuthenticationComplement({
-      password,
+      password: _getHashedPassword(rawPassword),
       shouldChangePassword,
     }),
     externalIdentifier: undefined,
@@ -141,5 +143,13 @@ buildAuthenticationMethod.withIdentityProvider = function ({
     updatedAt,
   });
 };
+
+function _getHashedPassword(password) {
+  if (password === DEFAULT_PASSWORD) {
+    return DEFAULT_HASHED_PASSWORD;
+  }
+  // eslint-disable-next-line no-sync
+  return cryptoService.hashPasswordSync(password);
+}
 
 export { buildAuthenticationMethod };

@@ -1,5 +1,4 @@
 import { config } from '../../../../src/shared/config.js';
-import { DEFAULT_PASSWORD } from '../../../constants.js';
 
 function _buildBlockedUser(databaseBuilder) {
   const blockedUser = databaseBuilder.factory.buildUser.withRawPassword({
@@ -7,7 +6,6 @@ function _buildBlockedUser(databaseBuilder) {
     lastName: 'Locks',
     email: 'blocked@example.net',
     username: 'goldi.locks',
-    rawPassword: DEFAULT_PASSWORD,
     cgu: false,
   });
 
@@ -24,7 +22,6 @@ function _buildAlmostBlockedUser(databaseBuilder) {
     lastName: 'Locks',
     email: 'almost-blocked@example.net',
     username: 'silveri.locks',
-    rawPassword: DEFAULT_PASSWORD,
     cgu: false,
   });
 
@@ -40,7 +37,6 @@ function _buildAlmostTemporarilyBlockedUser(databaseBuilder) {
     lastName: 'Bear',
     email: 'almost-temporarily-blocked@example.net',
     username: 'small.bear',
-    rawPassword: DEFAULT_PASSWORD,
     cgu: false,
   });
 

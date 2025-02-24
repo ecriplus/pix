@@ -52,8 +52,6 @@ function _createProOrganization(databaseBuilder) {
     mustValidateTermsOfService: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
-    rawPassword: 'pix123',
-    shouldChangePassword: false,
   });
 
   acceptPixOrgaTermsOfService(databaseBuilder, PRO_ORGANIZATION_USER_ID);
@@ -82,8 +80,6 @@ function _createProCertificationCenter(databaseBuilder) {
     mustValidateTermsOfService: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
-    rawPassword: 'pix123',
-    shouldChangePassword: false,
   });
 
   acceptPixOrgaTermsOfService(databaseBuilder, PRO_CERTIFICATION_CENTER_USER_ID);

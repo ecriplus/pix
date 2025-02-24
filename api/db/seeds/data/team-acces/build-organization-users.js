@@ -1,4 +1,3 @@
-import { DEFAULT_PASSWORD } from '../../../constants.js';
 import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
 
 export const PIX_ORGA_ALL_ORGA_ID = 10001;
@@ -31,13 +30,12 @@ export function buildOrganizationUsers(databaseBuilder) {
 }
 
 function _buildUser(databaseBuilder) {
-  return function ({ id, firstName, lastName, email, rawPassword = DEFAULT_PASSWORD, cguVersion }) {
+  return function ({ id, firstName, lastName, email, cguVersion }) {
     databaseBuilder.factory.buildUser.withRawPassword({
       id,
       firstName,
       lastName,
       email,
-      rawPassword,
       cgu: true,
     });
 

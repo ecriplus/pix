@@ -4,8 +4,12 @@ import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../src/identity-access-manage
 import * as OidcIdentityProviders from '../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { AuthenticationMethod } from '../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { cryptoService } from '../../../src/shared/domain/services/crypto-service.js';
+import { DEFAULT_PASSWORD } from '../../constants.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildUser } from './build-user.js';
+
+// eslint-disable-next-line no-sync
+const DEFAULT_HASHED_PASSWORD = cryptoService.hashPasswordSync(DEFAULT_PASSWORD);
 
 const buildAuthenticationMethod = {};
 
@@ -69,21 +73,19 @@ buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword = function 
 
 buildAuthenticationMethod.withPixAsIdentityProviderAndPassword = function ({
   id = databaseBuffer.getNextId(),
-  password = 'Password123',
+  password = DEFAULT_PASSWORD,
   shouldChangePassword = false,
   userId,
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-01-02'),
 } = {}) {
-  // eslint-disable-next-line no-sync
-  const hashedPassword = cryptoService.hashPasswordSync(password);
   userId = isUndefined(userId) ? buildUser().id : userId;
 
   const values = {
     id,
     identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
     authenticationComplement: new AuthenticationMethod.PixAuthenticationComplement({
-      password: hashedPassword,
+      password: getUserHashedPassword(password),
       shouldChangePassword,
     }),
     externalIdentifier: undefined,
@@ -190,4 +192,12 @@ buildAuthenticationMethod.withIdentityProvider = function ({
   });
 };
 
-export { buildAuthenticationMethod };
+function getUserHashedPassword(password) {
+  if (password === DEFAULT_PASSWORD) {
+    return DEFAULT_HASHED_PASSWORD;
+  }
+  // eslint-disable-next-line no-sync
+  return cryptoService.hashPasswordSync(password);
+}
+
+export { buildAuthenticationMethod, getUserHashedPassword };

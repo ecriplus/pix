@@ -1,4 +1,3 @@
-import { DEFAULT_PASSWORD } from '../../../constants.js';
 import { createCertificationCenter } from '../common/tooling/certification-center-tooling.js';
 
 const CERTIFICATION_CENTER_OFFSET_ID = 8000;
@@ -95,20 +94,12 @@ export async function buildCertificationCenters(databaseBuilder) {
   });
 }
 
-function _buildUsersWithDefaultPassword({
-  databaseBuilder,
-  firstName,
-  lastName,
-  email,
-  username,
-  rawPassword = DEFAULT_PASSWORD,
-}) {
+function _buildUsersWithDefaultPassword({ databaseBuilder, firstName, lastName, email, username }) {
   return databaseBuilder.factory.buildUser.withRawPassword({
     firstName,
     lastName,
     email,
     username,
-    rawPassword,
     cgu: true,
     lastPixCertifTermsOfServiceValidatedAt: new Date(),
     pixCertifTermsOfServiceAccepted: true,

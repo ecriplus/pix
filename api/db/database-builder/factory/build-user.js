@@ -5,15 +5,15 @@ const { isUndefined, isNil } = lodash;
 import { PIX_ADMIN } from '../../../src/authorization/domain/constants.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { AuthenticationMethod, Membership } from '../../../src/shared/domain/models/index.js';
-import { cryptoService } from '../../../src/shared/domain/services/crypto-service.js';
+import { DEFAULT_PASSWORD } from '../../constants.js';
 import { databaseBuffer } from '../database-buffer.js';
+import { getUserHashedPassword } from './build-authentication-method.js';
 import { buildCertificationCenter } from './build-certification-center.js';
 import { buildCertificationCenterMembership } from './build-certification-center-membership.js';
 import { buildMembership } from './build-membership.js';
 import { buildOrganization } from './build-organization.js';
 import { buildPixAdminRole } from './build-pix-admin-role.js';
 
-const DEFAULT_PASSWORD = 'pix123';
 const { ROLES } = PIX_ADMIN;
 
 /**
@@ -375,15 +375,12 @@ function _buildPixAuthenticationMethod({
   createdAt,
   updatedAt,
 } = {}) {
-  // eslint-disable-next-line no-sync
-  const hashedPassword = cryptoService.hashPasswordSync(rawPassword);
-
   const values = {
     id,
     userId,
     identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
     authenticationComplement: new AuthenticationMethod.PixAuthenticationComplement({
-      password: hashedPassword,
+      password: getUserHashedPassword(rawPassword),
       shouldChangePassword,
     }),
     externalIdentifier: undefined,

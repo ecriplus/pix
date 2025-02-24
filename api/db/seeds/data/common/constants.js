@@ -1,6 +1,5 @@
 import { Tag } from '../../../../src/organizational-entities/domain/models/Tag.js';
 
-const DEFAULT_PASSWORD = 'pix123';
 const COMMON_OFFSET_ID = 1000;
 
 //USERS
@@ -86,7 +85,6 @@ export {
   AGRICULTURE_TAG,
   CFA_TAG,
   COLLEGE_TAG,
-  DEFAULT_PASSWORD,
   FEATURE_ATTESTATIONS_MANAGEMENT_ID,
   FEATURE_CAMPAIGN_EXTERNAL_ID,
   FEATURE_CAMPAIGN_WITHOUT_USER_PROFILE_ID,

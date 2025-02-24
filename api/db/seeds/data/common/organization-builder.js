@@ -1,6 +1,5 @@
 import {
   AGRICULTURE_TAG,
-  DEFAULT_PASSWORD,
   FEATURE_ATTESTATIONS_MANAGEMENT_ID,
   FEATURE_CAMPAIGN_WITHOUT_USER_PROFILE_ID,
   FEATURE_COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY_ID,
@@ -132,8 +131,6 @@ function _createUserAdminForOrganizations(databaseBuilder) {
     email: 'admin-orga@example.net',
     cgu: true,
     lang: 'fr',
-    rawPassword: DEFAULT_PASSWORD,
-    shouldChangePassword: false,
   });
   acceptPixOrgaTermsOfService(databaseBuilder, USER_ID_ADMIN_ORGANIZATION);
 }
@@ -146,8 +143,6 @@ function _createUserMemberForOrganizations(databaseBuilder) {
     email: 'member-orga@example.net',
     cgu: true,
     lang: 'en',
-    rawPassword: DEFAULT_PASSWORD,
-    shouldChangePassword: false,
   });
   acceptPixOrgaTermsOfService(databaseBuilder, USER_ID_MEMBER_ORGANIZATION);
 }

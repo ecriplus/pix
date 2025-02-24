@@ -22,8 +22,6 @@ export default async function initUser(databaseBuilder) {
     mustValidateTermsOfService: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
-    rawPassword: 'pix123',
-    shouldChangePassword: false,
   });
 
   // 2. Accept Pix Orga Terms of Service
