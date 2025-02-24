@@ -33,8 +33,6 @@ async function _createSco1dUser(databaseBuilder) {
     mustValidateTermsOfService: false,
     pixCertifTermsOfServiceAccepted: true,
     hasSeenAssessmentInstructions: false,
-    rawPassword: 'pix123',
-    shouldChangePassword: false,
   });
   acceptPixOrgaTermsOfService(databaseBuilder, TEAM_1D_USER_ID);
   await databaseBuilder.commit();

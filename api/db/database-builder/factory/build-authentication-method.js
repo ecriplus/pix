@@ -4,12 +4,12 @@ import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../src/identity-access-manage
 import * as OidcIdentityProviders from '../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { AuthenticationMethod } from '../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { cryptoService } from '../../../src/shared/domain/services/crypto-service.js';
+import { DEFAULT_PASSWORD } from '../../constants.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildUser } from './build-user.js';
 
-const USER_DEFAULT_PASSWORD = 'pix123';
 // eslint-disable-next-line no-sync
-const USER_DEFAULT_HASHED_PASSWORD = cryptoService.hashPasswordSync(USER_DEFAULT_PASSWORD);
+const DEFAULT_HASHED_PASSWORD = cryptoService.hashPasswordSync(DEFAULT_PASSWORD);
 
 const buildAuthenticationMethod = {};
 
@@ -73,7 +73,7 @@ buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword = function 
 
 buildAuthenticationMethod.withPixAsIdentityProviderAndPassword = function ({
   id = databaseBuffer.getNextId(),
-  password = USER_DEFAULT_PASSWORD,
+  password = DEFAULT_PASSWORD,
   shouldChangePassword = false,
   userId,
   createdAt = new Date('2020-01-01'),
@@ -193,11 +193,11 @@ buildAuthenticationMethod.withIdentityProvider = function ({
 };
 
 function getUserHashedPassword(password) {
-  if (password === USER_DEFAULT_PASSWORD) {
-    return USER_DEFAULT_HASHED_PASSWORD;
+  if (password === DEFAULT_PASSWORD) {
+    return DEFAULT_HASHED_PASSWORD;
   }
   // eslint-disable-next-line no-sync
   return cryptoService.hashPasswordSync(password);
 }
 
-export { buildAuthenticationMethod, getUserHashedPassword, USER_DEFAULT_PASSWORD };
+export { buildAuthenticationMethod, getUserHashedPassword };

@@ -1,5 +1,4 @@
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
-import { DEFAULT_PASSWORD } from '../../../constants.js';
 
 const { ROLES } = PIX_ADMIN;
 
@@ -8,7 +7,6 @@ function _buildCertifRole(databaseBuilder) {
     firstName: 'Pix',
     lastName: 'Certif',
     email: 'pixcertif@example.net',
-    rawPassword: DEFAULT_PASSWORD,
     role: ROLES.CERTIF,
   });
 }
@@ -18,7 +16,6 @@ function _buildMetierRole(databaseBuilder) {
     firstName: 'Pix',
     lastName: 'Metier',
     email: 'pixmetier@example.net',
-    rawPassword: DEFAULT_PASSWORD,
     role: ROLES.METIER,
   });
 }
@@ -28,7 +25,6 @@ function _buildSupportRole(databaseBuilder) {
     firstName: 'Pix',
     lastName: 'Support',
     email: 'pixsupport@example.net',
-    rawPassword: DEFAULT_PASSWORD,
     role: ROLES.SUPPORT,
   });
 }

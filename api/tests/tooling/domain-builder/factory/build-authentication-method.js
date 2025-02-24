@@ -1,13 +1,13 @@
 import lodash from 'lodash';
 const { isUndefined } = lodash;
 
+import { DEFAULT_PASSWORD } from '../../../../db/constants.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import * as OidcIdentityProviders from '../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { AuthenticationMethod } from '../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { User } from '../../../../src/identity-access-management/domain/models/User.js';
 import { cryptoService } from '../../../../src/shared/domain/services/crypto-service.js';
 
-const DEFAULT_PASSWORD = 'pix123';
 // eslint-disable-next-line no-sync
 const DEFAULT_HASHED_PASSWORD = cryptoService.hashPasswordSync(DEFAULT_PASSWORD);
 
@@ -50,7 +50,7 @@ buildAuthenticationMethod.withGarAsIdentityProvider = function ({
 
 buildAuthenticationMethod.withPixAsIdentityProviderAndRawPassword = function ({
   id,
-  rawPassword = 'pix123',
+  rawPassword = DEFAULT_PASSWORD,
   shouldChangePassword = false,
   userId,
   createdAt,

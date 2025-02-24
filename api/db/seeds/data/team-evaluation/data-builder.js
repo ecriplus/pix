@@ -42,8 +42,6 @@ function createScoOrganization(databaseBuilder) {
     mustValidateTermsOfService: false,
     pixCertifTermsOfServiceAccepted: false,
     hasSeenAssessmentInstructions: false,
-    rawPassword: 'pix123',
-    shouldChangePassword: false,
   });
 
   acceptPixOrgaTermsOfService(databaseBuilder, SCO_ORGANIZATION_USER_ID);
