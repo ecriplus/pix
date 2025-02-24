@@ -1,4 +1,5 @@
 import { CampaignAssessmentParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignAssessmentParticipation.js';
+import { DetachedAssessment } from '../../../../../../src/prescription/campaign-participation/domain/read-models/DetachedAssessment.js';
 import * as campaignAssessmentParticipationRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-assessment-participation-repository.js';
 import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
@@ -367,6 +368,67 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
 
         //then
         expect(error).to.be.instanceof(NotFoundError);
+      });
+    });
+  });
+
+  describe('#getDetachedByUserId', function () {
+    let userId, assessment, assessment2;
+
+    beforeEach(async function () {
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
+      userId = databaseBuilder.factory.buildUser().id;
+      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId }).id;
+      const participation = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId,
+        userId,
+        organizationLearnerId,
+      });
+      assessment = databaseBuilder.factory.buildAssessment({
+        type: Assessment.types.CAMPAIGN,
+        userId,
+        campaignParticipationId: null,
+        createdAt: new Date('2025-02-23'),
+        updatedAt: new Date('2025-02-25'),
+      });
+      assessment2 = databaseBuilder.factory.buildAssessment({
+        type: Assessment.types.CAMPAIGN,
+        userId,
+        campaignParticipationId: null,
+        createdAt: new Date('2025-02-25'),
+        updatedAt: new Date('2025-02-27'),
+      });
+      databaseBuilder.factory.buildAssessment({
+        type: Assessment.types.CAMPAIGN,
+        userId,
+        campaignParticipationId: participation.id,
+        createdAt: new Date('2025-02-25'),
+        updatedAt: new Date('2025-02-27'),
+      });
+      await databaseBuilder.commit();
+    });
+    context('when userId has no assessment', function () {
+      it('should return an empty array', async function () {
+        const otherUser = databaseBuilder.factory.buildUser();
+        await databaseBuilder.commit();
+
+        const result = await campaignAssessmentParticipationRepository.getDetachedByUserId({ userId: otherUser.id });
+        expect(result).to.be.empty;
+      });
+    });
+    context('when user has anonymised participation', function () {
+      it('should return an array of DetachAssessment', async function () {
+        const result = await campaignAssessmentParticipationRepository.getDetachedByUserId({ userId });
+        expect(result).lengthOf(2);
+        expect(result[0]).instanceOf(DetachedAssessment);
+        expect(result[0].id).equal(assessment2.id);
+        expect(result[0].updatedAt).deep.equal(assessment2.updatedAt);
+        expect(result[0].state).equal(assessment2.state);
+        expect(result[1]).instanceOf(DetachedAssessment);
+        expect(result[1].id).equal(assessment.id);
+        expect(result[1].updatedAt).deep.equal(assessment.updatedAt);
+        expect(result[1].state).equal(assessment.state);
       });
     });
   });

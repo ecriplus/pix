@@ -7,6 +7,7 @@ import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 import { CampaignAssessmentParticipation } from '../../domain/models/CampaignAssessmentParticipation.js';
+import { DetachedAssessment } from '../../domain/read-models/DetachedAssessment.js';
 
 const getByCampaignIdAndCampaignParticipationId = async function ({
   campaignId,
@@ -18,7 +19,17 @@ const getByCampaignIdAndCampaignParticipationId = async function ({
   return _buildCampaignAssessmentParticipation(result, shouldBuildProgression);
 };
 
-export { getByCampaignIdAndCampaignParticipationId };
+const getDetachedByUserId = async ({ userId }) => {
+  const result = await knex('assessments')
+    .select(['id', 'state', 'updatedAt'])
+    .whereNull('campaignParticipationId')
+    .where({ userId, type: Assessment.types.CAMPAIGN })
+    .orderBy('updatedAt', 'DESC');
+
+  return result.map((row) => new DetachedAssessment(row));
+};
+
+export { getByCampaignIdAndCampaignParticipationId, getDetachedByUserId };
 
 async function _fetchCampaignAssessmentAttributesFromCampaignParticipation(campaignId, campaignParticipationId) {
   const knexConn = DomainTransaction.getConnection();
