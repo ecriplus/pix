@@ -6,6 +6,10 @@
   flex-direction: column;
   gap: var(--pix-spacing-10x);
 
+  &__previous-page-button {
+    width: fit-content;
+  }
+
   &__header {
     @extend %pix-title-m;
 
