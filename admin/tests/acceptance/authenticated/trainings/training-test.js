@@ -173,6 +173,18 @@ module('Acceptance | Trainings | Training', function (hooks) {
         // then
         assert.dom(screen.getByRole('heading', { name: 'Mon titre interne' })).exists();
       });
+
+      test('should be possible to duplicate displayed training', async function (assert) {
+        // given
+        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+        await visit(`/trainings/${trainingId}`);
+
+        // when
+        const duplicateButton = await screen.getByRole('button', { name: 'Dupliquer ce contenu formatif' });
+
+        // then
+        assert.dom(duplicateButton).exists();
+      });
     });
 
     module('when admin role is "SUPPORT', function () {
