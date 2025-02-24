@@ -1,5 +1,28 @@
 # Pix Changelog
 
+## v5.50.0 (24/02/2025)
+
+
+### :rocket: Amélioration
+- [#11478](https://github.com/1024pix/pix/pull/11478) [FEATURE] Remplacer le PixReturnTo déprécié par le PixButtonLink sur Pix Orga (PIX-16694).
+- [#11486](https://github.com/1024pix/pix/pull/11486) [FEATURE] Renommage du didacticiel de Modulix en bac-a-sable (PIX-16674).
+- [#11387](https://github.com/1024pix/pix/pull/11387) [FEATURE] Page résultats de campagne : afficher les badges obtenus sur le total des participations (PIX-16241).
+- [#11474](https://github.com/1024pix/pix/pull/11474) [FEATURE] Ajouter une feature qui permet d'avoir une nouvelle typologie de campagne (PIX-16485).
+- [#11453](https://github.com/1024pix/pix/pull/11453) [FEATURE] Afficher correctement le nom/prenom sur les attesations PDF sixth_grade / parenthood (Pix-16644).
+- [#11452](https://github.com/1024pix/pix/pull/11452) [FEATURE] Ajouter les migrations de lastLoggedAt et lastAccessedAt.
+
+### :building_construction: Tech
+- [#11459](https://github.com/1024pix/pix/pull/11459) [TECH] Migrer la route de mise à jour du rôle d'un membre d'un centre de certification.
+- [#11469](https://github.com/1024pix/pix/pull/11469) [TECH] Déplacer les assets du Didacticiel Modulix vers `assets.pix.org` (PIX-16677).
+- [#11471](https://github.com/1024pix/pix/pull/11471) [TECH] : 🔧 Ajout de la config maintenance plannifiée pour pix-admin .
+- [#11472](https://github.com/1024pix/pix/pull/11472) [TECH] Ajoute les infos de badges  imageUrl et altMessage dans le serializer de campagne (pix-16689).
+
+### :bug: Correction
+- [#11473](https://github.com/1024pix/pix/pull/11473) [BUGFIX] Correction du layout shift sur la bannière de nouvelle information du dashboard Pix App.
+
+### :arrow_up: Montée de version
+- [#11493](https://github.com/1024pix/pix/pull/11493) [BUMP] Update dependency @1024pix/pix-ui to ^54.9.0 (junior).
+
 ## v5.49.0 (21/02/2025)
 
 
