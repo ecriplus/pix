@@ -7,6 +7,10 @@ import { cryptoService } from '../../../src/shared/domain/services/crypto-servic
 import { databaseBuffer } from '../database-buffer.js';
 import { buildUser } from './build-user.js';
 
+const USER_DEFAULT_PASSWORD = 'pix123';
+// eslint-disable-next-line no-sync
+const USER_DEFAULT_HASHED_PASSWORD = cryptoService.hashPasswordSync(USER_DEFAULT_PASSWORD);
+
 const buildAuthenticationMethod = {};
 
 buildAuthenticationMethod.withGarAsIdentityProvider = function ({
@@ -69,21 +73,19 @@ buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword = function 
 
 buildAuthenticationMethod.withPixAsIdentityProviderAndPassword = function ({
   id = databaseBuffer.getNextId(),
-  password = 'Password123',
+  password = USER_DEFAULT_PASSWORD,
   shouldChangePassword = false,
   userId,
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-01-02'),
 } = {}) {
-  // eslint-disable-next-line no-sync
-  const hashedPassword = cryptoService.hashPasswordSync(password);
   userId = isUndefined(userId) ? buildUser().id : userId;
 
   const values = {
     id,
     identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
     authenticationComplement: new AuthenticationMethod.PixAuthenticationComplement({
-      password: hashedPassword,
+      password: getUserHashedPassword(password),
       shouldChangePassword,
     }),
     externalIdentifier: undefined,
@@ -190,4 +192,12 @@ buildAuthenticationMethod.withIdentityProvider = function ({
   });
 };
 
-export { buildAuthenticationMethod };
+function getUserHashedPassword(password) {
+  if (password === USER_DEFAULT_PASSWORD) {
+    return USER_DEFAULT_HASHED_PASSWORD;
+  }
+  // eslint-disable-next-line no-sync
+  return cryptoService.hashPasswordSync(password);
+}
+
+export { buildAuthenticationMethod, getUserHashedPassword, USER_DEFAULT_PASSWORD };

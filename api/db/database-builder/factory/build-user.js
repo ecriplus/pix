@@ -5,15 +5,14 @@ const { isUndefined, isNil } = lodash;
 import { PIX_ADMIN } from '../../../src/authorization/domain/constants.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { AuthenticationMethod, Membership } from '../../../src/shared/domain/models/index.js';
-import { cryptoService } from '../../../src/shared/domain/services/crypto-service.js';
 import { databaseBuffer } from '../database-buffer.js';
+import { getUserHashedPassword, USER_DEFAULT_PASSWORD } from './build-authentication-method.js';
 import { buildCertificationCenter } from './build-certification-center.js';
 import { buildCertificationCenterMembership } from './build-certification-center-membership.js';
 import { buildMembership } from './build-membership.js';
 import { buildOrganization } from './build-organization.js';
 import { buildPixAdminRole } from './build-pix-admin-role.js';
 
-const DEFAULT_PASSWORD = 'pix123';
 const { ROLES } = PIX_ADMIN;
 
 /**
@@ -119,7 +118,7 @@ buildUser.withRawPassword = function buildUserWithRawPassword({
   hasSeenAssessmentInstructions = false,
   createdAt = new Date(),
   updatedAt = new Date(),
-  rawPassword = DEFAULT_PASSWORD,
+  rawPassword = USER_DEFAULT_PASSWORD,
   shouldChangePassword = false,
   emailConfirmedAt = new Date('2021-04-28T02:42:00Z'),
 } = {}) {
@@ -214,7 +213,7 @@ buildUser.withRole = function buildUserWithRole({
   createdAt = new Date(),
   updatedAt = new Date(),
   disabledAt,
-  rawPassword = DEFAULT_PASSWORD,
+  rawPassword = USER_DEFAULT_PASSWORD,
   shouldChangePassword = false,
 } = {}) {
   email = _generateEmailIfUndefined(email, id, lastName, firstName);
@@ -269,7 +268,7 @@ buildUser.withMembership = function buildUserWithMemberships({
   updatedAt = new Date(),
   organizationRole = Membership.roles.ADMIN,
   organizationId = null,
-  rawPassword = DEFAULT_PASSWORD,
+  rawPassword = USER_DEFAULT_PASSWORD,
   shouldChangePassword = false,
 } = {}) {
   email = _generateEmailIfUndefined(email, id, lastName, firstName);
@@ -370,20 +369,17 @@ buildUser.withCertificationCenterMembership = function buildUserWithCertificatio
 function _buildPixAuthenticationMethod({
   id = databaseBuffer.getNextId(),
   userId,
-  rawPassword = DEFAULT_PASSWORD,
+  rawPassword = USER_DEFAULT_PASSWORD,
   shouldChangePassword,
   createdAt,
   updatedAt,
 } = {}) {
-  // eslint-disable-next-line no-sync
-  const hashedPassword = cryptoService.hashPasswordSync(rawPassword);
-
   const values = {
     id,
     userId,
     identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
     authenticationComplement: new AuthenticationMethod.PixAuthenticationComplement({
-      password: hashedPassword,
+      password: getUserHashedPassword(rawPassword),
       shouldChangePassword,
     }),
     externalIdentifier: undefined,
