@@ -17,6 +17,7 @@ const authenticateUser = async function ({
   userLoginRepository,
   adminMemberRepository,
   emailRepository,
+  emailValidationDemandRepository,
   audience,
 }) {
   try {
@@ -49,11 +50,15 @@ const authenticateUser = async function ({
 
     const userLogin = await userLoginRepository.findByUserId(foundUser.id);
     if (foundUser.email && userLogin?.shouldSendConnectionWarning()) {
+      const validationToken = !foundUser.emailConfirmedAt
+        ? await emailValidationDemandRepository.save(foundUser.id)
+        : null;
       await emailRepository.sendEmailAsync(
         createWarningConnectionEmail({
           locale: foundUser.locale,
           email: foundUser.email,
           firstName: foundUser.firstName,
+          validationToken,
         }),
       );
     }

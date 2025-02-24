@@ -20,6 +20,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
   let adminMemberRepository;
   let pixAuthenticationService;
   let emailRepository;
+  let emailValidationDemandRepository;
   let clock;
 
   const userEmail = 'user@example.net';
@@ -51,7 +52,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     pixAuthenticationService = {
       getUserByUsernameAndPassword: sinon.stub(),
     };
-
+    emailValidationDemandRepository = { save: sinon.stub() };
     emailRepository = { sendEmailAsync: sinon.stub() };
   });
 
@@ -387,21 +388,21 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           userId: user.id,
           lastLoggedAt: '2020-01-01',
         });
-
+        const validationToken = 'token';
         const expectedEmail = createWarningConnectionEmail({
           email: user.email,
           firstName: user.firstName,
           locale: user.locale,
+          validationToken,
         });
 
         pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
         tokenService.createAccessTokenFromUser
           .withArgs({ userId: user.id, source, audience })
           .resolves({ accessToken, expirationDelaySeconds });
-
+        emailValidationDemandRepository.save.withArgs(user.id).resolves(validationToken);
         userLoginRepository.findByUserId.resolves(userLogins);
 
-        // when
         await authenticateUser({
           username: userEmail,
           password,
@@ -413,6 +414,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           userRepository,
           userLoginRepository,
           emailRepository,
+          emailValidationDemandRepository,
           audience,
         });
 

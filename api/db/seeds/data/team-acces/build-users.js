@@ -48,6 +48,15 @@ function _buildUsers(databaseBuilder) {
     email: 'chrono.post@example.net',
     createdAt: new Date('2000-12-31'),
   });
+
+  // user with an old last logged-at date (>1 year) and no email confirmation date
+  const userWithOldLastLoggedAt = databaseBuilder.factory.buildUser.withRawPassword({
+    firstName: 'Old',
+    lastName: 'Connexion',
+    email: 'old-connexion@example.net',
+    emailConfirmedAt: null,
+  });
+  databaseBuilder.factory.buildUserLogin({ userId: userWithOldLastLoggedAt.id, lastLoggedAt: new Date('1970-01-01') });
 }
 
 export function buildUsers(databaseBuilder) {

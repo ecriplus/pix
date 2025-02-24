@@ -50,7 +50,8 @@ function getEmailValidationUrl({ locale, redirectUrl, token } = {}) {
   const baseUrl = getPixAppBaseUrl(locale);
 
   const params = new URLSearchParams();
-  if (token) params.append('token', token);
+  if (!token) return redirectUrl;
+  params.append('token', token);
   if (redirectUrl) params.append('redirect_url', redirectUrl);
 
   return `${baseUrl}/api/users/validate-email?${params.toString()}`;

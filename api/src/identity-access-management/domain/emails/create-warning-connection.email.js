@@ -10,12 +10,20 @@ import { mailer } from '../../../shared/mail/infrastructure/services/mailer.js';
  * @param {string} params.locale - The locale for the email.
  * @param {string} params.email - The recipient's email address.
  * @param {string} params.firstName - The recipient's first name.
+ * @param {string} params.validationToken - The token for email validation.
  * @returns {Email} The email object.
  */
-export function createWarningConnectionEmail({ locale, email, firstName }) {
+export function createWarningConnectionEmail({ locale, email, firstName, validationToken }) {
   locale = locale || LOCALE.FRENCH_FRANCE;
   const lang = new Intl.Locale(locale).language;
-  const factory = new EmailFactory({ app: 'pix-app', locale });
+  let localeSupport;
+  if (locale.toLowerCase() === LOCALE.FRENCH_FRANCE) {
+    localeSupport = LOCALE.FRENCH_FRANCE;
+  } else {
+    localeSupport = lang;
+  }
+
+  const factory = new EmailFactory({ app: 'pix-app', locale: localeSupport });
 
   const { i18n, defaultVariables } = factory;
   const pixAppUrl = urlBuilder.getPixAppBaseUrl(locale);
@@ -28,7 +36,11 @@ export function createWarningConnectionEmail({ locale, email, firstName }) {
     variables: {
       homeName: defaultVariables.homeName,
       homeUrl: defaultVariables.homeUrl,
-      helpDeskUrl: defaultVariables.helpdeskUrl,
+      helpDeskUrl: urlBuilder.getEmailValidationUrl({
+        locale: localeSupport,
+        redirectUrl: defaultVariables.helpdeskUrl,
+        token: validationToken,
+      }),
       displayNationalLogo: defaultVariables.displayNationalLogo,
       contactUs: i18n.__('common.email.contactUs'),
       doNotAnswer: i18n.__('common.email.doNotAnswer'),
@@ -39,7 +51,11 @@ export function createWarningConnectionEmail({ locale, email, firstName }) {
       disclaimer: i18n.__('warning-connection-email.params.disclaimer'),
       warningMessage: i18n.__('warning-connection-email.params.warningMessage'),
       resetMyPassword: i18n.__('warning-connection-email.params.resetMyPassword'),
-      resetUrl,
+      resetUrl: urlBuilder.getEmailValidationUrl({
+        locale: localeSupport,
+        redirectUrl: resetUrl,
+        token: validationToken,
+      }),
       supportContact: i18n.__('warning-connection-email.params.supportContact'),
       thanks: i18n.__('warning-connection-email.params.thanks'),
       signing: i18n.__('warning-connection-email.params.signing'),
