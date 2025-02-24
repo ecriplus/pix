@@ -702,6 +702,75 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
     });
   });
 
+  describe('POST /api/admin/trainings/{trainingId}/duplicate', function () {
+    describe('Security Prehandlers', function () {
+      it('should allow user if its role is SUPER_ADMIN', async function () {
+        // given
+        sinon.stub(trainingController, 'duplicate').returns('ok');
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+          .callsFake((request, h) => h.response(true));
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('POST', '/api/admin/trainings/11111/duplicate');
+
+        // then
+        sinon.assert.calledOnce(trainingController.duplicate);
+      });
+
+      it('should allow user if the role is METIER', async function () {
+        // given
+        sinon.stub(trainingController, 'duplicate').returns('ok');
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier').callsFake((request, h) => h.response(true));
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('POST', '/api/admin/trainings/11111/duplicate');
+
+        // then
+        sinon.assert.calledOnce(trainingController.duplicate);
+      });
+
+      it('should return 403 it if the role is not allowed', async function () {
+        // given
+        sinon.stub(trainingController, 'duplicate').returns('ok');
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request('POST', '/api/admin/trainings/11111/duplicate');
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        sinon.assert.notCalled(trainingController.duplicate);
+      });
+    });
+  });
+
   describe('PATCH /api/admin/trainings', function () {
     describe('Security Prehandlers', function () {
       // eslint-disable-next-line mocha/no-setup-in-describe

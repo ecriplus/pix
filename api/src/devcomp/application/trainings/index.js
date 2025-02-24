@@ -154,6 +154,29 @@ const register = async function (server) {
       },
     },
     {
+      method: 'POST',
+      path: '/api/admin/trainings/{trainingId}/duplicate',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            trainingId: identifiersType.trainingId,
+          }),
+        },
+        handler: trainingsController.duplicate,
+        tags: ['api', 'admin', 'trainings'],
+        notes: ['- Permet à un administrateur de dupliquer un contenu formatif existant'],
+      },
+    },
+    {
       method: 'PATCH',
       path: '/api/admin/trainings/{trainingId}',
       config: {
