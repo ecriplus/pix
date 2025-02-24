@@ -54,6 +54,10 @@ export default class Prescriber extends Model {
     return this.features[Prescriber.featureList.ATTESTATIONS_MANAGEMENT]?.active;
   }
 
+  get availableAttestations() {
+    return this.features[Prescriber.featureList.ATTESTATIONS_MANAGEMENT]?.params ?? [];
+  }
+
   get missionsManagement() {
     return this.features[Prescriber.featureList.MISSIONS_MANAGEMENT]?.active;
   }
