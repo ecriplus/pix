@@ -57,7 +57,10 @@ async function authenticateExternalUser({
     const token = tokenService.createAccessTokenForSaml({ userId: userFromCredentials.id, audience });
 
     await userLoginRepository.updateLastLoggedAt({ userId: userFromCredentials.id });
-
+    await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
+      userId: userFromCredentials.id,
+      identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
+    });
     return token;
   } catch (error) {
     if (error instanceof UserNotFoundError || error instanceof PasswordNotMatching) {

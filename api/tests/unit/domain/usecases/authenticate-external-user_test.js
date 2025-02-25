@@ -36,6 +36,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
     };
     authenticationMethodRepository = {
       create: sinon.stub(),
+      updateLastLoggedAtByIdentityProvider: sinon.stub(),
     };
     userRepository = {
       getBySamlId: sinon.stub(),
@@ -107,7 +108,6 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
 
       const expectedToken = 'expected returned token';
       tokenService.createAccessTokenForSaml.withArgs({ userId: user.id, audience }).resolves(expectedToken);
-
       // when
       await authenticateExternalUser({
         username: user.email,
@@ -125,6 +125,10 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
 
       // then
       expect(userLoginRepository.updateLastLoggedAt).to.have.been.calledWithExactly({ userId: user.id });
+      expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.have.been.calledWithExactly({
+        userId: user.id,
+        identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
+      });
     });
 
     it("should throw an UnexpectedUserAccountError (with expected user's username or email) when the authenticated user does not match the expected one", async function () {
