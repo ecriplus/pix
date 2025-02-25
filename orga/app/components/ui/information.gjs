@@ -1,0 +1,10 @@
+<template>
+  <div class="information" ...attributes>
+    <dt class="information__title">
+      {{yield to="title"}}
+    </dt>
+    <dd class="information__content {{@contentClass}}">
+      {{yield to="content"}}
+    </dd>
+  </div>
+</template>

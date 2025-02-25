@@ -1,0 +1,45 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import Component from '@glimmer/component';
+import { t } from 'ember-intl';
+import { not } from 'ember-truth-helpers';
+
+export default class ResetPasswordModal extends Component {
+  get canResetSomePasswords() {
+    return this.args.totalAffectedStudents > 0;
+  }
+  <template>
+    <PixModal
+      @title={{t "pages.sco-organization-participants.reset-password-modal.title" htmlSafe=true}}
+      @showModal={{@showModal}}
+      @onCloseButtonClick={{@onCloseModal}}
+    >
+      <:content>
+        <section class="reset-password-modal__content">
+          <PixNotificationAlert @type="warning" @withIcon={{true}}>{{t
+              "pages.sco-organization-participants.reset-password-modal.warning-message"
+            }}</PixNotificationAlert>
+          <p>{{t
+              "pages.sco-organization-participants.reset-password-modal.content-message-1"
+              totalSelectedStudents=@totalSelectedStudents
+              totalAffectedStudents=@totalAffectedStudents
+              htmlSafe=true
+            }}</p>
+          {{#if this.canResetSomePasswords}}
+            <p>{{t "pages.sco-organization-participants.reset-password-modal.content-message-2"}}</p>
+            <p>{{t "pages.sco-organization-participants.reset-password-modal.content-message-3"}}</p>
+          {{/if}}
+        </section>
+      </:content>
+      <:footer>
+        <PixButton @variant="secondary" @triggerAction={{@onCloseModal}}>
+          {{t "common.actions.cancel"}}
+        </PixButton>
+        <PixButton @triggerAction={{@onTriggerAction}} @isDisabled={{not this.canResetSomePasswords}}>
+          {{t "common.actions.confirm"}}
+        </PixButton>
+      </:footer>
+    </PixModal>
+  </template>
+}
