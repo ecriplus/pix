@@ -1,9 +1,15 @@
 {{! template-lint-disable link-href-attributes }}
 {{page-title (t "pages.sessions.import.title")}}
 <main class="import-page">
-  <PixReturnTo @route="authenticated.sessions" class="previous-button hide-on-mobile">
+  <PixButtonLink
+    @route="authenticated.sessions"
+    @variant="tertiary"
+    @iconBefore="arrowLeft"
+    class="previous-button hide-on-mobile"
+  >
     {{t "pages.sessions.actions.return"}}
-  </PixReturnTo>
+  </PixButtonLink>
+
   <h1 class="page-title">{{t "pages.sessions.import.title"}}</h1>
 
   {{#if this.isImportStepOne}}
