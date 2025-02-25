@@ -1,5 +1,32 @@
 # Pix Changelog
 
+## v5.51.0 (25/02/2025)
+
+
+### :rocket: Amélioration
+- [#11477](https://github.com/1024pix/pix/pull/11477) [FEATURE] Remplacer le PixReturnTo déprécié par le PixButtonLink sur Pix Certif (PIX-16687).
+- [#11420](https://github.com/1024pix/pix/pull/11420) [FEATURE] Ajouter une validation de l'email dans les liens de l'email d'avertissement de connexion après un an d'inactivité (PIX-16127).
+- [#11497](https://github.com/1024pix/pix/pull/11497) [FEATURE] Mettre à disposition un webhook pour repliquer les données entre le datawarehouse et le datamart (PIX-16704).
+- [#11460](https://github.com/1024pix/pix/pull/11460) [FEATURE] Créer la table last-user-application-connections (PIX-16618).
+- [#11465](https://github.com/1024pix/pix/pull/11465) [FEATURE] Créer un endpoint pour la duplication d'un CF(PIX-16669).
+
+### :building_construction: Tech
+- [#11503](https://github.com/1024pix/pix/pull/11503) [TECH] Ne pas remonter d'erreur à l'utilisateur si les quêtes sont en erreurs (PIX-16706).
+- [#11495](https://github.com/1024pix/pix/pull/11495) [TECH] Amélioration des performances du database builder.
+- [#11498](https://github.com/1024pix/pix/pull/11498) [TECH] Déclenche la CI sur les commits de la branche dev.
+- [#11255](https://github.com/1024pix/pix/pull/11255) [TECH] Ajouter un script pour actualiser les fichiers de traductions.
+- [#11450](https://github.com/1024pix/pix/pull/11450) [TECH] Mettre à jour la configuration docker pour le local-domains.
+- [#11426](https://github.com/1024pix/pix/pull/11426) [TECH] Ajouter un sous-composant d'affichage des infos du candidat d'une certification (PIX-16580).
+- [#11347](https://github.com/1024pix/pix/pull/11347) [TECH] Expliciter la définiton des quêtes (PIX-16445).
+
+### :arrow_up: Montée de version
+- [#11494](https://github.com/1024pix/pix/pull/11494) [BUMP] Update dependency @1024pix/pix-ui to ^54.10.0 (mon-pix).
+- [#11464](https://github.com/1024pix/pix/pull/11464) [BUMP] Update dependency @1024pix/eslint-plugin to ^2.1.0 (mon-pix).
+- [#11499](https://github.com/1024pix/pix/pull/11499) [BUMP] Update dependency @1024pix/pix-ui to ^54.10.0 (orga).
+
+### :coffee: Autre
+- [#11406](https://github.com/1024pix/pix/pull/11406) [DOC] Documenter le choix de l'architecture pour la mise à disposition des données (PIX-16526).
+
 ## v5.50.0 (24/02/2025)
 
 
