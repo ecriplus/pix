@@ -49,5 +49,15 @@ export default class SelectableList extends Component {
       {{yield item (fn this.toggle item) (this.isSelected item) index to="item"}}
     {{/each}}
     {{yield this.allSelected this.someSelected this.toggleAll this.selectedItems this.reset to="manager"}}
+
+    {{yield
+      this.toggle
+      this.isSelected
+      this.allSelected
+      this.someSelected
+      this.toggleAll
+      this.selectedItems
+      this.reset
+    }}
   </template>
 }

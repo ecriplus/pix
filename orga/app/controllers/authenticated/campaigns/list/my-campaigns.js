@@ -26,9 +26,8 @@ export default class AuthenticatedCampaignsListMyCampaignsController extends Con
   }
 
   @action
-  goToCampaignPage(campaignId, event) {
-    event.preventDefault();
-    this.router.transitionTo('authenticated.campaigns.campaign', campaignId);
+  goToCampaignPage(campaign) {
+    this.router.transitionTo('authenticated.campaigns.campaign', campaign.id);
   }
 
   @action

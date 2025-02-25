@@ -1,4 +1,5 @@
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';
 
@@ -50,6 +51,19 @@ module('Unit | Controller | authenticated/campaigns/list/all-campaigns', functio
 
         // then
         assert.strictEqual(controller.someField, undefined);
+      });
+    });
+
+    module('#action goToCampaignPage', function () {
+      test('it should call transitionTo with appropriate arguments', function (assert) {
+        // given
+        controller.router = { transitionTo: sinon.stub() };
+
+        // when
+        controller.send('goToCampaignPage', { id: 123 });
+
+        // then
+        assert.true(controller.router.transitionTo.calledWith('authenticated.campaigns.campaign', 123));
       });
     });
   });
