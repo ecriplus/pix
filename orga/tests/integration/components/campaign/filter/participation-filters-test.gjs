@@ -1,8 +1,8 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import ParticipationFilters from 'pix-orga/components/campaign/filter/participation-filters';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -12,10 +12,10 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
   setupIntlRenderingTest(hooks);
   let store;
   const campaignId = '1';
+  const noop = () => {};
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
-    this.set('noop', () => {});
   });
 
   module('Basic Filter State', function () {
@@ -25,20 +25,20 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         type: 'ASSESSMENT',
       });
       const rowCount = 1;
-      this.set('campaign', campaign);
-      this.set('rowCount', rowCount);
 
       // when
       const screen = await render(
-        hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @rowCount={{this.rowCount}}
-  @onFilter={{this.noop}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-/>`,
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @rowCount={{rowCount}}
+            @onFilter={{noop}}
+            @isHiddenStages={{true}}
+            @isHiddenBadges={{true}}
+            @isHiddenDivisions={{true}}
+            @isHiddenGroups={{true}}
+          />
+        </template>,
       );
 
       // then
@@ -55,20 +55,19 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
       });
       const rowCount = 2;
 
-      this.set('campaign', campaign);
-      this.set('details', rowCount);
-
       // when
       const screen = await render(
-        hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @rowCount={{this.details}}
-  @onFilter={{this.noop}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-/>`,
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @rowCount={{rowCount}}
+            @onFilter={{noop}}
+            @isHiddenStages={{true}}
+            @isHiddenBadges={{true}}
+            @isHiddenDivisions={{true}}
+            @isHiddenGroups={{true}}
+          />
+        </template>,
       );
 
       // then
@@ -85,22 +84,22 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           badges: [badge],
         });
         const resetFiltering = sinon.stub();
-        this.set('campaign', campaign);
-        this.set('resetFiltering', resetFiltering);
-        this.set('searchFilter', 'toto');
+        const searchFilter = 'toto';
 
         //when
         await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onResetFilter={{this.resetFiltering}}
-  @searchFilter={{this.searchFilter}}
-  @onFilter={{this.noop}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onResetFilter={{resetFiltering}}
+              @searchFilter={{searchFilter}}
+              @onFilter={{noop}}
+              @isHiddenStages={{true}}
+              @isHiddenBadges={{true}}
+              @isHiddenDivisions={{true}}
+              @isHiddenGroups={{true}}
+            />
+          </template>,
         );
 
         await clickByName('Effacer les filtres');
@@ -122,28 +121,31 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
             badges: [badge],
             stages: [stage],
           });
-          this.set('campaign', campaign);
-          this.set('resetFiltering', () => {});
-          this.set('searchFilter', null);
-          this.set('searchBadges', []);
-          this.set('searchStages', []);
-          this.set('selectedStages', []);
-          this.set('selectedBadges', []);
+          const resetFiltering = () => {};
+          const searchFilter = null;
+          const searchBadges = [];
+          const searchStages = [];
+          const selectedStages = [];
+          const selectedBadges = [];
+          const selectedUnacquiredBadges = [];
 
           //when
           const screen = await render(
-            hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onResetFilter={{this.resetFiltering}}
-  @searchFilter={{this.searchFilter}}
-  @searchBadges={{this.searchBadges}}
-  @searchStages={{this.searchStages}}
-  @selectedStages={{this.selectedStages}}
-  @selectedBadges={{this.selectedBadges}}
-  @isHiddenGroups={{true}}
-  @isHiddenDivisions={{true}}
-  @onFilter={{this.noop}}
-/>`,
+            <template>
+              <ParticipationFilters
+                @campaign={{campaign}}
+                @onResetFilter={{resetFiltering}}
+                @searchFilter={{searchFilter}}
+                @searchBadges={{searchBadges}}
+                @searchStages={{searchStages}}
+                @selectedStages={{selectedStages}}
+                @selectedUnacquiredBadges={{selectedUnacquiredBadges}}
+                @selectedBadges={{selectedBadges}}
+                @isHiddenGroups={{true}}
+                @isHiddenDivisions={{true}}
+                @onFilter={{noop}}
+              />
+            </template>,
           );
 
           //then
@@ -157,20 +159,21 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           const campaign = store.createRecord('campaign', {
             type: 'PROFILE_COLLECTION',
           });
-          this.set('campaign', campaign);
-          this.set('resetFiltering', () => {});
-          this.set('searchFilter', null);
-          this.set('certificabilityFilter', null);
+          const resetFiltering = () => {};
+          const searchFilter = null;
+          const certificabilityFilter = null;
 
           //when
           const screen = await render(
-            hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onResetFilter={{this.resetFiltering}}
-  @searchFilter={{this.searchFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @onFilter={{this.noop}}
-/>`,
+            <template>
+              <ParticipationFilters
+                @campaign={{campaign}}
+                @onResetFilter={{resetFiltering}}
+                @searchFilter={{searchFilter}}
+                @certificabilityFilter={{certificabilityFilter}}
+                @onFilter={{noop}}
+              />
+            </template>,
           );
 
           //then
@@ -190,18 +193,18 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           stages: [],
         });
 
-        this.set('campaign', campaign);
-
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.noop}}
-  @isHiddenStages={{false}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onFilter={{noop}}
+              @isHiddenStages={{false}}
+              @isHiddenBadges={{true}}
+              @isHiddenDivisions={{true}}
+              @isHiddenGroups={{true}}
+            />
+          </template>,
         );
 
         // then
@@ -219,18 +222,18 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           stages: [stage],
         });
 
-        this.set('campaign', campaign);
-
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.noop}}
-  @isHiddenStages={{false}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onFilter={{noop}}
+              @isHiddenStages={{false}}
+              @isHiddenBadges={{true}}
+              @isHiddenDivisions={{true}}
+              @isHiddenGroups={{true}}
+            />
+          </template>,
         );
 
         // then
@@ -248,20 +251,21 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           stages: [stage],
         });
 
-        this.set('campaign', campaign);
-        this.set('selectedStages', []);
+        const selectedStages = [];
 
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.noop}}
-  @isHiddenStages={{false}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-  @selectedStages={{this.selectedStages}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onFilter={{noop}}
+              @isHiddenStages={{false}}
+              @isHiddenBadges={{true}}
+              @isHiddenDivisions={{true}}
+              @isHiddenGroups={{true}}
+              @selectedStages={{selectedStages}}
+            />
+          </template>,
         );
 
         // then
@@ -277,18 +281,18 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           stages: [stage],
         });
 
-        this.set('campaign', campaign);
-
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.noop}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onFilter={{noop}}
+              @isHiddenStages={{true}}
+              @isHiddenBadges={{true}}
+              @isHiddenDivisions={{true}}
+              @isHiddenGroups={{true}}
+            />
+          </template>,
         );
 
         // then
@@ -306,21 +310,21 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         });
 
         const triggerFiltering = sinon.stub();
-        this.set('campaign', campaign);
-        this.set('triggerFiltering', triggerFiltering);
-        this.set('selectedStages', []);
+        const selectedStages = [];
 
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.triggerFiltering}}
-  @isHiddenStages={{false}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-  @selectedStages={{this.selectedStages}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onFilter={{triggerFiltering}}
+              @isHiddenStages={{false}}
+              @isHiddenBadges={{true}}
+              @isHiddenDivisions={{true}}
+              @isHiddenGroups={{true}}
+              @selectedStages={{selectedStages}}
+            />
+          </template>,
         );
 
         await click(screen.getByLabelText(t('pages.campaign-results.filters.type.stages')));
@@ -334,7 +338,7 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
 
   module('badges', function () {
     module('when campaign has badges and has type ASSESSMENT', function () {
-      test('it displays the badge filter', async function (assert) {
+      test('it displays the badge filters', async function (assert) {
         // given
         const badge = store.createRecord('badge', { title: 'Les bases' });
         const campaign = store.createRecord('campaign', {
@@ -343,25 +347,28 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           badges: [badge],
         });
 
-        this.set('campaign', campaign);
-        this.set('selectedBadges', []);
+        const selectedBadges = [];
+        const selectedUnacquiredBadges = [];
 
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.noop}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{false}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-  @selectedBadges={{this.selectedBadges}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onFilter={{noop}}
+              @isHiddenStages={{true}}
+              @isHiddenBadges={{false}}
+              @isHiddenDivisions={{true}}
+              @isHiddenGroups={{true}}
+              @selectedBadges={{selectedBadges}}
+              @selectedUnacquiredBadges={{selectedUnacquiredBadges}}
+            />
+          </template>,
         );
 
         // then
-        assert.ok(screen.getByRole('button', { name: 'Thématiques' }));
-        assert.ok(screen.getByLabelText('Les bases'));
+        assert.ok(screen.getByRole('button', { name: t('pages.campaign-results.filters.type.badges') }));
+        assert.ok(screen.getByRole('button', { name: t('pages.campaign-results.filters.type.unacquired-badges') }));
       });
 
       test('it should not displays the badge filter when it specified', async function (assert) {
@@ -372,20 +379,21 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           targetProfileThematicResultCount: 1,
           badges: [badge],
         });
-
-        this.set('campaign', campaign);
+        const selectedBadges = [];
 
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.noop}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-  @selectedBadges={{this.selectedBadges}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onFilter={{noop}}
+              @isHiddenStages={{true}}
+              @isHiddenBadges={{true}}
+              @isHiddenDivisions={{true}}
+              @isHiddenGroups={{true}}
+              @selectedBadges={{selectedBadges}}
+            />
+          </template>,
         );
 
         // then
@@ -393,7 +401,56 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         assert.notOk(screen.queryByLabelText('Les bases'));
       });
 
-      test('it triggers the filter when a badge is selected', async function (assert) {
+      test('it triggers the filter when an unacquired badge is selected', async function (assert) {
+        // given
+        const unacquiredBadge = store.createRecord('badge', { id: 'badge1', title: 'La base' });
+        const campaign = store.createRecord('campaign', {
+          type: 'ASSESSMENT',
+          targetProfileThematicResultCount: 1,
+          badges: [unacquiredBadge],
+        });
+
+        const triggerFiltering = sinon.stub();
+        const selectedUnacquiredBadges = [];
+        const selectedBadges = [];
+
+        const metrics = this.owner.lookup('service:metrics');
+        metrics.add = sinon.stub();
+
+        // when
+        const screen = await render(
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onFilter={{triggerFiltering}}
+              @isHiddenStages={{true}}
+              @isHiddenBadges={{false}}
+              @isHiddenDivisions={{true}}
+              @isHiddenGroups={{true}}
+              @selectedBadges={{selectedBadges}}
+              @selectedUnacquiredBadges={{selectedUnacquiredBadges}}
+            />
+          </template>,
+        );
+        const button = await screen.findByRole('button', {
+          name: t('pages.campaign-results.filters.type.unacquired-badges'),
+        });
+
+        await click(button);
+        await click(await screen.findByRole('checkbox', { name: 'La base' }));
+
+        // then
+        assert.ok(triggerFiltering.calledWith('unacquiredBadges', ['badge1']));
+
+        sinon.assert.calledWithExactly(metrics.add, {
+          event: 'custom-event',
+          'pix-event-category': 'Campagnes',
+          'pix-event-action': 'Filtrer les participations',
+          'pix-event-name': 'Utilisation du filtre "Thématiques non obtenues"',
+        });
+      });
+
+      test('it triggers the filter when an acquired badge is selected', async function (assert) {
         // given
         const badge = store.createRecord('badge', { id: 'badge1', title: 'Les bases' });
         const campaign = store.createRecord('campaign', {
@@ -403,24 +460,26 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         });
 
         const triggerFiltering = sinon.stub();
-        this.set('campaign', campaign);
-        this.set('triggerFiltering', triggerFiltering);
-        this.set('selectedBadges', []);
+        const selectedBadges = [];
+        const selectedUnacquiredBadges = [];
 
         const metrics = this.owner.lookup('service:metrics');
         metrics.add = sinon.stub();
 
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.triggerFiltering}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{false}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-  @selectedBadges={{this.selectedBadges}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onFilter={{triggerFiltering}}
+              @isHiddenStages={{true}}
+              @isHiddenBadges={{false}}
+              @isHiddenDivisions={{true}}
+              @isHiddenGroups={{true}}
+              @selectedBadges={{selectedBadges}}
+              @selectedUnacquiredBadges={{selectedUnacquiredBadges}}
+            />
+          </template>,
         );
 
         await click(screen.getByLabelText(t('pages.campaign-results.filters.type.badges')));
@@ -447,11 +506,9 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           badges: [],
         });
 
-        this.set('campaign', campaign);
-
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters @campaign={{this.campaign}} @onFilter={{this.noop}} />`,
+          <template><ParticipationFilters @campaign={{campaign}} @onFilter={{noop}} /></template>,
         );
 
         // then
@@ -469,11 +526,9 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           badges: [badge],
         });
 
-        this.set('campaign', campaign);
-
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters @campaign={{this.campaign}} @onFilter={{this.noop}} />`,
+          <template><ParticipationFilters @campaign={{campaign}} @onFilter={{noop}} /></template>,
         );
 
         // then
@@ -494,12 +549,10 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
       });
 
       const triggerFiltering = sinon.stub();
-      this.set('campaign', campaign);
-      this.set('triggerFiltering', triggerFiltering);
 
       // when
       const screen = await render(
-        hbs`<Campaign::Filter::ParticipationFilters @campaign={{this.campaign}} @onFilter={{this.triggerFiltering}} />`,
+        <template><ParticipationFilters @campaign={{campaign}} @onFilter={{triggerFiltering}} /></template>,
       );
       await click(screen.getByLabelText(t('pages.campaign-results.filters.type.status.title')));
       await click(
@@ -522,11 +575,11 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         stages: [],
       });
 
-      this.set('campaign', campaign);
-
       // when
       const screen = await render(
-        hbs`<Campaign::Filter::ParticipationFilters @campaign={{this.campaign}} @onFilter={{this.noop}} @selectedStatus='STARTED' />`,
+        <template>
+          <ParticipationFilters @campaign={{campaign}} @onFilter={{noop}} @selectedStatus="STARTED" />
+        </template>,
       );
       await click(screen.getByLabelText(t('pages.campaign-results.filters.type.status.title')));
 
@@ -551,11 +604,9 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         stages: [],
       });
 
-      this.set('campaign', campaign);
-
       // when
       const screen = await render(
-        hbs`<Campaign::Filter::ParticipationFilters @campaign={{this.campaign}} @onFilter={{this.noop}} />`,
+        <template><ParticipationFilters @campaign={{campaign}} @onFilter={{noop}} /></template>,
       );
 
       // then
@@ -582,11 +633,9 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         stages: [],
       });
 
-      this.set('campaign', campaign);
-
       // when
       const screen = await render(
-        hbs`<Campaign::Filter::ParticipationFilters @campaign={{this.campaign}} @onFilter={{this.noop}} />`,
+        <template><ParticipationFilters @campaign={{campaign}} @onFilter={{noop}} /></template>,
       );
 
       // then
@@ -609,20 +658,21 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         id: '1',
         name: 'campagne 1',
       });
-      this.set('campaign', campaign);
-      this.set('searchFilter', 'chichi');
+      const searchFilter = 'chichi';
 
       const screen = await render(
-        hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @searchFilter={{this.searchFilter}}
-  @isHiddenStatus={{true}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-  @onResetFilter={{this.noop}}
-  @onFilter={{this.noop}}
-/>`,
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @searchFilter={{searchFilter}}
+            @isHiddenStatus={{true}}
+            @isHiddenBadges={{true}}
+            @isHiddenDivisions={{true}}
+            @isHiddenGroups={{true}}
+            @onResetFilter={{noop}}
+            @onFilter={{noop}}
+          />
+        </template>,
       );
 
       // then
@@ -640,13 +690,9 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
       });
 
       const triggerFiltering = sinon.stub();
-      this.set('campaign', campaign);
-      this.set('triggerFiltering', triggerFiltering);
 
       // when
-      await render(
-        hbs`<Campaign::Filter::ParticipationFilters @campaign={{this.campaign}} @onFilter={{this.triggerFiltering}} />`,
-      );
+      await render(<template><ParticipationFilters @campaign={{campaign}} @onFilter={{triggerFiltering}} /></template>);
       await fillByLabel(t('common.filters.fullname.label'), 'Sal');
 
       // then
@@ -661,19 +707,20 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         type: 'PROFILE_COLLECTION',
         name: 'campagne 1',
       });
-      this.set('campaign', campaign);
 
       const screen = await render(
-        hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @isHiddenSearch={{true}}
-  @isHiddenStatus={{true}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-  @onResetFilter={{this.noop}}
-  @onFilter={{this.noop}}
-/>`,
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @isHiddenSearch={{true}}
+            @isHiddenStatus={{true}}
+            @isHiddenBadges={{true}}
+            @isHiddenDivisions={{true}}
+            @isHiddenGroups={{true}}
+            @onResetFilter={{noop}}
+            @onFilter={{noop}}
+          />
+        </template>,
       );
 
       // then
@@ -686,19 +733,20 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         type: 'ASSESSMENT',
         name: 'campagne 1',
       });
-      this.set('campaign', campaign);
 
       const screen = await render(
-        hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @isHiddenSearch={{true}}
-  @isHiddenStatus={{true}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{true}}
-  @isHiddenGroups={{true}}
-  @onResetFilter={{this.noop}}
-  @onFilter={{this.noop}}
-/>`,
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @isHiddenSearch={{true}}
+            @isHiddenStatus={{true}}
+            @isHiddenBadges={{true}}
+            @isHiddenDivisions={{true}}
+            @isHiddenGroups={{true}}
+            @onResetFilter={{noop}}
+            @onFilter={{noop}}
+          />
+        </template>,
       );
 
       // then
@@ -714,12 +762,10 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
       });
 
       const triggerFiltering = sinon.stub();
-      this.set('campaign', campaign);
-      this.set('triggerFiltering', triggerFiltering);
 
       // when
       const screen = await render(
-        hbs`<Campaign::Filter::ParticipationFilters @campaign={{this.campaign}} @onFilter={{this.triggerFiltering}} />`,
+        <template><ParticipationFilters @campaign={{campaign}} @onFilter={{triggerFiltering}} /></template>,
       );
       await click(
         screen.getByRole('button', {
@@ -744,26 +790,27 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
       isSCOManagingStudents = true;
     }
 
-    module('when there are some divisions', function (hooks) {
-      hooks.beforeEach(function () {
-        this.owner.register('service:current-user', CurrentUserStub);
-        const division = store.createRecord('division', { id: 'd1', name: 'd1' });
-        this.campaign = store.createRecord('campaign', { id: '1', divisions: [division] });
-        this.set('selectedDivisions', []);
-      });
-
+    module('when there are some divisions', function () {
       test('it displays the division filter', async function (assert) {
+        // given
+        const division = store.createRecord('division', { id: 'd1', name: 'd1' });
+        const campaign = store.createRecord('campaign', { id: '1', divisions: [division] });
+        this.owner.register('service:current-user', CurrentUserStub);
+        const selectedDivisions = [];
+
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.noop}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{false}}
-  @isHiddenGroups={{true}}
-  @selectedDivisions={{this.selectedDivisions}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onFilter={{noop}}
+              @isHiddenStages={{true}}
+              @isHiddenBadges={{true}}
+              @isHiddenDivisions={{false}}
+              @isHiddenGroups={{true}}
+              @selectedDivisions={{selectedDivisions}}
+            />
+          </template>,
         );
         // then
         assert.ok(screen.getByRole('textbox', { name: 'Rechercher par classes' }));
@@ -771,24 +818,29 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
       });
 
       test('it display disabled button', async function (assert) {
-        //given
-        this.set('resetFiltering', () => {});
-        this.set('selectedDivisions', []);
+        // given
+        const division = store.createRecord('division', { id: 'd1', name: 'd1' });
+        const campaign = store.createRecord('campaign', { id: '1', divisions: [division] });
+        this.owner.register('service:current-user', CurrentUserStub);
+        const resetFiltering = () => {};
+        const selectedDivisions = [];
 
         //when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onResetFilter={{this.resetFiltering}}
-  @selectedDivisions={{this.selectedDivisions}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{true}}
-  @isHiddenGroups={{true}}
-  @isHiddenCertificability={{true}}
-  @isHiddenSearch={{true}}
-  @isHiddenStatus={{true}}
-  @onFilter={{this.noop}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onResetFilter={{resetFiltering}}
+              @selectedDivisions={{selectedDivisions}}
+              @isHiddenStages={{true}}
+              @isHiddenBadges={{true}}
+              @isHiddenGroups={{true}}
+              @isHiddenCertificability={{true}}
+              @isHiddenSearch={{true}}
+              @isHiddenStatus={{true}}
+              @onFilter={{noop}}
+            />
+          </template>,
         );
 
         //then
@@ -796,19 +848,25 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
       });
 
       test('it triggers the filter when a division is selected', async function (assert) {
+        // given
+        const division = store.createRecord('division', { id: 'd1', name: 'd1' });
+        const campaign = store.createRecord('campaign', { id: '1', divisions: [division] });
+        this.owner.register('service:current-user', CurrentUserStub);
+        const selectedDivisions = [];
         const triggerFiltering = sinon.stub();
-        this.set('triggerFiltering', triggerFiltering);
 
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.triggerFiltering}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{false}}
-  @selectedDivisions={{this.selectedDivisions}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onFilter={{triggerFiltering}}
+              @isHiddenStages={{true}}
+              @isHiddenBadges={{true}}
+              @isHiddenDivisions={{false}}
+              @selectedDivisions={{selectedDivisions}}
+            />
+          </template>,
         );
         await click(screen.getByLabelText(t('common.filters.divisions.label')));
         await click(
@@ -823,17 +881,25 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
     });
 
     test('it should not display group filter', async function (assert) {
-      this.campaign = store.createRecord('campaign', { id: '1' });
-      this.set('selectedDivisions', []);
+      // given
+      const division = store.createRecord('division', { id: 'd1', name: 'd1' });
+      const campaign = store.createRecord('campaign', { id: '1', divisions: [division] });
+      this.owner.register('service:current-user', CurrentUserStub);
+      const selectedDivisions = [];
+
       // when
-      const screen = await render(hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.noop}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{false}}
-  @selectedDivisions={{this.selectedDivisions}}
-/>`);
+      const screen = await render(
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @onFilter={{noop}}
+            @isHiddenStages={{true}}
+            @isHiddenBadges={{true}}
+            @isHiddenDivisions={{false}}
+            @selectedDivisions={{selectedDivisions}}
+          />
+        </template>,
+      );
 
       // then
       assert.notOk(screen.queryByRole('button', { name: 'Groupes' }));
@@ -848,30 +914,31 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
     module('when there are some groups', function (hooks) {
       hooks.beforeEach(function () {
         this.owner.register('service:current-user', CurrentUserStub);
-        const group = store.createRecord('group', { id: 'd1', name: 'd1' });
-        this.campaign = store.createRecord('campaign', { id: '1', groups: [group] });
-        this.set('selectedGroups', []);
       });
 
       test('it display disabled button', async function (assert) {
         //given
-        this.set('resetFiltering', () => {});
-        this.set('selectedGroups', []);
+        const group = store.createRecord('group', { id: 'd1', name: 'd1' });
+        const campaign = store.createRecord('campaign', { id: '1', groups: [group] });
+        const resetFiltering = () => {};
+        const selectedGroups = [];
 
         //when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onResetFilter={{this.resetFiltering}}
-  @selectedGroups={{this.selectedGroups}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{true}}
-  @isHiddenDivisions={{true}}
-  @isHiddenCertificability={{true}}
-  @isHiddenSearch={{true}}
-  @isHiddenStatus={{true}}
-  @onFilter={{this.noop}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onResetFilter={{resetFiltering}}
+              @selectedGroups={{selectedGroups}}
+              @isHiddenStages={{true}}
+              @isHiddenBadges={{true}}
+              @isHiddenDivisions={{true}}
+              @isHiddenCertificability={{true}}
+              @isHiddenSearch={{true}}
+              @isHiddenStatus={{true}}
+              @onFilter={{noop}}
+            />
+          </template>,
         );
 
         //then
@@ -879,15 +946,22 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
       });
 
       test('it displays the group filter', async function (assert) {
+        // given
+        const group = store.createRecord('group', { id: 'd1', name: 'd1' });
+        const campaign = store.createRecord('campaign', { id: '1', groups: [group] });
+        const selectedGroups = [];
+
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.noop}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{true}}
-  @selectedGroups={{this.selectedGroups}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onFilter={{noop}}
+              @isHiddenStages={{true}}
+              @isHiddenBadges={{true}}
+              @selectedGroups={{selectedGroups}}
+            />
+          </template>,
         );
         // then
         assert.ok(screen.getByRole('textbox', { name: 'Groupes' }));
@@ -895,19 +969,23 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
       });
 
       test('it triggers the filter when a group is selected', async function (assert) {
+        // given
+        const group = store.createRecord('group', { id: 'd1', name: 'd1' });
+        const campaign = store.createRecord('campaign', { id: '1', groups: [group] });
+        const selectedGroups = [];
         const triggerFiltering = sinon.stub();
-
-        this.set('triggerFiltering', triggerFiltering);
 
         // when
         const screen = await render(
-          hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.triggerFiltering}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{true}}
-  @selectedGroups={{this.selectedGroups}}
-/>`,
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onFilter={{triggerFiltering}}
+              @isHiddenStages={{true}}
+              @isHiddenBadges={{true}}
+              @selectedGroups={{selectedGroups}}
+            />
+          </template>,
         );
 
         await click(screen.getByLabelText(t('pages.campaign-results.filters.type.groups.title')));
@@ -923,15 +1001,15 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
     });
 
     test('it does not display the division filter', async function (assert) {
+      // given
       this.owner.register('service:current-user', CurrentUserStub);
 
-      // given
       const division = store.createRecord('division', {
         id: 'd2',
         name: 'd2',
       });
-      this.set('selectedGroups', []);
-      this.campaign = store.createRecord('campaign', {
+      const selectedGroups = [];
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         divisions: [division],
@@ -939,13 +1017,15 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
 
       // when
       const screen = await render(
-        hbs`<Campaign::Filter::ParticipationFilters
-  @campaign={{this.campaign}}
-  @onFilter={{this.noop}}
-  @isHiddenStages={{true}}
-  @isHiddenBadges={{true}}
-  @selectedGroups={{this.selectedGroups}}
-/>`,
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @onFilter={{noop}}
+            @isHiddenStages={{true}}
+            @isHiddenBadges={{true}}
+            @selectedGroups={{selectedGroups}}
+          />
+        </template>,
       );
 
       // then

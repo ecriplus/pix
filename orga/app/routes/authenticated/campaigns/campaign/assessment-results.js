@@ -22,6 +22,9 @@ export default class AssessmentResultsRoute extends Route {
     badges: {
       refreshModel: true,
     },
+    unacquiredBadges: {
+      refreshModel: true,
+    },
     stages: {
       refreshModel: true,
     },
@@ -55,6 +58,7 @@ export default class AssessmentResultsRoute extends Route {
         divisions: params.divisions,
         groups: params.groups,
         badges: params.badges,
+        unacquiredBadges: params.unacquiredBadges,
         stages: params.stages,
         search: params.search,
       },
@@ -70,6 +74,7 @@ export default class AssessmentResultsRoute extends Route {
       controller.groups = [];
       controller.badges = [];
       controller.stages = [];
+      controller.unacquiredBadges = [];
       controller.search = null;
     }
   }

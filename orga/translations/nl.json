@@ -589,7 +589,7 @@
         "aria-label": "Filters op deelnames",
         "participations-count": "{count, plural, =0 {0 deelnemer} =1 {1 deelnemer} other {{count} deelnemers}}",
         "type": {
-          "badges": "Thema's",
+          "badges": "Verkregen onderwerpen",
           "groups": {
             "empty": "Geen groep",
             "title": "Groepen"
@@ -599,7 +599,8 @@
             "empty": "Alle statussen",
             "title": "Status"
           }
-        }
+        },
+        "unacquired-badges": "Niet verkregen onderwerpen"
       },
       "result": "Resultaat",
       "table": {

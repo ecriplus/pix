@@ -58,6 +58,7 @@ export default class ParticipationFilters extends Component {
       (!this.displayGroupsFilter || this.args.selectedGroups.length === 0) &&
       (!this.displayStagesFilter || this.args.selectedStages.length === 0) &&
       (!this.displayBadgesFilter || this.args.selectedBadges.length === 0) &&
+      (!this.displayBadgesFilter || this.args.selectedUnacquiredBadges.length === 0) &&
       (!this.displayCertificabilityFilter || !this.args.selectedCertificability)
     );
   }
@@ -160,6 +161,18 @@ export default class ParticipationFilters extends Component {
   }
 
   @action
+  onSelectUnacquiredBadge(unacquiredBadges) {
+    this.args.onFilter('unacquiredBadges', unacquiredBadges);
+
+    this.metrics.add({
+      event: 'custom-event',
+      'pix-event-category': 'Campagnes',
+      'pix-event-action': 'Filtrer les participations',
+      'pix-event-name': 'Utilisation du filtre "Thématiques non obtenues"',
+    });
+  }
+
+  @action
   onSelectDivision(divisions) {
     this.args.onFilter('divisions', divisions);
   }
@@ -241,6 +254,18 @@ export default class ParticipationFilters extends Component {
             @className="participant-filter-banner__badges"
           >
             <:label>{{t "pages.campaign-results.filters.type.badges"}}</:label>
+            <:default as |badge|>{{badge.label}}</:default>
+          </PixMultiSelect>
+
+          <PixMultiSelect
+            @placeholder={{t "pages.campaign-results.filters.type.unacquired-badges"}}
+            @screenReaderOnly={{true}}
+            @onChange={{this.onSelectUnacquiredBadge}}
+            @values={{@selectedUnacquiredBadges}}
+            @options={{this.badgeOptions}}
+            @className="participant-filter-banner__badges"
+          >
+            <:label>{{t "pages.campaign-results.filters.type.unacquired-badges"}}</:label>
             <:default as |badge|>{{badge.label}}</:default>
           </PixMultiSelect>
         {{/if}}

@@ -625,7 +625,7 @@
         "aria-label": "Filters on participations",
         "participations-count": "{count, plural, =0 {0 participants} =1 {1 participant} other {{count} participants}}",
         "type": {
-          "badges": "Thematic results",
+          "badges": "Acquired thematic results",
           "groups": {
             "empty": "No group",
             "title": "Groups"
@@ -634,7 +634,8 @@
           "status": {
             "empty": "All statuses",
             "title": "Status"
-          }
+          },
+          "unacquired-badges": "Unacquired thematic results"
         }
       },
       "result": "Result",
