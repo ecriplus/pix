@@ -1042,13 +1042,11 @@
         }
       },
       "table": {
+        "caption": "Tableau listant les invitations en attente pour rejoindre le centre de certification en tant que membre. Il comporte l'adresse mail de l'utilisateur invité, la date de dernier envoi de l'invitation et les actions pour renvoyer l'invitation ou la supprimer",
         "labels": {
           "actions": "Actions",
           "email-address": "Adresse email",
           "last-sending-date": "Date de dernier envoi"
-        },
-        "row": {
-          "aria-label": "Invitations en attente"
         }
       }
     },

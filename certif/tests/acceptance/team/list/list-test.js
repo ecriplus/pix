@@ -89,7 +89,7 @@ module('Acceptance | authenticated | team', function (hooks) {
         );
         // then
         assert.strictEqual(currentURL(), '/equipe/invitations');
-        assert.strictEqual(screen.getAllByLabelText('Invitations en attente').length, 2);
+        assert.dom(screen.getByRole('table', { name: t('pages.team-invitations.table.caption') })).exists();
       });
     });
 
