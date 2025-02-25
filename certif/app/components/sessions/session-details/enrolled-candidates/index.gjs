@@ -2,6 +2,8 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
@@ -40,6 +42,13 @@ export default class EnrolledCandidates extends Component {
       this.currentUser.currentAllowedCertificationCenterAccess.isV3Pilot &&
       this.featureToggles.featureToggles?.isNeedToAdjustCertificationAccessibilityEnabled
     );
+  }
+
+  get caption() {
+    if (this.args.shouldDisplayPrescriptionScoStudentRegistrationFeature) {
+      return this.intl.t('pages.sessions.detail.candidates.list.without-details-description');
+    }
+    return this.intl.t('pages.sessions.detail.candidates.list.with-details-description');
   }
 
   @action
@@ -319,204 +328,202 @@ export default class EnrolledCandidates extends Component {
     return subscriptionLabels.join(', ');
   };
   <template>
-    <div class='panel'>
-      <div class='panel-header'>
-        <h3 class='panel-header__title'>
-          {{t 'pages.sessions.detail.candidates.list.title'}}
-          ({{@certificationCandidates.length}})
-        </h3>
-        {{#if @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
-          <PixButtonLink
-            @route='authenticated.sessions.add-student'
-            @model={{@sessionId}}
-            class='enrolled-candidate__add-students'
-          >
-            {{t 'pages.sessions.detail.candidates.list.actions.inscription-multiple.label'}}
-          </PixButtonLink>
-        {{else}}
-          <PixButton id='add-candidate' @triggerAction={{this.openNewCandidateModal}} @size='small'>
-            {{t 'pages.sessions.detail.candidates.list.actions.inscription.label'}}
-          </PixButton>
-        {{/if}}
-      </div>
-      <div class='table content-text--small certification-candidates-table'>
-        {{#if @certificationCandidates}}
-          <table>
-            <caption class='screen-reader-only'>
-              {{#if @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
-                {{t 'pages.sessions.detail.candidates.list.without-details-description'}}
-              {{else}}
-                {{t 'pages.sessions.detail.candidates.list.with-details-description'}}
-              {{/if}}
-            </caption>
-            <thead>
-              <tr>
-                <th class='table__column--medium'>
-                  {{t 'common.labels.candidate.birth-name'}}
-                </th>
-                <th class='table__column--small'>
-                  {{t 'common.labels.candidate.firstname'}}
-                </th>
-                <th class='table__column--small'>
-                  {{t 'common.labels.candidate.birth-date'}}
-                </th>
-                {{#if @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
-                  <th>
-                    {{t 'common.labels.candidate.birth-city'}}
-                  </th>
-                  <th>
-                    {{t 'common.labels.candidate.birth-country'}}
-                  </th>
+    <header class='panel-header'>
+      <h3 class='panel-header__title'>
+        {{t 'pages.sessions.detail.candidates.list.title'}}
+        ({{@certificationCandidates.length}})
+      </h3>
+      {{#if @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
+        <PixButtonLink @route='authenticated.sessions.add-student' @model={{@sessionId}}>
+          {{t 'pages.sessions.detail.candidates.list.actions.inscription-multiple.label'}}
+        </PixButtonLink>
+      {{else}}
+        <PixButton id='add-candidate' @triggerAction={{this.openNewCandidateModal}} @size='small'>
+          {{t 'pages.sessions.detail.candidates.list.actions.inscription.label'}}
+        </PixButton>
+      {{/if}}
+    </header>
+    {{#if @certificationCandidates}}
+      <PixTable @data={{@certificationCandidates}} @variant='certif' @caption={{this.caption}}>
+        <:columns as |candidate context|>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t 'common.labels.candidate.birth-name'}}
+            </:header>
+            <:cell>
+              {{candidate.lastName}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t 'common.labels.candidate.firstname'}}
+            </:header>
+            <:cell>
+              {{candidate.firstName}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}} class='table__column--small'>
+            <:header>
+              {{t 'common.labels.candidate.birth-date'}}
+            </:header>
+            <:cell>
+              {{dayjsFormat candidate.birthdate 'DD/MM/YYYY'}}
+            </:cell>
+          </PixTableColumn>
+          {{#if @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t 'common.labels.candidate.birth-city'}}
+              </:header>
+              <:cell>
+                {{candidate.birthCity}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t 'common.labels.candidate.birth-country'}}
+              </:header>
+              <:cell>
+                {{candidate.birthCountry}}
+              </:cell>
+            </PixTableColumn>
+          {{/if}}
+          {{#unless @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
+            <PixTableColumn @context={{context}} class='table__column'>
+              <:header>
+                {{t 'common.forms.certification-labels.email-results'}}
+              </:header>
+              <:cell>
+                {{candidate.resultRecipientEmail}}
+              </:cell>
+            </PixTableColumn>
+          {{/unless}}
+          <PixTableColumn @context={{context}} class='table__column--small'>
+            <:header>
+              {{t 'common.forms.certification-labels.extratime'}}
+            </:header>
+            <:cell>
+              {{this.formattedCandidateExtratimePercentage candidate.extraTimePercentage}}
+            </:cell>
+          </PixTableColumn>
+          {{#if this.shouldDisplayAccessibilityAdjustmentNeededFeature}}
+            <PixTableColumn @context={{context}} class='table__column--small'>
+              <:header>
+                {{t 'common.forms.certification-labels.accessibility'}}
+              </:header>
+              <:cell>
+                {{candidate.accessibilityAdjustmentNeededLabel}}
+              </:cell>
+            </PixTableColumn>
+          {{/if}}
+          <PixTableColumn @context={{context}} class='table__column'>
+            <:header>
+              <span class='certification-candidates-table__selected-subscriptions'>
+                {{t 'common.forms.certification-labels.selected-subscriptions'}}
+                {{#if this.showCompatibilityTooltip}}
+                  <PixTooltip @id='tooltip-compatibility-subscription' @position='bottom' @isWide={{true}}>
+                    <:triggerElement>
+                      <PixIcon
+                        @plainIcon={{true}}
+                        @name='info'
+                        tabindex='0'
+                        aria-describedby='tooltip-compatibility-subscription'
+                      />
+                    </:triggerElement>
+                    <:tooltip>
+                      {{t 'pages.sessions.detail.candidates.list.compatibility-tooltip'}}
+                    </:tooltip>
+                  </PixTooltip>
                 {{/if}}
+              </span>
+            </:header>
+            <:cell>
+              {{this.computeSubscriptionsText candidate}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              Actions
+            </:header>
+            <:cell>
+              <div class='certification-candidates-actions'>
                 {{#unless @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
-                  <th>
-                    {{t 'common.forms.certification-labels.email-results'}}
-                  </th>
+                  <PixButton
+                    @variant='tertiary'
+                    @triggerAction={{fn this.openCertificationCandidateDetailsModal candidate}}
+                    aria-label='{{t
+                      "pages.sessions.detail.candidates.list.actions.details.extra-information"
+                    }} {{candidate.firstName}} {{candidate.lastName}}'
+                  >
+                    {{t 'pages.sessions.detail.candidates.list.actions.details.label'}}
+                  </PixButton>
                 {{/unless}}
-                <th class='table__column--small'>
-                  {{t 'common.forms.certification-labels.extratime'}}
-                </th>
                 {{#if this.shouldDisplayAccessibilityAdjustmentNeededFeature}}
-                  <th class='table__column--small'>
-                    {{t 'common.forms.certification-labels.accessibility'}}
-                  </th>
+                  {{#if candidate.isLinked}}
+                    <PixTooltip @position='left' @isInline={{true}} @id='tooltip-edit-student-button'>
+                      <:triggerElement>
+                        <PixIconButton
+                          @iconName='edit'
+                          @plainIcon={{true}}
+                          @ariaLabel='{{t
+                            "pages.sessions.detail.candidates.list.actions.edit.extra-information"
+                          }} {{candidate.firstName}} {{candidate.lastName}}'
+                          disabled
+                          aria-describedby='tooltip-edit-student-button'
+                          @withBackground={{true}}
+                        />
+                      </:triggerElement>
+                      <:tooltip>{{t 'pages.sessions.detail.candidates.list.actions.edit.tooltip'}}</:tooltip>
+                    </PixTooltip>
+                  {{else}}
+                    <PixIconButton
+                      @iconName='edit'
+                      @plainIcon={{true}}
+                      {{on 'click' (fn this.openEditCertificationCandidateDetailsModal candidate)}}
+                      @ariaLabel='{{t
+                        "pages.sessions.detail.candidates.list.actions.edit.extra-information"
+                      }} {{candidate.firstName}} {{candidate.lastName}}'
+                      @withBackground={{true}}
+                    />
+                  {{/if}}
                 {{/if}}
-                <th>
-                  <span class='certification-candidates-table__selected-subscriptions'>
-                    {{t 'common.forms.certification-labels.selected-subscriptions'}}
-                    {{#if this.showCompatibilityTooltip}}
-                      <PixTooltip @id='tooltip-compatibility-subscription' @position='bottom' @isWide={{true}}>
-                        <:triggerElement>
-                          <PixIcon
-                            @plainIcon={{true}}
-                            @name='info'
-                            tabindex='0'
-                            aria-describedby='tooltip-compatibility-subscription'
-                          />
-                        </:triggerElement>
-                        <:tooltip>
-                          {{t 'pages.sessions.detail.candidates.list.compatibility-tooltip'}}
-                        </:tooltip>
-                      </PixTooltip>
-                    {{/if}}
-                  </span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each @certificationCandidates as |candidate|}}
-                <tr>
-                  <td>{{candidate.lastName}}</td>
-                  <td>{{candidate.firstName}}</td>
-                  <td>{{dayjsFormat candidate.birthdate 'DD/MM/YYYY'}}</td>
-                  {{#if @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
-                    <td>{{candidate.birthCity}}</td>
-                    <td>{{candidate.birthCountry}}</td>
-                  {{/if}}
-                  {{#unless @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
-                    <td>{{candidate.resultRecipientEmail}}</td>
-                  {{/unless}}
-                  <td>{{this.formattedCandidateExtratimePercentage candidate.extraTimePercentage}}</td>
-                  {{#if this.shouldDisplayAccessibilityAdjustmentNeededFeature}}
-                    <td>{{candidate.accessibilityAdjustmentNeededLabel}}</td>
-                  {{/if}}
-
-                  <td>
-                    {{this.computeSubscriptionsText candidate}}
-                  </td>
-                  <td>
-                    <div class='certification-candidates-actions'>
-                      {{#unless @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
-                        <div class='certification-candidates-actions__display-details'>
-                          <button
-                            type='button'
-                            class='button--showed-as-link'
-                            {{on 'click' (fn this.openCertificationCandidateDetailsModal candidate)}}
-                            aria-label='{{t
-                              "pages.sessions.detail.candidates.list.actions.details.extra-information"
-                            }} {{candidate.firstName}} {{candidate.lastName}}'
-                          >
-                            {{t 'pages.sessions.detail.candidates.list.actions.details.label'}}
-                          </button>
-                        </div>
-                      {{/unless}}
-                      {{#if this.shouldDisplayAccessibilityAdjustmentNeededFeature}}
-                        <div class='certification-candidates-actions__edit'>
-                          {{#if candidate.isLinked}}
-                            <PixTooltip @position='left' @isInline={{true}} @id='tooltip-edit-student-button'>
-                              <:triggerElement>
-                                <PixIconButton
-                                  @iconName='edit'
-                                  @plainIcon={{true}}
-                                  class='certification-candidates-actions__edit'
-                                  @ariaLabel='{{t
-                                    "pages.sessions.detail.candidates.list.actions.edit.extra-information"
-                                  }} {{candidate.firstName}} {{candidate.lastName}}'
-                                  disabled
-                                  aria-describedby='tooltip-edit-student-button'
-                                  @withBackground={{true}}
-                                />
-                              </:triggerElement>
-                              <:tooltip>{{t 'pages.sessions.detail.candidates.list.actions.edit.tooltip'}}</:tooltip>
-                            </PixTooltip>
-                          {{else}}
-                            <PixIconButton
-                              @iconName='edit'
-                              @plainIcon={{true}}
-                              {{on 'click' (fn this.openEditCertificationCandidateDetailsModal candidate)}}
-                              @ariaLabel='{{t
-                                "pages.sessions.detail.candidates.list.actions.edit.extra-information"
-                              }} {{candidate.firstName}} {{candidate.lastName}}'
-                              class='certification-candidates-actions__edit-button'
-                              @withBackground={{true}}
-                            />
-                          {{/if}}
-                        </div>
-                      {{/if}}
-                      <div class='certification-candidates-actions__delete'>
-                        {{#if candidate.isLinked}}
-                          <PixTooltip @position='left' @isInline={{true}} @id='tooltip-delete-student-button'>
-                            <:triggerElement>
-                              <PixIconButton
-                                @iconName='delete'
-                                @plainIcon={{true}}
-                                class='certification-candidates-actions__delete'
-                                @ariaLabel='{{t
-                                  "pages.sessions.detail.candidates.list.actions.delete.extra-information"
-                                }} {{candidate.firstName}} {{candidate.lastName}}'
-                                disabled
-                                aria-describedby='tooltip-delete-student-button'
-                                @withBackground={{true}}
-                              />
-                            </:triggerElement>
-                            <:tooltip>{{t 'pages.sessions.detail.candidates.list.actions.delete.tooltip'}}</:tooltip>
-                          </PixTooltip>
-                        {{else}}
-                          <PixIconButton
-                            @iconName='delete'
-                            @plainIcon={{true}}
-                            {{on 'click' (fn this.deleteCertificationCandidate candidate)}}
-                            @ariaLabel='{{t
-                              "pages.sessions.detail.candidates.list.actions.delete.extra-information"
-                            }} {{candidate.firstName}} {{candidate.lastName}}'
-                            class='certification-candidates-actions__delete-button'
-                            @withBackground={{true}}
-                          />
-                        {{/if}}
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              {{/each}}
-            </tbody>
-          </table>
-        {{else}}
-          <div class='table__empty content-text'>
-            <p>{{t 'pages.sessions.detail.candidates.list.empty'}}</p>
-          </div>
-        {{/if}}
+                {{#if candidate.isLinked}}
+                  <PixTooltip @position='left' @isInline={{true}} @id='tooltip-delete-student-button'>
+                    <:triggerElement>
+                      <PixIconButton
+                        @iconName='delete'
+                        @plainIcon={{true}}
+                        @ariaLabel='{{t
+                          "pages.sessions.detail.candidates.list.actions.delete.extra-information"
+                        }} {{candidate.firstName}} {{candidate.lastName}}'
+                        disabled
+                        aria-describedby='tooltip-delete-student-button'
+                        @withBackground={{true}}
+                      />
+                    </:triggerElement>
+                    <:tooltip>{{t 'pages.sessions.detail.candidates.list.actions.delete.tooltip'}}</:tooltip>
+                  </PixTooltip>
+                {{else}}
+                  <PixIconButton
+                    @iconName='delete'
+                    @plainIcon={{true}}
+                    {{on 'click' (fn this.deleteCertificationCandidate candidate)}}
+                    @ariaLabel='{{t
+                      "pages.sessions.detail.candidates.list.actions.delete.extra-information"
+                    }} {{candidate.firstName}} {{candidate.lastName}}'
+                    @withBackground={{true}}
+                  />
+                {{/if}}
+              </div>
+            </:cell>
+          </PixTableColumn>
+        </:columns>
+      </PixTable>
+    {{else}}
+      <div class='table__empty content-text'>
+        <p>{{t 'pages.sessions.detail.candidates.list.empty'}}</p>
       </div>
-    </div>
+    {{/if}}
 
     {{#if this.shouldDisplayCertificationCandidateModal}}
       <CandidateDetailsModal
