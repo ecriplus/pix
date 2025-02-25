@@ -1,5 +1,3 @@
-import perf_hooks from 'node:perf_hooks';
-
 import Knex from 'knex';
 import QueryBuilder from 'knex/lib/query/querybuilder.js';
 import _ from 'lodash';
@@ -15,8 +13,6 @@ import knexConfigs from './knexfile.js';
 const types = pg.types;
 
 const { get } = _;
-
-const { performance } = perf_hooks;
 
 /*
 By default, node-postgres casts a DATE value (PostgreSQL type) as a Date Object (JS type).
@@ -37,7 +33,7 @@ Links :
  */
 types.setTypeParser(types.builtins.INT8, (value) => parseInt(value));
 
-const { logging, environment } = config;
+const { environment } = config;
 const liveDatabaseConnection = new DatabaseConnection(knexConfigs[environment]);
 const configuredKnex = liveDatabaseConnection.knex;
 
@@ -65,56 +61,13 @@ QueryBuilder.prototype.toSQL = function () {
   return ret;
 };
 
-configuredKnex.on('query', function (data) {
-  if (logging.enableKnexPerformanceMonitoring) {
-    const queryId = data.__knexQueryUid;
-    monitoringTools.setInContext(`knexQueryStartTimes.${queryId}`, performance.now());
-  }
-});
-
-configuredKnex.on('query-response', function (response, data) {
-  monitoringTools.incrementInContext('metrics.knexQueryCount');
-  if (logging.enableKnexPerformanceMonitoring) {
-    const queryStartedTime = monitoringTools.getInContext(`knexQueryStartTimes.${data.__knexQueryUid}`);
-    if (queryStartedTime) {
-      const duration = performance.now() - queryStartedTime;
-      monitoringTools.incrementInContext('metrics.knexTotalTimeSpent', duration);
-    }
-  }
-});
-
 async function disconnect() {
   await configuredDatamartKnex?.destroy();
   return configuredKnex.destroy();
 }
 
-const _databaseName = configuredKnex.client.database();
-
-async function listAllTableNames() {
-  const bindings = [_databaseName];
-
-  const resultSet = await configuredKnex.raw(
-    'SELECT table_name FROM information_schema.tables WHERE table_schema = current_schema() AND table_catalog = ?',
-    bindings,
-  );
-
-  const rows = resultSet.rows;
-  return _.map(rows, 'table_name');
-}
-
 async function emptyAllTables() {
-  const tableNames = await listAllTableNames();
-  const tablesToDelete = _.without(
-    tableNames,
-    'knex_migrations',
-    'knex_migrations_lock',
-    'view-active-organization-learners',
-  );
-
-  const tables = _.map(tablesToDelete, (tableToDelete) => `"${tableToDelete}"`).join();
-
-  // eslint-disable-next-line knex/avoid-injections
-  return configuredKnex.raw(`TRUNCATE ${tables}`);
+  return liveDatabaseConnection.emptyAllTables();
 }
 
 export {
