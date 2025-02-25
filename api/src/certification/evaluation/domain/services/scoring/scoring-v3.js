@@ -7,7 +7,6 @@
  * @typedef {import('../index.js').CertificationChallengeRepository} CertificationChallengeRepository
  * @typedef {import('../index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
  * @typedef {import('../index.js').FlashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
- * @typedef {import('../index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {import('../index.js').AnswerRepository} AnswerRepository
  * @typedef {import('../index.js').FlashAlgorithmService} FlashAlgorithmService
  * @typedef {import('../index.js').ChallengeRepository} ChallengeRepository
@@ -32,7 +31,6 @@ const debugScoringForV3Certification = Debug('pix:certif:v3:scoring');
  * @param {CompetenceMarkRepository} params.competenceMarkRepository
  * @param {CertificationAssessmentHistoryRepository} params.certificationAssessmentHistoryRepository
  * @param {CertificationChallengeRepository} params.certificationChallengeRepository
- * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
  * @param {FlashAlgorithmConfigurationRepository} params.flashAlgorithmConfigurationRepository
  * @param {AnswerRepository} params.answerRepository
@@ -54,7 +52,6 @@ export const handleV3CertificationScoring = async ({
   flashAlgorithmService,
   scoringDegradationService,
   scoringConfigurationRepository,
-  certificationChallengeLiveAlertRepository,
   dependencies,
 }) => {
   const { certificationCourseId, id: assessmentId } = certificationAssessment;
@@ -64,9 +61,11 @@ export const handleV3CertificationScoring = async ({
 
   const toBeCancelled = event instanceof CertificationCancelled;
 
-  const { allChallenges, askedChallenges, challengeCalibrations } = await dependencies.findByCertificationCourseId({
-    certificationCourseId,
-  });
+  const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
+    await dependencies.findByCertificationCourseIdAndAssessmentId({
+      certificationCourseId,
+      assessmentId,
+    });
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
 
   const abortReason = certificationCourse.getAbortReason();
@@ -85,14 +84,6 @@ export const handleV3CertificationScoring = async ({
     date: certificationCourse.getStartDate(),
   });
 
-  const { challengeCalibrationsWithoutLiveAlerts, challengesWithoutLiveAlerts } =
-    await _removeValidatedLiveAlertsFromScoring(
-      challengeCalibrations,
-      assessmentId,
-      askedChallenges,
-      certificationChallengeLiveAlertRepository,
-    );
-
   const certificationAssessmentScore = CertificationAssessmentScoreV3.fromChallengesAndAnswers({
     abortReason,
     algorithm,
@@ -100,7 +91,7 @@ export const handleV3CertificationScoring = async ({
     // so that in can be used during the assessment result creation
     allAnswers: [...candidateAnswers],
     allChallenges,
-    challenges: challengesWithoutLiveAlerts,
+    challenges: askedChallengesWithoutLiveAlerts,
     maxReachableLevelOnCertificationDate: certificationCourse.getMaxReachableLevelOnCertificationDate(),
     v3CertificationScoring,
     scoringDegradationService,
@@ -139,26 +130,6 @@ export const handleV3CertificationScoring = async ({
 
   return certificationCourse;
 };
-
-async function _removeValidatedLiveAlertsFromScoring(
-  challengeCalibrations,
-  assessmentId,
-  askedChallenges,
-  certificationChallengeLiveAlertRepository,
-) {
-  let challengeCalibrationsWithoutLiveAlerts = challengeCalibrations;
-  const validatedLiveAlertChallengeIds =
-    await certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId({
-      assessmentId,
-    });
-  challengeCalibrationsWithoutLiveAlerts = challengeCalibrations.filter(
-    (challengeCalibration) => !validatedLiveAlertChallengeIds.includes(challengeCalibration.id),
-  );
-  const challengesWithoutLiveAlerts = askedChallenges.filter(
-    (askedChallenge) => !validatedLiveAlertChallengeIds.includes(askedChallenge.id),
-  );
-  return { challengeCalibrationsWithoutLiveAlerts, challengesWithoutLiveAlerts };
-}
 
 function _createV3AssessmentResult({
   toBeCancelled,
