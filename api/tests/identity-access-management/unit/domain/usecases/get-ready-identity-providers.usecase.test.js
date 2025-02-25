@@ -1,5 +1,5 @@
-import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { getReadyIdentityProviders } from '../../../../../src/identity-access-management/domain/usecases/get-ready-identity-providers.usecase.js';
+import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCases | get-ready-identity-providers', function () {
@@ -19,13 +19,16 @@ describe('Unit | Identity Access Management | Domain | UseCases | get-ready-iden
     };
   });
 
-  describe('when a target is provided', function () {
-    describe('when the provided target is equal to "admin"', function () {
+  describe('when requestedApplication is provided', function () {
+    describe('when the provided requestedApplication is Pix Admin', function () {
       it('returns oidc providers from getReadyOidcProviderServicesForPixAdmin', async function () {
+        // given
+        const requestedApplication = new RequestedApplication('admin');
+
         // when
         const identityProviders = await getReadyIdentityProviders({
-          target: PIX_ADMIN.TARGET,
           oidcAuthenticationServiceRegistry: oidcAuthenticationServiceRegistryStub,
+          requestedApplication,
         });
 
         // then
@@ -39,7 +42,6 @@ describe('Unit | Identity Access Management | Domain | UseCases | get-ready-iden
   it('returns oidc providers from getReadyOidcProviderServices', async function () {
     // when
     const identityProviders = await getReadyIdentityProviders({
-      target: null,
       oidcAuthenticationServiceRegistry: oidcAuthenticationServiceRegistryStub,
     });
 

@@ -30,6 +30,10 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       const options = {
         method: 'GET',
         url: '/api/oidc/identity-providers',
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
       };
 
       // when
@@ -79,13 +83,16 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       // given
       const query = querystring.stringify({
         identity_provider: 'OIDC_EXAMPLE_NET',
-        target: 'app',
       });
 
       // when
       const response = await server.inject({
         method: 'GET',
         url: `/api/oidc/authorization-url?${query}`,
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
       });
 
       // then
@@ -119,6 +126,10 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       const authUrlResponse = await server.inject({
         method: 'GET',
         url: `/api/oidc/authorization-url?${query}`,
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
       });
       cookies = authUrlResponse.headers['set-cookie'];
 
@@ -192,7 +203,11 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
         const response = await server.inject({
           method: 'POST',
           url: '/api/oidc/token',
-          headers,
+          headers: {
+            cookie: cookies[0],
+            'x-forwarded-proto': 'https',
+            'x-forwarded-host': 'app.pix.fr',
+          },
           payload,
         });
 
@@ -285,15 +300,13 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       });
     });
 
-    context('when target is admin', function () {
+    context('when the requestedApplication is admin', function () {
       context('when user does not have an admin role', function () {
         it('returns 403', async function () {
           // given
           const firstName = 'John';
           const lastName = 'Doe';
           const externalIdentifier = 'sub';
-
-          payload.data.attributes.target = 'admin';
 
           const userId = databaseBuilder.factory.buildUser({
             firstName,
@@ -340,7 +353,11 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           const response = await server.inject({
             method: 'POST',
             url: '/api/oidc/token',
-            headers,
+            headers: {
+              cookie: cookies[0],
+              'x-forwarded-proto': 'https',
+              'x-forwarded-host': 'admin.pix.fr',
+            },
             payload,
           });
 
@@ -363,8 +380,6 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           const firstName = 'John';
           const lastName = 'Doe';
           const externalIdentifier = 'sub';
-
-          payload.data.attributes.target = 'admin';
 
           const userId = databaseBuilder.factory.buildUser.withRole({
             firstName,

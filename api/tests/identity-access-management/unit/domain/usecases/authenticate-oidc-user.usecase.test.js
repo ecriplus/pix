@@ -1,4 +1,3 @@
-import * as appMessages from '../../../../../src/authorization/domain/constants.js';
 import { POLE_EMPLOI } from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { authenticateOidcUser } from '../../../../../src/identity-access-management/domain/usecases/authenticate-oidc-user.usecase.js';
@@ -19,8 +18,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
     let lastUserApplicationConnectionsRepository;
     let oidcAuthenticationServiceRegistry;
     const externalIdentityId = '094b83ac-2e20-4aa8-b438-0bc91748e4a6';
-    const audience = 'https://app.pix.fr';
-    const requestedApplication = new RequestedApplication('app');
 
     beforeEach(function () {
       oidcAuthenticationService = {
@@ -55,19 +52,20 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
       };
     });
 
-    context('check access by target', function () {
-      context('when target is pix-admin', function () {
+    context('check access by requestedApplication', function () {
+      context('when requestedApplication is Pix Admin', function () {
+        const requestedApplication = new RequestedApplication('admin');
+
         context('when user has no role and is therefore not an admin member', function () {
           it('throws an error', async function () {
             // given
-            const target = appMessages.PIX_ADMIN.TARGET;
             _fakeOidcAPI({ oidcAuthenticationService, externalIdentityId });
             userRepository.findByExternalIdentifier.resolves({ id: 10 });
             adminMemberRepository.get.resolves(null);
 
             // when
             const error = await catchErr(authenticateOidcUser)({
-              target,
+              requestedApplication,
               oidcAuthenticationServiceRegistry,
               userRepository,
               adminMemberRepository,
@@ -83,7 +81,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
         context('when user has a role but admin membership is disabled', function () {
           it('throws an error', async function () {
             // given
-            const target = appMessages.PIX_ADMIN.TARGET;
             const adminMember = new AdminMember({
               id: 567,
               role: 'CERTIF',
@@ -95,7 +92,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
 
             // when
             const error = await catchErr(authenticateOidcUser)({
-              target,
+              requestedApplication,
               oidcAuthenticationServiceRegistry,
               userRepository,
               adminMemberRepository,
@@ -190,6 +187,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
     });
 
     context('when user does not have an account', function () {
+      const audience = 'https://app.pix.fr';
+
       it('saves the authentication session and returns the authentication key', async function () {
         // given
         const sessionContent = new AuthenticationSessionContent({
@@ -216,6 +215,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
 
         // when
         const result = await authenticateOidcUser({
+          audience,
           stateReceived: 'state',
           stateSent: 'state',
           identityProviderCode: 'OIDC_EXAMPLE_NET',
@@ -224,7 +224,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
-          audience,
         });
 
         // then
@@ -245,6 +244,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
 
         // when
         await authenticateOidcUser({
+          audience,
           stateReceived: 'state',
           stateSent: 'state',
           identityProviderCode: 'OIDC_EXAMPLE_NET',
@@ -253,7 +253,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
-          audience,
         });
 
         // then
@@ -273,7 +272,9 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           oidcAuthenticationService.createAuthenticationComplement.returns(authenticationComplement);
 
           // when
+          const requestedApplication = new RequestedApplication('app');
           await authenticateOidcUser({
+            requestedApplication,
             stateReceived: 'state',
             stateSent: 'state',
             identityProviderCode: 'OIDC_EXAMPLE_NET',
@@ -283,7 +284,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
             userRepository,
             userLoginRepository,
             lastUserApplicationConnectionsRepository,
-            requestedApplication,
           });
 
           // then
@@ -300,6 +300,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
       context('when the provider has an authentication complement', function () {
         it('updates the authentication method', async function () {
           // given
+          const requestedApplication = new RequestedApplication('app');
           _fakeOidcAPI({ oidcAuthenticationService, externalIdentityId });
           userRepository.findByExternalIdentifier.resolves({ id: 10 });
           const authenticationComplement = new AuthenticationMethod.OidcAuthenticationComplement({
@@ -310,6 +311,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
 
           // when
           await authenticateOidcUser({
+            requestedApplication,
             stateReceived: 'state',
             stateSent: 'state',
             identityProviderCode: 'OIDC_EXAMPLE_NET',
@@ -318,7 +320,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
             authenticationMethodRepository,
             userRepository,
             userLoginRepository,
-            requestedApplication,
             lastUserApplicationConnectionsRepository,
           });
 
@@ -382,6 +383,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
     context('when user has an account', function () {
       it('updates the authentication method', async function () {
         // given
+        const requestedApplication = new RequestedApplication('app');
         const { sessionContent } = _fakeOidcAPI({ oidcAuthenticationService, externalIdentityId });
         userRepository.findByExternalIdentifier.resolves({ id: 1 });
         const authenticationComplement = new AuthenticationMethod.PoleEmploiOidcAuthenticationComplement({
@@ -393,6 +395,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
 
         // when
         await authenticateOidcUser({
+          requestedApplication,
           stateReceived: 'state',
           stateSent: 'state',
           identityProviderCode: POLE_EMPLOI.code,
@@ -402,7 +405,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           userRepository,
           userLoginRepository,
           audience,
-          requestedApplication,
           lastUserApplicationConnectionsRepository,
         });
 
@@ -432,6 +434,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
 
         // when
         const accessToken = await authenticateOidcUser({
+          requestedApplication,
           stateReceived: 'state',
           stateSent: 'state',
           identityProviderCode: POLE_EMPLOI.code,
@@ -441,7 +444,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           userRepository,
           userLoginRepository,
           audience,
-          requestedApplication,
           lastUserApplicationConnectionsRepository,
         });
 
@@ -459,6 +461,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
     context('when user is logged with their pix account but also has a separate oidc account', function () {
       it('updates the oidc authentication method', async function () {
         // given
+        const requestedApplication = new RequestedApplication('app');
         const { sessionContent } = _fakeOidcAPI({ oidcAuthenticationService, externalIdentityId });
         userRepository.findByExternalIdentifier
           .withArgs({ externalIdentityId, identityProvider: oidcAuthenticationService.identityProvider })
@@ -472,6 +475,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
 
         // when
         await authenticateOidcUser({
+          audience,
+          requestedApplication,
           stateReceived: 'state',
           stateSent: 'state',
           identityProviderCode: POLE_EMPLOI.code,
@@ -480,8 +485,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
-          audience,
-          requestedApplication,
           lastUserApplicationConnectionsRepository,
         });
 

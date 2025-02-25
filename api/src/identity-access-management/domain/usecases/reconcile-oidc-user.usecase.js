@@ -7,6 +7,7 @@ import { AuthenticationMethod } from '../models/AuthenticationMethod.js';
  * @param {string} params.authenticationKey
  * @param {string} params.identityProvider
  * @param {string} params.audience
+ * @param {RequestedApplication} params.requestedApplication
  * @param {AuthenticationSessionService} params.authenticationSessionService
  * @param {AuthenticationMethodRepository} params.authenticationMethodRepository
  * @param {OidcAuthenticationServiceRegistry} params.oidcAuthenticationServiceRegistry
@@ -31,6 +32,7 @@ export const reconcileOidcUser = async function ({
 
   const oidcAuthenticationService = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
     identityProviderCode: identityProvider,
+    requestedApplication,
   });
 
   const sessionContentAndUserInfo = await authenticationSessionService.getByKey(authenticationKey);

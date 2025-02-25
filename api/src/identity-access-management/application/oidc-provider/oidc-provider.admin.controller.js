@@ -1,5 +1,4 @@
 import { oidcAuthenticationServiceRegistry } from '../../../../lib/domain/usecases/index.js';
-import { PIX_ADMIN } from '../../../authorization/domain/constants.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as oidcProviderSerializer from '../../infrastructure/serializers/jsonapi/oidc-identity-providers.serializer.js';
@@ -52,7 +51,7 @@ async function reconcileUserForAdmin(
 
   const oidcAuthenticationService = dependencies.oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
     identityProviderCode: identityProvider,
-    target: PIX_ADMIN.TARGET,
+    requestedApplication,
   });
 
   const accessToken = await usecases.reconcileOidcUserForAdmin({

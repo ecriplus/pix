@@ -1,4 +1,3 @@
-import { PIX_ADMIN } from '../../../authorization/domain/constants.js';
 import { ForbiddenAccess } from '../../../shared/domain/errors.js';
 
 /**
@@ -11,6 +10,7 @@ import { ForbiddenAccess } from '../../../shared/domain/errors.js';
  * @param {string} params.sessionState
  * @param {string} params.state
  * @param {string} params.audience
+ * @param {RequestedApplication} params.requestedApplication
  * @param {AuthenticationSessionService} params.authenticationSessionService
  * @param {OidcAuthenticationServiceRegistry} params.oidcAuthenticationServiceRegistry
  * @param {AdminMemberRepository} params.adminMemberRepository
@@ -18,11 +18,9 @@ import { ForbiddenAccess } from '../../../shared/domain/errors.js';
  * @param {UserLoginRepository} params.userLoginRepository
  * @param {UserRepository} params.userRepository
  * @param {LastUserApplicationConnectionsRepository} params.LastUserApplicationConnectionsRepository,
- * @param {RequestedApplication} params.RequestedApplication,
  * @return {Promise<{isAuthenticationComplete: boolean, givenName: string, familyName: string, authenticationKey: string, email: string}|{isAuthenticationComplete: boolean, pixAccessToken: string, logoutUrlUUID: string}>}
  */
 async function authenticateOidcUser({
-  target,
   code,
   state,
   iss,
@@ -30,6 +28,7 @@ async function authenticateOidcUser({
   nonce,
   sessionState,
   audience,
+  requestedApplication,
   authenticationSessionService,
   oidcAuthenticationServiceRegistry,
   adminMemberRepository,
@@ -37,14 +36,13 @@ async function authenticateOidcUser({
   userLoginRepository,
   userRepository,
   lastUserApplicationConnectionsRepository,
-  requestedApplication,
 }) {
   await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
   await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProviderCode);
 
   const oidcAuthenticationService = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
     identityProviderCode,
-    target,
+    requestedApplication,
   });
 
   const sessionContent = await oidcAuthenticationService.exchangeCodeForTokens({
@@ -69,7 +67,7 @@ async function authenticateOidcUser({
     return { authenticationKey, givenName, familyName, email, isAuthenticationComplete: false };
   }
 
-  await _assertUserHasAccessToApplication({ target, user, adminMemberRepository });
+  await _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository });
 
   await _updateAuthenticationMethodWithComplement({
     userInfo,
@@ -120,8 +118,8 @@ async function _updateAuthenticationMethodWithComplement({
   });
 }
 
-async function _assertUserHasAccessToApplication({ target, user, adminMemberRepository }) {
-  if (target === PIX_ADMIN.TARGET) {
+async function _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository }) {
+  if (requestedApplication.isPixAdmin) {
     const adminMember = await adminMemberRepository.get({ userId: user.id });
     if (!adminMember?.hasAccessToAdminScope) {
       throw new ForbiddenAccess(

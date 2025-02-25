@@ -53,7 +53,6 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
 
       // then
       expect(usecases.authenticateOidcUser).to.have.been.calledWithExactly({
-        target: undefined,
         code,
         identityProviderCode: identityProvider,
         nonce: 'nonce',
@@ -193,6 +192,10 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
     it('returns the generated authorization url', async function () {
       // given
       const request = {
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
         query: { identity_provider: 'OIDC' },
         yar: { set: sinon.stub(), commit: sinon.stub() },
       };
@@ -207,8 +210,8 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
 
       //then
       expect(usecases.getAuthorizationUrl).to.have.been.calledWithExactly({
-        target: undefined,
         identityProvider: 'OIDC',
+        requestedApplication: new RequestedApplication('app'),
       });
       expect(request.yar.set).to.have.been.calledTwice;
       expect(request.yar.set.getCall(0)).to.have.been.calledWithExactly(

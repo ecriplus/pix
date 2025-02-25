@@ -12,7 +12,7 @@ import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/u
  * @return {Promise<*>}
  */
 async function authenticateOidcUser(request, h) {
-  const { code, state, iss, identityProvider: identityProviderCode, target } = request.deserializedPayload;
+  const { code, state, iss, identityProvider: identityProviderCode } = request.deserializedPayload;
   const origin = getForwardedOrigin(request.headers);
   const requestedApplication = RequestedApplication.fromOrigin(origin);
 
@@ -25,7 +25,6 @@ async function authenticateOidcUser(request, h) {
   }
 
   const result = await usecases.authenticateOidcUser({
-    target,
     code,
     state,
     iss,
@@ -104,9 +103,11 @@ async function findUserForReconciliation(request, h, dependencies = { oidcSerial
  * @return {Promise<Object>}
  */
 async function getAuthorizationUrl(request, h) {
-  const { identity_provider: identityProvider, target } = request.query;
+  const { identity_provider: identityProvider } = request.query;
+  const origin = getForwardedOrigin(request.headers);
+  const requestedApplication = RequestedApplication.fromOrigin(origin);
 
-  const { nonce, state, ...payload } = await usecases.getAuthorizationUrl({ target, identityProvider });
+  const { nonce, state, ...payload } = await usecases.getAuthorizationUrl({ identityProvider, requestedApplication });
 
   request.yar.set('state', state);
   request.yar.set('nonce', nonce);
@@ -122,8 +123,11 @@ async function getAuthorizationUrl(request, h) {
  * @return {Promise<*>}
  */
 async function getIdentityProviders(request, h) {
-  const target = request.query.target;
-  const identityProviders = await usecases.getReadyIdentityProviders({ target });
+  const origin = getForwardedOrigin(request.headers);
+  const requestedApplication = RequestedApplication.fromOrigin(origin);
+
+  const identityProviders = await usecases.getReadyIdentityProviders({ requestedApplication });
+
   return h.response(oidcProviderSerializer.serialize(identityProviders)).code(200);
 }
 

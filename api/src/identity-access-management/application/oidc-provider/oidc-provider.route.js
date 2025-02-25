@@ -10,7 +10,7 @@ export const oidcProviderRoutes = [
     options: {
       validate: {
         query: Joi.object({
-          target: Joi.string().optional().default('app'),
+          target: Joi.string().optional().default('app'), // Now useless, will soon be removed
         }),
       },
       auth: false,
@@ -49,7 +49,7 @@ export const oidcProviderRoutes = [
       validate: {
         query: Joi.object({
           identity_provider: Joi.string().required(),
-          target: Joi.string().valid('app', 'admin').optional(),
+          target: Joi.string().valid('app', 'admin').optional(), // Now useless, will soon be removed
         }),
       },
       handler: (request, h) => oidcProviderController.getAuthorizationUrl(request, h),
@@ -73,7 +73,7 @@ export const oidcProviderRoutes = [
               code: Joi.string().required(),
               state: Joi.string().required(),
               iss: Joi.string().optional(),
-              target: Joi.string().valid('app', 'admin').optional(),
+              target: Joi.string().valid('app', 'admin').optional(), // Now useless, will soon be removed
             },
           },
         }),
