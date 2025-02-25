@@ -134,6 +134,7 @@ const schema = Joi.object({
   FT_ENABLE_NEED_TO_ADJUST_CERTIFICATION_ACCESSIBILITY: Joi.string().optional().valid('true', 'false'),
   FT_ENABLE_TEXT_TO_SPEECH_BUTTON: Joi.string().optional().valid('true', 'false'),
   FT_PIX_COMPANION_ENABLED: Joi.string().optional().valid('true', 'false'),
+  FT_V3_CERTIFICATION_ATTESTATION_ENABLED: Joi.string().optional().valid('true', 'false'),
   KNEX_ASYNC_STACKTRACE_ENABLED: Joi.string().optional().valid('true', 'false'),
   LCMS_API_KEY: Joi.string().requiredForApi(),
   LCMS_API_URL: Joi.string().uri().requiredForApi(),
@@ -310,6 +311,7 @@ const configuration = (function () {
       showExperimentalMissions: toBoolean(process.env.FT_SHOW_EXPERIMENTAL_MISSIONS),
       showNewCampaignPresentationPage: toBoolean(process.env.FT_SHOW_NEW_CAMPAIGN_PRESENTATION_PAGE),
       showNewResultPage: toBoolean(process.env.FT_SHOW_NEW_RESULT_PAGE),
+      isV3CertificationAttestationEnabled: toBoolean(process.env.FT_V3_CERTIFICATION_ATTESTATION_ENABLED),
     },
     hapi: {
       options: {},
