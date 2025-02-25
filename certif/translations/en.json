@@ -914,9 +914,9 @@
             "enrolled-candidates": "Signed up candidates"
           },
           "row": {
-            "label": "Certification session",
             "session-and-id": "Session {sessionId}"
-          }
+          },
+          "session-caption": "Tableau listant les sessions du centre de certification. Il comporte le nom et la salle du site où va se passer la certification, l'identifiant unique, le statut, la date et l'heure de la session, le nom du surveillant, le nombre de candidats inscrits à cette session, les certifications passées et l'action de pouvoir supprimer cette session."
         }
       },
       "new": {

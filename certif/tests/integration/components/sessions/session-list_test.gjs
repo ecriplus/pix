@@ -1,8 +1,8 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import SessionList from 'pix-certif/components/sessions/session-list';
 import { module, test } from 'qunit';
-import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 import { waitForDialogClose } from '../../../helpers/wait-for';
@@ -10,45 +10,14 @@ import { waitForDialogClose } from '../../../helpers/wait-for';
 module('Integration | Component | Sessions | SessionList', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('it should display an header', async function (assert) {
-    // given
-    const goToSessionDetailsSpy = () => {};
-    const sessionSummaries = [];
-    sessionSummaries.meta = { rowCount: 0 };
-
-    // when
-    const screen = await render(
-      <template>
-        <SessionList @sessionSummaries={{sessionSummaries}} @goToSessionDetails={{goToSessionDetailsSpy}} />
-      </template>,
-    );
-
-    // then
-    assert.dom(screen.getByRole('columnheader', { name: 'N° de session' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'Nom du site' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'Salle' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'Date' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'Heure' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'Surveillant(s)' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'Candidats inscrits' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'Certifications passées' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'Statut' })).exists();
-    assert.dom(screen.getByRole('columnheader', { name: 'Actions' })).exists();
-  });
-
   module('When there are no sessions to display', function () {
     test('it should display an empty list message', async function (assert) {
       // given
-      const goToSessionDetailsSpy = () => {};
       const sessionSummaries = [];
       sessionSummaries.meta = { rowCount: 0 };
 
       // when
-      const screen = await render(
-        <template>
-          <SessionList @sessionSummaries={{sessionSummaries}} @goToSessionDetails={{goToSessionDetailsSpy}} />
-        </template>,
-      );
+      const screen = await render(<template><SessionList @sessionSummaries={{sessionSummaries}} /></template>);
 
       // then
       assert.dom(screen.getByText('Aucune session trouvée')).exists();
@@ -58,7 +27,6 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
   module('When there are sessions to display', function () {
     test('it should display a list of sessions', async function (assert) {
       // given
-      const goToSessionDetailsSpy = () => {};
       const store = this.owner.lookup('service:store');
       const sessionSummary1 = store.createRecord('session-summary', {
         id: '123',
@@ -72,21 +40,27 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
       };
 
       // when
-      const screen = await render(
-        <template>
-          <SessionList @sessionSummaries={{sessionSummaries}} @goToSessionDetails={{goToSessionDetailsSpy}} />
-        </template>,
-      );
+      const screen = await render(<template><SessionList @sessionSummaries={{sessionSummaries}} /></template>);
 
       // then
       assert.dom(screen.queryByText('Aucune session trouvée')).doesNotExist();
+      const table = screen.getByRole('table', { name: t('pages.sessions.list.table.session-caption') });
+      assert.dom(within(table).getByRole('columnheader', { name: 'N° de session' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Nom du site' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Salle' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Date' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Heure' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Surveillant(s)' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Candidats inscrits' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Certifications passées' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Statut' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Actions' })).exists();
       assert.dom(screen.getByRole('link', { name: 'Session 123' })).exists();
       assert.dom(screen.getByRole('link', { name: 'Session 456' })).exists();
     });
 
     test('it should display all the attributes of the session summary in the row', async function (assert) {
       // given
-      const goToSessionDetailsSpy = () => {};
       const store = this.owner.lookup('service:store');
       const sessionSummary = store.createRecord('session-summary', {
         id: '123',
@@ -105,11 +79,7 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
       };
 
       // when
-      const screen = await render(
-        <template>
-          <SessionList @sessionSummaries={{sessionSummaries}} @goToSessionDetails={{goToSessionDetailsSpy}} />
-        </template>,
-      );
+      const screen = await render(<template><SessionList @sessionSummaries={{sessionSummaries}} /></template>);
 
       // then
       assert.dom(screen.getByRole('cell', { name: 'TicTac' })).exists();
@@ -122,35 +92,8 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
       assert.dom(screen.getByRole('cell', { name: 'Finalisée' })).exists();
     });
 
-    test('it should call goToSessionDetails function with session Id when clicking on a row', async function (assert) {
-      // given
-      const goToSessionDetailsSpy = sinon.stub();
-      const store = this.owner.lookup('service:store');
-      const sessionSummary = store.createRecord('session-summary', {
-        id: '123',
-      });
-      const sessionSummaries = [sessionSummary];
-      sessionSummaries.meta = {
-        rowCount: 1,
-      };
-
-      const screen = await render(
-        <template>
-          <SessionList @sessionSummaries={{sessionSummaries}} @goToSessionDetails={{goToSessionDetailsSpy}} />
-        </template>,
-      );
-
-      // when
-      await click(screen.getByRole('row', { name: 'Session de certification' }));
-
-      // then
-      sinon.assert.calledWith(goToSessionDetailsSpy, '123');
-      assert.ok(true);
-    });
-
     test('it should display a link to access session detail', async function (assert) {
       // given
-      const goToSessionDetailsSpy = sinon.stub();
       const store = this.owner.lookup('service:store');
       const sessionSummary = store.createRecord('session-summary', {
         id: '123',
@@ -161,11 +104,7 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
       };
 
       // when
-      const screen = await render(
-        <template>
-          <SessionList @sessionSummaries={{sessionSummaries}} @goToSessionDetails={{goToSessionDetailsSpy}} />
-        </template>,
-      );
+      const screen = await render(<template><SessionList @sessionSummaries={{sessionSummaries}} /></template>);
 
       // then
       assert.dom(screen.getByRole('link', { name: 'Session 123' })).exists();
@@ -174,7 +113,6 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
     module('when there is at least one effective candidate', function () {
       test('it should disable the delete button', async function (assert) {
         // given
-        const goToSessionDetailsSpy = sinon.stub();
         const store = this.owner.lookup('service:store');
         const sessionSummary = store.createRecord('session-summary', {
           id: '123',
@@ -187,11 +125,7 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
         };
 
         // when
-        const screen = await render(
-          <template>
-            <SessionList @sessionSummaries={{sessionSummaries}} @goToSessionDetails={{goToSessionDetailsSpy}} />
-          </template>,
-        );
+        const screen = await render(<template><SessionList @sessionSummaries={{sessionSummaries}} /></template>);
 
         // then
         assert.dom(screen.getByRole('button', { name: 'Supprimer la session 123' })).isDisabled();
@@ -201,7 +135,6 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
     module('when there are no effective candidates', function () {
       test('it should display an enabled delete button', async function (assert) {
         // given
-        const goToSessionDetailsSpy = sinon.stub();
         const store = this.owner.lookup('service:store');
         const sessionSummary = store.createRecord('session-summary', {
           id: '123',
@@ -212,11 +145,7 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
         };
 
         // when
-        const screen = await render(
-          <template>
-            <SessionList @sessionSummaries={{sessionSummaries}} @goToSessionDetails={{goToSessionDetailsSpy}} />
-          </template>,
-        );
+        const screen = await render(<template><SessionList @sessionSummaries={{sessionSummaries}} /></template>);
 
         // then
         assert.dom(screen.getByRole('button', { name: 'Supprimer la session 123' })).isEnabled();
@@ -225,7 +154,6 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
       module('when clicking on delete button', function () {
         test('it should open the modal', async function (assert) {
           // given
-          const goToSessionDetailsSpy = sinon.stub();
           const store = this.owner.lookup('service:store');
           const sessionSummary = store.createRecord('session-summary', {
             id: '123',
@@ -239,11 +167,7 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
             hasSessions: true,
           };
 
-          const screen = await render(
-            <template>
-              <SessionList @sessionSummaries={{sessionSummaries}} @goToSessionDetails={{goToSessionDetailsSpy}} />
-            </template>,
-          );
+          const screen = await render(<template><SessionList @sessionSummaries={{sessionSummaries}} /></template>);
 
           // when
           await click(screen.getByRole('button', { name: 'Supprimer la session 123' }));
@@ -259,7 +183,6 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
         module('when there are enrolled candidates', function () {
           test('it should open the modal with the number of enrolled candidates (plural)', async function (assert) {
             // given
-            const goToSessionDetailsSpy = sinon.stub();
             const store = this.owner.lookup('service:store');
             const sessionSummary = store.createRecord('session-summary', {
               id: '123',
@@ -274,11 +197,7 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
               hasSessions: true,
             };
 
-            const screen = await render(
-              <template>
-                <SessionList @sessionSummaries={{sessionSummaries}} @goToSessionDetails={{goToSessionDetailsSpy}} />
-              </template>,
-            );
+            const screen = await render(<template><SessionList @sessionSummaries={{sessionSummaries}} /></template>);
 
             // when
             await click(screen.getByRole('button', { name: 'Supprimer la session 123' }));
@@ -293,7 +212,6 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
 
           test('it should open the modal with the number of enrolled candidates (singular)', async function (assert) {
             // given
-            const goToSessionDetailsSpy = sinon.stub();
             const store = this.owner.lookup('service:store');
             const sessionSummary = store.createRecord('session-summary', {
               id: '123',
@@ -308,11 +226,7 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
               hasSessions: true,
             };
 
-            const screen = await render(
-              <template>
-                <SessionList @sessionSummaries={{sessionSummaries}} @goToSessionDetails={{goToSessionDetailsSpy}} />
-              </template>,
-            );
+            const screen = await render(<template><SessionList @sessionSummaries={{sessionSummaries}} /></template>);
 
             // when
             await click(screen.getByRole('button', { name: 'Supprimer la session 123' }));
@@ -329,7 +243,6 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
         module('when there are no enrolled candidates', function () {
           test('it should open the modal without the number of enrolled candidates', async function (assert) {
             // given
-            const goToSessionDetailsSpy = sinon.stub();
             const store = this.owner.lookup('service:store');
             const sessionSummary = store.createRecord('session-summary', {
               id: '123',
@@ -344,11 +257,7 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
               hasSessions: true,
             };
 
-            const screen = await render(
-              <template>
-                <SessionList @sessionSummaries={{sessionSummaries}} @goToSessionDetails={{goToSessionDetailsSpy}} />
-              </template>,
-            );
+            const screen = await render(<template><SessionList @sessionSummaries={{sessionSummaries}} /></template>);
 
             // when
             await click(screen.getByRole('button', { name: 'Supprimer la session 123' }));
@@ -363,7 +272,6 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
         module('when clicking on modal delete button', function () {
           test('it should close the modal', async function (assert) {
             // given
-            const goToSessionDetailsSpy = sinon.stub();
             const store = this.owner.lookup('service:store');
             const sessionSummary = store.createRecord('session-summary', {
               id: '123',
@@ -373,11 +281,7 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
               rowCount: 1,
             };
 
-            const screen = await render(
-              <template>
-                <SessionList @sessionSummaries={{sessionSummaries}} @goToSessionDetails={{goToSessionDetailsSpy}} />
-              </template>,
-            );
+            const screen = await render(<template><SessionList @sessionSummaries={{sessionSummaries}} /></template>);
             await click(screen.getByRole('button', { name: 'Supprimer la session 123' }));
             await screen.findByRole('dialog');
 

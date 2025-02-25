@@ -12,12 +12,6 @@
     overflow: initial;
   }
 
-  &--with-row-clickable tbody tr:hover,
-  &--with-row-clickable tbody tr:focus,
-  &--with-row-clickable tbody tr:active {
-    cursor: pointer;
-  }
-
   &__column {
     width: 16%;
 
