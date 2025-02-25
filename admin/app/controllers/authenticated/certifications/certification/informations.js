@@ -22,31 +22,6 @@ export default class CertificationInformationsController extends Controller {
 
   @tracked selectedJuryLevel = null;
 
-  @computed('model.certificationIssueReports.@each.isImpactful')
-  get impactfulCertificationIssueReports() {
-    return this.model.certificationIssueReports.filter((issueReport) => issueReport.isImpactful);
-  }
-
-  @computed('model.certificationIssueReports.@each.isImpactful')
-  get unimpactfulCertificationIssueReports() {
-    return this.model.certificationIssueReports.filter((issueReport) => !issueReport.isImpactful);
-  }
-
-  @computed('model.certificationIssueReports.@each.isImpactful')
-  get hasIssueReports() {
-    return Boolean(this.model.certificationIssueReports.length);
-  }
-
-  @computed('model.certificationIssueReports.@each.isImpactful')
-  get hasImpactfulIssueReports() {
-    return Boolean(this.model.certificationIssueReports.filter((issueReport) => issueReport.isImpactful).length);
-  }
-
-  @computed('model.certificationIssueReports.@each.isImpactful')
-  get hasUnimpactfulIssueReports() {
-    return Boolean(this.model.certificationIssueReports.filter((issueReport) => !issueReport.isImpactful).length);
-  }
-
   @computed('certification.status')
   get isCertificationCancelled() {
     return this.certification.status === 'cancelled';
@@ -67,17 +42,6 @@ export default class CertificationInformationsController extends Controller {
 
   get shouldDisplayPixScore() {
     return this.certification.version === 2;
-  }
-
-  @action
-  async resolveIssueReport(issueReport, resolutionLabel) {
-    try {
-      await issueReport.save({ adapterOptions: { resolutionLabel } });
-      this.pixToast.sendSuccessNotification({ message: 'Le signalement a été résolu.' });
-    } catch (error) {
-      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue :\n' + error?.errors[0]?.detail });
-    }
-    await this.certification.reload();
   }
 
   saveAssessmentResult(commentByJury) {

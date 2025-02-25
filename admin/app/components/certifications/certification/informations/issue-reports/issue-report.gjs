@@ -6,7 +6,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { and, not, or } from 'ember-truth-helpers';
 
-import CertificationIssueReportModal from './issue-reports/resolve-issue-report-modal';
+import CertificationIssueReportModal from './resolve-issue-report-modal';
 
 export default class CertificationIssueReport extends Component {
   @service accessControl;
@@ -64,11 +64,10 @@ export default class CertificationIssueReport extends Component {
           <PixButton @size="small" @triggerAction={{this.toggleResolveModal}}>Modifier la résolution</PixButton>
         {{/if}}
         <CertificationIssueReportModal
-          @toggleResolveModal={{this.toggleResolveModal}}
           @issueReport={{@issueReport}}
-          @resolveIssueReport={{@resolveIssueReport}}
-          @closeResolveModal={{this.closeResolveModal}}
+          @certification={{@certification}}
           @displayModal={{this.showResolveModal}}
+          @toggleResolveModal={{this.toggleResolveModal}}
         />
       {{/if}}
     </li>

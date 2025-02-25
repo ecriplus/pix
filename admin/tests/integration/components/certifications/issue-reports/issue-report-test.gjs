@@ -1,10 +1,10 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import IssueReport from 'pix-admin/components/certifications/issue-report';
+import IssueReport from 'pix-admin/components/certifications/certification/informations/issue-reports/issue-report';
 import { certificationIssueReportSubcategories } from 'pix-admin/models/certification-issue-report';
 import { module, test } from 'qunit';
 
-import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | certifications/issue-report', function (hooks) {
   setupIntlRenderingTest(hooks);

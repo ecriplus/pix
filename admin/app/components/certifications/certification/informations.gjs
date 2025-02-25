@@ -4,10 +4,10 @@ import PixSelect from '@1024pix/pix-ui/components/pix-select';
 
 import CertificationCompetenceList from '../competence-list';
 import CertificationInfoField from '../info-field';
-import CertificationIssueReports from '../issue-reports';
 import CertificationComments from './comments';
 import CertificationInformationCandidate from './informations/candidate';
 import CertificationInformationGlobalActions from './informations/global-actions';
+import CertificationInformationIssueReports from './informations/issue-reports';
 import CertificationInformationState from './informations/state';
 
 <template>
@@ -110,17 +110,11 @@ import CertificationInformationState from './informations/state';
       </div>
     {{/if}}
 
-    {{#if @hasIssueReports}}
-      <section
-        class="certification-informations__row certification-informations__card certification-informations__certification-issue-reports"
-      >
-        <h2 class="card-title certification-informations__card__title">Signalements</h2>
-        <CertificationIssueReports
-          @hasImpactfulIssueReports={{@hasImpactfulIssueReports}}
-          @hasUnimpactfulIssueReports={{@hasUnimpactfulIssueReports}}
-          @impactfulCertificationIssueReports={{@impactfulCertificationIssueReports}}
-          @unimpactfulCertificationIssueReports={{@unimpactfulCertificationIssueReports}}
-          @resolveIssueReport={{@resolveIssueReport}}
+    {{#if @certificationIssueReports.length}}
+      <section class="certification-informations__row">
+        <CertificationInformationIssueReports
+          @certificationIssueReports={{@certificationIssueReports}}
+          @certification={{@certification}}
         />
       </section>
     {{/if}}
