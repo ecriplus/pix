@@ -9,11 +9,12 @@ import { getQuestResultsForCampaignParticipation } from '../../../../../src/ques
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipation', function () {
-  let questRepository, eligibilityRepository, rewardRepository, campaignParticipationId, userId;
+  let questRepository, eligibilityRepository, rewardRepository, campaignParticipationId, userId, logger;
 
   beforeEach(function () {
     userId = 1;
     campaignParticipationId = 2;
+    logger = { error: sinon.stub() };
     questRepository = { findAll: sinon.stub() };
     eligibilityRepository = { find: sinon.stub() };
     rewardRepository = { getByQuestAndUserId: sinon.stub() };
@@ -111,5 +112,22 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
 
     // then
     expect(result).to.have.lengthOf(0);
+  });
+
+  it('ensure that quest system does not throw error', async function () {
+    const error = new Error('my error');
+    questRepository.findAll.throws(error);
+
+    const result = await getQuestResultsForCampaignParticipation({
+      userId,
+      campaignParticipationId,
+      questRepository,
+      eligibilityRepository,
+      rewardRepository,
+      logger,
+    });
+
+    expect(logger.error).have.been.calledWithExactly({ event: 'quest-result', err: error }, 'Error on quests');
+    expect(result).lengthOf(0);
   });
 });
