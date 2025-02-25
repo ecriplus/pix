@@ -36,6 +36,7 @@
   &__clipboard {
     display: flex;
     gap: var(--pix-spacing-4x);
+    align-items: flex-end;
 
     .pix-input {
       width: 100%;
@@ -44,6 +45,10 @@
     input {
       box-sizing: border-box;
       background-color: var(--pix-neutral-20);
+    }
+
+    &__copy-password-button {
+      color: var(--pix-neutral-100);
     }
   }
 
@@ -76,7 +81,7 @@
     border-radius: var(--pix-spacing-2x);
 
     button {
-      margin-bottom: var(--pix-spacing-4x);
+      margin-bottom: var(--pix-spacing-1x);
       font-weight: 600;
     }
 
