@@ -11,12 +11,7 @@ export default class ChallengeActions extends Component {
   <template>
     <div class="challenge-actions">
       {{#unless (or this.hideSkipButton @isLesson)}}
-        <PixButton
-          class="pix1d-button pix1d-button--skip"
-          @triggerAction={{@skipChallenge}}
-          @shape="rounded"
-          @size="large"
-        >
+        <PixButton class="pix1d-button pix1d-button--skip" @triggerAction={{@skipChallenge}} @size="large">
           <span>
             {{t "pages.challenge.actions.skip"}}
           </span>

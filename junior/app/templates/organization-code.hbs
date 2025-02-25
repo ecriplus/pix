@@ -6,17 +6,19 @@
     <p class="school-code__welcome">{{t "pages.home.welcome"}}</p>
   </div>
   <p class="school-code__instructions">{{t "pages.home.code-instruction"}}</p>
-  <label for="organization-code" class="school-code__label">{{t "pages.home.code-label"}}</label>
-  <PixInputCode
-    @ariaLabel={{t "pages.home.field-description"}}
-    @legend={{t "pages.home.code-description"}}
-    @numInputs={{9}}
-    @inputType="text"
-    @onAllInputsFilled={{this.updateCode}}
-    class="school-code__input"
-  />
+  <div class="school-code__input">
+    <PixCode
+      @length="9"
+      @requiredLabel={{t "common.forms.mandatory"}}
+      @value={{this.schoolCode}}
+      aria-label={{t "pages.home.code-description"}}
+      {{on "input" this.handleCode}}
+    >
+      <:label>{{t "pages.home.code-label"}}</:label>
+    </PixCode>
+  </div>
 
-  <PixButton class="pix1d-button" @type="submit" @shape="rounded" @size="large">
+  <PixButton class="pix1d-button" @type="submit" @size="large">
     {{t "pages.home.go-to-school"}}
   </PixButton>
   <img src="/images/logo.svg" alt="Pix Junior" class="logo" />
