@@ -1,4 +1,4 @@
-import { render, within } from '@1024pix/ember-testing-library';
+import { getDefaultNormalizer, render, within } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
@@ -199,6 +199,50 @@ module('Integration | Component | Participant::Assessment::Header', function (ho
         );
 
         assert.notOk(screen.queryByText(t('pages.campaign-individual-results.shared-date')));
+      });
+
+      test('displays participant progression on campaign of type not equal to exam', async function (assert) {
+        this.participation = {
+          isShared: false,
+          progression: 0.8,
+        };
+
+        this.campaign = {
+          isTypeExam: false,
+        };
+
+        const screen = await render(
+          hbs`<Participant::Assessment::Header @participation={{this.participation}} @campaign={{this.campaign}} />`,
+        );
+
+        assert.ok(screen.queryByText(t('pages.assessment-individual-results.progression')));
+        assert.ok(
+          screen.queryByText(t('common.result.percentage', { value: 0.8 }), {
+            normalizer: getDefaultNormalizer({ collapseWhitespace: false }),
+          }),
+        );
+      });
+
+      test('hides participant progression on campaign of type exam', async function (assert) {
+        this.participation = {
+          isShared: false,
+          progression: 0.8,
+        };
+
+        this.campaign = {
+          isTypeExam: true,
+        };
+
+        const screen = await render(
+          hbs`<Participant::Assessment::Header @participation={{this.participation}} @campaign={{this.campaign}} />`,
+        );
+
+        assert.notOk(screen.queryByText(t('pages.assessment-individual-results.progression')));
+        assert.notOk(
+          screen.queryByText(t('common.result.percentage', { value: 0.8 }), {
+            normalizer: getDefaultNormalizer({ collapseWhitespace: false }),
+          }),
+        );
       });
     });
   });
