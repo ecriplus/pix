@@ -17,6 +17,7 @@ const COLUMNS = Object.freeze([
   'userId',
   'createdAt',
   'updatedAt',
+  'lastLoggedAt',
 ]);
 
 const create = async function ({ authenticationMethod }) {
@@ -121,6 +122,16 @@ const hasIdentityProviderPIX = async function ({ userId }) {
     .first();
 
   return Boolean(authenticationMethodDTO);
+};
+
+const updateLastLoggedAtByIdentityProvider = async function ({ userId, identityProvider }) {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn(AUTHENTICATION_METHODS_TABLE)
+    .where({
+      userId,
+      identityProvider,
+    })
+    .update({ lastLoggedAt: new Date() });
 };
 
 const removeByUserIdAndIdentityProvider = async function ({ userId, identityProvider }) {
@@ -268,6 +279,7 @@ export {
   updateAuthenticationComplementByUserIdAndIdentityProvider,
   updateAuthenticationMethodUserId,
   updateExternalIdentifierByUserIdAndIdentityProvider,
+  updateLastLoggedAtByIdentityProvider,
   updatePassword,
 };
 
