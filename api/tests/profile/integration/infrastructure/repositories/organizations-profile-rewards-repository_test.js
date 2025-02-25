@@ -75,15 +75,16 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
     });
   });
 
-  describe('#getByOrganizationIds', function () {
+  describe('#getByOrganizationId', function () {
     it('should return empty array if profile rewards does not exist for given organizationId', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const attestationKey = databaseBuilder.factory.buildAttestation().key;
 
       await databaseBuilder.commit();
 
       // when
-      const results = await getByOrganizationId({ organizationId });
+      const results = await getByOrganizationId({ attestationKey, organizationId });
 
       // then
       expect(results).to.be.empty;
@@ -91,8 +92,9 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
 
     it('should return profile rewards for given organizationId', async function () {
       // given
-      const firstProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId: 1 });
-      const secondProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId: 2 });
+      const { key: attestationKey, id: rewardId } = databaseBuilder.factory.buildAttestation();
+      const firstProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
+      const secondProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       databaseBuilder.factory.buildOrganizationsProfileRewards({
         organizationId,
@@ -105,7 +107,7 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
       await databaseBuilder.commit();
 
       // when
-      const results = await getByOrganizationId({ organizationId });
+      const results = await getByOrganizationId({ attestationKey, organizationId });
 
       // then
       const expectedResults = [
@@ -117,10 +119,38 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
       expect(results).to.have.deep.members(expectedResults);
     });
 
+    it('should not return profile rewards for another organizationId', async function () {
+      // given
+      const { key: attestationKey, id: rewardId } = databaseBuilder.factory.buildAttestation();
+      const firstProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
+      const secondProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const anotherOrganizationId = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildOrganizationsProfileRewards({
+        organizationId,
+        profileRewardId: firstProfileReward.id,
+      });
+      databaseBuilder.factory.buildOrganizationsProfileRewards({
+        organizationId: anotherOrganizationId,
+        profileRewardId: secondProfileReward.id,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const results = await getByOrganizationId({ attestationKey, organizationId });
+
+      // then
+      const expectedResults = [{ profileRewardId: firstProfileReward.id, organizationId }];
+
+      expect(results).to.have.lengthOf(1);
+      expect(results).to.have.deep.members(expectedResults);
+    });
+
     it('should not return profile rewards for other organizationId', async function () {
       // given
-      const profileReward = databaseBuilder.factory.buildProfileReward();
-      const otherProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId: 11 });
+      const { key: attestationKey, id: rewardId } = databaseBuilder.factory.buildAttestation();
+      const profileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
+      const otherProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
       const expectedProfileReward = new OrganizationProfileReward(
@@ -137,7 +167,7 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
       await databaseBuilder.commit();
 
       // when
-      const results = await getByOrganizationId({ organizationId });
+      const results = await getByOrganizationId({ attestationKey, organizationId });
 
       // then
       expect(results).to.have.lengthOf(1);

@@ -13,9 +13,12 @@ export const save = async ({ organizationId, profileRewardId }) => {
     .ignore();
 };
 
-export const getByOrganizationId = async ({ organizationId }) => {
+export const getByOrganizationId = async ({ attestationKey, organizationId }) => {
   const knexConn = DomainTransaction.getConnection();
-  const organizationProfileRewards = await knexConn(ORGANIZATIONS_PROFILE_REWARDS_TABLE_NAME).where({ organizationId });
+  const organizationProfileRewards = await knexConn('organizations-profile-rewards')
+    .join('profile-rewards', 'organizations-profile-rewards.profileRewardId', '=', 'profile-rewards.id')
+    .join('attestations', 'profile-rewards.rewardId', '=', 'attestations.id')
+    .where({ organizationId, key: attestationKey });
   return organizationProfileRewards.map(
     (organizationProfileReward) => new OrganizationProfileReward(organizationProfileReward),
   );
