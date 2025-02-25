@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-import { disconnect, prepareDatabaseConnection } from './db/knex-database-connection.js';
+import { disconnect, liveDatabaseConnection } from './db/knex-database-connection.js';
 import { createServer } from './server.js';
 import { config, schema as configSchema } from './src/shared/config.js';
 import { learningContentCache } from './src/shared/infrastructure/caches/learning-content-cache.js';
@@ -19,7 +19,7 @@ async function _setupEcosystem() {
     DNS resolution. So we execute one harmless query to our database
     so those matters are resolved before starting the server.
   */
-  await prepareDatabaseConnection();
+  await liveDatabaseConnection.prepare();
 }
 
 const start = async function () {

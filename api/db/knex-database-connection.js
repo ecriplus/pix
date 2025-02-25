@@ -1,19 +1,23 @@
-import pg from 'pg';
-
-const types = pg.types;
-import _ from 'lodash';
-
-const { get } = _;
 import perf_hooks from 'node:perf_hooks';
-
-import { config } from '../src/shared/config.js';
-import { monitoringTools } from '../src/shared/infrastructure/monitoring-tools.js';
-import { logger } from '../src/shared/infrastructure/utils/logger.js';
-
-const { performance } = perf_hooks;
 
 import Knex from 'knex';
 import QueryBuilder from 'knex/lib/query/querybuilder.js';
+import _ from 'lodash';
+import pg from 'pg';
+
+import datamartKnexConfigs from '../datamart/knexfile.js';
+import { config } from '../src/shared/config.js';
+import { monitoringTools } from '../src/shared/infrastructure/monitoring-tools.js';
+import { logger } from '../src/shared/infrastructure/utils/logger.js';
+import { DatabaseConnection } from './database-connection.js';
+import knexConfigs from './knexfile.js';
+
+const types = pg.types;
+
+const { get } = _;
+
+const { performance } = perf_hooks;
+
 /*
 By default, node-postgres casts a DATE value (PostgreSQL type) as a Date Object (JS type).
 But, when dealing with dates with no time (such as birthdate for example), we want to
@@ -33,15 +37,12 @@ Links :
  */
 types.setTypeParser(types.builtins.INT8, (value) => parseInt(value));
 
-import * as datamartKnexConfigs from '../datamart/knexfile.js';
-import * as knexConfigs from './knexfile.js';
-
 const { logging, environment } = config;
-const knexConfig = knexConfigs.default[environment];
-const configuredKnex = Knex(knexConfig);
+const liveDatabaseConnection = new DatabaseConnection(knexConfigs[environment]);
+const configuredKnex = liveDatabaseConnection.knex;
 
-const datamartKnexConfig = datamartKnexConfigs.default[environment];
-const configuredDatamartKnex = Knex(datamartKnexConfig);
+const datamartDatabaseConnection = new DatabaseConnection(datamartKnexConfigs[environment]);
+const configuredDatamartKnex = datamartDatabaseConnection.knex;
 
 /* QueryBuilder Extension */
 try {
@@ -89,12 +90,6 @@ async function disconnect() {
 
 const _databaseName = configuredKnex.client.database();
 
-const _dbSpecificQueries = {
-  listTablesQuery:
-    'SELECT table_name FROM information_schema.tables WHERE table_schema = current_schema() AND table_catalog = ?',
-  emptyTableQuery: 'TRUNCATE ',
-};
-
 async function listAllTableNames() {
   const bindings = [_databaseName];
 
@@ -118,14 +113,8 @@ async function emptyAllTables() {
 
   const tables = _.map(tablesToDelete, (tableToDelete) => `"${tableToDelete}"`).join();
 
-  const query = _dbSpecificQueries.emptyTableQuery;
   // eslint-disable-next-line knex/avoid-injections
-  return configuredKnex.raw(`${query}${tables}`);
-}
-
-async function prepareDatabaseConnection() {
-  await configuredKnex.raw('SELECT 1');
-  logger.info('Connection to database established.');
+  return configuredKnex.raw(`TRUNCATE ${tables}`);
 }
 
 export {
@@ -133,5 +122,5 @@ export {
   disconnect,
   emptyAllTables,
   configuredKnex as knex,
-  prepareDatabaseConnection,
+  liveDatabaseConnection,
 };
