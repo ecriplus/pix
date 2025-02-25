@@ -46,6 +46,6 @@ export const rewardUser = async ({
       }
     }
   } catch (error) {
-    logger.error({ event: 'quest-reward' }, error);
+    logger.error({ event: 'quest-reward', err: error }, 'Error on quests');
   }
 };

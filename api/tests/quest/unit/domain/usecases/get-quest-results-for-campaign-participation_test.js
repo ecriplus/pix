@@ -127,7 +127,7 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
       logger,
     });
 
-    expect(logger.error).have.been.calledWithExactly({ event: 'quest-result' }, error);
+    expect(logger.error).have.been.calledWithExactly({ event: 'quest-result', err: error }, 'Error on quests');
     expect(result).lengthOf(0);
   });
 });

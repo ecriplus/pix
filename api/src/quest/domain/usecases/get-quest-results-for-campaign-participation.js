@@ -38,7 +38,7 @@ export const getQuestResultsForCampaignParticipation = async ({
 
     return questResults;
   } catch (error) {
-    logger.error({ event: 'quest-result' }, error);
+    logger.error({ event: 'quest-result', err: error }, 'Error on quests');
     return [];
   }
 };

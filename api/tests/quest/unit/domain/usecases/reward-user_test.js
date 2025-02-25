@@ -136,6 +136,6 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
       ...dependencies,
     });
 
-    expect(logger.error).have.been.calledWithExactly({ event: 'quest-reward' }, error);
+    expect(logger.error).have.been.calledWithExactly({ event: 'quest-reward', err: error }, 'Error on quests');
   });
 });
