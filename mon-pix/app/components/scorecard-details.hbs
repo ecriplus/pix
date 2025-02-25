@@ -1,6 +1,8 @@
 <div>
   <div class="scorecard-details__header">
-    <PixReturnTo @route="authenticated.profile">{{t "navigation.back-to-profile"}}</PixReturnTo>
+    <PixButtonLink @route="authenticated.profile" @variant="tertiary" @iconBefore="arrowLeft">
+      {{t "navigation.back-to-profile"}}
+    </PixButtonLink>
   </div>
 
   <div class="scorecard-details__content">
