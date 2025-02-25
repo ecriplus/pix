@@ -44,4 +44,19 @@ module('Unit | Adapter | Training ', function (hooks) {
       assert.ok(true);
     });
   });
+  module('#duplicate', function () {
+    test('should trigger an ajax call with the right url and method', async function (assert) {
+      // given
+      const trainingId = 1;
+      sinon.stub(adapter, 'ajax').resolves();
+      const expectedUrl = `http://localhost:3000/api/admin/trainings/${trainingId}/duplicate`;
+
+      // when
+      await adapter.duplicate(trainingId);
+
+      // then
+      sinon.assert.calledWith(adapter.ajax, expectedUrl, 'POST');
+      assert.ok(true);
+    });
+  });
 });

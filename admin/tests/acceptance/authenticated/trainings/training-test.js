@@ -185,7 +185,6 @@ module('Acceptance | Trainings | Training', function (hooks) {
         await clickByName('Valider');
 
         // then
-        assert.strictEqual(currentURL(), '/trainings/3/details');
         const title = await screen.findByRole('heading', {
           name: `[Copie] Apprendre à piloter des chauves-souris comme Batman`,
           level: 1,

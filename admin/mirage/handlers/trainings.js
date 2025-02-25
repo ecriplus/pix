@@ -134,11 +134,24 @@ function createOrUpdateTrainingTrigger(schema, request) {
   return trainingTrigger;
 }
 
+function duplicateTraining(schema, request) {
+  const trainingId = request.params.id;
+  const training = schema.trainings.find(trainingId);
+  delete training.attrs.id;
+
+  const { id } = schema.create('training', {
+    ...training.attrs,
+    internalTitle: '[Copie] ' + training.attrs.internalTitle,
+  });
+  return { trainingId: id };
+}
+
 export {
   attachTargetProfilesToTraining,
   createOrUpdateTrainingTrigger,
   createTraining,
   detachTargetProfileFromTraining,
+  duplicateTraining,
   findPaginatedTrainingSummaries,
   getTargetProfileSummariesForTraining,
   getTraining,
