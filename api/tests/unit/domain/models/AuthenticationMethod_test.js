@@ -14,6 +14,7 @@ describe('Unit | Domain | Models | AuthenticationMethod', function () {
       const shouldChangePassword = true;
       const createdAt = Date.now();
       const updatedAt = Date.now();
+      const lastLoggedAt = Date.now();
 
       // when
       const result = AuthenticationMethod.buildPixAuthenticationMethod({
@@ -23,6 +24,7 @@ describe('Unit | Domain | Models | AuthenticationMethod', function () {
         createdAt,
         updatedAt,
         userId,
+        lastLoggedAt,
       });
 
       // then
@@ -39,6 +41,7 @@ describe('Unit | Domain | Models | AuthenticationMethod', function () {
         userId,
         createdAt,
         updatedAt,
+        lastLoggedAt,
       };
       expect(result).to.deep.equal(expectedResult);
     });

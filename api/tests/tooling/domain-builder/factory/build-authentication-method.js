@@ -31,6 +31,7 @@ buildAuthenticationMethod.withGarAsIdentityProvider = function ({
   userLastName = 'Saint-James',
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-02-01'),
+  lastLoggedAt = null,
 } = {}) {
   userId = isUndefined(userId) ? _buildUser().id : userId;
 
@@ -45,6 +46,7 @@ buildAuthenticationMethod.withGarAsIdentityProvider = function ({
     userId,
     createdAt,
     updatedAt,
+    lastLoggedAt,
   });
 };
 
@@ -55,6 +57,7 @@ buildAuthenticationMethod.withPixAsIdentityProviderAndRawPassword = function ({
   userId,
   createdAt,
   updatedAt,
+  lastLoggedAt = null,
 } = {}) {
   userId = isUndefined(userId) ? _buildUser().id : userId;
 
@@ -69,6 +72,7 @@ buildAuthenticationMethod.withPixAsIdentityProviderAndRawPassword = function ({
     userId,
     createdAt,
     updatedAt,
+    lastLoggedAt,
   });
 };
 
@@ -79,6 +83,7 @@ buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword = function 
   userId,
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-02-01'),
+  lastLoggedAt = null,
 } = {}) {
   const password = hashedPassword;
   userId = isUndefined(userId) ? _buildUser().id : userId;
@@ -94,6 +99,7 @@ buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword = function 
     userId,
     createdAt,
     updatedAt,
+    lastLoggedAt,
   });
 };
 
@@ -106,6 +112,7 @@ buildAuthenticationMethod.withPoleEmploiAsIdentityProvider = function ({
   userId,
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-02-01'),
+  lastLoggedAt = null,
 } = {}) {
   userId = isUndefined(userId) ? _buildUser().id : userId;
 
@@ -121,6 +128,7 @@ buildAuthenticationMethod.withPoleEmploiAsIdentityProvider = function ({
     userId,
     createdAt,
     updatedAt,
+    lastLoggedAt,
   });
 };
 
@@ -131,6 +139,7 @@ buildAuthenticationMethod.withIdentityProvider = function ({
   userId,
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-02-01'),
+  lastLoggedAt = null,
 } = {}) {
   userId = isUndefined(userId) ? _buildUser().id : userId;
 
@@ -141,6 +150,7 @@ buildAuthenticationMethod.withIdentityProvider = function ({
     userId,
     createdAt,
     updatedAt,
+    lastLoggedAt,
   });
 };
 

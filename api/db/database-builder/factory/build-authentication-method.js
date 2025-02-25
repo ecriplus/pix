@@ -108,6 +108,7 @@ buildAuthenticationMethod.withPoleEmploiAsIdentityProvider = function ({
   userId,
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-01-02'),
+  lastLoggedAt = null,
 } = {}) {
   userId = isUndefined(userId) ? buildUser().id : userId;
 
@@ -127,6 +128,7 @@ buildAuthenticationMethod.withPoleEmploiAsIdentityProvider = function ({
     userId,
     createdAt,
     updatedAt,
+    lastLoggedAt,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'authentication-methods',
@@ -157,6 +159,7 @@ buildAuthenticationMethod.withOidcProviderAsIdentityProvider = function ({
     }),
     createdAt: new Date('2020-01-01'),
     updatedAt: new Date('2020-01-02'),
+    lastLoggedAt: null,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'authentication-methods',
@@ -171,6 +174,7 @@ buildAuthenticationMethod.withIdentityProvider = function ({
   userId,
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-01-02'),
+  lastLoggedAt = null,
 } = {}) {
   userId = isUndefined(userId) ? buildUser().id : userId;
 
@@ -185,6 +189,7 @@ buildAuthenticationMethod.withIdentityProvider = function ({
     userId,
     createdAt,
     updatedAt,
+    lastLoggedAt,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'authentication-methods',

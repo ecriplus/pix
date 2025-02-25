@@ -157,6 +157,7 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
           externalIdentifier: 'saml-id',
           createdAt: new Date('2020-01-01'),
           updatedAt: new Date('2020-02-01'),
+          lastLoggedAt: null,
         });
         userRepository.getBySamlId.withArgs('saml-id').resolves(user);
         authenticationMethodRepository.findOneByUserIdAndIdentityProvider
@@ -181,6 +182,7 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
           userFirstName: 'Vassili',
           userLastName: 'Lisitsa',
           externalIdentifier: 'saml-id',
+          lastLoggedAt: null,
         });
         expect(authenticationMethodRepository.update).to.have.been.calledWithExactly(expectedAuthenticationMethod);
       });
