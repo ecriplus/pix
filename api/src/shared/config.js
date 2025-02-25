@@ -4,8 +4,9 @@ import path from 'node:path';
 import * as url from 'node:url';
 
 import dayjs from 'dayjs';
-import Joi from 'joi';
 import ms from 'ms';
+
+import Joi from './config-joi.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -88,9 +89,10 @@ function buildSeedsContext(value) {
 }
 
 const schema = Joi.object({
+  MADDO: Joi.boolean().optional().default(false),
   ACCESS_TOKEN_LIFESPAN: Joi.string().optional(),
   AUTH_SECRET: Joi.string().required(),
-  AUTONOMOUS_COURSES_ORGANIZATION_ID: Joi.number().required(),
+  AUTONOMOUS_COURSES_ORGANIZATION_ID: Joi.number().requiredForApi(),
   API_DATA_URL: Joi.string().uri().optional(),
   API_DATA_USERNAME: Joi.string().optional(),
   API_DATA_PASSWORD: Joi.string().optional(),
@@ -133,8 +135,8 @@ const schema = Joi.object({
   FT_ENABLE_TEXT_TO_SPEECH_BUTTON: Joi.string().optional().valid('true', 'false'),
   FT_PIX_COMPANION_ENABLED: Joi.string().optional().valid('true', 'false'),
   KNEX_ASYNC_STACKTRACE_ENABLED: Joi.string().optional().valid('true', 'false'),
-  LCMS_API_KEY: Joi.string().required(),
-  LCMS_API_URL: Joi.string().uri().required(),
+  LCMS_API_KEY: Joi.string().requiredForApi(),
+  LCMS_API_URL: Joi.string().uri().requiredForApi(),
   LOG_ENABLED: Joi.string().required().valid('true', 'false'),
   LOG_FOR_HUMANS: Joi.string().optional().valid('true', 'false'),
   LOG_LEVEL: Joi.string().optional().valid('silent', 'fatal', 'error', 'warn', 'info', 'debug', 'trace'),
