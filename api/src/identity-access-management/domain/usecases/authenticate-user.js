@@ -7,7 +7,6 @@ import { RefreshToken } from '../models/RefreshToken.js';
 
 const authenticateUser = async function ({
   password,
-  scope,
   source,
   username,
   localeFromCookie,
@@ -21,6 +20,7 @@ const authenticateUser = async function ({
   emailRepository,
   emailValidationDemandRepository,
   audience,
+  requestedApplication,
 }) {
   try {
     const user = await pixAuthenticationService.getUserByUsernameAndPassword({
@@ -34,7 +34,7 @@ const authenticateUser = async function ({
       throw new UserShouldChangePasswordError(undefined, passwordResetToken);
     }
 
-    await _assertUserHasAccessToApplication({ scope, user, adminMemberRepository });
+    await _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository });
 
     const refreshToken = RefreshToken.generate({ userId: user.id, source, audience });
     await refreshTokenRepository.save({ refreshToken });
@@ -79,12 +79,12 @@ const authenticateUser = async function ({
   }
 };
 
-async function _assertUserHasAccessToApplication({ scope, user, adminMemberRepository }) {
-  if (scope === PIX_ORGA.SCOPE && !user.isLinkedToOrganizations()) {
+async function _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository }) {
+  if (requestedApplication.isPixOrga && !user.isLinkedToOrganizations()) {
     throw new ForbiddenAccess(PIX_ORGA.NOT_LINKED_ORGANIZATION_MSG);
   }
 
-  if (scope === PIX_ADMIN.SCOPE) {
+  if (requestedApplication.isPixAdmin) {
     const adminMember = await adminMemberRepository.get({ userId: user.id });
     if (!adminMember?.hasAccessToAdminScope) {
       throw new ForbiddenAccess(PIX_ADMIN.NOT_ALLOWED_MSG);

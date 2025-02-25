@@ -1,6 +1,6 @@
 import { tokenService } from '../../../shared/domain/services/token-service.js';
 import { usecases } from '../../domain/usecases/index.js';
-import { getForwardedOrigin } from '../../infrastructure/utils/network.js';
+import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/utils/network.js';
 
 const authenticateAnonymousUser = async function (request, h) {
   const { campaign_code: campaignCode, lang } = request.payload;
@@ -28,21 +28,22 @@ const createToken = async function (request, h, dependencies = { tokenService })
   let expirationDelaySeconds;
 
   const origin = getForwardedOrigin(request.headers);
+  const requestedApplication = RequestedApplication.fromOrigin(origin);
 
   const grantType = request.payload.grant_type;
 
   if (grantType === 'password') {
-    const { username, password, scope } = request.payload;
+    const { username, password } = request.payload;
     const localeFromCookie = request.state?.locale;
     const source = 'pix';
 
     const tokensInfo = await usecases.authenticateUser({
       username,
       password,
-      scope,
       source,
       localeFromCookie,
       audience: origin,
+      requestedApplication,
     });
 
     accessToken = tokensInfo.accessToken;

@@ -21,7 +21,7 @@ export const tokenRoutes = [
               grant_type: Joi.string().valid('password').required(),
               username: Joi.string().required(),
               password: Joi.string().required(),
-              scope: Joi.string(),
+              scope: Joi.string().optional(), // Now useless, will soon be removed
             }),
           Joi.object()
             .required()

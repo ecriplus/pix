@@ -45,7 +45,6 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           grant_type: 'password',
           username: userEmailAddress,
           password: userPassword,
-          scope: 'pix-orga',
         }),
       });
 
@@ -86,7 +85,6 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           grant_type: 'password',
           username: 'beth.rave1212',
           password: userPassword,
-          scope: 'pix',
         }),
       });
 
@@ -143,7 +141,7 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
       });
     });
 
-    context('when scope is admin', function () {
+    context('when requestedApplication is admin', function () {
       context('when admin member has allowed role but has been disabled', function () {
         it('returns http code 403', async function () {
           //given
@@ -158,7 +156,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
             disabledAt: new Date('2021-01-02'),
           });
           await databaseBuilder.commit();
-          const options = _getOptions({ scope: 'pix-admin', username: user.email, password: userPassword });
+
+          const options = _getServerOptions({ username: user.email, password: userPassword, applicationName: 'admin' });
 
           // when
           const response = await server.inject(options);
@@ -169,7 +168,7 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
       });
     });
 
-    context('when scope is pix-certif', function () {
+    context('when application is Pix Certif', function () {
       it('returns http code 200 with accessToken when authentication is ok', async function () {
         //given
         databaseBuilder.factory.buildCertificationCenter({ id: 345 });
@@ -179,7 +178,11 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         databaseBuilder.factory.buildSupervisorAccess({ userId, sessionId: 121 });
         await databaseBuilder.commit();
 
-        const options = _getOptions({ scope: 'pix-certif', username: userEmailAddress, password: userPassword });
+        const options = _getServerOptions({
+          username: userEmailAddress,
+          password: userPassword,
+          applicationName: 'certif',
+        });
 
         await databaseBuilder.commit();
         // when
@@ -193,7 +196,7 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         expect(result.access_token).to.exist;
         const decodedAccessToken = await decodeIfValid(result.access_token);
         expect(decodedAccessToken).to.include({
-          aud: 'https://orga.pix.fr',
+          aud: 'https://certif.pix.fr',
         });
         expect(result.user_id).to.equal(userId);
       });
@@ -211,7 +214,11 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           databaseBuilder.factory.buildUserLogin({ userId, failureCount: 9 });
           await databaseBuilder.commit();
 
-          const options = _getOptions({ scope: 'pix', username: 'email@without.mb', password: 'wrongPassword' });
+          const options = _getServerOptions({
+            username: 'email@without.mb',
+            password: 'wrongPassword',
+            applicationName: 'app',
+          });
 
           // when
           const { statusCode } = await server.inject(options);
@@ -239,7 +246,11 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           });
           await databaseBuilder.commit();
 
-          const options = _getOptions({ scope: 'pix', username: 'email@without.mb', password: userPassword });
+          const options = _getServerOptions({
+            username: 'email@without.mb',
+            password: userPassword,
+            applicationName: 'app',
+          });
 
           // when
           const { statusCode } = await server.inject(options);
@@ -264,7 +275,11 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           });
           await databaseBuilder.commit();
 
-          const options = _getOptions({ scope: 'pix', username: 'email@without.mb', password: userPassword });
+          const options = _getServerOptions({
+            username: 'email@without.mb',
+            password: userPassword,
+            applicationName: 'app',
+          });
 
           // when
           const { statusCode } = await server.inject(options);
@@ -299,7 +314,7 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
               'content-type': 'application/x-www-form-urlencoded',
               cookie: `locale=${localeFromCookie}`,
               'x-forwarded-proto': 'https',
-              'x-forwarded-host': 'orga.pix.fr',
+              'x-forwarded-host': 'app.pix.fr',
             },
             payload: querystring.stringify({
               grant_type: 'password',
@@ -336,7 +351,7 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
               'content-type': 'application/x-www-form-urlencoded',
               cookie: `locale=${localeFromCookie}`,
               'x-forwarded-proto': 'https',
-              'x-forwarded-host': 'orga.pix.fr',
+              'x-forwarded-host': 'app.pix.fr',
             },
             payload: querystring.stringify({
               grant_type: 'password',
@@ -525,20 +540,19 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
   });
 });
 
-function _getOptions({ scope, password, username }) {
+function _getServerOptions({ username, password, applicationName }) {
   return {
     method: 'POST',
     url: '/api/token',
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
       'x-forwarded-proto': 'https',
-      'x-forwarded-host': 'orga.pix.fr',
+      'x-forwarded-host': `${applicationName}.pix.fr`,
     },
     payload: querystring.stringify({
       grant_type: 'password',
       username,
       password,
-      scope,
     }),
   };
 }
