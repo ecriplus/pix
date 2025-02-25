@@ -61,9 +61,11 @@ export const handleV3CertificationScoring = async ({
 
   const toBeCancelled = event instanceof CertificationCancelled;
 
-  const { allChallenges, askedChallenges, challengeCalibrations } = await dependencies.findByCertificationCourseId({
-    certificationCourseId,
-  });
+  const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
+    await dependencies.findByCertificationCourseIdAndAssessmentId({
+      certificationCourseId,
+      assessmentId,
+    });
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
 
   const abortReason = certificationCourse.getAbortReason();
@@ -89,7 +91,7 @@ export const handleV3CertificationScoring = async ({
     // so that in can be used during the assessment result creation
     allAnswers: [...candidateAnswers],
     allChallenges,
-    challenges: askedChallenges,
+    challenges: askedChallengesWithoutLiveAlerts,
     maxReachableLevelOnCertificationDate: certificationCourse.getMaxReachableLevelOnCertificationDate(),
     v3CertificationScoring,
     scoringDegradationService,
@@ -112,7 +114,7 @@ export const handleV3CertificationScoring = async ({
 
   const certificationAssessmentHistory = CertificationAssessmentHistory.fromChallengesAndAnswers({
     algorithm,
-    challenges: challengeCalibrations,
+    challenges: challengeCalibrationsWithoutLiveAlerts,
     allAnswers: candidateAnswers,
   });
 

@@ -3,9 +3,11 @@ import differenceBy from 'lodash/differenceBy.js';
 
 const debugScoringForV3Certification = Debug('pix:certif:v3:scoring');
 
-export const findByCertificationCourseId = async ({
+export const findByCertificationCourseIdAndAssessmentId = async ({
   certificationCourseId,
+  assessmentId,
   challengeCalibrationRepository,
+  certificationChallengeLiveAlertRepository,
   challengeRepository,
 }) => {
   const flashCompatibleChallenges = await challengeRepository.findFlashCompatibleWithoutLocale({
@@ -13,12 +15,22 @@ export const findByCertificationCourseId = async ({
   });
   debugScoringForV3Certification(`FlashCompatibleChallenges count: ${flashCompatibleChallenges.length}`);
 
-  return _findByCertificationCourseId({
+  const { allChallenges, askedChallenges, challengeCalibrations } = await _findByCertificationCourseId({
     compatibleChallenges: flashCompatibleChallenges,
     certificationCourseId,
     challengeCalibrationRepository,
     challengeRepository,
   });
+
+  const { challengeCalibrationsWithoutLiveAlerts, askedChallengesWithoutLiveAlerts } =
+    await _removeChallengesWithValidatedLiveAlerts(
+      challengeCalibrations,
+      assessmentId,
+      askedChallenges,
+      certificationChallengeLiveAlertRepository,
+    );
+
+  return { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts };
 };
 
 const _findByCertificationCourseId = async ({
@@ -45,6 +57,25 @@ const _findByCertificationCourseId = async ({
 
   return { allChallenges, askedChallenges, challengeCalibrations };
 };
+
+async function _removeChallengesWithValidatedLiveAlerts(
+  challengeCalibrations,
+  assessmentId,
+  askedChallenges,
+  certificationChallengeLiveAlertRepository,
+) {
+  const validatedLiveAlertChallengeIds =
+    await certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId({
+      assessmentId,
+    });
+  const challengeCalibrationsWithoutLiveAlerts = challengeCalibrations.filter(
+    (challengeCalibration) => !validatedLiveAlertChallengeIds.includes(challengeCalibration.id),
+  );
+  const askedChallengesWithoutLiveAlerts = askedChallenges.filter(
+    (askedChallenge) => !validatedLiveAlertChallengeIds.includes(askedChallenge.id),
+  );
+  return { challengeCalibrationsWithoutLiveAlerts, askedChallengesWithoutLiveAlerts };
+}
 
 function _restoreCalibrationValues(challengeCalibrations, askedChallenges) {
   challengeCalibrations.forEach((certificationChallenge) => {
