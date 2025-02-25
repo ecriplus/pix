@@ -1,5 +1,6 @@
 import { PIX_ADMIN, PIX_ORGA } from '../../../authorization/domain/constants.js';
 import { ForbiddenAccess, UserNotFoundError } from '../../../shared/domain/errors.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 import { createWarningConnectionEmail } from '../emails/create-warning-connection.email.js';
 import { MissingOrInvalidCredentialsError, PasswordNotMatching, UserShouldChangePasswordError } from '../errors.js';
 import { RefreshToken } from '../models/RefreshToken.js';
@@ -15,6 +16,7 @@ const authenticateUser = async function ({
   tokenService,
   userRepository,
   userLoginRepository,
+  authenticationMethodRepository,
   adminMemberRepository,
   emailRepository,
   emailValidationDemandRepository,
@@ -47,7 +49,6 @@ const authenticateUser = async function ({
     if (foundUser.hasBeenModified) {
       await userRepository.update({ id: foundUser.id, locale: foundUser.locale });
     }
-
     const userLogin = await userLoginRepository.findByUserId(foundUser.id);
     if (foundUser.email && userLogin?.shouldSendConnectionWarning()) {
       const validationToken = !foundUser.emailConfirmedAt
@@ -63,6 +64,11 @@ const authenticateUser = async function ({
       );
     }
     await userLoginRepository.updateLastLoggedAt({ userId: foundUser.id });
+
+    await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
+      userId: foundUser.id,
+      identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
+    });
 
     return { accessToken, refreshToken: refreshToken.value, expirationDelaySeconds };
   } catch (error) {
