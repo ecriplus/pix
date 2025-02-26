@@ -36,7 +36,7 @@
       <Trainings::TrainingDetailsCard @training={{@model}} />
       {{#if this.canEdit}}
         <div class="training-details-card__actions">
-          <PixButton @size="small" @variant="secondary" @triggerAction={{this.toggleEditMode}}>Modifier
+          <PixButton @size="small" @variant="primary" @triggerAction={{this.toggleEditMode}}>{{t "common.actions.edit"}}
           </PixButton>
           <Trainings::DuplicateTraining @onSubmit={{this.duplicateTraining}} />
         </div>
