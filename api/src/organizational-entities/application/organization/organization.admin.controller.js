@@ -1,4 +1,5 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { organizationTagCsvParser } from '../../infrastructure/parsers/csv/organization-tag-csv.parser.js';
 import { organizationForAdminSerializer } from '../../infrastructure/serializers/jsonapi/organizations-administration/organization-for-admin.serializer.js';
@@ -8,6 +9,13 @@ const addTagsToOrganizations = async function (request, h) {
   const organizationTags = await organizationTagCsvParser.getCsvData(filePath);
   await usecases.addTagsToOrganizations({ organizationTags });
   return h.response().code(204);
+};
+
+const archiveOrganization = async function (request, h, dependencies = { organizationForAdminSerializer }) {
+  const organizationId = request.params.id;
+  const userId = extractUserIdFromRequest(request);
+  const archivedOrganization = await usecases.archiveOrganization({ organizationId, userId });
+  return dependencies.organizationForAdminSerializer.serialize(archivedOrganization);
 };
 
 const attachChildOrganization = async function (request, h) {
@@ -59,6 +67,7 @@ const updateOrganizationInformation = async function (
 
 const organizationAdminController = {
   addTagsToOrganizations,
+  archiveOrganization,
   attachChildOrganization,
   addOrganizationFeatureInBatch,
   getOrganizationDetails,
