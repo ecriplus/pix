@@ -435,15 +435,15 @@
   },
   "warning-connection-email": {
     "params": {
-      "context": "We noticed a new connection to your Pix account after a period of inactivity of 12 months or more.",
-      "disclaimer": "If this connection really comes from you, no action is necessary.",
-      "hello": "Hello {firstName},",
-      "resetMyPassword": "Set a new password",
-      "signing": "Pix team",
-      "supportContact": "If in doubt or if you have any questions, our support is available to help you.",
-      "thanks": "Thank you for your vigilance,",
-      "warningMessage": "If this is not the case, we invite you to change your password immediately to secure your account by clicking on the button below:"
+      "context": "Nos dimos cuenta de una nueva conexión a su cuenta Pix después de un período de inactividad de 12 meses o más.",
+      "disclaimer": "Si esta conexión procede realmente de ti, no es necesaria ninguna acción.",
+      "hello": "Hola {firstName},",
+      "resetMyPassword": "Establecer una nueva contraseña",
+      "signing": "Equipo Pix",
+      "supportContact": "En caso de duda o si tiene alguna pregunta, nuestro servicio de asistencia está a su disposición para ayudarle.",
+      "thanks": "Gracias por su vigilancia,",
+      "warningMessage": "Gracias por su Si este no es el caso, le invitamos a cambiar su contraseña inmediatamente para asegurar su cuenta haciendo clic en el botón de abajo:"
     },
-    "subject": "Recent activity on your Pix account"
+    "subject": "Actividad reciente en su cuenta Pix"
   }
 }
