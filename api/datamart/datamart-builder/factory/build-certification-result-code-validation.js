@@ -1,4 +1,7 @@
+import { config } from '../../../src/shared/config.js';
 import { datamartBuffer } from '../datamart-buffer.js';
+
+const datamartDbSchema = config.parcoursup.databaseSchema;
 
 const buildCertificationResultCodeValidation = function ({
   verificationCode,
@@ -28,7 +31,7 @@ const buildCertificationResultCodeValidation = function ({
   };
 
   datamartBuffer.pushInsertable({
-    tableName: 'data_export_parcoursup_certif_result_code_validation',
+    tableName: `${datamartDbSchema}.data_export_parcoursup_certif_result_code_validation`,
     values,
   });
 };

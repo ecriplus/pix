@@ -124,6 +124,7 @@ const schema = Joi.object({
   DATABASE_CONNECTION_POOL_MAX_SIZE: Joi.number().integer().min(0).optional(),
   DATABASE_CONNECTION_POOL_MIN_SIZE: Joi.number().integer().min(0).optional(),
   DATABASE_URL: Joi.string().uri().optional(),
+  DATAMART_DATABASE_SCHEMA: Joi.string().optional(),
   DOMAIN_PIX: Joi.string().optional(),
   DOMAIN_PIX_APP: Joi.string().optional(),
   DOMAIN_PIX_ORGA: Joi.string().optional(),
@@ -388,6 +389,9 @@ const configuration = (function () {
     },
     metrics: {
       flushIntervalSeconds: _getNumber(process.env.DIRECT_METRICS_FLUSH_INTERVAL, 5),
+    },
+    parcoursup: {
+      databaseSchema: process.env.DATAMART_DATABASE_SCHEMA || 'public',
     },
     partner: {
       fetchTimeOut: ms(process.env.FETCH_TIMEOUT_MILLISECONDS || '20s'),
