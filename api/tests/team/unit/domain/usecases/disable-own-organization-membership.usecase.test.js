@@ -1,7 +1,7 @@
-import { disableOwnOrganizationMembership } from '../../../../lib/domain/usecases/disable-own-organization-membership.js';
-import { expect, sinon } from '../../../test-helper.js';
+import { disableOwnOrganizationMembership } from '../../../../../src/team/domain/usecases/disable-own-organization-membership.usecase.js';
+import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | disable-own-membership', function () {
+describe('Unit | Team | Domain | UseCase | disable-own-membership', function () {
   let membershipRepository;
   let clock;
   let now;
