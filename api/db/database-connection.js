@@ -6,6 +6,8 @@ import _ from 'lodash';
 import { config } from '../src/shared/config.js';
 import { monitoringTools } from '../src/shared/infrastructure/monitoring-tools.js';
 import { logger } from '../src/shared/infrastructure/utils/logger.js';
+import { configureConnectionExtension } from './knex-extensions.js';
+
 const { logging } = config;
 
 export class DatabaseConnection {
@@ -30,6 +32,8 @@ export class DatabaseConnection {
         }
       }
     });
+
+    configureConnectionExtension(this.knex);
   }
 
   async prepare() {
