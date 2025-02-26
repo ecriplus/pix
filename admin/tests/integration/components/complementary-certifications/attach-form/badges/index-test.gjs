@@ -1,4 +1,4 @@
-import { render as renderScreen } from '@1024pix/ember-testing-library';
+import { render as renderScreen, within } from '@1024pix/ember-testing-library';
 import Badges from 'pix-admin/components/complementary-certifications/attach-badges/badges/index';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -92,7 +92,9 @@ module('Integration | Component | complementary-certifications/attach-badges/bad
 
         // then
         assert.dom(await screen.queryByRole('alert')).doesNotExist();
-        assert.dom(screen.getByRole('row', { name: 'Résultat thématique 1000 canards' })).exists();
+        const table = screen.getByRole('table', { name: 'Liste des résultats thématiques' });
+        assert.dom(within(table).getByRole('cell', { name: '1000' })).exists();
+        assert.dom(within(table).getByRole('cell', { name: 'canards' })).exists();
       });
     });
   });

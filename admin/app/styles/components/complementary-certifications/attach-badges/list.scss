@@ -12,41 +12,9 @@
 
     table {
       height: 100%;
-      margin-top: var(--pix-spacing-4x);
-      margin-bottom: var(--pix-spacing-4x);
-
-      thead tr{
-        height: 72px;
-
-        th {
-          padding: var(--pix-spacing-4x);
-          border: 1px solid var(--pix-neutral-20);
-        }
-      }
 
       tbody {
         vertical-align: top;
-
-        tr {
-          height: 180px;
-
-          th {
-            font-weight: normal
-          }
-
-          th, td {
-            padding: var(--pix-spacing-4x);
-            border: 1px solid var(--pix-neutral-20);
-
-            .pix-textarea, .pix-textarea textarea {
-              height: 100%;
-            }
-          }
-        }
-
-        > tr:nth-child(even) {
-          background-color: rgb(0 0 0 / 3%);
-        }
       }
     }
   }
