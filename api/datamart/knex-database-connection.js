@@ -5,13 +5,13 @@ import { config } from '../src/shared/config.js';
 
 const { environment } = config;
 
-const datamartDatabaseConnection = new DatabaseConnection(datamartKnexConfigs[environment]);
-const configuredDatamartKnex = datamartDatabaseConnection.knex;
+const databaseConnection = new DatabaseConnection(datamartKnexConfigs[environment]);
+const configuredDatamartKnex = databaseConnection.knex;
 
-databaseConnections.addConnection(datamartDatabaseConnection);
+databaseConnections.addConnection(databaseConnection);
 
 async function disconnect() {
   await databaseConnections.disconnect();
 }
 
-export { configuredDatamartKnex as datamartKnex, disconnect };
+export { databaseConnection, configuredDatamartKnex as datamartKnex, disconnect };

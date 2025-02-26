@@ -4,17 +4,13 @@ import { databaseConnections } from './database-connections.js';
 import knexConfigs from './knexfile.js';
 
 const { environment } = config;
-const liveDatabaseConnection = new DatabaseConnection(knexConfigs[environment]);
-const configuredLiveKnex = liveDatabaseConnection.knex;
+const databaseConnection = new DatabaseConnection(knexConfigs[environment]);
+const configuredLiveKnex = databaseConnection.knex;
 
-databaseConnections.addConnection(liveDatabaseConnection);
+databaseConnections.addConnection(databaseConnection);
 
 async function disconnect() {
-  return liveDatabaseConnection.disconnect();
+  return databaseConnection.disconnect();
 }
 
-async function emptyAllTables() {
-  return liveDatabaseConnection.emptyAllTables();
-}
-
-export { disconnect, emptyAllTables, configuredLiveKnex as knex, liveDatabaseConnection };
+export { databaseConnection, disconnect, configuredLiveKnex as knex };
