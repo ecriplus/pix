@@ -427,15 +427,15 @@
   },
   "warning-connection-email": {
     "params": {
-      "context": "We noticed a new connection to your Pix account after a period of inactivity of 12 months or more.",
-      "disclaimer": "If this connection really comes from you, no action is necessary.",
-      "hello": "Hello {firstName},",
-      "resetMyPassword": "Set a new password",
+      "context": "We hebben een nieuwe verbinding met je Pix-account opgemerkt na een periode van inactiviteit van 12 maanden of meer.",
+      "disclaimer": "Als deze verbinding echt van jou komt, is er geen actie nodig.",
+      "hello": "Hallo {firstName},",
+      "resetMyPassword": "Een nieuw wachtwoord instellen",
       "signing": "Pix team",
-      "supportContact": "If in doubt or if you have any questions, our support is available to help you.",
+      "supportContact": "Als je twijfelt of vragen hebt, staat onze support klaar om je te helpen.",
       "thanks": "Thank you for your vigilance,",
-      "warningMessage": "If this is not the case, we invite you to change your password immediately to secure your account by clicking on the button below:"
+      "warningMessage": "Als dit niet het geval is, nodigen we je uit om je wachtwoord onmiddellijk te wijzigen om je account te beveiligen door op de onderstaande knop te klikken:"
     },
-    "subject": "Recent activity on your Pix account"
+    "subject": "Recente activiteit op je Pix-account"
   }
 }

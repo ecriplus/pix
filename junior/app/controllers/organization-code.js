@@ -12,8 +12,8 @@ export default class Home extends Controller {
   }
 
   @action
-  updateCode(code) {
-    this.schoolCode = code;
+  handleCode(event) {
+    this.schoolCode = event.target.value;
   }
 
   @action

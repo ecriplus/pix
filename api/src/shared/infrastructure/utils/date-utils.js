@@ -33,10 +33,6 @@ function formatDate(params, outputFormat) {
   return dayjs(...params).format(outputFormat);
 }
 
-function getNowDate() {
-  return new Date();
-}
-
 /**
  * @param {Date} date
  * @returns {Date} a new Date object
@@ -48,4 +44,4 @@ function anonymizeGeneralizeDate(date) {
   return newDate;
 }
 
-export { anonymizeGeneralizeDate, convertDateValue, getNowDate, isValidDate };
+export { anonymizeGeneralizeDate, convertDateValue, isValidDate };

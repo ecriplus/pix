@@ -16,6 +16,7 @@ import EvolutionHeader from './evolution-header';
       @selectedDivisions={{@selectedDivisions}}
       @selectedGroups={{@selectedGroups}}
       @selectedBadges={{@selectedBadges}}
+      @selectedUnacquiredBadges={{@selectedUnacquiredBadges}}
       @selectedStages={{@selectedStages}}
       @searchFilter={{@searchFilter}}
       @rowCount={{@participations.meta.rowCount}}

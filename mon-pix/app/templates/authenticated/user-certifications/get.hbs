@@ -1,8 +1,13 @@
 <PixBackgroundHeader class="user-certifications-page-get">
-
-  <PixReturnTo @route="authenticated.user-certifications" @shade="neutral-light">
+  <PixButtonLink
+    @route="authenticated.user-certifications"
+    @variant="transparent-dark"
+    @iconBefore="arrowLeft"
+    class="user-certifications-page__previous-button"
+  >
     {{t "pages.certificate.back-link"}}
-  </PixReturnTo>
+  </PixButtonLink>
+
   <PixBlock class="user-certifications-page-get__header">
     <UserCertificationsDetailHeader @certification={{@model}} />
   </PixBlock>

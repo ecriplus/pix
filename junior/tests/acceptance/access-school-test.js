@@ -73,9 +73,7 @@ module('Acceptance | School', function (hooks) {
         // when
         const screen = await visit('/organization-code');
 
-        const code = ['M', 'I', 'N', 'I', 'P', 'I', 'X', 'O', 'U'];
-
-        code.forEach((element, index) => fillIn(screen.getByLabelText(`Champ numéro ${index + 1}`), element));
+        fillIn(screen.getByRole('textbox', { name: t('pages.home.code-description') }), 'MINIPIXOU');
         await clickByText(t('pages.home.go-to-school'));
         // then
         assert.strictEqual(currentURL(), '/schools/MINIPIXOU');

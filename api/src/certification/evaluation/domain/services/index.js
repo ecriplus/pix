@@ -6,6 +6,7 @@ import * as flashAlgorithmService from '../../../../certification/flash-certific
 // TODO: cross-bounded context violation
 import * as scoringDegradationService from '../../../../certification/scoring/domain/services/scoring-degradation-service.js';
 import * as scoringCertificationService from '../../../../certification/shared/domain/services/scoring-certification-service.js';
+import * as certificationChallengeLiveAlertRepository from '../../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 // TODO: cross-bounded context violation
 import * as scoringService from '../../../../evaluation/domain/services/scoring/scoring-service.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
@@ -32,6 +33,7 @@ import * as challengeCalibrationRepository from '../../infrastructure/repositori
  * @typedef {scoringDegradationService} ScoringDegradationService
  * @typedef {certificationAssessmentHistoryRepository} CertificationAssessmentHistoryRepository
  * @typedef {challengeCalibrationRepository} ChallengeCalibrationRepository
+ * @typedef {certificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {scoringConfigurationRepository} ScoringConfigurationRepository
  * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {answerRepository} AnswerRepository
@@ -52,6 +54,7 @@ const dependencies = {
   scoringConfigurationRepository,
   answerRepository,
   certificationAssessmentHistoryRepository,
+  certificationChallengeLiveAlertRepository,
   flashAlgorithmService,
   challengeCalibrationRepository,
   challengeRepository,

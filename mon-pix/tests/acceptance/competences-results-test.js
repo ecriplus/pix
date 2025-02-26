@@ -2,14 +2,17 @@ import { visit } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
 import { find } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
 import { authenticate } from '../helpers/authentication';
+import setupIntl from '../helpers/setup-intl';
 
 module('Acceptance | competences results', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks);
   let user;
   const competenceId = 10;
   const assessmentId = 10;
@@ -59,11 +62,12 @@ module('Acceptance | competences results', function (hooks) {
 
     test('should display a return link to competences', async function (assert) {
       // when
-      await visit(`/competences/${competenceId}/resultats/${assessmentId}`);
+      const screen = await visit(`/competences/${competenceId}/resultats/${assessmentId}`);
 
       // then
-      assert.dom('.pix-return-to').exists();
-      assert.strictEqual(find('.pix-return-to').getAttribute('href'), '/competences');
+      const previousButton = screen.getByRole('link', { name: t('navigation.back-to-profile') });
+      assert.dom(previousButton).exists();
+      assert.strictEqual(previousButton.getAttribute('href'), '/competences');
     });
 
     module('When user obtained 0 pix', function (hooks) {

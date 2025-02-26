@@ -8,14 +8,12 @@ import * as certificationVersionRepository from '../../../certification/results/
 import { usecases as certificationUsecases } from '../../../certification/session-management/domain/usecases/index.js';
 import { usecases as devcompUsecases } from '../../../devcomp/domain/usecases/index.js';
 import { Answer } from '../../../evaluation/domain/models/Answer.js';
-import { ValidatorAlwaysOK } from '../../../evaluation/domain/models/ValidatorAlwaysOK.js';
 import { evaluationUsecases } from '../../../evaluation/domain/usecases/index.js';
 import * as competenceEvaluationSerializer from '../../../evaluation/infrastructure/serializers/jsonapi/competence-evaluation-serializer.js';
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import { config } from '../../config.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { AssessmentEndedError } from '../../domain/errors.js';
-import { Examiner } from '../../domain/models/Examiner.js';
 import * as assessmentRepository from '../../infrastructure/repositories/assessment-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import * as assessmentSerializer from '../../infrastructure/serializers/jsonapi/assessment-serializer.js';
@@ -139,14 +137,39 @@ const autoValidateNextChallenge = async function (request, h) {
     challengeId: assessment.lastChallengeId,
     value: 'FAKE_ANSWER_WITH_AUTO_VALIDATE_NEXT_CHALLENGE',
   });
-  const validatorAlwaysOK = new ValidatorAlwaysOK();
-  const alwaysTrueExaminer = new Examiner({ validator: validatorAlwaysOK });
-  await usecases.correctAnswerThenUpdateAssessment({
-    answer: fakeAnswer,
-    userId,
-    locale,
-    examiner: alwaysTrueExaminer,
-  });
+  if (assessment.isCompetenceEvaluation()) {
+    await evaluationUsecases.saveAndCorrectAnswerForCompetenceEvaluation({
+      answer: fakeAnswer,
+      assessment,
+      userId,
+      locale,
+      forceOKAnswer: true,
+    });
+  } else if (assessment.isForCampaign()) {
+    await evaluationUsecases.saveAndCorrectAnswerForCampaign({
+      answer: fakeAnswer,
+      assessment,
+      userId,
+      locale,
+      forceOKAnswer: true,
+    });
+  } else if (assessment.isCertification()) {
+    await evaluationUsecases.saveAndCorrectAnswerForCertification({
+      answer: fakeAnswer,
+      assessment,
+      userId,
+      locale,
+      forceOKAnswer: true,
+    });
+  } else {
+    await evaluationUsecases.saveAndCorrectAnswerForDemoAndPreview({
+      answer: fakeAnswer,
+      assessment,
+      userId,
+      locale,
+      forceOKAnswer: true,
+    });
+  }
   return h.response().code(204);
 };
 

@@ -1,10 +1,14 @@
 {{page-title (t "pages.shared-certification.title")}}
 
 <PixBackgroundHeader class="user-certifications-page-get">
-
-  <PixReturnTo @route="fill-in-certificate-verification-code" @shade="neutral-light">
+  <PixButtonLink
+    @route="fill-in-certificate-verification-code"
+    @variant="transparent-dark"
+    @iconBefore="arrowLeft"
+    class="user-certifications-page__previous-button"
+  >
     {{t "pages.shared-certification.back-link"}}
-  </PixReturnTo>
+  </PixButtonLink>
 
   <PixBlock class="user-certifications-page-get__header">
     <UserCertificationsDetailHeader @certification={{this.model}} />

@@ -113,7 +113,7 @@ async function _handleV3CertificationScoring({
     certificationAssessment,
     emitter,
     locale,
-    dependencies: { findByCertificationCourseId: services.findByCertificationCourseId },
+    dependencies: { findByCertificationCourseIdAndAssessmentId: services.findByCertificationCourseIdAndAssessmentId },
   });
 
   certificationCourse.complete({ now: new Date() });

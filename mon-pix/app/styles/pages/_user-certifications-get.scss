@@ -23,6 +23,15 @@
   }
 }
 
+.user-certifications-page {
+
+  &__previous-button {
+    width: fit-content;
+    margin-bottom: var(--pix-spacing-3x);
+    border: 1px solid transparent;
+  }
+}
+
 @mixin contentInColumn() {
 
   .user-certifications-page-get {

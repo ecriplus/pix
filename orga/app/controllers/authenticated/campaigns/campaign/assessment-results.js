@@ -12,6 +12,7 @@ export default class AssessmentResultsController extends Controller {
   @tracked divisions = [];
   @tracked groups = [];
   @tracked badges = [];
+  @tracked unacquiredBadges = [];
   @tracked stages = [];
   @tracked search = null;
 
@@ -42,7 +43,10 @@ export default class AssessmentResultsController extends Controller {
     this.pageNumber = null;
     this.divisions = [];
     this.groups = [];
+
     this.badges = [];
+    this.unacquiredBadges = [];
+
     this.stages = [];
     this.search = null;
   }
