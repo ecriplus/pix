@@ -564,10 +564,12 @@
         "started-at": "Gestart op {date}",
         "tag": {
           "completed": "Om te sturen",
+          "deleted": "Inactief",
           "disabled": "Inactief",
           "finished": "Afgewerkt",
           "started": "Actief"
         },
+        "text-deleted": "Cursus gedeactiveerd door uw organisatie.'<br>'U kunt niet langer op deze cursus handelen.",
         "text-disabled": "Cursus gedeactiveerd door uw organisatie.'<br> 'U kunt uw resultaten niet langer verzenden."
       },
       "title": "Test"

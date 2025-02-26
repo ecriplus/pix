@@ -6,4 +6,6 @@
   <CampaignParticipationOverview::Card::Ended @model={{@model}} />
 {{else if (eq @model.cardStatus "DISABLED")}}
   <CampaignParticipationOverview::Card::Disabled @model={{@model}} />
+{{else if (eq @model.cardStatus "DELETED")}}
+  <CampaignParticipationOverview::Card::Deleted @model={{@model}} />
 {{/if}}

@@ -1,6 +1,7 @@
 import { Response } from 'miragejs';
 
 import findPaginatedUserTrainings from './find-paginated-user-trainings';
+import getAnonymisedCampaignAssessments from './get-anonymised-campaign-assessments';
 import getAuthenticatedUser from './get-authenticated-user';
 import getCampaignParticipationResult from './get-campaign-participation-result';
 import getMyAccount from './get-my-account.js';
@@ -48,6 +49,7 @@ export default function index(config) {
   config.get('/users/:id/profile', getProfile);
   config.get('/users/:id/campaign-participations', getUserCampaignParticipations);
   config.get('/users/:id/campaign-participation-overviews', getUserCampaignParticipationOverviews);
+  config.get('/users/:id/anonymised-campaign-assessments', getAnonymisedCampaignAssessments);
   config.get('/users/:id/trainings', findPaginatedUserTrainings);
 
   config.get('/users/:id/authentication-methods', (schema, request) => {

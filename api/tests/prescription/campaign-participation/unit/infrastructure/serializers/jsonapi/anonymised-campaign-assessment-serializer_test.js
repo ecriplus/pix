@@ -20,7 +20,7 @@ describe('Unit | Serializer | JSONAPI | anonymised-campaign-assessment-serialize
       expect(json).to.deep.equal({
         data: [
           {
-            type: 'anonymised-campaign-assessment',
+            type: 'anonymised-campaign-assessments',
             id: assessment.id.toString(),
             attributes: {
               'updated-at': assessment.updatedAt,

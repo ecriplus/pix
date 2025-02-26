@@ -569,10 +569,12 @@
         "started-at": "Started the {date}",
         "tag": {
           "completed": "To be submitted",
-          "disabled": "Inactive",
+          "deleted": "Inactive",
+          "disabled": "Route deactivated by your organization.'<br>'You can no longer act on this route.",
           "finished": "Finished",
           "started": "In progress"
         },
+        "text-deleted": "This customised test has been deactivated by your organization.'<br>'You can no longer act on this test.",
         "text-disabled": "This customised test has been deactivated by your organisation.'<br>'It is no longer possible to submit your results."
       },
       "title": "Customised test"
