@@ -848,6 +848,18 @@
           "status": "Statut :",
           "title": "Titre public :"
         },
+        "duplicate": {
+          "button": {
+            "label": "Dupliquer ce contenu formatif"
+          },
+          "modal": {
+            "instruction": "Cette action dupliquera le contenu formatif avec ses déclencheurs.",
+            "title": "Dupliquer le contenu formatif ?"
+          },
+          "notifications": {
+            "success": "Le contenu formatif a bien été dupliqué !"
+          }
+        },
         "list": {
           "caption": "Liste des contenus formatifs",
           "goalThreshold": "Objectif à ne pas dépasser",
