@@ -149,6 +149,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
         localeFromCookie: 'fr-FR',
         language: 'fr',
         audience: 'https://app.pix.fr',
+        requestedApplication: new RequestedApplication('app'),
       });
       expect(response.statusCode).to.equal(200);
       expect(response.source).to.deep.equal({

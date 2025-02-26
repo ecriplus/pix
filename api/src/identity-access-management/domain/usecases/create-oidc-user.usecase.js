@@ -13,6 +13,8 @@ import { UserToCreate } from '../models/UserToCreate.js';
  *   authenticationMethodRepository: AuthenticationMethodRepository,
  *   userToCreateRepository: UserToCreateRepository,
  *   userLoginRepository: UserLoginRepository,
+ *   lastUserApplicationConnectionsRepository: LastUserApplicationConnectionsRepository,
+ *   requestedApplication: RequestedApplication,
  * }} params
  * @return {Promise<{accessToken: string, logoutUrlUUID: string}>}
  */
@@ -27,6 +29,8 @@ async function createOidcUser({
   authenticationMethodRepository,
   userToCreateRepository,
   userLoginRepository,
+  lastUserApplicationConnectionsRepository,
+  requestedApplication,
 }) {
   const sessionContentAndUserInfo = await authenticationSessionService.getByKey(authenticationKey);
   if (!sessionContentAndUserInfo) {
@@ -77,6 +81,11 @@ async function createOidcUser({
   }
 
   await userLoginRepository.updateLastLoggedAt({ userId });
+  await lastUserApplicationConnectionsRepository.upsert({
+    userId,
+    application: requestedApplication.applicationName,
+    lastLoggedAt: new Date(),
+  });
 
   return { accessToken, logoutUrlUUID };
 }

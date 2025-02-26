@@ -1,10 +1,14 @@
 import { AuthenticationKeyExpired } from '../../../../../src/identity-access-management/domain/errors.js';
 import { createOidcUser } from '../../../../../src/identity-access-management/domain/usecases/create-oidc-user.usecase.js';
+import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { UserAlreadyExistsWithAuthenticationMethodError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-user', function () {
-  let authenticationMethodRepository, userToCreateRepository, userLoginRepository;
+  let authenticationMethodRepository,
+    userToCreateRepository,
+    userLoginRepository,
+    lastUserApplicationConnectionsRepository;
   let authenticationSessionService, oidcAuthenticationService, oidcAuthenticationServiceRegistry;
   let clock;
   let now;
@@ -36,6 +40,10 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
 
     userLoginRepository = {
       updateLastLoggedAt: sinon.stub(),
+    };
+
+    lastUserApplicationConnectionsRepository = {
+      upsert: sinon.stub(),
     };
   });
 
@@ -95,6 +103,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
     const idToken = 'idToken';
     const language = 'nl';
     const audience = 'htttps://app.pix.fr';
+    const requestedApplication = new RequestedApplication('app');
     authenticationSessionService.getByKey.withArgs('AUTHENTICATION_KEY').resolves({
       sessionContent: { idToken, accessToken: 'accessToken' },
       userInfo: { firstName: 'Jean', lastName: 'Heymar', externalIdentityId: 'externalId' },
@@ -120,6 +129,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
       authenticationMethodRepository,
       userToCreateRepository,
       userLoginRepository,
+      lastUserApplicationConnectionsRepository,
+      requestedApplication,
     });
 
     // then

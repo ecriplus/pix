@@ -62,6 +62,7 @@ async function createUser(request, h, dependencies = { requestResponseUtils }) {
   const localeFromCookie = request.state?.locale;
   const language = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
   const origin = getForwardedOrigin(request.headers);
+  const requestedApplication = RequestedApplication.fromOrigin(origin);
 
   const { accessToken: access_token, logoutUrlUUID: logout_url_uuid } = await usecases.createOidcUser({
     authenticationKey,
@@ -69,6 +70,7 @@ async function createUser(request, h, dependencies = { requestResponseUtils }) {
     localeFromCookie,
     language,
     audience: origin,
+    requestedApplication,
   });
 
   return h.response({ access_token, logout_url_uuid }).code(200);

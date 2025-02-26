@@ -505,6 +505,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
         const request = {
           method: 'POST',
           url: '/api/oidc/users',
+          headers: generateAuthenticatedUserRequestHeaders(),
           payload: {
             data: {
               attributes: {
