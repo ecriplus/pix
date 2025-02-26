@@ -18,6 +18,7 @@ import sinonChai from 'sinon-chai';
 
 import { DatamartBuilder } from '../datamart/datamart-builder/datamart-builder.js';
 import { knex as datamartKnex } from '../datamart/knex-database-connection.js';
+import { knex as datawarehouseKnex } from '../datawarehouse/knex-database-connection.js';
 import { DatabaseBuilder } from '../db/database-builder/database-builder.js';
 import { disconnect, knex } from '../db/knex-database-connection.js';
 import { createMaddoServer } from '../server.maddo.js';
@@ -338,6 +339,7 @@ export {
   databaseBuilder,
   datamartBuilder,
   datamartKnex,
+  datawarehouseKnex,
   domainBuilder,
   EMPTY_BLANK_AND_NULL,
   expect,

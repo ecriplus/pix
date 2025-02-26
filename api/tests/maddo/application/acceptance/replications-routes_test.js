@@ -2,6 +2,7 @@ import { replications } from '../../../../src/maddo/infrastructure/repositories/
 import {
   createMaddoServer,
   datamartKnex,
+  datawarehouseKnex,
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
 } from '../../../test-helper.js';
@@ -15,8 +16,8 @@ describe('Maddo | Application | Acceptance | Replications', function () {
         t.string('firstName').notNullable();
         t.string('lastName').notNullable();
       };
-      await datamartKnex.schema.dropTableIfExists('to-replicate');
-      await datamartKnex.schema.createTable('to-replicate', schema);
+      await datawarehouseKnex.schema.dropTableIfExists('to-replicate');
+      await datawarehouseKnex.schema.createTable('to-replicate', schema);
       await datamartKnex.schema.dropTableIfExists('replication');
       await datamartKnex.schema.createTable('replication', schema);
       server = await createMaddoServer();
@@ -25,7 +26,7 @@ describe('Maddo | Application | Acceptance | Replications', function () {
     it('should run given replication', async function () {
       // given
       const replication = 'my-replication';
-      await datamartKnex('to-replicate').insert([
+      await datawarehouseKnex('to-replicate').insert([
         { firstName: 'first1', lastName: 'last1' },
         { firstName: 'first2', lastName: 'last2' },
       ]);
