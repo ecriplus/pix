@@ -2,12 +2,11 @@ const jsonwebtoken = require('jsonwebtoken');
 const { addCompareSnapshotCommand } = require('cypress-visual-regression/dist/command');
 require('@testing-library/cypress/add-commands');
 
-function getLoginBody(username, password, scope) {
+function getLoginBody(username, password) {
   return {
     username,
     password,
     grant_type: 'password',
-    scope,
   };
 }
 
@@ -21,7 +20,6 @@ function setEmberSimpleAuthSession(response) {
         access_token: response.body.access_token,
         user_id: response.body.user_id,
         refresh_token: response.body.refresh_token,
-        scope: response.body.scope,
         expires_in: 1000,
       },
     })
@@ -34,7 +32,7 @@ Cypress.Commands.add("login", (username, password, url) => {
     url: `${Cypress.env('APP_URL')}/api/token`,
     method: 'POST',
     form: true,
-    body: getLoginBody(username, password, 'mon-pix'),
+    body: getLoginBody(username, password),
   }).then(setEmberSimpleAuthSession);
   if (url) cy.visitMonPix(url);
 
@@ -47,7 +45,7 @@ Cypress.Commands.add('loginOrga', (username, password) => {
     url: `${Cypress.env('ORGA_URL')}/api/token`,
     method: 'POST',
     form: true,
-    body: getLoginBody(username, password, 'pix-orga'),
+    body: getLoginBody(username, password),
   }).then(setEmberSimpleAuthSession);
   cy.wait(["@getCurrentUser"]);
 });
