@@ -1,4 +1,5 @@
 import { FixValidatedLiveAlertCertificationChallengeIds } from '../../../../scripts/certification/fix-validated-live-alert-certification-challenge-ids.js';
+import { AlgorithmEngineVersion } from '../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
 
@@ -8,7 +9,7 @@ describe('Integration | Scripts | Certification | fix-validated-live-alert-certi
       it('should fix the capacities challenges ids', async function () {
         // given
         const certificationCourseId = 321;
-        const options = { dryRun: false, courseIds: [certificationCourseId] };
+        const options = { dryRun: false, batchSize: 10 };
         const logger = {
           info: sinon.stub(),
           debug: sinon.stub(),
@@ -18,6 +19,7 @@ describe('Integration | Scripts | Certification | fix-validated-live-alert-certi
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           id: certificationCourseId,
           userId: user.id,
+          version: AlgorithmEngineVersion.V3,
         });
         const assessment = databaseBuilder.factory.buildAssessment({
           certificationCourseId: certificationCourse.id,
