@@ -1,4 +1,4 @@
-import { datamartKnex } from '../../../datamart/knex-database-connection.js';
+import { knex as datamartKnex } from '../../../datamart/knex-database-connection.js';
 import { logger } from '../../shared/infrastructure/utils/logger.js';
 import { extractTransformAndLoadData } from '../domain/usecases/extract-transform-and-load-data.js';
 import * as replicationRepository from '../infrastructure/repositories/replication-repository.js';

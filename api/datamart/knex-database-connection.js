@@ -6,7 +6,7 @@ import datamartKnexConfigs from './knexfile.js';
 const { environment } = config;
 
 const databaseConnection = new DatabaseConnection(datamartKnexConfigs[environment]);
-const configuredDatamartKnex = databaseConnection.knex;
+const { knex } = databaseConnection;
 
 databaseConnections.addConnection(databaseConnection);
 
@@ -14,4 +14,4 @@ async function disconnect() {
   await databaseConnections.disconnect();
 }
 
-export { databaseConnection, configuredDatamartKnex as datamartKnex, disconnect };
+export { databaseConnection, disconnect, knex };
