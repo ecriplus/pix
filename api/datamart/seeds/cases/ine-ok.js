@@ -7,6 +7,7 @@ import {
   generateFirstName,
   generatePixScore,
   generateStatus,
+  getCertificationDate,
   getFormattedBirthdate,
   nationalStudentIdGenerator,
 } from './tools.js';
@@ -26,7 +27,7 @@ export default function () {
     birthdate: getFormattedBirthdate(),
     status: generateStatus(),
     pix_score: generatePixScore(),
-    certification_date: faker.date.between({ from: '2024-01-01', to: '2024-11-04' }),
+    certification_date: getCertificationDate(),
   };
 
   return COMPETENCES.map((competence) => ({

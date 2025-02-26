@@ -7,6 +7,7 @@ import {
   generateFirstName,
   generatePixScore,
   generateStatus,
+  getCertificationDate,
   getFormattedBirthdate,
   nationalStudentIdGenerator,
   orgaUAIGenerator,
@@ -35,7 +36,7 @@ export default function () {
     birthdate: getFormattedBirthdate(), // We want different birthdate
     status: generateStatus(),
     pix_score: generatePixScore(),
-    certification_date: faker.date.between({ from: '2024-01-01', to: '2024-11-04' }),
+    certification_date: getCertificationDate(),
   };
 
   const studentTwoBase = {
@@ -47,7 +48,7 @@ export default function () {
     birthdate: getFormattedBirthdate(), // We want different birthdate
     status: generateStatus(),
     pix_score: generatePixScore(),
-    certification_date: faker.date.between({ from: '2024-01-01', to: '2024-11-04' }),
+    certification_date: getCertificationDate(),
   };
 
   return [studentOneBase, studentTwoBase].flatMap((student) => {

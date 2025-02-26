@@ -79,7 +79,8 @@ const nationalStudentIdGenerator = ({ startingFrom = 100000000, ineSuffix = 'xx'
   return () => ineGenerator.next().value + ineSuffix;
 };
 
-const verificationCodeGenerator = ({ startingFrom = 100000000 } = {}) => {
+// Eight characters only for the verification code
+const verificationCodeGenerator = ({ startingFrom = 10000000 } = {}) => {
   const verificationCodeGenerator = incrementalGenerator(startingFrom);
   return () => 'P-' + verificationCodeGenerator.next().value;
 };
@@ -91,6 +92,11 @@ const generateFirstName = () => {
 const getFormattedBirthdate = () => {
   const birthdate = faker.date.birthdate({ min: 13, max: 44, mode: 'age' });
   return birthdate.toISOString().split('T')[0]; // Format "YYYY-MM-DD"
+};
+
+const getCertificationDate = () => {
+  // V3 certifications start after 04/11/2024
+  return faker.date.between({ from: '2024-11-04', to: new Date() });
 };
 
 const generateStatus = () => {
@@ -120,6 +126,7 @@ export {
   generateFirstName,
   generatePixScore,
   generateStatus,
+  getCertificationDate,
   getFormattedBirthdate,
   nationalStudentIdGenerator,
   orgaUAIGenerator,

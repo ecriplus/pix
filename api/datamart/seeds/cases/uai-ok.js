@@ -1,11 +1,10 @@
-import { faker } from '@faker-js/faker';
-
 import {
   COMPETENCES,
   generateCertifCourseId,
   generateCompetenceLevel,
   generatePixScore,
   generateStatus,
+  getCertificationDate,
   orgaUAIGenerator,
 } from './tools.js';
 
@@ -26,7 +25,7 @@ export default function () {
     birthdate: '1999-11-12',
     status: generateStatus(),
     pix_score: generatePixScore(),
-    certification_date: faker.date.between({ from: '2024-01-01', to: '2024-11-04' }),
+    certification_date: getCertificationDate(),
   };
 
   return COMPETENCES.map((competence) => ({
