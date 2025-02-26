@@ -4,7 +4,7 @@ import pick from 'lodash/pick.js';
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 
-import { disconnect } from '../../../../db/knex-database-connection.js';
+import { databaseConnections } from '../../../../db/database-connections.js';
 import { learningContentCache } from '../../infrastructure/caches/learning-content-cache.js';
 import { quitAllStorages } from '../../infrastructure/key-value-storages/index.js';
 import { child } from '../../infrastructure/utils/logger.js';
@@ -62,7 +62,7 @@ export class ScriptRunner {
       logger.error(error);
       process.exitCode = 1;
     } finally {
-      await disconnect();
+      await databaseConnections.disconnect();
       await learningContentCache.quit();
       await quitAllStorages();
     }

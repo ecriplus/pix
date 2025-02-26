@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 import PgBoss from 'pg-boss';
 
-import { disconnect } from '../../db/knex-database-connection.js';
+import { databaseConnections } from '../../db/database-connections.js';
 import { logger } from '../../src/shared/infrastructure/utils/logger.js';
 
 async function main() {
@@ -20,6 +20,6 @@ async function main() {
     logger.error(error);
     process.exitCode = 1;
   } finally {
-    await disconnect();
+    await databaseConnections.disconnect();
   }
 })();

@@ -1,6 +1,7 @@
 import 'dotenv/config';
 
-import { disconnect, liveDatabaseConnection } from './db/knex-database-connection.js';
+import { databaseConnections } from './db/database-connections.js';
+import { liveDatabaseConnection } from './db/knex-database-connection.js';
 import { createServer } from './server.js';
 import { config, schema as configSchema } from './src/shared/config.js';
 import { learningContentCache } from './src/shared/infrastructure/caches/learning-content-cache.js';
@@ -40,7 +41,7 @@ async function _exitOnSignal(signal) {
     await server.oppsy.stop();
   }
   logger.info('Closing connections to databases...');
-  await disconnect();
+  await databaseConnections.disconnect();
   logger.info('Closing connections to cache...');
   await learningContentCache.quit();
   logger.info('Closing connections to storages...');

@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-import { disconnect } from './db/knex-database-connection.js';
+import { databaseConnections } from './db/database-connections.js';
 import { createMaddoServer } from './server.maddo.js';
 import { schema as configSchema } from './src/shared/config.js';
 import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
@@ -27,7 +27,7 @@ async function _exitOnSignal(signal) {
     await server.oppsy.stop();
   }
   logger.info('Closing connections to databases...');
-  await disconnect();
+  await databaseConnections.disconnect();
   logger.info('Closing connections to cache...');
   await quitAllStorages();
   logger.info('Closing connections to redis monitor...');

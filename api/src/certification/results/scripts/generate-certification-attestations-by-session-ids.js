@@ -10,7 +10,7 @@ import * as url from 'node:url';
 
 import i18n from 'i18n';
 
-import { disconnect } from '../../../../db/knex-database-connection.js';
+import { databaseConnections } from '../../../../db/database-connections.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { learningContentCache as cache } from '../../../shared/infrastructure/caches/learning-content-cache.js';
 import { options } from '../../../shared/infrastructure/plugins/i18n.js';
@@ -96,7 +96,7 @@ const isLaunchedFromCommandLine = process.argv[1] === modulePath;
       logger.error(error);
       process.exitCode = 1;
     } finally {
-      await disconnect();
+      await databaseConnections.disconnect();
       await cache.quit();
     }
   }

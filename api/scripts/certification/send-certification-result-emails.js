@@ -5,7 +5,7 @@ import * as url from 'node:url';
 
 import i18n from 'i18n';
 
-import { disconnect } from '../../db/knex-database-connection.js';
+import { databaseConnections } from '../../db/database-connections.js';
 import { manageEmails } from '../../src/certification/session-management/domain/services/session-publication-service.js';
 import * as certificationCenterRepository from '../../src/certification/shared/infrastructure/repositories/certification-center-repository.js';
 import * as sharedSessionRepository from '../../src/certification/shared/infrastructure/repositories/session-repository.js';
@@ -85,7 +85,7 @@ const isLaunchedFromCommandLine = process.argv[1] === modulePath;
       logger.error(error);
       process.exitCode = 1;
     } finally {
-      await disconnect();
+      await databaseConnections.disconnect();
     }
   }
 })();

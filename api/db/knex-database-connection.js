@@ -10,7 +10,7 @@ const configuredLiveKnex = liveDatabaseConnection.knex;
 databaseConnections.addConnection(liveDatabaseConnection);
 
 async function disconnect() {
-  return databaseConnections.disconnect();
+  return liveDatabaseConnection.disconnect();
 }
 
 async function emptyAllTables() {
