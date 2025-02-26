@@ -1,5 +1,25 @@
 # Pix Changelog
 
+## v5.52.0 (26/02/2025)
+
+
+### :rocket: Amélioration
+- [#11506](https://github.com/1024pix/pix/pull/11506) [FEATURE] Traduction en NL et ES de l'e-mail d'alerte si reconnexion après 12 mois.
+- [#11488](https://github.com/1024pix/pix/pull/11488) [FEATURE] Ajouter le filtre pour trier les participations par badge non obtenu. (PIX-16351).
+- [#11481](https://github.com/1024pix/pix/pull/11481) [FEATURE] Remplacer le PixReturnTo déprécié par le PixButtonLink sur Pix App (PIX-16695).
+- [#11484](https://github.com/1024pix/pix/pull/11484) [FEATURE] Utiliser PixCode dans la page de connexion sur Pix Junior (PIX-16536).
+
+### :building_construction: Tech
+- [#11501](https://github.com/1024pix/pix/pull/11501) [TECH] Faire fonctionner l'inspecteur Ember avec ember-source 6.1 (PIX-16664).
+- [#11480](https://github.com/1024pix/pix/pull/11480) [TECH] Migrer les derniers components orga en .gjs (PIX-16671).
+- [#11510](https://github.com/1024pix/pix/pull/11510) [TECH] Pouvoir spécifier les variables d'environnement obligatoires par API.
+
+### :bug: Correction
+- [#11476](https://github.com/1024pix/pix/pull/11476) [BUGFIX] Empêcher les questions avec live-alerts validées d'être prises en compte dans le scoring (PIX-16482).
+
+### :arrow_up: Montée de version
+- [#11496](https://github.com/1024pix/pix/pull/11496) [BUMP] Update dependency postgres to v16.
+
 ## v5.51.0 (25/02/2025)
 
 
