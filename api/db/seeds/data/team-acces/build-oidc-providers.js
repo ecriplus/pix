@@ -24,15 +24,15 @@ const defaultOidcProviderForPixAdminProperties = Object.assign(
   defaultVisibleOidcProviderProperties,
 );
 
-export function buildOidcProviders(databaseBuilder) {
-  _buildVisibleOidcProviders(databaseBuilder);
-  _buildNotVisibleOidcProviders(databaseBuilder);
-  _buildOidcProvidersForPixAdmin(databaseBuilder);
-  _buildOidcProvidersFromEnv(databaseBuilder);
+export async function buildOidcProviders(databaseBuilder) {
+  await _buildVisibleOidcProviders(databaseBuilder);
+  await _buildNotVisibleOidcProviders(databaseBuilder);
+  await _buildOidcProvidersForPixAdmin(databaseBuilder);
+  await _buildOidcProvidersFromEnv(databaseBuilder);
 }
 
-function _buildVisibleOidcProviders(databaseBuilder) {
-  databaseBuilder.factory.buildOidcProvider(
+async function _buildVisibleOidcProviders(databaseBuilder) {
+  await databaseBuilder.factory.buildOidcProvider(
     Object.assign(
       {
         identityProvider: OIDC_PROVIDER_EXAMPLE_NET_IDENTITY_PROVIDER,
@@ -48,7 +48,7 @@ function _buildVisibleOidcProviders(databaseBuilder) {
     ),
   );
 
-  databaseBuilder.factory.buildOidcProvider(
+  await databaseBuilder.factory.buildOidcProvider(
     Object.assign(
       {
         identityProvider: 'OIDC_EXAMPLE_NET_FROM_SEEDS-2',
@@ -65,8 +65,8 @@ function _buildVisibleOidcProviders(databaseBuilder) {
   );
 }
 
-function _buildNotVisibleOidcProviders(databaseBuilder) {
-  databaseBuilder.factory.buildOidcProvider(
+async function _buildNotVisibleOidcProviders(databaseBuilder) {
+  await databaseBuilder.factory.buildOidcProvider(
     Object.assign(
       {
         identityProvider: 'OIDC_EXAMPLE_NET_NOT_VISIBLE_FROM_SEEDS-1',
@@ -82,7 +82,7 @@ function _buildNotVisibleOidcProviders(databaseBuilder) {
     ),
   );
 
-  databaseBuilder.factory.buildOidcProvider(
+  await databaseBuilder.factory.buildOidcProvider(
     Object.assign(
       {
         identityProvider: 'OIDC_EXAMPLE_NET_NOT_VISIBLE_FROM_SEEDS-2',
@@ -99,8 +99,8 @@ function _buildNotVisibleOidcProviders(databaseBuilder) {
   );
 }
 
-function _buildOidcProvidersForPixAdmin(databaseBuilder) {
-  databaseBuilder.factory.buildOidcProvider(
+async function _buildOidcProvidersForPixAdmin(databaseBuilder) {
+  await databaseBuilder.factory.buildOidcProvider(
     Object.assign(
       {
         identityProvider: 'OIDC_EXAMPLE_NET_FOR_PIX_ADMIN_FROM_SEEDS',
@@ -117,7 +117,7 @@ function _buildOidcProvidersForPixAdmin(databaseBuilder) {
   );
 }
 
-function _buildOidcProvidersFromEnv(databaseBuilder) {
+async function _buildOidcProvidersFromEnv(databaseBuilder) {
   const oidcProvidersJson = process.env.OIDC_PROVIDERS;
   if (!oidcProvidersJson) {
     debugOidcProvidersSeeds('No environment variable OIDC_PROVIDERS defined, no loading from environment.');
@@ -125,9 +125,11 @@ function _buildOidcProvidersFromEnv(databaseBuilder) {
   }
 
   const oidcProviders = JSON.parse(oidcProvidersJson);
-  oidcProviders.forEach((oidcProviderProperties) => {
-    debugOidcProvidersSeeds(`Loading configuration for OIDC provider "${oidcProviderProperties}"…`);
 
-    databaseBuilder.factory.buildOidcProvider(oidcProviderProperties);
-  });
+  await Promise.all(
+    oidcProviders.map(async (oidcProviderProperties) => {
+      debugOidcProvidersSeeds(`Loading configuration for OIDC provider "${oidcProviderProperties.identityProvider}"…`);
+      return databaseBuilder.factory.buildOidcProvider(oidcProviderProperties);
+    }),
+  );
 }

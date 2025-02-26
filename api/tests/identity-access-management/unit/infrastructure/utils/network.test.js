@@ -1,4 +1,7 @@
-import { getForwardedOrigin } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
+import {
+  getForwardedOrigin,
+  RequestedApplication,
+} from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Infrastructure | Utils | network', function () {
@@ -81,6 +84,156 @@ describe('Unit | Identity Access Management | Infrastructure | Utils | network',
 
         // then
         expect(origin).to.equal('');
+      });
+    });
+  });
+
+  describe('RequestedApplication', function () {
+    describe('constructor', function () {
+      it('initializes an applicationName property', function () {
+        // given
+        const applicationName = 'orga';
+
+        // when
+        const requestedApplication = new RequestedApplication(applicationName);
+
+        // then
+        expect(requestedApplication.applicationName).to.equal('orga');
+      });
+    });
+
+    describe('#fromOrigin', function () {
+      it('returns the application name as the first label in the hostname', function () {
+        // given
+        const origin = 'https://app.pix.org';
+
+        // when
+        const requestedApplication = RequestedApplication.fromOrigin(origin);
+
+        // then
+        expect(requestedApplication).to.be.instanceOf(RequestedApplication);
+        expect(requestedApplication.applicationName).to.equal('app');
+        expect(requestedApplication.isPixApp).to.be.true;
+        expect(requestedApplication.isPixAdmin).to.be.false;
+        expect(requestedApplication.isPixOrga).to.be.false;
+        expect(requestedApplication.isPixCertif).to.be.false;
+        expect(requestedApplication.isPixJunior).to.be.false;
+      });
+
+      context('when the application is a Review App', function () {
+        it('returns the application name as a sub-part of the first label in the hostname', function () {
+          // given
+          const origin = 'https://app-pr11415.review.pix.org/';
+
+          // when
+          const requestedApplication = RequestedApplication.fromOrigin(origin);
+
+          // then
+          expect(requestedApplication).to.be.instanceOf(RequestedApplication);
+          expect(requestedApplication.applicationName).to.equal('app');
+          expect(requestedApplication.isPixApp).to.be.true;
+          expect(requestedApplication.isPixAdmin).to.be.false;
+          expect(requestedApplication.isPixOrga).to.be.false;
+          expect(requestedApplication.isPixCertif).to.be.false;
+          expect(requestedApplication.isPixJunior).to.be.false;
+        });
+      });
+
+      context('when the application is accessed directly on localhost', function () {
+        context('when port is 4200', function () {
+          it('returns the application name based on port 4200', function () {
+            // given
+            const origin = 'http://localhost:4200/';
+
+            // when
+            const requestedApplication = RequestedApplication.fromOrigin(origin);
+
+            // then
+            expect(requestedApplication).to.be.instanceOf(RequestedApplication);
+            expect(requestedApplication.applicationName).to.equal('app');
+            expect(requestedApplication.isPixApp).to.be.true;
+            expect(requestedApplication.isPixAdmin).to.be.false;
+            expect(requestedApplication.isPixOrga).to.be.false;
+            expect(requestedApplication.isPixCertif).to.be.false;
+            expect(requestedApplication.isPixJunior).to.be.false;
+          });
+        });
+
+        context('when port is 4201', function () {
+          it('returns the application name based on port 4201', function () {
+            // given
+            const origin = 'http://localhost:4201/';
+
+            // when
+            const requestedApplication = RequestedApplication.fromOrigin(origin);
+
+            // then
+            expect(requestedApplication).to.be.instanceOf(RequestedApplication);
+            expect(requestedApplication.applicationName).to.equal('orga');
+            expect(requestedApplication.isPixApp).to.be.false;
+            expect(requestedApplication.isPixAdmin).to.be.false;
+            expect(requestedApplication.isPixOrga).to.be.true;
+            expect(requestedApplication.isPixCertif).to.be.false;
+            expect(requestedApplication.isPixJunior).to.be.false;
+          });
+        });
+
+        context('when port is 4202', function () {
+          it('returns the application name based on port 4202', function () {
+            // given
+            const origin = 'http://localhost:4202/';
+
+            // when
+            const requestedApplication = RequestedApplication.fromOrigin(origin);
+
+            // then
+            expect(requestedApplication).to.be.instanceOf(RequestedApplication);
+            expect(requestedApplication.applicationName).to.equal('admin');
+            expect(requestedApplication.isPixApp).to.be.false;
+            expect(requestedApplication.isPixAdmin).to.be.true;
+            expect(requestedApplication.isPixOrga).to.be.false;
+            expect(requestedApplication.isPixCertif).to.be.false;
+            expect(requestedApplication.isPixJunior).to.be.false;
+          });
+        });
+
+        context('when port is 4203', function () {
+          it('returns the application name based on port 4203', function () {
+            // given
+            const origin = 'http://localhost:4203/';
+
+            // when
+            const requestedApplication = RequestedApplication.fromOrigin(origin);
+
+            // then
+            expect(requestedApplication).to.be.instanceOf(RequestedApplication);
+            expect(requestedApplication.applicationName).to.equal('certif');
+            expect(requestedApplication.isPixApp).to.be.false;
+            expect(requestedApplication.isPixAdmin).to.be.false;
+            expect(requestedApplication.isPixOrga).to.be.false;
+            expect(requestedApplication.isPixCertif).to.be.true;
+            expect(requestedApplication.isPixJunior).to.be.false;
+          });
+        });
+
+        context('when port is 4205', function () {
+          it('returns the application name based on port 4205', function () {
+            // given
+            const origin = 'http://localhost:4205/';
+
+            // when
+            const requestedApplication = RequestedApplication.fromOrigin(origin);
+
+            // then
+            expect(requestedApplication).to.be.instanceOf(RequestedApplication);
+            expect(requestedApplication.applicationName).to.equal('junior');
+            expect(requestedApplication.isPixApp).to.be.false;
+            expect(requestedApplication.isPixAdmin).to.be.false;
+            expect(requestedApplication.isPixOrga).to.be.false;
+            expect(requestedApplication.isPixCertif).to.be.false;
+            expect(requestedApplication.isPixJunior).to.be.true;
+          });
+        });
       });
     });
   });
