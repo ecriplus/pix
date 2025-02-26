@@ -1,17 +1,17 @@
 @use 'pix-design-tokens/fonts';
+@use 'pix-design-tokens/typography';
 
 .tutorials-filters {
 
   .pix-accordions {
 
     &__title {
+      @extend %pix-body-s;
+
       position: relative;
       align-items: center;
       padding-left: 2rem;
       color: var(--pix-neutral-800);
-      font-weight: 500;
-      font-size: 0.875rem;
-      font-family: fonts.$font-open-sans;
       text-align: left;
       text-transform: uppercase;
 

@@ -1,4 +1,5 @@
 @use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
 @use 'pix-design-tokens/fonts';
 
 .user-certifications-detail-result {
@@ -16,10 +17,9 @@
   }
 
   h2 {
+    @extend %pix-title-xs;
+
     margin-bottom: 8px;
-    font-weight: normal;
-    font-size: 1.125rem;
-    font-family: fonts.$font-open-sans;
   }
 
   .pix-block {
@@ -63,8 +63,8 @@
     }
 
     p {
-      font-weight: var(--pix-font-medium);
-      font-family: fonts.$font-open-sans;
+      @extend %pix-body-s;
+
       line-height: 1.375rem;
     }
   }

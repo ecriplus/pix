@@ -1,11 +1,13 @@
 @use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/fonts';
+@use 'pix-design-tokens/typography';
 
 .sitemap {
+  @extend %pix-body-m;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: fonts.$font-open-sans;
 
   ul {
     margin-right: 10px;

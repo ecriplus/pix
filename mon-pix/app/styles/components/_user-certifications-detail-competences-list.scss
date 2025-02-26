@@ -1,13 +1,13 @@
 @use 'pix-design-tokens/fonts';
+@use 'pix-design-tokens/typography';
 
 .user-certifications-detail-competences-list {
   flex-grow: 1;
 
   h2 {
+    @extend %pix-title-xs;
+
     margin-bottom: 8px;
-    font-weight: normal;
-    font-size: 1.125rem;
-    font-family: fonts.$font-open-sans;
 
     span {
       font-size: 0.75rem;

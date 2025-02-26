@@ -86,7 +86,7 @@
   }
 
   &__improving-text {
-    margin-top: 4px;
+    margin-top: var(--pix-spacing-2x);
     color: var(--pix-neutral-500);
     font-size: 0.8rem;
     font-family: fonts.$font-roboto;

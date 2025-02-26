@@ -1,5 +1,6 @@
 @use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/fonts';
+@use 'pix-design-tokens/typography';
 
 .rounded-panel {
   margin-bottom: 30px;
@@ -121,9 +122,9 @@
   }
 
   &__content--first-title {
+    @extend %pix-title-l;
+
     color: var(--pix-neutral-900);
-    font-size: 1.625rem;
-    font-family: fonts.$font-open-sans;
     line-height: 2.75rem;
     letter-spacing: 0.009rem;
 

@@ -1,4 +1,5 @@
 @use 'pix-design-tokens/fonts';
+@use 'pix-design-tokens/typography';
 
 .user-certification-hexagon-score {
   position: relative;
@@ -20,19 +21,18 @@
     text-align: center;
 
     &-title {
+      @extend %pix-body-s;
+
       color: var(--pix-neutral-500);
       font-weight: lighter;
-      font-size: 0.8rem;
-      font-family: fonts.$font-roboto;
       letter-spacing: 0.219rem;
       text-transform: uppercase;
     }
 
     &-pix-score {
+      @extend %pix-title-m;
+
       color: var(--pix-neutral-800);
-      font-weight: var(--pix-font-medium);
-      font-size: 2.3rem;
-      font-family: fonts.$font-open-sans;
     }
 
     &-certified {

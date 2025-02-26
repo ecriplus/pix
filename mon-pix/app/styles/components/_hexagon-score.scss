@@ -1,5 +1,6 @@
 @use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/fonts';
+@use 'pix-design-tokens/typography';
 
 .hexagon-score {
   width: 132px;
@@ -21,9 +22,9 @@
 }
 
 @mixin hexagon-score-pix-score {
+  @extend %pix-title-l;
+
   color: var(--pix-neutral-900);
-  font-size: 2.875rem;
-  font-family: fonts.$font-open-sans;
 }
 
 @mixin hexagon-score-pix-total {
@@ -83,9 +84,10 @@
 }
 
 .hexagon-score-information__text {
-  font-size: 1rem;
-  font-family: fonts.$font-open-sans;
+  @extend %pix-body-m;
+
   line-height: 1.6rem;
+  text-align: left;
 
   &--strong {
     font-weight: var(--pix-font-bold);

@@ -1,5 +1,6 @@
 @use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/fonts';
+@use 'pix-design-tokens/typography';
 
 .levelup {
   position: fixed;
@@ -28,12 +29,11 @@
   }
 
   &__icon-card-level {
+    @extend %pix-title-s;
+
     position: absolute;
     top: 31px;
     left: 45px;
-    font-weight: var(--pix-font-bold);
-    font-size: 1.5rem;
-    font-family: fonts.$font-open-sans;
   }
 
   &__competence {
@@ -69,10 +69,10 @@
 
 .levelup-competence {
   &__level {
+    @extend %pix-body-m;
+
     margin-bottom: 2px;
     font-weight: var(--pix-font-bold);
-    font-size: 1rem;
-    font-family: fonts.$font-open-sans;
     text-transform: uppercase;
 
     @include breakpoints.device-is('mobile') {
