@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-import { httpAgent } from '../../../../lib/infrastructure/http/http-agent.js';
+import { httpAgent } from '../../../../src/shared/infrastructure/http-agent.js';
 import { monitoringTools } from '../../../../src/shared/infrastructure/monitoring-tools.js';
 import { expect, sinon } from '../../../test-helper.js';
 
 const { post, get } = httpAgent;
 
-describe('Unit | Infrastructure | http | http-agent', function () {
+describe('Shared | Unit | Infrastructure | http-agent', function () {
   describe('#post', function () {
     it('should return the response status and success from the http call when successful', async function () {
       // given

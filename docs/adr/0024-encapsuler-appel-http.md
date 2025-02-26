@@ -5,7 +5,7 @@ Date : 2020-04-22
 ## État
 Adopté
 
-## Contexte 
+## Contexte
 L'API effectue des appels http:
 - vers des services Pix (ex: LCMS);
 - vers des API externes à Pix (ex: Pole Emploi).
@@ -28,7 +28,7 @@ Cette encapsulation a déjà été réalisée sur le logging avec [logger](./../
 
 ### Solution n°1 : Encapsuler les appels à la librairie http dans un composant
 
-Un composant, [http-agent](../../api/lib/infrastructure/http/http-agent.js), appelle la librairie (ex: `axios`).
+Un composant, [http-agent](../../api/src/shared/infrastructure/http-agent.js), appelle la librairie (ex: `axios`).
 
 Le code de production fait appel à ce composant uniquement pour tout appel http.
 
@@ -53,7 +53,7 @@ Inconvénients :
 La solution n°1 est adoptée
 
 ## Conséquences
-En dehors des API externes proposant une librairie dédiée (ex: [mailjet](https://github.com/mailjet/mailjet-apiv3-nodejs)), 
+En dehors des API externes proposant une librairie dédiée (ex: [mailjet](https://github.com/mailjet/mailjet-apiv3-nodejs)),
 appeler le composant `http-agent` à la place de la librairie (ex: `axios`).
 
 Ajouter une règle de lint pour empêcher l'usage direct et non-intentionnel de la librairie (ex: `axios`).
