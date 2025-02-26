@@ -14,6 +14,10 @@ export class DatabaseConnection {
   knex;
   #name;
 
+  static databaseUrlFromConfig(knexConfig) {
+    return new URL(knexConfig.connection);
+  }
+
   constructor(knexConfig) {
     this.knex = Knex(knexConfig);
     this.#name = knexConfig.name;

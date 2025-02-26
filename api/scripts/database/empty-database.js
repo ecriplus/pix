@@ -9,11 +9,11 @@ const commandLineArguments = yargs(hideBin(process.argv))
   .option('name', {
     description: 'Name of the database',
     type: 'text',
+    demandOption: true,
   })
   .help().argv;
 const databaseToEmpty = commandLineArguments.name;
 try {
-  console.log(`../../${databaseToEmpty}/knex-database-connection.js`);
   const importedFile = await import(`../../${databaseToEmpty}/knex-database-connection.js`);
   databaseConnection = importedFile.databaseConnection;
   logger.info(`Emptying all tables of database ${databaseToEmpty}...`);
