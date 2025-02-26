@@ -1,6 +1,6 @@
-import * as httpErrorsHelper from '../../../../../lib/infrastructure/http/errors-helper.js';
 import { httpAgent } from '../../../../shared/infrastructure/http-agent.js';
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
+import * as httpErrorsHelper from '../../../campaign-participation/infrastructure/errors-helper.js';
 import { PoleEmploiPayload } from '../../infrastructure/externals/pole-emploi/PoleEmploiPayload.js';
 import { PoleEmploiSending } from '../models/PoleEmploiSending.js';
 
