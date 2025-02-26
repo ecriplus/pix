@@ -1,7 +1,7 @@
 import { organizationController } from '../../../../lib/application/organizations/organization-controller.js';
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { Organization } from '../../../../src/shared/domain/models/index.js';
-import { expect, generateAuthenticatedUserRequestHeaders, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Application | Organizations | organization-controller', function () {
   describe('#findPaginatedFilteredOrganizations', function () {
@@ -123,40 +123,6 @@ describe('Unit | Application | Organizations | organization-controller', functio
 
       // then
       expect(result).to.be.equal(serializedMembersIdentities);
-    });
-  });
-
-  describe('#archiveOrganization', function () {
-    it('should call the usecase to archive the organization with the user id', async function () {
-      // given
-      const organizationId = 1234;
-      const userId = 10;
-      const request = {
-        headers: generateAuthenticatedUserRequestHeaders({ userId }),
-        params: { id: organizationId },
-      };
-
-      const archivedOrganization = Symbol('archivedOrganization');
-      const archivedOrganizationSerialized = Symbol('archivedOrganizationSerialized');
-      sinon.stub(usecases, 'archiveOrganization').resolves(archivedOrganization);
-      const organizationForAdminSerializerStub = {
-        serialize: sinon.stub(),
-      };
-
-      organizationForAdminSerializerStub.serialize
-        .withArgs(archivedOrganization)
-        .returns(archivedOrganizationSerialized);
-
-      const dependencies = {
-        organizationForAdminSerializer: organizationForAdminSerializerStub,
-      };
-
-      // when
-      const response = await organizationController.archiveOrganization(request, hFake, dependencies);
-
-      // then
-      expect(usecases.archiveOrganization).to.have.been.calledOnceWithExactly({ organizationId, userId });
-      expect(response).to.deep.equal(archivedOrganizationSerialized);
     });
   });
 

@@ -248,6 +248,43 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     });
   });
 
+  describe('POST /api/admin/organizations/{id}/archive', function () {
+    it('returns the archived organization', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      await databaseBuilder.commit();
+
+      // when
+      const response = await server.inject({
+        method: 'POST',
+        url: `/api/admin/organizations/${organizationId}/archive`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+      });
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      const archivedOrganization = response.result.data.attributes;
+      expect(archivedOrganization['archivist-full-name']).to.equal(`${admin.firstName} ${admin.lastName}`);
+    });
+
+    it('is forbidden for role certif', async function () {
+      // given
+      const certifUser = databaseBuilder.factory.buildUser.withRole({ role: ROLES.CERTIF });
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      await databaseBuilder.commit();
+
+      // when
+      const response = await server.inject({
+        method: 'POST',
+        url: `/api/admin/organizations/${organizationId}/archive`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: certifUser.id }),
+      });
+
+      // then
+      expect(response.statusCode).to.equal(403);
+    });
+  });
+
   describe('POST /api/admin/organizations/add-organization-features', function () {
     context('When a CSV file is loaded', function () {
       let feature, firstOrganization, otherOrganization;
