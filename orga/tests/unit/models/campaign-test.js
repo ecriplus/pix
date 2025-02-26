@@ -110,6 +110,83 @@ module('Unit | Model | campaign', function (hooks) {
     });
   });
 
+  module('#setType', function () {
+    test('set default to false multiple sending to false on ASSESSMENT type', function (assert) {
+      //given
+      const store = this.owner.lookup('service:store');
+
+      const model = store.createRecord('campaign', {
+        multipleSendings: true,
+      });
+
+      //when
+      model.setType('ASSESSMENT');
+
+      assert.false(model.multipleSendings);
+      assert.strictEqual(model.type, 'ASSESSMENT');
+    });
+
+    test('set default to false multiple sending on EXAM type', function (assert) {
+      //given
+      const store = this.owner.lookup('service:store');
+
+      const model = store.createRecord('campaign', {
+        multipleSendings: true,
+      });
+
+      //when
+      model.setType('EXAM');
+
+      assert.false(model.multipleSendings);
+      assert.strictEqual(model.type, 'EXAM');
+    });
+
+    test('set default to true multiple sending on PROFILES_COLLECTION type', function (assert) {
+      //given
+      const store = this.owner.lookup('service:store');
+
+      const model = store.createRecord('campaign', {
+        multipleSendings: false,
+      });
+
+      //when
+      model.setType('PROFILES_COLLECTION');
+
+      assert.true(model.multipleSendings);
+      assert.strictEqual(model.type, 'PROFILES_COLLECTION');
+    });
+
+    test('set default to null target profile on PROFILES_COLLECTION type', function (assert) {
+      //given
+      const store = this.owner.lookup('service:store');
+
+      const model = store.createRecord('campaign', {
+        targetProfileId: 18,
+      });
+
+      //when
+      model.setType('PROFILES_COLLECTION');
+
+      assert.strictEqual(model.targetProfileId, null);
+      assert.strictEqual(model.type, 'PROFILES_COLLECTION');
+    });
+
+    test('set default to null title on PROFILES_COLLECTION type', function (assert) {
+      //given
+      const store = this.owner.lookup('service:store');
+
+      const model = store.createRecord('campaign', {
+        title: 'wahout',
+      });
+
+      //when
+      model.setType('PROFILES_COLLECTION');
+
+      assert.strictEqual(model.title, null);
+      assert.strictEqual(model.type, 'PROFILES_COLLECTION');
+    });
+  });
+
   module('#ownerFullName', function () {
     test('it should return the fullname, combination of last and first name', function (assert) {
       const store = this.owner.lookup('service:store');

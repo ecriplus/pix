@@ -711,19 +711,6 @@ class UserNotAuthorizedToUpdateCampaignError extends DomainError {
   }
 }
 
-class UserNotAuthorizedToCreateCampaignError extends DomainError {
-  constructor(message = "Cet utilisateur n'est pas autorisé à créer une campagne.") {
-    super(message);
-  }
-}
-
-class OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError extends DomainError {
-  constructor(organizationId) {
-    const message = `L'organisation ${organizationId}, n'est pas autorisée à créer une campagne d'évaluation à envoi multiple.`;
-    super(message);
-  }
-}
-
 class UserNotAuthorizedToUpdateResourceError extends DomainError {
   constructor(message = "Cet utilisateur n'est pas autorisé à mettre à jour la ressource.") {
     super(message);
@@ -1141,7 +1128,6 @@ export {
   OrganizationLearnerNotFound,
   OrganizationLearnersConstraintError,
   OrganizationLearnersCouldNotBeSavedError,
-  OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError,
   OrganizationNotFoundError,
   OrganizationTagNotFound,
   OrganizationWithoutEmailError,
@@ -1160,7 +1146,6 @@ export {
   UserIsTemporaryBlocked,
   UserNotAuthorizedToAccessEntityError,
   UserNotAuthorizedToCertifyError,
-  UserNotAuthorizedToCreateCampaignError,
   UserNotAuthorizedToCreateResourceError,
   UserNotAuthorizedToGenerateUsernamePasswordError,
   UserNotAuthorizedToGetCampaignResultsError,

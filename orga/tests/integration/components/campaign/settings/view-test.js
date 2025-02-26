@@ -53,6 +53,20 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
         assert.dom(screen.getByText(t('pages.campaign-settings.campaign-type.profiles-collection'))).exists();
       });
     });
+
+    module('when type is EXAM', function () {
+      test('it should display profile collection campaign', async function (assert) {
+        this.campaign = store.createRecord('campaign', {
+          type: 'EXAM',
+        });
+
+        // when
+        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+
+        // then
+        assert.dom(screen.getByText(t('pages.campaign-settings.campaign-type.exam'))).exists();
+      });
+    });
   });
 
   module('on TargetProfile display', function () {

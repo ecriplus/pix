@@ -290,16 +290,6 @@ describe('Integration | API | Controller Error', function () {
       expect(responseDetail(response)).to.equal('Utilisateur non autorisé à mettre à jour à la ressource');
     });
 
-    it('responds Forbidden when a UserNotAuthorizedToCreateCampaignError error occurs', async function () {
-      routeHandler.throws(
-        new DomainErrors.UserNotAuthorizedToCreateCampaignError('Utilisateur non autorisé à créer une campagne'),
-      );
-      const response = await server.requestObject(request);
-
-      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
-      expect(responseDetail(response)).to.equal('Utilisateur non autorisé à créer une campagne');
-    });
-
     it('responds Forbidden when a CandidateAlreadyLinkedToUserError error occurs', async function () {
       routeHandler.throws(new DomainErrors.CandidateAlreadyLinkedToUserError());
       const response = await server.requestObject(request);

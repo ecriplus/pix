@@ -57,9 +57,10 @@ export default class CreateForm extends Component {
   }
 
   get isMultipleSendingEnabled() {
-    return (
-      this.isCampaignGoalProfileCollection || (this.isCampaignGoalAssessment && this.isMultipleSendingAssessmentEnabled)
-    );
+    const isMulipleSendingsAllowed =
+      this.isMultipleSendingAssessmentEnabled && (this.isCampaignGoalAssessment || this.isCampaignGoalExam);
+
+    return this.isCampaignGoalProfileCollection || isMulipleSendingsAllowed;
   }
 
   get multipleSendingWording() {
@@ -76,6 +77,14 @@ export default class CreateForm extends Component {
     }
   }
 
+  get isCreateCampaignOftypeExamEnabled() {
+    return this.currentUser.prescriber.enableCampaignWithoutUserProfile;
+  }
+
+  get isCampaignGoalExam() {
+    return this.args.campaign.type === 'EXAM';
+  }
+
   get isCampaignGoalAssessment() {
     return this.args.campaign.type === 'ASSESSMENT';
   }
@@ -90,6 +99,14 @@ export default class CreateForm extends Component {
 
   get isExternalIdTypeNotSelectedChecked() {
     return this.args.campaign.externalIdType === '';
+  }
+
+  get isTargetProfileSelectable() {
+    return this.isCampaignGoalAssessment || this.isCampaignGoalExam;
+  }
+
+  get isTitleInputEnable() {
+    return this.isCampaignGoalAssessment || this.isCampaignGoalExam;
   }
 
   @action
@@ -122,6 +139,8 @@ export default class CreateForm extends Component {
   setCampaignGoal(event) {
     if (event.target.value === 'collect-participants-profile') {
       this.args.campaign.setType('PROFILES_COLLECTION');
+    } else if (event.target.value === 'exam-participants') {
+      this.args.campaign.setType('EXAM');
     } else {
       this.args.campaign.setType('ASSESSMENT');
     }
@@ -236,6 +255,19 @@ export default class CreateForm extends Component {
               >
                 <:label>{{t "pages.campaign-creation.purpose.profiles-collection"}}</:label>
               </PixRadioButton>
+
+              {{#if this.isCreateCampaignOftypeExamEnabled}}
+                <PixRadioButton
+                  name="campaign-goal"
+                  @value="exam-participants"
+                  {{on "change" this.setCampaignGoal}}
+                  aria-describedby="exam-participants-info"
+                  checked={{this.isCampaignGoalExam}}
+                >
+                  <:label>{{t "pages.campaign-creation.purpose.exam"}}</:label>
+                </PixRadioButton>
+              {{/if}}
+
               {{#if @errors.type}}
                 <div class="form__error error-message">
                   {{displayCampaignErrors @errors.type}}
@@ -245,7 +277,13 @@ export default class CreateForm extends Component {
           </PixFieldset>
         </:default>
         <:information>
-          {{#if this.isCampaignGoalAssessment}}
+          {{#if this.isCampaignGoalExam}}
+            <ExplanationCard id="campaign-goal-exam-info">
+              <:title>{{t "pages.campaign-creation.purpose.exam"}}</:title>
+
+              <:message>{{t "pages.campaign-creation.purpose.exam-info"}}</:message>
+            </ExplanationCard>
+          {{else if this.isCampaignGoalAssessment}}
             <ExplanationCard id="campaign-goal-assessment-info">
               <:title>{{t "pages.campaign-creation.purpose.assessment"}}</:title>
 
@@ -270,7 +308,7 @@ export default class CreateForm extends Component {
         </:information>
       </FormField>
 
-      {{#if this.isCampaignGoalAssessment}}
+      {{#if this.isTargetProfileSelectable}}
         <FormField>
           <:default>
             <PixFilterableAndSearchableSelect
@@ -432,7 +470,7 @@ export default class CreateForm extends Component {
         </FormField>
       {{/if}}
 
-      {{#if this.isCampaignGoalAssessment}}
+      {{#if this.isTitleInputEnable}}
         <FormField>
           <PixInput
             @id="campaign-title"

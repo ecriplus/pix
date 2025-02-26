@@ -19,13 +19,6 @@ export default class ParticipationRow extends Component {
       : 'authenticated.campaigns.participant-profile';
   }
 
-  get labels() {
-    return {
-      ASSESSMENT: 'components.campaign.type.information.ASSESSMENT',
-      PROFILES_COLLECTION: 'components.campaign.type.information.PROFILES_COLLECTION',
-    };
-  }
-
   @action
   goToParticipationDetail(event) {
     event.preventDefault();
@@ -48,7 +41,7 @@ export default class ParticipationRow extends Component {
         </LinkTo>
       </td>
       <td class="ellipsis">
-        <CampaignType @labels={{this.labels}} @campaignType={{@participation.campaignType}} />
+        <CampaignType @campaignType={{@participation.campaignType}} @displayInformationLabel={{true}} />
       </td>
       <td class="table__column--left">
         <Date @date={{@participation.createdAt}} />

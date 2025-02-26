@@ -65,6 +65,10 @@ export default class Campaign extends Model {
     return this.type === 'ASSESSMENT';
   }
 
+  get isTypeExam() {
+    return this.type === 'EXAM';
+  }
+
   get urlToResult() {
     if (this.isTypeAssessment) {
       return `${ENV.APP.API_HOST}/api/campaigns/${this.id}/csv-assessment-results`;
@@ -91,13 +95,13 @@ export default class Campaign extends Model {
   }
 
   setType(type) {
-    if (type === 'ASSESSMENT') {
+    if (['ASSESSMENT', 'EXAM'].includes(type)) {
       this.multipleSendings = false;
     }
     if (type === 'PROFILES_COLLECTION') {
       this.multipleSendings = true;
       this.title = null;
-      this.targetProfile = null;
+      this.targetProfileId = null;
     }
     this.type = type;
   }

@@ -39,9 +39,13 @@ export default class CampaignView extends Component {
   }
 
   get campaignType() {
-    return this.args.campaign.isTypeAssessment
-      ? this.intl.t('pages.campaign-settings.campaign-type.assessment')
-      : this.intl.t('pages.campaign-settings.campaign-type.profiles-collection');
+    if (this.args.campaign.isTypeAssessment) {
+      return this.intl.t('pages.campaign-settings.campaign-type.assessment');
+    } else if (this.args.campaign.isProfilesCollection) {
+      return this.intl.t('pages.campaign-settings.campaign-type.profiles-collection');
+    } else if (this.args.campaign.isTypeExam) {
+      return this.intl.t('pages.campaign-settings.campaign-type.exam');
+    } else return null;
   }
 
   get multipleSendingsText() {

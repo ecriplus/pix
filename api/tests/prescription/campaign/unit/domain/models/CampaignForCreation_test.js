@@ -5,164 +5,167 @@ import { catchErr, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CampaignForCreation', function () {
   describe('#create', function () {
-    context('when the campaign type is ASSESSEMENT', function () {
-      context('when the every required field is present', function () {
-        it('creates the campaign', function () {
-          const attributes = {
-            name: 'CampaignName',
-            type: CampaignTypes.ASSESSMENT,
-            targetProfileId: 1,
-            creatorId: 2,
-            ownerId: 2,
-            organizationId: 3,
-            title: '',
-            customLandingPageText: '',
-            customResultPageButtonText: null,
-            customResultPageButtonUrl: null,
-          };
+    // eslint-disable-next-line mocha/no-setup-in-describe
+    [CampaignTypes.ASSESSMENT, CampaignTypes.EXAM].forEach((type) => {
+      context(`when the campaign type is ${type}`, function () {
+        context('when the every required field is present', function () {
+          it('creates the campaign', function () {
+            const attributes = {
+              name: 'CampaignName',
+              type,
+              targetProfileId: 1,
+              creatorId: 2,
+              ownerId: 2,
+              organizationId: 3,
+              title: '',
+              customLandingPageText: '',
+              customResultPageButtonText: null,
+              customResultPageButtonUrl: null,
+            };
 
-          expect(() => new CampaignForCreation(attributes)).to.not.throw();
-        });
-      });
-
-      context('when attributes are invalid', function () {
-        let attributes;
-        beforeEach(function () {
-          attributes = {
-            name: 'CampaignName',
-            type: CampaignTypes.ASSESSMENT,
-            targetProfileId: 1,
-            creatorId: 2,
-            ownerId: 2,
-            organizationId: 3,
-          };
-        });
-
-        context('name is missing', function () {
-          it('throws an error', async function () {
-            attributes.name = undefined;
-
-            const error = await catchErr(() => new CampaignForCreation(attributes))();
-            expect(error.message).to.equal("Échec de validation de l'entité.");
-            expect(error.invalidAttributes).to.deep.equal([{ attribute: 'name', message: '"name" is required' }]);
+            expect(() => new CampaignForCreation(attributes)).to.not.throw();
           });
         });
 
-        context('creatorId is missing', function () {
-          it('throws an error', async function () {
-            attributes.creatorId = undefined;
-
-            const error = await catchErr(() => new CampaignForCreation(attributes))();
-            expect(error.message).to.equal("Échec de validation de l'entité.");
-            expect(error.invalidAttributes).to.deep.equal([{ attribute: 'creatorId', message: 'MISSING_CREATOR' }]);
+        context('when attributes are invalid', function () {
+          let attributes;
+          beforeEach(function () {
+            attributes = {
+              name: 'CampaignName',
+              type,
+              targetProfileId: 1,
+              creatorId: 2,
+              ownerId: 2,
+              organizationId: 3,
+            };
           });
-        });
 
-        context('ownerId is missing', function () {
-          it('throws an error', async function () {
-            attributes.ownerId = undefined;
+          context('name is missing', function () {
+            it('throws an error', async function () {
+              attributes.name = undefined;
 
-            const error = await catchErr(() => new CampaignForCreation(attributes))();
-            expect(error.message).to.equal("Échec de validation de l'entité.");
-            expect(error.invalidAttributes).to.deep.equal([{ attribute: 'ownerId', message: 'MISSING_OWNER' }]);
+              const error = await catchErr(() => new CampaignForCreation(attributes))();
+              expect(error.message).to.equal("Échec de validation de l'entité.");
+              expect(error.invalidAttributes).to.deep.equal([{ attribute: 'name', message: '"name" is required' }]);
+            });
           });
-        });
 
-        context('organizationId is missing', function () {
-          it('throws an error', async function () {
-            attributes.organizationId = undefined;
+          context('creatorId is missing', function () {
+            it('throws an error', async function () {
+              attributes.creatorId = undefined;
 
-            const error = await catchErr(() => new CampaignForCreation(attributes))();
-            expect(error.message).to.equal("Échec de validation de l'entité.");
-            expect(error.invalidAttributes).to.deep.equal([
-              { attribute: 'organizationId', message: 'MISSING_ORGANIZATION' },
-            ]);
+              const error = await catchErr(() => new CampaignForCreation(attributes))();
+              expect(error.message).to.equal("Échec de validation de l'entité.");
+              expect(error.invalidAttributes).to.deep.equal([{ attribute: 'creatorId', message: 'MISSING_CREATOR' }]);
+            });
           });
-        });
 
-        context('targetProfileId is missing', function () {
-          it('throws an error', async function () {
-            attributes.targetProfileId = undefined;
+          context('ownerId is missing', function () {
+            it('throws an error', async function () {
+              attributes.ownerId = undefined;
 
-            const error = await catchErr(() => new CampaignForCreation(attributes))();
-            expect(error.message).to.equal("Échec de validation de l'entité.");
-            expect(error.invalidAttributes).to.deep.equal([
-              { attribute: 'targetProfileId', message: 'TARGET_PROFILE_IS_REQUIRED' },
-            ]);
+              const error = await catchErr(() => new CampaignForCreation(attributes))();
+              expect(error.message).to.equal("Échec de validation de l'entité.");
+              expect(error.invalidAttributes).to.deep.equal([{ attribute: 'ownerId', message: 'MISSING_OWNER' }]);
+            });
           });
-        });
 
-        context('customLandingPageText max length over 5000 character', function () {
-          it('throws an error', async function () {
-            // given
-            attributes.customLandingPageText = 'Godzilla vs Kong'.repeat(335);
+          context('organizationId is missing', function () {
+            it('throws an error', async function () {
+              attributes.organizationId = undefined;
 
-            const error = await catchErr(() => new CampaignForCreation(attributes))();
-            expect(error.message).to.equal("Échec de validation de l'entité.");
-            expect(error.invalidAttributes).to.deep.equal([
-              { attribute: 'customLandingPageText', message: 'CUSTOM_LANDING_PAGE_TEXT_IS_TOO_LONG' },
-            ]);
+              const error = await catchErr(() => new CampaignForCreation(attributes))();
+              expect(error.message).to.equal("Échec de validation de l'entité.");
+              expect(error.invalidAttributes).to.deep.equal([
+                { attribute: 'organizationId', message: 'MISSING_ORGANIZATION' },
+              ]);
+            });
           });
-        });
 
-        context('customResultPageText max length over 5000 character', function () {
-          it('throws an error', async function () {
-            // given
-            attributes.customResultPageText = 'Godzilla vs Kong'.repeat(335);
+          context('targetProfileId is missing', function () {
+            it('throws an error', async function () {
+              attributes.targetProfileId = undefined;
 
-            const error = await catchErr(() => new CampaignForCreation(attributes))();
-            expect(error.message).to.equal("Échec de validation de l'entité.");
-            expect(error.invalidAttributes).to.deep.equal([
-              { attribute: 'customResultPageText', message: 'CUSTOM_RESULT_PAGE_TEXT_IS_TOO_LONG' },
-            ]);
+              const error = await catchErr(() => new CampaignForCreation(attributes))();
+              expect(error.message).to.equal("Échec de validation de l'entité.");
+              expect(error.invalidAttributes).to.deep.equal([
+                { attribute: 'targetProfileId', message: 'TARGET_PROFILE_IS_REQUIRED' },
+              ]);
+            });
           });
-        });
 
-        context('customResultPageButtonUrl is required if customResultPageButtonText is defined', function () {
-          it('throws an error', async function () {
-            // given
-            attributes.customResultPageButtonText = 'Godzilla vs Kong';
-            attributes.customResultPageButtonUrl = null;
+          context('customLandingPageText max length over 5000 character', function () {
+            it('throws an error', async function () {
+              // given
+              attributes.customLandingPageText = 'Godzilla vs Kong'.repeat(335);
 
-            const error = await catchErr(() => new CampaignForCreation(attributes))();
-            expect(error.message).to.equal("Échec de validation de l'entité.");
-            expect(error.invalidAttributes).to.deep.equal([
-              {
-                attribute: 'customResultPageButtonUrl',
-                message: 'CUSTOM_RESULT_PAGE_BUTTON_URL_IS_REQUIRED_WHEN_CUSTOM_RESULT_PAGE_BUTTON_TEXT_IS_FILLED',
-              },
-            ]);
+              const error = await catchErr(() => new CampaignForCreation(attributes))();
+              expect(error.message).to.equal("Échec de validation de l'entité.");
+              expect(error.invalidAttributes).to.deep.equal([
+                { attribute: 'customLandingPageText', message: 'CUSTOM_LANDING_PAGE_TEXT_IS_TOO_LONG' },
+              ]);
+            });
           });
-        });
 
-        context('customResultPageButtonText is required if customResultPageButtonUrl is defined', function () {
-          it('throws an error', async function () {
-            // given
-            attributes.customResultPageButtonUrl = 'https://http.dog/';
-            attributes.customResultPageButtonText = null;
+          context('customResultPageText max length over 5000 character', function () {
+            it('throws an error', async function () {
+              // given
+              attributes.customResultPageText = 'Godzilla vs Kong'.repeat(335);
 
-            const error = await catchErr(() => new CampaignForCreation(attributes))();
-            expect(error.message).to.equal("Échec de validation de l'entité.");
-            expect(error.invalidAttributes).to.deep.equal([
-              {
-                attribute: 'customResultPageButtonText',
-                message: 'CUSTOM_RESULT_PAGE_BUTTON_TEXT_IS_REQUIRED_WHEN_CUSTOM_RESULT_PAGE_BUTTON_URL_IS_FILLED',
-              },
-            ]);
+              const error = await catchErr(() => new CampaignForCreation(attributes))();
+              expect(error.message).to.equal("Échec de validation de l'entité.");
+              expect(error.invalidAttributes).to.deep.equal([
+                { attribute: 'customResultPageText', message: 'CUSTOM_RESULT_PAGE_TEXT_IS_TOO_LONG' },
+              ]);
+            });
           });
-        });
 
-        context('customResultPageButtonUrl must be an URL', function () {
-          it('throws an error', async function () {
-            // given
-            attributes.customResultPageButtonText = 'Godzilla vs Kong';
-            attributes.customResultPageButtonUrl = 'Godzilla vs Kong';
+          context('customResultPageButtonUrl is required if customResultPageButtonText is defined', function () {
+            it('throws an error', async function () {
+              // given
+              attributes.customResultPageButtonText = 'Godzilla vs Kong';
+              attributes.customResultPageButtonUrl = null;
 
-            const error = await catchErr(() => new CampaignForCreation(attributes))();
-            expect(error.message).to.equal("Échec de validation de l'entité.");
-            expect(error.invalidAttributes).to.deep.equal([
-              { attribute: 'customResultPageButtonUrl', message: 'CUSTOM_RESULT_PAGE_BUTTON_URL_MUST_BE_A_URL' },
-            ]);
+              const error = await catchErr(() => new CampaignForCreation(attributes))();
+              expect(error.message).to.equal("Échec de validation de l'entité.");
+              expect(error.invalidAttributes).to.deep.equal([
+                {
+                  attribute: 'customResultPageButtonUrl',
+                  message: 'CUSTOM_RESULT_PAGE_BUTTON_URL_IS_REQUIRED_WHEN_CUSTOM_RESULT_PAGE_BUTTON_TEXT_IS_FILLED',
+                },
+              ]);
+            });
+          });
+
+          context('customResultPageButtonText is required if customResultPageButtonUrl is defined', function () {
+            it('throws an error', async function () {
+              // given
+              attributes.customResultPageButtonUrl = 'https://http.dog/';
+              attributes.customResultPageButtonText = null;
+
+              const error = await catchErr(() => new CampaignForCreation(attributes))();
+              expect(error.message).to.equal("Échec de validation de l'entité.");
+              expect(error.invalidAttributes).to.deep.equal([
+                {
+                  attribute: 'customResultPageButtonText',
+                  message: 'CUSTOM_RESULT_PAGE_BUTTON_TEXT_IS_REQUIRED_WHEN_CUSTOM_RESULT_PAGE_BUTTON_URL_IS_FILLED',
+                },
+              ]);
+            });
+          });
+
+          context('customResultPageButtonUrl must be an URL', function () {
+            it('throws an error', async function () {
+              // given
+              attributes.customResultPageButtonText = 'Godzilla vs Kong';
+              attributes.customResultPageButtonUrl = 'Godzilla vs Kong';
+
+              const error = await catchErr(() => new CampaignForCreation(attributes))();
+              expect(error.message).to.equal("Échec de validation de l'entité.");
+              expect(error.invalidAttributes).to.deep.equal([
+                { attribute: 'customResultPageButtonUrl', message: 'CUSTOM_RESULT_PAGE_BUTTON_URL_MUST_BE_A_URL' },
+              ]);
+            });
           });
         });
       });

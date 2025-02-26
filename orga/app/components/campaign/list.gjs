@@ -39,13 +39,6 @@ export default class List extends Component {
     return this.args.canDelete ?? false;
   }
 
-  get labels() {
-    return {
-      ASSESSMENT: 'components.campaign.type.explanation.ASSESSMENT',
-      PROFILES_COLLECTION: 'components.campaign.type.explanation.PROFILES_COLLECTION',
-    };
-  }
-
   @action
   toggleDeletionModal() {
     this.showDeletionModal = !this.showDeletionModal;
@@ -227,7 +220,7 @@ const Row = <template>
     {{yield}}
     <td>
       <span class="campaign-list__campaign-link-cell">
-        <CampaignType @labels={{@labels}} @campaignType={{@campaign.type}} @hideLabel={{true}} />
+        <CampaignType @campaignType={{@campaign.type}} @hideLabel={{true}} />
         <LinkTo @route="authenticated.campaigns.campaign" @model={{@campaign.id}}>
           {{@campaign.name}}
         </LinkTo>

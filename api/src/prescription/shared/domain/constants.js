@@ -6,6 +6,7 @@ const CampaignParticipationStatuses = {
 
 const CampaignTypes = {
   ASSESSMENT: 'ASSESSMENT',
+  EXAM: 'EXAM',
   PROFILES_COLLECTION: 'PROFILES_COLLECTION',
 };
 

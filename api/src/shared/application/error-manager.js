@@ -284,9 +284,7 @@ function _mapToHttpError(error) {
   if (error instanceof SharedDomainErrors.UserNotAuthorizedToUpdateResourceError) {
     return new HttpErrors.ForbiddenError(error.message);
   }
-  if (error instanceof SharedDomainErrors.UserNotAuthorizedToCreateCampaignError) {
-    return new HttpErrors.ForbiddenError(error.message);
-  }
+
   if (error instanceof SharedDomainErrors.UserNotAuthorizedToGenerateUsernamePasswordError) {
     return new HttpErrors.ForbiddenError(error.message);
   }

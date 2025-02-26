@@ -106,6 +106,30 @@ module('Unit | Model | prescriber', function (hooks) {
     });
   });
 
+  module('#enableCampaignWithoutUserProfile', function () {
+    test('it returns true when feature is enabled', function (assert) {
+      // given && when
+      const store = this.owner.lookup('service:store');
+      const model = store.createRecord('prescriber', {
+        features: { ['CAMPAIGN_WITHOUT_USER_PROFILE']: true },
+      });
+
+      // then
+      assert.true(model.enableCampaignWithoutUserProfile);
+    });
+
+    test('it returns false when feature is disabled', function (assert) {
+      // given && when
+      const store = this.owner.lookup('service:store');
+      const model = store.createRecord('prescriber', {
+        features: { ['CAMPAIGN_WITHOUT_USER_PROFILE']: false },
+      });
+
+      // then
+      assert.false(model.enableCampaignWithoutUserProfile);
+    });
+  });
+
   module('#computeOrganizationLearnerCertificability', function () {
     test('it returns true when feature is enabled', function (assert) {
       // given

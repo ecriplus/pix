@@ -58,6 +58,26 @@ class CampaignParticipationDoesNotBelongToUser extends DomainError {
   }
 }
 
+class OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError extends DomainError {
+  constructor(organizationId) {
+    const message = `L'organisation ${organizationId}, n'est pas autorisée à créer une campagne d'évaluation à envoi multiple.`;
+    super(message);
+  }
+}
+
+class OrganizationNotAuthorizedToCreateCampaignError extends DomainError {
+  constructor(organizationId, type) {
+    const message = `L'organisation ${organizationId}, n'est pas autorisée à créer une campagne de type ${type}.`;
+    super(message);
+  }
+}
+
+class UserNotAuthorizedToCreateCampaignError extends DomainError {
+  constructor(message = "Cet utilisateur n'est pas autorisé à créer une campagne.") {
+    super(message);
+  }
+}
+
 export {
   ArchivedCampaignError,
   CampaignCodeFormatError,
@@ -66,6 +86,9 @@ export {
   DeletedCampaignError,
   IsForAbsoluteNoviceUpdateError,
   MultipleSendingsUpdateError,
+  OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError,
+  OrganizationNotAuthorizedToCreateCampaignError,
   SwapCampaignMismatchOrganizationError,
   UnknownCampaignId,
+  UserNotAuthorizedToCreateCampaignError,
 };

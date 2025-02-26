@@ -8,7 +8,7 @@
     margin-left: var(--pix-spacing-2x);
   }
 
-  &__icon-assessment, &__icon-profile-collection {
+  &__icon {
     width: 1.5rem;
     height: 1.5rem;
 
@@ -25,11 +25,15 @@
     }
   }
 
-  &__icon-assessment {
+  &--assessment {
     fill: var(--pix-tertiary-500);
   }
 
-  &__icon-profile-collection {
+  &--profile-collection {
     fill: var(--pix-primary-500);
+  }
+
+  &--exam {
+    fill: var(--pix-secondary-700);
   }
 }
