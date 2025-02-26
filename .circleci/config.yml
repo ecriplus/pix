@@ -405,12 +405,19 @@ jobs:
             NODE_ENV: test
             TEST_DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration_datamart
       - run:
+          name: Prepare datawarehouse
+          command: npm run datawarehouse:prepare
+          environment:
+            NODE_ENV: test
+            TEST_DATAWAREHOUSE_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration_datawarehouse
+      - run:
           name: Test
           command: npm run test:api:integration
           environment:
             NODE_ENV: test
             TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration
             TEST_DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration_datamart
+            TEST_DATAWAREHOUSE_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration_datawarehouse
             TEST_REDIS_URL: redis://localhost:6379
             TEST_IMPORT_STORAGE_ENDPOINT: http://localhost:9090
             TEST_IMPORT_STORAGE_BUCKET_NAME: pix-import-test
@@ -440,7 +447,13 @@ jobs:
           command: npm run datamart:prepare
           environment:
             NODE_ENV: test
-            TEST_DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration_datamart
+            TEST_DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance_datamart
+      - run:
+          name: Prepare datawarehouse
+          command: npm run datawarehouse:prepare
+          environment:
+            NODE_ENV: test
+            TEST_DATAWAREHOUSE_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance_datawarehouse
       - run:
           name: Test
           command: |
@@ -450,7 +463,8 @@ jobs:
           environment:
             NODE_ENV: test
             TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance
-            TEST_DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration_datamart
+            TEST_DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance_datamart
+            TEST_DATAWAREHOUSE_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance_datawarehouse
             TEST_REDIS_URL: redis://localhost:6379
             TEST_IMPORT_STORAGE_ENDPOINT: http://localhost:9090
             TEST_IMPORT_STORAGE_BUCKET_NAME: pix-import-test
@@ -831,6 +845,7 @@ jobs:
           working_directory: ~/pix/api
           environment:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
             REDIS_URL: 'redis://localhost:6379'
           background: true
           command: npm start
@@ -857,6 +872,13 @@ jobs:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
           working_directory: ~/pix/api
           command: npm run cache:refresh
+
+      - run:
+          name: Prepare datamart
+          command: npm run datamart:prepare
+          working_directory: ~/pix/api
+          environment:
+            DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
 
       - run:
           name: Run tests
@@ -917,6 +939,7 @@ jobs:
           working_directory: ~/pix/api
           environment:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
             REDIS_URL: 'redis://localhost:6379'
           background: true
           command: npm start
@@ -943,6 +966,13 @@ jobs:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
           working_directory: ~/pix/api
           command: npm run cache:refresh
+
+      - run:
+          name: Prepare datamart
+          command: npm run datamart:prepare
+          working_directory: ~/pix/api
+          environment:
+            DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
 
       - run:
           name: Run tests
