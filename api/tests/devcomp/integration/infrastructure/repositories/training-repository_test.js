@@ -616,6 +616,33 @@ describe('Integration | Repository | training-repository', function () {
       expect(createdTraining.id).to.exist;
       expect(createdTraining).to.deep.include({ ...training, duration: { hours: 6 } });
     });
+
+    it('should handle other duration‘s format', async function () {
+      // given
+      const training = {
+        title: 'Titre du training',
+        internalTitle: 'Titre interne du training',
+        link: 'https://training-link.org',
+        type: 'webinaire',
+        duration: {
+          hours: 5,
+          minutes: 30,
+        },
+        locale: 'fr',
+        editorName: 'Un ministère',
+        editorLogoUrl: 'https://mon-logo.svg',
+      };
+
+      // when
+      const createdTraining = await trainingRepository.create({
+        training,
+      });
+
+      // then
+      expect(createdTraining).to.be.instanceOf(TrainingForAdmin);
+      expect(createdTraining.id).to.exist;
+      expect(createdTraining).to.deep.include({ ...training, duration: { hours: 5, minutes: 30 } });
+    });
   });
 
   describe('#update', function () {

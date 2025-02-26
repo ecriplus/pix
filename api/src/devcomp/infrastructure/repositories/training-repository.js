@@ -133,6 +133,9 @@ async function findWithTriggersByCampaignParticipationIdAndLocale({ campaignPart
 
 async function create({ training }) {
   const knexConn = DomainTransaction.getConnection();
+  if (typeof training.duration !== 'string') {
+    training.duration = _transformDurationFormat(training.duration);
+  }
   const pickedAttributes = pick(training, [
     'title',
     'internalTitle',
@@ -184,6 +187,10 @@ async function findPaginatedByUserId({ userId, locale, page }) {
     (userRecommendedTraining) => new UserRecommendedTraining(userRecommendedTraining),
   );
   return { userRecommendedTrainings, pagination };
+}
+
+function _transformDurationFormat(durationObject) {
+  return `${durationObject.days ?? 0}d${durationObject.hours ?? 0}h${durationObject.minutes ?? 0}m${durationObject.seconds ?? 0}s`;
 }
 
 export {
