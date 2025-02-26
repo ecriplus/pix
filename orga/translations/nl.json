@@ -438,7 +438,10 @@
       "divisions-description": "Selecteer de klas waarvoor je de attesten in PDF-formaat wilt exporteren.",
       "download-attestations-button": "Downloaden",
       "no-attestations": "Er zijn geen certificaten beschikbaar voor jouw selectie",
-      "select-label": "Selecteer een of meer klassen"
+      "select-divisions-label": "Selecteer een of meer klassen",
+      "select-label": "Certificat",
+      "SIXTH_GRADE": "Attestation de sensibilisation au numérique",
+      "PARENTHOOD": "Attestation de sensibilisation au numérique"
     },
     "campaign-activity": {
       "actions": {

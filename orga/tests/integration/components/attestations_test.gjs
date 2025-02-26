@@ -2,7 +2,10 @@ import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
-import Attestations, { SIXTH_GRADE_ATTESTATION_KEY } from 'pix-orga/components/attestations';
+import Attestations, {
+  PARENTHOOD_ATTESTATION_KEY,
+  SIXTH_GRADE_ATTESTATION_KEY,
+} from 'pix-orga/components/attestations';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -23,7 +26,7 @@ module('Integration | Component | Attestations', function (hooks) {
     test('it displays both way to download attestations', async function (assert) {
       // given
       const currentUser = this.owner.lookup('service:current-user');
-      currentUser.prescriber.availableAttestations = [SIXTH_GRADE_ATTESTATION_KEY, 'PARENTHOOD'];
+      currentUser.prescriber.availableAttestations = [SIXTH_GRADE_ATTESTATION_KEY, PARENTHOOD_ATTESTATION_KEY];
       const onSubmit = sinon.stub();
       const divisions = [];
 
@@ -52,7 +55,7 @@ module('Integration | Component | Attestations', function (hooks) {
       // then
       assert.ok(screen.getByRole('heading', { name: t('pages.attestations.title') }));
       assert.ok(screen.getByText(t('pages.attestations.divisions-description')));
-      assert.ok(screen.getByRole('textbox', { name: t('pages.attestations.select-label') }));
+      assert.ok(screen.getByRole('textbox', { name: t('pages.attestations.select-divisions-label') }));
       assert.ok(screen.getByPlaceholderText(t('common.filters.placeholder')));
       assert.ok(screen.getByRole('button', { name: t('pages.attestations.download-attestations-button') }));
     });
@@ -85,7 +88,7 @@ module('Integration | Component | Attestations', function (hooks) {
         <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} /></template>,
       );
 
-      const multiSelect = await screen.getByRole('textbox', { name: t('pages.attestations.select-label') });
+      const multiSelect = await screen.getByRole('textbox', { name: t('pages.attestations.select-divisions-label') });
       await click(multiSelect);
 
       const firstDivisionOption = await screen.findByRole('checkbox', { name: 'division1' });
@@ -137,10 +140,12 @@ module('Integration | Component | Attestations', function (hooks) {
         name: t('pages.attestations.download-attestations-button'),
       });
 
-      const select = await screen.getByLabelText('Attestation');
+      const select = await screen.getByLabelText(t('pages.attestations.select-label'));
       await click(select);
 
-      const firstOption = await screen.findByRole('option', { name: SIXTH_GRADE_ATTESTATION_KEY });
+      const firstOption = await screen.findByRole('option', {
+        name: t('pages.attestations.' + SIXTH_GRADE_ATTESTATION_KEY),
+      });
       await click(firstOption);
 
       await click(downloadButton);

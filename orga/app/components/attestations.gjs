@@ -12,6 +12,7 @@ import { and, eq } from 'ember-truth-helpers';
 import PageTitle from './ui/page-title';
 
 export const SIXTH_GRADE_ATTESTATION_KEY = 'SIXTH_GRADE';
+export const PARENTHOOD_ATTESTATION_KEY = 'PARENTHOOD';
 
 export default class Attestations extends Component {
   @service currentUser;
@@ -57,10 +58,14 @@ export default class Attestations extends Component {
 }
 
 class OtherAttestations extends Component {
+  @service intl;
   @tracked selectedAttestation = null;
 
   get options() {
-    return this.args.attestations.map((attestation) => ({ value: attestation, label: attestation }));
+    return this.args.attestations.map((attestation) => ({
+      value: attestation,
+      label: this.intl.t('pages.attestations.' + attestation),
+    }));
   }
 
   @action
@@ -92,7 +97,7 @@ class OtherAttestations extends Component {
           @onChange={{this.onSelectedAttestationChange}}
           @placeholder={{t "common.filters.placeholder"}}
         >
-          <:label>Attestation</:label>
+          <:label>{{t "pages.attestations.select-label"}}</:label>
         </PixSelect>
         <PixButton
           @type="submit"
@@ -139,7 +144,7 @@ class SixthGrade extends Component {
         @onChange={{this.onSelectDivision}}
         @placeholder={{t "common.filters.placeholder"}}
       >
-        <:label>{{t "pages.attestations.select-label"}}</:label>
+        <:label>{{t "pages.attestations.select-divisions-label"}}</:label>
         <:default as |option|>{{option.label}}</:default>
       </PixMultiSelect>
       <PixButton @type="submit" @size="small" @isDisabled={{this.isDisabled}}>
