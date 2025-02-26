@@ -3,6 +3,7 @@ import { render } from '@1024pix/ember-testing-library';
 import { find } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import ENV from 'mon-pix/config/environment';
 import { module, test } from 'qunit';
 
 import { clickByLabel } from '../../helpers/click-by-label';
@@ -170,6 +171,37 @@ module('Integration | Component | Challenge Embed Simulator', function (hooks) {
           assert.dom(screen.queryByText(t('pages.challenge.embed-simulator.actions.reset'))).doesNotExist();
         });
       });
+    });
+  });
+
+  module('allow clipboard-write', function () {
+    test('it should allow `clipboard-write` when the embed origin is allowed ', async function (assert) {
+      // given
+      this.set('embedDocument', {
+        url: `${ENV.APP.EMBED_ALLOWED_ORIGINS[0]}/embed-simulator.url`,
+        title: 'Embed simulator',
+        height: 200,
+      });
+
+      // when
+      await render(hbs`<ChallengeEmbedSimulator @embedDocument={{this.embedDocument}} />`);
+
+      // then
+      assert.strictEqual(find('.embed__iframe').allow, 'clipboard-write');
+    });
+    test('it should not allow `clipboard-write` when the embed origin is not allowed', async function (assert) {
+      // given
+      this.set('embedDocument', {
+        url: 'http://notAllowedOrigin/embed-simulator.url',
+        title: 'Embed simulator',
+        height: 200,
+      });
+
+      // when
+      await render(hbs`<ChallengeEmbedSimulator @embedDocument={{this.embedDocument}} />`);
+
+      // then
+      assert.notOk(find('.embed__iframe').allow);
     });
   });
 });
