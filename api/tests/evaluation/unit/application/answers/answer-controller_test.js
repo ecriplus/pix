@@ -1,7 +1,9 @@
 import { usecases } from '../../../../../lib/domain/usecases/index.js';
 import { answerController } from '../../../../../src/evaluation/application/answers/answer-controller.js';
+import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { config } from '../../../../../src/shared/config.js';
+import { Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | answer-controller', function () {
@@ -17,13 +19,13 @@ describe('Unit | Controller | answer-controller', function () {
       extractUserIdFromRequest: sinon.stub(),
       extractLocaleFromRequest: sinon.stub(),
     };
-    sinon.stub(usecases, 'correctAnswerThenUpdateAssessment');
     sinon.stub(questUsecases, 'rewardUser');
   });
 
   describe('#save', function () {
     const answerId = 1212;
     const assessmentId = 12;
+    const userId = 3;
     const challengeId = 'recdTpx4c0kPPDTtf';
     const result = null;
     const timeout = null;
@@ -34,6 +36,7 @@ describe('Unit | Controller | answer-controller', function () {
 
     let request;
     let deserializedAnswer;
+    let assessmentRepository;
     const serializedAnswer = {
       data: {
         type: 'answers',
@@ -103,129 +106,217 @@ describe('Unit | Controller | answer-controller', function () {
         challengeId,
         focusedOut,
       });
+      assessmentRepository = { get: sinon.stub() };
       deserializedAnswer.id = undefined;
+      deserializedAnswer.timeSpent = undefined;
+      answerSerializerStub.serialize.returns(serializedAnswer);
+      answerSerializerStub.deserialize.returns(deserializedAnswer);
+      requestResponseUtilsStub.extractUserIdFromRequest.withArgs(request).returns(userId);
+      requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+      sinon.stub(evaluationUsecases, 'saveAndCorrectAnswerForCompetenceEvaluation');
+      sinon.stub(evaluationUsecases, 'saveAndCorrectAnswerForCampaign');
+      sinon.stub(evaluationUsecases, 'saveAndCorrectAnswerForCertification');
+      sinon.stub(evaluationUsecases, 'saveAndCorrectAnswerForDemoAndPreview');
     });
 
-    context('when answer does not exist', function () {
+    context('assessment type', function () {
       let createdAnswer;
       let response;
-      const userId = 3;
 
-      beforeEach(async function () {
+      it('should call appropriate usecase when assessment is of type COMPETENCE_EVALUATION', async function () {
         // given
-        deserializedAnswer.id = undefined;
-        deserializedAnswer.timeSpent = undefined;
-        createdAnswer = domainBuilder.buildAnswer({ assessmentId });
-        answerSerializerStub.serialize.returns(serializedAnswer);
-        answerSerializerStub.deserialize.returns(deserializedAnswer);
-        usecases.correctAnswerThenUpdateAssessment.resolves(createdAnswer);
-        requestResponseUtilsStub.extractUserIdFromRequest.withArgs(request).returns(userId);
-        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
-      });
+        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.COMPETENCE_EVALUATION });
+        assessmentRepository.get.withArgs(assessmentId).resolves(assessment);
 
-      it('should call the usecase to save the answer', async function () {
         // when
         response = await answerController.save(request, hFake, {
           answerSerializer: answerSerializerStub,
           requestResponseUtils: requestResponseUtilsStub,
+          assessmentRepository,
         });
 
         // then
-        expect(usecases.correctAnswerThenUpdateAssessment).to.have.been.calledWithExactly({
+        expect(evaluationUsecases.saveAndCorrectAnswerForCompetenceEvaluation).to.have.been.calledWithExactly({
           answer: deserializedAnswer,
+          assessment,
           userId,
           locale,
         });
-      });
-      it('should serialize the answer', async function () {
-        // when
-        response = await answerController.save(request, hFake, {
-          answerSerializer: answerSerializerStub,
-          requestResponseUtils: requestResponseUtilsStub,
-        });
-
-        // then
         expect(answerSerializerStub.serialize).to.have.been.calledWithExactly(createdAnswer);
-      });
-      it('should return the serialized answer', async function () {
-        // when
-        response = await answerController.save(request, hFake, {
-          answerSerializer: answerSerializerStub,
-          requestResponseUtils: requestResponseUtilsStub,
-        });
-
-        // then
         expect(response.source).to.deep.equal(serializedAnswer);
         expect(response.statusCode).to.equal(201);
       });
 
-      context('quests', function () {
-        beforeEach(function () {
-          sinon.stub(config, 'featureToggles');
+      it('should call appropriate usecase when assessment is of type CAMPAIGN', async function () {
+        // given
+        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.CAMPAIGN });
+        assessmentRepository.get.withArgs(assessmentId).resolves(assessment);
+
+        // when
+        response = await answerController.save(request, hFake, {
+          answerSerializer: answerSerializerStub,
+          requestResponseUtils: requestResponseUtilsStub,
+          assessmentRepository,
         });
 
-        context('when quest feature is not enabled', function () {
-          it('should not call rewardUser', async function () {
-            // given
-            config.featureToggles.isQuestEnabled = false;
+        // then
+        expect(evaluationUsecases.saveAndCorrectAnswerForCampaign).to.have.been.calledWithExactly({
+          answer: deserializedAnswer,
+          assessment,
+          userId,
+          locale,
+        });
+        expect(answerSerializerStub.serialize).to.have.been.calledWithExactly(createdAnswer);
+        expect(response.source).to.deep.equal(serializedAnswer);
+        expect(response.statusCode).to.equal(201);
+      });
 
-            // when
-            await answerController.save(request, hFake, {
-              answerSerializer: answerSerializerStub,
-              requestResponseUtils: requestResponseUtilsStub,
-            });
+      it('should call appropriate usecase when assessment is of type CERTIFICATION', async function () {
+        // given
+        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.CERTIFICATION });
+        assessmentRepository.get.withArgs(assessmentId).resolves(assessment);
 
-            // then
-            expect(questUsecases.rewardUser).to.have.not.been.called;
-          });
+        // when
+        response = await answerController.save(request, hFake, {
+          answerSerializer: answerSerializerStub,
+          requestResponseUtils: requestResponseUtilsStub,
+          assessmentRepository,
         });
 
-        context('when quest feature enabled', function () {
-          it('should not call rewardUser if async is enabled', async function () {
-            // given
-            config.featureToggles.isQuestEnabled = true;
-            config.featureToggles.isAsyncQuestRewardingCalculationEnabled = true;
+        // then
+        expect(evaluationUsecases.saveAndCorrectAnswerForCertification).to.have.been.calledWithExactly({
+          answer: deserializedAnswer,
+          assessment,
+          userId,
+          locale,
+        });
+        expect(answerSerializerStub.serialize).to.have.been.calledWithExactly(createdAnswer);
+        expect(response.source).to.deep.equal(serializedAnswer);
+        expect(response.statusCode).to.equal(201);
+      });
 
-            // when
-            await answerController.save(request, hFake, {
-              answerSerializer: answerSerializerStub,
-              requestResponseUtils: requestResponseUtilsStub,
-            });
+      it('should call appropriate usecase when assessment is of type DEMO', async function () {
+        // given
+        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.DEMO });
+        assessmentRepository.get.withArgs(assessmentId).resolves(assessment);
 
-            // then
-            expect(questUsecases.rewardUser).to.have.not.been.called;
+        // when
+        response = await answerController.save(request, hFake, {
+          answerSerializer: answerSerializerStub,
+          requestResponseUtils: requestResponseUtilsStub,
+          assessmentRepository,
+        });
+
+        // then
+        expect(evaluationUsecases.saveAndCorrectAnswerForDemoAndPreview).to.have.been.calledWithExactly({
+          answer: deserializedAnswer,
+          assessment,
+          userId,
+          locale,
+        });
+        expect(answerSerializerStub.serialize).to.have.been.calledWithExactly(createdAnswer);
+        expect(response.source).to.deep.equal(serializedAnswer);
+        expect(response.statusCode).to.equal(201);
+      });
+
+      it('should call appropriate usecase when assessment is of type PREVIEW', async function () {
+        // given
+        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.PREVIEW });
+        assessmentRepository.get.withArgs(assessmentId).resolves(assessment);
+
+        // when
+        response = await answerController.save(request, hFake, {
+          answerSerializer: answerSerializerStub,
+          requestResponseUtils: requestResponseUtilsStub,
+          assessmentRepository,
+        });
+
+        // then
+        expect(evaluationUsecases.saveAndCorrectAnswerForDemoAndPreview).to.have.been.calledWithExactly({
+          answer: deserializedAnswer,
+          assessment,
+          userId,
+          locale,
+        });
+        expect(answerSerializerStub.serialize).to.have.been.calledWithExactly(createdAnswer);
+        expect(response.source).to.deep.equal(serializedAnswer);
+        expect(response.statusCode).to.equal(201);
+      });
+    });
+
+    context('quests', function () {
+      beforeEach(function () {
+        assessmentRepository.get.resolves(
+          domainBuilder.buildAssessment({ type: Assessment.types.COMPETENCE_EVALUATION }),
+        );
+        sinon.stub(config, 'featureToggles');
+      });
+
+      context('when quest feature is not enabled', function () {
+        it('should not call rewardUser', async function () {
+          // given
+          config.featureToggles.isQuestEnabled = false;
+
+          // when
+          await answerController.save(request, hFake, {
+            answerSerializer: answerSerializerStub,
+            requestResponseUtils: requestResponseUtilsStub,
+            assessmentRepository,
           });
 
-          it('should call rewardUser if async is not enabled', async function () {
-            // given
-            config.featureToggles.isQuestEnabled = true;
-            config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
+          // then
+          expect(questUsecases.rewardUser).to.have.not.been.called;
+        });
+      });
 
-            // when
-            await answerController.save(request, hFake, {
-              answerSerializer: answerSerializerStub,
-              requestResponseUtils: requestResponseUtilsStub,
-            });
+      context('when quest feature enabled', function () {
+        it('should not call rewardUser if async is enabled', async function () {
+          // given
+          config.featureToggles.isQuestEnabled = true;
+          config.featureToggles.isAsyncQuestRewardingCalculationEnabled = true;
 
-            // then
-            expect(questUsecases.rewardUser).to.have.been.calledWith({ userId });
+          // when
+          await answerController.save(request, hFake, {
+            answerSerializer: answerSerializerStub,
+            requestResponseUtils: requestResponseUtilsStub,
+            assessmentRepository,
           });
 
-          it('should not call the reward user usecase if userId is not provided', async function () {
-            // given
-            config.featureToggles.isQuestEnabled = true;
-            config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
-            requestResponseUtilsStub.extractUserIdFromRequest.withArgs(request).returns(null);
+          // then
+          expect(questUsecases.rewardUser).to.have.not.been.called;
+        });
 
-            // when
-            await answerController.save(request, hFake, {
-              answerSerializer: answerSerializerStub,
-              requestResponseUtils: requestResponseUtilsStub,
-            });
+        it('should call rewardUser if async is not enabled', async function () {
+          // given
+          config.featureToggles.isQuestEnabled = true;
+          config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
 
-            // then
-            expect(questUsecases.rewardUser).to.not.have.been.called;
+          // when
+          await answerController.save(request, hFake, {
+            answerSerializer: answerSerializerStub,
+            requestResponseUtils: requestResponseUtilsStub,
+            assessmentRepository,
           });
+
+          // then
+          expect(questUsecases.rewardUser).to.have.been.calledWith({ userId });
+        });
+
+        it('should not call the reward user usecase if userId is not provided', async function () {
+          // given
+          config.featureToggles.isQuestEnabled = true;
+          config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
+          requestResponseUtilsStub.extractUserIdFromRequest.withArgs(request).returns(null);
+
+          // when
+          await answerController.save(request, hFake, {
+            answerSerializer: answerSerializerStub,
+            requestResponseUtils: requestResponseUtilsStub,
+            assessmentRepository,
+          });
+
+          // then
+          expect(questUsecases.rewardUser).to.not.have.been.called;
         });
       });
     });

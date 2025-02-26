@@ -1,16 +1,46 @@
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import { config } from '../../../shared/config.js';
+import * as assessmentRepository from '../../../shared/infrastructure/repositories/assessment-repository.js';
 import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { evaluationUsecases } from '../../domain/usecases/index.js';
 import * as answerSerializer from '../../infrastructure/serializers/jsonapi/answer-serializer.js';
 import * as correctionSerializer from '../../infrastructure/serializers/jsonapi/correction-serializer.js';
 
-const save = async function (request, h, dependencies = { answerSerializer, requestResponseUtils }) {
+const save = async function (
+  request,
+  h,
+  dependencies = { answerSerializer, assessmentRepository, requestResponseUtils },
+) {
   const answer = dependencies.answerSerializer.deserialize(request.payload);
   const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
   const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
-  const createdAnswer = await usecases.correctAnswerThenUpdateAssessment({ answer, userId, locale });
+  const assessment = await dependencies.assessmentRepository.get(answer.assessmentId);
+  let correctedAnswer;
+  if (assessment.isCompetenceEvaluation()) {
+    correctedAnswer = await evaluationUsecases.saveAndCorrectAnswerForCompetenceEvaluation({
+      answer,
+      assessment,
+      userId,
+      locale,
+    });
+  } else if (assessment.isForCampaign()) {
+    correctedAnswer = await evaluationUsecases.saveAndCorrectAnswerForCampaign({ answer, assessment, userId, locale });
+  } else if (assessment.isCertification()) {
+    correctedAnswer = await evaluationUsecases.saveAndCorrectAnswerForCertification({
+      answer,
+      assessment,
+      userId,
+      locale,
+    });
+  } else {
+    correctedAnswer = await evaluationUsecases.saveAndCorrectAnswerForDemoAndPreview({
+      answer,
+      assessment,
+      userId,
+      locale,
+    });
+  }
   if (
     userId &&
     !config.featureToggles.isAsyncQuestRewardingCalculationEnabled &&
@@ -19,7 +49,7 @@ const save = async function (request, h, dependencies = { answerSerializer, requ
     await questUsecases.rewardUser({ userId });
   }
 
-  return h.response(dependencies.answerSerializer.serialize(createdAnswer)).created();
+  return h.response(dependencies.answerSerializer.serialize(correctedAnswer)).created();
 };
 
 const get = async function (request, _h, dependencies = { requestResponseUtils }) {
