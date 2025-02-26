@@ -6,6 +6,7 @@ import { buildPostgresEnvironment } from '../db/utils/build-postgres-environment
 dotenv.config({ path: `${__dirname}/../.env` });
 
 const baseConfiguration = {
+  name: 'datamart',
   migrationsDirectory: './migrations/',
   seedsDirectory: './seeds/',
   databaseUrl: process.env.DATAMART_DATABASE_URL,

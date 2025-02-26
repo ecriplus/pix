@@ -1,31 +1,20 @@
-import datamartKnexConfigs from '../datamart/knexfile.js';
 import { config } from '../src/shared/config.js';
 import { DatabaseConnection } from './database-connection.js';
-import { configureGlobalExtensions } from './knex-extensions.js';
+import { databaseConnections } from './database-connections.js';
 import knexConfigs from './knexfile.js';
 
 const { environment } = config;
 const liveDatabaseConnection = new DatabaseConnection(knexConfigs[environment]);
 const configuredLiveKnex = liveDatabaseConnection.knex;
 
-const datamartDatabaseConnection = new DatabaseConnection(datamartKnexConfigs[environment]);
-const configuredDatamartKnex = datamartDatabaseConnection.knex;
-
-configureGlobalExtensions();
+databaseConnections.addConnection(liveDatabaseConnection);
 
 async function disconnect() {
-  await configuredDatamartKnex?.destroy();
-  return configuredLiveKnex.destroy();
+  return databaseConnections.disconnect();
 }
 
 async function emptyAllTables() {
   return liveDatabaseConnection.emptyAllTables();
 }
 
-export {
-  configuredDatamartKnex as datamartKnex,
-  disconnect,
-  emptyAllTables,
-  configuredLiveKnex as knex,
-  liveDatabaseConnection,
-};
+export { disconnect, emptyAllTables, configuredLiveKnex as knex, liveDatabaseConnection };

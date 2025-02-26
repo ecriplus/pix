@@ -39,7 +39,7 @@ async function _exitOnSignal(signal) {
     logger.info('Stopping HAPI Oppsy server...');
     await server.oppsy.stop();
   }
-  logger.info('Closing connections to database...');
+  logger.info('Closing connections to databases...');
   await disconnect();
   logger.info('Closing connections to cache...');
   await learningContentCache.quit();

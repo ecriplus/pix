@@ -6,6 +6,7 @@ import { buildPostgresEnvironment } from './utils/build-postgres-environment.js'
 dotenv.config({ path: `${__dirname}/../.env` });
 
 const baseConfiguration = {
+  name: 'live',
   migrationsDirectory: './migrations/',
   seedsDirectory: './seeds/',
   databaseUrl: process.env.DATABASE_URL,

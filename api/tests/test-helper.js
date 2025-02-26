@@ -17,8 +17,9 @@ import sinon, { restore } from 'sinon';
 import sinonChai from 'sinon-chai';
 
 import { DatamartBuilder } from '../datamart/datamart-builder/datamart-builder.js';
+import { datamartKnex } from '../datamart/knex-database-connection.js';
 import { DatabaseBuilder } from '../db/database-builder/database-builder.js';
-import { datamartKnex, disconnect, knex } from '../db/knex-database-connection.js';
+import { disconnect, knex } from '../db/knex-database-connection.js';
 import { createMaddoServer } from '../server.maddo.js';
 import { PIX_ADMIN } from '../src/authorization/domain/constants.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';

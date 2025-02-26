@@ -1,4 +1,4 @@
-import { datamartKnex } from '../../../../../db/knex-database-connection.js';
+import { datamartKnex } from '../../../../../datamart/knex-database-connection.js';
 import { config } from '../../../../shared/config.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationResult } from '../../domain/read-models/parcoursup/CertificationResult.js';

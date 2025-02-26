@@ -1,5 +1,6 @@
-export function buildPostgresEnvironment({ databaseUrl, databaseSchema, pool, migrationsDirectory, seedsDirectory }) {
+export function buildPostgresEnvironment({ databaseUrl, databaseSchema, pool, migrationsDirectory, seedsDirectory, name }) {
   return {
+    name,
     client: 'postgresql',
     connection: databaseUrl,
     pool: {

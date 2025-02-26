@@ -12,9 +12,11 @@ const { logging } = config;
 
 export class DatabaseConnection {
   knex;
+  #name;
 
   constructor(knexConfig) {
     this.knex = Knex(knexConfig);
+    this.#name = knexConfig.name;
     this.knex.on('query', function (data) {
       if (logging.enableKnexPerformanceMonitoring) {
         const queryId = data.__knexQueryUid;
@@ -38,7 +40,12 @@ export class DatabaseConnection {
 
   async prepare() {
     await this.knex.raw('SELECT 1');
-    logger.info('Connection to database established.');
+    logger.info(`Connection to database ${this.#name} established.`);
+  }
+
+  async disconnect() {
+    await this.knex.destroy();
+    logger.info(`Closing connections to ${this.#name}`);
   }
 
   async emptyAllTables() {
