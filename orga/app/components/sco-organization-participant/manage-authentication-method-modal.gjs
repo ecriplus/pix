@@ -258,7 +258,7 @@ export default class ManageAuthenticationMethodModal extends Component {
                           }}</:label>
                       </PixInput>
                       {{#if (isClipboardSupported)}}
-                        <PixTooltip @id="copy-password-tooltip" @position="top" @isInline={{true}}>
+                        <PixTooltip @id="copy-password-tooltip" @position="bottom-left" @isInline={{true}}>
                           <:triggerElement>
                             <CopyButton
                               @text={{this.generatedPassword}}
@@ -268,7 +268,7 @@ export default class ManageAuthenticationMethodModal extends Component {
                                 "pages.sco-organization-participants.manage-authentication-method-modal.section.password.copy"
                               }}
                               aria-describedby="copy-password-tooltip"
-                              class="pix-icon-button pix-icon-button--small pix-icon-button--dark-grey"
+                              class="pix-icon-button pix-icon-button--small manage-authentication-window__clipboard__copy-password-button"
                             >
                               <PixIcon @name="copy" class="fa-inverse" />
                             </CopyButton>
