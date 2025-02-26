@@ -17,6 +17,8 @@ import { ForbiddenAccess } from '../../../shared/domain/errors.js';
  * @param {AuthenticationMethodRepository} params.authenticationMethodRepository
  * @param {UserLoginRepository} params.userLoginRepository
  * @param {UserRepository} params.userRepository
+ * @param {LastUserApplicationConnectionsRepository} params.LastUserApplicationConnectionsRepository,
+ * @param {RequestedApplication} params.RequestedApplication,
  * @return {Promise<{isAuthenticationComplete: boolean, givenName: string, familyName: string, authenticationKey: string, email: string}|{isAuthenticationComplete: boolean, pixAccessToken: string, logoutUrlUUID: string}>}
  */
 async function authenticateOidcUser({
@@ -34,6 +36,8 @@ async function authenticateOidcUser({
   authenticationMethodRepository,
   userLoginRepository,
   userRepository,
+  lastUserApplicationConnectionsRepository,
+  requestedApplication,
 }) {
   await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
   await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProviderCode);
@@ -86,6 +90,11 @@ async function authenticateOidcUser({
   }
 
   await userLoginRepository.updateLastLoggedAt({ userId: user.id });
+  await lastUserApplicationConnectionsRepository.upsert({
+    userId: user.id,
+    application: requestedApplication.applicationName,
+    lastLoggedAt: new Date(),
+  });
 
   return { pixAccessToken, logoutUrlUUID, isAuthenticationComplete: true };
 }

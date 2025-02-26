@@ -14,6 +14,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
     const identityProvider = 'OIDC_EXAMPLE_NET';
     const pixAccessToken = 'pixAccessToken';
     const audience = 'https://app.pix.fr';
+    const requestedApplication = new RequestedApplication('app');
 
     let request;
 
@@ -60,6 +61,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
         state: identityProviderState,
         iss,
         audience,
+        requestedApplication,
       });
       expect(request.yar.commit).to.have.been.calledOnce;
     });

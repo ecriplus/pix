@@ -185,12 +185,14 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
             lastName: 'Doe',
           },
         };
+        const headers = generateAuthenticatedUserRequestHeaders();
+        headers.cookie = cookies[0];
 
         // when
         const response = await server.inject({
           method: 'POST',
           url: '/api/oidc/token',
-          headers: { cookie: cookies[0] },
+          headers,
           payload,
         });
 
@@ -331,11 +333,14 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           // const getAccessTokenRequest = nock(settings.poleEmploi.tokenUrl).post('/').reply(200, getAccessTokenResponse);
           oidcExampleNetProvider.client.callback.resolves(getAccessTokenResponse);
 
+          const headers = generateAuthenticatedUserRequestHeaders();
+          headers.cookie = cookies[0];
+
           // when
           const response = await server.inject({
             method: 'POST',
             url: '/api/oidc/token',
-            headers: { cookie: cookies[0] },
+            headers,
             payload,
           });
 
