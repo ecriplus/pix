@@ -84,6 +84,12 @@ export default class Header extends Component {
     return options;
   }
 
+  get displayProgression() {
+    const { participation, campaign } = this.args;
+
+    return !campaign.isTypeExam && !participation.isShared;
+  }
+
   get selectedParticipation() {
     return this.participationsListOptions.find((participation) => participation.value === this.args.participation.id);
   }
@@ -140,12 +146,12 @@ export default class Header extends Component {
             <:title>{{t "pages.campaign-individual-results.start-date"}}</:title>
             <:content>{{dayjsFormat @participation.createdAt "DD MMM YYYY"}}</:content>
           </Information>
-          {{#unless @participation.isShared}}
+          {{#if this.displayProgression}}
             <Information>
               <:title>{{t "pages.assessment-individual-results.progression"}}</:title>
               <:content>{{t "common.result.percentage" value=@participation.progression}}</:content>
             </Information>
-          {{/unless}}
+          {{/if}}
           {{#if @participation.isShared}}
             <Information>
               <:title>{{t "pages.campaign-individual-results.shared-date"}}</:title>
