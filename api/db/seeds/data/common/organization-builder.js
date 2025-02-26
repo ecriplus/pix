@@ -1,3 +1,4 @@
+import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import {
   AGRICULTURE_TAG,
   FEATURE_ATTESTATIONS_MANAGEMENT_ID,
@@ -46,7 +47,10 @@ async function _createScoOrganization(databaseBuilder) {
     externalId: 'SCO_NOT_MANAGING',
     adminIds: [USER_ID_ADMIN_ORGANIZATION],
     memberIds: [USER_ID_MEMBER_ORGANIZATION],
-    features: [{ id: FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID }, { id: FEATURE_ATTESTATIONS_MANAGEMENT_ID }],
+    features: [
+      { id: FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID },
+      { id: FEATURE_ATTESTATIONS_MANAGEMENT_ID, params: JSON.stringify([ATTESTATIONS.SIXTH_GRADE]) },
+    ],
   });
 
   await organization.createOrganization({
