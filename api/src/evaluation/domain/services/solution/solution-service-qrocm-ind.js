@@ -46,11 +46,10 @@ function _compareAnswersAndSolutions(answers, solutions, enabledTreatments, qroc
   _.map(answers, (answer, answerKey) => {
     const solutionVariants = solutions[answerKey];
     if (!solutionVariants) {
-      logger.warn(
-        `[ERREUR CLE ANSWER] La clé ${answerKey} n'existe pas. Première clé de l'épreuve : ${
-          Object.keys(solutions)[0]
-        }`,
-      );
+      logger.warn({
+        event: 'badly_formatted_challenge',
+        message: `La clé ${answerKey} n'existe pas. Première clé de l'épreuve : ${Object.keys(solutions)[0]}`,
+      });
       throw new YamlParsingError();
     }
     if (useLevenshteinRatio(enabledTreatments) && qrocBlocksTypes[answerKey] != 'select') {
