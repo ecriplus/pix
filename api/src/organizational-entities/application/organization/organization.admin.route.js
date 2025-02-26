@@ -35,7 +35,7 @@ const register = async function (server) {
           }),
         },
         handler: (request, h) => organizationAdminController.getOrganizationDetails(request, h),
-        tags: ['api', 'organizations'],
+        tags: ['api', 'admin', 'organizational-entities', 'organizations'],
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
             '- Elle permet de récupérer toutes les informations d’une organisation',
@@ -74,10 +74,38 @@ const register = async function (server) {
           },
         },
         handler: (request, h) => organizationAdminController.updateOrganizationInformation(request, h),
-        tags: ['api', 'organizations'],
+        tags: ['api', 'admin', 'organizational-entities', 'organizations'],
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
             '- Elle permet de mettre à jour tout ou partie d’une organisation',
+        ],
+      },
+    },
+    {
+      method: 'POST',
+      path: '/api/admin/organizations/{id}/archive',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            id: identifiersType.organizationId,
+          }),
+        },
+        handler: organizationAdminController.archiveOrganization,
+        tags: ['api', 'admin', 'organizational-entities', 'organizations'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
+            "- Elle permet d'archiver une organisation",
         ],
       },
     },
