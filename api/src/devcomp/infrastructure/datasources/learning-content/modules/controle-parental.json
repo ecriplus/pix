@@ -245,7 +245,7 @@
             "isCompletionRequired": true,
             "title": "Simulateur de smartphone - activation du contrôle parental",
             "url": "https://epreuves.pix.fr/temps_en_ligne/temps_en_ligne.html?mode=module-activer&lang=fr",
-            "instruction": "",
+            "instruction": "<p></p>",
             "solution": "flügelhorn",
             "height": 720
           }
