@@ -1,6 +1,13 @@
 const DEFAULT_CHUNK_SIZE = 1_000;
 
-export async function extractTransformAndLoadData({ replication, datawarehouseKnex, datamartKnex }) {
+export async function extractTransformAndLoadData({
+  replicationName,
+  replicationRepository,
+  datawarehouseKnex,
+  datamartKnex,
+}) {
+  const replication = replicationRepository.getByName(replicationName);
+
   let context = { datawarehouseKnex, datamartKnex };
 
   const additionnalContext = await replication.before?.(context);

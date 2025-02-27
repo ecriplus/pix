@@ -2,6 +2,7 @@ import { extractTransformAndLoadData } from '../../../../../src/maddo/domain/use
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Maddo | Domain | Usecases | Unit | extract-transform-and-load-data', function () {
+  let replicationRepository;
   let fromQueryBuilder;
   let fromFunction;
 
@@ -14,6 +15,9 @@ describe('Maddo | Domain | Usecases | Unit | extract-transform-and-load-data', f
   let datawarehouseKnex;
 
   beforeEach(function () {
+    replicationRepository = {
+      getByName: sinon.stub(),
+    };
     fromQueryBuilder = {
       async *stream() {
         for (let i = 0; i < 5; i++) {
@@ -40,19 +44,25 @@ describe('Maddo | Domain | Usecases | Unit | extract-transform-and-load-data', f
 
   it('should insert into database with given query', async function () {
     // given
+    const replicationName = 'foo';
+    const replication = {
+      from: fromFunction,
+      to: toFunction,
+      chunkSize: 2,
+    };
+    replicationRepository.getByName.returns(replication);
 
     // when
     await extractTransformAndLoadData({
-      replication: {
-        from: fromFunction,
-        to: toFunction,
-        chunkSize: 2,
-      },
+      replicationName,
+      replicationRepository,
       datamartKnex,
       datawarehouseKnex,
     });
 
     // then
+    expect(replicationRepository.getByName).to.have.been.calledOnceWithExactly(replicationName);
+
     expect(fromFunction).to.have.been.calledOnce;
     expect(fromFunction).to.have.been.calledWithExactly({ datawarehouseKnex, datamartKnex });
     expect(fromFunction).to.have.been.calledBefore(toFunction);
@@ -71,11 +81,16 @@ describe('Maddo | Domain | Usecases | Unit | extract-transform-and-load-data', f
   describe('when chunkSize are not provided', function () {
     it('should use default chunkSize', async function () {
       // given
+      const replication = {
+        from: fromFunction,
+        to: toFunction,
+      };
+      replicationRepository.getByName.returns(replication);
+
+      // when
       await extractTransformAndLoadData({
-        replication: {
-          from: fromFunction,
-          to: toFunction,
-        },
+        replicationName: 'foo',
+        replicationRepository,
         datamartKnex,
         datawarehouseKnex,
       });
@@ -89,14 +104,18 @@ describe('Maddo | Domain | Usecases | Unit | extract-transform-and-load-data', f
       // given
       const beforeFunction = sinon.stub().resolves();
 
+      const replication = {
+        from: fromFunction,
+        before: beforeFunction,
+        to: toFunction,
+        chunkSize: 2,
+      };
+      replicationRepository.getByName.returns(replication);
+
       // when
       await extractTransformAndLoadData({
-        replication: {
-          from: fromFunction,
-          before: beforeFunction,
-          to: toFunction,
-          chunkSize: 2,
-        },
+        replicationName: 'foo',
+        replicationRepository,
         datamartKnex,
         datawarehouseKnex,
       });
@@ -115,14 +134,18 @@ describe('Maddo | Domain | Usecases | Unit | extract-transform-and-load-data', f
         // given
         const beforeFunction = sinon.stub().resolves({ foo: 'foo', bar: 'bar' });
 
+        const replication = {
+          from: fromFunction,
+          to: toFunction,
+          before: beforeFunction,
+          chunkSize: 2,
+        };
+        replicationRepository.getByName.returns(replication);
+
         // when
         await extractTransformAndLoadData({
-          replication: {
-            from: fromFunction,
-            to: toFunction,
-            before: beforeFunction,
-            chunkSize: 2,
-          },
+          replicationName: 'foo',
+          replicationRepository,
           datamartKnex,
           datawarehouseKnex,
         });
@@ -160,15 +183,18 @@ describe('Maddo | Domain | Usecases | Unit | extract-transform-and-load-data', f
     it('should call it for each row', async function () {
       // given
       const transform = (row) => row + 1;
+      const replication = {
+        from: fromFunction,
+        to: toFunction,
+        transform,
+        chunkSize: 2,
+      };
+      replicationRepository.getByName.returns(replication);
 
       // when
       await extractTransformAndLoadData({
-        replication: {
-          from: fromFunction,
-          to: toFunction,
-          transform,
-          chunkSize: 2,
-        },
+        replicationName: 'foo',
+        replicationRepository,
         datamartKnex,
         datawarehouseKnex,
       });

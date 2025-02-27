@@ -85,7 +85,7 @@ function createClientApplications(databaseBuilder) {
     name: 'pixData',
     clientId: 'pixData',
     clientSecret: 'pixdatasecret',
-    scopes: ['statistics'],
+    scopes: ['statistics', 'replication'],
   });
   databaseBuilder.factory.buildClientApplication({
     name: 'parcoursup',

@@ -1,47 +1,25 @@
-import { knex as datamartKnex } from '../../../datamart/knex-database-connection.js';
-import { knex as datawarehouseKnex } from '../../../datawarehouse/knex-database-connection.js';
-import { logger } from '../../shared/infrastructure/utils/logger.js';
-import { extractTransformAndLoadData } from '../domain/usecases/extract-transform-and-load-data.js';
+import { ReplicationJob } from '../domain/models/ReplicationJob.js';
+import { replicationJobRepository } from '../infrastructure/repositories/jobs/replication-job-repository.js';
 import * as replicationRepository from '../infrastructure/repositories/replication-repository.js';
 
 export async function replicate(
   request,
   h,
   dependencies = {
-    extractTransformAndLoadData,
     replicationRepository,
-    datamartKnex,
-    datawarehouseKnex,
-    logger,
+    replicationJobRepository,
   },
 ) {
+  const { replicationRepository, replicationJobRepository } = dependencies;
   const { replicationName } = request.params;
 
-  const replication = dependencies.replicationRepository.getByName(replicationName);
+  const replication = replicationRepository.getByName(replicationName);
 
   if (!replication) {
     return h.response().code(404);
   }
 
-  const promise = dependencies
-    .extractTransformAndLoadData({
-      replication,
-      datamartKnex: dependencies.datamartKnex,
-      datawarehouseKnex: dependencies.datawarehouseKnex,
-    })
-    .catch((err) =>
-      dependencies.logger.error(
-        {
-          event: 'replication',
-          err,
-        },
-        'Error during replication',
-      ),
-    );
-
-  if (!request.query.async) {
-    await promise;
-  }
+  await replicationJobRepository.performAsync(new ReplicationJob({ replicationName }));
 
   return h.response().code(204);
 }
