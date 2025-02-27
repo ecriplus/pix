@@ -51,7 +51,7 @@ describe('Unit | Shared | Domain | Service | user-service', function () {
         hashedPassword,
       });
       userToCreateRepository.create.resolves(user);
-      const expectedAuthenticationMethod = omit(authenticationMethod, ['id', 'createdAt', 'updatedAt']);
+      const expectedAuthenticationMethod = omit(authenticationMethod, ['id', 'createdAt', 'updatedAt', 'lastLoggedAt']);
 
       //when
       await userService.createUserWithPassword({

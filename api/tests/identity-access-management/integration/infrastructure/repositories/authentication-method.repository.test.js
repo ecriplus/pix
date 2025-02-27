@@ -34,6 +34,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           'id',
           'createdAt',
           'updatedAt',
+          'lastLoggedAt',
         ]);
       });
 
@@ -791,6 +792,41 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       // then
       const result = await knex('authentication-methods');
       expect(result).to.be.empty;
+    });
+  });
+
+  describe('#updateLastLoggedAtByIdentityProvider', function () {
+    context('when authentication method is Pix', function () {
+      it('updates lastLoggedAt in database', async function () {
+        // given
+        const now = new Date('2021-01-02');
+        const createdAt = new Date('2020-01-02');
+        const clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+        const identityProvider = NON_OIDC_IDENTITY_PROVIDERS.PIX.code;
+        const userId = databaseBuilder.factory.buildUser().id;
+        await databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
+          userId: userId,
+          createdAt: createdAt,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
+          userId,
+          identityProvider,
+        });
+
+        // then
+        const updatedAuthenticationMethod = await knex('authentication-methods')
+          .where({ userId: userId, identityProvider: identityProvider })
+          .first();
+
+        expect(updatedAuthenticationMethod).to.exist;
+        expect(updatedAuthenticationMethod.createdAt.toISOString()).to.equal(createdAt.toISOString());
+        expect(updatedAuthenticationMethod.lastLoggedAt.toISOString()).to.equal(now.toISOString());
+
+        clock.restore();
+      });
     });
   });
 

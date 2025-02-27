@@ -80,6 +80,7 @@ const validationSchema = Joi.object({
   userId: Joi.number().integer().required(),
   createdAt: Joi.date().optional(),
   updatedAt: Joi.date().optional(),
+  lastLoggedAt: Joi.date().allow(null).optional(),
 });
 
 class AuthenticationMethod {
@@ -91,6 +92,7 @@ class AuthenticationMethod {
     createdAt,
     updatedAt,
     userId,
+    lastLoggedAt,
   } = {}) {
     this.id = id;
     this.identityProvider = identityProvider;
@@ -99,11 +101,20 @@ class AuthenticationMethod {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.userId = userId;
+    this.lastLoggedAt = lastLoggedAt;
 
     validateEntity(validationSchema, this);
   }
 
-  static buildPixAuthenticationMethod({ id, password, shouldChangePassword = false, createdAt, updatedAt, userId }) {
+  static buildPixAuthenticationMethod({
+    id,
+    password,
+    shouldChangePassword = false,
+    createdAt,
+    updatedAt,
+    userId,
+    lastLoggedAt,
+  }) {
     const authenticationComplement = new PixAuthenticationComplement({ password, shouldChangePassword });
     return new AuthenticationMethod({
       id,
@@ -113,6 +124,7 @@ class AuthenticationMethod {
       createdAt,
       updatedAt,
       userId,
+      lastLoggedAt,
     });
   }
 }

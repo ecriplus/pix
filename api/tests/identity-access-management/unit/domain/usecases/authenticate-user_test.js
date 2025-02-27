@@ -1,4 +1,5 @@
 import { PIX_ADMIN, PIX_CERTIF, PIX_ORGA } from '../../../../../src/authorization/domain/constants.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { createWarningConnectionEmail } from '../../../../../src/identity-access-management/domain/emails/create-warning-connection.email.js';
 import {
   MissingOrInvalidCredentialsError,
@@ -20,6 +21,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
   let adminMemberRepository;
   let pixAuthenticationService;
   let emailRepository;
+  let authenticationMethodRepository;
   let emailValidationDemandRepository;
   let clock;
 
@@ -45,6 +47,9 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     userLoginRepository = {
       updateLastLoggedAt: sinon.stub(),
       findByUserId: sinon.stub(),
+    };
+    authenticationMethodRepository = {
+      updateLastLoggedAtByIdentityProvider: sinon.stub(),
     };
     adminMemberRepository = {
       get: sinon.stub(),
@@ -192,6 +197,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           pixAuthenticationService,
           userRepository,
           userLoginRepository,
+          authenticationMethodRepository,
           adminMemberRepository,
           refreshTokenRepository,
           tokenService,
@@ -243,6 +249,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
             refreshTokenRepository,
             userRepository,
             userLoginRepository,
+            authenticationMethodRepository,
             audience,
           });
 
@@ -267,7 +274,6 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     const audience = 'https://certif.pix.fr';
 
     pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
-
     const refreshToken = { value: 'jwt.refresh.token', userId: '456', scope, audience };
     sinon.stub(RefreshToken, 'generate').returns(refreshToken);
 
@@ -286,6 +292,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       tokenService,
       userRepository,
       userLoginRepository,
+      authenticationMethodRepository,
       audience,
     });
 
@@ -307,7 +314,6 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     const audience = 'https://certif.pix.fr';
 
     const user = domainBuilder.buildUser({ email: userEmail });
-
     pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
     tokenService.createAccessTokenFromUser
       .withArgs({ userId: user.id, source, audience })
@@ -324,11 +330,16 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       tokenService,
       userRepository,
       userLoginRepository,
+      authenticationMethodRepository,
       audience,
     });
 
     // then
     expect(userLoginRepository.updateLastLoggedAt).to.have.been.calledWithExactly({ userId: user.id });
+    expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.have.been.calledWithExactly({
+      userId: user.id,
+      identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
+    });
   });
 
   it('should rejects an error when given username (email) does not match an existing one', async function () {
@@ -413,6 +424,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           tokenService,
           userRepository,
           userLoginRepository,
+          authenticationMethodRepository,
           emailRepository,
           emailValidationDemandRepository,
           audience,
@@ -459,6 +471,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           tokenService,
           userRepository,
           userLoginRepository,
+          authenticationMethodRepository,
           emailRepository,
           audience,
         });
@@ -503,6 +516,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         tokenService,
         userRepository,
         userLoginRepository,
+        authenticationMethodRepository,
         emailRepository,
         audience,
       });
@@ -577,6 +591,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           tokenService,
           userRepository,
           userLoginRepository,
+          authenticationMethodRepository,
           audience,
         });
 
@@ -612,6 +627,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
             refreshTokenRepository,
             userRepository,
             userLoginRepository,
+            authenticationMethodRepository,
             audience,
           });
 
@@ -645,6 +661,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
             tokenService,
             userRepository,
             userLoginRepository,
+            authenticationMethodRepository,
             audience,
           });
 
