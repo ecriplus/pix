@@ -126,7 +126,6 @@ const schema = Joi.object({
   DATABASE_URL: Joi.string().uri().required(),
   DATAMART_DATABASE_URL: Joi.string().uri().required(),
   DATAWAREHOUSE_DATABASE_URL: Joi.string().uri().requiredForMaddo(),
-  DATAMART_DATABASE_SCHEMA: Joi.string().optional(),
   DOMAIN_PIX: Joi.string().optional(),
   DOMAIN_PIX_APP: Joi.string().optional(),
   DOMAIN_PIX_ORGA: Joi.string().optional(),
@@ -391,9 +390,6 @@ const configuration = (function () {
     },
     metrics: {
       flushIntervalSeconds: _getNumber(process.env.DIRECT_METRICS_FLUSH_INTERVAL, 5),
-    },
-    parcoursup: {
-      databaseSchema: process.env.DATAMART_DATABASE_SCHEMA || 'public',
     },
     partner: {
       fetchTimeOut: ms(process.env.FETCH_TIMEOUT_MILLISECONDS || '20s'),

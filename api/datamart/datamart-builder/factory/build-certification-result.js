@@ -1,7 +1,4 @@
-import { config } from '../../../src/shared/config.js';
 import { datamartBuffer } from '../datamart-buffer.js';
-
-const datamartDbSchema = config.parcoursup.databaseSchema;
 
 const buildCertificationResult = function ({
   nationalStudentId,
@@ -33,7 +30,7 @@ const buildCertificationResult = function ({
   };
 
   datamartBuffer.pushInsertable({
-    tableName: `${datamartDbSchema}.data_export_parcoursup_certif_result`,
+    tableName: 'data_export_parcoursup_certif_result',
     values,
   });
 
