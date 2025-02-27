@@ -134,6 +134,7 @@ const getUserDetailsForAdmin = async function (userId) {
       'authentication-methods.id',
       'authentication-methods.identityProvider',
       'authentication-methods.authenticationComplement',
+      'authentication-methods.lastLoggedAt',
     ])
     .join('users', 'users.id', 'authentication-methods.userId')
     .where({ userId });

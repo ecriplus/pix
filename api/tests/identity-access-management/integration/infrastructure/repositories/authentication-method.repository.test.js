@@ -689,6 +689,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           expiredDate,
           userId,
           updatedAt: new Date(),
+          lastLoggedAt: new Date(),
         });
         expect(updatedAuthenticationMethod).to.deepEqualInstance(expectedAuthenticationMethod);
       });
