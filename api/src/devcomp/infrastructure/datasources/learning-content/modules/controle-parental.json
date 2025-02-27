@@ -18,7 +18,7 @@
   "transitionTexts": [
     {
       "grainId": "f7e0ec28-06a2-4915-bcd7-53d5f5e3b9a7",
-      "content": "<p>Max entre bientôt au collège. <br>Ses parents souhaitent lui offrir son premier smartphone mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina, demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion.&nbsp;📺"
+      "content": "<p>Max va bientôt entrer au collège. <br>Ses parents souhaitent lui offrir son premier smartphone mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina, demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion.&nbsp;📺"
     },
     {
       "grainId": "fab2ec90-8350-4f51-8700-336bcd3acade",
@@ -54,7 +54,7 @@
             "type": "image",
             "url": "https://i.imgur.com/leS99Wj.png",
             "alt": "",
-            "alternativeText": "<p>Discussion du groupe <strong>Les gentils copains</strong> sur une application de messagerie instantannée&nbsp;:</p><p>Nina&nbsp;:&nbsp;Salut ! Ca y est ! Pour sa rentrée en 6e, j’achète un smartphone à Max. J’ai peur qu’il tombe sur des trucs pas top pour son âge. Un conseil ?</p><p>Tao&nbsp;:&nbsp;Ha moi, Inès a pas encore de smartphone. Elle le réclame mais c’est encore trop jeune !</p><p>Camille&nbsp;:&nbsp;Nous on n’a pas hésité. Le collège est loin et Théo prend le bus.</p><p>Nina&nbsp;:&nbsp;Et du coup, vous avez fait comment ?</p><p>Camille&nbsp;:&nbsp;On a beaucoup discuté avec Théo et son père. Pour fixer quelques règles. En plus, on a activé le contrôle parental du smartphone.</p><p>Tao&nbsp;:&nbsp;Le contrôle parental ? C’est utile ?</p><p>Camille&nbsp;:&nbsp;Oui oui. Ça restreint pas mal de choses… le temps passé, les sites visités. Attention, ça ne remplace pas la discussion avec son enfant, mais c’est un bon complément.</p>"
+            "alternativeText": "<p>Discussion du groupe <strong>Les gentils copains</strong> (notamment Nina, Tao, Camille, etc.) sur une application de messagerie instantanée&nbsp;:</p><p>Nina&nbsp;:&nbsp;Salut ! Ça y est ! Pour sa rentrée en 6e, j’achète un smartphone à Max. J’ai peur qu’il tombe sur des trucs pas top pour son âge. Un conseil ?</p><p>Tao&nbsp;:&nbsp;Ha moi, Inès a pas encore de smartphone. Elle le réclame mais c’est encore trop jeune !</p><p>Camille&nbsp;:&nbsp;Nous on n’a pas hésité. Le collège est loin et Théo prend le bus.</p><p>Nina&nbsp;:&nbsp;Et du coup, vous avez fait comment ?</p><p>Camille&nbsp;:&nbsp;On a beaucoup discuté avec Théo et son père. Pour fixer quelques règles. En plus, on a activé le contrôle parental du smartphone.</p><p>Tao&nbsp;:&nbsp;Le contrôle parental ? C’est utile ?</p><p>Camille&nbsp;:&nbsp;Oui oui. Ça restreint pas mal de choses… le temps passé, les sites visités. Attention, ça ne remplace pas la discussion avec son enfant, mais c’est un bon complément.</p>"
           }
         },
         {
