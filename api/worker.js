@@ -7,6 +7,7 @@ import { glob } from 'glob';
 import _ from 'lodash';
 import PgBoss from 'pg-boss';
 
+import { databaseConnections } from './db/database-connections.js';
 import { Metrics } from './src/monitoring/infrastructure/metrics.js';
 import { JobGroup } from './src/shared/application/jobs/job-controller.js';
 import { config } from './src/shared/config.js';
@@ -52,6 +53,7 @@ function createJobQueues(pgBoss) {
     await quitAllStorages();
     await metrics.clearMetrics();
     await jobQueues.stop();
+    await databaseConnections.disconnect();
 
     // Make sure pgBoss stopped before quitting
     pgBoss.on('stopped', () => {
