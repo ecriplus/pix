@@ -3,6 +3,19 @@ import * as certificationCenterMembershipSerializer from '../../../shared/infras
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 
+const findCertificationCenterMembershipsByCertificationCenter = async function (
+  request,
+  h,
+  dependencies = { certificationCenterMembershipSerializer },
+) {
+  const certificationCenterId = request.params.certificationCenterId;
+  const certificationCenterMemberships = await usecases.findCertificationCenterMembershipsByCertificationCenter({
+    certificationCenterId,
+  });
+
+  return dependencies.certificationCenterMembershipSerializer.serialize(certificationCenterMemberships);
+};
+
 const updateRole = async function (
   request,
   h,
@@ -72,6 +85,7 @@ const findCertificationCenterMembershipsByUser = async function (
 };
 
 const certificationCenterMembershipAdminController = {
+  findCertificationCenterMembershipsByCertificationCenter,
   updateRole,
   disableFromPixAdmin,
   createCertificationCenterMembershipByEmail,

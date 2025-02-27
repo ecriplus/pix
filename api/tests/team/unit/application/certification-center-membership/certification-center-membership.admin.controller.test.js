@@ -3,6 +3,45 @@ import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Team | Application | Controller | CertificationCenterMembershipAdminController', function () {
+  describe('#findCertificationCenterMembershipsByCertificationCenter', function () {
+    const certificationCenterId = 1;
+
+    const request = {
+      params: {
+        certificationCenterId,
+      },
+    };
+    let certificationCenterMembershipSerializerStub;
+
+    beforeEach(function () {
+      sinon.stub(usecases, 'findCertificationCenterMembershipsByCertificationCenter');
+      certificationCenterMembershipSerializerStub = {
+        serialize: sinon.stub(),
+      };
+    });
+
+    it('should call usecase and serializer and return ok', async function () {
+      // given
+      usecases.findCertificationCenterMembershipsByCertificationCenter
+        .withArgs({
+          certificationCenterId,
+        })
+        .resolves({});
+      certificationCenterMembershipSerializerStub.serialize.withArgs({}).returns('ok');
+
+      // when
+      const response =
+        await certificationCenterMembershipAdminController.findCertificationCenterMembershipsByCertificationCenter(
+          request,
+          hFake,
+          { certificationCenterMembershipSerializer: certificationCenterMembershipSerializerStub },
+        );
+
+      // then
+      expect(response).to.equal('ok');
+    });
+  });
+
   describe('#createCertificationCenterMembershipByEmail', function () {
     const certificationCenterId = 1;
     const email = 'user@example.net';

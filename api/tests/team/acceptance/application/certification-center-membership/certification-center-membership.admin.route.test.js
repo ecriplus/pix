@@ -415,4 +415,63 @@ describe('Acceptance | Team | Application | Admin | Routes | certification-cente
       });
     });
   });
+
+  describe('GET /api/admin/certification-centers/{certificationCenterId}/certification-center-memberships', function () {
+    let certificationCenterId;
+    let email;
+    let request;
+
+    beforeEach(async function () {
+      email = 'new.member@example.net';
+      const user = databaseBuilder.factory.buildUser({ email });
+      certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+      databaseBuilder.factory.buildCertificationCenterMembership({
+        certificationCenterId,
+        userId: user.id,
+      });
+      const adminId = databaseBuilder.factory.buildUser.withRole().id;
+
+      request = {
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminId }),
+        method: 'GET',
+        url: `/api/admin/certification-centers/${certificationCenterId}/certification-center-memberships`,
+      };
+
+      await databaseBuilder.commit();
+    });
+
+    it('should return 200 HTTP status', async function () {
+      // when
+      const response = await server.inject(request);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+
+    context('when user is not SuperAdmin', function () {
+      it('should return 403 HTTP status code ', async function () {
+        // given
+        request.headers = generateAuthenticatedUserRequestHeaders({ userId: 1111 });
+
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(403);
+      });
+    });
+
+    context('when user is not authenticated', function () {
+      it('should return 401 HTTP status code', async function () {
+        // given
+        request.headers.authorization = 'invalid.access.token';
+
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(401);
+      });
+    });
+  });
 });
