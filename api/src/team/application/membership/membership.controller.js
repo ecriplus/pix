@@ -21,6 +21,15 @@ const disable = async function (request, h) {
   return h.response().code(204);
 };
 
+const disableOwnOrganizationMembership = async function (request, h) {
+  const organizationId = request.payload.organizationId;
+  const userId = requestResponseUtils.extractUserIdFromRequest(request);
+
+  await usecases.disableOwnOrganizationMembership({ organizationId, userId });
+
+  return h.response().code(204);
+};
+
 const update = async function (request, h, dependencies = { requestResponseUtils, membershipSerializer }) {
   const membershipId = request.params.id;
   const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
@@ -50,6 +59,12 @@ const findPaginatedFilteredMemberships = async function (request) {
   return membershipSerializer.serialize(memberships, pagination);
 };
 
-const membershipController = { create, disable, findPaginatedFilteredMemberships, update };
+const membershipController = {
+  create,
+  disable,
+  disableOwnOrganizationMembership,
+  findPaginatedFilteredMemberships,
+  update,
+};
 
 export { membershipController };
