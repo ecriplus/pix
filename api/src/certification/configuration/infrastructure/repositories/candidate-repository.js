@@ -5,7 +5,7 @@ import { Candidate } from '../../domain/models/Candidate.js';
  * This function find candidates with a certification-course but no reconciledAt
  *
  * @param {Object} params
- * @param {number} params.[limit] - number of candidates to limit to
+ * @param {number} [params.limit] - number of candidates to limit to
  * @returns {Array<Candidate>} - Candidates returned have a reconciledAt built from certification-course
  */
 export const findCandidateWithoutReconciledAt = async function ({ limit } = {}) {
