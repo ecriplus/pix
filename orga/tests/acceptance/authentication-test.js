@@ -149,7 +149,7 @@ module('Acceptance | authentication', function (hooks) {
 
       module('When the prescriber has the missions management feature', function () {
         test('it should redirect prescriber to missions page', async function (assert) {
-          prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: true };
+          prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: { active: true, params: null } };
           // when
           await visit('/connexion');
 
@@ -289,7 +289,7 @@ module('Acceptance | authentication', function (hooks) {
           },
           'MEMBER',
           {
-            MISSIONS_MANAGEMENT: true,
+            MISSIONS_MANAGEMENT: { active: true, params: null },
           },
         );
         await authenticateSession(user.id);
@@ -310,7 +310,7 @@ module('Acceptance | authentication', function (hooks) {
           },
           'MEMBER',
           {
-            MISSIONS_MANAGEMENT: true,
+            MISSIONS_MANAGEMENT: { active: true, params: null },
           },
         );
         await authenticateSession(user.id);

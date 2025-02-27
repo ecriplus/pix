@@ -35,27 +35,31 @@ export default class Prescriber extends Model {
   }
 
   get enableMultipleSendingAssessment() {
-    return this.features[Prescriber.featureList.MULTIPLE_SENDING_ASSESSMENT];
+    return this.features[Prescriber.featureList.MULTIPLE_SENDING_ASSESSMENT]?.active;
   }
 
   get enableCampaignWithoutUserProfile() {
-    return this.features[Prescriber.featureList.CAMPAIGN_WITHOUT_USER_PROFILE];
+    return this.features[Prescriber.featureList.CAMPAIGN_WITHOUT_USER_PROFILE]?.active;
   }
 
   get computeOrganizationLearnerCertificability() {
-    return this.features[Prescriber.featureList.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY];
+    return this.features[Prescriber.featureList.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY]?.active;
   }
 
   get placesManagement() {
-    return this.features[Prescriber.featureList.PLACES_MANAGEMENT];
+    return this.features[Prescriber.featureList.PLACES_MANAGEMENT]?.active;
   }
 
   get attestationsManagement() {
-    return this.features[Prescriber.featureList.ATTESTATIONS_MANAGEMENT];
+    return this.features[Prescriber.featureList.ATTESTATIONS_MANAGEMENT]?.active;
+  }
+
+  get availableAttestations() {
+    return this.features[Prescriber.featureList.ATTESTATIONS_MANAGEMENT]?.params ?? [];
   }
 
   get missionsManagement() {
-    return this.features[Prescriber.featureList.MISSIONS_MANAGEMENT];
+    return this.features[Prescriber.featureList.MISSIONS_MANAGEMENT]?.active;
   }
 
   get isAdminOfTheCurrentOrganization() {
@@ -69,11 +73,11 @@ export default class Prescriber extends Model {
   }
 
   get hasOrganizationLearnerImport() {
-    return this.features[Prescriber.featureList.LEARNER_IMPORT];
+    return this.features[Prescriber.featureList.LEARNER_IMPORT]?.active;
   }
 
   get hasOralizationFeature() {
-    return this.features[Prescriber.featureList.ORALIZATION];
+    return this.features[Prescriber.featureList.ORALIZATION]?.active;
   }
 
   get hasParticipants() {
@@ -81,6 +85,6 @@ export default class Prescriber extends Model {
   }
 
   get hasCoverRateFeature() {
-    return this.features[Prescriber.featureList.COVER_RATE];
+    return this.features[Prescriber.featureList.COVER_RATE]?.active;
   }
 }

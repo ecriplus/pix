@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 export const SIXTH_GRADE_ATTESTATION_KEY = 'SIXTH_GRADE';
-export const SIXTH_GRADE_ATTESTATION_FILE_NAME = 'attestations';
+export const FILE_NAME = 'attestations';
 
 export default class AuthenticatedAttestationsController extends Controller {
   @service fileSaver;
@@ -14,12 +14,12 @@ export default class AuthenticatedAttestationsController extends Controller {
   @service intl;
 
   @action
-  async downloadSixthGradeAttestationsFile(selectedDivisions) {
+  async downloadAttestations(attestationKey, selectedDivisions) {
     try {
       this.sendMetrics();
       let url;
       const organizationId = this.currentUser.organization.id;
-      const baseUrl = `/api/organizations/${organizationId}/attestations/${SIXTH_GRADE_ATTESTATION_KEY}`;
+      const baseUrl = `/api/organizations/${organizationId}/attestations/${attestationKey}`;
       if (selectedDivisions.length > 0) {
         const formatedDivisionsForQuery = selectedDivisions
           .map((division) => `divisions[]=${encodeURIComponent(division)}`)
@@ -37,7 +37,7 @@ export default class AuthenticatedAttestationsController extends Controller {
       await this.fileSaver.save({
         url,
         token,
-        fileName: SIXTH_GRADE_ATTESTATION_FILE_NAME,
+        fileName: FILE_NAME,
         noContentMessageNotification: noAttestationMessageNotification,
       });
     } catch (error) {

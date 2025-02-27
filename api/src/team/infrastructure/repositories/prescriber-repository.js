@@ -136,7 +136,9 @@ async function _organizationFeatures(currentOrganizationId) {
   const allFeatures = await _allFeatures();
 
   const organizationFeatures = allFeatures.reduce((accumulator, feature) => {
-    return { ...accumulator, [feature]: availableFeatures.includes(feature) };
+    const availableFeature = availableFeatures.find(({ key }) => key === feature);
+    if (!availableFeature) return { ...accumulator, [feature]: { active: false, params: null } };
+    return { ...accumulator, [feature]: { active: true, params: availableFeature.params } };
   }, {});
 
   return organizationFeatures;
@@ -148,12 +150,11 @@ function _allFeatures() {
 
 function _availableFeaturesQueryBuilder(currentOrganizationId) {
   return knex('features')
-    .select('key')
+    .select('key', 'organization-features.params')
     .join('organization-features', function () {
       this.on('features.id', 'organization-features.featureId').andOn(
         'organization-features.organizationId',
         currentOrganizationId,
       );
-    })
-    .pluck('key');
+    });
 }

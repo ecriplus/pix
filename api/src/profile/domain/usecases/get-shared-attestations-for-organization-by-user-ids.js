@@ -18,7 +18,10 @@ export async function getSharedAttestationsForOrganizationByUserIds({
 
   const users = await userRepository.getByIds({ userIds });
 
-  const sharedProfileRewards = await organizationProfileRewardRepository.getByOrganizationId({ organizationId });
+  const sharedProfileRewards = await organizationProfileRewardRepository.getByOrganizationId({
+    attestationKey,
+    organizationId,
+  });
   const profileRewardIds = sharedProfileRewards.map((sharedProfileReward) => sharedProfileReward.profileRewardId);
 
   const profileRewards = await profileRewardRepository.getByIds({ profileRewardIds });

@@ -18,7 +18,7 @@ module('Acceptance | Missions Detail', function (hooks) {
     // given
     const user = createUserWithMembershipAndTermsOfServiceAccepted();
     const prescriber = createPrescriberByUser({ user });
-    prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: true };
+    prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: { active: true, params: null } };
     await authenticateSession(user.id);
 
     server.create('mission', {
@@ -39,7 +39,7 @@ module('Acceptance | Missions Detail', function (hooks) {
       // given
       const user = createUserWithMembershipAndTermsOfServiceAccepted();
       const prescriber = createPrescriberByUser({ user });
-      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: true };
+      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: { active: true, params: null } };
       await authenticateSession(user.id);
 
       server.create('mission', {
@@ -61,7 +61,7 @@ module('Acceptance | Missions Detail', function (hooks) {
       // given
       const user = createUserWithMembershipAndTermsOfServiceAccepted();
       const prescriber = createPrescriberByUser({ user });
-      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: true };
+      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: { active: true, params: null } };
       await authenticateSession(user.id);
 
       server.create('mission', {
@@ -80,7 +80,7 @@ module('Acceptance | Missions Detail', function (hooks) {
     hooks.beforeEach(async function () {
       const user = createUserWithMembershipAndTermsOfServiceAccepted({ organizationType: 'SCO-1D' });
       const prescriber = createPrescriberByUser({ user });
-      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: true };
+      prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: { active: true, params: null } };
       await authenticateSession(user.id);
       server.create('mission', {
         id: 1,

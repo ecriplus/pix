@@ -4,6 +4,7 @@ import { buildLegalDocumentVersion } from '../../../../../db/database-builder/fa
 import { buildLegalDocumentVersionUserAcceptance } from '../../../../../db/database-builder/factory/build-legal-document-version-user-acceptance.js';
 import { Organization } from '../../../../../src/organizational-entities/domain/models/Organization.js';
 import { Tag } from '../../../../../src/organizational-entities/domain/models/Tag.js';
+import { ATTESTATIONS } from '../../../../../src/profile/domain/constants.js';
 import { config as settings } from '../../../../../src/shared/config.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
@@ -437,7 +438,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
           const multipleSendingFeature = databaseBuilder.factory.buildFeature(
             ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT,
           );
-          const placesManagementFeature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.PLACES_MANAGEMENT);
+          const attestationsManagementFeature = databaseBuilder.factory.buildFeature(
+            ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT,
+          );
           databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY);
 
           databaseBuilder.factory.buildOrganizationFeature({
@@ -445,8 +448,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
             organizationId: organization.id,
           });
           databaseBuilder.factory.buildOrganizationFeature({
-            featureId: placesManagementFeature.id,
+            featureId: attestationsManagementFeature.id,
             organizationId: organization.id,
+            params: JSON.stringify([ATTESTATIONS.SIXTH_GRADE]),
           });
           await databaseBuilder.commit();
 
@@ -457,9 +461,9 @@ describe('Integration | Team | Infrastructure | Repository | Prescriber', functi
 
           // then
           expect(foundPrescriber.features).to.deep.equal({
-            [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: false,
-            [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: true,
-            [ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key]: true,
+            [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: false, params: null },
+            [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true, params: null },
+            [ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT.key]: { active: true, params: [ATTESTATIONS.SIXTH_GRADE] },
           });
         });
       });

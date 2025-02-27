@@ -439,11 +439,14 @@
       "title": "Résultats de {firstName} {lastName}"
     },
     "attestations": {
+      "PARENTHOOD": "Attestation de sensibilisation au numérique",
+      "SIXTH_GRADE": "Attestation de sensibilisation au numérique",
       "basic-description": "Exportez toutes les attestations au format PDF",
       "divisions-description": "Sélectionnez la classe pour laquelle vous souhaitez exporter les attestations au format PDF.",
       "download-attestations-button": "Télécharger",
       "no-attestations": "Aucune attestation disponible pour votre sélection",
-      "select-label": "Sélectionnez une ou plusieurs classes",
+      "select-divisions-label": "Sélectionnez une ou plusieurs classes",
+      "select-label": "Attestation",
       "title": "Attestations"
     },
     "campaign": {
