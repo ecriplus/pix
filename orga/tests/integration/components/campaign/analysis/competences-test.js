@@ -33,10 +33,12 @@ module('Integration | Component | Campaign::Analysis::Competences', function (ho
     this.set('campaignCollectiveResult', campaignCollectiveResult);
 
     // when
-    await render(hbs`<Campaign::Analysis::Competences @campaignCollectiveResult={{this.campaignCollectiveResult}} />`);
+    const screen = await render(
+      hbs`<Campaign::Analysis::Competences @campaignCollectiveResult={{this.campaignCollectiveResult}} />`,
+    );
 
     // then
-    const firstCompetence = '[aria-label="Compétence"]:first-child';
+    const firstCompetence = screen.getAllByRole('row')[1];
     assert.dom(firstCompetence).containsText('Competence A');
     assert.dom(firstCompetence).containsText('33%');
   });
