@@ -343,7 +343,9 @@
     "template-name": "importmodel"
   },
   "email-sender-name": {
-    "pix-app": "PIX - Niet beantwoorden"
+    "pix-app": "PIX - Niet beantwoorden",
+    "pix-certif": "Pix Certif - Niet reageren",
+    "pix-orga": "Pix Orga - Niet reageren"
   },
   "entity-validation-errors": {
     "ACCEPT_CGU": "Je moet de gebruiksvoorwaarden van Pix accepteren om een account aan te maken.",
@@ -382,6 +384,14 @@
       "REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS": {
         "candidate": "Je hebt meer dan 50% van de vragen fout beantwoord, waardoor je hele certificering ongeldig wordt en je een score van 0 pix krijgt.",
         "organization": "De kandidaat beantwoordde meer dan 50% van de vragen fout, waardoor zijn hele certificering ongeldig werd en hij een score van 0 pix kreeg."
+      },
+      "LOWER_LEVEL_COMPLEMENTARY_CERTIFICATION_ACQUIRED": {
+        "candidate": "Gefeliciteerd, met je score heb je je aanvullende certificering goedgekeurd! Het behaalde niveau is het niveau dat lager is dan waarvoor je in aanmerking kwam.",
+        "organization": "De score van de kandidaat was niet voldoende om zijn aanvullende certificering te valideren op het niveau waarvoor hij in aanmerking kwam. Toch heeft hij het direct lagere niveau van deze aanvullende certificering gevalideerd. Het is dus gecertificeerd."
+      },
+      "REJECTED_DUE_TO_LACK_OF_ANSWERS": {
+        "candidate": "Het aantal beantwoorde vragen tijdens je certificeringstoets is onvoldoende en staat ons niet toe om je een Pix-certificering te geven.",
+        "organization": "Het aantal vragen dat de kandidaat tijdens zijn certificeringstest beantwoordt, is onvoldoende en stelt ons niet in staat om hem of haar een Pix-certificering te geven."
       }
     }
   },
