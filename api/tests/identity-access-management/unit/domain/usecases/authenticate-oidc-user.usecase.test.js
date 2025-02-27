@@ -2,6 +2,7 @@ import * as appMessages from '../../../../../src/authorization/domain/constants.
 import { POLE_EMPLOI } from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { authenticateOidcUser } from '../../../../../src/identity-access-management/domain/usecases/authenticate-oidc-user.usecase.js';
+import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { AdminMember } from '../../../../../src/shared/domain/models/AdminMember.js';
 import { AuthenticationSessionContent } from '../../../../../src/shared/domain/models/AuthenticationSessionContent.js';
@@ -15,9 +16,11 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
     let userRepository;
     let adminMemberRepository;
     let userLoginRepository;
+    let lastUserApplicationConnectionsRepository;
     let oidcAuthenticationServiceRegistry;
     const externalIdentityId = '094b83ac-2e20-4aa8-b438-0bc91748e4a6';
     const audience = 'https://app.pix.fr';
+    const requestedApplication = new RequestedApplication('app');
 
     beforeEach(function () {
       oidcAuthenticationService = {
@@ -46,6 +49,9 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
       };
       userLoginRepository = {
         updateLastLoggedAt: sinon.stub().resolves(),
+      };
+      lastUserApplicationConnectionsRepository = {
+        upsert: sinon.stub().resolves(),
       };
     });
 
@@ -276,6 +282,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
             authenticationMethodRepository,
             userRepository,
             userLoginRepository,
+            lastUserApplicationConnectionsRepository,
+            requestedApplication,
           });
 
           // then
@@ -310,6 +318,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
             authenticationMethodRepository,
             userRepository,
             userLoginRepository,
+            requestedApplication,
+            lastUserApplicationConnectionsRepository,
           });
 
           // then
@@ -332,8 +342,10 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
     let userRepository;
     let userLoginRepository;
     let oidcAuthenticationServiceRegistry;
+    let lastUserApplicationConnectionsRepository;
     const externalIdentityId = '094b83ac-2e20-4aa8-b438-0bc91748e4a6';
     const audience = 'https://app.pix.fr';
+    const requestedApplication = new RequestedApplication('app');
 
     beforeEach(function () {
       oidcAuthenticationService = {
@@ -362,6 +374,9 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
       userLoginRepository = {
         updateLastLoggedAt: sinon.stub().resolves(),
       };
+      lastUserApplicationConnectionsRepository = {
+        upsert: sinon.stub().resolves(),
+      };
     });
 
     context('when user has an account', function () {
@@ -387,6 +402,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           userRepository,
           userLoginRepository,
           audience,
+          requestedApplication,
+          lastUserApplicationConnectionsRepository,
         });
 
         // then
@@ -424,6 +441,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           userRepository,
           userLoginRepository,
           audience,
+          requestedApplication,
+          lastUserApplicationConnectionsRepository,
         });
 
         // then
@@ -462,6 +481,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           userRepository,
           userLoginRepository,
           audience,
+          requestedApplication,
+          lastUserApplicationConnectionsRepository,
         });
 
         // then

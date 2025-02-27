@@ -16,6 +16,8 @@ import { AuthenticationMethod } from '../models/AuthenticationMethod.js';
  * @param {string} params.identityProvider
  * @param {string} params.audience
  * @param {OidcAuthenticationService} params.oidcAuthenticationService
+ * @param {RequestedApplication} params.requestedApplication
+ * @param {lastUserApplicationConnectionsRepository} params.lastUserApplicationConnectionsRepository
  * @param {AuthenticationSessionService} params.authenticationSessionService
  * @param {AuthenticationMethodRepository} params.authenticationMethodRepository
  * @param {UserRepository} params.userRepository
@@ -30,6 +32,8 @@ export const reconcileOidcUserForAdmin = async function ({
   authenticationMethodRepository,
   userRepository,
   userLoginRepository,
+  lastUserApplicationConnectionsRepository,
+  requestedApplication,
   audience,
 }) {
   const sessionContentAndUserInfo = await authenticationSessionService.getByKey(authenticationKey);
@@ -61,7 +65,13 @@ export const reconcileOidcUserForAdmin = async function ({
   });
 
   const accessToken = await oidcAuthenticationService.createAccessToken({ userId, audience });
+
   await userLoginRepository.updateLastLoggedAt({ userId });
+  await lastUserApplicationConnectionsRepository.upsert({
+    userId,
+    application: requestedApplication.applicationName,
+    lastLoggedAt: new Date(),
+  });
 
   return accessToken;
 };

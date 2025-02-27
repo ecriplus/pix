@@ -3,7 +3,7 @@ import { PIX_ADMIN } from '../../../authorization/domain/constants.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as oidcProviderSerializer from '../../infrastructure/serializers/jsonapi/oidc-identity-providers.serializer.js';
-import { getForwardedOrigin } from '../../infrastructure/utils/network.js';
+import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/utils/network.js';
 
 /**
  * @param request
@@ -45,6 +45,7 @@ async function reconcileUserForAdmin(
 ) {
   const { email, identityProvider, authenticationKey } = request.deserializedPayload;
   const origin = getForwardedOrigin(request.headers);
+  const requestedApplication = RequestedApplication.fromOrigin(origin);
 
   await dependencies.oidcAuthenticationServiceRegistry.loadOidcProviderServices();
   await dependencies.oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProvider);
@@ -60,6 +61,7 @@ async function reconcileUserForAdmin(
     authenticationKey,
     oidcAuthenticationService,
     audience: origin,
+    requestedApplication,
   });
 
   return h.response({ access_token: accessToken }).code(200);

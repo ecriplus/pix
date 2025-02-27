@@ -3,7 +3,7 @@ import { requestResponseUtils } from '../../../shared/infrastructure/utils/reque
 import { usecases } from '../../domain/usecases/index.js';
 import * as oidcProviderSerializer from '../../infrastructure/serializers/jsonapi/oidc-identity-providers.serializer.js';
 import * as oidcSerializer from '../../infrastructure/serializers/jsonapi/oidc-serializer.js';
-import { getForwardedOrigin } from '../../infrastructure/utils/network.js';
+import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/utils/network.js';
 
 /**
  * @typedef {function} authenticateOidcUser
@@ -14,6 +14,7 @@ import { getForwardedOrigin } from '../../infrastructure/utils/network.js';
 async function authenticateOidcUser(request, h) {
   const { code, state, iss, identityProvider: identityProviderCode, target } = request.deserializedPayload;
   const origin = getForwardedOrigin(request.headers);
+  const requestedApplication = RequestedApplication.fromOrigin(origin);
 
   const sessionState = request.yar.get('state', true);
   const nonce = request.yar.get('nonce', true);
@@ -32,6 +33,7 @@ async function authenticateOidcUser(request, h) {
     nonce,
     sessionState,
     audience: origin,
+    requestedApplication,
   });
 
   if (result.isAuthenticationComplete) {
@@ -62,6 +64,7 @@ async function createUser(request, h, dependencies = { requestResponseUtils }) {
   const localeFromCookie = request.state?.locale;
   const language = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
   const origin = getForwardedOrigin(request.headers);
+  const requestedApplication = RequestedApplication.fromOrigin(origin);
 
   const { accessToken: access_token, logoutUrlUUID: logout_url_uuid } = await usecases.createOidcUser({
     authenticationKey,
@@ -69,6 +72,7 @@ async function createUser(request, h, dependencies = { requestResponseUtils }) {
     localeFromCookie,
     language,
     audience: origin,
+    requestedApplication,
   });
 
   return h.response({ access_token, logout_url_uuid }).code(200);
@@ -152,11 +156,13 @@ async function reconcileUser(request, h) {
   const { identityProvider, authenticationKey } = request.deserializedPayload;
 
   const origin = getForwardedOrigin(request.headers);
+  const requestedApplication = RequestedApplication.fromOrigin(origin);
 
   const result = await usecases.reconcileOidcUser({
     authenticationKey,
     identityProvider,
     audience: origin,
+    requestedApplication,
   });
 
   return h.response({ access_token: result.accessToken, logout_url_uuid: result.logoutUrlUUID }).code(200);

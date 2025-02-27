@@ -11,6 +11,8 @@ import { AuthenticationMethod } from '../models/AuthenticationMethod.js';
  * @param {AuthenticationMethodRepository} params.authenticationMethodRepository
  * @param {OidcAuthenticationServiceRegistry} params.oidcAuthenticationServiceRegistry
  * @param {UserLoginRepository} params.userLoginRepository
+ * @param {LastUserApplicationConnectionsRepository} params.lastUserApplicationConnectionsRepository
+ * @param {RequestedApplication} params.requestedApplication
  * @return {Promise<{accessToken: string, logoutUrlUUID: string}|AuthenticationKeyExpired|MissingUserAccountError>}
  */
 export const reconcileOidcUser = async function ({
@@ -20,7 +22,9 @@ export const reconcileOidcUser = async function ({
   authenticationMethodRepository,
   oidcAuthenticationServiceRegistry,
   userLoginRepository,
+  lastUserApplicationConnectionsRepository,
   audience,
+  requestedApplication,
 }) {
   await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
   await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProvider);
@@ -65,6 +69,11 @@ export const reconcileOidcUser = async function ({
   }
 
   await userLoginRepository.updateLastLoggedAt({ userId });
+  await lastUserApplicationConnectionsRepository.upsert({
+    userId,
+    application: requestedApplication.applicationName,
+    lastLoggedAt: new Date(),
+  });
 
   return { accessToken, logoutUrlUUID };
 };
