@@ -5,3 +5,4 @@ postdeploy: npm run postdeploy:maddo
 # and https://github.com/npm/npm/issues/4603
 # for more information
 web: exec node maddo.js
+worker: exec node worker.js maddo
