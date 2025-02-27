@@ -1,8 +1,8 @@
 import 'dotenv/config';
 
-import { disconnect, prepareDatabaseConnection } from './db/knex-database-connection.js';
+import { databaseConnections } from './db/database-connections.js';
 import { createMaddoServer } from './server.maddo.js';
-import { config, schema as configSchema } from './src/shared/config.js';
+import { schema as configSchema } from './src/shared/config.js';
 import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
 import { logger } from './src/shared/infrastructure/utils/logger.js';
 import { redisMonitor } from './src/shared/infrastructure/utils/redis-monitor.js';
@@ -12,19 +12,7 @@ validateEnvironmentVariables(configSchema);
 
 let server;
 
-async function _setupEcosystem() {
-  /*
-    First connection with Knex requires infrastructure operations such as
-    DNS resolution. So we execute one harmless query to our database
-    so those matters are resolved before starting the server.
-  */
-  await prepareDatabaseConnection();
-}
-
 const start = async function () {
-  if (config.featureToggles.setupEcosystemBeforeStart) {
-    await _setupEcosystem();
-  }
   server = await createMaddoServer();
   await server.start();
 };
@@ -38,8 +26,8 @@ async function _exitOnSignal(signal) {
     logger.info('Stopping HAPI Oppsy server...');
     await server.oppsy.stop();
   }
-  logger.info('Closing connections to database...');
-  await disconnect();
+  logger.info('Closing connections to databases...');
+  await databaseConnections.disconnect();
   logger.info('Closing connections to cache...');
   await quitAllStorages();
   logger.info('Closing connections to redis monitor...');

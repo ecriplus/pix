@@ -1,32 +1,6 @@
-import { emptyAllTables, knex } from '../../../db/knex-database-connection.js';
-import * as userRepository from '../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
-import { UserNotFoundError } from '../../../src/shared/domain/errors.js';
-import { databaseBuilder, expect } from '../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../test-helper.js';
 
-describe('Integration | Infrastructure | knex-database-connection', function () {
-  it('should connect to the database', async function () {
-    // when
-    const resultSet = await knex.raw('SELECT 1 as value');
-
-    // then
-    expect(resultSet.rows || resultSet).to.deep.equal([{ value: 1 }]);
-  });
-
-  it('should empty all tables', async function () {
-    // Increase the test timeout because the table truncate can be long to respond sometimes.
-    this.timeout(5000);
-
-    // given
-    const { id } = databaseBuilder.factory.buildUser();
-    await databaseBuilder.commit();
-
-    // when
-    await emptyAllTables();
-
-    // then
-    await expect(userRepository.get(id)).to.be.rejectedWith(UserNotFoundError);
-  });
-
+describe('Integration | Infrastructure | knex-extensions', function () {
   context('QueryBuilder extension - whereInArray', function () {
     it('should return records that satisfy the where any clause', async function () {
       // given

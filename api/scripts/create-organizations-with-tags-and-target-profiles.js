@@ -4,7 +4,7 @@ import 'dotenv/config';
 
 import lodash from 'lodash';
 
-import { disconnect } from '../db/knex-database-connection.js';
+import { databaseConnections } from '../db/database-connections.js';
 import { createOrganizationsWithTagsAndTargetProfiles } from '../lib/domain/usecases/create-organizations-with-tags-and-target-profiles.js';
 import * as organizationValidator from '../lib/domain/validators/organization-with-tags-and-target-profiles-script.js';
 import * as targetProfileShareRepository from '../lib/infrastructure/repositories/target-profile-share-repository.js';
@@ -133,7 +133,7 @@ async function main() {
       console.error(error);
       process.exitCode = 1;
     } finally {
-      await disconnect();
+      await databaseConnections.disconnect();
       // l'import de OidcIdentityProviders dans les validateurs démarre le service redis
       // il faut donc stopper le process pour que celui ci s'arrête, il suffit d'avoir l'import du storage pour y avoir accès
       temporaryStorage.quit();

@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import fp from 'lodash/fp.js';
 import { readFile, set_fs, utils as xlsxUtils } from 'xlsx';
 
-import { disconnect } from '../../../db/knex-database-connection.js';
+import { databaseConnections } from '../../../db/database-connections.js';
 import * as stageCollectionRepository from '../../../src/evaluation/infrastructure/repositories/stage-collection-repository.js';
 import * as targetProfileAdministrationRepository from '../../../src/prescription/target-profile/infrastructure/repositories/target-profile-administration-repository.js';
 import { learningContentCache as cache } from '../../../src/shared/infrastructure/caches/learning-content-cache.js';
@@ -136,7 +136,7 @@ async function main() {
       logger.error(error);
       process.exitCode = 1;
     } finally {
-      await disconnect();
+      await databaseConnections.disconnect();
       await cache.quit();
     }
   }

@@ -10,6 +10,9 @@ describe('Shared | Integration | Config', function () {
           MADDO: 'true',
           AUTH_SECRET: 'auth secret',
           LOG_ENABLED: 'true',
+          DATABASE_URL: 'postgres://plop:plop@localhost:1234/foo',
+          DATAMART_DATABASE_URL: 'postgres://plop:plop@localhost:5678/bar',
+          DATAWAREHOUSE_DATABASE_URL: 'postgres://plop:plop@localhost:8910/bar',
         };
 
         // when

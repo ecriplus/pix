@@ -123,8 +123,9 @@ const schema = Joi.object({
   CPF_SEND_EMAIL_JOB_RECIPIENT: Joi.string().optional(),
   DATABASE_CONNECTION_POOL_MAX_SIZE: Joi.number().integer().min(0).optional(),
   DATABASE_CONNECTION_POOL_MIN_SIZE: Joi.number().integer().min(0).optional(),
-  DATABASE_URL: Joi.string().uri().optional(),
-  DATAMART_DATABASE_SCHEMA: Joi.string().optional(),
+  DATABASE_URL: Joi.string().uri().required(),
+  DATAMART_DATABASE_URL: Joi.string().uri().required(),
+  DATAWAREHOUSE_DATABASE_URL: Joi.string().uri().requiredForMaddo(),
   DOMAIN_PIX: Joi.string().optional(),
   DOMAIN_PIX_APP: Joi.string().optional(),
   DOMAIN_PIX_ORGA: Joi.string().optional(),
@@ -389,9 +390,6 @@ const configuration = (function () {
     },
     metrics: {
       flushIntervalSeconds: _getNumber(process.env.DIRECT_METRICS_FLUSH_INTERVAL, 5),
-    },
-    parcoursup: {
-      databaseSchema: process.env.DATAMART_DATABASE_SCHEMA || 'public',
     },
     partner: {
       fetchTimeOut: ms(process.env.FETCH_TIMEOUT_MILLISECONDS || '20s'),

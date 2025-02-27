@@ -1,4 +1,5 @@
-import { datamartKnex } from '../../../db/knex-database-connection.js';
+import { knex as datamartKnex } from '../../../datamart/knex-database-connection.js';
+import { knex as datawarehouseKnex } from '../../../datawarehouse/knex-database-connection.js';
 import { logger } from '../../shared/infrastructure/utils/logger.js';
 import { extractTransformAndLoadData } from '../domain/usecases/extract-transform-and-load-data.js';
 import * as replicationRepository from '../infrastructure/repositories/replication-repository.js';
@@ -9,8 +10,8 @@ export async function replicate(
   dependencies = {
     extractTransformAndLoadData,
     replicationRepository,
-    datamartKnex: datamartKnex,
-    datawarehouseKnex: datamartKnex,
+    datamartKnex,
+    datawarehouseKnex,
     logger,
   },
 ) {

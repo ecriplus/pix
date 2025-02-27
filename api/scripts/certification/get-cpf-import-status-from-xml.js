@@ -1,6 +1,6 @@
 import * as url from 'node:url';
 
-import { disconnect } from '../../db/knex-database-connection.js';
+import { databaseConnections } from '../../db/database-connections.js';
 import { usecases } from '../../src/certification/session-management/domain/usecases/index.js';
 import { logger } from '../../src/shared/infrastructure/utils/logger.js';
 
@@ -21,7 +21,7 @@ async function main() {
       console.error('An error occured', error);
       process.exitCode = 1;
     } finally {
-      await disconnect();
+      await databaseConnections.disconnect();
     }
   }
 })();

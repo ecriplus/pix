@@ -1,4 +1,4 @@
-import { disconnect } from '../../../../../db/knex-database-connection.js';
+import { databaseConnections } from '../../../../../db/database-connections.js';
 import { Script } from '../../../../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../../../../src/shared/application/scripts/script-runner.js';
 import { learningContentCache } from '../../../../../src/shared/infrastructure/caches/learning-content-cache.js';
@@ -27,7 +27,7 @@ describe('Shared | Unit | Application | ScriptRunner', function () {
       }
     };
 
-    sinon.spy(disconnect);
+    sinon.spy(databaseConnections.disconnect);
     sinon.stub(learningContentCache, 'quit');
   });
 

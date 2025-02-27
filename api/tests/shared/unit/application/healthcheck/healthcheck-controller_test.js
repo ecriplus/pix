@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { healthcheckController } from '../../../../../src/shared/application/healthcheck/healthcheck-controller.js';
 import { redisMonitor } from '../../../../../src/shared/infrastructure/utils/redis-monitor.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
@@ -19,35 +18,6 @@ describe('Unit | Controller | healthcheckController', function () {
         "Plateforme d'évaluation et de certification des compétences numériques",
       );
       expect(response['environment']).to.equal('test');
-    });
-  });
-
-  describe('#checkDbStatus', function () {
-    beforeEach(function () {
-      sinon.stub(knex, 'raw');
-    });
-
-    it('should check if DB connection is successful', async function () {
-      // given
-      knex.raw.resolves();
-
-      // when
-      const response = await healthcheckController.checkDbStatus();
-
-      // then
-      expect(response).to.include.keys('message');
-      expect(response['message']).to.equal('Connection to database ok');
-    });
-
-    it('should reply with a 503 error when the connection with the database is KO', function () {
-      // given
-      knex.raw.rejects();
-
-      // when
-      const promise = healthcheckController.checkDbStatus(null, hFake);
-
-      // then
-      expect(promise).to.be.rejectedWith(/Connection to database failed/);
     });
   });
 

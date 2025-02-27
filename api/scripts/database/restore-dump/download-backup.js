@@ -6,7 +6,7 @@ import fs from 'node:fs';
 
 import Joi from 'joi';
 
-import { disconnect } from '../../../db/knex-database-connection.js';
+import { databaseConnections } from '../../../db/database-connections.js';
 import { logger } from '../../../src/shared/infrastructure/utils/logger.js';
 import { ScalingoClient } from './helpers/scalingo/scalingo-client.js';
 
@@ -83,6 +83,6 @@ const main = async () => {
     logger.fatal(error);
     process.exitCode = 1;
   } finally {
-    await disconnect();
+    await databaseConnections.disconnect();
   }
 })();
