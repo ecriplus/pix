@@ -1,5 +1,30 @@
 # Pix Changelog
 
+## v5.53.0 (27/02/2025)
+
+
+### :rocket: Amélioration
+- [#11514](https://github.com/1024pix/pix/pull/11514) [FEATURE] Enregistrer dans Authentication Methods la date de dernière connexion Pix pour les méthodes de connexion Pix (PIX-16620).
+- [#11470](https://github.com/1024pix/pix/pull/11470) [FEATURE] Ajouter PixTable dans le tableau rattachant un profil cible à une complémentaire sur Pix Admin (PIX-16681).
+- [#11489](https://github.com/1024pix/pix/pull/11489) [FEATURE] Seeds pour Parcoursup (PIX-16690).
+- [#11511](https://github.com/1024pix/pix/pull/11511) [FEATURE] Ne pas afficher la progression sur les campagnes de type EXAM (Pix-16493).
+- [#11479](https://github.com/1024pix/pix/pull/11479) [FEATURE] Permettre de créer une Campagne de type EXAM (Pix-16488).
+
+### :building_construction: Tech
+- [#11517](https://github.com/1024pix/pix/pull/11517) [TECH] Ajout de la connexion à une BDD supplémentaire pour MaDDo .
+- [#11516](https://github.com/1024pix/pix/pull/11516) [TECH] :truck: Déplace `http-agent` vers `src/shared/'.
+- [#11485](https://github.com/1024pix/pix/pull/11485) [TECH] :truck: Déplace le cas d'usage `updateLastQuestionState` vers `src/`.
+- [#11525](https://github.com/1024pix/pix/pull/11525) [TECH] Ajouter un nom d'evenement pour monitorer les challenges mal formatés (PIX-16747).
+- [#11512](https://github.com/1024pix/pix/pull/11512) [TECH] Créer le feature toggle pour les attestations PDF V3 (PIX-16441).
+- [#11515](https://github.com/1024pix/pix/pull/11515) [TECH] Créer une fonction qui renvoie l'application demandée à partir de l'origin HTTP (PIX-16732).
+- [#11483](https://github.com/1024pix/pix/pull/11483) [TECH] :broom: Suppression d'un serializer qui n'est plus utilisé.
+- [#11458](https://github.com/1024pix/pix/pull/11458) [TECH] Refacto du usecase "correctAnswerThenUpdateAssessment" (PIX-16737).
+- [#11482](https://github.com/1024pix/pix/pull/11482) [TECH] :truck: Déplace le sérializer Student Information For Account Recovery dans `src/`.
+
+### :bug: Correction
+- [#11522](https://github.com/1024pix/pix/pull/11522) [BUGFIX] Déplacer les modifiers dans le bon sous ensemble css (PIX-OUPSY).
+- [#11508](https://github.com/1024pix/pix/pull/11508) [BUGFIX] Corriger la position et couleur du bouton de copie du nouveau mot de passe (PIX-16475).
+
 ## v5.52.0 (26/02/2025)
 
 
