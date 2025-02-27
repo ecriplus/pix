@@ -14,6 +14,7 @@ import { usecases as questUsecases } from '../../../quest/domain/usecases/index.
 import { config } from '../../config.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { AssessmentEndedError } from '../../domain/errors.js';
+import { sharedUsecases } from '../../domain/usecases/index.js';
 import * as assessmentRepository from '../../infrastructure/repositories/assessment-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import * as assessmentSerializer from '../../infrastructure/serializers/jsonapi/assessment-serializer.js';
@@ -112,7 +113,7 @@ const updateLastChallengeState = async function (request) {
   const challengeId = request.payload?.data?.attributes?.['challenge-id'];
 
   await DomainTransaction.execute(async () => {
-    await usecases.updateLastQuestionState({ assessmentId, challengeId, lastQuestionState });
+    await sharedUsecases.updateLastQuestionState({ assessmentId, challengeId, lastQuestionState });
   });
 
   return null;

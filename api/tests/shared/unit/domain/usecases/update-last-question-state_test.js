@@ -1,6 +1,6 @@
-import { updateLastQuestionState } from '../../../../lib/domain/usecases/update-last-question-state.js';
-import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
-import { domainBuilder, sinon } from '../../../test-helper.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
+import { updateLastQuestionState } from '../../../../../src/shared/domain/usecases/update-last-question-state.js';
+import { domainBuilder, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | update-last-question-state', function () {
   const assessmentId = 'assessmentId';
