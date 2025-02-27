@@ -1,3 +1,5 @@
+import iconv from 'iconv-lite';
+
 import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
 import { uploadCsvFile } from '../../../../../../src/prescription/learner-management/domain/usecases/upload-csv-file.js';
 import { SupOrganizationLearnerImportHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-import-header.js';
@@ -36,9 +38,12 @@ describe('Unit | UseCase | uploadCsvFile', function () {
     organizationImportId = Symbol('organizationImportId');
 
     s3Filename = Symbol('filename');
-    csvContent = `${supOrganizationLearnerImportHeader}
+    csvContent = iconv.encode(
+      `${supOrganizationLearnerImportHeader}
     Beatrix;The;Bride;Kiddo;Black Mamba;01/01/1970;thebride@example.net;12346;Assassination Squad;Hattori Hanzo;Deadly Viper Assassination Squad;Master;hello darkness my old friend;
-    O-Ren;;;Ishii;Cottonmouth;01/01/1980;ishii@example.net;789;Assassination Squad;Bill;Deadly Viper Assassination Squad;DUT;;`;
+    O-Ren;;;Ishii;Cottonmouth;01/01/1980;ishii@example.net;789;Assassination Squad;Bill;Deadly Viper Assassination Squad;DUT;;`,
+      'utf-8',
+    );
     filepath = await createTempFile('file.csv', csvContent);
     payload = { path: filepath };
     fakeDate = new Date('2019-01-10');

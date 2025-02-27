@@ -1,3 +1,5 @@
+import iconv from 'iconv-lite';
+
 import { IMPORT_STATUSES } from '../../../../../../src/prescription/learner-management/domain/constants.js';
 import { AggregateImportError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
 import { ImportScoCsvOrganizationLearnersJob } from '../../../../../../src/prescription/learner-management/domain/models/ImportScoCsvOrganizationLearnersJob.js';
@@ -28,9 +30,12 @@ describe('Unit | UseCase | validateCsvFile', function () {
   beforeEach(function () {
     organizationImportId = Symbol('organizationImportId');
     organizationId = 1234;
-    csvContent = `${supOrganizationLearnerImportHeader}
+    csvContent = iconv.encode(
+      `${supOrganizationLearnerImportHeader}
     Beatrix;The;Bride;Kiddo;Black Mamba;01/01/1970;thebride@example.net;123456;Assassination Squad;Hattori Hanzo;Deadly Viper Assassination Squad;BAD;BAD;
-    `.trim();
+    `.trim(),
+      'utf-8',
+    );
 
     expectedWarnings = [
       {
@@ -235,10 +240,13 @@ describe('Unit | UseCase | validateCsvFile', function () {
     it('should save VALIDATION_ERROR status', async function () {
       // given
       organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
-      const csvContent = `${supOrganizationLearnerImportHeader}
+      const csvContent = iconv.encode(
+        `${supOrganizationLearnerImportHeader}
           Beatrix;The;Bride;Kiddo;Black Mamba;01/01/1970;thebride@example.net;123456;Assassination Squad;Hattori Hanzo;Deadly Viper Assassination Squad;BAD;BAD;
           Beatrix;The;Bride;Kiddo;Black Mamba;01/01/1970;thebride@example.net;123456;Assassination Squad;Hattori Hanzo;Deadly Viper Assassination Squad;BAD;BAD;
-          `.trim();
+          `.trim(),
+        'utf-8',
+      );
       importStorageStub.getParser
         .withArgs({ Parser: SupOrganizationLearnerParser, filename: organizationImport.filename }, organizationId, i18n)
         .resolves(SupOrganizationLearnerParser.buildParser(csvContent, organizationId, i18n));
