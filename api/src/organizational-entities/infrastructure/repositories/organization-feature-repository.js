@@ -21,9 +21,14 @@ async function saveInBatch(organizationFeatures) {
   try {
     const knexConn = DomainTransaction.getConnection();
     await knexConn('organization-features')
-      .insert(organizationFeatures)
+      .insert(
+        organizationFeatures.map((organizationFeature) => ({
+          ...organizationFeature,
+          params: JSON.stringify(organizationFeature.params),
+        })),
+      )
       .onConflict(['featureId', 'organizationId'])
-      .ignore();
+      .merge();
   } catch (err) {
     if (knexUtils.foreignKeyConstraintViolated(err) && err.constraint.includes('featureid')) {
       throw new FeatureNotFound();

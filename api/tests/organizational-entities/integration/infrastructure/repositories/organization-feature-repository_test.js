@@ -50,6 +50,46 @@ describe('Integration | Repository | Organization-for-admin', function () {
       expect(result[1].params).to.deep.equal(organizationFeatures[1].params);
     });
 
+    it('should update existing rows', async function () {
+      // given
+      const otherOrganization = databaseBuilder.factory.buildOrganization();
+      databaseBuilder.factory.buildOrganizationFeature({
+        featureId: feature.id,
+        organizationId: organization.id,
+        params: `{ "id": 0 }`,
+      });
+      await databaseBuilder.commit();
+
+      const organizationFeatures = [
+        new OrganizationFeature({
+          featureId: feature.id,
+          organizationId: organization.id,
+          params: `["SOMETHING"]`,
+        }),
+        new OrganizationFeature({
+          featureId: feature.id,
+          organizationId: otherOrganization.id,
+          params: `{ "id": 456 }`,
+        }),
+      ];
+
+      // when
+      await organizationFeatureRepository.saveInBatch(organizationFeatures);
+
+      //then
+      const result = await knex('organization-features').where({
+        featureId: feature.id,
+      });
+
+      expect(result).to.have.lengthOf(2);
+      expect(result[0].featureId).to.deep.equal(organizationFeatures[0].featureId);
+      expect(result[0].organizationId).to.deep.equal(organizationFeatures[0].organizationId);
+      expect(result[0].params).to.deep.equal(organizationFeatures[0].params);
+      expect(result[1].featureId).to.deep.equal(organizationFeatures[1].featureId);
+      expect(result[1].organizationId).to.deep.equal(organizationFeatures[1].organizationId);
+      expect(result[1].params).to.deep.equal(organizationFeatures[1].params);
+    });
+
     it('should passe even if organization feature already exists', async function () {
       databaseBuilder.factory.buildOrganizationFeature({ organizationId: organization.id, featureId: feature.id });
       await databaseBuilder.commit();
