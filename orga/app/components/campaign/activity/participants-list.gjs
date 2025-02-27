@@ -1,7 +1,8 @@
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { array, fn } from '@ember/helper';
-import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
@@ -9,7 +10,6 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
-import TableHeader from '../../table/header';
 import ParticipationStatus from '../../ui/participation-status';
 import ParticipationFilters from '../filter/participation-filters';
 import DeleteParticipationModal from './delete-participation-modal';
@@ -66,119 +66,114 @@ export default class ParticipantsList extends Component {
       @onResetFilter={{@onResetFilter}}
     />
 
-    <section ...attributes>
-      <div class="panel">
-        <table class="table content-text content-text--small">
-          <colgroup class="table__column">
-            <col class="table__column--wide" />
-            <col class="table__column--wide" />
-            {{#if @campaign.externalIdLabel}}
-              <col class="table__column--medium" />
-            {{/if}}
-            <col class="table__column--wide" />
-            {{#if @showParticipationCount}}
-              <col class="table__column--wide" />
-            {{/if}}
-            {{#if this.canDeleteParticipation}}
-              <col class="table__column--small table__column--right hide-on-mobile" />
-            {{/if}}
-          </colgroup>
-          <thead>
-            <tr>
-              <TableHeader>{{t "pages.campaign-activity.table.column.last-name"}}</TableHeader>
-              <TableHeader>{{t "pages.campaign-activity.table.column.first-name"}}</TableHeader>
-              {{#if @campaign.externalIdLabel}}
-                <TableHeader>{{@campaign.externalIdLabel}}</TableHeader>
-              {{/if}}
-              <TableHeader>{{t "pages.campaign-activity.table.column.status"}}</TableHeader>
-              {{#if @showParticipationCount}}
-                <TableHeader @size="wide">
-                  {{t "pages.campaign-activity.table.column.participationCount"}}
-                </TableHeader>
-              {{/if}}
-              {{#if this.canDeleteParticipation}}
-                <TableHeader class="hide-on-mobile">
-                  <span class="screen-reader-only">
-                    {{t "pages.campaign-activity.table.column.delete"}}
-                  </span>
-                </TableHeader>
-              {{/if}}
-            </tr>
-          </thead>
+    <PixTable
+      @variant="orga"
+      @caption={{t "pages.campaign-activity.table.title"}}
+      @data={{@participations}}
+      class="table"
+      @onRowClick={{@onClickParticipant}}
+    >
+      <:columns as |participation context|>
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "pages.campaign-activity.table.column.last-name"}}
+          </:header>
+          <:cell>
+            <LinkTo
+              @route={{if
+                @campaign.isTypeAssessment
+                "authenticated.campaigns.participant-assessment"
+                "authenticated.campaigns.participant-profile"
+              }}
+              @models={{array @campaign.id participation.lastCampaignParticipationId}}
+            >
+              <span
+                aria-label={{t
+                  "pages.campaign-activity.table.see-results"
+                  firstName=participation.firstName
+                  lastName=participation.lastName
+                }}
+              >
+                {{participation.lastName}}</span>
+            </LinkTo>
+          </:cell>
+        </PixTableColumn>
 
-          {{#if @participations}}
-            <tbody>
-              {{#each @participations as |participation|}}
-                <tr
-                  aria-label={{t "pages.campaign-activity.table.row-title"}}
-                  {{on "click" (fn @onClickParticipant @campaign.id participation.lastCampaignParticipationId)}}
-                  class="tr--clickable"
-                >
-                  <td>
-                    <LinkTo
-                      @route={{if
-                        @campaign.isTypeAssessment
-                        "authenticated.campaigns.participant-assessment"
-                        "authenticated.campaigns.participant-profile"
-                      }}
-                      @models={{array @campaign.id participation.lastCampaignParticipationId}}
-                    >
-                      <span
-                        aria-label="{{t
-                          'pages.campaign-activity.table.see-results'
-                          firstName=participation.firstName
-                          lastName=participation.lastName
-                        }}"
-                      >
-                        {{participation.lastName}}</span>
-                    </LinkTo>
-                  </td>
-                  <td>{{participation.firstName}}</td>
-                  {{#if @campaign.externalIdLabel}}
-                    <td class="table__column table__column--break-word">{{participation.participantExternalId}}</td>
-                  {{/if}}
-                  <td>
-                    <ParticipationStatus @status={{participation.status}} @campaignType={{@campaign.type}} />
-                  </td>
-                  {{#if @showParticipationCount}}
-                    <td>
-                      {{participation.participationCount}}
-                    </td>
-                  {{/if}}
-                  {{#if this.canDeleteParticipation}}
-                    <td class="hide-on-mobile">
-                      <PixIconButton
-                        @ariaLabel={{t "pages.campaign-activity.table.delete-button-label"}}
-                        @withBackground={{true}}
-                        @iconName="delete"
-                        @triggerAction={{fn this.openModal participation}}
-                        @size="small"
-                        class="campaign-activity-table-actions__button campaign-activity-table-actions__button--delete"
-                      />
-                    </td>
-                  {{/if}}
-                </tr>
-              {{/each}}
-            </tbody>
-          {{/if}}
-        </table>
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "pages.campaign-activity.table.column.first-name"}}
+          </:header>
+          <:cell>
+            {{participation.firstName}}
+          </:cell>
+        </PixTableColumn>
 
-        {{#unless @participations}}
-          <p class="table__empty content-text">{{t "pages.campaign-activity.table.empty"}}</p>
-        {{/unless}}
-      </div>
+        {{#if @campaign.externalIdLabel}}
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{@campaign.externalIdLabel}}
+            </:header>
+            <:cell>
+              {{participation.participantExternalId}}
+            </:cell>
+          </PixTableColumn>
+        {{/if}}
 
-      {{#if @participations}}
-        <PixPagination @pagination={{@participations.meta}} @locale={{this.getCurrentLocale}} />
-      {{/if}}
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "pages.campaign-activity.table.column.status"}}
+          </:header>
+          <:cell>
+            <ParticipationStatus @status={{participation.status}} @campaignType={{@campaign.type}} />
+          </:cell>
+        </PixTableColumn>
 
-      <DeleteParticipationModal
-        @participation={{this.participationToDelete}}
-        @campaign={{@campaign}}
-        @deleteCampaignParticipation={{this.deleteCampaignParticipation}}
-        @closeModal={{this.closeModal}}
-        @isModalOpen={{this.isModalOpen}}
-      />
-    </section>
+        {{#if @showParticipationCount}}
+          <PixTableColumn @context={{context}} @type="number">
+            <:header>
+              {{t "pages.campaign-activity.table.column.participationCount"}}
+            </:header>
+            <:cell>
+              {{participation.participationCount}}
+            </:cell>
+          </PixTableColumn>
+        {{/if}}
+
+        {{#if this.canDeleteParticipation}}
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.campaign-activity.table.column.delete"}}
+            </:header>
+            <:cell>
+              <PixIconButton
+                @ariaLabel={{t "pages.campaign-activity.table.delete-button-label"}}
+                @withBackground={{true}}
+                @iconName="delete"
+                @triggerAction={{fn this.openModal participation}}
+                @size="small"
+                class="campaign-activity-table-actions__button campaign-activity-table-actions__button--delete"
+              />
+            </:cell>
+          </PixTableColumn>
+        {{/if}}
+
+      </:columns>
+    </PixTable>
+
+    {{#unless @participations}}
+      <p class="table__empty content-text">{{t "pages.campaign-activity.table.empty"}}</p>
+    {{/unless}}
+
+    {{#if @participations}}
+      <PixPagination @pagination={{@participations.meta}} @locale={{this.getCurrentLocale}} />
+    {{/if}}
+
+    <DeleteParticipationModal
+      @participation={{this.participationToDelete}}
+      @campaign={{@campaign}}
+      @deleteCampaignParticipation={{this.deleteCampaignParticipation}}
+      @closeModal={{this.closeModal}}
+      @isModalOpen={{this.isModalOpen}}
+    />
   </template>
 }
