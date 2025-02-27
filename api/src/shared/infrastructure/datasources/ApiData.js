@@ -1,7 +1,7 @@
 import jsonwebtoken from 'jsonwebtoken';
 
-import { httpAgent } from '../../../../lib/infrastructure/http/http-agent.js';
 import { config } from '../../config.js';
+import { httpAgent } from '../http-agent.js';
 
 export const STATUS = {
   SUCCESS: 'success',

@@ -1,7 +1,7 @@
-import { httpAgent } from '../../../../../lib/infrastructure/http/http-agent.js';
 import { auditLoggerRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/audit-logger-repository.js';
 import { config } from '../../../../../src/shared/config.js';
 import { AuditLoggerApiError } from '../../../../../src/shared/domain/errors.js';
+import { httpAgent } from '../../../../../src/shared/infrastructure/http-agent.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 const { auditLogger } = config;

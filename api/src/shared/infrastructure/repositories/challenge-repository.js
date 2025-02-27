@@ -1,4 +1,4 @@
-import { httpAgent } from '../../../../lib/infrastructure/http/http-agent.js';
+import { httpAgent } from '../../../../src/shared/infrastructure/http-agent.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
 import { config } from '../../config.js';
 import { NotFoundError } from '../../domain/errors.js';
