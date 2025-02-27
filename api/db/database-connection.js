@@ -42,8 +42,16 @@ export class DatabaseConnection {
     configureConnectionExtension(this.knex);
   }
 
+  async checkStatus() {
+    try {
+      await this.knex.raw('SELECT 1');
+    } catch (cause) {
+      throw new Error(`Connection to database ${this.#name} not available.`, { cause });
+    }
+  }
+
   async prepare() {
-    await this.knex.raw('SELECT 1');
+    await this.checkStatus();
     logger.info(`Connection to database ${this.#name} established.`);
   }
 

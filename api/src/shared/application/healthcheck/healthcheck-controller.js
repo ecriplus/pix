@@ -1,6 +1,6 @@
 import Boom from '@hapi/boom';
 
-import { knex } from '../../../../db/knex-database-connection.js';
+import { databaseConnections } from '../../../../db/database-connections.js';
 import packageJSON from '../../../../package.json' with { type: 'json' };
 import * as network from '../../../identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../config.js';
@@ -22,10 +22,10 @@ const get = function (request) {
 
 const checkDbStatus = async function () {
   try {
-    await knex.raw('SELECT 1 FROM knex_migrations_lock');
-    return { message: 'Connection to database ok' };
-  } catch {
-    throw Boom.serverUnavailable('Connection to database failed');
+    await databaseConnections.checkStatuses();
+    return { message: 'Connection to databases ok' };
+  } catch (error) {
+    throw Boom.serverUnavailable(`Connection to databases failed: ${error.message}`);
   }
 };
 
