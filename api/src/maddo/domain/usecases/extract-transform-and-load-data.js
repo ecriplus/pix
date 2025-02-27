@@ -16,11 +16,13 @@ export async function extractTransformAndLoadData({
 
   const queryBuilder = replication.from(context);
   let chunk = [];
+  let count = 0;
   const chunkSize = replication.chunkSize ?? DEFAULT_CHUNK_SIZE;
   const connection = await datamartKnex.context.client.acquireConnection();
   try {
     for await (const data of queryBuilder.stream()) {
       chunk.push(replication.transform?.(data) ?? data);
+      count += 1;
       if (chunk.length === chunkSize) {
         await replication.to(context, chunk).connection(connection);
         chunk = [];
@@ -30,6 +32,7 @@ export async function extractTransformAndLoadData({
     if (chunk.length) {
       await replication.to(context, chunk).connection(connection);
     }
+    return { count };
   } finally {
     await datamartKnex.context.client.releaseConnection(connection);
   }

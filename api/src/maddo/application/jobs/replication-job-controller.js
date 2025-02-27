@@ -15,7 +15,7 @@ export class ReplicationJobController extends JobController {
     dependencies = { extractTransformAndLoadData, replicationRepository, datamartKnex, datawarehouseKnex },
   }) {
     const { extractTransformAndLoadData, replicationRepository, datamartKnex, datawarehouseKnex } = dependencies;
-    await extractTransformAndLoadData({
+    return extractTransformAndLoadData({
       replicationName,
       replicationRepository,
       datamartKnex,
