@@ -22,8 +22,8 @@ describe('Shared | Unit | Application | ScriptRunner', function () {
           options: { verbose: { type: 'boolean', default: false } },
         });
       }
-      async run(options) {
-        return scriptRunStub(options);
+      async run(...args) {
+        return scriptRunStub(...args);
       }
     };
 
@@ -41,7 +41,7 @@ describe('Shared | Unit | Application | ScriptRunner', function () {
     await ScriptRunner.execute(scriptFileUrl, ScriptClass, { logger, isRunningFromCli: () => true });
 
     expect(logger.info.calledWith('Start script')).to.be.true;
-    expect(scriptRunStub).to.have.been.calledWith({ verbose: false });
+    expect(scriptRunStub).to.have.been.calledWith({ command: undefined, options: { verbose: false }, logger });
     expect(logger.info.calledWith('Script execution successful.')).to.be.true;
   });
 
