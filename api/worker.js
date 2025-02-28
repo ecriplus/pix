@@ -10,12 +10,13 @@ import PgBoss from 'pg-boss';
 import { databaseConnections } from './db/database-connections.js';
 import { Metrics } from './src/monitoring/infrastructure/metrics.js';
 import { JobGroup } from './src/shared/application/jobs/job-controller.js';
-import { config } from './src/shared/config.js';
+import { config, schema as configSchema } from './src/shared/config.js';
 import { learningContentCache } from './src/shared/infrastructure/caches/learning-content-cache.js';
 import { JobQueue } from './src/shared/infrastructure/jobs/JobQueue.js';
 import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
 import { importNamedExportFromFile } from './src/shared/infrastructure/utils/import-named-exports-from-directory.js';
 import { child } from './src/shared/infrastructure/utils/logger.js';
+import { validateEnvironmentVariables } from './src/shared/infrastructure/validate-environment-variables.js';
 
 const logger = child('worker', { event: 'worker' });
 
@@ -137,8 +138,11 @@ export async function registerJobs({ jobGroups, dependencies = { startPgBoss, cr
 const isRunningFromCli = import.meta.filename === process.argv[1];
 
 async function main() {
+  validateEnvironmentVariables(configSchema);
+
   const jobGroup = process.argv[2] ? JobGroup[process.argv[2]?.toUpperCase()] : JobGroup.DEFAULT;
   await registerJobs({ jobGroups: [jobGroup] });
+
   process.on('SIGINT', async () => {
     await quitAllStorages();
     await metrics.clearMetrics();
@@ -150,5 +154,6 @@ async function main() {
 if (isRunningFromCli) {
   main().catch((err) => {
     logger.error({ err }, 'worker crashed');
+    process.exit(1); // eslint-disable-line n/no-process-exit
   });
 }
