@@ -169,7 +169,7 @@ async function _getCampaignToStart({ campaignId, organizationFeatureAPI }) {
     throw new NotFoundError(`La campagne d'id ${campaignId} n'existe pas ou son accès est restreint`);
   }
 
-  const externalIdFeature = await knex('campaign-features')
+  const externalIdFeature = await knexConnection('campaign-features')
     .select('params')
     .join('features', 'features.id', 'featureId')
     .where({ campaignId, 'features.key': CAMPAIGN_FEATURES.EXTERNAL_ID.key })
