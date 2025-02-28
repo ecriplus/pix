@@ -24,3 +24,8 @@
 @use 'target-profile-details';
 @use 'detail';
 @use 'cards';
+
+.badge--unacquired {
+  opacity: .8;
+  filter: grayscale(1);
+}
