@@ -50,4 +50,103 @@ module('Unit | Model | campaign', function (hooks) {
       assert.false(campaign.hasCustomResultPageButton);
     });
   });
+
+  module('getter isAssessment', function () {
+    test('returns true when campaign is of type ASSESSMENT', function (assert) {
+      // given
+      const campaign = store.createRecord('campaign', {
+        type: 'ASSESSMENT',
+      });
+
+      // when
+      const isAssessment = campaign.isAssessment;
+
+      // then
+      assert.true(isAssessment);
+    });
+
+    test('returns false otherwise', function (assert) {
+      // given
+      const campaign1 = store.createRecord('campaign', {
+        type: 'PROFILES_COLLECTION',
+      });
+      const campaign2 = store.createRecord('campaign', {
+        type: 'EXAM',
+      });
+
+      // when
+      const isAssessment1 = campaign1.isAssessment;
+      const isAssessment2 = campaign2.isAssessment;
+
+      // then
+      assert.false(isAssessment1);
+      assert.false(isAssessment2);
+    });
+  });
+
+  module('getter isProfilesCollection', function () {
+    test('returns true when campaign is of type PROFILES_COLLECTION', function (assert) {
+      // given
+      const campaign = store.createRecord('campaign', {
+        type: 'PROFILES_COLLECTION',
+      });
+
+      // when
+      const isProfilesCollection = campaign.isProfilesCollection;
+
+      // then
+      assert.true(isProfilesCollection);
+    });
+
+    test('returns false otherwise', function (assert) {
+      // given
+      const campaign1 = store.createRecord('campaign', {
+        type: 'EXAM',
+      });
+      const campaign2 = store.createRecord('campaign', {
+        type: 'ASSESSMENT',
+      });
+
+      // when
+      const isProfilesCollection1 = campaign1.isProfilesCollection;
+      const isProfilesCollection2 = campaign2.isProfilesCollection;
+
+      // then
+      assert.false(isProfilesCollection1);
+      assert.false(isProfilesCollection2);
+    });
+  });
+
+  module('getter isExam', function () {
+    test('returns true when campaign is of type EXAM', function (assert) {
+      // given
+      const campaign = store.createRecord('campaign', {
+        type: 'EXAM',
+      });
+
+      // when
+      const isExam = campaign.isExam;
+
+      // then
+      assert.true(isExam);
+    });
+
+    test('returns false otherwise', function (assert) {
+      // given
+      const campaign1 = store.createRecord('campaign', {
+        type: 'PROFILES_COLLECTION',
+      });
+      const campaign2 = store.createRecord('campaign', {
+        type: 'ASSESSMENT',
+      });
+
+      // when
+      const isExam1 = campaign1.isExam;
+      const isExam2 = campaign2.isExam;
+
+      // then
+      assert.false(isExam1);
+      assert.false(isExam2);
+    });
+  });
 });

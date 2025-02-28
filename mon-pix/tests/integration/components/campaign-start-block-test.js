@@ -169,6 +169,52 @@ module('Integration | Component | campaign-start-block', function (hooks) {
           .exists();
       });
     });
+
+    module('when the campaign is a EXAM type', function (hooks) {
+      hooks.beforeEach(function () {
+        this.set('campaign', { isAssessment: false, isExam: true });
+      });
+      test('should display all text arguments correctly', async function (assert) {
+        // when
+        const screen = await render(
+          hbs`<CampaignStartBlock @campaign={{this.campaign}} @startCampaignParticipation={{this.startCampaignParticipation}} />`,
+        );
+
+        // then
+        assert
+          .dom(
+            screen.queryByRole('heading', {
+              name: t('pages.campaign-landing.profiles-collection.announcement'),
+            }),
+          )
+          .doesNotExist();
+        assert
+          .dom(
+            screen.getByRole('button', {
+              name: t('pages.campaign-landing.assessment.action'),
+            }),
+          )
+          .exists();
+        assert.dom(screen.getByText(t('pages.campaign-landing.assessment.legal'))).exists();
+      });
+
+      test('should display the userName', async function (assert) {
+        // when
+        const screen = await render(
+          hbs`<CampaignStartBlock @campaign={{this.campaign}} @startCampaignParticipation={{this.startCampaignParticipation}} />`,
+        );
+
+        // then
+        assert
+          .dom(
+            screen.getByRole('heading', {
+              name: 'Izuku, commencez votre parcours',
+              level: 1,
+            }),
+          )
+          .exists();
+      });
+    });
   });
 
   module('When the user is not authenticated', function (hooks) {
