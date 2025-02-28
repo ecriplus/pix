@@ -12,10 +12,8 @@ export default class ProfilesController extends Controller {
   @tracked certificability = null;
 
   @action
-  goToProfilePage(campaignId, campaignParticipationId, event) {
-    event.stopPropagation();
-    event.preventDefault();
-    this.router.transitionTo('authenticated.campaigns.participant-profile', campaignId, campaignParticipationId);
+  goToProfilePage(campaignId, participation) {
+    this.router.transitionTo('authenticated.campaigns.participant-profile', campaignId, participation.id);
   }
 
   @action
