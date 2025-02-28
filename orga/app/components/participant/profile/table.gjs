@@ -1,43 +1,47 @@
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { t } from 'ember-intl';
 
-import TableHeader from '../../table/header';
-
 <template>
-  <section class="profile-competences panel">
-    <h3 class="screen-reader-only">{{t "pages.profiles-individual-results.table.title"}}</h3>
-    <table>
-      <thead>
-        <tr>
-          <TableHeader @size="wide">
+  <section>
+    <PixTable
+      @variant="orga"
+      @caption={{t "pages.profiles-individual-results.table.title"}}
+      @data={{@competences}}
+      class="table"
+      @onRowClick={{@onClickCampaign}}
+    >
+      <:columns as |competence context|>
+        <PixTableColumn @context={{context}}>
+          <:header>
             {{t "pages.profiles-individual-results.table.column.skill"}}
-          </TableHeader>
-          <TableHeader @size="small" @align="center">{{t
-              "pages.profiles-individual-results.table.column.level"
-            }}</TableHeader>
-          <TableHeader @size="small" @align="center">{{t
-              "pages.profiles-individual-results.table.column.pix-score"
-            }}</TableHeader>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each @competences as |competence|}}
-          <tr aria-label={{t "pages.profiles-individual-results.table.row-title"}}>
-            <td class="competences-col__name">
-              <span class="competences-col__border competences-col__border--{{competence.areaColor}}"></span>
-              <span>
-                {{competence.name}}
-              </span>
-            </td>
-            <td class="table__column--center">
-              {{competence.estimatedLevel}}
-            </td>
-            <td class="table__column--center">
-              {{competence.pixScore}}
-            </td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+          </:header>
+          <:cell>
+            <span class="competences-col__border competences-col__border--{{competence.areaColor}}">
+              {{competence.name}}
+            </span>
+          </:cell>
+        </PixTableColumn>
+
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "pages.profiles-individual-results.table.column.level"}}
+          </:header>
+          <:cell>
+            {{competence.estimatedLevel}}
+          </:cell>
+        </PixTableColumn>
+
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "pages.profiles-individual-results.table.column.pix-score"}}
+          </:header>
+          <:cell>
+            {{competence.pixScore}}
+          </:cell>
+        </PixTableColumn>
+      </:columns>
+    </PixTable>
 
     {{#unless @isShared}}
       <p class="table__empty content-text">
