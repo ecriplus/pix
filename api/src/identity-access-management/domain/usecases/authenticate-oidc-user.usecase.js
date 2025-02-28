@@ -77,6 +77,15 @@ async function authenticateOidcUser({
     authenticationMethodRepository,
   });
 
+  await _updateUserLastConnection({
+    user,
+    requestedApplication,
+    oidcAuthenticationService,
+    authenticationMethodRepository,
+    lastUserApplicationConnectionsRepository,
+    userLoginRepository,
+  });
+
   const pixAccessToken = oidcAuthenticationService.createAccessToken({ userId: user.id, audience });
 
   let logoutUrlUUID;
@@ -87,17 +96,22 @@ async function authenticateOidcUser({
     });
   }
 
-  await userLoginRepository.updateLastLoggedAt({ userId: user.id });
-  await lastUserApplicationConnectionsRepository.upsert({
-    userId: user.id,
-    application: requestedApplication.applicationName,
-    lastLoggedAt: new Date(),
-  });
-
   return { pixAccessToken, logoutUrlUUID, isAuthenticationComplete: true };
 }
 
 export { authenticateOidcUser };
+
+async function _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository }) {
+  if (requestedApplication.isPixAdmin) {
+    const adminMember = await adminMemberRepository.get({ userId: user.id });
+    if (!adminMember?.hasAccessToAdminScope) {
+      throw new ForbiddenAccess(
+        'User does not have the rights to access the application',
+        'PIX_ADMIN_ACCESS_NOT_ALLOWED',
+      );
+    }
+  }
+}
 
 async function _updateAuthenticationMethodWithComplement({
   userInfo,
@@ -111,21 +125,29 @@ async function _updateAuthenticationMethodWithComplement({
     sessionContent,
   });
 
-  return await authenticationMethodRepository.updateAuthenticationComplementByUserIdAndIdentityProvider({
+  await authenticationMethodRepository.updateAuthenticationComplementByUserIdAndIdentityProvider({
     authenticationComplement,
     userId,
     identityProvider: oidcAuthenticationService.identityProvider,
   });
 }
 
-async function _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository }) {
-  if (requestedApplication.isPixAdmin) {
-    const adminMember = await adminMemberRepository.get({ userId: user.id });
-    if (!adminMember?.hasAccessToAdminScope) {
-      throw new ForbiddenAccess(
-        'User does not have the rights to access the application',
-        'PIX_ADMIN_ACCESS_NOT_ALLOWED',
-      );
-    }
-  }
+async function _updateUserLastConnection({
+  user,
+  requestedApplication,
+  oidcAuthenticationService,
+  authenticationMethodRepository,
+  lastUserApplicationConnectionsRepository,
+  userLoginRepository,
+}) {
+  await userLoginRepository.updateLastLoggedAt({ userId: user.id });
+  await lastUserApplicationConnectionsRepository.upsert({
+    userId: user.id,
+    application: requestedApplication.applicationName,
+    lastLoggedAt: new Date(),
+  });
+  await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
+    userId: user.id,
+    identityProvider: oidcAuthenticationService.identityProvider,
+  });
 }
