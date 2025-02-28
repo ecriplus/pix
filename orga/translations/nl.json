@@ -682,9 +682,7 @@
             "recommended": "Aanbevolen",
             "strongly-recommended": "Sterk aanbevolen",
             "very-strongly-recommended": "Zeer aanbevolen"
-          },
-          "row-title": "Onderwerp",
-          "title": "Analyse per onderwerp"
+          }
         },
         "competences": {
           "column": {

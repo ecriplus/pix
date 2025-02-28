@@ -724,9 +724,7 @@
             "recommended": "Recommandé",
             "strongly-recommended": "Fortement recommandé",
             "very-strongly-recommended": "Très recommandé"
-          },
-          "row-title": "Sujet",
-          "title": "Analyse par sujet"
+          }
         },
         "competences": {
           "column": {

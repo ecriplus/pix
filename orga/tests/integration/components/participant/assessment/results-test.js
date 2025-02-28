@@ -4,6 +4,7 @@ import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
+import { pauseTest } from '@ember/test-helpers';
 
 module('Integration | Component | Participant::Assessment::Results', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -42,12 +43,7 @@ module('Integration | Component | Participant::Assessment::Results', function (h
     const screen = await render(hbs`<Participant::Assessment::Results @results={{this.competenceResults}} />`);
 
     // then
-    assert.dom(screen.getByLabelText(t('pages.assessment-individual-results.table.row-title'))).exists();
-
-    assert
-      .dom(screen.getByLabelText(t('pages.assessment-individual-results.table.row-title')))
-      .containsText('Compétence 1');
-
-    assert.dom(screen.getByLabelText(t('pages.assessment-individual-results.table.row-title'))).containsText('50%');
+    assert.ok(screen.getByRole('cell', { name: 'Compétence 1' }));
+    assert.ok(screen.getByRole('cell', { name: /50%/ }));
   });
 });

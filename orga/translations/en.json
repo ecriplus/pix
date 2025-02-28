@@ -719,8 +719,7 @@
             "strongly-recommended": "Strongly recommended",
             "very-strongly-recommended": "Very strongly recommended"
           },
-          "row-title": "Topic",
-          "title": "Review by topic"
+          "row-title": "Topic"
         },
         "competences": {
           "column": {

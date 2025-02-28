@@ -38,7 +38,7 @@ module('Acceptance | Campaign Analysis', function (hooks) {
     const screen = await visit('/campagnes/1/analyse');
 
     // then
-    assert.ok(screen.getByLabelText(t('pages.campaign-review.table.analysis.title')));
+    assert.ok(screen.getByRole('table', { name: t('pages.campaign-review.table.analysis.caption') }));
     assert.ok(screen.getByText(t('pages.campaign-review.table.analysis.column.subjects', { count: 2 })));
   });
 
@@ -76,7 +76,6 @@ module('Acceptance | Campaign Analysis', function (hooks) {
 
         // when
         const screen = await visit('/campagnes/7654/analyse');
-
         // then
         assert.dom(screen.getByText(t('pages.campaign.empty-state'))).exists();
         assert.dom(screen.queryByRole('button', { name: t('pages.campaign.copy.link.default') })).doesNotExist();

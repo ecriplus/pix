@@ -10,8 +10,8 @@ function getCount(campaignCollectiveResult) {
 }
 
 <template>
-  <section class="competences-section">
-    <h3 class="campaign-details-analysis campaign-details-analysis__header">
+  <section>
+    <h3 class="campaign-details-analysis__header">
       {{t "pages.campaign-review.table.competences.title"}}
     </h3>
 
@@ -32,8 +32,7 @@ function getCount(campaignCollectiveResult) {
             }}
           </:header>
           <:cell>
-            <span class="competences-col__border competences-col__border--{{competenceResult.areaColor}}"></span>
-            <span>
+            <span class="competences-col__border competences-col__border--{{competenceResult.areaColor}}">
               {{competenceResult.competenceName}}
             </span>
           </:cell>
