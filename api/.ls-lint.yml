@@ -29,6 +29,7 @@ ls:
 ignore:
   - .git
   - node_modules
+  - datamart/migrations
   - db/migrations
   - db/seeds
   - scripts

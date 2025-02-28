@@ -3,12 +3,14 @@ import 'dotenv/config';
 import { databaseConnections } from './db/database-connections.js';
 import { databaseConnection as liveDatabaseConnection } from './db/knex-database-connection.js';
 import { createServer } from './server.js';
+import { JobGroup } from './src/shared/application/jobs/job-controller.js';
 import { config, schema as configSchema } from './src/shared/config.js';
 import { learningContentCache } from './src/shared/infrastructure/caches/learning-content-cache.js';
 import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
 import { logger } from './src/shared/infrastructure/utils/logger.js';
 import { redisMonitor } from './src/shared/infrastructure/utils/redis-monitor.js';
 import { validateEnvironmentVariables } from './src/shared/infrastructure/validate-environment-variables.js';
+import { registerJobs } from './worker.js';
 
 validateEnvironmentVariables(configSchema);
 
@@ -62,7 +64,7 @@ process.on('SIGINT', () => {
   try {
     await start();
     if (config.infra.startJobInWebProcess) {
-      import('./worker.js');
+      registerJobs({ jobGroups: [JobGroup.DEFAULT, JobGroup.FAST] });
     }
   } catch (error) {
     logger.error(error);

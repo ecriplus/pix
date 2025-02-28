@@ -4,6 +4,7 @@ import { parse } from 'neoqs';
 
 import { setupErrorHandling } from './config/server-setup-error-handling.js';
 import { knex } from './db/knex-database-connection.js';
+import * as authenticationRoutes from './lib/application/authentication/index.js';
 import { authentication } from './lib/infrastructure/authentication.js';
 import * as replicationRoutes from './src/maddo/application/replications-routes.js';
 import { Metrics } from './src/monitoring/infrastructure/metrics.js';
@@ -178,7 +179,7 @@ const setupAuthentication = function (server) {
 };
 
 const setupRoutesAndPlugins = async function (server) {
-  await server.register([...plugins, healthcheckRoutes, replicationRoutes]);
+  await server.register([...plugins, healthcheckRoutes, authenticationRoutes, replicationRoutes]);
 };
 
 const setupOpenApiSpecification = async function (server) {

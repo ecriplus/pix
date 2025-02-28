@@ -1,9 +1,10 @@
 import { replicate } from '../../../../src/maddo/application/replications-controller.js';
+import { ReplicationJob } from '../../../../src/maddo/domain/models/ReplicationJob.js';
 import { expect, sinon } from '../../../test-helper.js';
 
 describe('Maddo | Application | Unit | Controller | Replication', function () {
   describe('#replicate', function () {
-    it('should call use-case with given replication', async function () {
+    it('should create async replication job', async function () {
       // given
       const replicationName = 'foo';
       const replication = Symbol('replication');
@@ -21,72 +22,25 @@ describe('Maddo | Application | Unit | Controller | Replication', function () {
           code: codeStub,
         }),
       };
-      const extractTransformAndLoadData = sinon.stub().resolves();
       const replicationRepository = {
-        getByName: sinon.stub().withArgs(replicationName).returns(replication),
+        getByName: sinon.stub().returns(replication),
       };
-      const datawarehouseKnex = Symbol('datawarehouse-knex');
-      const datamartKnex = Symbol('datamart-knex');
+      const replicationJobRepository = {
+        performAsync: sinon.stub().resolves(replication),
+      };
 
       // when
       await replicate(request, h, {
-        extractTransformAndLoadData,
         replicationRepository,
-        datamartKnex,
-        datawarehouseKnex,
+        replicationJobRepository,
       });
 
       // then
-      expect(extractTransformAndLoadData).to.have.been.calledWithExactly({
-        replication,
-        datamartKnex,
-        datawarehouseKnex,
-      });
+      expect(replicationRepository.getByName).to.have.been.calledOnceWithExactly(replicationName);
+      expect(replicationJobRepository.performAsync).to.have.been.calledOnceWithExactly(
+        new ReplicationJob({ replicationName }),
+      );
       expect(codeStub).to.have.been.calledWithExactly(204);
-    });
-
-    context('when usecase throw an error', function () {
-      it('should log error', async function () {
-        // given
-        const replicationName = 'foo';
-        const replication = Symbol('replication');
-        const request = {
-          params: {
-            replicationName,
-          },
-          query: {
-            async: false,
-          },
-        };
-        const codeStub = sinon.stub();
-        const h = {
-          response: () => ({
-            code: codeStub,
-          }),
-        };
-
-        const error = new Error('extract-error');
-        const extractTransformAndLoadData = sinon.stub().rejects(error);
-        const logger = {
-          error: sinon.stub(),
-        };
-        const replicationRepository = {
-          getByName: sinon.stub().withArgs(replicationName).returns(replication),
-        };
-
-        // when
-        await replicate(request, h, { extractTransformAndLoadData, replicationRepository, logger });
-
-        // then
-        expect(logger.error).to.have.been.calledWithExactly(
-          {
-            event: 'replication',
-            err: error,
-          },
-          'Error during replication',
-        );
-        expect(codeStub).to.have.been.calledWithExactly(204);
-      });
     });
 
     context('when replication name is unknown', function () {
@@ -107,18 +61,19 @@ describe('Maddo | Application | Unit | Controller | Replication', function () {
             code: codeStub,
           }),
         };
-
         const replicationRepository = {
           getByName: sinon.stub().withArgs(replicationName).returns(undefined),
         };
-        const extractTransformAndLoadData = sinon.stub();
+        const replicationJobRepository = {
+          performAsync: sinon.stub(),
+        };
 
         // when
-        await replicate(request, h, { extractTransformAndLoadData, replicationRepository });
+        await replicate(request, h, { replicationRepository, replicationJobRepository });
 
         // then
         expect(codeStub).to.have.been.calledWithExactly(404);
-        expect(extractTransformAndLoadData).not.to.have.been.called;
+        expect(replicationJobRepository.performAsync).not.to.have.been.called;
       });
     });
   });

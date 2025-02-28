@@ -7,6 +7,7 @@ import { JobExpireIn } from '../../infrastructure/repositories/jobs/job-reposito
 export const JobGroup = {
   DEFAULT: 'default',
   FAST: 'fast',
+  MADDO: 'maddo',
 };
 
 export class JobController {
