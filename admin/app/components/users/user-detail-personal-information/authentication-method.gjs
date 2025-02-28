@@ -5,6 +5,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import dayjs from 'dayjs';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
 
@@ -15,6 +16,7 @@ import ReassignOidcAuthenticationMethodModal from './reassign-oidc-authenticatio
 export default class AuthenticationMethod extends Component {
   @service pixToast;
   @service accessControl;
+  @service intl;
   @service oidcIdentityProviders;
 
   @tracked showAddAuthenticationMethodModal = false;
@@ -87,12 +89,15 @@ export default class AuthenticationMethod extends Component {
   get emailAuthenticationMethod() {
     return { code: 'EMAIL', name: 'Adresse e-mail' };
   }
+
   get userNameAuthenticationMethod() {
     return { code: 'USERNAME', name: 'Identifiant' };
   }
+
   get garAuthenticationMethod() {
     return { code: 'GAR', name: 'Médiacentre' };
   }
+
   get userOidcAuthenticationMethods() {
     return this.oidcIdentityProviders.list.map((oidcIdentityProvider) => {
       const userHasThisOidcAuthenticationMethod = this.authenticationMethods.any(
@@ -108,6 +113,29 @@ export default class AuthenticationMethod extends Component {
         canBeReassignedToAnotherUser: userHasThisOidcAuthenticationMethod,
       };
     });
+  }
+
+  get pixLastLoggedAtAuthenticationMethod() {
+    const method = this.authenticationMethods.find((method) => method.identityProvider === 'PIX');
+    return method ? this._displayAuthenticationMethodDate(method.lastLoggedAt) : null;
+  }
+
+  get garLastLoggedAtAuthenticationMethod() {
+    const method = this.authenticationMethods.find((method) => method.identityProvider === 'GAR');
+    return method ? this._displayAuthenticationMethodDate(method.lastLoggedAt) : null;
+  }
+
+  _displayAuthenticationMethodDate(date) {
+    if (!date) return null;
+    return this.intl.t('components.users.user-detail-personal-information.authentication-method.last-logged-at', {
+      date: dayjs(date).format('DD/MM/YYYY'),
+    });
+  }
+
+  @action
+  oidcLastLoggedAtAuthenticationMethod(oidc) {
+    const method = this.authenticationMethods.find((method) => method.identityProvider === oidc.code);
+    return method ? this._displayAuthenticationMethodDate(method.lastLoggedAt) : null;
   }
 
   @action
@@ -244,6 +272,7 @@ export default class AuthenticationMethod extends Component {
               />
             {{/if}}
           </td>
+          <td>{{this.pixLastLoggedAtAuthenticationMethod}}</td>
           <td>
             {{#if this.accessControl.hasAccessToUsersActionsScope}}
               {{#if this.isAllowedToRemoveEmailAuthenticationMethod}}
@@ -284,6 +313,7 @@ export default class AuthenticationMethod extends Component {
               />
             {{/if}}
           </td>
+          <td>{{this.pixLastLoggedAtAuthenticationMethod}}</td>
           <td>
             {{#if this.accessControl.hasAccessToUsersActionsScope}}
               {{#if this.isAllowedToRemoveUsernameAuthenticationMethod}}
@@ -319,6 +349,7 @@ export default class AuthenticationMethod extends Component {
               />
             {{/if}}
           </td>
+          <td>{{this.garLastLoggedAtAuthenticationMethod}}</td>
           <td class="authentication-method-table__actions-column">
             {{#if this.accessControl.hasAccessToUsersActionsScope}}
               <div>
@@ -361,6 +392,7 @@ export default class AuthenticationMethod extends Component {
                 />
               {{/if}}
             </td>
+            <td>{{this.oidcLastLoggedAtAuthenticationMethod userOidcAuthenticationMethod}}</td>
             <td class="authentication-method-table__actions-column">
               {{#if this.accessControl.hasAccessToUsersActionsScope}}
                 <div>

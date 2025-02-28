@@ -440,6 +440,7 @@
           "copy-username": "Copy user id"
         },
         "authentication-method": {
+          "last-logged-at": "Last logged at {date}",
           "should-change-password-status": "Temporary password :"
         },
         "cgu": {
