@@ -13,7 +13,7 @@ import {
   AssessmentNotCompletedError,
   CantImproveCampaignParticipationError,
 } from '../../../../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/index.js';
 import { catchErr, catchErrSync, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 const { TO_SHARE, SHARED, STARTED } = CampaignParticipationStatuses;
@@ -243,44 +243,85 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
   });
 
   describe('#start', function () {
+    const userId = 123;
+    const organizationLearnerId = 456;
+    const participantExternalId = 'someExternalId';
+
     it('should return an instance of CampaignParticipation', function () {
-      const campaign = domainBuilder.buildCampaignToJoin();
-      const campaignParticipation = CampaignParticipation.start({ campaign });
+      const campaign = domainBuilder.buildCampaignToStartParticipation();
+      const campaignParticipation = CampaignParticipation.start({
+        campaign,
+        userId,
+        organizationLearnerId,
+        participantExternalId,
+      });
 
       expect(campaignParticipation instanceof CampaignParticipation).to.be.true;
     });
 
     context('organizationLearnerId', function () {
       it('it should set organizationLearnerId', function () {
-        const organizationLearnerId = 1;
-        const campaign = domainBuilder.buildCampaignToJoin();
-        const campaignParticipation = CampaignParticipation.start({ campaign, organizationLearnerId });
+        const campaign = domainBuilder.buildCampaignToStartParticipation();
+        const campaignParticipation = CampaignParticipation.start({
+          campaign,
+          userId,
+          organizationLearnerId,
+          participantExternalId,
+        });
 
         expect(campaignParticipation.organizationLearnerId).to.be.equal(organizationLearnerId);
       });
 
       it('it should set organizationLearnerId to null if it is not provided', function () {
-        const campaign = domainBuilder.buildCampaignToJoin();
-        const campaignParticipation = CampaignParticipation.start({ campaign });
+        const campaign = domainBuilder.buildCampaignToStartParticipation();
+        const campaignParticipation = CampaignParticipation.start({
+          campaign,
+          userId,
+          participantExternalId,
+        });
 
         expect(campaignParticipation.organizationLearnerId).to.be.equal(null);
       });
     });
 
     context('status', function () {
-      context('when the campaign as the type PROFILES_COLLECTION', function () {
-        it('status to TO_SHARE', function () {
-          const campaign = domainBuilder.buildCampaignToJoin({ type: CampaignTypes.PROFILES_COLLECTION });
-          const campaignParticipation = CampaignParticipation.start({ campaign });
+      context('when the campaign has the type PROFILES_COLLECTION', function () {
+        it('should set status to TO_SHARE', function () {
+          const campaign = domainBuilder.buildCampaignToStartParticipation({ type: CampaignTypes.PROFILES_COLLECTION });
+          const campaignParticipation = CampaignParticipation.start({
+            campaign,
+            userId,
+            organizationLearnerId,
+            participantExternalId,
+          });
 
           expect(campaignParticipation.status).to.be.equal(CampaignParticipationStatuses.TO_SHARE);
         });
       });
 
-      context('when the campaign as the type ASSESSMENT', function () {
-        it('status to STARTED', function () {
-          const campaign = domainBuilder.buildCampaignToJoin({ type: CampaignTypes.ASSESSMENT });
-          const campaignParticipation = CampaignParticipation.start({ campaign });
+      context('when the campaign has the type ASSESSMENT', function () {
+        it('should set status to STARTED', function () {
+          const campaign = domainBuilder.buildCampaignToStartParticipation({ type: CampaignTypes.ASSESSMENT });
+          const campaignParticipation = CampaignParticipation.start({
+            campaign,
+            userId,
+            organizationLearnerId,
+            participantExternalId,
+          });
+
+          expect(campaignParticipation.status).to.be.equal(CampaignParticipationStatuses.STARTED);
+        });
+      });
+
+      context('when the campaign has the type EXAM', function () {
+        it('should set status to STARTED', function () {
+          const campaign = domainBuilder.buildCampaignToStartParticipation({ type: CampaignTypes.EXAM });
+          const campaignParticipation = CampaignParticipation.start({
+            campaign,
+            userId,
+            organizationLearnerId,
+            participantExternalId,
+          });
 
           expect(campaignParticipation.status).to.be.equal(CampaignParticipationStatuses.STARTED);
         });

@@ -1,7 +1,7 @@
 import { CampaignToStartParticipation } from '../../../../src/prescription/campaign-participation/domain/models/CampaignToStartParticipation.js';
 import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 
-const buildCampaignToStartParticipation = function ({
+export function buildCampaignToStartParticipation({
   id = 1,
   externalIdLabel = 'Un id pix label',
   externalIdType,
@@ -29,6 +29,4 @@ const buildCampaignToStartParticipation = function ({
     skillCount: type === CampaignTypes.ASSESSMENT ? skillCount : null,
     organizationId,
   });
-};
-
-export { buildCampaignToStartParticipation };
+}

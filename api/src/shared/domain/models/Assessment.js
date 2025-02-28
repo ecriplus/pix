@@ -6,6 +6,7 @@ import { ObjectValidationError } from '../errors.js';
 const courseIdMessage = {
   COMPETENCE_EVALUATION: '[NOT USED] CompetenceId is in Competence Evaluation.',
   CAMPAIGN: '[NOT USED] Campaign Assessment CourseId Not Used',
+  EXAM: '[NOT USED] Exam Assessment CourseId Not Used',
 };
 
 const states = {
@@ -23,6 +24,7 @@ const types = {
   PREVIEW: 'PREVIEW',
   CAMPAIGN: 'CAMPAIGN',
   PIX1D_MISSION: 'PIX1D_MISSION',
+  EXAM: 'EXAM',
 };
 
 const TYPES_OF_ASSESSMENT_NEEDING_USER = [types.CERTIFICATION, types.COMPETENCE_EVALUATION, types.CAMPAIGN];
@@ -235,6 +237,7 @@ class Assessment {
       method: methods.SMART_RANDOM,
     });
   }
+
   static createForPix1dMission() {
     return new Assessment({
       state: Assessment.states.STARTED,

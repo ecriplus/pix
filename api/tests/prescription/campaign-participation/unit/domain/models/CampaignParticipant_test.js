@@ -1,10 +1,12 @@
 import { CampaignParticipant } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipant.js';
 import { CampaignExternalIdTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import {
   AlreadyExistingCampaignParticipationError,
   NotEnoughDaysPassedBeforeResetCampaignParticipationError,
 } from '../../../../../../src/shared/domain/errors.js';
 import { EntityValidationError, ForbiddenAccess } from '../../../../../../src/shared/domain/errors.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/index.js';
 import { catchErr, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CampaignParticipant', function () {
@@ -218,6 +220,62 @@ describe('Unit | Domain | Models | CampaignParticipant', function () {
           });
 
           expect(() => campaignParticipant.start({ participantExternalId: null })).to.not.throw();
+        });
+      });
+    });
+
+    context('when this is an assessment exam', function () {
+      it('should create a campaign campaign participation', function () {
+        const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
+          type: CampaignTypes.EXAM,
+          assessmentMethod: Assessment.methods.SMART_RANDOM,
+          multipleSendings: false,
+          externalIdLabel: null,
+        });
+        const organizationLearnerId = 12;
+        const userIdentity = { id: 13 };
+        const campaignParticipant = new CampaignParticipant({
+          campaignToStartParticipation,
+          userIdentity,
+          organizationLearner: {
+            id: organizationLearnerId,
+            hasParticipated: false,
+          },
+        });
+        campaignParticipant.start({ participantExternalId: null });
+
+        expect(campaignParticipant.campaignParticipation).to.deep.include({
+          campaignId: campaignToStartParticipation.id,
+          status: 'STARTED',
+          userId: userIdentity.id,
+          organizationLearnerId,
+        });
+      });
+
+      it('should create an assessment', function () {
+        const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
+          type: CampaignTypes.EXAM,
+          multipleSendings: false,
+          externalIdLabel: null,
+        });
+        const organizationLearnerId = 12;
+        const userIdentity = { id: 13 };
+        const campaignParticipant = new CampaignParticipant({
+          campaignToStartParticipation,
+          userIdentity,
+          organizationLearner: {
+            id: organizationLearnerId,
+            hasParticipated: false,
+          },
+        });
+        campaignParticipant.start({ participantExternalId: null });
+
+        expect(campaignParticipant.assessment).to.deep.include({
+          courseId: '[NOT USED] Campaign Assessment CourseId Not Used',
+          isImproving: false,
+          method: 'SMART_RANDOM',
+          state: 'started',
+          type: 'CAMPAIGN',
         });
       });
     });

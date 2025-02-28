@@ -1,26 +1,36 @@
-import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
-import { domainBuilder, expect } from '../../../test-helper.js';
+import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CampaignToStartParticipation', function () {
-  describe('#isAssessment', function () {
-    it('should return true if the campaign is of type ASSESSMENT', function () {
-      // given
-      const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
-        type: CampaignTypes.ASSESSMENT,
+  describe('getters', function () {
+    // eslint-disable-next-line mocha/no-setup-in-describe
+    [
+      {
+        getter: 'isAssessment',
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        isTrueForType: CampaignTypes.ASSESSMENT,
+      },
+      {
+        getter: 'isExam',
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        isTrueForType: CampaignTypes.EXAM,
+      },
+    ].forEach(({ getter, isTrueForType }) => {
+      describe('#' + getter, function () {
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        Object.values(CampaignTypes).forEach((campaignType) => {
+          const expected = campaignType === isTrueForType;
+          it(`should return ${expected} when campaign is of type ${campaignType}`, function () {
+            // given
+            const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
+              type: campaignType,
+            });
+
+            // when / then
+            expect(campaignToStartParticipation[getter]).to.equal(expected);
+          });
+        });
       });
-
-      // when / then
-      expect(campaignToStartParticipation.isAssessment).to.be.true;
-    });
-
-    it('should return false if the campaign is not of type ASSESSMENT', function () {
-      // given
-      const campaignToStartParticipation = domainBuilder.buildCampaignToStartParticipation({
-        type: CampaignTypes.PROFILES_COLLECTION,
-      });
-
-      // when / then
-      expect(campaignToStartParticipation.isAssessment).to.be.false;
     });
   });
 

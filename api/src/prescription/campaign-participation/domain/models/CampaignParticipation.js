@@ -6,7 +6,7 @@ import {
   CantImproveCampaignParticipationError,
 } from '../../../../../src/shared/domain/errors.js';
 import { ArchivedCampaignError } from '../../../campaign/domain/errors.js';
-import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
+import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
 import { CampaignParticiationInvalidStatus, CampaignParticipationDeletedError } from '../errors.js';
 
 class CampaignParticipation {
@@ -41,15 +41,15 @@ class CampaignParticipation {
     this.organizationLearnerId = organizationLearnerId;
   }
 
-  static start(campaignParticipation) {
-    const { organizationLearnerId = null } = campaignParticipation;
-    const { isAssessment } = campaignParticipation.campaign;
+  static start({ campaign, userId, organizationLearnerId = null, participantExternalId }) {
+    const { isAssessment, isExam } = campaign;
     const { STARTED, TO_SHARE } = CampaignParticipationStatuses;
-
-    const status = isAssessment ? STARTED : TO_SHARE;
+    const status = [isAssessment, isExam].includes(true) ? STARTED : TO_SHARE;
 
     return new CampaignParticipation({
-      ...campaignParticipation,
+      campaign,
+      userId,
+      participantExternalId,
       status,
       organizationLearnerId,
     });
@@ -97,7 +97,7 @@ class CampaignParticipation {
     }
 
     //TODO: rewrite when we have only one model for Campaign, for now now tests are based on Campaign.js from api context
-    if (this.campaign.type === 'PROFILES_COLLECTION') {
+    if (this.campaign.type === CampaignTypes.PROFILES_COLLECTION) {
       throw new CantImproveCampaignParticipationError();
     }
   }
@@ -117,7 +117,7 @@ class CampaignParticipation {
       throw new CampaignParticipationDeletedError('Cannot share results on a deleted participation.');
     }
     //TODO: rewrite when we have only one model for Campaign, for now tests are based on Campaign.js from api context
-    if (this.campaign.type === 'ASSESSMENT' && lastAssessmentNotCompleted(this)) {
+    if (this.campaign.type === CampaignTypes.ASSESSMENT && lastAssessmentNotCompleted(this)) {
       throw new AssessmentNotCompletedError();
     }
   }

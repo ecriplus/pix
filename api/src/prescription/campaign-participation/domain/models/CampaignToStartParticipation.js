@@ -32,6 +32,10 @@ class CampaignToStartParticipation {
     return this.type === CampaignTypes.ASSESSMENT;
   }
 
+  get isExam() {
+    return this.type === CampaignTypes.EXAM;
+  }
+
   get isArchived() {
     return Boolean(this.archivedAt);
   }
