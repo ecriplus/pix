@@ -184,5 +184,8 @@ function _adaptModelToDb(assessment) {
     'campaignCode',
     'challengeLiveAlerts',
     'companionLiveAlerts',
+    'showProgressBar',
+    'hasCheckpoints',
+    'showLevelup',
   ]);
 }

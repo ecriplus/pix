@@ -91,6 +91,9 @@ class Assessment {
     this.campaignCode = campaignCode;
     this.challengeLiveAlerts = challengeLiveAlerts;
     this.companionLiveAlerts = companionLiveAlerts;
+    this.showProgressBar = null;
+    this.hasCheckpoints = null;
+    this.showLevelup = null;
   }
 
   isCompleted() {

@@ -8,7 +8,14 @@ export default function (schema, request) {
   }
   if (courseData && courseData.id.startsWith('rec')) {
     const course = schema.challenges.find(courseData.id);
-    return schema.assessments.create({ course, state: 'started', type: 'DEMO' });
+    return schema.assessments.create({
+      course,
+      state: 'started',
+      type: 'DEMO',
+      hasCheckpoints: false,
+      showProgressBar: true,
+      showLevelup: false,
+    });
   }
 
   return new Response(500);

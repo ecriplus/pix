@@ -20,6 +20,9 @@ export default Factory.extend({
           type: 'CERTIFICATION',
           certificationNumber: certificationCourse.id,
           certificationCourse,
+          hasCheckpoints: false,
+          showProgressBar: false,
+          showLevelup: false,
         }),
       });
     }

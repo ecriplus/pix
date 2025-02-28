@@ -1,3 +1,4 @@
+import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 import { domainBuilder, expect } from '../../../test-helper.js';
 
 describe('Unit | Domain | Models | Campaign', function () {
@@ -46,6 +47,24 @@ describe('Unit | Domain | Models | Campaign', function () {
 
       // then
       expect(targetProfileId).to.equal(null);
+    });
+  });
+
+  describe('isExam', function () {
+    it('should return true when campaign is of type exam', function () {
+      // given
+      const campaign = domainBuilder.buildCampaign({ type: CampaignTypes.EXAM });
+
+      // when / then
+      expect(campaign.isExam()).to.be.true;
+    });
+
+    it('should return false when campaign is not of type exam', function () {
+      // given
+      const campaign = domainBuilder.buildCampaign.ofTypeProfilesCollection();
+
+      // when / then
+      expect(campaign.isExam()).to.be.false;
     });
   });
 

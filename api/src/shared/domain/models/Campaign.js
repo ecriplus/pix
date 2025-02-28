@@ -69,6 +69,10 @@ class Campaign {
     return this.type === CampaignTypes.ASSESSMENT;
   }
 
+  isExam() {
+    return this.type === CampaignTypes.EXAM;
+  }
+
   isProfilesCollection() {
     return this.type === CampaignTypes.PROFILES_COLLECTION;
   }

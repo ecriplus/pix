@@ -20,6 +20,8 @@ module('Integration | Component | progress-bar', function (hooks) {
     ];
     const mockAssessment = store.createRecord('assessment', {
       type: 'CAMPAIGN',
+      showProgressBar: true,
+      hasCheckpoints: true,
     });
     mockAssessment.answers = answers;
 

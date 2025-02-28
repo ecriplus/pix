@@ -10,6 +10,11 @@ export default function (schema, request) {
   if (existingCompetenceEvaluation) {
     return existingCompetenceEvaluation;
   }
-  const assessment = schema.assessments.create({ type: 'COMPETENCE_EVALUATION' });
+  const assessment = schema.assessments.create({
+    type: 'COMPETENCE_EVALUATION',
+    hasCheckpoints: true,
+    showProgressBar: true,
+    showLevelup: true,
+  });
   return schema.competenceEvaluations.create({ assessment, competenceId });
 }
