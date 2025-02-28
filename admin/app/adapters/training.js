@@ -19,4 +19,9 @@ export default class TrainingAdapter extends ApplicationAdapter {
     const url = `${this.host}/${this.namespace}/trainings/${trainingId}/target-profiles/${targetProfileId}`;
     return this.ajax(url, 'DELETE');
   }
+
+  async duplicate(trainingId) {
+    const url = `${this.host}/${this.namespace}/trainings/${trainingId}/duplicate`;
+    return this.ajax(url, 'POST');
+  }
 }

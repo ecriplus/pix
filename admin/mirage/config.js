@@ -49,6 +49,7 @@ import {
   createOrUpdateTrainingTrigger,
   createTraining,
   detachTargetProfileFromTraining,
+  duplicateTraining,
   findPaginatedTrainingSummaries,
   getTargetProfileSummariesForTraining,
   getTraining,
@@ -398,6 +399,7 @@ function routes() {
   this.post('/admin/trainings/:id/attach-target-profiles', attachTargetProfilesToTraining);
   this.delete('/admin/trainings/:trainingId/target-profiles/:targetProfileId', detachTargetProfileFromTraining);
   this.put('/admin/trainings/:id/triggers', createOrUpdateTrainingTrigger);
+  this.post('/admin/trainings/:id/duplicate', duplicateTraining);
 
   this.get('/admin/certifications/:id');
   this.get('/admin/certifications/:id/certified-profile', (schema, request) => {

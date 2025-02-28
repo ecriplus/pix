@@ -173,6 +173,25 @@ module('Acceptance | Trainings | Training', function (hooks) {
         // then
         assert.dom(screen.getByRole('heading', { name: 'Mon titre interne' })).exists();
       });
+
+      test('should be possible to duplicate displayed training', async function (assert) {
+        // given
+        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+        await visit(`/trainings/${trainingId}`);
+
+        // when
+        await clickByName('Dupliquer ce contenu formatif');
+        await screen.findByRole('button', { name: 'Valider' });
+        await clickByName('Valider');
+
+        // then
+        const title = await screen.findByRole('heading', {
+          name: `[Copie] Apprendre à piloter des chauves-souris comme Batman`,
+          level: 1,
+        });
+        assert.dom(title).exists();
+        assert.strictEqual(currentURL(), '/trainings/3/triggers');
+      });
     });
 
     module('when admin role is "SUPPORT', function () {
