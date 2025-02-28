@@ -1,5 +1,21 @@
 # Pix Changelog
 
+## v5.54.0 (28/02/2025)
+
+
+### :rocket: Amélioration
+- [#11504](https://github.com/1024pix/pix/pull/11504) [FEATURE] PixAdmin : pouvoir dupliquer les contenus formatifs (PIX-16670)(PIX-16075).
+- [#11505](https://github.com/1024pix/pix/pull/11505) [FEATURE] Enregistrer la date de dernière connexion Pix par application pour les méthodes de connexion OIDC (PIX-16623).
+- [#11467](https://github.com/1024pix/pix/pull/11467) [FEATURE] Permettre aux prescripteurs de télécharger les attestations lié à la parentalité (PIX-16666).
+
+### :building_construction: Tech
+- [#11526](https://github.com/1024pix/pix/pull/11526) [TECH] Migrer la route /api/admin/organizations/{id}/archive (PIX-16755).
+- [#11533](https://github.com/1024pix/pix/pull/11533) [TECH] Corriger les warnings lors des tests unitaires.
+- [#11532](https://github.com/1024pix/pix/pull/11532) [TECH] Corriger le warning `valid integer` des tests d'intég.
+
+### :arrow_up: Montée de version
+- [#11534](https://github.com/1024pix/pix/pull/11534) [BUMP] Update dependency @1024pix/pix-ui to ^54.12.0 (orga).
+
 ## v5.53.0 (27/02/2025)
 
 
