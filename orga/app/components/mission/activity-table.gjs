@@ -13,6 +13,7 @@ function statusColor(status) {
 }
 
 <template>
+  toto
   {{#if @missionLearners}}
     <div class="panel">
       <table class="table content-text content-text--small participation-list__table mission-table">
