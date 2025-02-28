@@ -60,6 +60,15 @@ export const reconcileOidcUser = async function ({
     }),
   });
 
+  await _updateUserLastConnection({
+    userId,
+    requestedApplication,
+    oidcAuthenticationService,
+    authenticationMethodRepository,
+    lastUserApplicationConnectionsRepository,
+    userLoginRepository,
+  });
+
   const accessToken = await oidcAuthenticationService.createAccessToken({ userId, audience });
 
   let logoutUrlUUID;
@@ -70,12 +79,25 @@ export const reconcileOidcUser = async function ({
     });
   }
 
+  return { accessToken, logoutUrlUUID };
+};
+
+async function _updateUserLastConnection({
+  userId,
+  requestedApplication,
+  oidcAuthenticationService,
+  authenticationMethodRepository,
+  lastUserApplicationConnectionsRepository,
+  userLoginRepository,
+}) {
   await userLoginRepository.updateLastLoggedAt({ userId });
   await lastUserApplicationConnectionsRepository.upsert({
     userId,
     application: requestedApplication.applicationName,
     lastLoggedAt: new Date(),
   });
-
-  return { accessToken, logoutUrlUUID };
-};
+  await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
+    userId,
+    identityProvider: oidcAuthenticationService.identityProvider,
+  });
+}
