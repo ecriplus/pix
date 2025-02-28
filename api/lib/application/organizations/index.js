@@ -117,34 +117,6 @@ const register = async function (server) {
       },
     },
     {
-      method: 'POST',
-      path: '/api/admin/organizations/{id}/archive',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-                securityPreHandlers.checkAdminMemberHasRoleMetier,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            id: identifiersType.organizationId,
-          }),
-        },
-        handler: organizationController.archiveOrganization,
-        tags: ['api', 'organizations'],
-        notes: [
-          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
-            "- Elle permet d'archiver une organisation",
-        ],
-      },
-    },
-    {
       method: 'GET',
       path: '/api/admin/organizations/{organizationId}/children',
       config: {

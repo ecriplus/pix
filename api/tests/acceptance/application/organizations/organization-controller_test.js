@@ -638,49 +638,6 @@ describe('Acceptance | Application | organization-controller', function () {
     });
   });
 
-  describe('POST /api/admin/organizations/{id}/archive', function () {
-    it('should return the archived organization', async function () {
-      // given
-      const adminUser = databaseBuilder.factory.buildUser.withRole();
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildOrganization({ id: 2 });
-
-      // Invitations
-      databaseBuilder.factory.buildOrganizationInvitation({
-        organizationId,
-        status: OrganizationInvitation.StatusType.PENDING,
-      });
-      databaseBuilder.factory.buildOrganizationInvitation({
-        organizationId,
-        status: OrganizationInvitation.StatusType.PENDING,
-      });
-
-      // Campaigns
-      databaseBuilder.factory.buildCampaign({ id: 1, organizationId });
-      databaseBuilder.factory.buildCampaign({ id: 2, organizationId });
-
-      // Memberships
-      databaseBuilder.factory.buildUser({ id: 7 });
-      databaseBuilder.factory.buildMembership({ id: 1, userId: 7, organizationId });
-      databaseBuilder.factory.buildUser({ id: 8 });
-      databaseBuilder.factory.buildMembership({ id: 2, userId: 8, organizationId });
-
-      await databaseBuilder.commit();
-
-      // when
-      const response = await server.inject({
-        method: 'POST',
-        url: `/api/admin/organizations/${organizationId}/archive`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
-      });
-
-      // then
-      expect(response.statusCode).to.equal(200);
-      const archivedOrganization = response.result.data.attributes;
-      expect(archivedOrganization['archivist-full-name']).to.equal(`${adminUser.firstName} ${adminUser.lastName}`);
-    });
-  });
-
   describe('GET /api/admin/organizations/{organizationId}/children', function () {
     context('error cases', function () {
       context('when organization does not exist', function () {

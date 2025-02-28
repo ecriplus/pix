@@ -1,7 +1,13 @@
 import { organizationAdminController } from '../../../../../src/organizational-entities/application/organization/organization.admin.controller.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import {
+  domainBuilder,
+  expect,
+  generateAuthenticatedUserRequestHeaders,
+  hFake,
+  sinon,
+} from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Application | Controller | Admin | organization', function () {
   describe('#addOrganizationFeatureInBatch', function () {
@@ -28,6 +34,40 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | or
         userId,
         filePath,
       });
+    });
+  });
+
+  describe('#archiveOrganization', function () {
+    it('calls the usecase to archive the organization with the user id', async function () {
+      // given
+      const organizationId = 1234;
+      const userId = 10;
+      const request = {
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        params: { id: organizationId },
+      };
+
+      const archivedOrganization = Symbol('archivedOrganization');
+      const archivedOrganizationSerialized = Symbol('archivedOrganizationSerialized');
+      sinon.stub(usecases, 'archiveOrganization').resolves(archivedOrganization);
+      const organizationForAdminSerializerStub = {
+        serialize: sinon.stub(),
+      };
+
+      organizationForAdminSerializerStub.serialize
+        .withArgs(archivedOrganization)
+        .returns(archivedOrganizationSerialized);
+
+      const dependencies = {
+        organizationForAdminSerializer: organizationForAdminSerializerStub,
+      };
+
+      // when
+      const response = await organizationAdminController.archiveOrganization(request, hFake, dependencies);
+
+      // then
+      expect(usecases.archiveOrganization).to.have.been.calledOnceWithExactly({ organizationId, userId });
+      expect(response).to.deep.equal(archivedOrganizationSerialized);
     });
   });
 

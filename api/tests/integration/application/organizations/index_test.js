@@ -64,24 +64,4 @@ describe('Integration | Application | Organizations | Routes', function () {
       });
     });
   });
-
-  describe('POST /api/admin/organizations/:id/archive', function () {
-    it('should call the controller to archive the organization', async function () {
-      // given
-      const method = 'POST';
-      const url = '/api/admin/organizations/1/archive';
-
-      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
-      sinon.stub(organizationController, 'archiveOrganization').callsFake((request, h) => h.response('ok').code(204));
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const response = await httpTestServer.request(method, url);
-
-      // then
-      expect(response.statusCode).to.equal(204);
-      expect(organizationController.archiveOrganization).to.have.been.calledOnce;
-    });
-  });
 });
