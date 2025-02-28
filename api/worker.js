@@ -19,7 +19,6 @@ import { child } from './src/shared/infrastructure/utils/logger.js';
 
 const logger = child('worker', { event: 'worker' });
 
-const isJobInWebProcess = process.env.START_JOB_IN_WEB_PROCESS === 'true';
 const workerDirPath = dirname(fileURLToPath(import.meta.url));
 
 const metrics = new Metrics({ config });
@@ -57,15 +56,19 @@ function createJobQueue(pgBoss) {
   return jobQueue;
 }
 
+function checkJobGroups(jobGroups) {
+  if (!jobGroups) throw new Error('Job groups are mandatory');
+  jobGroups.forEach((jobGroup) => checkJobGroup(jobGroup));
+}
+
 function checkJobGroup(jobGroup) {
   if (!Object.values(JobGroup).includes(jobGroup)) {
     throw new Error(`Job group invalid, allowed Job groups are [${Object.values(JobGroup)}]`);
   }
-  logger.info(`Job group "${jobGroup}"`);
 }
 
-export async function registerJobs({ jobGroup, dependencies = { startPgBoss, createJobQueue } }) {
-  checkJobGroup(jobGroup);
+export async function registerJobs({ jobGroups, dependencies = { startPgBoss, createJobQueue } }) {
+  checkJobGroups(jobGroups);
 
   const pgBoss = await dependencies.startPgBoss();
 
@@ -88,7 +91,7 @@ export async function registerJobs({ jobGroup, dependencies = { startPgBoss, cre
   for (const [moduleName, ModuleClass] of Object.entries(jobModules)) {
     const job = new ModuleClass();
 
-    if (!isJobInWebProcess && job.jobGroup !== jobGroup) continue;
+    if (!jobGroups.includes(job.jobGroup)) continue;
 
     if (job.isJobEnabled) {
       logger.info(`Job "${job.jobName}" registered from module "${moduleName}."`);
@@ -127,15 +130,15 @@ export async function registerJobs({ jobGroup, dependencies = { startPgBoss, cre
     }
   }
 
-  logger.info(`${jobRegisteredCount} jobs registered for group "${jobGroup}".`);
-  logger.info(`${cronJobCount} cron jobs scheduled for group "${jobGroup}".`);
+  logger.info(`${jobRegisteredCount} jobs registered for groups "${jobGroups}".`);
+  logger.info(`${cronJobCount} cron jobs scheduled for groups "${jobGroups}".`);
 }
 
 const isRunningFromCli = import.meta.filename === process.argv[1];
 
 async function main() {
   const jobGroup = process.argv[2] ? JobGroup[process.argv[2]?.toUpperCase()] : JobGroup.DEFAULT;
-  await registerJobs({ jobGroup });
+  await registerJobs({ jobGroups: [jobGroup] });
   process.on('SIGINT', async () => {
     await quitAllStorages();
     await metrics.clearMetrics();

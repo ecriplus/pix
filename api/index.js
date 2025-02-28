@@ -64,7 +64,7 @@ process.on('SIGINT', () => {
   try {
     await start();
     if (config.infra.startJobInWebProcess) {
-      registerJobs({ jobGroup: JobGroup.DEFAULT });
+      registerJobs({ jobGroups: [JobGroup.DEFAULT, JobGroup.FAST] });
     }
   } catch (error) {
     logger.error(error);

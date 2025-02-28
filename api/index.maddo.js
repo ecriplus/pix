@@ -2,11 +2,13 @@ import 'dotenv/config';
 
 import { databaseConnections } from './db/database-connections.js';
 import { createMaddoServer } from './server.maddo.js';
-import { schema as configSchema } from './src/shared/config.js';
+import { JobGroup } from './src/shared/application/jobs/job-controller.js';
+import { config, schema as configSchema } from './src/shared/config.js';
 import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
 import { logger } from './src/shared/infrastructure/utils/logger.js';
 import { redisMonitor } from './src/shared/infrastructure/utils/redis-monitor.js';
 import { validateEnvironmentVariables } from './src/shared/infrastructure/validate-environment-variables.js';
+import { registerJobs } from './worker.js';
 
 validateEnvironmentVariables(configSchema);
 
@@ -45,6 +47,9 @@ process.on('SIGINT', () => {
 (async () => {
   try {
     await start();
+    if (config.infra.startJobInWebProcess) {
+      registerJobs({ jobGroups: [JobGroup.MADDO] });
+    }
   } catch (error) {
     logger.error(error);
     throw error;

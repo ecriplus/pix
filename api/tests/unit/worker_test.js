@@ -29,7 +29,7 @@ describe('#registerJobs', function () {
   it('should register UserAnonymizedEventLoggingJob', async function () {
     // when
     await registerJobs({
-      jobGroup: JobGroup.DEFAULT,
+      jobGroups: [JobGroup.DEFAULT],
       dependencies: {
         startPgBoss: startPgBossStub,
         createJobQueue: createJobQueueStub,
@@ -50,7 +50,7 @@ describe('#registerJobs', function () {
       .stub(UserAnonymizedEventLoggingJobController.prototype, 'legacyName')
       .get(() => 'legyNameForUserAnonymizedEventLoggingJobController');
     await registerJobs({
-      jobGroup: JobGroup.DEFAULT,
+      jobGroups: [JobGroup.DEFAULT],
       dependencies: {
         startPgBoss: startPgBossStub,
         createJobQueue: createJobQueueStub,
@@ -71,7 +71,7 @@ describe('#registerJobs', function () {
 
     // when
     await registerJobs({
-      jobGroup: JobGroup.DEFAULT,
+      jobGroups: [JobGroup.DEFAULT],
       dependencies: {
         startPgBoss: startPgBossStub,
         createJobQueue: createJobQueueStub,
@@ -92,7 +92,7 @@ describe('#registerJobs', function () {
 
     // when
     await registerJobs({
-      jobGroup: JobGroup.DEFAULT,
+      jobGroups: [JobGroup.DEFAULT],
       dependencies: {
         startPgBoss: startPgBossStub,
         createJobQueue: createJobQueueStub,
@@ -106,9 +106,24 @@ describe('#registerJobs', function () {
     );
   });
 
+  it('should throws an error when no groups is invalid', async function () {
+    // given
+    const error = await catchErr(registerJobs)({
+      dependencies: {
+        startPgBoss: startPgBossStub,
+        createJobQueue: createJobQueueStub,
+      },
+    });
+
+    // then
+    expect(error).to.be.instanceOf(Error);
+    expect(error.message).to.equal('Job groups are mandatory');
+  });
+
   it('should throws an error when group is invalid', async function () {
     // given
     const error = await catchErr(registerJobs)({
+      jobGroups: ['pouet'],
       dependencies: {
         startPgBoss: startPgBossStub,
         createJobQueue: createJobQueueStub,
@@ -126,7 +141,7 @@ describe('#registerJobs', function () {
       sinon.stub(config.features.scheduleComputeOrganizationLearnersCertificability, 'cron').value('0 21 * * *');
 
       await registerJobs({
-        jobGroup: JobGroup.DEFAULT,
+        jobGroups: [JobGroup.DEFAULT],
         dependencies: {
           startPgBoss: startPgBossStub,
           createJobQueue: createJobQueueStub,
@@ -150,7 +165,7 @@ describe('#registerJobs', function () {
       sinon.stub(config.features.scheduleComputeOrganizationLearnersCertificability, 'cron').value('0 21 * * *');
 
       await registerJobs({
-        jobGroup: JobGroup.DEFAULT,
+        jobGroups: [JobGroup.DEFAULT],
         dependencies: {
           startPgBoss: startPgBossStub,
           createJobQueue: createJobQueueStub,
@@ -170,7 +185,7 @@ describe('#registerJobs', function () {
         sinon.stub(config.pgBoss, 'exportSenderJobEnabled').value(false);
 
         await registerJobs({
-          jobGroup: JobGroup.DEFAULT,
+          jobGroups: [JobGroup.DEFAULT],
           dependencies: {
             startPgBoss: startPgBossStub,
             createJobQueue: createJobQueueStub,
