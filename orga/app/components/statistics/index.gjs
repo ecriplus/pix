@@ -1,13 +1,14 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 
-import Header from '../table/header';
 import PageTitle from '../ui/page-title';
 import CoverRateGauge from './cover-rate-gauge';
 import TagLevel from './tag-level';
@@ -134,37 +135,38 @@ export default class Statistics extends Component {
           }}</PixButton>
       </section>
 
-      <section class="statistics-page__cover-rate">
-        <table class="panel">
-          <caption class="screen-reader-only">{{t "pages.statistics.table.caption"}}</caption>
-          <thead>
-            <tr>
-              <Header @size="wide" scope="col">{{t "pages.statistics.table.headers.competences"}}</Header>
-              <Header @size="medium" scope="col">{{t "pages.statistics.table.headers.topics"}}</Header>
-              <Header @size="medium" @align="center" scope="col">{{t
-                  "pages.statistics.table.headers.positioning"
-                }}</Header>
-              <Header @align="center" @size="medium" scope="col">{{t
-                  "pages.statistics.table.headers.reached-level"
-                }}</Header>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each this.currentVisibleAnalysis as |line|}}
-              <tr>
-                <td>{{line.competence_code}} {{line.competence}}</td>
-                <td>{{line.sujet}}</td>
-                <td>
-                  <CoverRateGauge @userLevel={{line.niveau_par_user}} @tubeLevel={{line.niveau_par_sujet}} />
-                </td>
-                <td class="table__column--center">
-                  <TagLevel @level={{line.niveau_par_user}} />
-                </td>
-              </tr>
-            {{/each}}
-          </tbody>
-        </table>
-      </section>
+      <PixTable
+        @variant="orga"
+        class="table"
+        @data={{this.currentVisibleAnalysis}}
+        @caption={{t "pages.statistics.table.caption"}}
+      >
+        <:columns as |analysis context|>
+          <PixTableColumn @context={{context}}>
+            <:header>{{t "pages.statistics.table.headers.competences"}}</:header>
+            <:cell>{{analysis.competence_code}} {{analysis.competence}}</:cell>
+          </PixTableColumn>
+
+          <PixTableColumn @context={{context}}>
+            <:header>{{t "pages.statistics.table.headers.topics"}}</:header>
+            <:cell>{{analysis.sujet}}</:cell>
+          </PixTableColumn>
+
+          <PixTableColumn @context={{context}}>
+            <:header>{{t "pages.statistics.table.headers.positioning"}}</:header>
+            <:cell>
+              <CoverRateGauge @userLevel={{analysis.niveau_par_user}} @tubeLevel={{analysis.niveau_par_sujet}} />
+            </:cell>
+          </PixTableColumn>
+
+          <PixTableColumn @context={{context}}>
+            <:header>{{t "pages.statistics.table.headers.reached-level"}}</:header>
+            <:cell>
+              <TagLevel @level={{analysis.niveau_par_user}} />
+            </:cell>
+          </PixTableColumn>
+        </:columns>
+      </PixTable>
 
       <PixPagination @pagination={{this.pagination}} @locale={{this.currentLocale}} />
     {{else}}
