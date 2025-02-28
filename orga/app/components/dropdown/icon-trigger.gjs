@@ -23,8 +23,8 @@ export default class IconTrigger extends Component {
     <div id="icon-trigger" class="dropdown" ...attributes>
       <PixIconButton
         @iconName={{@icon}}
-        aria-label="{{@ariaLabel}}"
-        class="{{@dropdownButtonClass}}"
+        @ariaLabel={{@ariaLabel}}
+        class={{@dropdownButtonClass}}
         @triggerAction={{this.toggle}}
         @size="small"
         @color="dark-grey"

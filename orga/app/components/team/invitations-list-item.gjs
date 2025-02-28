@@ -1,4 +1,5 @@
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
@@ -43,13 +44,30 @@ export default class InvitationsListItem extends Component {
   }
 
   <template>
-    <tr aria-label="{{t 'pages.team-invitations.table.row.aria-label'}}">
-      <td>{{@invitation.email}}</td>
-      <td class="hide-on-mobile">
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        {{t "pages.team-invitations.table.column.email-address"}}
+      </:header>
+      <:cell>
+        {{@invitation.email}}
+      </:cell>
+    </PixTableColumn>
+
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        {{t "pages.team-invitations.table.column.pending-invitation"}}
+      </:header>
+      <:cell>
         {{dayjsFormat @invitation.updatedAt "DD/MM/YYYY [-] HH:mm"}}
-      </td>
-      <td>
-        <div class="invitations-list__action">
+      </:cell>
+    </PixTableColumn>
+
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        {{t "common.actions.global"}}
+      </:header>
+      <:cell>
+        <div class="organization-participant__align-element">
           <PixTooltip @isInline={{true}}>
             <:triggerElement>
               <PixIconButton
@@ -84,7 +102,7 @@ export default class InvitationsListItem extends Component {
             </:tooltip>
           </PixTooltip>
         </div>
-      </td>
-    </tr>
+      </:cell>
+    </PixTableColumn>
   </template>
 }

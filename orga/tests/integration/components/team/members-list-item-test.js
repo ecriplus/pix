@@ -70,7 +70,9 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
       this.set('membership', memberMembership);
 
       // when
-      const screen = await render(hbs`<Team::MembersListItem @membership={{this.membership}} />`);
+      const screen = await render(
+        hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+      );
 
       // then
       assert.ok(screen.getByText('La Panique'));
@@ -83,7 +85,9 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
       this.set('membership', memberMembership);
 
       // when
-      const screen = await render(hbs`<Team::MembersListItem @membership={{this.membership}} />`);
+      const screen = await render(
+        hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+      );
 
       // then
       assert.notOk(screen.queryByRole('button', { name: t('pages.team-members.actions.manage') }));
@@ -106,7 +110,9 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
       this.set('membership', memberMembership);
 
       // when
-      const screen = await render(hbs`<Team::MembersListItem @membership={{this.membership}} />`);
+      const screen = await render(
+        hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+      );
 
       // then
 
@@ -121,23 +127,23 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
         // given
         this.set('membership', adminMembership);
 
-        const screen = await render(hbs`<Team::MembersListItem @membership={{this.membership}} />`);
+        const screen = await render(
+          hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+        );
 
         // when
         await clickByName(t('pages.team-members.actions.manage'));
         await clickByName(t('pages.team-members.actions.edit-organization-membership-role'));
-
         // then
-        assert.dom('.zone-save-cancel-role').exists({ count: 1 });
-        assert.ok(screen.getByLabelText(t('common.actions.cancel')));
-        assert.ok(screen.getByLabelText(t('pages.team-members.actions.save')));
+        assert.ok(screen.getByRole('button', { name: t('common.actions.cancel') }));
+        assert.ok(screen.getByRole('button', { name: t('pages.team-members.actions.save') }));
       });
 
       test('it should cancel the update if using the cancel button', async function (assert) {
         // given
         this.set('membership', adminMembership);
 
-        await render(hbs`<Team::MembersListItem @membership={{this.membership}} />`);
+        await render(hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`);
 
         await clickByName(t('pages.team-members.actions.manage'));
         await clickByName(t('pages.team-members.actions.edit-organization-membership-role'));
@@ -155,7 +161,9 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
         // given
         this.set('membership', memberMembership);
 
-        const screen = await render(hbs`<Team::MembersListItem @membership={{this.membership}} />`);
+        const screen = await render(
+          hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+        );
         await clickByName(t('pages.team-members.actions.manage'));
         await clickByName(t('pages.team-members.actions.edit-organization-membership-role'));
 
@@ -183,7 +191,9 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
         // given
         this.set('membership', adminMembership);
 
-        const screen = await render(hbs`<Team::MembersListItem @membership={{this.membership}} />`);
+        const screen = await render(
+          hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+        );
         await clickByName(t('pages.team-members.actions.manage'));
         await clickByName(t('pages.team-members.actions.edit-organization-membership-role'));
 
@@ -204,7 +214,9 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
         sinon.stub(notifications, 'success');
         this.set('membership', adminMembership);
 
-        const screen = await render(hbs`<Team::MembersListItem @membership={{this.membership}} />`);
+        const screen = await render(
+          hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+        );
         await clickByName(t('pages.team-members.actions.manage'));
         await clickByName(t('pages.team-members.actions.edit-organization-membership-role'));
 
@@ -228,7 +240,9 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
         const notifications = this.owner.lookup('service:notifications');
         sinon.stub(notifications, 'error');
 
-        const screen = await render(hbs`<Team::MembersListItem @membership={{this.membership}} />`);
+        const screen = await render(
+          hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+        );
         await clickByName(t('pages.team-members.actions.manage'));
         await clickByName(t('pages.team-members.actions.edit-organization-membership-role'));
 
@@ -256,7 +270,11 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
 
         // when
         screen = await render(
-          hbs`<Team::MembersListItem @membership={{this.membership}} @onRemoveMember={{this.removeMembership}} />`,
+          hbs`<Team::MembersListItem
+  @membership={{this.membership}}
+  @onRemoveMember={{this.removeMembership}}
+  @displayManagingColumn={{true}}
+/>`,
         );
 
         await clickByName(t('pages.team-members.actions.manage'));
@@ -359,6 +377,7 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
   @isMultipleAdminsAvailable={{this.isMultipleAdminsAvailable}}
   @onRemoveMember={{this.noop}}
   @onLeaveOrganization={{this.onLeaveOrganization}}
+  @displayManagingColumn={{true}}
 />`,
         );
         await clickByName(t('pages.team-members.actions.manage'));

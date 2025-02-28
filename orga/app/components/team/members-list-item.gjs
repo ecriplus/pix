@@ -1,6 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -47,8 +48,9 @@ export default class MembersListItem extends Component {
 
   constructor() {
     super(...arguments);
+
     this.organizationRoles = [this.adminOption, this.memberOption];
-    this.roleSelection = this.args.membership.organizationRole;
+    this.roleSelection = this.args.membership?.organizationRole;
   }
 
   get displayRole() {
@@ -152,84 +154,104 @@ export default class MembersListItem extends Component {
   }
 
   <template>
-    <tr aria-label="{{t 'pages.team-members.table.row-title'}}">
-      <td>{{@membership.user.lastName}}</td>
-      <td>{{@membership.user.firstName}}</td>
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        {{t "pages.team-members.table.column.last-name"}}
+      </:header>
+      <:cell>
+        {{@membership.user.lastName}}
+      </:cell>
+    </PixTableColumn>
 
-      {{#unless this.isEditionMode}}
-        <td>{{this.displayRole}}</td>
-        {{#if this.currentUser.isAdminInOrganization}}
-          <td class="zone-edit-role hide-on-mobile">
-            {{#if this.isNotCurrentUserMembership}}
-              <DropdownIconTrigger
-                @icon="moreVert"
-                @dropdownButtonClass="zone-edit-role__dropdown-button"
-                @dropdownContentClass="zone-edit-role__dropdown-content"
-                @ariaLabel={{t "pages.team-members.actions.manage"}}
-              >
-                <DropdownItem @onClick={{this.toggleEditionMode}}>
-                  {{t "pages.team-members.actions.edit-organization-membership-role"}}
-                </DropdownItem>
-                <DropdownItem @onClick={{fn this.displayRemoveMembershipModal @membership}}>
-                  {{t "pages.team-members.actions.remove-membership"}}
-                </DropdownItem>
-              </DropdownIconTrigger>
-            {{else}}
-              {{#if @isMultipleAdminsAvailable}}
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        {{t "pages.team-members.table.column.first-name"}}
+      </:header>
+      <:cell>
+        {{@membership.user.firstName}}
+      </:cell>
+    </PixTableColumn>
+
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        {{t "pages.team-members.table.column.organization-membership-role"}}
+      </:header>
+      <:cell>
+        {{#unless this.isEditionMode}}
+          {{this.displayRole}}
+        {{/unless}}
+
+        {{#if this.isEditionMode}}
+          <PixSelect
+            @screenReaderOnly={{true}}
+            @hideDefaultOption={{true}}
+            @placeholder="{{t 'pages.team-members.actions.select-role.label'}}"
+            @onChange={{this.setRoleSelection}}
+            @options={{this.organizationRoles}}
+            @value={{this.roleSelection}}
+          >
+            <:label>{{t "pages.team-members.actions.select-role.label"}}</:label>
+          </PixSelect>
+        {{/if}}
+      </:cell>
+    </PixTableColumn>
+
+    {{#if @displayManagingColumn}}
+      <PixTableColumn @context={{@context}}>
+        <:header>
+          {{t "common.actions.global"}}
+        </:header>
+        <:cell>
+          {{#unless this.isEditionMode}}
+            {{#if this.currentUser.isAdminInOrganization}}
+              {{#if this.isNotCurrentUserMembership}}
                 <DropdownIconTrigger
                   @icon="moreVert"
                   @dropdownButtonClass="zone-edit-role__dropdown-button"
                   @dropdownContentClass="zone-edit-role__dropdown-content"
                   @ariaLabel={{t "pages.team-members.actions.manage"}}
                 >
-                  <DropdownItem @onClick={{fn this.displayLeaveOrganizationModal @membership}}>
-                    {{t "pages.team-members.actions.leave-organization"}}
+                  <DropdownItem @onClick={{this.toggleEditionMode}}>
+                    {{t "pages.team-members.actions.edit-organization-membership-role"}}
+                  </DropdownItem>
+                  <DropdownItem @onClick={{fn this.displayRemoveMembershipModal @membership}}>
+                    {{t "pages.team-members.actions.remove-membership"}}
                   </DropdownItem>
                 </DropdownIconTrigger>
+              {{else}}
+                {{#if @isMultipleAdminsAvailable}}
+                  <DropdownIconTrigger
+                    @icon="moreVert"
+                    @dropdownButtonClass="zone-edit-role__dropdown-button"
+                    @dropdownContentClass="zone-edit-role__dropdown-content"
+                    @ariaLabel={{t "pages.team-members.actions.manage"}}
+                  >
+                    <DropdownItem @onClick={{fn this.displayLeaveOrganizationModal @membership}}>
+                      {{t "pages.team-members.actions.leave-organization"}}
+                    </DropdownItem>
+                  </DropdownIconTrigger>
+                {{/if}}
               {{/if}}
             {{/if}}
-          </td>
-        {{/if}}
-      {{/unless}}
+          {{/unless}}
 
-      {{#if this.isEditionMode}}
-        <td>
-          <div id="selectOrganizationRole">
-            <PixSelect
-              class="table__input"
-              @screenReaderOnly={{true}}
-              @hideDefaultOption={{true}}
-              @placeholder="{{t 'pages.team-members.actions.select-role.label'}}"
-              @onChange={{this.setRoleSelection}}
-              @options={{this.organizationRoles}}
-              @value={{this.roleSelection}}
-            >
-              <:label>{{t "pages.team-members.actions.select-role.label"}}</:label>
-            </PixSelect>
-          </div>
-        </td>
-        <td>
-          <div class="zone-save-cancel-role">
-            <PixButton
-              id="save-organization-role"
-              @triggerAction={{fn this.updateRoleOfMember @membership}}
-              @size="small"
-              aria-label={{t "pages.team-members.actions.save"}}
-            >
-              {{t "pages.team-members.actions.save"}}
-            </PixButton>
-            <PixIconButton
-              @iconName="close"
-              id="cancel-update-organization-role"
-              aria-label="{{t 'common.actions.cancel'}}"
-              @triggerAction={{this.cancelUpdateRoleOfMember}}
-              @withBackground={{false}}
-              @color="dark-grey"
-            />
-          </div>
-        </td>
-      {{/if}}
-    </tr>
+          {{#if this.isEditionMode}}
+            <div class="organization-participant__align-element">
+              <PixButton @triggerAction={{fn this.updateRoleOfMember @membership}} @size="small">
+                {{t "pages.team-members.actions.save"}}
+              </PixButton>
+              <PixIconButton
+                @iconName="close"
+                @ariaLabel={{t "common.actions.cancel"}}
+                @triggerAction={{this.cancelUpdateRoleOfMember}}
+                @withBackground={{false}}
+                @color="dark-grey"
+              />
+            </div>
+          {{/if}}
+        </:cell>
+      </PixTableColumn>
+    {{/if}}
 
     <RemoveMemberModal
       @firstName={{@membership.user.firstName}}

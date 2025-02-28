@@ -1,14 +1,24 @@
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
-import TableHeader from '../table/header';
 import MembersListItem from './members-list-item';
 
 export default class MembersList extends Component {
   @service currentUser;
   @service intl;
+  @tracked members = [];
+
+  constructor() {
+    super(...arguments);
+
+    Promise.resolve(this.args.members).then((members) => {
+      this.members = members;
+    });
+  }
 
   get currentLocale() {
     return this.intl.primaryLocale;
@@ -23,42 +33,22 @@ export default class MembersList extends Component {
   }
 
   <template>
-    <div class="panel">
-      <div class="table content-text content-text--small">
-        <table>
-          <thead>
-            <tr>
-              <TableHeader @size="wide">{{t "pages.team-members.table.column.last-name"}}</TableHeader>
-              <TableHeader @size="wide">{{t "pages.team-members.table.column.first-name"}}</TableHeader>
-              <TableHeader @size="wide">{{t
-                  "pages.team-members.table.column.organization-membership-role"
-                }}</TableHeader>
-              {{#if this.displayManagingColumn}}
-                <TableHeader @size="medium" class="hide-on-mobile">
-                  <span>{{t "common.actions.global"}}</span>
-                </TableHeader>
-              {{/if}}
-            </tr>
-          </thead>
-          {{#if @members}}
-            <tbody>
-              {{#each @members as |membership|}}
-                <MembersListItem
-                  @membership={{membership}}
-                  @isMultipleAdminsAvailable={{this.isMultipleAdminsAvailable}}
-                  @onRemoveMember={{@onRemoveMember}}
-                  @onLeaveOrganization={{@onLeaveOrganization}}
-                />
-              {{/each}}
-            </tbody>
-          {{/if}}
-        </table>
+    <PixTable @variant="orga" @caption={{@caption}} @data={{@members}} class="table">
+      <:columns as |membership context|>
+        <MembersListItem
+          @membership={{membership}}
+          @context={{context}}
+          @displayManagingColumn={{this.displayManagingColumn}}
+          @isMultipleAdminsAvailable={{this.isMultipleAdminsAvailable}}
+          @onRemoveMember={{@onRemoveMember}}
+          @onLeaveOrganization={{@onLeaveOrganization}}
+        />
+      </:columns>
+    </PixTable>
 
-        {{#unless @members}}
-          <div class="table__empty content-text">{{t "pages.team-members.table.empty"}}</div>
-        {{/unless}}
-      </div>
-    </div>
+    {{#unless @members}}
+      <div class="table__empty content-text">{{t "pages.team-members.table.empty"}}</div>
+    {{/unless}}
 
     {{#if @members}}
       <PixPagination @pagination={{@members.meta}} @locale={{this.currentLocale}} />

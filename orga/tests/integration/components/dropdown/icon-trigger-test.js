@@ -1,4 +1,5 @@
-import { clickByName, render } from '@1024pix/ember-testing-library';
+import { render } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 
@@ -12,7 +13,7 @@ module('Integration | Component | Dropdown | icon-trigger', function (hooks) {
     const screen = await render(hbs`<Dropdown::IconTrigger @ariaLabel='Afficher les actions' />`);
 
     // then
-    assert.ok(screen.getByLabelText('Afficher les actions'));
+    assert.ok(screen.getByRole('button', { name: 'Afficher les actions' }));
   });
 
   test('should display actions on click', async function (assert) {
@@ -20,7 +21,7 @@ module('Integration | Component | Dropdown | icon-trigger', function (hooks) {
     const screen = await render(
       hbs`<Dropdown::IconTrigger @ariaLabel='Afficher les actions'>Something</Dropdown::IconTrigger>`,
     );
-    await clickByName('Afficher les actions');
+    await click(screen.getByRole('button', { name: 'Afficher les actions' }));
 
     // then
     assert.ok(screen.getByText('Something'));
@@ -31,8 +32,8 @@ module('Integration | Component | Dropdown | icon-trigger', function (hooks) {
     const screen = await render(
       hbs`<Dropdown::IconTrigger @ariaLabel='Afficher les actions'>Something</Dropdown::IconTrigger>`,
     );
-    await clickByName('Afficher les actions');
-    await clickByName('Afficher les actions');
+    await click(screen.getByRole('button', { name: 'Afficher les actions' }));
+    await click(screen.getByRole('button', { name: 'Afficher les actions' }));
 
     // then
     assert.notOk(screen.queryByText('Something'));

@@ -10,7 +10,7 @@ $margin-right: 32px;
   }
 
   &__align-element {
-    display: flex;
+    display: inline-flex;
     gap:var(--pix-spacing-2x);
     justify-content: center;
 
