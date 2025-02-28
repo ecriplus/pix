@@ -88,11 +88,10 @@ module('Integration | Component | Auth::RegisterForm', function (hooks) {
           },
         });
       };
-      SessionStub.prototype.authenticate = function (authenticator, email, password, scope) {
+      SessionStub.prototype.authenticate = function (authenticator, email, password) {
         this.authenticator = authenticator;
         this.email = email;
         this.password = password;
-        this.scope = scope;
         return resolve();
       };
     });
@@ -115,7 +114,6 @@ module('Integration | Component | Auth::RegisterForm', function (hooks) {
       assert.strictEqual(sessionServiceObserver.authenticator, 'authenticator:oauth2');
       assert.strictEqual(sessionServiceObserver.email, 'shi@fu.me');
       assert.strictEqual(sessionServiceObserver.password, 'Mypassword1');
-      assert.strictEqual(sessionServiceObserver.scope, 'pix-orga');
     });
   });
 
