@@ -32,9 +32,8 @@ export default class LoginForm extends Component {
     event.preventDefault();
     const identification = this.email ? this.email.trim() : '';
     const password = this.password;
-    const scope = ENV.APP.AUTHENTICATION.SCOPE;
     try {
-      await this.session.authenticate('authenticator:oauth2', identification, password, scope);
+      await this.session.authenticate('authenticator:oauth2', identification, password);
     } catch (responseError) {
       this._handleApiError(responseError);
     }
