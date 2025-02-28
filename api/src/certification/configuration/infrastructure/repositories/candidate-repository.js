@@ -5,10 +5,10 @@ import { Candidate } from '../../domain/models/Candidate.js';
  * This function find candidates with a certification-course but no reconciledAt
  *
  * @param {Object} params
- * @param {number} params.[limit] - number of candidates to limit to
+ * @param {number} [params.limit] - number of candidates to limit to
  * @returns {Array<Candidate>} - Candidates returned have a reconciledAt built from certification-course
  */
-export const findCandidateWithoutReconciledAt = async function ({ limit } = {}) {
+export const findCandidateWithoutReconciledAt = async function ({ limit } = { limit: 1 }) {
   const knexConn = DomainTransaction.getConnection();
   const data = await knexConn('certification-candidates')
     .select('certification-candidates.id', 'certification-courses.createdAt')
