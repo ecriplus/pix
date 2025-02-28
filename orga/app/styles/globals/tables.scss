@@ -1,5 +1,6 @@
 .table {
   margin-bottom: var(--pix-spacing-4x);
+  overflow: unset;
 
   &__link-cell {
     display: flex;

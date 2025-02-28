@@ -1,14 +1,19 @@
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
+import { array, fn } from '@ember/helper';
+import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
 
 import getService from '../../../helpers/get-service.js';
-import TableHeader from '../../table/header';
+import MasteryPercentageDisplay from '../../ui/mastery-percentage-display';
+import CampaignBadges from '../badges';
 import CampaignParticipationFilters from '../filter/participation-filters';
-import CampaignAssessmentRow from './assessment-row';
 import EvolutionHeader from './evolution-header';
+import ParticipationEvolutionIcon from './participation-evolution-icon';
 
 <template>
-  <section ...attributes>
+  <section>
     <h3 class="screen-reader-only">{{t "pages.campaign-results.table.title"}}</h3>
 
     <CampaignParticipationFilters
@@ -25,69 +30,106 @@ import EvolutionHeader from './evolution-header';
       @onFilter={{@onFilter}}
     />
 
-    <div class="panel">
-      <table class="table content-text content-text--small">
-        <caption class="screen-reader-only">{{@caption}}</caption>
-        <colgroup class="table__column">
-          <col />
-          <col />
-          {{#if @campaign.externalIdLabel}}
-            <col class="table__column--medium" />
-          {{/if}}
-          <col />
-          {{#if @campaign.multipleSendings}}
-            <col />
-            <col />
-          {{/if}}
-          {{#if @campaign.hasBadges}}
-            <col />
-          {{/if}}
-        </colgroup>
-        <thead>
-          <tr>
-            <TableHeader>{{t "pages.campaign-results.table.column.last-name"}}</TableHeader>
-            <TableHeader>{{t "pages.campaign-results.table.column.first-name"}}</TableHeader>
-            {{#if @campaign.hasExternalId}}
-              <TableHeader>{{@campaign.externalIdLabel}}</TableHeader>
-            {{/if}}
-            <TableHeader>{{t "pages.campaign-results.table.column.results.label"}}</TableHeader>
-            {{#if @campaign.multipleSendings}}
-              <TableHeader>
-                <EvolutionHeader @tooltipContent={{t "pages.campaign-results.table.evolution-tooltip.content"}} />
-              </TableHeader>
-              <TableHeader aria-label={{t "pages.campaign-results.table.column.ariaSharedResultCount"}}>
-                {{t "pages.campaign-results.table.column.sharedResultCount"}}
-              </TableHeader>
-            {{/if}}
-            {{#if @campaign.hasBadges}}
-              <TableHeader>{{t "pages.campaign-results.table.column.badges"}}</TableHeader>
-            {{/if}}
-          </tr>
-        </thead>
+    <PixTable
+      @variant="orga"
+      @caption={{@caption}}
+      @data={{@participations}}
+      @onRowClick={{fn @onClickParticipant @campaign.id}}
+      class="table"
+    >
+      <:columns as |participation context|>
 
-        {{#if @participations}}
-          <tbody>
-            {{#each @participations as |participation|}}
-              <CampaignAssessmentRow
-                @hasStages={{@campaign.hasStages}}
-                @hasBadges={{@campaign.hasBadges}}
-                @hasExternalId={{@campaign.hasExternalId}}
-                @participation={{participation}}
-                @campaignId={{@campaign.id}}
-                @stages={{@campaign.stages}}
-                @badges={{@campaign.badges}}
-                @onClickParticipant={{@onClickParticipant}}
-                @displayParticipationCount={{@campaign.multipleSendings}}
-              />
-            {{/each}}
-          </tbody>
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "pages.campaign-results.table.column.last-name"}}
+          </:header>
+          <:cell>
+            <LinkTo
+              @route="authenticated.campaigns.participant-assessment"
+              @models={{array @campaign.id participation.id}}
+            >
+              {{participation.lastName}}
+            </LinkTo>
+          </:cell>
+        </PixTableColumn>
+
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "pages.campaign-results.table.column.first-name"}}
+          </:header>
+          <:cell>
+            {{participation.firstName}}
+          </:cell>
+        </PixTableColumn>
+
+        {{#if @campaign.externalIdLabel}}
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{@campaign.externalIdLabel}}
+            </:header>
+            <:cell>
+              {{participation.participantExternalId}}
+            </:cell>
+          </PixTableColumn>
         {{/if}}
-      </table>
 
-      {{#unless @participations}}
-        <p class="table__empty content-text">{{t "pages.campaign-results.table.empty"}}</p>
-      {{/unless}}
-    </div>
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "pages.campaign-results.table.column.results.label"}}
+          </:header>
+          <:cell>
+            <MasteryPercentageDisplay
+              @masteryRate={{participation.masteryRate}}
+              @hasStages={{@campaign.hasStages}}
+              @reachedStage={{participation.reachedStage}}
+              @totalStage={{participation.totalStage}}
+              @prescriberTitle={{participation.prescriberTitle}}
+              @prescriberDescription={{participation.prescriberDescription}}
+              @isTableDisplay={{true}}
+            />
+          </:cell>
+        </PixTableColumn>
+
+        {{#if @campaign.multipleSendings}}
+          <PixTableColumn @context={{context}}>
+            <:header>
+              <EvolutionHeader @tooltipContent={{t "pages.campaign-results.table.evolution-tooltip.content"}} />
+            </:header>
+            <:cell>
+              <ParticipationEvolutionIcon @evolution={{participation.evolution}} />
+            </:cell>
+          </PixTableColumn>
+
+          <PixTableColumn @context={{context}}>
+            <:header>
+              <span aria-label={{t "pages.campaign-results.table.column.ariaSharedResultCount"}}>{{t
+                  "pages.campaign-results.table.column.sharedResultCount"
+                }}</span>
+            </:header>
+            <:cell>
+              {{participation.sharedResultCount}}
+            </:cell>
+          </PixTableColumn>
+        {{/if}}
+
+        {{#if @campaign.hasBadges}}
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.campaign-results.table.column.badges"}}
+            </:header>
+            <:cell>
+              <span class="participant-list__badges">
+                <CampaignBadges @badges={{@campaign.badges}} @acquiredBadges={{participation.badges}} />
+              </span>
+            </:cell>
+          </PixTableColumn>
+        {{/if}}
+      </:columns>
+    </PixTable>
+
+    {{#unless @participations}}
+      <p class="table__empty content-text">{{t "pages.campaign-results.table.empty"}}</p>
+    {{/unless}}
 
     {{#if @participations}}
       {{#let (getService "service:intl") as |intl|}}
