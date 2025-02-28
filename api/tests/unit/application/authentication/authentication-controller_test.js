@@ -1,5 +1,6 @@
 import { authenticationController } from '../../../../lib/application/authentication/authentication-controller.js';
 import { usecases } from '../../../../lib/domain/usecases/index.js';
+import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Application | Controller | Authentication', function () {
@@ -14,6 +15,7 @@ describe('Unit | Application | Controller | Authentication', function () {
       const externalUserToken = 'SamlJacksonToken';
       const expectedUserId = 1;
       const audience = 'https://app.pix.fr';
+      const requestedApplication = new RequestedApplication('app');
 
       const request = {
         headers: {
@@ -41,6 +43,7 @@ describe('Unit | Application | Controller | Authentication', function () {
           externalUserToken,
           expectedUserId,
           audience,
+          requestedApplication,
         })
         .resolves(accessToken);
 

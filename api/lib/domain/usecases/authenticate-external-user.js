@@ -11,6 +11,27 @@ import {
   UserNotFoundError,
 } from '../../../src/shared/domain/errors.js';
 
+/**
+ *
+ * typedef { function } authenticateExternalUser
+ * @param {Object} params
+ * @param {string} params.username
+ * @param {string} params.password
+ * @param {string} params.externalUserToken
+ * @param {string} params.audience
+ * @param {number} params.expectedUserId
+ * @param {TokenService} params.tokenService
+ * @param {PixAuthenticationService} params.pixAuthenticationService
+ * @param {ObfuscationService} params.obfuscationService
+ * @param {AuthenticationMethodRepository} params.authenticationMethodRepository
+ * @param {UserRepository} params.userRepository
+ * @param {UserLoginRepository} params.userLoginRepository
+ * @param {LastUserApplicationConnectionsRepository} params.lastUserApplicationConnectionsRepository,
+ * @param {RequestedApplication} params.requestedApplication,
+ *
+ * @returns {Promise<*>}
+ */
+
 async function authenticateExternalUser({
   username,
   password,
@@ -23,6 +44,8 @@ async function authenticateExternalUser({
   authenticationMethodRepository,
   userRepository,
   userLoginRepository,
+  lastUserApplicationConnectionsRepository,
+  requestedApplication,
 }) {
   try {
     const userFromCredentials = await pixAuthenticationService.getUserByUsernameAndPassword({
@@ -57,6 +80,11 @@ async function authenticateExternalUser({
     const token = tokenService.createAccessTokenForSaml({ userId: userFromCredentials.id, audience });
 
     await userLoginRepository.updateLastLoggedAt({ userId: userFromCredentials.id });
+    await lastUserApplicationConnectionsRepository.upsert({
+      userId: userFromCredentials.id,
+      application: requestedApplication.applicationName,
+      lastLoggedAt: new Date(),
+    });
     await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
       userId: userFromCredentials.id,
       identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,

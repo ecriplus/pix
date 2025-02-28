@@ -23,6 +23,7 @@ import { accountRecoveryDemandRepository } from '../../../src/identity-access-ma
 import * as authenticationMethodRepository from '../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
 import { clientApplicationRepository } from '../../../src/identity-access-management/infrastructure/repositories/client-application.repository.js';
 import { emailValidationDemandRepository } from '../../../src/identity-access-management/infrastructure/repositories/email-validation-demand.repository.js';
+import { lastUserApplicationConnectionsRepository } from '../../../src/identity-access-management/infrastructure/repositories/last-user-application-connections.repository.js';
 import * as oidcProviderRepository from '../../../src/identity-access-management/infrastructure/repositories/oidc-provider-repository.js';
 import { organizationLearnerIdentityRepository } from '../../../src/identity-access-management/infrastructure/repositories/organization-learner-identity.repository.js';
 import * as userRepository from '../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
@@ -135,6 +136,7 @@ const dependencies = {
   frameworkRepository,
   userToCreateRepository,
   knowledgeElementRepository,
+  lastUserApplicationConnectionsRepository,
   learningContentConversionService,
   membershipRepository,
   obfuscationService,

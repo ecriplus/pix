@@ -6,6 +6,7 @@ import {
   UserShouldChangePasswordError,
 } from '../../../../src/identity-access-management/domain/errors.js';
 import { AuthenticationMethod } from '../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
+import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
 import {
   UnexpectedUserAccountError,
   UserAlreadyExistsWithAuthenticationMethodError,
@@ -14,6 +15,7 @@ import {
 import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
 
 describe('Unit | Application | UseCase | authenticate-external-user', function () {
+  let lastUserApplicationConnectionsRepository;
   let tokenService;
   let pixAuthenticationService;
   let obfuscationService;
@@ -21,6 +23,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
   let userRepository;
   let userLoginRepository;
   const audience = 'https://app.pix.fr';
+  const requestedApplication = new RequestedApplication('app');
 
   beforeEach(function () {
     tokenService = {
@@ -33,6 +36,9 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
     };
     obfuscationService = {
       getUserAuthenticationMethodWithObfuscation: sinon.stub(),
+    };
+    lastUserApplicationConnectionsRepository = {
+      upsert: sinon.stub(),
     };
     authenticationMethodRepository = {
       create: sinon.stub(),
@@ -82,6 +88,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         authenticationMethodRepository,
         userRepository,
         userLoginRepository,
+        lastUserApplicationConnectionsRepository,
+        requestedApplication,
       });
 
       // then
@@ -90,6 +98,10 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
 
     it('saves last login date when authentication succeeds', async function () {
       // given
+      const clock = sinon.useFakeTimers({
+        now: new Date(),
+        toFake: ['Date'],
+      });
       const password = 'Azerty123*';
       const user = createUserWithValidCredentials({
         password,
@@ -108,6 +120,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
 
       const expectedToken = 'expected returned token';
       tokenService.createAccessTokenForSaml.withArgs({ userId: user.id, audience }).resolves(expectedToken);
+
       // when
       await authenticateExternalUser({
         username: user.email,
@@ -121,6 +134,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         authenticationMethodRepository,
         userRepository,
         userLoginRepository,
+        lastUserApplicationConnectionsRepository,
+        requestedApplication,
       });
 
       // then
@@ -129,6 +144,12 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         userId: user.id,
         identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
       });
+      expect(lastUserApplicationConnectionsRepository.upsert).to.have.been.calledWithExactly({
+        userId: user.id,
+        application: requestedApplication.applicationName,
+        lastLoggedAt: new Date(),
+      });
+      clock.restore();
     });
 
     it("throws an UnexpectedUserAccountError (with expected user's username or email) when the authenticated user does not match the expected one", async function () {
@@ -163,6 +184,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         authenticationMethodRepository,
         userRepository,
         userLoginRepository,
+        lastUserApplicationConnectionsRepository,
+        requestedApplication,
       });
 
       // then
@@ -200,6 +223,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
+          requestedApplication,
         });
 
         // then
@@ -239,6 +264,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
+          requestedApplication,
         });
 
         // then
@@ -291,6 +318,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
+          requestedApplication,
         });
 
         // then
@@ -340,6 +369,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
+          requestedApplication,
         });
 
         // then
@@ -398,6 +429,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         pixAuthenticationService,
         userRepository,
         userLoginRepository,
+        lastUserApplicationConnectionsRepository,
+        requestedApplication,
       });
 
       // then
