@@ -4,7 +4,6 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
-import ENV from 'pix-certif/config/environment.js';
 
 import isEmailValid from '../../utils/email-validator';
 
@@ -99,10 +98,8 @@ export default class ToggableLoginForm extends Component {
   }
 
   async _authenticate(password, email) {
-    const scope = ENV.APP.AUTHENTICATION.SCOPE;
-
     try {
-      await this.session.authenticate('authenticator:oauth2', email, password, scope);
+      await this.session.authenticate('authenticator:oauth2', email, password);
     } catch (errorResponse) {
       const errors = get(errorResponse, 'responseJSON');
       this.errorMessage = this._handleResponseError(errors);

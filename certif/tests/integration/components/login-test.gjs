@@ -38,11 +38,10 @@ module('Integration | Component | login', function (hooks) {
 
   test('it should call authentication service with appropriate parameters', async function (assert) {
     // given
-    sessionStub.authenticate.callsFake(function (authenticator, email, password, scope) {
+    sessionStub.authenticate.callsFake(function (authenticator, email, password) {
       this.authenticator = authenticator;
       this.email = email;
       this.password = password;
-      this.scope = scope;
       return resolve();
     });
     const sessionServiceObserver = this.owner.lookup('service:session');
@@ -57,7 +56,6 @@ module('Integration | Component | login', function (hooks) {
     assert.strictEqual(sessionServiceObserver.authenticator, 'authenticator:oauth2');
     assert.strictEqual(sessionServiceObserver.email, 'pix@example.net');
     assert.strictEqual(sessionServiceObserver.password, 'JeMeLoggue1024');
-    assert.strictEqual(sessionServiceObserver.scope, 'pix-certif');
   });
 
   test('it should display an invalid credentials message if authentication failed', async function (assert) {
@@ -89,11 +87,10 @@ module('Integration | Component | login', function (hooks) {
 
   test('should authenticate user with trimmed email', async function (assert) {
     // given
-    sessionStub.authenticate.callsFake(function (authenticator, email, password, scope) {
+    sessionStub.authenticate.callsFake(function (authenticator, email, password) {
       this.authenticator = authenticator;
       this.email = email;
       this.password = password;
-      this.scope = scope;
       return resolve();
     });
     const sessionServiceObserver = this.owner.lookup('service:session');
@@ -108,7 +105,6 @@ module('Integration | Component | login', function (hooks) {
     assert.strictEqual(sessionServiceObserver.authenticator, 'authenticator:oauth2');
     assert.strictEqual(sessionServiceObserver.email, 'email@example.net');
     assert.strictEqual(sessionServiceObserver.password, 'JeMeLoggue1024');
-    assert.strictEqual(sessionServiceObserver.scope, 'pix-certif');
   });
 
   test('it displays a should change password message', async function (assert) {

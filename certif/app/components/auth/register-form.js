@@ -4,7 +4,6 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
-import ENV from 'pix-certif/config/environment.js';
 
 import isEmailValid from '../../utils/email-validator';
 import isPasswordValid from '../../utils/password-validator';
@@ -206,7 +205,6 @@ export default class RegisterForm extends Component {
   }
 
   _authenticate(email, password) {
-    const scope = ENV.APP.AUTHENTICATION.SCOPE;
-    return this.session.authenticate('authenticator:oauth2', email, password, scope);
+    return this.session.authenticate('authenticator:oauth2', email, password);
   }
 }
