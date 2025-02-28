@@ -19,6 +19,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
 
     authenticationMethodRepository = {
       findOneByExternalIdentifierAndIdentityProvider: sinon.stub(),
+      updateLastLoggedAtByIdentityProvider: sinon.stub(),
     };
 
     authenticationSessionService = {
@@ -148,12 +149,21 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
       userToCreateRepository,
       authenticationMethodRepository,
     });
-    sinon.assert.calledOnce(oidcAuthenticationService.createAccessToken);
-    sinon.assert.calledOnce(oidcAuthenticationService.saveIdToken);
-    sinon.assert.calledOnceWithExactly(userLoginRepository.updateLastLoggedAt, { userId: 10 });
+    expect(oidcAuthenticationService.createAccessToken).to.have.been.calledOnce;
+    expect(oidcAuthenticationService.saveIdToken).to.have.been.calledOnce;
+    expect(userLoginRepository.updateLastLoggedAt).to.have.been.calledWithExactly({ userId: 10 });
     expect(result).to.deep.equal({
       accessToken: 'accessTokenForExistingExternalUser',
       logoutUrlUUID: 'logoutUrlUUID',
+    });
+    expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.have.been.calledWithExactly({
+      userId: 10,
+      identityProvider: oidcAuthenticationService.identityProvider,
+    });
+    expect(lastUserApplicationConnectionsRepository.upsert).to.have.been.calledWithExactly({
+      userId: 10,
+      application: 'app',
+      lastLoggedAt: sinon.match.instanceOf(Date),
     });
   });
 });
