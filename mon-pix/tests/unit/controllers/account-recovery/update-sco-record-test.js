@@ -12,7 +12,6 @@ module('Unit | Controller | account-recovery | update-sco-record', function (hoo
         // given
         const email = 'user@example.net';
         const password = 'Password123';
-        const scope = 'mon-pix';
         const temporaryKey = 'temporaryKey';
 
         const updateDemand = {
@@ -44,7 +43,6 @@ module('Unit | Controller | account-recovery | update-sco-record', function (hoo
         sinon.assert.calledWith(controller.session.authenticate, 'authenticator:oauth2', {
           login: email,
           password,
-          scope,
         });
         assert.ok(true);
       });
@@ -55,7 +53,6 @@ module('Unit | Controller | account-recovery | update-sco-record', function (hoo
         // given
         const email = 'user@example.net';
         const password = 'Password123';
-        const scope = 'mon-pix';
         const temporaryKey = 'temporaryKey';
 
         const updateDemand = {
@@ -87,7 +84,6 @@ module('Unit | Controller | account-recovery | update-sco-record', function (hoo
         sinon.assert.calledWith(controller.session.authenticate, 'authenticator:oauth2', {
           login: email,
           password,
-          scope,
         });
         assert.ok(true);
       });

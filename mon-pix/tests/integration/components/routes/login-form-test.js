@@ -73,7 +73,6 @@ module('Integration | Component | routes/login-form', function (hooks) {
       sinon.assert.calledWith(sessionStub.authenticate, 'authenticator:oauth2', {
         login: 'pix@example.net',
         password: 'JeMeLoggue1024',
-        scope: 'mon-pix',
       });
       assert.ok(true);
     });
@@ -95,7 +94,6 @@ module('Integration | Component | routes/login-form', function (hooks) {
       sinon.assert.calledWith(sessionStub.authenticate, 'authenticator:oauth2', {
         login: 'pix@example.net',
         password: 'JeMeLoggue1024',
-        scope: 'mon-pix',
       });
       assert.ok(true);
     });

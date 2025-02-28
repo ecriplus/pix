@@ -36,9 +36,8 @@ module('Unit | Services | session', function (hooks) {
   });
 
   module('#authenticateUser', function () {
-    test('should authenticate the user with oauth2 and mon-pix scope', async function (assert) {
+    test('should authenticate the user with oauth2', async function (assert) {
       // given
-      const expectedScope = 'mon-pix';
       const expectedLogin = 'user';
       const expectedPassword = 'secret';
       sessionService.currentDomain.getExtension.returns(FRANCE_TLD);
@@ -50,7 +49,6 @@ module('Unit | Services | session', function (hooks) {
       sinon.assert.calledWith(oauthAuthenticator.authenticate, {
         login: expectedLogin,
         password: expectedPassword,
-        scope: expectedScope,
       });
       assert.ok(true);
     });

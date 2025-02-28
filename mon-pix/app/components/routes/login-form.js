@@ -52,8 +52,7 @@ export default class LoginForm extends Component {
 
   async _authenticatePixUser(password, login) {
     try {
-      const scope = ENV.APP.AUTHENTICATION.SCOPE;
-      await this.session.authenticate('authenticator:oauth2', { login, password, scope });
+      await this.session.authenticate('authenticator:oauth2', { login, password });
     } catch (response) {
       const shouldChangePassword = get(response, 'responseJSON.errors[0].title') === 'PasswordShouldChange';
       if (shouldChangePassword) {

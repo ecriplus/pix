@@ -7,7 +7,7 @@ export default class OAuth2 extends OAuth2PasswordGrant {
   serverTokenRevocationEndpoint = `${ENV.APP.API_HOST}/api/revoke`;
   refreshAccessTokensWithScope = true;
 
-  authenticate({ login, password, scope, token }) {
+  authenticate({ login, password, token }) {
     if (token) {
       const token_type = 'bearer';
       const decodedAccessToken = decodeToken(token);
@@ -18,14 +18,9 @@ export default class OAuth2 extends OAuth2PasswordGrant {
         access_token: token,
         user_id,
         source,
-        scope,
       });
     }
 
-    return super.authenticate(login, password, scope);
-  }
-
-  restore(data) {
-    return super.restore({ ...data, scope: ENV.APP.AUTHENTICATION.SCOPE });
+    return super.authenticate(login, password);
   }
 }
