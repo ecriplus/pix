@@ -958,18 +958,21 @@
         "actions": {
           "edit-role": "Change role",
           "leave-certification-center": "Leave this Pix Certif space",
-          "manage": "Manage",
           "remove-membership": "Remove",
-          "save": "Save",
-          "select-role": {
-            "label": "Select a role",
-            "options": {
-              "admin": "Administrator",
-              "member": "Member"
-            }
-          }
+          "save": "Save"
         },
         "modals": {
+          "change-member-role": {
+            "title": "Modify role",
+            "information": "You're about to change {firstName} {lastName}'s role.",
+            "select-role": {
+              "label": "Select a role",
+              "options": {
+                "admin": "Administrator",
+                "member": "Member"
+              }
+            }
+          },
           "leave-certification-center": {
             "title": "Leave this Pix Certif space",
             "message": "Are you sure you want to leave this Pix Certif space? You will no longer have access to <strong>{certificationCenterName}</strong>.<br/><br/>Your sessions remain accessible to the rest of the team.<br/><br/>Your access to other Pix Certif spaces will not be affected.<br/><br/>You'll be disconnected."
@@ -1022,6 +1025,9 @@
         "description": "Le Groupement d’intérêt public, sis 21-23 rue des Ardennes 75019 Paris PIX met en œuvre en tant que responsable de traitement un traitement de données à caractère personnel portant sur votre adresse email professionnel de référent Pix.<br />La finalité de ce traitement est la communication des informations nécessaires aux attributions du référent Pix au sein du centre de certification agréé. Le traitement de cette données repose sur l’exécution de la convention d’agrément de votre centre de certification.<br />Les données sont conservées pendant la durée de la convention d’agrément en vigueur entre le GIP Pix et le centre habilité auquel vous êtes rattaché.<br />Vous disposez de droits personnels, droits d'accès, de rectification et d’effacement des données, le droit de limitation ou d’opposition au traitement pour motif légitime et le droit d’introduire une réclamation auprès d’une autorité de contrôle ainsi que le droit de définir des directives relatives à la conservation, à l'effacement et à la communication de vos données à caractère personnel en cas de décès que vous pouvez exercer par courriel auprès de notre DPD en adressant votre demande à l’adresse électronique suivante : dpd@pix.fr .<br />Vous disposez de la possibilité d’introduire une réclamation auprès de Commission nationale Informatique et libertés « CNIL » à l’adresse suivante : 3 Place de Fontenoy – TSA 80715 – 75334 Paris Cedex 07.",
         "empty-option": "--Sélectionner--",
         "label": "Sélectionner le référent CléA Numérique"
+      },
+      "table": {
+        "caption": "Table listing the members of the certification centre. It includes the first and last name of the member and the role. If the logged-in user has an administrator role, there is an action column for changing a member's role, deleting a member from the space or leaving the certification space. If the centre has CléA accreditation, the table will include the referent."
       },
       "table-headers": {
         "actions": "Actions"

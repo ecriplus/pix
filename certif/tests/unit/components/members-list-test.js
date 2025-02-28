@@ -16,65 +16,77 @@ module('Unit | Component | MembersList', (hooks) => {
     store = this.owner.lookup('service:store');
   });
 
-  module('Getters', function () {
-    module('#isMultipleAdminsAvailable', () => {
-      module('when there is multiple members with the role "ADMIN"', function () {
-        test('returns true', function (assert) {
-          // given
-          component.args.members = [
-            store.createRecord('member', {
-              id: '1',
-              firstName: 'Éva',
-              lastName: 'Kué',
-              role: 'ADMIN',
-            }),
-            store.createRecord('member', {
-              id: '2',
-              firstName: 'Matt',
-              lastName: 'Ematic',
-              role: 'ADMIN',
-            }),
-            store.createRecord('member', {
-              id: '3',
-              firstName: 'Harry',
-              lastName: 'Coe',
-              role: 'MEMBER',
-            }),
-          ];
+  module('Methods', function () {
+    module('#changeMemberRole', () => {
+      test('closes modal, saves membership and displays success notification', async function (assert) {
+        // given
+        const component = createGlimmerComponent('component:members-list');
+        component.isChangeMemberRoleModalOpen = true;
+        component.pixToast = {
+          sendSuccessNotification: sinon.stub(),
+        };
+        const member = {
+          save: sinon.stub().resolves(),
+        };
+        component.member = member;
+        const role = 'MEMBER';
 
-          // when
-          // then
-          assert.true(component.isMultipleAdminsAvailable);
-        });
+        // when
+        await component.changeMemberRole(role);
+
+        // then
+        assert.false(component.isChangeMemberRoleModalOpen);
+        assert.ok(member.save.called);
+        assert.ok(component.pixToast.sendSuccessNotification.called);
       });
 
-      module('when there is one member with the role "ADMIN"', function () {
-        test('returns false', function (assert) {
+      module('when an error occurs', function () {
+        test('rollbacks membership role modification and display error notification', async function (assert) {
           // given
-          component.args.members = [
-            store.createRecord('member', {
-              id: '1',
-              firstName: 'Jean',
-              lastName: 'Tourloupe',
-              role: 'ADMIN',
-            }),
-            store.createRecord('member', {
-              id: '2',
-              firstName: 'Éva',
-              lastName: 'Noui',
-              role: 'MEMBER',
-            }),
-          ];
+          const component = createGlimmerComponent('component:members-list');
+          component.isChangeMemberRoleModalOpen = true;
+          component.pixToast = {
+            sendErrorNotification: sinon.stub(),
+          };
+          const member = {
+            save: sinon.stub().rejects(),
+            rollbackAttributes: sinon.stub(),
+          };
+          component.member = member;
+          const role = 'ADMIN';
 
           // when
+          await component.changeMemberRole(role);
+
           // then
-          assert.false(component.isMultipleAdminsAvailable);
+          assert.false(component.isChangeMemberRoleModalOpen);
+          assert.ok(member.save.called);
+          assert.ok(member.rollbackAttributes.called);
+          assert.ok(component.pixToast.sendErrorNotification.called);
         });
       });
     });
-  });
 
-  module('Methods', function () {
+    module('#closeChangeMemberRoleModal', () => {
+      module('when the cancel button is clicked', function () {
+        test('rollbacks member role modification', async function (assert) {
+          // given
+          const component = createGlimmerComponent('component:members-list');
+          component.isChangeMemberRoleModalOpen = true;
+          const member = {
+            rollbackAttributes: sinon.stub(),
+          };
+          component.args.member = member;
+
+          // when
+          await component.closeChangeMemberRoleModal();
+
+          // then
+          assert.false(component.isChangeMemberRoleModalOpen);
+        });
+      });
+    });
+
     module('#closeLeaveCertificationCenterModal', function () {
       test('sets "isLeaveCertificationCenterModalOpen" value to "false"', function (assert) {
         // given
