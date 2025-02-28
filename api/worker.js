@@ -11,12 +11,14 @@ import { databaseConnections } from './db/database-connections.js';
 import { Metrics } from './src/monitoring/infrastructure/metrics.js';
 import { JobGroup } from './src/shared/application/jobs/job-controller.js';
 import { config } from './src/shared/config.js';
+import { learningContentCache } from './src/shared/infrastructure/caches/learning-content-cache.js';
 import { JobQueue } from './src/shared/infrastructure/jobs/JobQueue.js';
 import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
 import { importNamedExportFromFile } from './src/shared/infrastructure/utils/import-named-exports-from-directory.js';
-import { logger } from './src/shared/infrastructure/utils/logger.js';
+import { child } from './src/shared/infrastructure/utils/logger.js';
 
-const isTestEnv = process.env.NODE_ENV === 'test';
+const logger = child('worker', { event: 'worker' });
+
 const isJobInWebProcess = process.env.START_JOB_IN_WEB_PROCESS === 'true';
 const workerDirPath = dirname(fileURLToPath(import.meta.url));
 
@@ -47,36 +49,27 @@ async function startPgBoss() {
   return pgBoss;
 }
 
-function createJobQueues(pgBoss) {
-  const jobQueues = new JobQueue(pgBoss);
+function createJobQueue(pgBoss) {
+  const jobQueue = new JobQueue(pgBoss);
   process.on('SIGINT', async () => {
-    await quitAllStorages();
-    await metrics.clearMetrics();
-    await jobQueues.stop();
-    await databaseConnections.disconnect();
-
-    // Make sure pgBoss stopped before quitting
-    pgBoss.on('stopped', () => {
-      // eslint-disable-next-line n/no-process-exit
-      process.exit(0);
-    });
+    await jobQueue.stop();
   });
-  return jobQueues;
+  return jobQueue;
 }
 
 function checkJobGroup(jobGroup) {
-  if (!jobGroup) {
+  if (!Object.values(JobGroup).includes(jobGroup)) {
     throw new Error(`Job group invalid, allowed Job groups are [${Object.values(JobGroup)}]`);
   }
   logger.info(`Job group "${jobGroup}"`);
 }
 
-export async function registerJobs({ jobGroup, dependencies = { startPgBoss, createJobQueues } }) {
+export async function registerJobs({ jobGroup, dependencies = { startPgBoss, createJobQueue } }) {
   checkJobGroup(jobGroup);
 
   const pgBoss = await dependencies.startPgBoss();
 
-  const jobQueues = dependencies.createJobQueues(pgBoss);
+  const jobQueues = dependencies.createJobQueue(pgBoss);
 
   const globPattern = `${workerDirPath}/src/**/application/**/*job-controller.js`;
 
@@ -138,7 +131,21 @@ export async function registerJobs({ jobGroup, dependencies = { startPgBoss, cre
   logger.info(`${cronJobCount} cron jobs scheduled for group "${jobGroup}".`);
 }
 
-if (!isTestEnv) {
+const isRunningFromCli = import.meta.filename === process.argv[1];
+
+async function main() {
   const jobGroup = process.argv[2] ? JobGroup[process.argv[2]?.toUpperCase()] : JobGroup.DEFAULT;
   await registerJobs({ jobGroup });
+  process.on('SIGINT', async () => {
+    await quitAllStorages();
+    await metrics.clearMetrics();
+    await databaseConnections.disconnect();
+    await learningContentCache.quit();
+  });
+}
+
+if (isRunningFromCli) {
+  main().catch((err) => {
+    logger.error({ err }, 'worker crashed');
+  });
 }

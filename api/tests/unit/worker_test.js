@@ -11,15 +11,15 @@ import { registerJobs } from '../../worker.js';
 import { catchErr, expect, sinon } from '../test-helper.js';
 
 describe('#registerJobs', function () {
-  let startPgBossStub, createJobQueuesStub, jobQueueStub;
+  let startPgBossStub, createJobQueueStub, jobQueueStub;
 
   beforeEach(function () {
     const pgBossStub = Symbol('pgBoss');
     jobQueueStub = { register: sinon.stub(), scheduleCronJob: sinon.stub(), unscheduleCronJob: sinon.stub() };
     startPgBossStub = sinon.stub();
     startPgBossStub.resolves(pgBossStub);
-    createJobQueuesStub = sinon.stub();
-    createJobQueuesStub.withArgs(pgBossStub).returns(jobQueueStub);
+    createJobQueueStub = sinon.stub();
+    createJobQueueStub.withArgs(pgBossStub).returns(jobQueueStub);
   });
 
   afterEach(function () {
@@ -32,7 +32,7 @@ describe('#registerJobs', function () {
       jobGroup: JobGroup.DEFAULT,
       dependencies: {
         startPgBoss: startPgBossStub,
-        createJobQueues: createJobQueuesStub,
+        createJobQueue: createJobQueueStub,
       },
     });
 
@@ -53,7 +53,7 @@ describe('#registerJobs', function () {
       jobGroup: JobGroup.DEFAULT,
       dependencies: {
         startPgBoss: startPgBossStub,
-        createJobQueues: createJobQueuesStub,
+        createJobQueue: createJobQueueStub,
       },
     });
 
@@ -74,7 +74,7 @@ describe('#registerJobs', function () {
       jobGroup: JobGroup.DEFAULT,
       dependencies: {
         startPgBoss: startPgBossStub,
-        createJobQueues: createJobQueuesStub,
+        createJobQueue: createJobQueueStub,
       },
     });
 
@@ -95,7 +95,7 @@ describe('#registerJobs', function () {
       jobGroup: JobGroup.DEFAULT,
       dependencies: {
         startPgBoss: startPgBossStub,
-        createJobQueues: createJobQueuesStub,
+        createJobQueue: createJobQueueStub,
       },
     });
 
@@ -111,7 +111,7 @@ describe('#registerJobs', function () {
     const error = await catchErr(registerJobs)({
       dependencies: {
         startPgBoss: startPgBossStub,
-        createJobQueues: createJobQueuesStub,
+        createJobQueue: createJobQueueStub,
       },
     });
 
@@ -129,7 +129,7 @@ describe('#registerJobs', function () {
         jobGroup: JobGroup.DEFAULT,
         dependencies: {
           startPgBoss: startPgBossStub,
-          createJobQueues: createJobQueuesStub,
+          createJobQueue: createJobQueueStub,
         },
       });
 
@@ -153,7 +153,7 @@ describe('#registerJobs', function () {
         jobGroup: JobGroup.DEFAULT,
         dependencies: {
           startPgBoss: startPgBossStub,
-          createJobQueues: createJobQueuesStub,
+          createJobQueue: createJobQueueStub,
         },
       });
 
@@ -173,7 +173,7 @@ describe('#registerJobs', function () {
           jobGroup: JobGroup.DEFAULT,
           dependencies: {
             startPgBoss: startPgBossStub,
-            createJobQueues: createJobQueuesStub,
+            createJobQueue: createJobQueueStub,
           },
         });
 

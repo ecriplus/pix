@@ -1,6 +1,8 @@
 import metrics from 'datadog-metrics';
 
-import { logger } from '../../shared/infrastructure/utils/logger.js';
+import { child } from '../../shared/infrastructure/utils/logger.js';
+
+const logger = child('metrics', { event: 'metrics' });
 
 export class Metrics {
   static intervals = [];
