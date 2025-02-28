@@ -64,14 +64,16 @@ export const reconcileOidcUserForAdmin = async function ({
     }),
   });
 
-  const accessToken = await oidcAuthenticationService.createAccessToken({ userId, audience });
-
-  await userLoginRepository.updateLastLoggedAt({ userId });
-  await lastUserApplicationConnectionsRepository.upsert({
+  await _updateUserLastConnection({
     userId,
-    application: requestedApplication.applicationName,
-    lastLoggedAt: new Date(),
+    requestedApplication,
+    oidcAuthenticationService,
+    authenticationMethodRepository,
+    lastUserApplicationConnectionsRepository,
+    userLoginRepository,
   });
+
+  const accessToken = await oidcAuthenticationService.createAccessToken({ userId, audience });
 
   return accessToken;
 };
@@ -93,4 +95,24 @@ async function _assertExternalIdentifier({
   if (oidcAuthenticationMethod && !isSameExternalIdentifier) {
     throw new DifferentExternalIdentifierError();
   }
+}
+
+async function _updateUserLastConnection({
+  userId,
+  requestedApplication,
+  oidcAuthenticationService,
+  authenticationMethodRepository,
+  lastUserApplicationConnectionsRepository,
+  userLoginRepository,
+}) {
+  await userLoginRepository.updateLastLoggedAt({ userId });
+  await lastUserApplicationConnectionsRepository.upsert({
+    userId,
+    application: requestedApplication.applicationName,
+    lastLoggedAt: new Date(),
+  });
+  await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
+    userId,
+    identityProvider: oidcAuthenticationService.identityProvider,
+  });
 }
