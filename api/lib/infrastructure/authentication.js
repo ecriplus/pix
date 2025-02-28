@@ -44,8 +44,6 @@ const authentication = {
 };
 
 async function validateUser(decodedAccessToken, { request, revokedUserAccessRepository }) {
-  // Only tokens including user_id are User Access Tokens.
-  // This is why applications Access Tokens are not subject to audience validation for now.
   const userId = decodedAccessToken.user_id;
   if (!userId) {
     return { isValid: false };
