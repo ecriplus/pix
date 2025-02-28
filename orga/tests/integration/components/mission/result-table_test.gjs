@@ -1,4 +1,4 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
 import ResultTable from 'pix-orga/components/mission/result-table';
 import { module, test } from 'qunit';
@@ -36,7 +36,7 @@ module('Integration | Component | Mission | ResultTable', function (hooks) {
       const screen = await render(
         <template><ResultTable @missionLearners={{missionLearners}} @mission={{mission}} /></template>,
       );
-      //mission-learner
+
       assert.ok(
         screen.getByRole('columnheader', { name: t('pages.missions.mission.table.result.headers.first-name') }),
       );
@@ -228,6 +228,7 @@ module('Integration | Component | Mission | ResultTable', function (hooks) {
         id: 1,
         name: 'Super Mission',
         content: {
+          dareChallenges: ['coucou'],
           steps: [
             {
               name: 'step one',
@@ -249,7 +250,9 @@ module('Integration | Component | Mission | ResultTable', function (hooks) {
         <template><ResultTable @missionLearners={{missionLearners}} @mission={{mission}} /></template>,
       );
 
-      const row = screen.getByRole('row', { name: t('pages.missions.mission.tabs.result.aria-label') });
+      const row = screen.getAllByRole('row')[1];
+
+      const cells = within(row).getAllByRole('cell');
 
       const generalInfoColQuantity = 3;
       const globalResultColQuantity = 1;
@@ -257,29 +260,31 @@ module('Integration | Component | Mission | ResultTable', function (hooks) {
       const dareResultColQuantity = 1;
       const allColQuantity =
         generalInfoColQuantity + globalResultColQuantity + stepsResultColQuantity + dareResultColQuantity;
-      assert.strictEqual(row.cells.length, allColQuantity);
+
+      assert.strictEqual(cells.length, allColQuantity);
 
       const resultStepOneIndex = 3;
+
       assert.strictEqual(
-        row.cells[resultStepOneIndex].innerHTML,
+        cells[resultStepOneIndex].innerHTML.trim(),
         t('pages.missions.mission.table.result.step-result.reached'),
       );
 
       const resultStepoDoseIndex = 4;
       assert.strictEqual(
-        row.cells[resultStepoDoseIndex].innerHTML,
+        cells[resultStepoDoseIndex].innerHTML.trim(),
         t('pages.missions.mission.table.result.step-result.not-reached'),
       );
 
       const resultStepThreeIndex = 5;
       assert.strictEqual(
-        row.cells[resultStepThreeIndex].innerHTML,
+        cells[resultStepThreeIndex].innerHTML.trim(),
         t('pages.missions.mission.table.result.step-result.partially-reached'),
       );
 
       const resultStepFourIndex = 6;
       assert.strictEqual(
-        row.cells[resultStepFourIndex].innerHTML,
+        cells[resultStepFourIndex].innerHTML.trim(),
         t('pages.missions.mission.table.result.step-result.undefined'),
       );
     });
