@@ -4,7 +4,6 @@ import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
-import { pauseTest } from '@ember/test-helpers';
 
 module('Integration | Component | Participant::Assessment::Results', function (hooks) {
   setupIntlRenderingTest(hooks);
