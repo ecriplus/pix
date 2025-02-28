@@ -68,7 +68,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
 
   context('check acces by pix scope', function () {
     context('when scope is pix-orga', function () {
-      it('should rejects an error when user is not linked to any organizations', async function () {
+      it('rejects an error when user is not linked to any organizations', async function () {
         // given
         const scope = PIX_ORGA.SCOPE;
         const user = new User({ email: userEmail, memberships: [] });
@@ -96,7 +96,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     });
 
     context('when scope is pix-admin', function () {
-      it('should throw an error when user has no role and is therefore not an admin member', async function () {
+      it('throws an error when user has no role and is therefore not an admin member', async function () {
         // given
         const scope = PIX_ADMIN.SCOPE;
         const user = new User({ email: userEmail });
@@ -125,7 +125,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         expect(error.message).to.be.equal(PIX_ADMIN.NOT_ALLOWED_MSG);
       });
 
-      it('should throw an error when user has a role but admin membership is disabled', async function () {
+      it('throws an error when user has a role but admin membership is disabled', async function () {
         // given
         const scope = PIX_ADMIN.SCOPE;
         const user = new User({ email: userEmail });
@@ -164,7 +164,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         expect(error.message).to.be.equal(PIX_ADMIN.NOT_ALLOWED_MSG);
       });
 
-      it('should resolve a valid JWT access token when admin member is not disabled and has a valid role', async function () {
+      it('resolves a valid JWT access token when admin member is not disabled and has a valid role', async function () {
         // given
         const scope = PIX_ADMIN.SCOPE;
         const source = 'pix';
@@ -225,7 +225,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
 
     context('when application is Pix Certif', function () {
       context('when user is not linked to any certification centers', function () {
-        it('should resolves a valid JWT access token when feature toggle is enabled', async function () {
+        it('resolves a valid JWT access token when feature toggle is enabled', async function () {
           // given
           const accessToken = 'jwt.access.token';
           const expirationDelaySeconds = 1;
@@ -273,7 +273,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     });
   });
 
-  it('should resolves a valid JWT access token when authentication succeeded', async function () {
+  it('resolves a valid JWT access token when authentication succeeded', async function () {
     // given
     const accessToken = 'jwt.access.token';
     const source = 'pix';
@@ -315,7 +315,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     expect(result).to.deep.equal({ accessToken, refreshToken: refreshToken.value, expirationDelaySeconds });
   });
 
-  it('should save the last date of login when authentication succeeded', async function () {
+  it('saves the last date of login when authentication succeeded', async function () {
     // given
     const accessToken = 'jwt.access.token';
     const source = 'pix';
@@ -354,7 +354,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     });
   });
 
-  it('should rejects an error when given username (email) does not match an existing one', async function () {
+  it('rejects an error when given username (email) does not match an existing one', async function () {
     // given
     const unknownUserEmail = 'unknown_user_email@example.net';
     pixAuthenticationService.getUserByUsernameAndPassword.rejects(new UserNotFoundError());
@@ -375,7 +375,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     expect(error).to.be.an.instanceOf(MissingOrInvalidCredentialsError);
   });
 
-  it('should rejects an error when given password does not match the found user’s one', async function () {
+  it('rejects an error when given password does not match the found user’s one', async function () {
     // given
     pixAuthenticationService.getUserByUsernameAndPassword.rejects(new MissingOrInvalidCredentialsError());
     const audience = 'https://certif.pix.fr';
@@ -397,7 +397,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
 
   context('when user has connected after a long period since last connection date', function () {
     context('when user has an email', function () {
-      it('should send a connection warning email', async function () {
+      it('sends a connection warning email', async function () {
         // given
         const accessToken = 'jwt.access.token';
         const source = 'pix';
@@ -545,7 +545,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
   });
 
   context('when user should change password', function () {
-    it('should throw UserShouldChangePasswordError', async function () {
+    it('throws UserShouldChangePasswordError', async function () {
       // given
       const tokenService = { createPasswordResetToken: sinon.stub() };
       const audience = 'https://certif.pix.fr';

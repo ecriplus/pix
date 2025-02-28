@@ -48,7 +48,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
   });
 
   context('when credentials are valid', function () {
-    it('should resolve a valid JWT token when authentication succeeds (should not change password)', async function () {
+    it('resolves a valid JWT token when authentication succeeds (should not change password)', async function () {
       // given
       const password = 'Azerty123*';
       const user = createUserWithValidCredentials({
@@ -88,7 +88,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
       expect(token).to.be.deep.equal(expectedToken);
     });
 
-    it('should save last login date when authentication succeeds', async function () {
+    it('saves last login date when authentication succeeds', async function () {
       // given
       const password = 'Azerty123*';
       const user = createUserWithValidCredentials({
@@ -131,7 +131,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
       });
     });
 
-    it("should throw an UnexpectedUserAccountError (with expected user's username or email) when the authenticated user does not match the expected one", async function () {
+    it("throws an UnexpectedUserAccountError (with expected user's username or email) when the authenticated user does not match the expected one", async function () {
       // given
       const password = 'Azerty123*';
       const user = createUserWithValidCredentials({
@@ -173,7 +173,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
     });
 
     context('when adding GAR authentication method', function () {
-      it('should throw an error if user from external user token is not the same as found user from credentials', async function () {
+      it('throws an error if user from external user token is not the same as found user from credentials', async function () {
         // given
         const password = 'Azerty123*';
         const userFromCredentials = createUserWithValidCredentials({
@@ -206,7 +206,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         expect(error).to.be.instanceOf(UserAlreadyExistsWithAuthenticationMethodError);
       });
 
-      it('should add GAR authentication method', async function () {
+      it('adds GAR authentication method', async function () {
         // given
         const password = 'Azerty123*';
         const user = createUserWithValidCredentials({
@@ -258,7 +258,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
     });
 
     context('when user should change password', function () {
-      it('should also add GAR authentication method', async function () {
+      it('also adds GAR authentication method', async function () {
         // given
         const oneTimePassword = 'Azerty123*';
         const user = createUserWithValidCredentialsWhoShouldChangePassword({
@@ -308,7 +308,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         });
       });
 
-      it('should create and return password reset token', async function () {
+      it('creates and return password reset token', async function () {
         // given
         tokenService.createPasswordResetToken.returns('token');
         const oneTimePassword = 'Azerty123*';
@@ -350,7 +350,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
   });
 
   context('when credentials are invalid', function () {
-    it('should reject when user not found', async function () {
+    it('rejects when user not found', async function () {
       // given
       const unknownUserEmail = 'foo@example.net';
       const password = 'Azerty123*';
@@ -377,7 +377,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
       expect(error).to.be.an.instanceOf(MissingOrInvalidCredentialsError);
     });
 
-    it('should reject when password does not match', async function () {
+    it('rejects when password does not match', async function () {
       // given
       const email = 'foo@example.net';
       const invalidPassword = 'oups123*';
