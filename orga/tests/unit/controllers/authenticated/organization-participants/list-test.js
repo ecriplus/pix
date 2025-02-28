@@ -174,10 +174,10 @@ module('Unit | Controller | authenticated/organization-participants', function (
       controller.latestParticipationOrder = 'Obi wan';
       controller.pageNumber = 9999;
       // when
-      controller.sortByLastname('desc');
+      controller.sortByLastname();
 
       // then
-      assert.strictEqual(controller.lastnameSort, 'desc');
+      assert.strictEqual(controller.lastnameSort, 'asc');
       assert.strictEqual(controller.participationCountOrder, null);
       assert.strictEqual(controller.latestParticipationOrder, null);
       assert.strictEqual(controller.pageNumber, null);
@@ -188,13 +188,13 @@ module('Unit | Controller | authenticated/organization-participants', function (
     test('update sorting value and reset other', function (assert) {
       // given
       controller.lastnameSort = 'toto';
-      controller.participationCountOrder = 'Godzilla';
+      controller.participationCountOrder = 'asc';
       controller.pageNumber = 9999;
       // when
-      controller.sortByLatestParticipation('desc');
+      controller.sortByLatestParticipation();
 
       // then
-      assert.strictEqual(controller.latestParticipationOrder, 'desc');
+      assert.strictEqual(controller.latestParticipationOrder, 'asc');
       assert.strictEqual(controller.lastnameSort, null);
       assert.strictEqual(controller.participationCountOrder, null);
       assert.strictEqual(controller.pageNumber, null);
@@ -205,14 +205,14 @@ module('Unit | Controller | authenticated/organization-participants', function (
     test('update sorting value and reset other', function (assert) {
       // given
       controller.participationCountOrder = null;
-      controller.lastnameSort = 'T-Rex';
+      controller.lastnameSort = 'desc';
       controller.latestParticipationOrder = 'Obi wan';
       controller.pageNumber = 9999;
       // when
-      controller.sortByParticipationCount('desc');
+      controller.sortByParticipationCount();
 
       // then
-      assert.strictEqual(controller.participationCountOrder, 'desc');
+      assert.strictEqual(controller.participationCountOrder, 'asc');
       assert.strictEqual(controller.latestParticipationOrder, null);
       assert.strictEqual(controller.lastnameSort, null);
       assert.strictEqual(controller.pageNumber, null);

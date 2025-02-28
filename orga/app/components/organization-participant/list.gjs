@@ -1,25 +1,66 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
-import { fn } from '@ember/helper';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
+import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
+import { fn, uniqueId } from '@ember/helper';
+import { on } from '@ember/modifier';
 import { action, get } from '@ember/object';
-import { guidFor } from '@ember/object/internals';
+import { LinkTo } from '@ember/routing';
 import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import dayjs from 'dayjs';
 import { t } from 'ember-intl';
+import { eq, not } from 'ember-truth-helpers';
 
+import { getColumnName } from '../../helpers/import-format.js';
+import CertificabilityCell from '../certificability/cell';
+import Tooltip from '../certificability/tooltip';
+import DropdownIconTrigger from '../dropdown/icon-trigger';
+import DropdownItem from '../dropdown/item';
 import InElement from '../in-element';
 import SelectableList from '../selectable-list';
-import DeletionModal from '../ui/deletion-modal';
-import ActionBar from './action-bar';
+import UiActionBar from '../ui/action-bar';
+import UiDeletionModal from '../ui/deletion-modal';
+import LastParticipationDateTooltip from '../ui/last-participation-date-tooltip';
 import LearnerFilters from './learner-filters';
-import TableHeaders from './table-headers';
-import TableRow from './table-row';
+
+async function withFunction(wrappedFunction, func, ...args) {
+  func(...args);
+  await wrappedFunction(...args);
+}
+
+function stopPropagation(event) {
+  event.stopPropagation();
+}
 
 export default class List extends Component {
   @tracked showDeletionModal = false;
-
   @service currentUser;
   @service intl;
+
+  displayDate(date) {
+    return dayjs(date).format('DD/MM/YYYY');
+  }
+
+  @action
+  getExtraColumnRowValue(extraColumnName, participant) {
+    const extraColumnValue = participant.extraColumns[extraColumnName];
+
+    if (extraColumnName === 'ORALIZATION') {
+      return this.intl.t(`pages.organization-participants.table.row-value.oralization.${extraColumnValue}`);
+    }
+    if (!extraColumnValue) return '';
+
+    if (dayjs(extraColumnValue).isValid()) {
+      return this.displayDate(extraColumnValue);
+    }
+
+    return extraColumnValue;
+  }
 
   get isAdminInOrganization() {
     return !!this.currentUser.isAdminInOrganization;
@@ -27,22 +68,6 @@ export default class List extends Component {
 
   get showCheckbox() {
     return this.isAdminInOrganization && !this.currentUser.hasLearnerImportFeature;
-  }
-
-  get headerId() {
-    return guidFor(this) + 'mainCheckbox';
-  }
-
-  get actionBarId() {
-    return guidFor(this) + 'actionBar';
-  }
-
-  get paginationId() {
-    return guidFor(this) + 'pagination';
-  }
-
-  get filtersId() {
-    return guidFor(this) + 'filters';
   }
 
   get hasParticipants() {
@@ -63,6 +88,22 @@ export default class List extends Component {
 
   get hasActionColumn() {
     return this.currentUser.canActivateOralizationLearner;
+  }
+
+  get extraColumnRowInfo() {
+    if (!this.args.participant.extraColumns) {
+      return [];
+    }
+
+    return Object.keys(this.args.participant.extraColumns).map((extraColumnName) =>
+      this.getExtraColumnRowValue(extraColumnName, this.args.participant),
+    );
+  }
+
+  get onClickLearner() {
+    if (this.currentUser.canAccessMissionsPage) return undefined;
+
+    return this.args.onClickLearner;
   }
 
   @action
@@ -116,120 +157,336 @@ export default class List extends Component {
   }
 
   <template>
-    <div id={{this.filtersId}} />
-
-    <div class="panel">
-      <table class="table content-text content-text--small">
-        <caption class="screen-reader-only">{{t "pages.organization-participants.table.description"}}</caption>
-        <thead id={{this.headerId}} />
-
-        <tbody>
-          <SelectableList @items={{@participants}}>
-            <:manager as |allSelected someSelected toggleAll selectedParticipants reset|>
-              <InElement @destinationId={{this.headerId}}>
-                <TableHeaders
-                  @allSelected={{allSelected}}
-                  @someSelected={{someSelected}}
-                  @showCheckbox={{this.showCheckbox}}
-                  @hasParticipants={{this.hasParticipants}}
-                  @hasActionColumn={{this.hasActionColumn}}
-                  @onToggleAll={{toggleAll}}
-                  @lastnameSort={{@lastnameSort}}
-                  @customHeadings={{this.customColumns}}
-                  @participationCountOrder={{@participationCountOrder}}
-                  @latestParticipationOrder={{@latestParticipationOrder}}
-                  @onSortByLastname={{fn this.addResetOnFunction @sortByLastname reset}}
-                  @onSortByParticipationCount={{fn this.addResetOnFunction @sortByParticipationCount reset}}
-                  @onSortByLatestParticipation={{fn this.addResetOnFunction @sortByLatestParticipation reset}}
-                  @hasComputeOrganizationLearnerCertificabilityEnabled={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
-                />
-              </InElement>
-              {{#if someSelected}}
-                <InElement @destinationId={{this.actionBarId}}>
-                  <ActionBar @count={{selectedParticipants.length}} @openDeletionModal={{this.openDeletionModal}} />
-                  <DeletionModal
-                    @title={{t
-                      "pages.organization-participants.deletion-modal.title"
-                      count=selectedParticipants.length
-                      firstname=(get selectedParticipants "0.firstName")
-                      lastname=(get selectedParticipants "0.lastName")
-                      htmlSafe=true
-                    }}
-                    @showModal={{this.showDeletionModal}}
-                    @count={{selectedParticipants.length}}
-                    @onTriggerAction={{fn this.deleteParticipants selectedParticipants reset}}
-                    @onCloseModal={{this.closeDeletionModal}}
+    {{#let (uniqueId) (uniqueId) (uniqueId) (uniqueId) as |actionBarId paginationId headerId filtersId|}}
+      <div id={{filtersId}} />
+      <SelectableList
+        @items={{@participants}}
+        as |toggleParticipant isParticipantSelected allSelected someSelected toggleAll selectedParticipants reset|
+      >
+        <PixTable
+          @variant="orga"
+          @condensed={{true}}
+          @caption={{t "pages.organization-participants.table.description"}}
+          @data={{@participants}}
+          class="table"
+          @onRowClick={{this.onClickLearner}}
+        >
+          <:columns as |participant context|>
+            {{#if this.showCheckbox}}
+              <PixTableColumn @context={{context}}>
+                <:header>
+                  <PixCheckbox
+                    @screenReaderOnly={{true}}
+                    @checked={{someSelected}}
+                    @isIndeterminate={{not allSelected}}
+                    disabled={{not @participants.length}}
+                    {{on "click" toggleAll}}
                   >
-                    <:content>
-                      <p>{{t "pages.organization-participants.deletion-modal.content.header" count=this.count}}</p>
-                      <p>{{t
-                          "pages.organization-participants.deletion-modal.content.main-participation-prevent"
-                          count=selectedParticipants.length
-                        }}</p>
-                      <p>{{t
-                          "pages.organization-participants.deletion-modal.content.main-campaign-prevent"
-                          count=selectedParticipants.length
-                        }}</p>
-                      <p>{{t
-                          "pages.organization-participants.deletion-modal.content.main-participation-access"
-                          count=selectedParticipants.length
-                        }}</p>
-                      <p>{{t
-                          "pages.organization-participants.deletion-modal.content.main-new-campaign-access"
-                          count=selectedParticipants.length
-                        }}</p>
-                      <p><strong>{{t
-                            "pages.organization-participants.deletion-modal.content.footer"
-                            count=selectedParticipants.length
-                          }}</strong></p>
-                    </:content>
-                  </DeletionModal>
-                </InElement>
-              {{/if}}
-              <InElement @destinationId={{this.paginationId}} @waitForElement={{true}}>
-                <PixPagination
-                  @pagination={{@participants.meta}}
-                  @onChange={{reset}}
-                  @locale={{this.intl.primaryLocale}}
-                />
-              </InElement>
-              <InElement @destinationId={{this.filtersId}}>
-                <LearnerFilters
-                  @learnersCount={{@participants.meta.rowCount}}
-                  @fullName={{@fullName}}
-                  @customFilters={{this.customFilters}}
-                  @customFiltersValues={{@customFiltersValues}}
-                  @certificabilityFilter={{@certificabilityFilter}}
-                  @onTriggerFiltering={{fn this.addResetOnFunction @triggerFiltering reset}}
-                  @onResetFilter={{fn this.addResetOnFunction @onResetFilter reset}}
-                />
-              </InElement>
-            </:manager>
-            <:item as |participant toggleParticipant isParticipantSelected|>
-              <TableRow
-                @showCheckbox={{this.showCheckbox}}
-                @participant={{participant}}
-                @isParticipantSelected={{isParticipantSelected}}
-                @onToggleParticipant={{fn this.addStopPropagationOnFunction toggleParticipant}}
-                @onClickLearner={{fn @onClickLearner participant.id}}
-                @customRows={{this.customColumns}}
-                @hideCertifiableDate={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
-                @hasOrganizationParticipantPage={{@hasOrganizationParticipantPage}}
-                @actionsForParticipant={{this.actionsForParticipant participant}}
-              />
-            </:item>
-          </SelectableList>
-        </tbody>
-      </table>
+                    <:label>{{t "pages.organization-participants.table.column.mainCheckbox"}}</:label>
+                  </PixCheckbox>
+                </:header>
+                <:cell>
+                  <span {{on "click" (fn withFunction (fn toggleParticipant participant) stopPropagation)}}>
+                    <PixCheckbox
+                      @screenReaderOnly={{true}}
+                      {{on "click" (fn withFunction (fn toggleParticipant participant) stopPropagation)}}
+                      @checked={{isParticipantSelected participant}}
+                    >
+                      <:label>
+                        {{t
+                          "pages.organization-participants.table.column.checkbox"
+                          firstname=participant.firstName
+                          lastname=participant.lastName
+                        }}
+                      </:label>
+                    </PixCheckbox>
+                  </span>
+                </:cell>
+              </PixTableColumn>
+            {{/if}}
+
+            <PixTableColumn
+              @context={{context}}
+              @onSort={{fn this.addResetOnFunction @sortByLastname reset}}
+              @sortOrder={{@lastnameSort}}
+              @ariaLabelDefaultSort={{t "pages.organization-participants.table.column.last-name.ariaLabelDefaultSort"}}
+              @ariaLabelSortAsc={{t "pages.organization-participants.table.column.last-name.ariaLabelSortUp"}}
+              @ariaLabelSortDesc={{t "pages.organization-participants.table.column.last-name.ariaLabelSortDown"}}
+            >
+              <:header>
+                {{t "pages.organization-participants.table.column.last-name.label"}}
+              </:header>
+              <:cell>
+                {{#if @hasOrganizationParticipantPage}}
+                  <LinkTo
+                    @route="authenticated.organization-participants.organization-participant"
+                    @model={{participant.id}}
+                  >
+                    {{participant.lastName}}
+                  </LinkTo>
+                {{else}}
+                  {{participant.lastName}}
+                {{/if}}
+              </:cell>
+            </PixTableColumn>
+
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "pages.organization-participants.table.column.first-name"}}
+              </:header>
+              <:cell>
+                {{participant.firstName}}
+              </:cell>
+            </PixTableColumn>
+
+            {{#each this.customColumns as |heading|}}
+              <PixTableColumn @context={{context}}>
+                <:header>
+                  <div class="organization-participant__align-element">
+                    {{t (getColumnName heading)}}
+                    {{#if (eq heading "ORALIZATION")}}
+                      <PixTooltip @id="organization-participants-oralization-tooltip" @isWide="true">
+                        <:triggerElement>
+                          <PixIcon
+                            @name="help"
+                            @plainIcon="true"
+                            aria-label={{t
+                              "pages.organization-participants.table.oralization-header-tooltip-aria-label"
+                            }}
+                            aria-describedby="organization-participants-oralization-tooltip"
+                          />
+                        </:triggerElement>
+
+                        <:tooltip>
+                          {{t "pages.organization-participants.table.oralization-header-tooltip"}}
+                        </:tooltip>
+                      </PixTooltip>
+                    {{/if}}
+                  </div>
+                </:header>
+                <:cell>
+                  {{this.getExtraColumnRowValue heading participant}}
+                </:cell>
+              </PixTableColumn>
+            {{/each}}
+
+            {{#unless this.currentUser.canAccessMissionsPage}}
+              <PixTableColumn
+                @context={{context}}
+                @type="number"
+                @onSort={{fn this.addResetOnFunction @sortByParticipationCount reset}}
+                @sortOrder={{@participationCountOrder}}
+                @ariaLabelDefaultSort={{t
+                  "pages.organization-participants.table.column.participation-count.ariaLabelDefaultSort"
+                }}
+                @ariaLabelSortAsc={{t
+                  "pages.organization-participants.table.column.participation-count.ariaLabelSortUp"
+                }}
+                @ariaLabelSortDesc={{t
+                  "pages.organization-participants.table.column.participation-count.ariaLabelSortDown"
+                }}
+              >
+                <:header>
+                  {{t "pages.organization-participants.table.column.participation-count.label"}}
+                </:header>
+                <:cell>
+                  {{participant.participationCount}}
+                </:cell>
+              </PixTableColumn>
+
+              <PixTableColumn
+                @context={{context}}
+                @type="number"
+                @onSort={{fn this.addResetOnFunction @sortByLatestParticipation reset}}
+                @sortOrder={{@latestParticipationOrder}}
+                @ariaLabelDefaultSort={{t
+                  "pages.organization-participants.table.column.latest-participation.ariaLabelDefaultSort"
+                }}
+                @ariaLabelSortAsc={{t
+                  "pages.organization-participants.table.column.latest-participation.ariaLabelSortUp"
+                }}
+                @ariaLabelSortDesc={{t
+                  "pages.organization-participants.table.column.latest-participation.ariaLabelSortDown"
+                }}
+              >
+                <:header>
+                  {{t "pages.organization-participants.table.column.latest-participation.label"}}
+                </:header>
+                <:cell>
+                  {{#if participant.lastParticipationDate}}
+                    <div class="organization-participant__align-element">
+                      <span>{{this.displayDate participant.lastParticipationDate}}</span>
+                      <LastParticipationDateTooltip
+                        @id={{participant.id}}
+                        @campaignName={{participant.campaignName}}
+                        @campaignType={{participant.campaignType}}
+                        @participationStatus={{participant.participationStatus}}
+                      />
+                    </div>
+                  {{/if}}
+                </:cell>
+              </PixTableColumn>
+
+              <PixTableColumn @context={{context}}>
+                <:header>
+                  <div class="organization-participant__align-element">
+                    {{t "pages.organization-participants.table.column.is-certifiable.label"}}
+                    <Tooltip
+                      @hasComputeOrganizationLearnerCertificabilityEnabled={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
+                    />
+                  </div>
+                </:header>
+                <:cell>
+                  <div class="organization-participant__align-element organization-participant__align-element--column">
+                    <CertificabilityCell
+                      @certifiableAt={{@participant.certifiableAt}}
+                      @isCertifiable={{@participant.isCertifiable}}
+                      @hideCertifiableDate={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
+                    />
+                  </div>
+                </:cell>
+              </PixTableColumn>
+            {{/unless}}
+
+            {{#if this.hasActionColumn}}
+              <PixTableColumn @context={{context}}>
+                <:header>
+                  {{t "common.actions.global"}}
+                </:header>
+                <:cell>
+                  <DropdownIconTrigger
+                    @icon="moreVert"
+                    @dropdownButtonClass="organization-participant__dropdown-button"
+                    @dropdownContentClass="organization-participant__dropdown-content"
+                    @ariaLabel={{t "pages.sup-organization-participants.actions.show-actions"}}
+                  >
+                    <:default as |closeMenu|>
+                      {{#each (this.actionsForParticipant participant) as |actionForPartipant|}}
+                        <DropdownItem @onClick={{actionForPartipant.onClick}} @closeMenu={{closeMenu}}>
+                          {{actionForPartipant.label}}
+                        </DropdownItem>
+                      {{/each}}
+                    </:default>
+                  </DropdownIconTrigger>
+                </:cell>
+              </PixTableColumn>
+            {{/if}}
+          </:columns>
+        </PixTable>
+
+        <Filters
+          @destinationId={{filtersId}}
+          @learnersCount={{@participants.meta.rowCount}}
+          @fullName={{@fullName}}
+          @customFilters={{this.customFilters}}
+          @customFiltersValues={{@customFiltersValues}}
+          @certificabilityFilter={{@certificabilityFilter}}
+          @onTriggerFiltering={{fn this.addResetOnFunction @triggerFiltering reset}}
+          @onResetFilter={{fn this.addResetOnFunction @onResetFilter reset}}
+        />
+
+        {{#if someSelected}}
+          <ActionBar
+            @destinationId={{actionBarId}}
+            @count={{selectedParticipants.length}}
+            @openDeletionModal={{this.openDeletionModal}}
+          />
+
+          <DeletionModal
+            @selectedParticipants={{selectedParticipants}}
+            @showDeletionModal={{this.showDeletionModal}}
+            @onTriggerAction={{fn this.deleteParticipants selectedParticipants reset}}
+            @onCloseDeletionModal={{this.closeDeletionModal}}
+          />
+        {{/if}}
+
+        <PixPaginationControl @destinationId={{paginationId}} @onChange={{reset}} @pagination={{@participants.meta}} />
+      </SelectableList>
 
       {{#unless @participants}}
         <div class="table__empty content-text">
           {{t "pages.organization-participants.table.empty"}}
         </div>
       {{/unless}}
-    </div>
 
-    <div id={{this.actionBarId}} />
-    <div id={{this.paginationId}} />
+      <div id={{paginationId}} />
+      <div id={{actionBarId}} />
+    {{/let}}
   </template>
 }
+
+const Filters = <template>
+  <InElement @destinationId={{@destinationId}}>
+    <LearnerFilters
+      @learnersCount={{@participants.meta.rowCount}}
+      @fullName={{@fullName}}
+      @customFilters={{@customFilters}}
+      @customFiltersValues={{@customFiltersValues}}
+      @certificabilityFilter={{@certificabilityFilter}}
+      @onTriggerFiltering={{@onTriggerFiltering}}
+      @onResetFilter={{@onResetFilter}}
+    />
+  </InElement>
+</template>;
+
+const ActionBar = <template>
+  <InElement @destinationId={{@destinationId}}>
+    <UiActionBar>
+      <:information>
+        {{t "pages.organization-participants.action-bar.information" count=@count}}
+      </:information>
+      <:actions>
+
+        <PixButton @triggerAction={{@openDeletionModal}} type="button" @variant="error">
+          {{t "pages.organization-participants.action-bar.delete-button"}}
+        </PixButton>
+      </:actions>
+    </UiActionBar>
+  </InElement>
+</template>;
+
+const PixPaginationControl = <template>
+  <InElement @destinationId={{@destinationId}} @waitForElement={{true}}>
+    <PixPagination @pagination={{@pagination}} @onChange={{@onChange}} @locale={{this.intl.primaryLocale}} />
+  </InElement>
+</template>;
+
+const DeletionModal = <template>
+  <UiDeletionModal
+    @title={{t
+      "pages.organization-participants.deletion-modal.title"
+      count=@selectedParticipants.length
+      firstname=(get @selectedParticipants "0.firstName")
+      lastname=(get @selectedParticipants "0.lastName")
+      htmlSafe=true
+    }}
+    @showModal={{@showDeletionModal}}
+    @count={{@selectedParticipants.length}}
+    @onTriggerAction={{@onTriggerAction}}
+    @onCloseModal={{@onCloseDeletionModal}}
+  >
+    <:content>
+      <p>{{t "pages.organization-participants.deletion-modal.content.header" count=@selectedParticipants.length}}</p>
+      <p>{{t
+          "pages.organization-participants.deletion-modal.content.main-participation-prevent"
+          count=@selectedParticipants.length
+        }}</p>
+      <p>{{t
+          "pages.organization-participants.deletion-modal.content.main-campaign-prevent"
+          count=@selectedParticipants.length
+        }}</p>
+      <p>{{t
+          "pages.organization-participants.deletion-modal.content.main-participation-access"
+          count=@selectedParticipants.length
+        }}</p>
+      <p>{{t
+          "pages.organization-participants.deletion-modal.content.main-new-campaign-access"
+          count=@selectedParticipants.length
+        }}</p>
+      <p><strong>{{t
+            "pages.organization-participants.deletion-modal.content.footer"
+            count=@selectedParticipants.length
+          }}</strong></p>
+    </:content>
+  </UiDeletionModal>
+</template>;
