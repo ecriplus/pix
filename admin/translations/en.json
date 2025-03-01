@@ -108,6 +108,14 @@
         "title": "Anonymize GAR Data",
         "upload-button": "Anonymize from a CSV file"
       },
+      "campaigns-import": {
+        "description": "Existing campaigns will not be modified. There is no control to prevent duplicates.",
+        "notifications": {
+          "success": "The campaigns have been created."
+        },
+        "title": "Creation of mass campaigns",
+        "upload-button": "Import a CSV file"
+      },
       "oidc-providers-import": {
         "description": "Note: Trying to import already existing OIDC Providers would produce an error.",
         "notifications": {
@@ -479,6 +487,7 @@
               "select-role": "Select a role"
             }
           },
+          "section-title": "User Certification Centres",
           "table-headers": {
             "actions-label": "Actions",
             "center-external-id": "External ID",
@@ -667,7 +676,12 @@
       "actions": {
         "load": {
           "label": "Charger"
-        }
+        },
+        "publish-session": {
+          "label": "Publish the session",
+          "warning-information": "You cannot publish the session until it is finalized or there are still erroneous certifications."
+        },
+        "unpublish-session": "Unpublish the session"
       },
       "certification": {
         "details": {
@@ -835,6 +849,13 @@
       },
       "title": "Children organisations"
     },
+    "organizations": {
+      "notifications": {
+        "errors": {
+          "payload-too-large": "The weight of the logo exceeds the authorised limit of {maxSizeInMegaBytes} MB. Please reduce the weight of the logo and try again."
+        }
+      }
+    },
     "sessions": {
       "informations": {
         "assignment-confirmation-modal": "This session is already assigned to the user {fullName}.'<br/>'Do you still want to assign it to yourself?",
@@ -964,6 +985,18 @@
           "status": "Status : ",
           "title": "Public title : "
         },
+        "duplicate": {
+          "button": {
+            "label": "Duplicate this formative content"
+          },
+          "modal": {
+            "instruction": "This action will duplicate the formative content with its triggers.",
+            "title": "Duplicate formative content?"
+          },
+          "notifications": {
+            "success": "The formative content has been duplicated!"
+          }
+        },
         "list": {
           "caption": "Trainings list",
           "goalThreshold": "Goal Threshold",
@@ -975,15 +1008,22 @@
           "targetProfileCount": "Associated Targets Profiles"
         },
         "targetProfiles": {
-          "tabName": "Target Profiles"
+          "tabName": "Target Profiles",
+          "title": "Attach one or more target profiles"
         },
         "triggers": {
           "goal": {
             "alternative-title": "Add a goal threshold to not exceed",
+            "edit": {
+              "description": "If the learner succeeds in the achievements of the selected subjects then the formative content will not be offered to him."
+            },
             "title": "Goal"
           },
           "prerequisite": {
             "alternative-title": "Add a prerequisite threshold to reach",
+            "edit": {
+              "description": "If the learner succeeds in all the achievements of the selected subjects, then the formative content will be offered to him."
+            },
             "title": "Prerequisite"
           },
           "tabName": "Triggers"
