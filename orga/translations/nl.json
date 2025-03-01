@@ -313,7 +313,13 @@
     "organization-participants-header": {
       "import-button": "Importeren",
       "sco-title": "{count, plural, =0 {Leerling} =1 {Leerling ({count})} other {Leerlingen ({count})}}",
-      "title": "{count, plural, =0 {Deelnemer} =1 {Deelnemer ({count})} other {Deelnemers ({count})}}"
+      "title": "{count, plural, =0 {Deelnemer} =1 {Deelnemer ({count})} other {Deelnemers ({count})}}",
+      "default": {
+        "title": "{count, plural, =0 {Deelnemers} =1 {Participant ({count})} other {Deelnemers ({count})}}"
+      },
+      "sco": {
+        "title": "{count, plural, =0 {Leerlingen} =1 {Leerlingen ({count})} other {Leerlingen ({count})}}"
+      }
     },
     "participation-status": {
       "SHARED-ASSESSMENT": "Ontvangen resultaten",
@@ -603,9 +609,9 @@
           "status": {
             "empty": "Alle statussen",
             "title": "Status"
-          }
-        },
-        "unacquired-badges": "Niet verkregen onderwerpen"
+          },
+          "unacquired-badges": "Thema's niet verkregen"
+        }
       },
       "result": "Resultaat",
       "table": {
@@ -1496,8 +1502,8 @@
         "headers": {
           "positioning": "positionering",
           "reached-level": "Bereikt niveau",
-          "skills": "Vaardigheden",
-          "topics": "Onderwerpen"
+          "topics": "Onderwerpen",
+          "competences": "Vaardigheden"
         }
       }
     },
