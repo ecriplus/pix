@@ -4,7 +4,6 @@ import * as campaignParticipations from './application/campaign-participations/i
 import * as certificationCenterMemberships from './application/certification-center-memberships/index.js';
 import * as certificationCenters from './application/certification-centers/index.js';
 import * as frameworks from './application/frameworks/index.js';
-import * as memberships from './application/memberships/index.js';
 import * as organizations from './application/organizations/index.js';
 import * as scoOrganizationLearners from './application/sco-organization-learners/index.js';
 import * as users from './application/users/index.js';
@@ -15,7 +14,6 @@ const routes = [
   certificationCenters,
   certificationCenterMemberships,
   healthcheck,
-  memberships,
   organizations,
   scoOrganizationLearners,
   frameworks,
