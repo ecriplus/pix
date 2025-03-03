@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker';
 
 import {
+  certificationCourseIdGenerator,
   COMPETENCES,
-  generateCertifCourseId,
   generateCompetenceLevel,
   generateFirstName,
   generatePixScore,
@@ -12,6 +12,7 @@ import {
   verificationCodeGenerator,
 } from './tools.js';
 
+const generateCertifCourseId = certificationCourseIdGenerator({ startingFrom: 1000000 });
 const generateVerificationCode = verificationCodeGenerator();
 
 /**

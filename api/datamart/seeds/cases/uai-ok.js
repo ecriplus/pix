@@ -1,6 +1,6 @@
 import {
+  certificationCourseIdGenerator,
   COMPETENCES,
-  generateCertifCourseId,
   generateCompetenceLevel,
   generatePixScore,
   generateStatus,
@@ -8,6 +8,7 @@ import {
   orgaUAIGenerator,
 } from './tools.js';
 
+const generateCertifCourseId = certificationCourseIdGenerator({ startingFrom: 2100000 });
 const generateOrgaUai = orgaUAIGenerator();
 
 /**

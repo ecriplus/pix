@@ -107,8 +107,9 @@ const generateStatus = () => {
   ]);
 };
 
-const generateCertifCourseId = () => {
-  return Date.now() + faker.number.int(10);
+const certificationCourseIdGenerator = ({ startingFrom = 1000 }) => {
+  const certifCourseIdGenerator = incrementalGenerator(startingFrom);
+  return () => certifCourseIdGenerator.next().value;
 };
 
 const generateCompetenceLevel = () => {
@@ -120,8 +121,8 @@ const generatePixScore = () => {
 };
 
 export {
+  certificationCourseIdGenerator,
   COMPETENCES,
-  generateCertifCourseId,
   generateCompetenceLevel,
   generateFirstName,
   generatePixScore,
