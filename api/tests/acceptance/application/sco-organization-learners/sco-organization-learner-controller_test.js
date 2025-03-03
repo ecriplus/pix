@@ -152,7 +152,7 @@ describe('Acceptance | Controller | sco-organization-learners', function () {
       options = {
         method: 'POST',
         url: '/api/sco-organization-learners/external',
-        headers: {},
+        headers: generateAuthenticatedUserRequestHeaders(),
         payload: {},
       };
 

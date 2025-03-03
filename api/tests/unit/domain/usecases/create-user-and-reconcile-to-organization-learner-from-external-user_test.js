@@ -1,4 +1,6 @@
 import { createUserAndReconcileToOrganizationLearnerFromExternalUser } from '../../../../lib/domain/usecases/create-user-and-reconcile-to-organization-learner-from-external-user.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { domainBuilder, expect, sinon } from '../../../test-helper.js';
 
 describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-from-external-user', function () {
@@ -12,7 +14,9 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
   let userLoginRepository;
   let organizationLearnerRepository;
   let studentRepository;
+  let lastUserApplicationConnectionsRepository;
   const audience = 'https://app.pix.fr';
+  const requestedApplication = new RequestedApplication('app');
 
   beforeEach(function () {
     campaignRepository = {
@@ -34,6 +38,14 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
     };
     userService = {
       createAndReconcileUserToOrganizationLearner: sinon.stub(),
+    };
+
+    authenticationMethodRepository = {
+      updateLastLoggedAtByIdentityProvider: sinon.stub(),
+    };
+
+    lastUserApplicationConnectionsRepository = {
+      upsert: sinon.stub(),
     };
   });
 
@@ -66,10 +78,21 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
         userLoginRepository,
         organizationLearnerRepository,
         studentRepository,
+        lastUserApplicationConnectionsRepository,
+        requestedApplication,
       });
 
       // then
       expect(userLoginRepository.updateLastLoggedAt).to.have.been.calledWithExactly({ userId: user.id });
+      expect(lastUserApplicationConnectionsRepository.upsert).to.have.been.calledWithExactly({
+        userId: user.id,
+        application: requestedApplication.applicationName,
+        lastLoggedAt: sinon.match.date,
+      });
+      expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.have.been.calledWithExactly({
+        userId: user.id,
+        identityProvider: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
+      });
     });
 
     it('should return an access token', async function () {
@@ -103,6 +126,8 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
         userLoginRepository,
         organizationLearnerRepository,
         studentRepository,
+        lastUserApplicationConnectionsRepository,
+        requestedApplication,
       });
 
       // then
@@ -111,7 +136,7 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
   });
 
   context('when user does not have saml id', function () {
-    it('should save last login date', async function () {
+    it('should save last login dates', async function () {
       // given
       const user = domainBuilder.buildUser();
       const organizationLearner = domainBuilder.buildOrganizationLearner(user);
@@ -140,6 +165,8 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
         userLoginRepository,
         organizationLearnerRepository,
         studentRepository,
+        lastUserApplicationConnectionsRepository,
+        requestedApplication,
       });
 
       // then
@@ -178,6 +205,8 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
         userLoginRepository,
         organizationLearnerRepository,
         studentRepository,
+        lastUserApplicationConnectionsRepository,
+        requestedApplication,
       });
 
       // then

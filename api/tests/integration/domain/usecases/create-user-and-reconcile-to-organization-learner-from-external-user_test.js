@@ -1,5 +1,6 @@
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
 import {
   CampaignCodeError,
   NotFoundError,
@@ -10,6 +11,13 @@ import { tokenService } from '../../../../src/shared/domain/services/token-servi
 import { catchErr, databaseBuilder, expect, knex } from '../../../test-helper.js';
 
 describe('Integration | UseCases | create-user-and-reconcile-to-organization-learner-from-external-user', function () {
+  let audience, requestedApplication;
+
+  beforeEach(async function () {
+    audience = 'https://app.pix.fr';
+    requestedApplication = new RequestedApplication('app');
+  });
+
   context('When there is no campaign with the given code', function () {
     it('should throw a campaign code error', async function () {
       // when
@@ -163,6 +171,8 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
         campaignCode,
         token,
         tokenService,
+        audience,
+        requestedApplication,
       });
 
       // then
@@ -171,11 +181,16 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
 
       const authenticationMethodInDB = await knex('authentication-methods');
       const authenticationMethod = authenticationMethodInDB[0];
+      const lastUserApplicationConnections = await knex('last-user-application-connections');
+      const lastUserApplicationConnection = lastUserApplicationConnections[0];
       expect(authenticationMethod.externalIdentifier).to.equal(samlId);
       expect(authenticationMethod.authenticationComplement).to.deep.equal({
         firstName: 'Julie',
         lastName: 'Dumoulin-Lemarchand',
       });
+      expect(authenticationMethod.identityProvider).to.equal(NON_OIDC_IDENTITY_PROVIDERS.GAR.code);
+      expect(lastUserApplicationConnection.userId).to.equal(authenticationMethod.userId);
+      expect(lastUserApplicationConnection.application).to.equal(requestedApplication.applicationName);
     });
 
     context('When the external user is already reconciled to another account', function () {
@@ -240,6 +255,8 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
               campaignCode,
               token,
               birthdate: organizationLearner.birthdate,
+              audience,
+              requestedApplication,
             });
 
             // then
@@ -292,6 +309,8 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
               campaignCode,
               token,
               birthdate: organizationLearner.birthdate,
+              audience,
+              requestedApplication,
             });
 
             // then
@@ -305,11 +324,16 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
               userId: otherAccount.id,
             });
             const authenticationMethod = authenticationMethodInDB[0];
+            const lastUserApplicationConnections = await knex('last-user-application-connections');
+            const lastUserApplicationConnection = lastUserApplicationConnections[0];
             expect(authenticationMethod.externalIdentifier).to.equal(samlId);
             expect(authenticationMethod.authenticationComplement).to.deep.equal({
               firstName: 'Julie',
               lastName: 'Dumoulin-Lemarchand',
             });
+            expect(authenticationMethod.identityProvider).to.equal(NON_OIDC_IDENTITY_PROVIDERS.GAR.code);
+            expect(lastUserApplicationConnection.userId).to.equal(authenticationMethod.userId);
+            expect(lastUserApplicationConnection.application).to.equal(requestedApplication.applicationName);
           });
         });
       });
@@ -337,6 +361,8 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
           birthdate: organizationLearner.birthdate,
           campaignCode,
           token,
+          audience,
+          requestedApplication,
         });
 
         // then

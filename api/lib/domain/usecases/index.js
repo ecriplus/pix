@@ -103,6 +103,7 @@ const oidcAuthenticationServiceRegistry = new OidcAuthenticationServiceRegistry(
  * @typedef {userRepository} UserRepository
  * @typedef {certificationChallengesService} CertificationChallengesService
  * @typedef {assessmentRepository} AssessmentRepository
+ * @typedef {LastUserApplicationConnectionsRepository} LastUserApplicationConnectionsRepository
  */
 const dependencies = {
   accountRecoveryDemandRepository,
@@ -138,6 +139,7 @@ const dependencies = {
   knowledgeElementRepository,
   lastUserApplicationConnectionsRepository,
   learningContentConversionService,
+  lastUserApplicationConnectionsRepository,
   membershipRepository,
   obfuscationService,
   organizationCreationValidator,
