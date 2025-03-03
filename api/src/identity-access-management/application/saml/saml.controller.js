@@ -3,7 +3,7 @@ import { tokenService } from '../../../shared/domain/services/token-service.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as saml from '../../infrastructure/saml.js';
-import { getForwardedOrigin } from '../../infrastructure/utils/network.js';
+import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/utils/network.js';
 
 const metadata = function (request, h) {
   return h.response(saml.getServiceProviderMetadata()).type('application/xml');
@@ -24,11 +24,13 @@ const assert = async function (request, h) {
 
   try {
     const origin = getForwardedOrigin(request.headers);
+    const requestedApplication = RequestedApplication.fromOrigin(origin);
     const redirectionUrl = await usecases.getSamlAuthenticationRedirectionUrl({
       userAttributes,
       tokenService,
       config,
       audience: origin,
+      requestedApplication,
     });
 
     return h.redirect(redirectionUrl);
