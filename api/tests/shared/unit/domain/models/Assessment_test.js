@@ -4,7 +4,7 @@ import { Assessment } from '../../../../../src/shared/domain/models/Assessment.j
 import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Models | Assessment', function () {
-  describe('#constuctor', function () {
+  describe('#constructor', function () {
     it('should init method when none is defined', function () {
       const assessment = new Assessment({
         type: 'COMPETENCE_EVALUATION',
