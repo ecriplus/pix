@@ -1,7 +1,7 @@
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
-import { fn } from '@ember/helper';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import { fn, uniqueId } from '@ember/helper';
 import { action } from '@ember/object';
-import { guidFor } from '@ember/object/internals';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -19,8 +19,16 @@ import ListActionBar from './list-action-bar';
 import ManageAuthenticationMethodModal from './manage-authentication-method-modal';
 import ResetPasswordModal from './reset-password-modal';
 import ScoLearnerFilters from './sco-learner-filters';
-import TableHeaders from './table-headers';
 import TableRow from './table-row';
+
+async function withFunction(wrappedFunction, func, ...args) {
+  func(...args);
+  await wrappedFunction(...args);
+}
+
+function stopPropagation(event) {
+  event.stopPropagation();
+}
 
 export default class ScoList extends Component {
   @service currentUser;
@@ -70,18 +78,6 @@ export default class ScoList extends Component {
     return this.currentUser?.organization.type === 'SCO' && this.currentUser?.organization.isManagingStudents;
   }
 
-  get headerId() {
-    return guidFor(this) + 'mainCheckbox';
-  }
-
-  get actionBarId() {
-    return guidFor(this) + 'actionBar';
-  }
-
-  get paginationControlId() {
-    return guidFor(this) + 'paginationCOntrol';
-  }
-
   get hasStudents() {
     return Boolean(this.args.students.length);
   }
@@ -115,7 +111,7 @@ export default class ScoList extends Component {
   }
 
   @action
-  openGenerateUsernamePasswordModal(students, event) {
+  openGenerateUsernamePasswordModal(students) {
     event.stopPropagation();
     this.affectedStudents = students.filter((student) => student.isAssociated);
     this.showGenerateUsernamePasswordModal = true;
@@ -192,104 +188,145 @@ export default class ScoList extends Component {
   <template>
     <ImportInformationBanner @importDetail={{@importDetail}} />
 
+    {{#let (uniqueId) (uniqueId) (uniqueId) (uniqueId) as |actionBarId paginationId headerId filtersId|}}
+      <div id={{filtersId}} />
+      <SelectableList
+        @items={{@students}}
+        as |toggleStudent isStudentSelected allSelected someSelected toggleAll selectedStudents reset|
+      >
+        <PixTable
+          @variant="orga"
+          @caption={{t "pages.sco-organization-participants.table.description"}}
+          @data={{@students}}
+          class="table"
+          @onRowClick={{@onClickLearner}}
+        >
+          <:columns as |student context index|>
+            <TableRow
+              @showCheckbox={{this.showCheckbox}}
+              @lastnameSort={{@lastnameSort}}
+              @onSortByLastname={{@sortByLastname}}
+              @participationCountOrder={{@participationCountOrder}}
+              @onSortByParticipationCount={{@sortByParticipationCount}}
+              @divisionSort={{@divisionSort}}
+              @onSortByDivision={{@sortByDivision}}
+              @allSelected={{allSelected}}
+              @someSelected={{someSelected}}
+              @onToggleAll={{toggleAll}}
+              @hasStudents={{this.hasStudents}}
+              @hasComputeOrganizationLearnerCertificabilityEnabled={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
+              @index={{index}}
+              @context={{context}}
+              @student={{student}}
+              @isStudentSelected={{isStudentSelected student}}
+              @openAuthenticationMethodModal={{this.openAuthenticationMethodModal}}
+              @onToggleStudent={{fn withFunction (fn toggleStudent student) stopPropagation}}
+              @hideCertifiableDate={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
+            />
+          </:columns>
+        </PixTable>
+
+        {{#if (eq @students.meta.participantCount 0)}}
+          <EmptyState
+            @infoText={{t "pages.sco-organization-participants.no-participants"}}
+            @actionText={{t "pages.sco-organization-participants.no-participants-action"}}
+          />
+        {{else if (not @students)}}
+          <div class="table__empty content-text">
+            {{t "pages.sco-organization-participants.table.empty"}}
+          </div>
+        {{/if}}
+
+        {{#if someSelected}}
+          <ActionBar
+            @destinationId={{actionBarId}}
+            @count={{selectedStudents.length}}
+            @openGenerateUsernamePasswordModal={{fn this.openGenerateUsernamePasswordModal selectedStudents}}
+            @openResetPasswordModal={{fn this.openResetPasswordModal selectedStudents}}
+            @hasGarIdentityProvider={{this.hasGarIdentityProvider}}
+            @totalSelectedStudents={{selectedStudents.length}}
+            @totalAffectedStudents={{this.affectedStudents.length}}
+            @onTriggerAction={{fn this.generateUsernamePasswordForStudents this.affectedStudents reset}}
+            @showResetPasswordModal={{this.showResetPasswordModal}}
+            @onCloseResetPassworModal={{this.closeResetPasswordModal}}
+            @showGeneratePasswordModal={{this.showGenerateUsernamePasswordModal}}
+            @onCloseGeneratePasswordModal={{this.closeGenerateUsernamePasswordModal}}
+          />
+        {{/if}}
+
+        <PixPaginationControl @destinationId={{paginationId}} @onChange={{reset}} @pagination={{@students.meta}} />
+
+        <Filters
+          @destinationId={{filtersId}}
+          @studentsCount={{@students.meta.rowCount}}
+          @onFilter={{fn withFunction @onFilter reset}}
+          @searchFilter={{@searchFilter}}
+          @certificabilityFilter={{@certificabilityFilter}}
+          @connectionTypeFilter={{@connectionTypeFilter}}
+          @divisionsFilter={{@divisionsFilter}}
+          @onResetFilter={{fn withFunction @onResetFilter reset}}
+          @divisionsOptions={{this.divisions}}
+          @isLoadingDivisions={{this.isLoadingDivisions}}
+          @connectionTypesOptions={{this.connectionTypesOptions}}
+        />
+      </SelectableList>
+
+      <div id={{actionBarId}} />
+      <div id={{paginationId}} />
+
+      <ManageAuthenticationMethodModal
+        @organizationId={{this.currentUser.organization.id}}
+        @student={{this.student}}
+        @display={{this.isShowingAuthenticationMethodModal}}
+        @onClose={{this.closeAuthenticationMethodModal}}
+      />
+    {{/let}}
+  </template>
+}
+
+const Filters = <template>
+  <InElement @destinationId={{@destinationId}}>
     <ScoLearnerFilters
-      @studentsCount={{@students.meta.rowCount}}
+      @studentsCount={{@studentsCount}}
       @onFilter={{@onFilter}}
       @searchFilter={{@searchFilter}}
       @certificabilityFilter={{@certificabilityFilter}}
       @connectionTypeFilter={{@connectionTypeFilter}}
       @divisionsFilter={{@divisionsFilter}}
       @onResetFilter={{@onResetFilter}}
-      @divisionsOptions={{this.divisions}}
-      @isLoadingDivisions={{this.isLoadingDivisions}}
-      @connectionTypesOptions={{this.connectionTypesOptions}}
+      @divisionsOptions={{@divisionsOptions}}
+      @isLoadingDivisions={{@isLoadingDivisions}}
+      @connectionTypesOptions={{@connectionTypesOptions}}
     />
+  </InElement>
+</template>;
 
-    <div class="panel">
-      <table class="table content-text content-text--small">
-        <caption class="screen-reader-only">{{t "pages.sco-organization-participants.table.description"}}</caption>
-        <thead id={{this.headerId}} />
+const PixPaginationControl = <template>
+  <InElement @destinationId={{@destinationId}} @waitForElement={{true}}>
+    <PixPagination @pagination={{@pagination}} @onChange={{@onChange}} @locale={{this.intl.primaryLocale}} />
+  </InElement>
+</template>;
 
-        <tbody>
-          <SelectableList @items={{@students}}>
-            <:manager as |allSelected someSelected toggleAll selectedStudents reset|>
-              <InElement @destinationId={{this.headerId}}>
-                <TableHeaders
-                  @showCheckbox={{this.showCheckbox}}
-                  @lastnameSort={{@lastnameSort}}
-                  @onSortByLastname={{@sortByLastname}}
-                  @participationCountOrder={{@participationCountOrder}}
-                  @onSortByParticipationCount={{@sortByParticipationCount}}
-                  @divisionSort={{@divisionSort}}
-                  @onSortByDivision={{@sortByDivision}}
-                  @allSelected={{allSelected}}
-                  @someSelected={{someSelected}}
-                  @onToggleAll={{toggleAll}}
-                  @hasStudents={{this.hasStudents}}
-                  @hasComputeOrganizationLearnerCertificabilityEnabled={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
-                />
-              </InElement>
-              <InElement @destinationId={{this.paginationControlId}} @waitForElement={{true}}>
-                <PixPagination @pagination={{@students.meta}} @onChange={{reset}} @locale={{this.intl.primaryLocale}} />
-              </InElement>
-              {{#if someSelected}}
-                <InElement @destinationId={{this.actionBarId}}>
-                  <ListActionBar
-                    @count={{selectedStudents.length}}
-                    @openGenerateUsernamePasswordModal={{fn this.openGenerateUsernamePasswordModal selectedStudents}}
-                    @openResetPasswordModal={{fn this.openResetPasswordModal selectedStudents}}
-                    @hasGarIdentityProvider={{this.hasGarIdentityProvider}}
-                  />
-                  <ResetPasswordModal
-                    @showModal={{this.showResetPasswordModal}}
-                    @totalSelectedStudents={{selectedStudents.length}}
-                    @totalAffectedStudents={{this.affectedStudents.length}}
-                    @onTriggerAction={{fn this.generateUsernamePasswordForStudents this.affectedStudents reset}}
-                    @onCloseModal={{this.closeResetPasswordModal}}
-                  />
-                  <GenerateUsernamePasswordModal
-                    @showModal={{this.showGenerateUsernamePasswordModal}}
-                    @totalAffectedStudents={{this.affectedStudents.length}}
-                    @onTriggerAction={{fn this.generateUsernamePasswordForStudents this.affectedStudents reset}}
-                    @onCloseModal={{this.closeGenerateUsernamePasswordModal}}
-                  />
-                </InElement>
-              {{/if}}
-            </:manager>
-            <:item as |student toggleStudent isStudentSelected index|>
-              <TableRow
-                @showCheckbox={{this.showCheckbox}}
-                @index={{index}}
-                @student={{student}}
-                @isStudentSelected={{isStudentSelected}}
-                @openAuthenticationMethodModal={{this.openAuthenticationMethodModal}}
-                @onToggleStudent={{fn this.addStopPropagationOnFunction toggleStudent}}
-                @onClickLearner={{fn @onClickLearner student.id}}
-                @hideCertifiableDate={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
-              />
-            </:item>
-          </SelectableList>
-        </tbody>
-      </table>
-      {{#if (eq @students.meta.participantCount 0)}}
-        <EmptyState
-          @infoText={{t "pages.sco-organization-participants.no-participants"}}
-          @actionText={{t "pages.sco-organization-participants.no-participants-action"}}
-        />
-      {{else if (not @students)}}
-        <div class="table__empty content-text">
-          {{t "pages.sco-organization-participants.table.empty"}}
-        </div>
-      {{/if}}
-    </div>
-    <div id={{this.actionBarId}} />
-    <div id={{this.paginationControlId}} />
-
-    <ManageAuthenticationMethodModal
-      @organizationId={{this.currentUser.organization.id}}
-      @student={{this.student}}
-      @display={{this.isShowingAuthenticationMethodModal}}
-      @onClose={{this.closeAuthenticationMethodModal}}
+const ActionBar = <template>
+  <InElement @destinationId={{@destinationId}}>
+    <ListActionBar
+      @count={{@count}}
+      @openGenerateUsernamePasswordModal={{@openGenerateUsernamePasswordModal}}
+      @openResetPasswordModal={{@openResetPasswordModal}}
+      @hasGarIdentityProvider={{@hasGarIdentityProvider}}
     />
-  </template>
-}
+    <ResetPasswordModal
+      @showModal={{@showResetPasswordModal}}
+      @totalSelectedStudents={{@totalSelectedStudents}}
+      @totalAffectedStudents={{@totalAffectedStudents}}
+      @onTriggerAction={{@onTriggerAction}}
+      @onCloseModal={{@onCloseResetPasswordModal}}
+    />
+    <GenerateUsernamePasswordModal
+      @showModal={{@showGeneratePasswordModal}}
+      @totalAffectedStudents={{@totalAffectedStudents}}
+      @onTriggerAction={{@onTriggerAction}}
+      @onCloseModal={{@onCloseGeneratePasswordModal}}
+    />
+  </InElement>
+</template>;

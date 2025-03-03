@@ -74,10 +74,10 @@ module('Unit | Controller | authenticated/sco-organization-participants/list', f
       controller.lastnameSort = 'Kong';
       controller.pageNumber = 9999;
       // when
-      controller.sortByDivision('desc');
+      controller.sortByDivision();
 
       // then
-      assert.strictEqual(controller.divisionSort, 'desc');
+      assert.strictEqual(controller.divisionSort, 'asc');
       assert.strictEqual(controller.participationCountOrder, null);
       assert.strictEqual(controller.lastnameSort, null);
       assert.strictEqual(controller.pageNumber, null);
@@ -92,10 +92,10 @@ module('Unit | Controller | authenticated/sco-organization-participants/list', f
       controller.participationCountOrder = 'Godzilla';
       controller.pageNumber = 9999;
       // when
-      controller.sortByLastname('desc');
+      controller.sortByLastname();
 
       // then
-      assert.strictEqual(controller.lastnameSort, 'desc');
+      assert.strictEqual(controller.lastnameSort, 'asc');
       assert.strictEqual(controller.divisionSort, null);
       assert.strictEqual(controller.participationCountOrder, null);
       assert.strictEqual(controller.pageNumber, null);
@@ -105,12 +105,12 @@ module('Unit | Controller | authenticated/sco-organization-participants/list', f
   module('#sortByParticipationCount', function () {
     test('update sorting value and reset other', function (assert) {
       // given
-      controller.participationCountOrder = null;
+      controller.participationCountOrder = 'asc';
       controller.divisionSort = 'king';
-      controller.lastnameSort = 'T-Rex';
+      controller.lastnameSort = 'asc';
       controller.pageNumber = 9999;
       // when
-      controller.sortByParticipationCount('desc');
+      controller.sortByParticipationCount();
 
       // then
       assert.strictEqual(controller.participationCountOrder, 'desc');
