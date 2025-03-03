@@ -1,5 +1,11 @@
+@use 'pix-design-tokens/breakpoints';
+
 .top-banners {
   & > * {
     margin-bottom: var(--pix-spacing-2x);
+  }
+
+  @include breakpoints.device-is('mobile') {
+    margin-top: var(--pix-spacing-2x);
   }
 }
