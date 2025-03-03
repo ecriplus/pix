@@ -101,7 +101,7 @@ const save = async function (campaigns, dependencies = { skillRepository }) {
         latestCreatedCampaign.externalIdType = params.type;
       }
 
-      if (latestCreatedCampaign.isAssessment) {
+      if (latestCreatedCampaign.isAssessment || latestCreatedCampaign.isExam) {
         const cappedTubes = await trx('target-profile_tubes')
           .select('tubeId', 'level')
           .where('targetProfileId', campaignAttributes.targetProfileId);

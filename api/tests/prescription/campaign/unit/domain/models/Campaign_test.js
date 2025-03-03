@@ -6,6 +6,7 @@ import {
   DeletedCampaignError,
 } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import { Campaign } from '../../../../../../src/prescription/campaign/domain/models/Campaign.js';
+import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { ObjectValidationError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, expect } from '../../../../../test-helper.js';
 
@@ -178,6 +179,43 @@ describe('Campaign', function () {
         campaign.updateFields({ code: expectedCode });
 
         expect(campaign.code).to.equal(expectedCode);
+      });
+    });
+  });
+
+  describe('getters', function () {
+    // eslint-disable-next-line mocha/no-setup-in-describe
+    [
+      {
+        getter: 'isAssessment',
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        isTrueForType: CampaignTypes.ASSESSMENT,
+      },
+      {
+        getter: 'isProfilesCollection',
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        isTrueForType: CampaignTypes.PROFILES_COLLECTION,
+      },
+      {
+        getter: 'isExam',
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        isTrueForType: CampaignTypes.EXAM,
+      },
+    ].forEach(({ getter, isTrueForType }) => {
+      describe('#' + getter, function () {
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        Object.values(CampaignTypes).forEach((campaignType) => {
+          const expected = campaignType === isTrueForType;
+          it(`should return ${expected} when campaign is of type ${campaignType}`, function () {
+            // given
+            const campaign = new Campaign({
+              type: campaignType,
+            });
+
+            // when / then
+            expect(campaign[getter]).to.equal(expected);
+          });
+        });
       });
     });
   });

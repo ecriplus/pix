@@ -70,6 +70,10 @@ class Campaign {
     return this.type === CampaignTypes.ASSESSMENT;
   }
 
+  get isExam() {
+    return this.type === CampaignTypes.EXAM;
+  }
+
   get isProfilesCollection() {
     return this.type === CampaignTypes.PROFILES_COLLECTION;
   }
