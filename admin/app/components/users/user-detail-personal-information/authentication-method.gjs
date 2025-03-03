@@ -216,34 +216,30 @@ export default class AuthenticationMethod extends Component {
       <h2 class="page-section__title">Méthodes de connexion</h2>
     </header>
 
-    <ul>
-      <li class="authentication-method__connexions-information">
-        Date de dernière connexion :
+    <ul class="authentication-method__connexions-information">
+      <li>
+        <strong>Date de dernière connexion :</strong>
         {{#if @user.lastLoggedAt}}{{dayjsFormat @user.lastLoggedAt "DD/MM/YYYY"}}{{/if}}
       </li>
       {{#if @user.emailConfirmedAt}}
-        <li class="authentication-method__connexions-information">
-          Adresse e-mail confirmée le :
+        <li>
+          <strong>Adresse e-mail confirmée le :</strong>
           {{dayjsFormat @user.emailConfirmedAt "DD/MM/YYYY"}}
         </li>
       {{else}}
-        <li class="authentication-method__connexions-information">
-          Adresse e-mail non confirmée
+        <li>
+          <strong>Adresse e-mail non confirmée</strong>
+        </li>
+      {{/if}}
+      {{#if this.hasPixAuthenticationMethod}}
+        <li>
+          <strong>{{t
+              "components.users.user-detail-personal-information.authentication-method.should-change-password-status"
+            }}</strong>
+          {{#if this.shouldChangePassword}}{{t "common.words.yes"}}{{else}}{{t "common.words.no"}}{{/if}}
         </li>
       {{/if}}
     </ul>
-
-    {{#if this.hasPixAuthenticationMethod}}
-      <br />
-      <ul>
-        <li class="authentication-method__connexions-information">
-          {{t "components.users.user-detail-personal-information.authentication-method.should-change-password-status"}}
-          {{#if this.shouldChangePassword}}{{t "common.words.yes"}}{{else}}{{t "common.words.no"}}{{/if}}
-        </li>
-      </ul>
-    {{/if}}
-
-    <br />
 
     <table class="authentication-method-table">
 
