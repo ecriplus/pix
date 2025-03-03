@@ -36,6 +36,33 @@ export const membershipRoutes = [
     },
   },
   {
+    method: 'POST',
+    path: '/api/memberships/me/disable',
+    config: {
+      pre: [
+        {
+          method: securityPreHandlers.checkUserIsAdminInOrganization,
+          assign: 'isAdminInOrganization',
+        },
+        {
+          method: securityPreHandlers.checkUserCanDisableHisOrganizationMembership,
+          assign: 'canDisableHisOrganizationMembership',
+        },
+      ],
+      validate: {
+        payload: Joi.object({
+          organizationId: identifiersType.organizationId,
+        }),
+      },
+      handler: (request, h) => membershipController.disableOwnOrganizationMembership(request, h),
+      tags: ['api'],
+      notes: [
+        "- **Cette route est restreinte aux utilisateurs authentifiés en tant qu'administrateur de l'organisation\n" +
+          "- Elle permet de se retirer d'une organisation",
+      ],
+    },
+  },
+  {
     method: 'GET',
     path: '/api/organizations/{id}/memberships',
     config: {
