@@ -1,10 +1,14 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { PGSQL_FOREIGN_KEY_VIOLATION_ERROR } from '../../../../../db/pgsql-errors.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
+import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
+import { CertificationAssessment } from '../../domain/models/CertificationAssessment.js';
 import { CertificationOfficer } from '../../domain/models/CertificationOfficer.js';
 import { JurySession, statuses } from '../../domain/models/JurySession.js';
+import { JurySessionCounters } from '../../domain/read-models/JurySessionCounters.js';
 
 const COLUMNS = Object.freeze([
   'sessions.*',
@@ -56,6 +60,55 @@ const findPaginatedFiltered = async function ({ filters, page }) {
   };
 };
 
+const getCounters = async function ({ sessionId }) {
+  const knex = DomainTransaction.getConnection();
+
+  const { startedCoursesCount } = await knex
+    .from('certification-courses')
+    .innerJoin('assessments', 'certification-courses.id', 'assessments.certificationCourseId')
+    .where('assessments.state', '=', CertificationAssessment.states.STARTED)
+    .andWhere('certification-courses.sessionId', '=', sessionId)
+    .count('assessments.state as startedCoursesCount')
+    .first();
+
+  const { certificationWithScoringError } = await knex
+    .from('certification-courses')
+    .innerJoin(
+      'certification-courses-last-assessment-results',
+      'certification-courses.id',
+      'certification-courses-last-assessment-results.certificationCourseId',
+    )
+    .innerJoin(
+      'assessment-results',
+      'assessment-results.id',
+      'certification-courses-last-assessment-results.lastAssessmentResultId',
+    )
+    .where('certification-courses.sessionId', '=', sessionId)
+    .andWhere('assessment-results.status', '=', AssessmentResult.status.ERROR)
+    .count('assessment-results.id as certificationWithScoringError')
+    .first();
+
+  const issueReports = await knex
+    .from('certification-courses')
+    .innerJoin(
+      'certification-issue-reports',
+      'certification-courses.id',
+      'certification-issue-reports.certificationCourseId',
+    )
+    .where('certification-courses.sessionId', '=', sessionId)
+    .select(
+      'certification-issue-reports.category',
+      'certification-issue-reports.subcategory',
+      'certification-issue-reports.resolvedAt',
+    );
+
+  return _toJurySessionCountersDomainModel({ startedCoursesCount, certificationWithScoringError, issueReports });
+};
+
+const _toJurySessionCountersDomainModel = ({ startedCoursesCount, certificationWithScoringError, issueReports }) => {
+  return new JurySessionCounters({ startedCoursesCount, certificationWithScoringError, issueReports });
+};
+
 const assignCertificationOfficer = async function ({ id, assignedCertificationOfficerId }) {
   try {
     const updatedLines = await knex('sessions').where({ id }).update({ assignedCertificationOfficerId });
@@ -73,7 +126,7 @@ const assignCertificationOfficer = async function ({ id, assignedCertificationOf
   }
 };
 
-export { assignCertificationOfficer, findPaginatedFiltered, get };
+export { assignCertificationOfficer, findPaginatedFiltered, get, getCounters };
 
 function _toDomain(jurySessionFromDB) {
   let assignedCertificationOfficer = null;
