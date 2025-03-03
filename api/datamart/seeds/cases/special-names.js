@@ -1,11 +1,13 @@
 import {
+  certificationCourseIdGenerator,
   COMPETENCES,
-  generateCertifCourseId,
   generateCompetenceLevel,
   generatePixScore,
   generateStatus,
   getCertificationDate,
 } from './tools.js';
+
+const generateCertifCourseId = certificationCourseIdGenerator({ startingFrom: 8100000 });
 
 /**
  * A student that has multiple accents in its first name and last name

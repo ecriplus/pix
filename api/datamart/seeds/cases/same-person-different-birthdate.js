@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker';
 
 import {
+  certificationCourseIdGenerator,
   COMPETENCES,
-  generateCertifCourseId,
   generateCompetenceLevel,
   generateFirstName,
   generatePixScore,
@@ -13,6 +13,8 @@ import {
   orgaUAIGenerator,
 } from './tools.js';
 
+const generateCertifCourseIdStudentOne = certificationCourseIdGenerator({ startingFrom: 5100000 });
+const generateCertifCourseIdStudentTwo = certificationCourseIdGenerator({ startingFrom: 6100000 });
 const generateINE = nationalStudentIdGenerator({ ineSuffix: 'BB' });
 const generateOrgaUai = orgaUAIGenerator();
 
@@ -28,7 +30,7 @@ export default function () {
   const sameLastName = faker.person.lastName();
 
   const studentOneBase = {
-    certification_courses_id: generateCertifCourseId(),
+    certification_courses_id: generateCertifCourseIdStudentOne(),
     organization_uai: sameUAI,
     national_student_id: sameINE,
     last_name: sameLastName,
@@ -40,7 +42,7 @@ export default function () {
   };
 
   const studentTwoBase = {
-    certification_courses_id: generateCertifCourseId(),
+    certification_courses_id: generateCertifCourseIdStudentTwo(),
     organization_uai: sameUAI,
     national_student_id: sameINE,
     last_name: sameLastName,
