@@ -96,7 +96,6 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-campai
           state: 'started',
           method: 'FLASH',
         });
-        databaseBuilder.factory.buildCompetenceEvaluation({ assessmentId, competenceId, userId });
         await databaseBuilder.commit();
 
         clock = sinon.useFakeTimers({
