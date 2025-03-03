@@ -18,7 +18,7 @@
   "transitionTexts": [
     {
       "grainId": "f7e0ec28-06a2-4915-bcd7-53d5f5e3b9a7",
-      "content": "<p>Max va bientôt entrer au collège. <br>Ses parents souhaitent lui offrir son premier smartphone mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina, demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion.&nbsp;📺"
+      "content": "<p>Max va bientôt entrer au collège. <br>Ses parents souhaitent lui offrir son premier smartphone, mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina, demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion.&nbsp;📺"
     },
     {
       "grainId": "fab2ec90-8350-4f51-8700-336bcd3acade",
@@ -77,7 +77,7 @@
               {
                 "id": "3",
                 "content": "<p>Il permet de vérifier que son enfant a fait ses devoirs scolaires.</p>",
-                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le contrôle parental ne concerne pas la surveillance de la santé.<br>Regardez à nouveau la conversation et réessayez !</p>"
+                "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le contrôle parental ne concerne pas le suivi de la scolarité.<br>Regardez à nouveau la conversation et réessayez !</p>"
               }
             ],
             "solution": "1"
@@ -134,22 +134,22 @@
                 {
                   "id": "ca55f260-188e-4292-91fe-80866319f0eb",
                   "type": "qcu",
-                  "instruction": "<p>Quelle fonctionnalité de contrôle parental est adaptée ?</p>",
+                  "instruction": "<p>Quelle fonctionnalité de contrôle parental est adaptée pour Rachel ?</p>",
                   "proposals": [
                     {
                       "id": "1",
                       "content": "<p>la gestion du temps d’écran</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><span class=\"feedback__state\"></span></p><p>La gestion du temps d’écran permet de mettre des limites de temps d’utilisation.<br>Elle ne permet pas de bloquer l’accès à un contenu en fonction de l’âge du fils de Rachel.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><span class=\"feedback__state\"></span></p><p>La gestion du temps d’écran permet de mettre des limites de temps d’utilisation.<br>Elle ne permet pas de bloquer l’accès à un contenu en fonction de l’âge de son enfant.</p>"
                     },
                     {
                       "id": "2",
                       "content": "<p>le filtrage des contenus</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse !&nbsp;🎉</span></p><p>Le filtrage de contenus permet de bloquer l’accès aux contenus en fonction de l’âge de l’enfant.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Bonne réponse !&nbsp;🎉</span></p><p>Le filtrage de contenus permet de bloquer l’accès aux contenus en fonction de l’âge de son enfant.</p>"
                     },
                     {
                       "id": "3",
                       "content": "<p>le suivi de l’activité en ligne</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le suivi de l’activité en ligne permet de suivre l’utilisation de la console. <br>Il ne permet pas de bloquer l’accès à un contenu en fonction de l’âge du fils de Rachel.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le suivi de l’activité en ligne permet de suivre l’utilisation de la console. <br>Il ne permet pas de bloquer l’accès à un contenu en fonction de l’âge de son enfant.</p>"
                     }
                   ],
                   "solution": "2"
@@ -161,12 +161,12 @@
                 {
                   "id": "e45eb37c-86b0-4643-ae61-39582618d6f1",
                   "type": "text",
-                  "content": "<p>Thibault trouve que son fils utilise son smartphone trop tard les soirs de semaine. Il souhaite verrouiller l’appareil après 20h.</p>"
+                  "content": "<p>Thibault trouve que son fils utilise son smartphone trop tard les soirs de semaine. Il souhaite verrouiller l’appareil à partir de 20h.</p>"
                 },
                 {
                   "id": "a175d292-6210-4a62-9e0a-4caf588e7bee",
                   "type": "qcu",
-                  "instruction": "<p>Quelle fonctionnalité de contrôle parental est adaptée ?</p>",
+                  "instruction": "<p>Quelle fonctionnalité de contrôle parental est adaptée pour Thibault ?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -176,12 +176,12 @@
                     {
                       "id": "2",
                       "content": "<p>le filtrage des contenus</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple.<br> Il ne permet pas de définir des temps de blocage du smartphone du fils de Thibault.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple.<br> Il ne permet pas de définir des temps de blocage du smartphone de son enfant.</p>"
                     },
                     {
                       "id": "3",
                       "content": "<p>le suivi de l’activité en ligne</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le suivi de l’activité en ligne permet de suivre l’utilisation du smartphone. <br>Il ne permet pas de définir des temps de blocage du smartphone du fils de Thibault.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Le suivi de l’activité en ligne permet de suivre l’utilisation du smartphone. <br>Il ne permet pas de définir des temps de blocage du smartphone de son enfant.</p>"
                     }
                   ],
                   "solution": "1"
@@ -193,22 +193,22 @@
                 {
                   "id": "7196fed5-37d9-4e5c-8d47-4baf6702129b",
                   "type": "text",
-                  "content": "<p>Nassira souhaite connaître le temps passé par son fils sur son réseau social favori.</p>"
+                  "content": "<p>Nassira souhaite connaître le temps passé par son fils sur les réseaux sociaux.</p>"
                 },
                 {
                   "id": "93effa58-b217-46c7-bb73-9b447a56902e",
                   "type": "qcu",
-                  "instruction": "<p>Quelle fonctionnalité de contrôle parental est adaptée ?</p>",
+                  "instruction": "<p>Quelle fonctionnalité de contrôle parental est adaptée pour Nassira ?</p>",
                   "proposals": [
                     {
                       "id": "1",
                       "content": "<p>la gestion du temps d’écran</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>La gestion du temps d’écran permet de mettre des limites de temps d’utilisation.<br>Elle ne permet pas de connaître le temps d’utilisation d’une application par le fils de Nassira.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>La gestion du temps d’écran permet de mettre des limites de temps d’utilisation.<br>Elle ne permet pas de connaître le temps d’utilisation d’une application par son enfant.</p>"
                     },
                     {
                       "id": "2",
                       "content": "<p>le filtrage des contenus</p>",
-                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><span class=\"feedback__state\"></span></p><p>Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple. <br>Il ne permet pas de connaître le temps d’utilisation d’une application par le fils de Nassira.</p>"
+                      "feedback": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p><span class=\"feedback__state\"></span></p><p>Le filtrage de contenus permet de bloquer l’accès à des contenus en fonction de l’âge par exemple. <br>Il ne permet pas de connaître le temps d’utilisation d’une application par son enfant.</p>"
                     },
                     {
                       "id": "3",
@@ -262,7 +262,7 @@
           "element": {
             "id": "37ff3330-b8df-47e0-80d2-e382671dc3dd",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><details><summary>Indice 1</summary><p>Le contrôle parental fait partie des paramètres de l’appareil à activer. ⚙️</p></details><details><summary>Indice 2</summary><p>Ici, le contrôle parental s’active sur l’appareil de l’enfant.</p></details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://www.image-heberg.fr/files/1733406264146730843.gif\"></iframe></details>"
+            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><details><summary>Indice 1</summary><p>Le contrôle parental fait partie des paramètres de l’appareil. ⚙️</p></details><details><summary>Indice 2</summary><p>Ici, le contrôle parental s’active sur l’appareil de l’enfant.</p></details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://www.image-heberg.fr/files/1733406264146730843.gif\"></iframe></details>"
           }
         },
         {
@@ -307,7 +307,7 @@
           "element": {
             "id": "2589ce3b-fe26-42fc-aadc-eba80302f0da",
             "type": "text",
-            "content": "<p>Après cette image, vous devrez sélectionner où Nina peut activer des options de contrôle parental pour accompagner Max.</p>"
+            "content": "<p>Après avoir regardé cette image, vous devrez sélectionner sur quels appareils et quelles plateformes en ligne Nina peut activer des options de contrôle parental.</p>"
           }
         },
         {
@@ -364,7 +364,7 @@
               },
               {
                 "id": "4",
-                "content": "<p>sur Whatsapp</p>"
+                "content": "<p>sur WhatsApp</p>"
               },
               {
                 "id": "5",
@@ -377,7 +377,7 @@
             ],
             "feedbacks": {
               "valid": "<p><span class=\"feedback__state\">Bonne réponse !&nbsp;🎉</span></p><p>Pour accompagner au mieux Max, Nina peut activer des options de contrôle parental sur les appareils et les plateformes en ligne.</p>",
-              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>Attention, même si Whastapp propose des options de confidentialité, il ne propose pas d’options de contrôle parental. Relisez l’infographie et essayez à nouveau !</p>"
+              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span></p><p>🤔 Peut-être que vous n'avez pas séletionné toutes les bonnes réponses. Relisez l’infographie et essayez à nouveau !</p>"
             },
             "solutions": [
               "1",
@@ -404,7 +404,7 @@
               {
                 "id": "1",
                 "content": "<p>oui</p>",
-                "feedback": "<p>Bravo ! ✨ Vous pouvez aussi regarder sur les sites et plateformes en ligne si ils proposent des options contrôle parental.</p>"
+                "feedback": "<p>Bravo ! ✨ Vous pouvez aussi regarder sur les sites et plateformes en ligne s'ils proposent des options de contrôle parental.</p>"
               },
               {
                 "id": "2",
