@@ -7,6 +7,7 @@
 
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationIssueReport, CertificationIssueReportCategory } from '../../../../shared/domain/models/index.js';
+import { ChallengeAlreadyAnsweredError } from '../../../evaluation/domain/errors.js';
 
 /**
  * @param {Object} params
@@ -23,6 +24,7 @@ export const validateLiveAlert = async ({
   assessmentRepository,
   issueReportCategoryRepository,
   certificationIssueReportRepository,
+  answerRepository,
 }) => {
   const certificationChallengeLiveAlert =
     await certificationChallengeLiveAlertRepository.getOngoingBySessionIdAndUserId({
@@ -33,6 +35,12 @@ export const validateLiveAlert = async ({
   if (!certificationChallengeLiveAlert) {
     throw new NotFoundError('There is no ongoing alert for this user');
   }
+
+  await _dismissLiveAlertForAnsweredChallenge({
+    certificationChallengeLiveAlert,
+    certificationChallengeLiveAlertRepository,
+    answerRepository,
+  });
 
   const assessment = await assessmentRepository.get(certificationChallengeLiveAlert.assessmentId);
 
@@ -59,3 +67,25 @@ export const validateLiveAlert = async ({
     certificationChallengeLiveAlert,
   });
 };
+
+async function _dismissLiveAlertForAnsweredChallenge({
+  certificationChallengeLiveAlert,
+  certificationChallengeLiveAlertRepository,
+  answerRepository,
+}) {
+  const candidateAnswers = await answerRepository.findByAssessment(certificationChallengeLiveAlert.assessmentId);
+
+  const answeredAlertedChallenge = candidateAnswers.find(
+    (answer) => answer.challengeId === certificationChallengeLiveAlert.challengeId,
+  );
+
+  if (answeredAlertedChallenge) {
+    certificationChallengeLiveAlert.dismiss();
+
+    await certificationChallengeLiveAlertRepository.save({
+      certificationChallengeLiveAlert,
+    });
+
+    throw new ChallengeAlreadyAnsweredError();
+  }
+}

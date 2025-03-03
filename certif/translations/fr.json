@@ -486,7 +486,10 @@
             "dismiss-alert-button": "Refuser le signalement",
             "validate-alert-button": "Valider le signalement"
           },
-          "error-handling-live-alert": "Une erreur a eu lieu. Merci de réessayer ultérieurement.",
+          "error-handling": {
+            "challenge-already-answered": "Le candidat a répondu à cette question. Cette alerte sera ignorée.",
+            "miscellaneous": "Une erreur a eu lieu. Merci de réessayer ultérieurement."
+          },
           "handled": {
             "close-button-label": "Fermer la fenêtre de confirmation",
             "close-button-text": "Fermer",

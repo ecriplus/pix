@@ -435,7 +435,7 @@ module('Acceptance | Session supervising', function (hooks) {
             const candidateId = 12345;
             server.patch(
               `/sessions/${sessionId}/candidates/${candidateId}/validate-live-alert`,
-              () => new Response(400),
+              () => new Response(400, {}, { errors: [{ code: 'SOME_CODE' }] }),
             );
             this.sessionForSupervising = server.create('session-for-supervising', {
               id: sessionId,

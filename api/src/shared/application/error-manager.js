@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import * as translations from '../../../translations/index.js';
 import { AdminMemberError } from '../../authorization/domain/errors.js';
+import { ChallengeAlreadyAnsweredError } from '../../certification/evaluation/domain/errors.js';
 import {
   CsvWithNoSessionDataError,
   SendingEmailToRefererError,
@@ -174,6 +175,10 @@ function _mapToHttpError(error) {
 
   if (error instanceof DeletedCampaignError) {
     return new HttpErrors.PreconditionFailedError(error.message);
+  }
+
+  if (error instanceof ChallengeAlreadyAnsweredError) {
+    return new HttpErrors.UnprocessableEntityError(error.message, error.code);
   }
 
   if (error instanceof CsvWithNoSessionDataError) {

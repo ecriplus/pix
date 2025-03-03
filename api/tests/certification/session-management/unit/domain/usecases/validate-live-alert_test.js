@@ -1,3 +1,4 @@
+import { ChallengeAlreadyAnsweredError } from '../../../../../../src/certification/evaluation/domain/errors.js';
 import { validateLiveAlert } from '../../../../../../src/certification/session-management/domain/usecases/validate-live-alert.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
 import {
@@ -12,6 +13,7 @@ describe('Unit | UseCase | validate-live-alert', function () {
   let assessmentRepository;
   let issueReportCategoryRepository;
   let certificationIssueReportRepository;
+  let answerRepository;
 
   beforeEach(function () {
     certificationChallengeLiveAlertRepository = {
@@ -29,6 +31,10 @@ describe('Unit | UseCase | validate-live-alert', function () {
 
     certificationIssueReportRepository = {
       save: sinon.stub(),
+    };
+
+    answerRepository = {
+      findByAssessment: sinon.stub(),
     };
   });
 
@@ -57,6 +63,52 @@ describe('Unit | UseCase | validate-live-alert', function () {
   });
 
   describe('when the liveAlert exists', function () {
+    describe('when an answer for the alerted challenge exists', function () {
+      it('should throw an error', async function () {
+        // given
+        const sessionId = 123;
+        const userId = 456;
+        const assessmentId = 789;
+        const questionNumber = 2;
+        const challengeId = 'rec123';
+
+        const onGoingLiveAlert = domainBuilder.buildCertificationChallengeLiveAlert({
+          questionNumber,
+          challengeId,
+          assessmentId,
+          status: CertificationChallengeLiveAlertStatus.ONGOING,
+        });
+
+        certificationChallengeLiveAlertRepository.getOngoingBySessionIdAndUserId
+          .withArgs({
+            sessionId,
+            userId,
+          })
+          .resolves(onGoingLiveAlert);
+
+        answerRepository.findByAssessment
+          .withArgs(onGoingLiveAlert.assessmentId)
+          .resolves([domainBuilder.buildAnswer({ challengeId })]);
+
+        const error = await catchErr(validateLiveAlert)({
+          certificationChallengeLiveAlertRepository,
+          issueReportCategoryRepository,
+          certificationIssueReportRepository,
+          answerRepository,
+          sessionId,
+          userId,
+        });
+
+        // then
+        expect(onGoingLiveAlert.status).equals(CertificationChallengeLiveAlertStatus.DISMISSED);
+        expect(certificationChallengeLiveAlertRepository.save).to.have.been.calledWith({
+          certificationChallengeLiveAlert: onGoingLiveAlert,
+        });
+
+        expect(error).to.be.instanceOf(ChallengeAlreadyAnsweredError);
+      });
+    });
+
     it('should update the LiveAlert and create a new resolved CertificationIssueReport', async function () {
       // given
       const sessionId = 123;
@@ -97,6 +149,8 @@ describe('Unit | UseCase | validate-live-alert', function () {
         })
         .resolves(issueReportCategory);
 
+      answerRepository.findByAssessment.withArgs(liveAlert.assessmentId).resolves([]);
+
       const validatedLiveAlert = domainBuilder.buildCertificationChallengeLiveAlert({
         assessmentId: liveAlert.assessmentId,
         challengeId: liveAlert.challengeId,
@@ -110,6 +164,7 @@ describe('Unit | UseCase | validate-live-alert', function () {
         issueReportCategoryRepository,
         assessmentRepository,
         certificationIssueReportRepository,
+        answerRepository,
         subcategory,
         sessionId,
         userId,

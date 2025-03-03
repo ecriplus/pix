@@ -1,8 +1,8 @@
 import { DomainError } from '../../../shared/domain/errors.js';
 
 class ChallengeAlreadyAnsweredError extends DomainError {
-  constructor(message) {
-    super(message);
+  constructor() {
+    super('La question a déjà été répondue.', 'ALREADY_ANSWERED_ERROR');
   }
 }
 

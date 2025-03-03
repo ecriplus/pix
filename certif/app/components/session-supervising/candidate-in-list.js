@@ -165,7 +165,7 @@ export default class CandidateInList extends Component {
       this.displayedModal = Modals.HandledLiveAlertSuccess;
     } catch (error) {
       const errorMessage = this.intl.t(
-        'pages.session-supervising.candidate-in-list.handle-live-alert-modal.error-handling-live-alert',
+        'pages.session-supervising.candidate-in-list.handle-live-alert-modal.error-handling.miscellaneous',
       );
       this.pixToast.sendErrorNotification({ message: errorMessage });
     }
@@ -183,9 +183,14 @@ export default class CandidateInList extends Component {
       this.isLiveAlertValidated = true;
       this.displayedModal = Modals.HandledLiveAlertSuccess;
     } catch (err) {
-      const errorMessage = this.intl.t(
-        'pages.session-supervising.candidate-in-list.handle-live-alert-modal.error-handling-live-alert',
-      );
+      const errorMessage =
+        err.errors[0].code === 'ALREADY_ANSWERED_ERROR'
+          ? this.intl.t(
+              'pages.session-supervising.candidate-in-list.handle-live-alert-modal.error-handling.challenge-already-answered',
+            )
+          : this.intl.t(
+              'pages.session-supervising.candidate-in-list.handle-live-alert-modal.error-handling.miscellaneous',
+            );
       this.pixToast.sendErrorNotification({ message: errorMessage });
     }
   }
@@ -207,7 +212,7 @@ export default class CandidateInList extends Component {
     } catch (error) {
       this.pixToast.sendErrorNotification({
         message: this.intl.t(
-          'pages.session-supervising.candidate-in-list.handle-live-alert-modal.error-handling-live-alert',
+          'pages.session-supervising.candidate-in-list.handle-live-alert-modal.error-handling.miscellaneous',
         ),
       });
     } finally {
