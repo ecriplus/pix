@@ -1,7 +1,7 @@
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
-import { fn, get } from '@ember/helper';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import { fn, get, uniqueId } from '@ember/helper';
 import { action } from '@ember/object';
-import { guidFor } from '@ember/object/internals';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -16,7 +16,6 @@ import EmptyState from '../ui/empty-state';
 import ActionBar from './action-bar';
 import EditStudentNumberModal from './modal/edit-student-number-modal';
 import SupLearnerFilters from './sup-learner-filters';
-import TableHeaders from './table-headers';
 import TableRow from './table-row';
 
 export default class ListItems extends Component {
@@ -43,22 +42,6 @@ export default class ListItems extends Component {
 
   get showCheckbox() {
     return this.currentUser.isAdminInOrganization;
-  }
-
-  get headerId() {
-    return guidFor(this) + 'header';
-  }
-
-  get actionBarId() {
-    return guidFor(this) + 'actionBar';
-  }
-
-  get paginationId() {
-    return guidFor(this) + 'pagination';
-  }
-
-  get filtersId() {
-    return guidFor(this) + 'filters';
   }
 
   get hasStudents() {
@@ -121,127 +104,143 @@ export default class ListItems extends Component {
   <template>
     <ImportInformationBanner @importDetail={{@importDetail}} />
 
-    <div id={{this.filtersId}} />
+    {{#let (uniqueId) (uniqueId) (uniqueId) (uniqueId) as |actionBarId paginationId headerId filtersId|}}
+      <div id={{filtersId}} />
+      <SelectableList
+        @items={{@students}}
+        as |toggleStudent isStudentSelected allSelected someSelected toggleAll selectedStudents reset|
+      >
+        <PixTable
+          @variant="orga"
+          @caption={{t "pages.sup-organization-participants.table.description"}}
+          @data={{@students}}
+          class="table"
+          @onRowClick={{@onClickLearner}}
+        >
+          <:columns as |student context|>
+            <TableRow
+              @showCheckbox={{this.showCheckbox}}
+              @student={{student}}
+              @context={{context}}
+              @isStudentSelected={{isStudentSelected student}}
+              @openEditStudentNumberModal={{this.openEditStudentNumberModal}}
+              @isAdminInOrganization={{this.currentUser.isAdminInOrganization}}
+              @onToggleStudent={{fn this.addStopPropagationOnFunction (fn toggleStudent student)}}
+              @hideCertifiableDate={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
+              @allSelected={{allSelected}}
+              @someSelected={{someSelected}}
+              @lastnameSort={{@lastnameSort}}
+              @hasStudents={{this.hasStudents}}
+              @participationCountOrder={{@participationCountOrder}}
+              @onToggleAll={{toggleAll}}
+              @sortByLastname={{fn this.addResetOnFunction @sortByLastname reset}}
+              @sortByParticipationCount={{fn this.addResetOnFunction @sortByParticipationCount reset}}
+              @hasComputeOrganizationLearnerCertificabilityEnabled={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
+            />
+          </:columns>
+        </PixTable>
 
-    <div class="panel">
-      <table class="table content-text content-text--small">
-        <caption class="screen-reader-only">{{t "pages.sup-organization-participants.table.description"}}</caption>
-        <thead id={{this.headerId}} />
-        <tbody>
-          <SelectableList @items={{@students}}>
-            <:manager as |allSelected someSelected toggleAll selectedStudents reset|>
-              <InElement @destinationId={{this.headerId}}>
-                <TableHeaders
-                  @allSelected={{allSelected}}
-                  @someSelected={{someSelected}}
-                  @showCheckbox={{this.showCheckbox}}
-                  @lastnameSort={{@lastnameSort}}
-                  @hasStudents={{this.hasStudents}}
-                  @participationCountOrder={{@participationCountOrder}}
-                  @onToggleAll={{toggleAll}}
-                  @sortByLastname={{fn this.addResetOnFunction @sortByLastname reset}}
-                  @sortByParticipationCount={{fn this.addResetOnFunction @sortByParticipationCount reset}}
-                  @hasComputeOrganizationLearnerCertificabilityEnabled={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
-                />
-              </InElement>
-              {{#if someSelected}}
-                <InElement @destinationId={{this.actionBarId}}>
-                  <ActionBar @count={{selectedStudents.length}} @openDeletionModal={{this.openDeletionModal}} />
-                  <DeletionModal
-                    @title={{t
-                      "pages.sup-organization-participants.deletion-modal.title"
-                      count=selectedStudents.length
-                      firstname=(get selectedStudents "0.firstName")
-                      lastname=(get selectedStudents "0.lastName")
-                      htmlSafe=true
-                    }}
-                    @showModal={{this.showDeletionModal}}
-                    @count={{selectedStudents.length}}
-                    @onTriggerAction={{fn this.deleteStudents selectedStudents reset}}
-                    @onCloseModal={{this.closeDeletionModal}}
-                  >
-                    <:content>
-                      <p>{{t
-                          "pages.sup-organization-participants.deletion-modal.content.header"
-                          count=selectedStudents.length
-                        }}</p>
-                      <p>{{t
-                          "pages.sup-organization-participants.deletion-modal.content.main-participation-prevent"
-                          count=selectedStudents.length
-                        }}</p>
-                      <p>{{t
-                          "pages.sup-organization-participants.deletion-modal.content.main-campaign-prevent"
-                          count=selectedStudents.length
-                        }}</p>
-                      <p>{{t
-                          "pages.sup-organization-participants.deletion-modal.content.main-participation-access"
-                          count=selectedStudents.length
-                        }}</p>
-                      <p>{{t
-                          "pages.sup-organization-participants.deletion-modal.content.main-new-campaign-access"
-                          count=selectedStudents.length
-                        }}</p>
-                      <p><strong>{{t
-                            "pages.sup-organization-participants.deletion-modal.content.footer"
-                            count=selectedStudents.length
-                          }}</strong></p>
-                    </:content>
-                  </DeletionModal>
-                </InElement>
-              {{/if}}
-              <InElement @destinationId={{this.paginationId}} @waitForElement={{true}}>
-                <PixPagination @pagination={{@students.meta}} @onChange={{reset}} @locale={{this.intl.primaryLocale}} />
-              </InElement>
-              <InElement @destinationId={{this.filtersId}}>
-                <SupLearnerFilters
-                  @studentsCount={{@students.meta.rowCount}}
-                  @onFilter={{fn this.addResetOnFunction @onFilter reset}}
-                  @searchFilter={{@searchFilter}}
-                  @studentNumberFilter={{@studentNumberFilter}}
-                  @certificabilityFilter={{@certificabilityFilter}}
-                  @groupsFilter={{@groupsFilter}}
-                  @onResetFilter={{fn this.addResetOnFunction @onResetFilter reset}}
-                  @groupsOptions={{this.groups}}
-                  @isLoadingGroups={{this.isLoadingGroups}}
-                />
-              </InElement>
-            </:manager>
-            <:item as |student toggleStudent isStudentSelected|>
-              <TableRow
-                @showCheckbox={{this.showCheckbox}}
-                @student={{student}}
-                @isStudentSelected={{isStudentSelected}}
-                @onClickLearner={{fn @onClickLearner student.id}}
-                @openEditStudentNumberModal={{this.openEditStudentNumberModal}}
-                @isAdminInOrganization={{this.currentUser.isAdminInOrganization}}
-                @onToggleStudent={{fn this.addStopPropagationOnFunction toggleStudent}}
-                @hideCertifiableDate={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
-              />
-            </:item>
-          </SelectableList>
-        </tbody>
-      </table>
+        {{#if (eq @students.meta.participantCount 0)}}
+          <EmptyState
+            @infoText={{t "pages.sup-organization-participants.empty-state.no-participants"}}
+            @actionText={{t "pages.sup-organization-participants.empty-state.no-participants-action"}}
+          />
+        {{else if (not @students)}}
+          <div class="table__empty content-text">
+            {{t "pages.sup-organization-participants.table.empty"}}
+          </div>
+        {{/if}}
 
-      {{#if (eq @students.meta.participantCount 0)}}
-        <EmptyState
-          @infoText={{t "pages.sup-organization-participants.empty-state.no-participants"}}
-          @actionText={{t "pages.sup-organization-participants.empty-state.no-participants-action"}}
+        {{#if someSelected}}
+          <SupActionBar
+            @destinationId={{actionBarId}}
+            @count={{selectedStudents.length}}
+            @selectedStudents={{selectedStudents}}
+            @openDeletionModal={{this.openDeletionModal}}
+            @showDeletionModal={{this.showDeletionModal}}
+            @onTriggerAction={{fn this.deleteStudents selectedStudents reset}}
+            @closeDeletionModal={{this.closeDeletionModal}}
+          />
+        {{/if}}
+
+        <PixPaginationControl @destinationId={{paginationId}} @onChange={{reset}} @pagination={{@students.meta}} />
+
+        <Filters
+          @destinationId={{filtersId}}
+          @studentsCount={{@students.meta.rowCount}}
+          @onFilter={{fn this.addResetOnFunction @onFilter reset}}
+          @searchFilter={{@searchFilter}}
+          @studentNumberFilter={{@studentNumberFilter}}
+          @certificabilityFilter={{@certificabilityFilter}}
+          @groupsFilter={{@groupsFilter}}
+          @onResetFilter={{fn this.addResetOnFunction @onResetFilter reset}}
+          @groupsOptions={{this.groups}}
+          @isLoadingGroups={{this.isLoadingGroups}}
         />
-      {{else if (not @students)}}
-        <div class="table__empty content-text">
-          {{t "pages.sup-organization-participants.table.empty"}}
-        </div>
-      {{/if}}
-    </div>
 
-    <EditStudentNumberModal
-      @student={{this.selectedStudent}}
-      @display={{this.isShowingEditStudentNumberModal}}
-      @onClose={{this.closeEditStudentNumberModal}}
-      @onSubmit={{this.onSaveStudentNumber}}
-    />
+      </SelectableList>
+      <div id={{actionBarId}} />
+      <div id={{paginationId}} />
 
-    <div id={{this.actionBarId}} />
-    <div id={{this.paginationId}} />
+      <EditStudentNumberModal
+        @student={{this.selectedStudent}}
+        @display={{this.isShowingEditStudentNumberModal}}
+        @onClose={{this.closeEditStudentNumberModal}}
+        @onSubmit={{this.onSaveStudentNumber}}
+      />
+    {{/let}}
   </template>
 }
+
+const Filters = <template>
+  <InElement @destinationId={{@destinationId}}>
+    <SupLearnerFilters
+      @studentsCount={{@studentsCount}}
+      @onFilter={{@onFilter}}
+      @searchFilter={{@searchFilter}}
+      @studentNumberFilter={{@studentNumberFilter}}
+      @certificabilityFilter={{@certificabilityFilter}}
+      @groupsFilter={{@groupsFilter}}
+      @onResetFilter={{@onResetFilter}}
+      @groupsOptions={{@groupsOptions}}
+      @isLoadingGroups={{@isLoadingGroups}}
+    />
+  </InElement>
+</template>;
+
+const PixPaginationControl = <template>
+  <InElement @destinationId={{@destinationId}} @waitForElement={{true}}>
+    <PixPagination @pagination={{@pagination}} @onChange={{@onChange}} @locale={{this.intl.primaryLocale}} />
+  </InElement>
+</template>;
+
+const SupActionBar = <template>
+  <InElement @destinationId={{@destinationId}}>
+    <ActionBar @count={{@count}} @openDeletionModal={{@openDeletionModal}} />
+    <DeletionModal
+      @title={{t
+        "pages.sup-organization-participants.deletion-modal.title"
+        count=@count
+        firstname=(get @selectedStudents "0.firstName")
+        lastname=(get @selectedStudents "0.lastName")
+        htmlSafe=true
+      }}
+      @showModal={{@showDeletionModal}}
+      @count={{@count}}
+      @onTriggerAction={{@onTriggerAction}}
+      @onCloseModal={{@closeDeletionModal}}
+    >
+      <:content>
+        <p>{{t "pages.sup-organization-participants.deletion-modal.content.header" count=@count}}</p>
+        <p>{{t
+            "pages.sup-organization-participants.deletion-modal.content.main-participation-prevent"
+            count=@count
+          }}</p>
+        <p>{{t "pages.sup-organization-participants.deletion-modal.content.main-campaign-prevent" count=@count}}</p>
+        <p>{{t "pages.sup-organization-participants.deletion-modal.content.main-participation-access" count=@count}}</p>
+        <p>{{t "pages.sup-organization-participants.deletion-modal.content.main-new-campaign-access" count=@count}}</p>
+        <p><strong>{{t "pages.sup-organization-participants.deletion-modal.content.footer" count=@count}}</strong></p>
+      </:content>
+    </DeletionModal>
+  </InElement>
+</template>;
