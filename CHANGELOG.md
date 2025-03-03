@@ -1,5 +1,19 @@
 # Pix Changelog
 
+## v5.55.0 (03/03/2025)
+
+
+### :rocket: Amélioration
+- [#11537](https://github.com/1024pix/pix/pull/11537) [FEATURE] Corriger l'espace entre le menu et l'alert en format mobile (PIX-16665).
+
+### :building_construction: Tech
+- [#11529](https://github.com/1024pix/pix/pull/11529) [TECH] Migration de la route GET /api/admin/certification-centers/{certificationCenterId}/certification-center-memberships (PIX-16758).
+- [#11527](https://github.com/1024pix/pix/pull/11527) [TECH] Enregistrer l'historique des réplications des données froides (PIX-16710)(PIX-16712).
+
+### :arrow_up: Montée de version
+- [#11543](https://github.com/1024pix/pix/pull/11543) [BUMP] Update dependency @1024pix/pix-ui to ^54.12.1 (orga).
+- [#11491](https://github.com/1024pix/pix/pull/11491) [BUMP] Update dependency @1024pix/pix-ui to ^54.10.0 (admin).
+
 ## v5.54.0 (28/02/2025)
 
 
