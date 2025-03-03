@@ -45,7 +45,7 @@ export default class EnrolledCandidates extends Component {
   }
 
   get caption() {
-    if (this.args.shouldDisplayPrescriptionScoStudentRegistrationFeature) {
+    if (this.args.shouldDisplayScoStudentRegistration) {
       return this.intl.t('pages.sessions.detail.candidates.list.without-details-description');
     }
     return this.intl.t('pages.sessions.detail.candidates.list.with-details-description');
@@ -333,7 +333,7 @@ export default class EnrolledCandidates extends Component {
         {{t 'pages.sessions.detail.candidates.list.title'}}
         ({{@certificationCandidates.length}})
       </h3>
-      {{#if @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
+      {{#if @shouldDisplayScoStudentRegistration}}
         <PixButtonLink @route='authenticated.sessions.add-student' @model={{@sessionId}}>
           {{t 'pages.sessions.detail.candidates.list.actions.inscription-multiple.label'}}
         </PixButtonLink>
@@ -370,7 +370,7 @@ export default class EnrolledCandidates extends Component {
               {{dayjsFormat candidate.birthdate 'DD/MM/YYYY'}}
             </:cell>
           </PixTableColumn>
-          {{#if @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
+          {{#if @shouldDisplayScoStudentRegistration}}
             <PixTableColumn @context={{context}}>
               <:header>
                 {{t 'common.labels.candidate.birth-city'}}
@@ -388,7 +388,7 @@ export default class EnrolledCandidates extends Component {
               </:cell>
             </PixTableColumn>
           {{/if}}
-          {{#unless @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
+          {{#unless @shouldDisplayScoStudentRegistration}}
             <PixTableColumn @context={{context}} class='table__column'>
               <:header>
                 {{t 'common.forms.certification-labels.email-results'}}
@@ -447,7 +447,7 @@ export default class EnrolledCandidates extends Component {
             </:header>
             <:cell>
               <div class='certification-candidates-actions'>
-                {{#unless @shouldDisplayPrescriptionScoStudentRegistrationFeature}}
+                {{#unless @shouldDisplayScoStudentRegistration}}
                   <PixButton
                     @variant='tertiary'
                     @triggerAction={{fn this.openCertificationCandidateDetailsModal candidate}}

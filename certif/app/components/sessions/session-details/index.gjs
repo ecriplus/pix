@@ -51,7 +51,7 @@ export default class SessionDetails extends Component {
     return this.hasOneOrMoreCandidates;
   }
 
-  get shouldDisplayPrescriptionScoStudentRegistrationFeature() {
+  get shouldDisplayScoStudentRegistration() {
     return this.currentUser.currentAllowedCertificationCenterAccess.isScoManagingStudents;
   }
 
