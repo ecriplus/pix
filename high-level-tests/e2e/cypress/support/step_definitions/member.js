@@ -14,15 +14,15 @@ Then(`je suis redirigé vers la page pour rejoindre l'organisation`, () => {
 
 Then(`je vois {int} invitation\(s\) en attente`, (numberOfInvitations) => {
   cy.contains(`Invitations (${numberOfInvitations})`).click();
-  cy.get('[aria-label="Invitation en attente"]').should(
+  cy.findAllByRole('row').should(
     "have.lengthOf",
-    numberOfInvitations
+    numberOfInvitations + 1
   );
 });
 
 Then(`je vois {int} membre\(s\)`, (numberOfMembers) => {
   cy.contains(`Membres (${numberOfMembers})`).click();
-  cy.get('[aria-label="Membre"]').should("have.lengthOf", numberOfMembers);
+  cy.findAllByRole('row').should("have.lengthOf", numberOfMembers + 1);
 });
 
 When(`j'invite {string} à rejoindre l'organisation`, (emailAddresses) => {
