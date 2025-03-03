@@ -68,7 +68,9 @@ module('Unit | Component | session-supervising/candidate-in-list', function (hoo
 
         // then
         sinon.assert.calledOnceWithExactly(component.pixToast.sendErrorNotification, {
-          message: t('pages.session-supervising.candidate-in-list.handle-live-alert-modal.error-handling.other'),
+          message: t(
+            'pages.session-supervising.candidate-in-list.handle-live-alert-modal.error-handling.miscellaneous',
+          ),
         });
         assert.ok(true);
       });

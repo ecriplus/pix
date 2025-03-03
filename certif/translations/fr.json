@@ -488,7 +488,7 @@
           },
           "error-handling": {
             "challenge-already-answered": "Le candidat a répondu à cette question. Cette alerte sera ignorée.",
-            "other": "Une erreur a eu lieu. Merci de réessayer ultérieurement."
+            "miscellaneous": "Une erreur a eu lieu. Merci de réessayer ultérieurement."
           },
           "handled": {
             "close-button-label": "Fermer la fenêtre de confirmation",

@@ -487,8 +487,8 @@
             "validate-alert-button": "Valider le signalement"
           },
           "error-handling": {
-            "challenge-already-answered": "Le candidat a répondu à cette question. Cette alerte sera ignorée.",
-            "other": "Une erreur a eu lieu. Merci de réessayer ultérieurement."
+            "challenge-already-answered": "The candidate has already answered this question. This alert will therefore be ignored.",
+            "miscellaneous": "An error occured. Please try again later."
           },
           "handled": {
             "close-button-label": "Fermer la fenêtre de confirmation",
