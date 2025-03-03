@@ -16,6 +16,7 @@ import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.
 
 describe('Unit | Identity Access Management | Domain | UseCases | authenticate-user', function () {
   let refreshTokenRepository;
+  let lastUserApplicationConnectionsRepository;
   let tokenService;
   let userRepository;
   let userLoginRepository;
@@ -48,6 +49,9 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     userLoginRepository = {
       updateLastLoggedAt: sinon.stub(),
       findByUserId: sinon.stub(),
+    };
+    lastUserApplicationConnectionsRepository = {
+      upsert: sinon.stub(),
     };
     authenticationMethodRepository = {
       updateLastLoggedAtByIdentityProvider: sinon.stub(),
@@ -84,6 +88,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           pixAuthenticationService,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
           refreshTokenRepository,
           audience,
           requestedApplication,
@@ -114,6 +119,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           pixAuthenticationService,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
           adminMemberRepository,
           refreshTokenRepository,
           audience,
@@ -153,6 +159,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           pixAuthenticationService,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
           adminMemberRepository,
           refreshTokenRepository,
           audience,
@@ -205,6 +212,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           pixAuthenticationService,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
           authenticationMethodRepository,
           adminMemberRepository,
           refreshTokenRepository,
@@ -257,6 +265,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
             refreshTokenRepository,
             userRepository,
             userLoginRepository,
+            lastUserApplicationConnectionsRepository,
             authenticationMethodRepository,
             audience,
             requestedApplication,
@@ -301,6 +310,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       tokenService,
       userRepository,
       userLoginRepository,
+      lastUserApplicationConnectionsRepository,
       authenticationMethodRepository,
       audience,
       requestedApplication,
@@ -341,6 +351,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       tokenService,
       userRepository,
       userLoginRepository,
+      lastUserApplicationConnectionsRepository,
       authenticationMethodRepository,
       audience,
       requestedApplication,
@@ -351,6 +362,11 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.have.been.calledWithExactly({
       userId: user.id,
       identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
+    });
+    expect(lastUserApplicationConnectionsRepository.upsert).to.have.been.calledWithExactly({
+      userId: user.id,
+      application: requestedApplication.applicationName,
+      lastLoggedAt: new Date(),
     });
   });
 
@@ -366,6 +382,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       password,
       userRepository,
       userLoginRepository,
+      lastUserApplicationConnectionsRepository,
       refreshTokenRepository,
       pixAuthenticationService,
       audience,
@@ -386,6 +403,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       password,
       userRepository,
       userLoginRepository,
+      lastUserApplicationConnectionsRepository,
       refreshTokenRepository,
       pixAuthenticationService,
       audience,
@@ -437,6 +455,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           tokenService,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
           authenticationMethodRepository,
           emailRepository,
           emailValidationDemandRepository,
@@ -486,6 +505,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           tokenService,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
           authenticationMethodRepository,
           emailRepository,
           audience,
@@ -533,6 +553,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         tokenService,
         userRepository,
         userLoginRepository,
+        lastUserApplicationConnectionsRepository,
         authenticationMethodRepository,
         emailRepository,
         audience,
@@ -573,6 +594,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         password: 'Password1234',
         userRepository,
         userLoginRepository,
+        lastUserApplicationConnectionsRepository,
         pixAuthenticationService,
         refreshTokenRepository,
         tokenService,
@@ -610,6 +632,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           tokenService,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
           authenticationMethodRepository,
           audience,
           requestedApplication,
@@ -648,6 +671,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
             refreshTokenRepository,
             userRepository,
             userLoginRepository,
+            lastUserApplicationConnectionsRepository,
             authenticationMethodRepository,
             audience,
             requestedApplication,
@@ -684,6 +708,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
             tokenService,
             userRepository,
             userLoginRepository,
+            lastUserApplicationConnectionsRepository,
             authenticationMethodRepository,
             audience,
             requestedApplication,
