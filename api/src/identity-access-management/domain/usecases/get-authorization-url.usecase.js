@@ -1,18 +1,18 @@
 /**
  * @typedef {function} getAuthorizationUrl
  * @param {Object} params
- * @param {string} params.audience
  * @param {string} params.identityProvider
+ * @param {RequestedApplication} params.requestedApplication
  * @param {OidcAuthenticationServiceRegistry} params.oidcAuthenticationServiceRegistry
  * @return {Promise<string>}
  */
-async function getAuthorizationUrl({ target, identityProvider, oidcAuthenticationServiceRegistry }) {
+async function getAuthorizationUrl({ identityProvider, requestedApplication, oidcAuthenticationServiceRegistry }) {
   await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
   await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProvider);
 
   const oidcAuthenticationService = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
     identityProviderCode: identityProvider,
-    target,
+    requestedApplication,
   });
 
   return oidcAuthenticationService.getAuthorizationUrl();

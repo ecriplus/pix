@@ -1,5 +1,6 @@
 import { tokenController } from '../../../../src/identity-access-management/application/token/token.controller.js';
 import { usecases } from '../../../../src/identity-access-management/domain/usecases/index.js';
+import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Application | Controller | Token', function () {
@@ -39,9 +40,9 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
     const accessToken = 'jwt.access.token';
     const username = 'user@email.com';
     const password = 'user_password';
-    const scope = 'pix-orga';
     const source = 'pix';
     const audience = 'https://app.pix.fr';
+    const requestedApplication = new RequestedApplication('app');
 
     /**
      * @see https://www.oauth.com/oauth2-servers/access-tokens/access-token-response/
@@ -62,7 +63,6 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
             grant_type: 'password',
             username,
             password,
-            scope,
           },
           state: {
             locale: localeFromCookie,
@@ -71,7 +71,7 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
 
         sinon
           .stub(usecases, 'authenticateUser')
-          .withArgs({ username, password, scope, source, localeFromCookie, audience })
+          .withArgs({ username, password, source, localeFromCookie, audience, requestedApplication })
           .resolves({ accessToken, refreshToken, expirationDelaySeconds });
 
         const tokenServiceStub = { extractUserId: sinon.stub() };
@@ -111,7 +111,7 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
             'x-forwarded-proto': 'https',
             'x-forwarded-host': 'app.pix.fr',
           },
-          payload: { grant_type: 'refresh_token', refresh_token: refreshToken, scope },
+          payload: { grant_type: 'refresh_token', refresh_token: refreshToken },
         };
 
         sinon

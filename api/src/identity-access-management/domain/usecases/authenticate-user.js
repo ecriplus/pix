@@ -7,7 +7,6 @@ import { RefreshToken } from '../models/RefreshToken.js';
 
 const authenticateUser = async function ({
   password,
-  scope,
   source,
   username,
   localeFromCookie,
@@ -21,52 +20,52 @@ const authenticateUser = async function ({
   emailRepository,
   emailValidationDemandRepository,
   audience,
+  requestedApplication,
 }) {
   try {
-    const foundUser = await pixAuthenticationService.getUserByUsernameAndPassword({
+    const user = await pixAuthenticationService.getUserByUsernameAndPassword({
       username,
       password,
       userRepository,
     });
 
-    if (foundUser.shouldChangePassword) {
-      const passwordResetToken = tokenService.createPasswordResetToken(foundUser.id);
+    if (user.shouldChangePassword) {
+      const passwordResetToken = tokenService.createPasswordResetToken(user.id);
       throw new UserShouldChangePasswordError(undefined, passwordResetToken);
     }
 
-    await _checkUserAccessScope(scope, foundUser, adminMemberRepository);
+    await _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository });
 
-    const refreshToken = RefreshToken.generate({ userId: foundUser.id, source, audience });
+    const refreshToken = RefreshToken.generate({ userId: user.id, source, audience });
     await refreshTokenRepository.save({ refreshToken });
 
     const { accessToken, expirationDelaySeconds } = await tokenService.createAccessTokenFromUser({
-      userId: foundUser.id,
+      userId: user.id,
       source,
       audience,
     });
 
-    foundUser.setLocaleIfNotAlreadySet(localeFromCookie);
-    if (foundUser.hasBeenModified) {
-      await userRepository.update({ id: foundUser.id, locale: foundUser.locale });
+    user.setLocaleIfNotAlreadySet(localeFromCookie);
+    if (user.hasBeenModified) {
+      await userRepository.update({ id: user.id, locale: user.locale });
     }
-    const userLogin = await userLoginRepository.findByUserId(foundUser.id);
-    if (foundUser.email && userLogin?.shouldSendConnectionWarning()) {
-      const validationToken = !foundUser.emailConfirmedAt
-        ? await emailValidationDemandRepository.save(foundUser.id)
-        : null;
+
+    const userLogin = await userLoginRepository.findByUserId(user.id);
+    if (user.email && userLogin?.shouldSendConnectionWarning()) {
+      const validationToken = !user.emailConfirmedAt ? await emailValidationDemandRepository.save(user.id) : null;
       await emailRepository.sendEmailAsync(
         createWarningConnectionEmail({
-          locale: foundUser.locale,
-          email: foundUser.email,
-          firstName: foundUser.firstName,
+          locale: user.locale,
+          email: user.email,
+          firstName: user.firstName,
           validationToken,
         }),
       );
     }
-    await userLoginRepository.updateLastLoggedAt({ userId: foundUser.id });
+    await userLoginRepository.updateLastLoggedAt({ userId: user.id });
 
     await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
-      userId: foundUser.id,
+      userId: user.id,
       identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
     });
 
@@ -80,12 +79,12 @@ const authenticateUser = async function ({
   }
 };
 
-async function _checkUserAccessScope(scope, user, adminMemberRepository) {
-  if (scope === PIX_ORGA.SCOPE && !user.isLinkedToOrganizations()) {
+async function _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository }) {
+  if (requestedApplication.isPixOrga && !user.isLinkedToOrganizations()) {
     throw new ForbiddenAccess(PIX_ORGA.NOT_LINKED_ORGANIZATION_MSG);
   }
 
-  if (scope === PIX_ADMIN.SCOPE) {
+  if (requestedApplication.isPixAdmin) {
     const adminMember = await adminMemberRepository.get({ userId: user.id });
     if (!adminMember?.hasAccessToAdminScope) {
       throw new ForbiddenAccess(PIX_ADMIN.NOT_ALLOWED_MSG);

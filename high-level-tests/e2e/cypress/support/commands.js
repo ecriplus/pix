@@ -31,7 +31,7 @@ function setEmberSimpleAuthSession(response) {
 Cypress.Commands.add("login", (username, password, url) => {
   cy.intercept("/api/users/me").as("getCurrentUser");
   cy.request({
-    url: `${Cypress.env('API_URL')}/api/token`,
+    url: `${Cypress.env('APP_URL')}/api/token`,
     method: 'POST',
     form: true,
     body: getLoginBody(username, password, 'mon-pix'),
@@ -44,7 +44,7 @@ Cypress.Commands.add("login", (username, password, url) => {
 Cypress.Commands.add('loginOrga', (username, password) => {
   cy.intercept('/api/prescription/prescribers/**').as('getCurrentUser');
   cy.request({
-    url: `${Cypress.env('API_URL')}/api/token`,
+    url: `${Cypress.env('ORGA_URL')}/api/token`,
     method: 'POST',
     form: true,
     body: getLoginBody(username, password, 'pix-orga'),

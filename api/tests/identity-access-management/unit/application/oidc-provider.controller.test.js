@@ -53,7 +53,6 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
 
       // then
       expect(usecases.authenticateOidcUser).to.have.been.calledWithExactly({
-        target: undefined,
         code,
         identityProviderCode: identityProvider,
         nonce: 'nonce',
@@ -77,27 +76,6 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
         // then
         expect(error).to.be.an.instanceOf(BadRequestError);
         expect(error.message).to.equal('Required cookie "state" is missing');
-      });
-    });
-
-    context('when authentication is complete', function () {
-      it('returns PIX access token and logout url uuid', async function () {
-        // given
-        usecases.authenticateOidcUser.resolves({
-          pixAccessToken,
-          logoutUrlUUID: '0208f50b-f612-46aa-89a0-7cdb5fb0d312',
-          isAuthenticationComplete: true,
-        });
-
-        // when
-        const response = await oidcProviderController.authenticateOidcUser(request, hFake);
-
-        // then
-        const expectedResult = {
-          access_token: pixAccessToken,
-          logout_url_uuid: '0208f50b-f612-46aa-89a0-7cdb5fb0d312',
-        };
-        expect(response.source).to.deep.equal(expectedResult);
       });
     });
 
@@ -214,6 +192,10 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
     it('returns the generated authorization url', async function () {
       // given
       const request = {
+        headers: {
+          'x-forwarded-proto': 'https',
+          'x-forwarded-host': 'app.pix.fr',
+        },
         query: { identity_provider: 'OIDC' },
         yar: { set: sinon.stub(), commit: sinon.stub() },
       };
@@ -228,8 +210,8 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
 
       //then
       expect(usecases.getAuthorizationUrl).to.have.been.calledWithExactly({
-        target: undefined,
         identityProvider: 'OIDC',
+        requestedApplication: new RequestedApplication('app'),
       });
       expect(request.yar.set).to.have.been.calledTwice;
       expect(request.yar.set.getCall(0)).to.have.been.calledWithExactly(
@@ -244,71 +226,6 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
       expect(response.statusCode).to.equal(200);
       expect(response.source).to.deep.equal({
         redirectTarget: 'https://idp.net/oidc/authorization',
-      });
-    });
-  });
-
-  describe('#getIdentityProviders', function () {
-    it('returns the list of oidc identity providers', async function () {
-      // given
-      sinon.stub(usecases, 'getReadyIdentityProviders').returns([
-        {
-          code: 'SOME_OIDC_PROVIDER',
-          source: 'some_oidc_provider',
-          isVisible: true,
-          organizationName: 'Some OIDC Provider',
-          slug: 'some-oidc-provider',
-          shouldCloseSession: false,
-        },
-      ]);
-
-      // when
-      const response = await oidcProviderController.getIdentityProviders({ query: { target: null } }, hFake);
-
-      // then
-      expect(usecases.getReadyIdentityProviders).to.have.been.called;
-      expect(response.statusCode).to.equal(200);
-      expect(response.source.data).to.have.lengthOf(1);
-      expect(response.source.data).to.deep.contain({
-        type: 'oidc-identity-providers',
-        id: 'some-oidc-provider',
-        attributes: {
-          code: 'SOME_OIDC_PROVIDER',
-          source: 'some_oidc_provider',
-          'organization-name': 'Some OIDC Provider',
-          slug: 'some-oidc-provider',
-          'should-close-session': false,
-          'is-visible': true,
-        },
-      });
-    });
-  });
-
-  describe('#getRedirectLogoutUrl', function () {
-    it('calls the oidc authentication service retrieved from his code to generate the redirect logout url', async function () {
-      // given
-      const request = {
-        auth: { credentials: { userId: '123' } },
-        query: {
-          identity_provider: 'OIDC',
-          logout_url_uuid: '1f3dbb71-f399-4c1c-85ae-0a863c78aeea',
-        },
-      };
-
-      sinon.stub(usecases, 'getRedirectLogoutUrl').resolves('https://idp.net/oidc/logout?id_token_hint=ID_TOKEN');
-
-      // when
-      const response = await oidcProviderController.getRedirectLogoutUrl(request, hFake);
-
-      // then
-      expect(usecases.getRedirectLogoutUrl).to.have.been.calledWithExactly({
-        identityProvider: 'OIDC',
-        logoutUrlUUID: '1f3dbb71-f399-4c1c-85ae-0a863c78aeea',
-        userId: '123',
-      });
-      expect(response.statusCode).to.equal(200);
-      expect(response.source).to.deep.equal({
-        redirectLogoutUrl: 'https://idp.net/oidc/logout?id_token_hint=ID_TOKEN',
       });
     });
   });

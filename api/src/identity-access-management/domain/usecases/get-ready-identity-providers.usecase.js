@@ -1,14 +1,14 @@
 /**
  * @typedef {function} getReadyIdentityProviders
  * @param {Object} params
- * @param {string} [params.audience=app]
+ * @param {RequestedApplication} params.requestedApplication
  * @param {OidcAuthenticationServiceRegistry} params.oidcAuthenticationServiceRegistry
  * @return {Promise<OidcAuthenticationService[]|null>}
  */
-const getReadyIdentityProviders = async function ({ target = 'app', oidcAuthenticationServiceRegistry }) {
+const getReadyIdentityProviders = async function ({ requestedApplication, oidcAuthenticationServiceRegistry }) {
   await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
 
-  if (target === 'admin') {
+  if (requestedApplication?.isPixAdmin) {
     return oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesForPixAdmin();
   }
 

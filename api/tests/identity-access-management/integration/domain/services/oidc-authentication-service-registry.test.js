@@ -1,6 +1,6 @@
-import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { OidcAuthenticationServiceRegistry } from '../../../../../src/identity-access-management/domain/services/oidc-authentication-service-registry.js';
 import { oidcProviderRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/oidc-provider-repository.js';
+import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { InvalidIdentityProviderError } from '../../../../../src/shared/domain/errors.js';
 import { catchErrSync, databaseBuilder, expect } from '../../../../test-helper.js';
 
@@ -164,15 +164,16 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
       expect(service.code).to.equal('OIDC_EXAMPLE');
     });
 
-    describe('when the target is admin', function () {
+    describe('when the requestedApplication is admin', function () {
       it('returns a ready OIDC provider for Pix Admin', async function () {
         // given
+        const requestedApplication = new RequestedApplication('admin');
         await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
 
         // when
         const service = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
           identityProviderCode: 'OIDC_EXAMPLE_FOR_PIX_ADMIN',
-          target: PIX_ADMIN.TARGET,
+          requestedApplication,
         });
 
         // then

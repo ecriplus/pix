@@ -1,4 +1,4 @@
-import { PIX_ADMIN, PIX_CERTIF, PIX_ORGA } from '../../../../../src/authorization/domain/constants.js';
+import { PIX_ADMIN, PIX_ORGA } from '../../../../../src/authorization/domain/constants.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { createWarningConnectionEmail } from '../../../../../src/identity-access-management/domain/emails/create-warning-connection.email.js';
 import {
@@ -8,6 +8,7 @@ import {
 import { RefreshToken } from '../../../../../src/identity-access-management/domain/models/RefreshToken.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { authenticateUser } from '../../../../../src/identity-access-management/domain/usecases/authenticate-user.js';
+import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { AdminMember } from '../../../../../src/shared/domain/models/AdminMember.js';
@@ -72,6 +73,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         const scope = PIX_ORGA.SCOPE;
         const user = new User({ email: userEmail, memberships: [] });
         const audience = 'https://orga.pix.fr';
+        const requestedApplication = new RequestedApplication('orga');
         pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
 
         // when
@@ -84,6 +86,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           userLoginRepository,
           refreshTokenRepository,
           audience,
+          requestedApplication,
         });
 
         // then
@@ -98,6 +101,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         const scope = PIX_ADMIN.SCOPE;
         const user = new User({ email: userEmail });
         const audience = 'https://admin.pix.fr';
+        const requestedApplication = new RequestedApplication('admin');
 
         pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
         adminMemberRepository.get.withArgs({ userId: user.id }).resolves();
@@ -113,6 +117,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           adminMemberRepository,
           refreshTokenRepository,
           audience,
+          requestedApplication,
         });
 
         // then
@@ -125,6 +130,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         const scope = PIX_ADMIN.SCOPE;
         const user = new User({ email: userEmail });
         const audience = 'https://admin.pix.fr';
+        const requestedApplication = new RequestedApplication('admin');
         const adminMember = new AdminMember({
           id: 567,
           userId: user.id,
@@ -150,6 +156,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           adminMemberRepository,
           refreshTokenRepository,
           audience,
+          requestedApplication,
         });
 
         // then
@@ -163,6 +170,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         const source = 'pix';
         const user = new User({ id: 123, email: userEmail });
         const audience = 'https://admin.pix.fr';
+        const requestedApplication = new RequestedApplication('admin');
         const adminMember = new AdminMember({
           id: 567,
           userId: user.id,
@@ -202,6 +210,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           refreshTokenRepository,
           tokenService,
           audience,
+          requestedApplication,
         });
 
         // then
@@ -214,15 +223,15 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       });
     });
 
-    context('when scope is pix-certif', function () {
+    context('when application is Pix Certif', function () {
       context('when user is not linked to any certification centers', function () {
         it('should resolves a valid JWT access token when feature toggle is enabled', async function () {
           // given
-          const scope = PIX_CERTIF.SCOPE;
           const accessToken = 'jwt.access.token';
           const expirationDelaySeconds = 1;
           const source = 'pix';
           const audience = 'https://certif.pix.fr';
+          const requestedApplication = new RequestedApplication('certif');
 
           const user = domainBuilder.buildUser({
             email: userEmail,
@@ -231,7 +240,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
 
           pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
 
-          const refreshToken = { value: 'jwt.refresh.token', userId: '456', scope, audience };
+          const refreshToken = { value: 'jwt.refresh.token', userId: '456', audience };
           sinon.stub(RefreshToken, 'generate').returns(refreshToken);
 
           tokenService.createAccessTokenFromUser
@@ -242,7 +251,6 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           await authenticateUser({
             username: userEmail,
             password,
-            scope,
             source,
             pixAuthenticationService,
             tokenService,
@@ -251,6 +259,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
             userLoginRepository,
             authenticationMethodRepository,
             audience,
+            requestedApplication,
           });
 
           // then
@@ -272,6 +281,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     const expirationDelaySeconds = 1;
     const user = domainBuilder.buildUser({ email: userEmail });
     const audience = 'https://certif.pix.fr';
+    const requestedApplication = new RequestedApplication('certif');
 
     pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
     const refreshToken = { value: 'jwt.refresh.token', userId: '456', scope, audience };
@@ -286,7 +296,6 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       username: userEmail,
       password,
       source,
-      scope,
       pixAuthenticationService,
       refreshTokenRepository,
       tokenService,
@@ -294,6 +303,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       userLoginRepository,
       authenticationMethodRepository,
       audience,
+      requestedApplication,
     });
 
     // then
@@ -312,6 +322,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
     const scope = 'mon-pix';
     const expirationDelaySeconds = 1;
     const audience = 'https://certif.pix.fr';
+    const requestedApplication = new RequestedApplication('certif');
 
     const user = domainBuilder.buildUser({ email: userEmail });
     pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
@@ -332,6 +343,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       userLoginRepository,
       authenticationMethodRepository,
       audience,
+      requestedApplication,
     });
 
     // then
@@ -392,6 +404,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         const scope = 'mon-pix';
         const expirationDelaySeconds = 1;
         const audience = 'https://certif.pix.fr';
+        const requestedApplication = new RequestedApplication('certif');
 
         const user = domainBuilder.buildUser({ email: userEmail });
         const userLogins = domainBuilder.identityAccessManagement.buildUserLogin({
@@ -428,6 +441,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           emailRepository,
           emailValidationDemandRepository,
           audience,
+          requestedApplication,
         });
 
         // then
@@ -442,6 +456,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         const scope = 'mon-pix';
         const expirationDelaySeconds = 1;
         const audience = 'https://certif.pix.fr';
+        const requestedApplication = new RequestedApplication('certif');
         const username = 'lorie.amie';
         const user = domainBuilder.buildUser({ username: username });
 
@@ -474,6 +489,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           authenticationMethodRepository,
           emailRepository,
           audience,
+          requestedApplication,
         });
 
         // then
@@ -490,6 +506,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
       const scope = 'mon-pix';
       const expirationDelaySeconds = 1;
       const audience = 'https://certif.pix.fr';
+      const requestedApplication = new RequestedApplication('certif');
 
       const user = domainBuilder.buildUser({ email: userEmail });
       const userLogins = domainBuilder.identityAccessManagement.buildUserLogin({
@@ -519,6 +536,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         authenticationMethodRepository,
         emailRepository,
         audience,
+        requestedApplication,
       });
 
       // then
@@ -576,6 +594,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
         const expirationDelaySeconds = 1;
         const user = domainBuilder.buildUser({ email: userEmail, locale: 'fr-FR' });
         const audience = 'https://app.pix.fr';
+        const requestedApplication = new RequestedApplication('app');
 
         pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
         tokenService.createAccessTokenFromUser.resolves({ accessToken, expirationDelaySeconds });
@@ -593,6 +612,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           userLoginRepository,
           authenticationMethodRepository,
           audience,
+          requestedApplication,
         });
 
         // then
@@ -609,6 +629,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           const scope = 'mon-pix';
           const expirationDelaySeconds = 1;
           const audience = 'https://app.pix.fr';
+          const requestedApplication = new RequestedApplication('app');
           const user = domainBuilder.buildUser({ email: userEmail, locale: null });
           const setLocaleIfNotAlreadySetStub = sinon.stub(user, 'setLocaleIfNotAlreadySet');
 
@@ -629,6 +650,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
             userLoginRepository,
             authenticationMethodRepository,
             audience,
+            requestedApplication,
           });
 
           // then
@@ -644,6 +666,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
           const scope = 'mon-pix';
           const expirationDelaySeconds = 1;
           const audience = 'https://app.pix.fr';
+          const requestedApplication = new RequestedApplication('app');
           const user = domainBuilder.buildUser({ email: userEmail, locale: undefined });
 
           pixAuthenticationService.getUserByUsernameAndPassword.resolves(user);
@@ -663,6 +686,7 @@ describe('Unit | Identity Access Management | Domain | UseCases | authenticate-u
             userLoginRepository,
             authenticationMethodRepository,
             audience,
+            requestedApplication,
           });
 
           // then
