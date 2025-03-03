@@ -1,4 +1,4 @@
-import { clickByName, render as renderScreen } from '@1024pix/ember-testing-library';
+import { clickByName, render as renderScreen, within } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
 import hbs from 'htmlbars-inline-precompile';
 import { module, test } from 'qunit';
@@ -72,8 +72,11 @@ module('Integration | Component |  team/invitation-list', function (hooks) {
     );
 
     // then
-
-    assert.strictEqual(screen.getAllByLabelText('Invitations en attente').length, 2);
+    const table = screen.getByRole('table', { name: t('pages.team-invitations.table.caption') });
+    assert.dom(within(table).getByRole('cell', { name: 'camille.onette@example.net' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: '21/09/2023 - 16:21' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: 'lee.tige@example.net' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: '20/09/2023 - 16:21' })).exists();
   });
 
   module('when the user clicks on the cancel invitation button', function () {
@@ -119,6 +122,31 @@ module('Integration | Component |  team/invitation-list', function (hooks) {
 
       // then
       assert.ok(resendInvitation.calledWith(invitation));
+    });
+  });
+
+  module('when certification center invitation has already been resent', function () {
+    test('disables the resend invitation button', async function (assert) {
+      // given
+      const invitation = store.createRecord('certification-center-invitation');
+
+      invitation.isResendingInvitation = true;
+
+      this.set('invitations', [invitation]);
+      this.set('cancelInvitation', sinon.stub());
+      this.set('resendInvitation', sinon.stub());
+
+      // when
+      const screen = await renderScreen(
+        hbs`<Team::InvitationsList
+  @invitations={{this.invitations}}
+  @onCancelInvitationButtonClicked={{this.cancelInvitation}}
+  @onResendInvitationButtonClicked={{this.resendInvitation}}
+/>`,
+      );
+
+      // then
+      assert.dom(screen.getByRole('button', { name: "Renvoyer l'invitation" })).isDisabled();
     });
   });
 });

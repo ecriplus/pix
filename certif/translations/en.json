@@ -914,9 +914,9 @@
             "enrolled-candidates": "Signed up candidates"
           },
           "row": {
-            "label": "Certification session",
             "session-and-id": "Session {sessionId}"
-          }
+          },
+          "session-caption": "Table listing the sessions of the certification centre. It includes the name and the room of the site where the certification will take place, the unique identifier, the status, the date and time of the session, the name of the supervisor, the number of candidates registered for this session, the certifications passed and the action of being able to delete this session."
         }
       },
       "new": {
@@ -1042,13 +1042,11 @@
         }
       },
       "table": {
+        "caption": "Table listing pending invitations to join the certification centre as a member. It includes the email address of the invited user, the date the invitation was last sent and the actions for resending or deleting the invitation",
         "labels": {
           "actions": "Actions",
           "email-address": "Email address",
           "last-sending-date": "Last sending date"
-        },
-        "row": {
-          "aria-label": "Pending invitations"
         }
       }
     },

@@ -1,14 +1,17 @@
-import { visit } from '@1024pix/ember-testing-library';
+import { visit, within } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
+import setupIntl from '../helpers/setup-intl';
 import { authenticateSession } from '../helpers/test-init';
 
 module('Acceptance | Session List', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks, 'fr');
 
   let certificationPointOfContact;
 
@@ -103,7 +106,8 @@ module('Acceptance | Session List', function (hooks) {
         const screen = await visit('/sessions');
 
         // then
-        assert.strictEqual(screen.getAllByRole('row', { name: 'Session de certification' }).length, 5);
+        const table = screen.getByRole('table', { name: t('pages.sessions.list.table.session-caption') });
+        assert.strictEqual(within(table).getAllByRole('row').length, 6);
       });
 
       test('it should redirect to detail page of clicked session-summary', async function (assert) {
@@ -129,7 +133,9 @@ module('Acceptance | Session List', function (hooks) {
         const screen = await visit('/sessions');
 
         // when
-        await click(screen.getByRole('link', { name: 'Session 123' }));
+        const table = screen.getByRole('table', { name: t('pages.sessions.list.table.session-caption') });
+        const rows = within(table).getAllByRole('row');
+        await click(rows[1]);
 
         // then
         assert.strictEqual(currentURL(), '/sessions/123');

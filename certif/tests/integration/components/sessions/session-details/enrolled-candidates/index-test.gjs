@@ -461,7 +461,7 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
           <EnrolledCandidates
             @sessionId='1'
             @certificationCandidates={{certificationCandidates}}
-            @shouldDisplayPrescriptionScoStudentRegistrationFeature={{true}}
+            @shouldDisplayScoStudentRegistration={{true}}
             @countries={{countries}}
           />
         </template>,
@@ -486,7 +486,7 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
           <EnrolledCandidates
             @sessionId='1'
             @certificationCandidates={{certificationCandidates}}
-            @shouldDisplayPrescriptionScoStudentRegistrationFeature={{true}}
+            @shouldDisplayScoStudentRegistration={{true}}
             @countries={{countries}}
           />
         </template>,
@@ -510,7 +510,7 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
           <EnrolledCandidates
             @sessionId='1'
             @certificationCandidates={{certificationCandidates}}
-            @shouldDisplayPrescriptionScoStudentRegistrationFeature={{false}}
+            @shouldDisplayScoStudentRegistration={{false}}
             @countries={{countries}}
           />
         </template>,
@@ -535,7 +535,7 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
           <EnrolledCandidates
             @sessionId='1'
             @certificationCandidates={{certificationCandidates}}
-            @shouldDisplayPrescriptionScoStudentRegistrationFeature={{false}}
+            @shouldDisplayScoStudentRegistration={{false}}
             @countries={{countries}}
           />
         </template>,

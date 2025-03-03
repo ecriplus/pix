@@ -1,50 +1,13 @@
 @use 'pix-design-tokens/typography';
 
 .add-student-list {
-  margin-top: var(--pix-spacing-6x);
-
-  @extend %pix-body-s;
-
   &__filters {
     display: flex;
     gap: var(--pix-spacing-2x);
     align-items: center;
-    padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
-    background-color: var(--pix-neutral-0);
-  }
+    padding: var(--pix-spacing-8x) var(--pix-spacing-2x);
 
-  thead tr {
-    background: var(--pix-certif-50);
-  }
-
-  tr.add-student-list__row--disabled {
-    &:hover {
-      background: var(--pix-neutral-20);
-      cursor: default;
-    }
-  }
-
-  &__row {
-    &:hover {
-      cursor: pointer;
-    }
-
-    &--disabled {
-      color: var(--pix-neutral-500);
-      background: var(--pix-neutral-20);
-    }
-  }
-
-  th,
-  td {
-    padding-left: 30px;
-    text-align: left;
-  }
-
-  &__column-birthdate { width: 60%; }
-
-  &__checker {
-    margin-right: 16px;
+    @extend %pix-body-s;
   }
 
   &__bottom-action-bar {

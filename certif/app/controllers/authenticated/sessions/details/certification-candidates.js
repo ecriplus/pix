@@ -33,7 +33,7 @@ export default class CertificationCandidatesController extends Controller {
     return certificationCandidatesCount > 0;
   }
 
-  get shouldDisplayPrescriptionScoStudentRegistrationFeature() {
+  get shouldDisplayScoStudentRegistration() {
     return this.currentUser.currentAllowedCertificationCenterAccess.isScoManagingStudents;
   }
 

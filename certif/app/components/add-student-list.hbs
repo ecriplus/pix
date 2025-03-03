@@ -1,91 +1,91 @@
 {{#if @studentList}}
 
-  <PixBlock class="add-student-list">
-    <div class="add-student-list__filters">
-      <span>{{t "pages.sco.enrol-candidates-in-session.list.table.filter.title"}}</span>
-      <PixMultiSelect
-        @emptyMessage={{this.emptyMessage}}
-        @id="add-student-list__multi-select"
-        @onChange={{this.selectDivision}}
-        @placeholder={{t "pages.sco.enrol-candidates-in-session.list.table.filter.placeholder"}}
-        @isSearchable={{true}}
-        @screenReaderOnly={{true}}
-        @values={{this.selectedDivisions}}
-        @options={{@certificationCenterDivisions}}
-      >
-        <:label>{{t "pages.sco.enrol-candidates-in-session.list.table.filter.extra-information"}}</:label>
-        <:default as |option|>{{option.label}}</:default>
-      </PixMultiSelect>
-    </div>
+  <div class="add-student-list__filters">
+    <span>{{t "pages.sco.enrol-candidates-in-session.list.table.filter.title"}}</span>
+    <PixMultiSelect
+      @emptyMessage={{this.emptyMessage}}
+      @id="add-student-list__multi-select"
+      @onChange={{this.selectDivision}}
+      @placeholder={{t "pages.sco.enrol-candidates-in-session.list.table.filter.placeholder"}}
+      @isSearchable={{true}}
+      @screenReaderOnly={{true}}
+      @values={{this.selectedDivisions}}
+      @options={{@certificationCenterDivisions}}
+    >
+      <:label>{{t "pages.sco.enrol-candidates-in-session.list.table.filter.extra-information"}}</:label>
+      <:default as |option|>{{option.label}}</:default>
+    </PixMultiSelect>
+  </div>
 
-    <div class="table">
-      <table>
-        <thead>
-          <tr>
-            <th class="table__column--checkbox">
-              <PixCheckbox
-                @screenReaderOnly={{true}}
-                @class="add-student-list__checker"
-                @isIndeterminate={{this.hasPartialState}}
-                @checked={{this.hasCheckState}}
-                {{on "click" this.toggleAllItems}}
-                disabled={{this.isDisabled}}
-              >
-                <:label>{{t "pages.candidates.add.actions.select-all.label"}}</:label>
-              </PixCheckbox>
-            </th>
-            <th class="table__column--medium">{{t "pages.sco.enrol-candidates-in-session.list.table.division"}}</th>
-            <th class="table__column--medium">{{t "pages.sco.enrol-candidates-in-session.list.table.last-name"}}</th>
-            <th class="table__column--medium">{{t "pages.sco.enrol-candidates-in-session.list.table.first-name"}}</th>
-            <th class="add-student-list__column-birthdate">
-              {{t "pages.sco.enrol-candidates-in-session.list.table.birthdate"}}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each @studentList as |student|}}
-            {{#if student.isEnrolled}}
-              <tr class="add-student-list__row add-student-list__row--disabled">
-                <td>
-                  <PixCheckbox @screenReaderOnly={{true}} @class="add-student-list__checker" @checked={{true}} disabled>
-                    <:label>
-                      {{t
-                        "pages.candidates.add.actions.selected.label"
-                        firstName=student.firstName
-                        lastName=student.lastName
-                      }}
-                    </:label>
-                  </PixCheckbox>
-                </td>
-                <td>{{student.division}}</td>
-                <td>{{student.lastName}}</td>
-                <td>{{student.firstName}}</td>
-                <td>{{dayjs-format student.birthdate "DD/MM/YYYY"}}</td>
-              </tr>
-            {{else}}
-              <tr class="add-student-list__row" {{on "click" (fn this.toggleItem student)}}>
-                <td>
-                  <PixCheckbox @screenReaderOnly={{true}} @checked={{student.isSelected}}>
-                    <:label>
-                      {{t
-                        "pages.candidates.add.actions.select.label"
-                        firstName=student.firstName
-                        lastName=student.lastName
-                      }}
-                    </:label>
-                  </PixCheckbox>
-                </td>
-                <td>{{student.division}}</td>
-                <td>{{student.lastName}}</td>
-                <td>{{student.firstName}}</td>
-                <td class="add-student-list__column-birthdate">{{dayjs-format student.birthdate "DD/MM/YYYY"}}</td>
-              </tr>
-            {{/if}}
-          {{/each}}
-        </tbody>
-      </table>
-    </div>
-  </PixBlock>
+  <PixTable @data={{@studentList}} @variant="certif">
+    <:columns as |student context|>
+      <PixTableColumn @context={{context}}>
+        <:header>
+          <PixCheckbox
+            @screenReaderOnly={{true}}
+            @isIndeterminate={{this.hasPartialState}}
+            @checked={{this.hasCheckState}}
+            {{on "click" this.toggleAllItems}}
+            disabled={{this.isDisabled}}
+          >
+            <:label>{{t "pages.candidates.add.actions.select-all.label"}}</:label>
+          </PixCheckbox>
+        </:header>
+        <:cell>
+          <PixCheckbox
+            @screenReaderOnly={{true}}
+            @checked={{or student.isSelected student.isEnrolled}}
+            disabled={{student.isEnrolled}}
+            {{on "click" (fn this.toggleItem student)}}
+          >
+            <:label>
+              {{#if student.isEnrolled}}
+                {{t
+                  "pages.candidates.add.actions.selected.label"
+                  firstName=student.firstName
+                  lastName=student.lastName
+                }}
+              {{else}}
+                {{t "pages.candidates.add.actions.select.label" firstName=student.firstName lastName=student.lastName}}
+              {{/if}}
+            </:label>
+          </PixCheckbox>
+        </:cell>
+      </PixTableColumn>
+      <PixTableColumn @context={{context}}>
+        <:header>
+          {{t "pages.sco.enrol-candidates-in-session.list.table.division"}}
+        </:header>
+        <:cell>
+          {{student.division}}
+        </:cell>
+      </PixTableColumn>
+      <PixTableColumn @context={{context}}>
+        <:header>
+          {{t "pages.sco.enrol-candidates-in-session.list.table.last-name"}}
+        </:header>
+        <:cell>
+          {{student.lastName}}
+        </:cell>
+      </PixTableColumn>
+      <PixTableColumn @context={{context}}>
+        <:header>
+          {{t "pages.sco.enrol-candidates-in-session.list.table.first-name"}}
+        </:header>
+        <:cell>
+          {{student.firstName}}
+        </:cell>
+      </PixTableColumn>
+      <PixTableColumn @context={{context}}>
+        <:header>
+          {{t "pages.sco.enrol-candidates-in-session.list.table.birthdate"}}
+        </:header>
+        <:cell>
+          {{dayjs-format student.birthdate "DD/MM/YYYY"}}
+        </:cell>
+      </PixTableColumn>
+    </:columns>
+  </PixTable>
 
   <PixPagination @pagination={{@studentList.meta}} />
 

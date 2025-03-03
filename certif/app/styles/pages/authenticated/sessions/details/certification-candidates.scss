@@ -1,21 +1,5 @@
 @use 'pix-design-tokens/typography';
 
-.certification-candidates-table {
- td,th {
-    padding-left: 16px;
-  }
-
-  th:last-child,td:last-child {
-    padding-right: 0;
-  }
-}
-
-  .table__empty {
-    text-align: center;
-    padding: 2rem 0;
-    box-sizing: border-box;
-  }
-
   .panel-actions  {
     margin-bottom: 1.25rem;
     padding: 1.25rem 2.5rem 0.3rem 2.58rem;
@@ -111,9 +95,9 @@
 
   .panel-header {
     display: flex;
-    align-items: center;
-    color: var(--pix-neutral-500);
-    padding: 20px;
+    padding-bottom: var(--pix-spacing-6x);
+    margin: var(--pix-spacing-6x) 0;
+    border-bottom: 1px solid var(--pix-neutral-100);
 
     &__title {
       display: flex;
@@ -141,31 +125,15 @@
     align-items: center;
     display: flex;
     gap: 0.5rem;
-    width: 100px;
 
     svg {
       width: 1rem;
       height: 1rem;
-      fill: var(--pix-neutral-800);
+      color: var(--pix-neutral-800);
     }
   }
 
   .certification-candidates-actions {
-    position: relative;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 16px;
     gap: var(--pix-spacing-2x);
-
-    &__display-details {
-      margin-right: 16px;
-    }
-
-    &__delete, &__edit {
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }

@@ -1,11 +1,11 @@
 {{page-title this.pageTitle replace=true}}
-{{#if this.shouldDisplayPrescriptionScoStudentRegistrationFeature}}
+{{#if this.shouldDisplayScoStudentRegistration}}
   {{#unless this.hasOneOrMoreCandidates}}
     <CertificationCandidatesSco @sessionId={{this.currentSession.id}} />
   {{/unless}}
   {{#if this.hasOneOrMoreCandidates}}
     <Sessions::SessionDetails::EnrolledCandidates
-      @shouldDisplayPrescriptionScoStudentRegistrationFeature={{this.shouldDisplayPrescriptionScoStudentRegistrationFeature}}
+      @shouldDisplayScoStudentRegistration={{this.shouldDisplayScoStudentRegistration}}
       @sessionId={{this.currentSession.id}}
       @certificationCandidates={{this.certificationCandidates}}
       @reloadCertificationCandidate={{this.reloadCertificationCandidateInController}}
@@ -22,7 +22,7 @@
     @fetchCandidatesImportTemplateAction={{this.fetchCandidatesImportTemplate}}
   />
   <Sessions::SessionDetails::EnrolledCandidates
-    @shouldDisplayPrescriptionScoStudentRegistrationFeature={{this.shouldDisplayPrescriptionScoStudentRegistrationFeature}}
+    @shouldDisplayScoStudentRegistration={{this.shouldDisplayScoStudentRegistration}}
     @sessionId={{this.currentSession.id}}
     @certificationCandidates={{this.certificationCandidates}}
     @reloadCertificationCandidate={{this.reloadCertificationCandidateInController}}

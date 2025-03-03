@@ -20,8 +20,8 @@ export default class Sessions extends Component {
   }
 
   @action
-  goToSessionDetails(sessionId) {
-    this.router.transitionTo('authenticated.sessions.details', sessionId);
+  goToSessionDetails(session) {
+    this.router.transitionTo('authenticated.sessions.details', session.id);
   }
 
   <template>

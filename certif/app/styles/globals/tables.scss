@@ -12,12 +12,6 @@
     overflow: initial;
   }
 
-  &--with-row-clickable tbody tr:hover,
-  &--with-row-clickable tbody tr:focus,
-  &--with-row-clickable tbody tr:active {
-    cursor: pointer;
-  }
-
   &__column {
     width: 16%;
 
@@ -43,10 +37,6 @@
       td, th {
         padding: var(--pix-spacing-4x) var(--pix-spacing-2x);
       }
-    }
-
-    &--checkbox {
-      width: 5%;
     }
   }
 
@@ -79,6 +69,11 @@
         border-bottom: 2px solid var(--pix-neutral-20);
       }
     }
+  }
+
+  &__empty {
+    padding: 2rem 0;
+    text-align: center;
   }
 }
 

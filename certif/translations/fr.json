@@ -914,9 +914,9 @@
             "enrolled-candidates": "Candidats inscrits"
           },
           "row": {
-            "label": "Session de certification",
             "session-and-id": "Session {sessionId}"
-          }
+          },
+          "session-caption": "Tableau listant les sessions du centre de certification. Il comporte le nom et la salle du site où va se passer la certification, l'identifiant unique, le statut, la date et l'heure de la session, le nom du surveillant, le nombre de candidats inscrits à cette session, les certifications passées et l'action de pouvoir supprimer cette session."
         }
       },
       "new": {
@@ -1042,13 +1042,11 @@
         }
       },
       "table": {
+        "caption": "Tableau listant les invitations en attente pour rejoindre le centre de certification en tant que membre. Il comporte l'adresse mail de l'utilisateur invité, la date de dernier envoi de l'invitation et les actions pour renvoyer l'invitation ou la supprimer",
         "labels": {
           "actions": "Actions",
           "email-address": "Adresse email",
           "last-sending-date": "Date de dernier envoi"
-        },
-        "row": {
-          "aria-label": "Invitations en attente"
         }
       }
     },
