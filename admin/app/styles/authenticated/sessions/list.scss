@@ -1,20 +1,12 @@
 .session-list {
   display: flex;
   flex-direction: column;
-
-  &__navbar {
-    display: flex;
-    margin: 20px 10px 10px;
-  }
+  gap: var(--pix-spacing-3x);
 
   &__assigned-to-process-session {
     display: flex;
     justify-content: flex-end;
     margin-bottom: var(--pix-spacing-3x);
-  }
-
-  &__item--align-center {
-    text-align: center;
   }
 }
 

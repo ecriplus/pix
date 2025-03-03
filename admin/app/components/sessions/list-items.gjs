@@ -1,6 +1,9 @@
+import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
@@ -92,123 +95,151 @@ export default class ListItems extends Component {
   }
 
   <template>
-    <div class="content-text content-text--small table-admin__wrapper session-list">
-      <table class="table-admin table-admin__auto-width">
-        <thead>
-          <tr>
-            <th class="table__column table__column--id" id="session-id">ID</th>
-            <th id="certification-center-name">Centre de certification</th>
-            <th id="session-external-id">Identifiant externe</th>
-            <th id="certification-center-category">Catégorie</th>
-            <th id="session-date">Date de session</th>
-            <th id="session-status">Statut</th>
-            <th id="session-finalization-date">Date de finalisation</th>
-            <th id="session-publication-date">Date de publication</th>
-            <th id="session-version">Version de la session</th>
-          </tr>
-          <tr>
-            <td class="table__column table__column--id">
-              <PixInput
-                aria-label="Filtrer les sessions avec un id"
-                type="text"
-                value={{this.searchedId}}
-                oninput={{fn @triggerFiltering "id"}}
-              />
-            </td>
-            <td>
-              <PixInput
-                aria-label="Filtrer les sessions avec le nom d'un centre de certification"
-                type="text"
-                value={{this.searchedCertificationCenterName}}
-                oninput={{fn @triggerFiltering "certificationCenterName"}}
-              />
-            </td>
-            <td>
-              <PixInput
-                aria-label="Filtrer les sessions avec un identifiant externe"
-                type="text"
-                value={{this.searchedCertificationCenterExternalId}}
-                oninput={{fn @triggerFiltering "certificationCenterExternalId"}}
-              />
-            </td>
-            <td>
-              <PixSelect
-                @screenReaderOnly={{true}}
-                class="sessions-list-items__select"
-                @options={{this.certificationCenterTypeOptions}}
-                @onChange={{this.selectCertificationCenterType}}
-                @value={{@certificationCenterType}}
-              >
-                <:label>Filtrer les sessions en sélectionnant un type de centre de certification</:label>
-              </PixSelect>
-            </td>
-            <td></td>
-            <td>
-              <PixSelect
-                @screenReaderOnly={{true}}
-                class="sessions-list-items__select"
-                @options={{this.sessionStatusOptions}}
-                @onChange={{this.selectSessionStatus}}
-                @value={{@status}}
-              >
-                <:label>Filtrer les sessions en sélectionnant un statut</:label>
-              </PixSelect>
-            </td>
-            <td></td>
-            <td></td>
-            <td>
-              <PixSelect
-                @screenReaderOnly={{true}}
-                class="sessions-list-items__select"
-                @options={{this.sessionVersionOptions}}
-                @onChange={{this.selectSessionVersion}}
-                @value={{@version}}
-              >
-                <:label>Filtrer les sessions par leur version</:label>
-              </PixSelect>
-            </td>
-          </tr>
-        </thead>
+    <div class="session-list">
+      <PixFilterBanner @title={{t "common.filters.title"}}>
+        <PixInput
+          aria-label={{t "pages.sessions.list.filters.id.aria-label"}}
+          type="text"
+          value={{this.searchedId}}
+          oninput={{fn @triggerFiltering "id"}}
+          placeholder={{t "pages.sessions.list.filters.id.placeholder"}}
+        />
+        <PixInput
+          aria-label={{t "pages.sessions.list.filters.certification-name.aria-label"}}
+          type="text"
+          value={{this.searchedCertificationCenterName}}
+          oninput={{fn @triggerFiltering "certificationCenterName"}}
+          placeholder={{t "pages.sessions.table.headers.certification-name"}}
+        />
+        <PixInput
+          aria-label={{t "pages.sessions.list.filters.external-id.aria-label"}}
+          type="text"
+          value={{this.searchedCertificationCenterExternalId}}
+          oninput={{fn @triggerFiltering "certificationCenterExternalId"}}
+          placeholder={{t "pages.sessions.table.headers.external-id"}}
+        />
+        <PixSelect
+          @screenReaderOnly={{true}}
+          @options={{this.certificationCenterTypeOptions}}
+          @onChange={{this.selectCertificationCenterType}}
+          @value={{@certificationCenterType}}
+          @placeholder={{t "pages.sessions.table.headers.type"}}
+          @hideDefaultOption={{true}}
+        >
+          <:label>{{t "pages.sessions.list.filters.type.aria-label"}}</:label>
+        </PixSelect>
+        <PixSelect
+          @screenReaderOnly={{true}}
+          @options={{this.sessionStatusOptions}}
+          @onChange={{this.selectSessionStatus}}
+          @value={{@status}}
+          @placeholder={{t "pages.sessions.table.headers.status"}}
+          @hideDefaultOption={{true}}
+        >
+          <:label>{{t "pages.sessions.list.filters.status.aria-label"}}</:label>
+        </PixSelect>
+        <PixSelect
+          @screenReaderOnly={{true}}
+          @options={{this.sessionVersionOptions}}
+          @onChange={{this.selectSessionVersion}}
+          @value={{@version}}
+          @placeholder={{t "pages.sessions.list.filters.version.placeholder"}}
+          @hideDefaultOption={{true}}
+        >
+          <:label>{{t "pages.sessions.list.filters.version.aria-label"}}</:label>
+        </PixSelect>
+      </PixFilterBanner>
 
-        {{#if @sessions}}
-          <tbody>
-            {{#each @sessions as |session|}}
-              <tr aria-label="Informations de la session de certification {{session.id}}">
-                <td headers="session-id" class="table__column table__column--id">
-                  <LinkTo @route="authenticated.sessions.session" @model={{session.id}}>
-                    {{session.id}}
-                  </LinkTo>
-                </td>
-                <td headers="certification-center-name">{{session.certificationCenterName}}</td>
-                <td
-                  class="break-word table__column"
-                  headers="session-external-id"
-                >{{session.certificationCenterExternalId}}</td>
+      {{#if @sessions}}
+        <PixTable @variant="primary" @data={{@sessions}} @caption={{t "pages.sessions.table.caption"}}>
+          <:columns as |session context|>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "pages.sessions.table.headers.id"}}
+              </:header>
+              <:cell>
+                <LinkTo @route="authenticated.sessions.session" @model={{session.id}}>
+                  {{session.id}}
+                </LinkTo>
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "pages.sessions.table.headers.certification-name"}}
+              </:header>
+              <:cell>
+                {{session.certificationCenterName}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}} class="break-word">
+              <:header>
+                {{t "pages.sessions.table.headers.external-id"}}
+              </:header>
+              <:cell>
+                {{session.certificationCenterExternalId}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "pages.sessions.table.headers.type"}}
+              </:header>
+              <:cell>
                 {{#if session.certificationCenterType}}
-                  <td headers="certification-center-category" class="session-list__item--align-center">
-                    {{session.certificationCenterType}}
-                  </td>
+                  {{session.certificationCenterType}}
                 {{else}}
-                  <td headers="certification-center-category" class="session-list__item--align-center">-</td>
+                  -
                 {{/if}}
-                <td headers="session-date">{{formatDate session.date}} à {{session.time}}</td>
-                <td headers="session-status">{{session.displayStatus}}</td>
-                <td headers="session-finalization-date">{{formatDate session.finalizedAt}}</td>
-                <td headers="session-publication-date">{{formatDate session.publishedAt}}</td>
-                <td headers="session-version">{{session.version}}</td>
-              </tr>
-            {{/each}}
-          </tbody>
-        {{/if}}
-      </table>
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "pages.sessions.table.headers.session-date"}}
+              </:header>
+              <:cell>
+                {{formatDate session.date}}
+                à
+                {{session.time}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "pages.sessions.table.headers.status"}}
+              </:header>
+              <:cell>
+                {{session.displayStatus}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "pages.sessions.table.headers.finalization-session-date"}}
+              </:header>
+              <:cell>
+                {{formatDate session.finalizedAt}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "pages.sessions.table.headers.publication-session-date"}}
+              </:header>
+              <:cell>
+                {{formatDate session.publishedAt}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "pages.sessions.table.headers.version"}}
+              </:header>
+              <:cell>
+                {{session.version}}
+              </:cell>
+            </PixTableColumn>
+          </:columns>
+        </PixTable>
 
-      {{#unless @sessions}}
+        <PixPagination @pagination={{@sessions.meta}} />
+      {{else}}
         <div class="table__empty">{{t "common.tables.empty-result"}}</div>
-      {{/unless}}
+      {{/if}}
     </div>
-
-    {{#if @sessions}}
-      <PixPagination @pagination={{@sessions.meta}} />
-    {{/if}}
   </template>
 }

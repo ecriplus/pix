@@ -760,6 +760,28 @@
       },
       "list": {
         "all": "Toutes les sessions",
+        "filters": {
+          "certification-name": {
+            "aria-label": "Filtrer les sessions avec le nom d'un centre de certification"
+          },
+          "external-id": {
+            "aria-label": "Filtrer les sessions avec un identifiant externe"
+          },
+          "id": {
+            "aria-label": "Filtrer les sessions avec un id",
+            "placeholder": "Identifiant"
+          },
+          "status": {
+            "aria-label": "Filtrer les sessions en sélectionnant un statut"
+          },
+          "type": {
+            "aria-label": "Filtrer les sessions en sélectionnant un type de centre de certification"
+          },
+          "version": {
+            "aria-label": "Filtrer les sessions par leur version",
+            "placeholder": "Version"
+          }
+        },
         "required-actions": {
           "v2": "Sessions à traiter",
           "v3": "Sessions à traiter V3"
@@ -770,6 +792,18 @@
         }
       },
       "table": {
+        "caption": "Tableau listant les sessions de certification. Il indique l'identifiant unique, le nom du centre de certification auquel il appartient, l'identifiant externe, la catégorie, le statut, les dates de passage, de finalisation et de publication et la version de la session.",
+        "headers": {
+          "certification-name": "Centre de certification",
+          "external-id": "Identifiant externe",
+          "finalization-session-date": "Date de finalisation",
+          "id": "ID",
+          "publication-session-date": "Date de publication",
+          "session-date": "Date de session",
+          "status": "Statut",
+          "type": "Catégorie",
+          "version": "Version de la session"
+        },
         "required-actions": {
           "caption": "Liste des sessions nécessitant un traitement par un interne Pix. Contient l'identifiant unique de la session, le nom du centre de certification, la date de finalisation et le nom de l'interne en charge du traitement.",
           "checkbox-label": "Afficher uniquement mes sessions",
