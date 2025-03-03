@@ -2,7 +2,7 @@
   "id": "a9e7dda1-fbcc-43a0-a9b4-90056548a4ae",
   "slug": "controle-parental",
   "title": "Le contrôle parental",
-  "isBeta": false,
+  "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Les enfants et les adolescents utilisent le numérique au quotidien. Pour les protéger sur internet, le contrôle parental fait partie des solutions à la disposition des parents.&nbsp;🧑‍🧒<br>Dans ce module, découvrez le contrôle parental et ses fonctionnalités.</p>",
@@ -18,7 +18,7 @@
   "transitionTexts": [
     {
       "grainId": "f7e0ec28-06a2-4915-bcd7-53d5f5e3b9a7",
-      "content": "<p>Max va bientôt entrer au collège. <br>Ses parents souhaitent lui offrir son premier smartphone, mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina, demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion.&nbsp;📺"
+      "content": "<p>Max va bientôt entrer au collège. <br>Ses parents souhaitent lui offrir son premier smartphone, mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina, demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion.&nbsp;📺</p>"
     },
     {
       "grainId": "fab2ec90-8350-4f51-8700-336bcd3acade",
@@ -234,7 +234,7 @@
           "element": {
             "id": "04eff902-3513-432e-b9a5-764c8563dd17",
             "type": "text",
-            "content": "<p><strong>Activez le contrôle parental dans le simulateur de smartphone ci-dessous. </strong>&nbsp;👇</p><p>🧘 </span> Ne vous inquiétez pas ! Les réglages de votre propre smartphone ne seront pas modifiés.</p>"
+            "content": "<p><strong>Activez le contrôle parental dans le simulateur de smartphone ci-dessous. </strong>&nbsp;👇</p><p>🧘 Ne vous inquiétez pas ! Les réglages de votre propre smartphone ne seront pas modifiés.</p>"
           }
         },
         {
