@@ -103,9 +103,13 @@
         {
           "type": "element",
           "element": {
-            "id": "18ae1715-325d-47fe-970d-fe6e5e0f2bc4",
-            "type": "text",
-            "content": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/DParpArUggg?si=v27wICFSUUzuD3ro\" title=\"Contrôle parental&nbsp;: les fonctionnalités\"></iframe>"
+            "id": "d8b50659-5ad8-4565-83eb-a3f7d82c0359",
+            "type": "video",
+            "title": "Les fonctionnalités du contrôle parental",
+            "url": "https://assets.pix.org/modules/controle-parental/fonctionnalit%C3%A9s_controle_parental_ppn2/fonctionnalit%C3%A9s_controle_parental_ppn2.mp4",
+            "poster": "https://assets.pix.org/modules/controle-parental/fonctionnalit%C3%A9s_controle_parental_ppn2/vignette_fonctionnalit%C3%A9s_ppn2.jpg",
+            "subtitles": "https://assets.pix.org/modules/controle-parental/fonctionnalit%C3%A9s_controle_parental_ppn2/fonctionnalit%C3%A9s_controle_parental_ppn2.vtt",
+            "transcription": "<p><br></p>"
           }
         }
       ]
