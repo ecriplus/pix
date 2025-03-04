@@ -1,22 +1,20 @@
 {{page-title (t "pages.sup-organization-participants.page-title")}}
-<div class="organization-participant-list-page sup-organization-participant-list-page">
-  <SupOrganizationParticipant::HeaderActions @participantCount={{@model.participants.meta.participantCount}} />
+<SupOrganizationParticipant::HeaderActions @participantCount={{@model.participants.meta.participantCount}} />
 
-  <SupOrganizationParticipant::List
-    @students={{@model.participants}}
-    @importDetail={{@model.importDetail}}
-    @searchFilter={{this.search}}
-    @studentNumberFilter={{this.studentNumber}}
-    @groupsFilter={{this.groups}}
-    @certificabilityFilter={{this.certificability}}
-    @onFilter={{this.triggerFiltering}}
-    @onClickLearner={{this.goToLearnerPage}}
-    @onResetFilter={{this.onResetFilter}}
-    @participationCountOrder={{this.participationCountOrder}}
-    @sortByParticipationCount={{this.sortByParticipationCount}}
-    @sortByLastname={{this.sortByLastname}}
-    @lastnameSort={{this.lastnameSort}}
-    @deleteStudents={{this.deleteStudents}}
-    @hasComputeOrganizationLearnerCertificabilityEnabled={{this.hasComputeOrganizationLearnerCertificabilityEnabled}}
-  />
-</div>
+<SupOrganizationParticipant::List
+  @students={{@model.participants}}
+  @importDetail={{@model.importDetail}}
+  @searchFilter={{this.search}}
+  @studentNumberFilter={{this.studentNumber}}
+  @groupsFilter={{this.groups}}
+  @certificabilityFilter={{this.certificability}}
+  @onFilter={{this.triggerFiltering}}
+  @onClickLearner={{this.goToLearnerPage}}
+  @onResetFilter={{this.onResetFilter}}
+  @participationCountOrder={{this.participationCountOrder}}
+  @sortByParticipationCount={{this.sortByParticipationCount}}
+  @sortByLastname={{this.sortByLastname}}
+  @lastnameSort={{this.lastnameSort}}
+  @deleteStudents={{this.deleteStudents}}
+  @hasComputeOrganizationLearnerCertificabilityEnabled={{this.hasComputeOrganizationLearnerCertificabilityEnabled}}
+/>
