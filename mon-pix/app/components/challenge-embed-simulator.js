@@ -31,6 +31,13 @@ export default class ChallengeEmbedSimulator extends Component {
     return '';
   }
 
+  get permissionToClipboardWrite() {
+    if (!this.args.embedDocument?.url) {
+      return null;
+    }
+    return isEmbedAllowedOrigin(this.args.embedDocument.url) ? 'clipboard-write' : null;
+  }
+
   configureIframe = (iframe, embedUrl, thisComponent) => {
     thisComponent.isLoadingEmbed = true;
     thisComponent.isSimulatorLaunched = false;
