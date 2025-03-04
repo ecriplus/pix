@@ -13,9 +13,5 @@
 }
 
 .participants {
-  @include breakpoints.device-is('desktop') {
-    width: calc(66.66% - var(--pix-spacing-6x));
-  }
-
   width: 100%;
 }
