@@ -1,5 +1,23 @@
 # Pix Changelog
 
+## v5.56.0 (04/03/2025)
+
+
+### :rocket: Amélioration
+- [#11531](https://github.com/1024pix/pix/pull/11531) [FEATURE] Permet au SUPER ADMIN de mettre à jour la colonne params sur les fonctionnalités (PIX-16763).
+
+### :building_construction: Tech
+- [#11536](https://github.com/1024pix/pix/pull/11536) [TECH] Mise en place d'`Events` liés au passage de module (PIX-16726).
+- [#11550](https://github.com/1024pix/pix/pull/11550) [TECH] Les types de colonnes ne sont pas corrects sur le datamart Parcoursup de dev (PIX-16800).
+- [#11521](https://github.com/1024pix/pix/pull/11521) [TECH] Utiliser PixTable sur Pix Certif (PIX-15794).
+- [#11524](https://github.com/1024pix/pix/pull/11524) [TECH] Script pour fix les certification-challenge-capacities liés à des live-alerts (PIX-16701).
+- [#11513](https://github.com/1024pix/pix/pull/11513) [TECH] Dans Pix API supprimer les notions erronées ou obsolètes de scope et de target utilisées pour la vérification du droit d’accès d’un utilisateur à une application (PIX-15945).
+- [#11528](https://github.com/1024pix/pix/pull/11528) [TECH] Migration de la route POST api/membership/me/disable (PIX-16733).
+
+### :bug: Correction
+- [#11542](https://github.com/1024pix/pix/pull/11542) [BUGFIX] Empêcher la validation d'un live-alert assigné à une épreuve déjà répondue (PIX-16783).
+- [#11549](https://github.com/1024pix/pix/pull/11549) [BUGFIX] Permettre d'afficher les notifications avec le nouveau menu sur Pix Admin.
+
 ## v5.55.0 (03/03/2025)
 
 
