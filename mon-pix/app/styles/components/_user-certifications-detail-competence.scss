@@ -1,4 +1,5 @@
 @use 'pix-design-tokens/fonts';
+@use 'pix-design-tokens/typography';
 
 .user-certifications-detail-competence {
   margin-bottom: 32px;
@@ -105,9 +106,10 @@
 
 .user-certifications-detail-competence-list-row {
   &__name {
+    @extend %pix-title-xs;
+
     padding: 20px 0 20px 36px;
     color: var(--pix-neutral-800);
-    font-family: fonts.$font-open-sans;
   }
 
   &__level {

@@ -10,11 +10,11 @@
 }
 
 .challenge-statement__instruction-section {
+  @extend %pix-body-m;
+
   display: flex;
   justify-content: space-between;
   margin: 20px 20px 16px;
-  font-size: 0.938rem;
-  font-family: fonts.$font-open-sans;
 
   hr {
     border-top: 1px solid var(--pix-neutral-20);

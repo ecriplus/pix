@@ -1,5 +1,6 @@
 @use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/fonts';
+@use 'pix-design-tokens/typography';
 
 .course-error-page__start__image__container {
   display: flex;
@@ -24,10 +25,11 @@
 }
 
 .course-error-page__error-text {
+  @extend %pix-body-m;
+
   display: flex;
   flex-direction: column;
   padding-bottom: 50px;
-  font-family: fonts.$font-open-sans;
 
   .title {
     font-size: 1.375rem;

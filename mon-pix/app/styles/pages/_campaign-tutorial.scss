@@ -1,4 +1,5 @@
 @use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
 @use 'pix-design-tokens/fonts';
 @use 'pix-design-tokens/colors';
 
@@ -23,10 +24,9 @@
   }
 
   &__title {
+    @extend %pix-title-xs;
+
     color: var(--pix-primary-500);
-    font-weight: 600;
-    font-size: 1.25rem;
-    font-family: fonts.$font-open-sans;
     line-height: 40px;
     text-align: center;
 
@@ -46,9 +46,9 @@
   }
 
   &__explanation-text {
+    @extend %pix-body-l;
+
     color: var(--pix-neutral-900);
-    font-size: 1.125rem;
-    font-family: fonts.$font-open-sans;
     white-space: pre-line;
     text-align: center;
 

@@ -1,4 +1,5 @@
 @use 'pix-design-tokens/fonts';
+@use 'pix-design-tokens/typography';
 
 .profile-already-shared-retry {
   display: flex;
@@ -10,8 +11,8 @@
   border-top: 1px dashed var(--pix-neutral-100);
 
   &__message {
-    font-size: 1.5rem;
-    font-family: fonts.$font-open-sans;
+    @extend %pix-title-xs;
+
     text-align: center;
   }
 

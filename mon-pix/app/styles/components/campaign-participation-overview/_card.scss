@@ -52,9 +52,9 @@
   }
 
   &--archived {
-    font-weight: var(--pix-font-normal);
+    @extend %pix-body-s;
+
     font-size: 0.75rem;
-    font-family: fonts.$font-open-sans;
     text-align: center;
   }
 }

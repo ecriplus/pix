@@ -8,9 +8,7 @@
     <p class="send-profile-disabled-share__text">
       {{t "pages.send-profile.disabled-share" htmlSafe=true}}
     </p>
-    <LinkTo @route="authenticated" class="send-profile-disabled-share__back-to-home link">
-      {{t "pages.send-profile.form.continue"}}
-    </LinkTo>
+    <PixButtonLink @route="authenticated" @variant="secondary">{{t "pages.send-profile.form.continue"}}</PixButtonLink>
   </div>
   <div class="send-profile-header__profile send-profile-header__profile--with-border-bottom">
     <HexagonScore
