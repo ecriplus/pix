@@ -20,8 +20,10 @@ describe('Certification | Results | Unit | Application | parcoursup-controller',
         },
       };
 
+      const pixScore = Symbol('pixScore');
+
       const certificationResultForParcoursup = {
-        pixScore: Symbol('pixScore'),
+        pixScore,
         certificationDate: Symbol('certificationDate'),
       };
       sinon.stub(usecases, 'getCertificationResultForParcoursup');
@@ -31,9 +33,7 @@ describe('Certification | Results | Unit | Application | parcoursup-controller',
 
       const globalMeshLevel = Symbol('globalMeshLevel');
       sinon.stub(usecases, 'getGlobalMeshLevel');
-      usecases.getGlobalMeshLevel
-        .withArgs({ ...certificationResultForParcoursup, i18n: getI18n(FRENCH_FRANCE) })
-        .resolves(globalMeshLevel);
+      usecases.getGlobalMeshLevel.withArgs({ pixScore }).resolves(globalMeshLevel);
 
       const dependencies = {
         parcoursupCertificationSerializer: {

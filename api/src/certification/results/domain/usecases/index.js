@@ -7,7 +7,6 @@ import { importNamedExportsFromDirectory } from '../../../../shared/infrastructu
 import * as sessionEnrolmentRepository from '../../../enrolment/infrastructure/repositories/session-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import * as certificationReportRepository from '../../../shared/infrastructure/repositories/certification-report-repository.js';
-import * as scoringConfigurationRepository from '../../../shared/infrastructure/repositories/scoring-configuration-repository.js';
 import * as sharedSessionRepository from '../../../shared/infrastructure/repositories/session-repository.js';
 import * as certificateRepository from '../../infrastructure/repositories/certificate-repository.js';
 import * as certificationLivretScolaireRepository from '../../infrastructure/repositories/certification-livret-scolaire-repository.js';
@@ -32,7 +31,6 @@ import * as pixScoreToMeshLevelService from '../services/pix-score-to-mesh-level
  * @typedef {sharedSessionRepository} SharedSessionRepository
  * @typedef {certificationLivretScolaireRepository} CertificationLivretScolaireRepository
  * @typedef {competenceTreeRepository} CompetenceTreeRepository
- * @typedef {scoringConfigurationRepository} ScoringConfigurationRepository
  * @typedef {pixScoreToMeshLevelService} PixScoreToMeshLevelService
  **/
 
@@ -48,7 +46,6 @@ const dependencies = {
   sharedSessionRepository,
   competenceTreeRepository,
   certificationLivretScolaireRepository,
-  scoringConfigurationRepository,
   pixScoreToMeshLevelService,
 };
 

@@ -25,8 +25,6 @@ const getCertificationResultForParcoursup = async function (
 
   const globalMeshLevel = await usecases.getGlobalMeshLevel({
     pixScore: certificationResult.pixScore,
-    certificationDate: certificationResult.certificationDate,
-    i18n,
   });
 
   return dependencies.parcoursupCertificationSerializer.serialize({
