@@ -5,10 +5,6 @@ import { config } from '../../../../shared/config.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/index.js';
-import {
-  logErrorWithCorrelationIds,
-  logInfoWithCorrelationIds,
-} from '../../../../shared/infrastructure/monitoring-tools.js';
 import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
 import { CertificationCourse } from '../../domain/models/CertificationCourse.js';
 import { CertificationIssueReport } from '../../domain/models/CertificationIssueReport.js';
@@ -20,20 +16,7 @@ async function save({ certificationCourse }) {
   const certificationCourseToSaveDTO = _adaptModelToDb(certificationCourse);
   const [{ id: certificationCourseId }] = await knexConn('certification-courses')
     .insert(certificationCourseToSaveDTO)
-    .returning('id')
-    .on('query', function (data) {
-      logInfoWithCorrelationIds({
-        event: 'save-certification-course',
-        message: `A certification course will be inserted with transaction ${data.__knexTxId}`,
-      });
-    })
-    .on('query-error', function (data) {
-      logErrorWithCorrelationIds({
-        event: 'save-certification-course',
-        message: `A certification course could not be inserted`,
-        data: _(data).pick(['code', 'constraint', 'detail']),
-      });
-    });
+    .returning('id');
 
   const complementaryCertificationCourses = certificationCourse
     .toDTO()
