@@ -15,7 +15,7 @@ const campaignValidationJoiSchema = Joi.object({
   }),
 
   type: Joi.string()
-    .valid(CampaignTypes.ASSESSMENT, CampaignTypes.PROFILES_COLLECTION)
+    .valid(...Object.values(CampaignTypes))
     .required()
     .error((errors) => first(errors))
     .messages({

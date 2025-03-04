@@ -39,9 +39,23 @@ describe('Unit | Domain | Validators | campaign-validator', function () {
     multipleSendings: false,
   };
 
+  const campaignOfTypeExam = {
+    name: "campagne d'interro",
+    // TODO: Fix this the next time the file is edited.
+    // eslint-disable-next-line mocha/no-setup-in-describe
+    type: CampaignTypes.EXAM,
+    title: "Campagne d'interro",
+    creatorId: 4,
+    organizationId: 12,
+    targetProfileId: 44,
+    customResultPageButtonText: null,
+    customResultPageButtonUrl: null,
+    multipleSendings: false,
+  };
+
   describe('#validate', function () {
     // eslint-disable-next-line mocha/no-setup-in-describe
-    [campaignOfTypeAssessment, campaignOfTypeProfilesCollection].forEach((campaign) => {
+    [campaignOfTypeAssessment, campaignOfTypeProfilesCollection, campaignOfTypeExam].forEach((campaign) => {
       // TODO: Fix this the next time the file is edited.
       // eslint-disable-next-line mocha/no-setup-in-describe
       context(`when campaign is of type ${campaign.type}`, function () {

@@ -4,6 +4,7 @@ import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { fn } from '@ember/helper';
+import { or } from 'ember-truth-helpers';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -140,7 +141,7 @@ export default class UpdateForm extends Component {
         </div>
       </div>
 
-      {{#if @campaign.isTypeAssessment}}
+      {{#if (or @campaign.isTypeAssessment @campaign.isTypeExam)}}
         <div class="form__field">
           <PixInput
             @id="campaign-title"
