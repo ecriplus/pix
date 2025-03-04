@@ -1,9 +1,8 @@
-import { config } from '../../../../shared/config.js';
+// TODO: bounded context violation
+import { findIntervalIndexFromScore } from '../../../results/domain/services/find-interval-index-from-score.js';
 import { CertificationAssessmentScoreV3 } from './CertificationAssessmentScoreV3.js';
 import { Intervals } from './Intervals.js';
 import { ScoringAndCapacitySimulatorReport } from './ScoringAndCapacitySimulatorReport.js';
-
-const SCORING_CONFIGURATION_WEIGHTS = CertificationAssessmentScoreV3.weightsAndCoefficients.map(({ weight }) => weight);
 
 // TODO change CapacitySimulator model to a service
 export class CapacitySimulator {
@@ -42,22 +41,4 @@ export class CapacitySimulator {
       competences,
     });
   }
-}
-
-// TODO Split function to a service, and change contexte to `results`
-export function findIntervalIndexFromScore({ score }) {
-  const weights = SCORING_CONFIGURATION_WEIGHTS;
-  let cumulativeSumOfWeights = weights[0];
-  let currentScoringInterval = 0;
-
-  while (_hasNextScoringInterval(score, cumulativeSumOfWeights, currentScoringInterval)) {
-    currentScoringInterval++;
-    cumulativeSumOfWeights += weights[currentScoringInterval];
-  }
-
-  return currentScoringInterval;
-}
-
-function _hasNextScoringInterval(score, nextIntervalMinimumScore, currentInterval) {
-  return score >= nextIntervalMinimumScore && currentInterval < config.v3Certification.maxReachableLevel;
 }
