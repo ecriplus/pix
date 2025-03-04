@@ -139,7 +139,6 @@ const dependencies = {
   knowledgeElementRepository,
   lastUserApplicationConnectionsRepository,
   learningContentConversionService,
-  lastUserApplicationConnectionsRepository,
   membershipRepository,
   obfuscationService,
   organizationCreationValidator,
