@@ -394,7 +394,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
         });
 
         module('simplified access', function () {
-          test('it should display with simplified access', async function (assert) {
+          test('it should display with simplified access label in options list', async function (assert) {
             // given
             this.targetProfiles = [
               store.createRecord('target-profile', {
@@ -421,13 +421,12 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
             await click(
               screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }),
             );
-            await click(await screen.findByRole('option', { description: 'targetProfile1' }));
 
             // then
             assert.ok(screen.getByText(t('common.target-profile-details.simplified-access.without-account')));
           });
 
-          test('it should display without simplified access', async function (assert) {
+          test('it should display without simplified access label in options list', async function (assert) {
             // given
             this.targetProfiles = [
               store.createRecord('target-profile', {
@@ -453,7 +452,6 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
             await click(
               screen.getByLabelText(t('pages.campaign-creation.target-profiles-list-label'), { exact: false }),
             );
-            await click(await screen.findByRole('option', { description: 'targetProfile1' }));
 
             // then
             assert.ok(screen.getByText(t('common.target-profile-details.simplified-access.with-account')));
