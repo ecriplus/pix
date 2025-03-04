@@ -377,6 +377,13 @@ describe('Acceptance | Team | Application | Route | membership', function () {
       it('should respond with a 403 if user does not have the role Admin in organization', async function () {
         // given
         const notOrganizationAdminUserId = databaseBuilder.factory.buildUser().id;
+        databaseBuilder.factory.buildMembership({
+          userId: notOrganizationAdminUserId,
+          organizationId,
+          organizationRole: Membership.roles.MEMBER,
+        });
+        await databaseBuilder.commit();
+
         options.headers = generateAuthenticatedUserRequestHeaders({ userId: notOrganizationAdminUserId });
 
         // when
