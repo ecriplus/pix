@@ -1,21 +1,17 @@
 {{! template-lint-disable no-action }}
 {{page-title "Session " @model.id " Certifications | Pix Admin" replace=true}}
-<section>
-  <div class="certification-list-page">
+<section class="certification-list-page">
 
-    <Sessions::Certifications::Header
-      @session={{this.model.session}}
-      @juryCertificationSummaries={{this.model.juryCertificationSummaries}}
-      @unpublishSession={{this.unpublishSession}}
-      @publishSession={{this.publishSession}}
-    />
+  <Sessions::Certifications::Header
+    @session={{this.model.session}}
+    @juryCertificationSummaries={{this.model.juryCertificationSummaries}}
+    @unpublishSession={{this.unpublishSession}}
+    @publishSession={{this.publishSession}}
+  />
 
-    <div>
-      <Sessions::Certifications::List
-        @juryCertificationSummaries={{this.model.juryCertificationSummaries}}
-        @pagination={{this.model.juryCertificationSummaries.meta}}
-        @displayHasSeenEndTestScreenColumn={{this.model.session.displayHasSeenEndTestScreenColumn}}
-      />
-    </div>
-  </div>
+  <Sessions::Certifications::List
+    @juryCertificationSummaries={{this.model.juryCertificationSummaries}}
+    @pagination={{this.model.juryCertificationSummaries.meta}}
+    @displayHasSeenEndTestScreenColumn={{this.model.session.displayHasSeenEndTestScreenColumn}}
+  />
 </section>

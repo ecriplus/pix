@@ -601,7 +601,12 @@
       "actions": {
         "load": {
           "label": "Charger"
-        }
+        },
+        "publish-session": {
+          "label": "Publier la session",
+          "warning-information": "Vous ne pouvez pas publier la session tant qu'elle n'est pas finalisée ou qu'il reste des certifications en erreur."
+        },
+        "unpublish-session": "Dépublier la session"
       },
       "certification": {
         "details": {
@@ -704,6 +709,28 @@
           }
         },
         "title": "Certif"
+      },
+      "modal-confirmation": {
+        "publish-session-information": "Souhaitez-vous publier la session ?",
+        "unpublish-session-information": "Souhaitez-vous dépublier la session ?"
+      },
+      "session-state": {
+        "not-published": "Session non publiée",
+        "published": "Session publiée"
+      },
+      "table": {
+        "caption": "Tableau listant les certification d'une session. Il indique l'identifiant unique, le nom et prénom du candidat, le statut et le score de la certification, les signalements impactants à résoudre, la présence d'une autre certification passé et les dates de début et de fin de session.",
+        "headers": {
+          "finished-certification-date": "Fin",
+          "first-name": "Prénom",
+          "id": "ID",
+          "last-name": "Nom",
+          "other-certification": "Autre certification",
+          "pix-score": "Score",
+          "started-certification-date": "Début",
+          "status": "Statut",
+          "unresolved-reports": "Signalements impactants non résolus"
+        }
       },
       "title": "Certifications"
     },

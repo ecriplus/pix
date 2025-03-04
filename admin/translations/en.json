@@ -695,6 +695,28 @@
         },
         "title": "Certif"
       },
+      "modal-confirmation": {
+        "publish-session-information": "Souhaitez-vous publier la session ?",
+        "unpublish-session-information": "Souhaitez-vous dépublier la session ?"
+      },
+      "session-state": {
+        "not-published": "Session non publiée",
+        "published": "Session publiée"
+      },
+      "table": {
+        "caption": "Table listing the certifications for a session. It shows the unique identifier, the first and last name of the candidate, the status and score of the certification, the impacting alerts to be resolved, the presence of another past certification and the start and end dates of the session.",
+        "headers": {
+          "finished-certification-date": "Fin",
+          "first-name": "Prénom",
+          "id": "ID",
+          "last-name": "Nom",
+          "other-certification": "Autre certification",
+          "pix-score": "Score",
+          "started-certification-date": "Début",
+          "status": "Statut",
+          "unresolved-reports": "Signalements impactants non résolus"
+        }
+      },
       "title": "Certifications"
     },
     "login": {

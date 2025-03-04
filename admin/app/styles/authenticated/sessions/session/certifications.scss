@@ -1,10 +1,8 @@
 .certification-list-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-4x);
 
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
   /* stylelint-disable selector-class-pattern */
   td.certification-list-page__cell--important,
   span.certification-list-page__cell--important {
@@ -12,7 +10,16 @@
     font-weight: bold;
   }
 
-  footer.pix-pagination {
-    padding-top: 10px;
+  &__header{
+    display: flex;
+    gap: var(--pix-spacing-2x);
+    align-items: center;
+  }
+
+  &__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 180px;
   }
 }
