@@ -315,4 +315,95 @@ describe('Acceptance | Team | Application | Route | membership', function () {
       });
     });
   });
+
+  describe('POST /api/memberships/{id}/disable', function () {
+    let options;
+    let membershipId;
+    let organizationId;
+
+    beforeEach(async function () {
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+      const userId = databaseBuilder.factory.buildUser().id;
+      membershipId = databaseBuilder.factory.buildMembership({ organizationId, userId }).id;
+      const organizationAdminUserId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildMembership({
+        userId: organizationAdminUserId,
+        organizationId,
+        organizationRole: Membership.roles.ADMIN,
+      });
+
+      await databaseBuilder.commit();
+
+      options = {
+        method: 'POST',
+        url: `/api/memberships/${membershipId}/disable`,
+        payload: {
+          data: {
+            id: membershipId.toString(),
+            type: 'memberships',
+            relationships: {
+              user: {
+                data: {
+                  type: 'users',
+                  id: userId,
+                },
+              },
+              organization: {
+                data: {
+                  type: 'organizations',
+                  id: organizationId,
+                },
+              },
+            },
+          },
+        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: organizationAdminUserId }),
+      };
+    });
+
+    context('Success cases', function () {
+      context('When user is admin of the organization', function () {
+        it('should return a 204', async function () {
+          // when
+          const response = await server.inject(options);
+
+          // then
+          expect(response.statusCode).to.equal(204);
+        });
+      });
+    });
+
+    context('Error cases', function () {
+      it('should respond with a 403 if user does not have the role Admin in organization', async function () {
+        // given
+        const notOrganizationAdminUserId = databaseBuilder.factory.buildUser().id;
+        databaseBuilder.factory.buildMembership({
+          userId: notOrganizationAdminUserId,
+          organizationId,
+          organizationRole: Membership.roles.MEMBER,
+        });
+        await databaseBuilder.commit();
+
+        options.headers = generateAuthenticatedUserRequestHeaders({ userId: notOrganizationAdminUserId });
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(403);
+      });
+
+      it('should respond with a 400 if membership does not exist', async function () {
+        // given
+        const unknownMembershipId = 9999;
+        options.url = `/api/memberships/${unknownMembershipId}/disable`;
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+    });
+  });
 });
