@@ -13,24 +13,6 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
       expect(error).to.be.instanceOf(PassageEventInstantiationError);
     });
 
-    describe('if a passage event does not have an id', function () {
-      it('should throw an error', function () {
-        // given
-        class FakeEvent extends PassageEvent {
-          constructor() {
-            super({});
-          }
-        }
-
-        // when
-        const error = catchErrSync(() => new FakeEvent())();
-
-        // then
-        expect(error).to.be.instanceOf(DomainError);
-        expect(error.message).to.equal('The id is required for a PassageEvent');
-      });
-    });
-
     describe('if a passage event does not have a type', function () {
       it('should throw an error', function () {
         // given
@@ -64,24 +46,6 @@ describe('Unit | Devcomp | Domain | Models | PassageEvent', function () {
         // then
         expect(error).to.be.instanceOf(DomainError);
         expect(error.message).to.equal('The occurredAt is required for a PassageEvent');
-      });
-    });
-
-    describe('if a passage event does not have a createdAt', function () {
-      it('should throw an error', function () {
-        // given
-        class FakeEvent extends PassageEvent {
-          constructor() {
-            super({ id: 1, type: 'FAKE', occurredAt: Symbol('date') });
-          }
-        }
-
-        // when
-        const error = catchErrSync(() => new FakeEvent())();
-
-        // then
-        expect(error).to.be.instanceOf(DomainError);
-        expect(error.message).to.equal('The createdAt is required for a PassageEvent');
       });
     });
 

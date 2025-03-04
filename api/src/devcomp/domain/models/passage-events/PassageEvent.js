@@ -16,10 +16,8 @@ class PassageEvent {
       throw new PassageEventInstantiationError();
     }
 
-    assertNotNullOrUndefined(id, 'The id is required for a PassageEvent');
     assertNotNullOrUndefined(type, 'The type is required for a PassageEvent');
     assertNotNullOrUndefined(occurredAt, 'The occurredAt is required for a PassageEvent');
-    assertNotNullOrUndefined(createdAt, 'The createdAt is required for a PassageEvent');
     assertNotNullOrUndefined(passageId, 'The passageId is required for a PassageEvent');
 
     this.id = id;
