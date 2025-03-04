@@ -1,6 +1,8 @@
 import { render } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
@@ -10,6 +12,98 @@ module('Integration | Component | challenge actions', function (hooks) {
   test('renders', async function (assert) {
     await render(hbs`<ChallengeActions />`);
     assert.dom('.challenge-actions__group').exists();
+  });
+
+  module('when the validate answer button is clicked', function () {
+    test('it should add a loading state to the button and disable the skip button', async function (assert) {
+      // given
+      this.set('isValidateButtonEnabled', true);
+      this.set('isSkipButtonEnabled', true);
+      this.set('validateActionStub', () => sinon.promise());
+
+      // when
+      const screen = await render(hbs`<ChallengeActions
+  @validateAnswer={{this.validateActionStub}}
+  @isValidateButtonEnabled={{this.isValidateButtonEnabled}}
+  @isSkipButtonEnabled={{this.isSkipButtonEnabled}}
+/>`);
+
+      const validateButton = screen.getByRole('button', { name: /Je valide/ });
+      await click(validateButton);
+
+      // then
+      assert.dom(validateButton).hasAttribute('disabled');
+      assert.dom(screen.getByRole('button', { name: /Je passe/ })).hasAttribute('disabled');
+    });
+
+    module('on request resolution or rejection', function () {
+      test('it should remove the disable states', async function (assert) {
+        // given
+        this.set('isValidateButtonEnabled', true);
+        this.set('isSkipButtonEnabled', true);
+        this.set('validateActionStub', () => sinon.promise().resolve());
+
+        // when
+        const screen = await render(hbs`<ChallengeActions
+  @validateAnswer={{this.validateActionStub}}
+  @isValidateButtonEnabled={{this.isValidateButtonEnabled}}
+  @isSkipButtonEnabled={{this.isSkipButtonEnabled}}
+/>`);
+
+        const validateButton = screen.getByRole('button', { name: /Je valide/ });
+        await click(validateButton);
+
+        // then
+        assert.dom(validateButton).hasNoAttribute('disabled');
+        assert.dom(screen.getByRole('button', { name: /Je passe/ })).hasNoAttribute('disabled');
+      });
+    });
+  });
+
+  module('when the skip button is clicked', function () {
+    test('it should add a loading state to the button and disable the validate button', async function (assert) {
+      // given
+      this.set('isValidateButtonEnabled', true);
+      this.set('isSkipButtonEnabled', true);
+      this.set('skipChallengeStub', () => sinon.promise());
+
+      // when
+      const screen = await render(hbs`<ChallengeActions
+  @skipChallenge={{this.skipChallengeStub}}
+  @isValidateButtonEnabled={{this.isValidateButtonEnabled}}
+  @isSkipButtonEnabled={{this.isSkipButtonEnabled}}
+/>`);
+
+      const skipButton = screen.getByRole('button', { name: /Je passe/ });
+      await click(skipButton);
+
+      // then
+      assert.dom(skipButton).hasAttribute('disabled');
+      assert.dom(screen.getByRole('button', { name: /Je valide/ })).hasAttribute('disabled');
+    });
+
+    module('on request resolution or rejection', function () {
+      test('it should remove the disable states', async function (assert) {
+        // given
+        this.set('isValidateButtonEnabled', true);
+        this.set('isSkipButtonEnabled', true);
+        this.set('skipChallengeStub', () => sinon.promise().reject());
+
+        // when
+        const screen = await render(hbs`<ChallengeActions
+  @skipChallenge={{this.skipChallengeStub}}
+  @isValidateButtonEnabled={{this.isValidateButtonEnabled}}
+  @isSkipButtonEnabled={{this.isSkipButtonEnabled}}
+/>`);
+
+        const skipButton = screen.getByRole('button', { name: /Je passe/ });
+        await click(skipButton);
+
+        // then
+        assert.dom(skipButton).hasNoAttribute('disabled');
+        assert.dom(screen.getByRole('button', { name: /Je valide/ })).hasNoAttribute('disabled');
+      });
+    });
   });
 
   module('Challenge has timed out', function () {
