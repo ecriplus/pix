@@ -4,6 +4,7 @@ import * as campaignReportRepository from '../../../../../../src/prescription/ca
 import {
   CampaignExternalIdTypes,
   CampaignParticipationStatuses,
+  CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
@@ -101,82 +102,94 @@ describe('Integration | Repository | Campaign-Report', function () {
         return databaseBuilder.commit();
       });
 
-      it('returns general information about target profile', async function () {
-        const targetProfile = databaseBuilder.factory.buildTargetProfile({
-          name: 'Name',
-          description: 'Description',
-        });
-        const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
-
-        databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: 'skill1' });
-        databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: 'skill2' });
-        databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: 'skill3' });
-
-        await databaseBuilder.commit();
-        const result = await campaignReportRepository.get(campaign.id);
-
-        expect(result).deep.include({
-          targetProfileId: targetProfile.id,
-          targetProfileDescription: targetProfile.description,
-          targetProfileName: targetProfile.name,
-          targetProfileTubesCount: 2,
-          targetProfileAreKnowledgeElementsResettable: false,
-        });
-      });
-
-      context('Thematic Result information', function () {
-        it('returns general information about thematic results', async function () {
-          const creator = databaseBuilder.factory.buildUser({ firstName: 'Walter', lastName: 'White' });
-          const targetProfile = databaseBuilder.factory.buildTargetProfile({
-            name: 'Name',
-            description: 'Description',
-          });
-          const campaign = databaseBuilder.factory.buildCampaign({
-            targetProfileId: targetProfile.id,
-            archivedAt: new Date(),
-            ownerId: creator.id,
-            multipleSendings: false,
-          });
-
-          databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: 'skill1' });
-          databaseBuilder.factory.buildBadge({ targetProfileId: targetProfile.id, key: 1 });
-          databaseBuilder.factory.buildBadge({ targetProfileId: targetProfile.id, key: 2 });
-          databaseBuilder.factory.buildBadge({ key: 3 });
-
-          await databaseBuilder.commit();
-          const result = await campaignReportRepository.get(campaign.id);
-
-          expect(result.targetProfileThematicResultCount).to.equal(2);
-        });
-      });
-
-      context('Stages information', function () {
-        context('when the target profile has stages', function () {
-          it('returns general information about stages', async function () {
-            const targetProfile = databaseBuilder.factory.buildTargetProfile();
-            const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
+      // eslint-disable-next-line mocha/no-setup-in-describe
+      [CampaignTypes.ASSESSMENT, CampaignTypes.EXAM].forEach((campaignType) => {
+        context(`for campaign of type ${campaignType}`, function () {
+          it('returns general information about target profile', async function () {
+            const targetProfile = databaseBuilder.factory.buildTargetProfile({
+              name: 'Name',
+              description: 'Description',
+            });
+            const campaign = databaseBuilder.factory.buildCampaign({
+              targetProfileId: targetProfile.id,
+              type: campaignType,
+            });
 
             databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: 'skill1' });
-            databaseBuilder.factory.buildStage({ targetProfileId: targetProfile.id });
+            databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: 'skill2' });
+            databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: 'skill3' });
 
             await databaseBuilder.commit();
             const result = await campaignReportRepository.get(campaign.id);
 
-            expect(result.targetProfileHasStage).to.equal(true);
+            expect(result).deep.include({
+              targetProfileId: targetProfile.id,
+              targetProfileDescription: targetProfile.description,
+              targetProfileName: targetProfile.name,
+              targetProfileTubesCount: 2,
+              targetProfileAreKnowledgeElementsResettable: false,
+            });
           });
-        });
-        context('when the target profile has no stages', function () {
-          it('returns general information about stages', async function () {
-            const { id: otherTargetProfilId } = databaseBuilder.factory.buildTargetProfile();
-            const campaign = databaseBuilder.factory.buildCampaign();
 
-            databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: 'skill1' });
-            databaseBuilder.factory.buildStage({ targetProfileId: otherTargetProfilId });
+          context('Thematic Result information', function () {
+            it('returns general information about thematic results', async function () {
+              const creator = databaseBuilder.factory.buildUser({ firstName: 'Walter', lastName: 'White' });
+              const targetProfile = databaseBuilder.factory.buildTargetProfile({
+                name: 'Name',
+                description: 'Description',
+              });
+              const campaign = databaseBuilder.factory.buildCampaign({
+                targetProfileId: targetProfile.id,
+                archivedAt: new Date(),
+                ownerId: creator.id,
+                multipleSendings: false,
+                type: campaignType,
+              });
 
-            await databaseBuilder.commit();
-            const result = await campaignReportRepository.get(campaign.id);
+              databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: 'skill1' });
+              databaseBuilder.factory.buildBadge({ targetProfileId: targetProfile.id, key: 1 });
+              databaseBuilder.factory.buildBadge({ targetProfileId: targetProfile.id, key: 2 });
+              databaseBuilder.factory.buildBadge({ key: 3 });
 
-            expect(result.targetProfileHasStage).to.equal(false);
+              await databaseBuilder.commit();
+              const result = await campaignReportRepository.get(campaign.id);
+
+              expect(result.targetProfileThematicResultCount).to.equal(2);
+            });
+          });
+
+          context('Stages information', function () {
+            context('when the target profile has stages', function () {
+              it('returns general information about stages', async function () {
+                const targetProfile = databaseBuilder.factory.buildTargetProfile();
+                const campaign = databaseBuilder.factory.buildCampaign({
+                  targetProfileId: targetProfile.id,
+                  type: campaignType,
+                });
+
+                databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: 'skill1' });
+                databaseBuilder.factory.buildStage({ targetProfileId: targetProfile.id });
+
+                await databaseBuilder.commit();
+                const result = await campaignReportRepository.get(campaign.id);
+
+                expect(result.targetProfileHasStage).to.equal(true);
+              });
+            });
+            context('when the target profile has no stages', function () {
+              it('returns general information about stages', async function () {
+                const { id: otherTargetProfilId } = databaseBuilder.factory.buildTargetProfile();
+                const campaign = databaseBuilder.factory.buildCampaign({ type: campaignType });
+
+                databaseBuilder.factory.buildCampaignSkill({ campaignId: campaign.id, skillId: 'skill1' });
+                databaseBuilder.factory.buildStage({ targetProfileId: otherTargetProfilId });
+
+                await databaseBuilder.commit();
+                const result = await campaignReportRepository.get(campaign.id);
+
+                expect(result.targetProfileHasStage).to.equal(false);
+              });
+            });
           });
         });
       });

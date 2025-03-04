@@ -2,59 +2,62 @@ import { CampaignTypes } from '../../../../src/prescription/shared/domain/consta
 import { domainBuilder, expect } from '../../../test-helper.js';
 
 describe('Unit | Domain | Models | CampaignReport', function () {
-  it('should define target profile informations', function () {
-    const targetProfileForSpecifier = {
-      name: 'target profile',
-      description: 'description',
-      TubesCount: 2,
-      hasStage: false,
-      thematicResult: 3,
-    };
+  describe('getters', function () {
+    // eslint-disable-next-line mocha/no-setup-in-describe
+    [
+      {
+        getter: 'isAssessment',
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        isTrueForType: CampaignTypes.ASSESSMENT,
+      },
+      {
+        getter: 'isExam',
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        isTrueForType: CampaignTypes.EXAM,
+      },
+      {
+        getter: 'isProfilesCollection',
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        isTrueForType: CampaignTypes.PROFILES_COLLECTION,
+      },
+    ].forEach(({ getter, isTrueForType }) => {
+      describe('#' + getter, function () {
+        // eslint-disable-next-line mocha/no-setup-in-describe
+        Object.values(CampaignTypes).forEach((campaignType) => {
+          const expected = campaignType === isTrueForType;
+          it(`should return ${expected} when campaign is of type ${campaignType}`, function () {
+            // given
+            const campaignReport = domainBuilder.buildCampaignReport({
+              type: campaignType,
+            });
 
-    const campaignReport = domainBuilder.buildCampaignReport();
-
-    campaignReport.setTargetProfileInformation(targetProfileForSpecifier);
-
-    expect(campaignReport.targetProfileName).to.equal(targetProfileForSpecifier.name);
-    expect(campaignReport.targetProfileDescription).to.equal(targetProfileForSpecifier.description);
-    expect(campaignReport.targetProfileTubesCount).to.equal(targetProfileForSpecifier.tubeCount);
-    expect(campaignReport.targetProfileThematicResult).to.equal(targetProfileForSpecifier.thematicResultCount);
-    expect(campaignReport.targetProfileHasStage).to.equal(targetProfileForSpecifier.hasStage);
+            // when / then
+            expect(campaignReport[getter]).to.equal(expected);
+          });
+        });
+      });
+    });
   });
 
-  describe('#isAssessment', function () {
-    it('should return true if the campaign is of type ASSESSMENT', function () {
-      // given
-      const campaignReport = domainBuilder.buildCampaignReport({ type: CampaignTypes.ASSESSMENT });
+  describe('#setTargetProfileInformation', function () {
+    it('should define target profile informations', function () {
+      const targetProfileForSpecifier = {
+        name: 'target profile',
+        description: 'description',
+        TubesCount: 2,
+        hasStage: false,
+        thematicResult: 3,
+      };
 
-      // when / then
-      expect(campaignReport.isAssessment).to.be.true;
-    });
+      const campaignReport = domainBuilder.buildCampaignReport();
 
-    it('should return false if the campaign is not of type ASSESSMENT', function () {
-      // given
-      const campaignReport = domainBuilder.buildCampaignReport({ type: CampaignTypes.PROFILES_COLLECTION });
+      campaignReport.setTargetProfileInformation(targetProfileForSpecifier);
 
-      // when / then
-      expect(campaignReport.isAssessment).to.be.false;
-    });
-  });
-
-  describe('#isProfilesCollection', function () {
-    it('should return true if the campaign is of type PROFILES_COLLECTION', function () {
-      // given
-      const campaignReport = domainBuilder.buildCampaignReport({ type: CampaignTypes.PROFILES_COLLECTION });
-
-      // when / then
-      expect(campaignReport.isProfilesCollection).to.be.true;
-    });
-
-    it('should return false if the campaign is not of type PROFILES_COLLECTION', function () {
-      // given
-      const campaignReport = domainBuilder.buildCampaignReport({ type: CampaignTypes.ASSESSMENT });
-
-      // when / then
-      expect(campaignReport.isProfilesCollection).to.be.false;
+      expect(campaignReport.targetProfileName).to.equal(targetProfileForSpecifier.name);
+      expect(campaignReport.targetProfileDescription).to.equal(targetProfileForSpecifier.description);
+      expect(campaignReport.targetProfileTubesCount).to.equal(targetProfileForSpecifier.tubeCount);
+      expect(campaignReport.targetProfileThematicResult).to.equal(targetProfileForSpecifier.thematicResultCount);
+      expect(campaignReport.targetProfileHasStage).to.equal(targetProfileForSpecifier.hasStage);
     });
   });
 

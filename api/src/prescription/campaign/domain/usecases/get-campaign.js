@@ -6,7 +6,7 @@ const getCampaign = async function ({
 }) {
   const campaignReport = await campaignReportRepository.get(campaignId);
 
-  if (campaignReport.isAssessment) {
+  if (campaignReport.isAssessment || campaignReport.isExam) {
     const [badges, stageCollection, aggregatedResults] = await Promise.all([
       badgeRepository.findByCampaignId(campaignId),
       stageCollectionRepository.findStageCollection({ campaignId: campaignId }),

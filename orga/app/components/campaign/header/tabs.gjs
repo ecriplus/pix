@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import { action } from '@ember/object';
+import { or } from 'ember-truth-helpers';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -37,7 +38,7 @@ export default class CampaignTabs extends Component {
 
         <LinkTo
           @route={{if
-            @campaign.isTypeAssessment
+            (or @campaign.isTypeAssessment @campaign.isTypeExam)
             "authenticated.campaigns.campaign.assessment-results"
             "authenticated.campaigns.campaign.profile-results"
           }}
@@ -47,7 +48,7 @@ export default class CampaignTabs extends Component {
           {{t "pages.campaign.tab.results" count=@campaign.sharedParticipationsCount}}
         </LinkTo>
 
-        {{#if @campaign.isTypeAssessment}}
+        {{#if (or @campaign.isTypeAssessment @campaign.isTypeExam)}}
           <LinkTo @route="authenticated.campaigns.campaign.analysis" class="navbar-item" @model={{@campaign}}>
             {{t "pages.campaign.tab.review"}}
           </LinkTo>
