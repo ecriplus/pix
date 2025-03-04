@@ -120,4 +120,27 @@ export const membershipRoutes = [
       ],
     },
   },
+  {
+    method: 'PATCH',
+    path: '/api/organizations/{organizationId}/me',
+    config: {
+      pre: [
+        {
+          method: (request, h) => securityPreHandlers.checkUserBelongsToOrganization(request, h),
+          assign: 'belongsToOrganization',
+        },
+      ],
+      validate: {
+        params: Joi.object({
+          organizationId: identifiersType.organizationId,
+        }),
+      },
+      handler: (request, h) => membershipController.updateLastAccessedAt(request, h),
+      tags: ['api', 'team', 'organizations'],
+      notes: [
+        "Cette route est restreinte aux membres authentifiés d'une organisation",
+        'Elle permet de mettre à jour la dernière date d’accès à une organisation d’un utilisateur.',
+      ],
+    },
+  },
 ];
