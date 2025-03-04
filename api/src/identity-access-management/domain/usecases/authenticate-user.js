@@ -5,6 +5,28 @@ import { createWarningConnectionEmail } from '../emails/create-warning-connectio
 import { MissingOrInvalidCredentialsError, PasswordNotMatching, UserShouldChangePasswordError } from '../errors.js';
 import { RefreshToken } from '../models/RefreshToken.js';
 
+/**
+ * typedef { function } authenticateUser
+ * @param {Object} params
+ * @param {string} params.password
+ * @param {string} params.scope
+ * @param {string} params.source
+ * @param {string} params.username
+ * @param {string} params.localeFromCookie
+ * @param {RefreshTokenRepository} params.refreshTokenRepository
+ * @param {PixAuthenticationService} params.pixAuthenticationService
+ * @param {TokenService} params.tokenService
+ * @param {UserRepository} params.userRepository
+ * @param {UserLoginRepository} params.userLoginRepository
+ * @param {AuthenticationMethodRepository} params.authenticationMethodRepository
+ * @param {AdminMemberRepository} params.adminMemberRepository
+ * @param {EmailRepository} params.emailRepository
+ * @param {EmailValidationDemandRepository} params.emailValidationDemandRepository
+ * @param {LastUserApplicationConnectionsRepository} params.lastUserApplicationConnectionsRepository,
+ * @param {RequestedApplication} params.requestedApplication,
+ * @param {string} params.audience
+ * @returns {Promise<{expirationDelaySeconds, accessToken: (*), refreshToken}>}
+ */
 const authenticateUser = async function ({
   password,
   source,
@@ -19,8 +41,9 @@ const authenticateUser = async function ({
   adminMemberRepository,
   emailRepository,
   emailValidationDemandRepository,
-  audience,
+  lastUserApplicationConnectionsRepository,
   requestedApplication,
+  audience,
 }) {
   try {
     const user = await pixAuthenticationService.getUserByUsernameAndPassword({
@@ -63,7 +86,11 @@ const authenticateUser = async function ({
       );
     }
     await userLoginRepository.updateLastLoggedAt({ userId: user.id });
-
+    await lastUserApplicationConnectionsRepository.upsert({
+      userId: user.id,
+      application: requestedApplication.applicationName,
+      lastLoggedAt: new Date(),
+    });
     await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
       userId: user.id,
       identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,

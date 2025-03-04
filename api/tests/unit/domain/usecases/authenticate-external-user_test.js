@@ -6,6 +6,7 @@ import {
   UserShouldChangePasswordError,
 } from '../../../../src/identity-access-management/domain/errors.js';
 import { AuthenticationMethod } from '../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
+import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
 import {
   UnexpectedUserAccountError,
   UserAlreadyExistsWithAuthenticationMethodError,
@@ -14,6 +15,7 @@ import {
 import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
 
 describe('Unit | Application | UseCase | authenticate-external-user', function () {
+  let lastUserApplicationConnectionsRepository;
   let tokenService;
   let pixAuthenticationService;
   let obfuscationService;
@@ -21,6 +23,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
   let userRepository;
   let userLoginRepository;
   const audience = 'https://app.pix.fr';
+  const requestedApplication = new RequestedApplication('app');
 
   beforeEach(function () {
     tokenService = {
@@ -33,6 +36,9 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
     };
     obfuscationService = {
       getUserAuthenticationMethodWithObfuscation: sinon.stub(),
+    };
+    lastUserApplicationConnectionsRepository = {
+      upsert: sinon.stub(),
     };
     authenticationMethodRepository = {
       create: sinon.stub(),
@@ -48,7 +54,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
   });
 
   context('when credentials are valid', function () {
-    it('should resolve a valid JWT token when authentication succeeds (should not change password)', async function () {
+    it('resolves a valid JWT token when authentication succeeds (should not change password)', async function () {
       // given
       const password = 'Azerty123*';
       const user = createUserWithValidCredentials({
@@ -82,14 +88,20 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         authenticationMethodRepository,
         userRepository,
         userLoginRepository,
+        lastUserApplicationConnectionsRepository,
+        requestedApplication,
       });
 
       // then
       expect(token).to.be.deep.equal(expectedToken);
     });
 
-    it('should save last login date when authentication succeeds', async function () {
+    it('saves last login date when authentication succeeds', async function () {
       // given
+      const clock = sinon.useFakeTimers({
+        now: new Date(),
+        toFake: ['Date'],
+      });
       const password = 'Azerty123*';
       const user = createUserWithValidCredentials({
         password,
@@ -108,6 +120,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
 
       const expectedToken = 'expected returned token';
       tokenService.createAccessTokenForSaml.withArgs({ userId: user.id, audience }).resolves(expectedToken);
+
       // when
       await authenticateExternalUser({
         username: user.email,
@@ -121,6 +134,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         authenticationMethodRepository,
         userRepository,
         userLoginRepository,
+        lastUserApplicationConnectionsRepository,
+        requestedApplication,
       });
 
       // then
@@ -129,9 +144,15 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         userId: user.id,
         identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
       });
+      expect(lastUserApplicationConnectionsRepository.upsert).to.have.been.calledWithExactly({
+        userId: user.id,
+        application: requestedApplication.applicationName,
+        lastLoggedAt: new Date(),
+      });
+      clock.restore();
     });
 
-    it("should throw an UnexpectedUserAccountError (with expected user's username or email) when the authenticated user does not match the expected one", async function () {
+    it("throws an UnexpectedUserAccountError (with expected user's username or email) when the authenticated user does not match the expected one", async function () {
       // given
       const password = 'Azerty123*';
       const user = createUserWithValidCredentials({
@@ -163,6 +184,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         authenticationMethodRepository,
         userRepository,
         userLoginRepository,
+        lastUserApplicationConnectionsRepository,
+        requestedApplication,
       });
 
       // then
@@ -173,7 +196,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
     });
 
     context('when adding GAR authentication method', function () {
-      it('should throw an error if user from external user token is not the same as found user from credentials', async function () {
+      it('throws an error if user from external user token is not the same as found user from credentials', async function () {
         // given
         const password = 'Azerty123*';
         const userFromCredentials = createUserWithValidCredentials({
@@ -200,13 +223,15 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
+          requestedApplication,
         });
 
         // then
         expect(error).to.be.instanceOf(UserAlreadyExistsWithAuthenticationMethodError);
       });
 
-      it('should add GAR authentication method', async function () {
+      it('adds GAR authentication method', async function () {
         // given
         const password = 'Azerty123*';
         const user = createUserWithValidCredentials({
@@ -239,6 +264,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
+          requestedApplication,
         });
 
         // then
@@ -258,7 +285,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
     });
 
     context('when user should change password', function () {
-      it('should also add GAR authentication method', async function () {
+      it('also adds GAR authentication method', async function () {
         // given
         const oneTimePassword = 'Azerty123*';
         const user = createUserWithValidCredentialsWhoShouldChangePassword({
@@ -291,6 +318,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
+          requestedApplication,
         });
 
         // then
@@ -308,7 +337,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         });
       });
 
-      it('should create and return password reset token', async function () {
+      it('creates and return password reset token', async function () {
         // given
         tokenService.createPasswordResetToken.returns('token');
         const oneTimePassword = 'Azerty123*';
@@ -340,6 +369,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
           authenticationMethodRepository,
           userRepository,
           userLoginRepository,
+          lastUserApplicationConnectionsRepository,
+          requestedApplication,
         });
 
         // then
@@ -350,7 +381,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
   });
 
   context('when credentials are invalid', function () {
-    it('should reject when user not found', async function () {
+    it('rejects when user not found', async function () {
       // given
       const unknownUserEmail = 'foo@example.net';
       const password = 'Azerty123*';
@@ -377,7 +408,7 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
       expect(error).to.be.an.instanceOf(MissingOrInvalidCredentialsError);
     });
 
-    it('should reject when password does not match', async function () {
+    it('rejects when password does not match', async function () {
       // given
       const email = 'foo@example.net';
       const invalidPassword = 'oups123*';
@@ -398,6 +429,8 @@ describe('Unit | Application | UseCase | authenticate-external-user', function (
         pixAuthenticationService,
         userRepository,
         userLoginRepository,
+        lastUserApplicationConnectionsRepository,
+        requestedApplication,
       });
 
       // then
