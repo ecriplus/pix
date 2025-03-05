@@ -14,9 +14,10 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       const grains = [Symbol('text')];
       const transitionTexts = [];
       const details = Symbol('details');
+      const version = Symbol('version');
 
       // when
-      const module = new Module({ id, slug, title, isBeta, grains, details, transitionTexts });
+      const module = new Module({ id, slug, title, isBeta, grains, details, transitionTexts, version });
 
       // then
       expect(module.id).to.equal(id);
@@ -26,6 +27,7 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       expect(module.transitionTexts).to.equal(transitionTexts);
       expect(module.grains).to.have.lengthOf(grains.length);
       expect(module.details).to.deep.equal(details);
+      expect(module.version).to.deep.equal(version);
     });
 
     describe('if a module does not have an id', function () {
