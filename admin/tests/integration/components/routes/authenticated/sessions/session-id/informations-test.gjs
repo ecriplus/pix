@@ -102,22 +102,7 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
 
       // when
       assert.dom('[data-test-id="session-info__number-of-issue-report"]').hasText('1');
-      assert.dom('[data-test-id="session-info__number-of-not-checked-end-screen"]').hasText('1');
       assert.dom('[data-test-id="session-info__number-of-started-or-error-certifications"]').hasText('0');
-    });
-
-    module('when the session has supervisor access', function () {
-      test('it should not display the number of not checked end test screens', async function (assert) {
-        // given
-        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-        const session = _buildSessionWithTwoJuryCertificationSummary({ hasSupervisorAccess: true }, server);
-
-        // when
-        const screen = await visit(`/sessions/${session.id}`);
-
-        // when
-        assert.dom(screen.queryByText("Nombre d'écrans de fin de test non renseignés")).doesNotExist();
-      });
     });
 
     test('it renders the examinerGlobalComment if any', async function (assert) {
@@ -216,11 +201,9 @@ function _buildSessionWithTwoJuryCertificationSummary(sessionData, server) {
   const juryCertifSummary1 = server.create('jury-certification-summary', {
     numberOfCertificationIssueReports: 1,
     status: 'validated',
-    hasSeenEndTestScreen: false,
   });
   const juryCertifSummary2 = server.create('jury-certification-summary', {
     status: 'validated',
-    hasSeenEndTestScreen: true,
   });
 
   return server.create('session', {

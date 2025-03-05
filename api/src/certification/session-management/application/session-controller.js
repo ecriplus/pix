@@ -33,9 +33,9 @@ const findPaginatedFilteredJurySessions = async function (
 
 const getJurySession = async function (request, h, dependencies = { jurySessionSerializer }) {
   const sessionId = request.params.sessionId;
-  const { jurySession, hasSupervisorAccess } = await usecases.getJurySession({ sessionId });
+  const { jurySession } = await usecases.getJurySession({ sessionId });
 
-  return dependencies.jurySessionSerializer.serialize(jurySession, hasSupervisorAccess);
+  return dependencies.jurySessionSerializer.serialize(jurySession);
 };
 
 const getJuryCertificationSummaries = async function (

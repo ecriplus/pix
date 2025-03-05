@@ -93,14 +93,6 @@ function getFormattedDate(param) {
               data-test-id="session-info__number-of-issue-report"
             >{{@sessionModel.countCertificationIssueReports}}</span>
           </li>
-          {{#unless @sessionModel.hasSupervisorAccess}}
-            <li class="session-info__list-item">
-              <span>Nombre d'écrans de fin de test non renseignés :</span>
-              <span
-                data-test-id="session-info__number-of-not-checked-end-screen"
-              >{{@sessionModel.countNotCheckedEndScreen}}</span>
-            </li>
-          {{/unless}}
           <li class="session-info__list-item">
             <span>Certifications non terminées traitées automatiquement :</span>
             <span>{{@sessionModel.countCertificationsFlaggedAsAborted}}</span>

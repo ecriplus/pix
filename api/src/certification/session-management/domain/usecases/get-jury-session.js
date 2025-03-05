@@ -8,12 +8,10 @@
  * @param {JurySessionRepository} params.jurySessionRepository
  * @param {SupervisorAccessRepository} params.supervisorAccessRepository
  */
-const getJurySession = async function ({ sessionId, jurySessionRepository, supervisorAccessRepository }) {
+const getJurySession = async function ({ sessionId, jurySessionRepository }) {
   const jurySession = await jurySessionRepository.get({ id: sessionId });
-  const hasSupervisorAccess = await supervisorAccessRepository.sessionHasSupervisorAccess({ sessionId });
   return {
     jurySession,
-    hasSupervisorAccess,
   };
 };
 

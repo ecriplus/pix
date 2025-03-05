@@ -43,7 +43,6 @@ export default class Session extends Model {
   @attr() juryCommentedAt;
   @attr('boolean') hasIncident;
   @attr('boolean') hasJoiningIssue;
-  @attr('boolean') hasSupervisorAccess;
   @attr() version;
 
   @hasMany('jury-certification-summary', { async: true, inverse: null }) juryCertificationSummaries;
@@ -120,10 +119,5 @@ export default class Session extends Model {
   @computed('status')
   get displayStatus() {
     return statusToDisplayName[this.status];
-  }
-
-  @computed('hasSupervisorAccess')
-  get displayHasSeenEndTestScreenColumn() {
-    return !this.hasSupervisorAccess;
   }
 }
