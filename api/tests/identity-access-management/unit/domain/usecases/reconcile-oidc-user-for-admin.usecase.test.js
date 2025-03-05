@@ -19,7 +19,11 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
   const requestedApplication = new RequestedApplication('admin');
 
   beforeEach(function () {
-    authenticationMethodRepository = { create: sinon.stub(), findOneByUserIdAndIdentityProvider: sinon.stub() };
+    authenticationMethodRepository = {
+      create: sinon.stub(),
+      findOneByUserIdAndIdentityProvider: sinon.stub(),
+      updateLastLoggedAtByIdentityProvider: sinon.stub(),
+    };
     userRepository = { getByEmail: sinon.stub() };
     userLoginRepository = { updateLastLoggedAt: sinon.stub() };
     authenticationSessionService = { getByKey: sinon.stub() };
@@ -144,7 +148,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
     expect(result).to.equal('accessToken');
   });
 
-  it('saves the last user application connection', async function () {
+  it('saves the last user connection', async function () {
     // given
     const email = 'anne@example.net';
     const externalIdentifier = 'external_id';
@@ -181,6 +185,10 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       userId,
       application: 'admin',
       lastLoggedAt: sinon.match.instanceOf(Date),
+    });
+    expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.be.calledWithMatch({
+      userId,
+      identityProvider: oidcAuthenticationService.identityProvider,
     });
   });
 

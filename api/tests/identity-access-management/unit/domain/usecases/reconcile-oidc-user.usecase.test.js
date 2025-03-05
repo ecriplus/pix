@@ -23,7 +23,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
 
     beforeEach(function () {
       identityProvider = 'genericOidcProviderCode';
-      authenticationMethodRepository = { create: sinon.stub() };
+      authenticationMethodRepository = { create: sinon.stub(), updateLastLoggedAtByIdentityProvider: sinon.stub() };
       userLoginRepository = {
         updateLastLoggedAt: sinon.stub(),
       };
@@ -156,7 +156,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       );
     });
 
-    it('saves the last user application connection', async function () {
+    it('saves the last user connection', async function () {
       // given
       const sessionContent = { idToken: 'idToken' };
       const externalIdentifier = 'external_id';
@@ -192,6 +192,11 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         application: 'app',
         lastLoggedAt: sinon.match.instanceOf(Date),
       });
+
+      expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.be.calledWithExactly({
+        userId,
+        identityProvider,
+      });
     });
   });
 
@@ -206,7 +211,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
 
     beforeEach(function () {
       identityProvider = POLE_EMPLOI.code;
-      authenticationMethodRepository = { create: sinon.stub() };
+      authenticationMethodRepository = { create: sinon.stub(), updateLastLoggedAtByIdentityProvider: sinon.stub() };
       userLoginRepository = {
         updateLastLoggedAt: sinon.stub(),
       };
@@ -303,12 +308,21 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
       });
 
       // then
-      sinon.assert.calledOnce(oidcAuthenticationService.createAccessToken);
-      sinon.assert.calledOnce(oidcAuthenticationService.saveIdToken);
-      sinon.assert.calledOnceWithExactly(userLoginRepository.updateLastLoggedAt, { userId });
+      expect(oidcAuthenticationService.createAccessToken).to.be.calledOnce;
+      expect(oidcAuthenticationService.saveIdToken).to.be.calledOnce;
+      expect(userLoginRepository.updateLastLoggedAt).to.have.been.calledWithExactly({ userId });
       expect(result).to.deep.equal({
         accessToken: 'accessToken',
         logoutUrlUUID: 'logoutUrlUUID',
+      });
+      expect(lastUserApplicationConnectionsRepository.upsert).to.be.calledWithExactly({
+        userId,
+        application: 'app',
+        lastLoggedAt: sinon.match.instanceOf(Date),
+      });
+      expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.be.calledWithExactly({
+        userId,
+        identityProvider: oidcAuthenticationService.identityProvider,
       });
     });
   });

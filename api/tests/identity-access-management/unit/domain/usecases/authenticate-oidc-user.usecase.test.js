@@ -36,6 +36,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
       };
       authenticationMethodRepository = {
         updateAuthenticationComplementByUserIdAndIdentityProvider: sinon.stub(),
+        updateLastLoggedAtByIdentityProvider: sinon.stub(),
       };
       authenticationSessionService = {
         save: sinon.stub(),
@@ -294,6 +295,15 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
             userId: 10,
             identityProvider: oidcAuthenticationService.identityProvider,
           });
+          expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.have.been.calledWithExactly({
+            userId: 10,
+            identityProvider: oidcAuthenticationService.identityProvider,
+          });
+          expect(lastUserApplicationConnectionsRepository.upsert).to.have.been.calledWithExactly({
+            userId: 10,
+            application: 'app',
+            lastLoggedAt: sinon.match.instanceOf(Date),
+          });
         });
       });
 
@@ -331,6 +341,15 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
             userId: 10,
             identityProvider: oidcAuthenticationService.identityProvider,
           });
+          expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.have.been.calledWithExactly({
+            userId: 10,
+            identityProvider: oidcAuthenticationService.identityProvider,
+          });
+          expect(lastUserApplicationConnectionsRepository.upsert).to.have.been.calledWithExactly({
+            userId: 10,
+            application: 'app',
+            lastLoggedAt: sinon.match.instanceOf(Date),
+          });
         });
       });
     });
@@ -365,6 +384,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
       };
       authenticationMethodRepository = {
         updateAuthenticationComplementByUserIdAndIdentityProvider: sinon.stub(),
+        updateLastLoggedAtByIdentityProvider: sinon.stub(),
       };
 
       authenticationSessionService = {
@@ -415,6 +435,15 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationComplement,
           userId: 1,
           identityProvider: oidcAuthenticationService.identityProvider,
+        });
+        expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.have.been.calledWithExactly({
+          userId: 1,
+          identityProvider: oidcAuthenticationService.identityProvider,
+        });
+        expect(lastUserApplicationConnectionsRepository.upsert).to.have.been.calledWithExactly({
+          userId: 1,
+          application: 'app',
+          lastLoggedAt: sinon.match.instanceOf(Date),
         });
       });
 
@@ -495,6 +524,15 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           authenticationComplement,
           userId: 10,
           identityProvider: oidcAuthenticationService.identityProvider,
+        });
+        expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.have.been.calledWithExactly({
+          userId: 10,
+          identityProvider: oidcAuthenticationService.identityProvider,
+        });
+        expect(lastUserApplicationConnectionsRepository.upsert).to.have.been.calledWithExactly({
+          userId: 10,
+          application: 'app',
+          lastLoggedAt: sinon.match.instanceOf(Date),
         });
       });
     });

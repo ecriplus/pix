@@ -73,6 +73,15 @@ async function createOidcUser({
     authenticationMethodRepository,
   });
 
+  await _updateUserLastConnection({
+    userId,
+    requestedApplication,
+    oidcAuthenticationService,
+    authenticationMethodRepository,
+    lastUserApplicationConnectionsRepository,
+    userLoginRepository,
+  });
+
   const accessToken = oidcAuthenticationService.createAccessToken({ userId, audience });
 
   let logoutUrlUUID;
@@ -80,14 +89,27 @@ async function createOidcUser({
     logoutUrlUUID = await oidcAuthenticationService.saveIdToken({ idToken: sessionContent.idToken, userId });
   }
 
+  return { accessToken, logoutUrlUUID };
+}
+
+export { createOidcUser };
+
+async function _updateUserLastConnection({
+  userId,
+  requestedApplication,
+  oidcAuthenticationService,
+  authenticationMethodRepository,
+  lastUserApplicationConnectionsRepository,
+  userLoginRepository,
+}) {
   await userLoginRepository.updateLastLoggedAt({ userId });
   await lastUserApplicationConnectionsRepository.upsert({
     userId,
     application: requestedApplication.applicationName,
     lastLoggedAt: new Date(),
   });
-
-  return { accessToken, logoutUrlUUID };
+  await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
+    userId,
+    identityProvider: oidcAuthenticationService.identityProvider,
+  });
 }
-
-export { createOidcUser };
