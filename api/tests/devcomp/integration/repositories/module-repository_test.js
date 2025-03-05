@@ -1,3 +1,5 @@
+import crypto from 'node:crypto';
+
 import { Module } from '../../../../src/devcomp/domain/models/module/Module.js';
 import moduleDatasource from '../../../../src/devcomp/infrastructure/datasources/learning-content/module-datasource.js';
 import { ModuleFactory } from '../../../../src/devcomp/infrastructure/factories/module-factory.js';
@@ -42,7 +44,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
       });
     });
 
-    it('should return a Module instance', async function () {
+    it('should return a Module instance with its version', async function () {
       const existingModuleSlug = 'bien-ecrire-son-adresse-mail';
       const expectedFoundModule = {
         id: 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
@@ -87,6 +89,18 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
       moduleDatasourceStub.getBySlug.withArgs(existingModuleSlug).resolves(expectedFoundModule);
       sinon.spy(ModuleFactory, 'build');
 
+      const version = Symbol('version');
+      const digestStub = sinon.stub().returns(version);
+      const updateStub = sinon.stub();
+      const createHashStub = sinon.stub(crypto, 'createHash').returns({
+        copy: () => {
+          return {
+            digest: digestStub,
+          };
+        },
+        update: updateStub,
+      });
+
       // when
       const module = await moduleRepository.getBySlug({
         slug: existingModuleSlug,
@@ -94,8 +108,11 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
       });
 
       // then
-      expect(ModuleFactory.build).to.have.been.calledWith(expectedFoundModule);
+      expect(ModuleFactory.build).to.have.been.calledWith({ ...expectedFoundModule, version });
       expect(module).to.be.instanceof(Module);
+      expect(createHashStub).to.have.been.calledOnceWith('sha256');
+      expect(updateStub).to.have.been.calledOnceWith(JSON.stringify(expectedFoundModule));
+      expect(digestStub).to.have.been.calledOnceWith('hex');
     });
   });
 
