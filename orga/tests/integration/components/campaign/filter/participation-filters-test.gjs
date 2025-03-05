@@ -8,7 +8,7 @@ import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module.only('Integration | Component | Campaign::Filter::ParticipationFilters', function (hooks) {
+module('Integration | Component | Campaign::Filter::ParticipationFilters', function (hooks) {
   setupIntlRenderingTest(hooks);
   let store;
   const campaignId = '1';

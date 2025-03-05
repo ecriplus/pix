@@ -3,6 +3,8 @@ import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { array, fn } from '@ember/helper';
+import { on } from '@ember/modifier';
+import { or } from 'ember-truth-helpers';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
@@ -81,7 +83,7 @@ export default class ParticipantsList extends Component {
           <:cell>
             <LinkTo
               @route={{if
-                @campaign.isTypeAssessment
+                (or @campaign.isTypeAssessment @campaign.isTypeExam)
                 "authenticated.campaigns.participant-assessment"
                 "authenticated.campaigns.participant-profile"
               }}
