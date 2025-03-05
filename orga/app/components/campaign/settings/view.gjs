@@ -3,11 +3,11 @@ import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { fn } from '@ember/helper';
-import { or } from 'ember-truth-helpers';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
+import { or } from 'ember-truth-helpers';
 
 import { ID_PIX_TYPES } from '../../../helpers/id-pix-types';
 import CopyPasteButton from '../../copy-paste-button';
@@ -64,7 +64,10 @@ export default class CampaignView extends Component {
   }
 
   get isMultipleSendingsForAssessmentEnabled() {
-    return (this.args.campaign.isTypeAssessment || this.args.campaign.isTypeExam) && this.currentUser.prescriber.enableMultipleSendingAssessment;
+    return (
+      (this.args.campaign.isTypeAssessment || this.args.campaign.isTypeExam) &&
+      this.currentUser.prescriber.enableMultipleSendingAssessment
+    );
   }
 
   get displayResetToZero() {

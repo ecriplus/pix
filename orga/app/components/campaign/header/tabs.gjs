@@ -1,10 +1,10 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import { action } from '@ember/object';
-import { or } from 'ember-truth-helpers';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
+import { or } from 'ember-truth-helpers';
 
 export default class CampaignTabs extends Component {
   @service intl;

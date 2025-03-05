@@ -12,7 +12,9 @@ export default class ParticipationStatus extends Component {
 
   get label() {
     const { status, campaignType } = this.args;
-    return this.intl.t(`components.participation-status.${status}-${campaignType === 'EXAM' ? 'ASSESSMENT' : campaignType}`);
+    return this.intl.t(
+      `components.participation-status.${status}-${campaignType === 'EXAM' ? 'ASSESSMENT' : campaignType}`,
+    );
   }
 
   <template>

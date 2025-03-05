@@ -15,9 +15,6 @@ import CampaignStageAverage from '../cards/stage-average';
       <CampaignResultAverage @value={{@averageResult}} class="assessment-cards__average-card" />
     {{/if}}
 
-    <CampaignSharedCount
-      @value={{@sharedParticipationsCount}}
-      @shouldDisplayAssessmentLabels={{true}}
-    />
+    <CampaignSharedCount @value={{@sharedParticipationsCount}} @shouldDisplayAssessmentLabels={{true}} />
   </div>
 </template>

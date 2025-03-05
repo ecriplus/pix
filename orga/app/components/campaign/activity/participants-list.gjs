@@ -4,13 +4,13 @@ import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { array, fn } from '@ember/helper';
 import { on } from '@ember/modifier';
-import { or } from 'ember-truth-helpers';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { or } from 'ember-truth-helpers';
 
 import ParticipationStatus from '../../ui/participation-status';
 import ParticipationFilters from '../filter/participation-filters';

@@ -1,7 +1,7 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { or } from 'ember-truth-helpers';
 import { tracked } from '@glimmer/tracking';
+import { or } from 'ember-truth-helpers';
 import sumBy from 'lodash/sumBy';
 
 import ParticipantsCount from '../cards/participants-count';

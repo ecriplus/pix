@@ -4,13 +4,13 @@ import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { fn } from '@ember/helper';
-import { or } from 'ember-truth-helpers';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { or } from 'ember-truth-helpers';
 
 import displayCampaignErrors from '../../helpers/display-campaign-errors';
 
