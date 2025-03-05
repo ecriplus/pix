@@ -9,6 +9,6 @@ function displayCertificabilityDate(hideCertifiableDate, isCertifiable) {
 <template>
   <IsCertifiable @isCertifiable={{@isCertifiable}} />
   {{#if (displayCertificabilityDate @hideCertifiableDate @isCertifiable)}}
-    <span class="cell-certifiable-at">{{dayjsFormat @certifiableAt "DD/MM/YYYY" allow-empty=true}}</span>
+    <span>{{dayjsFormat @certifiableAt "DD/MM/YYYY" allow-empty=true}}</span>
   {{/if}}
 </template>
