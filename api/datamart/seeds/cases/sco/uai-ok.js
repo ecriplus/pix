@@ -6,7 +6,7 @@ import {
   generateStatus,
   getCertificationDate,
   orgaUAIGenerator,
-} from './tools.js';
+} from '../tools.js';
 
 const generateCertifCourseId = certificationCourseIdGenerator({ startingFrom: 2100000 });
 const generateOrgaUai = orgaUAIGenerator();

@@ -120,8 +120,18 @@ const generatePixScore = () => {
   return faker.number.int({ min: 48, max: 895 });
 };
 
+const chunkify = async ({ numberOfSeeds, knex, datamart, generateFn }) => {
+  const chunkSize = 100;
+  let remaining = numberOfSeeds;
+  do {
+    await knex.batchInsert(datamart, faker.helpers.multiple(generateFn, { count: chunkSize }).flat());
+    remaining = remaining - chunkSize;
+  } while (remaining / chunkSize >= 1);
+};
+
 export {
   certificationCourseIdGenerator,
+  chunkify,
   COMPETENCES,
   generateCompetenceLevel,
   generateFirstName,
