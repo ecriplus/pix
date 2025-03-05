@@ -1,6 +1,7 @@
 import jsonapiSerializer from 'jsonapi-serializer';
 
 import { Progression } from '../../../../evaluation/domain/models/Progression.js';
+import { DomainError } from '../../../domain/errors.js';
 import { Assessment } from '../../../domain/models/Assessment.js';
 
 const { Serializer } = jsonapiSerializer;
@@ -89,10 +90,13 @@ const serialize = function (assessments) {
 
 const deserialize = function (json) {
   const type = json.data.attributes.type;
+  if (![Assessment.types.DEMO, Assessment.types.PREVIEW].includes(type)) {
+    throw new DomainError('Only allowed to create DEMO or PREVIEW type of assessment');
+  }
   const method = Assessment.computeMethodFromType(type);
 
   let courseId = null;
-  if (type !== Assessment.types.CAMPAIGN && type !== Assessment.types.PREVIEW) {
+  if (type !== Assessment.types.PREVIEW) {
     courseId = json.data.relationships.course.data.id;
   }
 

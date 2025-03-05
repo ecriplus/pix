@@ -1,7 +1,14 @@
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { databaseBuilder, expect, knex, learningContentBuilder, mockLearningContent } from '../../../../test-helper.js';
+import {
+  databaseBuilder,
+  domainBuilder,
+  expect,
+  knex,
+  learningContentBuilder,
+  mockLearningContent,
+} from '../../../../test-helper.js';
 
 describe('Integration | Usecase | Handle Badge Acquisition', function () {
   let userId, assessment, badgeCompleted;
@@ -73,7 +80,8 @@ describe('Integration | Usecase | Handle Badge Acquisition', function () {
       databaseBuilder.factory.buildKnowledgeElement({ userId, skillId: 'web3', status: 'validated' });
       databaseBuilder.factory.buildKnowledgeElement({ userId, skillId: 'web4', status: 'invalidated' });
 
-      const campaignId = databaseBuilder.factory.buildCampaign({ targetProfileId }).id;
+      const campaignDTO = databaseBuilder.factory.buildCampaign({ targetProfileId });
+      const campaignId = campaignDTO.id;
       listSkill.forEach((skillId) => databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId }));
       const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({ campaignId, userId }).id;
 
@@ -101,6 +109,7 @@ describe('Integration | Usecase | Handle Badge Acquisition', function () {
         userId,
         campaignParticipationId,
         type: Assessment.types.CAMPAIGN,
+        campaign: domainBuilder.buildCampaign(campaignDTO),
       });
 
       const learningContentObjects = learningContentBuilder(learningContent);

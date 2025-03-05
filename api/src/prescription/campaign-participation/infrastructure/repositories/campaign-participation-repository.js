@@ -7,6 +7,7 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { Campaign } from '../../../../shared/domain/models/Campaign.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
+import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 import * as knowledgeElementSnapshotRepository from '../../../campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../shared/domain/models/KnowledgeElementCollection.js';
@@ -57,14 +58,14 @@ const batchUpdate = async function (campaignParticipations) {
 const get = async function (id) {
   const knexConn = DomainTransaction.getConnection();
 
-  const campaignParticipation = await knexConn.from('campaign-participations').where({ id }).first();
-  const campaign = await knexConn.from('campaigns').where({ id: campaignParticipation.campaignId }).first();
-  const assessments = await knexConn.from('assessments').where({ campaignParticipationId: id });
-
+  const campaignParticipationDTO = await knexConn.from('campaign-participations').where({ id }).first();
+  const campaignDTO = await knexConn.from('campaigns').where({ id: campaignParticipationDTO.campaignId }).first();
+  const assessmentDTOs = await knexConn.from('assessments').where({ campaignParticipationId: id });
+  const campaign = new Campaign(campaignDTO);
   return new CampaignParticipation({
-    ...campaignParticipation,
-    campaign: new Campaign(campaign),
-    assessments: assessments.map((assessment) => new Assessment(assessment)),
+    ...campaignParticipationDTO,
+    campaign,
+    assessments: assessmentDTOs.map((assessmentDTO) => new Assessment({ ...assessmentDTO, campaign })),
   });
 };
 
@@ -150,9 +151,16 @@ const findOneByCampaignIdAndUserId = async function ({ campaignId, userId }) {
     .first();
   if (!campaignParticipation) return null;
   const assessments = await knex('assessments').where({ campaignParticipationId: campaignParticipation.id });
+  const campaign = await campaignRepository.get(campaignId);
   return new CampaignParticipation({
     ...campaignParticipation,
-    assessments: assessments.map((assessment) => new Assessment(assessment)),
+    assessments: assessments.map(
+      (assessment) =>
+        new Assessment({
+          ...assessment,
+          campaign,
+        }),
+    ),
   });
 };
 

@@ -84,7 +84,14 @@ describe('Integration | Infrastructure | Repositories | assessment-repository', 
 
     context('when the assessment exists', function () {
       beforeEach(async function () {
-        assessmentId = databaseBuilder.factory.buildAssessment({ courseId: 'course_A' }).id;
+        const campaignId = databaseBuilder.factory.buildCampaign({ code: 'COUCOUYVO' }).id;
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+        }).id;
+        assessmentId = databaseBuilder.factory.buildAssessment({
+          type: Assessment.types.CAMPAIGN,
+          campaignParticipationId,
+        }).id;
         await databaseBuilder.commit();
       });
 
@@ -95,7 +102,7 @@ describe('Integration | Infrastructure | Repositories | assessment-repository', 
         // then
         expect(assessment).to.be.an.instanceOf(Assessment);
         expect(assessment.id).to.equal(assessmentId);
-        expect(assessment.courseId).to.equal('course_A');
+        expect(assessment.campaignCode).to.equal('COUCOUYVO');
       });
     });
 
@@ -389,15 +396,20 @@ describe('Integration | Infrastructure | Repositories | assessment-repository', 
 
     beforeEach(async function () {
       userId = databaseBuilder.factory.buildUser().id;
+      const campaignId = databaseBuilder.factory.buildCampaign().id;
+      const campaignParticipation1Id = databaseBuilder.factory.buildCampaignParticipation({ campaignId }).id;
+      const campaignParticipation2Id = databaseBuilder.factory.buildCampaignParticipation({ campaignId }).id;
       databaseBuilder.factory.buildAssessment({
         userId,
         type: Assessment.types.CAMPAIGN,
         state: Assessment.states.ABORTED,
+        campaignParticipationId: campaignParticipation1Id,
       });
 
       assessmentId = databaseBuilder.factory.buildAssessment({
         userId,
         type: Assessment.types.CAMPAIGN,
+        campaignParticipationId: campaignParticipation2Id,
       }).id;
 
       await databaseBuilder.commit();
