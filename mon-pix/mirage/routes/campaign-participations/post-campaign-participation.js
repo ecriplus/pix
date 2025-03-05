@@ -43,6 +43,9 @@ export default function (schema, request) {
   const newAssessment = {
     type: 'CAMPAIGN',
     codeCampaign: campaign.code,
+    hasCheckpoints: true,
+    showProgressBar: true,
+    showLevelup: true,
   };
 
   const assessment = schema.assessments.create(newAssessment);

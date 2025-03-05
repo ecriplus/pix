@@ -21,15 +21,13 @@ const serialize = function (assessments) {
       }
 
       // Same here for isForCampaign() and isCompetenceEvaluation()
-      if ([Assessment.types.CAMPAIGN, Assessment.types.COMPETENCE_EVALUATION].includes(currentAssessment.type)) {
+      if (currentAssessment.hasCheckpoints) {
         assessment.progression = {
           id: Progression.generateIdFromAssessmentId(currentAssessment.id),
         };
       }
 
-      if (currentAssessment.type === Assessment.types.CAMPAIGN) {
-        assessment.codeCampaign = currentAssessment.campaignCode;
-      }
+      assessment.codeCampaign = currentAssessment.campaignCode;
 
       if (!currentAssessment.course) {
         assessment.course = { id: currentAssessment.courseId };
@@ -52,6 +50,9 @@ const serialize = function (assessments) {
       'competenceId',
       'lastQuestionState',
       'method',
+      'showProgressBar',
+      'hasCheckpoints',
+      'showLevelup',
     ],
     answers: {
       ref: 'id',

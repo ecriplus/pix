@@ -12,7 +12,7 @@ export default class CampaignStartBlock extends Component {
   }
 
   get campaignType() {
-    return this.args.campaign.isAssessment ? 'assessment' : 'profiles-collection';
+    return this.args.campaign.isAssessment || this.args.campaign.isExam ? 'assessment' : 'profiles-collection';
   }
 
   get titleText() {

@@ -205,21 +205,12 @@ export { assessmentController };
 async function _getChallenge(assessmentId, request, dependencies) {
   const assessment = await dependencies.assessmentRepository.get(assessmentId);
 
-  if (assessment.isCertification()) {
-    const locale = extractLocaleFromRequest(request);
-
-    return dependencies.repositories.certificationEvaluationRepository.selectNextCertificationChallenge({
-      assessmentId,
-      locale,
-    });
-  }
-
-  if (assessment.isStarted()) {
+  if (assessment.isStarted() && !assessment.isCertification()) {
     await dependencies.assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
   }
   const challenge = await _getChallengeByAssessmentType({ assessment, request, dependencies });
 
-  if (challenge) {
+  if (!assessment.isCertification() && challenge) {
     if (challenge.id !== assessment.lastChallengeId) {
       await dependencies.assessmentRepository.updateWhenNewChallengeIsAsked({
         id: assessment.id,
@@ -233,6 +224,13 @@ async function _getChallenge(assessmentId, request, dependencies) {
 
 async function _getChallengeByAssessmentType({ assessment, request, dependencies }) {
   const locale = extractLocaleFromRequest(request);
+
+  if (assessment.isCertification()) {
+    return dependencies.repositories.certificationEvaluationRepository.selectNextCertificationChallenge({
+      assessmentId: assessment.id,
+      locale,
+    });
+  }
 
   if (assessment.isPreview()) {
     return dependencies.usecases.getNextChallengeForPreview({});

@@ -32,11 +32,16 @@ describe('Acceptance | API | assessment-controller-get', function () {
           // given
           server = await createServer();
           const userId = databaseBuilder.factory.buildUser({}).id;
+          const campaignId = databaseBuilder.factory.buildCampaign().id;
+          const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+            campaignId,
+          }).id;
           const assessmentId = databaseBuilder.factory.buildAssessment({
             userId,
             courseId,
             state: Assessment.states.STARTED,
             type,
+            campaignParticipationId,
           }).id;
           await databaseBuilder.commit();
 
@@ -163,6 +168,10 @@ describe('Acceptance | API | assessment-controller-get', function () {
           'last-question-state': Assessment.statesOfLastQuestion.ASKED,
           'competence-id': 'recCompetenceId',
           method: Assessment.methods.CHOSEN,
+          'code-campaign': undefined,
+          'has-checkpoints': false,
+          'show-levelup': false,
+          'show-progress-bar': false,
         },
         relationships: {
           course: {
@@ -285,6 +294,10 @@ describe('Acceptance | API | assessment-controller-get', function () {
           'competence-id': 'recCompetenceId',
           'last-question-state': Assessment.statesOfLastQuestion.ASKED,
           method: Assessment.methods.CHOSEN,
+          'code-campaign': undefined,
+          'has-checkpoints': false,
+          'show-levelup': false,
+          'show-progress-bar': false,
         },
         relationships: {
           course: { data: { type: 'courses', id: courseId } },

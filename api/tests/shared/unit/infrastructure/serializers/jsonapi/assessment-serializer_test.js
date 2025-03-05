@@ -3,11 +3,14 @@ import * as serializer from '../../../../../../src/shared/infrastructure/seriali
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
-  describe('#serialize()', function () {
+  describe('#serialize', function () {
     it('should convert an Assessment model object (of type CERTIFICATION) into JSON API data', function () {
       //given
       const certificationCourseId = 1;
-      const assessment = domainBuilder.buildAssessment({ certificationCourseId });
+      const assessment = domainBuilder.buildAssessment({ type: Assessment.types.CERTIFICATION, certificationCourseId });
+      assessment.hasCheckpoints = false;
+      assessment.showProgressBar = false;
+      assessment.showLevelup = false;
       const expectedJson = {
         data: {
           id: assessment.id.toString(),
@@ -22,6 +25,10 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
             'competence-id': assessment.competenceId,
             'last-question-state': Assessment.statesOfLastQuestion.ASKED,
             method: Assessment.methods.CERTIFICATION_DETERMINED,
+            'show-progress-bar': false,
+            'show-levelup': false,
+            'has-checkpoints': false,
+            'code-campaign': undefined,
           },
           relationships: {
             answers: {
@@ -74,6 +81,8 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
         type: Assessment.types.COMPETENCE_EVALUATION,
         title: 'Traiter des données',
       });
+      assessment.hasCheckpoints = true;
+      assessment.showProgressBar = true;
 
       const expectedProgressionJson = {
         data: {
@@ -102,6 +111,8 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
         title: 'Parcours',
         campaignCode: 'CAMPAGNE1',
       });
+      assessment.hasCheckpoints = true;
+      assessment.showProgressBar = true;
       const expectedProgressionJson = {
         data: {
           id: `progression-${assessment.id}`,
@@ -120,29 +131,6 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
       expect(json.data.attributes['certification-number']).to.be.null;
       expect(json.data.attributes['code-campaign']).to.equal('CAMPAGNE1');
       expect(json.data.attributes['title']).to.equal('Parcours');
-    });
-
-    it('should convert an Assessment model object with type CAMPAIGN and method FLASH into JSON API data', function () {
-      //given
-      const assessment = domainBuilder.buildAssessment.ofTypeCampaign({
-        method: Assessment.methods.FLASH,
-      });
-      const expectedProgressionJson = {
-        data: {
-          id: `progression-${assessment.id}`,
-          type: 'progressions',
-        },
-        links: {
-          related: `/api/progressions/progression-${assessment.id}`,
-        },
-      };
-
-      // when
-      const json = serializer.serialize(assessment);
-
-      // then
-      expect(json.data.relationships['progression']).to.deep.equal(expectedProgressionJson);
-      expect(json.data.attributes['method']).to.equal(Assessment.methods.FLASH);
     });
 
     it('should convert an Assessment model object without course into JSON API data', function () {

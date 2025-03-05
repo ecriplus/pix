@@ -2,7 +2,7 @@ import { types } from '../../../../src/organizational-entities/domain/models/Org
 import { CampaignToJoin } from '../../../../src/prescription/campaign/domain/read-models/CampaignToJoin.js';
 import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 
-const buildCampaignToJoin = function ({
+export function buildCampaignToJoin({
   id = 1,
   code = 'AZERTY123',
   title = 'Un titre de campagne',
@@ -60,6 +60,4 @@ const buildCampaignToJoin = function ({
     multipleSendings,
     assessmentMethod,
   });
-};
-
-export { buildCampaignToJoin };
+}

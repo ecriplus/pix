@@ -9,6 +9,18 @@ export default Factory.extend({
     return 'COMPETENCE_EVALUATION';
   },
 
+  hasCheckpoints() {
+    return true;
+  },
+
+  showLevelup() {
+    return true;
+  },
+
+  showProgressBar() {
+    return true;
+  },
+
   withStartedState: trait({
     state: 'started',
   }),
@@ -41,6 +53,7 @@ export default Factory.extend({
   ofFlashCampaignType: trait({
     type: 'CAMPAIGN',
     method: 'FLASH',
+    showProgressBar: false,
   }),
 
   withCurrentChallengeTimeout: trait({

@@ -1,7 +1,7 @@
 import { KnowledgeElement } from '../../../../shared/domain/models/KnowledgeElement.js';
 import { ParticipationStartedJob } from '../models/ParticipationStartedJob.js';
 
-const startCampaignParticipation = async function ({
+export async function startCampaignParticipation({
   campaignParticipation,
   userId,
   campaignRepository,
@@ -45,7 +45,7 @@ const startCampaignParticipation = async function ({
   return {
     campaignParticipation: createdCampaignParticipation,
   };
-};
+}
 
 async function _resetCampaignParticipation({
   campaignParticipation,
@@ -76,5 +76,3 @@ async function _resetCampaignParticipation({
     .map(({ assessmentId }) => assessmentId);
   await assessmentRepository.setAssessmentsAsStarted({ assessmentIds });
 }
-
-export { startCampaignParticipation };

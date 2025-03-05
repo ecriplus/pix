@@ -53,6 +53,12 @@ class CampaignParticipant {
         isImproving: startAgainCampaign,
         method: this.campaignToStartParticipation.assessmentMethod,
       });
+    } else if (this.campaignToStartParticipation.isExam) {
+      this.assessment = Assessment.createForCampaign({
+        userId: this.userIdentity.id,
+        isImproving: startAgainCampaign,
+        method: this.campaignToStartParticipation.assessmentMethod,
+      });
     }
 
     this.campaignParticipation = CampaignParticipation.start({
