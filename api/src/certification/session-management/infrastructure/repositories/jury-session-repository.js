@@ -35,6 +35,9 @@ const get = async function ({ id }) {
   if (!jurySessionDTO) {
     throw new NotFoundError("La session n'existe pas ou son accès est restreint");
   }
+
+  //const sessionCounters = await getCounters({ sessionId: id });
+
   return _toDomain(jurySessionDTO);
 };
 
@@ -63,15 +66,15 @@ const findPaginatedFiltered = async function ({ filters, page }) {
 const getCounters = async function ({ sessionId }) {
   const knex = DomainTransaction.getConnection();
 
-  const { startedCoursesCount } = await knex
+  const { startedCertifications } = await knex
     .from('certification-courses')
     .innerJoin('assessments', 'certification-courses.id', 'assessments.certificationCourseId')
     .where('assessments.state', '=', CertificationAssessment.states.STARTED)
     .andWhere('certification-courses.sessionId', '=', sessionId)
-    .count('assessments.state as startedCoursesCount')
+    .count('assessments.state as startedCertifications')
     .first();
 
-  const { certificationWithScoringError } = await knex
+  const { certificationsWithScoringError } = await knex
     .from('certification-courses')
     .innerJoin(
       'certification-courses-last-assessment-results',
@@ -85,7 +88,7 @@ const getCounters = async function ({ sessionId }) {
     )
     .where('certification-courses.sessionId', '=', sessionId)
     .andWhere('assessment-results.status', '=', AssessmentResult.status.ERROR)
-    .count('assessment-results.id as certificationWithScoringError')
+    .count('assessment-results.id as certificationsWithScoringError')
     .first();
 
   const issueReports = await knex
@@ -102,11 +105,11 @@ const getCounters = async function ({ sessionId }) {
       'certification-issue-reports.resolvedAt',
     );
 
-  return _toJurySessionCountersDomainModel({ startedCoursesCount, certificationWithScoringError, issueReports });
+  return _toJurySessionCountersDomainModel({ startedCertifications, certificationsWithScoringError, issueReports });
 };
 
-const _toJurySessionCountersDomainModel = ({ startedCoursesCount, certificationWithScoringError, issueReports }) => {
-  return new JurySessionCounters({ startedCoursesCount, certificationWithScoringError, issueReports });
+const _toJurySessionCountersDomainModel = ({ startedCertifications, certificationsWithScoringError, issueReports }) => {
+  return new JurySessionCounters({ startedCertifications, certificationsWithScoringError, issueReports });
 };
 
 const assignCertificationOfficer = async function ({ id, assignedCertificationOfficerId }) {
@@ -128,7 +131,7 @@ const assignCertificationOfficer = async function ({ id, assignedCertificationOf
 
 export { assignCertificationOfficer, findPaginatedFiltered, get, getCounters };
 
-function _toDomain(jurySessionFromDB) {
+function _toDomain(jurySessionFromDB, counters) {
   let assignedCertificationOfficer = null;
   if (jurySessionFromDB.assignedCertificationOfficerId) {
     assignedCertificationOfficer = new CertificationOfficer({
@@ -154,6 +157,7 @@ function _toDomain(jurySessionFromDB) {
     certificationCenterExternalId: jurySessionFromDB.externalId,
     assignedCertificationOfficer,
     juryCommentAuthor,
+    counters,
   });
 
   return jurySession;

@@ -38,13 +38,13 @@ export class JurySessionCounters {
 
   /**
    * @param {Object} params
-   * @param {number} params.startedCoursesCount
-   * @param {number} params.certificationWithScoringError
+   * @param {number} params.startedCertifications
+   * @param {number} params.certificationsWithScoringError
    * @param {Array<IssueReport>} params.issueReports
    */
-  constructor({ startedCoursesCount = 0, certificationWithScoringError = 0, issueReports = [] }) {
-    this.startedCoursesCount = startedCoursesCount;
-    this.certificationWithScoringError = certificationWithScoringError;
+  constructor({ startedCertifications = 0, certificationsWithScoringError = 0, issueReports = [] }) {
+    this.startedCertifications = startedCertifications;
+    this.certificationsWithScoringError = certificationsWithScoringError;
     this.issueReports = issueReports.length;
 
     // TODO : fichier de test du read model, ce calcul contient + de variantes qu'on le teste dans le test d'integ du repo

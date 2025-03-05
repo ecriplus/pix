@@ -6,7 +6,6 @@ import {
   JurySession,
   statuses,
 } from '../../../../../../src/certification/session-management/domain/models/JurySession.js';
-import { JurySessionCounters } from '../../../../../../src/certification/session-management/domain/read-models/JurySessionCounters.js';
 import * as jurySessionRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/jury-session-repository.js';
 import {
   ImpactfulCategories,
@@ -596,7 +595,7 @@ describe('Integration | Repository | JurySession', function () {
     });
   });
 
-  describe.only('#getCounters', function () {
+  describe('#getCounters', function () {
     it('should count certifications still in progress', async function () {
       // given
       const currentSession = databaseBuilder.factory.buildSession();
@@ -616,7 +615,7 @@ describe('Integration | Repository | JurySession', function () {
       const jurySessionCounters = await jurySessionRepository.getCounters({ sessionId: currentSession.id });
 
       // then
-      expect(jurySessionCounters.startedCoursesCount).to.equal(7);
+      expect(jurySessionCounters.startedCertifications).to.equal(7);
     });
 
     it('should count certifications with failed scoring', async function () {
@@ -648,7 +647,7 @@ describe('Integration | Repository | JurySession', function () {
       const jurySessionCounters = await jurySessionRepository.getCounters({ sessionId: currentSession.id });
 
       // then
-      expect(jurySessionCounters.certificationWithScoringError).to.equal(3);
+      expect(jurySessionCounters.certificationsWithScoringError).to.equal(3);
     });
 
     it('should count all issue reports during the session', async function () {
@@ -673,7 +672,7 @@ describe('Integration | Repository | JurySession', function () {
         state: states.ENDED_BY_SUPERVISOR,
       });
 
-      const issueReportOne = databaseBuilder.factory.buildCertificationIssueReport({
+      databaseBuilder.factory.buildCertificationIssueReport({
         certificationCourseId: certificationCourseWithoutReport.id,
         category: CertificationIssueReportCategory.NON_BLOCKING_CANDIDATE_ISSUE,
       });
@@ -687,7 +686,7 @@ describe('Integration | Repository | JurySession', function () {
         state: states.ENDED_BY_SUPERVISOR,
       });
 
-      const issueReportTwo = databaseBuilder.factory.buildCertificationIssueReport({
+      databaseBuilder.factory.buildCertificationIssueReport({
         certificationCourseId: certificationCourseWithReportNotImpactfulTwo.id,
         category: CertificationIssueReportCategory.NON_BLOCKING_TECHNICAL_ISSUE,
       });
@@ -700,7 +699,7 @@ describe('Integration | Repository | JurySession', function () {
         type: Assessment.types.CERTIFICATION,
         state: states.ENDED_DUE_TO_FINALIZATION,
       });
-      const issueReportThree = databaseBuilder.factory.buildCertificationIssueReport({
+      databaseBuilder.factory.buildCertificationIssueReport({
         certificationCourseId: certificationCourseWithImpactfulCategory.id,
         category: ImpactfulCategories[0],
       });

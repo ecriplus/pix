@@ -212,6 +212,7 @@ import { buildCampaign as boundedContextCampaignBuildCampaign } from './prescrip
 import { buildCampaignParticipation as boundedContextCampaignParticipationBuildCampaignParticipation } from './prescription/campaign-participation/build-campaign-participation.js';
 import { buildStageCollection as buildStageCollectionForTargetProfileManagement } from './target-profile-management/build-stage-collection.js';
 import { buildStageCollection as buildStageCollectionForUserCampaignResults } from './user-campaign-results/build-stage-collection.js';
+import {buildJurySessionCounters} from './certification/session-management/build-jury-session-counters.js';
 
 const banner = {
   buildEmptyInformationBanner,
@@ -257,6 +258,7 @@ const certification = {
     buildCertificationSessionComplementaryCertification,
     buildSession: buildSessionManagement,
     buildCertificationCandidate: buildSessionManagementCandidate,
+    buildJurySessionCounters,
   },
   shared: {
     buildCertificationCompanionLiveAlert,
