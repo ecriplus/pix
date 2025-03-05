@@ -39,8 +39,12 @@ const checkRedisStatus = async function () {
 };
 
 const checkForwardedOriginStatus = async function (request, h) {
-  const forwardedOrigin = network.getForwardedOrigin(request.headers);
-  if (!forwardedOrigin) {
+  let forwardedOrigin;
+  try {
+    // network.getForwardedOrigin throws ForwardedOriginError which maps to a HTTP status code 400,
+    // but for monitoring purpose we want this error to produce a 500.
+    forwardedOrigin = network.getForwardedOrigin(request.headers);
+  } catch {
     return h.response('Obtaining Forwarded Origin failed').code(500);
   }
 

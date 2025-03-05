@@ -1,4 +1,5 @@
 import {
+  ForwardedOriginError,
   getForwardedOrigin,
   RequestedApplication,
 } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
@@ -75,15 +76,12 @@ describe('Unit | Identity Access Management | Infrastructure | Utils | network',
     });
 
     context('when x-forwarded-proto and x-forwarded-port are not defined', function () {
-      it('doesn’t choke and returns an empty string', async function () {
+      it('throws a ForwardedOriginError', function () {
         // given
         const headers = {};
 
-        // when
-        const origin = getForwardedOrigin(headers);
-
-        // then
-        expect(origin).to.equal('');
+        // when & then
+        expect(() => getForwardedOrigin(headers)).to.throw(ForwardedOriginError, 'Missing forwarded header(s)');
       });
     });
   });
@@ -233,6 +231,19 @@ describe('Unit | Identity Access Management | Infrastructure | Utils | network',
             expect(requestedApplication.isPixCertif).to.be.false;
             expect(requestedApplication.isPixJunior).to.be.true;
           });
+        });
+      });
+
+      context('when the origin is unsupported', function () {
+        it('throws a ForwardedOriginError', function () {
+          // given
+          const origin = 'https://someUnsupportedName';
+
+          // when & then
+          expect(() => RequestedApplication.fromOrigin(origin)).to.throw(
+            ForwardedOriginError,
+            'Unsupported hostname: "someunsupportedname"',
+          );
         });
       });
     });

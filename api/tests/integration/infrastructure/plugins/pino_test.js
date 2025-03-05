@@ -150,53 +150,81 @@ describe('Integration | Infrastructure | plugins | pino', function () {
       });
 
       context('when calling /api/token', function () {
-        it('should log the message, version, user id, route, metrics and hashed username', async function () {
-          // given
-          const messages = [];
-          await registerWithPlugin((data) => {
-            messages.push(data);
+        context('when there is a username', function () {
+          it('logs the message, version, user id, route, metrics and hashed username', async function () {
+            // given
+            const messages = [];
+            await registerWithPlugin((data) => {
+              messages.push(data);
+            });
+
+            const method = 'POST';
+            const url = '/api/token';
+            const payload = {
+              username: 'toto',
+            };
+            const headers = { 'x-forwarded-proto': 'https', 'x-forwarded-host': 'app.pix.org' };
+
+            // when
+            const response = await httpTestServer.request(method, url, payload, null, headers);
+
+            // then
+            expect(response.statusCode).to.equal(200);
+            expect(messages).to.have.lengthOf(1);
+            expect(messages[0].msg).to.equal('request completed');
+            expect(messages[0].req.version).to.equal('development');
+            expect(messages[0].req.user_id).to.equal('-');
+            expect(messages[0].req.route).to.equal('/api/token');
+            expect(messages[0].req.usernameHash).to.equal(
+              '31f7a65e315586ac198bd798b6629ce4903d0899476d5741a9f32e2e521b6a66', // echo -n 'toto'| shasum -a 256
+            );
           });
-
-          const method = 'POST';
-          const url = '/api/token';
-          const payload = {
-            username: 'toto',
-          };
-
-          // when
-          const response = await httpTestServer.request(method, url, payload);
-          // then
-          expect(response.statusCode).to.equal(200);
-          expect(messages).to.have.lengthOf(1);
-          expect(messages[0].msg).to.equal('request completed');
-          expect(messages[0].req.version).to.equal('development');
-          expect(messages[0].req.user_id).to.equal('-');
-          expect(messages[0].req.route).to.equal('/api/token');
-          expect(messages[0].req.usernameHash).to.equal(
-            '31f7a65e315586ac198bd798b6629ce4903d0899476d5741a9f32e2e521b6a66', // echo -n 'toto'| shasum -a 256
-          );
         });
 
-        it('should log the message, version, user id, route, metrics and default value for username when not specified', async function () {
-          // given
-          const messages = [];
-          await registerWithPlugin((data) => {
-            messages.push(data);
+        context('when there is no username', function () {
+          it('logs the message, version, user id, route, metrics and default value for username', async function () {
+            // given
+            const messages = [];
+            await registerWithPlugin((data) => {
+              messages.push(data);
+            });
+            const method = 'POST';
+            const url = '/api/token';
+            const headers = { 'x-forwarded-proto': 'https', 'x-forwarded-host': 'app.pix.org' };
+
+            // when
+            const response = await httpTestServer.request(method, url, null, null, headers);
+
+            // then
+            expect(response.statusCode).to.equal(200);
+            expect(messages).to.have.lengthOf(1);
+            expect(messages[0].msg).to.equal('request completed');
+            expect(messages[0].req.version).to.equal('development');
+            expect(messages[0].req.user_id).to.equal('-');
+            expect(messages[0].req.route).to.equal('/api/token');
+            expect(messages[0].req.usernameHash).to.equal('-');
           });
-          const method = 'POST';
-          const url = '/api/token';
+        });
 
-          // when
-          const response = await httpTestServer.request(method, url);
+        context('when there is no forwarded origin (no x-forwarded headers)', function () {
+          it('handles the ForwardedOriginError error', async function () {
+            // given
+            const messages = [];
+            await registerWithPlugin((data) => {
+              messages.push(data);
+            });
+            const method = 'POST';
+            const url = '/api/token';
+            const noForwardedHeaders = {};
 
-          // then
-          expect(response.statusCode).to.equal(200);
-          expect(messages).to.have.lengthOf(1);
-          expect(messages[0].msg).to.equal('request completed');
-          expect(messages[0].req.version).to.equal('development');
-          expect(messages[0].req.user_id).to.equal('-');
-          expect(messages[0].req.route).to.equal('/api/token');
-          expect(messages[0].req.usernameHash).to.equal('-');
+            // when
+            const response = await httpTestServer.request(method, url, null, null, noForwardedHeaders);
+
+            // then
+            expect(response.statusCode).to.equal(200);
+            expect(messages).to.have.lengthOf(1);
+            expect(messages[0].msg).to.equal('request completed');
+          });
         });
       });
     });

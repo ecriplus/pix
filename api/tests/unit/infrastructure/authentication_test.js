@@ -1,6 +1,7 @@
 import { authentication, validateClientApplication, validateUser } from '../../../lib/infrastructure/authentication.js';
 import { RevokedUserAccess } from '../../../src/identity-access-management/domain/models/RevokedUserAccess.js';
 import { revokedUserAccessRepository } from '../../../src/identity-access-management/infrastructure/repositories/revoked-user-access.repository.js';
+import { ForwardedOriginError } from '../../../src/identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../../src/shared/config.js';
 import { tokenService } from '../../../src/shared/domain/services/token-service.js';
 import { expect, sinon } from '../../test-helper.js';
@@ -221,7 +222,7 @@ describe('Unit | Infrastructure | Authentication', function () {
               aud: 'https://app.pix.fr',
             });
 
-            // when
+            // when & then
             const { authenticate } = authentication.schemes.jwt.scheme(undefined, {
               key: 'dummy-secret',
               validate: (decodedAccessToken, options) =>
@@ -230,14 +231,7 @@ describe('Unit | Infrastructure | Authentication', function () {
                   revokedUserAccessRepository,
                 }),
             });
-            const response = await authenticate(request, h);
-
-            // then
-            expect(response.output.payload).to.include({
-              statusCode: 401,
-              error: 'Unauthorized',
-              message: 'Unauthorized',
-            });
+            await expect(authenticate(request, h)).to.be.rejectedWith(ForwardedOriginError);
           });
         });
 
