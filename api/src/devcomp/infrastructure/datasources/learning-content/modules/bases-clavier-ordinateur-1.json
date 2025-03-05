@@ -254,9 +254,7 @@
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [],
-                      "solutions": [
-                        "cornichons"
-                      ]
+                      "solutions": ["cornichons"]
                     },
                     {
                       "type": "text",
@@ -272,9 +270,7 @@
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [],
-                      "solutions": [
-                        "vide"
-                      ]
+                      "solutions": ["vide"]
                     },
                     {
                       "type": "text",
@@ -519,9 +515,7 @@
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [],
-                      "solutions": [
-                        "céleri"
-                      ]
+                      "solutions": ["céleri"]
                     }
                   ],
                   "feedbacks": {
@@ -538,7 +532,7 @@
                   "type": "qrocm",
                   "instruction": "pastèque",
                   "proposals": [
-                     {
+                    {
                       "input": "2",
                       "type": "input",
                       "inputType": "text",
@@ -548,9 +542,7 @@
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [],
-                      "solutions": [
-                        "pastèque"
-                      ]
+                      "solutions": ["pastèque"]
                     }
                   ],
                   "feedbacks": {
@@ -577,9 +569,7 @@
                       "ariaLabel": "Cliquer ici",
                       "defaultValue": "",
                       "tolerances": [],
-                      "solutions": [
-                        "bac à glaçons"
-                      ]
+                      "solutions": ["bac à glaçons"]
                     }
                   ],
                   "feedbacks": {
