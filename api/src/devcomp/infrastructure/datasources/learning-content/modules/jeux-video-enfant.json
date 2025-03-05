@@ -4,7 +4,7 @@
   "title": "Choisir un jeu vidéo adapté à son enfant",
   "isBeta": false,
   "details": {
-    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "image": "https://images.pix.fr/modulix/ppn3_placeholder-details.svg",
     "description": "<p>Les jeux vidéo, c’est comme les livres ou les films : il y en a pour tous les goûts et tous les âges. <br>Alors, si votre enfant veut jouer sur smartphone, console ou ordinateur, il faut être vigilant pour bien choisir ses jeux ! <span aria-hidden=\"true\">🔎</span> <br>Dans ce module, découvrez des informations clés à vérifier avant de choisir un jeu vidéo.</p>",
     "duration": 10,
     "level": "Débutant",
@@ -68,7 +68,7 @@
           "element": {
             "id": "3fd2025c-f39b-4f28-9243-ac390b7106c2",
             "type": "image",
-            "url": "https://i.imgur.com/uaa9LtX.png",
+            "url": "https://images.pix.fr/modulix/ppn3_dragonkingdom.png",
             "alt": "",
             "alternativeText": "<p>Jeu Craft Dragon's kingdom</p><ul><li>Epix</li><li>Tag «&nbsp;Consoles&nbsp;»</li><li>Option sélectionnée «&nbsp;Gratuit&nbsp;»<br></li><li>Ajouter au panier</li><li>PEGI 12, peur</li><li>Abonnement requis pour le jeu en ligne</li><li>Achats intra jeux facultatifs</li><li>De 1 à 4 joueurs</li><li>Jeu en ligne facultatif</li></ul>"
           }
@@ -140,7 +140,7 @@
                 {
                   "id": "c9c01da7-3d63-45a6-a0d2-5d7f80dab582",
                   "type": "image",
-                  "url": "https://i.imgur.com/3ZQpKrb.png",
+                  "url": "https://images.pix.fr/modulix/ppn3_boitier_alva.png",
                   "alt": "",
                   "alternativeText": "<p>Boîte du jeu vidéo Les chroniques d'Alva :&nbsp;<br></p><ul><li>Illustration d'une elfe, de dos, avec une lance à la main qui regarde un chateau au loin.</li><li>Titre Les chroniques d'Alva </li><li>Pictogramme «&nbsp;12 &nbsp;»</li></ul>"
                 },
@@ -174,7 +174,7 @@
                 {
                   "id": "1360e72b-5248-41b0-9dfc-1d85264cb97c",
                   "type": "image",
-                  "url": "https://i.imgur.com/UdheHeR.png",
+                  "url": "https://images.pix.fr/modulix/ppn3_pixelworld.png",
                   "alt": "",
                   "alternativeText": "<p>Fiche du jeu vidéo Pixel world :</p><ul><li>Pixel world</li><li>Pixel industry</li><li>Action et aventure, Famille et enfants</li><li>3 étoilles, 21,5k</li><li>Bouton Obtenir</li><li>Pictogramme «&nbsp;! &nbsp;»</li></ul>"
                 },
@@ -220,7 +220,7 @@
                 {
                   "id": "5c339176-6325-4108-ac25-e8b811304d2c",
                   "type": "image",
-                  "url": "https://i.imgur.com/E1fKSEZ.png",
+                  "url": "https://images.pix.fr/modulix/ppn3_jeu_achats.png",
                   "alt": "",
                   "alternativeText": ""
                 },
@@ -241,7 +241,7 @@
                 {
                   "id": "cfbb169d-45d8-4029-a62b-a2d78d33cfc4",
                   "type": "image",
-                  "url": "https://i.imgur.com/qmjbQIS.png",
+                  "url": "https://images.pix.fr/modulix/ppn3_achats_integres_mentions.png",
                   "alt": "",
                   "alternativeText": "<p>Pictogramme PEGI Achats intégrés</p>"
                 }
@@ -257,7 +257,7 @@
                 {
                   "id": "453c0d40-58b4-4cb8-b972-30c8e382d5f3",
                   "type": "image",
-                  "url": "https://i.imgur.com/gzSnaQ4.png",
+                  "url": "https://images.pix.fr/modulix/ppn3_boite_mystere.png",
                   "alt": "",
                   "alternativeText": ""
                 },
@@ -293,7 +293,7 @@
                 {
                   "id": "f828c349-7282-4333-a267-b52be3744880",
                   "type": "image",
-                  "url": "https://i.imgur.com/zlVhnng.png",
+                  "url": "https://images.pix.fr/modulix/ppn3_lornitteclan.png",
                   "alt": "",
                   "alternativeText": "<p>Jeu Lorttnite Clan :&nbsp;</p><ul><li>4 étoiles</li><li>Communauté compétitive</li><li>Commandes rapides à maîtriser</li><li>Pegi 12</li><li>Violence, achats dans le jeu (inclut des éléments aléatoires)</li><li>Jeu de base</li><li>Gratuit</li><li>Boutons : obtenir, ajouter au panier</li></ul>"
                 },
@@ -327,7 +327,7 @@
                 {
                   "id": "f81697de-5d3f-4275-95cf-57ce22d366c1",
                   "type": "image",
-                  "url": "https://i.imgur.com/CGoGCWW.png",
+                  "url": "https://images.pix.fr/modulix/ppn3_boitier_cake.png",
                   "alt": "",
                   "alternativeText": ""
                 },
@@ -373,7 +373,7 @@
                 {
                   "id": "f8910400-71fb-4d54-a447-11e21a910ed6",
                   "type": "image",
-                  "url": "https://i.imgur.com/W42DZkO.png",
+                  "url": "https://images.pix.fr/modulix/ppn3_photo.jpg",
                   "alt": "",
                   "alternativeText": ""
                 },
@@ -403,7 +403,7 @@
                 {
                   "id": "9e9b11ab-0ffb-4dc9-917a-f5e336300ce5",
                   "type": "image",
-                  "url": "https://i.imgur.com/XKyBNac.png",
+                  "url": "https://images.pix.fr/modulix/ppn3_capture_pegi.png",
                   "alt": "",
                   "alternativeText": "<p>Capture d'écran de la fiche d'un jeu vidéo avec la mention&nbsp;«&nbsp;interactivité des utilisateurs&nbsp;»</p>"
                 },
@@ -489,7 +489,7 @@
           "element": {
             "id": "99f21e69-cdb4-4428-9153-ae857a148ee7",
             "type": "image",
-            "url": "https://i.imgur.com/fxv1UJM.png",
+            "url": "https://images.pix.fr/modulix/ppn3_resume.png",
             "alt": "",
             "alternativeText": "<p>Les 3 informations à vérifier :&nbsp;</p><ol>    <li>le pictogramme de la signalétique PEGI</li>    <li>la présence d'achats intégrés</li>    <li>la possibilité de discuter avec d'autres joueurs</li></ol>"
           }
