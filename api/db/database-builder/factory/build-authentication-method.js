@@ -22,6 +22,7 @@ buildAuthenticationMethod.withGarAsIdentityProvider = function ({
   userLastName = 'Saint-James',
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-01-02'),
+  lastLoggedAt = new Date(),
 } = {}) {
   userId = isUndefined(userId) ? buildUser().id : userId;
 
@@ -36,6 +37,7 @@ buildAuthenticationMethod.withGarAsIdentityProvider = function ({
     userId,
     createdAt,
     updatedAt,
+    lastLoggedAt,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'authentication-methods',
@@ -50,6 +52,7 @@ buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword = function 
   userId,
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-01-02'),
+  lastLoggedAt = new Date(),
 } = {}) {
   userId = isUndefined(userId) ? buildUser().id : userId;
 
@@ -64,6 +67,7 @@ buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword = function 
     userId,
     createdAt,
     updatedAt,
+    lastLoggedAt,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'authentication-methods',
@@ -78,6 +82,7 @@ buildAuthenticationMethod.withPixAsIdentityProviderAndPassword = function ({
   userId,
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-01-02'),
+  lastLoggedAt = new Date(),
 } = {}) {
   userId = isUndefined(userId) ? buildUser().id : userId;
 
@@ -92,6 +97,7 @@ buildAuthenticationMethod.withPixAsIdentityProviderAndPassword = function ({
     userId,
     createdAt,
     updatedAt,
+    lastLoggedAt,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'authentication-methods',
@@ -108,7 +114,7 @@ buildAuthenticationMethod.withPoleEmploiAsIdentityProvider = function ({
   userId,
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-01-02'),
-  lastLoggedAt = null,
+  lastLoggedAt = new Date(),
 } = {}) {
   userId = isUndefined(userId) ? buildUser().id : userId;
 
@@ -141,6 +147,7 @@ buildAuthenticationMethod.withOidcProviderAsIdentityProvider = function ({
   externalIdentifier,
   userId,
   identityProvider,
+  lastLoggedAt = new Date(),
 }) {
   userId = isUndefined(userId) ? buildUser().id : userId;
 
@@ -159,7 +166,7 @@ buildAuthenticationMethod.withOidcProviderAsIdentityProvider = function ({
     }),
     createdAt: new Date('2020-01-01'),
     updatedAt: new Date('2020-01-02'),
-    lastLoggedAt: null,
+    lastLoggedAt,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'authentication-methods',
@@ -174,7 +181,7 @@ buildAuthenticationMethod.withIdentityProvider = function ({
   userId,
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-01-02'),
-  lastLoggedAt = null,
+  lastLoggedAt = new Date(),
 } = {}) {
   userId = isUndefined(userId) ? buildUser().id : userId;
 

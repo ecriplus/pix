@@ -61,7 +61,7 @@ const serialize = function (usersDetailsForAdmin) {
     authenticationMethods: {
       ref: 'id',
       includes: true,
-      attributes: ['identityProvider', 'authenticationComplement'],
+      attributes: ['identityProvider', 'authenticationComplement', 'lastLoggedAt'],
     },
     userLogin: {
       ref: 'id',

@@ -450,6 +450,7 @@
           "copy-username": "Copier l’identifiant"
         },
         "authentication-method": {
+          "last-logged-at": "Dernière connexion le {date}",
           "should-change-password-status": "Mot de passe temporaire :"
         },
         "cgu": {

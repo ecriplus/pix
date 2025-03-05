@@ -12,6 +12,18 @@ function _buildUserWithPoleEmploiAuthenticationMethod(databaseBuilder) {
   });
 }
 
+function _buildGarUser(databaseBuilder) {
+  const user = databaseBuilder.factory.buildUser.withRawPassword({
+    firstName: 'Gar',
+    lastName: 'User',
+    email: 'gar.user@example.net',
+  });
+
+  databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({
+    userId: user.id,
+  });
+}
+
 function _buildOidcUser(databaseBuilder) {
   const user = databaseBuilder.factory.buildUser({
     firstName: 'Oidc',
@@ -62,5 +74,6 @@ function _buildUsers(databaseBuilder) {
 export function buildUsers(databaseBuilder) {
   _buildUsers(databaseBuilder);
   _buildUserWithPoleEmploiAuthenticationMethod(databaseBuilder);
+  _buildGarUser(databaseBuilder);
   _buildOidcUser(databaseBuilder);
 }

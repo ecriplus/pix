@@ -133,6 +133,7 @@ module('Integration | Component | users | user-detail-personal-information | aut
             )
             .exists();
         });
+
         test('it displays user has not to change password', async function (assert) {
           // given
           const user = {
@@ -154,6 +155,37 @@ module('Integration | Component | users | user-detail-personal-information | aut
             'components.users.user-detail-personal-information.authentication-method.should-change-password-status',
           );
           const expectedValue = t('common.words.no');
+          assert
+            .dom(
+              screen.getAllByRole('listitem').find((listItem) => {
+                const childrenText = listItem.textContent.trim().split('\n');
+                return childrenText[0]?.trim() === expectedLabel && childrenText[1]?.trim() === expectedValue;
+              }),
+            )
+            .exists();
+        });
+
+        test('it displays the last logged at with PIX authentication method', async function (assert) {
+          // given
+          const user = {
+            authenticationMethods: [
+              {
+                identityProvider: 'PIX',
+                authenticationComplement: {},
+                lastLoggedAt: new Date('2022-07-01T00:00:00Z'),
+              },
+            ],
+          };
+          this.owner.register('service:access-control', AccessControlStub);
+
+          // when
+          const screen = await render(<template><AuthenticationMethod @user={{user}} /></template>);
+
+          // then
+          const expectedLabel = t(
+            'components.users.user-detail-personal-information.authentication-method.last-logged-at',
+          );
+          const expectedValue = '01/07/2022';
           assert
             .dom(
               screen.getAllByRole('listitem').find((listItem) => {

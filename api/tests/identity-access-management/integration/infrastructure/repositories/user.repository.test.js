@@ -1344,6 +1344,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
             },
             id: expectedPixAuthenticationMethod.id,
             identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
+            lastLoggedAt: new Date(),
           });
         });
       });

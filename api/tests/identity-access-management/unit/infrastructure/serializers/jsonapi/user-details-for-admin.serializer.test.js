@@ -19,7 +19,12 @@ describe('Unit | Serializer | JSONAPI | user-details-for-admin-serializer', func
         anonymisedByFullName: null,
         organizationLearners: [domainBuilder.buildOrganizationLearnerForAdmin()],
         authenticationMethods: [
-          { id: 1, identityProvider: 'PIX', authenticationComplement: { shouldChangePassword: true } },
+          {
+            id: 1,
+            identityProvider: 'PIX',
+            authenticationComplement: { shouldChangePassword: true },
+            lastLoggedAt: null,
+          },
         ],
         userLogin: [{ id: 123, failureCount: 8 }],
       });
@@ -122,6 +127,7 @@ describe('Unit | Serializer | JSONAPI | user-details-for-admin-serializer', func
             attributes: {
               'identity-provider': userDetailsForAdmin.authenticationMethods[0].identityProvider,
               'authentication-complement': { shouldChangePassword: true },
+              'last-logged-at': null,
             },
             id: `${userDetailsForAdmin.authenticationMethods[0].id}`,
             type: 'authenticationMethods',

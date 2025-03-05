@@ -1,15 +1,9 @@
 .authentication-method {
-
   &__connexions-information {
     display: flex;
-
-    dt {
-      font-weight: normal;
-    }
-
-    dd {
-      margin-left: 6px;
-    }
+    flex-direction: column;
+    margin-bottom: var(--pix-spacing-6x);
+    margin-left: var(--pix-spacing-6x);
   }
 }
 
@@ -21,37 +15,32 @@
   }
 
   &__name-column {
-    min-width: 200px;
+    padding-left: var(--pix-spacing-6x);
   }
 
   &__actions-column {
-
     > div {
       display: flex;
 
       button:not(:first-child) {
-        margin-left: 10px;
+        margin-left: var(--pix-spacing-3x);
       }
     }
   }
 
   &__check {
-    margin: 0 20px;
     color: var(--pix-success-700);
   }
 
   &__uncheck {
-    margin: 0 20px;
     color: var(--pix-neutral-100);
   }
 }
 
 .reassign-authentication-method-modal {
-
   &__form-body {
-
     p {
-      margin-bottom: 40px;
+      margin-bottom: var(--pix-spacing-10x);
       padding: 0;
     }
   }
