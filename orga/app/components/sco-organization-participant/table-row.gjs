@@ -1,25 +1,34 @@
 import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn, get } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import { not } from 'ember-truth-helpers';
 
 import { CONNECTION_TYPES } from '../../helpers/connection-types';
 import Cell from '../certificability/cell';
+import Tooltip from '../certificability/tooltip';
 import IconTrigger from '../dropdown/icon-trigger';
 import Item from '../dropdown/item';
 import LastParticipationDateTooltip from '../ui/last-participation-date-tooltip';
 
 <template>
-  <tr
-    aria-label={{t "pages.sco-organization-participants.table.row-title"}}
-    {{on "click" @onClickLearner}}
-    class="tr--clickable"
-  >
-    {{#if @showCheckbox}}
-      <td class="table__column" {{on "click" @onToggleStudent}}>
-        <PixCheckbox @screenReaderOnly={{true}} @checked={{@isStudentSelected}}>
+  {{#if @showCheckbox}}
+    <PixTableColumn @context={{@context}}>
+      <:header>
+        <PixCheckbox
+          @screenReaderOnly={{true}}
+          @checked={{@someSelected}}
+          @isIndeterminate={{not @allSelected}}
+          disabled={{not @hasStudents}}
+          {{on "click" @onToggleAll}}
+        >
+          <:label>{{t "pages.sco-organization-participants.table.column.mainCheckbox"}}</:label></PixCheckbox>
+      </:header>
+      <:cell>
+        <PixCheckbox @screenReaderOnly={{true}} @checked={{@isStudentSelected}} {{on "click" @onToggleStudent}}>
           <:label>
             {{t
               "pages.sco-organization-participants.table.column.checkbox"
@@ -27,25 +36,67 @@ import LastParticipationDateTooltip from '../ui/last-participation-date-tooltip'
               lastname=@student.lastName
             }}</:label>
         </PixCheckbox>
-      </td>
-    {{/if}}
-    <td class="ellipsis">
+      </:cell>
+    </PixTableColumn>
+  {{/if}}
+  <PixTableColumn
+    @context={{@context}}
+    @onSort={{@onSortByLastname}}
+    @sortOrder={{@lastnameSort}}
+    @ariaLabelDefaultSort={{t "pages.organization-participants.table.column.last-name.ariaLabelDefaultSort"}}
+    @ariaLabelSortAsc={{t "pages.organization-participants.table.column.last-name.ariaLabelSortUp"}}
+    @ariaLabelSortDesc={{t "pages.organization-participants.table.column.last-name.ariaLabelSortDown"}}
+  >
+    <:header>{{t "pages.organization-participants.table.column.last-name.label"}}</:header>
+    <:cell>
       <LinkTo @route="authenticated.sco-organization-participants.sco-organization-participant" @model={{@student.id}}>
         {{@student.lastName}}
       </LinkTo>
-    </td>
-    <td class="ellipsis" title={{@student.firstName}}>{{@student.firstName}}</td>
-    <td>{{dayjsFormat @student.birthdate "DD/MM/YYYY" allow-empty=true}}</td>
-    <td class="ellipsis">{{@student.division}}</td>
-    <td class="sco-organization-participant-list-page__authentication-methods">
-      {{#each @student.authenticationMethods as |authenticationMethod|}}
+    </:cell>
+  </PixTableColumn>
+  <PixTableColumn @context={{@context}}>
+    <:header>{{t "pages.sco-organization-participants.table.column.first-name"}}</:header>
+    <:cell>{{@student.firstName}}</:cell>
+  </PixTableColumn>
+  <PixTableColumn @context={{@context}}>
+    <:header>{{t "pages.sco-organization-participants.table.column.date-of-birth"}}</:header>
+    <:cell>{{dayjsFormat @student.birthdate "DD/MM/YYYY" allow-empty=true}}</:cell>
+  </PixTableColumn>
+  <PixTableColumn
+    @context={{@context}}
+    @onSort={{@onSortByDivision}}
+    @sortOrder={{@divisionSort}}
+    @ariaLabelDefaultSort={{t "pages.sco-organization-participants.table.column.division.ariaLabelDefaultSort"}}
+    @ariaLabelSortAsc={{t "pages.sco-organization-participants.table.column.division.ariaLabelSortUp"}}
+    @ariaLabelSortDesc={{t "pages.sco-organization-participants.table.column.division.ariaLabelSortDown"}}
+  >
+    <:header>{{t "pages.sco-organization-participants.table.column.division.label"}}</:header>
+    <:cell>{{@student.division}}</:cell>
+  </PixTableColumn>
+  <PixTableColumn @context={{@context}}>
+    <:header>{{t "pages.sco-organization-participants.table.column.login-method"}}</:header>
+    <:cell>{{#each @student.authenticationMethods as |authenticationMethod|}}
         <p>{{t (get CONNECTION_TYPES authenticationMethod)}}</p>
-      {{/each}}
-    </td>
-    <td class="table__column--center">{{@student.participationCount}}</td>
-    <td>
-      {{#if @student.lastParticipationDate}}
-        <div class="organization-participant-list-page__last-participation">
+      {{/each}}</:cell>
+  </PixTableColumn>
+  <PixTableColumn
+    @context={{@context}}
+    @type="number"
+    @onSort={{@onSortByParticipationCount}}
+    @sortOrder={{@participationCountOrder}}
+    @ariaLabelDefaultSort={{t
+      "pages.sco-organization-participants.table.column.participation-count.ariaLabelDefaultSort"
+    }}
+    @ariaLabelSortAsc={{t "pages.sco-organization-participants.table.column.participation-count.ariaLabelSortUp"}}
+    @ariaLabelSortDesc={{t "pages.sco-organization-participants.table.column.participation-count.ariaLabelSortDown"}}
+  >
+    <:header>{{t "pages.sco-organization-participants.table.column.participation-count.label"}}</:header>
+    <:cell>{{@student.participationCount}}</:cell>
+  </PixTableColumn>
+  <PixTableColumn @context={{@context}}>
+    <:header>{{t "pages.sco-organization-participants.table.column.last-participation-date"}}</:header>
+    <:cell>{{#if @student.lastParticipationDate}}
+        <div class="organization-participant__align-element">
           <span>{{dayjsFormat @student.lastParticipationDate "DD/MM/YYYY" allow-empty=true}}</span>
           <LastParticipationDateTooltip
             @id={{@index}}
@@ -54,17 +105,26 @@ import LastParticipationDateTooltip from '../ui/last-participation-date-tooltip'
             @participationStatus={{@student.participationStatus}}
           />
         </div>
-      {{/if}}
-    </td>
-    <td class="table__column--center">
+      {{/if}}</:cell>
+  </PixTableColumn>
+  <PixTableColumn @context={{@context}}>
+    <:header>
+      {{t "pages.sco-organization-participants.table.column.is-certifiable.label"}}
+      <Tooltip
+        @hasComputeOrganizationLearnerCertificabilityEnabled={{@hasComputeOrganizationLearnerCertificabilityEnabled}}
+      />
+    </:header>
+    <:cell>
       <Cell
         @hideCertifiableDate={{@hideCertifiableDate}}
         @certifiableAt={{@student.certifiableAt}}
         @isCertifiable={{@student.isCertifiable}}
       />
-    </td>
-    <td class="organization-participant-list-page__actions hide-on-mobile">
-      {{#if @student.isAssociated}}
+    </:cell>
+  </PixTableColumn>
+  <PixTableColumn @context={{@context}}>
+    <:header>{{t "common.actions.global"}}</:header>
+    <:cell>{{#if @student.isAssociated}}
         <IconTrigger
           @icon="moreVert"
           @dropdownButtonClass="organization-participant-list-page__dropdown-button"
@@ -75,7 +135,6 @@ import LastParticipationDateTooltip from '../ui/last-participation-date-tooltip'
             {{t "pages.sco-organization-participants.actions.manage-account"}}
           </Item>
         </IconTrigger>
-      {{/if}}
-    </td>
-  </tr>
+      {{/if}}</:cell>
+  </PixTableColumn>
 </template>

@@ -143,13 +143,13 @@ module('Unit | Controller | authenticated/sup-organization-participants/list', f
     test('update sorting value and reset other', function (assert) {
       // given
       controller.lastnameSort = null;
-      controller.participationCountOrder = 'Godzilla';
+      controller.participationCountOrder = 'asc';
       controller.pageNumber = 9999;
       // when
-      controller.sortByLastname('desc');
+      controller.sortByLastname();
 
       // then
-      assert.strictEqual(controller.lastnameSort, 'desc');
+      assert.strictEqual(controller.lastnameSort, 'asc');
       assert.strictEqual(controller.participationCountOrder, null);
       assert.strictEqual(controller.pageNumber, null);
     });
@@ -159,13 +159,13 @@ module('Unit | Controller | authenticated/sup-organization-participants/list', f
     test('update sorting value and reset other', function (assert) {
       // given
       controller.participationCountOrder = null;
-      controller.lastnameSort = 'T-Rex';
+      controller.lastnameSort = 'asc';
       controller.pageNumber = 9999;
       // when
-      controller.sortByParticipationCount('desc');
+      controller.sortByParticipationCount();
 
       // then
-      assert.strictEqual(controller.participationCountOrder, 'desc');
+      assert.strictEqual(controller.participationCountOrder, 'asc');
       assert.strictEqual(controller.lastnameSort, null);
       assert.strictEqual(controller.pageNumber, null);
     });

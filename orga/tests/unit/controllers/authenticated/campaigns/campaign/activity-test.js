@@ -15,10 +15,10 @@ module('Unit | Controller | authenticated/campaigns/campaign/activity', function
     test('it should call transitionTo with appropriate arguments for profiles collection', function (assert) {
       // given
       controller.router = { transitionTo: sinon.stub() };
-      controller.model = { campaign: { isTypeAssessment: false } };
+      controller.model = { campaign: { id: 123, isTypeAssessment: false } };
 
       // when
-      controller.goToParticipantPage(123, 456);
+      controller.goToParticipantPage({ lastCampaignParticipationId: 456 });
 
       // then
       assert.true(controller.router.transitionTo.calledWith('authenticated.campaigns.participant-profile', 123, 456));
@@ -27,10 +27,10 @@ module('Unit | Controller | authenticated/campaigns/campaign/activity', function
     test('it should call transitionTo with appropriate arguments for assessment', function (assert) {
       // given
       controller.router = { transitionTo: sinon.stub() };
-      controller.model = { campaign: { isTypeAssessment: true } };
+      controller.model = { campaign: { id: 123, isTypeAssessment: true } };
 
       // when
-      controller.goToParticipantPage(123, 456);
+      controller.goToParticipantPage({ lastCampaignParticipationId: 456 });
 
       // then
       assert.true(

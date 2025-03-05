@@ -6,21 +6,13 @@
 
   color: var(--pix-neutral-800);
   font-size:0.875rem;
-
-  &--open {
-    margin-left: var(--pix-spacing-4x);
-  }
 }
 
 .tube-recommendation-subtitle {
   @extend %pix-body-s;
 
-  color: var(--pix-neutral-20)0;
+  color: var(--pix-neutral-500);
   font-weight: 400;
-
-  &--open {
-    color: var(--pix-neutral-500);
-  }
 }
 
 .tube-recommendation-tutorial {
@@ -36,7 +28,7 @@
   &__description {
     @extend %pix-title-s;
 
-    margin-bottom: var(--pix-spacing-4x);
+    margin-bottom: var(--pix-spacing-4x) 0;
     color: var(--pix-neutral-500);
     font-size:0.875rem;
   }
@@ -51,33 +43,7 @@
     @extend %pix-title-xs;
 
     margin-bottom: var(--pix-spacing-4x);
-    padding-left: var(--pix-spacing-6x);
     font-weight: 500;
-  }
-}
-
-.tube-recommendation-tutorial-wrapper {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0s ease;
-
-  &--open {
-    height: auto;
-    max-height: 1000px;
-    transition: max-height 1s ease-out;
-  }
-}
-
-.tube-recommendation-tutorial-table {
-  margin-bottom: var(--pix-spacing-2x);
-  margin-left: var(--pix-spacing-6x);
-
-  &__row {
-    padding-left: 0;
-
-    a {
-      font-weight: 500;
-    }
   }
 
   &__details {

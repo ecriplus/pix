@@ -1,6 +1,8 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn, uniqueId } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -10,11 +12,10 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
-import { eq, not } from 'ember-truth-helpers';
+import { not } from 'ember-truth-helpers';
 
 import InElement from '../in-element';
 import SelectableList from '../selectable-list';
-import TableHeader from '../table/header';
 import UiActionBar from '../ui/action-bar';
 import UiDeletionModal from '../ui/deletion-modal';
 import CampaignType from './detail/type';
@@ -37,6 +38,10 @@ export default class List extends Component {
 
   get canDelete() {
     return this.args.canDelete ?? false;
+  }
+
+  get displayEmptyResult() {
+    return this.args.campaigns.length === 0;
   }
 
   @action
@@ -67,94 +72,159 @@ export default class List extends Component {
 
   <template>
     {{#let (uniqueId) (uniqueId) (uniqueId) (uniqueId) as |actionBarId paginationId headerId filtersId|}}
-      <section class="campaign-list">
-        <div id={{filtersId}} />
-
-        <div class="panel">
-          <table class="table content-text content-text--small">
-            <caption class="screen-reader-only">{{@caption}}</caption>
-            <thead id={{headerId}} />
-
-            <tbody>
-              <SelectableList @items={{@campaigns}}>
-                <:manager as |allSelected someSelected toggleAll selectedCampaigns reset|>
-                  <InElement @destinationId={{filtersId}}>
-                    <CampaignFilters
-                      @ownerNameFilter={{@ownerNameFilter}}
-                      @nameFilter={{@nameFilter}}
-                      @statusFilter={{@statusFilter}}
-                      @onFilter={{fn withFunction @onFilter reset}}
-                      @onClearFilters={{fn withFunction @onClear reset}}
-                      @numResults={{@campaigns.meta.rowCount}}
-                      @canDelete={{this.canDelete}}
-                      @listOnlyCampaignsOfCurrentUser={{@hideCampaignOwnerFilter}}
-                    />
-                  </InElement>
-                  <Headers @destinationId={{headerId}} @showCampaignOwner={{@showCampaignOwner}}>
-                    {{#if this.canDelete}}
-                      <TableHeader @size="small">
-                        <PixCheckbox
-                          @screenReaderOnly={{true}}
-                          @checked={{someSelected}}
-                          @isIndeterminate={{not allSelected}}
-                          disabled={{not @campaigns.length}}
-                          {{on "click" toggleAll}}
-                        ><:label>{{t "pages.campaigns-list.table.column.mainCheckbox"}}</:label></PixCheckbox>
-                      </TableHeader>
-                    {{/if}}
-                  </Headers>
-                  {{#if someSelected}}
-                    <ActionBar
-                      @destinationId={{actionBarId}}
-                      @count={{selectedCampaigns.length}}
-                      @openDeletionModal={{this.toggleDeletionModal}}
-                    />
-                    <DeletionModal
-                      @showModal={{this.showDeletionModal}}
-                      @onCloseModal={{this.toggleDeletionModal}}
-                      @count={{selectedCampaigns.length}}
-                      @deleteCampaigns={{fn (fn withFunction this.deleteCampaigns reset) selectedCampaigns}}
-                    />
-                  {{/if}}
-                  <PixPaginationControl
-                    @destinationId={{paginationId}}
-                    @onChange={{reset}}
-                    @pagination={{@campaigns.meta}}
-                  />
-                </:manager>
-                <:item as |campaign toggleCampaign isCampaignSelected|>
-                  <Row
-                    @campaign={{campaign}}
-                    @showCampaignOwner={{@showCampaignOwner}}
-                    @labels={{this.labels}}
-                    @onClickCampaign={{@onClickCampaign}}
+      <div id={{filtersId}} />
+      <SelectableList
+        @items={{@campaigns}}
+        as |toggleCampaign isCampaignSelected allSelected someSelected toggleAll selectedCampaigns reset|
+      >
+        <PixTable
+          @variant="orga"
+          @caption={{@caption}}
+          @data={{@campaigns}}
+          class="table"
+          @onRowClick={{@onClickCampaign}}
+        >
+          <:columns as |campaign context|>
+            {{#if this.canDelete}}
+              <PixTableColumn @context={{context}}>
+                <:header>
+                  <PixCheckbox
+                    @screenReaderOnly={{true}}
+                    @checked={{someSelected}}
+                    @isIndeterminate={{not allSelected}}
+                    disabled={{not @campaigns.length}}
+                    {{on "click" toggleAll}}
                   >
-                    {{#if this.canDelete}}
-                      <td {{on "click" (fn withFunction toggleCampaign stopPropagation)}}>
-                        <PixCheckbox
-                          {{on "click" (fn withFunction toggleCampaign stopPropagation)}}
-                          @checked={{isCampaignSelected}}
-                        />
-                      </td>
-                    {{/if}}
-                  </Row>
-                </:item>
-              </SelectableList>
-            </tbody>
-          </table>
-          {{#if (eq @campaigns.length 0)}}
-            <p class="table__empty content-text">
-              {{t "pages.campaigns-list.table.empty"}}
-            </p>
-          {{/if}}
-        </div>
+                    <:label>{{t "pages.campaigns-list.table.column.mainCheckbox"}}</:label>
+                  </PixCheckbox>
+                </:header>
+                <:cell>
+                  <span {{on "click" (fn withFunction (fn toggleCampaign campaign) stopPropagation)}}>
+                    <PixCheckbox
+                      {{on "click" (fn withFunction (fn toggleCampaign campaign) stopPropagation)}}
+                      @checked={{isCampaignSelected campaign}}
+                    />
+                  </span>
+                </:cell>
+              </PixTableColumn>
+            {{/if}}
 
-        <div id={{paginationId}} />
-      </section>
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "pages.campaigns-list.table.column.name"}}
+              </:header>
+              <:cell>
+                <span class="table__link-cell">
+                  <CampaignType @labels={{this.labels}} @campaignType={{campaign.type}} @hideLabel={{true}} />
+                  <LinkTo @route="authenticated.campaigns.campaign" @model={{campaign.id}}>
+                    {{campaign.name}}
+                  </LinkTo>
+                </span>
+              </:cell>
+            </PixTableColumn>
+
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "pages.campaigns-list.table.column.code"}}
+              </:header>
+              <:cell>
+                <span {{on "click" stopPropagation}}>{{campaign.code}}</span>
+              </:cell>
+            </PixTableColumn>
+
+            {{#if @showCampaignOwner}}
+              <PixTableColumn @context={{context}}>
+                <:header>
+                  {{t "pages.campaigns-list.table.column.created-by"}}
+                </:header>
+                <:cell>
+                  {{campaign.ownerFullName}}
+                </:cell>
+              </PixTableColumn>
+            {{/if}}
+
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{t "pages.campaigns-list.table.column.created-on"}}
+              </:header>
+              <:cell>
+                {{dayjsFormat campaign.createdAt "DD/MM/YYYY" allow-empty=true}}
+              </:cell>
+            </PixTableColumn>
+
+            <PixTableColumn @context={{context}} @type="number">
+              <:header>
+                {{t "pages.campaigns-list.table.column.participants"}}
+              </:header>
+              <:cell>
+                {{campaign.participationsCount}}
+              </:cell>
+            </PixTableColumn>
+
+            <PixTableColumn @context={{context}} @type="number">
+              <:header>
+                {{t "pages.campaigns-list.table.column.results"}}
+              </:header>
+              <:cell>
+                {{campaign.sharedParticipationsCount}}
+              </:cell>
+            </PixTableColumn>
+          </:columns>
+        </PixTable>
+
+        {{#if this.displayEmptyResult}}
+          <p class="table__empty content-text">
+            {{t "pages.campaigns-list.table.empty"}}
+          </p>
+        {{/if}}
+
+        {{#if someSelected}}
+          <ActionBar
+            @destinationId={{actionBarId}}
+            @count={{selectedCampaigns.length}}
+            @openDeletionModal={{this.toggleDeletionModal}}
+          />
+
+          <DeletionModal
+            @showModal={{this.showDeletionModal}}
+            @onCloseModal={{this.toggleDeletionModal}}
+            @count={{selectedCampaigns.length}}
+            @deleteCampaigns={{fn (fn withFunction this.deleteCampaigns reset) selectedCampaigns}}
+          />
+        {{/if}}
+        <PixPaginationControl @destinationId={{paginationId}} @onChange={{reset}} @pagination={{@campaigns.meta}} />
+        <Filters
+          @destinationId={{filtersId}}
+          @reset={{reset}}
+          @ownerNameFilter={{@ownerNameFilter}}
+          @nameFilter={{@nameFilter}}
+          @statusFilter={{@statusFilter}}
+          @onFilter={{@onFilter}}
+          @onClearFilters={{@onClear}}
+          @numResults={{@campaigns.meta.rowCount}}
+          @hideCampaignOwnerFilter={{@hideCampaignOwnerFilter}}
+        />
+      </SelectableList>
+      <div id={{paginationId}} />
       <div id={{actionBarId}} />
     {{/let}}
   </template>
 }
+
+const Filters = <template>
+  <InElement @destinationId={{@destinationId}}>
+    <CampaignFilters
+      @ownerNameFilter={{@ownerNameFilter}}
+      @nameFilter={{@nameFilter}}
+      @statusFilter={{@statusFilter}}
+      @onFilter={{fn withFunction @onFilter @reset}}
+      @onClearFilters={{fn withFunction @onClearFilters @reset}}
+      @numResults={{@numResults}}
+      @canDelete={{this.canDelete}}
+      @listOnlyCampaignsOfCurrentUser={{@hideCampaignOwnerFilter}}
+    />
+  </InElement>
+</template>;
 
 const PixPaginationControl = <template>
   <InElement @destinationId={{@destinationId}} @waitForElement={{true}}>
@@ -191,47 +261,4 @@ const DeletionModal = <template>
       <p><strong>{{t "pages.campaigns-list.deletion-modal.content.footer" count=@count}}</strong></p>
     </:content>
   </UiDeletionModal>
-</template>;
-
-const Headers = <template>
-  <InElement @destinationId={{@destinationId}}>
-    <tr>
-      {{yield}}
-      <TableHeader @size="wide">{{t "pages.campaigns-list.table.column.name"}}</TableHeader>
-      <TableHeader @size="medium">{{t "pages.campaigns-list.table.column.code"}}</TableHeader>
-      {{#if @showCampaignOwner}}
-        <TableHeader @size="medium" class="hide-on-mobile">{{t
-            "pages.campaigns-list.table.column.created-by"
-          }}</TableHeader>
-      {{/if}}
-      <TableHeader @size="medium" class="hide-on-mobile">{{t
-          "pages.campaigns-list.table.column.created-on"
-        }}</TableHeader>
-      <TableHeader @size="medium" class="hide-on-mobile">{{t
-          "pages.campaigns-list.table.column.participants"
-        }}</TableHeader>
-      <TableHeader @size="medium" class="hide-on-mobile">{{t "pages.campaigns-list.table.column.results"}}</TableHeader>
-    </tr>
-  </InElement>
-</template>;
-
-const Row = <template>
-  <tr {{on "click" (fn @onClickCampaign @campaign.id)}} class="tr--clickable">
-    {{yield}}
-    <td>
-      <span class="campaign-list__campaign-link-cell">
-        <CampaignType @campaignType={{@campaign.type}} @hideLabel={{true}} />
-        <LinkTo @route="authenticated.campaigns.campaign" @model={{@campaign.id}}>
-          {{@campaign.name}}
-        </LinkTo>
-      </span>
-    </td>
-    <td {{on "click" stopPropagation}}>{{@campaign.code}}</td>
-    {{#if @showCampaignOwner}}
-      <td class="hide-on-mobile">{{@campaign.ownerFullName}}</td>
-    {{/if}}
-    <td class="hide-on-mobile">{{dayjsFormat @campaign.createdAt "DD/MM/YYYY" allow-empty=true}}</td>
-    <td class="hide-on-mobile">{{@campaign.participationsCount}}</td>
-    <td class="hide-on-mobile">{{@campaign.sharedParticipationsCount}}</td>
-  </tr>
 </template>;

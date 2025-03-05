@@ -7,11 +7,6 @@ module('Unit | Controller | authenticated/campaigns/list/all-campaigns', functio
   setupIntlRenderingTest(hooks);
   let controller;
 
-  const event = {
-    preventDefault: sinon.stub(),
-    stopPropagation: sinon.stub(),
-  };
-
   hooks.beforeEach(function () {
     controller = this.owner.lookup('controller:authenticated/campaigns/list/all-campaigns');
   });
@@ -22,10 +17,9 @@ module('Unit | Controller | authenticated/campaigns/list/all-campaigns', functio
       controller.router = { transitionTo: sinon.stub() };
 
       // when
-      controller.send('goToCampaignPage', 123, event);
+      controller.send('goToCampaignPage', { id: 123 });
 
       // then
-      assert.true(event.preventDefault.called);
       assert.true(controller.router.transitionTo.calledWith('authenticated.campaigns.campaign', 123));
     });
   });

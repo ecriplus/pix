@@ -427,7 +427,6 @@
           }
         },
         "empty": "Pending results",
-        "row-title": "Competence",
         "title": "Results by competence"
       },
       "title": "Results of {firstName} {lastName}"
@@ -514,7 +513,6 @@
         },
         "delete-button-label": "Delete participation",
         "empty": "No participants",
-        "row-title": "Participant",
         "see-results": "See results of {firstName} {lastName}",
         "title": "List of participants"
       },
@@ -675,7 +673,6 @@
         "evolution-tooltip": {
           "content": "Evolution of the participant between their last two shared results."
         },
-        "row-title": "Participant",
         "title": "List of submitted results"
       },
       "tested-items": "Items assessed",
@@ -690,7 +687,6 @@
             "value": "By {source}"
           }
         },
-        "row-title": "Tutorial",
         "title": "{count, plural, =1 {1 tutorial} other{{count} tutorials}} recommended by the Pix community"
       },
       "sub-title": "Recommendations of topics to focus on",
@@ -718,9 +714,7 @@
             "recommended": "Recommended",
             "strongly-recommended": "Strongly recommended",
             "very-strongly-recommended": "Very strongly recommended"
-          },
-          "row-title": "Topic",
-          "title": "Review by topic"
+          }
         },
         "competences": {
           "column": {
@@ -730,7 +724,6 @@
               "tooltip": "'<span class=\"screen-reader-only\">'Participants have validated'</span>' {result} % '<span class=\"screen-reader-only\">'of the competence {competence}.'</span>'"
             }
           },
-          "row-title": "Competence",
           "title": "Results by competence"
         },
         "empty": "Pending results"
@@ -829,8 +822,7 @@
         },
         "description-all-campaigns": "This is the list of all the campaigns created in you Pix Orga. It includes their code, their owner name, creation date, number of participants and number of received results.",
         "description-my-campaigns": "This is the list of the campaigns you own. It includes their code, their creation date, number of participants and number of received results.",
-        "empty": "No campaign",
-        "row-title": "Campaign"
+        "empty": "No campaign"
       },
       "tabs": {
         "all-campaigns": "All the campaigns",
@@ -1093,8 +1085,7 @@
               "participation-count": "Number of participations",
               "shared-at": "Sent on",
               "status": "Status"
-            },
-            "row-title": "Participation"
+            }
           }
         },
         "participations-title": "List of all the participations",
@@ -1178,7 +1169,6 @@
         "description": "Table of participants, sorted by name.",
         "empty": "No participants",
         "oralization-header-tooltip": "Activate “read the instruction” to have the student's oral transcription.",
-        "row-title": "Participant",
         "row-value": {
           "oralization": {
             "false": "Deactivated",
@@ -1309,7 +1299,6 @@
           "skill": "Competence"
         },
         "empty": "Pending results",
-        "row-title": "Competence",
         "title": "Results by competence"
       },
       "title": "Profile of {firstName} {lastName}"
@@ -1345,7 +1334,6 @@
         "evolution-tooltip": {
           "content": "Evolution of the pix score between the last two profile shares."
         },
-        "row-title": "Profile",
         "title": "List of submitted profiles"
       },
       "title": "Submitted profiles"
@@ -1484,8 +1472,7 @@
           }
         },
         "description": "Table of students, sorted by name. For students who have provided an authentication method, you can manage the allowed login modes and reset the student's password through a menu in 'Actions' column",
-        "empty": "No students.",
-        "row-title": "Student"
+        "empty": "No students."
       },
       "title": "{count, plural, =0 {Students} =1 {Student ({count})} other {Students ({count})}}"
     },
@@ -1606,8 +1593,7 @@
           "student-number": "Student number"
         },
         "description": "Table of students, sorted by name.You can edit the student's number through a menu in an additional column",
-        "empty": "No students.",
-        "row-title": "Student"
+        "empty": "No students."
       },
       "title": "{count, plural, =0 {Students} =1 {Student ({count})} other {Students ({count})}}"
     },
@@ -1683,8 +1669,7 @@
           "last-name": "Last name",
           "organization-membership-role": "Role"
         },
-        "empty": "No members yet",
-        "row-title": "Member"
+        "empty": "No members yet"
       },
       "title": "Team members"
     },

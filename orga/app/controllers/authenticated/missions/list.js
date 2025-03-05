@@ -8,8 +8,8 @@ export default class MissionList extends Controller {
   @service currentDomain;
 
   @action
-  goToMissionDetails(id) {
-    this.router.transitionTo('authenticated.missions.mission', id);
+  goToMissionDetails(mission) {
+    this.router.transitionTo('authenticated.missions.mission', mission.id);
   }
 
   get schoolCode() {

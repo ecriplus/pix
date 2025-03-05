@@ -20,11 +20,11 @@ export default class IconTrigger extends Component {
   }
 
   <template>
-    <div id="icon-trigger" class="dropdown" ...attributes>
+    <div class="dropdown" ...attributes>
       <PixIconButton
         @iconName={{@icon}}
-        aria-label="{{@ariaLabel}}"
-        class="{{@dropdownButtonClass}}"
+        @ariaLabel={{@ariaLabel}}
+        class={{@dropdownButtonClass}}
         @triggerAction={{this.toggle}}
         @size="small"
         @color="dark-grey"

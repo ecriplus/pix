@@ -1,20 +1,20 @@
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { array, fn } from '@ember/helper';
-import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
 import { gt } from 'ember-truth-helpers';
 
 import getService from '../../../helpers/get-service.js';
-import TableHeader from '../../table/header';
 import CampaignParticipationFilters from '../filter/participation-filters';
 import EvolutionHeader from './evolution-header';
 import ParticipationEvolutionIcon from './participation-evolution-icon';
 
 <template>
-  <section ...attributes>
+  <section>
     <h3 class="screen-reader-only">{{t "pages.profiles-list.table.title"}}</h3>
 
     <CampaignParticipationFilters
@@ -29,120 +29,125 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
       @isHiddenStatus={{true}}
     />
 
-    <div class="panel">
-      <table class="table content-text content-text--small">
-        <caption class="screen-reader-only">{{t "pages.profiles-list.table.caption"}}</caption>
-        <colgroup class="table__column">
-          <col />
-          <col />
-          {{#if @campaign.externalIdLabel}}
-            <col class="table__column--medium" />
-          {{/if}}
-          <col />
-          <col />
-          {{#if @campaign.multipleSendings}}
-            <col />
-          {{/if}}
-          <col class="hide-on-mobile" />
-          <col class="hide-on-mobile" />
-          {{#if @campaign.multipleSendings}}
-            <col />
-          {{/if}}
-        </colgroup>
-        <thead>
-          <tr>
-            <TableHeader>{{t "pages.profiles-list.table.column.last-name"}}</TableHeader>
-            <TableHeader>{{t "pages.profiles-list.table.column.first-name"}}</TableHeader>
-            {{#if @campaign.externalIdLabel}}
-              <TableHeader>{{@campaign.externalIdLabel}}</TableHeader>
-            {{/if}}
-            <TableHeader @align="center">{{t "pages.profiles-list.table.column.sending-date.label"}}</TableHeader>
-            <TableHeader @align="center">{{t "pages.profiles-list.table.column.pix-score.label"}}</TableHeader>
-            {{#if @campaign.multipleSendings}}
-              <TableHeader @align="center">
-                <EvolutionHeader
-                  @tooltipContent={{t "pages.profiles-list.table.evolution-tooltip.content"}}
-                /></TableHeader>
+    <PixTable
+      @variant="orga"
+      @caption={{t "pages.profiles-list.table.caption"}}
+      @data={{@profiles}}
+      @onRowClick={{fn @onClickParticipant @campaign.id}}
+      class="table"
+    >
+      <:columns as |participation context|>
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "pages.profiles-list.table.column.last-name"}}
+          </:header>
+          <:cell>
+            <LinkTo
+              @route="authenticated.campaigns.participant-profile"
+              @models={{array @campaign.id participation.id}}
+            >
+              {{participation.lastName}}
+            </LinkTo>
+          </:cell>
+        </PixTableColumn>
 
-            {{/if}}
-            <TableHeader @align="center" class="hide-on-mobile">{{t
-                "pages.profiles-list.table.column.certifiable"
-              }}</TableHeader>
-            <TableHeader @align="center" class="hide-on-mobile">{{t
-                "pages.profiles-list.table.column.competences-certifiables"
-              }}</TableHeader>
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "pages.profiles-list.table.column.first-name"}}
+          </:header>
+          <:cell>
+            {{participation.firstName}}
+          </:cell>
+        </PixTableColumn>
 
-            {{#if @campaign.multipleSendings}}
-              <TableHeader @align="center" aria-label={{t "pages.profiles-list.table.column.ariaSharedProfileCount"}}>
-                {{t "pages.profiles-list.table.column.sharedProfileCount"}}
-              </TableHeader>
-            {{/if}}
-          </tr>
-        </thead>
-
-        {{#if (gt @profiles.length 0)}}
-          <tbody>
-            {{#each @profiles as |profile|}}
-              <tr
-                aria-label={{t "pages.profiles-list.table.row-title"}}
-                {{on "click" (fn @onClickParticipant @campaign.id profile.id)}}
-                class="tr--clickable"
-              >
-                <td>
-                  <LinkTo
-                    @route="authenticated.campaigns.participant-profile"
-                    @models={{array @campaign.id profile.id}}
-                  >
-                    {{profile.lastName}}
-                  </LinkTo>
-                </td>
-                <td>{{profile.firstName}}</td>
-                {{#if @campaign.externalIdLabel}}
-                  <td class="table__column table__column--break-word">{{profile.participantExternalId}}</td>
-                {{/if}}
-                <td class="table__column--center">
-                  {{#if profile.sharedAt}}
-                    {{dayjsFormat profile.sharedAt "DD/MM/YYYY"}}
-                  {{else}}
-                    <span class="table__column--highlight">{{t
-                        "pages.profiles-list.table.column.sending-date.on-hold"
-                      }}</span>
-                  {{/if}}
-                </td>
-                <td class="table__column--center">
-                  {{#if profile.sharedAt}}
-                    <PixTag @color="tertiary" class="pix-score-tag">
-                      {{t "pages.profiles-list.table.column.pix-score.value" score=profile.pixScore}}
-                    </PixTag>
-                  {{/if}}
-                </td>
-                {{#if @campaign.multipleSendings}}
-                  <td class="table__column--center">
-                    <ParticipationEvolutionIcon @evolution={{profile.evolution}} /></td>
-                {{/if}}
-                <td class="table__column--center hide-on-mobile">
-                  {{#if profile.certifiable}}
-                    <PixTag @color="green-light">{{t "pages.profiles-list.table.column.certifiable-tag"}}</PixTag>
-                  {{/if}}
-                </td>
-                <td class="table__column--center hide-on-mobile">
-                  {{profile.certifiableCompetencesCount}}
-                </td>
-                {{#if @campaign.multipleSendings}}
-                  <td class="table__column--center">
-                    {{profile.sharedProfileCount}}
-                  </td>
-                {{/if}}
-              </tr>
-            {{/each}}
-          </tbody>
+        {{#if @campaign.externalIdLabel}}
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{@campaign.externalIdLabel}}
+            </:header>
+            <:cell>
+              {{participation.participantExternalId}}
+            </:cell>
+          </PixTableColumn>
         {{/if}}
-      </table>
 
-      {{#unless @profiles}}
-        <p class="table__empty content-text">{{t "pages.profiles-list.table.empty"}}</p>
-      {{/unless}}
-    </div>
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "pages.profiles-list.table.column.sending-date.label"}}
+          </:header>
+          <:cell>
+            {{#if participation.sharedAt}}
+              {{dayjsFormat participation.sharedAt "DD/MM/YYYY"}}
+            {{else}}
+              <span class="table__column--highlight">{{t
+                  "pages.profiles-list.table.column.sending-date.on-hold"
+                }}</span>
+            {{/if}}
+          </:cell>
+        </PixTableColumn>
+
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "pages.profiles-list.table.column.pix-score.label"}}
+          </:header>
+          <:cell>
+            {{#if participation.sharedAt}}
+              <PixTag @color="tertiary" class="pix-score-tag">
+                {{t "pages.profiles-list.table.column.pix-score.value" score=participation.pixScore}}
+              </PixTag>
+            {{/if}}
+          </:cell>
+        </PixTableColumn>
+
+        {{#if @campaign.multipleSendings}}
+          <PixTableColumn @context={{context}}>
+            <:header>
+              <EvolutionHeader @tooltipContent={{t "pages.profiles-list.table.evolution-tooltip.content"}} />
+            </:header>
+            <:cell>
+              <ParticipationEvolutionIcon @evolution={{participation.evolution}} />
+            </:cell>
+          </PixTableColumn>
+        {{/if}}
+
+        <PixTableColumn @context={{context}}>
+          <:header>
+            {{t "pages.profiles-list.table.column.certifiable"}}
+          </:header>
+          <:cell>
+            {{#if participation.certifiable}}
+              <PixTag @color="green-light">{{t "pages.profiles-list.table.column.certifiable-tag"}}</PixTag>
+            {{/if}}
+          </:cell>
+        </PixTableColumn>
+
+        <PixTableColumn @context={{context}} @type="number">
+          <:header>
+            {{t "pages.profiles-list.table.column.competences-certifiables"}}
+          </:header>
+          <:cell>
+            {{participation.certifiableCompetencesCount}}
+          </:cell>
+        </PixTableColumn>
+
+        {{#if @campaign.multipleSendings}}
+          <PixTableColumn @context={{context}} @type="number">
+            <:header>
+              <span aria-label={{t "pages.profiles-list.table.column.ariaSharedProfileCount"}}>
+                {{t "pages.profiles-list.table.column.sharedProfileCount"}}
+              </span>
+            </:header>
+            <:cell>
+              {{participation.sharedProfileCount}}
+            </:cell>
+          </PixTableColumn>
+        {{/if}}
+      </:columns>
+    </PixTable>
+
+    {{#unless @profiles}}
+      <p class="table__empty content-text">{{t "pages.profiles-list.table.empty"}}</p>
+    {{/unless}}
 
     {{#if (gt @profiles.length 0)}}
       {{#let (getService "service:intl") as |intl|}}

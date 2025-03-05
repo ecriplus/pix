@@ -79,7 +79,14 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
     );
     const row = screen.getByText('La frite').closest('tr');
     await click(row);
-    sinon.assert.calledOnceWithMatch(this.clickSpy, '100', '456');
+    sinon.assert.calledOnceWithMatch(this.clickSpy, {
+      id: '123',
+      firstName: 'Joe',
+      lastName: 'La frite',
+      status: 'TO_SHARE',
+      participantExternalId: 'patate',
+      lastCampaignParticipationId: '456',
+    });
     assert.dom(screen.getByRole('link', /la frite/i)).hasAttribute('href', '/campagnes/100/profils/456');
   });
 

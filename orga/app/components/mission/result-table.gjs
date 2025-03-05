@@ -1,11 +1,12 @@
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { t } from 'ember-intl';
 
 import getService from '../../helpers/get-service.js';
-import Header from '../table/header';
 
 function indexNumber(index) {
   return { number: index + 1 };
@@ -28,77 +29,82 @@ function getMissionResultColor(result) {
 
 <template>
   {{#if @missionLearners}}
-    <div class="panel">
-      <table class="table content-text content-text--small participation-list__table mission-table">
-        <caption class="screen-reader-only">{{t
-            "pages.missions.mission.table.result.caption"
-            missionName=@mission.name
-          }}</caption>
-        <thead>
-          <tr>
-            <Header scope="col">{{t "pages.missions.mission.table.result.headers.first-name"}}</Header>
-            <Header scope="col">{{t "pages.missions.mission.table.result.headers.last-name"}}</Header>
-            <Header scope="col">{{t "pages.missions.mission.table.result.headers.division"}}</Header>
-            {{#each @mission.content.steps as |step index|}}
-              <Header scope="col">
-                <div class="mission-result-table__header-cell">
-                  {{t "pages.missions.mission.table.result.headers.step" (indexNumber index)}}
+    <PixTable
+      @variant="orga"
+      class="table"
+      @data={{@missionLearners}}
+      @caption={{t "pages.missions.mission.table.result.caption" missionName=@mission.name}}
+    >
+      <:columns as |missionLearner context|>
+        <PixTableColumn @context={{context}}>
+          <:header>{{t "pages.missions.mission.table.result.headers.first-name"}}</:header>
+          <:cell>{{missionLearner.firstName}}</:cell>
+        </PixTableColumn>
 
-                  <PixTooltip @id="tooltip-{{index}}" @isInline={{true}}>
-                    <:triggerElement>
-                      <PixIcon
-                        @name="help"
-                        @plainIcon={{true}}
-                        class="mission-result-table__info-icon"
-                        aria-describedby="tooltip-{{index}}"
-                      />
-                    </:triggerElement>
+        <PixTableColumn @context={{context}}>
+          <:header>{{t "pages.missions.mission.table.result.headers.last-name"}}</:header>
+          <:cell>{{missionLearner.lastName}}</:cell>
+        </PixTableColumn>
 
-                    <:tooltip>
-                      <p>{{step.name}}</p>
-                    </:tooltip>
-                  </PixTooltip>
-                </div>
+        <PixTableColumn @context={{context}}>
+          <:header>{{t "pages.missions.mission.table.result.headers.division"}}</:header>
+          <:cell>
+            {{missionLearner.division}}
+          </:cell>
+        </PixTableColumn>
 
-              </Header>
-            {{/each}}
-            {{#if @mission.content.dareChallenges}}
-              <Header scope="col">{{t "pages.missions.mission.table.result.headers.dare-challenge"}}</Header>
+        {{#each @mission.content.steps as |step index|}}
+          <PixTableColumn @context={{context}}>
+            <:header>
+              <div class="organization-participant__align-element">
+                {{t "pages.missions.mission.table.result.headers.step" (indexNumber index)}}
+
+                <PixTooltip @id="tooltip-{{index}}" @isInline={{true}}>
+                  <:triggerElement>
+                    <PixIcon
+                      @name="help"
+                      @plainIcon={{true}}
+                      class="mission-result-table__info-icon"
+                      aria-describedby="tooltip-{{index}}"
+                    />
+                  </:triggerElement>
+
+                  <:tooltip>
+                    <p>{{step.name}}</p>
+                  </:tooltip>
+                </PixTooltip>
+              </div>
+            </:header>
+            <:cell>
+              {{t (displayableStepResult missionLearner index)}}
+            </:cell>
+          </PixTableColumn>
+        {{/each}}
+
+        {{#if @mission.content.dareChallenges}}
+          <PixTableColumn @context={{context}}>
+            <:header>{{t "pages.missions.mission.table.result.headers.dare-challenge"}}</:header>
+            <:cell>
+              {{t missionLearner.displayableDareResult}}
+            </:cell>
+          </PixTableColumn>
+        {{/if}}
+
+        <PixTableColumn @context={{context}}>
+          <:header>{{t "pages.missions.mission.table.result.headers.result"}}</:header>
+          <:cell>
+            {{#if missionLearner.result.global}}
+              <PixTag @color={{getMissionResultColor missionLearner.result.global}}>{{t
+                  missionLearner.displayableGlobalResult
+                }}</PixTag>
+            {{else}}
+              {{t missionLearner.displayableGlobalResult}}
             {{/if}}
-            <Header scope="col">{{t "pages.missions.mission.table.result.headers.result"}}</Header>
-          </tr>
-        </thead>
-        <tbody>
+          </:cell>
+        </PixTableColumn>
+      </:columns>
+    </PixTable>
 
-          {{#each @missionLearners as |missionLearner|}}
-            <tr aria-label={{t "pages.missions.mission.tabs.result.aria-label"}}>
-              <td>
-                {{missionLearner.firstName}}
-              </td>
-              <td>
-                {{missionLearner.lastName}}
-              </td>
-              <td>
-                {{missionLearner.division}}
-              </td>
-              {{#each @mission.content.steps as |missionStep index|}}
-                <td>{{t (displayableStepResult missionLearner index)}}</td>
-              {{/each}}
-              <td>{{t missionLearner.displayableDareResult}}</td>
-              <td>
-                {{#if missionLearner.result.global}}
-                  <PixTag @color={{getMissionResultColor missionLearner.result.global}}>{{t
-                      missionLearner.displayableGlobalResult
-                    }}</PixTag>
-                {{else}}
-                  {{t missionLearner.displayableGlobalResult}}
-                {{/if}}
-              </td>
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
-    </div>
     {{#let (getService "service:intl") as |intl|}}
       <PixPagination @pagination={{@missionLearners.meta}} @locale={{intl.primaryLocale}} />
     {{/let}}

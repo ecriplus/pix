@@ -1,7 +1,7 @@
 const { When, Then } = require("@badeball/cypress-cucumber-preprocessor");
 
 When(`je veux gérer le compte d'un élève`, () => {
-  cy.get('[aria-label="Afficher les actions"]').click();
+  cy.findByRole('button', {name : "Afficher les actions"}).click();
   cy.contains("Gérer le compte").click();
 });
 
@@ -23,9 +23,9 @@ Then("je vois le mot de passe généré", () => {
 });
 
 Then("je vois {int} élève(s)", (studentsCount) => {
-  cy.get('[aria-label="Élève"]').should("have.lengthOf", studentsCount);
+  cy.findAllByRole('row').should("have.lengthOf", studentsCount + 1);
 });
 
 Then("je vois {int} étudiant(s)", (studentsCount) => {
-  cy.get('[aria-label="Étudiant"]').should("have.lengthOf", studentsCount);
+  cy.findAllByRole('row').should("have.lengthOf", studentsCount + 1);
 });

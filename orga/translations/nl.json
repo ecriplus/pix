@@ -427,7 +427,6 @@
           }
         },
         "empty": "In afwachting van resultaten",
-        "row-title": "Vaardigheid",
         "title": "Resultaten per vaardigheid"
       },
       "title": "Resultaten voor {firstName} {lastName}"
@@ -478,7 +477,6 @@
         },
         "delete-button-label": "Deelname verwijderen",
         "empty": "Geen deelnemers",
-        "row-title": "Deelnemer",
         "see-results": "Bekijk de resultaten van {firstName} {lastName}",
         "title": "Lijst van deelnemers"
       },
@@ -639,7 +637,6 @@
           "content": "Evolutie van de deelnemer tussen hun laatste twee gedeelde resultaten."
         },
         "empty": "Geen deelname",
-        "row-title": "Deelnemer",
         "title": "Lijst van ontvangen resultaten"
       },
       "tested-items": "Beoordeelde verworvenheden",
@@ -654,7 +651,6 @@
             "value": "Door {source}"
           }
         },
-        "row-title": "Tutorial",
         "title": "{count, plural, =1 {1 tutorial aanbevolen} other{{count} tutorials aanbevolen}} door de Pix Community"
       },
       "sub-title": "Aanbeveling van onderwerpen om aan te werken",
@@ -682,9 +678,7 @@
             "recommended": "Aanbevolen",
             "strongly-recommended": "Sterk aanbevolen",
             "very-strongly-recommended": "Zeer aanbevolen"
-          },
-          "row-title": "Onderwerp",
-          "title": "Analyse per onderwerp"
+          }
         },
         "competences": {
           "column": {
@@ -694,7 +688,6 @@
               "tooltip": "'<span class=\"screen-reader-only\">'De deelnemers valideerden</span>' {result} % '<span class=\"screen-reader-only\">'van de vaardigheid {competence}.'</span>'"
             }
           },
-          "row-title": "Vaardigheid",
           "title": "Resultaten per vaardigheid"
         },
         "empty": "In afwachting van resultaten"
@@ -829,8 +822,7 @@
         },
         "description-all-campaigns": "Deze tabel geeft een overzicht van alle campagnes die zijn aangemaakt in je Pix Orga-ruimte. Voor elke campagne staat de code, de eigenaar, de datum waarop de campagne is gemaakt, het aantal deelnemers en het aantal ontvangen resultaten.",
         "description-my-campaigns": "In deze tabel staan de campagnes waarvan je de eigenaar bent. Voor elke campagne wordt de code weergegeven, de aanmaakdatum, het aantal deelnemers en het aantal ontvangen resultaten.",
-        "empty": "Geen campagne",
-        "row-title": "Campagne"
+        "empty": "Geen campagne"
       },
       "tabs": {
         "all-campaigns": "Alle campagnes",
@@ -1093,8 +1085,7 @@
               "participation-count": "Aantal deelnames",
               "shared-at": "Verzenddatum",
               "status": "Status"
-            },
-            "row-title": "Deelname"
+            }
           }
         },
         "participations-title": "Lijst van alle deelnames",
@@ -1233,7 +1224,6 @@
         "description": "Tabel met deelnemers gesorteerd op naam.",
         "empty": "Geen deelnemers",
         "oralization-header-tooltip": "Door ‘leesinstructies’ te activeren, kan de student zijn mondelinge transcriptie krijgen.",
-        "row-title": "Deelnemer",
         "row-value": {
           "oralization": {
             "true": "Geactiveerd",
@@ -1309,7 +1299,6 @@
           "skill": "Vaardigheid"
         },
         "empty": "In afwachting van resultaten",
-        "row-title": "Vaardigheid",
         "title": "Resultaten per vaardigheid"
       },
       "title": "Profiel van {firstName} {lastName}"
@@ -1345,7 +1334,6 @@
           "content": "Evolutie van de pix score tussen de laatste twee profielaandelen."
         },
         "empty": "In afwachting van profielen",
-        "row-title": "Profiel",
         "title": "Lijst van ontvangen profielen"
       },
       "title": "Ontvangen profielen"
@@ -1484,8 +1472,7 @@
           }
         },
         "description": "Studententabel gesorteerd op naam. Voor studenten die een inlogmethode hebben opgegeven, kun je een menu in de kolom 'Acties' gebruiken om de geautoriseerde inlogmethoden te beheren en het wachtwoord van de student opnieuw in te stellen.",
-        "empty": "Geen studenten.",
-        "row-title": "Student"
+        "empty": "Geen studenten."
       },
       "title": "{count, plural, =0 {Studenten} =1 {Studenten ({count})} other {studenten ({count})}}"
     },
@@ -1606,8 +1593,7 @@
           "student-number": "Studentnummer"
         },
         "description": "Tabel van studenten gesorteerd op naam. Je kunt via een menu in een extra kolom het studentnummer wijzigen.",
-        "empty": "Geen studenten.",
-        "row-title": "Student"
+        "empty": "Geen studenten."
       },
       "title": "{count, plural, =0 {Studenten} =1 {Student ({count})} other {Studenten ({count})}}"
     },
@@ -1683,8 +1669,7 @@
           "last-name": "Achternaam",
           "organization-membership-role": "Taak"
         },
-        "empty": "In afwachting van leden",
-        "row-title": "Lid"
+        "empty": "In afwachting van leden"
       },
       "title": "Leden"
     },

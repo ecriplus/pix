@@ -23,21 +23,24 @@ export default class ListController extends Controller {
   }
 
   @action
-  goToLearnerPage(learnerId, event) {
-    event.preventDefault();
-    this.router.transitionTo('authenticated.sup-organization-participants.sup-organization-participant', learnerId);
+  goToLearnerPage(learner) {
+    this.router.transitionTo('authenticated.sup-organization-participants.sup-organization-participant', learner.id);
   }
 
   @action
-  sortByParticipationCount(value) {
-    this.participationCountOrder = value || null;
+  sortByParticipationCount() {
+    if (!this.participationCountOrder) this.participationCountOrder = 'asc';
+    else this.participationCountOrder = this.participationCountOrder === 'asc' ? 'desc' : 'asc';
+
     this.pageNumber = null;
     this.lastnameSort = null;
   }
 
   @action
-  sortByLastname(value) {
-    this.lastnameSort = value || null;
+  sortByLastname() {
+    if (!this.lastnameSort) this.lastnameSort = 'asc';
+    else this.lastnameSort = this.lastnameSort === 'asc' ? 'desc' : 'asc';
+
     this.participationCountOrder = null;
     this.pageNumber = null;
   }

@@ -2,42 +2,21 @@
 
 $margin-right: 32px;
 
-.organization-participant-list-page {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  width: 100%;
-
+.organization-participant {
   &__last-participation {
     display: flex;
     gap: var(--pix-spacing-2x);
     justify-content: center;
   }
 
-  &__certificability-header {
-    display: flex;
+  &__align-element {
+    display: inline-flex;
+    gap:var(--pix-spacing-2x);
     justify-content: center;
-  }
 
-  &__header-with-tooltip {
-    display: flex;
-
-    .pix-tooltip {
-      margin-left: 5px;
-
-      &__trigger-element {
-        display: flex;
-      }
-    }
-  }
-
-  &__actions-header {
-    width: 10%;
-
-    @include breakpoints.device-is('tablet') {
-      padding-right: 12px;
-      padding-left: 0;
-      text-align: right;
+    &--column {
+      flex-direction:column;
+      align-items: center;
     }
   }
 

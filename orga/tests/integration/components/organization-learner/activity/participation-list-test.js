@@ -1,6 +1,8 @@
 import { render } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
@@ -53,5 +55,82 @@ module('Integration | Component | OrganizationLearner::Activity::ParticipationLi
     assert.ok(screen.getByText('25/12/2022'));
     assert.ok(screen.getByText('Profil reçu'));
     assert.ok(screen.getByText('1'));
+  });
+
+  module('redirect to campaign user detail', function (hooks) {
+    let router;
+
+    hooks.beforeEach(function () {
+      router = this.owner.lookup('service:router');
+      router.transitionTo = sinon.stub();
+    });
+
+    test('it should transition to profile collection detail when campaignType is PROFILE_COLLECTION', async function (assert) {
+      const router = this.owner.lookup('service:router');
+      router.transitionTo = sinon.stub();
+      // given
+      this.set('participations', [
+        {
+          id: '125',
+          campaignId: 789,
+          campaignType: 'PROFILES_COLLECTION',
+          campaignName: 'Ma campagne',
+          createdAt: new Date('2023-02-01'),
+          sharedAt: new Date('2023-03-01'),
+          status: 'SHARED',
+          lastCampaignParticipationId: 345,
+        },
+      ]);
+      this.route = 'authenticated.campaigns.participant-profile';
+
+      const screen = await render(
+        hbs`<OrganizationLearner::Activity::ParticipationList @participations={{this.participations}} />`,
+      );
+
+      // when
+      await click(await screen.findByRole('cell', { name: '01/02/2023' }));
+
+      // then
+      assert.ok(
+        router.transitionTo.calledWith(
+          this.route,
+          this.participations[0].campaignId,
+          this.participations[0].lastCampaignParticipationId,
+        ),
+      );
+    });
+
+    test('it should transition to assessment detail when campaignType is ASSESSMENT', async function (assert) {
+      // given
+      this.set('participations', [
+        {
+          id: '123',
+          campaignId: '456',
+          campaignType: 'ASSESSMENT',
+          campaignName: 'Ma campagne',
+          createdAt: new Date('2023-02-01'),
+          sharedAt: new Date('2023-03-01'),
+          status: 'SHARED',
+          lastCampaignParticipationId: 345,
+        },
+      ]);
+      this.route = 'authenticated.campaigns.participant-assessment';
+
+      const screen = await render(
+        hbs`<OrganizationLearner::Activity::ParticipationList @participations={{this.participations}} />`,
+      );
+
+      // when
+      await click(await screen.findByRole('cell', { name: '01/02/2023' }));
+
+      // then
+      assert.ok(
+        router.transitionTo.calledWith(
+          this.route,
+          this.participations[0].campaignId,
+          this.participations[0].lastCampaignParticipationId,
+        ),
+      );
+    });
   });
 });

@@ -123,10 +123,7 @@ module('Integration | Component | ScoOrganizationParticipant::List', function (h
     );
 
     // then
-    assert.strictEqual(
-      screen.getAllByRole('row', { name: t('pages.sco-organization-participants.table.row-title') }).length,
-      2,
-    );
+    assert.strictEqual(screen.getAllByRole('row').length, 3);
   });
 
   test('it should display a link to access student detail', async function (assert) {
@@ -531,88 +528,13 @@ module('Integration | Component | ScoOrganizationParticipant::List', function (h
 
         // when
         await click(
-          screen.getByLabelText(
-            t('pages.sco-organization-participants.table.column.participation-count.ariaLabelDefaultSort'),
-          ),
+          screen.getByRole('button', {
+            name: t('pages.sco-organization-participants.table.column.participation-count.ariaLabelDefaultSort'),
+          }),
         );
 
         // then
-        sinon.assert.calledWithExactly(sortByParticipationCount, 'asc');
-        assert.ok(true);
-      });
-
-      test('it should trigger ascending sort on participation count column when it is already sort descending', async function (assert) {
-        // given
-        this.set('participationCountOrder', 'desc');
-
-        const sortByParticipationCount = sinon.spy();
-
-        this.set('sortByParticipationCount', sortByParticipationCount);
-        this.set('divisions', []);
-        this.set('connectionTypes', []);
-        this.set('certificability', []);
-        this.set('search', null);
-
-        const screen = await render(hbs`<ScoOrganizationParticipant::List
-  @students={{this.students}}
-  @onFilter={{this.noop}}
-  @searchFilter={{this.search}}
-  @divisionsFilter={{this.divisions}}
-  @connectionTypeFilter={{this.connectionTypes}}
-  @certificabilityFilter={{this.certificability}}
-  @onClickLearner={{this.noop}}
-  @onResetFilter={{this.noop}}
-  @participationCountOrder={{this.participationCountOrder}}
-  @sortByParticipationCount={{this.sortByParticipationCount}}
-/>`);
-
-        // when
-        await click(
-          screen.getByLabelText(
-            t('pages.sco-organization-participants.table.column.participation-count.ariaLabelSortDown'),
-          ),
-        );
-
-        // then
-        sinon.assert.calledWithExactly(sortByParticipationCount, 'asc');
-        assert.ok(true);
-      });
-
-      test('it should trigger descending sort on participation count column when it is already sort ascending', async function (assert) {
-        // given
-        this.set('participationCountOrder', 'asc');
-
-        const sortByParticipationCount = sinon.spy();
-
-        this.set('sortByParticipationCount', sortByParticipationCount);
-        this.set('divisions', []);
-        this.set('connectionTypes', []);
-        this.set('certificability', []);
-        this.set('search', null);
-
-        const screen = await render(hbs`<ScoOrganizationParticipant::List
-  @students={{this.students}}
-  @onFilter={{this.noop}}
-  @searchFilter={{this.search}}
-  @divisionsFilter={{this.divisions}}
-  @connectionTypeFilter={{this.connectionTypes}}
-  @certificabilityFilter={{this.certificability}}
-  @onClickLearner={{this.noop}}
-  @onResetFilter={{this.noop}}
-  @participationCountOrder={{this.participationCountOrder}}
-  @sortByParticipationCount={{this.sortByParticipationCount}}
-/>`);
-
-        // when
-        await click(
-          screen.getByLabelText(
-            t('pages.sco-organization-participants.table.column.participation-count.ariaLabelSortUp'),
-          ),
-        );
-
-        // then
-        sinon.assert.calledWithExactly(sortByParticipationCount, 'desc');
-        assert.ok(true);
+        assert.ok(sortByParticipationCount.called);
       });
     });
 
@@ -645,82 +567,13 @@ module('Integration | Component | ScoOrganizationParticipant::List', function (h
 
         // when
         await click(
-          screen.getByLabelText(t('pages.sco-organization-participants.table.column.last-name.ariaLabelDefaultSort')),
+          screen.getByRole('button', {
+            name: t('pages.sco-organization-participants.table.column.last-name.ariaLabelDefaultSort'),
+          }),
         );
 
         // then
-        sinon.assert.calledWithExactly(sortByLastname, 'asc');
-        assert.ok(true);
-      });
-
-      test('it should trigger ascending sort on lastname column when it is already sort descending', async function (assert) {
-        // given
-        this.set('lastnameSort', 'desc');
-
-        const sortByLastname = sinon.spy();
-
-        this.set('sortByLastname', sortByLastname);
-        this.set('divisions', []);
-        this.set('connectionTypes', []);
-        this.set('certificability', []);
-        this.set('search', null);
-
-        const screen = await render(hbs`<ScoOrganizationParticipant::List
-  @students={{this.students}}
-  @onFilter={{this.noop}}
-  @searchFilter={{this.search}}
-  @divisionsFilter={{this.divisions}}
-  @connectionTypeFilter={{this.connectionTypes}}
-  @certificabilityFilter={{this.certificability}}
-  @onClickLearner={{this.noop}}
-  @onResetFilter={{this.noop}}
-  @lastnameSort={{this.lastnameSort}}
-  @sortByLastname={{this.sortByLastname}}
-/>`);
-
-        // when
-        await click(
-          screen.getByLabelText(t('pages.sco-organization-participants.table.column.last-name.ariaLabelSortDown')),
-        );
-
-        // then
-        sinon.assert.calledWithExactly(sortByLastname, 'asc');
-        assert.ok(true);
-      });
-
-      test('it should trigger descending sort on lastname column when it is already sort ascending', async function (assert) {
-        // given
-        this.set('lastnameSort', 'asc');
-
-        const sortByLastname = sinon.spy();
-
-        this.set('sortByLastname', sortByLastname);
-        this.set('divisions', []);
-        this.set('connectionTypes', []);
-        this.set('certificability', []);
-        this.set('search', null);
-
-        const screen = await render(hbs`<ScoOrganizationParticipant::List
-  @students={{this.students}}
-  @onFilter={{this.noop}}
-  @searchFilter={{this.search}}
-  @divisionsFilter={{this.divisions}}
-  @connectionTypeFilter={{this.connectionTypes}}
-  @certificabilityFilter={{this.certificability}}
-  @onClickLearner={{this.noop}}
-  @onResetFilter={{this.noop}}
-  @lastnameSort={{this.lastnameSort}}
-  @sortByLastname={{this.sortByLastname}}
-/>`);
-
-        // when
-        await click(
-          screen.getByLabelText(t('pages.sco-organization-participants.table.column.last-name.ariaLabelSortUp')),
-        );
-
-        // then
-        sinon.assert.calledWithExactly(sortByLastname, 'desc');
-        assert.ok(true);
+        assert.ok(sortByLastname.called);
       });
     });
 
@@ -753,82 +606,13 @@ module('Integration | Component | ScoOrganizationParticipant::List', function (h
 
         // when
         await click(
-          screen.getByLabelText(t('pages.sco-organization-participants.table.column.division.ariaLabelDefaultSort')),
+          screen.getByRole('button', {
+            name: t('pages.sco-organization-participants.table.column.division.ariaLabelDefaultSort'),
+          }),
         );
 
         // then
-        sinon.assert.calledWithExactly(sortByDivision, 'asc');
-        assert.ok(true);
-      });
-
-      test('it should trigger ascending sort when it is already sort descending', async function (assert) {
-        // given
-        this.set('divisionSort', 'desc');
-
-        const sortByDivision = sinon.spy();
-
-        this.set('sortByDivision', sortByDivision);
-        this.set('divisions', []);
-        this.set('connectionTypes', []);
-        this.set('certificability', []);
-        this.set('search', null);
-
-        const screen = await render(hbs`<ScoOrganizationParticipant::List
-  @students={{this.students}}
-  @onFilter={{this.noop}}
-  @searchFilter={{this.search}}
-  @divisionsFilter={{this.divisions}}
-  @connectionTypeFilter={{this.connectionTypes}}
-  @certificabilityFilter={{this.certificability}}
-  @onClickLearner={{this.noop}}
-  @onResetFilter={{this.noop}}
-  @divisionSort={{this.divisionSort}}
-  @sortByDivision={{this.sortByDivision}}
-/>`);
-
-        // when
-        await click(
-          screen.getByLabelText(t('pages.sco-organization-participants.table.column.division.ariaLabelSortDown')),
-        );
-
-        // then
-        sinon.assert.calledWithExactly(sortByDivision, 'asc');
-        assert.ok(true);
-      });
-
-      test('it should trigger descending sort when it is already sort ascending', async function (assert) {
-        // given
-        this.set('divisionSort', 'asc');
-
-        const sortByDivision = sinon.spy();
-
-        this.set('sortByDivision', sortByDivision);
-        this.set('divisions', []);
-        this.set('connectionTypes', []);
-        this.set('certificability', []);
-        this.set('search', null);
-
-        const screen = await render(hbs`<ScoOrganizationParticipant::List
-  @students={{this.students}}
-  @onFilter={{this.noop}}
-  @searchFilter={{this.search}}
-  @divisionsFilter={{this.divisions}}
-  @connectionTypeFilter={{this.connectionTypes}}
-  @certificabilityFilter={{this.certificability}}
-  @onClickLearner={{this.noop}}
-  @onResetFilter={{this.noop}}
-  @divisionSort={{this.divisionSort}}
-  @sortByDivision={{this.sortByDivision}}
-/>`);
-
-        // when
-        await click(
-          screen.getByLabelText(t('pages.sco-organization-participants.table.column.division.ariaLabelSortUp')),
-        );
-
-        // then
-        sinon.assert.calledWithExactly(sortByDivision, 'desc');
-        assert.ok(true);
+        assert.ok(sortByDivision.called);
       });
     });
   });
@@ -862,12 +646,7 @@ module('Integration | Component | ScoOrganizationParticipant::List', function (h
     });
 
     test('it should display dash for authentication method', async function (assert) {
-      assert.ok(
-        within(screen.getByRole('row', { name: t('pages.sco-organization-participants.table.row-title') })).getByRole(
-          'cell',
-          { name: '\u2013' },
-        ),
-      );
+      assert.ok(within(screen.getAllByRole('row')[1]).getByRole('cell', { name: '\u2013' }));
     });
 
     test('it should not display actions menu for username', async function (assert) {
@@ -946,10 +725,9 @@ module('Integration | Component | ScoOrganizationParticipant::List', function (h
 
     test('it should display "Identifiant" as authentication method', async function (assert) {
       assert.ok(
-        within(screen.getByRole('row', { name: t('pages.sco-organization-participants.table.row-title') })).getByRole(
-          'cell',
-          { name: t('pages.sco-organization-participants.connection-types.identifiant') },
-        ),
+        within(screen.getAllByRole('row')[1]).getByRole('cell', {
+          name: t('pages.sco-organization-participants.connection-types.identifiant'),
+        }),
       );
     });
 
@@ -991,10 +769,9 @@ module('Integration | Component | ScoOrganizationParticipant::List', function (h
 
     test('it should display "Adresse email" as authentication method', function (assert) {
       assert.ok(
-        within(screen.getByRole('row', { name: t('pages.sco-organization-participants.table.row-title') })).getByRole(
-          'cell',
-          { name: t('pages.sco-organization-participants.connection-types.email') },
-        ),
+        within(screen.getAllByRole('row')[1]).getByRole('cell', {
+          name: t('pages.sco-organization-participants.connection-types.email'),
+        }),
       );
     });
 
@@ -1042,10 +819,9 @@ module('Integration | Component | ScoOrganizationParticipant::List', function (h
 
       // then
       assert.ok(
-        within(screen.getByRole('row', { name: t('pages.sco-organization-participants.table.row-title') })).getByRole(
-          'cell',
-          { name: t('pages.sco-organization-participants.connection-types.mediacentre') },
-        ),
+        within(screen.getAllByRole('row')[1]).getByRole('cell', {
+          name: t('pages.sco-organization-participants.connection-types.mediacentre'),
+        }),
       );
     });
 

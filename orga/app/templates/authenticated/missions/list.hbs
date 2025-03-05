@@ -67,48 +67,44 @@
 </Ui::PageTitle>
 
 {{#if @model.missions}}
-  <div class="panel">
+  <PixTable
+    @variant="orga"
+    @data={{@model.missions}}
+    @caption={{t "pages.missions.list.caption"}}
+    @onRowClick={{this.goToMissionDetails}}
+  >
+    <:columns as |mission context|>
+      <PixTableColumn @context={{context}}>
+        <:header>{{t "pages.missions.list.headers.name"}}</:header>
+        <:cell>{{mission.name}}</:cell>
+      </PixTableColumn>
 
-    <table class="table content-text content-text--small mission-list__table">
-      <caption class="screen-reader-only">{{t "pages.missions.list.caption"}}</caption>
-      <thead>
-        <tr>
-          <Table::Header scope="col">{{t "pages.missions.list.headers.name"}}</Table::Header>
-          <Table::Header scope="col">{{t "pages.missions.list.headers.competences"}}</Table::Header>
-          <Table::Header scope="col">{{t "pages.missions.list.headers.started-by"}}</Table::Header>
-          <Table::Header scope="col" @align="center">{{t "pages.missions.list.headers.actions"}}</Table::Header>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each @model.missions as |mission|}}
-          <tr
-            aria-label={{t "pages.missions.list.aria-label"}}
-            class="tr--clickable"
-            {{on "click" (fn this.goToMissionDetails mission.id)}}
-          >
-            <td>
-              {{mission.name}}
-            </td>
-            <td>
-              {{mission.competenceName}}
-            </td>
-            <td>
-              {{#if (eq mission.startedBy "")}}
-                {{t "pages.missions.list.no-division"}}
-              {{else}}
-                {{mission.startedBy}}
-              {{/if}}
-            </td>
-            <td>
-              <PixButtonLink @route="authenticated.missions.mission" @model={{mission.id}} @variant="tertiary">
-                {{t "pages.missions.list.actions.see-mission-details"}}
-              </PixButtonLink>
-            </td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
+      <PixTableColumn @context={{context}}>
+        <:header>{{t "pages.missions.list.headers.competences"}}</:header>
+        <:cell>{{mission.competenceName}}</:cell>
+      </PixTableColumn>
+
+      <PixTableColumn @context={{context}}>
+        <:header>{{t "pages.missions.list.headers.started-by"}}</:header>
+        <:cell>
+          {{#if (eq mission.startedBy "")}}
+            {{t "pages.missions.list.no-division"}}
+          {{else}}
+            {{mission.startedBy}}
+          {{/if}}
+        </:cell>
+      </PixTableColumn>
+
+      <PixTableColumn @context={{context}}>
+        <:header>{{t "pages.missions.list.headers.actions"}}</:header>
+        <:cell>
+          <PixButtonLink @route="authenticated.missions.mission" @model={{mission.id}} @variant="tertiary">
+            {{t "pages.missions.list.actions.see-mission-details"}}
+          </PixButtonLink>
+        </:cell>
+      </PixTableColumn>
+    </:columns>
+  </PixTable>
 
 {{else}}
   <div class="table__empty content-text">

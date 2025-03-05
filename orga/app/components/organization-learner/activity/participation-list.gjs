@@ -1,38 +1,27 @@
-import { t } from 'ember-intl';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import { action } from '@ember/object';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
 
-import TableHeader from '../../table/header';
 import ParticipationRow from './participation-row';
 
-<template>
-  <div class="panel">
-    <table class="table content-text content-text--small participation-list__table">
-      <thead>
-        <tr>
-          <TableHeader @size="wide">{{t
-              "pages.organization-learner.activity.participation-list.table.column.campaign-name"
-            }}</TableHeader>
-          <TableHeader @size="medium" @align="left">{{t
-              "pages.organization-learner.activity.participation-list.table.column.campaign-type"
-            }}</TableHeader>
-          <TableHeader @size="medium" @align="left">
-            {{t "pages.organization-learner.activity.participation-list.table.column.created-at"}}
-          </TableHeader>
-          <TableHeader @size="medium" @align="left">{{t
-              "pages.organization-learner.activity.participation-list.table.column.shared-at"
-            }}</TableHeader>
-          <TableHeader @size="medium" @align="left">{{t
-              "pages.organization-learner.activity.participation-list.table.column.status"
-            }}</TableHeader>
-          <TableHeader @size="medium" @align="left">{{t
-              "pages.organization-learner.activity.participation-list.table.column.participation-count"
-            }}</TableHeader>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each @participations as |participation|}}
-          <ParticipationRow @participation={{participation}} />
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
-</template>
+export default class ParticipationList extends Component {
+  @service router;
+
+  @action
+  goToParticipationDetail(participation) {
+    const routeName =
+      participation.campaignType === 'ASSESSMENT'
+        ? 'authenticated.campaigns.participant-assessment'
+        : 'authenticated.campaigns.participant-profile';
+    this.router.transitionTo(routeName, participation.campaignId, participation.lastCampaignParticipationId);
+  }
+
+  <template>
+    <PixTable @variant="orga" @data={{@participations}} class="table" @onRowClick={{this.goToParticipationDetail}}>
+      <:columns as |participation context|>
+        <ParticipationRow @participation={{participation}} @context={{context}} />
+      </:columns>
+    </PixTable>
+  </template>
+}

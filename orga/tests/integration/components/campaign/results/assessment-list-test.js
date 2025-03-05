@@ -204,8 +204,10 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
 />`,
         );
         // then
+        assert.ok(
+          screen.getByRole('columnheader', { name: t('pages.campaign-results.table.column.ariaSharedResultCount') }),
+        );
         assert.ok(screen.getByText(t('pages.campaign-results.table.column.sharedResultCount')));
-        assert.ok(screen.getByLabelText(t('pages.campaign-results.table.column.ariaSharedResultCount')));
       });
 
       test('it should display shared result count', async function (assert) {

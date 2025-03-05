@@ -1,5 +1,4 @@
 @use 'activity/dashboard';
-@use 'analysis/competences';
 @use 'results/assessment-cards';
 @use 'results/evolution-header';
 @use 'results/participation-evolution-icon';
@@ -19,10 +18,14 @@
 @use 'empty-state';
 @use 'list-header';
 @use 'filters';
-@use 'list';
 @use 'no-campaign-panel';
 @use 'settings/campaign-settings';
 @use 'stage-average';
 @use 'target-profile-details';
 @use 'detail';
 @use 'cards';
+
+.badge--unacquired {
+  opacity: .8;
+  filter: grayscale(1);
+}

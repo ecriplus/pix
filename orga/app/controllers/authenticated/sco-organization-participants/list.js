@@ -28,30 +28,35 @@ export default class ListController extends Controller {
   }
 
   @action
-  goToLearnerPage(learnerId, event) {
-    event.preventDefault();
-    this.router.transitionTo('authenticated.sco-organization-participants.sco-organization-participant', learnerId);
+  goToLearnerPage(learner) {
+    this.router.transitionTo('authenticated.sco-organization-participants.sco-organization-participant', learner.id);
   }
 
   @action
-  sortByParticipationCount(value) {
-    this.participationCountOrder = value;
+  sortByParticipationCount() {
+    if (!this.participationCountOrder) this.participationCountOrder = 'asc';
+    else this.participationCountOrder = this.participationCountOrder === 'asc' ? 'desc' : 'asc';
+
     this.divisionSort = null;
     this.pageNumber = null;
     this.lastnameSort = null;
   }
 
   @action
-  sortByLastname(value) {
-    this.lastnameSort = value;
+  sortByLastname() {
+    if (!this.lastnameSort) this.lastnameSort = 'asc';
+    else this.lastnameSort = this.lastnameSort === 'asc' ? 'desc' : 'asc';
+
     this.divisionSort = null;
     this.participationCountOrder = null;
     this.pageNumber = null;
   }
 
   @action
-  sortByDivision(value) {
-    this.divisionSort = value;
+  sortByDivision() {
+    if (!this.divisionSort) this.divisionSort = 'asc';
+    else this.divisionSort = this.divisionSort === 'asc' ? 'desc' : 'asc';
+
     this.participationCountOrder = null;
     this.lastnameSort = null;
     this.pageNumber = null;

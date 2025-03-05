@@ -69,19 +69,21 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
 
       // then
       assert.ok(
-        screen.getByRole('columnheader', { name: t('pages.organization-participants.table.column.last-name.label') }),
+        screen.getByRole('columnheader', {
+          name: new RegExp('\\b' + t('pages.organization-participants.table.column.last-name.label') + '\\b'),
+        }),
       );
       assert.ok(
         screen.getByRole('columnheader', { name: t('pages.organization-participants.table.column.first-name') }),
       );
       assert.ok(
         screen.getByRole('columnheader', {
-          name: t('pages.organization-participants.table.column.participation-count.label'),
+          name: new RegExp(t('pages.organization-participants.table.column.latest-participation.label')),
         }),
       );
       assert.ok(
         screen.getByRole('columnheader', {
-          name: t('pages.organization-participants.table.column.latest-participation.label'),
+          name: new RegExp(t('pages.organization-participants.table.column.participation-count.label')),
         }),
       );
     });
@@ -481,96 +483,13 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
 
         // when
         await click(
-          screen.getByLabelText(
-            t('pages.organization-participants.table.column.participation-count.ariaLabelDefaultSort'),
-          ),
+          screen.getByRole('button', {
+            name: t('pages.organization-participants.table.column.participation-count.ariaLabelDefaultSort'),
+          }),
         );
 
         // then
-        sinon.assert.calledWithExactly(sortByParticipationCount, 'asc');
-        assert.ok(true);
-      });
-
-      test('it should trigger ascending sort on participation count column when it is already sort descending', async function (assert) {
-        // given
-        this.set('participationCountOrder', 'desc');
-
-        const sortByParticipationCount = sinon.spy();
-
-        const participants = [
-          {
-            lastName: 'La Terreur',
-            firstName: 'Gigi',
-          },
-        ];
-
-        this.set('participants', participants);
-        this.set('sortByParticipationCount', sortByParticipationCount);
-        this.set('certificabilityFilter', []);
-        this.set('fullNameFilter', null);
-
-        const screen = await render(
-          hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @participationCountOrder={{this.participationCountOrder}}
-  @sortByParticipationCount={{this.sortByParticipationCount}}
-/>`,
-        );
-
-        // when
-        await click(
-          screen.getByLabelText(
-            t('pages.organization-participants.table.column.participation-count.ariaLabelSortDown'),
-          ),
-        );
-
-        // then
-        sinon.assert.calledWithExactly(sortByParticipationCount, 'asc');
-        assert.ok(true);
-      });
-
-      test('it should trigger descending sort on participation count column when it is already sort ascending', async function (assert) {
-        // given
-        this.set('participationCountOrder', 'asc');
-
-        const sortByParticipationCount = sinon.spy();
-
-        const participants = [
-          {
-            lastName: 'La Terreur',
-            firstName: 'Gigi',
-          },
-        ];
-
-        this.set('participants', participants);
-        this.set('sortByParticipationCount', sortByParticipationCount);
-        this.set('certificabilityFilter', []);
-        this.set('fullNameFilter', null);
-
-        const screen = await render(
-          hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @participationCountOrder={{this.participationCountOrder}}
-  @sortByParticipationCount={{this.sortByParticipationCount}}
-/>`,
-        );
-
-        // when
-        await click(
-          screen.getByLabelText(t('pages.organization-participants.table.column.participation-count.ariaLabelSortUp')),
-        );
-
-        // then
-        sinon.assert.calledWithExactly(sortByParticipationCount, 'desc');
-        assert.ok(true);
+        assert.ok(sortByParticipationCount.called);
       });
     });
 
@@ -609,92 +528,13 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
 
         // when
         await click(
-          screen.getByLabelText(t('pages.organization-participants.table.column.last-name.ariaLabelDefaultSort')),
+          screen.getByRole('button', {
+            name: t('pages.organization-participants.table.column.last-name.ariaLabelDefaultSort'),
+          }),
         );
 
         // then
-        sinon.assert.calledWithExactly(sortByLastname, 'asc');
-        assert.ok(true);
-      });
-
-      test('it should trigger ascending sort on lastname column when it is already sort descending', async function (assert) {
-        // given
-        this.set('lastnameSort', 'desc');
-
-        const sortByLastname = sinon.spy();
-
-        const participants = [
-          {
-            lastName: 'La Terreur',
-            firstName: 'Gigi',
-          },
-        ];
-
-        this.set('participants', participants);
-        this.set('sortByLastname', sortByLastname);
-        this.set('certificabilityFilter', []);
-        this.set('fullNameFilter', null);
-
-        const screen = await render(
-          hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onFilter={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @lastnameSort={{this.lastnameSort}}
-  @sortByLastname={{this.sortByLastname}}
-/>`,
-        );
-
-        // when
-        await click(
-          screen.getByLabelText(t('pages.organization-participants.table.column.last-name.ariaLabelSortDown')),
-        );
-
-        // then
-        sinon.assert.calledWithExactly(sortByLastname, 'asc');
-        assert.ok(true);
-      });
-
-      test('it should trigger descending sort on lastname column when it is already sort ascending', async function (assert) {
-        // given
-        this.set('lastnameSort', 'asc');
-
-        const sortByLastname = sinon.spy();
-
-        const participants = [
-          {
-            lastName: 'La Terreur',
-            firstName: 'Gigi',
-          },
-        ];
-
-        this.set('participants', participants);
-        this.set('sortByLastname', sortByLastname);
-        this.set('certificabilityFilter', []);
-        this.set('fullNameFilter', null);
-
-        const screen = await render(
-          hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onFilter={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @lastnameSort={{this.lastnameSort}}
-  @sortByLastname={{this.sortByLastname}}
-/>`,
-        );
-
-        // when
-        await click(screen.getByLabelText(t('pages.organization-participants.table.column.last-name.ariaLabelSortUp')));
-
-        // then
-        sinon.assert.calledWithExactly(sortByLastname, 'desc');
-        assert.ok(true);
+        assert.ok(sortByLastname.called);
       });
     });
 
@@ -733,98 +573,13 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
 
         // when
         await click(
-          screen.getByLabelText(
-            t('pages.organization-participants.table.column.latest-participation.ariaLabelDefaultSort'),
-          ),
+          screen.getByRole('button', {
+            name: t('pages.organization-participants.table.column.latest-participation.ariaLabelDefaultSort'),
+          }),
         );
 
         // then
-        sinon.assert.calledWithExactly(sortByLatestParticipation, 'asc');
-        assert.ok(true);
-      });
-
-      test('it should trigger ascending sort on latestParticipation column when it is already sort descending', async function (assert) {
-        // given
-        this.set('latestParticipationOrder', 'desc');
-
-        const sortByLatestParticipation = sinon.spy();
-
-        const participants = [
-          {
-            lastName: 'La Terreur',
-            firstName: 'Gigi',
-          },
-        ];
-
-        this.set('participants', participants);
-        this.set('sortByLatestParticipation', sortByLatestParticipation);
-        this.set('certificabilityFilter', []);
-        this.set('fullNameFilter', null);
-
-        const screen = await render(
-          hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onFilter={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @latestParticipationOrder={{this.latestParticipationOrder}}
-  @sortByLatestParticipation={{this.sortByLatestParticipation}}
-/>`,
-        );
-
-        // when
-        await click(
-          screen.getByLabelText(
-            t('pages.organization-participants.table.column.latest-participation.ariaLabelSortDown'),
-          ),
-        );
-
-        // then
-        sinon.assert.calledWithExactly(sortByLatestParticipation, 'asc');
-        assert.ok(true);
-      });
-
-      test('it should trigger descending sort on latestParticipation column when it is already sort ascending', async function (assert) {
-        // given
-        this.set('latestParticipationOrder', 'asc');
-
-        const sortByLatestParticipation = sinon.spy();
-
-        const participants = [
-          {
-            lastName: 'La Terreur',
-            firstName: 'Gigi',
-          },
-        ];
-
-        this.set('participants', participants);
-        this.set('sortByLatestParticipation', sortByLatestParticipation);
-        this.set('certificabilityFilter', []);
-        this.set('fullNameFilter', null);
-
-        const screen = await render(
-          hbs`<OrganizationParticipant::List
-  @participants={{this.participants}}
-  @triggerFiltering={{this.noop}}
-  @onFilter={{this.noop}}
-  @onClickLearner={{this.noop}}
-  @fullName={{this.fullNameFilter}}
-  @certificabilityFilter={{this.certificabilityFilter}}
-  @latestParticipationOrder={{this.latestParticipationOrder}}
-  @sortByLatestParticipation={{this.sortByLatestParticipation}}
-/>`,
-        );
-
-        // when
-        await click(
-          screen.getByLabelText(t('pages.organization-participants.table.column.latest-participation.ariaLabelSortUp')),
-        );
-
-        // then
-        sinon.assert.calledWithExactly(sortByLatestParticipation, 'desc');
-        assert.ok(true);
+        assert.ok(sortByLatestParticipation.called);
       });
     });
   });
@@ -1094,9 +849,9 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
 
       await click(firstLearnerSelected);
 
-      const sortButton = await screen.findByLabelText(
-        t('pages.organization-participants.table.column.participation-count.ariaLabelDefaultSort'),
-      );
+      const sortButton = await screen.getByRole('button', {
+        name: t('pages.organization-participants.table.column.participation-count.ariaLabelDefaultSort'),
+      });
       await click(sortButton);
 
       assert.false(firstLearnerSelected.checked);
@@ -1127,7 +882,7 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
         assert.ok(screen.getByText(t('pages.organization-participants.action-bar.information', { count: 1 })));
       });
 
-      test('it should open the deletion modale', async function (assert) {
+      test('it should open the deletion modal', async function (assert) {
         //given
         const spiderLearner = { id: '1', firstName: 'Spider', lastName: 'Man' };
         const peterLearner = { id: '2', firstName: 'Peter', lastName: 'Parker' };

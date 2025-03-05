@@ -10,7 +10,7 @@ import { eq } from 'ember-truth-helpers';
       {{t "pages.sco-organization-participants.table.column.is-certifiable.eligible"}}
     </PixTag>
   {{else}}
-    <PixTag @color="yellow-light organization-participant-list-page__tag">
+    <PixTag @color="yellow-light organization-participant__tag">
       {{t "pages.sco-organization-participants.table.column.is-certifiable.non-eligible"}}
     </PixTag>
   {{/if}}

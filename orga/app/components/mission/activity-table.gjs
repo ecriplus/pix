@@ -1,9 +1,11 @@
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { t } from 'ember-intl';
 
 import getService from '../../helpers/get-service.js';
-import Header from '../table/header';
+
 function statusColor(status) {
   return {
     'not-started': 'tertiary',
@@ -14,46 +16,43 @@ function statusColor(status) {
 
 <template>
   {{#if @missionLearners}}
-    <div class="panel">
-      <table class="table content-text content-text--small participation-list__table mission-table">
-        <caption class="screen-reader-only">{{t
-            "pages.missions.mission.table.activities.caption"
-            missionName=@mission.name
-          }}</caption>
-        <thead>
-          <tr>
-            <Header scope="col">{{t "pages.missions.mission.table.activities.headers.first-name"}}</Header>
-            <Header scope="col">{{t "pages.missions.mission.table.activities.headers.last-name"}}</Header>
-            <Header scope="col">{{t "pages.missions.mission.table.activities.headers.division"}}</Header>
-            <Header scope="col">{{t "pages.missions.mission.table.activities.headers.status"}}</Header>
-          </tr>
-        </thead>
-        <tbody>
+    <PixTable
+      @variant="orga"
+      class="table"
+      @data={{@missionLearners}}
+      @caption={{t "pages.missions.mission.table.activities.caption" missionName=@mission.name}}
+    >
+      <:columns as |missionLearner context|>
+        <PixTableColumn @context={{context}}>
+          <:header>{{t "pages.missions.mission.table.activities.headers.first-name"}}</:header>
+          <:cell>{{missionLearner.firstName}}</:cell>
+        </PixTableColumn>
 
-          {{#each @missionLearners as |missionLearner|}}
-            <tr aria-label={{t "pages.missions.mission.table.activities.aria-label"}}>
-              <td>
-                {{missionLearner.firstName}}
-              </td>
-              <td>
-                {{missionLearner.lastName}}
-              </td>
-              <td>
-                {{missionLearner.division}}
-              </td>
-              <td>
-                <PixTag @color={{statusColor missionLearner.missionStatus}}>{{t
-                    missionLearner.displayableStatus
-                  }}</PixTag>
-              </td>
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
-    </div>
+        <PixTableColumn @context={{context}}>
+          <:header>{{t "pages.missions.mission.table.activities.headers.last-name"}}</:header>
+          <:cell>{{missionLearner.lastName}}</:cell>
+        </PixTableColumn>
+
+        <PixTableColumn @context={{context}}>
+          <:header>{{t "pages.missions.mission.table.activities.headers.division"}}</:header>
+          <:cell>
+            {{missionLearner.division}}
+          </:cell>
+        </PixTableColumn>
+
+        <PixTableColumn @context={{context}}>
+          <:header>{{t "pages.missions.mission.table.activities.headers.status"}}</:header>
+          <:cell>
+            <PixTag @color={{statusColor missionLearner.missionStatus}}>{{t missionLearner.displayableStatus}}</PixTag>
+          </:cell>
+        </PixTableColumn>
+      </:columns>
+    </PixTable>
+
     {{#let (getService "service:intl") as |intl|}}
       <PixPagination @pagination={{@missionLearners.meta}} @locale={{intl.primaryLocale}} />
     {{/let}}
+
   {{else}}
     <div class="table__empty content-text">
       {{t "pages.missions.mission.table.activities.no-data"}}

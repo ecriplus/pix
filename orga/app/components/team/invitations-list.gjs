@@ -1,9 +1,8 @@
+import PixTable from '@1024pix/pix-ui/components/pix-table';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { t } from 'ember-intl';
 
-import TableHeader from '../table/header';
 import InvitationsListItem from './invitations-list-item';
 
 export default class TeamInvitationsListComponent extends Component {
@@ -28,25 +27,14 @@ export default class TeamInvitationsListComponent extends Component {
     }
   }
   <template>
-    <div class="panel table content-text content-text--small">
-      <table>
-        <thead>
-          <tr>
-            <TableHeader @size="wide">{{t "pages.team-invitations.table.column.email-address"}}</TableHeader>
-            <TableHeader @size="x-wide" class="hide-on-mobile">{{t
-                "pages.team-invitations.table.column.pending-invitation"
-              }}</TableHeader>
-            <TableHeader @size="wide" class="hide-on-mobile">
-              <span>{{t "common.actions.global"}}</span>
-            </TableHeader>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each @invitations as |invitation|}}
-            <InvitationsListItem @invitation={{invitation}} @cancelInvitation={{this.cancelInvitation}} />
-          {{/each}}
-        </tbody>
-      </table>
-    </div>
+    <PixTable @variant="orga" @caption={{@caption}} @data={{@invitations}} class="table">
+      <:columns as |invitation context|>
+        <InvitationsListItem
+          @invitation={{invitation}}
+          @context={{context}}
+          @cancelInvitation={{this.cancelInvitation}}
+        />
+      </:columns>
+    </PixTable>
   </template>
 }

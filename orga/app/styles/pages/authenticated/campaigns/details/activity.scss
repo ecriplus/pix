@@ -6,15 +6,10 @@
   padding: 0;
 }
 
-.activity__participants-list {
-  margin-bottom: 24px;
-  padding: 0;
+.warning-text {
+  @extend %pix-body-s;
 
-  .warning-text {
-    @extend %pix-body-s;
-
-    font-weight: fonts.$font-medium;
-  }
+  font-weight: fonts.$font-medium;
 }
 
 @media (max-width: 768px) {

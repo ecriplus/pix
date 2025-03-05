@@ -15,7 +15,7 @@ When(
 
 When(`j'ouvre le sujet {string}`, (tubeName) => {
   cy.contains(tubeName)
-    .closest('[aria-label="Sujet"]')
+    .closest('tr')
     .within(() => {
       cy.get("button").click();
     });
@@ -35,11 +35,13 @@ When(
 );
 
 Then(`je vois {int} campagne\(s\)`, (campaignsCount) => {
-  cy.get('table tbody tr').should("have.lengthOf", campaignsCount);
+  cy.findAllByRole('row').should("have.lengthOf", campaignsCount + 1);
 });
 
 Then(`je vois {int} tutoriel\(s\)`, (tutorialsCount) => {
-  cy.get('[aria-label="Tutoriel"]').should("have.lengthOf", tutorialsCount);
+  cy.findByRole('table', { name: "Tableau des sujets à travailler, certains présentent des colonnes supplémentaires indiquant le nombre de tutoriels existant en lien avec le sujet et un accès à ces tutoriels" }).within(() => {
+    cy.findAllByRole('listitem').should("have.lengthOf", tutorialsCount);
+  });
 });
 
 When(`je recherche une campagne avec le nom {string}`, (campaignSearchName) => {
@@ -51,25 +53,31 @@ Then(`je vois le détail de la campagne {string}`, (campaignName) => {
 });
 
 Then(`je vois {int} participants`, (numberOfParticipants) => {
-  cy.get('[aria-label="Participant"]').should(
-    "have.lengthOf",
-    numberOfParticipants,
-  );
+  cy.findByRole('table', {name: "Liste des participants"}).within(() => {
+    cy.findAllByRole('row').should(
+      "have.lengthOf",
+      numberOfParticipants + 1,
+    );
+  })
 });
 
 Then(`je vois {int} profils`, (numberOfProfiles) => {
-  cy.get('[aria-label="Profil"]').should("have.lengthOf", numberOfProfiles);
+  if(numberOfProfiles === 0) {
+    cy.contains('Aucun participant pour l’instant ! Envoyez-leur le lien suivant pour rejoindre votre campagne.');
+  } else {
+    cy.findAllByRole('row').should("have.lengthOf", numberOfProfiles + 1);
+  }
 });
 
 When(
   `je vois {int} résultats par compétence`,
   (numberOfResultsByCompetence) => {
     if (numberOfResultsByCompetence === 0) {
-      cy.get(".table__empty").should("contain", "En attente de résultat");
+      cy.findByText("En attente de résultats");
     } else {
-      cy.get('[aria-label="Compétence"]').should(
+      cy.findAllByRole('row').should(
         "have.lengthOf",
-        numberOfResultsByCompetence,
+        numberOfResultsByCompetence + 1,
       );
     }
   },
@@ -118,14 +126,16 @@ Then(`je vois que j'ai envoyé les résultats`, () => {
 });
 
 Then(`je vois {int} sujets`, (tubeCount) => {
-  cy.get('[aria-label="Sujet"]').should("have.lengthOf", tubeCount);
+  cy.findByRole('table', { name: "Tableau des sujets à travailler, certains présentent des colonnes supplémentaires indiquant le nombre de tutoriels existant en lien avec le sujet et un accès à ces tutoriels"}).within(() => {
+    cy.findAllByRole('row').should("have.lengthOf", tubeCount + 1);
+  });
 });
 
 Then(
   `je vois que le sujet {string} est {string}`,
   (tubeName, recommendationLevel) => {
     cy.contains(tubeName)
-      .closest('[aria-label="Sujet"]')
+      .closest('tr')
       .get(`[aria-label="${recommendationLevel}"]`);
   },
 );

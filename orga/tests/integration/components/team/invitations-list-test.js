@@ -30,10 +30,10 @@ module('Integration | Component | Team::InvitationsList', function (hooks) {
     ]);
 
     // when
-    await render(hbs`<Team::InvitationsList @invitations={{this.invitations}} />`);
+    const screen = await render(hbs`<Team::InvitationsList @invitations={{this.invitations}} />`);
 
     // then
-    assert.dom(`[aria-label="${t('pages.team-invitations.table.row.aria-label')}"]`).exists({ count: 2 });
+    assert.strictEqual(screen.getAllByRole('row').length, 3);
   });
 
   test('it should display email and creation date of invitation', async function (assert) {

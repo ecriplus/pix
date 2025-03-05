@@ -47,24 +47,30 @@ export default class ListController extends Controller {
   }
 
   @action
-  sortByParticipationCount(value) {
-    this.participationCountOrder = value || null;
+  sortByParticipationCount() {
+    if (!this.participationCountOrder) this.participationCountOrder = 'asc';
+    else this.participationCountOrder = this.participationCountOrder === 'asc' ? 'desc' : 'asc';
+
     this.pageNumber = null;
     this.latestParticipationOrder = null;
     this.lastnameSort = null;
   }
 
   @action
-  sortByLatestParticipation(value) {
-    this.latestParticipationOrder = value || null;
+  sortByLatestParticipation() {
+    if (!this.latestParticipationOrder) this.latestParticipationOrder = 'asc';
+    else this.latestParticipationOrder = this.latestParticipationOrder === 'asc' ? 'desc' : 'asc';
+
     this.pageNumber = null;
     this.participationCountOrder = null;
     this.lastnameSort = null;
   }
 
   @action
-  sortByLastname(value) {
-    this.lastnameSort = value || null;
+  sortByLastname() {
+    if (!this.lastnameSort) this.lastnameSort = 'asc';
+    else this.lastnameSort = this.lastnameSort === 'asc' ? 'desc' : 'asc';
+
     this.pageNumber = null;
     this.participationCountOrder = null;
     this.latestParticipationOrder = null;
@@ -79,10 +85,9 @@ export default class ListController extends Controller {
   }
 
   @action
-  goToLearnerPage(learnerId, event) {
+  goToLearnerPage(learner) {
     if (this.hasOrganizationParticipantPage) {
-      event.preventDefault();
-      this.router.transitionTo('authenticated.organization-participants.organization-participant', learnerId);
+      this.router.transitionTo('authenticated.organization-participants.organization-participant', learner.id);
     }
   }
 
