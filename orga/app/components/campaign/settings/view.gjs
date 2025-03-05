@@ -3,6 +3,7 @@ import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { fn } from '@ember/helper';
+import { or } from 'ember-truth-helpers';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -59,11 +60,11 @@ export default class CampaignView extends Component {
   }
 
   get isMultipleSendingsEnable() {
-    return !this.args.campaign.isTypeAssessment || this.isMultipleSendingsForAssessmentEnabled;
+    return this.args.campaign.isProfilesCollection || this.isMultipleSendingsForAssessmentEnabled;
   }
 
   get isMultipleSendingsForAssessmentEnabled() {
-    return this.args.campaign.isTypeAssessment && this.currentUser.prescriber.enableMultipleSendingAssessment;
+    return (this.args.campaign.isTypeAssessment || this.args.campaign.isTypeExam) && this.currentUser.prescriber.enableMultipleSendingAssessment;
   }
 
   get displayResetToZero() {
@@ -153,7 +154,7 @@ export default class CampaignView extends Component {
           {{/if}}
         </div>
         <div class="campaign-settings-row">
-          {{#if @campaign.isTypeAssessment}}
+          {{#if (or @campaign.isTypeAssessment @campaign.isTypeExam)}}
             <div class="campaign-settings-content">
               <dt class="label-text campaign-settings-content__label">
                 {{t "pages.campaign-settings.target-profile.title"}}
@@ -195,7 +196,7 @@ export default class CampaignView extends Component {
             </div>
           {{/if}}
         </div>
-        {{#if @campaign.isTypeAssessment}}
+        {{#if (or @campaign.isTypeAssessment @campaign.isTypeExam)}}
           <div class="campaign-settings-row">
             <div class="campaign-settings-content campaign-settings-content--single">
               <dt class="label-text campaign-settings-content__label">{{t

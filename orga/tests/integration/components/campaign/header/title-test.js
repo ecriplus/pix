@@ -131,7 +131,7 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
           test("it should display 'oui'", async function (assert) {
             // given
             this.campaign = store.createRecord('campaign', {
-              type: 'PROFILES_COLLECTION',
+              type: 'ASSESSMENT',
               multipleSendings: true,
             });
 
@@ -147,7 +147,84 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
           test("it should display 'non'", async function (assert) {
             // given
             this.campaign = store.createRecord('campaign', {
-              type: 'PROFILES_COLLECTION',
+              type: 'ASSESSMENT',
+              multipleSendings: false,
+            });
+
+            // when
+            const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+
+            // then
+            assert.ok(screen.getByText(t('pages.campaign.multiple-sendings.status.disabled')));
+          });
+        });
+      });
+    });
+
+    module('when type is EXAM', function () {
+      module('when organization feature enableMultipleSending is false', function () {
+        test('it should not display multiple sendings label', async function (assert) {
+          // given
+          const currentUser = this.owner.lookup('service:currentUser');
+          currentUser.prescriber = {
+            enableMultipleSendingAssessment: false,
+          };
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+          });
+
+          // when
+          const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+
+          // then
+          assert.notOk(screen.queryByText(t('pages.campaign.multiple-sendings.title')));
+        });
+      });
+
+      module('when organization feature enableMultipleSending is true', function (hooks) {
+        hooks.beforeEach(function () {
+          const currentUser = this.owner.lookup('service:currentUser');
+          currentUser.prescriber = {
+            enableMultipleSendingAssessment: true,
+          };
+        });
+
+        test('it should display multiple sendings label', async function (assert) {
+          // given
+          const currentUser = this.owner.lookup('service:currentUser');
+          currentUser.prescriber = {
+            enableMultipleSendingAssessment: true,
+          };
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+          });
+          // when
+          const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+          // then
+          assert.ok(screen.getByText(t('pages.campaign.multiple-sendings.title')));
+        });
+
+        module('when the campaign multiple sending is true', function () {
+          test("it should display 'oui'", async function (assert) {
+            // given
+            this.campaign = store.createRecord('campaign', {
+              type: 'EXAM',
+              multipleSendings: true,
+            });
+
+            // when
+            const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+
+            // then
+            assert.ok(screen.getByText(t('pages.campaign.multiple-sendings.status.enabled')));
+          });
+        });
+
+        module('when the campaign multiple sending is false', function () {
+          test("it should display 'non'", async function (assert) {
+            // given
+            this.campaign = store.createRecord('campaign', {
+              type: 'EXAM',
               multipleSendings: false,
             });
 

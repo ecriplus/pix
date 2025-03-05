@@ -196,6 +196,132 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
       });
     });
 
+    module('when type is EXAM', function () {
+      test('it should display target profile related to campaign', async function (assert) {
+        // given
+        this.campaign = store.createRecord('campaign', {
+          type: 'EXAM',
+          targetProfileName: 'profil cible de la campagne 1',
+        });
+
+        // when
+        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+
+        // then
+        assert.dom(screen.getByText('profil cible de la campagne 1')).exists();
+      });
+
+      test('it should display target profile description related to campaign', async function (assert) {
+        // given
+        this.campaign = store.createRecord('campaign', {
+          type: 'EXAM',
+          targetProfileDescription: 'Description du profile cible',
+        });
+
+        // when
+        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+
+        // then
+        assert.dom(screen.getByText('Description du profile cible')).exists();
+      });
+
+      test('it should display target profile tubes count related to campaign', async function (assert) {
+        // given
+        this.campaign = store.createRecord('campaign', {
+          type: 'EXAM',
+          targetProfileTubesCount: 3,
+        });
+
+        // when
+        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+
+        // then
+        assert
+          .dom(
+            screen.getByText(
+              t('common.target-profile-details.subjects', { value: this.campaign.targetProfileTubesCount }),
+            ),
+          )
+          .exists();
+      });
+
+      module('Badge context', function () {
+        test('it should not display target profile thematic result when empty related to campaign', async function (assert) {
+          // given
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+            targetProfileThematicResultCount: 0,
+          });
+
+          // when
+          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+
+          // then
+          assert
+            .dom(
+              screen.queryByText(
+                t('common.target-profile-details.thematic-results', {
+                  value: this.campaign.targetProfileThematicResultCount,
+                }),
+              ),
+            )
+            .doesNotExist();
+        });
+
+        test('it should display target profile thematic result related to campaign', async function (assert) {
+          // given
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+            targetProfileThematicResultCount: 1,
+          });
+
+          // when
+          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+
+          // then
+          assert
+            .dom(
+              screen.getByText(
+                t('common.target-profile-details.thematic-results', {
+                  value: this.campaign.targetProfileThematicResultCount,
+                }),
+              ),
+            )
+            .exists();
+        });
+      });
+
+      module('Display Result', function () {
+        test('it should display target profile result with stars when stages related to campaign', async function (assert) {
+          // given
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+            targetProfileHasStage: true,
+          });
+
+          // when
+          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+
+          // then
+          assert.dom(screen.getByLabelText(t('common.target-profile-details.results.star'))).exists();
+        });
+
+        test('it should display target profile result with percentage when no stages related to campaign', async function (assert) {
+          // given
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+            targetProfileHasStage: false,
+          });
+
+          // when
+          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+
+          // then
+          assert.dom(screen.getByLabelText(t('common.target-profile-details.results.percent'))).exists();
+        });
+      });
+    });
+
     module('when type is PROFILES_COLLECTION', function () {
       test('it should not display target profile', async function (assert) {
         this.campaign = store.createRecord('campaign', {
@@ -304,6 +430,22 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
         // given
         this.campaign = store.createRecord('campaign', {
           type: 'ASSESSMENT',
+          title: 'Mon titre de Campagne',
+        });
+
+        // when
+        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+
+        // then
+        assert.dom(screen.getByText('Mon titre de Campagne')).exists();
+      });
+    });
+
+    module('when type is EXAM', function () {
+      test('it should display the campaign title', async function (assert) {
+        // given
+        this.campaign = store.createRecord('campaign', {
+          type: 'EXAM',
           title: 'Mon titre de Campagne',
         });
 
@@ -601,6 +743,163 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
           // given
           this.campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
+            multipleSendings: false,
+            targetProfileAreKnowledgeElementsResettable: false,
+          });
+          // when
+          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          // then
+          assert.dom(screen.queryByText(t('pages.campaign-settings.reset-to-zero.title'))).doesNotExist();
+        });
+      });
+    });
+
+    module('when type is EXAM', function () {
+      module('when organization feature enableMultipleSending is false', function () {
+        test('it should not display multiple sendings label or tooltip', async function (assert) {
+          // given
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+          });
+
+          // when
+          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+
+          // then
+          assert.dom(screen.queryByText(t('pages.campaign-settings.multiple-sendings.title'))).doesNotExist();
+          assert
+            .dom(screen.queryByLabelText(t('pages.campaign-settings.multiple-sendings.tooltip.aria-label')))
+            .doesNotExist();
+        });
+
+        test('it should not display reset to zero label or tooltip', async function (assert) {
+          // given
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+            targetProfileAreKnowledgeElementsResettable: true,
+          });
+
+          // when
+          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+
+          // then
+          assert.dom(screen.queryByText(t('pages.campaign-settings.reset-to-zero.title'))).doesNotExist();
+          assert
+            .dom(screen.queryByLabelText(t('pages.campaign-settings.reset-to-zero.tooltip.aria-label')))
+            .doesNotExist();
+        });
+      });
+      module('when organization feature enableMultipleSending is true', function (hooks) {
+        hooks.beforeEach(function () {
+          class CurrentUserStub extends Service {
+            prescriber = { isAdminOfTheCurrentOrganization: true, enableMultipleSendingAssessment: true };
+          }
+          this.owner.register('service:currentUser', CurrentUserStub);
+        });
+
+        test('it should display multiple sendings label', async function (assert) {
+          // given
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+          });
+          // when
+          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          // then
+          assert.dom(screen.getByText(t('pages.campaign-settings.multiple-sendings.title'))).exists();
+        });
+
+        test('it should display tooltip with multiple sendings explanatory text', async function (assert) {
+          // given
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+          });
+          // when
+          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+
+          // then
+          assert.dom(screen.getByText(t('pages.campaign-settings.multiple-sendings.tooltip.text'))).exists();
+        });
+      });
+
+      module('when the campaign has multiple sending enabled', function (hooks) {
+        hooks.beforeEach(function () {
+          class CurrentUserStub extends Service {
+            prescriber = { isAdminOfTheCurrentOrganization: true, enableMultipleSendingAssessment: true };
+          }
+          this.owner.register('service:currentUser', CurrentUserStub);
+        });
+        test('it should display reset to zero label as enabled when targetProfileAreKnowledgeElementsResettable is true', async function (assert) {
+          // given
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+            multipleSendings: true,
+            targetProfileAreKnowledgeElementsResettable: true,
+          });
+          // when
+          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          // then
+          const resetToZeroNode = screen.getByText(t('pages.campaign-settings.reset-to-zero.title')).parentNode
+            .parentNode;
+          assert
+            .dom(within(resetToZeroNode).getByText(t('pages.campaign-settings.reset-to-zero.status.enabled')))
+            .exists();
+        });
+
+        test('it should display the reset to zero label as disabled when targetProfileAreKnowledgeElementsResettable is false', async function (assert) {
+          // given
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+            multipleSendings: true,
+            targetProfileAreKnowledgeElementsResettable: false,
+          });
+          // when
+          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          // then
+          const resetToZeroNode = screen.getByText(t('pages.campaign-settings.reset-to-zero.title')).parentNode
+            .parentNode;
+          assert
+            .dom(within(resetToZeroNode).getByText(t('pages.campaign-settings.reset-to-zero.status.disabled')))
+            .exists();
+        });
+
+        test('it should display tooltip with reset to zero explanatory text', async function (assert) {
+          // given
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+            multipleSendings: true,
+          });
+          // when
+          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+
+          // then
+          assert.dom(screen.getByText(t('pages.campaign-settings.reset-to-zero.tooltip.text'))).exists();
+        });
+      });
+
+      module('when the campaign has multiple sending disabled', function (hooks) {
+        hooks.beforeEach(function () {
+          class CurrentUserStub extends Service {
+            prescriber = { isAdminOfTheCurrentOrganization: true, enableMultipleSendingAssessment: true };
+          }
+          this.owner.register('service:currentUser', CurrentUserStub);
+        });
+        test('it should not display reset to zero label when targetProfileAreKnowledgeElementsResettable is true', async function (assert) {
+          // given
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+            multipleSendings: false,
+            targetProfileAreKnowledgeElementsResettable: true,
+          });
+          // when
+          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          // then
+          assert.dom(screen.queryByText(t('pages.campaign-settings.reset-to-zero.title'))).doesNotExist();
+        });
+
+        test('it should not display the reset to zero label when targetProfileAreKnowledgeElementsResettable is false', async function (assert) {
+          // given
+          this.campaign = store.createRecord('campaign', {
+            type: 'EXAM',
             multipleSendings: false,
             targetProfileAreKnowledgeElementsResettable: false,
           });

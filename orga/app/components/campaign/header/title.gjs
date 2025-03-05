@@ -31,7 +31,7 @@ export default class Header extends Component {
   }
 
   get isMultipleSendingsForAssessmentEnabled() {
-    return this.args.campaign.isTypeAssessment && this.currentUser.prescriber.enableMultipleSendingAssessment;
+    return (this.args.campaign.isTypeAssessment || this.args.campaign.isTypeExam) && this.currentUser.prescriber.enableMultipleSendingAssessment;
   }
 
   get multipleSendingText() {
