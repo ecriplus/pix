@@ -1,7 +1,9 @@
 import { fireEvent, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import CertificationsHeader from 'pix-admin/components/sessions/certifications/header';
+import { FINALIZED, PROCESSED } from 'pix-admin/models/session';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -24,6 +26,52 @@ module('Integration | Component | certifications/header', function (hooks) {
 
     // then
     assert.dom(screen.getByRole('heading', { level: 2, name: 'Certifications' })).exists();
+  });
+
+  module('When session is published', function () {
+    test('it should display a specific tag information', async function (assert) {
+      // given
+      class SessionStub extends Service {
+        hasAccessToCertificationActionsScope = false;
+      }
+      this.owner.register('service:accessControl', SessionStub);
+      const session = store.createRecord('session', { status: PROCESSED, publishedAt: '2023-05-21' });
+
+      const juryCertificationSummaries = [];
+
+      // when
+      const screen = await render(
+        <template>
+          <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
+        </template>,
+      );
+
+      // then
+      assert.dom(screen.getByText(t('pages.certifications.session-state.published'))).exists();
+    });
+  });
+
+  module('When session is not published', function () {
+    test('it should display a specific tag information', async function (assert) {
+      // given
+      class SessionStub extends Service {
+        hasAccessToCertificationActionsScope = false;
+      }
+      this.owner.register('service:accessControl', SessionStub);
+      const session = store.createRecord('session', { status: FINALIZED, publishedAt: null });
+
+      const juryCertificationSummaries = [];
+
+      // when
+      const screen = await render(
+        <template>
+          <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
+        </template>,
+      );
+
+      // then
+      assert.dom(screen.getByText(t('pages.certifications.session-state.not-published'))).exists();
+    });
   });
 
   module('When user has not access to the certification session', function () {

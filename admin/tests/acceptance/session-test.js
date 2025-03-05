@@ -1,8 +1,10 @@
 import { clickByName, fillByLabel, visit } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { FINALIZED, PROCESSED } from 'pix-admin/models/session';
+import setupIntl from 'pix-admin/tests/helpers/setup-intl';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -10,6 +12,7 @@ import sinon from 'sinon';
 module('Acceptance | Session pages', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks);
 
   module('When user is not logged in', function () {
     test('it should not be accessible by an unauthenticated user', async function (assert) {
@@ -196,9 +199,7 @@ module('Acceptance | Session pages', function (hooks) {
           const screen = await visit('/sessions/1/certifications');
 
           // then
-          assert.dom(screen.getByText(juryCertificationSummary.firstName)).exists();
-          assert.dom(screen.getByText(juryCertificationSummary.lastName)).exists();
-          assert.dom(screen.getByRole('img', { name: 'Certification publiée' })).exists();
+          assert.dom(screen.getByRole('table', { name: t('pages.certifications.table.caption') })).exists();
         });
       });
     });

@@ -1,13 +1,16 @@
-import { fillByLabel, visit } from '@1024pix/ember-testing-library';
+import { fillByLabel, visit, within } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
+import setupIntl from 'pix-admin/tests/helpers/setup-intl';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
 
 module('Acceptance | Session List', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks);
 
   module('When user is not logged in', function () {
     test('it should not be accessible by an unauthenticated user', async function (assert) {
@@ -56,10 +59,11 @@ module('Acceptance | Session List', function (hooks) {
           const screen = await visit('/sessions/list');
 
           // then
-          const sessionCount = screen.getAllByLabelText('Informations de la session de certification', {
-            exact: false,
-          }).length;
-          assert.strictEqual(sessionCount, 10);
+          const table = screen.getByRole('table', {
+            name: t('pages.sessions.table.caption'),
+          });
+          const rows = within(table).getAllByRole('row');
+          assert.strictEqual(rows.length, 11);
           assert.dom(screen.getByText('1-10 sur 35 éléments')).exists();
         });
       });
@@ -71,10 +75,11 @@ module('Acceptance | Session List', function (hooks) {
           await click(screen.getByRole('button', { name: /Aller à la page suivante/ }));
 
           // then
-          const sessionCount = screen.getAllByLabelText('Informations de la session de certification', {
-            exact: false,
-          }).length;
-          assert.strictEqual(sessionCount, 10);
+          const table = screen.getByRole('table', {
+            name: t('pages.sessions.table.caption'),
+          });
+          const rows = within(table).getAllByRole('row');
+          assert.strictEqual(rows.length, 11);
           assert.dom(screen.getByText('11-20 sur 35 éléments')).exists();
         });
       });
@@ -88,10 +93,11 @@ module('Acceptance | Session List', function (hooks) {
           await click(screen.getByRole('option', { name: '25' }));
 
           // then
-          const sessionCount = screen.getAllByLabelText('Informations de la session de certification', {
-            exact: false,
-          }).length;
-          assert.strictEqual(sessionCount, 25);
+          const table = screen.getByRole('table', {
+            name: t('pages.sessions.table.caption'),
+          });
+          const rows = within(table).getAllByRole('row');
+          assert.strictEqual(rows.length, 26);
           assert.dom(screen.getByText('1-25 sur 35 éléments')).exists();
         });
       });
@@ -149,9 +155,11 @@ module('Acceptance | Session List', function (hooks) {
           );
 
           // then
-          assert
-            .dom(screen.getByLabelText('Informations de la session de certification 1'))
-            .containsText('Erdman, Bode and Walker');
+          const table = screen.getByRole('table', {
+            name: t('pages.sessions.table.caption'),
+          });
+          const rows = within(table).getAllByRole('row');
+          assert.dom(rows[1]).containsText('Erdman, Bode and Walker');
         });
       });
 
@@ -177,10 +185,11 @@ module('Acceptance | Session List', function (hooks) {
           );
 
           // then
-          const sessionProcessedCount = screen.getAllByLabelText('Informations de la session de certification', {
-            exact: false,
-          }).length;
-          assert.strictEqual(sessionProcessedCount, 5);
+          const table = screen.getByRole('table', {
+            name: t('pages.sessions.table.caption'),
+          });
+          const rows = within(table).getAllByRole('row');
+          assert.strictEqual(rows.length, 6);
         });
       });
 
@@ -195,10 +204,11 @@ module('Acceptance | Session List', function (hooks) {
           const screen = await visit('/sessions/list');
 
           // then
-          const sessionCount = screen.getAllByLabelText('Informations de la session de certification', {
-            exact: false,
-          }).length;
-          assert.strictEqual(sessionCount, 8);
+          const table = screen.getByRole('table', {
+            name: t('pages.sessions.table.caption'),
+          });
+          const rows = within(table).getAllByRole('row');
+          assert.strictEqual(rows.length, 9);
         });
 
         test('it should only display V2 sessions', async function (assert) {
@@ -217,10 +227,11 @@ module('Acceptance | Session List', function (hooks) {
           );
 
           // then
-          const v2Sessions = screen.getAllByLabelText('Informations de la session de certification', {
-            exact: false,
-          }).length;
-          assert.strictEqual(v2Sessions, 5);
+          const table = screen.getByRole('table', {
+            name: t('pages.sessions.table.caption'),
+          });
+          const rows = within(table).getAllByRole('row');
+          assert.strictEqual(rows.length, 6);
         });
 
         test('it should only display V3 sessions', async function (assert) {
@@ -239,10 +250,11 @@ module('Acceptance | Session List', function (hooks) {
           );
 
           // then
-          const v3Sessions = screen.getAllByLabelText('Informations de la session de certification', {
-            exact: false,
-          }).length;
-          assert.strictEqual(v3Sessions, 3);
+          const table = screen.getByRole('table', {
+            name: t('pages.sessions.table.caption'),
+          });
+          const rows = within(table).getAllByRole('row');
+          assert.strictEqual(rows.length, 4);
         });
       });
     });

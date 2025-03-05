@@ -1,72 +1,114 @@
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 
-import CertificationInfoPublished from './info-published';
 import CertificationStatus from './status';
-
 export default class CertificationsHeader extends Component {
   get sortedCertificationJurySummaries() {
     return this.args.juryCertificationSummaries.sortBy('numberOfCertificationIssueReportsWithRequiredAction').reverse();
   }
 
   <template>
-    <div class="table-admin">
-      <table>
-        <thead>
-          <tr>
-            <th class="table__column table__column--id">ID</th>
-            <th>Prénom</th>
-            <th>Nom</th>
-            <th>Statut</th>
-            <th>Signalements impactants non résolus</th>
-            {{#if @displayHasSeenEndTestScreenColumn}}
-              <th>Ecran de fin de test vu</th>
-            {{/if}}
-            <th>Autre certification</th>
-            <th>Score</th>
-            <th>Début</th>
-            <th>Fin</th>
-            <th>Publiée</th>
-          </tr>
-        </thead>
-
-        {{#if @juryCertificationSummaries}}
-          <tbody>
-            {{#each this.sortedCertificationJurySummaries as |certification|}}
-              <tr aria-label="Certifications de {{certification.firstName certification.LastName}}">
-                <td class="table__column table__column--id">
-                  <LinkTo @route="authenticated.certifications.certification.informations" @model={{certification.id}}>
-                    {{certification.id}}
-                  </LinkTo>
-                </td>
-                <td>{{certification.firstName}}</td>
-                <td>{{certification.lastName}}</td>
-                <td>
-                  <CertificationStatus @record={{certification}} />
-                </td>
-                <td
-                  class="certification-list-page__cell--important"
-                >{{certification.numberOfCertificationIssueReportsWithRequiredActionLabel}}</td>
-                {{#if @displayHasSeenEndTestScreenColumn}}
-                  <td class="certification-list-page__cell--important">{{certification.hasSeenEndTestScreenLabel}}</td>
-                {{/if}}
-                <td>{{certification.complementaryCertificationTakenLabel}}</td>
-                <td>{{certification.pixScore}}</td>
-                <td>{{certification.creationDate}}</td>
-                <td>{{certification.completionDate}}</td>
-                <td>
-                  <CertificationInfoPublished @record={{certification}} />
-                </td>
-              </tr>
-            {{/each}}
-          </tbody>
-        {{/if}}
-      </table>
-    </div>
-
     {{#if @juryCertificationSummaries}}
+      <PixTable
+        @variant="primary"
+        @data={{this.sortedCertificationJurySummaries}}
+        @caption={{t "pages.certifications.table.caption"}}
+      >
+        <:columns as |certification context|>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.table.headers.id"}}
+            </:header>
+            <:cell>
+              <LinkTo @route="authenticated.certifications.certification.informations" @model={{certification.id}}>
+                {{certification.id}}
+              </LinkTo>
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.table.headers.first-name"}}
+            </:header>
+            <:cell>
+              {{certification.firstName}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.table.headers.last-name"}}
+            </:header>
+            <:cell>
+              {{certification.lastName}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.table.headers.status"}}
+            </:header>
+            <:cell>
+              <CertificationStatus @record={{certification}} />
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.table.headers.unresolved-reports"}}
+            </:header>
+            <:cell>
+              {{certification.numberOfCertificationIssueReportsWithRequiredActionLabel}}
+            </:cell>
+          </PixTableColumn>
+          {{#if @displayHasSeenEndTestScreenColumn}}
+            <PixTableColumn @context={{context}}>
+              <:header>
+                Ecran de fin de test vu
+              </:header>
+              <:cell>
+                {{certification.hasSeenEndTestScreenLabel}}
+              </:cell>
+            </PixTableColumn>
+          {{/if}}
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.table.headers.other-certification"}}
+            </:header>
+            <:cell>
+              {{certification.complementaryCertificationTakenLabel}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.table.headers.pix-score"}}
+            </:header>
+            <:cell>
+              {{certification.pixScore}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.table.headers.started-certification-date"}}
+            </:header>
+            <:cell>
+              {{certification.creationDate}}
+            </:cell>
+          </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.certifications.table.headers.finished-certification-date"}}
+            </:header>
+            <:cell>
+              {{certification.completionDate}}
+            </:cell>
+          </PixTableColumn>
+        </:columns>
+      </PixTable>
+
       <PixPagination @pagination={{@pagination}} />
+    {{else}}
+      <p class="certification-list-page__empty">{{t "common.tables.empty-result"}}</p>
     {{/if}}
   </template>
 }

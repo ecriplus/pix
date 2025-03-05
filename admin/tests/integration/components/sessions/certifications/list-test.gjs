@@ -1,10 +1,11 @@
 import { render } from '@1024pix/ember-testing-library';
-import { setupRenderingTest } from 'ember-qunit';
 import List from 'pix-admin/components/sessions/certifications/list';
 import { module, test } from 'qunit';
 
+import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
+
 module('Integration | Component | certifications/list', function (hooks) {
-  setupRenderingTest(hooks);
+  setupIntlRenderingTest(hooks);
 
   let store;
 
