@@ -1,14 +1,24 @@
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { PassageDoesNotExistError, PassageTerminatedError } from '../errors.js';
+import { PassageTerminatedEvent } from '../models/passage-events/passage-events.js';
 
-async function terminatePassage({ passageId, passageRepository }) {
+const terminatePassage = withTransaction(async function ({
+  passageId,
+  occurredAt,
+  passageRepository,
+  passageEventRepository,
+}) {
   const passage = await _getPassage({ passageId, passageRepository });
   if (passage.terminatedAt) {
     throw new PassageTerminatedError();
   }
   passage.terminate();
-  return passageRepository.update({ passage });
-}
+  const terminatedPassage = await passageRepository.update({ passage });
+  const event = new PassageTerminatedEvent({ passageId, occurredAt });
+  await passageEventRepository.record(event);
+  return terminatedPassage;
+});
 
 async function _getPassage({ passageId, passageRepository }) {
   try {

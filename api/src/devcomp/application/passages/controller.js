@@ -1,3 +1,5 @@
+import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
+
 const create = async function (request, h, { usecases, passageSerializer, extractUserIdFromRequest }) {
   const { 'module-id': moduleId } = request.payload.data.attributes;
   const userId = extractUserIdFromRequest(request);
@@ -17,7 +19,8 @@ const verifyAndSaveAnswer = async function (request, h, { usecases, elementAnswe
 
 const terminate = async function (request, h, { usecases, passageSerializer }) {
   const { passageId } = request.params;
-  const updatedPassage = await usecases.terminatePassage({ passageId });
+  const requestTimestamp = requestResponseUtils.extractTimestampFromRequest(request);
+  const updatedPassage = await usecases.terminatePassage({ passageId, occurredAt: new Date(requestTimestamp) });
   return passageSerializer.serialize(updatedPassage);
 };
 

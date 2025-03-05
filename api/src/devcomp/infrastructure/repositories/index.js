@@ -3,6 +3,7 @@ import moduleDatasource from '../datasources/learning-content/module-datasource.
 import * as elementAnswerRepository from './element-answer-repository.js';
 import * as elementRepository from './element-repository.js';
 import * as moduleRepository from './module-repository.js';
+import * as passageEventRepository from './passage-event-repository.js';
 import * as passageRepository from './passage-repository.js';
 import * as trainingRepository from './training-repository.js';
 import * as trainingTriggerRepository from './training-trigger-repository.js';
@@ -15,6 +16,7 @@ const repositoriesWithoutInjectedDependencies = {
   elementAnswerRepository,
   elementRepository,
   moduleRepository,
+  passageEventRepository,
   passageRepository,
   trainingRepository,
   trainingTriggerRepository,
