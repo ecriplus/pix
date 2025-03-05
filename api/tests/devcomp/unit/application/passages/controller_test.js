@@ -1,4 +1,5 @@
 import { passageController } from '../../../../../src/devcomp/application/passages/controller.js';
+import { requestResponseUtils } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Application | Passages | Controller', function () {
@@ -90,13 +91,15 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
   describe('#terminate', function () {
     it('should call terminate use-case and return serialized passage', async function () {
       // given
+      const requestDate = new Date('2025-01-01').getTime();
       const serializedPassage = Symbol('serialized modules');
       const passageId = Symbol('passage-id');
       const passage = Symbol('passage');
+      const extractTimestampStub = sinon.stub(requestResponseUtils, 'extractTimestampFromRequest').returns(requestDate);
       const usecases = {
         terminatePassage: sinon.stub(),
       };
-      usecases.terminatePassage.withArgs({ passageId }).returns(passage);
+      usecases.terminatePassage.withArgs({ passageId, requestTimestamp: requestDate }).returns(passage);
       const passageSerializer = {
         serialize: sinon.stub(),
       };
@@ -110,6 +113,7 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
 
       // then
       expect(returned).to.deep.equal(serializedPassage);
+      expect(extractTimestampStub).to.have.been.calledOnce;
     });
   });
 });
