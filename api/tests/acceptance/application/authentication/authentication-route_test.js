@@ -13,7 +13,7 @@ describe('Acceptance | Controller | authentication-controller', function () {
     });
 
     describe('when user has a reconciled Pix account, then connect to Pix from GAR', function () {
-      it('should return an 200 with accessToken', async function () {
+      it('should return a 200 with accessToken', async function () {
         // given
         const password = 'Pix123';
         const userAttributes = {
@@ -111,116 +111,6 @@ describe('Acceptance | Controller | authentication-controller', function () {
           firstName: 'saml',
           lastName: 'jackson',
         });
-      });
-    });
-  });
-
-  describe('POST /api/application/token', function () {
-    let server;
-    let options;
-    const OSMOSE_CLIENT_ID = 'test-apimOsmoseClientId';
-    const OSMOSE_CLIENT_SECRET = 'test-apimOsmoseClientSecret';
-    const SCOPE = 'organizations-certifications-result';
-
-    beforeEach(async function () {
-      server = await createServer();
-      options = {
-        method: 'POST',
-        url: '/api/application/token',
-        headers: {
-          'content-type': 'application/x-www-form-urlencoded',
-          'x-forwarded-proto': 'https',
-          'x-forwarded-host': 'app.pix.fr',
-        },
-      };
-
-      databaseBuilder.factory.buildClientApplication({
-        name: 'osmose',
-        clientId: OSMOSE_CLIENT_ID,
-        clientSecret: OSMOSE_CLIENT_SECRET,
-        scopes: [SCOPE],
-      });
-      await databaseBuilder.commit();
-    });
-
-    it('should return an 200 with accessToken when clientId, client secret and scope are registred', async function () {
-      // given
-      options.payload = querystring.stringify({
-        grant_type: 'client_credentials',
-        client_id: OSMOSE_CLIENT_ID,
-        client_secret: OSMOSE_CLIENT_SECRET,
-        scope: SCOPE,
-      });
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(200);
-
-      const result = response.result;
-      expect(result.token_type).to.equal('bearer');
-      expect(result.access_token).to.exist;
-      expect(result.client_id).to.equal(OSMOSE_CLIENT_ID);
-    });
-
-    it('should return an 401 when clientId is not registred', async function () {
-      // given
-      options.payload = querystring.stringify({
-        grant_type: 'client_credentials',
-        client_id: 'NOT REGISTRED',
-        client_secret: OSMOSE_CLIENT_SECRET,
-        scope: SCOPE,
-      });
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.result.errors[0]).to.deep.equal({
-        title: 'Unauthorized',
-        detail: 'The client ID is invalid.',
-        status: '401',
-      });
-    });
-
-    it('should return an 401 when client secret is not valid', async function () {
-      // given
-      options.payload = querystring.stringify({
-        grant_type: 'client_credentials',
-        client_id: OSMOSE_CLIENT_ID,
-        client_secret: 'invalid secret',
-        scope: SCOPE,
-      });
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.result.errors[0]).to.deep.equal({
-        title: 'Unauthorized',
-        detail: 'The client secret is invalid.',
-        status: '401',
-      });
-    });
-
-    it('should return an 403 when scope is not allowed', async function () {
-      // given
-      options.payload = querystring.stringify({
-        grant_type: 'client_credentials',
-        client_id: OSMOSE_CLIENT_ID,
-        client_secret: OSMOSE_CLIENT_SECRET,
-        scope: 'invalid scope',
-      });
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.result.errors[0]).to.deep.equal({
-        title: 'Forbidden',
-        detail: 'The scope is not allowed.',
-        status: '403',
       });
     });
   });
