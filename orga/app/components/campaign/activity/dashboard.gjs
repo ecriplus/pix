@@ -47,7 +47,7 @@ export default class Dashboard extends Component {
         <ParticipantsByDay
           @campaignId={{@campaign.id}}
           @totalParticipations={{@totalParticipations}}
-          @isTypeAssessment={{@campaign.isTypeAssessment}}
+          @shouldDisplayAssessmentLabels={{or @campaign.isTypeAssessment @campaign.isTypeExam}}
           class="activity-dashboard__participations-by-day"
         />
         <ParticipantsByStatus
