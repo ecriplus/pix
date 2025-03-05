@@ -3,7 +3,7 @@
 
 .badge-acquisitions {
   @include breakpoints.device-is('desktop') {
-    width: 33.33%;
+    width: calc(53% - var(--pix-spacing-6x));
   }
 
   width: 100%;
