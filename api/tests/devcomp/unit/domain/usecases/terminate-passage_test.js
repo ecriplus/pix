@@ -1,10 +1,15 @@
 import { PassageDoesNotExistError, PassageTerminatedError } from '../../../../../src/devcomp/domain/errors.js';
 import { PassageTerminatedEvent } from '../../../../../src/devcomp/domain/models/passage-events/passage-events.js';
 import { terminatePassage } from '../../../../../src/devcomp/domain/usecases/terminate-passage.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | UseCases | terminate-passage', function () {
+  beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
+  });
+
   describe('#terminatePassage', function () {
     describe('when passage is not found', function () {
       it('should throw a PassageDoesNotExistError', async function () {
