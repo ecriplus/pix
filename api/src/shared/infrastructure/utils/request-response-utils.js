@@ -6,9 +6,12 @@ import { tokenService } from '../../../shared/domain/services/token-service.js';
 
 const { ENGLISH_SPOKEN, FRENCH_FRANCE, FRENCH_SPOKEN } = LOCALE;
 const { DUTCH, SPANISH } = LANGUAGES_CODE;
-const requestResponseUtils = { escapeFileName, extractUserIdFromRequest, extractLocaleFromRequest };
-
-export { escapeFileName, extractLocaleFromRequest, extractUserIdFromRequest, requestResponseUtils };
+const requestResponseUtils = {
+  escapeFileName,
+  extractUserIdFromRequest,
+  extractLocaleFromRequest,
+  extractTimestampFromRequest,
+};
 
 function escapeFileName(fileName) {
   return fileName
@@ -37,3 +40,15 @@ function extractLocaleFromRequest(request) {
   const acceptedLanguages = [ENGLISH_SPOKEN, FRENCH_SPOKEN, FRENCH_FRANCE, DUTCH, SPANISH];
   return accept.language(languageHeader, acceptedLanguages) || defaultLocale;
 }
+
+function extractTimestampFromRequest(request) {
+  return request.headers?.['X-Request-Start'] ?? new Date().getTime();
+}
+
+export {
+  escapeFileName,
+  extractLocaleFromRequest,
+  extractTimestampFromRequest,
+  extractUserIdFromRequest,
+  requestResponseUtils,
+};
