@@ -68,6 +68,7 @@ const getByUserIdAndCampaignId = async function ({ userId, campaignId, badges, r
     isOrganizationLearnerActive,
     isCampaignArchived,
     isCampaignDeleted,
+    campaignType: campaignDTO.type,
     flashScoringResults,
     isTargetProfileResetAllowed,
   });

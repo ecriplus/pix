@@ -6,7 +6,7 @@ import {
   MINIMUM_DELAY_IN_DAYS_BEFORE_IMPROVING,
   MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING,
 } from '../../constants.js';
-import { CampaignParticipationStatuses } from '../../models/index.js';
+import { CampaignParticipationStatuses, CampaignTypes } from '../../models/index.js';
 import { BadgeResult } from './BadgeResult.js';
 import { CompetenceResult } from './CompetenceResult.js';
 
@@ -18,6 +18,7 @@ class AssessmentResult {
     isTargetProfileResetAllowed,
     isCampaignArchived,
     isCampaignDeleted,
+    campaignType,
     competences,
     reachedStage,
     badgeResultsDTO,
@@ -64,7 +65,7 @@ class AssessmentResult {
 
     this.badgeResults = badgeResultsDTO.map((badge) => new BadgeResult(badge, participationResults.acquiredBadgeIds));
     this.reachedStage = reachedStage;
-    this.canImprove = this._computeCanImprove(knowledgeElements, assessmentCreatedAt, this.isShared);
+    this.canImprove = this._computeCanImprove(knowledgeElements, assessmentCreatedAt, this.isShared, campaignType);
     this.isDisabled = this._computeIsDisabled(isCampaignArchived, isCampaignDeleted, participationResults.isDeleted);
     this.canRetry = this._computeCanRetry(
       isCampaignMultipleSendings,
@@ -110,7 +111,10 @@ class AssessmentResult {
     }
   }
 
-  _computeCanImprove(knowledgeElements, assessmentCreatedAt, isShared) {
+  _computeCanImprove(knowledgeElements, assessmentCreatedAt, isShared, campaignType) {
+    if (campaignType === CampaignTypes.EXAM) {
+      return false;
+    }
     const isImprovementPossible =
       knowledgeElements.filter((knowledgeElement) => {
         const isOldEnoughToBeImproved =
