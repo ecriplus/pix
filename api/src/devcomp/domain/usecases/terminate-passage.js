@@ -5,7 +5,7 @@ import { PassageTerminatedEvent } from '../models/passage-events/passage-events.
 
 const terminatePassage = withTransaction(async function ({
   passageId,
-  requestTimestamp,
+  occurredAt,
   passageRepository,
   passageEventRepository,
 }) {
@@ -15,10 +15,7 @@ const terminatePassage = withTransaction(async function ({
   }
   passage.terminate();
   const terminatedPassage = await passageRepository.update({ passage });
-  const event = new PassageTerminatedEvent({
-    passageId: terminatedPassage.id,
-    occurredAt: new Date(requestTimestamp),
-  });
+  const event = new PassageTerminatedEvent({ passageId, occurredAt });
   await passageEventRepository.record(event);
   return terminatedPassage;
 });

@@ -91,15 +91,17 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
   describe('#terminate', function () {
     it('should call terminate use-case and return serialized passage', async function () {
       // given
-      const requestDate = new Date('2025-01-01').getTime();
+      const requestTimestamp = new Date('2025-01-01').getTime();
       const serializedPassage = Symbol('serialized modules');
       const passageId = Symbol('passage-id');
       const passage = Symbol('passage');
-      const extractTimestampStub = sinon.stub(requestResponseUtils, 'extractTimestampFromRequest').returns(requestDate);
+      const extractTimestampStub = sinon
+        .stub(requestResponseUtils, 'extractTimestampFromRequest')
+        .returns(requestTimestamp);
       const usecases = {
         terminatePassage: sinon.stub(),
       };
-      usecases.terminatePassage.withArgs({ passageId, requestTimestamp: requestDate }).returns(passage);
+      usecases.terminatePassage.withArgs({ passageId, occurredAt: new Date(requestTimestamp) }).returns(passage);
       const passageSerializer = {
         serialize: sinon.stub(),
       };

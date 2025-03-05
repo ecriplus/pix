@@ -20,7 +20,7 @@ const verifyAndSaveAnswer = async function (request, h, { usecases, elementAnswe
 const terminate = async function (request, h, { usecases, passageSerializer }) {
   const { passageId } = request.params;
   const requestTimestamp = requestResponseUtils.extractTimestampFromRequest(request);
-  const updatedPassage = await usecases.terminatePassage({ passageId, requestTimestamp });
+  const updatedPassage = await usecases.terminatePassage({ passageId, occurredAt: new Date(requestTimestamp) });
   return passageSerializer.serialize(updatedPassage);
 };
 
