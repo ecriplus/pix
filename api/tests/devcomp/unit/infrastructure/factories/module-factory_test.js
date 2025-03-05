@@ -229,10 +229,12 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
 
     it('should instantiate a Module with a grain containing components', function () {
       // given
+      const version = Symbol('version');
       const moduleData = {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
         slug: 'title',
         title: 'title',
+        version,
         isBeta: true,
         details: {
           image: 'https://images.pix.fr/modulix/placeholder-details.svg',
@@ -268,6 +270,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
 
       // then
       expect(module).to.be.an.instanceOf(Module);
+      expect(module.version).to.equal(version);
       expect(module.grains).not.to.be.empty;
       for (const grain of module.grains) {
         expect(grain).to.be.instanceof(Grain);
