@@ -2,16 +2,6 @@
 @use 'pix-design-tokens/typography';
 
 .table {
-  width: 100%;
-  padding: var(--pix-spacing-2x);
-  overflow: auto;
-
-  @extend %pix-body-s;
-
-  @include breakpoints.device-is('tablet') {
-    overflow: initial;
-  }
-
   &__column {
     width: 16%;
 
@@ -20,53 +10,6 @@
 
       th {
         text-align: start;
-      }
-    }
-
-    &--medium {
-      width: 12%;
-
-      td, th {
-        padding: var(--pix-spacing-2x);
-      }
-    }
-
-    &--wide {
-      width: 25%;
-
-      td, th {
-        padding: var(--pix-spacing-4x) var(--pix-spacing-2x);
-      }
-    }
-  }
-
-  table {
-    min-width: 100%;
-    border-collapse: collapse;
-
-    th, td {
-      padding: var(--pix-spacing-4x) var(--pix-spacing-2x);
-      text-align: start;
-    }
-
-    tr > td:first-child, tr > th:first-child {
-      padding-left: var(--pix-spacing-4x);
-    }
-
-    tbody {
-      tr:hover,
-      tr:focus,
-      tr:focus-within,
-      tr:active {
-        background-color: var(--pix-neutral-20);
-      }
-
-      tr:first-child {
-        border-top: 2px solid var(--pix-neutral-20);
-      }
-
-      tr:not(:last-child) {
-        border-bottom: 2px solid var(--pix-neutral-20);
       }
     }
   }
