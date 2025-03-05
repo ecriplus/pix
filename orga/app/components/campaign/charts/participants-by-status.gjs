@@ -20,7 +20,7 @@ export default class ParticipantsByStatus extends Component {
 
   get datasets() {
     return this.args.participantCountByStatus.map(([key, count]) => {
-      const datasetLabels = this.getDatasetLabels(key, count, this.args.isTypeAssessment);
+      const datasetLabels = this.getDatasetLabels(key, count, this.args.shouldDisplayAssessmentLabels);
       return { key, count, ...datasetLabels };
     });
   }
@@ -64,8 +64,8 @@ export default class ParticipantsByStatus extends Component {
     };
   }
 
-  getDatasetLabels(key, count, isTypeAssessment) {
-    const datasetLabels = isTypeAssessment ? LABELS_ASSESSMENT[key] : LABELS_PROFILE_COLLECTIONS[key];
+  getDatasetLabels(key, count, shouldDisplayAssessmentLabels) {
+    const datasetLabels = shouldDisplayAssessmentLabels ? LABELS_ASSESSMENT[key] : LABELS_PROFILE_COLLECTIONS[key];
     const percentage = this.total !== 0 ? count / this.total : 0;
     const canvas = pattern.draw(datasetLabels.shape, datasetLabels.color);
 

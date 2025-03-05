@@ -1,5 +1,6 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { or } from 'ember-truth-helpers';
 import { tracked } from '@glimmer/tracking';
 import sumBy from 'lodash/sumBy';
 
@@ -52,7 +53,7 @@ export default class Dashboard extends Component {
         <ParticipantsByStatus
           @loading={{this.participantsByStatusLoading}}
           @participantCountByStatus={{this.participantCountByStatus}}
-          @isTypeAssessment={{@campaign.isTypeAssessment}}
+          @shouldDisplayAssessmentLabels={{or @campaign.isTypeAssessment @campaign.isTypeExam}}
           class="activity-dashboard__participations-by-status"
         />
       </div>
