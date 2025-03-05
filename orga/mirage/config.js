@@ -101,6 +101,9 @@ function routes() {
   });
 
   this.patch('/memberships/:id');
+  this.patch('/organizations/:organizationId/me', () => {
+    return new Response(204);
+  });
   this.get('/organizations/:id/import-information', () => {
     return { data: null };
   });
