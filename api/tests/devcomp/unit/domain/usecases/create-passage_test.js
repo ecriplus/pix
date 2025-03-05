@@ -6,7 +6,7 @@ import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
   describe('when module does not exist', function () {
-    it('should throw an ModuleNotExists', async function () {
+    it('should throw a ModuleDoesNotExist error', async function () {
       // given
       const moduleId = Symbol('moduleId');
 
@@ -24,7 +24,7 @@ describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {
   });
 
   describe('when user does not exist', function () {
-    it('should throw an UserNotExists', async function () {
+    it('should throw an UserNotExists error', async function () {
       // given
       const userId = Symbol('userId');
 
