@@ -49,6 +49,7 @@ describe('Unit | Devcomp | Domain | UseCases | terminate-passage', function () {
       it('should call terminate method and update passage and return it, then record an event', async function () {
         // given
         const passageId = Symbol('passageId');
+        const requestTimestamp = new Date('2025-01-01').getTime();
 
         const passageRepository = {
           get: sinon.stub(),
@@ -72,12 +73,13 @@ describe('Unit | Devcomp | Domain | UseCases | terminate-passage', function () {
 
         const event = new PassageTerminatedEvent({
           passageId: updatedPassage.id,
-          occurredAt: updatedPassage.terminatedAt,
+          occurredAt: new Date(requestTimestamp),
         });
 
         // when
         const returnedPassage = await terminatePassage({
           passageId,
+          requestTimestamp,
           passageRepository,
           passageEventRepository,
         });
