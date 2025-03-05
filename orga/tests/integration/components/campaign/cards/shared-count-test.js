@@ -8,12 +8,12 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 module('Integration | Component | Campaign::Cards::SharedCount', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('When campaign is type assessment', () => {
+  module('When shouldDisplayAssessmentLabels is true', () => {
     test('it should display shared participations count card', async function (assert) {
       this.sharedCount = 10;
 
       const screen = await render(
-        hbs`<Campaign::Cards::SharedCount @value={{this.sharedCount}} @isTypeAssessment={{true}} />`,
+        hbs`<Campaign::Cards::SharedCount @value={{this.sharedCount}} @shouldDisplayAssessmentLabels={{true}} />`,
       );
 
       assert.dom(screen.getByText(t('cards.submitted-count.title'))).exists();
@@ -21,12 +21,12 @@ module('Integration | Component | Campaign::Cards::SharedCount', function (hooks
     });
   });
 
-  module('When campaign is type profile collection', () => {
+  module('When shouldDisplayAssessmentLabels is false', () => {
     test('it should display shared profiles count card', async function (assert) {
       this.sharedCount = 10;
 
       const screen = await render(
-        hbs`<Campaign::Cards::SharedCount @value={{this.sharedCount}} @isTypeAssessment={{false}} />`,
+        hbs`<Campaign::Cards::SharedCount @value={{this.sharedCount}} @shouldDisplayAssessmentLabels={{false}} />`,
       );
 
       assert.dom(screen.getByText(t('cards.submitted-count.title-profiles'))).exists();

@@ -40,7 +40,7 @@ export default class Dashboard extends Component {
         <SharedCount
           @value={{this.shared}}
           @isLoading={{this.participantsByStatusLoading}}
-          @isTypeAssessment={{@campaign.isTypeAssessment}}
+          @shouldDisplayAssessmentLabels={{or @campaign.isTypeAssessment @campaign.isTypeExam}}
         />
       </div>
       <div class="activity-dashboard__row">
