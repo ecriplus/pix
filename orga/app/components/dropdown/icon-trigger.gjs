@@ -20,7 +20,7 @@ export default class IconTrigger extends Component {
   }
 
   <template>
-    <div id="icon-trigger" class="dropdown" ...attributes>
+    <div class="dropdown" ...attributes>
       <PixIconButton
         @iconName={{@icon}}
         @ariaLabel={{@ariaLabel}}

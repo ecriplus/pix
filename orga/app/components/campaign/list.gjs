@@ -152,7 +152,7 @@ export default class List extends Component {
               </:cell>
             </PixTableColumn>
 
-            <PixTableColumn @context={{context}}>
+            <PixTableColumn @context={{context}} @type="number">
               <:header>
                 {{t "pages.campaigns-list.table.column.participants"}}
               </:header>
@@ -161,7 +161,7 @@ export default class List extends Component {
               </:cell>
             </PixTableColumn>
 
-            <PixTableColumn @context={{context}}>
+            <PixTableColumn @context={{context}} @type="number">
               <:header>
                 {{t "pages.campaigns-list.table.column.results"}}
               </:header>

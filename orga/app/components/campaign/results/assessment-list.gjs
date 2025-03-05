@@ -100,7 +100,7 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
             </:cell>
           </PixTableColumn>
 
-          <PixTableColumn @context={{context}}>
+          <PixTableColumn @context={{context}} @type="number">
             <:header>
               <span aria-label={{t "pages.campaign-results.table.column.ariaSharedResultCount"}}>{{t
                   "pages.campaign-results.table.column.sharedResultCount"

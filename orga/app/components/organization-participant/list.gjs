@@ -165,7 +165,6 @@ export default class List extends Component {
       >
         <PixTable
           @variant="orga"
-          @condensed={{true}}
           @caption={{t "pages.organization-participants.table.description"}}
           @data={{@participants}}
           class="table"
@@ -296,7 +295,6 @@ export default class List extends Component {
 
               <PixTableColumn
                 @context={{context}}
-                @type="number"
                 @onSort={{fn this.addResetOnFunction @sortByLatestParticipation reset}}
                 @sortOrder={{@latestParticipationOrder}}
                 @ariaLabelDefaultSort={{t

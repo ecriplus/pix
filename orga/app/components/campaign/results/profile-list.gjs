@@ -121,7 +121,7 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
           </:cell>
         </PixTableColumn>
 
-        <PixTableColumn @context={{context}}>
+        <PixTableColumn @context={{context}} @type="number">
           <:header>
             {{t "pages.profiles-list.table.column.competences-certifiables"}}
           </:header>
@@ -131,7 +131,7 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
         </PixTableColumn>
 
         {{#if @campaign.multipleSendings}}
-          <PixTableColumn @context={{context}}>
+          <PixTableColumn @context={{context}} @type="number">
             <:header>
               <span aria-label={{t "pages.profiles-list.table.column.ariaSharedProfileCount"}}>
                 {{t "pages.profiles-list.table.column.sharedProfileCount"}}
