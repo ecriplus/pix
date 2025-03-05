@@ -6,7 +6,7 @@ import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
-module.only('Integration | Component | Campaign::UpdateForm', function (hooks) {
+module('Integration | Component | Campaign::UpdateForm', function (hooks) {
   setupIntlRenderingTest(hooks);
   let store;
 

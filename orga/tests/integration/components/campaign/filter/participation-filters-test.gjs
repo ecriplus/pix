@@ -8,7 +8,7 @@ import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | Campaign::Filter::ParticipationFilters', function (hooks) {
+module.only('Integration | Component | Campaign::Filter::ParticipationFilters', function (hooks) {
   setupIntlRenderingTest(hooks);
   let store;
   const campaignId = '1';
@@ -146,6 +146,51 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
                 @onFilter={{noop}}
               />
             </template>,
+          );
+
+          //then
+          assert.ok(screen.getByRole('button', { name: 'Effacer les filtres', hidden: true }));
+        });
+      });
+
+      module('Campaign type EXAM', function () {
+        test('it display disabled button', async function (assert) {
+          //given
+          const badge = store.createRecord('badge');
+          const stage = store.createRecord('stage');
+
+          const campaign = store.createRecord('campaign', {
+            type: 'EXAM',
+            targetProfileHasStage: true,
+            targetProfileThematicResultCount: 2,
+            badges: [badge],
+            stages: [stage],
+          });
+          const resetFiltering = () => {};
+          const searchFilter = null;
+          const searchBadges = [];
+          const searchStages = [];
+          const selectedStages = [];
+          const selectedBadges = [];
+          const selectedUnacquiredBadges = [];
+
+          //when
+          const screen = await render(
+          <template>
+            <ParticipationFilters
+              @campaign={{campaign}}
+              @onResetFilter={{resetFiltering}}
+              @searchFilter={{searchFilter}}
+              @searchBadges={{searchBadges}}
+              @searchStages={{searchStages}}
+              @selectedStages={{selectedStages}}
+              @selectedUnacquiredBadges={{selectedUnacquiredBadges}}
+              @selectedBadges={{selectedBadges}}
+              @isHiddenGroups={{true}}
+              @isHiddenDivisions={{true}}
+              @onFilter={{noop}}
+            />
+          </template>,
           );
 
           //then
@@ -334,6 +379,100 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         assert.ok(triggerFiltering.calledWith('stages', ['stage2']));
       });
     });
+
+    module('when campaign has stages and has type EXAM', function () {
+      test('it displays the stage filter', async function (assert) {
+        // given
+        const stage = store.createRecord('stage', { id: 'stage1', threshold: 40 });
+        const campaign = store.createRecord('campaign', {
+          type: 'EXAM',
+          targetProfileHasStage: true,
+          stages: [stage],
+        });
+
+        const selectedStages = [];
+
+        // when
+        const screen = await render(
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @onFilter={{noop}}
+            @isHiddenStages={{false}}
+            @isHiddenBadges={{true}}
+            @isHiddenDivisions={{true}}
+            @isHiddenGroups={{true}}
+            @selectedStages={{selectedStages}}
+          />
+        </template>,
+        );
+
+        // then
+        assert.ok(screen.getByRole('button', { name: 'Paliers' }));
+      });
+
+      test('it should not display the stage filter when it specified', async function (assert) {
+        // given
+        const stage = store.createRecord('stage', { id: 'stage1', threshold: 40 });
+        const campaign = store.createRecord('campaign', {
+          type: 'EXAM',
+          targetProfileHasStage: true,
+          stages: [stage],
+        });
+
+        // when
+        const screen = await render(
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @onFilter={{noop}}
+            @isHiddenStages={{true}}
+            @isHiddenBadges={{true}}
+            @isHiddenDivisions={{true}}
+            @isHiddenGroups={{true}}
+          />
+        </template>,
+        );
+
+        // then
+        assert.notOk(screen.queryByRole('button', { name: 'Paliers' }));
+      });
+
+      test('it triggers the filter when a stage is selected', async function (assert) {
+        // given
+        const stage1 = store.createRecord('stage', { id: 'stage1', threshold: 40 });
+        const stage2 = store.createRecord('stage', { id: 'stage2', threshold: 55 });
+        const campaign = store.createRecord('campaign', {
+          type: 'EXAM',
+          targetProfileHasStage: true,
+          stages: [stage1, stage2],
+        });
+
+        const triggerFiltering = sinon.stub();
+        const selectedStages = [];
+
+        // when
+        const screen = await render(
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @onFilter={{triggerFiltering}}
+            @isHiddenStages={{false}}
+            @isHiddenBadges={{true}}
+            @isHiddenDivisions={{true}}
+            @isHiddenGroups={{true}}
+            @selectedStages={{selectedStages}}
+          />
+        </template>,
+        );
+
+        await click(screen.getByLabelText(t('pages.campaign-results.filters.type.stages')));
+        await click(await screen.findByRole('checkbox', { name: '1 étoile sur 1' }));
+
+        // then
+        assert.ok(triggerFiltering.calledWith('stages', ['stage2']));
+      });
+    });
   });
 
   module('badges', function () {
@@ -497,6 +636,166 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
       });
     });
 
+    module('when campaign has badges and has type EXAM', function () {
+      test('it displays the badge filters', async function (assert) {
+        // given
+        const badge = store.createRecord('badge', { title: 'Les bases' });
+        const campaign = store.createRecord('campaign', {
+          type: 'EXAM',
+          targetProfileThematicResultCount: 1,
+          badges: [badge],
+        });
+
+        const selectedBadges = [];
+        const selectedUnacquiredBadges = [];
+
+        // when
+        const screen = await render(
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @onFilter={{noop}}
+            @isHiddenStages={{true}}
+            @isHiddenBadges={{false}}
+            @isHiddenDivisions={{true}}
+            @isHiddenGroups={{true}}
+            @selectedBadges={{selectedBadges}}
+            @selectedUnacquiredBadges={{selectedUnacquiredBadges}}
+          />
+        </template>,
+        );
+
+        // then
+        assert.ok(screen.getByRole('button', { name: t('pages.campaign-results.filters.type.badges') }));
+        assert.ok(screen.getByRole('button', { name: t('pages.campaign-results.filters.type.unacquired-badges') }));
+      });
+
+      test('it should not displays the badge filter when it specified', async function (assert) {
+        // given
+        const badge = store.createRecord('badge', { title: 'Les bases' });
+        const campaign = store.createRecord('campaign', {
+          type: 'EXAM',
+          targetProfileThematicResultCount: 1,
+          badges: [badge],
+        });
+        const selectedBadges = [];
+
+        // when
+        const screen = await render(
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @onFilter={{noop}}
+            @isHiddenStages={{true}}
+            @isHiddenBadges={{true}}
+            @isHiddenDivisions={{true}}
+            @isHiddenGroups={{true}}
+            @selectedBadges={{selectedBadges}}
+          />
+        </template>,
+        );
+
+        // then
+        assert.notOk(screen.queryByRole('button', { name: 'Thématiques' }));
+        assert.notOk(screen.queryByLabelText('Les bases'));
+      });
+
+      test('it triggers the filter when an unacquired badge is selected', async function (assert) {
+        // given
+        const unacquiredBadge = store.createRecord('badge', { id: 'badge1', title: 'La base' });
+        const campaign = store.createRecord('campaign', {
+          type: 'EXAM',
+          targetProfileThematicResultCount: 1,
+          badges: [unacquiredBadge],
+        });
+
+        const triggerFiltering = sinon.stub();
+        const selectedUnacquiredBadges = [];
+        const selectedBadges = [];
+
+        const metrics = this.owner.lookup('service:metrics');
+        metrics.add = sinon.stub();
+
+        // when
+        const screen = await render(
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @onFilter={{triggerFiltering}}
+            @isHiddenStages={{true}}
+            @isHiddenBadges={{false}}
+            @isHiddenDivisions={{true}}
+            @isHiddenGroups={{true}}
+            @selectedBadges={{selectedBadges}}
+            @selectedUnacquiredBadges={{selectedUnacquiredBadges}}
+          />
+        </template>,
+        );
+        const button = await screen.findByRole('button', {
+          name: t('pages.campaign-results.filters.type.unacquired-badges'),
+        });
+
+        await click(button);
+        await click(await screen.findByRole('checkbox', { name: 'La base' }));
+
+        // then
+        assert.ok(triggerFiltering.calledWith('unacquiredBadges', ['badge1']));
+
+        sinon.assert.calledWithExactly(metrics.add, {
+          event: 'custom-event',
+          'pix-event-category': 'Campagnes',
+          'pix-event-action': 'Filtrer les participations',
+          'pix-event-name': 'Utilisation du filtre "Thématiques non obtenues"',
+        });
+      });
+
+      test('it triggers the filter when an acquired badge is selected', async function (assert) {
+        // given
+        const badge = store.createRecord('badge', { id: 'badge1', title: 'Les bases' });
+        const campaign = store.createRecord('campaign', {
+          type: 'EXAM',
+          targetProfileThematicResultCount: 1,
+          badges: [badge],
+        });
+
+        const triggerFiltering = sinon.stub();
+        const selectedBadges = [];
+        const selectedUnacquiredBadges = [];
+
+        const metrics = this.owner.lookup('service:metrics');
+        metrics.add = sinon.stub();
+
+        // when
+        const screen = await render(
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @onFilter={{triggerFiltering}}
+            @isHiddenStages={{true}}
+            @isHiddenBadges={{false}}
+            @isHiddenDivisions={{true}}
+            @isHiddenGroups={{true}}
+            @selectedBadges={{selectedBadges}}
+            @selectedUnacquiredBadges={{selectedUnacquiredBadges}}
+          />
+        </template>,
+        );
+
+        await click(screen.getByLabelText(t('pages.campaign-results.filters.type.badges')));
+        await click(await screen.findByRole('checkbox', { name: 'Les bases' }));
+
+        // then
+        assert.ok(triggerFiltering.calledWith('badges', ['badge1']));
+
+        sinon.assert.calledWithExactly(metrics.add, {
+          event: 'custom-event',
+          'pix-event-category': 'Campagnes',
+          'pix-event-action': 'Filtrer les participations',
+          'pix-event-name': 'Usage du filtre par Résultats Thématiques',
+        });
+      });
+    });
+
     module('when the campaign has no badge', function () {
       test('should not displays the badge filter', async function (assert) {
         // given
@@ -592,6 +891,35 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
           }),
         )
         .exists();
+    });
+
+    test('it should display 3 statuses for exam campaign', async function (assert) {
+      // given
+      const campaign = store.createRecord('campaign', {
+        id: campaignId,
+        name: 'campagne 1',
+        type: 'EXAM',
+        targetProfileHasStage: false,
+        stages: [],
+      });
+
+      // when
+      const screen = await render(
+      <template><ParticipationFilters @campaign={{campaign}} @onFilter={{noop}} /></template>,
+      );
+
+      // then
+      await click(screen.getByLabelText(t('pages.campaign-results.filters.type.status.title')));
+      const options = await screen.findAllByRole('option');
+      assert.deepEqual(
+        options.map((option) => option.innerText),
+        [
+          t('pages.campaign-results.filters.type.status.empty'),
+          t('components.participation-status.STARTED-ASSESSMENT'),
+          t('components.participation-status.TO_SHARE-ASSESSMENT'),
+          t('components.participation-status.SHARED-ASSESSMENT'),
+        ],
+      );
     });
 
     test('it should display 3 statuses for assessment campaign', async function (assert) {
@@ -747,6 +1075,32 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
             @onFilter={{noop}}
           />
         </template>,
+      );
+
+      // then
+      assert.notOk(screen.queryByLabelText('Rechercher par certificabilité'));
+    });
+
+    test('hide certificability filter on exam campaign', async function (assert) {
+      const campaign = store.createRecord('campaign', {
+        id: '1',
+        type: 'EXAM',
+        name: 'campagne 1',
+      });
+
+      const screen = await render(
+      <template>
+        <ParticipationFilters
+          @campaign={{campaign}}
+          @isHiddenSearch={{true}}
+          @isHiddenStatus={{true}}
+          @isHiddenBadges={{true}}
+          @isHiddenDivisions={{true}}
+          @isHiddenGroups={{true}}
+          @onResetFilter={{noop}}
+          @onFilter={{noop}}
+        />
+      </template>,
       );
 
       // then

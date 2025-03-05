@@ -76,20 +76,20 @@ export default class ParticipationFilters extends Component {
   }
 
   get displayCertificabilityFilter() {
-    const { isTypeAssessment } = this.args.campaign;
-    return !isTypeAssessment && !this.args.isHiddenCertificability;
+    const { isTypeAssessment, isTypeExam } = this.args.campaign;
+    return !isTypeAssessment && !isTypeExam && !this.args.isHiddenCertificability;
   }
 
   get displayStagesFilter() {
     if (this.isStagesLoading) return false;
-    const { isTypeAssessment, hasStages } = this.args.campaign;
-    return !this.args.isHiddenStages && isTypeAssessment && hasStages;
+    const { isTypeAssessment, isTypeExam, hasStages } = this.args.campaign;
+    return !this.args.isHiddenStages && (isTypeAssessment || isTypeExam) && hasStages;
   }
 
   get displayBadgesFilter() {
     if (this.isBadgesLoading) return false;
-    const { isTypeAssessment, hasBadges } = this.args.campaign;
-    return !this.args.isHiddenBadges && isTypeAssessment && hasBadges;
+    const { isTypeAssessment, isTypeExam, hasBadges } = this.args.campaign;
+    return !this.args.isHiddenBadges && (isTypeAssessment || isTypeExam) && hasBadges;
   }
 
   get displayDivisionFilter() {
@@ -123,12 +123,13 @@ export default class ParticipationFilters extends Component {
   }
 
   get statusOptions() {
-    const { isTypeAssessment, type } = this.args.campaign;
+    const { isTypeAssessment, isTypeExam, type } = this.args.campaign;
 
-    const statuses = isTypeAssessment ? ['STARTED', 'TO_SHARE', 'SHARED'] : ['TO_SHARE', 'SHARED'];
+    const statuses = (isTypeAssessment || isTypeExam) ? ['STARTED', 'TO_SHARE', 'SHARED'] : ['TO_SHARE', 'SHARED'];
 
+    let finalType = type === 'EXAM' ? 'ASSESSMENT': type;
     return statuses.map((status) => {
-      const label = this.intl.t(`components.participation-status.${status}-${type}`);
+      const label = this.intl.t(`components.participation-status.${status}-${finalType}`);
       return { value: status, label };
     });
   }
