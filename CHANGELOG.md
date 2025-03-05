@@ -1,5 +1,27 @@
 # Pix Changelog
 
+## v5.57.0 (05/03/2025)
+
+
+### :rocket: Amélioration
+- [#11541](https://github.com/1024pix/pix/pull/11541) [FEATURE] Pouvoir démarrer et achever une participation à une campagne interro - sans les spécificités interros pour le moment (PIX-16779).
+- [#11530](https://github.com/1024pix/pix/pull/11530) [FEATURE] Module PPN#2 - derniers changements avant sortie ! .
+- [#11557](https://github.com/1024pix/pix/pull/11557) [FEATURE] Initier un data repository pour enregistrer des passages events (PIX-16728).
+- [#11523](https://github.com/1024pix/pix/pull/11523) [FEATURE] Les iframes autorisent l'utilisation du presse papier de l'utilisateur (PIX-16746).
+- [#11540](https://github.com/1024pix/pix/pull/11540) [FEATURE] Enregistrer la date de dernière connexion Pix par application (PIX-16721).
+- [#11502](https://github.com/1024pix/pix/pull/11502) [FEATURE] Utiliser les designs tokens sur Mon Pix (PIX-16698).
+
+### :building_construction: Tech
+- [#11566](https://github.com/1024pix/pix/pull/11566) [TECH] Supprimer des logs plus utilisés.
+- [#11554](https://github.com/1024pix/pix/pull/11554) [TECH] Migration de la route POST /api/memberships/{id}/disable dans /src/team.
+- [#11519](https://github.com/1024pix/pix/pull/11519) [TECH] :truck: Déplace `errors helper` vers `src/prescription/campaign-participation/`.
+- [#11544](https://github.com/1024pix/pix/pull/11544) [TECH] Ajouter une contrainte sur la table last-user-application-connections assurant l'unicité du couple userId-application (PIX-16769).
+- [#11553](https://github.com/1024pix/pix/pull/11553) [TECH] Créer la table `passage-events` (migration) (PIX-16727).
+
+### :bug: Correction
+- [#11564](https://github.com/1024pix/pix/pull/11564) [BUGFIX] Correction du problème de largeur d'encart sur la page de résultats de campagnes sans badges (PIX-16786).
+- [#11555](https://github.com/1024pix/pix/pull/11555) [BUGFIX] Corriger le warning `MaxListenersExceededWarning` lors de l'exécution des tests  .
+
 ## v5.56.0 (04/03/2025)
 
 
