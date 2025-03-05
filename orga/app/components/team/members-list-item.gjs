@@ -249,22 +249,22 @@ export default class MembersListItem extends Component {
               />
             </div>
           {{/if}}
+
+          <RemoveMemberModal
+            @firstName={{@membership.user.firstName}}
+            @lastName={{@membership.user.lastName}}
+            @isOpen={{this.isRemoveMembershipModalDisplayed}}
+            @onSubmit={{this.onRemoveButtonClicked}}
+            @onClose={{this.closeRemoveMembershipModal}}
+          />
+          <LeaveOrganizationModal
+            @organizationName={{this.currentUserOrganizationName}}
+            @isOpen={{this.isLeaveOrganizationModalDisplayed}}
+            @onSubmit={{this.onLeaveButtonClicked}}
+            @onClose={{this.closeLeaveOrganizationModal}}
+          />
         </:cell>
       </PixTableColumn>
     {{/if}}
-
-    <RemoveMemberModal
-      @firstName={{@membership.user.firstName}}
-      @lastName={{@membership.user.lastName}}
-      @isOpen={{this.isRemoveMembershipModalDisplayed}}
-      @onSubmit={{this.onRemoveButtonClicked}}
-      @onClose={{this.closeRemoveMembershipModal}}
-    />
-    <LeaveOrganizationModal
-      @organizationName={{this.currentUserOrganizationName}}
-      @isOpen={{this.isLeaveOrganizationModalDisplayed}}
-      @onSubmit={{this.onLeaveButtonClicked}}
-      @onClose={{this.closeLeaveOrganizationModal}}
-    />
   </template>
 }
