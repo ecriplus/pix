@@ -6,9 +6,11 @@ const getSamlAuthenticationRedirectionUrl = async function ({
   userRepository,
   userLoginRepository,
   authenticationMethodRepository,
+  lastUserApplicationConnectionsRepository,
   tokenService,
   config,
   audience,
+  requestedApplication,
 }) {
   const { attributeMapping } = config.saml;
   const externalUser = {
@@ -18,15 +20,30 @@ const getSamlAuthenticationRedirectionUrl = async function ({
   };
 
   const user = await userRepository.getBySamlId(externalUser.samlId);
-
   if (user) {
-    return await _getUrlWithAccessToken({
+    await _updateUserLastConnection({
+      user,
+      requestedApplication,
+      authenticationMethodRepository,
+      lastUserApplicationConnectionsRepository,
+      userLoginRepository,
+    });
+
+    await _saveUserFirstAndLastName({
+      authenticationMethodRepository,
+      user,
+      externalUser,
+    });
+
+    return _getUrlWithAccessToken({
       user,
       audience,
       externalUser,
       tokenService,
       userLoginRepository,
       authenticationMethodRepository,
+      lastUserApplicationConnectionsRepository,
+      requestedApplication,
     });
   }
 
@@ -35,18 +52,25 @@ const getSamlAuthenticationRedirectionUrl = async function ({
 
 export { getSamlAuthenticationRedirectionUrl };
 
-async function _getUrlWithAccessToken({
-  user,
-  audience,
-  externalUser,
-  tokenService,
-  userLoginRepository,
-  authenticationMethodRepository,
-}) {
+async function _getUrlWithAccessToken({ user, audience, tokenService }) {
   const token = tokenService.createAccessTokenForSaml({ userId: user.id, audience });
-  await userLoginRepository.updateLastLoggedAt({ userId: user.id });
-  await _saveUserFirstAndLastName({ authenticationMethodRepository, user, externalUser });
+
   return `/connexion/gar#${encodeURIComponent(token)}`;
+}
+
+function _externalUserFirstAndLastNameMatchesAuthenticationMethodFirstAndLastName({
+  authenticationMethod,
+  externalUser,
+}) {
+  return (
+    externalUser.firstName === authenticationMethod.authenticationComplement?.firstName &&
+    externalUser.lastName === authenticationMethod.authenticationComplement?.lastName
+  );
+}
+
+function _getUrlForReconciliationPage({ tokenService, externalUser }) {
+  const externalUserToken = tokenService.createIdTokenForUserReconciliation(externalUser);
+  return `/campagnes?externalUser=${encodeURIComponent(externalUserToken)}`;
 }
 
 async function _saveUserFirstAndLastName({ authenticationMethodRepository, user, externalUser }) {
@@ -69,17 +93,21 @@ async function _saveUserFirstAndLastName({ authenticationMethodRepository, user,
   authenticationMethodRepository.update(authenticationMethod);
 }
 
-function _externalUserFirstAndLastNameMatchesAuthenticationMethodFirstAndLastName({
-  authenticationMethod,
-  externalUser,
+async function _updateUserLastConnection({
+  user,
+  requestedApplication,
+  authenticationMethodRepository,
+  lastUserApplicationConnectionsRepository,
+  userLoginRepository,
 }) {
-  return (
-    externalUser.firstName === authenticationMethod.authenticationComplement?.firstName &&
-    externalUser.lastName === authenticationMethod.authenticationComplement?.lastName
-  );
-}
-
-function _getUrlForReconciliationPage({ tokenService, externalUser }) {
-  const externalUserToken = tokenService.createIdTokenForUserReconciliation(externalUser);
-  return `/campagnes?externalUser=${encodeURIComponent(externalUserToken)}`;
+  await userLoginRepository.updateLastLoggedAt({ userId: user.id });
+  await lastUserApplicationConnectionsRepository.upsert({
+    userId: user.id,
+    application: requestedApplication.applicationName,
+    lastLoggedAt: new Date(),
+  });
+  await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
+    userId: user.id,
+    identityProvider: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
+  });
 }

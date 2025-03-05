@@ -17,6 +17,7 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
   obfuscationService,
   tokenService,
   audience,
+  requestedApplication,
   userReconciliationService,
   userService,
   authenticationMethodRepository,
@@ -26,6 +27,7 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
   userToCreateRepository,
   organizationLearnerRepository,
   prescriptionOrganizationLearnerRepository,
+  lastUserApplicationConnectionsRepository,
   studentRepository,
 }) {
   const campaign = await campaignRepository.getByCode(campaignCode);
@@ -115,9 +117,37 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
     }
   }
   const tokenUserId = userWithSamlId ? userWithSamlId.id : userId;
+
+  await _updateUserLastConnection({
+    userId: tokenUserId,
+    requestedApplication,
+    authenticationMethodRepository,
+    lastUserApplicationConnectionsRepository,
+    userLoginRepository,
+  });
+
   const accessToken = tokenService.createAccessTokenForSaml({ userId: tokenUserId, audience });
-  await userLoginRepository.updateLastLoggedAt({ userId: tokenUserId });
+
   return accessToken;
 };
 
 export { createUserAndReconcileToOrganizationLearnerFromExternalUser };
+
+async function _updateUserLastConnection({
+  userId,
+  requestedApplication,
+  authenticationMethodRepository,
+  lastUserApplicationConnectionsRepository,
+  userLoginRepository,
+}) {
+  await userLoginRepository.updateLastLoggedAt({ userId });
+  await lastUserApplicationConnectionsRepository.upsert({
+    userId,
+    application: requestedApplication.applicationName,
+    lastLoggedAt: new Date(),
+  });
+  await authenticationMethodRepository.updateLastLoggedAtByIdentityProvider({
+    userId,
+    identityProvider: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
+  });
+}

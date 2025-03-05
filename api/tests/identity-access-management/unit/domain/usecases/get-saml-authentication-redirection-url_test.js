@@ -2,15 +2,18 @@ import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { getSamlAuthenticationRedirectionUrl } from '../../../../../src/identity-access-management/domain/usecases/get-saml-authentication-redirection-url.js';
+import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | get-external-authentication-redirection-url', function () {
   let userRepository;
   let userLoginRepository;
   let authenticationMethodRepository;
+  let lastUserApplicationConnectionsRepository;
   let tokenService;
   let samlSettings;
   const audience = 'https://app.pix.fr';
+  const requestedApplication = new RequestedApplication('app');
 
   beforeEach(function () {
     userRepository = {
@@ -23,6 +26,7 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
 
     authenticationMethodRepository = {
       findOneByUserIdAndIdentityProvider: sinon.stub(),
+      updateLastLoggedAtByIdentityProvider: sinon.stub(),
       update: sinon.stub(),
     };
 
@@ -39,6 +43,10 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
           lastName: 'NOM',
         },
       },
+    };
+
+    lastUserApplicationConnectionsRepository = {
+      upsert: sinon.stub(),
     };
   });
 
@@ -59,6 +67,7 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
         userAttributes,
         userRepository,
         userLoginRepository,
+        lastUserApplicationConnectionsRepository,
         tokenService,
         config: samlSettings,
       });
@@ -107,8 +116,10 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
         userRepository,
         userLoginRepository,
         authenticationMethodRepository,
+        lastUserApplicationConnectionsRepository,
         tokenService,
         config: samlSettings,
+        requestedApplication,
       });
 
       // then
@@ -116,7 +127,7 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
       expect(result).to.deep.equal(expectedUrl);
     });
 
-    it('should save the last login date', async function () {
+    it('should save the last login dates', async function () {
       // given
       const userAttributes = {
         IDO: 'saml-id-for-adele',
@@ -137,12 +148,23 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
         userRepository,
         userLoginRepository,
         authenticationMethodRepository,
+        lastUserApplicationConnectionsRepository,
         tokenService,
         config: samlSettings,
+        requestedApplication,
       });
 
       // then
       expect(userLoginRepository.updateLastLoggedAt).to.have.been.calledWithExactly({ userId: 777 });
+      expect(lastUserApplicationConnectionsRepository.upsert).to.have.been.calledWithExactly({
+        userId: 777,
+        application: 'app',
+        lastLoggedAt: sinon.match.instanceOf(Date),
+      });
+      expect(authenticationMethodRepository.updateLastLoggedAtByIdentityProvider).to.have.been.calledWithExactly({
+        userId: 777,
+        identityProvider: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
+      });
     });
 
     context("when user's authentication method does not contain first and last name", function () {
@@ -170,8 +192,10 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
           userRepository,
           userLoginRepository,
           authenticationMethodRepository,
+          lastUserApplicationConnectionsRepository,
           tokenService,
           config: samlSettings,
+          requestedApplication,
         });
 
         // then
@@ -207,8 +231,10 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
           userRepository,
           userLoginRepository,
           authenticationMethodRepository,
+          lastUserApplicationConnectionsRepository,
           tokenService,
           config: samlSettings,
+          requestedApplication,
         });
 
         // then
@@ -243,8 +269,10 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
           userRepository,
           userLoginRepository,
           authenticationMethodRepository,
+          lastUserApplicationConnectionsRepository,
           tokenService,
           config: samlSettings,
+          requestedApplication,
         });
 
         // then
@@ -279,8 +307,10 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
           userRepository,
           userLoginRepository,
           authenticationMethodRepository,
+          lastUserApplicationConnectionsRepository,
           tokenService,
           config: samlSettings,
+          requestedApplication,
         });
 
         // then
