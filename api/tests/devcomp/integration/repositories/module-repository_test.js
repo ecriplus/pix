@@ -100,6 +100,47 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
   });
 
   describe('#list', function () {
+    describe('errors', function () {
+      describe('if there are no duplicated IDs in modules content', function () {
+        it('should result an empty array of duplicated IDs ', async function () {
+          const modules = await moduleDatasource.list();
+          const ids = [];
+          const duplicateIds = new Set();
+          for (const module of modules) {
+            for (const grain of module.grains) {
+              if (ids.includes(grain.id)) {
+                duplicateIds.add(grain.id);
+              }
+              ids.push(grain.id);
+
+              for (const component of grain.components) {
+                switch (component.type) {
+                  case 'element':
+                    if (ids.includes(component.element.id)) {
+                      duplicateIds.add(component.element.id);
+                    }
+                    ids.push(component.element.id);
+                    break;
+                  case 'stepper':
+                    for (const step of component.steps) {
+                      for (const element of step.elements) {
+                        if (ids.includes(element.id)) {
+                          duplicateIds.add(element.id);
+                        }
+                        ids.push(element.id);
+                      }
+                    }
+                    break;
+                }
+              }
+            }
+          }
+
+          expect([...duplicateIds]).to.deep.equal([]);
+        });
+      });
+    });
+
     it('should return a list of Module instances', async function () {
       const existingModuleSlug = 'bien-ecrire-son-adresse-mail';
       const expectedFoundModule = {

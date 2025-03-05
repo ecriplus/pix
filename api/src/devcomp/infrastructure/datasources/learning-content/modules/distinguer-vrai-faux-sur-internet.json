@@ -165,7 +165,7 @@
         {
           "type": "element",
           "element": {
-            "id": "342183f7-af51-4e4e-ab4c-ebed1e195063",
+            "id": "0b024dad-bcf3-4358-956a-febfb0b0ead6",
             "type": "text",
             "content": "<p>Après cette vidéo, vous devrez trouver dans des exemples concrets s'il s'agit d'une <strong>opinion</strong>, d'une <strong>rumeur</strong>, d'une <strong>anecdote</strong>, d'une <strong>information</strong>.</p>"
           }
@@ -173,7 +173,7 @@
         {
           "type": "element",
           "element": {
-            "id": "3a9f2269-99ba-4631-b6fd-6802c88d5c26",
+            "id": "e8938c8f-ecf2-4518-8789-1006eb8e97d4",
             "type": "video",
             "title": "-",
             "url": "https://videos.pix.fr/modulix/distinguer-vrai-faux-sur-internet/vocabulaire.mp4",
@@ -636,14 +636,14 @@
       ]
     },
     {
-      "id": "84f9134e-6a19-4673-a673-d4577355796a",
+      "id": "47eed162-0543-44d3-a719-cd477690985b",
       "type": "summary",
       "title": "Conclusion",
       "components": [
         {
           "type": "element",
           "element": {
-            "id": "5a4495bc-22f5-4a9a-aad5-531071bf33c9",
+            "id": "bfcc88ad-0061-4729-8b94-8f60bc92a57d",
             "type": "text",
             "content": "<p><strong>Pour chaque carte</strong> :</p><ol><li>Lisez la question. <span aria-hidden=\"true\">👀</span></li><li>Essayez de trouver la réponse dans votre tête. <span aria-hidden=\"true\">🤔</span></li><li>Retourner la carte en cliquant sur <i>Voir la réponse</i>. <span aria-hidden=\"true\">↪️</span></li></ol><p>Cela permet de <strong>tester votre mémoire</strong>.<span aria-hidden=\"true\">🎯</span></p>"
           }

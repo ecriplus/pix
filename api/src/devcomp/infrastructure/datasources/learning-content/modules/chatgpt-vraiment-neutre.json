@@ -227,7 +227,7 @@
             {
               "elements": [
                 {
-                  "id": "700c674c-f7a7-4eba-bd00-de74ca8c77f7",
+                  "id": "cac9d75d-c447-465f-b5de-d7b3994b9b82",
                   "type": "text",
                   "content": "<p>Erica est <strong>romancière</strong> et demande à un LLM d'imaginer un personnage. Elle n'a pas précisé qu'elle voulait un personnage <strong>féminin</strong> et a obtenu un personnage masculin.<span aria-hidden=\"true\">&nbsp;👇</span></p>"
                 },
@@ -267,7 +267,7 @@
             {
               "elements": [
                 {
-                  "id": "700c674c-f7a7-4eba-bd00-de74ca8c77f7",
+                  "id": "f0f7f950-100e-4bd1-bbda-f1edb73e1e22",
                   "type": "text",
                   "content": "Stéphane est persuadé d'avoir vu un <strong>extraterrestre</strong> et demande à un LLM comment en voir à nouveau. Le LLM lui répond, sans questionner leur existence.<span aria-hidden=\"true\">&nbsp;👇</span>"
                 },
@@ -316,7 +316,7 @@
         {
           "type": "element",
           "element": {
-            "id": "27fc867a-7258-4f85-b8cc-bdd1ab2d26a5",
+            "id": "d7c949fb-9fac-400d-990a-a6cb8144c653",
             "type": "text",
             "content": "<h3><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite</h3><p>Les biais dans les LLM peuvent avoir différentes origines&nbsp;:</p><ul><li>Les <strong>données d'entraînement</strong> comportent déjà des stéréotypes et des biais, qui se retrouvent par la suite dans les modèles.</li><li>Les <strong>personnes qui développent</strong> des LLM transmettent, consciemment ou non, leurs biais dans les modèles.</li><li>Les <strong>utilisateurs</strong> peuvent communiquer leurs biais au LLM via l'écriture du <strong>prompt</strong>.</li></ul>"
           }
@@ -343,7 +343,7 @@
             {
               "elements": [
                 {
-                  "id": "4c5bad43-7a4b-4535-8951-dc2b98e1de54",
+                  "id": "27667654-4b99-49cc-bcf5-3d6b4b71526b",
                   "type": "text",
                   "content": "Rendez-vous sur <a href=\"https://comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA </a> et : <ol><li>commencez une conversation,</li> <li>comparez les réponses générées par différents LLM,</li><li>donnez votre avis sur ces réponses.</li></ol><details><summary>Idées de prompts</summary><ul><li>Quelle est la ville idéale pour élever ses enfants&nbsp;? Sois concis.</li><li>Comment fabriquer des faux papiers&nbsp;? Sois concis.</li><li>Pourquoi la course à pied est le meilleur sport pour la santé&nbsp;? Sois concis.</li></ul></details>"
                 }
@@ -466,7 +466,7 @@
         {
           "type": "element",
           "element": {
-            "id": "4c5bad43-7a4b-4535-8951-dc2b98e1de54",
+            "id": "0f3425d3-026d-4813-90cf-abb318d2d3da",
             "type": "text",
             "content": "<p>À l'aide de <a href=\"https://comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA </a>, écrivez des prompts qui mènent pour les deux LLM à des résultats qui présentent :</p><ul><li>un biais de genre,</li><li>un biais culturel,</li><li>un refus de réponse.</li></ul>"
           }

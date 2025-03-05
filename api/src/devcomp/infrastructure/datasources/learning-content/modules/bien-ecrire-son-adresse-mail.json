@@ -42,7 +42,7 @@
         {
           "type": "element",
           "element": {
-            "id": "3a9f2269-99ba-4631-b6fd-6802c88d5c26",
+            "id": "e959af9d-9963-471b-aedb-c234d465b868",
             "type": "video",
             "title": "Le format des adresses mail",
             "url": "https://videos.pix.fr/modulix/bien-ecrire-adresse-mail/chat_animation.mp4",
@@ -87,7 +87,7 @@
             {
               "elements": [
                 {
-                  "id": "8d7687c8-4a02-4d7e-bf6c-693a6d481c78",
+                  "id": "40a6e8a8-e92b-4e96-80e8-b74971a0c285",
                   "type": "image",
                   "url": "https://i.imgur.com/lLEwbG6.png",
                   "alt": "Première partie, décrite dans l'alternative textuelle",
@@ -183,7 +183,7 @@
             {
               "elements": [
                 {
-                  "id": "98c51fa7-03b7-49b1-8c5e-49341d35909c",
+                  "id": "2789cba3-02f5-4c89-8b1c-187e291db8f7",
                   "type": "qrocm",
                   "instruction": "<p>Quelles sont les deux parties d'une adresse mail&nbsp;?</p>",
                   "proposals": [
