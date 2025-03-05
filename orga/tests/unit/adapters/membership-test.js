@@ -42,5 +42,20 @@ module('Unit | Adapter | membership', function (hooks) {
         assert.ok(adapter); /* required because QUnit wants at least one expect (and does not accept Sinon's one) */
       });
     });
+
+    module('when updateLastAccessedAt adapter option is provided', function () {
+      test('it should trigger a PATCH request to /organizations/{organizationId}/me', async function (assert) {
+        // when
+        await adapter.updateRecord(
+          {},
+          { modelName: 'membership' },
+          { id: 1, adapterOptions: { updateLastAccessedAt: true, organizationId: 1 } },
+        );
+
+        // then
+        sinon.assert.calledWith(adapter.ajax, 'http://localhost:3000/api/organizations/1/me', 'PATCH');
+        assert.ok(adapter); /* required because QUnit wants at least one expect (and does not accept Sinon's one) */
+      });
+    });
   });
 });

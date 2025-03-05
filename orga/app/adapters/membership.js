@@ -17,6 +17,12 @@ export default class MembershipAdapter extends ApplicationAdapter {
       const data = this.serialize(snapshot);
       return this.ajax(url, 'POST', { data });
     }
+
+    if (snapshot.adapterOptions && snapshot.adapterOptions.updateLastAccessedAt) {
+      const url = `${this.host}/${this.namespace}/organizations/${snapshot.adapterOptions.organizationId}/me`;
+
+      return this.ajax(url, 'PATCH');
+    }
     return super.updateRecord(...arguments);
   }
 
