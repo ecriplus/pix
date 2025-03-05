@@ -96,8 +96,7 @@
   .panel-header {
     display: flex;
     padding-bottom: var(--pix-spacing-6x);
-    margin: var(--pix-spacing-6x) 0;
-    border-bottom: 1px solid var(--pix-neutral-100);
+    margin: var(--pix-spacing-6x) 0 var(--pix-spacing-3x) 0;
 
     &__title {
       display: flex;
