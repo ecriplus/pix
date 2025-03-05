@@ -98,4 +98,60 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
       expect(module).to.be.instanceof(Module);
     });
   });
+
+  describe('#list', function () {
+    it('should return a list of Module instances', async function () {
+      const existingModuleSlug = 'bien-ecrire-son-adresse-mail';
+      const expectedFoundModule = {
+        id: 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
+        slug: existingModuleSlug,
+        title: 'Bien écrire son adresse mail',
+        isBeta: true,
+        details: {
+          image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
+          description:
+            'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
+          duration: 12,
+          level: 'Débutant',
+          tabletSupport: 'comfortable',
+          objectives: [
+            'Écrire une adresse mail correctement, en évitant les erreurs courantes',
+            'Connaître les parties d’une adresse mail et les identifier sur des exemples',
+            'Comprendre les fonctions des parties d’une adresse mail',
+          ],
+        },
+        grains: [
+          {
+            id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
+            type: 'lesson',
+            title: 'Explications : les parties d’une adresse mail',
+            components: [
+              {
+                type: 'element',
+                element: {
+                  id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
+                  type: 'text',
+                  content:
+                    "<h3 class='screen-reader-only'>L'arobase</h3><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
+                },
+              },
+            ],
+          },
+        ],
+      };
+      const moduleDatasourceStub = {
+        list: sinon.stub(),
+      };
+      moduleDatasourceStub.list.resolves([expectedFoundModule]);
+      sinon.spy(ModuleFactory, 'build');
+
+      // when
+      const modules = await moduleRepository.list({ moduleDatasource: moduleDatasourceStub });
+
+      // then
+      expect(ModuleFactory.build).to.have.been.calledWith(expectedFoundModule);
+      expect(modules).to.be.an('array');
+      expect(modules[0]).to.be.instanceof(Module);
+    });
+  });
 });
