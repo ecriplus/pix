@@ -1,30 +1,81 @@
-<div class="table session-finalization-reports-information-step">
+<div class="table session-finalization-reports">
+  <PixNotificationAlert @type="warning" @withIcon={{true}} class="session-finalization-reports__information">
+    {{t "pages.session-finalization.reporting.uncompleted-reports-information.description"}}
+  </PixNotificationAlert>
 
-  <table>
-    <caption>
-      <PixNotificationAlert
-        @type="warning"
-        @withIcon={{true}}
-        class="session-finalization-reports-information-step__title-uncompleted"
-      >
-        {{t "pages.session-finalization.reporting.uncompleted-reports-information.description"}}
-      </PixNotificationAlert>
-      <span class="screen-reader-only">
-        {{t "pages.session-finalization.reporting.uncompleted-reports-information.extra-information"}}
-      </span>
-    </caption>
-    <thead>
-      <tr>
-        <th>{{t "common.labels.candidate.lastname"}}</th>
-        <th>{{t "common.labels.candidate.firstname"}}</th>
-        <th>{{t "pages.session-finalization.reporting.table.labels.certification-number"}}</th>
-        <th>{{t "pages.session-finalization.reporting.table.labels.reporting"}}</th>
-        <th>
-          <div class="session-finalization-reports-information-step__header-cancel">
+  <PixTable
+    @data={{@certificationReports}}
+    @variant="certif"
+    @caption={{t "pages.session-finalization.reporting.uncompleted-reports-information.extra-information"}}
+  >
+    <:columns as |report context|>
+      <PixTableColumn @context={{context}}>
+        <:header>
+          {{t "common.labels.candidate.lastname"}}
+        </:header>
+        <:cell>
+          {{report.lastName}}
+        </:cell>
+      </PixTableColumn>
+      <PixTableColumn @context={{context}}>
+        <:header>
+          {{t "common.labels.candidate.firstname"}}
+        </:header>
+        <:cell>
+          {{report.firstName}}
+        </:cell>
+      </PixTableColumn>
+      <PixTableColumn @context={{context}}>
+        <:header>
+          {{t "pages.session-finalization.reporting.table.labels.certification-number"}}
+        </:header>
+        <:cell>
+          {{report.certificationCourseId}}
+        </:cell>
+      </PixTableColumn>
+      <PixTableColumn @context={{context}}>
+        <:header>
+          {{t "pages.session-finalization.reporting.table.labels.reporting"}}
+        </:header>
+        <:cell>
+          <div class="finalization-report-examiner-comment">
+            {{#if report.certificationIssueReports.length}}
+              <button
+                type="button"
+                class="button--showed-as-link add-button"
+                {{on "click" (fn this.openIssueReportsModal report)}}
+              >
+                <PixIcon @name="add" @ariaHidden={{true}} />
+                {{t "common.actions.add"}}
+                /
+                {{t "common.actions.delete"}}
+              </button>
+              <p data-test-id="finalization-report-has-examiner-comment_{{report.certificationCourseId}}">
+                {{t
+                  "pages.session-finalization.reporting.table.reporting-count"
+                  reportingsCount=report.certificationIssueReports.length
+                }}
+              </p>
+            {{else}}
+              <button
+                type="button"
+                class="button--showed-as-link add-button"
+                {{on "click" (fn this.openAddIssueReportModal report)}}
+              >
+                <PixIcon @name="add" @ariaHidden={{true}} />
+                {{t "common.actions.add"}}
+              </button>
+            {{/if}}
+          </div>
+        </:cell>
+      </PixTableColumn>
+      <PixTableColumn @context={{context}}>
+        <:header>
+          <div class="session-finalization-reports__header-cancel">
             <span>{{t
                 "pages.session-finalization.reporting.uncompleted-reports-information.table.labels.abandonment-reason"
               }}</span>
-            <PixTooltip @id="tooltip-cancel-reason" @position="left" @isWide={{true}}>
+            <PixTooltip @id="tooltip-cancel-reason" @position="bottom-left" @isWide={{true}}>
               <:triggerElement>
                 <PixIcon
                   @name="info"
@@ -63,68 +114,26 @@
               </:tooltip>
             </PixTooltip>
           </div>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each @certificationReports as |report|}}
-        <tr>
-          <td data-test-id="finalization-report-last-name_{{report.certificationCourseId}}">{{report.lastName}}</td>
-          <td data-test-id="finalization-report-first-name_{{report.certificationCourseId}}">{{report.firstName}}</td>
-          <td
-            data-test-id="finalization-report-certification-number_{{report.certificationCourseId}}"
-          >{{report.certificationCourseId}}</td>
-          <td data-test-id="finalization-report-certification-issue-reports_{{report.certificationCourseId}}">
-            <div class="finalization-report-examiner-comment">
-              {{#if report.certificationIssueReports.length}}
-                <button
-                  type="button"
-                  class="button--showed-as-link add-button"
-                  {{on "click" (fn this.openIssueReportsModal report)}}
-                >
-                  <PixIcon @name="add" @ariaHidden={{true}} />
-                  {{t "common.actions.add"}}
-                  /
-                  {{t "common.actions.delete"}}
-                </button>
-                <p data-test-id="finalization-report-has-examiner-comment_{{report.certificationCourseId}}">
-                  {{t
-                    "pages.session-finalization.reporting.table.reporting-count"
-                    reportingsCount=report.certificationIssueReports.length
-                  }}
-                </p>
-              {{else}}
-                <button
-                  type="button"
-                  class="button--showed-as-link add-button"
-                  {{on "click" (fn this.openAddIssueReportModal report)}}
-                >
-                  <PixIcon @name="add" @ariaHidden={{true}} />
-                  {{t "common.actions.add"}}
-                </button>
-              {{/if}}
-            </div>
-          </td>
-          <td class="finalization-report-abort-reason">
-            <PixSelect
-              @screenReaderOnly="true"
-              @id={{concat "finalization-report-abort-reason__select" report.id}}
-              @placeholder="-- {{t 'common.actions.choose'}} --"
-              @onChange={{fn @onChangeAbortReason report}}
-              @hideDefaultOption={{true}}
-              @value={{report.abortReason}}
-              required="required"
-              @options={{this.abortOptions}}
-            >
-              <:label>{{t
-                  "pages.session-finalization.reporting.uncompleted-reports-information.table.labels.abandonment-reason-label"
-                }}</:label>
-            </PixSelect>
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
+        </:header>
+        <:cell>
+          <PixSelect
+            @screenReaderOnly="true"
+            @id={{concat "finalization-report-abort-reason__select" report.id}}
+            @placeholder="-- {{t 'common.actions.choose'}} --"
+            @onChange={{fn @onChangeAbortReason report}}
+            @hideDefaultOption={{true}}
+            @value={{report.abortReason}}
+            required="required"
+            @options={{this.abortOptions}}
+          >
+            <:label>{{t
+                "pages.session-finalization.reporting.uncompleted-reports-information.table.labels.abandonment-reason-label"
+              }}</:label>
+          </PixSelect>
+        </:cell>
+      </PixTableColumn>
+    </:columns>
+  </PixTable>
 
   {{#if this.showAddIssueReportModal}}
     <IssueReportModal::AddIssueReportModal
@@ -146,5 +155,4 @@
       @version={{@session.version}}
     />
   {{/if}}
-
 </div>
