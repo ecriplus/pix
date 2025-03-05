@@ -4,6 +4,7 @@ import yargs from 'yargs';
 
 import { disconnect, knex } from '../../db/knex-database-connection.js';
 import * as knowledgeElementSnapshotRepository from '../../src/prescription/campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
+import { KnowledgeElementCollection } from '../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { AlreadyExistingEntityError } from '../../src/shared/domain/errors.js';
 import * as knowledgeElementRepository from '../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
 import { PromiseUtils } from '../../src/shared/infrastructure/utils/promise-utils.js';
@@ -45,7 +46,7 @@ function _validateAndNormalizeArgs({ concurrency, maxSnapshotCount }) {
 
 async function getEligibleCampaignParticipations(maxSnapshotCount) {
   return knex('campaign-participations')
-    .select('campaign-participations.userId', 'campaign-participations.sharedAt')
+    .select('campaign-participations.userId', 'campaign-participations.sharedAt', 'campaign-participations.id')
     .leftJoin('knowledge-element-snapshots', function () {
       this.on('knowledge-element-snapshots.userId', 'campaign-participations.userId').andOn(
         'knowledge-element-snapshots.snappedAt',
@@ -71,7 +72,7 @@ async function generateKnowledgeElementSnapshots(
   return PromiseUtils.map(
     campaignParticipationData,
     async (campaignParticipation) => {
-      const { userId, sharedAt } = campaignParticipation;
+      const { userId, sharedAt, id } = campaignParticipation;
       const knowledgeElements = await dependencies.knowledgeElementRepository.findUniqByUserId({
         userId,
         limitDate: sharedAt,
@@ -80,8 +81,8 @@ async function generateKnowledgeElementSnapshots(
         await dependencies.knowledgeElementSnapshotRepository.save({
           userId,
           snappedAt: sharedAt,
-          knowledgeElements,
-          campaignParticipationId: campaignParticipation.id,
+          snapshot: new KnowledgeElementCollection(knowledgeElements).toSnapshot(),
+          campaignParticipationId: id,
         });
       } catch (err) {
         if (!(err instanceof AlreadyExistingEntityError)) {
