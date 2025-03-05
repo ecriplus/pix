@@ -27,6 +27,10 @@ const serialize = function (jurySessions, meta) {
       'hasJoiningIssue',
       'hasIncident',
       'version',
+      'numberOfStartedCertifications',
+      'numberOfScoringErrors',
+      'totalNumberOfIssueReports',
+      'numberOfImpactfullIssueReports',
       // included
       'assignedCertificationOfficer',
       'juryCommentAuthor',

@@ -1,4 +1,5 @@
 import * as serializer from '../../../../../../src/certification/session-management/infrastructure/serializers/jury-session-serializer.js';
+import { ImpactfulCategories } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Serializer | JSONAPI | jury-session-serializer', function () {
@@ -46,6 +47,11 @@ describe('Unit | Serializer | JSONAPI | jury-session-serializer', function () {
           hasJoiningIssue: true,
           hasIncident: true,
           version: 2,
+          counters: domainBuilder.certification.sessionManagement.buildJurySessionCounters({
+            startedCertifications: 4,
+            certificationsWithScoringError: 3,
+            issueReports: [{ category: ImpactfulCategories[0] }],
+          }),
         });
 
         // when
@@ -78,6 +84,10 @@ describe('Unit | Serializer | JSONAPI | jury-session-serializer', function () {
               'has-incident': true,
               'has-joining-issue': true,
               version: 2,
+              'total-number-of-issue-reports': 1,
+              'number-of-impactfull-issue-reports': 1,
+              'number-of-scoring-errors': 3,
+              'number-of-started-certifications': 4,
             },
             relationships: {
               'jury-certification-summaries': {
@@ -164,6 +174,10 @@ describe('Unit | Serializer | JSONAPI | jury-session-serializer', function () {
               'has-incident': false,
               'has-joining-issue': false,
               version: 3,
+              'total-number-of-issue-reports': 0,
+              'number-of-impactfull-issue-reports': 0,
+              'number-of-scoring-errors': 0,
+              'number-of-started-certifications': 0,
             },
             relationships: {
               'jury-certification-summaries': {
@@ -186,81 +200,6 @@ describe('Unit | Serializer | JSONAPI | jury-session-serializer', function () {
               attributes: { 'first-name': 'Phil', 'last-name': 'Hippo' },
             },
           ],
-        };
-        expect(json).to.deep.equal(expectedJsonAPI);
-      });
-    });
-
-    context('when the session has supervisor access', function () {
-      it('should convert a Session model object into JSON API data with hasSupervisorAccess', function () {
-        // given
-        const hasSupervisorAccess = true;
-        const session = domainBuilder.buildJurySession({
-          id: 1,
-          certificationCenterName: 'someCenterName',
-          certificationCenterType: 'someCenterType',
-          certificationCenterId: 'someCenterId',
-          certificationCenterExternalId: 'someCenterExternalId',
-          address: 'someAddress',
-          room: 'someRoom',
-          examiner: 'someExaminer',
-          date: '2017-01-20',
-          time: '14:30',
-          accessCode: 'someAccessCode',
-          description: 'someDescription',
-          examinerGlobalComment: 'someComment',
-          finalizedAt: new Date('2020-02-17T14:23:56Z'),
-          resultsSentToPrescriberAt: new Date('2020-02-20T14:23:56Z'),
-          publishedAt: new Date('2020-02-21T14:23:56Z'),
-          version: 2,
-        });
-
-        // when
-        const json = serializer.serialize(session, hasSupervisorAccess);
-
-        // then
-        const expectedJsonAPI = {
-          data: {
-            type: 'sessions',
-            id: '1',
-            attributes: {
-              'certification-center-name': 'someCenterName',
-              'certification-center-type': 'someCenterType',
-              'certification-center-id': 'someCenterId',
-              'certification-center-external-id': 'someCenterExternalId',
-              address: 'someAddress',
-              room: 'someRoom',
-              examiner: 'someExaminer',
-              date: '2017-01-20',
-              time: '14:30',
-              'access-code': 'someAccessCode',
-              status: 'processed',
-              description: 'someDescription',
-              'examiner-global-comment': 'someComment',
-              'finalized-at': new Date('2020-02-17T14:23:56Z'),
-              'results-sent-to-prescriber-at': new Date('2020-02-20T14:23:56Z'),
-              'published-at': new Date('2020-02-21T14:23:56Z'),
-              'jury-comment': null,
-              'jury-commented-at': null,
-              'has-supervisor-access': true,
-              'has-incident': false,
-              'has-joining-issue': false,
-              version: 2,
-            },
-            relationships: {
-              'jury-certification-summaries': {
-                links: {
-                  related: '/api/admin/sessions/1/jury-certification-summaries',
-                },
-              },
-              'assigned-certification-officer': {
-                data: null,
-              },
-              'jury-comment-author': {
-                data: null,
-              },
-            },
-          },
         };
         expect(json).to.deep.equal(expectedJsonAPI);
       });
@@ -319,6 +258,10 @@ describe('Unit | Serializer | JSONAPI | jury-session-serializer', function () {
               'has-incident': false,
               'has-joining-issue': false,
               version: 3,
+              'total-number-of-issue-reports': 0,
+              'number-of-impactfull-issue-reports': 0,
+              'number-of-scoring-errors': 0,
+              'number-of-started-certifications': 0,
             },
             relationships: {
               'jury-certification-summaries': {

@@ -79,12 +79,10 @@ describe('Unit | Certification | Session-Management | Domain | Models | JurySess
       hasIncident: false,
       hasJoiningIssue: false,
       version: 3,
-      counters: {
-        startedCertifications: 1,
-        certificationsWithScoringError: 2,
-        issueReports: 0,
-        impactfullIssueReports: 0,
-      },
+      numberOfStartedCertifications: 1,
+      numberOfScoringErrors: 2,
+      totalNumberOfIssueReports: 0,
+      numberOfImpactfullIssueReports: 0,
     });
   });
 
@@ -96,6 +94,7 @@ describe('Unit | Certification | Session-Management | Domain | Models | JurySess
       const jurySession = new JurySession({
         id: 123,
         publishedAt: new Date('2025-03-03'),
+        counters: domainBuilder.certification.sessionManagement.buildJurySessionCounters(),
       });
 
       // then
@@ -114,6 +113,7 @@ describe('Unit | Certification | Session-Management | Domain | Models | JurySess
           firstName: 'Certif',
           lastName: 'Officer',
         }),
+        counters: domainBuilder.certification.sessionManagement.buildJurySessionCounters(),
       });
 
       // then
@@ -127,6 +127,7 @@ describe('Unit | Certification | Session-Management | Domain | Models | JurySess
       const jurySession = new JurySession({
         id: 123,
         finalizedAt: new Date('2025-03-03'),
+        counters: domainBuilder.certification.sessionManagement.buildJurySessionCounters(),
       });
 
       // then
@@ -137,7 +138,10 @@ describe('Unit | Certification | Session-Management | Domain | Models | JurySess
       // given
 
       // when
-      const jurySession = new JurySession({ id: 123 });
+      const jurySession = new JurySession({
+        id: 123,
+        counters: domainBuilder.certification.sessionManagement.buildJurySessionCounters(),
+      });
 
       // then
       expect(jurySession.status).to.equal(SESSION_STATUSES.CREATED);

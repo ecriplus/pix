@@ -33,7 +33,7 @@ const findPaginatedFilteredJurySessions = async function (
 
 const getJurySession = async function (request, h, dependencies = { jurySessionSerializer }) {
   const sessionId = request.params.sessionId;
-  const { jurySession } = await usecases.getJurySession({ sessionId });
+  const jurySession = await usecases.getJurySession({ sessionId });
 
   return dependencies.jurySessionSerializer.serialize(jurySession);
 };

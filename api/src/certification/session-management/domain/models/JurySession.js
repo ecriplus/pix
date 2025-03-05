@@ -82,7 +82,10 @@ class JurySession {
     this.hasIncident = hasIncident;
     this.hasJoiningIssue = hasJoiningIssue;
     this.version = version;
-    this.counters = counters;
+    this.numberOfStartedCertifications = counters.startedCertifications;
+    this.numberOfScoringErrors = counters.certificationsWithScoringError;
+    this.totalNumberOfIssueReports = counters.issueReports;
+    this.numberOfImpactfullIssueReports = counters.impactfullIssueReports;
   }
 
   get status() {

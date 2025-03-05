@@ -27,6 +27,7 @@ const buildJurySession = function ({
   hasIncident = false,
   hasJoiningIssue = false,
   version = 2,
+  counters,
 } = {}) {
   if (_.isUndefined(certificationCenterId)) {
     const certificationCenter = domainBuilder.buildCertificationCenter();
@@ -34,6 +35,10 @@ const buildJurySession = function ({
     certificationCenterName = certificationCenter.id;
     certificationCenterType = certificationCenter.type;
     certificationCenterExternalId = certificationCenter.externalId;
+  }
+
+  if (counters === undefined) {
+    counters = domainBuilder.certification.sessionManagement.buildJurySessionCounters();
   }
 
   return new JurySession({
@@ -60,6 +65,7 @@ const buildJurySession = function ({
     hasIncident,
     hasJoiningIssue,
     version,
+    counters,
   });
 };
 
