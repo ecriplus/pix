@@ -1,10 +1,12 @@
-import { knex } from '../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
 import { StageCollection } from '../../../../src/shared/domain/models/user-campaign-results/StageCollection.js';
 import * as skillRepository from '../../../../src/shared/infrastructure/repositories/skill-repository.js';
 const MAX_STAGE_THRESHOLD = 100;
 
 const findStageCollection = async function ({ campaignId }) {
-  const stages = await knex('stages')
+  const knexConn = DomainTransaction.getConnection();
+
+  const stages = await knexConn('stages')
     .select('stages.*')
     .join('campaigns', 'campaigns.targetProfileId', 'stages.targetProfileId')
     .where('campaigns.id', campaignId)
@@ -44,5 +46,7 @@ async function _findSkills({ campaignId }) {
 }
 
 function _findSkillIds({ campaignId }) {
-  return knex('campaign_skills').where({ campaignId }).pluck('skillId');
+  const knexConn = DomainTransaction.getConnection();
+
+  return knexConn('campaign_skills').where({ campaignId }).pluck('skillId');
 }

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
@@ -16,7 +17,8 @@ const getByCampaignIdAndCampaignParticipationId = async function ({ campaignId, 
 export { getByCampaignIdAndCampaignParticipationId };
 
 async function _fetchCampaignAssessmentAttributesFromCampaignParticipation(campaignId, campaignParticipationId) {
-  const [campaignAssessmentParticipation] = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const [campaignAssessmentParticipation] = await knexConn
     .with('campaignAssessmentParticipation', (qb) => {
       qb.select([
         'campaign-participations.userId',
@@ -43,6 +45,7 @@ async function _fetchCampaignAssessmentAttributesFromCampaignParticipation(campa
         )
         .where({
           'campaign-participations.id': campaignParticipationId,
+          'campaign-participations.campaignId': campaignId,
           'campaign-participations.deletedAt': null,
         });
     })

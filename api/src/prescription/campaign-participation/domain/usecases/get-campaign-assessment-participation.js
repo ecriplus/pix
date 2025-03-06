@@ -1,6 +1,7 @@
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../shared/domain/errors.js';
 
-const getCampaignAssessmentParticipation = async function ({
+const getCampaignAssessmentParticipation = withTransaction(async function ({
   userId,
   campaignId,
   campaignParticipationId,
@@ -34,6 +35,6 @@ const getCampaignAssessmentParticipation = async function ({
   campaignAssessmentParticipation.setStageInfo(reachedStage);
 
   return campaignAssessmentParticipation;
-};
+});
 
 export { getCampaignAssessmentParticipation };
