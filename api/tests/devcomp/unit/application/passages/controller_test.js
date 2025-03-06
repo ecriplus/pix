@@ -26,14 +26,13 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
 
       const request = { payload: { data: { attributes: { 'module-id': moduleId } } } };
 
-      const extractUserIdFromRequest = sinon.stub();
-      extractUserIdFromRequest.withArgs(request).returns(userId);
+      const extractUserIdFromRequestStub = sinon.stub(requestResponseUtils, 'extractUserIdFromRequest');
+      extractUserIdFromRequestStub.withArgs(request).returns(userId);
 
       // when
       await passageController.create({ payload: { data: { attributes: { 'module-id': moduleId } } } }, hStub, {
         passageSerializer,
         usecases,
-        extractUserIdFromRequest,
       });
 
       // then
