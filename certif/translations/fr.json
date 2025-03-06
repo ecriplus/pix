@@ -104,7 +104,6 @@
         "additional-certification": "Choix de la certification",
         "additional-certification-old": "Certification complémentaire",
         "candidate-status": {
-          "authorized-to-resume": "Autorisé à reprendre",
           "finished": "Terminé",
           "live-alerts": {
             "challenge": {

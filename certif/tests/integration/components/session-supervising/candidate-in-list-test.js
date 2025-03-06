@@ -291,7 +291,6 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
       assert.dom(screen.getByText('Fin théorique :')).exists();
       assert.dom(screen.getByText('+ temps majoré 12 %')).exists();
       assert.dom(screen.queryByText('Signalement en cours')).doesNotExist();
-      assert.dom(screen.queryByText('Autorisé à reprendre')).doesNotExist();
       assert.dom(screen.queryByText('Terminé')).doesNotExist();
     });
 
@@ -366,12 +365,11 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
       const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
 
       // then
-      assert.dom(screen.getByText('Autorisé à reprendre')).exists();
       assert.dom(screen.getByText('Début :')).exists();
       assert.dom(screen.getByText('Fin théorique :')).exists();
       assert.dom(screen.getByText('+ temps majoré 12 %')).exists();
+      assert.dom(screen.queryByText('En cours')).exists();
       assert.dom(screen.queryByText('Signalement en cours')).doesNotExist();
-      assert.dom(screen.queryByText('En cours')).doesNotExist();
       assert.dom(screen.queryByText('Terminé')).doesNotExist();
     });
   });
@@ -398,7 +396,6 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
       assert.dom(screen.queryByText('+ temps majoré 12 %')).doesNotExist();
       assert.dom(screen.queryByText('Signalement en cours')).doesNotExist();
       assert.dom(screen.queryByText('En cours')).doesNotExist();
-      assert.dom(screen.queryByText('Autorisé à reprendre')).doesNotExist();
     });
   });
 
@@ -430,7 +427,6 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
         // then
         assert.dom(screen.getByText('Signalement en cours')).exists();
         assert.dom(screen.queryByText('En cours')).doesNotExist();
-        assert.dom(screen.queryByText('Autorisé à reprendre')).doesNotExist();
         assert.dom(screen.queryByText('Terminé')).doesNotExist();
       });
 
