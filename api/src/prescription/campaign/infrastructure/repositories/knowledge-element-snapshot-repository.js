@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { KnowledgeElement } from '../../../../shared/domain/models/KnowledgeElement.js';
 import { CampaignParticipationKnowledgeElementSnapshots } from '../../../shared/domain/read-models/CampaignParticipationKnowledgeElementSnapshots.js';
@@ -52,7 +51,8 @@ export async function findCampaignParticipationKnowledgeElementSnapshots(campaig
  * @returns {Object.<number, KnowledgeElement[]>}
  */
 export async function findByCampaignParticipationIds(campaignParticipationIds) {
-  const results = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const results = await knexConn
     .select('campaignParticipationId', 'snapshot')
     .from('knowledge-element-snapshots')
     .whereIn('campaignParticipationId', campaignParticipationIds);
