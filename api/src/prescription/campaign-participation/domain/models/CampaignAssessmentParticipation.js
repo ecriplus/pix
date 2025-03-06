@@ -50,6 +50,7 @@ class CampaignAssessmentParticipation {
 
   _computeProgression(assessmentState, testedSkillsCount, targetedSkillsCount) {
     if (assessmentState === Assessment.states.COMPLETED) return 1;
+    if (!targetedSkillsCount) return null;
     return Number((testedSkillsCount / targetedSkillsCount).toFixed(2));
   }
 

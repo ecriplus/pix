@@ -8,10 +8,14 @@ import * as knowledgeElementRepository from '../../../../shared/infrastructure/r
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 import { CampaignAssessmentParticipation } from '../../domain/models/CampaignAssessmentParticipation.js';
 
-const getByCampaignIdAndCampaignParticipationId = async function ({ campaignId, campaignParticipationId }) {
+const getByCampaignIdAndCampaignParticipationId = async function ({
+  campaignId,
+  campaignParticipationId,
+  shouldBuildProgression = true,
+}) {
   const result = await _fetchCampaignAssessmentAttributesFromCampaignParticipation(campaignId, campaignParticipationId);
 
-  return _buildCampaignAssessmentParticipation(result);
+  return _buildCampaignAssessmentParticipation(result, shouldBuildProgression);
 };
 
 export { getByCampaignIdAndCampaignParticipationId };
@@ -66,8 +70,15 @@ function _assessmentRankByCreationDate() {
   ]);
 }
 
-async function _buildCampaignAssessmentParticipation(result) {
-  const { targetedSkillsCount, testedSkillsCount } = await _setSkillsCount(result);
+async function _buildCampaignAssessmentParticipation(result, shouldBuildProgression) {
+  let targetedSkillsCount,
+    testedSkillsCount = null;
+
+  if (shouldBuildProgression) {
+    const userSkills = await _setSkillsCount(result);
+    targetedSkillsCount = userSkills.targetedSkillsCount;
+    testedSkillsCount = userSkills.testedSkillsCount;
+  }
 
   return new CampaignAssessmentParticipation({
     ...result,
