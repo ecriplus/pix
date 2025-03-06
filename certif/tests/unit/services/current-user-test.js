@@ -8,11 +8,11 @@ module('Unit | Service | current-user', function (hooks) {
   setupTest(hooks);
 
   module('user is authenticated', function () {
-    test('should load the current certification point of contact', async function (assert) {
+    test('loads the current certification point of contact', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const allowedCertificationCenterAccesseA = store.createRecord('allowed-certification-center-access', {
-        id: '789',
+        id: 789,
       });
 
       const allowedCertificationCenterAccesseB = store.createRecord('allowed-certification-center-access', {
@@ -40,6 +40,7 @@ module('Unit | Service | current-user', function (hooks) {
       });
 
       sinon.stub(store, 'queryRecord').resolves(certificationPointOfContact);
+      sinon.stub(certificationCenterMembershipA, 'save').resolves();
 
       class SessionStub extends Service {
         isAuthenticated = true;
@@ -56,11 +57,15 @@ module('Unit | Service | current-user', function (hooks) {
       assert.strictEqual(currentUser.currentAllowedCertificationCenterAccess, allowedCertificationCenterAccesseA);
       assert.deepEqual(currentUser.currentCertificationCenterMembership, certificationCenterMembershipA);
       assert.true(currentUser.isAdminOfCurrentCertificationCenter);
+      sinon.assert.calledWith(certificationCenterMembershipA.save, {
+        adapterOptions: { updateLastAccessedAt: true, certificationCenterId: 789 },
+      });
+      assert.ok(true);
     });
   });
 
   module('user is not authenticated', function () {
-    test('should do nothing', async function (assert) {
+    test('does nothing', async function (assert) {
       // given
       class SessionStub extends Service {
         isAuthenticated = false;
@@ -77,7 +82,7 @@ module('Unit | Service | current-user', function (hooks) {
   });
 
   module('user token is expired', function () {
-    test('should redirect to login', async function (assert) {
+    test('redirects to login', async function (assert) {
       // Given
 
       const store = this.owner.lookup('service:store');
@@ -101,7 +106,7 @@ module('Unit | Service | current-user', function (hooks) {
   });
 
   module('#checkRestrictedAccess', function () {
-    test('should redirect to restricted access route when current certification center has restricted access', async function (assert) {
+    test('redirects to restricted access route when current certification center has restricted access', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const currentAllowedCertificationCenterAccess = store.createRecord('allowed-certification-center-access', {
@@ -127,7 +132,7 @@ module('Unit | Service | current-user', function (hooks) {
       assert.true(true);
     });
 
-    test('should not redirect to restricted access route when current certification center has no restricted access', async function (assert) {
+    test('does not redirect to restricted access route when current certification center has no restricted access', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const currentAllowedCertificationCenterAccess = store.createRecord('allowed-certification-center-access', {
@@ -158,7 +163,7 @@ module('Unit | Service | current-user', function (hooks) {
   });
 
   module('#updateCurrentCertificationCenter', function () {
-    test('should modify the current allowed certification center access', function (assert) {
+    test('modifies the current allowed certification center access', async function (assert) {
       // given
       const userId = 123;
       const store = this.owner.lookup('service:store');
@@ -197,15 +202,20 @@ module('Unit | Service | current-user', function (hooks) {
       const currentUser = this.owner.lookup('service:currentUser');
       currentUser.certificationPointOfContact = certificationPointOfContact;
       currentUser.currentAllowedCertificationCenterAccess = currentAllowedCertificationCenterAccess;
+      sinon.stub(newCertificationCenterMembership, 'save').resolves();
 
       // when
-      currentUser.updateCurrentCertificationCenter(222);
+      await currentUser.updateCurrentCertificationCenter(222);
 
       // then
 
       assert.strictEqual(currentUser.currentAllowedCertificationCenterAccess, newAllowedCertificationCenterAccess);
       assert.strictEqual(currentUser.currentCertificationCenterMembership, newCertificationCenterMembership);
       assert.true(currentUser.isAdminOfCurrentCertificationCenter);
+      sinon.assert.calledWith(newCertificationCenterMembership.save, {
+        adapterOptions: { updateLastAccessedAt: true, certificationCenterId: 222 },
+      });
+      assert.ok(true);
     });
   });
 });

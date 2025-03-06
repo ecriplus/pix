@@ -432,6 +432,10 @@ function _configureCertificationCenterInvitationRoutes(context) {
     return certificationCenterInvitation;
   });
 
+  context.patch('/certification-centers/:certificationCenterId/certification-center-memberships/me', () => {
+    return new Response(204);
+  });
+
   context.post(`${basePath}/:id/accept`, (schema) => {
     const certificationPointOfContact = schema.certificationPointOfContacts.first();
     const allowedCertificationCenterAccess = schema.allowedCertificationCenterAccesses.create({
