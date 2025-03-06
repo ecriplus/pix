@@ -23,9 +23,9 @@ export class OidcAuthenticationServiceRegistry {
     );
 
     if (!oidcProviderService) return;
-    if (oidcProviderService.client) return;
 
-    await oidcProviderService.createClient();
+    await oidcProviderService.initializeClientConfig();
+
     return true;
   }
 
@@ -87,5 +87,11 @@ export class OidcAuthenticationServiceRegistry {
       (oidcProviderService) => oidcProviderService.isReadyForPixAdmin,
     );
     return true;
+  }
+
+  testOnly_reset() {
+    this.#allOidcProviderServices = null;
+    this.#readyOidcProviderServices = null;
+    this.#readyOidcProviderServicesForPixAdmin = null;
   }
 }

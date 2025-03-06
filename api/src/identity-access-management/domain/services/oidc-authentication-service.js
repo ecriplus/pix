@@ -3,7 +3,7 @@ import { randomUUID } from 'node:crypto';
 import jsonwebtoken from 'jsonwebtoken';
 import lodash from 'lodash';
 import ms from 'ms';
-import { Issuer } from 'openid-client';
+import * as client from 'openid-client';
 
 import { config } from '../../../shared/config.js';
 import { OIDC_ERRORS } from '../../../shared/domain/constants.js';
@@ -23,6 +23,8 @@ const defaultSessionTemporaryStorage = temporaryStorage.withPrefix('oidc-session
 export class OidcAuthenticationService {
   #isReady = false;
   #isReadyForPixAdmin = false;
+  #openIdClient;
+  #openIdClientConfig;
 
   constructor(
     {
@@ -47,7 +49,7 @@ export class OidcAuthenticationService {
       isVisible = true,
       claimMapping,
     },
-    { sessionTemporaryStorage = defaultSessionTemporaryStorage } = {},
+    { sessionTemporaryStorage = defaultSessionTemporaryStorage, openIdClient = client } = {},
   ) {
     this.accessTokenLifespanMs = ms(accessTokenLifespan);
     this.additionalRequiredProperties = additionalRequiredProperties;
@@ -68,6 +70,7 @@ export class OidcAuthenticationService {
     this.slug = slug;
     this.source = source;
     this.isVisible = isVisible;
+    this.#openIdClient = openIdClient;
 
     claimMapping = claimMapping || DEFAULT_CLAIM_MAPPING;
 
@@ -105,20 +108,20 @@ export class OidcAuthenticationService {
     return this.#isReadyForPixAdmin;
   }
 
-  async createClient() {
+  async initializeClientConfig() {
+    if (this.#openIdClientConfig) return;
+
     try {
-      const issuer = await Issuer.discover(this.openidConfigurationUrl);
       const metadata = {
-        client_id: this.clientId,
         client_secret: this.clientSecret,
-        redirect_uris: [this.redirectUri],
+        ...this.openidClientExtraMetadata,
       };
 
-      if (this.openidClientExtraMetadata) {
-        Object.assign(metadata, this.openidClientExtraMetadata);
-      }
-
-      this.client = new issuer.Client(metadata);
+      this.#openIdClientConfig = await this.#openIdClient.discovery(
+        new URL(this.openidConfigurationUrl),
+        this.clientId,
+        metadata,
+      );
     } catch (error) {
       logger.error(`OIDC Provider "${this.identityProvider}" is UNAVAILABLE: ${error}`);
     }
@@ -145,10 +148,27 @@ export class OidcAuthenticationService {
   }
 
   async exchangeCodeForTokens({ code, state, iss, nonce, sessionState }) {
-    let tokenSet;
-
     try {
-      tokenSet = await this.client.callback(this.redirectUri, { code, state, iss }, { nonce, state: sessionState });
+      const currentUrl = new URL(this.redirectUri);
+      if (code) currentUrl.searchParams.append('code', code);
+      if (state) currentUrl.searchParams.append('state', state);
+      if (iss) currentUrl.searchParams.append('iss', iss);
+      if (sessionState) currentUrl.searchParams.append('session_state', sessionState);
+
+      const checks = { expectedNonce: nonce, expectedState: sessionState };
+
+      const tokenResponse = await this.#openIdClient.authorizationCodeGrant(
+        this.#openIdClientConfig,
+        currentUrl,
+        checks,
+      );
+
+      return new AuthenticationSessionContent({
+        accessToken: tokenResponse.access_token,
+        expiresIn: tokenResponse.expires_in,
+        idToken: tokenResponse.id_token,
+        refreshToken: tokenResponse.refresh_token,
+      });
     } catch (error) {
       _monitorOidcError(error.message, {
         data: { code, nonce, organizationName: this.organizationName, sessionState, state, iss },
@@ -157,40 +177,23 @@ export class OidcAuthenticationService {
       });
       throw new OidcError({ message: error.message });
     }
-
-    const {
-      access_token: accessToken,
-      expires_in: expiresIn,
-      id_token: idToken,
-      refresh_token: refreshToken,
-    } = tokenSet;
-
-    return new AuthenticationSessionContent({
-      accessToken,
-      expiresIn,
-      idToken,
-      refreshToken,
-    });
   }
 
   getAuthorizationUrl() {
-    const state = randomUUID();
-    const nonce = randomUUID();
-    const authorizationParameters = {
-      nonce,
-      redirect_uri: this.redirectUri,
-      scope: this.scope,
-      state,
-    };
-
-    if (this.extraAuthorizationUrlParameters) {
-      Object.assign(authorizationParameters, this.extraAuthorizationUrlParameters);
-    }
-
-    let redirectTarget;
-
     try {
-      redirectTarget = this.client.authorizationUrl(authorizationParameters);
+      const state = randomUUID();
+      const nonce = randomUUID();
+      const parameters = {
+        nonce,
+        redirect_uri: this.redirectUri,
+        scope: this.scope,
+        state,
+        ...this.extraAuthorizationUrlParameters,
+      };
+
+      const redirectTarget = this.#openIdClient.buildAuthorizationUrl(this.#openIdClientConfig, parameters);
+
+      return { redirectTarget, state, nonce };
     } catch (error) {
       _monitorOidcError(error.message, {
         data: { organizationName: this.organizationName },
@@ -199,15 +202,13 @@ export class OidcAuthenticationService {
       });
       throw new OidcError({ message: error.message });
     }
-
-    return { redirectTarget, state, nonce };
   }
 
   async getUserInfo({ idToken, accessToken }) {
     let userInfo = jsonwebtoken.decode(idToken);
 
     if (this.claimManager.hasMissingClaims(userInfo)) {
-      userInfo = await this._getUserInfoFromEndpoint({ accessToken });
+      userInfo = await this._getUserInfoFromEndpoint({ accessToken, expectedSubject: userInfo.sub });
     }
 
     return {
@@ -260,7 +261,7 @@ export class OidcAuthenticationService {
     }
 
     try {
-      const endSessionUrl = this.client.endSessionUrl(parameters);
+      const endSessionUrl = this.#openIdClient.buildEndSessionUrl(this.#openIdClientConfig, parameters);
 
       await this.sessionTemporaryStorage.delete(key);
 
@@ -275,11 +276,11 @@ export class OidcAuthenticationService {
     }
   }
 
-  async _getUserInfoFromEndpoint({ accessToken }) {
+  async _getUserInfoFromEndpoint({ accessToken, expectedSubject }) {
     let userInfo;
 
     try {
-      userInfo = await this.client.userinfo(accessToken);
+      userInfo = await this.#openIdClient.fetchUserInfo(this.#openIdClientConfig, accessToken, expectedSubject);
     } catch (error) {
       _monitorOidcError(error.message, {
         data: { organizationName: this.organizationName },

@@ -10,11 +10,13 @@ import {
   insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../test-helper.js';
+import { createMockedTestOidcProvider } from '../../../tooling/openid-client/openid-client-mocks.js';
 
 describe('Acceptance | Identity Access Management | Route | Admin | oidc-provider', function () {
   let server;
 
   beforeEach(async function () {
+    await createMockedTestOidcProvider();
     server = await createServer();
   });
 

@@ -112,12 +112,13 @@ describe('Unit | Identity Access Management | Domain | Services | oidc-authentic
     context('when oidc provider service exists and loaded', function () {
       it('configures openid client for ready oidc provider service and returns true', async function () {
         // given
-        const createClient = sinon.stub().resolves();
+        const initializeClientConfig = sinon.stub().resolves();
         const oidcProviderServices = [
           {
             code: 'OIDC',
             isReady: true,
-            createClient,
+            isClientConfigInitialized: false,
+            initializeClientConfig,
           },
         ];
         await oidcAuthenticationServiceRegistry.loadOidcProviderServices(oidcProviderServices);
@@ -129,27 +130,7 @@ describe('Unit | Identity Access Management | Domain | Services | oidc-authentic
 
         // then
         expect(result).to.be.true;
-        expect(createClient).to.have.been.calledOnce;
-      });
-
-      context('when there is already a client instantiated', function () {
-        it('returns undefined', async function () {
-          // given
-          const oidcProviderServices = [
-            {
-              code: 'OIDC',
-              isReady: true,
-              client: {},
-            },
-          ];
-          await oidcAuthenticationServiceRegistry.loadOidcProviderServices(oidcProviderServices);
-
-          // when
-          const result = await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode('OIDC');
-
-          // then
-          expect(result).to.be.undefined;
-        });
+        expect(initializeClientConfig).to.have.been.calledOnce;
       });
     });
   });

@@ -21,6 +21,7 @@ import { knex as datamartKnex } from '../datamart/knex-database-connection.js';
 import { knex as datawarehouseKnex } from '../datawarehouse/knex-database-connection.js';
 import { DatabaseBuilder } from '../db/database-builder/database-builder.js';
 import { disconnect, knex } from '../db/knex-database-connection.js';
+import { createServer } from '../server.js';
 import { createMaddoServer } from '../server.maddo.js';
 import { PIX_ADMIN } from '../src/authorization/domain/constants.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
@@ -43,7 +44,6 @@ import * as domainBuilder from './tooling/domain-builder/factory/index.js';
 import { jobChai } from './tooling/jobs/expect-job.js';
 import { buildLearningContent as learningContentBuilder } from './tooling/learning-content-builder/index.js';
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
-import { createServerWithTestOidcProvider } from './tooling/server/hapi-server-with-test-oidc-provider.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
 import { createTempFile, removeTempFile } from './tooling/temporary-file.js';
 
@@ -343,7 +343,7 @@ export {
   catchErr,
   catchErrSync,
   createMaddoServer,
-  createServerWithTestOidcProvider as createServer,
+  createServer,
   createTempFile,
   databaseBuilder,
   datamartBuilder,
