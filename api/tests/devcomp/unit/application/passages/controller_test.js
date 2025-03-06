@@ -10,10 +10,6 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
       const moduleId = Symbol('module-id');
       const passage = Symbol('passage');
       const userId = Symbol('user-id');
-      const usecases = {
-        createPassage: sinon.stub(),
-      };
-      usecases.createPassage.withArgs({ moduleId, userId }).returns(passage);
       const passageSerializer = {
         serialize: sinon.stub(),
       };
@@ -28,6 +24,15 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
 
       const extractUserIdFromRequestStub = sinon.stub(requestResponseUtils, 'extractUserIdFromRequest');
       extractUserIdFromRequestStub.withArgs(request).returns(userId);
+      const requestTimestamp = new Date('2025-01-01').getTime();
+      const extractTimestampStub = sinon
+        .stub(requestResponseUtils, 'extractTimestampFromRequest')
+        .returns(requestTimestamp);
+
+      const usecases = {
+        createPassage: sinon.stub(),
+      };
+      usecases.createPassage.withArgs({ moduleId, userId, occurredAt: new Date(requestTimestamp) }).returns(passage);
 
       // when
       await passageController.create({ payload: { data: { attributes: { 'module-id': moduleId } } } }, hStub, {
@@ -37,6 +42,7 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
 
       // then
       expect(created).to.have.been.called;
+      expect(extractTimestampStub).to.have.been.calledOnce;
     });
   });
 
