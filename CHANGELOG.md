@@ -1,5 +1,21 @@
 # Pix Changelog
 
+## v5.58.0 (06/03/2025)
+
+
+### :rocket: Amélioration
+- [#11547](https://github.com/1024pix/pix/pull/11547) [FEATURE] Afficher la date de dernière connexion par rapport à la méthode de connexion utilisée (PIX-16631).
+- [#11559](https://github.com/1024pix/pix/pull/11559) [FEATURE] Sauvegarder les événements `PASSAGE_TERMINATED`(PIX-16811).
+- [#11552](https://github.com/1024pix/pix/pull/11552) [FEATURE] Enregistrer la date de dernière connexion Pix pour les méthodes de connexion GAR (PIX-16624).
+- [#11538](https://github.com/1024pix/pix/pull/11538) [FEATURE] Enregistrer la date de dernière connexion dans Authentication method pour les connexions OIDC (PIX-16742).
+- [#11558](https://github.com/1024pix/pix/pull/11558) [FEATURE] Utiliser PixTable dans les tableaux de session et de certification sur Pix Admin (PIX-16809).
+
+### :building_construction: Tech
+- [#11509](https://github.com/1024pix/pix/pull/11509) [TECH] Utiliser le PixTable dans tout PixOrga (PIX-15793).
+
+### :arrow_up: Montée de version
+- [#11570](https://github.com/1024pix/pix/pull/11570) [BUMP] Update dependency @1024pix/pix-ui to ^54.12.2 (orga).
+
 ## v5.57.0 (05/03/2025)
 
 
