@@ -1,38 +1,32 @@
 @use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/typography';
 
-.certification-not-certifiable__panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 10px;
-  margin-bottom: 50px;
-  margin-left: 10px;
-  padding: var(--pix-spacing-8x);
-  text-rendering: optimizelegibility;
+.certification-not-certifiable {
 
-  @include breakpoints.device-is('desktop') {
-    padding: 50px 70px 40px;
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: var(--pix-spacing-3x) 0;
+    padding: var(--pix-spacing-4x) var(--pix-spacing-4x) var(--pix-spacing-12x) var(--pix-spacing-4x);
+
+    @include breakpoints.device-is('tablet') {
+      margin: var(--pix-spacing-6x) 0;
+    }
   }
-}
 
-.certification-not-certifiable__button {
-  margin-top: 20px;
-}
+  &__button {
+    margin-top: 20px;
+  }
 
-.certification-not-certifiable__title {
-  @extend %pix-title-m;
+  &__title {
+    @extend %pix-title-m;
+  }
 
-  text-align: center;
-}
+  &__text {
+    @extend %pix-body-l;
 
-.certification-not-certifiable__text {
-  @extend %pix-body-l;
-
-  margin-top: var(--pix-spacing-4x);
-  text-align: center;
-
-  @include breakpoints.device-is('desktop') {
-    max-width: 850px;
+    margin-top: var(--pix-spacing-4x);
+    text-align: center;
   }
 }
