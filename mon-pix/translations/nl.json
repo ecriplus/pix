@@ -763,8 +763,16 @@
           "first-name": "Voornaam",
           "session-number": "Sessienummer",
           "session-number-information": "Alleen meegedeeld door de surveillant aan het begin van de sessie"
-        }
-      },
+        },
+      "placeholders": {
+        "birth-day": "DD",
+        "birth-month": "MM",
+        "birth-name": "ex: Dupont",
+        "birth-year": "JJJJ",
+        "first-name": "ex: Jean",
+        "session-number": "ex: 123456"
+      }
+    },
       "title": "Doe mee aan een certificeringssessie"
     },
     "certification-not-certifiable": {

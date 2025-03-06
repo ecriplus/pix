@@ -1,11 +1,4 @@
 <div class="congratulations-banner">
-  <PixIconButton
-    @iconName="close"
-    @ariaLabel={{t "common.actions.close"}}
-    @triggerAction={{@closeBanner}}
-    @withBackground={{true}}
-    class="icon-button congratulations-banner__icon"
-  />
   <p class="congratulations-banner__message">
     {{t "pages.certification-joiner.congratulation-banner.message" fullName=@fullName htmlSafe=true}}
   </p>

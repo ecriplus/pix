@@ -10,19 +10,29 @@
       @validationStatus={{this.sessionIdStatus}}
       pattern={{this.SESSION_ID_VALIDATION_PATTERN}}
       title={{t "pages.certification-joiner.form.fields-validation.session-number-error"}}
-      size="6"
       {{on "input" this.checkSessionIdIsValid}}
       {{on "change" this.setSessionId}}
       inputmode="decimal"
       required="true"
       @subLabel={{t "pages.certification-joiner.form.fields.session-number-information"}}
+      placeholder={{t "pages.certification-joiner.form.placeholders.session-number"}}
     >
       <:label>{{t "pages.certification-joiner.form.fields.session-number"}}</:label>
     </PixInput>
-    <PixInput @id="certificationJoinerFirstName" required="true" {{on "change" this.setFirstName}}>
+    <PixInput
+      @id="certificationJoinerFirstName"
+      required="true"
+      {{on "change" this.setFirstName}}
+      placeholder={{t "pages.certification-joiner.form.placeholders.first-name"}}
+    >
       <:label>{{t "pages.certification-joiner.form.fields.first-name"}}</:label>
     </PixInput>
-    <PixInput @id="certificationJoinerLastName" required="true" {{on "change" this.setLastName}}>
+    <PixInput
+      @id="certificationJoinerLastName"
+      required="true"
+      {{on "change" this.setLastName}}
+      placeholder={{t "pages.certification-joiner.form.placeholders.birth-name"}}
+    >
       <:label>{{t "pages.certification-joiner.form.fields.birth-name"}}</:label>
     </PixInput>
     <div>
@@ -35,7 +45,7 @@
           min="1"
           max="31"
           type="number"
-          placeholder="JJ"
+          placeholder={{t "pages.certification-joiner.form.placeholders.birth-day"}}
           {{on "change" this.setDayOfBirth}}
           {{on "input" this.handleDayInputChange}}
           {{on "focus-in" this.handleInputFocus}}
@@ -49,7 +59,7 @@
           min="1"
           max="12"
           type="number"
-          placeholder="MM"
+          placeholder={{t "pages.certification-joiner.form.placeholders.birth-month"}}
           {{on "change" this.setMonthOfBirth}}
           {{on "input" this.handleMonthInputChange}}
           {{on "focus-in" this.handleInputFocus}}
@@ -63,7 +73,7 @@
           min="1900"
           max="2100"
           type="number"
-          placeholder="AAAA"
+          placeholder={{t "pages.certification-joiner.form.placeholders.birth-year"}}
           {{on "change" this.setYearOfBirth}}
           {{on "focus-in" this.handleInputFocus}}
           @screenReaderOnly="true"

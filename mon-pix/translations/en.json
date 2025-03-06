@@ -757,6 +757,14 @@
         },
         "fields-validation": {
           "session-number-error": "The session ID must only contain numbers."
+        },
+        "placeholders": {
+          "birth-day": "DD",
+          "birth-month": "MM",
+          "birth-name": "ex: Dupont",
+          "birth-year": "YYYY",
+          "first-name": "ex: Jean",
+          "session-number": "ex: 123456"
         }
       },
       "title": "Join a certification session"

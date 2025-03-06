@@ -763,8 +763,16 @@
           "first-name": "Nombre",
           "session-number": "Número de sesión",
           "session-number-information": "Comunicado únicamente por el supervisor al inicio de la sesión"
-        }
-      },
+        },
+      "placeholders": {
+        "birth-day": "DD",
+        "birth-month": "MM",
+        "birth-name": "ex: Dupont",
+        "birth-year": "YYYY",
+        "first-name": "ex: Jean",
+        "session-number": "ex: 123456"
+      }
+    },
       "title": "Unirse a una sesión de certificación"
     },
     "certification-not-certifiable": {

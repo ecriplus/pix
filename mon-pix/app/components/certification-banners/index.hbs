@@ -1,14 +1,12 @@
-{{#if this.showCongratulationsBanner}}
-  <CertificationBanners::CongratulationsCertificationBanner @fullName={{@fullName}} @closeBanner={{this.closeBanner}}>
-    <:eligibleComplementaryCertifications>
-      {{#if (gt this.eligibleComplementaryCertifications.length 0)}}
-        <CertificationBanners::EligibleComplementaryCertificationBanner
-          @complementaryCertifications={{this.eligibleComplementaryCertifications}}
-        />
-      {{/if}}
-    </:eligibleComplementaryCertifications>
-  </CertificationBanners::CongratulationsCertificationBanner>
-{{/if}}
+<CertificationBanners::CongratulationsCertificationBanner @fullName={{@fullName}}>
+  <:eligibleComplementaryCertifications>
+    {{#if (gt this.eligibleComplementaryCertifications.length 0)}}
+      <CertificationBanners::EligibleComplementaryCertificationBanner
+        @complementaryCertifications={{this.eligibleComplementaryCertifications}}
+      />
+    {{/if}}
+  </:eligibleComplementaryCertifications>
+</CertificationBanners::CongratulationsCertificationBanner>
 
 {{#if (gt this.outdatedLowerLevelComplementaryCertifications.length 0)}}
   <CertificationBanners::OutdatedComplementaryCertificationBanner

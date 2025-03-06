@@ -757,6 +757,14 @@
         },
         "fields-validation": {
           "session-number-error": "Le numéro de session est composé uniquement de chiffres."
+        },
+        "placeholders": {
+          "birth-day": "JJ",
+          "birth-month": "MM",
+          "birth-name": "ex: Dupont",
+          "birth-year": "AAAA",
+          "first-name": "ex: Jean",
+          "session-number": "ex: 123456"
         }
       },
       "title": "Rejoindre une session de certification"
