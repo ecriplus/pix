@@ -5,7 +5,7 @@ import { ScoringAndCapacitySimulatorReport } from './ScoringAndCapacitySimulator
 
 const SCORING_CONFIGURATION_WEIGHTS = CertificationAssessmentScoreV3.weightsAndCoefficients.map(({ weight }) => weight);
 
-// TODO change this model to a service
+// TODO change CapacitySimulator model to a service
 export class CapacitySimulator {
   static compute({ certificationScoringIntervals, competencesForScoring, score }) {
     const scoringIntervals = new Intervals({ intervals: certificationScoringIntervals });
@@ -44,8 +44,7 @@ export class CapacitySimulator {
   }
 }
 
-// TODO move this to result
-// TODO Split this to a service
+// TODO Split function to a service, and change contexte to `results`
 export function findIntervalIndexFromScore({ score }) {
   const weights = SCORING_CONFIGURATION_WEIGHTS;
   let cumulativeSumOfWeights = weights[0];
