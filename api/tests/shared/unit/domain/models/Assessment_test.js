@@ -67,7 +67,7 @@ describe('Unit | Domain | Models | Assessment', function () {
         // eslint-disable-next-line mocha/no-setup-in-describe
         type: Assessment.types.CAMPAIGN,
         hasCheckpoints: false,
-        showProgressBar: true,
+        showProgressBar: false,
         showLevelup: false,
         expectedTitle: 'Ma Campagne',
         // eslint-disable-next-line mocha/no-setup-in-describe

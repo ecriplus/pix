@@ -125,10 +125,11 @@ class Assessment {
         break;
       }
       case Assessment.types.CAMPAIGN: {
+        const isAssessmentCampaignNoFlash = !this.isFlash() && campaign.isAssessment;
         this.campaignCode = campaign.code;
-        this.showProgressBar = !this.isFlash() && (campaign.isAssessment || campaign.isExam);
-        this.hasCheckpoints = !this.isFlash() && campaign.isAssessment;
-        this.showLevelup = !this.isFlash() && campaign.isAssessment;
+        this.showProgressBar = isAssessmentCampaignNoFlash;
+        this.hasCheckpoints = isAssessmentCampaignNoFlash;
+        this.showLevelup = isAssessmentCampaignNoFlash;
         this.title = campaign.title;
         break;
       }
