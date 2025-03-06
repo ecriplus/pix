@@ -6,6 +6,7 @@ const DEFAULT_IMAGE_URL = 'https://images.pix.fr/profil-cible/Illu_GEN.svg';
 class TargetProfileForCreation {
   constructor({
     name,
+    internalName,
     category,
     description,
     comment,
@@ -15,6 +16,7 @@ class TargetProfileForCreation {
     areKnowledgeElementsResettable,
   }) {
     this.name = name;
+    this.internalName = internalName;
     this.category = category;
     this.description = description;
     this.comment = comment;
@@ -28,6 +30,7 @@ class TargetProfileForCreation {
     validate(creationCommand);
     return new TargetProfileForCreation({
       name: creationCommand.name,
+      internalName: creationCommand.internalName,
       category: creationCommand.category,
       description: creationCommand.description,
       comment: creationCommand.comment,
@@ -40,9 +43,11 @@ class TargetProfileForCreation {
 
   static copyTargetProfile(targetProfileToCopy) {
     const copiedTargetProfileName = TARGET_PROFILE_COPY_NAME_PREFIX + targetProfileToCopy.name;
+    const copiedTargetProfileInternalName = TARGET_PROFILE_COPY_NAME_PREFIX + targetProfileToCopy.internalName;
 
     return new TargetProfileForCreation({
       name: copiedTargetProfileName,
+      internalName: copiedTargetProfileInternalName,
       category: targetProfileToCopy.category,
       description: targetProfileToCopy.description,
       comment: targetProfileToCopy.comment,

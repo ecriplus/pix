@@ -8,14 +8,14 @@ describe('Unit | Serializer | JSONAPI | target-profile-serializer', function () 
       const targetProfileSummaries = [
         domainBuilder.buildTargetProfileSummaryForAdmin({
           id: 1,
-          name: 'TPA',
+          internalName: 'TPA',
           outdated: false,
           category: 'OTHER',
           createdAt: new Date('2021-01-01'),
         }),
         domainBuilder.buildTargetProfileSummaryForAdmin({
           id: 2,
-          name: 'TPB',
+          internalName: 'TPB',
           category: 'POUET',
           outdated: true,
           createdAt: new Date('2021-01-01'),
@@ -33,7 +33,7 @@ describe('Unit | Serializer | JSONAPI | target-profile-serializer', function () 
             type: 'target-profile-summaries',
             id: '1',
             attributes: {
-              name: 'TPA',
+              'internal-name': 'TPA',
               outdated: false,
               category: 'OTHER',
               'created-at': new Date('2021-01-01'),
@@ -44,7 +44,7 @@ describe('Unit | Serializer | JSONAPI | target-profile-serializer', function () 
             type: 'target-profile-summaries',
             id: '2',
             attributes: {
-              name: 'TPB',
+              'internal-name': 'TPB',
               category: 'POUET',
               outdated: true,
               'created-at': new Date('2021-01-01'),

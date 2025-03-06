@@ -8,7 +8,7 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
       // given
       const targetProfile = {
         id: 1,
-        name: 'Go go target profile',
+        internalName: 'Go go target profile',
         outdated: false,
         createdAt: new Date('2021-01-01'),
         category: TargetProfile.categories.PREDEFINED,
@@ -35,11 +35,11 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
       it('return sorted active target profile first', async function () {
         // given
         const targetProfileData = [
-          { id: 1, name: 'TPA', outdated: false },
-          { id: 2, name: 'TPA', outdated: true },
-          { id: 5, name: 'TPA', outdated: true },
-          { id: 6, name: 'TPA', outdated: true },
-          { id: 7, name: 'TPA', outdated: false },
+          { id: 1, internalName: 'TPA', outdated: false },
+          { id: 2, internalName: 'TPA', outdated: true },
+          { id: 5, internalName: 'TPA', outdated: true },
+          { id: 6, internalName: 'TPA', outdated: true },
+          { id: 7, internalName: 'TPA', outdated: false },
         ];
         targetProfileData.map(databaseBuilder.factory.buildTargetProfile);
         await databaseBuilder.commit();
@@ -63,11 +63,11 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
       it('return sorted by name target profile first', async function () {
         // given
         const targetProfileData = [
-          { id: 2, name: 'TPE', outdated: true },
-          { id: 4, name: 'TPD', outdated: true },
-          { id: 5, name: 'TPC', outdated: false },
-          { id: 6, name: 'TPB', outdated: true },
-          { id: 7, name: 'TPA', outdated: false },
+          { id: 2, internalName: 'TPE', outdated: true },
+          { id: 4, internalName: 'TPD', outdated: true },
+          { id: 5, internalName: 'TPC', outdated: false },
+          { id: 6, internalName: 'TPB', outdated: true },
+          { id: 7, internalName: 'TPA', outdated: false },
         ];
         targetProfileData.map(databaseBuilder.factory.buildTargetProfile);
         await databaseBuilder.commit();
@@ -84,8 +84,8 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
 
         // then
         expect(actualTargetProfileSummaries).to.have.lengthOf(5);
-        expect(actualTargetProfileSummaries[0].name).to.equal('TPA');
-        expect(actualTargetProfileSummaries[1].name).to.equal('TPC');
+        expect(actualTargetProfileSummaries[0].internalName).to.equal('TPA');
+        expect(actualTargetProfileSummaries[1].internalName).to.equal('TPC');
       });
     });
 
@@ -93,9 +93,9 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
       it('return TargetProfileSummariesForAdmin in the page', async function () {
         // given
         const targetProfileData = [
-          { id: 1, name: 'TPA', outdated: false },
-          { id: 2, name: 'TPB', outdated: true },
-          { id: 3, name: 'TPC', outdated: false },
+          { id: 1, internalName: 'TPA', outdated: false },
+          { id: 2, internalName: 'TPB', outdated: true },
+          { id: 3, internalName: 'TPC', outdated: false },
         ];
         targetProfileData.map(databaseBuilder.factory.buildTargetProfile);
         await databaseBuilder.commit();
@@ -121,11 +121,11 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
       it('return TargetProfileSummariesForAdmin in the page', async function () {
         // given
         const targetProfileData = [
-          { id: 1, name: 'TPA', outdated: false },
-          { id: 2, name: 'TPB', outdated: true },
-          { id: 3, name: 'TPC', outdated: false },
-          { id: 5, name: 'TPE', outdated: true },
-          { id: 4, name: 'TPD', outdated: false },
+          { id: 1, internalName: 'TPA', outdated: false },
+          { id: 2, internalName: 'TPB', outdated: true },
+          { id: 3, internalName: 'TPC', outdated: false },
+          { id: 5, internalName: 'TPE', outdated: true },
+          { id: 4, internalName: 'TPD', outdated: false },
         ];
         targetProfileData.map(databaseBuilder.factory.buildTargetProfile);
         await databaseBuilder.commit();
@@ -152,21 +152,21 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
       beforeEach(function () {
         disciplineTargetProfile = {
           id: 1,
-          name: 'TP DISCIPLINE',
+          internalName: 'TP DISCIPLINE',
           outdated: false,
           createdAt: new Date('2021-01-01'),
           category: TargetProfile.categories.DISCIPLINE,
         };
         otherTargetProfile = {
           id: 2,
-          name: 'TP OTHER',
+          internalName: 'TP OTHER',
           outdated: true,
           createdAt: new Date('2021-01-01'),
           category: TargetProfile.categories.OTHER,
         };
         backToSchoolTargetProfile = {
           id: 3,
-          name: 'TP BACK_TO_SCHOOL',
+          internalName: 'TP BACK_TO_SCHOOL',
           outdated: false,
           createdAt: new Date('2021-01-01'),
           category: TargetProfile.categories.BACK_TO_SCHOOL,
@@ -177,10 +177,10 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
         );
         return databaseBuilder.commit();
       });
-      context('name filter', function () {
-        it('should return only target profiles matching "name" discipline in filter', async function () {
+      context('internalName filter', function () {
+        it('should return only target profiles matching "internalName" discipline in filter', async function () {
           // given
-          const filter = { name: 'discipline' };
+          const filter = { internalName: 'discipline' };
           const page = { number: 1, size: 10 };
 
           // when
@@ -262,7 +262,7 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
       context('no match', function () {
         it('should return an empty array when no records match the filter', async function () {
           // given
-          const filter = { name: 'COUCOU' };
+          const filter = { internalName: 'COUCOU' };
           const page = { number: 1, size: 10 };
 
           // when

@@ -9,6 +9,7 @@ const update = async function (targetProfile) {
   const {
     id: targetProfileId,
     name,
+    internalName,
     imageUrl,
     description,
     comment,
@@ -18,6 +19,7 @@ const update = async function (targetProfile) {
 
   await knexConn(TARGET_PROFILE_TABLE_NAME).where({ id: targetProfileId }).update({
     name,
+    internalName,
     imageUrl,
     description,
     comment,

@@ -25,6 +25,7 @@ const get = async function ({ id, locale = FRENCH_FRANCE }) {
     .select(
       'target-profiles.id',
       'target-profiles.name',
+      'target-profiles.internalName',
       'target-profiles.outdated',
       'target-profiles.imageUrl',
       'target-profiles.createdAt',
@@ -47,9 +48,17 @@ const get = async function ({ id, locale = FRENCH_FRANCE }) {
     .where('targetProfileId', targetProfileDTO.id);
   return _toDomain(targetProfileDTO, tubesData, locale);
 };
+
 const update = async function (targetProfile) {
   let results;
-  const editedAttributes = _.pick(targetProfile, ['name', 'outdated', 'description', 'comment', 'isSimplifiedAccess']);
+  const editedAttributes = _.pick(targetProfile, [
+    'name',
+    'internalName',
+    'outdated',
+    'description',
+    'comment',
+    'isSimplifiedAccess',
+  ]);
 
   try {
     results = await knex('target-profiles')
@@ -71,6 +80,7 @@ const create = async function ({ targetProfileForCreation }) {
   const knexConn = DomainTransaction.getConnection();
   const targetProfileRawData = _.pick(targetProfileForCreation, [
     'name',
+    'internalName',
     'category',
     'description',
     'comment',
@@ -99,7 +109,7 @@ const findByOrganization = async function ({ organizationId }) {
   const results = await knex('target-profiles')
     .select({
       id: 'target-profiles.id',
-      name: 'target-profiles.name',
+      internalName: 'target-profiles.internalName',
       outdated: 'target-profiles.outdated',
       ownerOrganizationId: 'target-profiles.ownerOrganizationId',
       sharedOrganizationId: 'target-profile-shares.organizationId',

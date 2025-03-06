@@ -19,6 +19,7 @@ const deserialize = function (json) {
   const deserializedData = {};
 
   if (attributes.name !== undefined) deserializedData.name = attributes.name;
+  if (attributes['internal-name'] !== undefined) deserializedData.internalName = attributes['internal-name'];
   if (attributes.category !== undefined) deserializedData.category = attributes.category;
   if (attributes.description !== undefined) deserializedData.description = attributes.description;
   if (attributes.comment !== undefined) deserializedData.comment = attributes.comment;

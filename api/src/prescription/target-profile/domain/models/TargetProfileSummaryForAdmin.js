@@ -4,7 +4,7 @@ class TargetProfileSummaryForAdmin {
 
   constructor(params = {}) {
     this.id = params.id;
-    this.name = params.name;
+    this.internalName = params.internalName;
     this.outdated = params.outdated;
     this.category = params.category;
     this.createdAt = params.createdAt;

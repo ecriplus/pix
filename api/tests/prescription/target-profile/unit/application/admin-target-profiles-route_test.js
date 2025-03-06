@@ -1393,6 +1393,7 @@ describe('Unit | Application | Admin Target Profiles | Routes', function () {
         data: {
           attributes: {
             name: 'targetProfileName',
+            'internal-name': 'targetProfileInternalName',
             category: 'OTHER',
             description: 'coucou maman',
             comment: 'coucou papa',

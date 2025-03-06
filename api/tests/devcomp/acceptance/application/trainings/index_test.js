@@ -463,6 +463,7 @@ describe('Acceptance | Controller | training-controller', function () {
       const targetProfile = databaseBuilder.factory.buildTargetProfile({
         id: 1,
         name: 'Super profil cible',
+        internalName: 'Super profil cible interne',
         outdated: false,
         'created-at': undefined,
       });
@@ -476,7 +477,7 @@ describe('Acceptance | Controller | training-controller', function () {
         type: 'target-profile-summaries',
         id: `${targetProfile.id}`,
         attributes: {
-          name: targetProfile.name,
+          'internal-name': targetProfile.internalName,
           outdated: false,
           'created-at': undefined,
           'can-detach': false,

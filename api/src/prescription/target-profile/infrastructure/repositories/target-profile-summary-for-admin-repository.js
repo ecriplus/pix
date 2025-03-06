@@ -5,9 +5,9 @@ import { TargetProfileSummaryForAdmin } from '../../domain/models/TargetProfileS
 
 const findPaginatedFiltered = async function ({ filter, page }) {
   const query = knex('target-profiles')
-    .select('id', 'name', 'outdated', 'category', 'createdAt')
+    .select('id', 'internalName', 'outdated', 'category', 'createdAt')
     .orderBy('outdated', 'ASC')
-    .orderBy('name', 'ASC')
+    .orderBy('internalName', 'ASC')
     .modify(_applyFilters, filter);
 
   const { results, pagination } = await fetchPage(query, page);
@@ -22,7 +22,7 @@ const findByTraining = async function ({ trainingId }) {
   const results = await knexConn('target-profiles')
     .select({
       id: 'target-profiles.id',
-      name: 'target-profiles.name',
+      internalName: 'target-profiles.internalName',
       outdated: 'target-profiles.outdated',
       ownerOrganizationId: 'target-profiles.ownerOrganizationId',
     })
@@ -36,9 +36,9 @@ const findByTraining = async function ({ trainingId }) {
 export { findByTraining, findPaginatedFiltered };
 
 function _applyFilters(qb, filter) {
-  const { name, id, categories } = filter;
-  if (name) {
-    qb.whereILike('name', `%${name}%`);
+  const { internalName, id, categories } = filter;
+  if (internalName) {
+    qb.whereILike('internalName', `%${internalName}%`);
   }
   if (id) {
     qb.where({ id });
