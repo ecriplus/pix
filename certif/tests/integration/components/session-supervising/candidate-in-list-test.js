@@ -1,6 +1,7 @@
 import { render as renderScreen } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -425,9 +426,12 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
         const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
 
         // then
-        assert.dom(screen.getByText('Signalement en cours')).exists();
-        assert.dom(screen.queryByText('En cours')).doesNotExist();
-        assert.dom(screen.queryByText('Terminé')).doesNotExist();
+        assert
+          .dom(screen.getByText(t('common.forms.certification-labels.candidate-status.live-alerts.challenge.ongoing')))
+          .exists();
+        assert.dom(screen.getByText(t('common.forms.certification-labels.candidate-status.on-hold'))).exists();
+        assert.dom(screen.queryByText('common.forms.certification-labels.candidate-status.ongoing')).doesNotExist();
+        assert.dom(screen.queryByText(t('common.forms.certification-labels.candidate-status.finished'))).doesNotExist();
       });
 
       test('it displays the alert', async function (assert) {
@@ -485,8 +489,15 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
         const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
 
         // then
-        assert.dom(screen.getByText('Extension non détectée')).exists();
-        assert.dom(screen.queryByText('Signalement en cours')).doesNotExist();
+        assert
+          .dom(screen.getByText(t('common.forms.certification-labels.candidate-status.live-alerts.companion.ongoing')))
+          .exists();
+        assert.dom(screen.getByText(t('common.forms.certification-labels.candidate-status.on-hold'))).exists();
+        assert
+          .dom(
+            screen.queryByText(t('common.forms.certification-labels.candidate-status.live-alerts.challenge.ongoing')),
+          )
+          .doesNotExist();
       });
 
       test('it displays the alert', async function (assert) {
