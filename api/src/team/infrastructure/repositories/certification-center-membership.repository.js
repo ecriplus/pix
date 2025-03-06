@@ -288,6 +288,14 @@ const update = async function (certificationCenterMembership) {
   await knex(CERTIFICATION_CENTER_MEMBERSHIP_TABLE_NAME).update(data).where({ id: certificationCenterMembership.id });
 };
 
+const updateLastAccessedAt = async function ({ lastAccessedAt, userId, certificationCenterId }) {
+  const knexConnection = DomainTransaction.getConnection();
+
+  await knexConnection(CERTIFICATION_CENTER_MEMBERSHIP_TABLE_NAME)
+    .where({ userId, certificationCenterId })
+    .update({ lastAccessedAt, updatedAt: lastAccessedAt });
+};
+
 const findById = async function (certificationCenterMembershipId) {
   const certificationCenterMembership = await knex(CERTIFICATION_CENTER_MEMBERSHIP_TABLE_NAME)
     .select(
@@ -365,6 +373,7 @@ const certificationCenterMembershipRepository = {
   isMemberOfCertificationCenter,
   save,
   update,
+  updateLastAccessedAt,
   updateRefererStatusByUserIdAndCertificationCenterId,
 };
 

@@ -14,6 +14,7 @@ const buildCertificationCenterMembership = function ({
   disabledAt,
   isReferer = false,
   role = 'MEMBER',
+  lastAccessedAt,
 } = {}) {
   userId = _.isUndefined(userId) ? buildUser().id : userId;
   certificationCenterId = _.isUndefined(certificationCenterId) ? buildCertificationCenter().id : certificationCenterId;
@@ -32,6 +33,7 @@ const buildCertificationCenterMembership = function ({
     disabledAt,
     isReferer,
     role,
+    lastAccessedAt,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'certification-center-memberships',
