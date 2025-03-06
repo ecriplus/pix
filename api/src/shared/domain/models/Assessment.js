@@ -65,7 +65,6 @@ class Assessment {
     competenceId,
     campaignParticipationId,
     method,
-    campaignCode,
     campaign,
     challengeLiveAlerts,
     companionLiveAlerts,
@@ -89,7 +88,6 @@ class Assessment {
     this.competenceId = competenceId;
     this.campaignParticipationId = campaignParticipationId;
     this.method = method || Assessment.computeMethodFromType(this.type);
-    this.campaignCode = campaignCode;
     this.challengeLiveAlerts = challengeLiveAlerts;
     this.companionLiveAlerts = companionLiveAlerts;
 

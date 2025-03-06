@@ -26,7 +26,6 @@ function buildAssessment({
   lastChallengeId = null,
   lastQuestionState = Assessment.statesOfLastQuestion.ASKED,
   method,
-  campaignCode,
   campaign = null,
 } = {}) {
   return new Assessment({
@@ -51,7 +50,6 @@ function buildAssessment({
     course,
     campaignParticipationId,
     method,
-    campaignCode,
   });
 }
 
@@ -74,7 +72,6 @@ buildAssessment.ofTypeCampaign = function ({
   title = 'campaignTitle',
   method,
   campaign = buildCampaign(),
-  campaignCode,
 } = {}) {
   return buildAssessment({
     id,
@@ -96,7 +93,6 @@ buildAssessment.ofTypeCampaign = function ({
     targetProfile,
     method,
     campaign,
-    campaignCode,
   });
 };
 
@@ -141,7 +137,6 @@ buildAssessment.ofTypeCompetenceEvaluation = function ({
     targetProfile,
     knowledgeElements,
     campaignParticipation,
-    campaignCode: null,
   });
 };
 
