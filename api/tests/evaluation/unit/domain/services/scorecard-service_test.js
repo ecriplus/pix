@@ -284,6 +284,7 @@ describe('Unit | Service | ScorecardService', function () {
 
         campaignRepository = {
           findSkillIdsByCampaignParticipationId: sinon.stub(),
+          get: sinon.stub(),
         };
 
         assessmentRepository.findNotAbortedCampaignAssessmentsByUserId
@@ -371,6 +372,7 @@ describe('Unit | Service | ScorecardService', function () {
         campaignRepository.findSkillIdsByCampaignParticipationId
           .withArgs({ campaignParticipationId: campaignParticipation2.id })
           .resolves([firstSkillId, secondSkillId]);
+        campaignRepository.get.resolves(domainBuilder.buildCampaign());
 
         // when
         await scorecardService.resetScorecard({

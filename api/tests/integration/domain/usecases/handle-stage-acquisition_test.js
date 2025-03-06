@@ -2,7 +2,14 @@ import { STAGE_ACQUISITIONS_TABLE_NAME } from '../../../../db/migrations/2023072
 import { usecases } from '../../../../lib/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
-import { databaseBuilder, expect, knex, learningContentBuilder, mockLearningContent } from '../../../test-helper.js';
+import {
+  databaseBuilder,
+  domainBuilder,
+  expect,
+  knex,
+  learningContentBuilder,
+  mockLearningContent,
+} from '../../../test-helper.js';
 
 describe('Integration | Usecase | Handle Stage Acquisition', function () {
   let userId, assessment, stages, campaignParticipationId, targetProfileId, listSkill, learningContent;
@@ -76,7 +83,8 @@ describe('Integration | Usecase | Handle Stage Acquisition', function () {
       userId = databaseBuilder.factory.buildUser().id;
       targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
 
-      const campaignId = databaseBuilder.factory.buildCampaign({ targetProfileId }).id;
+      const campaignDTO = databaseBuilder.factory.buildCampaign({ targetProfileId });
+      const campaignId = campaignDTO.id;
       listSkill.forEach((skillId) => databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId }));
       campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
         campaignId,
@@ -88,6 +96,7 @@ describe('Integration | Usecase | Handle Stage Acquisition', function () {
         userId,
         campaignParticipationId,
         type: Assessment.types.CAMPAIGN,
+        campaign: domainBuilder.buildCampaign(campaignDTO),
       });
 
       await mockLearningContent(learningContentBuilder(learningContent));

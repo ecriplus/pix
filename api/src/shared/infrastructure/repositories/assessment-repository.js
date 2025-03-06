@@ -1,6 +1,7 @@
 import lodash from 'lodash';
 
 import { knex } from '../../../../db/knex-database-connection.js';
+import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { Assessment } from '../../domain/models/Assessment.js';
@@ -18,7 +19,10 @@ const getWithAnswers = async function (id) {
     .where('assessmentId', id)
     .orderBy('createdAt');
   assessment.answers = uniqBy(answers, 'challengeId');
-  return new Assessment(assessment);
+  return new Assessment({
+    ...assessment,
+    campaign: await _getAssociatedCampaign(assessment.campaignParticipationId),
+  });
 };
 
 const get = async function (id) {
@@ -28,7 +32,10 @@ const get = async function (id) {
   if (!assessment) {
     throw new NotFoundError("L'assessment n'existe pas ou son accès est restreint");
   }
-  return new Assessment(assessment);
+  return new Assessment({
+    ...assessment,
+    campaign: await _getAssociatedCampaign(assessment.campaignParticipationId),
+  });
 };
 
 const findLastCompletedAssessmentsForEachCompetenceByUser = async function (userId, limitDate) {
@@ -49,22 +56,46 @@ const findLastCompletedAssessmentsForEachCompetenceByUser = async function (user
 const getByAssessmentIdAndUserId = async function (assessmentId, userId) {
   const assessment = await knex('assessments').where({ id: assessmentId, userId }).first();
   if (!assessment) throw new NotFoundError();
-  return new Assessment(assessment);
+  return new Assessment({
+    ...assessment,
+    campaign: await _getAssociatedCampaign(assessment.campaignParticipationId),
+  });
 };
 
 const save = async function ({ assessment }) {
   const knexConn = DomainTransaction.getConnection();
   assessment.validate();
   const [assessmentCreated] = await knexConn('assessments').insert(_adaptModelToDb(assessment)).returning('*');
-  return new Assessment(assessmentCreated);
+  return new Assessment({
+    ...assessmentCreated,
+    campaign: await _getAssociatedCampaign(assessmentCreated.campaignParticipationId),
+  });
 };
 
 const findNotAbortedCampaignAssessmentsByUserId = async function (userId) {
-  const assessments = await knex('assessments').where({ userId, type: 'CAMPAIGN' }).andWhere('state', '!=', 'aborted');
-  return assessments.map((assessment) => {
-    return new Assessment(assessment);
-  });
+  const assessmentDTOs = await knex('assessments')
+    .where({ userId, type: 'CAMPAIGN' })
+    .andWhere('state', '!=', 'aborted');
+  const assessments = [];
+  for (const assessmentDTO of assessmentDTOs) {
+    assessments.push(
+      new Assessment({
+        ...assessmentDTO,
+        campaign: await _getAssociatedCampaign(assessmentDTO.campaignParticipationId),
+      }),
+    );
+  }
+  return assessments;
 };
+
+async function _getAssociatedCampaign(campaignParticipationId) {
+  let campaign = null;
+  if (campaignParticipationId) {
+    const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(campaignParticipationId);
+    campaign = await campaignRepository.get(campaignId);
+  }
+  return campaign;
+}
 
 const abortByAssessmentId = function (assessmentId) {
   return this._updateStateById({ id: assessmentId, state: Assessment.states.ABORTED });
@@ -109,7 +140,10 @@ const _updateStateById = async function ({ id, state }) {
     .where({ id })
     .update({ state, updatedAt: new Date() })
     .returning('*');
-  return new Assessment(assessment);
+  return new Assessment({
+    ...assessment,
+    campaign: await _getAssociatedCampaign(assessment.campaignParticipationId),
+  });
 };
 
 const updateLastQuestionDate = async function ({ id, lastQuestionDate }) {
@@ -126,7 +160,10 @@ const updateWhenNewChallengeIsAsked = async function ({ id, lastChallengeId }) {
     .update({ lastChallengeId, lastQuestionState: Assessment.statesOfLastQuestion.ASKED, updatedAt: new Date() })
     .returning('*');
   if (!assessmentUpdated) return null;
-  return new Assessment(assessmentUpdated);
+  return new Assessment({
+    ...assessmentUpdated,
+    campaign: await _getAssociatedCampaign(assessmentUpdated.campaignParticipationId),
+  });
 };
 
 const updateLastQuestionState = async function ({ id, lastQuestionState }) {

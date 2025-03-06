@@ -65,7 +65,7 @@ class Assessment {
     competenceId,
     campaignParticipationId,
     method,
-    campaignCode,
+    campaign,
     challengeLiveAlerts,
     companionLiveAlerts,
   } = {}) {
@@ -88,12 +88,63 @@ class Assessment {
     this.competenceId = competenceId;
     this.campaignParticipationId = campaignParticipationId;
     this.method = method || Assessment.computeMethodFromType(this.type);
-    this.campaignCode = campaignCode;
     this.challengeLiveAlerts = challengeLiveAlerts;
     this.companionLiveAlerts = companionLiveAlerts;
-    this.showProgressBar = null;
-    this.hasCheckpoints = null;
-    this.showLevelup = null;
+
+    this.#setSomeFlags(campaign);
+  }
+
+  #setSomeFlags(campaign) {
+    switch (this.type) {
+      case Assessment.types.CERTIFICATION: {
+        this.showProgressBar = false;
+        this.hasCheckpoints = false;
+        this.showLevelup = false;
+        this.title = this.certificationCourseId;
+        break;
+      }
+
+      case Assessment.types.COMPETENCE_EVALUATION: {
+        this.showProgressBar = true;
+        this.hasCheckpoints = true;
+        this.showLevelup = true;
+        break;
+      }
+
+      case Assessment.types.DEMO: {
+        this.showProgressBar = true;
+        this.hasCheckpoints = false;
+        this.showLevelup = false;
+        break;
+      }
+      case Assessment.types.PREVIEW: {
+        this.showProgressBar = false;
+        this.hasCheckpoints = false;
+        this.showLevelup = false;
+        this.title = 'Preview';
+        break;
+      }
+      case Assessment.types.CAMPAIGN: {
+        this.campaignCode = campaign.code;
+        this.showProgressBar = false;
+        this.hasCheckpoints = false;
+        this.showLevelup = false;
+        if (!this.isFlash() && (campaign.isAssessment || campaign.isExam)) {
+          this.showProgressBar = true;
+          this.hasCheckpoints = true;
+          this.showLevelup = true;
+        }
+        this.title = campaign.title;
+        break;
+      }
+
+      default: {
+        this.showProgressBar = false;
+        this.hasCheckpoints = false;
+        this.showLevelup = false;
+        this.title = '';
+      }
+    }
   }
 
   isCompleted() {
@@ -211,7 +262,7 @@ class Assessment {
     });
   }
 
-  static createForCampaign({ userId, campaignParticipationId, method, isImproving = false }) {
+  static createForCampaign({ userId, campaignParticipationId, method, isImproving = false, campaign }) {
     return new Assessment({
       userId,
       campaignParticipationId,
@@ -220,11 +271,12 @@ class Assessment {
       courseId: Assessment.courseIdMessage.CAMPAIGN,
       isImproving,
       method,
+      campaign,
     });
   }
 
-  static createImprovingForCampaign({ userId, campaignParticipationId, method }) {
-    const assessment = this.createForCampaign({ userId, campaignParticipationId, method });
+  static createImprovingForCampaign({ userId, campaignParticipationId, method, campaign }) {
+    const assessment = this.createForCampaign({ userId, campaignParticipationId, method, campaign });
     assessment.isImproving = true;
     return assessment;
   }
