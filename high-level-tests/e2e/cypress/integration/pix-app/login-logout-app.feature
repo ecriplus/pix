@@ -12,7 +12,7 @@ Fonctionnalité: Connexion - Déconnexion
     Alors je suis redirigé vers la page "/connexion"
 
   Scénario: Je suis connecté et ma session expire puis je rejoins une nouvelle page
-    Lorsque je suis connecté avec un compte dont le token expire bientôt
+    Lorsque je suis connecté et mon token expire bientôt
     Alors je suis redirigé vers la page d'accueil de "Daenerys"
     Lorsque j'attends 5000 ms
     Et je vais sur la page "/mes-certifications"

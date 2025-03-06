@@ -42,7 +42,7 @@ When(`je vais sur l'inscription de Pix`, () => {
   cy.visitMonPix(`/inscription`);
 });
 
-When("je suis connecté avec un compte dont le token expire bientôt", () => {
+When("je suis connecté et mon token expire bientôt", () => {
   cy.loginWithAlmostExpiredToken();
 });
 
