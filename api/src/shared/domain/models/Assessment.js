@@ -126,14 +126,9 @@ class Assessment {
       }
       case Assessment.types.CAMPAIGN: {
         this.campaignCode = campaign.code;
-        this.showProgressBar = false;
-        this.hasCheckpoints = false;
-        this.showLevelup = false;
-        if (!this.isFlash() && (campaign.isAssessment || campaign.isExam)) {
-          this.showProgressBar = true;
-          this.hasCheckpoints = true;
-          this.showLevelup = true;
-        }
+        this.showProgressBar = !this.isFlash() && (campaign.isAssessment || campaign.isExam);
+        this.hasCheckpoints = !this.isFlash() && campaign.isAssessment;
+        this.showLevelup = !this.isFlash() && (campaign.isAssessment || campaign.isExam);
         this.title = campaign.title;
         break;
       }
