@@ -1,7 +1,6 @@
 import { logger } from '../../src/shared/infrastructure/utils/logger.js';
 import { chunkify } from './cases/tools.js';
 import caseVerificationCodeOK from './cases/verification-code/verification-code-only.js';
-import { chunkify } from './cases/tools.js';
 
 const NUMBER_OF_SEEDS = Number(process.env.DATAMART_NUMBER_OF_SEEDS) || 100;
 
