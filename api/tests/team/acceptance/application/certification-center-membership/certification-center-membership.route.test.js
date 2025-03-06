@@ -142,4 +142,35 @@ describe('Acceptance | Team | Application | Routes | certification-center-member
       expect(response.statusCode).to.equal(204);
     });
   });
+
+  describe('PATCH /api/certification-centers/{certificationCenterId}/certification-center-memberships/me', function () {
+    context('When user is member of the certification center', function () {
+      it('updates user certification center membership lastAccessedAt', async function () {
+        // given
+        server = await createServer();
+
+        const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+
+        const userId = databaseBuilder.factory.buildUser().id;
+        databaseBuilder.factory.buildCertificationCenterMembership({
+          certificationCenterId,
+          userId,
+        });
+
+        await databaseBuilder.commit();
+        const request = {
+          method: 'PATCH',
+          url: `/api/certification-centers/${certificationCenterId}/certification-center-memberships/me`,
+          payload: {},
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
+
+        // when
+        const response = await server.inject(request);
+
+        // then
+        expect(response.statusCode).to.equal(204);
+      });
+    });
+  });
 });
