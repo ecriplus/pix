@@ -42,8 +42,8 @@ export default class CreateForm extends Component {
         category: this.intl.t(`pages.campaign-creation.tags.${targetProfile.category}`),
         icon: targetProfile.isSimplifiedAccess ? 'accountOff' : 'users',
         iconTitle: targetProfile.isSimplifiedAccess
-          ? 'common.target-profile-details.simplified-access.without-account'
-          : 'common.target-profile-details.simplified-access.with-account',
+          ? this.intl.t('common.target-profile-details.simplified-access.without-account')
+          : this.intl.t('common.target-profile-details.simplified-access.with-account'),
         order: 'OTHER' === targetProfile.category ? 1 : 0,
       };
     });
