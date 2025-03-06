@@ -47,11 +47,11 @@
               </PixTableColumn>
               <PixTableColumn @context={{context}} class="table__column--wide">
                 <:header>
-                  Nom du profil cible
+                  Nom interne du profil cible
                 </:header>
                 <:cell>
                   <LinkTo @route="authenticated.target-profiles.target-profile" @model={{row.id}}>
-                    {{row.name}}
+                    {{row.internalName}}
                   </LinkTo>
                 </:cell>
               </PixTableColumn>

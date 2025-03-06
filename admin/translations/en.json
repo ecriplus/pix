@@ -21,6 +21,7 @@
     "fields": {
       "createdAt": "creation date",
       "id": "id",
+      "internalName": "internal name",
       "name": "name",
       "status": "status",
       "target-profile": {
@@ -879,9 +880,9 @@
           "name": "Filter target profiles by ID",
           "placeholder": "Search by ID"
         },
-        "search-by-name": {
-          "name": "Filter target profiles by name",
-          "placeholder": "Search by name"
+        "search-by-internal-name": {
+          "name": "Filter target profiles by internal name",
+          "placeholder": "Search by internal name"
         }
       },
       "resettable-checkbox": {

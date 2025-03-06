@@ -46,7 +46,7 @@ module('Integration | Component | organizations/target-profiles-section', functi
       this.owner.register('service:pixToast', NotificationsStub);
       const targetProfileSummary = store.createRecord('target-profile-summary', {
         id: 666,
-        name: 'Number of The Beast',
+        internalName: 'Number of The Beast',
       });
       const organization = EmberObject.create({
         id: 1,
@@ -72,7 +72,7 @@ module('Integration | Component | organizations/target-profiles-section', functi
     test('it should have a link to redirect on target profile page', async function (assert) {
       const targetProfileSummary = store.createRecord('target-profile-summary', {
         id: 666,
-        name: 'Number of The Beast',
+        internalName: 'Number of The Beast',
       });
 
       const targetProfileSummaries = [targetProfileSummary];
@@ -99,12 +99,12 @@ module('Integration | Component | organizations/target-profiles-section', functi
         // given
         const publicTargetProfileSummary = store.createRecord('target-profile-summary', {
           id: 666,
-          name: 'Number of The Beast',
+          internalName: 'Number of The Beast',
           canDetach: false,
         });
         const privateTargetProfileSummary = store.createRecord('target-profile-summary', {
           id: 777,
-          name: 'Super Lucky',
+          internalName: 'Super Lucky',
           canDetach: true,
         });
         const organization = store.createRecord('organization', {
@@ -130,7 +130,7 @@ module('Integration | Component | organizations/target-profiles-section', functi
         // given
         const targetProfileSummary = store.createRecord('target-profile-summary', {
           id: 666,
-          name: 'Number of The Beast',
+          internalName: 'Number of The Beast',
           canDetach: true,
         });
         const organization = store.createRecord('organization', {
@@ -162,7 +162,7 @@ module('Integration | Component | organizations/target-profiles-section', functi
         const detachOrganizationsTargetProfileStub = sinon.stub(adapter, 'detachOrganizations').resolves();
         const targetProfileSummary = store.createRecord('target-profile-summary', {
           id: 666,
-          name: 'Number of The Beast',
+          internalName: 'Number of The Beast',
           canDetach: true,
         });
         const organization = store.createRecord('organization', {
@@ -201,7 +201,7 @@ module('Integration | Component | organizations/target-profiles-section', functi
         const targetProfileSummaries = [
           store.createRecord('target-profile-summary', {
             id: 666,
-            name: 'Number of The Beast',
+            internalName: 'Number of The Beast',
             canDetach: true,
           }),
         ];

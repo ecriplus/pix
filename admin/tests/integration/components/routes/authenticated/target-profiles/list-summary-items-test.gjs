@@ -4,7 +4,7 @@ import { module, test } from 'qunit';
 
 import setupIntlRenderingTest, { t } from '../../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | routes/authenticated/target-profiles | list-items', function (hooks) {
+module('Integration | Component | routes/authenticated/target-profiles | list-summary-items', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   const triggerFiltering = function () {};
@@ -20,7 +20,7 @@ module('Integration | Component | routes/authenticated/target-profiles | list-it
 
     // then
     assert.ok(screen.getByText(t('common.fields.id')));
-    assert.ok(screen.getByText(t('common.fields.name')));
+    assert.ok(screen.getByText(t('common.fields.internalName')));
     assert.ok(screen.getByText(t('common.fields.status')));
   });
 
@@ -34,7 +34,9 @@ module('Integration | Component | routes/authenticated/target-profiles | list-it
 
     // then
     assert.dom(screen.getByRole('textbox', { name: t('pages.target-profiles.filters.search-by-id.name') })).exists();
-    assert.dom(screen.getByRole('textbox', { name: t('pages.target-profiles.filters.search-by-name.name') })).exists();
+    assert
+      .dom(screen.getByRole('textbox', { name: t('pages.target-profiles.filters.search-by-internal-name.name') }))
+      .exists();
   });
 
   test('it should display target profile summaries list', async function (assert) {
@@ -62,7 +64,7 @@ module('Integration | Component | routes/authenticated/target-profiles | list-it
 
   test('it should display target profile summaries data', async function (assert) {
     // given
-    const summaries = [{ id: 123, name: 'Profile Cible 1' }];
+    const summaries = [{ id: 123, internalName: 'Profile Cible 1' }];
     summaries.meta = {
       rowCount: 2,
     };
@@ -86,7 +88,7 @@ module('Integration | Component | routes/authenticated/target-profiles | list-it
 
   test('it should display target profile status as "Obsolète" when target profile is outdated', async function (assert) {
     // given
-    const summaries = [{ id: 123, name: 'Profile Cible - outdated', outdated: true }];
+    const summaries = [{ id: 123, internalName: 'Profile Cible - outdated', outdated: true }];
     summaries.meta = {
       rowCount: 2,
     };
@@ -109,7 +111,7 @@ module('Integration | Component | routes/authenticated/target-profiles | list-it
 
   test('it should display target profile status as "Actif" when target profile is not outdated', async function (assert) {
     // given
-    const summaries = [{ id: 123, name: 'Profile Cible - active', outdated: false }];
+    const summaries = [{ id: 123, internalName: 'Profile Cible - active', outdated: false }];
     summaries.meta = {
       rowCount: 2,
     };

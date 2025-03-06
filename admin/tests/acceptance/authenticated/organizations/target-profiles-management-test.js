@@ -15,7 +15,7 @@ module('Acceptance | Organizations | Target profiles management', function (hook
   test('should display organization target profiles', async function (assert) {
     // given
     const ownerOrganizationId = this.server.create('organization').id;
-    this.server.create('target-profile-summary', { name: 'Profil cible du ghetto' });
+    this.server.create('target-profile-summary', { internalName: 'Profil cible du ghetto' });
 
     // when
     const screen = await visit(`/organizations/${ownerOrganizationId}/target-profiles`);
@@ -36,6 +36,7 @@ module('Acceptance | Organizations | Target profiles management', function (hook
 
     await fillByLabel('ID du ou des profil(s) cible(s)', '66');
     await clickByName('Valider');
+
     // then
     assert.dom(await screen.findByLabelText('Profil cible')).includesText('66');
     assert.dom(await within(parentInput).findByDisplayValue('')).hasAria('label', 'ID du ou des profil(s) cible(s)');
@@ -45,7 +46,7 @@ module('Acceptance | Organizations | Target profiles management', function (hook
     // given
     await authenticateAdminMemberWithRole({ isCertif: true })(server);
     const ownerOrganizationId = this.server.create('organization').id;
-    this.server.create('target-profile-summary', { name: 'Profil cible du ghetto', ownerOrganizationId });
+    this.server.create('target-profile-summary', { internalName: 'Profil cible du ghetto', ownerOrganizationId });
 
     // when
     const screen = await visit(`/organizations/${ownerOrganizationId}/target-profiles`);

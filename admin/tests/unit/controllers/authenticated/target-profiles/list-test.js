@@ -70,7 +70,7 @@ module('Unit | Controller | authenticated/target-profiles/list', function (hooks
   module('#onResetFilter', function () {
     test('it should reset controller filter', async function (assert) {
       // given
-      controller.name = 'someName';
+      controller.internalName = 'someName';
       controller.id = 'someId';
       controller.categories = ['someCategories'];
 
@@ -78,7 +78,7 @@ module('Unit | Controller | authenticated/target-profiles/list', function (hooks
       await controller.onResetFilter();
 
       // then
-      assert.strictEqual(controller.name, null);
+      assert.strictEqual(controller.internalName, null);
       assert.strictEqual(controller.id, null);
       assert.strictEqual(controller.categories.length, 0);
     });

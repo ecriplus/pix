@@ -16,7 +16,10 @@ module('Acceptance | Trainings | Target profiles', function (hooks) {
   hooks.beforeEach(async function () {
     trainingId = 2;
 
-    const targetProfileSummary = server.create('target-profile-summary', { id: 1111, name: 'Super profil cible 2' });
+    const targetProfileSummary = server.create('target-profile-summary', {
+      id: 1111,
+      internalName: 'Super profil cible 2',
+    });
     server.create('training', {
       id: 2,
       title: 'Devenir tailleur de citrouille',
@@ -57,7 +60,7 @@ module('Acceptance | Trainings | Target profiles', function (hooks) {
     module('when admin role is "SUPER_ADMIN" or "METIER"', function () {
       test('is should attach a target profile to a training', async function (assert) {
         await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-        server.create('target-profile-summary', { id: 1, name: 'Super profil cible' });
+        server.create('target-profile-summary', { id: 1, internalName: 'Super profil cible' });
 
         // when
         const screen = await visit(`/trainings/${trainingId}/target-profiles`);
@@ -84,7 +87,7 @@ module('Acceptance | Trainings | Target profiles', function (hooks) {
       test('is should not be able to attach a target profile to a training', async function (assert) {
         // given
         await authenticateAdminMemberWithRole({ isSupport: true })(server);
-        server.create('target-profile-summary', { id: 1, name: 'Super profil cible' });
+        server.create('target-profile-summary', { id: 1, internalName: 'Super profil cible' });
 
         // when
         const screen = await visit(`/trainings/${trainingId}/target-profiles`);

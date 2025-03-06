@@ -47,8 +47,8 @@ module('Acceptance | Target Profiles | List', function (hooks) {
 
       test('it should list target profile summaries', async function (assert) {
         // given
-        server.create('target-profile-summary', { id: 1, name: 'COUCOU', outdated: true });
-        server.create('target-profile-summary', { id: 2, name: 'CAVA', outdated: false });
+        server.create('target-profile-summary', { id: 1, internalName: 'COUCOU', outdated: true });
+        server.create('target-profile-summary', { id: 2, internalName: 'CAVA', outdated: false });
 
         // when
         const screen = await visit('/target-profiles/list');
@@ -67,7 +67,7 @@ module('Acceptance | Target Profiles | List', function (hooks) {
           name: 'Profil Cible',
           areas: [area],
         });
-        server.create('target-profile-summary', { id: 1, name: 'Profil Cible', outdated: true });
+        server.create('target-profile-summary', { id: 1, internalName: 'Profil Cible', outdated: true });
         const screen = await visit('/target-profiles/list');
 
         // when
@@ -97,10 +97,12 @@ module('Acceptance | Target Profiles | List', function (hooks) {
 
         test('it should display the current filter when target profiles are filtered by name', async function (assert) {
           // when
-          const screen = await visit('/target-profiles/list?name=sav');
+          const screen = await visit('/target-profiles/list?internalName=sav');
 
           // then
-          assert.dom(screen.getByRole('textbox', { name: 'Filtrer les profils cible par un nom' })).hasValue('sav');
+          assert
+            .dom(screen.getByRole('textbox', { name: 'Filtrer les profils cible par le nom interne' }))
+            .hasValue('sav');
         });
 
         test('it should display the current filter when target profiles are filtered by id', async function (assert) {

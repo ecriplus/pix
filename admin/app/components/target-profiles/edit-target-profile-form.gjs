@@ -15,7 +15,7 @@ import { optionsCategoryList } from '../../models/target-profile';
 import Card from '../card';
 import TubesSelection from '../common/tubes-selection';
 
-export default class CreateTargetProfileForm extends Component {
+export default class EditTargetProfileForm extends Component {
   @tracked submitting = false;
   selectedTubes = [];
 
@@ -65,7 +65,19 @@ export default class CreateTargetProfileForm extends Component {
         {{t "common.forms.mandatory-fields" htmlSafe=true}}
       </p>
       <section class="admin-form__content admin-form__content--with-counters">
+
         <Card class="admin-form__card" @title="Information sur le profil cible">
+          <PixInput
+            @id="targetProfileInternalName"
+            required={{true}}
+            @requiredLabel={{t "common.forms.mandatory"}}
+            aria-required={{true}}
+            @value={{@targetProfile.internalName}}
+            {{on "change" (fn this.handleInputValue "internalName")}}
+          >
+            <:label>Nom interne :</:label>
+          </PixInput>
+
           <PixInput
             @id="targetProfileName"
             required={{true}}
@@ -74,7 +86,7 @@ export default class CreateTargetProfileForm extends Component {
             @value={{@targetProfile.name}}
             {{on "change" (fn this.handleInputValue "name")}}
           >
-            <:label>Nom :</:label>
+            <:label>Nom externe :</:label>
           </PixInput>
 
           <PixSelect
@@ -161,6 +173,7 @@ export default class CreateTargetProfileForm extends Component {
           </PixTextarea>
         </Card>
       </section>
+
       <section class="admin-form__actions">
         <PixButton @variant="secondary" @size="large" @triggerAction={{@onCancel}}>
           {{t "common.actions.cancel"}}

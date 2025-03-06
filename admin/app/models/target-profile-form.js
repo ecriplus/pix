@@ -16,6 +16,20 @@ const Validations = buildValidations({
       }),
     ],
   },
+  internalName: {
+    validators: [
+      validator('presence', {
+        presence: true,
+        ignoreBlank: true,
+        message: 'Le nom interne ne peut pas être vide',
+      }),
+      validator('length', {
+        min: 1,
+        max: 255,
+        message: 'La longueur du nom ne doit pas excéder 255 caractères',
+      }),
+    ],
+  },
   description: {
     validators: [
       validator('length', {
@@ -43,6 +57,7 @@ const Validations = buildValidations({
 
 export default class TargetProfileForm extends Model.extend(Validations) {
   @attr('string') name;
+  @attr('string') internalName;
   @attr('string') description;
   @attr('string') comment;
   @attr('string') category;

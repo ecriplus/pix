@@ -11,7 +11,7 @@ export default class ListRoute extends Route {
     pageNumber: { refreshModel: true },
     pageSize: { refreshModel: true },
     id: { refreshModel: true },
-    name: { refreshModel: true },
+    internalName: { refreshModel: true },
     categories: { refreshModel: true },
   };
 
@@ -25,7 +25,7 @@ export default class ListRoute extends Route {
       targetProfileSummaries = await this.store.query('target-profile-summary', {
         filter: {
           id: params.id ? params.id.trim() : '',
-          name: params.name ? params.name.trim() : '',
+          internalName: params.internalName ? params.internalName.trim() : '',
           categories: params.categories ?? [],
         },
         page: {
@@ -47,7 +47,7 @@ export default class ListRoute extends Route {
       controller.pageNumber = 1;
       controller.pageSize = 10;
       controller.id = null;
-      controller.name = null;
+      controller.internalName = null;
       controller.categories = [];
     }
   }

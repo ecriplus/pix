@@ -27,7 +27,7 @@ module('Acceptance | Target Profile Management', function (hooks) {
       module('when admin member has role "SUPER_ADMIN", "SUPPORT" or "METIER"', function (hooks) {
         hooks.beforeEach(async function () {
           await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-          server.create('target-profile', { id: 1, name: 'Mon super profil cible' });
+          server.create('target-profile', { id: 1, internalName: 'Mon super profil cible' });
         });
 
         test('it should be accessible for an authenticated user', async function (assert) {
@@ -72,7 +72,8 @@ module('Acceptance | Target Profile Management', function (hooks) {
       // given
       server.create('target-profile', {
         id: 1,
-        name: 'Profil Cible Fantastix',
+        name: 'Profil Cible Fantastix externe',
+        internalName: 'Profil Cible Fantastix',
         outdated: false,
         ownerOrganizationId: 456,
         description: 'Top profil cible.',
