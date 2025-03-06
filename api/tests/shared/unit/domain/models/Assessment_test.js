@@ -68,7 +68,7 @@ describe('Unit | Domain | Models | Assessment', function () {
         type: Assessment.types.CAMPAIGN,
         hasCheckpoints: false,
         showProgressBar: true,
-        showLevelup: true,
+        showLevelup: false,
         expectedTitle: 'Ma Campagne',
         // eslint-disable-next-line mocha/no-setup-in-describe
         attributes: { campaign: domainBuilder.buildCampaign({ title: 'Ma Campagne', type: CampaignTypes.EXAM }) },

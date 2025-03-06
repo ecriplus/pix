@@ -128,7 +128,7 @@ class Assessment {
         this.campaignCode = campaign.code;
         this.showProgressBar = !this.isFlash() && (campaign.isAssessment || campaign.isExam);
         this.hasCheckpoints = !this.isFlash() && campaign.isAssessment;
-        this.showLevelup = !this.isFlash() && (campaign.isAssessment || campaign.isExam);
+        this.showLevelup = !this.isFlash() && campaign.isAssessment;
         this.title = campaign.title;
         break;
       }
