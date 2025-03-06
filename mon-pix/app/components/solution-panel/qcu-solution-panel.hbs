@@ -42,7 +42,11 @@
   {{/each}}
 
   {{#if this.isAnswerValid}}
-    <div data-test-correct-answer>{{t "pages.comparison-window.results.feedback.correct"}}</div>
+    <div data-test-correct-answer>
+      <p class="qcu-solution-answer-feedback__expected-answer">
+        {{t "pages.comparison-window.results.feedback.correct"}}
+      </p>
+    </div>
   {{else}}
     <MarkdownToHtml
       class="qcu-solution-answer-feedback__expected-answer"
