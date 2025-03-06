@@ -54,6 +54,7 @@ const serialize = function (assessments) {
       'showProgressBar',
       'hasCheckpoints',
       'showLevelup',
+      'showQuestionCounter',
     ],
     answers: {
       ref: 'id',

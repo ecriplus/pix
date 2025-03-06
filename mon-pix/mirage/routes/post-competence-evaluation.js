@@ -15,6 +15,7 @@ export default function (schema, request) {
     hasCheckpoints: true,
     showProgressBar: true,
     showLevelup: true,
+    showQuestionCounter: true,
   });
   return schema.competenceEvaluations.create({ assessment, competenceId });
 }

@@ -54,6 +54,7 @@ export default Factory.extend({
     type: 'CAMPAIGN',
     method: 'FLASH',
     showProgressBar: false,
+    showQuestionCounter: true,
   }),
 
   withCurrentChallengeTimeout: trait({

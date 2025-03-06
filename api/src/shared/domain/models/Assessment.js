@@ -100,6 +100,7 @@ class Assessment {
         this.showProgressBar = false;
         this.hasCheckpoints = false;
         this.showLevelup = false;
+        this.showQuestionCounter = true;
         this.title = this.certificationCourseId;
         break;
       }
@@ -108,6 +109,7 @@ class Assessment {
         this.showProgressBar = true;
         this.hasCheckpoints = true;
         this.showLevelup = true;
+        this.showQuestionCounter = true;
         break;
       }
 
@@ -115,12 +117,14 @@ class Assessment {
         this.showProgressBar = true;
         this.hasCheckpoints = false;
         this.showLevelup = false;
+        this.showQuestionCounter = true;
         break;
       }
       case Assessment.types.PREVIEW: {
         this.showProgressBar = false;
         this.hasCheckpoints = false;
         this.showLevelup = false;
+        this.showQuestionCounter = true;
         this.title = 'Preview';
         break;
       }
@@ -130,6 +134,7 @@ class Assessment {
         this.showProgressBar = isAssessmentCampaignNoFlash;
         this.hasCheckpoints = isAssessmentCampaignNoFlash;
         this.showLevelup = isAssessmentCampaignNoFlash;
+        this.showQuestionCounter = this.isFlash() || campaign.isAssessment;
         this.title = campaign.title;
         break;
       }
@@ -138,6 +143,7 @@ class Assessment {
         this.showProgressBar = false;
         this.hasCheckpoints = false;
         this.showLevelup = false;
+        this.showQuestionCounter = false;
         this.title = '';
       }
     }

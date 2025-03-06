@@ -22,6 +22,7 @@ module('Integration | Component | progress-bar', function (hooks) {
       type: 'CAMPAIGN',
       showProgressBar: true,
       hasCheckpoints: true,
+      showQuestionCounter: true,
     });
     mockAssessment.answers = answers;
 

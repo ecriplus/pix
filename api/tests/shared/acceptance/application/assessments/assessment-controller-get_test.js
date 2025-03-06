@@ -172,6 +172,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
           'has-checkpoints': false,
           'show-levelup': false,
           'show-progress-bar': false,
+          'show-question-counter': true,
         },
         relationships: {
           course: {
@@ -298,6 +299,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
           'has-checkpoints': false,
           'show-levelup': false,
           'show-progress-bar': false,
+          'show-question-counter': true,
         },
         relationships: {
           course: { data: { type: 'courses', id: courseId } },

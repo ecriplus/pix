@@ -12,6 +12,7 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
       assessment.hasCheckpoints = false;
       assessment.showProgressBar = false;
       assessment.showLevelup = false;
+      assessment.showQuestionCounter = true;
       const expectedJson = {
         data: {
           id: assessment.id.toString(),
@@ -29,6 +30,7 @@ describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
             'show-progress-bar': false,
             'show-levelup': false,
             'has-checkpoints': false,
+            'show-question-counter': true,
             'code-campaign': undefined,
           },
           relationships: {
