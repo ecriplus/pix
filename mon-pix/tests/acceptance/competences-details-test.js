@@ -51,19 +51,11 @@ module("Acceptance | Competence details | Afficher la page de détails d'une co
 
     test('should display the competence details', async function (assert) {
       // when
-      await visit(`/competences/${scorecardWithPoints.competenceId}/details`);
+      const screen = await visit(`/competences/${scorecardWithPoints.competenceId}/details`);
 
       // then
-      assert.ok(find('.scorecard-details-content-left__area').textContent.includes(scorecardWithPoints.area.title));
-      assert.ok(
-        find('.scorecard-details-content-left__area')
-          .getAttribute('class')
-          .includes(`scorecard-details-content-left__area--${scorecardWithPoints.area.color}`),
-      );
-      assert.ok(find('.scorecard-details-content-left__name').textContent.includes(scorecardWithPoints.name));
-      assert.ok(
-        find('.scorecard-details-content-left__description').textContent.includes(scorecardWithPoints.description),
-      );
+      assert.dom(screen.getByText(scorecardWithPoints.name)).exists();
+      assert.dom(screen.getByText(scorecardWithPoints.description)).exists();
     });
 
     test('should transition to /competences when the user clicks on return', async function (assert) {
@@ -102,22 +94,18 @@ module("Acceptance | Competence details | Afficher la page de détails d'une co
     module('when the scorecard has points', function () {
       test('should display level and score', async function (assert) {
         // when
-        await visit(`/competences/${scorecardWithPoints.competenceId}/details`);
+        const screen = await visit(`/competences/${scorecardWithPoints.competenceId}/details`);
 
         // then
-        assert.strictEqual(
-          find('.competence-card__level .score-value').textContent,
-          scorecardWithPoints.level.toString(),
-        );
-        assert.strictEqual(
-          find('.scorecard-details-content-right-score-container__pix-earned .score-value').textContent,
-          scorecardWithPoints.earnedPix.toString(),
-        );
-        assert.ok(
-          find('.scorecard-details-content-right__level-info').textContent.includes(
-            `${scorecardWithPoints.remainingPixToNextLevel} pix avant le niveau ${scorecardWithPoints.level + 1}`,
-          ),
-        );
+        assert.dom(screen.getByText(scorecardWithPoints.level)).exists();
+        assert.dom(screen.getByText(scorecardWithPoints.earnedPix)).exists();
+        assert
+          .dom(
+            screen.getByText(
+              `${scorecardWithPoints.remainingPixToNextLevel} pix avant le niveau ${scorecardWithPoints.level + 1}`,
+            ),
+          )
+          .exists();
       });
 
       test('should not display pixScoreAheadOfNextLevel when next level is over the max level', async function (assert) {
@@ -142,15 +130,17 @@ module("Acceptance | Competence details | Afficher la page de détails d'une co
       module('when it has remaining some days before reset', function () {
         test('should display remaining days before reset', async function (assert) {
           // when
-          await visit(`/competences/${scorecardWithRemainingDaysBeforeReset.competenceId}/details`);
+          const screen = await visit(`/competences/${scorecardWithRemainingDaysBeforeReset.competenceId}/details`);
 
           // then
-          assert.ok(
-            find('.scorecard-details-content-right__reset-message').textContent.includes(
-              `Remise à zéro disponible dans ${scorecardWithRemainingDaysBeforeReset.remainingDaysBeforeReset} jours`,
-            ),
-          );
-          assert.dom('.scorecard-details__reset-button').doesNotExist();
+          assert
+            .dom(
+              screen.getByText(
+                `Remise à zéro disponible dans ${scorecardWithRemainingDaysBeforeReset.remainingDaysBeforeReset} jours.`,
+              ),
+            )
+            .exists();
+          assert.dom(screen.queryByRole('button', { name: 'Remettre à zéro' })).doesNotExist();
         });
       });
 
