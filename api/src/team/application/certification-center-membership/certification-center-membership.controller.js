@@ -59,9 +59,22 @@ const updateReferer = async function (request, h) {
   return h.response().code(204);
 };
 
+const updateLastAccessedAt = async function (request, h, dependencies = { requestResponseUtils }) {
+  const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+  const certificationCenterId = request.params.certificationCenterId;
+
+  await usecases.updateCertificationCenterMembershipLastAccessedAt({
+    userId,
+    certificationCenterId,
+  });
+
+  return h.response().code(204);
+};
+
 const certificationCenterMembershipController = {
   findCertificationCenterMemberships,
   updateFromPixCertif,
   updateReferer,
+  updateLastAccessedAt,
 };
 export { certificationCenterMembershipController };
