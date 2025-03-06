@@ -22,12 +22,6 @@ export default class Header extends Component {
   @service currentUser;
   @service router;
 
-  get displayBadges() {
-    const { campaign, participation } = this.args;
-
-    return campaign.hasBadges && participation.badges.length > 0;
-  }
-
   get breadcrumbLinks() {
     return [
       {
@@ -162,12 +156,12 @@ export default class Header extends Component {
 
         {{#if @participation.isShared}}
           <ul class="panel-header__data panel-header__data--highlight">
-            {{#if this.displayBadges}}
+            {{#if @campaign.hasBadges}}
               <li
                 aria-label={{t "pages.assessment-individual-results.badges"}}
                 class="panel-header-data__content panel-header-data-content__badges"
               >
-                <Badges @badges={{@participation.badges}} />
+                <Badges @badges={{@campaign.badges}} @acquiredBadges={{@participation.badges}} />
               </li>
             {{/if}}
             <li
