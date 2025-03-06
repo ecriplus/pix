@@ -5,7 +5,7 @@ import {
   generatePixScore,
   generateStatus,
   getCertificationDate,
-} from './tools.js';
+} from '../tools.js';
 
 const generateCertifCourseId = certificationCourseIdGenerator({ startingFrom: 8100000 });
 

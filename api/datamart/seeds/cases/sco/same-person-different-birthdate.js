@@ -11,7 +11,7 @@ import {
   getFormattedBirthdate,
   nationalStudentIdGenerator,
   orgaUAIGenerator,
-} from './tools.js';
+} from '../tools.js';
 
 const generateCertifCourseIdStudentOne = certificationCourseIdGenerator({ startingFrom: 5100000 });
 const generateCertifCourseIdStudentTwo = certificationCourseIdGenerator({ startingFrom: 6100000 });
