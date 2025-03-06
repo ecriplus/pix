@@ -33,6 +33,7 @@ export class ModuleFactory {
         id: moduleData.id,
         slug: moduleData.slug,
         title: moduleData.title,
+        version: moduleData.version,
         isBeta: moduleData.isBeta,
         transitionTexts: moduleData.transitionTexts?.map((transitionText) => new TransitionText(transitionText)) ?? [],
         details: new Details(moduleData.details),
