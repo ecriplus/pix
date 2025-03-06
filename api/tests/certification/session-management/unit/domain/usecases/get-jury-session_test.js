@@ -23,7 +23,7 @@ describe('Certification | Session Management | Unit | Domain | UseCase | get-jur
       jurySessionRepository.get.withArgs({ id: sessionId }).resolves(sessionToFind);
 
       // when
-      const { jurySession: actualSession } = await getJurySession({
+      const actualSession = await getJurySession({
         sessionId,
         jurySessionRepository,
         supervisorAccessRepository,

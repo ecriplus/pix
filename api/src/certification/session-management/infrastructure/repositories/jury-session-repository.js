@@ -36,9 +36,9 @@ const get = async function ({ id }) {
     throw new NotFoundError("La session n'existe pas ou son accès est restreint");
   }
 
-  //const sessionCounters = await getCounters({ sessionId: id });
+  const sessionCounters = await getCounters({ sessionId: id });
 
-  return _toDomain(jurySessionDTO);
+  return _toDomain(jurySessionDTO, sessionCounters);
 };
 
 const findPaginatedFiltered = async function ({ filters, page }) {

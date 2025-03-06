@@ -748,7 +748,7 @@ describe('Integration | Repository | JurySession', function () {
         type: Assessment.types.CERTIFICATION,
         state: states.ENDED_DUE_TO_FINALIZATION,
       });
-      const issueReportOne = databaseBuilder.factory.buildCertificationIssueReport({
+      databaseBuilder.factory.buildCertificationIssueReport({
         certificationCourseId: certificationCourseWithImpactfulCategory.id,
         category: ImpactfulCategories[0],
       });
@@ -761,7 +761,7 @@ describe('Integration | Repository | JurySession', function () {
         type: Assessment.types.CERTIFICATION,
         state: states.ENDED_BY_SUPERVISOR,
       });
-      const issueReportTwo = databaseBuilder.factory.buildCertificationIssueReport({
+      databaseBuilder.factory.buildCertificationIssueReport({
         certificationCourseId: certificationCourseWithImpactfulSubCategory.id,
         subcategory: ImpactfulSubcategories[0],
       });

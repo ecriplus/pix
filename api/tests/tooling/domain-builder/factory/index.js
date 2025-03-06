@@ -199,6 +199,7 @@ import { buildChallengeCalibration } from './certification/scoring/build-challen
 import { buildCertificationCandidate as buildSessionManagementCandidate } from './certification/session-management/build-certification-candidate.js';
 import { buildCertificationDetails } from './certification/session-management/build-certification-details.js';
 import { buildCertificationSessionComplementaryCertification } from './certification/session-management/build-certification-session-complementary-certification.js';
+import { buildJurySessionCounters } from './certification/session-management/build-jury-session-counters.js';
 import { buildSessionManagement } from './certification/session-management/build-session.js';
 import { buildCompetenceForScoring } from './certification/shared/build-competence-for-scoring.js';
 import { buildJuryComment } from './certification/shared/build-jury-comment.js';
@@ -212,7 +213,6 @@ import { buildCampaign as boundedContextCampaignBuildCampaign } from './prescrip
 import { buildCampaignParticipation as boundedContextCampaignParticipationBuildCampaignParticipation } from './prescription/campaign-participation/build-campaign-participation.js';
 import { buildStageCollection as buildStageCollectionForTargetProfileManagement } from './target-profile-management/build-stage-collection.js';
 import { buildStageCollection as buildStageCollectionForUserCampaignResults } from './user-campaign-results/build-stage-collection.js';
-import {buildJurySessionCounters} from './certification/session-management/build-jury-session-counters.js';
 
 const banner = {
   buildEmptyInformationBanner,
