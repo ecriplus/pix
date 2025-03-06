@@ -15,4 +15,9 @@ async function getBySlug({ slug, moduleDatasource }) {
   }
 }
 
-export { getBySlug };
+async function list({ moduleDatasource }) {
+  const modulesData = await moduleDatasource.list();
+  return modulesData.map((moduleData) => ModuleFactory.build(moduleData));
+}
+
+export { getBySlug, list };
