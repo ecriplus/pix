@@ -1,7 +1,11 @@
+import { config } from '../../../../shared/config.js';
 import { CertificationAssessmentScoreV3 } from './CertificationAssessmentScoreV3.js';
 import { Intervals } from './Intervals.js';
 import { ScoringAndCapacitySimulatorReport } from './ScoringAndCapacitySimulatorReport.js';
 
+const SCORING_CONFIGURATION_WEIGHTS = CertificationAssessmentScoreV3.weightsAndCoefficients.map(({ weight }) => weight);
+
+// TODO change CapacitySimulator model to a service
 export class CapacitySimulator {
   static compute({ certificationScoringIntervals, competencesForScoring, score }) {
     const scoringIntervals = new Intervals({ intervals: certificationScoringIntervals });
@@ -40,14 +44,13 @@ export class CapacitySimulator {
   }
 }
 
-export function findIntervalIndexFromScore({ score, scoringIntervalsLength, weights }) {
+// TODO Split function to a service, and change contexte to `results`
+export function findIntervalIndexFromScore({ score }) {
+  const weights = SCORING_CONFIGURATION_WEIGHTS;
   let cumulativeSumOfWeights = weights[0];
   let currentScoringInterval = 0;
 
-  while (
-    _isPixScoreOfAnHigherInterval(score, cumulativeSumOfWeights) &&
-    _hasANextInterval(currentScoringInterval, scoringIntervalsLength)
-  ) {
+  while (_hasNextScoringInterval(score, cumulativeSumOfWeights, currentScoringInterval)) {
     currentScoringInterval++;
     cumulativeSumOfWeights += weights[currentScoringInterval];
   }
@@ -55,10 +58,6 @@ export function findIntervalIndexFromScore({ score, scoringIntervalsLength, weig
   return currentScoringInterval;
 }
 
-function _isPixScoreOfAnHigherInterval(score, nextIntervalMinimumScore) {
-  return score >= nextIntervalMinimumScore;
-}
-
-function _hasANextInterval(currentInterval, scoringIntervalsLength) {
-  return currentInterval < scoringIntervalsLength - 1;
+function _hasNextScoringInterval(score, nextIntervalMinimumScore, currentInterval) {
+  return score >= nextIntervalMinimumScore && currentInterval < config.v3Certification.maxReachableLevel;
 }

@@ -1,7 +1,5 @@
-import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import {
   createServer,
-  databaseBuilder,
   datamartBuilder,
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
@@ -86,18 +84,6 @@ describe('Certification | Results | Acceptance | Application | parcoursup-route'
     });
 
     await datamartBuilder.commit();
-
-    const superAdmin = databaseBuilder.factory.buildUser.withRole({
-      role: PIX_ADMIN.ROLES.SUPER_ADMIN,
-    });
-    databaseBuilder.factory.buildCompetenceScoringConfiguration({
-      createdByUserId: superAdmin.id,
-      configuration: [],
-    });
-    databaseBuilder.factory.buildScoringConfiguration({
-      createdByUserId: superAdmin.id,
-    });
-    await databaseBuilder.commit();
   });
 
   describe('POST /api/application/parcoursup/certification/search', function () {
