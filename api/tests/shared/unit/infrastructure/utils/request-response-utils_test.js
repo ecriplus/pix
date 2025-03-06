@@ -5,7 +5,7 @@ import {
   extractTimestampFromRequest,
   extractUserIdFromRequest,
 } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
-import { expect, generateAuthenticatedUserRequestHeaders, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
 const { ENGLISH_SPOKEN, FRENCH_FRANCE, FRENCH_SPOKEN } = LOCALE;
 
@@ -84,46 +84,20 @@ describe('Unit | Utils | Request Utils', function () {
   });
 
   describe('#extractTimestampFromRequest', function () {
-    context('when "X-Request-Start" header exist', function () {
-      it('returns the value of the header', function () {
-        // given
-        const startDateTimestamp = new Date('2025-01-01').getTime();
-        const request = {
-          headers: {
-            'X-Request-Start': startDateTimestamp,
-          },
-        };
+    it('returns the value of attribute "request.info.received"', function () {
+      // given
+      const startDateTimestamp = new Date('2025-01-01').getTime();
+      const request = {
+        info: {
+          received: startDateTimestamp,
+        },
+      };
 
-        // when
-        const timestamp = extractTimestampFromRequest(request);
+      // when
+      const timestamp = extractTimestampFromRequest(request);
 
-        // then
-        expect(timestamp).to.equal(startDateTimestamp);
-      });
-    });
-
-    context('when "X-Request-Start" header does not exist', function () {
-      let clock, now;
-
-      beforeEach(function () {
-        now = new Date('2023-09-12');
-        clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-      });
-
-      afterEach(function () {
-        clock.restore();
-      });
-
-      it('returns a new date in timestamp', function () {
-        // given
-        const request = {};
-
-        // when
-        const timestamp = extractTimestampFromRequest(request);
-
-        // then
-        expect(timestamp).to.equal(now.getTime());
-      });
+      // then
+      expect(timestamp).to.equal(startDateTimestamp);
     });
   });
 });
