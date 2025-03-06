@@ -313,7 +313,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
         // then
         assert.dom(screen.getByText('Autoriser la reprise du test')).exists();
         assert.dom(screen.getByText('Terminer le test')).exists();
-        assert.dom(screen.queryByText('Gérer le signalement')).doesNotExist();
+        assert.dom(screen.queryByRole('button', { name: 'Gérer le signalement' })).doesNotExist();
       });
     });
 
@@ -339,11 +339,11 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
 
         // when
         const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
-        await click(screen.getByRole('button', { name: 'Afficher les options du candidat' }));
 
         // then
+        assert.dom(screen.getByRole('button', { name: 'Gérer le signalement' })).exists();
+        await click(screen.getByRole('button', { name: 'Afficher les options du candidat' }));
         assert.dom(screen.getByText('Autoriser la reprise du test')).exists();
-        assert.dom(screen.getByText('Gérer le signalement')).exists();
         assert.dom(screen.getByText('Terminer le test')).exists();
       });
     });
@@ -451,7 +451,6 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
 
         // when
         const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
-        await click(screen.getByRole('button', { name: 'Afficher les options du candidat' }));
         await click(screen.getByRole('button', { name: 'Gérer le signalement' }));
 
         // then

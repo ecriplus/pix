@@ -3,15 +3,12 @@
 
 .session-supervising-header {
   background: var(--pix-neutral-20);
-  padding: 16px;
-
-  @include breakpoints.device-is("tablet") {
-    padding: var(--pix-spacing-10x) var(--pix-spacing-12x) var(--pix-spacing-8x) var(--pix-spacing-12x);
-  }
+  padding: var(--pix-spacing-10x) var(--pix-spacing-6x);
 
   @include breakpoints.device-is("desktop") {
     align-self: center;
-    width: 672px;
+    padding: var(--pix-spacing-10x) 0 var(--pix-spacing-8x) 0;
+    width: 800px;
   }
 
   &__quit {
