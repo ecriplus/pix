@@ -81,27 +81,29 @@ function getFormattedDate(param) {
         {{/if}}
       </ul>
 
-      {{#if @sessionModel.finalizedAt}}
-        <ul class="session-info__list">
+      <ul class="session-info__list">
+        <li class="session-info__list-item">
+          <span>Nombre de certification(s) démarrée(s) :</span>
+          <span
+            data-test-id="session-info__number-of-started-certifications"
+          >{{@sessionModel.numberOfStartedCertifications}}</span>
+        </li>
+        {{#if @sessionModel.finalizedAt}}
           <li class="session-info__list-item">
-            <span>Nombre de signalements impactants non résolus :</span>
-            <span>{{@sessionModel.countCertificationIssueReportsWithActionRequired}}</span>
-          </li>
-          <li class="session-info__list-item">
-            <span>Nombre de signalements :</span>
+            <span>Nombre de signalement(s) impactant(s) non résolu(s) :</span>
             <span
-              data-test-id="session-info__number-of-issue-report"
-            >{{@sessionModel.countCertificationIssueReports}}</span>
+              data-test-id="session-info__number-of-impactful-reports"
+            >{{@sessionModel.numberOfImpactfullIssueReports}}</span>
           </li>
           <li class="session-info__list-item">
-            <span>Certifications non terminées traitées automatiquement :</span>
-            <span>{{@sessionModel.countCertificationsFlaggedAsAborted}}</span>
-          </li>
-          <li class="session-info__list-item">
-            <span>Nombre de certifications démarrées/en erreur :</span>
+            <span>Nombre de signalement(s) :</span>
             <span
-              data-test-id="session-info__number-of-started-or-error-certifications"
-            >{{@sessionModel.countStartedAndInErrorCertifications}}</span>
+              data-test-id="session-info__number-of-issue-reports"
+            >{{@sessionModel.totalNumberOfIssueReports}}</span>
+          </li>
+          <li class="session-info__list-item">
+            <span>Nombre de certification(s) en erreur :</span>
+            <span data-test-id="session-info__number-of-scoring-errors">{{@sessionModel.numberOfScoringErrors}}</span>
           </li>
           {{#if @sessionModel.hasComplementaryInfo}}
             <li class="session-info__list-item">
@@ -122,8 +124,8 @@ function getFormattedDate(param) {
               <span>{{@sessionModel.examinerGlobalComment}}</span>
             </li>
           {{/if}}
-        </ul>
-      {{/if}}
+        {{/if}}
+      </ul>
 
       {{#if @accessControl.hasAccessToCertificationActionsScope}}
         <div class="session-info__actions">
