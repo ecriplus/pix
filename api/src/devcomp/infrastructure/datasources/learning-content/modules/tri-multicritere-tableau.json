@@ -310,7 +310,7 @@
             ],
             "feedbacks": {
               "valid": "<p><span class=\"feedback__state\">Correct !</span> Vous avez obtenu le classement des meilleurs tireurs aux fléchettes et parmi eux, ceux qui ont aussi réussi le quiz.</p><p>En inversant l’ordre de ce tri, le classement aurait été différent.</p>",
-              "invalid": "<p><span class=\"feedback__state\">Incorrect.</span> Avez-vous bien utilisé un tri multicritère ?&nbsp; Vérifiez également l’ordre de vos critères de tri.</p><p>Pour réussir, utilisez les indices ci-dessous ou regardez à nouveau la vidéo pour vous aider <span aria-hidden=\"true\">👆</span></p>"
+              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span> Avez-vous bien utilisé un tri multicritère ?&nbsp; Vérifiez également l’ordre de vos critères de tri.</p><p>Pour réussir, utilisez les indices ci-dessous ou regardez à nouveau la vidéo pour vous aider <span aria-hidden=\"true\">👆</span></p>"
             }
           }
         },
@@ -492,7 +492,7 @@
             ],
             "feedbacks": {
               "valid": "<p><span class=\"feedback__state\">Bravo&#8239;!</span><br>Le tri avancé a bien permis de classer les enfants par découverte du trésor, puis par plus grand nombre d’énigmes résolues, puis par temps le plus court au labyrinthe.</p>",
-              "invalid": "<p><span class=\"feedback__state\">Incorrect.</span><br>Le classement de Sarah demande de trier selon trois critères.<br>Réessayez. Aidez-vous des indices au besoin.</p>"
+              "invalid": "<p><span class=\"feedback__state\">Mauvaise réponse.</span><br>Le classement de Sarah demande de trier selon trois critères.<br>Réessayez. Aidez-vous des indices au besoin.</p>"
             }
           }
         },
