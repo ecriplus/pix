@@ -2,13 +2,14 @@ import { CertificationChallengeLiveAlertStatus } from '../../../../../src/certif
 import { EmptyAnswerError } from '../../../../../src/evaluation/domain/errors.js';
 import * as correctionService from '../../../../../src/evaluation/domain/services/correction-service.js';
 import { saveAndCorrectAnswerForCertification } from '../../../../../src/evaluation/domain/usecases/save-and-correct-answer-for-certification.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedBySupervisorError,
   ChallengeNotAskedError,
 } from '../../../../../src/shared/domain/errors.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
-import { AnswerStatus, Assessment, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus, Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 const ANSWER_STATUS_FOCUSEDOUT = AnswerStatus.FOCUSEDOUT;
 const ANSWER_STATUS_OK = AnswerStatus.OK;
@@ -35,13 +36,13 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
   let dependencies;
 
   beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
     candidate = domainBuilder.certification.evaluation.buildCandidate({
       accessibilityAdjustmentNeeded: true,
     });
     nowDate.setMilliseconds(1);
     clock = sinon.useFakeTimers({ now: nowDate, toFake: ['Date'] });
-    sinon.stub(KnowledgeElement, 'createKnowledgeElementsForAnswer');
-    answerRepository = { saveWithKnowledgeElements: sinon.stub() };
+    answerRepository = { save: sinon.stub() };
     challengeRepository = { get: sinon.stub() };
     certificationChallengeLiveAlertRepository = { getOngoingOrValidatedByChallengeIdAndAssessmentId: sinon.stub() };
     certificationEvaluationCandidateRepository = { findByAssessmentId: sinon.stub() };
@@ -151,7 +152,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       completedAnswer.resultDetails = null;
       completedAnswer.timeSpent = 0;
       savedAnswer = domainBuilder.buildAnswer(completedAnswer);
-      answerRepository.saveWithKnowledgeElements.resolves(savedAnswer);
+      answerRepository.save.resolves(savedAnswer);
     });
 
     context('and some other context (tired of moving things around...)', function () {
@@ -195,7 +196,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
         });
 
         challengeRepository.get.resolves(challenge);
-        answerRepository.saveWithKnowledgeElements.resolves(savedAnswer);
+        answerRepository.save.resolves(savedAnswer);
         certificationEvaluationCandidateRepository.findByAssessmentId
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
@@ -212,8 +213,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
         });
 
         // then
-        const expectedArgument = completedAnswer;
-        expect(answerRepository.saveWithKnowledgeElements).to.have.been.calledWithExactly(expectedArgument, []);
+        expect(answerRepository.save).to.have.been.calledWithExactly({ answer: completedAnswer });
       });
 
       it('should call the challenge repository to get the answer challenge', async function () {
@@ -284,7 +284,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       });
       answerSaved = domainBuilder.buildAnswer(answer);
       answerSaved.timeSpent = 5;
-      answerRepository.saveWithKnowledgeElements.resolves(answerSaved);
+      answerRepository.save.resolves(answerSaved);
       certificationEvaluationCandidateRepository.findByAssessmentId
         .withArgs({ assessmentId: assessment.id })
         .resolves(candidate);
@@ -299,7 +299,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
 
       const expectedAnswer = domainBuilder.buildAnswer(answer);
       expectedAnswer.timeSpent = 5;
-      expect(answerRepository.saveWithKnowledgeElements).to.be.calledWith(expectedAnswer);
+      expect(answerRepository.save).to.be.calledWith({ answer: expectedAnswer });
     });
   });
 
@@ -322,7 +322,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
         type: Assessment.types.CERTIFICATION,
       });
       answerSaved = domainBuilder.buildAnswer(focusedOutAnswer);
-      answerRepository.saveWithKnowledgeElements.resolves(answerSaved);
+      answerRepository.save.resolves(answerSaved);
     });
 
     it('should not return focused out answer', async function () {
@@ -402,7 +402,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
             // Given
             answer.isFocusedOut = isFocusedOut;
             assessment.lastQuestionState = lastQuestionState;
-            answerRepository.saveWithKnowledgeElements = (_) => _;
+            answerRepository.save.callsFake(({ answer }) => answer);
 
             // When
             const correctedAnswer = await saveAndCorrectAnswerForCertification({
@@ -471,7 +471,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
             // Given
             answer.isFocusedOut = isFocusedOut;
             assessment.lastQuestionState = lastQuestionState;
-            answerRepository.saveWithKnowledgeElements = (_) => _;
+            answerRepository.save.callsFake(({ answer }) => answer);
 
             // When
             const correctedAnswer = await saveAndCorrectAnswerForCertification({
@@ -607,7 +607,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
         type: Assessment.types.CERTIFICATION,
       });
       const answerSaved = domainBuilder.buildAnswer(emptyAnswer);
-      answerRepository.saveWithKnowledgeElements.resolves(answerSaved);
+      answerRepository.save.resolves(answerSaved);
       certificationEvaluationCandidateRepository.findByAssessmentId
         .withArgs({ assessmentId: assessment.id })
         .resolves(candidate);

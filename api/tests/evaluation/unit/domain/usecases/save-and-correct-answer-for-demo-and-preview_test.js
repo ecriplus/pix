@@ -1,8 +1,9 @@
 import { EmptyAnswerError } from '../../../../../src/evaluation/domain/errors.js';
 import * as correctionService from '../../../../../src/evaluation/domain/services/correction-service.js';
 import { saveAndCorrectAnswerForDemoAndPreview } from '../../../../../src/evaluation/domain/usecases/save-and-correct-answer-for-demo-and-preview.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { ChallengeNotAskedError } from '../../../../../src/shared/domain/errors.js';
-import { AnswerStatus, Assessment, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus, Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-demo-and-preview', function () {
@@ -22,10 +23,10 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
   let dependencies;
 
   beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
     nowDate.setMilliseconds(1);
     clock = sinon.useFakeTimers({ now: nowDate, toFake: ['Date'] });
-    sinon.stub(KnowledgeElement, 'createKnowledgeElementsForAnswer');
-    answerRepository = { saveWithKnowledgeElements: sinon.stub() };
+    answerRepository = { save: sinon.stub() };
     challengeRepository = { get: sinon.stub() };
 
     const challengeId = 'oneChallengeId';
@@ -84,7 +85,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
       completedAnswer.resultDetails = null;
       completedAnswer.timeSpent = 0;
       savedAnswer = domainBuilder.buildAnswer(completedAnswer);
-      answerRepository.saveWithKnowledgeElements.resolves(savedAnswer);
+      answerRepository.save.resolves(savedAnswer);
       assessment.competenceId = 'recABCD';
     });
 
@@ -98,7 +99,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
       });
 
       // then
-      expect(answerRepository.saveWithKnowledgeElements).to.have.been.calledWithExactly(completedAnswer, []);
+      expect(answerRepository.save).to.have.been.calledWithExactly({ answer: completedAnswer });
     });
 
     it('should return the saved answer - with the id', async function () {
@@ -143,7 +144,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
       });
       answerSaved = domainBuilder.buildAnswer(answer);
       answerSaved.timeSpent = 5;
-      answerRepository.saveWithKnowledgeElements.resolves(answerSaved);
+      answerRepository.save.resolves(answerSaved);
 
       await saveAndCorrectAnswerForDemoAndPreview({
         answer,
@@ -154,7 +155,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
 
       const expectedAnswer = domainBuilder.buildAnswer(answer);
       expectedAnswer.timeSpent = 5;
-      expect(answerRepository.saveWithKnowledgeElements).to.be.calledWith(expectedAnswer);
+      expect(answerRepository.save).to.be.calledWith({ answer: expectedAnswer });
     });
   });
 
@@ -176,7 +177,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
         type: Assessment.types.CERTIFICATION,
       });
       answerSaved = domainBuilder.buildAnswer(focusedOutAnswer);
-      answerRepository.saveWithKnowledgeElements.resolves(answerSaved);
+      answerRepository.save.resolves(answerSaved);
     });
 
     it('should not return focused out answer', async function () {
@@ -236,7 +237,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
         type: Assessment.types.DEMO,
       });
       const answerSaved = domainBuilder.buildAnswer(emptyAnswer);
-      answerRepository.saveWithKnowledgeElements.resolves(answerSaved);
+      answerRepository.save.resolves(answerSaved);
 
       // when
       const { result } = await saveAndCorrectAnswerForDemoAndPreview({

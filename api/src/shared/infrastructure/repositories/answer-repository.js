@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import { knex } from '../../../../db/knex-database-connection.js';
 import { Answer } from '../../../evaluation/domain/models/Answer.js';
+import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { ChallengeAlreadyAnsweredError, NotFoundError } from '../../domain/errors.js';
 import * as answerStatusDatabaseAdapter from '../adapters/answer-status-database-adapter.js';
 
@@ -12,19 +13,6 @@ function _adaptAnswerToDb(answer) {
     result: answerStatusDatabaseAdapter.toSQLString(answer.result),
     resultDetails: jsYaml.dump(answer.resultDetails),
   };
-}
-
-function _adaptKnowledgeElementToDb(knowledgeElement) {
-  return _.pick(knowledgeElement, [
-    'source',
-    'status',
-    'earnedPix',
-    'answerId',
-    'assessmentId',
-    'skillId',
-    'userId',
-    'competenceId',
-  ]);
 }
 
 function _toDomain(answerDTO) {
@@ -101,32 +89,24 @@ const findChallengeIdsFromAnswerIds = async function (ids) {
   return knex.distinct().pluck('challengeId').from('answers').whereInArray('id', ids);
 };
 
-const saveWithKnowledgeElements = async function (answer, knowledgeElements) {
+const save = async function ({ answer }) {
+  const knexConn = DomainTransaction.getConnection();
   const answerForDB = _adaptAnswerToDb(answer);
-  return knex.transaction(async (trx) => {
-    const alreadySavedAnswer = await trx('answers')
-      .select('id')
-      .where({ challengeId: answer.challengeId, assessmentId: answer.assessmentId });
-    if (alreadySavedAnswer.length !== 0) {
-      throw new ChallengeAlreadyAnsweredError();
-    }
-    const [savedAnswerDTO] = await trx('answers').insert(answerForDB).returning(COLUMNS);
-    const savedAnswer = _toDomain(savedAnswerDTO);
-    if (!_.isEmpty(knowledgeElements)) {
-      for (const knowledgeElement of knowledgeElements) {
-        knowledgeElement.answerId = savedAnswer.id;
-      }
-      const knowledgeElementsForDB = knowledgeElements.map(_adaptKnowledgeElementToDb);
-      await trx('knowledge-elements').insert(knowledgeElementsForDB);
-    }
-    return savedAnswer;
-  });
+  const alreadySavedAnswer = await knexConn('answers')
+    .select('id')
+    .where({ challengeId: answer.challengeId, assessmentId: answer.assessmentId });
+  if (alreadySavedAnswer.length !== 0) {
+    throw new ChallengeAlreadyAnsweredError();
+  }
+  const [savedAnswerDTO] = await knexConn('answers').insert(answerForDB).returning(COLUMNS);
+  return _toDomain(savedAnswerDTO);
 };
+
 export {
   findByAssessment,
   findByAssessmentExcludingChallengeIds,
   findByChallengeAndAssessment,
   findChallengeIdsFromAnswerIds,
   get,
-  saveWithKnowledgeElements,
+  save,
 };

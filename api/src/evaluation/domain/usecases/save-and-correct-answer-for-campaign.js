@@ -1,10 +1,11 @@
 import { AnswerJob } from '../../../quest/domain/models/AnwserJob.js';
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { ForbiddenAccess } from '../../../shared/domain/errors.js';
 import { ChallengeNotAskedError } from '../../../shared/domain/errors.js';
 import { KnowledgeElement } from '../../../shared/domain/models/index.js';
 import { EmptyAnswerError } from '../errors.js';
 
-export async function saveAndCorrectAnswerForCampaign({
+const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
   answer,
   userId,
   assessment,
@@ -53,15 +54,18 @@ export async function saveAndCorrectAnswerForCampaign({
     const targetSkills = await campaignRepository.findSkillsByCampaignParticipationId({
       campaignParticipationId: assessment.campaignParticipationId,
     });
+    answerSaved = await answerRepository.save({ answer: correctedAnswer });
     const knowledgeElementsToAdd = computeKnowledgeElements({
       assessment,
-      answer: correctedAnswer,
+      answer: answerSaved,
       challenge,
       targetSkills,
       knowledgeElementsBefore,
     });
-
-    answerSaved = await answerRepository.saveWithKnowledgeElements(correctedAnswer, knowledgeElementsToAdd);
+    await knowledgeElementRepository.saveForCampaignParticipation({
+      knowledgeElements: knowledgeElementsToAdd,
+      campaignParticipationId: assessment.campaignParticipationId,
+    });
     answerSaved.levelup = await computeLevelUpInformation({
       answerSaved,
       userId,
@@ -75,7 +79,7 @@ export async function saveAndCorrectAnswerForCampaign({
       competenceEvaluationRepository,
     });
   } else if (assessment.isFlash()) {
-    answerSaved = await answerRepository.saveWithKnowledgeElements(correctedAnswer, []);
+    answerSaved = await answerRepository.save({ answer: correctedAnswer });
     answerSaved.levelup = {};
     const flashData = await algorithmDataFetcherService.fetchForFlashLevelEstimation({
       assessment,
@@ -99,7 +103,7 @@ export async function saveAndCorrectAnswerForCampaign({
   }
 
   return answerSaved;
-}
+});
 
 function computeKnowledgeElements({ assessment, answer, challenge, targetSkills, knowledgeElementsBefore }) {
   const knowledgeElements = knowledgeElementsBefore.filter(
@@ -168,3 +172,5 @@ async function computeLevelUpInformation({
     knowledgeElementsForCompetenceAfter,
   });
 }
+
+export { saveAndCorrectAnswerForCampaign };

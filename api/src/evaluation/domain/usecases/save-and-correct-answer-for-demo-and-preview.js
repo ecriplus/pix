@@ -1,7 +1,8 @@
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { ChallengeNotAskedError } from '../../../shared/domain/errors.js';
 import { EmptyAnswerError } from '../errors.js';
 
-export async function saveAndCorrectAnswerForDemoAndPreview({
+const saveAndCorrectAnswerForDemoAndPreview = withTransaction(async function ({
   answer,
   assessment,
   forceOKAnswer = false,
@@ -28,7 +29,9 @@ export async function saveAndCorrectAnswerForDemoAndPreview({
   const lastQuestionDate = assessment.lastQuestionDate || now;
   correctedAnswer.setTimeSpentFrom({ now, lastQuestionDate });
 
-  const answerSaved = await answerRepository.saveWithKnowledgeElements(correctedAnswer, []);
+  const answerSaved = await answerRepository.save({ answer: correctedAnswer });
   answerSaved.levelup = {};
   return answerSaved;
-}
+});
+
+export { saveAndCorrectAnswerForDemoAndPreview };

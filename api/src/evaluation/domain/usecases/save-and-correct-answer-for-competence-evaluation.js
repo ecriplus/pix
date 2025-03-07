@@ -1,10 +1,11 @@
 import { AnswerJob } from '../../../quest/domain/models/AnwserJob.js';
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { ForbiddenAccess } from '../../../shared/domain/errors.js';
 import { ChallengeNotAskedError } from '../../../shared/domain/errors.js';
 import { KnowledgeElement } from '../../../shared/domain/models/index.js';
 import { EmptyAnswerError } from '../errors.js';
 
-export async function saveAndCorrectAnswerForCompetenceEvaluation({
+const saveAndCorrectAnswerForCompetenceEvaluation = withTransaction(async function ({
   answer,
   userId,
   assessment,
@@ -45,15 +46,15 @@ export async function saveAndCorrectAnswerForCompetenceEvaluation({
 
   const targetSkills = await skillRepository.findActiveByCompetenceId(assessment.competenceId);
   const knowledgeElementsBefore = await knowledgeElementRepository.findUniqByUserId({ userId });
+  const answerSaved = await answerRepository.save({ answer: correctedAnswer });
   const knowledgeElementsToAdd = computeKnowledgeElements({
     assessment,
-    answer: correctedAnswer,
+    answer: answerSaved,
     challenge,
     targetSkills,
     knowledgeElementsBefore,
   });
-
-  const answerSaved = await answerRepository.saveWithKnowledgeElements(correctedAnswer, knowledgeElementsToAdd);
+  await knowledgeElementRepository.batchSave({ knowledgeElements: knowledgeElementsToAdd });
   answerSaved.levelup = await computeLevelUpInformation({
     answerSaved,
     userId,
@@ -72,7 +73,7 @@ export async function saveAndCorrectAnswerForCompetenceEvaluation({
   }
 
   return answerSaved;
-}
+});
 
 function computeKnowledgeElements({ assessment, answer, challenge, targetSkills, knowledgeElementsBefore }) {
   const knowledgeElements = knowledgeElementsBefore.filter(
@@ -141,3 +142,5 @@ async function computeLevelUpInformation({
     knowledgeElementsForCompetenceAfter,
   });
 }
+
+export { saveAndCorrectAnswerForCompetenceEvaluation };
