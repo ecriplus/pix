@@ -459,8 +459,8 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Correct !</span> <p>Vous avez lancé la vidéo et trouvé la bonne réponse</p>",
-                    "invalid": "<span class=\"feedback__state\">Incorrect.</span><p>Vous avez bien cliqué sur vérifier. Mais ce n’était pas la bonne réponse.<br>Vous pouvez retenter votre chance en cliquant sur «&nbsp;Réessayer&nbsp;».</p>"
+                    "valid": "<span class=\"feedback__state\">Bonne réponse&nbsp;! 🎉</span> <p>Vous avez lancé la vidéo et trouvé la bonne réponse</p>",
+                    "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p>Vous avez bien cliqué sur vérifier. Mais ce n’était pas la bonne réponse.<br>Vous pouvez retenter votre chance en cliquant sur «&nbsp;Réessayer&nbsp;».</p>"
                   },
                   "solution": "1"
                 },
