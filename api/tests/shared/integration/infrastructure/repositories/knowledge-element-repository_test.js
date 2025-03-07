@@ -1,9 +1,10 @@
 import _ from 'lodash';
 
+import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import * as knowledgeElementRepository from '../../../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Repository | knowledgeElementRepository', function () {
   describe('#batchSave', function () {
@@ -47,6 +48,149 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
       expect(savedKnowledgeElements[0]).to.deepEqualInstanceOmitting(knowledgeElementsToSave[0], ['createdAt', 'id']);
       expect(savedKnowledgeElements[1]).to.deepEqualInstanceOmitting(knowledgeElementsToSave[1], ['createdAt', 'id']);
       expect(savedKnowledgeElements[0].createdAt).to.deep.equal(savedKnowledgeElements[1].createdAt);
+    });
+  });
+
+  describe('#saveForCampaignParticipation', function () {
+    let knowledgeElementsToSave;
+
+    beforeEach(function () {
+      // given
+      knowledgeElementsToSave = [];
+      const userId = databaseBuilder.factory.buildUser({}).id;
+      const assessmentId = databaseBuilder.factory.buildAssessment({ userId }).id;
+      const answerId1 = databaseBuilder.factory.buildAnswer({ assessmentId }).id;
+      const answerId2 = databaseBuilder.factory.buildAnswer({ assessmentId }).id;
+      knowledgeElementsToSave.push(
+        domainBuilder.buildKnowledgeElement({
+          userId,
+          assessmentId,
+          answerId: answerId1,
+          competenceId: 'recABC',
+        }),
+      );
+      knowledgeElementsToSave.push(
+        domainBuilder.buildKnowledgeElement({
+          userId,
+          assessmentId,
+          answerId: answerId2,
+          competenceId: 'recABC',
+        }),
+      );
+
+      return databaseBuilder.commit();
+    });
+
+    context('when campaign participation is invalid', function () {
+      it('should return an empty array without saving anything when campaign participation does not refer to existing entities', async function () {
+        // when
+        const res = await knowledgeElementRepository.saveForCampaignParticipation({
+          knowledgeElements: knowledgeElementsToSave,
+          campaignParticipationId: 456,
+        });
+
+        // then
+        const [{ count }] = await knex('knowledge-elements').count();
+        expect(count).to.equal(0);
+        expect(res).to.deep.equal([]);
+      });
+
+      it('should return an empty array without saving anything when campaign participation is not defined', async function () {
+        // when
+        const res = await knowledgeElementRepository.saveForCampaignParticipation({
+          knowledgeElements: knowledgeElementsToSave,
+          campaignParticipationId: null,
+        });
+
+        // then
+        const [{ count }] = await knex('knowledge-elements').count();
+        expect(count).to.equal(0);
+        expect(res).to.deep.equal([]);
+      });
+    });
+
+    context('when campaign participation is valid', function () {
+      context('when campaign is of type PROFILES_COLLECTION', function () {
+        it('should not save anything in DB and return an empty array', async function () {
+          // given
+          const campaignId = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.PROFILES_COLLECTION }).id;
+          const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+            campaignId,
+          }).id;
+          await databaseBuilder.commit();
+
+          // when
+          const savedKnowledgeElements = await knowledgeElementRepository.saveForCampaignParticipation({
+            knowledgeElements: knowledgeElementsToSave,
+            campaignParticipationId,
+          });
+
+          // then
+          const [{ count }] = await knex('knowledge-elements').count();
+          expect(count).to.equal(0);
+          expect(savedKnowledgeElements).to.deep.equal([]);
+        });
+      });
+      context('when campaign is of type ASSESSMENT', function () {
+        it('should save all the knowledgeElements in table "knowledge-elements"', async function () {
+          // given
+          const campaignId = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT }).id;
+          const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+            campaignId,
+          }).id;
+          await databaseBuilder.commit();
+
+          // when
+          const savedKnowledgeElements = await knowledgeElementRepository.saveForCampaignParticipation({
+            knowledgeElements: knowledgeElementsToSave,
+            campaignParticipationId,
+          });
+
+          // then
+          const [{ count }] = await knex('knowledge-elements').count();
+          expect(count).to.equal(2);
+          expect(savedKnowledgeElements).to.have.lengthOf(2);
+          expect(savedKnowledgeElements[0]).to.deepEqualInstanceOmitting(knowledgeElementsToSave[0], [
+            'createdAt',
+            'id',
+          ]);
+          expect(savedKnowledgeElements[1]).to.deepEqualInstanceOmitting(knowledgeElementsToSave[1], [
+            'createdAt',
+            'id',
+          ]);
+          expect(savedKnowledgeElements[0].createdAt).to.deep.equal(savedKnowledgeElements[1].createdAt);
+        });
+      });
+      context('when campaign is of type EXAM', function () {
+        it('should save all the knowledgeElements in table "knowledge-elements"', async function () {
+          // given
+          const campaignId = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.EXAM }).id;
+          const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+            campaignId,
+          }).id;
+          await databaseBuilder.commit();
+
+          // when
+          const savedKnowledgeElements = await knowledgeElementRepository.saveForCampaignParticipation({
+            knowledgeElements: knowledgeElementsToSave,
+            campaignParticipationId,
+          });
+
+          // then
+          const [{ count }] = await knex('knowledge-elements').count();
+          expect(count).to.equal(2);
+          expect(savedKnowledgeElements).to.have.lengthOf(2);
+          expect(savedKnowledgeElements[0]).to.deepEqualInstanceOmitting(knowledgeElementsToSave[0], [
+            'createdAt',
+            'id',
+          ]);
+          expect(savedKnowledgeElements[1]).to.deepEqualInstanceOmitting(knowledgeElementsToSave[1], [
+            'createdAt',
+            'id',
+          ]);
+          expect(savedKnowledgeElements[0].createdAt).to.deep.equal(savedKnowledgeElements[1].createdAt);
+        });
+      });
     });
   });
 

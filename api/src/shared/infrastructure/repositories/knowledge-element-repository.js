@@ -1,9 +1,11 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../db/knex-database-connection.js';
+import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import { KnowledgeElementCollection } from '../../../prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { KnowledgeElement } from '../../domain/models/KnowledgeElement.js';
+import { logger } from '../utils/logger.js';
 
 const tableName = 'knowledge-elements';
 
@@ -51,6 +53,23 @@ const batchSave = async function ({ knowledgeElements }) {
   return savedKnowledgeElements.map((ke) => new KnowledgeElement(ke));
 };
 
+const saveForCampaignParticipation = async function ({ knowledgeElements, campaignParticipationId }) {
+  const knexConn = DomainTransaction.getConnection();
+  const campaign = await _getAssociatedCampaign(campaignParticipationId);
+  if (!campaign) {
+    return [];
+  }
+  if (campaign.isAssessment || campaign.isExam) {
+    const knowledgeElementsToSave = knowledgeElements.map((ke) => _.omit(ke, ['id', 'createdAt']));
+    const savedKnowledgeElements = await knex
+      .batchInsert(tableName, knowledgeElementsToSave)
+      .transacting(knexConn.isTransaction ? knexConn : null)
+      .returning('*');
+    return savedKnowledgeElements.map((ke) => new KnowledgeElement(ke));
+  }
+  return [];
+};
+
 const findUniqByUserId = function ({ userId, limitDate, skillIds }) {
   return findAssessedByUserIdAndLimitDateQuery({ userId, limitDate, skillIds });
 };
@@ -93,6 +112,21 @@ const findInvalidatedAndDirectByUserId = async function (userId) {
   );
 };
 
+async function _getAssociatedCampaign(campaignParticipationId) {
+  let campaign = null;
+  if (!campaignParticipationId) {
+    return campaign;
+  }
+  try {
+    const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(campaignParticipationId);
+    campaign = await campaignRepository.get(campaignId);
+  } catch (err) {
+    logger.error(err);
+    return null;
+  }
+  return campaign;
+}
+
 export {
   batchSave,
   findAssessedByUserIdAndLimitDateQuery,
@@ -102,4 +136,5 @@ export {
   findUniqByUserIdAndCompetenceId,
   findUniqByUserIdGroupedByCompetenceId,
   findUniqByUserIds,
+  saveForCampaignParticipation,
 };
