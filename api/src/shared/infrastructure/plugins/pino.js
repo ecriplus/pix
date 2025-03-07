@@ -22,9 +22,14 @@ function requestSerializer(req) {
   const context = monitoringTools.getContext();
   if (context?.request?.route?.path === '/api/token') {
     const { username, refresh_token, grant_type } = context.request.payload || {};
-    const origin = getForwardedOrigin(context.request.headers);
+    let origin;
+    try {
+      origin = getForwardedOrigin(context.request.headers);
+    } catch {
+      origin = '-';
+    }
+    enhancedReq.audience = origin;
     enhancedReq.grantType = grant_type || '-';
-    enhancedReq.audience = origin || '-';
     enhancedReq.usernameHash = generateHash(username) || '-';
     enhancedReq.refreshTokenHash = generateHash(refresh_token) || '-';
   }

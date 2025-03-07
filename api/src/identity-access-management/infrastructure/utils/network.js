@@ -1,3 +1,5 @@
+import { HttpErrors } from '../../../shared/application/http-errors.js';
+
 const PIX_APP_APPLICATION_NAME = 'app';
 const PIX_ADMIN_APPLICATION_NAME = 'admin';
 const PIX_ORGA_APPLICATION_NAME = 'orga';
@@ -22,7 +24,7 @@ function getForwardedOrigin(headers) {
   const protoHeader = headers['x-forwarded-proto'];
   const hostHeader = headers['x-forwarded-host'];
   if (!protoHeader || !hostHeader) {
-    return '';
+    throw new ForwardedOriginError('Missing forwarded header(s)');
   }
 
   return `${_getHeaderFirstValue(protoHeader)}://${_getHeaderFirstValue(hostHeader)}`;
@@ -61,7 +63,13 @@ class RequestedApplication {
    * @returns {RequestedApplication}
    */
   static fromOrigin(origin) {
-    const url = new URL(origin);
+    let url;
+    try {
+      url = new URL(origin);
+    } catch {
+      throw new ForwardedOriginError(`Invalid URL: "${origin}"`);
+    }
+
     let applicationName;
 
     if (url.hostname == 'localhost') {
@@ -69,10 +77,28 @@ class RequestedApplication {
       return new RequestedApplication(applicationName);
     }
 
-    const urlFirstLabel = url.hostname.split('.')[0];
-    const reviewAppSubPart = urlFirstLabel.split('-')[0];
-    applicationName = reviewAppSubPart;
+    const hostnameParts = url.hostname.split('.');
+    if (hostnameParts.length < 2) {
+      throw new ForwardedOriginError(`Unsupported hostname: "${url.hostname}"`);
+    }
+
+    const urlFirstLabel = hostnameParts[0];
+
+    const urlFirstLabelParts = urlFirstLabel.split('-');
+    if (urlFirstLabelParts.length == 2) {
+      const reviewAppSubPart = urlFirstLabelParts[0];
+      applicationName = reviewAppSubPart;
+    } else {
+      applicationName = urlFirstLabel;
+    }
+
     return new RequestedApplication(applicationName);
+  }
+}
+
+class ForwardedOriginError extends HttpErrors.BadRequestError {
+  constructor(message) {
+    super(message);
   }
 }
 
@@ -80,4 +106,4 @@ function _getHeaderFirstValue(headerValue) {
   return headerValue.split(',')[0];
 }
 
-export { getForwardedOrigin, RequestedApplication };
+export { ForwardedOriginError, getForwardedOrigin, RequestedApplication };
