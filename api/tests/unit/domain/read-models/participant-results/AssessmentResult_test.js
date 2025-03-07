@@ -1,5 +1,9 @@
 import { constants } from '../../../../../src/shared/domain/constants.js';
-import { CampaignParticipationStatuses, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import {
+  CampaignParticipationStatuses,
+  CampaignTypes,
+  KnowledgeElement,
+} from '../../../../../src/shared/domain/models/index.js';
 import { AssessmentResult } from '../../../../../src/shared/domain/read-models/participant-results/AssessmentResult.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
@@ -914,19 +918,13 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
     const assessmentCreatedAt = new Date('2020-01-05T05:06:07Z');
     let clock;
 
-    before(function () {
-      sinon.stub(constants, 'MINIMUM_DELAY_IN_DAYS_BEFORE_IMPROVING').value(4);
-    });
-
-    after(function () {
-      sinon.stub(constants, 'MINIMUM_DELAY_IN_DAYS_BEFORE_IMPROVING').value(originalConstantValue);
-    });
-
     beforeEach(function () {
+      sinon.stub(constants, 'MINIMUM_DELAY_IN_DAYS_BEFORE_IMPROVING').value(4);
       clock = sinon.useFakeTimers({ now: assessmentCreatedAt, toFake: ['Date'] });
     });
 
     afterEach(function () {
+      sinon.stub(constants, 'MINIMUM_DELAY_IN_DAYS_BEFORE_IMPROVING').value(originalConstantValue);
       clock.restore();
     });
 
@@ -979,6 +977,47 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
         });
 
         expect(assessmentResult.canImprove).to.be.false;
+      });
+    });
+
+    context('by campaign types', function () {
+      // eslint-disable-next-line mocha/no-setup-in-describe
+      [
+        {
+          // eslint-disable-next-line mocha/no-setup-in-describe
+          campaignType: CampaignTypes.EXAM,
+          expected: false,
+        },
+        {
+          // eslint-disable-next-line mocha/no-setup-in-describe
+          campaignType: CampaignTypes.ASSESSMENT,
+          expected: true,
+        },
+      ].forEach(({ campaignType, expected }) => {
+        it(`returns ${expected} when campaign is of type ${campaignType}`, function () {
+          const ke = domainBuilder.buildKnowledgeElement({
+            status: KnowledgeElement.StatusType.INVALIDATED,
+            createdAt: new Date('2020-01-01'),
+          });
+          const participationResults = {
+            knowledgeElements: [ke],
+            acquiredBadgeIds: [],
+            assessmentCreatedAt,
+            sharedAt: null,
+            status: CampaignParticipationStatuses.STARTED,
+          };
+          const assessmentResult = new AssessmentResult({
+            participationResults,
+            competences: [],
+            stages: [],
+            badgeResultsDTO: [],
+            isCampaignMultipleSendings: false,
+            isOrganizationLearnerActive: false,
+            campaignType,
+          });
+
+          expect(assessmentResult.canImprove).to.equal(expected);
+        });
       });
     });
 

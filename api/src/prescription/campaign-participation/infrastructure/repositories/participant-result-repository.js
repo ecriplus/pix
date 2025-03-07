@@ -38,10 +38,11 @@ const getByUserIdAndCampaignId = async function ({ userId, campaignId, badges, r
   if (participationResults.isFlash) {
     flashScoringResults = await _getFlashScoringResults(participationResults.assessmentId, locale);
   }
-  const isCampaignMultipleSendings = await _isCampaignMultipleSendings(campaignId);
+  const campaignDTO = await _getCampaignDTO(campaignId);
+  const isCampaignMultipleSendings = _isCampaignMultipleSendings(campaignDTO);
+  const isCampaignArchived = _isCampaignArchived(campaignDTO);
+  const isCampaignDeleted = _isCampaignDeleted(campaignDTO);
   const isOrganizationLearnerActive = await _isOrganizationLearnerActive(userId, campaignId);
-  const isCampaignArchived = await _isCampaignArchived(campaignId);
-  const isCampaignDeleted = await _isCampaignDeleted(campaignId);
   const competences = await _findTargetedCompetences(campaignId, locale);
   if (stages && stages.length) {
     const skillIds = competences.flatMap(({ targetedSkillIds }) => targetedSkillIds);
@@ -67,6 +68,7 @@ const getByUserIdAndCampaignId = async function ({ userId, campaignId, badges, r
     isOrganizationLearnerActive,
     isCampaignArchived,
     isCampaignDeleted,
+    campaignType: campaignDTO.type,
     flashScoringResults,
     isTargetProfileResetAllowed,
   });
@@ -236,19 +238,20 @@ async function _findTargetedCompetences(campaignId, locale) {
   return targetedCompetences;
 }
 
-async function _isCampaignMultipleSendings(campaignId) {
-  const campaign = await knex('campaigns').select('multipleSendings').where({ 'campaigns.id': campaignId }).first();
-  return campaign.multipleSendings;
+function _getCampaignDTO(campaignId) {
+  return knex('campaigns').select('*').where({ 'campaigns.id': campaignId }).first();
 }
 
-async function _isCampaignArchived(campaignId) {
-  const campaign = await knex('campaigns').select('archivedAt').where({ 'campaigns.id': campaignId }).first();
-  return Boolean(campaign.archivedAt);
+function _isCampaignMultipleSendings(campaignDTO) {
+  return campaignDTO.multipleSendings;
 }
 
-async function _isCampaignDeleted(campaignId) {
-  const campaign = await knex('campaigns').select('deletedAt').where({ 'campaigns.id': campaignId }).first();
-  return Boolean(campaign.deletedAt);
+function _isCampaignArchived(campaignDTO) {
+  return Boolean(campaignDTO.archivedAt);
+}
+
+function _isCampaignDeleted(campaignDTO) {
+  return Boolean(campaignDTO.deletedAt);
 }
 
 async function _isOrganizationLearnerActive(userId, campaignId) {
