@@ -15,6 +15,7 @@ export default function (schema, request) {
       hasCheckpoints: false,
       showProgressBar: true,
       showLevelup: false,
+      showQuestionCounter: true,
     });
   }
 

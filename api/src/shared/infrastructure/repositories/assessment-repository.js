@@ -224,5 +224,6 @@ function _adaptModelToDb(assessment) {
     'showProgressBar',
     'hasCheckpoints',
     'showLevelup',
+    'showQuestionCounter',
   ]);
 }

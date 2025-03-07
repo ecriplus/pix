@@ -23,6 +23,7 @@ describe('Unit | Domain | Models | Assessment', function () {
         hasCheckpoints: true,
         showProgressBar: true,
         showLevelup: true,
+        showQuestionCounter: true,
         expectedTitle: 'Ma Compétence',
         attributes: { title: 'Ma Compétence' },
       },
@@ -32,6 +33,7 @@ describe('Unit | Domain | Models | Assessment', function () {
         hasCheckpoints: false,
         showProgressBar: false,
         showLevelup: false,
+        showQuestionCounter: true,
         expectedTitle: 'certificationCourseId',
         attributes: { certificationCourseId: 'certificationCourseId' },
       },
@@ -41,6 +43,7 @@ describe('Unit | Domain | Models | Assessment', function () {
         hasCheckpoints: false,
         showProgressBar: true,
         showLevelup: false,
+        showQuestionCounter: true,
         expectedTitle: 'Mon Course',
         attributes: { title: 'Mon Course' },
       },
@@ -50,6 +53,7 @@ describe('Unit | Domain | Models | Assessment', function () {
         hasCheckpoints: false,
         showProgressBar: false,
         showLevelup: false,
+        showQuestionCounter: true,
         expectedTitle: 'Preview',
         attributes: {},
       },
@@ -59,6 +63,7 @@ describe('Unit | Domain | Models | Assessment', function () {
         hasCheckpoints: true,
         showProgressBar: true,
         showLevelup: true,
+        showQuestionCounter: true,
         expectedTitle: 'Ma Campagne',
         // eslint-disable-next-line mocha/no-setup-in-describe
         attributes: { campaign: domainBuilder.buildCampaign({ title: 'Ma Campagne', type: CampaignTypes.ASSESSMENT }) },
@@ -66,9 +71,10 @@ describe('Unit | Domain | Models | Assessment', function () {
       {
         // eslint-disable-next-line mocha/no-setup-in-describe
         type: Assessment.types.CAMPAIGN,
-        hasCheckpoints: true,
-        showProgressBar: true,
-        showLevelup: true,
+        hasCheckpoints: false,
+        showProgressBar: false,
+        showLevelup: false,
+        showQuestionCounter: false,
         expectedTitle: 'Ma Campagne',
         // eslint-disable-next-line mocha/no-setup-in-describe
         attributes: { campaign: domainBuilder.buildCampaign({ title: 'Ma Campagne', type: CampaignTypes.EXAM }) },
@@ -79,6 +85,7 @@ describe('Unit | Domain | Models | Assessment', function () {
         hasCheckpoints: false,
         showProgressBar: false,
         showLevelup: false,
+        showQuestionCounter: true,
         expectedTitle: 'Ma Campagne',
         attributes: {
           // eslint-disable-next-line mocha/no-setup-in-describe

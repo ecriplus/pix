@@ -25,6 +25,7 @@ export default class Assessment extends Model {
   @attr('boolean') hasCheckpoints;
   @attr('boolean') showProgressBar;
   @attr('boolean') showLevelup;
+  @attr('boolean') showQuestionCounter;
 
   // references
   @attr('string') competenceId;

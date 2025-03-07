@@ -21,6 +21,10 @@ export default Factory.extend({
     return true;
   },
 
+  showQuestionCounter() {
+    return true;
+  },
+
   withStartedState: trait({
     state: 'started',
   }),
@@ -54,6 +58,7 @@ export default Factory.extend({
     type: 'CAMPAIGN',
     method: 'FLASH',
     showProgressBar: false,
+    showQuestionCounter: true,
   }),
 
   withCurrentChallengeTimeout: trait({

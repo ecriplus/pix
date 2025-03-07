@@ -14,6 +14,14 @@ export default class ProgressBar extends Component {
     return this.args.assessment.showProgressBar && this.media.isDesktop;
   }
 
+  get showQuestionCounterInsideProgressBar() {
+    return this.showProgressBar && this.args.assessment.showQuestionCounter;
+  }
+
+  get showQuestionCounterOutside() {
+    return !this.showProgressBar && this.args.assessment.showQuestionCounter;
+  }
+
   get currentStepIndex() {
     return progressInAssessment.getCurrentStepIndex(this.args.assessment, this.args.currentChallengeNumber);
   }

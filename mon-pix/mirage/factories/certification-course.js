@@ -23,6 +23,7 @@ export default Factory.extend({
           hasCheckpoints: false,
           showProgressBar: false,
           showLevelup: false,
+          showQuestionCounter: true,
         }),
       });
     }
