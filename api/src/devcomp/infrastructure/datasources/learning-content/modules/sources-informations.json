@@ -392,7 +392,7 @@
                     }
                   ],
                   "feedbacks": {
-                    "valid": "<span class=\"feedback__state\">Bonne réponse&nbsp;! 🎉<p> Ce journal est reconnu et vérifie les informations qu’il publie. Ces informations sont donc très souvent vraies.</p>",
+                    "valid": "<span class=\"feedback__state\">Bonne réponse&nbsp;! 🎉</span><p> Ce journal est reconnu et vérifie les informations qu’il publie. Ces informations sont donc très souvent vraies.</p>",
                     "invalid": "<span class=\"feedback__state\">Mauvaise réponse.</span><p> Ce journal est reconnu et vérifie les informations qu’il publie. Ces informations sont donc très souvent vraies.</p>"
                   },
                   "solution": "1"
