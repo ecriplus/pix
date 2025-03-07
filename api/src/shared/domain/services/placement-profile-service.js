@@ -164,38 +164,6 @@ async function getPlacementProfilesWithSnapshotting({ participations, competence
   });
 }
 
-async function getPlacementProfileWithSnapshotting({
-  userId,
-  limitDate,
-  competences,
-  allowExcessPixAndLevels = true,
-  campaignParticipationId,
-}) {
-  const snapshots = await knowledgeElementSnapshotRepository.findByCampaignParticipationIds([campaignParticipationId]);
-  const knowledgeElements = snapshots[campaignParticipationId];
-  const knowledgeElementsByCompetence = knowledgeElements
-    ? knowledgeElements.reduce((acc, ke) => {
-        if (!acc[ke.competenceId]) {
-          acc[ke.competenceId] = [];
-        }
-        acc[ke.competenceId].push(ke);
-        return acc;
-      }, {})
-    : {};
-
-  const userCompetences = _createUserCompetencesV2({
-    knowledgeElementsByCompetence,
-    competences,
-    allowExcessPixAndLevels,
-  });
-
-  return new PlacementProfile({
-    userId,
-    profileDate: limitDate,
-    userCompetences,
-  });
-}
-
 function _matchingDirectlyValidatedSkillsForCompetence(knowledgeElementsForCompetence, skillMap) {
   const competenceSkills = knowledgeElementsForCompetence
     .filter((ke) => ke.isDirectlyValidated())
@@ -206,4 +174,4 @@ function _matchingDirectlyValidatedSkillsForCompetence(knowledgeElementsForCompe
   return competenceSkills.filter(Boolean);
 }
 
-export { getPlacementProfile, getPlacementProfilesWithSnapshotting, getPlacementProfileWithSnapshotting };
+export { getPlacementProfile, getPlacementProfilesWithSnapshotting };

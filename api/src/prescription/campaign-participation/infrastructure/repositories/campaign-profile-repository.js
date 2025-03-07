@@ -4,20 +4,18 @@ import * as placementProfileService from '../../../../shared/domain/services/pla
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
 import { CampaignProfile } from '../../domain/models/CampaignProfile.js';
+import * as campaignParticipationRepository from './campaign-participation-repository.js';
 
 const findProfile = async function ({ campaignId, campaignParticipationId, locale }) {
   const profile = await _fetchCampaignProfileAttributesFromCampaignParticipation(campaignId, campaignParticipationId);
   const competences = await competenceRepository.listPixCompetencesOnly({ locale });
   const allAreas = await areaRepository.list({ locale });
+  const { userId, sharedAt, id } = await campaignParticipationRepository.get(campaignParticipationId);
 
-  const { sharedAt, userId } = profile;
-
-  const placementProfile = await placementProfileService.getPlacementProfileWithSnapshotting({
-    userId,
-    limitDate: sharedAt,
-    allowExcessPixAndLevels: false,
+  const [placementProfile] = await placementProfileService.getPlacementProfilesWithSnapshotting({
+    participations: [{ userId, sharedAt, campaignParticipationId: id }],
     competences,
-    campaignParticipationId,
+    allowExcessPixAndLevels: false,
   });
 
   return new CampaignProfile({ ...profile, placementProfile, allAreas });
