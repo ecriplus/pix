@@ -390,7 +390,7 @@ const findByExternalIdentifier = async function ({ externalIdentityId, identityP
 };
 
 const findAnotherUserByEmail = async function (userId, email) {
-  const anotherUsers = await knex('users').whereNot('id', userId).where({ email: email.toLowerCase() });
+  const anotherUsers = await knex('users').whereNot('id', userId).whereRaw('LOWER("email") = ?', email.toLowerCase());
 
   return anotherUsers.map((anotherUser) => new User(anotherUser));
 };
