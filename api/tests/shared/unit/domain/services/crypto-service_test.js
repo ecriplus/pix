@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import omit from 'lodash/omit.js';
 
 import { PasswordNotMatching } from '../../../../../src/identity-access-management/domain/errors.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
@@ -79,6 +80,30 @@ describe('Unit | Shared | Domain | Services | Crypto', function () {
 
       // then
       expect(output).to.equals('00a6fa25-df29-4701-9077-557932591766');
+    });
+  });
+
+  describe('#generateRSAJSONWebKeyPair', function () {
+    it('should generate a new JSON Web Key pair', async function () {
+      // given
+      const modulusLength = 512;
+
+      // when
+      const keyPair = await cryptoService.generateRSAJSONWebKeyPair({ modulusLength });
+      const newKeyPair = await cryptoService.generateRSAJSONWebKeyPair({ modulusLength });
+
+      // then
+      expect(keyPair.publicKey).to.be.instanceOf(Object);
+      expect(keyPair.publicKey).to.have.property('kty', 'RSA');
+      expect(keyPair.publicKey).to.have.property('kid');
+      expect(keyPair.publicKey.kid).to.be.a('string');
+      expect(keyPair.privateKey).to.be.instanceOf(Object);
+      expect(keyPair.privateKey).to.have.property('kty', 'RSA');
+      expect(keyPair.privateKey).to.have.property('kid');
+      expect(keyPair.privateKey.kid).to.be.a('string');
+
+      expect(omit(newKeyPair.publicKey, 'kid')).to.not.deep.equal(omit(keyPair.publicKey, 'kid'));
+      expect(omit(newKeyPair.privateKey, 'kid')).to.not.deep.equal(omit(keyPair.privateKey, 'kid'));
     });
   });
 });

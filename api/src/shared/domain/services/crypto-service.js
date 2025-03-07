@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt';
 import { config } from '../../../../src/shared/config.js';
 import { PasswordNotMatching } from '../../../identity-access-management/domain/errors.js';
 
+const generateKeyPair = util.promisify(crypto.generateKeyPair);
 const randomBytes = util.promisify(crypto.randomBytes);
 const scrypt = util.promisify(crypto.scrypt);
 
@@ -86,6 +87,25 @@ const decrypt = async function (phcText) {
   return decrypted.toString();
 };
 
+async function generateRSAJSONWebKeyPair({ modulusLength = 4096 } = {}) {
+  const keyPair = await generateKeyPair('rsa', {
+    modulusLength,
+    publicKeyEncoding: {
+      type: 'pkcs1',
+      format: 'jwk',
+    },
+    privateKeyEncoding: {
+      type: 'pkcs1',
+      format: 'jwk',
+    },
+  });
+  const kid = crypto.randomUUID();
+  return {
+    publicKey: { ...keyPair.publicKey, kid },
+    privateKey: { ...keyPair.privateKey, kid },
+  };
+}
+
 /**
  * @typedef {Object} CryptoService
  * @property {function} randomBytes
@@ -94,8 +114,18 @@ const decrypt = async function (phcText) {
  * @property {function} encrypt
  * @property {function} hashPassword
  * @property {function} hashPasswordSync
+ * @property {function} generateRSAJSONWebKeyPair
  * @property {RegExp} phcRegexp
  */
-const cryptoService = { randomBytes, checkPassword, decrypt, encrypt, hashPassword, hashPasswordSync, phcRegexp };
+const cryptoService = {
+  randomBytes,
+  checkPassword,
+  decrypt,
+  encrypt,
+  hashPassword,
+  hashPasswordSync,
+  phcRegexp,
+  generateRSAJSONWebKeyPair,
+};
 
 export { cryptoService };

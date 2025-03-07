@@ -1,9 +1,8 @@
-import { randomUUID, subtle } from 'node:crypto';
-
 import { LtiPlatformRegistration } from '../../../../../src/identity-access-management/domain/models/LtiPlatformRegistration.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
 
-const defaultKeyPair = await generateJWKPair();
+const defaultKeyPair = await cryptoService.generateRSAJSONWebKeyPair({ modulusLength: 512 });
+defaultKeyPair.encryptedPrivateKey = await cryptoService.encrypt(JSON.stringify(defaultKeyPair.privateKey));
 
 function getDefaultToolConfig(clientId) {
   return {
@@ -155,28 +154,4 @@ export function buildLtiPlatformRegistrationWithPlatformConfig({
   });
   ltiPlatformRegistration.platformOpenIdConfig = defaultPlatformOpenIdConfig;
   return ltiPlatformRegistration;
-}
-
-buildLtiPlatformRegistration.generateJWKPair = generateJWKPair;
-
-async function generateJWKPair() {
-  const keyPair = await subtle.generateKey(
-    {
-      name: 'RSASSA-PKCS1-v1_5',
-      modulusLength: 4096,
-      hash: 'SHA-256',
-      publicExponent: new Uint8Array([1, 0, 1]),
-    },
-    true,
-    ['sign', 'verify'],
-  );
-  const privateKey = await subtle.exportKey('jwk', keyPair.privateKey);
-  const encryptedPrivateKey = await cryptoService.encrypt(JSON.stringify(privateKey));
-  const publicKey = await subtle.exportKey('jwk', keyPair.publicKey);
-  publicKey.kid = randomUUID();
-  return {
-    privateKey,
-    encryptedPrivateKey,
-    publicKey,
-  };
 }
