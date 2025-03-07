@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import { certificationCenterController } from '../../../../lib/application/certification-centers/certification-center-controller.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { certificationCenterMembershipController } from './certification-center-membership.controller.js';
@@ -57,7 +56,7 @@ export const certificationCenterMembershipRoute = [
     method: 'POST',
     path: '/api/certif/certification-centers/{certificationCenterId}/update-referer',
     config: {
-      handler: certificationCenterController.updateReferer,
+      handler: certificationCenterMembershipController.updateReferer,
       pre: [
         {
           method: securityPreHandlers.checkUserIsAdminOfCertificationCenter,
