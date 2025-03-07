@@ -552,4 +552,57 @@ describe('Integration | Repository | answerRepository', function () {
       });
     });
   });
+
+  describe('#save', function () {
+    it('should save and return the answer', async function () {
+      // given
+      const answerToSave = domainBuilder.buildAnswer({
+        id: null,
+        result: AnswerStatus.OK,
+        resultDetails: 'some details',
+        timeout: 456,
+        value: 'Fruits',
+        assessmentId: 123,
+        challengeId: 'recChallenge123',
+        timeSpent: 20,
+        isFocusedOut: true,
+      });
+      databaseBuilder.factory.buildAssessment({ id: 123 });
+      await databaseBuilder.commit();
+
+      // when
+      const savedAnswer = await answerRepository.save({ answer: answerToSave });
+
+      // then
+      const answerInDB = await answerRepository.get(savedAnswer.id);
+      expect(savedAnswer).to.deepEqualInstance(answerInDB);
+    });
+
+    context('when there is already an answer for one challenge in one assessment', function () {
+      it('should not have saved anything', async function () {
+        // given
+        const assessmentId = 123;
+        const answerToSave = domainBuilder.buildAnswer({
+          id: null,
+          assessmentId,
+          challengeId: 'challengeId',
+        });
+        databaseBuilder.factory.buildAssessment({ id: assessmentId });
+        const alreadyCreatedAnswerId = databaseBuilder.factory.buildAnswer({
+          challengeId: 'challengeId',
+          assessmentId,
+        }).id;
+        await databaseBuilder.commit();
+
+        // when
+        const error = await catchErr(answerRepository.save)({ answer: answerToSave });
+
+        // then
+        expect(error).to.be.instanceOf(ChallengeAlreadyAnsweredError);
+        const answerInDB = await knex('answers');
+        expect(answerInDB).to.have.lengthOf(1);
+        expect(answerInDB[0].id).to.be.equal(alreadyCreatedAnswerId);
+      });
+    });
+  });
 });
