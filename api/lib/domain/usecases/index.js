@@ -21,7 +21,6 @@ import { pixAuthenticationService } from '../../../src/identity-access-managemen
 import { scoAccountRecoveryService } from '../../../src/identity-access-management/domain/services/sco-account-recovery.service.js';
 import { accountRecoveryDemandRepository } from '../../../src/identity-access-management/infrastructure/repositories/account-recovery-demand.repository.js';
 import * as authenticationMethodRepository from '../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
-import { clientApplicationRepository } from '../../../src/identity-access-management/infrastructure/repositories/client-application.repository.js';
 import { emailValidationDemandRepository } from '../../../src/identity-access-management/infrastructure/repositories/email-validation-demand.repository.js';
 import { lastUserApplicationConnectionsRepository } from '../../../src/identity-access-management/infrastructure/repositories/last-user-application-connections.repository.js';
 import * as oidcProviderRepository from '../../../src/identity-access-management/infrastructure/repositories/oidc-provider-repository.js';
@@ -120,7 +119,6 @@ const dependencies = {
   certificationChallengeLiveAlertRepository,
   certificationCompanionAlertRepository,
   challengeRepository,
-  clientApplicationRepository,
   codeGenerator,
   competenceEvaluationRepository,
   competenceRepository,

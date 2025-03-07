@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { tokenController } from '../../../../src/identity-access-management/application/token/token.controller.js';
 import { usecases } from '../../../../src/identity-access-management/domain/usecases/index.js';
 import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
@@ -216,7 +215,7 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
       const dependencies = { tokenService: tokenServiceStub };
 
       sinon
-        .stub(libUsecases, 'authenticateApplication')
+        .stub(usecases, 'authenticateApplication')
         .withArgs({ clientId: client_id, clientSecret: client_secret, scope })
         .resolves(access_token);
 

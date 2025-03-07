@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { tokenService } from '../../../shared/domain/services/token-service.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/utils/network.js';
@@ -85,7 +84,7 @@ const revokeToken = async function (request, h) {
 const authenticateApplication = async function (request, h) {
   const { client_id: clientId, client_secret: clientSecret, scope } = request.payload;
 
-  const accessToken = await libUsecases.authenticateApplication({ clientId, clientSecret, scope });
+  const accessToken = await usecases.authenticateApplication({ clientId, clientSecret, scope });
 
   return h
     .response({

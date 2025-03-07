@@ -1,12 +1,12 @@
-import { authenticateApplication } from '../../../../lib/domain/usecases/authenticate-application.js';
-import { PasswordNotMatching } from '../../../../src/identity-access-management/domain/errors.js';
-import { config } from '../../../../src/shared/config.js';
+import { PasswordNotMatching } from '../../../../../src/identity-access-management/domain/errors.js';
+import { authenticateApplication } from '../../../../../src/identity-access-management/domain/usecases/authenticate-application.js';
+import { config } from '../../../../../src/shared/config.js';
 import {
   ApplicationScopeNotAllowedError,
   ApplicationWithInvalidClientIdError,
   ApplicationWithInvalidClientSecretError,
-} from '../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+} from '../../../../../src/shared/domain/errors.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Usecase | authenticate-application', function () {
   context('when application is not found', function () {
