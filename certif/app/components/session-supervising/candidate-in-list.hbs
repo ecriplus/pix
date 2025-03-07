@@ -2,20 +2,14 @@
   <div class="session-supervising-candidate-in-list__candidate-data">
     <div class="session-supervising-candidate-in-list__status-container">
       {{#if @candidate.hasStarted}}
-        {{#if @candidate.isAuthorizedToResume}}
-          <PixTag class="session-supervising-candidate-in-list__status-container--authorized-to-resume">{{t
-              "common.forms.certification-labels.candidate-status.authorized-to-resume"
-            }}</PixTag>
+        {{#if @candidate.currentLiveAlert}}
+          <PixTag class="session-supervising-candidate-in-list__status-container--ongoing-alert">
+            {{this.currentLiveAlertLabel}}
+          </PixTag>
         {{else}}
-          {{#if @candidate.currentLiveAlert}}
-            <PixTag class="session-supervising-candidate-in-list__status-container--ongoing-alert">
-              {{this.currentLiveAlertLabel}}
-            </PixTag>
-          {{else}}
-            <PixTag class="session-supervising-candidate-in-list__status-container--started">{{t
-                "common.forms.certification-labels.candidate-status.ongoing"
-              }}</PixTag>
-          {{/if}}
+          <PixTag class="session-supervising-candidate-in-list__status-container--started">{{t
+              "common.forms.certification-labels.candidate-status.ongoing"
+            }}</PixTag>
         {{/if}}
       {{/if}}
       {{#if @candidate.hasCompleted}}
