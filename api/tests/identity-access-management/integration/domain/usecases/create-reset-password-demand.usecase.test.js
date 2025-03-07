@@ -22,6 +22,29 @@ describe('Integration | Identity Access Management | Domain | UseCase | create-r
     expect(resetPasswordDemand).to.exist;
   });
 
+  context('when a user account exists but with an email differing by case', function () {
+    it('creates a reset password demand', async function () {
+      // given
+      const accountEmail = 'DIFFERING_BY_CASE@example.net';
+      const passwordResetDemandEmail = 'differing_by_case@example.net';
+      const userId = databaseBuilder.factory.buildUser({ email: accountEmail }).id;
+      databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({ userId });
+      await databaseBuilder.commit();
+
+      // when
+      await usecases.createResetPasswordDemand({
+        email: passwordResetDemandEmail,
+        locale,
+      });
+
+      // then
+      const resetPasswordDemand = await knex('reset-password-demands')
+        .whereRaw('LOWER("email") = LOWER(?)', passwordResetDemandEmail)
+        .first();
+      expect(resetPasswordDemand).to.exist;
+    });
+  });
+
   context('when user account does not exist with given email', function () {
     it('does not create a reset password demand', async function () {
       // given
