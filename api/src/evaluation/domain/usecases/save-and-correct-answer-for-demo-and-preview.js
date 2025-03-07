@@ -28,7 +28,7 @@ export async function saveAndCorrectAnswerForDemoAndPreview({
   const lastQuestionDate = assessment.lastQuestionDate || now;
   correctedAnswer.setTimeSpentFrom({ now, lastQuestionDate });
 
-  const answerSaved = await answerRepository.saveWithKnowledgeElements(correctedAnswer, []);
+  const answerSaved = await answerRepository.save({ answer: correctedAnswer });
   answerSaved.levelup = {};
   return answerSaved;
 }
