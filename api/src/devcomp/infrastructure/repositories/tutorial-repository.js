@@ -79,7 +79,7 @@ export async function findPaginatedFilteredRecommendedByUserId({
   page,
   locale = FRENCH_FRANCE,
 } = {}) {
-  const invalidatedKnowledgeElements = await knowledgeElementRepository.findInvalidatedAndDirectByUserId(userId);
+  const invalidatedKnowledgeElements = await knowledgeElementRepository.findInvalidatedAndDirectByUserId({ userId });
 
   const [userSavedTutorials, tutorialEvaluations, skills] = await Promise.all([
     userSavedTutorialRepository.find({ userId }),

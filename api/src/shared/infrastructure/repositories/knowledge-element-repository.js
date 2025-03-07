@@ -94,7 +94,7 @@ const findUniqByUserIdGroupedByCompetenceId = async function ({ userId, limitDat
   return _.groupBy(knowledgeElements, 'competenceId');
 };
 
-const findInvalidatedAndDirectByUserId = async function (userId) {
+const findInvalidatedAndDirectByUserId = async function ({ userId }) {
   const invalidatedKnowledgeElements = await knex(tableName)
     .where({
       userId,

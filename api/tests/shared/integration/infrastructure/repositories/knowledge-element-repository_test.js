@@ -488,7 +488,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
       await databaseBuilder.commit();
 
       // When
-      const knowledgeElements = await knowledgeElementRepository.findInvalidatedAndDirectByUserId(userId);
+      const knowledgeElements = await knowledgeElementRepository.findInvalidatedAndDirectByUserId({ userId });
 
       // Then
       expect(knowledgeElements).to.have.lengthOf(2);
@@ -502,7 +502,7 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
       await databaseBuilder.commit();
 
       // When
-      const knowledgeElements = await knowledgeElementRepository.findInvalidatedAndDirectByUserId(userId);
+      const knowledgeElements = await knowledgeElementRepository.findInvalidatedAndDirectByUserId({ userId });
 
       // Then
       expect(knowledgeElements).to.have.lengthOf(0);
