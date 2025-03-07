@@ -28,6 +28,17 @@ module('Unit | Model | campaign', function (hooks) {
       assert.strictEqual(model.urlToResult, 'http://localhost:3000/api/campaigns/1/csv-assessment-results');
     });
 
+    test('it should construct the url to result of the campaign with type exam', function (assert) {
+      const store = this.owner.lookup('service:store');
+      const model = store.createRecord('campaign', {
+        id: '1',
+        name: 'Fake name',
+        code: 'ABC123',
+        type: 'EXAM',
+      });
+      assert.strictEqual(model.urlToResult, 'http://localhost:3000/api/campaigns/1/csv-assessment-results');
+    });
+
     test('it should construct the url to result of the campaign with type profiles collection', function (assert) {
       const store = this.owner.lookup('service:store');
       const model = store.createRecord('campaign', {

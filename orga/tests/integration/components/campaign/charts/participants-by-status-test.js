@@ -18,7 +18,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByStatus', funct
     const screen = await render(
       hbs`<Campaign::Charts::ParticipantsByStatus
   @participantCountByStatus={{this.participantCountByStatus}}
-  @isTypeAssessment={{true}}
+  @shouldDisplayAssessmentLabels={{true}}
 />`,
     );
     assert
@@ -40,7 +40,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByStatus', funct
     const screen = await render(
       hbs`<Campaign::Charts::ParticipantsByStatus
   @participantCountByStatus={{this.participantCountByStatus}}
-  @isTypeAssessment={{true}}
+  @shouldDisplayAssessmentLabels={{true}}
 />`,
     );
 
@@ -60,7 +60,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByStatus', funct
     const screen = await render(
       hbs`<Campaign::Charts::ParticipantsByStatus
   @participantCountByStatus={{this.participantCountByStatus}}
-  @isTypeAssessment={{false}}
+  @shouldDisplayAssessmentLabels={{false}}
 />`,
     );
 
@@ -84,7 +84,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByStatus', funct
     const screen = await render(
       hbs`<Campaign::Charts::ParticipantsByStatus
   @participantCountByStatus={{this.participantCountByStatus}}
-  @isTypeAssessment={{false}}
+  @shouldDisplayAssessmentLabels={{false}}
 />`,
     );
 

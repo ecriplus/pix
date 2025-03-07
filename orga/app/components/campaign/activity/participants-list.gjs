@@ -9,6 +9,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { or } from 'ember-truth-helpers';
 
 import ParticipationStatus from '../../ui/participation-status';
 import ParticipationFilters from '../filter/participation-filters';
@@ -81,7 +82,7 @@ export default class ParticipantsList extends Component {
           <:cell>
             <LinkTo
               @route={{if
-                @campaign.isTypeAssessment
+                (or @campaign.isTypeAssessment @campaign.isTypeExam)
                 "authenticated.campaigns.participant-assessment"
                 "authenticated.campaigns.participant-profile"
               }}

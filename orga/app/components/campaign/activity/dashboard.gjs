@@ -1,6 +1,7 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { or } from 'ember-truth-helpers';
 import sumBy from 'lodash/sumBy';
 
 import ParticipantsCount from '../cards/participants-count';
@@ -39,20 +40,20 @@ export default class Dashboard extends Component {
         <SharedCount
           @value={{this.shared}}
           @isLoading={{this.participantsByStatusLoading}}
-          @isTypeAssessment={{@campaign.isTypeAssessment}}
+          @shouldDisplayAssessmentLabels={{or @campaign.isTypeAssessment @campaign.isTypeExam}}
         />
       </div>
       <div class="activity-dashboard__row">
         <ParticipantsByDay
           @campaignId={{@campaign.id}}
           @totalParticipations={{@totalParticipations}}
-          @isTypeAssessment={{@campaign.isTypeAssessment}}
+          @shouldDisplayAssessmentLabels={{or @campaign.isTypeAssessment @campaign.isTypeExam}}
           class="activity-dashboard__participations-by-day"
         />
         <ParticipantsByStatus
           @loading={{this.participantsByStatusLoading}}
           @participantCountByStatus={{this.participantCountByStatus}}
-          @isTypeAssessment={{@campaign.isTypeAssessment}}
+          @shouldDisplayAssessmentLabels={{or @campaign.isTypeAssessment @campaign.isTypeExam}}
           class="activity-dashboard__participations-by-status"
         />
       </div>

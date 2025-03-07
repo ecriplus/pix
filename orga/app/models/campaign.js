@@ -70,7 +70,7 @@ export default class Campaign extends Model {
   }
 
   get urlToResult() {
-    if (this.isTypeAssessment) {
+    if (this.isTypeAssessment || this.isTypeExam) {
       return `${ENV.APP.API_HOST}/api/campaigns/${this.id}/csv-assessment-results`;
     }
     return `${ENV.APP.API_HOST}/api/campaigns/${this.id}/csv-profiles-collection-results`;

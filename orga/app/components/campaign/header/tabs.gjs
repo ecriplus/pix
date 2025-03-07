@@ -4,6 +4,7 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
+import { or } from 'ember-truth-helpers';
 
 export default class CampaignTabs extends Component {
   @service intl;
@@ -37,7 +38,7 @@ export default class CampaignTabs extends Component {
 
         <LinkTo
           @route={{if
-            @campaign.isTypeAssessment
+            (or @campaign.isTypeAssessment @campaign.isTypeExam)
             "authenticated.campaigns.campaign.assessment-results"
             "authenticated.campaigns.campaign.profile-results"
           }}
@@ -47,7 +48,7 @@ export default class CampaignTabs extends Component {
           {{t "pages.campaign.tab.results" count=@campaign.sharedParticipationsCount}}
         </LinkTo>
 
-        {{#if @campaign.isTypeAssessment}}
+        {{#if (or @campaign.isTypeAssessment @campaign.isTypeExam)}}
           <LinkTo @route="authenticated.campaigns.campaign.analysis" class="navbar-item" @model={{@campaign}}>
             {{t "pages.campaign.tab.review"}}
           </LinkTo>

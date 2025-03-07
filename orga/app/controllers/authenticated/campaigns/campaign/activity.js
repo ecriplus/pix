@@ -24,9 +24,10 @@ export default class ActivityController extends Controller {
 
   @action
   goToParticipantPage(participant) {
-    const route = this.model.campaign.isTypeAssessment
-      ? 'authenticated.campaigns.participant-assessment'
-      : 'authenticated.campaigns.participant-profile';
+    const route =
+      this.model.campaign.isTypeAssessment || this.model.campaign.isTypeExam
+        ? 'authenticated.campaigns.participant-assessment'
+        : 'authenticated.campaigns.participant-profile';
 
     this.router.transitionTo(route, this.model.campaign.id, participant.lastCampaignParticipationId);
   }

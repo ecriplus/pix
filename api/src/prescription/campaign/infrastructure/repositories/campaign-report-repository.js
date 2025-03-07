@@ -66,7 +66,7 @@ const get = async function (id) {
     id,
   });
 
-  if (campaignReport.isAssessment) {
+  if (campaignReport.isAssessment || campaignReport.isExam) {
     const skillIds = await knex('campaign_skills').where({ campaignId: id }).pluck('skillId');
     const skills = await skillRepository.findByRecordIds(skillIds);
 

@@ -10,6 +10,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { or } from 'ember-truth-helpers';
 
 import displayCampaignErrors from '../../helpers/display-campaign-errors';
 
@@ -140,7 +141,7 @@ export default class UpdateForm extends Component {
         </div>
       </div>
 
-      {{#if @campaign.isTypeAssessment}}
+      {{#if (or @campaign.isTypeAssessment @campaign.isTypeExam)}}
         <div class="form__field">
           <PixInput
             @id="campaign-title"

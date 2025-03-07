@@ -57,7 +57,7 @@ export default class ParticipantsByDay extends Component {
   }
 
   get labels() {
-    return this.args.isTypeAssessment ? LABELS_ASSESSMENT : LABELS_PROFILE_COLLECTIONS;
+    return this.args.shouldDisplayAssessmentLabels ? LABELS_ASSESSMENT : LABELS_PROFILE_COLLECTIONS;
   }
 
   get data() {
@@ -138,7 +138,7 @@ export default class ParticipantsByDay extends Component {
     let startedCaption = '';
     let sharedCaption = '';
 
-    if (this.args.isTypeAssessment) {
+    if (this.args.shouldDisplayAssessmentLabels) {
       startedCaption = LABELS_ASSESSMENT.started.caption;
       startedLabel = LABELS_ASSESSMENT.started.a11y;
       sharedCaption = LABELS_ASSESSMENT.shared.caption;
