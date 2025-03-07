@@ -197,49 +197,6 @@ describe('Acceptance | API | Certification Center', function () {
     });
   });
 
-  describe('POST /api/certif/certification-centers/{certificationCenterId}/update-referer', function () {
-    it('should return 204 HTTP status', async function () {
-      // given
-      const userId = databaseBuilder.factory.buildUser().id;
-      const certificationCenterMemberId = databaseBuilder.factory.buildUser().id;
-      const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
-      databaseBuilder.factory.buildCertificationCenterMembership({
-        userId,
-        certificationCenterId,
-        isReferer: false,
-      });
-      databaseBuilder.factory.buildCertificationCenterMembership({
-        userId: certificationCenterMemberId,
-        certificationCenterId,
-        isReferer: false,
-        role: 'ADMIN',
-      });
-      await databaseBuilder.commit();
-
-      const payload = {
-        data: {
-          attributes: {
-            isReferer: true,
-            userId,
-          },
-        },
-      };
-
-      const options = {
-        method: 'POST',
-        url: `/api/certif/certification-centers/${certificationCenterId}/update-referer`,
-        payload,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: certificationCenterMemberId }),
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(204);
-    });
-  });
-
   describe('POST /api/certification-centers/{certificationCenterId}/session', function () {
     describe('when certification center is not V3 certification pilot center', function () {
       it('should return a 200 HTTP status with a V2 session', async function () {

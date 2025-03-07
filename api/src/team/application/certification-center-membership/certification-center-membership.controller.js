@@ -47,8 +47,21 @@ const updateFromPixCertif = async function (
   );
 };
 
+const updateReferer = async function (request, h) {
+  const certificationCenterId = request.params.certificationCenterId;
+  const { userId, isReferer } = request.payload.data.attributes;
+
+  await usecases.updateCertificationCenterReferer({
+    userId,
+    certificationCenterId,
+    isReferer,
+  });
+  return h.response().code(204);
+};
+
 const certificationCenterMembershipController = {
   findCertificationCenterMemberships,
   updateFromPixCertif,
+  updateReferer,
 };
 export { certificationCenterMembershipController };

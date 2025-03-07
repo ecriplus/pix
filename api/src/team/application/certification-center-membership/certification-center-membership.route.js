@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { certificationCenterController } from '../../../../lib/application/certification-centers/certification-center-controller.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { certificationCenterMembershipController } from './certification-center-membership.controller.js';
@@ -48,6 +49,24 @@ export const certificationCenterMembershipRoute = [
       notes: [
         "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès**\n" +
           "- Modification du rôle d'un membre d'un centre de certification\n",
+      ],
+      tags: ['api', 'certification-center-membership'],
+    },
+  },
+  {
+    method: 'POST',
+    path: '/api/certif/certification-centers/{certificationCenterId}/update-referer',
+    config: {
+      handler: certificationCenterController.updateReferer,
+      pre: [
+        {
+          method: securityPreHandlers.checkUserIsAdminOfCertificationCenter,
+          assign: 'isAdminOfCertificationCenter',
+        },
+      ],
+      notes: [
+        "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès**\n" +
+          "- Mise à jour du status de référent d'un membre d'un espace pix-certif\n",
       ],
       tags: ['api', 'certification-center-membership'],
     },
