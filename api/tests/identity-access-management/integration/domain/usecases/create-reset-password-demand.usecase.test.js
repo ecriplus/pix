@@ -1,8 +1,4 @@
-import { resetPasswordService } from '../../../../../src/identity-access-management/domain/services/reset-password.service.js';
-import { createResetPasswordDemand } from '../../../../../src/identity-access-management/domain/usecases/create-reset-password-demand.usecase.js';
-import { resetPasswordDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/reset-password-demand.repository.js';
-import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
-import * as emailRepository from '../../../../../src/shared/mail/infrastructure/repositories/email.repository.js';
+import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | create-reset-password-demand', function () {
@@ -16,13 +12,9 @@ describe('Integration | Identity Access Management | Domain | UseCase | create-r
     await databaseBuilder.commit();
 
     // when
-    await createResetPasswordDemand({
+    await usecases.createResetPasswordDemand({
       email,
       locale,
-      emailRepository,
-      resetPasswordService,
-      resetPasswordDemandRepository,
-      userRepository,
     });
 
     // then
@@ -36,13 +28,9 @@ describe('Integration | Identity Access Management | Domain | UseCase | create-r
       const unknownEmail = 'unknown@example.net';
 
       // when
-      await createResetPasswordDemand({
+      await usecases.createResetPasswordDemand({
         email: unknownEmail,
         locale,
-        emailRepository,
-        resetPasswordService,
-        resetPasswordDemandRepository,
-        userRepository,
       });
 
       // then
