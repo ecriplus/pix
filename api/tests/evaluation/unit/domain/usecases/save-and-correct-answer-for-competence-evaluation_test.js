@@ -36,14 +36,14 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
     nowDate.setMilliseconds(1);
     clock = sinon.useFakeTimers({ now: nowDate, toFake: ['Date'] });
     sinon.stub(KnowledgeElement, 'createKnowledgeElementsForAnswer');
-    answerRepository = { saveWithKnowledgeElements: sinon.stub() };
+    answerRepository = { save: sinon.stub() };
     challengeRepository = { get: sinon.stub() };
     skillRepository = { findActiveByCompetenceId: sinon.stub() };
     scorecardService = { computeLevelUpInformation: sinon.stub() };
     competenceRepository = { get: sinon.stub() };
     areaRepository = { get: sinon.stub() };
     competenceEvaluationRepository = { findByUserId: sinon.stub() };
-    knowledgeElementRepository = { findUniqByUserId: sinon.stub() };
+    knowledgeElementRepository = { findUniqByUserId: sinon.stub(), batchSave: sinon.stub() };
     answerJobRepository = {
       performAsync: sinon.stub(),
     };
@@ -181,7 +181,8 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
         type: Assessment.types.COMPETENCE_EVALUATION,
       });
       const answerSaved = domainBuilder.buildAnswer(emptyAnswer);
-      answerRepository.saveWithKnowledgeElements.resolves(answerSaved);
+      answerRepository.save.resolves(answerSaved);
+      knowledgeElementRepository.batchSave.resolves();
 
       // when
       const { result } = await saveAndCorrectAnswerForCompetenceEvaluation({
@@ -211,12 +212,15 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       completedAnswer.result = AnswerStatus.OK;
       completedAnswer.resultDetails = null;
       completedAnswer.timeSpent = 0;
-      savedAnswer = domainBuilder.buildAnswer(completedAnswer);
-      answerRepository.saveWithKnowledgeElements.resolves(savedAnswer);
+      savedAnswer = domainBuilder.buildAnswer({
+        ...completedAnswer,
+        id: 'savedAnswerId',
+      });
+      answerRepository.save.resolves(savedAnswer);
       assessment.competenceId = 'recABCD';
       knowledgeElement = domainBuilder.buildKnowledgeElement();
-      firstCreatedKnowledgeElement = domainBuilder.buildKnowledgeElement({ earnedPix: 2 });
-      secondCreatedKnowledgeElement = domainBuilder.buildKnowledgeElement({ earnedPix: 1 });
+      firstCreatedKnowledgeElement = domainBuilder.buildKnowledgeElement({ answerId: savedAnswer.id, earnedPix: 2 });
+      secondCreatedKnowledgeElement = domainBuilder.buildKnowledgeElement({ answerId: savedAnswer.id, earnedPix: 1 });
       skills = domainBuilder.buildSkillCollection();
       skillRepository.findActiveByCompetenceId.withArgs(assessment.competenceId).resolves(skills);
       challengeRepository.get.resolves(challenge);
@@ -228,7 +232,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       scorecardService.computeLevelUpInformation.resolves({});
     });
 
-    it('should call the answer repository to save the answer', async function () {
+    it('should save the answer and the knowledge elements', async function () {
       // when
       await saveAndCorrectAnswerForCompetenceEvaluation({
         answer,
@@ -239,10 +243,10 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       });
 
       // then
-      expect(answerRepository.saveWithKnowledgeElements).to.have.been.calledWithExactly(completedAnswer, [
-        firstCreatedKnowledgeElement,
-        secondCreatedKnowledgeElement,
-      ]);
+      expect(answerRepository.save).to.be.calledWith({ answer: completedAnswer });
+      expect(knowledgeElementRepository.batchSave).to.be.calledWith({
+        knowledgeElements: [firstCreatedKnowledgeElement, secondCreatedKnowledgeElement],
+      });
     });
 
     context('when there is no user ID', function () {
@@ -375,9 +379,10 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       });
       answerSaved = domainBuilder.buildAnswer(answer);
       answerSaved.timeSpent = 5;
-      answerRepository.saveWithKnowledgeElements.resolves(answerSaved);
       KnowledgeElement.createKnowledgeElementsForAnswer.returns([]);
       knowledgeElementRepository.findUniqByUserId.withArgs({ userId: assessment.userId }).resolves([]);
+      answerRepository.save.resolves(answerSaved);
+      knowledgeElementRepository.batchSave.resolves();
 
       await saveAndCorrectAnswerForCompetenceEvaluation({
         answer,
@@ -389,7 +394,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
 
       const expectedAnswer = domainBuilder.buildAnswer(answer);
       expectedAnswer.timeSpent = 5;
-      expect(answerRepository.saveWithKnowledgeElements).to.be.calledWith(expectedAnswer);
+      expect(answerRepository.save).to.be.calledWith({ answer: expectedAnswer });
     });
   });
 });

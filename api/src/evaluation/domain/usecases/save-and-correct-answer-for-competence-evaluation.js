@@ -45,15 +45,15 @@ export async function saveAndCorrectAnswerForCompetenceEvaluation({
 
   const targetSkills = await skillRepository.findActiveByCompetenceId(assessment.competenceId);
   const knowledgeElementsBefore = await knowledgeElementRepository.findUniqByUserId({ userId });
+  const answerSaved = await answerRepository.save({ answer: correctedAnswer });
   const knowledgeElementsToAdd = computeKnowledgeElements({
     assessment,
-    answer: correctedAnswer,
+    answer: answerSaved,
     challenge,
     targetSkills,
     knowledgeElementsBefore,
   });
-
-  const answerSaved = await answerRepository.saveWithKnowledgeElements(correctedAnswer, knowledgeElementsToAdd);
+  await knowledgeElementRepository.batchSave({ knowledgeElements: knowledgeElementsToAdd });
   answerSaved.levelup = await computeLevelUpInformation({
     answerSaved,
     userId,
