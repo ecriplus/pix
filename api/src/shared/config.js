@@ -306,7 +306,6 @@ const configuration = (function () {
       isPixCompanionEnabled: toBoolean(process.env.FT_PIX_COMPANION_ENABLED),
       isSelfAccountDeletionEnabled: toBoolean(process.env.FT_SELF_ACCOUNT_DELETION),
       isQuestEnabled: toBoolean(process.env.FT_ENABLE_QUESTS),
-      isUserTokenAudConfinementEnabled: toBoolean(process.env.FT_USER_TOKEN_AUD_CONFINEMENT_ENABLED),
       isTextToSpeechButtonEnabled: toBoolean(process.env.FT_ENABLE_TEXT_TO_SPEECH_BUTTON),
       setupEcosystemBeforeStart: toBoolean(process.env.FT_SETUP_ECOSYSTEM_BEFORE_START) || false,
       showExperimentalMissions: toBoolean(process.env.FT_SHOW_EXPERIMENTAL_MISSIONS),
@@ -524,7 +523,6 @@ const configuration = (function () {
     config.featureToggles.isSelfAccountDeletionEnabled = false;
     config.featureToggles.isQuestEnabled = false;
     config.featureToggles.isAsyncQuestRewardingCalculationEnabled = false;
-    config.featureToggles.isUserTokenAudConfinementEnabled = true;
     config.featureToggles.isTextToSpeechButtonEnabled = false;
     config.featureToggles.showNewResultPage = false;
     config.featureToggles.showExperimentalMissions = false;

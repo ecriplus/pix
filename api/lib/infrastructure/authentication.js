@@ -51,27 +51,25 @@ async function validateUser(decodedAccessToken, { request, revokedUserAccessRepo
     return { isValid: false };
   }
 
-  if (config.featureToggles.isUserTokenAudConfinementEnabled) {
-    const revokedUserAccess = await revokedUserAccessRepository.findByUserId(userId);
-    if (revokedUserAccess.isAccessTokenRevoked(decodedAccessToken)) {
-      monitoringTools.logWarnWithCorrelationIds({
-        message: 'Revoked user AccessToken usage',
-        decodedAccessToken,
-      });
+  const revokedUserAccess = await revokedUserAccessRepository.findByUserId(userId);
+  if (revokedUserAccess.isAccessTokenRevoked(decodedAccessToken)) {
+    monitoringTools.logWarnWithCorrelationIds({
+      message: 'Revoked user AccessToken usage',
+      decodedAccessToken,
+    });
 
-      return { isValid: false };
-    }
+    return { isValid: false };
+  }
 
-    const audience = getForwardedOrigin(request.headers);
-    if (decodedAccessToken.aud !== audience) {
-      monitoringTools.logWarnWithCorrelationIds({
-        message: 'User AccessToken audience mismatch',
-        audience,
-        decodedAccessToken,
-      });
+  const audience = getForwardedOrigin(request.headers);
+  if (decodedAccessToken.aud !== audience) {
+    monitoringTools.logWarnWithCorrelationIds({
+      message: 'User AccessToken audience mismatch',
+      audience,
+      decodedAccessToken,
+    });
 
-      return { isValid: false };
-    }
+    return { isValid: false };
   }
 
   return { isValid: true, credentials: { userId: decodedAccessToken.user_id } };
