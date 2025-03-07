@@ -26,6 +26,7 @@ import { PIX_ADMIN } from '../src/authorization/domain/constants.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
 import { config } from '../src/shared/config.js';
+import { ORGANIZATION_FEATURE } from '../src/shared/domain/constants.js';
 import { Membership } from '../src/shared/domain/models/index.js';
 import * as tokenService from '../src/shared/domain/services/token-service.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
@@ -192,6 +193,14 @@ async function insertOrganizationUserWithRoleAdmin() {
   return { adminUser, organization };
 }
 
+// We insert a multiple sending feature by default for each new organization created.
+// It is under feature for now because we want to be able to deactivate it when asked.
+async function insertMultipleSendingFeatureForNewOrganization() {
+  const feature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT);
+  await databaseBuilder.commit();
+  return feature.id;
+}
+
 // Hapi
 const hFake = {
   response(source) {
@@ -348,6 +357,7 @@ export {
   generateValidRequestAuthorizationHeaderForApplication,
   hFake,
   HttpTestServer,
+  insertMultipleSendingFeatureForNewOrganization,
   insertOrganizationUserWithRoleAdmin,
   insertUserWithRoleCertif,
   insertUserWithRoleSuperAdmin,
