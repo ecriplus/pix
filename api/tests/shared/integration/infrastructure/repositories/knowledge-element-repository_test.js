@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
 import * as knowledgeElementRepository from '../../../../../src/shared/infrastructure/repositories/knowledge-element-repository.js';
 import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 
@@ -540,10 +540,9 @@ describe('Integration | Repository | knowledgeElementRepository', function () {
       await databaseBuilder.commit();
 
       // when
-      const knowledgeElementsByUserIdAndCompetenceId = await knowledgeElementRepository.findUniqByUserIds([
-        userId1,
-        userId2,
-      ]);
+      const knowledgeElementsByUserIdAndCompetenceId = await knowledgeElementRepository.findUniqByUserIds({
+        userIds: [userId1, userId2],
+      });
 
       // then
       expect(knowledgeElementsByUserIdAndCompetenceId[0].knowledgeElements).to.have.deep.members([

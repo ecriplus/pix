@@ -31,7 +31,7 @@ async function findAssessedByUserIdAndLimitDateQuery({ userId, limitDate, skillI
   return keCollection.latestUniqNonResetKnowledgeElements;
 }
 
-const findUniqByUserIds = async function (userIds) {
+const findUniqByUserIds = async function ({ userIds }) {
   const results = [];
   for (const userId of userIds) {
     const knowledgeElements = await findAssessedByUserIdAndLimitDateQuery({
