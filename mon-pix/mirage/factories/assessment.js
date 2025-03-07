@@ -21,6 +21,10 @@ export default Factory.extend({
     return true;
   },
 
+  showQuestionCounter() {
+    return true;
+  },
+
   withStartedState: trait({
     state: 'started',
   }),

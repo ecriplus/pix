@@ -21,6 +21,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Exam', function (hook
     this.server.schema.users.create({
       mustValidateTermsOfService: true,
     });
+    server.create('challenge', { id: 'recSMARPLA' });
   });
 
   module('Start a campaign', function (hooks) {
