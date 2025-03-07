@@ -60,5 +60,6 @@
 /admin/app/services/oidc-identity-providers.js @1024pix/team-acces
 /admin/app/services/session.js @1024pix/team-acces
 
-
+# Directories maintainted by team Captains
+/api/db/migrations/ @1024pix/team-captains
 
