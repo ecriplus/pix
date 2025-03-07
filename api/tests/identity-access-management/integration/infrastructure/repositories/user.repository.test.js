@@ -1842,10 +1842,15 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
     });
 
-    context('when no user account with a matching email exist', function () {
-      it('throws an error', async function () {
+    context('when no user account with a matching email exists', function () {
+      it('throws a UserNotFoundError', async function () {
+        // given
         const searchedEmail = 'Address_Unknown@example.net';
+
+        // when
         const err = await catchErr(userRepository.isUserExistingByEmail)(searchedEmail);
+
+        // then
         expect(err).to.be.instanceOf(UserNotFoundError);
       });
     });

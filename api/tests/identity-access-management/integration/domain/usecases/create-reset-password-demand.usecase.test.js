@@ -45,7 +45,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | create-r
     });
   });
 
-  context('when user account does not exist with given email', function () {
+  context('when no user account with a matching email exists', function () {
     it('does not create a reset password demand', async function () {
       // given
       const unknownEmail = 'unknown@example.net';
