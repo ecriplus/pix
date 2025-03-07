@@ -42,7 +42,7 @@ function extractLocaleFromRequest(request) {
 }
 
 function extractTimestampFromRequest(request) {
-  return request.headers?.['X-Request-Start'] ?? new Date().getTime();
+  return request.info.received;
 }
 
 export {
