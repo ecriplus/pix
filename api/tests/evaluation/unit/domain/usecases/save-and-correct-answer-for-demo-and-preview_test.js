@@ -1,6 +1,7 @@
 import { EmptyAnswerError } from '../../../../../src/evaluation/domain/errors.js';
 import * as correctionService from '../../../../../src/evaluation/domain/services/correction-service.js';
 import { saveAndCorrectAnswerForDemoAndPreview } from '../../../../../src/evaluation/domain/usecases/save-and-correct-answer-for-demo-and-preview.js';
+import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { ChallengeNotAskedError } from '../../../../../src/shared/domain/errors.js';
 import { AnswerStatus, Assessment } from '../../../../../src/shared/domain/models/index.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
@@ -22,6 +23,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-d
   let dependencies;
 
   beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
     nowDate.setMilliseconds(1);
     clock = sinon.useFakeTimers({ now: nowDate, toFake: ['Date'] });
     answerRepository = { save: sinon.stub() };
