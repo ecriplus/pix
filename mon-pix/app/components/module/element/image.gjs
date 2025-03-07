@@ -24,13 +24,19 @@ export default class ModulixImageElement extends Component {
     this.modalIsOpen = false;
   }
 
+  get hasCaption() {
+    return this.args.image.legend?.length > 0 || this.args.image.licence?.length > 0;
+  }
+
   <template>
     <div class="element-image">
       <figure class="element-image__container">
         <img class="element-image-container__image" alt={{@image.alt}} src={{@image.url}} />
-        <figcaption class="element-image-container__caption">{{@image.legend}}<span
-            class="element-image-container__licence"
-          >{{@image.licence}}</span></figcaption>
+        {{#if this.hasCaption}}
+          <figcaption class="element-image-container__caption">{{@image.legend}}<span
+              class="element-image-container__licence"
+            >{{@image.licence}}</span></figcaption>
+        {{/if}}
       </figure>
       {{#if this.hasAlternativeText}}
         <PixButton class="element-image__button" @variant="tertiary" @triggerAction={{this.showModal}}>
