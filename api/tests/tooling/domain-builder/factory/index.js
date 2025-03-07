@@ -203,6 +203,7 @@ import { buildSessionManagement } from './certification/session-management/build
 import { buildCompetenceForScoring } from './certification/shared/build-competence-for-scoring.js';
 import { buildJuryComment } from './certification/shared/build-jury-comment.js';
 import { buildV3CertificationScoring } from './certification/shared/build-v3-certification-scoring.js';
+import { buildLtiPlatformRegistration } from './identity-access-management/build-lti-platform-registration.js';
 import { buildUserLogin } from './identity-access-management/build-user-login.js';
 import { buildCampaign as boundedContextCampaignBuildCampaign } from './prescription/campaign/build-campaign.js';
 import { buildCampaignParticipation as boundedContextCampaignParticipationBuildCampaignParticipation } from './prescription/campaign-participation/build-campaign-participation.js';
@@ -282,6 +283,7 @@ const prescription = {
 
 const identityAccessManagement = {
   buildUserLogin,
+  buildLtiPlatformRegistration,
 };
 
 export {
