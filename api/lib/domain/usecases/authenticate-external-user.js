@@ -12,7 +12,6 @@ import {
 } from '../../../src/shared/domain/errors.js';
 
 /**
- *
  * typedef { function } authenticateExternalUser
  * @param {Object} params
  * @param {string} params.username
@@ -28,10 +27,8 @@ import {
  * @param {UserLoginRepository} params.userLoginRepository
  * @param {LastUserApplicationConnectionsRepository} params.lastUserApplicationConnectionsRepository,
  * @param {RequestedApplication} params.requestedApplication,
- *
  * @returns {Promise<*>}
  */
-
 async function authenticateExternalUser({
   username,
   password,
