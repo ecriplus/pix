@@ -31,16 +31,16 @@ async function findAssessedByUserIdAndLimitDateQuery({ userId, limitDate, skillI
   return keCollection.latestUniqNonResetKnowledgeElements;
 }
 
-const findUniqByUserIds = function (userIds) {
-  return Promise.all(
-    userIds.map(async (userId) => {
-      const knowledgeElements = await findAssessedByUserIdAndLimitDateQuery({
-        userId,
-      });
+const findUniqByUserIds = async function (userIds) {
+  const results = [];
+  for (const userId of userIds) {
+    const knowledgeElements = await findAssessedByUserIdAndLimitDateQuery({
+      userId,
+    });
 
-      return { userId, knowledgeElements };
-    }),
-  );
+    results.push({ userId, knowledgeElements });
+  }
+  return results;
 };
 
 const batchSave = async function ({ knowledgeElements }) {
