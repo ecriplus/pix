@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import { authenticationController } from '../../../../lib/application/authentication/authentication-controller.js';
 import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { responseAuthenticationDoc } from '../../../shared/infrastructure/open-api-doc/authentication/response-authentication-doc.js';
@@ -46,7 +45,7 @@ export const tokenRoutes = [
           403: responseObjectErrorDoc,
         },
       },
-      handler: authenticationController.authenticateApplication,
+      handler: tokenController.authenticateApplication,
       tags: ['api', 'authorization-server', 'parcoursup'],
     },
   },

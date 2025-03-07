@@ -1,5 +1,3 @@
-import querystring from 'node:querystring';
-
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { decodeIfValid, tokenService } from '../../../../src/shared/domain/services/token-service.js';
 import { createServer, databaseBuilder, expect, knex } from '../../../test-helper.js';
