@@ -601,7 +601,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
           email: 'current.user@example.net',
         });
         const anotherUser = databaseBuilder.factory.buildUser({
-          email: 'another.user@example.net',
+          email: 'another.user.with_mix_of_lower_AND_UPPER_case_letters@example.net',
         });
         await databaseBuilder.commit();
 
@@ -611,7 +611,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         // then
         expect(foundUsers).to.be.an('array').that.have.lengthOf(1);
         expect(foundUsers[0]).to.be.an.instanceof(User);
-        expect(foundUsers[0].email).to.equal(anotherUser.email);
+        expect(foundUsers[0].email).to.equal(anotherUser.email.toLowerCase());
       });
 
       it('returns an empty list if email is not used', async function () {
