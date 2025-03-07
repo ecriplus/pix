@@ -336,8 +336,8 @@ module('Integration | Component | Participant::Assessment::Header', function (ho
       });
 
       module('when the campaign has badges', function () {
-        test('it displays badges acquired', async function (assert) {
-          this.campaign = { hasBadges: true };
+        test('it displays acquired badges', async function (assert) {
+          this.campaign = { hasBadges: true, badges: [{ id: '1', title: 'Les bases' }] };
           this.participation = { isShared: true, masteryRate: 0.85, badges: [{ id: '1', title: 'Les bases' }] };
 
           const screen = await render(
@@ -345,8 +345,23 @@ module('Integration | Component | Participant::Assessment::Header', function (ho
           );
 
           assert
-            .dom(screen.queryByLabelText(t('pages.assessment-individual-results.badges')))
-            .containsText('Les bases');
+            .dom(screen.getByText('Les bases - ' + t('pages.campaign-results.table.badge-tooltip.acquired')))
+            .exists();
+          assert.dom(screen.getByLabelText(t('pages.assessment-individual-results.badges'))).containsText('Les bases');
+        });
+
+        test('it displays unacquired badges', async function (assert) {
+          this.campaign = { hasBadges: true, badges: [{ id: '1', title: 'Les bases' }] };
+          this.participation = { isShared: true, masteryRate: 0.85, badges: [] };
+
+          const screen = await render(
+            hbs`<Participant::Assessment::Header @participation={{this.participation}} @campaign={{this.campaign}} />`,
+          );
+
+          assert
+            .dom(screen.getByText('Les bases - ' + t('pages.campaign-results.table.badge-tooltip.unacquired')))
+            .exists();
+          assert.dom(screen.getByLabelText(t('pages.assessment-individual-results.badges'))).containsText('Les bases');
         });
       });
 
@@ -359,18 +374,6 @@ module('Integration | Component | Participant::Assessment::Header', function (ho
             hbs`<Participant::Assessment::Header @participation={{this.participation}} @campaign={{this.campaign}} />`,
           );
 
-          assert.notOk(screen.queryByLabelText(t('pages.assessment-individual-results.badges')));
-        });
-      });
-
-      module('when the campaign has badges but the participant has not acquired one', function () {
-        test('it does not display badges', async function (assert) {
-          this.campaign = { hasBadges: true };
-          this.participation = { isShared: true, masteryRate: 0.85, badges: [] };
-
-          const screen = await render(
-            hbs`<Participant::Assessment::Header @participation={{this.participation}} @campaign={{this.campaign}} />`,
-          );
           assert.notOk(screen.queryByLabelText(t('pages.assessment-individual-results.badges')));
         });
       });
