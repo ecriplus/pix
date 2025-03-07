@@ -634,5 +634,62 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         expect(campaignParticipationOverviews).to.have.lengthOf(0);
       });
     });
+
+    context('when there is an campaign of type PROFILE_COLLECTION', function () {
+      it('should not keep the autonomous course from the campaign participations list', async function () {
+        // given
+        const { id: organizationId } = databaseBuilder.factory.buildOrganization({ ownerOrganizationId: userId });
+        const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+          organizationId,
+          type: CampaignTypes.PROFILES_COLLECTION,
+          targetProfileId: null,
+        });
+        const organizationLearnerId =
+          databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({ userId }).id;
+        databaseBuilder.factory.buildCampaignParticipation({
+          userId,
+          organizationLearnerId,
+          campaignId,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const { campaignParticipationOverviews } =
+          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+
+        // then
+        expect(campaignParticipationOverviews).to.have.lengthOf(0);
+      });
+    });
+
+    context('when there is an campaign of type EXAM', function () {
+      it('should not keep the autonomous course from the campaign participations list', async function () {
+        // given
+        const { id: organizationId } = databaseBuilder.factory.buildOrganization({ ownerOrganizationId: userId });
+        const { id: targetProfileId } = databaseBuilder.factory.buildTargetProfile({ organizationId });
+        const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+          organizationId,
+          type: CampaignTypes.EXAM,
+          targetProfileId,
+        });
+        const organizationLearnerId =
+          databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({ userId }).id;
+        databaseBuilder.factory.buildCampaignParticipation({
+          userId,
+          organizationLearnerId,
+          campaignId,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const { campaignParticipationOverviews } =
+          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+
+        // then
+        expect(campaignParticipationOverviews).to.have.lengthOf(1);
+      });
+    });
   });
 });

@@ -13,7 +13,6 @@ const findByUserIdWithFilters = async function ({ userId, states, page }) {
   }
 
   const { results, pagination } = await fetchPage(queryBuilder, page);
-
   return {
     campaignParticipationOverviews: results.map(
       (campaignParticipationOverview) => new CampaignParticipationOverview(campaignParticipationOverview),
@@ -46,13 +45,13 @@ function _findByUserId({ userId }) {
         campaignId: 'campaigns.id',
       })
         .from('campaign-participations')
-        .innerJoin('campaigns', 'campaign-participations.campaignId', 'campaigns.id')
-        .innerJoin('organizations', 'organizations.id', 'campaigns.organizationId')
+        .join('campaigns', 'campaign-participations.campaignId', 'campaigns.id')
+        .join('organizations', 'organizations.id', 'campaigns.organizationId')
+        .whereIn('campaigns.type', [CampaignTypes.ASSESSMENT, CampaignTypes.EXAM])
+        .where('campaigns.isForAbsoluteNovice', false)
         .whereNot('organizations.id', constants.AUTONOMOUS_COURSES_ORGANIZATION_ID)
         .where('campaign-participations.userId', userId)
-        .where('campaign-participations.isImproved', false)
-        .where('campaigns.type', CampaignTypes.ASSESSMENT)
-        .whereNot('campaigns.isForAbsoluteNovice', true);
+        .where('campaign-participations.isImproved', false);
     })
     .from('campaign-participation-overviews')
     .orderByRaw(_computeCampaignParticipationOrder())
