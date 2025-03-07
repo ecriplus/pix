@@ -16,6 +16,7 @@ function getCount(campaignCollectiveResult) {
     </h3>
 
     <PixTable
+      @condensed={{true}}
       @variant="orga"
       @caption={{t "pages.campaign-review.table.competences.title"}}
       @data={{@campaignCollectiveResult.campaignCompetenceCollectiveResults}}

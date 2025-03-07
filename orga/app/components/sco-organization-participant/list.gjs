@@ -195,6 +195,7 @@ export default class ScoList extends Component {
         as |toggleStudent isStudentSelected allSelected someSelected toggleAll selectedStudents reset|
       >
         <PixTable
+          @condensed={{true}}
           @variant="orga"
           @caption={{t "pages.sco-organization-participants.table.description"}}
           @data={{@students}}

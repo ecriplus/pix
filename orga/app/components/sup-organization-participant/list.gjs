@@ -111,6 +111,7 @@ export default class ListItems extends Component {
         as |toggleStudent isStudentSelected allSelected someSelected toggleAll selectedStudents reset|
       >
         <PixTable
+          @condensed={{true}}
           @variant="orga"
           @caption={{t "pages.sup-organization-participants.table.description"}}
           @data={{@students}}
