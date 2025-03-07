@@ -686,6 +686,7 @@
                   "extra-information": "Link to question information (Opens in new window)"
                 }
               },
+              "caption": "Liste des questions passées sur une certification. Contient le numéro de la question, l'heure de la réponse donnée, son statut, la compétence concernée, le nom de l'acquis et le recId. Des boutons d'action permettent d'accéder à un aperçu de la question ou de lire la réponse donnée par le candidat.",
               "labels": {
                 "actions": "Actions",
                 "answer-status": "Status",
