@@ -31,21 +31,23 @@ describe('Integration | Identity Access Management | Domain | UseCase | create-r
   });
 
   context('when user account does not exist with given email', function () {
-    it('does not throw an error', async function () {
+    it('does not create a reset password demand', async function () {
       // given
       const unknownEmail = 'unknown@example.net';
 
-      // when & then
-      expect(
-        createResetPasswordDemand({
-          email: unknownEmail,
-          locale,
-          emailRepository,
-          resetPasswordService,
-          resetPasswordDemandRepository,
-          userRepository,
-        }),
-      ).not.to.be.rejected;
+      // when
+      await createResetPasswordDemand({
+        email: unknownEmail,
+        locale,
+        emailRepository,
+        resetPasswordService,
+        resetPasswordDemandRepository,
+        userRepository,
+      });
+
+      // then
+      const resetPasswordDemand = await knex('reset-password-demands').where({ email: unknownEmail }).first();
+      expect(resetPasswordDemand).to.not.exist;
     });
   });
 });
