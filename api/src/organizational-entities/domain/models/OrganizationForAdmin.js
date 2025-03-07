@@ -98,6 +98,12 @@ class OrganizationForAdmin {
       active: showNPS,
       params: showNPS ? { formNPSUrl: formNPSUrl } : null,
     };
+    if (this.features[ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key] === undefined) {
+      this.features[ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key] = {
+        active: true,
+        params: null,
+      };
+    }
     if (this.type === 'SCO' && this.isManagingStudents) {
       this.features[ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key] = {
         active: true,
